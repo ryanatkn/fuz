@@ -13,9 +13,9 @@
 
 <main class="width_md">
 	<div class="prose">
-		<section class="box">
+		<section>
 			<header class="box">
-				<h1>fuz_template</h1>
+				<h1>{pkg.repo_name}</h1>
 			</header>
 			<Breadcrumb>🧶</Breadcrumb>
 		</section>
