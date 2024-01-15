@@ -267,6 +267,18 @@
 	<hr />
 
 	<section class="prose box">
+		<h3>colorful buttons</h3>
+	</section>
+	<br />
+	{#each {length: 7} as _, i}
+		<Code content={`<button class="color_${i + 1}">`} />
+		<button class="color_{i + 1}">.color_{i + 1}</button>
+		<br />
+	{/each}
+
+	<hr />
+
+	<section class="prose box">
 		<h3><code>.plain</code> and <code>.icon_button</code></h3>
 	</section>
 	<br />

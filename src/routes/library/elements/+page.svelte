@@ -12,8 +12,8 @@
 
 <Tome_Detail {tome}>
 	<div class="prose box">
-		<blockquote>
-			styles for <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element"
+		<blockquote class="text_align_center">
+			styles for miscellaneous <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element"
 				>HTML elements</a
 			>
 		</blockquote>

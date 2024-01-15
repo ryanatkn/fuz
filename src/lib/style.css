@@ -469,6 +469,35 @@ label.disabled:active {
 	background: var(--button_bg_disabled);
 }
 
+button.color_1 {
+	background-color: var(--color_1);
+	color: var(--lighten_7);
+}
+button.color_2 {
+	background-color: var(--color_2);
+	color: var(--lighten_7);
+}
+button.color_3 {
+	background-color: var(--color_3);
+	color: var(--lighten_7);
+}
+button.color_4 {
+	background-color: var(--color_4);
+	color: var(--lighten_7);
+}
+button.color_5 {
+	background-color: var(--color_5);
+	color: var(--lighten_7);
+}
+button.color_6 {
+	background-color: var(--color_6);
+	color: var(--lighten_7);
+}
+button.color_7 {
+	background-color: var(--color_7);
+	color: var(--lighten_7);
+}
+
 /* TODO could improve this with the coming `:has` selector
 for disabled colors without needing a wrapper .disabled class */
 label {
