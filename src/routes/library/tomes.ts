@@ -1,7 +1,8 @@
 import {init_tome, type Tome} from '@fuz.dev/fuz_library/tome.js';
 
-import elements from '$routes/library/elements/+page.svelte';
+import buttons from '$routes/library/buttons/+page.svelte';
 import forms from '$routes/library/forms/+page.svelte';
+import elements from '$routes/library/elements/+page.svelte';
 import typography from '$routes/library/typography/+page.svelte';
 import theme from '$routes/library/theme/+page.svelte';
 import variables from '$routes/library/variables/+page.svelte';
@@ -18,12 +19,12 @@ export const tomes: Tome[] = [
 		related: ['icon sizes', 'typography', 'variables'],
 	},
 	{
-		name: 'elements',
-		slug: 'elements',
+		name: 'buttons',
+		slug: 'buttons',
 		pathname: '',
 		category: 'styles',
-		component: elements,
-		related: ['forms', 'prose'],
+		component: buttons,
+		related: ['forms', 'elements', 'prose'],
 	},
 	{
 		name: 'forms',
@@ -31,7 +32,15 @@ export const tomes: Tome[] = [
 		pathname: '',
 		category: 'styles',
 		component: forms,
-		related: ['elements', 'prose'],
+		related: ['buttons', 'elements', 'prose'],
+	},
+	{
+		name: 'elements',
+		slug: 'elements',
+		pathname: '',
+		category: 'styles',
+		component: elements,
+		related: ['buttons', 'forms', 'prose'],
 	},
 	{
 		name: 'icon sizes',
