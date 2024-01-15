@@ -469,45 +469,29 @@ label.disabled:active {
 	background: var(--button_bg_disabled);
 }
 
-/* TODO how do we want to do the generic declarations?
-repeat in each? or maybe:
-button.color_1, button.color_1, button.color_1 button.color_1 {
+button:is(.color_1, .color_2, .color_3, .color_4, .color_5, .color_6, .color_7) {
 	color: var(--lighten_7);
 }
-
-or require a second class to the buttons?
-button.color {
-	color: var(--lighten_7);
-}
-*/
-
 button.color_1 {
 	background-color: var(--color_1);
-	color: var(--lighten_7);
 }
 button.color_2 {
 	background-color: var(--color_2);
-	color: var(--lighten_7);
 }
 button.color_3 {
 	background-color: var(--color_3);
-	color: var(--lighten_7);
 }
 button.color_4 {
 	background-color: var(--color_4);
-	color: var(--lighten_7);
 }
 button.color_5 {
 	background-color: var(--color_5);
-	color: var(--lighten_7);
 }
 button.color_6 {
 	background-color: var(--color_6);
-	color: var(--lighten_7);
 }
 button.color_7 {
 	background-color: var(--color_7);
-	color: var(--lighten_7);
 }
 
 /* TODO could improve this with the coming `:has` selector
