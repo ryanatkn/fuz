@@ -33,15 +33,15 @@
 				"@fuz.dev/fuz_code": "^0.5.0",
 				"@fuz.dev/fuz_dialog": "^0.6.0",
 				"@fuz.dev/fuz_library": "^0.23.0",
-				"@grogarden/gro": "^0.107.1",
+				"@grogarden/gro": "^0.108.0",
 				"@ryanatkn/orc": "^0.17.0",
 				"@sveltejs/adapter-static": "^3.0.1",
-				"@sveltejs/kit": "^2.0.4",
-				"@sveltejs/package": "^2.2.4",
+				"@sveltejs/kit": "^2.0.6",
+				"@sveltejs/package": "^2.2.5",
 				"@sveltejs/vite-plugin-svelte": "^3.0.1",
 				"@types/prismjs": "^1.26.3",
-				"@typescript-eslint/eslint-plugin": "^6.15.0",
-				"@typescript-eslint/parser": "^6.15.0",
+				"@typescript-eslint/eslint-plugin": "^6.16.0",
+				"@typescript-eslint/parser": "^6.16.0",
 				"eslint": "^8.56.0",
 				"eslint-plugin-svelte": "^2.35.1",
 				"prettier": "^3.1.1",
@@ -173,9 +173,9 @@
 		"npm_url": "https://www.npmjs.com/package/@fuz.dev/fuz",
 		"changelog_url": "https://github.com/fuz-dev/fuz/blob/main/CHANGELOG.md",
 		"published": true,
-		"check_runs": {"status": "queued", "conclusion": null},
+		"check_runs": {"status": "completed", "conclusion": "success"},
 		"pull_requests": [
-			{"number": 358, "title": "add .unprose", "user": {"login": "ryanatkn"}, "draft": true}
+			{"number": 1, "title": "add colors to buttons", "user": {"login": "ryanatkn"}, "draft": true}
 		]
 	},
 	{
@@ -204,13 +204,13 @@
 				"@fuz.dev/fuz_contextmenu": "^0.7.0",
 				"@fuz.dev/fuz_dialog": "^0.6.0",
 				"@fuz.dev/fuz_library": "^0.23.0",
-				"@grogarden/gro": "^0.107.0",
-				"@grogarden/util": "^0.18.1",
+				"@grogarden/gro": "^0.108.0",
+				"@grogarden/util": "^0.18.3",
 				"@sveltejs/adapter-static": "^3.0.1",
-				"@sveltejs/kit": "^2.0.4",
+				"@sveltejs/kit": "^2.0.6",
 				"@sveltejs/vite-plugin-svelte": "^3.0.1",
-				"@typescript-eslint/eslint-plugin": "^6.15.0",
-				"@typescript-eslint/parser": "^6.15.0",
+				"@typescript-eslint/eslint-plugin": "^6.16.0",
+				"@typescript-eslint/parser": "^6.16.0",
 				"eslint": "^8.56.0",
 				"eslint-plugin-svelte": "^2.35.1",
 				"prettier": "^3.1.1",
@@ -657,7 +657,7 @@
 		"npm_url": "https://www.npmjs.com/package/@fuz.dev/fuz_contextmenu",
 		"changelog_url": "https://github.com/fuz-dev/fuz_contextmenu/blob/main/CHANGELOG.md",
 		"published": true,
-		"check_runs": {"status": "completed", "conclusion": "failure"},
+		"check_runs": {"status": "completed", "conclusion": "success"},
 		"pull_requests": []
 	},
 	{
@@ -856,94 +856,6 @@
 		"homepage_url": "https://code.fuz.dev/",
 		"npm_url": "https://www.npmjs.com/package/@fuz.dev/fuz_code",
 		"changelog_url": "https://github.com/fuz-dev/fuz_code/blob/main/CHANGELOG.md",
-		"published": true,
-		"check_runs": {"status": "completed", "conclusion": "success"},
-		"pull_requests": []
-	},
-	{
-		"url": "https://intersect.fuz.dev/",
-		"package_json": {
-			"name": "@fuz.dev/svelte_intersect",
-			"description": "a Svelte action for IntersectionObserver",
-			"version": "0.8.0",
-			"public": true,
-			"license": "MIT",
-			"type": "module",
-			"homepage": "https://intersect.fuz.dev/",
-			"repository": "https://github.com/fuz-dev/svelte_intersect",
-			"engines": {"node": ">=20.10"},
-			"scripts": {
-				"start": "gro dev",
-				"dev": "gro dev",
-				"build": "gro build",
-				"test": "gro test",
-				"deploy": "gro deploy"
-			},
-			"files": ["dist"],
-			"peerDependencies": {"svelte": "*"},
-			"devDependencies": {
-				"@changesets/changelog-git": "^0.2.0",
-				"@feltjs/eslint-config": "^0.4.1",
-				"@fuz.dev/fuz": "^0.81.0",
-				"@fuz.dev/fuz_code": "^0.5.0",
-				"@fuz.dev/fuz_library": "^0.23.0",
-				"@grogarden/gro": "^0.107.0",
-				"@grogarden/util": "^0.18.1",
-				"@sveltejs/adapter-static": "^3.0.1",
-				"@sveltejs/kit": "^2.0.4",
-				"@sveltejs/package": "^2.2.4",
-				"@sveltejs/vite-plugin-svelte": "^3.0.1",
-				"@typescript-eslint/eslint-plugin": "^6.15.0",
-				"@typescript-eslint/parser": "^6.15.0",
-				"eslint": "^8.56.0",
-				"eslint-plugin-svelte": "^2.35.1",
-				"prettier": "^3.1.1",
-				"prettier-plugin-svelte": "^3.1.2",
-				"prism-svelte": "^0.5.0",
-				"prismjs": "^1.29.0",
-				"svelte": "^4.2.8",
-				"svelte-check": "^3.6.2",
-				"tslib": "^2.6.2",
-				"typescript": "^5.3.3",
-				"uvu": "^0.5.6"
-			},
-			"eslintConfig": {"root": true, "extends": "@feltjs"},
-			"prettier": {
-				"plugins": ["prettier-plugin-svelte"],
-				"useTabs": true,
-				"printWidth": 100,
-				"singleQuote": true,
-				"bracketSpacing": false,
-				"overrides": [{"files": "package.json", "options": {"useTabs": false}}]
-			},
-			"exports": {
-				".": {"default": "./dist/index.js", "types": "./dist/index.d.ts"},
-				"./intersect.js": {"default": "./dist/intersect.js", "types": "./dist/intersect.d.ts"}
-			}
-		},
-		"src_json": {
-			"name": "@fuz.dev/svelte_intersect",
-			"version": "0.8.0",
-			"modules": {
-				".": {"path": "index.ts", "declarations": []},
-				"./intersect.js": {
-					"path": "intersect.ts",
-					"declarations": [
-						{"name": "Intersect_Callback", "kind": "type"},
-						{"name": "Intersect_Params", "kind": "type"},
-						{"name": "Intersect_Params_Or_Callback", "kind": "type"},
-						{"name": "intersect", "kind": "function"}
-					]
-				}
-			}
-		},
-		"name": "@fuz.dev/svelte_intersect",
-		"repo_name": "svelte_intersect",
-		"repo_url": "https://github.com/fuz-dev/svelte_intersect",
-		"owner_name": "fuz-dev",
-		"homepage_url": "https://intersect.fuz.dev/",
-		"npm_url": "https://www.npmjs.com/package/@fuz.dev/svelte_intersect",
-		"changelog_url": "https://github.com/fuz-dev/svelte_intersect/blob/main/CHANGELOG.md",
 		"published": true,
 		"check_runs": {"status": "completed", "conclusion": "success"},
 		"pull_requests": []

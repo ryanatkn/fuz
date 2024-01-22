@@ -24,7 +24,7 @@
 				>design<br />system<br /><svelte:fragment slot="icon">🧶</svelte:fragment></Card
 			>
 		</section>
-		<section>
+		<section class="panel padded_lg">
 			<h2 class="spaced">packages</h2>
 			<Page_Menu />
 		</section>
