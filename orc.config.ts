@@ -8,7 +8,6 @@ const config: Orc_Config = {
 		'https://contextmenu.fuz.dev/',
 		'https://dialog.fuz.dev/',
 		'https://code.fuz.dev/',
-		'https://intersect.fuz.dev/',
 		'https://mastodon.fuz.dev/',
 	],
 };
