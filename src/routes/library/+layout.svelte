@@ -1,13 +1,13 @@
 <script lang="ts">
 	import {page} from '$app/stores';
-	import Library_Menu from '@fuz.dev/fuz_library/Library_Menu.svelte';
-	import Library_Panel from '@fuz.dev/fuz_library/Library_Panel.svelte';
-	import Breadcrumb from '@fuz.dev/fuz_library/Breadcrumb.svelte';
-	import {set_tomes} from '@fuz.dev/fuz_library/tome.js';
-	import Library_Footer from '@fuz.dev/fuz_library/Library_Footer.svelte';
-	import Package_Summary from '@fuz.dev/fuz_library/Package_Summary.svelte';
-	import Library_Nav from '@fuz.dev/fuz_library/Library_Nav.svelte';
-	import {parse_package_meta} from '@fuz.dev/fuz_library/package_meta.js';
+	import Library_Menu from '$lib/Library_Menu.svelte';
+	import Library_Panel from '$lib/Library_Panel.svelte';
+	import Breadcrumb from '$lib/Breadcrumb.svelte';
+	import {set_tomes} from '$lib/tome.js';
+	import Library_Footer from '$lib/Library_Footer.svelte';
+	import Package_Summary from '$lib/Package_Summary.svelte';
+	import Library_Nav from '$lib/Library_Nav.svelte';
+	import {parse_package_meta} from '$lib/package_meta.js';
 
 	import {tomes} from '$routes/library/tomes.js';
 	import {package_json, src_json} from '$routes/package.js';

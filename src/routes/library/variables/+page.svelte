@@ -1,14 +1,14 @@
 <script lang="ts">
-	import {swallow} from '$lib/swallow.js';
-	import Tome_Detail from '@fuz.dev/fuz_library/Tome_Detail.svelte';
-	import Library_Vocab from '@fuz.dev/fuz_library/Library_Vocab.svelte';
-	import Dialog from '@fuz.dev/fuz_dialog/Dialog.svelte';
-	import {get_tome} from '@fuz.dev/fuz_library/tome.js';
 	import 'prismjs'; // TODO why are these needed? `Code` imports these already - vite config?
 	import 'prism-svelte';
-	import Code from '@fuz.dev/fuz_code/Code.svelte';
-	import Alert from '@fuz.dev/fuz_library/Alert.svelte';
+	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
+	import {swallow} from '$lib/swallow.js';
+	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import Library_Vocab from '$lib/Library_Vocab.svelte';
+	import Dialog from '$lib/Dialog.svelte';
+	import {get_tome} from '$lib/tome.js';
+	import Alert from '$lib/Alert.svelte';
 	import {default_variables} from '$lib/variables.js';
 	import type {Theme_Variable} from '$lib/theme.js';
 	import Theme_Variable_Detail from '$routes/Theme_Variable_Detail.svelte';

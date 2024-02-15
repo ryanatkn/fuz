@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Tome_Detail from '@fuz.dev/fuz_library/Tome_Detail.svelte';
-	import {get_tome} from '@fuz.dev/fuz_library/tome.js';
+	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import {get_tome} from '$lib/tome.js';
 
 	const LIBRARY_ITEM_NAME = 'icon sizes';
 
