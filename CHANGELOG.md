@@ -1,110 +1,116 @@
 # @ryanatkn/fuz
 
+## 0.82.0
+
+### Minor Changes
+
+- republish ([#2](https://github.com/ryanatkn/fuz/pull/2))
+
 ## 0.81.0
 
 ### Minor Changes
 
-- 3300d01: unpublish package.ts
+- unpublish package.ts ([3300d01](https://github.com/ryanatkn/fuz/commit/3300d01))
 
 ## 0.80.1
 
 ### Patch Changes
 
-- 4f8617d: add orc
+- add orc ([4f8617d](https://github.com/ryanatkn/fuz/commit/4f8617d))
 
 ## 0.80.0
 
 ### Minor Changes
 
-- e651cc6: fix `.prose` button margins
+- fix `.prose` button margins ([e651cc6](https://github.com/ryanatkn/fuz/commit/e651cc6))
 
 ## 0.79.3
 
 ### Patch Changes
 
-- 558a22d: fix table head text alignment
+- fix table head text alignment ([558a22d](https://github.com/ryanatkn/fuz/commit/558a22d))
 
 ## 0.79.2
 
 ### Patch Changes
 
-- b7d77c5: fix a name
+- fix a name ([b7d77c5](https://github.com/ryanatkn/fuz/commit/b7d77c5))
 
 ## 0.79.1
 
 ### Patch Changes
 
-- 534e204: upgrade deps
+- upgrade deps ([534e204](https://github.com/ryanatkn/fuz/commit/534e204))
 
 ## 0.79.0
 
 ### Minor Changes
 
-- 1265ae7: upgrade deps
+- upgrade deps ([1265ae7](https://github.com/ryanatkn/fuz/commit/1265ae7))
 
 ## 0.78.0
 
 ### Minor Changes
 
-- 39e2af5: use `Proper_Snakes`
+- use `Proper_Snakes` ([39e2af5](https://github.com/ryanatkn/fuz/commit/39e2af5))
 
 ## 0.77.1
 
 ### Patch Changes
 
-- ea562c5: add `"public": true,` to `package.json`
+- add `"public": true,` to `package.json` ([ea562c5](https://github.com/ryanatkn/fuz/commit/ea562c5))
 
 ## 0.77.0
 
 ### Minor Changes
 
-- 305546f: remove unused `ThemerParams`
+- remove unused `ThemerParams` ([305546f](https://github.com/ryanatkn/fuz/commit/305546f))
 
 ### Patch Changes
 
-- 74a56e7: upgrade gro to fix `package.ts`
+- upgrade gro to fix `package.ts` ([74a56e7](https://github.com/ryanatkn/fuz/commit/74a56e7))
 
 ## 0.76.0
 
 ### Minor Changes
 
-- 4829675: upgrade gro with `modules` added to `package.json`
+- upgrade gro with `modules` added to `package.json` ([4829675](https://github.com/ryanatkn/fuz/commit/4829675))
 
 ## 0.75.4
 
 ### Patch Changes
 
-- 2ed6d56: fix textarea padding
+- fix textarea padding ([2ed6d56](https://github.com/ryanatkn/fuz/commit/2ed6d56))
 
 ## 0.75.3
 
 ### Patch Changes
 
-- a61c032: cleanup css
+- cleanup css ([a61c032](https://github.com/ryanatkn/fuz/commit/a61c032))
 
 ## 0.75.2
 
 ### Patch Changes
 
-- 870d1a1: upgrade gro to add svelte default imports
+- upgrade gro to add svelte default imports ([870d1a1](https://github.com/ryanatkn/fuz/commit/870d1a1))
 
 ## 0.75.1
 
 ### Patch Changes
 
-- 1814ae7: fix input padding and line-height
+- fix input padding and line-height ([1814ae7](https://github.com/ryanatkn/fuz/commit/1814ae7))
 
 ## 0.75.0
 
 ### Minor Changes
 
-- 0756d97: rename `Theme` property `items` from `variables`
+- rename `Theme` property `items` from `variables` ([0756d97](https://github.com/ryanatkn/fuz/commit/0756d97))
 
 ## 0.74.0
 
 ### Minor Changes
 
-- d8ab48d: improve base styles in reference to CSS resets
+- improve base styles in reference to CSS resets ([d8ab48d](https://github.com/ryanatkn/fuz/commit/d8ab48d))
 
   - set base `--line_height` to `normal` and override for `.prose` and some elements
   - set height for `body` to `100vh`
@@ -112,96 +118,96 @@
 
 ### Patch Changes
 
-- d8ab48d: add variables `--line_height_1-7`
+- add variables `--line_height_1-7` ([d8ab48d](https://github.com/ryanatkn/fuz/commit/d8ab48d))
 
 ## 0.73.0
 
 ### Minor Changes
 
-- e747fd8: rename theme property `summary` from `comment` to match ActivityStreams
+- rename theme property `summary` from `comment` to match ActivityStreams ([e747fd8](https://github.com/ryanatkn/fuz/commit/e747fd8))
 
 ### Patch Changes
 
-- beb1ac2: publish $routes/package.ts
+- publish $routes/package.ts ([beb1ac2](https://github.com/ryanatkn/fuz/commit/beb1ac2))
 
 ## 0.72.1
 
 ### Patch Changes
 
-- e6872f0: add .padded_2-5 helper classes
+- add .padded_2-5 helper classes ([e6872f0](https://github.com/ryanatkn/fuz/commit/e6872f0))
 
 ## 0.72.0
 
 ### Minor Changes
 
-- 6540471: rename xl vars to drop the xl, so `_xlX` becomes `_X` and `_xl` becomes `_1`
+- rename xl vars to drop the xl, so `_xlX` becomes `_X` and `_xl` becomes `_1` ([6540471](https://github.com/ryanatkn/fuz/commit/6540471))
 
 ## 0.71.0
 
 ### Minor Changes
 
-- faf3063: unpublish `packages` json and task
+- unpublish `packages` json and task ([faf3063](https://github.com/ryanatkn/fuz/commit/faf3063))
 
 ## 0.70.3
 
 ### Patch Changes
 
-- 5d3090c: remove `@sveltejs/kit` peer dep
+- remove `@sveltejs/kit` peer dep ([5d3090c](https://github.com/ryanatkn/fuz/commit/5d3090c))
 
 ## 0.70.2
 
 ### Patch Changes
 
-- 0d033d3: remove `@ryanatkn/belt` dependency
+- remove `@ryanatkn/belt` dependency ([0d033d3](https://github.com/ryanatkn/fuz/commit/0d033d3))
 
 ## 0.70.1
 
 ### Patch Changes
 
-- fb47615: add peer deps
+- add peer deps ([fb47615](https://github.com/ryanatkn/fuz/commit/fb47615))
 
 ## 0.70.0
 
 ### Minor Changes
 
-- ddb3bf1: extract contextmenu
-- e802137: upgrade to @ryanatkn/gro from @feltjs/gro
-- ddb3bf1: upgrade `@ryanatkn/belt@0.15.0` from `0.13.1`
+- extract contextmenu ([ddb3bf1](https://github.com/ryanatkn/fuz/commit/ddb3bf1))
+- upgrade to @ryanatkn/gro from @feltjs/gro ([e802137](https://github.com/ryanatkn/fuz/commit/e802137))
+- upgrade `@ryanatkn/belt@0.15.0` from `0.13.1` ([ddb3bf1](https://github.com/ryanatkn/fuz/commit/ddb3bf1))
 
 ### Patch Changes
 
-- ddb3bf1: fix theme meta tags
+- fix theme meta tags ([ddb3bf1](https://github.com/ryanatkn/fuz/commit/ddb3bf1))
 
 ## 0.69.1
 
 ### Patch Changes
 
-- 017ebe6: upgrade @ryanatkn/belt
+- upgrade @ryanatkn/belt ([017ebe6](https://github.com/ryanatkn/fuz/commit/017ebe6))
 
 ## 0.69.0
 
 ### Minor Changes
 
-- 0a1c4d7: fix some snake_cases
+- fix some snake_cases ([0a1c4d7](https://github.com/ryanatkn/fuz/commit/0a1c4d7))
 
 ## 0.68.0
 
 ### Minor Changes
 
-- e159ea3: upgrade deps and switch to `snake_case`
+- upgrade deps and switch to `snake_case` ([e159ea3](https://github.com/ryanatkn/fuz/commit/e159ea3))
 
 ## 0.67.0
 
 ### Minor Changes
 
-- 861180a: www.fuz.dev
-- 0287a9b: rename to `@ryanatkn/fuz`
+- www.fuz.dev ([861180a](https://github.com/ryanatkn/fuz/commit/861180a))
+- rename to `@ryanatkn/fuz` ([0287a9b](https://github.com/ryanatkn/fuz/commit/0287a9b))
 
 ## 0.66.2
 
 ### Patch Changes
 
-- e49ce5d2: upgrade gro and felt-mural ([#348](https://github.com/ryanatkn/fuz/pull/348))
+- upgrade gro and felt-mural ([#348](https://github.com/ryanatkn/fuz/pull/348)) ([e49ce5d2](https://github.com/ryanatkn/fuz/commit/e49ce5d2))
 
 ## 0.66.1
 
