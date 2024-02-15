@@ -48,7 +48,7 @@
 		$dialogs = Array.from({length: count}, (_, i) =>
 			to_dialog_params(Text, {
 				text: to_text(i),
-				fontSize: 'var(--size_4)',
+				font_size: 'var(--size_4)',
 				padding: 'var(--spacing_sm) var(--spacing_lg)',
 			}),
 		);
