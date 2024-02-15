@@ -3,12 +3,12 @@
 	import {crossfade} from 'svelte/transition';
 	import {quintOut} from 'svelte/easing';
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
-	import Color_Scheme_Input from '@fuz.dev/fuz/Color_Scheme_Input.svelte';
-	import Theme_Input from '@fuz.dev/fuz/Theme_Input.svelte';
-	import Tome_Detail from '@fuz.dev/fuz_library/Tome_Detail.svelte';
-	import Dialog from '@fuz.dev/fuz_dialog/Dialog.svelte';
-	import {get_tome} from '@fuz.dev/fuz_library/tome.js';
 
+	import Color_Scheme_Input from '$lib/Color_Scheme_Input.svelte';
+	import Theme_Input from '$lib/Theme_Input.svelte';
+	import Dialog from '$lib/Dialog.svelte';
+	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import {get_tome} from '$lib/tome.js';
 	import Contextmenu from '$lib/Contextmenu.svelte';
 	import {create_contextmenu, set_contextmenu, to_contextmenu_params} from '$lib/contextmenu.js';
 	import Cat_Contextmenu from '$routes/library/Contextmenu/Cat_Contextmenu.svelte';
@@ -297,8 +297,8 @@
 				and <a href="https://www.fuz.dev/">Fuz</a>
 			</blockquote>
 			<blockquote>
-				free and open source at<br /><a href="https://github.com/fuz-dev/fuz_contextmenu"
-					>github.com/fuz-dev/fuz_contextmenu</a
+				free and open source at<br /><a href="https://github.com/ryanatkn/fuz"
+					>github.com/ryanatkn/fuz</a
 				>
 			</blockquote>
 			<code class="padded_md spaced"

@@ -13,7 +13,7 @@ export interface Package {
 export interface Package_Meta extends Package {
 	name: string; // '@ryanatkn/fuz_library';
 	repo_name: string; // fuz_library
-	repo_url: Url | null; // 'https://github.com/fuz-dev/fuz_library';
+	repo_url: Url | null; // 'https://github.com/ryanatkn/fuz';
 	/**
 	 * the is the github user/org, not npm
 	 */

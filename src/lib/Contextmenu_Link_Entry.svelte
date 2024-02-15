@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {strip_start} from '@grogarden/util/string.js';
+	import {strip_start} from '@ryanatkn/belt/string.js';
 
 	import {get_contextmenu} from '$lib/contextmenu.js';
 

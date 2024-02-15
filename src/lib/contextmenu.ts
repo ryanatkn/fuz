@@ -7,8 +7,8 @@ import {
 	type SvelteComponent,
 } from 'svelte';
 import {writable, type Readable, type Writable, get} from 'svelte/store';
-import type {Result} from '@grogarden/util/result.js';
-import {to_array} from '@grogarden/util/array.js';
+import type {Result} from '@ryanatkn/belt/result.js';
+import {to_array} from '@ryanatkn/belt/array.js';
 
 import Contextmenu_Link_Entry from '$lib/Contextmenu_Link_Entry.svelte';
 import Contextmenu_Text_Entry from '$lib/Contextmenu_Text_Entry.svelte';

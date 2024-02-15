@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {is_editable, swallow} from '@grogarden/util/dom.js';
+	import {is_editable, swallow} from '@ryanatkn/belt/dom.js';
 
 	import {
 		set_contextmenu,
