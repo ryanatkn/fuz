@@ -152,7 +152,7 @@
 
 ### Patch Changes
 
-- 0d033d3: remove `@grogarden/util` dependency
+- 0d033d3: remove `@ryanatkn/belt` dependency
 
 ## 0.70.1
 
@@ -165,8 +165,8 @@
 ### Minor Changes
 
 - ddb3bf1: extract contextmenu
-- e802137: upgrade to @grogarden/gro from @feltjs/gro
-- ddb3bf1: upgrade `@grogarden/util@0.15.0` from `0.13.1`
+- e802137: upgrade to @ryanatkn/gro from @feltjs/gro
+- ddb3bf1: upgrade `@ryanatkn/belt@0.15.0` from `0.13.1`
 
 ### Patch Changes
 
@@ -176,7 +176,7 @@
 
 ### Patch Changes
 
-- 017ebe6: upgrade @grogarden/util
+- 017ebe6: upgrade @ryanatkn/belt
 
 ## 0.69.0
 
@@ -256,7 +256,7 @@
 
 ## 0.63.0
 
-- **break**: upgrade dep `@grogarden/util@0.9.0`
+- **break**: upgrade dep `@ryanatkn/belt@0.9.0`
   ([#326](https://github.com/fuz-dev/fuz/pull/326))
 - **break**: remove the keyboard shortcut that opens the contextmenu
   ([#315](https://github.com/fuz-dev/fuz/pull/315))
@@ -490,17 +490,17 @@
 
 ## 0.50.2
 
-- upgrade `@grogarden/util@0.7.5`
+- upgrade `@ryanatkn/belt@0.7.5`
   ([commit](https://github.com/fuz-dev/fuz/commit/96bd481228618e07ad206e0148687c320bb9a132))
 
 ## 0.50.1
 
-- upgrade `@grogarden/util@0.7.4`
+- upgrade `@ryanatkn/belt@0.7.4`
   ([commit](https://github.com/fuz-dev/fuz/commit/c78755d867acb0e0d372afda8be80b7c18904d5a))
 
 ## 0.50.0
 
-- **break**: upgrade `@grogarden/util@0.7.3`
+- **break**: upgrade `@ryanatkn/belt@0.7.3`
 
 ## 0.49.1
 
@@ -512,7 +512,7 @@
 
 ## 0.49.0
 
-- **break**: upgrade `@grogarden/util@0.6.0`
+- **break**: upgrade `@ryanatkn/belt@0.6.0`
   ([commit](https://github.com/fuz-dev/fuz/commit/14bf20c5f642588797f1611021899e480632ae9a))
 - add pen brush to whiteboard
   ([#286](https://github.com/fuz-dev/fuz/pull/286))
@@ -578,7 +578,7 @@
 - **break**: move all of `ui/` into the base directory
   ([#261](https://github.com/fuz-dev/fuz/pull/261))
 - **break**: remove `util/` directory;
-  use [`@grogarden/util`](https://github.com/grogarden/util) instead
+  use [`@ryanatkn/belt`](https://github.com/ryanatkn/belt) instead
   ([#260](https://github.com/fuz-dev/fuz/pull/260))
 - uncenter the `legend` element
   ([#259](https://github.com/fuz-dev/fuz/pull/259))
@@ -1147,7 +1147,7 @@
 
 ## 0.1.3
 
-- move utils from `@grogarden/gro`
+- move utils from `@ryanatkn/gro`
   ([#30](https://github.com/fuz-dev/fuz/pull/30))
 
 ## 0.1.2

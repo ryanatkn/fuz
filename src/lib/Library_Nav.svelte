@@ -1,6 +1,6 @@
 <script lang="ts">
 	import {page} from '$app/stores';
-	import {is_iframed} from '@grogarden/util/dom.js';
+	import {is_iframed} from '@ryanatkn/belt/dom.js';
 
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
 

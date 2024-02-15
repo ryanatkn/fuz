@@ -1,7 +1,7 @@
-import type {Package_Json} from '@grogarden/gro/package_json.js';
-import type {Src_Json} from '@grogarden/gro/src_json.js';
-import type {Url} from '@grogarden/gro/paths.js';
-import {strip_start, strip_end} from '@grogarden/util/string.js';
+import type {Package_Json} from '@ryanatkn/gro/package_json.js';
+import type {Src_Json} from '@ryanatkn/gro/src_json.js';
+import type {Url} from '@ryanatkn/gro/paths.js';
+import {strip_start, strip_end} from '@ryanatkn/belt/string.js';
 
 // TODO refactor/rethink
 export interface Package {

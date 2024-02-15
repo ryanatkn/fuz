@@ -18,7 +18,7 @@
 		type Dialog_Layout,
 		to_dialog_params,
 	} from '$lib/dialog.js';
-	import Text from '$routes/library/dialog/Text.svelte';
+	import Text from '$routes/library/Dialog/Text.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Dialog';
 

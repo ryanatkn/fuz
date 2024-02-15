@@ -10,6 +10,7 @@ import Pending_Animation from '$routes/library/Pending_Animation/+page.svelte';
 import Pending_Button from '$routes/library/Pending_Button/+page.svelte';
 import Package_Summary from '$routes/library/Package_Summary/+page.svelte';
 import Package_Detail from '$routes/library/Package_Detail/+page.svelte';
+import Dialog from '$routes/library/Dialog/+page.svelte';
 import Teleport from '$routes/library/Teleport/+page.svelte';
 import Alert from '$routes/library/Alert/+page.svelte';
 // import Library from '$routes/library/Library/+page.svelte';
@@ -110,6 +111,14 @@ export const tomes: Tome[] = [
 		related: ['Alert'],
 	},
 	{
+		name: 'Dialog',
+		slug: 'Dialog',
+		pathname: '',
+		category: 'dialog',
+		component: Dialog,
+		related: [],
+	},
+	{
 		name: 'Hue_Input',
 		slug: 'Hue_Input',
 		pathname: '',
@@ -172,7 +181,7 @@ export const tomes: Tome[] = [
 		pathname: '',
 		category: 'components',
 		component: Teleport,
-		related: [], // TODO external `Dialog`
+		related: [],
 	},
 ];
 

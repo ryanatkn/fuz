@@ -1,6 +1,6 @@
 <script lang="ts">
 	import {page} from '$app/stores';
-	import {ensure_end, strip_end, strip_start} from '@grogarden/util/string.js';
+	import {ensure_end, strip_end, strip_start} from '@ryanatkn/belt/string.js';
 
 	import {format_host, type Package_Meta} from '$lib/package_meta.js';
 

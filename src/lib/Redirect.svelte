@@ -1,7 +1,7 @@
 <script lang="ts">
 	import {browser} from '$app/environment';
 	import {page} from '$app/stores';
-	import {strip_start} from '@grogarden/util/string.js';
+	import {strip_start} from '@ryanatkn/belt/string.js';
 	import {goto} from '$app/navigation';
 
 	/**

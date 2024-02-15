@@ -41,6 +41,7 @@
     "@feltjs/eslint-config": "^0.4.1",
     "@ryanatkn/belt": "^0.20.3",
     "@ryanatkn/gro": "^0.112.0",
+    "@ryanatkn/orc": "^0.18.0",
     "@sveltejs/adapter-static": "^3.0.1",
     "@sveltejs/kit": "^2.0.6",
     "@sveltejs/package": "^2.2.5",

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type {Url} from '@grogarden/gro/paths.js';
+	import type {Url} from '@ryanatkn/gro/paths.js';
 
 	import Github_Logo from '$lib/Github_Logo.svelte';
 	import {format_host, type Package_Meta} from '$lib/package_meta.js';

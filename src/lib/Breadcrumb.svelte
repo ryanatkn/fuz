@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {parse_path_pieces} from '@grogarden/util/path.js';
+	import {parse_path_pieces} from '@ryanatkn/belt/path.js';
 	import {base} from '$app/paths';
 	import {page} from '$app/stores';
 

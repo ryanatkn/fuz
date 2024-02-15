@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type {Writable} from 'svelte/store';
-	import {is_editable} from '@grogarden/util/dom.js';
+	import {is_editable} from '@ryanatkn/belt/dom.js';
 
 	// TODO  this is experimental
 
