@@ -14,7 +14,7 @@
 	It uses a CSS custom property for this to avoid the high complexity of trying to
 	correctly revert any preexisting values for overflow and padding on the body.
 	We don't want to add restrictions to what users can do to the body on their own!
-	For more on these quirks see: https://github.com/fuz-dev/fuz/pull/162
+	For more on these quirks see: https://github.com/ryanatkn/fuz/pull/162
 
 	*/
 

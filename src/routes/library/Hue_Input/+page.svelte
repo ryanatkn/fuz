@@ -14,7 +14,7 @@
 <Tome_Detail {tome}>
 	<div class="prose" style:--color="hsl({hue} 62% 31%)">
 		<!-- TODO make this a generic data-driven helper -->
-		<Code content={`import Hue_Input from\n\t'@fuz.dev/fuz_library/Hue_Input.svelte';`} lang="ts" />
+		<Code content={`import Hue_Input from\n\t'@ryanatkn/fuz/Hue_Input.svelte';`} lang="ts" />
 		<Code
 			content={`<Hue_Input
 	bind:hue

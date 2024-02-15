@@ -4,7 +4,7 @@
 		"package_json": {
 			"name": "@ryanatkn/fuz",
 			"version": "0.81.0",
-			"description": "design system for CSS, Svelte, and SvelteKit",
+			"description": "UI library for Svelte and SvelteKit",
 			"icon": "🧶",
 			"public": true,
 			"license": "MIT",
@@ -14,8 +14,8 @@
 				"email": "mail@ryanatkn.com",
 				"url": "https://www.ryanatkn.com/"
 			},
-			"repository": {"type": "git", "url": "git+https://github.com/fuz-dev/fuz.git"},
-			"bugs": {"url": "https://github.com/fuz-dev/fuz/issues", "email": "mail@ryanatkn.com"},
+			"repository": {"type": "git", "url": "git+https://github.com/ryanatkn/fuz.git"},
+			"bugs": {"url": "https://github.com/ryanatkn/fuz/issues", "email": "mail@ryanatkn.com"},
 			"type": "module",
 			"engines": {"node": ">=20.10"},
 			"scripts": {
@@ -167,11 +167,11 @@
 		},
 		"name": "@ryanatkn/fuz",
 		"repo_name": "fuz",
-		"repo_url": "https://github.com/fuz-dev/fuz",
+		"repo_url": "https://github.com/ryanatkn/fuz",
 		"owner_name": "fuz-dev",
 		"homepage_url": "https://www.fuz.dev/",
 		"npm_url": "https://www.npmjs.com/package/@ryanatkn/fuz",
-		"changelog_url": "https://github.com/fuz-dev/fuz/blob/main/CHANGELOG.md",
+		"changelog_url": "https://github.com/ryanatkn/fuz/blob/main/CHANGELOG.md",
 		"published": true,
 		"check_runs": {"status": "completed", "conclusion": "success"},
 		"pull_requests": [
@@ -253,7 +253,7 @@
 			"public": true,
 			"license": "MIT",
 			"homepage": "https://library.fuz.dev/",
-			"repository": "https://github.com/fuz-dev/fuz_library",
+			"repository": "https://github.com/ryanatkn/fuz",
 			"author": {
 				"name": "Ryan Atkinson",
 				"email": "mail@ryanatkn.com",
@@ -500,11 +500,11 @@
 		},
 		"name": "@ryanatkn/fuz_library",
 		"repo_name": "fuz_library",
-		"repo_url": "https://github.com/fuz-dev/fuz_library",
+		"repo_url": "https://github.com/ryanatkn/fuz",
 		"owner_name": "fuz-dev",
 		"homepage_url": "https://library.fuz.dev/",
 		"npm_url": "https://www.npmjs.com/package/@ryanatkn/fuz_library",
-		"changelog_url": "https://github.com/fuz-dev/fuz_library/blob/main/CHANGELOG.md",
+		"changelog_url": "https://github.com/ryanatkn/fuz/blob/main/CHANGELOG.md",
 		"published": true,
 		"check_runs": {"status": "completed", "conclusion": "success"},
 		"pull_requests": [

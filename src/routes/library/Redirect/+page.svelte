@@ -22,7 +22,7 @@
 			>. Includes a rendered link and JS navigation fallback.
 		</p>
 		<!-- TODO make this a generic data-driven helper -->
-		<Code content={`import Redirect from\n\t'@fuz.dev/fuz_library/Redirect.svelte';`} lang="ts" />
+		<Code content={`import Redirect from\n\t'@ryanatkn/fuz/Redirect.svelte';`} lang="ts" />
 		<aside class="width_sm">
 			Please note: <code>auto={'{'}false}</code> is only used here to prevent the page from redirecting!
 			Normally you wouldn't include it as a prop.

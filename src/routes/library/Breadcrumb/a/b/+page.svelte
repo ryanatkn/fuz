@@ -1,5 +1,5 @@
 <script lang="ts">
-	import BreadcrumbExample from '$routes/library/Breadcrumb/BreadcrumbExample.svelte';
+	import Breadcrumb_Example from '$routes/library/Breadcrumb/Breadcrumb_Example.svelte';
 </script>
 
-<BreadcrumbExample selected_path="/a/b" />
+<Breadcrumb_Example selected_path="/a/b" />

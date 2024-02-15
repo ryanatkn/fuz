@@ -1,15 +1,12 @@
 <script lang="ts">
 	import {slide} from 'svelte/transition';
 	import {writable} from 'svelte/store';
+	import 'prismjs'; // TODO why are these needed? `Code` imports these already - vite config?
+	import Code from '@ryanatkn/fuz_code/Code.svelte';
+
 	import Alert from '$lib/Alert.svelte';
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
 	import {get_tome} from '$lib/tome.js';
-	// TODO hack why is this needed? it's imported in the `Code` component
-	// but it needs to be imported before the next line,
-	// but only in this project and not `fuz_library`??
-	import 'prismjs';
-	import Code from '@ryanatkn/fuz_code/Code.svelte';
-
 	import Dialog from '$lib/Dialog.svelte';
 	import Dialogs from '$lib/Dialogs.svelte';
 	import {

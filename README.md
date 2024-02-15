@@ -14,7 +14,7 @@ and <a href="https://kit.svelte.dev/">SvelteKit</a>:
   unless the gains are substantial
 - has a small set of utility classes with plans for a lot more -
   currently includes a single global importable `style.css`,
-  see [this issue about optimization](https://github.com/fuz-dev/fuz/issues/277)
+  see [this issue about optimization](https://github.com/ryanatkn/fuz/issues/277)
 
 ## usage
 

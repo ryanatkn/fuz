@@ -25,7 +25,7 @@
 			</aside>
 			<!-- TODO make this a generic data-driven helper -->
 			<Code
-				content={`import Pending_Button from\n\t'@fuz.dev/fuz_library/Pending_Button.svelte';`}
+				content={`import Pending_Button from\n\t'@ryanatkn/fuz/Pending_Button.svelte';`}
 				lang="ts"
 			/>
 			<button

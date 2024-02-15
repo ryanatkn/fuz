@@ -4,7 +4,7 @@
 	import {get_tome} from '$lib/tome.js';
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
-	import BreadcrumbExample from '$routes/library/Breadcrumb/BreadcrumbExample.svelte';
+	import Breadcrumb_Example from '$routes/library/Breadcrumb/Breadcrumb_Example.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Breadcrumb';
 	const tome = get_tome(LIBRARY_ITEM_NAME);
@@ -14,10 +14,7 @@
 	<div class="prose box">
 		<section>
 			<!-- TODO make this a generic data-driven helper -->
-			<Code
-				content={`import Breadcrumb from\n\t'@fuz.dev/fuz_library/Breadcrumb.svelte';`}
-				lang="ts"
-			/>
+			<Code content={`import Breadcrumb from\n\t'@ryanatkn/fuz/Breadcrumb.svelte';`} lang="ts" />
 			<Code content={`<Breadcrumb />`} />
 			<Breadcrumb />
 		</section>
@@ -29,7 +26,7 @@
 			<Code
 				content={`<Breadcrumb\n\tpath="/a/b/c"\n\tselected_path="/a/b"\n\tbase_path="/library/Breadcrumb"\n>\n\t🔡\n\t<div slot="separator">.</div>\n</Breadcrumb>`}
 			/>
-			<BreadcrumbExample selected_path="/a/b" />
+			<Breadcrumb_Example selected_path="/a/b" />
 		</section>
 	</div>
 </Tome_Detail>

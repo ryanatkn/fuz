@@ -1,7 +1,7 @@
 {
   "name": "@ryanatkn/fuz",
   "version": "0.81.0",
-  "description": "design system for CSS, Svelte, and SvelteKit",
+  "description": "UI library for Svelte and SvelteKit",
   "icon": "🧶",
   "public": true,
   "license": "MIT",
@@ -13,10 +13,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fuz-dev/fuz.git"
+    "url": "git+https://github.com/ryanatkn/fuz.git"
   },
   "bugs": {
-    "url": "https://github.com/fuz-dev/fuz/issues",
+    "url": "https://github.com/ryanatkn/fuz/issues",
     "email": "mail@ryanatkn.com"
   },
   "type": "module",

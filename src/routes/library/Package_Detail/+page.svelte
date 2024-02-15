@@ -17,7 +17,7 @@
 	<div class="prose">
 		<section>
 			<Code
-				content={`import Package_Detail from\n\t'@fuz.dev/fuz_library/Package_Detail.svelte';`}
+				content={`import Package_Detail from\n\t'@ryanatkn/fuz/Package_Detail.svelte';`}
 				lang="ts"
 			/>
 			<Code content={`<Package_Detail {pkg} />`} />

@@ -6,14 +6,14 @@ import type {Src_Json} from '@ryanatkn/gro/src_json.js';
 export const package_json = {
 	name: '@ryanatkn/fuz',
 	version: '0.81.0',
-	description: 'design system for CSS, Svelte, and SvelteKit',
+	description: 'UI library for Svelte and SvelteKit',
 	icon: '🧶',
 	public: true,
 	license: 'MIT',
 	homepage: 'https://www.fuz.dev/',
 	author: {name: 'Ryan Atkinson', email: 'mail@ryanatkn.com', url: 'https://www.ryanatkn.com/'},
-	repository: {type: 'git', url: 'git+https://github.com/fuz-dev/fuz.git'},
-	bugs: {url: 'https://github.com/fuz-dev/fuz/issues', email: 'mail@ryanatkn.com'},
+	repository: {type: 'git', url: 'git+https://github.com/ryanatkn/fuz.git'},
+	bugs: {url: 'https://github.com/ryanatkn/fuz/issues', email: 'mail@ryanatkn.com'},
 	type: 'module',
 	engines: {node: '>=20.10'},
 	scripts: {

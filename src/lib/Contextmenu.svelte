@@ -10,7 +10,7 @@
 
 	// TODO this is full of hacks to implement "longpress"
 	// to work around iOS not firing the `'contextmenu'` event:
-	// https://github.com/fuz-dev/fuz/pull/319
+	// https://github.com/ryanatkn/fuz/pull/319
 
 	/**
 	 * The `contextmenu` prop is not reactive because that's a rare corner case and

@@ -3,6 +3,7 @@
 	import {crossfade} from 'svelte/transition';
 	import {quintOut} from 'svelte/easing';
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
+	import 'prismjs'; // TODO why are these needed? `Code` imports these already - vite config?
 
 	import Color_Scheme_Input from '$lib/Color_Scheme_Input.svelte';
 	import Theme_Input from '$lib/Theme_Input.svelte';
@@ -239,7 +240,7 @@
 				<a href="https://bugs.webkit.org/show_bug.cgi?id=213953">this WebKit bug report</a>. The Fuz
 				implementation therefore has hacks that may cause corner case bugs on various devices and
 				browsers - for more see
-				<a href="https://github.com/fuz-dev/fuz/pull/319">this PR</a>.
+				<a href="https://github.com/ryanatkn/fuz/pull/319">this PR</a>.
 			</p>
 			<p>
 				When you rightclick or longpress, we search for behaviors defined with <code
@@ -281,7 +282,7 @@
 						><code>navigator.vibrate</code></a
 					>
 					(may remain broken due to the iOS longpress workaround, see
-					<a href="https://github.com/fuz-dev/fuz/pull/319">this PR</a>)
+					<a href="https://github.com/ryanatkn/fuz/pull/319">this PR</a>)
 				</li>
 			</ul>
 		</div>
@@ -292,10 +293,6 @@
 	<Dialog on:close={() => (show_about_dialog = false)}>
 		<div class="pane prose padded_1 box text_align_center">
 			<h1>About</h1>
-			<blockquote class="width_sm">
-				contextmenu for <a href="https://svelte.dev/">Svelte</a>
-				and <a href="https://www.fuz.dev/">Fuz</a>
-			</blockquote>
 			<blockquote>
 				free and open source at<br /><a href="https://github.com/ryanatkn/fuz"
 					>github.com/ryanatkn/fuz</a

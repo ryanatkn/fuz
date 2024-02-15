@@ -5,7 +5,7 @@
 <div class="width_md">
 	<Alert status="help">todo</Alert>
 	<div>
-		<a href="https://github.com/fuz-dev/fuz/issues">github.com/fuz-dev/fuz/issues</a>
+		<a href="https://github.com/ryanatkn/fuz/issues">github.com/ryanatkn/fuz/issues</a>
 	</div>
 </div>
 
