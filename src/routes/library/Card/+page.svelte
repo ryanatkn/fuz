@@ -1,6 +1,6 @@
 <script lang="ts">
 	import {base} from '$app/paths';
-	import Code from '@fuz.dev/fuz_code/Code.svelte';
+	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	import {get_tome} from '$lib/tome.js';
 	import Card from '$lib/Card.svelte';

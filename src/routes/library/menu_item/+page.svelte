@@ -1,6 +1,6 @@
 <script lang="ts">
 	import {swallow} from '@ryanatkn/belt/dom.js';
-	import Code from '@fuz.dev/fuz_code/Code.svelte';
+	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	import {get_tome} from '$lib/tome.js';
 	import Tome_Detail from '$lib/Tome_Detail.svelte';

@@ -15,6 +15,7 @@ import Teleport from '$routes/library/Teleport/+page.svelte';
 import Alert from '$routes/library/Alert/+page.svelte';
 // import Library from '$routes/library/Library/+page.svelte';
 // import menu_item from '$routes/library/menu_item/+page.svelte';
+import Contextmenu from '$routes/library/Contextmenu/+page.svelte';
 import Redirect from '$routes/library/Redirect/+page.svelte';
 import Hue_Input from '$routes/library/Hue_Input/+page.svelte';
 import Breadcrumb from '$routes/library/Breadcrumb/+page.svelte';
@@ -109,6 +110,14 @@ export const tomes: Tome[] = [
 		category: 'components',
 		component: Card,
 		related: ['Alert'],
+	},
+	{
+		name: 'Contextmenu',
+		slug: 'Contextmenu',
+		pathname: '',
+		category: 'components',
+		component: Contextmenu,
+		related: [],
 	},
 	{
 		name: 'Dialog',

@@ -1,15 +1,15 @@
 <script lang="ts">
 	import {writable} from 'svelte/store';
 
-	import Tome_Detail from '$lib/Tome_Detail.svelte';
-	import Dialog from '@ryanatkn/fuz_dialog/Dialog.svelte';
-	import Library_Vocab from '$lib/Library_Vocab.svelte';
 	import 'prismjs'; // TODO why are these needed? `Code` imports these already - vite config?
 	import 'prism-svelte';
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
-	import {get_tome} from '$lib/tome.js';
 
+	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import Dialog from '$lib/Dialog.svelte';
+	import {get_tome} from '$lib/tome.js';
 	import Color_Scheme_Input from '$lib/Color_Scheme_Input.svelte';
+	import Library_Vocab from '$lib/Library_Vocab.svelte';
 	import {type Theme, save_theme, get_theme, get_color_scheme} from '$lib/theme.js';
 	import {default_themes} from '$lib/themes.js';
 	import Theme_Input from '$lib/Theme_Input.svelte';

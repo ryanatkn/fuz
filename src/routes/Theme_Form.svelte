@@ -1,12 +1,12 @@
 <script lang="ts">
 	import {createEventDispatcher} from 'svelte';
-	import {swallow} from '$lib/swallow.js';
-	import Dialog from '@ryanatkn/fuz_dialog/Dialog.svelte';
-	import Copy_To_Clipboard from '$lib/Copy_To_Clipboard.svelte';
 	import 'prismjs'; // TODO why are these needed? `Code` imports these already - vite config?
 	import 'prism-svelte';
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
+	import {swallow} from '$lib/swallow.js';
+	import Copy_To_Clipboard from '$lib/Copy_To_Clipboard.svelte';
+	import Dialog from '$lib/Dialog.svelte';
 	import {render_theme_style, type Theme_Variable, type Theme} from '$lib/theme.js';
 	import Theme_Variable_Detail from '$routes/Theme_Variable_Detail.svelte';
 
