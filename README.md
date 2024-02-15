@@ -1,4 +1,4 @@
-# `@fuz.dev/fuz`
+# `@ryanatkn/fuz`
 
 > friendly user zystem 🧶 [fuz.dev](https://www.fuz.dev/)
 
@@ -19,19 +19,19 @@ and <a href="https://kit.svelte.dev/">SvelteKit</a>:
 ## usage
 
 ```bash
-npm i -D @fuz.dev/fuz
+npm i -D @ryanatkn/fuz
 ```
 
 Import modules at their full paths:
 
 ```ts
 // plain CSS stylesheets:
-import '@fuz.dev/fuz/style.css';
-import '@fuz.dev/fuz/theme.css'; // or bring your own
+import '@ryanatkn/fuz/style.css';
+import '@ryanatkn/fuz/theme.css'; // or bring your own
 // Svelte components:
-import Themed from '@fuz.dev/fuz/Themed.svelte';
+import Themed from '@ryanatkn/fuz/Themed.svelte';
 // TypeScript modules:
-import {type Theme, get_theme} from '@fuz.dev/fuz/theme.js';
+import {type Theme, get_theme} from '@ryanatkn/fuz/theme.js';
 ```
 
 See [the library](https://www.fuz.dev/library) and

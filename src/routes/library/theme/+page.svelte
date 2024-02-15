@@ -1,13 +1,13 @@
 <script lang="ts">
 	import {writable} from 'svelte/store';
 
-	import Tome_Detail from '@fuz.dev/fuz_library/Tome_Detail.svelte';
-	import Dialog from '@fuz.dev/fuz_dialog/Dialog.svelte';
-	import Library_Vocab from '@fuz.dev/fuz_library/Library_Vocab.svelte';
+	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import Dialog from '@ryanatkn/fuz_dialog/Dialog.svelte';
+	import Library_Vocab from '$lib/Library_Vocab.svelte';
 	import 'prismjs'; // TODO why are these needed? `Code` imports these already - vite config?
 	import 'prism-svelte';
-	import Code from '@fuz.dev/fuz_code/Code.svelte';
-	import {get_tome} from '@fuz.dev/fuz_library/tome.js';
+	import Code from '@ryanatkn/fuz_code/Code.svelte';
+	import {get_tome} from '$lib/tome.js';
 
 	import Color_Scheme_Input from '$lib/Color_Scheme_Input.svelte';
 	import {type Theme, save_theme, get_theme, get_color_scheme} from '$lib/theme.js';
@@ -53,7 +53,7 @@
 					>CSS variables</a
 				>. <code>Themed</code> is a singleton component that's mounted at the top-level of the page:
 			</p>
-			<Code content={`import Themed from\n\t'@fuz.dev/fuz/Themed.svelte';`} lang="ts" />
+			<Code content={`import Themed from\n\t'@ryanatkn/fuz/Themed.svelte';`} lang="ts" />
 			<Code content={`<!-- +layout.svelte -->\n<Themed>\n\t<slot />\n</Themed>`} />
 			<details>
 				<summary>why the singleton?</summary>
@@ -117,7 +117,7 @@
 			</p>
 			<Color_Scheme_Input />
 			<Code
-				content={`import Color_Scheme_Input from\n\t'@fuz.dev/fuz/Color_Scheme_Input.svelte';`}
+				content={`import Color_Scheme_Input from\n\t'@ryanatkn/fuz/Color_Scheme_Input.svelte';`}
 				lang="ts"
 			/>
 			<Code content="<Color_Scheme_Input />" />
@@ -182,7 +182,7 @@
 			<div class="spaced prose width_sm">
 				<p>Scope a theme to one branch of the DOM tree with <code>Themed_Scope</code>:</p>
 				<Code
-					content={`import Themed_Scope from\n\t'@fuz.dev/fuz/Themed_Scope.svelte';`}
+					content={`import Themed_Scope from\n\t'@ryanatkn/fuz/Themed_Scope.svelte';`}
 					lang="ts"
 				/>
 				<Code content={`<Themed_Scope {selected_theme}>\n\t\t...\n</Themed_Scope>`} />
@@ -243,9 +243,9 @@
 		<Code
 			content={`<!-- +layout.svelte -->
 <script>
-	import '@fuz.dev/fuz/style.css';
-	import '@fuz.dev/fuz/theme.css';
-	import Themed from '@fuz.dev/fuz/Themed.svelte';
+	import '@ryanatkn/fuz/style.css';
+	import '@ryanatkn/fuz/theme.css';
+	import Themed from '@ryanatkn/fuz/Themed.svelte';
 <script>
 
 <!-- enable theme and color-scheme support -->
@@ -272,11 +272,11 @@
 				content={`// get values from the Svelte context provided by
 // the nearest \`Themed\` or \`Themed_Scope\` ancestor:
 
-import {get_theme} from '@fuz.dev/fuz/theme.js';
+import {get_theme} from '@ryanatkn/fuz/theme.js';
 const selected_theme = get_theme();
 $selected_theme.name; // '${$selected_theme.name}'
 
-import {get_color_scheme} from '@fuz.dev/fuz/theme.js';
+import {get_color_scheme} from '@ryanatkn/fuz/theme.js';
 const selected_color_scheme = get_color_scheme();
 $selected_color_scheme; // '${$selected_color_scheme}'`}
 				lang="js"

@@ -4,7 +4,7 @@ import type {Package_Json} from '@grogarden/gro/package_json.js';
 import type {Src_Json} from '@grogarden/gro/src_json.js';
 
 export const package_json = {
-	name: '@fuz.dev/fuz',
+	name: '@ryanatkn/fuz',
 	version: '0.81.0',
 	description: 'design system for CSS, Svelte, and SvelteKit',
 	icon: '🧶',
@@ -28,9 +28,9 @@ export const package_json = {
 	devDependencies: {
 		'@changesets/changelog-git': '^0.2.0',
 		'@feltjs/eslint-config': '^0.4.1',
-		'@fuz.dev/fuz_code': '^0.5.0',
-		'@fuz.dev/fuz_dialog': '^0.6.0',
-		'@fuz.dev/fuz_library': '^0.23.0',
+		'@ryanatkn/fuz_code': '^0.5.0',
+		'@ryanatkn/fuz_dialog': '^0.6.0',
+		'@ryanatkn/fuz_library': '^0.23.0',
 		'@grogarden/gro': '^0.108.0',
 		'@ryanatkn/orc': '^0.17.0',
 		'@sveltejs/adapter-static': '^3.0.1',
@@ -102,7 +102,7 @@ export const package_json = {
 } satisfies Package_Json;
 
 export const src_json = {
-	name: '@fuz.dev/fuz',
+	name: '@ryanatkn/fuz',
 	version: '0.81.0',
 	modules: {
 		'./Color_Scheme_Input.svelte': {path: 'Color_Scheme_Input.svelte', declarations: []},

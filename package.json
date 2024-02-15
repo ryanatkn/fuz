@@ -1,5 +1,5 @@
 {
-  "name": "@fuz.dev/fuz",
+  "name": "@ryanatkn/fuz",
   "version": "0.81.0",
   "description": "design system for CSS, Svelte, and SvelteKit",
   "icon": "🧶",
@@ -39,11 +39,8 @@
   "devDependencies": {
     "@changesets/changelog-git": "^0.2.0",
     "@feltjs/eslint-config": "^0.4.1",
-    "@fuz.dev/fuz_code": "^0.5.0",
-    "@fuz.dev/fuz_dialog": "^0.6.0",
-    "@fuz.dev/fuz_library": "^0.23.0",
-    "@grogarden/gro": "^0.108.0",
-    "@ryanatkn/orc": "^0.17.0",
+    "@ryanatkn/belt": "^0.20.3",
+    "@ryanatkn/gro": "^0.112.0",
     "@sveltejs/adapter-static": "^3.0.1",
     "@sveltejs/kit": "^2.0.6",
     "@sveltejs/package": "^2.2.5",

@@ -1,4 +1,4 @@
-import {init_tome, type Tome} from '@fuz.dev/fuz_library/tome.js';
+import {init_tome, type Tome} from '$lib/tome.js';
 
 import elements from '$routes/library/elements/+page.svelte';
 import forms from '$routes/library/forms/+page.svelte';

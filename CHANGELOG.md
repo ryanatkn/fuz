@@ -1,4 +1,4 @@
-# @fuz.dev/fuz
+# @ryanatkn/fuz
 
 ## 0.81.0
 
@@ -195,7 +195,7 @@
 ### Minor Changes
 
 - 861180a: www.fuz.dev
-- 0287a9b: rename to `@fuz.dev/fuz`
+- 0287a9b: rename to `@ryanatkn/fuz`
 
 ## 0.66.2
 
@@ -274,7 +274,7 @@
   ([#330](https://github.com/fuz-dev/fuz/pull/330))
 - fix theme when SSR is disabled
   ([#317](https://github.com/fuz-dev/fuz/pull/317))
-- add and publish `@fuz.dev/fuz_library/Copy_To_Clipboard.svelte`
+- add and publish `@ryanatkn/fuz_library/Copy_To_Clipboard.svelte`
   ([#318](https://github.com/fuz-dev/fuz/pull/318))
 - publish `$lib/prism.css`
   ([#318](https://github.com/fuz-dev/fuz/pull/318))
@@ -286,7 +286,7 @@
   ([#334](https://github.com/fuz-dev/fuz/pull/334))
 - add and publish `$lib/Card.svelte`
   ([#332](https://github.com/fuz-dev/fuz/pull/332))
-- publish `@fuz.dev/fuz_code/Code.svelte` and `$lib/prism.css`
+- publish `@ryanatkn/fuz_code/Code.svelte` and `$lib/prism.css`
   ([#331](https://github.com/fuz-dev/fuz/pull/331))
 
 ## 0.62.0
@@ -548,7 +548,7 @@
 
 ## 0.47.0
 
-- **break**: rename to `@fuz.dev/fuz` and upgrade deps
+- **break**: rename to `@ryanatkn/fuz` and upgrade deps
   ([#271](https://github.com/fuz-dev/fuz/pull/271))
 
 ## 0.46.0

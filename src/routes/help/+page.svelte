@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Alert from '@fuz.dev/fuz_library/Alert.svelte';
+	import Alert from '$lib/Alert.svelte';
 </script>
 
 <div class="width_md">

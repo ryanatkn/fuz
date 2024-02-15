@@ -1,5 +1,5 @@
-import type {Gen} from '@grogarden/gro';
-import {to_root_path} from '@grogarden/gro/paths.js';
+import type {Gen} from '@ryanatkn/gro';
+import {to_root_path} from '@ryanatkn/gro/paths.js';
 
 import {default_themes} from '$lib/themes.js';
 import {render_theme_style} from '$lib/theme.js';
