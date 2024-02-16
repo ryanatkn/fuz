@@ -1,7 +1,8 @@
 import type {Logger} from '@ryanatkn/belt/log.js';
-import type {Package_Meta} from '@ryanatkn/fuz/package_meta.js';
 import {z} from 'zod';
 import {fetch_value, type Fetch_Value_Cache} from '@ryanatkn/belt/fetch.js';
+
+import type {Package_Meta} from '$lib/package_meta.js';
 
 /**
  * @see https://docs.github.com/en/rest/pulls/pulls?apiVersion=2022-11-28#list-pull-requests

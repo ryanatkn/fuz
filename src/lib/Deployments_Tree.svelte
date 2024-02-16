@@ -1,9 +1,9 @@
 <script lang="ts">
-	import Package_Summary from '@ryanatkn/fuz/Package_Summary.svelte';
-	import Package_Detail from '@ryanatkn/fuz/Package_Detail.svelte';
 	import {strip_end, strip_start} from '@ryanatkn/belt/string.js';
 	import {base} from '$app/paths';
 
+	import Package_Summary from '$lib/Package_Summary.svelte';
+	import Package_Detail from '$lib/Package_Detail.svelte';
 	import type {Fetched_Deployment} from '$lib/fetch_deployments.js';
 	import Deployments_Tree_Nav from '$lib/Deployments_Tree_Nav.svelte';
 

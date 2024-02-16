@@ -1,8 +1,8 @@
 <script lang="ts">
 	import {page} from '$app/stores';
-	import Library_Panel from '@ryanatkn/fuz/Library_Panel.svelte';
 	import type {Src_Module} from '@ryanatkn/gro/src_json.js';
 
+	import Library_Panel from '$lib/Library_Panel.svelte';
 	import type {Fetched_Deployment} from '$lib/fetch_deployments.js';
 
 	// TODO add highlighting of the items that are onscreen

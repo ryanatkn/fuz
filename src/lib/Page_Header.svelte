@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Breadcrumb from '@ryanatkn/fuz/Breadcrumb.svelte';
-	import type {Package_Meta} from '@ryanatkn/fuz/package_meta.js';
+	import Breadcrumb from '$lib/Breadcrumb.svelte';
+	import type {Package_Meta} from '$lib/package_meta.js';
 
 	export let pkg: Package_Meta;
 </script>

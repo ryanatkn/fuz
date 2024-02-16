@@ -1,7 +1,7 @@
 <script lang="ts">
-	import {format_host} from '@ryanatkn/fuz/package_meta.js';
 	import {base} from '$app/paths';
 
+	import {format_host} from '$lib/package_meta.js';
 	import {to_pull_requests, type Filter_Pull_Request} from '$lib/github_helpers.js';
 	import type {Fetched_Deployment, Unfetched_Deployment} from '$lib/fetch_deployments.js';
 

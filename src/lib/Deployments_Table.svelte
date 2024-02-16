@@ -1,9 +1,9 @@
 <script lang="ts">
-	import {format_host} from '@ryanatkn/fuz/package_meta.js';
 	import {page} from '$app/stores';
 	import {base} from '$app/paths';
 	import {ensure_end} from '@ryanatkn/belt/string.js';
 
+	import {format_host} from '$lib/package_meta.js';
 	import type {Fetched_Deployment} from '$lib/fetch_deployments.js';
 	import {to_pull_url} from '$lib/github_helpers.js';
 

@@ -1,6 +1,6 @@
 import {getContext, setContext} from 'svelte';
-import {parse_package_meta} from '@ryanatkn/fuz/package_meta.js';
 
+import {parse_package_meta} from '$lib/package_meta.js';
 import type {Fetched_Deployment, Deployment, Unfetched_Deployment} from '$lib/fetch_deployments.js';
 
 export interface Deployments {
