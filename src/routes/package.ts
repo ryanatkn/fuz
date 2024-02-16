@@ -6,7 +6,7 @@ import type {Src_Json} from '@ryanatkn/gro/src_json.js';
 export const package_json = {
 	name: '@ryanatkn/fuz',
 	version: '0.83.0',
-	description: 'UI library for Svelte and SvelteKit',
+	description: 'Svelte UI library and CSS design system',
 	icon: '🧶',
 	public: true,
 	license: 'MIT',
