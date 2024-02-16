@@ -125,7 +125,7 @@ export const tomes: Tome[] = [
 		pathname: '',
 		category: 'components',
 		component: Dialog,
-		related: [],
+		related: ['Teleport'],
 	},
 	{
 		name: 'Hue_Input',
@@ -190,7 +190,7 @@ export const tomes: Tome[] = [
 		pathname: '',
 		category: 'components',
 		component: Teleport,
-		related: [],
+		related: ['Dialog'],
 	},
 ];
 
