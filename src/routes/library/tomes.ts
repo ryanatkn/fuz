@@ -78,7 +78,7 @@ export const tomes: Tome[] = [
 		component: variables,
 		related: ['theme', 'icon sizes', 'typography'],
 	},
-	// TODO maybe? or do styles like this belong elsewhere?
+	// TODO maybe? or do styles like this belong elsewhere? classes? problem is we'll have a classes page for the variables
 	// {
 	// 	name: 'menu item',
 	// 	slug: 'menu_item',
@@ -125,7 +125,7 @@ export const tomes: Tome[] = [
 		pathname: '',
 		category: 'components',
 		component: Dialog,
-		related: [],
+		related: ['Teleport'],
 	},
 	{
 		name: 'Hue_Input',
@@ -190,7 +190,7 @@ export const tomes: Tome[] = [
 		pathname: '',
 		category: 'components',
 		component: Teleport,
-		related: [],
+		related: ['Dialog'],
 	},
 ];
 
