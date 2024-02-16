@@ -1,7 +1,7 @@
 <script lang="ts">
 	import {slide} from 'svelte/transition';
 	import {writable} from 'svelte/store';
-	import 'prismjs'; // TODO why are these needed? `Code` imports these already - vite config?
+	import 'prismjs'; // TODO @multiple why are these needed? `Code` imports these already - vite config?
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	import Alert from '$lib/Alert.svelte';

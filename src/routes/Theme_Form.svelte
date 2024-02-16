@@ -1,7 +1,6 @@
 <script lang="ts">
 	import {createEventDispatcher} from 'svelte';
-	import 'prismjs'; // TODO why are these needed? `Code` imports these already - vite config?
-	import 'prism-svelte';
+	import 'prismjs'; // TODO @multiple why are these needed? `Code` imports these already - vite config?
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	import {swallow} from '$lib/swallow.js';
