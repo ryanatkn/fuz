@@ -78,12 +78,13 @@ export const fetch_deployments = async (
 				log?.info('fetching data for', homepage_url);
 
 				// `${base}/.well-known/package.json`
+				await wait(delay);
 				const fetched_package_json = await fetch_package_json(homepage_url, cache, log);
 				if (!fetched_package_json) throw Error('failed to load package_json: ' + homepage_url);
 				package_json = fetched_package_json;
-				await wait(delay);
 
 				// `${base}/.well-known/src.json`
+				await wait(delay);
 				const fetched_src_json = await fetch_src_json(homepage_url, cache, log);
 				if (!fetched_src_json) throw Error('failed to load src_json: ' + homepage_url);
 				src_json = fetched_src_json;
@@ -96,9 +97,9 @@ export const fetch_deployments = async (
 		}
 
 		if (pkg) {
-			await wait(delay);
+			// CI status
 			try {
-				// CI status
+				await wait(delay);
 				check_runs = await fetch_github_check_runs(
 					pkg,
 					cache,
@@ -112,10 +113,10 @@ export const fetch_deployments = async (
 				check_runs = null;
 				log?.error(err);
 			}
-			await wait(delay);
 
+			// pull requests
 			try {
-				// pull requests
+				await wait(delay);
 				pull_requests = await fetch_github_pull_requests(
 					pkg,
 					cache,
@@ -128,7 +129,6 @@ export const fetch_deployments = async (
 				pull_requests = null;
 				log?.error(err);
 			}
-			await wait(delay);
 		} else {
 			check_runs = null;
 			pull_requests = null;
