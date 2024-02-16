@@ -1,4 +1,5 @@
 <script lang="ts">
+	import 'prismjs';
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	import {get_tome} from '$lib/tome.js';
