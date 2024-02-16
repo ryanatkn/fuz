@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.83.0
+
+### Minor Changes
+
+- add config and deployments feature ([#3](https://github.com/ryanatkn/fuz/pull/3))
+
 ## 0.82.0
 
 ### Minor Changes
