@@ -1,5 +1,5 @@
 ---
-"@ryanatkn/fuz": patch
+'@ryanatkn/fuz': patch
 ---
 
-publish Page_Menu
+publish `Page_Menu`
