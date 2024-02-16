@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Tree_Page from '@ryanatkn/orc/Tree_Page.svelte';
-	import {get_deployments} from '@ryanatkn/orc/deployments.js';
+	import Tree_Page from '$lib/Tree_Page.svelte';
+	import {get_deployments} from '$lib/deployments.js';
 
 	// TODO ideally there would be one `Packages_Tree` mounted by the layout
 

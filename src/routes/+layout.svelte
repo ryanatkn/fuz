@@ -1,10 +1,10 @@
 <script lang="ts">
 	import '$lib/style.css';
 	import '$lib/theme.css';
-	import '@fuz.dev/fuz_code/prism.css';
+	import '@ryanatkn/fuz_code/prism.css';
 
-	import {set_devmode} from '@fuz.dev/fuz_library/devmode.js';
-	import Devmode_Controls from '@fuz.dev/fuz_library/Devmode_Controls.svelte';
+	import {set_devmode} from '$lib/devmode.js';
+	import Devmode_Controls from '$lib/Devmode_Controls.svelte';
 
 	import Themed from '$lib/Themed.svelte';
 

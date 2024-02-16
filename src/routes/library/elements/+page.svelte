@@ -1,9 +1,8 @@
 <script lang="ts">
-	import Tome_Detail from '@fuz.dev/fuz_library/Tome_Detail.svelte';
-	import {get_tome} from '@fuz.dev/fuz_library/tome.js';
-	import 'prismjs'; // TODO why are these needed? `Code` imports these already - vite config?
-	import 'prism-svelte';
-	import Code from '@fuz.dev/fuz_code/Code.svelte';
+	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import {get_tome} from '$lib/tome.js';
+	import 'prismjs'; // TODO @multiple why are these needed? `Code` imports these already - vite config?
+	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	const LIBRARY_ITEM_NAME = 'elements';
 

@@ -1,5 +1,5 @@
 import type {EntryGenerator} from './$types';
-import {parse_package_meta} from '@fuz.dev/fuz_library/package_meta.js';
+import {parse_package_meta} from '$lib/package_meta.js';
 
 import maybe_deployments from '$lib/deployments.json';
 

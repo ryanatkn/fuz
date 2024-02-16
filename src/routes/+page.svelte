@@ -1,9 +1,9 @@
 <script lang="ts">
 	import {base} from '$app/paths';
-	import Library_Footer from '@fuz.dev/fuz_library/Library_Footer.svelte';
-	import Card from '@fuz.dev/fuz_library/Card.svelte';
-	import {parse_package_meta} from '@fuz.dev/fuz_library/package_meta.js';
 
+	import Library_Footer from '$lib/Library_Footer.svelte';
+	import Card from '$lib/Card.svelte';
+	import {parse_package_meta} from '$lib/package_meta.js';
 	import Page_Menu from '$routes/Page_Menu.svelte';
 	import {package_json, src_json} from '$routes/package.js';
 
@@ -20,9 +20,7 @@
 			</section>
 		</div>
 		<section>
-			<Card href="{base}/library"
-				>design<br />system<br /><svelte:fragment slot="icon">🧶</svelte:fragment></Card
-			>
+			<Card href="{base}/library">library<svelte:fragment slot="icon">🧶</svelte:fragment></Card>
 		</section>
 		<section class="panel padded_lg">
 			<h2 class="spaced">packages</h2>

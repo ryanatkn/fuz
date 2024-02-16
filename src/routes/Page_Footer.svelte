@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Breadcrumb from '@fuz.dev/fuz_library/Breadcrumb.svelte';
-	import Library_Footer from '@fuz.dev/fuz_library/Library_Footer.svelte';
-	import type {Package_Meta} from '@fuz.dev/fuz_library/package_meta.js';
+	import Breadcrumb from '$lib/Breadcrumb.svelte';
+	import Library_Footer from '$lib/Library_Footer.svelte';
+	import type {Package_Meta} from '$lib/package_meta.js';
 
 	export let pkg: Package_Meta | {url: string; package_json: null};
 </script>
