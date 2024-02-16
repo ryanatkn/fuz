@@ -57,10 +57,13 @@ export const fetch_deployments = async (
 	const deployments: Deployment[] = [];
 	for (const raw_homepage_url of homepage_urls) {
 		const homepage_url = ensure_end(raw_homepage_url, '/');
-		try {
-			let package_json: Package_Json;
-			let src_json: Src_Json;
+		let package_json: Package_Json;
+		let src_json: Src_Json;
+		let pkg: Package_Meta;
+		let check_runs: Github_Check_Runs_Item | null;
+		let pull_requests: Github_Pull_Requests | null;
 
+		try {
 			// Handle the local package data, if available
 			if (homepage_url === local_homepage_url) {
 				log?.info('resolving data locally for', homepage_url);
@@ -86,7 +89,7 @@ export const fetch_deployments = async (
 				await wait(delay);
 			}
 
-			const pkg = parse_package_meta(homepage_url, package_json, src_json);
+			pkg = parse_package_meta(homepage_url, package_json, src_json);
 
 			// CI status
 			const check_runs = await fetch_github_check_runs(
@@ -110,17 +113,21 @@ export const fetch_deployments = async (
 			);
 			if (!pull_requests) throw Error('failed to fetch issues: ' + homepage_url);
 			await wait(delay);
-
-			deployments.push({...pkg, check_runs, pull_requests});
 		} catch (err) {
+			log?.error(err);
+		}
+
+		// TODO BLOCK combine
+		if (pkg) {
+			deployments.push({...pkg, check_runs, pull_requests});
+		} else {
 			deployments.push({
 				url: homepage_url,
-				package_json: null,
-				src_json: null,
-				check_runs: null,
-				pull_requests: null,
+				package_json,
+				src_json,
+				check_runs,
+				pull_requests,
 			});
-			log?.error(err);
 		}
 	}
 	return deployments;
