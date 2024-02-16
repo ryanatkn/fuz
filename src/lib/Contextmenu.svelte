@@ -94,7 +94,7 @@
 	let touch_x: number | undefined | null;
 	let touch_y: number | undefined | null;
 	let longpress_start_time: number | undefined | null;
-	let longpress_timeout: number | undefined | null;
+	let longpress_timeout: NodeJS.Timeout | undefined | null;
 	let longpress_opened: boolean | undefined;
 	let longpress_bypass: boolean | undefined;
 

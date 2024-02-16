@@ -1,7 +1,7 @@
 <script lang="ts">
 	import {page} from '$app/stores';
-	import Tree_Item_Page from '@ryanatkn/orc/Tree_Item_Page.svelte';
-	import {get_deployments} from '@ryanatkn/orc/deployments.js';
+	import Tree_Item_Page from '$lib/Tree_Item_Page.svelte';
+	import {get_deployments} from '$lib/deployments.js';
 
 	// TODO ideally there would be one `Packages_Tree` mounted by the layout
 
