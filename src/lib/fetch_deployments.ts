@@ -12,6 +12,7 @@ import {
 	fetch_github_check_runs,
 	fetch_github_pull_requests,
 	Github_Check_Runs_Item,
+	Github_Pull_Requests,
 	type Github_Pull_Request,
 } from '$lib/github.js';
 
@@ -59,7 +60,7 @@ export const fetch_deployments = async (
 		const homepage_url = ensure_end(raw_homepage_url, '/');
 		let package_json: Package_Json;
 		let src_json: Src_Json;
-		let pkg: Package_Meta;
+		let pkg: Package_Meta | null;
 		let check_runs: Github_Check_Runs_Item | null;
 		let pull_requests: Github_Pull_Requests | null;
 
@@ -86,35 +87,51 @@ export const fetch_deployments = async (
 				const fetched_src_json = await fetch_src_json(homepage_url, cache, log);
 				if (!fetched_src_json) throw Error('failed to load src_json: ' + homepage_url);
 				src_json = fetched_src_json;
-				await wait(delay);
 			}
 
 			pkg = parse_package_meta(homepage_url, package_json, src_json);
-
-			// CI status
-			const check_runs = await fetch_github_check_runs(
-				pkg,
-				cache,
-				log,
-				token,
-				github_api_version,
-				github_refs?.[raw_homepage_url],
-			);
-			if (!check_runs) throw Error('failed to fetch CI status: ' + homepage_url);
-			await wait(delay);
-
-			// pull requests
-			const pull_requests = await fetch_github_pull_requests(
-				pkg,
-				cache,
-				log,
-				token,
-				github_api_version,
-			);
-			if (!pull_requests) throw Error('failed to fetch issues: ' + homepage_url);
-			await wait(delay);
 		} catch (err) {
+			pkg = null;
 			log?.error(err);
+		}
+
+		if (pkg) {
+			await wait(delay);
+			try {
+				// CI status
+				check_runs = await fetch_github_check_runs(
+					pkg,
+					cache,
+					log,
+					token,
+					github_api_version,
+					github_refs?.[raw_homepage_url],
+				);
+				if (!check_runs) throw Error('failed to fetch CI status: ' + homepage_url);
+			} catch (err) {
+				check_runs = null;
+				log?.error(err);
+			}
+			await wait(delay);
+
+			try {
+				// pull requests
+				pull_requests = await fetch_github_pull_requests(
+					pkg,
+					cache,
+					log,
+					token,
+					github_api_version,
+				);
+				if (!pull_requests) throw Error('failed to fetch issues: ' + homepage_url);
+			} catch (err) {
+				pull_requests = null;
+				log?.error(err);
+			}
+			await wait(delay);
+		} else {
+			check_runs = null;
+			pull_requests = null;
 		}
 
 		// TODO BLOCK combine
