@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.83.1
+
+### Patch Changes
+
+- publish `Page_Menu` ([#4](https://github.com/ryanatkn/fuz/pull/4))
+
 ## 0.83.0
 
 ### Minor Changes

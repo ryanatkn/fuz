@@ -2,11 +2,11 @@
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
 	import type {Package_Meta} from '$lib/package_meta.js';
 
-	export let pkg: Package_Meta;
+	export let pkg: Package_Meta | {url: string; package_json: null};
 </script>
 
 <div>
-	<Breadcrumb>{pkg.package_json.icon}</Breadcrumb>
+	<Breadcrumb>{pkg.package_json?.icon}</Breadcrumb>
 </div>
 
 <style>

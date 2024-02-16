@@ -5,8 +5,8 @@ import type {Src_Json} from '@ryanatkn/gro/src_json.js';
 
 export const package_json = {
 	name: '@ryanatkn/fuz',
-	version: '0.83.0',
-	description: 'UI library for Svelte and SvelteKit',
+	version: '0.83.1',
+	description: 'Svelte UI library and CSS design system',
 	icon: '🧶',
 	public: true,
 	license: 'MIT',
@@ -30,7 +30,7 @@ export const package_json = {
 		'@ryanatkn/belt': '^0.20.3',
 		'@ryanatkn/eslint-config': '^0.1.0',
 		'@ryanatkn/fuz_code': '^0.7.0',
-		'@ryanatkn/gro': '^0.112.0',
+		'@ryanatkn/gro': '^0.112.1',
 		'@sveltejs/adapter-static': '^3.0.1',
 		'@sveltejs/kit': '^2.5.0',
 		'@sveltejs/package': '^2.2.6',
@@ -251,6 +251,11 @@ export const package_json = {
 			default: './dist/Page_Header.svelte',
 			types: './dist/Page_Header.svelte.d.ts',
 		},
+		'./Page_Menu.svelte': {
+			svelte: './dist/Page_Menu.svelte',
+			default: './dist/Page_Menu.svelte',
+			types: './dist/Page_Menu.svelte.d.ts',
+		},
 		'./Pending_Animation.svelte': {
 			svelte: './dist/Pending_Animation.svelte',
 			default: './dist/Pending_Animation.svelte',
@@ -334,7 +339,7 @@ export const package_json = {
 
 export const src_json = {
 	name: '@ryanatkn/fuz',
-	version: '0.83.0',
+	version: '0.83.1',
 	modules: {
 		'./Alert.svelte': {path: 'Alert.svelte', declarations: []},
 		'./alert.js': {
@@ -505,6 +510,7 @@ export const src_json = {
 		'./Package_Summary.svelte': {path: 'Package_Summary.svelte', declarations: []},
 		'./Page_Footer.svelte': {path: 'Page_Footer.svelte', declarations: []},
 		'./Page_Header.svelte': {path: 'Page_Header.svelte', declarations: []},
+		'./Page_Menu.svelte': {path: 'Page_Menu.svelte', declarations: []},
 		'./Pending_Animation.svelte': {path: 'Pending_Animation.svelte', declarations: []},
 		'./Pending_Button.svelte': {path: 'Pending_Button.svelte', declarations: []},
 		'./Pull_Requests_Detail.svelte': {path: 'Pull_Requests_Detail.svelte', declarations: []},

@@ -2,7 +2,6 @@
 	import {flip} from 'svelte/animate';
 	import {crossfade} from 'svelte/transition';
 	import {quintOut} from 'svelte/easing';
-	import 'prismjs'; // TODO why are these needed? `Code` imports these already - vite config?
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	import Color_Scheme_Input from '$lib/Color_Scheme_Input.svelte';

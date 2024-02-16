@@ -1,6 +1,5 @@
 <script lang="ts">
 	import {base} from '$app/paths';
-	import 'prismjs'; // TODO @multiple why are these needed? `Code` imports these already - vite config?
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	import {get_tome} from '$lib/tome.js';

@@ -1,18 +1,21 @@
 <script lang="ts">
+	import type {Url} from '@ryanatkn/gro/paths.js';
+
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
 	import Library_Footer from '$lib/Library_Footer.svelte';
 	import type {Package_Meta} from '$lib/package_meta.js';
 
-	export let pkg: Package_Meta;
+	export let pkg: Package_Meta | {url: string; package_json: null};
+	export let root_url: Url | null = null;
 </script>
 
 <footer>
 	{#if pkg.package_json}
-		<Library_Footer {pkg} root_url="https://www.spiderspace.org/" />
+		<Library_Footer {pkg} {root_url} />
 	{/if}
 	<slot />
 	<div class="breadcrumb_wrapper">
-		<Breadcrumb>{pkg.package_json.icon}</Breadcrumb>
+		<Breadcrumb>{pkg.package_json?.icon}</Breadcrumb>
 	</div>
 </footer>
 
