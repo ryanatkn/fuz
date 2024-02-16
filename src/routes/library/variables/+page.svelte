@@ -1,5 +1,4 @@
 <script lang="ts">
-	import 'prismjs'; // TODO @multiple why are these needed? `Code` imports these already - vite config?
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	import {swallow} from '$lib/swallow.js';
