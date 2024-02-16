@@ -1,7 +1,7 @@
 <script lang="ts">
 	import {base} from '$app/paths';
 
-	// TODO upstream
+	// TODO rethink this, is just for deployments (which also needs to be renamed because it's more like repos)
 </script>
 
 <menu>

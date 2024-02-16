@@ -4,7 +4,7 @@
 	import Library_Footer from '$lib/Library_Footer.svelte';
 	import Card from '$lib/Card.svelte';
 	import {parse_package_meta} from '$lib/package_meta.js';
-	import Page_Menu from '$routes/Page_Menu.svelte';
+	import Page_Menu from '$lib/Page_Menu.svelte';
 	import {package_json, src_json} from '$routes/package.js';
 
 	// TODO set in context
