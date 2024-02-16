@@ -251,6 +251,11 @@ export const package_json = {
 			default: './dist/Page_Header.svelte',
 			types: './dist/Page_Header.svelte.d.ts',
 		},
+		'./Page_Menu.svelte': {
+			svelte: './dist/Page_Menu.svelte',
+			default: './dist/Page_Menu.svelte',
+			types: './dist/Page_Menu.svelte.d.ts',
+		},
 		'./Pending_Animation.svelte': {
 			svelte: './dist/Pending_Animation.svelte',
 			default: './dist/Pending_Animation.svelte',
@@ -505,6 +510,7 @@ export const src_json = {
 		'./Package_Summary.svelte': {path: 'Package_Summary.svelte', declarations: []},
 		'./Page_Footer.svelte': {path: 'Page_Footer.svelte', declarations: []},
 		'./Page_Header.svelte': {path: 'Page_Header.svelte', declarations: []},
+		'./Page_Menu.svelte': {path: 'Page_Menu.svelte', declarations: []},
 		'./Pending_Animation.svelte': {path: 'Pending_Animation.svelte', declarations: []},
 		'./Pending_Button.svelte': {path: 'Pending_Button.svelte', declarations: []},
 		'./Pull_Requests_Detail.svelte': {path: 'Pull_Requests_Detail.svelte', declarations: []},

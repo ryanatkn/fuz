@@ -3,16 +3,16 @@
 	import Library_Footer from '$lib/Library_Footer.svelte';
 	import type {Package_Meta} from '$lib/package_meta.js';
 
-	export let pkg: Package_Meta;
+	export let pkg: Package_Meta | {url: string; package_json: null};
 </script>
 
 <footer>
 	{#if pkg.package_json}
-		<Library_Footer {pkg} root_url="https://www.spiderspace.org/" />
+		<Library_Footer {pkg} root_url="https://www.fuz.dev/" />
 	{/if}
 	<slot />
 	<div class="breadcrumb_wrapper">
-		<Breadcrumb>{pkg.package_json.icon}</Breadcrumb>
+		<Breadcrumb>{pkg.package_json?.icon}</Breadcrumb>
 	</div>
 </footer>
 
