@@ -1,5 +1,5 @@
 ---
-"@ryanatkn/fuz": minor
+'@ryanatkn/fuz': minor
 ---
 
-add fuz_gitops
+extract package meta and deployments modules to fuz_gitops
