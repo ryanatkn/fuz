@@ -1,5 +1,7 @@
 <script lang="ts">
 	import {page} from '$app/stores';
+	import {parse_package_meta} from '@ryanatkn/gro/package_meta.js';
+
 	import Library_Menu from '$lib/Library_Menu.svelte';
 	import Library_Panel from '$lib/Library_Panel.svelte';
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
@@ -7,8 +9,6 @@
 	import Library_Footer from '$lib/Library_Footer.svelte';
 	import Package_Summary from '$lib/Package_Summary.svelte';
 	import Library_Nav from '$lib/Library_Nav.svelte';
-	import {parse_package_meta} from '$lib/package_meta.js';
-
 	import {tomes} from '$routes/library/tomes.js';
 	import {package_json, src_json} from '$routes/package.js';
 

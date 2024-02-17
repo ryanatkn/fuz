@@ -1,6 +1,7 @@
 <script lang="ts">
+	import {parse_package_meta} from '@ryanatkn/gro/package_meta.js';
+
 	import Package_Detail from '$lib/Package_Detail.svelte';
-	import {parse_package_meta} from '$lib/package_meta.js';
 	import Library_Footer from '$lib/Library_Footer.svelte';
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
 
