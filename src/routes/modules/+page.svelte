@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Modules_Page from '$lib/Modules_Page.svelte';
-	import {get_deployments} from '$lib/deployments.js';
+	import {get_deployments} from '@ryanatkn/fuz_gitops/deployments.js';
+	import Modules_Page from '@ryanatkn/fuz_gitops/Modules_Page.svelte';
 
 	const {deployment, deployments} = get_deployments();
 </script>

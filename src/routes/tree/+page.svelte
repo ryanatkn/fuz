@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Tree_Page from '$lib/Tree_Page.svelte';
-	import {get_deployments} from '$lib/deployments.js';
+	import {get_deployments} from '@ryanatkn/fuz_gitops/deployments.js';
+	import Tree_Page from '@ryanatkn/fuz_gitops/Tree_Page.svelte';
 
 	// TODO ideally there would be one `Packages_Tree` mounted by the layout
 
