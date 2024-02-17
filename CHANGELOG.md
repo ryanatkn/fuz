@@ -4,7 +4,7 @@
 
 ### Minor Changes
 
-- extract package meta and deployments modules to fuz_gitops ([293bb98](https://github.com/ryanatkn/fuz/commit/293bb98))
+- extract package meta and deployments modules to fuz_gitops ([#5](https://github.com/ryanatkn/fuz/pull/5))
 
 ## 0.83.2
 
