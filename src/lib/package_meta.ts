@@ -31,8 +31,6 @@ export const parse_package_meta = (
 ): Package_Meta => {
 	const {name} = package_json;
 
-	// TODO think through with other presentations - Details, Summary, Card
-
 	// TODO hacky
 	const parse_repo = (r: string | null | undefined) => {
 		if (!r) return null;

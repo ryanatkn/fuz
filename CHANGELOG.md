@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.83.2
+
+### Patch Changes
+
+- fix fetch failures ([#5](https://github.com/ryanatkn/fuz/pull/5))
+
 ## 0.83.1
 
 ### Patch Changes
