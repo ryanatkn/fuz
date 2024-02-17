@@ -1,9 +1,9 @@
 <script lang="ts">
 	import {base} from '$app/paths';
-	import Gitops_Menu from '@ryanatkn/fuz_gitops/Gitops_Menu.svelte';
 
 	import Library_Footer from '$lib/Library_Footer.svelte';
 	import Card from '$lib/Card.svelte';
+	import Gitops_Menu from '$routes/Gitops_Menu.svelte';
 	import {parse_package_meta} from '$lib/package_meta.js';
 	import {package_json, src_json} from '$routes/package.js';
 
