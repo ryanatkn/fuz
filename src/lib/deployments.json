@@ -617,8 +617,9 @@
 		"npm_url": "https://www.npmjs.com/package/@ryanatkn/fuz",
 		"changelog_url": "https://github.com/ryanatkn/fuz/blob/main/CHANGELOG.md",
 		"published": true,
-		"check_runs": {"status": "in_progress", "conclusion": null},
+		"check_runs": {"status": "completed", "conclusion": "success"},
 		"pull_requests": [
+			{"number": 5, "title": "fix fetch failures", "user": {"login": "ryanatkn"}, "draft": false},
 			{"number": 1, "title": "add colors to buttons", "user": {"login": "ryanatkn"}, "draft": true}
 		]
 	},
