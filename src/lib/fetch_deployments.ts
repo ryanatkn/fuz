@@ -6,8 +6,8 @@ import {wait} from '@ryanatkn/belt/async.js';
 import {create_src_json, Src_Json} from '@ryanatkn/gro/src_json.js';
 import {join} from 'node:path';
 import {fetch_value, type Fetch_Value_Cache} from '@ryanatkn/belt/fetch.js';
+import {parse_package_meta, type Package_Meta} from '@ryanatkn/gro/package_meta.js';
 
-import {parse_package_meta, type Package_Meta} from '$lib/package_meta.js';
 import {
 	fetch_github_check_runs,
 	fetch_github_pull_requests,
