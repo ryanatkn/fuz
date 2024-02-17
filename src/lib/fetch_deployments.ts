@@ -12,6 +12,7 @@ import {
 	fetch_github_check_runs,
 	fetch_github_pull_requests,
 	Github_Check_Runs_Item,
+	Github_Pull_Requests,
 	type Github_Pull_Request,
 } from '$lib/github.js';
 
@@ -32,7 +33,7 @@ export interface Unfetched_Deployment {
 
 /* eslint-disable no-await-in-loop */
 
-// TODO probably refactor to an object API
+// TODO this is all very hacky
 export const fetch_deployments = async (
 	homepage_urls: Url[],
 	token?: string,
@@ -57,39 +58,51 @@ export const fetch_deployments = async (
 	const deployments: Deployment[] = [];
 	for (const raw_homepage_url of homepage_urls) {
 		const homepage_url = ensure_end(raw_homepage_url, '/');
-		try {
-			let package_json: Package_Json;
-			let src_json: Src_Json;
+		let package_json: Package_Json | null;
+		let src_json: Src_Json | null;
+		let pkg: Package_Meta | null;
+		let check_runs: Github_Check_Runs_Item | null;
+		let pull_requests: Github_Pull_Requests | null;
 
-			// Handle the local package data, if available
-			if (homepage_url === local_homepage_url) {
-				log?.info('resolving data locally for', homepage_url);
-				package_json = local_package_json;
-				src_json = await create_src_json(
-					local_package_json,
-					log,
-					dir ? join(dir, 'src/lib') : undefined,
-				);
-			} else {
-				log?.info('fetching data for', homepage_url);
+		// Handle the local package data, if available
+		if (homepage_url === local_homepage_url) {
+			log?.info('resolving data locally for', homepage_url);
+			package_json = local_package_json;
 
-				// `${base}/.well-known/package.json`
-				const fetched_package_json = await fetch_package_json(homepage_url, cache, log);
-				if (!fetched_package_json) throw Error('failed to load package_json: ' + homepage_url);
-				package_json = fetched_package_json;
-				await wait(delay);
+			src_json = await create_src_json(
+				local_package_json,
+				log,
+				dir ? join(dir, 'src/lib') : undefined,
+			);
+			if (!src_json) log?.error('failed to fetch src_json: ' + homepage_url);
+		} else {
+			// Fetch the remote package data
+			log?.info('fetching data for', homepage_url);
 
-				// `${base}/.well-known/src.json`
-				const fetched_src_json = await fetch_src_json(homepage_url, cache, log);
-				if (!fetched_src_json) throw Error('failed to load src_json: ' + homepage_url);
-				src_json = fetched_src_json;
-				await wait(delay);
+			await wait(delay);
+			package_json = await fetch_package_json(homepage_url, cache, log);
+			if (!package_json) log?.error('failed to load package_json: ' + homepage_url);
+
+			await wait(delay);
+			src_json = await fetch_src_json(homepage_url, cache, log);
+			if (!src_json) log?.error('failed to load src_json: ' + homepage_url);
+		}
+
+		if (package_json && src_json) {
+			try {
+				pkg = parse_package_meta(homepage_url, package_json, src_json);
+			} catch (err) {
+				pkg = null;
+				log?.error('failed to parse package meta: ' + err);
 			}
+		} else {
+			pkg = null;
+		}
 
-			const pkg = parse_package_meta(homepage_url, package_json, src_json);
-
+		if (pkg) {
 			// CI status
-			const check_runs = await fetch_github_check_runs(
+			await wait(delay);
+			check_runs = await fetch_github_check_runs(
 				pkg,
 				cache,
 				log,
@@ -97,22 +110,20 @@ export const fetch_deployments = async (
 				github_api_version,
 				github_refs?.[raw_homepage_url],
 			);
-			if (!check_runs) throw Error('failed to fetch CI status: ' + homepage_url);
-			await wait(delay);
+			if (!check_runs) log?.error('failed to fetch CI status: ' + homepage_url);
 
 			// pull requests
-			const pull_requests = await fetch_github_pull_requests(
-				pkg,
-				cache,
-				log,
-				token,
-				github_api_version,
-			);
-			if (!pull_requests) throw Error('failed to fetch issues: ' + homepage_url);
 			await wait(delay);
+			pull_requests = await fetch_github_pull_requests(pkg, cache, log, token, github_api_version);
+			if (!pull_requests) log?.error('failed to fetch issues: ' + homepage_url);
+		} else {
+			check_runs = null;
+			pull_requests = null;
+		}
 
+		if (pkg) {
 			deployments.push({...pkg, check_runs, pull_requests});
-		} catch (err) {
+		} else {
 			deployments.push({
 				url: homepage_url,
 				package_json: null,
@@ -120,7 +131,6 @@ export const fetch_deployments = async (
 				check_runs: null,
 				pull_requests: null,
 			});
-			log?.error(err);
 		}
 	}
 	return deployments;
