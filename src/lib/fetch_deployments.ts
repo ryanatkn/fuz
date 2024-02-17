@@ -18,6 +18,9 @@ import {
 
 export type Deployment = Fetched_Deployment | Unfetched_Deployment;
 
+// TODO ideally all of the deployments stuff would be in a different repo,
+// but this usage of `Package_Meta` would cause a circular dependency between this repo and that one,
+// so maybe `Package_Meta` belongs in Gro?
 export interface Fetched_Deployment extends Package_Meta {
 	check_runs: Github_Check_Runs_Item | null;
 	pull_requests: Github_Pull_Request[] | null;
