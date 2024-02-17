@@ -33,7 +33,7 @@ export interface Unfetched_Deployment {
 
 /* eslint-disable no-await-in-loop */
 
-// TODO probably refactor to an object API
+// TODO this is all very hacky
 export const fetch_deployments = async (
 	homepage_urls: Url[],
 	token?: string,
@@ -121,16 +121,15 @@ export const fetch_deployments = async (
 			pull_requests = null;
 		}
 
-		// TODO BLOCK combine
 		if (pkg) {
 			deployments.push({...pkg, check_runs, pull_requests});
 		} else {
 			deployments.push({
 				url: homepage_url,
-				package_json,
-				src_json,
-				check_runs,
-				pull_requests,
+				package_json: null,
+				src_json: null,
+				check_runs: null,
+				pull_requests: null,
 			});
 		}
 	}
