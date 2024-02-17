@@ -58,77 +58,64 @@ export const fetch_deployments = async (
 	const deployments: Deployment[] = [];
 	for (const raw_homepage_url of homepage_urls) {
 		const homepage_url = ensure_end(raw_homepage_url, '/');
-		let package_json: Package_Json;
-		let src_json: Src_Json;
+		let package_json: Package_Json | null;
+		let src_json: Src_Json | null;
 		let pkg: Package_Meta | null;
 		let check_runs: Github_Check_Runs_Item | null;
 		let pull_requests: Github_Pull_Requests | null;
 
-		try {
-			// Handle the local package data, if available
-			if (homepage_url === local_homepage_url) {
-				log?.info('resolving data locally for', homepage_url);
-				package_json = local_package_json;
-				src_json = await create_src_json(
-					local_package_json,
-					log,
-					dir ? join(dir, 'src/lib') : undefined,
-				);
-			} else {
-				log?.info('fetching data for', homepage_url);
+		// Handle the local package data, if available
+		if (homepage_url === local_homepage_url) {
+			log?.info('resolving data locally for', homepage_url);
+			package_json = local_package_json;
 
-				// `${base}/.well-known/package.json`
-				await wait(delay);
-				const fetched_package_json = await fetch_package_json(homepage_url, cache, log);
-				if (!fetched_package_json) throw Error('failed to load package_json: ' + homepage_url);
-				package_json = fetched_package_json;
+			src_json = await create_src_json(
+				local_package_json,
+				log,
+				dir ? join(dir, 'src/lib') : undefined,
+			);
+			if (!src_json) log?.error('failed to fetch src_json: ' + homepage_url);
+		} else {
+			// Fetch the remote package data
+			log?.info('fetching data for', homepage_url);
 
-				// `${base}/.well-known/src.json`
-				await wait(delay);
-				const fetched_src_json = await fetch_src_json(homepage_url, cache, log);
-				if (!fetched_src_json) throw Error('failed to load src_json: ' + homepage_url);
-				src_json = fetched_src_json;
+			await wait(delay);
+			package_json = await fetch_package_json(homepage_url, cache, log);
+			if (!package_json) log?.error('failed to load package_json: ' + homepage_url);
+
+			await wait(delay);
+			src_json = await fetch_src_json(homepage_url, cache, log);
+			if (!src_json) log?.error('failed to load src_json: ' + homepage_url);
+		}
+
+		if (package_json && src_json) {
+			try {
+				pkg = parse_package_meta(homepage_url, package_json, src_json);
+			} catch (err) {
+				pkg = null;
+				log?.error('failed to parse package meta: ' + err);
 			}
-
-			pkg = parse_package_meta(homepage_url, package_json, src_json);
-		} catch (err) {
+		} else {
 			pkg = null;
-			log?.error(err);
 		}
 
 		if (pkg) {
 			// CI status
-			try {
-				await wait(delay);
-				check_runs = await fetch_github_check_runs(
-					pkg,
-					cache,
-					log,
-					token,
-					github_api_version,
-					github_refs?.[raw_homepage_url],
-				);
-				if (!check_runs) throw Error('failed to fetch CI status: ' + homepage_url);
-			} catch (err) {
-				check_runs = null;
-				log?.error(err);
-			}
+			await wait(delay);
+			check_runs = await fetch_github_check_runs(
+				pkg,
+				cache,
+				log,
+				token,
+				github_api_version,
+				github_refs?.[raw_homepage_url],
+			);
+			if (!check_runs) log?.error('failed to fetch CI status: ' + homepage_url);
 
 			// pull requests
-			try {
-				await wait(delay);
-				pull_requests = await fetch_github_pull_requests(
-					pkg,
-					cache,
-					log,
-					token,
-					github_api_version,
-				);
-				if (!pull_requests) throw Error('failed to fetch issues: ' + homepage_url);
-			} catch (err) {
-				pull_requests = null;
-				log?.error(err);
-			}
+			await wait(delay);
+			pull_requests = await fetch_github_pull_requests(pkg, cache, log, token, github_api_version);
+			if (!pull_requests) log?.error('failed to fetch issues: ' + homepage_url);
 		} else {
 			check_runs = null;
 			pull_requests = null;
