@@ -1,10 +1,10 @@
 <script lang="ts">
 	import {base} from '$app/paths';
+	import Gitops_Menu from '@ryanatkn/fuz_gitops/Gitops_Menu.svelte';
 
 	import Library_Footer from '$lib/Library_Footer.svelte';
 	import Card from '$lib/Card.svelte';
 	import {parse_package_meta} from '$lib/package_meta.js';
-	import Page_Menu from '$lib/Page_Menu.svelte';
 	import {package_json, src_json} from '$routes/package.js';
 
 	// TODO set in context
@@ -24,7 +24,7 @@
 		</section>
 		<section class="panel padded_lg">
 			<h2 class="spaced">packages</h2>
-			<Page_Menu />
+			<Gitops_Menu />
 		</section>
 		<section>
 			<Library_Footer {pkg} />
