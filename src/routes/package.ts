@@ -30,7 +30,7 @@ export const package_json = {
 		'@ryanatkn/belt': '^0.20.3',
 		'@ryanatkn/eslint-config': '^0.1.0',
 		'@ryanatkn/fuz_code': '^0.7.0',
-		'@ryanatkn/gro': '^0.112.1',
+		'@ryanatkn/gro': '^0.112.2',
 		'@sveltejs/adapter-static': '^3.0.1',
 		'@sveltejs/kit': '^2.5.0',
 		'@sveltejs/package': '^2.2.6',
@@ -114,30 +114,10 @@ export const package_json = {
 			default: './dist/Copy_To_Clipboard.svelte',
 			types: './dist/Copy_To_Clipboard.svelte.d.ts',
 		},
-		'./Deployments_Table.svelte': {
-			svelte: './dist/Deployments_Table.svelte',
-			default: './dist/Deployments_Table.svelte',
-			types: './dist/Deployments_Table.svelte.d.ts',
-		},
-		'./Deployments_Tree_Nav.svelte': {
-			svelte: './dist/Deployments_Tree_Nav.svelte',
-			default: './dist/Deployments_Tree_Nav.svelte',
-			types: './dist/Deployments_Tree_Nav.svelte.d.ts',
-		},
-		'./Deployments_Tree.svelte': {
-			svelte: './dist/Deployments_Tree.svelte',
-			default: './dist/Deployments_Tree.svelte',
-			types: './dist/Deployments_Tree.svelte.d.ts',
-		},
 		'./deployments.json': {
 			default: './dist/deployments.json',
 			types: './dist/deployments.json.d.ts',
 		},
-		'./deployments.task.js': {
-			default: './dist/deployments.task.js',
-			types: './dist/deployments.task.d.ts',
-		},
-		'./deployments.js': {default: './dist/deployments.js', types: './dist/deployments.d.ts'},
 		'./Devmode_Controls.svelte': {
 			svelte: './dist/Devmode_Controls.svelte',
 			default: './dist/Devmode_Controls.svelte',
@@ -155,25 +135,11 @@ export const package_json = {
 			default: './dist/Dialogs.svelte',
 			types: './dist/Dialogs.svelte.d.ts',
 		},
-		'./fetch_deployments.js': {
-			default: './dist/fetch_deployments.js',
-			types: './dist/fetch_deployments.d.ts',
-		},
-		'./fs_fetch_value_cache.js': {
-			default: './dist/fs_fetch_value_cache.js',
-			types: './dist/fs_fetch_value_cache.d.ts',
-		},
-		'./fuz.task.js': {default: './dist/fuz.task.js', types: './dist/fuz.task.d.ts'},
-		'./github_helpers.js': {
-			default: './dist/github_helpers.js',
-			types: './dist/github_helpers.d.ts',
-		},
 		'./Github_Logo.svelte': {
 			svelte: './dist/Github_Logo.svelte',
 			default: './dist/Github_Logo.svelte',
 			types: './dist/Github_Logo.svelte.d.ts',
 		},
-		'./github.js': {default: './dist/github.js', types: './dist/github.d.ts'},
 		'./helpers.js': {default: './dist/helpers.js', types: './dist/helpers.d.ts'},
 		'./Hue_Input.svelte': {
 			svelte: './dist/Hue_Input.svelte',
@@ -215,27 +181,11 @@ export const package_json = {
 			default: './dist/Library.svelte',
 			types: './dist/Library.svelte.d.ts',
 		},
-		'./Modules_Detail.svelte': {
-			svelte: './dist/Modules_Detail.svelte',
-			default: './dist/Modules_Detail.svelte',
-			types: './dist/Modules_Detail.svelte.d.ts',
-		},
-		'./Modules_Menu.svelte': {
-			svelte: './dist/Modules_Menu.svelte',
-			default: './dist/Modules_Menu.svelte',
-			types: './dist/Modules_Menu.svelte.d.ts',
-		},
-		'./Modules_Page.svelte': {
-			svelte: './dist/Modules_Page.svelte',
-			default: './dist/Modules_Page.svelte',
-			types: './dist/Modules_Page.svelte.d.ts',
-		},
 		'./Package_Detail.svelte': {
 			svelte: './dist/Package_Detail.svelte',
 			default: './dist/Package_Detail.svelte',
 			types: './dist/Package_Detail.svelte.d.ts',
 		},
-		'./package_meta.js': {default: './dist/package_meta.js', types: './dist/package_meta.d.ts'},
 		'./Package_Summary.svelte': {
 			svelte: './dist/Package_Summary.svelte',
 			default: './dist/Package_Summary.svelte',
@@ -251,11 +201,6 @@ export const package_json = {
 			default: './dist/Page_Header.svelte',
 			types: './dist/Page_Header.svelte.d.ts',
 		},
-		'./Page_Menu.svelte': {
-			svelte: './dist/Page_Menu.svelte',
-			default: './dist/Page_Menu.svelte',
-			types: './dist/Page_Menu.svelte.d.ts',
-		},
 		'./Pending_Animation.svelte': {
 			svelte: './dist/Pending_Animation.svelte',
 			default: './dist/Pending_Animation.svelte',
@@ -266,16 +211,6 @@ export const package_json = {
 			default: './dist/Pending_Button.svelte',
 			types: './dist/Pending_Button.svelte.d.ts',
 		},
-		'./Pull_Requests_Detail.svelte': {
-			svelte: './dist/Pull_Requests_Detail.svelte',
-			default: './dist/Pull_Requests_Detail.svelte',
-			types: './dist/Pull_Requests_Detail.svelte.d.ts',
-		},
-		'./Pull_Requests_Page.svelte': {
-			svelte: './dist/Pull_Requests_Page.svelte',
-			default: './dist/Pull_Requests_Page.svelte',
-			types: './dist/Pull_Requests_Page.svelte.d.ts',
-		},
 		'./Redirect.svelte': {
 			svelte: './dist/Redirect.svelte',
 			default: './dist/Redirect.svelte',
@@ -283,11 +218,6 @@ export const package_json = {
 		},
 		'./style.css': {default: './dist/style.css'},
 		'./swallow.js': {default: './dist/swallow.js', types: './dist/swallow.d.ts'},
-		'./Table_Page.svelte': {
-			svelte: './dist/Table_Page.svelte',
-			default: './dist/Table_Page.svelte',
-			types: './dist/Table_Page.svelte.d.ts',
-		},
 		'./Teleport.svelte': {
 			svelte: './dist/Teleport.svelte',
 			default: './dist/Teleport.svelte',
@@ -323,16 +253,6 @@ export const package_json = {
 			types: './dist/Tome_Title.svelte.d.ts',
 		},
 		'./tome.js': {default: './dist/tome.js', types: './dist/tome.d.ts'},
-		'./Tree_Item_Page.svelte': {
-			svelte: './dist/Tree_Item_Page.svelte',
-			default: './dist/Tree_Item_Page.svelte',
-			types: './dist/Tree_Item_Page.svelte.d.ts',
-		},
-		'./Tree_Page.svelte': {
-			svelte: './dist/Tree_Page.svelte',
-			default: './dist/Tree_Page.svelte',
-			types: './dist/Tree_Page.svelte.d.ts',
-		},
 		'./variables.js': {default: './dist/variables.js', types: './dist/variables.d.ts'},
 	},
 } satisfies Package_Json;
@@ -390,26 +310,7 @@ export const src_json = {
 			],
 		},
 		'./Copy_To_Clipboard.svelte': {path: 'Copy_To_Clipboard.svelte', declarations: []},
-		'./Deployments_Table.svelte': {path: 'Deployments_Table.svelte', declarations: []},
-		'./Deployments_Tree_Nav.svelte': {path: 'Deployments_Tree_Nav.svelte', declarations: []},
-		'./Deployments_Tree.svelte': {path: 'Deployments_Tree.svelte', declarations: []},
 		'./deployments.json': {path: 'deployments.json', declarations: []},
-		'./deployments.task.js': {
-			path: 'deployments.task.ts',
-			declarations: [
-				{name: 'Args', kind: 'variable'},
-				{name: 'task', kind: 'variable'},
-			],
-		},
-		'./deployments.js': {
-			path: 'deployments.ts',
-			declarations: [
-				{name: 'Deployments', kind: 'type'},
-				{name: 'set_deployments', kind: 'function'},
-				{name: 'get_deployments', kind: 'function'},
-				{name: 'parse_deployments', kind: 'function'},
-			],
-		},
 		'./Devmode_Controls.svelte': {path: 'Devmode_Controls.svelte', declarations: []},
 		'./devmode.js': {
 			path: 'devmode.ts',
@@ -429,59 +330,12 @@ export const src_json = {
 			],
 		},
 		'./Dialogs.svelte': {path: 'Dialogs.svelte', declarations: []},
-		'./fetch_deployments.js': {
-			path: 'fetch_deployments.ts',
-			declarations: [
-				{name: 'Deployment', kind: 'type'},
-				{name: 'Fetched_Deployment', kind: 'type'},
-				{name: 'Unfetched_Deployment', kind: 'type'},
-				{name: 'fetch_deployments', kind: 'function'},
-				{name: 'fetch_package_json', kind: 'function'},
-				{name: 'fetch_src_json', kind: 'function'},
-			],
-		},
-		'./fs_fetch_value_cache.js': {
-			path: 'fs_fetch_value_cache.ts',
-			declarations: [
-				{name: 'Fetch_Cache', kind: 'type'},
-				{name: 'create_fs_fetch_value_cache', kind: 'function'},
-			],
-		},
-		'./fuz.task.js': {
-			path: 'fuz.task.ts',
-			declarations: [
-				{name: 'Args', kind: 'variable'},
-				{name: 'task', kind: 'variable'},
-			],
-		},
-		'./github_helpers.js': {
-			path: 'github_helpers.ts',
-			declarations: [
-				{name: 'Filter_Pull_Request', kind: 'type'},
-				{name: 'Pull_Request_Meta', kind: 'type'},
-				{name: 'to_pull_requests', kind: 'function'},
-				{name: 'to_pull_url', kind: 'function'},
-			],
-		},
 		'./Github_Logo.svelte': {path: 'Github_Logo.svelte', declarations: []},
-		'./github.js': {
-			path: 'github.ts',
-			declarations: [
-				{name: 'Github_Pull_Request', kind: 'variable'},
-				{name: 'Github_Pull_Requests', kind: 'variable'},
-				{name: 'fetch_github_pull_requests', kind: 'function'},
-				{name: 'Github_Check_Runs_Item', kind: 'variable'},
-				{name: 'Github_Check_Runs', kind: 'variable'},
-				{name: 'fetch_github_check_runs', kind: 'function'},
-			],
-		},
 		'./helpers.js': {
 			path: 'helpers.ts',
 			declarations: [
-				{name: 'Filter_Pull_Request', kind: 'type'},
-				{name: 'Pull_Request_Meta', kind: 'type'},
-				{name: 'to_pull_requests', kind: 'function'},
-				{name: 'to_pull_url', kind: 'function'},
+				{name: 'LIBRARY_PATH', kind: 'variable'},
+				{name: 'to_library_path_info', kind: 'function'},
 			],
 		},
 		'./Hue_Input.svelte': {path: 'Hue_Input.svelte', declarations: []},
@@ -492,33 +346,15 @@ export const src_json = {
 		'./Library_Panel.svelte': {path: 'Library_Panel.svelte', declarations: []},
 		'./Library_Vocab.svelte': {path: 'Library_Vocab.svelte', declarations: []},
 		'./Library.svelte': {path: 'Library.svelte', declarations: []},
-		'./Modules_Detail.svelte': {path: 'Modules_Detail.svelte', declarations: []},
-		'./Modules_Menu.svelte': {path: 'Modules_Menu.svelte', declarations: []},
-		'./Modules_Page.svelte': {path: 'Modules_Page.svelte', declarations: []},
 		'./Package_Detail.svelte': {path: 'Package_Detail.svelte', declarations: []},
-		'./package_meta.js': {
-			path: 'package_meta.ts',
-			declarations: [
-				{name: 'Package', kind: 'type'},
-				{name: 'Package_Meta', kind: 'type'},
-				{name: 'parse_package_meta', kind: 'function'},
-				{name: 'parse_repo_name', kind: 'function'},
-				{name: 'format_host', kind: 'function'},
-				{name: 'parse_org_url', kind: 'function'},
-			],
-		},
 		'./Package_Summary.svelte': {path: 'Package_Summary.svelte', declarations: []},
 		'./Page_Footer.svelte': {path: 'Page_Footer.svelte', declarations: []},
 		'./Page_Header.svelte': {path: 'Page_Header.svelte', declarations: []},
-		'./Page_Menu.svelte': {path: 'Page_Menu.svelte', declarations: []},
 		'./Pending_Animation.svelte': {path: 'Pending_Animation.svelte', declarations: []},
 		'./Pending_Button.svelte': {path: 'Pending_Button.svelte', declarations: []},
-		'./Pull_Requests_Detail.svelte': {path: 'Pull_Requests_Detail.svelte', declarations: []},
-		'./Pull_Requests_Page.svelte': {path: 'Pull_Requests_Page.svelte', declarations: []},
 		'./Redirect.svelte': {path: 'Redirect.svelte', declarations: []},
 		'./style.css': {path: 'style.css', declarations: []},
 		'./swallow.js': {path: 'swallow.ts', declarations: [{name: 'swallow', kind: 'function'}]},
-		'./Table_Page.svelte': {path: 'Table_Page.svelte', declarations: []},
 		'./Teleport.svelte': {path: 'Teleport.svelte', declarations: []},
 		'./Theme_Input.svelte': {path: 'Theme_Input.svelte', declarations: []},
 		'./theme.css': {path: 'theme.css', declarations: []},
@@ -573,8 +409,6 @@ export const src_json = {
 				{name: 'get_tome', kind: 'function'},
 			],
 		},
-		'./Tree_Item_Page.svelte': {path: 'Tree_Item_Page.svelte', declarations: []},
-		'./Tree_Page.svelte': {path: 'Tree_Page.svelte', declarations: []},
 		'./variables.js': {
 			path: 'variables.ts',
 			declarations: [{name: 'default_variables', kind: 'variable'}],

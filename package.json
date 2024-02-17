@@ -150,32 +150,9 @@
       "default": "./dist/Copy_To_Clipboard.svelte",
       "types": "./dist/Copy_To_Clipboard.svelte.d.ts"
     },
-    "./Deployments_Table.svelte": {
-      "svelte": "./dist/Deployments_Table.svelte",
-      "default": "./dist/Deployments_Table.svelte",
-      "types": "./dist/Deployments_Table.svelte.d.ts"
-    },
-    "./Deployments_Tree_Nav.svelte": {
-      "svelte": "./dist/Deployments_Tree_Nav.svelte",
-      "default": "./dist/Deployments_Tree_Nav.svelte",
-      "types": "./dist/Deployments_Tree_Nav.svelte.d.ts"
-    },
-    "./Deployments_Tree.svelte": {
-      "svelte": "./dist/Deployments_Tree.svelte",
-      "default": "./dist/Deployments_Tree.svelte",
-      "types": "./dist/Deployments_Tree.svelte.d.ts"
-    },
     "./deployments.json": {
       "default": "./dist/deployments.json",
       "types": "./dist/deployments.json.d.ts"
-    },
-    "./deployments.task.js": {
-      "default": "./dist/deployments.task.js",
-      "types": "./dist/deployments.task.d.ts"
-    },
-    "./deployments.js": {
-      "default": "./dist/deployments.js",
-      "types": "./dist/deployments.d.ts"
     },
     "./Devmode_Controls.svelte": {
       "svelte": "./dist/Devmode_Controls.svelte",
@@ -200,30 +177,10 @@
       "default": "./dist/Dialogs.svelte",
       "types": "./dist/Dialogs.svelte.d.ts"
     },
-    "./fetch_deployments.js": {
-      "default": "./dist/fetch_deployments.js",
-      "types": "./dist/fetch_deployments.d.ts"
-    },
-    "./fs_fetch_value_cache.js": {
-      "default": "./dist/fs_fetch_value_cache.js",
-      "types": "./dist/fs_fetch_value_cache.d.ts"
-    },
-    "./fuz.task.js": {
-      "default": "./dist/fuz.task.js",
-      "types": "./dist/fuz.task.d.ts"
-    },
-    "./github_helpers.js": {
-      "default": "./dist/github_helpers.js",
-      "types": "./dist/github_helpers.d.ts"
-    },
     "./Github_Logo.svelte": {
       "svelte": "./dist/Github_Logo.svelte",
       "default": "./dist/Github_Logo.svelte",
       "types": "./dist/Github_Logo.svelte.d.ts"
-    },
-    "./github.js": {
-      "default": "./dist/github.js",
-      "types": "./dist/github.d.ts"
     },
     "./helpers.js": {
       "default": "./dist/helpers.js",
@@ -269,29 +226,10 @@
       "default": "./dist/Library.svelte",
       "types": "./dist/Library.svelte.d.ts"
     },
-    "./Modules_Detail.svelte": {
-      "svelte": "./dist/Modules_Detail.svelte",
-      "default": "./dist/Modules_Detail.svelte",
-      "types": "./dist/Modules_Detail.svelte.d.ts"
-    },
-    "./Modules_Menu.svelte": {
-      "svelte": "./dist/Modules_Menu.svelte",
-      "default": "./dist/Modules_Menu.svelte",
-      "types": "./dist/Modules_Menu.svelte.d.ts"
-    },
-    "./Modules_Page.svelte": {
-      "svelte": "./dist/Modules_Page.svelte",
-      "default": "./dist/Modules_Page.svelte",
-      "types": "./dist/Modules_Page.svelte.d.ts"
-    },
     "./Package_Detail.svelte": {
       "svelte": "./dist/Package_Detail.svelte",
       "default": "./dist/Package_Detail.svelte",
       "types": "./dist/Package_Detail.svelte.d.ts"
-    },
-    "./package_meta.js": {
-      "default": "./dist/package_meta.js",
-      "types": "./dist/package_meta.d.ts"
     },
     "./Package_Summary.svelte": {
       "svelte": "./dist/Package_Summary.svelte",
@@ -308,11 +246,6 @@
       "default": "./dist/Page_Header.svelte",
       "types": "./dist/Page_Header.svelte.d.ts"
     },
-    "./Page_Menu.svelte": {
-      "svelte": "./dist/Page_Menu.svelte",
-      "default": "./dist/Page_Menu.svelte",
-      "types": "./dist/Page_Menu.svelte.d.ts"
-    },
     "./Pending_Animation.svelte": {
       "svelte": "./dist/Pending_Animation.svelte",
       "default": "./dist/Pending_Animation.svelte",
@@ -322,16 +255,6 @@
       "svelte": "./dist/Pending_Button.svelte",
       "default": "./dist/Pending_Button.svelte",
       "types": "./dist/Pending_Button.svelte.d.ts"
-    },
-    "./Pull_Requests_Detail.svelte": {
-      "svelte": "./dist/Pull_Requests_Detail.svelte",
-      "default": "./dist/Pull_Requests_Detail.svelte",
-      "types": "./dist/Pull_Requests_Detail.svelte.d.ts"
-    },
-    "./Pull_Requests_Page.svelte": {
-      "svelte": "./dist/Pull_Requests_Page.svelte",
-      "default": "./dist/Pull_Requests_Page.svelte",
-      "types": "./dist/Pull_Requests_Page.svelte.d.ts"
     },
     "./Redirect.svelte": {
       "svelte": "./dist/Redirect.svelte",
@@ -344,11 +267,6 @@
     "./swallow.js": {
       "default": "./dist/swallow.js",
       "types": "./dist/swallow.d.ts"
-    },
-    "./Table_Page.svelte": {
-      "svelte": "./dist/Table_Page.svelte",
-      "default": "./dist/Table_Page.svelte",
-      "types": "./dist/Table_Page.svelte.d.ts"
     },
     "./Teleport.svelte": {
       "svelte": "./dist/Teleport.svelte",
@@ -398,16 +316,6 @@
     "./tome.js": {
       "default": "./dist/tome.js",
       "types": "./dist/tome.d.ts"
-    },
-    "./Tree_Item_Page.svelte": {
-      "svelte": "./dist/Tree_Item_Page.svelte",
-      "default": "./dist/Tree_Item_Page.svelte",
-      "types": "./dist/Tree_Item_Page.svelte.d.ts"
-    },
-    "./Tree_Page.svelte": {
-      "svelte": "./dist/Tree_Page.svelte",
-      "default": "./dist/Tree_Page.svelte",
-      "types": "./dist/Tree_Page.svelte.d.ts"
     },
     "./variables.js": {
       "default": "./dist/variables.js",
