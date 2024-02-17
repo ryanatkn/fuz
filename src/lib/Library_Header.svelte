@@ -1,6 +1,7 @@
 <script lang="ts">
+	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
+
 	import Library_Panel from '$lib/Library_Panel.svelte';
-	import type {Package_Meta} from '$lib/package_meta.js';
 	import Package_Summary from '$lib/Package_Summary.svelte';
 
 	export let pkg: Package_Meta;

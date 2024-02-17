@@ -1,10 +1,10 @@
 <script lang="ts">
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
+	import {parse_package_meta} from '@ryanatkn/gro/package_meta.js';
 
 	import {get_tome} from '$lib/tome.js';
 	import Package_Detail from '$lib/Package_Detail.svelte';
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
-	import {parse_package_meta} from '$lib/package_meta.js';
 	import {package_json, src_json} from '$routes/package.js';
 
 	const LIBRARY_ITEM_NAME = 'Package_Detail';

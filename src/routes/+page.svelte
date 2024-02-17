@@ -1,10 +1,9 @@
 <script lang="ts">
 	import {base} from '$app/paths';
+	import {parse_package_meta} from '@ryanatkn/gro/package_meta.js';
 
 	import Library_Footer from '$lib/Library_Footer.svelte';
 	import Card from '$lib/Card.svelte';
-	import {parse_package_meta} from '$lib/package_meta.js';
-	import Page_Menu from '$lib/Page_Menu.svelte';
 	import {package_json, src_json} from '$routes/package.js';
 
 	// TODO set in context
@@ -23,8 +22,14 @@
 			<Card href="{base}/library">library<svelte:fragment slot="icon">🧶</svelte:fragment></Card>
 		</section>
 		<section class="panel padded_lg">
-			<h2 class="spaced">packages</h2>
-			<Page_Menu />
+			<!-- TODO ideally this wouldn't duplicate metadata like descriptions, but adding fuz_gitops to this repo is heavy -->
+			<h2 class="spaced">other packages</h2>
+			<menu>
+				<a class="chip" href="https://template.fuz.dev/">fuz_template</a>
+				<a class="chip" href="https://gitops.fuz.dev/">fuz_gitops</a>
+				<a class="chip" href="https://code.fuz.dev/">fuz_code</a>
+				<a class="chip" href="https://mastodon.fuz.dev/">fuz_mastodon</a>
+			</menu>
 		</section>
 		<section>
 			<Library_Footer {pkg} />
@@ -38,5 +43,13 @@
 		flex-direction: column;
 		align-items: center;
 		margin-bottom: var(--spacing_5);
+	}
+	menu {
+		width: 100%;
+		display: flex;
+		gap: var(--spacing_lg);
+		flex-direction: column;
+		align-items: center;
+		font-size: var(--size_lg);
 	}
 </style>

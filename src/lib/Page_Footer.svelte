@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type {Url} from '@ryanatkn/gro/paths.js';
+	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
 
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
 	import Library_Footer from '$lib/Library_Footer.svelte';
-	import type {Package_Meta} from '$lib/package_meta.js';
 
 	export let pkg: Package_Meta | {url: string; package_json: null};
 	export let root_url: Url | null = null;
