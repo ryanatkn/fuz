@@ -30,7 +30,6 @@ export const package_json = {
 		'@ryanatkn/belt': '^0.20.3',
 		'@ryanatkn/eslint-config': '^0.1.0',
 		'@ryanatkn/fuz_code': '^0.7.0',
-		'@ryanatkn/fuz_gitops': '^0.20.0',
 		'@ryanatkn/gro': '^0.112.2',
 		'@sveltejs/adapter-static': '^3.0.1',
 		'@sveltejs/kit': '^2.5.0',
@@ -114,10 +113,6 @@ export const package_json = {
 			svelte: './dist/Copy_To_Clipboard.svelte',
 			default: './dist/Copy_To_Clipboard.svelte',
 			types: './dist/Copy_To_Clipboard.svelte.d.ts',
-		},
-		'./deployments.json': {
-			default: './dist/deployments.json',
-			types: './dist/deployments.json.d.ts',
 		},
 		'./Devmode_Controls.svelte': {
 			svelte: './dist/Devmode_Controls.svelte',
@@ -311,7 +306,6 @@ export const src_json = {
 			],
 		},
 		'./Copy_To_Clipboard.svelte': {path: 'Copy_To_Clipboard.svelte', declarations: []},
-		'./deployments.json': {path: 'deployments.json', declarations: []},
 		'./Devmode_Controls.svelte': {path: 'Devmode_Controls.svelte', declarations: []},
 		'./devmode.js': {
 			path: 'devmode.ts',

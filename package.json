@@ -150,10 +150,6 @@
       "default": "./dist/Copy_To_Clipboard.svelte",
       "types": "./dist/Copy_To_Clipboard.svelte.d.ts"
     },
-    "./deployments.json": {
-      "default": "./dist/deployments.json",
-      "types": "./dist/deployments.json.d.ts"
-    },
     "./Devmode_Controls.svelte": {
       "svelte": "./dist/Devmode_Controls.svelte",
       "default": "./dist/Devmode_Controls.svelte",
