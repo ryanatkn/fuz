@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.84.0
+
+### Minor Changes
+
+- extract package meta and deployments modules to fuz_gitops ([#6](https://github.com/ryanatkn/fuz/pull/6))
+
 ## 0.83.2
 
 ### Patch Changes
