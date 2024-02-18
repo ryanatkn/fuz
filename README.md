@@ -2,8 +2,7 @@
 
 > friendly user zystem 🧶 [fuz.dev](https://www.fuz.dev/)
 
-Fuz is a design system for CSS, <a href="https://svelte.dev/">Svelte</a>,
-and <a href="https://kit.svelte.dev/">SvelteKit</a>:
+Fuz is a <a href="https://svelte.dev/">Svelte</a> UI library and CSS design system.
 
 - plain CSS
 - designed around CSS variables
