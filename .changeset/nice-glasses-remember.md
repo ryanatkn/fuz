@@ -1,5 +1,5 @@
 ---
-"@ryanatkn/fuz": minor
+'@ryanatkn/fuz': minor
 ---
 
-remove drop_shadow_ variables
+remove `drop_shadow_` variables

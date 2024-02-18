@@ -37,7 +37,7 @@
 	--tint_hue: var(--hue_4);
 	--tint_saturation: 11%;
 	--bg: hsl(var(--tint_hue), var(--tint_saturation), 96%);
-	--fg: hsl(var(--tint_hue), var(--tint_saturation), 7%);
+	--fg: hsl(var(--tint_hue), var(--tint_saturation), 6%);
 	--bg_1: var(--lighten_1);
 	--bg_2: var(--lighten_2);
 	--bg_3: var(--lighten_3);
@@ -144,12 +144,10 @@
 	--input_height_inner: calc(
 		var(--input_height) - 2 * var(--border_width) - 2 * var(--input_padding_y)
 	);
-	--box_shadow: 2px 4px 9px hsla(var(--tint_hue), var(--tint_saturation), 7%, 0.28),
-		2px 14px 48px hsla(var(--tint_hue), var(--tint_saturation), 7%, 0.28);
-	--box_shadow_lg: 2px 6px 14px hsla(var(--tint_hue), var(--tint_saturation), 7%, 0.8),
-		2px 6px 48px hsla(var(--tint_hue), var(--tint_saturation), 7%, 0.8);
-	--drop_shadow: drop-shadow(var(--box_shadow));
-	--drop_shadow_lg: drop-shadow(var(--box_shadow_lg));
+	--box_shadow: 2px 4px 9px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.28),
+		2px 14px 48px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.28);
+	--box_shadow_lg: 2px 6px 14px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.8),
+		2px 6px 48px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.8);
 	--icon_size: var(--icon_size_md);
 	--icon_size_xs: 18px;
 	--icon_size_sm: 32px;
@@ -186,7 +184,7 @@
 	--color_5: hsl(var(--hue_5), 50%, 65%);
 	--color_6: hsl(var(--hue_6), 32%, 75%);
 	--color_7: hsl(var(--hue_7), 74%, 76%);
-	--bg: hsl(var(--tint_hue), var(--tint_saturation), 7%);
+	--bg: hsl(var(--tint_hue), var(--tint_saturation), 6%);
 	--fg: hsl(var(--tint_hue), var(--tint_saturation), 96%);
 	--bg_1: var(--darken_1);
 	--bg_2: var(--darken_2);
