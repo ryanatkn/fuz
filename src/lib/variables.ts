@@ -274,13 +274,13 @@ export const default_variables: Theme_Variable[] = [
 
 	/* shadows */
 	{
-		name: 'box_shadow',
+		name: 'shadow',
 		light:
 			'2px 4px 9px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.28), 2px 14px 48px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.28)',
 		dark: '2px 4px 9px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--faded_5)), 2px 14px 48px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--faded_5))',
 	},
 	{
-		name: 'box_shadow_lg',
+		name: 'shadow_lg',
 		light:
 			'2px 6px 14px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.8), 2px 6px 48px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.8)',
 		dark: '2px 6px 18px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--faded_5)), 2px 6px 48px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--faded_5))',
