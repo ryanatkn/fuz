@@ -615,8 +615,8 @@ ahead are utility and helper classes:
 By default it's opaque, resetting the background to the initial depth. */
 .pane {
 	background-color: var(--pane_bg, var(--bg));
-	/* TODO this causes blurriness with nested contextmenus, maybe they shouldn't be panes? is pane overloaded? maybe extract the bg part of it?
-	filter: var(--drop_shadow); */
+	/* TODO this is preferred but causes blurriness with nested contextmenus, maybe they shouldn't be panes? is pane overloaded? maybe extract the bg part of it?
+	filter: drop-shadow(var(--shadow)); */
 	box-shadow: var(--box_shadow);
 	border-radius: var(--border_radius_xs);
 }

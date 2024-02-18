@@ -425,8 +425,8 @@
   - remove `.plain-button`, use `.plain` on `button` instead
   - rename `.w-full` to `.width_full` and `.h-full` to `.height_full`
   - snake_case `.padded-X` to `.padded_X` and `.icon-button` to `.icon_button`
-  - rename `--box_shadow_dark` and `--drop_shadow_dark` to `--box_shadow_lg`
-    and `--drop_shadow_lg`
+  - rename `--box_shadow_dark` and `--shadow_dark` to `--box_shadow_lg`
+    and `--shadow_lg`
   - drop the `font_` from `--font_size_X` (later changed to `size_`, see below)
   - rename `.column` to `.width_md` and `.column-sm` to `.width_sm`
   - rename `--column_width` to `--width_md` and `--column_width_sm` to `--width_sm`
@@ -940,7 +940,7 @@
   ([#159](https://github.com/ryanatkn/fuz/pull/159))
 - **break**: remove opinionated layout CSS on the `html` and `body` elements
   ([#155](https://github.com/ryanatkn/fuz/pull/155))
-- **break**: replace `--pane_box_shadow` with `--drop_shadow` and `--drop_shadow_dark`
+- **break**: replace `--pane_box_shadow` with `--shadow` and `--shadow_dark`
   ([#161](https://github.com/ryanatkn/fuz/pull/161))
 - add CSS variables `--transition_duration_1` to `--transition_duration_5`
   that get disabled with `prefers-reduced-motion`

@@ -152,7 +152,7 @@
 
 <style>
 	.dialog {
-		--drop_shadow: var(--drop_shadow_lg);
+		--shadow: var(--shadow_lg);
 		overflow: auto;
 		position: fixed;
 		inset: 0;
