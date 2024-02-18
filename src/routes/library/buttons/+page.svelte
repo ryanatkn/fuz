@@ -23,6 +23,16 @@
 		<br />
 	{/each}
 
+	<br />
+	<h4><code>.outlined</code> variants</h4>
+	<br />
+
+	{#each {length: 7} as _, i}
+		<Code content={`<button class="color_${i + 1} outlined">`} />
+		<button class="color_{i + 1} outlined">.color_{i + 1}</button>
+		<br />
+	{/each}
+
 	<hr />
 
 	<div class="box prose">
