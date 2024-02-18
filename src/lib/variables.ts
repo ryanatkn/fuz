@@ -273,6 +273,10 @@ export const default_variables: Theme_Variable[] = [
 	},
 
 	/* shadows */
+	// TODO these shouldn't use tint, use lighten/darken instead,
+	// but ideally we'd have a blend mode make the colors right,
+	// which would require a pseduo-element,
+	// but that's heavier and requires the element to be positioned (I think?)
 	{
 		name: 'shadow',
 		light:
@@ -284,6 +288,14 @@ export const default_variables: Theme_Variable[] = [
 		light:
 			'2px 6px 14px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.8), 2px 6px 48px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.8)',
 		dark: '2px 6px 18px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--faded_5)), 2px 6px 48px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--faded_5))',
+	},
+	{
+		name: 'shadow_inset',
+		light: '2px 2px 4px inset var(--lighten_2), -2px -2px 4px inset var(--darken_2)',
+	},
+	{
+		name: 'shadow_inset_active', // TODO better name? this is the "pressed" version for buttons
+		light: '2px 2px 4px inset var(--darken_2), -2px -2px 4px inset var(--lighten_2)',
 	},
 
 	/* icons */
