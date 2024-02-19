@@ -48,8 +48,7 @@ import Themed from '@ryanatkn/fuz/Themed.svelte';
 import {type Theme, get_theme} from '@ryanatkn/fuz/theme.js';
 ```
 
-See [the library](https://www.fuz.dev/library) and
-[modules docs](https://www.fuz.dev/modules) for more.
+See [the library](https://www.fuz.dev/library) for more.
 
 ## develop
 
