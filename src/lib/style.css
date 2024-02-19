@@ -737,6 +737,9 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories
 	background-color: var(--button_bg_hover);
 	border-color: var(--border_2);
 }
+/* TODO some inconsistencies here where `.selectable` isn't used in each selector to catch buttons,
+maybe combine these styles with the buttons or scope just to `.selectable`?
+or remove the `.selectable`. from `.selectable.selected`? */
 .selectable.selected,
 .selectable:active {
 	background-color: var(--button_bg_active);
