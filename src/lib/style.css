@@ -506,7 +506,6 @@ button.color_7:not(.selected) {
 button.selected.color_1 {
 	color: var(--color_1);
 	border-color: var(--color_1);
-	border-width: var(--border_width_2);
 }
 button.selected.color_2 {
 	color: var(--color_2);
