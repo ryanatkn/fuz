@@ -14,7 +14,7 @@ The CSS design system:
   `@ryanatkn/fuz/theme.css` or your own theme file, everything else can be used a la carte
 - supports [`color-scheme` and custom themes](https://www.fuz.dev/library/theme)
   (including dark mode)
-- no dependencies except for `svelte`
+- zero dependencies except for Svelte
 - encourages plain HTML elements like `button` and `a` over Svelte components
   unless the gains are substantial
 - has a small set of utility classes with plans for a lot more -
@@ -26,6 +26,8 @@ The Svelte components and helpers:
 - pending migration to Svelte 5
 - builds on the CSS design system
 - plain CSS and minimal abstraction
+- zero dependencies except for Svelte and SvelteKit
+  (not all require SvelteKit but some do import its modules, which could be polyfilled)
 - not a fully-featured enterprise-ready set of components,
   it's being developed for the needs of specific projects, though eventually it will fill out
 - should be easy to copy/paste into your projects when you need full control like
