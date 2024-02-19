@@ -1,5 +1,13 @@
 # @ryanatkn/fuz
 
+## 0.85.0
+
+### Minor Changes
+
+- remove `drop_shadow` and `drop_shadow_lg` variables and ([#1](https://github.com/ryanatkn/fuz/pull/1))
+  rename `box_shadow`/`box_shadow_lg` to `shadow`/`shadow_lg`
+- add button colors ([#1](https://github.com/ryanatkn/fuz/pull/1))
+
 ## 0.84.0
 
 ### Minor Changes
