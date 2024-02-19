@@ -148,8 +148,10 @@
 		2px 14px 48px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.28);
 	--shadow_lg: 2px 6px 14px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.8),
 		2px 6px 48px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.8);
-	--shadow_inset: 2px 2px 4px inset var(--lighten_2), -2px -2px 4px inset var(--darken_2);
-	--shadow_inset_active: 2px 2px 4px inset var(--darken_2), -2px -2px 4px inset var(--lighten_2);
+	--shadow_inset: 2px 2px 4px inset var(--lighten_2), -2px -2px 4px inset var(--darken_2),
+		4px 4px 6px inset var(--lighten_1), -4px -4px 6px inset var(--darken_1);
+	--shadow_inset_active: 2px 2px 4px inset var(--darken_2), -2px -2px 4px inset var(--lighten_2),
+		4px 4px 6px inset var(--darken_1), -4px -4px 6px inset var(--lighten_1);
 	--icon_size: var(--icon_size_md);
 	--icon_size_xs: 18px;
 	--icon_size_sm: 32px;

@@ -471,15 +471,15 @@ label.disabled:active {
 
 /* TODO these need design work for visuals/consistency/customizability */
 button:is(.color_1, .color_2, .color_3, .color_4, .color_5, .color_6, .color_7) {
-	color: var(--lighten_7);
+	color: var(--bg_7);
 }
 /* TODO differences for hover/focus */
 button:is(.color_1, .color_2, .color_3, .color_4, .color_5, .color_6, .color_7):is(:hover, :focus) {
-	color: var(--lighten_9);
+	color: var(--bg_9);
 	box-shadow: var(--shadow_inset);
 }
 button:is(.color_1, .color_2, .color_3, .color_4, .color_5, .color_6, .color_7):active {
-	color: var(--lighten_9);
+	color: var(--bg_9);
 	box-shadow: var(--shadow_inset_active);
 }
 button.color_1:not(.outlined) {

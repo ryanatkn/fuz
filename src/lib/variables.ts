@@ -291,11 +291,13 @@ export const default_variables: Theme_Variable[] = [
 	},
 	{
 		name: 'shadow_inset',
-		light: '2px 2px 4px inset var(--lighten_2), -2px -2px 4px inset var(--darken_2)',
+		light:
+			'2px 2px 4px inset var(--lighten_2), -2px -2px 4px inset var(--darken_2), 4px 4px 6px inset var(--lighten_1), -4px -4px 6px inset var(--darken_1)',
 	},
 	{
 		name: 'shadow_inset_active', // TODO better name? this is the "pressed" version for buttons
-		light: '2px 2px 4px inset var(--darken_2), -2px -2px 4px inset var(--lighten_2)',
+		light:
+			'2px 2px 4px inset var(--darken_2), -2px -2px 4px inset var(--lighten_2), 4px 4px 6px inset var(--darken_1), -4px -4px 6px inset var(--lighten_1)',
 	},
 
 	/* icons */
