@@ -10,6 +10,8 @@
 
 	let selected_button = 1;
 	let selected_deselectable_button = true;
+
+	// TODO probably want to put the buttons in a more consistent format so we can include `disabled` versions of each in a condensed format
 </script>
 
 <Tome_Detail {tome}>
@@ -20,16 +22,14 @@
 	{#each {length: 7} as _, i}
 		<Code content={`<button class="color_${i + 1}">`} />
 		<button class="color_{i + 1}">.color_{i + 1}</button>
-		<br />
-	{/each}
-
-	<br />
-	<h4><code>.outlined</code> variants</h4>
-	<br />
-
-	{#each {length: 7} as _, i}
-		<Code content={`<button class="color_${i + 1} outlined">`} />
-		<button class="color_{i + 1} outlined">.color_{i + 1}</button>
+		<button class="color_{i + 1}" disabled>disabled .color_{i + 1}</button>
+		<button class="color_{i + 1} selected">.color_{i + 1}.selected</button>
+		<button class="color_{i + 1} selected" disabled>disabled .color_{i + 1}.selected</button>
+		<button class="color_{i + 1} selected deselectable">.color_{i + 1}.selected.deselectable</button
+		>
+		<button class="color_{i + 1} selected deselectable" disabled
+			>disabled .color_{i + 1}.selected.deselectable</button
+		>
 		<br />
 	{/each}
 

@@ -475,59 +475,60 @@ button:is(.color_1, .color_2, .color_3, .color_4, .color_5, .color_6, .color_7) 
 }
 /* TODO differences for hover/focus */
 button:is(.color_1, .color_2, .color_3, .color_4, .color_5, .color_6, .color_7):is(:hover, :focus) {
-	color: var(--bg_9);
+	color: var(--bg_10);
 	box-shadow: var(--shadow_inset);
 }
 button:is(.color_1, .color_2, .color_3, .color_4, .color_5, .color_6, .color_7):active {
-	color: var(--bg_9);
+	color: var(--bg_10);
 	box-shadow: var(--shadow_inset_active);
 }
-button.color_1:not(.outlined) {
+button.color_1:not(.selected) {
 	background-color: var(--color_1);
 }
-button.color_2:not(.outlined) {
+button.color_2:not(.selected) {
 	background-color: var(--color_2);
 }
-button.color_3:not(.outlined) {
+button.color_3:not(.selected) {
 	background-color: var(--color_3);
 }
-button.color_4:not(.outlined) {
+button.color_4:not(.selected) {
 	background-color: var(--color_4);
 }
-button.color_5:not(.outlined) {
+button.color_5:not(.selected) {
 	background-color: var(--color_5);
 }
-button.color_6:not(.outlined) {
+button.color_6:not(.selected) {
 	background-color: var(--color_6);
 }
-button.color_7:not(.outlined) {
+button.color_7:not(.selected) {
 	background-color: var(--color_7);
 }
-button.outlined.color_1 {
+button.selected.color_1 {
 	color: var(--color_1);
 	border-color: var(--color_1);
+	border-width: var(--border_width_2);
 }
-button.outlined.color_2 {
+button.selected.color_2 {
 	color: var(--color_2);
 	border-color: var(--color_2);
 }
-button.outlined.color_3 {
+button.selected.color_3 {
 	color: var(--color_3);
 	border-color: var(--color_3);
 }
-button.outlined.color_4 {
+button.selected.color_4 {
 	color: var(--color_4);
 	border-color: var(--color_4);
 }
-button.outlined.color_5 {
+button.selected.color_5 {
 	color: var(--color_5);
 	border-color: var(--color_5);
 }
-button.outlined.color_6 {
+button.selected.color_6 {
 	color: var(--color_6);
 	border-color: var(--color_6);
 }
-button.outlined.color_7 {
+button.selected.color_7 {
 	color: var(--color_7);
 	border-color: var(--color_7);
 }

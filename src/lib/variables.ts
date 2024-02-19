@@ -103,7 +103,7 @@ export const default_variables: Theme_Variable[] = [
 		dark: 'hsl(var(--tint_hue), var(--tint_saturation), 96%)',
 	},
 	/* these are light or dark with a low alpha, so they nest/stack arbitrarily */
-	/* TODO maybe extract --bg_lightness and --fg_lightness */
+	// TODO these inconsistently don't use tint, unlike bg/fg
 	{name: 'bg_1', light: 'var(--lighten_1)', dark: 'var(--darken_1)'},
 	{name: 'bg_2', light: 'var(--lighten_2)', dark: 'var(--darken_2)'},
 	{name: 'bg_3', light: 'var(--lighten_3)', dark: 'var(--darken_3)'},
@@ -113,6 +113,7 @@ export const default_variables: Theme_Variable[] = [
 	{name: 'bg_7', light: 'var(--lighten_7)', dark: 'var(--darken_7)'},
 	{name: 'bg_8', light: 'var(--lighten_8)', dark: 'var(--darken_8)'},
 	{name: 'bg_9', light: 'var(--lighten_9)', dark: 'var(--darken_9)'},
+	{name: 'bg_10', light: '#fff', dark: '#000'},
 	{name: 'fg_1', light: 'var(--darken_1)', dark: 'var(--lighten_1)'},
 	{name: 'fg_2', light: 'var(--darken_2)', dark: 'var(--lighten_2)'},
 	{name: 'fg_3', light: 'var(--darken_3)', dark: 'var(--lighten_3)'},
@@ -122,6 +123,7 @@ export const default_variables: Theme_Variable[] = [
 	{name: 'fg_7', light: 'var(--darken_7)', dark: 'var(--lighten_7)'},
 	{name: 'fg_8', light: 'var(--darken_8)', dark: 'var(--lighten_8)'},
 	{name: 'fg_9', light: 'var(--darken_9)', dark: 'var(--lighten_9)'},
+	{name: 'fg_10', light: '#000', dark: '#fff'},
 	/* text colors don't use alpha because it affects performance too much */
 	{name: 'text_color', light: 'var(--text_1)'},
 	{
