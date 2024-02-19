@@ -1,5 +1,5 @@
 ---
-"@ryanatkn/fuz": minor
+'@ryanatkn/fuz': minor
 ---
 
-remove .buttonlike for role='button'
+remove `.buttonlike`
