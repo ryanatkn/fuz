@@ -24,7 +24,7 @@
 	<button class="selected deselectable" disabled>disabled button.selected.deselectable</button>
 	<br />
 
-	<section class="prose box">
+	<section class="prose">
 		<h3>colorful buttons</h3>
 	</section>
 	<br />
@@ -44,7 +44,7 @@
 
 	<hr />
 
-	<div class="box prose">
+	<div class="prose">
 		<h3>disabled button</h3>
 		<Code content={`<button disabled>\n\t:|\n</button>`} />
 		<button disabled>:|</button>
@@ -54,59 +54,57 @@
 
 	<hr />
 
-	<div class="box">
-		<div class="prose">
-			<h3>
-				<code>button</code> with CSS class <code>.selected</code>
-			</h3>
-		</div>
-		<section style:margin-bottom="var(--spacing_4)">
-			<nav>
-				<button class:selected={selected_button === 0} on:click={() => (selected_button = 0)}>
-					button 0
-				</button>
-				<button class:selected={selected_button === 1} on:click={() => (selected_button = 1)}>
-					button 1
-				</button>
-				<button class:selected={selected_button === 2} on:click={() => (selected_button = 2)}>
-					button 2
-				</button>
-			</nav>
+	<div class="prose">
+		<h3>
+			<code>button</code> with CSS class <code>.selected</code>
+		</h3>
+	</div>
+	<section style:margin-bottom="var(--spacing_4)">
+		<nav>
+			<button class:selected={selected_button === 0} on:click={() => (selected_button = 0)}>
+				button 0
+			</button>
+			<button class:selected={selected_button === 1} on:click={() => (selected_button = 1)}>
+				button 1
+			</button>
+			<button class:selected={selected_button === 2} on:click={() => (selected_button = 2)}>
+				button 2
+			</button>
+		</nav>
+	</section>
+	<div class="prose">
+		<section>
+			<Code content={`<button class="selected">...</button>`} />
+			<button class="width_full selected">a button with the <code>.selected</code> class</button>
 		</section>
-		<div class="prose">
-			<section>
-				<Code content={`<button class="selected">...</button>`} />
-				<button class="width_full selected">a button with the <code>.selected</code> class</button>
-			</section>
-			<section>
-				<p class="width_sm">
-					<code>.selected</code> buttons with the <code>.deselectable</code> class continue to be clickable
-					when selected:
-				</p>
-				<Code content={`<button class="selected deselectable">\n\t...\n</button>`} />
-			</section>
-			<section>
-				<button
-					class="width_full deselectable"
-					class:selected={selected_deselectable_button}
-					on:click={() => (selected_deselectable_button = !selected_deselectable_button)}
-					>a <code>.deselectable</code>
-					{#if selected_deselectable_button}<code>.selected</code>{:else}unselected{/if} button</button
-				>
-				<button class="width_full selected deselectable" disabled={true}
-					>disabled <code>.deselectable</code> <code>.selected</code></button
-				>
-			</section>
-		</div>
+		<section>
+			<p class="width_sm">
+				<code>.selected</code> buttons with the <code>.deselectable</code> class continue to be clickable
+				when selected:
+			</p>
+			<Code content={`<button class="selected deselectable">\n\t...\n</button>`} />
+		</section>
+		<section>
+			<button
+				class="width_full deselectable"
+				class:selected={selected_deselectable_button}
+				on:click={() => (selected_deselectable_button = !selected_deselectable_button)}
+				>a <code>.deselectable</code>
+				{#if selected_deselectable_button}<code>.selected</code>{:else}unselected{/if} button</button
+			>
+			<button class="width_full selected deselectable" disabled={true}
+				>disabled <code>.deselectable</code> <code>.selected</code></button
+			>
+		</section>
 	</div>
 
 	<hr />
 
-	<section class="prose box">
+	<section class="prose">
 		<h3><code>.plain</code> and <code>.icon_button</code></h3>
 	</section>
 	<br />
-	<section class="box">
+	<section>
 		<Code
 			content={`<button class="plain">
 	+
@@ -128,7 +126,7 @@
 		/>
 		<button class="plain icon_button">+</button>
 		<br />
-		<div class="prose box">
+		<div class="prose">
 			<h4><code>disabled</code> variants</h4>
 		</div>
 		<br />
@@ -153,7 +151,7 @@
 		/>
 		<button class="plain icon_button" disabled>+</button>
 		<br />
-		<div class="prose box">
+		<div class="prose">
 			<h4><code>.selected</code> variants</h4>
 		</div>
 		<br />
@@ -178,7 +176,7 @@
 		/>
 		<button class="plain icon_button selected">+</button>
 		<br />
-		<div class="prose box">
+		<div class="prose">
 			<h4><code>.selected</code> and <code>.deselectable</code> variants</h4>
 		</div>
 		<br />
