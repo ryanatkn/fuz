@@ -2,11 +2,15 @@
 
 > friendly user zystem 🧶 [fuz.dev](https://www.fuz.dev/)
 
-Fuz is a design system for CSS, <a href="https://svelte.dev/">Svelte</a>,
-and <a href="https://kit.svelte.dev/">SvelteKit</a>:
+Fuz is a <a href="https://svelte.dev/">Svelte</a> UI library and CSS design system.
+
+The CSS design system:
 
 - plain CSS
-- designed around CSS variables
+- designed around CSS variables (includes optional utility and semantic classes,
+  but the base abstraction is implemented with
+  [CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/--*) not classes)
+- is the only required part of the library, everything else can be used a la carte
 - supports [`color-scheme` and custom themes](https://www.fuz.dev/library/theme)
   (including dark mode)
 - no dependencies except for `svelte`
@@ -15,6 +19,16 @@ and <a href="https://kit.svelte.dev/">SvelteKit</a>:
 - has a small set of utility classes with plans for a lot more -
   currently includes a single global importable `style.css`,
   see [this issue about optimization](https://github.com/ryanatkn/fuz/issues/277)
+
+The Svelte components and helpers:
+
+- pending migration to Svelte 5
+- builds on the CSS design system
+- plain CSS
+- not a fully-featured
+- minimal abstraction
+- should be easy to copy/paste into your projects when you need full control like
+  [shadcn-svelte](https://github.com/huntabyte/shadcn-svelte)
 
 ## usage
 
