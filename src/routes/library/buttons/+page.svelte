@@ -202,45 +202,4 @@
 		<button class="plain icon_button selected deselectable">+</button>
 		<br />
 	</section>
-
-	<hr />
-
-	<div class="box prose">
-		<section>
-			<h3>
-				<code>.buttonlike</code> CSS class
-			</h3>
-			<p class="width_sm">
-				the <code>.buttonlike</code> class is useful when you want interactive builtin elements to be
-				wrapped in a larger clickable area:
-			</p>
-		</section>
-		<section class="padded_md panel">
-			<Code content={`<label class="buttonlike">\n\t<input type="checkbox" />...\n</label>`} />
-			<label class="buttonlike padded_md row box">
-				<input type="checkbox" />
-				<div class="padded_sm">this entire thing is buttonlike, not just the checkbox</div>
-			</label>
-		</section>
-		<section class="padded_md panel">
-			<Code content={`<label class="buttonlike disabled">...</label>`} />
-			<label class="buttonlike padded_md row box disabled">
-				<input type="checkbox" disabled />
-				<div class="padded_sm">this is a <code>.disabled</code> buttonlike</div>
-			</label>
-		</section>
-		<section class="padded_md panel">
-			<Code content={`<div class="buttonlike selected padded_md">...</div>`} />
-			<div class="buttonlike selected padded_md">
-				<code>.buttonlike</code> with <code>.selected</code>
-			</div>
-		</section>
-		<section class="padded_md panel">
-			<Code content={`<div class="buttonlike deselectable selected padded_md">...</div>`} />
-			<div class="buttonlike deselectable selected padded_md">
-				<code>.buttonlike</code> with <code>.selected</code> and <code>.deselectable</code>
-			</div>
-		</section>
-		<blockquote>TODO: add more <code>deselectable</code> signifiers?</blockquote>
-	</div>
 </Tome_Detail>

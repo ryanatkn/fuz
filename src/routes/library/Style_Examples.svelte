@@ -144,20 +144,6 @@
 		<button class="icon_button selected deselectable">+</button>
 		<button class="plain icon_button selected deselectable">+</button>
 	</div>
-	<label class="buttonlike padded_md row box">
-		<input type="checkbox" />
-		<div class="padded_sm">this entire thing is buttonlike, not just the checkbox</div>
-	</label>
-	<label class="buttonlike padded_md row box disabled">
-		<input type="checkbox" disabled />
-		<div class="padded_sm">this is a <code>.disabled</code> buttonlike</div>
-	</label>
-	<div class="buttonlike selected padded_md" tabindex="0" role="button">
-		<code>.buttonlike</code> with <code>.selected</code>
-	</div>
-	<div class="buttonlike deselectable selected padded_md" tabindex="0" role="button">
-		<code>.buttonlike</code> with <code>.selected</code> and <code>.deselectable</code>
-	</div>
 </div>
 
 <style>
