@@ -26,12 +26,14 @@ The Svelte components and helpers:
 - pending migration to Svelte 5
 - builds on the CSS design system
 - plain CSS and minimal abstraction
-- zero dependencies except for Svelte and SvelteKit
-  (not all require SvelteKit but some do import its modules, which could be polyfilled)
+- near-zero dependencies except for Svelte, SvelteKit, and my utility library
+  [`@ryanatkn/belt`](https://github.com/ryanatkn/belt)
+  (not all components require SvelteKit but some do import its modules, which could be polyfilled)
 - not a fully-featured enterprise-ready set of components,
   it's being developed for the needs of specific projects, though eventually it will fill out
 - should be easy to copy/paste into your projects when you need full control like
-  [shadcn-svelte](https://github.com/huntabyte/shadcn-svelte)
+  [shadcn-svelte](https://github.com/huntabyte/shadcn-svelte),
+  I'll look into smoothing this pattern out in the future
 
 ## usage
 
