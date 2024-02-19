@@ -8,13 +8,15 @@
 </script>
 
 <Tome_Detail {tome}>
-	<section class="width_sm text_align_center">
+	<section class="width_sm">
 		<blockquote>
-			the <code>.prose</code> CSS class styles HTML elements for document-like presentation
+			The <code>.prose</code> CSS class styles HTML elements for document-like presentation. The
+			base Fuz stylesheet resets everything for app-like presentation (e.g. no margin/padding), and
+			<code>.prose</code> adds good defaults back.
 		</blockquote>
 	</section>
 	<div class="prose">
-		<section class="text_align_center">
+		<section>
 			<h3><code>ul</code> inside <code>.prose</code></h3>
 		</section>
 	</div>
@@ -26,7 +28,7 @@
 		</ul>
 	</section>
 	<div class="prose">
-		<section class="text_align_center">
+		<section>
 			<h3><code>ul</code> without a <code>.prose</code> ancestor</h3>
 		</section>
 	</div>
@@ -38,7 +40,7 @@
 		</ul>
 	</section>
 	<div class="prose">
-		<section class="text_align_center">
+		<section>
 			<h3><code>a</code> links are inline inside <code>.prose</code></h3>
 		</section>
 	</div>
@@ -48,7 +50,7 @@
 		</p>
 	</section>
 	<div class="prose">
-		<section class="text_align_center">
+		<section>
 			<h3><code>a</code> without a <code>.prose</code> ancestor</h3>
 		</section>
 	</div>
@@ -60,11 +62,11 @@
 		</p>
 	</section>
 	<div class="prose">
-		<section class="text_align_center">
+		<section>
 			<h3>headings and other elements have no margin by default:</h3>
 		</section>
 	</div>
-	<section class="text_align_center box">
+	<section>
 		<h1>h1</h1>
 		<h2>h2</h2>
 		<h3>h3</h3>
@@ -80,11 +82,11 @@
 		<footer>footer</footer>
 	</section>
 	<div class="prose">
-		<section class="text_align_center">
+		<section>
 			<h3>but they do inside <code>.prose</code>:</h3>
 		</section>
 	</div>
-	<section class="prose text_align_center box">
+	<section class="prose">
 		<h1>h1</h1>
 		<h2>h2</h2>
 		<h3>h3</h3>

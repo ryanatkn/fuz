@@ -17,8 +17,8 @@
 	-->
 
 <Tome_Detail {tome}>
-	<div class="prose box">
-		<section class="box">
+	<div class="prose">
+		<section>
 			<p class="width_sm">Preserves a button's normal width while animating.</p>
 			<aside class="width_sm">
 				<p>This component may be replaced with an action in the future or otherwise change.</p>

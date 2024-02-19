@@ -26,7 +26,7 @@
 </script>
 
 <Tome_Detail {tome}>
-	<section class="prose box width_sm">
+	<section class="prose width_sm">
 		<blockquote>
 			{variables.length} theme variables
 		</blockquote>

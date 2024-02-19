@@ -7,7 +7,7 @@
 		overflow: hidden;
 		width: 100%;
 		display: flex;
-		align-items: center;
+		align-items: flex-start;
 		justify-content: center;
 		flex-direction: column;
 		padding: var(--library_panel_padding, var(--spacing_lg));

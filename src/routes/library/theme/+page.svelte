@@ -99,7 +99,7 @@
 	</section>
 	<section class="theme box panel">
 		<div class="prose width_sm">
-			<h3 class="text_align_center">color scheme</h3>
+			<h3>color scheme</h3>
 			<p>
 				<code>Themed</code> defaults to automatic
 				<code
@@ -151,7 +151,7 @@
 	</section>
 	<section class="theme box panel">
 		<div class="prose width_sm">
-			<h3 class="text_align_center">themes</h3>
+			<h3>themes</h3>
 			<p>
 				A theme is a simple JSON collection of <Library_Vocab name="variables" /> that can be transformed
 				into CSS that set
@@ -173,7 +173,7 @@
 	</section>
 	<section class="theme box panel">
 		<div class="spaced prose width_sm">
-			<h3 class="text_align_center">scoped themes</h3>
+			<h3>scoped themes</h3>
 		</div>
 		<details>
 			<summary>⚠️ scoped themes are a work in progress</summary>
@@ -235,7 +235,7 @@
 		</details>
 	</section>
 	<section class="theme panel prose">
-		<h3 class="text_align_center">theme usage</h3>
+		<h3>theme usage</h3>
 		<p>Themes are plain CSS that can be sourced in a variety of ways.</p>
 		<p>To use fuz's base theme:</p>
 		<Code
