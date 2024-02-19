@@ -12,7 +12,6 @@
 	import {default_themes} from '$lib/themes.js';
 	import Theme_Input from '$lib/Theme_Input.svelte';
 	import Theme_Form from '$routes/Theme_Form.svelte';
-	import Style_Examples from '$routes/library/Style_Examples.svelte';
 	import Themed_Scope from '$lib/Themed_Scope.svelte';
 
 	const LIBRARY_ITEM_NAME = 'theme';
@@ -309,9 +308,11 @@ $selected_color_scheme; // '${$selected_color_scheme}'`}
 			</details>
 		</p>
 	</section>
-	<section class="panel prose padded_md">
+	<!-- TODO probably do this, needs colored buttons and other missing things though,
+		gets big - maybe put behind a click? or at least on the main library page? -->
+	<!-- <section class="panel prose padded_md">
 		<Style_Examples />
-	</section>
+	</section> -->
 </Tome_Detail>
 
 {#if show_create_theme_dialog}
