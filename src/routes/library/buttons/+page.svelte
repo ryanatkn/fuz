@@ -205,39 +205,44 @@
 
 	<hr />
 
-	<div class="box prose">
+	<div class="prose">
 		<section>
 			<h3>
 				<code>role="button"</code>
 			</h3>
-			<p class="width_sm">
-				<code>role="button"</code> is useful when you want interactive builtin elements to be wrapped
-				in a larger clickable area:
+			<p>
+				<code>role="button"</code> is useful when you want interactive builtin elements to be
+				wrapped in a larger clickable area, or if you don't want a <code>button</code> for some other
+				reason:
 			</p>
 		</section>
 		<section class="padded_md panel">
-			<Code content={`<label class="buttonlike">\n\t<input type="checkbox" />...\n</label>`} />
-			<label class="buttonlike padded_md row box">
+			<Code
+				content={`<label role="button" tabindex="0">\n\t<input type="checkbox" />...\n</label>`}
+			/>
+			<label role="button" tabindex="0" class="padded_md row box">
 				<input type="checkbox" />
-				<div class="padded_sm">this entire thing is buttonlike, not just the checkbox</div>
+				<div class="padded_sm">this is a checkbox inside an element with role="button"</div>
 			</label>
 		</section>
 		<section class="padded_md panel">
-			<Code content={`<label class="buttonlike disabled">...</label>`} />
-			<label class="buttonlike padded_md row box disabled">
+			<Code content={`<label role="button" tabindex="0" class="disabled">...</label>`} />
+			<label role="button" tabindex="0" class="padded_md row box disabled">
 				<input type="checkbox" disabled />
 				<div class="padded_sm"><code>role="button"</code> with <code>.disabled</code></div>
 			</label>
 		</section>
 		<section class="padded_md panel">
-			<Code content={`<div class="buttonlike selected padded_md">...</div>`} />
-			<div class="buttonlike selected padded_md">
+			<Code content={`<div role="button" tabindex="0" class="selected padded_md">...</div>`} />
+			<div role="button" tabindex="0" class="selected padded_md">
 				<code>role="button"</code> with <code>.selected</code>
 			</div>
 		</section>
 		<section class="padded_md panel">
-			<Code content={`<div class="buttonlike deselectable selected padded_md">...</div>`} />
-			<div class="buttonlike deselectable selected padded_md">
+			<Code
+				content={`<div role="button" tabindex="0" class="deselectable selected padded_md">...</div>`}
+			/>
+			<div role="button" tabindex="0" class="deselectable selected padded_md">
 				<code>role="button"</code> with <code>.selected</code> and <code>.deselectable</code>
 			</div>
 		</section>
