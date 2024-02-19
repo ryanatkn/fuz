@@ -15,6 +15,15 @@
 </script>
 
 <Tome_Detail {tome}>
+	<Code content={`<button>`} />
+	<button>button</button>
+	<button disabled>disabled button</button>
+	<button class="selected">button.selected</button>
+	<button class="selected" disabled>disabled button.selected</button>
+	<button class="selected deselectable">button.selected.deselectable</button>
+	<button class="selected deselectable" disabled>disabled button.selected.deselectable</button>
+	<br />
+
 	<section class="prose box">
 		<h3>colorful buttons</h3>
 	</section>
