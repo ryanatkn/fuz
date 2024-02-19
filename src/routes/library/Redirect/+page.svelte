@@ -10,7 +10,7 @@
 </script>
 
 <Tome_Detail {tome}>
-	<div class="box prose">
+	<div class="prose">
 		<p class="width_sm">
 			Adds a redirect for a page using <a
 				href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Redirections#html_redirections"
@@ -48,13 +48,3 @@
 		</section>
 	</div>
 </Tome_Detail>
-
-<style>
-	section {
-		/* TODO make standard across library pages */
-		padding: var(--spacing_2);
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
-</style>

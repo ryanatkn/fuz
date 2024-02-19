@@ -1,5 +1,20 @@
 import type {Theme_Variable} from '$lib/theme.js';
 
+/*
+
+TODO lots of things here to address:
+
+- lots of inconsistencies, like the relationship between base and modified values
+	- in some cases the base value is just a value, in other cases it's the "current" value
+- going from `_lg` to `_1` is awkward - maybe replace all xs/sm/md/lg with 1/2/3/4
+	- issues with this:
+		- less semantically meaningful, harder to read/write so you'll have to learn the system
+			- 3 won't always be "medium" for each usage because of the lower end values
+		- changing the bottom end of the range will cause bad churn (can't just add a new `_xs4`)
+		- numbers will get into the double digits
+
+/*
+
 /**
  * These are implicitly the variables for the `base` theme.
  * See also the empty `variables` array of the `base` theme above.
@@ -80,15 +95,15 @@ export const default_variables: Theme_Variable[] = [
 	{
 		name: 'bg',
 		light: 'hsl(var(--tint_hue), var(--tint_saturation), 96%)',
-		dark: 'hsl(var(--tint_hue), var(--tint_saturation), 7%)',
+		dark: 'hsl(var(--tint_hue), var(--tint_saturation), 6%)',
 	},
 	{
 		name: 'fg',
-		light: 'hsl(var(--tint_hue), var(--tint_saturation), 7%)',
+		light: 'hsl(var(--tint_hue), var(--tint_saturation), 6%)',
 		dark: 'hsl(var(--tint_hue), var(--tint_saturation), 96%)',
 	},
 	/* these are light or dark with a low alpha, so they nest/stack arbitrarily */
-	/* TODO maybe extract --bg_lightness and --fg_lightness */
+	// TODO these inconsistently don't use tint, unlike bg/fg
 	{name: 'bg_1', light: 'var(--lighten_1)', dark: 'var(--darken_1)'},
 	{name: 'bg_2', light: 'var(--lighten_2)', dark: 'var(--darken_2)'},
 	{name: 'bg_3', light: 'var(--lighten_3)', dark: 'var(--darken_3)'},
@@ -98,6 +113,7 @@ export const default_variables: Theme_Variable[] = [
 	{name: 'bg_7', light: 'var(--lighten_7)', dark: 'var(--darken_7)'},
 	{name: 'bg_8', light: 'var(--lighten_8)', dark: 'var(--darken_8)'},
 	{name: 'bg_9', light: 'var(--lighten_9)', dark: 'var(--darken_9)'},
+	{name: 'bg_10', light: '#fff', dark: '#000'},
 	{name: 'fg_1', light: 'var(--darken_1)', dark: 'var(--lighten_1)'},
 	{name: 'fg_2', light: 'var(--darken_2)', dark: 'var(--lighten_2)'},
 	{name: 'fg_3', light: 'var(--darken_3)', dark: 'var(--lighten_3)'},
@@ -107,6 +123,7 @@ export const default_variables: Theme_Variable[] = [
 	{name: 'fg_7', light: 'var(--darken_7)', dark: 'var(--lighten_7)'},
 	{name: 'fg_8', light: 'var(--darken_8)', dark: 'var(--lighten_8)'},
 	{name: 'fg_9', light: 'var(--darken_9)', dark: 'var(--lighten_9)'},
+	{name: 'fg_10', light: '#000', dark: '#fff'},
 	/* text colors don't use alpha because it affects performance too much */
 	{name: 'text_color', light: 'var(--text_1)'},
 	{
@@ -258,20 +275,32 @@ export const default_variables: Theme_Variable[] = [
 	},
 
 	/* shadows */
+	// TODO these shouldn't use tint, use lighten/darken instead,
+	// but ideally we'd have a blend mode make the colors right,
+	// which would require a pseduo-element,
+	// but that's heavier and requires the element to be positioned (I think?)
 	{
-		name: 'box_shadow',
+		name: 'shadow',
 		light:
-			'2px 4px 9px hsla(var(--tint_hue), var(--tint_saturation), 7%, 0.28), 2px 14px 48px hsla(var(--tint_hue), var(--tint_saturation), 7%, 0.28)',
+			'2px 4px 9px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.28), 2px 14px 48px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.28)',
 		dark: '2px 4px 9px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--faded_5)), 2px 14px 48px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--faded_5))',
 	},
 	{
-		name: 'box_shadow_lg',
+		name: 'shadow_lg',
 		light:
-			'2px 6px 14px hsla(var(--tint_hue), var(--tint_saturation), 7%, 0.8), 2px 6px 48px hsla(var(--tint_hue), var(--tint_saturation), 7%, 0.8)',
+			'2px 6px 14px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.8), 2px 6px 48px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.8)',
 		dark: '2px 6px 18px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--faded_5)), 2px 6px 48px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--faded_5))',
 	},
-	{name: 'drop_shadow', light: 'drop-shadow(var(--box_shadow))'},
-	{name: 'drop_shadow_lg', light: 'drop-shadow(var(--box_shadow_lg))'},
+	{
+		name: 'shadow_inset',
+		light:
+			'2px 2px 4px inset var(--lighten_2), -2px -2px 4px inset var(--darken_2), 4px 4px 6px inset var(--lighten_1), -4px -4px 6px inset var(--darken_1)',
+	},
+	{
+		name: 'shadow_inset_active', // TODO better name? this is the "pressed" version for buttons
+		light:
+			'2px 2px 4px inset var(--darken_2), -2px -2px 4px inset var(--lighten_2), 4px 4px 6px inset var(--darken_1), -4px -4px 6px inset var(--lighten_1)',
+	},
 
 	/* icons */
 	/* these decrease by the golden ratio, rounded to the nearest pixel,
@@ -302,7 +331,7 @@ export const default_variables: Theme_Variable[] = [
 	{name: 'faded_4', light: '24%'},
 	{name: 'faded_5', light: '15%'},
 	{name: 'faded_6', light: '9%'},
-	{name: 'disabled_opacity', light: 'var(--faded_1)'},
+	{name: 'disabled_opacity', light: 'var(--faded_2)'},
 
 	/* border radii */
 	{name: 'border_radius', light: 'var(--border_radius_md)'},

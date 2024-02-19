@@ -152,10 +152,10 @@
 		<input type="checkbox" disabled />
 		<div class="padded_sm">this is a <code>.disabled</code> buttonlike</div>
 	</label>
-	<div class="buttonlike selected padded_md">
+	<div class="buttonlike selected padded_md" tabindex="0" role="button">
 		<code>.buttonlike</code> with <code>.selected</code>
 	</div>
-	<div class="buttonlike deselectable selected padded_md">
+	<div class="buttonlike deselectable selected padded_md" tabindex="0" role="button">
 		<code>.buttonlike</code> with <code>.selected</code> and <code>.deselectable</code>
 	</div>
 </div>

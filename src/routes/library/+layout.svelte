@@ -35,7 +35,9 @@
 			</div>
 		</div>
 		<Library_Panel>
-			<Package_Summary {pkg} />
+			<div class="box width_full">
+				<Package_Summary {pkg} />
+			</div>
 		</Library_Panel>
 		<slot />
 		<section class="box">

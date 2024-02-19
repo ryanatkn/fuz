@@ -9,9 +9,9 @@
 </script>
 
 <Tome_Detail {tome}>
-	<div class="prose box">
+	<div class="prose">
 		<blockquote>
-			styles for <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element"
+			styles for miscellaneous <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element"
 				>HTML elements</a
 			>
 		</blockquote>
@@ -30,17 +30,15 @@
 	</div>
 	<hr />
 	<div class="prose">
-		<div class="box">
-			<h3>
-				<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details"
-					><code>details</code></a
-				>
-				and
-				<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/summary"
-					><code>summary</code></a
-				>
-			</h3>
-		</div>
+		<h3>
+			<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details"
+				><code>details</code></a
+			>
+			and
+			<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/summary"
+				><code>summary</code></a
+			>
+		</h3>
 		<details>
 			<summary
 				>Click me, a <code>summary</code>, to see the rest of the <code>details</code></summary
@@ -58,18 +56,15 @@
 		</details>
 	</div>
 	<hr />
-	<div class="prose box">
-		<div class="box">
-			<h3>
-				<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table"
-					><code>table</code></a
-				>
-			</h3>
-			<blockquote>this is unfinished and will change</blockquote>
-		</div>
-		<div class="box">
-			<Code
-				content={`<table>
+	<div class="prose">
+		<h3>
+			<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table"
+				><code>table</code></a
+			>
+		</h3>
+		<blockquote>this is unfinished and will change</blockquote>
+		<Code
+			content={`<table>
 	<thead>
 		<th>th</th>
 		<th>th</th>
@@ -81,8 +76,7 @@
 		<tr><td>td</td><td>td</td><td>td</td></tr>
 	</tbody>
 </table>`}
-			/>
-		</div>
+		/>
 		<table>
 			<thead>
 				<th>th</th>
@@ -111,17 +105,15 @@
 	</div>
 	<hr />
 	<div class="prose">
-		<div class="box">
-			<h3>
-				<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/aside"
-					><code>aside</code></a
-				>
-			</h3>
-		</div>
+		<h3>
+			<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/aside"
+				><code>aside</code></a
+			>
+		</h3>
 		<aside>
 			the <code>aside</code> looks like this
 		</aside>
-		<aside class="box">
+		<aside>
 			<Code
 				content={`<aside>
 	<aside>

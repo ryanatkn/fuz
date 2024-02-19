@@ -140,10 +140,9 @@
 <!-- TODO demonstrate usage of a custom `link_component` and `linkProps`  -->
 <Contextmenu {contextmenu} />
 
-<Tome_Detail {tome} --library_panel_padding="var(--spacing_lg) 0 0 0">
+<Tome_Detail {tome}>
 	<div slot="header"><h2>{tome.name}</h2></div>
 	<div
-		class="width_full box"
 		use:contextmenu.action={[
 			// params type of the action is `Contextmenu_Action_Params`
 			can_reset ? {run: reset, content: 'Reset', icon: '↻'} : null,

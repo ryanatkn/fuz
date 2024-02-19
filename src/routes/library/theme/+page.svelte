@@ -12,7 +12,6 @@
 	import {default_themes} from '$lib/themes.js';
 	import Theme_Input from '$lib/Theme_Input.svelte';
 	import Theme_Form from '$routes/Theme_Form.svelte';
-	import Style_Examples from '$routes/library/Style_Examples.svelte';
 	import Themed_Scope from '$lib/Themed_Scope.svelte';
 
 	const LIBRARY_ITEM_NAME = 'theme';
@@ -99,7 +98,7 @@
 	</section>
 	<section class="theme box panel">
 		<div class="prose width_sm">
-			<h3 class="text_align_center">color scheme</h3>
+			<h3>color scheme</h3>
 			<p>
 				<code>Themed</code> defaults to automatic
 				<code
@@ -151,7 +150,7 @@
 	</section>
 	<section class="theme box panel">
 		<div class="prose width_sm">
-			<h3 class="text_align_center">themes</h3>
+			<h3>themes</h3>
 			<p>
 				A theme is a simple JSON collection of <Library_Vocab name="variables" /> that can be transformed
 				into CSS that set
@@ -173,7 +172,7 @@
 	</section>
 	<section class="theme box panel">
 		<div class="spaced prose width_sm">
-			<h3 class="text_align_center">scoped themes</h3>
+			<h3>scoped themes</h3>
 		</div>
 		<details>
 			<summary>⚠️ scoped themes are a work in progress</summary>
@@ -235,7 +234,7 @@
 		</details>
 	</section>
 	<section class="theme panel prose">
-		<h3 class="text_align_center">theme usage</h3>
+		<h3>theme usage</h3>
 		<p>Themes are plain CSS that can be sourced in a variety of ways.</p>
 		<p>To use fuz's base theme:</p>
 		<Code
@@ -309,9 +308,11 @@ $selected_color_scheme; // '${$selected_color_scheme}'`}
 			</details>
 		</p>
 	</section>
-	<section class="panel prose padded_md">
+	<!-- TODO probably do this, needs colored buttons and other missing things though,
+		gets big - maybe put behind a click? or at least on the main library page? -->
+	<!-- <section class="panel prose padded_md">
 		<Style_Examples />
-	</section>
+	</section> -->
 </Tome_Detail>
 
 {#if show_create_theme_dialog}

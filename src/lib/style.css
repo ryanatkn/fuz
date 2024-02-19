@@ -414,6 +414,7 @@ button:focus,
 .buttonlike:focus {
 	--border_color: var(--border_2);
 	background: var(--button_bg_hover);
+	box-shadow: var(--shadow_inset);
 }
 button:active,
 .buttonlike:active {
@@ -421,6 +422,7 @@ button:active,
 	--outline_width: var(--outline_width_3);
 	/* TODO use of `background` vs `background-color` in this file is not intentional */
 	background: var(--button_bg_active);
+	box-shadow: var(--shadow_inset_active);
 }
 button.inline {
 	display: inline-block;
@@ -432,12 +434,14 @@ see https://caniuse.com/css-has
  */
 /* TODO maybe add a style for `button.selected:disabled`, probably reduced brightness,
 currently `:disabled` overrides this */
-button.selected,
-.buttonlike.selected {
+:is(button, .buttonlike).selected {
 	--text_color: var(--text_active);
 	--border_color: var(--color_1);
 	background: var(--button_bg_active);
+}
+:is(button, .buttonlike).selected:not(.deselectable) {
 	cursor: default;
+	box-shadow: none;
 }
 input:checked,
 .buttonlike:hover input:checked:not(:disabled),
@@ -454,6 +458,7 @@ input[type='radio']:checked {
 	--border_color: var(--border_disabled);
 	--border_style: solid dashed;
 	cursor: default;
+	box-shadow: none;
 	opacity: var(--disabled_opacity);
 	background: var(--button_bg_disabled);
 	outline: none;
@@ -467,6 +472,67 @@ label.disabled:active {
 .buttonlike:active :is(input[type='checkbox'], input[type='radio']):disabled {
 	--border_color: var(--color_5);
 	background: var(--button_bg_disabled);
+}
+
+/* TODO these need design work for visuals/consistency/customizability */
+button:is(.color_1, .color_2, .color_3, .color_4, .color_5, .color_6, .color_7) {
+	color: var(--bg_7);
+}
+/* TODO differences for hover/focus */
+button:is(.color_1, .color_2, .color_3, .color_4, .color_5, .color_6, .color_7):is(:hover, :focus) {
+	color: var(--bg_10);
+}
+button:is(.color_1, .color_2, .color_3, .color_4, .color_5, .color_6, .color_7):active {
+	color: var(--bg_10);
+}
+button.color_1:not(.selected) {
+	background-color: var(--color_1);
+}
+button.color_2:not(.selected) {
+	background-color: var(--color_2);
+}
+button.color_3:not(.selected) {
+	background-color: var(--color_3);
+}
+button.color_4:not(.selected) {
+	background-color: var(--color_4);
+}
+button.color_5:not(.selected) {
+	background-color: var(--color_5);
+}
+button.color_6:not(.selected) {
+	background-color: var(--color_6);
+}
+button.color_7:not(.selected) {
+	background-color: var(--color_7);
+}
+button.selected.color_1 {
+	color: var(--color_1);
+	border-color: var(--color_1);
+}
+button.selected.color_2 {
+	color: var(--color_2);
+	border-color: var(--color_2);
+}
+button.selected.color_3 {
+	color: var(--color_3);
+	border-color: var(--color_3);
+}
+button.selected.color_4 {
+	color: var(--color_4);
+	border-color: var(--color_4);
+}
+button.selected.color_5 {
+	color: var(--color_5);
+	border-color: var(--color_5);
+}
+button.selected.color_6 {
+	color: var(--color_6);
+	border-color: var(--color_6);
+}
+button.selected.color_7 {
+	color: var(--color_7);
+	border-color: var(--color_7);
 }
 
 /* TODO could improve this with the coming `:has` selector
@@ -576,9 +642,9 @@ ahead are utility and helper classes:
 By default it's opaque, resetting the background to the initial depth. */
 .pane {
 	background-color: var(--pane_bg, var(--bg));
-	/* TODO this causes blurriness with nested contextmenus, maybe they shouldn't be panes? is pane overloaded? maybe extract the bg part of it?
-	filter: var(--drop_shadow); */
-	box-shadow: var(--box_shadow);
+	/* TODO this is preferred but causes blurriness with nested contextmenus, maybe they shouldn't be panes? is pane overloaded? maybe extract the bg part of it?
+	filter: drop-shadow(var(--shadow)); */
+	box-shadow: var(--shadow);
 	border-radius: var(--border_radius_xs);
 }
 /* A panel is a box embedded into the page, useful for visually isolating content. */
@@ -682,7 +748,7 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories
 .selectable.selected {
 	cursor: default;
 }
-.selected.deselectable:not(:disabled) {
+.selectable.selected.deselectable:not(:disabled) {
 	cursor: pointer;
 }
 

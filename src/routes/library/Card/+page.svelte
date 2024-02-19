@@ -13,7 +13,7 @@
 </script>
 
 <Tome_Detail {tome}>
-	<div class="prose box">
+	<div class="prose">
 		<section>
 			<!-- TODO make this a generic data-driven helper -->
 			<Code content={`import Card from\n\t'@ryanatkn/fuz/Card.svelte';`} lang="ts" />
@@ -116,13 +116,3 @@
 		</section>
 	</div>
 </Tome_Detail>
-
-<style>
-	section {
-		/* TODO not sure about this -- maybe make it a util class? or a component? */
-		padding: var(--spacing_2);
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
-</style>

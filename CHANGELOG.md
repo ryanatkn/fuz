@@ -425,8 +425,8 @@
   - remove `.plain-button`, use `.plain` on `button` instead
   - rename `.w-full` to `.width_full` and `.h-full` to `.height_full`
   - snake_case `.padded-X` to `.padded_X` and `.icon-button` to `.icon_button`
-  - rename `--box_shadow_dark` and `--drop_shadow_dark` to `--box_shadow_lg`
-    and `--drop_shadow_lg`
+  - rename `--shadow_dark` and `--shadow_dark` to `--shadow_lg`
+    and `--shadow_lg`
   - drop the `font_` from `--font_size_X` (later changed to `size_`, see below)
   - rename `.column` to `.width_md` and `.column-sm` to `.width_sm`
   - rename `--column_width` to `--width_md` and `--column_width_sm` to `--width_sm`
@@ -714,11 +714,11 @@
   - remove `--interactive_color_active_dark`
   - remove `--avatar_height`
   - remove `--border_radius_N` for variants `md`/`sm`/`xs`
-  - remove `--input_box_shadow_` variables
+  - remove `--input_shadow_` variables
   - remove `--panel_color` and `--panel_color_dark`
   - remove `.panel-outset` and `.panel-inset` - use `.panel` instead
-  - remove `--panel_inset_box_shadow`, `--panel_outset_box_shadow`,
-    `--panel_inset_box_shadow_hover` and `--panel_outset_box_shadow_hover`
+  - remove `--panel_inset_shadow`, `--panel_outset_shadow`,
+    `--panel_inset_shadow_hover` and `--panel_outset_shadow_hover`
   - remove `--panel_padding`, `--panel_padding_sm`, and `--panel_padding_xs` -- use `--padded_X` instead
   - add utility classes `.centered-text`, `.padded-xs`, `.padded-sm`, and `.padded-lg`
   - add `--border_width`
@@ -940,7 +940,7 @@
   ([#159](https://github.com/ryanatkn/fuz/pull/159))
 - **break**: remove opinionated layout CSS on the `html` and `body` elements
   ([#155](https://github.com/ryanatkn/fuz/pull/155))
-- **break**: replace `--pane_box_shadow` with `--drop_shadow` and `--drop_shadow_dark`
+- **break**: replace `--pane_shadow` with `--shadow` and `--shadow_dark`
   ([#161](https://github.com/ryanatkn/fuz/pull/161))
 - add CSS variables `--transition_duration_1` to `--transition_duration_5`
   that get disabled with `prefers-reduced-motion`
