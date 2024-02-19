@@ -24,10 +24,9 @@ The Svelte components and helpers:
 
 - pending migration to Svelte 5
 - builds on the CSS design system
-- plain CSS
+- plain CSS and minimal abstraction
 - not a fully-featured enterprise-ready set of components,
   it's being developed for the needs of specific projects, though eventually it will fill out
-- minimal abstraction
 - should be easy to copy/paste into your projects when you need full control like
   [shadcn-svelte](https://github.com/huntabyte/shadcn-svelte)
 
