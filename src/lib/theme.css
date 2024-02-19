@@ -175,7 +175,7 @@
 	--faded_4: 24%;
 	--faded_5: 15%;
 	--faded_6: 9%;
-	--disabled_opacity: var(--faded_1);
+	--disabled_opacity: var(--faded_2);
 	--border_radius: var(--border_radius_md);
 	--border_radius_md: calc(var(--input_height) / 2);
 	--border_radius_sm: calc(var(--border_radius_md) / 1.618);

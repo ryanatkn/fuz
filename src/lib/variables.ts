@@ -331,7 +331,7 @@ export const default_variables: Theme_Variable[] = [
 	{name: 'faded_4', light: '24%'},
 	{name: 'faded_5', light: '15%'},
 	{name: 'faded_6', light: '9%'},
-	{name: 'disabled_opacity', light: 'var(--faded_1)'},
+	{name: 'disabled_opacity', light: 'var(--faded_2)'},
 
 	/* border radii */
 	{name: 'border_radius', light: 'var(--border_radius_md)'},
