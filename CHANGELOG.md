@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.86.0
+
+### Minor Changes
+
+- remove `.buttonlike` ([#7](https://github.com/ryanatkn/fuz/pull/7))
+
 ## 0.85.0
 
 ### Minor Changes
