@@ -9,6 +9,7 @@ Fuz is being made to support my [other projects](https://www.ryanatkn.com/table)
 that focus on end-users.
 Fuz emphasizes capability and efficiency and tries to be simple for those goals.
 It's not trying to be as generalized or fully-featured as most UI libraries.
+
 Feel free to take the ideas and code for your own purposes.
 
 The CSS design system:
