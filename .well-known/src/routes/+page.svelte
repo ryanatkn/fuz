@@ -23,7 +23,7 @@
 				<p>
 					Fuz is being made to support <a href="https://www.ryanatkn.com/table">my other projects</a
 					> that focus on end-users. Fuz emphasizes capability and efficiency and tries to be simple
-					for those goals. It's not trying to be as generalized or fully-featured as most UI libraries.
+					for those goals. It's less generalized and fully-featured compared to most UI libraries.
 				</p>
 				<p>
 					To learn more see <a href="https://www.fuz.dev/library">the docs</a>
