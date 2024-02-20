@@ -10,6 +10,7 @@ that focus on end-users.
 Fuz emphasizes capability and efficiency and tries to be simple for those goals.
 It's not trying to be as generalized or fully-featured as most UI libraries.
 
+To learn more see <a href="https://www.fuz.dev/library">the docs</a>.
 Feel free to take the ideas and code for your own purposes.
 
 The CSS design system:
