@@ -1,0 +1,466 @@
+{
+  "name": "@ryanatkn/fuz",
+  "version": "0.87.0",
+  "modules": {
+    "./Alert.svelte": {
+      "path": "Alert.svelte",
+      "declarations": []
+    },
+    "./alert.js": {
+      "path": "alert.ts",
+      "declarations": [
+        {
+          "name": "Alert_Status",
+          "kind": "type"
+        },
+        {
+          "name": "Alert_Status_Options",
+          "kind": "type"
+        },
+        {
+          "name": "alert_status_options",
+          "kind": "variable"
+        }
+      ]
+    },
+    "./Breadcrumb.svelte": {
+      "path": "Breadcrumb.svelte",
+      "declarations": []
+    },
+    "./Card.svelte": {
+      "path": "Card.svelte",
+      "declarations": []
+    },
+    "./Color_Scheme_Input.svelte": {
+      "path": "Color_Scheme_Input.svelte",
+      "declarations": []
+    },
+    "./config.js": {
+      "path": "config.ts",
+      "declarations": [
+        {
+          "name": "Fuz_Config",
+          "kind": "variable"
+        },
+        {
+          "name": "load_fuz_config",
+          "kind": "function"
+        }
+      ]
+    },
+    "./Contextmenu_Entry.svelte": {
+      "path": "Contextmenu_Entry.svelte",
+      "declarations": []
+    },
+    "./Contextmenu_Link_Entry.svelte": {
+      "path": "Contextmenu_Link_Entry.svelte",
+      "declarations": []
+    },
+    "./Contextmenu_Submenu.svelte": {
+      "path": "Contextmenu_Submenu.svelte",
+      "declarations": []
+    },
+    "./Contextmenu_Text_Entry.svelte": {
+      "path": "Contextmenu_Text_Entry.svelte",
+      "declarations": []
+    },
+    "./Contextmenu.svelte": {
+      "path": "Contextmenu.svelte",
+      "declarations": []
+    },
+    "./contextmenu.js": {
+      "path": "contextmenu.ts",
+      "declarations": [
+        {
+          "name": "Contextmenu_Params",
+          "kind": "type"
+        },
+        {
+          "name": "Contextmenu_Action_Params",
+          "kind": "type"
+        },
+        {
+          "name": "to_contextmenu_params",
+          "kind": "function"
+        },
+        {
+          "name": "Item_State",
+          "kind": "type"
+        },
+        {
+          "name": "Entry_State",
+          "kind": "type"
+        },
+        {
+          "name": "Submenu_State",
+          "kind": "type"
+        },
+        {
+          "name": "Root_Menu_State",
+          "kind": "type"
+        },
+        {
+          "name": "Contextmenu_Run",
+          "kind": "type"
+        },
+        {
+          "name": "Contextmenu",
+          "kind": "type"
+        },
+        {
+          "name": "Contextmenu_Store",
+          "kind": "type"
+        },
+        {
+          "name": "Contextmenu_Store_Options",
+          "kind": "type"
+        },
+        {
+          "name": "create_contextmenu",
+          "kind": "function"
+        },
+        {
+          "name": "open_contextmenu",
+          "kind": "function"
+        },
+        {
+          "name": "set_contextmenu",
+          "kind": "function"
+        },
+        {
+          "name": "get_contextmenu",
+          "kind": "function"
+        },
+        {
+          "name": "set_contextmenu_submenu",
+          "kind": "function"
+        },
+        {
+          "name": "get_contextmenu_submenu",
+          "kind": "function"
+        },
+        {
+          "name": "set_contextmenu_dimensions",
+          "kind": "function"
+        },
+        {
+          "name": "get_contextmenu_dimensions",
+          "kind": "function"
+        }
+      ]
+    },
+    "./Copy_To_Clipboard.svelte": {
+      "path": "Copy_To_Clipboard.svelte",
+      "declarations": []
+    },
+    "./Devmode_Controls.svelte": {
+      "path": "Devmode_Controls.svelte",
+      "declarations": []
+    },
+    "./devmode.js": {
+      "path": "devmode.ts",
+      "declarations": [
+        {
+          "name": "get_devmode",
+          "kind": "function"
+        },
+        {
+          "name": "set_devmode",
+          "kind": "function"
+        }
+      ]
+    },
+    "./Dialog.svelte": {
+      "path": "Dialog.svelte",
+      "declarations": []
+    },
+    "./dialog.js": {
+      "path": "dialog.ts",
+      "declarations": [
+        {
+          "name": "to_dialog_params",
+          "kind": "function"
+        },
+        {
+          "name": "Dialog_Params",
+          "kind": "type"
+        },
+        {
+          "name": "Dialog_Layout",
+          "kind": "type"
+        },
+        {
+          "name": "dialog_layouts",
+          "kind": "variable"
+        }
+      ]
+    },
+    "./Dialogs.svelte": {
+      "path": "Dialogs.svelte",
+      "declarations": []
+    },
+    "./Github_Logo.svelte": {
+      "path": "Github_Logo.svelte",
+      "declarations": []
+    },
+    "./helpers.js": {
+      "path": "helpers.ts",
+      "declarations": [
+        {
+          "name": "LIBRARY_PATH",
+          "kind": "variable"
+        },
+        {
+          "name": "to_library_path_info",
+          "kind": "function"
+        }
+      ]
+    },
+    "./Hue_Input.svelte": {
+      "path": "Hue_Input.svelte",
+      "declarations": []
+    },
+    "./Library_Footer.svelte": {
+      "path": "Library_Footer.svelte",
+      "declarations": []
+    },
+    "./Library_Header.svelte": {
+      "path": "Library_Header.svelte",
+      "declarations": []
+    },
+    "./Library_Menu.svelte": {
+      "path": "Library_Menu.svelte",
+      "declarations": []
+    },
+    "./Library_Nav.svelte": {
+      "path": "Library_Nav.svelte",
+      "declarations": []
+    },
+    "./Library_Panel.svelte": {
+      "path": "Library_Panel.svelte",
+      "declarations": []
+    },
+    "./Library_Vocab.svelte": {
+      "path": "Library_Vocab.svelte",
+      "declarations": []
+    },
+    "./Library.svelte": {
+      "path": "Library.svelte",
+      "declarations": []
+    },
+    "./Package_Detail.svelte": {
+      "path": "Package_Detail.svelte",
+      "declarations": []
+    },
+    "./Package_Summary.svelte": {
+      "path": "Package_Summary.svelte",
+      "declarations": []
+    },
+    "./Page_Footer.svelte": {
+      "path": "Page_Footer.svelte",
+      "declarations": []
+    },
+    "./Page_Header.svelte": {
+      "path": "Page_Header.svelte",
+      "declarations": []
+    },
+    "./Pending_Animation.svelte": {
+      "path": "Pending_Animation.svelte",
+      "declarations": []
+    },
+    "./Pending_Button.svelte": {
+      "path": "Pending_Button.svelte",
+      "declarations": []
+    },
+    "./Redirect.svelte": {
+      "path": "Redirect.svelte",
+      "declarations": []
+    },
+    "./style.css": {
+      "path": "style.css",
+      "declarations": []
+    },
+    "./swallow.js": {
+      "path": "swallow.ts",
+      "declarations": [
+        {
+          "name": "swallow",
+          "kind": "function"
+        }
+      ]
+    },
+    "./Teleport.svelte": {
+      "path": "Teleport.svelte",
+      "declarations": []
+    },
+    "./Theme_Input.svelte": {
+      "path": "Theme_Input.svelte",
+      "declarations": []
+    },
+    "./theme.css": {
+      "path": "theme.css",
+      "declarations": []
+    },
+    "./theme.gen.css.js": {
+      "path": "theme.gen.css.ts",
+      "declarations": [
+        {
+          "name": "gen",
+          "kind": "variable"
+        }
+      ]
+    },
+    "./theme.js": {
+      "path": "theme.ts",
+      "declarations": [
+        {
+          "name": "Color_Scheme",
+          "kind": "type"
+        },
+        {
+          "name": "color_schemes",
+          "kind": "variable"
+        },
+        {
+          "name": "THEME_COLOR",
+          "kind": "variable"
+        },
+        {
+          "name": "sync_color_scheme",
+          "kind": "function"
+        },
+        {
+          "name": "COLOR_SCHEME_STORAGE_KEY",
+          "kind": "variable"
+        },
+        {
+          "name": "save_color_scheme",
+          "kind": "function"
+        },
+        {
+          "name": "load_color_scheme",
+          "kind": "function"
+        },
+        {
+          "name": "THEME_STORAGE_KEY",
+          "kind": "variable"
+        },
+        {
+          "name": "save_theme",
+          "kind": "function"
+        },
+        {
+          "name": "load_theme",
+          "kind": "function"
+        },
+        {
+          "name": "create_theme_setup_script",
+          "kind": "function"
+        },
+        {
+          "name": "create_theme_style_html",
+          "kind": "function"
+        },
+        {
+          "name": "Theme",
+          "kind": "type"
+        },
+        {
+          "name": "Theme_Variable",
+          "kind": "type"
+        },
+        {
+          "name": "Render_Theme_Style_Options",
+          "kind": "type"
+        },
+        {
+          "name": "render_theme_style",
+          "kind": "function"
+        },
+        {
+          "name": "render_theme_variable",
+          "kind": "function"
+        },
+        {
+          "name": "get_theme",
+          "kind": "function"
+        },
+        {
+          "name": "set_theme",
+          "kind": "function"
+        },
+        {
+          "name": "get_color_scheme",
+          "kind": "function"
+        },
+        {
+          "name": "set_color_scheme",
+          "kind": "function"
+        }
+      ]
+    },
+    "./Themed_Scope.svelte": {
+      "path": "Themed_Scope.svelte",
+      "declarations": []
+    },
+    "./Themed.svelte": {
+      "path": "Themed.svelte",
+      "declarations": []
+    },
+    "./themes.js": {
+      "path": "themes.ts",
+      "declarations": [
+        {
+          "name": "DEFAULT_THEME",
+          "kind": "variable"
+        },
+        {
+          "name": "default_themes",
+          "kind": "variable"
+        }
+      ]
+    },
+    "./Tome_Detail.svelte": {
+      "path": "Tome_Detail.svelte",
+      "declarations": []
+    },
+    "./Tome_Title.svelte": {
+      "path": "Tome_Title.svelte",
+      "declarations": []
+    },
+    "./tome.js": {
+      "path": "tome.ts",
+      "declarations": [
+        {
+          "name": "Tome",
+          "kind": "variable"
+        },
+        {
+          "name": "init_tome",
+          "kind": "function"
+        },
+        {
+          "name": "get_tomes",
+          "kind": "function"
+        },
+        {
+          "name": "set_tomes",
+          "kind": "function"
+        },
+        {
+          "name": "get_tome",
+          "kind": "function"
+        }
+      ]
+    },
+    "./variables.js": {
+      "path": "variables.ts",
+      "declarations": [
+        {
+          "name": "default_variables",
+          "kind": "variable"
+        }
+      ]
+    }
+  }
+}
