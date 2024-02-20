@@ -34,6 +34,12 @@ export const default_variables: Theme_Variable[] = [
 		dark: 'hsl(var(--hue_2), 45%, 70%)',
 		summary: 'same as THEME_COLOR',
 	},
+	{name: 'hue_5', light: '0', summary: 'red'},
+	{
+		name: 'color_c',
+		light: 'hsl(var(--hue_5), 50%, 50%)',
+		dark: 'hsl(var(--hue_5), 50%, 65%)',
+	},
 	{name: 'hue_3', light: '251', summary: 'purple, triad with `--color_b` and `--color_e`'},
 	{
 		name: 'color_d',
@@ -45,12 +51,6 @@ export const default_variables: Theme_Variable[] = [
 		name: 'color_e',
 		light: 'hsl(var(--hue_4), 55%, 50%)',
 		dark: 'hsl(var(--hue_4), 65%, 75%)',
-	},
-	{name: 'hue_5', light: '0', summary: 'red'},
-	{
-		name: 'color_c',
-		light: 'hsl(var(--hue_5), 50%, 50%)',
-		dark: 'hsl(var(--hue_5), 50%, 65%)',
 	},
 	{name: 'hue_6', light: '32', summary: 'brown'},
 	{
