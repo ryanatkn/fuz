@@ -21,9 +21,10 @@
 					many breaking changes.
 				</p>
 				<p>
-					Fuz is being made to support other projects that focus on end-users with emphasis on
-					capability and efficiency. It's not trying to be as generalized as most UI libraries. Feel
-					free to take the ideas and code for your own purposes.
+					Fuz is being made to support <a href="https://www.ryanatkn.com/table">other projects</a> that
+					focus on end-users. Fuz emphasizes capability and efficiency and tries to be simple for those
+					goals. It's not trying to be as generalized or fully-featured as most UI libraries. Feel free
+					to take the ideas and code for your own purposes.
 				</p>
 			</div>
 		</section>
