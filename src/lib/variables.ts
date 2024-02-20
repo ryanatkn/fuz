@@ -23,44 +23,44 @@ export const default_variables: Theme_Variable[] = [
 	/* colors */
 	{name: 'hue_1', light: '210', summary: 'blue'} /* TODO midpoint? */,
 	{
-		name: 'color_1',
+		name: 'color_a',
 		light: 'hsl(var(--hue_1), 55%, 50%)',
 		dark: 'hsl(var(--hue_1), 55%, 75%)',
 	},
-	{name: 'hue_2', light: '120', summary: 'green, triad with `--color_3` and `--color_4`'},
+	{name: 'hue_2', light: '120', summary: 'green, triad with `--color_d` and `--color_e`'},
 	{
-		name: 'color_2',
+		name: 'color_b',
 		light: 'hsl(var(--hue_2), 55%, 32%)',
 		dark: 'hsl(var(--hue_2), 45%, 70%)',
 		summary: 'same as THEME_COLOR',
 	},
-	{name: 'hue_3', light: '251', summary: 'purple, triad with `--color_2` and `--color_4`'},
+	{name: 'hue_3', light: '251', summary: 'purple, triad with `--color_b` and `--color_e`'},
 	{
-		name: 'color_3',
+		name: 'color_d',
 		light: 'hsl(var(--hue_3), 50%, 50%)',
 		dark: 'hsl(var(--hue_3), 50%, 75%)',
 	},
-	{name: 'hue_4', light: '26', summary: 'orange, triad with `--color_2` and `--color_3`'},
+	{name: 'hue_4', light: '26', summary: 'orange, triad with `--color_b` and `--color_d`'},
 	{
-		name: 'color_4',
+		name: 'color_e',
 		light: 'hsl(var(--hue_4), 55%, 50%)',
 		dark: 'hsl(var(--hue_4), 65%, 75%)',
 	},
 	{name: 'hue_5', light: '0', summary: 'red'},
 	{
-		name: 'color_5',
+		name: 'color_c',
 		light: 'hsl(var(--hue_5), 50%, 50%)',
 		dark: 'hsl(var(--hue_5), 50%, 65%)',
 	},
 	{name: 'hue_6', light: '32', summary: 'brown'},
 	{
-		name: 'color_6',
+		name: 'color_f',
 		light: 'hsl(var(--hue_6), 97%, 22%)',
 		dark: 'hsl(var(--hue_6), 32%, 75%)',
 	},
 	{name: 'hue_7', light: '335', summary: 'pink'},
 	{
-		name: 'color_7',
+		name: 'color_g',
 		light: 'hsl(var(--hue_7), 74%, 56%)',
 		dark: 'hsl(var(--hue_7), 74%, 76%)',
 	},
@@ -254,7 +254,7 @@ export const default_variables: Theme_Variable[] = [
 	{name: 'outline_width_2', light: 'var(--border_width_2)'},
 	{name: 'outline_width_3', light: 'var(--border_width_1)'},
 	{name: 'outline_style', light: 'solid'},
-	{name: 'outline_color', light: 'var(--color_1)'},
+	{name: 'outline_color', light: 'var(--color_a)'},
 
 	/* button colors */
 	{name: 'button_bg', light: 'var(--fg_1)'},

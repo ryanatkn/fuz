@@ -411,7 +411,7 @@
   - add and publish `$lib/Color_Scheme_Input.svelte`
   - remove the `error` param from `createContextmenu` and add the `contextmenu.error` store
   - rename `.prose` from `.markup`
-  - replace `--active_color` and `--active_color_2` with `--color_N`
+  - replace `--active_color` and `--active_color_b` with `--color_N`
   - rename `--button_color_X` to `--button_X`, `--border_color_X` to `--border_X`,
     and `--link_color_X` to `--link_X`
   - replace `--text_color_light` and `--text_color_lighter` with
