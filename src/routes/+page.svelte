@@ -21,11 +21,14 @@
 					many breaking changes.
 				</p>
 				<p>
-					Fuz is being made to support my <a href="https://www.ryanatkn.com/table">other projects</a
+					Fuz is being made to support <a href="https://www.ryanatkn.com/table">my other projects</a
 					> that focus on end-users. Fuz emphasizes capability and efficiency and tries to be simple
 					for those goals. It's not trying to be as generalized or fully-featured as most UI libraries.
 				</p>
-				<p>Feel free to take the ideas and code for your own purposes.</p>
+				<p>
+					Feel free to take the ideas and <a href="https://github.com/ryanatkn/fuz">code</a> for your
+					own purposes.
+				</p>
 			</div>
 		</section>
 		<section>
