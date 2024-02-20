@@ -26,9 +26,9 @@
 					for those goals. It's not trying to be as generalized or fully-featured as most UI libraries.
 				</p>
 				<p>
-					Feel free to take the ideas and <a href="https://github.com/ryanatkn/fuz">code</a> for
-					your own purposes. To learn more see <a href="https://www.fuz.dev/library">the docs</a>
-					and <a href="https://github.com/ryanatkn/fuz#readme">readme</a>.
+					To learn more see <a href="https://www.fuz.dev/library">the docs</a>
+					and <a href="https://github.com/ryanatkn/fuz#readme">readme</a>. Feel free to take the
+					ideas and <a href="https://github.com/ryanatkn/fuz">code</a> for your own purposes.
 				</p>
 			</div>
 		</section>
