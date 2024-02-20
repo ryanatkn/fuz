@@ -2,20 +2,20 @@
 
 /* theme: base */
 :root {
-	--hue_1: 210; /* blue */
-	--color_a: hsl(var(--hue_1), 55%, 50%);
-	--hue_2: 120; /* green, triad with `--color_d` and `--color_e` */
-	--color_b: hsl(var(--hue_2), 55%, 32%); /* same as THEME_COLOR */
-	--hue_3: 251; /* purple, triad with `--color_b` and `--color_e` */
-	--color_d: hsl(var(--hue_3), 50%, 50%);
-	--hue_4: 26; /* orange, triad with `--color_b` and `--color_d` */
-	--color_e: hsl(var(--hue_4), 55%, 50%);
-	--hue_5: 0; /* red */
-	--color_c: hsl(var(--hue_5), 50%, 50%);
-	--hue_6: 32; /* brown */
-	--color_f: hsl(var(--hue_6), 97%, 22%);
-	--hue_7: 335; /* pink */
-	--color_g: hsl(var(--hue_7), 74%, 56%);
+	--hue_a: 210; /* blue */
+	--color_a: hsl(var(--hue_a), 55%, 50%);
+	--hue_b: 120; /* green, triad with `--color_d` and `--color_e` */
+	--color_b: hsl(var(--hue_b), 55%, 32%); /* same as THEME_COLOR */
+	--hue_c: 0; /* red */
+	--color_c: hsl(var(--hue_c), 50%, 50%);
+	--hue_d: 251; /* purple, triad with `--color_b` and `--color_e` */
+	--color_d: hsl(var(--hue_d), 50%, 50%);
+	--hue_e: 26; /* orange, triad with `--color_b` and `--color_d` */
+	--color_e: hsl(var(--hue_e), 55%, 50%);
+	--hue_f: 32; /* brown */
+	--color_f: hsl(var(--hue_f), 97%, 22%);
+	--hue_g: 335; /* pink */
+	--color_g: hsl(var(--hue_g), 74%, 56%);
 	--darken_1: #0000000f; /* 6% */
 	--darken_2: #0000001f; /* 12% */
 	--darken_3: #00000036; /* 21% */
@@ -34,7 +34,7 @@
 	--lighten_7: #ffffffcc; /* 80% */
 	--lighten_8: #ffffffe3; /* 89% */
 	--lighten_9: #fffffff5; /* 96% */
-	--tint_hue: var(--hue_4);
+	--tint_hue: var(--hue_e);
 	--tint_saturation: 11%;
 	--bg: hsl(var(--tint_hue), var(--tint_saturation), 96%);
 	--fg: hsl(var(--tint_hue), var(--tint_saturation), 6%);
@@ -63,7 +63,7 @@
 	--text_2: hsl(var(--tint_hue), var(--tint_saturation), 32%);
 	--text_3: hsl(var(--tint_hue), var(--tint_saturation), 48%);
 	--text_disabled: var(--text_3);
-	--text_active: hsl(var(--hue_1), 55%, 40%);
+	--text_active: hsl(var(--hue_a), 55%, 40%);
 	--line_height: var(--line_height_5);
 	--line_height_1: 1;
 	--line_height_2: 1.1;
@@ -88,7 +88,7 @@
 	--size_7: 10.97rem;
 	--size_8: 13.95rem;
 	--size_9: 17.74rem;
-	--link_color: hsl(var(--hue_1), 61%, 35%);
+	--link_color: hsl(var(--hue_a), 61%, 35%);
 	--text_decoration: none;
 	--text_decoration_hover: underline;
 	--text_decoration_selected: underline;
@@ -183,13 +183,13 @@
 	--border_radius_xs2: calc(var(--border_radius_xs) / 1.618);
 }
 :root.dark {
-	--color_a: hsl(var(--hue_1), 55%, 75%);
-	--color_b: hsl(var(--hue_2), 45%, 70%); /* same as THEME_COLOR */
-	--color_d: hsl(var(--hue_3), 50%, 75%);
-	--color_e: hsl(var(--hue_4), 65%, 75%);
-	--color_c: hsl(var(--hue_5), 50%, 65%);
-	--color_f: hsl(var(--hue_6), 32%, 75%);
-	--color_g: hsl(var(--hue_7), 74%, 76%);
+	--color_a: hsl(var(--hue_a), 55%, 75%);
+	--color_b: hsl(var(--hue_b), 45%, 70%); /* same as THEME_COLOR */
+	--color_c: hsl(var(--hue_c), 50%, 65%);
+	--color_d: hsl(var(--hue_d), 50%, 75%);
+	--color_e: hsl(var(--hue_e), 65%, 75%);
+	--color_f: hsl(var(--hue_f), 32%, 75%);
+	--color_g: hsl(var(--hue_g), 74%, 76%);
 	--bg: hsl(var(--tint_hue), var(--tint_saturation), 6%);
 	--fg: hsl(var(--tint_hue), var(--tint_saturation), 96%);
 	--bg_1: var(--darken_1);
@@ -215,8 +215,8 @@
 	--text_1: hsl(var(--tint_hue), var(--tint_saturation), 80%);
 	--text_2: hsl(var(--tint_hue), var(--tint_saturation), 65%);
 	--text_3: hsl(var(--tint_hue), var(--tint_saturation), 50%);
-	--text_active: hsl(var(--hue_1), 65%, 65%);
-	--link_color: hsl(var(--hue_1), 61%, 58%);
+	--text_active: hsl(var(--hue_a), 65%, 65%);
+	--link_color: hsl(var(--hue_a), 61%, 58%);
 	--border_1: hsl(var(--tint_hue), 60%, 80%, 85%);
 	--border_2: hsl(var(--tint_hue), 60%, 80%, 70%);
 	--border_3: hsl(var(--tint_hue), 60%, 80%, 50%);

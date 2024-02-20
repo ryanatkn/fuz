@@ -21,48 +21,48 @@ TODO lots of things here to address:
  */
 export const default_variables: Theme_Variable[] = [
 	/* colors */
-	{name: 'hue_1', light: '210', summary: 'blue'} /* TODO midpoint? */,
+	{name: 'hue_a', light: '210', summary: 'blue'} /* TODO midpoint? */,
 	{
 		name: 'color_a',
-		light: 'hsl(var(--hue_1), 55%, 50%)',
-		dark: 'hsl(var(--hue_1), 55%, 75%)',
+		light: 'hsl(var(--hue_a), 55%, 50%)',
+		dark: 'hsl(var(--hue_a), 55%, 75%)',
 	},
-	{name: 'hue_2', light: '120', summary: 'green, triad with `--color_d` and `--color_e`'},
+	{name: 'hue_b', light: '120', summary: 'green, triad with `--color_d` and `--color_e`'},
 	{
 		name: 'color_b',
-		light: 'hsl(var(--hue_2), 55%, 32%)',
-		dark: 'hsl(var(--hue_2), 45%, 70%)',
+		light: 'hsl(var(--hue_b), 55%, 32%)',
+		dark: 'hsl(var(--hue_b), 45%, 70%)',
 		summary: 'same as THEME_COLOR',
 	},
-	{name: 'hue_5', light: '0', summary: 'red'},
+	{name: 'hue_c', light: '0', summary: 'red'},
 	{
 		name: 'color_c',
-		light: 'hsl(var(--hue_5), 50%, 50%)',
-		dark: 'hsl(var(--hue_5), 50%, 65%)',
+		light: 'hsl(var(--hue_c), 50%, 50%)',
+		dark: 'hsl(var(--hue_c), 50%, 65%)',
 	},
-	{name: 'hue_3', light: '251', summary: 'purple, triad with `--color_b` and `--color_e`'},
+	{name: 'hue_d', light: '251', summary: 'purple, triad with `--color_b` and `--color_e`'},
 	{
 		name: 'color_d',
-		light: 'hsl(var(--hue_3), 50%, 50%)',
-		dark: 'hsl(var(--hue_3), 50%, 75%)',
+		light: 'hsl(var(--hue_d), 50%, 50%)',
+		dark: 'hsl(var(--hue_d), 50%, 75%)',
 	},
-	{name: 'hue_4', light: '26', summary: 'orange, triad with `--color_b` and `--color_d`'},
+	{name: 'hue_e', light: '26', summary: 'orange, triad with `--color_b` and `--color_d`'},
 	{
 		name: 'color_e',
-		light: 'hsl(var(--hue_4), 55%, 50%)',
-		dark: 'hsl(var(--hue_4), 65%, 75%)',
+		light: 'hsl(var(--hue_e), 55%, 50%)',
+		dark: 'hsl(var(--hue_e), 65%, 75%)',
 	},
-	{name: 'hue_6', light: '32', summary: 'brown'},
+	{name: 'hue_f', light: '32', summary: 'brown'},
 	{
 		name: 'color_f',
-		light: 'hsl(var(--hue_6), 97%, 22%)',
-		dark: 'hsl(var(--hue_6), 32%, 75%)',
+		light: 'hsl(var(--hue_f), 97%, 22%)',
+		dark: 'hsl(var(--hue_f), 32%, 75%)',
 	},
-	{name: 'hue_7', light: '335', summary: 'pink'},
+	{name: 'hue_g', light: '335', summary: 'pink'},
 	{
 		name: 'color_g',
-		light: 'hsl(var(--hue_7), 74%, 56%)',
-		dark: 'hsl(var(--hue_7), 74%, 76%)',
+		light: 'hsl(var(--hue_g), 74%, 56%)',
+		dark: 'hsl(var(--hue_g), 74%, 76%)',
 	},
 
 	/* color variants */
@@ -88,7 +88,7 @@ export const default_variables: Theme_Variable[] = [
 	{name: 'lighten_9', light: '#fffffff5', summary: '96%'},
 
 	/* tint colors */
-	{name: 'tint_hue', light: 'var(--hue_4)'},
+	{name: 'tint_hue', light: 'var(--hue_e)'},
 	{name: 'tint_saturation', light: '11%'},
 
 	/* bg colors */
@@ -144,8 +144,8 @@ export const default_variables: Theme_Variable[] = [
 	{name: 'text_disabled', light: 'var(--text_3)'},
 	{
 		name: 'text_active',
-		light: 'hsl(var(--hue_1), 55%, 40%);',
-		dark: 'hsl(var(--hue_1), 65%, 65%);',
+		light: 'hsl(var(--hue_a), 55%, 40%);',
+		dark: 'hsl(var(--hue_a), 65%, 65%);',
 	},
 
 	/* fonts */
@@ -184,8 +184,8 @@ export const default_variables: Theme_Variable[] = [
 	/* links */
 	{
 		name: 'link_color',
-		light: 'hsl(var(--hue_1), 61%, 35%)',
-		dark: 'hsl(var(--hue_1), 61%, 58%)',
+		light: 'hsl(var(--hue_a), 61%, 35%)',
+		dark: 'hsl(var(--hue_a), 61%, 58%)',
 	},
 	{name: 'text_decoration', light: 'none'},
 	{name: 'text_decoration_hover', light: 'underline'},

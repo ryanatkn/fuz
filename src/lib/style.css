@@ -45,7 +45,7 @@ body {
 }
 
 ::selection {
-	background: hsla(var(--hue_1), 80%, 80%, var(--faded_3));
+	background: hsla(var(--hue_a), 80%, 80%, var(--faded_3));
 }
 
 /*
