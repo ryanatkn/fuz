@@ -12,6 +12,8 @@
 	let selected_deselectable_button = true;
 
 	// TODO probably want to put the buttons in a more consistent format so we can include `disabled` versions of each in a condensed format
+
+	const color_names = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
 </script>
 
 <Tome_Detail {tome}>
@@ -28,16 +30,15 @@
 		<h3>colorful buttons</h3>
 	</section>
 	<br />
-	{#each {length: 7} as _, i}
-		<Code content={`<button class="color_${i + 1}">`} />
-		<button class="color_{i + 1}">.color_{i + 1}</button>
-		<button class="color_{i + 1}" disabled>disabled .color_{i + 1}</button>
-		<button class="color_{i + 1} selected">.color_{i + 1}.selected</button>
-		<button class="color_{i + 1} selected" disabled>disabled .color_{i + 1}.selected</button>
-		<button class="color_{i + 1} selected deselectable">.color_{i + 1}.selected.deselectable</button
-		>
-		<button class="color_{i + 1} selected deselectable" disabled
-			>disabled .color_{i + 1}.selected.deselectable</button
+	{#each color_names as c}
+		<Code content={`<button class="color_${c}">`} />
+		<button class="color_{c}">.color_{c}</button>
+		<button class="color_{c}" disabled>disabled .color_{c}</button>
+		<button class="color_{c} selected">.color_{c}.selected</button>
+		<button class="color_{c} selected" disabled>disabled .color_{c}.selected</button>
+		<button class="color_{c} selected deselectable">.color_{c}.selected.deselectable</button>
+		<button class="color_{c} selected deselectable" disabled
+			>disabled .color_{c}.selected.deselectable</button
 		>
 		<br />
 	{/each}

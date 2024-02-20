@@ -41,7 +41,7 @@
 		border: var(--border_width) double var(--border_color);
 	}
 	.logo a:hover {
-		--border_color: var(--color_1);
+		--border_color: var(--color_a);
 	}
 	.root_url {
 		/* TODO messy */

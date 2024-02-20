@@ -12,12 +12,22 @@
 
 <main class="box width_full">
 	<div class="box width_md">
-		<div class="prose box">
+		<section class="prose box">
 			<h1>fuz</h1>
-			<section>
-				<blockquote>friendly user zystem</blockquote>
-			</section>
-		</div>
+			<blockquote>friendly user zystem</blockquote>
+			<div class="width_sm panel padded_md">
+				<p>
+					Fuz is a Svelte UI library and CSS design system. It's in early alpha and there will be
+					many breaking changes.
+				</p>
+				<p>
+					Fuz is being made to support my <a href="https://www.ryanatkn.com/table">other projects</a
+					> that focus on end-users. Fuz emphasizes capability and efficiency and tries to be simple
+					for those goals. It's not trying to be as generalized or fully-featured as most UI libraries.
+				</p>
+				<p>Feel free to take the ideas and code for your own purposes.</p>
+			</div>
+		</section>
 		<section>
 			<Card href="{base}/library">library<svelte:fragment slot="icon">🧶</svelte:fragment></Card>
 		</section>

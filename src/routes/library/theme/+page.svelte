@@ -38,7 +38,7 @@
 
 <Tome_Detail {tome}>
 	<section class="theme box panel">
-		<div class="prose width_sm">
+		<div class="prose">
 			<p>
 				<code>Themed</code> adds global support for both the browser's
 				<code
@@ -97,7 +97,7 @@
 		</div>
 	</section>
 	<section class="theme box panel">
-		<div class="prose width_sm">
+		<div class="prose">
 			<h3>color scheme</h3>
 			<p>
 				<code>Themed</code> defaults to automatic
@@ -149,7 +149,7 @@
 		</div>
 	</section>
 	<section class="theme box panel">
-		<div class="prose width_sm">
+		<div class="prose">
 			<h3>themes</h3>
 			<p>
 				A theme is a simple JSON collection of <Library_Vocab name="variables" /> that can be transformed
@@ -160,7 +160,9 @@
 			</p>
 			<aside>The builtin themes need more work, but the proof of concept is ready!</aside>
 			<!-- TODO explain when exported <Code code={`<Theme_Input\n\t{themes}\n\t{selected_theme}\n/>`} /> -->
-			<Theme_Input {themes} enable_editing={true} on:edit={(e) => (editing_theme = e.detail)} />
+			<div class="width_sm">
+				<Theme_Input {themes} enable_editing={true} on:edit={(e) => (editing_theme = e.detail)} />
+			</div>
 			<button class="spaced" on:click={() => (show_create_theme_dialog = true)} disabled={true}
 				>create a new theme (todo)</button
 			>
@@ -171,12 +173,12 @@
 		</div>
 	</section>
 	<section class="theme box panel">
-		<div class="spaced prose width_sm">
+		<div class="spaced prose">
 			<h3>scoped themes</h3>
 		</div>
 		<details>
 			<summary>⚠️ scoped themes are a work in progress</summary>
-			<div class="spaced prose width_sm">
+			<div class="spaced prose">
 				<p>Scope a theme to one branch of the DOM tree with <code>Themed_Scope</code>:</p>
 				<Code
 					content={`import Themed_Scope from\n\t'@ryanatkn/fuz/Themed_Scope.svelte';`}
@@ -318,7 +320,7 @@ $selected_color_scheme; // '${$selected_color_scheme}'`}
 {#if show_create_theme_dialog}
 	<Dialog on:close={() => (show_create_theme_dialog = false)} let:close>
 		<div class="pane">
-			<div class="theme-editor-wrapper panel">
+			<div class="theme_editor_wrapper panel">
 				<Theme_Form
 					on:create={(e) => {
 						themes = themes.concat(e.detail);
@@ -332,7 +334,7 @@ $selected_color_scheme; // '${$selected_color_scheme}'`}
 {#if editing_theme}
 	<Dialog on:close={() => (editing_theme = null)}>
 		<div class="pane">
-			<div class="theme-editor-wrapper panel">
+			<div class="theme_editor_wrapper panel">
 				<Theme_Form
 					theme={editing_theme}
 					on:save={(e) => {
@@ -352,7 +354,7 @@ $selected_color_scheme; // '${$selected_color_scheme}'`}
 	section {
 		margin-bottom: var(--spacing_6);
 	}
-	.theme-editor-wrapper {
+	.theme_editor_wrapper {
 		width: var(--width_md);
 		padding: var(--spacing_lg);
 	}

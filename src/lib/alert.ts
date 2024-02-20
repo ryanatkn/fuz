@@ -9,6 +9,6 @@ export interface Alert_Status_Options {
 
 export const alert_status_options: Record<Alert_Status, Alert_Status_Options> = {
 	inform: {color: 'var(--text_2)', icon: '🗨️'},
-	help: {color: 'var(--color_2)', icon: '🍀'},
-	error: {color: 'var(--color_5)', icon: '⁉'},
+	help: {color: 'var(--color_b)', icon: '🍀'},
+	error: {color: 'var(--color_c)', icon: '⁉'},
 };
