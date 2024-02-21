@@ -26,17 +26,20 @@
 </script>
 
 <Tome_Detail {tome}>
-	<section class="prose width_sm">
-		<blockquote>
-			{variables.length} theme variables
-		</blockquote>
-		<aside>
+	<section class="prose">
+		<p>
 			Variables are <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/--*"
 				>CSS custom properties</a
 			>
 			that can be grouped into a <Library_Vocab name="theme" />. Each variable can have values for
 			light and/or dark color schemes.
-		</aside>
+		</p>
+		<p>
+			Compared to most systems not based on CSS custom properties, variables are more easily changed
+			at runtime by developers and end-users. The goal is to provide runtime theming with minimal
+			overhead. Variables also double as an interface that user-generated content can safely use.
+			Stay tuned for examples.
+		</p>
 		<Code
 			lang="ts"
 			content={`export interface Theme {
@@ -53,6 +56,9 @@ export interface Theme_Variable {
 	summary?: string;
 }`}
 		/>
+		<blockquote>
+			{variables.length} theme variables
+		</blockquote>
 	</section>
 	<section class="box">
 		<!-- TODO add info through the contextmenu or dialog -->

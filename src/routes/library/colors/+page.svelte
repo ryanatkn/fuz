@@ -16,9 +16,9 @@
 	<section class="prose">
 		<h3>Semantics</h3>
 		<p>
-			Fuz provides a selection of colors designed to support theming by both developers and
-			end-users. Instead of "blue" and "red" they're named with letters like "a" and "b", so you can
-			change "a" from blue to any color without getting weird.
+			Fuz provides a palette of colors designed to support theming by both developers and end-users
+			at runtime. Instead of "blue" and "red" they're named with letters like "a" and "b", so you
+			can change "a" from blue to any color without getting weird.
 		</p>
 		<ul>
 			<li><code>color_a</code> - primary</li>
@@ -50,17 +50,15 @@
 	</div>
 	<ul class="palette">
 		{#each color_names as color_name}
-			<li>
-				<ul class="swatch">
-					{#each {length: 9} as _, i}
-						{@const num = i + 1}
-						<li class="color">
-							<div class="example" style:background-color="var(--color_{color_name}_{num})"></div>
-							<div>color_{color_name}_{num}</div>
-						</li>
-					{/each}
-				</ul>
-			</li>
+			<ul class="swatch">
+				{#each {length: 9} as _, i}
+					{@const num = i + 1}
+					<li class="color">
+						<div class="example" style:background-color="var(--color_{color_name}_{num})"></div>
+						<div>color_{color_name}_{num}</div>
+					</li>
+				{/each}
+			</ul>
 		{/each}
 	</ul>
 	<br />
