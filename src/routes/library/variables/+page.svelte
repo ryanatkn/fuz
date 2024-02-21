@@ -56,11 +56,11 @@ export interface Theme_Variable {
 	summary?: string;
 }`}
 		/>
-		<blockquote>
-			{variables.length} theme variables
-		</blockquote>
 	</section>
 	<section class="box">
+		<blockquote class="spaced">
+			{variables.length} theme variables
+		</blockquote>
 		<!-- TODO add info through the contextmenu or dialog -->
 		<div class="variables">
 			{#each variables as variable (variable.name)}
