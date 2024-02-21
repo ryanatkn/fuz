@@ -6,7 +6,6 @@
 	import Library_Vocab from '$lib/Library_Vocab.svelte';
 	import Dialog from '$lib/Dialog.svelte';
 	import {get_tome} from '$lib/tome.js';
-	import Alert from '$lib/Alert.svelte';
 	import {default_variables} from '$lib/variables.js';
 	import type {Theme_Variable} from '$lib/theme.js';
 	import Theme_Variable_Detail from '$routes/Theme_Variable_Detail.svelte';
@@ -40,6 +39,13 @@
 			overhead. Variables also double as an interface that user-generated content can safely use.
 			Stay tuned for examples.
 		</p>
+		<blockquote>
+			Variables are <code>snake_case</code> so that they're also valid JS identifiers, not for stylistic
+			or contrarian reasons. This choice leaks to the CSS class naming conventions, so that variable-derived
+			utility classes match their corresponding variable names. This topic needs a blog post.
+		</blockquote>
+	</section>
+	<section>
 		<Code
 			lang="ts"
 			content={`export interface Theme {
@@ -69,15 +75,6 @@ export interface Theme_Variable {
 				>
 			{/each}
 		</div>
-	</section>
-	<section>
-		<Alert icon="🕸">
-			<p class="prose">
-				Variables are <code>snake_case</code> so that they're also valid JS identifiers, not for stylistic
-				or contrarian reasons. This choice leaks to the CSS class naming conventions, so that variable-derived
-				utility classes match their corresponding variable names. This topic needs a blog post.
-			</p>
-		</Alert>
 	</section>
 </Tome_Detail>
 {#if selected_variable}

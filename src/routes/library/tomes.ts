@@ -7,7 +7,6 @@ import typography from '$routes/library/typography/+page.svelte';
 import theme from '$routes/library/theme/+page.svelte';
 import variables from '$routes/library/variables/+page.svelte';
 import prose from '$routes/library/prose/+page.svelte';
-import icon_sizes from '$routes/library/icon_sizes/+page.svelte';
 import Pending_Animation from '$routes/library/Pending_Animation/+page.svelte';
 import Pending_Button from '$routes/library/Pending_Button/+page.svelte';
 import Package_Summary from '$routes/library/Package_Summary/+page.svelte';
@@ -30,7 +29,15 @@ export const tomes: Tome[] = [
 		pathname: '',
 		category: 'styles',
 		component: theme,
-		related: ['colors', 'icon sizes', 'typography', 'variables'],
+		related: ['colors', 'typography', 'variables'],
+	},
+	{
+		name: 'variables',
+		slug: 'variables',
+		pathname: '',
+		category: 'styles',
+		component: variables,
+		related: ['theme', 'typography'],
 	},
 	{
 		name: 'colors',
@@ -65,14 +72,6 @@ export const tomes: Tome[] = [
 		related: ['buttons', 'elements', 'prose', 'Hue_Input'],
 	},
 	{
-		name: 'icon sizes',
-		slug: 'icon_sizes',
-		pathname: '',
-		category: 'styles',
-		component: icon_sizes,
-		related: ['theme', 'typography', 'variables'],
-	},
-	{
 		name: 'prose',
 		slug: 'prose',
 		pathname: '',
@@ -86,15 +85,7 @@ export const tomes: Tome[] = [
 		pathname: '',
 		category: 'styles',
 		component: typography,
-		related: ['theme', 'icon sizes', 'prose', 'variables'],
-	},
-	{
-		name: 'variables',
-		slug: 'variables',
-		pathname: '',
-		category: 'styles',
-		component: variables,
-		related: ['theme', 'icon sizes', 'typography'],
+		related: ['theme', 'prose', 'variables'],
 	},
 	// TODO maybe? or do styles like this belong elsewhere? classes? problem is we'll have a classes page for the variables
 	// {

@@ -45,9 +45,9 @@
 					><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme">color-scheme</a
 					></code
 				>
-				and custom themes based on
+				and custom themes based on <Library_Vocab name="variables" />, which use
 				<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties"
-					>CSS variables</a
+					>CSS custom properties</a
 				>. <code>Themed</code> is a singleton component that's mounted at the top-level of the page:
 			</p>
 			<Code content={`import Themed from\n\t'@ryanatkn/fuz/Themed.svelte';`} lang="ts" />
@@ -155,7 +155,7 @@
 				A theme is a simple JSON collection of <Library_Vocab name="variables" /> that can be transformed
 				into CSS that set
 				<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties"
-					>CSS variables</a
+					>CSS custom properties</a
 				>. Each variable can have values for light and/or dark color schemes.
 			</p>
 			<aside>The builtin themes need more work, but the proof of concept is ready!</aside>
