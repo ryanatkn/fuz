@@ -73,7 +73,9 @@ export interface Theme_Variable {
 	<section>
 		<Alert icon="🕸">
 			<p class="prose">
-				variables are <code>snake_case</code> so they're also valid js identifiers
+				Variables are <code>snake_case</code> so that they're also valid JS identifiers, not for stylistic
+				or contrarian reasons. This choice leaks to the CSS class naming conventions, so that variable-derived
+				utility classes match their corresponding variable names. This topic needs a blog post.
 			</p>
 		</Alert>
 	</section>
