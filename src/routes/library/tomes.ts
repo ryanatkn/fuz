@@ -1,4 +1,5 @@
 import {init_tome, type Tome} from '$lib/tome.js';
+import colors from '$routes/library/colors/+page.svelte';
 import buttons from '$routes/library/buttons/+page.svelte';
 import forms from '$routes/library/forms/+page.svelte';
 import elements from '$routes/library/elements/+page.svelte';
@@ -29,7 +30,15 @@ export const tomes: Tome[] = [
 		pathname: '',
 		category: 'styles',
 		component: theme,
-		related: ['icon sizes', 'typography', 'variables'],
+		related: ['colors', 'icon sizes', 'typography', 'variables'],
+	},
+	{
+		name: 'colors',
+		slug: 'colors',
+		pathname: '',
+		category: 'styles',
+		component: colors,
+		related: ['theme', 'buttons'],
 	},
 	{
 		name: 'buttons',
@@ -37,15 +46,7 @@ export const tomes: Tome[] = [
 		pathname: '',
 		category: 'styles',
 		component: buttons,
-		related: ['forms', 'elements', 'prose'],
-	},
-	{
-		name: 'forms',
-		slug: 'forms',
-		pathname: '',
-		category: 'styles',
-		component: forms,
-		related: ['buttons', 'elements', 'prose', 'Hue_Input'],
+		related: ['colors', 'elements', 'forms', 'prose'],
 	},
 	{
 		name: 'elements',
@@ -54,6 +55,14 @@ export const tomes: Tome[] = [
 		category: 'styles',
 		component: elements,
 		related: ['buttons', 'forms', 'prose'],
+	},
+	{
+		name: 'forms',
+		slug: 'forms',
+		pathname: '',
+		category: 'styles',
+		component: forms,
+		related: ['buttons', 'elements', 'prose', 'Hue_Input'],
 	},
 	{
 		name: 'icon sizes',

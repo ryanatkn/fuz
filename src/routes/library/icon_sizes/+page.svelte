@@ -21,9 +21,9 @@
 
 <Tome_Detail {tome}>
 	<section class="prose box">
-		<div class="width_sm text_align_center">
+		<div>
 			<h3>the <code>--icon_size</code> variable's variants</h3>
-			<blockquote>
+			<blockquote class="width_sm">
 				unlike <code>--size_</code> variables, <code>--icon_</code> variables are in
 				<code>px</code>
 				not <code>rem</code>, so they're insensitive to browser font size
@@ -111,17 +111,12 @@
 <style>
 	.icon_sizes {
 		width: 100%;
-		display: flex;
-		flex-wrap: wrap;
-		flex-direction: column;
-		align-items: center;
 		overflow-x: auto;
 		overflow-y: hidden;
 	}
 	.icon_sizes figure {
 		display: flex;
 		flex-direction: column;
-		align-items: center;
 		width: 100%;
 		padding: var(--spacing_1) 0;
 	}
