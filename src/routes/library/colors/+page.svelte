@@ -8,7 +8,7 @@
 
 	const color_names = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
 
-	// TODO BLOCK dark mode for side-by-side comparison
+	// TODO BLOCK CSS grid
 	// TODO maybe display the color hex and/or hsl values?
 </script>
 
@@ -55,7 +55,7 @@
 					{@const num = i + 1}
 					<li class="color">
 						<div class="example" style:background-color="var(--color_{color_name}_{num})"></div>
-						<div>color_{color_name}_{num}</div>
+						<code>color_{color_name}_{num}</code>
 					</li>
 				{/each}
 			</ul>
