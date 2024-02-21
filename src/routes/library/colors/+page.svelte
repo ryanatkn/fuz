@@ -9,48 +9,57 @@
 	const color_names = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
 
 	// TODO BLOCK dark mode for side-by-side comparison
+	// TODO maybe display the color hex and/or hsl values?
 </script>
 
 <Tome_Detail {tome}>
 	<section class="prose">
+		<h3>Semantics</h3>
 		<p>
 			Fuz provides a selection of colors designed to support theming by both developers and
-			end-users. Instead of "blue" and "red" they're named with letters like "a" and "b", allowing
-			themes to change "a" from blue to any color without getting weird.
+			end-users. Instead of "blue" and "red" they're named with letters like "a" and "b", so you can
+			change "a" from blue to any color without getting weird.
 		</p>
+		<ul>
+			<li><code>color_a</code> - primary</li>
+			<li><code>color_b</code> - success/help</li>
+			<li><code>color_c</code> - error/danger</li>
+			<li><code>color_d</code> - secondary/accent</li>
+			<li><code>color_e</code> - tertiary</li>
+			<li><code>color_f</code> - quaternary</li>
+			<li><code>color_g</code> - quinary</li>
+		</ul>
+
+		<h3>Caveats</h3>
 		<p>
-			For efficiency reasons, there are no color value variables, though this could change if Fuz
-			decides to include a Vite plugin or other build tooling for optimization. Then we could have
-			"color_blue" that's used by "color_a" by default with more reasonable costs.
+			For efficiency reasons, there are no color value variables like "blue", though this could
+			change if Fuz decides to include a Vite plugin or other build tooling for optimization. Then
+			we could have "color_blue" that's used by "color_a" by default with more reasonable costs.
 		</p>
 		<p>
 			The base colors can be customized with <a
 				href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix"
 				>the <code>color-mix</code> CSS function</a
-			>, so Fuz does not have a ton of variants. The variants could likely be expanded if Fuz can
-			optimize its outputs.
+			>, so Fuz does not have an extensive set of variants. The variants may be expanded when Fuz
+			optimizes its outputs.
 		</p>
 	</section>
 
-	<ul>
-		<li>a - primary</li>
-		<li>b - success/help</li>
-		<li>c - error/danger</li>
-		<li>d - secondary/accent</li>
-		<li>e - tertiary</li>
-		<li>f - quaternary</li>
-		<li>g - quinary</li>
-	</ul>
-
-	<ul class="examples">
+	<div class="prose">
+		<h3>Examples</h3>
+	</div>
+	<ul class="palette">
 		{#each color_names as color_name}
-			<li class="example">
-				<div class="text">color_{color_name}</div>
-				<div class="color" style:background-color="var(--color_{color_name})"></div>
-				<div
-					class="color"
-					style:background-color="color-mix(in hsl, var(--color_{color_name}), transparent 50%)"
-				></div>
+			<li>
+				<ul class="swatch">
+					{#each {length: 9} as _, i}
+						{@const num = i + 1}
+						<li class="color">
+							<div class="example" style:background-color="var(--color_{color_name}_{num})"></div>
+							<div>color_{color_name}_{num}</div>
+						</li>
+					{/each}
+				</ul>
 			</li>
 		{/each}
 	</ul>
@@ -58,25 +67,20 @@
 </Tome_Detail>
 
 <style>
+	.palette {
+		width: 100%;
+	}
+	.swatch {
+		flex-direction: row;
+		width: 100%;
+	}
 	.color {
+		display: flex;
+		flex-direction: column;
 		flex: 1;
 		height: 100px;
 	}
-	.examples {
-		width: 100%;
-	}
 	.example {
-		position: relative;
-	}
-	.text {
-		color: var(--bg_10);
-		font-size: var(--size_3);
-		position: absolute;
-		left: 0;
-		top: 0;
-		height: 100%;
-		display: flex;
-		align-items: center;
-		padding-left: var(--spacing_1);
+		flex: 1;
 	}
 </style>
