@@ -46,9 +46,9 @@
 			<p style:font-size="var(--{font_size.name})" title={font_size.light}>--{font_size.name}</p>
 		{/each}
 	</section>
-	<section>
+	<section class="prose">
 		<h3>
-			<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight"
+			sizes at each <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight"
 				><code>font-weight</code></a
 			>
 		</h3>
