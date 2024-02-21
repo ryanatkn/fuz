@@ -46,6 +46,8 @@ body {
 
 ::selection {
 	background: hsla(var(--hue_a), 80%, 80%, var(--faded_3));
+	/* TODO maybe replace with color_a_X where X has more saturation, this is too dull */
+	/* background-color: color-mix(in hsl, var(--color_a), transparent var(--faded_1)); */
 }
 
 /*

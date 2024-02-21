@@ -16,17 +16,19 @@
 		<p>
 			Fuz provides a selection of colors designed to support theming by both developers and
 			end-users. Instead of "blue" and "red" they're named with letters like "a" and "b", allowing
-			themes to change "a" from blue to any color.
+			themes to change "a" from blue to any color without getting weird.
 		</p>
 		<p>
 			For efficiency reasons, there are no color value variables, though this could change if Fuz
-			decides to include a Vite plugin or other build tooling to optimize itself for your apps.
+			decides to include a Vite plugin or other build tooling for optimization. Then we could have
+			"color_blue" that's used by "color_a" by default with more reasonable costs.
 		</p>
 		<p>
 			The base colors can be customized with <a
 				href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix"
 				>the <code>color-mix</code> CSS function</a
-			>.
+			>, so Fuz does not have a ton of variants. The variants could likely be expanded if Fuz can
+			optimize its outputs.
 		</p>
 	</section>
 
