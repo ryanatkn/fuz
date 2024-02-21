@@ -8,7 +8,9 @@ It's in early alpha and there will be many breaking changes.
 Fuz is being made to support [my other projects](https://www.ryanatkn.com/table)
 that focus on end-users.
 Fuz emphasizes capability and efficiency and tries to be simple for those goals.
-It's less generalized and fully-featured compared to most UI libraries.
+Compared to most UI libraries, Fuz has fewer features and more opinions,
+and it has some unusual features like
+<a href="https://www.fuz.dev/library/Contextmenu">the contextmenu</a>.
 
 To learn more see <a href="https://www.fuz.dev/library">the docs</a>.
 Feel free to take the ideas and code for your own purposes.
@@ -24,11 +26,16 @@ The CSS design system:
 - supports [`color-scheme` and custom themes](https://www.fuz.dev/library/theme)
   (including dark mode)
 - zero dependencies except for Svelte
-- encourages plain HTML elements like `button` and `a` over Svelte components
-  unless the gains are substantial
-- has a small set of utility classes with plans for a lot more -
-  currently includes a single global importable `style.css`,
-  see [this issue about optimization](https://github.com/ryanatkn/fuz/issues/277)
+- styles HTML tags directly, so you don't need to add `.btn` to buttonss
+  - encourages plain HTML elements like `button` and `a` over Svelte components
+    unless the gains are substantial
+  - includes `.prose` to apply document-like presentation compared to the base app-like presentation
+- has a small set of utility and semantic classes with plans for more
+  - prefers Svelte's `<style>` for nontrivial cases,
+    so it won't be nearly as featureful as Tailwind
+  - currently includes a single global importable `style.css`,
+    seems likely I'll extract optional CSS files instead of going hard on build tooling,
+    though eventually it probably makes sense to have a Vite plugin to remove unused styles
 
 The Svelte components and helpers:
 
