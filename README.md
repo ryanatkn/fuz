@@ -2,7 +2,7 @@
 
 > friendly user zystem 🧶 [fuz.dev](https://www.fuz.dev/)
 
-Fuz is a <a href="https://svelte.dev/">Svelte</a> UI library and CSS design system.
+Fuz is a [Svelte](https://svelte.dev/) UI library and CSS design system.
 It's in early alpha and there will be many breaking changes.
 
 Fuz is being made to support [my other projects](https://www.ryanatkn.com/table)
@@ -10,9 +10,9 @@ that focus on end-users.
 Fuz emphasizes capability and efficiency and tries to be simple for those goals.
 Compared to most UI libraries, Fuz has fewer features and more opinions,
 and it has some unusual features like
-<a href="https://www.fuz.dev/library/Contextmenu">the contextmenu</a>.
+[the contextmenu](https://www.fuz.dev/library/Contextmenu).
 
-To learn more see <a href="https://www.fuz.dev/library">the docs</a>.
+To learn more see [the docs](https://www.fuz.dev/library).
 Feel free to take the ideas and code for your own purposes.
 
 The CSS design system:
