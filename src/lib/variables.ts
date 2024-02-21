@@ -22,43 +22,79 @@ TODO lots of things here to address:
 export const default_variables: Theme_Variable[] = [
 	/* colors */
 	{name: 'hue_a', light: '210', summary: 'blue'} /* TODO midpoint? */,
+	{name: 'hue_b', light: '120', summary: 'green, triad with `--color_d` and `--color_e`'},
+	{name: 'hue_c', light: '0', summary: 'red'},
+	{name: 'hue_d', light: '251', summary: 'purple, triad with `--color_b` and `--color_e`'},
+	{name: 'hue_e', light: '26', summary: 'orange, triad with `--color_b` and `--color_d`'},
+	{name: 'hue_f', light: '32', summary: 'brown'},
+	{name: 'hue_g', light: '335', summary: 'pink'},
 	{
 		name: 'color_a',
-		light: 'hsl(var(--hue_a), 55%, 50%)',
-		dark: 'hsl(var(--hue_a), 55%, 75%)',
+		light: 'var(--color_a_5)',
+		dark: 'var(--color_a_3)',
 	},
-	{name: 'hue_b', light: '120', summary: 'green, triad with `--color_d` and `--color_e`'},
+	{
+		name: 'color_a_1',
+		light: 'hsl(var(--hue_a), 55%, 95%)',
+	},
+	{
+		name: 'color_a_2',
+		light: 'hsl(var(--hue_a), 55%, 85%)',
+	},
+	{
+		name: 'color_a_3',
+		light: 'hsl(var(--hue_a), 55%, 75%)',
+	},
+	{
+		name: 'color_a_4',
+		light: 'hsl(var(--hue_a), 55%, 62%)',
+	},
+	{
+		name: 'color_a_5',
+		light: 'hsl(var(--hue_a), 55%, 50%)',
+	},
+	{
+		name: 'color_a_6',
+		light: 'hsl(var(--hue_a), 55%, 40%)',
+	},
+	{
+		name: 'color_a_7',
+		light: 'hsl(var(--hue_a), 55%, 30%)',
+	},
+	{
+		name: 'color_a_8',
+		light: 'hsl(var(--hue_a), 55%, 20%)',
+	},
+	{
+		name: 'color_a_9',
+		light: 'hsl(var(--hue_a), 55%, 10%)',
+	},
 	{
 		name: 'color_b',
 		light: 'hsl(var(--hue_b), 55%, 32%)',
 		dark: 'hsl(var(--hue_b), 45%, 70%)',
 		summary: 'same as THEME_COLOR',
 	},
-	{name: 'hue_c', light: '0', summary: 'red'},
 	{
 		name: 'color_c',
 		light: 'hsl(var(--hue_c), 50%, 50%)',
 		dark: 'hsl(var(--hue_c), 50%, 65%)',
 	},
-	{name: 'hue_d', light: '251', summary: 'purple, triad with `--color_b` and `--color_e`'},
 	{
 		name: 'color_d',
 		light: 'hsl(var(--hue_d), 50%, 50%)',
 		dark: 'hsl(var(--hue_d), 50%, 75%)',
 	},
-	{name: 'hue_e', light: '26', summary: 'orange, triad with `--color_b` and `--color_d`'},
 	{
 		name: 'color_e',
 		light: 'hsl(var(--hue_e), 55%, 50%)',
 		dark: 'hsl(var(--hue_e), 65%, 75%)',
 	},
-	{name: 'hue_f', light: '32', summary: 'brown'},
 	{
 		name: 'color_f',
 		light: 'hsl(var(--hue_f), 97%, 22%)',
 		dark: 'hsl(var(--hue_f), 32%, 75%)',
 	},
-	{name: 'hue_g', light: '335', summary: 'pink'},
 	{
 		name: 'color_g',
 		light: 'hsl(var(--hue_g), 74%, 56%)',
