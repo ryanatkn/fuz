@@ -706,6 +706,7 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories
 	margin-bottom: var(--spacing_xs);
 }
 
+/* TODO maybe remove? */
 .selectable {
 	cursor: pointer;
 	background-color: var(--button_bg);
