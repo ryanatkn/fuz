@@ -36,11 +36,16 @@
 	}
 	li {
 		display: flex;
-		align-items: center;
+		align-items: stretch;
 		font-family: var(--font_family_mono);
+		min-height: 32px;
+	}
+	li:hover {
+		background-color: var(--bg);
 	}
 	.text {
 		display: flex;
+		align-items: center;
 		flex: 1;
 		padding-left: var(--spacing_sm);
 	}
@@ -59,9 +64,16 @@
 		font-size: var(--size_sm);
 	}
 	.color {
-		height: 32px;
 		width: 100px;
+		min-width: 50px;
 		background-color: var(--bg_color);
 		color: hsl(210, 55%, 62%);
+	}
+	@media (max-width: 630px) {
+		.text {
+			flex-direction: column;
+			align-items: flex-start;
+			padding: var(--spacing_sm);
+		}
 	}
 </style>
