@@ -9,8 +9,6 @@
 
 	const color_names = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
 
-	// TODO BLOCK CSS grid
-	// TODO maybe display the color hex and/or hsl values?
 	const computed_styles = getComputedStyle(document.documentElement);
 </script>
 

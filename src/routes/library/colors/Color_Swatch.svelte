@@ -8,8 +8,6 @@
 		const v = computed_styles.getPropertyValue('--' + name);
 		return v;
 	};
-
-	// TODO BLOCK responsive
 </script>
 
 <ul>
