@@ -48,7 +48,8 @@
 		width: 100px;
 	}
 	.hex {
-		width: 85px;
+		width: 75px;
+		font-size: var(--size_sm);
 	}
 	.hsl {
 		width: 150px;
