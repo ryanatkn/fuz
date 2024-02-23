@@ -19,7 +19,7 @@
 	--color_a_7: hsl(var(--hue_a), 55%, 30%);
 	--color_a_8: hsl(var(--hue_a), 55%, 20%);
 	--color_a_9: hsl(var(--hue_a), 55%, 10%);
-	--color_b: hsl(var(--hue_b), 55%, 32%); /* same as THEME_COLOR */
+	--color_b: hsl(var(--hue_b), 55%, 32%);
 	--color_c: hsl(var(--hue_c), 50%, 50%);
 	--color_d: hsl(var(--hue_d), 50%, 50%);
 	--color_e: hsl(var(--hue_e), 55%, 50%);
@@ -193,7 +193,7 @@
 }
 :root.dark {
 	--color_a: var(--color_a_3);
-	--color_b: hsl(var(--hue_b), 45%, 70%); /* same as THEME_COLOR */
+	--color_b: hsl(var(--hue_b), 45%, 70%);
 	--color_c: hsl(var(--hue_c), 50%, 65%);
 	--color_d: hsl(var(--hue_d), 50%, 75%);
 	--color_e: hsl(var(--hue_e), 65%, 75%);

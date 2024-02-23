@@ -73,7 +73,6 @@ export const default_variables: Theme_Variable[] = [
 		name: 'color_b',
 		light: 'hsl(var(--hue_b), 55%, 32%)',
 		dark: 'hsl(var(--hue_b), 45%, 70%)',
-		summary: 'same as THEME_COLOR',
 	},
 	{
 		name: 'color_c',

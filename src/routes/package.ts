@@ -362,7 +362,6 @@ export const src_json = {
 			declarations: [
 				{name: 'Color_Scheme', kind: 'type'},
 				{name: 'color_schemes', kind: 'variable'},
-				{name: 'THEME_COLOR', kind: 'variable'},
 				{name: 'sync_color_scheme', kind: 'function'},
 				{name: 'COLOR_SCHEME_STORAGE_KEY', kind: 'variable'},
 				{name: 'save_color_scheme', kind: 'function'},
