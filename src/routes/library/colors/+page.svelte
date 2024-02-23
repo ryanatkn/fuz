@@ -10,6 +10,8 @@
 	const color_names = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
 
 	const computed_styles = getComputedStyle(document.documentElement);
+
+	// TODO BLOCK document on this page the connection to the numbered color once that's decided
 </script>
 
 <Tome_Detail {tome}>
