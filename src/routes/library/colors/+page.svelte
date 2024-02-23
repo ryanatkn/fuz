@@ -34,7 +34,8 @@
 		<p>
 			For efficiency reasons, there are no color value variables like "blue", though this could
 			change if Fuz decides to include a Vite plugin or other build tooling for optimization. Then
-			we could have "color_blue" that's used by "color_a" by default with more reasonable costs.
+			we could have <code>color_blue</code> that's used by <code>color_a</code> by default with more
+			reasonable costs.
 		</p>
 		<p>
 			The base colors can be customized with <a
