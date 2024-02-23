@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
 	import {get_tome} from '$lib/tome.js';
+	import Color_Swatch from '$routes/library/colors/Color_Swatch.svelte';
 
 	const LIBRARY_ITEM_NAME = 'colors';
 
@@ -50,15 +51,7 @@
 	</div>
 	<ul class="palette">
 		{#each color_names as color_name}
-			<ul class="swatch">
-				{#each {length: 9} as _, i}
-					{@const num = i + 1}
-					<li class="color">
-						<div class="example" style:background-color="var(--color_{color_name}_{num})"></div>
-						<code>color_{color_name}_{num}</code>
-					</li>
-				{/each}
-			</ul>
+			<Color_Swatch {color_name} />
 		{/each}
 	</ul>
 	<br />
@@ -67,18 +60,5 @@
 <style>
 	.palette {
 		width: 100%;
-	}
-	.swatch {
-		flex-direction: row;
-		width: 100%;
-	}
-	.color {
-		display: flex;
-		flex-direction: column;
-		flex: 1;
-		height: 100px;
-	}
-	.example {
-		flex: 1;
 	}
 </style>
