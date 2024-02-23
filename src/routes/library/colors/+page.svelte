@@ -48,7 +48,7 @@
 	</section>
 
 	<div class="prose">
-		<h3>Examples</h3>
+		<h3>Swatches</h3>
 	</div>
 	<ul class="palette">
 		{#each color_names as color_name}
