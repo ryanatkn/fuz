@@ -11,6 +11,7 @@
 
 	// TODO BLOCK CSS grid
 	// TODO maybe display the color hex and/or hsl values?
+	const computed_styles = getComputedStyle(document.documentElement);
 </script>
 
 <Tome_Detail {tome}>
@@ -51,7 +52,7 @@
 	</div>
 	<ul class="palette">
 		{#each color_names as color_name}
-			<Color_Swatch {color_name} />
+			<Color_Swatch {color_name} {computed_styles} />
 		{/each}
 	</ul>
 	<br />
