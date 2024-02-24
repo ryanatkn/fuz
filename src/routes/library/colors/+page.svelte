@@ -27,9 +27,9 @@
 		<h4>Adapting colors to dark mode</h4>
 		<p>
 			A color's subjective appearance depends on the context in which it's viewed, especially the
-			surrounding colors and values. Each color in Fuz is therefore distinct for light and dark
-			modes, meaning each color has two values. The exceptions are the lightest (1) and darkest (9)
-			variants, although this may change if it yields better results.
+			surrounding colors and values. Fuz's semantic colors should just work without modifying code,
+			so each Fuz color has two values, one for light and one for dark mode. The exceptions are the
+			lightest (1) and darkest (9) variants, although this may change if it yields better results.
 		</p>
 		<h4>Custom themes</h4>
 		<p>
@@ -47,10 +47,17 @@
 			<li><code>color_f</code> - quaternary</li>
 			<li><code>color_g</code> - quinary</li>
 		</ul>
+		<p>
+			A downside of this approach is that changing color "a" modifies the many cases it's used, but
+			sometimes you may want to change the color of a specific element or state. In those cases, use
+			plain CSS and optionally Fuz variables to get the desired result. Compared to most libraries,
+			Fuz provides fewer handles for granular color customizations, but the benefits include
+			consistency, efficiency, and ease of app-wide theming.
+		</p>
 
 		<h3>Caveats</h3>
 		<p>
-			For efficiency reasons, Fuz does not currently have an extensive set of variants, like
+			For performance reasons, Fuz does not currently have an extensive set of variants, like
 			specialized states for elements and color values like "blue". Each builtin hue (a through g)
 			has 9 color values, handling most cases, and the base colors can be customized with <a
 				href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix"
