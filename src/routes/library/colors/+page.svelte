@@ -67,7 +67,7 @@
 		<p>
 			Variants may be expanded when Fuz includes a Vite plugin or other build tooling for
 			optimization. A downside of removing unused styles is that they won't be available to your
-			users at runtime.
+			end-users at runtime.
 		</p>
 	</section>
 
