@@ -20,8 +20,11 @@ TODO lots of things here to address:
  * See also the empty `variables` array of the `base` theme above.
  */
 export const default_variables: Theme_Variable[] = [
-	/* colors */
-	{name: 'hue_a', light: '210', summary: 'blue'} /* TODO midpoint? */,
+	/*
+		colors - eyeballed and intepolated with a spreadsheet,
+		a professional designer will have opinions
+	*/
+	{name: 'hue_a', light: '210', summary: 'blue'},
 	{name: 'hue_b', light: '120', summary: 'green, triad with `--color_d` and `--color_f`'},
 	{name: 'hue_c', light: '0', summary: 'red'},
 	{name: 'hue_d', light: '251', summary: 'purple, triad with `--color_b` and `--color_f`'},
@@ -30,78 +33,79 @@ export const default_variables: Theme_Variable[] = [
 	{name: 'hue_g', light: '335', summary: 'pink'},
 	{name: 'color_a', light: 'var(--color_a_5)'},
 	{name: 'color_a_1', light: 'hsl(var(--hue_a), 55%, 94%)'},
-	{name: 'color_a_2', light: 'hsl(var(--hue_a), 55%, 84%)', dark: 'hsl(var(--hue_a), 55%, 84%)'}, // TODO interpolate
-	{name: 'color_a_3', light: 'hsl(var(--hue_a), 55%, 73%)', dark: 'hsl(var(--hue_a), 55%, 73%)'}, // TODO interpolate
-	{name: 'color_a_4', light: 'hsl(var(--hue_a), 55%, 62%)', dark: 'hsl(var(--hue_a), 55%, 62%)'}, // TODO interpolate
+	{name: 'color_a_2', light: 'hsl(var(--hue_a), 55%, 84%)', dark: 'hsl(var(--hue_a), 55%, 88%)'},
+	{name: 'color_a_3', light: 'hsl(var(--hue_a), 55%, 73%)', dark: 'hsl(var(--hue_a), 55%, 82%)'},
+	{name: 'color_a_4', light: 'hsl(var(--hue_a), 55%, 62%)', dark: 'hsl(var(--hue_a), 55%, 76%)'},
 	{name: 'color_a_5', light: 'hsl(var(--hue_a), 55%, 50%)', dark: 'hsl(var(--hue_a), 55%, 70%)'},
-	{name: 'color_a_6', light: 'hsl(var(--hue_a), 55%, 40%)', dark: 'hsl(var(--hue_a), 55%, 40%)'}, // TODO interpolate
-	{name: 'color_a_7', light: 'hsl(var(--hue_a), 55%, 30%)', dark: 'hsl(var(--hue_a), 55%, 30%)'}, // TODO interpolate
-	{name: 'color_a_8', light: 'hsl(var(--hue_a), 55%, 20%)', dark: 'hsl(var(--hue_a), 55%, 20%)'}, // TODO interpolate
+	{name: 'color_a_6', light: 'hsl(var(--hue_a), 55%, 40%)', dark: 'hsl(var(--hue_a), 55%, 55%)'},
+	{name: 'color_a_7', light: 'hsl(var(--hue_a), 55%, 30%)', dark: 'hsl(var(--hue_a), 55%, 40%)'},
+	{name: 'color_a_8', light: 'hsl(var(--hue_a), 55%, 20%)', dark: 'hsl(var(--hue_a), 55%, 25%)'},
 	{name: 'color_a_9', light: 'hsl(var(--hue_a), 55%, 10%)'},
 	{name: 'color_b', light: 'var(--color_b_5)'},
 	{name: 'color_b_1', light: 'hsl(var(--hue_b), 50%, 89%)'},
-	{name: 'color_b_2', light: 'hsl(var(--hue_b), 50%, 77%)', dark: 'hsl(var(--hue_b), 50%, 77%)'}, // TODO interpolate
-	{name: 'color_b_3', light: 'hsl(var(--hue_b), 50%, 63%)', dark: 'hsl(var(--hue_b), 50%, 63%)'}, // TODO interpolate
-	{name: 'color_b_4', light: 'hsl(var(--hue_b), 50%, 49%)', dark: 'hsl(var(--hue_b), 50%, 49%)'}, // TODO interpolate
+	{name: 'color_b_2', light: 'hsl(var(--hue_b), 50%, 77%)', dark: 'hsl(var(--hue_b), 50%, 81%)'},
+	{name: 'color_b_3', light: 'hsl(var(--hue_b), 50%, 63%)', dark: 'hsl(var(--hue_b), 50%, 74%)'},
+	{name: 'color_b_4', light: 'hsl(var(--hue_b), 50%, 49%)', dark: 'hsl(var(--hue_b), 50%, 66%)'},
 	{name: 'color_b_5', light: 'hsl(var(--hue_b), 55%, 36%)', dark: 'hsl(var(--hue_b), 43%, 58%)'},
-	{name: 'color_b_6', light: 'hsl(var(--hue_b), 60%, 25%)', dark: 'hsl(var(--hue_b), 60%, 25%)'}, // TODO interpolate
-	{name: 'color_b_7', light: 'hsl(var(--hue_b), 65%, 18%)', dark: 'hsl(var(--hue_b), 65%, 18%)'}, // TODO interpolate
-	{name: 'color_b_8', light: 'hsl(var(--hue_b), 70%, 12%)', dark: 'hsl(var(--hue_b), 70%, 12%)'}, // TODO interpolate
+	{name: 'color_b_6', light: 'hsl(var(--hue_b), 60%, 25%)', dark: 'hsl(var(--hue_b), 51%, 45%)'},
+	{name: 'color_b_7', light: 'hsl(var(--hue_b), 65%, 18%)', dark: 'hsl(var(--hue_b), 59%, 33%)'},
+	{name: 'color_b_8', light: 'hsl(var(--hue_b), 70%, 12%)', dark: 'hsl(var(--hue_b), 67%, 20%)'},
 	{name: 'color_b_9', light: 'hsl(var(--hue_b), 75%, 7%)'},
 	{name: 'color_c', light: 'var(--color_c_5)'},
 	{name: 'color_c_1', light: 'hsl(var(--hue_c), 85%, 92%)'},
-	{name: 'color_c_2', light: 'hsl(var(--hue_c), 80%, 83%)', dark: 'hsl(var(--hue_c), 80%, 83%)'}, // TODO interpolate
-	{name: 'color_c_3', light: 'hsl(var(--hue_c), 75%, 73%)', dark: 'hsl(var(--hue_c), 75%, 73%)'}, // TODO interpolate
-	{name: 'color_c_4', light: 'hsl(var(--hue_c), 70%, 63%)', dark: 'hsl(var(--hue_c), 70%, 63%)'}, // TODO interpolate
+	{name: 'color_c_2', light: 'hsl(var(--hue_c), 80%, 83%)', dark: 'hsl(var(--hue_c), 81%, 83%)'},
+	{name: 'color_c_3', light: 'hsl(var(--hue_c), 75%, 73%)', dark: 'hsl(var(--hue_c), 78%, 74%)'},
+	{name: 'color_c_4', light: 'hsl(var(--hue_c), 70%, 63%)', dark: 'hsl(var(--hue_c), 74%, 65%)'},
 	{name: 'color_c_5', light: 'hsl(var(--hue_c), 65%, 50%)', dark: 'hsl(var(--hue_c), 70%, 56%)'},
-	{name: 'color_c_6', light: 'hsl(var(--hue_c), 65%, 40%)', dark: 'hsl(var(--hue_c), 65%, 40%)'}, // TODO interpolate
-	{name: 'color_c_7', light: 'hsl(var(--hue_c), 65%, 30%)', dark: 'hsl(var(--hue_c), 65%, 30%)'}, // TODO interpolate
-	{name: 'color_c_8', light: 'hsl(var(--hue_c), 65%, 20%)', dark: 'hsl(var(--hue_c), 65%, 20%)'}, // TODO interpolate
+	{name: 'color_c_6', light: 'hsl(var(--hue_c), 65%, 40%)', dark: 'hsl(var(--hue_c), 65%, 45%)'},
+	{name: 'color_c_7', light: 'hsl(var(--hue_c), 65%, 30%)', dark: 'hsl(var(--hue_c), 65%, 33%)'},
+	{name: 'color_c_8', light: 'hsl(var(--hue_c), 65%, 20%)', dark: 'hsl(var(--hue_c), 65%, 22%)'},
 	{name: 'color_c_9', light: 'hsl(var(--hue_c), 65%, 10%)'},
 	{name: 'color_d', light: 'var(--color_d_5)'},
 	{name: 'color_d_1', light: 'hsl(var(--hue_d), 50%, 92%)'},
-	{name: 'color_d_2', light: 'hsl(var(--hue_d), 50%, 82%)', dark: 'hsl(var(--hue_d), 50%, 82%)'}, // TODO interpolate
-	{name: 'color_d_3', light: 'hsl(var(--hue_d), 50%, 72%)', dark: 'hsl(var(--hue_d), 50%, 72%)'}, // TODO interpolate
-	{name: 'color_d_4', light: 'hsl(var(--hue_d), 50%, 62%)', dark: 'hsl(var(--hue_d), 50%, 62%)'}, // TODO interpolate
+	{name: 'color_d_2', light: 'hsl(var(--hue_d), 50%, 82%)', dark: 'hsl(var(--hue_d), 50%, 87%)'},
+	{name: 'color_d_3', light: 'hsl(var(--hue_d), 50%, 72%)', dark: 'hsl(var(--hue_d), 50%, 81%)'},
+	{name: 'color_d_4', light: 'hsl(var(--hue_d), 50%, 62%)', dark: 'hsl(var(--hue_d), 50%, 76%)'},
 	{name: 'color_d_5', light: 'hsl(var(--hue_d), 50%, 50%)', dark: 'hsl(var(--hue_d), 50%, 70%)'},
-	{name: 'color_d_6', light: 'hsl(var(--hue_d), 50%, 40%)', dark: 'hsl(var(--hue_d), 50%, 40%)'}, // TODO interpolate
-	{name: 'color_d_7', light: 'hsl(var(--hue_d), 50%, 30%)', dark: 'hsl(var(--hue_d), 50%, 30%)'}, // TODO interpolate
-	{name: 'color_d_8', light: 'hsl(var(--hue_d), 50%, 20%)', dark: 'hsl(var(--hue_d), 50%, 20%)'}, // TODO interpolate
+	{name: 'color_d_6', light: 'hsl(var(--hue_d), 50%, 40%)', dark: 'hsl(var(--hue_d), 50%, 55%)'},
+	{name: 'color_d_7', light: 'hsl(var(--hue_d), 50%, 30%)', dark: 'hsl(var(--hue_d), 50%, 40%)'},
+	{name: 'color_d_8', light: 'hsl(var(--hue_d), 50%, 20%)', dark: 'hsl(var(--hue_d), 50%, 25%)'},
 	{name: 'color_d_9', light: 'hsl(var(--hue_d), 50%, 10%)'},
 	{name: 'color_e', light: 'var(--color_e_5)'},
 	{name: 'color_e_1', light: 'hsl(var(--hue_e), 85%, 90%)'},
-	{name: 'color_e_2', light: 'hsl(var(--hue_e), 80%, 79%)', dark: 'hsl(var(--hue_e), 80%, 79%)'}, // TODO interpolate
-	{name: 'color_e_3', light: 'hsl(var(--hue_e), 75%, 68%)', dark: 'hsl(var(--hue_e), 75%, 68%)'}, // TODO interpolate
-	{name: 'color_e_4', light: 'hsl(var(--hue_e), 70%, 56%)', dark: 'hsl(var(--hue_e), 70%, 57%)'}, // TODO interpolate
+	{name: 'color_e_2', light: 'hsl(var(--hue_e), 80%, 79%)', dark: 'hsl(var(--hue_e), 80%, 83%)'},
+	{name: 'color_e_3', light: 'hsl(var(--hue_e), 75%, 68%)', dark: 'hsl(var(--hue_e), 75%, 76%)'},
+	{name: 'color_e_4', light: 'hsl(var(--hue_e), 70%, 56%)', dark: 'hsl(var(--hue_e), 70%, 69%)'},
 	{name: 'color_e_5', light: 'hsl(var(--hue_e), 65%, 42%)', dark: 'hsl(var(--hue_e), 70%, 62%)'},
-	{name: 'color_e_6', light: 'hsl(var(--hue_e), 70%, 34%)', dark: 'hsl(var(--hue_e), 70%, 35%)'}, // TODO interpolate
-	{name: 'color_e_7', light: 'hsl(var(--hue_e), 75%, 26%)', dark: 'hsl(var(--hue_e), 75%, 26%)'}, // TODO interpolate
-	{name: 'color_e_8', light: 'hsl(var(--hue_e), 80%, 18%)', dark: 'hsl(var(--hue_e), 80%, 18%)'}, // TODO interpolate
+	{name: 'color_e_6', light: 'hsl(var(--hue_e), 70%, 34%)', dark: 'hsl(var(--hue_e), 70%, 49%)'},
+	{name: 'color_e_7', light: 'hsl(var(--hue_e), 75%, 26%)', dark: 'hsl(var(--hue_e), 75%, 36%)'},
+	{name: 'color_e_8', light: 'hsl(var(--hue_e), 80%, 18%)', dark: 'hsl(var(--hue_e), 80%, 23%)'},
 	{name: 'color_e_9', light: 'hsl(var(--hue_e), 85%, 10%)'},
 	{name: 'color_f', light: 'var(--color_f_5)'},
 	{name: 'color_f_1', light: 'hsl(var(--hue_f), 32%, 83%)'},
-	{name: 'color_f_2', light: 'hsl(var(--hue_f), 32%, 69%)', dark: 'hsl(var(--hue_f), 32%, 69%)'}, // TODO interpolate
-	{name: 'color_f_3', light: 'hsl(var(--hue_f), 32%, 56%)', dark: 'hsl(var(--hue_f), 32%, 56%)'}, // TODO interpolate
-	{name: 'color_f_4', light: 'hsl(var(--hue_f), 42%, 38%)', dark: 'hsl(var(--hue_f), 42%, 38%)'}, // TODO interpolate
+	{name: 'color_f_2', light: 'hsl(var(--hue_f), 32%, 69%)', dark: 'hsl(var(--hue_f), 32%, 76%)'},
+	{name: 'color_f_3', light: 'hsl(var(--hue_f), 32%, 56%)', dark: 'hsl(var(--hue_f), 32%, 70%)'},
+	{name: 'color_f_4', light: 'hsl(var(--hue_f), 42%, 38%)', dark: 'hsl(var(--hue_f), 32%, 63%)'},
 	{name: 'color_f_5', light: 'hsl(var(--hue_f), 60%, 26%)', dark: 'hsl(var(--hue_f), 30%, 56%)'},
-	{name: 'color_f_6', light: 'hsl(var(--hue_f), 65%, 19%)', dark: 'hsl(var(--hue_f), 65%, 19%)'}, // TODO interpolate
-	{name: 'color_f_7', light: 'hsl(var(--hue_f), 70%, 14%)', dark: 'hsl(var(--hue_f), 70%, 14%)'}, // TODO interpolate
-	{name: 'color_f_8', light: 'hsl(var(--hue_f), 75%, 10%)', dark: 'hsl(var(--hue_f), 75%, 10%)'}, // TODO interpolate
+	{name: 'color_f_6', light: 'hsl(var(--hue_f), 65%, 19%)', dark: 'hsl(var(--hue_f), 40%, 44%)'},
+	{name: 'color_f_7', light: 'hsl(var(--hue_f), 70%, 14%)', dark: 'hsl(var(--hue_f), 50%, 31%)'},
+	{name: 'color_f_8', light: 'hsl(var(--hue_f), 75%, 10%)', dark: 'hsl(var(--hue_f), 70%, 19%)'},
 	{name: 'color_f_9', light: 'hsl(var(--hue_f), 80%, 6%)'},
 	{name: 'color_g', light: 'var(--color_g_5)'},
 	{name: 'color_g_1', light: 'hsl(var(--hue_g), 72%, 92%)'},
-	{name: 'color_g_2', light: 'hsl(var(--hue_g), 72%, 83%)', dark: 'hsl(var(--hue_g), 72%, 83%)'}, // TODO interpolate
-	{name: 'color_g_3', light: 'hsl(var(--hue_g), 72%, 74%)', dark: 'hsl(var(--hue_g), 72%, 74%)'}, // TODO interpolate
-	{name: 'color_g_4', light: 'hsl(var(--hue_g), 72%, 65%)', dark: 'hsl(var(--hue_g), 72%, 65%)'}, // TODO interpolate
+	{name: 'color_g_2', light: 'hsl(var(--hue_g), 72%, 83%)', dark: 'hsl(var(--hue_g), 72%, 87%)'},
+	{name: 'color_g_3', light: 'hsl(var(--hue_g), 72%, 74%)', dark: 'hsl(var(--hue_g), 72%, 81%)'},
+	{name: 'color_g_4', light: 'hsl(var(--hue_g), 72%, 65%)', dark: 'hsl(var(--hue_g), 72%, 76%)'},
 	{name: 'color_g_5', light: 'hsl(var(--hue_g), 72%, 56%)', dark: 'hsl(var(--hue_g), 72%, 70%)'},
-	{name: 'color_g_6', light: 'hsl(var(--hue_g), 72%, 44%)', dark: 'hsl(var(--hue_g), 72%, 44%)'}, // TODO interpolate
-	{name: 'color_g_7', light: 'hsl(var(--hue_g), 72%, 32%)', dark: 'hsl(var(--hue_g), 72%, 32%)'}, // TODO interpolate
-	{name: 'color_g_8', light: 'hsl(var(--hue_g), 72%, 20%)', dark: 'hsl(var(--hue_g), 72%, 20%)'}, // TODO interpolate
+	{name: 'color_g_6', light: 'hsl(var(--hue_g), 72%, 44%)', dark: 'hsl(var(--hue_g), 72%, 55%)'},
+	{name: 'color_g_7', light: 'hsl(var(--hue_g), 72%, 32%)', dark: 'hsl(var(--hue_g), 72%, 40%)'},
+	{name: 'color_g_8', light: 'hsl(var(--hue_g), 72%, 20%)', dark: 'hsl(var(--hue_g), 72%, 25%)'},
 	{name: 'color_g_9', light: 'hsl(var(--hue_g), 72%, 10%)'},
 
-	/* color variants */
-	/* using these usually means handling both light and dark mode separately - the semantic variants
-	that handle `color-schema` automatically include `--bg_1` and `--bg_2`  */
+	/*
+		color variants - using these usually means handling both light and dark mode separately -
+		the semantic variants	that handle `color-schema` automatically include `--bg_1` and `--bg_2`
+	*/
 	{name: 'darken_1', light: '#0000000f', summary: '6%'},
 	{name: 'darken_2', light: '#0000001f', summary: '12%'},
 	{name: 'darken_3', light: '#00000036', summary: '21%'},
@@ -158,6 +162,7 @@ export const default_variables: Theme_Variable[] = [
 	{name: 'fg_8', light: 'var(--darken_8)', dark: 'var(--lighten_8)'},
 	{name: 'fg_9', light: 'var(--darken_9)', dark: 'var(--lighten_9)'},
 	{name: 'fg_10', light: '#000', dark: '#fff'},
+	// TODO probably need more variants, 5 total?
 	/* text colors don't use alpha because it affects performance too much */
 	{name: 'text_color', light: 'var(--text_1)'},
 	{
