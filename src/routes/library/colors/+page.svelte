@@ -28,7 +28,7 @@
 		<p>
 			A color's subjective appearance depends on the context in which it's viewed, especially the
 			surrounding colors and values. Each color in Fuz is therefore distinct for light and dark
-			modes, so each color has two values. The exceptions are the lightest (1) and darkest (9)
+			modes, meaning each color has two values. The exceptions are the lightest (1) and darkest (9)
 			variants, although this may change if it yields better results.
 		</p>
 		<h4>Custom themes</h4>
