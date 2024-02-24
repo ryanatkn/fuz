@@ -2,6 +2,7 @@
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
 	import {get_tome} from '$lib/tome.js';
 	import Color_Swatch from '$routes/library/colors/Color_Swatch.svelte';
+	import Library_Vocab from '$lib/Library_Vocab.svelte';
 
 	const LIBRARY_ITEM_NAME = 'colors';
 
@@ -19,7 +20,7 @@
 			Fuz provides a palette of colors designed to support theming by both developers at buildtime
 			and end-users at runtime. The colors are semantic, not plain values, which means they
 			automatically adapt to dark mode and customizations, at the expense of having different values
-			depending on color scheme and theme.
+			depending on color scheme and theme. Each color has a <Library_Vocab name="variable" />.
 		</p>
 		<h4>Adapting colors to dark mode</h4>
 		<p>
