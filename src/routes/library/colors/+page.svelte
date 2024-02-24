@@ -20,7 +20,9 @@
 			Fuz provides a palette of colors designed to support theming by both developers at buildtime
 			and end-users at runtime. The colors are semantic, not plain values, which means they
 			automatically adapt to dark mode and customizations, at the expense of having different values
-			depending on color scheme and theme. Each color has a <Library_Vocab name="variable" />.
+			depending on color scheme and theme. Each color has a <Library_Vocab name="variables"
+				>variable</Library_Vocab
+			>.
 		</p>
 		<h4>Adapting colors to dark mode</h4>
 		<p>
