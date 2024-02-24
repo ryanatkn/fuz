@@ -10,8 +10,6 @@
 	const color_names = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
 
 	const computed_styles = getComputedStyle(document.documentElement);
-
-	// TODO BLOCK document on this page the connection to the numbered color once that's decided
 </script>
 
 <Tome_Detail {tome}>
@@ -20,8 +18,8 @@
 		<p>
 			Fuz provides a palette of colors designed to support theming by both developers and end-users
 			at runtime. The colors are semantic, not plain values, which means they automatically adapt to
-			dark mode and customizations, at the expense of having different values depending on theme and
-			color scheme.
+			dark mode and customizations, at the expense of having different values depending on color
+			scheme and theme.
 		</p>
 		<h4>Adapting colors to dark mode</h4>
 		<p>
@@ -30,10 +28,10 @@
 			each color has two values. The exceptions are the lightest (1) and darkest (9) variants,
 			although this may change if it yields better results.
 		</p>
-		<h4>Customizability</h4>
+		<h4>Custom themes</h4>
 		<p>
-			Instead of "blue" and "red" they're named with letters like "a" and "b", so you can change "a"
-			from blue to any color in a theme without breaking the name-to-color correspondence
+			Instead of "blue" and "red", colors are named with letters like "a" and "b", so you can change
+			"a" from blue to any color in a theme without breaking the name-to-color correspondence
 			everywhere. The semantics of the builtin colors as as follows, and they can be extended for
 			your own purposes (e.g. you can decide what "tertiary" means for your app):
 		</p>
@@ -50,8 +48,8 @@
 		<h3>Caveats</h3>
 		<p>
 			For efficiency reasons, Fuz does not currently have an extensive set of variants, like
-			specialized states for elements and color values like "blue". Each builtin hue has 9 color
-			values, handling most cases, and the base colors can be customized with <a
+			specialized states for elements and color values like "blue". Each builtin hue (a through g)
+			has 9 color values, handling most cases, and the base colors can be customized with <a
 				href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix"
 				>the <code>color-mix</code> CSS function</a
 			> when needed.
