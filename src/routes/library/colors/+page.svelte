@@ -14,12 +14,12 @@
 
 <Tome_Detail {tome}>
 	<section class="prose">
-		<h3>Semantics</h3>
+		<h3>Color semantics</h3>
 		<p>
-			Fuz provides a palette of colors designed to support theming by both developers and end-users
-			at runtime. The colors are semantic, not plain values, which means they automatically adapt to
-			dark mode and customizations, at the expense of having different values depending on color
-			scheme and theme.
+			Fuz provides a palette of colors designed to support theming by both developers at buildtime
+			and end-users at runtime. The colors are semantic, not plain values, which means they
+			automatically adapt to dark mode and customizations, at the expense of having different values
+			depending on color scheme and theme.
 		</p>
 		<h4>Adapting colors to dark mode</h4>
 		<p>
