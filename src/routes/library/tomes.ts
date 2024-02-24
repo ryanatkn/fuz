@@ -29,7 +29,7 @@ export const tomes: Tome[] = [
 		pathname: '',
 		category: 'styles',
 		component: theme,
-		related: ['colors', 'typography', 'variables'],
+		related: ['variables', 'colors', 'typography'],
 	},
 	{
 		name: 'variables',
@@ -37,7 +37,7 @@ export const tomes: Tome[] = [
 		pathname: '',
 		category: 'styles',
 		component: variables,
-		related: ['theme', 'typography'],
+		related: ['theme', 'colors', 'typography'],
 	},
 	{
 		name: 'colors',
@@ -45,7 +45,7 @@ export const tomes: Tome[] = [
 		pathname: '',
 		category: 'styles',
 		component: colors,
-		related: ['theme', 'buttons'],
+		related: ['theme', 'variables', 'buttons'],
 	},
 	{
 		name: 'buttons',
@@ -85,7 +85,7 @@ export const tomes: Tome[] = [
 		pathname: '',
 		category: 'styles',
 		component: typography,
-		related: ['theme', 'prose', 'variables'],
+		related: ['theme', 'variables', 'prose'],
 	},
 	// TODO maybe? or do styles like this belong elsewhere? classes? problem is we'll have a classes page for the variables
 	// {
