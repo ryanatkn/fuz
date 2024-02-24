@@ -89,15 +89,15 @@ export const default_variables: Theme_Variable[] = [
 	{name: 'color_f_8', light: 'hsl(var(--hue_f), 75%, 10%)', dark: 'hsl(var(--hue_f), 75%, 10%)'}, // TODO interpolate
 	{name: 'color_f_9', light: 'hsl(var(--hue_f), 80%, 6%)'},
 	{name: 'color_g', light: 'var(--color_g_5)'},
-	{name: 'color_g_1', light: 'hsl(var(--hue_g), 74%, 92%)'},
-	{name: 'color_g_2', light: 'hsl(var(--hue_g), 74%, 83%)', dark: 'hsl(var(--hue_g), 74%, 83%)'}, // TODO interpolate
-	{name: 'color_g_3', light: 'hsl(var(--hue_g), 74%, 74%)', dark: 'hsl(var(--hue_g), 74%, 74%)'}, // TODO interpolate
-	{name: 'color_g_4', light: 'hsl(var(--hue_g), 74%, 65%)', dark: 'hsl(var(--hue_g), 74%, 65%)'}, // TODO interpolate
-	{name: 'color_g_5', light: 'hsl(var(--hue_g), 74%, 56%)', dark: 'hsl(var(--hue_g), 74%, 70%)'},
-	{name: 'color_g_6', light: 'hsl(var(--hue_g), 74%, 44%)', dark: 'hsl(var(--hue_g), 74%, 44%)'}, // TODO interpolate
-	{name: 'color_g_7', light: 'hsl(var(--hue_g), 74%, 32%)', dark: 'hsl(var(--hue_g), 74%, 32%)'}, // TODO interpolate
-	{name: 'color_g_8', light: 'hsl(var(--hue_g), 74%, 20%)', dark: 'hsl(var(--hue_g), 74%, 20%)'}, // TODO interpolate
-	{name: 'color_g_9', light: 'hsl(var(--hue_g), 74%, 10%)'},
+	{name: 'color_g_1', light: 'hsl(var(--hue_g), 72%, 92%)'},
+	{name: 'color_g_2', light: 'hsl(var(--hue_g), 72%, 83%)', dark: 'hsl(var(--hue_g), 72%, 83%)'}, // TODO interpolate
+	{name: 'color_g_3', light: 'hsl(var(--hue_g), 72%, 74%)', dark: 'hsl(var(--hue_g), 72%, 74%)'}, // TODO interpolate
+	{name: 'color_g_4', light: 'hsl(var(--hue_g), 72%, 65%)', dark: 'hsl(var(--hue_g), 72%, 65%)'}, // TODO interpolate
+	{name: 'color_g_5', light: 'hsl(var(--hue_g), 72%, 56%)', dark: 'hsl(var(--hue_g), 72%, 70%)'},
+	{name: 'color_g_6', light: 'hsl(var(--hue_g), 72%, 44%)', dark: 'hsl(var(--hue_g), 72%, 44%)'}, // TODO interpolate
+	{name: 'color_g_7', light: 'hsl(var(--hue_g), 72%, 32%)', dark: 'hsl(var(--hue_g), 72%, 32%)'}, // TODO interpolate
+	{name: 'color_g_8', light: 'hsl(var(--hue_g), 72%, 20%)', dark: 'hsl(var(--hue_g), 72%, 20%)'}, // TODO interpolate
+	{name: 'color_g_9', light: 'hsl(var(--hue_g), 72%, 10%)'},
 
 	/* color variants */
 	/* using these usually means handling both light and dark mode separately - the semantic variants
