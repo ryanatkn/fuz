@@ -20,6 +20,14 @@
 <Tome_Detail {tome}>
 	<Code content={`<button>`} />
 	<button>button</button>
+	<section class="prose">
+		<p>
+			Buttons have a standardized <code>.selected</code> state that can be used for various UI purposes,
+			like showing a selected item in a menu or a styling button's `aria-pressed` state. Instead of providing
+			two styles of buttons, outlined and filled, Fuz makes filled buttons the default, and selected
+			buttons are outlined.
+		</p>
+	</section>
 	<button disabled>disabled button</button>
 	<button class="selected">button.selected</button>
 	<button class="selected" disabled>disabled button.selected</button>
