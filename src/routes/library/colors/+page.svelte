@@ -78,14 +78,19 @@
 	<div class="prose spaced">
 		<h3>Hue variables</h3>
 		<p>
-			Each color variable combines a hue variable with hardcoded saturation and lightness values.
-			Hue variables therefore provide a single source of truth that's easy to theme, but saturation
-			and lightness values will need to be set for each color in many cases to achieve pleasing
-			results.
+			Hue variables contain a single <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/hue"
+				>hue</a
+			> number. Each color variable combines a hue variable with hardcoded saturation and lightness values.
+		</p>
+		<p>
+			Hue variables therefore provide a single source of truth that's easy to theme, but to achieve
+			pleasing results, setting the hue alone is not always sufficient. Custom colors will often
+			require you to set per-variable saturation and lightness values.
 		</p>
 		<p>
 			Hue variables are also useful to construct custom colors not covered by the color variables.
 		</p>
+		<p>Unlike the color variables, the hue variables are the same in both light and dark mode.</p>
 	</div>
 	<ul class="palette">
 		{#each color_names as color_name}
@@ -97,10 +102,13 @@
 	<div class="prose spaced">
 		<h3>Color variables</h3>
 		<p>
-			The 5th variable of each color is used as the base for things like <Library_Vocab
-				name="buttons"
-			/>.
+			There are 9 variables per color, numbered 1 to 9, lightest to darkest. The 5th variable of
+			each color is used as the base for things like <Library_Vocab name="buttons" />.
 		</p>
+		<p>
+			Note that these values differ between light and dark mode! See the discussion above for why.
+		</p>
+		<p>These colors were eyeballed by a programmer, and will change :]</p>
 	</div>
 	<ul class="palette">
 		{#each color_names as color_name}
