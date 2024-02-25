@@ -107,7 +107,7 @@
 	</section>
 	<div class="prose">
 		<section>
-			<h3>but they do inside <code>.prose</code>:</h3>
+			<h3>but margin is added back inside <code>.prose</code>:</h3>
 		</section>
 	</div>
 	<section class="prose">
