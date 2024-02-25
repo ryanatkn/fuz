@@ -32,9 +32,13 @@
 			Stay tuned for examples.
 		</p>
 		<blockquote>
-			Variables are <code>snake_case</code> so that they're also valid JS identifiers, not for stylistic
-			or contrarian reasons. This choice leaks to the CSS class naming conventions, so that variable-derived
-			utility classes match their corresponding variable names. This topic needs a blog post.
+			Variables are <code>snake_case</code> so that they're also valid JS identifiers, not for
+			stylistic or contrarian reasons. This choice leaks to the CSS class naming conventions, so
+			that variable-derived utility classes match their corresponding variable names. This works
+			nicely with
+			<a href="https://svelte.dev/docs/element-directives#class-name"
+				>Svelte's class shorthand syntax</a
+			>. This topic needs a blog post.
 		</blockquote>
 	</section>
 	<section>
