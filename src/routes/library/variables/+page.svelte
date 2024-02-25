@@ -41,8 +41,6 @@
 		<Code
 			lang="ts"
 			content={`export interface Theme {
-	// TODO probably need an \`id\`
-	// id: string;
 	name: string;
 	items: Theme_Variable[];
 }

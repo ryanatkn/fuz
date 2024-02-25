@@ -18,9 +18,9 @@ Feel free to take the ideas and code for your own purposes.
 The CSS design system:
 
 - plain CSS
-- designed around CSS variables (includes optional utility and semantic classes,
-  but the base abstraction is implemented with
-  [CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/--*) not classes)
+- designed around style variables,
+  a specialization of [CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/--*)
+  - includes optional utility and semantic classes that use the variables
 - the only required parts of the library are `@ryanatkn/fuz/style.css` and either
   `@ryanatkn/fuz/theme.css` or your own theme file, everything else can be used a la carte
 - supports [`color-scheme` and custom themes](https://www.fuz.dev/library/theme)

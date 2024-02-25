@@ -920,7 +920,6 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories
 	line-height: var(--line_height_6); /* prevents the bottom of g's and others from being cut off */
 }
 
-/* TODO change to SVG? or use CSS vars for size and color? rename to indicate it's facing right? */
 .chevron {
 	position: relative;
 	height: 8px;
