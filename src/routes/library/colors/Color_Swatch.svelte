@@ -19,7 +19,7 @@
 		<li style:--bg_color="var(--{variable_name})">
 			<div class="color"></div>
 			<div class="text">
-				<div class="name">{variable_name}</div>
+				<button class="plain">{variable_name}</button>
 				<div class="hex">{hsl_to_hex_string(...hsl)}</div>
 				<div class="hsl">{hsl_string}</div>
 				<div class="rgb">rgb({hsl_to_rgb(...hsl).join(', ')})</div>
@@ -48,12 +48,14 @@
 		flex: 1;
 		padding-left: var(--spacing_sm);
 	}
-	.name {
-		width: 100px;
+	button {
+		/* TODO var? see the 32px elsewhere here and the Hue_Swatch as well */
+		--min_height: 32px;
 	}
 	.hex {
-		width: 75px;
+		width: 80px;
 		font-size: var(--size_sm);
+		padding-left: var(--spacing_sm);
 	}
 	.hsl {
 		width: 150px;

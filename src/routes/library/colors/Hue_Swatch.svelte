@@ -39,6 +39,10 @@
 		flex: 1;
 		padding-left: var(--spacing_sm);
 	}
+	button {
+		/* TODO var? see the Color_Swatch as well */
+		--min_height: 32px;
+	}
 	.hue {
 		width: 55px;
 		padding-left: var(--spacing_sm);
