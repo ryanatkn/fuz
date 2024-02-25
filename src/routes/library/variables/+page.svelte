@@ -1,14 +1,11 @@
 <script lang="ts">
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
-	import {swallow} from '$lib/swallow.js';
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
 	import Library_Vocab from '$lib/Library_Vocab.svelte';
-	import Dialog from '$lib/Dialog.svelte';
 	import {get_tome} from '$lib/tome.js';
 	import {default_variables} from '$lib/variables.js';
-	import type {Theme_Variable} from '$lib/theme.js';
-	import Theme_Variable_Detail from '$routes/Theme_Variable_Detail.svelte';
+	import {get_selected_variable} from '$routes/library/helpers.js';
 
 	const LIBRARY_ITEM_NAME = 'variables';
 
@@ -16,12 +13,7 @@
 
 	export let variables = default_variables.slice().sort((a, b) => a.name.localeCompare(b.name));
 
-	let selected_variable: Theme_Variable | null = null;
-
-	const click = (e: MouseEvent, variable: Theme_Variable): void => {
-		swallow(e);
-		selected_variable = variable;
-	};
+	const selected_variable = get_selected_variable();
 </script>
 
 <Tome_Detail {tome}>
@@ -70,26 +62,13 @@ export interface Theme_Variable {
 		<!-- TODO add info through the contextmenu or dialog -->
 		<div class="variables">
 			{#each variables as variable (variable.name)}
-				<button class="variable menu_item" on:click={(e) => click(e, variable)}
+				<button class="variable menu_item" on:click={() => ($selected_variable = variable)}
 					>--{variable.name}</button
 				>
 			{/each}
 		</div>
 	</section>
 </Tome_Detail>
-{#if selected_variable}
-	<Dialog on:close={() => (selected_variable = null)} let:close>
-		<div class="pane">
-			<div class="panel padded_lg box">
-				<Theme_Variable_Detail variable={selected_variable} />
-				<br />
-				<aside>this is unfinished</aside>
-				<br />
-				<button on:click={close}>ok</button>
-			</div>
-		</div>
-	</Dialog>
-{/if}
 
 <style>
 	section {

@@ -1,4 +1,7 @@
 <script lang="ts">
+	import {get_selected_variable} from '$routes/library/helpers.js';
+	import {default_variables} from '$lib/variables.js';
+
 	export let color_name: string;
 	export let computed_styles: CSSStyleDeclaration;
 	export let width = 48;
@@ -12,12 +15,17 @@
 
 	$: variable_name = `hue_${color_name}`;
 	$: hue = Number(get_color_hue_string(variable_name));
+
+	const selected_variable = get_selected_variable();
+	const select_variable = () => {
+		$selected_variable = default_variables.find((v) => v.name === variable_name)!;
+	};
 </script>
 
 <li style:--hue="var(--{variable_name})">
 	<div class="color" style:width="{width}px" style:height="{height}px"></div>
 	<div class="text">
-		<button class="plain">{variable_name}</button>
+		<button class="plain" on:click={() => select_variable()}>{variable_name}</button>
 		<div class="hue">{hue}</div>
 		<small class="description">{description}</small>
 	</div>

@@ -1,12 +1,20 @@
 <script lang="ts">
 	import {hsl_to_hex_string, hsl_to_rgb, parse_hsl_string} from '@ryanatkn/belt/colors.js';
 
+	import {get_selected_variable} from '$routes/library/helpers.js';
+	import {default_variables} from '$lib/variables.js';
+
 	export let color_name: string;
 	export let computed_styles: CSSStyleDeclaration;
 
 	const get_color_hsl_string = (name: string) => {
 		const v = computed_styles.getPropertyValue('--' + name);
 		return v;
+	};
+
+	const selected_variable = get_selected_variable();
+	const select_variable = (variable_name: string) => {
+		$selected_variable = default_variables.find((v) => v.name === variable_name)!;
 	};
 </script>
 
@@ -19,7 +27,9 @@
 		<li style:--bg_color="var(--{variable_name})">
 			<div class="color"></div>
 			<div class="text">
-				<button class="plain">{variable_name}</button>
+				<button class="plain" on:click={() => select_variable(variable_name)}
+					>{variable_name}</button
+				>
 				<div class="hex">{hsl_to_hex_string(...hsl)}</div>
 				<div class="hsl">{hsl_string}</div>
 				<div class="rgb">rgb({hsl_to_rgb(...hsl).join(', ')})</div>
