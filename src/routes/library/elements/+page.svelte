@@ -128,4 +128,6 @@
 			</aside>
 		</aside>
 	</div>
+	<hr />
+	<div class="prose">TODO more!</div>
 </Tome_Detail>
