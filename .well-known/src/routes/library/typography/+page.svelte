@@ -3,13 +3,14 @@
 
 	import {default_variables} from '$lib/variables.js';
 	import {get_tome} from '$lib/tome.js';
+	import Icon_Sizes from '$routes/library/typography/Icon_Sizes.svelte';
 
 	const LIBRARY_ITEM_NAME = 'typography';
 
 	const tome = get_tome(LIBRARY_ITEM_NAME);
 
 	// TODO refactor
-	const font_weights = [100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
+	const font_weights = [100, 200, 300, 400, 500, 600, 700, 800, 900];
 
 	// TODO how to improve this?
 	const font_size_names = new Set([
@@ -31,7 +32,7 @@
 </script>
 
 <Tome_Detail {tome}>
-	<section class="typography prose box">
+	<section class="prose">
 		<h1 title="--size_3">h1</h1>
 		<h2 title="--size_2">h2</h2>
 		<h3 title="--size_1">h3</h3>
@@ -45,12 +46,12 @@
 			<p style:font-size="var(--{font_size.name})" title={font_size.light}>--{font_size.name}</p>
 		{/each}
 	</section>
-	<section class="box font-weights">
-		<h2>
-			<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight"
+	<section class="prose">
+		<h3>
+			sizes at each <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight"
 				><code>font-weight</code></a
 			>
-		</h2>
+		</h3>
 		{#each font_weights as fontWeight (fontWeight)}
 			<div style:font-weight={fontWeight}>
 				{fontWeight}
@@ -59,7 +60,7 @@
 		{#each font_sizes as font_size (font_size)}
 			{#each font_weights as fontWeight (fontWeight)}
 				<div
-					class="box nowrap"
+					class="nowrap"
 					style:font-weight={fontWeight}
 					style:--font_weight={fontWeight}
 					style:font-size={font_size.light}
@@ -71,12 +72,10 @@
 			{/each}
 		{/each}
 	</section>
+	<Icon_Sizes />
 </Tome_Detail>
 
 <style>
-	.typography {
-		display: flex;
-	}
 	p {
 		white-space: nowrap;
 	}

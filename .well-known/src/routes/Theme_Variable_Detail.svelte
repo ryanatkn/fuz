@@ -2,6 +2,8 @@
 	import type {Theme_Variable} from '$lib/theme.js';
 
 	export let variable: Theme_Variable;
+
+	// TODO needs a lot of work - for example, enable editing the values directly, and certain values like colors could be rendered
 </script>
 
 <div class="variable">

@@ -11,8 +11,6 @@ export type Color_Scheme = 'dark' | 'light' | 'auto';
 
 export const color_schemes: Color_Scheme[] = ['light', 'auto', 'dark'];
 
-export const THEME_COLOR = '#257e25'; // same as `--color_b`
-
 export const sync_color_scheme = (color_scheme: Color_Scheme | null): void => {
 	if (import.meta.env.SSR) return;
 	if (
@@ -51,7 +49,7 @@ export const load_color_scheme = (
 		return fallback;
 	}
 	if (color_schemes.includes(stored)) {
-		return stored;
+		return stored; // TODO should parse, and also delete the stored key on failures
 	}
 	return fallback;
 };

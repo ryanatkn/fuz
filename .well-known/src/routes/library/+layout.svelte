@@ -11,6 +11,9 @@
 	import Library_Nav from '$lib/Library_Nav.svelte';
 	import {tomes} from '$routes/library/tomes.js';
 	import {package_json, src_json} from '$routes/package.js';
+	import {set_selected_variable} from '$routes/library/helpers.js';
+	import Dialog from '$lib/Dialog.svelte';
+	import Theme_Variable_Detail from '$routes/Theme_Variable_Detail.svelte';
 
 	const pkg = parse_package_meta(package_json.homepage, package_json, src_json);
 
@@ -19,6 +22,8 @@
 
 	$: selected_item = tomes.find((c) => c.pathname === $page.url.pathname);
 	$: tomes_related_to_selected = selected_item?.related?.map((r) => tomes_by_name.get(r)!);
+
+	const selected_variable = set_selected_variable();
 </script>
 
 <main class="box width_full">
@@ -47,6 +52,19 @@
 			<Breadcrumb>🧶</Breadcrumb>
 		</section>
 	</div>
+	{#if $selected_variable}
+		<Dialog on:close={() => ($selected_variable = null)} let:close>
+			<div class="pane">
+				<div class="panel padded_lg box">
+					<Theme_Variable_Detail variable={$selected_variable} />
+					<br />
+					<aside>this is unfinished</aside>
+					<br />
+					<button on:click={close}>ok</button>
+				</div>
+			</div>
+		</Dialog>
+	{/if}
 </main>
 
 <style>

@@ -31,14 +31,15 @@
 	</section>
 	<br />
 	{#each color_names as c}
-		<Code content={`<button class="color_${c}">`} />
-		<button class="color_{c}">.color_{c}</button>
-		<button class="color_{c}" disabled>disabled .color_{c}</button>
-		<button class="color_{c} selected">.color_{c}.selected</button>
-		<button class="color_{c} selected" disabled>disabled .color_{c}.selected</button>
-		<button class="color_{c} selected deselectable">.color_{c}.selected.deselectable</button>
-		<button class="color_{c} selected deselectable" disabled
-			>disabled .color_{c}.selected.deselectable</button
+		{@const color_name = `color_${c}`}
+		<Code content={`<button class="${color_name}">`} />
+		<button class={color_name}>.{color_name}</button>
+		<button class={color_name} disabled>disabled .{color_name}</button>
+		<button class="{color_name} selected">.{color_name}.selected</button>
+		<button class="{color_name} selected" disabled>disabled .{color_name}.selected</button>
+		<button class="{color_name} selected deselectable">.{color_name}.selected.deselectable</button>
+		<button class="{color_name} selected deselectable" disabled
+			>disabled .{color_name}.selected.deselectable</button
 		>
 		<br />
 	{/each}
@@ -47,10 +48,14 @@
 
 	<div class="prose">
 		<h3>disabled button</h3>
-		<Code content={`<button disabled>\n\t:|\n</button>`} />
-		<button disabled>:|</button>
-		<Code content={`<button disabled>\n\ta bigger disabled button\n</button>`} />
-		<button disabled>a bigger disabled button</button>
+		<section>
+			<Code content={`<button disabled>\n\t:|\n</button>`} />
+			<button disabled>:|</button>
+		</section>
+		<section>
+			<Code content={`<button disabled>\n\ta bigger disabled button\n</button>`} />
+			<button disabled>a bigger disabled button</button>
+		</section>
 	</div>
 
 	<hr />

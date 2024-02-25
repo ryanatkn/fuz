@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.87.0",
+  "version": "0.88.0",
   "modules": {
     "./Alert.svelte": {
       "path": "Alert.svelte",
@@ -319,10 +319,6 @@
         },
         {
           "name": "color_schemes",
-          "kind": "variable"
-        },
-        {
-          "name": "THEME_COLOR",
           "kind": "variable"
         },
         {
