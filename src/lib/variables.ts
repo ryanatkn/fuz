@@ -25,11 +25,11 @@ export const default_variables: Theme_Variable[] = [
 		a professional designer will have opinions
 	*/
 	{name: 'hue_a', light: '210', summary: 'blue'},
-	{name: 'hue_b', light: '120', summary: 'green, triad with `--color_d` and `--color_f`'},
+	{name: 'hue_b', light: '120', summary: 'green'},
 	{name: 'hue_c', light: '0', summary: 'red'},
-	{name: 'hue_d', light: '251', summary: 'purple, triad with `--color_b` and `--color_f`'},
+	{name: 'hue_d', light: '260', summary: 'purple'},
 	{name: 'hue_e', light: '50', summary: 'yellow'},
-	{name: 'hue_f', light: '26', summary: 'brown, triad with `--color_b` and `--color_d`'},
+	{name: 'hue_f', light: '27', summary: 'brown'},
 	{name: 'hue_g', light: '335', summary: 'pink'},
 	{name: 'color_a', light: 'var(--color_a_5)'},
 	{name: 'color_a_1', light: 'hsl(var(--hue_a), 55%, 94%)'},

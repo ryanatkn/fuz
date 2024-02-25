@@ -3,11 +3,11 @@
 /* theme: base */
 :root {
 	--hue_a: 210; /* blue */
-	--hue_b: 120; /* green, triad with `--color_d` and `--color_f` */
+	--hue_b: 120; /* green */
 	--hue_c: 0; /* red */
-	--hue_d: 251; /* purple, triad with `--color_b` and `--color_f` */
+	--hue_d: 260; /* purple */
 	--hue_e: 50; /* yellow */
-	--hue_f: 26; /* brown, triad with `--color_b` and `--color_d` */
+	--hue_f: 27; /* brown */
 	--hue_g: 335; /* pink */
 	--color_a: var(--color_a_5);
 	--color_a_1: hsl(var(--hue_a), 55%, 94%);

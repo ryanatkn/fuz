@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
 	import {get_tome} from '$lib/tome.js';
+	import Hue_Swatch from '$routes/library/colors/Hue_Swatch.svelte';
 	import Color_Swatch from '$routes/library/colors/Color_Swatch.svelte';
 	import Library_Vocab from '$lib/Library_Vocab.svelte';
 
@@ -11,6 +12,9 @@
 	const color_names = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
 
 	const computed_styles = getComputedStyle(document.documentElement);
+
+	// TODO BLOCK make each of these clickable like on the variables page
+	// TODO BLOCK hue picker?
 </script>
 
 <Tome_Detail {tome}>
@@ -39,13 +43,13 @@
 			your own purposes (e.g. you can decide what "tertiary" means for your app):
 		</p>
 		<ul>
-			<li><code>color_a</code> - primary</li>
-			<li><code>color_b</code> - success/help</li>
-			<li><code>color_c</code> - error/danger</li>
-			<li><code>color_d</code> - secondary/accent</li>
-			<li><code>color_e</code> - tertiary</li>
-			<li><code>color_f</code> - quaternary</li>
-			<li><code>color_g</code> - quinary</li>
+			<li><code>a</code> - primary</li>
+			<li><code>b</code> - success/help</li>
+			<li><code>c</code> - error/danger</li>
+			<li><code>d</code> - secondary/accent</li>
+			<li><code>e</code> - tertiary</li>
+			<li><code>f</code> - quaternary</li>
+			<li><code>g</code> - quinary</li>
 		</ul>
 		<p>
 			A downside of this approach is that changing color "a" modifies the many cases it's used, but
@@ -71,8 +75,23 @@
 		</p>
 	</section>
 
+	<div class="prose spaced">
+		<h3>Hue variables</h3>
+		<p>
+			Each color variable combines a hue variable with hardcoded saturation and lightness values.
+			Hue variables are useful when you want to construct your own colors, but most cases can be
+			handled with the color variables.
+		</p>
+	</div>
+	<ul class="palette">
+		{#each color_names as color_name}
+			<Hue_Swatch {color_name} {computed_styles} />
+		{/each}
+	</ul>
+	<br />
+
 	<div class="prose">
-		<h3>Swatches</h3>
+		<h3>Color variables</h3>
 	</div>
 	<ul class="palette">
 		{#each color_names as color_name}
