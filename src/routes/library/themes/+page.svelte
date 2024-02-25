@@ -14,7 +14,7 @@
 	import Theme_Form from '$routes/Theme_Form.svelte';
 	import Themed_Scope from '$lib/Themed_Scope.svelte';
 
-	const LIBRARY_ITEM_NAME = 'theme';
+	const LIBRARY_ITEM_NAME = 'themes';
 
 	const tome = get_tome(LIBRARY_ITEM_NAME);
 
@@ -50,7 +50,7 @@
 					>CSS custom properties</a
 				>. <code>Themed</code> is a singleton component that's mounted at the top-level of the page:
 			</p>
-			<Code content={`import Themed from\n\t'@ryanatkn/fuz/Themed.svelte';`} lang="ts" />
+			<Code content={`import Themed from '@ryanatkn/fuz/Themed.svelte';`} lang="ts" />
 			<Code content={`<!-- +layout.svelte -->\n<Themed>\n\t<slot />\n</Themed>`} />
 			<details>
 				<summary>why the singleton?</summary>
@@ -114,7 +114,7 @@
 			</p>
 			<Color_Scheme_Input />
 			<Code
-				content={`import Color_Scheme_Input from\n\t'@ryanatkn/fuz/Color_Scheme_Input.svelte';`}
+				content={`import Color_Scheme_Input from '@ryanatkn/fuz/Color_Scheme_Input.svelte';`}
 				lang="ts"
 			/>
 			<Code content="<Color_Scheme_Input />" />
@@ -180,10 +180,7 @@
 			<summary>⚠️ scoped themes are a work in progress</summary>
 			<div class="spaced prose">
 				<p>Scope a theme to one branch of the DOM tree with <code>Themed_Scope</code>:</p>
-				<Code
-					content={`import Themed_Scope from\n\t'@ryanatkn/fuz/Themed_Scope.svelte';`}
-					lang="ts"
-				/>
+				<Code content={`import Themed_Scope from '@ryanatkn/fuz/Themed_Scope.svelte';`} lang="ts" />
 				<Code content={`<Themed_Scope {selected_theme}>\n\t\t...\n</Themed_Scope>`} />
 			</div>
 			<div>

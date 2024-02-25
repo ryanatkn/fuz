@@ -30,8 +30,8 @@
 			Variables are <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/--*"
 				>CSS custom properties</a
 			>
-			that can be grouped into a <Library_Vocab name="theme" />. Each variable can have values for
-			light and/or dark color schemes.
+			that can be grouped into a <Library_Vocab name="themes">theme</Library_Vocab>. Each variable
+			can have values for light and/or dark color schemes.
 		</p>
 		<p>
 			Compared to most systems not based on CSS custom properties, variables are more easily changed

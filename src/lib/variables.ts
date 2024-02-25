@@ -31,7 +31,7 @@ export const default_variables: Theme_Variable[] = [
 	{name: 'hue_e', light: '50', summary: 'yellow'},
 	{name: 'hue_f', light: '27', summary: 'brown'},
 	{name: 'hue_g', light: '335', summary: 'pink'},
-	{name: 'color_a_1', light: 'hsl(var(--hue_a), 65%, 91%)'},
+	{name: 'color_a_1', light: 'hsl(var(--hue_a), 65%, 90%)'},
 	{name: 'color_a_2', light: 'hsl(var(--hue_a), 62%, 84%)', dark: 'hsl(var(--hue_a), 62%, 88%)'},
 	{name: 'color_a_3', light: 'hsl(var(--hue_a), 60%, 73%)', dark: 'hsl(var(--hue_a), 60%, 82%)'},
 	{name: 'color_a_4', light: 'hsl(var(--hue_a), 60%, 62%)', dark: 'hsl(var(--hue_a), 60%, 76%)'},

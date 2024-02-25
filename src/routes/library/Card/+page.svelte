@@ -16,7 +16,7 @@
 	<div class="prose">
 		<section>
 			<!-- TODO make this a generic data-driven helper -->
-			<Code content={`import Card from\n\t'@ryanatkn/fuz/Card.svelte';`} lang="ts" />
+			<Code content={`import Card from '@ryanatkn/fuz/Card.svelte';`} lang="ts" />
 			<Code
 				content={`<Card>
   <div>just</div>

@@ -4,7 +4,7 @@ import buttons from '$routes/library/buttons/+page.svelte';
 import forms from '$routes/library/forms/+page.svelte';
 import elements from '$routes/library/elements/+page.svelte';
 import typography from '$routes/library/typography/+page.svelte';
-import theme from '$routes/library/theme/+page.svelte';
+import themes from '$routes/library/themes/+page.svelte';
 import variables from '$routes/library/variables/+page.svelte';
 import prose from '$routes/library/prose/+page.svelte';
 import Pending_Animation from '$routes/library/Pending_Animation/+page.svelte';
@@ -24,11 +24,11 @@ import Card from '$routes/library/Card/+page.svelte';
 
 export const tomes: Tome[] = [
 	{
-		name: 'theme',
-		slug: 'theme',
+		name: 'themes',
+		slug: 'themes',
 		pathname: '',
 		category: 'styles',
-		component: theme,
+		component: themes,
 		related: ['variables', 'colors', 'typography'],
 	},
 	{
@@ -37,7 +37,7 @@ export const tomes: Tome[] = [
 		pathname: '',
 		category: 'styles',
 		component: variables,
-		related: ['theme', 'colors', 'typography'],
+		related: ['themes', 'colors', 'typography'],
 	},
 	{
 		name: 'colors',
@@ -45,7 +45,7 @@ export const tomes: Tome[] = [
 		pathname: '',
 		category: 'styles',
 		component: colors,
-		related: ['theme', 'variables', 'buttons'],
+		related: ['themes', 'variables', 'buttons'],
 	},
 	{
 		name: 'buttons',
@@ -85,7 +85,7 @@ export const tomes: Tome[] = [
 		pathname: '',
 		category: 'styles',
 		component: typography,
-		related: ['theme', 'variables', 'prose'],
+		related: ['themes', 'variables', 'prose'],
 	},
 	// TODO maybe? or do styles like this belong elsewhere? classes? problem is we'll have a classes page for the variables
 	// {

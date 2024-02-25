@@ -9,7 +9,7 @@
 	--hue_e: 50; /* yellow */
 	--hue_f: 27; /* brown */
 	--hue_g: 335; /* pink */
-	--color_a_1: hsl(var(--hue_a), 65%, 91%);
+	--color_a_1: hsl(var(--hue_a), 65%, 90%);
 	--color_a_2: hsl(var(--hue_a), 62%, 84%);
 	--color_a_3: hsl(var(--hue_a), 60%, 73%);
 	--color_a_4: hsl(var(--hue_a), 60%, 62%);
