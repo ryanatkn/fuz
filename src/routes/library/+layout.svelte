@@ -70,9 +70,6 @@
 <style>
 	.layout {
 		position: relative;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
 		padding-bottom: var(--spacing_5);
 	}
 	.menu_wrapper {
