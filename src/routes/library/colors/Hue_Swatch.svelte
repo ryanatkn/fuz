@@ -3,6 +3,7 @@
 	export let computed_styles: CSSStyleDeclaration;
 	export let width = 48;
 	export let height = 48;
+	export let description: string;
 
 	const get_color_hue_string = (name: string) => {
 		const v = computed_styles.getPropertyValue('--' + name);
@@ -18,6 +19,7 @@
 	<div class="text">
 		<div class="name">{variable_name}</div>
 		<div class="hue">{hue}</div>
+		<small class="description">{description}</small>
 	</div>
 </li>
 
@@ -26,7 +28,7 @@
 		display: flex;
 		align-items: stretch;
 		font-family: var(--font_family_mono);
-		padding: var(--spacing_xs);
+		padding: var(--spacing_xs2);
 	}
 	li:hover {
 		background-color: var(--bg);
@@ -38,17 +40,17 @@
 		padding-left: var(--spacing_sm);
 	}
 	.name {
-		width: 70px;
+		width: 65px;
 	}
 	.hue {
-		width: 75px;
-		font-size: var(--size_sm);
+		width: 45px;
 	}
 	.color {
 		background: linear-gradient(-90deg, hsl(var(--hue), 100%, 50%), hsl(var(--hue), 0%, 50%));
 		position: relative;
 		border-radius: 50%;
 		overflow: hidden;
+		flex-shrink: 0;
 	}
 	.color::before {
 		content: '';
@@ -65,5 +67,11 @@
 		inset: 0;
 		background: linear-gradient(transparent 50%, #0008);
 		mix-blend-mode: multiply;
+	}
+	small {
+		display: flex;
+	}
+	.description {
+		font-family: var(--font_family);
 	}
 </style>

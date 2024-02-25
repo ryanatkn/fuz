@@ -15,6 +15,16 @@
 
 	// TODO BLOCK make each of these clickable like on the variables page
 	// TODO BLOCK hue picker?
+
+	const descriptions = [
+		'primary',
+		'success/help',
+		'error/danger',
+		'secondary/accent',
+		'tertiary',
+		'quaternary',
+		'quinary',
+	];
 </script>
 
 <Tome_Detail {tome}>
@@ -23,53 +33,44 @@
 		<p>
 			Fuz provides a palette of colors designed to support theming by both developers at buildtime
 			and end-users at runtime. The colors are semantic, not plain values, which means they
-			automatically adapt to dark mode and customizations, at the expense of having different values
-			depending on color scheme and theme. Each color has a <Library_Vocab name="variables"
-				>variable</Library_Vocab
-			>.
+			automatically adapt to dark mode and custom themes, at the cost of having different values
+			depending on color scheme and theme.
 		</p>
 		<h4>Adapting colors to dark mode</h4>
 		<p>
 			A color's subjective appearance depends on the context in which it's viewed, especially the
-			surrounding colors and values. Fuz's semantic colors should just work without modifying code,
-			so each Fuz color has two values, one for light and one for dark mode. The exceptions are the
-			lightest (1) and darkest (9) variants, although this may change if it yields better results.
+			surrounding colors and values. Fuz's semantic colors are designed to work across color
+			schemes, so each Fuz color <Library_Vocab name="variables">variable</Library_Vocab> has two values,
+			one for light and one for dark mode. The exceptions are the lightest (1) and darkest (9) variants,
+			although this may change if it yields better results.
 		</p>
 		<h4>Custom themes</h4>
 		<p>
 			Instead of "blue" and "red", colors are named with letters like "a" and "b", so you can change
-			"a" from blue to any color in a theme without breaking the name-to-color correspondence
-			everywhere. The semantics of the builtin colors as as follows, and they can be extended for
-			your own purposes (e.g. you can decide what "tertiary" means for your app):
+			the primary "a" from blue to any color in a theme without breaking the name-to-color
+			correspondence everywhere. This also flexibly handles more colors and cases than using names
+			like "primary", and although it takes some learning, it's a simple pattern to remember.
+			("primary" and its ilk require learning too!)
 		</p>
-		<ul>
-			<li><code>a</code> - primary</li>
-			<li><code>b</code> - success/help</li>
-			<li><code>c</code> - error/danger</li>
-			<li><code>d</code> - secondary/accent</li>
-			<li><code>e</code> - tertiary</li>
-			<li><code>f</code> - quaternary</li>
-			<li><code>g</code> - quinary</li>
-		</ul>
 		<p>
-			A downside of this approach is that changing color "a" modifies the many cases it's used, but
-			sometimes you may want to change the color of a specific element or state. In those cases, use
-			plain CSS and optionally Fuz variables to get the desired result. Compared to most libraries,
-			Fuz provides fewer handles for granular color customizations, but the benefits include
-			consistency, efficiency, and ease of app-wide theming.
+			A downside of this approach is that changing a color like the primary "a" affects the many
+			places it's used. Sometimes you may want to change the color of a specific element or state,
+			not all the things. In those cases, use plain CSS and optionally Fuz variables. Compared to
+			most libraries, Fuz provides fewer handles for granular color customizations, but the benefits
+			include consistency, efficiency, DRY authoring, and ease of app-wide theming.
 		</p>
 
 		<h3>Caveats</h3>
 		<p>
 			For performance reasons, Fuz does not currently have an extensive set of variants, like
-			specialized states for elements and color values like "blue". Each builtin hue (a through g)
-			has 9 color values, handling most cases, and the base colors can be customized with <a
+			specialized states for elements or color values like "blue". Each of the 7 hues has 9 color
+			values, handling most cases, and the base colors can be customized with <a
 				href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix"
 				>the <code>color-mix</code> CSS function</a
-			> when needed.
+			> to handle many more cases.
 		</p>
 		<p>
-			Variants may be expanded when Fuz includes a Vite plugin or other build tooling for
+			Variants may be expanded when/if Fuz includes a Vite plugin or other build tooling for
 			optimization. A downside of removing unused styles is that they won't be available to your
 			end-users at runtime.
 		</p>
@@ -80,7 +81,8 @@
 		<p>
 			Hue variables contain a single <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/hue"
 				>hue</a
-			> number. Each color variable combines a hue variable with hardcoded saturation and lightness values.
+			> number. Each color variable combines a hue variable with hardcoded saturation and lightness values
+			for light and dark mode.
 		</p>
 		<p>
 			Hue variables therefore provide a single source of truth that's easy to theme, but to achieve
@@ -89,12 +91,14 @@
 		</p>
 		<p>
 			Hue variables are also useful to construct custom colors not covered by the color variables.
+			For example, Fuz's base stylesheet uses <code>hue_a</code> for the semi-transparent
+			<code>::selection</code>. (try selecting some text - same hue!)
 		</p>
 		<p>Unlike the color variables, the hue variables are the same in both light and dark mode.</p>
 	</div>
 	<ul class="palette">
-		{#each color_names as color_name}
-			<Hue_Swatch {color_name} {computed_styles} />
+		{#each color_names as color_name, i}
+			<Hue_Swatch {color_name} {computed_styles} description={descriptions[i]} />
 		{/each}
 	</ul>
 	<br />
