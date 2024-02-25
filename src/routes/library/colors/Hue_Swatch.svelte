@@ -17,7 +17,7 @@
 <li style:--hue="var(--{variable_name})">
 	<div class="color" style:width="{width}px" style:height="{height}px"></div>
 	<div class="text">
-		<div class="name">{variable_name}</div>
+		<button class="plain">{variable_name}</button>
 		<div class="hue">{hue}</div>
 		<small class="description">{description}</small>
 	</div>
@@ -39,11 +39,9 @@
 		flex: 1;
 		padding-left: var(--spacing_sm);
 	}
-	.name {
-		width: 65px;
-	}
 	.hue {
-		width: 45px;
+		width: 55px;
+		padding-left: var(--spacing_sm);
 	}
 	.color {
 		background: linear-gradient(-90deg, hsl(var(--hue), 100%, 50%), hsl(var(--hue), 0%, 50%));

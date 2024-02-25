@@ -450,73 +450,62 @@ label.disabled:active {
 }
 
 /* TODO these need design work for visuals/consistency/customizability */
-button:is(.color_a_5, .color_b_5, .color_d_5, .color_e_5, .color_c_5, .color_f_5, .color_g_5) {
+button:is(.color_a, .color_b, .color_c, .color_d, .color_e, .color_f, .color_g) {
 	color: var(--bg_7);
 }
-/* TODO differences for hover/focus */
-button:is(.color_a_5, .color_b_5, .color_d_5, .color_e_5, .color_c_5, .color_f_5, .color_g_5):is(
+button:is(.color_a, .color_b, .color_c, .color_d, .color_e, .color_f, .color_g):is(
 		:hover,
-		:focus
+		:focus,
+		:active
 	) {
 	color: var(--bg_10);
 }
-button:is(
-		.color_a_5,
-		.color_b_5,
-		.color_d_5,
-		.color_e_5,
-		.color_c_5,
-		.color_f_5,
-		.color_g_5
-	):active {
-	color: var(--bg_10);
-}
-button.color_a_5:not(.selected) {
+button.color_a:not(.selected) {
 	background-color: var(--color_a_5);
 }
-button.color_b_5:not(.selected) {
+button.color_b:not(.selected) {
 	background-color: var(--color_b_5);
 }
-button.color_d_5:not(.selected) {
-	background-color: var(--color_d_5);
-}
-button.color_e_5:not(.selected) {
-	background-color: var(--color_e_5);
-}
-button.color_c_5:not(.selected) {
+button.color_c:not(.selected) {
 	background-color: var(--color_c_5);
 }
-button.color_f_5:not(.selected) {
+button.color_d:not(.selected) {
+	background-color: var(--color_d_5);
+}
+button.color_e:not(.selected) {
+	background-color: var(--color_e_5);
+}
+button.color_f:not(.selected) {
 	background-color: var(--color_f_5);
 }
-button.color_g_5:not(.selected) {
+button.color_g:not(.selected) {
 	background-color: var(--color_g_5);
 }
-button.selected.color_a_5 {
+button.selected.color_a {
 	color: var(--color_a_5);
 	border-color: var(--color_a_5);
 }
-button.selected.color_b_5 {
+button.selected.color_b {
 	color: var(--color_b_5);
 	border-color: var(--color_b_5);
 }
-button.selected.color_d_5 {
+button.selected.color_d {
 	color: var(--color_d_5);
 	border-color: var(--color_d_5);
 }
-button.selected.color_e_5 {
+button.selected.color_e {
 	color: var(--color_e_5);
 	border-color: var(--color_e_5);
 }
-button.selected.color_c_5 {
+button.selected.color_c {
 	color: var(--color_c_5);
 	border-color: var(--color_c_5);
 }
-button.selected.color_f_5 {
+button.selected.color_f {
 	color: var(--color_f_5);
 	border-color: var(--color_f_5);
 }
-button.selected.color_g_5 {
+button.selected.color_g {
 	color: var(--color_g_5);
 	border-color: var(--color_g_5);
 }
