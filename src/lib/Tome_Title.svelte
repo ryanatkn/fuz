@@ -9,6 +9,6 @@
 	$: ({path, path_is_selected} = to_library_path_info(tome.slug, $page.url.pathname));
 </script>
 
-<h2 class="box" id={tome.name}>
+<h2 id={tome.name}>
 	{#if path_is_selected}{tome.name}{:else}<a href={path}>{tome.name}</a>{/if}
 </h2>
