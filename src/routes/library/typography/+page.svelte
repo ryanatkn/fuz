@@ -52,12 +52,12 @@
 				><code>font-weight</code></a
 			>
 		</h3>
-		{#each font_weights as fontWeight (fontWeight)}
-			<div style:font-weight={fontWeight}>
-				{fontWeight}
-			</div>
-		{/each}
 		<div class="overflowing">
+			{#each font_weights as fontWeight (fontWeight)}
+				<div style:font-weight={fontWeight}>
+					{fontWeight}
+				</div>
+			{/each}
 			{#each font_sizes as font_size (font_size)}
 				{#each font_weights as fontWeight (fontWeight)}
 					<div
