@@ -114,8 +114,6 @@ export const create_theme_style_html = (style: string): string => `<style nonce=
 </style>`;
 
 export interface Theme {
-	// TODO probably need an `id`
-	// id: string;
 	name: string;
 	items: Theme_Variable[];
 }
