@@ -90,8 +90,13 @@
 	</ul>
 	<br />
 
-	<div class="prose">
+	<div class="prose spaced">
 		<h3>Color variables</h3>
+		<p>
+			The 5th variable of each color is used as the base for things like <Library_Vocab
+				name="buttons"
+			/>.
+		</p>
 	</div>
 	<ul class="palette">
 		{#each color_names as color_name}

@@ -31,6 +31,7 @@
 <style>
 	ul {
 		width: 100%;
+		margin-bottom: 32px;
 	}
 	li {
 		display: flex;
