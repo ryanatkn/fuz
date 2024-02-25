@@ -21,7 +21,7 @@
 		<section>
 			<!-- TODO make this a generic data-driven helper -->
 			<Code
-				content={`import Pending_Animation from\n\t'@ryanatkn/fuz/Pending_Animation.svelte';`}
+				content={`import Pending_Animation from '@ryanatkn/fuz/Pending_Animation.svelte';`}
 				lang="ts"
 			/>
 			<Code content={`<Pending_Animation running={${pendingAnimation0Running}} />`} />

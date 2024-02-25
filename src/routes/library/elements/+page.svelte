@@ -11,7 +11,7 @@
 <Tome_Detail {tome}>
 	<div class="prose">
 		<blockquote>
-			styles for miscellaneous <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element"
+			styles for plain <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element"
 				>HTML elements</a
 			>
 		</blockquote>
@@ -128,4 +128,6 @@
 			</aside>
 		</aside>
 	</div>
+	<hr />
+	<div class="prose">TODO more!</div>
 </Tome_Detail>

@@ -19,7 +19,6 @@
 		sync_color_scheme as default_sync_color_scheme,
 		save_theme as default_save_theme,
 		load_theme as default_load_theme,
-		THEME_COLOR,
 	} from '$lib/theme.js';
 	import {DEFAULT_THEME} from '$lib/themes.js';
 
@@ -76,7 +75,6 @@
 
 	export let color_scheme_fallback: Color_Scheme | undefined = undefined;
 	export let color_scheme_css: string | undefined = undefined;
-	export let theme_color: string | undefined = undefined;
 
 	/**
 	 * @readonly
@@ -116,7 +114,6 @@
 			: !import.meta.env.SSR && matchMedia('(prefers-color-scheme: dark)').matches
 				? 'dark light'
 				: 'light dark');
-	$: final_theme_color = theme_color ?? THEME_COLOR;
 </script>
 
 <!-- eslint-disable svelte/no-at-html-tags -->
@@ -124,7 +121,6 @@
 	{#if theme_style_html}{@html theme_style_html}{/if}
 	{#if theme_setup_script}
 		<meta name="color-scheme" content={final_color_scheme_css} />
-		<meta name="theme-color" content={final_theme_color} />
 		<svelte:element this="script">{@html theme_setup_script}</svelte:element>
 	{/if}
 </svelte:head>

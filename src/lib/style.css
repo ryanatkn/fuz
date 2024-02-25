@@ -29,7 +29,7 @@ html,
 .themed {
 	background-color: var(--bg);
 	color: var(--text_color);
-	accent-color: var(--color_b);
+	accent-color: var(--color_b_5);
 	line-height: var(--line_height);
 	tab-size: 2;
 }
@@ -45,7 +45,7 @@ body {
 }
 
 ::selection {
-	background: hsla(var(--hue_a), 80%, 80%, var(--faded_3));
+	background: hsla(var(--hue_a), 90%, 80%, var(--faded_3));
 }
 
 /*
@@ -307,13 +307,13 @@ input[type='range'] {
 	cursor: pointer;
 }
 input[type='range']:hover {
-	--thumb_background_color: var(--color_a);
+	--thumb_background_color: var(--color_a_5);
 }
 input[type='range']:disabled {
 	--thumb_background_color: var(--text_disabled);
 }
 input[type='range']:disabled:active {
-	--thumb_background_color: var(--color_c);
+	--thumb_background_color: var(--color_c_5);
 }
 input[type='range']::-webkit-slider-thumb {
 	-webkit-appearance: none;
@@ -362,8 +362,8 @@ input[type='range']::-moz-range-track {
 }
 
 :is(button, input, textarea, select):focus {
-	--border_color: var(--color_a);
-	--outline_color: var(--color_a);
+	--border_color: var(--color_a_5);
+	--outline_color: var(--color_a_5);
 	--outline_width: var(--outline_width_2);
 }
 
@@ -419,7 +419,7 @@ see https://caniuse.com/css-has
 currently `:disabled` overrides this */
 button.selected {
 	--text_color: var(--text_active);
-	--border_color: var(--color_a);
+	--border_color: var(--color_a_5);
 	background: var(--button_bg_active);
 }
 button.selected:not(.deselectable) {
@@ -428,7 +428,7 @@ button.selected:not(.deselectable) {
 }
 input:checked {
 	--text_color: var(--text_active);
-	--border_color: var(--color_a);
+	--border_color: var(--color_a_5);
 }
 input[type='radio']:checked {
 	cursor: default;
@@ -445,69 +445,69 @@ input[type='radio']:checked {
 }
 :is(input, textarea, select, button):disabled:active,
 label.disabled:active {
-	--border_color: var(--color_c);
-	--text_color: var(--color_c);
+	--border_color: var(--color_c_5);
+	--text_color: var(--color_c_5);
 }
 
 /* TODO these need design work for visuals/consistency/customizability */
-button:is(.color_a, .color_b, .color_d, .color_e, .color_c, .color_f, .color_g) {
+button:is(.color_a, .color_b, .color_c, .color_d, .color_e, .color_f, .color_g) {
 	color: var(--bg_7);
 }
-/* TODO differences for hover/focus */
-button:is(.color_a, .color_b, .color_d, .color_e, .color_c, .color_f, .color_g):is(:hover, :focus) {
-	color: var(--bg_10);
-}
-button:is(.color_a, .color_b, .color_d, .color_e, .color_c, .color_f, .color_g):active {
+button:is(.color_a, .color_b, .color_c, .color_d, .color_e, .color_f, .color_g):is(
+		:hover,
+		:focus,
+		:active
+	) {
 	color: var(--bg_10);
 }
 button.color_a:not(.selected) {
-	background-color: var(--color_a);
+	background-color: var(--color_a_5);
 }
 button.color_b:not(.selected) {
-	background-color: var(--color_b);
-}
-button.color_d:not(.selected) {
-	background-color: var(--color_d);
-}
-button.color_e:not(.selected) {
-	background-color: var(--color_e);
+	background-color: var(--color_b_5);
 }
 button.color_c:not(.selected) {
-	background-color: var(--color_c);
+	background-color: var(--color_c_5);
+}
+button.color_d:not(.selected) {
+	background-color: var(--color_d_5);
+}
+button.color_e:not(.selected) {
+	background-color: var(--color_e_5);
 }
 button.color_f:not(.selected) {
-	background-color: var(--color_f);
+	background-color: var(--color_f_5);
 }
 button.color_g:not(.selected) {
-	background-color: var(--color_g);
+	background-color: var(--color_g_5);
 }
 button.selected.color_a {
-	color: var(--color_a);
-	border-color: var(--color_a);
+	color: var(--color_a_5);
+	border-color: var(--color_a_5);
 }
 button.selected.color_b {
-	color: var(--color_b);
-	border-color: var(--color_b);
+	color: var(--color_b_5);
+	border-color: var(--color_b_5);
 }
 button.selected.color_d {
-	color: var(--color_d);
-	border-color: var(--color_d);
+	color: var(--color_d_5);
+	border-color: var(--color_d_5);
 }
 button.selected.color_e {
-	color: var(--color_e);
-	border-color: var(--color_e);
+	color: var(--color_e_5);
+	border-color: var(--color_e_5);
 }
 button.selected.color_c {
-	color: var(--color_c);
-	border-color: var(--color_c);
+	color: var(--color_c_5);
+	border-color: var(--color_c_5);
 }
 button.selected.color_f {
-	color: var(--color_f);
-	border-color: var(--color_f);
+	color: var(--color_f_5);
+	border-color: var(--color_f_5);
 }
 button.selected.color_g {
-	color: var(--color_g);
-	border-color: var(--color_g);
+	color: var(--color_g_5);
+	border-color: var(--color_g_5);
 }
 
 /* TODO could improve this with the coming `:has` selector
@@ -704,6 +704,7 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories
 	margin-bottom: var(--spacing_xs);
 }
 
+/* TODO maybe remove? */
 .selectable {
 	cursor: pointer;
 	background-color: var(--button_bg);
@@ -718,7 +719,7 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories
 .selectable.selected,
 .selectable:active {
 	background-color: var(--button_bg_active);
-	border-color: var(--color_a);
+	border-color: var(--color_a_5);
 }
 .selectable.selected {
 	cursor: default;
@@ -889,7 +890,7 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories
 }
 .menu_item.selected {
 	/* TODO different patterns for border and bg? */
-	--border_color: var(--color_a);
+	--border_color: var(--color_a_5);
 	background-color: var(--fg_1);
 	z-index: 1;
 }

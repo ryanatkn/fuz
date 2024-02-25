@@ -14,7 +14,7 @@
 	<div class="prose">
 		<section>
 			<!-- TODO make this a generic data-driven helper -->
-			<Code content={`import Breadcrumb from\n\t'@ryanatkn/fuz/Breadcrumb.svelte';`} lang="ts" />
+			<Code content={`import Breadcrumb from '@ryanatkn/fuz/Breadcrumb.svelte';`} lang="ts" />
 			<Code content={`<Breadcrumb />`} />
 			<Breadcrumb />
 		</section>

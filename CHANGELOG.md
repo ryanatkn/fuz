@@ -6,13 +6,13 @@
 
 - rename colors ([#8](https://github.com/ryanatkn/fuz/pull/8))
 
-  - `color_1` to `color_a` and `hue_1` to `hue_a` (primary)
-  - `color_2` to `color_b` and `hue_2` to `hue_b` (success)
-  - `color_3` to `color_d` and `hue_3` to `hue_d`
-  - `color_4` to `color_e` and `hue_4` to `hue_e`
-  - `color_5` to `color_c` and `hue_5` to `hue_c` (danger)
-  - `color_6` to `color_f` and `hue_6` to `hue_f`
-  - `color_7` to `color_g` and `hue_7` to `hue_g`
+  - `color_1` to `color_a_5` and `hue_1` to `hue_a` (primary)
+  - `color_2` to `color_b_5` and `hue_2` to `hue_b` (success)
+  - `color_3` to `color_d_5` and `hue_3` to `hue_d`
+  - `color_4` to `color_e_5` and `hue_4` to `hue_e`
+  - `color_5` to `color_c_5` and `hue_5` to `hue_c` (danger)
+  - `color_6` to `color_f_5` and `hue_6` to `hue_f`
+  - `color_7` to `color_g_5` and `hue_7` to `hue_g`
 
 ## 0.86.0
 
@@ -425,7 +425,7 @@
   - add and publish `$lib/Color_Scheme_Input.svelte`
   - remove the `error` param from `createContextmenu` and add the `contextmenu.error` store
   - rename `.prose` from `.markup`
-  - replace `--active_color` and `--active_color_b` with `--color_N`
+  - replace `--active_color` and `--active_color_b_5` with `--color_N`
   - rename `--button_color_X` to `--button_X`, `--border_color_X` to `--border_X`,
     and `--link_color_X` to `--link_X`
   - replace `--text_color_light` and `--text_color_lighter` with
