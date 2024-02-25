@@ -13,7 +13,7 @@
 
 	const computed_styles = getComputedStyle(document.documentElement);
 
-	// TODO button to add an inline hue input
+	// TODO button to add an inline hue input for runtime modification of the theme
 
 	const descriptions = [
 		'primary',
