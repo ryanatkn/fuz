@@ -12,7 +12,7 @@
 	};
 </script>
 
-<section class="prose box">
+<section class="prose">
 	<div>
 		<h3>the <code>--icon_size</code> variable's variants</h3>
 		<blockquote class="width_sm">
