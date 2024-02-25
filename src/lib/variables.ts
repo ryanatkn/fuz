@@ -76,7 +76,7 @@ export const default_variables: Theme_Variable[] = [
 	{name: 'color_e_7', light: 'hsl(var(--hue_e), 75%, 26%)', dark: 'hsl(var(--hue_e), 75%, 36%)'},
 	{name: 'color_e_8', light: 'hsl(var(--hue_e), 80%, 18%)', dark: 'hsl(var(--hue_e), 80%, 23%)'},
 	{name: 'color_e_9', light: 'hsl(var(--hue_e), 85%, 10%)'},
-	{name: 'color_f_1', light: 'hsl(var(--hue_f), 32%, 84%)'},
+	{name: 'color_f_1', light: 'hsl(var(--hue_f), 32%, 85%)'},
 	{name: 'color_f_2', light: 'hsl(var(--hue_f), 32%, 69%)', dark: 'hsl(var(--hue_f), 32%, 76%)'},
 	{name: 'color_f_3', light: 'hsl(var(--hue_f), 32%, 56%)', dark: 'hsl(var(--hue_f), 32%, 70%)'},
 	{name: 'color_f_4', light: 'hsl(var(--hue_f), 42%, 38%)', dark: 'hsl(var(--hue_f), 32%, 63%)'},
