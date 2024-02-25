@@ -145,12 +145,10 @@ a.selected:active {
 ul,
 ol,
 menu {
-	display: flex;
-	flex-direction: column;
 	list-style: none;
 }
 li {
-	display: flex;
+	display: block; /* reverted by .prose */
 }
 
 h1 {
@@ -665,7 +663,7 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories
 	list-style: decimal;
 }
 .prose li {
-	display: list-item;
+	display: list-item; /* reset from `block` */
 }
 .prose a {
 	display: inline;
