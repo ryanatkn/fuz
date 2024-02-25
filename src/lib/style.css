@@ -189,11 +189,6 @@ hr {
 	margin: var(--spacing_5) 0;
 }
 
-form {
-	display: flex;
-	flex-direction: column;
-}
-
 fieldset {
 	display: flex;
 	flex-direction: column;
