@@ -47,13 +47,15 @@
 		display: flex;
 		font-size: var(--size_2);
 		align-items: center;
-		justify-content: center;
 		padding: var(--spacing_lg);
 		width: var(--card_width);
 		background-color: var(--fg_1);
 		border-radius: var(--border_radius);
 		text-decoration: none;
 		text-align: left;
+	}
+	.right {
+		justify-content: flex-end;
 	}
 	.above,
 	.below {

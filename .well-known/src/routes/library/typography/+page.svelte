@@ -32,7 +32,7 @@
 </script>
 
 <Tome_Detail {tome}>
-	<section class="prose">
+	<section class="prose overflowing">
 		<h1 title="--size_3">h1</h1>
 		<h2 title="--size_2">h2</h2>
 		<h3 title="--size_1">h3</h3>
@@ -46,31 +46,33 @@
 			<p style:font-size="var(--{font_size.name})" title={font_size.light}>--{font_size.name}</p>
 		{/each}
 	</section>
-	<section class="prose">
+	<section class="prose width_full">
 		<h3>
 			sizes at each <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight"
 				><code>font-weight</code></a
 			>
 		</h3>
-		{#each font_weights as fontWeight (fontWeight)}
-			<div style:font-weight={fontWeight}>
-				{fontWeight}
-			</div>
-		{/each}
-		{#each font_sizes as font_size (font_size)}
+		<div class="overflowing">
 			{#each font_weights as fontWeight (fontWeight)}
-				<div
-					class="nowrap"
-					style:font-weight={fontWeight}
-					style:--font_weight={fontWeight}
-					style:font-size={font_size.light}
-				>
-					<div title="{font_size.light} at {fontWeight} font-weight">
-						--{font_size.name}
-					</div>
+				<div style:font-weight={fontWeight}>
+					{fontWeight}
 				</div>
 			{/each}
-		{/each}
+			{#each font_sizes as font_size (font_size)}
+				{#each font_weights as fontWeight (fontWeight)}
+					<div
+						class="nowrap"
+						style:font-weight={fontWeight}
+						style:--font_weight={fontWeight}
+						style:font-size={font_size.light}
+					>
+						<div title="{font_size.light} at {fontWeight} font-weight">
+							--{font_size.name}
+						</div>
+					</div>
+				{/each}
+			{/each}
+		</div>
 	</section>
 	<Icon_Sizes />
 </Tome_Detail>
@@ -81,5 +83,9 @@
 	}
 	section {
 		margin-bottom: var(--spacing_5);
+	}
+	.overflowing {
+		width: 100%;
+		overflow-x: auto;
 	}
 </style>

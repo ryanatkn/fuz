@@ -3,6 +3,7 @@
 
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
 	import {get_tome} from '$lib/tome.js';
+	import Color_Scheme_Input from '$lib/Color_Scheme_Input.svelte';
 
 	const LIBRARY_ITEM_NAME = 'buttons';
 
@@ -30,19 +31,26 @@
 		<h3>colorful buttons</h3>
 	</section>
 	<br />
-	{#each color_names as c}
-		{@const color_name = `color_${c}`}
-		<Code content={`<button class="${color_name}">`} />
-		<button class={color_name}>.{color_name}</button>
-		<button class={color_name} disabled>disabled .{color_name}</button>
-		<button class="{color_name} selected">.{color_name}.selected</button>
-		<button class="{color_name} selected" disabled>disabled .{color_name}.selected</button>
-		<button class="{color_name} selected deselectable">.{color_name}.selected.deselectable</button>
-		<button class="{color_name} selected deselectable" disabled
-			>disabled .{color_name}.selected.deselectable</button
-		>
-		<br />
-	{/each}
+	<div class="spaced">
+		{#each color_names as c}
+			{@const color_name = `color_${c}`}
+			<Code content={`<button class="${color_name}">`} />
+			<button class={color_name}>.{color_name}</button>
+			<button class={color_name} disabled>disabled .{color_name}</button>
+			<button class="{color_name} selected">.{color_name}.selected</button>
+			<button class="{color_name} selected" disabled>disabled .{color_name}.selected</button>
+			<button class="{color_name} selected deselectable">.{color_name}.selected.deselectable</button
+			>
+			<button class="{color_name} selected deselectable" disabled
+				>disabled .{color_name}.selected.deselectable</button
+			>
+			<br />
+		{/each}
+	</div>
+
+	<div class="box width_full spaced">
+		<Color_Scheme_Input />
+	</div>
 
 	<hr />
 

@@ -28,7 +28,7 @@
 </script>
 
 <Tome_Detail {tome}>
-	<div class="prose box">
+	<div class="prose">
 		<Code
 			content={`<form>
 	<fieldset>
@@ -119,7 +119,7 @@
 
 	<hr />
 
-	<div class="box prose">
+	<div class="prose">
 		<h3>
 			<code>form</code> with range input
 		</h3>
@@ -137,7 +137,7 @@
 
 	<hr />
 
-	<div class="box prose">
+	<div class="prose">
 		<h3>
 			<code>form</code> with checkboxes
 		</h3>
@@ -171,7 +171,7 @@
 	</div>
 	<hr />
 
-	<div class="box prose">
+	<div class="prose">
 		<h3>
 			<code>form</code> with radio inputs
 		</h3>

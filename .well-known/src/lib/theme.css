@@ -18,7 +18,7 @@
 	--color_a_7: hsl(var(--hue_a), 55%, 30%);
 	--color_a_8: hsl(var(--hue_a), 55%, 20%);
 	--color_a_9: hsl(var(--hue_a), 55%, 10%);
-	--color_b_1: hsl(var(--hue_b), 55%, 88%);
+	--color_b_1: hsl(var(--hue_b), 55%, 90%);
 	--color_b_2: hsl(var(--hue_b), 50%, 77%);
 	--color_b_3: hsl(var(--hue_b), 50%, 63%);
 	--color_b_4: hsl(var(--hue_b), 50%, 49%);
@@ -239,14 +239,14 @@
 	--border_radius_xs2: calc(var(--border_radius_xs) / 1.618);
 }
 :root.dark {
-	--color_a_2: hsl(var(--hue_a), 62%, 88%);
+	--color_a_2: hsl(var(--hue_a), 62%, 87%);
 	--color_a_3: hsl(var(--hue_a), 60%, 82%);
 	--color_a_4: hsl(var(--hue_a), 60%, 76%);
 	--color_a_5: hsl(var(--hue_a), 55%, 70%);
 	--color_a_6: hsl(var(--hue_a), 55%, 55%);
 	--color_a_7: hsl(var(--hue_a), 55%, 40%);
 	--color_a_8: hsl(var(--hue_a), 55%, 25%);
-	--color_b_2: hsl(var(--hue_b), 50%, 81%);
+	--color_b_2: hsl(var(--hue_b), 50%, 82%);
 	--color_b_3: hsl(var(--hue_b), 50%, 74%);
 	--color_b_4: hsl(var(--hue_b), 50%, 66%);
 	--color_b_5: hsl(var(--hue_b), 43%, 58%);
@@ -260,7 +260,7 @@
 	--color_c_6: hsl(var(--hue_c), 65%, 45%);
 	--color_c_7: hsl(var(--hue_c), 65%, 33%);
 	--color_c_8: hsl(var(--hue_c), 65%, 22%);
-	--color_d_2: hsl(var(--hue_d), 50%, 87%);
+	--color_d_2: hsl(var(--hue_d), 50%, 86%);
 	--color_d_3: hsl(var(--hue_d), 50%, 81%);
 	--color_d_4: hsl(var(--hue_d), 50%, 76%);
 	--color_d_5: hsl(var(--hue_d), 50%, 70%);
@@ -281,7 +281,7 @@
 	--color_f_6: hsl(var(--hue_f), 40%, 44%);
 	--color_f_7: hsl(var(--hue_f), 50%, 31%);
 	--color_f_8: hsl(var(--hue_f), 70%, 19%);
-	--color_g_2: hsl(var(--hue_g), 72%, 87%);
+	--color_g_2: hsl(var(--hue_g), 72%, 86%);
 	--color_g_3: hsl(var(--hue_g), 72%, 81%);
 	--color_g_4: hsl(var(--hue_g), 72%, 76%);
 	--color_g_5: hsl(var(--hue_g), 72%, 70%);
