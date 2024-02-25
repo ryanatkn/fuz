@@ -103,7 +103,7 @@
 	.icon_sizes {
 		width: 100%;
 		overflow-x: auto;
-		overflow-y: hidden;
+		overflow-y: hidden; /* TODO hack because emoji are bigger than the defined dimensions, maybe dont use a 🐢? :(  */
 	}
 	.icon_sizes figure {
 		display: flex;
