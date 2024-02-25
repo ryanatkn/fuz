@@ -148,7 +148,7 @@
 			</details>
 		</div>
 	</section>
-	<section class="theme box panel">
+	<section class="theme panel">
 		<div class="prose">
 			<h3>themes</h3>
 			<p>
@@ -172,7 +172,7 @@
 			</aside>
 		</div>
 	</section>
-	<section class="theme box panel">
+	<section class="theme panel">
 		<div class="spaced prose">
 			<h3>scoped themes</h3>
 		</div>
@@ -349,6 +349,7 @@ $selected_color_scheme; // '${$selected_color_scheme}'`}
 		padding: var(--spacing_md) var(--spacing_lg);
 	}
 	section {
+		width: 100%;
 		margin-bottom: var(--spacing_6);
 	}
 	.theme_editor_wrapper {
