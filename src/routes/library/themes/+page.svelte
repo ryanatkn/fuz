@@ -346,14 +346,14 @@ $selected_color_scheme; // '${$selected_color_scheme}'`}
 
 <style>
 	.theme {
-		padding: var(--spacing_md) var(--spacing_lg);
+		padding: var(--space_md) var(--space_lg);
 	}
 	section {
 		width: 100%;
-		margin-bottom: var(--spacing_6);
+		margin-bottom: var(--space_6);
 	}
 	.theme_editor_wrapper {
 		width: var(--width_md);
-		padding: var(--spacing_lg);
+		padding: var(--space_lg);
 	}
 </style>

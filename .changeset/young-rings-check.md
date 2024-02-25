@@ -1,5 +1,8 @@
 ---
-"@ryanatkn/fuz": minor
+'@ryanatkn/fuz': minor
 ---
 
-rename `faded_N` variables to `fade_N`
+rename some variables
+
+- `fade_N` from `faded_N`
+- `space_N` from `spacing_N`

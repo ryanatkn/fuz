@@ -59,12 +59,12 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		margin-bottom: var(--spacing_5);
+		margin-bottom: var(--space_5);
 	}
 	menu {
 		width: 100%;
 		display: flex;
-		gap: var(--spacing_lg);
+		gap: var(--space_lg);
 		flex-direction: column;
 		align-items: center;
 		font-size: var(--size_lg);

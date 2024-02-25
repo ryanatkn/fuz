@@ -82,7 +82,7 @@
 		white-space: nowrap;
 	}
 	section {
-		margin-bottom: var(--spacing_5);
+		margin-bottom: var(--space_5);
 	}
 	.overflowing {
 		width: 100%;

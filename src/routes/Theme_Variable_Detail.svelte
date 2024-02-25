@@ -24,11 +24,11 @@
 	.variable {
 		align-items: flex-start;
 		/* ... */
-		padding: var(--spacing_xs) 0;
+		padding: var(--space_xs) 0;
 	}
 	.name {
 		font-size: var(--size_1);
 		text-align: center;
-		margin-bottom: var(--spacing_1);
+		margin-bottom: var(--space_1);
 	}
 </style>

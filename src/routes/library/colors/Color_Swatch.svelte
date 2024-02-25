@@ -56,7 +56,7 @@
 		display: flex;
 		align-items: center;
 		flex: 1;
-		padding-left: var(--spacing_sm);
+		padding-left: var(--space_sm);
 	}
 	button {
 		/* TODO var? see the 32px elsewhere here and the Hue_Swatch as well */
@@ -65,16 +65,16 @@
 	.hex {
 		width: 73px;
 		font-size: var(--size_sm);
-		padding-left: var(--spacing_sm);
+		padding-left: var(--space_sm);
 	}
 	.hsl {
 		width: 149px;
 		font-size: var(--size_sm);
-		padding-left: var(--spacing_sm);
+		padding-left: var(--space_sm);
 	}
 	.rgb {
 		font-size: var(--size_sm);
-		padding-left: var(--spacing_sm);
+		padding-left: var(--space_sm);
 	}
 	.color {
 		width: 100px;
@@ -86,7 +86,7 @@
 		.text {
 			flex-direction: column;
 			align-items: flex-start;
-			padding: var(--spacing_sm);
+			padding: var(--space_sm);
 		}
 	}
 </style>

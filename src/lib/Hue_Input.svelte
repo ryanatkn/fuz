@@ -60,7 +60,7 @@
 <style>
 	.hue_input .indicator {
 		background-color: hsl(var(--hue) 50% 50%);
-		height: var(--spacing_5);
+		height: var(--space_5);
 		margin: 0;
 		display: flex;
 		flex-direction: row;
@@ -90,7 +90,7 @@
 			hsl(324, 50%, 50%) 90%,
 			hsl(360, 50%, 50%) 100%
 		);
-		height: var(--spacing_lg);
+		height: var(--space_lg);
 	}
 	/* TODO generic way to make this seamless? */
 	input {

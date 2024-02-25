@@ -70,14 +70,14 @@
 <style>
 	.layout {
 		position: relative;
-		padding-bottom: var(--spacing_5);
+		padding-bottom: var(--space_5);
 	}
 	.menu_wrapper {
 		position: absolute;
 		left: 0;
 		top: 0;
 		height: 100%;
-		transform: translate3d(calc(-100% - var(--spacing_sm)), 0, 0);
+		transform: translate3d(calc(-100% - var(--space_sm)), 0, 0);
 	}
 	.menu {
 		position: sticky;
@@ -87,15 +87,15 @@
 		.menu_wrapper {
 			position: relative;
 			transform: none;
-			margin-bottom: var(--spacing_3);
+			margin-bottom: var(--space_3);
 		}
 	}
 	section {
-		padding: var(--spacing_2);
+		padding: var(--space_2);
 	}
 	h6 {
-		margin-bottom: var(--spacing_md);
-		margin-top: var(--spacing_3);
+		margin-bottom: var(--space_md);
+		margin-top: var(--space_3);
 	}
 	h6:first-child {
 		margin-top: 0;

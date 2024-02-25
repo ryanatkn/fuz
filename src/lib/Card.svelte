@@ -43,11 +43,11 @@
 <style>
 	.card {
 		--icon_size: var(--icon_size_lg);
-		--icon_margin: var(--spacing_lg);
+		--icon_margin: var(--space_lg);
 		display: flex;
 		font-size: var(--size_2);
 		align-items: center;
-		padding: var(--spacing_lg);
+		padding: var(--space_lg);
 		width: var(--card_width);
 		background-color: var(--fg_1);
 		border-radius: var(--border_radius);
@@ -67,11 +67,11 @@
 		text-decoration: underline;
 	}
 	.left .content {
-		padding-right: var(--spacing_sm);
+		padding-right: var(--space_sm);
 	}
 	.right .content {
 		text-align: right;
-		padding-left: var(--spacing_sm);
+		padding-left: var(--space_sm);
 	}
 	.icon {
 		font-size: var(--icon_size);
@@ -99,16 +99,16 @@
 	@media (max-width: 380px) {
 		.card {
 			--icon_size: var(--icon_size_md);
-			--icon_margin: var(--spacing_sm);
+			--icon_margin: var(--space_sm);
 			font-size: var(--size_lg);
 		}
 		.icon {
 			font-size: var(--icon_size_md);
-			margin-right: var(--spacing_sm);
+			margin-right: var(--space_sm);
 		}
 		.right .icon {
 			margin-right: 0;
-			margin-left: var(--spacing_sm);
+			margin-left: var(--space_sm);
 		}
 	}
 </style>

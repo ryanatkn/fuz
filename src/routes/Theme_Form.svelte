@@ -113,7 +113,7 @@
 	header {
 		display: flex;
 		gap: 1rem;
-		margin-bottom: var(--spacing_md);
+		margin-bottom: var(--space_md);
 	}
 	.variables_header,
 	form {
@@ -123,7 +123,7 @@
 		display: flex;
 	}
 	.variables {
-		padding-right: var(--spacing_sm);
+		padding-right: var(--space_sm);
 	}
 	.variable {
 		min-height: var(--icon_size_sm);
@@ -143,7 +143,7 @@
 	}
 	.copy {
 		position: absolute;
-		top: var(--spacing_md);
-		right: var(--spacing_md);
+		top: var(--space_md);
+		right: var(--space_md);
 	}
 </style>

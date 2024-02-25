@@ -74,7 +74,7 @@ export interface Theme_Variable {
 
 <style>
 	section {
-		margin-bottom: var(--spacing_5);
+		margin-bottom: var(--space_5);
 	}
 	.variables {
 		width: 100%;

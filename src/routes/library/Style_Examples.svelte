@@ -84,13 +84,13 @@
 		</fieldset>
 		<fieldset class="row wrap box">
 			<label class="row">
-				<input type="checkbox" bind:checked={checked1} style:margin-right="var(--spacing_lg)" />
+				<input type="checkbox" bind:checked={checked1} style:margin-right="var(--space_lg)" />
 			</label>
 			<label class="row">
-				<input type="checkbox" bind:checked={checked2} style:margin-right="var(--spacing_lg)" />
+				<input type="checkbox" bind:checked={checked2} style:margin-right="var(--space_lg)" />
 			</label>
 			<label class="row disabled">
-				<input type="checkbox" disabled style:margin-right="var(--spacing_lg)" />
+				<input type="checkbox" disabled style:margin-right="var(--space_lg)" />
 			</label>
 			<label class="row disabled">
 				<input type="checkbox" checked disabled />
@@ -104,7 +104,7 @@
 			<label class="row disabled">
 				<input type="radio" disabled />
 			</label>
-			<label class="row disabled selected" style:margin-bottom="var(--spacing_lg)">
+			<label class="row disabled selected" style:margin-bottom="var(--space_lg)">
 				<input type="radio" checked disabled />
 			</label>
 		</fieldset>
@@ -153,7 +153,7 @@
 	}
 	/* TODO fix this generically, but how without a gnarly selector? */
 	nav {
-		margin-bottom: var(--spacing_lg);
+		margin-bottom: var(--space_lg);
 	}
 	nav button {
 		margin-bottom: 0;

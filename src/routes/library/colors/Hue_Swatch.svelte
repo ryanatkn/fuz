@@ -36,7 +36,7 @@
 		display: flex;
 		align-items: stretch;
 		font-family: var(--font_family_mono);
-		padding: var(--spacing_xs2);
+		padding: var(--space_xs2);
 	}
 	li:hover {
 		background-color: var(--bg);
@@ -45,7 +45,7 @@
 		display: flex;
 		align-items: center;
 		flex: 1;
-		padding-left: var(--spacing_sm);
+		padding-left: var(--space_sm);
 	}
 	button {
 		/* TODO var? see the Color_Swatch as well */
@@ -53,7 +53,7 @@
 	}
 	.hue {
 		width: 55px;
-		padding-left: var(--spacing_sm);
+		padding-left: var(--space_sm);
 	}
 	.color {
 		background: linear-gradient(-90deg, hsl(var(--hue), 100%, 50%), hsl(var(--hue), 0%, 50%));

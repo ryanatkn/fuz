@@ -129,6 +129,6 @@
 
 <style>
 	section {
-		margin-bottom: var(--spacing_3);
+		margin-bottom: var(--space_3);
 	}
 </style>

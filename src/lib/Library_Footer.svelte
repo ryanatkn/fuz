@@ -45,6 +45,6 @@
 	}
 	.root_url {
 		/* TODO messy */
-		margin-top: var(--spacing_md);
+		margin-top: var(--space_md);
 	}
 </style>

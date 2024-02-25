@@ -33,7 +33,7 @@
 	}
 	small {
 		font-weight: 700;
-		margin-top: var(--spacing_xs);
+		margin-top: var(--space_xs);
 		opacity: 0;
 		animation: fade-in 1.5s ease-in reverse;
 	}
