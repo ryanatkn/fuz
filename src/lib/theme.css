@@ -9,7 +9,7 @@
 	--hue_e: 50; /* yellow */
 	--hue_f: 27; /* brown */
 	--hue_g: 335; /* pink */
-	--color_a: var(--color_a_5);
+	--color_a_5: var(--color_a_5);
 	--color_a_1: hsl(var(--hue_a), 55%, 94%);
 	--color_a_2: hsl(var(--hue_a), 55%, 84%);
 	--color_a_3: hsl(var(--hue_a), 55%, 73%);
@@ -19,7 +19,7 @@
 	--color_a_7: hsl(var(--hue_a), 55%, 30%);
 	--color_a_8: hsl(var(--hue_a), 55%, 20%);
 	--color_a_9: hsl(var(--hue_a), 55%, 10%);
-	--color_b: var(--color_b_5);
+	--color_b_5: var(--color_b_5);
 	--color_b_1: hsl(var(--hue_b), 50%, 89%);
 	--color_b_2: hsl(var(--hue_b), 50%, 77%);
 	--color_b_3: hsl(var(--hue_b), 50%, 63%);
@@ -29,7 +29,7 @@
 	--color_b_7: hsl(var(--hue_b), 65%, 18%);
 	--color_b_8: hsl(var(--hue_b), 70%, 12%);
 	--color_b_9: hsl(var(--hue_b), 75%, 7%);
-	--color_c: var(--color_c_5);
+	--color_c_5: var(--color_c_5);
 	--color_c_1: hsl(var(--hue_c), 85%, 92%);
 	--color_c_2: hsl(var(--hue_c), 80%, 83%);
 	--color_c_3: hsl(var(--hue_c), 75%, 73%);
@@ -39,7 +39,7 @@
 	--color_c_7: hsl(var(--hue_c), 65%, 30%);
 	--color_c_8: hsl(var(--hue_c), 65%, 20%);
 	--color_c_9: hsl(var(--hue_c), 65%, 10%);
-	--color_d: var(--color_d_5);
+	--color_d_5: var(--color_d_5);
 	--color_d_1: hsl(var(--hue_d), 50%, 92%);
 	--color_d_2: hsl(var(--hue_d), 50%, 82%);
 	--color_d_3: hsl(var(--hue_d), 50%, 72%);
@@ -49,7 +49,7 @@
 	--color_d_7: hsl(var(--hue_d), 50%, 30%);
 	--color_d_8: hsl(var(--hue_d), 50%, 20%);
 	--color_d_9: hsl(var(--hue_d), 50%, 10%);
-	--color_e: var(--color_e_5);
+	--color_e_5: var(--color_e_5);
 	--color_e_1: hsl(var(--hue_e), 85%, 90%);
 	--color_e_2: hsl(var(--hue_e), 80%, 79%);
 	--color_e_3: hsl(var(--hue_e), 75%, 68%);
@@ -59,7 +59,7 @@
 	--color_e_7: hsl(var(--hue_e), 75%, 26%);
 	--color_e_8: hsl(var(--hue_e), 80%, 18%);
 	--color_e_9: hsl(var(--hue_e), 85%, 10%);
-	--color_f: var(--color_f_5);
+	--color_f_5: var(--color_f_5);
 	--color_f_1: hsl(var(--hue_f), 32%, 83%);
 	--color_f_2: hsl(var(--hue_f), 32%, 69%);
 	--color_f_3: hsl(var(--hue_f), 32%, 56%);
@@ -69,7 +69,7 @@
 	--color_f_7: hsl(var(--hue_f), 70%, 14%);
 	--color_f_8: hsl(var(--hue_f), 75%, 10%);
 	--color_f_9: hsl(var(--hue_f), 80%, 6%);
-	--color_g: var(--color_g_5);
+	--color_g_5: var(--color_g_5);
 	--color_g_1: hsl(var(--hue_g), 72%, 92%);
 	--color_g_2: hsl(var(--hue_g), 72%, 83%);
 	--color_g_3: hsl(var(--hue_g), 72%, 74%);
@@ -195,7 +195,7 @@
 	--outline_width_2: var(--border_width_2);
 	--outline_width_3: var(--border_width_1);
 	--outline_style: solid;
-	--outline_color: var(--color_a);
+	--outline_color: var(--color_a_5);
 	--button_bg: var(--fg_1);
 	--button_bg_hover: var(--fg_2);
 	--button_bg_active: var(--bg_3);
