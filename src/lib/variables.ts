@@ -315,13 +315,13 @@ export const default_variables: Theme_Variable[] = [
 		name: 'shadow',
 		light:
 			'2px 4px 9px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.28), 2px 14px 48px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.28)',
-		dark: '2px 4px 9px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--faded_5)), 2px 14px 48px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--faded_5))',
+		dark: '2px 4px 9px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5)), 2px 14px 48px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5))',
 	},
 	{
 		name: 'shadow_lg',
 		light:
 			'2px 6px 14px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.8), 2px 6px 48px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.8)',
-		dark: '2px 6px 18px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--faded_5)), 2px 6px 48px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--faded_5))',
+		dark: '2px 6px 18px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5)), 2px 6px 48px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5))',
 	},
 	{
 		name: 'shadow_inset',
@@ -357,13 +357,13 @@ export const default_variables: Theme_Variable[] = [
 
 	/* transparencies */
 	/* TODO maybe delete these? they do help with standardizing/consistency */
-	{name: 'faded_1', light: '86%'},
-	{name: 'faded_2', light: '62%'},
-	{name: 'faded_3', light: '38%'},
-	{name: 'faded_4', light: '24%'},
-	{name: 'faded_5', light: '15%'},
-	{name: 'faded_6', light: '9%'},
-	{name: 'disabled_opacity', light: 'var(--faded_2)'},
+	{name: 'fade_1', light: '86%'},
+	{name: 'fade_2', light: '62%'},
+	{name: 'fade_3', light: '38%'},
+	{name: 'fade_4', light: '24%'},
+	{name: 'fade_5', light: '15%'},
+	{name: 'fade_6', light: '9%'},
+	{name: 'disabled_opacity', light: 'var(--fade_2)'},
 
 	/* border radii */
 	{name: 'border_radius', light: 'var(--border_radius_md)'},
