@@ -63,16 +63,18 @@
 		--min_height: 32px;
 	}
 	.hex {
-		width: 80px;
+		width: 73px;
 		font-size: var(--size_sm);
 		padding-left: var(--spacing_sm);
 	}
 	.hsl {
-		width: 150px;
+		width: 149px;
 		font-size: var(--size_sm);
+		padding-left: var(--spacing_sm);
 	}
 	.rgb {
 		font-size: var(--size_sm);
+		padding-left: var(--spacing_sm);
 	}
 	.color {
 		width: 100px;
