@@ -28,7 +28,7 @@
 </script>
 
 <Tome_Detail {tome}>
-	<div class="prose box">
+	<div class="prose">
 		<Code
 			content={`<form>
 	<fieldset>
