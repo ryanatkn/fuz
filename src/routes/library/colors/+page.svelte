@@ -13,8 +13,7 @@
 
 	const computed_styles = getComputedStyle(document.documentElement);
 
-	// TODO BLOCK make each of these clickable like on the variables page
-	// TODO BLOCK hue picker?
+	// TODO button to add an inline hue input
 
 	const descriptions = [
 		'primary',
