@@ -122,7 +122,9 @@
 		{/each}
 	</ul>
 	<br />
-	<Color_Scheme_Input />
+	<div class="box width_full spaced">
+		<Color_Scheme_Input />
+	</div>
 </Tome_Detail>
 
 <style>
