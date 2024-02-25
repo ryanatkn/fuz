@@ -48,10 +48,14 @@
 
 	<div class="prose">
 		<h3>disabled button</h3>
-		<Code content={`<button disabled>\n\t:|\n</button>`} />
-		<button disabled>:|</button>
-		<Code content={`<button disabled>\n\ta bigger disabled button\n</button>`} />
-		<button disabled>a bigger disabled button</button>
+		<section>
+			<Code content={`<button disabled>\n\t:|\n</button>`} />
+			<button disabled>:|</button>
+		</section>
+		<section>
+			<Code content={`<button disabled>\n\ta bigger disabled button\n</button>`} />
+			<button disabled>a bigger disabled button</button>
+		</section>
 	</div>
 
 	<hr />
