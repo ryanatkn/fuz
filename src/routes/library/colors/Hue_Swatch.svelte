@@ -64,11 +64,4 @@
 		background: linear-gradient(transparent 50%, #0009);
 		mix-blend-mode: multiply;
 	}
-	@media (max-width: 630px) {
-		.text {
-			flex-direction: column;
-			align-items: flex-start;
-			padding: var(--spacing_sm);
-		}
-	}
 </style>

@@ -79,8 +79,8 @@
 		<h3>Hue variables</h3>
 		<p>
 			Each color variable combines a hue variable with hardcoded saturation and lightness values.
-			Hue variables are useful when you want to construct your own colors, but most cases can be
-			handled with the color variables.
+			Hue variables are useful when you want to construct your own colors that the color variables
+			don't cover.
 		</p>
 	</div>
 	<ul class="palette">
