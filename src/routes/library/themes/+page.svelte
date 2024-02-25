@@ -37,7 +37,7 @@
 </script>
 
 <Tome_Detail {tome}>
-	<section class="theme box panel">
+	<section class="theme panel">
 		<div class="prose">
 			<p>
 				<code>Themed</code> adds global support for both the browser's
@@ -96,7 +96,7 @@
 			</details>
 		</div>
 	</section>
-	<section class="theme box panel">
+	<section class="theme panel">
 		<div class="prose">
 			<h3>color scheme</h3>
 			<p>
