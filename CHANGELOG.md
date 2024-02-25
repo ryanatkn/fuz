@@ -1,5 +1,24 @@
 # @ryanatkn/fuz
 
+## 0.88.0
+
+### Minor Changes
+
+- remove `theme_color` from `Themed` and `THEME_COLOR` ([#9](https://github.com/ryanatkn/fuz/pull/9))
+- add suffix `_5` to all base variable names ([#9](https://github.com/ryanatkn/fuz/pull/9))
+
+  - `color_a` to `color_a_5`
+  - `color_b` to `color_b_5`
+  - `color_c` to `color_c_5`
+  - `color_d` to `color_d_5`
+  - `color_e` to `color_e_5`
+  - `color_f` to `color_f_5`
+  - `color_g` to `color_g_5`
+
+### Patch Changes
+
+- add button color classes `.color_a-g` ([#9](https://github.com/ryanatkn/fuz/pull/9))
+
 ## 0.87.0
 
 ### Minor Changes
