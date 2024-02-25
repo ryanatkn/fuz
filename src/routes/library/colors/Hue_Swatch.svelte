@@ -45,7 +45,7 @@
 		font-size: var(--size_sm);
 	}
 	.color {
-		background: linear-gradient(90deg, hsl(var(--hue), 100%, 50%), hsl(var(--hue), 0%, 50%));
+		background: linear-gradient(-90deg, hsl(var(--hue), 100%, 50%), hsl(var(--hue), 0%, 50%));
 		position: relative;
 	}
 	.color::before {
