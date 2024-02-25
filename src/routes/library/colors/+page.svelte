@@ -4,6 +4,7 @@
 	import Hue_Swatch from '$routes/library/colors/Hue_Swatch.svelte';
 	import Color_Swatch from '$routes/library/colors/Color_Swatch.svelte';
 	import Library_Vocab from '$lib/Library_Vocab.svelte';
+	import Color_Scheme_Input from '$lib/Color_Scheme_Input.svelte';
 
 	const LIBRARY_ITEM_NAME = 'colors';
 
@@ -121,6 +122,7 @@
 		{/each}
 	</ul>
 	<br />
+	<Color_Scheme_Input />
 </Tome_Detail>
 
 <style>
