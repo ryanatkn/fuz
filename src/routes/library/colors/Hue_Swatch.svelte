@@ -26,7 +26,7 @@
 		display: flex;
 		align-items: stretch;
 		font-family: var(--font_family_mono);
-		margin-bottom: var(--spacing_xs);
+		padding: var(--spacing_xs);
 	}
 	li:hover {
 		background-color: var(--bg);
@@ -55,7 +55,7 @@
 		display: block;
 		position: absolute;
 		inset: 0;
-		background: linear-gradient(#fff7, transparent 50%, transparent);
+		background: linear-gradient(#fff8, transparent 50%, transparent);
 		mix-blend-mode: screen;
 	}
 	.color::after {
@@ -63,7 +63,7 @@
 		display: block;
 		position: absolute;
 		inset: 0;
-		background: linear-gradient(transparent 50%, #0007);
+		background: linear-gradient(transparent 50%, #0008);
 		mix-blend-mode: multiply;
 	}
 </style>
