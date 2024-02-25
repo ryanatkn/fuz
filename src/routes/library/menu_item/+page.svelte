@@ -8,6 +8,8 @@
 	const LIBRARY_ITEM_NAME = 'menu item';
 	const tome = get_tome(LIBRARY_ITEM_NAME);
 
+	// TODO this is currently not being displayed
+
 	// TODO `role="menuitem"` ?
 
 	let clicked = 'c';
@@ -22,7 +24,7 @@
 </script>
 
 <Tome_Detail {tome}>
-	<section class="prose box">
+	<section class="prose">
 		<h3>
 			<code>.menu_item</code> CSS class
 		</h3>
