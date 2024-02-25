@@ -55,11 +55,11 @@
 	--color_e_8: hsl(var(--hue_e), 80%, 18%);
 	--color_e_9: hsl(var(--hue_e), 85%, 10%);
 	--color_f_1: hsl(var(--hue_f), 32%, 87%);
-	--color_f_2: hsl(var(--hue_f), 32%, 69%);
-	--color_f_3: hsl(var(--hue_f), 32%, 56%);
-	--color_f_4: hsl(var(--hue_f), 42%, 38%);
+	--color_f_2: hsl(var(--hue_f), 32%, 72%);
+	--color_f_3: hsl(var(--hue_f), 32%, 57%);
+	--color_f_4: hsl(var(--hue_f), 42%, 41%);
 	--color_f_5: hsl(var(--hue_f), 60%, 26%);
-	--color_f_6: hsl(var(--hue_f), 65%, 19%);
+	--color_f_6: hsl(var(--hue_f), 65%, 18%);
 	--color_f_7: hsl(var(--hue_f), 70%, 14%);
 	--color_f_8: hsl(var(--hue_f), 75%, 10%);
 	--color_f_9: hsl(var(--hue_f), 80%, 6%);
@@ -275,8 +275,8 @@
 	--color_e_7: hsl(var(--hue_e), 75%, 36%);
 	--color_e_8: hsl(var(--hue_e), 80%, 23%);
 	--color_f_2: hsl(var(--hue_f), 32%, 79%);
-	--color_f_3: hsl(var(--hue_f), 32%, 70%);
-	--color_f_4: hsl(var(--hue_f), 32%, 63%);
+	--color_f_3: hsl(var(--hue_f), 32%, 72%);
+	--color_f_4: hsl(var(--hue_f), 32%, 64%);
 	--color_f_5: hsl(var(--hue_f), 30%, 56%);
 	--color_f_6: hsl(var(--hue_f), 40%, 44%);
 	--color_f_7: hsl(var(--hue_f), 50%, 31%);
