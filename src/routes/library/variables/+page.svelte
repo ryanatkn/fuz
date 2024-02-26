@@ -27,7 +27,7 @@
 		</p>
 		<p>
 			The goal of the variables system is to provide runtime theming that's efficient and ergnomic
-			to both developers and end-users. Variables can be composed in multiple ways:
+			both both developers and end-users. Variables can be composed in multiple ways:
 		</p>
 		<ul>
 			<li>by CSS classes, both utility and semantic</li>
@@ -40,9 +40,9 @@
 			<li>in JS like in Svelte components</li>
 		</ul>
 		<p>
-			Variables also provide an interface that user-generated content can safely use. The result is
-			a non-dogmatic system that aligns with modern CSS to deliver high-capability UX and DX with
-			minimal overhead.
+			Variables also provide an interface that user-generated content can safely use in most cases.
+			The result is a non-dogmatic system that aligns with modern CSS to deliver high-capability UX
+			and DX with minimal overhead.
 		</p>
 		<aside>
 			<p>
@@ -53,7 +53,7 @@
 			</p>
 			<p>
 				Also, in the programming domains I'm familiar with, including some Fuz projects, a token is
-				a secret for authentication, and I don't like overloading the term. Wikipedia has
+				a secret for authentication, and I don't like overloading the term. Wikipedia has several
 				programming usages but no page about design tokens. And finally, the term token has been
 				popularized by cryptocurrencies which have no relation with Fuz, so its vibes are all over
 				the place.
@@ -71,8 +71,10 @@
 			</p>
 			<p>
 				The naming convention also supports my goal of thinking about Fuz and your app as having a
-				single unified flat namespace, where every identifier regardless of module is unique and
-				part of a larger whole - the system's vocabulary. Maybe this needs a blog post.
+				single unified flat namespace, where every identifier regardless of module is unique, and
+				part of a larger whole - the system's vocabulary, available in every appropriate context -
+				JS, HTML, and CSS, on the client and server, and in tests and dev tools. Maybe this needs a
+				blog post.
 			</p>
 		</aside>
 	</section>
