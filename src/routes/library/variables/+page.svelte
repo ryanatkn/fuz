@@ -50,7 +50,7 @@
 				>Svelte's class shorthand syntax</a
 			>. The naming convention also supports my goal of thinking about Fuz and your app as having a
 			single unified flat namespace, where every identifier regardless of module is unique and part
-			of a larger whole - the system's vocabulary.
+			of a larger whole - the system's vocabulary. Maybe this needs a blog post.
 		</aside>
 	</section>
 	<section>
