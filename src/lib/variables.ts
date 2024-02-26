@@ -340,8 +340,6 @@ export const default_variables: Style_Variable[] = [
 	{name: 'icon_size_lg', light: '80px'},
 	{name: 'icon_size_xl', light: '128px'},
 	{name: 'icon_size_xl2', light: '196px'},
-	{name: 'icon_size_xl3', light: '316px'},
-	{name: 'icon_size_xl4', light: '512px'},
 
 	/* durations */
 	{name: 'duration_1', light: '0.08s'},
@@ -352,6 +350,7 @@ export const default_variables: Style_Variable[] = [
 	{name: 'duration_6', light: '3s'},
 
 	/* transparencies */
+	// TODO add one for 7 total?
 	/* TODO maybe delete these? they do help with standardizing/consistency */
 	{name: 'fade_1', light: '86%'},
 	{name: 'fade_2', light: '62%'},
