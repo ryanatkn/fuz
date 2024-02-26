@@ -129,7 +129,7 @@
 			</div>
 		</section>
 		<section>
-			<h3>Shadows</h3>
+			<h3>Box shadows</h3>
 			<div class="shadow" style:box-shadow="var(--shadow)">
 				<Style_Variable_Button name="shadow" />
 			</div>
@@ -151,7 +151,8 @@
 		font-family: var(--font_family_mono);
 		margin-bottom: var(--space_md);
 		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+		grid-template-columns: repeat(auto-fill, minmax(85px, 1fr));
+		grid-auto-flow: row;
 	}
 	.color {
 		height: var(--input_height_sm);
