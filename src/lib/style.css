@@ -152,15 +152,15 @@ li {
 }
 
 h1 {
-	font-size: var(--size_3);
+	font-size: var(--size_3xl);
 	font-weight: 300;
 }
 h2 {
-	font-size: var(--size_2);
+	font-size: var(--size_2xl);
 	font-weight: 400;
 }
 h3 {
-	font-size: var(--size_1);
+	font-size: var(--size_xl);
 	font-weight: 500;
 }
 h4 {
@@ -194,7 +194,7 @@ fieldset {
 }
 
 legend {
-	font-size: var(--size_1);
+	font-size: var(--size_xl);
 	margin-bottom: var(--space_lg);
 }
 
@@ -270,7 +270,7 @@ input[type='checkbox']::before {
 	align-items: center;
 	justify-content: center;
 	overflow: var(--overflow, visible);
-	font-size: var(--font_size, var(--size_3));
+	font-size: var(--font_size, var(--size_3xl));
 	color: var(--text_color);
 }
 

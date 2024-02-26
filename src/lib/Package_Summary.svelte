@@ -55,7 +55,7 @@
 		max-width: var(--max_width, var(--width_sm));
 	}
 	.repo_name {
-		font-size: var(--size_2);
+		font-size: var(--size_2xl);
 		font-weight: 400;
 		text-align: center;
 	}

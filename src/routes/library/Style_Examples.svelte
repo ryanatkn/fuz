@@ -65,12 +65,12 @@
 				<div class="title">disabled textarea</div>
 				<textarea disabled={true} placeholder=">" /></label
 			>
-			<select class="text_align_center" style="font-size: var(--size_5)">
+			<select class="text_align_center" style="font-size: var(--size_5xl)">
 				{#each faces as face (face)}
 					<option value={face}>{face}</option>
 				{/each}
 			</select>
-			<select class="text_align_center" style="font-size: var(--size_5)" disabled={true}>
+			<select class="text_align_center" style="font-size: var(--size_5xl)" disabled={true}>
 				{#each faces as face (face)}
 					<option value={face}>{face}</option>
 				{/each}

@@ -88,7 +88,7 @@
 						<div class="title">select</div>
 						<select
 							class="text_align_center"
-							style="font-size: var(--size_5)"
+							style="font-size: var(--size_5xl)"
 							disabled={created_account}
 						>
 							{#each faces as face (face)}

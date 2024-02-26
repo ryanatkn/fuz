@@ -29,7 +29,7 @@
 		padding: var(--space_xs) 0;
 	}
 	.name {
-		font-size: var(--size_1);
+		font-size: var(--size_xl);
 		text-align: center;
 		margin-bottom: var(--space_xl);
 	}

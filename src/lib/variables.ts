@@ -203,15 +203,15 @@ export const default_variables: Style_Variable[] = [
 	{name: 'size_sm', light: '1.3rem'},
 	{name: 'size_md', light: '1.6rem'},
 	{name: 'size_lg', light: '2.04rem'},
-	{name: 'size_1', light: '2.59rem'},
-	{name: 'size_2', light: '3.29rem'},
-	{name: 'size_3', light: '4.19rem'},
-	{name: 'size_4', light: '5.33rem'},
-	{name: 'size_5', light: '6.78rem'},
-	{name: 'size_6', light: '8.62rem'},
-	{name: 'size_7', light: '10.97rem'},
-	{name: 'size_8', light: '13.95rem'},
-	{name: 'size_9', light: '17.74rem'},
+	{name: 'size_xl', light: '2.59rem'},
+	{name: 'size_2xl', light: '3.29rem'},
+	{name: 'size_3xl', light: '4.19rem'},
+	{name: 'size_4xl', light: '5.33rem'},
+	{name: 'size_5xl', light: '6.78rem'},
+	{name: 'size_6xl', light: '8.62rem'},
+	{name: 'size_7xl', light: '10.97rem'},
+	{name: 'size_8xl', light: '13.95rem'},
+	{name: 'size_9xl', light: '17.74rem'},
 
 	/* links */
 	{
@@ -343,9 +343,9 @@ export const default_variables: Style_Variable[] = [
 	{name: 'icon_size_md', light: '48px'},
 	{name: 'icon_size_lg', light: '80px'},
 	{name: 'icon_size_xl', light: '128px'},
-	{name: 'icon_size_2xl', light: '196px'},
-	{name: 'icon_size_3xl', light: '316px'},
-	{name: 'icon_size_4xl', light: '512px'},
+	{name: 'icon_size_2xlxl', light: '196px'},
+	{name: 'icon_size_3xlxl', light: '316px'},
+	{name: 'icon_size_4xlxl', light: '512px'},
 
 	/* durations */
 	{name: 'duration_1', light: '0.08s'},
