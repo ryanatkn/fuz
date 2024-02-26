@@ -54,8 +54,8 @@
 		display: flex;
 	}
 	.teleports > div {
-		width: var(--space_8);
-		height: var(--space_8);
+		width: var(--space_8xl);
+		height: var(--space_8xl);
 		font-size: var(--size_3);
 		display: flex;
 		align-items: center;
@@ -63,6 +63,6 @@
 	}
 	/* TODO standardize this */
 	section {
-		margin-bottom: var(--space_3);
+		margin-bottom: var(--space_3xl);
 	}
 </style>

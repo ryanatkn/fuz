@@ -107,7 +107,7 @@ export interface Style_Variable {
 
 <style>
 	section {
-		margin-bottom: var(--space_5);
+		margin-bottom: var(--space_5xl);
 	}
 	.variables {
 		width: 100%;

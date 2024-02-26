@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let size = 'var(--space_7, 64px)';
+	export let size = 'var(--space_7xl, 64px)';
 	export let fill = 'var(--color, #000)';
 	export let label = 'GitHub icon';
 	export let attrs: any = undefined;

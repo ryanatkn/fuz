@@ -52,7 +52,7 @@
 		padding-bottom: var(--space_sm);
 	}
 	h6:not(:first-child) {
-		margin-top: var(--space_1);
+		margin-top: var(--space_xl);
 	}
 	li {
 		width: 100%;

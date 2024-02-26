@@ -141,6 +141,6 @@
 
 <style>
 	section {
-		margin-bottom: var(--space_5);
+		margin-bottom: var(--space_5xl);
 	}
 </style>

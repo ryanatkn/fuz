@@ -149,23 +149,23 @@
 	--text_decoration_hover: underline;
 	--text_decoration_selected: underline;
 	--link_active: var(--text_color);
-	--space_xs5: 0.1rem;
-	--space_xs4: 0.2rem;
-	--space_xs3: 0.3rem;
-	--space_xs2: 0.4rem;
+	--space_5xs: 0.1rem;
+	--space_4xs: 0.2rem;
+	--space_3xs: 0.3rem;
+	--space_2xs: 0.4rem;
 	--space_xs: 0.6rem;
 	--space_sm: 0.8rem;
 	--space_md: 1rem;
 	--space_lg: 1.3rem;
-	--space_1: 1.6rem;
-	--space_2: 2.1rem;
-	--space_3: 2.6rem;
-	--space_4: 3.3rem;
-	--space_5: 4.2rem;
-	--space_6: 5.4rem;
-	--space_7: 6.9rem;
-	--space_8: 8.7rem;
-	--space_9: 11.1rem;
+	--space_xl: 1.6rem;
+	--space_2xl: 2.1rem;
+	--space_3xl: 2.6rem;
+	--space_4xl: 3.3rem;
+	--space_5xl: 4.2rem;
+	--space_6xl: 5.4rem;
+	--space_7xl: 6.9rem;
+	--space_8xl: 8.7rem;
+	--space_9xl: 11.1rem;
 	--width_md: 800px;
 	--width_sm: 320px;
 	--border_color: var(--border_3);
@@ -197,8 +197,8 @@
 	--input_padding_y: 0;
 	--input_padding_x: var(--space_lg);
 	--input_width_min: 100px;
-	--input_height: var(--space_5);
-	--input_height_sm: var(--space_4);
+	--input_height: var(--space_5xl);
+	--input_height_sm: var(--space_4xl);
 	--input_height_inner: calc(
 		var(--input_height) - 2 * var(--border_width) - 2 * var(--input_padding_y)
 	);

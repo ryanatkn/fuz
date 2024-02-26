@@ -202,7 +202,7 @@
 {/if}
 {#if dialog_nested_3_opened}
 	<Dialog on:close={() => (dialog_nested_3_opened = false)}>
-		<div class="pane prose padded_1" style:margin-bottom="var(--space_3)">
+		<div class="pane prose padded_1" style:margin-bottom="var(--space_3xl)">
 			<h1>3 dialogs!</h1>
 			<button on:click={() => (dialog_nested_3_opened = false)}>close dialog</button>
 		</div>

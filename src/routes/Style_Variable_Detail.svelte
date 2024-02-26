@@ -31,6 +31,6 @@
 	.name {
 		font-size: var(--size_1);
 		text-align: center;
-		margin-bottom: var(--space_1);
+		margin-bottom: var(--space_xl);
 	}
 </style>

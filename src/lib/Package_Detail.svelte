@@ -170,8 +170,8 @@
 		text-align: center;
 	}
 	.chip {
-		margin-left: var(--space_xs2);
-		margin-right: var(--space_xs2);
+		margin-left: var(--space_2xs);
+		margin-right: var(--space_2xs);
 	}
 	pre {
 		display: flex;

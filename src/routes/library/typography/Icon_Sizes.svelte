@@ -109,7 +109,7 @@
 		display: flex;
 		flex-direction: column;
 		width: 100%;
-		padding: var(--space_1) 0;
+		padding: var(--space_xl) 0;
 	}
 	/* TODO layout with CSS grid */
 	.icon_sizes figcaption {

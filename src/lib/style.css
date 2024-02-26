@@ -96,7 +96,7 @@ code {
 	hyphens: none;
 	color: var(--color, var(--text_2));
 	background-color: var(--fg_1);
-	padding: 0 var(--space_xs2);
+	padding: 0 var(--space_2xs);
 	border-radius: var(--radius_xs);
 }
 
@@ -184,7 +184,7 @@ hr {
 	border-right: none;
 	width: 100%;
 	height: 5px;
-	margin: var(--space_5) 0;
+	margin: var(--space_5xl) 0;
 }
 
 fieldset {
@@ -295,7 +295,7 @@ input[type='radio']:checked::before {
 }
 
 input[type='range'] {
-	--thumb_size: var(--space_1);
+	--thumb_size: var(--space_xl);
 	--thumb_background_color: var(--text_2);
 	cursor: pointer;
 }
@@ -637,10 +637,10 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories
 	text-wrap: balance; /* @see https://developer.mozilla.org/en-US/docs/Web/CSS/text-wrap#balance */
 }
 .prose h1 {
-	margin: var(--space_2) 0;
+	margin: var(--space_2xl) 0;
 }
 .prose h2 {
-	margin: var(--space_1) 0;
+	margin: var(--space_xl) 0;
 }
 .prose h3 {
 	margin: var(--space_lg) 0;
@@ -655,7 +655,7 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories
 	margin: var(--space_xs) 0;
 }
 .prose :is(ul, ol, menu) {
-	padding-left: var(--space_4);
+	padding-left: var(--space_4xl);
 	list-style: initial;
 }
 .prose ol {
@@ -668,7 +668,7 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories
 	display: inline;
 }
 .prose section {
-	margin-bottom: var(--space_4);
+	margin-bottom: var(--space_4xl);
 }
 /* checkboxes and radios are expected to be nested inside a `label`, thus no bottom margin */
 .prose
@@ -823,19 +823,19 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories
 	padding: var(--space_lg);
 }
 .padded_1 {
-	padding: var(--space_1);
+	padding: var(--space_xl);
 }
 .padded_2 {
-	padding: var(--space_2);
+	padding: var(--space_2xl);
 }
 .padded_3 {
-	padding: var(--space_3);
+	padding: var(--space_3xl);
 }
 .padded_4 {
-	padding: var(--space_4);
+	padding: var(--space_4xl);
 }
 .padded_5 {
-	padding: var(--space_5);
+	padding: var(--space_5xl);
 }
 
 /* use `reverse` to fade out and `alternate` to flash */
@@ -877,7 +877,7 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories
 	align-items: center;
 	padding: var(
 		--menu_item_padding,
-		var(--space_xs3) var(--space_xs3) var(--space_xs3) var(--space_xs)
+		var(--space_3xs) var(--space_3xs) var(--space_3xs) var(--space_xs)
 	);
 }
 .menu_item.selected {
@@ -926,7 +926,7 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories
 .chip {
 	font-size: var(--font_size_sm);
 	font-weight: 600;
-	padding: var(--space_xs4) var(--space_sm);
+	padding: var(--space_4xs) var(--space_sm);
 	background-color: var(--darken_1);
 	border-radius: var(--radius_xs);
 }

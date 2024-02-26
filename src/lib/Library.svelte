@@ -16,6 +16,6 @@
 	}
 	/* TODO hacky */
 	.tomes :global(.tome) {
-		margin-bottom: var(--space_9) !important;
+		margin-bottom: var(--space_9xl) !important;
 	}
 </style>

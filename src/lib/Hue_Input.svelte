@@ -60,7 +60,7 @@
 <style>
 	.hue_input .indicator {
 		background-color: hsl(var(--hue) 50% 50%);
-		height: var(--space_5);
+		height: var(--space_5xl);
 		margin: 0;
 		display: flex;
 		flex-direction: row;
