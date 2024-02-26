@@ -321,7 +321,7 @@
   ([#337](https://github.com/ryanatkn/fuz/pull/337))
 - add classes `.inline`, `.inline_block`, `.block`, `.flex`, and `.flex_1`
   ([#337](https://github.com/ryanatkn/fuz/pull/337))
-- add `--border_radius_xs2`
+- add `--radius_2xs`
   ([#342](https://github.com/ryanatkn/fuz/pull/342))
 
 ## 0.64.0
@@ -439,7 +439,7 @@
   - add and publish `$lib/theme.ts` with `create_theme_setup_script` for setting up the color scheme
   - add and publish `$lib/themes.ts` with the default theme data,
     including the base theme along with low and high contrast themes
-  - add and publish `$lib/variables.ts` with the default `Theme_Variable` data
+  - add and publish `$lib/variables.ts` with the default `Style_Variable` data
   - add and publish `$lib/Themed.svelte` for mounting a theme to the page or a part of it
   - add and publish `$lib/Color_Scheme_Input.svelte`
   - remove the `error` param from `createContextmenu` and add the `contextmenu.error` store
@@ -760,7 +760,7 @@
   - rename `--interactive_` variables to `--button_`
   - remove `--interactive_color_active_dark`
   - remove `--avatar_height`
-  - remove `--border_radius_N` for variants `md`/`sm`/`xs`
+  - remove `--radius_N` for variants `md`/`sm`/`xs`
   - remove `--input_shadow_` variables
   - remove `--panel_color` and `--panel_color_dark`
   - remove `.panel-outset` and `.panel-inset` - use `.panel` instead
@@ -836,8 +836,8 @@
 
 ## 0.30.0
 
-- **break**: replace `--border_radius_1` and `--border_radius_5` with `--border_radius_2` to 5,
-  and rename `--border_radius_2` and `border_radius_3` to 2 and 3, respectively
+- **break**: replace `--radius_xl` and `--radius_5xl` with `--radius_2xl` to 5,
+  and rename `--radius_2xl` and `radius_3xl` to 2 and 3, respectively
   ([#204](https://github.com/ryanatkn/fuz/pull/204))
 - add `fade-in` animation
   ([#205](https://github.com/ryanatkn/fuz/pull/205))

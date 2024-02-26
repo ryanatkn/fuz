@@ -167,10 +167,10 @@ export const package_json = {
 			default: './dist/Library_Panel.svelte',
 			types: './dist/Library_Panel.svelte.d.ts',
 		},
-		'./Library_Vocab.svelte': {
-			svelte: './dist/Library_Vocab.svelte',
-			default: './dist/Library_Vocab.svelte',
-			types: './dist/Library_Vocab.svelte.d.ts',
+		'./Library_Tome_Link.svelte': {
+			svelte: './dist/Library_Tome_Link.svelte',
+			default: './dist/Library_Tome_Link.svelte',
+			types: './dist/Library_Tome_Link.svelte.d.ts',
 		},
 		'./Library.svelte': {
 			svelte: './dist/Library.svelte',
@@ -339,7 +339,7 @@ export const src_json = {
 		'./Library_Menu.svelte': {path: 'Library_Menu.svelte', declarations: []},
 		'./Library_Nav.svelte': {path: 'Library_Nav.svelte', declarations: []},
 		'./Library_Panel.svelte': {path: 'Library_Panel.svelte', declarations: []},
-		'./Library_Vocab.svelte': {path: 'Library_Vocab.svelte', declarations: []},
+		'./Library_Tome_Link.svelte': {path: 'Library_Tome_Link.svelte', declarations: []},
 		'./Library.svelte': {path: 'Library.svelte', declarations: []},
 		'./Package_Detail.svelte': {path: 'Package_Detail.svelte', declarations: []},
 		'./Package_Summary.svelte': {path: 'Package_Summary.svelte', declarations: []},
@@ -372,7 +372,7 @@ export const src_json = {
 				{name: 'create_theme_setup_script', kind: 'function'},
 				{name: 'create_theme_style_html', kind: 'function'},
 				{name: 'Theme', kind: 'type'},
-				{name: 'Theme_Variable', kind: 'type'},
+				{name: 'Style_Variable', kind: 'type'},
 				{name: 'Render_Theme_Style_Options', kind: 'type'},
 				{name: 'render_theme_style', kind: 'function'},
 				{name: 'render_theme_variable', kind: 'function'},

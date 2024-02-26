@@ -1,6 +1,5 @@
 <script lang="ts">
-	import {get_selected_variable} from '$routes/library/helpers.js';
-	import {default_variables} from '$lib/variables.js';
+	import Style_Variable_Button from '$routes/Style_Variable_Button.svelte';
 
 	export let color_name: string;
 	export let computed_styles: CSSStyleDeclaration;
@@ -15,17 +14,12 @@
 
 	$: variable_name = `hue_${color_name}`;
 	$: hue = Number(get_color_hue_string(variable_name));
-
-	const selected_variable = get_selected_variable();
-	const select_variable = () => {
-		$selected_variable = default_variables.find((v) => v.name === variable_name)!;
-	};
 </script>
 
 <li style:--hue="var(--{variable_name})">
 	<div class="color" style:width="{width}px" style:height="{height}px"></div>
 	<div class="text">
-		<button class="plain" on:click={() => select_variable()}>{variable_name}</button>
+		<Style_Variable_Button name={variable_name} />
 		<div class="hue">{hue}</div>
 		<small class="description">{description}</small>
 	</div>
@@ -46,10 +40,6 @@
 		align-items: center;
 		flex: 1;
 		padding-left: var(--space_sm);
-	}
-	button {
-		/* TODO var? see the Color_Swatch as well */
-		--min_height: 32px;
 	}
 	.hue {
 		width: 55px;

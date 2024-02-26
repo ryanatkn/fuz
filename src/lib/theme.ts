@@ -115,10 +115,10 @@ export const create_theme_style_html = (style: string): string => `<style nonce=
 
 export interface Theme {
 	name: string;
-	items: Theme_Variable[];
+	items: Style_Variable[];
 }
 
-export interface Theme_Variable {
+export interface Style_Variable {
 	name: string;
 	light?: string;
 	dark?: string;
@@ -171,7 +171,7 @@ ${
 };
 
 export const render_theme_variable = (
-	variable: Theme_Variable,
+	variable: Style_Variable,
 	dark = false,
 	comments = true,
 ): string => {

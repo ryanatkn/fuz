@@ -2,18 +2,16 @@
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
-	import Library_Vocab from '$lib/Library_Vocab.svelte';
+	import Library_Tome_Link from '$lib/Library_Tome_Link.svelte';
 	import {get_tome} from '$lib/tome.js';
 	import {default_variables} from '$lib/variables.js';
-	import {get_selected_variable} from '$routes/library/helpers.js';
+	import Style_Variable_Button from '$routes/Style_Variable_Button.svelte';
 
 	const LIBRARY_ITEM_NAME = 'variables';
 
 	const tome = get_tome(LIBRARY_ITEM_NAME);
 
 	export let variables = default_variables.slice().sort((a, b) => a.name.localeCompare(b.name));
-
-	const selected_variable = get_selected_variable();
 
 	// TODO maybe FAQ? need a standardized pattern -- first add the "on this page" menu functionality
 </script>
@@ -24,15 +22,27 @@
 			Variables are <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/--*"
 				>CSS custom properties</a
 			>
-			that can be grouped into a <Library_Vocab name="themes">theme</Library_Vocab>. Each variable
-			can have values for light and/or dark color schemes.
+			that can be grouped into a <Library_Tome_Link name="themes">theme</Library_Tome_Link>. Each
+			variable can have values for light and/or dark color schemes.
 		</p>
 		<p>
 			The goal of the variables system is to provide runtime theming that's efficient and ergnomic
-			to both developers and end-users. Variables also provide an interface that user-generated
-			content can safely use, and they can be leveraged by CSS classes, both utility and semantic.
-			The result is a non-dogmatic system that aligns with modern CSS to deliver high-capability UX
-			and DX with minimal overhead.
+			to both developers and end-users. Variables can be composed in multiple ways:
+		</p>
+		<ul>
+			<li>by CSS classes, both utility and semantic</li>
+			<li>
+				by other variables, both in calculations and to add useful semantics (e.g. <code
+					>button_bg_hover</code
+				>
+				defaults to <code>fg_2</code> but can be themed independently)
+			</li>
+			<li>in JS like in Svelte components</li>
+		</ul>
+		<p>
+			Variables also provide an interface that user-generated content can safely use. The result is
+			a non-dogmatic system that aligns with modern CSS to deliver high-capability UX and DX with
+			minimal overhead.
 		</p>
 		<aside>
 			<p>
@@ -71,10 +81,10 @@
 			lang="ts"
 			content={`export interface Theme {
 	name: string;
-	items: Theme_Variable[];
+	items: Style_Variable[];
 }
 
-export interface Theme_Variable {
+export interface Style_Variable {
 	name: string;
 	light?: string;
 	dark?: string;
@@ -89,9 +99,7 @@ export interface Theme_Variable {
 		<!-- TODO add info through the contextmenu or dialog -->
 		<div class="variables">
 			{#each variables as variable (variable.name)}
-				<button class="variable menu_item" on:click={() => ($selected_variable = variable)}
-					>--{variable.name}</button
-				>
+				<Style_Variable_Button name={variable.name} classes="menu_item" />
 			{/each}
 		</div>
 	</section>
@@ -103,14 +111,9 @@ export interface Theme_Variable {
 	}
 	.variables {
 		width: 100%;
-		display: flex;
-		justify-content: center;
-		flex-wrap: wrap;
+		display: inline-grid;
+		grid-template-columns: repeat(auto-fit, minmax(256px, 1fr));
 		font-family: var(--font_family_mono);
 		white-space: nowrap;
-	}
-	.variable {
-		width: 256px;
-		min-height: var(--icon_size_sm);
 	}
 </style>

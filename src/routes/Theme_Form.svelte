@@ -5,8 +5,10 @@
 	import {swallow} from '$lib/swallow.js';
 	import Copy_To_Clipboard from '$lib/Copy_To_Clipboard.svelte';
 	import Dialog from '$lib/Dialog.svelte';
-	import {render_theme_style, type Theme_Variable, type Theme} from '$lib/theme.js';
-	import Theme_Variable_Detail from '$routes/Theme_Variable_Detail.svelte';
+	import {render_theme_style, type Style_Variable, type Theme} from '$lib/theme.js';
+	import Style_Variable_Detail from '$routes/Style_Variable_Detail.svelte';
+
+	// TODO @multiple add to $lib?
 
 	// TODO should this be merged with `Theme_Input`?
 
@@ -17,7 +19,7 @@
 	export let theme: Theme | null = null; // `null` means creating
 
 	let new_name = theme ? theme.name : 'new theme';
-	let new_variables = theme ? theme.items : []; // TODO `updateVariables` to `Theme_Variable_Detail` ?
+	let new_variables = theme ? theme.items : []; // TODO `updateVariables` to `Style_Variable_Detail` ?
 
 	let new_theme: Theme;
 	$: new_theme = {name: new_name, items: new_variables};
@@ -27,14 +29,14 @@
 	$: light_count = new_variables.reduce((c, v) => (v.light ? c + 1 : c), 0);
 	$: dark_count = new_variables.reduce((c, v) => (v.dark ? c + 1 : c), 0);
 
-	let selected_variable: Theme_Variable | null = null;
+	let selected_variable: Style_Variable | null = null;
 
 	const save = (): void => {
 		if (!changed) return;
 		dispatch('save', new_theme);
 	};
 
-	const edit_variable = (e: MouseEvent, variable: Theme_Variable): void => {
+	const edit_variable = (e: MouseEvent, variable: Style_Variable): void => {
 		swallow(e);
 		selected_variable = variable;
 		new_variables = new_variables.slice(); // TODO
@@ -96,7 +98,7 @@
 	<Dialog on:close={() => (selected_variable = null)} let:close>
 		<div class="pane">
 			<div class="panel padded_lg box">
-				<Theme_Variable_Detail variable={selected_variable} />
+				<Style_Variable_Detail variable={selected_variable} />
 				<br />
 				<aside>this is unfinished</aside>
 				<br />

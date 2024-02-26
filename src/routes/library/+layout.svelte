@@ -11,9 +11,9 @@
 	import Library_Nav from '$lib/Library_Nav.svelte';
 	import {tomes} from '$routes/library/tomes.js';
 	import {package_json, src_json} from '$routes/package.js';
-	import {set_selected_variable} from '$routes/library/helpers.js';
+	import {set_selected_variable} from '$routes/style_variable_helpers.js';
 	import Dialog from '$lib/Dialog.svelte';
-	import Theme_Variable_Detail from '$routes/Theme_Variable_Detail.svelte';
+	import Style_Variable_Detail from '$routes/Style_Variable_Detail.svelte';
 
 	const pkg = parse_package_meta(package_json.homepage, package_json, src_json);
 
@@ -56,7 +56,7 @@
 		<Dialog on:close={() => ($selected_variable = null)} let:close>
 			<div class="pane">
 				<div class="panel padded_lg box">
-					<Theme_Variable_Detail variable={$selected_variable} />
+					<Style_Variable_Detail variable={$selected_variable} />
 					<br />
 					<aside>this is unfinished</aside>
 					<br />

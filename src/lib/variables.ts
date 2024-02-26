@@ -1,4 +1,4 @@
-import type {Theme_Variable} from '$lib/theme.js';
+import type {Style_Variable} from '$lib/theme.js';
 
 /*
 
@@ -19,7 +19,7 @@ TODO lots of things here to address:
  * These are implicitly the variables for the `base` theme.
  * See also the empty `variables` array of the `base` theme above.
  */
-export const default_variables: Theme_Variable[] = [
+export const default_variables: Style_Variable[] = [
 	/*
 		colors - eyeballed and intepolated with a spreadsheet,
 		a professional designer will have opinions
@@ -185,7 +185,7 @@ export const default_variables: Theme_Variable[] = [
 	{name: 'line_height_1', light: '1'},
 	{name: 'line_height_2', light: '1.1'},
 	{name: 'line_height_3', light: '1.2'},
-	{name: 'line_height_4', light: '1.35'},
+	{name: 'line_height_4', light: '1.35'}, // TODO BLOCK xs/sm/md/lg?
 	{name: 'line_height_5', light: '1.5'},
 	{name: 'line_height_6', light: '1.75'},
 	{name: 'line_height_7', light: '2'},
@@ -290,7 +290,7 @@ export const default_variables: Theme_Variable[] = [
 
 	/* button colors */
 	{name: 'button_bg', light: 'var(--fg_1)'},
-	{name: 'button_bg_hover', light: 'var(--fg_2)'},
+	{name: 'button_bg_hover', light: 'var(--fg_2)'}, // TODO BLOCK keep these? what about `::before` and `::after` visuals with gradients/animations?
 	{name: 'button_bg_active', light: 'var(--bg_3)'},
 	{name: 'button_bg_disabled', light: 'transparent'},
 
@@ -366,9 +366,9 @@ export const default_variables: Theme_Variable[] = [
 	{name: 'disabled_opacity', light: 'var(--fade_2)'},
 
 	/* border radii */
-	{name: 'border_radius', light: 'var(--border_radius_md)'},
-	{name: 'border_radius_md', light: 'calc(var(--input_height) / 2)'},
-	{name: 'border_radius_sm', light: 'calc(var(--border_radius_md) / 1.618)'},
-	{name: 'border_radius_xs', light: 'calc(var(--border_radius_sm) / 1.618)'},
-	{name: 'border_radius_xs2', light: 'calc(var(--border_radius_xs) / 1.618)'},
+	{name: 'border_radius', light: 'var(--radius_md)'},
+	{name: 'radius_md', light: 'calc(var(--input_height) / 2)'},
+	{name: 'radius_sm', light: 'calc(var(--radius_md) / 1.618)'},
+	{name: 'radius_xs', light: 'calc(var(--radius_sm) / 1.618)'},
+	{name: 'radius_2xs', light: 'calc(var(--radius_xs) / 1.618)'},
 ];

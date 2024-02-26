@@ -232,11 +232,11 @@
 	--fade_5: 15%;
 	--fade_6: 9%;
 	--disabled_opacity: var(--fade_2);
-	--border_radius: var(--border_radius_md);
-	--border_radius_md: calc(var(--input_height) / 2);
-	--border_radius_sm: calc(var(--border_radius_md) / 1.618);
-	--border_radius_xs: calc(var(--border_radius_sm) / 1.618);
-	--border_radius_xs2: calc(var(--border_radius_xs) / 1.618);
+	--border_radius: var(--radius_md);
+	--radius_md: calc(var(--input_height) / 2);
+	--radius_sm: calc(var(--radius_md) / 1.618);
+	--radius_xs: calc(var(--radius_sm) / 1.618);
+	--radius_2xs: calc(var(--radius_xs) / 1.618);
 }
 :root.dark {
 	--color_a_2: hsl(var(--hue_a), 62%, 87%);
