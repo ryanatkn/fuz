@@ -28,19 +28,18 @@
 		<aside>
 			These are named "variables" or "style variables" instead of the common name "design tokens"
 			because Fuz is made by a programmer designing more for devs and end-users than designers.
-			Their functionality is like JS variables but for CSS, and they're based on CSS custom
+			Their functionality is like JS variables but for CSS, and they're implemented with CSS custom
 			properties, which are commonly called CSS variables. Also, in the programming domains I'm
 			familiar with, including some Fuz projects, a token is a secret for authentication, and I
 			don't like seeing the term overloaded. And finally, the term token has been popularized by
 			cryptocurrencies which have no relation with Fuz, so its vibes are all over the place.
 		</aside>
 		<p>
-			CSS custom properties and therefore variables support runtime modifications with minimal
-			overhead and DRY markup, unlike most other systems. The goal is to provide runtime theming
-			that's efficient and ergnomic to both developers and end-users. Variables also provide an
-			interface that user-generated content can safely use, and they can be leveraged by CSS
-			classes, both utility and semantic. The result is a flexible and non-dogmatic system that
-			aligns with modern CSS to achieve great UX and DX.
+			The goal of the variables system is to provide runtime theming that's efficient and ergnomic
+			to both developers and end-users. Variables also provide an interface that user-generated
+			content can safely use, and they can be leveraged by CSS classes, both utility and semantic.
+			The result is a flexible and non-dogmatic system that aligns with modern CSS to achieve great
+			UX and DX.
 		</p>
 		<aside>
 			Variables are <code>snake_case</code> so that they're also valid JS identifiers, not for
