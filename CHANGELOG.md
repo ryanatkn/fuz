@@ -755,7 +755,7 @@
   ([#224](https://github.com/ryanatkn/fuz/pull/224))
   - remove `--input_border_width` - use `--border_width` instead
   - remove `--border` - use each variable directly instead so they can be overidden
-  - remove `--icon_max` - use `--icon_size_4xlxl` instead
+  - remove `--icon_max` - use `--icon_size_4xl` instead
   - remove `--button_border_width` and `--button_text_color`
   - rename `--interactive_` variables to `--button_`
   - remove `--interactive_color_active_dark`

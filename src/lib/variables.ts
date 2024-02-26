@@ -343,9 +343,9 @@ export const default_variables: Style_Variable[] = [
 	{name: 'icon_size_md', light: '48px'},
 	{name: 'icon_size_lg', light: '80px'},
 	{name: 'icon_size_xl', light: '128px'},
-	{name: 'icon_size_2xlxl', light: '196px'},
-	{name: 'icon_size_3xlxl', light: '316px'},
-	{name: 'icon_size_4xlxl', light: '512px'},
+	{name: 'icon_size_2xl', light: '196px'},
+	{name: 'icon_size_3xl', light: '316px'},
+	{name: 'icon_size_4xl', light: '512px'},
 
 	/* durations */
 	{name: 'duration_1', light: '0.08s'},
