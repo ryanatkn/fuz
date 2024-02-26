@@ -14,6 +14,8 @@
 	export let variables = default_variables.slice().sort((a, b) => a.name.localeCompare(b.name));
 
 	const selected_variable = get_selected_variable();
+
+	// TODO maybe FAQ? need a standardized pattern -- first add the "on this page" menu functionality
 </script>
 
 <Tome_Detail {tome}>
