@@ -7,6 +7,9 @@ import typography from '$routes/library/typography/+page.svelte';
 import themes from '$routes/library/themes/+page.svelte';
 import variables from '$routes/library/variables/+page.svelte';
 import prose from '$routes/library/prose/+page.svelte';
+import layout from '$routes/library/layout/+page.svelte';
+import light_and_shadow from '$routes/library/light_and_shadow/+page.svelte';
+import borders from '$routes/library/borders/+page.svelte';
 import Pending_Animation from '$routes/library/Pending_Animation/+page.svelte';
 import Pending_Button from '$routes/library/Pending_Button/+page.svelte';
 import Package_Summary from '$routes/library/Package_Summary/+page.svelte';
@@ -21,6 +24,8 @@ import Redirect from '$routes/library/Redirect/+page.svelte';
 import Hue_Input from '$routes/library/Hue_Input/+page.svelte';
 import Breadcrumb from '$routes/library/Breadcrumb/+page.svelte';
 import Card from '$routes/library/Card/+page.svelte';
+
+// TODO maybe decouple `related` from `Tome` to get bidirectionality for free
 
 export const tomes: Tome[] = [
 	{
@@ -45,7 +50,15 @@ export const tomes: Tome[] = [
 		pathname: '',
 		category: 'styles',
 		component: colors,
-		related: ['themes', 'variables', 'buttons'],
+		related: ['themes', 'variables', 'light and shadow', 'buttons'],
+	},
+	{
+		name: 'light and shadow',
+		slug: 'light_and_shadow',
+		pathname: '',
+		category: 'styles',
+		component: light_and_shadow,
+		related: ['colors'],
 	},
 	{
 		name: 'buttons',
@@ -53,7 +66,7 @@ export const tomes: Tome[] = [
 		pathname: '',
 		category: 'styles',
 		component: buttons,
-		related: ['colors', 'elements', 'forms', 'prose'],
+		related: ['colors', 'elements', 'forms', 'borders'],
 	},
 	{
 		name: 'forms',
@@ -61,7 +74,7 @@ export const tomes: Tome[] = [
 		pathname: '',
 		category: 'styles',
 		component: forms,
-		related: ['buttons', 'elements', 'prose', 'Hue_Input'],
+		related: ['buttons', 'elements', 'prose', 'borders', 'Hue_Input'],
 	},
 	{
 		name: 'elements',
@@ -69,7 +82,7 @@ export const tomes: Tome[] = [
 		pathname: '',
 		category: 'styles',
 		component: elements,
-		related: ['buttons', 'forms', 'prose'],
+		related: ['buttons', 'forms', 'prose', 'layout'],
 	},
 	{
 		name: 'prose',
@@ -86,6 +99,22 @@ export const tomes: Tome[] = [
 		category: 'styles',
 		component: typography,
 		related: ['themes', 'variables', 'prose'],
+	},
+	{
+		name: 'borders',
+		slug: 'borders',
+		pathname: '',
+		category: 'styles',
+		component: borders,
+		related: ['buttons', 'forms'],
+	},
+	{
+		name: 'layout',
+		slug: 'layout',
+		pathname: '',
+		category: 'styles',
+		component: layout,
+		related: ['elements'],
 	},
 	// TODO maybe? or do styles like this belong elsewhere? classes? problem is we'll have a classes page for the variables
 	// {

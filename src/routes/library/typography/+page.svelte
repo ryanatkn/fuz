@@ -74,6 +74,16 @@
 			{/each}
 		</div>
 	</section>
+	<section>'text_1' 'text_2' 'text_3' 'text_disabled' 'text_active'</section>
+	<section>
+		<div>line_height_1</div>
+		<div>line_height_2</div>
+		<div>line_height_3</div>
+		<div>line_height_4</div>
+		<div>line_height_5</div>
+		<div>line_height_6</div>
+		<div>line_height_7</div>
+	</section>
 	<Icon_Sizes />
 </Tome_Detail>
 

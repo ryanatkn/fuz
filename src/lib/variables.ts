@@ -99,6 +99,7 @@ export const default_variables: Style_Variable[] = [
 		color variants - using these usually means handling both light and dark mode separately -
 		the semantic variants	that handle `color-schema` automatically include `--bg_1` and `--bg_2`
 	*/
+	// TODO some of these may be too subtle, but there may be cases where it's needed so keeping them for now
 	{name: 'darken_1', light: '#0000000f', summary: '6%'},
 	{name: 'darken_2', light: '#0000001f', summary: '12%'},
 	{name: 'darken_3', light: '#00000036', summary: '21%'},
@@ -144,7 +145,7 @@ export const default_variables: Style_Variable[] = [
 	{name: 'bg_7', light: 'var(--lighten_7)', dark: 'var(--darken_7)'},
 	{name: 'bg_8', light: 'var(--lighten_8)', dark: 'var(--darken_8)'},
 	{name: 'bg_9', light: 'var(--lighten_9)', dark: 'var(--darken_9)'},
-	{name: 'bg_10', light: '#fff', dark: '#000'},
+	{name: 'bg_10', light: '#fff', dark: '#000'}, // TODO 0 variant? or remove 10? add to lighten/darken?
 	{name: 'fg_1', light: 'var(--darken_1)', dark: 'var(--lighten_1)'},
 	{name: 'fg_2', light: 'var(--darken_2)', dark: 'var(--lighten_2)'},
 	{name: 'fg_3', light: 'var(--darken_3)', dark: 'var(--lighten_3)'},
@@ -154,7 +155,7 @@ export const default_variables: Style_Variable[] = [
 	{name: 'fg_7', light: 'var(--darken_7)', dark: 'var(--lighten_7)'},
 	{name: 'fg_8', light: 'var(--darken_8)', dark: 'var(--lighten_8)'},
 	{name: 'fg_9', light: 'var(--darken_9)', dark: 'var(--lighten_9)'},
-	{name: 'fg_10', light: '#000', dark: '#fff'},
+	{name: 'fg_10', light: '#000', dark: '#fff'}, // TODO 0 variant? or remove 10? add to lighten/darken?
 	// TODO probably need more variants, 5 total?
 	/* text colors don't use alpha because it affects performance too much */
 	{name: 'text_color', light: 'var(--text_1)'},
@@ -243,6 +244,9 @@ export const default_variables: Style_Variable[] = [
 
 	/* borders and outlines */
 	{name: 'border_color', light: 'var(--border_3)'},
+	{name: 'border_style', light: 'solid'},
+	// TODO BLOCK add `_color` probably, ambiguous with width
+	// TODO add tint vars for these?
 	{
 		name: 'border_1',
 		light: 'hsl(var(--tint_hue), 60%, 20%, 15%)',
@@ -276,7 +280,6 @@ export const default_variables: Style_Variable[] = [
 	{name: 'border_width_4', light: '4px'},
 	{name: 'border_width_5', light: '6px'},
 	{name: 'border_width_6', light: '8px'},
-	{name: 'border_style', light: 'solid'},
 	{name: 'outline_width', light: 'var(--outline_width_1)'},
 	{name: 'outline_width_1', light: '0'},
 	{name: 'outline_width_2', light: 'var(--border_width_2)'},
