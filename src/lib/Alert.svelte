@@ -39,7 +39,7 @@
 		display: flex;
 		justify-content: flex-start; /* override button horizontal centering */
 		align-items: center;
-		padding: var(--space_2xs) var(--space_lg) var(--space_2xs) var(--space_xs);
+		padding: var(--space_xs2) var(--space_lg) var(--space_xs2) var(--space_xs);
 		margin-bottom: var(--space_lg);
 	}
 	.message:last-child {
@@ -50,6 +50,6 @@
 		align-items: center;
 		justify-content: center;
 		padding-right: var(--space_md);
-		font-size: var(--size_2xl);
+		font-size: var(--size_xl2);
 	}
 </style>

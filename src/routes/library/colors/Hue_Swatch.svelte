@@ -30,7 +30,7 @@
 		display: flex;
 		align-items: stretch;
 		font-family: var(--font_family_mono);
-		padding: var(--space_2xs);
+		padding: var(--space_xs2);
 	}
 	li:hover {
 		background-color: var(--bg);

@@ -313,7 +313,7 @@
 
 <style>
 	section {
-		margin-bottom: var(--space_4xl);
+		margin-bottom: var(--space_xl4);
 	}
 	.position {
 		border-radius: var(--border_radius);

@@ -54,15 +54,15 @@
 		display: flex;
 	}
 	.teleports > div {
-		width: var(--space_8xl);
-		height: var(--space_8xl);
-		font-size: var(--size_3xl);
+		width: var(--space_xl8);
+		height: var(--space_xl8);
+		font-size: var(--size_xl3);
 		display: flex;
 		align-items: center;
 		justify-content: center;
 	}
 	/* TODO standardize this */
 	section {
-		margin-bottom: var(--space_3xl);
+		margin-bottom: var(--space_xl3);
 	}
 </style>

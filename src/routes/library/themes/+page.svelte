@@ -350,7 +350,7 @@ $selected_color_scheme; // '${$selected_color_scheme}'`}
 	}
 	section {
 		width: 100%;
-		margin-bottom: var(--space_6xl);
+		margin-bottom: var(--space_xl6);
 	}
 	.theme_editor_wrapper {
 		width: var(--width_md);

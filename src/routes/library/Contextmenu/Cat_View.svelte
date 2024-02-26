@@ -27,7 +27,7 @@
 		font-weight: 700;
 	}
 	.cat.has-icon .name {
-		padding: 0 var(--space_3xs);
+		padding: 0 var(--space_xs3);
 	}
 	.icon {
 		font-size: var(--icon_size_md);

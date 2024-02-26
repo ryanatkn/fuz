@@ -12,36 +12,36 @@
   - `fade_N` from `faded_N`
   - `space_N` from `spacing_N`
   - `radius_N` from `border_radius_N`
-  - `space_5xs` from `space_xs5`
-  - `space_4xs` from `space_xs4`
-  - `space_3xs` from `space_xs3`
-  - `space_2xs` from `space_xs2`
+  - `space_xs5` from `space_xs5`
+  - `space_xs4` from `space_xs4`
+  - `space_xs3` from `space_xs3`
+  - `space_xs2` from `space_xs2`
   - `space_xs` from `space_xs`
   - `space_sm` from `space_sm`
   - `space_md` from `space_md`
   - `space_lg` from `space_lg`
   - `space_xl` from `space_1`
-  - `space_2xl` from `space_2`
-  - `space_3xl` from `space_3`
-  - `space_4xl` from `space_4`
-  - `space_5xl` from `space_5`
-  - `space_6xl` from `space_6`
-  - `space_7xl` from `space_7`
-  - `space_8xl` from `space_8`
-  - `space_9xl` from `space_9`
+  - `space_xl2` from `space_2`
+  - `space_xl3` from `space_3`
+  - `space_xl4` from `space_4`
+  - `space_xl5` from `space_5`
+  - `space_xl6` from `space_6`
+  - `space_xl7` from `space_7`
+  - `space_xl8` from `space_8`
+  - `space_xl9` from `space_9`
   - `size_xl` from `size_1`
-  - `size_2xl` from `size_2`
-  - `size_3xl` from `size_3`
-  - `size_4xl` from `size_4`
-  - `size_5xl` from `size_5`
-  - `size_6xl` from `size_6`
-  - `size_7xl` from `size_7`
-  - `size_8xl` from `size_8`
-  - `size_9xl` from `size_9`
+  - `size_xl2` from `size_2`
+  - `size_xl3` from `size_3`
+  - `size_xl4` from `size_4`
+  - `size_xl5` from `size_5`
+  - `size_xl6` from `size_6`
+  - `size_xl7` from `size_7`
+  - `size_xl8` from `size_8`
+  - `size_xl9` from `size_9`
   - `icon_size_xl` from `icon_size_1`
-  - `icon_size_2xl` from `icon_size_2`
-  - `icon_size_3xl` from `icon_size_3`
-  - `icon_size_4xl` from `icon_size_4`
+  - `icon_size_xl2` from `icon_size_2`
+  - `icon_size_xl3` from `icon_size_3`
+  - `icon_size_xl4` from `icon_size_4`
 
 ### Patch Changes
 
@@ -369,7 +369,7 @@
   ([#337](https://github.com/ryanatkn/fuz/pull/337))
 - add classes `.inline`, `.inline_block`, `.block`, `.flex`, and `.flex_1`
   ([#337](https://github.com/ryanatkn/fuz/pull/337))
-- add `--radius_2xs`
+- add `--radius_xs2`
   ([#342](https://github.com/ryanatkn/fuz/pull/342))
 
 ## 0.64.0
@@ -803,7 +803,7 @@
   ([#224](https://github.com/ryanatkn/fuz/pull/224))
   - remove `--input_border_width` - use `--border_width` instead
   - remove `--border` - use each variable directly instead so they can be overidden
-  - remove `--icon_max` - use `--icon_size_4xl` instead
+  - remove `--icon_max` - use `--icon_size_xl4` instead
   - remove `--button_border_width` and `--button_text_color`
   - rename `--interactive_` variables to `--button_`
   - remove `--interactive_color_active_dark`
@@ -884,8 +884,8 @@
 
 ## 0.30.0
 
-- **break**: replace `--radius_xl` and `--radius_5xl` with `--radius_2xl` to 5,
-  and rename `--radius_2xl` and `radius_3xl` to 2 and 3, respectively
+- **break**: replace `--radius_xl` and `--radius_xl5` with `--radius_xl2` to 5,
+  and rename `--radius_xl2` and `radius_xl3` to 2 and 3, respectively
   ([#204](https://github.com/ryanatkn/fuz/pull/204))
 - add `fade-in` animation
   ([#205](https://github.com/ryanatkn/fuz/pull/205))
