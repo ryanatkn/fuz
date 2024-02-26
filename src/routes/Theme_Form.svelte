@@ -19,10 +19,10 @@
 	export let theme: Theme | null = null; // `null` means creating
 
 	let new_name = theme ? theme.name : 'new theme';
-	let new_variables = theme ? theme.items : []; // TODO `updateVariables` to `Style_Variable_Detail` ?
+	let new_variables = theme ? theme.variables : []; // TODO `updateVariables` to `Style_Variable_Detail` ?
 
 	let new_theme: Theme;
-	$: new_theme = {name: new_name, items: new_variables};
+	$: new_theme = {name: new_name, variables: new_variables};
 
 	$: code = render_theme_style(new_theme, {empty_default_theme: false, specificity: 1});
 
@@ -48,7 +48,7 @@
 	};
 
 	$: editing = !!theme;
-	$: changed = theme ? new_name !== theme.name || new_variables !== theme.items : true;
+	$: changed = theme ? new_name !== theme.name || new_variables !== theme.variables : true;
 </script>
 
 <div class="theme_form">

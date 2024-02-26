@@ -81,7 +81,7 @@
 			lang="ts"
 			content={`export interface Theme {
 	name: string;
-	items: Style_Variable[];
+	variables: Style_Variable[];
 }
 
 export interface Style_Variable {

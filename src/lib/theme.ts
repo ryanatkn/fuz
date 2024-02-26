@@ -115,7 +115,7 @@ export const create_theme_style_html = (style: string): string => `<style nonce=
 
 export interface Theme {
 	name: string;
-	items: Style_Variable[];
+	variables: Style_Variable[];
 }
 
 export interface Style_Variable {
@@ -146,7 +146,7 @@ export const render_theme_style = (
 			? empty_default_theme
 				? null
 				: default_variables
-			: theme.items;
+			: theme.variables;
 	if (!variables?.length) return '';
 	const rendered_light = variables.map((v) => render_theme_variable(v)).filter(Boolean);
 	const rendered_dark = variables
