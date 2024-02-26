@@ -185,7 +185,7 @@ export const default_variables: Style_Variable[] = [
 	{name: 'line_height_1', light: '1'},
 	{name: 'line_height_2', light: '1.1'},
 	{name: 'line_height_3', light: '1.2'},
-	{name: 'line_height_4', light: '1.35'}, // TODO BLOCK xs/sm/md/lg?
+	{name: 'line_height_4', light: '1.35'}, // TODO xs/sm/md/lg?
 	{name: 'line_height_5', light: '1.5'},
 	{name: 'line_height_6', light: '1.75'},
 	{name: 'line_height_7', light: '2'},
@@ -286,7 +286,7 @@ export const default_variables: Style_Variable[] = [
 
 	/* button colors */
 	{name: 'button_bg', light: 'var(--fg_1)'},
-	{name: 'button_bg_hover', light: 'var(--fg_2)'}, // TODO BLOCK keep these? what about `::before` and `::after` visuals with gradients/animations?
+	{name: 'button_bg_hover', light: 'var(--fg_2)'}, // TODO keep these? what about `::before` and `::after` visuals with gradients/animations?
 	{name: 'button_bg_active', light: 'var(--bg_3)'},
 	{name: 'button_bg_disabled', light: 'transparent'},
 
@@ -362,7 +362,7 @@ export const default_variables: Style_Variable[] = [
 	{name: 'disabled_opacity', light: 'var(--fade_2)'},
 
 	/* border radii */
-	// TODO BLOCK hardcoded values
+	// TODO hardcoded values
 	{name: 'border_radius', light: 'var(--radius_md)'},
 	{name: 'radius_md', light: 'calc(var(--input_height) / 2)'},
 	{name: 'radius_sm', light: 'calc(var(--radius_md) / 1.618)'},
