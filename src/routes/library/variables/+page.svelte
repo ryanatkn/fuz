@@ -30,7 +30,7 @@
 			to both developers and end-users. Variables also provide an interface that user-generated
 			content can safely use, and they can be leveraged by CSS classes, both utility and semantic.
 			The result is a powerful, unbloated, and non-dogmatic system that aligns with modern CSS to
-			achieve great UX and DX.
+			deliver good UX and DX.
 		</p>
 		<aside>
 			<p>
