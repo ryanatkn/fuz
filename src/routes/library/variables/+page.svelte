@@ -94,7 +94,7 @@ export interface Style_Variable {
 	</section>
 	<section class="box">
 		<blockquote class="spaced">
-			{variables.length} theme variables
+			{variables.length} style variables
 		</blockquote>
 		<!-- TODO add info through the contextmenu or dialog -->
 		<div class="variables">
