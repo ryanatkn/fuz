@@ -26,13 +26,19 @@
 			can have values for light and/or dark color schemes.
 		</p>
 		<aside>
-			These are named "variables" or "style variables" instead of the common name "design tokens"
-			because Fuz is made by a programmer designing more for devs and end-users than designers.
-			Their functionality is like JS variables but for CSS, and they're implemented with CSS custom
-			properties, which are commonly called CSS variables. Also, in the programming domains I'm
-			familiar with, including some Fuz projects, a token is a secret for authentication, and I
-			don't like seeing the term overloaded. And finally, the term token has been popularized by
-			cryptocurrencies which have no relation with Fuz, so its vibes are all over the place.
+			<p>
+				These are named "variables" or "style variables" instead of the common name "design tokens"
+				because Fuz is made by a programmer designing more for devs and end-users than designers.
+				Their functionality is like JS variables but for CSS, and they're implemented with CSS
+				custom properties, which are commonly called CSS variables.
+			</p>
+			<p>
+				Also, in the programming domains I'm familiar with, including some Fuz projects, a token is
+				a secret for authentication, and I don't like seeing the term overloaded. Wikipedia has
+				programming usages but no page about design tokens. And finally, the term token has been
+				popularized by cryptocurrencies which have no relation with Fuz, so its vibes are all over
+				the place.
+			</p>
 		</aside>
 		<p>
 			The goal of the variables system is to provide runtime theming that's efficient and ergnomic
@@ -42,15 +48,20 @@
 			UX and DX.
 		</p>
 		<aside>
-			Variables are <code>snake_case</code> so that they're also valid JS identifiers, not for
-			stylistic or contrarian reasons. This choice leaks to the CSS class naming conventions, so
-			that variable-derived utility classes match their corresponding variable names. This fits
-			nicely with
-			<a href="https://svelte.dev/docs/element-directives#class-name"
-				>Svelte's class shorthand syntax</a
-			>. The naming convention also supports my goal of thinking about Fuz and your app as having a
-			single unified flat namespace, where every identifier regardless of module is unique and part
-			of a larger whole - the system's vocabulary. Maybe this needs a blog post.
+			<p>
+				Variables are <code>snake_case</code> so that they're also valid JS identifiers, not for
+				stylistic or contrarian reasons. This choice leaks to the CSS class naming conventions, so
+				that variable-derived utility classes match their corresponding variable names. This fits
+				nicely with
+				<a href="https://svelte.dev/docs/element-directives#class-name"
+					>Svelte's class shorthand syntax</a
+				>.
+			</p>
+			<p>
+				The naming convention also supports my goal of thinking about Fuz and your app as having a
+				single unified flat namespace, where every identifier regardless of module is unique and
+				part of a larger whole - the system's vocabulary. Maybe this needs a blog post.
+			</p>
 		</aside>
 	</section>
 	<section>
