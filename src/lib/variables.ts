@@ -214,11 +214,7 @@ export const default_variables: Style_Variable[] = [
 	{name: 'size_9xl', light: '17.74rem'},
 
 	/* links */
-	{
-		name: 'link_color',
-		light: 'hsl(var(--hue_a), 61%, 35%)',
-		dark: 'hsl(var(--hue_a), 61%, 58%)',
-	},
+	{name: 'link_color', light: 'hsl(var(--hue_a), 61%, 35%)', dark: 'hsl(var(--hue_a), 61%, 58%)'},
 	{name: 'text_decoration', light: 'none'},
 	{name: 'text_decoration_hover', light: 'underline'},
 	{name: 'text_decoration_selected', light: 'underline'},
