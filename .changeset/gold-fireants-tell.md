@@ -2,6 +2,4 @@
 '@ryanatkn/fuz': minor
 ---
 
-rename vars
-
-- `xsN` from `Nxs` and `xlN` from `Nxl`
+rename variable pattern `xsN` from `Nxs` and `xlN` from `Nxl`
