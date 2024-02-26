@@ -21,11 +21,11 @@
 	<div class="prose">
 		<section>
 			<h3>Border colors</h3>
-			<div class="border_colors">
+			<div class="border_examples border_colors">
 				{#each {length: 5} as _, i}
 					{@const name = 'border_color_' + (i + 1)}
 					<div class="border_color_wrapper">
-						<div class="border_color" style:border-color="var(--{name})">
+						<div class="border_example border_color" style:border-color="var(--{name})">
 							<Style_Variable_Button {name} />
 						</div>
 						{#each {length: 5} as _, i}
@@ -42,10 +42,10 @@
 
 		<section>
 			<h3>Border widths</h3>
-			<div class="border_widths">
+			<div class="border_examples border_widths">
 				{#each {length: 6} as _, i}
 					{@const name = 'border_width_' + (i + 1)}
-					<div class="border_width" style:border-width="var(--{name})">
+					<div class="border_example border_width" style:border-width="var(--{name})">
 						<Style_Variable_Button {name} />
 					</div>
 				{/each}
@@ -54,10 +54,10 @@
 
 		<section>
 			<h3>Outline widths</h3>
-			<div class="outline_widths">
+			<div class="border_examples outline_widths">
 				{#each {length: 3} as _, i}
 					{@const name = 'outline_width_' + (i + 1)}
-					<div class="outline_width" style:outline-width="var(--{name})">
+					<div class="border_example outline_width" style:outline-width="var(--{name})">
 						<Style_Variable_Button {name} />
 					</div>
 				{/each}
@@ -66,10 +66,10 @@
 
 		<section>
 			<h3>Border radii</h3>
-			<div class="border_radii">
+			<div class="border_examples border_radii">
 				{#each ['xs2', 'xs', 'sm', 'md'] as radius}
 					{@const name = 'radius_' + radius}
-					<div class="border_radius" style:border-radius="var(--{name})">
+					<div class="border_example border_radius" style:border-radius="var(--{name})">
 						<Style_Variable_Button {name} />
 					</div>
 				{/each}
@@ -79,22 +79,25 @@
 </Tome_Detail>
 
 <style>
-	.border_colors {
+	.border_examples {
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
 	}
-	.border_color_wrapper {
-		display: flex;
-	}
-	.border_color {
+	.border_example {
 		width: 200px;
 		display: flex;
 		justify-content: center;
 		margin-bottom: var(--space_md);
+		padding: var(--space_md);
+	}
+
+	.border_color_wrapper {
+		display: flex;
+	}
+	.border_color {
 		border-width: 1px;
 		border-style: solid;
-		padding: var(--space_md);
 	}
 	.border_color_width {
 		border-style: solid;
@@ -103,47 +106,17 @@
 		margin-bottom: var(--space_md);
 	}
 
-	.border_widths {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-	}
 	.border_width {
-		width: 200px;
-		display: flex;
-		justify-content: center;
-		margin-bottom: var(--space_md);
 		border-color: var(--border_color_5);
 		border-style: solid;
-		padding: var(--space_md);
 	}
 
-	.outline_widths {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-	}
 	.outline_width {
-		width: 200px;
-		display: flex;
-		justify-content: center;
-		margin-bottom: var(--space_md);
 		outline-color: var(--outline_color);
 		outline-style: solid;
-		padding: var(--space_md);
 	}
 
-	.border_radii {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-	}
 	.border_radius {
-		display: flex;
-		justify-content: center;
-		width: 200px;
-		margin-bottom: var(--space_md);
-		padding: var(--space_md);
 		background-color: var(--fg_2);
 	}
 </style>
