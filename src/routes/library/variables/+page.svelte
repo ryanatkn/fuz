@@ -44,11 +44,13 @@
 		<aside>
 			Variables are <code>snake_case</code> so that they're also valid JS identifiers, not for
 			stylistic or contrarian reasons. This choice leaks to the CSS class naming conventions, so
-			that variable-derived utility classes match their corresponding variable names. This works
+			that variable-derived utility classes match their corresponding variable names. This fits
 			nicely with
 			<a href="https://svelte.dev/docs/element-directives#class-name"
 				>Svelte's class shorthand syntax</a
-			>. This topic needs a blog post.
+			>. The naming convention also supports my goal of thinking about Fuz and your app as having a
+			single unified flat namespace, where every identifier regardless of module is unique and part
+			of a larger whole - the system's vocabulary.
 		</aside>
 	</section>
 	<section>
