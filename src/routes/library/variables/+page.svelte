@@ -25,6 +25,13 @@
 			that can be grouped into a <Library_Vocab name="themes">theme</Library_Vocab>. Each variable
 			can have values for light and/or dark color schemes.
 		</p>
+		<p>
+			The goal of the variables system is to provide runtime theming that's efficient and ergnomic
+			to both developers and end-users. Variables also provide an interface that user-generated
+			content can safely use, and they can be leveraged by CSS classes, both utility and semantic.
+			The result is a flexible and non-dogmatic system that aligns with modern CSS to achieve good
+			UX and DX.
+		</p>
 		<aside>
 			<p>
 				These are named "variables" or "style variables" instead of the common name "design tokens"
@@ -40,13 +47,6 @@
 				the place.
 			</p>
 		</aside>
-		<p>
-			The goal of the variables system is to provide runtime theming that's efficient and ergnomic
-			to both developers and end-users. Variables also provide an interface that user-generated
-			content can safely use, and they can be leveraged by CSS classes, both utility and semantic.
-			The result is a flexible and non-dogmatic system that aligns with modern CSS to achieve great
-			UX and DX.
-		</p>
 		<aside>
 			<p>
 				Variables are <code>snake_case</code> so that they're also valid JS identifiers, not for
