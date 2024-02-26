@@ -29,8 +29,8 @@
 			The goal of the variables system is to provide runtime theming that's efficient and ergnomic
 			to both developers and end-users. Variables also provide an interface that user-generated
 			content can safely use, and they can be leveraged by CSS classes, both utility and semantic.
-			The result is a flexible and non-dogmatic system that aligns with modern CSS to achieve good
-			UX and DX.
+			The result is a simple, flexible, and non-dogmatic system that aligns with modern CSS to
+			achieve good UX and DX.
 		</p>
 		<aside>
 			<p>
