@@ -25,13 +25,22 @@
 			that can be grouped into a <Library_Vocab name="themes">theme</Library_Vocab>. Each variable
 			can have values for light and/or dark color schemes.
 		</p>
+		<aside>
+			These are named "variables" or "style variables" instead of the common name "design tokens"
+			because Fuz is made by a programmer designing more for devs and end-users than designers.
+			Their functionality is like JS variables but in CSS, and they're based on CSS custom
+			properties, which are commonly called CSS variables. Also, in the programming domains I'm
+			familiar with, the word "token" means a secret for authentication. And finally, the term token
+			was popularized by cryptocurrencies which have no relation with Fuz, so its vibes are all over
+			the place.
+		</aside>
 		<p>
 			Compared to most systems not based on CSS custom properties, variables are more easily changed
 			at runtime by developers and end-users. The goal is to provide runtime theming with minimal
 			overhead. Variables also double as an interface that user-generated content can safely use.
 			Stay tuned for examples.
 		</p>
-		<blockquote>
+		<aside>
 			Variables are <code>snake_case</code> so that they're also valid JS identifiers, not for
 			stylistic or contrarian reasons. This choice leaks to the CSS class naming conventions, so
 			that variable-derived utility classes match their corresponding variable names. This works
@@ -39,7 +48,7 @@
 			<a href="https://svelte.dev/docs/element-directives#class-name"
 				>Svelte's class shorthand syntax</a
 			>. This topic needs a blog post.
-		</blockquote>
+		</aside>
 	</section>
 	<section>
 		<Code
