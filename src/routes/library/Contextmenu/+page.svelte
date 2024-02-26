@@ -122,7 +122,7 @@
 
 	const [send, receive] = crossfade({
 		fallback: (node, _params) => {
-			const style = getComputedStyle(node);
+			const style = window.getComputedStyle(node);
 			const transform = style.transform === 'none' ? '' : style.transform;
 
 			return {
