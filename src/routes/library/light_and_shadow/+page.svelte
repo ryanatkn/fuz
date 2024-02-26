@@ -4,6 +4,7 @@
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
 	import Color_Scheme_Input from '$lib/Color_Scheme_Input.svelte';
 	import Style_Variable_Button from '$routes/Style_Variable_Button.svelte';
+	import Library_Tome_Link from '$lib/Library_Tome_Link.svelte';
 	import {get_tome} from '$lib/tome.js';
 
 	const LIBRARY_ITEM_NAME = 'light and shadow';
@@ -16,13 +17,15 @@
 		<section>
 			<p>
 				Fuz is designed around the idea of stacking light and shadow with highlights and shading.
-				The goal is easy authoring with simple and consistent rules for various compositions and
+				The goal is easy authoring with simple and consistent rules for arbitrary compositions and
 				states.
 			</p>
 			<p>
 				The details are not always simple inversions between light mode, which starts from plain
 				white documents, and dark mode, which starts from a lightless void. It's more helpful to
-				think in terms of additive light than opaque colors.
+				think in terms of additive light than opaque colors. See also the <Library_Tome_Link
+					name="colors"
+				/> docs.
 			</p>
 			<p>
 				Opacity is used to enable arbitrary stacking that visually inherits its context. Not all
@@ -86,12 +89,16 @@
 		<section>
 			<h3>Fading opacity</h3>
 			<div class="swatch">
+				<div>
+					<div class="color" style:background-color="var(--color_a_5)"></div>
+					<small style:font-family="var(--font_family)">full opacity</small>
+				</div>
 				{#each {length: 6} as _, i}
 					{@const name = 'fade_' + (i + 1)}
 					<div>
 						<div
 							class="color"
-							style:background-color="var(--fg)"
+							style:background-color="var(--color_a_5)"
 							style:opacity="var(--{name})"
 						></div>
 						<small><Style_Variable_Button {name} /></small>
@@ -163,7 +170,9 @@
 		font-family: var(--font_family_mono);
 	}
 	small {
+		height: var(--input_height_sm);
 		display: flex;
 		justify-content: center;
+		align-items: center;
 	}
 </style>
