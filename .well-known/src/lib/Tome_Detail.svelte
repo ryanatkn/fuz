@@ -19,6 +19,6 @@
 
 <style>
 	header {
-		margin-bottom: var(--spacing_3);
+		margin-bottom: var(--space_3xl);
 	}
 </style>

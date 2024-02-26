@@ -33,12 +33,12 @@
 		flex-wrap: wrap;
 		justify-content: center;
 		align-items: stretch;
-		padding: var(--spacing_md) 0;
+		padding: var(--space_md) 0;
 	}
 	a {
 		position: relative;
 		z-index: 1;
-		padding: 0 var(--spacing_sm);
+		padding: 0 var(--space_sm);
 		display: flex;
 		align-items: center;
 	}

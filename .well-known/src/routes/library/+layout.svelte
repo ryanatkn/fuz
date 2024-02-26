@@ -11,9 +11,9 @@
 	import Library_Nav from '$lib/Library_Nav.svelte';
 	import {tomes} from '$routes/library/tomes.js';
 	import {package_json, src_json} from '$routes/package.js';
-	import {set_selected_variable} from '$routes/library/helpers.js';
+	import {set_selected_variable} from '$routes/style_variable_helpers.js';
 	import Dialog from '$lib/Dialog.svelte';
-	import Theme_Variable_Detail from '$routes/Theme_Variable_Detail.svelte';
+	import Style_Variable_Detail from '$routes/Style_Variable_Detail.svelte';
 
 	const pkg = parse_package_meta(package_json.homepage, package_json, src_json);
 
@@ -56,7 +56,7 @@
 		<Dialog on:close={() => ($selected_variable = null)} let:close>
 			<div class="pane">
 				<div class="panel padded_lg box">
-					<Theme_Variable_Detail variable={$selected_variable} />
+					<Style_Variable_Detail variable={$selected_variable} />
 					<br />
 					<aside>this is unfinished</aside>
 					<br />
@@ -70,14 +70,17 @@
 <style>
 	.layout {
 		position: relative;
-		padding-bottom: var(--spacing_5);
+		padding-bottom: var(--space_5xl);
 	}
 	.menu_wrapper {
 		position: absolute;
 		left: 0;
 		top: 0;
 		height: 100%;
-		transform: translate3d(calc(-100% - var(--spacing_sm)), 0, 0);
+		transform: translate3d(calc(-100% - var(--space_sm)), 0, 0);
+		display: flex;
+		align-items: center;
+		flex-direction: column;
 	}
 	.menu {
 		position: sticky;
@@ -87,15 +90,15 @@
 		.menu_wrapper {
 			position: relative;
 			transform: none;
-			margin-bottom: var(--spacing_3);
+			margin-bottom: var(--space_3xl);
 		}
 	}
 	section {
-		padding: var(--spacing_2);
+		padding: var(--space_2xl);
 	}
 	h6 {
-		margin-bottom: var(--spacing_md);
-		margin-top: var(--spacing_3);
+		margin-bottom: var(--space_md);
+		margin-top: var(--space_3xl);
 	}
 	h6:first-child {
 		margin-top: 0;

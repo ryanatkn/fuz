@@ -49,7 +49,7 @@
 			<h3>custom slot</h3>
 			<Code
 				content={`<div
-	style:font-size="var(--size_6)"
+	style:font-size="var(--size_6xl)"
 	style:--animation_duration="var(--duration_6)"
 >
 	<Pending_Animation running={${pendingAnimation1Running}}>
@@ -69,7 +69,7 @@
 				{#if pendingAnimation1Running}pause animation{:else}play animation{/if}
 			</button>
 			<div
-				style:font-size="var(--size_6)"
+				style:font-size="var(--size_6xl)"
 				style:--animation_duration="var(--duration_6)"
 				style:text-align="center"
 			>
@@ -85,7 +85,7 @@
 	<div class="row box">
 		{${turtleSlot2a}}
 		{index}
-		<span style="font-size: var(--size_5)">
+		<span style="font-size: var(--size_5xl)">
 			{${turtleSlot2b}}
 		</span>}
 	</div>
@@ -104,7 +104,7 @@
 			</p>
 			<Pending_Animation running={frogsRunning} let:index>
 				<div class="row box">
-					<span style="font-size: var(--size_5)">{turtleSlot2a}</span>
+					<span style="font-size: var(--size_5xl)">{turtleSlot2a}</span>
 					<span class="index">{index}</span>
 					{turtleSlot2b}
 				</div>
@@ -118,7 +118,7 @@
 		margin: 0;
 	}
 	.index {
-		font-size: var(--size_3);
+		font-size: var(--size_3xl);
 		font-weight: 300;
 	}
 </style>

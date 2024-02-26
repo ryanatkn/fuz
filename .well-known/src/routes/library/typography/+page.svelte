@@ -18,24 +18,24 @@
 		'size_sm',
 		'size_md',
 		'size_lg',
-		'size_1',
-		'size_2',
-		'size_3',
-		'size_4',
-		'size_5',
-		'size_6',
-		'size_7',
-		'size_8',
-		'size_9',
+		'size_xl',
+		'size_2xl',
+		'size_3xl',
+		'size_4xl',
+		'size_5xl',
+		'size_6xl',
+		'size_7xl',
+		'size_8xl',
+		'size_9xl',
 	]);
 	const font_sizes = default_variables.filter((p) => font_size_names.has(p.name));
 </script>
 
 <Tome_Detail {tome}>
 	<section class="prose overflowing">
-		<h1 title="--size_3">h1</h1>
-		<h2 title="--size_2">h2</h2>
-		<h3 title="--size_1">h3</h3>
+		<h1 title="--size_3xl">h1</h1>
+		<h2 title="--size_2xl">h2</h2>
+		<h3 title="--size_xl">h3</h3>
 		<h4 title="--size_lg">h4</h4>
 		<h5 title="--size_md">h5</h5>
 		<h6 title="--size_sm">h6</h6>
@@ -82,7 +82,7 @@
 		white-space: nowrap;
 	}
 	section {
-		margin-bottom: var(--spacing_5);
+		margin-bottom: var(--space_5xl);
 	}
 	.overflowing {
 		width: 100%;

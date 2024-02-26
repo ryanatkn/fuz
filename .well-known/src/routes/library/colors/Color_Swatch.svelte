@@ -1,8 +1,7 @@
 <script lang="ts">
 	import {hsl_to_hex_string, hsl_to_rgb, parse_hsl_string} from '@ryanatkn/belt/colors.js';
 
-	import {get_selected_variable} from '$routes/library/helpers.js';
-	import {default_variables} from '$lib/variables.js';
+	import Style_Variable_Button from '$routes/Style_Variable_Button.svelte';
 
 	export let color_name: string;
 	export let computed_styles: CSSStyleDeclaration;
@@ -10,11 +9,6 @@
 	const get_color_hsl_string = (name: string) => {
 		const v = computed_styles.getPropertyValue('--' + name);
 		return v;
-	};
-
-	const selected_variable = get_selected_variable();
-	const select_variable = (variable_name: string) => {
-		$selected_variable = default_variables.find((v) => v.name === variable_name)!;
 	};
 </script>
 
@@ -27,9 +21,7 @@
 		<li style:--bg_color="var(--{variable_name})">
 			<div class="color"></div>
 			<div class="text">
-				<button class="plain" on:click={() => select_variable(variable_name)}
-					>{variable_name}</button
-				>
+				<Style_Variable_Button name={variable_name} />
 				<div class="hex">{hsl_to_hex_string(...hsl)}</div>
 				<div class="hsl">{hsl_string}</div>
 				<div class="rgb">rgb({hsl_to_rgb(...hsl).join(', ')})</div>
@@ -41,13 +33,13 @@
 <style>
 	ul {
 		width: 100%;
-		margin-bottom: 32px;
+		margin-bottom: var(--input_height_sm);
 	}
 	li {
 		display: flex;
 		align-items: stretch;
 		font-family: var(--font_family_mono);
-		min-height: 32px;
+		min-height: var(--input_height_sm);
 	}
 	li:hover {
 		background-color: var(--bg);
@@ -56,25 +48,21 @@
 		display: flex;
 		align-items: center;
 		flex: 1;
-		padding-left: var(--spacing_sm);
-	}
-	button {
-		/* TODO var? see the 32px elsewhere here and the Hue_Swatch as well */
-		--min_height: 32px;
+		padding-left: var(--space_sm);
 	}
 	.hex {
 		width: 73px;
 		font-size: var(--size_sm);
-		padding-left: var(--spacing_sm);
+		padding-left: var(--space_sm);
 	}
 	.hsl {
 		width: 149px;
 		font-size: var(--size_sm);
-		padding-left: var(--spacing_sm);
+		padding-left: var(--space_sm);
 	}
 	.rgb {
 		font-size: var(--size_sm);
-		padding-left: var(--spacing_sm);
+		padding-left: var(--space_sm);
 	}
 	.color {
 		width: 100px;
@@ -86,7 +74,7 @@
 		.text {
 			flex-direction: column;
 			align-items: flex-start;
-			padding: var(--spacing_sm);
+			padding: var(--space_sm);
 		}
 	}
 </style>

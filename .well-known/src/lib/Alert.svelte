@@ -39,8 +39,8 @@
 		display: flex;
 		justify-content: flex-start; /* override button horizontal centering */
 		align-items: center;
-		padding: var(--spacing_xs2) var(--spacing_lg) var(--spacing_xs2) var(--spacing_xs);
-		margin-bottom: var(--spacing_lg);
+		padding: var(--space_2xs) var(--space_lg) var(--space_2xs) var(--space_xs);
+		margin-bottom: var(--space_lg);
 	}
 	.message:last-child {
 		margin-bottom: 0;
@@ -49,7 +49,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		padding-right: var(--spacing_md);
-		font-size: var(--size_2);
+		padding-right: var(--space_md);
+		font-size: var(--size_2xl);
 	}
 </style>

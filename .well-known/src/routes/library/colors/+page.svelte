@@ -3,7 +3,7 @@
 	import {get_tome} from '$lib/tome.js';
 	import Hue_Swatch from '$routes/library/colors/Hue_Swatch.svelte';
 	import Color_Swatch from '$routes/library/colors/Color_Swatch.svelte';
-	import Library_Vocab from '$lib/Library_Vocab.svelte';
+	import Library_Tome_Link from '$lib/Library_Tome_Link.svelte';
 	import Color_Scheme_Input from '$lib/Color_Scheme_Input.svelte';
 
 	const LIBRARY_ITEM_NAME = 'colors';
@@ -31,9 +31,9 @@
 	<section class="prose">
 		<h3>Color semantics</h3>
 		<p>
-			Fuz provides a palette of color and hue <Library_Vocab name="variables" /> designed to support
-			concise authoring in light and dark mode, as well as straightforward <Library_Vocab
-				name="themes">theming</Library_Vocab
+			Fuz provides a palette of color and hue <Library_Tome_Link name="variables" /> designed to support
+			concise authoring in light and dark mode, as well as straightforward <Library_Tome_Link
+				name="themes">theming</Library_Tome_Link
 			> by both developers and end-users at runtime. The colors have more semantics than just plain values,
 			so they automatically adapt to dark mode and custom themes, at the cost of having different values
 			depending on color scheme and theme.
@@ -42,9 +42,9 @@
 		<p>
 			A color's subjective appearance depends on the context in which it's viewed, especially the
 			surrounding colors and values. Fuz's semantic colors are designed to work across color
-			schemes, so each Fuz color <Library_Vocab name="variables">variable</Library_Vocab> has two values,
-			one for light and one for dark mode. The exceptions are the lightest (1) and darkest (9) variants,
-			although this may change if it yields better results.
+			schemes, so each Fuz color <Library_Tome_Link name="variables">variable</Library_Tome_Link> has
+			two values, one for light and one for dark mode. The exceptions are the lightest (1) and darkest
+			(9) variants, although this may change if it yields better results.
 		</p>
 		<h4>Custom themes</h4>
 		<p>
@@ -109,7 +109,7 @@
 		<h3>Color variables</h3>
 		<p>
 			There are 9 variables per color, numbered 1 to 9, lightest to darkest. The 5th variable of
-			each color is used as the base for things like <Library_Vocab name="buttons" />.
+			each color is used as the base for things like <Library_Tome_Link name="buttons" />.
 		</p>
 		<p>
 			Note that these values differ between light and dark mode! See the discussion above for why.

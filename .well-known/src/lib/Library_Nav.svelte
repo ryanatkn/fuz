@@ -26,7 +26,7 @@
 
 <style>
 	nav {
-		font-size: var(--size_1);
+		font-size: var(--size_xl);
 	}
 	.root {
 		--text_decoration_selected: none;

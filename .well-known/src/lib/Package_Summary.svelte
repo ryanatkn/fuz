@@ -48,14 +48,14 @@
 
 <style>
 	.package_summary {
-		padding: var(--spacing_lg);
+		padding: var(--space_lg);
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		max-width: var(--max_width, var(--width_sm));
 	}
 	.repo_name {
-		font-size: var(--size_2);
+		font-size: var(--size_2xl);
 		font-weight: 400;
 		text-align: center;
 	}
@@ -64,7 +64,7 @@
 		text-align: center;
 	}
 	.chip {
-		margin-left: var(--spacing_xs2);
-		margin-right: var(--spacing_xs2);
+		margin-left: var(--space_2xs);
+		margin-right: var(--space_2xs);
 	}
 </style>

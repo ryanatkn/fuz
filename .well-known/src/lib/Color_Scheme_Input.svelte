@@ -51,7 +51,7 @@ https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/menubar_ro
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		padding: 0 var(--spacing_lg);
+		padding: 0 var(--space_lg);
 	}
 	.color_scheme {
 		border-radius: 0;

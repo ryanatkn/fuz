@@ -5,8 +5,10 @@
 	import {swallow} from '$lib/swallow.js';
 	import Copy_To_Clipboard from '$lib/Copy_To_Clipboard.svelte';
 	import Dialog from '$lib/Dialog.svelte';
-	import {render_theme_style, type Theme_Variable, type Theme} from '$lib/theme.js';
-	import Theme_Variable_Detail from '$routes/Theme_Variable_Detail.svelte';
+	import {render_theme_style, type Style_Variable, type Theme} from '$lib/theme.js';
+	import Style_Variable_Detail from '$routes/Style_Variable_Detail.svelte';
+
+	// TODO @multiple add to $lib?
 
 	// TODO should this be merged with `Theme_Input`?
 
@@ -17,24 +19,24 @@
 	export let theme: Theme | null = null; // `null` means creating
 
 	let new_name = theme ? theme.name : 'new theme';
-	let new_variables = theme ? theme.items : []; // TODO `updateVariables` to `Theme_Variable_Detail` ?
+	let new_variables = theme ? theme.variables : []; // TODO `updateVariables` to `Style_Variable_Detail` ?
 
 	let new_theme: Theme;
-	$: new_theme = {name: new_name, items: new_variables};
+	$: new_theme = {name: new_name, variables: new_variables};
 
 	$: code = render_theme_style(new_theme, {empty_default_theme: false, specificity: 1});
 
 	$: light_count = new_variables.reduce((c, v) => (v.light ? c + 1 : c), 0);
 	$: dark_count = new_variables.reduce((c, v) => (v.dark ? c + 1 : c), 0);
 
-	let selected_variable: Theme_Variable | null = null;
+	let selected_variable: Style_Variable | null = null;
 
 	const save = (): void => {
 		if (!changed) return;
 		dispatch('save', new_theme);
 	};
 
-	const edit_variable = (e: MouseEvent, variable: Theme_Variable): void => {
+	const edit_variable = (e: MouseEvent, variable: Style_Variable): void => {
 		swallow(e);
 		selected_variable = variable;
 		new_variables = new_variables.slice(); // TODO
@@ -46,7 +48,7 @@
 	};
 
 	$: editing = !!theme;
-	$: changed = theme ? new_name !== theme.name || new_variables !== theme.items : true;
+	$: changed = theme ? new_name !== theme.name || new_variables !== theme.variables : true;
 </script>
 
 <div class="theme_form">
@@ -96,7 +98,7 @@
 	<Dialog on:close={() => (selected_variable = null)} let:close>
 		<div class="pane">
 			<div class="panel padded_lg box">
-				<Theme_Variable_Detail variable={selected_variable} />
+				<Style_Variable_Detail variable={selected_variable} />
 				<br />
 				<aside>this is unfinished</aside>
 				<br />
@@ -113,7 +115,7 @@
 	header {
 		display: flex;
 		gap: 1rem;
-		margin-bottom: var(--spacing_md);
+		margin-bottom: var(--space_md);
 	}
 	.variables_header,
 	form {
@@ -123,11 +125,11 @@
 		display: flex;
 	}
 	.variables {
-		padding-right: var(--spacing_sm);
+		padding-right: var(--space_sm);
 	}
 	.variable {
 		min-height: var(--icon_size_sm);
-		width: 256px;
+		width: var(--style_variable_name_width, 240px);
 	}
 	.rendered {
 		position: relative; /* for the .copy button */
@@ -143,7 +145,7 @@
 	}
 	.copy {
 		position: absolute;
-		top: var(--spacing_md);
-		right: var(--spacing_md);
+		top: var(--space_md);
+		right: var(--space_md);
 	}
 </style>

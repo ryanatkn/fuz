@@ -69,7 +69,7 @@
 							alt="favicon to homepage at {homepage_url}"
 							style:width="16px"
 							style:height="16px"
-							style:margin-right="var(--spacing_xs)"
+							style:margin-right="var(--space_xs)"
 						/>
 						{format_host(homepage_url)}
 					</a>
@@ -153,7 +153,7 @@
 
 <style>
 	.package_detail {
-		padding: var(--spacing_lg);
+		padding: var(--space_lg);
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
@@ -161,7 +161,7 @@
 		max-width: var(--max_width, var(--width_md));
 	}
 	.repo_name {
-		font-size: var(--size_2);
+		font-size: var(--size_2xl);
 		font-weight: 400;
 		text-align: center;
 	}
@@ -170,8 +170,8 @@
 		text-align: center;
 	}
 	.chip {
-		margin-left: var(--spacing_xs2);
-		margin-right: var(--spacing_xs2);
+		margin-left: var(--space_2xs);
+		margin-right: var(--space_2xs);
 	}
 	pre {
 		display: flex;
@@ -179,10 +179,10 @@
 		width: 100%;
 	}
 	.properties .row {
-		margin-bottom: var(--spacing_xs);
+		margin-bottom: var(--space_xs);
 	}
 	.module {
-		margin-bottom: var(--spacing_xs);
+		margin-bottom: var(--space_xs);
 		--link_color: var(--text_2);
 	}
 	.ts {
@@ -204,7 +204,7 @@
 		flex-direction: row;
 		flex-wrap: wrap;
 		align-items: flex-start;
-		gap: var(--spacing_xs) 0;
+		gap: var(--space_xs) 0;
 	}
 	.declaration {
 		font-family: var(--font_family_mono);

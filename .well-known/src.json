@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.88.0",
+  "version": "0.89.0",
   "modules": {
     "./Alert.svelte": {
       "path": "Alert.svelte",
@@ -240,8 +240,8 @@
       "path": "Library_Panel.svelte",
       "declarations": []
     },
-    "./Library_Vocab.svelte": {
-      "path": "Library_Vocab.svelte",
+    "./Library_Tome_Link.svelte": {
+      "path": "Library_Tome_Link.svelte",
       "declarations": []
     },
     "./Library.svelte": {
@@ -362,7 +362,7 @@
           "kind": "type"
         },
         {
-          "name": "Theme_Variable",
+          "name": "Style_Variable",
           "kind": "type"
         },
         {

@@ -2,14 +2,14 @@ import type {Theme} from '$lib/theme.js';
 
 export const DEFAULT_THEME: Theme = {
 	name: 'base',
-	items: [], // inherits base
+	variables: [], // inherits base
 };
 
 export const default_themes: Theme[] = [
 	DEFAULT_THEME,
 	{
 		name: 'low contrast',
-		items: [
+		variables: [
 			{name: 'tint_saturation', light: '8%'},
 			{
 				name: 'bg',
@@ -20,7 +20,7 @@ export const default_themes: Theme[] = [
 	},
 	{
 		name: 'high contrast',
-		items: [
+		variables: [
 			{
 				name: 'bg',
 				light: '#fff',

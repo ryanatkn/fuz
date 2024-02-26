@@ -56,20 +56,20 @@ export const tomes: Tome[] = [
 		related: ['colors', 'elements', 'forms', 'prose'],
 	},
 	{
-		name: 'elements',
-		slug: 'elements',
-		pathname: '',
-		category: 'styles',
-		component: elements,
-		related: ['buttons', 'forms', 'prose'],
-	},
-	{
 		name: 'forms',
 		slug: 'forms',
 		pathname: '',
 		category: 'styles',
 		component: forms,
 		related: ['buttons', 'elements', 'prose', 'Hue_Input'],
+	},
+	{
+		name: 'elements',
+		slug: 'elements',
+		pathname: '',
+		category: 'styles',
+		component: elements,
+		related: ['buttons', 'forms', 'prose'],
 	},
 	{
 		name: 'prose',

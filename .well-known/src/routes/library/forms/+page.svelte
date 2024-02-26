@@ -88,7 +88,7 @@
 						<div class="title">select</div>
 						<select
 							class="text_align_center"
-							style="font-size: var(--size_5)"
+							style="font-size: var(--size_5xl)"
 							disabled={created_account}
 						>
 							{#each faces as face (face)}
@@ -145,15 +145,15 @@
 		<form>
 			<fieldset>
 				<label class="row">
-					<input type="checkbox" bind:checked={checked1} style:margin-right="var(--spacing_lg)" />
+					<input type="checkbox" bind:checked={checked1} style:margin-right="var(--space_lg)" />
 					<Code content={`<input type="checkbox" ${checked1 ? 'checked ' : ''}/>`} />
 				</label>
 				<label class="row">
-					<input type="checkbox" bind:checked={checked2} style:margin-right="var(--spacing_lg)" />
+					<input type="checkbox" bind:checked={checked2} style:margin-right="var(--space_lg)" />
 					<Code content={`<input type="checkbox" ${checked2 ? 'checked ' : ''}/>`} />
 				</label>
 				<label class="row disabled">
-					<input type="checkbox" disabled style:margin-right="var(--spacing_lg)" />
+					<input type="checkbox" disabled style:margin-right="var(--space_lg)" />
 					<Code content={`<input type="checkbox" disabled />`} /> (disabled)
 				</label>
 				<label class="row disabled">

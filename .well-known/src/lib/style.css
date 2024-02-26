@@ -45,7 +45,7 @@ body {
 }
 
 ::selection {
-	background: hsla(var(--hue_a), 90%, 80%, var(--faded_3));
+	background: hsla(var(--hue_a), 90%, 80%, var(--fade_3));
 }
 
 /*
@@ -59,7 +59,7 @@ Keep hidden behavior when `display` is set.
 /* TODO what about .themed? */
 @media (prefers-reduced-motion) {
 	:root {
-		/* setting to `initial` disables animations but allows for fallbacks (see PendingAnimation)  */
+		/* setting to `initial` disables animations but allows for fallbacks (see Pending_Animation)  */
 		--duration_6: initial;
 		--duration_5: initial;
 		--duration_4: initial;
@@ -73,8 +73,8 @@ aside {
 	border-left-color: var(--border_color);
 	border-left-style: var(--border_style);
 	border-left-width: var(--border_width_3);
-	border-radius: var(--border_radius_xs);
-	padding: var(--spacing_md);
+	border-radius: var(--radius_xs);
+	padding: var(--space_md);
 	color: var(--color, var(--text_2));
 	background-color: var(--fg_1);
 }
@@ -83,8 +83,8 @@ aside:hover {
 }
 
 blockquote {
-	border-radius: var(--border_radius_xs);
-	padding: var(--spacing_md);
+	border-radius: var(--radius_xs);
+	padding: var(--space_md);
 	color: var(--color, var(--text_2));
 	background-color: var(--fg_1);
 }
@@ -96,8 +96,8 @@ code {
 	hyphens: none;
 	color: var(--color, var(--text_2));
 	background-color: var(--fg_1);
-	padding: 0 var(--spacing_xs2);
-	border-radius: var(--border_radius_xs);
+	padding: 0 var(--space_2xs);
+	border-radius: var(--radius_xs);
 }
 
 pre {
@@ -121,7 +121,7 @@ a {
 	color: var(--color);
 	font-weight: 700;
 	text-decoration: var(--text_decoration);
-	border-radius: var(--border_radius_xs2);
+	border-radius: var(--radius_2xs);
 	outline: var(--outline_width) var(--outline_style) var(--outline_color);
 }
 a:hover {
@@ -145,24 +145,22 @@ a.selected:active {
 ul,
 ol,
 menu {
-	display: flex;
-	flex-direction: column;
 	list-style: none;
 }
 li {
-	display: flex;
+	display: block; /* reverted by .prose */
 }
 
 h1 {
-	font-size: var(--size_3);
+	font-size: var(--size_3xl);
 	font-weight: 300;
 }
 h2 {
-	font-size: var(--size_2);
+	font-size: var(--size_2xl);
 	font-weight: 400;
 }
 h3 {
-	font-size: var(--size_1);
+	font-size: var(--size_xl);
 	font-weight: 500;
 }
 h4 {
@@ -186,12 +184,7 @@ hr {
 	border-right: none;
 	width: 100%;
 	height: 5px;
-	margin: var(--spacing_5) 0;
-}
-
-form {
-	display: flex;
-	flex-direction: column;
+	margin: var(--space_5xl) 0;
 }
 
 fieldset {
@@ -201,8 +194,8 @@ fieldset {
 }
 
 legend {
-	font-size: var(--size_1);
-	margin-bottom: var(--spacing_lg);
+	font-size: var(--size_xl);
+	margin-bottom: var(--space_lg);
 }
 
 input,
@@ -226,7 +219,7 @@ select {
 }
 
 textarea {
-	--input_padding_y: var(--spacing_sm);
+	--input_padding_y: var(--space_sm);
 	height: 100px;
 }
 
@@ -255,7 +248,7 @@ input[type='checkbox'] {
 	height: var(--input_height_sm);
 	min-width: var(--input_height_sm);
 	min-height: var(--input_height_sm);
-	--border_radius: var(--border_radius_xs);
+	--border_radius: var(--radius_xs);
 	--input_padding_x: 0;
 	--content_default: '✓';
 	---content: var(--content_empty, '');
@@ -277,7 +270,7 @@ input[type='checkbox']::before {
 	align-items: center;
 	justify-content: center;
 	overflow: var(--overflow, visible);
-	font-size: var(--font_size, var(--size_3));
+	font-size: var(--font_size, var(--size_3xl));
 	color: var(--text_color);
 }
 
@@ -302,7 +295,7 @@ input[type='radio']:checked::before {
 }
 
 input[type='range'] {
-	--thumb_size: var(--spacing_1);
+	--thumb_size: var(--space_xl);
 	--thumb_background_color: var(--text_2);
 	cursor: pointer;
 }
@@ -354,7 +347,7 @@ input[type='range']::-moz-range-track {
 
 :is(input, select).inline {
 	display: inline-block;
-	margin-left: var(--spacing_lg);
+	margin-left: var(--space_lg);
 	/* TODO ideally `width` here would be set to a minimum and have an API to increase size --
 	buttons can grow automatically, but how can inputs? only with js?
 	 */
@@ -409,8 +402,7 @@ button:active {
 }
 button.inline {
 	display: inline-block;
-	margin-left: var(--spacing_sm);
-	margin-right: var(--spacing_sm);
+	--min_height: var(--input_height_sm); /* TODO this increases paragraph line spacing */
 }
 /*  TODO :has selector? `button:has(input[type='checkbox']:checked)`
 see https://caniuse.com/css-has
@@ -536,7 +528,7 @@ label.row {
 	align-items: center;
 }
 label.row :is(input[type='checkbox'], input[type='radio']) {
-	margin-right: var(--spacing_md);
+	margin-right: var(--space_md);
 }
 
 nav {
@@ -570,8 +562,8 @@ audio {
 
 summary {
 	cursor: pointer;
-	padding: var(--spacing_md);
-	border-radius: var(--border_radius_xs);
+	padding: var(--space_md);
+	border-radius: var(--radius_xs);
 }
 summary:hover {
 	background-color: var(--fg_1);
@@ -620,11 +612,11 @@ By default it's opaque, resetting the background to the initial depth. */
 	/* TODO this is preferred but causes blurriness with nested contextmenus, maybe they shouldn't be panes? is pane overloaded? maybe extract the bg part of it?
 	filter: drop-shadow(var(--shadow)); */
 	box-shadow: var(--shadow);
-	border-radius: var(--border_radius_xs);
+	border-radius: var(--radius_xs);
 }
 /* A panel is a box embedded into the page, useful for visually isolating content. */
 .panel {
-	border-radius: var(--border_radius_sm);
+	border-radius: var(--radius_sm);
 	background-color: var(--panel_bg, var(--fg_1));
 }
 
@@ -645,38 +637,38 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories
 	text-wrap: balance; /* @see https://developer.mozilla.org/en-US/docs/Web/CSS/text-wrap#balance */
 }
 .prose h1 {
-	margin: var(--spacing_2) 0;
+	margin: var(--space_2xl) 0;
 }
 .prose h2 {
-	margin: var(--spacing_1) 0;
+	margin: var(--space_xl) 0;
 }
 .prose h3 {
-	margin: var(--spacing_lg) 0;
+	margin: var(--space_lg) 0;
 }
 .prose h4 {
-	margin: var(--spacing_md) 0;
+	margin: var(--space_md) 0;
 }
 .prose h5 {
-	margin: var(--spacing_sm) 0;
+	margin: var(--space_sm) 0;
 }
 .prose h6 {
-	margin: var(--spacing_xs) 0;
+	margin: var(--space_xs) 0;
 }
 .prose :is(ul, ol, menu) {
-	padding-left: var(--spacing_4);
+	padding-left: var(--space_4xl);
 	list-style: initial;
 }
 .prose ol {
 	list-style: decimal;
 }
 .prose li {
-	display: list-item;
+	display: list-item; /* reset from `block` */
 }
 .prose a {
 	display: inline;
 }
 .prose section {
-	margin-bottom: var(--spacing_4);
+	margin-bottom: var(--space_4xl);
 }
 /* checkboxes and radios are expected to be nested inside a `label`, thus no bottom margin */
 .prose
@@ -696,12 +688,12 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories
 		blockquote,
 		aside
 	):not(:last-child) {
-	margin-bottom: var(--spacing_lg);
+	margin-bottom: var(--space_lg);
 }
 /* TODO others with a smaller margin? */
 .prose summary:not(:last-child) {
 	/* TODO maybe change API to like `--margin_bottom`? */
-	margin-bottom: var(--spacing_xs);
+	margin-bottom: var(--space_xs);
 }
 
 /* TODO maybe remove? */
@@ -804,10 +796,10 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories
 }
 
 .spaced {
-	margin-bottom: var(--spacing_lg);
+	margin-bottom: var(--space_lg);
 }
 .spaced_hz {
-	margin-right: var(--spacing_lg);
+	margin-right: var(--space_lg);
 }
 /* the extra `.prose` selectors are needed for specificity to override the above styles */
 .unspaced,
@@ -819,31 +811,31 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories
 }
 
 .padded_xs {
-	padding: var(--spacing_xs);
+	padding: var(--space_xs);
 }
 .padded_sm {
-	padding: var(--spacing_sm);
+	padding: var(--space_sm);
 }
 .padded_md {
-	padding: var(--spacing_md);
+	padding: var(--space_md);
 }
 .padded_lg {
-	padding: var(--spacing_lg);
+	padding: var(--space_lg);
 }
 .padded_1 {
-	padding: var(--spacing_1);
+	padding: var(--space_xl);
 }
 .padded_2 {
-	padding: var(--spacing_2);
+	padding: var(--space_2xl);
 }
 .padded_3 {
-	padding: var(--spacing_3);
+	padding: var(--space_3xl);
 }
 .padded_4 {
-	padding: var(--spacing_4);
+	padding: var(--space_4xl);
 }
 .padded_5 {
-	padding: var(--spacing_5);
+	padding: var(--space_5xl);
 }
 
 /* use `reverse` to fade out and `alternate` to flash */
@@ -885,7 +877,7 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories
 	align-items: center;
 	padding: var(
 		--menu_item_padding,
-		var(--spacing_xs3) var(--spacing_xs3) var(--spacing_xs3) var(--spacing_xs)
+		var(--space_3xs) var(--space_3xs) var(--space_3xs) var(--space_xs)
 	);
 }
 .menu_item.selected {
@@ -906,13 +898,13 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories
 }
 .menu_item .icon {
 	width: var(--icon_size);
-	margin-right: var(--spacing_xs);
+	margin-right: var(--space_xs);
 	flex-shrink: 0;
 	text-align: center;
 	font-weight: 900;
 }
 .menu_item .title {
-	margin-right: var(--spacing_lg);
+	margin-right: var(--space_lg);
 	flex-shrink: 1;
 	overflow: hidden;
 	white-space: nowrap;
@@ -934,9 +926,9 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories
 .chip {
 	font-size: var(--font_size_sm);
 	font-weight: 600;
-	padding: var(--spacing_xs4) var(--spacing_sm);
+	padding: var(--space_4xs) var(--space_sm);
 	background-color: var(--darken_1);
-	border-radius: var(--border_radius_xs);
+	border-radius: var(--radius_xs);
 }
 a.chip {
 	font-weight: 700;
