@@ -169,6 +169,7 @@
 	--width_md: 800px;
 	--width_sm: 320px;
 	--border_color: var(--border_3);
+	--border_style: solid;
 	--border_1: hsl(var(--tint_hue), 60%, 20%, 15%);
 	--border_2: hsl(var(--tint_hue), 60%, 20%, 25%);
 	--border_3: hsl(var(--tint_hue), 60%, 20%, 35%);
@@ -182,7 +183,6 @@
 	--border_width_4: 4px;
 	--border_width_5: 6px;
 	--border_width_6: 8px;
-	--border_style: solid;
 	--outline_width: var(--outline_width_1);
 	--outline_width_1: 0;
 	--outline_width_2: var(--border_width_2);

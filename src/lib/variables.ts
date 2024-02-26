@@ -245,7 +245,6 @@ export const default_variables: Style_Variable[] = [
 	/* borders and outlines */
 	{name: 'border_color', light: 'var(--border_3)'},
 	{name: 'border_style', light: 'solid'},
-	// TODO BLOCK add `_color` probably, ambiguous with width
 	// TODO add tint vars for these?
 	{
 		name: 'border_1',
