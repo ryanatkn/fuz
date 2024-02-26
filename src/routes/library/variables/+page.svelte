@@ -30,9 +30,9 @@
 			because Fuz is made by a programmer designing more for devs and end-users than designers.
 			Their functionality is like JS variables but in CSS, and they're based on CSS custom
 			properties, which are commonly called CSS variables. Also, in the programming domains I'm
-			familiar with, the word "token" means a secret for authentication. And finally, the term token
-			was popularized by cryptocurrencies which have no relation with Fuz, so its vibes are all over
-			the place.
+			familiar with, including some Fuz projects, a token is a secret for authentication. And
+			finally, the term token was popularized by cryptocurrencies which have no relation with Fuz,
+			so its vibes are all over the place.
 		</aside>
 		<p>
 			Compared to most systems not based on CSS custom properties, variables are more easily changed
