@@ -363,7 +363,7 @@ export const default_variables: Style_Variable[] = [
 	{name: 'disabled_opacity', light: 'var(--fade_2)'},
 
 	/* border radii */
-	// TODO hardcoded values
+	// TODO hardcoded values - maybe have `radius_xl` or `radius_lg` be 50%?
 	{name: 'border_radius', light: 'var(--radius_md)'},
 	{name: 'radius_md', light: 'calc(var(--input_height) / 2)'},
 	{name: 'radius_sm', light: 'calc(var(--radius_md) / 1.618)'},
