@@ -313,7 +313,7 @@
 
 <style>
 	section {
-		margin-bottom: var(--spacing_4);
+		margin-bottom: var(--space_4xl);
 	}
 	.position {
 		border-radius: var(--border_radius);
@@ -321,7 +321,7 @@
 		display: flex;
 	}
 	.position .icon {
-		font-size: var(--icon_size_1);
+		font-size: var(--icon_size_xl);
 	}
 	.cats {
 		display: flex;

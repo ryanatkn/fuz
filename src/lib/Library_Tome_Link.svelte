@@ -5,7 +5,7 @@
 
 	export let name: string; // TODO type, generate from `tomes`?
 
-	// TODO runes!
+	// TODO active state
 </script>
 
 <code {...$$restProps}><a href="{base}/library/{name}"><slot>{name}</slot></a></code>

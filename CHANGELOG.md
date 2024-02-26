@@ -321,7 +321,7 @@
   ([#337](https://github.com/ryanatkn/fuz/pull/337))
 - add classes `.inline`, `.inline_block`, `.block`, `.flex`, and `.flex_1`
   ([#337](https://github.com/ryanatkn/fuz/pull/337))
-- add `--border_radius_xs2`
+- add `--radius_2xs`
   ([#342](https://github.com/ryanatkn/fuz/pull/342))
 
 ## 0.64.0
@@ -357,7 +357,7 @@
   ([#318](https://github.com/ryanatkn/fuz/pull/318))
 - add more readable dark mode text colors
   ([#327](https://github.com/ryanatkn/fuz/pull/327))
-- add `attrs` prop to `PendingAnimation`
+- add `attrs` prop to `Pending_Animation`
   ([#327](https://github.com/ryanatkn/fuz/pull/327))
 - improve `HueInput` a11y
   ([#334](https://github.com/ryanatkn/fuz/pull/334))
@@ -439,7 +439,7 @@
   - add and publish `$lib/theme.ts` with `create_theme_setup_script` for setting up the color scheme
   - add and publish `$lib/themes.ts` with the default theme data,
     including the base theme along with low and high contrast themes
-  - add and publish `$lib/variables.ts` with the default `Theme_Variable` data
+  - add and publish `$lib/variables.ts` with the default `Style_Variable` data
   - add and publish `$lib/Themed.svelte` for mounting a theme to the page or a part of it
   - add and publish `$lib/Color_Scheme_Input.svelte`
   - remove the `error` param from `createContextmenu` and add the `contextmenu.error` store
@@ -755,12 +755,12 @@
   ([#224](https://github.com/ryanatkn/fuz/pull/224))
   - remove `--input_border_width` - use `--border_width` instead
   - remove `--border` - use each variable directly instead so they can be overidden
-  - remove `--icon_max` - use `--icon_size_4` instead
+  - remove `--icon_max` - use `--icon_size_4xl` instead
   - remove `--button_border_width` and `--button_text_color`
   - rename `--interactive_` variables to `--button_`
   - remove `--interactive_color_active_dark`
   - remove `--avatar_height`
-  - remove `--border_radius_N` for variants `md`/`sm`/`xs`
+  - remove `--radius_N` for variants `md`/`sm`/`xs`
   - remove `--input_shadow_` variables
   - remove `--panel_color` and `--panel_color_dark`
   - remove `.panel-outset` and `.panel-inset` - use `.panel` instead
@@ -836,8 +836,8 @@
 
 ## 0.30.0
 
-- **break**: replace `--border_radius_1` and `--border_radius_5` with `--border_radius_2` to 5,
-  and rename `--border_radius_2` and `border_radius_3` to 2 and 3, respectively
+- **break**: replace `--radius_xl` and `--radius_5xl` with `--radius_2xl` to 5,
+  and rename `--radius_2xl` and `radius_3xl` to 2 and 3, respectively
   ([#204](https://github.com/ryanatkn/fuz/pull/204))
 - add `fade-in` animation
   ([#205](https://github.com/ryanatkn/fuz/pull/205))
@@ -903,7 +903,7 @@
 
 - **break**: rename `--duration_N` CSS variables from `--transition_duration_N` and add `--duration_6`
   ([#186](https://github.com/ryanatkn/fuz/pull/186))
-- add `--animation_duration` API to `PendingAnimation.svelte`
+- add `--animation_duration` API to `Pending_Animation.svelte`
   ([#186](https://github.com/ryanatkn/fuz/pull/186))
 - relax `is_editable` type in `util/dom.js`
   ([#187](https://github.com/ryanatkn/fuz/pull/187))
@@ -930,7 +930,7 @@
   ([#178](https://github.com/ryanatkn/fuz/pull/178))
 - improve env handling for log level
   ([#180](https://github.com/ryanatkn/fuz/pull/180))
-- add `index` to `PendingAnimation` slot props
+- add `index` to `Pending_Animation` slot props
   ([#181](https://github.com/ryanatkn/fuz/pull/181))
 
 ## 0.22.0
@@ -1045,7 +1045,7 @@
   ([#136](https://github.com/ryanatkn/fuz/pull/136))
 - **break**: update styles
   ([#136](https://github.com/ryanatkn/fuz/pull/136))
-- **break**: change `PendingAnimation` property `paused` to `running`
+- **break**: change `Pending_Animation` property `paused` to `running`
   ([#136](https://github.com/ryanatkn/fuz/pull/136))
 - add optional `separator` arg to `toToClientId`
   ([#136](https://github.com/ryanatkn/fuz/pull/136))
@@ -1100,7 +1100,7 @@
   ([#108](https://github.com/ryanatkn/fuz/pull/108))
 - **break**: add peer deps `svelte` and `@sveltejs/kit`
   ([#112](https://github.com/ryanatkn/fuz/pull/112))
-- update `PendingAnimation.svelte` with slot content and `running` prop
+- update `Pending_Animation.svelte` with slot content and `running` prop
   ([#108](https://github.com/ryanatkn/fuz/pull/108))
 - replace `Message.svelte` prop `text` with a slot
   ([#108](https://github.com/ryanatkn/fuz/pull/108))
@@ -1163,7 +1163,7 @@
 
 ## 0.4.2
 
-- publish component `PendingAnimation.svelte`
+- publish component `Pending_Animation.svelte`
   ([#91](https://github.com/ryanatkn/fuz/pull/91))
 
 ## 0.4.1

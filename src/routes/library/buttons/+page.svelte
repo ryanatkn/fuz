@@ -20,6 +20,16 @@
 <Tome_Detail {tome}>
 	<Code content={`<button>`} />
 	<button>button</button>
+	<div class="prose">
+		<section>
+			<p>
+				Buttons have a standardized <code>.selected</code> state that can be used for various UI purposes,
+				like showing a selected item in a menu or a styling button's `aria-pressed` state. Instead of
+				providing two styles of buttons, outlined and filled, Fuz makes filled buttons the default, and
+				selected buttons are outlined.
+			</p>
+		</section>
+	</div>
 	<button disabled>disabled button</button>
 	<button class="selected">button.selected</button>
 	<button class="selected" disabled>disabled button.selected</button>
@@ -73,7 +83,7 @@
 			<code>button</code> with CSS class <code>.selected</code>
 		</h3>
 	</div>
-	<section style:margin-bottom="var(--spacing_4)">
+	<section style:margin-bottom="var(--space_4xl)">
 		<nav>
 			<button class:selected={selected_button === 0} on:click={() => (selected_button = 0)}>
 				button 0

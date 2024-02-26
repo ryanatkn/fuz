@@ -213,10 +213,10 @@
       "default": "./dist/Library_Panel.svelte",
       "types": "./dist/Library_Panel.svelte.d.ts"
     },
-    "./Library_Vocab.svelte": {
-      "svelte": "./dist/Library_Vocab.svelte",
-      "default": "./dist/Library_Vocab.svelte",
-      "types": "./dist/Library_Vocab.svelte.d.ts"
+    "./Library_Tome_Link.svelte": {
+      "svelte": "./dist/Library_Tome_Link.svelte",
+      "default": "./dist/Library_Tome_Link.svelte",
+      "types": "./dist/Library_Tome_Link.svelte.d.ts"
     },
     "./Library.svelte": {
       "svelte": "./dist/Library.svelte",

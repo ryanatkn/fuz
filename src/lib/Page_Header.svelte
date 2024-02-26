@@ -12,6 +12,6 @@
 
 <style>
 	div {
-		font-size: var(--size_1);
+		font-size: var(--size_xl);
 	}
 </style>

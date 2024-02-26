@@ -1,4 +1,4 @@
-import type {Theme_Variable} from '$lib/theme.js';
+import type {Style_Variable} from '$lib/theme.js';
 
 /*
 
@@ -19,7 +19,7 @@ TODO lots of things here to address:
  * These are implicitly the variables for the `base` theme.
  * See also the empty `variables` array of the `base` theme above.
  */
-export const default_variables: Theme_Variable[] = [
+export const default_variables: Style_Variable[] = [
 	/*
 		colors - eyeballed and intepolated with a spreadsheet,
 		a professional designer will have opinions
@@ -76,12 +76,12 @@ export const default_variables: Theme_Variable[] = [
 	{name: 'color_e_7', light: 'hsl(var(--hue_e), 75%, 26%)', dark: 'hsl(var(--hue_e), 75%, 36%)'},
 	{name: 'color_e_8', light: 'hsl(var(--hue_e), 80%, 18%)', dark: 'hsl(var(--hue_e), 80%, 23%)'},
 	{name: 'color_e_9', light: 'hsl(var(--hue_e), 85%, 10%)'},
-	{name: 'color_f_1', light: 'hsl(var(--hue_f), 32%, 86%)'},
-	{name: 'color_f_2', light: 'hsl(var(--hue_f), 32%, 69%)', dark: 'hsl(var(--hue_f), 32%, 76%)'},
-	{name: 'color_f_3', light: 'hsl(var(--hue_f), 32%, 56%)', dark: 'hsl(var(--hue_f), 32%, 70%)'},
-	{name: 'color_f_4', light: 'hsl(var(--hue_f), 42%, 38%)', dark: 'hsl(var(--hue_f), 32%, 63%)'},
+	{name: 'color_f_1', light: 'hsl(var(--hue_f), 32%, 87%)'},
+	{name: 'color_f_2', light: 'hsl(var(--hue_f), 32%, 72%)', dark: 'hsl(var(--hue_f), 32%, 79%)'},
+	{name: 'color_f_3', light: 'hsl(var(--hue_f), 32%, 57%)', dark: 'hsl(var(--hue_f), 32%, 72%)'},
+	{name: 'color_f_4', light: 'hsl(var(--hue_f), 42%, 41%)', dark: 'hsl(var(--hue_f), 32%, 64%)'},
 	{name: 'color_f_5', light: 'hsl(var(--hue_f), 60%, 26%)', dark: 'hsl(var(--hue_f), 30%, 56%)'},
-	{name: 'color_f_6', light: 'hsl(var(--hue_f), 65%, 19%)', dark: 'hsl(var(--hue_f), 40%, 44%)'},
+	{name: 'color_f_6', light: 'hsl(var(--hue_f), 65%, 18%)', dark: 'hsl(var(--hue_f), 40%, 44%)'},
 	{name: 'color_f_7', light: 'hsl(var(--hue_f), 70%, 14%)', dark: 'hsl(var(--hue_f), 50%, 31%)'},
 	{name: 'color_f_8', light: 'hsl(var(--hue_f), 75%, 10%)', dark: 'hsl(var(--hue_f), 70%, 19%)'},
 	{name: 'color_f_9', light: 'hsl(var(--hue_f), 80%, 6%)'},
@@ -185,7 +185,7 @@ export const default_variables: Theme_Variable[] = [
 	{name: 'line_height_1', light: '1'},
 	{name: 'line_height_2', light: '1.1'},
 	{name: 'line_height_3', light: '1.2'},
-	{name: 'line_height_4', light: '1.35'},
+	{name: 'line_height_4', light: '1.35'}, // TODO xs/sm/md/lg?
 	{name: 'line_height_5', light: '1.5'},
 	{name: 'line_height_6', light: '1.75'},
 	{name: 'line_height_7', light: '2'},
@@ -203,45 +203,41 @@ export const default_variables: Theme_Variable[] = [
 	{name: 'size_sm', light: '1.3rem'},
 	{name: 'size_md', light: '1.6rem'},
 	{name: 'size_lg', light: '2.04rem'},
-	{name: 'size_1', light: '2.59rem'},
-	{name: 'size_2', light: '3.29rem'},
-	{name: 'size_3', light: '4.19rem'},
-	{name: 'size_4', light: '5.33rem'},
-	{name: 'size_5', light: '6.78rem'},
-	{name: 'size_6', light: '8.62rem'},
-	{name: 'size_7', light: '10.97rem'},
-	{name: 'size_8', light: '13.95rem'},
-	{name: 'size_9', light: '17.74rem'},
+	{name: 'size_xl', light: '2.59rem'},
+	{name: 'size_2xl', light: '3.29rem'},
+	{name: 'size_3xl', light: '4.19rem'},
+	{name: 'size_4xl', light: '5.33rem'},
+	{name: 'size_5xl', light: '6.78rem'},
+	{name: 'size_6xl', light: '8.62rem'},
+	{name: 'size_7xl', light: '10.97rem'},
+	{name: 'size_8xl', light: '13.95rem'},
+	{name: 'size_9xl', light: '17.74rem'},
 
 	/* links */
-	{
-		name: 'link_color',
-		light: 'hsl(var(--hue_a), 61%, 35%)',
-		dark: 'hsl(var(--hue_a), 61%, 58%)',
-	},
+	{name: 'link_color', light: 'hsl(var(--hue_a), 61%, 35%)', dark: 'hsl(var(--hue_a), 61%, 58%)'},
 	{name: 'text_decoration', light: 'none'},
 	{name: 'text_decoration_hover', light: 'underline'},
 	{name: 'text_decoration_selected', light: 'underline'},
 	{name: 'link_active', light: 'var(--text_color)'},
 
 	/* spacings, rounded to pixels for the default 16px case */
-	{name: 'spacing_xs5', light: '0.1rem'},
-	{name: 'spacing_xs4', light: '0.2rem'},
-	{name: 'spacing_xs3', light: '0.3rem'},
-	{name: 'spacing_xs2', light: '0.4rem'},
-	{name: 'spacing_xs', light: '0.6rem'},
-	{name: 'spacing_sm', light: '0.8rem'},
-	{name: 'spacing_md', light: '1rem'},
-	{name: 'spacing_lg', light: '1.3rem'},
-	{name: 'spacing_1', light: '1.6rem'},
-	{name: 'spacing_2', light: '2.1rem'},
-	{name: 'spacing_3', light: '2.6rem'},
-	{name: 'spacing_4', light: '3.3rem'},
-	{name: 'spacing_5', light: '4.2rem'},
-	{name: 'spacing_6', light: '5.4rem'},
-	{name: 'spacing_7', light: '6.9rem'},
-	{name: 'spacing_8', light: '8.7rem'},
-	{name: 'spacing_9', light: '11.1rem'},
+	{name: 'space_5xs', light: '0.1rem'},
+	{name: 'space_4xs', light: '0.2rem'},
+	{name: 'space_3xs', light: '0.3rem'},
+	{name: 'space_2xs', light: '0.4rem'},
+	{name: 'space_xs', light: '0.6rem'},
+	{name: 'space_sm', light: '0.8rem'},
+	{name: 'space_md', light: '1rem'},
+	{name: 'space_lg', light: '1.3rem'},
+	{name: 'space_xl', light: '1.6rem'},
+	{name: 'space_2xl', light: '2.1rem'},
+	{name: 'space_3xl', light: '2.6rem'},
+	{name: 'space_4xl', light: '3.3rem'},
+	{name: 'space_5xl', light: '4.2rem'},
+	{name: 'space_6xl', light: '5.4rem'},
+	{name: 'space_7xl', light: '6.9rem'},
+	{name: 'space_8xl', light: '8.7rem'},
+	{name: 'space_9xl', light: '11.1rem'},
 	{name: 'width_md', light: '800px'},
 	{name: 'width_sm', light: '320px'},
 
@@ -290,17 +286,17 @@ export const default_variables: Theme_Variable[] = [
 
 	/* button colors */
 	{name: 'button_bg', light: 'var(--fg_1)'},
-	{name: 'button_bg_hover', light: 'var(--fg_2)'},
+	{name: 'button_bg_hover', light: 'var(--fg_2)'}, // TODO keep these? what about `::before` and `::after` visuals with gradients/animations?
 	{name: 'button_bg_active', light: 'var(--bg_3)'},
 	{name: 'button_bg_disabled', light: 'transparent'},
 
 	/* inputs */
 	{name: 'input_bg', light: 'var(--bg_5)'},
 	{name: 'input_padding_y', light: '0'},
-	{name: 'input_padding_x', light: 'var(--spacing_lg)'},
+	{name: 'input_padding_x', light: 'var(--space_lg)'},
 	{name: 'input_width_min', light: '100px'},
-	{name: 'input_height', light: 'var(--spacing_5)'},
-	{name: 'input_height_sm', light: 'var(--spacing_4)'},
+	{name: 'input_height', light: 'var(--space_5xl)'},
+	{name: 'input_height_sm', light: 'var(--space_4xl)'},
 	{
 		name: 'input_height_inner',
 		light: 'calc(var(--input_height) - 2 * var(--border_width) - 2 * var(--input_padding_y))',
@@ -315,13 +311,13 @@ export const default_variables: Theme_Variable[] = [
 		name: 'shadow',
 		light:
 			'2px 4px 9px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.28), 2px 14px 48px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.28)',
-		dark: '2px 4px 9px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--faded_5)), 2px 14px 48px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--faded_5))',
+		dark: '2px 4px 9px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5)), 2px 14px 48px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5))',
 	},
 	{
 		name: 'shadow_lg',
 		light:
 			'2px 6px 14px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.8), 2px 6px 48px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.8)',
-		dark: '2px 6px 18px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--faded_5)), 2px 6px 48px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--faded_5))',
+		dark: '2px 6px 18px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5)), 2px 6px 48px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5))',
 	},
 	{
 		name: 'shadow_inset',
@@ -342,10 +338,10 @@ export const default_variables: Theme_Variable[] = [
 	{name: 'icon_size_sm', light: '32px'},
 	{name: 'icon_size_md', light: '48px'},
 	{name: 'icon_size_lg', light: '80px'},
-	{name: 'icon_size_1', light: '128px'},
-	{name: 'icon_size_2', light: '196px'},
-	{name: 'icon_size_3', light: '316px'},
-	{name: 'icon_size_4', light: '512px'},
+	{name: 'icon_size_xl', light: '128px'},
+	{name: 'icon_size_2xl', light: '196px'},
+	{name: 'icon_size_3xl', light: '316px'},
+	{name: 'icon_size_4xl', light: '512px'},
 
 	/* durations */
 	{name: 'duration_1', light: '0.08s'},
@@ -357,18 +353,19 @@ export const default_variables: Theme_Variable[] = [
 
 	/* transparencies */
 	/* TODO maybe delete these? they do help with standardizing/consistency */
-	{name: 'faded_1', light: '86%'},
-	{name: 'faded_2', light: '62%'},
-	{name: 'faded_3', light: '38%'},
-	{name: 'faded_4', light: '24%'},
-	{name: 'faded_5', light: '15%'},
-	{name: 'faded_6', light: '9%'},
-	{name: 'disabled_opacity', light: 'var(--faded_2)'},
+	{name: 'fade_1', light: '86%'},
+	{name: 'fade_2', light: '62%'},
+	{name: 'fade_3', light: '38%'},
+	{name: 'fade_4', light: '24%'},
+	{name: 'fade_5', light: '15%'},
+	{name: 'fade_6', light: '9%'},
+	{name: 'disabled_opacity', light: 'var(--fade_2)'},
 
 	/* border radii */
-	{name: 'border_radius', light: 'var(--border_radius_md)'},
-	{name: 'border_radius_md', light: 'calc(var(--input_height) / 2)'},
-	{name: 'border_radius_sm', light: 'calc(var(--border_radius_md) / 1.618)'},
-	{name: 'border_radius_xs', light: 'calc(var(--border_radius_sm) / 1.618)'},
-	{name: 'border_radius_xs2', light: 'calc(var(--border_radius_xs) / 1.618)'},
+	// TODO hardcoded values
+	{name: 'border_radius', light: 'var(--radius_md)'},
+	{name: 'radius_md', light: 'calc(var(--input_height) / 2)'},
+	{name: 'radius_sm', light: 'calc(var(--radius_md) / 1.618)'},
+	{name: 'radius_xs', light: 'calc(var(--radius_sm) / 1.618)'},
+	{name: 'radius_2xs', light: 'calc(var(--radius_xs) / 1.618)'},
 ];

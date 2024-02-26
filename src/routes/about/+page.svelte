@@ -45,6 +45,6 @@
 		text-align: center;
 	}
 	section {
-		margin-bottom: var(--spacing_5);
+		margin-bottom: var(--space_5xl);
 	}
 </style>

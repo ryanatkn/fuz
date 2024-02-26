@@ -47,7 +47,7 @@
 			<Code
 				content={`<Alert status="error" button={true}>
 	<div slot="icon">
-		<div style:font-size="var(--size_3)">🔥</div>
+		<div style:font-size="var(--size_3xl)">🔥</div>
 		😊
 	</div>
 	remain calm it's only on fire
@@ -61,7 +61,7 @@
 				}}
 			>
 				<div slot="icon" style:line-height="1">
-					<div style:font-size="var(--size_3)">🔥</div>
+					<div style:font-size="var(--size_3xl)">🔥</div>
 					😊
 				</div>
 				remain calm it's only on fire

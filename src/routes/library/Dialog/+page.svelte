@@ -47,8 +47,8 @@
 		$dialogs = Array.from({length: count}, (_, i) =>
 			to_dialog_params(Text, {
 				text: to_text(i),
-				font_size: 'var(--size_4)',
-				padding: 'var(--spacing_sm) var(--spacing_lg)',
+				font_size: 'var(--size_4xl)',
+				padding: 'var(--space_sm) var(--space_lg)',
 			}),
 		);
 	};
@@ -202,7 +202,7 @@
 {/if}
 {#if dialog_nested_3_opened}
 	<Dialog on:close={() => (dialog_nested_3_opened = false)}>
-		<div class="pane prose padded_1" style:margin-bottom="var(--spacing_3)">
+		<div class="pane prose padded_1" style:margin-bottom="var(--space_3xl)">
 			<h1>3 dialogs!</h1>
 			<button on:click={() => (dialog_nested_3_opened = false)}>close dialog</button>
 		</div>

@@ -19,14 +19,14 @@
 		<section>
 			<h3><code>ul</code> inside <code>.prose</code></h3>
 		</section>
+		<section>
+			<ul>
+				<li>a</li>
+				<li>b</li>
+				<li>see</li>
+			</ul>
+		</section>
 	</div>
-	<section class="prose">
-		<ul>
-			<li>a</li>
-			<li>b</li>
-			<li>see</li>
-		</ul>
-	</section>
 	<div class="prose">
 		<section>
 			<h3><code>ul</code> without a <code>.prose</code> ancestor</h3>
@@ -38,6 +38,30 @@
 			<li>b</li>
 			<li>see</li>
 		</ul>
+	</section>
+	<div class="prose">
+		<section>
+			<h3><code>ol</code> inside <code>.prose</code></h3>
+		</section>
+		<section>
+			<ol>
+				<li>one</li>
+				<li>two</li>
+				<li>etc</li>
+			</ol>
+		</section>
+	</div>
+	<div class="prose">
+		<section>
+			<h3><code>ol</code> without a <code>.prose</code> ancestor</h3>
+		</section>
+	</div>
+	<section>
+		<ol>
+			<li>a</li>
+			<li>b</li>
+			<li>see</li>
+		</ol>
 	</section>
 	<div class="prose">
 		<section>
@@ -83,7 +107,7 @@
 	</section>
 	<div class="prose">
 		<section>
-			<h3>but they do inside <code>.prose</code>:</h3>
+			<h3>but margin is added back inside <code>.prose</code>:</h3>
 		</section>
 	</div>
 	<section class="prose">
@@ -105,6 +129,6 @@
 
 <style>
 	section {
-		margin-bottom: var(--spacing_3);
+		margin-bottom: var(--space_3xl);
 	}
 </style>

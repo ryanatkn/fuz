@@ -18,8 +18,9 @@ Feel free to take the ideas and code for your own purposes.
 The CSS design system:
 
 - plain CSS
-- designed around style variables,
+- designed around variables aka style variables aka design tokens,
   a specialization of [CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/--*)
+  - variables are a more primitive building block than classes
   - includes optional utility and semantic classes that use the variables
 - the only required parts of the library are `@ryanatkn/fuz/style.css` and either
   `@ryanatkn/fuz/theme.css` or your own theme file, everything else can be used a la carte
