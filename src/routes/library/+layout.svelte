@@ -78,6 +78,8 @@
 		top: 0;
 		height: 100%;
 		transform: translate3d(calc(-100% - var(--space_sm)), 0, 0);
+		display: flex;
+		justify-content: center;
 	}
 	.menu {
 		position: sticky;
