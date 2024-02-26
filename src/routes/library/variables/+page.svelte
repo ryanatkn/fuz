@@ -34,7 +34,7 @@
 			</p>
 			<p>
 				Also, in the programming domains I'm familiar with, including some Fuz projects, a token is
-				a secret for authentication, and I don't like seeing the term overloaded. Wikipedia has
+				a secret for authentication, and I don't like overloading the term. Wikipedia has
 				programming usages but no page about design tokens. And finally, the term token has been
 				popularized by cryptocurrencies which have no relation with Fuz, so its vibes are all over
 				the place.
