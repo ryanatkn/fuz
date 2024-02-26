@@ -187,10 +187,6 @@ hr {
 	margin: var(--space_5) 0;
 }
 
-br {
-	margin-bottom: var(--space_lg);
-}
-
 fieldset {
 	display: flex;
 	flex-direction: column;
