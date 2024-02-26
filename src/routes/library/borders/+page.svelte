@@ -18,32 +18,36 @@
 	<!-- <div>outline_style</div> -->
 	<!-- <div>outline_color</div> -->
 
-	<div class="border_colors">
-		{#each {length: 5} as _, i}
-			{@const name = 'border_color_' + (i + 1)}
-			<div class="border" style:border-color="var(--{name})">
-				<Style_Variable_Button {name} />
-			</div>
-		{/each}
+	<div class="prose">
+		<h3>Border colors</h3>
+		<div class="border_colors">
+			{#each {length: 5} as _, i}
+				{@const name = 'border_color_' + (i + 1)}
+				<div class="border" style:border-color="var(--{name})">
+					<Style_Variable_Button {name} />
+				</div>
+			{/each}
+		</div>
+
+		<h3>Border widths</h3>
+		<div class="border_widths">
+			{#each {length: 6} as _, i}
+				{@const name = 'border_width_' + (i + 1)}
+				<div class="border_width" style:border-width="var(--{name})">
+					<Style_Variable_Button {name} />
+				</div>
+			{/each}
+		</div>
+
+		<div>outline_width_1</div>
+		<div>outline_width_2</div>
+		<div>outline_width_3</div>
+
+		<div>radius_md</div>
+		<div>radius_sm</div>
+		<div>radius_xs</div>
+		<div>radius_xs2</div>
 	</div>
-
-	<div class="border_widths">
-		{#each {length: 6} as _, i}
-			{@const name = 'border_width_' + (i + 1)}
-			<div class="border_width" style:border-width="var(--{name})">
-				<Style_Variable_Button {name} />
-			</div>
-		{/each}
-	</div>
-
-	<div>outline_width_1</div>
-	<div>outline_width_2</div>
-	<div>outline_width_3</div>
-
-	<div>radius_md</div>
-	<div>radius_sm</div>
-	<div>radius_xs</div>
-	<div>radius_xs2</div>
 </Tome_Detail>
 
 <style>

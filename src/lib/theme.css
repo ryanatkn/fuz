@@ -168,14 +168,14 @@
 	--space_xl9: 11.1rem;
 	--width_md: 800px;
 	--width_sm: 320px;
-	--border_color: var(--border_3);
+	--border_color: var(--border_color_3);
 	--border_style: solid;
-	--border_1: hsl(var(--tint_hue), 60%, 20%, 15%);
-	--border_2: hsl(var(--tint_hue), 60%, 20%, 25%);
-	--border_3: hsl(var(--tint_hue), 60%, 20%, 35%);
-	--border_4: hsl(var(--tint_hue), 60%, 20%, 45%);
-	--border_5: hsl(var(--tint_hue), 60%, 20%, 60%);
-	--border_disabled: var(--border_3);
+	--border_color_1: hsl(var(--tint_hue), 60%, 20%, 15%);
+	--border_color_2: hsl(var(--tint_hue), 60%, 20%, 25%);
+	--border_color_3: hsl(var(--tint_hue), 60%, 20%, 35%);
+	--border_color_4: hsl(var(--tint_hue), 60%, 20%, 50%);
+	--border_color_5: hsl(var(--tint_hue), 60%, 20%, 70%);
+	--border_disabled: var(--border_color_3);
 	--border_width: var(--border_width_1);
 	--border_width_1: 1px;
 	--border_width_2: 2px;
@@ -313,11 +313,11 @@
 	--text_3: hsl(var(--tint_hue), var(--tint_saturation), 50%);
 	--text_active: hsl(var(--hue_a), 65%, 65%);
 	--link_color: hsl(var(--hue_a), 61%, 58%);
-	--border_1: hsl(var(--tint_hue), 60%, 80%, 85%);
-	--border_2: hsl(var(--tint_hue), 60%, 80%, 70%);
-	--border_3: hsl(var(--tint_hue), 60%, 80%, 50%);
-	--border_4: hsl(var(--tint_hue), 60%, 80%, 40%);
-	--border_5: hsl(var(--tint_hue), 60%, 80%, 30%);
+	--border_color_1: hsl(var(--tint_hue), 60%, 80%, 85%);
+	--border_color_2: hsl(var(--tint_hue), 60%, 80%, 70%);
+	--border_color_3: hsl(var(--tint_hue), 60%, 80%, 50%);
+	--border_color_4: hsl(var(--tint_hue), 60%, 80%, 40%);
+	--border_color_5: hsl(var(--tint_hue), 60%, 80%, 25%);
 	--shadow: 2px 4px 9px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5)),
 		2px 14px 48px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5));
 	--shadow_lg: 2px 6px 18px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5)),

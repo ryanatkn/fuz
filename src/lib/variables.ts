@@ -243,35 +243,35 @@ export const default_variables: Style_Variable[] = [
 	{name: 'width_sm', light: '320px'},
 
 	/* borders and outlines */
-	{name: 'border_color', light: 'var(--border_3)'},
+	{name: 'border_color', light: 'var(--border_color_3)'},
 	{name: 'border_style', light: 'solid'},
 	// TODO add tint vars for these?
 	{
-		name: 'border_1',
+		name: 'border_color_1',
 		light: 'hsl(var(--tint_hue), 60%, 20%, 15%)',
 		dark: 'hsl(var(--tint_hue), 60%, 80%, 85%)',
 	},
 	{
-		name: 'border_2',
+		name: 'border_color_2',
 		light: 'hsl(var(--tint_hue), 60%, 20%, 25%)',
 		dark: 'hsl(var(--tint_hue), 60%, 80%, 70%)',
 	},
 	{
-		name: 'border_3',
+		name: 'border_color_3',
 		light: 'hsl(var(--tint_hue), 60%, 20%, 35%)',
 		dark: 'hsl(var(--tint_hue), 60%, 80%, 50%)',
 	},
 	{
-		name: 'border_4',
-		light: 'hsl(var(--tint_hue), 60%, 20%, 45%)',
+		name: 'border_color_4',
+		light: 'hsl(var(--tint_hue), 60%, 20%, 50%)',
 		dark: 'hsl(var(--tint_hue), 60%, 80%, 40%)',
 	},
 	{
-		name: 'border_5',
-		light: 'hsl(var(--tint_hue), 60%, 20%, 60%)',
-		dark: 'hsl(var(--tint_hue), 60%, 80%, 30%)',
+		name: 'border_color_5',
+		light: 'hsl(var(--tint_hue), 60%, 20%, 70%)',
+		dark: 'hsl(var(--tint_hue), 60%, 80%, 25%)',
 	},
-	{name: 'border_disabled', light: 'var(--border_3)'},
+	{name: 'border_disabled', light: 'var(--border_color_3)'},
 	{name: 'border_width', light: 'var(--border_width_1)'},
 	{name: 'border_width_1', light: '1px'},
 	{name: 'border_width_2', light: '2px'},
