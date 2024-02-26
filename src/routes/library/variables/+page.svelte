@@ -114,7 +114,7 @@ export interface Style_Variable {
 	.variables {
 		width: 100%;
 		display: inline-grid;
-		grid-template-columns: repeat(auto-fit, minmax(256px, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(var(--style_variable_name_width, 240px), 1fr));
 		font-family: var(--font_family_mono);
 		white-space: nowrap;
 	}

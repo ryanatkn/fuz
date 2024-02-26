@@ -129,7 +129,7 @@
 	}
 	.variable {
 		min-height: var(--icon_size_sm);
-		width: 256px;
+		width: var(--style_variable_name_width, 240px);
 	}
 	.rendered {
 		position: relative; /* for the .copy button */
