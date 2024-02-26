@@ -357,7 +357,7 @@
   ([#318](https://github.com/ryanatkn/fuz/pull/318))
 - add more readable dark mode text colors
   ([#327](https://github.com/ryanatkn/fuz/pull/327))
-- add `attrs` prop to `PendingAnimation`
+- add `attrs` prop to `Pending_Animation`
   ([#327](https://github.com/ryanatkn/fuz/pull/327))
 - improve `HueInput` a11y
   ([#334](https://github.com/ryanatkn/fuz/pull/334))
@@ -903,7 +903,7 @@
 
 - **break**: rename `--duration_N` CSS variables from `--transition_duration_N` and add `--duration_6`
   ([#186](https://github.com/ryanatkn/fuz/pull/186))
-- add `--animation_duration` API to `PendingAnimation.svelte`
+- add `--animation_duration` API to `Pending_Animation.svelte`
   ([#186](https://github.com/ryanatkn/fuz/pull/186))
 - relax `is_editable` type in `util/dom.js`
   ([#187](https://github.com/ryanatkn/fuz/pull/187))
@@ -930,7 +930,7 @@
   ([#178](https://github.com/ryanatkn/fuz/pull/178))
 - improve env handling for log level
   ([#180](https://github.com/ryanatkn/fuz/pull/180))
-- add `index` to `PendingAnimation` slot props
+- add `index` to `Pending_Animation` slot props
   ([#181](https://github.com/ryanatkn/fuz/pull/181))
 
 ## 0.22.0
@@ -1045,7 +1045,7 @@
   ([#136](https://github.com/ryanatkn/fuz/pull/136))
 - **break**: update styles
   ([#136](https://github.com/ryanatkn/fuz/pull/136))
-- **break**: change `PendingAnimation` property `paused` to `running`
+- **break**: change `Pending_Animation` property `paused` to `running`
   ([#136](https://github.com/ryanatkn/fuz/pull/136))
 - add optional `separator` arg to `toToClientId`
   ([#136](https://github.com/ryanatkn/fuz/pull/136))
@@ -1100,7 +1100,7 @@
   ([#108](https://github.com/ryanatkn/fuz/pull/108))
 - **break**: add peer deps `svelte` and `@sveltejs/kit`
   ([#112](https://github.com/ryanatkn/fuz/pull/112))
-- update `PendingAnimation.svelte` with slot content and `running` prop
+- update `Pending_Animation.svelte` with slot content and `running` prop
   ([#108](https://github.com/ryanatkn/fuz/pull/108))
 - replace `Message.svelte` prop `text` with a slot
   ([#108](https://github.com/ryanatkn/fuz/pull/108))
@@ -1163,7 +1163,7 @@
 
 ## 0.4.2
 
-- publish component `PendingAnimation.svelte`
+- publish component `Pending_Animation.svelte`
   ([#91](https://github.com/ryanatkn/fuz/pull/91))
 
 ## 0.4.1
