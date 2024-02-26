@@ -82,7 +82,7 @@ export const tomes: Tome[] = [
 		pathname: '',
 		category: 'styles',
 		component: elements,
-		related: ['buttons', 'forms', 'prose', 'layout'],
+		related: ['buttons', 'forms', 'prose', 'borders', 'layout'],
 	},
 	{
 		name: 'prose',
@@ -106,7 +106,7 @@ export const tomes: Tome[] = [
 		pathname: '',
 		category: 'styles',
 		component: borders,
-		related: ['buttons', 'forms'],
+		related: ['buttons', 'forms', 'elements'],
 	},
 	{
 		name: 'layout',
