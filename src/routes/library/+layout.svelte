@@ -79,7 +79,8 @@
 		height: 100%;
 		transform: translate3d(calc(-100% - var(--space_sm)), 0, 0);
 		display: flex;
-		justify-content: center;
+		align-items: center;
+		flex-direction: column;
 	}
 	.menu {
 		position: sticky;
