@@ -1,10 +1,10 @@
 <script lang="ts">
 	// TODO move to a single source of truth (JSON or ts), generate CSS and use to render here
 	const sizes = {
-		icon_size_4: '512px',
-		icon_size_3: '316px',
-		icon_size_2: '196px',
-		icon_size_1: '128px',
+		icon_size_4xl: '512px',
+		icon_size_3xl: '316px',
+		icon_size_2xl: '196px',
+		icon_size_xl: '128px',
 		icon_size_lg: '80px',
 		icon_size_md: '48px',
 		icon_size_sm: '32px',
@@ -62,37 +62,37 @@
 		</div>
 	</figure>
 	<figure>
-		<figcaption><code>--icon_size_1: {sizes.icon_size_1}</code></figcaption>
+		<figcaption><code>--icon_size_xl: {sizes.icon_size_xl}</code></figcaption>
 		<div
-			style="font-size: var(--icon_size_1); --size: var(--icon_size_1);"
-			title="--icon_size_1 is {sizes.icon_size_1}"
+			style="font-size: var(--icon_size_xl); --size: var(--icon_size_xl);"
+			title="--icon_size_xl is {sizes.icon_size_xl}"
 		>
 			🐢
 		</div>
 	</figure>
 	<figure>
-		<figcaption><code>--icon_size_2: {sizes.icon_size_2}</code></figcaption>
+		<figcaption><code>--icon_size_2xl: {sizes.icon_size_2xl}</code></figcaption>
 		<div
-			style="font-size: var(--icon_size_2); --size: var(--icon_size_2);"
-			title="--icon_size_2 is {sizes.icon_size_2}"
+			style="font-size: var(--icon_size_2xl); --size: var(--icon_size_2xl);"
+			title="--icon_size_2xl is {sizes.icon_size_2xl}"
 		>
 			🐢
 		</div>
 	</figure>
 	<figure>
-		<figcaption><code>--icon_size_3: {sizes.icon_size_3}</code></figcaption>
+		<figcaption><code>--icon_size_3xl: {sizes.icon_size_3xl}</code></figcaption>
 		<div
-			style="font-size: var(--icon_size_3); --size: var(--icon_size_3);"
-			title="--icon_size_3 is {sizes.icon_size_3}"
+			style="font-size: var(--icon_size_3xl); --size: var(--icon_size_3xl);"
+			title="--icon_size_3xl is {sizes.icon_size_3xl}"
 		>
 			🐢
 		</div>
 	</figure>
 	<figure>
-		<figcaption><code>--icon_size_4: {sizes.icon_size_4}</code></figcaption>
+		<figcaption><code>--icon_size_4xl: {sizes.icon_size_4xl}</code></figcaption>
 		<div
-			style="font-size: var(--icon_size_4); --size: var(--icon_size_4);"
-			title="--icon_size_4 is {sizes.icon_size_4}"
+			style="font-size: var(--icon_size_4xl); --size: var(--icon_size_4xl);"
+			title="--icon_size_4xl is {sizes.icon_size_4xl}"
 		>
 			🐢
 		</div>

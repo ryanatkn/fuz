@@ -342,10 +342,10 @@ export const default_variables: Style_Variable[] = [
 	{name: 'icon_size_sm', light: '32px'},
 	{name: 'icon_size_md', light: '48px'},
 	{name: 'icon_size_lg', light: '80px'},
-	{name: 'icon_size_1', light: '128px'},
-	{name: 'icon_size_2', light: '196px'},
-	{name: 'icon_size_3', light: '316px'},
-	{name: 'icon_size_4', light: '512px'},
+	{name: 'icon_size_xl', light: '128px'},
+	{name: 'icon_size_2xl', light: '196px'},
+	{name: 'icon_size_3xl', light: '316px'},
+	{name: 'icon_size_4xl', light: '512px'},
 
 	/* durations */
 	{name: 'duration_1', light: '0.08s'},
@@ -366,6 +366,7 @@ export const default_variables: Style_Variable[] = [
 	{name: 'disabled_opacity', light: 'var(--fade_2)'},
 
 	/* border radii */
+	// TODO BLOCK hardcoded values
 	{name: 'border_radius', light: 'var(--radius_md)'},
 	{name: 'radius_md', light: 'calc(var(--input_height) / 2)'},
 	{name: 'radius_sm', light: 'calc(var(--radius_md) / 1.618)'},

@@ -321,7 +321,7 @@
 		display: flex;
 	}
 	.position .icon {
-		font-size: var(--icon_size_1);
+		font-size: var(--icon_size_xl);
 	}
 	.cats {
 		display: flex;

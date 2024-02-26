@@ -24,3 +24,7 @@ rename some variables
 - `space_7xl` from `space_7`
 - `space_8xl` from `space_8`
 - `space_9xl` from `space_9`
+- `icon_size_xl` from `icon_size_1`
+- `icon_size_2xl` from `icon_size_2`
+- `icon_size_3xl` from `icon_size_3`
+- `icon_size_4xl` from `icon_size_4`
