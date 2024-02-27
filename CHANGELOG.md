@@ -53,7 +53,7 @@
 ### Patch Changes
 
 - tweak colors ([#10](https://github.com/ryanatkn/fuz/pull/10))
-- rename `Library_Tome_Link` from `Library_Vocab` ([#12](https://github.com/ryanatkn/fuz/pull/12))
+- rename `Tome_Link` from `Library_Vocab` ([#12](https://github.com/ryanatkn/fuz/pull/12))
 
 ## 0.88.0
 

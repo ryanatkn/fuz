@@ -7,7 +7,7 @@
 	import Dialog from '$lib/Dialog.svelte';
 	import {get_tome} from '$lib/tome.js';
 	import Color_Scheme_Input from '$lib/Color_Scheme_Input.svelte';
-	import Library_Tome_Link from '$lib/Library_Tome_Link.svelte';
+	import Tome_Link from '$lib/Tome_Link.svelte';
 	import {type Theme, save_theme, get_theme, get_color_scheme} from '$lib/theme.js';
 	import {default_themes} from '$lib/themes.js';
 	import Theme_Input from '$lib/Theme_Input.svelte';
@@ -45,7 +45,7 @@
 					><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme">color-scheme</a
 					></code
 				>
-				and custom themes based on <Library_Tome_Link name="variables" />, which use
+				and custom themes based on <Tome_Link name="variables" />, which use
 				<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties"
 					>CSS custom properties</a
 				>. <code>Themed</code> is a singleton component that's mounted at the top-level of the page:
@@ -152,7 +152,7 @@
 		<div class="prose">
 			<h3>themes</h3>
 			<p>
-				A theme is a simple JSON collection of <Library_Tome_Link name="variables" /> that can be transformed
+				A theme is a simple JSON collection of <Tome_Link name="variables" /> that can be transformed
 				into CSS that set
 				<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties"
 					>CSS custom properties</a

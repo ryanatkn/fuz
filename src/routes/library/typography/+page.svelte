@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
-	import Library_Tome_Link from '$lib/Library_Tome_Link.svelte';
+	import Tome_Link from '$lib/Tome_Link.svelte';
 
 	import {default_variables} from '$lib/variables.js';
 	import {get_tome} from '$lib/tome.js';
@@ -39,7 +39,7 @@
 	<section class="prose">
 		<p>
 			Fuz has app-like markup semantics by default, which does a hard CSS reset including removing
-			all padding and margin. The following document-like markup style is opt-in with the <Library_Tome_Link
+			all padding and margin. The following document-like markup style is opt-in with the <Tome_Link
 				name="prose"
 			/> class.
 		</p>

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
-	import Library_Tome_Link from '$lib/Library_Tome_Link.svelte';
+	import Tome_Link from '$lib/Tome_Link.svelte';
 	import {get_tome} from '$lib/tome.js';
 
 	const LIBRARY_ITEM_NAME = 'prose';
@@ -11,7 +11,7 @@
 <Tome_Detail {tome}>
 	<section>
 		<aside>
-			The <code>.prose</code> CSS class styles HTML <Library_Tome_Link name="elements" /> for document-like
+			The <code>.prose</code> CSS class styles HTML <Tome_Link name="elements" /> for document-like
 			presentation. The base Fuz stylesheet resets everything for app-like presentation - e.g. no margin/padding
 			- and
 			<code>.prose</code> adds back good defaults.
