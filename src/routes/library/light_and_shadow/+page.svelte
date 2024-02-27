@@ -21,9 +21,8 @@
 				states.
 			</p>
 			<p>
-				The details are not always simple inversions between light mode, which starts from plain
-				white documents, and dark mode, which starts from a lightless void. It's more helpful to
-				think in terms of additive light than opaque colors. See also the <Library_Tome_Link
+				Light mode's starting point is plain white documents, and dark mode's is a lightless void.
+				It's more helpful to think in terms of additive light than opaque colors. See also the <Library_Tome_Link
 					name="colors"
 				/> docs.
 			</p>
