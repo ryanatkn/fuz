@@ -107,11 +107,13 @@
 		<div>
 			{#each {length: 3} as _, i}
 				{@const name = 'text_' + (i + 1)}
-				<Style_Variable_Button {name}
-					><span style:color="var(--{name})">
-						{name}
-					</span></Style_Variable_Button
-				>
+				<div class="row">
+					<Style_Variable_Button {name}
+						><span style:color="var(--{name})">
+							{name}
+						</span></Style_Variable_Button
+					> = <code>{computed_styles.getPropertyValue('--' + name)}</code>
+				</div>
 			{/each}
 		</div>
 	</section>
