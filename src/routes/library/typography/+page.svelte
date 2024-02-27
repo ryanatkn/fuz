@@ -51,9 +51,11 @@
 		<h4 title="--size_lg">h4</h4>
 		<h5 title="--size_md">h5</h5>
 		<h6 title="--size_sm">h6</h6>
-		<p>p</p>
-		<small>small</small>
+		<p>paragraphs</p>
+		<p>paragraphs</p>
+		<p>paragraphs</p>
 		<p>p <sub>sub</sub> p <sup>sup</sup> p</p>
+		<small>small</small>
 		<details>
 			<summary>show code</summary>
 			<Code
@@ -70,9 +72,11 @@
 <h4 title="--size_lg">h4</h4>
 <h5 title="--size_md">h5</h5>
 <h6 title="--size_sm">h6</h6>
-<p>p</p>
-<small>small</small>
+<p>paragraphs</p>
+<p>paragraphs</p>
+<p>paragraphs</p>
 <p>p <sub>sub</sub> p <sup>sup</sup> p</p>
+<small>small</small>
 <details>
 	<summary>show code</summary>
 	{:recurse}`}
