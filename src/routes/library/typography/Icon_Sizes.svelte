@@ -1,8 +1,6 @@
 <script lang="ts">
 	// TODO move to a single source of truth (JSON or ts), generate CSS and use to render here
 	const sizes = {
-		icon_size_xl4: '512px',
-		icon_size_xl3: '316px',
 		icon_size_xl2: '196px',
 		icon_size_xl: '128px',
 		icon_size_lg: '80px',
@@ -75,24 +73,6 @@
 		<div
 			style="font-size: var(--icon_size_xl2); --size: var(--icon_size_xl2);"
 			title="--icon_size_xl2 is {sizes.icon_size_xl2}"
-		>
-			🐢
-		</div>
-	</figure>
-	<figure>
-		<figcaption><code>--icon_size_xl3: {sizes.icon_size_xl3}</code></figcaption>
-		<div
-			style="font-size: var(--icon_size_xl3); --size: var(--icon_size_xl3);"
-			title="--icon_size_xl3 is {sizes.icon_size_xl3}"
-		>
-			🐢
-		</div>
-	</figure>
-	<figure>
-		<figcaption><code>--icon_size_xl4: {sizes.icon_size_xl4}</code></figcaption>
-		<div
-			style="font-size: var(--icon_size_xl4); --size: var(--icon_size_xl4);"
-			title="--icon_size_xl4 is {sizes.icon_size_xl4}"
 		>
 			🐢
 		</div>

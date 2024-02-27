@@ -18,7 +18,6 @@
 - rename some variables ([#12](https://github.com/ryanatkn/fuz/pull/12))
 
   - `fade_N` from `faded_N`
-  - `space_N` from `spacing_N`
   - `radius_N` from `border_radius_N`
   - `space_xs5` from `space_xs5`
   - `space_xs4` from `space_xs4`
