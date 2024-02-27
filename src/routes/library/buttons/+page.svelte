@@ -18,8 +18,10 @@
 </script>
 
 <Tome_Detail {tome}>
-	<Code content={`<button>`} />
-	<button>button</button>
+	<div class="spaced">
+		<Code content={`<button>`} />
+		<button>button</button>
+	</div>
 	<div class="prose">
 		<section>
 			<p>
