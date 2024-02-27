@@ -20,21 +20,21 @@
 		</blockquote>
 		<h3>
 			<span style="font-size: var(--size_xl3)">👆</span>
-			<Mdn_Link href="Web/HTML/Element/blockquote"><code>blockquote</code></Mdn_Link>
+			<Mdn_Link href="Web/HTML/Element/blockquote">blockquote</Mdn_Link>
 		</h3>
 		<h3>
 			<span style="font-size: var(--size_xl3)">👇</span>
-			<Mdn_Link href="Web/HTML/Element/hr"><code>hr</code></Mdn_Link>
+			<Mdn_Link href="Web/HTML/Element/hr">hr</Mdn_Link>
 			<span style="font-size: var(--size_xl3)">👈</span>
-			<Mdn_Link href="Web/HTML/Element/code"><code>code</code></Mdn_Link>
+			<Mdn_Link href="Web/HTML/Element/code">code</Mdn_Link>
 		</h3>
 	</div>
 	<hr />
 	<div class="prose">
 		<h3>
-			<Mdn_Link href="Web/HTML/Element/details"><code>details</code></Mdn_Link>
+			<Mdn_Link href="Web/HTML/Element/details">details</Mdn_Link>
 			and
-			<Mdn_Link href="Web/HTML/Element/summary"><code>summary</code></Mdn_Link>
+			<Mdn_Link href="Web/HTML/Element/summary">summary</Mdn_Link>
 		</h3>
 		<details>
 			<summary
@@ -55,7 +55,7 @@
 	<hr />
 	<div class="prose">
 		<h3>
-			<Mdn_Link href="Web/HTML/Element/table"><code>table</code></Mdn_Link>
+			<Mdn_Link href="Web/HTML/Element/table">table</Mdn_Link>
 		</h3>
 		<blockquote>this is unfinished and will change</blockquote>
 		<Code
@@ -101,7 +101,7 @@
 	<hr />
 	<div class="prose">
 		<h3>
-			<Mdn_Link href="Web/HTML/Element/aside"><code>aside</code></Mdn_Link>
+			<Mdn_Link href="Web/HTML/Element/aside">aside</Mdn_Link>
 		</h3>
 		<aside>
 			the <code>aside</code> looks like this

@@ -57,9 +57,9 @@
 			<form>
 				<fieldset>
 					<legend
-						>a <Mdn_Link href="Web/HTML/Element/legend"><code>legend</code></Mdn_Link>
+						>a <Mdn_Link href="Web/HTML/Element/legend">legend</Mdn_Link>
 						in a
-						<Mdn_Link href="Web/HTML/Element/fieldset"><code>fieldset</code></Mdn_Link></legend
+						<Mdn_Link href="Web/HTML/Element/fieldset">fieldset</Mdn_Link></legend
 					>
 					<label>
 						<div class="title">username</div>

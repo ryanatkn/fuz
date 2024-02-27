@@ -152,27 +152,45 @@ li {
 }
 
 h1 {
-	font-size: var(--size_xl3);
+	--size: var(--size_xl3);
+	font-size: var(
+		--size
+	); /* TODO use this pattern elsewhere? provides API to components like `Mdn_Logo` */
 	font-weight: 300;
 }
 h2 {
-	font-size: var(--size_xl2);
+	--size: var(--size_xl2);
+	font-size: var(
+		--size
+	); /* TODO use this pattern elsewhere? provides API to components like `Mdn_Logo` */
 	font-weight: 400;
 }
 h3 {
-	font-size: var(--size_xl);
+	--size: var(--size_xl);
+	font-size: var(
+		--size
+	); /* TODO use this pattern elsewhere? provides API to components like `Mdn_Logo` */
 	font-weight: 500;
 }
 h4 {
-	font-size: var(--size_lg);
+	--size: var(--size_lg);
+	font-size: var(
+		--size
+	); /* TODO use this pattern elsewhere? provides API to components like `Mdn_Logo` */
 	font-weight: 700;
 }
 h5 {
-	font-size: var(--size_md);
+	--size: var(--size_md);
+	font-size: var(
+		--size
+	); /* TODO use this pattern elsewhere? provides API to components like `Mdn_Logo` */
 	font-weight: 900;
 }
 h6 {
-	font-size: var(--size_sm);
+	--size: var(--size_sm);
+	font-size: var(
+		--size
+	); /* TODO use this pattern elsewhere? provides API to components like `Mdn_Logo` */
 	font-weight: 600;
 	text-transform: uppercase;
 }

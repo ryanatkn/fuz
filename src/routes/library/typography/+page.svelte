@@ -65,7 +65,7 @@
 		<!-- TODO add a slider for the font size here -->
 		<hr />
 		<h3>
-			<Mdn_Link href="Web/CSS/font-weight"><code>font-weight</code></Mdn_Link> has no variables
+			<Mdn_Link href="Web/CSS/font-weight">font-weight</Mdn_Link> has no variables
 		</h3>
 		<div>
 			{#each font_weights as font_weight}
@@ -91,7 +91,7 @@
 	<!-- <section> 'text_disabled' 'text_active'</section> -->
 	<section class="prose">
 		<h3>
-			<Mdn_Link href="Web/CSS/line-height"><code>line-height</code></Mdn_Link> variables
+			<Mdn_Link href="Web/CSS/line-height">line-height</Mdn_Link> variables
 		</h3>
 		<div>
 			{#each {length: 7} as _, i}

@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let size = 'var(--mdn_logo_size, var(--size_md)';
+	export let size = 'var(--size, var(--size_md))';
 	export let fill = 'var(--color, #000)';
 	export let label = 'GitHub icon';
 	export let attrs: any = undefined;
