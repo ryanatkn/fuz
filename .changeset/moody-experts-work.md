@@ -1,5 +1,5 @@
 ---
-"@ryanatkn/fuz": patch
+'@ryanatkn/fuz': patch
 ---
 
-add `Mdn_Link` and `Mdn_Logo`
+add `Mdn_Link`, `Mdn_Logo`, and `$lib/variable_data.ts`
