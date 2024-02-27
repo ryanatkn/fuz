@@ -167,15 +167,20 @@ export const package_json = {
 			default: './dist/Library_Panel.svelte',
 			types: './dist/Library_Panel.svelte.d.ts',
 		},
-		'./Library_Tome_Link.svelte': {
-			svelte: './dist/Library_Tome_Link.svelte',
-			default: './dist/Library_Tome_Link.svelte',
-			types: './dist/Library_Tome_Link.svelte.d.ts',
-		},
 		'./Library.svelte': {
 			svelte: './dist/Library.svelte',
 			default: './dist/Library.svelte',
 			types: './dist/Library.svelte.d.ts',
+		},
+		'./Mdn_Link.svelte': {
+			svelte: './dist/Mdn_Link.svelte',
+			default: './dist/Mdn_Link.svelte',
+			types: './dist/Mdn_Link.svelte.d.ts',
+		},
+		'./Mdn_Logo.svelte': {
+			svelte: './dist/Mdn_Logo.svelte',
+			default: './dist/Mdn_Logo.svelte',
+			types: './dist/Mdn_Logo.svelte.d.ts',
 		},
 		'./Package_Detail.svelte': {
 			svelte: './dist/Package_Detail.svelte',
@@ -243,12 +248,18 @@ export const package_json = {
 			default: './dist/Tome_Detail.svelte',
 			types: './dist/Tome_Detail.svelte.d.ts',
 		},
+		'./Tome_Link.svelte': {
+			svelte: './dist/Tome_Link.svelte',
+			default: './dist/Tome_Link.svelte',
+			types: './dist/Tome_Link.svelte.d.ts',
+		},
 		'./Tome_Title.svelte': {
 			svelte: './dist/Tome_Title.svelte',
 			default: './dist/Tome_Title.svelte',
 			types: './dist/Tome_Title.svelte.d.ts',
 		},
 		'./tome.js': {default: './dist/tome.js', types: './dist/tome.d.ts'},
+		'./variable_data.js': {default: './dist/variable_data.js', types: './dist/variable_data.d.ts'},
 		'./variables.js': {default: './dist/variables.js', types: './dist/variables.d.ts'},
 	},
 } satisfies Package_Json;
@@ -339,8 +350,9 @@ export const src_json = {
 		'./Library_Menu.svelte': {path: 'Library_Menu.svelte', declarations: []},
 		'./Library_Nav.svelte': {path: 'Library_Nav.svelte', declarations: []},
 		'./Library_Panel.svelte': {path: 'Library_Panel.svelte', declarations: []},
-		'./Library_Tome_Link.svelte': {path: 'Library_Tome_Link.svelte', declarations: []},
 		'./Library.svelte': {path: 'Library.svelte', declarations: []},
+		'./Mdn_Link.svelte': {path: 'Mdn_Link.svelte', declarations: []},
+		'./Mdn_Logo.svelte': {path: 'Mdn_Logo.svelte', declarations: []},
 		'./Package_Detail.svelte': {path: 'Package_Detail.svelte', declarations: []},
 		'./Package_Summary.svelte': {path: 'Package_Summary.svelte', declarations: []},
 		'./Page_Footer.svelte': {path: 'Page_Footer.svelte', declarations: []},
@@ -392,6 +404,7 @@ export const src_json = {
 			],
 		},
 		'./Tome_Detail.svelte': {path: 'Tome_Detail.svelte', declarations: []},
+		'./Tome_Link.svelte': {path: 'Tome_Link.svelte', declarations: []},
 		'./Tome_Title.svelte': {path: 'Tome_Title.svelte', declarations: []},
 		'./tome.js': {
 			path: 'tome.ts',
@@ -401,6 +414,14 @@ export const src_json = {
 				{name: 'get_tomes', kind: 'function'},
 				{name: 'set_tomes', kind: 'function'},
 				{name: 'get_tome', kind: 'function'},
+			],
+		},
+		'./variable_data.js': {
+			path: 'variable_data.ts',
+			declarations: [
+				{name: 'font_sizes', kind: 'variable'},
+				{name: 'font_size_names', kind: 'variable'},
+				{name: 'font_size_names_set', kind: 'variable'},
 			],
 		},
 		'./variables.js': {

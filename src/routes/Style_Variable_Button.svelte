@@ -21,6 +21,8 @@
 </script>
 
 <button
+	type="button"
+	{...$$restProps}
 	class={classes}
 	class:inline
 	class:plain

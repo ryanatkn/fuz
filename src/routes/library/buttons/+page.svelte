@@ -18,8 +18,10 @@
 </script>
 
 <Tome_Detail {tome}>
-	<Code content={`<button>`} />
-	<button>button</button>
+	<div class="spaced">
+		<Code content={`<button>`} />
+		<button>button</button>
+	</div>
 	<div class="prose">
 		<section>
 			<p>
@@ -80,7 +82,7 @@
 
 	<div class="prose">
 		<h3>
-			<code>button</code> with CSS class <code>.selected</code>
+			<code>button</code> with <code>.selected</code>
 		</h3>
 	</div>
 	<section style:margin-bottom="var(--space_xl4)">

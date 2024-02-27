@@ -4,7 +4,7 @@
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
 	import Color_Scheme_Input from '$lib/Color_Scheme_Input.svelte';
 	import Style_Variable_Button from '$routes/Style_Variable_Button.svelte';
-	import Library_Tome_Link from '$lib/Library_Tome_Link.svelte';
+	import Tome_Link from '$lib/Tome_Link.svelte';
 	import {get_tome} from '$lib/tome.js';
 
 	const LIBRARY_ITEM_NAME = 'light and shadow';
@@ -22,7 +22,7 @@
 			</p>
 			<p>
 				Light mode's starting point is plain white documents, and dark mode's is a lightless void.
-				It's more helpful to think in terms of additive light than opaque colors. See also the <Library_Tome_Link
+				It's more helpful to think in terms of additive light than opaque colors. See also the <Tome_Link
 					name="colors"
 				/> docs.
 			</p>

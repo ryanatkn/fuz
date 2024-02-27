@@ -1,17 +1,17 @@
 <script lang="ts">
 	import {writable} from 'svelte/store';
-
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
 	import Dialog from '$lib/Dialog.svelte';
 	import {get_tome} from '$lib/tome.js';
 	import Color_Scheme_Input from '$lib/Color_Scheme_Input.svelte';
-	import Library_Tome_Link from '$lib/Library_Tome_Link.svelte';
+	import Tome_Link from '$lib/Tome_Link.svelte';
 	import {type Theme, save_theme, get_theme, get_color_scheme} from '$lib/theme.js';
 	import {default_themes} from '$lib/themes.js';
 	import Theme_Input from '$lib/Theme_Input.svelte';
 	import Theme_Form from '$routes/Theme_Form.svelte';
+	import Mdn_Link from '$lib/Mdn_Link.svelte';
 	import Themed_Scope from '$lib/Themed_Scope.svelte';
 
 	const LIBRARY_ITEM_NAME = 'themes';
@@ -41,14 +41,10 @@
 		<div class="prose">
 			<p>
 				<code>Themed</code> adds global support for both the browser's
-				<code
-					><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme">color-scheme</a
-					></code
-				>
-				and custom themes based on <Library_Tome_Link name="variables" />, which use
-				<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties"
-					>CSS custom properties</a
-				>. <code>Themed</code> is a singleton component that's mounted at the top-level of the page:
+				<code><Mdn_Link href="Web/CSS/color-scheme">color-scheme</Mdn_Link></code>
+				and custom themes based on <Tome_Link name="variables" />, which use
+				<Mdn_Link href="Web/CSS/Using_CSS_custom_properties">CSS custom properties</Mdn_Link>.
+				<code>Themed</code> is a singleton component that's mounted at the top-level of the page:
 			</p>
 			<Code content={`import Themed from '@ryanatkn/fuz/Themed.svelte';`} lang="ts" />
 			<Code content={`<!-- +layout.svelte -->\n<Themed>\n\t<slot />\n</Themed>`} />
@@ -101,14 +97,10 @@
 			<h3>color scheme</h3>
 			<p>
 				<code>Themed</code> defaults to automatic
-				<code
-					><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme">color-scheme</a
-					></code
-				>
+				<code><Mdn_Link href="Web/CSS/color-scheme">color-scheme</Mdn_Link></code>
 				detection with
 				<code
-					><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme"
-						>prefers-color-scheme</a
+					><Mdn_Link href="Web/CSS/@media/prefers-color-scheme">prefers-color-scheme</Mdn_Link
 					></code
 				>, and users can also set it directly:
 			</p>
@@ -152,11 +144,10 @@
 		<div class="prose">
 			<h3>themes</h3>
 			<p>
-				A theme is a simple JSON collection of <Library_Tome_Link name="variables" /> that can be transformed
+				A theme is a simple JSON collection of <Tome_Link name="variables" /> that can be transformed
 				into CSS that set
-				<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties"
-					>CSS custom properties</a
-				>. Each variable can have values for light and/or dark color schemes.
+				<Mdn_Link href="Web/CSS/Using_CSS_custom_properties">CSS custom properties</Mdn_Link>. Each
+				variable can have values for light and/or dark color schemes.
 			</p>
 			<aside>The builtin themes need more work, but the proof of concept is ready!</aside>
 			<!-- TODO explain when exported <Code code={`<Theme_Input\n\t{themes}\n\t{selected_theme}\n/>`} /> -->
