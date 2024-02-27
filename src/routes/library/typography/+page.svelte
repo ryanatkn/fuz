@@ -1,13 +1,14 @@
 <script lang="ts">
+	import Code from '@ryanatkn/fuz_code/Code.svelte';
+
+	import Font_Weight_Control from '$routes/Font_Weight_Control.svelte';
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
 	import Tome_Link from '$lib/Tome_Link.svelte';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
-
 	import {default_variables} from '$lib/variables.js';
 	import {get_tome} from '$lib/tome.js';
 	import Icon_Sizes from '$routes/library/typography/Icon_Sizes.svelte';
 	import Style_Variable_Button from '$routes/Style_Variable_Button.svelte';
-	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	const LIBRARY_ITEM_NAME = 'typography';
 
@@ -86,19 +87,7 @@
 		</details>
 		<hr />
 		<form class="width_sm">
-			<label
-				><div class="title row width_full wrap">
-					selected_font_weight = <input
-						class="inline flex_1"
-						type="number"
-						bind:value={selected_font_weight}
-						min={100}
-						step={100}
-						max={900}
-					/>
-				</div>
-				<input type="range" bind:value={selected_font_weight} min={100} step={100} max={900} />
-			</label>
+			<Font_Weight_Control bind:selected_font_weight></Font_Weight_Control>
 		</form>
 		{#each font_sizes as font_size (font_size.name)}
 			<Style_Variable_Button title={font_size.light} name={font_size.name}
