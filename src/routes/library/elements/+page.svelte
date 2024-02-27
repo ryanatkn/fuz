@@ -61,9 +61,11 @@
 		<Code
 			content={`<table>
 	<thead>
-		<th>th</th>
-		<th>th</th>
-		<th>th</th>
+		<tr>
+			<th>th</th>
+			<th>th</th>
+			<th>th</th>
+		</tr>
 	</thead>
 	<tbody>
 		<tr><td>td</td><td>td</td><td>td</td></tr>
@@ -74,9 +76,11 @@
 		/>
 		<table>
 			<thead>
-				<th>th</th>
-				<th>th</th>
-				<th>th</th>
+				<tr>
+					<th>th</th>
+					<th>th</th>
+					<th>th</th>
+				</tr>
 			</thead>
 			<tbody>
 				<tr><td>td</td><td>td</td><td>td</td></tr>
@@ -87,9 +91,11 @@
 		<Code content={`<table class="width_full">\n\t...\n</table>`} />
 		<table class="width_full">
 			<thead>
-				<th>th</th>
-				<th>th</th>
-				<th>th</th>
+				<tr>
+					<th>th</th>
+					<th>th</th>
+					<th>th</th>
+				</tr>
 			</thead>
 			<tbody>
 				<tr><td>td</td><td>td</td><td>td</td></tr>

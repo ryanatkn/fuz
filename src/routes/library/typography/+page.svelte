@@ -125,7 +125,7 @@
 		<div>
 			{#each {length: 7} as _, i}
 				{@const name = 'line_height_' + (i + 1)}
-				<p>
+				<div class="spaced">
 					<Style_Variable_Button {name}
 						><div style:line-height="var(--{name})" class="button_contents">
 							<div>
@@ -137,7 +137,7 @@
 							<div>{name}</div>
 						</div></Style_Variable_Button
 					>
-				</p>
+				</div>
 			{/each}
 		</div>
 	</section>

@@ -269,34 +269,32 @@ $selected_color_scheme; // '${$selected_color_scheme}'`}
 				lang="js"
 			/>
 		</div>
-		<p>
-			<details>
-				<summary>more about <code>Themed</code></summary>
-				<aside>
-					<p>
-						<code>Themed</code> initializes the system's theme support. Without it, the page will
-						not reflect the user's system
-						<code>color-scheme</code>. By default, <code>Themed</code> applies the base theme to the
-						root of the page via <code>create_theme_setup_script</code>. It uses JS to add the
-						<code>.dark</code> CSS class to the <code>:root</code> element.
-					</p>
-					<p>
-						This strategy enables color scheme and theme support with minimal CSS and optimal
-						performance for most use cases. The system supports plain CSS usage that can be static
-						or dynamic, scoped or global, or imported at buildtime or runtime. It also allows
-						runtime access to the data if you want to pay the performance costs.
-					</p>
-					<p>
-						The theme setup script interacts with <code>sync_color_scheme</code> to save the user's
-						preference to <code>localStorage</code>. See also <code>Color_Scheme_Input</code>.
-					</p>
-					<p>
-						The setup script avoids flash-on-load due to color scheme, but currently themes flash in
-						after loading. We'll try to fix this when the system stabilizes.
-					</p>
-				</aside>
-			</details>
-		</p>
+		<details>
+			<summary>more about <code>Themed</code></summary>
+			<aside>
+				<p>
+					<code>Themed</code> initializes the system's theme support. Without it, the page will not
+					reflect the user's system
+					<code>color-scheme</code>. By default, <code>Themed</code> applies the base theme to the
+					root of the page via <code>create_theme_setup_script</code>. It uses JS to add the
+					<code>.dark</code> CSS class to the <code>:root</code> element.
+				</p>
+				<p>
+					This strategy enables color scheme and theme support with minimal CSS and optimal
+					performance for most use cases. The system supports plain CSS usage that can be static or
+					dynamic, scoped or global, or imported at buildtime or runtime. It also allows runtime
+					access to the data if you want to pay the performance costs.
+				</p>
+				<p>
+					The theme setup script interacts with <code>sync_color_scheme</code> to save the user's
+					preference to <code>localStorage</code>. See also <code>Color_Scheme_Input</code>.
+				</p>
+				<p>
+					The setup script avoids flash-on-load due to color scheme, but currently themes flash in
+					after loading. We'll try to fix this when the system stabilizes.
+				</p>
+			</aside>
+		</details>
 	</section>
 	<!-- TODO probably do this, needs colored buttons and other missing things though,
 		gets big - maybe put behind a click? or at least on the main library page? -->
