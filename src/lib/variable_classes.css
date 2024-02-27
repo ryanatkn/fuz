@@ -1,4 +1,9 @@
 /* TODO @multiple docs in library */
 
 .fg {
+	background-color: var(--fg);
+}
+
+.bg {
+	background-color: var(--bg);
 }
