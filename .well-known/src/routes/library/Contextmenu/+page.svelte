@@ -5,6 +5,7 @@
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	import Color_Scheme_Input from '$lib/Color_Scheme_Input.svelte';
+	import Mdn_Link from '$lib/Mdn_Link.svelte';
 	import Theme_Input from '$lib/Theme_Input.svelte';
 	import Dialog from '$lib/Dialog.svelte';
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
@@ -231,8 +232,8 @@
 			<p>
 				On touch devices, we detect tap-and-hold (aka longpress) instead of simply overriding the
 				web's
-				<a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event"
-					><code>'contextmenu'</code> event</a
+				<Mdn_Link href="Web/API/Element/contextmenu_event"
+					><code>'contextmenu'</code> event</Mdn_Link
 				>
 				because iOS does not support this web standard as of July 2023 as described in
 				<a href="https://bugs.webkit.org/show_bug.cgi?id=213953">this WebKit bug report</a>. The Fuz
@@ -275,9 +276,8 @@
 					that opened it
 				</li>
 				<li>
-					gives haptic feedback on open with <a
-						href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator/vibrate"
-						><code>navigator.vibrate</code></a
+					gives haptic feedback on open with <Mdn_Link href="Web/API/Navigator/vibrate"
+						><code>navigator.vibrate</code></Mdn_Link
 					>
 					(may remain broken due to the iOS longpress workaround, see
 					<a href="https://github.com/ryanatkn/fuz/pull/319">this PR</a>)

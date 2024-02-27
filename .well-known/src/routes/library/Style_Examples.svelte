@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Mdn_Link from '$lib/Mdn_Link.svelte';
+
 	import {get_theme} from '$lib/theme.js';
 
 	const theme = get_theme();
@@ -31,7 +33,7 @@
 		</ul>
 		<p>
 			p and <code>code</code> with
-			<a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility">links</a>
+			<Mdn_Link href="Web/Accessibility">links</Mdn_Link>
 		</p>
 		{#each {length: 3} as _}
 			<p class="width_sm">

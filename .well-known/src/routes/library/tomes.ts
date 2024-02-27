@@ -42,7 +42,7 @@ export const tomes: Tome[] = [
 		pathname: '',
 		category: 'styles',
 		component: variables,
-		related: ['themes', 'colors', 'typography'],
+		related: ['themes'],
 	},
 	{
 		name: 'colors',
@@ -50,7 +50,7 @@ export const tomes: Tome[] = [
 		pathname: '',
 		category: 'styles',
 		component: colors,
-		related: ['themes', 'variables', 'light and shadow', 'buttons'],
+		related: ['themes', 'light and shadow', 'buttons'],
 	},
 	{
 		name: 'light and shadow',
@@ -82,7 +82,7 @@ export const tomes: Tome[] = [
 		pathname: '',
 		category: 'styles',
 		component: elements,
-		related: ['buttons', 'forms', 'prose', 'borders', 'layout'],
+		related: ['buttons', 'forms', 'prose', 'typography', 'borders', 'layout'],
 	},
 	{
 		name: 'prose',
@@ -98,7 +98,7 @@ export const tomes: Tome[] = [
 		pathname: '',
 		category: 'styles',
 		component: typography,
-		related: ['themes', 'variables', 'prose'],
+		related: ['themes', 'elements', 'prose'],
 	},
 	{
 		name: 'borders',

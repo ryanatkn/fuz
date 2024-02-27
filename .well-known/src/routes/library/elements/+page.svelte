@@ -1,7 +1,10 @@
 <script lang="ts">
-	import Tome_Detail from '$lib/Tome_Detail.svelte';
-	import {get_tome} from '$lib/tome.js';
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
+
+	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import Tome_Link from '$lib/Tome_Link.svelte';
+	import {get_tome} from '$lib/tome.js';
+	import Mdn_Link from '$lib/Mdn_Link.svelte';
 
 	const LIBRARY_ITEM_NAME = 'elements';
 
@@ -11,33 +14,27 @@
 <Tome_Detail {tome}>
 	<div class="prose">
 		<blockquote>
-			styles for plain <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element"
-				>HTML elements</a
-			>
+			styles for plain <Mdn_Link href="Web/HTML/Element">HTML elements</Mdn_Link>
+			with app-like presentation, for document-like presentation see <Tome_Link name="typography" />
+			and <Tome_Link name="prose" />
 		</blockquote>
 		<h3>
 			<span style="font-size: var(--size_xl3)">👆</span>
-			<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/blockquote"
-				><code>blockquote</code></a
-			>
+			<Mdn_Link href="Web/HTML/Element/blockquote">blockquote</Mdn_Link>
 		</h3>
 		<h3>
 			<span style="font-size: var(--size_xl3)">👇</span>
-			<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/hr"><code>hr</code></a>
+			<Mdn_Link href="Web/HTML/Element/hr">hr</Mdn_Link>
 			<span style="font-size: var(--size_xl3)">👈</span>
-			<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/code"><code>code</code></a>
+			<Mdn_Link href="Web/HTML/Element/code">code</Mdn_Link>
 		</h3>
 	</div>
 	<hr />
 	<div class="prose">
 		<h3>
-			<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details"
-				><code>details</code></a
-			>
+			<Mdn_Link href="Web/HTML/Element/details">details</Mdn_Link>
 			and
-			<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/summary"
-				><code>summary</code></a
-			>
+			<Mdn_Link href="Web/HTML/Element/summary">summary</Mdn_Link>
 		</h3>
 		<details>
 			<summary
@@ -58,9 +55,7 @@
 	<hr />
 	<div class="prose">
 		<h3>
-			<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table"
-				><code>table</code></a
-			>
+			<Mdn_Link href="Web/HTML/Element/table">table</Mdn_Link>
 		</h3>
 		<blockquote>this is unfinished and will change</blockquote>
 		<Code
@@ -106,9 +101,7 @@
 	<hr />
 	<div class="prose">
 		<h3>
-			<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/aside"
-				><code>aside</code></a
-			>
+			<Mdn_Link href="Web/HTML/Element/aside">aside</Mdn_Link>
 		</h3>
 		<aside>
 			the <code>aside</code> looks like this
