@@ -126,7 +126,11 @@
 				<p>
 					<Style_Variable_Button {name}
 						><div style:line-height="var(--{name})" class="button_contents">
-							<div>{name} = {computed_styles.getPropertyValue('--' + name)}</div>
+							<div>
+								{name} =
+								<code class="font_family_mono">{computed_styles.getPropertyValue('--' + name)}</code
+								>
+							</div>
 							<div>{name}</div>
 							<div>{name}</div>
 						</div></Style_Variable_Button

@@ -17,6 +17,8 @@
 		font-size = <input
 			class="inline"
 			type="number"
+			style:width="var(--space_xl7)"
+			style:min-width="var(--space_xl7)"
 			bind:value={selected_font_size}
 			{min}
 			step={1}
