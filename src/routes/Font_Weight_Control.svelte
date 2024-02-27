@@ -2,6 +2,8 @@
 	// TODO @multiple publish in $lib when ready
 
 	export let selected_font_weight = 500;
+
+	// TODO should this be the font_weight variable by default?
 </script>
 
 <label
