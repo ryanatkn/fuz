@@ -29,7 +29,7 @@
 			<p>
 				Opacity is used to enable arbitrary stacking that visually inherits its context. Not all
 				cases are properly handled yet, and some choices are made for performance reasons, like
-				avoiding opacity on text.
+				avoiding opacity on text. (is this still a thing?)
 			</p>
 		</section>
 
