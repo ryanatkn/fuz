@@ -1,7 +1,9 @@
 <script lang="ts">
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import Tome_Link from '$lib/Tome_Link.svelte';
 	import {get_tome} from '$lib/tome.js';
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
+	import Mdn_Link from '$lib/Mdn_Link.svelte';
 
 	const LIBRARY_ITEM_NAME = 'elements';
 
@@ -11,9 +13,9 @@
 <Tome_Detail {tome}>
 	<div class="prose">
 		<blockquote>
-			styles for plain <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element"
-				>HTML elements</a
-			>
+			styles for plain <Mdn_Link href="/Web/HTML/Element">HTML elements</Mdn_Link>
+			with app-like presentation, for document-like presentation see <Tome_Link name="typography" />
+			and <Tome_Link name="prose" />
 		</blockquote>
 		<h3>
 			<span style="font-size: var(--size_xl3)">👆</span>
