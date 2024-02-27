@@ -2,6 +2,7 @@
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	import Font_Weight_Control from '$routes/Font_Weight_Control.svelte';
+	import Font_Size_Control from '$routes/Font_Size_Control.svelte';
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
 	import Tome_Link from '$lib/Tome_Link.svelte';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
@@ -17,7 +18,7 @@
 	// TODO refactor
 	const font_weights = [100, 200, 300, 400, 500, 600, 700, 800, 900];
 
-	// TODO how to improve this?
+	// TODO @multiple extract to helpers
 	const font_size_names = new Set([
 		'size_xs',
 		'size_sm',
@@ -38,6 +39,7 @@
 	const computed_styles = window.getComputedStyle(document.documentElement);
 
 	let selected_font_weight = 500;
+	let selected_font_size = 3;
 </script>
 
 <Tome_Detail {tome}>
@@ -101,6 +103,9 @@
 		<h3>
 			<Mdn_Link href="Web/CSS/font-weight">font-weight</Mdn_Link> has no variables
 		</h3>
+		<form>
+			<Font_Size_Control bind:selected_font_size />
+		</form>
 		<div>
 			{#each font_weights as font_weight}
 				<div style:font-weight={font_weight}>
