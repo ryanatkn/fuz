@@ -13,7 +13,7 @@
 <section class="prose">
 	<div>
 		<h3>the <code>--icon_size</code> variable's variants</h3>
-		<aside class="width_sm">
+		<aside>
 			unlike <code>--size_</code> variables, <code>--icon_</code> variables are in
 			<code>px</code>
 			not <code>rem</code>, so they're insensitive to browser font size

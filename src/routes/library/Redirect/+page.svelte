@@ -12,7 +12,7 @@
 
 <Tome_Detail {tome}>
 	<div class="prose">
-		<p class="width_sm">
+		<p>
 			Adds a redirect for a page using <Mdn_Link href="Web/HTTP/Redirections#html_redirections"
 				>a meta tag</Mdn_Link
 			>
@@ -22,7 +22,7 @@
 		</p>
 		<!-- TODO make this a generic data-driven helper -->
 		<Code content={`import Redirect from '@ryanatkn/fuz/Redirect.svelte';`} lang="ts" />
-		<aside class="width_sm">
+		<aside>
 			Please note: <code>auto={'{'}false}</code> is only used here to prevent the page from redirecting!
 			Normally you wouldn't include it as a prop.
 		</aside>
