@@ -213,11 +213,6 @@
       "default": "./dist/Library_Panel.svelte",
       "types": "./dist/Library_Panel.svelte.d.ts"
     },
-    "./Tome_Link.svelte": {
-      "svelte": "./dist/Tome_Link.svelte",
-      "default": "./dist/Tome_Link.svelte",
-      "types": "./dist/Tome_Link.svelte.d.ts"
-    },
     "./Library.svelte": {
       "svelte": "./dist/Library.svelte",
       "default": "./dist/Library.svelte",
@@ -304,6 +299,11 @@
       "svelte": "./dist/Tome_Detail.svelte",
       "default": "./dist/Tome_Detail.svelte",
       "types": "./dist/Tome_Detail.svelte.d.ts"
+    },
+    "./Tome_Link.svelte": {
+      "svelte": "./dist/Tome_Link.svelte",
+      "default": "./dist/Tome_Link.svelte",
+      "types": "./dist/Tome_Link.svelte.d.ts"
     },
     "./Tome_Title.svelte": {
       "svelte": "./dist/Tome_Title.svelte",

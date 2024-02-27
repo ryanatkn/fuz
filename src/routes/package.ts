@@ -167,11 +167,6 @@ export const package_json = {
 			default: './dist/Library_Panel.svelte',
 			types: './dist/Library_Panel.svelte.d.ts',
 		},
-		'./Tome_Link.svelte': {
-			svelte: './dist/Tome_Link.svelte',
-			default: './dist/Tome_Link.svelte',
-			types: './dist/Tome_Link.svelte.d.ts',
-		},
 		'./Library.svelte': {
 			svelte: './dist/Library.svelte',
 			default: './dist/Library.svelte',
@@ -242,6 +237,11 @@ export const package_json = {
 			svelte: './dist/Tome_Detail.svelte',
 			default: './dist/Tome_Detail.svelte',
 			types: './dist/Tome_Detail.svelte.d.ts',
+		},
+		'./Tome_Link.svelte': {
+			svelte: './dist/Tome_Link.svelte',
+			default: './dist/Tome_Link.svelte',
+			types: './dist/Tome_Link.svelte.d.ts',
 		},
 		'./Tome_Title.svelte': {
 			svelte: './dist/Tome_Title.svelte',
@@ -339,7 +339,6 @@ export const src_json = {
 		'./Library_Menu.svelte': {path: 'Library_Menu.svelte', declarations: []},
 		'./Library_Nav.svelte': {path: 'Library_Nav.svelte', declarations: []},
 		'./Library_Panel.svelte': {path: 'Library_Panel.svelte', declarations: []},
-		'./Tome_Link.svelte': {path: 'Tome_Link.svelte', declarations: []},
 		'./Library.svelte': {path: 'Library.svelte', declarations: []},
 		'./Package_Detail.svelte': {path: 'Package_Detail.svelte', declarations: []},
 		'./Package_Summary.svelte': {path: 'Package_Summary.svelte', declarations: []},
@@ -392,6 +391,7 @@ export const src_json = {
 			],
 		},
 		'./Tome_Detail.svelte': {path: 'Tome_Detail.svelte', declarations: []},
+		'./Tome_Link.svelte': {path: 'Tome_Link.svelte', declarations: []},
 		'./Tome_Title.svelte': {path: 'Tome_Title.svelte', declarations: []},
 		'./tome.js': {
 			path: 'tome.ts',
