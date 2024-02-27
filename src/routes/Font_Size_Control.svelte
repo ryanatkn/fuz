@@ -16,7 +16,8 @@
 
 <label
 	><div class="title row width_full wrap">
-		font-size = <input
+		<slot>font-size</slot> =
+		<input
 			class="inline"
 			type="number"
 			style:width="var(--space_xl7)"
