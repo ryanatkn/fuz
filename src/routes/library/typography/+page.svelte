@@ -35,6 +35,8 @@
 	const font_sizes = default_variables.filter((p) => font_size_names.has(p.name));
 
 	const computed_styles = window.getComputedStyle(document.documentElement);
+
+	let selected_font_weight = 500;
 </script>
 
 <Tome_Detail {tome}>
@@ -83,10 +85,22 @@
 			/>
 		</details>
 		<hr />
-		<!-- TODO maybe add a slider for the font weight here -->
+		<label
+			><div class="title">
+				selected_font_weight = <input
+					class="inline"
+					type="number"
+					bind:value={selected_font_weight}
+					min={100}
+					step={100}
+					max={900}
+				/>
+			</div>
+			<input type="range" bind:value={selected_font_weight} min={100} step={100} max={900} />
+		</label>
 		{#each font_sizes as font_size (font_size.name)}
 			<Style_Variable_Button title={font_size.light} name={font_size.name}
-				><span style:font-size="var(--{font_size.name})" style:font-weight="normal"
+				><span style:font-size="var(--{font_size.name})" style:font-weight={selected_font_weight}
 					>{font_size.name}</span
 				></Style_Variable_Button
 			>
