@@ -259,6 +259,7 @@ export const package_json = {
 			types: './dist/Tome_Title.svelte.d.ts',
 		},
 		'./tome.js': {default: './dist/tome.js', types: './dist/tome.d.ts'},
+		'./variable_data.js': {default: './dist/variable_data.js', types: './dist/variable_data.d.ts'},
 		'./variables.js': {default: './dist/variables.js', types: './dist/variables.d.ts'},
 	},
 } satisfies Package_Json;
@@ -413,6 +414,14 @@ export const src_json = {
 				{name: 'get_tomes', kind: 'function'},
 				{name: 'set_tomes', kind: 'function'},
 				{name: 'get_tome', kind: 'function'},
+			],
+		},
+		'./variable_data.js': {
+			path: 'variable_data.ts',
+			declarations: [
+				{name: 'font_sizes', kind: 'variable'},
+				{name: 'font_size_names', kind: 'variable'},
+				{name: 'font_size_names_set', kind: 'variable'},
 			],
 		},
 		'./variables.js': {

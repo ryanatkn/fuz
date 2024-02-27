@@ -10,6 +10,7 @@
 	import {get_tome} from '$lib/tome.js';
 	import Icon_Sizes from '$routes/library/typography/Icon_Sizes.svelte';
 	import Style_Variable_Button from '$routes/Style_Variable_Button.svelte';
+	import {font_size_names, font_size_names_set} from '$lib/variable_data.js';
 
 	const LIBRARY_ITEM_NAME = 'typography';
 
@@ -18,23 +19,7 @@
 	// TODO refactor
 	const font_weights = [100, 200, 300, 400, 500, 600, 700, 800, 900];
 
-	// TODO @multiple extract to helpers
-	const font_size_names = new Set([
-		'size_xs',
-		'size_sm',
-		'size_md',
-		'size_lg',
-		'size_xl',
-		'size_xl2',
-		'size_xl3',
-		'size_xl4',
-		'size_xl5',
-		'size_xl6',
-		'size_xl7',
-		'size_xl8',
-		'size_xl9',
-	]);
-	const font_sizes = default_variables.filter((p) => font_size_names.has(p.name));
+	const font_sizes = default_variables.filter((p) => font_size_names_set.has(p.name));
 
 	const computed_styles = window.getComputedStyle(document.documentElement);
 
@@ -108,7 +93,10 @@
 		</form>
 		<div>
 			{#each font_weights as font_weight}
-				<div style:font-weight={font_weight}>
+				<div
+					style:font-weight={font_weight}
+					style:font-size="var(--{font_size_names[selected_font_size - 1]})"
+				>
 					{font_weight}
 				</div>
 			{/each}

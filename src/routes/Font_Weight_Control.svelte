@@ -6,7 +6,7 @@
 
 <label
 	><div class="title row width_full wrap">
-		selected_font_weight = <input
+		font-weight = <input
 			class="inline flex_1"
 			type="number"
 			bind:value={selected_font_weight}

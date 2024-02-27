@@ -14,4 +14,7 @@ export const font_sizes = [
 	'xl9',
 ];
 
-export const font_size_names = new Set(font_sizes);
+// TODO maybe suffix with `_set` and also export the array?
+export const font_size_names = font_sizes.map((s) => 'size_' + s);
+
+export const font_size_names_set = new Set(font_size_names);

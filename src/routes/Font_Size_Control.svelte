@@ -14,7 +14,7 @@
 
 <label
 	><div class="title row width_full wrap">
-		selected_font_size = <input
+		font-size = <input
 			class="inline"
 			type="number"
 			bind:value={selected_font_size}

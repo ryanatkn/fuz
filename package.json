@@ -324,6 +324,10 @@
       "default": "./dist/tome.js",
       "types": "./dist/tome.d.ts"
     },
+    "./variable_data.js": {
+      "default": "./dist/variable_data.js",
+      "types": "./dist/variable_data.d.ts"
+    },
     "./variables.js": {
       "default": "./dist/variables.js",
       "types": "./dist/variables.d.ts"
