@@ -172,6 +172,16 @@ export const package_json = {
 			default: './dist/Library.svelte',
 			types: './dist/Library.svelte.d.ts',
 		},
+		'./Mdn_Link.svelte': {
+			svelte: './dist/Mdn_Link.svelte',
+			default: './dist/Mdn_Link.svelte',
+			types: './dist/Mdn_Link.svelte.d.ts',
+		},
+		'./Mdn_Logo.svelte': {
+			svelte: './dist/Mdn_Logo.svelte',
+			default: './dist/Mdn_Logo.svelte',
+			types: './dist/Mdn_Logo.svelte.d.ts',
+		},
 		'./Package_Detail.svelte': {
 			svelte: './dist/Package_Detail.svelte',
 			default: './dist/Package_Detail.svelte',
@@ -340,6 +350,8 @@ export const src_json = {
 		'./Library_Nav.svelte': {path: 'Library_Nav.svelte', declarations: []},
 		'./Library_Panel.svelte': {path: 'Library_Panel.svelte', declarations: []},
 		'./Library.svelte': {path: 'Library.svelte', declarations: []},
+		'./Mdn_Link.svelte': {path: 'Mdn_Link.svelte', declarations: []},
+		'./Mdn_Logo.svelte': {path: 'Mdn_Logo.svelte', declarations: []},
 		'./Package_Detail.svelte': {path: 'Package_Detail.svelte', declarations: []},
 		'./Package_Summary.svelte': {path: 'Package_Summary.svelte', declarations: []},
 		'./Page_Footer.svelte': {path: 'Page_Footer.svelte', declarations: []},

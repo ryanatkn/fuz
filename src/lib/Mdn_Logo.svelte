@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let size = 'var(--size, var(--size_md))';
-	export let fill = 'var(--color, #000)';
+	export let fill = '#8cb4ff';
 	export let label = 'GitHub icon';
 	export let attrs: any = undefined;
 

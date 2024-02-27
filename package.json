@@ -218,6 +218,16 @@
       "default": "./dist/Library.svelte",
       "types": "./dist/Library.svelte.d.ts"
     },
+    "./Mdn_Link.svelte": {
+      "svelte": "./dist/Mdn_Link.svelte",
+      "default": "./dist/Mdn_Link.svelte",
+      "types": "./dist/Mdn_Link.svelte.d.ts"
+    },
+    "./Mdn_Logo.svelte": {
+      "svelte": "./dist/Mdn_Logo.svelte",
+      "default": "./dist/Mdn_Logo.svelte",
+      "types": "./dist/Mdn_Logo.svelte.d.ts"
+    },
     "./Package_Detail.svelte": {
       "svelte": "./dist/Package_Detail.svelte",
       "default": "./dist/Package_Detail.svelte",
