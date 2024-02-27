@@ -13,11 +13,11 @@
 <section class="prose">
 	<div>
 		<h3>the <code>--icon_size</code> variable's variants</h3>
-		<blockquote class="width_sm">
+		<aside class="width_sm">
 			unlike <code>--size_</code> variables, <code>--icon_</code> variables are in
 			<code>px</code>
 			not <code>rem</code>, so they're insensitive to browser font size
-		</blockquote>
+		</aside>
 	</div>
 </section>
 <div class="icon_sizes">

@@ -7,6 +7,7 @@
 	import {get_tome} from '$lib/tome.js';
 	import Icon_Sizes from '$routes/library/typography/Icon_Sizes.svelte';
 	import Style_Variable_Button from '$routes/Style_Variable_Button.svelte';
+	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	const LIBRARY_ITEM_NAME = 'typography';
 
@@ -53,6 +54,27 @@
 		<p>p</p>
 		<small>small</small>
 		<p>p <sub>sub</sub> p <sup>sup</sup> p</p>
+		<details>
+			<summary>show code</summary>
+			<Code
+				content={`<section class="prose">
+<p>
+	Fuz has app-like markup semantics by default, which does a hard CSS reset including removing
+	all padding and margin. The following document-like markup style is opt-in with the <Tome_Link
+		name="prose"
+	/> class.
+</p>
+<h1 title="--size_xl3">h1</h1>
+<h2 title="--size_xl2">h2</h2>
+<h3 title="--size_xl">h3</h3>
+<h4 title="--size_lg">h4</h4>
+<h5 title="--size_md">h5</h5>
+<h6 title="--size_sm">h6</h6>
+<p>p</p>
+<small>small</small>
+<p>p <sub>sub</sub> p <sup>sup</sup> p</p>`}
+			/>
+		</details>
 		<hr />
 		<!-- TODO maybe add a slider for the font weight here -->
 		{#each font_sizes as font_size (font_size.name)}
