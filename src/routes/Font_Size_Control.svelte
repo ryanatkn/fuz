@@ -4,6 +4,8 @@
 
 	// TODO @multiple publish in $lib when ready
 
+	// TODO the API is strange
+
 	export let selected_font_size = 2; // TODO improve API, is index for `'md'`
 
 	const min = 1;
