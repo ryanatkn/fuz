@@ -9,14 +9,16 @@
 </script>
 
 <Tome_Detail {tome}>
-	<section>
-		<aside>
-			The <code>.prose</code> CSS class styles HTML <Tome_Link name="elements" /> for document-like
-			presentation. The base Fuz stylesheet resets everything for app-like presentation - e.g. no margin/padding
-			- and
-			<code>.prose</code> adds back good defaults.
-		</aside>
-	</section>
+	<div class="prose">
+		<section>
+			<aside>
+				The <code>.prose</code> CSS class styles HTML <Tome_Link name="elements" /> for document-like
+				presentation. The base Fuz stylesheet resets everything for app-like presentation - e.g. no margin/padding
+				- and
+				<code>.prose</code> adds back good defaults.
+			</aside>
+		</section>
+	</div>
 	<div class="prose">
 		<section>
 			<h3><code>ul</code> inside <code>.prose</code></h3>
