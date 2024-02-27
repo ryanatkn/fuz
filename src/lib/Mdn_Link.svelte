@@ -10,7 +10,7 @@
 		: `https://developer.mozilla.org/en-US/docs/${strip_start(href, '/')}`;
 </script>
 
-<a {...$$restProps} href={final_href} class="chip"
+<a {...$$restProps} href={final_href} class="chip nowrap"
 	><span class="logo_wrapper"><Mdn_Logo /></span><slot /></a
 >
 
