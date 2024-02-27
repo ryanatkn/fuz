@@ -72,7 +72,10 @@
 <h6 title="--size_sm">h6</h6>
 <p>p</p>
 <small>small</small>
-<p>p <sub>sub</sub> p <sup>sup</sup> p</p>`}
+<p>p <sub>sub</sub> p <sup>sup</sup> p</p>
+<details>
+	<summary>show code</summary>
+	{:recurse}`}
 			/>
 		</details>
 		<hr />
