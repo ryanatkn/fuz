@@ -2,13 +2,12 @@
 	// TODO @multiple publish in $lib when ready
 
 	export let selected_font_weight = 500;
-
-	// TODO should this be the font_weight variable by default?
 </script>
 
 <label
 	><div class="title row width_full wrap">
-		font-weight = <input
+		<slot>font-weight</slot> =
+		<input
 			class="inline flex_1"
 			type="number"
 			bind:value={selected_font_weight}
