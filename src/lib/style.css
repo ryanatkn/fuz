@@ -786,44 +786,6 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories
 	margin-right: 0;
 }
 
-.padded_xs {
-	padding: var(--space_xs);
-}
-.padded_sm {
-	padding: var(--space_sm);
-}
-.padded_md {
-	padding: var(--space_md);
-}
-.padded_lg {
-	padding: var(--space_lg);
-}
-.padded_1 {
-	padding: var(--space_xl);
-}
-.padded_2 {
-	padding: var(--space_xl2);
-}
-.padded_3 {
-	padding: var(--space_xl3);
-}
-.padded_4 {
-	padding: var(--space_xl4);
-}
-.padded_5 {
-	padding: var(--space_xl5);
-}
-
-/* use `reverse` to fade out and `alternate` to flash */
-@keyframes fade-in {
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;
-	}
-}
-
 /* TODO other button variants? */
 /* TODO this is slightly strange that it doesn't use --icon_size */
 .icon_button {

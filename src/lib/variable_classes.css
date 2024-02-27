@@ -7,3 +7,31 @@
 .bg {
 	background-color: var(--bg);
 }
+
+.padded_xs {
+	padding: var(--space_xs);
+}
+.padded_sm {
+	padding: var(--space_sm);
+}
+.padded_md {
+	padding: var(--space_md);
+}
+.padded_lg {
+	padding: var(--space_lg);
+}
+.padded_1 {
+	padding: var(--space_xl);
+}
+.padded_2 {
+	padding: var(--space_xl2);
+}
+.padded_3 {
+	padding: var(--space_xl3);
+}
+.padded_4 {
+	padding: var(--space_xl4);
+}
+.padded_5 {
+	padding: var(--space_xl5);
+}
