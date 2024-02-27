@@ -13,8 +13,9 @@
 		<section>
 			<aside>
 				The <code>.prose</code> CSS class styles HTML <Tome_Link name="elements" /> for document-like
-				presentation. The base Fuz stylesheet resets everything for app-like presentation - e.g. no margin/padding
-				- and
+				presentation. The base Fuz stylesheet resets everything for app-like presentation and <Tome_Link
+					name="typography"
+				/> - e.g. no margin/padding - and
 				<code>.prose</code> adds back good defaults.
 			</aside>
 		</section>
