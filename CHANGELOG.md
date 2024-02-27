@@ -1,5 +1,13 @@
 # @ryanatkn/fuz
 
+## 0.90.0
+
+### Minor Changes
+
+- remove variables `icon_size_xl3` and `icon_size_xl4` ([#13](https://github.com/ryanatkn/fuz/pull/13))
+- rename variable pattern `xsN` from `Nxs` and `xlN` from `Nxl` ([#13](https://github.com/ryanatkn/fuz/pull/13))
+- rename `border_color_N` from `border_N` ([#13](https://github.com/ryanatkn/fuz/pull/13))
+
 ## 0.89.0
 
 ### Minor Changes
