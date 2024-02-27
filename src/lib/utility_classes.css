@@ -1,0 +1,49 @@
+/* TODO @multiple docs in library */
+
+/* TODO display_flex? more predictable+verbose or shorthand? */
+.flex {
+	display: flex;
+}
+
+.box {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+/* can be used to override the direction of a `.box` */
+.row {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+/* Makes flexboxes wrap. */
+.wrap {
+	flex-wrap: wrap;
+}
+
+/* Stops text from wrapping. */
+.nowrap {
+	white-space: nowrap;
+}
+
+/* Formats content to wrap long strings and preserve displayed whitespace. */
+.formatted {
+	overflow: hidden;
+	white-space: break-spaces;
+}
+
+.text_align_center {
+	text-align: center;
+}
+.text_align_right {
+	text-align: right;
+}
+.text_align_left {
+	text-align: left;
+}
+.text_align_justify {
+	text-align: justify;
+}
