@@ -1,9 +1,11 @@
 <script lang="ts">
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import Library_Tome_Link from '$lib/Library_Tome_Link.svelte';
 
 	import {default_variables} from '$lib/variables.js';
 	import {get_tome} from '$lib/tome.js';
 	import Icon_Sizes from '$routes/library/typography/Icon_Sizes.svelte';
+	import Style_Variable_Button from '$routes/Style_Variable_Button.svelte';
 
 	const LIBRARY_ITEM_NAME = 'typography';
 
@@ -29,10 +31,18 @@
 		'size_xl9',
 	]);
 	const font_sizes = default_variables.filter((p) => font_size_names.has(p.name));
+
+	const computed_styles = window.getComputedStyle(document.documentElement);
 </script>
 
 <Tome_Detail {tome}>
-	<section class="prose overflowing">
+	<section class="prose">
+		<p>
+			Fuz has app-like markup semantics by default, which does a hard CSS reset including removing
+			all padding and margin. The following document-like markup style is opt-in with the <Library_Tome_Link
+				name="prose"
+			/> class.
+		</p>
 		<h1 title="--size_xl3">h1</h1>
 		<h2 title="--size_xl2">h2</h2>
 		<h3 title="--size_xl">h3</h3>
@@ -42,60 +52,74 @@
 		<p>p</p>
 		<small>small</small>
 		<p>p <sub>sub</sub> p <sup>sup</sup> p</p>
+		<hr />
+		<!-- TODO maybe add a slider for the font weight here -->
 		{#each font_sizes as font_size (font_size.name)}
-			<p style:font-size="var(--{font_size.name})" title={font_size.light}>--{font_size.name}</p>
-		{/each}
-	</section>
-	<section class="prose width_full">
-		<h3>
-			sizes at each <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight"
-				><code>font-weight</code></a
+			<Style_Variable_Button title={font_size.light} name={font_size.name}
+				><span style:font-size="var(--{font_size.name})" style:font-weight="normal"
+					>{font_size.name}</span
+				></Style_Variable_Button
 			>
+		{/each}
+		<!-- TODO add a slider for the font size here -->
+		<hr />
+		<h3>
+			<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight"
+				><code>font-weight</code></a
+			> has no variables
 		</h3>
-		<div class="overflowing">
-			{#each font_weights as fontWeight (fontWeight)}
-				<div style:font-weight={fontWeight}>
-					{fontWeight}
+		<div>
+			{#each font_weights as font_weight}
+				<div style:font-weight={font_weight}>
+					{font_weight}
 				</div>
 			{/each}
-			{#each font_sizes as font_size (font_size)}
-				{#each font_weights as fontWeight (fontWeight)}
-					<div
-						class="nowrap"
-						style:font-weight={fontWeight}
-						style:--font_weight={fontWeight}
-						style:font-size={font_size.light}
-					>
-						<div title="{font_size.light} at {fontWeight} font-weight">
-							--{font_size.name}
-						</div>
-					</div>
-				{/each}
+		</div>
+		<hr />
+		<h3>text colors</h3>
+		<aside>TODO needs work</aside>
+		<div>
+			{#each {length: 3} as _, i}
+				{@const name = 'text_' + (i + 1)}
+				<Style_Variable_Button {name}
+					><span style:color="var(--{name})">
+						{name}
+					</span></Style_Variable_Button
+				>
 			{/each}
 		</div>
 	</section>
-	<section>'text_1' 'text_2' 'text_3' 'text_disabled' 'text_active'</section>
-	<section>
-		<div>line_height_1</div>
-		<div>line_height_2</div>
-		<div>line_height_3</div>
-		<div>line_height_4</div>
-		<div>line_height_5</div>
-		<div>line_height_6</div>
-		<div>line_height_7</div>
+	<!-- <section> 'text_disabled' 'text_active'</section> -->
+	<section class="prose">
+		<h3>
+			<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/line-height"
+				><code>line-height</code></a
+			> variables
+		</h3>
+		<div>
+			{#each {length: 7} as _, i}
+				{@const name = 'line_height_' + (i + 1)}
+				<p>
+					<Style_Variable_Button {name}
+						><div style:line-height="var(--{name})" class="button_contents">
+							<div>{name} - {computed_styles.getPropertyValue('--' + name)}</div>
+							<div>{name}</div>
+							<div>{name}</div>
+						</div></Style_Variable_Button
+					>
+				</p>
+			{/each}
+		</div>
 	</section>
 	<Icon_Sizes />
 </Tome_Detail>
 
 <style>
-	p {
-		white-space: nowrap;
-	}
 	section {
 		margin-bottom: var(--space_xl5);
 	}
-	.overflowing {
-		width: 100%;
-		overflow-x: auto;
+	.button_contents {
+		font-weight: normal;
+		text-align: left;
 	}
 </style>
