@@ -149,5 +149,6 @@
 	.button_contents {
 		font-weight: normal;
 		text-align: left;
+		padding: var(--space_sm) 0;
 	}
 </style>
