@@ -1,9 +1,11 @@
 <script lang="ts">
+	import Code from '@ryanatkn/fuz_code/Code.svelte';
+
 	import {fly} from 'svelte/transition';
 	import Alert from '$lib/Alert.svelte';
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import Mdn_Link from '$lib/Mdn_Link.svelte';
 	import {get_tome} from '$lib/tome.js';
-	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	const LIBRARY_ITEM_NAME = 'forms';
 
@@ -55,13 +57,9 @@
 			<form>
 				<fieldset>
 					<legend
-						>a <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/legend"
-							><code>legend</code></a
-						>
+						>a <Mdn_Link href="Web/HTML/Element/legend"><code>legend</code></Mdn_Link>
 						in a
-						<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/fieldset"
-							><code>fieldset</code></a
-						></legend
+						<Mdn_Link href="Web/HTML/Element/fieldset"><code>fieldset</code></Mdn_Link></legend
 					>
 					<label>
 						<div class="title">username</div>

@@ -3,6 +3,7 @@
 
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
 	import Tome_Link from '$lib/Tome_Link.svelte';
+	import Mdn_Link from '$lib/Mdn_Link.svelte';
 	import {get_tome} from '$lib/tome.js';
 	import {default_variables} from '$lib/variables.js';
 	import Style_Variable_Button from '$routes/Style_Variable_Button.svelte';
@@ -19,11 +20,9 @@
 <Tome_Detail {tome}>
 	<section class="prose">
 		<p>
-			Variables are <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/--*"
-				>CSS custom properties</a
-			>
-			that can be grouped into a <Tome_Link name="themes">theme</Tome_Link>. Each
-			variable can have values for light and/or dark color schemes.
+			Variables are <Mdn_Link href="Web/CSS/--*">CSS custom properties</Mdn_Link>
+			that can be grouped into a <Tome_Link name="themes">theme</Tome_Link>. Each variable can have
+			values for light and/or dark color schemes.
 		</p>
 		<p>
 			The goal of the variables system is to provide runtime theming that's efficient and ergnomic

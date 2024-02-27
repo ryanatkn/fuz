@@ -3,6 +3,7 @@
 
 	import {get_tome} from '$lib/tome.js';
 	import Redirect from '$lib/Redirect.svelte';
+	import Mdn_Link from '$lib/Mdn_Link.svelte';
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Redirect';
@@ -12,14 +13,12 @@
 <Tome_Detail {tome}>
 	<div class="prose">
 		<p class="width_sm">
-			Adds a redirect for a page using <a
-				href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Redirections#html_redirections"
-				>a meta tag</a
+			Adds a redirect for a page using <Mdn_Link href="Web/HTTP/Redirections#html_redirections"
+				>a meta tag</Mdn_Link
 			>
 			with
-			<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta#http-equiv"
-				>the <code>refresh</code> header</a
-			>. Includes a rendered link and JS navigation fallback.
+			<Mdn_Link href="Web/HTML/Element/meta#http-equiv">the <code>refresh</code> header</Mdn_Link>.
+			Includes a rendered link and JS navigation fallback.
 		</p>
 		<!-- TODO make this a generic data-driven helper -->
 		<Code content={`import Redirect from '@ryanatkn/fuz/Redirect.svelte';`} lang="ts" />

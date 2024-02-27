@@ -4,6 +4,7 @@
 	import Hue_Swatch from '$routes/library/colors/Hue_Swatch.svelte';
 	import Color_Swatch from '$routes/library/colors/Color_Swatch.svelte';
 	import Tome_Link from '$lib/Tome_Link.svelte';
+	import Mdn_Link from '$lib/Mdn_Link.svelte';
 	import Color_Scheme_Input from '$lib/Color_Scheme_Input.svelte';
 
 	const LIBRARY_ITEM_NAME = 'colors';
@@ -31,9 +32,9 @@
 	<section class="prose">
 		<h3>Color semantics</h3>
 		<p>
-			Fuz provides a palette of color and hue <Tome_Link name="variables" /> designed to support
-			concise authoring in light and dark mode, as well as straightforward <Tome_Link
-				name="themes">theming</Tome_Link
+			Fuz provides a palette of color and hue <Tome_Link name="variables" /> designed to support concise
+			authoring in light and dark mode, as well as straightforward <Tome_Link name="themes"
+				>theming</Tome_Link
 			> by both developers and end-users at runtime. The colors have more semantics than just plain values,
 			so they automatically adapt to dark mode and custom themes, at the cost of having different values
 			depending on color scheme and theme.
@@ -42,9 +43,9 @@
 		<p>
 			A color's subjective appearance depends on the context in which it's viewed, especially the
 			surrounding colors and values. Fuz's semantic colors are designed to work across color
-			schemes, so each Fuz color <Tome_Link name="variables">variable</Tome_Link> has
-			two values, one for light and one for dark mode. The exceptions are the lightest (1) and darkest
-			(9) variants, although this may change if it yields better results.
+			schemes, so each Fuz color <Tome_Link name="variables">variable</Tome_Link> has two values, one
+			for light and one for dark mode. The exceptions are the lightest (1) and darkest (9) variants,
+			although this may change if it yields better results.
 		</p>
 		<h4>Custom themes</h4>
 		<p>
@@ -66,9 +67,8 @@
 		<p>
 			For performance reasons, Fuz does not currently have an extensive set of variants, like
 			specialized states for elements or color values like "blue". Each of the 7 hues has 9 color
-			values, handling most cases, and the base colors can be customized with <a
-				href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix"
-				>the <code>color-mix</code> CSS function</a
+			values, handling most cases, and the base colors can be customized with <Mdn_Link
+				href="Web/CSS/color_value/color-mix">the <code>color-mix</code> CSS function</Mdn_Link
 			> to handle many more cases.
 		</p>
 		<p>
@@ -81,10 +81,8 @@
 	<div class="prose spaced">
 		<h3>Hue variables</h3>
 		<p>
-			Hue variables contain a single <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/hue"
-				>hue</a
-			> number. Each color variable combines a hue variable with hardcoded saturation and lightness values
-			for light and dark mode.
+			Hue variables contain a single <Mdn_Link href="Web/CSS/hue">hue</Mdn_Link> number. Each color variable
+			combines a hue variable with hardcoded saturation and lightness values for light and dark mode.
 		</p>
 		<p>
 			Hue variables therefore provide a single source of truth that's easy to theme, but to achieve

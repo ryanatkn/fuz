@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
 	import Tome_Link from '$lib/Tome_Link.svelte';
+	import Mdn_Link from '$lib/Mdn_Link.svelte';
 
 	import {default_variables} from '$lib/variables.js';
 	import {get_tome} from '$lib/tome.js';
@@ -64,9 +65,7 @@
 		<!-- TODO add a slider for the font size here -->
 		<hr />
 		<h3>
-			<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight"
-				><code>font-weight</code></a
-			> has no variables
+			<Mdn_Link href="Web/CSS/font-weight"><code>font-weight</code></Mdn_Link> has no variables
 		</h3>
 		<div>
 			{#each font_weights as font_weight}
@@ -92,9 +91,7 @@
 	<!-- <section> 'text_disabled' 'text_active'</section> -->
 	<section class="prose">
 		<h3>
-			<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/line-height"
-				><code>line-height</code></a
-			> variables
+			<Mdn_Link href="Web/CSS/line-height"><code>line-height</code></Mdn_Link> variables
 		</h3>
 		<div>
 			{#each {length: 7} as _, i}
