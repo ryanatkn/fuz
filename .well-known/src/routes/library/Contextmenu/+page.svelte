@@ -122,7 +122,7 @@
 
 	const [send, receive] = crossfade({
 		fallback: (node, _params) => {
-			const style = getComputedStyle(node);
+			const style = window.getComputedStyle(node);
 			const transform = style.transform === 'none' ? '' : style.transform;
 
 			return {
@@ -313,7 +313,7 @@
 
 <style>
 	section {
-		margin-bottom: var(--space_4xl);
+		margin-bottom: var(--space_xl4);
 	}
 	.position {
 		border-radius: var(--border_radius);

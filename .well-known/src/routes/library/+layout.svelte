@@ -70,7 +70,7 @@
 <style>
 	.layout {
 		position: relative;
-		padding-bottom: var(--space_5xl);
+		padding-bottom: var(--space_xl5);
 	}
 	.menu_wrapper {
 		position: absolute;
@@ -90,15 +90,15 @@
 		.menu_wrapper {
 			position: relative;
 			transform: none;
-			margin-bottom: var(--space_3xl);
+			margin-bottom: var(--space_xl3);
 		}
 	}
 	section {
-		padding: var(--space_2xl);
+		padding: var(--space_xl2);
 	}
 	h6 {
 		margin-bottom: var(--space_md);
-		margin-top: var(--space_3xl);
+		margin-top: var(--space_xl3);
 	}
 	h6:first-child {
 		margin-top: 0;

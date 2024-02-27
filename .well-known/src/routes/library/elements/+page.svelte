@@ -16,15 +16,15 @@
 			>
 		</blockquote>
 		<h3>
-			<span style="font-size: var(--size_3xl)">👆</span>
+			<span style="font-size: var(--size_xl3)">👆</span>
 			<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/blockquote"
 				><code>blockquote</code></a
 			>
 		</h3>
 		<h3>
-			<span style="font-size: var(--size_3xl)">👇</span>
+			<span style="font-size: var(--size_xl3)">👇</span>
 			<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/hr"><code>hr</code></a>
-			<span style="font-size: var(--size_3xl)">👈</span>
+			<span style="font-size: var(--size_xl3)">👈</span>
 			<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/code"><code>code</code></a>
 		</h3>
 	</div>

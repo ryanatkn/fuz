@@ -83,7 +83,7 @@
 			<code>button</code> with CSS class <code>.selected</code>
 		</h3>
 	</div>
-	<section style:margin-bottom="var(--space_4xl)">
+	<section style:margin-bottom="var(--space_xl4)">
 		<nav>
 			<button class:selected={selected_button === 0} on:click={() => (selected_button = 0)}>
 				button 0

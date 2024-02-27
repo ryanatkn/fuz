@@ -161,7 +161,7 @@
 		max-width: var(--max_width, var(--width_md));
 	}
 	.repo_name {
-		font-size: var(--size_2xl);
+		font-size: var(--size_xl2);
 		font-weight: 400;
 		text-align: center;
 	}
@@ -170,8 +170,8 @@
 		text-align: center;
 	}
 	.chip {
-		margin-left: var(--space_2xs);
-		margin-right: var(--space_2xs);
+		margin-left: var(--space_xs2);
+		margin-right: var(--space_xs2);
 	}
 	pre {
 		display: flex;

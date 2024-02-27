@@ -129,6 +129,6 @@
 
 <style>
 	section {
-		margin-bottom: var(--space_3xl);
+		margin-bottom: var(--space_xl3);
 	}
 </style>

@@ -99,6 +99,7 @@ export const default_variables: Style_Variable[] = [
 		color variants - using these usually means handling both light and dark mode separately -
 		the semantic variants	that handle `color-schema` automatically include `--bg_1` and `--bg_2`
 	*/
+	// TODO some of these may be too subtle, but there may be cases where it's needed so keeping them for now
 	{name: 'darken_1', light: '#0000000f', summary: '6%'},
 	{name: 'darken_2', light: '#0000001f', summary: '12%'},
 	{name: 'darken_3', light: '#00000036', summary: '21%'},
@@ -144,7 +145,7 @@ export const default_variables: Style_Variable[] = [
 	{name: 'bg_7', light: 'var(--lighten_7)', dark: 'var(--darken_7)'},
 	{name: 'bg_8', light: 'var(--lighten_8)', dark: 'var(--darken_8)'},
 	{name: 'bg_9', light: 'var(--lighten_9)', dark: 'var(--darken_9)'},
-	{name: 'bg_10', light: '#fff', dark: '#000'},
+	{name: 'bg_10', light: '#fff', dark: '#000'}, // TODO 0 variant? or remove 10? add to lighten/darken?
 	{name: 'fg_1', light: 'var(--darken_1)', dark: 'var(--lighten_1)'},
 	{name: 'fg_2', light: 'var(--darken_2)', dark: 'var(--lighten_2)'},
 	{name: 'fg_3', light: 'var(--darken_3)', dark: 'var(--lighten_3)'},
@@ -154,7 +155,7 @@ export const default_variables: Style_Variable[] = [
 	{name: 'fg_7', light: 'var(--darken_7)', dark: 'var(--lighten_7)'},
 	{name: 'fg_8', light: 'var(--darken_8)', dark: 'var(--lighten_8)'},
 	{name: 'fg_9', light: 'var(--darken_9)', dark: 'var(--lighten_9)'},
-	{name: 'fg_10', light: '#000', dark: '#fff'},
+	{name: 'fg_10', light: '#000', dark: '#fff'}, // TODO 0 variant? or remove 10? add to lighten/darken?
 	// TODO probably need more variants, 5 total?
 	/* text colors don't use alpha because it affects performance too much */
 	{name: 'text_color', light: 'var(--text_1)'},
@@ -204,14 +205,14 @@ export const default_variables: Style_Variable[] = [
 	{name: 'size_md', light: '1.6rem'},
 	{name: 'size_lg', light: '2.04rem'},
 	{name: 'size_xl', light: '2.59rem'},
-	{name: 'size_2xl', light: '3.29rem'},
-	{name: 'size_3xl', light: '4.19rem'},
-	{name: 'size_4xl', light: '5.33rem'},
-	{name: 'size_5xl', light: '6.78rem'},
-	{name: 'size_6xl', light: '8.62rem'},
-	{name: 'size_7xl', light: '10.97rem'},
-	{name: 'size_8xl', light: '13.95rem'},
-	{name: 'size_9xl', light: '17.74rem'},
+	{name: 'size_xl2', light: '3.29rem'},
+	{name: 'size_xl3', light: '4.19rem'},
+	{name: 'size_xl4', light: '5.33rem'},
+	{name: 'size_xl5', light: '6.78rem'},
+	{name: 'size_xl6', light: '8.62rem'},
+	{name: 'size_xl7', light: '10.97rem'},
+	{name: 'size_xl8', light: '13.95rem'},
+	{name: 'size_xl9', light: '17.74rem'},
 
 	/* links */
 	{name: 'link_color', light: 'hsl(var(--hue_a), 61%, 35%)', dark: 'hsl(var(--hue_a), 61%, 58%)'},
@@ -221,54 +222,56 @@ export const default_variables: Style_Variable[] = [
 	{name: 'link_active', light: 'var(--text_color)'},
 
 	/* spacings, rounded to pixels for the default 16px case */
-	{name: 'space_5xs', light: '0.1rem'},
-	{name: 'space_4xs', light: '0.2rem'},
-	{name: 'space_3xs', light: '0.3rem'},
-	{name: 'space_2xs', light: '0.4rem'},
+	{name: 'space_xs5', light: '0.1rem'},
+	{name: 'space_xs4', light: '0.2rem'},
+	{name: 'space_xs3', light: '0.3rem'},
+	{name: 'space_xs2', light: '0.4rem'},
 	{name: 'space_xs', light: '0.6rem'},
 	{name: 'space_sm', light: '0.8rem'},
 	{name: 'space_md', light: '1rem'},
 	{name: 'space_lg', light: '1.3rem'},
 	{name: 'space_xl', light: '1.6rem'},
-	{name: 'space_2xl', light: '2.1rem'},
-	{name: 'space_3xl', light: '2.6rem'},
-	{name: 'space_4xl', light: '3.3rem'},
-	{name: 'space_5xl', light: '4.2rem'},
-	{name: 'space_6xl', light: '5.4rem'},
-	{name: 'space_7xl', light: '6.9rem'},
-	{name: 'space_8xl', light: '8.7rem'},
-	{name: 'space_9xl', light: '11.1rem'},
+	{name: 'space_xl2', light: '2.1rem'},
+	{name: 'space_xl3', light: '2.6rem'},
+	{name: 'space_xl4', light: '3.3rem'},
+	{name: 'space_xl5', light: '4.2rem'},
+	{name: 'space_xl6', light: '5.4rem'},
+	{name: 'space_xl7', light: '6.9rem'},
+	{name: 'space_xl8', light: '8.7rem'},
+	{name: 'space_xl9', light: '11.1rem'},
 	{name: 'width_md', light: '800px'},
 	{name: 'width_sm', light: '320px'},
 
 	/* borders and outlines */
-	{name: 'border_color', light: 'var(--border_3)'},
+	{name: 'border_color', light: 'var(--border_color_3)'},
+	{name: 'border_style', light: 'solid'},
+	// TODO add tint vars for these?
 	{
-		name: 'border_1',
+		name: 'border_color_1',
 		light: 'hsl(var(--tint_hue), 60%, 20%, 15%)',
 		dark: 'hsl(var(--tint_hue), 60%, 80%, 85%)',
 	},
 	{
-		name: 'border_2',
+		name: 'border_color_2',
 		light: 'hsl(var(--tint_hue), 60%, 20%, 25%)',
 		dark: 'hsl(var(--tint_hue), 60%, 80%, 70%)',
 	},
 	{
-		name: 'border_3',
+		name: 'border_color_3',
 		light: 'hsl(var(--tint_hue), 60%, 20%, 35%)',
 		dark: 'hsl(var(--tint_hue), 60%, 80%, 50%)',
 	},
 	{
-		name: 'border_4',
-		light: 'hsl(var(--tint_hue), 60%, 20%, 45%)',
+		name: 'border_color_4',
+		light: 'hsl(var(--tint_hue), 60%, 20%, 50%)',
 		dark: 'hsl(var(--tint_hue), 60%, 80%, 40%)',
 	},
 	{
-		name: 'border_5',
-		light: 'hsl(var(--tint_hue), 60%, 20%, 60%)',
-		dark: 'hsl(var(--tint_hue), 60%, 80%, 30%)',
+		name: 'border_color_5',
+		light: 'hsl(var(--tint_hue), 60%, 20%, 70%)',
+		dark: 'hsl(var(--tint_hue), 60%, 80%, 25%)',
 	},
-	{name: 'border_disabled', light: 'var(--border_3)'},
+	{name: 'border_disabled', light: 'var(--border_color_3)'},
 	{name: 'border_width', light: 'var(--border_width_1)'},
 	{name: 'border_width_1', light: '1px'},
 	{name: 'border_width_2', light: '2px'},
@@ -276,7 +279,6 @@ export const default_variables: Style_Variable[] = [
 	{name: 'border_width_4', light: '4px'},
 	{name: 'border_width_5', light: '6px'},
 	{name: 'border_width_6', light: '8px'},
-	{name: 'border_style', light: 'solid'},
 	{name: 'outline_width', light: 'var(--outline_width_1)'},
 	{name: 'outline_width_1', light: '0'},
 	{name: 'outline_width_2', light: 'var(--border_width_2)'},
@@ -295,8 +297,8 @@ export const default_variables: Style_Variable[] = [
 	{name: 'input_padding_y', light: '0'},
 	{name: 'input_padding_x', light: 'var(--space_lg)'},
 	{name: 'input_width_min', light: '100px'},
-	{name: 'input_height', light: 'var(--space_5xl)'},
-	{name: 'input_height_sm', light: 'var(--space_4xl)'},
+	{name: 'input_height', light: 'var(--space_xl5)'},
+	{name: 'input_height_sm', light: 'var(--space_xl4)'},
 	{
 		name: 'input_height_inner',
 		light: 'calc(var(--input_height) - 2 * var(--border_width) - 2 * var(--input_padding_y))',
@@ -339,9 +341,7 @@ export const default_variables: Style_Variable[] = [
 	{name: 'icon_size_md', light: '48px'},
 	{name: 'icon_size_lg', light: '80px'},
 	{name: 'icon_size_xl', light: '128px'},
-	{name: 'icon_size_2xl', light: '196px'},
-	{name: 'icon_size_3xl', light: '316px'},
-	{name: 'icon_size_4xl', light: '512px'},
+	{name: 'icon_size_xl2', light: '196px'},
 
 	/* durations */
 	{name: 'duration_1', light: '0.08s'},
@@ -352,6 +352,7 @@ export const default_variables: Style_Variable[] = [
 	{name: 'duration_6', light: '3s'},
 
 	/* transparencies */
+	// TODO add one for 7 total?
 	/* TODO maybe delete these? they do help with standardizing/consistency */
 	{name: 'fade_1', light: '86%'},
 	{name: 'fade_2', light: '62%'},
@@ -362,10 +363,10 @@ export const default_variables: Style_Variable[] = [
 	{name: 'disabled_opacity', light: 'var(--fade_2)'},
 
 	/* border radii */
-	// TODO hardcoded values
+	// TODO hardcoded values - maybe have `radius_xl` or `radius_lg` be 50%?
 	{name: 'border_radius', light: 'var(--radius_md)'},
 	{name: 'radius_md', light: 'calc(var(--input_height) / 2)'},
 	{name: 'radius_sm', light: 'calc(var(--radius_md) / 1.618)'},
 	{name: 'radius_xs', light: 'calc(var(--radius_sm) / 1.618)'},
-	{name: 'radius_2xs', light: 'calc(var(--radius_xs) / 1.618)'},
+	{name: 'radius_xs2', light: 'calc(var(--radius_xs) / 1.618)'},
 ];

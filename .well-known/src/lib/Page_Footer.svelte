@@ -21,10 +21,10 @@
 
 <style>
 	footer {
-		margin: var(--space_3xl) 0;
+		margin: var(--space_xl3) 0;
 	}
 	.breadcrumb_wrapper {
 		font-size: var(--size_lg);
-		margin-top: var(--space_3xl);
+		margin-top: var(--space_xl3);
 	}
 </style>

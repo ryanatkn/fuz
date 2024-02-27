@@ -45,7 +45,7 @@
 		--icon_size: var(--icon_size_lg);
 		--icon_margin: var(--space_lg);
 		display: flex;
-		font-size: var(--size_2xl);
+		font-size: var(--size_xl2);
 		align-items: center;
 		padding: var(--space_lg);
 		width: var(--card_width);

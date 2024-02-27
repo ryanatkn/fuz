@@ -59,7 +59,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		margin-bottom: var(--space_5xl);
+		margin-bottom: var(--space_xl5);
 	}
 	menu {
 		width: 100%;
