@@ -42,7 +42,7 @@
 							{/each}
 						</div>
 						<div>
-							<span class="p_l_sm p_r_sm">=</span><code
+							<span class="pl_sm pr_sm">=</span><code
 								>{computed_styles.getPropertyValue('--' + name)}</code
 							>
 						</div>
@@ -60,7 +60,7 @@
 						<div class="border_example border_width" style:border-width="var(--{name})">
 							<Style_Variable_Button {name} />
 						</div>
-						<span class="p_l_sm p_r_sm">=</span><code
+						<span class="pl_sm pr_sm">=</span><code
 							>{computed_styles.getPropertyValue('--' + name)}</code
 						>
 					</div>
@@ -77,7 +77,7 @@
 						<div class="border_example outline_width" style:outline-width="var(--{name})">
 							<Style_Variable_Button {name} />
 						</div>
-						<span class="p_l_sm p_r_sm">=</span><code
+						<span class="pl_sm pr_sm">=</span><code
 							>{computed_styles.getPropertyValue('--' + name)}</code
 						>
 					</div>
@@ -94,7 +94,7 @@
 						<div class="border_example border_radius" style:border-radius="var(--{name})">
 							<Style_Variable_Button {name} />
 						</div>
-						<span class="p_l_sm p_r_sm">=</span><code
+						<span class="pl_sm pr_sm">=</span><code
 							>{computed_styles.getPropertyValue('--' + name)}</code
 						>
 					</div>
