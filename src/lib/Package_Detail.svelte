@@ -123,7 +123,7 @@
 						<div class="bg_3 radius_sm p_xs">
 							<a class="chip" href={source_url}>{module_name}</a>
 							{#if pkg_module?.declarations.length}
-								<ul class="declarations p_t_xs">
+								<ul class="declarations pt_xs">
 									{#each pkg_module.declarations as { name, kind }}
 										<li class="declaration chip {kind}_declaration">
 											{name}
