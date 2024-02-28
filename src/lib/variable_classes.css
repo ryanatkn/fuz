@@ -2036,6 +2036,76 @@ layout
 	margin-bottom: var(--space_xl15);
 }
 
+.gap_xs5 {
+	gap: var(--space_xs5);
+}
+.gap_xs4 {
+	gap: var(--space_xs4);
+}
+.gap_xs3 {
+	gap: var(--space_xs3);
+}
+.gap_xs2 {
+	gap: var(--space_xs2);
+}
+.gap_xs {
+	gap: var(--space_xs);
+}
+.gap_sm {
+	gap: var(--space_sm);
+}
+.gap_md {
+	gap: var(--space_md);
+}
+.gap_lg {
+	gap: var(--space_lg);
+}
+.gap_xl {
+	gap: var(--space_xl);
+}
+.gap_xl2 {
+	gap: var(--space_xl2);
+}
+.gap_xl3 {
+	gap: var(--space_xl3);
+}
+.gap_xl4 {
+	gap: var(--space_xl4);
+}
+.gap_xl5 {
+	gap: var(--space_xl5);
+}
+.gap_xl6 {
+	gap: var(--space_xl6);
+}
+.gap_xl7 {
+	gap: var(--space_xl7);
+}
+.gap_xl8 {
+	gap: var(--space_xl8);
+}
+.gap_xl9 {
+	gap: var(--space_xl9);
+}
+.gap_xl10 {
+	gap: var(--space_xl10);
+}
+.gap_xl11 {
+	gap: var(--space_xl11);
+}
+.gap_xl12 {
+	gap: var(--space_xl12);
+}
+.gap_xl13 {
+	gap: var(--space_xl13);
+}
+.gap_xl14 {
+	gap: var(--space_xl14);
+}
+.gap_xl15 {
+	gap: var(--space_xl15);
+}
+
 /*
 
 other
