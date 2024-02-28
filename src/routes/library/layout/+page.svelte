@@ -36,6 +36,7 @@
 					<div class="layout_example">
 						<div class="fill" style:width="var(--{name})" />
 						<div class="variable_wrapper"><Style_Variable_Button {name} /></div>
+						<span class="pr_sm">=</span>
 						<div class="computed_value">{computed_styles.getPropertyValue('--' + name)}</div>
 					</div>
 				{/each}
