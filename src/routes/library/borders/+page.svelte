@@ -121,6 +121,9 @@
 		margin-bottom: var(--space_xs2);
 	}
 	.border_color_outer {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
 		margin-bottom: var(--space_md);
 	}
 	.border_color_inner {
