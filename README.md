@@ -39,7 +39,7 @@ The CSS design system:
   - [`@ryanatkn/fuz/variable_classes.css`](/src/lib/variable_classes.css) - optional
   - [`@ryanatkn/fuz/animations.css`](/src/lib/animations.css) - optional
   - prefers Svelte's `<style>` for nontrivial cases,
-    and it's not nearly as featureful as Tailwind,
+    and it's not nearly as featureful as Tailwind -
     eventually it probably makes sense to have a Vite plugin to remove unused styles,
     who knows what else
 
