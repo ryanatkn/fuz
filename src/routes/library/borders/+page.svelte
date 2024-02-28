@@ -134,6 +134,9 @@
 		outline-style: solid;
 	}
 
+	.border_radii .border_example {
+		padding: var(--space_xl5) var(--space_md);
+	}
 	.border_radius {
 		background-color: var(--fg_2);
 	}
