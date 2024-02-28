@@ -65,7 +65,7 @@
 					<span class="text_align_right">homepage</span>
 					<div class="row">
 						<a
-							class="chip row ml_md"
+							class="chip row ml_xs"
 							class:selected={homepage_url === $page.url.href}
 							href={homepage_url}
 						>
@@ -83,34 +83,34 @@
 			{/if}
 			{#if repo_url}
 				<span class="text_align_right">repo</span>
-				<div class="row"><a class="chip ml_md" title="repo" href={repo_url}>{repo_name}</a></div>
+				<div class="row"><a class="chip ml_xs" title="repo" href={repo_url}>{repo_name}</a></div>
 			{/if}
 			{#if npm_url}
 				<span class="text_align_right">npm</span>
-				<div class="row"><a class="chip ml_md" title="npm" href={npm_url}>{name}</a></div>
+				<div class="row"><a class="chip ml_xs" title="npm" href={npm_url}>{name}</a></div>
 			{/if}
 			{#if changelog_url}
 				<span class="text_align_right">version</span>
 				<div class="row">
-					<a class="chip ml_md" title="version" href={changelog_url}>{version}</a>
+					<a class="chip ml_xs" title="version" href={changelog_url}>{version}</a>
 				</div>
 			{/if}
 			{#if license_url}
 				<span class="text_align_right">license</span>
 				<div class="row">
-					<a class="chip ml_md" title="license" href={license_url}>{license}</a>
+					<a class="chip ml_xs" title="license" href={license_url}>{license}</a>
 				</div>
 			{/if}
 			{#if homepage_url}
 				<span class="text_align_right">data</span>
 				<div class="row">
 					<a
-						class="chip ml_md"
+						class="chip ml_xs"
 						title="data"
 						href="{ensure_end(homepage_url, '/')}.well-known/package.json">package.json</a
 					>
 					<a
-						class="chip ml_md"
+						class="chip ml_xs"
 						title="data"
 						href="{ensure_end(homepage_url, '/')}.well-known/src.json">src.json</a
 					>
@@ -183,6 +183,7 @@
 	}
 	.grid {
 		grid-template-columns: 80px 1fr;
+		gap: var(--space_xs2);
 	}
 	pre {
 		display: flex;
