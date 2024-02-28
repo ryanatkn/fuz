@@ -17,7 +17,7 @@ text
 
 */
 
-/* TODO probably make font_family_sans and use this as an inheritable variable */
+/* TODO use this as an inheritable variable? */
 .font_family_sans {
 	font-family: var(--font_family_sans);
 }
