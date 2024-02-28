@@ -1,5 +1,21 @@
 # @ryanatkn/fuz
 
+## 0.91.0
+
+### Minor Changes
+
+- extract optional stylesheets from `style.css` ([#16](https://github.com/ryanatkn/fuz/pull/16))
+- rename `Tome_Link` from `Library_Tome_Link` ([#14](https://github.com/ryanatkn/fuz/pull/14))
+- - rename `font_family_sans` variable from `font_family` ([#16](https://github.com/ryanatkn/fuz/pull/16))
+  - remove `spaced_hz`, use `mr_lg`
+  - remove `spaced`, use `mb_lg`
+  - remove `.unspaced` and `.unspaced_hz`
+  - rename `w_100` from `width_full` and `h_100` from `height_full`
+
+### Patch Changes
+
+- add `Mdn_Link`, `Mdn_Logo`, and `$lib/variable_data.ts` ([#14](https://github.com/ryanatkn/fuz/pull/14))
+
 ## 0.90.0
 
 ### Minor Changes
