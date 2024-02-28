@@ -484,7 +484,7 @@
   - add `enable_editing` to `Theme_Input`
   - add `.formatted` CSS helper class
   - add `.chip` CSS helper class
-  - add `.spaced_hz`, `.unspaced`, and `.unspaced_hz` CSS helper classes
+  - add `.spaced`, `.unspaced`, and `.unspaced_hz` CSS helper classes
 
 ## 0.56.0
 

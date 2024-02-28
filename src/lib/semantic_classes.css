@@ -74,21 +74,6 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories
 	margin-bottom: var(--space_xs);
 }
 
-.spaced {
-	margin-bottom: var(--space_lg);
-}
-.spaced_hz {
-	margin-right: var(--space_lg);
-}
-/* the extra `.prose` selectors are needed for specificity to override the above styles */
-.unspaced,
-.prose .unspaced {
-	margin-bottom: 0;
-}
-.unspaced_hz {
-	margin-right: 0;
-}
-
 /* TODO maybe remove? */
 .selectable {
 	cursor: pointer;
