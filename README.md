@@ -32,14 +32,12 @@ The CSS design system:
     unless the gains are substantial
   - includes `.prose` to apply document-like presentation compared to the base app-like presentation
 - stylesheets:
-
   - [`@ryanatkn/fuz/style.css`](/src/lib/style.css)
   - [`@ryanatkn/fuz/theme.css`](/src/lib/theme.css) - or bring your own
   - [`@ryanatkn/fuz/semantic_classes.css`](/src/lib/semantic_classes.css) - optional
   - [`@ryanatkn/fuz/utility_classes.css`](/src/lib/utility_classes.css) - optional
   - [`@ryanatkn/fuz/variable_classes.css`](/src/lib/variable_classes.css) - optional
   - [`@ryanatkn/fuz/animations.css`](/src/lib/animations.css) - optional
-
   - prefers Svelte's `<style>` for nontrivial cases,
     so it won't be nearly as featureful as Tailwind
     eventually it probably makes sense to have a Vite plugin to remove unused styles
