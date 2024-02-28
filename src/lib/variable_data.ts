@@ -18,3 +18,5 @@ export const font_sizes = [
 export const font_size_names = font_sizes.map((s) => 'size_' + s);
 
 export const font_size_names_set = new Set(font_size_names);
+
+export const radius_sizes = ['xs3', 'xs2', 'xs', 'sm', 'md', 'lg', 'xl'];

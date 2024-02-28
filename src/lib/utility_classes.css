@@ -184,6 +184,13 @@ text
 	image-rendering: crisp-edges; /* the recommended pixel art setting according to MDN */
 }
 
+.radius_100 {
+	border-radius: 100%;
+}
+.radius_0 {
+	border-radius: 0;
+}
+
 .p_0 {
 	padding: 0;
 }

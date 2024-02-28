@@ -430,6 +430,7 @@ export const src_json = {
 				{name: 'font_sizes', kind: 'variable'},
 				{name: 'font_size_names', kind: 'variable'},
 				{name: 'font_size_names_set', kind: 'variable'},
+				{name: 'radius_sizes', kind: 'variable'},
 			],
 		},
 		'./variables.js': {

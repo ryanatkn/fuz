@@ -189,6 +189,14 @@
 	--outline_width_3: var(--border_width_1);
 	--outline_style: solid;
 	--outline_color: var(--color_a_5);
+	--border_radius: var(--radius_md);
+	--radius_xl: 5.5rem;
+	--radius_lg: 3.4rem;
+	--radius_md: 2.1rem;
+	--radius_sm: 1.3rem;
+	--radius_xs: 0.8rem;
+	--radius_xs2: 0.5rem;
+	--radius_xs3: 0.3rem;
 	--button_bg: var(--fg_1);
 	--button_bg_hover: var(--fg_2);
 	--button_bg_active: var(--bg_3);
@@ -230,11 +238,6 @@
 	--fade_5: 15%;
 	--fade_6: 9%;
 	--disabled_opacity: var(--fade_2);
-	--border_radius: var(--radius_md);
-	--radius_md: calc(var(--input_height) / 2);
-	--radius_sm: calc(var(--radius_md) / 1.618);
-	--radius_xs: calc(var(--radius_sm) / 1.618);
-	--radius_xs2: calc(var(--radius_xs) / 1.618);
 }
 :root.dark {
 	--color_a_2: hsl(var(--hue_a), 62%, 87%);

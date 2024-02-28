@@ -1,11 +1,14 @@
 <script lang="ts">
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
 	import {get_tome} from '$lib/tome.js';
+	import {radius_sizes} from '$lib/variable_data.js';
 	import Style_Variable_Button from '$routes/Style_Variable_Button.svelte';
 
 	const LIBRARY_ITEM_NAME = 'borders';
 
 	const tome = get_tome(LIBRARY_ITEM_NAME);
+
+	const computed_styles = window.getComputedStyle(document.documentElement);
 </script>
 
 <Tome_Detail {tome}>
@@ -45,8 +48,13 @@
 			<div class="border_examples border_widths">
 				{#each {length: 6} as _, i}
 					{@const name = 'border_width_' + (i + 1)}
-					<div class="border_example border_width" style:border-width="var(--{name})">
-						<Style_Variable_Button {name} />
+					<div class="row">
+						<div class="border_example border_width" style:border-width="var(--{name})">
+							<Style_Variable_Button {name} />
+						</div>
+						<span class="p_l_sm p_r_sm">=</span><code
+							>{computed_styles.getPropertyValue('--' + name)}</code
+						>
 					</div>
 				{/each}
 			</div>
@@ -57,8 +65,13 @@
 			<div class="border_examples outline_widths">
 				{#each {length: 3} as _, i}
 					{@const name = 'outline_width_' + (i + 1)}
-					<div class="border_example outline_width" style:outline-width="var(--{name})">
-						<Style_Variable_Button {name} />
+					<div class="row">
+						<div class="border_example outline_width" style:outline-width="var(--{name})">
+							<Style_Variable_Button {name} />
+						</div>
+						<span class="p_l_sm p_r_sm">=</span><code
+							>{computed_styles.getPropertyValue('--' + name)}</code
+						>
 					</div>
 				{/each}
 			</div>
@@ -67,10 +80,15 @@
 		<section>
 			<h3>Border radii</h3>
 			<div class="border_examples border_radii">
-				{#each ['xs2', 'xs', 'sm', 'md'] as radius}
+				{#each radius_sizes as radius}
 					{@const name = 'radius_' + radius}
-					<div class="border_example border_radius" style:border-radius="var(--{name})">
-						<Style_Variable_Button {name} />
+					<div class="row">
+						<div class="border_example border_radius" style:border-radius="var(--{name})">
+							<Style_Variable_Button {name} />
+						</div>
+						<span class="p_l_sm p_r_sm">=</span><code
+							>{computed_styles.getPropertyValue('--' + name)}</code
+						>
 					</div>
 				{/each}
 			</div>

@@ -286,6 +286,17 @@ export const default_variables: Style_Variable[] = [
 	{name: 'outline_style', light: 'solid'},
 	{name: 'outline_color', light: 'var(--color_a_5)'},
 
+	/* border radii */
+	// TODO hardcoded values - maybe have `radius_xl` or `radius_lg` be 50%?
+	{name: 'border_radius', light: 'var(--radius_md)'},
+	{name: 'radius_xl', light: '5.5rem'},
+	{name: 'radius_lg', light: '3.4rem'},
+	{name: 'radius_md', light: '2.1rem'},
+	{name: 'radius_sm', light: '1.3rem'},
+	{name: 'radius_xs', light: '0.8rem'},
+	{name: 'radius_xs2', light: '0.5rem'},
+	{name: 'radius_xs3', light: '0.3rem'},
+
 	/* button colors */
 	{name: 'button_bg', light: 'var(--fg_1)'},
 	{name: 'button_bg_hover', light: 'var(--fg_2)'}, // TODO keep these? what about `::before` and `::after` visuals with gradients/animations?
@@ -361,12 +372,4 @@ export const default_variables: Style_Variable[] = [
 	{name: 'fade_5', light: '15%'},
 	{name: 'fade_6', light: '9%'},
 	{name: 'disabled_opacity', light: 'var(--fade_2)'},
-
-	/* border radii */
-	// TODO hardcoded values - maybe have `radius_xl` or `radius_lg` be 50%?
-	{name: 'border_radius', light: 'var(--radius_md)'},
-	{name: 'radius_md', light: 'calc(var(--input_height) / 2)'},
-	{name: 'radius_sm', light: 'calc(var(--radius_md) / 1.618)'},
-	{name: 'radius_xs', light: 'calc(var(--radius_sm) / 1.618)'},
-	{name: 'radius_xs2', light: 'calc(var(--radius_xs) / 1.618)'},
 ];
