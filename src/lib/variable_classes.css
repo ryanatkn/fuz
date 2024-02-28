@@ -45,6 +45,34 @@ They couple variables with CSS properties.
 	background-color: var(--fg_9);
 }
 
+.bg_1 {
+	background-color: var(--bg_1);
+}
+.bg_2 {
+	background-color: var(--bg_2);
+}
+.bg_3 {
+	background-color: var(--bg_3);
+}
+.bg_4 {
+	background-color: var(--bg_4);
+}
+.bg_5 {
+	background-color: var(--bg_5);
+}
+.bg_6 {
+	background-color: var(--bg_6);
+}
+.bg_7 {
+	background-color: var(--bg_7);
+}
+.bg_8 {
+	background-color: var(--bg_8);
+}
+.bg_9 {
+	background-color: var(--bg_9);
+}
+
 /* TODO go with shorthand `p_` and `m_` probably */
 .p_xs5 {
 	padding: var(--space_xs5);
