@@ -94,7 +94,7 @@ See `variable_classes.css` for the utility classes based on the style variables.
 	flex: 1;
 }
 .grid {
-	display: flex;
+	display: grid;
 }
 
 .box {
