@@ -26,7 +26,7 @@
 	const selected_variable = set_selected_variable();
 </script>
 
-<main class="box width_full">
+<main class="box w_100">
 	<Library_Nav />
 	<div class="layout width_md">
 		<div class="menu_wrapper">
@@ -40,7 +40,7 @@
 			</div>
 		</div>
 		<Library_Panel>
-			<div class="box width_full">
+			<div class="box w_100">
 				<Package_Summary {pkg} />
 			</div>
 		</Library_Panel>
@@ -55,7 +55,7 @@
 	{#if $selected_variable}
 		<Dialog on:close={() => ($selected_variable = null)} let:close>
 			<div class="pane">
-				<div class="panel padded_lg box">
+				<div class="panel p_lg box">
 					<Style_Variable_Detail variable={$selected_variable} />
 					<br />
 					<aside>this is unfinished</aside>

@@ -21,7 +21,7 @@
 		</aside>
 	</section>
 	<section>
-		<div class="spaced">
+		<div class="mb_lg">
 			<!-- TODO make this a generic data-driven helper -->
 			<Code content={`import Teleport from '@ryanatkn/fuz/Teleport.svelte';`} lang="ts" />
 		</div>

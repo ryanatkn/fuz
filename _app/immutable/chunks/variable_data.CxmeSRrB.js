@@ -1,0 +1,1 @@
+const x=["xs","sm","md","lg","xl","xl2","xl3","xl4","xl5","xl6","xl7","xl8","xl9"],l=x.map(s=>"size_"+s),e=new Set(l),a=["xs5","xs4","xs3","xs2","xs","sm","md","lg","xl","xl2","xl3","xl4","xl5","xl6","xl7","xl8","xl9","xl10","xl11","xl12","xl13","xl14","xl15"],n=["xs3","xs2","xs","sm","md","lg","xl"];export{e as a,l as b,x as f,n as r,a as s};

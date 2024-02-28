@@ -1,11 +1,11 @@
 <script lang="ts">
 	// TODO @multiple publish in $lib when ready
 
-	export let selected_font_weight = 500;
+	export let selected_font_weight = 400;
 </script>
 
 <label
-	><div class="title row width_full wrap">
+	><div class="title row w_100 wrap">
 		<slot>font-weight</slot> =
 		<input
 			class="inline flex_1"

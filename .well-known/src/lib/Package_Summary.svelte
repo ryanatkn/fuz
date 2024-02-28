@@ -10,24 +10,24 @@
 
 <div class="package_summary">
 	<!-- TODO maybe continue this slot pattern, or maybe simplify? -->
-	<header class="spaced">
+	<header class="mb_lg">
 		<slot name="repo_name" {repo_name}><div class="repo_name">{repo_name}</div></slot>
 	</header>
 	{#if description}
 		<slot name="description" {description}
-			><blockquote class="spaced text_align_center">{description}</blockquote></slot
+			><blockquote class="mb_lg text_align_center">{description}</blockquote></slot
 		>
 	{/if}
 	{#if homepage_url}
 		<slot name="homepage_url" {homepage_url}
-			><div class="spaced">
+			><div class="mb_lg">
 				<a class="chip" class:selected={homepage_url === $page.url.href} href={homepage_url}
 					>{format_host(homepage_url)}</a
 				>
 			</div></slot
 		>
 	{/if}
-	<div class="box row spaced">
+	<div class="box row mb_lg">
 		{#if repo_url}
 			<a class="chip" href={repo_url}>repo</a>
 		{/if}

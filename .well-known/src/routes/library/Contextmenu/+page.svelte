@@ -156,7 +156,7 @@
 		]}
 	>
 		<section>
-			<div class="spaced">
+			<div class="mb_lg">
 				<Code lang="ts" content={`const contextmenu = create_contextmenu();`} />
 			</div>
 			<Code content={`<Contextmenu {contextmenu} />`} />
@@ -220,8 +220,8 @@
 			</div>
 		</section>
 	</div>
-	<div class="width_md padded_md">
-		<div class="prose padded_md panel">
+	<div class="width_md p_md">
+		<div class="prose p_md panel">
 			<h3>Expected behaviors</h3>
 			<p>
 				The <code>Contextmenu</code> overrides the system contextmenu to provide capabilities
@@ -232,9 +232,7 @@
 			<p>
 				On touch devices, we detect tap-and-hold (aka longpress) instead of simply overriding the
 				web's
-				<Mdn_Link href="Web/API/Element/contextmenu_event"
-					><code>'contextmenu'</code> event</Mdn_Link
-				>
+				<Mdn_Link href="Web/API/Element/contextmenu_event">contextmenu event</Mdn_Link>
 				because iOS does not support this web standard as of July 2023 as described in
 				<a href="https://bugs.webkit.org/show_bug.cgi?id=213953">this WebKit bug report</a>. The Fuz
 				implementation therefore has hacks that may cause corner case bugs on various devices and
@@ -289,19 +287,19 @@
 
 {#if show_about_dialog}
 	<Dialog on:close={() => (show_about_dialog = false)}>
-		<div class="pane prose padded_1 box text_align_center">
+		<div class="pane prose p_xl box text_align_center">
 			<h1>About</h1>
 			<blockquote>
 				free and open source at<br /><a href="https://github.com/ryanatkn/fuz"
 					>github.com/ryanatkn/fuz</a
 				>
 			</blockquote>
-			<code class="padded_md spaced"
+			<code class="p_md mb_lg"
 				>npm i -D <a href="https://www.npmjs.com/package/@fuz.dev/fuz_contextmenu"
 					>@fuz.dev/fuz_contextmenu</a
 				></code
 			>
-			<div class="prose padded_1 box">
+			<div class="prose p_xl box">
 				<h2>Color Scheme</h2>
 				<Color_Scheme_Input />
 				<h2>Theme</h2>

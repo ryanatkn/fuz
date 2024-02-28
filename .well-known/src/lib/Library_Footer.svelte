@@ -10,7 +10,7 @@
 	$: ({repo_url} = pkg);
 </script>
 
-<footer class="panel padded_lg">
+<footer class="panel p_lg">
 	<slot />
 	<div class="logo">
 		<a href={repo_url} rel="me"><slot name="logo"><Github_Logo /></slot></a>

@@ -26,7 +26,8 @@
 	class={classes}
 	class:inline
 	class:plain
-	on:click={() => ($selected_variable = variable ?? null)}><slot>{name}</slot></button
+	on:click={() => ($selected_variable = variable ?? null)}
+	><slot><span class="font_family_mono">{name}</span></slot></button
 >
 
 <style>

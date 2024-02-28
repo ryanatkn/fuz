@@ -23,8 +23,8 @@
 			<Code content={`<Package_Detail {pkg} />`} />
 		</section>
 	</div>
-	<section class="width_full">
-		<div class="box panel padded_md">
+	<section class="w_100">
+		<div class="box panel p_md">
 			<Package_Detail {pkg} />
 		</div>
 	</section>

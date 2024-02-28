@@ -29,7 +29,7 @@
 			<p>
 				Opacity is used to enable arbitrary stacking that visually inherits its context. Not all
 				cases are properly handled yet, and some choices are made for performance reasons, like
-				avoiding opacity on text.
+				avoiding opacity on text. (is this still a thing?)
 			</p>
 		</section>
 
@@ -90,7 +90,7 @@
 			<div class="swatch">
 				<div>
 					<div class="color" style:background-color="var(--color_a_5)"></div>
-					<small style:font-family="var(--font_family)">full opacity</small>
+					<small style:font-family="var(--font_family_sans)">full opacity</small>
 				</div>
 				{#each {length: 6} as _, i}
 					{@const name = 'fade_' + (i + 1)}
@@ -109,11 +109,11 @@
 		<section>
 			<h3>Stacking opacity</h3>
 			<Code
-				content={`<div style:background-color="var(--fg_1)" class="padded_sm">
-	<div style:background-color="var(--fg_1)" class="padded_sm">
-		<div style:background-color="var(--fg_1)" class="padded_sm">
-			<div style:background-color="var(--fg_1)" class="padded_sm">
-				<div style:background-color="var(--bg_4)" class="padded_sm">
+				content={`<div style:background-color="var(--fg_1)" class="p_sm">
+	<div style:background-color="var(--fg_1)" class="p_sm">
+		<div style:background-color="var(--fg_1)" class="p_sm">
+			<div style:background-color="var(--fg_1)" class="p_sm">
+				<div style:background-color="var(--bg_4)" class="p_sm">
 					...
 				</div>
 			</div>
@@ -121,11 +121,11 @@
 	</div>
 </div>`}
 			/>
-			<div style:background-color="var(--fg_1)" class="padded_sm">
-				<div style:background-color="var(--fg_1)" class="padded_sm">
-					<div style:background-color="var(--fg_1)" class="padded_sm">
-						<div style:background-color="var(--fg_1)" class="padded_sm">
-							<div style:background-color="var(--bg_4)" class="padded_sm">
+			<div style:background-color="var(--fg_1)" class="p_sm">
+				<div style:background-color="var(--fg_1)" class="p_sm">
+					<div style:background-color="var(--fg_1)" class="p_sm">
+						<div style:background-color="var(--fg_1)" class="p_sm">
+							<div style:background-color="var(--bg_4)" class="p_sm">
 								these variables have opacity, but notice how contrast changes with depth, creating
 								limitations
 							</div>

@@ -42,7 +42,7 @@
 
 <div class="package_detail">
 	<!-- TODO maybe continue this slot pattern, or maybe simplify? -->
-	<header class="spaced">
+	<header class="mb_lg">
 		<slot name="repo_name" {repo_name}
 			><div class="repo_name">
 				{repo_name}{#if icon}{' '}{icon}{/if}
@@ -51,63 +51,75 @@
 	</header>
 	<slot />
 	{#if description}
-		<slot name="description" {description}><div class="spaced">{description}</div></slot>
+		<slot name="description" {description}><div class="mb_lg">{description}</div></slot>
 	{/if}
 	{#if npm_url}
 		<slot name="npm_url" {npm_url}
-			><blockquote class="npm_url spaced">npm i -D {name}</blockquote></slot
+			><blockquote class="npm_url mb_lg">npm i -D {name}</blockquote></slot
 		>
 	{/if}
-	<section class="properties width_full spaced">
-		{#if homepage_url}
-			<slot name="homepage_url" {homepage_url}>
+	<section class="properties w_100 mb_lg">
+		<div class="grid mb_lg">
+			{#if homepage_url}
+				<slot name="homepage_url" {homepage_url}>
+					<span class="text_align_right">homepage</span>
+					<div class="row">
+						<a
+							class="chip row ml_xs"
+							class:selected={homepage_url === $page.url.href}
+							href={homepage_url}
+						>
+							<img
+								src="{ensure_end(homepage_url, '/')}favicon.png"
+								alt="favicon to homepage at {homepage_url}"
+								style:width="16px"
+								style:height="16px"
+								style:margin-right="var(--space_xs)"
+							/>
+							{format_host(homepage_url)}
+						</a>
+					</div>
+				</slot>
+			{/if}
+			{#if repo_url}
+				<span class="text_align_right">repo</span>
+				<div class="row"><a class="chip ml_xs" title="repo" href={repo_url}>{repo_name}</a></div>
+			{/if}
+			{#if npm_url}
+				<span class="text_align_right">npm</span>
+				<div class="row"><a class="chip ml_xs" title="npm" href={npm_url}>{name}</a></div>
+			{/if}
+			{#if changelog_url}
+				<span class="text_align_right">version</span>
 				<div class="row">
-					homepage:
-					<a class="chip row" class:selected={homepage_url === $page.url.href} href={homepage_url}>
-						<img
-							src="{ensure_end(homepage_url, '/')}favicon.png"
-							alt="favicon to homepage at {homepage_url}"
-							style:width="16px"
-							style:height="16px"
-							style:margin-right="var(--space_xs)"
-						/>
-						{format_host(homepage_url)}
-					</a>
+					<a class="chip ml_xs" title="version" href={changelog_url}>{version}</a>
 				</div>
-			</slot>
-		{/if}
-		{#if repo_url}
-			<div class="row">
-				repo: <a class="chip" title="repo" href={repo_url}>{repo_name}</a>
-			</div>
-		{/if}
-		{#if npm_url}
-			<div class="row">npm: <a class="chip" title="npm" href={npm_url}>{name}</a></div>
-		{/if}
-		{#if changelog_url}
-			<div class="row">
-				version: <a class="chip" title="version" href={changelog_url}>{version}</a>
-			</div>
-		{/if}
-		{#if license_url}
-			<div class="row">
-				license: <a class="chip" title="license" href={license_url}>{license}</a>
-			</div>
-		{/if}
-		{#if homepage_url}
-			<section class="row spaced">
-				data:
-				<a class="chip" title="data" href="{ensure_end(homepage_url, '/')}.well-known/package.json"
-					>package.json</a
-				>
-				<a class="chip" title="data" href="{ensure_end(homepage_url, '/')}.well-known/src.json"
-					>src.json</a
-				>
-			</section>
-		{/if}
+			{/if}
+			{#if license_url}
+				<span class="text_align_right">license</span>
+				<div class="row">
+					<a class="chip ml_xs" title="license" href={license_url}>{license}</a>
+				</div>
+			{/if}
+			{#if homepage_url}
+				<span class="text_align_right">data</span>
+				<div class="row">
+					<a
+						class="chip ml_xs"
+						title="data"
+						href="{ensure_end(homepage_url, '/')}.well-known/package.json">package.json</a
+					>
+					<a
+						class="chip ml_xs"
+						title="data"
+						href="{ensure_end(homepage_url, '/')}.well-known/src.json">src.json</a
+					>
+				</div>
+			{/if}
+		</div>
 	</section>
 	{#if modules && repo_url}
-		<section class="width_full spaced">
+		<section class="w_100 mb_lg">
 			<menu>
 				{#each modules as module_name, i (module_name)}
 					{@const source_url = to_source_url(repo_url, module_name)}
@@ -120,25 +132,25 @@
 						class:css={module_name.endsWith('.css')}
 						class:json={module_name.endsWith('.json')}
 					>
-						<div>
+						<div class="bg_3 radius_sm p_xs">
 							<a class="chip" href={source_url}>{module_name}</a>
+							{#if pkg_module?.declarations.length}
+								<ul class="declarations pt_xs">
+									{#each pkg_module.declarations as { name, kind }}
+										<li class="declaration chip {kind}_declaration">
+											{name}
+										</li>
+									{/each}
+								</ul>
+							{/if}
 						</div>
-						{#if pkg_module}
-							<ul class="declarations">
-								{#each pkg_module.declarations as { name, kind }}
-									<li class="declaration chip {kind}_declaration">
-										{name}
-									</li>
-								{/each}
-							</ul>
-						{/if}
 					</li>
 				{/each}
 			</menu>
 		</section>
 	{/if}
 
-	<section class="width_full spaced">
+	<section class="w_100 mb_lg">
 		<details>
 			<summary>raw data for <code>pkg: Package_Meta</code></summary>
 			<pre><code>{JSON.stringify(pkg, null, '\t')}</code></pre>
@@ -169,17 +181,14 @@
 		font-family: var(--font_family_mono);
 		text-align: center;
 	}
-	.chip {
-		margin-left: var(--space_xs2);
-		margin-right: var(--space_xs2);
+	.grid {
+		grid-template-columns: 80px 1fr;
+		gap: var(--space_xs2);
 	}
 	pre {
 		display: flex;
 		overflow: auto;
 		width: 100%;
-	}
-	.properties .row {
-		margin-bottom: var(--space_xs);
 	}
 	.module {
 		margin-bottom: var(--space_xs);
@@ -209,6 +218,8 @@
 	.declaration {
 		font-family: var(--font_family_mono);
 		font-size: var(--size_sm);
+		margin-left: var(--space_xs2);
+		margin-right: var(--space_xs2);
 	}
 	.variable_declaration {
 		color: var(--color_d_5);

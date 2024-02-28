@@ -40,7 +40,7 @@
 <!-- TODO consider making this a text input or otherwise editable directly -->
 <div class="hue_input">
 	<label class="indicator" style:--hue={hue}>
-		<div class="spaced_hz">{title}</div>
+		<div class="mr_lg">{title}</div>
 		<input class="hue" value={hue} on:input={onInput} />
 	</label>
 	<div class="minimap_wrapper">
