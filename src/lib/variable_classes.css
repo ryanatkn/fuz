@@ -90,6 +90,25 @@ text
 	font-size: var(--size_xl9);
 }
 
+.icon_size_xs {
+	font-size: var(--icon_size_xs);
+}
+.icon_size_sm {
+	font-size: var(--icon_size_sm);
+}
+.icon_size_md {
+	font-size: var(--icon_size_md);
+}
+.icon_size_lg {
+	font-size: var(--icon_size_lg);
+}
+.icon_size_xl {
+	font-size: var(--icon_size_xl);
+}
+.icon_size_xl2 {
+	font-size: var(--icon_size_xl2);
+}
+
 /*
 
 colors
