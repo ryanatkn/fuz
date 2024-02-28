@@ -152,7 +152,7 @@
 			<aside>The builtin themes need more work, but the proof of concept is ready!</aside>
 			<!-- TODO explain when exported <Code code={`<Theme_Input\n\t{themes}\n\t{selected_theme}\n/>`} /> -->
 			<div class="width_sm">
-				<Theme_Input {themes} enable_editing={true} on:edit={(e) => (editing_theme = e.detail)} />
+				<Theme_Input {themes} enable_editing={true} onedit={(t) => (editing_theme = t)} />
 			</div>
 			<button class="mb_lg" on:click={() => (show_create_theme_dialog = true)} disabled={true}
 				>create a new theme (todo)</button
