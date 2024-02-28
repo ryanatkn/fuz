@@ -1,17 +1,22 @@
 <script lang="ts">
-	import {createEventDispatcher} from 'svelte';
 	import type {Writable} from 'svelte/store';
 
 	import {swallow} from '$lib/swallow.js';
 	import {color_schemes, type Color_Scheme, get_color_scheme} from '$lib/theme.js';
 
-	const dispatch = createEventDispatcher<{select: Color_Scheme}>();
+	interface Props {
+		selected_color_scheme?: Writable<Color_Scheme | null>;
+		select?: ((color_scheme: Color_Scheme) => void | boolean) | null;
+		onselect?: (color_scheme: Color_Scheme) => void;
+	}
 
-	// TODO consider an event API to complement this
-	export let selected_color_scheme: Writable<Color_Scheme | null> = get_color_scheme();
-	export let select: ((color_scheme: Color_Scheme) => void | boolean) | null = (color_scheme) => {
-		$selected_color_scheme = color_scheme;
-	};
+	const {
+		selected_color_scheme = get_color_scheme(),
+		select = (color_scheme) => {
+			$selected_color_scheme = color_scheme;
+		},
+		onselect,
+	} = $props<Props>();
 </script>
 
 <!-- TODO maybe support menubar aria
@@ -31,7 +36,7 @@ https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/menubar_ro
 			on:click={(e) => {
 				swallow(e);
 				if (select?.(color_scheme) !== false) {
-					dispatch('select', color_scheme);
+					onselect?.(color_scheme);
 				}
 			}}
 		>
