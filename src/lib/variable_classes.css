@@ -650,7 +650,7 @@ layout
 */
 
 .p_0 {
-	padding: 0; /* TODO technically not a variable class */
+	padding: 0; /* TODO technically not a variable class, but seems to belong here */
 }
 .p_xs5 {
 	padding: var(--space_xs5);
@@ -705,7 +705,7 @@ layout
 }
 
 .p_t_0 {
-	padding-top: 0; /* TODO technically not a variable class */
+	padding-top: 0; /* TODO technically not a variable class, but seems to belong here */
 }
 .p_t_xs5 {
 	padding-top: var(--space_xs5);
@@ -760,7 +760,7 @@ layout
 }
 
 .p_r_0 {
-	padding-right: 0; /* TODO technically not a variable class */
+	padding-right: 0; /* TODO technically not a variable class, but seems to belong here */
 }
 .p_r_xs5 {
 	padding-right: var(--space_xs5);
@@ -815,7 +815,7 @@ layout
 }
 
 .p_b_0 {
-	padding-bottom: 0; /* TODO technically not a variable class */
+	padding-bottom: 0; /* TODO technically not a variable class, but seems to belong here */
 }
 .p_b_xs5 {
 	padding-bottom: var(--space_xs5);
@@ -870,7 +870,7 @@ layout
 }
 
 .p_l_0 {
-	padding-left: 0; /* TODO technically not a variable class */
+	padding-left: 0; /* TODO technically not a variable class, but seems to belong here */
 }
 .p_l_xs5 {
 	padding-left: var(--space_xs5);
@@ -925,7 +925,7 @@ layout
 }
 
 .m_0 {
-	margin: 0; /* TODO technically not a variable class */
+	margin: 0; /* TODO technically not a variable class, but seems to belong here */
 }
 .m_xs5 {
 	margin: var(--space_xs5);
@@ -980,7 +980,7 @@ layout
 }
 
 .m_t_0 {
-	margin-top: 0; /* TODO technically not a variable class */
+	margin-top: 0; /* TODO technically not a variable class, but seems to belong here */
 }
 .m_t_xs5 {
 	margin-top: var(--space_xs5);
@@ -1035,7 +1035,7 @@ layout
 }
 
 .m_r_0 {
-	margin-right: 0; /* TODO technically not a variable class */
+	margin-right: 0; /* TODO technically not a variable class, but seems to belong here */
 }
 .m_r_xs5 {
 	margin-right: var(--space_xs5);
@@ -1090,7 +1090,7 @@ layout
 }
 
 .m_b_0 {
-	margin-bottom: 0; /* TODO technically not a variable class */
+	margin-bottom: 0; /* TODO technically not a variable class, but seems to belong here */
 }
 .m_b_xs5 {
 	margin-bottom: var(--space_xs5);
@@ -1145,7 +1145,7 @@ layout
 }
 
 .m_l_0 {
-	margin-left: 0; /* TODO technically not a variable class */
+	margin-left: 0; /* TODO technically not a variable class, but seems to belong here */
 }
 .m_l_xs5 {
 	margin-left: var(--space_xs5);
