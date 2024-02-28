@@ -276,3 +276,9 @@ text
 }
 
 /* TODO fade? 0/100? */
+.fade_0 {
+	opacity: 0;
+}
+.fade_100 {
+	opacity: 1;
+}
