@@ -9,12 +9,40 @@ They couple variables with CSS properties.
 
 /* TODO vite plugin for removing unused */
 
+.bg {
+	background-color: var(--bg);
+}
+
 .fg {
 	background-color: var(--fg);
 }
 
-.bg {
-	background-color: var(--bg);
+.fg_1 {
+	background-color: var(--fg_1);
+}
+.fg_2 {
+	background-color: var(--fg_2);
+}
+.fg_3 {
+	background-color: var(--fg_3);
+}
+.fg_4 {
+	background-color: var(--fg_4);
+}
+.fg_5 {
+	background-color: var(--fg_5);
+}
+.fg_6 {
+	background-color: var(--fg_6);
+}
+.fg_7 {
+	background-color: var(--fg_7);
+}
+.fg_8 {
+	background-color: var(--fg_8);
+}
+.fg_9 {
+	background-color: var(--fg_9);
 }
 
 /* TODO go with shorthand `p_` and `m_` probably */
