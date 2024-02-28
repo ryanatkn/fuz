@@ -114,18 +114,20 @@ See `variable_classes.css` for the utility classes based on the style variables.
 /* Makes flexboxes wrap. */
 .wrap {
 	flex-wrap: wrap;
+	white-space: initial;
 }
 
 /* Stops text from wrapping. */
 .nowrap {
+	flex-wrap: nowrap;
 	white-space: nowrap;
 }
 
-/* Formats content to wrap long strings and preserve displayed whitespace. */
-.formatted {
-	overflow: hidden;
-	white-space: break-spaces;
-}
+/*
+
+text
+
+*/
 
 .text_align_center {
 	text-align: center;
@@ -138,6 +140,34 @@ See `variable_classes.css` for the utility classes based on the style variables.
 }
 .text_align_justify {
 	text-align: justify;
+}
+
+.font_weight_100 {
+	font-weight: 100;
+}
+.font_weight_200 {
+	font-weight: 200;
+}
+.font_weight_300 {
+	font-weight: 300;
+}
+.font_weight_400 {
+	font-weight: 400;
+}
+.font_weight_500 {
+	font-weight: 500;
+}
+.font_weight_600 {
+	font-weight: 600;
+}
+.font_weight_700 {
+	font-weight: 700;
+}
+.font_weight_800 {
+	font-weight: 800;
+}
+.font_weight_900 {
+	font-weight: 900;
 }
 
 .ellipsis {

@@ -124,3 +124,9 @@ By default it's opaque, resetting the background to the initial depth. */
 a.chip {
 	font-weight: 700;
 }
+
+/* Formats content to wrap long strings and preserve displayed whitespace. */
+.formatted {
+	overflow: hidden;
+	white-space: break-spaces;
+}
