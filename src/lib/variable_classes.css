@@ -8,7 +8,8 @@
 	background-color: var(--bg);
 }
 
-.padded_x5 {
+/* TODO go with shorthand `p_` and `m_` probably */
+.padded_xs5 {
 	padding: var(--space_xs5);
 }
 .padded_xs4 {
@@ -47,6 +48,18 @@
 }
 .padded_5 {
 	padding: var(--space_xl5);
+}
+.padded_6 {
+	padding: var(--space_xl6);
+}
+.padded_7 {
+	padding: var(--space_xl7);
+}
+.padded_8 {
+	padding: var(--space_xl8);
+}
+.padded_9 {
+	padding: var(--space_xl9);
 }
 
 .color_a_1 {
