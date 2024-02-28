@@ -68,6 +68,214 @@ They couple variables with CSS properties.
 	padding: var(--space_xl9);
 }
 
+.p_t_xs5 {
+	padding-top: var(--space_xs5);
+}
+.p_t_xs4 {
+	padding-top: var(--space_xs4);
+}
+.p_t_xs3 {
+	padding-top: var(--space_xs3);
+}
+.p_t_xs2 {
+	padding-top: var(--space_xs2);
+}
+.p_t_xs {
+	padding-top: var(--space_xs);
+}
+.p_t_sm {
+	padding-top: var(--space_sm);
+}
+.p_t_md {
+	padding-top: var(--space_md);
+}
+.p_t_lg {
+	padding-top: var(--space_lg);
+}
+.p_t_xl {
+	padding-top: var(--space_xl);
+}
+.p_t_xl2 {
+	padding-top: var(--space_xl2);
+}
+.p_t_xl3 {
+	padding-top: var(--space_xl3);
+}
+.p_t_xl4 {
+	padding-top: var(--space_xl4);
+}
+.p_t_xl5 {
+	padding-top: var(--space_xl5);
+}
+.p_t_xl6 {
+	padding-top: var(--space_xl6);
+}
+.p_t_xl7 {
+	padding-top: var(--space_xl7);
+}
+.p_t_xl8 {
+	padding-top: var(--space_xl8);
+}
+.p_t_xl9 {
+	padding-top: var(--space_xl9);
+}
+
+.p_r_xs5 {
+	padding-right: var(--space_xs5);
+}
+.p_r_xs4 {
+	padding-right: var(--space_xs4);
+}
+.p_r_xs3 {
+	padding-right: var(--space_xs3);
+}
+.p_r_xs2 {
+	padding-right: var(--space_xs2);
+}
+.p_r_xs {
+	padding-right: var(--space_xs);
+}
+.p_r_sm {
+	padding-right: var(--space_sm);
+}
+.p_r_md {
+	padding-right: var(--space_md);
+}
+.p_r_lg {
+	padding-right: var(--space_lg);
+}
+.p_r_xl {
+	padding-right: var(--space_xl);
+}
+.p_r_xl2 {
+	padding-right: var(--space_xl2);
+}
+.p_r_xl3 {
+	padding-right: var(--space_xl3);
+}
+.p_r_xl4 {
+	padding-right: var(--space_xl4);
+}
+.p_r_xl5 {
+	padding-right: var(--space_xl5);
+}
+.p_r_xl6 {
+	padding-right: var(--space_xl6);
+}
+.p_r_xl7 {
+	padding-right: var(--space_xl7);
+}
+.p_r_xl8 {
+	padding-right: var(--space_xl8);
+}
+.p_r_xl9 {
+	padding-right: var(--space_xl9);
+}
+
+.p_b_xs5 {
+	padding-bottom: var(--space_xs5);
+}
+.p_b_xs4 {
+	padding-bottom: var(--space_xs4);
+}
+.p_b_xs3 {
+	padding-bottom: var(--space_xs3);
+}
+.p_b_xs2 {
+	padding-bottom: var(--space_xs2);
+}
+.p_b_xs {
+	padding-bottom: var(--space_xs);
+}
+.p_b_sm {
+	padding-bottom: var(--space_sm);
+}
+.p_b_md {
+	padding-bottom: var(--space_md);
+}
+.p_b_lg {
+	padding-bottom: var(--space_lg);
+}
+.p_b_xl {
+	padding-bottom: var(--space_xl);
+}
+.p_b_xl2 {
+	padding-bottom: var(--space_xl2);
+}
+.p_b_xl3 {
+	padding-bottom: var(--space_xl3);
+}
+.p_b_xl4 {
+	padding-bottom: var(--space_xl4);
+}
+.p_b_xl5 {
+	padding-bottom: var(--space_xl5);
+}
+.p_b_xl6 {
+	padding-bottom: var(--space_xl6);
+}
+.p_b_xl7 {
+	padding-bottom: var(--space_xl7);
+}
+.p_b_xl8 {
+	padding-bottom: var(--space_xl8);
+}
+.p_b_xl9 {
+	padding-bottom: var(--space_xl9);
+}
+
+.p_l_xs5 {
+	padding-left: var(--space_xs5);
+}
+.p_l_xs4 {
+	padding-left: var(--space_xs4);
+}
+.p_l_xs3 {
+	padding-left: var(--space_xs3);
+}
+.p_l_xs2 {
+	padding-left: var(--space_xs2);
+}
+.p_l_xs {
+	padding-left: var(--space_xs);
+}
+.p_l_sm {
+	padding-left: var(--space_sm);
+}
+.p_l_md {
+	padding-left: var(--space_md);
+}
+.p_l_lg {
+	padding-left: var(--space_lg);
+}
+.p_l_xl {
+	padding-left: var(--space_xl);
+}
+.p_l_xl2 {
+	padding-left: var(--space_xl2);
+}
+.p_l_xl3 {
+	padding-left: var(--space_xl3);
+}
+.p_l_xl4 {
+	padding-left: var(--space_xl4);
+}
+.p_l_xl5 {
+	padding-left: var(--space_xl5);
+}
+.p_l_xl6 {
+	padding-left: var(--space_xl6);
+}
+.p_l_xl7 {
+	padding-left: var(--space_xl7);
+}
+.p_l_xl8 {
+	padding-left: var(--space_xl8);
+}
+.p_l_xl9 {
+	padding-left: var(--space_xl9);
+}
+
 .m_xs5 {
 	margin: var(--space_xs5);
 }
