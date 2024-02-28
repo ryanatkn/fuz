@@ -81,6 +81,9 @@ See `variable_classes.css` for the utility classes based on the style variables.
 .block {
 	display: block;
 }
+.display_none {
+	display: none;
+}
 .display_contents {
 	display: contents;
 }
@@ -89,6 +92,9 @@ See `variable_classes.css` for the utility classes based on the style variables.
 }
 .flex_1 {
 	flex: 1;
+}
+.grid {
+	display: flex;
 }
 
 .box {
