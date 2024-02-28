@@ -31,12 +31,18 @@ The CSS design system:
   - encourages plain HTML elements like `button` and `a` over Svelte components
     unless the gains are substantial
   - includes `.prose` to apply document-like presentation compared to the base app-like presentation
-- has a small set of utility and semantic classes with plans for more
+- stylesheets:
+
+  - [`@ryanatkn/fuz/style.css`](/src/lib/style.css)
+  - [`@ryanatkn/fuz/theme.css`](/src/lib/theme.css) - or bring your own
+  - [`@ryanatkn/fuz/semantic_classes.css`](/src/lib/semantic_classes.css) - optional
+  - [`@ryanatkn/fuz/utility_classes.css`](/src/lib/utility_classes.css) - optional
+  - [`@ryanatkn/fuz/variable_classes.css`](/src/lib/variable_classes.css) - optional
+  - [`@ryanatkn/fuz/animations.css`](/src/lib/animations.css) - optional
+
   - prefers Svelte's `<style>` for nontrivial cases,
     so it won't be nearly as featureful as Tailwind
-  - currently includes a single global importable `style.css`,
-    seems likely I'll extract optional CSS files instead of going hard on build tooling,
-    though eventually it probably makes sense to have a Vite plugin to remove unused styles
+    eventually it probably makes sense to have a Vite plugin to remove unused styles
 
 The Svelte components and helpers:
 
