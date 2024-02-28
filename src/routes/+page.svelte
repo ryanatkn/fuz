@@ -10,12 +10,12 @@
 	const pkg = parse_package_meta(package_json.homepage, package_json, src_json);
 </script>
 
-<main class="box width_full">
+<main class="box w_100">
 	<div class="box width_md">
 		<section class="prose box">
 			<h1>fuz</h1>
 			<blockquote>friendly user zystem</blockquote>
-			<div class="width_sm panel padded_md">
+			<div class="width_sm panel p_md">
 				<p>
 					Fuz is a Svelte UI library and CSS design system. It's in early alpha and there will be
 					many breaking changes.
@@ -38,9 +38,9 @@
 		<section>
 			<Card href="{base}/library">library<svelte:fragment slot="icon">🧶</svelte:fragment></Card>
 		</section>
-		<section class="panel padded_lg">
+		<section class="panel p_lg">
 			<!-- TODO ideally this wouldn't duplicate metadata like descriptions, but adding fuz_gitops to this repo is heavy -->
-			<h2 class="spaced">other packages</h2>
+			<h2 class="mb_lg">other packages</h2>
 			<menu>
 				<a class="chip" href="https://template.fuz.dev/">fuz_template</a>
 				<a class="chip" href="https://gitops.fuz.dev/">fuz_gitops</a>

@@ -98,6 +98,9 @@
       "default": "./dist/alert.js",
       "types": "./dist/alert.d.ts"
     },
+    "./animations.css": {
+      "default": "./dist/animations.css"
+    },
     "./Breadcrumb.svelte": {
       "svelte": "./dist/Breadcrumb.svelte",
       "default": "./dist/Breadcrumb.svelte",
@@ -263,6 +266,9 @@
       "default": "./dist/Redirect.svelte",
       "types": "./dist/Redirect.svelte.d.ts"
     },
+    "./semantic_classes.css": {
+      "default": "./dist/semantic_classes.css"
+    },
     "./style.css": {
       "default": "./dist/style.css"
     },
@@ -323,6 +329,12 @@
     "./tome.js": {
       "default": "./dist/tome.js",
       "types": "./dist/tome.d.ts"
+    },
+    "./utility_classes.css": {
+      "default": "./dist/utility_classes.css"
+    },
+    "./variable_classes.css": {
+      "default": "./dist/variable_classes.css"
     },
     "./variable_data.js": {
       "default": "./dist/variable_data.js",

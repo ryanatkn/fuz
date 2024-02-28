@@ -62,7 +62,7 @@
 			<div class="prose">
 				<p>variables: {light_count} light, {dark_count} dark</p>
 			</div>
-			<button type="button" class="width_full" on:click={add_variable}>add a variable</button>
+			<button type="button" class="w_100" on:click={add_variable}>add a variable</button>
 		</div>
 		<form>
 			<label>
@@ -97,7 +97,7 @@
 {#if selected_variable}
 	<Dialog on:close={() => (selected_variable = null)} let:close>
 		<div class="pane">
-			<div class="panel padded_lg box">
+			<div class="panel p_lg box">
 				<Style_Variable_Detail variable={selected_variable} />
 				<br />
 				<aside>this is unfinished</aside>
