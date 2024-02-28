@@ -34,31 +34,31 @@
 	padding: var(--space_lg);
 }
 /* TODO names are out of sync */
-.padded_1 {
+.padded_xl {
 	padding: var(--space_xl);
 }
-.padded_2 {
+.padded_xl2 {
 	padding: var(--space_xl2);
 }
-.padded_3 {
+.padded_xl3 {
 	padding: var(--space_xl3);
 }
-.padded_4 {
+.padded_xl4 {
 	padding: var(--space_xl4);
 }
-.padded_5 {
+.padded_xl5 {
 	padding: var(--space_xl5);
 }
-.padded_6 {
+.padded_xl6 {
 	padding: var(--space_xl6);
 }
-.padded_7 {
+.padded_xl7 {
 	padding: var(--space_xl7);
 }
-.padded_8 {
+.padded_xl8 {
 	padding: var(--space_xl8);
 }
-.padded_9 {
+.padded_xl9 {
 	padding: var(--space_xl9);
 }
 

@@ -260,7 +260,7 @@
 
 ### Patch Changes
 
-- add .padded_2-5 helper classes ([e6872f0](https://github.com/ryanatkn/fuz/commit/e6872f0))
+- add .padded_xl2-5 helper classes ([e6872f0](https://github.com/ryanatkn/fuz/commit/e6872f0))
 
 ## 0.72.0
 

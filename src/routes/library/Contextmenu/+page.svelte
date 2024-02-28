@@ -289,7 +289,7 @@
 
 {#if show_about_dialog}
 	<Dialog on:close={() => (show_about_dialog = false)}>
-		<div class="pane prose padded_1 box text_align_center">
+		<div class="pane prose padded_xl box text_align_center">
 			<h1>About</h1>
 			<blockquote>
 				free and open source at<br /><a href="https://github.com/ryanatkn/fuz"
@@ -301,7 +301,7 @@
 					>@fuz.dev/fuz_contextmenu</a
 				></code
 			>
-			<div class="prose padded_1 box">
+			<div class="prose padded_xl box">
 				<h2>Color Scheme</h2>
 				<Color_Scheme_Input />
 				<h2>Theme</h2>
