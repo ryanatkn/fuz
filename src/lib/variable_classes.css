@@ -1335,3 +1335,28 @@ layout
 .m_l_xl9 {
 	margin-left: var(--space_xl9);
 }
+
+/*
+
+other
+
+*/
+
+.fade_1 {
+	opacity: var(--fade_1);
+}
+.fade_2 {
+	opacity: var(--fade_2);
+}
+.fade_3 {
+	opacity: var(--fade_3);
+}
+.fade_4 {
+	opacity: var(--fade_4);
+}
+.fade_5 {
+	opacity: var(--fade_5);
+}
+.fade_6 {
+	opacity: var(--fade_6);
+}
