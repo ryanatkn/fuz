@@ -67,6 +67,7 @@ export const package_json = {
 			types: './dist/Alert.svelte.d.ts',
 		},
 		'./alert.js': {default: './dist/alert.js', types: './dist/alert.d.ts'},
+		'./animations.css': {default: './dist/animations.css'},
 		'./Breadcrumb.svelte': {
 			svelte: './dist/Breadcrumb.svelte',
 			default: './dist/Breadcrumb.svelte',
@@ -217,6 +218,7 @@ export const package_json = {
 			default: './dist/Redirect.svelte',
 			types: './dist/Redirect.svelte.d.ts',
 		},
+		'./semantic_classes.css': {default: './dist/semantic_classes.css'},
 		'./style.css': {default: './dist/style.css'},
 		'./swallow.js': {default: './dist/swallow.js', types: './dist/swallow.d.ts'},
 		'./Teleport.svelte': {
@@ -259,6 +261,8 @@ export const package_json = {
 			types: './dist/Tome_Title.svelte.d.ts',
 		},
 		'./tome.js': {default: './dist/tome.js', types: './dist/tome.d.ts'},
+		'./utility_classes.css': {default: './dist/utility_classes.css'},
+		'./variable_classes.css': {default: './dist/variable_classes.css'},
 		'./variable_data.js': {default: './dist/variable_data.js', types: './dist/variable_data.d.ts'},
 		'./variables.js': {default: './dist/variables.js', types: './dist/variables.d.ts'},
 	},
@@ -277,6 +281,7 @@ export const src_json = {
 				{name: 'alert_status_options', kind: 'variable'},
 			],
 		},
+		'./animations.css': {path: 'animations.css', declarations: []},
 		'./Breadcrumb.svelte': {path: 'Breadcrumb.svelte', declarations: []},
 		'./Card.svelte': {path: 'Card.svelte', declarations: []},
 		'./Color_Scheme_Input.svelte': {path: 'Color_Scheme_Input.svelte', declarations: []},
@@ -360,6 +365,7 @@ export const src_json = {
 		'./Pending_Animation.svelte': {path: 'Pending_Animation.svelte', declarations: []},
 		'./Pending_Button.svelte': {path: 'Pending_Button.svelte', declarations: []},
 		'./Redirect.svelte': {path: 'Redirect.svelte', declarations: []},
+		'./semantic_classes.css': {path: 'semantic_classes.css', declarations: []},
 		'./style.css': {path: 'style.css', declarations: []},
 		'./swallow.js': {path: 'swallow.ts', declarations: [{name: 'swallow', kind: 'function'}]},
 		'./Teleport.svelte': {path: 'Teleport.svelte', declarations: []},
@@ -416,6 +422,8 @@ export const src_json = {
 				{name: 'get_tome', kind: 'function'},
 			],
 		},
+		'./utility_classes.css': {path: 'utility_classes.css', declarations: []},
+		'./variable_classes.css': {path: 'variable_classes.css', declarations: []},
 		'./variable_data.js': {
 			path: 'variable_data.ts',
 			declarations: [
