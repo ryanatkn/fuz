@@ -679,25 +679,6 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories
 	margin-bottom: var(--space_xs);
 }
 
-.width_full {
-	width: 100%;
-}
-
-.height_full {
-	height: 100%;
-}
-
-/* TODO seems this should be colocated with `_width_full`, but it's a variable class */
-.width_md {
-	width: 100%;
-	max-width: var(--width_md);
-}
-
-.width_sm {
-	width: 100%;
-	max-width: var(--width_sm);
-}
-
 .spaced {
 	margin-bottom: var(--space_lg);
 }
