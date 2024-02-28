@@ -120,18 +120,18 @@
 						class:css={module_name.endsWith('.css')}
 						class:json={module_name.endsWith('.json')}
 					>
-						<div>
+						<div class="bg_3 radius_sm p_xs">
 							<a class="chip" href={source_url}>{module_name}</a>
+							{#if pkg_module?.declarations.length}
+								<ul class="declarations p_t_xs">
+									{#each pkg_module.declarations as { name, kind }}
+										<li class="declaration chip {kind}_declaration">
+											{name}
+										</li>
+									{/each}
+								</ul>
+							{/if}
 						</div>
-						{#if pkg_module}
-							<ul class="declarations">
-								{#each pkg_module.declarations as { name, kind }}
-									<li class="declaration chip {kind}_declaration">
-										{name}
-									</li>
-								{/each}
-							</ul>
-						{/if}
 					</li>
 				{/each}
 			</menu>
@@ -169,10 +169,6 @@
 		font-family: var(--font_family_mono);
 		text-align: center;
 	}
-	.chip {
-		margin-left: var(--space_xs2);
-		margin-right: var(--space_xs2);
-	}
 	pre {
 		display: flex;
 		overflow: auto;
@@ -209,6 +205,8 @@
 	.declaration {
 		font-family: var(--font_family_mono);
 		font-size: var(--size_sm);
+		margin-left: var(--space_xs2);
+		margin-right: var(--space_xs2);
 	}
 	.variable_declaration {
 		color: var(--color_d_5);
