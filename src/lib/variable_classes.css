@@ -714,6 +714,86 @@ layout
 
 */
 
+.w_xs {
+	width: var(--size_xs);
+}
+.w_sm {
+	width: var(--size_sm);
+}
+.w_md {
+	width: var(--size_md);
+}
+.w_lg {
+	width: var(--size_lg);
+}
+.w_xl {
+	width: var(--size_xl);
+}
+.w_xl2 {
+	width: var(--size_xl2);
+}
+.w_xl3 {
+	width: var(--size_xl3);
+}
+.w_xl4 {
+	width: var(--size_xl4);
+}
+.w_xl5 {
+	width: var(--size_xl5);
+}
+.w_xl6 {
+	width: var(--size_xl6);
+}
+.w_xl7 {
+	width: var(--size_xl7);
+}
+.w_xl8 {
+	width: var(--size_xl8);
+}
+.w_xl9 {
+	width: var(--size_xl9);
+}
+
+.h_xs {
+	height: var(--size_xs);
+}
+.h_sm {
+	height: var(--size_sm);
+}
+.h_md {
+	height: var(--size_md);
+}
+.h_lg {
+	height: var(--size_lg);
+}
+.h_xl {
+	height: var(--size_xl);
+}
+.h_xl2 {
+	height: var(--size_xl2);
+}
+.h_xl3 {
+	height: var(--size_xl3);
+}
+.h_xl4 {
+	height: var(--size_xl4);
+}
+.h_xl5 {
+	height: var(--size_xl5);
+}
+.h_xl6 {
+	height: var(--size_xl6);
+}
+.h_xl7 {
+	height: var(--size_xl7);
+}
+.h_xl8 {
+	height: var(--size_xl8);
+}
+.h_xl9 {
+	height: var(--size_xl9);
+}
+
 .p_0 {
 	padding: 0; /* TODO technically not a variable class, but seems to belong here */
 }
