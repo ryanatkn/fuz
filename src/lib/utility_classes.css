@@ -209,6 +209,15 @@ See `variable_classes.css` for the utility classes based on the style variables.
 .width_full {
 	width: 100%;
 }
-.width_0 {
+.w_0 {
+	/* TODO inconsistency */
 	width: 0;
+}
+
+.height_full {
+	height: 100%;
+}
+.h_0 {
+	/* TODO inconsistency */
+	height: 0;
 }
