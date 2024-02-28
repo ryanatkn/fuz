@@ -251,6 +251,7 @@ text
 	margin-bottom: auto;
 }
 
+/* TODO rename these? use to be columns, maybe should be? */
 .width_md {
 	width: 100%;
 	max-width: var(--width_md);
@@ -259,19 +260,18 @@ text
 	width: 100%;
 	max-width: var(--width_sm);
 }
-.width_full {
+
+.w_100 {
 	width: 100%; /* w_100 ? */
 }
 .w_0 {
-	/* TODO inconsistency */
 	width: 0;
 }
 
-.height_full {
+.h_100 {
 	height: 100%; /* h_100 ? */
 }
 .h_0 {
-	/* TODO inconsistency */
 	height: 0;
 }
 

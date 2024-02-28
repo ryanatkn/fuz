@@ -60,7 +60,7 @@
 		{/each}
 	</div>
 
-	<div class="box width_full mb_lg">
+	<div class="box w_100 mb_lg">
 		<Color_Scheme_Input />
 	</div>
 
@@ -101,7 +101,7 @@
 	<div class="prose">
 		<section>
 			<Code content={`<button class="selected">...</button>`} />
-			<button class="width_full selected">a button with the <code>.selected</code> class</button>
+			<button class="w_100 selected">a button with the <code>.selected</code> class</button>
 		</section>
 		<section>
 			<p class="width_sm">
@@ -112,13 +112,13 @@
 		</section>
 		<section>
 			<button
-				class="width_full deselectable"
+				class="w_100 deselectable"
 				class:selected={selected_deselectable_button}
 				on:click={() => (selected_deselectable_button = !selected_deselectable_button)}
 				>a <code>.deselectable</code>
 				{#if selected_deselectable_button}<code>.selected</code>{:else}unselected{/if} button</button
 			>
-			<button class="width_full selected deselectable" disabled={true}
+			<button class="w_100 selected deselectable" disabled={true}
 				>disabled <code>.deselectable</code> <code>.selected</code></button
 			>
 		</section>

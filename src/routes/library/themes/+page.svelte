@@ -254,7 +254,7 @@
 			<code>Themed</code> sets the writable stores <code>selected_theme</code>
 			and <code>selected_color_scheme</code> in the Svelte context:
 		</p>
-		<div class="width_full">
+		<div class="w_100">
 			<Code
 				content={`// get values from the Svelte context provided by
 // the nearest \`Themed\` or \`Themed_Scope\` ancestor:

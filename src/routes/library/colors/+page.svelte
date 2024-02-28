@@ -120,7 +120,7 @@
 		{/each}
 	</ul>
 	<br />
-	<div class="box width_full mb_lg">
+	<div class="box w_100 mb_lg">
 		<Color_Scheme_Input />
 	</div>
 </Tome_Detail>

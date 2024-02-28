@@ -5,7 +5,7 @@
 </script>
 
 <label
-	><div class="title row width_full wrap">
+	><div class="title row w_100 wrap">
 		<slot>font-weight</slot> =
 		<input
 			class="inline flex_1"

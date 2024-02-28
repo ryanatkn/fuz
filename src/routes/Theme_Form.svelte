@@ -62,7 +62,7 @@
 			<div class="prose">
 				<p>variables: {light_count} light, {dark_count} dark</p>
 			</div>
-			<button type="button" class="width_full" on:click={add_variable}>add a variable</button>
+			<button type="button" class="w_100" on:click={add_variable}>add a variable</button>
 		</div>
 		<form>
 			<label>

@@ -58,7 +58,7 @@
 			><blockquote class="npm_url mb_lg">npm i -D {name}</blockquote></slot
 		>
 	{/if}
-	<section class="properties width_full mb_lg">
+	<section class="properties w_100 mb_lg">
 		<div class="grid mb_lg">
 			{#if homepage_url}
 				<slot name="homepage_url" {homepage_url}>
@@ -119,7 +119,7 @@
 		</div>
 	</section>
 	{#if modules && repo_url}
-		<section class="width_full mb_lg">
+		<section class="w_100 mb_lg">
 			<menu>
 				{#each modules as module_name, i (module_name)}
 					{@const source_url = to_source_url(repo_url, module_name)}
@@ -150,7 +150,7 @@
 		</section>
 	{/if}
 
-	<section class="width_full mb_lg">
+	<section class="w_100 mb_lg">
 		<details>
 			<summary>raw data for <code>pkg: Package_Meta</code></summary>
 			<pre><code>{JSON.stringify(pkg, null, '\t')}</code></pre>

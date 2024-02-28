@@ -56,7 +56,7 @@
 
 <Tome_Detail {tome}>
 	<div slot="header"><h2>{tome.name}</h2></div>
-	<div class="prose width_full">
+	<div class="prose w_100">
 		<Code
 			content={`<button on:click={() => (opened = true)}>
 	open a dialog
