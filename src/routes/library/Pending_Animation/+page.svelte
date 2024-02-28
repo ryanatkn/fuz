@@ -33,7 +33,7 @@
 				>{#if pendingAnimation0Running}pause animation{:else}play animation{/if}</button
 			>
 			<Code
-				content={`<Pending_Animation\n\tattrs={{class: 'height_full'}}\n\trunning={${pendingAnimation0Running}}\n/>`}
+				content={`<Pending_Animation\n\tattrs={{class: 'h_100'}}\n\trunning={${pendingAnimation0Running}}\n/>`}
 			/>
 			<div
 				class="box"
@@ -42,7 +42,7 @@
 				on:click={() => (pendingAnimation0Running = !pendingAnimation0Running)}
 				role="none"
 			>
-				<Pending_Animation attrs={{class: 'height_full'}} running={pendingAnimation0Running} />
+				<Pending_Animation attrs={{class: 'h_100'}} running={pendingAnimation0Running} />
 			</div>
 		</section>
 		<section>

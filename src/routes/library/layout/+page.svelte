@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
 	import {get_tome} from '$lib/tome.js';
+	import {space_sizes} from '$lib/variable_data.js';
 	import Style_Variable_Button from '$routes/Style_Variable_Button.svelte';
 
 	const LIBRARY_ITEM_NAME = 'layout';
@@ -15,11 +16,12 @@
 		<section>
 			<h3>Spaces</h3>
 			<div>
-				{#each ['xs5', 'xs4', 'xs3', 'xs2', 'xs', 'sm', 'md', 'lg', 'xl', 'xl2', 'xl3', 'xl4', 'xl5', 'xl6', 'xl7', 'xl8', 'xl9'] as radius}
-					{@const name = 'space_' + radius}
+				{#each space_sizes as space_size}
+					{@const name = 'space_' + space_size}
 					<div class="layout_example">
 						<div class="fill" style:width="var(--{name})" />
 						<div class="variable_wrapper"><Style_Variable_Button {name} /></div>
+						<span class="pr_sm">=</span>
 						<div class="computed_value">{computed_styles.getPropertyValue('--' + name)}</div>
 					</div>
 				{/each}
@@ -34,6 +36,7 @@
 					<div class="layout_example">
 						<div class="fill" style:width="var(--{name})" />
 						<div class="variable_wrapper"><Style_Variable_Button {name} /></div>
+						<span class="pr_sm">=</span>
 						<div class="computed_value">{computed_styles.getPropertyValue('--' + name)}</div>
 					</div>
 				{/each}

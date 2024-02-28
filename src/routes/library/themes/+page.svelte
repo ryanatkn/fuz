@@ -154,7 +154,7 @@
 			<div class="width_sm">
 				<Theme_Input {themes} enable_editing={true} on:edit={(e) => (editing_theme = e.detail)} />
 			</div>
-			<button class="spaced" on:click={() => (show_create_theme_dialog = true)} disabled={true}
+			<button class="mb_lg" on:click={() => (show_create_theme_dialog = true)} disabled={true}
 				>create a new theme (todo)</button
 			>
 			<aside>
@@ -164,12 +164,12 @@
 		</div>
 	</section>
 	<section class="theme panel">
-		<div class="spaced prose">
+		<div class="mb_lg prose">
 			<h3>scoped themes</h3>
 		</div>
 		<details>
 			<summary>⚠️ scoped themes are a work in progress</summary>
-			<div class="spaced prose">
+			<div class="mb_lg prose">
 				<p>Scope a theme to one branch of the DOM tree with <code>Themed_Scope</code>:</p>
 				<Code content={`import Themed_Scope from '@ryanatkn/fuz/Themed_Scope.svelte';`} lang="ts" />
 				<Code content={`<Themed_Scope {selected_theme}>\n\t\t...\n</Themed_Scope>`} />
@@ -181,7 +181,7 @@
 					{@const selected =
 						$selected_color_scheme === 'light' && theme.name === $selected_theme.name}
 					<Themed_Scope selected_theme={writable(theme)} selected_color_scheme={writable('light')}>
-						<div class="box row padded_sm">
+						<div class="box row p_sm">
 							<button
 								type="button"
 								class="icon_button"
@@ -192,7 +192,7 @@
 								}}
 								>{#if selected}★{:else}☆{/if}</button
 							>
-							<div style:flex="1" class="padded_md">
+							<div style:flex="1" class="p_md">
 								the <code>{theme.name}</code> theme
 							</div>
 						</div>
@@ -203,7 +203,7 @@
 					{@const selected =
 						$selected_color_scheme === 'dark' && theme.name === $selected_theme.name}
 					<Themed_Scope selected_theme={writable(theme)} selected_color_scheme={writable('dark')}>
-						<div class="box row padded_sm">
+						<div class="box row p_sm">
 							<button
 								type="button"
 								class="icon_button"
@@ -214,7 +214,7 @@
 								}}
 								>{#if selected}★{:else}☆{/if}</button
 							>
-							<div style:flex="1" class="padded_md">
+							<div style:flex="1" class="p_md">
 								the <code>{theme.name}</code> theme
 							</div>
 						</div>
@@ -254,7 +254,7 @@
 			<code>Themed</code> sets the writable stores <code>selected_theme</code>
 			and <code>selected_color_scheme</code> in the Svelte context:
 		</p>
-		<div class="width_full">
+		<div class="w_100">
 			<Code
 				content={`// get values from the Svelte context provided by
 // the nearest \`Themed\` or \`Themed_Scope\` ancestor:
@@ -298,7 +298,7 @@ $selected_color_scheme; // '${$selected_color_scheme}'`}
 	</section>
 	<!-- TODO probably do this, needs colored buttons and other missing things though,
 		gets big - maybe put behind a click? or at least on the main library page? -->
-	<!-- <section class="panel prose padded_md">
+	<!-- <section class="panel prose p_md">
 		<Style_Examples />
 	</section> -->
 </Tome_Detail>
