@@ -712,7 +712,3 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories
 .unspaced_hz {
 	margin-right: 0;
 }
-
-.font_family_mono {
-	font-family: var(--font_family_mono);
-}

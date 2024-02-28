@@ -13,6 +13,20 @@ The utility classes not based on style variables are in `utility_classes.css`.
 
 /*
 
+typography
+
+*/
+
+/* TODO probably make font_family_sans and use this as an inheritable variable */
+.font_family {
+	font-family: var(--font_family);
+}
+.font_family_mono {
+	font-family: var(--font_family_mono);
+}
+
+/*
+
 colors
 
 */
