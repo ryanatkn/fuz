@@ -7,6 +7,8 @@ They couple variables with CSS properties.
 
 */
 
+/* TODO vite plugin for removing unused */
+
 .fg {
 	background-color: var(--fg);
 }
