@@ -27,17 +27,24 @@
 			<div class="border_examples border_colors">
 				{#each {length: 5} as _, i}
 					{@const name = 'border_color_' + (i + 1)}
-					<div class="border_color_wrapper">
-						<div class="border_example border_color" style:border-color="var(--{name})">
-							<Style_Variable_Button {name} />
+					<div class="border_color_outer">
+						<div class="border_color_inner">
+							<div class="border_example border_color" style:border-color="var(--{name})">
+								<Style_Variable_Button {name} />
+							</div>
+							{#each {length: 5} as _, i}
+								<div
+									class="border_color_width"
+									style:border-color="var(--{name})"
+									style:border-width="var(--{'border_width_' + (i + 2)})"
+								></div>
+							{/each}
 						</div>
-						{#each {length: 5} as _, i}
-							<div
-								class="border_color_width"
-								style:border-color="var(--{name})"
-								style:border-width="var(--{'border_width_' + (i + 2)})"
-							></div>
-						{/each}
+						<div>
+							<span class="p_l_sm p_r_sm">=</span><code
+								>{computed_styles.getPropertyValue('--' + name)}</code
+							>
+						</div>
 					</div>
 				{/each}
 			</div>
@@ -110,7 +117,13 @@
 		padding: var(--space_md);
 	}
 
-	.border_color_wrapper {
+	.border_colors .border_example {
+		margin-bottom: var(--space_xs2);
+	}
+	.border_color_outer {
+		margin-bottom: var(--space_md);
+	}
+	.border_color_inner {
 		display: flex;
 	}
 	.border_color {
@@ -121,7 +134,7 @@
 		border-style: solid;
 		padding: 2px;
 		margin-left: var(--space_xs2);
-		margin-bottom: var(--space_md);
+		margin-bottom: var(--space_xs2);
 	}
 
 	.border_width {
