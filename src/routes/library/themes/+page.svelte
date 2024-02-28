@@ -181,7 +181,7 @@
 					{@const selected =
 						$selected_color_scheme === 'light' && theme.name === $selected_theme.name}
 					<Themed_Scope selected_theme={writable(theme)} selected_color_scheme={writable('light')}>
-						<div class="box row padded_sm">
+						<div class="box row p_sm">
 							<button
 								type="button"
 								class="icon_button"
@@ -192,7 +192,7 @@
 								}}
 								>{#if selected}★{:else}☆{/if}</button
 							>
-							<div style:flex="1" class="padded_md">
+							<div style:flex="1" class="p_md">
 								the <code>{theme.name}</code> theme
 							</div>
 						</div>
@@ -203,7 +203,7 @@
 					{@const selected =
 						$selected_color_scheme === 'dark' && theme.name === $selected_theme.name}
 					<Themed_Scope selected_theme={writable(theme)} selected_color_scheme={writable('dark')}>
-						<div class="box row padded_sm">
+						<div class="box row p_sm">
 							<button
 								type="button"
 								class="icon_button"
@@ -214,7 +214,7 @@
 								}}
 								>{#if selected}★{:else}☆{/if}</button
 							>
-							<div style:flex="1" class="padded_md">
+							<div style:flex="1" class="p_md">
 								the <code>{theme.name}</code> theme
 							</div>
 						</div>
@@ -300,7 +300,7 @@ $selected_color_scheme; // '${$selected_color_scheme}'`}
 	</section>
 	<!-- TODO probably do this, needs colored buttons and other missing things though,
 		gets big - maybe put behind a click? or at least on the main library page? -->
-	<!-- <section class="panel prose padded_md">
+	<!-- <section class="panel prose p_md">
 		<Style_Examples />
 	</section> -->
 </Tome_Detail>

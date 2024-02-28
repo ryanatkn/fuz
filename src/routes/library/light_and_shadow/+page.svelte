@@ -109,11 +109,11 @@
 		<section>
 			<h3>Stacking opacity</h3>
 			<Code
-				content={`<div style:background-color="var(--fg_1)" class="padded_sm">
-	<div style:background-color="var(--fg_1)" class="padded_sm">
-		<div style:background-color="var(--fg_1)" class="padded_sm">
-			<div style:background-color="var(--fg_1)" class="padded_sm">
-				<div style:background-color="var(--bg_4)" class="padded_sm">
+				content={`<div style:background-color="var(--fg_1)" class="p_sm">
+	<div style:background-color="var(--fg_1)" class="p_sm">
+		<div style:background-color="var(--fg_1)" class="p_sm">
+			<div style:background-color="var(--fg_1)" class="p_sm">
+				<div style:background-color="var(--bg_4)" class="p_sm">
 					...
 				</div>
 			</div>
@@ -121,11 +121,11 @@
 	</div>
 </div>`}
 			/>
-			<div style:background-color="var(--fg_1)" class="padded_sm">
-				<div style:background-color="var(--fg_1)" class="padded_sm">
-					<div style:background-color="var(--fg_1)" class="padded_sm">
-						<div style:background-color="var(--fg_1)" class="padded_sm">
-							<div style:background-color="var(--bg_4)" class="padded_sm">
+			<div style:background-color="var(--fg_1)" class="p_sm">
+				<div style:background-color="var(--fg_1)" class="p_sm">
+					<div style:background-color="var(--fg_1)" class="p_sm">
+						<div style:background-color="var(--fg_1)" class="p_sm">
+							<div style:background-color="var(--bg_4)" class="p_sm">
 								these variables have opacity, but notice how contrast changes with depth, creating
 								limitations
 							</div>

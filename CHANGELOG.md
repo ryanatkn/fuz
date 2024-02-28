@@ -260,7 +260,7 @@
 
 ### Patch Changes
 
-- add .padded_xl2-5 helper classes ([e6872f0](https://github.com/ryanatkn/fuz/commit/e6872f0))
+- add .p_xl2-5 helper classes ([e6872f0](https://github.com/ryanatkn/fuz/commit/e6872f0))
 
 ## 0.72.0
 
@@ -526,7 +526,7 @@
   - rename `.centered-text` to `.text_align_center`
   - remove `.plain-button`, use `.plain` on `button` instead
   - rename `.w-full` to `.width_full` and `.h-full` to `.height_full`
-  - snake_case `.padded-X` to `.padded_X` and `.icon-button` to `.icon_button`
+  - snake_case `.padded-X` to `.p_X` and `.icon-button` to `.icon_button`
   - rename `--shadow_dark` and `--shadow_dark` to `--shadow_lg`
     and `--shadow_lg`
   - drop the `font_` from `--font_size_X` (later changed to `size_`, see below)
@@ -821,7 +821,7 @@
   - remove `.panel-outset` and `.panel-inset` - use `.panel` instead
   - remove `--panel_inset_shadow`, `--panel_outset_shadow`,
     `--panel_inset_shadow_hover` and `--panel_outset_shadow_hover`
-  - remove `--panel_padding`, `--panel_padding_sm`, and `--panel_padding_xs` -- use `--padded_X` instead
+  - remove `--panel_padding`, `--panel_padding_sm`, and `--panel_padding_xs` -- use `--p_X` instead
   - add utility classes `.centered-text`, `.padded-xs`, `.padded-sm`, and `.padded-lg`
   - add `--border_width`
   - add `--input_height_sm`

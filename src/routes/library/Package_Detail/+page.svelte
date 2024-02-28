@@ -24,7 +24,7 @@
 		</section>
 	</div>
 	<section class="width_full">
-		<div class="box panel padded_md">
+		<div class="box panel p_md">
 			<Package_Detail {pkg} />
 		</div>
 	</section>

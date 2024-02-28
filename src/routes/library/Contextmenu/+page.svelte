@@ -220,8 +220,8 @@
 			</div>
 		</section>
 	</div>
-	<div class="width_md padded_md">
-		<div class="prose padded_md panel">
+	<div class="width_md p_md">
+		<div class="prose p_md panel">
 			<h3>Expected behaviors</h3>
 			<p>
 				The <code>Contextmenu</code> overrides the system contextmenu to provide capabilities
@@ -289,19 +289,19 @@
 
 {#if show_about_dialog}
 	<Dialog on:close={() => (show_about_dialog = false)}>
-		<div class="pane prose padded_xl box text_align_center">
+		<div class="pane prose p_xl box text_align_center">
 			<h1>About</h1>
 			<blockquote>
 				free and open source at<br /><a href="https://github.com/ryanatkn/fuz"
 					>github.com/ryanatkn/fuz</a
 				>
 			</blockquote>
-			<code class="padded_md spaced"
+			<code class="p_md spaced"
 				>npm i -D <a href="https://www.npmjs.com/package/@fuz.dev/fuz_contextmenu"
 					>@fuz.dev/fuz_contextmenu</a
 				></code
 			>
-			<div class="prose padded_xl box">
+			<div class="prose p_xl box">
 				<h2>Color Scheme</h2>
 				<Color_Scheme_Input />
 				<h2>Theme</h2>
