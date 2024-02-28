@@ -120,6 +120,214 @@ They couple variables with CSS properties.
 	margin: var(--space_xl9);
 }
 
+.m_t_xs5 {
+	margin-top: var(--space_xs5);
+}
+.m_t_xs4 {
+	margin-top: var(--space_xs4);
+}
+.m_t_xs3 {
+	margin-top: var(--space_xs3);
+}
+.m_t_xs2 {
+	margin-top: var(--space_xs2);
+}
+.m_t_xs {
+	margin-top: var(--space_xs);
+}
+.m_t_sm {
+	margin-top: var(--space_sm);
+}
+.m_t_md {
+	margin-top: var(--space_md);
+}
+.m_t_lg {
+	margin-top: var(--space_lg);
+}
+.m_t_xl {
+	margin-top: var(--space_xl);
+}
+.m_t_xl2 {
+	margin-top: var(--space_xl2);
+}
+.m_t_xl3 {
+	margin-top: var(--space_xl3);
+}
+.m_t_xl4 {
+	margin-top: var(--space_xl4);
+}
+.m_t_xl5 {
+	margin-top: var(--space_xl5);
+}
+.m_t_xl6 {
+	margin-top: var(--space_xl6);
+}
+.m_t_xl7 {
+	margin-top: var(--space_xl7);
+}
+.m_t_xl8 {
+	margin-top: var(--space_xl8);
+}
+.m_t_xl9 {
+	margin-top: var(--space_xl9);
+}
+
+.m_r_xs5 {
+	margin-right: var(--space_xs5);
+}
+.m_r_xs4 {
+	margin-right: var(--space_xs4);
+}
+.m_r_xs3 {
+	margin-right: var(--space_xs3);
+}
+.m_r_xs2 {
+	margin-right: var(--space_xs2);
+}
+.m_r_xs {
+	margin-right: var(--space_xs);
+}
+.m_r_sm {
+	margin-right: var(--space_sm);
+}
+.m_r_md {
+	margin-right: var(--space_md);
+}
+.m_r_lg {
+	margin-right: var(--space_lg);
+}
+.m_r_xl {
+	margin-right: var(--space_xl);
+}
+.m_r_xl2 {
+	margin-right: var(--space_xl2);
+}
+.m_r_xl3 {
+	margin-right: var(--space_xl3);
+}
+.m_r_xl4 {
+	margin-right: var(--space_xl4);
+}
+.m_r_xl5 {
+	margin-right: var(--space_xl5);
+}
+.m_r_xl6 {
+	margin-right: var(--space_xl6);
+}
+.m_r_xl7 {
+	margin-right: var(--space_xl7);
+}
+.m_r_xl8 {
+	margin-right: var(--space_xl8);
+}
+.m_r_xl9 {
+	margin-right: var(--space_xl9);
+}
+
+.m_b_xs5 {
+	margin-bottom: var(--space_xs5);
+}
+.m_b_xs4 {
+	margin-bottom: var(--space_xs4);
+}
+.m_b_xs3 {
+	margin-bottom: var(--space_xs3);
+}
+.m_b_xs2 {
+	margin-bottom: var(--space_xs2);
+}
+.m_b_xs {
+	margin-bottom: var(--space_xs);
+}
+.m_b_sm {
+	margin-bottom: var(--space_sm);
+}
+.m_b_md {
+	margin-bottom: var(--space_md);
+}
+.m_b_lg {
+	margin-bottom: var(--space_lg);
+}
+.m_b_xl {
+	margin-bottom: var(--space_xl);
+}
+.m_b_xl2 {
+	margin-bottom: var(--space_xl2);
+}
+.m_b_xl3 {
+	margin-bottom: var(--space_xl3);
+}
+.m_b_xl4 {
+	margin-bottom: var(--space_xl4);
+}
+.m_b_xl5 {
+	margin-bottom: var(--space_xl5);
+}
+.m_b_xl6 {
+	margin-bottom: var(--space_xl6);
+}
+.m_b_xl7 {
+	margin-bottom: var(--space_xl7);
+}
+.m_b_xl8 {
+	margin-bottom: var(--space_xl8);
+}
+.m_b_xl9 {
+	margin-bottom: var(--space_xl9);
+}
+
+.m_l_xs5 {
+	margin-left: var(--space_xs5);
+}
+.m_l_xs4 {
+	margin-left: var(--space_xs4);
+}
+.m_l_xs3 {
+	margin-left: var(--space_xs3);
+}
+.m_l_xs2 {
+	margin-left: var(--space_xs2);
+}
+.m_l_xs {
+	margin-left: var(--space_xs);
+}
+.m_l_sm {
+	margin-left: var(--space_sm);
+}
+.m_l_md {
+	margin-left: var(--space_md);
+}
+.m_l_lg {
+	margin-left: var(--space_lg);
+}
+.m_l_xl {
+	margin-left: var(--space_xl);
+}
+.m_l_xl2 {
+	margin-left: var(--space_xl2);
+}
+.m_l_xl3 {
+	margin-left: var(--space_xl3);
+}
+.m_l_xl4 {
+	margin-left: var(--space_xl4);
+}
+.m_l_xl5 {
+	margin-left: var(--space_xl5);
+}
+.m_l_xl6 {
+	margin-left: var(--space_xl6);
+}
+.m_l_xl7 {
+	margin-left: var(--space_xl7);
+}
+.m_l_xl8 {
+	margin-left: var(--space_xl8);
+}
+.m_l_xl9 {
+	margin-left: var(--space_xl9);
+}
+
 .color_a_1 {
 	color: var(--color_a_1);
 }

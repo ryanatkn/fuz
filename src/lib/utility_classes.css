@@ -61,3 +61,15 @@
 	image-rendering: pixelated; /* in case crisp-edges isn't supported */
 	image-rendering: crisp-edges; /* the recommended pixel art setting according to MDN */
 }
+
+.m_auto {
+	margin: auto;
+}
+.m_x_auto {
+	margin-left: auto;
+	margin-right: auto;
+}
+.m_y_auto {
+	margin-top: auto;
+	margin-bottom: auto;
+}
