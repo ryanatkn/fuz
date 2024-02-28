@@ -1,5 +1,12 @@
 /* TODO @multiple docs in library */
 
+/*
+
+Variable classes are a specialization of utility classes.
+They couple variables with CSS properties.
+
+*/
+
 .fg {
 	background-color: var(--fg);
 }
@@ -33,7 +40,6 @@
 .padded_lg {
 	padding: var(--space_lg);
 }
-/* TODO names are out of sync */
 .padded_xl {
 	padding: var(--space_xl);
 }
