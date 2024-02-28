@@ -7,8 +7,40 @@ See `variable_classes.css` for the utility classes based on the style variables.
 */
 
 /* TODO display_flex? more predictable+verbose or shorthand? */
+
+.relative {
+	position: relative;
+}
+.absolute {
+	position: absolute;
+}
+.fixed {
+	position: fixed;
+}
+.sticky {
+	position: sticky;
+}
+.static {
+	position: static;
+}
+
+.inline {
+	display: inline;
+}
+.inline_block {
+	display: inline-block;
+}
+.block {
+	display: block;
+}
+.display_contents {
+	display: contents;
+}
 .flex {
 	display: flex;
+}
+.flex_1 {
+	flex: 1;
 }
 
 .box {
