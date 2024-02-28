@@ -649,6 +649,9 @@ layout
 
 */
 
+.p_0 {
+	padding: 0; /* TODO technically not a variable class */
+}
 .p_xs5 {
 	padding: var(--space_xs5);
 }
@@ -701,6 +704,9 @@ layout
 	padding: var(--space_xl9);
 }
 
+.p_t_0 {
+	padding-top: 0; /* TODO technically not a variable class */
+}
 .p_t_xs5 {
 	padding-top: var(--space_xs5);
 }
@@ -753,6 +759,9 @@ layout
 	padding-top: var(--space_xl9);
 }
 
+.p_r_0 {
+	padding-right: 0; /* TODO technically not a variable class */
+}
 .p_r_xs5 {
 	padding-right: var(--space_xs5);
 }
@@ -805,6 +814,9 @@ layout
 	padding-right: var(--space_xl9);
 }
 
+.p_b_0 {
+	padding-bottom: 0; /* TODO technically not a variable class */
+}
 .p_b_xs5 {
 	padding-bottom: var(--space_xs5);
 }
@@ -857,6 +869,9 @@ layout
 	padding-bottom: var(--space_xl9);
 }
 
+.p_l_0 {
+	padding-left: 0; /* TODO technically not a variable class */
+}
 .p_l_xs5 {
 	padding-left: var(--space_xs5);
 }
@@ -909,6 +924,9 @@ layout
 	padding-left: var(--space_xl9);
 }
 
+.m_0 {
+	margin: 0; /* TODO technically not a variable class */
+}
 .m_xs5 {
 	margin: var(--space_xs5);
 }
@@ -961,6 +979,9 @@ layout
 	margin: var(--space_xl9);
 }
 
+.m_t_0 {
+	margin-top: 0; /* TODO technically not a variable class */
+}
 .m_t_xs5 {
 	margin-top: var(--space_xs5);
 }
@@ -1013,6 +1034,9 @@ layout
 	margin-top: var(--space_xl9);
 }
 
+.m_r_0 {
+	margin-right: 0; /* TODO technically not a variable class */
+}
 .m_r_xs5 {
 	margin-right: var(--space_xs5);
 }
@@ -1065,6 +1089,9 @@ layout
 	margin-right: var(--space_xl9);
 }
 
+.m_b_0 {
+	margin-bottom: 0; /* TODO technically not a variable class */
+}
 .m_b_xs5 {
 	margin-bottom: var(--space_xs5);
 }
@@ -1117,6 +1144,9 @@ layout
 	margin-bottom: var(--space_xl9);
 }
 
+.m_l_0 {
+	margin-left: 0; /* TODO technically not a variable class */
+}
 .m_l_xs5 {
 	margin-left: var(--space_xs5);
 }
