@@ -1,5 +1,4 @@
 <script lang="ts">
-	import {createEventDispatcher} from 'svelte';
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	import {swallow} from '$lib/swallow.js';
@@ -12,28 +11,37 @@
 
 	// TODO should this be merged with `Theme_Input`?
 
-	const dispatch = createEventDispatcher<{save: Theme}>();
-
 	// TODO add UI to change the tint hue/saturation
 
-	export let theme: Theme | null = null; // `null` means creating
+	interface Props {
+		/**
+		 * `null` means creating
+		 */
+		theme?: Theme | null;
+		onsave?: (theme: Theme) => void;
+		// oncreate?: (theme: Theme) => void;
+	}
 
-	let new_name = theme ? theme.name : 'new theme';
-	let new_variables = theme ? theme.variables : []; // TODO `updateVariables` to `Style_Variable_Detail` ?
+	const {theme = null, onsave} = $props<Props>();
 
-	let new_theme: Theme;
-	$: new_theme = {name: new_name, variables: new_variables};
+	let new_name = $state(theme ? theme.name : 'new theme');
 
-	$: code = render_theme_style(new_theme, {empty_default_theme: false, specificity: 1});
+	let new_variables = $state(theme ? theme.variables : []); // TODO `updateVariables` to `Style_Variable_Detail` ?
 
-	$: light_count = new_variables.reduce((c, v) => (v.light ? c + 1 : c), 0);
-	$: dark_count = new_variables.reduce((c, v) => (v.dark ? c + 1 : c), 0);
+	const new_theme: Theme = $derived({name: new_name, variables: new_variables});
 
-	let selected_variable: Style_Variable | null = null;
+	const code = $derived(
+		render_theme_style(new_theme, {empty_default_theme: false, specificity: 1}),
+	);
+
+	const light_count = $derived(new_variables.reduce((c, v) => (v.light ? c + 1 : c), 0));
+	const dark_count = $derived(new_variables.reduce((c, v) => (v.dark ? c + 1 : c), 0));
+
+	let selected_variable: Style_Variable | null = $state(null);
 
 	const save = (): void => {
 		if (!changed) return;
-		dispatch('save', new_theme);
+		onsave?.(new_theme);
 	};
 
 	const edit_variable = (e: MouseEvent, variable: Style_Variable): void => {
@@ -47,8 +55,10 @@
 		alert('TODO'); // eslint-disable-line no-alert
 	};
 
-	$: editing = !!theme;
-	$: changed = theme ? new_name !== theme.name || new_variables !== theme.variables : true;
+	const editing = $derived(!!theme);
+	const changed = $derived(
+		theme ? new_name !== theme.name || new_variables !== theme.variables : true,
+	);
 </script>
 
 <div class="theme_form">
