@@ -24,6 +24,7 @@
 	<div class="prose">
 		<section>
 			<h3>Border colors</h3>
+			<aside>TODO needs work</aside>
 			<div class="border_examples border_colors">
 				{#each {length: 5} as _, i}
 					{@const name = 'border_color_' + (i + 1)}
