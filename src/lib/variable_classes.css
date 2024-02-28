@@ -129,6 +129,118 @@ They couple variables with CSS properties.
 	background-color: var(--bg_9);
 }
 
+.color_darken_1 {
+	color: var(--darken_1);
+}
+.color_darken_2 {
+	color: var(--darken_2);
+}
+.color_darken_3 {
+	color: var(--darken_3);
+}
+.color_darken_4 {
+	color: var(--darken_4);
+}
+.color_darken_5 {
+	color: var(--darken_5);
+}
+.color_darken_6 {
+	color: var(--darken_6);
+}
+.color_darken_7 {
+	color: var(--darken_7);
+}
+.color_darken_8 {
+	color: var(--darken_8);
+}
+.color_darken_9 {
+	color: var(--darken_9);
+}
+
+.color_lighten_1 {
+	color: var(--lighten_1);
+}
+.color_lighten_2 {
+	color: var(--lighten_2);
+}
+.color_lighten_3 {
+	color: var(--lighten_3);
+}
+.color_lighten_4 {
+	color: var(--lighten_4);
+}
+.color_lighten_5 {
+	color: var(--lighten_5);
+}
+.color_lighten_6 {
+	color: var(--lighten_6);
+}
+.color_lighten_7 {
+	color: var(--lighten_7);
+}
+.color_lighten_8 {
+	color: var(--lighten_8);
+}
+.color_lighten_9 {
+	color: var(--lighten_9);
+}
+
+.color_fg_1 {
+	color: var(--fg_1);
+}
+.color_fg_2 {
+	color: var(--fg_2);
+}
+.color_fg_3 {
+	color: var(--fg_3);
+}
+.color_fg_4 {
+	color: var(--fg_4);
+}
+.color_fg_5 {
+	color: var(--fg_5);
+}
+.color_fg_6 {
+	color: var(--fg_6);
+}
+.color_fg_7 {
+	color: var(--fg_7);
+}
+.color_fg_8 {
+	color: var(--fg_8);
+}
+.color_fg_9 {
+	color: var(--fg_9);
+}
+
+.color_bg_1 {
+	color: var(--bg_1);
+}
+.color_bg_2 {
+	color: var(--bg_2);
+}
+.color_bg_3 {
+	color: var(--bg_3);
+}
+.color_bg_4 {
+	color: var(--bg_4);
+}
+.color_bg_5 {
+	color: var(--bg_5);
+}
+.color_bg_6 {
+	color: var(--bg_6);
+}
+.color_bg_7 {
+	color: var(--bg_7);
+}
+.color_bg_8 {
+	color: var(--bg_8);
+}
+.color_bg_9 {
+	color: var(--bg_9);
+}
+
 /* TODO go with shorthand `p_` and `m_` probably */
 .p_xs5 {
 	padding: var(--space_xs5);
