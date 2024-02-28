@@ -328,6 +328,28 @@ colors
 	color: var(--bg_9);
 }
 
+.hue_a {
+	--hue: var(--hue_a);
+}
+.hue_b {
+	--hue: var(--hue_b);
+}
+.hue_c {
+	--hue: var(--hue_c);
+}
+.hue_d {
+	--hue: var(--hue_d);
+}
+.hue_e {
+	--hue: var(--hue_e);
+}
+.hue_f {
+	--hue: var(--hue_f);
+}
+.hue_g {
+	--hue: var(--hue_g);
+}
+
 .color_a_1 {
 	color: var(--color_a_1);
 }
