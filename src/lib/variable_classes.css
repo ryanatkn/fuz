@@ -96,6 +96,16 @@ colors
 
 */
 
+.text_1 {
+	color: var(--text_1);
+}
+.text_2 {
+	color: var(--text_2);
+}
+.text_3 {
+	color: var(--text_3);
+}
+
 .bg {
 	background-color: var(--bg);
 }
