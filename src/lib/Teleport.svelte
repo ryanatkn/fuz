@@ -1,23 +1,30 @@
 <script lang="ts">
-	import {onDestroy, createEventDispatcher} from 'svelte';
+	import {onDestroy} from 'svelte';
 
-	const dispatch = createEventDispatcher<{move: {el: HTMLElement; to: HTMLElement}}>();
+	interface Props {
+		/**
+		 * Defaults to `undefined` to lessen friction with SSR.
+		 * We may want to change this to optionally accept a string selector,
+		 * but that didn't seem to be the best API for the `Dialog`.
+		 */
+		to?: HTMLElement | undefined | null;
+		onmove?: (el: HTMLElement, to: HTMLElement) => void;
+	}
 
-	// Defaults to `undefined` to lessen friction with SSR.
-	// We may want to change this to optionally accept a string selector,
-	// but that didn't seem to be the best API for the `Dialog`.
-	export let to: HTMLElement | undefined | null;
+	const {to, onmove} = $props<Props>();
 
-	let el: HTMLElement | undefined | null;
+	let el: HTMLElement | undefined | null = $state();
 
-	$: el && to && move(el, to);
+	$effect(() => {
+		el && to && move(el, to);
+	});
 
-	let moved = false;
+	let moved = $state(false);
 
 	const move = (el: HTMLElement, to: HTMLElement): void => {
 		moved = true;
 		to.appendChild(el);
-		dispatch('move', {el, to});
+		onmove?.(el, to);
 	};
 
 	onDestroy(() => {

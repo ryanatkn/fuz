@@ -52,6 +52,8 @@
 <style>
 	.teleports {
 		display: flex;
+		gap: var(--space_sm);
+		margin-bottom: var(--space_sm);
 	}
 	.teleports > div {
 		width: var(--space_xl8);
