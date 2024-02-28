@@ -41,7 +41,7 @@ html.dark {
 body {
 	min-height: 100vh;
 	font-size: 1.6rem; /* same value as the default `--size_md`, but this one shouldn't vary */
-	font-family: var(--font_family);
+	font-family: var(--font_family_sans);
 }
 
 ::selection {

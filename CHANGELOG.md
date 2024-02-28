@@ -240,7 +240,7 @@
 
   - set base `--line_height` to `normal` and override for `.prose` and some elements
   - set height for `body` to `100vh`
-  - simplify default `--font_family`
+  - simplify default `--font_family_sans`
 
 ### Patch Changes
 

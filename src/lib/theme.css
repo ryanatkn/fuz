@@ -128,7 +128,7 @@
 	--line_height_5: 1.5;
 	--line_height_6: 1.75;
 	--line_height_7: 2;
-	--font_family: system-ui, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+	--font_family_sans: system-ui, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
 		'Noto Color Emoji'; /* @source https://kilianvalkhof.com/2022/css-html/your-css-reset-needs-text-size-adjust-probably/ */
 	--font_family_mono: ui-monospace, 'Fira Mono', monospace;
 	--size_xs: 1rem;

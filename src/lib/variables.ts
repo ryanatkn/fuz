@@ -453,8 +453,8 @@ export const line_height_4: Style_Variable = {name: 'line_height_4', light: '1.3
 export const line_height_5: Style_Variable = {name: 'line_height_5', light: '1.5'};
 export const line_height_6: Style_Variable = {name: 'line_height_6', light: '1.75'};
 export const line_height_7: Style_Variable = {name: 'line_height_7', light: '2'};
-export const font_family: Style_Variable = {
-	name: 'font_family',
+export const font_family_sans: Style_Variable = {
+	name: 'font_family_sans',
 	light: "system-ui, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'",
 	summary:
 		'@source https://kilianvalkhof.com/2022/css-html/your-css-reset-needs-text-size-adjust-probably/',
@@ -820,7 +820,7 @@ export const default_variables: Style_Variable[] = [
 	line_height_5,
 	line_height_6,
 	line_height_7,
-	font_family,
+	font_family_sans,
 	font_family_mono,
 
 	/* sizes like font-size */

@@ -72,6 +72,6 @@
 		display: flex;
 	}
 	.description {
-		font-family: var(--font_family);
+		font-family: var(--font_family_sans);
 	}
 </style>

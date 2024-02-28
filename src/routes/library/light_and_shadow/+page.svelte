@@ -90,7 +90,7 @@
 			<div class="swatch">
 				<div>
 					<div class="color" style:background-color="var(--color_a_5)"></div>
-					<small style:font-family="var(--font_family)">full opacity</small>
+					<small style:font-family="var(--font_family_sans)">full opacity</small>
 				</div>
 				{#each {length: 6} as _, i}
 					{@const name = 'fade_' + (i + 1)}

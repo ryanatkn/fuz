@@ -24,7 +24,7 @@
 	const computed_styles = window.getComputedStyle(document.documentElement);
 
 	// TODO selected_font_family
-	let selected_font_weight = 500;
+	let selected_font_weight = 400;
 	let selected_font_size = 3;
 </script>
 
@@ -80,8 +80,10 @@
 		{#each font_sizes as font_size (font_size.name)}
 			<div class="row wrap">
 				<Style_Variable_Button title={font_size.light} name={font_size.name}
-					><span style:font-size="var(--{font_size.name})" style:font-weight={selected_font_weight}
-						>{font_size.name}</span
+					><span
+						style:font-size="var(--{font_size.name})"
+						style:font-weight={selected_font_weight}
+						class="font_family_sans">{font_size.name}</span
 					></Style_Variable_Button
 				>
 				<div class="row">
