@@ -23,6 +23,7 @@
 
 	const computed_styles = window.getComputedStyle(document.documentElement);
 
+	// TODO selected_font_family
 	let selected_font_weight = 500;
 	let selected_font_size = 3;
 </script>
