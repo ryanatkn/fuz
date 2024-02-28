@@ -514,6 +514,12 @@ export const space_xl6: Style_Variable = {name: 'space_xl6', light: '5.4rem'};
 export const space_xl7: Style_Variable = {name: 'space_xl7', light: '6.9rem'};
 export const space_xl8: Style_Variable = {name: 'space_xl8', light: '8.7rem'};
 export const space_xl9: Style_Variable = {name: 'space_xl9', light: '11.1rem'};
+export const space_xl10: Style_Variable = {name: 'space_xl10', light: '14.1rem'};
+export const space_xl11: Style_Variable = {name: 'space_xl11', light: '17.9rem'};
+export const space_xl12: Style_Variable = {name: 'space_xl12', light: '22.8rem'};
+export const space_xl13: Style_Variable = {name: 'space_xl13', light: '29rem'};
+export const space_xl14: Style_Variable = {name: 'space_xl14', light: '36.9rem'};
+export const space_xl15: Style_Variable = {name: 'space_xl15', light: '47rem'};
 export const width_md: Style_Variable = {name: 'width_md', light: '800px'};
 export const width_sm: Style_Variable = {name: 'width_sm', light: '320px'};
 
@@ -839,7 +845,7 @@ export const default_variables: Style_Variable[] = [
 	text_decoration_selected,
 	link_active,
 
-	/* spacings, rounded to pixels for the default 16px case */
+	/* space, rounded to pixels for the default 16px case */
 	space_xs5,
 	space_xs4,
 	space_xs3,
@@ -857,6 +863,12 @@ export const default_variables: Style_Variable[] = [
 	space_xl7,
 	space_xl8,
 	space_xl9,
+	space_xl10,
+	space_xl11,
+	space_xl12,
+	space_xl13,
+	space_xl14,
+	space_xl15,
 	width_md,
 	width_sm,
 
