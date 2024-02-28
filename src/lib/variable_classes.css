@@ -3,7 +3,9 @@
 /*
 
 Variable classes are a specialization of utility classes.
-They couple variables with CSS properties.
+They couple style variables with CSS properties.
+
+The utility classes not based on style variables are in `utility_classes.css`.
 
 */
 

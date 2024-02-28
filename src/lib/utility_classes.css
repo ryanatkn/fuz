@@ -1,5 +1,11 @@
 /* TODO @multiple docs in library */
 
+/*
+
+See `variable_classes.css` for the utility classes based on the style variables.
+
+*/
+
 /* TODO display_flex? more predictable+verbose or shorthand? */
 .flex {
 	display: flex;
