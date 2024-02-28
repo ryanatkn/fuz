@@ -125,14 +125,6 @@ colors
 	color: var(--text_3);
 }
 
-.bg {
-	background-color: var(--bg);
-}
-
-.fg {
-	background-color: var(--fg);
-}
-
 .darken_1 {
 	background-color: var(--darken_1);
 }
@@ -187,6 +179,14 @@ colors
 }
 .lighten_9 {
 	background-color: var(--lighten_9);
+}
+
+.bg {
+	background-color: var(--bg);
+}
+
+.fg {
+	background-color: var(--fg);
 }
 
 .fg_1 {
@@ -299,6 +299,14 @@ colors
 }
 .color_lighten_9 {
 	color: var(--lighten_9);
+}
+
+.color_bg {
+	color: var(--bg);
+}
+
+.color_fg {
+	color: var(--fg);
 }
 
 .color_fg_1 {
