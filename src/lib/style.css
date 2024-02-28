@@ -714,30 +714,6 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories
 	margin-bottom: var(--space_xs);
 }
 
-/* TODO maybe remove? */
-.selectable {
-	cursor: pointer;
-	background-color: var(--button_bg);
-	border-color: var(--border_color_3);
-	border-style: var(--border_style);
-	border-width: var(--border_width);
-}
-.selectable:hover {
-	background-color: var(--button_bg_hover);
-	border-color: var(--border_color_2);
-}
-.selectable.selected,
-.selectable:active {
-	background-color: var(--button_bg_active);
-	border-color: var(--color_a_5);
-}
-.selectable.selected {
-	cursor: default;
-}
-.selectable.selected.deselectable:not(:disabled) {
-	cursor: pointer;
-}
-
 .width_full {
 	width: 100%;
 }
