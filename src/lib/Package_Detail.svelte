@@ -63,7 +63,11 @@
 			<slot name="homepage_url" {homepage_url}>
 				<div class="row">
 					homepage:
-					<a class="chip row" class:selected={homepage_url === $page.url.href} href={homepage_url}>
+					<a
+						class="chip row ml_sm"
+						class:selected={homepage_url === $page.url.href}
+						href={homepage_url}
+					>
 						<img
 							src="{ensure_end(homepage_url, '/')}favicon.png"
 							alt="favicon to homepage at {homepage_url}"
@@ -78,30 +82,34 @@
 		{/if}
 		{#if repo_url}
 			<div class="row">
-				repo: <a class="chip" title="repo" href={repo_url}>{repo_name}</a>
+				repo: <a class="chip ml_sm" title="repo" href={repo_url}>{repo_name}</a>
 			</div>
 		{/if}
 		{#if npm_url}
-			<div class="row">npm: <a class="chip" title="npm" href={npm_url}>{name}</a></div>
+			<div class="row">npm: <a class="chip ml_sm" title="npm" href={npm_url}>{name}</a></div>
 		{/if}
 		{#if changelog_url}
 			<div class="row">
-				version: <a class="chip" title="version" href={changelog_url}>{version}</a>
+				version: <a class="chip ml_sm" title="version" href={changelog_url}>{version}</a>
 			</div>
 		{/if}
 		{#if license_url}
 			<div class="row">
-				license: <a class="chip" title="license" href={license_url}>{license}</a>
+				license: <a class="chip ml_sm" title="license" href={license_url}>{license}</a>
 			</div>
 		{/if}
 		{#if homepage_url}
 			<section class="row spaced">
 				data:
-				<a class="chip" title="data" href="{ensure_end(homepage_url, '/')}.well-known/package.json"
-					>package.json</a
+				<a
+					class="chip ml_sm"
+					title="data"
+					href="{ensure_end(homepage_url, '/')}.well-known/package.json">package.json</a
 				>
-				<a class="chip" title="data" href="{ensure_end(homepage_url, '/')}.well-known/src.json"
-					>src.json</a
+				<a
+					class="chip ml_sm"
+					title="data"
+					href="{ensure_end(homepage_url, '/')}.well-known/src.json">src.json</a
 				>
 			</section>
 		{/if}
