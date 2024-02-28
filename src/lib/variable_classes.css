@@ -2106,6 +2106,146 @@ layout
 	gap: var(--space_xl15);
 }
 
+.column_gap_xs5 {
+	column-gap: var(--space_xs5);
+}
+.column_gap_xs4 {
+	column-gap: var(--space_xs4);
+}
+.column_gap_xs3 {
+	column-gap: var(--space_xs3);
+}
+.column_gap_xs2 {
+	column-gap: var(--space_xs2);
+}
+.column_gap_xs {
+	column-gap: var(--space_xs);
+}
+.column_gap_sm {
+	column-gap: var(--space_sm);
+}
+.column_gap_md {
+	column-gap: var(--space_md);
+}
+.column_gap_lg {
+	column-gap: var(--space_lg);
+}
+.column_gap_xl {
+	column-gap: var(--space_xl);
+}
+.column_gap_xl2 {
+	column-gap: var(--space_xl2);
+}
+.column_gap_xl3 {
+	column-gap: var(--space_xl3);
+}
+.column_gap_xl4 {
+	column-gap: var(--space_xl4);
+}
+.column_gap_xl5 {
+	column-gap: var(--space_xl5);
+}
+.column_gap_xl6 {
+	column-gap: var(--space_xl6);
+}
+.column_gap_xl7 {
+	column-gap: var(--space_xl7);
+}
+.column_gap_xl8 {
+	column-gap: var(--space_xl8);
+}
+.column_gap_xl9 {
+	column-gap: var(--space_xl9);
+}
+.column_gap_xl10 {
+	column-gap: var(--space_xl10);
+}
+.column_gap_xl11 {
+	column-gap: var(--space_xl11);
+}
+.column_gap_xl12 {
+	column-gap: var(--space_xl12);
+}
+.column_gap_xl13 {
+	column-gap: var(--space_xl13);
+}
+.column_gap_xl14 {
+	column-gap: var(--space_xl14);
+}
+.column_gap_xl15 {
+	column-gap: var(--space_xl15);
+}
+
+.row_gap_xs5 {
+	row-gap: var(--space_xs5);
+}
+.row_gap_xs4 {
+	row-gap: var(--space_xs4);
+}
+.row_gap_xs3 {
+	row-gap: var(--space_xs3);
+}
+.row_gap_xs2 {
+	row-gap: var(--space_xs2);
+}
+.row_gap_xs {
+	row-gap: var(--space_xs);
+}
+.row_gap_sm {
+	row-gap: var(--space_sm);
+}
+.row_gap_md {
+	row-gap: var(--space_md);
+}
+.row_gap_lg {
+	row-gap: var(--space_lg);
+}
+.row_gap_xl {
+	row-gap: var(--space_xl);
+}
+.row_gap_xl2 {
+	row-gap: var(--space_xl2);
+}
+.row_gap_xl3 {
+	row-gap: var(--space_xl3);
+}
+.row_gap_xl4 {
+	row-gap: var(--space_xl4);
+}
+.row_gap_xl5 {
+	row-gap: var(--space_xl5);
+}
+.row_gap_xl6 {
+	row-gap: var(--space_xl6);
+}
+.row_gap_xl7 {
+	row-gap: var(--space_xl7);
+}
+.row_gap_xl8 {
+	row-gap: var(--space_xl8);
+}
+.row_gap_xl9 {
+	row-gap: var(--space_xl9);
+}
+.row_gap_xl10 {
+	row-gap: var(--space_xl10);
+}
+.row_gap_xl11 {
+	row-gap: var(--space_xl11);
+}
+.row_gap_xl12 {
+	row-gap: var(--space_xl12);
+}
+.row_gap_xl13 {
+	row-gap: var(--space_xl13);
+}
+.row_gap_xl14 {
+	row-gap: var(--space_xl14);
+}
+.row_gap_xl15 {
+	row-gap: var(--space_xl15);
+}
+
 /*
 
 other
