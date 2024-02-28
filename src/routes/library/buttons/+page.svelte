@@ -18,7 +18,7 @@
 </script>
 
 <Tome_Detail {tome}>
-	<div class="spaced">
+	<div class="mb_lg">
 		<Code content={`<button>`} />
 		<button>button</button>
 	</div>
@@ -43,7 +43,7 @@
 		<h3>colorful buttons</h3>
 	</section>
 	<br />
-	<div class="spaced">
+	<div class="mb_lg">
 		{#each color_names as c}
 			{@const color_name = `color_${c}`}
 			<Code content={`<button class="${color_name}">`} />
@@ -60,7 +60,7 @@
 		{/each}
 	</div>
 
-	<div class="box width_full spaced">
+	<div class="box width_full mb_lg">
 		<Color_Scheme_Input />
 	</div>
 

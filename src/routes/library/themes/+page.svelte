@@ -154,7 +154,7 @@
 			<div class="width_sm">
 				<Theme_Input {themes} enable_editing={true} on:edit={(e) => (editing_theme = e.detail)} />
 			</div>
-			<button class="spaced" on:click={() => (show_create_theme_dialog = true)} disabled={true}
+			<button class="mb_lg" on:click={() => (show_create_theme_dialog = true)} disabled={true}
 				>create a new theme (todo)</button
 			>
 			<aside>
@@ -164,12 +164,12 @@
 		</div>
 	</section>
 	<section class="theme panel">
-		<div class="spaced prose">
+		<div class="mb_lg prose">
 			<h3>scoped themes</h3>
 		</div>
 		<details>
 			<summary>⚠️ scoped themes are a work in progress</summary>
-			<div class="spaced prose">
+			<div class="mb_lg prose">
 				<p>Scope a theme to one branch of the DOM tree with <code>Themed_Scope</code>:</p>
 				<Code content={`import Themed_Scope from '@ryanatkn/fuz/Themed_Scope.svelte';`} lang="ts" />
 				<Code content={`<Themed_Scope {selected_theme}>\n\t\t...\n</Themed_Scope>`} />

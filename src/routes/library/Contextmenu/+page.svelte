@@ -156,7 +156,7 @@
 		]}
 	>
 		<section>
-			<div class="spaced">
+			<div class="mb_lg">
 				<Code lang="ts" content={`const contextmenu = create_contextmenu();`} />
 			</div>
 			<Code content={`<Contextmenu {contextmenu} />`} />
@@ -294,7 +294,7 @@
 					>github.com/ryanatkn/fuz</a
 				>
 			</blockquote>
-			<code class="p_md spaced"
+			<code class="p_md mb_lg"
 				>npm i -D <a href="https://www.npmjs.com/package/@fuz.dev/fuz_contextmenu"
 					>@fuz.dev/fuz_contextmenu</a
 				></code

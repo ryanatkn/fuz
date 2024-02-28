@@ -94,10 +94,10 @@ export interface Style_Variable {
 		/>
 	</section>
 	<section class="box">
-		<blockquote class="spaced">
+		<blockquote class="mb_lg">
 			{variables.length} style variables
 		</blockquote>
-		<aside class="spaced">TODO some of these will change</aside>
+		<aside class="mb_lg">TODO some of these will change</aside>
 		<!-- TODO add info through the contextmenu or dialog -->
 		<div class="variables">
 			{#each variables as variable (variable.name)}

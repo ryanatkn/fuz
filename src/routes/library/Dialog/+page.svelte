@@ -168,7 +168,7 @@
 			{/each}
 			<hr />
 			<form class="box">
-				<div class="spaced">
+				<div class="mb_lg">
 					{#each layouts as layout}
 						<label class="row">
 							<input type="radio" bind:group={selected_layout} value={layout} />

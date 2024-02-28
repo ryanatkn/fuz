@@ -78,7 +78,7 @@
 		</p>
 	</section>
 
-	<div class="prose spaced">
+	<div class="prose mb_lg">
 		<h3>Hue variables</h3>
 		<p>
 			Hue variables contain a single <Mdn_Link href="Web/CSS/hue">hue</Mdn_Link> number. Each color variable
@@ -103,7 +103,7 @@
 	</ul>
 	<br />
 
-	<div class="prose spaced">
+	<div class="prose mb_lg">
 		<h3>Color variables</h3>
 		<p>
 			There are 9 variables per color, numbered 1 to 9, lightest to darkest. The 5th variable of
@@ -120,7 +120,7 @@
 		{/each}
 	</ul>
 	<br />
-	<div class="box width_full spaced">
+	<div class="box width_full mb_lg">
 		<Color_Scheme_Input />
 	</div>
 </Tome_Detail>
