@@ -14,6 +14,11 @@ export const font_sizes = [
 	'xl9',
 ];
 
+// TODO maybe suffix with `_set` and also export the array?
+export const font_size_names = font_sizes.map((s) => 'size_' + s);
+
+export const font_size_names_set = new Set(font_size_names);
+
 export const space_sizes = [
 	'xs5',
 	'xs4',
@@ -39,10 +44,5 @@ export const space_sizes = [
 	'xl14',
 	'xl15',
 ];
-
-// TODO maybe suffix with `_set` and also export the array?
-export const font_size_names = font_sizes.map((s) => 'size_' + s);
-
-export const font_size_names_set = new Set(font_size_names);
 
 export const radius_sizes = ['xs3', 'xs2', 'xs', 'sm', 'md', 'lg', 'xl'];
