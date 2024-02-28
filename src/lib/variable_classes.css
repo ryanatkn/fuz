@@ -11,6 +11,12 @@ The utility classes not based on style variables are in `utility_classes.css`.
 
 /* TODO vite plugin for removing unused */
 
+/*
+
+colors
+
+*/
+
 .bg {
 	background-color: var(--bg);
 }
@@ -622,6 +628,12 @@ The utility classes not based on style variables are in `utility_classes.css`.
 .bg_g_9 {
 	background-color: var(--color_g_9);
 }
+
+/*
+
+layout
+
+*/
 
 .p_xs5 {
 	padding: var(--space_xs5);
