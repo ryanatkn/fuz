@@ -40,7 +40,7 @@ export const package_json = {
 		'@typescript-eslint/eslint-plugin': '^7.1.0',
 		'@typescript-eslint/parser': '^7.1.0',
 		eslint: '^8.57.0',
-		'eslint-plugin-svelte': '^2.36.0-next.6',
+		'eslint-plugin-svelte': '^2.36.0-next.7',
 		prettier: '^3.2.5',
 		'prettier-plugin-svelte': '^3.2.1',
 		'prism-svelte': '^0.5.0',

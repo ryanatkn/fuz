@@ -69,15 +69,7 @@
     "extends": "@ryanatkn",
     "rules": {
       "no-console": 1
-    },
-    "overrides": [
-      {
-        "files": "*.svelte",
-        "rules": {
-          "prefer-const": 0
-        }
-      }
-    ]
+    }
   },
   "prettier": {
     "plugins": [

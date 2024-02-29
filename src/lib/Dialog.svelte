@@ -30,7 +30,7 @@
 		onclose?: () => void;
 	}
 
-	let {container, layout = 'centered', index = 0, active = true, onclose} = $props<Props>();
+	const {container, layout = 'centered', index = 0, active = true, onclose} = $props<Props>();
 
 	const ROOT_SELECTOR = 'body'; // TODO make configurable
 	const ROOT_DIALOG_OPEN_CLASS = 'dialog_open';

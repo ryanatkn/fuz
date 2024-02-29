@@ -2,14 +2,18 @@
 	import type {Alert_Status} from '$lib/alert.js';
 	import {alert_status_options} from '$lib/alert.js';
 
-	export let status: Alert_Status = 'inform';
-	export let icon: string | null | undefined = undefined;
-	export let button: boolean | undefined = undefined;
+	interface Props {
+		status?: Alert_Status;
+		icon?: string | null | undefined;
+		button?: boolean | undefined;
+	}
 
-	$: options = alert_status_options[status];
-	$: final_icon = icon === undefined ? options.icon : icon;
+	const {status = 'inform', icon, button} = $props<Props>();
+
+	const options = $derived(alert_status_options[status]);
+	const final_icon = $derived(icon === undefined ? options.icon : icon);
 	// TODO change this to use the hue and put transparency on the borders, or add a borderColor option
-	$: color = options.color;
+	const color = $derived(options.color);
 </script>
 
 {#if button}

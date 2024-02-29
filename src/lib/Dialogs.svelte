@@ -11,7 +11,7 @@
 		onclose?: () => void;
 	}
 
-	let {dialogs, onclose} = $props<Props>();
+	const {dialogs, onclose} = $props<Props>();
 </script>
 
 {#each $dialogs as dialog, index (dialog)}

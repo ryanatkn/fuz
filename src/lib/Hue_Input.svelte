@@ -7,6 +7,8 @@
 		oninput?: (hue: Hue) => void;
 	}
 
+	// TODO BLOCK just disable this rule when we use bindings? would prefer not to disable for all Svelte
+	// eslint-disable-next-line prefer-const
 	let {value: hue, title = 'hue', oninput} = $props<Props>();
 
 	// TODO BLOCK rename to `value`?
