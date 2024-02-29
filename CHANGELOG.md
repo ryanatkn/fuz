@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.91.2
+
+### Patch Changes
+
+- add float utility classes ([38fa81e](https://github.com/ryanatkn/fuz/commit/38fa81e))
+
 ## 0.91.1
 
 ### Patch Changes
