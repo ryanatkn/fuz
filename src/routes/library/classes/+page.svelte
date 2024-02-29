@@ -25,30 +25,15 @@
 			<h3>Raw CSS</h3>
 			<Details>
 				<summary slot="summary">utility classes</summary>
-				<Code
-					content={`/* utility_classes.css */
-
-${utility_classes_text}`}
-					lang="css"
-				/>
+				<Code content={utility_classes_text} lang="css" />
 			</Details>
 			<Details>
 				<summary slot="summary">variable classes</summary>
-				<Code
-					content={`/* variable_classes.css */
-
-      ${variable_classes_text}`}
-					lang="css"
-				/>
+				<Code content={variable_classes_text} lang="css" />
 			</Details>
 			<Details>
 				<summary slot="summary">semantic classes</summary>
-				<Code
-					content={`/* semantic_classes.css */
-
-      ${semantic_classes_text}`}
-					lang="css"
-				/>
+				<Code content={semantic_classes_text} lang="css" />
 			</Details>
 		</section>
 	</div>
