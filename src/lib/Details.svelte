@@ -1,18 +1,10 @@
 <script lang="ts">
 	export let lazy = true;
-	export let ontoggle:
-		| ((e: Event & {currentTarget: EventTarget & HTMLDetailsElement}) => void)
-		| undefined = undefined;
 	export let open: boolean | null | undefined = undefined;
 </script>
 
-<details
-	bind:open
-	on:toggle={(e) => {
-		console.log(`e`, e);
-		ontoggle?.(e);
-	}}
->
+<!-- TODO svelte5 splat attrs -->
+<details bind:open>
 	{#if lazy}
 		<slot name="summary" />
 		{#if open}
