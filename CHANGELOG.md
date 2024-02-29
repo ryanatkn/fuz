@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.91.3
+
+### Patch Changes
+
+- add `Details` component for lazy loading ([#17](https://github.com/ryanatkn/fuz/pull/17))
+
 ## 0.91.2
 
 ### Patch Changes
