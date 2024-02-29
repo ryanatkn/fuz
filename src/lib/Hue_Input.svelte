@@ -2,12 +2,12 @@
 	import type {Hue} from '@ryanatkn/belt/colors.js';
 
 	interface Props {
-		hue?: Hue;
+		value?: Hue;
 		title?: string;
 		oninput?: (hue: Hue) => void;
 	}
 
-	let {hue, title = 'hue', oninput} = $props<Props>();
+	let {value: hue, title = 'hue', oninput} = $props<Props>();
 
 	// TODO BLOCK rename to `value`?
 	hue ??= 180; // TODO BLOCK hack to allow binding with a fallback
@@ -16,11 +16,11 @@
 	// export {hue};
 
 	// TODO probably upstream this to belt
-	const parse_hue = (value: any): Hue | null => {
-		const t = typeof value;
-		if (t === 'number') return value;
+	const parse_hue = (v: any): Hue | null => {
+		const t = typeof v;
+		if (t === 'number') return v;
 		if (t !== 'string') return null;
-		const parsed = Number(value);
+		const parsed = Number(v);
 		if (Number.isNaN(parsed)) return null;
 		return parsed;
 	};
@@ -28,8 +28,8 @@
 	// TODO BLOCK is this the API we want?
 	// Binding to `hue` externally works for simple things,
 	// but the `input` event makes reacting to actual changes easier.
-	const update_hue = (value: Hue) => {
-		hue = value;
+	const update_hue = (v: Hue) => {
+		hue = v;
 		oninput?.(hue);
 	};
 
