@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.91.2",
+  "version": "0.91.3",
   "modules": {
     "./Alert.svelte": {
       "path": "Alert.svelte",
@@ -155,6 +155,10 @@
     },
     "./Copy_To_Clipboard.svelte": {
       "path": "Copy_To_Clipboard.svelte",
+      "declarations": []
+    },
+    "./Details.svelte": {
+      "path": "Details.svelte",
       "declarations": []
     },
     "./Devmode_Controls.svelte": {
