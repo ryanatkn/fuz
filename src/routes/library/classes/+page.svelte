@@ -14,7 +14,10 @@
 
 <Tome_Detail {tome}>
 	<div class="prose">
-		<aside>CSS classes</aside>
+		<aside>
+			Fuz provides an arbitrary subset of CSS classes that defers to Svelte CSS for complex and
+			uncommon patterns
+		</aside>
 		<details>
 			<summary>utility classes</summary>
 			<Code
