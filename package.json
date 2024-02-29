@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.91.2",
+  "version": "0.91.3",
   "description": "Svelte UI library and CSS design system",
   "icon": "🧶",
   "public": true,
@@ -154,6 +154,11 @@
       "svelte": "./dist/Copy_To_Clipboard.svelte",
       "default": "./dist/Copy_To_Clipboard.svelte",
       "types": "./dist/Copy_To_Clipboard.svelte.d.ts"
+    },
+    "./Details.svelte": {
+      "svelte": "./dist/Details.svelte",
+      "default": "./dist/Details.svelte",
+      "types": "./dist/Details.svelte.d.ts"
     },
     "./Devmode_Controls.svelte": {
       "svelte": "./dist/Devmode_Controls.svelte",
