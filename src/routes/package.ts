@@ -5,7 +5,7 @@ import type {Src_Json} from '@ryanatkn/gro/src_json.js';
 
 export const package_json = {
 	name: '@ryanatkn/fuz',
-	version: '0.91.0',
+	version: '0.91.1',
 	description: 'Svelte UI library and CSS design system',
 	icon: '🧶',
 	public: true,
@@ -270,7 +270,7 @@ export const package_json = {
 
 export const src_json = {
 	name: '@ryanatkn/fuz',
-	version: '0.91.0',
+	version: '0.91.1',
 	modules: {
 		'./Alert.svelte': {path: 'Alert.svelte', declarations: []},
 		'./alert.js': {

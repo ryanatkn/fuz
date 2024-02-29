@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.91.1
+
+### Patch Changes
+
+- publish CHANGELOG.md ([87f6fa0](https://github.com/ryanatkn/fuz/commit/87f6fa0))
+
 ## 0.91.0
 
 ### Minor Changes
