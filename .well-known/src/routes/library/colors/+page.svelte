@@ -33,7 +33,7 @@
 		<h3>Color semantics</h3>
 		<p>
 			Fuz provides a palette of color and hue <Tome_Link name="variables" /> designed to support concise
-			authoring in light and dark mode, as well as straightforward <Tome_Link name="themes"
+			authoring in light and dark modes, as well as straightforward <Tome_Link name="themes"
 				>theming</Tome_Link
 			> by both developers and end-users at runtime. The colors have more semantics than just plain values,
 			so they automatically adapt to dark mode and custom themes, at the cost of having different values
@@ -82,7 +82,7 @@
 		<h3>Hue variables</h3>
 		<p>
 			Hue variables contain a single <Mdn_Link href="Web/CSS/hue">hue</Mdn_Link> number. Each color variable
-			combines a hue variable with hardcoded saturation and lightness values for light and dark mode.
+			combines a hue variable with hardcoded saturation and lightness values for light and dark modes.
 		</p>
 		<p>
 			Hue variables therefore provide a single source of truth that's easy to theme, but to achieve
@@ -94,7 +94,7 @@
 			For example, Fuz's base stylesheet uses <code>hue_a</code> for the semi-transparent
 			<code>::selection</code>. (try selecting some text - same hue!)
 		</p>
-		<p>Unlike the color variables, the hue variables are the same in both light and dark mode.</p>
+		<p>Unlike the color variables, the hue variables are the same in both light and dark modes.</p>
 	</div>
 	<ul class="palette">
 		{#each color_names as color_name, i}
@@ -110,7 +110,7 @@
 			each color is used as the base for things like <Tome_Link name="buttons" />.
 		</p>
 		<p>
-			Note that these values differ between light and dark mode! See the discussion above for why.
+			Note that these values differ between light and dark modes! See the discussion above for why.
 		</p>
 		<p>These colors were eyeballed by a programmer, and will change :]</p>
 	</div>
