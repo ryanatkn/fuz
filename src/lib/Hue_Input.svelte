@@ -8,8 +8,7 @@
 	}
 
 	// TODO BLOCK just disable this rule when we use bindings? would prefer not to disable for all Svelte
-	// eslint-disable-next-line prefer-const
-	let {value: hue, title = 'hue', oninput} = $props<Props>();
+	let {value: hue, title = 'hue', oninput} = $props<Props>(); // eslint-disable-line prefer-const
 
 	// TODO BLOCK rename to `value`?
 	hue ??= 180; // TODO BLOCK hack to allow binding with a fallback
