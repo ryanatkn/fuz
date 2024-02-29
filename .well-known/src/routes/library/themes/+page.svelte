@@ -41,7 +41,7 @@
 		<div class="prose">
 			<p>
 				<code>Themed</code> adds global support for both the browser's
-				<code><Mdn_Link href="Web/CSS/color-scheme">color-scheme</Mdn_Link></code>
+				<Mdn_Link href="Web/CSS/color-scheme">color-scheme</Mdn_Link>
 				and custom themes based on <Tome_Link name="variables" />, which use
 				<Mdn_Link href="Web/CSS/Using_CSS_custom_properties">CSS custom properties</Mdn_Link>.
 				<code>Themed</code> is a singleton component that's mounted at the top-level of the page:
@@ -97,12 +97,10 @@
 			<h3>color scheme</h3>
 			<p>
 				<code>Themed</code> defaults to automatic
-				<code><Mdn_Link href="Web/CSS/color-scheme">color-scheme</Mdn_Link></code>
+				<Mdn_Link href="Web/CSS/color-scheme">color-scheme</Mdn_Link>
 				detection with
-				<code
-					><Mdn_Link href="Web/CSS/@media/prefers-color-scheme">prefers-color-scheme</Mdn_Link
-					></code
-				>, and users can also set it directly:
+				<Mdn_Link href="Web/CSS/@media/prefers-color-scheme">prefers-color-scheme</Mdn_Link>, and
+				users can also set it directly:
 			</p>
 			<Color_Scheme_Input />
 			<Code
