@@ -23,7 +23,7 @@ export const package_json = {
 		start: 'gro start',
 		test: 'gro test',
 	},
-	files: ['dist'],
+	files: ['dist', 'CHANGELOG.md'],
 	peerDependencies: {'@ryanatkn/belt': '*', '@sveltejs/kit': '*', svelte: '*'},
 	devDependencies: {
 		'@changesets/changelog-git': '^0.2.0',

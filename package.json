@@ -31,7 +31,8 @@
     "test": "gro test"
   },
   "files": [
-    "dist"
+    "dist",
+    "CHANGELOG.md"
   ],
   "peerDependencies": {
     "@ryanatkn/belt": "*",
