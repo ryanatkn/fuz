@@ -287,7 +287,7 @@ export const color_g_8: Style_Variable = {
 export const color_g_9: Style_Variable = {name: 'color_g_9', light: 'hsl(var(--hue_g), 72%, 10%)'};
 
 /*
-		color variants - using these usually means handling both light and dark mode separately -
+		color variants - using these usually means handling both light and dark modes separately -
 		the semantic variants	that handle `color-schema` automatically include `--bg_1` and `--bg_2`
 	*/
 // TODO some of these may be too subtle, but there may be cases where it's needed so keeping them for now
@@ -750,7 +750,7 @@ export const default_variables: Style_Variable[] = [
 	color_g_9,
 
 	/*
-		color variants - using these usually means handling both light and dark mode separately -
+		color variants - using these usually means handling both light and dark modes separately -
 		the semantic variants	that handle `color-schema` automatically include `--bg_1` and `--bg_2`
 	*/
 	// TODO some of these may be too subtle, but there may be cases where it's needed so keeping them for now

@@ -22,9 +22,9 @@
 			</p>
 			<p>
 				Light mode's starting point is plain white documents, and dark mode's is a lightless void.
-				It's more helpful to think in terms of additive light than opaque colors. See also the <Tome_Link
+				It's more helpful to think in terms of additive light than opaque colors. The <Tome_Link
 					name="colors"
-				/> docs.
+				/> docs elaborate.
 			</p>
 			<p>
 				Opacity is used to enable arbitrary stacking that visually inherits its context. Not all
