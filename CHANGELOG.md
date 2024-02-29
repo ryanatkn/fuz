@@ -1,5 +1,17 @@
 # @ryanatkn/fuz
 
+## 0.91.2
+
+### Patch Changes
+
+- add float utility classes ([38fa81e](https://github.com/ryanatkn/fuz/commit/38fa81e))
+
+## 0.91.1
+
+### Patch Changes
+
+- publish CHANGELOG.md ([87f6fa0](https://github.com/ryanatkn/fuz/commit/87f6fa0))
+
 ## 0.91.0
 
 ### Minor Changes
@@ -9,6 +21,7 @@
 - - rename `font_family_sans` variable from `font_family` ([#16](https://github.com/ryanatkn/fuz/pull/16))
   - remove `spaced_hz`, use `mr_lg`
   - remove `spaced`, use `mb_lg`
+  - remove `padded` variables, use `p` variants
   - remove `.unspaced` and `.unspaced_hz`
   - rename `w_100` from `width_full` and `h_100` from `height_full`
 

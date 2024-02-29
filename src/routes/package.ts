@@ -5,7 +5,7 @@ import type {Src_Json} from '@ryanatkn/gro/src_json.js';
 
 export const package_json = {
 	name: '@ryanatkn/fuz',
-	version: '0.91.0',
+	version: '0.91.2',
 	description: 'Svelte UI library and CSS design system',
 	icon: '🧶',
 	public: true,
@@ -23,7 +23,7 @@ export const package_json = {
 		start: 'gro start',
 		test: 'gro test',
 	},
-	files: ['dist'],
+	files: ['dist', 'CHANGELOG.md'],
 	peerDependencies: {'@ryanatkn/belt': '*', '@sveltejs/kit': '*', svelte: '*'},
 	devDependencies: {
 		'@changesets/changelog-git': '^0.2.0',
@@ -35,14 +35,14 @@ export const package_json = {
 		'@sveltejs/kit': '^2.5.2',
 		'@sveltejs/package': '^2.2.7',
 		'@sveltejs/vite-plugin-svelte': '^3.0.2',
-		'@types/node': '^20.11.20',
+		'@types/node': '^20.11.24',
 		'@types/prismjs': '^1.26.3',
 		'@typescript-eslint/eslint-plugin': '^7.1.0',
 		'@typescript-eslint/parser': '^7.1.0',
 		eslint: '^8.57.0',
 		'eslint-plugin-svelte': '^2.36.0-next.7',
 		prettier: '^3.2.5',
-		'prettier-plugin-svelte': '^3.2.1',
+		'prettier-plugin-svelte': '^3.2.2',
 		'prism-svelte': '^0.5.0',
 		prismjs: '^1.29.0',
 		svelte: '^5.0.0-next.69',
@@ -270,7 +270,7 @@ export const package_json = {
 
 export const src_json = {
 	name: '@ryanatkn/fuz',
-	version: '0.91.0',
+	version: '0.91.2',
 	modules: {
 		'./Alert.svelte': {path: 'Alert.svelte', declarations: []},
 		'./alert.js': {

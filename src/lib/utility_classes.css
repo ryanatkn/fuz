@@ -123,6 +123,22 @@ See `variable_classes.css` for the utility classes based on the style variables.
 	white-space: nowrap;
 }
 
+.float_none {
+	float: none;
+}
+.float_left {
+	float: left;
+}
+.float_right {
+	float: right;
+}
+.float_inline_start {
+	float: inline-start;
+}
+.float_inline_end {
+	float: inline-end;
+}
+
 /*
 
 text
