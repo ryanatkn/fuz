@@ -42,9 +42,9 @@ The CSS design system:
     and it's not nearly as featureful as Tailwind - instead of letting you express all of CSS in classes,
     Fuz provides an arbitrary subset that defers to CSS for complex and uncommon patterns
     (advanced build tooling like a compiler could change this, but I have no current plans for that)
-  - eventually it probably makes sense to have a Vite plugin to remove unused styles,
-    who knows what else, but the primary apps I'm building provide these styles to users,
-    so the feature isn't urgent
+  - it probably makes sense to include a Vite plugin to remove unused styles,
+    but the primary apps I'm building provide these styles to users
+    and therefore won't remove unused code, so the feature isn't urgent
 
 The Svelte components and helpers:
 
