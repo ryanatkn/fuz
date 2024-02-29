@@ -155,6 +155,11 @@
       "default": "./dist/Copy_To_Clipboard.svelte",
       "types": "./dist/Copy_To_Clipboard.svelte.d.ts"
     },
+    "./Details.svelte": {
+      "svelte": "./dist/Details.svelte",
+      "default": "./dist/Details.svelte",
+      "types": "./dist/Details.svelte.d.ts"
+    },
     "./Devmode_Controls.svelte": {
       "svelte": "./dist/Devmode_Controls.svelte",
       "default": "./dist/Devmode_Controls.svelte",
