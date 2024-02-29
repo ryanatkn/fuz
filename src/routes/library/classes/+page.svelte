@@ -2,25 +2,45 @@
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
-	import Tome_Link from '$lib/Tome_Link.svelte';
 	import {get_tome} from '$lib/tome.js';
-	import Mdn_Link from '$lib/Mdn_Link.svelte';
+	import utility_classes_text from '$lib/utility_classes.css?raw';
+	import variable_classes_text from '$lib/variable_classes.css?raw';
+	import semantic_classes_text from '$lib/semantic_classes.css?raw';
 
-	const LIBRARY_ITEM_NAME = 'elements';
+	const LIBRARY_ITEM_NAME = 'classes';
 
 	const tome = get_tome(LIBRARY_ITEM_NAME);
 </script>
 
 <Tome_Detail {tome}>
 	<div class="prose">
-		<aside>
-			styles for plain <Mdn_Link href="Web/HTML/Element">HTML elements</Mdn_Link>
-			with app-like presentation, for document-like presentation see <Tome_Link name="typography" />
-			and <Tome_Link name="prose" />
-		</aside>
+		<aside>CSS classes</aside>
+		<details>
+			<summary>utility classes</summary>
+			<Code
+				content={`/* utility_classes.css */
 
-		<Code content={`/* utility_classes.css */`} />
-		<Code content={`/* variable_classes.css */`} />
-		<Code content={`/* semantic_classes.css */`} />
+${utility_classes_text}`}
+				lang="css"
+			/>
+		</details>
+		<details>
+			<summary>variable classes</summary>
+			<Code
+				content={`/* variable_classes.css */
+
+      ${variable_classes_text}`}
+				lang="css"
+			/>
+		</details>
+		<details>
+			<summary>semantic classes</summary>
+			<Code
+				content={`/* semantic_classes.css */
+
+      ${semantic_classes_text}`}
+				lang="css"
+			/>
+		</details>
 	</div></Tome_Detail
 >
