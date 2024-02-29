@@ -15,8 +15,9 @@
 <Tome_Detail {tome}>
 	<div class="prose">
 		<aside>
-			Fuz provides an arbitrary subset of CSS classes that defers to Svelte CSS for complex and
-			uncommon patterns
+			Fuz provides an arbitrary subset of CSS classes that defers to CSS in Svelte's <a
+				href="https://svelte.dev/docs/svelte-components#style"><code>{'<'}style></code></a
+			> for complex and uncommon patterns
 		</aside>
 		<details>
 			<summary>utility classes</summary>
