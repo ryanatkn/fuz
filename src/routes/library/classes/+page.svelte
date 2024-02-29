@@ -15,37 +15,41 @@
 
 <Tome_Detail {tome}>
 	<div class="prose">
-		<aside>
+		<section>
 			Fuz provides an arbitrary subset of utility classes for CSS, and defers to CSS in <a
 				href="https://svelte.dev/docs/svelte-components#style">Svelte's <code>{'<'}style></code></a
-			> for complex and uncommon patterns. This may change depending on build tool sophistication.
-		</aside>
-		<Details>
-			<summary>utility classes</summary>
-			<Code
-				content={`/* utility_classes.css */
+			> for complex and uncommon patterns. This may change depending on build tool sophistication, like
+			a compiler or Vite plugin to remove unused styles.
+		</section>
+		<section>
+			<h3>Raw CSS</h3>
+			<Details>
+				<summary slot="summary">utility classes</summary>
+				<Code
+					content={`/* utility_classes.css */
 
 ${utility_classes_text}`}
-				lang="css"
-			/>
-		</Details>
-		<Details>
-			<summary>variable classes</summary>
-			<Code
-				content={`/* variable_classes.css */
+					lang="css"
+				/>
+			</Details>
+			<Details>
+				<summary slot="summary">variable classes</summary>
+				<Code
+					content={`/* variable_classes.css */
 
       ${variable_classes_text}`}
-				lang="css"
-			/>
-		</Details>
-		<Details>
-			<summary>semantic classes</summary>
-			<Code
-				content={`/* semantic_classes.css */
+					lang="css"
+				/>
+			</Details>
+			<Details>
+				<summary slot="summary">semantic classes</summary>
+				<Code
+					content={`/* semantic_classes.css */
 
       ${semantic_classes_text}`}
-				lang="css"
-			/>
-		</Details>
-	</div></Tome_Detail
->
+					lang="css"
+				/>
+			</Details>
+		</section>
+	</div>
+</Tome_Detail>

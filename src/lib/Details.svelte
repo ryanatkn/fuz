@@ -14,8 +14,12 @@
 	}}
 >
 	{#if lazy}
-		<slot />
+		<slot name="summary" />
+		{#if open}
+			<slot />
+		{/if}
 	{:else}
+		<slot name="summary" />
 		<slot />
 	{/if}
 </details>
