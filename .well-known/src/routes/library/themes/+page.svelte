@@ -30,7 +30,7 @@
 		save_theme(theme);
 	};
 
-	let show_create_theme_dialog = false;
+	// let show_create_theme_dialog = false;
 	let editing_theme: null | Theme = null;
 
 	// TODO some hacky layout patterns below, tricky to mix prose and other elements
@@ -151,14 +151,14 @@
 			</p>
 			<aside>The builtin themes need more work, but the proof of concept is ready!</aside>
 			<!-- TODO explain when exported <Code code={`<Theme_Input\n\t{themes}\n\t{selected_theme}\n/>`} /> -->
-			<div class="width_sm">
+			<div class="width_sm mb_lg">
 				<Theme_Input {themes} enable_editing={true} on:edit={(e) => (editing_theme = e.detail)} />
 			</div>
-			<button class="mb_lg" on:click={() => (show_create_theme_dialog = true)} disabled={true}
+			<!-- <button class="mb_lg" on:click={() => (show_create_theme_dialog = true)} disabled={true}
 				>create a new theme (todo)</button
-			>
+			> -->
 			<aside>
-				Editing themes at runtime is a work in progress, but please click around to see where we're
+				Editing themes at runtime is a work in progress, but you can click around to see where it's
 				going!
 			</aside>
 		</div>
@@ -305,7 +305,8 @@ $selected_color_scheme; // '${$selected_color_scheme}'`}
 	</section> -->
 </Tome_Detail>
 
-{#if show_create_theme_dialog}
+<!-- TODO enable creating themes -->
+<!-- {#if show_create_theme_dialog}
 	<Dialog on:close={() => (show_create_theme_dialog = false)} let:close>
 		<div class="pane">
 			<div class="theme_editor_wrapper panel">
@@ -318,7 +319,7 @@ $selected_color_scheme; // '${$selected_color_scheme}'`}
 			</div>
 		</div>
 	</Dialog>
-{/if}
+{/if} -->
 {#if editing_theme}
 	<Dialog on:close={() => (editing_theme = null)}>
 		<div class="pane">
@@ -337,7 +338,7 @@ $selected_color_scheme; // '${$selected_color_scheme}'`}
 
 <style>
 	.theme {
-		padding: var(--space_md) var(--space_lg);
+		padding: var(--space_lg);
 	}
 	section {
 		width: 100%;
