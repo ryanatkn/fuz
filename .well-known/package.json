@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.91.0",
+  "version": "0.91.1",
   "description": "Svelte UI library and CSS design system",
   "icon": "🧶",
   "public": true,
@@ -31,7 +31,8 @@
     "test": "gro test"
   },
   "files": [
-    "dist"
+    "dist",
+    "CHANGELOG.md"
   ],
   "peerDependencies": {
     "@ryanatkn/belt": "*",

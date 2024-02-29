@@ -18,7 +18,7 @@
 
 	const tome = get_tome(LIBRARY_ITEM_NAME);
 
-	let themes = default_themes.slice();
+	const themes = default_themes.slice();
 
 	const selected_theme = get_theme();
 	const selected_color_scheme = get_color_scheme();
