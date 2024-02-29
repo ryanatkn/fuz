@@ -51,12 +51,7 @@ export const package_json = {
 		typescript: '^5.3.3',
 		uvu: '^0.5.6',
 	},
-	eslintConfig: {
-		root: true,
-		extends: '@ryanatkn',
-		rules: {'no-console': 1},
-		overrides: [{files: '*.svelte', rules: {'prefer-const': 0}}],
-	},
+	eslintConfig: {root: true, extends: '@ryanatkn', rules: {'no-console': 1}},
 	prettier: {
 		plugins: ['prettier-plugin-svelte'],
 		useTabs: true,
