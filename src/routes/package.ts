@@ -115,6 +115,11 @@ export const package_json = {
 			default: './dist/Copy_To_Clipboard.svelte',
 			types: './dist/Copy_To_Clipboard.svelte.d.ts',
 		},
+		'./Details.svelte': {
+			svelte: './dist/Details.svelte',
+			default: './dist/Details.svelte',
+			types: './dist/Details.svelte.d.ts',
+		},
 		'./Devmode_Controls.svelte': {
 			svelte: './dist/Devmode_Controls.svelte',
 			default: './dist/Devmode_Controls.svelte',
@@ -322,6 +327,7 @@ export const src_json = {
 			],
 		},
 		'./Copy_To_Clipboard.svelte': {path: 'Copy_To_Clipboard.svelte', declarations: []},
+		'./Details.svelte': {path: 'Details.svelte', declarations: []},
 		'./Devmode_Controls.svelte': {path: 'Devmode_Controls.svelte', declarations: []},
 		'./devmode.js': {
 			path: 'devmode.ts',

@@ -3,6 +3,7 @@ import colors from '$routes/library/colors/+page.svelte';
 import buttons from '$routes/library/buttons/+page.svelte';
 import forms from '$routes/library/forms/+page.svelte';
 import elements from '$routes/library/elements/+page.svelte';
+import classes from '$routes/library/classes/+page.svelte';
 import typography from '$routes/library/typography/+page.svelte';
 import themes from '$routes/library/themes/+page.svelte';
 import variables from '$routes/library/variables/+page.svelte';
@@ -82,7 +83,15 @@ export const tomes: Tome[] = [
 		pathname: '',
 		category: 'styles',
 		component: elements,
-		related: ['buttons', 'forms', 'prose', 'typography', 'borders', 'layout'],
+		related: ['buttons', 'forms', 'classes', 'prose', 'typography', 'borders', 'layout'],
+	},
+	{
+		name: 'classes',
+		slug: 'classes',
+		pathname: '',
+		category: 'styles',
+		component: classes,
+		related: ['elements'],
 	},
 	{
 		name: 'prose',
