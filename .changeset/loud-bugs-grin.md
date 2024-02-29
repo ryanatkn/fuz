@@ -1,5 +1,5 @@
 ---
-"@ryanatkn/fuz": minor
+'@ryanatkn/fuz': minor
 ---
 
-upgrade to svelte@5
+upgrade to svelte@5 including many breaking changes to components

@@ -1,10 +1,22 @@
 <script lang="ts">
-	import {createEventDispatcher} from 'svelte';
+	import type {Hue} from '@ryanatkn/belt/colors.js';
 
-	export let hue = 180;
-	export let title = 'hue';
+	interface Props {
+		hue?: Hue;
+		title?: string;
+		oninput?: (hue: Hue) => void;
+	}
 
-	const parse_hue = (value: any): number | null => {
+	let {hue, title = 'hue', oninput} = $props<Props>();
+
+	// TODO BLOCK rename to `value`?
+	hue ??= 180; // TODO BLOCK hack to allow binding with a fallback
+
+	// TODO BLOCK needed?
+	// export {hue};
+
+	// TODO probably upstream this to belt
+	const parse_hue = (value: any): Hue | null => {
 		const t = typeof value;
 		if (t === 'number') return value;
 		if (t !== 'string') return null;
@@ -13,27 +25,27 @@
 		return parsed;
 	};
 
+	// TODO BLOCK is this the API we want?
 	// Binding to `hue` externally works for simple things,
 	// but the `input` event makes reacting to actual changes easier.
-	const dispatch = createEventDispatcher<{input: number}>();
-	const update_hue = (value: number) => {
+	const update_hue = (value: Hue) => {
 		hue = value;
-		dispatch('input', hue);
+		oninput?.(hue);
 	};
 
-	const onInput = (e: Event & {currentTarget: EventTarget & HTMLInputElement}) => {
+	const on_input_event = (e: Event & {currentTarget: EventTarget & HTMLInputElement}) => {
 		const parsed = parse_hue(e.currentTarget.value);
 		if (parsed === null) return;
 		update_hue(parsed);
 	};
 
-	let el: HTMLInputElement;
+	let el: HTMLInputElement | undefined = $state();
 
 	const set_hue_from_minimap = (e: MouseEvent & {currentTarget: EventTarget & HTMLElement}) => {
 		const rect = e.currentTarget.getBoundingClientRect();
 		const pct = (e.clientX - rect.x) / rect.width;
 		update_hue(Math.floor(360 * pct));
-		el.focus();
+		el?.focus();
 	};
 </script>
 
@@ -41,7 +53,7 @@
 <div class="hue_input">
 	<label class="indicator" style:--hue={hue}>
 		<div class="mr_lg">{title}</div>
-		<input class="hue" value={hue} on:input={onInput} />
+		<input class="hue" value={hue} on:input={on_input_event} />
 	</label>
 	<div class="minimap_wrapper">
 		<div class="minimap" on:click={set_hue_from_minimap} aria-hidden />
@@ -51,7 +63,7 @@
 		type="range"
 		aria-label={title}
 		value={hue}
-		on:input={onInput}
+		on:input={on_input_event}
 		min="0"
 		max="359"
 	/>

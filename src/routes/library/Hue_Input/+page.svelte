@@ -9,6 +9,7 @@
 	const tome = get_tome(LIBRARY_ITEM_NAME);
 
 	let hue: number;
+	let hue_from_callback: number;
 </script>
 
 <Tome_Detail {tome}>
@@ -18,16 +19,17 @@
 		<Code
 			content={`<Hue_Input
 	bind:hue
-	on:input={(e) => {
-		// hue === e.detail
-		// === ${hue}
+	oninput={(e) => {
+		// bind:hue === ${hue}
+		// hue_from_callback === ${hue_from_callback}
 	}}
 />`}
 		/>
 		<Hue_Input
 			bind:hue
-			on:input={(e) => {
-				if (hue !== e.detail) throw Error();
+			oninput={(v) => {
+				hue_from_callback = v;
+				if (hue !== v) throw Error();
 			}}
 		/>
 	</div>
