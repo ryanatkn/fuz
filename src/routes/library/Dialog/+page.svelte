@@ -20,17 +20,17 @@
 
 	const tome = get_tome(LIBRARY_ITEM_NAME);
 
-	let opened = false;
-	let dialog_overflowing_opened = false;
-	let dialog_layout_page_opened = false;
-	let dialog_nested_1_opened = false;
-	let dialog_nested_2_opened = false;
-	let dialog_nested_3_opened = false;
+	let opened = $state(false);
+	let dialog_overflowing_opened = $state(false);
+	let dialog_layout_page_opened = $state(false);
+	let dialog_nested_1_opened = $state(false);
+	let dialog_nested_2_opened = $state(false);
+	let dialog_nested_3_opened = $state(false);
 
-	let selected_layout: Dialog_Layout = 'page';
+	let selected_layout: Dialog_Layout = $state('page');
 	const layouts: Dialog_Layout[] = ['centered', 'page'];
 
-	let items: object[] = [];
+	let items: object[] = $state([]);
 	const remove_item = (item: object) => {
 		items = items.filter((i) => i !== item);
 	};
@@ -64,7 +64,7 @@
 {#if opened}
 	<Dialog
 		let:close
-		on:close={() => (opened = false)}
+		onclose={() => (opened = false)}
 	>
 		<div class="pane prose p_xl box">
 			<h1>attention</h1>
@@ -94,7 +94,7 @@
 	</div>
 </Tome_Detail>
 {#if opened}
-	<Dialog let:close on:close={() => (opened = false)}>
+	<Dialog let:close onclose={() => (opened = false)}>
 		<div class="pane prose p_xl box">
 			<h1>attention</h1>
 			<p>this is a dialog</p>
@@ -103,7 +103,7 @@
 	</Dialog>
 {/if}
 {#if dialog_overflowing_opened}
-	<Dialog let:close on:close={() => (dialog_overflowing_opened = false)}>
+	<Dialog let:close onclose={() => (dialog_overflowing_opened = false)}>
 		<div class="pane prose p_xl">
 			<h1>attention</h1>
 			{#each {length: 120} as _}
@@ -115,7 +115,7 @@
 {/if}
 {#if dialog_layout_page_opened}
 	<Dialog
-		on:close={() => ((dialog_layout_page_opened = false), reset_items())}
+		onclose={() => ((dialog_layout_page_opened = false), reset_items())}
 		let:close
 		layout={selected_layout}
 	>
@@ -182,7 +182,7 @@
 	</Dialog>
 {/if}
 {#if dialog_nested_1_opened}
-	<Dialog on:close={() => (dialog_nested_1_opened = false)}>
+	<Dialog onclose={() => (dialog_nested_1_opened = false)}>
 		<div class="pane prose p_xl">
 			<h1>dialog 1</h1>
 			<p>dialogs can open more dialogs</p>
@@ -191,7 +191,7 @@
 	</Dialog>
 {/if}
 {#if dialog_nested_2_opened}
-	<Dialog on:close={() => (dialog_nested_2_opened = false)}>
+	<Dialog onclose={() => (dialog_nested_2_opened = false)}>
 		<div class="pane prose p_xl">
 			<h1>dialog 2</h1>
 			<p>this dialog can open more dialogs</p>
@@ -201,7 +201,7 @@
 	</Dialog>
 {/if}
 {#if dialog_nested_3_opened}
-	<Dialog on:close={() => (dialog_nested_3_opened = false)}>
+	<Dialog onclose={() => (dialog_nested_3_opened = false)}>
 		<div class="pane prose p_xl" style:margin-bottom="var(--space_xl3)">
 			<h1>3 dialogs!</h1>
 			<button on:click={() => (dialog_nested_3_opened = false)}>close dialog</button>
@@ -218,7 +218,7 @@
 {/if}
 <Dialogs
 	{dialogs}
-	on:close={() => {
+	onclose={() => {
 		$dialogs = $dialogs.slice(0, -1);
 	}}
 	let:dialog

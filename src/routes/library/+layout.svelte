@@ -53,7 +53,7 @@
 		</section>
 	</div>
 	{#if $selected_variable}
-		<Dialog on:close={() => ($selected_variable = null)} let:close>
+		<Dialog onclose={() => ($selected_variable = null)} let:close>
 			<div class="pane">
 				<div class="panel p_lg box">
 					<Style_Variable_Detail variable={$selected_variable} />

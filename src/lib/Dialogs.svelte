@@ -6,11 +6,16 @@
 
 	// TODO this is experimental
 
-	export let dialogs: Readable<Dialog_Params[]>;
+	interface Props {
+		dialogs: Readable<Dialog_Params[]>;
+		onclose?: () => void;
+	}
+
+	let {dialogs, onclose} = $props<Props>();
 </script>
 
 {#each $dialogs as dialog, index (dialog)}
-	<Dialog on:close {...dialog.dialog_props} {index} active={index === $dialogs.length - 1}>
+	<Dialog {onclose} {...dialog.dialog_props} {index} active={index === $dialogs.length - 1}>
 		<slot {dialog}>
 			<svelte:component this={dialog.Component} {...dialog.props} />
 		</slot>

@@ -305,7 +305,7 @@ $selected_color_scheme; // '${$selected_color_scheme}'`}
 
 <!-- TODO enable creating themes -->
 <!-- {#if show_create_theme_dialog}
-	<Dialog on:close={() => (show_create_theme_dialog = false)} let:close>
+	<Dialog onclose={() => (show_create_theme_dialog = false)} let:close>
 		<div class="pane">
 			<div class="theme_editor_wrapper panel">
 				<Theme_Form
@@ -319,7 +319,7 @@ $selected_color_scheme; // '${$selected_color_scheme}'`}
 	</Dialog>
 {/if} -->
 {#if editing_theme}
-	<Dialog on:close={() => (editing_theme = null)}>
+	<Dialog onclose={() => (editing_theme = null)}>
 		<div class="pane">
 			<div class="theme_editor_wrapper panel">
 				<Theme_Form

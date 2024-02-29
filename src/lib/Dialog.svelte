@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {createEventDispatcher, onDestroy} from 'svelte';
+	import {onDestroy} from 'svelte';
 	import {is_editable, swallow} from '@ryanatkn/belt/dom.js';
 
 	import Teleport from '$lib/Teleport.svelte';
@@ -18,20 +18,32 @@
 
 	*/
 
+	interface Props {
+		// TODO maybe change this API away from an element to a selector? or remove the API completely?
+		container?: HTMLElement;
+		layout?: Dialog_Layout;
+		/**
+		 * index 0 is under 1 is under 2 etc -- the topmost dialog is the last in the array
+		 */
+		index?: number;
+		active?: boolean;
+		onclose?: () => void;
+	}
+
+	let {container, layout = 'centered', index = 0, active = true, onclose} = $props<Props>();
+
 	const ROOT_SELECTOR = 'body'; // TODO make configurable
 	const ROOT_DIALOG_OPEN_CLASS = 'dialog_open';
 	const ROOT_DIALOG_PADDING_PROPERTY = '--dialog_open_padding_right';
 	const CONTAINER_ID = 'dialog';
 
-	const dispatch = createEventDispatcher<{close: undefined}>();
-
-	export let container: HTMLElement | undefined = undefined;
-	export let layout: Dialog_Layout = 'centered';
-	export let index = 0; // index 0 is under 1 is under 2 etc -- the topmost dialog is the last in the array
-	export let active = true;
-
-	let container_el: HTMLElement | undefined;
-	$: !import.meta.env.SSR && update_container_el(container); // TODO guard some other way
+	let container_el: HTMLElement | undefined = $state();
+	$effect(() => {
+		// TODO guard some other way
+		if (!import.meta.env.SSR) {
+			update_container_el(container);
+		}
+	});
 
 	const update_container_el = (container: HTMLElement | undefined): void => {
 		if (container) {
@@ -53,19 +65,19 @@
 		}
 	};
 
-	let dialog_el: HTMLElement;
-	let pane_wrapper_el: HTMLElement;
+	let dialog_el: HTMLElement | undefined = $state();
+	let pane_wrapper_el: HTMLElement | undefined = $state();
 
 	const close = (e?: Event) => {
 		if (e) swallow(e);
-		dispatch('close');
+		onclose?.();
 	};
 
 	// TODO hook into a ui input system
 	const on_window_keydown = (e: KeyboardEvent) => {
 		if (e.key === 'Escape' && !is_editable(e.target)) {
 			// apply hotkey only for the top-most dialog
-			const parent_el = dialog_el.parentElement;
+			const parent_el = dialog_el?.parentElement;
 			const parents = parent_el?.parentElement?.children;
 			const index = Array.prototype.indexOf.call(parents, parent_el);
 			if (!parents || index === parents.length - 1 || index === -1) {
@@ -76,7 +88,7 @@
 
 	// The dialog isn't "ready" until the teleport moves it.
 	// Rendering the the dialog's slot only once it's ready fixes things like `autofocus`.
-	let ready = false;
+	let ready = $state(false);
 
 	onDestroy(() => {
 		if (index === 0) {
@@ -97,7 +109,7 @@
 -->
 <Teleport
 	to={container_el}
-	on:move={() => {
+	onmove={() => {
 		// Measure `padding-right` before adding the class that changes it,
 		// so we can set the body padding to offset any scrollbar width changes.
 		const computed_padding_right =
@@ -116,7 +128,7 @@
 			);
 		}
 		ready = true;
-		dialog_el.focus(); // TODO make this more declarative? probably want to focus only after moving though, not on mount, which makes an action trickier
+		dialog_el?.focus(); // TODO make this more declarative? probably want to focus only after moving though, not on mount, which makes an action trickier
 	}}
 >
 	<div
@@ -131,7 +143,7 @@
 	>
 		<div class="dialog_layout">
 			<div class="dialog_wrapper">
-				<div class="dialog_bg" role="none" class:ready on:mousedown={close} />
+				<div class="dialog_bg" role="none" on:mousedown={close} />
 				<div
 					class="dialog_content"
 					bind:this={pane_wrapper_el}
@@ -165,7 +177,7 @@
 		transition: opacity var(--duration_3) ease;
 		background-color: var(--dialog_bg, var(--darken_6));
 	}
-	.dialog_bg.ready {
+	.ready .dialog_bg {
 		opacity: 1;
 	}
 	.dialog_layout {

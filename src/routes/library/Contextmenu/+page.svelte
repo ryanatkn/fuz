@@ -286,7 +286,7 @@
 </Tome_Detail>
 
 {#if show_about_dialog}
-	<Dialog on:close={() => (show_about_dialog = false)}>
+	<Dialog onclose={() => (show_about_dialog = false)}>
 		<div class="pane prose p_xl box text_align_center">
 			<h1>About</h1>
 			<blockquote>
