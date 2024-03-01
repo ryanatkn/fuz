@@ -1,14 +1,18 @@
 <script lang="ts">
+	import type {Snippet} from 'svelte';
+
 	import type {Alert_Status} from '$lib/alert.js';
 	import {alert_status_options} from '$lib/alert.js';
 
 	interface Props {
 		status?: Alert_Status;
+		// TODO BLOCK what API for icon? replace slot with snippet, but what with this prop? maybe accept a string?
 		icon?: string | null | undefined;
 		button?: boolean | undefined;
+		children?: Snippet | undefined;
 	}
 
-	const {status = 'inform', icon, button} = $props<Props>();
+	const {status = 'inform', icon, button, children} = $props<Props>();
 
 	const options = $derived(alert_status_options[status]);
 	const final_icon = $derived(icon === undefined ? options.icon : icon);
@@ -20,13 +24,13 @@
 	<button class="message" type="button" style:--color={color} on:click
 		>{#if icon !== null}<div class="icon">
 				<slot name="icon" icon={final_icon}>{final_icon}</slot>
-			</div>{/if}<slot /></button
+			</div>{/if}{#if children}{@render children()}{/if}</button
 	>
 {:else}
 	<div class="message panel" style:--color={color}>
 		{#if icon !== null}<div class="icon">
 				<slot name="icon" icon={final_icon}>{final_icon}</slot>
-			</div>{/if}<slot />
+			</div>{/if}{#if children}{@render children()}{/if}
 	</div>
 {/if}
 

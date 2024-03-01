@@ -2,6 +2,7 @@
 	import {parse_path_pieces} from '@ryanatkn/belt/path.js';
 	import {base} from '$app/paths';
 	import {page} from '$app/stores';
+	import type {Snippet} from 'svelte';
 
 	interface Props {
 		path?: string | undefined;
@@ -10,7 +11,7 @@
 		 */
 		selected_path?: string | null | undefined;
 		base_path?: string;
-		children?: any; // TODO BLOCK type?
+		children?: Snippet;
 	}
 
 	const {path, selected_path, base_path, children} = $props<Props>();
@@ -28,7 +29,8 @@
 
 <div class="breadcrumb">
 	<!-- The default/only slot is the content for the root "/" link. -->
-	<a href={root_path} class:selected={root_path === final_selected_path}>{#if children}{@render children()}{:else}<slot>•</slot>{/if}</a
+	<a href={root_path} class:selected={root_path === final_selected_path}
+		>{#if children}{@render children()}{:else}<slot>•</slot>{/if}</a
 	>{#each path_pieces as pathPiece}{#if pathPiece.type === 'piece'}<a
 				href={final_base_path + pathPiece.path}
 				class:selected={pathPiece.path === final_selected_path}>{pathPiece.name}</a
