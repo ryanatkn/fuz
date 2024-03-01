@@ -1,22 +1,27 @@
 <script lang="ts">
 	import {page} from '$app/stores';
 
-	export let tag: string | undefined = undefined;
-	export let href: string | undefined = undefined;
-	export let align: 'left' | 'right' | 'above' | 'below' = 'left';
-	export let attrs: any = undefined;
+	interface Props {
+		tag?: string | undefined;
+		href?: string | undefined;
+		align?: 'left' | 'right' | 'above' | 'below';
+		attrs?: any;
+		// TODO BLOCK default and `icon` snippets
+	}
 
-	$: link = !!href;
-	$: selected = link && $page.url.pathname === href;
-	$: final_tag = tag || (link ? 'a' : 'div');
-	$: inferred_attrs = link ? {href} : undefined;
+	const {tag, href, align = 'left', attrs} = $props<Props>();
 
-	$: left = align === 'left';
-	$: right = align === 'right';
-	$: above = align === 'above';
-	$: below = align === 'below';
+	const link = $derived(!!href);
+	const selected = $derived(link && $page.url.pathname === href);
+	const final_tag = $derived(tag || (link ? 'a' : 'div'));
+	const inferred_attrs = $derived(link ? {href} : undefined);
 
-	$: icon = link ? '🔗' : '🪧';
+	const left = $derived(align === 'left');
+	const right = $derived(align === 'right');
+	const above = $derived(align === 'above');
+	const below = $derived(align === 'below');
+
+	const icon = $derived(link ? '🔗' : '🪧');
 </script>
 
 <svelte:element
