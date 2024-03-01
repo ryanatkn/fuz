@@ -4,12 +4,19 @@
 	import Pending_Animation from '$lib/Pending_Animation.svelte';
 	import {get_contextmenu, type Contextmenu_Run} from '$lib/contextmenu.js';
 
-	export let run: Contextmenu_Run;
+	interface Props {
+		run: Contextmenu_Run;
+	}
 
+	const {run} = $props<Props>();
+
+	// TODO refactor away from stores
 	// This store makes `run` reactive
 	// because it's a param to `contextmenu.add_entry` which @initializes.
 	const runStore = writable(run);
-	$: if ($runStore !== run) $runStore = run;
+	$effect(() => {
+		if ($runStore !== run) $runStore = run;
+	});
 
 	const contextmenu = get_contextmenu();
 
@@ -26,7 +33,7 @@
 	};
 
 	// the `$contextmenu` is needed because `entry` is not reactive
-	$: ({selected, pending, error_message} = $contextmenu && entry);
+	const {selected, pending, error_message} = $derived($contextmenu && entry);
 </script>
 
 <!-- disabling the a11y warning because a parent element handles keyboard events -->

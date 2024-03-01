@@ -5,7 +5,7 @@
 		tag?: string | undefined;
 		href?: string | undefined;
 		align?: 'left' | 'right' | 'above' | 'below';
-		attrs?: any;
+		attrs?: any; // type? what about the optional tag though? (button etc - maybe API should be more explicit)
 		// TODO BLOCK default and `icon` snippets
 	}
 
