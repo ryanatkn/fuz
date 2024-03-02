@@ -18,8 +18,8 @@
 		<section>
 			Fuz provides an arbitrary subset of utility classes for CSS, and defers to CSS in <a
 				href="https://svelte.dev/docs/svelte-components#style">Svelte's <code>{'<'}style></code></a
-			> for complex and uncommon patterns. This may change depending on build tool sophistication, like
-			a compiler or Vite plugin to remove unused styles.
+			> for complex and uncommon patterns. More classes could be added with increased build tool sophistication,
+			like a compiler or Vite plugin to remove unused styles.
 		</section>
 		<section>
 			<h3>Raw CSS</h3>
