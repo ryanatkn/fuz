@@ -6,17 +6,23 @@
 	import type {Tome} from '$lib/tome.js';
 	import Library_Panel from '$lib/Library_Panel.svelte';
 
-	// Library_Menu floats alongside the docs, showing scrolled item as selected
-	export let tomes: Tome[];
+	interface Props {
+		tomes: Tome[];
+	}
 
-	let tomes_by_category: Record<string, Tome[]>;
-	$: tomes_by_category = tomes.reduce(
-		(result, c) => {
-			if (!(c.category in result)) result[c.category] = [];
-			result[c.category].push(c);
-			return result;
-		},
-		{} as Record<string, Tome[]>,
+	const {tomes} = $props<Props>();
+
+	// Library_Menu floats alongside the docs, showing scrolled item as selected
+
+	const tomes_by_category = $derived(
+		tomes.reduce(
+			(result, c) => {
+				if (!(c.category in result)) result[c.category] = [];
+				result[c.category].push(c);
+				return result;
+			},
+			{} as Record<string, Tome[]>,
+		),
 	);
 </script>
 

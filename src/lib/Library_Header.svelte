@@ -4,7 +4,11 @@
 	import Library_Panel from '$lib/Library_Panel.svelte';
 	import Package_Summary from '$lib/Package_Summary.svelte';
 
-	export let pkg: Package_Meta;
+	interface Props {
+		pkg: Package_Meta;
+	}
+
+	const {pkg} = $props<Props>();
 </script>
 
 <Library_Panel><slot><Package_Summary {pkg} /></slot></Library_Panel>
