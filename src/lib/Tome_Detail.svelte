@@ -3,9 +3,13 @@
 	import Library_Panel from '$lib/Library_Panel.svelte';
 	import type {Tome} from '$lib/tome.js';
 
-	// TODO component name?
+	interface Props {
+		tome: Tome;
+	}
 
-	export let tome: Tome;
+	const {tome} = $props<Props>();
+
+	// TODO component name?
 </script>
 
 <Library_Panel>

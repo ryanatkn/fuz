@@ -1,11 +1,22 @@
 <script lang="ts">
 	import {base} from '$app/paths';
+	import type {HTMLAnchorAttributes} from 'svelte/elements';
+
+	interface Props {
+		name: string; // TODO type, generate from `tomes`?
+		chip?: boolean;
+		attrs?: HTMLAnchorAttributes;
+	}
+
+	const {name, chip = true, attrs} = $props<Props>();
 
 	// TODO add contextmenu behavior
-
-	export let name: string; // TODO type, generate from `tomes`?
-
-	// TODO active state
 </script>
 
-<code {...$$restProps}><a href="{base}/library/{name}"><slot>{name}</slot></a></code>
+<a {...attrs} class:chip href="{base}/library/{name}"><slot>{name}</slot></a>
+
+<style>
+	a {
+		font-family: var(--font_family_mono);
+	}
+</style>
