@@ -1,8 +1,12 @@
 <script lang="ts">
-	export let text: string;
+	interface Props {
+		text: string;
+	}
 
-	let copied = false;
-	let failed = false;
+	const {text} = $props<Props>();
+
+	let copied = $state(false);
+	let failed = $state(false);
 
 	const copy = async () => {
 		copied = false;

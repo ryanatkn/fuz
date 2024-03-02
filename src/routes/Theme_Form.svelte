@@ -144,9 +144,6 @@
 	.rendered {
 		position: relative; /* for the .copy button */
 		flex: 1;
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
 		overflow: auto;
 	}
 	/* TODO this is hacky, maybe pass classes to `Code`? or what else? */
