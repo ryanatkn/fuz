@@ -94,7 +94,8 @@
 						>{frogsRunning}</button
 					>{'}'}</code
 				>
-				<br />
+			</p>
+			<p>
 				and slots <input class="inline" bind:value={turtleSlot2a} />
 				<input class="inline" bind:value={turtleSlot2b} />
 			</p>

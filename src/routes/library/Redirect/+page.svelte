@@ -23,8 +23,8 @@
 		<!-- TODO make this a generic data-driven helper -->
 		<Code content={`import Redirect from '@ryanatkn/fuz/Redirect.svelte';`} lang="ts" />
 		<aside>
-			Please note: <code>auto={'{'}false}</code> is only used here to prevent the page from redirecting!
-			Normally you wouldn't include it as a prop.
+			Note that <code>auto={'{'}false}</code> is only used here to prevent the page from
+			redirecting! Typical usage lets it default to <code>true</code>.
 		</aside>
 		<section>
 			<Code content={`<Redirect auto={false} />`} />

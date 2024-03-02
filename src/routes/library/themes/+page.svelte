@@ -166,7 +166,11 @@
 			<h3>scoped themes</h3>
 		</div>
 		<details>
-			<summary>⚠️ scoped themes are a work in progress</summary>
+			<summary
+				>⚠️ scoped themes are a work in progress, maybe this should be as simple as a <code
+					>.dark</code
+				> class but that would require some other changes</summary
+			>
 			<div class="mb_lg prose">
 				<p>Scope a theme to one branch of the DOM tree with <code>Themed_Scope</code>:</p>
 				<Code content={`import Themed_Scope from '@ryanatkn/fuz/Themed_Scope.svelte';`} lang="ts" />

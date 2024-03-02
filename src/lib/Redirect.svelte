@@ -4,23 +4,25 @@
 	import {strip_start} from '@ryanatkn/belt/string.js';
 	import {goto} from '$app/navigation';
 
-	/**
-	 * The target host to redirect to. Defaults to the current `location.host`.
-	 * @nonreactive
-	 */
-	export let host = '';
+	interface Props {
+		/**
+		 * The target host to redirect to. Defaults to the current `location.host`.
+		 * @nonreactive
+		 */
+		host?: string;
+		/**
+		 * The target path to redirect to. Defaults to the current `location.pathname`.
+		 * @nonreactive
+		 */
+		path?: string;
+		/**
+		 * Should the redirect happen automatically without user input? Defaults to `true`.
+		 * @nonreactive
+		 */
+		auto?: boolean;
+	}
 
-	/**
-	 * The target path to redirect to. Defaults to the current `location.pathname`.
-	 * @nonreactive
-	 */
-	export let path = $page.url.pathname;
-
-	/**
-	 * Should the redirect happen automatically without user input? Defaults to `true`.
-	 * @nonreactive
-	 */
-	export let auto = true;
+	const {host = '', path = $page.url.pathname, auto = true} = $props<Props>();
 
 	const url = host + path;
 
