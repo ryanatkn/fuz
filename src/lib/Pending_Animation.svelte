@@ -9,7 +9,7 @@
 	const {running = true, attrs} = $props<Props>();
 </script>
 
-<div {...attrs} class="pending_animation">
+<div {...attrs} class:pending_animation={true}>
 	<span class:running style="animation-delay: 0s"><slot index={0}>•</slot></span>
 	<span class:running style="animation-delay: 0.09s"><slot index={1}>•</slot></span>
 	<span class:running style="animation-delay: 0.3s"><slot index={2}>•</slot></span>

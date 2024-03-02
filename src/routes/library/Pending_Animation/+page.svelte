@@ -26,23 +26,19 @@
 			/>
 			<Code content={`<Pending_Animation running={${pendingAnimation0Running}} />`} />
 			<!-- svelte-ignore a11y-click-events-have-key-events a11y-no-static-element-interactions -->
-			<div on:click={() => (pendingAnimation0Running = !pendingAnimation0Running)}>
+			<div class="mb_lg">
 				<Pending_Animation running={pendingAnimation0Running} />
 			</div>
-			<button on:click={() => (pendingAnimation0Running = !pendingAnimation0Running)}
-				>{#if pendingAnimation0Running}pause animation{:else}play animation{/if}</button
-			>
+			<p>
+				<button on:click={() => (pendingAnimation0Running = !pendingAnimation0Running)}
+					>{#if pendingAnimation0Running}pause animation{:else}play animation{/if}</button
+				>
+			</p>
 			<Code
-				content={`<Pending_Animation\n\tattrs={{class: 'h_100'}}\n\trunning={${pendingAnimation0Running}}\n/>`}
+				content={`<Pending_Animation\n\tattrs={{class: 'size_xl5'}}\n\trunning={${pendingAnimation0Running}}\n/>`}
 			/>
-			<div
-				class="box"
-				style:height="19rem"
-				style:align-items="flex-start"
-				on:click={() => (pendingAnimation0Running = !pendingAnimation0Running)}
-				role="none"
-			>
-				<Pending_Animation attrs={{class: 'h_100'}} running={pendingAnimation0Running} />
+			<div class="box" style:align-items="flex-start" role="none">
+				<Pending_Animation attrs={{class: 'size_xl5'}} running={pendingAnimation0Running} />
 			</div>
 		</section>
 		<section>
