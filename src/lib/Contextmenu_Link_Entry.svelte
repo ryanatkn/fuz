@@ -1,9 +1,16 @@
 <script lang="ts">
 	import {strip_start} from '@ryanatkn/belt/string.js';
+	import type {Snippet} from 'svelte';
 
 	import {get_contextmenu} from '$lib/contextmenu.js';
 
-	export let href: string;
+	interface Props {
+		href: string;
+		children?: Snippet;
+		icon?: Snippet<[icon: string]>;
+	}
+
+	const {href, children, icon} = $props<Props>();
 
 	const contextmenu = get_contextmenu();
 
@@ -13,9 +20,9 @@
 		return formatted.startsWith(host + '/') ? strip_start(formatted, host) : formatted;
 	};
 
-	$: text = format_url(href);
-	$: external = !(text[0] === '.' || (text[0] === '/' && text[1] !== '/'));
-	$: rel = external ? 'noreferrer' : undefined;
+	const text = $derived(format_url(href));
+	const external = $derived(!(text[0] === '.' || (text[0] === '/' && text[1] !== '/')));
+	const rel = $derived(external ? 'noreferrer' : undefined);
 </script>
 
 <!-- TODO this doesn't work with the keyboard controls, need to use `menuitem` -->
@@ -23,9 +30,13 @@
 <li role="none">
 	<a class="menu_item plain" role="menuitem" {href} {rel} on:click={() => contextmenu.close()}>
 		<div class="content">
-			<div class="icon">🔗</div>
+			<div class="icon">
+				{#if icon}{@render icon('🔗')}{:else}🔗{/if}
+			</div>
 			<div class="title">
-				<span class="text">{text}</span>
+				<span class="text"
+					>{#if children}{@render children()}{:else}{text}{/if}</span
+				>
 			</div>
 		</div>
 	</a>
