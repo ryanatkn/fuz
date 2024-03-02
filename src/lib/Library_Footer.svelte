@@ -4,10 +4,14 @@
 
 	import Github_Logo from '$lib/Github_Logo.svelte';
 
-	export let pkg: Package_Meta;
-	export let root_url: Url | null = null;
+	interface Props {
+		pkg: Package_Meta;
+		root_url?: Url | null;
+	}
 
-	$: ({repo_url} = pkg);
+	const {pkg, root_url = null} = $props<Props>();
+
+	const repo_url = $derived(pkg.repo_url);
 </script>
 
 <footer class="panel p_lg">
