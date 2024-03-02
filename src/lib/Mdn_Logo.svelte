@@ -1,8 +1,17 @@
 <script lang="ts">
-	export let size = 'var(--size, var(--size_md))';
-	export let fill = '#8cb4ff';
-	export let label = 'GitHub icon';
-	export let attrs: any = undefined;
+	interface Props {
+		size?: string;
+		fill?: string;
+		label?: string;
+		attrs?: any;
+	}
+
+	const {
+		size = 'var(--size, var(--size_md))',
+		fill = '#8cb4ff',
+		label = 'GitHub icon',
+		attrs,
+	} = $props<Props>();
 
 	// TODO do something more optimal
 </script>

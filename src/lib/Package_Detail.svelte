@@ -3,25 +3,43 @@
 	import {ensure_end, strip_end, strip_start} from '@ryanatkn/belt/string.js';
 	import {format_host, type Package_Meta} from '@ryanatkn/gro/package_meta.js';
 
-	export let pkg: Package_Meta; // TODO normalized version with cached primitives?
+	interface Props {
+		// TODO normalized version with cached primitives?
+		pkg: Package_Meta;
+	}
+
+	const {pkg} = $props<Props>();
 
 	// TODO show other data (lines of code)
 
-	$: ({package_json, src_json, npm_url, repo_name, repo_url, changelog_url, homepage_url} = pkg);
-	$: ({name, version, description, icon, license, repository, exports: pkg_exports} = package_json);
-	$: ({modules: pkg_modules} = src_json);
+	const {package_json, src_json, npm_url, repo_name, repo_url, changelog_url, homepage_url} =
+		$derived(pkg);
+	const {
+		name,
+		version,
+		description,
+		icon,
+		license,
+		repository,
+		exports: pkg_exports,
+	} = $derived(package_json);
+	const {modules: pkg_modules} = $derived(src_json);
 
 	// TODO helper (zod parser?)
-	$: repository_url = repository
-		? strip_start(
-				strip_end(
-					strip_end(typeof repository === 'string' ? repository : repository.url, '.git'),
-					'/',
-				),
-				'git+',
-			)
-		: null;
-	$: license_url = license && repository_url ? repository_url + '/blob/main/LICENSE' : null;
+	const repository_url = $derived(
+		repository
+			? strip_start(
+					strip_end(
+						strip_end(typeof repository === 'string' ? repository : repository.url, '.git'),
+						'/',
+					),
+					'git+',
+				)
+			: null,
+	);
+	const license_url = $derived(
+		license && repository_url ? repository_url + '/blob/main/LICENSE' : null,
+	);
 
 	// TODO refactor
 	const to_source_url = (repo_url: string, module_name: string): string =>
@@ -29,15 +47,17 @@
 		'/blob/main/src/lib/' +
 		(module_name.endsWith('.js') ? module_name.slice(0, -3) + '.ts' : module_name);
 
-	$: pkg_exports_keys = pkg_exports && Object.keys(pkg_exports); // TODO hacky, see usage
+	const pkg_exports_keys = $derived(pkg_exports && Object.keys(pkg_exports)); // TODO hacky, see usage
 
 	// TODO helper, look at existing code
-	$: modules = pkg_exports
-		? Object.keys(pkg_exports).map((k) => {
-				const v = strip_start(k, './');
-				return v === '.' ? 'index.js' : v;
-			})
-		: null;
+	const modules = $derived(
+		pkg_exports
+			? Object.keys(pkg_exports).map((k) => {
+					const v = strip_start(k, './');
+					return v === '.' ? 'index.js' : v;
+				})
+			: null,
+	);
 </script>
 
 <div class="package_detail">

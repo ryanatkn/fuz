@@ -32,12 +32,16 @@
 <Tome_Detail {tome}>
 	<div class="prose">
 		<aside>forms need more work</aside>
+		<p>
+			a <Mdn_Link href="Web/HTML/Element/form">form</Mdn_Link> with a <Mdn_Link
+				href="Web/HTML/Element/fieldset">fieldset</Mdn_Link
+			>:
+		</p>
 		<Code
 			content={`<form>
 	<fieldset>
 		<legend>
-			a <code>legend</code>
-			in a <code>fieldset</code>
+			a legend
 		</legend>
 		<label>
 			<div class="title">
@@ -57,11 +61,7 @@
 		<div class="width_sm">
 			<form>
 				<fieldset>
-					<legend
-						>a <Mdn_Link href="Web/HTML/Element/legend">legend</Mdn_Link>
-						in a
-						<Mdn_Link href="Web/HTML/Element/fieldset">fieldset</Mdn_Link></legend
-					>
+					<legend>a <Mdn_Link href="Web/HTML/Element/legend">legend</Mdn_Link></legend>
 					<label>
 						<div class="title">username</div>
 						<input bind:value={username} disabled={created_account} placeholder=">" />

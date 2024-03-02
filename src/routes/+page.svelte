@@ -49,7 +49,9 @@
 			</menu>
 		</section>
 		<section>
-			<Library_Footer {pkg} />
+			<Library_Footer {pkg}>
+				<a href="{base}/about">about</a>
+			</Library_Footer>
 		</section>
 	</div>
 </main>
