@@ -12,91 +12,107 @@
 	// to work around iOS not firing the `'contextmenu'` event:
 	// https://github.com/ryanatkn/fuz/pull/319
 
-	/**
-	 * The `contextmenu` prop is not reactive because that's a rare corner case and
-	 * it's easier to put the `contextmenu` directly in the context rather than wrapping with a store.
-	 * If you need to change the contextmenu prop for some reason, use a `{#key contextmenu}` block:
-	 * https://svelte.dev/docs#template-syntax-key
-	 * @nonreactive
-	 */
-	export let contextmenu: Contextmenu_Store;
+	interface Props {
+		/**
+		 * The `contextmenu` prop is not reactive because that's a rare corner case and
+		 * it's easier to put the `contextmenu` directly in the context rather than wrapping with a store.
+		 * If you need to change the contextmenu prop for some reason, use a `{#key contextmenu}` block:
+		 * https://svelte.dev/docs#template-syntax-key
+		 * @nonreactive
+		 */
+		contextmenu: Contextmenu_Store;
+		/**
+		 * The number of pixels the pointer can be moved without canceling `longpress`.
+		 * Defaults to half the default `--input_height`.
+		 */
+		longpress_move_tolerance?: number;
+		/**
+		 * The number of milliseconds after a touch starts before a `longpress` is detected.
+		 * This value needs to be lower than iOS's ~500 so we can intercept its behavior.
+		 */
+		longpress_duration?: number;
+		/**
+		 * Whether to detect tap-then-longpress to bypass `longpress`.
+		 * Setting to `false` disables the gesture.
+		 */
+		bypass_with_tap_then_longpress?: boolean;
+		/**
+		 * The number of milliseconds between taps to detect a gesture that bypasses a `longpress`.
+		 * Used only when `bypass_with_tap_then_longpress` is true.
+		 * If the duration is too long, it'll detect more false positives and interrupt normal usage,
+		 * but too short and some people will have difficulty performing the gesture.
+		 */
+		tap_then_longpress_duration?: number;
+		/**
+		 * The number of pixels the pointer can be moved between taps to detect a tap-then-longpress.
+		 * Used only when `bypass_with_tap_then_longpress` is true.
+		 */
+		tap_then_longpress_move_tolerance?: number;
+		/**
+		 * The number of pixels to offset from the pointer X position when opened.
+		 * Useful to ensure the first menu item is immediately under the pointer.
+		 */
+		open_offset_x?: number;
+		/**
+		 * The number of pixels to offset from the pointer Y position when opened.
+		 * Useful to ensure the first menu item is immediately under the pointer.
+		 */
+		open_offset_y?: number;
+	}
+
+	const {
+		contextmenu,
+		longpress_move_tolerance = 21,
+		longpress_duration = 633,
+		bypass_with_tap_then_longpress = true,
+		tap_then_longpress_duration = 660,
+		tap_then_longpress_move_tolerance = 7,
+		open_offset_x = -2,
+		open_offset_y = -2,
+	} = $props<Props>();
+
 	set_contextmenu(contextmenu);
 
-	/**
-	 * The number of pixels the pointer can be moved without canceling `longpress`.
-	 * Defaults to half the default `--input_height`.
-	 */
-	export let longpress_move_tolerance = 21;
+	let el: HTMLElement | undefined = $state();
 
-	/**
-	 * The number of milliseconds after a touch starts before a `longpress` is detected.
-	 * This value needs to be lower than iOS's ~500 so we can intercept its behavior.
-	 */
-	export let longpress_duration = 633;
-
-	/**
-	 * Whether to detect tap-then-longpress to bypass `longpress`.
-	 * Setting to `false` disables the gesture.
-	 */
-	export let bypass_with_tap_then_longpress = true;
-
-	/**
-	 * The number of milliseconds between taps to detect a gesture that bypasses a `longpress`.
-	 * Used only when `bypass_with_tap_then_longpress` is true.
-	 * If the duration is too long, it'll detect more false positives and interrupt normal usage,
-	 * but too short and some people will have difficulty performing the gesture.
-	 */
-	export let tap_then_longpress_duration = 660;
-
-	/**
-	 * The number of pixels the pointer can be moved between taps to detect a tap-then-longpress.
-	 * Used only when `bypass_with_tap_then_longpress` is true.
-	 */
-	export let tap_then_longpress_move_tolerance = 7;
-
-	/**
-	 * The number of pixels to offset from the pointer X position when opened.
-	 * Useful to ensure the first menu item is immediately under the pointer.
-	 */
-	export let open_offset_x = -2;
-
-	/**
-	 * The number of pixels to offset from the pointer Y position when opened.
-	 * Useful to ensure the first menu item is immediately under the pointer.
-	 */
-	export let open_offset_y = -2;
-
-	let el: HTMLElement | undefined;
-
-	$: ({layout, initial_layout} = contextmenu);
+	const {layout, initial_layout} = $derived(contextmenu);
 
 	// Update the layout unless it's custom.
 	// Custom layouts are when `contextmenu.initial_layout` is the same as `contextmenu.layout`.
-	$: custom_layout = layout === initial_layout;
-	let clientWidth: number | undefined = undefined;
-	let clientHeight: number | undefined = undefined;
-	$: if (!custom_layout && clientWidth !== undefined && clientHeight !== undefined) {
-		$layout = {width: clientWidth, height: clientHeight};
-	}
+	const custom_layout = $derived(layout === initial_layout);
+	let clientWidth: number | undefined = $state();
+	let clientHeight: number | undefined = $state();
+	$effect(() => {
+		if (!custom_layout && clientWidth !== undefined && clientHeight !== undefined) {
+			$layout = {width: clientWidth, height: clientHeight};
+		}
+	});
 
-	$: ({open, x: contextmenu_x, y: contextmenu_y} = $contextmenu);
+	const {open, x: contextmenu_x, y: contextmenu_y} = $derived($contextmenu);
 	const dimensions = set_contextmenu_dimensions();
-	$: if (el) {
-		const rect = el.getBoundingClientRect();
-		$dimensions = {width: rect.width, height: rect.height};
-	}
-	$: x = contextmenu_x + Math.min(0, $layout.width - (contextmenu_x + $dimensions.width));
-	$: y = contextmenu_y + Math.min(0, $layout.height - (contextmenu_y + $dimensions.height));
+	// TODO BLOCK maybe `derived.by`?
+	$effect(() => {
+		if (el) {
+			const rect = el.getBoundingClientRect();
+			$dimensions = {width: rect.width, height: rect.height};
+		}
+	});
+	const x = $derived(
+		contextmenu_x + Math.min(0, $layout.width - (contextmenu_x + $dimensions.width)),
+	);
+	const y = $derived(
+		contextmenu_y + Math.min(0, $layout.height - (contextmenu_y + $dimensions.height)),
+	);
 
 	// TODO maybe show an indicator fade in at these coordinates
 
 	// These values are `undefined` when unused, and `null` after being reset.
-	let touch_x: number | undefined | null;
-	let touch_y: number | undefined | null;
-	let longpress_start_time: number | undefined | null;
-	let longpress_timeout: NodeJS.Timeout | undefined | null;
-	let longpress_opened: boolean | undefined;
-	let longpress_bypass: boolean | undefined;
+	let touch_x: number | undefined | null = $state();
+	let touch_y: number | undefined | null = $state();
+	let longpress_start_time: number | undefined | null = $state();
+	let longpress_timeout: NodeJS.Timeout | undefined | null = $state();
+	let longpress_opened: boolean | undefined = $state();
+	let longpress_bypass: boolean | undefined = $state();
 
 	const reset_longpress = (): void => {
 		if (longpress_opened) longpress_opened = false;
