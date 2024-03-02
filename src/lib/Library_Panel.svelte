@@ -1,5 +1,15 @@
+<script lang="ts">
+	import type {Snippet} from 'svelte';
+
+	interface Props {
+		children: Snippet;
+	}
+
+	const {children} = $props<Props>();
+</script>
+
 <div class="library_panel panel">
-	<slot />
+	{@render children()}
 </div>
 
 <style>
