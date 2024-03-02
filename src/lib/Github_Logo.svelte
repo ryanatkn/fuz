@@ -1,10 +1,19 @@
 <script lang="ts">
-	export let size = 'var(--space_xl7, 64px)';
-	export let fill = 'var(--color, #000)';
-	export let label = 'GitHub icon';
-	export let attrs: any = undefined;
+	interface Props {
+		size?: string;
+		fill?: string;
+		label?: string;
+		attrs?: any; // TODO type
+	}
 
-	// TODO do something more optimal
+	const {
+		size = 'var(--space_xl7, 64px)',
+		fill = 'var(--color, #000)',
+		label = 'GitHub icon',
+		attrs,
+	} = $props<Props>();
+
+	// TODO do something more optimal preferring {@html}
 </script>
 
 <svg
