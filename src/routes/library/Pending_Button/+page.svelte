@@ -28,13 +28,14 @@
 				content={`import Pending_Button from '@ryanatkn/fuz/Pending_Button.svelte';`}
 				lang="ts"
 			/>
-			<button
-				on:click={() => {
-					pending_1 = !pending_1;
-					pending_2 = !pending_2;
-				}}>toggle the pending status of the buttons below</button
-			>
-
+			<p>
+				<button
+					on:click={() => {
+						pending_1 = !pending_1;
+						pending_2 = !pending_2;
+					}}>toggle the pending status of the buttons below</button
+				>
+			</p>
 			<Code
 				content={`<Pending_Button
 	pending={${pending_1}}
@@ -43,9 +44,11 @@
 	do something async
 </Pending_Button>`}
 			/>
-			<Pending_Button pending={pending_1} on:click={() => (pending_1 = !pending_1)}>
-				do something async
-			</Pending_Button>
+			<p>
+				<Pending_Button pending={pending_1} on:click={() => (pending_1 = !pending_1)}>
+					do something async
+				</Pending_Button>
+			</p>
 			<Code
 				content={`<Pending_Button
 	pending={${pending_2}}

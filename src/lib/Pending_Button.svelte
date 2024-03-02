@@ -1,12 +1,17 @@
 <script lang="ts">
 	import Pending_Animation from '$lib/Pending_Animation.svelte';
 
-	export let pending: boolean;
-	export let running: boolean | undefined = undefined;
-	export let el: HTMLButtonElement | undefined = undefined;
-	export let title: string | undefined = undefined;
-	export let disabled: boolean | undefined = undefined;
-	export let attrs: any = undefined;
+	interface Props {
+		pending: boolean;
+		running?: boolean;
+		el?: HTMLButtonElement;
+		title?: string;
+		disabled?: boolean;
+		attrs?: any;
+	}
+
+	// TODO BLOCK @multiple just disable this eslint rule when we use bindings? would prefer not to disable for all Svelte so let continues to signal reassigment
+	let {pending, running, el, title, disabled, attrs} = $props<Props>(); // eslint-disable-line prefer-const
 </script>
 
 <button

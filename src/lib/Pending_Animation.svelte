@@ -1,13 +1,14 @@
 <script lang="ts">
-	// TODO what if this comment here appeared as a description
-	// on mouseover of the property `running` from within the app?
-	export let running = true;
-	export let attrs: any = undefined;
+	import type {HTMLAttributes} from 'svelte/elements';
 
-	// TODO support a `count` prop that defaults to 3 -- is tricky because of handcrafted animation delays
+	interface Props {
+		running?: boolean;
+		attrs?: HTMLAttributes<HTMLDivElement>;
+	}
+
+	const {running = true, attrs} = $props<Props>();
 </script>
 
-<!-- using `class:` directive to avoid collision with `class` attribute -->
 <div {...attrs} class="pending_animation">
 	<span class:running style="animation-delay: 0s"><slot index={0}>•</slot></span>
 	<span class:running style="animation-delay: 0.09s"><slot index={1}>•</slot></span>

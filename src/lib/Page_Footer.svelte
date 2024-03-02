@@ -5,8 +5,12 @@
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
 	import Library_Footer from '$lib/Library_Footer.svelte';
 
-	export let pkg: Package_Meta | {url: string; package_json: null};
-	export let root_url: Url | null = null;
+	interface Props {
+		pkg: Package_Meta | {url: string; package_json: null};
+		root_url?: Url | null;
+	}
+
+	const {pkg, root_url = null} = $props<Props>();
 </script>
 
 <footer>

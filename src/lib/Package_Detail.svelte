@@ -4,8 +4,7 @@
 	import {format_host, type Package_Meta} from '@ryanatkn/gro/package_meta.js';
 
 	interface Props {
-		// TODO normalized version with cached primitives?
-		pkg: Package_Meta;
+		pkg: Package_Meta; // TODO normalized version with cached primitives?
 	}
 
 	const {pkg} = $props<Props>();

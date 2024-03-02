@@ -3,7 +3,11 @@
 
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
 
-	export let pkg: Package_Meta | {url: string; package_json: null};
+	interface Props {
+		pkg: Package_Meta | {url: string; package_json: null};
+	}
+
+	const {pkg} = $props<Props>();
 </script>
 
 <div>
