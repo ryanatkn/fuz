@@ -1,6 +1,11 @@
 <script lang="ts">
-	export let lazy = true;
-	export let open: boolean | null | undefined = undefined;
+	interface Props {
+		lazy?: boolean;
+		open?: boolean | null | undefined;
+	}
+
+	// TODO BLOCK @multiple just disable this eslint rule when we use bindings? would prefer not to disable for all Svelte so let continues to signal reassigment
+	let {lazy = true, open} = $props<Props>(); // eslint-disable-line prefer-const
 </script>
 
 <!-- TODO svelte5 splat attrs -->
