@@ -2,11 +2,15 @@
 	import Contextmenu_Entry from '$lib/Contextmenu_Entry.svelte';
 	import type {Contextmenu_Run} from '$lib/contextmenu.js';
 
-	// TODO consider making this the implicit default entry, so consumers can simply declare `{run, content}`
+	interface Props {
+		run: Contextmenu_Run;
+		icon: string; // TODO think about this API, maybe make a snippet or both? maybe just a snippet after changing from actions to nested components
+		content: string; // TODO think about this API, maybe make a snippet or both? maybe just a snippet after changing from actions to nested components
+	}
 
-	export let content: string;
-	export let icon: string;
-	export let run: Contextmenu_Run;
+	const {run, content, icon} = $props<Props>();
+
+	// TODO consider making this the implicit default entry, so consumers can simply declare `{run, content}`
 </script>
 
 <Contextmenu_Entry {run}>

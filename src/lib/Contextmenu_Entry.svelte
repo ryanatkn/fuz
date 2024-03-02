@@ -6,6 +6,8 @@
 
 	interface Props {
 		run: Contextmenu_Run;
+		// children: Snippet; // TODO think about this API, maybe make a snippet or both? maybe just a snippet after changing from actions to nested components
+		// icon: Snippet;  // TODO think about this API, maybe make a snippet or both? maybe just a snippet after changing from actions to nested components
 	}
 
 	const {run} = $props<Props>();

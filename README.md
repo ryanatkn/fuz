@@ -48,7 +48,6 @@ The CSS design system:
 
 The Svelte components and helpers:
 
-- pending migration to Svelte 5
 - builds on the CSS design system
 - plain CSS and minimal abstraction
 - near-zero dependencies except for Svelte, SvelteKit, and my utility library
