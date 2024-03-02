@@ -1,9 +1,13 @@
 <script lang="ts">
 	import type {Style_Variable} from '$lib/theme.js';
 
-	// TODO @multiple add to $lib?
+	interface Props {
+		variable: Style_Variable;
+	}
 
-	export let variable: Style_Variable;
+	const {variable} = $props<Props>();
+
+	// TODO @multiple add to $lib?
 
 	// TODO needs a lot of work - for example, enable editing the values directly, and certain values like colors could be rendered
 </script>
