@@ -14,9 +14,9 @@
 <Tome_Detail {tome}>
 	<div class="prose">
 		<blockquote>
-			styles for plain <Mdn_Link href="Web/HTML/Element">HTML elements</Mdn_Link>
-			with app-like presentation, for document-like presentation see <Tome_Link name="typography" />
-			and <Tome_Link name="prose" />
+			Styles for plain <Mdn_Link href="Web/HTML/Element">HTML elements</Mdn_Link>
+			with app-like presentation. For document-like presentation see <Tome_Link name="typography" />
+			and <Tome_Link name="prose" />.
 		</blockquote>
 		<h3>
 			<span style="font-size: var(--size_xl3)">👆</span>
