@@ -167,7 +167,7 @@
 		</div>
 		<details>
 			<summary
-				>⚠️ scoped themes are a work in progress, probably requires some bigger changes</summary
+				>⚠️ scoped themes are a work in progress, probably requires some bigger changes to Themed</summary
 			>
 			<div class="mb_lg prose">
 				<p>Scope a theme to one branch of the DOM tree with <code>Themed_Scope</code>:</p>
