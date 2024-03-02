@@ -17,7 +17,7 @@
 	const options = $derived(alert_status_options[status]);
 	const final_icon = $derived(icon === undefined ? options.icon : icon);
 	// TODO change this to use the hue and put transparency on the borders, or add a borderColor option
-	const color = $derived(options.color);
+	const {color} = $derived(options);
 </script>
 
 {#if button}

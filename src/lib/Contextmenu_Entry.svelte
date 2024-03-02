@@ -34,6 +34,7 @@
 		contextmenu.select(entry);
 	};
 
+	// TODO @multiple improve with runes
 	// the `$contextmenu` is needed because `entry` is not reactive
 	const {selected, pending, error_message} = $derived($contextmenu && entry);
 </script>

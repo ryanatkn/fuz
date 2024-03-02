@@ -5,8 +5,8 @@
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
 
 	// TODO this could be a prop passed by `Breadcrumb`, is commonly needed
-	$: ({pathname} = $page.url);
-	$: root = pathname === '/';
+	const {pathname} = $derived($page.url);
+	const root = $derived(pathname === '/');
 
 	const iframed = is_iframed();
 	const enabled = !iframed;

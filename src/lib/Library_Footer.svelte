@@ -11,7 +11,7 @@
 
 	const {pkg, root_url = null} = $props<Props>();
 
-	const repo_url = $derived(pkg.repo_url);
+	const {repo_url} = $derived(pkg);
 </script>
 
 <footer class="panel p_lg">
