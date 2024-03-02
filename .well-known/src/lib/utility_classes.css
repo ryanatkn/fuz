@@ -269,18 +269,18 @@ text
 	margin-bottom: auto;
 }
 
-.w_100 {
-	width: 100%;
-}
 .w_0 {
 	width: 0;
 }
-
-.h_100 {
-	height: 100%;
+.w_100 {
+	width: 100%;
 }
+
 .h_0 {
 	height: 0;
+}
+.h_100 {
+	height: 100%;
 }
 
 .fade_0 {
