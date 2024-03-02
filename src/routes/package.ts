@@ -120,7 +120,6 @@ export const package_json = {
 			default: './dist/Details.svelte',
 			types: './dist/Details.svelte.d.ts',
 		},
-		'./devmode.js': {default: './dist/devmode.js', types: './dist/devmode.d.ts'},
 		'./Dialog.svelte': {
 			svelte: './dist/Dialog.svelte',
 			default: './dist/Dialog.svelte',
@@ -323,13 +322,6 @@ export const src_json = {
 		},
 		'./Copy_To_Clipboard.svelte': {path: 'Copy_To_Clipboard.svelte', declarations: []},
 		'./Details.svelte': {path: 'Details.svelte', declarations: []},
-		'./devmode.js': {
-			path: 'devmode.ts',
-			declarations: [
-				{name: 'get_devmode', kind: 'function'},
-				{name: 'set_devmode', kind: 'function'},
-			],
-		},
 		'./Dialog.svelte': {path: 'Dialog.svelte', declarations: []},
 		'./dialog.js': {
 			path: 'dialog.ts',

@@ -160,10 +160,6 @@
       "default": "./dist/Details.svelte",
       "types": "./dist/Details.svelte.d.ts"
     },
-    "./devmode.js": {
-      "default": "./dist/devmode.js",
-      "types": "./dist/devmode.d.ts"
-    },
     "./Dialog.svelte": {
       "svelte": "./dist/Dialog.svelte",
       "default": "./dist/Dialog.svelte",
