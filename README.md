@@ -71,9 +71,9 @@ Import modules at their full paths:
 // plain CSS stylesheets:
 import '@ryanatkn/fuz/style.css';
 import '@ryanatkn/fuz/theme.css'; // or bring your own
-import '@ryanatkn/fuz/semantic_classes.css'; // optional
 import '@ryanatkn/fuz/utility_classes.css'; // optional
 import '@ryanatkn/fuz/variable_classes.css'; // optional
+import '@ryanatkn/fuz/semantic_classes.css'; // optional
 import '@ryanatkn/fuz/animations.css'; // optional
 // Svelte components:
 import Themed from '@ryanatkn/fuz/Themed.svelte';
