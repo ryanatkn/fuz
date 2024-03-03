@@ -22,17 +22,39 @@
 			a compiler or Vite plugin to remove unused styles.
 		</section>
 		<section>
+			<h3>Optional CSS classes</h3>
+			<p>Fuz has three optional CSS files with classes. To use them:</p>
+			<Code
+				content={`<!-- +layout.svelte -->
+<script>
+	import '@ryanatkn/fuz/style.css'; // required
+	import '@ryanatkn/fuz/theme.css'; // or bring your own
+	import '@ryanatkn/fuz/utility_classes.css';
+	import '@ryanatkn/fuz/variable_classes.css';
+	import '@ryanatkn/fuz/semantic_classes.css';
+	// ...`}
+			/>
+			<p>
+				Utility classes are helpers for base CSS. Variable classes are utility classes based on Fuz
+				style variables. Semantic classes are useful groupings of styles that are like the CSS
+				equivalent of Svelte components.
+			</p>
+		</section>
+		<section>
+			<h3>Utility classees</h3>
+		</section>
+		<section>
 			<h3>Raw CSS</h3>
 			<Details>
-				<summary slot="summary">utility classes</summary>
+				<summary slot="summary">utility_classes.css</summary>
 				<Code content={utility_classes_text} lang="css" />
 			</Details>
 			<Details>
-				<summary slot="summary">variable classes</summary>
+				<summary slot="summary">variable_classes.css</summary>
 				<Code content={variable_classes_text} lang="css" />
 			</Details>
 			<Details>
-				<summary slot="summary">semantic classes</summary>
+				<summary slot="summary">semantic_classes.css</summary>
 				<Code content={semantic_classes_text} lang="css" />
 			</Details>
 		</section>
