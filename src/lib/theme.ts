@@ -86,8 +86,6 @@ export const load_theme = (fallback: Theme = default_themes[0], key = THEME_STOR
 /**
  * Creates an HTML script string to be inserted into the `head`
  * that initializes the dark/light color scheme.
- * This runs before Svelte executes both in SSR and on the client
- * so it avoids flashing the wrong color scheme.
  * https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme
  * Prefers a value in `localStorage` if available, and if not detects using `matchMedia`.
  * On unexpected errors, like if `localStorage` is disabled, the `fallback` value is used.
@@ -108,7 +106,6 @@ export const create_theme_setup_script = (
 	} catch (_) { ${fallback === 'dark' ? "document.documentElement.classList.add('dark');" : ''} }
 `;
 
-// TODO unlike the color scheme, themes currently flash in when the Svelte executes, needs some reworking
 /**
  * Creates an HTML style string to be inserted into the `head`
  * that overrides the theme for a part of the page.
