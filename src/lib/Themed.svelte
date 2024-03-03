@@ -102,24 +102,18 @@
 	let c1 = 0; // hackily skip the first call
 	$effect(() => {
 		const v = $selected_color_scheme;
-		if (c1++) {
-			sync_color_scheme?.(v);
-		}
+		if (c1++) sync_color_scheme?.(v);
 	});
 	let c2 = 0; // hackily skip the first call
 	$effect(() => {
 		const v = $selected_color_scheme;
-		if (c2++) {
-			save_color_scheme?.(v);
-		}
+		if (c2++) save_color_scheme?.(v);
 	});
 
 	let t = 0; // hackily skip the first call
 	$effect(() => {
 		const v = $selected_theme;
-		if (t++) {
-			save_theme?.(v);
-		}
+		if (t++) save_theme?.(v);
 	});
 
 	// TODO this is messy and probably wrong -- do we want both values?
