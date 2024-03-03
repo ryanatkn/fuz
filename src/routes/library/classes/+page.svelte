@@ -3,6 +3,7 @@
 
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
 	import Tome_Link from '$lib/Tome_Link.svelte';
+	import Github_Logo from '$lib/Github_Logo.svelte';
 	import {get_tome} from '$lib/tome.js';
 	import utility_classes_text from '$lib/utility_classes.css?raw';
 	import variable_classes_text from '$lib/variable_classes.css?raw';
@@ -16,6 +17,8 @@
 	const utility_classes = ['utility'];
 	const variable_classes = ['variable'];
 	const semantic_classes = ['semantic'];
+
+	// TODO extract a `Github_Link` like `Mdn_Link`
 </script>
 
 <Tome_Detail {tome}>
@@ -81,8 +84,10 @@
 				<summary slot="summary"
 					><span class="font_family_mono">@ryanatkn/fuz/utility_classes.css</span></summary
 				>
-				<p class="mb_lg">
-					<a href="https://github.com/ryanatkn/fuz/blob/main/src/lib/utility_classes.css">source</a>
+				<p class="source_link">
+					<a href="https://github.com/ryanatkn/fuz/blob/main/src/lib/utility_classes.css"
+						><Github_Logo size="var(--icon_size_xs)" /> <span class="ml_xs">source</span></a
+					>
 				</p>
 				<Code content={utility_classes_text} lang="css" />
 			</Details>
@@ -90,8 +95,9 @@
 				<summary slot="summary"
 					><span class="font_family_mono">@ryanatkn/fuz/variable_classes.css</span></summary
 				>
-				<p class="mb_lg">
-					<a href="https://github.com/ryanatkn/fuz/blob/main/src/lib/variable_classes.css">source</a
+				<p class="source_link">
+					<a href="https://github.com/ryanatkn/fuz/blob/main/src/lib/variable_classes.css"
+						><Github_Logo size="var(--icon_size_xs)" /> <span class="ml_xs">source</span></a
 					>
 				</p>
 				<Code content={variable_classes_text} lang="css" />
@@ -100,8 +106,9 @@
 				<summary slot="summary"
 					><span class="font_family_mono">@ryanatkn/fuz/semantic_classes.css</span></summary
 				>
-				<p class="mb_lg">
-					<a href="https://github.com/ryanatkn/fuz/blob/main/src/lib/semantic_classes.css">source</a
+				<p class="source_link">
+					<a href="https://github.com/ryanatkn/fuz/blob/main/src/lib/semantic_classes.css"
+						><Github_Logo size="var(--icon_size_xs)" /> <span class="ml_xs">source</span></a
 					>
 				</p>
 				<Code content={semantic_classes_text} lang="css" />
@@ -112,5 +119,13 @@
 
 <style>
 	.classes {
+	}
+	.source_link {
+		display: flex;
+		margin-bottom: var(--space_lg);
+	}
+	.source_link a {
+		display: flex;
+		align-items: center;
 	}
 </style>
