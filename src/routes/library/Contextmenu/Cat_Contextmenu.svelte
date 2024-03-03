@@ -3,10 +3,14 @@
 	import Contextmenu_Submenu from '$lib/Contextmenu_Submenu.svelte';
 	import type {Cat_Position, History_Item} from '$routes/library/Contextmenu/helpers.js';
 
-	export let name = 'Cat';
-	export let icon: string | null = '😺';
-	export let position: Cat_Position;
-	export let act: (item: History_Item) => void;
+	interface Props {
+		name?: string;
+		icon?: string | null;
+		position: Cat_Position;
+		act: (item: History_Item) => void;
+	}
+
+	const {name = 'Cat', icon = '😺', position, act} = $props<Props>();
 </script>
 
 <Contextmenu_Submenu>

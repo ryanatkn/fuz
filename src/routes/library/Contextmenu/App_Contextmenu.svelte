@@ -3,7 +3,11 @@
 	import Contextmenu_Link_Entry from '$lib/Contextmenu_Link_Entry.svelte';
 	import GithubLogo from '$lib/Github_Logo.svelte';
 
-	export let toggle_about_dialog: () => void;
+	interface Props {
+		toggle_about_dialog: () => void;
+	}
+
+	const {toggle_about_dialog} = $props<Props>();
 </script>
 
 <Contextmenu_Link_Entry href="https://github.com/ryanatkn/fuz"

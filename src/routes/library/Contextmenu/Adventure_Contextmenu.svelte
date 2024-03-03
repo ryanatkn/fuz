@@ -4,11 +4,15 @@
 	import {type History_Item, type Cat, to_cats_label} from '$routes/library/Contextmenu/helpers.js';
 	import Cat_Contextmenu from '$routes/library/Contextmenu/Cat_Contextmenu.svelte';
 
-	export let home_cats: Cat[];
-	export let adventure_cats: Cat[];
-	export let act: (item: History_Item) => void;
+	interface Props {
+		home_cats: Cat[];
+		adventure_cats: Cat[];
+		act: (item: History_Item) => void;
+	}
 
-	$: cat_to_call_to_adventure = to_cats_label(home_cats);
+	const {home_cats, adventure_cats, act} = $props<Props>();
+
+	const cat_to_call_to_adventure = $derived(to_cats_label(home_cats));
 </script>
 
 <Contextmenu_Submenu>

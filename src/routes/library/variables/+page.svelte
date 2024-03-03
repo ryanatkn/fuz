@@ -12,7 +12,7 @@
 
 	const tome = get_tome(LIBRARY_ITEM_NAME);
 
-	export let variables = default_variables.slice().sort((a, b) => a.name.localeCompare(b.name));
+	const variables = default_variables.slice().sort((a, b) => a.name.localeCompare(b.name));
 
 	// TODO maybe FAQ? need a standardized pattern -- first add the "on this page" menu functionality
 </script>

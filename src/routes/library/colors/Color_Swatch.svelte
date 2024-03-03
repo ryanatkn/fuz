@@ -3,8 +3,12 @@
 
 	import Style_Variable_Button from '$routes/Style_Variable_Button.svelte';
 
-	export let color_name: string;
-	export let computed_styles: CSSStyleDeclaration;
+	interface Props {
+		color_name: string;
+		computed_styles: CSSStyleDeclaration;
+	}
+
+	const {color_name, computed_styles} = $props<Props>();
 
 	const get_color_hsl_string = (name: string) => {
 		const v = computed_styles.getPropertyValue('--' + name);

@@ -1,11 +1,21 @@
 <script lang="ts">
 	import {get_contextmenu, type Contextmenu_Params} from '$lib/contextmenu.js';
 
-	export let name = 'Cat';
-	export let icon: string | null = '😺';
-	export let show_name = true;
-	export let show_icon = true;
-	export let contextmenu_action: Contextmenu_Params | Contextmenu_Params[] | null = null;
+	interface Props {
+		name?: string;
+		icon?: string | null;
+		show_name?: boolean;
+		show_icon?: boolean;
+		contextmenu_action?: Contextmenu_Params | Contextmenu_Params[] | null;
+	}
+
+	const {
+		name = 'Cat',
+		icon = '😺',
+		show_name = true,
+		show_icon = true,
+		contextmenu_action = null,
+	} = $props<Props>();
 
 	const contextmenu = get_contextmenu();
 </script>

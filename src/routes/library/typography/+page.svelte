@@ -79,7 +79,7 @@
 		</form>
 		{#each font_sizes as font_size (font_size.name)}
 			<div class="row wrap">
-				<Style_Variable_Button title={font_size.light} name={font_size.name}
+				<Style_Variable_Button attrs={{title: font_size.light}} name={font_size.name}
 					><span
 						style:font-size="var(--{font_size.name})"
 						style:font-weight={selected_font_weight}
