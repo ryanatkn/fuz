@@ -22,7 +22,7 @@
 	<div class="prose">
 		<section>
 			<h3>Optional CSS classes</h3>
-			<p>Fuz has three optional CSS files with different kinds of classes. To use them:</p>
+			<p>Fuz has three optional CSS files with different kinds of classes:</p>
 			<Code
 				content={`<!-- +layout.svelte -->
 <script>
@@ -33,10 +33,11 @@
 	import '@ryanatkn/fuz/semantic_classes.css';
 	// ...`}
 			/>
+			<p>Utility classes use plain CSS for convenient HTML authoring.</p>
+			<p>Variable classes are utility classes based on Fuz style <Tome_Link name="variables" />.</p>
 			<p>
-				Utility classes use plain CSS for convenient HTML authoring. Variable classes are utility
-				classes based on Fuz style <Tome_Link name="variables" />. Semantic classes are named
-				groupings of styles that are like the CSS equivalent of Svelte components.
+				Semantic classes are named groupings of styles that are like the CSS equivalent of Svelte
+				components.
 			</p>
 			<aside>
 				With more sophisticated build tooling, these classes could be generated on demand instead of
