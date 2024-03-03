@@ -2,16 +2,20 @@
 	import {font_sizes} from '$lib/variable_data.js';
 	import Style_Variable_Button from '$routes/Style_Variable_Button.svelte';
 
-	// TODO @multiple publish in $lib when ready
+	interface Props {
+		selected_font_size?: number; // TODO improve API, is index for `'md'`
+	}
+
+	let {selected_font_size = 2} = $props<Props>();
 
 	// TODO the API is strange
 
-	export let selected_font_size = 2; // TODO improve API, is index for `'md'`
+	// TODO @multiple publish in $lib when ready
 
 	const min = 1;
 	const max = font_sizes.length;
 
-	$: selected_name = font_sizes[selected_font_size - 1];
+	const selected_name = $derived(font_sizes[selected_font_size - 1]);
 </script>
 
 <label

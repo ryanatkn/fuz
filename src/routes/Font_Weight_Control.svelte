@@ -1,7 +1,11 @@
 <script lang="ts">
-	// TODO @multiple publish in $lib when ready
+	interface Props {
+		selected_font_weight?: number;
+	}
 
-	export let selected_font_weight = 400;
+	let {selected_font_weight = 400} = $props<Props>();
+
+	// TODO @multiple publish in $lib when ready
 </script>
 
 <label
