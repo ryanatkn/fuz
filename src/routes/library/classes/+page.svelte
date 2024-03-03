@@ -2,6 +2,8 @@
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import Tome_Link from '$lib/Tome_Link.svelte';
+	import Github_Logo from '$lib/Github_Logo.svelte';
 	import {get_tome} from '$lib/tome.js';
 	import utility_classes_text from '$lib/utility_classes.css?raw';
 	import variable_classes_text from '$lib/variable_classes.css?raw';
@@ -11,30 +13,232 @@
 	const LIBRARY_ITEM_NAME = 'classes';
 
 	const tome = get_tome(LIBRARY_ITEM_NAME);
+
+	const utility_classes = [
+		'relative',
+		'absolute',
+		'fixed',
+		'sticky',
+		'static',
+		'overflow_auto|hidden|scroll|clip|visible',
+		'overflow_x_auto|hidden|scroll|clip|visible',
+		'overflow_y_auto|hidden|scroll|clip|visible',
+		'inline',
+		'inline_block',
+		'block',
+		'display_none|contents',
+		'flex',
+		'flex_1',
+		'grid',
+		'box',
+		'row',
+		'wrap',
+		'nowrap',
+		'float_none|left|right|inline_start|inline_end',
+		'text_align_center|right|left|justify',
+		'font_weight_100-900',
+		'ellipsis',
+		'pixelated',
+		'radius_0|100',
+		'p_0',
+		'pt_0',
+		'pr_0',
+		'pb_0',
+		'pl_0',
+		'px_0',
+		'py_0',
+		'm_0',
+		'mt_0',
+		'mr_0',
+		'mb_0',
+		'ml_0',
+		'mx_0',
+		'my_0',
+		'm_auto',
+		'mx_auto',
+		'my_auto',
+		'w_100',
+		'w_0',
+		'h_100',
+		'h_0',
+		'fade_0',
+		'fade_100',
+	];
+	const variable_classes = [
+		'font_family_sans|mono',
+		'line_height',
+		'line_height_1-7',
+		'size_xs-xl9',
+		'icon_size_xs-xl2',
+		'text_1-3',
+		'darken_1-9',
+		'lighten_1-9',
+		'bg',
+		'fg',
+		'fg_1-9',
+		'bg_1-9',
+		'color_darken_1-9',
+		'color_lighten_1-9',
+		'color_bg',
+		'color_fg',
+		'color_fg_1-9',
+		'color_bg_1-9',
+		'hue_a-g',
+		'color_a-g_1 -9',
+		'bg_a-g_1-9',
+		'border_color_1-5',
+		'border_width_1-6',
+		'outline_width_1-3',
+		'radius_xs3-xl',
+		'w_xs-xl15',
+		'h_xs-xl15',
+		'p_xs5-xl15',
+		'pt_xs5-xl15',
+		'pr_xs5-xl15',
+		'pb_xs5-xl15',
+		'pl_xs5-xl15',
+		'px_xs5-xl15',
+		'py_xs5-xl15',
+		'm_xs5-xl15',
+		'mt_xs5-xl15',
+		'mr_xs5-xl15',
+		'mb_xs5-xl15',
+		'ml_xs5-xl15',
+		'mx_xs5-xl15',
+		'my_xs5-xl15',
+		'gap_xs5-xl15',
+		'column_gap_xs5-xl15',
+		'row_gap_xs5-xl15',
+		'fade_1-6',
+		'shadow',
+		'shadow_lg',
+		'shadow_inset',
+		'shadow_inset_active',
+	];
+	const semantic_classes = [
+		'prose',
+		'selectable',
+		'pane',
+		'panel',
+		'icon_button',
+		'plain',
+		'menu_item',
+		'chevron',
+		'chip',
+		'formatted',
+		'width_sm-lg',
+	];
+
+	// TODO extract a `Github_Link` like `Mdn_Link`
 </script>
 
 <Tome_Detail {tome}>
 	<div class="prose">
+		<aside>both the docs and implementation of these need more work</aside>
 		<section>
-			Fuz provides an arbitrary subset of utility classes for CSS, and defers to CSS in <a
-				href="https://svelte.dev/docs/svelte-components#style">Svelte's <code>{'<'}style></code></a
-			> for complex and uncommon patterns. This may change depending on build tool sophistication, like
-			a compiler or Vite plugin to remove unused styles.
+			<h3>Optional CSS classes</h3>
+			<p>Fuz has three optional CSS files with different kinds of classes:</p>
+			<Code
+				content={`<!-- +layout.svelte -->
+<script>
+	import '@ryanatkn/fuz/style.css'; // required
+	import '@ryanatkn/fuz/theme.css'; // or bring your own
+	import '@ryanatkn/fuz/utility_classes.css';
+	import '@ryanatkn/fuz/variable_classes.css';
+	import '@ryanatkn/fuz/semantic_classes.css';
+	// ...`}
+			/>
+			<p>Utility classes use plain CSS for convenient HTML authoring.</p>
+			<p>Variable classes are utility classes based on Fuz style <Tome_Link name="variables" />.</p>
+			<p>
+				Semantic classes are named groupings of styles that are like the CSS equivalent of Svelte
+				components.
+			</p>
+			<aside>
+				With more sophisticated build tooling, these classes could be generated on demand instead of
+				distributed as static files, or unused classes could be removed with a Vite plugin.
+			</aside>
+		</section>
+		<section>
+			<h3>Utility classes</h3>
+			<p>
+				Fuz provides an arbitrary set of utility classes for CSS, and defers to CSS in <a
+					href="https://svelte.dev/docs/svelte-components#style"
+					>Svelte's <code>{'<'}style></code></a
+				> for complex and uncommon patterns.
+			</p>
+			<div class="classes">
+				{#each utility_classes as c}
+					<div>.{c}</div>
+				{/each}
+			</div>
+		</section>
+		<section>
+			<h3>Variable classes</h3>
+			<div class="classes">
+				{#each variable_classes as c}
+					<div>.{c}</div>
+				{/each}
+			</div>
+		</section>
+		<section>
+			<h3>Semantic classes</h3>
+			<div class="classes">
+				{#each semantic_classes as c}
+					<div>.{c}</div>
+				{/each}
+			</div>
 		</section>
 		<section>
 			<h3>Raw CSS</h3>
+			<!-- TODO maybe add a github source link? -->
 			<Details>
-				<summary slot="summary">utility classes</summary>
+				<summary slot="summary"
+					><span class="font_family_mono">@ryanatkn/fuz/utility_classes.css</span></summary
+				>
+				<p class="source_link">
+					<a href="https://github.com/ryanatkn/fuz/blob/main/src/lib/utility_classes.css"
+						><Github_Logo size="var(--icon_size_xs)" /> <span class="ml_xs">source</span></a
+					>
+				</p>
 				<Code content={utility_classes_text} lang="css" />
 			</Details>
 			<Details>
-				<summary slot="summary">variable classes</summary>
+				<summary slot="summary"
+					><span class="font_family_mono">@ryanatkn/fuz/variable_classes.css</span></summary
+				>
+				<p class="source_link">
+					<a href="https://github.com/ryanatkn/fuz/blob/main/src/lib/variable_classes.css"
+						><Github_Logo size="var(--icon_size_xs)" /> <span class="ml_xs">source</span></a
+					>
+				</p>
 				<Code content={variable_classes_text} lang="css" />
 			</Details>
 			<Details>
-				<summary slot="summary">semantic classes</summary>
+				<summary slot="summary"
+					><span class="font_family_mono">@ryanatkn/fuz/semantic_classes.css</span></summary
+				>
+				<p class="source_link">
+					<a href="https://github.com/ryanatkn/fuz/blob/main/src/lib/semantic_classes.css"
+						><Github_Logo size="var(--icon_size_xs)" /> <span class="ml_xs">source</span></a
+					>
+				</p>
 				<Code content={semantic_classes_text} lang="css" />
 			</Details>
 		</section>
 	</div>
 </Tome_Detail>
+
+<style>
+	.classes {
+		font-family: var(--font_family_mono);
+	}
+	.source_link {
+		display: flex;
+		margin-bottom: var(--space_lg);
+	}
+	.source_link a {
+		display: flex;
+		align-items: center;
+	}
+</style>
