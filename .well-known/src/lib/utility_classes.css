@@ -269,16 +269,6 @@ text
 	margin-bottom: auto;
 }
 
-/* TODO rename these? use to be columns, maybe should be? */
-.width_md {
-	width: 100%;
-	max-width: var(--width_md);
-}
-.width_sm {
-	width: 100%;
-	max-width: var(--width_sm);
-}
-
 .w_100 {
 	width: 100%;
 }
