@@ -82,13 +82,15 @@ export const load_theme = (fallback: Theme = default_themes[0], key = THEME_STOR
 };
 
 // TODO can we add `nonce="%sveltekit.nonce%"` to this script to fix the CSP issues? does it even work on the style tag below?
-// TODO look at this to initialize the theme synchronously in the HEAD to avoid flashing
+
 /**
  * Creates an HTML script string to be inserted into the `head`
  * that initializes the dark/light color scheme.
+ * This runs before Svelte executes both in SSR and on the client
+ * so it avoids flashing the wrong color scheme.
  * https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme
  * Prefers a value in `localStorage` if available, and if not detects using `matchMedia`.
- * In case of an unexpected error, like if `localStorage` is disabled, the `fallback` value is used.
+ * On unexpected errors, like if `localStorage` is disabled, the `fallback` value is used.
  * @param fallback
  * @param key
  * @returns HTML string with the color scheme setup script and a `color-schema` meta tag
@@ -106,6 +108,7 @@ export const create_theme_setup_script = (
 	} catch (_) { ${fallback === 'dark' ? "document.documentElement.classList.add('dark');" : ''} }
 `;
 
+// TODO unlike the color scheme, themes currently flash in when the Svelte executes, needs some reworking
 /**
  * Creates an HTML style string to be inserted into the `head`
  * that overrides the theme for a part of the page.
