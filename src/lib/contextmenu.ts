@@ -76,44 +76,6 @@ export interface Contextmenu {
 	y: number;
 }
 
-export interface Contextmenu_Store extends Readable<Contextmenu> {
-	layout: Readable<{width: number; height: number}>;
-	initial_layout: Readable<{width: number; height: number}> | undefined;
-	link_component: ComponentType<Contextmenu_Link_Entry>;
-	text_component: ComponentType<Contextmenu_Text_Entry>;
-	action: ReturnType<typeof create_contextmenu_action>;
-	error: Writable<string | undefined>;
-	open: (params: Contextmenu_Params[], x: number, y: number) => void;
-	close: () => void;
-	activate: (item: Item_State) => boolean | Promise<Activate_Result>;
-	/**
-	 * Activates the selected entry, or if none, selects the first.
-	 */
-	activate_selected: () => void | boolean | Promise<Activate_Result>;
-	select: (item: Item_State) => void;
-	collapse_selected: () => void;
-	expand_selected: () => void; // opens the selected submenu
-	select_next: () => void;
-	select_previous: () => void;
-	select_first: () => void;
-	select_last: () => void;
-	/**
-	 * Used by `Contextmenu_Entry` and custom entry components
-	 * @initializes
-	 */
-	add_entry: (run: Writable<Contextmenu_Run>) => Entry_State;
-	/**
-	 * @initializes
-	 */
-	add_submenu: () => Submenu_State;
-	// These two properties are mutated internally.
-	// If you need reactivity, use `$contextmenu` in a reactive statement to react to all changes, and
-	// then access the mutable non-reactive  `contextmenu.root_menu` and `contextmenu.selections`.
-	// See `Contextmenu_Entry.svelte` and `Contextmenu_Submenu.svelte` for reactive usage examples.
-	root_menu: Root_Menu_State;
-	selections: Item_State[];
-}
-
 export interface Contextmenu_Store_Options {
 	link_component?: ComponentType<Contextmenu_Link_Entry>;
 	text_component?: ComponentType<Contextmenu_Text_Entry>;
@@ -126,75 +88,76 @@ export interface Contextmenu_Store_Options {
  * and for internal usage see `Contextmenu.svelte`.
  */
 export class Contextmenu_Store {
+	layout: Readable<{width: number; height: number}>;
+	initial_layout: Readable<{width: number; height: number}> | undefined;
+	link_component: ComponentType<Contextmenu_Link_Entry>;
+	text_component: ComponentType<Contextmenu_Text_Entry>;
+	action: ReturnType<typeof create_contextmenu_action>;
+	error: Writable<string | undefined>;
+
+	// These two properties are mutated internally.
+	// If you need reactivity, use `$contextmenu` in a reactive statement to react to all changes, and
+	// then access the mutable non-reactive  `contextmenu.root_menu` and `contextmenu.selections`.
+	// See `Contextmenu_Entry.svelte` and `Contextmenu_Submenu.svelte` for reactive usage examples.
+	root_menu: Root_Menu_State;
+	selections: Item_State[];
+
+	// TODO BLOCK remove
+	update: (fn: (state: Contextmenu) => Contextmenu) => void;
+	force_update = (): void => this.update(($) => ({...$}));
+
 	constructor(options?: Contextmenu_Store_Options) {
 		this.link_component = options?.link_component ?? Contextmenu_Link_Entry;
 		this.text_component = options?.text_component ?? Contextmenu_Text_Entry;
 		this.initial_layout = options?.layout;
 
 		// TODO BLOCK put on instance?
-		const layout: Contextmenu_Store['layout'] = initial_layout || writable({width: 0, height: 0});
-		const root_menu: Contextmenu_Store['root_menu'] = {
+		this.layout = this.initial_layout || writable({width: 0, height: 0});
+		this.root_menu = {
 			is_menu: true,
 			menu: null,
 			depth: 1,
 			items: [],
 		};
-		const selections: Contextmenu_Store['selections'] = [];
+		this.selections = [];
 
 		const {
 			update,
 			set: _set,
 			...rest
 		} = writable<Contextmenu>({open: false, params: [], x: 0, y: 0});
+		this.update = update;
 
-		// TODO instead of this, use a store per entry probably
-		const force_update = () => update(($) => ({...$}));
+		this.error = writable(undefined);
 
-		// TODO not mutation, probably
-		const reset_items = (items: Item_State[]): void => {
-			for (const item of items) {
-				if (item.is_menu) {
-					reset_items(item.items);
-				} else {
-					if (item.promise !== null) item.promise = null;
-					if (item.error_message !== null) item.error_message = null;
-				}
-			}
-		};
-
-		const error: Contextmenu_Store['error'] = writable(undefined);
+		this.action = create_contextmenu_action(this.text_component);
 	}
 
-	root_menu;
-
-	selections;
-
-	layout;
-
-	initial_layout;
-
-	link_component;
-
-	text_component;
-
-	action = create_contextmenu_action(text_component);
-
-	error;
-
-	open(params, x, y) {
-		selections.length = 0;
-		update(($state) => ({...$state, open: true, params, x, y}));
+	open(params: Contextmenu_Params[], x: number, y: number): void {
+		this.selections.length = 0;
+		this.update(($state) => ({...$state, open: true, params, x, y}));
 	}
 
-	close() {
-		update(($state) => {
+	close(): void {
+		this.update(($state) => {
 			if (!$state.open) return $state;
-			reset_items(root_menu.items);
+			this.reset_items(this.root_menu.items);
 			return {...$state, open: false};
 		});
 	}
 
-	activate(item) {
+	reset_items(items: Item_State[]): void {
+		for (const item of items) {
+			if (item.is_menu) {
+				this.reset_items(item.items);
+			} else {
+				if (item.promise !== null) item.promise = null;
+				if (item.error_message !== null) item.error_message = null;
+			}
+		}
+	}
+
+	activate(item: Item_State): boolean | Promise<Activate_Result> {
 		if (item.is_menu) {
 			this.expand_selected();
 		} else {
@@ -204,7 +167,7 @@ export class Contextmenu_Store {
 			} catch (err) {
 				const message = typeof err?.message === 'string' ? err.message : undefined;
 				item.error_message = message ?? 'unknown error';
-				error.set(message);
+				this.error.set(message);
 			}
 			if (returned?.then) {
 				item.pending = true;
@@ -219,7 +182,7 @@ export class Contextmenu_Store {
 								} else {
 									const message = typeof result.message === 'string' ? result.message : undefined;
 									item.error_message = message ?? 'unknown error';
-									error.set(message);
+									this.error.set(message);
 								}
 							} else {
 								this.close();
@@ -230,16 +193,16 @@ export class Contextmenu_Store {
 							if (promise !== item.promise) return;
 							const message = typeof err?.message === 'string' ? err.message : undefined;
 							item.error_message = message ?? 'unknown error';
-							error.set(message);
+							this.error.set(message);
 						},
 					)
 					.finally(() => {
 						if (promise !== item.promise) return;
 						item.pending = false;
 						item.promise = null;
-						force_update();
+						this.force_update();
 					}));
-				force_update();
+				this.force_update();
 				return item.promise; // async path
 			}
 			this.close(); // synchronous path only
@@ -247,8 +210,8 @@ export class Contextmenu_Store {
 		return true;
 	}
 
-	activate_selected() {
-		const selected = selections[selections.length - 1];
+	activate_selected(): void | boolean | Promise<Activate_Result> {
+		const selected = this.selections[this.selections.length - 1];
 		return selected ? this.activate(selected) : this.select_first();
 	}
 
@@ -256,59 +219,66 @@ export class Contextmenu_Store {
 	// deselects everything and then re-creates the list of selections.
 	// Could be improved but it's fine because we're using mutation and the N is very small,
 	// and it allows us to have a single code path for the various selection methods.
-	select(item) {
-		if (selections[selections.length - 1] === item) return;
-		for (const s of selections) s.selected = false;
-		selections.length = 0;
+	/**
+	 * Activates the selected entry, or if none, selects the first.
+	 */
+	select(item: Item_State): void {
+		if (this.selections[this.selections.length - 1] === item) return;
+		for (const s of this.selections) s.selected = false;
+		this.selections.length = 0;
 		let i: Item_State | Root_Menu_State = item;
 		do {
 			i.selected = true;
-			selections.unshift(i);
+			this.selections.unshift(i);
 		} while ((i = i.menu) && i.menu);
-		force_update();
+		this.force_update();
 	}
 
-	collapse_selected() {
-		if (selections.length <= 1) return;
-		const deselected = selections.pop()!;
+	collapse_selected(): void {
+		if (this.selections.length <= 1) return;
+		const deselected = this.selections.pop()!;
 		deselected.selected = false;
-		force_update();
+		this.force_update();
 	}
 
-	expand_selected() {
-		const parent = selections[selections.length - 1];
+	expand_selected(): void {
+		const parent = this.selections[this.selections.length - 1];
 		if (!parent?.is_menu) return;
 		const selected = parent.items[0];
 		selected.selected = true;
-		selections.push(selected);
-		force_update();
+		this.selections.push(selected);
+		this.force_update();
 	}
 
-	select_next() {
-		if (!selections.length) return this.select_first();
-		const item = selections[selections.length - 1];
+	select_next(): void {
+		if (!this.selections.length) return this.select_first();
+		const item = this.selections[this.selections.length - 1];
 		const index = item.menu.items.indexOf(item);
 		this.select(item.menu.items[index === item.menu.items.length - 1 ? 0 : index + 1]);
 	}
 
-	select_previous() {
-		if (!selections.length) return this.select_last();
-		const item = selections[selections.length - 1];
+	select_previous(): void {
+		if (!this.selections.length) return this.select_last();
+		const item = this.selections[this.selections.length - 1];
 		const index = item.menu.items.indexOf(item);
 		this.select(item.menu.items[index === 0 ? item.menu.items.length - 1 : index - 1]);
 	}
 
-	select_first() {
-		this.select((selections[selections.length - 1]?.menu || root_menu).items[0]);
+	select_first(): void {
+		this.select((this.selections[this.selections.length - 1]?.menu || this.root_menu).items[0]);
 	}
 
-	select_last() {
-		const {items} = selections[selections.length - 1]?.menu || root_menu;
+	select_last(): void {
+		const {items} = this.selections[this.selections.length - 1]?.menu || this.root_menu;
 		return this.select(items[items.length - 1]);
 	}
 
-	add_entry(run) {
-		const menu = get_contextmenu_submenu() || root_menu;
+	/**
+	 * Used by `Contextmenu_Entry` and custom entry components
+	 * @initializes
+	 */
+	add_entry(run: Writable<Contextmenu_Run>): Entry_State {
+		const menu = get_contextmenu_submenu() || this.root_menu;
 		const entry: Entry_State = {
 			is_menu: false,
 			menu,
@@ -325,8 +295,11 @@ export class Contextmenu_Store {
 		return entry;
 	}
 
-	add_submenu() {
-		const menu = get_contextmenu_submenu() || root_menu;
+	/**
+	 * @initializes
+	 */
+	add_submenu(): Submenu_State {
+		const menu = get_contextmenu_submenu() || this.root_menu;
 		const submenu: Submenu_State = {
 			is_menu: true,
 			menu,
