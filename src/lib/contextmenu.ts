@@ -103,6 +103,7 @@ export class Contextmenu_Store {
 	selections: Item_State[];
 
 	// TODO BLOCK remove
+	subscribe: Readable<Contextmenu>['subscribe'];
 	update: (fn: (state: Contextmenu) => Contextmenu) => void;
 	force_update = (): void => this.update(($) => ({...$}));
 
@@ -121,12 +122,9 @@ export class Contextmenu_Store {
 		};
 		this.selections = [];
 
-		const {
-			update,
-			set: _set,
-			...rest
-		} = writable<Contextmenu>({open: false, params: [], x: 0, y: 0});
-		this.update = update;
+		const store = writable<Contextmenu>({open: false, params: [], x: 0, y: 0});
+		this.subscribe = store.subscribe;
+		this.update = store.update;
 
 		this.error = writable(undefined);
 

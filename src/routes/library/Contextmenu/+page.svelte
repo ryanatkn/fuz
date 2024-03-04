@@ -11,7 +11,7 @@
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
 	import {get_tome} from '$lib/tome.js';
 	import Contextmenu from '$lib/Contextmenu.svelte';
-	import {create_contextmenu, set_contextmenu, to_contextmenu_params} from '$lib/contextmenu.js';
+	import {Contextmenu_Store, set_contextmenu, to_contextmenu_params} from '$lib/contextmenu.js';
 	import Cat_Contextmenu from '$routes/library/Contextmenu/Cat_Contextmenu.svelte';
 	import App_Contextmenu from '$routes/library/Contextmenu/App_Contextmenu.svelte';
 	import Home_Contextmenu from '$routes/library/Contextmenu/Home_Contextmenu.svelte';
@@ -27,7 +27,7 @@
 
 	// TODO should we make this optional, created by `Contextmenu`?
 	// TODO demonstrate custom layout
-	const contextmenu = create_contextmenu();
+	const contextmenu = new Contextmenu_Store();
 	set_contextmenu(contextmenu);
 
 	const alyssa = 'Alyssa';
