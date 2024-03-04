@@ -1,5 +1,6 @@
 <script lang="ts">
 	import {is_editable, swallow} from '@ryanatkn/belt/dom.js';
+	import type {Snippet} from 'svelte';
 
 	import {
 		set_contextmenu,
@@ -58,6 +59,8 @@
 		 * Useful to ensure the first menu item is immediately under the pointer.
 		 */
 		open_offset_y?: number;
+
+		children: Snippet;
 	}
 
 	const {
@@ -69,6 +72,7 @@
 		tap_then_longpress_move_tolerance = 7,
 		open_offset_x = -2,
 		open_offset_y = -2,
+		children,
 	} = $props<Props>();
 
 	set_contextmenu(contextmenu);
@@ -266,6 +270,8 @@
 	on:mousedown|capture|passive={open ? mousedown : undefined}
 	on:keydown|capture|nonpassive={open ? keydown : undefined}
 />
+
+{@render children()}
 
 {#if !custom_layout}
 	<div class="contextmenu_layout" bind:clientHeight bind:clientWidth />
