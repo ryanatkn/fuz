@@ -68,6 +68,7 @@ export interface Contextmenu_Run {
 	(): void | Promise<Activate_Result>;
 }
 
+// TODO rename to Contextmenu_State? or is it no longer needed with the class refactor?
 export interface Contextmenu {
 	open: boolean;
 	params: Contextmenu_Params[];

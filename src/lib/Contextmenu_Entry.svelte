@@ -15,6 +15,7 @@
 	// TODO refactor away from stores
 	// This store makes `run` reactive
 	// because it's a param to `contextmenu.add_entry` which @initializes.
+	// Maybe `add_entry` should just be a callback?
 	const runStore = writable(run);
 	$effect(() => {
 		if ($runStore !== run) $runStore = run;
