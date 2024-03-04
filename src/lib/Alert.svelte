@@ -1,38 +1,65 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
+	import type {HTMLAttributes} from 'svelte/elements';
 
 	import type {Alert_Status} from '$lib/alert.js';
 	import {alert_status_options} from '$lib/alert.js';
 
 	interface Props {
 		status?: Alert_Status;
-		// TODO BLOCK what API for icon? replace slot with snippet, but what with this prop? maybe accept a string?
-		icon?: string | null | undefined;
-		button?: boolean | undefined;
-		children?: Snippet | undefined;
+		color?: string;
+		// TODO this API is a mess in part because of the types, maybe an explicit `Alert_Button` is better
+		// $props must be destructured, so we can't use a union with narrowing
+		// so `disabled` only makes sense if `onclick` is defined, and we dont get the other HTMLButtonElement attributes
+		onclick?: (() => void) | undefined;
+		disabled?: boolean;
+		attrs?: HTMLAttributes<HTMLElement> | undefined;
+		icon?: string | Snippet<[icon: string]> | null | undefined; // TODO experimenting with this, gets complex in the impl
+		children: Snippet;
 	}
 
-	const {status = 'inform', icon, button, children} = $props<Props>();
+	const {status = 'inform', color, onclick, disabled, attrs, icon, children} = $props<Props>();
 
 	const options = $derived(alert_status_options[status]);
-	const final_icon = $derived(icon === undefined ? options.icon : icon);
 	// TODO change this to use the hue and put transparency on the borders, or add a borderColor option
-	const {color} = $derived(options);
+	const {color: status_color, icon: status_icon} = $derived(options);
+	const final_color = $derived(color ?? status_color);
+	const final_icon = $derived(
+		typeof icon === 'string' ? icon : status_icon ?? alert_status_options.inform.icon!,
+	);
 </script>
 
-{#if button}
-	<button class="message" type="button" style:--color={color} on:click
-		>{#if icon !== null}<div class="icon">
-				<slot name="icon" icon={final_icon}>{final_icon}</slot>
-			</div>{/if}{#if children}{@render children()}{/if}</button
+{#if onclick}
+	<button
+		class="message text_align_left"
+		type="button"
+		style:--color={final_color}
+		on:click={onclick}
+		{disabled}
+		{...attrs}
 	>
+		{@render content()}
+	</button>
 {:else}
-	<div class="message panel" style:--color={color}>
-		{#if icon !== null}<div class="icon">
-				<slot name="icon" icon={final_icon}>{final_icon}</slot>
-			</div>{/if}{#if children}{@render children()}{/if}
+	<div class="message panel" style:--color={final_color} {...attrs}>
+		{@render content()}
 	</div>
 {/if}
+
+{#snippet content()}
+	{#if icon !== null}
+		<div class="icon">
+			{#if !icon || typeof icon === 'string'}
+				{final_icon}
+			{:else}
+				{@render icon(final_icon)}
+			{/if}
+		</div>
+	{/if}
+	<div class="prose flex_1">
+		{@render children()}
+	</div>
+{/snippet}
 
 <style>
 	.message {
@@ -57,7 +84,9 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		padding-right: var(--space_md);
+		margin-right: var(--space_md);
 		font-size: var(--size_xl2);
+		min-width: var(--size_xl2);
+		text-align: center;
 	}
 </style>

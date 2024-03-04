@@ -3,15 +3,15 @@
 
 	interface Props {
 		pending: boolean;
+		onclick: () => void;
 		running?: boolean;
-		el?: HTMLButtonElement;
 		title?: string;
 		disabled?: boolean;
 		attrs?: any;
 	}
 
 	// TODO BLOCK @multiple just disable this eslint rule when we use bindings? would prefer not to disable for all Svelte so let continues to signal reassigment
-	let {pending, running, el, title, disabled, attrs} = $props<Props>(); // eslint-disable-line prefer-const
+	let {pending, onclick, running, title, disabled, attrs} = $props<Props>(); // eslint-disable-line prefer-const
 </script>
 
 <button
@@ -20,8 +20,7 @@
 	disabled={disabled ?? pending}
 	{title}
 	class:pending
-	bind:this={el}
-	on:click
+	on:click={onclick}
 >
 	<div class="content">
 		<slot />
