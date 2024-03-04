@@ -9,8 +9,8 @@
 
 	const tome = get_tome(LIBRARY_ITEM_NAME);
 
-	let selected_button = 1;
-	let selected_deselectable_button = true;
+	let selected_button = $state(1);
+	let selected_deselectable_button = $state(true);
 
 	// TODO probably want to put the buttons in a more consistent format so we can include `disabled` versions of each in a condensed format
 

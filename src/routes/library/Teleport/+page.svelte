@@ -8,9 +8,9 @@
 	const LIBRARY_ITEM_NAME = 'Teleport';
 	const tome = get_tome(LIBRARY_ITEM_NAME);
 
-	let swap = true;
-	let teleport_1: HTMLElement | undefined = undefined;
-	let teleport_2: HTMLElement | undefined = undefined;
+	let swap = $state(true);
+	let teleport_1: HTMLElement | undefined = $state();
+	let teleport_2: HTMLElement | undefined = $state();
 </script>
 
 <Tome_Detail {tome}>

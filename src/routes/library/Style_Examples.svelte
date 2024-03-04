@@ -5,19 +5,19 @@
 
 	const theme = get_theme();
 
-	let selected_button = 1;
+	let selected_button = $state(1);
 
 	const faces = ['😊', '😑', '🤔', '😉'];
 
-	let username = '';
-	let password = '';
-	let lifestory = '';
+	let username = $state('');
+	let password = $state('');
+	let lifestory = $state('');
 
 	const radio_items = ['a radio input', 'another radio input'];
-	let selected_radio_item = radio_items[0];
+	let selected_radio_item = $state(radio_items[0]);
 
-	let checked1 = false;
-	let checked2 = true;
+	let checked1 = $state(false);
+	let checked2 = $state(true);
 </script>
 
 <div class="style_examples">

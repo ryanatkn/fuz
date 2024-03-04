@@ -12,7 +12,7 @@
 
 	// TODO `role="menuitem"` ?
 
-	let clicked = 'c';
+	let clicked = $state('c');
 
 	const handled = (e: any): boolean => {
 		if (e.key === 'Enter' || e.key === ' ') {

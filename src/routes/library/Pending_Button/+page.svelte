@@ -8,8 +8,8 @@
 	const LIBRARY_ITEM_NAME = 'Pending_Button';
 	const tome = get_tome(LIBRARY_ITEM_NAME);
 
-	let pending_1 = false;
-	let pending_2 = true;
+	let pending_1 = $state(false);
+	let pending_2 = $state(true);
 </script>
 
 <!-- TODO maybe Pending_Button shouldn't be a component? action? Or renderless maybe?
@@ -39,25 +39,25 @@
 			<Code
 				content={`<Pending_Button
 	pending={${pending_1}}
-	on:click={() => (pending_1 = !pending_1)}
+	onclick={() => (pending_1 = !pending_1)}
 >
 	do something async
 </Pending_Button>`}
 			/>
 			<p>
-				<Pending_Button pending={pending_1} on:click={() => (pending_1 = !pending_1)}>
+				<Pending_Button pending={pending_1} onclick={() => (pending_1 = !pending_1)}>
 					do something async
 				</Pending_Button>
 			</p>
 			<Code
 				content={`<Pending_Button
 	pending={${pending_2}}
-	on:click={() => (pending_2 = !pending_2)}
+	onclick={() => (pending_2 = !pending_2)}
 >
 	do another
 </Pending_Button>`}
 			/>
-			<Pending_Button pending={pending_2} on:click={() => (pending_2 = !pending_2)}>
+			<Pending_Button pending={pending_2} onclick={() => (pending_2 = !pending_2)}>
 				do another
 			</Pending_Button>
 		</section>

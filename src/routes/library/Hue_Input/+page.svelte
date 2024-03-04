@@ -8,8 +8,8 @@
 	const LIBRARY_ITEM_NAME = 'Hue_Input';
 	const tome = get_tome(LIBRARY_ITEM_NAME);
 
-	let value: number;
-	let value_from_oninput: number;
+	let value: number | undefined = $state();
+	let value_from_oninput: number | undefined = $state();
 </script>
 
 <Tome_Detail {tome}>

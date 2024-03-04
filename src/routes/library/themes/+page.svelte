@@ -31,7 +31,7 @@
 	};
 
 	// let show_create_theme_dialog = false;
-	let editing_theme: null | Theme = null;
+	let editing_theme: null | Theme = $state(null);
 
 	// TODO some hacky layout patterns below, tricky to mix prose and other elements
 </script>

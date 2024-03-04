@@ -24,8 +24,8 @@
 	const computed_styles = window.getComputedStyle(document.documentElement);
 
 	// TODO selected_font_family
-	let selected_font_weight = 400;
-	let selected_font_size = 3;
+	let selected_font_weight = $state(400);
+	let selected_font_size = $state(3);
 </script>
 
 <Tome_Detail {tome}>
