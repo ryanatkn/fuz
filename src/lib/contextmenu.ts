@@ -125,198 +125,223 @@ export interface Contextmenu_Store_Options {
  * For external usage see `use:contextmenu.run` scattered throughout the app,
  * and for internal usage see `Contextmenu.svelte`.
  */
-export const create_contextmenu = (options?: Contextmenu_Store_Options): Contextmenu_Store => {
-	const link_component = options?.link_component ?? Contextmenu_Link_Entry;
-	const text_component = options?.text_component ?? Contextmenu_Text_Entry;
-	const initial_layout = options?.layout;
+export class Contextmenu_Store {
+	constructor(options?: Contextmenu_Store_Options) {
+		this.link_component = options?.link_component ?? Contextmenu_Link_Entry;
+		this.text_component = options?.text_component ?? Contextmenu_Text_Entry;
+		this.initial_layout = options?.layout;
 
-	const layout: Contextmenu_Store['layout'] = initial_layout || writable({width: 0, height: 0});
-	const root_menu: Contextmenu_Store['root_menu'] = {
-		is_menu: true,
-		menu: null,
-		depth: 1,
-		items: [],
-	};
-	const selections: Contextmenu_Store['selections'] = [];
+		// TODO BLOCK put on instance?
+		const layout: Contextmenu_Store['layout'] = initial_layout || writable({width: 0, height: 0});
+		const root_menu: Contextmenu_Store['root_menu'] = {
+			is_menu: true,
+			menu: null,
+			depth: 1,
+			items: [],
+		};
+		const selections: Contextmenu_Store['selections'] = [];
 
-	const {update, set: _set, ...rest} = writable<Contextmenu>({open: false, params: [], x: 0, y: 0});
+		const {
+			update,
+			set: _set,
+			...rest
+		} = writable<Contextmenu>({open: false, params: [], x: 0, y: 0});
 
-	// TODO instead of this, use a store per entry probably
-	const force_update = () => update(($) => ({...$}));
+		// TODO instead of this, use a store per entry probably
+		const force_update = () => update(($) => ({...$}));
 
-	// TODO not mutation, probably
-	const reset_items = (items: Item_State[]): void => {
-		for (const item of items) {
-			if (item.is_menu) {
-				reset_items(item.items);
-			} else {
-				if (item.promise !== null) item.promise = null;
-				if (item.error_message !== null) item.error_message = null;
-			}
-		}
-	};
-
-	const error: Contextmenu_Store['error'] = writable(undefined);
-
-	const store: Contextmenu_Store = {
-		...rest,
-		root_menu,
-		selections,
-		layout,
-		initial_layout,
-		link_component,
-		text_component,
-		action: create_contextmenu_action(text_component),
-		error,
-		open: (params, x, y) => {
-			selections.length = 0;
-			update(($state) => ({...$state, open: true, params, x, y}));
-		},
-		close: () =>
-			update(($state) => {
-				if (!$state.open) return $state;
-				reset_items(root_menu.items);
-				return {...$state, open: false};
-			}),
-		activate: (item) => {
-			if (item.is_menu) {
-				store.expand_selected();
-			} else {
-				let returned;
-				try {
-					returned = get(item.run)();
-				} catch (err) {
-					const message = typeof err?.message === 'string' ? err.message : undefined;
-					item.error_message = message ?? 'unknown error';
-					error.set(message);
+		// TODO not mutation, probably
+		const reset_items = (items: Item_State[]): void => {
+			for (const item of items) {
+				if (item.is_menu) {
+					reset_items(item.items);
+				} else {
+					if (item.promise !== null) item.promise = null;
+					if (item.error_message !== null) item.error_message = null;
 				}
-				if (returned?.then) {
-					item.pending = true;
-					item.error_message = null;
-					const promise = (item.promise = returned
-						.then(
-							(result) => {
-								if (promise !== item.promise) return;
-								if (typeof result?.ok === 'boolean') {
-									if (result.ok) {
-										store.close();
-									} else {
-										const message = typeof result.message === 'string' ? result.message : undefined;
-										item.error_message = message ?? 'unknown error';
-										error.set(message);
-									}
-								} else {
-									store.close();
-								}
-								return result;
-							},
-							(err) => {
-								if (promise !== item.promise) return;
-								const message = typeof err?.message === 'string' ? err.message : undefined;
-								item.error_message = message ?? 'unknown error';
-								error.set(message);
-							},
-						)
-						.finally(() => {
+			}
+		};
+
+		const error: Contextmenu_Store['error'] = writable(undefined);
+	}
+
+	root_menu;
+
+	selections;
+
+	layout;
+
+	initial_layout;
+
+	link_component;
+
+	text_component;
+
+	action = create_contextmenu_action(text_component);
+
+	error;
+
+	open(params, x, y) {
+		selections.length = 0;
+		update(($state) => ({...$state, open: true, params, x, y}));
+	}
+
+	close() {
+		update(($state) => {
+			if (!$state.open) return $state;
+			reset_items(root_menu.items);
+			return {...$state, open: false};
+		});
+	}
+
+	activate(item) {
+		if (item.is_menu) {
+			this.expand_selected();
+		} else {
+			let returned;
+			try {
+				returned = get(item.run)();
+			} catch (err) {
+				const message = typeof err?.message === 'string' ? err.message : undefined;
+				item.error_message = message ?? 'unknown error';
+				error.set(message);
+			}
+			if (returned?.then) {
+				item.pending = true;
+				item.error_message = null;
+				const promise = (item.promise = returned
+					.then(
+						(result) => {
 							if (promise !== item.promise) return;
-							item.pending = false;
-							item.promise = null;
-							force_update();
-						}));
-					force_update();
-					return item.promise; // async path
-				}
-				store.close(); // synchronous path only
+							if (typeof result?.ok === 'boolean') {
+								if (result.ok) {
+									this.close();
+								} else {
+									const message = typeof result.message === 'string' ? result.message : undefined;
+									item.error_message = message ?? 'unknown error';
+									error.set(message);
+								}
+							} else {
+								this.close();
+							}
+							return result;
+						},
+						(err) => {
+							if (promise !== item.promise) return;
+							const message = typeof err?.message === 'string' ? err.message : undefined;
+							item.error_message = message ?? 'unknown error';
+							error.set(message);
+						},
+					)
+					.finally(() => {
+						if (promise !== item.promise) return;
+						item.pending = false;
+						item.promise = null;
+						force_update();
+					}));
+				force_update();
+				return item.promise; // async path
 			}
-			return true;
-		},
-		activate_selected: () => {
-			const selected = selections[selections.length - 1];
-			return selected ? store.activate(selected) : store.select_first();
-		},
-		// Instead of diffing, this does the simple thing and
-		// deselects everything and then re-creates the list of selections.
-		// Could be improved but it's fine because we're using mutation and the N is very small,
-		// and it allows us to have a single code path for the various selection methods.
-		select: (item) => {
-			if (selections[selections.length - 1] === item) return;
-			for (const s of selections) s.selected = false;
-			selections.length = 0;
-			let i: Item_State | Root_Menu_State = item;
-			do {
-				i.selected = true;
-				selections.unshift(i);
-			} while ((i = i.menu) && i.menu);
-			force_update();
-		},
-		collapse_selected: () => {
-			if (selections.length <= 1) return;
-			const deselected = selections.pop()!;
-			deselected.selected = false;
-			force_update();
-		},
-		expand_selected: () => {
-			const parent = selections[selections.length - 1];
-			if (!parent?.is_menu) return;
-			const selected = parent.items[0];
-			selected.selected = true;
-			selections.push(selected);
-			force_update();
-		},
-		select_next: () => {
-			if (!selections.length) return store.select_first();
-			const item = selections[selections.length - 1];
-			const index = item.menu.items.indexOf(item);
-			store.select(item.menu.items[index === item.menu.items.length - 1 ? 0 : index + 1]);
-		},
-		select_previous: () => {
-			if (!selections.length) return store.select_last();
-			const item = selections[selections.length - 1];
-			const index = item.menu.items.indexOf(item);
-			store.select(item.menu.items[index === 0 ? item.menu.items.length - 1 : index - 1]);
-		},
-		select_first: () =>
-			store.select((selections[selections.length - 1]?.menu || root_menu).items[0]),
-		select_last: () => {
-			const {items} = selections[selections.length - 1]?.menu || root_menu;
-			return store.select(items[items.length - 1]);
-		},
-		add_entry: (run) => {
-			const menu = get_contextmenu_submenu() || root_menu;
-			const entry: Entry_State = {
-				is_menu: false,
-				menu,
-				selected: false,
-				run,
-				pending: false,
-				error_message: null,
-				promise: null,
-			};
-			menu.items.push(entry);
-			onDestroy(() => {
-				menu.items.length = 0;
-			});
-			return entry;
-		},
-		add_submenu: () => {
-			const menu = get_contextmenu_submenu() || root_menu;
-			const submenu: Submenu_State = {
-				is_menu: true,
-				menu,
-				depth: menu.depth + 1,
-				selected: false,
-				items: [],
-			};
-			menu.items.push(submenu);
-			set_contextmenu_submenu(submenu);
-			onDestroy(() => {
-				menu.items.length = 0;
-			});
-			return submenu;
-		},
-	};
-	return store;
-};
+			this.close(); // synchronous path only
+		}
+		return true;
+	}
+
+	activate_selected() {
+		const selected = selections[selections.length - 1];
+		return selected ? this.activate(selected) : this.select_first();
+	}
+
+	// Instead of diffing, this does the simple thing and
+	// deselects everything and then re-creates the list of selections.
+	// Could be improved but it's fine because we're using mutation and the N is very small,
+	// and it allows us to have a single code path for the various selection methods.
+	select(item) {
+		if (selections[selections.length - 1] === item) return;
+		for (const s of selections) s.selected = false;
+		selections.length = 0;
+		let i: Item_State | Root_Menu_State = item;
+		do {
+			i.selected = true;
+			selections.unshift(i);
+		} while ((i = i.menu) && i.menu);
+		force_update();
+	}
+
+	collapse_selected() {
+		if (selections.length <= 1) return;
+		const deselected = selections.pop()!;
+		deselected.selected = false;
+		force_update();
+	}
+
+	expand_selected() {
+		const parent = selections[selections.length - 1];
+		if (!parent?.is_menu) return;
+		const selected = parent.items[0];
+		selected.selected = true;
+		selections.push(selected);
+		force_update();
+	}
+
+	select_next() {
+		if (!selections.length) return this.select_first();
+		const item = selections[selections.length - 1];
+		const index = item.menu.items.indexOf(item);
+		this.select(item.menu.items[index === item.menu.items.length - 1 ? 0 : index + 1]);
+	}
+
+	select_previous() {
+		if (!selections.length) return this.select_last();
+		const item = selections[selections.length - 1];
+		const index = item.menu.items.indexOf(item);
+		this.select(item.menu.items[index === 0 ? item.menu.items.length - 1 : index - 1]);
+	}
+
+	select_first() {
+		this.select((selections[selections.length - 1]?.menu || root_menu).items[0]);
+	}
+
+	select_last() {
+		const {items} = selections[selections.length - 1]?.menu || root_menu;
+		return this.select(items[items.length - 1]);
+	}
+
+	add_entry(run) {
+		const menu = get_contextmenu_submenu() || root_menu;
+		const entry: Entry_State = {
+			is_menu: false,
+			menu,
+			selected: false,
+			run,
+			pending: false,
+			error_message: null,
+			promise: null,
+		};
+		menu.items.push(entry);
+		onDestroy(() => {
+			menu.items.length = 0;
+		});
+		return entry;
+	}
+
+	add_submenu() {
+		const menu = get_contextmenu_submenu() || root_menu;
+		const submenu: Submenu_State = {
+			is_menu: true,
+			menu,
+			depth: menu.depth + 1,
+			selected: false,
+			items: [],
+		};
+		menu.items.push(submenu);
+		set_contextmenu_submenu(submenu);
+		onDestroy(() => {
+			menu.items.length = 0;
+		});
+		return submenu;
+	}
+}
 
 // The dataset key must not have capital letters or dashes or it'll differ between JS and DOM:
 // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset
