@@ -12,6 +12,7 @@ import {to_array} from '@ryanatkn/belt/array.js';
 
 import Contextmenu_Link_Entry from '$lib/Contextmenu_Link_Entry.svelte';
 import Contextmenu_Text_Entry from '$lib/Contextmenu_Text_Entry.svelte';
+import {Dimensions} from '$lib/dimensions.svelte.js';
 
 // TODO rewrite with runes!!!!
 
@@ -79,21 +80,26 @@ export interface Contextmenu {
 export interface Contextmenu_Store_Options {
 	link_component?: ComponentType<Contextmenu_Link_Entry>;
 	text_component?: ComponentType<Contextmenu_Text_Entry>;
-	layout?: Readable<{width: number; height: number}>; // TODO consider making this a prop on `Contextmenu`, and being assigned here
+	layout?: Dimensions; // TODO consider making this a prop on `Contextmenu_Root`, and being assigned here
 }
+
+// TODO BLOCK name? should the component or this be `Contextmenu`? `Contextmenu_State`?
+// maybe the compoonent is `Contextmenu_Entries`? seems like the common one should be simpler
 
 /**
  * Creates a `contextmenu` store.
- * For external usage see `use:contextmenu.run` scattered throughout the app,
- * and for internal usage see `Contextmenu.svelte`.
+ * See usage with `Contextmenu_Root.svelte` and `Contextmenu.svelte`.
  */
 export class Contextmenu_Store {
-	layout: Readable<{width: number; height: number}>;
-	initial_layout: Readable<{width: number; height: number}> | undefined;
-	link_component: ComponentType<Contextmenu_Link_Entry>;
-	text_component: ComponentType<Contextmenu_Text_Entry>;
-	action: ReturnType<typeof create_contextmenu_action>;
-	error: Writable<string | undefined>;
+	layout: Dimensions; // TODO $state?
+	/**
+	 * If an initial layout is provided, control is deferred externally.
+	 * Otherwise the layout syncs to the page dimensions.
+	 */
+	initial_layout: Dimensions | undefined; // TODO $state?
+	link_component: ComponentType<Contextmenu_Link_Entry>; // TODO $state?
+	text_component: ComponentType<Contextmenu_Text_Entry>; // TODO $state?
+	error: Writable<string | undefined>; // TODO $state?
 
 	// These two properties are mutated internally.
 	// If you need reactivity, use `$contextmenu` in a reactive statement to react to all changes, and
@@ -112,8 +118,7 @@ export class Contextmenu_Store {
 		this.text_component = options?.text_component ?? Contextmenu_Text_Entry;
 		this.initial_layout = options?.layout;
 
-		// TODO BLOCK put on instance?
-		this.layout = this.initial_layout || writable({width: 0, height: 0});
+		this.layout = this.initial_layout || new Dimensions();
 		this.root_menu = {
 			is_menu: true,
 			menu: null,
@@ -127,8 +132,6 @@ export class Contextmenu_Store {
 		this.update = store.update;
 
 		this.error = writable(undefined);
-
-		this.action = create_contextmenu_action(this.text_component);
 	}
 
 	open(params: Contextmenu_Params[], x: number, y: number): void {
@@ -437,12 +440,12 @@ export const get_contextmenu_submenu = (): Submenu_State | undefined =>
 	getContext(CONTEXTMENU_STATE_KEY);
 
 const CONTEXTMENU_DIMENSIONS_STORE_KEY = Symbol();
-export const set_contextmenu_dimensions = (): Writable<{width: number; height: number}> => {
-	const dimensions = writable({width: 0, height: 0});
+export const set_contextmenu_dimensions = (): Dimensions => {
+	const dimensions = new Dimensions();
 	setContext(CONTEXTMENU_DIMENSIONS_STORE_KEY, dimensions);
 	return dimensions;
 };
-export const get_contextmenu_dimensions = (): Writable<{width: number; height: number}> =>
+export const get_contextmenu_dimensions = (): Dimensions =>
 	getContext(CONTEXTMENU_DIMENSIONS_STORE_KEY);
 
 // TODO quick and hacky, probably delete, see usage

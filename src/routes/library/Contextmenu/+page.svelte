@@ -10,7 +10,7 @@
 	import Dialog from '$lib/Dialog.svelte';
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
 	import {get_tome} from '$lib/tome.js';
-	import Contextmenu from '$lib/Contextmenu.svelte';
+	import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
 	import {Contextmenu_Store, set_contextmenu, to_contextmenu_params} from '$lib/contextmenu.js';
 	import Cat_Contextmenu from '$routes/library/Contextmenu/Cat_Contextmenu.svelte';
 	import App_Contextmenu from '$routes/library/Contextmenu/App_Contextmenu.svelte';
@@ -137,7 +137,7 @@
 </script>
 
 <!-- TODO demonstrate usage of a custom `link_component` and `linkProps`  -->
-<Contextmenu {contextmenu} />
+<Contextmenu_Root {contextmenu} />
 
 <Tome_Detail {tome}>
 	<div slot="header"><h2>{tome.name}</h2></div>
