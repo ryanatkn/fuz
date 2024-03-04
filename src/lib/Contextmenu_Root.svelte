@@ -10,8 +10,10 @@
 	} from '$lib/contextmenu.js';
 
 	// TODO this is full of hacks to implement "longpress"
-	// to work around iOS not firing the `'contextmenu'` event:
-	// https://github.com/ryanatkn/fuz/pull/319
+	// to work around iOS not firing the `'contextmenu'` event -
+	// besides the hacks, the main negative effect is that vibrate doesn't work for Android either,
+	// though this could potentially be fixed if the code is changed to make sure the longpress delay
+	// is longer than any available `contextmenu` event delay
 
 	interface Props {
 		/**
