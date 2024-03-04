@@ -20,8 +20,10 @@
 	const tomes_by_name = new Map(tomes.map((t) => [t.name, t]));
 	set_tomes(tomes_by_name);
 
-	$: selected_item = tomes.find((c) => c.pathname === $page.url.pathname);
-	$: tomes_related_to_selected = selected_item?.related?.map((r) => tomes_by_name.get(r)!);
+	const selected_item = $derived(tomes.find((c) => c.pathname === $page.url.pathname));
+	const tomes_related_to_selected = $derived(
+		selected_item?.related?.map((r) => tomes_by_name.get(r)!),
+	);
 
 	const selected_variable = set_selected_variable();
 </script>

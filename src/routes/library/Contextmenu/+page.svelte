@@ -23,35 +23,29 @@
 
 	const tome = get_tome(LIBRARY_ITEM_NAME);
 
+	// TODO examples for error, async
+
 	// TODO should we make this optional, created by `Contextmenu`?
 	// TODO demonstrate custom layout
 	const contextmenu = create_contextmenu();
 	set_contextmenu(contextmenu);
 
-	// TODO maybe this again
-	// const contextmenuError = contextmenu.error;
-	// $: if ($contextmenuError) {
-	// 	act({type: 'speak', content: '❌ error detected: ' + $contextmenuError});
-
 	const alyssa = 'Alyssa';
 	const ben = 'Ben';
 
 	const INITIAL_POSITION: Cat_Position = 'home';
-	let alyssa_position: Cat_Position = INITIAL_POSITION;
-	let ben_position: Cat_Position = INITIAL_POSITION;
+	let alyssa_position: Cat_Position = $state(INITIAL_POSITION);
+	let ben_position: Cat_Position = $state(INITIAL_POSITION);
 
-	$: alyssa_icon = alyssa_position === ben_position ? '😺' : '😾';
-	$: ben_icon = alyssa_position === ben_position ? '😸' : '😿';
+	const alyssa_icon = $derived(alyssa_position === ben_position ? '😺' : '😾');
+	const ben_icon = $derived(alyssa_position === ben_position ? '😸' : '😿');
 
-	let alyssa_cat: Cat;
-	let ben_cat: Cat;
-	$: alyssa_cat = {name: alyssa, icon: alyssa_icon, position: alyssa_position};
-	$: ben_cat = {name: ben, icon: ben_icon, position: ben_position};
+	const alyssa_cat = $derived({name: alyssa, icon: alyssa_icon, position: alyssa_position});
+	const ben_cat = $derived({name: ben, icon: ben_icon, position: ben_position});
 
-	let swapped = false;
+	let swapped = $state(false);
 
 	// TODO this is weird but `animate:` needs an `each`?
-	$: ({home_cats, adventure_cats} = locate_cats([alyssa_cat, ben_cat], swapped));
 	const locate_cats = (
 		cats: Cat[],
 		swapped: boolean,
@@ -69,11 +63,15 @@
 		return {home_cats, adventure_cats};
 	};
 
+	const {home_cats, adventure_cats} = $derived(locate_cats([alyssa_cat, ben_cat], swapped));
+
 	// const cats = [alyssa, ben];
 	// TODO use these
 	// const catMoods = ['😼', '😾', '😺', '😸', '😻'];
 
-	$: can_reset = alyssa_position !== INITIAL_POSITION || ben_position !== INITIAL_POSITION;
+	const can_reset = $derived(
+		alyssa_position !== INITIAL_POSITION || ben_position !== INITIAL_POSITION,
+	);
 
 	// reset the tome's state
 	const reset = () => {
@@ -81,7 +79,7 @@
 		ben_position = INITIAL_POSITION;
 	};
 
-	let show_about_dialog = false;
+	let show_about_dialog = $state(false);
 	const toggle_about_dialog = () => {
 		show_about_dialog = !show_about_dialog;
 	};

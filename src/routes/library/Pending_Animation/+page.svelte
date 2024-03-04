@@ -8,12 +8,12 @@
 	const LIBRARY_ITEM_NAME = 'Pending_Animation';
 	const tome = get_tome(LIBRARY_ITEM_NAME);
 
-	let turtleSlot = '🐢';
-	let turtleSlot2a = '🐸';
-	let turtleSlot2b = '⏳';
-	let frogsRunning = false;
-	let pendingAnimation0Running = true;
-	let pendingAnimation1Running = false;
+	let turtleSlot = $state('🐢');
+	let turtleSlot2a = $state('🐸');
+	let turtleSlot2b = $state('⏳');
+	let frogsRunning = $state(false);
+	let pendingAnimation0Running = $state(true);
+	let pendingAnimation1Running = $state(false);
 </script>
 
 <Tome_Detail {tome}>
