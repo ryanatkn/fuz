@@ -43,8 +43,10 @@
 	// 		);
 
 	// const CONTEXTMENU_OPEN_VIBRATE_DURATION = 17;
+
+	// TODO BLOCK remove the wrapper element
 </script>
 
-<div use:contextmenu.action={params}>
+<div use:contextmenu.action={params} class="display_contents">
 	{@render children()}
 </div>
