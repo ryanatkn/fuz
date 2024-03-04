@@ -7,7 +7,7 @@
 		children: Snippet;
 	}
 
-	const {children} = $props<Props>();
+	const {params, children} = $props<Props>();
 
 	const contextmenu = get_contextmenu(); // TODO BLOCK use?
 
@@ -45,4 +45,6 @@
 	// const CONTEXTMENU_OPEN_VIBRATE_DURATION = 17;
 </script>
 
-{@render children()}
+<div use:contextmenu.action={params}>
+	{@render children()}
+</div>

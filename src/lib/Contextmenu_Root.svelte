@@ -134,6 +134,7 @@
 	};
 
 	const on_window_contextmenu = (e: MouseEvent) => {
+		console.log(`e`, e);
 		// handle the tap-then-longpress bypass gesture
 		if (longpress_bypass) {
 			longpress_bypass = false;

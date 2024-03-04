@@ -113,6 +113,8 @@ export class Contextmenu_Store {
 	update: (fn: (state: Contextmenu) => Contextmenu) => void;
 	force_update = (): void => this.update(($) => ({...$}));
 
+	action: ReturnType<typeof create_contextmenu_action>;
+
 	constructor(options?: Contextmenu_Store_Options) {
 		this.link_component = options?.link_component ?? Contextmenu_Link_Entry;
 		this.text_component = options?.text_component ?? Contextmenu_Text_Entry;
@@ -132,6 +134,8 @@ export class Contextmenu_Store {
 		this.update = store.update;
 
 		this.error = writable(undefined);
+
+		this.action = create_contextmenu_action(this.text_component);
 	}
 
 	open(params: Contextmenu_Params[], x: number, y: number): void {
