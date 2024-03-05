@@ -114,7 +114,10 @@ export const package_json = {
 			default: './dist/Contextmenu.svelte',
 			types: './dist/Contextmenu.svelte.d.ts',
 		},
-		'./contextmenu.js': {default: './dist/contextmenu.js', types: './dist/contextmenu.d.ts'},
+		'./contextmenu.svelte.js': {
+			default: './dist/contextmenu.svelte.js',
+			types: './dist/contextmenu.svelte.d.ts',
+		},
 		'./Copy_To_Clipboard.svelte': {
 			svelte: './dist/Copy_To_Clipboard.svelte',
 			default: './dist/Copy_To_Clipboard.svelte',
@@ -306,8 +309,8 @@ export const src_json = {
 		'./Contextmenu_Submenu.svelte': {path: 'Contextmenu_Submenu.svelte', declarations: []},
 		'./Contextmenu_Text_Entry.svelte': {path: 'Contextmenu_Text_Entry.svelte', declarations: []},
 		'./Contextmenu.svelte': {path: 'Contextmenu.svelte', declarations: []},
-		'./contextmenu.js': {
-			path: 'contextmenu.ts',
+		'./contextmenu.svelte.js': {
+			path: 'contextmenu.svelte.ts',
 			declarations: [
 				{name: 'Contextmenu_Params', kind: 'type'},
 				{name: 'Contextmenu_Action_Params', kind: 'type'},

@@ -7,7 +7,7 @@
 		set_contextmenu_dimensions,
 		type Contextmenu_Store,
 		open_contextmenu,
-	} from '$lib/contextmenu.js';
+	} from '$lib/contextmenu.svelte.js';
 
 	// TODO this is full of hacks to implement "longpress"
 	// to work around iOS not firing the `'contextmenu'` event -
@@ -99,7 +99,7 @@
 		}
 	});
 
-	const {open, x: contextmenu_x, y: contextmenu_y} = $derived($contextmenu);
+	const {x: contextmenu_x, y: contextmenu_y} = $derived($contextmenu);
 	const dimensions = set_contextmenu_dimensions();
 	// TODO BLOCK maybe `derived.by`?
 	$effect(() => {
@@ -168,7 +168,7 @@
 		if (longpress_opened) longpress_opened = false;
 		const {touches, target} = e;
 		if (
-			open ||
+			contextmenu.opened ||
 			touches.length !== 1 ||
 			e.shiftKey ||
 			!(target instanceof HTMLElement || target instanceof SVGElement) ||
@@ -216,7 +216,7 @@
 		const {clientX, clientY} = touches[0];
 		const distance = Math.hypot(clientX - touch_x!, clientY - touch_y!);
 		if (distance > longpress_move_tolerance) {
-			if (open) contextmenu.close();
+			if (contextmenu.opened) contextmenu.close();
 			reset_longpress();
 		}
 	};
@@ -237,19 +237,20 @@
 		}
 	};
 
+	// TODO BLOCK maybe bind these to the contextmenu instance instead of including the function wrapper
 	// TODO customize
 	const keyboard_handlers: Map<string, () => void> = new Map([
-		['Escape', contextmenu.close],
-		['ArrowLeft', contextmenu.collapse_selected],
-		['ArrowRight', contextmenu.expand_selected],
-		['ArrowDown', contextmenu.select_next],
-		['PageDown', contextmenu.select_next],
-		['ArrowUp', contextmenu.select_previous],
-		['PageUp', contextmenu.select_previous],
-		['Home', contextmenu.select_first],
-		['End', contextmenu.select_last],
-		[' ', contextmenu.activate_selected],
-		['Enter', contextmenu.activate_selected],
+		['Escape', () => contextmenu.close()],
+		['ArrowLeft', () => contextmenu.collapse_selected()],
+		['ArrowRight', () => contextmenu.expand_selected()],
+		['ArrowDown', () => contextmenu.select_next()],
+		['PageDown', () => contextmenu.select_next()],
+		['ArrowUp', () => contextmenu.select_previous()],
+		['PageUp', () => contextmenu.select_previous()],
+		['Home', () => contextmenu.select_first()],
+		['End', () => contextmenu.select_last()],
+		[' ', () => contextmenu.activate_selected()],
+		['Enter', () => contextmenu.activate_selected()],
 	]);
 	const keydown = (e: KeyboardEvent): void => {
 		const handler = keyboard_handlers.get(e.key);
@@ -257,6 +258,10 @@
 		swallow(e);
 		handler();
 	};
+
+	// TODO BLOCK remove
+	$inspect('open', contextmenu.opened);
+	$inspect('params', $contextmenu.params);
 </script>
 
 <!--
@@ -270,8 +275,8 @@
 	on:touchmove|capture|passive={touchmove}
 	on:touchend|capture|nonpassive={touchend}
 	on:touchcancel|capture|nonpassive={touchend}
-	on:mousedown|capture|passive={open ? mousedown : undefined}
-	on:keydown|capture|nonpassive={open ? keydown : undefined}
+	on:mousedown|capture|passive={contextmenu.opened ? mousedown : undefined}
+	on:keydown|capture|nonpassive={contextmenu.opened ? keydown : undefined}
 />
 
 {@render children()}
@@ -280,7 +285,7 @@
 	<div class="contextmenu_layout" bind:clientHeight bind:clientWidth />
 {/if}
 <!-- TODO Maybe animate a subtle highlight around the contextmenu as it appears? -->
-{#if open}
+{#if contextmenu.opened}
 	<menu
 		class="contextmenu pane"
 		role="dialog"

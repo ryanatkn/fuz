@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
-	import {get_contextmenu} from '$lib/contextmenu.js';
+	import {get_contextmenu} from '$lib/contextmenu.svelte.js';
 
 	interface Props {
 		entries: Snippet;

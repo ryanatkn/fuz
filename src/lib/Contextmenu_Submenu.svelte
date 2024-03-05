@@ -3,7 +3,7 @@
 		get_contextmenu,
 		get_contextmenu_dimensions,
 		set_contextmenu_dimensions,
-	} from '$lib/contextmenu.js';
+	} from '$lib/contextmenu.svelte.js';
 	import type {Dimensions} from '$lib/dimensions.svelte.js';
 
 	const contextmenu = get_contextmenu();

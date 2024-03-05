@@ -151,9 +151,9 @@
       "default": "./dist/Contextmenu.svelte",
       "types": "./dist/Contextmenu.svelte.d.ts"
     },
-    "./contextmenu.js": {
-      "default": "./dist/contextmenu.js",
-      "types": "./dist/contextmenu.d.ts"
+    "./contextmenu.svelte.js": {
+      "default": "./dist/contextmenu.svelte.js",
+      "types": "./dist/contextmenu.svelte.d.ts"
     },
     "./Copy_To_Clipboard.svelte": {
       "svelte": "./dist/Copy_To_Clipboard.svelte",

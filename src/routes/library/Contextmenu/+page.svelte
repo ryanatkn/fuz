@@ -13,7 +13,7 @@
 	import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
 	import Contextmenu from '$lib/Contextmenu.svelte';
 	import Contextmenu_Text_Entry from '$lib/Contextmenu_Text_Entry.svelte';
-	import {Contextmenu_Store, set_contextmenu} from '$lib/contextmenu.js';
+	import {Contextmenu_Store, set_contextmenu} from '$lib/contextmenu.svelte.js';
 	import Cat_Contextmenu from '$routes/library/Contextmenu/Cat_Contextmenu.svelte';
 	import App_Contextmenu from '$routes/library/Contextmenu/App_Contextmenu.svelte';
 	import Home_Contextmenu from '$routes/library/Contextmenu/Home_Contextmenu.svelte';

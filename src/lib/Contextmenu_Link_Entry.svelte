@@ -2,7 +2,7 @@
 	import {strip_start} from '@ryanatkn/belt/string.js';
 	import type {Snippet} from 'svelte';
 
-	import {get_contextmenu} from '$lib/contextmenu.js';
+	import {get_contextmenu} from '$lib/contextmenu.svelte.js';
 
 	interface Props {
 		href: string;

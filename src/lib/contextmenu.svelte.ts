@@ -65,7 +65,6 @@ export interface Contextmenu_Run {
 
 // TODO rename to Contextmenu_State? or is it no longer needed with the class refactor?
 export interface Contextmenu {
-	open: boolean;
 	params: Contextmenu_Params[];
 	x: number;
 	y: number;
@@ -105,7 +104,10 @@ export class Contextmenu_Store {
 	// TODO BLOCK remove
 	subscribe: Readable<Contextmenu>['subscribe'];
 	update: (fn: (state: Contextmenu) => Contextmenu) => void;
-	force_update = (): void => this.update(($) => ({...$}));
+	force_update = (): void => this.update((s) => ({...s}));
+
+	// TODO BLOCK rename with `open` method?
+	opened: boolean = $state(false);
 
 	action: ReturnType<typeof create_contextmenu_action>;
 
@@ -123,7 +125,7 @@ export class Contextmenu_Store {
 		};
 		this.selections = [];
 
-		const store = writable<Contextmenu>({open: false, params: [], x: 0, y: 0});
+		const store = writable<Contextmenu>({params: [], x: 0, y: 0});
 		this.subscribe = store.subscribe;
 		this.update = store.update;
 
@@ -134,15 +136,14 @@ export class Contextmenu_Store {
 
 	open(params: Contextmenu_Params[], x: number, y: number): void {
 		this.selections.length = 0;
-		this.update(($state) => ({...$state, open: true, params, x, y}));
+		this.opened = true;
+		this.update((s) => ({...s, params, x, y}));
 	}
 
 	close(): void {
-		this.update(($state) => {
-			if (!$state.open) return $state;
-			this.reset_items(this.root_menu.items);
-			return {...$state, open: false};
-		});
+		if (!this.opened) return;
+		this.reset_items(this.root_menu.items);
+		this.opened = false;
 	}
 
 	reset_items(items: Item_State[]): void {

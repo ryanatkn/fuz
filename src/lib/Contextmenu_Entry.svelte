@@ -2,7 +2,7 @@
 	import {writable} from 'svelte/store';
 
 	import Pending_Animation from '$lib/Pending_Animation.svelte';
-	import {get_contextmenu, type Contextmenu_Run} from '$lib/contextmenu.js';
+	import {get_contextmenu, type Contextmenu_Run} from '$lib/contextmenu.svelte.js';
 
 	interface Props {
 		run: Contextmenu_Run;
