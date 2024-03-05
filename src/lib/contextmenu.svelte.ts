@@ -7,7 +7,6 @@ import {
 	type SvelteComponent,
 	type Snippet,
 } from 'svelte';
-import {type Writable, get} from 'svelte/store';
 import type {Result} from '@ryanatkn/belt/result.js';
 import {to_array} from '@ryanatkn/belt/array.js';
 
@@ -37,28 +36,48 @@ export type Contextmenu_Action_Params =
 type Activate_Result = Result<any, {message?: string}> | any;
 
 export type Item_State = Submenu_State | Entry_State;
-export interface Entry_State {
-	is_menu: false; // TODO rename to `type`?
-	menu: Submenu_State | Root_Menu_State;
-	selected: boolean;
-	run: Writable<Contextmenu_Run>;
-	pending: boolean;
-	error_message: string | null;
-	promise: Promise<any> | null;
+
+// TODO BLOCK set more of these properties to readonly?
+
+export class Entry_State {
+	readonly is_menu = false; // TODO rename to `type`?
+	readonly menu: Submenu_State | Root_Menu_State;
+
+	selected: boolean = $state(false);
+	run: Contextmenu_Run = $state(undefined as any); // TODO BLOCK any better way to do this?
+	pending: boolean = $state(false);
+	error_message: string | null = $state(null);
+	promise: Promise<any> | null = $state(null);
+
+	constructor(menu: Submenu_State | Root_Menu_State, run: Contextmenu_Run) {
+		this.menu = menu;
+		this.run = run;
+		// this.run = $state(run); // TODO BLOCK does this work?
+	}
 }
-export interface Submenu_State {
-	is_menu: true;
-	menu: Submenu_State | Root_Menu_State;
-	depth: number;
-	selected: boolean;
-	items: Item_State[];
+
+export class Submenu_State {
+	readonly is_menu = true;
+	readonly menu: Submenu_State | Root_Menu_State;
+	readonly depth: number;
+
+	selected: boolean = $state(false);
+	items: Item_State[] = $state([]);
+
+	constructor(menu: Submenu_State | Root_Menu_State, depth: number) {
+		this.menu = menu;
+		this.depth = depth;
+	}
 }
-export interface Root_Menu_State {
-	is_menu: true;
-	menu: null;
-	depth: 1;
-	items: Item_State[];
+
+export class Root_Menu_State {
+	readonly is_menu = true;
+	readonly menu = null;
+	readonly depth = 1;
+
+	items: Item_State[] = $state([]);
 }
+
 export interface Contextmenu_Run {
 	(): void | Promise<Activate_Result>;
 }
@@ -87,7 +106,6 @@ export class Contextmenu_Store {
 	text_component: ComponentType<Contextmenu_Text_Entry>; // TODO $state?
 
 	// State for external consumers.
-	HACK_counter: number = $state(0);
 	opened: boolean = $state(false);
 	x: number = $state(0);
 	y: number = $state(0);
@@ -99,12 +117,7 @@ export class Contextmenu_Store {
 	// If you need reactivity, use `$contextmenu` in a reactive statement to react to all changes, and
 	// then access the mutable non-reactive  `contextmenu.root_menu` and `contextmenu.selections`.
 	// See `Contextmenu_Entry.svelte` and `Contextmenu_Submenu.svelte` for reactive usage examples.
-	root_menu: Root_Menu_State = $state({
-		is_menu: true,
-		menu: null,
-		depth: 1,
-		items: [],
-	});
+	root_menu: Root_Menu_State = $state(new Root_Menu_State());
 	selections: Item_State[] = $state([]);
 
 	action: ReturnType<typeof create_contextmenu_action>;
@@ -153,7 +166,7 @@ export class Contextmenu_Store {
 		} else {
 			let returned;
 			try {
-				returned = get(item.run)();
+				returned = item.run();
 			} catch (err) {
 				const message = typeof err?.message === 'string' ? err.message : undefined;
 				item.error_message = message ?? 'unknown error';
@@ -191,10 +204,8 @@ export class Contextmenu_Store {
 						item.pending = false;
 						item.promise = null;
 						// TODO BLOCK shouldn't be needed but might be relying on this behavior for nonreactive properties
-						this.HACK_counter++;
 					}));
 				// TODO BLOCK shouldn't be needed but might be relying on this behavior for nonreactive properties
-				this.HACK_counter++;
 				return item.promise; // async path
 			}
 			this.close(); // synchronous path only
@@ -225,7 +236,6 @@ export class Contextmenu_Store {
 			this.selections.unshift(i);
 		} while ((i = i.menu) && i.menu);
 		// TODO BLOCK shouldn't be needed but might be relying on this behavior for nonreactive properties
-		this.HACK_counter++;
 	}
 
 	collapse_selected(): void {
@@ -233,7 +243,6 @@ export class Contextmenu_Store {
 		const deselected = this.selections.pop()!;
 		deselected.selected = false;
 		// TODO BLOCK shouldn't be needed but might be relying on this behavior for nonreactive properties
-		this.HACK_counter++;
 	}
 
 	expand_selected(): void {
@@ -243,7 +252,6 @@ export class Contextmenu_Store {
 		selected.selected = true;
 		this.selections.push(selected);
 		// TODO BLOCK shouldn't be needed but might be relying on this behavior for nonreactive properties
-		this.HACK_counter++;
 	}
 
 	select_next(): void {
@@ -255,8 +263,11 @@ export class Contextmenu_Store {
 
 	select_previous(): void {
 		if (!this.selections.length) return this.select_last();
+		console.log(`this.selections`, this.selections);
 		const item = this.selections[this.selections.length - 1];
+		console.log(`item.menu.items`, item.menu.items);
 		const index = item.menu.items.indexOf(item);
+		console.log(`select_previous item, index`, item, index);
 		this.select(item.menu.items[index === 0 ? item.menu.items.length - 1 : index - 1]);
 	}
 
@@ -273,17 +284,9 @@ export class Contextmenu_Store {
 	 * Used by `Contextmenu_Entry` and custom entry components
 	 * @initializes
 	 */
-	add_entry(run: Writable<Contextmenu_Run>): Entry_State {
+	add_entry(run: Contextmenu_Run): Entry_State {
 		const menu = get_contextmenu_submenu() || this.root_menu;
-		const entry: Entry_State = {
-			is_menu: false,
-			menu,
-			selected: false,
-			run,
-			pending: false,
-			error_message: null,
-			promise: null,
-		};
+		const entry = new Entry_State(menu, run);
 		menu.items.push(entry);
 		onDestroy(() => {
 			menu.items.length = 0;
@@ -296,13 +299,7 @@ export class Contextmenu_Store {
 	 */
 	add_submenu(): Submenu_State {
 		const menu = get_contextmenu_submenu() || this.root_menu;
-		const submenu: Submenu_State = {
-			is_menu: true,
-			menu,
-			depth: menu.depth + 1,
-			selected: false,
-			items: [],
-		};
+		const submenu = new Submenu_State(menu, menu.depth + 1);
 		menu.items.push(submenu);
 		set_contextmenu_submenu(submenu);
 		onDestroy(() => {
@@ -395,12 +392,11 @@ const query_contextmenu_params = (
 				continue;
 			}
 			for (const item of cached) {
-				const {props} = item;
 				// preserve bubbling order
-				// TODO probably should use `deepEqual`, but we don't have that dependency yet
+				// TODO probably should rethink this comparison or use `dequal`, but we don't have that dependency yet
 				if (
 					typeof item === 'function' ||
-					!params?.some((i) => i.component === item.component && shallow_equal(i.props, props))
+					!params?.some((i) => i.component === item.component && shallow_equal(i.props, item.props))
 				) {
 					(params || (params = [])).push(item);
 				}
