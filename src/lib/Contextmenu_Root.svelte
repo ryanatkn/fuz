@@ -260,7 +260,7 @@
 
 	// TODO BLOCK remove
 	$inspect('open', contextmenu.opened);
-	$inspect('params', $contextmenu.params);
+	$inspect('params', contextmenu.params);
 </script>
 
 <!--
@@ -292,7 +292,7 @@
 		bind:this={el}
 		style:transform="translate3d({x}px, {y}px, 0)"
 	>
-		{#each $contextmenu.params as p (p)}
+		{#each contextmenu.params as p (p)}
 			{#if typeof p === 'function'}
 				{@render p()}
 			{:else}

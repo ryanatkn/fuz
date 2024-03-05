@@ -7,7 +7,7 @@ import {
 	type SvelteComponent,
 	type Snippet,
 } from 'svelte';
-import {writable, type Readable, type Writable, get} from 'svelte/store';
+import {type Writable, get} from 'svelte/store';
 import type {Result} from '@ryanatkn/belt/result.js';
 import {to_array} from '@ryanatkn/belt/array.js';
 
@@ -63,11 +63,6 @@ export interface Contextmenu_Run {
 	(): void | Promise<Activate_Result>;
 }
 
-// TODO rename to Contextmenu_State? or is it no longer needed with the class refactor?
-export interface Contextmenu {
-	params: Contextmenu_Params[];
-}
-
 export interface Contextmenu_Store_Options {
 	link_component?: ComponentType<Contextmenu_Link_Entry>;
 	text_component?: ComponentType<Contextmenu_Text_Entry>;
@@ -90,24 +85,22 @@ export class Contextmenu_Store {
 	initial_layout: Dimensions | undefined; // TODO $state?
 	link_component: ComponentType<Contextmenu_Link_Entry>; // TODO $state?
 	text_component: ComponentType<Contextmenu_Text_Entry>; // TODO $state?
-	error: Writable<string | undefined>; // TODO $state?
 
+	// State for external consumers.
+	HACK_counter: number = $state(0);
+	opened: boolean = $state(false);
+	x: number = $state(0);
+	y: number = $state(0);
+	params: Contextmenu_Params[] = $state([]);
+	error: string | undefined = $state();
+
+	// TODO BLOCK probably make these reactive?
 	// These two properties are mutated internally.
 	// If you need reactivity, use `$contextmenu` in a reactive statement to react to all changes, and
 	// then access the mutable non-reactive  `contextmenu.root_menu` and `contextmenu.selections`.
 	// See `Contextmenu_Entry.svelte` and `Contextmenu_Submenu.svelte` for reactive usage examples.
 	root_menu: Root_Menu_State;
 	selections: Item_State[];
-
-	// TODO BLOCK remove
-	subscribe: Readable<Contextmenu>['subscribe'];
-	update: (fn: (state: Contextmenu) => Contextmenu) => void;
-	force_update = (): void => this.update((s) => ({...s}));
-
-	// TODO BLOCK rename with `open` method?
-	opened: boolean = $state(false);
-	x: number = $state(0);
-	y: number = $state(0);
 
 	action: ReturnType<typeof create_contextmenu_action>;
 
@@ -125,12 +118,6 @@ export class Contextmenu_Store {
 		};
 		this.selections = [];
 
-		const store = writable<Contextmenu>({params: []});
-		this.subscribe = store.subscribe;
-		this.update = store.update;
-
-		this.error = writable(undefined);
-
 		this.action = create_contextmenu_action(this.text_component);
 	}
 
@@ -139,7 +126,7 @@ export class Contextmenu_Store {
 		this.opened = true;
 		this.x = x;
 		this.y = y;
-		this.update((s) => ({...s, params}));
+		this.params = params;
 	}
 
 	close(): void {
@@ -169,7 +156,7 @@ export class Contextmenu_Store {
 			} catch (err) {
 				const message = typeof err?.message === 'string' ? err.message : undefined;
 				item.error_message = message ?? 'unknown error';
-				this.error.set(message);
+				this.error = message;
 			}
 			if (returned?.then) {
 				item.pending = true;
@@ -184,7 +171,7 @@ export class Contextmenu_Store {
 								} else {
 									const message = typeof result.message === 'string' ? result.message : undefined;
 									item.error_message = message ?? 'unknown error';
-									this.error.set(message);
+									this.error = message;
 								}
 							} else {
 								this.close();
@@ -195,16 +182,18 @@ export class Contextmenu_Store {
 							if (promise !== item.promise) return;
 							const message = typeof err?.message === 'string' ? err.message : undefined;
 							item.error_message = message ?? 'unknown error';
-							this.error.set(message);
+							this.error = message;
 						},
 					)
 					.finally(() => {
 						if (promise !== item.promise) return;
 						item.pending = false;
 						item.promise = null;
-						this.force_update();
+						// TODO BLOCK shouldn't be needed but might be relying on this behavior for nonreactive properties
+						this.HACK_counter++;
 					}));
-				this.force_update();
+				// TODO BLOCK shouldn't be needed but might be relying on this behavior for nonreactive properties
+				this.HACK_counter++;
 				return item.promise; // async path
 			}
 			this.close(); // synchronous path only
@@ -233,14 +222,16 @@ export class Contextmenu_Store {
 			i.selected = true;
 			this.selections.unshift(i);
 		} while ((i = i.menu) && i.menu);
-		this.force_update();
+		// TODO BLOCK shouldn't be needed but might be relying on this behavior for nonreactive properties
+		this.HACK_counter++;
 	}
 
 	collapse_selected(): void {
 		if (this.selections.length <= 1) return;
 		const deselected = this.selections.pop()!;
 		deselected.selected = false;
-		this.force_update();
+		// TODO BLOCK shouldn't be needed but might be relying on this behavior for nonreactive properties
+		this.HACK_counter++;
 	}
 
 	expand_selected(): void {
@@ -249,7 +240,8 @@ export class Contextmenu_Store {
 		const selected = parent.items[0];
 		selected.selected = true;
 		this.selections.push(selected);
-		this.force_update();
+		// TODO BLOCK shouldn't be needed but might be relying on this behavior for nonreactive properties
+		this.HACK_counter++;
 	}
 
 	select_next(): void {

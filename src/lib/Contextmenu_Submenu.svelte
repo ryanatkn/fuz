@@ -22,8 +22,8 @@
 	const {layout} = contextmenu;
 
 	// TODO @multiple improve with runes
-	// the `$contextmenu` is needed because `submenu` is not reactive
-	const selected = $derived($contextmenu && submenu.selected); // TODO BLOCK destructuring doesn't work here, but does elsewhere?
+	// the `contextmenu.HACK_counter` is needed because `submenu` is not reactive
+	const selected = $derived(contextmenu.HACK_counter !== undefined && submenu.selected); // TODO BLOCK destructuring doesn't work here, but does elsewhere?
 
 	let el: HTMLElement | undefined = $state();
 
