@@ -5,6 +5,7 @@ import {
 	type ComponentProps,
 	type ComponentType,
 	type SvelteComponent,
+	type Snippet,
 } from 'svelte';
 import {writable, type Readable, type Writable, get} from 'svelte/store';
 import type {Result} from '@ryanatkn/belt/result.js';
@@ -19,26 +20,19 @@ import {Dimensions} from '$lib/dimensions.svelte.js';
 // TODO @multiple added this hack with Svelte 4, didn't see an open issue about it
 /* eslint-disable @typescript-eslint/no-redundant-type-constituents */
 
-export type Contextmenu_Params<T extends SvelteComponent = SvelteComponent> = {
-	component: ComponentType<T>;
-	props: ComponentProps<T>;
-};
+export type Contextmenu_Params<T extends SvelteComponent = SvelteComponent> =
+	| Snippet
+	| {
+			component: ComponentType<T>;
+			props: ComponentProps<T>;
+	  };
 
+// TODO BLOCK should this just be snippets? might need a wrapper hack
 export type Contextmenu_Action_Params =
+	| Snippet
 	| Contextmenu_Params
 	| Array<Contextmenu_Params | ComponentProps<Contextmenu_Text_Entry> | null | undefined>
 	| ComponentProps<Contextmenu_Text_Entry>;
-
-/**
- * This helper function is needed to construct `Contextmenu_Params` with type safety.
- * It uses TypeScript's inferred generics for functions,
- * which do not work for plain objects as of v5.0.4.
- * `DialogParams` uses a similar strategy.
- */
-export const to_contextmenu_params = <T extends SvelteComponent>(
-	component: ComponentType<T>,
-	props: ComponentProps<T>,
-): Contextmenu_Params<T> => ({component, props});
 
 type Activate_Result = Result<any, {message?: string}> | any;
 

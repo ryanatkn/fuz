@@ -131,6 +131,11 @@
       "default": "./dist/Contextmenu_Link_Entry.svelte",
       "types": "./dist/Contextmenu_Link_Entry.svelte.d.ts"
     },
+    "./Contextmenu_Root.svelte": {
+      "svelte": "./dist/Contextmenu_Root.svelte",
+      "default": "./dist/Contextmenu_Root.svelte",
+      "types": "./dist/Contextmenu_Root.svelte.d.ts"
+    },
     "./Contextmenu_Submenu.svelte": {
       "svelte": "./dist/Contextmenu_Submenu.svelte",
       "default": "./dist/Contextmenu_Submenu.svelte",
@@ -173,6 +178,10 @@
       "svelte": "./dist/Dialogs.svelte",
       "default": "./dist/Dialogs.svelte",
       "types": "./dist/Dialogs.svelte.d.ts"
+    },
+    "./dimensions.svelte.js": {
+      "default": "./dist/dimensions.svelte.js",
+      "types": "./dist/dimensions.svelte.d.ts"
     },
     "./Github_Logo.svelte": {
       "svelte": "./dist/Github_Logo.svelte",

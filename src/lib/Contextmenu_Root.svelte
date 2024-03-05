@@ -289,7 +289,11 @@
 		style:transform="translate3d({x}px, {y}px, 0)"
 	>
 		{#each $contextmenu.params as p (p)}
-			<svelte:component this={p.component} {...p.props} />
+			{#if typeof p === 'function'}
+				{@render p()}
+			{:else}
+				<svelte:component this={p.component} {...p.props} />
+			{/if}
 		{/each}
 	</menu>
 {/if}

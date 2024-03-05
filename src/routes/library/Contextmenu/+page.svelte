@@ -12,7 +12,8 @@
 	import {get_tome} from '$lib/tome.js';
 	import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
 	import Contextmenu from '$lib/Contextmenu.svelte';
-	import {Contextmenu_Store, set_contextmenu, to_contextmenu_params} from '$lib/contextmenu.js';
+	import Contextmenu_Text_Entry from '$lib/Contextmenu_Text_Entry.svelte';
+	import {Contextmenu_Store, set_contextmenu} from '$lib/contextmenu.js';
 	import Cat_Contextmenu from '$routes/library/Contextmenu/Cat_Contextmenu.svelte';
 	import App_Contextmenu from '$routes/library/Contextmenu/App_Contextmenu.svelte';
 	import Home_Contextmenu from '$routes/library/Contextmenu/Home_Contextmenu.svelte';
@@ -141,22 +142,17 @@
 	// TODO BLOCK the flip animations caused the contextmenu wrapper of the children to be nested, make sure it doesn't mess up the contextmenu behavior
 </script>
 
-<!-- TODO demonstrate usage of a custom `link_component` and `linkProps`  -->
+<!-- TODO demonstrate usage of a custom `link_snippet` and `linkProps`  -->
 <Contextmenu_Root {contextmenu}>
 	<Tome_Detail {tome}>
 		<div slot="header"><h2>{tome.name}</h2></div>
-		<Contextmenu
-			params={[
-				// params type of the action is `Contextmenu_Action_Params`
-				can_reset ? {run: reset, content: 'Reset', icon: '↻'} : null,
-				// you can pass multiple items in an array or a single object:
-				// simple text action with with a `run` callback and `icon`:
-				to_contextmenu_params(App_Contextmenu, {toggle_about_dialog}),
-				// you can pass `null` or `undefined` for convenience:
-				null,
-				undefined,
-			]}
-		>
+		<Contextmenu>
+			{#snippet entries()}
+				{#if can_reset}
+					<Contextmenu_Text_Entry run={reset} content="Reset" icon="↻" />
+				{/if}
+				<App_Contextmenu {toggle_about_dialog} />
+			{/snippet}
 			<section>
 				<div class="mb_lg">
 					<Code lang="ts" content={`const contextmenu = create_contextmenu();`} />
@@ -164,13 +160,10 @@
 				<Code content={`<Contextmenu {contextmenu} />`} />
 			</section>
 			<section>
-				<Contextmenu
-					params={to_contextmenu_params(Home_Contextmenu, {
-						act,
-						home_cats,
-						adventure_cats,
-					})}
-				>
+				<Contextmenu>
+					{#snippet entries()}
+						<Home_Contextmenu {act} {home_cats} {adventure_cats} />
+					{/snippet}
 					<div class="position home">
 						<div class="icon">🏠</div>
 						<div class="cats">
@@ -181,14 +174,10 @@
 									out:send={{key: name}}
 									animate:flip
 								>
-									<Contextmenu
-										params={to_contextmenu_params(Cat_Contextmenu, {
-											act,
-											name,
-											icon,
-											position,
-										})}
-									>
+									<Contextmenu>
+										{#snippet entries()}
+											<Cat_Contextmenu {act} {name} {icon} {position} />
+										{/snippet}
 										<Cat_View {name} {icon} />
 									</Contextmenu>
 								</div>
@@ -196,13 +185,10 @@
 						</div>
 					</div>
 				</Contextmenu>
-				<Contextmenu
-					params={to_contextmenu_params(Adventure_Contextmenu, {
-						act,
-						home_cats,
-						adventure_cats,
-					})}
-				>
+				<Contextmenu>
+					{#snippet entries()}
+						<Adventure_Contextmenu {act} {home_cats} {adventure_cats} />
+					{/snippet}
 					<div class="position adventure">
 						<div class="icon">🌄</div>
 						<div class="cats">
@@ -213,14 +199,10 @@
 									out:send={{key: name}}
 									animate:flip
 								>
-									<Contextmenu
-										params={to_contextmenu_params(Cat_Contextmenu, {
-											act,
-											name,
-											icon,
-											position,
-										})}
-									>
+									<Contextmenu>
+										{#snippet entries()}
+											<Cat_Contextmenu {act} {name} {icon} {position} />
+										{/snippet}
 										<Cat_View {name} {icon} />
 									</Contextmenu>
 								</div>
