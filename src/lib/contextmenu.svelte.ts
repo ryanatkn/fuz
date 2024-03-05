@@ -398,7 +398,10 @@ const query_contextmenu_params = (
 				const {props} = item;
 				// preserve bubbling order
 				// TODO probably should use `deepEqual`, but we don't have that dependency yet
-				if (!params?.some((i) => i.component === item.component && shallow_equal(i.props, props))) {
+				if (
+					typeof item === 'function' ||
+					!params?.some((i) => i.component === item.component && shallow_equal(i.props, props))
+				) {
 					(params || (params = [])).push(item);
 				}
 			}
