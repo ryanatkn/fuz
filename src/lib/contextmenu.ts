@@ -422,6 +422,7 @@ const query_contextmenu_params = (
 			});
 		}
 	}
+	console.log(`queried params`, params);
 	return params;
 };
 
@@ -437,8 +438,7 @@ export const get_contextmenu_submenu = (): Submenu_State | undefined =>
 	getContext(CONTEXTMENU_STATE_KEY);
 
 const CONTEXTMENU_DIMENSIONS_STORE_KEY = Symbol();
-export const set_contextmenu_dimensions = (): Dimensions => {
-	const dimensions = new Dimensions();
+export const set_contextmenu_dimensions = (dimensions = new Dimensions()): Dimensions => {
 	setContext(CONTEXTMENU_DIMENSIONS_STORE_KEY, dimensions);
 	return dimensions;
 };
