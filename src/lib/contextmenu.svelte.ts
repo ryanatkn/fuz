@@ -263,11 +263,8 @@ export class Contextmenu_Store {
 
 	select_previous(): void {
 		if (!this.selections.length) return this.select_last();
-		console.log(`this.selections`, this.selections);
 		const item = this.selections[this.selections.length - 1];
-		console.log(`item.menu.items`, item.menu.items);
 		const index = item.menu.items.indexOf(item);
-		console.log(`select_previous item, index`, item, index);
 		this.select(item.menu.items[index === 0 ? item.menu.items.length - 1 : index - 1]);
 	}
 
