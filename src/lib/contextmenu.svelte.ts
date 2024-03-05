@@ -122,6 +122,7 @@ export class Contextmenu_Store {
 	}
 
 	open(params: Contextmenu_Params[], x: number, y: number): void {
+		console.log('open', params);
 		this.selections.length = 0;
 		this.opened = true;
 		this.x = x;
@@ -130,6 +131,7 @@ export class Contextmenu_Store {
 	}
 
 	close(): void {
+		console.log('close');
 		if (!this.opened) return;
 		this.reset_items(this.root_menu.items);
 		this.opened = false;
@@ -340,7 +342,11 @@ const resolve_contextmenu_params = (
 	to_array(params)
 		.filter(Boolean)
 		.map((p: any) =>
-			'component' in p && 'props' in p ? p : {component: text_component, props: p},
+			typeof p === 'function'
+				? p
+				: 'component' in p && 'props' in p
+					? p
+					: {component: text_component, props: p},
 		);
 
 const CONTEXTMENU_OPEN_VIBRATE_DURATION = 17;
@@ -363,7 +369,7 @@ export const open_contextmenu = (
 	const params = query_contextmenu_params(target, contextmenu);
 	if (!params?.length) return false;
 	contextmenu.open(params, x, y);
-	// Unfortunately `vibrate` this gets blocked by some browsers the way we're doing it
+	// Unfortunately `vibrate` this gets blocked by some (all?) browsers the way we're doing it
 	// outside of a user interaction in a custom `longpress` gesture that triggers on a timeout,
 	// which exists only because iOS doesn't support the contextmenu event.
 	navigator.vibrate?.(CONTEXTMENU_OPEN_VIBRATE_DURATION);
