@@ -66,8 +66,6 @@ export interface Contextmenu_Run {
 // TODO rename to Contextmenu_State? or is it no longer needed with the class refactor?
 export interface Contextmenu {
 	params: Contextmenu_Params[];
-	x: number;
-	y: number;
 }
 
 export interface Contextmenu_Store_Options {
@@ -108,6 +106,8 @@ export class Contextmenu_Store {
 
 	// TODO BLOCK rename with `open` method?
 	opened: boolean = $state(false);
+	x: number = $state(0);
+	y: number = $state(0);
 
 	action: ReturnType<typeof create_contextmenu_action>;
 
@@ -125,7 +125,7 @@ export class Contextmenu_Store {
 		};
 		this.selections = [];
 
-		const store = writable<Contextmenu>({params: [], x: 0, y: 0});
+		const store = writable<Contextmenu>({params: []});
 		this.subscribe = store.subscribe;
 		this.update = store.update;
 
@@ -137,7 +137,9 @@ export class Contextmenu_Store {
 	open(params: Contextmenu_Params[], x: number, y: number): void {
 		this.selections.length = 0;
 		this.opened = true;
-		this.update((s) => ({...s, params, x, y}));
+		this.x = x;
+		this.y = y;
+		this.update((s) => ({...s, params}));
 	}
 
 	close(): void {

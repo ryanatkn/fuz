@@ -99,7 +99,6 @@
 		}
 	});
 
-	const {x: contextmenu_x, y: contextmenu_y} = $derived($contextmenu);
 	const dimensions = set_contextmenu_dimensions();
 	// TODO BLOCK maybe `derived.by`?
 	$effect(() => {
@@ -110,10 +109,10 @@
 		}
 	});
 	const x = $derived(
-		contextmenu_x + Math.min(0, layout.width - (contextmenu_x + dimensions.width)),
+		contextmenu.x + Math.min(0, layout.width - (contextmenu.x + dimensions.width)),
 	);
 	const y = $derived(
-		contextmenu_y + Math.min(0, layout.height - (contextmenu_y + dimensions.height)),
+		contextmenu.y + Math.min(0, layout.height - (contextmenu.y + dimensions.height)),
 	);
 
 	// TODO maybe show an indicator fade in at these coordinates
