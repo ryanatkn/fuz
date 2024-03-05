@@ -36,7 +36,7 @@
 	};
 
 	// TODO @multiple improve with runes
-	// the `$contextmenu` is needed because `entry` is not reactive
+	// the contextmenu.HACK_COUNTER is needed because `entry` is not reactive
 	const {selected, pending, error_message} = $derived(
 		contextmenu.HACK_counter !== undefined && entry,
 	);

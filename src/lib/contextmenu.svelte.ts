@@ -99,8 +99,13 @@ export class Contextmenu_Store {
 	// If you need reactivity, use `$contextmenu` in a reactive statement to react to all changes, and
 	// then access the mutable non-reactive  `contextmenu.root_menu` and `contextmenu.selections`.
 	// See `Contextmenu_Entry.svelte` and `Contextmenu_Submenu.svelte` for reactive usage examples.
-	root_menu: Root_Menu_State;
-	selections: Item_State[];
+	root_menu: Root_Menu_State = $state({
+		is_menu: true,
+		menu: null,
+		depth: 1,
+		items: [],
+	});
+	selections: Item_State[] = $state([]);
 
 	action: ReturnType<typeof create_contextmenu_action>;
 
@@ -110,13 +115,6 @@ export class Contextmenu_Store {
 		this.initial_layout = options?.layout;
 
 		this.layout = this.initial_layout || new Dimensions();
-		this.root_menu = {
-			is_menu: true,
-			menu: null,
-			depth: 1,
-			items: [],
-		};
-		this.selections = [];
 
 		this.action = create_contextmenu_action(this.text_component);
 	}
@@ -149,6 +147,7 @@ export class Contextmenu_Store {
 	}
 
 	activate(item: Item_State): boolean | Promise<Activate_Result> {
+		console.log(`activate item`, item);
 		if (item.is_menu) {
 			this.expand_selected();
 		} else {
@@ -216,6 +215,7 @@ export class Contextmenu_Store {
 	 * Activates the selected entry, or if none, selects the first.
 	 */
 	select(item: Item_State): void {
+		console.log(`select item`, item);
 		if (this.selections[this.selections.length - 1] === item) return;
 		for (const s of this.selections) s.selected = false;
 		this.selections.length = 0;
@@ -308,6 +308,8 @@ export class Contextmenu_Store {
 		onDestroy(() => {
 			menu.items.length = 0;
 		});
+		console.log(`submenu`, submenu);
+		console.log(`menu.items(last)`, menu.items[menu.items.length - 1]);
 		return submenu;
 	}
 }
