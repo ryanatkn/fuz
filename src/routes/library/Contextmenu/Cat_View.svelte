@@ -23,10 +23,10 @@
 		align-items: center;
 		background-color: var(--bg_3);
 		border-radius: var(--radius_md);
-		border: transparent var(--border_width_4) dotted;
+		border: transparent var(--border_width_4) double;
 	}
 	.cat:hover {
-		border-color: var(--border_color_1);
+		border-color: var(--border_color_2);
 	}
 	.name {
 		font-weight: 700;

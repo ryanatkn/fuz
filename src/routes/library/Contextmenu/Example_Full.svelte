@@ -222,7 +222,7 @@
 		border-radius: var(--border_radius);
 		background-color: var(--fg_1);
 		display: flex;
-		border: transparent var(--border_width_4) dotted;
+		border: transparent var(--border_width_4) double;
 	}
 	.position:hover {
 		border-color: var(--border_color_1);

@@ -40,9 +40,8 @@
 		<div class="panel p_md prose">
 			<div bind:this={text_el} class="mb_lg">
 				<p>
-					If a contextmenu behavior is triggered when text is selected, it includes a <code
-						>Copy text</code
-					> entry by default.
+					If a contextmenu is triggered on selected text, it includes a <code>Copy text</code>
+					entry by default.
 				</p>
 				<p>
 					Try <button class="inline" on:click={select_text} class:color_a={toggled}
