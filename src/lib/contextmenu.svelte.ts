@@ -9,6 +9,7 @@ import {
 } from 'svelte';
 import type {Result} from '@ryanatkn/belt/result.js';
 import {to_array} from '@ryanatkn/belt/array.js';
+import {is_promise} from '@ryanatkn/belt/async.js';
 
 import Contextmenu_Link_Entry from '$lib/Contextmenu_Link_Entry.svelte';
 import Contextmenu_Text_Entry from '$lib/Contextmenu_Text_Entry.svelte';
@@ -79,7 +80,7 @@ export class Root_Menu_State {
 }
 
 export interface Contextmenu_Run {
-	(): void | Promise<Activate_Result>; // | unknown; // TODO BLOCK the result, maybe allow any promise and duck type results? see e.g. navigator.clipboard.writeText, we'd want to wait for it to finish still right? what about catching errors generically instead of expecting the result interface?
+	(): unknown | Promise<Activate_Result>;
 }
 
 export interface Contextmenu_Store_Options {
@@ -172,7 +173,7 @@ export class Contextmenu_Store {
 				item.error_message = message ?? 'unknown error';
 				this.error = message;
 			}
-			if (returned?.then) {
+			if (is_promise(returned)) {
 				item.pending = true;
 				item.error_message = null;
 				const promise = (item.promise = returned

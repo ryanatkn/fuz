@@ -24,7 +24,7 @@
 		</section>
 		<section>
 			<Code
-				content={`<Breadcrumb\n\tpath="/a/b/c"\n\tselected_path="/a/b"\n\tbase_path="/library/Breadcrumb"\n>\n\t🔡\n\t<div slot="separator">.</div>\n</Breadcrumb>`}
+				content={`<Breadcrumb\n\tpath="/a/b/c"\n\tselected_path="/a/b"\n\tbase_path="/library/Breadcrumb"\n>\n\t<span class="size_xl">🔡</span>\n\t<div slot="separator">.</div>\n</Breadcrumb>`}
 			/>
 			<Breadcrumb_Example selected_path="/a/b" />
 		</section>

@@ -9,6 +9,6 @@
 </script>
 
 <Breadcrumb path="/a/b/c" {selected_path} base_path="/library/Breadcrumb">
-	🔡
+	<span class="size_xl">🔡</span>
 	<div slot="separator">.</div>
 </Breadcrumb>
