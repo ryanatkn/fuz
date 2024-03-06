@@ -50,7 +50,7 @@
 				</p>
 			</div>
 			<label>
-				<input type="text" placeholder="paste text here" bind:value />
+				<input type="text" placeholder="paste text here?" bind:value />
 				<p class:color_g_5={value === text}>
 					Opening the contextmenu on an input opens the browser's default contextmenu.
 				</p>
