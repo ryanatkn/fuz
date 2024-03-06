@@ -1,8 +1,6 @@
 <script lang="ts">
-	import {writable} from 'svelte/store';
-
 	import Pending_Animation from '$lib/Pending_Animation.svelte';
-	import {get_contextmenu, type Contextmenu_Run} from '$lib/contextmenu.js';
+	import {get_contextmenu, type Contextmenu_Run} from '$lib/contextmenu.svelte.js';
 
 	interface Props {
 		run: Contextmenu_Run;
@@ -12,18 +10,16 @@
 
 	const {run} = $props<Props>();
 
-	// TODO refactor away from stores
-	// This store makes `run` reactive
-	// because it's a param to `contextmenu.add_entry` which @initializes.
-	// Maybe `add_entry` should just be a callback?
-	const runStore = writable(run);
-	$effect(() => {
-		if ($runStore !== run) $runStore = run;
-	});
-
 	const contextmenu = get_contextmenu();
 
-	const entry = contextmenu.add_entry(runStore);
+	const entry = contextmenu.add_entry(run);
+
+	// TODO BLOCK test that this still works, maybe refactor
+	// This store makes `run` reactive
+	// because it's a param to `contextmenu.add_entry` which @initializes.
+	$effect(() => {
+		entry.run = run;
+	});
 
 	const click = (_e: MouseEvent) => {
 		// This timeout lets event handlers react to the current DOM
@@ -35,9 +31,7 @@
 		contextmenu.select(entry);
 	};
 
-	// TODO @multiple improve with runes
-	// the `$contextmenu` is needed because `entry` is not reactive
-	const {selected, pending, error_message} = $derived($contextmenu && entry);
+	const {selected, pending, error_message} = $derived(entry);
 </script>
 
 <!-- disabling the a11y warning because a parent element handles keyboard events -->
@@ -63,5 +57,6 @@
 	/* TODO hacky, needed because the base `.menu_item` added z-index */
 	.menu_item {
 		z-index: unset;
+		display: flex; /* TODO @multiple allows nesting in `.prose`, use `.unprose` if/when it's added */
 	}
 </style>

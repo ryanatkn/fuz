@@ -5,143 +5,148 @@ import {
 	type ComponentProps,
 	type ComponentType,
 	type SvelteComponent,
+	type Snippet,
 } from 'svelte';
-import {writable, type Readable, type Writable, get} from 'svelte/store';
 import type {Result} from '@ryanatkn/belt/result.js';
 import {to_array} from '@ryanatkn/belt/array.js';
+import {is_promise} from '@ryanatkn/belt/async.js';
 
 import Contextmenu_Link_Entry from '$lib/Contextmenu_Link_Entry.svelte';
 import Contextmenu_Text_Entry from '$lib/Contextmenu_Text_Entry.svelte';
+import {Dimensions} from '$lib/dimensions.svelte.js';
 
 // TODO rewrite with runes!!!!
 
 // TODO @multiple added this hack with Svelte 4, didn't see an open issue about it
 /* eslint-disable @typescript-eslint/no-redundant-type-constituents */
 
-export type Contextmenu_Params<T extends SvelteComponent = SvelteComponent> = {
-	component: ComponentType<T>;
-	props: ComponentProps<T>;
-};
+export type Contextmenu_Params<T extends SvelteComponent = SvelteComponent> =
+	| Snippet
+	| {
+			component: ComponentType<T>;
+			props: ComponentProps<T>;
+	  };
 
+// TODO BLOCK should this just be snippets? might need a wrapper hack
 export type Contextmenu_Action_Params =
+	| Snippet
 	| Contextmenu_Params
 	| Array<Contextmenu_Params | ComponentProps<Contextmenu_Text_Entry> | null | undefined>
 	| ComponentProps<Contextmenu_Text_Entry>;
 
-/**
- * This helper function is needed to construct `Contextmenu_Params` with type safety.
- * It uses TypeScript's inferred generics for functions,
- * which do not work for plain objects as of v5.0.4.
- * `DialogParams` uses a similar strategy.
- */
-export const to_contextmenu_params = <T extends SvelteComponent>(
-	component: ComponentType<T>,
-	props: ComponentProps<T>,
-): Contextmenu_Params<T> => ({component, props});
-
 type Activate_Result = Result<any, {message?: string}> | any;
 
 export type Item_State = Submenu_State | Entry_State;
-export interface Entry_State {
-	is_menu: false; // TODO rename to `type`?
-	menu: Submenu_State | Root_Menu_State;
-	selected: boolean;
-	run: Writable<Contextmenu_Run>;
-	pending: boolean;
-	error_message: string | null;
-	promise: Promise<any> | null;
-}
-export interface Submenu_State {
-	is_menu: true;
-	menu: Submenu_State | Root_Menu_State;
-	depth: number;
-	selected: boolean;
-	items: Item_State[];
-}
-export interface Root_Menu_State {
-	is_menu: true;
-	menu: null;
-	depth: 1;
-	items: Item_State[];
-}
-export interface Contextmenu_Run {
-	(): void | Promise<Activate_Result>;
+
+// TODO BLOCK set more of these properties to readonly?
+
+export class Entry_State {
+	readonly is_menu = false; // TODO rename to `type`?
+	readonly menu: Submenu_State | Root_Menu_State;
+
+	selected: boolean = $state(false);
+	run: Contextmenu_Run = $state(undefined as any); // TODO BLOCK any better way to do this?
+	pending: boolean = $state(false);
+	error_message: string | null = $state(null);
+	promise: Promise<any> | null = $state(null);
+
+	constructor(menu: Submenu_State | Root_Menu_State, run: Contextmenu_Run) {
+		this.menu = menu;
+		this.run = run;
+		// this.run = $state(run); // TODO BLOCK does this work?
+	}
 }
 
-// TODO rename to Contextmenu_State? or is it no longer needed with the class refactor?
-export interface Contextmenu {
-	open: boolean;
-	params: Contextmenu_Params[];
-	x: number;
-	y: number;
+export class Submenu_State {
+	readonly is_menu = true;
+	readonly menu: Submenu_State | Root_Menu_State;
+	readonly depth: number;
+
+	selected: boolean = $state(false);
+	items: Item_State[] = $state([]);
+
+	constructor(menu: Submenu_State | Root_Menu_State, depth: number) {
+		this.menu = menu;
+		this.depth = depth;
+	}
+}
+
+export class Root_Menu_State {
+	readonly is_menu = true;
+	readonly menu = null;
+	readonly depth = 1;
+
+	items: Item_State[] = $state([]);
+}
+
+export interface Contextmenu_Run {
+	(): unknown | Promise<Activate_Result>;
 }
 
 export interface Contextmenu_Store_Options {
 	link_component?: ComponentType<Contextmenu_Link_Entry>;
 	text_component?: ComponentType<Contextmenu_Text_Entry>;
-	layout?: Readable<{width: number; height: number}>; // TODO consider making this a prop on `Contextmenu`, and being assigned here
+	layout?: Dimensions; // TODO consider making this a prop on `Contextmenu_Root`, and being assigned here
 }
+
+// TODO BLOCK name? should the component or this be `Contextmenu`? `Contextmenu_State`?
+// maybe the compoonent is `Contextmenu_Entries`? seems like the common one should be simpler
 
 /**
  * Creates a `contextmenu` store.
- * For external usage see `use:contextmenu.run` scattered throughout the app,
- * and for internal usage see `Contextmenu.svelte`.
+ * See usage with `Contextmenu_Root.svelte` and `Contextmenu.svelte`.
  */
 export class Contextmenu_Store {
-	layout: Readable<{width: number; height: number}>;
-	initial_layout: Readable<{width: number; height: number}> | undefined;
-	link_component: ComponentType<Contextmenu_Link_Entry>;
-	text_component: ComponentType<Contextmenu_Text_Entry>;
-	action: ReturnType<typeof create_contextmenu_action>;
-	error: Writable<string | undefined>;
+	layout: Dimensions; // TODO $state?
+	/**
+	 * If an initial layout is provided, control is deferred externally.
+	 * Otherwise the layout syncs to the page dimensions.
+	 */
+	initial_layout: Dimensions | undefined; // TODO $state?
+	link_component: ComponentType<Contextmenu_Link_Entry>; // TODO $state?
+	text_component: ComponentType<Contextmenu_Text_Entry>; // TODO $state?
 
+	// State for external consumers.
+	opened: boolean = $state(false);
+	x: number = $state(0);
+	y: number = $state(0);
+	params: Contextmenu_Params[] = $state([]);
+	error: string | undefined = $state();
+
+	// TODO BLOCK probably make these reactive?
 	// These two properties are mutated internally.
 	// If you need reactivity, use `$contextmenu` in a reactive statement to react to all changes, and
 	// then access the mutable non-reactive  `contextmenu.root_menu` and `contextmenu.selections`.
 	// See `Contextmenu_Entry.svelte` and `Contextmenu_Submenu.svelte` for reactive usage examples.
-	root_menu: Root_Menu_State;
-	selections: Item_State[];
+	root_menu: Root_Menu_State = $state(new Root_Menu_State());
+	selections: Item_State[] = $state([]);
 
-	// TODO BLOCK remove
-	subscribe: Readable<Contextmenu>['subscribe'];
-	update: (fn: (state: Contextmenu) => Contextmenu) => void;
-	force_update = (): void => this.update(($) => ({...$}));
+	action: ReturnType<typeof create_contextmenu_action>;
 
 	constructor(options?: Contextmenu_Store_Options) {
 		this.link_component = options?.link_component ?? Contextmenu_Link_Entry;
 		this.text_component = options?.text_component ?? Contextmenu_Text_Entry;
 		this.initial_layout = options?.layout;
 
-		// TODO BLOCK put on instance?
-		this.layout = this.initial_layout || writable({width: 0, height: 0});
-		this.root_menu = {
-			is_menu: true,
-			menu: null,
-			depth: 1,
-			items: [],
-		};
-		this.selections = [];
-
-		const store = writable<Contextmenu>({open: false, params: [], x: 0, y: 0});
-		this.subscribe = store.subscribe;
-		this.update = store.update;
-
-		this.error = writable(undefined);
+		this.layout = this.initial_layout || new Dimensions();
 
 		this.action = create_contextmenu_action(this.text_component);
 	}
 
 	open(params: Contextmenu_Params[], x: number, y: number): void {
+		console.log('open', params);
 		this.selections.length = 0;
-		this.update(($state) => ({...$state, open: true, params, x, y}));
+		this.opened = true;
+		this.x = x;
+		this.y = y;
+		this.params = params;
 	}
 
 	close(): void {
-		this.update(($state) => {
-			if (!$state.open) return $state;
-			this.reset_items(this.root_menu.items);
-			return {...$state, open: false};
-		});
+		console.log('close');
+		if (!this.opened) return;
+		this.reset_items(this.root_menu.items);
+		this.opened = false;
 	}
 
 	reset_items(items: Item_State[]): void {
@@ -156,18 +161,19 @@ export class Contextmenu_Store {
 	}
 
 	activate(item: Item_State): boolean | Promise<Activate_Result> {
+		console.log(`activate item`, item);
 		if (item.is_menu) {
 			this.expand_selected();
 		} else {
 			let returned;
 			try {
-				returned = get(item.run)();
+				returned = item.run();
 			} catch (err) {
 				const message = typeof err?.message === 'string' ? err.message : undefined;
 				item.error_message = message ?? 'unknown error';
-				this.error.set(message);
+				this.error = message;
 			}
-			if (returned?.then) {
+			if (is_promise(returned)) {
 				item.pending = true;
 				item.error_message = null;
 				const promise = (item.promise = returned
@@ -180,7 +186,7 @@ export class Contextmenu_Store {
 								} else {
 									const message = typeof result.message === 'string' ? result.message : undefined;
 									item.error_message = message ?? 'unknown error';
-									this.error.set(message);
+									this.error = message;
 								}
 							} else {
 								this.close();
@@ -191,16 +197,16 @@ export class Contextmenu_Store {
 							if (promise !== item.promise) return;
 							const message = typeof err?.message === 'string' ? err.message : undefined;
 							item.error_message = message ?? 'unknown error';
-							this.error.set(message);
+							this.error = message;
 						},
 					)
 					.finally(() => {
 						if (promise !== item.promise) return;
 						item.pending = false;
 						item.promise = null;
-						this.force_update();
+						// TODO BLOCK shouldn't be needed but might be relying on this behavior for nonreactive properties
 					}));
-				this.force_update();
+				// TODO BLOCK shouldn't be needed but might be relying on this behavior for nonreactive properties
 				return item.promise; // async path
 			}
 			this.close(); // synchronous path only
@@ -221,6 +227,7 @@ export class Contextmenu_Store {
 	 * Activates the selected entry, or if none, selects the first.
 	 */
 	select(item: Item_State): void {
+		console.log(`select item`, item);
 		if (this.selections[this.selections.length - 1] === item) return;
 		for (const s of this.selections) s.selected = false;
 		this.selections.length = 0;
@@ -229,14 +236,14 @@ export class Contextmenu_Store {
 			i.selected = true;
 			this.selections.unshift(i);
 		} while ((i = i.menu) && i.menu);
-		this.force_update();
+		// TODO BLOCK shouldn't be needed but might be relying on this behavior for nonreactive properties
 	}
 
 	collapse_selected(): void {
 		if (this.selections.length <= 1) return;
 		const deselected = this.selections.pop()!;
 		deselected.selected = false;
-		this.force_update();
+		// TODO BLOCK shouldn't be needed but might be relying on this behavior for nonreactive properties
 	}
 
 	expand_selected(): void {
@@ -245,7 +252,7 @@ export class Contextmenu_Store {
 		const selected = parent.items[0];
 		selected.selected = true;
 		this.selections.push(selected);
-		this.force_update();
+		// TODO BLOCK shouldn't be needed but might be relying on this behavior for nonreactive properties
 	}
 
 	select_next(): void {
@@ -275,17 +282,9 @@ export class Contextmenu_Store {
 	 * Used by `Contextmenu_Entry` and custom entry components
 	 * @initializes
 	 */
-	add_entry(run: Writable<Contextmenu_Run>): Entry_State {
+	add_entry(run: Contextmenu_Run): Entry_State {
 		const menu = get_contextmenu_submenu() || this.root_menu;
-		const entry: Entry_State = {
-			is_menu: false,
-			menu,
-			selected: false,
-			run,
-			pending: false,
-			error_message: null,
-			promise: null,
-		};
+		const entry = new Entry_State(menu, run);
 		menu.items.push(entry);
 		onDestroy(() => {
 			menu.items.length = 0;
@@ -298,18 +297,14 @@ export class Contextmenu_Store {
 	 */
 	add_submenu(): Submenu_State {
 		const menu = get_contextmenu_submenu() || this.root_menu;
-		const submenu: Submenu_State = {
-			is_menu: true,
-			menu,
-			depth: menu.depth + 1,
-			selected: false,
-			items: [],
-		};
+		const submenu = new Submenu_State(menu, menu.depth + 1);
 		menu.items.push(submenu);
 		set_contextmenu_submenu(submenu);
 		onDestroy(() => {
 			menu.items.length = 0;
 		});
+		console.log(`submenu`, submenu);
+		console.log(`menu.items(last)`, menu.items[menu.items.length - 1]);
 		return submenu;
 	}
 }
@@ -344,7 +339,11 @@ const resolve_contextmenu_params = (
 	to_array(params)
 		.filter(Boolean)
 		.map((p: any) =>
-			'component' in p && 'props' in p ? p : {component: text_component, props: p},
+			typeof p === 'function'
+				? p
+				: 'component' in p && 'props' in p
+					? p
+					: {component: text_component, props: p},
 		);
 
 const CONTEXTMENU_OPEN_VIBRATE_DURATION = 17;
@@ -367,10 +366,9 @@ export const open_contextmenu = (
 	const params = query_contextmenu_params(target, contextmenu);
 	if (!params?.length) return false;
 	contextmenu.open(params, x, y);
-	// Unfortunately `vibrate` this gets blocked by some browsers the way we're doing it
+	// Unfortunately `vibrate` this gets blocked by some (all?) browsers the way we're doing it
 	// outside of a user interaction in a custom `longpress` gesture that triggers on a timeout,
-	// which exists only because iOS doesn't support the contextmenu event:
-	// https://github.com/ryanatkn/fuz/pull/319
+	// which exists only because iOS doesn't support the contextmenu event.
 	navigator.vibrate?.(CONTEXTMENU_OPEN_VIBRATE_DURATION);
 	return true;
 };
@@ -392,10 +390,12 @@ const query_contextmenu_params = (
 				continue;
 			}
 			for (const item of cached) {
-				const {props} = item;
 				// preserve bubbling order
-				// TODO probably should use `deepEqual`, but we don't have that dependency yet
-				if (!params?.some((i) => i.component === item.component && shallow_equal(i.props, props))) {
+				// TODO probably should rethink this comparison or use `dequal`, but we don't have that dependency yet
+				if (
+					typeof item === 'function' ||
+					!params?.some((i) => i.component === item.component && shallow_equal(i.props, item.props))
+				) {
 					(params || (params = [])).push(item);
 				}
 			}
@@ -422,6 +422,7 @@ const query_contextmenu_params = (
 			});
 		}
 	}
+	console.log(`queried params`, params);
 	return params;
 };
 
@@ -437,12 +438,11 @@ export const get_contextmenu_submenu = (): Submenu_State | undefined =>
 	getContext(CONTEXTMENU_STATE_KEY);
 
 const CONTEXTMENU_DIMENSIONS_STORE_KEY = Symbol();
-export const set_contextmenu_dimensions = (): Writable<{width: number; height: number}> => {
-	const dimensions = writable({width: 0, height: 0});
+export const set_contextmenu_dimensions = (dimensions = new Dimensions()): Dimensions => {
 	setContext(CONTEXTMENU_DIMENSIONS_STORE_KEY, dimensions);
 	return dimensions;
 };
-export const get_contextmenu_dimensions = (): Writable<{width: number; height: number}> =>
+export const get_contextmenu_dimensions = (): Dimensions =>
 	getContext(CONTEXTMENU_DIMENSIONS_STORE_KEY);
 
 // TODO quick and hacky, probably delete, see usage

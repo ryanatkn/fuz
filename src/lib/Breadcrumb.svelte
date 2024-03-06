@@ -11,10 +11,11 @@
 		 */
 		selected_path?: string | null | undefined;
 		base_path?: string;
+		separator?: Snippet;
 		children?: Snippet;
 	}
 
-	const {path, selected_path, base_path, children} = $props<Props>();
+	const {path, selected_path, base_path, separator, children} = $props<Props>();
 
 	const final_path = $derived(path ?? $page.url.pathname);
 	const final_selected_path = $derived(
@@ -28,13 +29,14 @@
 </script>
 
 <div class="breadcrumb">
-	<!-- The default/only slot is the content for the root "/" link. -->
 	<a href={root_path} class:selected={root_path === final_selected_path}
-		>{#if children}{@render children()}{:else}<slot>•</slot>{/if}</a
+		>{#if children}{@render children()}{:else}•{/if}</a
 	>{#each path_pieces as pathPiece}{#if pathPiece.type === 'piece'}<a
 				href={final_base_path + pathPiece.path}
 				class:selected={pathPiece.path === final_selected_path}>{pathPiece.name}</a
-			>{:else}<span class="separator"><slot name="separator">/</slot></span>{/if}{/each}
+			>{:else}<span class="separator"
+				>{#if separator}{@render separator()}{:else}/{/if}</span
+			>{/if}{/each}
 </div>
 
 <style>
@@ -43,7 +45,7 @@
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
-		align-items: stretch;
+		align-items: center;
 		padding: var(--space_md) 0;
 	}
 	a {

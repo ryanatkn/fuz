@@ -19,13 +19,21 @@
 			<Breadcrumb />
 		</section>
 		<section>
+			<h3>Custom icon</h3>
 			<Code content={`<Breadcrumb>🏠</Breadcrumb>`} />
 			<Breadcrumb>🏠</Breadcrumb>
 		</section>
 		<section>
+			<h3>Custom separator</h3>
 			<Code
-				content={`<Breadcrumb\n\tpath="/a/b/c"\n\tselected_path="/a/b"\n\tbase_path="/library/Breadcrumb"\n>\n\t🔡\n\t<div slot="separator">.</div>\n</Breadcrumb>`}
+				content={`<Breadcrumb>
+	{#snippet separator()}.{/snippet}
+</Breadcrumb>`}
 			/>
+			<Breadcrumb>{#snippet separator()}.{/snippet}</Breadcrumb>
+		</section>
+		<section>
+			<h3>Custom paths</h3>
 			<Breadcrumb_Example selected_path="/a/b" />
 		</section>
 	</div>

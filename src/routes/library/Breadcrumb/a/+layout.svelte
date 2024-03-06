@@ -1,8 +1,12 @@
 <script lang="ts">
-	import {base} from '$app/paths';
+	import {get_tome} from '$lib/tome.js';
+	import Tome_Detail from '$lib/Tome_Detail.svelte';
+
+	const LIBRARY_ITEM_NAME = 'Breadcrumb';
+
+	const tome = get_tome(LIBRARY_ITEM_NAME);
 </script>
 
-<div class="panel box">
-	<h2><a href="{base}/library/Breadcrumb">Breadcrumb example</a></h2>
+<Tome_Detail {tome}>
 	<slot />
-</div>
+</Tome_Detail>

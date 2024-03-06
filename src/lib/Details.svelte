@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type {Snippet} from 'svelte';
 	import type {HTMLDetailsAttributes} from 'svelte/elements';
 
 	/**
@@ -10,21 +11,22 @@
 		lazy?: boolean;
 		open?: boolean | null | undefined;
 		attrs?: HTMLDetailsAttributes;
+		summary: Snippet;
+		children: Snippet;
 	}
 
 	// TODO BLOCK @multiple just disable this eslint rule when we use bindings? would prefer not to disable for all Svelte so let continues to signal reassigment
-	let {lazy = true, open, attrs} = $props<Props>(); // eslint-disable-line prefer-const
+	let {lazy = true, open, attrs, summary, children} = $props<Props>(); // eslint-disable-line prefer-const
 </script>
 
 <!-- TODO svelte5 splat attrs -->
 <details {...attrs} bind:open>
+	{@render summary()}
 	{#if lazy}
-		<slot name="summary" />
 		{#if open}
-			<slot />
+			{@render children()}
 		{/if}
 	{:else}
-		<slot name="summary" />
-		<slot />
+		{@render children()}
 	{/if}
 </details>

@@ -27,7 +27,7 @@ export const package_json = {
 	peerDependencies: {'@ryanatkn/belt': '*', '@sveltejs/kit': '*', svelte: '*'},
 	devDependencies: {
 		'@changesets/changelog-git': '^0.2.0',
-		'@ryanatkn/belt': '^0.20.5',
+		'@ryanatkn/belt': '^0.20.6',
 		'@ryanatkn/eslint-config': '^0.1.0',
 		'@ryanatkn/fuz_code': '^0.11.0',
 		'@ryanatkn/gro': '^0.112.4',
@@ -94,6 +94,11 @@ export const package_json = {
 			default: './dist/Contextmenu_Link_Entry.svelte',
 			types: './dist/Contextmenu_Link_Entry.svelte.d.ts',
 		},
+		'./Contextmenu_Root.svelte': {
+			svelte: './dist/Contextmenu_Root.svelte',
+			default: './dist/Contextmenu_Root.svelte',
+			types: './dist/Contextmenu_Root.svelte.d.ts',
+		},
 		'./Contextmenu_Submenu.svelte': {
 			svelte: './dist/Contextmenu_Submenu.svelte',
 			default: './dist/Contextmenu_Submenu.svelte',
@@ -109,7 +114,10 @@ export const package_json = {
 			default: './dist/Contextmenu.svelte',
 			types: './dist/Contextmenu.svelte.d.ts',
 		},
-		'./contextmenu.js': {default: './dist/contextmenu.js', types: './dist/contextmenu.d.ts'},
+		'./contextmenu.svelte.js': {
+			default: './dist/contextmenu.svelte.js',
+			types: './dist/contextmenu.svelte.d.ts',
+		},
 		'./Copy_To_Clipboard.svelte': {
 			svelte: './dist/Copy_To_Clipboard.svelte',
 			default: './dist/Copy_To_Clipboard.svelte',
@@ -130,6 +138,10 @@ export const package_json = {
 			svelte: './dist/Dialogs.svelte',
 			default: './dist/Dialogs.svelte',
 			types: './dist/Dialogs.svelte.d.ts',
+		},
+		'./dimensions.svelte.js': {
+			default: './dist/dimensions.svelte.js',
+			types: './dist/dimensions.svelte.d.ts',
 		},
 		'./Github_Logo.svelte': {
 			svelte: './dist/Github_Logo.svelte',
@@ -293,21 +305,20 @@ export const src_json = {
 		},
 		'./Contextmenu_Entry.svelte': {path: 'Contextmenu_Entry.svelte', declarations: []},
 		'./Contextmenu_Link_Entry.svelte': {path: 'Contextmenu_Link_Entry.svelte', declarations: []},
+		'./Contextmenu_Root.svelte': {path: 'Contextmenu_Root.svelte', declarations: []},
 		'./Contextmenu_Submenu.svelte': {path: 'Contextmenu_Submenu.svelte', declarations: []},
 		'./Contextmenu_Text_Entry.svelte': {path: 'Contextmenu_Text_Entry.svelte', declarations: []},
 		'./Contextmenu.svelte': {path: 'Contextmenu.svelte', declarations: []},
-		'./contextmenu.js': {
-			path: 'contextmenu.ts',
+		'./contextmenu.svelte.js': {
+			path: 'contextmenu.svelte.ts',
 			declarations: [
 				{name: 'Contextmenu_Params', kind: 'type'},
 				{name: 'Contextmenu_Action_Params', kind: 'type'},
-				{name: 'to_contextmenu_params', kind: 'function'},
 				{name: 'Item_State', kind: 'type'},
-				{name: 'Entry_State', kind: 'type'},
-				{name: 'Submenu_State', kind: 'type'},
-				{name: 'Root_Menu_State', kind: 'type'},
+				{name: 'Entry_State', kind: 'class'},
+				{name: 'Submenu_State', kind: 'class'},
+				{name: 'Root_Menu_State', kind: 'class'},
 				{name: 'Contextmenu_Run', kind: 'type'},
-				{name: 'Contextmenu', kind: 'type'},
 				{name: 'Contextmenu_Store_Options', kind: 'type'},
 				{name: 'Contextmenu_Store', kind: 'class'},
 				{name: 'open_contextmenu', kind: 'function'},
@@ -332,6 +343,10 @@ export const src_json = {
 			],
 		},
 		'./Dialogs.svelte': {path: 'Dialogs.svelte', declarations: []},
+		'./dimensions.svelte.js': {
+			path: 'dimensions.svelte.ts',
+			declarations: [{name: 'Dimensions', kind: 'class'}],
+		},
 		'./Github_Logo.svelte': {path: 'Github_Logo.svelte', declarations: []},
 		'./helpers.js': {
 			path: 'helpers.ts',
