@@ -6,6 +6,7 @@
 
 	import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
 	import Contextmenu from '$lib/Contextmenu.svelte';
+	import Details from '$lib/Details.svelte';
 	import Contextmenu_Text_Entry from '$lib/Contextmenu_Text_Entry.svelte';
 	import Cat_Contextmenu from '$routes/library/Contextmenu/Cat_Contextmenu.svelte';
 	import App_Contextmenu from '$routes/library/Contextmenu/App_Contextmenu.svelte';
@@ -16,6 +17,7 @@
 	import Color_Scheme_Input from '$lib/Color_Scheme_Input.svelte';
 	import Theme_Input from '$lib/Theme_Input.svelte';
 	import Dialog from '$lib/Dialog.svelte';
+	import file_contents from '$routes/library/Contextmenu/Example_Full.svelte?raw';
 
 	const alyssa = 'Alyssa';
 	const ben = 'Ben';
@@ -135,9 +137,6 @@
 			<App_Contextmenu {toggle_about_dialog} />
 		{/snippet}
 		<section>
-			<Code content={`<Contextmenu_Root />`} />
-		</section>
-		<section>
 			<Contextmenu>
 				{#snippet entries()}
 					<Home_Contextmenu {act} {home_cats} {adventure_cats} />
@@ -178,6 +177,14 @@
 					</div>
 				</div>
 			</Contextmenu>
+		</section>
+		<section>
+			<Details>
+				{#snippet summary()}
+					<summary> View example source </summary>
+				{/snippet}
+				<Code content={file_contents} />
+			</Details>
 		</section>
 	</Contextmenu>
 </Contextmenu_Root>
