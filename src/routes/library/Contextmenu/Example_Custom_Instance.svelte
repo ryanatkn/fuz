@@ -26,11 +26,11 @@
 				<Code lang="ts" content={`const contextmenu = create_contextmenu();`} />
 			</p>
 			<p>
-				<Code content={`<Contextmenu_Root {contextmenu} />`} />
+				<Code content={`<Contextmenu_Root {contextmenu}>...`} />
 			</p>
 			<p>
-				The <code>Contextmenu_Root</code> takes a <code>contextmenu</code> prop if you want more control.
-				Try opening the contextmenu on this panel.
+				The <code>Contextmenu_Root</code> prop <code>contextmenu</code> provides more control. Try opening
+				the contextmenu on this panel.
 			</p>
 			<!-- TODO this extra wrapper is only for the last-child margin behavior, but that may be removed -->
 			<div>
