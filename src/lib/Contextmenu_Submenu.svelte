@@ -1,10 +1,20 @@
 <script lang="ts">
+	import type {Snippet} from 'svelte';
+
 	import {
 		get_contextmenu,
 		get_contextmenu_dimensions,
 		set_contextmenu_dimensions,
 	} from '$lib/contextmenu.svelte.js';
 	import type {Dimensions} from '$lib/dimensions.svelte.js';
+
+	interface Props {
+		icon?: Snippet;
+		menu: Snippet;
+		children: Snippet;
+	}
+
+	const {icon, menu, children} = $props<Props>();
 
 	const contextmenu = get_contextmenu();
 
@@ -68,8 +78,10 @@
 		aria-expanded={selected}
 	>
 		<div class="content">
-			<div class="icon"><slot name="icon" /></div>
-			<div class="title"><slot /></div>
+			<div class="icon">
+				{#if icon}{@render icon()}{/if}
+			</div>
+			<div class="title">{@render children()}</div>
 		</div>
 		<div class="chevron" />
 	</div>
@@ -78,10 +90,8 @@
 			bind:this={el}
 			class="pane"
 			style:transform="translate3d({translate_x}px, {translate_y}px, 0)"
-			style:max-height="{layout.height}px"
+			style:max-height="{layout.height}px">{@render menu()}</menu
 		>
-			<slot name="menu" />
-		</menu>
 	{/if}
 </li>
 

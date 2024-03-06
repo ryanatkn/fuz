@@ -10,26 +10,23 @@
 		act: (item: History_Item) => void;
 	}
 
-	const {name = 'Cat', icon = '😺', position, act} = $props<Props>();
+	// TODO remove the alias
+	const {name = 'Cat', icon: icon_text = '😺', position, act} = $props<Props>();
 </script>
 
 <Contextmenu_Submenu>
-	<svelte:fragment slot="icon">{icon}</svelte:fragment>
+	{#snippet icon()}{icon_text}{/snippet}
 	{name}
-	<svelte:fragment slot="menu">
+	{#snippet menu()}
 		<Contextmenu_Entry
 			run={() => act({type: position === 'adventure' ? 'cat_go_home' : 'cat_go_adventure', name})}
 		>
-			<svelte:fragment slot="icon"
-				>{#if position === 'adventure'}🏠{:else}🌄{/if}</svelte:fragment
-			>
+			{#snippet icon()}{#if position === 'adventure'}🏠{:else}🌄{/if}{/snippet}
 			{#if position === 'adventure'}go home{:else}go adventure{/if}
 		</Contextmenu_Entry>
 		<Contextmenu_Entry run={() => act({type: 'cat_be_or_do', name, position})}>
-			<svelte:fragment slot="icon"
-				>{#if position === 'adventure'}🌄{:else}🏠{/if}</svelte:fragment
-			>
+			{#snippet icon()}{#if position === 'adventure'}🌄{:else}🏠{/if}{/snippet}
 			{#if position === 'adventure'}do adventure{:else}be home{/if}
 		</Contextmenu_Entry>
-	</svelte:fragment>
+	{/snippet}
 </Contextmenu_Submenu>

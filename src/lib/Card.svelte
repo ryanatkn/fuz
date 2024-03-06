@@ -1,5 +1,6 @@
 <script lang="ts">
 	import {page} from '$app/stores';
+	import type {Snippet} from 'svelte';
 
 	interface Props {
 		tag?: string | undefined;
@@ -7,9 +8,11 @@
 		align?: 'left' | 'right' | 'above' | 'below';
 		attrs?: any; // type? what about the optional tag though? (button etc - maybe API should be more explicit)
 		// TODO BLOCK default and `icon` snippets
+		icon?: Snippet;
+		children: Snippet;
 	}
 
-	const {tag, href, align = 'left', attrs} = $props<Props>();
+	const {tag, href, align = 'left', attrs, icon, children} = $props<Props>();
 
 	const link = $derived(!!href);
 	const selected = $derived(link && $page.url.pathname === href);
@@ -21,7 +24,8 @@
 	const above = $derived(align === 'above');
 	const below = $derived(align === 'below');
 
-	const icon = $derived(link ? '🔗' : '🪧');
+	const fallback_icon = $derived(link ? '🔗' : '🪧');
+	const final_icon = $derived(icon ?? fallback_icon);
 </script>
 
 <svelte:element
@@ -37,11 +41,11 @@
 	class:below
 >
 	{#if align === 'left' || align === 'above'}<div class="icon">
-			<slot name="icon">{icon}</slot>
+			{#if typeof final_icon === 'string'}{final_icon}{:else}{@render final_icon()}{/if}
 		</div>{/if}
-	<div class="content"><slot /></div>
+	<div class="content">{@render children()}</div>
 	{#if align === 'right' || align === 'below'}<div class="icon">
-			<slot name="icon">{icon}</slot>
+			{#if typeof final_icon === 'string'}{final_icon}{:else}{@render final_icon()}{/if}
 		</div>{/if}</svelte:element
 >
 

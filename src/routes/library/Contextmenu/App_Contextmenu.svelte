@@ -14,6 +14,6 @@
 	>{#snippet icon()}<GithubLogo size="var(--icon_size_xs)" />{/snippet}Source code</Contextmenu_Link_Entry
 >
 <Contextmenu_Entry run={toggle_about_dialog}>
-	<svelte:fragment slot="icon">?</svelte:fragment>
+	{#snippet icon()}?{/snippet}
 	About
 </Contextmenu_Entry>

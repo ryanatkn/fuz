@@ -16,12 +16,12 @@
 </script>
 
 <Contextmenu_Submenu>
-	<svelte:fragment slot="icon">🏠</svelte:fragment>
+	{#snippet icon()}🏠{/snippet}
 	home
-	<svelte:fragment slot="menu">
+	{#snippet menu()}
 		{#if cat_to_call_home}
 			<Contextmenu_Entry run={() => act({type: 'call_cats_home'})}>
-				<svelte:fragment slot="icon">🐈‍⬛</svelte:fragment>
+				{#snippet icon()}🐈‍⬛{/snippet}
 				call
 			</Contextmenu_Entry>
 		{/if}
@@ -30,9 +30,9 @@
 		{/each}
 		{#if !cat_to_call_home}
 			<Contextmenu_Entry run={() => act({type: 'call_cats_adventure'})}>
-				<svelte:fragment slot="icon">🦋</svelte:fragment>
+				{#snippet icon()}🦋{/snippet}
 				leave
 			</Contextmenu_Entry>
 		{/if}
-	</svelte:fragment>
+	{/snippet}
 </Contextmenu_Submenu>

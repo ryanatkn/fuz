@@ -14,6 +14,6 @@
 </script>
 
 <Contextmenu_Entry {run}>
-	<svelte:fragment slot="icon">{icon}</svelte:fragment>
+	{#snippet icon()}{icon}{/snippet}
 	{content}
 </Contextmenu_Entry>

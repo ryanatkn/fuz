@@ -1,14 +1,16 @@
 <script lang="ts">
+	import type {Snippet} from 'svelte';
+
 	import Pending_Animation from '$lib/Pending_Animation.svelte';
 	import {get_contextmenu, type Contextmenu_Run} from '$lib/contextmenu.svelte.js';
 
 	interface Props {
 		run: Contextmenu_Run;
-		// children: Snippet; // TODO @multiple think about this API, maybe make a snippet or both? maybe just a snippet after changing from actions to nested components
-		// icon: Snippet;  // TODO @multiple think about this API, maybe make a snippet or both? maybe just a snippet after changing from actions to nested components
+		icon?: Snippet; // TODO @multiple think about this API, maybe make a snippet or string? maybe just a snippet after changing from actions to nested components
+		children: Snippet; // TODO @multiple think about this API, maybe make a snippet or string? maybe just a snippet after changing from actions to nested components
 	}
 
-	const {run} = $props<Props>();
+	const {run, icon, children} = $props<Props>();
 
 	const contextmenu = get_contextmenu();
 
@@ -47,8 +49,10 @@
 	on:mouseenter={mouseenter}
 >
 	<div class="content">
-		<div class="icon"><slot name="icon" /></div>
-		<div class="title"><slot /></div>
+		<div class="icon">
+			{#if icon}{@render icon()}{/if}
+		</div>
+		<div class="title">{@render children()}</div>
 		{#if pending}<Pending_Animation />{:else if error_message}⚠️{/if}
 	</div>
 </li>

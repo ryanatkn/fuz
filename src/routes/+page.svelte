@@ -36,7 +36,7 @@
 			</div>
 		</section>
 		<section>
-			<Card href="{base}/library">library<svelte:fragment slot="icon">🧶</svelte:fragment></Card>
+			<Card href="{base}/library">library{#snippet icon()}🧶{/snippet}</Card>
 		</section>
 		<section class="panel p_lg">
 			<!-- TODO ideally this wouldn't duplicate metadata like descriptions, but adding fuz_gitops to this repo is heavy -->
