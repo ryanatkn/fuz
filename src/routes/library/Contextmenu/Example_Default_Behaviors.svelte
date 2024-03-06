@@ -29,9 +29,9 @@
 		<div class="panel p_md">
 			<Code
 				content={`<Contextmenu_Root>
-  <a href="https://www.fuz.dev/">
+  ...<a href="https://www.fuz.dev/">
     a link like this one
-  </a>
+  </a>...
 </Contextmenu_Root>`}
 			/>
 			<p>

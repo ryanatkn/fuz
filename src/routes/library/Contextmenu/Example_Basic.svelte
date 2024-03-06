@@ -28,10 +28,10 @@
 					content={`<Contextmenu_Root>
   <Contextmenu>
     {#snippet entries()}
-      <Contextmenu_Entry run={() => (greeted = !greeted)}>
+      <Contextmenu_Entry run={() => (greeted = !greeted)}> <!-- ${greeted} />
         Hello world
       </Contextmenu_Entry>
-      <Contextmenu_Entry run={() => (with_icon = !with_icon)}>
+      <Contextmenu_Entry run={() => (with_icon = !with_icon)}> <!-- ${with_icon} />
         <svelte:fragment slot="icon">🌞</svelte:fragment>
         With an optional icon
       </Contextmenu_Entry>
@@ -42,8 +42,10 @@
 </Contextmenu_Root>
 ...context without contextmenu behavior`}
 				/>
-				<p>Try opening the contextmenu on this panel.</p>
-				<!-- TODO this extra wrapper is only for the last-child margin behavior, but that may be removed -->
+				<p>
+					Try opening the contextmenu on this panel with rightclick or longpress.
+					<!-- TODO this extra wrapper is only for the last-child margin behavior, but that may be removed -->
+				</p>
 				<div>
 					{#if greeted}
 						<div transition:slide><code>greeted = true</code></div>

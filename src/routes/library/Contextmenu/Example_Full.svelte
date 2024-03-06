@@ -213,8 +213,12 @@
 	}
 	.position {
 		border-radius: var(--border_radius);
-		background-color: var(--bg);
+		background-color: var(--fg_1);
 		display: flex;
+		border: transparent var(--border_width_4) dotted;
+	}
+	.position:hover {
+		border-color: var(--border_color_1);
 	}
 	.position .icon {
 		font-size: var(--icon_size_xl);
