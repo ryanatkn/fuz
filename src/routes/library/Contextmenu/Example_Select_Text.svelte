@@ -28,7 +28,7 @@
 
 	let value = $state('');
 
-	const text = `If a contextmenu behavior is triggered when text is selected, it includes a Copy text entry by default.  Try selecting text and then opening the contextmenu on it.`;
+	const text = `If a contextmenu is triggered on selected text, it includes a Copy text entry by default.  Try selecting text and then opening the contextmenu on it.`;
 </script>
 
 <Contextmenu_Root {contextmenu}>
@@ -37,7 +37,7 @@
 		{#snippet entries()}
 			<Contextmenu_Entry run={() => (toggled = !toggled)}>Toggle</Contextmenu_Entry>
 		{/snippet}
-		<div class="panel p_md prose">
+		<div class="panel p_md prose" class:color_g_5={value === text}>
 			<div bind:this={text_el} class="mb_lg">
 				<p>
 					If a contextmenu is triggered on selected text, it includes a <code>Copy text</code>
@@ -51,9 +51,7 @@
 			</div>
 			<label>
 				<input type="text" placeholder="paste text here" bind:value />
-				<p class:color_g_5={value === text}>
-					Opening the contextmenu on an input opens the browser's default contextmenu.
-				</p>
+				<p>Opening the contextmenu on an input opens the browser's default contextmenu.</p>
 			</label>
 		</div>
 	</Contextmenu>
