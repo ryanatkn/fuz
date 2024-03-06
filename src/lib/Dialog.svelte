@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {onDestroy} from 'svelte';
+	import {onDestroy, type Snippet} from 'svelte';
 	import {is_editable, swallow} from '@ryanatkn/belt/dom.js';
 
 	import Teleport from '$lib/Teleport.svelte';
@@ -27,9 +27,17 @@
 		index?: number;
 		active?: boolean;
 		onclose?: () => void;
+		children: Snippet<[close: (e?: Event) => void]>;
 	}
 
-	const {container, layout = 'centered', index = 0, active = true, onclose} = $props<Props>();
+	const {
+		container,
+		layout = 'centered',
+		index = 0,
+		active = true,
+		onclose,
+		children,
+	} = $props<Props>();
 
 	const ROOT_SELECTOR = 'body'; // TODO make configurable
 	const ROOT_DIALOG_OPEN_CLASS = 'dialog_open';
@@ -152,9 +160,7 @@
 					}}
 				>
 					<!-- mount the content only after teleporting to avoid issues -->
-					{#if ready}
-						<slot {close} />
-					{/if}
+					{#if ready}{@render children(close)}{/if}
 				</div>
 			</div>
 		</div>

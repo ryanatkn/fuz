@@ -105,16 +105,18 @@
 	</div>
 </div>
 {#if selected_variable}
-	<Dialog onclose={() => (selected_variable = null)} let:close>
-		<div class="pane">
-			<div class="panel p_lg box">
-				<Style_Variable_Detail variable={selected_variable} />
-				<br />
-				<aside>this is unfinished</aside>
-				<br />
-				<button on:click={close}>ok</button>
+	<Dialog onclose={() => (selected_variable = null)}>
+		{#snippet children(close)}
+			<div class="pane">
+				<div class="panel p_lg box">
+					<Style_Variable_Detail variable={selected_variable!} />
+					<br />
+					<aside>this is unfinished</aside>
+					<br />
+					<button on:click={close}>ok</button>
+				</div>
 			</div>
-		</div>
+		{/snippet}
 	</Dialog>
 {/if}
 
