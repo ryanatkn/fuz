@@ -32,7 +32,7 @@
 </script>
 
 <Contextmenu_Root {contextmenu}>
-	<h3>Select text example</h3>
+	<h3 class:color_e_5={value === text}>Select text example</h3>
 	<Contextmenu>
 		{#snippet entries()}
 			<Contextmenu_Entry run={() => (toggled = !toggled)}>Toggle</Contextmenu_Entry>
@@ -51,7 +51,9 @@
 			</div>
 			<label>
 				<input type="text" placeholder="paste text here" bind:value />
-				<p>Opening the contextmenu on an input opens the browser's default contextmenu.</p>
+				<p class:color_g_5={value === text}>
+					Opening the contextmenu on an input opens the browser's default contextmenu.
+				</p>
 			</label>
 		</div>
 	</Contextmenu>
