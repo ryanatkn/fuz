@@ -21,6 +21,12 @@
 	.cat {
 		display: flex;
 		align-items: center;
+		background-color: var(--bg_3);
+		border-radius: var(--radius_md);
+		border: transparent var(--border_width_4) dotted;
+	}
+	.cat:hover {
+		border-color: var(--border_color_1);
 	}
 	.name {
 		font-weight: 700;

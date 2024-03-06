@@ -238,6 +238,6 @@
 	.cat_wrapper {
 		display: flex;
 		flex-direction: column;
-		width: 120px;
+		width: 130px;
 	}
 </style>

@@ -525,13 +525,10 @@ for disabled colors without needing a wrapper .disabled class */
 label {
 	color: var(--text_color);
 	cursor: pointer;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
 }
 label .title {
 	font-weight: 600;
+	margin-bottom: var(--space_xs2);
 }
 label.selected {
 	cursor: default;

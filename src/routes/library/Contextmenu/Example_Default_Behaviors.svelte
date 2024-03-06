@@ -3,24 +3,7 @@
 
 	import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
 
-	// TODO BLOCK opt out of this with a prop? `null` for snippet? default to fallback_link snippet inside `Contextmenu_Root`?
-
 	// TODO BLOCK opening it on itself is bugged, opens another menu
-
-	// TODO BLOCK input example (with paste option?)
-
-	// TODO BLOCK selecting text needs to be moved - doesn't work properly here
-
-	let text_el: HTMLElement;
-
-	const select_text = () => {
-		const selection = window.getSelection();
-		if (!selection) return;
-		const range = document.createRange();
-		range.selectNodeContents(text_el);
-		selection.removeAllRanges();
-		selection.addRange(range);
-	};
 </script>
 
 <Contextmenu_Root>
@@ -44,16 +27,10 @@
 				behaviors, and it allows you to open the contextmenu anywhere to access all contextual
 				behaviors.
 			</p>
-			<div bind:this={text_el}>
-				<p>
-					Also try <button class="inline" on:click={select_text}>selecting text</button> and then opening
-					the contextmenu on it.
-				</p>
-				<aside>
-					Also note that opening the contextmenu on anything here except the link passes through to
-					the browser's default contextmenu, because we didn't include any behaviors.
-				</aside>
-			</div>
+			<aside>
+				Notice that opening the contextmenu on anything here except the link passes through to the
+				browser's default contextmenu, because we didn't include any behaviors.
+			</aside>
 		</div>
 	</div>
 </Contextmenu_Root>
