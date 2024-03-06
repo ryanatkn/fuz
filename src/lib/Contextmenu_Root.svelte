@@ -5,7 +5,7 @@
 	import {
 		set_contextmenu,
 		set_contextmenu_dimensions,
-		type Contextmenu_Store,
+		Contextmenu_Store,
 		open_contextmenu,
 	} from '$lib/contextmenu.svelte.js';
 
@@ -18,12 +18,13 @@
 	interface Props {
 		/**
 		 * The `contextmenu` prop is not reactive because that's a rare corner case and
-		 * it's easier to put the `contextmenu` directly in the context rather than wrapping with a store.
+		 * it's easier to put the `contextmenu` directly in the context
+		 * rather than wrapping with a store or other reactivity.
 		 * If you need to change the contextmenu prop for some reason, use a `{#key contextmenu}` block:
 		 * https://svelte.dev/docs#template-syntax-key
 		 * @nonreactive
 		 */
-		contextmenu: Contextmenu_Store;
+		contextmenu?: Contextmenu_Store;
 		/**
 		 * The number of pixels the pointer can be moved without canceling `longpress`.
 		 * Defaults to half the default `--input_height`.
@@ -66,7 +67,7 @@
 	}
 
 	const {
-		contextmenu,
+		contextmenu = new Contextmenu_Store(),
 		longpress_move_tolerance = 21,
 		longpress_duration = 633,
 		bypass_with_tap_then_longpress = true,
@@ -252,6 +253,7 @@
 		['Enter', () => contextmenu.activate_selected()],
 	]);
 	const keydown = (e: KeyboardEvent): void => {
+		console.log(`e.key`, e.key);
 		const handler = keyboard_handlers.get(e.key);
 		if (!handler || is_editable(e.target)) return;
 		swallow(e);
@@ -315,6 +317,7 @@
 		z-index: var(--contextmenu_z_index, 200);
 		max-width: var(--contextmenu_width);
 		width: 100%;
+		padding-left: 0; /* TODO @multiple allows nesting in `.prose`, use `.unprose` if/when it's added */
 		/* TODO fix for iOS */
 		-webkit-touch-callout: none;
 		-webkit-user-select: none;

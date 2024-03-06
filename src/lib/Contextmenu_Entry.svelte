@@ -57,5 +57,6 @@
 	/* TODO hacky, needed because the base `.menu_item` added z-index */
 	.menu_item {
 		z-index: unset;
+		display: flex; /* TODO @multiple allows nesting in `.prose`, use `.unprose` if/when it's added */
 	}
 </style>

@@ -43,6 +43,9 @@
 </li>
 
 <style>
+	li {
+		display: flex;
+	}
 	/* Underline only the link text, not the icon. */
 	a:hover {
 		text-decoration: none;

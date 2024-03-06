@@ -87,6 +87,7 @@
 
 <style>
 	li {
+		display: flex; /* TODO @multiple allows nesting in `.prose`, use `.unprose` if/when it's added */
 		position: relative;
 	}
 	.chevron {
@@ -100,6 +101,7 @@
 		top: 0;
 		max-width: var(--contextmenu_width);
 		width: 100%;
+		padding-left: 0; /* TODO @multiple allows nesting in `.prose`, use `.unprose` if/when it's added */
 	}
 	/* TODO hacky, needed because the base `.menu_item` added z-index */
 	.menu_item {

@@ -79,7 +79,7 @@ export class Root_Menu_State {
 }
 
 export interface Contextmenu_Run {
-	(): void | Promise<Activate_Result>;
+	(): void | Promise<Activate_Result>; // | unknown; // TODO BLOCK the result, maybe allow any promise and duck type results? see e.g. navigator.clipboard.writeText, we'd want to wait for it to finish still right? what about catching errors generically instead of expecting the result interface?
 }
 
 export interface Contextmenu_Store_Options {
