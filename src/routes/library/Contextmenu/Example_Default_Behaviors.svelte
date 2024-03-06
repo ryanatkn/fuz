@@ -44,10 +44,16 @@
 				behaviors, and it allows you to open the contextmenu anywhere to access all contextual
 				behaviors.
 			</p>
-			<p bind:this={text_el}>
-				Also try <button class="inline" on:click={select_text}>selecting text</button> and then opening
-				the contextmenu on it.
-			</p>
+			<div bind:this={text_el}>
+				<p>
+					Also try <button class="inline" on:click={select_text}>selecting text</button> and then opening
+					the contextmenu on it.
+				</p>
+				<aside>
+					Also note that opening the contextmenu on anything here except the link passes through to
+					the browser's default contextmenu, because we didn't include any behaviors.
+				</aside>
+			</div>
 		</div>
 	</div>
 </Contextmenu_Root>

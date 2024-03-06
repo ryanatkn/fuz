@@ -185,7 +185,7 @@
 {#if show_about_dialog}
 	<Dialog onclose={() => (show_about_dialog = false)}>
 		<div class="pane prose p_xl box text_align_center">
-			<h1>About</h1>
+			<h1>About Fuz</h1>
 			<blockquote>Svelte UI library and CSS design system</blockquote>
 			<blockquote>
 				free and open source at<br /><a href="https://github.com/ryanatkn/fuz"
