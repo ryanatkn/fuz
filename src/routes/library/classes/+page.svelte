@@ -145,9 +145,9 @@
 			<h3>Raw CSS</h3>
 			<!-- TODO maybe add a github source link? -->
 			<Details>
-				<summary slot="summary"
-					><span class="font_family_mono">@ryanatkn/fuz/utility_classes.css</span></summary
-				>
+				{#snippet summary()}
+					<summary><span class="font_family_mono">@ryanatkn/fuz/utility_classes.css</span></summary>
+				{/snippet}
 				<p class="source_link">
 					<a href="https://github.com/ryanatkn/fuz/blob/main/src/lib/utility_classes.css"
 						><Github_Logo size="var(--icon_size_xs)" /> <span class="ml_xs">source</span></a
@@ -156,9 +156,11 @@
 				<Code content={utility_classes_text} lang="css" />
 			</Details>
 			<Details>
-				<summary slot="summary"
-					><span class="font_family_mono">@ryanatkn/fuz/variable_classes.css</span></summary
-				>
+				{#snippet summary()}
+					<summary><span class="font_family_mono">@ryanatkn/fuz/variable_classes.css</span></summary
+					>
+				{/snippet}
+
 				<p class="source_link">
 					<a href="https://github.com/ryanatkn/fuz/blob/main/src/lib/variable_classes.css"
 						><Github_Logo size="var(--icon_size_xs)" /> <span class="ml_xs">source</span></a
@@ -167,9 +169,10 @@
 				<Code content={variable_classes_text} lang="css" />
 			</Details>
 			<Details>
-				<summary slot="summary"
-					><span class="font_family_mono">@ryanatkn/fuz/semantic_classes.css</span></summary
-				>
+				{#snippet summary()}
+					<summary><span class="font_family_mono">@ryanatkn/fuz/semantic_classes.css</span></summary
+					>
+				{/snippet}
 				<p class="source_link">
 					<a href="https://github.com/ryanatkn/fuz/blob/main/src/lib/semantic_classes.css"
 						><Github_Logo size="var(--icon_size_xs)" /> <span class="ml_xs">source</span></a

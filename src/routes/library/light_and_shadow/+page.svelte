@@ -84,6 +84,13 @@
 		<section>
 			<Color_Scheme_Input />
 		</section>
+		<section>
+			<aside>
+				Tip: try flipping between light and dark to see how <code>bg</code> and <code>fg</code>
+				change, while <code>darken</code> and <code>lighten</code> don't change but do appear significantly
+				different because of the context.
+			</aside>
+		</section>
 
 		<section>
 			<h3>Fading opacity</h3>
