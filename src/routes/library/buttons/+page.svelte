@@ -136,47 +136,27 @@
 	+
 </button>`}
 		/>
-		<button class="plain">+</button>
-		<br />
+		<div class="mb_lg">
+			<button class="plain">+</button>
+			<button class="plain" disabled>+</button>
+		</div>
 		<Code
 			content={`<button class="icon_button">
 	+
 </button>`}
 		/>
 		<button class="icon_button">+</button>
+		<button class="icon_button" disabled>+</button>
 		<br />
 		<Code
 			content={`<button class="plain icon_button">
 	+
 </button>`}
 		/>
-		<button class="plain icon_button">+</button>
-		<br />
-		<div class="prose">
-			<h4><code>disabled</code> variants</h4>
+		<div class="mb_lg">
+			<button class="plain icon_button">+</button>
+			<button class="plain icon_button" disabled>+</button>
 		</div>
-		<br />
-		<Code
-			content={`<button class="plain" disabled>
-	+
-</button>`}
-		/>
-		<button class="plain" disabled>+</button>
-		<br />
-		<Code
-			content={`<button class="icon_button" disabled>
-	+
-</button>`}
-		/>
-		<button class="icon_button" disabled>+</button>
-		<br />
-		<Code
-			content={`<button class="plain icon_button" disabled>
-	+
-</button>`}
-		/>
-		<button class="plain icon_button" disabled>+</button>
-		<br />
 		<div class="prose">
 			<h4><code>.selected</code> variants</h4>
 		</div>
