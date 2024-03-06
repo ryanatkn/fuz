@@ -25,6 +25,10 @@
 		selection.removeAllRanges();
 		selection.addRange(range);
 	};
+
+	let value = $state('');
+
+	const text = `If a contextmenu behavior is triggered when text is selected, it includes a Copy text entry by default.  Try selecting text and then opening the contextmenu on it.`;
 </script>
 
 <Contextmenu_Root {contextmenu}>
@@ -47,8 +51,10 @@
 				</p>
 			</div>
 			<label>
-				<input type="text" />
-				<p>opening the contextmenu here opens the browser's default contextmenu</p>
+				<input type="text" placeholder="paste text here" bind:value />
+				<p class:color_g_5={value === text}>
+					Opening the contextmenu on an input opens the browser's default contextmenu.
+				</p>
 			</label>
 		</div>
 	</Contextmenu>
