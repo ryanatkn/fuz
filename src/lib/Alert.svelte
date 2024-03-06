@@ -31,7 +31,7 @@
 
 {#if onclick}
 	<button
-		class="message text_align_left"
+		class="message"
 		type="button"
 		style:--color={final_color}
 		on:click={onclick}
@@ -56,7 +56,7 @@
 			{/if}
 		</div>
 	{/if}
-	<div class="prose flex_1">
+	<div class="prose">
 		{@render children()}
 	</div>
 {/snippet}
@@ -88,5 +88,9 @@
 		font-size: var(--size_xl2);
 		min-width: var(--size_xl2);
 		text-align: center;
+	}
+	.prose {
+		text-align: left;
+		flex: 1;
 	}
 </style>
