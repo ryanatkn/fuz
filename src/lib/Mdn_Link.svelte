@@ -1,6 +1,7 @@
 <script lang="ts">
 	import {strip_start} from '@ryanatkn/belt/string.js';
 	import type {HTMLAnchorAttributes} from 'svelte/elements';
+	import type {Snippet} from 'svelte';
 
 	import Mdn_Logo from '$lib/Mdn_Logo.svelte';
 
@@ -10,9 +11,10 @@
 		 */
 		href: string;
 		attrs?: HTMLAnchorAttributes;
+		children: Snippet;
 	}
 
-	const {href, attrs} = $props<Props>();
+	const {href, attrs, children} = $props<Props>();
 
 	const final_href = $derived(
 		href.startsWith('https://')
@@ -22,7 +24,7 @@
 </script>
 
 <a {...attrs} href={final_href} class="chip nowrap"
-	><span class="logo_wrapper"><Mdn_Logo /></span><slot /></a
+	><span class="logo_wrapper"><Mdn_Logo /></span>{@render children()}</a
 >
 
 <style>
