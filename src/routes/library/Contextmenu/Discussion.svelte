@@ -20,8 +20,7 @@
 			because iOS does not support this web standard as of July 2023 as described in
 			<a href="https://bugs.webkit.org/show_bug.cgi?id=213953">this WebKit bug report</a>. The Fuz
 			implementation therefore has hacks that may cause corner case bugs on various devices and
-			browsers - for more see
-			<a href="https://github.com/ryanatkn/fuz/pull/319">this PR</a>.
+			browsers.
 		</p>
 		<p>
 			When you rightclick or longpress, we search for behaviors defined with <code>Contextmenu</code
@@ -60,8 +59,7 @@
 				gives haptic feedback on open with <Mdn_Link href="Web/API/Navigator/vibrate"
 					><code>navigator.vibrate</code></Mdn_Link
 				>
-				(may remain broken due to the iOS longpress workaround, see
-				<a href="https://github.com/ryanatkn/fuz/pull/319">this PR</a>)
+				(currently broken, may remain so due to the iOS longpress workaround)
 			</li>
 		</ul>
 	</div>
