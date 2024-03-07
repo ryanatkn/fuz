@@ -21,15 +21,14 @@
 				states.
 			</p>
 			<p>
-				Light mode's starting point is plain white documents, and dark mode's is a lightless void.
-				It's more helpful to think in terms of additive light than opaque colors. The <Tome_Link
-					name="colors"
-				/> docs elaborate.
+				Light mode's starting point is plain white documents (like paper), and dark mode's is a
+				lightless void (like videogames and augmented reality). In Fuz it's more helpful to think in
+				terms of additive light than opaque colors. The <Tome_Link name="colors" /> docs elaborate.
 			</p>
 			<p>
 				Opacity is used to enable arbitrary stacking that visually inherits its context. Not all
 				cases are properly handled yet, and some choices are made for performance reasons, like
-				avoiding opacity on text. (is this still a thing?)
+				avoiding opacity on text. (maybe this won't be a thing one day?)
 			</p>
 		</section>
 

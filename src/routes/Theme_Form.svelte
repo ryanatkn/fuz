@@ -109,7 +109,7 @@
 		{#snippet children(close)}
 			<div class="pane">
 				<div class="panel p_lg box">
-					<Style_Variable_Detail variable={selected_variable!} />
+					<Style_Variable_Detail variable={selected_variable} />
 					<br />
 					<aside>this is unfinished</aside>
 					<br />

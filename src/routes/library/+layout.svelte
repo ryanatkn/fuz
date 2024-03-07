@@ -35,8 +35,8 @@
 			<div class="menu width_sm">
 				<Library_Menu {tomes} />
 				{#if tomes_related_to_selected}
-					<Library_Menu tomes={tomes_related_to_selected} let:category>
-						<h6>related {category}</h6>
+					<Library_Menu tomes={tomes_related_to_selected}>
+						{#snippet children(category)}<h6>related {category}</h6>{/snippet}
 					</Library_Menu>
 				{/if}
 			</div>
@@ -55,16 +55,18 @@
 		</section>
 	</div>
 	{#if $selected_variable}
-		<Dialog onclose={() => ($selected_variable = null)} let:close>
-			<div class="pane">
-				<div class="panel p_lg box">
-					<Style_Variable_Detail variable={$selected_variable} />
-					<br />
-					<aside>this is unfinished</aside>
-					<br />
-					<button on:click={close}>ok</button>
+		<Dialog onclose={() => ($selected_variable = null)}>
+			{#snippet children(close)}
+				<div class="pane">
+					<div class="panel p_lg box">
+						<Style_Variable_Detail variable={$selected_variable} />
+						<br />
+						<aside>this is unfinished</aside>
+						<br />
+						<button on:click={close}>ok</button>
+					</div>
 				</div>
-			</div>
+			{/snippet}
 		</Dialog>
 	{/if}
 </main>

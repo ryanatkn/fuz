@@ -5,12 +5,14 @@
 
 	import type {Tome} from '$lib/tome.js';
 	import Library_Panel from '$lib/Library_Panel.svelte';
+	import type {Snippet} from 'svelte';
 
 	interface Props {
 		tomes: Tome[];
+		children?: Snippet<[category: string]>;
 	}
 
-	const {tomes} = $props<Props>();
+	const {tomes, children} = $props<Props>();
 
 	// Library_Menu floats alongside the docs, showing scrolled item as selected
 
@@ -30,9 +32,7 @@
 	<div transition:slide>
 		<Library_Panel>
 			<div class="library_menu">
-				<slot {category}>
-					<h6>{category}</h6>
-				</slot>
+				{#if children}{@render children(category)}{:else}<h6>{category}</h6>{/if}
 				<menu>
 					{#each tomes as item (item.slug)}
 						<li role="none" transition:slide>
