@@ -263,6 +263,8 @@
 	// TODO BLOCK remove
 	$inspect('open', contextmenu.opened);
 	$inspect('params', contextmenu.params);
+
+	// TODO BLOCK change the events to be just the container? maybe just the starting triggers? (contextmenu, touchstart)
 </script>
 
 <!--
