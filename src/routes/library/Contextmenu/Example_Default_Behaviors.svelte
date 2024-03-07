@@ -6,12 +6,12 @@
 	// TODO BLOCK opening it on itself is bugged, opens another menu
 </script>
 
-<Contextmenu_Root>
+<Contextmenu_Root scoped>
 	<div class="prose">
 		<h3>Default behaviors example</h3>
 		<div class="panel p_md">
 			<Code
-				content={`<Contextmenu_Root>
+				content={`<Contextmenu_Root scoped>
   ...<a href="https://www.fuz.dev/">
     a link like this one
   </a>...

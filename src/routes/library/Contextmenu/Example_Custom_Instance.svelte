@@ -15,7 +15,7 @@
 	let toggled = $state(false);
 </script>
 
-<Contextmenu_Root {contextmenu}>
+<Contextmenu_Root {contextmenu} scoped>
 	<h3>Custom instance example</h3>
 	<Contextmenu>
 		{#snippet entries()}
@@ -26,7 +26,7 @@
 				<Code lang="ts" content={`const contextmenu = create_contextmenu();`} />
 			</p>
 			<p>
-				<Code content={`<Contextmenu_Root {contextmenu}>...`} />
+				<Code content={`<Contextmenu_Root {contextmenu} scoped>...`} />
 			</p>
 			<p>
 				The <code>Contextmenu_Root</code> prop <code>contextmenu</code> provides more control. Try opening

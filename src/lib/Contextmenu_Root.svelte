@@ -62,7 +62,10 @@
 		 * Useful to ensure the first menu item is immediately under the pointer.
 		 */
 		open_offset_y?: number;
-
+		/**
+		 * If `true`, wraps `children` with a div and listens to events on it instead of the window.
+		 */
+		scoped?: boolean;
 		children: Snippet;
 	}
 
@@ -75,6 +78,7 @@
 		tap_then_longpress_move_tolerance = 7,
 		open_offset_x = -2,
 		open_offset_y = -2,
+		scoped = false,
 		children,
 	} = $props<Props>();
 
@@ -134,7 +138,6 @@
 	};
 
 	const on_window_contextmenu = (e: MouseEvent) => {
-		console.log(`e`, e);
 		// handle the tap-then-longpress bypass gesture
 		if (longpress_bypass) {
 			longpress_bypass = false;
@@ -273,16 +276,26 @@
 -->
 <!-- Capture keydown so it can handle the event before any dialogs. -->
 <svelte:window
-	on:contextmenu|capture|nonpassive={on_window_contextmenu}
-	on:touchstart|capture|passive={touchstart}
-	on:touchmove|capture|passive={touchmove}
-	on:touchend|capture|nonpassive={touchend}
-	on:touchcancel|capture|nonpassive={touchend}
+	on:contextmenu|capture|nonpassive={scoped ? undefined : on_window_contextmenu}
+	on:touchstart|capture|passive={scoped ? undefined : touchstart}
+	on:touchmove|capture|passive={scoped ? undefined : touchmove}
+	on:touchend|capture|nonpassive={scoped ? undefined : touchend}
+	on:touchcancel|capture|nonpassive={scoped ? undefined : touchend}
 	on:mousedown|capture|passive={contextmenu.opened ? mousedown : undefined}
 	on:keydown|capture|nonpassive={contextmenu.opened ? keydown : undefined}
 />
 
-{@render children()}
+{#if scoped}<div
+		class="contextmenu_root"
+		role="region"
+		on:contextmenu|capture|nonpassive={on_window_contextmenu}
+		on:touchstart|capture|passive={touchstart}
+		on:touchmove|capture|passive={touchmove}
+		on:touchend|capture|nonpassive={touchend}
+		on:touchcancel|capture|nonpassive={touchend}
+	>
+		{@render children()}
+	</div>{:else}{@render children()}{/if}
 
 {#if !custom_layout}
 	<div class="contextmenu_layout" bind:clientHeight bind:clientWidth />
@@ -307,6 +320,9 @@
 {/if}
 
 <style>
+	.contextmenu_root {
+		display: contents;
+	}
 	.contextmenu {
 		--icon_size: var(--icon_size_xs);
 		/* TODO maybe make this responsive or a max of the page width

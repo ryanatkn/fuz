@@ -14,6 +14,4 @@
 	// TODO BLOCK remove the wrapper element and action for context
 </script>
 
-<div use:contextmenu.action={entries} class="display_contents">
-	{@render children()}
-</div>
+<div use:contextmenu.action={entries} class="display_contents">{@render children()}</div>

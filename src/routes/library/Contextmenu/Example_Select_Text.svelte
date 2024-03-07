@@ -31,7 +31,7 @@
 	const text = `If a contextmenu is triggered on selected text, it includes a Copy text entry by default.  Try selecting text and then opening the contextmenu on it.`;
 </script>
 
-<Contextmenu_Root {contextmenu}>
+<Contextmenu_Root {contextmenu} scoped>
 	<h3 class:color_e_5={value === text}>Select text example</h3>
 	<Contextmenu>
 		{#snippet entries()}

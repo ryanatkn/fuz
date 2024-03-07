@@ -12,7 +12,7 @@
 
 <div class="prose">
 	<h3>Basic example</h3>
-	<Contextmenu_Root>
+	<Contextmenu_Root scoped>
 		<Contextmenu>
 			{#snippet entries()}
 				<!-- eslint-disable-next-line no-alert -->
@@ -26,7 +26,7 @@
 			<div class="panel p_md">
 				<p>Try opening the contextmenu on this panel with rightclick or longpress.</p>
 				<Code
-					content={`<Contextmenu_Root>
+					content={`<Contextmenu_Root scoped>
   <Contextmenu>
     {#snippet entries()}
       <Contextmenu_Entry run={() => (greeted = !greeted)}> <!-- ${greeted} />

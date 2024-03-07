@@ -6,7 +6,7 @@
 		icon?: string | null;
 		show_name?: boolean;
 		show_icon?: boolean;
-		children: Snippet;
+		children?: Snippet;
 	}
 
 	const {name = 'Cat', icon = '😺', show_name = true, show_icon = true, children} = $props<Props>();
@@ -16,7 +16,7 @@
 
 <span class="cat" class:has-icon={show_icon}>
 	{#if show_icon}<span class="icon">{icon}</span>{/if}{#if show_name}<span class="name"
-			>{@render children()}{name}</span
+			>{#if children}{@render children()}{/if}{name}</span
 		>{/if}
 </span>
 

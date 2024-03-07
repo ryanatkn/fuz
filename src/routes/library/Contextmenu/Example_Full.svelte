@@ -127,7 +127,7 @@
 	// TODO BLOCK the flip animations caused the contextmenu wrapper of the children to be nested, make sure it doesn't mess up the contextmenu behavior
 </script>
 
-<Contextmenu_Root>
+<Contextmenu_Root scoped>
 	<h3>Full example</h3>
 	<Contextmenu>
 		{#snippet entries()}
