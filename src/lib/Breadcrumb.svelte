@@ -26,6 +26,9 @@
 	const path_pieces = $derived(parse_path_pieces(final_path));
 
 	const root_path = $derived(final_base_path || '/');
+
+	// TODO animate these, need to use in a layout though, but then how to opt out?
+	// `transition:slide={{axis: 'x'}}`
 </script>
 
 <div class="breadcrumb">
