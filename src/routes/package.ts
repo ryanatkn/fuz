@@ -48,7 +48,7 @@ export const package_json = {
 		svelte: '^5.0.0-next.73',
 		'svelte-check': '^3.6.6',
 		tslib: '^2.6.2',
-		typescript: '^5.3.3',
+		typescript: '^5.4.2',
 		uvu: '^0.5.6',
 	},
 	eslintConfig: {root: true, extends: '@ryanatkn', rules: {'no-console': 1}},
