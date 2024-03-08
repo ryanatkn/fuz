@@ -3,7 +3,7 @@
 </script>
 
 <script lang="ts">
-	import {onDestroy, onMount} from 'svelte';
+	import {onDestroy, onMount, type Snippet} from 'svelte';
 	import {writable, type Writable} from 'svelte/store';
 
 	import {
@@ -46,6 +46,15 @@
 		selected_color_scheme?: Writable<Color_Scheme | null>;
 		color_scheme_fallback?: Color_Scheme | undefined;
 		color_scheme_css?: string | undefined;
+		children: Snippet<
+			[
+				style: string | null,
+				theme_style_html: string | null,
+				theme_setup_script: string,
+				selected_theme: Writable<Theme>,
+				selected_color_scheme: Writable<Color_Scheme | null>,
+			]
+		>;
 	}
 
 	const {
@@ -58,6 +67,7 @@
 		selected_color_scheme = writable(load_color_scheme()),
 		color_scheme_fallback,
 		color_scheme_css,
+		children,
 	}: Props = $props();
 
 	// TODO improve this so it works without `unsafe-inline` in the CSP - hash/nonce?
@@ -137,4 +147,10 @@
 	{/if}
 </svelte:head>
 
-<slot {style} {theme_style_html} {theme_setup_script} {selected_theme} {selected_color_scheme} />
+{@render children(
+	style,
+	theme_style_html,
+	theme_setup_script,
+	selected_theme,
+	selected_color_scheme,
+)}

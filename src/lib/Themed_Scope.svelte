@@ -50,6 +50,7 @@
 		selected_theme = writable(get(get_theme())),
 		selected_color_scheme = writable(get(get_color_scheme())),
 		tagName = 'div',
+		children,
 	}: Props = $props();
 
 	const id = 'themed_' + _id++;
@@ -88,12 +89,12 @@
 	{#if theme_style_html}{@html theme_style_html}{/if}
 </svelte:head>
 
-<svelte:element this={tagName} {id} class="themed" class:dark={final_color__scheme === 'dark'}>
-	<slot
-		{id}
-		{style}
-		{theme_style_html}
-		theme={selected_theme}
-		color_scheme={selected_color_scheme}
-	/>
-</svelte:element>
+<svelte:element this={tagName} {id} class="themed" class:dark={final_color__scheme === 'dark'}
+	>{@render children(
+		id,
+		style,
+		theme_style_html,
+		selected_theme,
+		selected_color_scheme,
+	)}</svelte:element
+>

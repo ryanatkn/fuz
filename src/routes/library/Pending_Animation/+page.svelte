@@ -42,7 +42,7 @@
 			</div>
 		</section>
 		<section>
-			<h3>custom slot</h3>
+			<h3>custom children</h3>
 			<Code
 				content={`<div
 	style:font-size="var(--size_xl6)"
@@ -54,7 +54,7 @@
 </div>`}
 			/>
 			<p>
-				with slot <input class="inline" bind:value={turtleSlot} />
+				with children <input class="inline" bind:value={turtleSlot} />
 				<button on:click={() => (turtleSlot = '🐢🐢🐢')} class="inline">🐢🐢🐢</button>
 				<button
 					on:click={() => (turtleSlot = (turtleSlot + turtleSlot).substring(0, 24))}
@@ -75,16 +75,18 @@
 			</div>
 		</section>
 		<section>
-			<h3>slot <code>index</code> prop</h3>
+			<h3>children <code>index</code> prop</h3>
 			<Code
-				content={`<Pending_Animation running={${frogsRunning}} let:index>
-	<div class="row box">
-		{${turtleSlot2a}}
-		{index}
-		<span style="font-size: var(--size_xl5)">
-			{${turtleSlot2b}}
-		</span>}
-	</div>
+				content={`<Pending_Animation running={${frogsRunning}}>
+	{#snippet children(index)}
+		<div class="row box">
+			{${turtleSlot2a}}
+			{index}
+			<span style="font-size: var(--size_xl5)">
+				{${turtleSlot2b}}
+			</span>}
+		</div>
+	{/snippet}
 </Pending_Animation>`}
 			/>
 			<p>
@@ -96,15 +98,17 @@
 				>
 			</p>
 			<p>
-				and slots <input class="inline" bind:value={turtleSlot2a} />
+				and children <input class="inline" bind:value={turtleSlot2a} />
 				<input class="inline" bind:value={turtleSlot2b} />
 			</p>
-			<Pending_Animation running={frogsRunning} let:index>
-				<div class="row box">
-					<span style="font-size: var(--size_xl5)">{turtleSlot2a}</span>
-					<span class="index">{index}</span>
-					{turtleSlot2b}
-				</div>
+			<Pending_Animation running={frogsRunning}>
+				{#snippet children(index)}
+					<div class="row box">
+						<span style="font-size: var(--size_xl5)">{turtleSlot2a}</span>
+						<span class="index">{index}</span>
+						{turtleSlot2b}
+					</div>
+				{/snippet}
 			</Pending_Animation>
 		</section>
 	</div>
