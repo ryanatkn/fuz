@@ -3,6 +3,7 @@
 	import Contextmenu_Entry from '$lib/Contextmenu_Entry.svelte';
 	import Contextmenu from '$lib/Contextmenu.svelte';
 	import {Contextmenu_Store} from '$lib/contextmenu.svelte';
+	import Mdn_Link from '$lib/Mdn_Link.svelte';
 
 	const contextmenu = new Contextmenu_Store();
 
@@ -28,16 +29,20 @@
 
 	let value = $state('');
 
-	const text = `If a contextmenu is triggered on selected text, it includes a Copy text entry by default.  Try selecting text and then opening the contextmenu on it.`;
+	// TODO very hacky
+	const text1 = `If a contextmenu is triggered on selected text, it includes a Copy text entry by default.  Try selecting text and then opening the contextmenu on it.`;
+	const text2 = `If a contextmenu is triggered on selected text, it includes a Copy text entry by default.\n\n\nTry selecting text and then opening the contextmenu on it.`;
+
+	const highlighted = $derived(value === text1 || value === text2);
 </script>
 
 <Contextmenu_Root {contextmenu} scoped>
-	<h3 class:color_e_5={value === text}>Select text example</h3>
+	<h3 class:color_e_5={highlighted}>Select text example</h3>
 	<Contextmenu>
 		{#snippet entries()}
 			<Contextmenu_Entry run={() => (toggled = !toggled)}>Toggle</Contextmenu_Entry>
 		{/snippet}
-		<div class="panel p_md prose" class:color_g_5={value === text}>
+		<div class="panel p_md prose" class:color_g_5={highlighted}>
 			<div bind:this={text_el} class="mb_lg">
 				<p>
 					If a contextmenu is triggered on selected text, it includes a <code>Copy text</code>
@@ -51,10 +56,15 @@
 			</div>
 			<label>
 				<input type="text" placeholder="paste text here?" bind:value />
-				<p class:color_g_5={value === text}>
-					Opening the contextmenu on an input opens the browser's default contextmenu.
-				</p>
 			</label>
+			<p class:color_g_5={highlighted}>
+				Opening the contextmenu on an input opens the browser's default contextmenu.
+			</p>
+			<p>
+				<Mdn_Link href="Web/HTML/Global_attributes/contenteditable">contenteditable</Mdn_Link> likewise
+				has your browser's default contextmenu behavior:
+			</p>
+			<blockquote contenteditable bind:innerText={value} />
 		</div>
 	</Contextmenu>
 </Contextmenu_Root>
