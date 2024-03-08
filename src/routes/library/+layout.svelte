@@ -1,6 +1,7 @@
 <script lang="ts">
 	import {page} from '$app/stores';
 	import {parse_package_meta} from '@ryanatkn/gro/package_meta.js';
+	import type {Snippet} from 'svelte';
 
 	import Library_Menu from '$lib/Library_Menu.svelte';
 	import Library_Panel from '$lib/Library_Panel.svelte';
@@ -14,6 +15,12 @@
 	import {set_selected_variable} from '$routes/style_variable_helpers.js';
 	import Dialog from '$lib/Dialog.svelte';
 	import Style_Variable_Detail from '$routes/Style_Variable_Detail.svelte';
+
+	interface Props {
+		children: Snippet;
+	}
+
+	const {children}: Props = $props();
 
 	const pkg = parse_package_meta(package_json.homepage, package_json, src_json);
 
@@ -46,7 +53,7 @@
 				<Package_Summary {pkg} />
 			</div>
 		</Library_Panel>
-		<slot />
+		{@render children()}
 		<section class="box">
 			<Library_Footer {pkg} />
 		</section>

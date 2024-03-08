@@ -19,7 +19,7 @@
 
 <!-- TODO demonstrate usage of a custom `link_snippet` and `linkProps`  -->
 <Tome_Detail {tome}>
-	<div slot="header"><h2>{tome.name}</h2></div>
+	{#snippet header()}<h2>{tome.name}</h2>{/snippet}
 	<div class="prose">
 		<section>
 			<aside>
