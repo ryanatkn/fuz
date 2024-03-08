@@ -41,8 +41,10 @@
 	the redirect url is {url}
 </Redirect>`}
 			/>
-			<Redirect host="https://www.felt.dev" path="/library" let:url auto={false}>
-				the redirect url is {url}
+			<Redirect host="https://www.felt.dev" path="/library" auto={false}>
+				{#snippet children(url)}
+					the redirect url is {url}
+				{/snippet}
 			</Redirect>
 		</section>
 	</div>
