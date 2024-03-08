@@ -154,7 +154,8 @@
 			e.shiftKey ||
 			!(target instanceof HTMLElement || target instanceof SVGElement) ||
 			el?.contains(target) ||
-			is_editable(target)
+			is_editable(target) ||
+			target.closest('[contenteditable=true]')
 		) {
 			return;
 		}

@@ -64,7 +64,7 @@
 				<Mdn_Link href="Web/HTML/Global_attributes/contenteditable">contenteditable</Mdn_Link> likewise
 				has your browser's default contextmenu behavior:
 			</p>
-			<blockquote contenteditable bind:innerText={value} />
+			<blockquote contenteditable="true" bind:innerText={value} />
 		</div>
 	</Contextmenu>
 </Contextmenu_Root>
