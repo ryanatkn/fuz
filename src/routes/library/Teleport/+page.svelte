@@ -14,7 +14,7 @@
 </script>
 
 <Tome_Detail {tome}>
-	<section class="prose width_sm">
+	<section class="prose">
 		<p>Relocates elements in the DOM, in the rare cases that's useful and the best solution.</p>
 		<aside>
 			<p>Use only when necessary or fun.</p>
