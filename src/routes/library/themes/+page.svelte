@@ -47,7 +47,7 @@
 				<code>Themed</code> is a singleton component that's mounted at the top-level of the page:
 			</p>
 			<Code content={`import Themed from '@ryanatkn/fuz/Themed.svelte';`} lang="ts" />
-			<Code content={`<!-- +layout.svelte -->\n<Themed>\n\t<slot />\n</Themed>`} />
+			<Code content={`<!-- +layout.svelte -->\n<Themed>\n\t{@render children()}\n</Themed>`} />
 			<details>
 				<summary>why the singleton?</summary>
 				<aside>
@@ -233,11 +233,18 @@
 	import '@ryanatkn/fuz/style.css';
 	import '@ryanatkn/fuz/theme.css';
 	import Themed from '@ryanatkn/fuz/Themed.svelte';
+	import type {Snippet} from 'svelte';
+
+	interface Props {
+		children: Snippet;
+	}
+	
+	const {children}: Props = $props();
 <script>
 
 <!-- enable theme and color-scheme support -->
 <Themed>
-	<slot />
+	{@render children()}
 </Themed>`}
 		/>
 		<p>
@@ -247,7 +254,7 @@
 		</p>
 		<Code
 			content={`<Themed {selected_theme} {selected_color_scheme}>
-	<slot />
+	{@render children()}
 </Themed>`}
 		/>
 		<p>
