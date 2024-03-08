@@ -24,7 +24,7 @@
 		<section>
 			<aside>
 				<!-- TODO style hack, maybe use margin-bottom only on h elements? -->
-				<h3>TODO</h3>
+				<h4>TODO</h4>
 				<ul>
 					<li>consider mobile drawer-from-bottom design (maybe an option)</li>
 				</ul>

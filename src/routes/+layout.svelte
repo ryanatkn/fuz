@@ -8,8 +8,15 @@
 	import '@ryanatkn/fuz_code/prism.css';
 
 	import Themed from '$lib/Themed.svelte';
+	import type {Snippet} from 'svelte';
+
+	interface Props {
+		children: Snippet;
+	}
+
+	const {children} = $props<Props>();
 </script>
 
 <Themed>
-	<slot />
+	{@render children()}
 </Themed>
