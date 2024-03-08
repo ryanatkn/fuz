@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {onDestroy} from 'svelte';
+	import {onDestroy, type Snippet} from 'svelte';
 
 	interface Props {
 		/**
@@ -9,9 +9,10 @@
 		 */
 		to?: HTMLElement | undefined | null;
 		onmove?: (el: HTMLElement, to: HTMLElement) => void;
+		children: Snippet;
 	}
 
-	const {to, onmove} = $props<Props>();
+	const {to, onmove, children} = $props<Props>();
 
 	let el: HTMLElement | undefined | null = $state();
 
@@ -33,7 +34,7 @@
 </script>
 
 <div class="teleport" bind:this={el} hidden={!moved}>
-	<slot />
+	{@render children()}
 </div>
 
 <style>
