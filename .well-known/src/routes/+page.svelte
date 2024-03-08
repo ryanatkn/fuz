@@ -49,7 +49,12 @@
 			</menu>
 		</section>
 		<section>
-			<Library_Footer {pkg} />
+			<Library_Footer {pkg}>
+				<a href="{base}/about">about</a>
+				<div hidden>
+					@ryanatkn@hci.social on <a rel="me" href="https://hci.social/@ryanatkn">Mastodon</a>
+				</div>
+			</Library_Footer>
 		</section>
 	</div>
 </main>
