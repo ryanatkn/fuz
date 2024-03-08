@@ -94,7 +94,7 @@
 	};
 
 	// The dialog isn't "ready" until the teleport moves it.
-	// Rendering the the dialog's slot only once it's ready fixes things like `autofocus`.
+	// Rendering the the dialog's children only once it's ready fixes things like `autofocus`.
 	let ready = $state(false);
 
 	onDestroy(() => {

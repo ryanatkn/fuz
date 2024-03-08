@@ -67,11 +67,12 @@
 				</aside>
 			</details>
 			<details>
-				<summary>why nest the slot?</summary>
+				<summary>why nested children?</summary>
 				<aside>
 					<p>
 						<code>Themed</code> is designed to wrap every page at the top level so it can provide
-						the selected theme and color scheme in the Svelte context. It works without a slot, but
+						the selected theme and color scheme in the Svelte context. It works without children,
+						but
 						<code>get_theme</code> and <code>get_color_scheme</code> will fail unless you call
 						<code>set_theme</code> and <code>set_color_scheme</code> yourself.
 					</p>

@@ -61,7 +61,7 @@
 </script>
 
 <div class="package_detail">
-	<!-- TODO maybe continue this slot pattern, or maybe simplify? -->
+	<!-- TODO maybe continue this snippet pattern, or maybe simplify? -->
 	<header class="mb_lg">
 		{#if repo_name}
 			{@render repo_name(pkg.repo_name)}
