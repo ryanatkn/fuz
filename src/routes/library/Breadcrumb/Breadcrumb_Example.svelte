@@ -12,7 +12,7 @@
 
 <Code
 	content={`<Breadcrumb
-	path="/a/b/c"
+	path="/a/b/c/d"
 	selected_path="${selected_path}"
 	base_path="/library/Breadcrumb"	
 >
