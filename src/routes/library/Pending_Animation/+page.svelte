@@ -25,7 +25,6 @@
 				lang="ts"
 			/>
 			<Code content={`<Pending_Animation running={${pendingAnimation0Running}} />`} />
-			<!-- svelte-ignore a11y-click-events-have-key-events a11y-no-static-element-interactions -->
 			<div class="mb_lg">
 				<Pending_Animation running={pendingAnimation0Running} />
 			</div>
