@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type {HTMLButtonAttributes} from 'svelte/elements';
+	import type {Snippet} from 'svelte';
 
 	import {default_variables} from '$lib/variables';
 	import {get_selected_variable} from '$routes/style_variable_helpers.js';
@@ -10,9 +11,10 @@
 		inline?: boolean;
 		plain?: boolean;
 		attrs?: HTMLButtonAttributes;
+		children?: Snippet;
 	}
 
-	const {name, classes, inline = false, plain = true, attrs}: Props = $props();
+	const {name, classes, inline = false, plain = true, attrs, children}: Props = $props();
 
 	// TODO @multiple add to $lib?
 
@@ -34,7 +36,8 @@
 	class:inline
 	class:plain
 	on:click={() => ($selected_variable = variable ?? null)}
-	><slot><span class="font_family_mono">{name}</span></slot></button
+	>{#if children}{@render children()}{:else}<span class="font_family_mono">{name}</span
+		>{/if}</button
 >
 
 <style>
