@@ -3,6 +3,7 @@
 	import {page} from '$app/stores';
 	import {strip_start} from '@ryanatkn/belt/string.js';
 	import {goto} from '$app/navigation';
+	import type {Snippet} from 'svelte';
 
 	interface Props {
 		/**
@@ -20,9 +21,10 @@
 		 * @nonreactive
 		 */
 		auto?: boolean;
+		children?: Snippet<[url: string]>;
 	}
 
-	const {host = '', path = $page.url.pathname, auto = true}: Props = $props();
+	const {host = '', path = $page.url.pathname, auto = true, children}: Props = $props();
 
 	const url = host + path;
 
@@ -33,8 +35,6 @@
 	{#if auto}<meta http-equiv="refresh" content="0; URL={url}" />{/if}
 </svelte:head>
 
-<slot {url}>
-	<main class="row box prose">
+{#if children}{@render children(url)}{:else}<main class="row box prose">
 		<p>redirect to <a href={url}>{strip_start(url, 'https://')}</a></p>
-	</main>
-</slot>
+	</main>{/if}
