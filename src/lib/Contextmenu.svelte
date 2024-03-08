@@ -11,7 +11,8 @@
 
 	const contextmenu = get_contextmenu(); // TODO BLOCK use?
 
-	// TODO BLOCK remove the wrapper element and action for context
+	// Ideally this wouldn't have a wrapper element,
+	// but I don't see a decent way to map from click events to the Svelte context.
 </script>
 
 <div use:contextmenu.action={entries} class="display_contents">{@render children()}</div>
