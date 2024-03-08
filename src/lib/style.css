@@ -127,6 +127,8 @@ a {
 	text-decoration: var(--text_decoration);
 	border-radius: var(--radius_xs2);
 	outline: var(--outline_width) var(--outline_style) var(--outline_color);
+	/* TODO @multiple outline-offset */
+	/* outline-offset: 2px; */
 }
 a:hover {
 	text-decoration: var(--text_decoration_hover);
@@ -234,6 +236,8 @@ select {
 	border-width: var(--border_width);
 	border-radius: var(--border_radius);
 	outline: var(--outline_width) var(--outline_style) var(--outline_color);
+	/* TODO @multiple outline-offset */
+	/* outline-offset: 2px; */
 	padding: var(--input_padding_y) var(--input_padding_x);
 	width: 100%;
 	min-width: var(--input_width_min);
@@ -256,7 +260,7 @@ option {
 	background-color: var(--bg);
 }
 
-:is(input, textarea, select):hover {
+:is(input, textarea, select, [contenteditable]):hover {
 	--border_color: var(--border_color_2);
 }
 
@@ -376,13 +380,19 @@ input[type='range']::-moz-range-track {
 	width: var(--input_width_min);
 }
 
-:is(button, input, textarea, select):focus {
+:is(button, input, textarea, select):focus,
+[contenteditable]:focus-visible {
 	--border_color: var(--color_a_5);
 	--outline_color: var(--color_a_5);
 	--outline_width: var(--outline_width_2);
 }
+[contenteditable]:focus-visible {
+	outline: var(--outline_width) var(--outline_style) var(--outline_color);
+	/* TODO @multiple outline-offset */
+	/* outline-offset: 2px; */
+}
 
-:is(input, textarea, select):active {
+:is(input, textarea, select, [contenteditable]):active {
 	--outline_width: var(--outline_width_3);
 }
 
@@ -408,6 +418,8 @@ button {
 	border-color: var(--border_color);
 	border-radius: var(--border_radius);
 	outline: var(--outline_width) var(--outline_style) var(--outline_color);
+	/* TODO @multiple outline-offset */
+	/* outline-offset: 2px; */
 }
 button:hover,
 button:focus {
