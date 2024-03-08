@@ -30,7 +30,7 @@
 		{#if description}
 			{@render description(package_json.description)}
 		{:else}
-			<blockquote class="mb_lg text_align_center">{description}</blockquote>
+			<blockquote class="mb_lg text_align_center">{package_json.description}</blockquote>
 		{/if}
 	{/if}
 	{#if children}{@render children()}{/if}
