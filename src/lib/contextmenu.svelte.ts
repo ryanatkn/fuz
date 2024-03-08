@@ -8,8 +8,8 @@ import {
 	type Snippet,
 } from 'svelte';
 import type {Result} from '@ryanatkn/belt/result.js';
-import {to_array} from '@ryanatkn/belt/array.js';
 import {is_promise} from '@ryanatkn/belt/async.js';
+import type {ActionReturn} from 'svelte/action';
 
 import Contextmenu_Link_Entry from '$lib/Contextmenu_Link_Entry.svelte';
 import Contextmenu_Text_Entry from '$lib/Contextmenu_Text_Entry.svelte';
@@ -28,11 +28,7 @@ export type Contextmenu_Params<T extends SvelteComponent = SvelteComponent> =
 	  };
 
 // TODO BLOCK should this just be snippets? might need a wrapper hack
-export type Contextmenu_Action_Params =
-	| Snippet
-	| Contextmenu_Params
-	| Array<Contextmenu_Params | ComponentProps<Contextmenu_Text_Entry> | null | undefined>
-	| ComponentProps<Contextmenu_Text_Entry>;
+export type Contextmenu_Action_Params = Snippet;
 
 type Activate_Result = Result<any, {message?: string}> | any;
 
@@ -121,16 +117,12 @@ export class Contextmenu_Store {
 	root_menu: Root_Menu_State = $state(new Root_Menu_State());
 	selections: Item_State[] = $state([]);
 
-	action: ReturnType<typeof create_contextmenu_action>;
-
 	constructor(options?: Contextmenu_Store_Options) {
 		this.link_component = options?.link_component ?? Contextmenu_Link_Entry;
 		this.text_component = options?.text_component ?? Contextmenu_Text_Entry;
 		this.initial_layout = options?.layout;
 
 		this.layout = this.initial_layout || new Dimensions();
-
-		this.action = create_contextmenu_action(this.text_component);
 	}
 
 	open(params: Contextmenu_Params[], x: number, y: number): void {
@@ -303,8 +295,6 @@ export class Contextmenu_Store {
 		onDestroy(() => {
 			menu.items.length = 0;
 		});
-		console.log(`submenu`, submenu);
-		console.log(`menu.items(last)`, menu.items[menu.items.length - 1]);
 		return submenu;
 	}
 }
@@ -313,38 +303,25 @@ export class Contextmenu_Store {
 // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset
 const CONTEXTMENU_DATASET_KEY = 'contextmenu';
 const CONTEXTMENU_DOM_QUERY = `a,[data-${CONTEXTMENU_DATASET_KEY}]`;
-const contextmenu_cache = new Map<string, Contextmenu_Params[]>();
+const contextmenu_cache = new Map<string, Contextmenu_Params>();
 let cache_key_counter = 0;
 
-const create_contextmenu_action =
-	(text_component: ComponentType<Contextmenu_Text_Entry>) =>
-	(el: HTMLElement | SVGElement, params: Contextmenu_Action_Params | null | undefined) => {
-		const key = cache_key_counter++ + '';
-		el.dataset[CONTEXTMENU_DATASET_KEY] = key;
-		contextmenu_cache.set(key, resolve_contextmenu_params(params, text_component));
-		return {
-			update: (p: Contextmenu_Action_Params | null | undefined) => {
-				contextmenu_cache.set(key, resolve_contextmenu_params(p, text_component));
-			},
-			destroy: () => {
-				contextmenu_cache.delete(key);
-			},
-		};
+export const contextmenu_action = (
+	el: HTMLElement | SVGElement,
+	params: Contextmenu_Action_Params,
+): ActionReturn<Contextmenu_Action_Params> => {
+	const key = cache_key_counter++ + '';
+	el.dataset[CONTEXTMENU_DATASET_KEY] = key;
+	contextmenu_cache.set(key, params);
+	return {
+		update: (p: Contextmenu_Action_Params) => {
+			contextmenu_cache.set(key, p);
+		},
+		destroy: () => {
+			contextmenu_cache.delete(key);
+		},
 	};
-
-const resolve_contextmenu_params = (
-	params: Contextmenu_Action_Params | null | undefined,
-	text_component: ComponentType<Contextmenu_Text_Entry>,
-): Contextmenu_Params[] =>
-	to_array(params)
-		.filter(Boolean)
-		.map((p: any) =>
-			typeof p === 'function'
-				? p
-				: 'component' in p && 'props' in p
-					? p
-					: {component: text_component, props: p},
-		);
+};
 
 const CONTEXTMENU_OPEN_VIBRATE_DURATION = 17;
 
@@ -381,7 +358,7 @@ const query_contextmenu_params = (
 	let params: null | Contextmenu_Params[] = null;
 	// crawl DOM for contextmenu entries
 	let el: HTMLElement | SVGElement | null | undefined = target;
-	let cache_key: string, cached: Contextmenu_Params[] | undefined;
+	let cache_key: string, cached: Contextmenu_Params | undefined;
 	while ((el = el?.closest(CONTEXTMENU_DOM_QUERY))) {
 		if ((cache_key = el.dataset[CONTEXTMENU_DATASET_KEY]!)) {
 			if (!params) params = [];
@@ -389,16 +366,8 @@ const query_contextmenu_params = (
 			if (cached === undefined) {
 				continue;
 			}
-			for (const item of cached) {
-				// preserve bubbling order
-				// TODO probably should rethink this comparison or use `dequal`, but we don't have that dependency yet
-				if (
-					typeof item === 'function' ||
-					!params?.some((i) => i.component === item.component && shallow_equal(i.props, item.props))
-				) {
-					(params || (params = [])).push(item);
-				}
-			}
+			// preserve bubbling order
+			(params || (params = [])).push(cached);
 		}
 		if (link_component && el.tagName === 'A') {
 			(params || (params = [])).push({
@@ -444,14 +413,3 @@ export const set_contextmenu_dimensions = (dimensions = new Dimensions()): Dimen
 };
 export const get_contextmenu_dimensions = (): Dimensions =>
 	getContext(CONTEXTMENU_DIMENSIONS_STORE_KEY);
-
-// TODO quick and hacky, probably delete, see usage
-const shallow_equal = (a: any, b: any): boolean => {
-	if (!a || !b) return a === b;
-	let i = 0;
-	for (const k in a) {
-		if (a[k] !== b[k]) return false;
-		i++;
-	}
-	return i === Object.keys(b).length;
-};

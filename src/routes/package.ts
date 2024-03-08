@@ -321,6 +321,7 @@ export const src_json = {
 				{name: 'Contextmenu_Run', kind: 'type'},
 				{name: 'Contextmenu_Store_Options', kind: 'type'},
 				{name: 'Contextmenu_Store', kind: 'class'},
+				{name: 'contextmenu_action', kind: 'function'},
 				{name: 'open_contextmenu', kind: 'function'},
 				{name: 'set_contextmenu', kind: 'function'},
 				{name: 'get_contextmenu', kind: 'function'},
