@@ -6,10 +6,10 @@
 
 	interface Props {
 		pkg: Package_Meta; // TODO normalized version with cached primitives?
-		repo_name?: Snippet<[repo_name: string, pkg: Package_Meta]>;
-		description?: Snippet<[description: string, pkg: Package_Meta]>;
-		npm_url?: Snippet<[npm_url: string, pkg: Package_Meta]>;
-		homepage_url?: Snippet<[homepage_url: string, pkg: Package_Meta]>;
+		repo_name?: Snippet<[repo_name: string]>;
+		description?: Snippet<[description: string]>;
+		npm_url?: Snippet<[npm_url: string]>;
+		homepage_url?: Snippet<[homepage_url: string]>;
 		children?: Snippet<[pkg: Package_Meta]>;
 	}
 
@@ -64,7 +64,7 @@
 	<!-- TODO maybe continue this slot pattern, or maybe simplify? -->
 	<header class="mb_lg">
 		{#if repo_name}
-			{@render repo_name(pkg.repo_name, pkg)}
+			{@render repo_name(pkg.repo_name)}
 		{:else}
 			<div class="repo_name">
 				{pkg.repo_name}{#if package_json.icon}{' '}{package_json.icon}{/if}
@@ -74,14 +74,14 @@
 	{#if children}{@render children(pkg)}{/if}
 	{#if package_json.description}
 		{#if description}
-			{@render description(package_json.description, pkg)}
+			{@render description(package_json.description)}
 		{:else}
 			<div class="mb_lg">{package_json.description}</div>
 		{/if}
 	{/if}
 	{#if pkg.npm_url}
 		{#if npm_url}
-			{@render npm_url(pkg.npm_url, pkg)}
+			{@render npm_url(pkg.npm_url)}
 		{:else}
 			<blockquote class="npm_url mb_lg">npm i -D {package_json.name}</blockquote>
 		{/if}
@@ -90,7 +90,7 @@
 		<div class="grid mb_lg">
 			{#if pkg.homepage_url}
 				{#if homepage_url}
-					{@render homepage_url(pkg.homepage_url, pkg)}
+					{@render homepage_url(pkg.homepage_url)}
 				{:else}
 					<span class="text_align_right">homepage</span>
 					<div class="row">
