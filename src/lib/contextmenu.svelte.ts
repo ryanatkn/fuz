@@ -1,18 +1,8 @@
-import {
-	getContext,
-	onDestroy,
-	setContext,
-	type ComponentProps,
-	type ComponentType,
-	type SvelteComponent,
-	type Snippet,
-} from 'svelte';
+import {getContext, onDestroy, setContext, type Snippet} from 'svelte';
 import type {Result} from '@ryanatkn/belt/result.js';
 import {is_promise} from '@ryanatkn/belt/async.js';
 import type {ActionReturn} from 'svelte/action';
 
-import Contextmenu_Link_Entry from '$lib/Contextmenu_Link_Entry.svelte';
-import Contextmenu_Text_Entry from '$lib/Contextmenu_Text_Entry.svelte';
 import {Dimensions} from '$lib/dimensions.svelte.js';
 
 // TODO rewrite with runes!!!!
@@ -20,12 +10,10 @@ import {Dimensions} from '$lib/dimensions.svelte.js';
 // TODO @multiple added this hack with Svelte 4, didn't see an open issue about it
 /* eslint-disable @typescript-eslint/no-redundant-type-constituents */
 
-export type Contextmenu_Params<T extends SvelteComponent = SvelteComponent> =
+export type Contextmenu_Params =
 	| Snippet
-	| {
-			component: ComponentType<T>;
-			props: ComponentProps<T>;
-	  };
+	| {snippet: 'link'; props: {href: string; icon?: string}}
+	| {snippet: 'text'; props: {content: string; icon: string; run: Contextmenu_Run}};
 
 // TODO BLOCK should this just be snippets? might need a wrapper hack
 export type Contextmenu_Action_Params = Snippet;
@@ -80,8 +68,8 @@ export interface Contextmenu_Run {
 }
 
 export interface Contextmenu_Store_Options {
-	link_component?: ComponentType<Contextmenu_Link_Entry>;
-	text_component?: ComponentType<Contextmenu_Text_Entry>;
+	link_snippet?: [href: string, icon?: Snippet<[icon: string]>];
+	text_snippet?: [content: string, icon: string];
 	layout?: Dimensions; // TODO consider making this a prop on `Contextmenu_Root`, and being assigned here
 }
 
@@ -99,8 +87,6 @@ export class Contextmenu_Store {
 	 * Otherwise the layout syncs to the page dimensions.
 	 */
 	initial_layout: Dimensions | undefined; // TODO $state?
-	link_component: ComponentType<Contextmenu_Link_Entry>; // TODO $state?
-	text_component: ComponentType<Contextmenu_Text_Entry>; // TODO $state?
 
 	// State for external consumers.
 	opened: boolean = $state(false);
@@ -118,8 +104,6 @@ export class Contextmenu_Store {
 	selections: Item_State[] = $state([]);
 
 	constructor(options?: Contextmenu_Store_Options) {
-		this.link_component = options?.link_component ?? Contextmenu_Link_Entry;
-		this.text_component = options?.text_component ?? Contextmenu_Text_Entry;
 		this.initial_layout = options?.layout;
 
 		this.layout = this.initial_layout || new Dimensions();
@@ -340,7 +324,7 @@ export const open_contextmenu = (
 	y: number,
 	contextmenu: Contextmenu_Store,
 ): boolean => {
-	const params = query_contextmenu_params(target, contextmenu);
+	const params = query_contextmenu_params(target);
 	if (!params?.length) return false;
 	contextmenu.open(params, x, y);
 	// Unfortunately `vibrate` this gets blocked by some (all?) browsers the way we're doing it
@@ -352,9 +336,7 @@ export const open_contextmenu = (
 
 const query_contextmenu_params = (
 	target: HTMLElement | SVGElement,
-	contextmenu: Contextmenu_Store,
 ): null | Contextmenu_Params[] => {
-	const {link_component, text_component} = contextmenu;
 	let params: null | Contextmenu_Params[] = null;
 	// crawl DOM for contextmenu entries
 	let el: HTMLElement | SVGElement | null | undefined = target;
@@ -369,9 +351,9 @@ const query_contextmenu_params = (
 			// preserve bubbling order
 			(params || (params = [])).push(cached);
 		}
-		if (link_component && el.tagName === 'A') {
+		if (el.tagName === 'A') {
 			(params || (params = [])).push({
-				component: link_component,
+				snippet: 'link',
 				props: {href: (el as HTMLAnchorElement).href},
 			});
 		}
@@ -382,7 +364,7 @@ const query_contextmenu_params = (
 		const text = window.getSelection()?.toString();
 		if (text) {
 			params.unshift({
-				component: text_component,
+				snippet: 'text',
 				props: {
 					content: 'Copy text',
 					icon: '📋',

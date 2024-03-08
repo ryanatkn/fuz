@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {is_editable, swallow} from '@ryanatkn/belt/dom.js';
+	import {is_editable, swallow, inside_editable} from '@ryanatkn/belt/dom.js';
 	import type {Snippet} from 'svelte';
 
 	import {
@@ -8,6 +8,8 @@
 		Contextmenu_Store,
 		open_contextmenu,
 	} from '$lib/contextmenu.svelte.js';
+	import Contextmenu_Link_Entry from '$lib/Contextmenu_Link_Entry.svelte';
+	import Contextmenu_Text_Entry from '$lib/Contextmenu_Text_Entry.svelte';
 
 	// TODO this is full of hacks to implement "longpress"
 	// to work around iOS not firing the `'contextmenu'` event -
@@ -155,7 +157,7 @@
 			!(target instanceof HTMLElement || target instanceof SVGElement) ||
 			el?.contains(target) ||
 			is_editable(target) ||
-			target.closest('[contenteditable=true]')
+			inside_editable(target)
 		) {
 			return;
 		}
@@ -176,7 +178,8 @@
 			touches.length !== 1 ||
 			e.shiftKey ||
 			!(target instanceof HTMLElement || target instanceof SVGElement) ||
-			is_editable(target)
+			is_editable(target) ||
+			inside_editable(target)
 		) {
 			return;
 		}
@@ -315,12 +318,22 @@
 		{#each contextmenu.params as p (p)}
 			{#if typeof p === 'function'}
 				{@render p()}
-			{:else}
-				<svelte:component this={p.component} {...p.props} />
+			{:else if p.snippet === 'link'}
+				{@render link_entry(p.props)}
+			{:else if p.snippet === 'text'}
+				{@render text_entry(p.props)}
 			{/if}
 		{/each}
 	</menu>
 {/if}
+
+{#snippet link_entry(props)}
+	<Contextmenu_Link_Entry {...props} />
+{/snippet}
+
+{#snippet text_entry(props)}
+	<Contextmenu_Text_Entry {...props} />
+{/snippet}
 
 <style>
 	.contextmenu_root {

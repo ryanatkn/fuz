@@ -32,8 +32,11 @@
 	// TODO very hacky
 	const text1 = `If a contextmenu is triggered on selected text, it includes a Copy text entry by default.  Try selecting text and then opening the contextmenu on it.`;
 	const text2 = `If a contextmenu is triggered on selected text, it includes a Copy text entry by default.\n\n\nTry selecting text and then opening the contextmenu on it.`;
+	const text3 = `If a contextmenu is triggered on selected text, it includes a Copy text entry by default.
 
-	const highlighted = $derived(value === text1 || value === text2);
+Try selecting text and then opening the contextmenu on it.`;
+
+	const highlighted = $derived(value === text1 || value === text2 || value === text3);
 </script>
 
 <Contextmenu_Root {contextmenu} scoped>
@@ -65,6 +68,8 @@
 				has your browser's default contextmenu behavior:
 			</p>
 			<blockquote contenteditable="true" bind:innerText={value} />
+			<p><code>contenteditable=plaintext-only</code></p>
+			<blockquote contenteditable="plaintext-only" bind:innerText={value} />
 		</div>
 	</Contextmenu>
 </Contextmenu_Root>
