@@ -23,7 +23,7 @@
 		},
 		onselect,
 		onedit,
-	} = $props<Props>();
+	}: Props = $props();
 
 	const selected_theme_name = $derived($selected_theme?.name);
 </script>

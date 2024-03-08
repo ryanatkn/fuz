@@ -10,7 +10,7 @@
 		children?: Snippet;
 	}
 
-	const {tome, children} = $props<Props>();
+	const {tome, children}: Props = $props();
 
 	const {path, path_is_selected} = $derived(to_library_path_info(tome.slug, $page.url.pathname));
 </script>

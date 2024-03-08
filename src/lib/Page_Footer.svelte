@@ -12,7 +12,7 @@
 		children?: Snippet;
 	}
 
-	const {pkg, root_url = null, children} = $props<Props>();
+	const {pkg, root_url = null, children}: Props = $props();
 </script>
 
 <footer>

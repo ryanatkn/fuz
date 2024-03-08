@@ -50,7 +50,7 @@
 		selected_theme = writable(get(get_theme())),
 		selected_color_scheme = writable(get(get_color_scheme())),
 		tagName = 'div',
-	} = $props<Props>();
+	}: Props = $props();
 
 	const id = 'themed_' + _id++;
 

@@ -12,7 +12,7 @@
 		children: Snippet;
 	}
 
-	const {tag, href, align = 'left', attrs, icon, children} = $props<Props>();
+	const {tag, href, align = 'left', attrs, icon, children}: Props = $props();
 
 	const link = $derived(!!href);
 	const selected = $derived(link && $page.url.pathname === href);

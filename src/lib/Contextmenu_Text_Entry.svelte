@@ -9,7 +9,7 @@
 	}
 
 	// TODO @multiple remove the alias
-	const {run, content, icon: icon_text} = $props<Props>();
+	const {run, content, icon: icon_text}: Props = $props();
 
 	// TODO consider making this the implicit default entry, so consumers can simply declare `{run, content}`
 </script>

@@ -11,7 +11,7 @@
 	}
 
 	// TODO @multiple remove the alias
-	const {name = 'Cat', icon: icon_text = '😺', position, act} = $props<Props>();
+	const {name = 'Cat', icon: icon_text = '😺', position, act}: Props = $props();
 </script>
 
 <Contextmenu_Submenu>

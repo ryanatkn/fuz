@@ -7,7 +7,7 @@
 		toggle_about_dialog: () => void;
 	}
 
-	const {toggle_about_dialog} = $props<Props>();
+	const {toggle_about_dialog}: Props = $props();
 </script>
 
 <Contextmenu_Link_Entry href="https://github.com/ryanatkn/fuz"

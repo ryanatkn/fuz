@@ -37,7 +37,7 @@
 		active = true,
 		onclose,
 		children,
-	} = $props<Props>();
+	}: Props = $props();
 
 	const ROOT_SELECTOR = 'body'; // TODO make configurable
 	const ROOT_DIALOG_OPEN_CLASS = 'dialog_open';

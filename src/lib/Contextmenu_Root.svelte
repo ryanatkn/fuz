@@ -80,7 +80,7 @@
 		open_offset_y = -2,
 		scoped = false,
 		children,
-	} = $props<Props>();
+	}: Props = $props();
 
 	set_contextmenu(contextmenu);
 

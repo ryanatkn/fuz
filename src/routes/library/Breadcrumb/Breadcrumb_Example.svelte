@@ -7,7 +7,7 @@
 		selected_path: string;
 	}
 
-	const {selected_path} = $props<Props>();
+	const {selected_path}: Props = $props();
 </script>
 
 <Code

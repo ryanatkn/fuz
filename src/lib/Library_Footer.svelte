@@ -12,7 +12,7 @@
 		children?: Snippet;
 	}
 
-	const {pkg, root_url = null, logo, children} = $props<Props>();
+	const {pkg, root_url = null, logo, children}: Props = $props();
 
 	const {repo_url} = $derived(pkg);
 </script>

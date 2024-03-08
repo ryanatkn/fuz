@@ -8,7 +8,7 @@
 		computed_styles: CSSStyleDeclaration;
 	}
 
-	const {color_name, computed_styles} = $props<Props>();
+	const {color_name, computed_styles}: Props = $props();
 
 	const get_color_hsl_string = (name: string) => {
 		const v = computed_styles.getPropertyValue('--' + name);

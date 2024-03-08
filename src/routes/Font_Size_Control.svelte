@@ -6,7 +6,7 @@
 		selected_font_size?: number; // TODO improve API, is index for `'md'`
 	}
 
-	let {selected_font_size = 2} = $props<Props>();
+	let {selected_font_size = 2}: Props = $props();
 
 	// TODO the API is strange
 

@@ -14,7 +14,7 @@
 		children: Snippet;
 	}
 
-	const {href, attrs, children} = $props<Props>();
+	const {href, attrs, children}: Props = $props();
 
 	const final_href = $derived(
 		href.startsWith('https://')

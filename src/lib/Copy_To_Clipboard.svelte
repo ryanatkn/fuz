@@ -3,7 +3,7 @@
 		text: string;
 	}
 
-	const {text} = $props<Props>();
+	const {text}: Props = $props();
 
 	let copied = $state(false);
 	let failed = $state(false);

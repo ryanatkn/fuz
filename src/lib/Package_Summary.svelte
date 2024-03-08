@@ -12,7 +12,7 @@
 		children?: Snippet;
 	}
 
-	const {pkg, repo_name, description, npm_url, homepage_url, children} = $props<Props>();
+	const {pkg, repo_name, description, npm_url, homepage_url, children}: Props = $props();
 
 	const {package_json} = $derived(pkg);
 </script>

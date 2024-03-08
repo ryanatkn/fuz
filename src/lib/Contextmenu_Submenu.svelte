@@ -14,7 +14,7 @@
 		children: Snippet;
 	}
 
-	const {icon, menu, children} = $props<Props>();
+	const {icon, menu, children}: Props = $props();
 
 	const contextmenu = get_contextmenu();
 

@@ -9,7 +9,7 @@
 		children?: Snippet;
 	}
 
-	const {name = 'Cat', icon = '😺', show_name = true, show_icon = true, children} = $props<Props>();
+	const {name = 'Cat', icon = '😺', show_name = true, show_icon = true, children}: Props = $props();
 </script>
 
 <!-- TODO add link option? -->

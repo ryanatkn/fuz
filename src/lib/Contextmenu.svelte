@@ -7,7 +7,7 @@
 		children: Snippet;
 	}
 
-	const {entries, children} = $props<Props>();
+	const {entries, children}: Props = $props();
 
 	const contextmenu = get_contextmenu(); // TODO BLOCK use?
 

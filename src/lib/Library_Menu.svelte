@@ -12,7 +12,7 @@
 		children?: Snippet<[category: string]>;
 	}
 
-	const {tomes, children} = $props<Props>();
+	const {tomes, children}: Props = $props();
 
 	// Library_Menu floats alongside the docs, showing scrolled item as selected
 

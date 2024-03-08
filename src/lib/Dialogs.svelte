@@ -13,7 +13,7 @@
 		children?: Snippet<[dialog: Dialog_Params]>;
 	}
 
-	const {dialogs, onclose, children} = $props<Props>();
+	const {dialogs, onclose, children}: Props = $props();
 </script>
 
 {#each $dialogs as dialog, index (dialog)}

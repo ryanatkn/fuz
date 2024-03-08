@@ -10,7 +10,7 @@
 		icon?: Snippet<[icon: string]>;
 	}
 
-	const {href, children, icon} = $props<Props>();
+	const {href, children, icon}: Props = $props();
 
 	const contextmenu = get_contextmenu();
 

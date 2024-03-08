@@ -6,7 +6,7 @@
 		attrs?: HTMLAttributes<HTMLDivElement>;
 	}
 
-	const {running = true, attrs} = $props<Props>();
+	const {running = true, attrs}: Props = $props();
 </script>
 
 <div {...attrs} class:pending_animation={true}>

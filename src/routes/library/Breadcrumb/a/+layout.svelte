@@ -8,7 +8,7 @@
 		children: Snippet;
 	}
 
-	const {children} = $props<Props>();
+	const {children}: Props = $props();
 
 	const LIBRARY_ITEM_NAME = 'Breadcrumb';
 

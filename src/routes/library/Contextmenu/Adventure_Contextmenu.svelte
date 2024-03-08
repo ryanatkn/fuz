@@ -10,7 +10,7 @@
 		act: (item: History_Item) => void;
 	}
 
-	const {home_cats, adventure_cats, act} = $props<Props>();
+	const {home_cats, adventure_cats, act}: Props = $props();
 
 	const cat_to_call_to_adventure = $derived(to_cats_label(home_cats));
 </script>

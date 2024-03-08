@@ -12,7 +12,7 @@
 		children: Snippet;
 	}
 
-	const {to, onmove, children} = $props<Props>();
+	const {to, onmove, children}: Props = $props();
 
 	let el: HTMLElement | undefined | null = $state();
 

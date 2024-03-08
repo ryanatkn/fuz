@@ -8,7 +8,7 @@
 		attrs?: HTMLAnchorAttributes;
 	}
 
-	const {name, chip = true, attrs} = $props<Props>();
+	const {name, chip = true, attrs}: Props = $props();
 
 	// TODO add contextmenu behavior
 </script>

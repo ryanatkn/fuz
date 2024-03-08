@@ -13,7 +13,7 @@
 		children?: Snippet<[pkg: Package_Meta]>;
 	}
 
-	const {pkg, repo_name, description, npm_url, homepage_url, children} = $props<Props>();
+	const {pkg, repo_name, description, npm_url, homepage_url, children}: Props = $props();
 
 	// TODO show other data (lines of code)
 

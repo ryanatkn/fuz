@@ -22,7 +22,7 @@
 		auto?: boolean;
 	}
 
-	const {host = '', path = $page.url.pathname, auto = true} = $props<Props>();
+	const {host = '', path = $page.url.pathname, auto = true}: Props = $props();
 
 	const url = host + path;
 

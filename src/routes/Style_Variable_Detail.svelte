@@ -5,7 +5,7 @@
 		variable: Style_Variable | null;
 	}
 
-	const {variable} = $props<Props>();
+	const {variable}: Props = $props();
 
 	// TODO @multiple add to $lib?
 

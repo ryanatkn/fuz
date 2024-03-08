@@ -10,7 +10,7 @@
 		children?: Snippet;
 	}
 
-	const {pkg, children} = $props<Props>();
+	const {pkg, children}: Props = $props();
 </script>
 
 <Library_Panel

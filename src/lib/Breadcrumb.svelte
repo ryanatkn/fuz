@@ -15,7 +15,7 @@
 		children?: Snippet;
 	}
 
-	const {path, selected_path, base_path, separator, children} = $props<Props>();
+	const {path, selected_path, base_path, separator, children}: Props = $props();
 
 	const final_path = $derived(path ?? $page.url.pathname);
 	const final_selected_path = $derived(

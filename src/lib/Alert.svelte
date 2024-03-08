@@ -18,7 +18,7 @@
 		children: Snippet;
 	}
 
-	const {status = 'inform', color, onclick, disabled, attrs, icon, children} = $props<Props>();
+	const {status = 'inform', color, onclick, disabled, attrs, icon, children}: Props = $props();
 
 	const options = $derived(alert_status_options[status]);
 	// TODO change this to use the hue and put transparency on the borders, or add a borderColor option

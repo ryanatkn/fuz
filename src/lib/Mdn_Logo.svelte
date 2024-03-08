@@ -11,7 +11,7 @@
 		fill = '#8cb4ff',
 		label = 'GitHub icon',
 		attrs,
-	} = $props<Props>();
+	}: Props = $props();
 
 	// TODO do something more optimal
 </script>

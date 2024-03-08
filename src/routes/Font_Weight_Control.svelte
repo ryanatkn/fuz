@@ -3,7 +3,7 @@
 		selected_font_weight?: number;
 	}
 
-	let {selected_font_weight = 400} = $props<Props>();
+	let {selected_font_weight = 400}: Props = $props();
 
 	// TODO @multiple publish in $lib when ready
 </script>

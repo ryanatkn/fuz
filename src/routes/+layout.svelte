@@ -14,7 +14,7 @@
 		children: Snippet;
 	}
 
-	const {children} = $props<Props>();
+	const {children}: Props = $props();
 </script>
 
 <Themed>

@@ -16,7 +16,7 @@
 			$selected_color_scheme = color_scheme;
 		},
 		onselect,
-	} = $props<Props>();
+	}: Props = $props();
 </script>
 
 <!-- TODO maybe support menubar aria

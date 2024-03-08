@@ -58,7 +58,7 @@
 		selected_color_scheme = writable(load_color_scheme()),
 		color_scheme_fallback,
 		color_scheme_css,
-	} = $props<Props>();
+	}: Props = $props();
 
 	// TODO improve this so it works without `unsafe-inline` in the CSP - hash/nonce?
 

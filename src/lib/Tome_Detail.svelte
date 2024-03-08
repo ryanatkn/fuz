@@ -7,7 +7,7 @@
 		tome: Tome;
 	}
 
-	const {tome} = $props<Props>();
+	const {tome}: Props = $props();
 
 	// TODO component name?
 </script>

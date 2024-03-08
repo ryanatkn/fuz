@@ -5,7 +5,7 @@
 		children: Snippet;
 	}
 
-	const {children} = $props<Props>();
+	const {children}: Props = $props();
 </script>
 
 <div class="library_panel panel">

@@ -8,7 +8,7 @@
 		padding?: string | undefined;
 	}
 
-	const {text, tag = 'span', font_size, padding} = $props<Props>();
+	const {text, tag = 'span', font_size, padding}: Props = $props();
 </script>
 
 <svelte:element this={tag} style:font-size={font_size} style:padding>{text}</svelte:element>

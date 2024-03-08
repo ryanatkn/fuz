@@ -12,7 +12,7 @@
 		attrs?: HTMLButtonAttributes;
 	}
 
-	const {name, classes, inline = false, plain = true, attrs} = $props<Props>();
+	const {name, classes, inline = false, plain = true, attrs}: Props = $props();
 
 	// TODO @multiple add to $lib?
 

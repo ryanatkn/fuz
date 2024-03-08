@@ -9,7 +9,7 @@
 		description: string;
 	}
 
-	const {color_name, computed_styles, width = 48, height = 48, description} = $props<Props>();
+	const {color_name, computed_styles, width = 48, height = 48, description}: Props = $props();
 
 	const get_color_hue_string = (name: string) => {
 		const v = computed_styles.getPropertyValue('--' + name);

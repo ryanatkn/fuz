@@ -5,7 +5,7 @@
 		tomes: Tome[];
 	}
 
-	const {tomes} = $props<Props>();
+	const {tomes}: Props = $props();
 </script>
 
 <div class="tomes">

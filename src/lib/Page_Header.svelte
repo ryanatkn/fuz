@@ -7,7 +7,7 @@
 		pkg: Package_Meta | {url: string; package_json: null};
 	}
 
-	const {pkg} = $props<Props>();
+	const {pkg}: Props = $props();
 </script>
 
 <div>

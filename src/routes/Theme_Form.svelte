@@ -22,7 +22,7 @@
 		// oncreate?: (theme: Theme) => void;
 	}
 
-	const {theme = null, onsave} = $props<Props>();
+	const {theme = null, onsave}: Props = $props();
 
 	let new_name = $state(theme ? theme.name : 'new theme');
 

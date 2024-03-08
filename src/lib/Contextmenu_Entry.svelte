@@ -10,7 +10,7 @@
 		children: Snippet; // TODO @multiple think about this API, maybe make a snippet or string? maybe just a snippet after changing from actions to nested components
 	}
 
-	const {run, icon, children} = $props<Props>();
+	const {run, icon, children}: Props = $props();
 
 	const contextmenu = get_contextmenu();
 
