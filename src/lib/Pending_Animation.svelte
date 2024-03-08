@@ -1,18 +1,24 @@
 <script lang="ts">
+	import type {Snippet} from 'svelte';
 	import type {HTMLAttributes} from 'svelte/elements';
 
 	interface Props {
 		running?: boolean;
 		attrs?: HTMLAttributes<HTMLDivElement>;
+		children?: Snippet<[index: number]>;
 	}
 
-	const {running = true, attrs}: Props = $props();
+	const {running = true, attrs, children}: Props = $props();
 </script>
 
 <div {...attrs} class:pending_animation={true}>
-	<span class:running style="animation-delay: 0s"><slot index={0}>•</slot></span>
-	<span class:running style="animation-delay: 0.09s"><slot index={1}>•</slot></span>
-	<span class:running style="animation-delay: 0.3s"><slot index={2}>•</slot></span>
+	<span class:running style="animation-delay: 0s"
+		>{#if children}{@render children(0)}{:else}•{/if}</span
+	><span class:running style="animation-delay: 0.09s"
+		>{#if children}{@render children(1)}{:else}•{/if}</span
+	><span class:running style="animation-delay: 0.3s"
+		>{#if children}{@render children(2)}{:else}•{/if}</span
+	>
 </div>
 
 <style>
