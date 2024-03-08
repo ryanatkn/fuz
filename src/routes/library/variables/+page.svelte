@@ -48,14 +48,10 @@
 				These are named "variables" or "style variables" instead of the common name "design tokens"
 				because Fuz is made by a programmer designing more for devs and end-users than designers.
 				Their functionality is like JS variables but for CSS, and they're implemented with CSS
-				custom properties, which are commonly called CSS variables.
-			</p>
-			<p>
-				Also, in the programming domains I'm familiar with, including some Fuz projects, a token is
-				a secret for authentication, and I don't like overloading the term. Wikipedia has several
-				programming usages but no page about design tokens. And finally, the term token has been
-				popularized by cryptocurrencies which have no relation with Fuz, so its vibes are all over
-				the place.
+				custom properties, which are commonly called CSS variables. Wikipedia has several
+				programming usages but no page about design tokens. I'm familiar with tokens as secrets for
+				authentication, and I don't like overloading the term - especially related to sensitive
+				secrets!
 			</p>
 		</aside>
 		<aside>
