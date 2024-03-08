@@ -268,6 +268,8 @@
 	$inspect('params', contextmenu.params);
 
 	// TODO BLOCK change the events to be just the container? maybe just the starting triggers? (contextmenu, touchstart)
+
+	// TODO BLOCK fallback snippets below? `type: 'text' | 'link'`?
 </script>
 
 <!--
