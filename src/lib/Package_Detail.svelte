@@ -2,34 +2,35 @@
 	import {page} from '$app/stores';
 	import {ensure_end, strip_end, strip_start} from '@ryanatkn/belt/string.js';
 	import {format_host, type Package_Meta} from '@ryanatkn/gro/package_meta.js';
+	import type {Snippet} from 'svelte';
 
 	interface Props {
 		pkg: Package_Meta; // TODO normalized version with cached primitives?
+		repo_name?: Snippet<[repo_name: string, pkg: Package_Meta]>;
+		description?: Snippet<[description: string, pkg: Package_Meta]>;
+		npm_url?: Snippet<[npm_url: string, pkg: Package_Meta]>;
+		homepage_url?: Snippet<[homepage_url: string, pkg: Package_Meta]>;
+		children?: Snippet<[pkg: Package_Meta]>;
 	}
 
-	const {pkg} = $props<Props>();
+	const {pkg, repo_name, description, npm_url, homepage_url, children} = $props<Props>();
 
 	// TODO show other data (lines of code)
 
-	const {package_json, src_json, npm_url, repo_name, repo_url, changelog_url, homepage_url} =
-		$derived(pkg);
-	const {
-		name,
-		version,
-		description,
-		icon,
-		license,
-		repository,
-		exports: pkg_exports,
-	} = $derived(package_json);
+	const {package_json, src_json} = $derived(pkg);
 	const {modules: pkg_modules} = $derived(src_json);
 
 	// TODO helper (zod parser?)
 	const repository_url = $derived(
-		repository
+		package_json.repository
 			? strip_start(
 					strip_end(
-						strip_end(typeof repository === 'string' ? repository : repository.url, '.git'),
+						strip_end(
+							typeof package_json.repository === 'string'
+								? package_json.repository
+								: package_json.repository.url,
+							'.git',
+						),
 						'/',
 					),
 					'git+',
@@ -37,7 +38,7 @@
 			: null,
 	);
 	const license_url = $derived(
-		license && repository_url ? repository_url + '/blob/main/LICENSE' : null,
+		package_json.license && repository_url ? repository_url + '/blob/main/LICENSE' : null,
 	);
 
 	// TODO refactor
@@ -46,12 +47,12 @@
 		'/blob/main/src/lib/' +
 		(module_name.endsWith('.js') ? module_name.slice(0, -3) + '.ts' : module_name);
 
-	const pkg_exports_keys = $derived(pkg_exports && Object.keys(pkg_exports)); // TODO hacky, see usage
+	const pkg_exports_keys = $derived(package_json.exports && Object.keys(package_json.exports)); // TODO hacky, see usage
 
 	// TODO helper, look at existing code
 	const modules = $derived(
-		pkg_exports
-			? Object.keys(pkg_exports).map((k) => {
+		package_json.exports
+			? Object.keys(package_json.exports).map((k) => {
 					const v = strip_start(k, './');
 					return v === '.' ? 'index.js' : v;
 				})
@@ -62,86 +63,100 @@
 <div class="package_detail">
 	<!-- TODO maybe continue this slot pattern, or maybe simplify? -->
 	<header class="mb_lg">
-		<slot name="repo_name" {repo_name}
-			><div class="repo_name">
-				{repo_name}{#if icon}{' '}{icon}{/if}
-			</div></slot
-		>
+		{#if repo_name}
+			{@render repo_name(pkg.repo_name, pkg)}
+		{:else}
+			<div class="repo_name">
+				{pkg.repo_name}{#if package_json.icon}{' '}{package_json.icon}{/if}
+			</div>
+		{/if}
 	</header>
-	<slot />
-	{#if description}
-		<slot name="description" {description}><div class="mb_lg">{description}</div></slot>
+	{#if children}{@render children(pkg)}{/if}
+	{#if package_json.description}
+		{#if description}
+			{@render description(package_json.description, pkg)}
+		{:else}
+			<div class="mb_lg">{package_json.description}</div>
+		{/if}
 	{/if}
-	{#if npm_url}
-		<slot name="npm_url" {npm_url}
-			><blockquote class="npm_url mb_lg">npm i -D {name}</blockquote></slot
-		>
+	{#if pkg.npm_url}
+		{#if npm_url}
+			{@render npm_url(pkg.npm_url, pkg)}
+		{:else}
+			<blockquote class="npm_url mb_lg">npm i -D {package_json.name}</blockquote>
+		{/if}
 	{/if}
 	<section class="properties w_100 mb_lg">
 		<div class="grid mb_lg">
-			{#if homepage_url}
-				<slot name="homepage_url" {homepage_url}>
+			{#if pkg.homepage_url}
+				{#if homepage_url}
+					{@render homepage_url(pkg.homepage_url, pkg)}
+				{:else}
 					<span class="text_align_right">homepage</span>
 					<div class="row">
 						<a
 							class="chip row ml_xs"
-							class:selected={homepage_url === $page.url.href}
-							href={homepage_url}
+							class:selected={pkg.homepage_url === $page.url.href}
+							href={pkg.homepage_url}
 						>
 							<img
-								src="{ensure_end(homepage_url, '/')}favicon.png"
-								alt="favicon to homepage at {homepage_url}"
+								src="{ensure_end(pkg.homepage_url, '/')}favicon.png"
+								alt="favicon to homepage at {pkg.homepage_url}"
 								style:width="16px"
 								style:height="16px"
 								style:margin-right="var(--space_xs)"
 							/>
-							{format_host(homepage_url)}
+							{format_host(pkg.homepage_url)}
 						</a>
 					</div>
-				</slot>
+				{/if}
 			{/if}
-			{#if repo_url}
+			{#if pkg.repo_url}
 				<span class="text_align_right">repo</span>
-				<div class="row"><a class="chip ml_xs" title="repo" href={repo_url}>{repo_name}</a></div>
+				<div class="row">
+					<a class="chip ml_xs" title="repo" href={pkg.repo_url}>{repo_name}</a>
+				</div>
 			{/if}
-			{#if npm_url}
+			{#if pkg.npm_url}
 				<span class="text_align_right">npm</span>
-				<div class="row"><a class="chip ml_xs" title="npm" href={npm_url}>{name}</a></div>
+				<div class="row">
+					<a class="chip ml_xs" title="npm" href={pkg.npm_url}>{package_json.name}</a>
+				</div>
 			{/if}
-			{#if changelog_url}
+			{#if pkg.changelog_url}
 				<span class="text_align_right">version</span>
 				<div class="row">
-					<a class="chip ml_xs" title="version" href={changelog_url}>{version}</a>
+					<a class="chip ml_xs" title="version" href={pkg.changelog_url}>{package_json.version}</a>
 				</div>
 			{/if}
 			{#if license_url}
 				<span class="text_align_right">license</span>
 				<div class="row">
-					<a class="chip ml_xs" title="license" href={license_url}>{license}</a>
+					<a class="chip ml_xs" title="license" href={license_url}>{package_json.license}</a>
 				</div>
 			{/if}
-			{#if homepage_url}
+			{#if pkg.homepage_url}
 				<span class="text_align_right">data</span>
 				<div class="row">
 					<a
 						class="chip ml_xs"
 						title="data"
-						href="{ensure_end(homepage_url, '/')}.well-known/package.json">package.json</a
+						href="{ensure_end(pkg.homepage_url, '/')}.well-known/package.json">package.json</a
 					>
 					<a
 						class="chip ml_xs"
 						title="data"
-						href="{ensure_end(homepage_url, '/')}.well-known/src.json">src.json</a
+						href="{ensure_end(pkg.homepage_url, '/')}.well-known/src.json">src.json</a
 					>
 				</div>
 			{/if}
 		</div>
 	</section>
-	{#if modules && repo_url}
+	{#if modules && pkg.repo_url}
 		<section class="w_100 mb_lg">
 			<menu>
 				{#each modules as module_name, i (module_name)}
-					{@const source_url = to_source_url(repo_url, module_name)}
+					{@const source_url = to_source_url(pkg.repo_url, module_name)}
 					{@const exports_key = pkg_exports_keys?.[i]}
 					{@const pkg_module = exports_key && pkg_modules?.[exports_key]}
 					<li

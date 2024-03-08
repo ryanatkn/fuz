@@ -45,13 +45,13 @@
 				content={`<Card>
   <div>custom</div>
   <div>icon</div>
-  <div slot="icon">📖</div>
+  {#snippet icon()}📖{/snippet}
 </Card>`}
 			/>
 			<Card>
 				<div>custom</div>
 				<div>icon</div>
-				<div slot="icon">📖</div>
+				{#snippet icon()}📖{/snippet}
 			</Card>
 		</section>
 		<section>

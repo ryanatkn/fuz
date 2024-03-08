@@ -62,15 +62,14 @@
 	open a dialog
 </button>
 {#if opened}
-	<Dialog
-		let:close
-		onclose={() => (opened = false)}
-	>
-		<div class="pane prose p_xl box">
-			<h1>attention</h1>
-			<p>this is a dialog</p>
-			<button on:click={close}> ok </button>
-		</div>
+	<Dialog onclose={() => (opened = false)}>
+		{#snippet children(close)}
+			<div class="pane prose p_xl box">
+				<h1>attention</h1>
+				<p>this is a dialog</p>
+				<button on:click={close}>ok</button>
+			</div>
+		{/snippet}
 	</Dialog>
 {/if}`}
 		/>
@@ -94,91 +93,96 @@
 	</div>
 </Tome_Detail>
 {#if opened}
-	<Dialog let:close onclose={() => (opened = false)}>
-		<div class="pane prose p_xl box">
-			<h1>attention</h1>
-			<p>this is a dialog</p>
-			<button on:click={close}> ok </button>
-		</div>
+	<Dialog onclose={() => (opened = false)}>
+		{#snippet children(close)}
+			<div class="pane prose p_xl box">
+				<h1>attention</h1>
+				<p>this is a dialog</p>
+				<button on:click={close}>ok</button>
+			</div>
+		{/snippet}
 	</Dialog>
 {/if}
 {#if dialog_overflowing_opened}
-	<Dialog let:close onclose={() => (dialog_overflowing_opened = false)}>
-		<div class="pane prose p_xl">
-			<h1>attention</h1>
-			{#each {length: 120} as _}
-				<p>this is a dialog that overflows vertically</p>
-			{/each}
-			<button on:click={close}> close </button>
-		</div>
+	<Dialog onclose={() => (dialog_overflowing_opened = false)}>
+		{#snippet children(close)}
+			<div class="pane prose p_xl">
+				<h1>attention</h1>
+				{#each {length: 120} as _}
+					<p>this is a dialog that overflows vertically</p>
+				{/each}
+				<button on:click={close}>close</button>
+			</div>
+		{/snippet}
 	</Dialog>
 {/if}
 {#if dialog_layout_page_opened}
 	<Dialog
 		onclose={() => ((dialog_layout_page_opened = false), reset_items())}
-		let:close
 		layout={selected_layout}
 	>
-		<div class="pane prose p_xl width_md">
-			<h1>attention</h1>
-			{#if selected_layout === 'page'}
+		{#snippet children(close)}
+			<div class="pane prose p_xl width_md">
+				<h1>attention</h1>
+				{#if selected_layout === 'page'}
+					<p>
+						This is a <code>Dialog</code> with
+						<code
+							>layout="<select class="inline" bind:value={selected_layout}
+								>{#each dialog_layouts as layout}
+									<option value={layout}>{layout}</option>
+								{/each}
+							</select>"</code
+						>.
+					</p>
+					<p>
+						Instead of being centered by default, the dialog's contents are aligned to the top of
+						the page and grow downward. It's useful when the dialog's contents change in height.
+					</p>
+				{:else if selected_layout === 'centered'}
+					<p>
+						This is a <code>Dialog</code> with
+						<code
+							>layout="<select class="inline" bind:value={selected_layout}
+								>{#each dialog_layouts as layout}
+									<option value={layout}>{layout}</option>
+								{/each}
+							</select>"</code
+						>, the default value.
+					</p>
+					<p>
+						It's often the best choice, but it can be undesirable in some situations, like when the
+						height of the content changes as the user does things, leading to a janky experience.
+					</p>
+				{:else}
+					<Alert status="error">eek a bug! unknown layout "{selected_layout}"</Alert>
+				{/if}
 				<p>
-					This is a <code>Dialog</code> with
-					<code
-						>layout="<select class="inline" bind:value={selected_layout}
-							>{#each dialog_layouts as layout}
-								<option value={layout}>{layout}</option>
-							{/each}
-						</select>"</code
-					>.
+					<button class="inline" on:click={() => add_item()}>add item</button>
+					<button class="inline" disabled={!items.length} on:click={() => reset_items()}
+						>remove all</button
+					>
 				</p>
-				<p>
-					Instead of being centered by default, the dialog's contents are aligned to the top of the
-					page and grow downward. It's useful when the dialog's contents change in height.
-				</p>
-			{:else if selected_layout === 'centered'}
-				<p>
-					This is a <code>Dialog</code> with
-					<code
-						>layout="<select class="inline" bind:value={selected_layout}
-							>{#each dialog_layouts as layout}
-								<option value={layout}>{layout}</option>
-							{/each}
-						</select>"</code
-					>, the default value.
-				</p>
-				<p>
-					It's often the best choice, but it can be undesirable in some situations, like when the
-					height of the content changes as the user does things, leading to a janky experience.
-				</p>
-			{:else}
-				<Alert status="error">eek a bug! unknown layout "{selected_layout}"</Alert>
-			{/if}
-			<p>
-				<button class="inline" on:click={() => add_item()}>add item</button>
-				<button class="inline" disabled={!items.length} on:click={() => reset_items()}
-					>remove all</button
-				>
-			</p>
-			{#each items as item (item)}
-				<p transition:slide>
-					<button class="inline" on:click={() => remove_item(item)}>✕</button>
-					new stuff appears {#if selected_layout === 'page'}gracefully{:else if selected_layout === 'centered'}ungracefully{/if}
-				</p>
-			{/each}
-			<hr />
-			<form class="box">
-				<div class="mb_lg">
-					{#each layouts as layout}
-						<label class="row">
-							<input type="radio" bind:group={selected_layout} value={layout} />
-							{layout}
-						</label>
-					{/each}
-				</div>
-				<button type="button" on:click={close}> close </button>
-			</form>
-		</div>
+				{#each items as item (item)}
+					<p transition:slide>
+						<button class="inline" on:click={() => remove_item(item)}>✕</button>
+						new stuff appears {#if selected_layout === 'page'}gracefully{:else if selected_layout === 'centered'}ungracefully{/if}
+					</p>
+				{/each}
+				<hr />
+				<form class="box">
+					<div class="mb_lg">
+						{#each layouts as layout}
+							<label class="row">
+								<input type="radio" bind:group={selected_layout} value={layout} />
+								{layout}
+							</label>
+						{/each}
+					</div>
+					<button type="button" on:click={close}>close</button>
+				</form>
+			</div>
+		{/snippet}
 	</Dialog>
 {/if}
 {#if dialog_nested_1_opened}
@@ -221,8 +225,10 @@
 	onclose={() => {
 		$dialogs = $dialogs.slice(0, -1);
 	}}
-	let:dialog
-	><div class="pane">
-		<svelte:component this={dialog.Component} {...dialog.props} />
-	</div>
+>
+	{#snippet children(dialog)}
+		<div class="pane">
+			<svelte:component this={dialog.Component} {...dialog.props} />
+		</div>
+	{/snippet}
 </Dialogs>
