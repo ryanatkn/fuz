@@ -49,11 +49,15 @@ body {
 }
 
 /*
+
 Keep hidden behavior when `display` is set.
+The `!important` makes this `hidden` behavior much higher specificity.
+
 @source https://github.com/jensimmons/cssremedy
+
 */
 [hidden] {
-	display: none;
+	display: none !important;
 }
 
 /* TODO what about .themed? */
