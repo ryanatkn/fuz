@@ -17,22 +17,22 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories
 	text-wrap: balance; /* @see https://developer.mozilla.org/en-US/docs/Web/CSS/text-wrap#balance */
 }
 .prose h1 {
-	margin: var(--space_xl2) 0;
+	margin-bottom: var(--space_xl5);
 }
 .prose h2 {
-	margin: var(--space_xl) 0;
+	margin-bottom: var(--space_xl4);
 }
 .prose h3 {
-	margin: var(--space_lg) 0;
+	margin-bottom: var(--space_xl3);
 }
 .prose h4 {
-	margin: var(--space_md) 0;
+	margin-bottom: var(--space_xl2);
 }
 .prose h5 {
-	margin: var(--space_sm) 0;
+	margin-bottom: var(--space_xl);
 }
 .prose h6 {
-	margin: var(--space_xs) 0;
+	margin-bottom: var(--space_lg);
 }
 .prose :is(ul, ol, menu) {
 	padding-left: var(--space_xl4);
