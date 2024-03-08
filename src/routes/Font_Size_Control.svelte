@@ -1,12 +1,16 @@
 <script lang="ts">
+	import type {Snippet} from 'svelte';
+
 	import {font_sizes} from '$lib/variable_data.js';
 	import Style_Variable_Button from '$routes/Style_Variable_Button.svelte';
 
 	interface Props {
 		selected_font_size?: number; // TODO improve API, is index for `'md'`
+		children?: Snippet;
 	}
 
-	let {selected_font_size = 2}: Props = $props();
+	// TODO BLOCK @multiple just disable this eslint rule when we use bindings? would prefer not to disable for all Svelte so let continues to signal reassigment
+	let {selected_font_size = 2, children}: Props = $props(); // eslint-disable-line prefer-const
 
 	// TODO the API is strange
 
@@ -20,7 +24,11 @@
 
 <label
 	><div class="title row w_100 wrap">
-		<slot>font-size</slot> =
+		{#if children}
+			{@render children()}
+		{:else}
+			font-size
+		{/if} =
 		<input
 			class="inline"
 			type="number"
