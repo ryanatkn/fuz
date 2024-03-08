@@ -4,8 +4,9 @@
 
 	interface Props {
 		run: Contextmenu_Run;
-		icon: string; // TODO @multiple think about this API, maybe make a snippet or both? maybe just a snippet after changing from actions to nested components
+		// TODO BLOCK refactor with `Contextmenu_Link_Entry`
 		content: string; // TODO @multiple think about this API, maybe make a snippet or both? maybe just a snippet after changing from actions to nested components
+		icon: string; // TODO @multiple think about this API, maybe make a snippet or both? maybe just a snippet after changing from actions to nested components
 	}
 
 	// TODO @multiple remove the alias

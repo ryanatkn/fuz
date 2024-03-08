@@ -6,11 +6,12 @@
 
 	interface Props {
 		href: string;
-		children?: Snippet;
+		// TODO BLOCK refactor with `Contextmenu_Text_Entry`
 		icon?: Snippet<[icon: string]>;
+		children?: Snippet;
 	}
 
-	const {href, children, icon}: Props = $props();
+	const {href, icon, children}: Props = $props();
 
 	const contextmenu = get_contextmenu();
 
