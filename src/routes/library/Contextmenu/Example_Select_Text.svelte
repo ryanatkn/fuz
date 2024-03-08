@@ -37,7 +37,7 @@
 </script>
 
 <Contextmenu_Root {contextmenu} scoped>
-	<h3 class:color_e_5={highlighted}>Select text example</h3>
+	<h3 class:color_d_5={highlighted}>Select text example</h3>
 	<Contextmenu>
 		{#snippet entries()}
 			<Contextmenu_Entry run={() => (toggled = !toggled)}>Toggle</Contextmenu_Entry>

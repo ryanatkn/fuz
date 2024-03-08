@@ -260,7 +260,7 @@ option {
 	background-color: var(--bg);
 }
 
-:is(input, textarea, select, [contenteditable]):hover {
+:is(input, textarea, select):hover {
 	--border_color: var(--border_color_2);
 }
 
@@ -380,13 +380,12 @@ input[type='range']::-moz-range-track {
 	width: var(--input_width_min);
 }
 
-:is(button, input, textarea, select):focus,
-[contenteditable]:focus-visible {
+:is(button, input, textarea, select):focus {
 	--border_color: var(--color_a_5);
-	--outline_color: var(--color_a_5);
 	--outline_width: var(--outline_width_2);
 }
 [contenteditable]:focus-visible {
+	--outline_width: var(--outline_width_2);
 	outline: var(--outline_width) var(--outline_style) var(--outline_color);
 	/* TODO @multiple outline-offset */
 	/* outline-offset: 2px; */
