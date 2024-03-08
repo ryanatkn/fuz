@@ -12,6 +12,7 @@ import {Dimensions} from '$lib/dimensions.svelte.js';
 
 export type Contextmenu_Params =
 	| Snippet
+	// TODO maybe this should be generic?
 	| {snippet: 'link'; props: {href: string; icon?: string}}
 	| {snippet: 'text'; props: {content: string; icon: string; run: Contextmenu_Run}};
 

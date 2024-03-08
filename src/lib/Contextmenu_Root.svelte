@@ -315,6 +315,7 @@
 		bind:this={el}
 		style:transform="translate3d({x}px, {y}px, 0)"
 	>
+		<!-- TODO maybe this should be generic? -->
 		{#each contextmenu.params as p (p)}
 			{#if typeof p === 'function'}
 				{@render p()}
