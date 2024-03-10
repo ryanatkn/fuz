@@ -61,8 +61,12 @@ Try selecting text and then opening the contextmenu on it.`;
 				<input type="text" placeholder="paste text here?" bind:value />
 			</label>
 			<p class:color_g_5={highlighted}>
-				Opening the contextmenu on an input opens the browser's default contextmenu.
+				Opening the contextmenu on an <code>input</code> or <code>textarea</code> opens the browser's
+				default contextmenu.
 			</p>
+			<label>
+				<textarea placeholder="paste text here?" bind:value />
+			</label>
 			<p>
 				<Mdn_Link href="Web/HTML/Global_attributes/contenteditable">contenteditable</Mdn_Link> likewise
 				has your browser's default contextmenu behavior.
