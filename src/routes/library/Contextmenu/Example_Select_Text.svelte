@@ -68,7 +68,7 @@ Try selecting text and then opening the contextmenu on it.`;
 				has your browser's default contextmenu behavior:
 			</p>
 			<blockquote contenteditable="true" bind:innerText={value} />
-			<p><code>contenteditable=plaintext-only</code></p>
+			<p><code>contenteditable="plaintext-only"</code></p>
 			<blockquote contenteditable="plaintext-only" bind:innerText={value} />
 		</div>
 	</Contextmenu>
