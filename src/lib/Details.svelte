@@ -22,11 +22,7 @@
 <!-- TODO svelte5 splat attrs -->
 <details {...attrs} bind:open>
 	{@render summary()}
-	{#if lazy}
-		{#if open}
-			{@render children()}
-		{/if}
-	{:else}
+	{#if !lazy || open}
 		{@render children()}
 	{/if}
 </details>
