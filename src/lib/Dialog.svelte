@@ -141,7 +141,7 @@
 	<div
 		class="dialog"
 		class:ready
-		class:layout-page={layout === 'page'}
+		class:layout_page={layout === 'page'}
 		role="dialog"
 		aria-modal
 		bind:this={dialog_el}
@@ -200,7 +200,7 @@
 		align-items: center;
 		justify-content: center;
 	}
-	.layout-page .dialog_wrapper {
+	.layout_page .dialog_wrapper {
 		justify-content: flex-start;
 	}
 	.dialog_content {

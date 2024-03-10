@@ -260,7 +260,6 @@
 		['Enter', () => contextmenu.activate_selected()],
 	]);
 	const keydown = (e: KeyboardEvent): void => {
-		console.log(`e.key`, e.key);
 		const handler = keyboard_handlers.get(e.key);
 		if (!handler || is_editable(e.target)) return;
 		swallow(e);
