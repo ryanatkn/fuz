@@ -52,7 +52,7 @@
 <!-- TODO consider making this a text input or otherwise editable directly -->
 <div class="hue_input">
 	<label class="indicator" style:--hue={hue}>
-		<div class="mr_lg">{title}</div>
+		<div>{title}</div>
 		<input class="hue" value={hue} on:input={on_input_event} />
 	</label>
 	<div class="minimap_wrapper">
@@ -112,6 +112,7 @@
 	.hue {
 		width: 7rem;
 		min-width: 7rem;
+		margin-left: var(--space_lg);
 		font-size: var(--size_lg);
 		text-align: center;
 		background-color: transparent;

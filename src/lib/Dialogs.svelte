@@ -16,11 +16,13 @@
 	const {dialogs, onclose, children}: Props = $props();
 </script>
 
-{#each $dialogs as dialog, index (dialog)}
-	<Dialog {onclose} {...dialog.dialog_props} {index} active={index === $dialogs.length - 1}>
-		{#if children}{@render children(dialog)}{:else}<svelte:component
+{#each $dialogs as dialog, index (dialog)}<Dialog
+		{onclose}
+		{...dialog.dialog_props}
+		{index}
+		active={index === $dialogs.length - 1}
+		>{#if children}{@render children(dialog)}{:else}<svelte:component
 				this={dialog.Component}
 				{...dialog.props}
-			/>{/if}
-	</Dialog>
-{/each}
+			/>{/if}</Dialog
+	>{/each}
