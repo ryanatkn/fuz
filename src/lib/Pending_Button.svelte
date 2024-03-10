@@ -15,7 +15,6 @@
 
 	// TODO maybe this shouldn't disable? cancelable?
 
-	// TODO BLOCK @multiple just disable this eslint rule when we use bindings? would prefer not to disable for all Svelte so let continues to signal reassigment
 	let {pending, onclick, running, title, disabled, attrs, children}: Props = $props(); // eslint-disable-line prefer-const
 </script>
 

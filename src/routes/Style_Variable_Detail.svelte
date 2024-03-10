@@ -15,12 +15,11 @@
 {#if variable}
 	<div class="variable">
 		<div class="name"><code>--{variable.name}</code></div>
-		{#if variable.summary}<blockquote class="mb_lg">{variable.summary}</blockquote>{/if}
+		{#if variable.summary}<blockquote>{variable.summary}</blockquote>{/if}
 		<label>
 			<small class="title">light</small>
 			<input disabled={true} value={variable.light ?? ''} />
 		</label>
-		<br />
 		<label>
 			<small class="title">dark</small>
 			<input disabled={true} value={variable.dark ?? ''} />

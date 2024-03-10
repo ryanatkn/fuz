@@ -6,7 +6,6 @@
 		children?: Snippet;
 	}
 
-	// TODO BLOCK @multiple just disable this eslint rule when we use bindings? would prefer not to disable for all Svelte so let continues to signal reassigment
 	let {selected_font_weight = 400, children}: Props = $props(); // eslint-disable-line prefer-const
 
 	// TODO @multiple publish in $lib when ready
