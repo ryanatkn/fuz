@@ -65,11 +65,14 @@ Try selecting text and then opening the contextmenu on it.`;
 			</p>
 			<p>
 				<Mdn_Link href="Web/HTML/Global_attributes/contenteditable">contenteditable</Mdn_Link> likewise
-				has your browser's default contextmenu behavior:
+				has your browser's default contextmenu behavior.
 			</p>
+			<p><code>contenteditable="true"</code></p>
 			<blockquote contenteditable="true" bind:innerText={value} />
 			<p><code>contenteditable="plaintext-only"</code></p>
 			<blockquote contenteditable="plaintext-only" bind:innerText={value} />
+			<p><code>contenteditable</code> (same as empty string)</p>
+			<blockquote contenteditable bind:innerText={value} />
 		</div>
 	</Contextmenu>
 </Contextmenu_Root>
