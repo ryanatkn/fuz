@@ -80,3 +80,10 @@ Try selecting text and then opening the contextmenu on it.`;
 		</div>
 	</Contextmenu>
 </Contextmenu_Root>
+
+<style>
+	label {
+		/* TODO hacky */
+		display: block;
+	}
+</style>
