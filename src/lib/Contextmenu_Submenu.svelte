@@ -31,7 +31,7 @@
 
 	const {layout} = contextmenu;
 
-	const selected = $derived(submenu.selected); // TODO BLOCK destructuring doesn't work here, but does elsewhere?
+	const selected = $derived(submenu.selected);
 
 	let el: HTMLElement | undefined = $state();
 
