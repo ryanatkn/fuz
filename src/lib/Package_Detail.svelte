@@ -62,7 +62,7 @@
 
 <div class="package_detail">
 	<!-- TODO maybe continue this snippet pattern, or maybe simplify? -->
-	<header class="mb_lg">
+	<header>
 		{#if repo_name}
 			{@render repo_name(pkg.repo_name)}
 		{:else}
@@ -76,84 +76,80 @@
 		{#if description}
 			{@render description(package_json.description)}
 		{:else}
-			<div class="mb_lg">{package_json.description}</div>
+			<div class="description">{package_json.description}</div>
 		{/if}
 	{/if}
 	{#if pkg.npm_url}
 		{#if npm_url}
 			{@render npm_url(pkg.npm_url)}
 		{:else}
-			<blockquote class="npm_url mb_lg">npm i -D {package_json.name}</blockquote>
+			<blockquote class="npm_url">npm i -D {package_json.name}</blockquote>
 		{/if}
 	{/if}
-	<section class="properties w_100 mb_lg">
-		<div class="grid mb_lg">
-			{#if pkg.homepage_url}
-				{#if homepage_url}
-					{@render homepage_url(pkg.homepage_url)}
-				{:else}
-					<span class="text_align_right">homepage</span>
-					<div class="row">
-						<a
-							class="chip row ml_xs"
-							class:selected={pkg.homepage_url === $page.url.href}
-							href={pkg.homepage_url}
-						>
-							<img
-								src="{ensure_end(pkg.homepage_url, '/')}favicon.png"
-								alt="favicon to homepage at {pkg.homepage_url}"
-								style:width="16px"
-								style:height="16px"
-								style:margin-right="var(--space_xs)"
-							/>
-							{format_host(pkg.homepage_url)}
-						</a>
-					</div>
-				{/if}
-			{/if}
-			{#if pkg.repo_url}
-				<span class="text_align_right">repo</span>
-				<div class="row">
-					<a class="chip ml_xs" title="repo" href={pkg.repo_url}>{repo_name}</a>
-				</div>
-			{/if}
-			{#if pkg.npm_url}
-				<span class="text_align_right">npm</span>
-				<div class="row">
-					<a class="chip ml_xs" title="npm" href={pkg.npm_url}>{package_json.name}</a>
-				</div>
-			{/if}
-			{#if pkg.changelog_url}
-				<span class="text_align_right">version</span>
-				<div class="row">
-					<a class="chip ml_xs" title="version" href={pkg.changelog_url}>{package_json.version}</a>
-				</div>
-			{/if}
-			{#if license_url}
-				<span class="text_align_right">license</span>
-				<div class="row">
-					<a class="chip ml_xs" title="license" href={license_url}>{package_json.license}</a>
-				</div>
-			{/if}
-			{#if pkg.homepage_url}
-				<span class="text_align_right">data</span>
-				<div class="row">
+	<section class="properties">
+		{#if pkg.homepage_url}
+			{#if homepage_url}
+				{@render homepage_url(pkg.homepage_url)}
+			{:else}
+				<span class="title">homepage</span>
+				<div class="content">
 					<a
-						class="chip ml_xs"
-						title="data"
-						href="{ensure_end(pkg.homepage_url, '/')}.well-known/package.json">package.json</a
+						class="chip"
+						class:selected={pkg.homepage_url === $page.url.href}
+						href={pkg.homepage_url}
 					>
-					<a
-						class="chip ml_xs"
-						title="data"
-						href="{ensure_end(pkg.homepage_url, '/')}.well-known/src.json">src.json</a
-					>
+						<img
+							src="{ensure_end(pkg.homepage_url, '/')}favicon.png"
+							alt="favicon to homepage at {pkg.homepage_url}"
+							style:width="16px"
+							style:height="16px"
+							style:margin-right="var(--space_xs)"
+						/>
+						{format_host(pkg.homepage_url)}
+					</a>
 				</div>
 			{/if}
-		</div>
+		{/if}
+		{#if pkg.repo_url}
+			<span class="title">repo</span>
+			<div class="content">
+				<a class="chip" title="repo" href={pkg.repo_url}>{pkg.repo_name}</a>
+			</div>
+		{/if}
+		{#if pkg.npm_url}
+			<span class="title">npm</span>
+			<div class="content">
+				<a class="chip" title="npm" href={pkg.npm_url}>{package_json.name}</a>
+			</div>
+		{/if}
+		{#if pkg.changelog_url}
+			<span class="title">version</span>
+			<div class="content">
+				<a class="chip" title="version" href={pkg.changelog_url}>{package_json.version}</a>
+			</div>
+		{/if}
+		{#if license_url}
+			<span class="title">license</span>
+			<div class="content">
+				<a class="chip" title="license" href={license_url}>{package_json.license}</a>
+			</div>
+		{/if}
+		{#if pkg.homepage_url}
+			<span class="title">data</span>
+			<div class="content">
+				<a
+					class="chip"
+					title="data"
+					href="{ensure_end(pkg.homepage_url, '/')}.well-known/package.json">package.json</a
+				>
+				<a class="chip" title="data" href="{ensure_end(pkg.homepage_url, '/')}.well-known/src.json"
+					>src.json</a
+				>
+			</div>
+		{/if}
 	</section>
 	{#if modules && pkg.repo_url}
-		<section class="w_100 mb_lg">
+		<section>
 			<menu>
 				{#each modules as module_name, i (module_name)}
 					{@const source_url = to_source_url(pkg.repo_url, module_name)}
@@ -166,10 +162,10 @@
 						class:css={module_name.endsWith('.css')}
 						class:json={module_name.endsWith('.json')}
 					>
-						<div class="bg_3 radius_sm p_xs">
+						<div class="module_content">
 							<a class="chip" href={source_url}>{module_name}</a>
 							{#if pkg_module?.declarations.length}
-								<ul class="declarations pt_xs">
+								<ul class="declarations">
 									{#each pkg_module.declarations as { name, kind }}
 										<li class="declaration chip {kind}_declaration">
 											{name}
@@ -184,7 +180,7 @@
 		</section>
 	{/if}
 
-	<section class="w_100 mb_lg">
+	<section>
 		<details>
 			<summary>raw data for <code>pkg: Package_Meta</code></summary>
 			<pre><code>{JSON.stringify(pkg, null, '\t')}</code></pre>
@@ -206,6 +202,13 @@
 		width: 100%;
 		max-width: var(--max_width, var(--width_md));
 	}
+	header {
+		margin-bottom: var(--space_lg);
+	}
+	section {
+		width: 100%;
+		margin-bottom: var(--space_lg);
+	}
 	.repo_name {
 		font-size: var(--size_xl2);
 		font-weight: 400;
@@ -214,10 +217,27 @@
 	.npm_url {
 		font-family: var(--font_family_mono);
 		text-align: center;
+		margin-bottom: var(--space_lg);
 	}
-	.grid {
+	.description {
+		margin-bottom: var(--space_lg);
+	}
+	.properties {
+		display: grid;
 		grid-template-columns: 80px 1fr;
 		gap: var(--space_xs2);
+		margin-bottom: var(--space_lg);
+	}
+	.title {
+		text-align: right;
+	}
+	.content {
+		display: flex;
+	}
+	.content a {
+		display: flex;
+		align-items: center;
+		margin-left: var(--space_xs);
 	}
 	pre {
 		display: flex;
@@ -227,6 +247,11 @@
 	.module {
 		margin-bottom: var(--space_xs);
 		--link_color: var(--text_2);
+	}
+	.module_content {
+		background-color: var(--bg_3);
+		border-radius: var(--radius_sm);
+		padding: var(--space_xs);
 	}
 	.ts {
 		--link_color: var(--color_a_5);
@@ -248,6 +273,7 @@
 		flex-wrap: wrap;
 		align-items: flex-start;
 		gap: var(--space_xs) 0;
+		padding-top: var(--space_xs);
 	}
 	.declaration {
 		font-family: var(--font_family_mono);
