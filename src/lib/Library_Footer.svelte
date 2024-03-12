@@ -17,7 +17,7 @@
 	const {repo_url} = $derived(pkg);
 </script>
 
-<footer class="panel p_lg">
+<footer class="panel">
 	{#if children}{@render children()}{/if}
 	<div class="logo">
 		<a href={repo_url} rel="me"
@@ -37,6 +37,7 @@
 		justify-content: center;
 		align-items: center;
 		flex-direction: column;
+		padding: var(--space_lg);
 	}
 	.logo {
 		display: flex;

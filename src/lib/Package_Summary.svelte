@@ -19,7 +19,7 @@
 
 <div class="package_summary">
 	<!-- TODO maybe continue this snippet pattern, or maybe simplify? -->
-	<header class="mb_lg">
+	<header>
 		{#if repo_name}
 			{@render repo_name(pkg.repo_name)}
 		{:else}
@@ -30,7 +30,7 @@
 		{#if description}
 			{@render description(package_json.description)}
 		{:else}
-			<blockquote class="mb_lg text_align_center">{package_json.description}</blockquote>
+			<blockquote class="description">{package_json.description}</blockquote>
 		{/if}
 	{/if}
 	{#if children}{@render children()}{/if}
@@ -38,14 +38,14 @@
 		{#if homepage_url}
 			{@render homepage_url(pkg.homepage_url)}
 		{:else}
-			<div class="mb_lg">
+			<div class="homepage_url">
 				<a class="chip" class:selected={homepage_url === $page.url.href} href={homepage_url}
 					>{format_host(pkg.homepage_url)}</a
 				>
 			</div>
 		{/if}
 	{/if}
-	<div class="box row mb_lg">
+	<div class="links">
 		{#if pkg.repo_url}
 			<a class="chip" href={pkg.repo_url}>repo</a>
 		{/if}
@@ -75,6 +75,20 @@
 		flex-direction: column;
 		align-items: center;
 		max-width: var(--max_width, var(--width_sm));
+	}
+	header {
+		margin-bottom: var(--space_lg);
+	}
+	.links {
+		display: flex;
+		margin-bottom: var(--space_lg);
+	}
+	.description {
+		margin-bottom: var(--space_lg);
+		text-align: center;
+	}
+	.homepage_url {
+		margin-bottom: var(--space_lg);
 	}
 	.repo_name {
 		font-size: var(--size_xl2);

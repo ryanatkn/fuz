@@ -35,6 +35,6 @@
 	{#if auto}<meta http-equiv="refresh" content="0; URL={url}" />{/if}
 </svelte:head>
 
-{#if children}{@render children(url)}{:else}<main class="row box prose">
-		<p>redirect to <a href={url}>{strip_start(url, 'https://')}</a></p>
-	</main>{/if}
+{#if children}{@render children(url)}{:else}<p>
+		redirect to <a href={url}>{strip_start(url, 'https://')}</a>
+	</p>{/if}

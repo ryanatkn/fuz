@@ -11,12 +11,12 @@
 	const {running = true, attrs, children}: Props = $props();
 </script>
 
-<div {...attrs} class:pending_animation={true}>
-	<span class:running style="animation-delay: 0s"
+<div {...attrs} class:pending_animation={true} class:running>
+	<span style="animation-delay: 0s"
 		>{#if children}{@render children(0)}{:else}•{/if}</span
-	><span class:running style="animation-delay: 0.09s"
+	><span style="animation-delay: 0.09s"
 		>{#if children}{@render children(1)}{:else}•{/if}</span
-	><span class:running style="animation-delay: 0.3s"
+	><span style="animation-delay: 0.3s"
 		>{#if children}{@render children(2)}{:else}•{/if}</span
 	>
 </div>
@@ -33,7 +33,7 @@
 		transform: scale3d(var(--scale_x), var(--scale_y), var(--scale_z));
 		animation: dot var(--animation_duration, var(--duration_5, 1.5s)) infinite paused;
 	}
-	.running {
+	.running span {
 		animation-play-state: running;
 	}
 	@keyframes dot {

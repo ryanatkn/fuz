@@ -23,11 +23,14 @@
 	);
 </script>
 
-<a {...attrs} href={final_href} class="chip nowrap"
+<a {...attrs} href={final_href} class="chip"
 	><span class="logo_wrapper"><Mdn_Logo /></span>{@render children()}</a
 >
 
 <style>
+	a {
+		white-space: nowrap;
+	}
 	.logo_wrapper {
 		display: inline-block;
 		margin-right: var(--space_sm);
