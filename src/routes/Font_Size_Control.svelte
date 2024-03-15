@@ -9,7 +9,8 @@
 		children?: Snippet;
 	}
 
-	let {selected_font_size = 2, children}: Props = $props(); // eslint-disable-line prefer-const
+	const {children}: Props = $props();
+	let {selected_font_size = 2}: Props = $props.bindable();
 
 	// TODO the API is strange
 

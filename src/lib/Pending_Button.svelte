@@ -15,7 +15,7 @@
 
 	// TODO maybe this shouldn't disable? cancelable?
 
-	let {pending, onclick, running, title, disabled, attrs, children}: Props = $props(); // eslint-disable-line prefer-const
+	const {pending, onclick, running, title, disabled, attrs, children}: Props = $props();
 </script>
 
 <button

@@ -6,7 +6,8 @@
 		children?: Snippet;
 	}
 
-	let {selected_font_weight = 400, children}: Props = $props(); // eslint-disable-line prefer-const
+	const {children}: Props = $props();
+	let {selected_font_weight = 400}: Props = $props.bindable();
 
 	// TODO @multiple publish in $lib when ready
 </script>

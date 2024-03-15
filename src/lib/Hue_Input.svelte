@@ -7,7 +7,8 @@
 		oninput?: (hue: Hue) => void;
 	}
 
-	let {value: hue, title = 'hue', oninput}: Props = $props(); // eslint-disable-line prefer-const
+	const {title = 'hue', oninput}: Props = $props();
+	let {value: hue}: Props = $props.bindable();
 
 	// TODO BLOCK rename to `value`?
 	hue ??= 180; // TODO BLOCK hack to allow binding with a fallback
