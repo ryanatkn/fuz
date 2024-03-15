@@ -11,6 +11,7 @@
 <Tome_Detail {tome}>
 	<div class="prose">
 		<section>
+			<aside>⚠️ this may be removed completely</aside>
 			<aside>
 				The <code>.prose</code> CSS class styles HTML <Tome_Link name="elements" /> for document-like
 				presentation. The base Fuz stylesheet resets everything for app-like presentation and <Tome_Link

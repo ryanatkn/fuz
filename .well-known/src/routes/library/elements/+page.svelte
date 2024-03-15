@@ -57,7 +57,7 @@
 		<h3>
 			<Mdn_Link href="Web/HTML/Element/table">table</Mdn_Link>
 		</h3>
-		<blockquote>this is unfinished and will change</blockquote>
+		<blockquote>⚠️ this is unfinished and will change</blockquote>
 		<Code
 			content={`<table>
 	<thead>
