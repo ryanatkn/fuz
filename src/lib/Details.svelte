@@ -14,9 +14,8 @@
 		children: Snippet;
 	}
 
-	// TODO BLOCK what pattern for type declaration?
 	const {lazy = true, attrs, summary, children}: Props = $props();
-	let {open}: {open?: boolean | null | undefined} = $props.bindable();
+	let {open}: Props = $props.bindable();
 </script>
 
 <!-- TODO svelte5 splat attrs -->
