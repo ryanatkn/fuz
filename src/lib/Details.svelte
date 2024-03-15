@@ -9,13 +9,14 @@
 	 */
 	interface Props {
 		lazy?: boolean;
-		open?: boolean | null | undefined;
 		attrs?: HTMLDetailsAttributes;
 		summary: Snippet;
 		children: Snippet;
 	}
 
-	let {lazy = true, open, attrs, summary, children}: Props = $props(); // eslint-disable-line prefer-const
+	// TODO BLOCK what pattern for type declaration?
+	const {lazy = true, attrs, summary, children}: Props = $props();
+	let {open}: {open?: boolean | null | undefined} = $props.bindable();
 </script>
 
 <!-- TODO svelte5 splat attrs -->
