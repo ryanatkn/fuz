@@ -90,10 +90,11 @@
 		<div>
 			{#each font_weights as font_weight}
 				<div
+					class="nowrap"
 					style:font-weight={font_weight}
 					style:font-size="var(--{font_size_names[selected_font_size - 1]})"
 				>
-					{font_weight}
+					font-weight: {font_weight}
 				</div>
 			{/each}
 		</div>
