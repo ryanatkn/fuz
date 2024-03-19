@@ -30,18 +30,17 @@
 </script>
 
 <Tome_Detail {tome}>
-	<div class="prose">
-		<aside>forms need more work</aside>
-		<p>
-			a <Mdn_Link href="Web/HTML/Element/form">form</Mdn_Link> with a <Mdn_Link
-				href="Web/HTML/Element/fieldset">fieldset</Mdn_Link
-			>:
-		</p>
-		<Code
-			content={`<form>
+	<aside>forms need more work</aside>
+	<p>
+		a <Mdn_Link href="Web/HTML/Element/form">form</Mdn_Link> with a <Mdn_Link
+			href="Web/HTML/Element/fieldset">fieldset</Mdn_Link
+		>:
+	</p>
+	<Code
+		content={`<form>
 	<fieldset>
 		<legend>
-			a legend
+			a <Mdn_Link href="Web/HTML/Element/legend">legend</Mdn_Link>
 		</legend>
 		<label>
 			<div class="title">
@@ -56,148 +55,132 @@
 	</fieldset>
 	...
 </form>`}
-		/>
-		<br />
-		<div class="width_sm">
-			<form>
-				<fieldset>
-					<legend>a <Mdn_Link href="Web/HTML/Element/legend">legend</Mdn_Link></legend>
-					<label>
-						<div class="title">username</div>
-						<input bind:value={username} disabled={created_account} placeholder=">" />
-					</label>
-					<label>
-						<div class="title">password</div>
-						<input
-							type="password"
-							bind:value={password}
-							disabled={created_account}
-							placeholder=">"
-						/>
-					</label>
-					<p>
-						More info can be included in <code>{'<'}p></code> tags like this one. Here we could include
-						info about passwords.
-					</p>
-					<label>
-						<div class="title">lifestory</div>
-						<textarea bind:value={lifestory} disabled={created_account} placeholder="👀" /></label
-					>
-					<label>
-						<div class="title">select</div>
-						<select
-							class="text_align_center"
-							style="font-size: var(--size_xl5)"
-							disabled={created_account}
-						>
-							{#each faces as face (face)}
-								<option value={face}>{face}</option>
-							{/each}
-						</select>
-					</label>
-					<button
-						type="button"
-						disabled={created_account}
-						on:click={() => (created_account = true)}
-					>
-						create account
-					</button>
-				</fieldset>
-			</form>
-			{#if created_account}
-				<form
-					in:fly={{y: -100, duration: ANIMATION_DURATION_FAST}}
-					out:fly={{y: 100, duration: ANIMATION_DURATION_FAST}}
+	/>
+	<div class="width_sm">
+		<form>
+			<fieldset>
+				<legend>a <Mdn_Link href="Web/HTML/Element/legend">legend</Mdn_Link></legend>
+				<label>
+					<div class="title">username</div>
+					<input bind:value={username} disabled={created_account} placeholder=">" />
+				</label>
+				<label>
+					<div class="title">password</div>
+					<input type="password" bind:value={password} disabled={created_account} placeholder=">" />
+				</label>
+				<p>
+					More info can be included in <code>{'<'}p></code> tags like this one. Here we could include
+					info about passwords.
+				</p>
+				<label>
+					<div class="title">lifestory</div>
+					<textarea bind:value={lifestory} disabled={created_account} placeholder="👀" /></label
 				>
-					<Alert status="error">cannot create account because this library is fake</Alert>
-					<button type="button" on:click={() => (created_account = false)}> undo undo! </button>
-				</form>
-			{/if}
-		</div>
-	</div>
-
-	<hr />
-
-	<div class="prose">
-		<h3>
-			<code>form</code> with range input
-		</h3>
-		<form>
-			<fieldset>
-				<Code content={`<input type="range" />`} />
-				<input type="range" step={1} min={0} max={100} />
-			</fieldset>
-			<fieldset>
-				<Code content={`<input type="range" disabled />`} />
-				<input type="range" step={1} min={0} max={100} disabled />
-			</fieldset>
-		</form>
-	</div>
-
-	<hr />
-
-	<div class="prose">
-		<h3>
-			<code>form</code> with checkboxes
-		</h3>
-		<!-- TODO make this a form, but figure out the checkbox problem -- maybe a last-child exception? -->
-		<form>
-			<fieldset>
-				<label class="row">
-					<input type="checkbox" bind:checked={checked1} style:margin-right="var(--space_lg)" />
-					<Code content={`<input type="checkbox" ${checked1 ? 'checked ' : ''}/>`} />
-				</label>
-				<label class="row">
-					<input type="checkbox" bind:checked={checked2} style:margin-right="var(--space_lg)" />
-					<Code content={`<input type="checkbox" ${checked2 ? 'checked ' : ''}/>`} />
-				</label>
-				<label class="row disabled">
-					<input type="checkbox" disabled style:margin-right="var(--space_lg)" />
-					<Code content={`<input type="checkbox" disabled />`} /> (disabled)
-				</label>
-				<label class="row disabled">
-					<input type="checkbox" checked disabled />
-					<Code content={`<input type="checkbox" checked disabled />`} /> (disabled)
-				</label>
-			</fieldset>
-		</form>
-		<aside>
-			The above are wrapped with: <Code content={`<label class="row">`} />
-			with the <code>.disabled</code> class as needed: <Code
-				content={`<label class="row disabled">`}
-			/>
-		</aside>
-	</div>
-	<hr />
-
-	<div class="prose">
-		<h3>
-			<code>form</code> with radio inputs
-		</h3>
-		<form>
-			<fieldset>
-				{#each radio_items as radioItem}
-					{@const selected = radioItem === selected_radio_item}
-					<label class="row" class:selected
-						><input type="radio" bind:group={selected_radio_item} value={radioItem} />
-						<Code
-							content={`<label class="row${selected ? ' selected' : ''}">\n\t<input type="radio" ${
-								selected ? 'checked' : ''
-							}/>\n</label>`}
-						/></label
+				<label>
+					<div class="title">select</div>
+					<select
+						class="text_align_center"
+						style="font-size: var(--size_xl5)"
+						disabled={created_account}
 					>
-				{/each}
-				<label class="row disabled">
-					<input type="radio" disabled />
-					<Code content={`<label class="row">\n\t<input type="radio" disabled />\n</label>`} />
+						{#each faces as face (face)}
+							<option value={face}>{face}</option>
+						{/each}
+					</select>
 				</label>
-				<label class="row disabled selected">
-					<input type="radio" checked disabled />
-					<Code
-						content={`<label class="row">\n\t<input type="radio" checked disabled />\n</label>`}
-					/>
-				</label>
+				<button type="button" disabled={created_account} on:click={() => (created_account = true)}>
+					create account
+				</button>
 			</fieldset>
 		</form>
+		{#if created_account}
+			<form
+				in:fly={{y: -100, duration: ANIMATION_DURATION_FAST}}
+				out:fly={{y: 100, duration: ANIMATION_DURATION_FAST}}
+			>
+				<Alert status="error">cannot create account because this library is fake</Alert>
+				<button type="button" on:click={() => (created_account = false)}> undo undo! </button>
+			</form>
+		{/if}
 	</div>
+
+	<hr />
+
+	<h3>
+		<code>form</code> with range input
+	</h3>
+	<form>
+		<fieldset>
+			<Code content={`<input type="range" />`} />
+			<input type="range" step={1} min={0} max={100} />
+		</fieldset>
+		<fieldset>
+			<Code content={`<input type="range" disabled />`} />
+			<input type="range" step={1} min={0} max={100} disabled />
+		</fieldset>
+	</form>
+
+	<hr />
+
+	<h3>
+		<code>form</code> with checkboxes
+	</h3>
+	<!-- TODO make this a form, but figure out the checkbox problem -- maybe a last-child exception? -->
+	<form>
+		<fieldset>
+			<label class="row">
+				<input type="checkbox" bind:checked={checked1} style:margin-right="var(--space_lg)" />
+				<Code content={`<input type="checkbox" ${checked1 ? 'checked ' : ''}/>`} />
+			</label>
+			<label class="row">
+				<input type="checkbox" bind:checked={checked2} style:margin-right="var(--space_lg)" />
+				<Code content={`<input type="checkbox" ${checked2 ? 'checked ' : ''}/>`} />
+			</label>
+			<label class="row disabled">
+				<input type="checkbox" disabled style:margin-right="var(--space_lg)" />
+				<Code content={`<input type="checkbox" disabled />`} /> (disabled)
+			</label>
+			<label class="row disabled">
+				<input type="checkbox" checked disabled />
+				<Code content={`<input type="checkbox" checked disabled />`} /> (disabled)
+			</label>
+		</fieldset>
+	</form>
+	<aside>
+		The above are wrapped with: <Code content={`<label class="row">`} />
+		with the <code>.disabled</code> class as needed: <Code
+			content={`<label class="row disabled">`}
+		/>
+	</aside>
+
+	<hr />
+
+	<h3>
+		<code>form</code> with radio inputs
+	</h3>
+	<form>
+		<fieldset>
+			{#each radio_items as radioItem}
+				{@const selected = radioItem === selected_radio_item}
+				<label class="row" class:selected
+					><input type="radio" bind:group={selected_radio_item} value={radioItem} />
+					<Code
+						content={`<label class="row${selected ? ' selected' : ''}">\n\t<input type="radio" ${
+							selected ? 'checked' : ''
+						}/>\n</label>`}
+					/></label
+				>
+			{/each}
+			<label class="row disabled">
+				<input type="radio" disabled />
+				<Code content={`<label class="row">\n\t<input type="radio" disabled />\n</label>`} />
+			</label>
+			<label class="row disabled selected">
+				<input type="radio" checked disabled />
+				<Code
+					content={`<label class="row">\n\t<input type="radio" checked disabled />\n</label>`}
+				/>
+			</label>
+		</fieldset>
+	</form>
 </Tome_Detail>

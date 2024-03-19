@@ -36,8 +36,9 @@ The CSS design system:
   - [`@ryanatkn/fuz/utility_classes.css`](/src/lib/utility_classes.css) - optional
   - [`@ryanatkn/fuz/variable_classes.css`](/src/lib/variable_classes.css) - optional
   - [`@ryanatkn/fuz/animations.css`](/src/lib/animations.css) - optional
-  - prefers Svelte's `<style>` for nontrivial cases,
-    and it's not nearly as featureful as Tailwind - instead of letting you express all of CSS in classes,
+  - prefers Svelte's `<style>` for nontrivial cases
+    because its utility classes are not nearly as featureful and complete as Tailwind -
+    instead of providing a full interface to CSS through classes,
     Fuz provides an arbitrary subset that defers to Svelte CSS for complex and uncommon patterns
     (advanced build tooling like a compiler could change this, but I have no current plans for that)
   - it probably makes sense to include a Vite plugin to remove unused styles,

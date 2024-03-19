@@ -12,54 +12,47 @@
 </script>
 
 <Tome_Detail {tome}>
-	<div class="prose">
-		<blockquote>
-			Styles for plain <Mdn_Link href="Web/HTML/Element">HTML elements</Mdn_Link>. See also <Tome_Link
-				name="typography"
-			/>.
-		</blockquote>
-		<h3>
-			<span style="font-size: var(--size_xl3)">👆</span>
-			<Mdn_Link href="Web/HTML/Element/blockquote">blockquote</Mdn_Link>
-		</h3>
-		<h3>
-			<span style="font-size: var(--size_xl3)">👇</span>
-			<Mdn_Link href="Web/HTML/Element/hr">hr</Mdn_Link>
-			<span style="font-size: var(--size_xl3)">👈</span>
-			<Mdn_Link href="Web/HTML/Element/code">code</Mdn_Link>
-		</h3>
-	</div>
+	<blockquote>
+		Styles for plain <Mdn_Link href="Web/HTML/Element">HTML elements</Mdn_Link>. See also <Tome_Link
+			name="typography"
+		/>.
+	</blockquote>
+	<h3>
+		<span style="font-size: var(--size_xl3)">👆</span>
+		<Mdn_Link href="Web/HTML/Element/blockquote">blockquote</Mdn_Link>
+	</h3>
+	<h3>
+		<span style="font-size: var(--size_xl3)">👇</span>
+		<Mdn_Link href="Web/HTML/Element/hr">hr</Mdn_Link>
+		<span style="font-size: var(--size_xl3)">👈</span>
+		<Mdn_Link href="Web/HTML/Element/code">code</Mdn_Link>
+	</h3>
 	<hr />
-	<div class="prose">
-		<h3>
-			<Mdn_Link href="Web/HTML/Element/details">details</Mdn_Link>
-			and
-			<Mdn_Link href="Web/HTML/Element/summary">summary</Mdn_Link>
-		</h3>
-		<details>
-			<summary
-				>Click me, a <code>summary</code>, to see the rest of the <code>details</code></summary
-			>
-			<p>so many details</p>
-			<Code
-				content={`<details>
+	<h3>
+		<Mdn_Link href="Web/HTML/Element/details">details</Mdn_Link>
+		and
+		<Mdn_Link href="Web/HTML/Element/summary">summary</Mdn_Link>
+	</h3>
+	<details>
+		<summary>Click me, a <code>summary</code>, to see the rest of the <code>details</code></summary>
+		<p>so many details</p>
+		<Code
+			content={`<details>
 	<summary>
 		Click me, a <code>summary</code>,
 		to see the rest of the <code>details</code>
 	</summary>
 	<Code code={'...'} />
 </details>`}
-			/>
-		</details>
-	</div>
+		/>
+	</details>
 	<hr />
-	<div class="prose">
-		<h3>
-			<Mdn_Link href="Web/HTML/Element/table">table</Mdn_Link>
-		</h3>
-		<blockquote>⚠️ this is unfinished and will change</blockquote>
-		<Code
-			content={`<table>
+	<h3>
+		<Mdn_Link href="Web/HTML/Element/table">table</Mdn_Link>
+	</h3>
+	<blockquote>⚠️ this is unfinished and will change</blockquote>
+	<Code
+		content={`<table>
 	<thead>
 		<tr>
 			<th>th</th>
@@ -73,84 +66,75 @@
 		<tr><td>td</td><td>td</td><td>td</td></tr>
 	</tbody>
 </table>`}
-		/>
-		<table>
-			<thead>
-				<tr>
-					<th>th</th>
-					<th>th</th>
-					<th>th</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr><td>td</td><td>td</td><td>td</td></tr>
-				<tr><td>td</td><td>td</td><td>td</td></tr>
-				<tr><td>td</td><td>td</td><td>td</td></tr>
-			</tbody>
-		</table>
-		<Code content={`<table class="w_100">\n\t...\n</table>`} />
-		<table class="w_100">
-			<thead>
-				<tr>
-					<th>th</th>
-					<th>th</th>
-					<th>th</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr><td>td</td><td>td</td><td>td</td></tr>
-				<tr><td>td</td><td>td</td><td>td</td></tr>
-				<tr><td>td</td><td>td</td><td>td</td></tr>
-			</tbody>
-		</table>
-	</div>
+	/>
+	<table>
+		<thead>
+			<tr>
+				<th>th</th>
+				<th>th</th>
+				<th>th</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr><td>td</td><td>td</td><td>td</td></tr>
+			<tr><td>td</td><td>td</td><td>td</td></tr>
+			<tr><td>td</td><td>td</td><td>td</td></tr>
+		</tbody>
+	</table>
+	<Code content={`<table class="w_100">\n\t...\n</table>`} />
+	<table class="w_100">
+		<thead>
+			<tr>
+				<th>th</th>
+				<th>th</th>
+				<th>th</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr><td>td</td><td>td</td><td>td</td></tr>
+			<tr><td>td</td><td>td</td><td>td</td></tr>
+			<tr><td>td</td><td>td</td><td>td</td></tr>
+		</tbody>
+	</table>
 	<hr />
-	<div class="prose">
-		<h3>
-			<Mdn_Link href="Web/HTML/Element/aside">aside</Mdn_Link>
-		</h3>
-		<aside>
-			the <code>aside</code> looks like this
-		</aside>
-		<aside>
-			<Code
-				content={`<aside>
+	<h3>
+		<Mdn_Link href="Web/HTML/Element/aside">aside</Mdn_Link>
+	</h3>
+	<aside>
+		the <code>aside</code> looks like this
+	</aside>
+	<aside>
+		<Code
+			content={`<aside>
 	<aside>
 		<aside>nested asides</aside>
 	</aside>
 </aside>`}
-			/>
+		/>
+		<aside>
 			<aside>
-				<aside>
-					<aside>nested asides</aside>
-				</aside>
+				<aside>nested asides</aside>
 			</aside>
 		</aside>
-	</div>
+	</aside>
 	<hr />
-	<div class="prose">
-		<h3>
-			<Mdn_Link href="Web/HTML/Element/footer">header</Mdn_Link>
-		</h3>
-		<Code content={`<header>header</header>`} />
-		<header>header</header>
-	</div>
+	<h3>
+		<Mdn_Link href="Web/HTML/Element/footer">header</Mdn_Link>
+	</h3>
+	<Code content={`<header>header</header>`} />
+	<header>header</header>
 	<hr />
-	<div class="prose">
-		<h3>
-			<Mdn_Link href="Web/HTML/Element/footer">footer</Mdn_Link>
-		</h3>
-		<Code content={`<footer>footer</footer>`} />
-		<footer>footer</footer>
-	</div>
+	<h3>
+		<Mdn_Link href="Web/HTML/Element/footer">footer</Mdn_Link>
+	</h3>
+	<Code content={`<footer>footer</footer>`} />
+	<footer>footer</footer>
 	<hr />
-	<div class="prose">
-		<h3>
-			<Mdn_Link href="Web/HTML/Element/section">section</Mdn_Link>
-		</h3>
-		<Code content={`<section>section</section>`} />
-		<section>section</section>
-	</div>
+	<h3>
+		<Mdn_Link href="Web/HTML/Element/section">section</Mdn_Link>
+	</h3>
+	<Code content={`<section>section</section>`} />
+	<section>section</section>
 	<hr />
 	<section>
 		<h3><code>ul</code></h3>
@@ -213,5 +197,5 @@
 		</menu>
 	</section>
 	<hr />
-	<div class="prose">TODO more!</div>
+	<p>TODO more!</p>
 </Tome_Detail>
