@@ -6,10 +6,16 @@
 	import Style_Variable_Button from '$routes/Style_Variable_Button.svelte';
 	import Tome_Link from '$lib/Tome_Link.svelte';
 	import {get_tome} from '$lib/tome.js';
+	import {get_color_scheme} from '$lib/theme';
 
 	const LIBRARY_ITEM_NAME = 'light and shadow';
 
 	const tome = get_tome(LIBRARY_ITEM_NAME);
+
+	const color_scheme = get_color_scheme();
+	const toggle_color_scheme = () => {
+		color_scheme.update((c) => (c === 'light' ? 'dark' : 'light'));
+	};
 </script>
 
 <Tome_Detail {tome}>
@@ -85,7 +91,8 @@
 		</section>
 		<section>
 			<aside>
-				Tip: try flipping between light and dark to see how <code>bg</code> and <code>fg</code>
+				tip: Try <button class="inline" on:click={toggle_color_scheme}>toggling</button> between
+				light and dark to see how <code>bg</code> and <code>fg</code>
 				change, while <code>darken</code> and <code>lighten</code> don't change but do appear significantly
 				different because of the context.
 			</aside>
