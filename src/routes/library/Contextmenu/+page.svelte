@@ -20,17 +20,15 @@
 <!-- TODO demonstrate usage of a custom `link_snippet` and `linkProps`  -->
 <Tome_Detail {tome}>
 	{#snippet header()}<h2>{tome.name}</h2>{/snippet}
-	<div class="prose">
-		<section>
-			<aside>
-				<!-- TODO style hack, maybe use margin-bottom only on h elements? -->
-				<h4>TODO</h4>
-				<ul>
-					<li>consider mobile drawer-from-bottom design (maybe an option)</li>
-				</ul>
-			</aside>
-		</section>
-	</div>
+	<section>
+		<aside>
+			<!-- TODO style hack, maybe use margin-bottom only on h elements? -->
+			<h4>TODO</h4>
+			<ul>
+				<li>consider mobile drawer-from-bottom design (maybe an option)</li>
+			</ul>
+		</aside>
+	</section>
 	<Example_Basic />
 	<hr />
 	<Example_Default_Behaviors />
