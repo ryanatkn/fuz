@@ -63,8 +63,4 @@
 		align-items: center;
 		justify-content: center;
 	}
-	/* TODO standardize this */
-	section {
-		margin-bottom: var(--space_xl3);
-	}
 </style>

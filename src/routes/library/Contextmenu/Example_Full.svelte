@@ -215,9 +215,6 @@
 {/if}
 
 <style>
-	section {
-		margin-bottom: var(--space_xl4);
-	}
 	.position {
 		border-radius: var(--border_radius);
 		background-color: var(--fg_1);

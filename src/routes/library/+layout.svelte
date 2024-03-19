@@ -43,7 +43,7 @@
 				<Library_Menu {tomes} />
 				{#if tomes_related_to_selected}
 					<Library_Menu tomes={tomes_related_to_selected}>
-						{#snippet children(category)}<h6 class="mb_0">related {category}</h6>{/snippet}
+						{#snippet children(category)}<h6>related {category}</h6>{/snippet}
 					</Library_Menu>
 				{/if}
 			</div>
@@ -106,12 +106,5 @@
 	}
 	section {
 		padding: var(--space_xl2);
-	}
-	h6 {
-		margin-bottom: var(--space_md);
-		margin-top: var(--space_xl3);
-	}
-	h6:first-child {
-		margin-top: 0;
 	}
 </style>

@@ -138,9 +138,3 @@
 		</ul>
 	</section>
 </Tome_Detail>
-
-<style>
-	section {
-		margin-bottom: var(--space_xl5);
-	}
-</style>

@@ -59,12 +59,6 @@
 </main>
 
 <style>
-	section {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		margin-bottom: var(--space_xl5);
-	}
 	menu {
 		width: 100%;
 		display: flex;

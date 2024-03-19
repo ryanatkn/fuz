@@ -104,9 +104,6 @@ export interface Style_Variable {
 </Tome_Detail>
 
 <style>
-	section {
-		margin-bottom: var(--space_xl5);
-	}
 	.variables {
 		width: 100%;
 		display: inline-grid;

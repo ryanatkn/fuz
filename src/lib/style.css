@@ -228,7 +228,8 @@ p {
 		label,
 		pre,
 		blockquote,
-		aside
+		aside,
+		nav
 	):not(:last-child) {
 	margin-bottom: var(--space_lg);
 }

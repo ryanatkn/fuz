@@ -141,9 +141,6 @@
 </Tome_Detail>
 
 <style>
-	section {
-		margin-bottom: var(--space_xl5);
-	}
 	.button_contents {
 		font-weight: normal;
 		text-align: left;
