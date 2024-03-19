@@ -13,106 +13,104 @@
 </script>
 
 <Tome_Detail {tome}>
-	<div class="prose">
-		<section>
-			<!-- TODO make this a generic data-driven helper -->
-			<Code content={`import Card from '@ryanatkn/fuz/Card.svelte';`} lang="ts" />
-			<Code
-				content={`<Card>
+	<section>
+		<!-- TODO make this a generic data-driven helper -->
+		<Code content={`import Card from '@ryanatkn/fuz/Card.svelte';`} lang="ts" />
+		<Code
+			content={`<Card>
   <div>just</div>
   <div>a card</div>
 </Card>`}
-			/>
-			<Card>
-				<div>just</div>
-				<div>a card</div>
-			</Card>
-		</section>
-		<section>
-			<Code
-				content={`<Card href="${base}/">
+		/>
+		<Card>
+			<div>just</div>
+			<div>a card</div>
+		</Card>
+	</section>
+	<section>
+		<Code
+			content={`<Card href="${base}/">
   <div>a</div>
   <div>link</div>
 </Card>`}
-			/>
-			<Card href="{base}/">
-				<div>a</div>
-				<div>link</div>
-			</Card>
-		</section>
-		<section>
-			<Code
-				content={`<Card>
+		/>
+		<Card href="{base}/">
+			<div>a</div>
+			<div>link</div>
+		</Card>
+	</section>
+	<section>
+		<Code
+			content={`<Card>
   <div>custom</div>
   <div>icon</div>
   {#snippet icon()}📖{/snippet}
 </Card>`}
-			/>
-			<Card>
-				<div>custom</div>
-				<div>icon</div>
-				{#snippet icon()}📖{/snippet}
-			</Card>
-		</section>
-		<section>
-			<Code
-				content={`<Card tag="button">
+		/>
+		<Card>
+			<div>custom</div>
+			<div>icon</div>
+			{#snippet icon()}📖{/snippet}
+		</Card>
+	</section>
+	<section>
+		<Code
+			content={`<Card tag="button">
   <div>custom</div>
   <div>tag</div>
 </Card>`}
-			/>
-			<Card tag="button">
-				<div>custom</div>
-				<div>tag</div>
-			</Card>
-		</section>
-		<section>
-			<Code
-				content={`<Card href="${base}/library/Card">
+		/>
+		<Card tag="button">
+			<div>custom</div>
+			<div>tag</div>
+		</Card>
+	</section>
+	<section>
+		<Code
+			content={`<Card href="${base}/library/Card">
   <div>href is</div>
   <div>selected</div>
 </Card>`}
-			/>
-			<Card href="{href}/Card">
-				<div>href is</div>
-				<div>selected</div>
-			</Card>
-		</section>
-		<section>
-			<Code
-				content={`<Card align="right">
+		/>
+		<Card href="{href}/Card">
+			<div>href is</div>
+			<div>selected</div>
+		</Card>
+	</section>
+	<section>
+		<Code
+			content={`<Card align="right">
   <div>align</div>
   <div>icon right</div>
 </Card>`}
-			/>
-			<Card align="right">
-				<div>align</div>
-				<div>icon right</div>
-			</Card>
-		</section>
-		<section>
-			<Code
-				content={`<Card align="above">
+		/>
+		<Card align="right">
+			<div>align</div>
+			<div>icon right</div>
+		</Card>
+	</section>
+	<section>
+		<Code
+			content={`<Card align="above">
   <div>align</div>
   <div>icon above</div>
 </Card>`}
-			/>
-			<Card align="above">
-				<div>align</div>
-				<div>icon above</div>
-			</Card>
-		</section>
-		<section>
-			<Code
-				content={`<Card align="below">
+		/>
+		<Card align="above">
+			<div>align</div>
+			<div>icon above</div>
+		</Card>
+	</section>
+	<section>
+		<Code
+			content={`<Card align="below">
   <div>align</div>
   <div>icon below</div>
 </Card>`}
-			/>
-			<Card align="below">
-				<div>align</div>
-				<div>icon below</div>
-			</Card>
-		</section>
-	</div>
+		/>
+		<Card align="below">
+			<div>align</div>
+			<div>icon below</div>
+		</Card>
+	</section>
 </Tome_Detail>

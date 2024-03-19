@@ -62,16 +62,12 @@
 </script>
 
 <div class="theme_form">
-	<div class="prose">
-		<h2 class="text_align_center">
-			{#if editing}edit{:else}create{/if} theme
-		</h2>
-	</div>
+	<h2 class="text_align_center">
+		{#if editing}edit{:else}create{/if} theme
+	</h2>
 	<header>
 		<div class="variables_header">
-			<div class="prose">
-				<p>variables: {light_count} light, {dark_count} dark</p>
-			</div>
+			<p>variables: {light_count} light, {dark_count} dark</p>
 			<button type="button" class="w_100" on:click={add_variable}>add a variable</button>
 		</div>
 		<form>

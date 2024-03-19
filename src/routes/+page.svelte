@@ -12,7 +12,7 @@
 
 <main class="box w_100">
 	<div class="box width_md">
-		<section class="prose box">
+		<section class="box">
 			<h1 class="mt_xl4">fuz</h1>
 			<blockquote>friendly user zystem</blockquote>
 			<div class="width_sm panel p_md">

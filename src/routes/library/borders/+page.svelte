@@ -21,87 +21,85 @@
 	<!-- <div>outline_style</div> -->
 	<!-- <div>outline_color</div> -->
 
-	<div class="prose">
-		<section>
-			<h3>Border colors</h3>
-			<aside>TODO needs work</aside>
-			<div class="border_examples border_colors">
-				{#each {length: 5} as _, i}
-					{@const name = 'border_color_' + (i + 1)}
-					<div class="border_color_outer">
-						<div class="border_color_inner">
-							<div class="border_example border_color" style:border-color="var(--{name})">
-								<Style_Variable_Button {name} />
-							</div>
-							{#each {length: 5} as _, i}
-								<div
-									class="border_color_width"
-									style:border-color="var(--{name})"
-									style:border-width="var(--{'border_width_' + (i + 2)})"
-								></div>
-							{/each}
-						</div>
-						<div>
-							<span class="pl_sm pr_sm">=</span><code
-								>{computed_styles.getPropertyValue('--' + name)}</code
-							>
-						</div>
-					</div>
-				{/each}
-			</div>
-		</section>
-
-		<section>
-			<h3>Border widths</h3>
-			<div class="border_examples border_widths">
-				{#each {length: 6} as _, i}
-					{@const name = 'border_width_' + (i + 1)}
-					<div class="row">
-						<div class="border_example border_width" style:border-width="var(--{name})">
+	<section>
+		<h3>Border colors</h3>
+		<aside>TODO needs work</aside>
+		<div class="border_examples border_colors">
+			{#each {length: 5} as _, i}
+				{@const name = 'border_color_' + (i + 1)}
+				<div class="border_color_outer">
+					<div class="border_color_inner">
+						<div class="border_example border_color" style:border-color="var(--{name})">
 							<Style_Variable_Button {name} />
 						</div>
+						{#each {length: 5} as _, i}
+							<div
+								class="border_color_width"
+								style:border-color="var(--{name})"
+								style:border-width="var(--{'border_width_' + (i + 2)})"
+							></div>
+						{/each}
+					</div>
+					<div>
 						<span class="pl_sm pr_sm">=</span><code
 							>{computed_styles.getPropertyValue('--' + name)}</code
 						>
 					</div>
-				{/each}
-			</div>
-		</section>
+				</div>
+			{/each}
+		</div>
+	</section>
 
-		<section>
-			<h3>Outline widths</h3>
-			<div class="border_examples outline_widths">
-				{#each {length: 3} as _, i}
-					{@const name = 'outline_width_' + (i + 1)}
-					<div class="row">
-						<div class="border_example outline_width" style:outline-width="var(--{name})">
-							<Style_Variable_Button {name} />
-						</div>
-						<span class="pl_sm pr_sm">=</span><code
-							>{computed_styles.getPropertyValue('--' + name)}</code
-						>
+	<section>
+		<h3>Border widths</h3>
+		<div class="border_examples border_widths">
+			{#each {length: 6} as _, i}
+				{@const name = 'border_width_' + (i + 1)}
+				<div class="row">
+					<div class="border_example border_width" style:border-width="var(--{name})">
+						<Style_Variable_Button {name} />
 					</div>
-				{/each}
-			</div>
-		</section>
+					<span class="pl_sm pr_sm">=</span><code
+						>{computed_styles.getPropertyValue('--' + name)}</code
+					>
+				</div>
+			{/each}
+		</div>
+	</section>
 
-		<section>
-			<h3>Border radii</h3>
-			<div class="border_examples border_radii">
-				{#each radius_sizes as radius}
-					{@const name = 'radius_' + radius}
-					<div class="row">
-						<div class="border_example border_radius" style:border-radius="var(--{name})">
-							<Style_Variable_Button {name} />
-						</div>
-						<span class="pl_sm pr_sm">=</span><code
-							>{computed_styles.getPropertyValue('--' + name)}</code
-						>
+	<section>
+		<h3>Outline widths</h3>
+		<div class="border_examples outline_widths">
+			{#each {length: 3} as _, i}
+				{@const name = 'outline_width_' + (i + 1)}
+				<div class="row">
+					<div class="border_example outline_width" style:outline-width="var(--{name})">
+						<Style_Variable_Button {name} />
 					</div>
-				{/each}
-			</div>
-		</section>
-	</div>
+					<span class="pl_sm pr_sm">=</span><code
+						>{computed_styles.getPropertyValue('--' + name)}</code
+					>
+				</div>
+			{/each}
+		</div>
+	</section>
+
+	<section>
+		<h3>Border radii</h3>
+		<div class="border_examples border_radii">
+			{#each radius_sizes as radius}
+				{@const name = 'radius_' + radius}
+				<div class="row">
+					<div class="border_example border_radius" style:border-radius="var(--{name})">
+						<Style_Variable_Button {name} />
+					</div>
+					<span class="pl_sm pr_sm">=</span><code
+						>{computed_styles.getPropertyValue('--' + name)}</code
+					>
+				</div>
+			{/each}
+		</div>
+	</section>
 </Tome_Detail>
 
 <style>

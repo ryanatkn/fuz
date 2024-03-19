@@ -21,7 +21,7 @@
 		{#snippet entries()}
 			<Contextmenu_Entry run={() => (toggled = !toggled)}>Toggle</Contextmenu_Entry>
 		{/snippet}
-		<div class="panel p_md prose">
+		<div class="panel p_md">
 			<p>
 				<Code lang="ts" content={`const contextmenu = create_contextmenu();`} />
 			</p>

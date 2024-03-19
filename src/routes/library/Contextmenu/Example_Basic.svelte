@@ -10,23 +10,22 @@
 	let with_icon = $state(false);
 </script>
 
-<div class="prose">
-	<h3>Basic example</h3>
-	<Contextmenu_Root scoped>
-		<Contextmenu>
-			{#snippet entries()}
-				<!-- eslint-disable-next-line no-alert -->
-				<Contextmenu_Entry run={() => (greeted = !greeted)}>Hello world</Contextmenu_Entry>
-				<!-- eslint-disable-next-line no-alert -->
-				<Contextmenu_Entry run={() => (with_icon = !with_icon)}>
-					{#snippet icon()}🌞{/snippet}
-					With an optional icon
-				</Contextmenu_Entry>
-			{/snippet}
-			<div class="panel p_md">
-				<p>Try opening the contextmenu on this panel with rightclick or longpress.</p>
-				<Code
-					content={`<Contextmenu_Root scoped>
+<h3>Basic example</h3>
+<Contextmenu_Root scoped>
+	<Contextmenu>
+		{#snippet entries()}
+			<!-- eslint-disable-next-line no-alert -->
+			<Contextmenu_Entry run={() => (greeted = !greeted)}>Hello world</Contextmenu_Entry>
+			<!-- eslint-disable-next-line no-alert -->
+			<Contextmenu_Entry run={() => (with_icon = !with_icon)}>
+				{#snippet icon()}🌞{/snippet}
+				With an optional icon
+			</Contextmenu_Entry>
+		{/snippet}
+		<div class="panel p_md">
+			<p>Try opening the contextmenu on this panel with rightclick or longpress.</p>
+			<Code
+				content={`<Contextmenu_Root scoped>
   <Contextmenu>
     {#snippet entries()}
       <Contextmenu_Entry run={() => (greeted = !greeted)}> <!-- ${greeted} />
@@ -42,17 +41,16 @@
   ...content with only default contextmenu behavior...
 </Contextmenu_Root>
 ...context without contextmenu behavior`}
-				/>
-				<!-- TODO this extra wrapper is only for the last-child margin behavior, but that may be removed -->
-				<div>
-					{#if greeted}
-						<div transition:slide><code>greeted = true</code></div>
-					{/if}
-					{#if with_icon}
-						<div transition:slide><code>with_icon = true</code></div>
-					{/if}
-				</div>
+			/>
+			<!-- TODO this extra wrapper is only for the last-child margin behavior, but that may be removed -->
+			<div>
+				{#if greeted}
+					<div transition:slide><code>greeted = true</code></div>
+				{/if}
+				{#if with_icon}
+					<div transition:slide><code>with_icon = true</code></div>
+				{/if}
 			</div>
-		</Contextmenu>
-	</Contextmenu_Root>
-</div>
+		</div>
+	</Contextmenu>
+</Contextmenu_Root>
