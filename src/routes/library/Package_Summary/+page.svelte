@@ -14,15 +14,13 @@
 </script>
 
 <Tome_Detail {tome}>
-	<div class="prose">
-		<section>
-			<Code
-				content={`import Package_Summary from '@ryanatkn/fuz/Package_Summary.svelte';`}
-				lang="ts"
-			/>
-			<Code content={`<Package_Summary {pkg} />`} />
-		</section>
-	</div>
+	<section>
+		<Code
+			content={`import Package_Summary from '@ryanatkn/fuz/Package_Summary.svelte';`}
+			lang="ts"
+		/>
+		<Code content={`<Package_Summary {pkg} />`} />
+	</section>
 	<section>
 		<Package_Summary {pkg} />
 	</section>

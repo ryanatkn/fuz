@@ -168,6 +168,7 @@ h6 {
 	font-size: var(--size);
 	font-weight: var(--font_weight);
 	overflow-wrap: break-word; /* @see https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-wrap#break-word */
+	hyphens: auto;
 }
 
 h1 {
@@ -202,13 +203,7 @@ h6 {
 	text-transform: uppercase;
 }
 
-section {
-	/* TODO or more? */
-	margin-bottom: var(--space_xl5);
-}
-
 p {
-	/* TODO maybe apply to body? */
 	overflow-wrap: break-word; /* @see https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-wrap#break-word */
 	hyphens: auto;
 }
@@ -232,6 +227,10 @@ p {
 		nav
 	):not(:last-child) {
 	margin-bottom: var(--space_lg);
+}
+section:not(:last-child) {
+	/* TODO or more? */
+	margin-bottom: var(--space_xl5);
 }
 summary {
 	/* TODO maybe change API to like `--margin_bottom`? */

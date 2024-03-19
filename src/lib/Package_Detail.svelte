@@ -195,7 +195,6 @@
 
 <style>
 	.package_detail {
-		padding: var(--space_lg);
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;

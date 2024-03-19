@@ -32,8 +32,6 @@
 
 	// let show_create_theme_dialog = false;
 	let editing_theme: null | Theme = $state(null);
-
-	// TODO some hacky layout patterns below, tricky to mix prose and other elements
 </script>
 
 <Tome_Detail {tome}>
@@ -253,9 +251,8 @@
 			<code>Themed</code> sets the writable stores <code>selected_theme</code>
 			and <code>selected_color_scheme</code> in the Svelte context:
 		</p>
-		<div class="w_100">
-			<Code
-				content={`// get values from the Svelte context provided by
+		<Code
+			content={`// get values from the Svelte context provided by
 // the nearest \`Themed\` or \`Themed_Scope\` ancestor:
 
 import {get_theme} from '@ryanatkn/fuz/theme.js';
@@ -265,9 +262,8 @@ $selected_theme.name; // '${$selected_theme.name}'
 import {get_color_scheme} from '@ryanatkn/fuz/theme.js';
 const selected_color_scheme = get_color_scheme();
 $selected_color_scheme; // '${$selected_color_scheme}'`}
-				lang="js"
-			/>
-		</div>
+			lang="js"
+		/>
 		<details>
 			<summary>more about <code>Themed</code></summary>
 			<aside>

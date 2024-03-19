@@ -14,18 +14,11 @@
 </script>
 
 <Tome_Detail {tome}>
-	<div class="prose">
-		<section>
-			<Code
-				content={`import Package_Detail from '@ryanatkn/fuz/Package_Detail.svelte';`}
-				lang="ts"
-			/>
-			<Code content={`<Package_Detail {pkg} />`} />
-		</section>
-	</div>
-	<section class="w_100">
-		<div class="box panel p_md">
-			<Package_Detail {pkg} />
-		</div>
+	<section>
+		<Code content={`import Package_Detail from '@ryanatkn/fuz/Package_Detail.svelte';`} lang="ts" />
+		<Code content={`<Package_Detail {pkg} />`} />
+	</section>
+	<section>
+		<Package_Detail {pkg} />
 	</section>
 </Tome_Detail>

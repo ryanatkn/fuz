@@ -13,22 +13,22 @@
 </script>
 
 <Tome_Detail {tome}>
-	<div class="prose" style:--color="hsl({value} 62% 31%)">
-		<!-- TODO make this a generic data-driven helper -->
-		<Code content={`import Hue_Input from '@ryanatkn/fuz/Hue_Input.svelte';`} lang="ts" />
-		<Code
-			content={`<Hue_Input
+	<!-- TODO make this a generic data-driven helper -->
+	<Code content={`import Hue_Input from '@ryanatkn/fuz/Hue_Input.svelte';`} lang="ts" />
+	<Code
+		content={`<Hue_Input
 	bind:value
 	oninput={(v) => (value_from_oninput = v)}
 />`}
-		/>
-		<Hue_Input
-			bind:value
-			oninput={(v) => {
-				value_from_oninput = v;
-				if (value !== v) throw Error();
-			}}
-		/>
+	/>
+	<Hue_Input
+		bind:value
+		oninput={(v) => {
+			value_from_oninput = v;
+			if (value !== v) throw Error();
+		}}
+	/>
+	<div style:--color="hsl({value} 62% 31%)">
 		<code class="block my_md">bind:value === {value}</code>
 		<code class="block">value_from_oninput === {value_from_oninput + ''}</code>
 	</div>

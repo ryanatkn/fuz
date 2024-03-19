@@ -12,37 +12,34 @@
 </script>
 
 <Tome_Detail {tome}>
-	<div class="prose">
-		<section>
-			<h3>Spaces</h3>
-			<div>
-				{#each space_sizes as space_size}
-					{@const name = 'space_' + space_size}
-					<div class="layout_example">
-						<div class="fill" style:width="var(--{name})" />
-						<div class="variable_wrapper"><Style_Variable_Button {name} /></div>
-						<span class="pr_sm">=</span>
-						<div class="computed_value">{computed_styles.getPropertyValue('--' + name)}</div>
-					</div>
-				{/each}
-			</div>
-		</section>
-
-		<section>
-			<h3>Widths</h3>
-			<div>
-				{#each ['sm', 'md'] as radius}
-					{@const name = 'width_' + radius}
-					<div class="layout_example">
-						<div class="fill" style:width="var(--{name})" />
-						<div class="variable_wrapper"><Style_Variable_Button {name} /></div>
-						<span class="pr_sm">=</span>
-						<div class="computed_value">{computed_styles.getPropertyValue('--' + name)}</div>
-					</div>
-				{/each}
-			</div>
-		</section>
-	</div>
+	<section>
+		<h3>Spaces</h3>
+		<div>
+			{#each space_sizes as space_size}
+				{@const name = 'space_' + space_size}
+				<div class="layout_example">
+					<div class="fill" style:width="var(--{name})" />
+					<div class="variable_wrapper"><Style_Variable_Button {name} /></div>
+					<span class="pr_sm">=</span>
+					<div class="computed_value">{computed_styles.getPropertyValue('--' + name)}</div>
+				</div>
+			{/each}
+		</div>
+	</section>
+	<section>
+		<h3>Widths</h3>
+		<div>
+			{#each ['sm', 'md'] as radius}
+				{@const name = 'width_' + radius}
+				<div class="layout_example">
+					<div class="fill" style:width="var(--{name})" />
+					<div class="variable_wrapper"><Style_Variable_Button {name} /></div>
+					<span class="pr_sm">=</span>
+					<div class="computed_value">{computed_styles.getPropertyValue('--' + name)}</div>
+				</div>
+			{/each}
+		</div>
+	</section>
 </Tome_Detail>
 
 <style>

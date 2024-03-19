@@ -17,49 +17,44 @@
 	-->
 
 <Tome_Detail {tome}>
-	<div class="prose">
-		<section>
-			<p>Preserves a button's normal width while animating.</p>
-			<aside>
-				<p>This component may be replaced with an action in the future or otherwise change.</p>
-			</aside>
-			<!-- TODO make this a generic data-driven helper -->
-			<Code
-				content={`import Pending_Button from '@ryanatkn/fuz/Pending_Button.svelte';`}
-				lang="ts"
-			/>
-			<p>
-				<button
-					on:click={() => {
-						pending_1 = !pending_1;
-						pending_2 = !pending_2;
-					}}>toggle the pending status of the buttons below</button
-				>
-			</p>
-			<Code
-				content={`<Pending_Button
+	<section>
+		<p>Preserves a button's normal width while animating.</p>
+		<aside>
+			<p>This component may be replaced with an action in the future or otherwise change.</p>
+		</aside>
+		<!-- TODO make this a generic data-driven helper -->
+		<Code content={`import Pending_Button from '@ryanatkn/fuz/Pending_Button.svelte';`} lang="ts" />
+		<p>
+			<button
+				on:click={() => {
+					pending_1 = !pending_1;
+					pending_2 = !pending_2;
+				}}>toggle the pending status of the buttons below</button
+			>
+		</p>
+		<Code
+			content={`<Pending_Button
 	pending={${pending_1}}
 	onclick={() => (pending_1 = !pending_1)}
 >
 	do something async
 </Pending_Button>`}
-			/>
-			<p>
-				<Pending_Button pending={pending_1} onclick={() => (pending_1 = !pending_1)}>
-					do something async
-				</Pending_Button>
-			</p>
-			<Code
-				content={`<Pending_Button
+		/>
+		<p>
+			<Pending_Button pending={pending_1} onclick={() => (pending_1 = !pending_1)}>
+				do something async
+			</Pending_Button>
+		</p>
+		<Code
+			content={`<Pending_Button
 	pending={${pending_2}}
 	onclick={() => (pending_2 = !pending_2)}
 >
 	do another
 </Pending_Button>`}
-			/>
-			<Pending_Button pending={pending_2} onclick={() => (pending_2 = !pending_2)}>
-				do another
-			</Pending_Button>
-		</section>
-	</div>
+		/>
+		<Pending_Button pending={pending_2} onclick={() => (pending_2 = !pending_2)}>
+			do another
+		</Pending_Button>
+	</section>
 </Tome_Detail>
