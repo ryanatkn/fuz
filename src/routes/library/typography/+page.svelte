@@ -118,6 +118,7 @@
 		<h3>
 			<Mdn_Link href="Web/CSS/line-height">line-height</Mdn_Link> variables
 		</h3>
+		<aside>These may be renamed with a semantic scale.</aside>
 		<div>
 			{#each {length: 7} as _, i}
 				{@const name = 'line_height_' + (i + 1)}
