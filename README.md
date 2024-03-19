@@ -26,10 +26,9 @@ The CSS design system:
 - supports [`color-scheme` and custom themes](https://www.fuz.dev/library/theme)
   (including dark mode)
 - zero dependencies except for Svelte
-- styles HTML tags directly, so you don't need to add `.btn` to buttonss
+- styles HTML tags directly, so you don't need to add `.btn` to buttons
   - encourages plain HTML elements like `button` and `a` over Svelte components
     unless the gains are substantial
-  - includes `.prose` to apply document-like presentation compared to the base app-like presentation
 - stylesheets:
   - [`@ryanatkn/fuz/style.css`](/src/lib/style.css)
   - [`@ryanatkn/fuz/theme.css`](/src/lib/theme.css) - or bring your own
