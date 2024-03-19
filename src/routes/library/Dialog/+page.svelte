@@ -28,7 +28,6 @@
 	let dialog_nested_3_opened = $state(false);
 
 	let selected_layout: Dialog_Layout = $state('page');
-	const layouts: Dialog_Layout[] = ['centered', 'page'];
 
 	let items: object[] = $state([]);
 	const remove_item = (item: object) => {
@@ -123,7 +122,6 @@
 	>
 		{#snippet children(close)}
 			<div class="pane prose p_xl width_md">
-				<h1>attention</h1>
 				{#if selected_layout === 'page'}
 					<p>
 						This is a <code>Dialog</code> with
@@ -167,18 +165,7 @@
 						new stuff appears {#if selected_layout === 'page'}gracefully{:else if selected_layout === 'centered'}ungracefully{/if}
 					</p>
 				{/each}
-				<hr />
-				<form class="box">
-					<div class="mb_lg">
-						{#each layouts as layout}
-							<label class="row">
-								<input type="radio" bind:group={selected_layout} value={layout} />
-								{layout}
-							</label>
-						{/each}
-					</div>
-					<button type="button" on:click={close}>close</button>
-				</form>
+				<button type="button" on:click={close}>close</button>
 			</div>
 		{/snippet}
 	</Dialog>
