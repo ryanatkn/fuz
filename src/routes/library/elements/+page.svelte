@@ -144,5 +144,13 @@
 		<footer>footer</footer>
 	</div>
 	<hr />
+	<div class="prose">
+		<h3>
+			<Mdn_Link href="Web/HTML/Element/section">section</Mdn_Link>
+		</h3>
+		<Code content={`<section>section</section>`} />
+		<section>section</section>
+	</div>
+	<hr />
 	<div class="prose">TODO more!</div>
 </Tome_Detail>

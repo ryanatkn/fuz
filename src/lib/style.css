@@ -196,6 +196,35 @@ h6 {
 	text-transform: uppercase;
 }
 
+section {
+	/* TODO or more? */
+	margin-bottom: var(--space_xl4);
+}
+
+/* checkboxes and radios are expected to be nested inside a `label`, thus no bottom margin */
+:is(
+		p,
+		ul,
+		ol,
+		menu,
+		form,
+		fieldset,
+		table,
+		details,
+		textarea,
+		select,
+		label,
+		pre,
+		blockquote,
+		aside
+	):not(:last-child) {
+	margin-bottom: var(--space_lg);
+}
+summary {
+	/* TODO maybe change API to like `--margin_bottom`? */
+	margin-bottom: var(--space_xs);
+}
+
 hr {
 	border-top: 1px solid var(--border_color_3);
 	border-bottom: 2px solid var(--border_color_3);
