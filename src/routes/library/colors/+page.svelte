@@ -96,7 +96,7 @@
 		</p>
 		<p>Unlike the color variables, the hue variables are the same in both light and dark modes.</p>
 	</div>
-	<ul class="palette">
+	<ul class="palette unstyled">
 		{#each color_names as color_name, i}
 			<Hue_Swatch {color_name} {computed_styles} description={descriptions[i]} />
 		{/each}
@@ -114,7 +114,7 @@
 		</p>
 		<p>These colors were eyeballed by a programmer, and will change :]</p>
 	</div>
-	<ul class="palette">
+	<ul class="palette unstyled">
 		{#each color_names as color_name}
 			<Color_Swatch {color_name} {computed_styles} />
 		{/each}

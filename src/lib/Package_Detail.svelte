@@ -165,7 +165,7 @@
 						<div class="module_content">
 							<a class="chip" href={source_url}>{module_name}</a>
 							{#if pkg_module?.declarations.length}
-								<ul class="declarations">
+								<ul class="declarations unstyled">
 									{#each pkg_module.declarations as { name, kind }}
 										<li class="declaration chip {kind}_declaration">
 											{name}

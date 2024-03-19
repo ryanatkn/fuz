@@ -22,30 +22,28 @@
 
 <div class="style_examples">
 	<h1>theme: {$theme.name}</h1>
-	<div class="prose">
-		<h2>this is an <code>h2</code> inside <code>.prose</code></h2>
-		<blockquote>blockquote</blockquote>
-		<aside>aside</aside>
-		<ul>
-			<li>a</li>
-			<li>b</li>
-			<li>c</li>
-		</ul>
-		<p>
-			p and <code>code</code> with
-			<Mdn_Link href="Web/Accessibility">links</Mdn_Link>
+	<h2>this is an <code>h2</code></h2>
+	<blockquote>blockquote</blockquote>
+	<aside>aside</aside>
+	<ul class="unstyled">
+		<li>a</li>
+		<li>b</li>
+		<li>c</li>
+	</ul>
+	<p>
+		p and <code>code</code> with
+		<Mdn_Link href="Web/Accessibility">links</Mdn_Link>
+	</p>
+	{#each {length: 3} as _}
+		<p class="width_sm">
+			another p with <code>.width_sm</code> so it will wrap any moment now and there we have multiple
+			lines of text
 		</p>
-		{#each {length: 3} as _}
-			<p class="width_sm">
-				another p with <code>.width_sm</code> so it will wrap any moment now and there we have multiple
-				lines of text
-			</p>
-		{/each}
-		<details>
-			<summary>summary and details</summary>
-			details content
-		</details>
-	</div>
+	{/each}
+	<details>
+		<summary>summary and details</summary>
+		details content
+	</details>
 	<hr />
 	<h2><code>form</code></h2>
 	<form>

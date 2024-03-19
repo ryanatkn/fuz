@@ -16,7 +16,7 @@
 	};
 </script>
 
-<ul>
+<ul class="unstyled">
 	{#each {length: 9} as _, i}
 		{@const num = i + 1}
 		{@const variable_name = `color_${color_name}_${num}`}

@@ -31,7 +31,7 @@
 		<blockquote>This is experimental and may change or be removed.</blockquote>
 	</section>
 	<section>
-		<ul>
+		<ul class="unstyled">
 			<li role="none">
 				<div class="menu_item">
 					<div class="content">
@@ -65,7 +65,7 @@
 		</ul>
 	</section>
 	<section>
-		<ul>
+		<ul class="unstyled">
 			<li role="none">
 				<div
 					class="menu_item selectable"
