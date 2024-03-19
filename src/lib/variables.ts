@@ -631,12 +631,12 @@ export const shadow_lg: Style_Variable = {
 export const shadow_inset: Style_Variable = {
 	name: 'shadow_inset',
 	light:
-		'2px 2px 4px inset var(--lighten_2), -2px -2px 4px inset var(--darken_2), 4px 4px 6px inset var(--lighten_1), -4px -4px 6px inset var(--darken_1)',
+		'0px 2px 4px 1px inset var(--lighten_2), 0px -2px 4px 1px inset var(--darken_2), 0 3px 6px 2px inset var(--lighten_2), 0 -3px 6px 2px inset var(--darken_1)',
 };
 export const shadow_inset_active: Style_Variable = {
 	name: 'shadow_inset_active', // TODO better name? this is the "pressed" version for buttons
 	light:
-		'2px 2px 4px inset var(--darken_2), -2px -2px 4px inset var(--lighten_2), 4px 4px 6px inset var(--darken_1), -4px -4px 6px inset var(--lighten_1)',
+		'0 2px 4px 1px inset var(--darken_2), 0 -2px 4px 1px inset var(--lighten_2), 0 3px 6px 2px inset var(--darken_1), 0 -3px 6px 2px inset var(--lighten_2)',
 };
 
 /* icons */
