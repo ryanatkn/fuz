@@ -1,5 +1,5 @@
 ---
-"@ryanatkn/fuz": patch
+'@ryanatkn/fuz': patch
 ---
 
-reduce the need for prose for everything except lists
+reduce the need for prose for everything except lists and buttons
