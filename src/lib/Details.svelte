@@ -8,14 +8,16 @@
 	 * Prefer `details` when you don't need the lazy behavior.
 	 */
 	interface Props {
+		open?: boolean;
 		lazy?: boolean;
 		attrs?: HTMLDetailsAttributes;
 		summary: Snippet;
 		children: Snippet;
 	}
 
-	const {lazy = true, attrs, summary, children}: Props = $props();
-	let {open}: Props = $props.bindable();
+	// const {lazy = true, attrs, summary, children}: Props = $props();
+	// let {open}: Props = $props.bindable();
+	let {open, lazy = true, attrs, summary, children}: Props = $props();
 </script>
 
 <!-- TODO svelte5 splat attrs -->

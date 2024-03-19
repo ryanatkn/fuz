@@ -39,15 +39,17 @@
 	class:right
 	class:above
 	class:below
->
-	{#if align === 'left' || align === 'above'}<div class="icon">
-			{#if typeof final_icon === 'string'}{final_icon}{:else}{@render final_icon()}{/if}
-		</div>{/if}
+	>{#if align === 'left' || align === 'above'}{@render icon_snippet()}{/if}
 	<div class="content">{@render children()}</div>
-	{#if align === 'right' || align === 'below'}<div class="icon">
-			{#if typeof final_icon === 'string'}{final_icon}{:else}{@render final_icon()}{/if}
-		</div>{/if}</svelte:element
+	{#if align === 'right' || align === 'below'}{@render icon_snippet()}{/if}</svelte:element
 >
+
+<!-- TODO name? -->
+{#snippet icon_snippet()}
+	<div class="icon">
+		{#if typeof final_icon === 'string'}{final_icon}{:else}{@render final_icon()}{/if}
+	</div>
+{/snippet}
 
 <style>
 	.card {
