@@ -45,7 +45,7 @@ Try selecting text and then opening the contextmenu on it.`;
 		{#snippet entries()}
 			<Contextmenu_Entry run={() => (toggled = !toggled)}>Toggle</Contextmenu_Entry>
 		{/snippet}
-		<div class="panel p_md prose" class:color_g_5={highlighted}>
+		<div class="panel p_md" class:color_g_5={highlighted}>
 			<div bind:this={text_el} class="mb_lg">
 				<p>
 					If a contextmenu is triggered on selected text, it includes a <code>Copy text</code>

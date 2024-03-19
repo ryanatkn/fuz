@@ -191,7 +191,7 @@
 
 {#if show_about_dialog}
 	<Dialog onclose={() => (show_about_dialog = false)}>
-		<div class="pane prose p_xl box text_align_center">
+		<div class="pane p_xl box text_align_center">
 			<h1>About Fuz</h1>
 			<blockquote>Svelte UI library and CSS design system</blockquote>
 			<blockquote>
@@ -204,7 +204,7 @@
 					>@fuz.dev/fuz_contextmenu</a
 				></code
 			>
-			<div class="prose p_xl box">
+			<div class="p_xl box">
 				<h2>Color Scheme</h2>
 				<Color_Scheme_Input />
 				<h2>Theme</h2>
