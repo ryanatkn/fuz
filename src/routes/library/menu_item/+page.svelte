@@ -24,7 +24,7 @@
 </script>
 
 <Tome_Detail {tome}>
-	<section class="prose">
+	<section>
 		<h3>
 			<code>.menu_item</code> CSS class
 		</h3>

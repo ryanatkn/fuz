@@ -18,7 +18,7 @@
 </script>
 
 <Tome_Detail {tome}>
-	<section class="prose">
+	<section>
 		<p>
 			Variables are <Mdn_Link href="Web/CSS/--*">CSS custom properties</Mdn_Link>
 			that can be grouped into a <Tome_Link name="themes">theme</Tome_Link>. Each variable can have

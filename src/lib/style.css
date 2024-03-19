@@ -407,7 +407,8 @@ input[type='range']::-moz-range-track {
 	background-color: var(--thumb_background_color);
 }
 
-:is(input, select).inline {
+:is(input, textarea, select).inline,
+p :is(input, textarea, select) {
 	display: inline-block;
 	margin-left: var(--space_lg);
 	/* TODO ideally `width` here would be set to a minimum and have an API to increase size --
@@ -469,7 +470,8 @@ button:active {
 	background: var(--button_bg_active);
 	box-shadow: var(--shadow_inset_active);
 }
-button.inline {
+button.inline,
+p button {
 	display: inline-block;
 	--min_height: var(--input_height_sm); /* TODO this increases paragraph line spacing */
 }

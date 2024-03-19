@@ -29,7 +29,7 @@
 </script>
 
 <Tome_Detail {tome}>
-	<section class="prose">
+	<section>
 		<h3>Color semantics</h3>
 		<p>
 			Fuz provides a palette of color and hue <Tome_Link name="variables" /> designed to support concise

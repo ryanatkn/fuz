@@ -39,7 +39,7 @@
 	<button class="selected deselectable" disabled>disabled button.selected.deselectable</button>
 	<br />
 
-	<section class="prose">
+	<section>
 		<h3>colorful buttons</h3>
 	</section>
 	<br />
@@ -126,11 +126,8 @@
 
 	<hr />
 
-	<section class="prose">
-		<h3><code>.plain</code> and <code>.icon_button</code></h3>
-	</section>
-	<br />
 	<section>
+		<h3><code>.plain</code> and <code>.icon_button</code></h3>
 		<Code
 			content={`<button class="plain">
 	+

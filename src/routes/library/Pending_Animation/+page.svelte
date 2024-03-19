@@ -53,11 +53,10 @@
 </div>`}
 			/>
 			<p>
-				with children <input class="inline" bind:value={turtleSlot} />
-				<button on:click={() => (turtleSlot = '🐢🐢🐢')} class="inline">🐢🐢🐢</button>
-				<button
-					on:click={() => (turtleSlot = (turtleSlot + turtleSlot).substring(0, 24))}
-					class="inline">* 2</button
+				with children <input bind:value={turtleSlot} />
+				<button on:click={() => (turtleSlot = '🐢🐢🐢')}>🐢🐢🐢</button>
+				<button on:click={() => (turtleSlot = (turtleSlot + turtleSlot).substring(0, 24))}
+					>* 2</button
 				>
 			</p>
 			<button on:click={() => (pendingAnimation1Running = !pendingAnimation1Running)}>
@@ -91,14 +90,14 @@
 			<p>
 				with
 				<code
-					>running={'{'}<button class="inline" on:click={() => (frogsRunning = !frogsRunning)}
+					>running={'{'}<button on:click={() => (frogsRunning = !frogsRunning)}
 						>{frogsRunning}</button
 					>{'}'}</code
 				>
 			</p>
 			<p>
-				and children <input class="inline" bind:value={turtleSlot2a} />
-				<input class="inline" bind:value={turtleSlot2b} />
+				and children <input bind:value={turtleSlot2a} />
+				<input bind:value={turtleSlot2b} />
 			</p>
 			<Pending_Animation running={frogsRunning}>
 				{#snippet children(index)}

@@ -28,7 +28,7 @@
 </script>
 
 <Tome_Detail {tome}>
-	<section class="prose">
+	<section>
 		<h1 title="--size_xl3">h1</h1>
 		<h2 title="--size_xl2">h2</h2>
 		<h3 title="--size_xl">h3</h3>
@@ -43,13 +43,7 @@
 		<details>
 			<summary>show code</summary>
 			<Code
-				content={`<section class="prose">
-<p>
-	Fuz has app-like markup semantics by default, which does a hard CSS reset including removing
-	all padding and margin. The following document-like markup style is opt-in with the <Tome_Link
-		name="prose"
-	/> class.
-</p>
+				content={`<section>
 <h1 title="--size_xl3">h1</h1>
 <h2 title="--size_xl2">h2</h2>
 <h3 title="--size_xl">h3</h3>
@@ -120,7 +114,7 @@
 		</div>
 	</section>
 	<!-- <section> 'text_disabled' 'text_active'</section> -->
-	<section class="prose">
+	<section>
 		<h3>
 			<Mdn_Link href="Web/CSS/line-height">line-height</Mdn_Link> variables
 		</h3>

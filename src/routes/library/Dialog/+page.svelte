@@ -128,7 +128,7 @@
 					<p>
 						This is a <code>Dialog</code> with
 						<code
-							>layout="<select class="inline" bind:value={selected_layout}
+							>layout="<select bind:value={selected_layout}
 								>{#each dialog_layouts as layout}
 									<option value={layout}>{layout}</option>
 								{/each}
@@ -143,7 +143,7 @@
 					<p>
 						This is a <code>Dialog</code> with
 						<code
-							>layout="<select class="inline" bind:value={selected_layout}
+							>layout="<select bind:value={selected_layout}
 								>{#each dialog_layouts as layout}
 									<option value={layout}>{layout}</option>
 								{/each}
@@ -158,14 +158,12 @@
 					<Alert status="error">eek a bug! unknown layout "{selected_layout}"</Alert>
 				{/if}
 				<p>
-					<button class="inline" on:click={() => add_item()}>add item</button>
-					<button class="inline" disabled={!items.length} on:click={() => reset_items()}
-						>remove all</button
-					>
+					<button on:click={() => add_item()}>add item</button>
+					<button disabled={!items.length} on:click={() => reset_items()}>remove all</button>
 				</p>
 				{#each items as item (item)}
 					<p transition:slide>
-						<button class="inline" on:click={() => remove_item(item)}>✕</button>
+						<button on:click={() => remove_item(item)}>✕</button>
 						new stuff appears {#if selected_layout === 'page'}gracefully{:else if selected_layout === 'centered'}ungracefully{/if}
 					</p>
 				{/each}
