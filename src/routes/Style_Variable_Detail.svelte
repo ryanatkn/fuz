@@ -17,11 +17,11 @@
 		<div class="name"><code>--{variable.name}</code></div>
 		{#if variable.summary}<blockquote>{variable.summary}</blockquote>{/if}
 		<label>
-			<small class="title">light</small>
+			<div class="title">light</div>
 			<input disabled={true} value={variable.light ?? ''} />
 		</label>
 		<label>
-			<small class="title">dark</small>
+			<div class="title">dark</div>
 			<input disabled={true} value={variable.dark ?? ''} />
 		</label>
 	</div>
