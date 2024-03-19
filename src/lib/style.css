@@ -25,26 +25,23 @@ which is generated from the default values in `@ryanatkn/fuz/variables.js`.
 	text-size-adjust: none;
 }
 
-html,
+:root,
 .themed {
 	background-color: var(--bg);
 	color: var(--text_color);
 	accent-color: var(--color_b_5);
 	line-height: var(--line_height);
-	tab-size: 2;
 }
 
-html.dark {
+:root.dark {
 	color-scheme: dark; /* override for the meta tag set by `createThemeSetupHtml` */
 }
 
 body {
 	min-height: 100vh;
-	font-size: 1.6rem; /* same value as the default `--size_md`, but this one shouldn't vary */
+	font-size: 1.6rem; /* matched to `font-size: 62.5%` and same value as the default `--size_md`, but this one shouldn't vary */
 	font-family: var(--font_family_sans);
-	/* TODO BLOCK  */
-	/* line-height: var(--line_height_4); */
-	overflow-wrap: break-word; /* @see https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-wrap#break-word */
+	tab-size: 2; /* TODO var */
 }
 
 ::selection {
@@ -159,41 +156,48 @@ ol {
 	list-style: decimal;
 }
 
-:is(h1, h2, h3, h4, h5, h6) {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
 	line-height: var(--line_height_3);
 	text-wrap: balance; /* @see https://developer.mozilla.org/en-US/docs/Web/CSS/text-wrap#balance */
 	/* TODO use this pattern elsewhere? provides API to components like `Mdn_Logo` */
 	font-size: var(--size);
+	font-weight: var(--font_weight);
+	overflow-wrap: break-word; /* @see https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-wrap#break-word */
 }
 
 h1 {
 	--size: var(--size_xl3);
-	font-weight: 300;
+	--font_weight: 300;
 	margin-bottom: var(--space_xl5);
 }
 h2 {
 	--size: var(--size_xl2);
-	font-weight: 400;
+	--font_weight: 400;
 	margin-bottom: var(--space_xl4);
 }
 h3 {
 	--size: var(--size_xl);
-	font-weight: 500;
+	--font_weight: 500;
 	margin-bottom: var(--space_xl3);
 }
 h4 {
 	--size: var(--size_lg);
-	font-weight: 700;
+	--font_weight: 700;
 	margin-bottom: var(--space_xl2);
 }
 h5 {
 	--size: var(--size_md);
-	font-weight: 900;
+	--font_weight: 900;
 	margin-bottom: var(--space_xl);
 }
 h6 {
 	--size: var(--size_sm);
-	font-weight: 600;
+	--font_weight: 600;
 	margin-bottom: var(--space_lg);
 	text-transform: uppercase;
 }
@@ -201,6 +205,12 @@ h6 {
 section {
 	/* TODO or more? */
 	margin-bottom: var(--space_xl4);
+}
+
+p {
+	/* TODO maybe apply to body? */
+	overflow-wrap: break-word; /* @see https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-wrap#break-word */
+	hyphens: auto;
 }
 
 /* checkboxes and radios are expected to be nested inside a `label`, thus no bottom margin */

@@ -26,6 +26,8 @@
 			{} as Record<string, Tome[]>,
 		),
 	);
+
+	// TODO BLOCK remove CSS below
 </script>
 
 {#each Object.entries(tomes_by_category) as [category, tomes] (category)}
@@ -50,19 +52,6 @@
 {/each}
 
 <style>
-	.library_menu,
-	menu {
-		width: 100%;
-	}
-	h6 {
-		padding-bottom: var(--space_sm);
-	}
-	h6:not(:first-child) {
-		margin-top: var(--space_xl);
-	}
-	li {
-		width: 100%;
-	}
 	/* TODO should be a CSS class or variable, maybe should be the default?
 	problem is it doesn't work on .bg, maybe needs a variant/modifier in the name? */
 	menu a:hover {

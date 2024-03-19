@@ -43,7 +43,7 @@
 				<Library_Menu {tomes} />
 				{#if tomes_related_to_selected}
 					<Library_Menu tomes={tomes_related_to_selected}>
-						{#snippet children(category)}<h6>related {category}</h6>{/snippet}
+						{#snippet children(category)}<h6 class="mb_0">related {category}</h6>{/snippet}
 					</Library_Menu>
 				{/if}
 			</div>

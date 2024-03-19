@@ -5,6 +5,48 @@
 	list-style: none;
 }
 
+.box {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+/* can be used to override the direction of a `.box` */
+.row {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+/* Makes flexboxes wrap. */
+.wrap {
+	flex-wrap: wrap;
+	white-space: initial;
+}
+
+/* Stops text from wrapping. */
+.nowrap {
+	flex-wrap: nowrap;
+	white-space: nowrap;
+}
+
+/* Formats content to wrap long strings and preserve displayed whitespace. */
+.formatted {
+	overflow: hidden;
+	white-space: break-spaces;
+}
+
+/* TODO rename these? use to be columns, maybe should be? */
+.width_md {
+	width: 100%;
+	max-width: var(--width_md);
+}
+.width_sm {
+	width: 100%;
+	max-width: var(--width_sm);
+}
+
 /* TODO maybe remove? */
 .selectable {
 	cursor: pointer;
@@ -130,20 +172,4 @@ By default it's opaque, resetting the background to the initial depth. */
 }
 a.chip {
 	font-weight: 700;
-}
-
-/* Formats content to wrap long strings and preserve displayed whitespace. */
-.formatted {
-	overflow: hidden;
-	white-space: break-spaces;
-}
-
-/* TODO rename these? use to be columns, maybe should be? */
-.width_md {
-	width: 100%;
-	max-width: var(--width_md);
-}
-.width_sm {
-	width: 100%;
-	max-width: var(--width_sm);
 }
