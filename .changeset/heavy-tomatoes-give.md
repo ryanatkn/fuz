@@ -2,4 +2,4 @@
 '@ryanatkn/fuz': patch
 ---
 
-reduce the need for prose for everything except lists and buttons
+remove `.prose` and add `.unstyled`

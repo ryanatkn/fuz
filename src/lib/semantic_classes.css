@@ -1,30 +1,8 @@
 /* @ryanatkn/fuz/semantic_classes.css */
 
-/*
-The name `.prose` was copied from Tailwind's @tailwindcss/typography -
-https://tailwindcss.com/docs/typography-plugin
-In Fuz it means "document-like typographic markup" distinct from the rest of the page's markup.
-An example is `ul`s - inside `.prose` they have visible bullet points, but they don't by default.
-MDN's documented content categories didn't match the intent:
-https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories
-*/
-.prose {
-	line-height: var(--line_height_4);
-	overflow-wrap: break-word; /* @see https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-wrap#break-word */
-}
-/* TODO keep prose for this? what about links? */
-.prose :is(ul, ol, menu) {
-	padding-left: var(--space_xl4);
-	list-style: initial;
-}
-.prose ol {
-	list-style: decimal;
-}
-.prose li {
-	display: list-item; /* reset from `block` */
-}
-.prose a {
-	display: inline;
+.unstyled:is(ul, ol, menu) {
+	padding-left: 0; /* TODO test specificity with utility classes, maybe change to set --padding_left */
+	list-style: none;
 }
 
 /* TODO maybe remove? */

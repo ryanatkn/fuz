@@ -88,7 +88,7 @@
 	{#if selected}
 		<menu
 			bind:this={el}
-			class="pane"
+			class="pane unstyled"
 			style:transform="translate3d({translate_x}px, {translate_y}px, 0)"
 			style:max-height="{layout.height}px">{@render menu()}</menu
 		>

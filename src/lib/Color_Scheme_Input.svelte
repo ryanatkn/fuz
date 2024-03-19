@@ -21,7 +21,7 @@
 
 <!-- TODO maybe support menubar aria
 https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/menubar_role -->
-<menu class="color_scheme_control">
+<menu class="color_scheme_control unstyled">
 	{#each color_schemes as color_scheme (color_scheme)}
 		{@const selected = color_scheme === $selected_color_scheme}
 		<button

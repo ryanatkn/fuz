@@ -33,7 +33,7 @@
 		<Library_Panel>
 			<div class="library_menu">
 				{#if children}{@render children(category)}{:else}<h6>{category}</h6>{/if}
-				<menu>
+				<menu class="unstyled">
 					{#each tomes as item (item.slug)}
 						<li role="none" transition:slide>
 							<a

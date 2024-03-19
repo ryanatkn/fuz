@@ -6,6 +6,8 @@
 	const LIBRARY_ITEM_NAME = 'prose';
 
 	const tome = get_tome(LIBRARY_ITEM_NAME);
+
+	// TODO BLOCK either merge into `classes` or make a new page
 </script>
 
 <Tome_Detail {tome}>
@@ -68,28 +70,6 @@
 			<li>b</li>
 			<li>see</li>
 		</ol>
-	</section>
-	<div class="prose">
-		<section>
-			<h3><code>a</code> links are inline inside <code>.prose</code></h3>
-		</section>
-	</div>
-	<section class="prose">
-		<p>
-			this <a title="a demo link" href="https://www.fuz.dev/.well-known/package.json">link</a> is inline
-		</p>
-	</section>
-	<div class="prose">
-		<section>
-			<h3><code>a</code> without a <code>.prose</code> ancestor</h3>
-		</section>
-	</div>
-	<section>
-		<p>
-			outside of <code>.prose</code>
-			<a title="a demo link" href="https://www.fuz.dev/.well-known/package.json">links</a> are normally
-			blocks
-		</p>
 	</section>
 </Tome_Detail>
 

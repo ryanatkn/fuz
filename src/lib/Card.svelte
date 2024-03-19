@@ -25,7 +25,7 @@
 	const below = $derived(align === 'below');
 
 	const fallback_icon = $derived(link ? '🔗' : '🪧');
-	const final_icon = $derived(icon ?? fallback_icon);
+	const final_icon: string | Snippet = $derived(icon ?? fallback_icon);
 </script>
 
 <svelte:element

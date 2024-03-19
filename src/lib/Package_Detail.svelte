@@ -150,7 +150,7 @@
 	</section>
 	{#if modules && pkg.repo_url}
 		<section>
-			<menu>
+			<menu class="unstyled">
 				{#each modules as module_name, i (module_name)}
 					{@const source_url = to_source_url(pkg.repo_url, module_name)}
 					{@const exports_key = pkg_exports_keys?.[i]}

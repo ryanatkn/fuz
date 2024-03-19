@@ -42,6 +42,9 @@ body {
 	min-height: 100vh;
 	font-size: 1.6rem; /* same value as the default `--size_md`, but this one shouldn't vary */
 	font-family: var(--font_family_sans);
+	/* TODO BLOCK  */
+	/* line-height: var(--line_height_4); */
+	overflow-wrap: break-word; /* @see https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-wrap#break-word */
 }
 
 ::selection {
@@ -119,7 +122,6 @@ pre > code {
 }
 
 a {
-	display: flex;
 	cursor: pointer;
 	--color: var(--link_color);
 	color: var(--color);
@@ -151,10 +153,10 @@ a.selected:active {
 ul,
 ol,
 menu {
-	list-style: none;
+	padding-left: var(--space_xl4);
 }
-li {
-	display: block; /* reverted by .prose */
+ol {
+	list-style: decimal;
 }
 
 :is(h1, h2, h3, h4, h5, h6) {

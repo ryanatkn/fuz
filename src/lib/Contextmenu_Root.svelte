@@ -308,7 +308,7 @@
 <!-- TODO Maybe animate a subtle highlight around the contextmenu as it appears? -->
 {#if contextmenu.opened}
 	<menu
-		class="contextmenu pane"
+		class="contextmenu unstyled pane"
 		role="dialog"
 		tabindex="-1"
 		bind:this={el}

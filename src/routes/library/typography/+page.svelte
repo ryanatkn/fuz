@@ -4,7 +4,6 @@
 	import Font_Weight_Control from '$routes/Font_Weight_Control.svelte';
 	import Font_Size_Control from '$routes/Font_Size_Control.svelte';
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
-	import Tome_Link from '$lib/Tome_Link.svelte';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
 	import {default_variables} from '$lib/variables.js';
 	import {get_tome} from '$lib/tome.js';
@@ -30,12 +29,6 @@
 
 <Tome_Detail {tome}>
 	<section class="prose">
-		<p>
-			Fuz has app-like markup semantics by default, which does a hard CSS reset including removing
-			all padding and margin. The following document-like markup style is opt-in with the <Tome_Link
-				name="prose"
-			/> class.
-		</p>
 		<h1 title="--size_xl3">h1</h1>
 		<h2 title="--size_xl2">h2</h2>
 		<h3 title="--size_xl">h3</h3>

@@ -28,7 +28,7 @@
 	const selected_theme_name = $derived($selected_theme?.name);
 </script>
 
-<menu class="theme_input">
+<menu class="theme_input unstyled">
 	{#each themes as theme (theme.name)}
 		<!-- TODO @multiple proper equality check, won't work when we allow editing, need an id or unique names and a deep equality check -->
 		{@const selected = theme.name === selected_theme_name}
