@@ -152,5 +152,66 @@
 		<section>section</section>
 	</div>
 	<hr />
+	<section>
+		<h3><code>ul</code></h3>
+	</section>
+	<section>
+		<ul>
+			<li>a</li>
+			<li>b</li>
+			<li>see</li>
+		</ul>
+	</section>
+	<section>
+		<h3><code>ul</code> with <code>.unstyled</code></h3>
+	</section>
+	<section>
+		<ul class="unstyled">
+			<li>a</li>
+			<li>b</li>
+			<li>see</li>
+		</ul>
+	</section>
+	<section>
+		<h3><code>ol</code></h3>
+	</section>
+	<section>
+		<ol>
+			<li>one</li>
+			<li>two</li>
+			<li>etc</li>
+		</ol>
+	</section>
+	<section>
+		<h3><code>ol</code> with <code>.unstyled</code></h3>
+	</section>
+	<section>
+		<ol class="unstyled">
+			<li>one</li>
+			<li>two</li>
+			<li>etc</li>
+		</ol>
+	</section>
+	<section>
+		<h3><code>menu</code></h3>
+	</section>
+	<section>
+		<menu>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+		</menu>
+	</section>
+	<section>
+		<h3><code>menu</code> with <code>.unstyled</code></h3>
+	</section>
+	<section>
+		<menu class="unstyled">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+		</menu>
+	</section>
+	<hr />
 	<div class="prose">TODO more!</div>
 </Tome_Detail>

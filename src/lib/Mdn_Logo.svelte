@@ -7,7 +7,7 @@
 	}
 
 	const {
-		size = 'var(--size, var(--size_md))',
+		size = 'var(--size, var(--size_sm))',
 		fill = '#8cb4ff',
 		label = 'GitHub icon',
 		attrs,

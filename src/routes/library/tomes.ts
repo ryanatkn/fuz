@@ -7,7 +7,6 @@ import classes from '$routes/library/classes/+page.svelte';
 import typography from '$routes/library/typography/+page.svelte';
 import themes from '$routes/library/themes/+page.svelte';
 import variables from '$routes/library/variables/+page.svelte';
-import prose from '$routes/library/prose/+page.svelte';
 import layout from '$routes/library/layout/+page.svelte';
 import light_and_shadow from '$routes/library/light_and_shadow/+page.svelte';
 import borders from '$routes/library/borders/+page.svelte';
@@ -75,7 +74,7 @@ export const tomes: Tome[] = [
 		pathname: '',
 		category: 'styles',
 		component: forms,
-		related: ['buttons', 'elements', 'prose', 'borders', 'Hue_Input'],
+		related: ['buttons', 'elements', 'borders', 'Hue_Input'],
 	},
 	{
 		name: 'elements',
@@ -83,7 +82,7 @@ export const tomes: Tome[] = [
 		pathname: '',
 		category: 'styles',
 		component: elements,
-		related: ['buttons', 'forms', 'classes', 'prose', 'typography', 'borders', 'layout'],
+		related: ['buttons', 'forms', 'classes', 'typography', 'borders', 'layout'],
 	},
 	{
 		name: 'classes',
@@ -94,20 +93,12 @@ export const tomes: Tome[] = [
 		related: ['elements'],
 	},
 	{
-		name: 'prose',
-		slug: 'prose',
-		pathname: '',
-		category: 'styles',
-		component: prose,
-		related: ['elements', 'forms', 'typography'],
-	},
-	{
 		name: 'typography',
 		slug: 'typography',
 		pathname: '',
 		category: 'styles',
 		component: typography,
-		related: ['themes', 'elements', 'prose'],
+		related: ['themes', 'elements'],
 	},
 	{
 		name: 'borders',
