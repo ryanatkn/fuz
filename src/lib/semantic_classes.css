@@ -12,28 +12,6 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories
 	line-height: var(--line_height_4);
 	overflow-wrap: break-word; /* @see https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-wrap#break-word */
 }
-.prose :is(h1, h2, h3, h4, h5, h6) {
-	line-height: var(--line_height_3);
-	text-wrap: balance; /* @see https://developer.mozilla.org/en-US/docs/Web/CSS/text-wrap#balance */
-}
-.prose h1 {
-	margin-bottom: var(--space_xl5);
-}
-.prose h2 {
-	margin-bottom: var(--space_xl4);
-}
-.prose h3 {
-	margin-bottom: var(--space_xl3);
-}
-.prose h4 {
-	margin-bottom: var(--space_xl2);
-}
-.prose h5 {
-	margin-bottom: var(--space_xl);
-}
-.prose h6 {
-	margin-bottom: var(--space_lg);
-}
 .prose :is(ul, ol, menu) {
 	padding-left: var(--space_xl4);
 	list-style: initial;

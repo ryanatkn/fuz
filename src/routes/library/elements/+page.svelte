@@ -128,5 +128,21 @@
 		</aside>
 	</div>
 	<hr />
+	<div class="prose">
+		<h3>
+			<Mdn_Link href="Web/HTML/Element/footer">header</Mdn_Link>
+		</h3>
+		<Code content={`<header>header</header>`} />
+		<header>header</header>
+	</div>
+	<hr />
+	<div class="prose">
+		<h3>
+			<Mdn_Link href="Web/HTML/Element/footer">footer</Mdn_Link>
+		</h3>
+		<Code content={`<footer>footer</footer>`} />
+		<footer>footer</footer>
+	</div>
+	<hr />
 	<div class="prose">TODO more!</div>
 </Tome_Detail>

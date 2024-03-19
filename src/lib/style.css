@@ -157,47 +157,42 @@ li {
 	display: block; /* reverted by .prose */
 }
 
+:is(h1, h2, h3, h4, h5, h6) {
+	line-height: var(--line_height_3);
+	text-wrap: balance; /* @see https://developer.mozilla.org/en-US/docs/Web/CSS/text-wrap#balance */
+	/* TODO use this pattern elsewhere? provides API to components like `Mdn_Logo` */
+	font-size: var(--size);
+}
+
 h1 {
 	--size: var(--size_xl3);
-	font-size: var(
-		--size
-	); /* TODO use this pattern elsewhere? provides API to components like `Mdn_Logo` */
 	font-weight: 300;
+	margin-bottom: var(--space_xl5);
 }
 h2 {
 	--size: var(--size_xl2);
-	font-size: var(
-		--size
-	); /* TODO use this pattern elsewhere? provides API to components like `Mdn_Logo` */
 	font-weight: 400;
+	margin-bottom: var(--space_xl4);
 }
 h3 {
 	--size: var(--size_xl);
-	font-size: var(
-		--size
-	); /* TODO use this pattern elsewhere? provides API to components like `Mdn_Logo` */
 	font-weight: 500;
+	margin-bottom: var(--space_xl3);
 }
 h4 {
 	--size: var(--size_lg);
-	font-size: var(
-		--size
-	); /* TODO use this pattern elsewhere? provides API to components like `Mdn_Logo` */
 	font-weight: 700;
+	margin-bottom: var(--space_xl2);
 }
 h5 {
 	--size: var(--size_md);
-	font-size: var(
-		--size
-	); /* TODO use this pattern elsewhere? provides API to components like `Mdn_Logo` */
 	font-weight: 900;
+	margin-bottom: var(--space_xl);
 }
 h6 {
 	--size: var(--size_sm);
-	font-size: var(
-		--size
-	); /* TODO use this pattern elsewhere? provides API to components like `Mdn_Logo` */
 	font-weight: 600;
+	margin-bottom: var(--space_lg);
 	text-transform: uppercase;
 }
 

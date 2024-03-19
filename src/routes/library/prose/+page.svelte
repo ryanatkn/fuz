@@ -91,46 +91,6 @@
 			blocks
 		</p>
 	</section>
-	<div class="prose">
-		<section>
-			<h3>headings and other elements have no margin by default:</h3>
-		</section>
-	</div>
-	<section>
-		<h1>h1</h1>
-		<h2>h2</h2>
-		<h3>h3</h3>
-		<h4>h4</h4>
-		<h5>h5</h5>
-		<h6>h6</h6>
-		<p>p</p>
-		<small>small</small>
-		<p>p <sub>sub</sub> p <sup>sup</sup> p</p>
-		<blockquote>blockquote</blockquote>
-		<aside>aside</aside>
-		<button>button</button>
-		<footer>footer</footer>
-	</section>
-	<div class="prose">
-		<section>
-			<h3>but margin is added back inside <code>.prose</code>:</h3>
-		</section>
-	</div>
-	<section class="prose">
-		<h1>h1</h1>
-		<h2>h2</h2>
-		<h3>h3</h3>
-		<h4>h4</h4>
-		<h5>h5</h5>
-		<h6>h6</h6>
-		<p>p</p>
-		<small>small</small>
-		<p>p <sub>sub</sub> p <sup>sup</sup> p</p>
-		<blockquote>blockquote</blockquote>
-		<aside>aside</aside>
-		<button>button</button>
-		<footer>footer</footer>
-	</section>
 </Tome_Detail>
 
 <style>
