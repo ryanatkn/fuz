@@ -648,6 +648,7 @@ export const icon_size_xl: Style_Variable = {name: 'icon_size_xl', light: '128px
 export const icon_size_xl2: Style_Variable = {name: 'icon_size_xl2', light: '196px'};
 
 /* durations */
+// TODO maybe change the scale from xs-xl, and add an xs here around 0.04s or 0.03s
 export const duration_1: Style_Variable = {name: 'duration_1', light: '0.08s'};
 export const duration_2: Style_Variable = {name: 'duration_2', light: '0.2s'};
 export const duration_3: Style_Variable = {name: 'duration_3', light: '0.5s'};
