@@ -351,7 +351,6 @@
 		z-index: var(--contextmenu_z_index, 200);
 		max-width: var(--contextmenu_width);
 		width: 100%;
-		padding-left: 0; /* TODO @multiple allows nesting in `.prose`, use `.unprose` if/when it's added */
 		/* TODO fix for iOS */
 		-webkit-touch-callout: none;
 		-webkit-user-select: none;

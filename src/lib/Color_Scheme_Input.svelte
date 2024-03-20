@@ -50,7 +50,6 @@ https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/menubar_ro
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
-		padding-left: 0; /* allow nesting in .prose */
 	}
 	.content {
 		display: flex;
