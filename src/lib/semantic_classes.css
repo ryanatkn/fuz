@@ -1,10 +1,5 @@
 /* @ryanatkn/fuz/semantic_classes.css */
 
-.unstyled:is(ul, ol, menu) {
-	padding-left: 0; /* TODO test specificity with utility classes, maybe change to set --padding_left */
-	list-style: none;
-}
-
 .box {
 	display: flex;
 	flex-direction: column;
