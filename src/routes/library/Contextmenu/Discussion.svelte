@@ -21,10 +21,11 @@
 		browsers.
 	</p>
 	<p>
-		When you rightclick or longpress, we search for behaviors defined with <code>Contextmenu</code> starting
-		from the target element up to the root of the DOM tree. If any behaviors are found, the Fuz contextmenu
-		opens, with the caveats below. The contextmenu displays the available behaviors which you can then
-		activate. If no behaviors are found, the system contextmenu opens.
+		When you rightclick or longpress inside a <code>Contextmenu_Root</code>, it searches for
+		behaviors defined with <code>Contextmenu</code> starting from the target element up to the root of
+		the DOM tree. If any behaviors are found, the Fuz contextmenu opens, with the caveats below. The
+		contextmenu displays the available behaviors which you can then activate. If no behaviors are found,
+		the system contextmenu opens.
 	</p>
 	<h4>Devices with a mouse</h4>
 	<ul>
@@ -79,8 +80,8 @@
 	</p>
 	<p>
 		Balancing these two concerns is going to be an ongoing challenge, and my current belief is that
-		the contextmenu is too useful and powerful to ignore. I'm open to critical feedback, and we'll
-		do what we can to minimize the harmful effects of choices like this.
+		the contextmenu is too useful and powerful to ignore. I'm open to critical feedback, and I'll do
+		what I can to minimize the harmful effects of choices like this.
 	</p>
 	<p>Mitigations to the platform behavior change:</p>
 	<ul>
