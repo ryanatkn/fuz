@@ -17,7 +17,9 @@
 	let el: HTMLElement | undefined | null = $state();
 
 	$effect(() => {
-		el && to && move(el, to);
+		if (el && to) {
+			move(el, to);
+		}
 	});
 
 	let moved = $state(false);
