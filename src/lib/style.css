@@ -170,7 +170,7 @@ h6 {
 	/* TODO use this pattern elsewhere? provides API to components like `Mdn_Logo` */
 	font-size: var(--size);
 	font-weight: var(--font_weight);
-	overflow-wrap: break-word; /* @see https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-wrap#break-word */
+	overflow-wrap: break-word;
 }
 
 h1 {
@@ -206,7 +206,7 @@ h6 {
 }
 
 p {
-	overflow-wrap: break-word; /* @see https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-wrap#break-word */
+	overflow-wrap: break-word;
 }
 
 /* checkboxes and radios are expected to be nested inside a `label`, thus no bottom margin */
