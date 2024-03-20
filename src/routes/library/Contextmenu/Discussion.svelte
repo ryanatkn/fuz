@@ -11,7 +11,7 @@
 	<p>
 		The <code>Contextmenu</code> overrides the system contextmenu to provide capabilities specific
 		to your app.
-		<a href="#motivation">These docs</a> explain why Fuz breaks web platform expectations.
+		<a href="#motivation">The motivation docs</a> explain why Fuz breaks web platform expectations.
 	</p>
 	<p>
 		On touch devices, we detect tap-and-hold (aka longpress) instead of simply overriding the web's
