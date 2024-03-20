@@ -32,7 +32,7 @@
 	{#each themes as theme (theme.name)}
 		<!-- TODO @multiple proper equality check, won't work when we allow editing, need an id or unique names and a deep equality check -->
 		{@const selected = theme.name === selected_theme_name}
-		<li role="none">
+		<li class="row" role="none">
 			<button
 				type="button"
 				class="theme_button"
@@ -64,14 +64,7 @@
 </menu>
 
 <style>
-	.theme_input {
-		padding-left: 0; /* allow nesting in .prose */
-	}
 	.theme_button {
 		flex: 1;
-	}
-	li {
-		display: flex; /* allow nesting in .prose */
-		list-style: none; /* allow nesting in .prose */
 	}
 </style>
