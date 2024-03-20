@@ -445,9 +445,7 @@ export const text_active: Style_Variable = {
 };
 
 /* fonts */
-export const line_height: Style_Variable = {name: 'line_height', light: 'var(--line_height_5)'};
 export const line_height_1: Style_Variable = {name: 'line_height_1', light: '1'};
-export const line_height_2: Style_Variable = {name: 'line_height_2', light: '1.1'};
 export const line_height_3: Style_Variable = {name: 'line_height_3', light: '1.2'};
 export const line_height_4: Style_Variable = {name: 'line_height_4', light: '1.35'}; // TODO xs/sm/md/lg - but which is md, 1.35 or 1.5?
 export const line_height_5: Style_Variable = {name: 'line_height_5', light: '1.5'};
@@ -812,9 +810,7 @@ export const default_variables: Style_Variable[] = [
 	text_active,
 
 	/* fonts */
-	line_height,
 	line_height_1,
-	line_height_2,
 	line_height_3,
 	line_height_4,
 	line_height_5,

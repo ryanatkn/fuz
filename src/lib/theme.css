@@ -120,9 +120,7 @@
 	--text_3: hsl(var(--tint_hue), var(--tint_saturation), 48%);
 	--text_disabled: var(--text_3);
 	--text_active: hsl(var(--hue_a), 55%, 40%);
-	--line_height: var(--line_height_5);
 	--line_height_1: 1;
-	--line_height_2: 1.1;
 	--line_height_3: 1.2;
 	--line_height_4: 1.35;
 	--line_height_5: 1.5;

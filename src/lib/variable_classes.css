@@ -28,9 +28,6 @@ text
 	font-family: var(--font_family_mono);
 }
 
-.line_height {
-	line-height: var(--line_height);
-}
 .line_height_1 {
 	line-height: var(--line_height_1);
 }

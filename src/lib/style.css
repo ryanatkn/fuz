@@ -29,7 +29,7 @@ which is generated from the default values in `@ryanatkn/fuz/variables.js`.
 	background-color: var(--bg);
 	color: var(--text_color);
 	accent-color: var(--color_b_5);
-	line-height: var(--line_height);
+	line-height: var(--line_height_5);
 }
 
 :root.dark {
