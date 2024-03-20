@@ -23,8 +23,6 @@ type Activate_Result = Result<any, {message?: string}> | any;
 
 export type Item_State = Submenu_State | Entry_State;
 
-// TODO BLOCK set more of these properties to readonly?
-
 export class Entry_State {
 	readonly is_menu = false; // TODO rename to `type`?
 	readonly menu: Submenu_State | Root_Menu_State;
@@ -111,7 +109,6 @@ export class Contextmenu_Store {
 	}
 
 	open(params: Contextmenu_Params[], x: number, y: number): void {
-		console.log('open', params);
 		this.selections.length = 0;
 		this.opened = true;
 		this.x = x;
@@ -120,7 +117,6 @@ export class Contextmenu_Store {
 	}
 
 	close(): void {
-		console.log('close');
 		if (!this.opened) return;
 		this.reset_items(this.root_menu.items);
 		this.opened = false;
@@ -138,7 +134,6 @@ export class Contextmenu_Store {
 	}
 
 	activate(item: Item_State): boolean | Promise<Activate_Result> {
-		console.log(`activate item`, item);
 		if (item.is_menu) {
 			this.expand_selected();
 		} else {
@@ -181,9 +176,7 @@ export class Contextmenu_Store {
 						if (promise !== item.promise) return;
 						item.pending = false;
 						item.promise = null;
-						// TODO BLOCK shouldn't be needed but might be relying on this behavior for nonreactive properties
 					}));
-				// TODO BLOCK shouldn't be needed but might be relying on this behavior for nonreactive properties
 				return item.promise; // async path
 			}
 			this.close(); // synchronous path only
@@ -204,7 +197,6 @@ export class Contextmenu_Store {
 	 * Activates the selected entry, or if none, selects the first.
 	 */
 	select(item: Item_State): void {
-		console.log(`select item`, item);
 		if (this.selections[this.selections.length - 1] === item) return;
 		for (const s of this.selections) s.selected = false;
 		this.selections.length = 0;
@@ -213,14 +205,12 @@ export class Contextmenu_Store {
 			i.selected = true;
 			this.selections.unshift(i);
 		} while ((i = i.menu) && i.menu);
-		// TODO BLOCK shouldn't be needed but might be relying on this behavior for nonreactive properties
 	}
 
 	collapse_selected(): void {
 		if (this.selections.length <= 1) return;
 		const deselected = this.selections.pop()!;
 		deselected.selected = false;
-		// TODO BLOCK shouldn't be needed but might be relying on this behavior for nonreactive properties
 	}
 
 	expand_selected(): void {
@@ -229,7 +219,6 @@ export class Contextmenu_Store {
 		const selected = parent.items[0];
 		selected.selected = true;
 		this.selections.push(selected);
-		// TODO BLOCK shouldn't be needed but might be relying on this behavior for nonreactive properties
 	}
 
 	select_next(): void {
@@ -374,7 +363,6 @@ const query_contextmenu_params = (
 			});
 		}
 	}
-	console.log(`queried params`, params);
 	return params;
 };
 
