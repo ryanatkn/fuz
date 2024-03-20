@@ -19,10 +19,8 @@
 		because iOS does not support this web standard as of July 2023 as described in
 		<a href="https://bugs.webkit.org/show_bug.cgi?id=213953">this WebKit bug report</a>. The Fuz
 		implementation therefore has hacks that may cause corner case bugs on various devices and
-		browsers, and it breaks <Mdn_Link href="Web/API/Navigator/vibrate"
-			><code>navigator.vibrate</code></Mdn_Link
-		> on all mobile browsers that I've tested because it triggers the gesture on a timeout, not a user
-		action.
+		browsers, and it breaks <Mdn_Link href="Web/API/Navigator/vibrate">navigator.vibrate</Mdn_Link> on
+		all mobile browsers that I've tested because it triggers the gesture on a timeout, not a user action.
 	</p>
 	<p>
 		When you rightclick or longpress inside a <code>Contextmenu_Root</code>, it searches for
@@ -33,7 +31,10 @@
 	</p>
 	<h4>Devices with a mouse</h4>
 	<ul>
-		<li>rightclick opens the Fuz contextmenu and not the system contextmenu</li>
+		<li>
+			rightclick opens the Fuz contextmenu and not the system contextmenu except on
+			input/textarea/contenteditable
+		</li>
 		<li>rightclick on the Fuz contextmenu opens the system contextmenu</li>
 		<li>rightclick while holding Shift opens the system contextmenu</li>
 		<li>
@@ -60,7 +61,7 @@
 		</li>
 		<li>
 			gives haptic feedback on open with <Mdn_Link href="Web/API/Navigator/vibrate"
-				><code>navigator.vibrate</code></Mdn_Link
+				>navigator.vibrate</Mdn_Link
 			>
 			(currently broken, may remain so due to the iOS longpress workaround)
 		</li>
@@ -73,8 +74,8 @@
 		<li>aligning with the web platform and not breaking its standard behaviors</li>
 	</ol>
 	<p>
-		For #1, Fuz includes <a href="https://contextmenu.fuz.dev/">a custom contextmenu</a>. Like
-		Google Docs, when you right-click or tap-and-hold (aka longpress) on an element inside Fuz's
+		For #1, Fuz includes a custom contextmenu. Like Google Docs, when you right-click or
+		tap-and-hold (aka longpress) on an element inside Fuz's
 		<code>Contextmenu</code>, you'll see app-specific options and actions for your current context.
 	</p>
 	<p>
