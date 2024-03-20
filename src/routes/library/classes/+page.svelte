@@ -41,7 +41,7 @@
 	const variable_classes = [
 		'font_family_sans|mono',
 		'line_height',
-		'line_height_1-7',
+		'line_height_xs-xl',
 		'size_xs-xl9',
 		'icon_size_xs-xl2',
 		'text_1-3',

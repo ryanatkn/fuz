@@ -120,11 +120,11 @@
 	--text_3: hsl(var(--tint_hue), var(--tint_saturation), 48%);
 	--text_disabled: var(--text_3);
 	--text_active: hsl(var(--hue_a), 55%, 40%);
-	--line_height_1: 1;
-	--line_height_3: 1.2;
-	--line_height_4: 1.35;
-	--line_height_5: 1.5;
-	--line_height_7: 2;
+	--line_height_xs: 1;
+	--line_height_sm: 1.2;
+	--line_height_md: 1.35;
+	--line_height_lg: 1.5;
+	--line_height_xl: 2;
 	--font_family_sans: system-ui, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
 		'Noto Color Emoji'; /* @source https://kilianvalkhof.com/2022/css-html/your-css-reset-needs-text-size-adjust-probably/ */
 	--font_family_mono: ui-monospace, 'Fira Mono', monospace;

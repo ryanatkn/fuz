@@ -29,7 +29,7 @@ which is generated from the default values in `@ryanatkn/fuz/variables.js`.
 	background-color: var(--bg);
 	color: var(--text_color);
 	accent-color: var(--color_b_5);
-	line-height: var(--line_height_5);
+	line-height: var(--line_height_md);
 }
 
 :root.dark {
@@ -165,7 +165,7 @@ h3,
 h4,
 h5,
 h6 {
-	line-height: var(--line_height_3);
+	line-height: var(--line_height_sm);
 	text-wrap: balance; /* @see https://developer.mozilla.org/en-US/docs/Web/CSS/text-wrap#balance */
 	/* TODO use this pattern elsewhere? provides API to components like `Mdn_Logo` */
 	font-size: var(--size);

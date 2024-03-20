@@ -445,11 +445,11 @@ export const text_active: Style_Variable = {
 };
 
 /* fonts */
-export const line_height_1: Style_Variable = {name: 'line_height_1', light: '1'};
-export const line_height_3: Style_Variable = {name: 'line_height_3', light: '1.2'};
-export const line_height_4: Style_Variable = {name: 'line_height_4', light: '1.35'}; // TODO xs/sm/md/lg - but which is md, 1.35 or 1.5?
-export const line_height_5: Style_Variable = {name: 'line_height_5', light: '1.5'};
-export const line_height_7: Style_Variable = {name: 'line_height_7', light: '2'};
+export const line_height_xs: Style_Variable = {name: 'line_height_xs', light: '1'};
+export const line_height_sm: Style_Variable = {name: 'line_height_sm', light: '1.2'};
+export const line_height_md: Style_Variable = {name: 'line_height_md', light: '1.35'}; // TODO xs/sm/md/lg - but which is md, 1.35 or 1.5?
+export const line_height_lg: Style_Variable = {name: 'line_height_lg', light: '1.5'};
+export const line_height_xl: Style_Variable = {name: 'line_height_xl', light: '2'};
 export const font_family_sans: Style_Variable = {
 	name: 'font_family_sans',
 	light: "system-ui, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'",
@@ -809,11 +809,11 @@ export const default_variables: Style_Variable[] = [
 	text_active,
 
 	/* fonts */
-	line_height_1,
-	line_height_3,
-	line_height_4,
-	line_height_5,
-	line_height_7,
+	line_height_xs,
+	line_height_sm,
+	line_height_md,
+	line_height_lg,
+	line_height_xl,
 	font_family_sans,
 	font_family_mono,
 

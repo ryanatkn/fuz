@@ -28,20 +28,20 @@ text
 	font-family: var(--font_family_mono);
 }
 
-.line_height_1 {
-	line-height: var(--line_height_1);
+.line_height_xs {
+	line-height: var(--line_height_xs);
 }
-.line_height_3 {
-	line-height: var(--line_height_3);
+.line_height_sm {
+	line-height: var(--line_height_sm);
 }
-.line_height_4 {
-	line-height: var(--line_height_4);
+.line_height_md {
+	line-height: var(--line_height_md);
 }
-.line_height_5 {
-	line-height: var(--line_height_5);
+.line_height_lg {
+	line-height: var(--line_height_lg);
 }
-.line_height_7 {
-	line-height: var(--line_height_7);
+.line_height_xl {
+	line-height: var(--line_height_xl);
 }
 
 .size_xs {
