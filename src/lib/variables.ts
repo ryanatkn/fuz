@@ -893,7 +893,7 @@ export const default_variables: Style_Variable[] = [
 
 	/* border radii */
 	// TODO hardcoded values - maybe have `radius_xl` or `radius_lg` be 50%?
-	border_radius,
+	border_radius, // TODO maybe this should be deleted, and they always provide a fallback instead?
 	radius_xl,
 	radius_lg,
 	radius_md,
@@ -928,8 +928,6 @@ export const default_variables: Style_Variable[] = [
 	shadow_inset_active,
 
 	/* icons */
-	/* these decrease by the golden ratio, rounded to the nearest pixel,
-	and they're insensitive to font size (`px` not `rem`) */
 	icon_size,
 	icon_size_xs,
 	icon_size_sm,
@@ -948,7 +946,6 @@ export const default_variables: Style_Variable[] = [
 
 	/* transparencies */
 	// TODO add one for 7 total?
-	/* TODO maybe delete these? they do help with standardizing/consistency */
 	fade_1,
 	fade_2,
 	fade_3,
