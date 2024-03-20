@@ -15,6 +15,12 @@
 
 <Tome_Detail {tome}>
 	<section>
+		<p>
+			This is a component related to <a
+				href="https://github.com/ryanatkn/gro/blob/main/src/lib/docs/package_json.md#public-packages"
+				>Gro's public packages</a
+			> features.
+		</p>
 		<Code content={`import Package_Detail from '@ryanatkn/fuz/Package_Detail.svelte';`} lang="ts" />
 		<Code content={`<Package_Detail {pkg} />`} />
 	</section>
