@@ -171,7 +171,6 @@ h6 {
 	font-size: var(--size);
 	font-weight: var(--font_weight);
 	overflow-wrap: break-word; /* @see https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-wrap#break-word */
-	hyphens: auto;
 }
 
 h1 {
@@ -208,7 +207,6 @@ h6 {
 
 p {
 	overflow-wrap: break-word; /* @see https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-wrap#break-word */
-	hyphens: auto;
 }
 
 /* checkboxes and radios are expected to be nested inside a `label`, thus no bottom margin */

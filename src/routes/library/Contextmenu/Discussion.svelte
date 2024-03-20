@@ -60,6 +60,50 @@
 			(currently broken, may remain so due to the iOS longpress workaround)
 		</li>
 	</ul>
+	<hr />
+	<h3>Motivation</h3>
+	<p>Fuz takes two things very seriously, in no particular order:</p>
+	<ol>
+		<li>giving users a powerful and customizable UX</li>
+		<li>aligning with the web platform and not breaking its standard behaviors</li>
+	</ol>
+	<p>
+		For #1, Fuz includes <a href="https://contextmenu.fuz.dev/">a custom contextmenu</a>. Like
+		Google Docs, when you right-click or tap-and-hold (aka longpress) on an element inside Fuz's
+		<code>Contextmenu</code>, you'll see app-specific options and actions for your current context.
+	</p>
+	<p>
+		This is a powerful UX pattern, but it violates #2. The Fuz contextmenu breaks the normal browser
+		behavior of showing the system contextmenu and device-specific behaviors like selecting text on
+		a longpress.
+	</p>
+	<p>
+		Balancing these two concerns is going to be an ongoing challenge, and my current belief is that
+		the contextmenu is too useful and powerful to ignore. We're open to constructive feedback, and
+		we'll do what we can to minimize the harmful effects of choices like this.
+	</p>
+	<p>Mitigations to the platform behavior change:</p>
+	<ul>
+		<li>
+			The Fuz contextmenu does not open on elements that allow clipboard pasting like inputs,
+			textareas, and contenteditables.
+		</li>
+		<li>To bypass the Fuz contextmenu on a device with a keyboard, hold the Shift key.</li>
+		<li>
+			To bypass the Fuz contextmenu on a touch device, like to select text, tap one extra time
+			before your longpress. This means double-tap-and-hold should behave the same as tap-and-hold
+			on standard web pages.
+		</li>
+		<li>
+			Triggering the contextmenu inside of the Fuz contextmenu shows your system contextmenu. This
+			means you can either double-right-click or longpress twice to access your system contextmenu
+			as an alternative to holding Shift or double-tap-and-hold, However a caveat is that the target
+			of your action will be some element inside the Fuz contextmenu, so to select text or access a
+			link's system contextmenu on a touch device, you must use double-tap-and-hold. When you open
+			the Fuz contextmenu on a link, you'll see the link again in the menu under your pointer by
+			default, so to access your system's functionality on links, tap-and-hold twice.
+		</li>
+	</ul>
 </section>
 
 <style>
