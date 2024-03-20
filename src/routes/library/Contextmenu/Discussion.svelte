@@ -79,8 +79,8 @@
 	</p>
 	<p>
 		Balancing these two concerns is going to be an ongoing challenge, and my current belief is that
-		the contextmenu is too useful and powerful to ignore. We're open to constructive feedback, and
-		we'll do what we can to minimize the harmful effects of choices like this.
+		the contextmenu is too useful and powerful to ignore. I'm open to critical feedback, and we'll
+		do what we can to minimize the harmful effects of choices like this.
 	</p>
 	<p>Mitigations to the platform behavior change:</p>
 	<ul>
