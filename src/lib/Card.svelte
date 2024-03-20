@@ -2,6 +2,8 @@
 	import {page} from '$app/stores';
 	import type {Snippet} from 'svelte';
 
+	// TODO think through Alert+Card APIs together, one can be a button and the other a link atm
+
 	interface Props {
 		tag?: string | undefined;
 		href?: string | undefined;
