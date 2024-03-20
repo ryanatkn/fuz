@@ -29,6 +29,10 @@
 			<Cat_Contextmenu name={cat.name} icon={cat.icon} position={cat.position} {act} />
 		{/each}
 		{#if !cat_to_call_to_adventure}
+			<Contextmenu_Entry run={() => act({type: 'cat_be_or_do', name: null, position: 'adventure'})}>
+				{#snippet icon()}🌄{/snippet}
+				do
+			</Contextmenu_Entry>
 			<Contextmenu_Entry run={() => act({type: 'call_cats_home'})}>
 				{#snippet icon()}🐈‍⬛{/snippet}
 				leave
