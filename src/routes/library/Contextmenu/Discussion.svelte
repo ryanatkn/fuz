@@ -18,7 +18,10 @@
 		because iOS does not support this web standard as of July 2023 as described in
 		<a href="https://bugs.webkit.org/show_bug.cgi?id=213953">this WebKit bug report</a>. The Fuz
 		implementation therefore has hacks that may cause corner case bugs on various devices and
-		browsers.
+		browsers, and it breaks <Mdn_Link href="Web/API/Navigator/vibrate"
+			><code>navigator.vibrate</code></Mdn_Link
+		> on all mobile browsers that I've tested because it triggers the gesture on a timeout, not a user
+		action.
 	</p>
 	<p>
 		When you rightclick or longpress inside a <code>Contextmenu_Root</code>, it searches for
@@ -83,7 +86,7 @@
 		the contextmenu is too useful and powerful to ignore. I'm open to critical feedback, and I'll do
 		what I can to minimize the harmful effects of choices like this.
 	</p>
-	<p>Mitigations to the platform behavior change:</p>
+	<p>Mitigations:</p>
 	<ul>
 		<li>
 			The Fuz contextmenu does not open on elements that allow clipboard pasting like inputs,
