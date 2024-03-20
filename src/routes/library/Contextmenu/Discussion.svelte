@@ -1,6 +1,8 @@
 <script lang="ts">
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
 
+	// TODO BLOCK this is a good usecase for the automatic library heading links in an "on this page" righthand sidebar
+
 	// TODO BLOCK the flip animations caused the contextmenu wrapper of the children to be nested, make sure it doesn't mess up the contextmenu behavior
 </script>
 
@@ -9,8 +11,7 @@
 	<p>
 		The <code>Contextmenu</code> overrides the system contextmenu to provide capabilities specific
 		to your app.
-		<a href="https://www.felt.dev/docs/guide/user/known-issues">These docs</a> explain why Fuz breaks
-		web platform expectations.
+		<a href="#motivation">These docs</a> explain why Fuz breaks web platform expectations.
 	</p>
 	<p>
 		On touch devices, we detect tap-and-hold (aka longpress) instead of simply overriding the web's
@@ -25,10 +26,10 @@
 	</p>
 	<p>
 		When you rightclick or longpress inside a <code>Contextmenu_Root</code>, it searches for
-		behaviors defined with <code>Contextmenu</code> starting from the target element up to the root of
-		the DOM tree. If any behaviors are found, the Fuz contextmenu opens, with the caveats below. The
-		contextmenu displays the available behaviors which you can then activate. If no behaviors are found,
-		the system contextmenu opens.
+		behaviors defined with <code>Contextmenu</code> starting from the target element up to the root.
+		If any behaviors are found, the Fuz contextmenu opens, with the caveats below. The contextmenu displays
+		the available behaviors which you can then activate. If no behaviors are found, the system contextmenu
+		opens.
 	</p>
 	<h4>Devices with a mouse</h4>
 	<ul>
@@ -65,7 +66,7 @@
 		</li>
 	</ul>
 	<hr />
-	<h3>Motivation</h3>
+	<h3 id="motivation">Motivation</h3>
 	<p>Fuz takes two things very seriously, in no particular order:</p>
 	<ol>
 		<li>giving users a powerful and customizable UX</li>
