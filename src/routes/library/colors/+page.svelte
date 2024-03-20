@@ -70,7 +70,7 @@
 			specialized states for elements or color values like "blue". Each of the 7 hues has 9 color
 			values, handling most cases, and the base colors can be customized with <Mdn_Link
 				href="Web/CSS/color_value/color-mix">the <code>color-mix</code> CSS function</Mdn_Link
-			> to handle many more cases.
+			>.
 		</p>
 		<p>
 			Variants may be expanded when/if Fuz includes a Vite plugin or other build tooling for

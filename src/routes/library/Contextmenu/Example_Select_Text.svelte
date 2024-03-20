@@ -30,9 +30,9 @@
 	let value = $state('');
 
 	// TODO very hacky
-	const text1 = `If a contextmenu is triggered on selected text, it includes a Copy text entry by default.  Try selecting text and then opening the contextmenu on it.`;
-	const text2 = `If a contextmenu is triggered on selected text, it includes a Copy text entry by default.\n\n\nTry selecting text and then opening the contextmenu on it.`;
-	const text3 = `If a contextmenu is triggered on selected text, it includes a Copy text entry by default.
+	const text1 = `If a contextmenu is triggered on selected text, it includes a Copy text entry.  Try selecting text and then opening the contextmenu on it.`;
+	const text2 = `If a contextmenu is triggered on selected text, it includes a Copy text entry.\n\n\nTry selecting text and then opening the contextmenu on it.`;
+	const text3 = `If a contextmenu is triggered on selected text, it includes a Copy text entry.
 
 Try selecting text and then opening the contextmenu on it.`;
 
@@ -43,13 +43,13 @@ Try selecting text and then opening the contextmenu on it.`;
 	<h3 class:color_d_5={highlighted}>Select text example</h3>
 	<Contextmenu>
 		{#snippet entries()}
-			<Contextmenu_Entry run={() => (toggled = !toggled)}>Toggle</Contextmenu_Entry>
+			<Contextmenu_Entry run={() => (toggled = !toggled)}>Toggle something</Contextmenu_Entry>
 		{/snippet}
 		<div class="panel p_md" class:color_g_5={highlighted}>
 			<div bind:this={text_el} class="mb_lg">
 				<p>
 					If a contextmenu is triggered on selected text, it includes a <code>Copy text</code>
-					entry by default.
+					entry.
 				</p>
 				<p>
 					Try <button on:click={select_text} class:color_a={toggled}>selecting text</button> and then

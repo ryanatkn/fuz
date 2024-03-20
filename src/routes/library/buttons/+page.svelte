@@ -30,10 +30,10 @@
 			{/if}
 		</div>
 		<p>
-			Buttons have a standardized <code>.selected</code> state that can be used for various UI purposes,
-			like showing a selected item in a menu or a styling button's `aria-pressed` state. Instead of providing
-			two styles of buttons, outlined and filled, Fuz makes filled buttons the default, and selected
-			buttons are outlined.
+			Buttons have a <code>.selected</code> state that can be used for various UI purposes, like
+			showing a selected item in a menu or a styling button's <code>aria-pressed</code> state. Instead
+			of having two distinct styles of buttons with outlined and filled variants, Fuz makes filled buttons
+			the default, and selected buttons are outlined.
 		</p>
 		<button disabled>disabled button</button>
 		<button class="selected">button.selected</button>
