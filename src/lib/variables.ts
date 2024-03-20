@@ -577,8 +577,6 @@ export const outline_style: Style_Variable = {name: 'outline_style', light: 'sol
 export const outline_color: Style_Variable = {name: 'outline_color', light: 'var(--color_a_5)'};
 
 /* border radii */
-// TODO hardcoded values - maybe have `radius_xl` or `radius_lg` be 50%?
-export const border_radius: Style_Variable = {name: 'border_radius', light: 'var(--radius_md)'};
 export const radius_xl: Style_Variable = {name: 'radius_xl', light: '5.5rem'};
 export const radius_lg: Style_Variable = {name: 'radius_lg', light: '3.4rem'};
 export const radius_md: Style_Variable = {name: 'radius_md', light: '2.1rem'};
@@ -892,8 +890,6 @@ export const default_variables: Style_Variable[] = [
 	outline_color,
 
 	/* border radii */
-	// TODO hardcoded values - maybe have `radius_xl` or `radius_lg` be 50%?
-	border_radius, // TODO maybe this should be deleted, and they always provide a fallback instead?
 	radius_xl,
 	radius_lg,
 	radius_md,

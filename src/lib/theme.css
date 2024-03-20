@@ -192,7 +192,6 @@
 	--outline_width_3: var(--border_width_1);
 	--outline_style: solid;
 	--outline_color: var(--color_a_5);
-	--border_radius: var(--radius_md);
 	--radius_xl: 5.5rem;
 	--radius_lg: 3.4rem;
 	--radius_md: 2.1rem;

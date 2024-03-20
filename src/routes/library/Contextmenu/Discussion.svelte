@@ -114,7 +114,7 @@
 
 <style>
 	.position {
-		border-radius: var(--border_radius);
+		border-radius: var(--radius_md);
 		background-color: var(--bg);
 		display: flex;
 	}

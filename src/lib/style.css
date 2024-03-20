@@ -271,7 +271,7 @@ select {
 	border-color: var(--border_color);
 	border-style: var(--border_style);
 	border-width: var(--border_width);
-	border-radius: var(--border_radius);
+	border-radius: var(--border_radius, var(--radius_md));
 	outline: var(--outline_width) var(--outline_style) var(--outline_color);
 	/* TODO @multiple outline-offset */
 	/* outline-offset: 2px; */
@@ -376,7 +376,7 @@ input[type='range']::-webkit-slider-thumb {
 	appearance: none;
 	height: var(--thumb_size);
 	width: var(--thumb_size);
-	border-radius: var(--border_radius);
+	border-radius: var(--border_radius, var(--radius_md));
 	background-color: var(--thumb_background_color);
 	border: 0;
 	/*
@@ -393,7 +393,7 @@ input[type='range']::-moz-range-thumb {
 	appearance: none;
 	height: var(--thumb_size);
 	width: var(--thumb_size);
-	border-radius: var(--border_radius);
+	border-radius: var(--border_radius, var(--radius_md));
 	background-color: var(--thumb_background_color);
 	border: 0;
 }
@@ -453,7 +453,7 @@ button {
 	border-width: var(--border_width);
 	border-style: var(--border_style);
 	border-color: var(--border_color);
-	border-radius: var(--border_radius);
+	border-radius: var(--border_radius, var(--radius_md));
 	outline: var(--outline_width) var(--outline_style) var(--outline_color);
 	/* TODO @multiple outline-offset */
 	/* outline-offset: 2px; */

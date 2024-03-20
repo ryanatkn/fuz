@@ -633,7 +633,6 @@ export const src_json = {
 				{name: 'outline_width_3', kind: 'variable'},
 				{name: 'outline_style', kind: 'variable'},
 				{name: 'outline_color', kind: 'variable'},
-				{name: 'border_radius', kind: 'variable'},
 				{name: 'radius_xl', kind: 'variable'},
 				{name: 'radius_lg', kind: 'variable'},
 				{name: 'radius_md', kind: 'variable'},

@@ -82,8 +82,8 @@
 		justify-content: center;
 		font-weight: 700;
 		color: var(--bg);
-		border-top-left-radius: var(--border_radius);
-		border-top-right-radius: var(--border_radius);
+		border-top-left-radius: var(--border_radius, var(--radius_md));
+		border-top-right-radius: var(--border_radius, var(--radius_md));
 	}
 	.minimap_wrapper {
 		padding: 0 var(--input_padding_x);
@@ -119,7 +119,7 @@
 		text-align: center;
 		background-color: transparent;
 		border: none;
-		border-radius: var(--border_radius);
+		border-radius: var(--border_radius, var(--radius_md));
 		/* TODO why is this necessary? */
 		height: var(--input_height);
 		color: var(--bg);
