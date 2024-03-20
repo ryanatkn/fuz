@@ -136,7 +136,7 @@
 				width_diff + computed_padding_right + 'px',
 			);
 		}
-		await wait(); // TODO BLOCK this is a hack to get animations work, Teleport now mounts synchronously!!
+		await wait(); // TODO BLOCK this is a hack to get animations working, Teleport now mounts synchronously!!
 		ready = true;
 		dialog_el?.focus(); // TODO make this more declarative? probably want to focus only after moving though, not on mount, which makes an action trickier
 	}}
