@@ -1,6 +1,7 @@
 <script lang="ts">
 	import {onDestroy, type Snippet} from 'svelte';
 	import {is_editable, swallow} from '@ryanatkn/belt/dom.js';
+	import {wait} from '@ryanatkn/belt/async.js';
 
 	import Teleport from '$lib/Teleport.svelte';
 	import type {Dialog_Layout} from '$lib/dialog.js';
@@ -96,6 +97,7 @@
 	// The dialog isn't "ready" until the teleport moves it.
 	// Rendering the the dialog's children only once it's ready fixes things like `autofocus`.
 	let ready = $state(false);
+	$inspect('[ready]', ready);
 
 	onDestroy(() => {
 		if (index === 0) {
@@ -116,7 +118,7 @@
 -->
 <Teleport
 	to={container_el}
-	onmove={() => {
+	onmove={async () => {
 		// Measure `padding-right` before adding the class that changes it,
 		// so we can set the body padding to offset any scrollbar width changes.
 		const computed_padding_right =
@@ -134,6 +136,7 @@
 				width_diff + computed_padding_right + 'px',
 			);
 		}
+		await wait(); // TODO BLOCK this is a hack to get animations work, Teleport now mounts synchronously!!
 		ready = true;
 		dialog_el?.focus(); // TODO make this more declarative? probably want to focus only after moving though, not on mount, which makes an action trickier
 	}}
