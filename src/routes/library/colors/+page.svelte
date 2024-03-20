@@ -78,7 +78,6 @@
 			end-users at runtime.
 		</p>
 	</section>
-
 	<section>
 		<h3>Hue variables</h3>
 		<p>
@@ -102,7 +101,6 @@
 			{/each}
 		</ul>
 	</section>
-
 	<section>
 		<h3>Color variables</h3>
 		<p>
@@ -119,7 +117,6 @@
 			{/each}
 		</ul>
 	</section>
-
 	<div class="box w_100 mb_lg">
 		<Color_Scheme_Input />
 	</div>
