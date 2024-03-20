@@ -2,4 +2,6 @@
 '@ryanatkn/fuz': patch
 ---
 
-remove `.prose` and add `.unstyled`
+remove `.prose`
+
+- use `.unstyled` to get the old behavior for `ul|ol|menu`
