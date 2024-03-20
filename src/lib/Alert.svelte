@@ -56,7 +56,8 @@
 			{/if}
 		</div>
 	{/if}
-	<div class="prose">
+	<!-- TODO conflict in the names of content as the snippet and this inner div -->
+	<div class="content">
 		{@render children()}
 	</div>
 {/snippet}
@@ -89,7 +90,7 @@
 		min-width: var(--size_xl2);
 		text-align: center;
 	}
-	.prose {
+	.content {
 		text-align: left;
 		flex: 1;
 	}
