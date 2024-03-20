@@ -171,7 +171,7 @@ a.chip {
 
 .clickable {
 	transform: var(--clickable_transform, scale3d(1, 1, 1));
-	transition-duration: var(--clickable_transform_duration, var(--duration_1));
+	transition-duration: var(--clickable_transform_duration);
 }
 .clickable:focus {
 	transform: var(--clickable_transform_focus, scale3d(1.07, 1.07, 1.07));
