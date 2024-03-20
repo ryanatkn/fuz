@@ -26,7 +26,7 @@
 		</p>
 		<p>
 			The goal of the variables system is to provide runtime theming that's efficient and ergnomic
-			both both developers and end-users. Variables can be composed in multiple ways:
+			both developers and end-users. Variables can be composed in multiple ways:
 		</p>
 		<ul>
 			<li>by CSS classes, both utility and semantic</li>

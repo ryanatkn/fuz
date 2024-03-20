@@ -447,8 +447,8 @@ export const text_active: Style_Variable = {
 /* fonts */
 export const line_height_xs: Style_Variable = {name: 'line_height_xs', light: '1'};
 export const line_height_sm: Style_Variable = {name: 'line_height_sm', light: '1.2'};
-export const line_height_md: Style_Variable = {name: 'line_height_md', light: '1.35'}; // TODO xs/sm/md/lg - but which is md, 1.35 or 1.5?
-export const line_height_lg: Style_Variable = {name: 'line_height_lg', light: '1.5'};
+export const line_height_md: Style_Variable = {name: 'line_height_md', light: '1.4'};
+export const line_height_lg: Style_Variable = {name: 'line_height_lg', light: '1.6'};
 export const line_height_xl: Style_Variable = {name: 'line_height_xl', light: '2'};
 export const font_family_sans: Style_Variable = {
 	name: 'font_family_sans',

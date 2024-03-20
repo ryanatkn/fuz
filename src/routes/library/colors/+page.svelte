@@ -92,7 +92,8 @@
 		<p>
 			Hue variables are also useful to construct custom colors not covered by the color variables.
 			For example, Fuz's base stylesheet uses <code>hue_a</code> for the semi-transparent
-			<code>::selection</code>. (try selecting some text - same hue!)
+			<code>::selection</code>. (try selecting some text -
+			<span class="color_a_5">same hue!</span>)
 		</p>
 		<p>Unlike the color variables, the hue variables are the same in both light and dark modes.</p>
 		<ul class="palette unstyled">
