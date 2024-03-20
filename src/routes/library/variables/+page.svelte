@@ -48,10 +48,10 @@
 				These are named "variables" or "style variables" instead of the common name "design tokens"
 				because Fuz is made by a programmer designing more for devs and end-users than designers.
 				Their functionality is like JS variables but for CSS, and they're implemented with CSS
-				custom properties, which are commonly called CSS variables. Wikipedia has several
-				programming usages but no page about design tokens. I'm familiar with tokens as secrets for
-				authentication, and I don't like overloading the term - especially related to sensitive
-				secrets!
+				custom properties, which are commonly called CSS variables. I'm familiar with tokens as
+				secrets for authentication, and I don't like overloading the term - especially for sensitive
+				secrets! Wikipedia has several programming usages for tokens but no page about design
+				tokens. Maybe I'll change my mind?
 			</p>
 		</aside>
 		<aside>
@@ -66,10 +66,10 @@
 			</p>
 			<p>
 				The naming convention also supports my goal of thinking about Fuz and your app as having a
-				single unified flat namespace, where every identifier regardless of module is unique, and
-				part of a larger whole - the system's vocabulary, available in every appropriate context -
-				JS, HTML, and CSS, on the client and server, and in tests and dev tools. Maybe this needs a
-				blog post.
+				single unified flat namespace, where every identifier regardless of module is unique and
+				part of a larger whole - the system's vocabulary, referenceable in every appropriate context
+				- JS, HTML, and CSS, on the client and server, and in tests and dev tools. This makes each
+				identifier a globally meaningful term. Maybe this needs a blog post.
 			</p>
 		</aside>
 	</section>
