@@ -144,7 +144,7 @@ By default it's opaque, resetting the background to the initial depth. */
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
-	line-height: var(--line_height_6); /* prevents the bottom of g's and others from being cut off */
+	line-height: var(--line_height_lg); /* prevents the bottom of g's and others from being cut off */
 }
 
 .chevron {

@@ -566,7 +566,6 @@ export const src_json = {
 				{name: 'line_height_3', kind: 'variable'},
 				{name: 'line_height_4', kind: 'variable'},
 				{name: 'line_height_5', kind: 'variable'},
-				{name: 'line_height_6', kind: 'variable'},
 				{name: 'line_height_7', kind: 'variable'},
 				{name: 'font_family_sans', kind: 'variable'},
 				{name: 'font_family_mono', kind: 'variable'},

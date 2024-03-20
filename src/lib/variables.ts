@@ -449,7 +449,6 @@ export const line_height_1: Style_Variable = {name: 'line_height_1', light: '1'}
 export const line_height_3: Style_Variable = {name: 'line_height_3', light: '1.2'};
 export const line_height_4: Style_Variable = {name: 'line_height_4', light: '1.35'}; // TODO xs/sm/md/lg - but which is md, 1.35 or 1.5?
 export const line_height_5: Style_Variable = {name: 'line_height_5', light: '1.5'};
-export const line_height_6: Style_Variable = {name: 'line_height_6', light: '1.75'};
 export const line_height_7: Style_Variable = {name: 'line_height_7', light: '2'};
 export const font_family_sans: Style_Variable = {
 	name: 'font_family_sans',
@@ -814,7 +813,6 @@ export const default_variables: Style_Variable[] = [
 	line_height_3,
 	line_height_4,
 	line_height_5,
-	line_height_6,
 	line_height_7,
 	font_family_sans,
 	font_family_mono,

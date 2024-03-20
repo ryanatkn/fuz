@@ -31,9 +31,6 @@ text
 .line_height_1 {
 	line-height: var(--line_height_1);
 }
-.line_height_2 {
-	line-height: var(--line_height_2);
-}
 .line_height_3 {
 	line-height: var(--line_height_3);
 }
@@ -42,9 +39,6 @@ text
 }
 .line_height_5 {
 	line-height: var(--line_height_5);
-}
-.line_height_6 {
-	line-height: var(--line_height_6);
 }
 .line_height_7 {
 	line-height: var(--line_height_7);
