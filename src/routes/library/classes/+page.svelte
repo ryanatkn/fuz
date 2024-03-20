@@ -116,27 +116,27 @@
 				href="https://svelte.dev/docs/svelte-components#style">Svelte's <code>{'<'}style></code></a
 			> for complex and uncommon patterns.
 		</p>
-		<div class="classes">
+		<ul class="classes unstyled">
 			{#each utility_classes as c}
-				<div>.{c}</div>
+				<li>.{c}</li>
 			{/each}
-		</div>
+		</ul>
 	</section>
 	<section>
 		<h3>Variable classes</h3>
-		<div class="classes">
+		<ul class="classes unstyled">
 			{#each variable_classes as c}
-				<div>.{c}</div>
+				<li>.{c}</li>
 			{/each}
-		</div>
+		</ul>
 	</section>
 	<section>
 		<h3>Semantic classes</h3>
-		<div class="classes">
+		<ul class="classes unstyled">
 			{#each semantic_classes as c}
-				<div>.{c}</div>
+				<li>.{c}</li>
 			{/each}
-		</div>
+		</ul>
 	</section>
 	<section>
 		<h3>Raw CSS</h3>
@@ -181,6 +181,12 @@
 <style>
 	.classes {
 		font-family: var(--font_family_mono);
+	}
+	.classes li {
+		padding: var(--space_xs3);
+	}
+	.classes li:hover {
+		background-color: var(--bg_3);
 	}
 	.source_link {
 		display: flex;
