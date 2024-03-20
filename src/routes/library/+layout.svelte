@@ -49,6 +49,9 @@
 			</div>
 		</div>
 		<Library_Panel>
+			<div class="box">
+				<h1 class="m_0">fuz</h1>
+			</div>
 			<div class="box w_100">
 				<Package_Summary {pkg} />
 			</div>
