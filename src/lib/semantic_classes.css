@@ -162,7 +162,7 @@ By default it's opaque, resetting the background to the initial depth. */
 	font-size: var(--font_size_sm);
 	font-weight: 600;
 	padding: var(--space_xs4) var(--space_sm);
-	background-color: var(--darken_1);
+	background-color: var(--fg_1);
 	border-radius: var(--radius_xs);
 }
 a.chip {
