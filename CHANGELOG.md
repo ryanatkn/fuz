@@ -1,5 +1,12 @@
 # @ryanatkn/fuz
 
+## 0.91.4
+
+### Patch Changes
+
+- fix `Package_Summary` homepage formatting ([37e6790](https://github.com/ryanatkn/fuz/commit/37e6790))
+- make hidden `display: none` higher specificity with `!important` ([948e3e6](https://github.com/ryanatkn/fuz/commit/948e3e6))
+
 ## 0.91.3
 
 ### Patch Changes
