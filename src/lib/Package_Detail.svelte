@@ -1,7 +1,7 @@
 <script lang="ts">
 	import {page} from '$app/stores';
 	import {ensure_end, strip_end, strip_start} from '@ryanatkn/belt/string.js';
-	import {format_host, type Package_Meta} from '@ryanatkn/gro/package_meta.js';
+	import type{ Package_Meta} from '@ryanatkn/gro/package_meta.js';
 	import type {Snippet} from 'svelte';
 
 	interface Props {
@@ -105,7 +105,7 @@
 							style:height="16px"
 							style:margin-right="var(--space_xs)"
 						/>
-						{format_host(pkg.homepage_url)}
+						{strip_end(strip_start(pkg.homepage_url, 'https://'), '/')}
 					</a>
 				</div>
 			{/if}
