@@ -1,6 +1,7 @@
 <script lang="ts">
 	import {page} from '$app/stores';
-	import {format_host, type Package_Meta} from '@ryanatkn/gro/package_meta.js';
+	import {strip_end, strip_start} from '@ryanatkn/belt/string.js';
+	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
 
 	export let pkg: Package_Meta; // TODO normalized version with cached primitives?
 
@@ -22,7 +23,7 @@
 		<slot name="homepage_url" {homepage_url}
 			><div class="mb_lg">
 				<a class="chip" class:selected={homepage_url === $page.url.href} href={homepage_url}
-					>{format_host(homepage_url)}</a
+					>{strip_end(strip_start(homepage_url, 'https://'), '/')}</a
 				>
 			</div></slot
 		>
