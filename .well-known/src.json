@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.91.4",
+  "version": "0.91.5",
   "modules": {
     "./Alert.svelte": {
       "path": "Alert.svelte",

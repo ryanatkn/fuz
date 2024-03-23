@@ -1,7 +1,7 @@
 <script lang="ts">
 	import {page} from '$app/stores';
 	import {ensure_end, strip_end, strip_start} from '@ryanatkn/belt/string.js';
-	import {format_host, type Package_Meta} from '@ryanatkn/gro/package_meta.js';
+	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
 
 	export let pkg: Package_Meta; // TODO normalized version with cached primitives?
 
@@ -76,7 +76,7 @@
 								style:height="16px"
 								style:margin-right="var(--space_xs)"
 							/>
-							{format_host(homepage_url)}
+							{strip_end(strip_start(homepage_url, 'https://'), '/')}
 						</a>
 					</div>
 				</slot>
