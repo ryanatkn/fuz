@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.91.5
+
+### Patch Changes
+
+- fix `Package_Detail` homepage formatting ([2b22117](https://github.com/ryanatkn/fuz/commit/2b22117))
+
 ## 0.91.4
 
 ### Patch Changes
