@@ -99,9 +99,6 @@
       "default": "./dist/alert.js",
       "types": "./dist/alert.d.ts"
     },
-    "./animations.css": {
-      "default": "./dist/animations.css"
-    },
     "./Breadcrumb.svelte": {
       "svelte": "./dist/Breadcrumb.svelte",
       "default": "./dist/Breadcrumb.svelte",
@@ -271,6 +268,9 @@
       "svelte": "./dist/Redirect.svelte",
       "default": "./dist/Redirect.svelte",
       "types": "./dist/Redirect.svelte.d.ts"
+    },
+    "./style_animations.css": {
+      "default": "./dist/style_animations.css"
     },
     "./style_components.css": {
       "default": "./dist/style_components.css"
