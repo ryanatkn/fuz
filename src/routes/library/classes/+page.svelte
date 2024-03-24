@@ -5,8 +5,8 @@
 	import Tome_Link from '$lib/Tome_Link.svelte';
 	import Github_Logo from '$lib/Github_Logo.svelte';
 	import {get_tome} from '$lib/tome.js';
-	import utility_classes_text from '$lib/utility_classes.css?raw';
-	import semantic_classes_text from '$lib/semantic_classes.css?raw';
+	import style_utilities_text from '$lib/style_utilities.css?raw';
+	import style_components_text from '$lib/style_components.css?raw';
 	import Details from '$lib/Details.svelte';
 
 	const LIBRARY_ITEM_NAME = 'classes';
@@ -46,6 +46,7 @@
 		'border_color_1-5',
 		'border_width_1-6',
 		'outline_width_1-3',
+		'border_none|hidden|dotted|dashed|solid|double|groove|ridge|inset|outset',
 		'radius_0|100',
 		'radius_xs3-xl',
 		'w|h_0|100',
@@ -134,14 +135,14 @@
 		<!-- TODO maybe add a github source link? -->
 		<Details>
 			{#snippet summary()}
-				<summary><span class="font_family_mono">@ryanatkn/fuz/utility_classes.css</span></summary>
+				<summary><span class="font_family_mono">@ryanatkn/fuz/style_utilities.css</span></summary>
 			{/snippet}
 			<p class="source_link">
-				<a href="https://github.com/ryanatkn/fuz/blob/main/src/lib/utility_classes.css"
+				<a href="https://github.com/ryanatkn/fuz/blob/main/src/lib/style_utilities.css"
 					><Github_Logo size="var(--icon_size_xs)" /> <span class="ml_xs">source</span></a
 				>
 			</p>
-			<Code content={utility_classes_text} lang="css" />
+			<Code content={style_utilities_text} lang="css" />
 		</Details>
 		<Details>
 			{#snippet summary()}
@@ -152,7 +153,7 @@
 					><Github_Logo size="var(--icon_size_xs)" /> <span class="ml_xs">source</span></a
 				>
 			</p>
-			<Code content={semantic_classes_text} lang="css" />
+			<Code content={style_components_text} lang="css" />
 		</Details>
 	</section>
 </Tome_Detail>

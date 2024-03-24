@@ -1,4 +1,4 @@
-/* @ryanatkn/fuz/utility_classes.css */
+/* @ryanatkn/fuz/style_utilities.css */
 
 /* TODO @multiple docs in library */
 
@@ -9,7 +9,7 @@
 Variable classes are a specialization of utility classes.
 They couple style variables with CSS properties.
 
-The utility classes not based on style variables are in `utility_classes.css`.
+The utility classes not based on style variables are in `style_utilities.css`.
 
 */
 
