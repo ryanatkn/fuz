@@ -12,11 +12,11 @@ export const gen: Gen = async ({origin_id}) => {
 
 ${await readFile('./src/lib/style_reset.css', 'utf8')}
 
-${await readFile('./src/lib/style_utilities.css', 'utf8')}
-
 ${await readFile('./src/lib/style_components.css', 'utf8')}
 
 ${await readFile('./src/lib/style_animations.css', 'utf8')}
+
+${await readFile('./src/lib/style_utilities.css', 'utf8')}
 
     ${banner}
   `;
