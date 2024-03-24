@@ -15,6 +15,133 @@ The utility classes not based on style variables are in `utility_classes.css`.
 
 /* TODO vite plugin for removing unused */
 
+/* TODO display_flex? more predictable+verbose or shorthand? */
+
+.relative {
+	position: relative;
+}
+.absolute {
+	position: absolute;
+}
+.fixed {
+	position: fixed;
+}
+.sticky {
+	position: sticky;
+}
+.static {
+	position: static;
+}
+
+.overflow_auto {
+	overflow: auto;
+}
+.overflow_hidden {
+	overflow: hidden;
+}
+.overflow_scroll {
+	overflow: scroll;
+}
+.overflow_clip {
+	overflow: clip;
+}
+.overflow_visible {
+	overflow: visible;
+}
+
+.overflow_x_auto {
+	overflow-x: auto;
+}
+.overflow_x_hidden {
+	overflow-x: hidden;
+}
+.overflow_x_scroll {
+	overflow-x: scroll;
+}
+.overflow_x_clip {
+	overflow-x: clip;
+}
+.overflow_x_visible {
+	overflow-x: visible;
+}
+
+.overflow_y_auto {
+	overflow-y: auto;
+}
+.overflow_y_hidden {
+	overflow-y: hidden;
+}
+.overflow_y_scroll {
+	overflow-y: scroll;
+}
+.overflow_y_clip {
+	overflow-y: clip;
+}
+.overflow_y_visible {
+	overflow-y: visible;
+}
+
+.inline {
+	display: inline;
+}
+.inline_block {
+	display: inline-block;
+}
+.block {
+	display: block;
+}
+.display_none {
+	display: none;
+}
+.display_contents {
+	display: contents;
+}
+.flex {
+	display: flex;
+}
+.flex_1 {
+	flex: 1;
+}
+.grid {
+	display: grid;
+}
+
+.float_none {
+	float: none;
+}
+.float_left {
+	float: left;
+}
+.float_right {
+	float: right;
+}
+.float_inline_start {
+	float: inline-start;
+}
+.float_inline_end {
+	float: inline-end;
+}
+
+/*
+
+text
+
+*/
+
+.ellipsis {
+	display: block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.pixelated {
+	image-rendering: -webkit-optimize-contrast; /* Safari */
+	image-rendering: -o-crisp-edges; /* OS X & Windows Opera (12.02+) */
+	image-rendering: pixelated; /* in case crisp-edges isn't supported */
+	image-rendering: crisp-edges; /* the recommended pixel art setting according to MDN */
+}
+
 /*
 
 text
@@ -101,6 +228,47 @@ text
 }
 .icon_size_xl2 {
 	font-size: var(--icon_size_xl2);
+}
+
+.text_align_center {
+	text-align: center;
+}
+.text_align_right {
+	text-align: right;
+}
+.text_align_left {
+	text-align: left;
+}
+.text_align_justify {
+	text-align: justify;
+}
+
+.font_weight_100 {
+	font-weight: 100;
+}
+.font_weight_200 {
+	font-weight: 200;
+}
+.font_weight_300 {
+	font-weight: 300;
+}
+.font_weight_400 {
+	font-weight: 400;
+}
+.font_weight_500 {
+	font-weight: 500;
+}
+.font_weight_600 {
+	font-weight: 600;
+}
+.font_weight_700 {
+	font-weight: 700;
+}
+.font_weight_800 {
+	font-weight: 800;
+}
+.font_weight_900 {
+	font-weight: 900;
 }
 
 /*
@@ -814,6 +982,12 @@ borders
 	outline-width: var(--outline_width_3);
 }
 
+.radius_100 {
+	border-radius: 100%;
+}
+.radius_0 {
+	border-radius: 0;
+}
 .radius_xs3 {
 	border-radius: var(--radius_xs3);
 }
@@ -842,6 +1016,12 @@ layout
 
 */
 
+.w_0 {
+	width: 0;
+}
+.w_100 {
+	width: 100%;
+}
 .w_xs {
 	width: var(--space_xs);
 }
@@ -900,6 +1080,12 @@ layout
 	width: var(--space_xl15);
 }
 
+.h_0 {
+	height: 0;
+}
+.h_100 {
+	height: 100%;
+}
 .h_xs {
 	height: var(--space_xs);
 }
@@ -958,6 +1144,9 @@ layout
 	height: var(--space_xl15);
 }
 
+.p_0 {
+	padding: 0;
+}
 .p_xs5 {
 	padding: var(--space_xs5);
 }
@@ -1028,6 +1217,9 @@ layout
 	padding: var(--space_xl15);
 }
 
+.pt_0 {
+	padding-top: 0;
+}
 .pt_xs5 {
 	padding-top: var(--space_xs5);
 }
@@ -1098,6 +1290,9 @@ layout
 	padding-top: var(--space_xl15);
 }
 
+.pr_0 {
+	padding-right: 0;
+}
 .pr_xs5 {
 	padding-right: var(--space_xs5);
 }
@@ -1168,6 +1363,9 @@ layout
 	padding-right: var(--space_xl15);
 }
 
+.pb_0 {
+	padding-bottom: 0;
+}
 .pb_xs5 {
 	padding-bottom: var(--space_xs5);
 }
@@ -1238,6 +1436,9 @@ layout
 	padding-bottom: var(--space_xl15);
 }
 
+.pl_0 {
+	padding-left: 0;
+}
 .pl_xs5 {
 	padding-left: var(--space_xs5);
 }
@@ -1308,6 +1509,10 @@ layout
 	padding-left: var(--space_xl15);
 }
 
+.px_0 {
+	padding-left: 0;
+	padding-right: 0;
+}
 .px_xs5 {
 	padding-left: var(--space_xs5);
 	padding-right: var(--space_xs5);
@@ -1401,6 +1606,10 @@ layout
 	padding-right: var(--space_xl15);
 }
 
+.py_0 {
+	padding-top: 0;
+	padding-bottom: 0;
+}
 .py_xs5 {
 	padding-top: var(--space_xs5);
 	padding-bottom: var(--space_xs5);
@@ -1494,6 +1703,21 @@ layout
 	padding-bottom: var(--space_xl15);
 }
 
+.m_auto {
+	margin: auto;
+}
+.mx_auto {
+	margin-left: auto;
+	margin-right: auto;
+}
+.my_auto {
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.m_0 {
+	margin: 0;
+}
 .m_xs5 {
 	margin: var(--space_xs5);
 }
@@ -1564,6 +1788,9 @@ layout
 	margin: var(--space_xl15);
 }
 
+.mt_0 {
+	margin-top: 0;
+}
 .mt_xs5 {
 	margin-top: var(--space_xs5);
 }
@@ -1634,6 +1861,9 @@ layout
 	margin-top: var(--space_xl15);
 }
 
+.mr_0 {
+	margin-right: 0;
+}
 .mr_xs5 {
 	margin-right: var(--space_xs5);
 }
@@ -1704,6 +1934,9 @@ layout
 	margin-right: var(--space_xl15);
 }
 
+.mb_0 {
+	margin-bottom: 0;
+}
 .mb_xs5 {
 	margin-bottom: var(--space_xs5);
 }
@@ -1774,6 +2007,9 @@ layout
 	margin-bottom: var(--space_xl15);
 }
 
+.ml_0 {
+	margin-left: 0;
+}
 .ml_xs5 {
 	margin-left: var(--space_xs5);
 }
@@ -1844,6 +2080,10 @@ layout
 	margin-left: var(--space_xl15);
 }
 
+.mx_0 {
+	margin-left: 0;
+	margin-right: 0;
+}
 .mx_xs5 {
 	margin-left: var(--space_xs5);
 	margin-right: var(--space_xs5);
@@ -1937,6 +2177,10 @@ layout
 	margin-right: var(--space_xl15);
 }
 
+.my_0 {
+	margin-top: 0;
+	margin-bottom: 0;
+}
 .my_xs5 {
 	margin-top: var(--space_xs5);
 	margin-bottom: var(--space_xs5);
@@ -2246,6 +2490,12 @@ other
 
 */
 
+.fade_0 {
+	opacity: 0;
+}
+.fade_100 {
+	opacity: 1;
+}
 .fade_1 {
 	opacity: var(--fade_1);
 }
