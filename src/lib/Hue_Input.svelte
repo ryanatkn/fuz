@@ -7,9 +7,8 @@
 		oninput?: (hue: Hue) => void;
 	}
 
-	// const {title = 'hue', oninput}: Props = $props();
-	// let {value: hue}: Props = $props.bindable();
-	let {value: hue, title = 'hue', oninput}: Props = $props();
+	const {title = 'hue', oninput}: Props = $props();
+	let {value: hue}: Props = $props.bindable();
 
 	// TODO BLOCK rename to `value`?
 	hue ??= 180; // TODO BLOCK hack to allow binding with a fallback

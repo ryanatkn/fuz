@@ -6,9 +6,8 @@
 		children?: Snippet;
 	}
 
-	// const {children}: Props = $props();
-	// let {selected_font_weight = 400}: Props = $props.bindable();
-	let {selected_font_weight = 400, children}: Props = $props();
+	const {children}: Props = $props();
+	let {selected_font_weight = 400}: Props = $props.bindable();
 
 	// TODO @multiple publish in $lib when ready
 </script>

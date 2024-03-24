@@ -15,9 +15,8 @@
 		children: Snippet;
 	}
 
-	// const {lazy = true, attrs, summary, children}: Props = $props();
-	// let {open}: Props = $props.bindable();
-	let {open, lazy = true, attrs, summary, children}: Props = $props();
+	const {lazy = true, attrs, summary, children}: Props = $props();
+	let {open}: Props = $props.bindable();
 </script>
 
 <!-- TODO svelte5 splat attrs -->

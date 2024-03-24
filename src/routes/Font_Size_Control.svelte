@@ -9,9 +9,8 @@
 		children?: Snippet;
 	}
 
-	// const {children}: Props = $props();
-	// let {selected_font_size = 2}: Props = $props.bindable();
-	let {selected_font_size = 2, children}: Props = $props();
+	const {children}: Props = $props();
+	let {selected_font_size = 2}: Props = $props.bindable();
 
 	// TODO the API is strange
 
