@@ -45,7 +45,7 @@ export const package_json = {
 		'prettier-plugin-svelte': '^3.2.2',
 		'prism-svelte': '^0.5.0',
 		prismjs: '^1.29.0',
-		svelte: '^5.0.0-next.80',
+		svelte: '^5.0.0-next.81',
 		'svelte-check': '^3.6.8',
 		tslib: '^2.6.2',
 		typescript: '^5.4.2',
