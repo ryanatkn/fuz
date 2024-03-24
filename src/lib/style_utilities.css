@@ -1010,6 +1010,39 @@ borders
 	border-radius: var(--radius_xl);
 }
 
+/* TODO add the top/right/bottom/left variants */
+/* @see https://developer.mozilla.org/en-US/docs/Web/CSS/border-style */
+.border_none {
+	border-style: none;
+}
+.border_hidden {
+	border-style: hidden;
+}
+.border_dotted {
+	border-style: dotted;
+}
+.border_dashed {
+	border-style: dashed;
+}
+.border_solid {
+	border-style: solid;
+}
+.border_double {
+	border-style: double;
+}
+.border_groove {
+	border-style: groove;
+}
+.border_ridge {
+	border-style: ridge;
+}
+.border_inset {
+	border-style: inset;
+}
+.border_outset {
+	border-style: outset;
+}
+
 /*
 
 layout
