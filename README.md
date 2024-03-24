@@ -30,11 +30,12 @@ The CSS design system:
   - encourages plain HTML elements like `button` and `a` over Svelte components
     unless the gains are substantial
 - stylesheets:
-  - [`@ryanatkn/fuz/style.css`](/src/lib/style.css)
-  - [`@ryanatkn/fuz/theme.css`](/src/lib/theme.css) - or bring your own
-  - [`@ryanatkn/fuz/semantic_classes.css`](/src/lib/semantic_classes.css) - optional
-  - [`@ryanatkn/fuz/utility_classes.css`](/src/lib/utility_classes.css) - optional
-  - [`@ryanatkn/fuz/animations.css`](/src/lib/animations.css) - optional
+  - [`@ryanatkn/style.css`](/src/lib/style.css), which is composed of:
+    - [`@ryanatkn/style_reset.css`](/src/lib/style_reset.css) - required
+    - [`@ryanatkn/style_utilities.css`](/src/lib/style_utilities.css) - optional
+    - [`@ryanatkn/style_components.css`](/src/lib/style_components.css) - optional
+    - [`@ryanatkn/style_animations.css`](/src/lib/style_animations.css) - optional
+  - [`theme.css`](/src/lib/theme.css) - or bring your own
   - prefers Svelte's `<style>` for nontrivial cases
     because its utility classes are not nearly as featureful and complete as Tailwind -
     instead of providing a full interface to CSS through classes,
@@ -69,9 +70,11 @@ Import modules at their full paths:
 // plain CSS stylesheets:
 import '@ryanatkn/fuz/style.css';
 import '@ryanatkn/fuz/theme.css'; // or bring your own
-import '@ryanatkn/fuz/utility_classes.css'; // optional
-import '@ryanatkn/fuz/semantic_classes.css'; // optional
-import '@ryanatkn/fuz/animations.css'; // optional
+// or import individual parts of `@ryanatkn/fuz/style.css`:
+import '@ryanatkn/fuz/style_reset.css'; // required
+import '@ryanatkn/fuz/style_utilities.css'; // optional
+import '@ryanatkn/fuz/style_components.css'; // optional
+import '@ryanatkn/fuz/style_animations.css'; // optional
 // Svelte components:
 import Themed from '@ryanatkn/fuz/Themed.svelte';
 // TypeScript modules:

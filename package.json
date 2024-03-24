@@ -272,11 +272,21 @@
       "default": "./dist/Redirect.svelte",
       "types": "./dist/Redirect.svelte.d.ts"
     },
-    "./semantic_classes.css": {
-      "default": "./dist/semantic_classes.css"
+    "./style_components.css": {
+      "default": "./dist/style_components.css"
+    },
+    "./style_reset.css": {
+      "default": "./dist/style_reset.css"
+    },
+    "./style_utilities.css": {
+      "default": "./dist/style_utilities.css"
     },
     "./style.css": {
       "default": "./dist/style.css"
+    },
+    "./style.gen.css.js": {
+      "default": "./dist/style.gen.css.js",
+      "types": "./dist/style.gen.css.d.ts"
     },
     "./swallow.js": {
       "default": "./dist/swallow.js",
@@ -335,9 +345,6 @@
     "./tome.js": {
       "default": "./dist/tome.js",
       "types": "./dist/tome.d.ts"
-    },
-    "./utility_classes.css": {
-      "default": "./dist/utility_classes.css"
     },
     "./variable_data.js": {
       "default": "./dist/variable_data.js",

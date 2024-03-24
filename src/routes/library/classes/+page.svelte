@@ -86,10 +86,12 @@
 		<Code
 			content={`<!-- +layout.svelte -->
 <script>
-	import '@ryanatkn/fuz/style.css'; // required
+	import '@ryanatkn/fuz/style.css';
 	import '@ryanatkn/fuz/theme.css'; // or bring your own
-	import '@ryanatkn/fuz/utility_classes.css';
-	import '@ryanatkn/fuz/semantic_classes.css';
+	// or import individual parts of \`@ryanatkn/fuz/style.css\`:
+	import '@ryanatkn/fuz/style_reset.css'; // required
+	import '@ryanatkn/fuz/style_utilities.css'; // optional
+	import '@ryanatkn/fuz/style_components.css'; // optional
 	// ...`}
 		/>
 		<p>
