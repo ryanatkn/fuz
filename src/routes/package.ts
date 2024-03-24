@@ -273,7 +273,6 @@ export const package_json = {
 		},
 		'./tome.js': {default: './dist/tome.js', types: './dist/tome.d.ts'},
 		'./utility_classes.css': {default: './dist/utility_classes.css'},
-		'./variable_classes.css': {default: './dist/variable_classes.css'},
 		'./variable_data.js': {default: './dist/variable_data.js', types: './dist/variable_data.d.ts'},
 		'./variables.js': {default: './dist/variables.js', types: './dist/variables.d.ts'},
 	},
@@ -430,7 +429,6 @@ export const src_json = {
 			],
 		},
 		'./utility_classes.css': {path: 'utility_classes.css', declarations: []},
-		'./variable_classes.css': {path: 'variable_classes.css', declarations: []},
 		'./variable_data.js': {
 			path: 'variable_data.ts',
 			declarations: [

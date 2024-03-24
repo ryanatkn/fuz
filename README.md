@@ -34,7 +34,6 @@ The CSS design system:
   - [`@ryanatkn/fuz/theme.css`](/src/lib/theme.css) - or bring your own
   - [`@ryanatkn/fuz/semantic_classes.css`](/src/lib/semantic_classes.css) - optional
   - [`@ryanatkn/fuz/utility_classes.css`](/src/lib/utility_classes.css) - optional
-  - [`@ryanatkn/fuz/variable_classes.css`](/src/lib/variable_classes.css) - optional
   - [`@ryanatkn/fuz/animations.css`](/src/lib/animations.css) - optional
   - prefers Svelte's `<style>` for nontrivial cases
     because its utility classes are not nearly as featureful and complete as Tailwind -
@@ -71,7 +70,6 @@ Import modules at their full paths:
 import '@ryanatkn/fuz/style.css';
 import '@ryanatkn/fuz/theme.css'; // or bring your own
 import '@ryanatkn/fuz/utility_classes.css'; // optional
-import '@ryanatkn/fuz/variable_classes.css'; // optional
 import '@ryanatkn/fuz/semantic_classes.css'; // optional
 import '@ryanatkn/fuz/animations.css'; // optional
 // Svelte components:

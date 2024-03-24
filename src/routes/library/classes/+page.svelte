@@ -6,7 +6,6 @@
 	import Github_Logo from '$lib/Github_Logo.svelte';
 	import {get_tome} from '$lib/tome.js';
 	import utility_classes_text from '$lib/utility_classes.css?raw';
-	import variable_classes_text from '$lib/variable_classes.css?raw';
 	import semantic_classes_text from '$lib/semantic_classes.css?raw';
 	import Details from '$lib/Details.svelte';
 
@@ -23,27 +22,17 @@
 		'flex_1',
 		'box',
 		'row',
-		'wrap',
-		'nowrap',
+		'wrap|nowrap',
 		'float_none|left|right|inline_start|inline_end',
-		'text_align_center|right|left|justify',
-		'font_weight_100-900',
-		'ellipsis',
-		'pixelated',
-		'radius_0|100',
-		'p|pt|pr|pb|pl|px|py_0',
-		'm|mt|mr|mb|ml|mx|my_0',
-		'm|mx|my_auto',
-		'w_0|100',
-		'h_0|100',
-		'fade_0|100',
-	];
-	const variable_classes = [
 		'font_family_sans|mono',
 		'line_height',
 		'line_height_xs-xl',
 		'size_xs-xl9',
 		'icon_size_xs-xl2',
+		'text_align_center|right|left|justify',
+		'font_weight_100-900',
+		'ellipsis',
+		'pixelated',
 		'text_1-3',
 		'darken|lighten_1-9',
 		'bg|fg',
@@ -57,12 +46,18 @@
 		'border_color_1-5',
 		'border_width_1-6',
 		'outline_width_1-3',
+		'radius_0|100',
 		'radius_xs3-xl',
+		'w|h_0|100',
 		'w|h_xs-xl15',
+		'p|pt|pr|pb|pl|px|py_0',
 		'p|pt|pr|pb|pl|px|py_xs5-xl15',
+		'm|mx|my_auto',
+		'm|mt|mr|mb|ml|mx|my_0',
 		'm|mt|mr|mb|ml|mx|my_xs5-xl15',
 		'gap_xs5-xl15',
 		'row|column_gap_xs5-xl15',
+		'fade_0|100',
 		'fade_1-6',
 		'shadow',
 		'shadow_lg|inset|inset_active',
@@ -94,12 +89,14 @@
 	import '@ryanatkn/fuz/style.css'; // required
 	import '@ryanatkn/fuz/theme.css'; // or bring your own
 	import '@ryanatkn/fuz/utility_classes.css';
-	import '@ryanatkn/fuz/variable_classes.css';
 	import '@ryanatkn/fuz/semantic_classes.css';
 	// ...`}
 		/>
-		<p>Utility classes use plain CSS for convenient HTML authoring.</p>
-		<p>Variable classes are utility classes based on Fuz style <Tome_Link name="variables" />.</p>
+		<p>
+			Utility classes use plain CSS for convenient HTML authoring. Many are based on Fuz style <Tome_Link
+				name="variables"
+			/>.
+		</p>
 		<p>
 			Semantic classes are named groupings of styles that are like the CSS equivalent of Svelte
 			components.
@@ -118,14 +115,6 @@
 		</p>
 		<ul class="classes unstyled">
 			{#each utility_classes as c}
-				<li>.{c}</li>
-			{/each}
-		</ul>
-	</section>
-	<section>
-		<h3>Variable classes</h3>
-		<ul class="classes unstyled">
-			{#each variable_classes as c}
 				<li>.{c}</li>
 			{/each}
 		</ul>
@@ -151,18 +140,6 @@
 				>
 			</p>
 			<Code content={utility_classes_text} lang="css" />
-		</Details>
-		<Details>
-			{#snippet summary()}
-				<summary><span class="font_family_mono">@ryanatkn/fuz/variable_classes.css</span></summary>
-			{/snippet}
-
-			<p class="source_link">
-				<a href="https://github.com/ryanatkn/fuz/blob/main/src/lib/variable_classes.css"
-					><Github_Logo size="var(--icon_size_xs)" /> <span class="ml_xs">source</span></a
-				>
-			</p>
-			<Code content={variable_classes_text} lang="css" />
 		</Details>
 		<Details>
 			{#snippet summary()}

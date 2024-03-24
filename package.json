@@ -339,9 +339,6 @@
     "./utility_classes.css": {
       "default": "./dist/utility_classes.css"
     },
-    "./variable_classes.css": {
-      "default": "./dist/variable_classes.css"
-    },
     "./variable_data.js": {
       "default": "./dist/variable_data.js",
       "types": "./dist/variable_data.d.ts"
