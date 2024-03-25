@@ -1831,6 +1831,9 @@ borders
 .radius_100 {
 	border-radius: 100%;
 }
+.radius_50 {
+	border-radius: 50%;
+}
 .radius_0 {
 	border-radius: 0;
 }
