@@ -47,7 +47,7 @@
 		'border_width_1-6',
 		'outline_width_1-3',
 		'border_none|hidden|dotted|dashed|solid|double|groove|ridge|inset|outset',
-		'radius_0|100',
+		'radius_0|50|100',
 		'radius_xs3-xl',
 		'w|h_0|100',
 		'w|h_xs-xl15',
