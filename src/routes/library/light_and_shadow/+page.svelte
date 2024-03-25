@@ -26,8 +26,7 @@
 		</p>
 		<p>
 			Light mode's starting point is plain white documents (like paper), and dark mode's is a
-			lightless void (like videogames and augmented reality). In Fuz it's more helpful to think in
-			terms of additive light than opaque colors. The <Tome_Link name="colors" /> docs elaborate.
+			lightless void (like videogames and augmented reality). The <Tome_Link name="colors" /> docs elaborate.
 		</p>
 		<p>
 			Opacity is used to enable arbitrary stacking that visually inherits its context. Not all cases
