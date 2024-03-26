@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.92.0
+
+### Minor Changes
+
+- upgrade `@ryanatkn/belt@0.20.10` ([5be586b](https://github.com/ryanatkn/fuz/commit/5be586b))
+
 ## 0.91.5
 
 ### Patch Changes
