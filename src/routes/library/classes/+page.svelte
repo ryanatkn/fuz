@@ -147,10 +147,10 @@
 		</Details>
 		<Details>
 			{#snippet summary()}
-				<summary><span class="font_family_mono">@ryanatkn/fuz/semantic_classes.css</span></summary>
+				<summary><span class="font_family_mono">@ryanatkn/fuz/style_components.css</span></summary>
 			{/snippet}
 			<p class="source_link">
-				<a href="https://github.com/ryanatkn/fuz/blob/main/src/lib/semantic_classes.css"
+				<a href="https://github.com/ryanatkn/fuz/blob/main/src/lib/style_components.css"
 					><Github_Logo size="var(--icon_size_xs)" /> <span class="ml_xs">source</span></a
 				>
 			</p>
