@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type {Url} from '@ryanatkn/gro/paths.js';
-	import {format_host, type Package_Meta} from '@ryanatkn/gro/package_meta.js';
+	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
 
 	import Github_Logo from '$lib/Github_Logo.svelte';
 	import type {Snippet} from 'svelte';
@@ -26,7 +26,7 @@
 	</div>
 	{#if root_url}
 		<div class="root_url">
-			<a href={root_url} rel="me">{format_host(root_url)}</a>
+			<a href={root_url} rel="me">{format_url(root_url)}</a>
 		</div>
 	{/if}
 </footer>
