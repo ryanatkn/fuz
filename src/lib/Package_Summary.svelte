@@ -1,8 +1,8 @@
 <script lang="ts">
 	import {page} from '$app/stores';
 	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
-	import {strip_end, strip_start} from '@ryanatkn/belt/string.js';
 	import type {Snippet} from 'svelte';
+	import {format_url} from '@ryanatkn/belt/url.js';
 
 	interface Props {
 		pkg: Package_Meta; // TODO normalized version with cached primitives?
@@ -41,7 +41,7 @@
 		{:else}
 			<div class="homepage_url">
 				<a class="chip" class:selected={homepage_url === $page.url.href} href={homepage_url}
-					>{strip_end(strip_start(pkg.homepage_url, 'https://'), '/')}</a
+					>{format_url(pkg.homepage_url)}</a
 				>
 			</div>
 		{/if}

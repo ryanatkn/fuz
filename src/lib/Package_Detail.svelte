@@ -1,6 +1,7 @@
 <script lang="ts">
 	import {page} from '$app/stores';
 	import {ensure_end, strip_end, strip_start} from '@ryanatkn/belt/string.js';
+	import {format_url} from '@ryanatkn/belt/url.js';
 	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
 	import type {Snippet} from 'svelte';
 
@@ -105,7 +106,7 @@
 							style:height="16px"
 							style:margin-right="var(--space_xs)"
 						/>
-						{strip_end(strip_start(pkg.homepage_url, 'https://'), '/')}
+						{format_url(pkg.homepage_url)}
 					</a>
 				</div>
 			{/if}
