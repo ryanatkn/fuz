@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type {Url} from '@ryanatkn/gro/paths.js';
 	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
+	import {format_url} from '@ryanatkn/belt/url.js';
 
 	import Github_Logo from '$lib/Github_Logo.svelte';
 	import type {Snippet} from 'svelte';
