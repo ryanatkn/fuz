@@ -13,14 +13,12 @@
 </script>
 
 <main class="width_md">
-	<div class="prose">
-		<section>
-			<header class="box">
-				<h1>{pkg.repo_name}</h1>
-			</header>
-			<Breadcrumb>🧶</Breadcrumb>
-		</section>
-	</div>
+	<section>
+		<header class="box">
+			<h1>{pkg.repo_name}</h1>
+		</header>
+		<Breadcrumb>🧶</Breadcrumb>
+	</section>
 	<section class="box w_100 mb_lg">
 		<div class="panel p_md width_md">
 			<Package_Detail {pkg} />
@@ -43,8 +41,5 @@
 		display: flex;
 		align-items: baseline;
 		text-align: center;
-	}
-	section {
-		margin-bottom: var(--space_xl5);
 	}
 </style>

@@ -4,17 +4,26 @@
 	import {format_url} from '@ryanatkn/belt/url.js';
 
 	import Github_Logo from '$lib/Github_Logo.svelte';
+	import type {Snippet} from 'svelte';
 
-	export let pkg: Package_Meta;
-	export let root_url: Url | null = null;
+	interface Props {
+		pkg: Package_Meta;
+		root_url?: Url | null;
+		logo?: Snippet;
+		children?: Snippet;
+	}
 
-	$: ({repo_url} = pkg);
+	const {pkg, root_url = null, logo, children}: Props = $props();
+
+	const {repo_url} = $derived(pkg);
 </script>
 
-<footer class="panel p_lg">
-	<slot />
+<footer class="panel">
+	{#if children}{@render children()}{/if}
 	<div class="logo">
-		<a href={repo_url} rel="me"><slot name="logo"><Github_Logo /></slot></a>
+		<a href={repo_url} rel="me"
+			>{#if logo}{@render logo()}{:else}<Github_Logo />{/if}</a
+		>
 	</div>
 	{#if root_url}
 		<div class="root_url">
@@ -29,6 +38,7 @@
 		justify-content: center;
 		align-items: center;
 		flex-direction: column;
+		padding: var(--space_lg);
 	}
 	.logo {
 		display: flex;

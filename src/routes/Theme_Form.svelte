@@ -1,5 +1,4 @@
 <script lang="ts">
-	import {createEventDispatcher} from 'svelte';
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	import {swallow} from '$lib/swallow.js';
@@ -12,28 +11,37 @@
 
 	// TODO should this be merged with `Theme_Input`?
 
-	const dispatch = createEventDispatcher<{save: Theme}>();
-
 	// TODO add UI to change the tint hue/saturation
 
-	export let theme: Theme | null = null; // `null` means creating
+	interface Props {
+		/**
+		 * `null` means creating
+		 */
+		theme?: Theme | null;
+		onsave?: (theme: Theme) => void;
+		// oncreate?: (theme: Theme) => void;
+	}
 
-	let new_name = theme ? theme.name : 'new theme';
-	let new_variables = theme ? theme.variables : []; // TODO `updateVariables` to `Style_Variable_Detail` ?
+	const {theme = null, onsave}: Props = $props();
 
-	let new_theme: Theme;
-	$: new_theme = {name: new_name, variables: new_variables};
+	let new_name = $state(theme ? theme.name : 'new theme');
 
-	$: code = render_theme_style(new_theme, {empty_default_theme: false, specificity: 1});
+	let new_variables = $state(theme ? theme.variables : []); // TODO `updateVariables` to `Style_Variable_Detail` ?
 
-	$: light_count = new_variables.reduce((c, v) => (v.light ? c + 1 : c), 0);
-	$: dark_count = new_variables.reduce((c, v) => (v.dark ? c + 1 : c), 0);
+	const new_theme: Theme = $derived({name: new_name, variables: new_variables});
 
-	let selected_variable: Style_Variable | null = null;
+	const code = $derived(
+		render_theme_style(new_theme, {empty_default_theme: false, specificity: 1}),
+	);
+
+	const light_count = $derived(new_variables.reduce((c, v) => (v.light ? c + 1 : c), 0));
+	const dark_count = $derived(new_variables.reduce((c, v) => (v.dark ? c + 1 : c), 0));
+
+	let selected_variable: Style_Variable | null = $state(null);
 
 	const save = (): void => {
 		if (!changed) return;
-		dispatch('save', new_theme);
+		onsave?.(new_theme);
 	};
 
 	const edit_variable = (e: MouseEvent, variable: Style_Variable): void => {
@@ -47,21 +55,19 @@
 		alert('TODO'); // eslint-disable-line no-alert
 	};
 
-	$: editing = !!theme;
-	$: changed = theme ? new_name !== theme.name || new_variables !== theme.variables : true;
+	const editing = $derived(!!theme);
+	const changed = $derived(
+		theme ? new_name !== theme.name || new_variables !== theme.variables : true,
+	);
 </script>
 
 <div class="theme_form">
-	<div class="prose">
-		<h2 class="text_align_center">
-			{#if editing}edit{:else}create{/if} theme
-		</h2>
-	</div>
+	<h2 class="text_align_center">
+		{#if editing}edit{:else}create{/if} theme
+	</h2>
 	<header>
 		<div class="variables_header">
-			<div class="prose">
-				<p>variables: {light_count} light, {dark_count} dark</p>
-			</div>
+			<p>variables: {light_count} light, {dark_count} dark</p>
 			<button type="button" class="w_100" on:click={add_variable}>add a variable</button>
 		</div>
 		<form>
@@ -95,16 +101,16 @@
 	</div>
 </div>
 {#if selected_variable}
-	<Dialog on:close={() => (selected_variable = null)} let:close>
-		<div class="pane">
-			<div class="panel p_lg box">
-				<Style_Variable_Detail variable={selected_variable} />
-				<br />
-				<aside>this is unfinished</aside>
-				<br />
-				<button on:click={close}>ok</button>
+	<Dialog onclose={() => (selected_variable = null)}>
+		{#snippet children(close)}
+			<div class="pane">
+				<div class="panel p_lg box">
+					<Style_Variable_Detail variable={selected_variable} />
+					<aside>this is unfinished</aside>
+					<button on:click={close}>ok</button>
+				</div>
 			</div>
-		</div>
+		{/snippet}
 	</Dialog>
 {/if}
 
@@ -134,9 +140,6 @@
 	.rendered {
 		position: relative; /* for the .copy button */
 		flex: 1;
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
 		overflow: auto;
 	}
 	/* TODO this is hacky, maybe pass classes to `Code`? or what else? */

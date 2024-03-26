@@ -1,33 +1,43 @@
 <script lang="ts">
+	import type {HTMLButtonAttributes} from 'svelte/elements';
+	import type {Snippet} from 'svelte';
+
 	import {default_variables} from '$lib/variables';
 	import {get_selected_variable} from '$routes/style_variable_helpers.js';
+
+	interface Props {
+		name: string; // TODO type? generate from `tomes`? or keep extensible?
+		classes?: string;
+		inline?: boolean;
+		plain?: boolean;
+		attrs?: HTMLButtonAttributes;
+		children?: Snippet;
+	}
+
+	const {name, classes, inline = false, plain = true, attrs, children}: Props = $props();
 
 	// TODO @multiple add to $lib?
 
 	// TODO add contextmenu behavior
 
-	export let name: string; // TODO type? generate from `tomes`? or keep extensible?
-
-	export let classes: string | undefined = undefined;
-
-	export let inline = false;
-
-	export let plain = true;
-
-	$: variable = default_variables.find((v) => v.name === name);
-	$: if (!variable) throw new Error(`cannot find variable named "${name}"`);
+	const variable = $derived.by(() => {
+		const v = default_variables.find((v) => v.name === name);
+		if (!v) throw new Error(`cannot find variable named "${name}"`);
+		return v;
+	});
 
 	const selected_variable = get_selected_variable();
 </script>
 
 <button
 	type="button"
-	{...$$restProps}
+	{...attrs}
 	class={classes}
 	class:inline
 	class:plain
 	on:click={() => ($selected_variable = variable ?? null)}
-	><slot><span class="font_family_mono">{name}</span></slot></button
+	>{#if children}{@render children()}{:else}<span class="font_family_mono">{name}</span
+		>{/if}</button
 >
 
 <style>

@@ -1,7 +1,11 @@
 <script lang="ts">
 	import type {Tome} from '$lib/tome.js';
 
-	export let tomes: Tome[];
+	interface Props {
+		tomes: Tome[];
+	}
+
+	const {tomes}: Props = $props();
 </script>
 
 <div class="tomes">

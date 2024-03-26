@@ -10,7 +10,7 @@ export interface Cat_Go_Home_History_Item {
 }
 export interface Cat_Be_Or_Do_History_Item {
 	type: 'cat_be_or_do';
-	name: string;
+	name: string | null;
 	position: Cat_Position;
 }
 export interface Cat_Go_Adventure_History_Item {

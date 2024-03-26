@@ -1,12 +1,21 @@
 <script lang="ts">
+	import type {Snippet} from 'svelte';
+
 	import Pending_Animation from '$lib/Pending_Animation.svelte';
 
-	export let pending: boolean;
-	export let running: boolean | undefined = undefined;
-	export let el: HTMLButtonElement | undefined = undefined;
-	export let title: string | undefined = undefined;
-	export let disabled: boolean | undefined = undefined;
-	export let attrs: any = undefined;
+	interface Props {
+		pending: boolean;
+		onclick: () => void;
+		running?: boolean;
+		title?: string;
+		disabled?: boolean;
+		attrs?: any;
+		children: Snippet;
+	}
+
+	// TODO maybe this shouldn't disable? cancelable?
+
+	const {pending, onclick, running, title, disabled, attrs, children}: Props = $props();
 </script>
 
 <button
@@ -15,11 +24,10 @@
 	disabled={disabled ?? pending}
 	{title}
 	class:pending
-	bind:this={el}
-	on:click
+	on:click={onclick}
 >
 	<div class="content">
-		<slot />
+		{@render children()}
 	</div>
 	{#if pending}
 		<div class="animation">
@@ -36,7 +44,7 @@
 		display: contents;
 	}
 	.pending .content {
-		visibility: hidden;
+		visibility: hidden; /* preserve the size */
 	}
 	.animation {
 		position: absolute;

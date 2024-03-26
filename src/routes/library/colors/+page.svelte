@@ -29,7 +29,7 @@
 </script>
 
 <Tome_Detail {tome}>
-	<section class="prose">
+	<section>
 		<h3>Color semantics</h3>
 		<p>
 			Fuz provides a palette of color and hue <Tome_Link name="variables" /> designed to support concise
@@ -62,14 +62,15 @@
 			most libraries, Fuz provides fewer handles for granular color customizations, but the benefits
 			include consistency, efficiency, DRY authoring, and ease of app-wide theming.
 		</p>
-
+	</section>
+	<section>
 		<h3>Caveats</h3>
 		<p>
 			For performance reasons, Fuz does not currently have an extensive set of variants, like
 			specialized states for elements or color values like "blue". Each of the 7 hues has 9 color
 			values, handling most cases, and the base colors can be customized with <Mdn_Link
 				href="Web/CSS/color_value/color-mix">the <code>color-mix</code> CSS function</Mdn_Link
-			> to handle many more cases.
+			>.
 		</p>
 		<p>
 			Variants may be expanded when/if Fuz includes a Vite plugin or other build tooling for
@@ -77,8 +78,7 @@
 			end-users at runtime.
 		</p>
 	</section>
-
-	<div class="prose mb_lg">
+	<section>
 		<h3>Hue variables</h3>
 		<p>
 			Hue variables contain a single <Mdn_Link href="Web/CSS/hue">hue</Mdn_Link> number. Each color variable
@@ -92,18 +92,17 @@
 		<p>
 			Hue variables are also useful to construct custom colors not covered by the color variables.
 			For example, Fuz's base stylesheet uses <code>hue_a</code> for the semi-transparent
-			<code>::selection</code>. (try selecting some text - same hue!)
+			<code>::selection</code>. (try selecting some text -
+			<span class="color_a_5">same hue!</span>)
 		</p>
 		<p>Unlike the color variables, the hue variables are the same in both light and dark modes.</p>
-	</div>
-	<ul class="palette">
-		{#each color_names as color_name, i}
-			<Hue_Swatch {color_name} {computed_styles} description={descriptions[i]} />
-		{/each}
-	</ul>
-	<br />
-
-	<div class="prose mb_lg">
+		<ul class="palette unstyled">
+			{#each color_names as color_name, i}
+				<Hue_Swatch {color_name} {computed_styles} description={descriptions[i]} />
+			{/each}
+		</ul>
+	</section>
+	<section>
 		<h3>Color variables</h3>
 		<p>
 			There are 9 variables per color, numbered 1 to 9, lightest to darkest. The 5th variable of
@@ -113,13 +112,12 @@
 			Note that these values differ between light and dark modes! See the discussion above for why.
 		</p>
 		<p>These colors were eyeballed by a programmer, and will change :]</p>
-	</div>
-	<ul class="palette">
-		{#each color_names as color_name}
-			<Color_Swatch {color_name} {computed_styles} />
-		{/each}
-	</ul>
-	<br />
+		<ul class="palette unstyled pt_xl2">
+			{#each color_names as color_name}
+				<Color_Swatch {color_name} {computed_styles} />
+			{/each}
+		</ul>
+	</section>
 	<div class="box w_100 mb_lg">
 		<Color_Scheme_Input />
 	</div>

@@ -4,7 +4,6 @@
 	import Font_Weight_Control from '$routes/Font_Weight_Control.svelte';
 	import Font_Size_Control from '$routes/Font_Size_Control.svelte';
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
-	import Tome_Link from '$lib/Tome_Link.svelte';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
 	import {default_variables} from '$lib/variables.js';
 	import {get_tome} from '$lib/tome.js';
@@ -24,18 +23,12 @@
 	const computed_styles = window.getComputedStyle(document.documentElement);
 
 	// TODO selected_font_family
-	let selected_font_weight = 400;
-	let selected_font_size = 3;
+	let selected_font_weight = $state(400);
+	let selected_font_size = $state(3);
 </script>
 
 <Tome_Detail {tome}>
-	<section class="prose">
-		<p>
-			Fuz has app-like markup semantics by default, which does a hard CSS reset including removing
-			all padding and margin. The following document-like markup style is opt-in with the <Tome_Link
-				name="prose"
-			/> class.
-		</p>
+	<section>
 		<h1 title="--size_xl3">h1</h1>
 		<h2 title="--size_xl2">h2</h2>
 		<h3 title="--size_xl">h3</h3>
@@ -50,13 +43,7 @@
 		<details>
 			<summary>show code</summary>
 			<Code
-				content={`<section class="prose">
-<p>
-	Fuz has app-like markup semantics by default, which does a hard CSS reset including removing
-	all padding and margin. The following document-like markup style is opt-in with the <Tome_Link
-		name="prose"
-	/> class.
-</p>
+				content={`<section>
 <h1 title="--size_xl3">h1</h1>
 <h2 title="--size_xl2">h2</h2>
 <h3 title="--size_xl">h3</h3>
@@ -79,7 +66,7 @@
 		</form>
 		{#each font_sizes as font_size (font_size.name)}
 			<div class="row wrap">
-				<Style_Variable_Button title={font_size.light} name={font_size.name}
+				<Style_Variable_Button attrs={{title: font_size.light}} name={font_size.name}
 					><span
 						style:font-size="var(--{font_size.name})"
 						style:font-weight={selected_font_weight}
@@ -103,10 +90,11 @@
 		<div>
 			{#each font_weights as font_weight}
 				<div
+					class="nowrap"
 					style:font-weight={font_weight}
 					style:font-size="var(--{font_size_names[selected_font_size - 1]})"
 				>
-					{font_weight}
+					font-weight: {font_weight}
 				</div>
 			{/each}
 		</div>
@@ -127,14 +115,15 @@
 		</div>
 	</section>
 	<!-- <section> 'text_disabled' 'text_active'</section> -->
-	<section class="prose">
+	<section>
 		<h3>
 			<Mdn_Link href="Web/CSS/line-height">line-height</Mdn_Link> variables
 		</h3>
+		<aside>TODO maybe rename with a semantic scale</aside>
 		<div>
 			{#each {length: 7} as _, i}
 				{@const name = 'line_height_' + (i + 1)}
-				<p>
+				<div class="spaced">
 					<Style_Variable_Button {name}
 						><div style:line-height="var(--{name})" class="button_contents">
 							<div>
@@ -146,7 +135,7 @@
 							<div>{name}</div>
 						</div></Style_Variable_Button
 					>
-				</p>
+				</div>
 			{/each}
 		</div>
 	</section>
@@ -154,9 +143,6 @@
 </Tome_Detail>
 
 <style>
-	section {
-		margin-bottom: var(--space_xl5);
-	}
 	.button_contents {
 		font-weight: normal;
 		text-align: left;

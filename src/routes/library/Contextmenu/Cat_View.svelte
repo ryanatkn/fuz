@@ -1,20 +1,22 @@
 <script lang="ts">
-	import {get_contextmenu, type Contextmenu_Params} from '$lib/contextmenu.js';
+	import type {Snippet} from 'svelte';
 
-	export let name = 'Cat';
-	export let icon: string | null = '😺';
-	export let show_name = true;
-	export let show_icon = true;
-	export let contextmenu_action: Contextmenu_Params | Contextmenu_Params[] | null = null;
+	interface Props {
+		name?: string;
+		icon?: string | null;
+		show_name?: boolean;
+		show_icon?: boolean;
+		children?: Snippet;
+	}
 
-	const contextmenu = get_contextmenu();
+	const {name = 'Cat', icon = '😺', show_name = true, show_icon = true, children}: Props = $props();
 </script>
 
 <!-- TODO add link option? -->
 
-<span class="cat" class:has-icon={show_icon} use:contextmenu.action={contextmenu_action}>
+<span class="cat" class:has-icon={show_icon}>
 	{#if show_icon}<span class="icon">{icon}</span>{/if}{#if show_name}<span class="name"
-			><slot />{name}</span
+			>{#if children}{@render children()}{/if}{name}</span
 		>{/if}
 </span>
 
@@ -22,6 +24,12 @@
 	.cat {
 		display: flex;
 		align-items: center;
+		background-color: var(--bg_3);
+		border-radius: var(--radius_md);
+		border: transparent var(--border_width_4) double;
+	}
+	.cat:hover {
+		border-color: var(--border_color_2);
 	}
 	.name {
 		font-weight: 700;

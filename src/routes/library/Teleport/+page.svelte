@@ -8,13 +8,13 @@
 	const LIBRARY_ITEM_NAME = 'Teleport';
 	const tome = get_tome(LIBRARY_ITEM_NAME);
 
-	let swap = true;
-	let teleport_1: HTMLElement | undefined = undefined;
-	let teleport_2: HTMLElement | undefined = undefined;
+	let swap = $state(true);
+	let teleport_1: HTMLElement | undefined = $state();
+	let teleport_2: HTMLElement | undefined = $state();
 </script>
 
 <Tome_Detail {tome}>
-	<section class="prose width_sm">
+	<section>
 		<p>Relocates elements in the DOM, in the rare cases that's useful and the best solution.</p>
 		<aside>
 			<p>Use only when necessary or fun.</p>
@@ -52,6 +52,8 @@
 <style>
 	.teleports {
 		display: flex;
+		gap: var(--space_sm);
+		margin-bottom: var(--space_sm);
 	}
 	.teleports > div {
 		width: var(--space_xl8);
@@ -60,9 +62,5 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-	}
-	/* TODO standardize this */
-	section {
-		margin-bottom: var(--space_xl3);
 	}
 </style>

@@ -42,9 +42,9 @@
     "@ryanatkn/belt": "^0.20.10",
     "@ryanatkn/eslint-config": "^0.1.0",
     "@ryanatkn/fuz_code": "^0.11.0",
-    "@ryanatkn/gro": "^0.112.4",
+    "@ryanatkn/gro": "^0.113.0",
     "@sveltejs/adapter-static": "^3.0.1",
-    "@sveltejs/kit": "^2.5.2",
+    "@sveltejs/kit": "^2.5.4",
     "@sveltejs/package": "^2.2.7",
     "@sveltejs/vite-plugin-svelte": "^3.0.2",
     "@types/node": "^20.11.24",
@@ -52,15 +52,15 @@
     "@typescript-eslint/eslint-plugin": "^7.1.0",
     "@typescript-eslint/parser": "^7.1.0",
     "eslint": "^8.57.0",
-    "eslint-plugin-svelte": "^2.35.1",
+    "eslint-plugin-svelte": "^2.36.0-next.13",
     "prettier": "^3.2.5",
     "prettier-plugin-svelte": "^3.2.2",
     "prism-svelte": "^0.5.0",
     "prismjs": "^1.29.0",
-    "svelte": "^4.2.12",
-    "svelte-check": "^3.6.6",
+    "svelte": "^5.0.0-next.85",
+    "svelte-check": "^3.6.8",
     "tslib": "^2.6.2",
-    "typescript": "^5.3.3",
+    "typescript": "^5.4.2",
     "uvu": "^0.5.6"
   },
   "eslintConfig": {
@@ -97,9 +97,6 @@
       "default": "./dist/alert.js",
       "types": "./dist/alert.d.ts"
     },
-    "./animations.css": {
-      "default": "./dist/animations.css"
-    },
     "./Breadcrumb.svelte": {
       "svelte": "./dist/Breadcrumb.svelte",
       "default": "./dist/Breadcrumb.svelte",
@@ -129,6 +126,11 @@
       "default": "./dist/Contextmenu_Link_Entry.svelte",
       "types": "./dist/Contextmenu_Link_Entry.svelte.d.ts"
     },
+    "./Contextmenu_Root.svelte": {
+      "svelte": "./dist/Contextmenu_Root.svelte",
+      "default": "./dist/Contextmenu_Root.svelte",
+      "types": "./dist/Contextmenu_Root.svelte.d.ts"
+    },
     "./Contextmenu_Submenu.svelte": {
       "svelte": "./dist/Contextmenu_Submenu.svelte",
       "default": "./dist/Contextmenu_Submenu.svelte",
@@ -144,9 +146,9 @@
       "default": "./dist/Contextmenu.svelte",
       "types": "./dist/Contextmenu.svelte.d.ts"
     },
-    "./contextmenu.js": {
-      "default": "./dist/contextmenu.js",
-      "types": "./dist/contextmenu.d.ts"
+    "./contextmenu.svelte.js": {
+      "default": "./dist/contextmenu.svelte.js",
+      "types": "./dist/contextmenu.svelte.d.ts"
     },
     "./Copy_To_Clipboard.svelte": {
       "svelte": "./dist/Copy_To_Clipboard.svelte",
@@ -157,15 +159,6 @@
       "svelte": "./dist/Details.svelte",
       "default": "./dist/Details.svelte",
       "types": "./dist/Details.svelte.d.ts"
-    },
-    "./Devmode_Controls.svelte": {
-      "svelte": "./dist/Devmode_Controls.svelte",
-      "default": "./dist/Devmode_Controls.svelte",
-      "types": "./dist/Devmode_Controls.svelte.d.ts"
-    },
-    "./devmode.js": {
-      "default": "./dist/devmode.js",
-      "types": "./dist/devmode.d.ts"
     },
     "./Dialog.svelte": {
       "svelte": "./dist/Dialog.svelte",
@@ -180,6 +173,10 @@
       "svelte": "./dist/Dialogs.svelte",
       "default": "./dist/Dialogs.svelte",
       "types": "./dist/Dialogs.svelte.d.ts"
+    },
+    "./dimensions.svelte.js": {
+      "default": "./dist/dimensions.svelte.js",
+      "types": "./dist/dimensions.svelte.d.ts"
     },
     "./Github_Logo.svelte": {
       "svelte": "./dist/Github_Logo.svelte",
@@ -270,11 +267,24 @@
       "default": "./dist/Redirect.svelte",
       "types": "./dist/Redirect.svelte.d.ts"
     },
-    "./semantic_classes.css": {
-      "default": "./dist/semantic_classes.css"
+    "./style_animations.css": {
+      "default": "./dist/style_animations.css"
+    },
+    "./style_components.css": {
+      "default": "./dist/style_components.css"
+    },
+    "./style_reset.css": {
+      "default": "./dist/style_reset.css"
+    },
+    "./style_utilities.css": {
+      "default": "./dist/style_utilities.css"
     },
     "./style.css": {
       "default": "./dist/style.css"
+    },
+    "./style.gen.css.js": {
+      "default": "./dist/style.gen.css.js",
+      "types": "./dist/style.gen.css.d.ts"
     },
     "./swallow.js": {
       "default": "./dist/swallow.js",
@@ -333,12 +343,6 @@
     "./tome.js": {
       "default": "./dist/tome.js",
       "types": "./dist/tome.d.ts"
-    },
-    "./utility_classes.css": {
-      "default": "./dist/utility_classes.css"
-    },
-    "./variable_classes.css": {
-      "default": "./dist/variable_classes.css"
     },
     "./variable_data.js": {
       "default": "./dist/variable_data.js",

@@ -12,7 +12,7 @@
 
 	// TODO `role="menuitem"` ?
 
-	let clicked = 'c';
+	let clicked = $state('c');
 
 	const handled = (e: any): boolean => {
 		if (e.key === 'Enter' || e.key === ' ') {
@@ -24,14 +24,14 @@
 </script>
 
 <Tome_Detail {tome}>
-	<section class="prose">
+	<section>
 		<h3>
 			<code>.menu_item</code> CSS class
 		</h3>
 		<blockquote>This is experimental and may change or be removed.</blockquote>
 	</section>
 	<section>
-		<ul>
+		<ul class="unstyled">
 			<li role="none">
 				<div class="menu_item">
 					<div class="content">
@@ -65,7 +65,7 @@
 		</ul>
 	</section>
 	<section>
-		<ul>
+		<ul class="unstyled">
 			<li role="none">
 				<div
 					class="menu_item selectable"
@@ -138,9 +138,3 @@
 		</ul>
 	</section>
 </Tome_Detail>
-
-<style>
-	section {
-		margin-bottom: var(--space_xl5);
-	}
-</style>

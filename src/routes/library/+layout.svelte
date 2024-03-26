@@ -1,6 +1,7 @@
 <script lang="ts">
 	import {page} from '$app/stores';
 	import {parse_package_meta} from '@ryanatkn/gro/package_meta.js';
+	import type {Snippet} from 'svelte';
 
 	import Library_Menu from '$lib/Library_Menu.svelte';
 	import Library_Panel from '$lib/Library_Panel.svelte';
@@ -15,13 +16,21 @@
 	import Dialog from '$lib/Dialog.svelte';
 	import Style_Variable_Detail from '$routes/Style_Variable_Detail.svelte';
 
+	interface Props {
+		children: Snippet;
+	}
+
+	const {children}: Props = $props();
+
 	const pkg = parse_package_meta(package_json.homepage, package_json, src_json);
 
 	const tomes_by_name = new Map(tomes.map((t) => [t.name, t]));
 	set_tomes(tomes_by_name);
 
-	$: selected_item = tomes.find((c) => c.pathname === $page.url.pathname);
-	$: tomes_related_to_selected = selected_item?.related?.map((r) => tomes_by_name.get(r)!);
+	const selected_item = $derived(tomes.find((c) => c.pathname === $page.url.pathname));
+	const tomes_related_to_selected = $derived(
+		selected_item?.related?.map((r) => tomes_by_name.get(r)!),
+	);
 
 	const selected_variable = set_selected_variable();
 </script>
@@ -33,18 +42,21 @@
 			<div class="menu width_sm">
 				<Library_Menu {tomes} />
 				{#if tomes_related_to_selected}
-					<Library_Menu tomes={tomes_related_to_selected} let:category>
-						<h6>related {category}</h6>
+					<Library_Menu tomes={tomes_related_to_selected}>
+						{#snippet children(category)}<h6>related {category}</h6>{/snippet}
 					</Library_Menu>
 				{/if}
 			</div>
 		</div>
 		<Library_Panel>
+			<div class="box">
+				<h1 class="m_0">fuz</h1>
+			</div>
 			<div class="box w_100">
 				<Package_Summary {pkg} />
 			</div>
 		</Library_Panel>
-		<slot />
+		{@render children()}
 		<section class="box">
 			<Library_Footer {pkg} />
 		</section>
@@ -53,16 +65,16 @@
 		</section>
 	</div>
 	{#if $selected_variable}
-		<Dialog on:close={() => ($selected_variable = null)} let:close>
-			<div class="pane">
-				<div class="panel p_lg box">
-					<Style_Variable_Detail variable={$selected_variable} />
-					<br />
-					<aside>this is unfinished</aside>
-					<br />
-					<button on:click={close}>ok</button>
+		<Dialog onclose={() => ($selected_variable = null)}>
+			{#snippet children(close)}
+				<div class="pane">
+					<div class="panel p_lg box">
+						<Style_Variable_Detail variable={$selected_variable} />
+						<aside>this is unfinished</aside>
+						<button on:click={close}>ok</button>
+					</div>
 				</div>
-			</div>
+			{/snippet}
 		</Dialog>
 	{/if}
 </main>
@@ -95,12 +107,5 @@
 	}
 	section {
 		padding: var(--space_xl2);
-	}
-	h6 {
-		margin-bottom: var(--space_md);
-		margin-top: var(--space_xl3);
-	}
-	h6:first-child {
-		margin-top: 0;
 	}
 </style>

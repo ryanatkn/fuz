@@ -1,47 +1,60 @@
 <script lang="ts">
-	import {createEventDispatcher} from 'svelte';
+	import type {Hue} from '@ryanatkn/belt/colors.js';
 
-	export let hue = 180;
-	export let title = 'hue';
+	interface Props {
+		value?: Hue;
+		title?: string;
+		oninput?: (hue: Hue) => void;
+	}
 
-	const parse_hue = (value: any): number | null => {
-		const t = typeof value;
-		if (t === 'number') return value;
+	const {title = 'hue', oninput}: Props = $props();
+	let {value: hue}: Props = $props.bindable();
+
+	// TODO BLOCK rename to `value`?
+	hue ??= 180; // TODO BLOCK hack to allow binding with a fallback
+
+	// TODO BLOCK needed?
+	// export {hue};
+
+	// TODO probably upstream this to belt
+	const parse_hue = (v: any): Hue | null => {
+		const t = typeof v;
+		if (t === 'number') return v;
 		if (t !== 'string') return null;
-		const parsed = Number(value);
+		const parsed = Number(v);
 		if (Number.isNaN(parsed)) return null;
 		return parsed;
 	};
 
+	// TODO BLOCK is this the API we want?
 	// Binding to `hue` externally works for simple things,
 	// but the `input` event makes reacting to actual changes easier.
-	const dispatch = createEventDispatcher<{input: number}>();
-	const update_hue = (value: number) => {
-		hue = value;
-		dispatch('input', hue);
+	const update_hue = (v: Hue) => {
+		hue = v;
+		oninput?.(hue);
 	};
 
-	const onInput = (e: Event & {currentTarget: EventTarget & HTMLInputElement}) => {
+	const on_input_event = (e: Event & {currentTarget: EventTarget & HTMLInputElement}) => {
 		const parsed = parse_hue(e.currentTarget.value);
 		if (parsed === null) return;
 		update_hue(parsed);
 	};
 
-	let el: HTMLInputElement;
+	let el: HTMLInputElement | undefined = $state();
 
 	const set_hue_from_minimap = (e: MouseEvent & {currentTarget: EventTarget & HTMLElement}) => {
 		const rect = e.currentTarget.getBoundingClientRect();
 		const pct = (e.clientX - rect.x) / rect.width;
 		update_hue(Math.floor(360 * pct));
-		el.focus();
+		el?.focus();
 	};
 </script>
 
 <!-- TODO consider making this a text input or otherwise editable directly -->
 <div class="hue_input">
 	<label class="indicator" style:--hue={hue}>
-		<div class="mr_lg">{title}</div>
-		<input class="hue" value={hue} on:input={onInput} />
+		<div>{title}</div>
+		<input class="hue" value={hue} on:input={on_input_event} />
 	</label>
 	<div class="minimap_wrapper">
 		<div class="minimap" on:click={set_hue_from_minimap} aria-hidden />
@@ -51,7 +64,7 @@
 		type="range"
 		aria-label={title}
 		value={hue}
-		on:input={onInput}
+		on:input={on_input_event}
 		min="0"
 		max="359"
 	/>
@@ -68,8 +81,8 @@
 		justify-content: center;
 		font-weight: 700;
 		color: var(--bg);
-		border-top-left-radius: var(--border_radius);
-		border-top-right-radius: var(--border_radius);
+		border-top-left-radius: var(--border_radius, var(--radius_md));
+		border-top-right-radius: var(--border_radius, var(--radius_md));
 	}
 	.minimap_wrapper {
 		padding: 0 var(--input_padding_x);
@@ -100,11 +113,12 @@
 	.hue {
 		width: 7rem;
 		min-width: 7rem;
+		margin-left: var(--space_lg);
 		font-size: var(--size_lg);
 		text-align: center;
 		background-color: transparent;
 		border: none;
-		border-radius: var(--border_radius);
+		border-radius: var(--border_radius, var(--radius_md));
 		/* TODO why is this necessary? */
 		height: var(--input_height);
 		color: var(--bg);

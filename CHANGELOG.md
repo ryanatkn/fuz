@@ -298,7 +298,7 @@
 
 ### Patch Changes
 
-- add variables `--line_height_1-7` ([d8ab48d](https://github.com/ryanatkn/fuz/commit/d8ab48d))
+- add variables `--line_height_xs-xl` ([d8ab48d](https://github.com/ryanatkn/fuz/commit/d8ab48d))
 
 ## 0.73.0
 

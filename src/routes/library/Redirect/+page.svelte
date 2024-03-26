@@ -11,7 +11,7 @@
 </script>
 
 <Tome_Detail {tome}>
-	<div class="prose">
+	<section>
 		<p>
 			Adds a redirect for a page using <Mdn_Link href="Web/HTTP/Redirections#html_redirections"
 				>a meta tag</Mdn_Link
@@ -23,16 +23,15 @@
 		<!-- TODO make this a generic data-driven helper -->
 		<Code content={`import Redirect from '@ryanatkn/fuz/Redirect.svelte';`} lang="ts" />
 		<aside>
-			Please note: <code>auto={'{'}false}</code> is only used here to prevent the page from redirecting!
-			Normally you wouldn't include it as a prop.
+			Note that <code>auto={'{'}false}</code> is only used here to prevent the page from
+			redirecting! Typical usage lets it default to <code>true</code>.
 		</aside>
-		<section>
-			<Code content={`<Redirect auto={false} />`} />
-			<Redirect auto={false} />
-		</section>
-		<section>
-			<Code
-				content={`<Redirect
+		<Code content={`<Redirect auto={false} />`} />
+		<Redirect auto={false} />
+	</section>
+	<section>
+		<Code
+			content={`<Redirect
 	host="https://www.felt.dev"
 	path="/library"
 	let:url
@@ -40,10 +39,11 @@
 >
 	the redirect url is {url}
 </Redirect>`}
-			/>
-			<Redirect host="https://www.felt.dev" path="/library" let:url auto={false}>
+		/>
+		<Redirect host="https://www.felt.dev" path="/library" auto={false}>
+			{#snippet children(url)}
 				the redirect url is {url}
-			</Redirect>
-		</section>
-	</div>
+			{/snippet}
+		</Redirect>
+	</section>
 </Tome_Detail>

@@ -1,19 +1,27 @@
 <script lang="ts">
-	import {writable} from 'svelte/store';
+	import type {Snippet} from 'svelte';
 
 	import Pending_Animation from '$lib/Pending_Animation.svelte';
-	import {get_contextmenu, type Contextmenu_Run} from '$lib/contextmenu.js';
+	import {get_contextmenu, type Contextmenu_Run} from '$lib/contextmenu.svelte.js';
 
-	export let run: Contextmenu_Run;
+	interface Props {
+		run: Contextmenu_Run;
+		icon?: Snippet; // TODO @multiple think about this API, maybe make a snippet or string? maybe just a snippet after changing from actions to nested components
+		children: Snippet; // TODO @multiple think about this API, maybe make a snippet or string? maybe just a snippet after changing from actions to nested components
+	}
 
-	// This store makes `run` reactive
-	// because it's a param to `contextmenu.add_entry` which @initializes.
-	const runStore = writable(run);
-	$: if ($runStore !== run) $runStore = run;
+	const {run, icon, children}: Props = $props();
 
 	const contextmenu = get_contextmenu();
 
-	const entry = contextmenu.add_entry(runStore);
+	const entry = contextmenu.add_entry(run);
+
+	// TODO BLOCK test that this still works, maybe refactor
+	// This store makes `run` reactive
+	// because it's a param to `contextmenu.add_entry` which @initializes.
+	$effect(() => {
+		entry.run = run;
+	});
 
 	const click = (_e: MouseEvent) => {
 		// This timeout lets event handlers react to the current DOM
@@ -25,8 +33,7 @@
 		contextmenu.select(entry);
 	};
 
-	// the `$contextmenu` is needed because `entry` is not reactive
-	$: ({selected, pending, error_message} = $contextmenu && entry);
+	const {selected, pending, error_message} = $derived(entry);
 </script>
 
 <!-- disabling the a11y warning because a parent element handles keyboard events -->
@@ -42,8 +49,10 @@
 	on:mouseenter={mouseenter}
 >
 	<div class="content">
-		<div class="icon"><slot name="icon" /></div>
-		<div class="title"><slot /></div>
+		<div class="icon">
+			{#if icon}{@render icon()}{/if}
+		</div>
+		<div class="title">{@render children()}</div>
 		{#if pending}<Pending_Animation />{:else if error_message}⚠️{/if}
 	</div>
 </li>

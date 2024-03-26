@@ -12,8 +12,8 @@
 
 <main class="box w_100">
 	<div class="box width_md">
-		<section class="prose box">
-			<h1>fuz</h1>
+		<section class="box">
+			<h1 class="mt_xl4">fuz</h1>
 			<blockquote>friendly user zystem</blockquote>
 			<div class="width_sm panel p_md">
 				<p>
@@ -24,9 +24,8 @@
 					Fuz is being made to support <a href="https://www.ryanatkn.com/table">my other projects</a
 					>
 					that focus on end-users. Fuz emphasizes capability and efficiency and tries to be simple for
-					those goals. Compared to most UI libraries, Fuz has fewer features and more opinions, and it
-					has some unusual features like
-					<a href="https://www.fuz.dev/library/Contextmenu">the contextmenu</a>.
+					those goals. Compared to most UI libraries, Fuz has fewer features and more opinions - it's
+					not suitable for every enterprise.
 				</p>
 				<p>
 					To learn more see <a href="https://www.fuz.dev/library">the docs</a>
@@ -36,12 +35,12 @@
 			</div>
 		</section>
 		<section>
-			<Card href="{base}/library">library<svelte:fragment slot="icon">🧶</svelte:fragment></Card>
+			<Card href="{base}/library">library{#snippet icon()}🧶{/snippet}</Card>
 		</section>
 		<section class="panel p_lg">
 			<!-- TODO ideally this wouldn't duplicate metadata like descriptions, but adding fuz_gitops to this repo is heavy -->
 			<h2 class="mb_lg">other packages</h2>
-			<menu>
+			<menu class="unstyled">
 				<a class="chip" href="https://template.fuz.dev/">fuz_template</a>
 				<a class="chip" href="https://gitops.fuz.dev/">fuz_gitops</a>
 				<a class="chip" href="https://code.fuz.dev/">fuz_code</a>
@@ -60,12 +59,6 @@
 </main>
 
 <style>
-	section {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		margin-bottom: var(--space_xl5);
-	}
 	menu {
 		width: 100%;
 		display: flex;

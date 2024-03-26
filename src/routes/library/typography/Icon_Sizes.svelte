@@ -12,17 +12,15 @@
 	};
 </script>
 
-<section class="prose">
-	<div>
-		<h3>
-			the <Style_Variable_Button name="icon_size" inline /> variable's variants
-		</h3>
-		<aside>
-			unlike <code>--size_</code> variables, <code>--icon_</code> variables are in
-			<code>px</code>
-			not <code>rem</code>, so they're insensitive to browser font size
-		</aside>
-	</div>
+<section>
+	<h3>
+		the <Style_Variable_Button name="icon_size" inline /> variable's variants
+	</h3>
+	<aside>
+		unlike <code>--size_</code> variables, <code>--icon_</code> variables are in
+		<code>px</code>
+		not <code>rem</code>, so they're insensitive to browser font size
+	</aside>
 </section>
 <div class="icon_sizes">
 	<!-- TODO make this data driven -->

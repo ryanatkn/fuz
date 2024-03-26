@@ -11,22 +11,28 @@
 </script>
 
 <Tome_Detail {tome}>
-	<div class="prose">
-		<section>
-			<!-- TODO make this a generic data-driven helper -->
-			<Code content={`import Breadcrumb from '@ryanatkn/fuz/Breadcrumb.svelte';`} lang="ts" />
-			<Code content={`<Breadcrumb />`} />
-			<Breadcrumb />
-		</section>
-		<section>
-			<Code content={`<Breadcrumb>🏠</Breadcrumb>`} />
-			<Breadcrumb>🏠</Breadcrumb>
-		</section>
-		<section>
-			<Code
-				content={`<Breadcrumb\n\tpath="/a/b/c"\n\tselected_path="/a/b"\n\tbase_path="/library/Breadcrumb"\n>\n\t🔡\n\t<div slot="separator">.</div>\n</Breadcrumb>`}
-			/>
-			<Breadcrumb_Example selected_path="/a/b" />
-		</section>
-	</div>
+	<section>
+		<!-- TODO make this a generic data-driven helper -->
+		<Code content={`import Breadcrumb from '@ryanatkn/fuz/Breadcrumb.svelte';`} lang="ts" />
+		<Code content={`<Breadcrumb />`} />
+		<Breadcrumb />
+	</section>
+	<section>
+		<h3>Custom icon</h3>
+		<Code content={`<Breadcrumb>🏠</Breadcrumb>`} />
+		<Breadcrumb>🏠</Breadcrumb>
+	</section>
+	<section>
+		<h3>Custom separator</h3>
+		<Code
+			content={`<Breadcrumb>
+	{#snippet separator()}.{/snippet}
+</Breadcrumb>`}
+		/>
+		<Breadcrumb>{#snippet separator()}.{/snippet}</Breadcrumb>
+	</section>
+	<section>
+		<h3>Custom paths</h3>
+		<Breadcrumb_Example selected_path="/a/b" />
+	</section>
 </Tome_Detail>

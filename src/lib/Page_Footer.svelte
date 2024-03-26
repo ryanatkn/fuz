@@ -1,19 +1,25 @@
 <script lang="ts">
 	import type {Url} from '@ryanatkn/gro/paths.js';
 	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
+	import type {Snippet} from 'svelte';
 
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
 	import Library_Footer from '$lib/Library_Footer.svelte';
 
-	export let pkg: Package_Meta | {url: string; package_json: null};
-	export let root_url: Url | null = null;
+	interface Props {
+		pkg: Package_Meta | {url: string; package_json: null};
+		root_url?: Url | null;
+		children?: Snippet;
+	}
+
+	const {pkg, root_url = null, children}: Props = $props();
 </script>
 
 <footer>
 	{#if pkg.package_json}
 		<Library_Footer {pkg} {root_url} />
 	{/if}
-	<slot />
+	{#if children}{@render children()}{/if}
 	<div class="breadcrumb_wrapper">
 		<Breadcrumb>{pkg.package_json?.icon}</Breadcrumb>
 	</div>
