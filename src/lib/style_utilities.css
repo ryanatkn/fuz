@@ -122,6 +122,16 @@ The utility classes not based on style variables are in `style_utilities.css`.
 	float: inline-end;
 }
 
+.flip_x {
+	transform: scaleX(-1);
+}
+.flip_y {
+	transform: scaleY(-1);
+}
+.flip_xy {
+	transform: scaleX(-1) scaleY(-1);
+}
+
 /*
 
 text
@@ -140,16 +150,6 @@ text
 	image-rendering: -o-crisp-edges; /* OS X & Windows Opera (12.02+) */
 	image-rendering: pixelated; /* in case crisp-edges isn't supported */
 	image-rendering: crisp-edges; /* the recommended pixel art setting according to MDN */
-}
-
-.flip_x {
-	transform: scaleX(-1);
-}
-.flip_y {
-	transform: scaleY(-1);
-}
-.flip_xy {
-	transform: scaleX(-1) scaleY(-1);
 }
 
 /*
