@@ -27,7 +27,7 @@ export const package_json = {
 	peerDependencies: {'@ryanatkn/belt': '*', '@sveltejs/kit': '*', svelte: '*'},
 	devDependencies: {
 		'@changesets/changelog-git': '^0.2.0',
-		'@ryanatkn/belt': '^0.20.8',
+		'@ryanatkn/belt': '^0.20.10',
 		'@ryanatkn/eslint-config': '^0.1.0',
 		'@ryanatkn/fuz_code': '^0.11.0',
 		'@ryanatkn/gro': '^0.112.5',
@@ -45,7 +45,7 @@ export const package_json = {
 		'prettier-plugin-svelte': '^3.2.2',
 		'prism-svelte': '^0.5.0',
 		prismjs: '^1.29.0',
-		svelte: '^5.0.0-next.83',
+		svelte: '^5.0.0-next.84',
 		'svelte-check': '^3.6.8',
 		tslib: '^2.6.2',
 		typescript: '^5.4.2',
