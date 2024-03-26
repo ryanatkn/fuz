@@ -13,7 +13,7 @@
 
 	const tome = get_tome(LIBRARY_ITEM_NAME);
 
-	const utility_classes = [
+	const style_utilities_items = [
 		'relative|absolute|fixed|sticky|static',
 		'overflow_auto|hidden|scroll|clip|visible',
 		'overflow_x|y_auto|hidden|scroll|clip|visible',
@@ -64,7 +64,7 @@
 		'shadow',
 		'shadow_lg|inset|inset_active',
 	];
-	const semantic_classes = [
+	const style_components_items = [
 		'selectable',
 		'pane',
 		'panel',
@@ -118,7 +118,7 @@
 			> for complex and uncommon patterns.
 		</p>
 		<ul class="classes unstyled">
-			{#each utility_classes as c}
+			{#each style_utilities_items as c}
 				<li>.{c}</li>
 			{/each}
 		</ul>
@@ -126,7 +126,7 @@
 	<section>
 		<h3>Semantic classes</h3>
 		<ul class="classes unstyled">
-			{#each semantic_classes as c}
+			{#each style_components_items as c}
 				<li>.{c}</li>
 			{/each}
 		</ul>
