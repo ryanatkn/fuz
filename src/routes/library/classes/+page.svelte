@@ -33,6 +33,7 @@
 		'font_weight_100-900',
 		'ellipsis',
 		'pixelated',
+		'flip_x|y|xy',
 		'text_1-3',
 		'darken|lighten_1-9',
 		'bg|fg',

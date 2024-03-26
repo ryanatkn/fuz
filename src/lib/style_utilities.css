@@ -142,6 +142,16 @@ text
 	image-rendering: crisp-edges; /* the recommended pixel art setting according to MDN */
 }
 
+.flip_x {
+	transform: scaleX(-1);
+}
+.flip_y {
+	transform: scaleY(-1);
+}
+.flip_xy {
+	transform: scaleX(-1) scaleY(-1);
+}
+
 /*
 
 text
