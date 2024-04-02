@@ -15,8 +15,7 @@
 		children: Snippet;
 	}
 
-	const {lazy = true, attrs, summary, children}: Props = $props();
-	let {open}: Props = $props.bindable();
+	let {open = $bindable(), lazy = true, attrs, summary, children}: Props = $props(); // eslint-disable-line prefer-const
 </script>
 
 <!-- TODO svelte5 splat attrs -->

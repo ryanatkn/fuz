@@ -8,7 +8,7 @@
 	const LIBRARY_ITEM_NAME = 'Hue_Input';
 	const tome = get_tome(LIBRARY_ITEM_NAME);
 
-	let value: number | undefined = $state();
+	let value: number | undefined = $state(180); // TODO seems like this ought to allow undefined but Svelte doesn't (try again later to see if it changed, I saw some discussion and thought this would have worked)
 	let value_from_oninput: number | undefined = $state();
 </script>
 

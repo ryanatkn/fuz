@@ -7,14 +7,7 @@
 		oninput?: (hue: Hue) => void;
 	}
 
-	const {title = 'hue', oninput}: Props = $props();
-	let {value: hue}: Props = $props.bindable();
-
-	// TODO BLOCK rename to `value`?
-	hue ??= 180; // TODO BLOCK hack to allow binding with a fallback
-
-	// TODO BLOCK needed?
-	// export {hue};
+	let {value = $bindable(), title = 'hue', oninput}: Props = $props(); // eslint-disable-line prefer-const
 
 	// TODO probably upstream this to belt
 	const parse_hue = (v: any): Hue | null => {
@@ -30,8 +23,8 @@
 	// Binding to `hue` externally works for simple things,
 	// but the `input` event makes reacting to actual changes easier.
 	const update_hue = (v: Hue) => {
-		hue = v;
-		oninput?.(hue);
+		value = v;
+		oninput?.(value);
 	};
 
 	const on_input_event = (e: Event & {currentTarget: EventTarget & HTMLInputElement}) => {
@@ -52,9 +45,9 @@
 
 <!-- TODO consider making this a text input or otherwise editable directly -->
 <div class="hue_input">
-	<label class="indicator" style:--hue={hue}>
+	<label class="indicator" style:--hue={value}>
 		<div>{title}</div>
-		<input class="hue" value={hue} on:input={on_input_event} />
+		<input type="number" step="0" class="hue" {value} on:input={on_input_event} />
 	</label>
 	<div class="minimap_wrapper">
 		<div class="minimap" on:click={set_hue_from_minimap} aria-hidden />
@@ -63,7 +56,7 @@
 		bind:this={el}
 		type="range"
 		aria-label={title}
-		value={hue}
+		{value}
 		on:input={on_input_event}
 		min="0"
 		max="359"
@@ -111,8 +104,8 @@
 		border-top-right-radius: 0;
 	}
 	.hue {
-		width: 7rem;
-		min-width: 7rem;
+		width: 10rem;
+		min-width: 10rem;
 		margin-left: var(--space_lg);
 		font-size: var(--size_lg);
 		text-align: center;
