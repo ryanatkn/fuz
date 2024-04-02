@@ -19,7 +19,9 @@
 		return parsed;
 	};
 
-	// TODO is this the API we want?
+	// TODO BLOCK maybe put the title in a `title` element and allow string or snippet?
+
+	// TODO BLOCK is this the API we want?
 	// Binding to `hue` externally works for simple things,
 	// but the `input` event makes reacting to actual changes easier.
 	const update_hue = (v: Hue) => {
