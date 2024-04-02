@@ -7,7 +7,7 @@
 		oninput?: (hue: Hue) => void;
 	}
 
-	let {value = $bindable(), title = 'hue', oninput}: Props = $props(); // eslint-disable-line prefer-const
+	let {value = $bindable(180), title = 'hue', oninput}: Props = $props(); // eslint-disable-line prefer-const
 
 	// TODO probably upstream this to belt
 	const parse_hue = (v: any): Hue | null => {
@@ -45,8 +45,8 @@
 
 <!-- TODO consider making this a text input or otherwise editable directly -->
 <div class="hue_input">
-	<label class="indicator" style:--hue={value}>
-		<div>{title}</div>
+	<label style:--hue={value}>
+		{#if title}<div>{title}</div>{/if}
 		<input type="number" step="0" class="hue" {value} on:input={on_input_event} />
 	</label>
 	<div class="minimap_wrapper">
@@ -64,16 +64,16 @@
 </div>
 
 <style>
-	.hue_input .indicator {
+	label {
 		background-color: hsl(var(--hue) 50% 50%);
 		height: var(--space_xl5);
 		margin: 0;
 		display: flex;
 		flex-direction: row;
 		align-items: center;
-		justify-content: center;
 		font-weight: 700;
 		color: var(--bg);
+		padding-left: var(--space_xl);
 		border-top-left-radius: var(--border_radius, var(--radius_md));
 		border-top-right-radius: var(--border_radius, var(--radius_md));
 	}
