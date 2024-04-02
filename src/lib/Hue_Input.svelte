@@ -3,7 +3,7 @@
 
 	interface Props {
 		value?: Hue;
-		title?: string;
+		title?: string; // TODO this API is inconsistent with other forms
 		oninput?: (hue: Hue) => void;
 	}
 
