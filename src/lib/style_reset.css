@@ -357,6 +357,7 @@ input[type='radio']:checked::before {
 	border-radius: 50%;
 }
 
+/* TODO @multiple figure these variables out so they're easily customized (similar pattern in a lot of places) */
 input[type='range'] {
 	--thumb_size: var(--space_xl);
 	--thumb_background_color: var(--text_2);
@@ -641,7 +642,7 @@ summary:active {
 	background-color: var(--fg_2);
 }
 
-/* TODO where to put table styles? currently no others */
+/* TODO more  table styles */
 thead {
 	text-align: left;
 }

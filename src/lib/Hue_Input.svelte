@@ -1,13 +1,14 @@
 <script lang="ts">
 	import type {Hue} from '@ryanatkn/belt/colors.js';
+	import type {Snippet} from 'svelte';
 
 	interface Props {
 		value?: Hue;
-		title?: string; // TODO this API is inconsistent with other forms
 		oninput?: (hue: Hue) => void;
+		children?: Snippet;
 	}
 
-	let {value = $bindable(180), title = 'hue', oninput}: Props = $props(); // eslint-disable-line prefer-const
+	let {value = $bindable(180), oninput, children}: Props = $props(); // eslint-disable-line prefer-const
 
 	// TODO probably upstream this to belt
 	const parse_hue = (v: any): Hue | null => {
@@ -19,7 +20,7 @@
 		return parsed;
 	};
 
-	// TODO BLOCK maybe put the title in a `title` element and allow string or snippet?
+	// TODO BLOCK maybe wrap the title with a `.title` element? problem is it's inconsistently styled with other inputs, and the aria-label doesn't work with snippets
 
 	// TODO BLOCK is this the API we want?
 	// Binding to `hue` externally works for simple things,
@@ -46,10 +47,13 @@
 </script>
 
 <!-- TODO consider making this a text input or otherwise editable directly -->
-<div class="hue_input">
-	<label style:--hue={value}>
-		{#if title}<div>{title}</div>{/if}
-		<input type="number" step="0" class="hue" {value} on:input={on_input_event} />
+<div class="hue_input" style:--hue={value}>
+	<label>
+		{#if children}<div class="title">{@render children()}</div>{/if}
+		<div class="preview">
+			hue
+			<input type="number" step="0" class="hue" {value} on:input={on_input_event} />
+		</div>
 	</label>
 	<div class="minimap_wrapper">
 		<div class="minimap" on:click={set_hue_from_minimap} aria-hidden />
@@ -57,7 +61,7 @@
 	<input
 		bind:this={el}
 		type="range"
-		aria-label={title}
+		aria-label="hue"
 		{value}
 		on:input={on_input_event}
 		min="0"
@@ -66,7 +70,12 @@
 </div>
 
 <style>
-	label {
+	.hue_input {
+		--outline_color: hsl(var(--hue) 50% 50%);
+		/* TODO @multiple figure these variables out so they're easily customized (similar pattern in a lot of places) */
+		/* --thumb_background_color: hsl(var(--hue) 50% 50%); */
+	}
+	.preview {
 		background-color: hsl(var(--hue) 50% 50%);
 		height: var(--space_xl5);
 		margin: 0;
