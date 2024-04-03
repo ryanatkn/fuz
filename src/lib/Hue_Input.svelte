@@ -20,9 +20,6 @@
 		return parsed;
 	};
 
-	// TODO BLOCK maybe wrap the title with a `.title` element? problem is it's inconsistently styled with other inputs, and the aria-label doesn't work with snippets
-
-	// TODO BLOCK is this the API we want?
 	// Binding to `hue` externally works for simple things,
 	// but the `input` event makes reacting to actual changes easier.
 	const update_hue = (v: Hue) => {
