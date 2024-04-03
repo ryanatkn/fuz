@@ -31,12 +31,7 @@
 	oninput={(v) => (value_from_oninput = v)}
 />`}
 		/>
-		<Hue_Input
-			oninput={(v) => {
-				value_from_oninput = v;
-				if (value !== v) throw Error();
-			}}
-		/>
+		<Hue_Input oninput={(v) => (value_from_oninput = v)} />
 		<div class="mt_md" style:--color="hsl({value} 62% 31%)">
 			<code>value_from_oninput === {value_from_oninput + ''}</code>
 		</div>
