@@ -607,6 +607,7 @@ export const input_height_inner: Style_Variable = {
 };
 
 /* shadows */
+// TODO these need work - probably change `--shadow` to `--shadow_md` and use `--shadow` for customizing, probably add sm, maybe xl/xs
 // TODO these shouldn't use tint, use lighten/darken instead,
 // but ideally we'd have a blend mode make the colors right,
 // which would require a pseduo-element,

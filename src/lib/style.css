@@ -603,17 +603,6 @@ label.row :is(input[type='checkbox'], input[type='radio']) {
 	margin-right: var(--space_md);
 }
 
-nav {
-	width: 100%;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	align-items: stretch;
-}
-nav button {
-	flex: 1;
-}
-
 small {
 	font-size: var(--size_sm);
 }

@@ -10,21 +10,37 @@
 
 	const iframed = is_iframed();
 	const enabled = !iframed;
+
+	// TODO BLOCK what if `--bg|fg_N` were opaque? problem here requires two layered backgrounds, but maybe that's fine?
 </script>
 
 {#if enabled}
-	<nav class:root>
-		<Breadcrumb>
-			{#if root}
-				<span>fuz</span>
-			{:else}
-				<span class="icon">🧶</span>
-			{/if}
-		</Breadcrumb>
-	</nav>
+	<div class="library_nav">
+		<div class="background">
+			<nav class:root>
+				<Breadcrumb>
+					{#if root}
+						<span>fuz</span>
+					{:else}
+						<span class="icon">🧶</span>
+					{/if}
+				</Breadcrumb>
+			</nav>
+		</div>
+	</div>
 {/if}
 
 <style>
+	.library_nav {
+		position: sticky;
+		top: 0;
+		z-index: 10;
+		background-color: var(--bg);
+	}
+	.background {
+		background-color: var(--fg_1);
+		padding-bottom: var(--space_sm);
+	}
 	nav {
 		font-size: var(--size_xl);
 	}

@@ -33,21 +33,25 @@
 	);
 
 	const selected_variable = set_selected_variable();
+
+	// TODO BLOCK primary/secondary is a little off because of the top nav, nav instead of sidebar sounds better too
+
+	// TODO maybe extract a `Library_Layout`?
 </script>
 
-<main class="box w_100">
-	<Library_Nav />
-	<div class="layout width_md">
-		<div class="menu_wrapper">
-			<div class="menu width_sm">
-				<Library_Menu {tomes} />
-				{#if tomes_related_to_selected}
-					<Library_Menu tomes={tomes_related_to_selected}>
-						{#snippet children(category)}<h6>related {category}</h6>{/snippet}
-					</Library_Menu>
-				{/if}
-			</div>
-		</div>
+<Library_Nav />
+<main>
+	<div class="primary_sidebar">
+		<nav>
+			<Library_Menu {tomes} />
+			{#if tomes_related_to_selected}
+				<Library_Menu tomes={tomes_related_to_selected}>
+					{#snippet children(category)}<h6>related {category}</h6>{/snippet}
+				</Library_Menu>
+			{/if}
+		</nav>
+	</div>
+	<div class="content">
 		<Library_Panel>
 			<div class="box">
 				<h1 class="m_0">fuz</h1>
@@ -64,45 +68,60 @@
 			<Breadcrumb>🧶</Breadcrumb>
 		</section>
 	</div>
-	{#if $selected_variable}
-		<Dialog onclose={() => ($selected_variable = null)}>
-			{#snippet children(close)}
-				<div class="pane">
-					<div class="panel p_lg box">
-						<Style_Variable_Detail variable={$selected_variable} />
-						<aside>this is unfinished</aside>
-						<button on:click={close}>ok</button>
-					</div>
-				</div>
-			{/snippet}
-		</Dialog>
-	{/if}
+	<div class="secondary_sidebar"></div>
 </main>
+{#if $selected_variable}
+	<Dialog onclose={() => ($selected_variable = null)}>
+		{#snippet children(close)}
+			<div class="pane">
+				<div class="panel p_lg box">
+					<Style_Variable_Detail variable={$selected_variable} />
+					<aside>this is unfinished</aside>
+					<button on:click={close}>ok</button>
+				</div>
+			</div>
+		{/snippet}
+	</Dialog>
+{/if}
 
 <style>
-	.layout {
+	.content {
+		--padding: var(--space_xl5);
 		position: relative;
-		padding-bottom: var(--space_xl5);
+		/* TODO feels hacky */
+		width: 100%;
+		max-width: calc(var(--width_md) + var(--padding) * 2);
+		padding: var(--padding);
+		margin: 0 auto;
 	}
-	.menu_wrapper {
-		position: absolute;
+	.primary_sidebar,
+	.secondary_sidebar {
+		position: fixed;
 		left: 0;
 		top: 0;
-		height: 100%;
-		transform: translate3d(calc(-100% - var(--space_sm)), 0, 0);
+		z-index: 1;
+		width: 200px;
 		display: flex;
-		align-items: center;
 		flex-direction: column;
+		align-items: flex-end;
+		flex: 1;
+		height: 100%;
+		overflow: auto;
+		background-color: var(--fg_1);
 	}
-	.menu {
-		position: sticky;
-		top: 0;
+	.secondary_sidebar {
+		right: 0;
+		left: unset;
+		align-items: flex-start;
 	}
 	@media (max-width: 1200px) {
-		.menu_wrapper {
-			position: relative;
-			transform: none;
-			margin-bottom: var(--space_xl3);
+		main {
+			/* flex-direction: column; */
+		}
+	}
+	@media (max-width: 600px) {
+		.content {
+			--padding: var(--space_xl);
 		}
 	}
 	section {
