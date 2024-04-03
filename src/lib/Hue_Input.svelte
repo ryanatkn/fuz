@@ -20,8 +20,6 @@
 		return parsed;
 	};
 
-	// Binding to `hue` externally works for simple things,
-	// but the `input` event makes reacting to actual changes easier.
 	const update_hue = (v: Hue) => {
 		value = v;
 		oninput?.(value);
