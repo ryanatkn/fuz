@@ -64,7 +64,7 @@
 	}
 
 	.computed_value {
-		margin-left: var(--spacing_md);
+		margin-left: var(--space_md);
 		font-family: var(--font_family_mono);
 	}
 </style>

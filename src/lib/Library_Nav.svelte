@@ -22,7 +22,7 @@
 				{#if root}
 					<span>fuz</span>
 				{:else}
-					<span class="icon">🧶</span>
+					<span class="icon">🧶 fuz</span>
 				{/if}
 			</Breadcrumb>
 		</nav>
@@ -31,6 +31,7 @@
 
 <style>
 	.library_nav {
+		--breadcrumb_padding_x: var(--space_lg);
 		position: sticky;
 		top: 0;
 		z-index: 10;
@@ -47,6 +48,7 @@
 	nav {
 		font-size: var(--size_xl);
 		height: 100%;
+		display: flex;
 	}
 	.root {
 		--text_decoration_selected: none;

@@ -1,17 +1,12 @@
 <script lang="ts">
 	import {page} from '$app/stores';
-	import {parse_package_meta} from '@ryanatkn/gro/package_meta.js';
 	import type {Snippet} from 'svelte';
 
 	import Library_Menu from '$lib/Library_Menu.svelte';
-	import Library_Panel from '$lib/Library_Panel.svelte';
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
 	import {set_tomes} from '$lib/tome.js';
-	import Library_Footer from '$lib/Library_Footer.svelte';
-	import Package_Summary from '$lib/Package_Summary.svelte';
 	import Library_Nav from '$lib/Library_Nav.svelte';
 	import {tomes} from '$routes/library/tomes.js';
-	import {package_json, src_json} from '$routes/package.js';
 	import {set_selected_variable} from '$routes/style_variable_helpers.js';
 	import Dialog from '$lib/Dialog.svelte';
 	import Style_Variable_Detail from '$routes/Style_Variable_Detail.svelte';
@@ -21,8 +16,6 @@
 	}
 
 	const {children}: Props = $props();
-
-	const pkg = parse_package_meta(package_json.homepage, package_json, src_json);
 
 	const tomes_by_name = new Map(tomes.map((t) => [t.name, t]));
 	set_tomes(tomes_by_name);
@@ -37,8 +30,6 @@
 	// TODO BLOCK put related styles/components in the secondary sidebar along with "on this page"
 
 	// TODO BLOCK use an .unstyled aside for the sidebars
-
-	// TODO BLOCK put the `Package_Summary` at the library root only
 
 	// TODO BLOCK primary/secondary is a little off because of the top nav,
 	// nav instead of sidebar sounds better too -
@@ -62,18 +53,7 @@
 		</nav>
 	</div>
 	<div class="content">
-		<Library_Panel>
-			<div class="box">
-				<h1 class="m_0">fuz</h1>
-			</div>
-			<div class="box w_100">
-				<Package_Summary {pkg} />
-			</div>
-		</Library_Panel>
 		{@render children()}
-		<section class="box">
-			<Library_Footer {pkg} />
-		</section>
 		<section class="box">
 			<Breadcrumb>🧶</Breadcrumb>
 		</section>

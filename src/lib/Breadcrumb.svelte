@@ -49,12 +49,11 @@
 		flex-wrap: wrap;
 		justify-content: center;
 		align-items: center;
-		padding: var(--space_md) 0;
 	}
 	a {
 		position: relative;
 		z-index: 1;
-		padding: 0 var(--space_sm);
+		padding: 0 var(--breadcrumb_padding_x, var(--space_sm));
 		display: flex;
 		align-items: center;
 	}
