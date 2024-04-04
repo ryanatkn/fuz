@@ -6,7 +6,7 @@
 	import Style_Variable_Button from '$routes/Style_Variable_Button.svelte';
 	import Tome_Link from '$lib/Tome_Link.svelte';
 	import {get_tome} from '$lib/tome.js';
-	import {get_color_scheme} from '$lib/theme';
+	import {get_color_scheme} from '$lib/theme.js';
 
 	const LIBRARY_ITEM_NAME = 'light and shadow';
 

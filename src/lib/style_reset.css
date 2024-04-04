@@ -72,7 +72,7 @@ The `!important` makes this `hidden` behavior much higher specificity.
 	}
 }
 
-aside {
+aside:not(.unstyled) {
 	border-left-color: var(--border_color);
 	border-left-style: var(--border_style);
 	border-left-width: var(--border_width_3);
@@ -81,11 +81,11 @@ aside {
 	color: var(--color, var(--text_2));
 	background-color: var(--fg_1);
 }
-aside:hover {
+aside:not(.unstyled):hover {
 	border-left-color: var(--border_color_4);
 }
 
-blockquote {
+blockquote:not(.unstyled) {
 	border-radius: var(--radius_xs);
 	padding: var(--space_md);
 	color: var(--color, var(--text_2));

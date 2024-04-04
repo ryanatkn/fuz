@@ -193,6 +193,11 @@
       "default": "./dist/Hue_Input.svelte",
       "types": "./dist/Hue_Input.svelte.d.ts"
     },
+    "./Library_Content.svelte": {
+      "svelte": "./dist/Library_Content.svelte",
+      "default": "./dist/Library_Content.svelte",
+      "types": "./dist/Library_Content.svelte.d.ts"
+    },
     "./Library_Footer.svelte": {
       "svelte": "./dist/Library_Footer.svelte",
       "default": "./dist/Library_Footer.svelte",
@@ -217,11 +222,6 @@
       "svelte": "./dist/Library_Panel.svelte",
       "default": "./dist/Library_Panel.svelte",
       "types": "./dist/Library_Panel.svelte.d.ts"
-    },
-    "./Library.svelte": {
-      "svelte": "./dist/Library.svelte",
-      "default": "./dist/Library.svelte",
-      "types": "./dist/Library.svelte.d.ts"
     },
     "./Mdn_Link.svelte": {
       "svelte": "./dist/Mdn_Link.svelte",

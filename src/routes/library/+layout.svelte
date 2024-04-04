@@ -31,6 +31,8 @@
 
 	// TODO BLOCK use an .unstyled aside for the sidebars
 
+	// TODO BLOCK sub 1000 move the secondary sidebar, sub 800 move the primary sidebar
+
 	// TODO BLOCK primary/secondary is a little off because of the top nav,
 	// nav instead of sidebar sounds better too -
 	// maybe extract components?
@@ -42,24 +44,24 @@
 
 <Library_Nav --library_nav_height={library_nav_height} />
 <main>
-	<div class="primary_sidebar">
+	<aside class="primary_sidebar unstyled">
 		<nav>
 			<Library_Menu {tomes} />
 		</nav>
-	</div>
+	</aside>
 	<div class="content">
 		{@render children()}
 		<section class="box">
 			<Breadcrumb>🧶</Breadcrumb>
 		</section>
 	</div>
-	<div class="secondary_sidebar">
+	<aside class="secondary_sidebar unstyled">
 		{#if tomes_related_to_selected}
 			<Library_Menu tomes={tomes_related_to_selected}>
 				{#snippet children(category)}<h6>related {category}</h6>{/snippet}
 			</Library_Menu>
 		{/if}
-	</div>
+	</aside>
 </main>
 {#if $selected_variable}
 	<Dialog onclose={() => ($selected_variable = null)}>
@@ -84,11 +86,11 @@
 	}
 	.content {
 		position: relative;
-		/* TODO feels hacky */
 		width: calc(100% - var(--library_sidebar_width) * 2);
 		max-width: var(--library_content_max_width);
 		padding: var(--library_content_padding);
 		margin: 0 auto;
+		overflow: hidden; /* maybe heavy-handed */
 	}
 	.primary_sidebar,
 	.secondary_sidebar {
@@ -114,7 +116,7 @@
 			flex-direction: column;
 		} */
 	}
-	@media (max-width: 600px) {
+	@media (max-width: 1000px) {
 		.content {
 			--library_content_padding: var(--space_xl);
 		}
