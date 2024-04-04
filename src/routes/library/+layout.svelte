@@ -78,15 +78,18 @@
 <style>
 	main {
 		--library_nav_height: 60px;
-		--sidebar_width: 200px;
+		--content_padding: var(--space_xl5);
+		--sidebar_width: max(
+			200px,
+			calc((100% - calc(var(--width_md) + var(--content_padding) * 2)) / 2)
+		);
 	}
 	.content {
-		--padding: var(--space_xl5);
 		position: relative;
 		/* TODO feels hacky */
 		width: calc(100% - var(--sidebar_width) * 2);
-		max-width: calc(var(--width_md) + var(--padding) * 2);
-		padding: var(--padding);
+		max-width: calc(var(--width_md) + var(--content_padding) * 2);
+		padding: var(--content_padding);
 		margin: 0 auto;
 	}
 	.primary_sidebar,
@@ -115,7 +118,7 @@
 	}
 	@media (max-width: 600px) {
 		.content {
-			--padding: var(--space_xl);
+			--content_padding: var(--space_xl);
 		}
 	}
 	section {
