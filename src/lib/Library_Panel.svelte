@@ -14,8 +14,6 @@
 
 <style>
 	.library_panel {
-		overflow: hidden;
-		/* This margin matches the padding between the library menu and main content. */
-		margin-bottom: calc(var(--space_md) + var(--space_sm));
+		margin: var(--space_xl4) 0;
 	}
 </style>

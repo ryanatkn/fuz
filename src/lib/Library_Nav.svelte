@@ -15,18 +15,17 @@
 </script>
 
 {#if enabled}
-	<div class="library_nav">
-		<div class="background">
-			<nav class:root>
-				<Breadcrumb>
-					{#if root}
-						<span>fuz</span>
-					{:else}
-						<span class="icon">🧶</span>
-					{/if}
-				</Breadcrumb>
-			</nav>
-		</div>
+	<div class="library_nav shadow_sm">
+		<div class="background" />
+		<nav class:root>
+			<Breadcrumb>
+				{#if root}
+					<span>fuz</span>
+				{:else}
+					<span class="icon">🧶</span>
+				{/if}
+			</Breadcrumb>
+		</nav>
 	</div>
 {/if}
 
@@ -36,18 +35,23 @@
 		top: 0;
 		z-index: 10;
 		background-color: var(--bg);
+		height: var(--library_nav_height);
 	}
 	.background {
+		position: absolute;
+		z-index: 0;
+		width: 100%;
+		height: 100%;
 		background-color: var(--fg_1);
-		padding-bottom: var(--space_sm);
 	}
 	nav {
 		font-size: var(--size_xl);
+		height: 100%;
 	}
 	.root {
 		--text_decoration_selected: none;
 	}
 	.icon {
-		font-size: var(--size_md);
+		font-size: var(--size_xl);
 	}
 </style>

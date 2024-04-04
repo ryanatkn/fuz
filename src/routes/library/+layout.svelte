@@ -34,12 +34,16 @@
 
 	const selected_variable = set_selected_variable();
 
-	// TODO BLOCK primary/secondary is a little off because of the top nav, nav instead of sidebar sounds better too
+	// TODO BLOCK primary/secondary is a little off because of the top nav,
+	// nav instead of sidebar sounds better too -
+	// maybe extract components?
 
 	// TODO maybe extract a `Library_Layout`?
+
+	const library_nav_height = '60px';
 </script>
 
-<Library_Nav />
+<Library_Nav --library_nav_height={library_nav_height} />
 <main>
 	<div class="primary_sidebar">
 		<nav>
@@ -85,6 +89,9 @@
 {/if}
 
 <style>
+	main {
+		--library_nav_height: 60px;
+	}
 	.content {
 		--padding: var(--space_xl5);
 		position: relative;
@@ -98,14 +105,13 @@
 	.secondary_sidebar {
 		position: fixed;
 		left: 0;
-		top: 0;
+		top: var(--library_nav_height);
 		z-index: 1;
 		width: 200px;
+		height: calc(100% - var(--library_nav_height));
 		display: flex;
 		flex-direction: column;
 		align-items: flex-end;
-		flex: 1;
-		height: 100%;
 		overflow: auto;
 		background-color: var(--fg_1);
 	}
@@ -115,9 +121,9 @@
 		align-items: flex-start;
 	}
 	@media (max-width: 1200px) {
-		main {
-			/* flex-direction: column; */
-		}
+		/* main {
+			flex-direction: column;
+		} */
 	}
 	@media (max-width: 600px) {
 		.content {
