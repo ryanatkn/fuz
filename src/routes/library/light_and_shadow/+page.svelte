@@ -31,7 +31,7 @@
 		<p>
 			Opacity is used to enable arbitrary stacking that visually inherits its context. Not all cases
 			are properly handled yet, and some choices are made for performance reasons, like avoiding
-			opacity on text. (maybe this won't be a thing one day?)
+			opacity on text. (I'm assuming this is still a thing)
 		</p>
 	</section>
 	<section>
@@ -144,16 +144,16 @@
 	</section>
 	<section>
 		<h3>Box shadows</h3>
-		<div class="shadow" style:box-shadow="var(--shadow)">
-			<Style_Variable_Button name="shadow" />
+		<div class="shadow_example" style:box-shadow="var(--shadow)">
+			<Style_Variable_Button name="shadow_md" />
 		</div>
-		<div class="shadow" style:box-shadow="var(--shadow_lg)">
+		<div class="shadow_example" style:box-shadow="var(--shadow_lg)">
 			<Style_Variable_Button name="shadow_lg" />
 		</div>
-		<div class="shadow" style:box-shadow="var(--shadow_inset)">
+		<div class="shadow_example" style:box-shadow="var(--shadow_inset)">
 			<Style_Variable_Button name="shadow_inset" />
 		</div>
-		<div class="shadow" style:box-shadow="var(--shadow_inset_active)">
+		<div class="shadow_example" style:box-shadow="var(--shadow_inset_active)">
 			<Style_Variable_Button name="shadow_inset_active" />
 		</div>
 	</section>
@@ -170,8 +170,8 @@
 	.color {
 		height: var(--input_height_sm);
 	}
-	.shadow {
-		margin-bottom: var(--space_xl5);
+	.shadow_example {
+		margin-bottom: var(--space_xl8);
 		padding: var(--space_md);
 		font-family: var(--font_family_mono);
 	}

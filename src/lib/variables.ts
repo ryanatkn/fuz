@@ -612,17 +612,17 @@ export const input_height_inner: Style_Variable = {
 // but ideally we'd have a blend mode make the colors right,
 // which would require a pseduo-element,
 // but that's heavier and requires the element to be positioned (I think?)
-export const shadow: Style_Variable = {
+export const shadow_md: Style_Variable = {
 	name: 'shadow',
 	light:
-		'2px 4px 9px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.28), 2px 14px 48px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.28)',
-	dark: '2px 4px 9px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5)), 2px 14px 48px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5))',
+		'2px 4px 9px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.28), 2px 12px 36px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.28)',
+	dark: '2px 4px 9px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5)), 2px 12px 36px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5))',
 };
 export const shadow_lg: Style_Variable = {
 	name: 'shadow_lg',
 	light:
 		'2px 6px 14px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.8), 2px 6px 48px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.8)',
-	dark: '2px 6px 18px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5)), 2px 6px 48px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5))',
+	dark: '2px 6px 14px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5)), 2px 6px 48px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5))',
 };
 export const shadow_inset: Style_Variable = {
 	name: 'shadow_inset',
@@ -915,11 +915,7 @@ export const default_variables: Style_Variable[] = [
 	input_height_inner,
 
 	/* shadows */
-	// TODO these shouldn't use tint, use lighten/darken instead,
-	// but ideally we'd have a blend mode make the colors right,
-	// which would require a pseduo-element,
-	// but that's heavier and requires the element to be positioned (I think?)
-	shadow,
+	shadow_md,
 	shadow_lg,
 	shadow_inset,
 	shadow_inset_active,

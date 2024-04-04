@@ -61,8 +61,7 @@
 		'row|column_gap_xs5-xl15',
 		'fade_0|100',
 		'fade_1-6',
-		'shadow',
-		'shadow_lg|inset|inset_active',
+		'shadow_md|lg|inset|inset_active',
 	];
 	const style_components_items = [
 		'selectable',

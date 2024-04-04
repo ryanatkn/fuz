@@ -213,7 +213,7 @@
 		var(--input_height) - 2 * var(--border_width) - 2 * var(--input_padding_y)
 	);
 	--shadow: 2px 4px 9px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.28),
-		2px 14px 48px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.28);
+		2px 12px 36px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.28);
 	--shadow_lg: 2px 6px 14px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.8),
 		2px 6px 48px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.8);
 	--shadow_inset: 0px 2px 4px 1px inset var(--lighten_2), 0px -2px 4px 1px inset var(--darken_2),
@@ -324,7 +324,7 @@
 	--border_color_4: hsl(var(--tint_hue), 60%, 80%, 40%);
 	--border_color_5: hsl(var(--tint_hue), 60%, 80%, 25%);
 	--shadow: 2px 4px 9px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5)),
-		2px 14px 48px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5));
+		2px 12px 36px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5));
 	--shadow_lg: 2px 6px 18px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5)),
 		2px 6px 48px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5));
 }

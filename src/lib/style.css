@@ -752,7 +752,7 @@ By default it's opaque, resetting the background to the initial depth. */
 	align-items: center;
 	padding: var(
 		--menu_item_padding,
-		var(--space_xs3) var(--space_xs) var(--space_xs3) var(--space_xs)
+		var(--space_xs3) var(--space_xs3) var(--space_xs3) var(--space_xs)
 	);
 }
 .menu_item.selected {
