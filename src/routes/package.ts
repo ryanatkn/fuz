@@ -165,20 +165,15 @@ export const package_json = {
 			default: './dist/Library_Footer.svelte',
 			types: './dist/Library_Footer.svelte.d.ts',
 		},
-		'./Library_Header.svelte': {
-			svelte: './dist/Library_Header.svelte',
-			default: './dist/Library_Header.svelte',
-			types: './dist/Library_Header.svelte.d.ts',
+		'./Library_Primary_Nav.svelte': {
+			svelte: './dist/Library_Primary_Nav.svelte',
+			default: './dist/Library_Primary_Nav.svelte',
+			types: './dist/Library_Primary_Nav.svelte.d.ts',
 		},
 		'./Library_Menu.svelte': {
 			svelte: './dist/Library_Menu.svelte',
 			default: './dist/Library_Menu.svelte',
 			types: './dist/Library_Menu.svelte.d.ts',
-		},
-		'./Library_Nav.svelte': {
-			svelte: './dist/Library_Nav.svelte',
-			default: './dist/Library_Nav.svelte',
-			types: './dist/Library_Nav.svelte.d.ts',
 		},
 		'./Library_Panel.svelte': {
 			svelte: './dist/Library_Panel.svelte',
@@ -362,9 +357,8 @@ export const src_json = {
 		'./Hue_Input.svelte': {path: 'Hue_Input.svelte', declarations: []},
 		'./Library_Content.svelte': {path: 'Library_Content.svelte', declarations: []},
 		'./Library_Footer.svelte': {path: 'Library_Footer.svelte', declarations: []},
-		'./Library_Header.svelte': {path: 'Library_Header.svelte', declarations: []},
+		'./Library_Primary_Nav.svelte': {path: 'Library_Primary_Nav.svelte', declarations: []},
 		'./Library_Menu.svelte': {path: 'Library_Menu.svelte', declarations: []},
-		'./Library_Nav.svelte': {path: 'Library_Nav.svelte', declarations: []},
 		'./Library_Panel.svelte': {path: 'Library_Panel.svelte', declarations: []},
 		'./Mdn_Link.svelte': {path: 'Mdn_Link.svelte', declarations: []},
 		'./Mdn_Logo.svelte': {path: 'Mdn_Logo.svelte', declarations: []},

@@ -5,7 +5,7 @@
 	import Library_Menu from '$lib/Library_Menu.svelte';
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
 	import {set_tomes} from '$lib/tome.js';
-	import Library_Nav from '$lib/Library_Nav.svelte';
+	import Library_Primary_Nav from '$lib/Library_Primary_Nav.svelte';
 	import {tomes} from '$routes/library/tomes.js';
 	import {set_selected_variable} from '$routes/style_variable_helpers.js';
 	import Dialog from '$lib/Dialog.svelte';
@@ -42,7 +42,7 @@
 	const library_nav_height = '60px';
 </script>
 
-<Library_Nav --library_nav_height={library_nav_height} />
+<Library_Primary_Nav --library_nav_height={library_nav_height} />
 <main>
 	<aside class="primary_sidebar unstyled">
 		<nav>
