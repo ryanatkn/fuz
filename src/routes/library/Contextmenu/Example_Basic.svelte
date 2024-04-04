@@ -42,7 +42,7 @@
 </Contextmenu_Root>
 ...context without contextmenu behavior`}
 			/>
-			<!-- TODO this extra wrapper is only for the last-child margin behavior, but that may be removed -->
+			<!-- TODO this extra wrapper is only for the last-child margin behavior that glitches with the transition, but that may be removed -->
 			<div>
 				{#if greeted}
 					<div transition:slide><code>greeted = true</code></div>

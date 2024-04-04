@@ -18,8 +18,4 @@
 	.tomes {
 		width: 100%;
 	}
-	/* TODO hacky */
-	.tomes :global(.tome) {
-		margin-bottom: var(--space_xl9) !important;
-	}
 </style>

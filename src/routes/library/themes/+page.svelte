@@ -35,7 +35,7 @@
 </script>
 
 <Tome_Detail {tome}>
-	<section class="theme panel">
+	<section class="theme">
 		<p>
 			<code>Themed</code> adds global support for both the browser's
 			<Mdn_Link href="Web/CSS/color-scheme">color-scheme</Mdn_Link>
@@ -88,7 +88,7 @@
 			</aside>
 		</details>
 	</section>
-	<section class="theme panel">
+	<section class="theme">
 		<h3>color scheme</h3>
 		<p>
 			<code>Themed</code> defaults to automatic
@@ -131,7 +131,7 @@
 			</aside>
 		</details>
 	</section>
-	<section class="theme panel">
+	<section class="theme">
 		<h3>themes</h3>
 		<p>
 			A theme is a simple JSON collection of <Tome_Link name="variables" /> that can be transformed into
@@ -152,7 +152,7 @@
 			going!
 		</aside>
 	</section>
-	<section class="theme panel">
+	<section class="theme">
 		<h3>scoped themes</h3>
 		<details>
 			<summary
@@ -213,7 +213,7 @@
 			</div>
 		</details>
 	</section>
-	<section class="theme panel">
+	<section class="theme">
 		<h3>theme usage</h3>
 		<p>Themes are plain CSS that can be sourced in a variety of ways.</p>
 		<p>To use fuz's base theme:</p>
