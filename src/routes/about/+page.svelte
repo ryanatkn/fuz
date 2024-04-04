@@ -15,7 +15,7 @@
 <main class="width_md">
 	<section>
 		<header class="box">
-			<h1>{pkg.repo_name}</h1>
+			<h1 class="mt_xl4">{pkg.repo_name}</h1>
 		</header>
 		<Breadcrumb>🧶</Breadcrumb>
 	</section>
