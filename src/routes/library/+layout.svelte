@@ -78,12 +78,13 @@
 <style>
 	main {
 		--library_nav_height: 60px;
+		--sidebar_width: 200px;
 	}
 	.content {
 		--padding: var(--space_xl5);
 		position: relative;
 		/* TODO feels hacky */
-		width: 100%;
+		width: calc(100% - var(--sidebar_width) * 2);
 		max-width: calc(var(--width_md) + var(--padding) * 2);
 		padding: var(--padding);
 		margin: 0 auto;
@@ -94,7 +95,7 @@
 		left: 0;
 		top: var(--library_nav_height);
 		z-index: 1;
-		width: 200px;
+		width: var(--sidebar_width);
 		height: calc(100% - var(--library_nav_height));
 		display: flex;
 		flex-direction: column;
