@@ -8,8 +8,7 @@ It's in early alpha and there will be many breaking changes.
 Fuz is being made to support [my other projects](https://www.ryanatkn.com/table)
 that focus on end-users.
 Fuz emphasizes capability and efficiency and tries to be simple for those goals.
-Compared to most UI libraries, Fuz has fewer features and more opinions -
-it's not suitable for every enterprise.
+Compared to most UI libraries, Fuz has fewer features and more opinions.
 
 To learn more see [the docs](https://www.fuz.dev/library).
 Feel free to take the ideas and code for your own purposes.
