@@ -45,11 +45,6 @@
 	<div class="primary_sidebar">
 		<nav>
 			<Library_Menu {tomes} />
-			{#if tomes_related_to_selected}
-				<Library_Menu tomes={tomes_related_to_selected}>
-					{#snippet children(category)}<h6>related {category}</h6>{/snippet}
-				</Library_Menu>
-			{/if}
 		</nav>
 	</div>
 	<div class="content">
@@ -58,7 +53,13 @@
 			<Breadcrumb>🧶</Breadcrumb>
 		</section>
 	</div>
-	<div class="secondary_sidebar"></div>
+	<div class="secondary_sidebar">
+		{#if tomes_related_to_selected}
+			<Library_Menu tomes={tomes_related_to_selected}>
+				{#snippet children(category)}<h6>related {category}</h6>{/snippet}
+			</Library_Menu>
+		{/if}
+	</div>
 </main>
 {#if $selected_variable}
 	<Dialog onclose={() => ($selected_variable = null)}>
