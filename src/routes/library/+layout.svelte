@@ -34,6 +34,8 @@
 
 	const selected_variable = set_selected_variable();
 
+	// TODO BLOCK put related in the secondary sidebar
+
 	// TODO BLOCK primary/secondary is a little off because of the top nav,
 	// nav instead of sidebar sounds better too -
 	// maybe extract components?
