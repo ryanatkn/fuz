@@ -203,11 +203,6 @@
       "default": "./dist/Library_Footer.svelte",
       "types": "./dist/Library_Footer.svelte.d.ts"
     },
-    "./Library_Primary_Nav.svelte": {
-      "svelte": "./dist/Library_Primary_Nav.svelte",
-      "default": "./dist/Library_Primary_Nav.svelte",
-      "types": "./dist/Library_Primary_Nav.svelte.d.ts"
-    },
     "./Library_Menu.svelte": {
       "svelte": "./dist/Library_Menu.svelte",
       "default": "./dist/Library_Menu.svelte",
@@ -217,6 +212,11 @@
       "svelte": "./dist/Library_Panel.svelte",
       "default": "./dist/Library_Panel.svelte",
       "types": "./dist/Library_Panel.svelte.d.ts"
+    },
+    "./Library_Primary_Nav.svelte": {
+      "svelte": "./dist/Library_Primary_Nav.svelte",
+      "default": "./dist/Library_Primary_Nav.svelte",
+      "types": "./dist/Library_Primary_Nav.svelte.d.ts"
     },
     "./Mdn_Link.svelte": {
       "svelte": "./dist/Mdn_Link.svelte",
