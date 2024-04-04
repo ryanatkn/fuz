@@ -36,6 +36,8 @@
 
 	// TODO BLOCK put related styles/components in the secondary sidebar along with "on this page"
 
+	// TODO BLOCK put the `Package_Summary` at the library root only
+
 	// TODO BLOCK primary/secondary is a little off because of the top nav,
 	// nav instead of sidebar sounds better too -
 	// maybe extract components?
