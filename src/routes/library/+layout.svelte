@@ -79,16 +79,14 @@
 	main {
 		--library_nav_height: 60px;
 		--content_padding: var(--space_xl5);
-		--sidebar_width: max(
-			200px,
-			calc((100% - calc(var(--width_md) + var(--content_padding) * 2)) / 2)
-		);
+		--content_max_width: calc(var(--width_md) + var(--content_padding) * 2);
+		--sidebar_width: max(200px, calc((100% - var(--content_max_width)) / 2));
 	}
 	.content {
 		position: relative;
 		/* TODO feels hacky */
 		width: calc(100% - var(--sidebar_width) * 2);
-		max-width: calc(var(--width_md) + var(--content_padding) * 2);
+		max-width: var(--content_max_width);
 		padding: var(--content_padding);
 		margin: 0 auto;
 	}
