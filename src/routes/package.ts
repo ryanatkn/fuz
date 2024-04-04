@@ -31,12 +31,12 @@ export const package_json = {
 		'@ryanatkn/belt': '^0.20.10',
 		'@ryanatkn/eslint-config': '^0.1.1',
 		'@ryanatkn/fuz_code': '^0.11.0',
-		'@ryanatkn/gro': '^0.113.1',
+		'@ryanatkn/gro': '^0.114.0',
 		'@sveltejs/adapter-static': '^3.0.1',
 		'@sveltejs/kit': '^2.5.5',
 		'@sveltejs/package': '^2.3.0',
 		'@sveltejs/vite-plugin-svelte': '^3.0.2',
-		'@types/node': '^20.12.3',
+		'@types/node': '^20.12.4',
 		'@types/prismjs': '^1.26.3',
 		'@typescript-eslint/eslint-plugin': '^7.5.0',
 		'@typescript-eslint/parser': '^7.5.0',
@@ -46,7 +46,7 @@ export const package_json = {
 		'prettier-plugin-svelte': '^3.2.2',
 		'prism-svelte': '^0.5.0',
 		prismjs: '^1.29.0',
-		svelte: '^5.0.0-next.93',
+		svelte: '^5.0.0-next.94',
 		'svelte-check': '^3.6.9',
 		tslib: '^2.6.2',
 		typescript: '^5.4.3',
@@ -62,6 +62,7 @@ export const package_json = {
 		overrides: [{files: 'package.json', options: {useTabs: false}}],
 	},
 	exports: {
+		'./package.json': './package.json',
 		'./Alert.svelte': {
 			svelte: './dist/Alert.svelte',
 			default: './dist/Alert.svelte',
@@ -285,6 +286,7 @@ export const src_json = {
 	name: '@ryanatkn/fuz',
 	version: '0.92.0',
 	modules: {
+		'./package.json': {path: 'package.json', declarations: []},
 		'./Alert.svelte': {path: 'Alert.svelte', declarations: []},
 		'./alert.js': {
 			path: 'alert.ts',
