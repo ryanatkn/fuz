@@ -34,7 +34,7 @@
 
 	const selected_variable = set_selected_variable();
 
-	// TODO BLOCK put related in the secondary sidebar along with "on this page"
+	// TODO BLOCK put related styles/components in the secondary sidebar along with "on this page"
 
 	// TODO BLOCK primary/secondary is a little off because of the top nav,
 	// nav instead of sidebar sounds better too -
