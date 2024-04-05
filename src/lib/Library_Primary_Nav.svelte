@@ -49,6 +49,7 @@
 		font-size: var(--size_xl);
 		height: 100%;
 		display: flex;
+		padding-left: var(--space_md);
 	}
 	.root {
 		--text_decoration_selected: none;
