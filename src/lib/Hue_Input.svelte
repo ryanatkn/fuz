@@ -47,7 +47,7 @@
 		{#if children}<div class="title">{@render children()}</div>{/if}
 		<div class="preview">
 			hue
-			<input type="number" step="0" class="hue" {value} on:input={on_input_event} />
+			<input type="number" step="0" class="hue" {value} oninput={on_input_event} />
 		</div>
 	</label>
 	<div class="minimap_wrapper">
@@ -58,7 +58,7 @@
 		type="range"
 		aria-label="hue"
 		{value}
-		on:input={on_input_event}
+		oninput={on_input_event}
 		min="0"
 		max="359"
 	/>
