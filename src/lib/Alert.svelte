@@ -32,14 +32,7 @@
 </script>
 
 {#if onclick}
-	<button
-		class="message"
-		type="button"
-		style:--color={final_color}
-		on:click={onclick}
-		{disabled}
-		{...attrs}
-	>
+	<button class="message" type="button" style:--color={final_color} {onclick} {disabled} {...attrs}>
 		{@render content()}
 	</button>
 {:else}

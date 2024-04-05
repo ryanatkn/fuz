@@ -33,7 +33,7 @@ https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/menubar_ro
 				: `select ${color_scheme} color scheme`}
 			class:selected
 			aria-checked={selected}
-			on:click={(e) => {
+			onclick={(e) => {
 				swallow(e);
 				if (select?.(color_scheme) !== false) {
 					onselect?.(color_scheme);
