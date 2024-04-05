@@ -17,6 +17,9 @@
 	const tomes_related_to_selected = $derived(
 		selected_item?.related?.map((r) => tomes_by_name.get(r)!),
 	);
+
+	// TODO BLOCK `related components` has the outline of the <a> cut off, what's going on?
+	// also see the menu_item z-index
 </script>
 
 <aside class="library_tertiary_nav unstyled">
