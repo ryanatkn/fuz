@@ -48,7 +48,6 @@
 </details>`}
 		/>
 	</details>
-	<hr />
 	<h3>
 		<Mdn_Link href="Web/HTML/Element/table">table</Mdn_Link>
 	</h3>
@@ -98,7 +97,6 @@
 			<tr><td>td</td><td>td</td><td>td</td></tr>
 		</tbody>
 	</table>
-	<hr />
 	<h3>
 		<Mdn_Link href="Web/HTML/Element/aside">aside</Mdn_Link>
 	</h3>
@@ -119,25 +117,21 @@
 			</aside>
 		</aside>
 	</aside>
-	<hr />
 	<h3>
 		<Mdn_Link href="Web/HTML/Element/footer">header</Mdn_Link>
 	</h3>
 	<Code content={`<header>header</header>`} />
 	<header>header</header>
-	<hr />
 	<h3>
 		<Mdn_Link href="Web/HTML/Element/footer">footer</Mdn_Link>
 	</h3>
 	<Code content={`<footer>footer</footer>`} />
 	<footer>footer</footer>
-	<hr />
 	<h3>
 		<Mdn_Link href="Web/HTML/Element/section">section</Mdn_Link>
 	</h3>
 	<Code content={`<section>section</section>`} />
 	<section>section</section>
-	<hr />
 	<section>
 		<h3><code>ul</code></h3>
 	</section>
@@ -198,6 +192,5 @@
 			<li>3</li>
 		</menu>
 	</section>
-	<hr />
 	<p>TODO more!</p>
 </Tome_Detail>

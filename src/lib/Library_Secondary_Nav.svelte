@@ -7,8 +7,6 @@
 	}
 
 	const {tomes}: Props = $props();
-
-	// TODO BLOCK get the width of the navs consistent
 </script>
 
 <aside class="library_secondary_nav unstyled">

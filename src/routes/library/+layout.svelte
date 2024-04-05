@@ -32,6 +32,8 @@
 	// TODO BLOCK maybe extract `<Library {tomes} />`?
 
 	const library_primary_nav_height = '60px';
+
+	// TODO BLOCK doesn't use Library_Footer here, hm
 </script>
 
 <Library_Primary_Nav --library_primary_nav_height={library_primary_nav_height} />
@@ -39,11 +41,13 @@
 	<Library_Secondary_Nav {tomes} />
 	<div class="content">
 		{@render children()}
-		<section class="box">
-			<Breadcrumb>🧶</Breadcrumb>
-		</section>
+		<footer>
+			<Library_Tertiary_Nav {tomes} {tomes_by_name} />
+			<section class="box">
+				<Breadcrumb>🧶</Breadcrumb>
+			</section>
+		</footer>
 	</div>
-	<Library_Tertiary_Nav {tomes} {tomes_by_name} />
 </main>
 {#if $selected_variable}
 	<Dialog onclose={() => ($selected_variable = null)}>
@@ -80,8 +84,13 @@
 		} */
 	}
 	@media (max-width: 1000px) {
+		/* main { */
+		/* --library_content_max_width: calc(var(--width_md) + var(--library_content_padding)); */
+		/* } */
 		.content {
 			--library_content_padding: var(--space_xl);
+			width: calc(100% - var(--library_sidebar_width));
+			margin-right: 0;
 		}
 	}
 	section {

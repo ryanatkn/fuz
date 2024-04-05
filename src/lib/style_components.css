@@ -110,10 +110,7 @@ By default it's opaque, resetting the background to the initial depth. */
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: var(
-		--menu_item_padding,
-		var(--space_xs3) var(--space_xs3) var(--space_xs3) var(--space_xs)
-	);
+	padding: var(--menu_item_padding, var(--space_xs3) var(--space_xs));
 }
 .menu_item.selected {
 	/* TODO different patterns for border and bg? */
