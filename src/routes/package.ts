@@ -180,6 +180,16 @@ export const package_json = {
 			default: './dist/Library_Primary_Nav.svelte',
 			types: './dist/Library_Primary_Nav.svelte.d.ts',
 		},
+		'./Library_Secondary_Nav.svelte': {
+			svelte: './dist/Library_Secondary_Nav.svelte',
+			default: './dist/Library_Secondary_Nav.svelte',
+			types: './dist/Library_Secondary_Nav.svelte.d.ts',
+		},
+		'./Library_Tertiary_Nav.svelte': {
+			svelte: './dist/Library_Tertiary_Nav.svelte',
+			default: './dist/Library_Tertiary_Nav.svelte',
+			types: './dist/Library_Tertiary_Nav.svelte.d.ts',
+		},
 		'./Mdn_Link.svelte': {
 			svelte: './dist/Mdn_Link.svelte',
 			default: './dist/Mdn_Link.svelte',
@@ -360,6 +370,8 @@ export const src_json = {
 		'./Library_Menu.svelte': {path: 'Library_Menu.svelte', declarations: []},
 		'./Library_Panel.svelte': {path: 'Library_Panel.svelte', declarations: []},
 		'./Library_Primary_Nav.svelte': {path: 'Library_Primary_Nav.svelte', declarations: []},
+		'./Library_Secondary_Nav.svelte': {path: 'Library_Secondary_Nav.svelte', declarations: []},
+		'./Library_Tertiary_Nav.svelte': {path: 'Library_Tertiary_Nav.svelte', declarations: []},
 		'./Mdn_Link.svelte': {path: 'Mdn_Link.svelte', declarations: []},
 		'./Mdn_Logo.svelte': {path: 'Mdn_Logo.svelte', declarations: []},
 		'./Package_Detail.svelte': {path: 'Package_Detail.svelte', declarations: []},

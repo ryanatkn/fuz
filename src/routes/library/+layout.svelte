@@ -1,11 +1,11 @@
 <script lang="ts">
-	import {page} from '$app/stores';
 	import type {Snippet} from 'svelte';
 
-	import Library_Menu from '$lib/Library_Menu.svelte';
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
 	import {set_tomes} from '$lib/tome.js';
 	import Library_Primary_Nav from '$lib/Library_Primary_Nav.svelte';
+	import Library_Secondary_Nav from '$lib/Library_Secondary_Nav.svelte';
+	import Library_Tertiary_Nav from '$lib/Library_Tertiary_Nav.svelte';
 	import {tomes} from '$routes/library/tomes.js';
 	import {set_selected_variable} from '$routes/style_variable_helpers.js';
 	import Dialog from '$lib/Dialog.svelte';
@@ -17,13 +17,9 @@
 
 	const {children}: Props = $props();
 
+	// TODO BLOCK this API is messy, inconsistent usage of props/context
 	const tomes_by_name = new Map(tomes.map((t) => [t.name, t]));
 	set_tomes(tomes_by_name);
-
-	const selected_item = $derived(tomes.find((c) => c.pathname === $page.url.pathname));
-	const tomes_related_to_selected = $derived(
-		selected_item?.related?.map((r) => tomes_by_name.get(r)!),
-	);
 
 	const selected_variable = set_selected_variable();
 
@@ -33,35 +29,21 @@
 
 	// TODO BLOCK sub 1000 move the secondary sidebar, sub 800 move the primary sidebar
 
-	// TODO BLOCK primary/secondary is a little off because of the top nav,
-	// nav instead of sidebar sounds better too -
-	// maybe extract components?
-
-	// TODO maybe extract a `Library_Layout`?
+	// TODO BLOCK maybe extract `<Library {tomes} />`?
 
 	const library_nav_height = '60px';
 </script>
 
 <Library_Primary_Nav --library_nav_height={library_nav_height} />
 <main>
-	<aside class="primary_sidebar unstyled">
-		<nav>
-			<Library_Menu {tomes} />
-		</nav>
-	</aside>
+	<Library_Secondary_Nav {tomes} />
 	<div class="content">
 		{@render children()}
 		<section class="box">
 			<Breadcrumb>🧶</Breadcrumb>
 		</section>
 	</div>
-	<aside class="secondary_sidebar unstyled">
-		{#if tomes_related_to_selected}
-			<Library_Menu tomes={tomes_related_to_selected}>
-				{#snippet children(category)}<h6>related {category}</h6>{/snippet}
-			</Library_Menu>
-		{/if}
-	</aside>
+	<Library_Tertiary_Nav {tomes} {tomes_by_name} />
 </main>
 {#if $selected_variable}
 	<Dialog onclose={() => ($selected_variable = null)}>
@@ -91,25 +73,6 @@
 		padding: var(--library_content_padding);
 		margin: 0 auto;
 		overflow: hidden; /* maybe heavy-handed */
-	}
-	.primary_sidebar,
-	.secondary_sidebar {
-		position: fixed;
-		left: 0;
-		top: var(--library_nav_height);
-		z-index: 1;
-		width: var(--library_sidebar_width);
-		height: calc(100% - var(--library_nav_height));
-		display: flex;
-		flex-direction: column;
-		align-items: flex-end;
-		overflow: auto;
-		background-color: var(--fg_1);
-	}
-	.secondary_sidebar {
-		right: 0;
-		left: unset;
-		align-items: flex-start;
 	}
 	@media (max-width: 1200px) {
 		/* main {
