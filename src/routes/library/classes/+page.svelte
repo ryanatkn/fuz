@@ -93,6 +93,7 @@
 	import '@ryanatkn/fuz/style_reset.css'; // required
 	import '@ryanatkn/fuz/style_utilities.css'; // optional
 	import '@ryanatkn/fuz/style_components.css'; // optional
+	import '@ryanatkn/fuz/style_animations.css'; // optional
 	// ...`}
 		/>
 		<p>
