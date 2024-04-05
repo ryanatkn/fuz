@@ -78,7 +78,7 @@
 					><span
 						style:font-size="var(--{font_size.name})"
 						style:font-weight={selected_font_weight}
-						class="font_family_sans">{font_size.name}</span
+						class="font_sans">{font_size.name}</span
 					></Style_Variable_Button
 				>
 				<div class="row">
@@ -136,7 +136,7 @@
 						><div style:line-height="var(--{name})" class="button_contents">
 							<div>
 								{name} =
-								<code class="font_family_mono">{computed_styles.getPropertyValue('--' + name)}</code
+								<code class="font_mono">{computed_styles.getPropertyValue('--' + name)}</code
 								>
 							</div>
 							<div>{name}</div>

@@ -42,7 +42,7 @@
 	li {
 		display: flex;
 		align-items: stretch;
-		font-family: var(--font_family_mono);
+		font-family: var(--font_mono);
 		min-height: var(--input_height_sm);
 	}
 	li:hover {

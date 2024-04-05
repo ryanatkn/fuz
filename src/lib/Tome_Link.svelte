@@ -21,6 +21,6 @@
 
 <style>
 	a {
-		font-family: var(--font_family_mono);
+		font-family: var(--font_mono);
 	}
 </style>

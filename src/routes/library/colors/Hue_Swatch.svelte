@@ -33,7 +33,7 @@
 	li {
 		display: flex;
 		align-items: stretch;
-		font-family: var(--font_family_mono);
+		font-family: var(--font_mono);
 		padding: var(--space_xs2);
 	}
 	li:hover {
@@ -76,6 +76,6 @@
 		display: flex;
 	}
 	.description {
-		font-family: var(--font_family_sans);
+		font-family: var(--font_sans);
 	}
 </style>

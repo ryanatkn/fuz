@@ -158,11 +158,11 @@ text
 
 */
 
-.font_family_sans {
-	font-family: var(--font_family_sans);
+.font_sans {
+	font-family: var(--font_sans);
 }
-.font_family_mono {
-	font-family: var(--font_family_mono);
+.font_mono {
+	font-family: var(--font_mono);
 }
 
 .line_height_xs {

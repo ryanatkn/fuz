@@ -25,7 +25,7 @@
 		'wrap|nowrap',
 		'float_none|left|right|inline_start|inline_end',
 		'flip_x|y|xy',
-		'font_family_sans|mono',
+		'font_sans|mono',
 		'line_height',
 		'line_height_xs-xl',
 		'size_xs-xl9',
@@ -136,7 +136,7 @@
 		<!-- TODO maybe add a github source link? -->
 		<Details>
 			{#snippet summary()}
-				<span class="font_family_mono">@ryanatkn/fuz/style_utilities.css</span>
+				<span class="font_mono">@ryanatkn/fuz/style_utilities.css</span>
 			{/snippet}
 			<p class="source_link">
 				<a href="https://github.com/ryanatkn/fuz/blob/main/src/lib/style_utilities.css"
@@ -147,7 +147,7 @@
 		</Details>
 		<Details>
 			{#snippet summary()}
-				<span class="font_family_mono">@ryanatkn/fuz/style_components.css</span>
+				<span class="font_mono">@ryanatkn/fuz/style_components.css</span>
 			{/snippet}
 			<p class="source_link">
 				<a href="https://github.com/ryanatkn/fuz/blob/main/src/lib/style_components.css"
@@ -161,7 +161,7 @@
 
 <style>
 	.classes {
-		font-family: var(--font_family_mono);
+		font-family: var(--font_mono);
 	}
 	.classes li {
 		padding: var(--space_xs3);

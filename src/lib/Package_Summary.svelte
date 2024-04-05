@@ -97,7 +97,7 @@
 		text-align: center;
 	}
 	.npm_url {
-		font-family: var(--font_family_mono);
+		font-family: var(--font_mono);
 		text-align: center;
 	}
 	.chip {

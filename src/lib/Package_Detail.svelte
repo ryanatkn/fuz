@@ -217,7 +217,7 @@
 		text-align: center;
 	}
 	.npm_url {
-		font-family: var(--font_family_mono);
+		font-family: var(--font_mono);
 		text-align: center;
 		margin-bottom: var(--space_lg);
 	}
@@ -273,7 +273,7 @@
 		padding-top: var(--space_xs);
 	}
 	.declaration {
-		font-family: var(--font_family_mono);
+		font-family: var(--font_mono);
 		font-size: var(--size_sm);
 		margin-left: var(--space_xs2);
 		margin-right: var(--space_xs2);

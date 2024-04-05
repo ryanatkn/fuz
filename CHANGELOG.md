@@ -43,7 +43,7 @@
 
 - extract optional stylesheets from `style.css` ([#16](https://github.com/ryanatkn/fuz/pull/16))
 - rename `Tome_Link` from `Library_Tome_Link` ([#14](https://github.com/ryanatkn/fuz/pull/14))
-- - rename `font_family_sans` variable from `font_family` ([#16](https://github.com/ryanatkn/fuz/pull/16))
+- - rename `font_sans` variable from `font_family` ([#16](https://github.com/ryanatkn/fuz/pull/16))
   - remove `spaced_hz`, use `mr_lg`
   - remove `spaced`, use `mb_lg`
   - remove `padded` variables, use `p` variants
@@ -294,7 +294,7 @@
 
   - set base `--line_height` to `normal` and override for `.prose` and some elements
   - set height for `body` to `100vh`
-  - simplify default `--font_family_sans`
+  - simplify default `--font_sans`
 
 ### Patch Changes
 

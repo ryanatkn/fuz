@@ -99,7 +99,7 @@
 		<div class="swatch">
 			<div>
 				<div class="color" style:background-color="var(--color_a_5)"></div>
-				<small style:font-family="var(--font_family_sans)">full opacity</small>
+				<small style:font-family="var(--font_sans)">full opacity</small>
 			</div>
 			{#each {length: 6} as _, i}
 				{@const name = 'fade_' + (i + 1)}
@@ -161,7 +161,7 @@
 
 <style>
 	.swatch {
-		font-family: var(--font_family_mono);
+		font-family: var(--font_mono);
 		margin-bottom: var(--space_md);
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(85px, 1fr));
@@ -173,7 +173,7 @@
 	.shadow_example {
 		margin-bottom: var(--space_xl8);
 		padding: var(--space_md);
-		font-family: var(--font_family_mono);
+		font-family: var(--font_mono);
 	}
 	small {
 		height: var(--input_height_sm);
