@@ -13,6 +13,7 @@
 
 	const selected_item = $derived(tomes.find((c) => c.pathname === $page.url.pathname));
 
+	// TODO BLOCK this gets duplicates as you click around
 	const tomes_related_to_selected = $derived(
 		selected_item?.related?.map((r) => tomes_by_name.get(r)!),
 	);
