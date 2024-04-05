@@ -14,6 +14,6 @@
 
 <style>
 	.library_panel {
-		margin: var(--space_xl4) 0 var(--space_xl9);
+		margin-bottom: var(--space_xl9);
 	}
 </style>
