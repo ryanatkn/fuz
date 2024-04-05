@@ -26,7 +26,7 @@
 		<Code content={`import Pending_Button from '@ryanatkn/fuz/Pending_Button.svelte';`} lang="ts" />
 		<p>
 			<button
-				on:click={() => {
+				onclick={() => {
 					pending_1 = !pending_1;
 					pending_2 = !pending_2;
 				}}>toggle the pending status of the buttons below</button

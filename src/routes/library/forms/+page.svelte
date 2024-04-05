@@ -88,7 +88,7 @@
 						{/each}
 					</select>
 				</label>
-				<button type="button" disabled={created_account} on:click={() => (created_account = true)}>
+				<button type="button" disabled={created_account} onclick={() => (created_account = true)}>
 					create account
 				</button>
 			</fieldset>
@@ -99,7 +99,7 @@
 				out:fly={{y: 100, duration: ANIMATION_DURATION_FAST}}
 			>
 				<Alert status="error">cannot create account because this library is fake</Alert>
-				<button type="button" on:click={() => (created_account = false)}> undo undo! </button>
+				<button type="button" onclick={() => (created_account = false)}> undo undo! </button>
 			</form>
 		{/if}
 	</div>

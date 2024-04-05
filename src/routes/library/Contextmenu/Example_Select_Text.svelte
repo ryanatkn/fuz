@@ -52,7 +52,7 @@ Try selecting text and then opening the contextmenu on it.`;
 					entry.
 				</p>
 				<p>
-					Try <button on:click={select_text} class:color_a={toggled}>selecting text</button> and then
+					Try <button onclick={select_text} class:color_a={toggled}>selecting text</button> and then
 					opening the contextmenu on it.
 				</p>
 			</div>

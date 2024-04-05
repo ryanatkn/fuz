@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type {Readable} from 'svelte/store';
+	import {swallow} from '@ryanatkn/belt/dom.js';
 
 	import {get_theme, type Theme} from '$lib/theme.js';
 	import {default_themes} from '$lib/themes.js';
-	import {swallow} from '$lib/swallow.js';
 
 	interface Props {
 		selected_theme?: Readable<Theme | null>;
@@ -40,7 +40,7 @@
 				aria-label="{theme.name} theme"
 				aria-checked={selected}
 				class:selected
-				on:click={(e) => {
+				onclick={(e) => {
 					swallow(e);
 					if (select?.(theme) !== false) {
 						onselect?.(theme);
@@ -53,7 +53,7 @@
 				<button
 					type="button"
 					class="icon_button plain"
-					on:click={(e) => {
+					onclick={(e) => {
 						swallow(e);
 						onedit?.(theme);
 					}}>•••</button

@@ -90,7 +90,7 @@
 		</Details>
 	</section>
 	<section class="theme">
-		<h3>color scheme</h3>
+		<h3>Color scheme</h3>
 		<p>
 			<code>Themed</code> defaults to automatic
 			<Mdn_Link href="Web/CSS/color-scheme">color-scheme</Mdn_Link>
@@ -133,7 +133,7 @@
 		</Details>
 	</section>
 	<section class="theme">
-		<h3>themes</h3>
+		<h3>Themes</h3>
 		<p>
 			A theme is a simple JSON collection of <Tome_Link name="variables" /> that can be transformed into
 			CSS that set
@@ -145,7 +145,7 @@
 		<div class="width_sm mb_lg">
 			<Theme_Input {themes} enable_editing onedit={(t) => (editing_theme = t)} />
 		</div>
-		<!-- <button class="mb_lg" on:click={() => (show_create_theme_dialog = true)} disabled
+		<!-- <button class="mb_lg" onclick={() => (show_create_theme_dialog = true)} disabled
 				>create a new theme (todo)</button
 			> -->
 		<aside>
@@ -154,7 +154,7 @@
 		</aside>
 	</section>
 	<section class="theme">
-		<h3>scoped themes</h3>
+		<h3>Scoped themes</h3>
 		<Details>
 			{#snippet summary()}⚠️ Scoped themes are a work in progress and may not be supported depending
 				on complexity. It shouldn't worsen the unscoped API.{/snippet}
@@ -175,7 +175,7 @@
 								type="button"
 								class="icon_button"
 								class:selected
-								on:click={() => {
+								onclick={() => {
 									select_theme(theme);
 									$selected_color_scheme = 'light';
 								}}
@@ -197,7 +197,7 @@
 								type="button"
 								class="icon_button"
 								class:selected
-								on:click={() => {
+								onclick={() => {
 									select_theme(theme);
 									$selected_color_scheme = 'dark';
 								}}
@@ -213,7 +213,7 @@
 		</Details>
 	</section>
 	<section class="theme">
-		<h3>theme usage</h3>
+		<h3>Theme usage</h3>
 		<p>Themes are plain CSS that can be sourced in a variety of ways.</p>
 		<p>To use fuz's base theme:</p>
 		<Code

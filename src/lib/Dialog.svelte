@@ -6,6 +6,8 @@
 	import Teleport from '$lib/Teleport.svelte';
 	import type {Dialog_Layout} from '$lib/dialog.js';
 
+	// TODO use `<dialog>` here
+
 	/*
 
 	This component is a singleton that mounts to a #dialog container element added to the body,
@@ -74,7 +76,7 @@
 	};
 
 	let dialog_el: HTMLElement | undefined = $state();
-	let pane_wrapper_el: HTMLElement | undefined = $state();
+	let content_el: HTMLElement | undefined = $state();
 
 	const close = (e?: Event) => {
 		if (e) swallow(e);
@@ -107,7 +109,7 @@
 	});
 </script>
 
-<svelte:window on:keydown={active ? on_window_keydown : undefined} />
+<svelte:window onkeydown={active ? on_window_keydown : undefined} />
 
 <!--
 	The `tabindex` and `el.focus()` fix scrolling with the keyboard,
@@ -153,13 +155,13 @@
 	>
 		<div class="dialog_layout">
 			<div class="dialog_wrapper">
-				<div class="dialog_bg" role="none" on:mousedown={close} />
+				<div class="dialog_bg" role="none" onmousedown={close} />
 				<div
 					class="dialog_content"
-					bind:this={pane_wrapper_el}
+					bind:this={content_el}
 					role="none"
-					on:mousedown={(e) => {
-						if (e.target === pane_wrapper_el) close(e);
+					onmousedown={(e) => {
+						if (e.target === content_el) close(e);
 					}}
 				>
 					<!-- mount the content only after teleporting to avoid issues -->

@@ -3,6 +3,8 @@
 		text: string;
 	}
 
+	// TODO BLOCK add library entry
+
 	const {text}: Props = $props();
 
 	let copied = $state(false);
@@ -22,7 +24,7 @@
 </script>
 
 <div class="copy_to_clipboard">
-	<button type="button" class="icon_button" style:font-size="var(--size_lg)" on:click={() => copy()}
+	<button type="button" class="icon_button" style:font-size="var(--size_lg)" onclick={copy}
 		>📋</button
 	>
 	{#if copied}<small style:color="var(--color_b_5)">copied!</small>{/if}

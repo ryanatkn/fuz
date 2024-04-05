@@ -33,7 +33,7 @@
 	<div class="panel" bind:this={teleport_1} />
 	<div class="panel" bind:this={teleport_2} />
 </div>
-<button on:click={() => (swap = !swap)}>
+<button onclick={() => (swap = !swap)}>
 	teleport the bunny
 </button>`}
 		/>
@@ -45,7 +45,7 @@
 			<div class="panel" bind:this={teleport_1} />
 			<div class="panel" bind:this={teleport_2} />
 		</div>
-		<button on:click={() => (swap = !swap)}> teleport the bunny </button>
+		<button onclick={() => (swap = !swap)}> teleport the bunny </button>
 	</section>
 </Tome_Detail>
 

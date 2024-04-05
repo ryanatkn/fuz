@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
+	import {swallow} from '@ryanatkn/belt/dom.js';
 
 	import Pending_Animation from '$lib/Pending_Animation.svelte';
 	import {get_contextmenu, type Contextmenu_Run} from '$lib/contextmenu.svelte.js';
@@ -23,16 +24,6 @@
 		entry.run = run;
 	});
 
-	const click = (_e: MouseEvent) => {
-		// This timeout lets event handlers react to the current DOM
-		// before the item's changes are applied.
-		setTimeout(() => contextmenu.activate(entry));
-	};
-	const mouseenter = (e: MouseEvent) => {
-		e.stopImmediatePropagation();
-		contextmenu.select(entry);
-	};
-
 	const {selected, pending, error_message} = $derived(entry);
 </script>
 
@@ -45,8 +36,15 @@
 	aria-label="contextmenu entry"
 	tabindex="-1"
 	title={error_message ? `Error: ${error_message}` : undefined}
-	on:click={click}
-	on:mouseenter={mouseenter}
+	onclick={() => {
+		// This timeout lets event handlers react to the current DOM
+		// before the item's changes are applied.
+		setTimeout(() => contextmenu.activate(entry));
+	}}
+	onmouseenter={(e) => {
+		swallow(e);
+		contextmenu.select(entry);
+	}}
 >
 	<div class="content">
 		<div class="icon">

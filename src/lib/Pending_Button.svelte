@@ -18,14 +18,7 @@
 	const {pending, onclick, running, title, disabled, attrs, children}: Props = $props();
 </script>
 
-<button
-	type="button"
-	{...attrs}
-	disabled={disabled ?? pending}
-	{title}
-	class:pending
-	on:click={onclick}
->
+<button type="button" {...attrs} disabled={disabled ?? pending} {title} class:pending {onclick}>
 	<div class="content">
 		{@render children()}
 	</div>

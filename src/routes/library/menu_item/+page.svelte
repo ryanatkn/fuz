@@ -72,8 +72,8 @@
 					class:selected={clicked === 'a'}
 					tabindex="0"
 					role="menuitem"
-					on:click={() => (clicked = 'a')}
-					on:keypress={(e) => handled(e) && (clicked = 'a')}
+					onclick={() => (clicked = 'a')}
+					onkeypress={(e) => handled(e) && (clicked = 'a')}
 				>
 					<div class="content">
 						<div class="icon">a</div>
@@ -95,8 +95,8 @@
 					class:selected={clicked === 'b'}
 					tabindex="0"
 					role="menuitem"
-					on:click={() => (clicked = 'b')}
-					on:keypress={(e) => handled(e) && (clicked = 'b')}
+					onclick={() => (clicked = 'b')}
+					onkeypress={(e) => handled(e) && (clicked = 'b')}
 				>
 					<div class="content">
 						<div class="icon">b</div>
@@ -118,8 +118,8 @@
 					class:selected={clicked === 'c'}
 					tabindex="0"
 					role="menuitem"
-					on:click={() => (clicked = 'c')}
-					on:keypress={(e) => handled(e) && (clicked = 'c')}
+					onclick={() => (clicked = 'c')}
+					onkeypress={(e) => handled(e) && (clicked = 'c')}
 				>
 					<div class="content">
 						<div class="icon">c</div>

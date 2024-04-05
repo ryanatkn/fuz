@@ -292,10 +292,6 @@
       "default": "./dist/style.gen.css.js",
       "types": "./dist/style.gen.css.d.ts"
     },
-    "./swallow.js": {
-      "default": "./dist/swallow.js",
-      "types": "./dist/swallow.d.ts"
-    },
     "./Teleport.svelte": {
       "svelte": "./dist/Teleport.svelte",
       "default": "./dist/Teleport.svelte",

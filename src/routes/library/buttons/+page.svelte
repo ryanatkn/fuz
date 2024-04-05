@@ -85,13 +85,13 @@
 			button with <code>.selected</code>
 		</h3>
 		<nav>
-			<button class:selected={selected_button === 0} on:click={() => (selected_button = 0)}>
+			<button class:selected={selected_button === 0} onclick={() => (selected_button = 0)}>
 				button 0
 			</button>
-			<button class:selected={selected_button === 1} on:click={() => (selected_button = 1)}>
+			<button class:selected={selected_button === 1} onclick={() => (selected_button = 1)}>
 				button 1
 			</button>
-			<button class:selected={selected_button === 2} on:click={() => (selected_button = 2)}>
+			<button class:selected={selected_button === 2} onclick={() => (selected_button = 2)}>
 				button 2
 			</button>
 		</nav>
@@ -111,7 +111,7 @@
 		<button
 			class="w_100 deselectable"
 			class:selected={selected_deselectable_button}
-			on:click={() => (selected_deselectable_button = !selected_deselectable_button)}
+			onclick={() => (selected_deselectable_button = !selected_deselectable_button)}
 			>a <code>.deselectable</code>
 			{#if selected_deselectable_button}<code>.selected</code>{:else}unselected{/if} button</button
 		>

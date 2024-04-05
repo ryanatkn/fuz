@@ -27,11 +27,9 @@
 		<div class="mb_lg">
 			<Pending_Animation running={pendingAnimation0Running} />
 		</div>
-		<p>
-			<button on:click={() => (pendingAnimation0Running = !pendingAnimation0Running)}
-				>{#if pendingAnimation0Running}pause animation{:else}play animation{/if}</button
-			>
-		</p>
+		<button class="mb_lg" onclick={() => (pendingAnimation0Running = !pendingAnimation0Running)}
+			>{#if pendingAnimation0Running}pause animation{:else}play animation{/if}</button
+		>
 		<Code
 			content={`<Pending_Animation\n\tattrs={{class: 'size_xl5'}}\n\trunning={${pendingAnimation0Running}}\n/>`}
 		/>
@@ -53,11 +51,10 @@
 		/>
 		<p>
 			with children <input bind:value={turtleSlot} />
-			<button on:click={() => (turtleSlot = '🐢🐢🐢')}>🐢🐢🐢</button>
-			<button on:click={() => (turtleSlot = (turtleSlot + turtleSlot).substring(0, 24))}>* 2</button
-			>
+			<button onclick={() => (turtleSlot = '🐢🐢🐢')}>🐢🐢🐢</button>
+			<button onclick={() => (turtleSlot = (turtleSlot + turtleSlot).substring(0, 24))}>* 2</button>
 		</p>
-		<button on:click={() => (pendingAnimation1Running = !pendingAnimation1Running)}>
+		<button onclick={() => (pendingAnimation1Running = !pendingAnimation1Running)}>
 			{#if pendingAnimation1Running}pause animation{:else}play animation{/if}
 		</button>
 		<div
@@ -88,7 +85,7 @@
 		<p>
 			with
 			<code
-				>running={'{'}<button on:click={() => (frogsRunning = !frogsRunning)}>{frogsRunning}</button
+				>running={'{'}<button onclick={() => (frogsRunning = !frogsRunning)}>{frogsRunning}</button
 				>{'}'}</code
 			>
 		</p>

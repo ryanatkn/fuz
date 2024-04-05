@@ -241,7 +241,6 @@ export const package_json = {
 		'./style_utilities.css': {default: './dist/style_utilities.css'},
 		'./style.css': {default: './dist/style.css'},
 		'./style.gen.css.js': {default: './dist/style.gen.css.js', types: './dist/style.gen.css.d.ts'},
-		'./swallow.js': {default: './dist/swallow.js', types: './dist/swallow.d.ts'},
 		'./Teleport.svelte': {
 			svelte: './dist/Teleport.svelte',
 			default: './dist/Teleport.svelte',
@@ -390,7 +389,6 @@ export const src_json = {
 			path: 'style.gen.css.ts',
 			declarations: [{name: 'gen', kind: 'variable'}],
 		},
-		'./swallow.js': {path: 'swallow.ts', declarations: [{name: 'swallow', kind: 'function'}]},
 		'./Teleport.svelte': {path: 'Teleport.svelte', declarations: []},
 		'./Theme_Input.svelte': {path: 'Theme_Input.svelte', declarations: []},
 		'./theme.css': {path: 'theme.css', declarations: []},

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
+	import {swallow} from '@ryanatkn/belt/dom.js';
 
 	import {
 		get_contextmenu,
@@ -19,15 +20,6 @@
 	const contextmenu = get_contextmenu();
 
 	const submenu = contextmenu.add_submenu();
-
-	const mouseenter = (e: MouseEvent) => {
-		e.stopImmediatePropagation();
-		// This timeout fixes a bug on mobile where the mouseenter event
-		// fires immediately when the contextmenu appears,
-		// and then the newly mounted selected entry immediately receives a click event.
-		// The timeout ensures the click event is not passed through.
-		setTimeout(() => contextmenu.select(submenu));
-	};
 
 	const {layout} = contextmenu;
 
@@ -74,7 +66,14 @@
 		role="menuitem"
 		aria-label="contextmenu submenmu"
 		tabindex="-1"
-		on:mouseenter={mouseenter}
+		onmouseenter={(e) => {
+			swallow(e);
+			// This timeout fixes a bug on mobile where the mouseenter event
+			// fires immediately when the contextmenu appears,
+			// and then the newly mounted selected entry immediately receives a click event.
+			// The timeout ensures the click event is not passed through.
+			setTimeout(() => contextmenu.select(submenu));
+		}}
 		aria-expanded={selected}
 	>
 		<div class="content">

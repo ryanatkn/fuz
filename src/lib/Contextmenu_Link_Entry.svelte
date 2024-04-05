@@ -29,7 +29,7 @@
 <!-- TODO this doesn't work with the keyboard controls, need to use `menuitem` -->
 <!-- TODO could do more if we had the original `target` element (but it might go stale on $contextmenu?) -->
 <li role="none">
-	<a class="menu_item plain" role="menuitem" {href} {rel} on:click={() => contextmenu.close()}>
+	<a class="menu_item plain" role="menuitem" {href} {rel} onclick={() => contextmenu.close()}>
 		<div class="content">
 			<div class="icon">
 				{#if icon}{@render icon('🔗')}{:else}🔗{/if}

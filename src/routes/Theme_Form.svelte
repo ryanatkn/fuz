@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
+	import {swallow} from '@ryanatkn/belt/dom.js';
 
-	import {swallow} from '$lib/swallow.js';
 	import Copy_To_Clipboard from '$lib/Copy_To_Clipboard.svelte';
 	import Dialog from '$lib/Dialog.svelte';
 	import {render_theme_style, type Style_Variable, type Theme} from '$lib/theme.js';
@@ -68,14 +68,14 @@
 	<header>
 		<div class="variables_header">
 			<p>variables: {light_count} light, {dark_count} dark</p>
-			<button type="button" class="w_100" on:click={add_variable}>add a variable</button>
+			<button type="button" class="w_100" onclick={add_variable} disabled>add a variable</button>
 		</div>
 		<form>
 			<label>
 				<div class="title">name</div>
 				<input bind:value={new_name} placeholder=">" />
 			</label>
-			<button type="button" on:click={save} disabled={!changed}
+			<button type="button" onclick={save} disabled={!changed}
 				>{#if editing}save changes{:else}create theme{/if}</button
 			>
 		</form>
@@ -83,10 +83,8 @@
 	<div class="content">
 		<div class="variables">
 			{#each new_variables as variable (variable.name)}
-				<button
-					type="button"
-					class="variable menu_item"
-					on:click={(e) => edit_variable(e, variable)}>--{variable.name}</button
+				<button type="button" class="variable menu_item" onclick={(e) => edit_variable(e, variable)}
+					>--{variable.name}</button
 				>
 			{/each}
 		</div>
@@ -107,7 +105,7 @@
 				<div class="panel p_lg box">
 					<Style_Variable_Detail variable={selected_variable} />
 					<aside>this is unfinished</aside>
-					<button on:click={close}>ok</button>
+					<button onclick={close}>ok</button>
 				</div>
 			</div>
 		{/snippet}
