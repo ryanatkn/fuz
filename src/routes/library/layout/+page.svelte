@@ -13,7 +13,7 @@
 
 <Tome_Detail {tome}>
 	<section>
-		<h3>Spaces</h3>
+		<h3>Space variables</h3>
 		<div>
 			{#each space_sizes as space_size}
 				{@const name = 'space_' + space_size}
@@ -27,7 +27,7 @@
 		</div>
 	</section>
 	<section>
-		<h3>Widths</h3>
+		<h3>Width variables</h3>
 		<div>
 			{#each ['sm', 'md'] as radius}
 				{@const name = 'width_' + radius}

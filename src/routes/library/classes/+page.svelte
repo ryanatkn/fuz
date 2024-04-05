@@ -135,7 +135,7 @@
 		<!-- TODO maybe add a github source link? -->
 		<Details>
 			{#snippet summary()}
-				<summary><span class="font_family_mono">@ryanatkn/fuz/style_utilities.css</span></summary>
+				<span class="font_family_mono">@ryanatkn/fuz/style_utilities.css</span>
 			{/snippet}
 			<p class="source_link">
 				<a href="https://github.com/ryanatkn/fuz/blob/main/src/lib/style_utilities.css"
@@ -146,7 +146,7 @@
 		</Details>
 		<Details>
 			{#snippet summary()}
-				<summary><span class="font_family_mono">@ryanatkn/fuz/style_components.css</span></summary>
+				<span class="font_family_mono">@ryanatkn/fuz/style_components.css</span>
 			{/snippet}
 			<p class="source_link">
 				<a href="https://github.com/ryanatkn/fuz/blob/main/src/lib/style_components.css"

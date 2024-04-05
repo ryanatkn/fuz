@@ -180,9 +180,7 @@
 		</section>
 		<section>
 			<Details>
-				{#snippet summary()}
-					<summary> View example source </summary>
-				{/snippet}
+				{#snippet summary()}View example source{/snippet}
 				<Code content={file_contents} />
 			</Details>
 		</section>

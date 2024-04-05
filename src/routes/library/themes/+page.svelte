@@ -3,6 +3,7 @@
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import Details from '$lib/Details.svelte';
 	import Dialog from '$lib/Dialog.svelte';
 	import {get_tome} from '$lib/tome.js';
 	import Color_Scheme_Input from '$lib/Color_Scheme_Input.svelte';
@@ -45,8 +46,8 @@
 		</p>
 		<Code content={`import Themed from '@ryanatkn/fuz/Themed.svelte';`} lang="ts" />
 		<Code content={`<!-- +layout.svelte -->\n<Themed>\n\t{@render children()}\n</Themed>`} />
-		<details>
-			<summary>why the singleton?</summary>
+		<Details>
+			{#snippet summary()}why the singleton?{/snippet}
 			<aside>
 				<p>
 					By default <code>Themed</code> syncs its settings to the global <code>:root</code> tag and
@@ -62,9 +63,9 @@
 				</ul>
 				<p>See <code>Themed_Scope</code> below to theme one branch of the DOM tree.</p>
 			</aside>
-		</details>
-		<details>
-			<summary>why nested children?</summary>
+		</Details>
+		<Details>
+			{#snippet summary()}why nested children?{/snippet}
 			<aside>
 				<p>
 					<code>Themed</code> is designed to wrap every page at the top level so it can provide the
@@ -86,7 +87,7 @@
 						`script>\n\tconst theme = writable(...);\n\tconst color_scheme = writable(...);\n\tset_theme(theme);\n\tset_color_scheme(color_scheme);\n</script>\n<Themed\n\tselected_theme={theme}\n\tselected_color_scheme={color_scheme}\n/>\n<!-- sibling content... -->`}
 				/>
 			</aside>
-		</details>
+		</Details>
 	</section>
 	<section class="theme">
 		<h3>color scheme</h3>
@@ -115,8 +116,8 @@
 			The builtin themes support both dark and light color schemes. Custom themes may support one or
 			both color schemes.
 		</p>
-		<details>
-			<summary>more about <code>Color_Scheme_Input</code></summary>
+		<Details>
+			{#snippet summary()}more about <code>Color_Scheme_Input</code>{/snippet}
 			<aside>
 				<p>
 					<code>Color_Scheme_Input</code> enables users to choose and persist the color scheme without
@@ -129,7 +130,7 @@
 					or <code>select</code> function prop.
 				</p>
 			</aside>
-		</details>
+		</Details>
 	</section>
 	<section class="theme">
 		<h3>themes</h3>
@@ -154,11 +155,9 @@
 	</section>
 	<section class="theme">
 		<h3>scoped themes</h3>
-		<details>
-			<summary
-				>⚠️ Scoped themes are a work in progress and may not be supported depending on complexity.
-				It shouldn't worsen the unscoped API.</summary
-			>
+		<Details>
+			{#snippet summary()}⚠️ Scoped themes are a work in progress and may not be supported depending
+				on complexity. It shouldn't worsen the unscoped API.{/snippet}
 			<div class="mb_lg">
 				<p>Scope a theme to one branch of the DOM tree with <code>Themed_Scope</code>:</p>
 				<Code content={`import Themed_Scope from '@ryanatkn/fuz/Themed_Scope.svelte';`} lang="ts" />
@@ -211,7 +210,7 @@
 					</Themed_Scope>
 				{/each}
 			</div>
-		</details>
+		</Details>
 	</section>
 	<section class="theme">
 		<h3>theme usage</h3>
@@ -264,8 +263,8 @@ const selected_color_scheme = get_color_scheme();
 $selected_color_scheme; // '${$selected_color_scheme}'`}
 			lang="js"
 		/>
-		<details>
-			<summary>more about <code>Themed</code></summary>
+		<Details>
+			{#snippet summary()}more about <code>Themed</code>{/snippet}
 			<aside>
 				<p>
 					<code>Themed</code> initializes the system's theme support. Without it, the page will not
@@ -289,7 +288,7 @@ $selected_color_scheme; // '${$selected_color_scheme}'`}
 					after loading. We'll try to fix this when the system stabilizes.
 				</p>
 			</aside>
-		</details>
+		</Details>
 	</section>
 </Tome_Detail>
 

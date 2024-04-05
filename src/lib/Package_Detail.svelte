@@ -5,6 +5,8 @@
 	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
 	import type {Snippet} from 'svelte';
 
+	import Details from '$lib/Details.svelte';
+
 	interface Props {
 		pkg: Package_Meta; // TODO normalized version with cached primitives?
 		repo_name?: Snippet<[repo_name: string]>;
@@ -182,10 +184,10 @@
 	{/if}
 
 	<section>
-		<details>
-			<summary>raw data for <code>pkg: Package_Meta</code></summary>
+		<Details>
+			{#snippet summary()}raw data for <code>pkg: Package_Meta</code>{/snippet}
 			<pre><code>{JSON.stringify(pkg, null, '\t')}</code></pre>
-		</details>
+		</Details>
 	</section>
 
 	<!-- TODO more details behind a `<details>`, including author -->
@@ -238,11 +240,6 @@
 		display: flex;
 		align-items: center;
 		margin-left: var(--space_xs);
-	}
-	pre {
-		display: flex;
-		overflow: auto;
-		width: 100%;
 	}
 	.module {
 		margin-bottom: var(--space_xs);

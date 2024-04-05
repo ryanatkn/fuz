@@ -9,6 +9,8 @@
 	const LIBRARY_ITEM_NAME = 'elements';
 
 	const tome = get_tome(LIBRARY_ITEM_NAME);
+
+	// TODO BLOCK add `Details` page and document below
 </script>
 
 <Tome_Detail {tome}>

@@ -115,6 +115,7 @@ pre {
 }
 
 pre > code {
+	display: block; /* TODO maybe invert and change to inline in `p`? */
 	font-size: var(--size_sm);
 	font-weight: 500;
 }
