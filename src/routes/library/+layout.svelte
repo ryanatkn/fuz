@@ -31,10 +31,10 @@
 
 	// TODO BLOCK maybe extract `<Library {tomes} />`?
 
-	const library_nav_height = '60px';
+	const library_primary_nav_height = '60px';
 </script>
 
-<Library_Primary_Nav --library_nav_height={library_nav_height} />
+<Library_Primary_Nav --library_primary_nav_height={library_primary_nav_height} />
 <main>
 	<Library_Secondary_Nav {tomes} />
 	<div class="content">
@@ -61,7 +61,7 @@
 
 <style>
 	main {
-		--library_nav_height: 60px;
+		--library_primary_nav_height: 60px;
 		--library_content_padding: var(--space_xl5);
 		--library_content_max_width: calc(var(--width_md) + var(--library_content_padding) * 2);
 		--library_sidebar_width: max(200px, calc((100% - var(--library_content_max_width)) / 2));

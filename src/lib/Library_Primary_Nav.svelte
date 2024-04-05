@@ -36,7 +36,7 @@
 		top: 0;
 		z-index: 10;
 		background-color: var(--bg);
-		height: var(--library_nav_height);
+		height: var(--library_primary_nav_height);
 	}
 	.background {
 		position: absolute;

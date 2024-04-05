@@ -7,6 +7,8 @@
 	}
 
 	const {tomes}: Props = $props();
+
+	// TODO BLOCK get the width of the navs consistent
 </script>
 
 <aside class="library_secondary_nav unstyled">
@@ -19,10 +21,11 @@
 	.library_secondary_nav {
 		position: fixed;
 		left: 0;
-		top: var(--library_nav_height);
+		top: var(--library_primary_nav_height);
 		z-index: 1;
 		width: var(--library_sidebar_width);
-		height: calc(100% - var(--library_nav_height));
+		height: calc(100% - var(--library_primary_nav_height));
+		padding: 0 var(--space_md);
 		display: flex;
 		flex-direction: column;
 		align-items: flex-end;
