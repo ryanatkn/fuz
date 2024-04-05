@@ -18,99 +18,99 @@
 		<Code content={`import Card from '@ryanatkn/fuz/Card.svelte';`} lang="ts" />
 		<Code
 			content={`<Card>
-  <div>just</div>
-  <div>a card</div>
+  just<br />
+  a card
 </Card>`}
 		/>
 		<Card>
-			<div>just</div>
-			<div>a card</div>
+			just<br />
+			a card
 		</Card>
 	</section>
 	<section>
 		<Code
 			content={`<Card href="${base}/">
-  <div>a</div>
-  <div>link</div>
+  a<br />
+  link
 </Card>`}
 		/>
 		<Card href="{base}/">
-			<div>a</div>
-			<div>link</div>
+			a<br />
+			link
 		</Card>
 	</section>
 	<section>
 		<Code
 			content={`<Card>
-  <div>custom</div>
-  <div>icon</div>
+  custom<br />
+  icon
   {#snippet icon()}📖{/snippet}
 </Card>`}
 		/>
 		<Card>
-			<div>custom</div>
-			<div>icon</div>
+			custom<br />
+			icon
 			{#snippet icon()}📖{/snippet}
 		</Card>
 	</section>
 	<section>
 		<Code
 			content={`<Card tag="button">
-  <div>custom</div>
-  <div>tag</div>
+  custom<br />
+  tag
 </Card>`}
 		/>
 		<Card tag="button">
-			<div>custom</div>
-			<div>tag</div>
+			custom<br />
+			tag
 		</Card>
 	</section>
 	<section>
 		<Code
 			content={`<Card href="${base}/library/Card">
-  <div>href is</div>
-  <div>selected</div>
+  href is<br />
+  selected
 </Card>`}
 		/>
 		<Card href="{href}/Card">
-			<div>href is</div>
-			<div>selected</div>
+			href is<br />
+			selected
 		</Card>
 	</section>
 	<section>
 		<Code
 			content={`<Card align="right">
-  <div>align</div>
-  <div>icon right</div>
+  align<br />
+  icon right
 </Card>`}
 		/>
 		<Card align="right">
-			<div>align</div>
-			<div>icon right</div>
+			align<br />
+			icon right
 		</Card>
 	</section>
 	<section>
 		<Code
 			content={`<Card align="above">
-  <div>align</div>
-  <div>icon above</div>
+  align<br />
+  icon above
 </Card>`}
 		/>
 		<Card align="above">
-			<div>align</div>
-			<div>icon above</div>
+			align<br />
+			icon above
 		</Card>
 	</section>
 	<section>
 		<Code
 			content={`<Card align="below">
-  <div>align</div>
-  <div>icon below</div>
+  align<br />
+  icon below
 </Card>`}
 		/>
 		<Card align="below">
-			<div>align</div>
-			<div>icon below</div>
+			align<br />
+			icon below
 		</Card>
 	</section>
 </Tome_Detail>
