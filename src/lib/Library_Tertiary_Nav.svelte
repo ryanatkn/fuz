@@ -17,9 +17,6 @@
 	const tomes_related_to_selected = $derived(
 		selected_item?.related?.map((r) => tomes_by_name.get(r)!),
 	);
-
-	// TODO BLOCK sometimes the outline of the <a> cut off but it goes away after a refresh, what's going on?
-	// may be due to the transition - also see the menu_item z-index
 </script>
 
 <aside class="library_tertiary_nav unstyled">
@@ -38,7 +35,7 @@
 		z-index: 1;
 		width: var(--library_sidebar_width);
 		height: calc(100% - var(--library_primary_nav_height));
-		padding: 0 var(--space_lg);
+		padding: var(--space_md); /* needed with `overflow: auto` to avoid cutting off outline */
 		overflow: auto;
 		background-color: var(--fg_1);
 	}
@@ -47,7 +44,6 @@
 		.library_tertiary_nav {
 			position: static;
 			background-color: initial;
-			padding: 0;
 		}
 	}
 </style>

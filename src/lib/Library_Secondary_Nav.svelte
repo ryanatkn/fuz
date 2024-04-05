@@ -23,7 +23,7 @@
 		z-index: 1;
 		width: var(--library_sidebar_width);
 		height: calc(100% - var(--library_primary_nav_height));
-		padding: 0 var(--space_lg);
+		padding: var(--space_md); /* needed with `overflow: auto` to avoid cutting off outline */
 		display: flex;
 		flex-direction: column;
 		align-items: flex-end;
