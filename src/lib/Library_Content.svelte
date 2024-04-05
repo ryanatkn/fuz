@@ -4,7 +4,6 @@
 	import {base} from '$app/paths';
 
 	import type {Tome} from '$lib/tome.js';
-	import Library_Panel from '$lib/Library_Panel.svelte';
 	import Library_Footer from '$lib/Library_Footer.svelte';
 	import Package_Summary from '$lib/Package_Summary.svelte';
 	import {package_json, src_json} from '$routes/package.js';
@@ -20,14 +19,13 @@
 </script>
 
 {#if $page.url.pathname === base + root_path}
-	<Library_Panel>
-		<div class="box">
-			<h1 class="m_0">fuz</h1>
-		</div>
-		<div class="box w_100">
-			<Package_Summary {pkg} />
-		</div>
-	</Library_Panel>
+	<div class="box mb_xl5">
+		<Package_Summary {pkg}>
+			{#snippet repo_name()}
+				<h1 class="m_0">fuz</h1>
+			{/snippet}
+		</Package_Summary>
+	</div>
 {/if}
 <div class="tomes">
 	{#each tomes as tome (tome)}

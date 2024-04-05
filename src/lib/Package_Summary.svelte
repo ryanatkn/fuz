@@ -24,7 +24,7 @@
 		{#if repo_name}
 			{@render repo_name(pkg.repo_name)}
 		{:else}
-			<div class="repo_name">{repo_name}</div>
+			<div class="repo_name">{pkg.repo_name}</div>
 		{/if}
 	</header>
 	{#if package_json.description}
