@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
+	import {parse_package_meta} from '@ryanatkn/gro/package_meta.js';
 
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
 	import {set_tomes} from '$lib/tome.js';
@@ -10,6 +11,8 @@
 	import {set_selected_variable} from '$routes/style_variable_helpers.js';
 	import Dialog from '$lib/Dialog.svelte';
 	import Style_Variable_Detail from '$routes/Style_Variable_Detail.svelte';
+	import Library_Footer from '$lib/Library_Footer.svelte';
+	import {package_json, src_json} from '$routes/package.js';
 
 	interface Props {
 		children: Snippet;
@@ -36,6 +39,8 @@
 	// TODO BLOCK doesn't use Library_Footer here, hm
 
 	// TODO BLOCK maybe add an hr or put the bg_1 on the footer area
+
+	const pkg = parse_package_meta(package_json.homepage, package_json, src_json);
 </script>
 
 <Library_Primary_Nav --library_primary_nav_height={library_primary_nav_height} />
@@ -48,6 +53,7 @@
 			<section class="box">
 				<Breadcrumb>🧶</Breadcrumb>
 			</section>
+			<Library_Footer {pkg} />
 		</footer>
 	</div>
 </main>

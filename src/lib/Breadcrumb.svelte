@@ -27,6 +27,9 @@
 
 	const root_path = $derived(final_base_path || '/');
 
+	// TODO BLOCK instead of having `--breadcrumb_padding_x`, maybe calculate from `--font_size`?
+	// and set `font-size: var(--font_size);`
+
 	// TODO animate these, need to use in a layout though, but then how to opt out?
 	// `transition:slide={{axis: 'x'}}`
 </script>

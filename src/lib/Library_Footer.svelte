@@ -27,7 +27,7 @@
 	</div>
 	{#if root_url}
 		<div class="root_url">
-			<a href={root_url} rel="me">{format_url(root_url)}</a>
+			<a href={root_url}>{format_url(root_url)}</a>
 		</div>
 	{/if}
 </footer>

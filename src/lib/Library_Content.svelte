@@ -1,10 +1,9 @@
 <script lang="ts">
-	import {parse_package_meta} from '@ryanatkn/gro/package_meta.js';
 	import {page} from '$app/stores';
 	import {base} from '$app/paths';
+	import {parse_package_meta} from '@ryanatkn/gro/package_meta.js';
 
 	import type {Tome} from '$lib/tome.js';
-	import Library_Footer from '$lib/Library_Footer.svelte';
 	import Package_Summary from '$lib/Package_Summary.svelte';
 	import {package_json, src_json} from '$routes/package.js';
 
@@ -15,6 +14,7 @@
 
 	const {root_path = '/library', tomes}: Props = $props();
 
+	// TODO BLOCK get from context? is used at root
 	const pkg = parse_package_meta(package_json.homepage, package_json, src_json);
 </script>
 
@@ -32,9 +32,6 @@
 		<svelte:component this={tome.component} />
 	{/each}
 </div>
-<section class="box">
-	<Library_Footer {pkg} />
-</section>
 
 <style>
 	.tomes {

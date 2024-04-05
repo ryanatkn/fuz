@@ -210,16 +210,6 @@ export const package_json = {
 			default: './dist/Package_Summary.svelte',
 			types: './dist/Package_Summary.svelte.d.ts',
 		},
-		'./Page_Footer.svelte': {
-			svelte: './dist/Page_Footer.svelte',
-			default: './dist/Page_Footer.svelte',
-			types: './dist/Page_Footer.svelte.d.ts',
-		},
-		'./Page_Header.svelte': {
-			svelte: './dist/Page_Header.svelte',
-			default: './dist/Page_Header.svelte',
-			types: './dist/Page_Header.svelte.d.ts',
-		},
 		'./Pending_Animation.svelte': {
 			svelte: './dist/Pending_Animation.svelte',
 			default: './dist/Pending_Animation.svelte',
@@ -375,8 +365,6 @@ export const src_json = {
 		'./Mdn_Logo.svelte': {path: 'Mdn_Logo.svelte', declarations: []},
 		'./Package_Detail.svelte': {path: 'Package_Detail.svelte', declarations: []},
 		'./Package_Summary.svelte': {path: 'Package_Summary.svelte', declarations: []},
-		'./Page_Footer.svelte': {path: 'Page_Footer.svelte', declarations: []},
-		'./Page_Header.svelte': {path: 'Page_Header.svelte', declarations: []},
 		'./Pending_Animation.svelte': {path: 'Pending_Animation.svelte', declarations: []},
 		'./Pending_Button.svelte': {path: 'Pending_Button.svelte', declarations: []},
 		'./Redirect.svelte': {path: 'Redirect.svelte', declarations: []},

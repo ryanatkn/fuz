@@ -248,16 +248,6 @@
       "default": "./dist/Package_Summary.svelte",
       "types": "./dist/Package_Summary.svelte.d.ts"
     },
-    "./Page_Footer.svelte": {
-      "svelte": "./dist/Page_Footer.svelte",
-      "default": "./dist/Page_Footer.svelte",
-      "types": "./dist/Page_Footer.svelte.d.ts"
-    },
-    "./Page_Header.svelte": {
-      "svelte": "./dist/Page_Header.svelte",
-      "default": "./dist/Page_Header.svelte",
-      "types": "./dist/Page_Header.svelte.d.ts"
-    },
     "./Pending_Animation.svelte": {
       "svelte": "./dist/Pending_Animation.svelte",
       "default": "./dist/Pending_Animation.svelte",
