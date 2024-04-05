@@ -71,23 +71,18 @@
 	</Dialog>
 {/if}`}
 	/>
-	<button onclick={() => (opened = true)}> open a dialog </button>
-	<hr />
-	<button onclick={() => (dialog_overflowing_opened = true)}
+	<button class="mb_lg" onclick={() => (opened = true)}> open a dialog </button>
+	<button class="mb_lg" onclick={() => (dialog_overflowing_opened = true)}
 		>open a dialog that overflows vertically</button
 	>
-	<hr />
-	<button onclick={() => (dialog_layout_page_opened = true)}
+	<button class="mb_lg" onclick={() => (dialog_layout_page_opened = true)}
 		>open a dialog with <code>layout="page"</code> instead of the default
 		<code>layout='centered'</code></button
 	>
-	<hr />
-	<button onclick={() => (dialog_nested_1_opened = true)}
+	<button class="mb_lg" onclick={() => (dialog_nested_1_opened = true)}
 		>open a dialog containing another dialog</button
 	>
-	<hr />
-	<button onclick={() => add_dialogs(5)}>open many dialogs</button>
-	<hr />
+	<button class="mb_lg" onclick={() => add_dialogs(5)}>open many dialogs</button>
 </Tome_Detail>
 {#if opened}
 	<Dialog onclose={() => (opened = false)}>

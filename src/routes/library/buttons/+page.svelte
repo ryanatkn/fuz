@@ -18,6 +18,8 @@
 	// TODO probably want to put the buttons in a more consistent format so we can include `disabled` versions of each in a condensed format
 
 	const color_names = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
+
+	const mb_xs = true;
 </script>
 
 <Tome_Detail {tome}>
@@ -35,11 +37,13 @@
 			of having two distinct styles of buttons with outlined and filled variants, Fuz makes filled buttons
 			the default, and selected buttons are outlined.
 		</p>
-		<button disabled>disabled button</button>
-		<button class="selected">button.selected</button>
-		<button class="selected" disabled>disabled button.selected</button>
-		<button class="selected deselectable">button.selected.deselectable</button>
-		<button class="selected deselectable" disabled>disabled button.selected.deselectable</button>
+		<button disabled class:mb_xs>disabled button</button>
+		<button class="selected" class:mb_xs>button.selected</button>
+		<button class="selected" disabled class:mb_xs>disabled button.selected</button>
+		<button class="selected deselectable" class:mb_xs>button.selected.deselectable</button>
+		<button class="selected deselectable" disabled class:mb_xs
+			>disabled button.selected.deselectable</button
+		>
 	</section>
 
 	<section>
@@ -48,14 +52,16 @@
 			{@const color_name = `color_${c}`}
 			<section>
 				<Code content={`<button class="${color_name}">`} />
-				<button class={color_name}>.{color_name}</button>
-				<button class={color_name} disabled>disabled .{color_name}</button>
-				<button class="{color_name} selected">.{color_name}.selected</button>
-				<button class="{color_name} selected" disabled>disabled .{color_name}.selected</button>
-				<button class="{color_name} selected deselectable"
+				<button class={color_name} class:mb_xs>.{color_name}</button>
+				<button class={color_name} disabled class:mb_xs>disabled .{color_name}</button>
+				<button class="{color_name} selected" class:mb_xs>.{color_name}.selected</button>
+				<button class="{color_name} selected" disabled class:mb_xs
+					>disabled .{color_name}.selected</button
+				>
+				<button class="{color_name} selected deselectable" class:mb_xs
 					>.{color_name}.selected.deselectable</button
 				>
-				<button class="{color_name} selected deselectable" disabled
+				<button class="{color_name} selected deselectable" disabled class:mb_xs
 					>disabled .{color_name}.selected.deselectable</button
 				>
 			</section>
@@ -85,13 +91,25 @@
 			button with <code>.selected</code>
 		</h3>
 		<nav>
-			<button class:selected={selected_button === 0} onclick={() => (selected_button = 0)}>
+			<button
+				class:selected={selected_button === 0}
+				onclick={() => (selected_button = 0)}
+				class:mb_xs
+			>
 				button 0
 			</button>
-			<button class:selected={selected_button === 1} onclick={() => (selected_button = 1)}>
+			<button
+				class:selected={selected_button === 1}
+				onclick={() => (selected_button = 1)}
+				class:mb_xs
+			>
 				button 1
 			</button>
-			<button class:selected={selected_button === 2} onclick={() => (selected_button = 2)}>
+			<button
+				class:selected={selected_button === 2}
+				onclick={() => (selected_button = 2)}
+				class:mb_xs
+			>
 				button 2
 			</button>
 		</nav>
@@ -130,21 +148,21 @@
 	+
 </button>`}
 			/>
-			<button class="plain">+</button>
+			<button class="plain" class:mb_xs>+</button>
 			<button class="plain mb_lg" disabled>+</button>
 			<Code
 				content={`<button class="icon_button">
 	+
 </button>`}
 			/>
-			<button class="icon_button">+</button>
+			<button class="icon_button" class:mb_xs>+</button>
 			<button class="icon_button mb_lg" disabled>+</button>
 			<Code
 				content={`<button class="plain icon_button">
 	+
 </button>`}
 			/>
-			<button class="plain icon_button">+</button>
+			<button class="plain icon_button" class:mb_xs>+</button>
 			<button class="plain icon_button" disabled>+</button>
 		</section>
 		<section>
