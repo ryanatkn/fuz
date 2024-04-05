@@ -34,6 +34,8 @@
 	const library_primary_nav_height = '60px';
 
 	// TODO BLOCK doesn't use Library_Footer here, hm
+
+	// TODO BLOCK maybe add an hr or put the bg_1 on the footer area
 </script>
 
 <Library_Primary_Nav --library_primary_nav_height={library_primary_nav_height} />
