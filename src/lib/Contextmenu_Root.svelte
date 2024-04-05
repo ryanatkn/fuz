@@ -266,9 +266,7 @@
 		handler();
 	};
 
-	// TODO BLOCK remove
-	$inspect('open', contextmenu.opened);
-	$inspect('params', contextmenu.params);
+	// TODO BLOCK change the events below to the callback form, but the passive/nonpassive modifiers need to be handled with an action? assuming we still need them
 
 	// TODO BLOCK change the events to be just the container? maybe just the starting triggers? (contextmenu, touchstart)
 
