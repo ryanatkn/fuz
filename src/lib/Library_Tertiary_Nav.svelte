@@ -19,7 +19,7 @@
 	);
 
 	// TODO BLOCK sometimes the outline of the <a> cut off but it goes away after a refresh, what's going on?
-	// also see the menu_item z-index
+	// may be due to the transition - also see the menu_item z-index
 </script>
 
 <aside class="library_tertiary_nav unstyled">
