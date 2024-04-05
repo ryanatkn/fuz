@@ -14,6 +14,7 @@ import Pending_Animation from '$routes/library/Pending_Animation/+page.svelte';
 import Pending_Button from '$routes/library/Pending_Button/+page.svelte';
 import Package_Summary from '$routes/library/Package_Summary/+page.svelte';
 import Package_Detail from '$routes/library/Package_Detail/+page.svelte';
+import Details from '$routes/library/Details/+page.svelte';
 import Dialog from '$routes/library/Dialog/+page.svelte';
 import Teleport from '$routes/library/Teleport/+page.svelte';
 import Alert from '$routes/library/Alert/+page.svelte';
@@ -82,7 +83,7 @@ export const tomes: Tome[] = [
 		pathname: '',
 		category: 'styles',
 		component: elements,
-		related: ['buttons', 'forms', 'classes', 'typography', 'borders', 'layout'],
+		related: ['buttons', 'forms', 'classes', 'typography', 'borders', 'layout', 'Details'],
 	},
 	{
 		name: 'classes',
@@ -156,6 +157,14 @@ export const tomes: Tome[] = [
 		category: 'components',
 		component: Contextmenu,
 		related: [],
+	},
+	{
+		name: 'Details',
+		slug: 'Details',
+		pathname: '',
+		category: 'components',
+		component: Details,
+		related: ['elements'],
 	},
 	{
 		name: 'Dialog',

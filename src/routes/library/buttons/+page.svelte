@@ -43,7 +43,7 @@
 	</section>
 
 	<section>
-		<h3>colorful buttons</h3>
+		<h3>Colorful buttons</h3>
 		{#each color_names as c}
 			{@const color_name = `color_${c}`}
 			<section>
@@ -115,7 +115,7 @@
 			>a <code>.deselectable</code>
 			{#if selected_deselectable_button}<code>.selected</code>{:else}unselected{/if} button</button
 		>
-		<button class="w_100 selected deselectable" disabled={true}
+		<button class="w_100 selected deselectable" disabled
 			>disabled <code>.deselectable</code> <code>.selected</code></button
 		>
 	</section>

@@ -31,11 +31,11 @@
 
 <Tome_Detail {tome}>
 	<aside>forms need more work</aside>
-	<p>
-		a <Mdn_Link href="Web/HTML/Element/form">form</Mdn_Link> with a <Mdn_Link
+	<h3>
+		<Mdn_Link href="Web/HTML/Element/form">form</Mdn_Link> with a <Mdn_Link
 			href="Web/HTML/Element/fieldset">fieldset</Mdn_Link
-		>:
-	</p>
+		>
+	</h3>
 	<Code
 		content={`<form>
 	<fieldset>
@@ -59,7 +59,7 @@
 	<div class="width_sm">
 		<form>
 			<fieldset>
-				<legend>a <Mdn_Link href="Web/HTML/Element/legend">legend</Mdn_Link></legend>
+				<legend>This is a <Mdn_Link href="Web/HTML/Element/legend">legend</Mdn_Link></legend>
 				<label>
 					<div class="title">username</div>
 					<input bind:value={username} disabled={created_account} placeholder=">" />
