@@ -28,18 +28,7 @@
 		</Card>
 	</section>
 	<section>
-		<Code
-			content={`<Card href="${base}/">
-  a<br />
-  link
-</Card>`}
-		/>
-		<Card href="{base}/">
-			a<br />
-			link
-		</Card>
-	</section>
-	<section>
+		<h3>With a custom icon</h3>
 		<Code
 			content={`<Card>
   custom<br />
@@ -54,18 +43,20 @@
 		</Card>
 	</section>
 	<section>
+		<h3>As a link</h3>
 		<Code
-			content={`<Card tag="button">
-  custom<br />
-  tag
+			content={`<Card href="${base}/">
+  a<br />
+  link
 </Card>`}
 		/>
-		<Card tag="button">
-			custom<br />
-			tag
+		<Card href="{base}/">
+			a<br />
+			link
 		</Card>
 	</section>
 	<section>
+		<h3>As the selected link</h3>
 		<Code
 			content={`<Card href="${base}/library/Card">
   href is<br />
@@ -78,6 +69,20 @@
 		</Card>
 	</section>
 	<section>
+		<h3>With a custom HTML tag</h3>
+		<Code
+			content={`<Card tag="button">
+  custom<br />
+  tag
+</Card>`}
+		/>
+		<Card tag="button">
+			custom<br />
+			tag
+		</Card>
+	</section>
+	<section>
+		<h3>With custom alignment</h3>
 		<Code
 			content={`<Card align="right">
   align<br />
