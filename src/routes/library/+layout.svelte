@@ -48,13 +48,14 @@
 	<Library_Secondary_Nav {tomes} />
 	<div class="content">
 		{@render children()}
-		<footer>
-			<Library_Tertiary_Nav {tomes} {tomes_by_name} />
-			<section class="box">
-				<Breadcrumb>🧶</Breadcrumb>
-			</section>
-			<Library_Footer {pkg} />
-		</footer>
+		<Library_Tertiary_Nav {tomes} {tomes_by_name} />
+		<section class="box">
+			<Library_Footer {pkg}>
+				<div class="mb_xl5">
+					<Breadcrumb>🧶</Breadcrumb>
+				</div>
+			</Library_Footer>
+		</section>
 	</div>
 </main>
 {#if $selected_variable}

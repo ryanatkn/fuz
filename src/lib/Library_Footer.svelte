@@ -10,20 +10,24 @@
 		pkg: Package_Meta;
 		root_url?: Url | null;
 		logo?: Snippet;
+		logo_header?: Snippet;
+		logo_footer?: Snippet;
 		children?: Snippet;
 	}
 
-	const {pkg, root_url = null, logo, children}: Props = $props();
+	const {pkg, root_url = null, logo, logo_header, logo_footer, children}: Props = $props();
 
 	const {repo_url} = $derived(pkg);
 </script>
 
-<footer class="panel">
+<footer class="box">
 	{#if children}{@render children()}{/if}
-	<div class="logo">
+	<div class="logo panel">
+		{#if logo_header}{@render logo_header()}{/if}
 		<a href={repo_url} rel="me"
 			>{#if logo}{@render logo()}{:else}<Github_Logo />{/if}</a
 		>
+		{#if logo_footer}{@render logo_footer()}{/if}
 	</div>
 	{#if root_url}
 		<div class="root_url">
@@ -33,16 +37,11 @@
 </footer>
 
 <style>
-	footer {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		flex-direction: column;
-		padding: var(--space_lg);
-	}
 	.logo {
 		display: flex;
+		padding: var(--space_lg);
 	}
+	/* TODO probably extract */
 	.logo a {
 		--border_width: var(--border_width_4);
 		--border_color: transparent;
