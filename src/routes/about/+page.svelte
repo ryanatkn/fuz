@@ -24,9 +24,12 @@
 			<Package_Detail {pkg} />
 		</div>
 	</section>
-	<section class="box">
-		<Library_Footer {pkg} />
-		<Breadcrumb>🧶</Breadcrumb>
+	<section class="box mb_xl7">
+		<Library_Footer {pkg}>
+			<div class="mb_xl5">
+				<Breadcrumb>🧶</Breadcrumb>
+			</div>
+		</Library_Footer>
 	</section>
 </main>
 
