@@ -22,7 +22,7 @@
 
 <footer class="box">
 	{#if children}{@render children()}{/if}
-	<div class="logo panel">
+	<div class="logo box panel p_lg">
 		{#if logo_header}{@render logo_header()}{/if}
 		<a href={repo_url} rel="me"
 			>{#if logo}{@render logo()}{:else}<Github_Logo />{/if}</a
@@ -37,10 +37,6 @@
 </footer>
 
 <style>
-	.logo {
-		display: flex;
-		padding: var(--space_lg);
-	}
 	/* TODO probably extract */
 	.logo a {
 		--border_width: var(--border_width_4);

@@ -48,7 +48,9 @@
 		</section>
 		<section>
 			<Library_Footer {pkg}>
-				<a href="{base}/about">about</a>
+				{#snippet logo_header()}
+					<a href="{base}/about" class="mb_xs">about</a>
+				{/snippet}
 				<div hidden>
 					@ryanatkn@hci.social on <a rel="me" href="https://hci.social/@ryanatkn">Mastodon</a>
 				</div>
