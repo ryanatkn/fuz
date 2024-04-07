@@ -231,7 +231,7 @@ p {
 	margin-bottom: var(--space_lg);
 }
 section:not(:last-child) {
-	margin-bottom: var(--space_xl6);
+	margin-bottom: var(--space_xl7);
 }
 summary {
 	/* TODO maybe change API to like `--margin_bottom`? */
