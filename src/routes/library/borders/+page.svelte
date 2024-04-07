@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
 	import {get_tome} from '$lib/tome.js';
-	import {radius_sizes} from '$lib/variable_data.js';
+	import {radius_variants} from '$lib/variable_data.js';
 	import Style_Variable_Button from '$routes/Style_Variable_Button.svelte';
 
 	const LIBRARY_ITEM_NAME = 'borders';
@@ -88,7 +88,7 @@
 	<section>
 		<h3>Border radii</h3>
 		<div class="border_examples border_radii">
-			{#each radius_sizes as radius}
+			{#each radius_variants as radius}
 				{@const name = 'radius_' + radius}
 				<div class="row">
 					<div class="border_example border_radius" style:border-radius="var(--{name})">

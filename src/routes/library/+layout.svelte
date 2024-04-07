@@ -31,7 +31,6 @@
 	const SECONDARY_NAV_BREAKPOINT = 800;
 
 	let innerWidth: number | undefined = $state();
-	$inspect('innerWidth', innerWidth);
 
 	// TODO BLOCK put related styles/components in the secondary sidebar along with "on this page"
 

@@ -72,8 +72,6 @@
 		<Color_Scheme_Input />
 	</div>
 
-	<hr />
-
 	<h3>disabled button</h3>
 	<section>
 		<Code content={`<button disabled>\n\t:|\n</button>`} />
@@ -83,8 +81,6 @@
 		<Code content={`<button disabled>\n\ta bigger disabled button\n</button>`} />
 		<button disabled>a bigger disabled button</button>
 	</section>
-
-	<hr />
 
 	<section>
 		<h3>
@@ -137,8 +133,6 @@
 			>disabled <code>.deselectable</code> <code>.selected</code></button
 		>
 	</section>
-
-	<hr />
 
 	<section>
 		<h3><code>.plain</code> and <code>.icon_button</code></h3>

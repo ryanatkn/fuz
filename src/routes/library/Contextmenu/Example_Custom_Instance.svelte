@@ -22,12 +22,8 @@
 			<Contextmenu_Entry run={() => (toggled = !toggled)}>Toggle</Contextmenu_Entry>
 		{/snippet}
 		<div class="panel p_md">
-			<p>
-				<Code lang="ts" content={`const contextmenu = create_contextmenu();`} />
-			</p>
-			<p>
-				<Code content={`<Contextmenu_Root {contextmenu} scoped>...`} />
-			</p>
+			<Code lang="ts" content={`const contextmenu = create_contextmenu();`} />
+			<Code content={`<Contextmenu_Root {contextmenu} scoped>...`} />
 			<p>
 				The <code>Contextmenu_Root</code> prop <code>contextmenu</code> provides more control. Try opening
 				the contextmenu on this panel.

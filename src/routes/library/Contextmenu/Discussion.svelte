@@ -66,7 +66,8 @@
 			(currently broken, may remain so due to the iOS longpress workaround)
 		</li>
 	</ul>
-	<hr />
+</section>
+<section>
 	<h3 id="motivation">Motivation</h3>
 	<p>Fuz takes two things very seriously, in no particular order:</p>
 	<ol>

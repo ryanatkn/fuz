@@ -9,7 +9,7 @@
 	import {get_tome} from '$lib/tome.js';
 	import Icon_Sizes from '$routes/library/typography/Icon_Sizes.svelte';
 	import Style_Variable_Button from '$routes/Style_Variable_Button.svelte';
-	import {size_names} from '$lib/variable_data.js';
+	import {line_height_names, size_names} from '$lib/variable_data.js';
 	import Details from '$lib/Details.svelte';
 
 	// TODO BLOCK inconsistent h3/section/hr below
@@ -67,7 +67,6 @@
 			/>
 		</Details>
 	</section>
-	<hr />
 	<section>
 		<h3>Font sizes</h3>
 		<form class="width_sm">
@@ -88,8 +87,9 @@
 				</div>
 			</div>
 		{/each}
+	</section>
+	<section>
 		<!-- TODO add a slider for the font size here -->
-		<hr />
 		<h3>
 			<Mdn_Link href="Web/CSS/font-weight">font-weight</Mdn_Link> has no variables
 		</h3>
@@ -107,7 +107,8 @@
 				</div>
 			{/each}
 		</div>
-		<hr />
+	</section>
+	<section>
 		<h3>Text colors</h3>
 		<aside>TODO needs work</aside>
 		<div>
@@ -130,8 +131,7 @@
 		</h3>
 		<aside>TODO maybe rename with a semantic scale</aside>
 		<div>
-			{#each {length: 7} as _, i}
-				{@const name = 'line_height_' + (i + 1)}
+			{#each line_height_names as name}
 				<div class="spaced">
 					<Style_Variable_Button {name}
 						><div style:line-height="var(--{name})" class="button_contents">

@@ -437,7 +437,9 @@ export const src_json = {
 				{name: 'size_variants', kind: 'variable'},
 				{name: 'size_names', kind: 'variable'},
 				{name: 'space_variants', kind: 'variable'},
-				{name: 'radius_sizes', kind: 'variable'},
+				{name: 'radius_variants', kind: 'variable'},
+				{name: 'line_height_variants', kind: 'variable'},
+				{name: 'line_height_names', kind: 'variable'},
 			],
 		},
 		'./variables.js': {

@@ -29,15 +29,10 @@
 			</ul>
 		</aside>
 	</section>
-	<Example_Basic />
-	<hr />
-	<Example_Default_Behaviors />
-	<hr />
-	<Example_Custom_Instance />
-	<hr />
-	<Example_Select_Text />
-	<hr />
-	<Example_Full />
-	<hr />
-	<Contextmenu_Discussion />
+	<section><Example_Basic /></section>
+	<section><Example_Default_Behaviors /></section>
+	<section><Example_Custom_Instance /></section>
+	<section><Example_Select_Text /></section>
+	<section><Example_Full /></section>
+	<section><Contextmenu_Discussion /></section>
 </Tome_Detail>

@@ -42,4 +42,8 @@ export const space_variants = [
 	'xl15',
 ];
 
-export const radius_sizes = ['xs3', 'xs2', 'xs', 'sm', 'md', 'lg', 'xl'];
+export const radius_variants = ['xs3', 'xs2', 'xs', 'sm', 'md', 'lg', 'xl'];
+
+export const line_height_variants = ['xs', 'sm', 'md', 'lg', 'xl'];
+
+export const line_height_names = line_height_variants.map((s) => 'line_height_' + s);
