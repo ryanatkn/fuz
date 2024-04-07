@@ -26,7 +26,7 @@
 		),
 	);
 
-	// TODO BLOCK remove CSS below
+	// TODO BLOCK remove CSS below with reusable CSS or a Svelte component
 </script>
 
 <ul class="unstyled">
