@@ -613,7 +613,7 @@ export const input_height_inner: Style_Variable = {
 // which would require a pseduo-element,
 // but that's heavier and requires the element to be positioned (I think?)
 export const shadow_md: Style_Variable = {
-	name: 'shadow',
+	name: 'shadow_md',
 	light:
 		'2px 4px 9px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.28), 2px 12px 36px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.28)',
 	dark: '2px 4px 9px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5)), 2px 12px 36px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5))',

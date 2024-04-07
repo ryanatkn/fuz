@@ -3,7 +3,7 @@
 
 	interface Props {
 		color_name: string;
-		computed_styles: CSSStyleDeclaration;
+		computed_styles: CSSStyleDeclaration | null;
 		width?: number;
 		height?: number;
 		description: string;
@@ -11,10 +11,7 @@
 
 	const {color_name, computed_styles, width = 48, height = 48, description}: Props = $props();
 
-	const get_color_hue_string = (name: string) => {
-		const v = computed_styles.getPropertyValue('--' + name);
-		return v;
-	};
+	const get_color_hue_string = (name: string) => computed_styles?.getPropertyValue('--' + name);
 
 	const variable_name = $derived(`hue_${color_name}`);
 	const hue = $derived(Number(get_color_hue_string(variable_name)));

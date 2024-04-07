@@ -5,15 +5,12 @@
 
 	interface Props {
 		color_name: string;
-		computed_styles: CSSStyleDeclaration;
+		computed_styles: CSSStyleDeclaration | null;
 	}
 
 	const {color_name, computed_styles}: Props = $props();
 
-	const get_color_hsl_string = (name: string) => {
-		const v = computed_styles.getPropertyValue('--' + name);
-		return v;
-	};
+	const get_color_hsl_string = (name: string) => computed_styles?.getPropertyValue('--' + name);
 </script>
 
 <ul class="unstyled">
@@ -21,14 +18,14 @@
 		{@const num = i + 1}
 		{@const variable_name = `color_${color_name}_${num}`}
 		{@const hsl_string = get_color_hsl_string(variable_name)}
-		{@const hsl = parse_hsl_string(hsl_string)}
+		{@const hsl = hsl_string && parse_hsl_string(hsl_string)}
 		<li style:--bg_color="var(--{variable_name})">
 			<div class="color"></div>
 			<div class="text">
 				<Style_Variable_Button name={variable_name} />
-				<div class="hex">{hsl_to_hex_string(...hsl)}</div>
+				<div class="hex">{hsl && hsl_to_hex_string(...hsl)}</div>
 				<div class="hsl">{hsl_string}</div>
-				<div class="rgb">rgb({hsl_to_rgb(...hsl).join(', ')})</div>
+				<div class="rgb">rgb({hsl && hsl_to_rgb(...hsl).join(', ')})</div>
 			</div>
 		</li>
 	{/each}

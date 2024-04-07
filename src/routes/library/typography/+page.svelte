@@ -23,7 +23,8 @@
 
 	const size_variants = default_variables.filter((p) => size_names.includes(p.name));
 
-	const computed_styles = window.getComputedStyle(document.documentElement);
+	const computed_styles =
+		typeof window === 'undefined' ? null : window.getComputedStyle(document.documentElement);
 
 	// TODO selected_font_family
 	let selected_font_weight = $state(400);
@@ -83,7 +84,7 @@
 				>
 				<div class="row">
 					<span class="pr_sm">=</span>
-					<code>{computed_styles.getPropertyValue('--' + font_size.name)}</code>
+					<code>{computed_styles?.getPropertyValue('--' + font_size.name)}</code>
 				</div>
 			</div>
 		{/each}
@@ -117,7 +118,7 @@
 						><span style:color="var(--{name})">
 							{name}
 						</span></Style_Variable_Button
-					> = <code>{computed_styles.getPropertyValue('--' + name)}</code>
+					> = <code>{computed_styles?.getPropertyValue('--' + name)}</code>
 				</div>
 			{/each}
 		</div>
@@ -136,7 +137,7 @@
 						><div style:line-height="var(--{name})" class="button_contents">
 							<div>
 								{name} =
-								<code class="font_mono">{computed_styles.getPropertyValue('--' + name)}</code>
+								<code class="font_mono">{computed_styles?.getPropertyValue('--' + name)}</code>
 							</div>
 							<div>{name}</div>
 							<div>{name}</div>

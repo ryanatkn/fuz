@@ -2,7 +2,7 @@
 	import type {HTMLButtonAttributes} from 'svelte/elements';
 	import type {Snippet} from 'svelte';
 
-	import {default_variables} from '$lib/variables';
+	import {default_variables} from '$lib/variables.js';
 	import {get_selected_variable} from '$routes/style_variable_helpers.js';
 
 	interface Props {

@@ -8,7 +8,8 @@
 
 	const tome = get_tome(LIBRARY_ITEM_NAME);
 
-	const computed_styles = window.getComputedStyle(document.documentElement);
+	const computed_styles =
+		typeof window === 'undefined' ? null : window.getComputedStyle(document.documentElement);
 </script>
 
 <Tome_Detail {tome}>
@@ -42,7 +43,7 @@
 					</div>
 					<div>
 						<span class="pl_sm pr_sm">=</span><code
-							>{computed_styles.getPropertyValue('--' + name)}</code
+							>{computed_styles?.getPropertyValue('--' + name)}</code
 						>
 					</div>
 				</div>
@@ -60,7 +61,7 @@
 						<Style_Variable_Button {name} />
 					</div>
 					<span class="pl_sm pr_sm">=</span><code
-						>{computed_styles.getPropertyValue('--' + name)}</code
+						>{computed_styles?.getPropertyValue('--' + name)}</code
 					>
 				</div>
 			{/each}
@@ -77,7 +78,7 @@
 						<Style_Variable_Button {name} />
 					</div>
 					<span class="pl_sm pr_sm">=</span><code
-						>{computed_styles.getPropertyValue('--' + name)}</code
+						>{computed_styles?.getPropertyValue('--' + name)}</code
 					>
 				</div>
 			{/each}
@@ -94,7 +95,7 @@
 						<Style_Variable_Button {name} />
 					</div>
 					<span class="pl_sm pr_sm">=</span><code
-						>{computed_styles.getPropertyValue('--' + name)}</code
+						>{computed_styles?.getPropertyValue('--' + name)}</code
 					>
 				</div>
 			{/each}

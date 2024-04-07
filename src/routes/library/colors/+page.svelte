@@ -13,7 +13,8 @@
 
 	const color_names = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
 
-	const computed_styles = window.getComputedStyle(document.documentElement);
+	const computed_styles =
+		typeof window === 'undefined' ? null : window.getComputedStyle(document.documentElement);
 
 	// TODO button to add an inline hue input for runtime modification of the theme
 

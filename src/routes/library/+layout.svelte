@@ -27,11 +27,15 @@
 
 	const selected_variable = set_selected_variable();
 
+	// TODO this is messy to satisfy SSR with the current design that puts the secondary nav in a dialog
+	const SECONDARY_NAV_BREAKPOINT = 800;
+
+	let innerWidth: number | undefined = $state();
+	$inspect('innerWidth', innerWidth);
+
 	// TODO BLOCK put related styles/components in the secondary sidebar along with "on this page"
 
 	// TODO BLOCK maybe extract `<Library {tomes} />`?
-
-	// TODO BLOCK opening the menu dialog and increasing the screen size causes a visual bug, maybe bind to the width and use it to not double render?
 
 	const pkg = parse_package_meta(package_json.homepage, package_json, src_json);
 
@@ -45,6 +49,8 @@
 	});
 </script>
 
+<svelte:window bind:innerWidth />
+
 <div class="layout">
 	<Library_Primary_Nav>
 		<div class="toggle_secondary_nav_button_wrapper">
@@ -52,9 +58,11 @@
 			>
 		</div>
 	</Library_Primary_Nav>
-	<div class="secondary_nav_wrapper">
-		<Library_Secondary_Nav {tomes} />
-	</div>
+	{#if !innerWidth || innerWidth > SECONDARY_NAV_BREAKPOINT}
+		<div class="secondary_nav_wrapper">
+			<Library_Secondary_Nav {tomes} />
+		</div>
+	{/if}
 	<main>
 		<div class="content">
 			{@render children()}
@@ -84,7 +92,7 @@
 {/if}
 <!-- TODO instead of a dialog, probably use a popover (new component) -->
 <!-- TODO this is messy rendering `Library_Secondary_Nav` twice to handle responsive states with SSR correctly -->
-{#if show_secondary_nav_dialog}
+{#if show_secondary_nav_dialog && innerWidth && innerWidth <= SECONDARY_NAV_BREAKPOINT}
 	<Dialog onclose={() => (show_secondary_nav_dialog = false)}>
 		<div class="pane">
 			<div class="p_xl"><Breadcrumb>🧶</Breadcrumb></div>
