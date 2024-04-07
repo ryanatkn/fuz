@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
 
-	import {font_sizes} from '$lib/variable_data.js';
+	import {size_variants} from '$lib/variable_data.js';
 	import Style_Variable_Button from '$routes/Style_Variable_Button.svelte';
 
 	interface Props {
@@ -16,9 +16,9 @@
 	// TODO @multiple publish in $lib when ready
 
 	const min = 1;
-	const max = font_sizes.length;
+	const max = size_variants.length;
 
-	const selected_name = $derived(font_sizes[selected_font_size - 1]);
+	const selected_name = $derived(size_variants[selected_font_size - 1]);
 </script>
 
 <label

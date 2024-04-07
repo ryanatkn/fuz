@@ -1,5 +1,4 @@
-// TODO BLOCK inconsistently named, if like `space_sizes` this would be `size_sizes` - maybe variants instead of sizes?
-export const font_sizes = [
+export const size_variants = [
 	'xs',
 	'sm',
 	'md',
@@ -15,12 +14,9 @@ export const font_sizes = [
 	'xl9',
 ];
 
-// TODO maybe suffix with `_set` and also export the array?
-export const font_size_names = font_sizes.map((s) => 'size_' + s);
+export const size_names = size_variants.map((s) => 'size_' + s);
 
-export const font_size_names_set = new Set(font_size_names);
-
-export const space_sizes = [
+export const space_variants = [
 	'xs5',
 	'xs4',
 	'xs3',

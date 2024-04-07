@@ -9,7 +9,7 @@
 	import {get_tome} from '$lib/tome.js';
 	import Icon_Sizes from '$routes/library/typography/Icon_Sizes.svelte';
 	import Style_Variable_Button from '$routes/Style_Variable_Button.svelte';
-	import {font_size_names, font_size_names_set} from '$lib/variable_data.js';
+	import {size_names} from '$lib/variable_data.js';
 	import Details from '$lib/Details.svelte';
 
 	// TODO BLOCK inconsistent h3/section/hr below
@@ -21,7 +21,7 @@
 	// TODO refactor
 	const font_weights = [100, 200, 300, 400, 500, 600, 700, 800, 900];
 
-	const font_sizes = default_variables.filter((p) => font_size_names_set.has(p.name));
+	const size_variants = default_variables.filter((p) => size_names.includes(p.name));
 
 	const computed_styles = window.getComputedStyle(document.documentElement);
 
@@ -72,7 +72,7 @@
 		<form class="width_sm">
 			<Font_Weight_Control bind:selected_font_weight></Font_Weight_Control>
 		</form>
-		{#each font_sizes as font_size (font_size.name)}
+		{#each size_variants as font_size (font_size.name)}
 			<div class="row wrap">
 				<Style_Variable_Button attrs={{title: font_size.light}} name={font_size.name}
 					><span
@@ -100,7 +100,7 @@
 				<div
 					class="nowrap"
 					style:font-weight={font_weight}
-					style:font-size="var(--{font_size_names[selected_font_size - 1]})"
+					style:font-size="var(--{size_names[selected_font_size - 1]})"
 				>
 					font-weight: {font_weight}
 				</div>

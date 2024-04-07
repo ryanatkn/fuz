@@ -434,10 +434,9 @@ export const src_json = {
 		'./variable_data.js': {
 			path: 'variable_data.ts',
 			declarations: [
-				{name: 'font_sizes', kind: 'variable'},
-				{name: 'font_size_names', kind: 'variable'},
-				{name: 'font_size_names_set', kind: 'variable'},
-				{name: 'space_sizes', kind: 'variable'},
+				{name: 'size_variants', kind: 'variable'},
+				{name: 'size_names', kind: 'variable'},
+				{name: 'space_variants', kind: 'variable'},
 				{name: 'radius_sizes', kind: 'variable'},
 			],
 		},

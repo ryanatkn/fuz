@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
 	import {get_tome} from '$lib/tome.js';
-	import {space_sizes} from '$lib/variable_data.js';
+	import {space_variants} from '$lib/variable_data.js';
 	import Style_Variable_Button from '$routes/Style_Variable_Button.svelte';
 
 	const LIBRARY_ITEM_NAME = 'layout';
@@ -15,7 +15,7 @@
 	<section>
 		<h3>Space variables</h3>
 		<div>
-			{#each space_sizes as space_size}
+			{#each space_variants as space_size}
 				{@const name = 'space_' + space_size}
 				<div class="layout_example">
 					<div class="fill" style:width="var(--{name})" />

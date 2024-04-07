@@ -29,15 +29,9 @@
 
 	// TODO BLOCK put related styles/components in the secondary sidebar along with "on this page"
 
-	// TODO BLOCK use an .unstyled aside for the sidebars
-
-	// TODO BLOCK sub 1000 move the secondary sidebar, sub 800 move the primary sidebar
-
 	// TODO BLOCK maybe extract `<Library {tomes} />`?
 
-	// TODO BLOCK doesn't use Library_Footer here, hm
-
-	// TODO BLOCK maybe add an hr or put the bg_1 on the footer area
+	// TODO BLOCK opening the menu dialog and increasing the screen size causes a visual bug, maybe bind to the width and use it to not double render?
 
 	const pkg = parse_package_meta(package_json.homepage, package_json, src_json);
 
