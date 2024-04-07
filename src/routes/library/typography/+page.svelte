@@ -136,8 +136,7 @@
 						><div style:line-height="var(--{name})" class="button_contents">
 							<div>
 								{name} =
-								<code class="font_mono">{computed_styles.getPropertyValue('--' + name)}</code
-								>
+								<code class="font_mono">{computed_styles.getPropertyValue('--' + name)}</code>
 							</div>
 							<div>{name}</div>
 							<div>{name}</div>
