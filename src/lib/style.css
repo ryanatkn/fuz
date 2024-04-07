@@ -233,8 +233,7 @@ p {
 	margin-bottom: var(--space_lg);
 }
 section:not(:last-child) {
-	/* TODO or more? */
-	margin-bottom: var(--space_xl5);
+	margin-bottom: var(--space_xl6);
 }
 summary {
 	/* TODO maybe change API to like `--margin_bottom`? */

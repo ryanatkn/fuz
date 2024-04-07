@@ -13,6 +13,7 @@
 	import Style_Variable_Detail from '$routes/Style_Variable_Detail.svelte';
 	import Library_Footer from '$lib/Library_Footer.svelte';
 	import {package_json, src_json} from '$routes/package.js';
+	import {onNavigate} from '$app/navigation';
 
 	interface Props {
 		children: Snippet;
@@ -34,31 +35,46 @@
 
 	// TODO BLOCK maybe extract `<Library {tomes} />`?
 
-	const library_primary_nav_height = '60px';
-
 	// TODO BLOCK doesn't use Library_Footer here, hm
 
 	// TODO BLOCK maybe add an hr or put the bg_1 on the footer area
 
 	const pkg = parse_package_meta(package_json.homepage, package_json, src_json);
+
+	let show_secondary_nav_dialog = $state(false);
+	const toggle_secondary_nav_dialog = (show?: boolean): void => {
+		show_secondary_nav_dialog = show ?? !show_secondary_nav_dialog;
+	};
+
+	onNavigate(() => {
+		show_secondary_nav_dialog = false;
+	});
 </script>
 
-<Library_Primary_Nav --library_primary_nav_height={library_primary_nav_height}>
-	<Library_Secondary_Nav {tomes} />
-</Library_Primary_Nav>
-<main>
-	<div class="content">
-		{@render children()}
-		<Library_Tertiary_Nav {tomes} {tomes_by_name} />
-		<section class="box">
-			<Library_Footer {pkg}>
-				<div class="mb_xl5">
-					<Breadcrumb>🧶</Breadcrumb>
-				</div>
-			</Library_Footer>
-		</section>
+<div class="layout">
+	<Library_Primary_Nav>
+		<div class="toggle_secondary_nav_button_wrapper">
+			<button class="plain" type="button" onclick={() => toggle_secondary_nav_dialog()}>menu</button
+			>
+		</div>
+	</Library_Primary_Nav>
+	<div class="secondary_nav_wrapper">
+		<Library_Secondary_Nav {tomes} />
 	</div>
-</main>
+	<main>
+		<div class="content">
+			{@render children()}
+			<Library_Tertiary_Nav {tomes} {tomes_by_name} />
+			<section class="box">
+				<Library_Footer {pkg}>
+					<div class="mb_xl5">
+						<Breadcrumb>🧶</Breadcrumb>
+					</div>
+				</Library_Footer>
+			</section>
+		</div>
+	</main>
+</div>
 {#if $selected_variable}
 	<Dialog onclose={() => ($selected_variable = null)}>
 		{#snippet children(close)}
@@ -72,13 +88,24 @@
 		{/snippet}
 	</Dialog>
 {/if}
+<!-- TODO instead of a dialog, probably use a popover (new component) -->
+<!-- TODO this is messy rendering `Library_Secondary_Nav` twice to handle responsive states with SSR correctly -->
+{#if show_secondary_nav_dialog}
+	<Dialog onclose={() => (show_secondary_nav_dialog = false)}>
+		<div class="pane">
+			<div class="p_xl"><Breadcrumb>🧶</Breadcrumb></div>
+			<Library_Secondary_Nav {tomes} />
+		</div>
+	</Dialog>
+{/if}
 
 <style>
-	main {
+	.layout {
 		--library_primary_nav_height: 60px;
 		--library_content_padding: var(--space_xl5);
 		--library_content_max_width: calc(var(--width_md) + var(--library_content_padding) * 2);
 		--library_sidebar_width: max(200px, calc((100% - var(--library_content_max_width)) / 2));
+		display: contents;
 	}
 
 	.content {
@@ -88,6 +115,19 @@
 		padding: var(--library_content_padding);
 		margin: 0 auto;
 		overflow: hidden; /* maybe heavy-handed */
+	}
+
+	.secondary_nav_wrapper {
+		display: contents;
+	}
+
+	.toggle_secondary_nav_button_wrapper {
+		display: none;
+	}
+	.toggle_secondary_nav_button_wrapper button {
+		padding-left: var(--space_xl3);
+		padding-right: var(--space_xl3);
+		border-radius: 0;
 	}
 
 	@media (max-width: 1200px) {
@@ -109,12 +149,20 @@
 		}
 	}
 
-	/* sync this breakpoint with `Library_Secondary_Nav` */
+	/* sync this breakpoint with `Library_Primary_Nav` and `Library_Secondary_Nav` */
 	@media (max-width: 800px) {
 		.content {
 			/* handle the moved `Library_Secondary_Nav` */
 			width: 100%;
 			margin-left: 0;
+		}
+
+		.secondary_nav_wrapper {
+			display: none;
+		}
+
+		.toggle_secondary_nav_button_wrapper {
+			display: contents;
 		}
 	}
 

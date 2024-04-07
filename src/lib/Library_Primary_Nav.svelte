@@ -1,9 +1,9 @@
 <script lang="ts">
 	import {page} from '$app/stores';
 	import {is_iframed} from '@ryanatkn/belt/dom.js';
+	import type {Snippet} from 'svelte';
 
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
-	import type {Snippet} from 'svelte';
 
 	interface Props {
 		children?: Snippet;
@@ -36,8 +36,8 @@
 					{/if}
 				</Breadcrumb>
 			</nav>
+			{#if children}{@render children()}{/if}
 		</div>
-		{#if children}{@render children()}{/if}
 	</div>
 {/if}
 
@@ -52,7 +52,7 @@
 
 	.background {
 		position: absolute;
-		z-index: 0;
+		z-index: -1;
 		width: 100%;
 		height: 100%;
 		background-color: var(--fg_1);
@@ -71,6 +71,7 @@
 		padding-left: var(--space_md);
 	}
 
+	/* sync this breakpoint with `library/+layout` */
 	@media (max-width: 800px) {
 		nav {
 			--font_size: var(--size_lg);

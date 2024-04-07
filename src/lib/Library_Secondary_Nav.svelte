@@ -31,7 +31,7 @@
 		background-color: var(--fg_1);
 	}
 
-	/* sync this breakpoint with `library/+layout.svelte` */
+	/* sync this breakpoint with `library/+layout` and `Library_Primary_Nav` */
 	@media (max-width: 800px) {
 		.library_secondary_nav {
 			position: static;

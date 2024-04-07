@@ -13,6 +13,10 @@
 
 	const selected_item = $derived(tomes.find((c) => c.pathname === $page.url.pathname));
 
+	// TODO BLOCK maybe this should be added to the primary nav as a button (or included on the secondary nav button's dialog for now)
+	// or like Svelte as a popover menu at the top?
+	// this will become more important when we add the "on this page" section
+
 	// TODO BLOCK this gets duplicated as you click around
 	const tomes_related_to_selected = $derived(
 		selected_item?.related?.map((r) => tomes_by_name.get(r)!),
@@ -40,7 +44,7 @@
 		background-color: var(--fg_1);
 	}
 
-	/* sync this breakpoint with `library/+layout.svelte` */
+	/* sync this breakpoint with `library/+layout` */
 	@media (max-width: 1000px) {
 		.library_tertiary_nav {
 			position: static;
