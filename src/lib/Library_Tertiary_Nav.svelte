@@ -40,6 +40,7 @@
 		background-color: var(--fg_1);
 	}
 
+	/* sync this breakpoint with `library/+layout.svelte` */
 	@media (max-width: 1000px) {
 		.library_tertiary_nav {
 			position: static;

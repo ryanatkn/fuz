@@ -43,9 +43,10 @@
 	const pkg = parse_package_meta(package_json.homepage, package_json, src_json);
 </script>
 
-<Library_Primary_Nav --library_primary_nav_height={library_primary_nav_height} />
-<main>
+<Library_Primary_Nav --library_primary_nav_height={library_primary_nav_height}>
 	<Library_Secondary_Nav {tomes} />
+</Library_Primary_Nav>
+<main>
 	<div class="content">
 		{@render children()}
 		<Library_Tertiary_Nav {tomes} {tomes_by_name} />
@@ -79,6 +80,7 @@
 		--library_content_max_width: calc(var(--width_md) + var(--library_content_padding) * 2);
 		--library_sidebar_width: max(200px, calc((100% - var(--library_content_max_width)) / 2));
 	}
+
 	.content {
 		position: relative;
 		width: calc(100% - var(--library_sidebar_width) * 2);
@@ -87,21 +89,35 @@
 		margin: 0 auto;
 		overflow: hidden; /* maybe heavy-handed */
 	}
+
 	@media (max-width: 1200px) {
 		/* main {
 			flex-direction: column;
 		} */
 	}
+
+	/* sync this breakpoint with `Library_Tertiary_Nav` */
 	@media (max-width: 1000px) {
 		/* main { */
 		/* --library_content_max_width: calc(var(--width_md) + var(--library_content_padding)); */
 		/* } */
 		.content {
 			--library_content_padding: var(--space_xl);
+			/* handle the moved `Library_Tertiary_Nav` */
 			width: calc(100% - var(--library_sidebar_width));
 			margin-right: 0;
 		}
 	}
+
+	/* sync this breakpoint with `Library_Secondary_Nav` */
+	@media (max-width: 800px) {
+		.content {
+			/* handle the moved `Library_Secondary_Nav` */
+			width: 100%;
+			margin-left: 0;
+		}
+	}
+
 	section {
 		padding: var(--space_xl2);
 	}

@@ -1,3 +1,4 @@
+// TODO BLOCK inconsistently named, if like `space_sizes` this would be `size_sizes` - maybe variants instead of sizes?
 export const font_sizes = [
 	'xs',
 	'sm',

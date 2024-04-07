@@ -30,4 +30,12 @@
 		overflow: auto;
 		background-color: var(--fg_1);
 	}
+
+	/* sync this breakpoint with `library/+layout.svelte` */
+	@media (max-width: 800px) {
+		.library_secondary_nav {
+			position: static;
+			background-color: initial;
+		}
+	}
 </style>
