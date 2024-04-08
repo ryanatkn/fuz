@@ -12,8 +12,6 @@
 	import Library_Footer from '$lib/Library_Footer.svelte';
 
 	// TODO BLOCK extract to props or context
-	import {set_selected_variable} from '$routes/style_variable_helpers.js';
-	import Style_Variable_Detail from '$routes/Style_Variable_Detail.svelte';
 	import {package_json, src_json} from '$routes/package.js';
 
 	interface Props {
@@ -26,8 +24,6 @@
 	// TODO BLOCK this API is messy, inconsistent usage of props/context
 	const tomes_by_name = new Map(tomes.map((t) => [t.name, t]));
 	set_tomes(tomes_by_name);
-
-	const selected_variable = set_selected_variable();
 
 	// TODO this is messy to satisfy SSR with the current design that puts the secondary nav in a dialog
 	const SECONDARY_NAV_BREAKPOINT = 800;
@@ -76,19 +72,6 @@
 		</div>
 	</main>
 </div>
-{#if $selected_variable}
-	<Dialog onclose={() => ($selected_variable = null)}>
-		{#snippet children(close)}
-			<div class="pane">
-				<div class="panel p_lg box">
-					<Style_Variable_Detail variable={$selected_variable} />
-					<aside>this is unfinished</aside>
-					<button onclick={close}>ok</button>
-				</div>
-			</div>
-		{/snippet}
-	</Dialog>
-{/if}
 <!-- TODO instead of a dialog, probably use a popover (new component) -->
 <!-- TODO this is messy rendering `Library_Secondary_Nav` twice to handle responsive states with SSR correctly -->
 {#if show_secondary_nav_dialog && innerWidth && innerWidth <= SECONDARY_NAV_BREAKPOINT}
