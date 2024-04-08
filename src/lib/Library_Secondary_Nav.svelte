@@ -36,6 +36,7 @@
 		.library_secondary_nav {
 			position: static;
 			background-color: initial;
+			align-items: initial;
 		}
 	}
 </style>
