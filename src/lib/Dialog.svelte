@@ -121,6 +121,7 @@
 <Teleport
 	to={container_el}
 	onmove={async () => {
+		// TODO this way of bumping the padding doesn't work with `position: fixed` elements :(
 		// Measure `padding-right` before adding the class that changes it,
 		// so we can set the body padding to offset any scrollbar width changes.
 		const computed_padding_right =
