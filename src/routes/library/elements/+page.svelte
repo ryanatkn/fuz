@@ -20,41 +20,48 @@
 			name="typography"
 		/>.
 	</blockquote>
-	<Tome_Subheading slug="blockquote-element">
-		<span style="font-size: var(--size_xl3)">👆</span>
-		<Mdn_Link href="Web/HTML/Element/blockquote">blockquote</Mdn_Link>
-	</Tome_Subheading>
-	<Tome_Subheading slug="hr-and-code-elements">
-		<span style="font-size: var(--size_xl3)">👇</span>
-		<Mdn_Link href="Web/HTML/Element/hr">hr</Mdn_Link>
-		<span style="font-size: var(--size_xl3)">👈</span>
-		<Mdn_Link href="Web/HTML/Element/code">code</Mdn_Link>
-	</Tome_Subheading>
-	<hr />
-	<Tome_Subheading slug="details-and-summary-elements">
-		<Mdn_Link href="Web/HTML/Element/details">details</Mdn_Link>
-		and
-		<Mdn_Link href="Web/HTML/Element/summary">summary</Mdn_Link>
-	</Tome_Subheading>
-	<details>
-		<summary>Click me, a <code>summary</code>, to see the rest of the <code>details</code></summary>
-		<p>so many details</p>
-		<Code
-			content={`<details>
+	<section>
+		<Tome_Subheading slug="blockquote-element">
+			<span style="font-size: var(--size_xl3)">👆</span>
+			<Mdn_Link href="Web/HTML/Element/blockquote">blockquote</Mdn_Link>
+		</Tome_Subheading>
+		<Tome_Subheading slug="hr-and-code-elements">
+			<span style="font-size: var(--size_xl3)">👇</span>
+			<Mdn_Link href="Web/HTML/Element/hr">hr</Mdn_Link>
+			<span style="font-size: var(--size_xl3)">👈</span>
+			<Mdn_Link href="Web/HTML/Element/code">code</Mdn_Link>
+		</Tome_Subheading>
+		<hr />
+	</section>
+	<section>
+		<Tome_Subheading slug="details-and-summary-elements">
+			<Mdn_Link href="Web/HTML/Element/details">details</Mdn_Link>
+			and
+			<Mdn_Link href="Web/HTML/Element/summary">summary</Mdn_Link>
+		</Tome_Subheading>
+		<details>
+			<summary
+				>Click me, a <code>summary</code>, to see the rest of the <code>details</code></summary
+			>
+			<p>so many details</p>
+			<Code
+				content={`<details>
 	<summary>
 		Click me, a <code>summary</code>,
 		to see the rest of the <code>details</code>
 	</summary>
 	<Code code={'...'} />
 </details>`}
-		/>
-	</details>
-	<Tome_Subheading slug="table-element">
-		<Mdn_Link href="Web/HTML/Element/table">table</Mdn_Link>
-	</Tome_Subheading>
-	<blockquote>⚠️ this is unfinished and will change</blockquote>
-	<Code
-		content={`<table>
+			/>
+		</details>
+	</section>
+	<section>
+		<Tome_Subheading slug="table-element">
+			<Mdn_Link href="Web/HTML/Element/table">table</Mdn_Link>
+		</Tome_Subheading>
+		<blockquote>⚠️ this is unfinished and will change</blockquote>
+		<Code
+			content={`<table>
 	<thead>
 		<tr>
 			<th>th</th>
@@ -68,71 +75,80 @@
 		<tr><td>td</td><td>td</td><td>td</td></tr>
 	</tbody>
 </table>`}
-	/>
-	<table>
-		<thead>
-			<tr>
-				<th>th</th>
-				<th>th</th>
-				<th>th</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr><td>td</td><td>td</td><td>td</td></tr>
-			<tr><td>td</td><td>td</td><td>td</td></tr>
-			<tr><td>td</td><td>td</td><td>td</td></tr>
-		</tbody>
-	</table>
-	<Code content={`<table class="w_100">\n\t...\n</table>`} />
-	<table class="w_100">
-		<thead>
-			<tr>
-				<th>th</th>
-				<th>th</th>
-				<th>th</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr><td>td</td><td>td</td><td>td</td></tr>
-			<tr><td>td</td><td>td</td><td>td</td></tr>
-			<tr><td>td</td><td>td</td><td>td</td></tr>
-		</tbody>
-	</table>
-	<Tome_Subheading slug="aside-element">
-		<Mdn_Link href="Web/HTML/Element/aside">aside</Mdn_Link>
-	</Tome_Subheading>
-	<aside>
-		the <code>aside</code> looks like this
-	</aside>
-	<aside>
-		<Code
-			content={`<aside>
+		/>
+		<table>
+			<thead>
+				<tr>
+					<th>th</th>
+					<th>th</th>
+					<th>th</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr><td>td</td><td>td</td><td>td</td></tr>
+				<tr><td>td</td><td>td</td><td>td</td></tr>
+				<tr><td>td</td><td>td</td><td>td</td></tr>
+			</tbody>
+		</table>
+		<Code content={`<table class="w_100">\n\t...\n</table>`} />
+		<table class="w_100">
+			<thead>
+				<tr>
+					<th>th</th>
+					<th>th</th>
+					<th>th</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr><td>td</td><td>td</td><td>td</td></tr>
+				<tr><td>td</td><td>td</td><td>td</td></tr>
+				<tr><td>td</td><td>td</td><td>td</td></tr>
+			</tbody>
+		</table>
+	</section>
+	<section>
+		<Tome_Subheading slug="aside-element">
+			<Mdn_Link href="Web/HTML/Element/aside">aside</Mdn_Link>
+		</Tome_Subheading>
+		<aside>
+			the <code>aside</code> looks like this
+		</aside>
+		<aside>
+			<Code
+				content={`<aside>
 	<aside>
 		<aside>nested asides</aside>
 	</aside>
 </aside>`}
-		/>
-		<aside>
+			/>
 			<aside>
-				<aside>nested asides</aside>
+				<aside>
+					<aside>nested asides</aside>
+				</aside>
 			</aside>
 		</aside>
-	</aside>
-	<Tome_Subheading slug="header-element">
-		<Mdn_Link href="Web/HTML/Element/footer">header</Mdn_Link>
-	</Tome_Subheading>
-	<Code content={`<header>header</header>`} />
-	<header>header</header>
-	<Tome_Subheading slug="footer-element">
-		<Mdn_Link href="Web/HTML/Element/footer">footer</Mdn_Link>
-	</Tome_Subheading>
-	<Code content={`<footer>footer</footer>`} />
-	<footer>footer</footer>
-	<Tome_Subheading slug="section-element">
-		<Mdn_Link href="Web/HTML/Element/section">section</Mdn_Link>
-	</Tome_Subheading>
-	<Code content={`<section>section</section>`} />
-	<section>section</section>
+	</section>
+	<section>
+		<Tome_Subheading slug="header-element">
+			<Mdn_Link href="Web/HTML/Element/footer">header</Mdn_Link>
+		</Tome_Subheading>
+		<Code content={`<header>header</header>`} />
+		<header>header</header>
+	</section>
+	<section>
+		<Tome_Subheading slug="footer-element">
+			<Mdn_Link href="Web/HTML/Element/footer">footer</Mdn_Link>
+		</Tome_Subheading>
+		<Code content={`<footer>footer</footer>`} />
+		<footer>footer</footer>
+	</section>
+	<section>
+		<Tome_Subheading slug="section-element">
+			<Mdn_Link href="Web/HTML/Element/section">section</Mdn_Link>
+		</Tome_Subheading>
+		<Code content={`<section>section</section>`} />
+		<section>section</section>
+	</section>
 	<section>
 		<Tome_Subheading slug="ul-element"><code>ul</code></Tome_Subheading>
 	</section>

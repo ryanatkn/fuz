@@ -24,7 +24,7 @@
 		left: -3.5rem;
 		bottom: calc(var(--size) * 0.1);
 		opacity: 0;
-		transition: opacity var(--duration_1);
+		transition: opacity var(--duration_2);
 	}
 
 	.hashlink_scroll_target {
