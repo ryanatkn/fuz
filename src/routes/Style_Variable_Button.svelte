@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type {HTMLButtonAttributes} from 'svelte/elements';
+	import type {SvelteHTMLElements} from 'svelte/elements';
 	import type {Snippet} from 'svelte';
 
 	import {default_variables} from '$lib/variables.js';
@@ -10,7 +10,7 @@
 		classes?: string;
 		inline?: boolean;
 		plain?: boolean;
-		attrs?: HTMLButtonAttributes;
+		attrs?: SvelteHTMLElements['button'];
 		children?: Snippet;
 	}
 

@@ -1,12 +1,12 @@
 <script lang="ts">
 	import {base} from '$app/paths';
 	import type {Snippet} from 'svelte';
-	import type {HTMLAnchorAttributes} from 'svelte/elements';
+	import type {SvelteHTMLElements} from 'svelte/elements';
 
 	interface Props {
 		name: string; // TODO type, generate from `tomes`?
 		chip?: boolean;
-		attrs?: HTMLAnchorAttributes;
+		attrs?: SvelteHTMLElements['a'];
 		children?: Snippet;
 	}
 

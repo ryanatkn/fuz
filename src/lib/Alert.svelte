@@ -11,7 +11,7 @@
 		status?: Alert_Status;
 		color?: string;
 		// TODO this API is a mess in part because of the types, maybe an explicit `Alert_Button` is better
-		// $props must be destructured, so we can't use a union with narrowing
+		// $props must be destructured, so we can't use a union with narrowing right?
 		// so `disabled` only makes sense if `onclick` is defined, and we dont get the other HTMLButtonElement attributes
 		onclick?: (() => void) | undefined;
 		disabled?: boolean;

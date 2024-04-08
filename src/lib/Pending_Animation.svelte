@@ -1,10 +1,10 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
-	import type {HTMLAttributes} from 'svelte/elements';
+	import type {SvelteHTMLElements} from 'svelte/elements';
 
 	interface Props {
 		running?: boolean;
-		attrs?: HTMLAttributes<HTMLDivElement>;
+		attrs?: SvelteHTMLElements['div'];
 		children?: Snippet<[index: number]>;
 	}
 

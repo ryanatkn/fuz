@@ -1,6 +1,6 @@
 <script lang="ts">
 	import {strip_start} from '@ryanatkn/belt/string.js';
-	import type {HTMLAnchorAttributes} from 'svelte/elements';
+	import type {SvelteHTMLElements} from 'svelte/elements';
 	import type {Snippet} from 'svelte';
 
 	import Mdn_Logo from '$lib/Mdn_Logo.svelte';
@@ -10,7 +10,7 @@
 		 * @example Web/HTML/Element
 		 */
 		href: string;
-		attrs?: HTMLAnchorAttributes;
+		attrs?: SvelteHTMLElements['a'];
 		children: Snippet;
 	}
 
