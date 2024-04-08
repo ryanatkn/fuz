@@ -6,12 +6,7 @@
 		attrs?: any;
 	}
 
-	const {
-		size = 'var(--size, var(--size_sm))',
-		fill = '#8cb4ff',
-		label = 'GitHub icon',
-		attrs,
-	}: Props = $props();
+	const {size = 'var(--size)', fill = '#8cb4ff', label = 'GitHub icon', attrs}: Props = $props();
 
 	// TODO do something more optimal
 </script>

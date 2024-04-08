@@ -157,7 +157,7 @@ By default it's opaque, resetting the background to the initial depth. */
 
 .chip {
 	font-weight: 600;
-	padding: var(--space_xs4) var(--space_sm);
+	padding: var(--space_xs5) var(--space_sm); /* maybe different inside `p`? using `calc` with `--size`? */
 	background-color: var(--fg_1);
 	border-radius: var(--radius_xs);
 }

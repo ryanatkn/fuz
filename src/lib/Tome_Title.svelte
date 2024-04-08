@@ -4,6 +4,7 @@
 
 	import type {Tome} from '$lib/tome.js';
 	import {to_library_path_info} from '$lib/helpers.js';
+	import Hashlink from '$lib/Hashlink.svelte';
 
 	interface Props {
 		tome: Tome;
@@ -12,16 +13,19 @@
 
 	const {tome, children}: Props = $props();
 
-	const {path, path_is_selected} = $derived(to_library_path_info(tome.slug, $page.url.pathname));
+	const slugify = (str: string) => str.toLowerCase().replaceAll(/\s/gu, '-').replaceAll(/\W/gu, ''); // TODO extract to helper
 
-	// TODO maybe add `Heading_Link` when it's a link, but the UX isn't great because it presents the user with 2 different links
+	const slug = $derived(slugify(tome.name));
+
+	const {path, path_is_selected} = $derived(to_library_path_info(tome.slug, $page.url.pathname));
 </script>
 
-<h2 id={tome.name}>
+<h2>
 	{#if path_is_selected}
 		{@render content(tome.name)}
 	{:else}
 		<a href={path}>{@render content(tome.name)}</a>
+		<Hashlink {slug} />
 	{/if}
 </h2>
 
@@ -32,3 +36,13 @@
 		{name}
 	{/if}
 {/snippet}
+
+<style>
+	h2 {
+		position: relative;
+	}
+	/* TODO @multiple how can this be done composably? currently using `:global` at usage site - ideally we'd continue to use :hover instead of JS */
+	h2:hover :global(.hashlink) {
+		opacity: 1;
+	}
+</style>

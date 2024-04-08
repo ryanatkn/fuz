@@ -149,6 +149,11 @@ export const package_json = {
 			default: './dist/Github_Logo.svelte',
 			types: './dist/Github_Logo.svelte.d.ts',
 		},
+		'./Hashlink.svelte': {
+			svelte: './dist/Hashlink.svelte',
+			default: './dist/Hashlink.svelte',
+			types: './dist/Hashlink.svelte.d.ts',
+		},
 		'./helpers.js': {default: './dist/helpers.js', types: './dist/helpers.d.ts'},
 		'./Hue_Input.svelte': {
 			svelte: './dist/Hue_Input.svelte',
@@ -190,6 +195,12 @@ export const package_json = {
 			default: './dist/Library_Tertiary_Nav.svelte',
 			types: './dist/Library_Tertiary_Nav.svelte.d.ts',
 		},
+		'./Library.svelte': {
+			svelte: './dist/Library.svelte',
+			default: './dist/Library.svelte',
+			types: './dist/Library.svelte.d.ts',
+		},
+		'./library.js': {default: './dist/library.js', types: './dist/library.d.ts'},
 		'./Mdn_Link.svelte': {
 			svelte: './dist/Mdn_Link.svelte',
 			default: './dist/Mdn_Link.svelte',
@@ -264,6 +275,11 @@ export const package_json = {
 			svelte: './dist/Tome_Link.svelte',
 			default: './dist/Tome_Link.svelte',
 			types: './dist/Tome_Link.svelte.d.ts',
+		},
+		'./Tome_Subheading.svelte': {
+			svelte: './dist/Tome_Subheading.svelte',
+			default: './dist/Tome_Subheading.svelte',
+			types: './dist/Tome_Subheading.svelte.d.ts',
 		},
 		'./Tome_Title.svelte': {
 			svelte: './dist/Tome_Title.svelte',
@@ -346,6 +362,7 @@ export const src_json = {
 			declarations: [{name: 'Dimensions', kind: 'class'}],
 		},
 		'./Github_Logo.svelte': {path: 'Github_Logo.svelte', declarations: []},
+		'./Hashlink.svelte': {path: 'Hashlink.svelte', declarations: []},
 		'./helpers.js': {
 			path: 'helpers.ts',
 			declarations: [
@@ -361,6 +378,8 @@ export const src_json = {
 		'./Library_Primary_Nav.svelte': {path: 'Library_Primary_Nav.svelte', declarations: []},
 		'./Library_Secondary_Nav.svelte': {path: 'Library_Secondary_Nav.svelte', declarations: []},
 		'./Library_Tertiary_Nav.svelte': {path: 'Library_Tertiary_Nav.svelte', declarations: []},
+		'./Library.svelte': {path: 'Library.svelte', declarations: []},
+		'./library.js': {path: 'library.ts', declarations: []},
 		'./Mdn_Link.svelte': {path: 'Mdn_Link.svelte', declarations: []},
 		'./Mdn_Logo.svelte': {path: 'Mdn_Logo.svelte', declarations: []},
 		'./Package_Detail.svelte': {path: 'Package_Detail.svelte', declarations: []},
@@ -420,6 +439,7 @@ export const src_json = {
 		},
 		'./Tome_Detail.svelte': {path: 'Tome_Detail.svelte', declarations: []},
 		'./Tome_Link.svelte': {path: 'Tome_Link.svelte', declarations: []},
+		'./Tome_Subheading.svelte': {path: 'Tome_Subheading.svelte', declarations: []},
 		'./Tome_Title.svelte': {path: 'Tome_Title.svelte', declarations: []},
 		'./tome.js': {
 			path: 'tome.ts',

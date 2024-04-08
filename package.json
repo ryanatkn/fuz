@@ -184,6 +184,11 @@
       "default": "./dist/Github_Logo.svelte",
       "types": "./dist/Github_Logo.svelte.d.ts"
     },
+    "./Hashlink.svelte": {
+      "svelte": "./dist/Hashlink.svelte",
+      "default": "./dist/Hashlink.svelte",
+      "types": "./dist/Hashlink.svelte.d.ts"
+    },
     "./helpers.js": {
       "default": "./dist/helpers.js",
       "types": "./dist/helpers.d.ts"
@@ -227,6 +232,15 @@
       "svelte": "./dist/Library_Tertiary_Nav.svelte",
       "default": "./dist/Library_Tertiary_Nav.svelte",
       "types": "./dist/Library_Tertiary_Nav.svelte.d.ts"
+    },
+    "./Library.svelte": {
+      "svelte": "./dist/Library.svelte",
+      "default": "./dist/Library.svelte",
+      "types": "./dist/Library.svelte.d.ts"
+    },
+    "./library.js": {
+      "default": "./dist/library.js",
+      "types": "./dist/library.d.ts"
     },
     "./Mdn_Link.svelte": {
       "svelte": "./dist/Mdn_Link.svelte",
@@ -326,6 +340,11 @@
       "svelte": "./dist/Tome_Link.svelte",
       "default": "./dist/Tome_Link.svelte",
       "types": "./dist/Tome_Link.svelte.d.ts"
+    },
+    "./Tome_Subheading.svelte": {
+      "svelte": "./dist/Tome_Subheading.svelte",
+      "default": "./dist/Tome_Subheading.svelte",
+      "types": "./dist/Tome_Subheading.svelte.d.ts"
     },
     "./Tome_Title.svelte": {
       "svelte": "./dist/Tome_Title.svelte",

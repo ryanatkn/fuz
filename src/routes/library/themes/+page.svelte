@@ -320,9 +320,6 @@ $selected_color_scheme; // '${$selected_color_scheme}'`}
 {/if}
 
 <style>
-	.theme {
-		padding: var(--space_lg);
-	}
 	.theme_editor_wrapper {
 		width: var(--width_md);
 		padding: var(--space_lg);
