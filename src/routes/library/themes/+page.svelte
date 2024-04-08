@@ -136,10 +136,8 @@
 		<h3>Themes</h3>
 		<p>
 			A theme is a simple JSON collection of <Tome_Link name="variables" /> that can be transformed into
-			CSS that set
-			<Mdn_Link href="Web/CSS/Using_CSS_custom_properties">CSS custom properties</Mdn_Link>. Each
-			variable can have values for light and/or dark color schemes. In other words, "dark" isn't a
-			theme, it's a mode that any theme can implement.
+			CSS that set custom properties. Each variable can have values for light and/or dark color schemes.
+			In other words, "dark" isn't a theme, it's a mode that any theme can implement.
 		</p>
 		<!-- TODO explain when exported <Code code={`<Theme_Input\n\t{themes}\n\t{selected_theme}\n/>`} /> -->
 		<div class="width_sm mb_lg">
