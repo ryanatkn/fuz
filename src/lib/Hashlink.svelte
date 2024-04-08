@@ -29,7 +29,7 @@
 
 	.hashlink_scroll_target {
 		position: absolute;
-		top: calc(var(--size) * -3);
+		top: calc(var(--size) * -4);
 		left: 0;
 	}
 

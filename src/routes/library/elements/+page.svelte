@@ -151,8 +151,6 @@
 	</section>
 	<section>
 		<Tome_Subheading slug="ul-element"><code>ul</code></Tome_Subheading>
-	</section>
-	<section>
 		<ul>
 			<li>a</li>
 			<li>b</li>
@@ -163,8 +161,6 @@
 		<Tome_Subheading slug="ul-with-unstyled"
 			><code>ul</code> with <code>.unstyled</code></Tome_Subheading
 		>
-	</section>
-	<section>
 		<ul class="unstyled">
 			<li>a</li>
 			<li>b</li>
@@ -173,8 +169,6 @@
 	</section>
 	<section>
 		<Tome_Subheading slug="ol-element"><code>ol</code></Tome_Subheading>
-	</section>
-	<section>
 		<ol>
 			<li>one</li>
 			<li>two</li>
@@ -185,8 +179,6 @@
 		<Tome_Subheading slug="ol-with-unstyled"
 			><code>ol</code> with <code>.unstyled</code></Tome_Subheading
 		>
-	</section>
-	<section>
 		<ol class="unstyled">
 			<li>one</li>
 			<li>two</li>
@@ -195,8 +187,6 @@
 	</section>
 	<section>
 		<Tome_Subheading slug="menu-element"><code>menu</code></Tome_Subheading>
-	</section>
-	<section>
 		<menu>
 			<li>1</li>
 			<li>2</li>
@@ -207,8 +197,6 @@
 		<Tome_Subheading slug="menu-with-unstyled"
 			><code>menu</code> with <code>.unstyled</code></Tome_Subheading
 		>
-	</section>
-	<section>
 		<menu class="unstyled">
 			<li>1</li>
 			<li>2</li>
