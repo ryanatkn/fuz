@@ -1,18 +1,20 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
 	import {parse_package_meta} from '@ryanatkn/gro/package_meta.js';
+	import {onNavigate} from '$app/navigation';
 
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
 	import {Tome, set_tomes} from '$lib/tome.js';
 	import Library_Primary_Nav from '$lib/Library_Primary_Nav.svelte';
 	import Library_Secondary_Nav from '$lib/Library_Secondary_Nav.svelte';
 	import Library_Tertiary_Nav from '$lib/Library_Tertiary_Nav.svelte';
-	import {set_selected_variable} from '$routes/style_variable_helpers.js';
 	import Dialog from '$lib/Dialog.svelte';
-	import Style_Variable_Detail from '$routes/Style_Variable_Detail.svelte';
 	import Library_Footer from '$lib/Library_Footer.svelte';
+
+	// TODO BLOCK extract to props or context
+	import {set_selected_variable} from '$routes/style_variable_helpers.js';
+	import Style_Variable_Detail from '$routes/Style_Variable_Detail.svelte';
 	import {package_json, src_json} from '$routes/package.js';
-	import {onNavigate} from '$app/navigation';
 
 	interface Props {
 		tomes: Tome[];
@@ -33,8 +35,6 @@
 	let innerWidth: number | undefined = $state();
 
 	// TODO BLOCK put related styles/components in the secondary sidebar along with "on this page"
-
-	// TODO BLOCK maybe extract `<Library {tomes} />`?
 
 	const pkg = parse_package_meta(package_json.homepage, package_json, src_json);
 

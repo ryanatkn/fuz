@@ -13,8 +13,6 @@
 
 	const {tomes, children}: Props = $props();
 
-	// Library_Menu floats alongside the docs, showing scrolled item as selected
-
 	const tomes_by_category = $derived(
 		tomes.reduce(
 			(result, c) => {
