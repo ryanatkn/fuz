@@ -13,6 +13,8 @@
 
 	const selected_item = $derived(tomes.find((c) => c.pathname === $page.url.pathname));
 
+	// TODO BLOCK width is going to full
+
 	// TODO BLOCK maybe this should be added to the primary nav as a button (or included on the secondary nav button's dialog for now)
 	// or like Svelte as a popover menu at the top?
 	// this will become more important when we add the "on this page" section
@@ -39,7 +41,9 @@
 		z-index: 1;
 		width: var(--library_sidebar_width);
 		height: calc(100% - var(--library_primary_nav_height));
-		padding: var(--space_md); /* needed with `overflow: auto` to avoid cutting off outline */
+		padding: var(
+			--library_nav_padding
+		); /* needed with `overflow: auto` to avoid cutting off outline */
 		overflow: auto;
 		background-color: var(--fg_1);
 	}

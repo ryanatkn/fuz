@@ -29,7 +29,7 @@
 	// TODO BLOCK remove CSS below with reusable CSS or a Svelte component
 </script>
 
-<ul class="unstyled">
+<ul class="library_menu unstyled">
 	{#each Object.entries(tomes_by_category) as [category, tomes] (category)}
 		<li class="category">
 			{#if children}{@render children(category)}{:else}<h6>{category}</h6>{/if}
@@ -49,6 +49,10 @@
 </ul>
 
 <style>
+	.library_menu {
+		width: var(--library_menu_width);
+	}
+
 	.category {
 		margin: var(--space_xl6) 0;
 	}
