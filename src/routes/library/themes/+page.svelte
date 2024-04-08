@@ -47,7 +47,7 @@
 		<Code content={`import Themed from '@ryanatkn/fuz/Themed.svelte';`} lang="ts" />
 		<Code content={`<!-- +layout.svelte -->\n<Themed>\n\t{@render children()}\n</Themed>`} />
 		<Details>
-			{#snippet summary()}why the singleton?{/snippet}
+			{#snippet summary()}Why the singleton?{/snippet}
 			<aside>
 				<p>
 					By default <code>Themed</code> syncs its settings to the global <code>:root</code> tag and
@@ -65,7 +65,7 @@
 			</aside>
 		</Details>
 		<Details>
-			{#snippet summary()}why nested children?{/snippet}
+			{#snippet summary()}Why nested children?{/snippet}
 			<aside>
 				<p>
 					<code>Themed</code> is designed to wrap every page at the top level so it can provide the
@@ -117,7 +117,7 @@
 			both color schemes.
 		</p>
 		<Details>
-			{#snippet summary()}more about <code>Color_Scheme_Input</code>{/snippet}
+			{#snippet summary()}More about <code>Color_Scheme_Input</code>{/snippet}
 			<aside>
 				<p>
 					<code>Color_Scheme_Input</code> enables users to choose and persist the color scheme without
@@ -259,7 +259,7 @@ $selected_color_scheme; // '${$selected_color_scheme}'`}
 			lang="js"
 		/>
 		<Details>
-			{#snippet summary()}more about <code>Themed</code>{/snippet}
+			{#snippet summary()}More about <code>Themed</code>{/snippet}
 			<aside>
 				<p>
 					<code>Themed</code> initializes the system's theme support. Without it, the page will not
