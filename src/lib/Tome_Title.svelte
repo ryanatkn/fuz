@@ -13,6 +13,8 @@
 	const {tome, children}: Props = $props();
 
 	const {path, path_is_selected} = $derived(to_library_path_info(tome.slug, $page.url.pathname));
+
+	// TODO maybe add `Heading_Link` when it's a link, but the UX isn't great because it presents the user with 2 different links
 </script>
 
 <h2 id={tome.name}>

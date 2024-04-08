@@ -6,6 +6,7 @@
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
 	import {get_tome} from '$lib/tome.js';
 	import {default_variables} from '$lib/variables.js';
+	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 	import Style_Variable_Button from '$routes/Style_Variable_Button.svelte';
 
 	const LIBRARY_ITEM_NAME = 'variables';
@@ -90,9 +91,9 @@ export interface Style_Variable {
 		/>
 	</section>
 	<section>
-		<h3 class="mb_lg">
+		<Tome_Subheading slug="all-style-variables">
 			All {variables.length} style variables
-		</h3>
+		</Tome_Subheading>
 		<aside class="mb_lg">⚠️ some of these will change</aside>
 		<!-- TODO add info through the contextmenu or dialog -->
 		<div class="variables">

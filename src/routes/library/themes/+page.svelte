@@ -10,6 +10,7 @@
 	import Tome_Link from '$lib/Tome_Link.svelte';
 	import {type Theme, save_theme, get_theme, get_color_scheme} from '$lib/theme.js';
 	import {default_themes} from '$lib/themes.js';
+	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 	import Theme_Input from '$lib/Theme_Input.svelte';
 	import Theme_Form from '$routes/Theme_Form.svelte';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
@@ -90,7 +91,7 @@
 		</Details>
 	</section>
 	<section class="theme">
-		<h3>Color scheme</h3>
+		<Tome_Subheading slug="color-scheme">Color scheme</Tome_Subheading>
 		<p>
 			<code>Themed</code> defaults to automatic
 			<Mdn_Link href="Web/CSS/color-scheme">color-scheme</Mdn_Link>
@@ -133,7 +134,7 @@
 		</Details>
 	</section>
 	<section class="theme">
-		<h3>Themes</h3>
+		<Tome_Subheading slug="builtin-themes">Builtin themes</Tome_Subheading>
 		<p>
 			A theme is a simple JSON collection of <Tome_Link name="variables" /> that can be transformed into
 			CSS that set custom properties. Each variable can have values for light and/or dark color schemes.
@@ -149,7 +150,7 @@
 		<aside>The builtin themes need more work, but the proof of concept is ready!</aside>
 	</section>
 	<section class="theme">
-		<h3>Scoped themes</h3>
+		<Tome_Subheading slug="scoped-themes">Scoped themes</Tome_Subheading>
 		<Details>
 			{#snippet summary()}⚠️ Scoped themes are a work in progress and may not be supported depending
 				on complexity. It shouldn't worsen the unscoped API.{/snippet}
@@ -208,7 +209,7 @@
 		</Details>
 	</section>
 	<section class="theme">
-		<h3>Theme usage</h3>
+		<Tome_Subheading slug="theme-usage">Theme usage</Tome_Subheading>
 		<p>Themes are plain CSS that can be sourced in a variety of ways.</p>
 		<p>To use fuz's base theme:</p>
 		<Code

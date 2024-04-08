@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
-	import {parse_package_meta} from '@ryanatkn/gro/package_meta.js';
+	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
 	import {onNavigate} from '$app/navigation';
 
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
@@ -11,15 +11,13 @@
 	import Dialog from '$lib/Dialog.svelte';
 	import Library_Footer from '$lib/Library_Footer.svelte';
 
-	// TODO BLOCK extract to props or context
-	import {package_json, src_json} from '$routes/package.js';
-
 	interface Props {
 		tomes: Tome[];
+		pkg: Package_Meta;
 		children: Snippet;
 	}
 
-	const {tomes, children}: Props = $props();
+	const {tomes, pkg, children}: Props = $props();
 
 	// TODO BLOCK this API is messy, inconsistent usage of props/context
 	const tomes_by_name = new Map(tomes.map((t) => [t.name, t]));
@@ -31,8 +29,6 @@
 	let innerWidth: number | undefined = $state();
 
 	// TODO BLOCK put related styles/components in the secondary sidebar along with "on this page"
-
-	const pkg = parse_package_meta(package_json.homepage, package_json, src_json);
 
 	let show_secondary_nav_dialog = $state(false);
 	const toggle_secondary_nav_dialog = (show?: boolean): void => {
@@ -132,7 +128,7 @@
 		} */
 	}
 
-	/* sync this breakpoint with `Library_Tertiary_Nav` */
+	/* sync this breakpoint with `Library_Tertiary_Nav` and `Tome_Subheading` */
 	@media (max-width: 1000px) {
 		/* main { */
 		/* --library_content_max_width: calc(var(--width_md) + var(--library_content_padding)); */
@@ -145,7 +141,7 @@
 		}
 	}
 
-	/* sync this breakpoint with `Library_Primary_Nav` and `Library_Secondary_Nav` */
+	/* sync this breakpoint with `Library_Primary_Nav`, `Library_Secondary_Nav`, and `Tome_Subheading` */
 	@media (max-width: 800px) {
 		.content {
 			/* handle the moved `Library_Secondary_Nav` */

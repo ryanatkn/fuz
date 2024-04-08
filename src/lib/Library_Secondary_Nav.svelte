@@ -34,7 +34,7 @@
 		margin-bottom: var(--space_xl6);
 	}
 
-	/* sync this breakpoint with `library/+layout` and `Library_Primary_Nav` */
+	/* sync this breakpoint with `Library` */
 	@media (max-width: 800px) {
 		.library_secondary_nav {
 			position: static;
