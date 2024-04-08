@@ -10,6 +10,7 @@
 	import Library_Tertiary_Nav from '$lib/Library_Tertiary_Nav.svelte';
 	import Dialog from '$lib/Dialog.svelte';
 	import Library_Footer from '$lib/Library_Footer.svelte';
+	import {set_library_links} from '$lib/library.svelte.js';
 
 	interface Props {
 		tomes: Tome[];
@@ -38,9 +39,11 @@
 	onNavigate(() => {
 		show_secondary_nav_dialog = false;
 	});
+
+	set_library_links();
 </script>
 
-<svelte:window bind:innerWidth />
+<svelte:window bind:innerWidth on:hashchange={() => (show_secondary_nav_dialog = false)} />
 
 <div class="layout">
 	<Library_Primary_Nav>

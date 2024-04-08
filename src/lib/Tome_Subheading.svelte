@@ -1,8 +1,13 @@
+<script lang="ts" context="module">
+	let _id = 0;
+</script>
+
 <script lang="ts">
-	import type {Snippet} from 'svelte';
+	import {onDestroy, type Snippet} from 'svelte';
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
 	import Hashlink from '$lib/Hashlink.svelte';
+	import {get_library_links} from '$lib/library.svelte.js';
 
 	interface Props {
 		slug: string;
@@ -11,6 +16,14 @@
 	}
 
 	const {slug, attrs, children}: Props = $props();
+
+	const id = 'tome_subheading_' + _id++;
+
+	const library_links = get_library_links();
+
+	library_links.add(id, children, slug); // TODO make reactive?
+
+	onDestroy(() => library_links.remove(id));
 </script>
 
 <h3 {...attrs}>
