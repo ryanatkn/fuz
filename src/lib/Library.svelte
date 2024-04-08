@@ -20,6 +20,8 @@
 
 	const {tomes, pkg, children}: Props = $props();
 
+	// TODO BLOCK menus get cut off at lower widths
+
 	// TODO BLOCK this API is messy, inconsistent usage of props/context
 	const tomes_by_name = new Map(tomes.map((t) => [t.name, t]));
 	set_tomes(tomes_by_name);

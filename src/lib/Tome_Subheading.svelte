@@ -3,31 +3,36 @@
 </script>
 
 <script lang="ts">
-	import {onDestroy, type Snippet} from 'svelte';
+	import {onDestroy} from 'svelte';
 	import type {SvelteHTMLElements} from 'svelte/elements';
+	import {page} from '$app/stores';
+	import {base} from '$app/paths';
 
 	import Hashlink from '$lib/Hashlink.svelte';
 	import {get_library_links} from '$lib/library.svelte.js';
 
 	interface Props {
+		text: string;
 		slug: string;
 		attrs?: SvelteHTMLElements['h3'];
-		children: Snippet;
 	}
 
-	const {slug, attrs, children}: Props = $props();
+	const {text, slug, attrs}: Props = $props();
 
 	const id = 'tome_subheading_' + _id++;
 
 	const library_links = get_library_links();
 
-	library_links.add(id, children, slug); // TODO make reactive?
-
-	onDestroy(() => library_links.remove(id));
+	// Add subheadings only if not on the root page.
+	// TODO make reactive?
+	if ($page.url.pathname !== base + library_links.root_path) {
+		library_links.add(id, text, slug);
+		onDestroy(() => library_links.remove(id));
+	}
 </script>
 
 <h3 {...attrs}>
-	{@render children()}
+	{text}
 	<Hashlink {slug} />
 </h3>
 

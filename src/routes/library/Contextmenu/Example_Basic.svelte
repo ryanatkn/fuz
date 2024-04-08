@@ -11,7 +11,7 @@
 	let with_icon = $state(false);
 </script>
 
-<Tome_Subheading slug="basic-usage">Basic usage</Tome_Subheading>
+<Tome_Subheading text="Basic usage" slug="basic-usage" />
 <Contextmenu_Root scoped>
 	<Contextmenu>
 		{#snippet entries()}

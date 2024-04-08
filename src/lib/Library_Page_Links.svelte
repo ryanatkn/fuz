@@ -1,7 +1,8 @@
 <script lang="ts">
 	import {page} from '$app/stores';
+	import {slide} from 'svelte/transition';
 
-	import type {Library_Links} from './library.svelte.js';
+	import type {Library_Links} from '$lib/library.svelte.js';
 
 	interface Props {
 		library_links: Library_Links;
@@ -21,10 +22,8 @@
 	<h6>On this page</h6>
 	<ul class="unstyled">
 		{#each library_links.library_links as item (item.id)}
-			<li role="none">
-				<a class="menu_item" href="#{item.slug}" class:selected={item.slug === hash}
-					>{@render item.snippet()}</a
-				>
+			<li role="none" transition:slide>
+				<a class="menu_item" href="#{item.slug}" class:selected={item.slug === hash}>{item.text}</a>
 			</li>
 		{/each}
 	</ul>

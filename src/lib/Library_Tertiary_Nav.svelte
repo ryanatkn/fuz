@@ -29,7 +29,7 @@
 			{#snippet children(category)}<h6>related {category}</h6>{/snippet}
 		</Library_Menu>
 	{/if}
-	{#if library_links.library_links.length > 0}
+	{#if library_links.library_links.length > 1}
 		<Library_Page_Links {library_links} />
 	{/if}
 </aside>

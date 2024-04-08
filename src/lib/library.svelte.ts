@@ -1,4 +1,4 @@
-import {getContext, setContext, type Snippet} from 'svelte';
+import {getContext, setContext} from 'svelte';
 
 const LIBRARY_LINKS_KEY = Symbol('library_links');
 
@@ -11,14 +11,15 @@ export const get_library_links = (): Library_Links => {
 	return links as Library_Links;
 };
 
-// TODO BLOCK making this a snippet instead of a string causes many issues
-export type Library_Link_Data = {id: string; snippet: Snippet; slug: string};
+export type Library_Link_Data = {id: string; text: string; slug: string};
 
 export class Library_Links {
 	library_links: Library_Link_Data[] = $state([]);
 
-	add(id: string, snippet: Snippet, slug: string): void {
-		this.library_links.push({id, snippet, slug});
+	constructor(public readonly root_path = '/library') {}
+
+	add(id: string, text: string, slug: string): void {
+		this.library_links.push({id, text, slug});
 	}
 
 	remove(id: string): void {

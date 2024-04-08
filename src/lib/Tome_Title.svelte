@@ -4,7 +4,7 @@
 
 <script lang="ts">
 	import {page} from '$app/stores';
-	import {onDestroy, type Snippet} from 'svelte';
+	import {onDestroy} from 'svelte';
 
 	import type {Tome} from '$lib/tome.js';
 	import {to_library_path_info} from '$lib/helpers.js';
@@ -13,10 +13,9 @@
 
 	interface Props {
 		tome: Tome;
-		children: Snippet;
 	}
 
-	const {tome, children}: Props = $props();
+	const {tome}: Props = $props();
 
 	const id = 'tome_title_' + _id++;
 
@@ -26,7 +25,7 @@
 
 	const library_links = get_library_links();
 
-	library_links.add(id, children, slug); // TODO make reactive?
+	library_links.add(id, tome.name, slug); // TODO make reactive?
 
 	onDestroy(() => library_links.remove(id));
 
@@ -43,11 +42,7 @@
 </h2>
 
 {#snippet content(name: string)}
-	{#if children}
-		{@render children()}
-	{:else}
-		{name}
-	{/if}
+	{name}
 {/snippet}
 
 <style>

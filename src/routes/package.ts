@@ -175,6 +175,11 @@ export const package_json = {
 			default: './dist/Library_Menu.svelte',
 			types: './dist/Library_Menu.svelte.d.ts',
 		},
+		'./Library_Page_Links.svelte': {
+			svelte: './dist/Library_Page_Links.svelte',
+			default: './dist/Library_Page_Links.svelte',
+			types: './dist/Library_Page_Links.svelte.d.ts',
+		},
 		'./Library_Panel.svelte': {
 			svelte: './dist/Library_Panel.svelte',
 			default: './dist/Library_Panel.svelte',
@@ -200,7 +205,10 @@ export const package_json = {
 			default: './dist/Library.svelte',
 			types: './dist/Library.svelte.d.ts',
 		},
-		'./library.js': {default: './dist/library.js', types: './dist/library.d.ts'},
+		'./library.svelte.js': {
+			default: './dist/library.svelte.js',
+			types: './dist/library.svelte.d.ts',
+		},
 		'./Mdn_Link.svelte': {
 			svelte: './dist/Mdn_Link.svelte',
 			default: './dist/Mdn_Link.svelte',
@@ -374,12 +382,21 @@ export const src_json = {
 		'./Library_Content.svelte': {path: 'Library_Content.svelte', declarations: []},
 		'./Library_Footer.svelte': {path: 'Library_Footer.svelte', declarations: []},
 		'./Library_Menu.svelte': {path: 'Library_Menu.svelte', declarations: []},
+		'./Library_Page_Links.svelte': {path: 'Library_Page_Links.svelte', declarations: []},
 		'./Library_Panel.svelte': {path: 'Library_Panel.svelte', declarations: []},
 		'./Library_Primary_Nav.svelte': {path: 'Library_Primary_Nav.svelte', declarations: []},
 		'./Library_Secondary_Nav.svelte': {path: 'Library_Secondary_Nav.svelte', declarations: []},
 		'./Library_Tertiary_Nav.svelte': {path: 'Library_Tertiary_Nav.svelte', declarations: []},
 		'./Library.svelte': {path: 'Library.svelte', declarations: []},
-		'./library.js': {path: 'library.ts', declarations: []},
+		'./library.svelte.js': {
+			path: 'library.svelte.ts',
+			declarations: [
+				{name: 'set_library_links', kind: 'function'},
+				{name: 'get_library_links', kind: 'function'},
+				{name: 'Library_Link_Data', kind: 'type'},
+				{name: 'Library_Links', kind: 'class'},
+			],
+		},
 		'./Mdn_Link.svelte': {path: 'Mdn_Link.svelte', declarations: []},
 		'./Mdn_Logo.svelte': {path: 'Mdn_Logo.svelte', declarations: []},
 		'./Package_Detail.svelte': {path: 'Package_Detail.svelte', declarations: []},
