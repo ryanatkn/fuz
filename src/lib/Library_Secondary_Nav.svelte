@@ -31,6 +31,7 @@
 		align-items: flex-end;
 		overflow: auto;
 		background-color: var(--fg_1);
+		margin-bottom: var(--space_xl6);
 	}
 
 	/* sync this breakpoint with `library/+layout` and `Library_Primary_Nav` */
@@ -39,7 +40,7 @@
 			position: static;
 			background-color: initial;
 			align-items: initial;
-			padding: 0 var(--space_md);
+			overflow: initial;
 		}
 	}
 </style>

@@ -53,6 +53,7 @@
 		.library_tertiary_nav {
 			position: static;
 			background-color: initial;
+			overflow: initial;
 		}
 	}
 </style>
