@@ -2,12 +2,13 @@
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
+	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
 	// TODO BLOCK opening it on itself is bugged, opens another menu
 </script>
 
 <Contextmenu_Root scoped>
-	<h3>Default behaviors example</h3>
+	<Tome_Subheading slug="default-behaviors">Default behaviors</Tome_Subheading>
 	<div class="panel p_md">
 		<Code
 			content={`<Contextmenu_Root scoped>

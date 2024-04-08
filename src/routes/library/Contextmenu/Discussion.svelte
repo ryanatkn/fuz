@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
+	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
 	// TODO BLOCK this is a good usecase for the automatic library heading links in an "on this page" righthand sidebar
 
@@ -7,7 +8,7 @@
 </script>
 
 <section>
-	<h3>Expected behaviors</h3>
+	<Tome_Subheading slug="expected-behaviors">Expected behaviors</Tome_Subheading>
 	<p>
 		The <code>Contextmenu</code> overrides the system contextmenu to provide capabilities specific
 		to your app.
@@ -68,7 +69,7 @@
 	</ul>
 </section>
 <section>
-	<h3>Motivation</h3>
+	<Tome_Subheading slug="motivation">Motivation</Tome_Subheading>
 	<p>Fuz takes two things very seriously, in no particular order:</p>
 	<ol>
 		<li>giving users a powerful and customizable UX</li>

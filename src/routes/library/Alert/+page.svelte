@@ -4,6 +4,7 @@
 	import {get_tome} from '$lib/tome.js';
 	import Alert from '$lib/Alert.svelte';
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Alert';
 	const tome = get_tome(LIBRARY_ITEM_NAME);
@@ -21,7 +22,7 @@
 		<Alert>info</Alert>
 	</section>
 	<section>
-		<h3>With custom icon</h3>
+		<Tome_Subheading slug="custom-icon">With custom icon</Tome_Subheading>
 		<p><code>icon</code> can be a string prop or snippet:</p>
 		<Code
 			content={`<Alert icon="▷">
@@ -41,7 +42,7 @@
 		</Alert>
 	</section>
 	<section>
-		<h3>As optional button</h3>
+		<Tome_Subheading slug="optional-button">As optional button</Tome_Subheading>
 		<p>
 			Alerts can be buttons by including an <code>onclick</code> prop. This API may change because
 			it's a bit of a mess - a separate <code>Alert_Button</code> may be better.
@@ -57,7 +58,7 @@
 		<p>clicks: {clicks}</p>
 	</section>
 	<section>
-		<h3>With custom status</h3>
+		<Tome_Subheading slug="custom-status">With custom status</Tome_Subheading>
 		<p>
 			The <code>status</code> prop, which defaults to <code>'inform'</code>, changes the default
 			icon and color.

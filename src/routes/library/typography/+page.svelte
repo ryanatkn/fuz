@@ -11,8 +11,7 @@
 	import Style_Variable_Button from '$routes/Style_Variable_Button.svelte';
 	import {line_height_names, size_names} from '$lib/variable_data.js';
 	import Details from '$lib/Details.svelte';
-
-	// TODO BLOCK inconsistent h3/section/hr below
+	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
 	const LIBRARY_ITEM_NAME = 'typography';
 
@@ -68,7 +67,7 @@
 		</Details>
 	</section>
 	<section>
-		<h3>Font sizes</h3>
+		<Tome_Subheading slug="font-sizes">Font sizes</Tome_Subheading>
 		<form class="width_sm">
 			<Font_Weight_Control bind:selected_font_weight></Font_Weight_Control>
 		</form>
@@ -90,9 +89,9 @@
 	</section>
 	<section>
 		<!-- TODO add a slider for the font size here -->
-		<h3>
+		<Tome_Subheading slug="font-weight">
 			<Mdn_Link href="Web/CSS/font-weight">font-weight</Mdn_Link> has no variables
-		</h3>
+		</Tome_Subheading>
 		<form>
 			<Font_Size_Control bind:selected_font_size />
 		</form>
@@ -109,7 +108,7 @@
 		</div>
 	</section>
 	<section>
-		<h3>Text colors</h3>
+		<Tome_Subheading slug="text-colors">Text colors</Tome_Subheading>
 		<aside>TODO needs work</aside>
 		<div>
 			{#each {length: 3} as _, i}
@@ -126,9 +125,9 @@
 	</section>
 	<!-- <section> 'text_disabled' 'text_active'</section> -->
 	<section>
-		<h3>
+		<Tome_Subheading slug="line-height">
 			<Mdn_Link href="Web/CSS/line-height">line-height</Mdn_Link> variables
-		</h3>
+		</Tome_Subheading>
 		<aside>TODO maybe rename with a semantic scale</aside>
 		<div>
 			{#each line_height_names as name}

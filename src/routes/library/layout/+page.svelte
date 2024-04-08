@@ -3,6 +3,7 @@
 	import {get_tome} from '$lib/tome.js';
 	import {space_variants} from '$lib/variable_data.js';
 	import Style_Variable_Button from '$routes/Style_Variable_Button.svelte';
+	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
 	const LIBRARY_ITEM_NAME = 'layout';
 
@@ -14,7 +15,7 @@
 
 <Tome_Detail {tome}>
 	<section>
-		<h3>Space variables</h3>
+		<Tome_Subheading slug="space-variables">Space variables</Tome_Subheading>
 		<div>
 			{#each space_variants as space_size}
 				{@const name = 'space_' + space_size}
@@ -28,7 +29,7 @@
 		</div>
 	</section>
 	<section>
-		<h3>Width variables</h3>
+		<Tome_Subheading slug="width-variables">Width variables</Tome_Subheading>
 		<div>
 			{#each ['sm', 'md'] as radius}
 				{@const name = 'width_' + radius}

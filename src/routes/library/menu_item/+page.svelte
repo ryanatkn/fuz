@@ -4,6 +4,7 @@
 
 	import {get_tome} from '$lib/tome.js';
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
 	const LIBRARY_ITEM_NAME = 'menu item';
 	const tome = get_tome(LIBRARY_ITEM_NAME);
@@ -25,9 +26,9 @@
 
 <Tome_Detail {tome}>
 	<section>
-		<h3>
+		<Tome_Subheading slug="menu_item-css-class">
 			<code>.menu_item</code> CSS class
-		</h3>
+		</Tome_Subheading>
 		<blockquote>This is experimental and may change or be removed.</blockquote>
 	</section>
 	<section>

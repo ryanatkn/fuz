@@ -5,6 +5,7 @@
 	import Details from '$lib/Details.svelte';
 	import {get_tome} from '$lib/tome.js';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
+	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Details';
 
@@ -37,7 +38,9 @@
 		</ul>
 	</section>
 	<section>
-		<h3>With lazy rendering by default</h3>
+		<Tome_Subheading slug="lazy-rendering-by-default"
+			>With lazy rendering by default</Tome_Subheading
+		>
 		<Code
 			content={`<Details>
   {#snippet summary()}summary content{/snippet}
@@ -50,7 +53,7 @@
 		</Details>
 	</section>
 	<section>
-		<h3>With eager rendering</h3>
+		<Tome_Subheading slug="eager-rendering">With eager rendering</Tome_Subheading>
 		<Code
 			content={`<Details eager>
   {#snippet summary()}summary content{/snippet}
@@ -63,9 +66,9 @@
 		</Details>
 	</section>
 	<section>
-		<h3>
+		<Tome_Subheading slug="base-details-element">
 			With the base <Mdn_Link href="Web/HTML/Element/details">details</Mdn_Link> element
-		</h3>
+		</Tome_Subheading>
 		<Code
 			content={`<details>
   <summary>a summary element instead of a snippet</summary>

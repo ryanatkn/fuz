@@ -4,6 +4,7 @@
 	import {get_tome} from '$lib/tome.js';
 	import Pending_Animation from '$lib/Pending_Animation.svelte';
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Pending_Animation';
 	const tome = get_tome(LIBRARY_ITEM_NAME);
@@ -38,7 +39,7 @@
 		</div>
 	</section>
 	<section>
-		<h3>custom children</h3>
+		<Tome_Subheading slug="custom-children">custom children</Tome_Subheading>
 		<Code
 			content={`<div
 	style:font-size="var(--size_xl6)"
@@ -68,7 +69,7 @@
 		</div>
 	</section>
 	<section>
-		<h3>children <code>index</code> prop</h3>
+		<Tome_Subheading slug="children-index-prop">children <code>index</code> prop</Tome_Subheading>
 		<Code
 			content={`<Pending_Animation running={${frogsRunning}}>
 	{#snippet children(index)}

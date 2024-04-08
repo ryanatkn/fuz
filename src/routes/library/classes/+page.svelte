@@ -8,6 +8,7 @@
 	import style_utilities_text from '$lib/style_utilities.css?raw';
 	import style_components_text from '$lib/style_components.css?raw';
 	import Details from '$lib/Details.svelte';
+	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
 	const LIBRARY_ITEM_NAME = 'classes';
 
@@ -82,7 +83,7 @@
 <Tome_Detail {tome}>
 	<aside>both the docs and implementation of these need more work</aside>
 	<section>
-		<h3>Optional CSS classes</h3>
+		<Tome_Subheading slug="css-classes">Optional CSS classes</Tome_Subheading>
 		<p>Fuz has three optional CSS files with different kinds of classes:</p>
 		<Code
 			content={`<!-- +layout.svelte -->
@@ -111,7 +112,7 @@
 		</aside>
 	</section>
 	<section>
-		<h3>Utility classes</h3>
+		<Tome_Subheading slug="utility-classes">Utility classes</Tome_Subheading>
 		<p>
 			Fuz provides an arbitrary set of utility classes for CSS, and defers to CSS in <a
 				href="https://svelte.dev/docs/svelte-components#style">Svelte's <code>{'<'}style></code></a
@@ -124,7 +125,7 @@
 		</ul>
 	</section>
 	<section>
-		<h3>Semantic classes</h3>
+		<Tome_Subheading slug="semantic-classes">Semantic classes</Tome_Subheading>
 		<ul class="classes unstyled">
 			{#each style_components_items as c}
 				<li>.{c}</li>
@@ -132,7 +133,7 @@
 		</ul>
 	</section>
 	<section>
-		<h3>Raw CSS</h3>
+		<Tome_Subheading slug="raw-css">Raw CSS</Tome_Subheading>
 		<!-- TODO maybe add a github source link? -->
 		<Details>
 			{#snippet summary()}

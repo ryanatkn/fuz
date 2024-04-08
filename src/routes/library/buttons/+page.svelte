@@ -5,6 +5,7 @@
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
 	import {get_tome} from '$lib/tome.js';
 	import Color_Scheme_Input from '$lib/Color_Scheme_Input.svelte';
+	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
 	const LIBRARY_ITEM_NAME = 'buttons';
 
@@ -47,7 +48,7 @@
 	</section>
 
 	<section>
-		<h3>Colorful buttons</h3>
+		<Tome_Subheading slug="colorful-buttons">Colorful buttons</Tome_Subheading>
 		{#each color_names as c}
 			{@const color_name = `color_${c}`}
 			<section>
@@ -66,13 +67,12 @@
 				>
 			</section>
 		{/each}
+		<div class="box w_100 mb_lg">
+			<Color_Scheme_Input />
+		</div>
 	</section>
 
-	<div class="box w_100 mb_lg">
-		<Color_Scheme_Input />
-	</div>
-
-	<h3>disabled button</h3>
+	<Tome_Subheading slug="disabled-attribute">With disabled attribute</Tome_Subheading>
 	<section>
 		<Code content={`<button disabled>\n\t:|\n</button>`} />
 		<button disabled>:|</button>
@@ -83,9 +83,9 @@
 	</section>
 
 	<section>
-		<h3>
-			button with <code>.selected</code>
-		</h3>
+		<Tome_Subheading slug="selected-class">
+			With <code>.selected</code>
+		</Tome_Subheading>
 		<nav>
 			<button
 				class:selected={selected_button === 0}
@@ -112,12 +112,11 @@
 	</section>
 	<section>
 		<Code content={`<button class="selected">...</button>`} />
-		<button class="w_100 selected">a button with the <code>.selected</code> class</button>
+		<button class="w_100 selected">a button with <code>.selected</code></button>
 	</section>
 	<section>
 		<p>
-			<code>.selected</code> buttons with the <code>.deselectable</code> class continue to be clickable
-			when selected:
+			<code>.selected</code> buttons with <code>.deselectable</code> continue to be clickable when selected:
 		</p>
 		<Code content={`<button class="selected deselectable">\n\t...\n</button>`} />
 	</section>
@@ -135,7 +134,9 @@
 	</section>
 
 	<section>
-		<h3><code>.plain</code> and <code>.icon_button</code></h3>
+		<Tome_Subheading slug="plain-and-icon_button"
+			><code>.plain</code> and <code>.icon_button</code></Tome_Subheading
+		>
 		<section>
 			<Code
 				content={`<button class="plain">

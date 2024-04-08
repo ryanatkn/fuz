@@ -5,12 +5,13 @@
 	import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
 	import Contextmenu_Entry from '$lib/Contextmenu_Entry.svelte';
 	import Contextmenu from '$lib/Contextmenu.svelte';
+	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
 	let greeted = $state(false);
 	let with_icon = $state(false);
 </script>
 
-<h3>Basic example</h3>
+<Tome_Subheading slug="basic-usage">Basic usage</Tome_Subheading>
 <Contextmenu_Root scoped>
 	<Contextmenu>
 		{#snippet entries()}

@@ -6,6 +6,7 @@
 	import Tome_Link from '$lib/Tome_Link.svelte';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
 	import Color_Scheme_Input from '$lib/Color_Scheme_Input.svelte';
+	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
 	const LIBRARY_ITEM_NAME = 'colors';
 
@@ -31,7 +32,7 @@
 
 <Tome_Detail {tome}>
 	<section>
-		<h3>Color semantics</h3>
+		<Tome_Subheading slug="color-semantics">Color semantics</Tome_Subheading>
 		<p>
 			Fuz provides a palette of color and hue <Tome_Link name="variables" /> designed to support concise
 			authoring in light and dark modes, as well as straightforward <Tome_Link name="themes"
@@ -65,7 +66,7 @@
 		</p>
 	</section>
 	<section>
-		<h3>Caveats</h3>
+		<Tome_Subheading slug="caveats">Caveats</Tome_Subheading>
 		<p>
 			For performance reasons, Fuz does not currently have an extensive set of variants, like
 			specialized states for elements or color values like "blue". Each of the 7 hues has 9 color
@@ -80,7 +81,7 @@
 		</p>
 	</section>
 	<section>
-		<h3>Hue variables</h3>
+		<Tome_Subheading slug="hue-variables">Hue variables</Tome_Subheading>
 		<p>
 			Hue variables contain a single <Mdn_Link href="Web/CSS/hue">hue</Mdn_Link> number. Each color variable
 			combines a hue variable with hardcoded saturation and lightness values for light and dark modes.
@@ -104,7 +105,7 @@
 		</ul>
 	</section>
 	<section>
-		<h3>Color variables</h3>
+		<Tome_Subheading slug="hue-variables">Color variables</Tome_Subheading>
 		<p>
 			There are 9 variables per color, numbered 1 to 9, lightest to darkest. The 5th variable of
 			each color is used as the base for things like <Tome_Link name="buttons" />.

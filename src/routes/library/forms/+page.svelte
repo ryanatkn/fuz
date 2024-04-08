@@ -6,6 +6,7 @@
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
 	import {get_tome} from '$lib/tome.js';
+	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
 	const LIBRARY_ITEM_NAME = 'forms';
 
@@ -33,11 +34,11 @@
 	<aside>forms need more work</aside>
 
 	<section>
-		<h3>
+		<Tome_Subheading slug="form-with-a-fieldset">
 			<Mdn_Link href="Web/HTML/Element/form">form</Mdn_Link> with a <Mdn_Link
 				href="Web/HTML/Element/fieldset">fieldset</Mdn_Link
 			>
-		</h3>
+		</Tome_Subheading>
 		<Code
 			content={`<form>
 	<fieldset>
@@ -113,9 +114,9 @@
 	</section>
 
 	<section>
-		<h3>
+		<Tome_Subheading slug="form-with-range-input">
 			<code>form</code> with range input
-		</h3>
+		</Tome_Subheading>
 		<form>
 			<fieldset>
 				<Code content={`<input type="range" />`} />
@@ -129,9 +130,9 @@
 	</section>
 
 	<section>
-		<h3>
+		<Tome_Subheading slug="form-with-checkboxes">
 			<code>form</code> with checkboxes
-		</h3>
+		</Tome_Subheading>
 		<!-- TODO make this a form, but figure out the checkbox problem -- maybe a last-child exception? -->
 		<form>
 			<fieldset>
@@ -155,16 +156,14 @@
 		</form>
 		<aside>
 			The above are wrapped with: <Code content={`<label class="row">`} />
-			with the <code>.disabled</code> class as needed: <Code
-				content={`<label class="row disabled">`}
-			/>
+			with <code>.disabled</code> as needed: <Code content={`<label class="row disabled">`} />
 		</aside>
 	</section>
 
 	<section>
-		<h3>
+		<Tome_Subheading slug="form-with-radio-inputs">
 			<code>form</code> with radio inputs
-		</h3>
+		</Tome_Subheading>
 		<form>
 			<fieldset>
 				{#each radio_items as radioItem}

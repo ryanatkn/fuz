@@ -3,6 +3,7 @@
 	import {get_tome} from '$lib/tome.js';
 	import {radius_variants} from '$lib/variable_data.js';
 	import Style_Variable_Button from '$routes/Style_Variable_Button.svelte';
+	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
 	const LIBRARY_ITEM_NAME = 'borders';
 
@@ -23,7 +24,7 @@
 	<!-- <div>outline_color</div> -->
 
 	<section>
-		<h3>Border colors</h3>
+		<Tome_Subheading slug="border-colors">Border colors</Tome_Subheading>
 		<aside>TODO needs work</aside>
 		<div class="border_examples border_colors">
 			{#each {length: 5} as _, i}
@@ -52,7 +53,7 @@
 	</section>
 
 	<section>
-		<h3>Border widths</h3>
+		<Tome_Subheading slug="border-widths">Border widths</Tome_Subheading>
 		<div class="border_examples border_widths">
 			{#each {length: 6} as _, i}
 				{@const name = 'border_width_' + (i + 1)}
@@ -69,7 +70,7 @@
 	</section>
 
 	<section>
-		<h3>Outline widths</h3>
+		<Tome_Subheading slug="outline-widths">Outline widths</Tome_Subheading>
 		<div class="border_examples outline_widths">
 			{#each {length: 3} as _, i}
 				{@const name = 'outline_width_' + (i + 1)}
@@ -86,7 +87,7 @@
 	</section>
 
 	<section>
-		<h3>Border radii</h3>
+		<Tome_Subheading slug="border-radius">Border radius</Tome_Subheading>
 		<div class="border_examples border_radii">
 			{#each radius_variants as radius}
 				{@const name = 'radius_' + radius}

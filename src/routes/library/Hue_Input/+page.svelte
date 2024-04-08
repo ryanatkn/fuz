@@ -4,6 +4,7 @@
 	import {get_tome} from '$lib/tome.js';
 	import Hue_Input from '$lib/Hue_Input.svelte';
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Hue_Input';
 	const tome = get_tome(LIBRARY_ITEM_NAME);
@@ -17,7 +18,7 @@
 		<Code content={`import Hue_Input from '@ryanatkn/fuz/Hue_Input.svelte';`} lang="ts" />
 	</section>
 	<section>
-		<h3>With <code>bind:value</code></h3>
+		<Tome_Subheading slug="with-bindvalue">With <code>bind:value</code></Tome_Subheading>
 		<Code content={`<Hue_Input bind:value />`} />
 		<Hue_Input bind:value />
 		<div class="mt_md" style:--color="hsl({value} 62% 31%)">
@@ -25,7 +26,7 @@
 		</div>
 	</section>
 	<section>
-		<h3>With <code>oninput</code></h3>
+		<Tome_Subheading slug="with-oninput">With <code>oninput</code></Tome_Subheading>
 		<Code
 			content={`<Hue_Input
 	oninput={(v) => (value_from_oninput = v)}
@@ -37,7 +38,7 @@
 		</div>
 	</section>
 	<section>
-		<h3>With <code>children</code></h3>
+		<Tome_Subheading slug="with-children">With <code>children</code></Tome_Subheading>
 		<Code
 			content={`<Hue_Input>
 	Some colorful hue input

@@ -7,6 +7,7 @@
 	import Tome_Link from '$lib/Tome_Link.svelte';
 	import {get_tome} from '$lib/tome.js';
 	import {get_color_scheme} from '$lib/theme.js';
+	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
 	const LIBRARY_ITEM_NAME = 'light and shadow';
 
@@ -35,7 +36,7 @@
 		</p>
 	</section>
 	<section>
-		<h3>Shades and highlights</h3>
+		<Tome_Subheading slug="shades-and-highlights">Shades and highlights</Tome_Subheading>
 		<h4><code>darken</code> and <code>lighten</code></h4>
 		<div class="swatch">
 			{#each {length: 9} as _, i}
@@ -95,7 +96,7 @@
 		</aside>
 	</section>
 	<section>
-		<h3>Fading opacity</h3>
+		<Tome_Subheading slug="fading-opacity">Fading opacity</Tome_Subheading>
 		<div class="swatch">
 			<div>
 				<div class="color" style:background-color="var(--color_a_5)"></div>
@@ -115,7 +116,7 @@
 		</div>
 	</section>
 	<section>
-		<h3>Stacking opacity</h3>
+		<Tome_Subheading slug="stacking-opacity">Stacking opacity</Tome_Subheading>
 		<Code
 			content={`<div style:background-color="var(--fg_1)" class="p_sm">
 	<div style:background-color="var(--fg_1)" class="p_sm">
@@ -143,7 +144,7 @@
 		</div>
 	</section>
 	<section>
-		<h3>Box shadows</h3>
+		<Tome_Subheading slug="box-shadows">Box shadows</Tome_Subheading>
 		<div class="shadow_example" style:box-shadow="var(--shadow)">
 			<Style_Variable_Button name="shadow_md" />
 		</div>

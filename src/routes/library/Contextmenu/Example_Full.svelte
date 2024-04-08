@@ -18,6 +18,7 @@
 	import Theme_Input from '$lib/Theme_Input.svelte';
 	import Dialog from '$lib/Dialog.svelte';
 	import file_contents from '$routes/library/Contextmenu/Example_Full.svelte?raw';
+	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
 	const alyssa = 'Alyssa';
 	const ben = 'Ben';
@@ -128,7 +129,7 @@
 </script>
 
 <Contextmenu_Root scoped>
-	<h3>Full example</h3>
+	<Tome_Subheading slug="full-example">Full example</Tome_Subheading>
 	<Contextmenu>
 		{#snippet entries()}
 			{#if can_reset}

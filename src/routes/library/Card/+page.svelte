@@ -5,6 +5,7 @@
 	import {get_tome} from '$lib/tome.js';
 	import Card from '$lib/Card.svelte';
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Card';
 	const tome = get_tome(LIBRARY_ITEM_NAME);
@@ -28,7 +29,7 @@
 		</Card>
 	</section>
 	<section>
-		<h3>With a custom icon</h3>
+		<Tome_Subheading slug="custom-icon">With a custom icon</Tome_Subheading>
 		<Code
 			content={`<Card>
   custom<br />
@@ -43,7 +44,7 @@
 		</Card>
 	</section>
 	<section>
-		<h3>As a link</h3>
+		<Tome_Subheading slug="as-a-link">As a link</Tome_Subheading>
 		<Code
 			content={`<Card href="${base}/">
   a<br />
@@ -56,7 +57,7 @@
 		</Card>
 	</section>
 	<section>
-		<h3>As the selected link</h3>
+		<Tome_Subheading slug="as-selected-link">As the selected link</Tome_Subheading>
 		<Code
 			content={`<Card href="${base}/library/Card">
   href is<br />
@@ -69,7 +70,7 @@
 		</Card>
 	</section>
 	<section>
-		<h3>With a custom HTML tag</h3>
+		<Tome_Subheading slug="custom-html-tag">With a custom HTML tag</Tome_Subheading>
 		<Code
 			content={`<Card tag="button">
   custom<br />
@@ -82,7 +83,7 @@
 		</Card>
 	</section>
 	<section>
-		<h3>With custom alignment</h3>
+		<Tome_Subheading slug="custom-alignment">With custom alignment</Tome_Subheading>
 		<Code
 			content={`<Card align="right">
   align<br />
