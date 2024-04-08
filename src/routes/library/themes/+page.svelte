@@ -138,9 +138,9 @@
 			A theme is a simple JSON collection of <Tome_Link name="variables" /> that can be transformed into
 			CSS that set
 			<Mdn_Link href="Web/CSS/Using_CSS_custom_properties">CSS custom properties</Mdn_Link>. Each
-			variable can have values for light and/or dark color schemes.
+			variable can have values for light and/or dark color schemes. In other words, "dark" isn't a
+			theme, it's a mode that any theme can implement.
 		</p>
-		<aside>The builtin themes need more work, but the proof of concept is ready!</aside>
 		<!-- TODO explain when exported <Code code={`<Theme_Input\n\t{themes}\n\t{selected_theme}\n/>`} /> -->
 		<div class="width_sm mb_lg">
 			<Theme_Input {themes} enable_editing onedit={(t) => (editing_theme = t)} />
@@ -148,10 +148,7 @@
 		<!-- <button class="mb_lg" onclick={() => (show_create_theme_dialog = true)} disabled
 				>create a new theme (todo)</button
 			> -->
-		<aside>
-			Editing themes at runtime is a work in progress, but you can click around to see where it's
-			going!
-		</aside>
+		<aside>The builtin themes need more work, but the proof of concept is ready!</aside>
 	</section>
 	<section class="theme">
 		<h3>Scoped themes</h3>

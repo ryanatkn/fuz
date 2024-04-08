@@ -65,6 +65,10 @@
 	<h2 class="text_align_center">
 		{#if editing}edit{:else}create{/if} theme
 	</h2>
+	<aside>
+		Creating and editing themes at runtime is a work in progress, but you can click around to see
+		where it's going!
+	</aside>
 	<header>
 		<div class="variables_header">
 			<p>variables: {light_count} light, {dark_count} dark</p>
