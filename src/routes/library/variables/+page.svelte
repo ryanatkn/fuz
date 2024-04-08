@@ -89,10 +89,10 @@ export interface Style_Variable {
 }`}
 		/>
 	</section>
-	<section class="box">
-		<blockquote class="mb_lg">
-			{variables.length} style variables
-		</blockquote>
+	<section>
+		<h3 class="mb_lg">
+			All {variables.length} style variables
+		</h3>
 		<aside class="mb_lg">⚠️ some of these will change</aside>
 		<!-- TODO add info through the contextmenu or dialog -->
 		<div class="variables">
