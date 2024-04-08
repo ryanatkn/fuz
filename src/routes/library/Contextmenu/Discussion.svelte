@@ -68,7 +68,7 @@
 	</ul>
 </section>
 <section>
-	<h3 id="motivation">Motivation</h3>
+	<h3>Motivation</h3>
 	<p>Fuz takes two things very seriously, in no particular order:</p>
 	<ol>
 		<li>giving users a powerful and customizable UX</li>

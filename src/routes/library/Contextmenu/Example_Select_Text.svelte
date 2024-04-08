@@ -40,7 +40,7 @@ Try selecting text and then opening the contextmenu on it.`;
 </script>
 
 <Contextmenu_Root {contextmenu} scoped>
-	<h3 class:color_d_5={highlighted}>Select text example</h3>
+	<div class:color_d_5={highlighted}><h3>Select text example</h3></div>
 	<Contextmenu>
 		{#snippet entries()}
 			<Contextmenu_Entry run={() => (toggled = !toggled)}>Toggle something</Contextmenu_Entry>
