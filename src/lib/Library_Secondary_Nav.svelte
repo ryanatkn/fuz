@@ -24,7 +24,7 @@
 		width: var(--library_sidebar_width);
 		height: calc(100% - var(--library_primary_nav_height));
 		padding: var(
-			--library_nav_padding
+			--library_secondary_nav_padding
 		); /* needed with `overflow: auto` to avoid cutting off outline */
 		display: flex;
 		flex-direction: column;

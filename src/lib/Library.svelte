@@ -86,12 +86,12 @@
 <style>
 	.layout {
 		--library_primary_nav_height: 60px;
+		--library_secondary_nav_padding: var(--space_md); /* also used by the tertiary nav */
+		--library_menu_width: 180px;
 		--library_content_padding: var(--space_xl5);
 		--library_content_max_width: calc(var(--width_md) + var(--library_content_padding) * 2);
-		--library_menu_width: 180px;
-		--library_nav_padding: var(--space_md);
 		--library_sidebar_width: max(
-			calc(var(--library_menu_width) + var(--library_nav_padding) * 2),
+			calc(var(--library_menu_width) + var(--library_secondary_nav_padding) * 2),
 			calc((100% - var(--library_content_max_width)) / 2)
 		);
 		display: contents;
