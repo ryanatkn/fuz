@@ -113,24 +113,3 @@
 		</li>
 	</ul>
 </section>
-
-<style>
-	.position {
-		border-radius: var(--radius_md);
-		background-color: var(--bg);
-		display: flex;
-	}
-	.position .icon {
-		font-size: var(--icon_size_xl);
-	}
-	.cats {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-	}
-	.cat_wrapper {
-		display: flex;
-		flex-direction: column;
-		width: 120px;
-	}
-</style>
