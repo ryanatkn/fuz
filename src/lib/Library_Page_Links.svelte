@@ -16,6 +16,8 @@
 	$inspect($page.url.hash);
 
 	const hash = $derived($page.url.hash.slice(1));
+
+	// TODO BLOCK margin issue with the h6 here and in `Library_Menu`, setting it to 0 here doesn't work when it's the only thing mounted
 </script>
 
 <div class="library_page_links">
@@ -34,10 +36,6 @@
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
-	}
-
-	.category:not(:last-child) {
-		margin-bottom: var(--space_xl6);
 	}
 
 	/* TODO should be a CSS class or variable, maybe should be the default?
