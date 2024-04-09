@@ -175,7 +175,7 @@
 
 <style>
 	.dialog {
-		--shadow: var(--shadow_lg);
+		--pane_shadow: var(--shadow_lg);
 		overflow: auto;
 		position: fixed;
 		inset: 0;

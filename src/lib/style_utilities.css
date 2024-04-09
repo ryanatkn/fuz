@@ -2561,8 +2561,8 @@ other
 	opacity: var(--fade_6);
 }
 
-.shadow {
-	box-shadow: var(--shadow);
+.shadow_md {
+	box-shadow: var(--shadow_md);
 }
 .shadow_lg {
 	box-shadow: var(--shadow_lg);

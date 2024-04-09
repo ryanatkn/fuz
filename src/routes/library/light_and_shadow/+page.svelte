@@ -145,7 +145,7 @@
 	</section>
 	<section>
 		<Tome_Subheading text="Box shadows" slug="box-shadows" />
-		<div class="shadow_example" style:box-shadow="var(--shadow)">
+		<div class="shadow_example" style:box-shadow="var(--shadow_md)">
 			<Style_Variable_Button name="shadow_md" />
 		</div>
 		<div class="shadow_example" style:box-shadow="var(--shadow_lg)">
