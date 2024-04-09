@@ -9,7 +9,7 @@
 		sidebar?: boolean; // TODO @multiple dialog navs (this shouldn't exist)
 	}
 
-	const {library_links, sidebar}: Props = $props();
+	const {library_links, sidebar = true}: Props = $props();
 
 	// TODO BLOCK refactor with `Library_Menu`, probably
 	// TODO BLOCK remove CSS below with reusable CSS or a Svelte component
@@ -19,6 +19,8 @@
 	const hash = $derived($page.url.hash.slice(1));
 
 	// TODO BLOCK margin issue with the h6 here and in `Library_Menu`, setting it to 0 here doesn't work when it's the only thing mounted
+
+	// TODO BLOCK the `:global(ul)` below appears to be a bug
 </script>
 
 <div class="library_page_links">
@@ -50,6 +52,9 @@
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
+	}
+	.sidebar_wrapper :global(ul) {
+		min-width: var(--library_menu_width);
 	}
 
 	/* TODO should be a CSS class or variable, maybe should be the default?

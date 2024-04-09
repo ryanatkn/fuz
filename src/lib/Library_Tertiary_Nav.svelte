@@ -12,7 +12,7 @@
 		sidebar?: boolean; // TODO @multiple dialog navs (this shouldn't exist)
 	}
 
-	const {tomes, tomes_by_name, sidebar}: Props = $props();
+	const {tomes, tomes_by_name, sidebar = true}: Props = $props();
 
 	const selected_item = $derived(tomes.find((c) => c.pathname === $page.url.pathname));
 
