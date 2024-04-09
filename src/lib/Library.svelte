@@ -27,6 +27,7 @@
 	set_tomes(tomes_by_name);
 
 	// TODO @multiple dialog navs - this is messy to satisfy SSR with the current design that puts the secondary nav in a dialog
+	const TERTIARY_NAV_BREAKPOINT = 1000;
 	const SECONDARY_NAV_BREAKPOINT = 800;
 
 	let innerWidth: number | undefined = $state();
@@ -51,7 +52,7 @@
 
 <div class="library">
 	<Library_Primary_Nav>
-		<div class="toggle_secondary_nav_button_wrapper">
+		<div class="nav_dialog_toggle">
 			<button class="plain" type="button" onclick={() => toggle_secondary_nav_dialog()}>menu</button
 			>
 		</div>
@@ -66,7 +67,7 @@
 		<div class="content">
 			{@render children()}
 			<!-- TODO @multiple dialog navs -->
-			{#if !innerWidth || innerWidth > SECONDARY_NAV_BREAKPOINT}
+			{#if !innerWidth || innerWidth > TERTIARY_NAV_BREAKPOINT}
 				<Library_Tertiary_Nav {tomes} {tomes_by_name} />
 			{/if}
 			<section class="box">
@@ -81,13 +82,13 @@
 </div>
 <!-- TODO @multiple dialog navs - instead of a dialog, probably use a popover (new component) -->
 <!-- TODO this is messy rendering `Library_Secondary_Nav` twice to handle responsive states with SSR correctly -->
-{#if show_secondary_nav_dialog && innerWidth && innerWidth <= SECONDARY_NAV_BREAKPOINT}
+{#if show_secondary_nav_dialog && innerWidth && innerWidth <= TERTIARY_NAV_BREAKPOINT}
 	<Dialog onclose={() => (show_secondary_nav_dialog = false)}>
 		<div class="pane">
 			<div class="p_xl"><Breadcrumb>🧶</Breadcrumb></div>
 			<div class="px_lg py_xl">
-				<Library_Secondary_Nav {tomes} />
-				<Library_Tertiary_Nav {tomes} {tomes_by_name} />
+				<Library_Secondary_Nav {tomes} sidebar={false} />
+				<Library_Tertiary_Nav {tomes} {tomes_by_name} sidebar={false} />
 			</div>
 		</div>
 	</Dialog>
@@ -121,10 +122,10 @@
 		display: contents;
 	}
 
-	.toggle_secondary_nav_button_wrapper {
+	.nav_dialog_toggle {
 		display: none;
 	}
-	.toggle_secondary_nav_button_wrapper button {
+	.nav_dialog_toggle button {
 		padding-left: var(--space_xl3);
 		padding-right: var(--space_xl3);
 		border-radius: 0;
@@ -147,6 +148,10 @@
 			width: calc(100% - var(--library_sidebar_width));
 			margin-right: 0;
 		}
+
+		.nav_dialog_toggle {
+			display: contents;
+		}
 	}
 
 	/* sync this breakpoint with `Library_Primary_Nav`, `Library_Secondary_Nav`, and `Tome_Subheading` */
@@ -159,10 +164,6 @@
 
 		.secondary_nav_wrapper {
 			display: none;
-		}
-
-		.toggle_secondary_nav_button_wrapper {
-			display: contents;
 		}
 	}
 

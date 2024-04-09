@@ -4,12 +4,13 @@
 
 	interface Props {
 		tomes: Tome[];
+		sidebar?: boolean; // TODO @multiple dialog navs (this shouldn't exist)
 	}
 
-	const {tomes}: Props = $props();
+	const {tomes, sidebar = true}: Props = $props();
 </script>
 
-<aside class="library_secondary_nav unstyled">
+<aside class="library_secondary_nav unstyled" class:sidebar>
 	<nav>
 		<Library_Menu {tomes} />
 	</nav>
@@ -42,5 +43,12 @@
 			align-items: initial;
 			overflow: initial;
 		}
+	}
+	/* TODO @multiple dialog navs  */
+	.library_secondary_nav:not(.sidebar) {
+		position: static;
+		background-color: initial;
+		align-items: initial;
+		overflow: initial;
 	}
 </style>
