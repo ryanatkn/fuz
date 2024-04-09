@@ -43,9 +43,9 @@
 	}: Props = $props();
 
 	const ROOT_SELECTOR = 'body'; // TODO make configurable
-	const ROOT_DIALOG_OPEN_CLASS = 'dialog_open';
+	const ROOT_DIALOG_OPEN_CLASS = 'fuz_dialog_open';
 	const ROOT_DIALOG_PADDING_PROPERTY = '--dialog_open_padding_right';
-	const CONTAINER_ID = 'dialog';
+	const CONTAINER_ID = 'fuz_dialog';
 
 	let container_el: HTMLElement | undefined = $state();
 	$effect(() => {
@@ -218,7 +218,7 @@
 		transform: scale3d(1, 1, 1);
 	}
 	/* need to sync with `ROOT_DIALOG_OPEN_CLASS` and `ROOT_DIALOG_PADDING_PROPERTY` */
-	:global(body.dialog_open) {
+	:global(body.fuz_dialog_open) {
 		overflow: hidden !important;
 		padding-right: var(--dialog_open_padding_right, 0) !important;
 	}
