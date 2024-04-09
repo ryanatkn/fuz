@@ -189,10 +189,6 @@
       "default": "./dist/Hashlink.svelte",
       "types": "./dist/Hashlink.svelte.d.ts"
     },
-    "./helpers.js": {
-      "default": "./dist/helpers.js",
-      "types": "./dist/helpers.d.ts"
-    },
     "./Hue_Input.svelte": {
       "svelte": "./dist/Hue_Input.svelte",
       "default": "./dist/Hue_Input.svelte",

@@ -154,7 +154,6 @@ export const package_json = {
 			default: './dist/Hashlink.svelte',
 			types: './dist/Hashlink.svelte.d.ts',
 		},
-		'./helpers.js': {default: './dist/helpers.js', types: './dist/helpers.d.ts'},
 		'./Hue_Input.svelte': {
 			svelte: './dist/Hue_Input.svelte',
 			default: './dist/Hue_Input.svelte',
@@ -371,13 +370,6 @@ export const src_json = {
 		},
 		'./Github_Logo.svelte': {path: 'Github_Logo.svelte', declarations: []},
 		'./Hashlink.svelte': {path: 'Hashlink.svelte', declarations: []},
-		'./helpers.js': {
-			path: 'helpers.ts',
-			declarations: [
-				{name: 'LIBRARY_PATH', kind: 'variable'},
-				{name: 'to_library_path_info', kind: 'function'},
-			],
-		},
 		'./Hue_Input.svelte': {path: 'Hue_Input.svelte', declarations: []},
 		'./Library_Content.svelte': {path: 'Library_Content.svelte', declarations: []},
 		'./Library_Footer.svelte': {path: 'Library_Footer.svelte', declarations: []},
@@ -391,6 +383,8 @@ export const src_json = {
 		'./library.svelte.js': {
 			path: 'library.svelte.ts',
 			declarations: [
+				{name: 'DEFAULT_LIBRARY_PATH', kind: 'variable'},
+				{name: 'to_library_path_info', kind: 'function'},
 				{name: 'set_library_links', kind: 'function'},
 				{name: 'get_library_links', kind: 'function'},
 				{name: 'Library_Link_Data', kind: 'type'},

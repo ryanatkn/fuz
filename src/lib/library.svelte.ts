@@ -1,7 +1,6 @@
 import {getContext, setContext} from 'svelte';
 import {base} from '$app/paths';
 
-// TODO BLOCK reactive info in context used everywhere instead of root_path
 export const DEFAULT_LIBRARY_PATH = '/library';
 
 export const to_library_path_info = (
