@@ -11,11 +11,7 @@ export const to_library_path_info = (
 	const path_segment = pathname.split('/').at(-1);
 	const path = base + root_path + '/' + name;
 	const path_is_selected = path_segment === name; // messy but works
-	return {
-		path,
-		path_is_selected,
-		path_segment,
-	};
+	return {path, path_is_selected, path_segment};
 };
 
 const LIBRARY_LINKS_KEY = Symbol('library_links');
