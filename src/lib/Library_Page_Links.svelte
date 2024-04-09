@@ -31,7 +31,9 @@
 
 <style>
 	.library_page_links {
-		width: var(--library_menu_width);
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
 	}
 
 	.category:not(:last-child) {
