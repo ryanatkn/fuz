@@ -4,6 +4,7 @@
 	import {get_tome} from '$lib/tome.js';
 	import Teleport from '$lib/Teleport.svelte';
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import Tome_Link from '$lib/Tome_Link.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Teleport';
 	const tome = get_tome(LIBRARY_ITEM_NAME);
@@ -15,7 +16,11 @@
 
 <Tome_Detail {tome}>
 	<section>
-		<p>Relocates elements in the DOM, in the rare cases that's useful and the best solution.</p>
+		<p>
+			Relocates elements in the DOM, in the rare cases that's useful and the best solution. The <Tome_Link
+				name="Dialog"
+			/> uses this to mount dialogs from any component without inheriting styles.
+		</p>
 		<aside>
 			<p>Use only when necessary or fun.</p>
 		</aside>

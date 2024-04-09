@@ -59,7 +59,7 @@
 		<Tome_Subheading text="table" slug="table-element">
 			<Mdn_Link href="Web/HTML/Element/table">table</Mdn_Link>
 		</Tome_Subheading>
-		<blockquote>⚠️ this is unfinished and will change</blockquote>
+		<blockquote>⚠️ This is unfinished and will change.</blockquote>
 		<Code
 			content={`<table>
 	<thead>

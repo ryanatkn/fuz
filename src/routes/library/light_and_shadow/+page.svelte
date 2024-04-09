@@ -151,11 +151,11 @@
 		<div class="shadow_example" style:box-shadow="var(--shadow_lg)">
 			<Style_Variable_Button name="shadow_lg" />
 		</div>
-		<div class="shadow_example" style:box-shadow="var(--shadow_inset)">
-			<Style_Variable_Button name="shadow_inset" />
+		<div class="shadow_example" style:box-shadow="var(--shadow_inset_md)">
+			<Style_Variable_Button name="shadow_inset_md" />
 		</div>
-		<div class="shadow_example" style:box-shadow="var(--shadow_inset_active)">
-			<Style_Variable_Button name="shadow_inset_active" />
+		<div class="shadow_example" style:box-shadow="var(--shadow_inset_inverse_md)">
+			<Style_Variable_Button name="shadow_inset_inverse_md" />
 		</div>
 	</section>
 </Tome_Detail>

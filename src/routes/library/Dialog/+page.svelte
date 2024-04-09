@@ -7,6 +7,8 @@
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
 	import {get_tome} from '$lib/tome.js';
 	import Dialog from '$lib/Dialog.svelte';
+	import Tome_Link from '$lib/Tome_Link.svelte';
+	import Mdn_Link from '$lib/Mdn_Link.svelte';
 	import Dialogs from '$lib/Dialogs.svelte';
 	import {
 		dialog_layouts,
@@ -54,8 +56,20 @@
 </script>
 
 <Tome_Detail {tome}>
-	<Code
-		content={`<button onclick={() => (opened = true)}>
+	<section>
+		<p>
+			A modal that overlays the entire page. Uses <Tome_Link name="Teleport" /> to allow usage from any
+			component without inheriting styles.
+		</p>
+		<aside>
+			⚠️ This will change to use and align APIs with the builtin <Mdn_Link
+				href="Web/HTML/Element/dialog">dialog</Mdn_Link
+			>. API
+		</aside>
+	</section>
+	<section>
+		<Code
+			content={`<button onclick={() => (opened = true)}>
 	open a dialog
 </button>
 {#if opened}
@@ -69,19 +83,22 @@
 		{/snippet}
 	</Dialog>
 {/if}`}
-	/>
-	<button class="mb_lg" onclick={() => (opened = true)}> open a dialog </button>
-	<button class="mb_lg" onclick={() => (dialog_overflowing_opened = true)}
-		>open a dialog that overflows vertically</button
-	>
-	<button class="mb_lg" onclick={() => (dialog_layout_page_opened = true)}
-		>open a dialog with <code>layout="page"</code> instead of the default
-		<code>layout='centered'</code></button
-	>
-	<button class="mb_lg" onclick={() => (dialog_nested_1_opened = true)}
-		>open a dialog containing another dialog</button
-	>
-	<button class="mb_lg" onclick={() => add_dialogs(5)}>open many dialogs</button>
+		/>
+	</section>
+	<section>
+		<button class="mb_lg" onclick={() => (opened = true)}> open a dialog </button>
+		<button class="mb_lg" onclick={() => (dialog_overflowing_opened = true)}
+			>open a dialog that overflows vertically</button
+		>
+		<button class="mb_lg" onclick={() => (dialog_layout_page_opened = true)}
+			>open a dialog with <code>layout="page"</code> instead of the default
+			<code>layout='centered'</code></button
+		>
+		<button class="mb_lg" onclick={() => (dialog_nested_1_opened = true)}
+			>open a dialog containing another dialog</button
+		>
+		<button class="mb_lg" onclick={() => add_dialogs(5)}>open many dialogs</button>
+	</section>
 </Tome_Detail>
 {#if opened}
 	<Dialog onclose={() => (opened = false)}>

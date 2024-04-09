@@ -624,13 +624,13 @@ export const shadow_lg: Style_Variable = {
 		'2px 6px 14px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.8), 2px 6px 48px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.8)',
 	dark: '2px 6px 14px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5)), 2px 6px 48px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5))',
 };
-export const shadow_inset: Style_Variable = {
-	name: 'shadow_inset',
+export const shadow_inset_md: Style_Variable = {
+	name: 'shadow_inset_md',
 	light:
 		'0px 2px 4px 1px inset var(--lighten_2), 0px -2px 4px 1px inset var(--darken_2), 0 3px 6px 2px inset var(--lighten_2), 0 -3px 6px 2px inset var(--darken_1)',
 };
-export const shadow_inset_active: Style_Variable = {
-	name: 'shadow_inset_active', // TODO better name? this is the "pressed" version for buttons
+export const shadow_inset_inverse_md: Style_Variable = {
+	name: 'shadow_inset_inverse_md', // TODO better name? this is the "pressed" version for buttons
 	light:
 		'0 2px 4px 1px inset var(--darken_2), 0 -2px 4px 1px inset var(--lighten_2), 0 3px 6px 2px inset var(--darken_1), 0 -3px 6px 2px inset var(--lighten_2)',
 };
@@ -917,8 +917,8 @@ export const default_variables: Style_Variable[] = [
 	/* shadows */
 	shadow_md,
 	shadow_lg,
-	shadow_inset,
-	shadow_inset_active,
+	shadow_inset_md,
+	shadow_inset_inverse_md,
 
 	/* icons */
 	icon_size,

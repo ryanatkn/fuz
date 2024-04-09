@@ -30,7 +30,7 @@
 			<div class="pane">
 				<div class="panel p_lg box">
 					<Style_Variable_Detail variable={$selected_variable} />
-					<aside>this is unfinished</aside>
+					<aside>⚠️ This is unfinished and will change.</aside>
 					<button onclick={close}>ok</button>
 				</div>
 			</div>

@@ -2567,9 +2567,9 @@ other
 .shadow_lg {
 	box-shadow: var(--shadow_lg);
 }
-.shadow_inset {
-	box-shadow: var(--shadow_inset);
+.shadow_inset_md {
+	box-shadow: var(--shadow_inset_md);
 }
-.shadow_inset_active {
-	box-shadow: var(--shadow_inset_active);
+.shadow_inset_inverse_md {
+	box-shadow: var(--shadow_inset_inverse_md);
 }
