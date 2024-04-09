@@ -19,7 +19,6 @@
 
 <!-- TODO demonstrate usage of a custom `link_snippet` and `linkProps`  -->
 <Tome_Detail {tome}>
-	{#snippet header()}<h2>{tome.name}</h2>{/snippet}
 	<section>
 		<aside>
 			<!-- TODO style hack, maybe use margin-bottom only on h elements? -->

@@ -31,25 +31,26 @@
 	const {path, path_is_selected} = $derived(to_library_path_info(tome.slug, $page.url.pathname));
 </script>
 
-<h2>
+<svelte:element this={path_is_selected ? 'h1' : 'h2'} class="tome_title">
 	{#if path_is_selected}
 		{@render content(tome.name)}
 	{:else}
 		<a href={path}>{@render content(tome.name)}</a>
 	{/if}
 	<Hashlink {slug} />
-</h2>
+</svelte:element>
 
 {#snippet content(name: string)}
 	{name}
 {/snippet}
 
 <style>
-	h2 {
+	.tome_title {
+		margin-top: var(--space_xl4);
 		position: relative;
 	}
 	/* TODO @multiple how can this be done composably? currently using `:global` at usage site - ideally we'd continue to use :hover instead of JS */
-	h2:hover :global(.hashlink) {
+	.tome_title:hover :global(.hashlink) {
 		opacity: 1;
 	}
 </style>

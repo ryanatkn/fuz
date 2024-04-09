@@ -54,7 +54,6 @@
 </script>
 
 <Tome_Detail {tome}>
-	{#snippet header()}<h2>{tome.name}</h2>{/snippet}
 	<Code
 		content={`<button onclick={() => (opened = true)}>
 	open a dialog
