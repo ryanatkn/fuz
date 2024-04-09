@@ -52,7 +52,7 @@
 		width: var(--library_menu_width);
 	}
 
-	.category {
+	.category:not(:last-child) {
 		margin-bottom: var(--space_xl6);
 	}
 

@@ -22,17 +22,22 @@
 
 <div class="library_page_links">
 	<h6>On this page</h6>
-	<ul class="unstyled">
-		{#each library_links.library_links as item (item.id)}
-			<li role="none" transition:slide>
-				<a class="menu_item" href="#{item.slug}" class:selected={item.slug === hash}>{item.text}</a>
-			</li>
-		{/each}
-	</ul>
+	<div class="wrapper">
+		<ul class="unstyled">
+			{#each library_links.library_links as item (item.id)}
+				<li role="none" transition:slide>
+					<a class="menu_item" href="#{item.slug}" class:selected={item.slug === hash}
+						>{item.text}</a
+					>
+				</li>
+			{/each}
+		</ul>
+	</div>
 </div>
 
 <style>
-	.library_page_links {
+	/* this is needed because `.library_page_links` needs to be a block to collapse the vertical margin */
+	.wrapper {
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;

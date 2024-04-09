@@ -43,6 +43,8 @@
 	});
 
 	set_library_links();
+
+	// TODO BLOCK this puts the tertiary nav at the bottom, need to add the dialog button
 </script>
 
 <svelte:window bind:innerWidth on:hashchange={() => (show_secondary_nav_dialog = false)} />
@@ -83,7 +85,7 @@
 	<Dialog onclose={() => (show_secondary_nav_dialog = false)}>
 		<div class="pane">
 			<div class="p_xl"><Breadcrumb>🧶</Breadcrumb></div>
-			<div class="px_lg py_xl4">
+			<div class="px_lg py_xl">
 				<Library_Secondary_Nav {tomes} />
 				<Library_Tertiary_Nav {tomes} {tomes_by_name} />
 			</div>
