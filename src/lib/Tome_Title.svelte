@@ -7,9 +7,8 @@
 	import {onDestroy} from 'svelte';
 
 	import type {Tome} from '$lib/tome.js';
-	import {to_library_path_info} from '$lib/helpers.js';
 	import Hashlink from '$lib/Hashlink.svelte';
-	import {get_library_links} from '$lib/library.svelte.js';
+	import {get_library_links, to_library_path_info} from '$lib/library.svelte.js';
 
 	interface Props {
 		tome: Tome;

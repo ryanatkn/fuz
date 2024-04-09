@@ -1,4 +1,23 @@
 import {getContext, setContext} from 'svelte';
+import {base} from '$app/paths';
+
+// TODO BLOCK reactive info in context used everywhere instead of root_path
+export const DEFAULT_LIBRARY_PATH = '/library';
+
+export const to_library_path_info = (
+	name: string,
+	pathname: string,
+	root_path = DEFAULT_LIBRARY_PATH,
+): {path: string; path_is_selected: boolean; path_segment: string | undefined} => {
+	const path_segment = pathname.split('/').at(-1);
+	const path = base + root_path + '/' + name;
+	const path_is_selected = path_segment === name; // messy but works
+	return {
+		path,
+		path_is_selected,
+		path_segment,
+	};
+};
 
 const LIBRARY_LINKS_KEY = Symbol('library_links');
 
@@ -16,7 +35,7 @@ export type Library_Link_Data = {id: string; text: string; slug: string};
 export class Library_Links {
 	library_links: Library_Link_Data[] = $state([]);
 
-	constructor(public readonly root_path = '/library') {}
+	constructor(public readonly root_path = DEFAULT_LIBRARY_PATH) {}
 
 	add(id: string, text: string, slug: string): void {
 		// TODO BLOCK replace if id exists, make reactive, probably call inside $effect
