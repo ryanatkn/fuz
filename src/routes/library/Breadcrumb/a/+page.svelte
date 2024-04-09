@@ -3,5 +3,5 @@
 	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 </script>
 
-<Tome_Subheading slug="custom-paths">Custom paths</Tome_Subheading>
+<Tome_Subheading text="Custom paths" slug="custom-paths" />
 <Breadcrumb_Example selected_path="/a" />

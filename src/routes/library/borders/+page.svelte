@@ -24,7 +24,7 @@
 	<!-- <div>outline_color</div> -->
 
 	<section>
-		<Tome_Subheading slug="border-colors">Border colors</Tome_Subheading>
+		<Tome_Subheading text="Border colors" slug="border-colors" />
 		<aside>TODO needs work</aside>
 		<div class="border_examples border_colors">
 			{#each {length: 5} as _, i}
@@ -53,7 +53,7 @@
 	</section>
 
 	<section>
-		<Tome_Subheading slug="border-widths">Border widths</Tome_Subheading>
+		<Tome_Subheading text="Border widths" slug="border-widths" />
 		<div class="border_examples border_widths">
 			{#each {length: 6} as _, i}
 				{@const name = 'border_width_' + (i + 1)}
@@ -70,7 +70,7 @@
 	</section>
 
 	<section>
-		<Tome_Subheading slug="outline-widths">Outline widths</Tome_Subheading>
+		<Tome_Subheading text="Outline widths" slug="outline-widths" />
 		<div class="border_examples outline_widths">
 			{#each {length: 3} as _, i}
 				{@const name = 'outline_width_' + (i + 1)}
@@ -87,7 +87,7 @@
 	</section>
 
 	<section>
-		<Tome_Subheading slug="border-radius">Border radius</Tome_Subheading>
+		<Tome_Subheading text="Border radius" slug="border-radius" />
 		<div class="border_examples border_radii">
 			{#each radius_variants as radius}
 				{@const name = 'radius_' + radius}

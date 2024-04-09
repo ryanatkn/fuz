@@ -14,9 +14,7 @@
 </script>
 
 <section>
-	<Tome_Subheading slug="icon_size-variants">
-		<Style_Variable_Button name="icon_size" inline /> variants
-	</Tome_Subheading>
+	<Tome_Subheading text="Icon sizes" slug="icon_size-variants" />
 	<aside>
 		unlike <code>--size_</code> variables, <code>--icon_</code> variables are in
 		<code>px</code>

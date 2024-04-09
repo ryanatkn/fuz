@@ -91,7 +91,7 @@
 		</Details>
 	</section>
 	<section class="theme">
-		<Tome_Subheading slug="color-scheme">Color scheme</Tome_Subheading>
+		<Tome_Subheading text="Color scheme" slug="color-scheme" />
 		<p>
 			<code>Themed</code> defaults to automatic
 			<Mdn_Link href="Web/CSS/color-scheme">color-scheme</Mdn_Link>
@@ -134,7 +134,7 @@
 		</Details>
 	</section>
 	<section class="theme">
-		<Tome_Subheading slug="builtin-themes">Builtin themes</Tome_Subheading>
+		<Tome_Subheading text="Builtin themes" slug="builtin-themes" />
 		<p>
 			A theme is a simple JSON collection of <Tome_Link name="variables" /> that can be transformed into
 			CSS that set custom properties. Each variable can have values for light and/or dark color schemes.
@@ -150,7 +150,7 @@
 		<aside>The builtin themes need more work, but the proof of concept is ready!</aside>
 	</section>
 	<section class="theme">
-		<Tome_Subheading slug="scoped-themes">Scoped themes</Tome_Subheading>
+		<Tome_Subheading text="Scoped themes" slug="scoped-themes" />
 		<Details>
 			{#snippet summary()}⚠️ Scoped themes are a work in progress and may not be supported depending
 				on complexity. It shouldn't worsen the unscoped API.{/snippet}
@@ -209,7 +209,7 @@
 		</Details>
 	</section>
 	<section class="theme">
-		<Tome_Subheading slug="theme-usage">Theme usage</Tome_Subheading>
+		<Tome_Subheading text="Theme usage" slug="theme-usage" />
 		<p>Themes are plain CSS that can be sourced in a variety of ways.</p>
 		<p>To use fuz's base theme:</p>
 		<Code

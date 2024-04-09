@@ -5,6 +5,7 @@
 	import Font_Size_Control from '$routes/Font_Size_Control.svelte';
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
+	import Tome_Link from '$lib/Tome_Link.svelte';
 	import {default_variables} from '$lib/variables.js';
 	import {get_tome} from '$lib/tome.js';
 	import Icon_Sizes from '$routes/library/typography/Icon_Sizes.svelte';
@@ -67,7 +68,7 @@
 		</Details>
 	</section>
 	<section>
-		<Tome_Subheading slug="font-sizes">Font sizes</Tome_Subheading>
+		<Tome_Subheading text="Font sizes" slug="font-sizes" />
 		<form class="width_sm">
 			<Font_Weight_Control bind:selected_font_weight></Font_Weight_Control>
 		</form>
@@ -89,9 +90,12 @@
 	</section>
 	<section>
 		<!-- TODO add a slider for the font size here -->
-		<Tome_Subheading slug="font-weight">
-			<Mdn_Link href="Web/CSS/font-weight">font-weight</Mdn_Link> has no variables
-		</Tome_Subheading>
+		<Tome_Subheading text="Font weights" slug="font-weight" />
+		<aside>
+			There are no variables for <Mdn_Link href="Web/CSS/font-weight">font-weight</Mdn_Link> but there
+			are utility
+			<Tome_Link name="classes" hash="utility-classes">utility classes</Tome_Link>.
+		</aside>
 		<form>
 			<Font_Size_Control bind:selected_font_size />
 		</form>
@@ -108,7 +112,7 @@
 		</div>
 	</section>
 	<section>
-		<Tome_Subheading slug="text-colors">Text colors</Tome_Subheading>
+		<Tome_Subheading text="Text colors" slug="text-colors">Text colors</Tome_Subheading>
 		<aside>TODO needs work</aside>
 		<div>
 			{#each {length: 3} as _, i}
@@ -125,10 +129,8 @@
 	</section>
 	<!-- <section> 'text_disabled' 'text_active'</section> -->
 	<section>
-		<Tome_Subheading slug="line-height">
-			<Mdn_Link href="Web/CSS/line-height">line-height</Mdn_Link> variables
-		</Tome_Subheading>
-		<aside>TODO maybe rename with a semantic scale</aside>
+		<Tome_Subheading text="Line heights" slug="line-height" />
+		<aside>Learn more about <Mdn_Link href="Web/CSS/line-height">line-height</Mdn_Link>.</aside>
 		<div>
 			{#each line_height_names as name}
 				<div class="spaced">

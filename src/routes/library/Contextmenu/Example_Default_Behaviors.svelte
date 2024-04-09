@@ -8,7 +8,7 @@
 </script>
 
 <Contextmenu_Root scoped>
-	<Tome_Subheading slug="default-behaviors">Default behaviors</Tome_Subheading>
+	<Tome_Subheading text="Default behaviors" slug="default-behaviors" />
 	<div class="panel p_md">
 		<Code
 			content={`<Contextmenu_Root scoped>

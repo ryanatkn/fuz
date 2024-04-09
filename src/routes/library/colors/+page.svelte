@@ -32,7 +32,7 @@
 
 <Tome_Detail {tome}>
 	<section>
-		<Tome_Subheading slug="color-semantics">Color semantics</Tome_Subheading>
+		<Tome_Subheading text="Color semantics" slug="color-semantics" />
 		<p>
 			Fuz provides a palette of color and hue <Tome_Link name="variables" /> designed to support concise
 			authoring in light and dark modes, as well as straightforward <Tome_Link name="themes"
@@ -66,7 +66,7 @@
 		</p>
 	</section>
 	<section>
-		<Tome_Subheading slug="caveats">Caveats</Tome_Subheading>
+		<Tome_Subheading text="Caveats" slug="caveats" />
 		<p>
 			For performance reasons, Fuz does not currently have an extensive set of variants, like
 			specialized states for elements or color values like "blue". Each of the 7 hues has 9 color
@@ -81,7 +81,7 @@
 		</p>
 	</section>
 	<section>
-		<Tome_Subheading slug="hue-variables">Hue variables</Tome_Subheading>
+		<Tome_Subheading text="Hue variables" slug="hue-variables" />
 		<p>
 			Hue variables contain a single <Mdn_Link href="Web/CSS/hue">hue</Mdn_Link> number. Each color variable
 			combines a hue variable with hardcoded saturation and lightness values for light and dark modes.
@@ -105,7 +105,7 @@
 		</ul>
 	</section>
 	<section>
-		<Tome_Subheading slug="hue-variables">Color variables</Tome_Subheading>
+		<Tome_Subheading text="Color variables" slug="hue-variables" />
 		<p>
 			There are 9 variables per color, numbered 1 to 9, lightest to darkest. The 5th variable of
 			each color is used as the base for things like <Tome_Link name="buttons" />.

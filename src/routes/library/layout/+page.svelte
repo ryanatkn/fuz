@@ -15,7 +15,7 @@
 
 <Tome_Detail {tome}>
 	<section>
-		<Tome_Subheading slug="space-variables">Space variables</Tome_Subheading>
+		<Tome_Subheading text="Space variables" slug="space-variables" />
 		<div>
 			{#each space_variants as space_size}
 				{@const name = 'space_' + space_size}
@@ -29,7 +29,7 @@
 		</div>
 	</section>
 	<section>
-		<Tome_Subheading slug="width-variables">Width variables</Tome_Subheading>
+		<Tome_Subheading text="Width variables" slug="width-variables" />
 		<div>
 			{#each ['sm', 'md'] as radius}
 				{@const name = 'width_' + radius}

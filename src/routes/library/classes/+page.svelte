@@ -83,7 +83,7 @@
 <Tome_Detail {tome}>
 	<aside>both the docs and implementation of these need more work</aside>
 	<section>
-		<Tome_Subheading slug="css-classes">Optional CSS classes</Tome_Subheading>
+		<Tome_Subheading text="Optional CSS classes" slug="css-classes" />
 		<p>Fuz has three optional CSS files with different kinds of classes:</p>
 		<Code
 			content={`<!-- +layout.svelte -->
@@ -112,7 +112,7 @@
 		</aside>
 	</section>
 	<section>
-		<Tome_Subheading slug="utility-classes">Utility classes</Tome_Subheading>
+		<Tome_Subheading text="Utility classes" slug="utility-classes" />
 		<p>
 			Fuz provides an arbitrary set of utility classes for CSS, and defers to CSS in <a
 				href="https://svelte.dev/docs/svelte-components#style">Svelte's <code>{'<'}style></code></a
@@ -125,7 +125,7 @@
 		</ul>
 	</section>
 	<section>
-		<Tome_Subheading slug="semantic-classes">Semantic classes</Tome_Subheading>
+		<Tome_Subheading text="Semantic classes" slug="semantic-classes" />
 		<ul class="classes unstyled">
 			{#each style_components_items as c}
 				<li>.{c}</li>
@@ -133,7 +133,7 @@
 		</ul>
 	</section>
 	<section>
-		<Tome_Subheading slug="raw-css">Raw CSS</Tome_Subheading>
+		<Tome_Subheading text="Raw CSS" slug="raw-css" />
 		<!-- TODO maybe add a github source link? -->
 		<Details>
 			{#snippet summary()}

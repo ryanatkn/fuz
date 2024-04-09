@@ -18,7 +18,9 @@
 		<Code content={`import Hue_Input from '@ryanatkn/fuz/Hue_Input.svelte';`} lang="ts" />
 	</section>
 	<section>
-		<Tome_Subheading slug="with-bindvalue">With <code>bind:value</code></Tome_Subheading>
+		<Tome_Subheading text="With bind:value" slug="with-bindvalue"
+			>With <code>bind:value</code></Tome_Subheading
+		>
 		<Code content={`<Hue_Input bind:value />`} />
 		<Hue_Input bind:value />
 		<div class="mt_md" style:--color="hsl({value} 62% 31%)">
@@ -26,7 +28,9 @@
 		</div>
 	</section>
 	<section>
-		<Tome_Subheading slug="with-oninput">With <code>oninput</code></Tome_Subheading>
+		<Tome_Subheading text="With oninput" slug="with-oninput"
+			>With <code>oninput</code></Tome_Subheading
+		>
 		<Code
 			content={`<Hue_Input
 	oninput={(v) => (value_from_oninput = v)}
@@ -38,7 +42,9 @@
 		</div>
 	</section>
 	<section>
-		<Tome_Subheading slug="with-children">With <code>children</code></Tome_Subheading>
+		<Tome_Subheading text="With children" slug="with-children"
+			>With <code>children</code></Tome_Subheading
+		>
 		<Code
 			content={`<Hue_Input>
 	Some colorful hue input

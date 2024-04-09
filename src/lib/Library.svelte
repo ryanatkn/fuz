@@ -47,7 +47,7 @@
 
 <svelte:window bind:innerWidth on:hashchange={() => (show_secondary_nav_dialog = false)} />
 
-<div class="layout">
+<div class="library">
 	<Library_Primary_Nav>
 		<div class="toggle_secondary_nav_button_wrapper">
 			<button class="plain" type="button" onclick={() => toggle_secondary_nav_dialog()}>menu</button
@@ -92,7 +92,7 @@
 {/if}
 
 <style>
-	.layout {
+	.library {
 		--library_primary_nav_height: 60px;
 		--library_secondary_nav_padding: var(--space_md); /* also used by the tertiary nav */
 		--library_menu_width: 180px;
@@ -110,6 +110,7 @@
 		width: calc(100% - var(--library_sidebar_width) * 2);
 		max-width: var(--library_content_max_width);
 		padding: var(--library_content_padding);
+		padding-top: 0;
 		margin: 0 auto;
 		overflow: hidden; /* maybe heavy-handed */
 	}

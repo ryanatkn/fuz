@@ -19,12 +19,12 @@
 		<Breadcrumb />
 	</section>
 	<section>
-		<Tome_Subheading slug="custom-icon">With custom icon</Tome_Subheading>
+		<Tome_Subheading text="With custom icon" slug="custom-icon" />
 		<Code content={`<Breadcrumb>🏠</Breadcrumb>`} />
 		<Breadcrumb>🏠</Breadcrumb>
 	</section>
 	<section>
-		<Tome_Subheading slug="custom-separator">With custom separator</Tome_Subheading>
+		<Tome_Subheading text="With custom separator" slug="custom-separator" />
 		<Code
 			content={`<Breadcrumb>
 	{#snippet separator()}.{/snippet}
@@ -33,7 +33,7 @@
 		<Breadcrumb>{#snippet separator()}.{/snippet}</Breadcrumb>
 	</section>
 	<section>
-		<Tome_Subheading slug="custom-paths">With custom paths</Tome_Subheading>
+		<Tome_Subheading text="With custom paths" slug="custom-paths" />
 		<Breadcrumb_Example selected_path="/a/b" />
 	</section>
 </Tome_Detail>

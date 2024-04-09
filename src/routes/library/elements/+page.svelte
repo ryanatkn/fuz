@@ -21,11 +21,11 @@
 		/>.
 	</blockquote>
 	<section>
-		<Tome_Subheading slug="blockquote-element">
+		<Tome_Subheading text="blockquote" slug="blockquote-element">
 			<span style="font-size: var(--size_xl3)">👆</span>
 			<Mdn_Link href="Web/HTML/Element/blockquote">blockquote</Mdn_Link>
 		</Tome_Subheading>
-		<Tome_Subheading slug="hr-and-code-elements">
+		<Tome_Subheading text="hr and code" slug="hr-and-code-elements">
 			<span style="font-size: var(--size_xl3)">👇</span>
 			<Mdn_Link href="Web/HTML/Element/hr">hr</Mdn_Link>
 			<span style="font-size: var(--size_xl3)">👈</span>
@@ -34,7 +34,7 @@
 		<hr />
 	</section>
 	<section>
-		<Tome_Subheading slug="details-and-summary-elements">
+		<Tome_Subheading text="details and summary" slug="details-and-summary-elements">
 			<Mdn_Link href="Web/HTML/Element/details">details</Mdn_Link>
 			and
 			<Mdn_Link href="Web/HTML/Element/summary">summary</Mdn_Link>
@@ -56,7 +56,7 @@
 		</details>
 	</section>
 	<section>
-		<Tome_Subheading slug="table-element">
+		<Tome_Subheading text="table" slug="table-element">
 			<Mdn_Link href="Web/HTML/Element/table">table</Mdn_Link>
 		</Tome_Subheading>
 		<blockquote>⚠️ this is unfinished and will change</blockquote>
@@ -107,7 +107,7 @@
 		</table>
 	</section>
 	<section>
-		<Tome_Subheading slug="aside-element">
+		<Tome_Subheading text="aside" slug="aside-element">
 			<Mdn_Link href="Web/HTML/Element/aside">aside</Mdn_Link>
 		</Tome_Subheading>
 		<aside>
@@ -129,38 +129,34 @@
 		</aside>
 	</section>
 	<section>
-		<Tome_Subheading slug="header-element">
+		<Tome_Subheading text="header" slug="header-element">
 			<Mdn_Link href="Web/HTML/Element/footer">header</Mdn_Link>
 		</Tome_Subheading>
 		<Code content={`<header>header</header>`} />
 		<header>header</header>
 	</section>
 	<section>
-		<Tome_Subheading slug="footer-element">
+		<Tome_Subheading text="footer" slug="footer-element">
 			<Mdn_Link href="Web/HTML/Element/footer">footer</Mdn_Link>
 		</Tome_Subheading>
 		<Code content={`<footer>footer</footer>`} />
 		<footer>footer</footer>
 	</section>
 	<section>
-		<Tome_Subheading slug="section-element">
+		<Tome_Subheading text="section" slug="section-element">
 			<Mdn_Link href="Web/HTML/Element/section">section</Mdn_Link>
 		</Tome_Subheading>
 		<Code content={`<section>section</section>`} />
 		<section>section</section>
 	</section>
 	<section>
-		<Tome_Subheading slug="ul-element"><code>ul</code></Tome_Subheading>
+		<Tome_Subheading text="ul" slug="ul-element"><code>ul</code></Tome_Subheading>
 		<ul>
 			<li>a</li>
 			<li>b</li>
 			<li>see</li>
 		</ul>
-	</section>
-	<section>
-		<Tome_Subheading slug="ul-with-unstyled"
-			><code>ul</code> with <code>.unstyled</code></Tome_Subheading
-		>
+		<h4><code>ul</code> with <code>.unstyled</code></h4>
 		<ul class="unstyled">
 			<li>a</li>
 			<li>b</li>
@@ -168,17 +164,13 @@
 		</ul>
 	</section>
 	<section>
-		<Tome_Subheading slug="ol-element"><code>ol</code></Tome_Subheading>
+		<Tome_Subheading text="ol" slug="ol-element"><code>ol</code></Tome_Subheading>
 		<ol>
 			<li>one</li>
 			<li>two</li>
 			<li>etc</li>
 		</ol>
-	</section>
-	<section>
-		<Tome_Subheading slug="ol-with-unstyled"
-			><code>ol</code> with <code>.unstyled</code></Tome_Subheading
-		>
+		<h4><code>ol</code> with <code>.unstyled</code></h4>
 		<ol class="unstyled">
 			<li>one</li>
 			<li>two</li>
@@ -186,17 +178,13 @@
 		</ol>
 	</section>
 	<section>
-		<Tome_Subheading slug="menu-element"><code>menu</code></Tome_Subheading>
+		<Tome_Subheading text="menu" slug="menu-element"><code>menu</code></Tome_Subheading>
 		<menu>
 			<li>1</li>
 			<li>2</li>
 			<li>3</li>
 		</menu>
-	</section>
-	<section>
-		<Tome_Subheading slug="menu-with-unstyled"
-			><code>menu</code> with <code>.unstyled</code></Tome_Subheading
-		>
+		<h4><code>menu</code> with <code>.unstyled</code></h4>
 		<menu class="unstyled">
 			<li>1</li>
 			<li>2</li>

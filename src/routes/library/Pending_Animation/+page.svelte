@@ -39,7 +39,7 @@
 		</div>
 	</section>
 	<section>
-		<Tome_Subheading slug="custom-children">custom children</Tome_Subheading>
+		<Tome_Subheading text="With custom children" slug="custom-children" />
 		<Code
 			content={`<div
 	style:font-size="var(--size_xl6)"
@@ -69,7 +69,9 @@
 		</div>
 	</section>
 	<section>
-		<Tome_Subheading slug="children-index-prop">children <code>index</code> prop</Tome_Subheading>
+		<Tome_Subheading text="With children index prop" slug="children-index-prop"
+			>With children <code>index</code> prop</Tome_Subheading
+		>
 		<Code
 			content={`<Pending_Animation running={${frogsRunning}}>
 	{#snippet children(index)}

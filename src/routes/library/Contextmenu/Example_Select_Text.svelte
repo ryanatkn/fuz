@@ -42,7 +42,7 @@ Try selecting text and then opening the contextmenu on it.`;
 
 <Contextmenu_Root {contextmenu} scoped>
 	<div class:color_d_5={highlighted}>
-		<Tome_Subheading slug="select-text">Select text</Tome_Subheading>
+		<Tome_Subheading text="Select text" slug="select-text" />
 	</div>
 	<Contextmenu>
 		{#snippet entries()}

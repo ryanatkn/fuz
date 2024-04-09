@@ -34,7 +34,7 @@
 	<aside>forms need more work</aside>
 
 	<section>
-		<Tome_Subheading slug="form-with-a-fieldset">
+		<Tome_Subheading text="form with a fieldset" slug="form-with-a-fieldset">
 			<Mdn_Link href="Web/HTML/Element/form">form</Mdn_Link> with a <Mdn_Link
 				href="Web/HTML/Element/fieldset">fieldset</Mdn_Link
 			>
@@ -114,7 +114,7 @@
 	</section>
 
 	<section>
-		<Tome_Subheading slug="form-with-range-input">
+		<Tome_Subheading text="form with range input" slug="form-with-range-input">
 			<code>form</code> with range input
 		</Tome_Subheading>
 		<form>
@@ -130,7 +130,7 @@
 	</section>
 
 	<section>
-		<Tome_Subheading slug="form-with-checkboxes">
+		<Tome_Subheading text="form with checkboxes" slug="form-with-checkboxes">
 			<code>form</code> with checkboxes
 		</Tome_Subheading>
 		<!-- TODO make this a form, but figure out the checkbox problem -- maybe a last-child exception? -->
@@ -161,7 +161,7 @@
 	</section>
 
 	<section>
-		<Tome_Subheading slug="form-with-radio-inputs">
+		<Tome_Subheading text="form with radio inputs" slug="form-with-radio-inputs">
 			<code>form</code> with radio inputs
 		</Tome_Subheading>
 		<form>

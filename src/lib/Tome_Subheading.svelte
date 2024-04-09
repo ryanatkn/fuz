@@ -3,7 +3,7 @@
 </script>
 
 <script lang="ts">
-	import {onDestroy} from 'svelte';
+	import {onDestroy, type Snippet} from 'svelte';
 	import type {SvelteHTMLElements} from 'svelte/elements';
 	import {page} from '$app/stores';
 	import {base} from '$app/paths';
@@ -15,9 +15,10 @@
 		text: string;
 		slug: string;
 		attrs?: SvelteHTMLElements['h3'];
+		children?: Snippet;
 	}
 
-	const {text, slug, attrs}: Props = $props();
+	const {text, slug, attrs, children}: Props = $props();
 
 	const id = 'tome_subheading_' + _id++;
 
@@ -32,7 +33,7 @@
 </script>
 
 <h3 {...attrs}>
-	{text}
+	{#if children}{@render children()}{:else}{text}{/if}
 	<Hashlink {slug} />
 </h3>
 

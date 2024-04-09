@@ -8,7 +8,7 @@
 </script>
 
 <section>
-	<Tome_Subheading slug="expected-behaviors">Expected behaviors</Tome_Subheading>
+	<Tome_Subheading text="Expected behaviors" slug="expected-behaviors" />
 	<p>
 		The <code>Contextmenu</code> overrides the system contextmenu to provide capabilities specific
 		to your app.
@@ -69,7 +69,7 @@
 	</ul>
 </section>
 <section>
-	<Tome_Subheading slug="motivation">Motivation</Tome_Subheading>
+	<Tome_Subheading text="Motivation" slug="motivation" />
 	<p>Fuz takes two things very seriously, in no particular order:</p>
 	<ol>
 		<li>giving users a powerful and customizable UX</li>

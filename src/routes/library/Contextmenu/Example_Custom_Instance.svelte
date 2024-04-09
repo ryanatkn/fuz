@@ -17,7 +17,7 @@
 </script>
 
 <Contextmenu_Root {contextmenu} scoped>
-	<Tome_Subheading slug="custom-instance">Custom instance</Tome_Subheading>
+	<Tome_Subheading text="Custom instance" slug="custom-instance" />
 	<Contextmenu>
 		{#snippet entries()}
 			<Contextmenu_Entry run={() => (toggled = !toggled)}>Toggle</Contextmenu_Entry>

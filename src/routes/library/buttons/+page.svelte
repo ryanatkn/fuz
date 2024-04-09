@@ -48,7 +48,7 @@
 	</section>
 
 	<section>
-		<Tome_Subheading slug="colorful-buttons">Colorful buttons</Tome_Subheading>
+		<Tome_Subheading text="Colorful buttons" slug="colorful-buttons" />
 		{#each color_names as c}
 			{@const color_name = `color_${c}`}
 			<section>
@@ -72,7 +72,7 @@
 		</div>
 	</section>
 
-	<Tome_Subheading slug="disabled-attribute">With disabled attribute</Tome_Subheading>
+	<Tome_Subheading text="With disabled attribute" slug="disabled-attribute" />
 	<section>
 		<Code content={`<button disabled>\n\t:|\n</button>`} />
 		<button disabled>:|</button>
@@ -83,7 +83,7 @@
 	</section>
 
 	<section>
-		<Tome_Subheading slug="selected-class">
+		<Tome_Subheading text="With .selected" slug="selected-class">
 			With <code>.selected</code>
 		</Tome_Subheading>
 		<nav>
@@ -134,73 +134,67 @@
 	</section>
 
 	<section>
-		<Tome_Subheading slug="plain-and-icon_button"
-			><code>.plain</code> and <code>.icon_button</code></Tome_Subheading
-		>
-		<section>
-			<Code
-				content={`<button class="plain">
+		<Tome_Subheading text="With .plain and .icon_button" slug="plain-and-icon_button">
+			With <code>.plain</code> and <code>.icon_button</code>
+		</Tome_Subheading>
+		<Code
+			content={`<button class="plain">
 	+
 </button>`}
-			/>
-			<button class="plain" class:mb_xs>+</button>
-			<button class="plain mb_lg" disabled>+</button>
-			<Code
-				content={`<button class="icon_button">
+		/>
+		<button class="plain" class:mb_xs>+</button>
+		<button class="plain mb_lg" disabled>+</button>
+		<Code
+			content={`<button class="icon_button">
 	+
 </button>`}
-			/>
-			<button class="icon_button" class:mb_xs>+</button>
-			<button class="icon_button mb_lg" disabled>+</button>
-			<Code
-				content={`<button class="plain icon_button">
+		/>
+		<button class="icon_button" class:mb_xs>+</button>
+		<button class="icon_button mb_lg" disabled>+</button>
+		<Code
+			content={`<button class="plain icon_button">
 	+
 </button>`}
-			/>
-			<button class="plain icon_button" class:mb_xs>+</button>
-			<button class="plain icon_button" disabled>+</button>
-		</section>
-		<section>
-			<h4><code>.selected</code> variants</h4>
-			<Code
-				content={`<button class="plain selected">
+		/>
+		<button class="plain icon_button" class:mb_xs>+</button>
+		<button class="plain icon_button" disabled>+</button>
+		<h4><code>.selected</code> variants</h4>
+		<Code
+			content={`<button class="plain selected">
 	+
 </button>`}
-			/>
-			<button class="plain selected mb_lg">+</button>
-			<Code
-				content={`<button class="icon_button selected">
+		/>
+		<button class="plain selected mb_lg">+</button>
+		<Code
+			content={`<button class="icon_button selected">
 	+
 </button>`}
-			/>
-			<button class="icon_button selected mb_lg">+</button>
-			<Code
-				content={`<button class="plain icon_button selected">
+		/>
+		<button class="icon_button selected mb_lg">+</button>
+		<Code
+			content={`<button class="plain icon_button selected">
 	+
 </button>`}
-			/>
-			<button class="plain icon_button selected">+</button>
-		</section>
-		<section>
-			<h4><code>.selected</code> and <code>.deselectable</code> variants</h4>
-			<Code
-				content={`<button class="plain selected deselectable">
+		/>
+		<button class="plain icon_button selected">+</button>
+		<h4><code>.selected</code> and <code>.deselectable</code> variants</h4>
+		<Code
+			content={`<button class="plain selected deselectable">
 	+
 </button>`}
-			/>
-			<button class="plain selected deselectable mb_lg">+</button>
-			<Code
-				content={`<button class="icon_button selected deselectable">
+		/>
+		<button class="plain selected deselectable mb_lg">+</button>
+		<Code
+			content={`<button class="icon_button selected deselectable">
 	+
 </button>`}
-			/>
-			<button class="icon_button selected deselectable mb_lg">+</button>
-			<Code
-				content={`<button class="plain icon_button selected deselectable">
+		/>
+		<button class="icon_button selected deselectable mb_lg">+</button>
+		<Code
+			content={`<button class="plain icon_button selected deselectable">
 	+
 </button>`}
-			/>
-			<button class="plain icon_button selected deselectable">+</button>
-		</section>
+		/>
+		<button class="plain icon_button selected deselectable">+</button>
 	</section>
 </Tome_Detail>

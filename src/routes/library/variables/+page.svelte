@@ -91,9 +91,7 @@ export interface Style_Variable {
 		/>
 	</section>
 	<section>
-		<Tome_Subheading slug="all-style-variables">
-			All {variables.length} style variables
-		</Tome_Subheading>
+		<Tome_Subheading text={`All ${variables.length} style variables`} slug="all-style-variables" />
 		<aside class="mb_lg">⚠️ some of these will change</aside>
 		<!-- TODO add info through the contextmenu or dialog -->
 		<div class="variables">

@@ -29,7 +29,7 @@
 		</Card>
 	</section>
 	<section>
-		<Tome_Subheading slug="custom-icon">With a custom icon</Tome_Subheading>
+		<Tome_Subheading text="With a custom icon" slug="custom-icon" />
 		<Code
 			content={`<Card>
   custom<br />
@@ -44,7 +44,7 @@
 		</Card>
 	</section>
 	<section>
-		<Tome_Subheading slug="as-a-link">As a link</Tome_Subheading>
+		<Tome_Subheading text="As a link" slug="as-a-link" />
 		<Code
 			content={`<Card href="${base}/">
   a<br />
@@ -57,7 +57,7 @@
 		</Card>
 	</section>
 	<section>
-		<Tome_Subheading slug="as-selected-link">As the selected link</Tome_Subheading>
+		<Tome_Subheading text="As the selected link" slug="as-selected-link" />
 		<Code
 			content={`<Card href="${base}/library/Card">
   href is<br />
@@ -70,7 +70,7 @@
 		</Card>
 	</section>
 	<section>
-		<Tome_Subheading slug="custom-html-tag">With a custom HTML tag</Tome_Subheading>
+		<Tome_Subheading text="With a custom HTML tag" slug="custom-html-tag" />
 		<Code
 			content={`<Card tag="button">
   custom<br />
@@ -83,7 +83,7 @@
 		</Card>
 	</section>
 	<section>
-		<Tome_Subheading slug="custom-alignment">With custom alignment</Tome_Subheading>
+		<Tome_Subheading text="With custom alignment" slug="custom-alignment" />
 		<Code
 			content={`<Card align="right">
   align<br />

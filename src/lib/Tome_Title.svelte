@@ -37,8 +37,8 @@
 		{@render content(tome.name)}
 	{:else}
 		<a href={path}>{@render content(tome.name)}</a>
-		<Hashlink {slug} />
 	{/if}
+	<Hashlink {slug} />
 </h2>
 
 {#snippet content(name: string)}

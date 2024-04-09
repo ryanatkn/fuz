@@ -36,7 +36,7 @@
 		</p>
 	</section>
 	<section>
-		<Tome_Subheading slug="shades-and-highlights">Shades and highlights</Tome_Subheading>
+		<Tome_Subheading text="Shades and highlights" slug="shades-and-highlights" />
 		<h4><code>darken</code> and <code>lighten</code></h4>
 		<div class="swatch">
 			{#each {length: 9} as _, i}
@@ -96,7 +96,7 @@
 		</aside>
 	</section>
 	<section>
-		<Tome_Subheading slug="fading-opacity">Fading opacity</Tome_Subheading>
+		<Tome_Subheading text="Fading opacity" slug="fading-opacity" />
 		<div class="swatch">
 			<div>
 				<div class="color" style:background-color="var(--color_a_5)"></div>
@@ -116,7 +116,7 @@
 		</div>
 	</section>
 	<section>
-		<Tome_Subheading slug="stacking-opacity">Stacking opacity</Tome_Subheading>
+		<Tome_Subheading text="Stacking opacity" slug="stacking-opacity" />
 		<Code
 			content={`<div style:background-color="var(--fg_1)" class="p_sm">
 	<div style:background-color="var(--fg_1)" class="p_sm">
@@ -144,7 +144,7 @@
 		</div>
 	</section>
 	<section>
-		<Tome_Subheading slug="box-shadows">Box shadows</Tome_Subheading>
+		<Tome_Subheading text="Box shadows" slug="box-shadows" />
 		<div class="shadow_example" style:box-shadow="var(--shadow)">
 			<Style_Variable_Button name="shadow_md" />
 		</div>

@@ -26,7 +26,7 @@
 
 <Tome_Detail {tome}>
 	<section>
-		<Tome_Subheading slug="menu_item-css-class">
+		<Tome_Subheading text=".menu-item CSS class" slug="menu_item-css-class">
 			<code>.menu_item</code> CSS class
 		</Tome_Subheading>
 		<blockquote>This is experimental and may change or be removed.</blockquote>

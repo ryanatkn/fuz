@@ -19,6 +19,7 @@ export class Library_Links {
 	constructor(public readonly root_path = '/library') {}
 
 	add(id: string, text: string, slug: string): void {
+		// TODO BLOCK replace if id exists, make reactive, probably call inside $effect
 		this.library_links.push({id, text, slug});
 	}
 

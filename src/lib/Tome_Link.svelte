@@ -5,17 +5,18 @@
 
 	interface Props {
 		name: string; // TODO type, generate from `tomes`?
+		hash?: string;
 		chip?: boolean;
 		attrs?: SvelteHTMLElements['a'];
 		children?: Snippet;
 	}
 
-	const {name, chip = true, attrs, children}: Props = $props();
+	const {name, hash, chip = true, attrs, children}: Props = $props();
 
 	// TODO add contextmenu behavior
 </script>
 
-<a {...attrs} class:chip href="{base}/library/{name}"
+<a {...attrs} class:chip href="{base}/library/{name}{hash ? `#${hash}` : ''}"
 	>{#if children}{@render children()}{:else}{name}{/if}</a
 >
 
