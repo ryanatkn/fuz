@@ -178,25 +178,25 @@ h6 {
 h1 {
 	--size: var(--size_xl3);
 	--font_weight: 300;
-	margin-bottom: var(--space_xl3);
+	margin-bottom: var(--space_xl4);
 	margin-top: var(--space_xl7);
 }
 h2 {
 	--size: var(--size_xl2);
 	--font_weight: 400;
-	margin-bottom: var(--space_xl2);
+	margin-bottom: var(--space_xl3);
 	margin-top: var(--space_xl6);
 }
 h3 {
 	--size: var(--size_xl);
 	--font_weight: 500;
-	margin-bottom: var(--space_xl);
+	margin-bottom: var(--space_xl2);
 	margin-top: var(--space_xl5);
 }
 h4 {
 	--size: var(--size_lg);
 	--font_weight: 700;
-	margin-bottom: var(--space_lg);
+	margin-bottom: var(--space_xl);
 	margin-top: var(--space_xl4);
 }
 h5 {
