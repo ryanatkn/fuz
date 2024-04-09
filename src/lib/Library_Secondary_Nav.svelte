@@ -27,12 +27,12 @@
 		padding: var(
 			--library_secondary_nav_padding
 		); /* needed with `overflow: auto` to avoid cutting off outline */
+		margin-bottom: 0;
 		display: flex;
 		flex-direction: column;
 		align-items: flex-end;
 		overflow: auto;
 		background-color: var(--fg_1);
-		margin-bottom: var(--space_xl6);
 	}
 
 	/* sync this breakpoint with `Library` */
@@ -50,5 +50,6 @@
 		background-color: initial;
 		align-items: initial;
 		overflow: initial;
+		display: block; /* collapse margin */
 	}
 </style>

@@ -85,8 +85,8 @@
 {#if show_secondary_nav_dialog && innerWidth && innerWidth <= TERTIARY_NAV_BREAKPOINT}
 	<Dialog onclose={() => (show_secondary_nav_dialog = false)}>
 		<div class="pane">
-			<div class="p_xl"><Breadcrumb>🧶</Breadcrumb></div>
-			<div class="px_lg py_xl">
+			<div class="p_xl pb_0"><Breadcrumb>🧶</Breadcrumb></div>
+			<div class="px_lg pb_xl">
 				<Library_Secondary_Nav {tomes} sidebar={false} />
 				<Library_Tertiary_Nav {tomes} {tomes_by_name} sidebar={false} />
 			</div>

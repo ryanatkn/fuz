@@ -52,8 +52,8 @@
 		width: var(--library_menu_width);
 	}
 
-	.category:not(:last-child) {
-		margin-bottom: var(--space_xl6);
+	.category {
+		margin: var(--space_xl6) 0;
 	}
 
 	/* TODO should be a CSS class or variable, maybe should be the default?

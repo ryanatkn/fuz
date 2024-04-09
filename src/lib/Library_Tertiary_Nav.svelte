@@ -9,9 +9,10 @@
 	interface Props {
 		tomes: Tome[];
 		tomes_by_name: Map<string, Tome>;
+		sidebar?: boolean; // TODO @multiple dialog navs (this shouldn't exist)
 	}
 
-	const {tomes, tomes_by_name}: Props = $props();
+	const {tomes, tomes_by_name, sidebar}: Props = $props();
 
 	const selected_item = $derived(tomes.find((c) => c.pathname === $page.url.pathname));
 
@@ -30,7 +31,7 @@
 		</Library_Menu>
 	{/if}
 	{#if library_links.library_links.length > 1}
-		<Library_Page_Links {library_links} />
+		<Library_Page_Links {library_links} {sidebar} />
 	{/if}
 </aside>
 

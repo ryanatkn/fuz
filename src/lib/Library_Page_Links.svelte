@@ -6,9 +6,10 @@
 
 	interface Props {
 		library_links: Library_Links;
+		sidebar?: boolean; // TODO @multiple dialog navs (this shouldn't exist)
 	}
 
-	const {library_links}: Props = $props();
+	const {library_links, sidebar}: Props = $props();
 
 	// TODO BLOCK refactor with `Library_Menu`, probably
 	// TODO BLOCK remove CSS below with reusable CSS or a Svelte component
@@ -22,22 +23,30 @@
 
 <div class="library_page_links">
 	<h6>On this page</h6>
-	<div class="wrapper">
-		<ul class="unstyled">
-			{#each library_links.library_links as item (item.id)}
-				<li role="none" transition:slide>
-					<a class="menu_item" href="#{item.slug}" class:selected={item.slug === hash}
-						>{item.text}</a
-					>
-				</li>
-			{/each}
-		</ul>
-	</div>
+	{#if sidebar}
+		<div class="sidebar_wrapper">{@render content()}</div>
+	{:else}
+		{@render content()}
+	{/if}
 </div>
 
+{#snippet content()}
+	<ul class="unstyled">
+		{#each library_links.library_links as item (item.id)}
+			<li role="none" transition:slide>
+				<a class="menu_item" href="#{item.slug}" class:selected={item.slug === hash}>{item.text}</a>
+			</li>
+		{/each}
+	</ul>
+{/snippet}
+
 <style>
+	.library_page_links {
+		margin: var(--space_xl6) 0;
+	}
+
 	/* this is needed because `.library_page_links` needs to be a block to collapse the vertical margin */
-	.wrapper {
+	.sidebar_wrapper {
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
