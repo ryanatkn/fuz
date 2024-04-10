@@ -181,7 +181,8 @@ h1 {
 	--size: var(--size_xl3);
 	--font_weight: 300;
 	margin-bottom: var(--space_xl5);
-	margin-top: var(--space_xl7);
+	/* TODO strange to omit only this one, but seems to be generally my desired behavior */
+	/* margin-top: var(--space_xl7); */
 }
 h2 {
 	--size: var(--size_xl2);

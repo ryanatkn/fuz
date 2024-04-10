@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {onDestroy, type Snippet} from 'svelte';
+	import type {Snippet} from 'svelte';
 	import {is_editable, swallow} from '@ryanatkn/belt/dom.js';
 	import {wait} from '@ryanatkn/belt/async.js';
 
@@ -43,8 +43,6 @@
 	}: Props = $props();
 
 	const ROOT_SELECTOR = 'body'; // TODO make configurable
-	const ROOT_DIALOG_OPEN_CLASS = 'fuz_dialog_open';
-	const ROOT_DIALOG_PADDING_PROPERTY = '--dialog_open_padding_right';
 	const CONTAINER_ID = 'fuz_dialog';
 
 	let container_el: HTMLElement | undefined = $state();
@@ -99,14 +97,6 @@
 	// The dialog isn't "ready" until the teleport moves it.
 	// Rendering the the dialog's children only once it's ready fixes things like `autofocus`.
 	let ready = $state(false);
-	$inspect('[ready]', ready);
-
-	onDestroy(() => {
-		if (index === 0) {
-			document.body.classList.remove(ROOT_DIALOG_OPEN_CLASS);
-			document.body.style.setProperty(ROOT_DIALOG_PADDING_PROPERTY, null);
-		}
-	});
 </script>
 
 <svelte:window onkeydown={active ? on_window_keydown : undefined} />
@@ -121,24 +111,6 @@
 <Teleport
 	to={container_el}
 	onmove={async () => {
-		// TODO BLOCK this way of bumping the padding doesn't work with `position: fixed` elements :(
-		// Measure `padding-right` before adding the class that changes it,
-		// so we can set the body padding to offset any scrollbar width changes.
-		const computed_padding_right =
-			Number(
-				window.getComputedStyle(document.body).getPropertyValue('padding-right').slice(0, -2),
-			) || 0; // just in case the parsed value is NaN
-		const width_before = document.body.clientWidth;
-		document.body.classList.add(ROOT_DIALOG_OPEN_CLASS);
-		const width_after = document.body.clientWidth;
-		const width_diff = width_after - width_before;
-		if (width_diff > 0) {
-			// Offset scrollbar width changes.
-			document.body.style.setProperty(
-				ROOT_DIALOG_PADDING_PROPERTY,
-				width_diff + computed_padding_right + 'px',
-			);
-		}
 		await wait(); // TODO BLOCK this is a hack to get animations working, Teleport now mounts synchronously!!
 		ready = true;
 		dialog_el?.focus(); // TODO make this more declarative? probably want to focus only after moving though, not on mount, which makes an action trickier
@@ -176,9 +148,12 @@
 <style>
 	.dialog {
 		--pane_shadow: var(--shadow_lg);
-		overflow: auto;
 		position: fixed;
 		inset: 0;
+		overflow: auto;
+		/* this simplifies the code a lot but doesn't prevent scrolling
+		the underlying content when the dialog doesn't overflow, even when `overflow: scroll` */
+		overscroll-behavior: contain;
 	}
 	.dialog_bg {
 		position: absolute;
@@ -216,10 +191,5 @@
 	}
 	.ready .dialog_content {
 		transform: scale3d(1, 1, 1);
-	}
-	/* need to sync with `ROOT_DIALOG_OPEN_CLASS` and `ROOT_DIALOG_PADDING_PROPERTY` */
-	:global(body.fuz_dialog_open) {
-		overflow: hidden !important;
-		padding-right: var(--dialog_open_padding_right, 0) !important;
 	}
 </style>
