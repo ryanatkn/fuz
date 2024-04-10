@@ -33,8 +33,12 @@ export class Library_Links {
 	constructor(public readonly root_path = DEFAULT_LIBRARY_PATH) {}
 
 	add(id: string, text: string, slug: string): void {
-		// TODO BLOCK replace if id exists, make reactive, probably call inside $effect
-		this.library_links.push({id, text, slug});
+		const index = this.library_links.findIndex((t) => t.id === id);
+		if (index === -1) {
+			this.library_links.push({id, text, slug});
+		} else {
+			this.library_links[index] = {id, text, slug};
+		}
 	}
 
 	remove(id: string): void {

@@ -18,8 +18,6 @@
 	const iframed = is_iframed();
 	const enabled = !iframed;
 
-	// TODO BLOCK what if `--bg|fg_N` were opaque? problem here requires two layered backgrounds, but maybe that's fine?
-
 	// TODO BLOCK maybe when scrolled to the top, hide shadow, but show otherwise
 </script>
 
