@@ -8,14 +8,9 @@
 
 	const contextmenu = new Contextmenu_Store();
 
-	// TODO BLOCK add some initial option that customizes the behavior
-	// TODO BLOCK maybe pass `contextmenu` to the children snippet
+	// TODO maybe pass `contextmenu` to the children snippet
 
 	let toggled = $state(false);
-
-	// TODO BLOCK input example (with paste option?)
-
-	// TODO BLOCK selecting text needs to be moved - doesn't work properly here
 
 	let text_el: HTMLElement;
 

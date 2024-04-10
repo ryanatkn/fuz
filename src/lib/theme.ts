@@ -190,7 +190,7 @@ export const render_theme_variable = (
 	);
 };
 
-// TODO BLOCK change API to use runes (maybe a followup PR)
+// TODO change API to use runes
 
 const THEME_KEY = Symbol('theme');
 export const get_theme = (): Writable<Theme> => getContext(THEME_KEY);

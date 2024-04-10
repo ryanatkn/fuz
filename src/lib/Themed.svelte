@@ -108,7 +108,7 @@
 	const theme_style_html = $derived(style ? create_theme_style_html(style) : null);
 	const theme_setup_script = $derived(create_theme_setup_script(color_scheme_fallback));
 
-	// TODO BLOCK svelte5 improve this pattern? got worse bc the $effect needs to read the value before the short-circuiting check
+	// TODO improve this pattern? got worse bc the $effect needs to read the value before the short-circuiting check
 	let c1 = 0; // hackily skip the first call
 	$effect(() => {
 		const v = $selected_color_scheme;

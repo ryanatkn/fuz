@@ -3,8 +3,6 @@
 
 	import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
 	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
-
-	// TODO BLOCK opening it on itself is bugged, opens another menu
 </script>
 
 <Contextmenu_Root scoped>

@@ -10,8 +10,8 @@
 
 	const contextmenu = new Contextmenu_Store();
 
-	// TODO BLOCK add some initial option that customizes the behavior
-	// TODO BLOCK maybe pass `contextmenu` to the children snippet
+	// TODO add some initial option that customizes the behavior
+	// TODO maybe pass `contextmenu` to the children snippet
 
 	let toggled = $state(false);
 </script>

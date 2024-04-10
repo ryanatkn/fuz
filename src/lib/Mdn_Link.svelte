@@ -5,8 +5,6 @@
 
 	import Mdn_Logo from '$lib/Mdn_Logo.svelte';
 
-	// TODO BLOCK maybe improve API to make `children` optional, defaulting to the last segment of `href`?
-
 	interface Props {
 		/**
 		 * @example Web/HTML/Element

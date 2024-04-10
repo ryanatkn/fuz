@@ -2,9 +2,7 @@
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
 	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
-	// TODO BLOCK this is a good usecase for the automatic library heading links in an "on this page" righthand sidebar
-
-	// TODO BLOCK the flip animations caused the contextmenu wrapper of the children to be nested, make sure it doesn't mess up the contextmenu behavior
+	// TODO BLOCK buggy animations, maybe will be fixed before Svelte 5 release
 </script>
 
 <section>
