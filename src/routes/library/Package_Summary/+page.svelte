@@ -1,16 +1,15 @@
 <script lang="ts">
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
-	import {parse_package_meta} from '@ryanatkn/gro/package_meta.js';
 
 	import {get_tome} from '$lib/tome.js';
 	import Package_Summary from '$lib/Package_Summary.svelte';
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
-	import {package_json, src_json} from '$routes/package.js';
+	import {get_pkg} from '$routes/pkg.js';
 
 	const LIBRARY_ITEM_NAME = 'Package_Summary';
 	const tome = get_tome(LIBRARY_ITEM_NAME);
 
-	const pkg = parse_package_meta(package_json.homepage, package_json, src_json);
+	const pkg = get_pkg();
 </script>
 
 <Tome_Detail {tome}>

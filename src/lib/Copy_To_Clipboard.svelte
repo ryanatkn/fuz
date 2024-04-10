@@ -3,7 +3,7 @@
 		text: string;
 	}
 
-	// TODO BLOCK add library entry
+	// TODO add library entry
 
 	const {text}: Props = $props();
 

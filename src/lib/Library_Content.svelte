@@ -1,11 +1,10 @@
 <script lang="ts">
 	import {page} from '$app/stores';
 	import {base} from '$app/paths';
-	import {parse_package_meta} from '@ryanatkn/gro/package_meta.js';
 
 	import type {Tome} from '$lib/tome.js';
 	import Package_Summary from '$lib/Package_Summary.svelte';
-	import {package_json, src_json} from '$routes/package.js';
+	import {get_pkg} from '$routes/pkg';
 
 	interface Props {
 		root_path?: string;
@@ -14,8 +13,7 @@
 
 	const {root_path = '/library', tomes}: Props = $props();
 
-	// TODO BLOCK get from context? is used at root
-	const pkg = parse_package_meta(package_json.homepage, package_json, src_json);
+	const pkg = get_pkg();
 </script>
 
 {#if $page.url.pathname === base + root_path}

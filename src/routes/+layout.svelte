@@ -3,14 +3,20 @@
 	import '$lib/theme.css';
 	import '@ryanatkn/fuz_code/prism.css';
 
-	import Themed from '$lib/Themed.svelte';
+	import {parse_package_meta} from '@ryanatkn/gro/package_meta.js';
 	import type {Snippet} from 'svelte';
+
+	import Themed from '$lib/Themed.svelte';
+	import {set_pkg} from '$routes/pkg.js';
+	import {package_json, src_json} from '$routes/package.js';
 
 	interface Props {
 		children: Snippet;
 	}
 
 	const {children}: Props = $props();
+
+	set_pkg(parse_package_meta(package_json.homepage, package_json, src_json));
 </script>
 
 <Themed>

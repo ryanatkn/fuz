@@ -16,15 +16,13 @@
 	}
 
 	const {pkg, root_url = null, logo, logo_header, logo_footer, children}: Props = $props();
-
-	const {repo_url} = $derived(pkg);
 </script>
 
 <footer class="box">
 	{#if children}{@render children()}{/if}
 	<div class="logo box panel p_lg">
 		{#if logo_header}{@render logo_header()}{/if}
-		<a href={repo_url} rel="me"
+		<a href={pkg.repo_url} rel="me"
 			>{#if logo}{@render logo()}{:else}<Github_Logo />{/if}</a
 		>
 		{#if logo_footer}{@render logo_footer()}{/if}

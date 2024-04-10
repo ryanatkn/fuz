@@ -111,7 +111,7 @@
 <Teleport
 	to={container_el}
 	onmove={async () => {
-		await wait(); // TODO BLOCK this is a hack to get animations working, Teleport now mounts synchronously!!
+		await wait(); // TODO this is a hack to get animations working, `Teleport` now mounts synchronously?!
 		ready = true;
 		dialog_el?.focus(); // TODO make this more declarative? probably want to focus only after moving though, not on mount, which makes an action trickier
 	}}

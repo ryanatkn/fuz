@@ -1,13 +1,11 @@
 <script lang="ts">
-	import {parse_package_meta} from '@ryanatkn/gro/package_meta.js';
-
 	import Package_Detail from '$lib/Package_Detail.svelte';
 	import Library_Footer from '$lib/Library_Footer.svelte';
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
 
-	import {package_json, src_json} from '$routes/package.js';
+	import {get_pkg} from '$routes/pkg.js';
 
-	const pkg = parse_package_meta(package_json.homepage, package_json, src_json);
+	const pkg = get_pkg();
 
 	// TODO standardize
 </script>
