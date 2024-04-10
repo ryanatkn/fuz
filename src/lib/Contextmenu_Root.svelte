@@ -108,7 +108,6 @@
 	});
 
 	const dimensions = set_contextmenu_dimensions();
-	// TODO BLOCK maybe `derived.by`?
 	$effect(() => {
 		if (el) {
 			const rect = el.getBoundingClientRect();
