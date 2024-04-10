@@ -19,11 +19,7 @@
 <Tome_Detail {tome}>
 	<section>
 		<aside>
-			<!-- TODO style hack, maybe use margin-bottom only on h elements? -->
-			<h4>TODO</h4>
-			<ul>
-				<li>consider mobile drawer-from-bottom design (maybe an option)</li>
-			</ul>
+			<p>todo: for mobile, probably change to a drawer-from-bottom design</p>
 		</aside>
 	</section>
 	<section><Example_Basic /></section>
