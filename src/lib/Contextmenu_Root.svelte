@@ -16,6 +16,7 @@
 	// besides the hacks, the main negative effect is that vibrate doesn't work for Android either,
 	// though this could potentially be fixed if the code is changed to make sure the longpress delay
 	// is longer than any available `contextmenu` event delay
+	// @see https://bugs.webkit.org/show_bug.cgi?id=213953
 
 	interface Props {
 		/**
