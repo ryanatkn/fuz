@@ -10,7 +10,8 @@
 	interface Props {
 		status?: Alert_Status;
 		color?: string;
-		// TODO this API is a mess in part because of the types, maybe an explicit `Alert_Button` is better
+		// TODO this API is a mess in part because of the types, maybe an explicit `Alert_Button` is better,
+		// or rethink the design because `role="alert"` can't be put on buttons.
 		// $props must be destructured, so we can't use a union with narrowing right?
 		// so `disabled` only makes sense if `onclick` is defined, and we dont get the other HTMLButtonElement attributes
 		onclick?: (() => void) | undefined;
@@ -36,7 +37,7 @@
 		{@render content()}
 	</button>
 {:else}
-	<div class="message panel" style:--color={final_color} {...attrs}>
+	<div role="alert" class="message panel" style:--color={final_color} {...attrs}>
 		{@render content()}
 	</div>
 {/if}
