@@ -22,7 +22,7 @@
 	<div class="box mb_xl5">
 		<Package_Summary {pkg}>
 			{#snippet repo_name()}
-				<h1 class="m_0">fuz</h1>
+				<h1 class="mb_0">fuz</h1>
 			{/snippet}
 		</Package_Summary>
 	</div>

@@ -17,7 +17,6 @@
 
 	const entry = contextmenu.add_entry(run);
 
-	// TODO BLOCK test that this still works, maybe refactor
 	// This store makes `run` reactive
 	// because it's a param to `contextmenu.add_entry` which @initializes.
 	$effect(() => {
