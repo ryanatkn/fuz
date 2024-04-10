@@ -7,8 +7,8 @@
 
 	interface Props {
 		run: Contextmenu_Run;
-		icon?: string | Snippet; // TODO @multiple think about this API, maybe make a snippet or string? maybe just a snippet after changing from actions to nested components
-		children: Snippet; // TODO @multiple think about this API, maybe make a snippet or string? maybe just a snippet after changing from actions to nested components
+		icon?: string | Snippet;
+		children: Snippet;
 	}
 
 	const {run, icon, children}: Props = $props();
@@ -17,6 +17,7 @@
 
 	const entry = contextmenu.add_entry(run);
 
+	// TODO refactor
 	// This store makes `run` reactive
 	// because it's a param to `contextmenu.add_entry` which @initializes.
 	$effect(() => {

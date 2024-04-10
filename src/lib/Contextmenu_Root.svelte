@@ -245,7 +245,7 @@
 		}
 	};
 
-	// TODO BLOCK maybe bind these to the contextmenu instance instead of including the function wrapper
+	// TODO maybe bind these to the contextmenu instance instead of including the function wrapper
 	// TODO customize
 	const keyboard_handlers: Map<string, () => void> = new Map([
 		['Escape', () => contextmenu.close()],
@@ -267,11 +267,7 @@
 		handler();
 	};
 
-	// TODO BLOCK change the events below to the callback form, but the passive/nonpassive modifiers need to be handled with an action? assuming we still need them
-
-	// TODO BLOCK change the events to be just the container? maybe just the starting triggers? (contextmenu, touchstart)
-
-	// TODO BLOCK fallback snippets below? `type: 'text' | 'link'`?
+	// TODO change the events below to the callback form, but the passive/nonpassive modifiers need to be handled with an action? assuming we still need them
 </script>
 
 <!--

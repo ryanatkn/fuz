@@ -10,9 +10,10 @@
 	const {toggle_about_dialog}: Props = $props();
 </script>
 
-<Contextmenu_Link_Entry href="https://github.com/ryanatkn/fuz"
-	>{#snippet icon()}<GithubLogo size="var(--icon_size_xs)" />{/snippet}Source code</Contextmenu_Link_Entry
->
+<Contextmenu_Link_Entry href="https://github.com/ryanatkn/fuz">
+	{#snippet icon()}<GithubLogo size="var(--icon_size_xs)" />{/snippet}
+	Source code
+</Contextmenu_Link_Entry>
 <Contextmenu_Entry run={toggle_about_dialog}>
 	{#snippet icon()}?{/snippet}
 	About

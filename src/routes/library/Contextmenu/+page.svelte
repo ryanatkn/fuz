@@ -8,8 +8,6 @@
 	import Example_Select_Text from '$routes/library/Contextmenu/Example_Select_Text.svelte';
 	import Example_Default_Behaviors from '$routes/library/Contextmenu/Example_Default_Behaviors.svelte';
 
-	// TODO BLOCK rewrite the docs with the other text
-
 	const LIBRARY_ITEM_NAME = 'Contextmenu';
 
 	const tome = get_tome(LIBRARY_ITEM_NAME);

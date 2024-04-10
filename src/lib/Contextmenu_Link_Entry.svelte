@@ -4,14 +4,15 @@
 
 	import {get_contextmenu} from '$lib/contextmenu.svelte.js';
 
+	const DEFAULT_LINK_ICON = '🔗';
+
 	interface Props {
 		href: string;
-		// TODO BLOCK refactor with `Contextmenu_Text_Entry`
-		icon?: Snippet<[icon: string]>;
-		children?: Snippet;
+		icon?: string | Snippet<[icon: string]>; // TODO @multiple rethink this API
+		children?: Snippet; // TODO @multiple rethink this API
 	}
 
-	const {href, icon, children}: Props = $props();
+	const {href, icon = DEFAULT_LINK_ICON, children}: Props = $props();
 
 	const contextmenu = get_contextmenu();
 
@@ -32,7 +33,11 @@
 	<a class="menu_item plain" role="menuitem" {href} {rel} onclick={() => contextmenu.close()}>
 		<div class="content">
 			<div class="icon">
-				{#if icon}{@render icon('🔗')}{:else}🔗{/if}
+				{#if typeof icon === 'string'}
+					{icon}
+				{:else}
+					{@render icon(DEFAULT_LINK_ICON)}
+				{/if}
 			</div>
 			<div class="title">
 				<span class="text"

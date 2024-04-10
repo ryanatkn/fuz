@@ -16,7 +16,6 @@ export type Contextmenu_Params =
 	| {snippet: 'link'; props: {href: string; icon?: string}}
 	| {snippet: 'text'; props: {content: string; icon: string; run: Contextmenu_Run}};
 
-// TODO BLOCK should this just be snippets? might need a wrapper hack
 export type Contextmenu_Action_Params = Snippet;
 
 type Activate_Result = Result<any, {message?: string}> | any;
@@ -28,7 +27,7 @@ export class Entry_State {
 	readonly menu: Submenu_State | Root_Menu_State;
 
 	selected: boolean = $state(false);
-	run: Contextmenu_Run = $state(undefined as any); // TODO BLOCK any better way to do this?
+	run: Contextmenu_Run = $state()!;
 	pending: boolean = $state(false);
 	error_message: string | null = $state(null);
 	promise: Promise<any> | null = $state(null);
@@ -36,7 +35,6 @@ export class Entry_State {
 	constructor(menu: Submenu_State | Root_Menu_State, run: Contextmenu_Run) {
 		this.menu = menu;
 		this.run = run;
-		// this.run = $state(run); // TODO BLOCK does this work?
 	}
 }
 
@@ -72,9 +70,6 @@ export interface Contextmenu_Store_Options {
 	layout?: Dimensions; // TODO consider making this a prop on `Contextmenu_Root`, and being assigned here
 }
 
-// TODO BLOCK name? should the component or this be `Contextmenu`? `Contextmenu_State`?
-// maybe the compoonent is `Contextmenu_Entries`? seems like the common one should be simpler
-
 /**
  * Creates a `contextmenu` store.
  * See usage with `Contextmenu_Root.svelte` and `Contextmenu.svelte`.
@@ -94,7 +89,6 @@ export class Contextmenu_Store {
 	params: Contextmenu_Params[] = $state([]);
 	error: string | undefined = $state();
 
-	// TODO BLOCK probably make these reactive?
 	// These two properties are mutated internally.
 	// If you need reactivity, use `$contextmenu` in a reactive statement to react to all changes, and
 	// then access the mutable non-reactive  `contextmenu.root_menu` and `contextmenu.selections`.
@@ -252,6 +246,7 @@ export class Contextmenu_Store {
 		const menu = get_contextmenu_submenu() || this.root_menu;
 		const entry = new Entry_State(menu, run);
 		menu.items.push(entry);
+		// TODO messy, runs more than needed
 		onDestroy(() => {
 			menu.items.length = 0;
 		});
@@ -266,6 +261,7 @@ export class Contextmenu_Store {
 		const submenu = new Submenu_State(menu, menu.depth + 1);
 		menu.items.push(submenu);
 		set_contextmenu_submenu(submenu);
+		// TODO messy, runs more than needed
 		onDestroy(() => {
 			menu.items.length = 0;
 		});

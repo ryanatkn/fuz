@@ -4,12 +4,10 @@
 
 	interface Props {
 		run: Contextmenu_Run;
-		// TODO BLOCK refactor with `Contextmenu_Link_Entry`
-		content: string; // TODO @multiple think about this API, maybe make a snippet or both? maybe just a snippet after changing from actions to nested components
-		icon: string; // TODO @multiple think about this API, maybe make a snippet or both? maybe just a snippet after changing from actions to nested components
+		content: string; // TODO @multiple rethink this API
+		icon: string; // TODO @multiple rethink this API
 	}
 
-	// TODO @multiple remove the alias
 	const {run, content, icon: icon_text}: Props = $props();
 
 	// TODO consider making this the implicit default entry, so consumers can simply declare `{run, content}`

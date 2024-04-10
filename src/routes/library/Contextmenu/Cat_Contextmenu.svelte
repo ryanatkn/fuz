@@ -10,7 +10,6 @@
 		act: (item: History_Item) => void;
 	}
 
-	// TODO @multiple remove the alias
 	const {name = 'Cat', icon: icon_text = '😺', position, act}: Props = $props();
 </script>
 
