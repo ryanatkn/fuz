@@ -11,16 +11,13 @@
 
 	const {library_links, sidebar = true}: Props = $props();
 
-	// TODO BLOCK refactor with `Library_Menu`, probably
-	// TODO BLOCK remove CSS below with reusable CSS or a Svelte component
+	// TODO remove CSS below with reusable CSS or a Svelte component
 
 	$inspect($page.url.hash);
 
 	const hash = $derived($page.url.hash.slice(1));
 
-	// TODO BLOCK margin issue with the h6 here and in `Library_Menu`, setting it to 0 here doesn't work when it's the only thing mounted
-
-	// TODO BLOCK the `:global(ul)` below appears to be a bug
+	// TODO BLOCK the `:global(ul)` below appears to be a bug in Svelte 5
 </script>
 
 <div class="library_page_links">

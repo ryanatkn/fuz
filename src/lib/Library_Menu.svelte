@@ -24,8 +24,7 @@
 		),
 	);
 
-	// TODO BLOCK refactor with `Library_Page_Links`, probably
-	// TODO BLOCK remove CSS below with reusable CSS or a Svelte component
+	// TODO remove CSS below with reusable CSS or a Svelte component
 </script>
 
 <ul class="library_menu unstyled">
