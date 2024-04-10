@@ -2,7 +2,6 @@
 	import type {Snippet} from 'svelte';
 
 	import Tome_Title from '$lib/Tome_Title.svelte';
-	import Library_Panel from '$lib/Library_Panel.svelte';
 	import type {Tome} from '$lib/tome.js';
 
 	interface Props {
@@ -16,7 +15,7 @@
 	// TODO component name?
 </script>
 
-<Library_Panel>
+<div class="tome_detail width_md">
 	<header>
 		{#if header}
 			{@render header()}
@@ -25,9 +24,12 @@
 		{/if}
 	</header>
 	{@render children()}
-</Library_Panel>
+</div>
 
 <style>
+	.tome_detail {
+		margin-bottom: var(--space_xl9);
+	}
 	header {
 		margin-bottom: var(--space_xl3);
 	}
