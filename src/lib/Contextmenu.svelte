@@ -10,7 +10,8 @@
 	const {entries, children}: Props = $props();
 
 	// Ideally this wouldn't have a wrapper element,
-	// but I don't see a decent way to map from click events to the Svelte context.
+	// but I don't see a decent way to map DOM click events
+	// from anywhere to the Svelte context without gross overhead.
 </script>
 
 <div use:contextmenu_action={entries} class="display_contents">{@render children()}</div>

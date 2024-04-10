@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
-	import {slide} from 'svelte/transition';
 
 	import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
 	import Contextmenu_Entry from '$lib/Contextmenu_Entry.svelte';
@@ -8,7 +7,8 @@
 	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
 	let greeted = $state(false);
-	let with_icon = $state(false);
+	let greeted_icon_snippet = $state(false);
+	let greeted_icon_string = $state(false);
 </script>
 
 <Tome_Subheading text="Basic usage" slug="basic-usage" />
@@ -18,9 +18,12 @@
 			<!-- eslint-disable-next-line no-alert -->
 			<Contextmenu_Entry run={() => (greeted = !greeted)}>Hello world</Contextmenu_Entry>
 			<!-- eslint-disable-next-line no-alert -->
-			<Contextmenu_Entry run={() => (with_icon = !with_icon)}>
+			<Contextmenu_Entry run={() => (greeted_icon_snippet = !greeted_icon_snippet)}>
 				{#snippet icon()}🌞{/snippet}
-				With an optional icon
+				Hello with an optional icon snippet
+			</Contextmenu_Entry>
+			<Contextmenu_Entry run={() => (greeted_icon_string = !greeted_icon_string)} icon="🌚">
+				Hello with an optional icon string
 			</Contextmenu_Entry>
 		{/snippet}
 		<div class="panel p_md">
@@ -32,26 +35,35 @@
       <Contextmenu_Entry run={() => (greeted = !greeted)}> <!-- ${greeted} />
         Hello world
       </Contextmenu_Entry>
-      <Contextmenu_Entry run={() => (with_icon = !with_icon)}> <!-- ${with_icon} />
+      <Contextmenu_Entry run={() => (greeted_icon_snippet = !greeted_icon_snippet)}> <!-- ${greeted_icon_snippet} />
         {#snippet icon()}🌞{/snippet}
-        With an optional icon
+        Hello with an optional icon snippet
+      </Contextmenu_Entry>
+      <Contextmenu_Entry run={() => (greeted_icon_string = !greeted_icon_string)} icon="🌚"> <!-- ${greeted_icon_string} />
+        Hello with an optional icon string
       </Contextmenu_Entry>
     {/snippet}
-    ...content with the above contextmenu behavior...
+    ...markup with the above contextmenu behavior...
   </Contextmenu>
-  ...content with only default contextmenu behavior...
+  ...markup with only default contextmenu behavior...
 </Contextmenu_Root>
-...context without contextmenu behavior`}
+...markup without contextmenu behavior...`}
 			/>
-			<!-- TODO this extra wrapper is only for the last-child margin behavior that glitches with the transition, but that may be removed -->
+			<div><code class:color_g_5={greeted}>greeted = {greeted}</code></div>
 			<div>
-				{#if greeted}
-					<div transition:slide><code>greeted = true</code></div>
-				{/if}
-				{#if with_icon}
-					<div transition:slide><code>with_icon = true</code></div>
-				{/if}
+				<code class:color_e_5={greeted_icon_snippet}
+					>greeted_icon_snippet = {greeted_icon_snippet}</code
+				>
 			</div>
+			<div>
+				<code class:color_d_5={greeted_icon_string}
+					>greeted_icon_string = {greeted_icon_string}</code
+				>
+			</div>
+			<aside class="mt_lg">
+				The <code>scoped</code> prop is only needed when mounting a contextmenu inside a specific element
+				instead of the entire page.
+			</aside>
 		</div>
 	</Contextmenu>
 </Contextmenu_Root>

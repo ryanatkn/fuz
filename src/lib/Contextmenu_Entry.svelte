@@ -7,7 +7,7 @@
 
 	interface Props {
 		run: Contextmenu_Run;
-		icon?: Snippet; // TODO @multiple think about this API, maybe make a snippet or string? maybe just a snippet after changing from actions to nested components
+		icon?: string | Snippet; // TODO @multiple think about this API, maybe make a snippet or string? maybe just a snippet after changing from actions to nested components
 		children: Snippet; // TODO @multiple think about this API, maybe make a snippet or string? maybe just a snippet after changing from actions to nested components
 	}
 
@@ -48,7 +48,11 @@
 >
 	<div class="content">
 		<div class="icon">
-			{#if icon}{@render icon()}{/if}
+			{#if typeof icon === 'string'}
+				{icon}
+			{:else if icon}
+				{@render icon()}
+			{/if}
 		</div>
 		<div class="title">{@render children()}</div>
 		{#if pending}<Pending_Animation />{:else if error_message}⚠️{/if}

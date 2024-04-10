@@ -276,7 +276,7 @@
 
 <!--
 	Some of these modifiers may be unnecessary, but some browsers need some of them.
-	We use `nonpassive` only to swallow an event.
+	The `nonpassive` option is needed to swallow events.
 -->
 <!-- Capture keydown so it can handle the event before any dialogs. -->
 <svelte:window
@@ -289,7 +289,8 @@
 	on:keydown|capture|nonpassive={contextmenu.opened ? keydown : undefined}
 />
 
-{#if scoped}<div
+{#if scoped}
+	<div
 		class="contextmenu_root"
 		role="region"
 		on:contextmenu|capture|nonpassive={on_window_contextmenu}
@@ -299,7 +300,10 @@
 		on:touchcancel|capture|nonpassive={touchend}
 	>
 		{@render children()}
-	</div>{:else}{@render children()}{/if}
+	</div>
+{:else}
+	{@render children()}
+{/if}
 
 {#if !custom_layout}
 	<div class="contextmenu_layout" bind:clientHeight bind:clientWidth />
