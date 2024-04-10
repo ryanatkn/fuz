@@ -9,8 +9,7 @@
 		href?: string | undefined;
 		align?: 'left' | 'right' | 'above' | 'below';
 		attrs?: any; // type? what about the optional tag though? (button etc - maybe API should be more explicit)
-		// TODO BLOCK default and `icon` snippets
-		icon?: Snippet;
+		icon?: string | Snippet;
 		children: Snippet;
 	}
 
@@ -41,15 +40,26 @@
 	class:right
 	class:above
 	class:below
-	>{#if align === 'left' || align === 'above'}{@render icon_snippet()}{/if}
-	<div class="content">{@render children()}</div>
-	{#if align === 'right' || align === 'below'}{@render icon_snippet()}{/if}</svelte:element
 >
+	{#if align === 'left' || align === 'above'}
+		{@render icon_snippet()}
+	{/if}
+	<div class="content">
+		{@render children()}
+	</div>
+	{#if align === 'right' || align === 'below'}
+		{@render icon_snippet()}
+	{/if}
+</svelte:element>
 
 <!-- TODO name? -->
 {#snippet icon_snippet()}
 	<div class="icon">
-		{#if typeof final_icon === 'string'}{final_icon}{:else}{@render final_icon()}{/if}
+		{#if typeof final_icon === 'string'}
+			{final_icon}
+		{:else}
+			{@render final_icon()}
+		{/if}
 	</div>
 {/snippet}
 
