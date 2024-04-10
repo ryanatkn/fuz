@@ -152,7 +152,8 @@
 		inset: 0;
 		overflow: auto;
 		/* this simplifies the code a lot but doesn't prevent scrolling
-		the underlying content when the dialog doesn't overflow, even when `overflow: scroll` */
+		the underlying content when the dialog doesn't overflow, even when `overflow: scroll`
+		TODO check if this behaves as desired after switching to use the `dialog` element */
 		overscroll-behavior: contain;
 	}
 	.dialog_bg {
