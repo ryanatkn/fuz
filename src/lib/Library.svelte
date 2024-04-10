@@ -48,7 +48,7 @@
 	// TODO BLOCK this puts the tertiary nav at the bottom, need to add the dialog button
 </script>
 
-<svelte:window bind:innerWidth on:hashchange={() => (show_secondary_nav_dialog = false)} />
+<svelte:window bind:innerWidth onhashchange={() => (show_secondary_nav_dialog = false)} />
 
 <div class="library">
 	<Library_Primary_Nav>
