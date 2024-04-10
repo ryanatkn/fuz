@@ -179,7 +179,7 @@ export class Contextmenu_Store {
 	}
 
 	activate_selected(): void | boolean | Promise<Activate_Result> {
-		const selected = this.selections[this.selections.length - 1];
+		const selected = this.selections.at(-1)!;
 		return selected ? this.activate(selected) : this.select_first();
 	}
 
@@ -191,7 +191,7 @@ export class Contextmenu_Store {
 	 * Activates the selected entry, or if none, selects the first.
 	 */
 	select(item: Item_State): void {
-		if (this.selections[this.selections.length - 1] === item) return;
+		if (this.selections.at(-1)! === item) return;
 		for (const s of this.selections) s.selected = false;
 		this.selections.length = 0;
 		let i: Item_State | Root_Menu_State = item;
@@ -208,7 +208,7 @@ export class Contextmenu_Store {
 	}
 
 	expand_selected(): void {
-		const parent = this.selections[this.selections.length - 1];
+		const parent = this.selections.at(-1)!;
 		if (!parent?.is_menu) return;
 		const selected = parent.items[0];
 		selected.selected = true;
@@ -217,25 +217,25 @@ export class Contextmenu_Store {
 
 	select_next(): void {
 		if (!this.selections.length) return this.select_first();
-		const item = this.selections[this.selections.length - 1];
+		const item = this.selections.at(-1)!;
 		const index = item.menu.items.indexOf(item);
 		this.select(item.menu.items[index === item.menu.items.length - 1 ? 0 : index + 1]);
 	}
 
 	select_previous(): void {
 		if (!this.selections.length) return this.select_last();
-		const item = this.selections[this.selections.length - 1];
+		const item = this.selections.at(-1)!;
 		const index = item.menu.items.indexOf(item);
 		this.select(item.menu.items[index === 0 ? item.menu.items.length - 1 : index - 1]);
 	}
 
 	select_first(): void {
-		this.select((this.selections[this.selections.length - 1]?.menu || this.root_menu).items[0]);
+		this.select((this.selections.at(-1)?.menu || this.root_menu).items[0]);
 	}
 
 	select_last(): void {
-		const {items} = this.selections[this.selections.length - 1]?.menu || this.root_menu;
-		return this.select(items[items.length - 1]);
+		const {items} = this.selections.at(-1)?.menu || this.root_menu;
+		return this.select(items.at(-1)!);
 	}
 
 	/**

@@ -16,7 +16,9 @@
 	</p>
 	<p>
 		On touch devices, we detect tap-and-hold (aka longpress) instead of simply overriding the web's
-		<Mdn_Link href="Web/API/Element/contextmenu_event">contextmenu event</Mdn_Link>
+		<Mdn_Link href="Web/API/Element/contextmenu_event"
+			>contextmenu <span class="font_sans">event</span></Mdn_Link
+		>
 		because iOS does not support this web standard as of July 2023 as described in
 		<a href="https://bugs.webkit.org/show_bug.cgi?id=213953">this WebKit bug report</a>. The Fuz
 		implementation therefore has hacks that may cause corner case bugs on various devices and

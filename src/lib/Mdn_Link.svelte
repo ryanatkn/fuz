@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {strip_start} from '@ryanatkn/belt/string.js';
+	import {strip_end, strip_start} from '@ryanatkn/belt/string.js';
 	import type {SvelteHTMLElements} from 'svelte/elements';
 	import type {Snippet} from 'svelte';
 
@@ -13,7 +13,7 @@
 		 */
 		href: string;
 		attrs?: SvelteHTMLElements['a'];
-		children: Snippet;
+		children?: Snippet;
 	}
 
 	const {href, attrs, children}: Props = $props();
@@ -23,11 +23,16 @@
 			? href
 			: `https://developer.mozilla.org/en-US/docs/${strip_start(href, '/')}`,
 	);
+
+	const final_children = $derived(children ?? strip_end(href, '/').split('/').at(-1)!);
 </script>
 
-<a {...attrs} href={final_href} class="chip">
-	<span class="logo_wrapper"><Mdn_Logo /></span>
-	{@render children()}
+<a {...attrs} href={final_href} class="chip font_mono">
+	<span class="logo_wrapper"><Mdn_Logo /></span>{#if typeof final_children === 'string'}
+		{final_children}
+	{:else}
+		{@render final_children()}
+	{/if}
 </a>
 
 <style>

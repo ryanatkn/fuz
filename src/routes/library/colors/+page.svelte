@@ -70,9 +70,9 @@
 		<p>
 			For performance reasons, Fuz does not currently have an extensive set of variants, like
 			specialized states for elements or color values like "blue". Each of the 7 hues has 9 color
-			values, handling most cases, and the base colors can be customized with <Mdn_Link
-				href="Web/CSS/color_value/color-mix">the <code>color-mix</code> CSS function</Mdn_Link
-			>.
+			values, handling most cases, and the base colors can be customized with the <Mdn_Link
+				href="Web/CSS/color_value/color-mix"
+			/> CSS function.
 		</p>
 		<p>
 			Variants may be expanded when/if Fuz includes a Vite plugin or other build tooling for
@@ -83,8 +83,8 @@
 	<section>
 		<Tome_Subheading text="Hue variables" slug="hue-variables" />
 		<p>
-			Hue variables contain a single <Mdn_Link href="Web/CSS/hue">hue</Mdn_Link> number. Each color variable
-			combines a hue variable with hardcoded saturation and lightness values for light and dark modes.
+			Hue variables contain a single <Mdn_Link href="Web/CSS/hue" /> number. Each color variable combines
+			a hue variable with hardcoded saturation and lightness values for light and dark modes.
 		</p>
 		<p>
 			Hue variables therefore provide a single source of truth that's easy to theme, but to achieve
