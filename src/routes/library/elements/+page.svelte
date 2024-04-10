@@ -10,8 +10,6 @@
 	const LIBRARY_ITEM_NAME = 'elements';
 
 	const tome = get_tome(LIBRARY_ITEM_NAME);
-
-	// TODO BLOCK add `Details` page and document below
 </script>
 
 <Tome_Detail {tome}>
@@ -43,13 +41,14 @@
 			<summary
 				>Click me, a <code>summary</code>, to see the rest of the <code>details</code></summary
 			>
-			<p>so many details</p>
+			<p>See also the <Tome_Link name="Details" /> component.</p>
 			<Code
 				content={`<details>
 	<summary>
 		Click me, a <code>summary</code>,
 		to see the rest of the <code>details</code>
 	</summary>
+	<p>See also the <Tome_Link name="Details" /> component.</p>
 	<Code code={'...'} />
 </details>`}
 			/>
