@@ -20,9 +20,7 @@
 
 	const {tomes, pkg, children}: Props = $props();
 
-	// TODO BLOCK menus get cut off at lower widths
-
-	// TODO BLOCK this API is messy, inconsistent usage of props/context
+	// TODO this API is messy, inconsistent usage of props/context
 	const tomes_by_name = new Map(tomes.map((t) => [t.name, t]));
 	set_tomes(tomes_by_name);
 
@@ -31,8 +29,6 @@
 	const SECONDARY_NAV_BREAKPOINT = 800;
 
 	let innerWidth: number | undefined = $state();
-
-	// TODO BLOCK put related styles/components in the secondary sidebar along with "on this page"
 
 	let show_secondary_nav_dialog = $state(false);
 	const toggle_secondary_nav_dialog = (show?: boolean): void => {
@@ -44,8 +40,6 @@
 	});
 
 	set_library_links();
-
-	// TODO BLOCK this puts the tertiary nav at the bottom, need to add the dialog button
 </script>
 
 <svelte:window bind:innerWidth onhashchange={() => (show_secondary_nav_dialog = false)} />

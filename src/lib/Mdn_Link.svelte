@@ -25,9 +25,10 @@
 	);
 </script>
 
-<a {...attrs} href={final_href} class="chip"
-	><span class="logo_wrapper"><Mdn_Logo /></span>{@render children()}</a
->
+<a {...attrs} href={final_href} class="chip">
+	<span class="logo_wrapper"><Mdn_Logo /></span>
+	{@render children()}
+</a>
 
 <style>
 	a {
