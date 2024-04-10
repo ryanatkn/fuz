@@ -214,11 +214,6 @@
       "default": "./dist/Library_Page_Links.svelte",
       "types": "./dist/Library_Page_Links.svelte.d.ts"
     },
-    "./Library_Panel.svelte": {
-      "svelte": "./dist/Library_Panel.svelte",
-      "default": "./dist/Library_Panel.svelte",
-      "types": "./dist/Library_Panel.svelte.d.ts"
-    },
     "./Library_Primary_Nav.svelte": {
       "svelte": "./dist/Library_Primary_Nav.svelte",
       "default": "./dist/Library_Primary_Nav.svelte",

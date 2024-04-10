@@ -21,21 +21,21 @@
 	<section>
 		<Tome_Subheading text="blockquote" slug="blockquote-element">
 			<span style="font-size: var(--size_xl3)">👆</span>
-			<Mdn_Link href="Web/HTML/Element/blockquote">blockquote</Mdn_Link>
+			<Mdn_Link href="Web/HTML/Element/blockquote" />
 		</Tome_Subheading>
 		<Tome_Subheading text="hr and code" slug="hr-and-code-elements">
 			<span style="font-size: var(--size_xl3)">👇</span>
-			<Mdn_Link href="Web/HTML/Element/hr">hr</Mdn_Link>
+			<Mdn_Link href="Web/HTML/Element/hr" />
 			<span style="font-size: var(--size_xl3)">👈</span>
-			<Mdn_Link href="Web/HTML/Element/code">code</Mdn_Link>
+			<Mdn_Link href="Web/HTML/Element/code" />
 		</Tome_Subheading>
 		<hr />
 	</section>
 	<section>
 		<Tome_Subheading text="details and summary" slug="details-and-summary-elements">
-			<Mdn_Link href="Web/HTML/Element/details">details</Mdn_Link>
+			<Mdn_Link href="Web/HTML/Element/details" />
 			and
-			<Mdn_Link href="Web/HTML/Element/summary">summary</Mdn_Link>
+			<Mdn_Link href="Web/HTML/Element/summary" />
 		</Tome_Subheading>
 		<details>
 			<summary
@@ -56,7 +56,7 @@
 	</section>
 	<section>
 		<Tome_Subheading text="table" slug="table-element">
-			<Mdn_Link href="Web/HTML/Element/table">table</Mdn_Link>
+			<Mdn_Link href="Web/HTML/Element/table" />
 		</Tome_Subheading>
 		<blockquote>⚠️ This is unfinished and will change.</blockquote>
 		<Code
@@ -107,7 +107,7 @@
 	</section>
 	<section>
 		<Tome_Subheading text="aside" slug="aside-element">
-			<Mdn_Link href="Web/HTML/Element/aside">aside</Mdn_Link>
+			<Mdn_Link href="Web/HTML/Element/aside" />
 		</Tome_Subheading>
 		<aside>
 			the <code>aside</code> looks like this
@@ -129,21 +129,21 @@
 	</section>
 	<section>
 		<Tome_Subheading text="header" slug="header-element">
-			<Mdn_Link href="Web/HTML/Element/footer">header</Mdn_Link>
+			<Mdn_Link href="Web/HTML/Element/footer" />
 		</Tome_Subheading>
 		<Code content={`<header>header</header>`} />
 		<header>header</header>
 	</section>
 	<section>
 		<Tome_Subheading text="footer" slug="footer-element">
-			<Mdn_Link href="Web/HTML/Element/footer">footer</Mdn_Link>
+			<Mdn_Link href="Web/HTML/Element/footer" />
 		</Tome_Subheading>
 		<Code content={`<footer>footer</footer>`} />
 		<footer>footer</footer>
 	</section>
 	<section>
 		<Tome_Subheading text="section" slug="section-element">
-			<Mdn_Link href="Web/HTML/Element/section">section</Mdn_Link>
+			<Mdn_Link href="Web/HTML/Element/section" />
 		</Tome_Subheading>
 		<Code content={`<section>section</section>`} />
 		<section>section</section>

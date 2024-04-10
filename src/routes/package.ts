@@ -179,11 +179,6 @@ export const package_json = {
 			default: './dist/Library_Page_Links.svelte',
 			types: './dist/Library_Page_Links.svelte.d.ts',
 		},
-		'./Library_Panel.svelte': {
-			svelte: './dist/Library_Panel.svelte',
-			default: './dist/Library_Panel.svelte',
-			types: './dist/Library_Panel.svelte.d.ts',
-		},
 		'./Library_Primary_Nav.svelte': {
 			svelte: './dist/Library_Primary_Nav.svelte',
 			default: './dist/Library_Primary_Nav.svelte',
@@ -375,7 +370,6 @@ export const src_json = {
 		'./Library_Footer.svelte': {path: 'Library_Footer.svelte', declarations: []},
 		'./Library_Menu.svelte': {path: 'Library_Menu.svelte', declarations: []},
 		'./Library_Page_Links.svelte': {path: 'Library_Page_Links.svelte', declarations: []},
-		'./Library_Panel.svelte': {path: 'Library_Panel.svelte', declarations: []},
 		'./Library_Primary_Nav.svelte': {path: 'Library_Primary_Nav.svelte', declarations: []},
 		'./Library_Secondary_Nav.svelte': {path: 'Library_Secondary_Nav.svelte', declarations: []},
 		'./Library_Tertiary_Nav.svelte': {path: 'Library_Tertiary_Nav.svelte', declarations: []},

@@ -18,8 +18,8 @@
 	<section>
 		<p>
 			The <code>Details</code> component is an alternative to the <Mdn_Link
-				href="Web/HTML/Element/details">details</Mdn_Link
-			> element. By default it's lazy, and you can pass <code>eager</code> to render the children immediately
+				href="Web/HTML/Element/details"
+			/> element. By default it's lazy, and you can pass <code>eager</code> to render the children immediately
 			like the base element.
 		</p>
 		<p>Benefits of lazy children:</p>
@@ -65,7 +65,7 @@
 	</section>
 	<section>
 		<Tome_Subheading text="With the base details element" slug="base-details-element">
-			With the base <Mdn_Link href="Web/HTML/Element/details">details</Mdn_Link> element
+			With the base <Mdn_Link href="Web/HTML/Element/details" /> element
 		</Tome_Subheading>
 		<Code
 			content={`<details>

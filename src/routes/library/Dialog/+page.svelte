@@ -63,8 +63,8 @@
 		</p>
 		<aside>
 			⚠️ This will change to use and align APIs with the builtin <Mdn_Link
-				href="Web/HTML/Element/dialog">dialog</Mdn_Link
-			>. API
+				href="Web/HTML/Element/dialog"
+			/>. API
 		</aside>
 	</section>
 	<section>

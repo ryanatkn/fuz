@@ -35,15 +35,13 @@
 
 	<section>
 		<Tome_Subheading text="form with a fieldset" slug="form-with-a-fieldset">
-			<Mdn_Link href="Web/HTML/Element/form">form</Mdn_Link> with a <Mdn_Link
-				href="Web/HTML/Element/fieldset">fieldset</Mdn_Link
-			>
+			<Mdn_Link href="Web/HTML/Element/form" /> with a <Mdn_Link href="Web/HTML/Element/fieldset" />
 		</Tome_Subheading>
 		<Code
 			content={`<form>
 	<fieldset>
 		<legend>
-			a <Mdn_Link href="Web/HTML/Element/legend">legend</Mdn_Link>
+			a <Mdn_Link href="Web/HTML/Element/legend" />
 		</legend>
 		<label>
 			<div class="title">
@@ -62,7 +60,7 @@
 		<div class="width_sm">
 			<form>
 				<fieldset>
-					<legend>This is a <Mdn_Link href="Web/HTML/Element/legend">legend</Mdn_Link></legend>
+					<legend>This is a <Mdn_Link href="Web/HTML/Element/legend" /></legend>
 					<label>
 						<div class="title">username</div>
 						<input bind:value={username} disabled={created_account} placeholder=">" />

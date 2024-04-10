@@ -40,9 +40,9 @@
 	<section class="theme">
 		<p>
 			<code>Themed</code> adds global support for both the browser's
-			<Mdn_Link href="Web/CSS/color-scheme">color-scheme</Mdn_Link>
+			<Mdn_Link href="Web/CSS/color-scheme" />
 			and custom themes based on <Tome_Link name="variables" />, which use
-			<Mdn_Link href="Web/CSS/Using_CSS_custom_properties">CSS custom properties</Mdn_Link>.
+			<Mdn_Link href="Web/CSS/--*">CSS custom properties</Mdn_Link>.
 			<code>Themed</code> is a singleton component that's mounted at the top-level of the page:
 		</p>
 		<Code content={`import Themed from '@ryanatkn/fuz/Themed.svelte';`} lang="ts" />
@@ -94,10 +94,9 @@
 		<Tome_Subheading text="Color scheme" slug="color-scheme" />
 		<p>
 			<code>Themed</code> defaults to automatic
-			<Mdn_Link href="Web/CSS/color-scheme">color-scheme</Mdn_Link>
+			<Mdn_Link href="Web/CSS/color-scheme" />
 			detection with
-			<Mdn_Link href="Web/CSS/@media/prefers-color-scheme">prefers-color-scheme</Mdn_Link>, and
-			users can also set it directly:
+			<Mdn_Link href="Web/CSS/@media/prefers-color-scheme" />, and users can also set it directly:
 		</p>
 		<Color_Scheme_Input />
 		<Code

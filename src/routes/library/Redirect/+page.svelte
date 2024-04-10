@@ -17,8 +17,9 @@
 				>a meta tag</Mdn_Link
 			>
 			with
-			<Mdn_Link href="Web/HTML/Element/meta#http-equiv">the <code>refresh</code> header</Mdn_Link>.
-			Includes a rendered link and JS navigation fallback.
+			<Mdn_Link href="Web/HTML/Element/meta#http-equiv"
+				>the <span class="font_mono">refresh</span> header</Mdn_Link
+			>. Includes a rendered link and JS navigation fallback.
 		</p>
 		<!-- TODO make this a generic data-driven helper -->
 		<Code content={`import Redirect from '@ryanatkn/fuz/Redirect.svelte';`} lang="ts" />
