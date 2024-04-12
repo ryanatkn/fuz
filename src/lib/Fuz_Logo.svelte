@@ -11,7 +11,7 @@
 
 	// TODO BLOCK size
 	const {
-		size = 'var(--space_xl7, 64px)',
+		size = '32px',
 		fill = 'var(--color, #000)',
 		label = 'the Fuz logo, a little brown spider',
 		path_attrs,
@@ -32,8 +32,8 @@ style:height={size}
 	xmlns="http://www.w3.org/2000/svg"
 	aria-label={label}
 	viewBox="0 0 134.96025 126.4936"
-	width="134.96025mm"
-	height="126.4936mm"
+	width={size}
+	height={size}
 	fill="none"
 	{...attrs}
 >

@@ -17,4 +17,4 @@
 	// but probably wait until Svelte 5 has the successor to actions
 </script>
 
-<div use:contextmenu_action={entries} class="display_contents">{@render children()}</div>
+<span use:contextmenu_action={entries} class="display_contents">{@render children()}</span>

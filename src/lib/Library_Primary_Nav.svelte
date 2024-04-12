@@ -4,6 +4,7 @@
 	import type {Snippet} from 'svelte';
 
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
+	import Spider from '$routes/Spider.svelte';
 
 	interface Props {
 		children?: Snippet;
@@ -30,7 +31,7 @@
 					{#if root}
 						<span>fuz</span>
 					{:else}
-						<span class="icon">🧶 fuz</span>
+						<div class="icon row"><Spider /> <span class="ml_sm">fuz</span></div>
 					{/if}
 				</Breadcrumb>
 			</nav>

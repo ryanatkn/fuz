@@ -5,12 +5,14 @@
 
 	// TODO think about this API
 	interface Props {
+		size?: string;
 		image?: boolean;
 		src?: string;
 		alt?: string;
 	}
 
 	const {
+		size,
 		image = false,
 		src = `${base}/favicon.png`,
 		alt = 'the Fuz logo, a little brown spider',
@@ -24,7 +26,7 @@
 </script>
 
 {#if image}
-	<img {src} {alt} />
+	<img {src} {alt} width={size} height={size} />
 {:else}
-	<div style:--color="var(--color_f_5)"><Fuz_Logo /></div>
+	<span style:--color="var(--color_f_5)" class="display_contents"><Fuz_Logo {size} /></span>
 {/if}

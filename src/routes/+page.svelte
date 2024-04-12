@@ -13,7 +13,7 @@
 	<div class="box width_md">
 		<section class="box">
 			<h1 class="mt_xl4 mb_lg">fuz</h1>
-			<div class="box mb_xl"><div style:width="120px"><Spider /></div></div>
+			<div class="box mb_xl"><Spider size="120px" /></div>
 			<blockquote>friendly user zystem</blockquote>
 			<div class="width_sm panel p_md">
 				<p>
