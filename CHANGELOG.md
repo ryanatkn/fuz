@@ -1,5 +1,46 @@
 # @ryanatkn/fuz
 
+## 0.93.0
+
+### Minor Changes
+
+- rename `font_sans` and `font_mono` from `font_family_sans` and `font_family_mono` ([#15](https://github.com/ryanatkn/fuz/pull/15))
+- remove `nav` styles ([#15](https://github.com/ryanatkn/fuz/pull/15))
+- remove `Page_Header` and `Page_Footer` ([#15](https://github.com/ryanatkn/fuz/pull/15))
+- remove the `border_radius` variable ([#15](https://github.com/ryanatkn/fuz/pull/15))
+- remove `h1-6` `margin-top` and compensate by increasing `margin-bottom` ([#15](https://github.com/ryanatkn/fuz/pull/15))
+- upgrade to svelte@5 including many breaking changes to components ([#15](https://github.com/ryanatkn/fuz/pull/15))
+
+  - convert slots to snippets
+  - change events to callbacks
+  - remove `Devmode_Controls`
+
+- change `line_height` vaiables ([#15](https://github.com/ryanatkn/fuz/pull/15))
+
+  - rename `line_height_xs` from `line_height_1`
+  - remove `line_height_2`
+  - rename `line_height_sm` from `line_height_3`
+  - rename `line_height_md` from `line_height_4`
+  - rename `line_height_lg` from `line_height_5`
+  - remove `line_height_6`
+  - rename `line_height_xl` from `line_height_7`
+
+- change shadow variables ([#15](https://github.com/ryanatkn/fuz/pull/15))
+
+  - rename `shadow` to `shadow_md`
+  - rename `shadow_inset` to `shadow_inset_md`
+  - rename `shadow_inset_active` to `shadow_inset_inverse_md`
+
+### Patch Changes
+
+- add `Details` ([#15](https://github.com/ryanatkn/fuz/pull/15))
+- remove `.prose` ([#15](https://github.com/ryanatkn/fuz/pull/15))
+
+  - use `.unstyled` to get the old behavior for `ul|ol|menu`
+  - `a` is now the default `diplay: inline` instead of `flex`
+
+- add the `.clickable` semantic class ([#15](https://github.com/ryanatkn/fuz/pull/15))
+
 ## 0.92.0
 
 ### Minor Changes
