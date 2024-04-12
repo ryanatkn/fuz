@@ -59,7 +59,17 @@ The Svelte components and helpers:
   [shadcn-svelte](https://github.com/huntabyte/shadcn-svelte),
   I'll look into smoothing this pattern out in the future
 
-## usage
+## Usage
+
+> ⚠️ Expect a lot of breaking changes. If you want to help stabilize the API,
+> please join [the Discord](https://discord.gg/YU5tyeK72X), your input is appreciated.
+>
+> If you feel comfortable looking at the source code,
+> Fuz is ready to use in your own projects,
+> with the major caveat that there will be a lot of breaking changes ahead.
+> The code is significantly incomplete but I think it's stable enough to use
+> if you're willing to keep up with the relatively fast-moving changelog.
+> For more see the dev channels in [Discord](https://discord.gg/YU5tyeK72X).
 
 ```bash
 npm i -D @ryanatkn/fuz
@@ -84,7 +94,11 @@ import {type Theme, get_theme} from '@ryanatkn/fuz/theme.js';
 
 See [the library](https://www.fuz.dev/library) for more.
 
-## develop
+## Contributing
+
+See [contributing.md](contributing.md).
+
+## Develop
 
 ```bash
 npm i # node >=20.10
@@ -97,6 +111,10 @@ npm run build
 npm start
 ```
 
-## license 🐦
+Fuz uses [Gro](https://github.com/ryanatkn/gro),
+my CLI and toolkit that I use to run tasks in all of my projects.
+If you're not allergic it's handy to install globally.
+
+## License 🐦
 
 [MIT](LICENSE)
