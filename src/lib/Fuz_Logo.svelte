@@ -9,7 +9,6 @@
 		attrs?: SvelteHTMLElements['svg'];
 	}
 
-	// TODO BLOCK size
 	const {
 		size = '100%',
 		fill = 'var(--color, #000)',
