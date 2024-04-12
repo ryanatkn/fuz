@@ -4,6 +4,7 @@
 	import {format_url} from '@ryanatkn/belt/url.js';
 
 	import Github_Logo from '$lib/Github_Logo.svelte';
+	import Fuz_Logo from '$lib/Fuz_Logo.svelte';
 	import type {Snippet} from 'svelte';
 
 	interface Props {
@@ -27,6 +28,7 @@
 		>
 		{#if logo_footer}{@render logo_footer()}{/if}
 	</div>
+	<div style:--color="var(--color_e_4)"><Fuz_Logo /></div>
 	{#if root_url}
 		<div class="root_url">
 			<a href={root_url}>{format_url(root_url)}</a>
