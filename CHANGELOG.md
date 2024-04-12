@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.93.1
+
+### Patch Changes
+
+- fix card styles to workaround a pending Svelte 5 bug ([3f4fbd7](https://github.com/ryanatkn/fuz/commit/3f4fbd7))
+
 ## 0.93.0
 
 ### Minor Changes
