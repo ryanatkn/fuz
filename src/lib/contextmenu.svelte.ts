@@ -14,8 +14,6 @@ export type Contextmenu_Params =
 	| {snippet: 'link'; props: {href: string; icon?: string}}
 	| {snippet: 'text'; props: {content: string; icon: string; run: Contextmenu_Run}};
 
-export type Contextmenu_Action_Params = Snippet;
-
 type Activate_Result = Result<any, {message?: string}> | any;
 
 export type Item_State = Submenu_State | Entry_State;
@@ -276,13 +274,13 @@ let cache_key_counter = 0;
 
 export const contextmenu_action = (
 	el: HTMLElement | SVGElement,
-	params: Contextmenu_Action_Params,
-): ActionReturn<Contextmenu_Action_Params> => {
+	params: Contextmenu_Params,
+): ActionReturn<Contextmenu_Params> => {
 	const key = cache_key_counter++ + '';
 	el.dataset[CONTEXTMENU_DATASET_KEY] = key;
 	contextmenu_cache.set(key, params);
 	return {
-		update: (p: Contextmenu_Action_Params) => {
+		update: (p: Contextmenu_Params) => {
 			contextmenu_cache.set(key, p);
 		},
 		destroy: () => {
