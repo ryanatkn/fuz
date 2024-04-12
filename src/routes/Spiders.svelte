@@ -1,8 +1,12 @@
 <script lang="ts">
 	import Fuz_Logo from '$lib/Fuz_Logo.svelte';
+	import {random_int, shuffle} from '@ryanatkn/belt/random.js';
+	import {create_random_alea} from '@ryanatkn/belt/random_alea.js';
 
 	interface Props {
 		spiders?: string[]; // for now, just colors
+		seed?: unknown;
+		random?: typeof Math.random;
 	}
 
 	const {
@@ -15,13 +19,18 @@
 			'var(--color_f_5)',
 			'var(--color_g_5)',
 		],
+		seed = Math.random(),
+		random = create_random_alea(seed),
 	}: Props = $props();
+
+	const shuffled = $derived(shuffle(spiders.slice(), (min, max) => random_int(min, max, random)));
+	$inspect(shuffled);
 </script>
 
 <!-- TODO animate each in randomly -->
 <!-- TODO show when intersected in viewport, maybe inline `svelte-intersect` in Fuz? -->
 <div class="row mt_xl9">
-	{#each spiders as color (color)}
+	{#each shuffled as color (color)}
 		<div style:--color={color} class="col_2">
 			<Fuz_Logo />
 		</div>
