@@ -1,16 +1,19 @@
 <script lang="ts">
+	import type {SvelteHTMLElements} from 'svelte/elements';
+
 	interface Props {
 		size?: string;
 		fill?: string;
 		label?: string;
-		// TODO BLOCK add path attrs too?
-		attrs?: any; // TODO BLOCK type
+		path_attrs?: SvelteHTMLElements['path'];
+		attrs?: SvelteHTMLElements['svg'];
 	}
 
 	const {
 		size = 'var(--space_xl7, 64px)',
 		fill = 'var(--color, #000)',
 		label = 'the Fuz logo, a little yellow spider',
+		path_attrs,
 		attrs,
 	}: Props = $props();
 
@@ -51,5 +54,6 @@ style:height={size}
 		3.50221 11.505019,19.4653 6.94749,25.653196 0.0965,13.87959 -2.3043,1.53456 -2.71415,
 		-12.44681 -8.973059,-24.822586 -15.58782,-21.33262 -5.64214,-0.79125 -9.85154,
 		3.96472 -13.965985,21.53102 -9.803665,24.924456 -2.207758,9.73266 -2.796593,-2.06524 z"
+		{...path_attrs}
 	/>
 </svg>
