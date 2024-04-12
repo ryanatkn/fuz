@@ -25,8 +25,9 @@
 	// hwb(27 11% 58%)
 </script>
 
-{#if image}
-	<img {src} {alt} width={size} height={size} />
-{:else}
-	<span style:--color="var(--color_f_5)" class="display_contents"><Fuz_Logo {size} /></span>
-{/if}
+{#if image}<img {src} {alt} width={size} height={size} />{:else}<span
+		style:--color="var(--color_f_5)"
+		class="inline_block"
+		style:width={size}
+		style:height={size}><Fuz_Logo /></span
+	>{/if}

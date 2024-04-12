@@ -31,7 +31,9 @@
 					{#if root}
 						<span>fuz</span>
 					{:else}
-						<div class="icon row"><Spider /> <span class="ml_sm">fuz</span></div>
+						<div class="icon row">
+							<Spider size="32px" /> <span class="ml_sm">fuz</span>
+						</div>
 					{/if}
 				</Breadcrumb>
 			</nav>

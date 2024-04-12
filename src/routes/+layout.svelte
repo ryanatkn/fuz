@@ -20,6 +20,10 @@
 	set_pkg(parse_package_meta(package_json.homepage, package_json, src_json));
 </script>
 
+<svelte:head>
+	<title>Fuz - friendly user zystem</title>
+</svelte:head>
+
 <Themed>
 	{@render children()}
 	<Spiders />

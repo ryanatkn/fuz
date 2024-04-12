@@ -16,7 +16,7 @@
 		<header class="box">
 			<h1 class="mt_xl4">{pkg.repo_name}</h1>
 		</header>
-		<Breadcrumb><Spider /></Breadcrumb>
+		<Breadcrumb><Spider size="32px" /></Breadcrumb>
 	</section>
 	<section class="box w_100 mb_lg">
 		<div class="panel p_md width_md">
@@ -26,7 +26,7 @@
 	<section class="box mb_xl7">
 		<Library_Footer {pkg}>
 			<div class="mb_xl5">
-				<Breadcrumb><Spider /></Breadcrumb>
+				<Breadcrumb><Spider size="32px" /></Breadcrumb>
 			</div>
 		</Library_Footer>
 	</section>

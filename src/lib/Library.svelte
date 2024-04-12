@@ -68,7 +68,7 @@
 			<section class="box">
 				<Library_Footer {pkg}>
 					<div class="mb_xl5">
-						<Breadcrumb><Spider /></Breadcrumb>
+						<Breadcrumb><Spider size="32px" /></Breadcrumb>
 					</div>
 				</Library_Footer>
 			</section>
@@ -80,7 +80,7 @@
 {#if show_secondary_nav_dialog && innerWidth && innerWidth <= TERTIARY_NAV_BREAKPOINT}
 	<Dialog onclose={() => (show_secondary_nav_dialog = false)}>
 		<div class="pane">
-			<div class="p_xl pb_0"><Breadcrumb><Spider /></Breadcrumb></div>
+			<div class="p_xl pb_0"><Breadcrumb><Spider size="32px" /></Breadcrumb></div>
 			<div class="px_lg pb_xl">
 				<Library_Secondary_Nav {tomes} sidebar={false} />
 				<Library_Tertiary_Nav {tomes} {tomes_by_name} sidebar={false} />

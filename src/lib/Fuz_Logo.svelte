@@ -11,7 +11,7 @@
 
 	// TODO BLOCK size
 	const {
-		size = '32px',
+		size = '100%',
 		fill = 'var(--color, #000)',
 		label = 'the Fuz logo, a little brown spider',
 		path_attrs,
