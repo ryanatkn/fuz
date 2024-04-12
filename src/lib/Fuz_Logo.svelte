@@ -13,7 +13,7 @@
 	const {
 		size = 'var(--space_xl7, 64px)',
 		fill = 'var(--color, #000)',
-		label = 'the Fuz logo, a little yellow spider',
+		label = 'the Fuz logo, a little brown spider',
 		path_attrs,
 		attrs,
 	}: Props = $props();

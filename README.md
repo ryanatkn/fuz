@@ -1,3 +1,5 @@
+[<img src="/static/favicon.png" align="right" width="192" height="192">](https://www.fuz.dev/)
+
 # `@ryanatkn/fuz`
 
 > friendly user zystem 🧶 [fuz.dev](https://www.fuz.dev/)
