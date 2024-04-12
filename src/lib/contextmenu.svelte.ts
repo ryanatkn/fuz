@@ -5,8 +5,6 @@ import type {ActionReturn} from 'svelte/action';
 
 import {Dimensions} from '$lib/dimensions.svelte.js';
 
-// TODO rewrite with runes!!!!
-
 // TODO @multiple added this hack with Svelte 4, didn't see an open issue about it
 /* eslint-disable @typescript-eslint/no-redundant-type-constituents */
 
