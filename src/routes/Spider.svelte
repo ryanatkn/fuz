@@ -1,11 +1,30 @@
 <script lang="ts">
+	import {base} from '$app/paths';
+
 	import Fuz_Logo from '$lib/Fuz_Logo.svelte';
 
+	// TODO think about this API
+	interface Props {
+		image?: boolean;
+		src?: string;
+		alt?: string;
+	}
+
+	const {
+		image = false,
+		src = `${base}/favicon.png`,
+		alt = 'the Fuz logo, a little brown spider',
+	}: Props = $props();
+
 	// color:
-	// #94643d
-	// hsl(27, 42%, 41%);
-	// rgb(148, 100, 61)
-	// hwb(27 24% 42%)
+	// #6b401c
+	// hsl(27, 60%, 26%)
+	// rgb(107, 64, 28)
+	// hwb(27 11% 58%)
 </script>
 
-<div style:--color="var(--color_d_4)"><Fuz_Logo /></div>
+{#if image}
+	<img {src} {alt} />
+{:else}
+	<div style:--color="var(--color_f_5)"><Fuz_Logo /></div>
+{/if}
