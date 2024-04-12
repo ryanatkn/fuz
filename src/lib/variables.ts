@@ -445,22 +445,19 @@ export const text_active: Style_Variable = {
 };
 
 /* fonts */
-export const line_height: Style_Variable = {name: 'line_height', light: 'var(--line_height_5)'};
-export const line_height_1: Style_Variable = {name: 'line_height_1', light: '1'};
-export const line_height_2: Style_Variable = {name: 'line_height_2', light: '1.1'};
-export const line_height_3: Style_Variable = {name: 'line_height_3', light: '1.2'};
-export const line_height_4: Style_Variable = {name: 'line_height_4', light: '1.35'}; // TODO xs/sm/md/lg;
-export const line_height_5: Style_Variable = {name: 'line_height_5', light: '1.5'};
-export const line_height_6: Style_Variable = {name: 'line_height_6', light: '1.75'};
-export const line_height_7: Style_Variable = {name: 'line_height_7', light: '2'};
-export const font_family_sans: Style_Variable = {
-	name: 'font_family_sans',
+export const line_height_xs: Style_Variable = {name: 'line_height_xs', light: '1'};
+export const line_height_sm: Style_Variable = {name: 'line_height_sm', light: '1.2'};
+export const line_height_md: Style_Variable = {name: 'line_height_md', light: '1.4'};
+export const line_height_lg: Style_Variable = {name: 'line_height_lg', light: '1.6'};
+export const line_height_xl: Style_Variable = {name: 'line_height_xl', light: '2'};
+export const font_sans: Style_Variable = {
+	name: 'font_sans',
 	light: "system-ui, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'",
 	summary:
 		'@source https://kilianvalkhof.com/2022/css-html/your-css-reset-needs-text-size-adjust-probably/',
 };
-export const font_family_mono: Style_Variable = {
-	name: 'font_family_mono',
+export const font_mono: Style_Variable = {
+	name: 'font_mono',
 	light: "ui-monospace, 'Fira Mono', monospace",
 };
 
@@ -580,8 +577,6 @@ export const outline_style: Style_Variable = {name: 'outline_style', light: 'sol
 export const outline_color: Style_Variable = {name: 'outline_color', light: 'var(--color_a_5)'};
 
 /* border radii */
-// TODO hardcoded values - maybe have `radius_xl` or `radius_lg` be 50%?
-export const border_radius: Style_Variable = {name: 'border_radius', light: 'var(--radius_md)'};
 export const radius_xl: Style_Variable = {name: 'radius_xl', light: '5.5rem'};
 export const radius_lg: Style_Variable = {name: 'radius_lg', light: '3.4rem'};
 export const radius_md: Style_Variable = {name: 'radius_md', light: '2.1rem'};
@@ -612,31 +607,32 @@ export const input_height_inner: Style_Variable = {
 };
 
 /* shadows */
+// TODO these need work - improve the visuals, and probably add sm, maybe xl/xs with inset variants
 // TODO these shouldn't use tint, use lighten/darken instead,
 // but ideally we'd have a blend mode make the colors right,
 // which would require a pseduo-element,
 // but that's heavier and requires the element to be positioned (I think?)
-export const shadow: Style_Variable = {
-	name: 'shadow',
+export const shadow_md: Style_Variable = {
+	name: 'shadow_md',
 	light:
-		'2px 4px 9px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.28), 2px 14px 48px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.28)',
-	dark: '2px 4px 9px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5)), 2px 14px 48px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5))',
+		'2px 4px 9px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.28), 2px 12px 36px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.28)',
+	dark: '2px 4px 9px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5)), 2px 12px 36px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5))',
 };
 export const shadow_lg: Style_Variable = {
 	name: 'shadow_lg',
 	light:
 		'2px 6px 14px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.8), 2px 6px 48px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.8)',
-	dark: '2px 6px 18px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5)), 2px 6px 48px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5))',
+	dark: '2px 6px 14px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5)), 2px 6px 48px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5))',
 };
-export const shadow_inset: Style_Variable = {
-	name: 'shadow_inset',
+export const shadow_inset_md: Style_Variable = {
+	name: 'shadow_inset_md',
 	light:
-		'2px 2px 4px inset var(--lighten_2), -2px -2px 4px inset var(--darken_2), 4px 4px 6px inset var(--lighten_1), -4px -4px 6px inset var(--darken_1)',
+		'0px 2px 4px 1px inset var(--lighten_2), 0px -2px 4px 1px inset var(--darken_2), 0 3px 6px 2px inset var(--lighten_2), 0 -3px 6px 2px inset var(--darken_1)',
 };
-export const shadow_inset_active: Style_Variable = {
-	name: 'shadow_inset_active', // TODO better name? this is the "pressed" version for buttons
+export const shadow_inset_inverse_md: Style_Variable = {
+	name: 'shadow_inset_inverse_md', // TODO better name? this is the "pressed" version for buttons
 	light:
-		'2px 2px 4px inset var(--darken_2), -2px -2px 4px inset var(--lighten_2), 4px 4px 6px inset var(--darken_1), -4px -4px 6px inset var(--lighten_1)',
+		'0 2px 4px 1px inset var(--darken_2), 0 -2px 4px 1px inset var(--lighten_2), 0 3px 6px 2px inset var(--darken_1), 0 -3px 6px 2px inset var(--lighten_2)',
 };
 
 /* icons */
@@ -651,6 +647,7 @@ export const icon_size_xl: Style_Variable = {name: 'icon_size_xl', light: '128px
 export const icon_size_xl2: Style_Variable = {name: 'icon_size_xl2', light: '196px'};
 
 /* durations */
+// TODO maybe change the scale from xs-xl, and add an xs here around 0.04s or 0.03s
 export const duration_1: Style_Variable = {name: 'duration_1', light: '0.08s'};
 export const duration_2: Style_Variable = {name: 'duration_2', light: '0.2s'};
 export const duration_3: Style_Variable = {name: 'duration_3', light: '0.5s'};
@@ -812,16 +809,13 @@ export const default_variables: Style_Variable[] = [
 	text_active,
 
 	/* fonts */
-	line_height,
-	line_height_1,
-	line_height_2,
-	line_height_3,
-	line_height_4,
-	line_height_5,
-	line_height_6,
-	line_height_7,
-	font_family_sans,
-	font_family_mono,
+	line_height_xs,
+	line_height_sm,
+	line_height_md,
+	line_height_lg,
+	line_height_xl,
+	font_sans,
+	font_mono,
 
 	/* sizes like font-size */
 	size_xs,
@@ -897,8 +891,6 @@ export const default_variables: Style_Variable[] = [
 	outline_color,
 
 	/* border radii */
-	// TODO hardcoded values - maybe have `radius_xl` or `radius_lg` be 50%?
-	border_radius,
 	radius_xl,
 	radius_lg,
 	radius_md,
@@ -923,18 +915,12 @@ export const default_variables: Style_Variable[] = [
 	input_height_inner,
 
 	/* shadows */
-	// TODO these shouldn't use tint, use lighten/darken instead,
-	// but ideally we'd have a blend mode make the colors right,
-	// which would require a pseduo-element,
-	// but that's heavier and requires the element to be positioned (I think?)
-	shadow,
+	shadow_md,
 	shadow_lg,
-	shadow_inset,
-	shadow_inset_active,
+	shadow_inset_md,
+	shadow_inset_inverse_md,
 
 	/* icons */
-	/* these decrease by the golden ratio, rounded to the nearest pixel,
-	and they're insensitive to font size (`px` not `rem`) */
 	icon_size,
 	icon_size_xs,
 	icon_size_sm,
@@ -953,7 +939,6 @@ export const default_variables: Style_Variable[] = [
 
 	/* transparencies */
 	// TODO add one for 7 total?
-	/* TODO maybe delete these? they do help with standardizing/consistency */
 	fade_1,
 	fade_2,
 	fade_3,

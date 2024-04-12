@@ -1,8 +1,12 @@
 <script lang="ts">
-	export let size = 'var(--size, var(--size_md))';
-	export let fill = '#8cb4ff';
-	export let label = 'GitHub icon';
-	export let attrs: any = undefined;
+	interface Props {
+		size?: string;
+		fill?: string;
+		label?: string;
+		attrs?: any;
+	}
+
+	const {size = 'var(--size)', fill = '#8cb4ff', label = 'GitHub icon', attrs}: Props = $props();
 
 	// TODO do something more optimal
 </script>
@@ -18,7 +22,6 @@
 >
 	<path
 		d="M42 .2 13.4 92.3H1.7L30.2.2Zm10.4 0v92.1H42V.2Zm40.3 0L64.2 92.3H52.5L81 .2Zm10.4 0v92.1H92.7V.2Z"
-		class="logo-m"
 		{fill}
-	></path>
+	/>
 </svg>

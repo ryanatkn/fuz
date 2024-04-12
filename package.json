@@ -40,27 +40,27 @@
   "devDependencies": {
     "@changesets/changelog-git": "^0.2.0",
     "@ryanatkn/belt": "^0.20.10",
-    "@ryanatkn/eslint-config": "^0.1.0",
+    "@ryanatkn/eslint-config": "^0.1.1",
     "@ryanatkn/fuz_code": "^0.11.0",
-    "@ryanatkn/gro": "^0.112.4",
+    "@ryanatkn/gro": "^0.115.0",
     "@sveltejs/adapter-static": "^3.0.1",
-    "@sveltejs/kit": "^2.5.2",
-    "@sveltejs/package": "^2.2.7",
+    "@sveltejs/kit": "^2.5.5",
+    "@sveltejs/package": "^2.3.1",
     "@sveltejs/vite-plugin-svelte": "^3.0.2",
-    "@types/node": "^20.11.24",
+    "@types/node": "^20.12.5",
     "@types/prismjs": "^1.26.3",
-    "@typescript-eslint/eslint-plugin": "^7.1.0",
-    "@typescript-eslint/parser": "^7.1.0",
+    "@typescript-eslint/eslint-plugin": "^7.6.0",
+    "@typescript-eslint/parser": "^7.6.0",
     "eslint": "^8.57.0",
-    "eslint-plugin-svelte": "^2.35.1",
+    "eslint-plugin-svelte": "^2.36.0-next.13",
     "prettier": "^3.2.5",
     "prettier-plugin-svelte": "^3.2.2",
     "prism-svelte": "^0.5.0",
     "prismjs": "^1.29.0",
-    "svelte": "^4.2.12",
-    "svelte-check": "^3.6.6",
+    "svelte": "^5.0.0-next.100",
+    "svelte-check": "^3.6.9",
     "tslib": "^2.6.2",
-    "typescript": "^5.3.3",
+    "typescript": "^5.4.4",
     "uvu": "^0.5.6"
   },
   "eslintConfig": {
@@ -88,6 +88,7 @@
     ]
   },
   "exports": {
+    "./package.json": "./package.json",
     "./Alert.svelte": {
       "svelte": "./dist/Alert.svelte",
       "default": "./dist/Alert.svelte",
@@ -96,9 +97,6 @@
     "./alert.js": {
       "default": "./dist/alert.js",
       "types": "./dist/alert.d.ts"
-    },
-    "./animations.css": {
-      "default": "./dist/animations.css"
     },
     "./Breadcrumb.svelte": {
       "svelte": "./dist/Breadcrumb.svelte",
@@ -129,6 +127,11 @@
       "default": "./dist/Contextmenu_Link_Entry.svelte",
       "types": "./dist/Contextmenu_Link_Entry.svelte.d.ts"
     },
+    "./Contextmenu_Root.svelte": {
+      "svelte": "./dist/Contextmenu_Root.svelte",
+      "default": "./dist/Contextmenu_Root.svelte",
+      "types": "./dist/Contextmenu_Root.svelte.d.ts"
+    },
     "./Contextmenu_Submenu.svelte": {
       "svelte": "./dist/Contextmenu_Submenu.svelte",
       "default": "./dist/Contextmenu_Submenu.svelte",
@@ -144,9 +147,9 @@
       "default": "./dist/Contextmenu.svelte",
       "types": "./dist/Contextmenu.svelte.d.ts"
     },
-    "./contextmenu.js": {
-      "default": "./dist/contextmenu.js",
-      "types": "./dist/contextmenu.d.ts"
+    "./contextmenu.svelte.js": {
+      "default": "./dist/contextmenu.svelte.js",
+      "types": "./dist/contextmenu.svelte.d.ts"
     },
     "./Copy_To_Clipboard.svelte": {
       "svelte": "./dist/Copy_To_Clipboard.svelte",
@@ -157,15 +160,6 @@
       "svelte": "./dist/Details.svelte",
       "default": "./dist/Details.svelte",
       "types": "./dist/Details.svelte.d.ts"
-    },
-    "./Devmode_Controls.svelte": {
-      "svelte": "./dist/Devmode_Controls.svelte",
-      "default": "./dist/Devmode_Controls.svelte",
-      "types": "./dist/Devmode_Controls.svelte.d.ts"
-    },
-    "./devmode.js": {
-      "default": "./dist/devmode.js",
-      "types": "./dist/devmode.d.ts"
     },
     "./Dialog.svelte": {
       "svelte": "./dist/Dialog.svelte",
@@ -181,49 +175,73 @@
       "default": "./dist/Dialogs.svelte",
       "types": "./dist/Dialogs.svelte.d.ts"
     },
+    "./dimensions.svelte.js": {
+      "default": "./dist/dimensions.svelte.js",
+      "types": "./dist/dimensions.svelte.d.ts"
+    },
+    "./Fuz_Logo.svelte": {
+      "svelte": "./dist/Fuz_Logo.svelte",
+      "default": "./dist/Fuz_Logo.svelte",
+      "types": "./dist/Fuz_Logo.svelte.d.ts"
+    },
     "./Github_Logo.svelte": {
       "svelte": "./dist/Github_Logo.svelte",
       "default": "./dist/Github_Logo.svelte",
       "types": "./dist/Github_Logo.svelte.d.ts"
     },
-    "./helpers.js": {
-      "default": "./dist/helpers.js",
-      "types": "./dist/helpers.d.ts"
+    "./Hashlink.svelte": {
+      "svelte": "./dist/Hashlink.svelte",
+      "default": "./dist/Hashlink.svelte",
+      "types": "./dist/Hashlink.svelte.d.ts"
     },
     "./Hue_Input.svelte": {
       "svelte": "./dist/Hue_Input.svelte",
       "default": "./dist/Hue_Input.svelte",
       "types": "./dist/Hue_Input.svelte.d.ts"
     },
+    "./Library_Content.svelte": {
+      "svelte": "./dist/Library_Content.svelte",
+      "default": "./dist/Library_Content.svelte",
+      "types": "./dist/Library_Content.svelte.d.ts"
+    },
     "./Library_Footer.svelte": {
       "svelte": "./dist/Library_Footer.svelte",
       "default": "./dist/Library_Footer.svelte",
       "types": "./dist/Library_Footer.svelte.d.ts"
-    },
-    "./Library_Header.svelte": {
-      "svelte": "./dist/Library_Header.svelte",
-      "default": "./dist/Library_Header.svelte",
-      "types": "./dist/Library_Header.svelte.d.ts"
     },
     "./Library_Menu.svelte": {
       "svelte": "./dist/Library_Menu.svelte",
       "default": "./dist/Library_Menu.svelte",
       "types": "./dist/Library_Menu.svelte.d.ts"
     },
-    "./Library_Nav.svelte": {
-      "svelte": "./dist/Library_Nav.svelte",
-      "default": "./dist/Library_Nav.svelte",
-      "types": "./dist/Library_Nav.svelte.d.ts"
+    "./Library_Page_Links.svelte": {
+      "svelte": "./dist/Library_Page_Links.svelte",
+      "default": "./dist/Library_Page_Links.svelte",
+      "types": "./dist/Library_Page_Links.svelte.d.ts"
     },
-    "./Library_Panel.svelte": {
-      "svelte": "./dist/Library_Panel.svelte",
-      "default": "./dist/Library_Panel.svelte",
-      "types": "./dist/Library_Panel.svelte.d.ts"
+    "./Library_Primary_Nav.svelte": {
+      "svelte": "./dist/Library_Primary_Nav.svelte",
+      "default": "./dist/Library_Primary_Nav.svelte",
+      "types": "./dist/Library_Primary_Nav.svelte.d.ts"
+    },
+    "./Library_Secondary_Nav.svelte": {
+      "svelte": "./dist/Library_Secondary_Nav.svelte",
+      "default": "./dist/Library_Secondary_Nav.svelte",
+      "types": "./dist/Library_Secondary_Nav.svelte.d.ts"
+    },
+    "./Library_Tertiary_Nav.svelte": {
+      "svelte": "./dist/Library_Tertiary_Nav.svelte",
+      "default": "./dist/Library_Tertiary_Nav.svelte",
+      "types": "./dist/Library_Tertiary_Nav.svelte.d.ts"
     },
     "./Library.svelte": {
       "svelte": "./dist/Library.svelte",
       "default": "./dist/Library.svelte",
       "types": "./dist/Library.svelte.d.ts"
+    },
+    "./library.svelte.js": {
+      "default": "./dist/library.svelte.js",
+      "types": "./dist/library.svelte.d.ts"
     },
     "./Mdn_Link.svelte": {
       "svelte": "./dist/Mdn_Link.svelte",
@@ -245,16 +263,6 @@
       "default": "./dist/Package_Summary.svelte",
       "types": "./dist/Package_Summary.svelte.d.ts"
     },
-    "./Page_Footer.svelte": {
-      "svelte": "./dist/Page_Footer.svelte",
-      "default": "./dist/Page_Footer.svelte",
-      "types": "./dist/Page_Footer.svelte.d.ts"
-    },
-    "./Page_Header.svelte": {
-      "svelte": "./dist/Page_Header.svelte",
-      "default": "./dist/Page_Header.svelte",
-      "types": "./dist/Page_Header.svelte.d.ts"
-    },
     "./Pending_Animation.svelte": {
       "svelte": "./dist/Pending_Animation.svelte",
       "default": "./dist/Pending_Animation.svelte",
@@ -270,15 +278,24 @@
       "default": "./dist/Redirect.svelte",
       "types": "./dist/Redirect.svelte.d.ts"
     },
-    "./semantic_classes.css": {
-      "default": "./dist/semantic_classes.css"
+    "./style_animations.css": {
+      "default": "./dist/style_animations.css"
+    },
+    "./style_components.css": {
+      "default": "./dist/style_components.css"
+    },
+    "./style_reset.css": {
+      "default": "./dist/style_reset.css"
+    },
+    "./style_utilities.css": {
+      "default": "./dist/style_utilities.css"
     },
     "./style.css": {
       "default": "./dist/style.css"
     },
-    "./swallow.js": {
-      "default": "./dist/swallow.js",
-      "types": "./dist/swallow.d.ts"
+    "./style.gen.css.js": {
+      "default": "./dist/style.gen.css.js",
+      "types": "./dist/style.gen.css.d.ts"
     },
     "./Teleport.svelte": {
       "svelte": "./dist/Teleport.svelte",
@@ -325,6 +342,11 @@
       "default": "./dist/Tome_Link.svelte",
       "types": "./dist/Tome_Link.svelte.d.ts"
     },
+    "./Tome_Subheading.svelte": {
+      "svelte": "./dist/Tome_Subheading.svelte",
+      "default": "./dist/Tome_Subheading.svelte",
+      "types": "./dist/Tome_Subheading.svelte.d.ts"
+    },
     "./Tome_Title.svelte": {
       "svelte": "./dist/Tome_Title.svelte",
       "default": "./dist/Tome_Title.svelte",
@@ -333,12 +355,6 @@
     "./tome.js": {
       "default": "./dist/tome.js",
       "types": "./dist/tome.d.ts"
-    },
-    "./utility_classes.css": {
-      "default": "./dist/utility_classes.css"
-    },
-    "./variable_classes.css": {
-      "default": "./dist/variable_classes.css"
     },
     "./variable_data.js": {
       "default": "./dist/variable_data.js",

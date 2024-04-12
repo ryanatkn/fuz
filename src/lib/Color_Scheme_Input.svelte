@@ -1,22 +1,27 @@
 <script lang="ts">
-	import {createEventDispatcher} from 'svelte';
 	import type {Writable} from 'svelte/store';
+	import {swallow} from '@ryanatkn/belt/dom.js';
 
-	import {swallow} from '$lib/swallow.js';
 	import {color_schemes, type Color_Scheme, get_color_scheme} from '$lib/theme.js';
 
-	const dispatch = createEventDispatcher<{select: Color_Scheme}>();
+	interface Props {
+		selected_color_scheme?: Writable<Color_Scheme | null>;
+		select?: ((color_scheme: Color_Scheme) => void | boolean) | null;
+		onselect?: (color_scheme: Color_Scheme) => void;
+	}
 
-	// TODO consider an event API to complement this
-	export let selected_color_scheme: Writable<Color_Scheme | null> = get_color_scheme();
-	export let select: ((color_scheme: Color_Scheme) => void | boolean) | null = (color_scheme) => {
-		$selected_color_scheme = color_scheme;
-	};
+	const {
+		selected_color_scheme = get_color_scheme(),
+		select = (color_scheme) => {
+			$selected_color_scheme = color_scheme;
+		},
+		onselect,
+	}: Props = $props();
 </script>
 
 <!-- TODO maybe support menubar aria
 https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/menubar_role -->
-<menu class="color_scheme_control">
+<menu class="color_scheme_control unstyled">
 	{#each color_schemes as color_scheme (color_scheme)}
 		{@const selected = color_scheme === $selected_color_scheme}
 		<button
@@ -28,10 +33,10 @@ https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/menubar_ro
 				: `select ${color_scheme} color scheme`}
 			class:selected
 			aria-checked={selected}
-			on:click={(e) => {
+			onclick={(e) => {
 				swallow(e);
 				if (select?.(color_scheme) !== false) {
-					dispatch('select', color_scheme);
+					onselect?.(color_scheme);
 				}
 			}}
 		>
@@ -45,7 +50,6 @@ https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/menubar_ro
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
-		padding-left: 0; /* allow nesting in .prose */
 	}
 	.content {
 		display: flex;
@@ -57,11 +61,11 @@ https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/menubar_ro
 		border-radius: 0;
 	}
 	.color_scheme:first-child {
-		border-top-left-radius: var(--border_radius);
-		border-bottom-left-radius: var(--border_radius);
+		border-top-left-radius: var(--border_radius, var(--radius_md));
+		border-bottom-left-radius: var(--border_radius, var(--radius_md));
 	}
 	.color_scheme:last-child {
-		border-top-right-radius: var(--border_radius);
-		border-bottom-right-radius: var(--border_radius);
+		border-top-right-radius: var(--border_radius, var(--radius_md));
+		border-bottom-right-radius: var(--border_radius, var(--radius_md));
 	}
 </style>

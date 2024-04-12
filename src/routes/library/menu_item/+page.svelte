@@ -4,6 +4,7 @@
 
 	import {get_tome} from '$lib/tome.js';
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
 	const LIBRARY_ITEM_NAME = 'menu item';
 	const tome = get_tome(LIBRARY_ITEM_NAME);
@@ -12,7 +13,7 @@
 
 	// TODO `role="menuitem"` ?
 
-	let clicked = 'c';
+	let clicked = $state('c');
 
 	const handled = (e: any): boolean => {
 		if (e.key === 'Enter' || e.key === ' ') {
@@ -24,14 +25,14 @@
 </script>
 
 <Tome_Detail {tome}>
-	<section class="prose">
-		<h3>
+	<section>
+		<Tome_Subheading text=".menu-item CSS class" slug="menu_item-css-class">
 			<code>.menu_item</code> CSS class
-		</h3>
+		</Tome_Subheading>
 		<blockquote>This is experimental and may change or be removed.</blockquote>
 	</section>
 	<section>
-		<ul>
+		<ul class="unstyled">
 			<li role="none">
 				<div class="menu_item">
 					<div class="content">
@@ -65,15 +66,15 @@
 		</ul>
 	</section>
 	<section>
-		<ul>
+		<ul class="unstyled">
 			<li role="none">
 				<div
 					class="menu_item selectable"
 					class:selected={clicked === 'a'}
 					tabindex="0"
 					role="menuitem"
-					on:click={() => (clicked = 'a')}
-					on:keypress={(e) => handled(e) && (clicked = 'a')}
+					onclick={() => (clicked = 'a')}
+					onkeypress={(e) => handled(e) && (clicked = 'a')}
 				>
 					<div class="content">
 						<div class="icon">a</div>
@@ -95,8 +96,8 @@
 					class:selected={clicked === 'b'}
 					tabindex="0"
 					role="menuitem"
-					on:click={() => (clicked = 'b')}
-					on:keypress={(e) => handled(e) && (clicked = 'b')}
+					onclick={() => (clicked = 'b')}
+					onkeypress={(e) => handled(e) && (clicked = 'b')}
 				>
 					<div class="content">
 						<div class="icon">b</div>
@@ -118,8 +119,8 @@
 					class:selected={clicked === 'c'}
 					tabindex="0"
 					role="menuitem"
-					on:click={() => (clicked = 'c')}
-					on:keypress={(e) => handled(e) && (clicked = 'c')}
+					onclick={() => (clicked = 'c')}
+					onkeypress={(e) => handled(e) && (clicked = 'c')}
 				>
 					<div class="content">
 						<div class="icon">c</div>
@@ -138,9 +139,3 @@
 		</ul>
 	</section>
 </Tome_Detail>
-
-<style>
-	section {
-		margin-bottom: var(--space_xl5);
-	}
-</style>

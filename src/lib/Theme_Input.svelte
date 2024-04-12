@@ -1,28 +1,38 @@
 <script lang="ts">
-	import {createEventDispatcher} from 'svelte';
 	import type {Readable} from 'svelte/store';
+	import {swallow} from '@ryanatkn/belt/dom.js';
 
 	import {get_theme, type Theme} from '$lib/theme.js';
 	import {default_themes} from '$lib/themes.js';
-	import {swallow} from '$lib/swallow.js';
 
-	const dispatch = createEventDispatcher<{select: Theme; edit: Theme}>();
+	interface Props {
+		selected_theme?: Readable<Theme | null>;
+		themes?: Theme[];
+		enable_editing?: boolean;
+		select?: ((theme: Theme) => void | boolean) | null;
+		onselect?: (theme: Theme) => void;
+		onedit?: (theme: Theme) => void;
+	}
 
-	export let selected_theme: Readable<Theme | null> = get_theme();
-	export let themes: Theme[] = default_themes;
-	export let enable_editing = false;
-	export let select: ((theme: Theme) => void | boolean) | null = (theme) => {
-		$selected_theme = theme;
-	};
+	const {
+		selected_theme = get_theme(),
+		themes = default_themes,
+		enable_editing = false,
+		select = (theme) => {
+			$selected_theme = theme;
+		},
+		onselect,
+		onedit,
+	}: Props = $props();
 
-	$: selected_theme_name = $selected_theme?.name;
+	const selected_theme_name = $derived($selected_theme?.name);
 </script>
 
-<menu class="theme_input">
+<menu class="theme_input unstyled">
 	{#each themes as theme (theme.name)}
 		<!-- TODO @multiple proper equality check, won't work when we allow editing, need an id or unique names and a deep equality check -->
 		{@const selected = theme.name === selected_theme_name}
-		<li role="none">
+		<li class="row" role="none">
 			<button
 				type="button"
 				class="theme_button"
@@ -30,10 +40,10 @@
 				aria-label="{theme.name} theme"
 				aria-checked={selected}
 				class:selected
-				on:click={(e) => {
+				onclick={(e) => {
 					swallow(e);
 					if (select?.(theme) !== false) {
-						dispatch('select', theme);
+						onselect?.(theme);
 					}
 				}}
 			>
@@ -43,9 +53,9 @@
 				<button
 					type="button"
 					class="icon_button plain"
-					on:click={(e) => {
+					onclick={(e) => {
 						swallow(e);
-						dispatch('edit', theme);
+						onedit?.(theme);
 					}}>•••</button
 				>
 			{/if}
@@ -54,14 +64,7 @@
 </menu>
 
 <style>
-	.theme_input {
-		padding-left: 0; /* allow nesting in .prose */
-	}
 	.theme_button {
 		flex: 1;
-	}
-	li {
-		display: flex; /* allow nesting in .prose */
-		list-style: none; /* allow nesting in .prose */
 	}
 </style>

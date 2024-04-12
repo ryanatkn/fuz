@@ -1,106 +1,38 @@
 <script lang="ts">
-	import {page} from '$app/stores';
-	import {parse_package_meta} from '@ryanatkn/gro/package_meta.js';
+	import type {Snippet} from 'svelte';
 
-	import Library_Menu from '$lib/Library_Menu.svelte';
-	import Library_Panel from '$lib/Library_Panel.svelte';
-	import Breadcrumb from '$lib/Breadcrumb.svelte';
-	import {set_tomes} from '$lib/tome.js';
-	import Library_Footer from '$lib/Library_Footer.svelte';
-	import Package_Summary from '$lib/Package_Summary.svelte';
-	import Library_Nav from '$lib/Library_Nav.svelte';
+	import Library from '$lib/Library.svelte';
 	import {tomes} from '$routes/library/tomes.js';
-	import {package_json, src_json} from '$routes/package.js';
 	import {set_selected_variable} from '$routes/style_variable_helpers.js';
-	import Dialog from '$lib/Dialog.svelte';
 	import Style_Variable_Detail from '$routes/Style_Variable_Detail.svelte';
+	import Dialog from '$lib/Dialog.svelte';
+	import {get_pkg} from '$routes/pkg.js';
 
-	const pkg = parse_package_meta(package_json.homepage, package_json, src_json);
+	interface Props {
+		children: Snippet;
+	}
 
-	const tomes_by_name = new Map(tomes.map((t) => [t.name, t]));
-	set_tomes(tomes_by_name);
-
-	$: selected_item = tomes.find((c) => c.pathname === $page.url.pathname);
-	$: tomes_related_to_selected = selected_item?.related?.map((r) => tomes_by_name.get(r)!);
+	const {children}: Props = $props();
 
 	const selected_variable = set_selected_variable();
+
+	const pkg = get_pkg();
 </script>
 
-<main class="box w_100">
-	<Library_Nav />
-	<div class="layout width_md">
-		<div class="menu_wrapper">
-			<div class="menu width_sm">
-				<Library_Menu {tomes} />
-				{#if tomes_related_to_selected}
-					<Library_Menu tomes={tomes_related_to_selected} let:category>
-						<h6>related {category}</h6>
-					</Library_Menu>
-				{/if}
-			</div>
-		</div>
-		<Library_Panel>
-			<div class="box w_100">
-				<Package_Summary {pkg} />
-			</div>
-		</Library_Panel>
-		<slot />
-		<section class="box">
-			<Library_Footer {pkg} />
-		</section>
-		<section class="box">
-			<Breadcrumb>🧶</Breadcrumb>
-		</section>
-	</div>
-	{#if $selected_variable}
-		<Dialog on:close={() => ($selected_variable = null)} let:close>
+<Library {tomes} {pkg}>
+	{@render children()}
+</Library>
+
+{#if $selected_variable}
+	<Dialog onclose={() => ($selected_variable = null)}>
+		{#snippet children(close)}
 			<div class="pane">
 				<div class="panel p_lg box">
 					<Style_Variable_Detail variable={$selected_variable} />
-					<br />
-					<aside>this is unfinished</aside>
-					<br />
-					<button on:click={close}>ok</button>
+					<aside>⚠️ This is unfinished and will change.</aside>
+					<button onclick={close}>ok</button>
 				</div>
 			</div>
-		</Dialog>
-	{/if}
-</main>
-
-<style>
-	.layout {
-		position: relative;
-		padding-bottom: var(--space_xl5);
-	}
-	.menu_wrapper {
-		position: absolute;
-		left: 0;
-		top: 0;
-		height: 100%;
-		transform: translate3d(calc(-100% - var(--space_sm)), 0, 0);
-		display: flex;
-		align-items: center;
-		flex-direction: column;
-	}
-	.menu {
-		position: sticky;
-		top: 0;
-	}
-	@media (max-width: 1200px) {
-		.menu_wrapper {
-			position: relative;
-			transform: none;
-			margin-bottom: var(--space_xl3);
-		}
-	}
-	section {
-		padding: var(--space_xl2);
-	}
-	h6 {
-		margin-bottom: var(--space_md);
-		margin-top: var(--space_xl3);
-	}
-	h6:first-child {
-		margin-top: 0;
-	}
-</style>
+		{/snippet}
+	</Dialog>
+{/if}

@@ -1,3 +1,5 @@
+[<img src="/static/favicon.png" align="right" width="192" height="192">](https://www.fuz.dev/)
+
 # `@ryanatkn/fuz`
 
 > friendly user zystem 🧶 [fuz.dev](https://www.fuz.dev/)
@@ -8,9 +10,7 @@ It's in early alpha and there will be many breaking changes.
 Fuz is being made to support [my other projects](https://www.ryanatkn.com/table)
 that focus on end-users.
 Fuz emphasizes capability and efficiency and tries to be simple for those goals.
-Compared to most UI libraries, Fuz has fewer features and more opinions,
-and it has some unusual features like
-[the contextmenu](https://www.fuz.dev/library/Contextmenu).
+Compared to most UI libraries, Fuz has fewer features and more opinions.
 
 To learn more see [the docs](https://www.fuz.dev/library).
 Feel free to take the ideas and code for your own purposes.
@@ -27,19 +27,19 @@ The CSS design system:
 - supports [`color-scheme` and custom themes](https://www.fuz.dev/library/theme)
   (including dark mode)
 - zero dependencies except for Svelte
-- styles HTML tags directly, so you don't need to add `.btn` to buttonss
+- styles HTML tags directly, so you don't need to add `.btn` to buttons
   - encourages plain HTML elements like `button` and `a` over Svelte components
     unless the gains are substantial
-  - includes `.prose` to apply document-like presentation compared to the base app-like presentation
 - stylesheets:
-  - [`@ryanatkn/fuz/style.css`](/src/lib/style.css)
-  - [`@ryanatkn/fuz/theme.css`](/src/lib/theme.css) - or bring your own
-  - [`@ryanatkn/fuz/semantic_classes.css`](/src/lib/semantic_classes.css) - optional
-  - [`@ryanatkn/fuz/utility_classes.css`](/src/lib/utility_classes.css) - optional
-  - [`@ryanatkn/fuz/variable_classes.css`](/src/lib/variable_classes.css) - optional
-  - [`@ryanatkn/fuz/animations.css`](/src/lib/animations.css) - optional
-  - prefers Svelte's `<style>` for nontrivial cases,
-    and it's not nearly as featureful as Tailwind - instead of letting you express all of CSS in classes,
+  - [`@ryanatkn/style.css`](/src/lib/style.css), which is composed of:
+    - [`@ryanatkn/style_reset.css`](/src/lib/style_reset.css) - required
+    - [`@ryanatkn/style_utilities.css`](/src/lib/style_utilities.css) - optional
+    - [`@ryanatkn/style_components.css`](/src/lib/style_components.css) - optional
+    - [`@ryanatkn/style_animations.css`](/src/lib/style_animations.css) - optional
+  - [`theme.css`](/src/lib/theme.css) - or bring your own
+  - prefers Svelte's `<style>` for nontrivial cases
+    because its utility classes are not nearly as featureful and complete as Tailwind -
+    instead of providing a full interface to CSS through classes,
     Fuz provides an arbitrary subset that defers to Svelte CSS for complex and uncommon patterns
     (advanced build tooling like a compiler could change this, but I have no current plans for that)
   - it probably makes sense to include a Vite plugin to remove unused styles,
@@ -48,7 +48,6 @@ The CSS design system:
 
 The Svelte components and helpers:
 
-- pending migration to Svelte 5
 - builds on the CSS design system
 - plain CSS and minimal abstraction
 - near-zero dependencies except for Svelte, SvelteKit, and my utility library
@@ -72,10 +71,11 @@ Import modules at their full paths:
 // plain CSS stylesheets:
 import '@ryanatkn/fuz/style.css';
 import '@ryanatkn/fuz/theme.css'; // or bring your own
-import '@ryanatkn/fuz/utility_classes.css'; // optional
-import '@ryanatkn/fuz/variable_classes.css'; // optional
-import '@ryanatkn/fuz/semantic_classes.css'; // optional
-import '@ryanatkn/fuz/animations.css'; // optional
+// or import individual parts of `@ryanatkn/fuz/style.css`:
+import '@ryanatkn/fuz/style_reset.css'; // required
+import '@ryanatkn/fuz/style_utilities.css'; // optional
+import '@ryanatkn/fuz/style_components.css'; // optional
+import '@ryanatkn/fuz/style_animations.css'; // optional
 // Svelte components:
 import Themed from '@ryanatkn/fuz/Themed.svelte';
 // TypeScript modules:

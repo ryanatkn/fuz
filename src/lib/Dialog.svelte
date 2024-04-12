@@ -1,9 +1,12 @@
 <script lang="ts">
-	import {createEventDispatcher, onDestroy} from 'svelte';
+	import type {Snippet} from 'svelte';
 	import {is_editable, swallow} from '@ryanatkn/belt/dom.js';
+	import {wait} from '@ryanatkn/belt/async.js';
 
 	import Teleport from '$lib/Teleport.svelte';
 	import type {Dialog_Layout} from '$lib/dialog.js';
+
+	// TODO use `<dialog>` here
 
 	/*
 
@@ -14,24 +17,41 @@
 	It uses a CSS custom property for this to avoid the high complexity of trying to
 	correctly revert any preexisting values for overflow and padding on the body.
 	We don't want to add restrictions to what users can do to the body on their own!
-	For more on these quirks see: https://github.com/ryanatkn/fuz/pull/162
 
 	*/
 
+	interface Props {
+		// TODO maybe change this API away from an element to a selector? or remove the API completely?
+		container?: HTMLElement;
+		layout?: Dialog_Layout;
+		/**
+		 * index 0 is under 1 is under 2 etc -- the topmost dialog is the last in the array
+		 */
+		index?: number;
+		active?: boolean;
+		onclose?: () => void;
+		children: Snippet<[close: (e?: Event) => void]>;
+	}
+
+	const {
+		container,
+		layout = 'centered',
+		index = 0,
+		active = true,
+		onclose,
+		children,
+	}: Props = $props();
+
 	const ROOT_SELECTOR = 'body'; // TODO make configurable
-	const ROOT_DIALOG_OPEN_CLASS = 'dialog_open';
-	const ROOT_DIALOG_PADDING_PROPERTY = '--dialog_open_padding_right';
-	const CONTAINER_ID = 'dialog';
+	const CONTAINER_ID = 'fuz_dialog';
 
-	const dispatch = createEventDispatcher<{close: undefined}>();
-
-	export let container: HTMLElement | undefined = undefined;
-	export let layout: Dialog_Layout = 'centered';
-	export let index = 0; // index 0 is under 1 is under 2 etc -- the topmost dialog is the last in the array
-	export let active = true;
-
-	let container_el: HTMLElement | undefined;
-	$: !import.meta.env.SSR && update_container_el(container); // TODO guard some other way
+	let container_el: HTMLElement | undefined = $state();
+	$effect(() => {
+		// TODO guard some other way
+		if (!import.meta.env.SSR) {
+			update_container_el(container);
+		}
+	});
 
 	const update_container_el = (container: HTMLElement | undefined): void => {
 		if (container) {
@@ -53,19 +73,19 @@
 		}
 	};
 
-	let dialog_el: HTMLElement;
-	let pane_wrapper_el: HTMLElement;
+	let dialog_el: HTMLElement | undefined = $state();
+	let content_el: HTMLElement | undefined = $state();
 
 	const close = (e?: Event) => {
 		if (e) swallow(e);
-		dispatch('close');
+		onclose?.();
 	};
 
 	// TODO hook into a ui input system
 	const on_window_keydown = (e: KeyboardEvent) => {
 		if (e.key === 'Escape' && !is_editable(e.target)) {
 			// apply hotkey only for the top-most dialog
-			const parent_el = dialog_el.parentElement;
+			const parent_el = dialog_el?.parentElement;
 			const parents = parent_el?.parentElement?.children;
 			const index = Array.prototype.indexOf.call(parents, parent_el);
 			if (!parents || index === parents.length - 1 || index === -1) {
@@ -75,18 +95,11 @@
 	};
 
 	// The dialog isn't "ready" until the teleport moves it.
-	// Rendering the the dialog's slot only once it's ready fixes things like `autofocus`.
-	let ready = false;
-
-	onDestroy(() => {
-		if (index === 0) {
-			document.body.classList.remove(ROOT_DIALOG_OPEN_CLASS);
-			document.body.style.setProperty(ROOT_DIALOG_PADDING_PROPERTY, null);
-		}
-	});
+	// Rendering the the dialog's children only once it's ready fixes things like `autofocus`.
+	let ready = $state(false);
 </script>
 
-<svelte:window on:keydown={active ? on_window_keydown : undefined} />
+<svelte:window onkeydown={active ? on_window_keydown : undefined} />
 
 <!--
 	The `tabindex` and `el.focus()` fix scrolling with the keyboard,
@@ -97,32 +110,16 @@
 -->
 <Teleport
 	to={container_el}
-	on:move={() => {
-		// Measure `padding-right` before adding the class that changes it,
-		// so we can set the body padding to offset any scrollbar width changes.
-		const computed_padding_right =
-			Number(
-				window.getComputedStyle(document.body).getPropertyValue('padding-right').slice(0, -2),
-			) || 0; // just in case the parsed value is NaN
-		const width_before = document.body.clientWidth;
-		document.body.classList.add(ROOT_DIALOG_OPEN_CLASS);
-		const width_after = document.body.clientWidth;
-		const width_diff = width_after - width_before;
-		if (width_diff > 0) {
-			// Offset scrollbar width changes.
-			document.body.style.setProperty(
-				ROOT_DIALOG_PADDING_PROPERTY,
-				width_diff + computed_padding_right + 'px',
-			);
-		}
+	onmove={async () => {
+		await wait(); // TODO this is a hack to get animations working, `Teleport` now mounts synchronously?!
 		ready = true;
-		dialog_el.focus(); // TODO make this more declarative? probably want to focus only after moving though, not on mount, which makes an action trickier
+		dialog_el?.focus(); // TODO make this more declarative? probably want to focus only after moving though, not on mount, which makes an action trickier
 	}}
 >
 	<div
 		class="dialog"
 		class:ready
-		class:layout-page={layout === 'page'}
+		class:layout_page={layout === 'page'}
 		role="dialog"
 		aria-modal
 		bind:this={dialog_el}
@@ -131,19 +128,17 @@
 	>
 		<div class="dialog_layout">
 			<div class="dialog_wrapper">
-				<div class="dialog_bg" role="none" class:ready on:mousedown={close} />
+				<div class="dialog_bg" role="none" onmousedown={close} />
 				<div
 					class="dialog_content"
-					bind:this={pane_wrapper_el}
+					bind:this={content_el}
 					role="none"
-					on:mousedown={(e) => {
-						if (e.target === pane_wrapper_el) close(e);
+					onmousedown={(e) => {
+						if (e.target === content_el) close(e);
 					}}
 				>
 					<!-- mount the content only after teleporting to avoid issues -->
-					{#if ready}
-						<slot {close} />
-					{/if}
+					{#if ready}{@render children(close)}{/if}
 				</div>
 			</div>
 		</div>
@@ -152,10 +147,14 @@
 
 <style>
 	.dialog {
-		--shadow: var(--shadow_lg);
-		overflow: auto;
+		--pane_shadow: var(--shadow_lg);
 		position: fixed;
 		inset: 0;
+		overflow: auto;
+		/* this simplifies the code a lot but doesn't prevent scrolling
+		the underlying content when the dialog doesn't overflow, even when `overflow: scroll`
+		TODO check if this behaves as desired after switching to use the `dialog` element */
+		overscroll-behavior: contain;
 	}
 	.dialog_bg {
 		position: absolute;
@@ -165,7 +164,7 @@
 		transition: opacity var(--duration_3) ease;
 		background-color: var(--dialog_bg, var(--darken_6));
 	}
-	.dialog_bg.ready {
+	.ready .dialog_bg {
 		opacity: 1;
 	}
 	.dialog_layout {
@@ -183,7 +182,7 @@
 		align-items: center;
 		justify-content: center;
 	}
-	.layout-page .dialog_wrapper {
+	.layout_page .dialog_wrapper {
 		justify-content: flex-start;
 	}
 	.dialog_content {
@@ -193,10 +192,5 @@
 	}
 	.ready .dialog_content {
 		transform: scale3d(1, 1, 1);
-	}
-	/* need to sync with `ROOT_DIALOG_OPEN_CLASS` and `ROOT_DIALOG_PADDING_PROPERTY` */
-	:global(body.dialog_open) {
-		overflow: hidden !important;
-		padding-right: var(--dialog_open_padding_right, 0) !important;
 	}
 </style>

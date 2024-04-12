@@ -4,6 +4,7 @@
 
 <script lang="ts">
 	import {get, writable, type Writable} from 'svelte/store';
+	import type {Snippet} from 'svelte';
 
 	import {
 		create_theme_style_html,
@@ -15,6 +16,44 @@
 		get_theme,
 		get_color_scheme,
 	} from '$lib/theme.js';
+
+	interface Props {
+		/**
+		 * A writable store containing a theme object.
+		 * Defaults to the first default theme.
+		 * Like `color_scheme`, the store reference is not reactive
+		 * because it's set in context without a wrapper, use `{#key theme}` if it changes.
+		 * @nonreactive
+		 */
+		selected_theme?: Writable<Theme>;
+		/**
+		 * A writable store containing the active color scheme.
+		 * Defaults to looking in localStorage and falls back to detecting with `prefers-color-scheme`.
+		 * Like `theme`, the store reference is not reactive
+		 * because it's set in context without a wrapper, use `{#key color_scheme}` if it changes.
+		 * @nonreactive
+		 */
+		selected_color_scheme?: Writable<Color_Scheme | null>;
+		tagName?: string;
+		children: Snippet<
+			[
+				id: string,
+				style: string | null,
+				theme_style_html: string | null,
+				theme: Writable<Theme>,
+				color_scheme: Writable<Color_Scheme | null>,
+			]
+		>;
+	}
+
+	const {
+		selected_theme = writable(get(get_theme())),
+		selected_color_scheme = writable(get(get_color_scheme())),
+		tagName = 'div',
+		children,
+	}: Props = $props();
+
+	const id = 'themed_' + _id++;
 
 	/**
 	 * `Themed_Scope` is a variant of `Themed` that scopes its theme to one branch of the DOM.
@@ -29,52 +68,20 @@
 	 * though a more complicated API could be devised to accept an `Element` as a prop.
 	 */
 
-	/**
-	 * A writable store containing a theme object.
-	 * Defaults to the first default theme.
-	 * Like `color_scheme`, the store reference is not reactive
-	 * because it's set in context without a wrapper, use `{#key theme}` if it changes.
-	 * @nonreactive
-	 */
-	export let selected_theme: Writable<Theme> = writable(get(get_theme()));
 	set_theme(selected_theme);
 
-	/**
-	 * A writable store containing the active color scheme.
-	 * Defaults to looking in localStorage and falls back to detecting with `prefers-color-scheme`.
-	 * Like `theme`, the store reference is not reactive
-	 * because it's set in context without a wrapper, use `{#key color_scheme}` if it changes.
-	 * @nonreactive
-	 */
-	export let selected_color_scheme: Writable<Color_Scheme | null> = writable(
-		get(get_color_scheme()),
-	);
 	set_color_scheme(selected_color_scheme);
 
-	export let tagName = 'div';
+	const style = $derived(render_theme_style($selected_theme, {id, empty_default_theme: false}));
+	const theme_style_html = $derived(style ? create_theme_style_html(style) : null);
 
-	/**
-	 * @readonly
-	 */
-	export let id = 'themed_' + _id++;
-	/**
-	 * @readonly
-	 */
-	export let style: string | null = null;
-	/**
-	 * @readonly
-	 */
-	export let theme_style_html: string | null = null;
-
-	$: style = render_theme_style($selected_theme, {id, empty_default_theme: false});
-	$: theme_style_html = style ? create_theme_style_html(style) : null;
-
-	$: final_color__scheme =
+	const final_color__scheme = $derived(
 		$selected_color_scheme === 'dark' || $selected_color_scheme === 'light'
 			? $selected_color_scheme
 			: !import.meta.env.SSR && matchMedia('(prefers-color-scheme: dark)').matches
 				? 'dark'
-				: 'light'; // fallback to best guess
+				: 'light',
+	); // fallback to best guess
 </script>
 
 <!-- eslint-disable svelte/no-at-html-tags -->
@@ -82,12 +89,12 @@
 	{#if theme_style_html}{@html theme_style_html}{/if}
 </svelte:head>
 
-<svelte:element this={tagName} {id} class="themed" class:dark={final_color__scheme === 'dark'}>
-	<slot
-		{id}
-		{style}
-		{theme_style_html}
-		theme={selected_theme}
-		color_scheme={selected_color_scheme}
-	/>
-</svelte:element>
+<svelte:element this={tagName} {id} class="themed" class:dark={final_color__scheme === 'dark'}
+	>{@render children(
+		id,
+		style,
+		theme_style_html,
+		selected_theme,
+		selected_color_scheme,
+	)}</svelte:element
+>

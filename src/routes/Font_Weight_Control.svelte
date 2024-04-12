@@ -1,12 +1,23 @@
 <script lang="ts">
-	// TODO @multiple publish in $lib when ready
+	import type {Snippet} from 'svelte';
 
-	export let selected_font_weight = 400;
+	interface Props {
+		selected_font_weight?: number;
+		children?: Snippet;
+	}
+
+	let {selected_font_weight = $bindable(400), children}: Props = $props(); // eslint-disable-line prefer-const
+
+	// TODO @multiple publish in $lib when ready
 </script>
 
 <label
 	><div class="title row w_100 wrap">
-		<slot>font-weight</slot> =
+		{#if children}
+			{@render children()}
+		{:else}
+			font-weight
+		{/if} =
 		<input
 			class="inline flex_1"
 			type="number"

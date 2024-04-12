@@ -1,21 +1,30 @@
 <script lang="ts">
 	import '$lib/style.css';
 	import '$lib/theme.css';
-	import '$lib/utility_classes.css';
-	import '$lib/variable_classes.css';
-	import '$lib/semantic_classes.css';
-	import '$lib/animations.css';
 	import '@ryanatkn/fuz_code/prism.css';
 
-	import {set_devmode} from '$lib/devmode.js';
-	import Devmode_Controls from '$lib/Devmode_Controls.svelte';
+	import {parse_package_meta} from '@ryanatkn/gro/package_meta.js';
+	import type {Snippet} from 'svelte';
 
 	import Themed from '$lib/Themed.svelte';
+	import {set_pkg} from '$routes/pkg.js';
+	import {package_json, src_json} from '$routes/package.js';
+	import Spiders from '$routes/Spiders.svelte';
 
-	const devmode = set_devmode(false);
+	interface Props {
+		children: Snippet;
+	}
+
+	const {children}: Props = $props();
+
+	set_pkg(parse_package_meta(package_json.homepage, package_json, src_json));
 </script>
 
+<svelte:head>
+	<title>Fuz - friendly user zystem</title>
+</svelte:head>
+
 <Themed>
-	<slot />
+	{@render children()}
+	<Spiders />
 </Themed>
-<Devmode_Controls {devmode} />

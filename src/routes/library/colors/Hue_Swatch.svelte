@@ -1,19 +1,20 @@
 <script lang="ts">
 	import Style_Variable_Button from '$routes/Style_Variable_Button.svelte';
 
-	export let color_name: string;
-	export let computed_styles: CSSStyleDeclaration;
-	export let width = 48;
-	export let height = 48;
-	export let description: string;
+	interface Props {
+		color_name: string;
+		computed_styles: CSSStyleDeclaration | null;
+		width?: number;
+		height?: number;
+		description: string;
+	}
 
-	const get_color_hue_string = (name: string) => {
-		const v = computed_styles.getPropertyValue('--' + name);
-		return v;
-	};
+	const {color_name, computed_styles, width = 48, height = 48, description}: Props = $props();
 
-	$: variable_name = `hue_${color_name}`;
-	$: hue = Number(get_color_hue_string(variable_name));
+	const get_color_hue_string = (name: string) => computed_styles?.getPropertyValue('--' + name);
+
+	const variable_name = $derived(`hue_${color_name}`);
+	const hue = $derived(Number(get_color_hue_string(variable_name)));
 </script>
 
 <li style:--hue="var(--{variable_name})">
@@ -29,7 +30,7 @@
 	li {
 		display: flex;
 		align-items: stretch;
-		font-family: var(--font_family_mono);
+		font-family: var(--font_mono);
 		padding: var(--space_xs2);
 	}
 	li:hover {
@@ -72,6 +73,6 @@
 		display: flex;
 	}
 	.description {
-		font-family: var(--font_family_sans);
+		font-family: var(--font_sans);
 	}
 </style>

@@ -4,8 +4,6 @@ import type {Writable} from 'svelte/store';
 import {default_variables} from '$lib/variables.js';
 import {default_themes} from '$lib/themes.js'; // TODO shoudln't be a dep, see usage below
 
-// TODO more flavored types? zod?
-
 // TODO this is more like `Color_Scheme_Setting`, because `Color_Scheme` is an arbitrary string if it means `color-scheme` - https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme
 export type Color_Scheme = 'dark' | 'light' | 'auto';
 
@@ -22,7 +20,9 @@ export const sync_color_scheme = (color_scheme: Color_Scheme | null): void => {
 		document.documentElement.classList.remove('dark');
 	}
 };
+
 export const COLOR_SCHEME_STORAGE_KEY = 'color-scheme';
+
 // TODO @multiple refactor, probably with a storage util
 export const save_color_scheme = (
 	color_scheme: Color_Scheme | null,
@@ -37,6 +37,7 @@ export const save_color_scheme = (
 		}
 	} catch (_) {}
 };
+
 export const load_color_scheme = (
 	fallback: Color_Scheme | null = 'auto',
 	key = COLOR_SCHEME_STORAGE_KEY,
@@ -56,6 +57,7 @@ export const load_color_scheme = (
 
 // TODO @multiple refactor, probably with a storage util
 export const THEME_STORAGE_KEY = 'theme';
+
 export const save_theme = (theme: Theme | null, key = THEME_STORAGE_KEY): void => {
 	if (import.meta.env.SSR) return;
 	try {
@@ -66,6 +68,7 @@ export const save_theme = (theme: Theme | null, key = THEME_STORAGE_KEY): void =
 		}
 	} catch (_) {}
 };
+
 export const load_theme = (fallback: Theme = default_themes[0], key = THEME_STORAGE_KEY): Theme => {
 	if (import.meta.env.SSR) return fallback;
 	try {
@@ -79,13 +82,13 @@ export const load_theme = (fallback: Theme = default_themes[0], key = THEME_STOR
 };
 
 // TODO can we add `nonce="%sveltekit.nonce%"` to this script to fix the CSP issues? does it even work on the style tag below?
-// TODO look at this to initialize the theme synchronously in the HEAD to avoid flashing
+
 /**
  * Creates an HTML script string to be inserted into the `head`
  * that initializes the dark/light color scheme.
  * https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme
  * Prefers a value in `localStorage` if available, and if not detects using `matchMedia`.
- * In case of an unexpected error, like if `localStorage` is disabled, the `fallback` value is used.
+ * On unexpected errors, like if `localStorage` is disabled, the `fallback` value is used.
  * @param fallback
  * @param key
  * @returns HTML string with the color scheme setup script and a `color-schema` meta tag
@@ -186,6 +189,8 @@ export const render_theme_variable = (
 		(comments && variable.summary ? ' /* ' + variable.summary + ' */' : '')
 	);
 };
+
+// TODO change API to use runes
 
 const THEME_KEY = Symbol('theme');
 export const get_theme = (): Writable<Theme> => getContext(THEME_KEY);

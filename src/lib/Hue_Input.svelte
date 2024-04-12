@@ -1,75 +1,87 @@
 <script lang="ts">
-	import {createEventDispatcher} from 'svelte';
+	import type {Hue} from '@ryanatkn/belt/colors.js';
+	import type {Snippet} from 'svelte';
 
-	export let hue = 180;
-	export let title = 'hue';
+	interface Props {
+		value?: Hue;
+		oninput?: (hue: Hue) => void;
+		children?: Snippet;
+	}
 
-	const parse_hue = (value: any): number | null => {
-		const t = typeof value;
-		if (t === 'number') return value;
+	let {value = $bindable(180), oninput, children}: Props = $props(); // eslint-disable-line prefer-const
+
+	// TODO probably upstream this to belt
+	const parse_hue = (v: any): Hue | null => {
+		const t = typeof v;
+		if (t === 'number') return v;
 		if (t !== 'string') return null;
-		const parsed = Number(value);
+		const parsed = Number(v);
 		if (Number.isNaN(parsed)) return null;
 		return parsed;
 	};
 
-	// Binding to `hue` externally works for simple things,
-	// but the `input` event makes reacting to actual changes easier.
-	const dispatch = createEventDispatcher<{input: number}>();
-	const update_hue = (value: number) => {
-		hue = value;
-		dispatch('input', hue);
+	const update_hue = (v: Hue) => {
+		value = v;
+		oninput?.(value);
 	};
 
-	const onInput = (e: Event & {currentTarget: EventTarget & HTMLInputElement}) => {
+	const on_input_event = (e: Event & {currentTarget: EventTarget & HTMLInputElement}) => {
 		const parsed = parse_hue(e.currentTarget.value);
 		if (parsed === null) return;
 		update_hue(parsed);
 	};
 
-	let el: HTMLInputElement;
+	let el: HTMLInputElement | undefined = $state();
 
 	const set_hue_from_minimap = (e: MouseEvent & {currentTarget: EventTarget & HTMLElement}) => {
 		const rect = e.currentTarget.getBoundingClientRect();
 		const pct = (e.clientX - rect.x) / rect.width;
 		update_hue(Math.floor(360 * pct));
-		el.focus();
+		el?.focus();
 	};
 </script>
 
 <!-- TODO consider making this a text input or otherwise editable directly -->
-<div class="hue_input">
-	<label class="indicator" style:--hue={hue}>
-		<div class="mr_lg">{title}</div>
-		<input class="hue" value={hue} on:input={onInput} />
+<div class="hue_input" style:--hue={value}>
+	<label>
+		{#if children}<div class="title">{@render children()}</div>{/if}
+		<div class="preview">
+			hue
+			<input type="number" step="0" class="hue" {value} oninput={on_input_event} />
+		</div>
 	</label>
 	<div class="minimap_wrapper">
-		<div class="minimap" on:click={set_hue_from_minimap} aria-hidden />
+		<div class="minimap" onclick={set_hue_from_minimap} aria-hidden />
 	</div>
 	<input
 		bind:this={el}
 		type="range"
-		aria-label={title}
-		value={hue}
-		on:input={onInput}
+		aria-label="hue"
+		{value}
+		oninput={on_input_event}
 		min="0"
 		max="359"
 	/>
 </div>
 
 <style>
-	.hue_input .indicator {
+	.hue_input {
+		--outline_color: hsl(var(--hue) 50% 60%);
+		/* TODO @multiple figure these variables out so they're easily customized (similar pattern in a lot of places) */
+		/* --thumb_background_color: hsl(var(--hue) 50% 50%); */
+	}
+	.preview {
 		background-color: hsl(var(--hue) 50% 50%);
 		height: var(--space_xl5);
 		margin: 0;
 		display: flex;
 		flex-direction: row;
 		align-items: center;
-		justify-content: center;
 		font-weight: 700;
 		color: var(--bg);
-		border-top-left-radius: var(--border_radius);
-		border-top-right-radius: var(--border_radius);
+		padding-left: var(--space_xl);
+		border-top-left-radius: var(--border_radius, var(--radius_md));
+		border-top-right-radius: var(--border_radius, var(--radius_md));
 	}
 	.minimap_wrapper {
 		padding: 0 var(--input_padding_x);
@@ -98,13 +110,14 @@
 		border-top-right-radius: 0;
 	}
 	.hue {
-		width: 7rem;
-		min-width: 7rem;
+		width: 10rem;
+		min-width: 10rem;
+		margin-left: var(--space_lg);
 		font-size: var(--size_lg);
 		text-align: center;
 		background-color: transparent;
 		border: none;
-		border-radius: var(--border_radius);
+		border-radius: var(--border_radius, var(--radius_md));
 		/* TODO why is this necessary? */
 		height: var(--input_height);
 		color: var(--bg);

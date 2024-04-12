@@ -1,32 +1,30 @@
 <script lang="ts">
-	import {writable} from 'svelte/store';
+	import type {Snippet} from 'svelte';
+	import {swallow} from '@ryanatkn/belt/dom.js';
 
 	import Pending_Animation from '$lib/Pending_Animation.svelte';
-	import {get_contextmenu, type Contextmenu_Run} from '$lib/contextmenu.js';
+	import {get_contextmenu, type Contextmenu_Run} from '$lib/contextmenu.svelte.js';
 
-	export let run: Contextmenu_Run;
+	interface Props {
+		run: Contextmenu_Run;
+		icon?: string | Snippet;
+		children: Snippet;
+	}
 
-	// This store makes `run` reactive
-	// because it's a param to `contextmenu.add_entry` which @initializes.
-	const runStore = writable(run);
-	$: if ($runStore !== run) $runStore = run;
+	const {run, icon, children}: Props = $props();
 
 	const contextmenu = get_contextmenu();
 
-	const entry = contextmenu.add_entry(runStore);
+	const entry = contextmenu.add_entry(run);
 
-	const click = (_e: MouseEvent) => {
-		// This timeout lets event handlers react to the current DOM
-		// before the item's changes are applied.
-		setTimeout(() => contextmenu.activate(entry));
-	};
-	const mouseenter = (e: MouseEvent) => {
-		e.stopImmediatePropagation();
-		contextmenu.select(entry);
-	};
+	// TODO refactor
+	// This store makes `run` reactive
+	// because it's a param to `contextmenu.add_entry` which @initializes.
+	$effect(() => {
+		entry.run = run;
+	});
 
-	// the `$contextmenu` is needed because `entry` is not reactive
-	$: ({selected, pending, error_message} = $contextmenu && entry);
+	const {selected, pending, error_message} = $derived(entry);
 </script>
 
 <!-- disabling the a11y warning because a parent element handles keyboard events -->
@@ -38,12 +36,25 @@
 	aria-label="contextmenu entry"
 	tabindex="-1"
 	title={error_message ? `Error: ${error_message}` : undefined}
-	on:click={click}
-	on:mouseenter={mouseenter}
+	onclick={() => {
+		// This timeout lets event handlers react to the current DOM
+		// before the item's changes are applied.
+		setTimeout(() => contextmenu.activate(entry));
+	}}
+	onmouseenter={(e) => {
+		swallow(e);
+		contextmenu.select(entry);
+	}}
 >
 	<div class="content">
-		<div class="icon"><slot name="icon" /></div>
-		<div class="title"><slot /></div>
+		<div class="icon">
+			{#if typeof icon === 'string'}
+				{icon}
+			{:else if icon}
+				{@render icon()}
+			{/if}
+		</div>
+		<div class="title">{@render children()}</div>
 		{#if pending}<Pending_Animation />{:else if error_message}⚠️{/if}
 	</div>
 </li>

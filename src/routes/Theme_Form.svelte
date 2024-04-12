@@ -1,8 +1,7 @@
 <script lang="ts">
-	import {createEventDispatcher} from 'svelte';
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
+	import {swallow} from '@ryanatkn/belt/dom.js';
 
-	import {swallow} from '$lib/swallow.js';
 	import Copy_To_Clipboard from '$lib/Copy_To_Clipboard.svelte';
 	import Dialog from '$lib/Dialog.svelte';
 	import {render_theme_style, type Style_Variable, type Theme} from '$lib/theme.js';
@@ -12,28 +11,37 @@
 
 	// TODO should this be merged with `Theme_Input`?
 
-	const dispatch = createEventDispatcher<{save: Theme}>();
-
 	// TODO add UI to change the tint hue/saturation
 
-	export let theme: Theme | null = null; // `null` means creating
+	interface Props {
+		/**
+		 * `null` means creating
+		 */
+		theme?: Theme | null;
+		onsave?: (theme: Theme) => void;
+		// oncreate?: (theme: Theme) => void;
+	}
 
-	let new_name = theme ? theme.name : 'new theme';
-	let new_variables = theme ? theme.variables : []; // TODO `updateVariables` to `Style_Variable_Detail` ?
+	const {theme = null, onsave}: Props = $props();
 
-	let new_theme: Theme;
-	$: new_theme = {name: new_name, variables: new_variables};
+	let new_name = $state(theme ? theme.name : 'new theme');
 
-	$: code = render_theme_style(new_theme, {empty_default_theme: false, specificity: 1});
+	let new_variables = $state(theme ? theme.variables : []); // TODO `updateVariables` to `Style_Variable_Detail` ?
 
-	$: light_count = new_variables.reduce((c, v) => (v.light ? c + 1 : c), 0);
-	$: dark_count = new_variables.reduce((c, v) => (v.dark ? c + 1 : c), 0);
+	const new_theme: Theme = $derived({name: new_name, variables: new_variables});
 
-	let selected_variable: Style_Variable | null = null;
+	const code = $derived(
+		render_theme_style(new_theme, {empty_default_theme: false, specificity: 1}),
+	);
+
+	const light_count = $derived(new_variables.reduce((c, v) => (v.light ? c + 1 : c), 0));
+	const dark_count = $derived(new_variables.reduce((c, v) => (v.dark ? c + 1 : c), 0));
+
+	let selected_variable: Style_Variable | null = $state(null);
 
 	const save = (): void => {
 		if (!changed) return;
-		dispatch('save', new_theme);
+		onsave?.(new_theme);
 	};
 
 	const edit_variable = (e: MouseEvent, variable: Style_Variable): void => {
@@ -47,29 +55,31 @@
 		alert('TODO'); // eslint-disable-line no-alert
 	};
 
-	$: editing = !!theme;
-	$: changed = theme ? new_name !== theme.name || new_variables !== theme.variables : true;
+	const editing = $derived(!!theme);
+	const changed = $derived(
+		theme ? new_name !== theme.name || new_variables !== theme.variables : true,
+	);
 </script>
 
 <div class="theme_form">
-	<div class="prose">
-		<h2 class="text_align_center">
-			{#if editing}edit{:else}create{/if} theme
-		</h2>
-	</div>
+	<h2 class="text_align_center">
+		{#if editing}edit{:else}create{/if} theme
+	</h2>
+	<aside>
+		Creating and editing themes at runtime is a work in progress, but you can click around to see
+		where it's going!
+	</aside>
 	<header>
 		<div class="variables_header">
-			<div class="prose">
-				<p>variables: {light_count} light, {dark_count} dark</p>
-			</div>
-			<button type="button" class="w_100" on:click={add_variable}>add a variable</button>
+			<p>variables: {light_count} light, {dark_count} dark</p>
+			<button type="button" class="w_100" onclick={add_variable} disabled>add a variable</button>
 		</div>
 		<form>
 			<label>
 				<div class="title">name</div>
 				<input bind:value={new_name} placeholder=">" />
 			</label>
-			<button type="button" on:click={save} disabled={!changed}
+			<button type="button" onclick={save} disabled={!changed}
 				>{#if editing}save changes{:else}create theme{/if}</button
 			>
 		</form>
@@ -77,10 +87,8 @@
 	<div class="content">
 		<div class="variables">
 			{#each new_variables as variable (variable.name)}
-				<button
-					type="button"
-					class="variable menu_item"
-					on:click={(e) => edit_variable(e, variable)}>--{variable.name}</button
+				<button type="button" class="variable menu_item" onclick={(e) => edit_variable(e, variable)}
+					>--{variable.name}</button
 				>
 			{/each}
 		</div>
@@ -95,16 +103,16 @@
 	</div>
 </div>
 {#if selected_variable}
-	<Dialog on:close={() => (selected_variable = null)} let:close>
-		<div class="pane">
-			<div class="panel p_lg box">
-				<Style_Variable_Detail variable={selected_variable} />
-				<br />
-				<aside>this is unfinished</aside>
-				<br />
-				<button on:click={close}>ok</button>
+	<Dialog onclose={() => (selected_variable = null)}>
+		{#snippet children(close)}
+			<div class="pane">
+				<div class="panel p_lg box">
+					<Style_Variable_Detail variable={selected_variable} />
+					<aside>⚠️ This is unfinished and will change.</aside>
+					<button onclick={close}>ok</button>
+				</div>
 			</div>
-		</div>
+		{/snippet}
 	</Dialog>
 {/if}
 
@@ -134,9 +142,6 @@
 	.rendered {
 		position: relative; /* for the .copy button */
 		flex: 1;
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
 		overflow: auto;
 	}
 	/* TODO this is hacky, maybe pass classes to `Code`? or what else? */

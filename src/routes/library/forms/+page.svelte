@@ -6,6 +6,7 @@
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
 	import {get_tome} from '$lib/tome.js';
+	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
 	const LIBRARY_ITEM_NAME = 'forms';
 
@@ -14,29 +15,33 @@
 	// TODO extract this to where? (where is it used in the css? check all @keyframe)
 	const ANIMATION_DURATION_FAST = 91; // ms
 
-	let created_account = false;
+	let created_account = $state(false);
 
 	const faces = ['😊', '😑', '🤔', '😉'];
 
-	let username = '';
-	let password = '';
-	let lifestory = '';
+	let username = $state('');
+	let password = $state('');
+	let lifestory = $state('');
 
 	const radio_items = ['a radio input', 'another radio input'];
-	let selected_radio_item = radio_items[0];
+	let selected_radio_item = $state(radio_items[0]);
 
-	let checked1 = false;
-	let checked2 = true;
+	let checked1 = $state(false);
+	let checked2 = $state(true);
 </script>
 
 <Tome_Detail {tome}>
-	<div class="prose">
+	<aside>forms need more work</aside>
+
+	<section>
+		<Tome_Subheading text="form with a fieldset" slug="form-with-a-fieldset">
+			<Mdn_Link href="Web/HTML/Element/form" /> with a <Mdn_Link href="Web/HTML/Element/fieldset" />
+		</Tome_Subheading>
 		<Code
 			content={`<form>
 	<fieldset>
 		<legend>
-			a <code>legend</code>
-			in a <code>fieldset</code>
+			a <Mdn_Link href="Web/HTML/Element/legend" />
 		</legend>
 		<label>
 			<div class="title">
@@ -52,15 +57,10 @@
 	...
 </form>`}
 		/>
-		<br />
 		<div class="width_sm">
 			<form>
 				<fieldset>
-					<legend
-						>a <Mdn_Link href="Web/HTML/Element/legend">legend</Mdn_Link>
-						in a
-						<Mdn_Link href="Web/HTML/Element/fieldset">fieldset</Mdn_Link></legend
-					>
+					<legend>This is a <Mdn_Link href="Web/HTML/Element/legend" /></legend>
 					<label>
 						<div class="title">username</div>
 						<input bind:value={username} disabled={created_account} placeholder=">" />
@@ -94,11 +94,7 @@
 							{/each}
 						</select>
 					</label>
-					<button
-						type="button"
-						disabled={created_account}
-						on:click={() => (created_account = true)}
-					>
+					<button type="button" disabled={created_account} onclick={() => (created_account = true)}>
 						create account
 					</button>
 				</fieldset>
@@ -109,18 +105,16 @@
 					out:fly={{y: 100, duration: ANIMATION_DURATION_FAST}}
 				>
 					<Alert status="error">cannot create account because this library is fake</Alert>
-					<button type="button" on:click={() => (created_account = false)}> undo undo! </button>
+					<button type="button" onclick={() => (created_account = false)}> undo undo! </button>
 				</form>
 			{/if}
 		</div>
-	</div>
+	</section>
 
-	<hr />
-
-	<div class="prose">
-		<h3>
+	<section>
+		<Tome_Subheading text="form with range input" slug="form-with-range-input">
 			<code>form</code> with range input
-		</h3>
+		</Tome_Subheading>
 		<form>
 			<fieldset>
 				<Code content={`<input type="range" />`} />
@@ -131,14 +125,12 @@
 				<input type="range" step={1} min={0} max={100} disabled />
 			</fieldset>
 		</form>
-	</div>
+	</section>
 
-	<hr />
-
-	<div class="prose">
-		<h3>
+	<section>
+		<Tome_Subheading text="form with checkboxes" slug="form-with-checkboxes">
 			<code>form</code> with checkboxes
-		</h3>
+		</Tome_Subheading>
 		<!-- TODO make this a form, but figure out the checkbox problem -- maybe a last-child exception? -->
 		<form>
 			<fieldset>
@@ -162,17 +154,14 @@
 		</form>
 		<aside>
 			The above are wrapped with: <Code content={`<label class="row">`} />
-			with the <code>.disabled</code> class as needed: <Code
-				content={`<label class="row disabled">`}
-			/>
+			with <code>.disabled</code> as needed: <Code content={`<label class="row disabled">`} />
 		</aside>
-	</div>
-	<hr />
+	</section>
 
-	<div class="prose">
-		<h3>
+	<section>
+		<Tome_Subheading text="form with radio inputs" slug="form-with-radio-inputs">
 			<code>form</code> with radio inputs
-		</h3>
+		</Tome_Subheading>
 		<form>
 			<fieldset>
 				{#each radio_items as radioItem}
@@ -198,5 +187,5 @@
 				</label>
 			</fieldset>
 		</form>
-	</div>
+	</section>
 </Tome_Detail>

@@ -2,28 +2,44 @@
 	import {parse_path_pieces} from '@ryanatkn/belt/path.js';
 	import {base} from '$app/paths';
 	import {page} from '$app/stores';
+	import type {Snippet} from 'svelte';
 
-	export let path: string | undefined = undefined;
-	export let selected_path: string | null | undefined = undefined; // `null` means none
-	export let base_path: string | undefined = undefined;
+	interface Props {
+		path?: string | undefined;
+		/**
+		 * `null` means none
+		 */
+		selected_path?: string | null | undefined;
+		base_path?: string;
+		separator?: Snippet;
+		children?: Snippet;
+	}
 
-	$: final_path = path ?? $page.url.pathname;
-	$: final_selected_path =
-		selected_path === null ? null : selected_path === undefined ? final_path : selected_path;
-	$: final_base_path = base_path ?? base;
+	const {path, selected_path, base_path, separator, children}: Props = $props();
 
-	$: path_pieces = parse_path_pieces(final_path);
+	const final_path = $derived(path ?? $page.url.pathname);
+	const final_selected_path = $derived(
+		selected_path === null ? null : selected_path === undefined ? final_path : selected_path,
+	);
+	const final_base_path = $derived(base_path ?? base);
 
-	$: root_path = final_base_path || '/';
+	const path_pieces = $derived(parse_path_pieces(final_path));
+
+	const root_path = $derived(final_base_path || '/');
+
+	// TODO animate these, need to use in a layout though, but then how to opt out?
+	// `transition:slide={{axis: 'x'}}`
 </script>
 
 <div class="breadcrumb">
-	<!-- The default/only slot is the content for the root "/" link. -->
-	<a href={root_path} class:selected={root_path === final_selected_path}><slot>•</slot></a
+	<a href={root_path} class:selected={root_path === final_selected_path}
+		>{#if children}{@render children()}{:else}•{/if}</a
 	>{#each path_pieces as pathPiece}{#if pathPiece.type === 'piece'}<a
 				href={final_base_path + pathPiece.path}
 				class:selected={pathPiece.path === final_selected_path}>{pathPiece.name}</a
-			>{:else}<span class="separator"><slot name="separator">/</slot></span>{/if}{/each}
+			>{:else}<span class="separator"
+				>{#if separator}{@render separator()}{:else}/{/if}</span
+			>{/if}{/each}
 </div>
 
 <style>
@@ -31,14 +47,13 @@
 		text-align: center;
 		display: flex;
 		flex-wrap: wrap;
-		justify-content: center;
-		align-items: stretch;
-		padding: var(--space_md) 0;
+		align-items: center;
+		font-size: var(--font_size, var(--size_md));
 	}
 	a {
 		position: relative;
 		z-index: 1;
-		padding: 0 var(--space_sm);
+		padding: 0 calc(var(--font_size, var(--size_md)) * 0.5);
 		display: flex;
 		align-items: center;
 	}

@@ -120,17 +120,14 @@
 	--text_3: hsl(var(--tint_hue), var(--tint_saturation), 48%);
 	--text_disabled: var(--text_3);
 	--text_active: hsl(var(--hue_a), 55%, 40%);
-	--line_height: var(--line_height_5);
-	--line_height_1: 1;
-	--line_height_2: 1.1;
-	--line_height_3: 1.2;
-	--line_height_4: 1.35;
-	--line_height_5: 1.5;
-	--line_height_6: 1.75;
-	--line_height_7: 2;
-	--font_family_sans: system-ui, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+	--line_height_xs: 1;
+	--line_height_sm: 1.2;
+	--line_height_md: 1.4;
+	--line_height_lg: 1.6;
+	--line_height_xl: 2;
+	--font_sans: system-ui, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
 		'Noto Color Emoji'; /* @source https://kilianvalkhof.com/2022/css-html/your-css-reset-needs-text-size-adjust-probably/ */
-	--font_family_mono: ui-monospace, 'Fira Mono', monospace;
+	--font_mono: ui-monospace, 'Fira Mono', monospace;
 	--size_xs: 1rem;
 	--size_sm: 1.3rem;
 	--size_md: 1.6rem;
@@ -195,7 +192,6 @@
 	--outline_width_3: var(--border_width_1);
 	--outline_style: solid;
 	--outline_color: var(--color_a_5);
-	--border_radius: var(--radius_md);
 	--radius_xl: 5.5rem;
 	--radius_lg: 3.4rem;
 	--radius_md: 2.1rem;
@@ -216,14 +212,15 @@
 	--input_height_inner: calc(
 		var(--input_height) - 2 * var(--border_width) - 2 * var(--input_padding_y)
 	);
-	--shadow: 2px 4px 9px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.28),
-		2px 14px 48px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.28);
+	--shadow_md: 2px 4px 9px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.28),
+		2px 12px 36px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.28);
 	--shadow_lg: 2px 6px 14px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.8),
 		2px 6px 48px hsla(var(--tint_hue), var(--tint_saturation), 6%, 0.8);
-	--shadow_inset: 2px 2px 4px inset var(--lighten_2), -2px -2px 4px inset var(--darken_2),
-		4px 4px 6px inset var(--lighten_1), -4px -4px 6px inset var(--darken_1);
-	--shadow_inset_active: 2px 2px 4px inset var(--darken_2), -2px -2px 4px inset var(--lighten_2),
-		4px 4px 6px inset var(--darken_1), -4px -4px 6px inset var(--lighten_1);
+	--shadow_inset_md: 0px 2px 4px 1px inset var(--lighten_2), 0px -2px 4px 1px inset var(--darken_2),
+		0 3px 6px 2px inset var(--lighten_2), 0 -3px 6px 2px inset var(--darken_1);
+	--shadow_inset_inverse_md: 0 2px 4px 1px inset var(--darken_2),
+		0 -2px 4px 1px inset var(--lighten_2), 0 3px 6px 2px inset var(--darken_1),
+		0 -3px 6px 2px inset var(--lighten_2);
 	--icon_size: var(--icon_size_md);
 	--icon_size_xs: 18px;
 	--icon_size_sm: 32px;
@@ -327,9 +324,9 @@
 	--border_color_3: hsl(var(--tint_hue), 60%, 80%, 50%);
 	--border_color_4: hsl(var(--tint_hue), 60%, 80%, 40%);
 	--border_color_5: hsl(var(--tint_hue), 60%, 80%, 25%);
-	--shadow: 2px 4px 9px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5)),
-		2px 14px 48px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5));
-	--shadow_lg: 2px 6px 18px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5)),
+	--shadow_md: 2px 4px 9px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5)),
+		2px 12px 36px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5));
+	--shadow_lg: 2px 6px 14px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5)),
 		2px 6px 48px hsla(var(--tint_hue), var(--tint_saturation), 82%, var(--fade_5));
 }
 

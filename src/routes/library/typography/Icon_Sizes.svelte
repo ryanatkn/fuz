@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Style_Variable_Button from '$routes/Style_Variable_Button.svelte';
+	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
 	// TODO move to a single source of truth (JSON or ts), generate CSS and use to render here
 	const sizes = {
@@ -12,17 +13,13 @@
 	};
 </script>
 
-<section class="prose">
-	<div>
-		<h3>
-			the <Style_Variable_Button name="icon_size" inline /> variable's variants
-		</h3>
-		<aside>
-			unlike <code>--size_</code> variables, <code>--icon_</code> variables are in
-			<code>px</code>
-			not <code>rem</code>, so they're insensitive to browser font size
-		</aside>
-	</div>
+<section>
+	<Tome_Subheading text="Icon sizes" slug="icon_size-variants" />
+	<aside>
+		unlike <code>--size_</code> variables, <code>--icon_</code> variables are in
+		<code>px</code>
+		not <code>rem</code>, so they're insensitive to browser font size
+	</aside>
 </section>
 <div class="icon_sizes">
 	<!-- TODO make this data driven -->

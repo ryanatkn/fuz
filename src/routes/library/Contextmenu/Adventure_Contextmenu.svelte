@@ -4,20 +4,24 @@
 	import {type History_Item, type Cat, to_cats_label} from '$routes/library/Contextmenu/helpers.js';
 	import Cat_Contextmenu from '$routes/library/Contextmenu/Cat_Contextmenu.svelte';
 
-	export let home_cats: Cat[];
-	export let adventure_cats: Cat[];
-	export let act: (item: History_Item) => void;
+	interface Props {
+		home_cats: Cat[];
+		adventure_cats: Cat[];
+		act: (item: History_Item) => void;
+	}
 
-	$: cat_to_call_to_adventure = to_cats_label(home_cats);
+	const {home_cats, adventure_cats, act}: Props = $props();
+
+	const cat_to_call_to_adventure = $derived(to_cats_label(home_cats));
 </script>
 
 <Contextmenu_Submenu>
-	<svelte:fragment slot="icon">🌄</svelte:fragment>
+	{#snippet icon()}🌄{/snippet}
 	adventure
-	<svelte:fragment slot="menu">
+	{#snippet menu()}
 		{#if cat_to_call_to_adventure}
 			<Contextmenu_Entry run={() => act({type: 'call_cats_adventure'})}>
-				<svelte:fragment slot="icon">🦋</svelte:fragment>
+				{#snippet icon()}🦋{/snippet}
 				call
 			</Contextmenu_Entry>
 		{/if}
@@ -25,10 +29,14 @@
 			<Cat_Contextmenu name={cat.name} icon={cat.icon} position={cat.position} {act} />
 		{/each}
 		{#if !cat_to_call_to_adventure}
+			<Contextmenu_Entry run={() => act({type: 'cat_be_or_do', name: null, position: 'adventure'})}>
+				{#snippet icon()}🌄{/snippet}
+				do
+			</Contextmenu_Entry>
 			<Contextmenu_Entry run={() => act({type: 'call_cats_home'})}>
-				<svelte:fragment slot="icon">🐈‍⬛</svelte:fragment>
+				{#snippet icon()}🐈‍⬛{/snippet}
 				leave
 			</Contextmenu_Entry>
 		{/if}
-	</svelte:fragment>
+	{/snippet}
 </Contextmenu_Submenu>

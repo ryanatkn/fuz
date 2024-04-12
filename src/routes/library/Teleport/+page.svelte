@@ -4,18 +4,23 @@
 	import {get_tome} from '$lib/tome.js';
 	import Teleport from '$lib/Teleport.svelte';
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import Tome_Link from '$lib/Tome_Link.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Teleport';
 	const tome = get_tome(LIBRARY_ITEM_NAME);
 
-	let swap = true;
-	let teleport_1: HTMLElement | undefined = undefined;
-	let teleport_2: HTMLElement | undefined = undefined;
+	let swap = $state(true);
+	let teleport_1: HTMLElement | undefined = $state();
+	let teleport_2: HTMLElement | undefined = $state();
 </script>
 
 <Tome_Detail {tome}>
-	<section class="prose width_sm">
-		<p>Relocates elements in the DOM, in the rare cases that's useful and the best solution.</p>
+	<section>
+		<p>
+			Relocates elements in the DOM, in the rare cases that's useful and the best solution. The <Tome_Link
+				name="Dialog"
+			/> uses this to mount dialogs from any component without inheriting styles.
+		</p>
 		<aside>
 			<p>Use only when necessary or fun.</p>
 		</aside>
@@ -33,7 +38,7 @@
 	<div class="panel" bind:this={teleport_1} />
 	<div class="panel" bind:this={teleport_2} />
 </div>
-<button on:click={() => (swap = !swap)}>
+<button onclick={() => (swap = !swap)}>
 	teleport the bunny
 </button>`}
 		/>
@@ -45,13 +50,15 @@
 			<div class="panel" bind:this={teleport_1} />
 			<div class="panel" bind:this={teleport_2} />
 		</div>
-		<button on:click={() => (swap = !swap)}> teleport the bunny </button>
+		<button onclick={() => (swap = !swap)}> teleport the bunny </button>
 	</section>
 </Tome_Detail>
 
 <style>
 	.teleports {
 		display: flex;
+		gap: var(--space_sm);
+		margin-bottom: var(--space_sm);
 	}
 	.teleports > div {
 		width: var(--space_xl8);
@@ -60,9 +67,5 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-	}
-	/* TODO standardize this */
-	section {
-		margin-bottom: var(--space_xl3);
 	}
 </style>

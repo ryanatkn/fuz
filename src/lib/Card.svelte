@@ -1,22 +1,32 @@
 <script lang="ts">
 	import {page} from '$app/stores';
+	import type {Snippet} from 'svelte';
 
-	export let tag: string | undefined = undefined;
-	export let href: string | undefined = undefined;
-	export let align: 'left' | 'right' | 'above' | 'below' = 'left';
-	export let attrs: any = undefined;
+	// TODO think through Alert+Card APIs together, one can be a button and the other a link atm
 
-	$: link = !!href;
-	$: selected = link && $page.url.pathname === href;
-	$: final_tag = tag || (link ? 'a' : 'div');
-	$: inferred_attrs = link ? {href} : undefined;
+	interface Props {
+		tag?: string | undefined;
+		href?: string | undefined;
+		align?: 'left' | 'right' | 'above' | 'below';
+		attrs?: any; // type? what about the optional tag though? (button etc - maybe API should be more explicit)
+		icon?: string | Snippet;
+		children: Snippet;
+	}
 
-	$: left = align === 'left';
-	$: right = align === 'right';
-	$: above = align === 'above';
-	$: below = align === 'below';
+	const {tag, href, align = 'left', attrs, icon, children}: Props = $props();
 
-	$: icon = link ? '🔗' : '🪧';
+	const link = $derived(!!href);
+	const selected = $derived(link && $page.url.pathname === href);
+	const final_tag = $derived(tag || (link ? 'a' : 'div'));
+	const inferred_attrs = $derived(link ? {href} : undefined);
+
+	const left = $derived(align === 'left');
+	const right = $derived(align === 'right');
+	const above = $derived(align === 'above');
+	const below = $derived(align === 'below');
+
+	const fallback_icon = $derived(link ? '🔗' : '🪧');
+	const final_icon: string | Snippet = $derived(icon ?? fallback_icon);
 </script>
 
 <svelte:element
@@ -31,14 +41,27 @@
 	class:above
 	class:below
 >
-	{#if align === 'left' || align === 'above'}<div class="icon">
-			<slot name="icon">{icon}</slot>
-		</div>{/if}
-	<div class="content"><slot /></div>
-	{#if align === 'right' || align === 'below'}<div class="icon">
-			<slot name="icon">{icon}</slot>
-		</div>{/if}</svelte:element
->
+	{#if align === 'left' || align === 'above'}
+		{@render icon_snippet()}
+	{/if}
+	<div class="content">
+		{@render children()}
+	</div>
+	{#if align === 'right' || align === 'below'}
+		{@render icon_snippet()}
+	{/if}
+</svelte:element>
+
+<!-- TODO name? -->
+{#snippet icon_snippet()}
+	<div class="icon">
+		{#if typeof final_icon === 'string'}
+			{final_icon}
+		{:else}
+			{@render final_icon()}
+		{/if}
+	</div>
+{/snippet}
 
 <style>
 	.card {
@@ -50,7 +73,7 @@
 		padding: var(--space_lg);
 		width: var(--card_width);
 		background-color: var(--fg_1);
-		border-radius: var(--border_radius);
+		border-radius: var(--border_radius, var(--radius_md));
 		text-decoration: none;
 		text-align: left;
 	}

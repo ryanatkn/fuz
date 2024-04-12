@@ -1,23 +1,35 @@
 <script lang="ts">
+	import type {Snippet} from 'svelte';
+
 	import Tome_Title from '$lib/Tome_Title.svelte';
-	import Library_Panel from '$lib/Library_Panel.svelte';
 	import type {Tome} from '$lib/tome.js';
 
-	// TODO component name?
+	interface Props {
+		tome: Tome;
+		header?: Snippet;
+		children: Snippet;
+	}
 
-	export let tome: Tome;
+	const {tome, header, children}: Props = $props();
+
+	// TODO component name?
 </script>
 
-<Library_Panel>
+<div class="tome_detail width_md">
 	<header>
-		<slot name="header">
+		{#if header}
+			{@render header()}
+		{:else}
 			<Tome_Title {tome} />
-		</slot>
+		{/if}
 	</header>
-	<slot />
-</Library_Panel>
+	{@render children()}
+</div>
 
 <style>
+	.tome_detail {
+		margin-bottom: var(--space_xl9);
+	}
 	header {
 		margin-bottom: var(--space_xl3);
 	}

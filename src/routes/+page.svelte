@@ -1,19 +1,19 @@
 <script lang="ts">
 	import {base} from '$app/paths';
-	import {parse_package_meta} from '@ryanatkn/gro/package_meta.js';
 
 	import Library_Footer from '$lib/Library_Footer.svelte';
 	import Card from '$lib/Card.svelte';
-	import {package_json, src_json} from '$routes/package.js';
+	import {get_pkg} from '$routes/pkg.js';
+	import Spider from '$routes/Spider.svelte';
 
-	// TODO set in context
-	const pkg = parse_package_meta(package_json.homepage, package_json, src_json);
+	const pkg = get_pkg();
 </script>
 
 <main class="box w_100">
 	<div class="box width_md">
-		<section class="prose box">
-			<h1>fuz</h1>
+		<section class="box">
+			<h1 class="mt_xl4 mb_lg">fuz</h1>
+			<div class="box mb_xl"><Spider size="120px" /></div>
 			<blockquote>friendly user zystem</blockquote>
 			<div class="width_sm panel p_md">
 				<p>
@@ -24,9 +24,7 @@
 					Fuz is being made to support <a href="https://www.ryanatkn.com/table">my other projects</a
 					>
 					that focus on end-users. Fuz emphasizes capability and efficiency and tries to be simple for
-					those goals. Compared to most UI libraries, Fuz has fewer features and more opinions, and it
-					has some unusual features like
-					<a href="https://www.fuz.dev/library/Contextmenu">the contextmenu</a>.
+					those goals. Compared to most UI libraries, Fuz has fewer features and more opinions.
 				</p>
 				<p>
 					To learn more see <a href="https://www.fuz.dev/library">the docs</a>
@@ -36,12 +34,12 @@
 			</div>
 		</section>
 		<section>
-			<Card href="{base}/library">library<svelte:fragment slot="icon">🧶</svelte:fragment></Card>
+			<Card href="{base}/library">library{#snippet icon()}🧶{/snippet}</Card>
 		</section>
 		<section class="panel p_lg">
 			<!-- TODO ideally this wouldn't duplicate metadata like descriptions, but adding fuz_gitops to this repo is heavy -->
-			<h2 class="mb_lg">other packages</h2>
-			<menu>
+			<h2 class="mb_lg mt_0">other packages</h2>
+			<menu class="unstyled">
 				<a class="chip" href="https://template.fuz.dev/">fuz_template</a>
 				<a class="chip" href="https://gitops.fuz.dev/">fuz_gitops</a>
 				<a class="chip" href="https://code.fuz.dev/">fuz_code</a>
@@ -50,7 +48,9 @@
 		</section>
 		<section>
 			<Library_Footer {pkg}>
-				<a href="{base}/about">about</a>
+				{#snippet logo_header()}
+					<a href="{base}/about" class="mb_xs">about</a>
+				{/snippet}
 				<div hidden>
 					@ryanatkn@hci.social on <a rel="me" href="https://hci.social/@ryanatkn">Mastodon</a>
 				</div>
@@ -60,12 +60,6 @@
 </main>
 
 <style>
-	section {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		margin-bottom: var(--space_xl5);
-	}
 	menu {
 		width: 100%;
 		display: flex;

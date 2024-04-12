@@ -2,37 +2,40 @@
 	import type {Url} from '@ryanatkn/gro/paths.js';
 	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
 	import {format_url} from '@ryanatkn/belt/url.js';
+	import type {Snippet} from 'svelte';
 
 	import Github_Logo from '$lib/Github_Logo.svelte';
 
-	export let pkg: Package_Meta;
-	export let root_url: Url | null = null;
+	interface Props {
+		pkg: Package_Meta;
+		root_url?: Url | null;
+		logo?: Snippet;
+		logo_header?: Snippet;
+		logo_footer?: Snippet;
+		children?: Snippet;
+	}
 
-	$: ({repo_url} = pkg);
+	const {pkg, root_url = null, logo, logo_header, logo_footer, children}: Props = $props();
 </script>
 
-<footer class="panel p_lg">
-	<slot />
-	<div class="logo">
-		<a href={repo_url} rel="me"><slot name="logo"><Github_Logo /></slot></a>
+<footer class="box">
+	{#if children}{@render children()}{/if}
+	<div class="logo box panel p_lg">
+		{#if logo_header}{@render logo_header()}{/if}
+		<a href={pkg.repo_url} rel="me"
+			>{#if logo}{@render logo()}{:else}<Github_Logo />{/if}</a
+		>
+		{#if logo_footer}{@render logo_footer()}{/if}
 	</div>
 	{#if root_url}
 		<div class="root_url">
-			<a href={root_url} rel="me">{format_url(root_url)}</a>
+			<a href={root_url}>{format_url(root_url)}</a>
 		</div>
 	{/if}
 </footer>
 
 <style>
-	footer {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		flex-direction: column;
-	}
-	.logo {
-		display: flex;
-	}
+	/* TODO probably extract */
 	.logo a {
 		--border_width: var(--border_width_4);
 		--border_color: transparent;

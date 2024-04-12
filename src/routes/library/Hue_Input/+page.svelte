@@ -4,31 +4,52 @@
 	import {get_tome} from '$lib/tome.js';
 	import Hue_Input from '$lib/Hue_Input.svelte';
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Hue_Input';
 	const tome = get_tome(LIBRARY_ITEM_NAME);
 
-	let hue: number;
+	let value: number = $state(180);
+	let value_from_oninput: number | undefined = $state();
 </script>
 
 <Tome_Detail {tome}>
-	<div class="prose" style:--color="hsl({hue} 62% 31%)">
-		<!-- TODO make this a generic data-driven helper -->
+	<section>
 		<Code content={`import Hue_Input from '@ryanatkn/fuz/Hue_Input.svelte';`} lang="ts" />
+	</section>
+	<section>
+		<Tome_Subheading text="With bind:value" slug="with-bindvalue"
+			>With <code>bind:value</code></Tome_Subheading
+		>
+		<Code content={`<Hue_Input bind:value />`} />
+		<Hue_Input bind:value />
+		<div class="mt_md" style:--color="hsl({value} 62% 31%)">
+			<code>bind:value === {value}</code>
+		</div>
+	</section>
+	<section>
+		<Tome_Subheading text="With oninput" slug="with-oninput"
+			>With <code>oninput</code></Tome_Subheading
+		>
 		<Code
 			content={`<Hue_Input
-	bind:hue
-	on:input={(e) => {
-		// hue === e.detail
-		// === ${hue}
-	}}
+	oninput={(v) => (value_from_oninput = v)}
 />`}
 		/>
-		<Hue_Input
-			bind:hue
-			on:input={(e) => {
-				if (hue !== e.detail) throw Error();
-			}}
+		<Hue_Input oninput={(v) => (value_from_oninput = v)} />
+		<div class="mt_md" style:--color="hsl({value} 62% 31%)">
+			<code>value_from_oninput === {value_from_oninput + ''}</code>
+		</div>
+	</section>
+	<section>
+		<Tome_Subheading text="With children" slug="with-children"
+			>With <code>children</code></Tome_Subheading
+		>
+		<Code
+			content={`<Hue_Input>
+	Some colorful hue input
+</Hue_Input>`}
 		/>
-	</div>
+		<Hue_Input>Some colorful hue input</Hue_Input>
+	</section>
 </Tome_Detail>

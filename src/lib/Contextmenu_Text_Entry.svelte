@@ -1,15 +1,19 @@
 <script lang="ts">
 	import Contextmenu_Entry from '$lib/Contextmenu_Entry.svelte';
-	import type {Contextmenu_Run} from '$lib/contextmenu.js';
+	import type {Contextmenu_Run} from '$lib/contextmenu.svelte.js';
+
+	interface Props {
+		run: Contextmenu_Run;
+		content: string; // TODO @multiple rethink this API
+		icon: string; // TODO @multiple rethink this API
+	}
+
+	const {run, content, icon: icon_text}: Props = $props();
 
 	// TODO consider making this the implicit default entry, so consumers can simply declare `{run, content}`
-
-	export let content: string;
-	export let icon: string;
-	export let run: Contextmenu_Run;
 </script>
 
 <Contextmenu_Entry {run}>
-	<svelte:fragment slot="icon">{icon}</svelte:fragment>
+	{#snippet icon()}{icon_text}{/snippet}
 	{content}
 </Contextmenu_Entry>
