@@ -1,5 +1,5 @@
 ---
-"@ryanatkn/fuz": minor
+'@ryanatkn/fuz': patch
 ---
 
-improve contextmenu api
+improve contextmenu api to have more flexible action params
