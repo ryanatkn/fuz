@@ -7,7 +7,7 @@
 	interface Props {
 		pkg: Package_Meta; // TODO normalized version with cached primitives?
 		repo_name?: Snippet<[repo_name: string]>;
-		description?: Snippet<[description: string]>;
+		description?: Snippet<[description: string, icon?: string]>;
 		npm_url?: Snippet<[npm_url: string]>;
 		homepage_url?: Snippet<[homepage_url: string]>;
 		children?: Snippet;
@@ -35,9 +35,12 @@
 	</header>
 	{#if package_json.description}
 		{#if description}
-			{@render description(package_json.description)}
+			{@render description(package_json.description, package_json.icon)}
 		{:else}
-			<blockquote class="description">{package_json.description}</blockquote>
+			<blockquote class="description">
+				{package_json.description}
+				{package_json.icon}
+			</blockquote>
 		{/if}
 	{/if}
 	{#if children}{@render children()}{/if}
