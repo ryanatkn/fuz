@@ -333,7 +333,6 @@ export const src_json = {
 			path: 'contextmenu.svelte.ts',
 			declarations: [
 				{name: 'Contextmenu_Params', kind: 'type'},
-				{name: 'Contextmenu_Action_Params', kind: 'type'},
 				{name: 'Item_State', kind: 'type'},
 				{name: 'Entry_State', kind: 'class'},
 				{name: 'Submenu_State', kind: 'class'},
