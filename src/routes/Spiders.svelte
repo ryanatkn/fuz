@@ -34,7 +34,6 @@
 	}: Props = $props();
 
 	const shuffled = $derived(shuffle(spiders.slice(), (min, max) => random_int(min, max, random)));
-	$inspect(shuffled);
 </script>
 
 <!-- TODO animate each in randomly -->

@@ -4,7 +4,7 @@
 
 	// TODO move to a single source of truth (JSON or ts), generate CSS and use to render here
 	const sizes = {
-		icon_size_xl2: '196px',
+		icon_size_xl2: '192px',
 		icon_size_xl: '128px',
 		icon_size_lg: '80px',
 		icon_size_md: '48px',

@@ -7,7 +7,7 @@
 	interface Props {
 		pkg: Package_Meta; // TODO normalized version with cached primitives?
 		repo_name?: Snippet<[repo_name: string]>;
-		description?: Snippet<[description: string]>;
+		description?: Snippet<[description: string, icon?: string]>;
 		npm_url?: Snippet<[npm_url: string]>;
 		homepage_url?: Snippet<[homepage_url: string]>;
 		children?: Snippet;
@@ -20,18 +20,27 @@
 
 <div class="package_summary">
 	<!-- TODO maybe continue this snippet pattern, or maybe simplify? -->
-	<header>
+	<header class="box">
 		{#if repo_name}
 			{@render repo_name(pkg.repo_name)}
 		{:else}
 			<div class="repo_name">{pkg.repo_name}</div>
 		{/if}
+		<!-- TODO maybe add this value to package.json, `icon_alt` -->
+		<img
+			style:max-width="var(--favicon_size, var(--icon_size_xl2))"
+			src="{pkg.homepage_url}/favicon.png"
+			alt="favicon for {pkg.repo_name}"
+		/>
 	</header>
 	{#if package_json.description}
 		{#if description}
-			{@render description(package_json.description)}
+			{@render description(package_json.description, package_json.icon)}
 		{:else}
-			<blockquote class="description">{package_json.description}</blockquote>
+			<blockquote class="description">
+				{package_json.description}
+				{package_json.icon}
+			</blockquote>
 		{/if}
 	{/if}
 	{#if children}{@render children()}{/if}
@@ -95,6 +104,7 @@
 		font-size: var(--size_xl2);
 		font-weight: 400;
 		text-align: center;
+		margin-bottom: var(--space_lg);
 	}
 	.npm_url {
 		font-family: var(--font_mono);

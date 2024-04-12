@@ -109,9 +109,6 @@
 </Tome_Detail>
 
 <style>
-	code button.inline {
-		margin: 0;
-	}
 	.index {
 		font-size: var(--size_xl3);
 		font-weight: 300;

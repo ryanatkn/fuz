@@ -46,7 +46,7 @@ export const package_json = {
 		'prettier-plugin-svelte': '^3.2.2',
 		'prism-svelte': '^0.5.0',
 		prismjs: '^1.29.0',
-		svelte: '^5.0.0-next.100',
+		svelte: '^5.0.0-next.101',
 		'svelte-check': '^3.6.9',
 		tslib: '^2.6.2',
 		typescript: '^5.4.4',
@@ -333,7 +333,6 @@ export const src_json = {
 			path: 'contextmenu.svelte.ts',
 			declarations: [
 				{name: 'Contextmenu_Params', kind: 'type'},
-				{name: 'Contextmenu_Action_Params', kind: 'type'},
 				{name: 'Item_State', kind: 'type'},
 				{name: 'Entry_State', kind: 'class'},
 				{name: 'Submenu_State', kind: 'class'},

@@ -13,11 +13,7 @@
 
 	// TODO remove CSS below with reusable CSS or a Svelte component
 
-	$inspect($page.url.hash);
-
 	const hash = $derived($page.url.hash.slice(1));
-
-	// TODO BLOCK the `:global(ul)` below appears to be a bug in Svelte 5
 </script>
 
 <div class="library_page_links">
@@ -50,6 +46,7 @@
 		flex-direction: column;
 		align-items: flex-start;
 	}
+	/* TODO @multiple remove all :global usage after https://github.com/sveltejs/svelte/issues/10143 */
 	.sidebar_wrapper :global(ul) {
 		min-width: var(--library_menu_width);
 	}

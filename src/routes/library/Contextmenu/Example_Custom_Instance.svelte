@@ -5,7 +5,7 @@
 	import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
 	import Contextmenu_Entry from '$lib/Contextmenu_Entry.svelte';
 	import Contextmenu from '$lib/Contextmenu.svelte';
-	import {Contextmenu_Store} from '$lib/contextmenu.svelte';
+	import {Contextmenu_Store} from '$lib/contextmenu.svelte.js';
 	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
 	const contextmenu = new Contextmenu_Store();

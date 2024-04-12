@@ -19,6 +19,11 @@
 <Tome_Detail {tome}>
 	<section>
 		<aside>
+			<p>
+				todo: demonstrate using <code>contextmenu_action</code> to avoid the wrapper element
+			</p>
+		</aside>
+		<aside>
 			<p>todo: for mobile, probably change to a drawer-from-bottom design</p>
 		</aside>
 	</section>

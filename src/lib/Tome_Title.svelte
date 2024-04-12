@@ -20,11 +20,13 @@
 
 	const slugify = (str: string) => str.toLowerCase().replaceAll(/\s/gu, '-').replaceAll(/\W/gu, ''); // TODO extract to helper
 
-	const slug = $derived(slugify(tome.name));
-
 	const library_links = get_library_links();
 
-	library_links.add(id, tome.name, slug); // TODO make reactive?
+	// TODO how to make reactive?
+	const slug = slugify(tome.name);
+	library_links.add(id, tome.name, slug);
+	// const slug = $derived(slugify(tome.name));
+	// $effect(() => library_links.add(id, tome.name, slug));
 
 	onDestroy(() => library_links.remove(id));
 
