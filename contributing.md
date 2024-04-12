@@ -45,3 +45,8 @@ I'm open to PRs when they fit the project's design goals, which can be subtle an
 Feel free to open PRs for straightforward changes, but start with an issue for most PRs.
 
 The code is permissively licensed, feel free to fork for your own needs.
+
+## Funding
+
+If you like Fuz and want to help sustain it,
+see [ryanatkn.com/funding](https://www.ryanatkn.com/funding).
