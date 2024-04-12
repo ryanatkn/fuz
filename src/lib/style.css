@@ -158,7 +158,7 @@ menu {
 ol {
 	list-style: decimal;
 }
-.unstyled:is(ul, ol, menu) {
+.unstyled:where(ul, ol, menu) {
 	padding-left: 0; /* TODO test specificity with utility classes, maybe change to set --padding_left */
 	list-style: none;
 }
@@ -221,7 +221,7 @@ p {
 }
 
 /* checkboxes and radios are expected to be nested inside a `label`, thus no bottom margin */
-:is(
+:where(
 		p,
 		ul,
 		ol,
@@ -307,7 +307,7 @@ option {
 	background-color: var(--bg);
 }
 
-:is(input, textarea, select):hover {
+:where(input, textarea, select):hover {
 	--border_color: var(--border_color_2);
 }
 
@@ -419,8 +419,8 @@ input[type='range']::-moz-range-track {
 	background-color: var(--thumb_background_color);
 }
 
-:is(input, textarea, select).inline,
-p :is(input, textarea, select) {
+:where(input, textarea, select).inline,
+p :where(input, textarea, select) {
 	display: inline-block;
 	margin-left: var(--space_lg);
 	/* TODO ideally `width` here would be set to a minimum and have an API to increase size --
@@ -429,7 +429,7 @@ p :is(input, textarea, select) {
 	width: var(--input_width_min);
 }
 
-:is(button, input, textarea, select):focus {
+:where(button, input, textarea, select):focus {
 	--border_color: var(--color_a_5);
 	--outline_width: var(--outline_width_2);
 }
@@ -440,7 +440,7 @@ p :is(input, textarea, select) {
 	/* outline-offset: 2px; */
 }
 
-:is(input, textarea, select, [contenteditable]):active {
+:where(input, textarea, select, [contenteditable]):active {
 	--outline_width: var(--outline_width_3);
 }
 
@@ -508,7 +508,7 @@ input:checked {
 input[type='radio']:checked {
 	cursor: default;
 }
-:is(input, textarea, select, button):disabled {
+:where(input, textarea, select, button):disabled {
 	--text_color: var(--text_disabled);
 	--border_color: var(--border_disabled);
 	--border_style: solid dashed;
@@ -518,17 +518,17 @@ input[type='radio']:checked {
 	background: var(--button_bg_disabled);
 	outline: none;
 }
-:is(input, textarea, select, button):disabled:active,
+:where(input, textarea, select, button):disabled:active,
 label.disabled:active {
 	--border_color: var(--color_c_5);
 	--text_color: var(--color_c_5);
 }
 
 /* TODO these need design work for visuals/consistency/customizability */
-button:is(.color_a, .color_b, .color_c, .color_d, .color_e, .color_f, .color_g) {
+button:where(.color_a, .color_b, .color_c, .color_d, .color_e, .color_f, .color_g) {
 	color: var(--bg_7);
 }
-button:is(.color_a, .color_b, .color_c, .color_d, .color_e, .color_f, .color_g):is(
+button:where(.color_a, .color_b, .color_c, .color_d, .color_e, .color_f, .color_g):where(
 		:hover,
 		:focus,
 		:active
@@ -607,7 +607,7 @@ label.row {
 	justify-content: flex-start;
 	align-items: center;
 }
-label.row :is(input[type='checkbox'], input[type='radio']) {
+label.row :where(input[type='checkbox'], input[type='radio']) {
 	margin-right: var(--space_md);
 }
 
