@@ -10,6 +10,7 @@
 	import {set_pkg} from '$routes/pkg.js';
 	import {package_json, src_json} from '$routes/package.js';
 	import Spiders from '$routes/Spiders.svelte';
+	// TODO re-enable this, see comment below
 	// import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
 	// import Dialog from '$lib/Dialog.svelte';
 	// import Settings from '$routes/Settings.svelte';
