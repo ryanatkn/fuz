@@ -4,6 +4,7 @@
 	import Library_Footer from '$lib/Library_Footer.svelte';
 	import Card from '$lib/Card.svelte';
 	import {get_pkg} from '$routes/pkg.js';
+	import Spider from '$routes/Spider.svelte';
 
 	const pkg = get_pkg();
 </script>
@@ -11,7 +12,8 @@
 <main class="box w_100">
 	<div class="box width_md">
 		<section class="box">
-			<h1 class="mt_xl4">fuz</h1>
+			<h1 class="mt_xl4 mb_lg">fuz</h1>
+			<div class="box mb_xl"><div style:width="120px"><Spider /></div></div>
 			<blockquote>friendly user zystem</blockquote>
 			<div class="width_sm panel p_md">
 				<p>

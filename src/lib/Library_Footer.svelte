@@ -2,10 +2,9 @@
 	import type {Url} from '@ryanatkn/gro/paths.js';
 	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
 	import {format_url} from '@ryanatkn/belt/url.js';
+	import type {Snippet} from 'svelte';
 
 	import Github_Logo from '$lib/Github_Logo.svelte';
-	import Fuz_Logo from '$lib/Fuz_Logo.svelte';
-	import type {Snippet} from 'svelte';
 
 	interface Props {
 		pkg: Package_Meta;
@@ -28,7 +27,6 @@
 		>
 		{#if logo_footer}{@render logo_footer()}{/if}
 	</div>
-	<div style:--color="var(--color_e_4)"><Fuz_Logo /></div>
 	{#if root_url}
 		<div class="root_url">
 			<a href={root_url}>{format_url(root_url)}</a>

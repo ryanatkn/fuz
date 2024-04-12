@@ -9,6 +9,7 @@
 	import Themed from '$lib/Themed.svelte';
 	import {set_pkg} from '$routes/pkg.js';
 	import {package_json, src_json} from '$routes/package.js';
+	import Spiders from '$routes/Spiders.svelte';
 
 	interface Props {
 		children: Snippet;
@@ -21,4 +22,5 @@
 
 <Themed>
 	{@render children()}
+	<Spiders />
 </Themed>
