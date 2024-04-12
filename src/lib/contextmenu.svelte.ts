@@ -269,18 +269,18 @@ export class Contextmenu_Store {
 // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset
 const CONTEXTMENU_DATASET_KEY = 'contextmenu';
 const CONTEXTMENU_DOM_QUERY = `a,[data-${CONTEXTMENU_DATASET_KEY}]`;
-const contextmenu_cache = new Map<string, Contextmenu_Params>();
+const contextmenu_cache = new Map<string, Contextmenu_Params | Contextmenu_Params[]>();
 let cache_key_counter = 0;
 
-export const contextmenu_action = (
+export const contextmenu_action = <T extends Contextmenu_Params | Contextmenu_Params[]>(
 	el: HTMLElement | SVGElement,
-	params: Contextmenu_Params,
-): ActionReturn<Contextmenu_Params> => {
+	params: T,
+): ActionReturn<T> => {
 	const key = cache_key_counter++ + '';
 	el.dataset[CONTEXTMENU_DATASET_KEY] = key;
 	contextmenu_cache.set(key, params);
 	return {
-		update: (p: Contextmenu_Params) => {
+		update: (p: T) => {
 			contextmenu_cache.set(key, p);
 		},
 		destroy: () => {
@@ -322,7 +322,7 @@ const query_contextmenu_params = (
 	let params: null | Contextmenu_Params[] = null;
 	// crawl DOM for contextmenu entries
 	let el: HTMLElement | SVGElement | null | undefined = target;
-	let cache_key: string, cached: Contextmenu_Params | undefined;
+	let cache_key: string, cached: Contextmenu_Params | Contextmenu_Params[] | undefined;
 	while ((el = el?.closest(CONTEXTMENU_DOM_QUERY))) {
 		if ((cache_key = el.dataset[CONTEXTMENU_DATASET_KEY]!)) {
 			if (!params) params = [];
@@ -331,7 +331,11 @@ const query_contextmenu_params = (
 				continue;
 			}
 			// preserve bubbling order
-			(params || (params = [])).push(cached);
+			if (Array.isArray(cached)) {
+				(params || (params = [])).push(...cached);
+			} else {
+				(params || (params = [])).push(cached);
+			}
 		}
 		if (el.tagName === 'A') {
 			(params || (params = [])).push({
