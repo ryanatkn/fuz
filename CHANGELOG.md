@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.93.3
+
+### Patch Changes
+
+- improve specificity of reset CSS by using `:where` instead of `:is` ([215c9d0](https://github.com/ryanatkn/fuz/commit/215c9d0))
+
 ## 0.93.2
 
 ### Patch Changes
