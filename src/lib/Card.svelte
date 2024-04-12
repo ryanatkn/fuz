@@ -102,16 +102,17 @@
 		display: flex;
 		justify-content: center;
 	}
-	.left .icon {
+	/* TODO remove all :global usage after https://github.com/sveltejs/svelte/issues/10143 */
+	.left :global(.icon) {
 		margin-right: var(--icon_margin);
 	}
-	.right .icon {
+	.right :global(.icon) {
 		margin-left: var(--icon_margin);
 	}
-	.above .icon {
+	.above :global(.icon) {
 		margin-bottom: var(--icon_margin);
 	}
-	.below .icon {
+	.below :global(.icon) {
 		margin-top: var(--icon_margin);
 	}
 	@media (max-width: 460px) {
@@ -129,7 +130,7 @@
 			font-size: var(--icon_size_md);
 			margin-right: var(--space_sm);
 		}
-		.right .icon {
+		.right :global(.icon) {
 			margin-right: 0;
 			margin-left: var(--space_sm);
 		}
