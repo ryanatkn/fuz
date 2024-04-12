@@ -19,10 +19,9 @@
 	}: Props = $props();
 
 	// color:
-	// #6b401c
+	// #6a3e1b
 	// hsl(27, 60%, 26%)
-	// rgb(107, 64, 28)
-	// hwb(27 11% 58%)
+	// rgb(106, 62, 27)
 </script>
 
 {#if image}<img {src} {alt} width={size} height={size} />{:else}<span
