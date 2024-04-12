@@ -38,7 +38,7 @@
 		</section>
 		<section class="panel p_lg">
 			<!-- TODO ideally this wouldn't duplicate metadata like descriptions, but adding fuz_gitops to this repo is heavy -->
-			<h2 class="mb_lg mt_0">other packages</h2>
+			<h2 class="mt_0">other packages</h2>
 			<menu class="unstyled">
 				<a class="chip" href="https://template.fuz.dev/">fuz_template</a>
 				<a class="chip" href="https://gitops.fuz.dev/">fuz_gitops</a>

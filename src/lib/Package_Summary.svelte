@@ -20,12 +20,18 @@
 
 <div class="package_summary">
 	<!-- TODO maybe continue this snippet pattern, or maybe simplify? -->
-	<header>
+	<header class="box">
 		{#if repo_name}
 			{@render repo_name(pkg.repo_name)}
 		{:else}
 			<div class="repo_name">{pkg.repo_name}</div>
 		{/if}
+		<!-- TODO maybe add this value to package.json, `icon_alt` -->
+		<img
+			style:max-width="var(--favicon_size, var(--icon_size_xl2))"
+			src="{pkg.homepage_url}/favicon.png"
+			alt="favicon for {pkg.repo_name}"
+		/>
 	</header>
 	{#if package_json.description}
 		{#if description}
@@ -95,6 +101,7 @@
 		font-size: var(--size_xl2);
 		font-weight: 400;
 		text-align: center;
+		margin-bottom: var(--space_lg);
 	}
 	.npm_url {
 		font-family: var(--font_mono);
