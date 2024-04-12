@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.93.2
+
+### Patch Changes
+
+- improve contextmenu api to have more flexible action params ([#19](https://github.com/ryanatkn/fuz/pull/19))
+
 ## 0.93.1
 
 ### Patch Changes
