@@ -1,3 +1,13 @@
+<script context="module" lang="ts">
+	/**
+	 * Returns the minute of the current day.
+	 */
+	const minute_of_day = (): number => {
+		const now = new Date();
+		return now.getHours() * 60 + now.getMinutes();
+	};
+</script>
+
 <script lang="ts">
 	import Fuz_Logo from '$lib/Fuz_Logo.svelte';
 	import {random_int, shuffle} from '@ryanatkn/belt/random.js';
@@ -19,7 +29,7 @@
 			'var(--color_f_5)',
 			'var(--color_g_5)',
 		],
-		seed = Math.random(),
+		seed = minute_of_day(),
 		random = create_random_alea(seed),
 	}: Props = $props();
 
@@ -29,10 +39,18 @@
 
 <!-- TODO animate each in randomly -->
 <!-- TODO show when intersected in viewport, maybe inline `svelte-intersect` in Fuz? -->
-<div class="row mt_xl9">
+<div class="spiders" style:--width="{100 / spiders.length}%">
 	{#each shuffled as color (color)}
 		<div style:--color={color} class="col_2">
 			<Fuz_Logo />
 		</div>
 	{/each}
 </div>
+
+<style>
+	.spiders {
+		margin-top: var(--space_xl9);
+		display: grid;
+		grid-template-columns: repeat(7, 1fr);
+	}
+</style>
