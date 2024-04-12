@@ -9,7 +9,7 @@
 	const {
 		size = 'var(--space_xl7, 64px)',
 		fill = 'var(--color, #000)',
-		label = 'GitHub icon',
+		label = 'the GitHub icon, an octocat silhouette',
 		attrs,
 	}: Props = $props();
 

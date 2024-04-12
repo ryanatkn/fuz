@@ -22,7 +22,7 @@
 	{#if children}{@render children()}{/if}
 	<div class="logo box panel p_lg">
 		{#if logo_header}{@render logo_header()}{/if}
-		<a href={pkg.repo_url} rel="me"
+		<a href={pkg.repo_url} rel="me" title="source code on GitHub"
 			>{#if logo}{@render logo()}{:else}<Github_Logo />{/if}</a
 		>
 		{#if logo_footer}{@render logo_footer()}{/if}
