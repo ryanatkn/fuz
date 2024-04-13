@@ -4,7 +4,7 @@
 	import type {Snippet} from 'svelte';
 
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
-	import Fuz from '$routes/Fuz.svelte';
+	import Fuz from '$routes/Fuz.svelte'; // TODO BLOCK fix
 
 	interface Props {
 		children?: Snippet;

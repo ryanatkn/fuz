@@ -4,7 +4,7 @@
 
 	import type {Tome} from '$lib/tome.js';
 	import Package_Summary from '$lib/Package_Summary.svelte';
-	import {get_pkg} from '$routes/pkg';
+	import {get_pkg} from '$routes/pkg.js'; // TODO BLOCK fix
 
 	interface Props {
 		root_path?: string;

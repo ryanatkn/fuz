@@ -11,7 +11,7 @@
 	import Dialog from '$lib/Dialog.svelte';
 	import Library_Footer from '$lib/Library_Footer.svelte';
 	import {set_library_links} from '$lib/library.svelte.js';
-	import Fuz from '$routes/Fuz.svelte';
+	import Fuz from '$routes/Fuz.svelte'; // TODO BLOCK fix
 
 	interface Props {
 		tomes: Tome[];
