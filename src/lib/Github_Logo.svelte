@@ -12,8 +12,6 @@
 		label = 'the GitHub icon, an octocat silhouette',
 		attrs,
 	}: Props = $props();
-
-	// TODO do something more optimal preferring {@html}
 </script>
 
 <svg
