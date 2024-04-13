@@ -1,7 +1,7 @@
 import {getContext, setContext} from 'svelte';
 import {writable, type Writable} from 'svelte/store';
 
-import type {Style_Variable} from '$lib/theme.js';
+import type {Style_Variable} from '@ryanatkn/moss/theme.js';
 
 // TODO @multiple add to $lib?
 

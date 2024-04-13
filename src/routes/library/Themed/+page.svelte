@@ -1,15 +1,15 @@
 <script lang="ts">
 	import {writable} from 'svelte/store';
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
+	import {type Theme, save_theme} from '@ryanatkn/moss/theme.js';
+	import {default_themes} from '@ryanatkn/moss/themes.js';
 
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
 	import Details from '$lib/Details.svelte';
 	import Dialog from '$lib/Dialog.svelte';
 	import {get_tome} from '$lib/tome.js';
 	import Color_Scheme_Input from '$lib/Color_Scheme_Input.svelte';
-	import Tome_Link from '$lib/Tome_Link.svelte';
-	import {type Theme, save_theme, get_theme, get_color_scheme} from '$lib/theme.js';
-	import {default_themes} from '$lib/themes.js';
+	import {get_theme, get_color_scheme} from '$lib/Themed.svelte';
 	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 	import Theme_Input from '$lib/Theme_Input.svelte';
 	import Theme_Form from '$routes/Theme_Form.svelte';

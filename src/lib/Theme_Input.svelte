@@ -1,9 +1,10 @@
 <script lang="ts">
 	import type {Readable} from 'svelte/store';
 	import {swallow} from '@ryanatkn/belt/dom.js';
+	import type {Theme} from '@ryanatkn/moss/theme.js';
+	import {default_themes} from '@ryanatkn/moss/themes.js';
 
-	import {get_theme, type Theme} from '$lib/theme.js';
-	import {default_themes} from '$lib/themes.js';
+	import {get_theme} from '$lib/Themed.svelte';
 
 	interface Props {
 		selected_theme?: Readable<Theme | null>;

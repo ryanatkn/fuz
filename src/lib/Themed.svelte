@@ -18,7 +18,6 @@
 <script lang="ts">
 	import {getContext, onDestroy, onMount, setContext, type Snippet} from 'svelte';
 	import {writable, type Writable} from 'svelte/store';
-
 	import {
 		create_theme_style_html,
 		render_theme_style,
@@ -30,8 +29,8 @@
 		sync_color_scheme as default_sync_color_scheme,
 		save_theme as default_save_theme,
 		load_theme as default_load_theme,
-	} from '$lib/theme.js';
-	import {DEFAULT_THEME} from '$lib/themes.js';
+	} from '@ryanatkn/moss/theme.js';
+	import {DEFAULT_THEME} from '@ryanatkn/moss/themes.js';
 
 	interface Props {
 		sync_color_scheme?: typeof default_sync_color_scheme;

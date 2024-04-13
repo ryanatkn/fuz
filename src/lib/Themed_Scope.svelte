@@ -5,17 +5,14 @@
 <script lang="ts">
 	import {get, writable, type Writable} from 'svelte/store';
 	import type {Snippet} from 'svelte';
-
 	import {
 		create_theme_style_html,
 		render_theme_style,
 		type Theme,
-		set_theme,
 		type Color_Scheme,
-		set_color_scheme,
-		get_theme,
-		get_color_scheme,
-	} from '$lib/theme.js';
+	} from '@ryanatkn/moss/theme.js';
+
+	import {set_color_scheme, get_color_scheme, set_theme, get_theme} from '$lib/Themed.svelte';
 
 	interface Props {
 		/**
