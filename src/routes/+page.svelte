@@ -4,7 +4,7 @@
 	import Library_Footer from '$lib/Library_Footer.svelte';
 	import Card from '$lib/Card.svelte';
 	import {get_pkg} from '$routes/pkg.js';
-	import Fuz from '$routes/Fuz.svelte';
+	import Fuz_Logo from '$lib/Fuz_Logo.svelte';
 
 	const pkg = get_pkg();
 </script>
@@ -13,7 +13,7 @@
 	<div class="box width_md">
 		<section class="box">
 			<h1 class="mt_xl4 mb_lg">fuz</h1>
-			<div class="box mb_xl"><Fuz size="120px" /></div>
+			<div class="box mb_xl"><Fuz_Logo size="120px" /></div>
 			<blockquote>friendly user zystem</blockquote>
 			<div class="width_sm panel p_md">
 				<p>

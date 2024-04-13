@@ -5,7 +5,7 @@ import type {Src_Json} from '@ryanatkn/gro/src_json.js';
 
 export const package_json = {
 	name: '@ryanatkn/fuz',
-	version: '0.95.0',
+	version: '0.96.0',
 	description: 'Svelte UI library',
 	icon: '🧶',
 	public: true,
@@ -243,6 +243,16 @@ export const package_json = {
 			default: './dist/Redirect.svelte',
 			types: './dist/Redirect.svelte.d.ts',
 		},
+		'./Spider.svelte': {
+			svelte: './dist/Spider.svelte',
+			default: './dist/Spider.svelte',
+			types: './dist/Spider.svelte.d.ts',
+		},
+		'./Spiders.svelte': {
+			svelte: './dist/Spiders.svelte',
+			default: './dist/Spiders.svelte',
+			types: './dist/Spiders.svelte.d.ts',
+		},
 		'./Teleport.svelte': {
 			svelte: './dist/Teleport.svelte',
 			default: './dist/Teleport.svelte',
@@ -289,7 +299,7 @@ export const package_json = {
 
 export const src_json = {
 	name: '@ryanatkn/fuz',
-	version: '0.95.0',
+	version: '0.96.0',
 	modules: {
 		'./package.json': {path: 'package.json', declarations: []},
 		'./Alert.svelte': {path: 'Alert.svelte', declarations: []},
@@ -385,6 +395,8 @@ export const src_json = {
 		'./Pending_Animation.svelte': {path: 'Pending_Animation.svelte', declarations: []},
 		'./Pending_Button.svelte': {path: 'Pending_Button.svelte', declarations: []},
 		'./Redirect.svelte': {path: 'Redirect.svelte', declarations: []},
+		'./Spider.svelte': {path: 'Spider.svelte', declarations: []},
+		'./Spiders.svelte': {path: 'Spiders.svelte', declarations: []},
 		'./Teleport.svelte': {path: 'Teleport.svelte', declarations: []},
 		'./Theme_Input.svelte': {path: 'Theme_Input.svelte', declarations: []},
 		'./Themed_Scope.svelte': {path: 'Themed_Scope.svelte', declarations: []},

@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.96.0
+
+### Minor Changes
+
+- rename `Spider` from `Fuz_Logo` and publish `Fuz_Logo` and `Spiders` ([0f4908e](https://github.com/ryanatkn/fuz/commit/0f4908e))
+
 ## 0.95.0
 
 ### Minor Changes

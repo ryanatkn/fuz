@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.95.0",
+  "version": "0.96.0",
   "description": "Svelte UI library",
   "icon": "🧶",
   "public": true,
@@ -277,6 +277,16 @@
       "svelte": "./dist/Redirect.svelte",
       "default": "./dist/Redirect.svelte",
       "types": "./dist/Redirect.svelte.d.ts"
+    },
+    "./Spider.svelte": {
+      "svelte": "./dist/Spider.svelte",
+      "default": "./dist/Spider.svelte",
+      "types": "./dist/Spider.svelte.d.ts"
+    },
+    "./Spiders.svelte": {
+      "svelte": "./dist/Spiders.svelte",
+      "default": "./dist/Spiders.svelte",
+      "types": "./dist/Spiders.svelte.d.ts"
     },
     "./Teleport.svelte": {
       "svelte": "./dist/Teleport.svelte",

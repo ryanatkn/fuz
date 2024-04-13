@@ -9,9 +9,10 @@
 </script>
 
 <script lang="ts">
-	import Fuz_Logo from '$lib/Fuz_Logo.svelte';
 	import {random_int, shuffle} from '@ryanatkn/belt/random.js';
 	import {create_random_alea} from '@ryanatkn/belt/random_alea.js';
+
+	import Spider from '$lib/Spider.svelte';
 
 	interface Props {
 		spiders?: string[]; // for now, just colors
@@ -41,7 +42,7 @@
 <div class="spiders" style:--width="{100 / spiders.length}%">
 	{#each shuffled as color (color)}
 		<div style:--color={color} class="col_2">
-			<Fuz_Logo />
+			<Spider />
 		</div>
 	{/each}
 </div>

@@ -4,16 +4,15 @@
 
 	import type {Tome} from '$lib/tome.js';
 	import Package_Summary from '$lib/Package_Summary.svelte';
-	import {get_pkg} from '$routes/pkg.js'; // TODO BLOCK fix
+	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
 
 	interface Props {
 		root_path?: string;
 		tomes: Tome[];
+		pkg: Package_Meta;
 	}
 
-	const {root_path = '/library', tomes}: Props = $props();
-
-	const pkg = get_pkg();
+	const {root_path = '/library', tomes, pkg}: Props = $props();
 </script>
 
 {#if $page.url.pathname === base + root_path}
