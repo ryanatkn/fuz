@@ -13,13 +13,24 @@
 	export const set_color_scheme = (
 		store: Writable<Color_Scheme | null>,
 	): Writable<Color_Scheme | null> => setContext(COLOR_SCHEME_KEY, store);
+
+	/**
+	 * Creates an HTML style string to be inserted into the `head`
+	 * that overrides the theme for a part of the page.
+	 * @param style same as the result of a call to `render_theme_style`
+	 * @returns HTML string with the style tag and its contents
+	 */
+	export const create_theme_style_html = (
+		style: string,
+	): string => `<style nonce="%sveltekit.nonce%">
+	${style}
+</style>`;
 </script>
 
 <script lang="ts">
 	import {getContext, onDestroy, onMount, setContext, type Snippet} from 'svelte';
 	import {writable, type Writable} from 'svelte/store';
 	import {
-		create_theme_style_html,
 		render_theme_style,
 		type Theme,
 		create_theme_setup_script,
