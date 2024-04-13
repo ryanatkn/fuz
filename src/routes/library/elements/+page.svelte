@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
+	import {base} from '$app/paths';
 
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
 	import Tome_Link from '$lib/Tome_Link.svelte';
@@ -23,13 +24,26 @@
 			<span style="font-size: var(--size_xl3)">👆</span>
 			<Mdn_Link href="Web/HTML/Element/blockquote" />
 		</Tome_Subheading>
-		<Tome_Subheading text="hr and code" slug="hr-and-code-elements">
+		<Tome_Subheading text="hr" slug="hr">
 			<span style="font-size: var(--size_xl3)">👇</span>
 			<Mdn_Link href="Web/HTML/Element/hr" />
-			<span style="font-size: var(--size_xl3)">👈</span>
-			<Mdn_Link href="Web/HTML/Element/code" />
 		</Tome_Subheading>
 		<hr />
+	</section>
+	<section>
+		<Tome_Subheading text="a" slug="a-element">
+			<Mdn_Link href="Web/HTML/Element/a" />
+		</Tome_Subheading>
+		<a href="{base}/">a link</a> and some text not in a paragraph
+		<p>A paragraph with <a href="{base}/">a link</a></p>
+		<p><a class="selected" href="{base}/">a link</a> with <code>.selected</code></p>
+	</section>
+	<section>
+		<Tome_Subheading text="code" slug="code-element">
+			<Mdn_Link href="Web/HTML/Element/code" />
+		</Tome_Subheading>
+		<code>code</code> and some text not in a paragraph
+		<p>A paragraph with <code>code</code> and other text.</p>
 	</section>
 	<section>
 		<Tome_Subheading text="details and summary" slug="details-and-summary-elements">
@@ -38,14 +52,12 @@
 			<Mdn_Link href="Web/HTML/Element/summary" />
 		</Tome_Subheading>
 		<details>
-			<summary
-				>Click me, a <code>summary</code>, to see the rest of the <code>details</code></summary
-			>
+			<summary>Click this <code>summary</code> to see the rest of the <code>details</code></summary>
 			<p>See also the <Tome_Link name="Details" /> component.</p>
 			<Code
 				content={`<details>
 	<summary>
-		Click me, a <code>summary</code>,
+		Click this <code>summary</code>
 		to see the rest of the <code>details</code>
 	</summary>
 	<p>See also the <Tome_Link name="Details" /> component.</p>

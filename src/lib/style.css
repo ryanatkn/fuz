@@ -10,7 +10,8 @@ which is generated from the default values in `@ryanatkn/fuz/variables.js`.
 
 Some notes:
 
-- uses `:where` everywhere to lower specificity so utility classes work as expected
+- uses `:where` on all selectors with more specificity than a single tag/class
+	to lower specificity so utility classes override them
 
 */
 
@@ -42,7 +43,7 @@ Some notes:
 	color-scheme: dark; /* override for the meta tag set by `createThemeSetupHtml` */
 }
 
-:where(body) {
+body {
 	min-height: 100vh;
 	font-size: 1.6rem; /* matched to `font-size: 62.5%` and same value as the default `--size_md`, but this one shouldn't vary */
 	font-family: var(--font_sans);
@@ -79,7 +80,7 @@ The `!important` makes this `hidden` behavior much higher specificity.
 	}
 }
 
-aside:not(.unstyled) {
+:where(aside:not(.unstyled)) {
 	border-left-color: var(--border_color);
 	border-left-style: var(--border_style);
 	border-left-width: var(--border_width_3);
@@ -88,11 +89,11 @@ aside:not(.unstyled) {
 	color: var(--color, var(--text_2));
 	background-color: var(--fg_1);
 }
-aside:not(.unstyled):hover {
+:where(aside:not(.unstyled):hover) {
 	border-left-color: var(--border_color_4);
 }
 
-blockquote:not(.unstyled) {
+:where(blockquote:not(.unstyled)) {
 	border-radius: var(--radius_xs);
 	padding: var(--space_md);
 	color: var(--color, var(--text_2));
@@ -119,7 +120,7 @@ pre {
 	max-width: 100%;
 }
 
-pre > code {
+:where(pre > code) {
 	display: block; /* TODO maybe invert and change to inline in `p`? */
 	font-size: var(--size_sm);
 	font-weight: 500;
@@ -127,6 +128,7 @@ pre > code {
 
 a {
 	cursor: pointer;
+	/* TODO should the generic be --link_color or --color? */
 	--color: var(--link_color);
 	color: var(--color);
 	font-weight: 700;
@@ -146,7 +148,7 @@ a:active {
 	--outline_width: var(--outline_width_3);
 }
 a.selected {
-	--color: var(--link_active);
+	--color: var(--link_color_active);
 	--outline_color: var(--border_color);
 	text-decoration: var(--text_decoration_selected);
 }

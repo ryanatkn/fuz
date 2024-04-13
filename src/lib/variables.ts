@@ -491,7 +491,10 @@ export const text_decoration_selected: Style_Variable = {
 	name: 'text_decoration_selected',
 	light: 'underline',
 };
-export const link_active: Style_Variable = {name: 'link_active', light: 'var(--text_color)'};
+export const link_color_active: Style_Variable = {
+	name: 'link_color_active',
+	light: 'var(--text_color)',
+};
 
 /* spacings, rounded to pixels for the default 16px case */
 export const space_xs5: Style_Variable = {name: 'space_xs5', light: '0.1rem'};
@@ -837,7 +840,7 @@ export const default_variables: Style_Variable[] = [
 	text_decoration,
 	text_decoration_hover,
 	text_decoration_selected,
-	link_active,
+	link_color_active,
 
 	/* space, rounded to pixels for the default 16px case */
 	space_xs5,

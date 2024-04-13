@@ -617,7 +617,7 @@ export const src_json = {
 				{name: 'text_decoration', kind: 'variable'},
 				{name: 'text_decoration_hover', kind: 'variable'},
 				{name: 'text_decoration_selected', kind: 'variable'},
-				{name: 'link_active', kind: 'variable'},
+				{name: 'link_color_active', kind: 'variable'},
 				{name: 'space_xs5', kind: 'variable'},
 				{name: 'space_xs4', kind: 'variable'},
 				{name: 'space_xs3', kind: 'variable'},
