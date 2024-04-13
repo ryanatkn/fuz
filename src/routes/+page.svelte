@@ -26,7 +26,7 @@
 					those goals. Compared to most UI libraries, Fuz has fewer features and more opinions.
 				</p>
 				<p>
-					To learn more see <a href="https://www.fuz.dev/library">the docs</a>
+					To learn more see <a href="{base}/library">the docs</a>
 					and <a href="https://github.com/ryanatkn/fuz#readme">readme</a>. Feel free to take the
 					ideas and <a href="https://github.com/ryanatkn/fuz">code</a> for your own purposes.
 				</p>
