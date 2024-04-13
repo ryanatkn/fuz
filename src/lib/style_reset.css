@@ -6,6 +6,10 @@ containing the base variable declarations.
 By default that's the `'base'` theme's variables,
 which is generated from the default values in `@ryanatkn/fuz/variables.js`.
 
+Some notes:
+
+- uses `:where` everywhere to lower specificity so utility classes work as expected
+
 */
 
 *,
@@ -246,7 +250,7 @@ p {
 	margin-bottom: var(--space_xs);
 }
 
-hr {
+:where(hr) {
 	border-top: 1px solid var(--border_color_3);
 	border-bottom: 2px solid var(--border_color_3);
 	border-left: none;
@@ -256,13 +260,13 @@ hr {
 	margin: var(--space_xl7) 0;
 }
 
-fieldset {
+:where(fieldset) {
 	display: flex;
 	flex-direction: column;
 	border: 0;
 }
 
-legend {
+:where(legend) {
 	font-size: var(--size_xl);
 	margin-bottom: var(--space_lg);
 }
