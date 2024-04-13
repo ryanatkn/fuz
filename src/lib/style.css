@@ -229,7 +229,7 @@ p {
 /* TODO maybe do the `:not(:last-child)` more generically instead of this selector? */
 /* TODO other elements */
 /* checkboxes and radios are expected to be nested inside a `label`, thus no bottom margin */
-:is(
+:where(
 		p,
 		ul,
 		ol,
