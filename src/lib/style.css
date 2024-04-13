@@ -148,7 +148,7 @@ a:active {
 	--outline_width: var(--outline_width_3);
 }
 a.selected {
-	--color: var(--link_color_active);
+	--color: var(--link_color_selected);
 	--outline_color: var(--border_color);
 	text-decoration: var(--text_decoration_selected);
 }

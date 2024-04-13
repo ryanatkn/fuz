@@ -1,5 +1,6 @@
 ---
-"@ryanatkn/fuz": minor
+'@ryanatkn/fuz': minor
 ---
 
-rename `link_color_active` from `link_active`
+- use `:where` in the reset stylesheet to lower specificity of most selectors
+- rename `link_color_selected` from `link_active`

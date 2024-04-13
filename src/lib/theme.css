@@ -145,7 +145,7 @@
 	--text_decoration: none;
 	--text_decoration_hover: underline;
 	--text_decoration_selected: underline;
-	--link_color_active: var(--text_color);
+	--link_color_selected: var(--text_color);
 	--space_xs5: 0.1rem;
 	--space_xs4: 0.2rem;
 	--space_xs3: 0.3rem;
