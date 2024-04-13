@@ -17,7 +17,7 @@ Feel free to take the ideas and code for your own purposes.
 
 The Svelte components and helpers:
 
-- builds on the CSS design system [Moss](https://github.com/ryanatkn/moss)
+- builds on my CSS design system [Moss](https://github.com/ryanatkn/moss)
 - plain CSS and minimal abstraction
 - near-zero dependencies except for Svelte, SvelteKit, and my utility library
   [`@ryanatkn/belt`](https://github.com/ryanatkn/belt)
