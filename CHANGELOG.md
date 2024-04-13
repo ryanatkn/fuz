@@ -1,5 +1,15 @@
 # @ryanatkn/fuz
 
+## 0.94.0
+
+### Minor Changes
+
+- - use `:where` in the reset stylesheet to lower specificity of most selectors ([#21](https://github.com/ryanatkn/fuz/pull/21))
+  - rename `link_color_selected` from `link_active`
+  - remove generic variables to support generic fallbacks:
+    - `var(--size)` becomes `var(--size, var(--size_md))`
+    - `var(--icon_size)` becomes `var(--icon_size, var(--icon_size_md))`
+
 ## 0.93.3
 
 ### Patch Changes
