@@ -38,16 +38,16 @@
 		<Tome_Subheading text="a" slug="a-element">
 			<Mdn_Link href="Web/HTML/Element/a" />
 		</Tome_Subheading>
-		<div><a href="{base}/">a link</a> in a <code>div</code></div>
 		<p><a href="{base}/">a link</a> in a <code>p</code></p>
+		<div><a href="{base}/">a link</a> in a <code>div</code></div>
 		<p><a class="selected" href="{base}/">a link</a> with <code>.selected</code></p>
 	</section>
 	<section>
 		<Tome_Subheading text="code" slug="code-element">
 			<Mdn_Link href="Web/HTML/Element/code" />
 		</Tome_Subheading>
-		<div><code>code</code> in a <code>div</code></div>
 		<p><code>code</code> in a <code>p</code></p>
+		<div><code>code</code> in a <code>div</code></div>
 	</section>
 	<section>
 		<Tome_Subheading text="pre" slug="pre-element">
