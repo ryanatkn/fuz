@@ -13,13 +13,15 @@
 	const tome = get_tome(LIBRARY_ITEM_NAME);
 
 	// TODO consider a generated table that shows all of the computed styles like `block` and `inline`
+
+	// TODO think about the best way to show the raw code (and how to get it, how much structure to apply to library authors)
 </script>
 
 <Tome_Detail {tome}>
 	<blockquote>
 		Styles for plain <Mdn_Link href="Web/HTML/Element">HTML elements</Mdn_Link>. See also <Tome_Link
 			name="typography"
-		/>.
+		/> and <Tome_Link name="forms" />.
 	</blockquote>
 	<section>
 		<Tome_Subheading text="blockquote" slug="blockquote-element">
@@ -82,57 +84,6 @@
 		</details>
 	</section>
 	<section>
-		<Tome_Subheading text="table" slug="table-element">
-			<Mdn_Link href="Web/HTML/Element/table" />
-		</Tome_Subheading>
-		<blockquote>⚠️ This is unfinished and will change.</blockquote>
-		<Code
-			content={`<table>
-	<thead>
-		<tr>
-			<th>th</th>
-			<th>th</th>
-			<th>th</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr><td>td</td><td>td</td><td>td</td></tr>
-		<tr><td>td</td><td>td</td><td>td</td></tr>
-		<tr><td>td</td><td>td</td><td>td</td></tr>
-	</tbody>
-</table>`}
-		/>
-		<table>
-			<thead>
-				<tr>
-					<th>th</th>
-					<th>th</th>
-					<th>th</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr><td>td</td><td>td</td><td>td</td></tr>
-				<tr><td>td</td><td>td</td><td>td</td></tr>
-				<tr><td>td</td><td>td</td><td>td</td></tr>
-			</tbody>
-		</table>
-		<Code content={`<table class="w_100">\n\t...\n</table>`} />
-		<table class="w_100">
-			<thead>
-				<tr>
-					<th>th</th>
-					<th>th</th>
-					<th>th</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr><td>td</td><td>td</td><td>td</td></tr>
-				<tr><td>td</td><td>td</td><td>td</td></tr>
-				<tr><td>td</td><td>td</td><td>td</td></tr>
-			</tbody>
-		</table>
-	</section>
-	<section>
 		<Tome_Subheading text="aside" slug="aside-element">
 			<Mdn_Link href="Web/HTML/Element/aside" />
 		</Tome_Subheading>
@@ -156,7 +107,7 @@
 	</section>
 	<section>
 		<Tome_Subheading text="header" slug="header-element">
-			<Mdn_Link href="Web/HTML/Element/footer" />
+			<Mdn_Link href="Web/HTML/Element/header" />
 		</Tome_Subheading>
 		<Code content={`<header>header</header>`} />
 		<header>header</header>
@@ -216,6 +167,57 @@
 			<li>2</li>
 			<li>3</li>
 		</menu>
+	</section>
+	<section>
+		<Tome_Subheading text="table" slug="table-element">
+			<Mdn_Link href="Web/HTML/Element/table" />
+		</Tome_Subheading>
+		<blockquote>⚠️ This is unfinished and will change.</blockquote>
+		<Code
+			content={`<table>
+	<thead>
+		<tr>
+			<th>th</th>
+			<th>th</th>
+			<th>th</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr><td>td</td><td>td</td><td>td</td></tr>
+		<tr><td>td</td><td>td</td><td>td</td></tr>
+		<tr><td>td</td><td>td</td><td>td</td></tr>
+	</tbody>
+</table>`}
+		/>
+		<table>
+			<thead>
+				<tr>
+					<th>th</th>
+					<th>th</th>
+					<th>th</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr><td>td</td><td>td</td><td>td</td></tr>
+				<tr><td>td</td><td>td</td><td>td</td></tr>
+				<tr><td>td</td><td>td</td><td>td</td></tr>
+			</tbody>
+		</table>
+		<Code content={`<table class="w_100">\n\t...\n</table>`} />
+		<table class="w_100">
+			<thead>
+				<tr>
+					<th>th</th>
+					<th>th</th>
+					<th>th</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr><td>td</td><td>td</td><td>td</td></tr>
+				<tr><td>td</td><td>td</td><td>td</td></tr>
+				<tr><td>td</td><td>td</td><td>td</td></tr>
+			</tbody>
+		</table>
 	</section>
 	<p>TODO more!</p>
 </Tome_Detail>
