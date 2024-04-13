@@ -120,7 +120,7 @@ pre {
 	max-width: 100%;
 }
 
-:where(pre > code) {
+pre > code {
 	display: block; /* TODO maybe invert and change to inline in `p`? */
 	font-size: var(--size_sm);
 	font-weight: 500;
@@ -226,6 +226,7 @@ p {
 	overflow-wrap: break-word;
 }
 
+/* TODO maybe do the `:not(:last-child)` more generically instead of this selector? */
 /* checkboxes and radios are expected to be nested inside a `label`, thus no bottom margin */
 :where(
 		p,

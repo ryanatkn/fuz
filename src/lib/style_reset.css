@@ -118,9 +118,9 @@ pre {
 	max-width: 100%;
 }
 
-:where(pre > code) {
+pre > code {
 	display: block; /* TODO maybe invert and change to inline in `p`? */
-	font-size: var(--size_sm);
+	font-size: var(--size_sm); /* TODO maybe computed from generic `--size` using a multiplier var? */
 	font-weight: 500;
 }
 

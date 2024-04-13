@@ -11,6 +11,8 @@
 	const LIBRARY_ITEM_NAME = 'elements';
 
 	const tome = get_tome(LIBRARY_ITEM_NAME);
+
+	// TODO consider a generated table that shows all of the computed styles like `block` and `inline`
 </script>
 
 <Tome_Detail {tome}>
@@ -34,27 +36,28 @@
 		<Tome_Subheading text="a" slug="a-element">
 			<Mdn_Link href="Web/HTML/Element/a" />
 		</Tome_Subheading>
-		<a href="{base}/">a link</a> and some text not in a paragraph
-		<p>A paragraph with <a href="{base}/">a link</a></p>
+		<div><a href="{base}/">a link</a> in a <code>div</code></div>
+		<p><a href="{base}/">a link</a> in a <code>p</code></p>
 		<p><a class="selected" href="{base}/">a link</a> with <code>.selected</code></p>
 	</section>
 	<section>
 		<Tome_Subheading text="code" slug="code-element">
 			<Mdn_Link href="Web/HTML/Element/code" />
 		</Tome_Subheading>
-		<code>code</code> and some text not in a paragraph
-		<p>A paragraph with <code>code</code> and other text.</p>
+		<div><code>code</code> in a <code>div</code></div>
+		<p><code>code</code> in a <code>p</code></p>
 	</section>
 	<section>
 		<Tome_Subheading text="pre" slug="pre-element">
 			<Mdn_Link href="Web/HTML/Element/pre" />
 		</Tome_Subheading>
-		<pre><code class="inline">pre</code> is preformatted
-				text</pre>
+		<pre>a <code class="inline">pre</code> is
+  preformatted
+					text</pre>
 		<pre><code
-				><code class="inline">code</code> inside a pre
-		 looks like
-				   this</code
+				><code class="inline">code</code> in a <code class="inline">pre</code>
+		 	is a
+				 block</code
 			></pre>
 	</section>
 	<section>
