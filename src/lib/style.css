@@ -347,7 +347,7 @@ input[type='checkbox']::before {
 	align-items: center;
 	justify-content: center;
 	overflow: var(--overflow, visible);
-	font-size: var(--font_size, var(--size_xl3));
+	font-size: var(--size, var(--size_xl3));
 	color: var(--text_color);
 }
 

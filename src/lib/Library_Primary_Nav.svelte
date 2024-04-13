@@ -67,7 +67,7 @@
 	}
 
 	nav {
-		--font_size: var(--size_xl);
+		--size: var(--size_xl);
 		height: 100%;
 		display: flex;
 		flex: 1;
@@ -77,12 +77,12 @@
 	/* sync this breakpoint with `Library` */
 	@media (max-width: 800px) {
 		nav {
-			--font_size: var(--size_lg);
+			--size: var(--size_lg);
 		}
 	}
 	@media (max-width: 550px) {
 		nav {
-			--font_size: var(--size_md);
+			--size: var(--size_md);
 		}
 	}
 
