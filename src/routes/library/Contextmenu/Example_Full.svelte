@@ -190,7 +190,7 @@
 	<Dialog onclose={() => (show_about_dialog = false)}>
 		<div class="pane p_xl box text_align_center">
 			<h1>About Fuz</h1>
-			<blockquote>Svelte UI library and CSS design system</blockquote>
+			<blockquote>Svelte UI library</blockquote>
 			<blockquote>
 				free and open source at<br /><a href="https://github.com/ryanatkn/fuz"
 					>github.com/ryanatkn/fuz</a

@@ -17,8 +17,7 @@
 			<blockquote>friendly user zystem</blockquote>
 			<div class="width_sm panel p_md">
 				<p>
-					Fuz is a Svelte UI library and CSS design system. It's in early alpha and there will be
-					many breaking changes.
+					Fuz is a Svelte UI library. It's in early alpha and there will be many breaking changes.
 				</p>
 				<p>
 					Fuz is being made to support <a href="https://www.ryanatkn.com/table">my other projects</a
