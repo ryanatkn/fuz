@@ -278,25 +278,6 @@
       "default": "./dist/Redirect.svelte",
       "types": "./dist/Redirect.svelte.d.ts"
     },
-    "./style_animations.css": {
-      "default": "./dist/style_animations.css"
-    },
-    "./style_components.css": {
-      "default": "./dist/style_components.css"
-    },
-    "./style_reset.css": {
-      "default": "./dist/style_reset.css"
-    },
-    "./style_utilities.css": {
-      "default": "./dist/style_utilities.css"
-    },
-    "./style.css": {
-      "default": "./dist/style.css"
-    },
-    "./style.gen.css.js": {
-      "default": "./dist/style.gen.css.js",
-      "types": "./dist/style.gen.css.d.ts"
-    },
     "./Teleport.svelte": {
       "svelte": "./dist/Teleport.svelte",
       "default": "./dist/Teleport.svelte",
@@ -307,17 +288,6 @@
       "default": "./dist/Theme_Input.svelte",
       "types": "./dist/Theme_Input.svelte.d.ts"
     },
-    "./theme.css": {
-      "default": "./dist/theme.css"
-    },
-    "./theme.gen.css.js": {
-      "default": "./dist/theme.gen.css.js",
-      "types": "./dist/theme.gen.css.d.ts"
-    },
-    "./theme.js": {
-      "default": "./dist/theme.js",
-      "types": "./dist/theme.d.ts"
-    },
     "./Themed_Scope.svelte": {
       "svelte": "./dist/Themed_Scope.svelte",
       "default": "./dist/Themed_Scope.svelte",
@@ -327,10 +297,6 @@
       "svelte": "./dist/Themed.svelte",
       "default": "./dist/Themed.svelte",
       "types": "./dist/Themed.svelte.d.ts"
-    },
-    "./themes.js": {
-      "default": "./dist/themes.js",
-      "types": "./dist/themes.d.ts"
     },
     "./Tome_Detail.svelte": {
       "svelte": "./dist/Tome_Detail.svelte",
@@ -355,14 +321,6 @@
     "./tome.js": {
       "default": "./dist/tome.js",
       "types": "./dist/tome.d.ts"
-    },
-    "./variable_data.js": {
-      "default": "./dist/variable_data.js",
-      "types": "./dist/variable_data.d.ts"
-    },
-    "./variables.js": {
-      "default": "./dist/variables.js",
-      "types": "./dist/variables.d.ts"
     }
   }
 }
