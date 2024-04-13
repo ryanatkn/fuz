@@ -40,7 +40,7 @@ Some notes:
 	color-scheme: dark; /* override for the meta tag set by `createThemeSetupHtml` */
 }
 
-body {
+:where(body) {
 	min-height: 100vh;
 	font-size: 1.6rem; /* matched to `font-size: 62.5%` and same value as the default `--size_md`, but this one shouldn't vary */
 	font-family: var(--font_sans);
