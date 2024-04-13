@@ -77,52 +77,6 @@ The `!important` makes this `hidden` behavior much higher specificity.
 	}
 }
 
-:where(aside:not(.unstyled)) {
-	border-left-color: var(--border_color);
-	border-left-style: var(--border_style);
-	border-left-width: var(--border_width_3);
-	border-radius: var(--radius_xs);
-	padding: var(--space_md);
-	color: var(--color, var(--text_2));
-	background-color: var(--fg_1);
-}
-:where(aside:not(.unstyled):hover) {
-	border-left-color: var(--border_color_4);
-}
-
-:where(blockquote:not(.unstyled)) {
-	border-radius: var(--radius_xs);
-	padding: var(--space_md);
-	color: var(--color, var(--text_2));
-	background-color: var(--fg_1);
-}
-
-code {
-	font-family: var(--font_mono);
-	font-weight: 600;
-	-webkit-hyphens: none;
-	hyphens: none;
-	color: var(--color, var(--text_2));
-	background-color: var(--fg_1);
-	padding: 0 var(--space_xs2);
-	border-radius: var(--radius_xs);
-}
-
-pre {
-	/* @see https://developer.mozilla.org/en-US/docs/Web/CSS/white-space#break-spaces */
-	/* TODO check for `Code` before adding this - white-space: break-spaces; */
-	font-family: var(--font_mono);
-	color: var(--color, var(--text_2));
-	overflow: auto;
-	max-width: 100%;
-}
-
-pre > code {
-	display: block; /* TODO maybe invert and change to inline in `p`? */
-	font-size: var(--size_sm); /* TODO maybe computed from generic `--size` using a multiplier var? */
-	font-weight: 500;
-}
-
 a {
 	cursor: pointer;
 	/* TODO should the generic be --link_color or --color? */
@@ -254,6 +208,52 @@ summary {
 	margin-bottom: var(--space_xs);
 }
 
+:where(aside:not(.unstyled)) {
+	border-left-color: var(--border_color);
+	border-left-style: var(--border_style);
+	border-left-width: var(--border_width_3);
+	border-radius: var(--radius_xs);
+	padding: var(--space_md);
+	color: var(--color, var(--text_2));
+	background-color: var(--fg_1);
+}
+:where(aside:not(.unstyled):hover) {
+	border-left-color: var(--border_color_4);
+}
+
+:where(blockquote:not(.unstyled)) {
+	border-radius: var(--radius_xs);
+	padding: var(--space_md);
+	color: var(--color, var(--text_2));
+	background-color: var(--fg_1);
+}
+
+code {
+	font-family: var(--font_mono);
+	font-weight: 600;
+	-webkit-hyphens: none;
+	hyphens: none;
+	color: var(--color, var(--text_2));
+	background-color: var(--fg_1);
+	padding: 0 var(--space_xs2);
+	border-radius: var(--radius_xs);
+}
+
+pre {
+	/* @see https://developer.mozilla.org/en-US/docs/Web/CSS/white-space#break-spaces */
+	/* TODO check for `Code` before adding this - white-space: break-spaces; */
+	font-family: var(--font_mono);
+	color: var(--color, var(--text_2));
+	overflow: auto;
+	max-width: 100%;
+}
+
+pre > code {
+	display: block; /* TODO maybe invert and change to inline in `p`? */
+	font-size: var(--size_sm); /* TODO maybe computed from generic `--size` using a multiplier var? */
+	font-weight: 500;
+}
+
 hr {
 	border-top: 1px solid var(--border_color_3);
 	border-bottom: 2px solid var(--border_color_3);
@@ -264,13 +264,13 @@ hr {
 	margin: var(--space_xl7) 0;
 }
 
-:where(fieldset) {
+fieldset {
 	display: flex;
 	flex-direction: column;
 	border: 0;
 }
 
-:where(legend) {
+legend {
 	font-size: var(--size_xl);
 	margin-bottom: var(--space_lg);
 }
@@ -597,7 +597,7 @@ label {
 	color: var(--text_color);
 	cursor: pointer;
 }
-label .title {
+:where(label .title) {
 	font-weight: 600;
 	margin-bottom: var(--space_xs2);
 }
