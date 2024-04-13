@@ -122,7 +122,7 @@ pre {
 
 pre > code {
 	display: block; /* TODO maybe invert and change to inline in `p`? */
-	font-size: var(--size_sm);
+	font-size: var(--size_sm); /* TODO maybe computed from generic `--size` using a multiplier var? */
 	font-weight: 500;
 }
 
@@ -227,8 +227,9 @@ p {
 }
 
 /* TODO maybe do the `:not(:last-child)` more generically instead of this selector? */
+/* TODO other elements */
 /* checkboxes and radios are expected to be nested inside a `label`, thus no bottom margin */
-:where(
+:is(
 		p,
 		ul,
 		ol,
