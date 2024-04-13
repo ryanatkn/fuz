@@ -4,7 +4,7 @@
 	import type {Snippet} from 'svelte';
 
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
-	import Spider from '$routes/Spider.svelte';
+	import Fuz from '$routes/Fuz.svelte';
 
 	interface Props {
 		children?: Snippet;
@@ -32,7 +32,7 @@
 						<span>fuz</span>
 					{:else}
 						<div class="icon row">
-							<Spider size="32px" /> <span class="ml_sm">fuz</span>
+							<Fuz size="32px" /> <span class="ml_sm">fuz</span>
 						</div>
 					{/if}
 				</Breadcrumb>
