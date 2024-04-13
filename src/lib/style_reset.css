@@ -135,6 +135,7 @@ a {
 	/* TODO @multiple outline-offset */
 	/* outline-offset: 2px; */
 }
+/* TODO should these be customizable with utility classes? */
 a:hover {
 	text-decoration: var(--text_decoration_hover);
 }
@@ -248,12 +249,12 @@ p {
 :where(section:not(:last-child)) {
 	margin-bottom: var(--space_xl7);
 }
-:where(summary) {
+summary {
 	/* TODO maybe change API to like `--margin_bottom`? */
 	margin-bottom: var(--space_xs);
 }
 
-:where(hr) {
+hr {
 	border-top: 1px solid var(--border_color_3);
 	border-bottom: 2px solid var(--border_color_3);
 	border-left: none;

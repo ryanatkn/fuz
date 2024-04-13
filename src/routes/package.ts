@@ -643,6 +643,7 @@ export const src_json = {
 				{name: 'space_xl15', kind: 'variable'},
 				{name: 'width_md', kind: 'variable'},
 				{name: 'width_sm', kind: 'variable'},
+				{name: 'width_xs', kind: 'variable'},
 				{name: 'border_color', kind: 'variable'},
 				{name: 'border_style', kind: 'variable'},
 				{name: 'border_color_1', kind: 'variable'},

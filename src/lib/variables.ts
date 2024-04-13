@@ -522,6 +522,7 @@ export const space_xl14: Style_Variable = {name: 'space_xl14', light: '36.9rem'}
 export const space_xl15: Style_Variable = {name: 'space_xl15', light: '47rem'};
 export const width_md: Style_Variable = {name: 'width_md', light: '800px'};
 export const width_sm: Style_Variable = {name: 'width_sm', light: '320px'};
+export const width_xs: Style_Variable = {name: 'width_xs', light: '200px'};
 
 /* borders and outlines */
 export const border_color: Style_Variable = {name: 'border_color', light: 'var(--border_color_3)'};
@@ -867,6 +868,7 @@ export const default_variables: Style_Variable[] = [
 	space_xl15,
 	width_md,
 	width_sm,
+	width_xs,
 
 	/* borders and outlines */
 	border_color,
