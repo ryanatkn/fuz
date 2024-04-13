@@ -28,7 +28,8 @@
 		{/if}
 		<!-- TODO maybe add this value to package.json, `icon_alt` -->
 		<img
-			style:max-width="var(--favicon_size, var(--icon_size_xl2))"
+			style:width="var(--size, var(--icon_size_xl2))"
+			style:height="var(--size, var(--icon_size_xl2))"
 			src="{pkg.homepage_url}/favicon.png"
 			alt="favicon for {pkg.repo_name}"
 		/>

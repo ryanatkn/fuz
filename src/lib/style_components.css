@@ -127,7 +127,7 @@ By default it's opaque, resetting the background to the initial depth. */
 	min-width: 0;
 }
 .menu_item .icon {
-	width: var(--icon_size);
+	width: var(--icon_size, var(--icon_size_md));
 	margin-right: var(--space_sm);
 	flex-shrink: 0;
 	text-align: center;

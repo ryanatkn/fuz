@@ -491,7 +491,10 @@ export const text_decoration_selected: Style_Variable = {
 	name: 'text_decoration_selected',
 	light: 'underline',
 };
-export const link_active: Style_Variable = {name: 'link_active', light: 'var(--text_color)'};
+export const link_color_selected: Style_Variable = {
+	name: 'link_color_selected',
+	light: 'var(--text_color)',
+};
 
 /* spacings, rounded to pixels for the default 16px case */
 export const space_xs5: Style_Variable = {name: 'space_xs5', light: '0.1rem'};
@@ -519,6 +522,7 @@ export const space_xl14: Style_Variable = {name: 'space_xl14', light: '36.9rem'}
 export const space_xl15: Style_Variable = {name: 'space_xl15', light: '47rem'};
 export const width_md: Style_Variable = {name: 'width_md', light: '800px'};
 export const width_sm: Style_Variable = {name: 'width_sm', light: '320px'};
+export const width_xs: Style_Variable = {name: 'width_xs', light: '200px'};
 
 /* borders and outlines */
 export const border_color: Style_Variable = {name: 'border_color', light: 'var(--border_color_3)'};
@@ -638,7 +642,6 @@ export const shadow_inset_inverse_md: Style_Variable = {
 /* icons */
 /* these decrease by the golden ratio, rounded to the nearest pixel,
 	and they're insensitive to font size (`px` not `rem`) */
-export const icon_size: Style_Variable = {name: 'icon_size', light: 'var(--icon_size_md)'};
 export const icon_size_xs: Style_Variable = {name: 'icon_size_xs', light: '18px'};
 export const icon_size_sm: Style_Variable = {name: 'icon_size_sm', light: '32px'};
 export const icon_size_md: Style_Variable = {name: 'icon_size_md', light: '48px'};
@@ -837,7 +840,7 @@ export const default_variables: Style_Variable[] = [
 	text_decoration,
 	text_decoration_hover,
 	text_decoration_selected,
-	link_active,
+	link_color_selected,
 
 	/* space, rounded to pixels for the default 16px case */
 	space_xs5,
@@ -865,6 +868,7 @@ export const default_variables: Style_Variable[] = [
 	space_xl15,
 	width_md,
 	width_sm,
+	width_xs,
 
 	/* borders and outlines */
 	border_color,
@@ -921,7 +925,6 @@ export const default_variables: Style_Variable[] = [
 	shadow_inset_inverse_md,
 
 	/* icons */
-	icon_size,
 	icon_size_xs,
 	icon_size_sm,
 	icon_size_md,

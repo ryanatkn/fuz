@@ -115,8 +115,8 @@
 		display: flex;
 	}
 	.icon_sizes figure > div {
-		width: var(--size);
-		height: var(--size);
+		width: var(--size, var(--size_md));
+		height: var(--size, var(--size_md));
 		border: var(--border_width) var(--border_style) var(--border_color);
 		display: flex;
 		align-items: center;

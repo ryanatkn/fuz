@@ -5,11 +5,11 @@
 	import Style_Variable_Button from '$routes/Style_Variable_Button.svelte';
 
 	interface Props {
-		selected_font_size?: number; // TODO improve API, is index for `'md'`
+		selected_size?: number; // TODO improve API, is index for `'md'`
 		children?: Snippet;
 	}
 
-	let {selected_font_size = $bindable(2), children}: Props = $props(); // eslint-disable-line prefer-const
+	let {selected_size = $bindable(2), children}: Props = $props(); // eslint-disable-line prefer-const
 
 	// TODO the API is strange
 
@@ -18,7 +18,7 @@
 	const min = 1;
 	const max = size_variants.length;
 
-	const selected_name = $derived(size_variants[selected_font_size - 1]);
+	const selected_name = $derived(size_variants[selected_size - 1]);
 </script>
 
 <label
@@ -33,7 +33,7 @@
 			type="number"
 			style:width="var(--space_xl7)"
 			style:min-width="var(--space_xl7)"
-			bind:value={selected_font_size}
+			bind:value={selected_size}
 			{min}
 			step={1}
 			{max}
@@ -42,5 +42,5 @@
 			>--size_{selected_name}</Style_Variable_Button
 		>)
 	</div>
-	<input type="range" bind:value={selected_font_size} {min} step={1} {max} />
+	<input type="range" bind:value={selected_size} {min} step={1} {max} />
 </label>

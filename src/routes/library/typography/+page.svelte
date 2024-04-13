@@ -28,7 +28,7 @@
 
 	// TODO selected_font_family
 	let selected_font_weight = $state(400);
-	let selected_font_size = $state(3);
+	let selected_size = $state(3);
 </script>
 
 <Tome_Detail {tome}>
@@ -72,18 +72,18 @@
 		<form class="width_sm">
 			<Font_Weight_Control bind:selected_font_weight></Font_Weight_Control>
 		</form>
-		{#each size_variants as font_size (font_size.name)}
+		{#each size_variants as size (size.name)}
 			<div class="row wrap">
-				<Style_Variable_Button attrs={{title: font_size.light}} name={font_size.name}
+				<Style_Variable_Button attrs={{title: size.light}} name={size.name}
 					><span
-						style:font-size="var(--{font_size.name})"
+						style:font-size="var(--{size.name})"
 						style:font-weight={selected_font_weight}
-						class="font_sans">{font_size.name}</span
+						class="font_sans">{size.name}</span
 					></Style_Variable_Button
 				>
 				<div class="row">
 					<span class="pr_sm">=</span>
-					<code>{computed_styles?.getPropertyValue('--' + font_size.name)}</code>
+					<code>{computed_styles?.getPropertyValue('--' + size.name)}</code>
 				</div>
 			</div>
 		{/each}
@@ -96,14 +96,14 @@
 			<Tome_Link name="classes" hash="utility-classes">utility classes</Tome_Link>.
 		</aside>
 		<form>
-			<Font_Size_Control bind:selected_font_size />
+			<Font_Size_Control bind:selected_size />
 		</form>
 		<div>
 			{#each font_weights as font_weight}
 				<div
 					class="nowrap"
 					style:font-weight={font_weight}
-					style:font-size="var(--{size_names[selected_font_size - 1]})"
+					style:font-size="var(--{size_names[selected_size - 1]})"
 				>
 					font-weight: {font_weight}
 				</div>

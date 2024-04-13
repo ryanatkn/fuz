@@ -2,7 +2,7 @@
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
 	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
-	// TODO BLOCK buggy animations, maybe will be fixed before Svelte 5 release
+	// TODO buggy animations, maybe will be fixed before Svelte 5 release
 </script>
 
 <section>
