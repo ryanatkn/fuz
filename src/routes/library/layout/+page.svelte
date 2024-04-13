@@ -31,7 +31,7 @@
 	<section>
 		<Tome_Subheading text="Width variables" slug="width-variables" />
 		<div>
-			{#each ['sm', 'md'] as radius}
+			{#each ['xs', 'sm', 'md'] as radius}
 				{@const name = 'width_' + radius}
 				<div class="layout_example">
 					<div class="fill" style:width="var(--{name})" />
@@ -62,7 +62,7 @@
 	}
 
 	.variable_wrapper {
-		width: 120px;
+		width: 110px;
 	}
 
 	.computed_value {

@@ -4,11 +4,11 @@
 	interface Props {
 		text: string;
 		tag?: string;
-		font_size?: string | undefined;
+		size?: string | undefined;
 		padding?: string | undefined;
 	}
 
-	const {text, tag = 'span', font_size, padding}: Props = $props();
+	const {text, tag = 'span', size, padding}: Props = $props();
 </script>
 
-<svelte:element this={tag} style:font-size={font_size} style:padding>{text}</svelte:element>
+<svelte:element this={tag} style:font-size={size} style:padding>{text}</svelte:element>

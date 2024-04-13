@@ -97,7 +97,7 @@
 		padding-left: var(--space_sm);
 	}
 	.icon {
-		font-size: var(--icon_size);
+		font-size: var(--icon_size, var(--icon_size_md));
 		text-align: center;
 		display: flex;
 		justify-content: center;

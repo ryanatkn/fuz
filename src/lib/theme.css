@@ -145,7 +145,7 @@
 	--text_decoration: none;
 	--text_decoration_hover: underline;
 	--text_decoration_selected: underline;
-	--link_active: var(--text_color);
+	--link_color_selected: var(--text_color);
 	--space_xs5: 0.1rem;
 	--space_xs4: 0.2rem;
 	--space_xs3: 0.3rem;
@@ -171,6 +171,7 @@
 	--space_xl15: 47rem;
 	--width_md: 800px;
 	--width_sm: 320px;
+	--width_xs: 200px;
 	--border_color: var(--border_color_3);
 	--border_style: solid;
 	--border_color_1: hsl(var(--tint_hue), 60%, 20%, 15%);
@@ -221,7 +222,6 @@
 	--shadow_inset_inverse_md: 0 2px 4px 1px inset var(--darken_2),
 		0 -2px 4px 1px inset var(--lighten_2), 0 3px 6px 2px inset var(--darken_1),
 		0 -3px 6px 2px inset var(--lighten_2);
-	--icon_size: var(--icon_size_md);
 	--icon_size_xs: 18px;
 	--icon_size_sm: 32px;
 	--icon_size_md: 48px;

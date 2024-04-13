@@ -15,17 +15,12 @@
 <Contextmenu_Root scoped>
 	<Contextmenu>
 		{#snippet entries()}
-			<!-- eslint-disable-next-line no-alert -->
 			<Contextmenu_Entry run={() => (greeted = !greeted)}>Hello world</Contextmenu_Entry>
-			<!-- eslint-disable-next-line no-alert -->
 			<Contextmenu_Entry run={() => (greeted_icon_snippet = !greeted_icon_snippet)}>
 				{#snippet icon()}🌞{/snippet}
 				Hello with an optional icon snippet
 			</Contextmenu_Entry>
-			<Contextmenu_Entry
-				run={greeted ? () => alert('hi!') : () => (greeted_icon_string = !greeted_icon_string)}
-				icon="🌚"
-			>
+			<Contextmenu_Entry run={() => (greeted_icon_string = !greeted_icon_string)} icon="🌚">
 				Hello with an optional icon string
 			</Contextmenu_Entry>
 		{/snippet}

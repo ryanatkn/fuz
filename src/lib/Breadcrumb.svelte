@@ -48,12 +48,12 @@
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
-		font-size: var(--font_size, var(--size_md));
+		font-size: var(--size, var(--size_md));
 	}
 	a {
 		position: relative;
 		z-index: 1;
-		padding: 0 calc(var(--font_size, var(--size_md)) * 0.5);
+		padding: 0 calc(var(--size, var(--size_md)) * 0.5);
 		display: flex;
 		align-items: center;
 	}
