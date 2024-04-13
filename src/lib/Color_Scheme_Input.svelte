@@ -2,7 +2,8 @@
 	import type {Writable} from 'svelte/store';
 	import {swallow} from '@ryanatkn/belt/dom.js';
 
-	import {color_schemes, type Color_Scheme, get_color_scheme} from '$lib/theme.js';
+	import {color_schemes, type Color_Scheme} from '$lib/theme.js';
+	import {get_color_scheme} from '$lib/Themed.svelte';
 
 	interface Props {
 		selected_color_scheme?: Writable<Color_Scheme | null>;

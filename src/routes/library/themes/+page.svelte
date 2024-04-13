@@ -8,7 +8,8 @@
 	import {get_tome} from '$lib/tome.js';
 	import Color_Scheme_Input from '$lib/Color_Scheme_Input.svelte';
 	import Tome_Link from '$lib/Tome_Link.svelte';
-	import {type Theme, save_theme, get_theme, get_color_scheme} from '$lib/theme.js';
+	import {type Theme, save_theme} from '$lib/theme.js';
+	import {get_theme, get_color_scheme} from '$lib/Themed.svelte';
 	import {default_themes} from '$lib/themes.js';
 	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 	import Theme_Input from '$lib/Theme_Input.svelte';

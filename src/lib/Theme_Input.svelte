@@ -2,7 +2,8 @@
 	import type {Readable} from 'svelte/store';
 	import {swallow} from '@ryanatkn/belt/dom.js';
 
-	import {get_theme, type Theme} from '$lib/theme.js';
+	import type {Theme} from '$lib/theme.js';
+	import {get_theme} from '$lib/Themed.svelte';
 	import {default_themes} from '$lib/themes.js';
 
 	interface Props {
