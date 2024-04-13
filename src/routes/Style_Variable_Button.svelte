@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type {SvelteHTMLElements} from 'svelte/elements';
 	import type {Snippet} from 'svelte';
+	import {default_variables} from '@ryanatkn/moss/variables.js';
 
-	import {default_variables} from '$lib/variables.js';
 	import {get_selected_variable} from '$routes/style_variable_helpers.js';
 
 	interface Props {
