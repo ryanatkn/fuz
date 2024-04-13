@@ -2,6 +2,8 @@
 	import {base} from '$app/paths';
 	import Spider from '@ryanatkn/fuz/Spider.svelte';
 
+	// Moss doesn't publish any Svelte, so we include this logo here like the GitHub/MDN ones
+
 	// TODO think about this API
 	interface Props {
 		size?: string;
