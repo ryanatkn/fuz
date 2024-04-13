@@ -1,19 +1,30 @@
 <script lang="ts" context="module">
 	let mounted = false;
+
+	// TODO change API to use runes
+
+	const THEME_KEY = Symbol('theme');
+	export const get_theme = (): Writable<Theme> => getContext(THEME_KEY);
+	export const set_theme = (store: Writable<Theme>): Writable<Theme> =>
+		setContext(THEME_KEY, store);
+
+	const COLOR_SCHEME_KEY = Symbol('color_scheme');
+	export const get_color_scheme = (): Writable<Color_Scheme | null> => getContext(COLOR_SCHEME_KEY);
+	export const set_color_scheme = (
+		store: Writable<Color_Scheme | null>,
+	): Writable<Color_Scheme | null> => setContext(COLOR_SCHEME_KEY, store);
 </script>
 
 <script lang="ts">
-	import {onDestroy, onMount, type Snippet} from 'svelte';
+	import {getContext, onDestroy, onMount, setContext, type Snippet} from 'svelte';
 	import {writable, type Writable} from 'svelte/store';
 
 	import {
 		create_theme_style_html,
 		render_theme_style,
 		type Theme,
-		set_theme,
 		create_theme_setup_script,
 		type Color_Scheme,
-		set_color_scheme,
 		load_color_scheme as default_load_color_scheme,
 		save_color_scheme as default_save_color_scheme,
 		sync_color_scheme as default_sync_color_scheme,
