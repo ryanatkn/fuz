@@ -22,14 +22,14 @@
 		font-size: var(--size_lg);
 		position: absolute;
 		left: -3.5rem;
-		bottom: calc(var(--size) * 0.1);
+		bottom: calc(var(--size, var(--size_md)) * 0.1);
 		opacity: 0;
 		transition: opacity var(--duration_2);
 	}
 
 	.hashlink_scroll_target {
 		position: absolute;
-		top: calc(var(--size) * -4);
+		top: calc(var(--size, var(--size_md)) * -4);
 		left: 0;
 	}
 

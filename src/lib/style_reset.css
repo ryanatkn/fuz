@@ -46,7 +46,6 @@ body {
 	font-size: 1.6rem; /* matched to `font-size: 62.5%` and same value as the default `--size_md`, but this one shouldn't vary */
 	font-family: var(--font_sans);
 	tab-size: 2; /* TODO var */
-	--size: var(--size_md); /* TODO expand this pattern? */
 }
 
 ::selection {
@@ -176,7 +175,7 @@ h6 {
 	line-height: var(--line_height_sm);
 	text-wrap: balance; /* @see https://developer.mozilla.org/en-US/docs/Web/CSS/text-wrap#balance */
 	/* TODO use this pattern elsewhere? provides API to components like `Mdn_Logo` */
-	font-size: var(--size);
+	font-size: var(--size, var(--size_md));
 	font-weight: var(--font_weight);
 	overflow-wrap: break-word;
 }

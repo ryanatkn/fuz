@@ -641,7 +641,6 @@ export const shadow_inset_inverse_md: Style_Variable = {
 /* icons */
 /* these decrease by the golden ratio, rounded to the nearest pixel,
 	and they're insensitive to font size (`px` not `rem`) */
-export const icon_size: Style_Variable = {name: 'icon_size', light: 'var(--icon_size_md)'};
 export const icon_size_xs: Style_Variable = {name: 'icon_size_xs', light: '18px'};
 export const icon_size_sm: Style_Variable = {name: 'icon_size_sm', light: '32px'};
 export const icon_size_md: Style_Variable = {name: 'icon_size_md', light: '48px'};
@@ -924,7 +923,6 @@ export const default_variables: Style_Variable[] = [
 	shadow_inset_inverse_md,
 
 	/* icons */
-	icon_size,
 	icon_size_xs,
 	icon_size_sm,
 	icon_size_md,
