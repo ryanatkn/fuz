@@ -46,6 +46,18 @@
 		<p>A paragraph with <code>code</code> and other text.</p>
 	</section>
 	<section>
+		<Tome_Subheading text="pre" slug="pre-element">
+			<Mdn_Link href="Web/HTML/Element/pre" />
+		</Tome_Subheading>
+		<pre><code class="inline">pre</code> is preformatted
+				text</pre>
+		<pre><code
+				><code class="inline">code</code> inside a pre
+		 looks like
+				   this</code
+			></pre>
+	</section>
+	<section>
 		<Tome_Subheading text="details and summary" slug="details-and-summary-elements">
 			<Mdn_Link href="Web/HTML/Element/details" />
 			and
