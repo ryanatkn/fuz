@@ -41,7 +41,8 @@
 		<p>
 			<code>Themed</code> adds global support for both the browser's
 			<Mdn_Link href="Web/CSS/color-scheme" />
-			and custom themes based on <Tome_Link name="variables" />, which use
+			and custom themes based on
+			<a href="https://moss.ryanatkn.com/library/variables">Moss style variables</a>, which use
 			<Mdn_Link href="Web/CSS/--*">CSS custom properties</Mdn_Link>.
 			<code>Themed</code> is a singleton component that's mounted at the top-level of the page:
 		</p>
@@ -135,9 +136,11 @@
 	<section class="theme">
 		<Tome_Subheading text="Builtin themes" slug="builtin-themes" />
 		<p>
-			A theme is a simple JSON collection of <Tome_Link name="variables" /> that can be transformed into
-			CSS that set custom properties. Each variable can have values for light and/or dark color schemes.
-			In other words, "dark" isn't a theme, it's a mode that any theme can implement.
+			A theme is a simple JSON collection of <a href="https://moss.ryanatkn.com/library/variables"
+				>Moss style variables</a
+			> that can be transformed into CSS that set custom properties. Each variable can have values for
+			light and/or dark color schemes. In other words, "dark" isn't a theme, it's a mode that any theme
+			can implement.
 		</p>
 		<!-- TODO explain when exported <Code code={`<Theme_Input\n\t{themes}\n\t{selected_theme}\n/>`} /> -->
 		<div class="width_sm mb_lg">
