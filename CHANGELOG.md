@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.95.0
+
+### Minor Changes
+
+- move theme Svelte helpers to `Themed.svelte` from `theme.ts` to prepare for Moss ([3ccf53c](https://github.com/ryanatkn/fuz/commit/3ccf53c))
+
 ## 0.94.0
 
 ### Minor Changes
