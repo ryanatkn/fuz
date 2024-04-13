@@ -238,10 +238,10 @@ p {
 	):not(:last-child) {
 	margin-bottom: var(--space_lg);
 }
-section:not(:last-child) {
+:where(section:not(:last-child)) {
 	margin-bottom: var(--space_xl7);
 }
-summary {
+:where(summary) {
 	/* TODO maybe change API to like `--margin_bottom`? */
 	margin-bottom: var(--space_xs);
 }
