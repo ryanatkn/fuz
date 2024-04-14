@@ -35,13 +35,14 @@
 	}: Props = $props();
 
 	const shuffled = $derived(shuffle(spiders.slice(), (min, max) => random_int(min, max, random)));
+	const rotations = $derived(shuffled.map(() => random_int(0, 359, random)));
 </script>
 
 <!-- TODO animate each in randomly -->
 <!-- TODO show when intersected in viewport, maybe inline `svelte-intersect` in Fuz? -->
 <div class="spiders" style:--width="{100 / spiders.length}%">
-	{#each shuffled as color (color)}
-		<div style:--color={color} class="col_2">
+	{#each shuffled as color, i (color)}
+		<div style:--color={color} class="col_2" style:transform="rotate({rotations[i]}deg)">
 			<Spider />
 		</div>
 	{/each}
@@ -51,6 +52,7 @@
 	.spiders {
 		position: relative;
 		z-index: -1;
+		overflow: hidden;
 		margin-top: var(--space_xl9);
 		display: grid;
 		grid-template-columns: repeat(7, 1fr);
