@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.97.1
+
+### Patch Changes
+
+- add `Card` link styling ([470608c](https://github.com/ryanatkn/fuz/commit/470608c))
+
 ## 0.97.0
 
 ### Minor Changes
