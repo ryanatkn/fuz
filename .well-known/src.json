@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.96.4",
+  "version": "0.96.7",
   "modules": {
     "./package.json": {
       "path": "package.json",
@@ -195,6 +195,10 @@
       "path": "Fuz_Logo.svelte",
       "declarations": []
     },
+    "./Fuz_Template_Logo.svelte": {
+      "path": "Fuz_Template_Logo.svelte",
+      "declarations": []
+    },
     "./Github_Logo.svelte": {
       "path": "Github_Logo.svelte",
       "declarations": []
@@ -274,6 +278,10 @@
     },
     "./Mdn_Logo.svelte": {
       "path": "Mdn_Logo.svelte",
+      "declarations": []
+    },
+    "./Moss_Logo.svelte": {
+      "path": "Moss_Logo.svelte",
       "declarations": []
     },
     "./Package_Detail.svelte": {
@@ -1454,6 +1462,10 @@
           "kind": "variable"
         }
       ]
+    },
+    "./Zzz_Logo.svelte": {
+      "path": "Zzz_Logo.svelte",
+      "declarations": []
     }
   }
 }

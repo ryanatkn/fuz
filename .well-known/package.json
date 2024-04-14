@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.96.4",
+  "version": "0.96.7",
   "description": "Svelte UI library and CSS design system",
   "icon": "🧶",
   "public": true,
@@ -184,6 +184,11 @@
       "default": "./dist/Fuz_Logo.svelte",
       "types": "./dist/Fuz_Logo.svelte.d.ts"
     },
+    "./Fuz_Template_Logo.svelte": {
+      "svelte": "./dist/Fuz_Template_Logo.svelte",
+      "default": "./dist/Fuz_Template_Logo.svelte",
+      "types": "./dist/Fuz_Template_Logo.svelte.d.ts"
+    },
     "./Github_Logo.svelte": {
       "svelte": "./dist/Github_Logo.svelte",
       "default": "./dist/Github_Logo.svelte",
@@ -252,6 +257,11 @@
       "svelte": "./dist/Mdn_Logo.svelte",
       "default": "./dist/Mdn_Logo.svelte",
       "types": "./dist/Mdn_Logo.svelte.d.ts"
+    },
+    "./Moss_Logo.svelte": {
+      "svelte": "./dist/Moss_Logo.svelte",
+      "default": "./dist/Moss_Logo.svelte",
+      "types": "./dist/Moss_Logo.svelte.d.ts"
     },
     "./Package_Detail.svelte": {
       "svelte": "./dist/Package_Detail.svelte",
@@ -378,6 +388,11 @@
     "./variables.js": {
       "default": "./dist/variables.js",
       "types": "./dist/variables.d.ts"
+    },
+    "./Zzz_Logo.svelte": {
+      "svelte": "./dist/Zzz_Logo.svelte",
+      "default": "./dist/Zzz_Logo.svelte",
+      "types": "./dist/Zzz_Logo.svelte.d.ts"
     }
   }
 }
