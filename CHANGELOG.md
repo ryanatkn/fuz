@@ -1,5 +1,12 @@
 # @ryanatkn/fuz
 
+## 0.96.1
+
+### Patch Changes
+
+- allow customizing the library breadcrumb children ([a521537](https://github.com/ryanatkn/fuz/commit/a521537))
+- fix `Package_Summary` homepage url ([a521537](https://github.com/ryanatkn/fuz/commit/a521537))
+
 ## 0.96.0
 
 ### Minor Changes
