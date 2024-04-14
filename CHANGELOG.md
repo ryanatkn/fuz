@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.96.4
+
+### Patch Changes
+
+- add `Spiderspace_Logo` ([9b6df0f](https://github.com/ryanatkn/fuz/commit/9b6df0f))
+
 ## 0.96.3
 
 ### Patch Changes

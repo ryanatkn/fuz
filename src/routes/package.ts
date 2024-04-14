@@ -5,7 +5,7 @@ import type {Src_Json} from '@ryanatkn/gro/src_json.js';
 
 export const package_json = {
 	name: '@ryanatkn/fuz',
-	version: '0.96.3',
+	version: '0.96.4',
 	description: 'Svelte UI library',
 	motto: 'friendly user zystem',
 	icon: '🧶',
@@ -259,6 +259,11 @@ export const package_json = {
 			default: './dist/Spiders.svelte',
 			types: './dist/Spiders.svelte.d.ts',
 		},
+		'./Spiderspace_Logo.svelte': {
+			svelte: './dist/Spiderspace_Logo.svelte',
+			default: './dist/Spiderspace_Logo.svelte',
+			types: './dist/Spiderspace_Logo.svelte.d.ts',
+		},
 		'./Teleport.svelte': {
 			svelte: './dist/Teleport.svelte',
 			default: './dist/Teleport.svelte',
@@ -305,7 +310,7 @@ export const package_json = {
 
 export const src_json = {
 	name: '@ryanatkn/fuz',
-	version: '0.96.3',
+	version: '0.96.4',
 	modules: {
 		'./package.json': {path: 'package.json', declarations: []},
 		'./Alert.svelte': {path: 'Alert.svelte', declarations: []},
@@ -404,6 +409,7 @@ export const src_json = {
 		'./Redirect.svelte': {path: 'Redirect.svelte', declarations: []},
 		'./Spider.svelte': {path: 'Spider.svelte', declarations: []},
 		'./Spiders.svelte': {path: 'Spiders.svelte', declarations: []},
+		'./Spiderspace_Logo.svelte': {path: 'Spiderspace_Logo.svelte', declarations: []},
 		'./Teleport.svelte': {path: 'Teleport.svelte', declarations: []},
 		'./Theme_Input.svelte': {path: 'Theme_Input.svelte', declarations: []},
 		'./Themed_Scope.svelte': {path: 'Themed_Scope.svelte', declarations: []},
