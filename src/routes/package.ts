@@ -223,6 +223,11 @@ export const package_json = {
 			default: './dist/Mdn_Logo.svelte',
 			types: './dist/Mdn_Logo.svelte.d.ts',
 		},
+		'./Moss_Logo.svelte': {
+			svelte: './dist/Moss_Logo.svelte',
+			default: './dist/Moss_Logo.svelte',
+			types: './dist/Moss_Logo.svelte.d.ts',
+		},
 		'./Package_Detail.svelte': {
 			svelte: './dist/Package_Detail.svelte',
 			default: './dist/Package_Detail.svelte',
@@ -413,6 +418,7 @@ export const src_json = {
 		},
 		'./Mdn_Link.svelte': {path: 'Mdn_Link.svelte', declarations: []},
 		'./Mdn_Logo.svelte': {path: 'Mdn_Logo.svelte', declarations: []},
+		'./Moss_Logo.svelte': {path: 'Moss_Logo.svelte', declarations: []},
 		'./Package_Detail.svelte': {path: 'Package_Detail.svelte', declarations: []},
 		'./Package_Summary.svelte': {path: 'Package_Summary.svelte', declarations: []},
 		'./Pending_Animation.svelte': {path: 'Pending_Animation.svelte', declarations: []},

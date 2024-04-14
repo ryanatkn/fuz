@@ -121,7 +121,7 @@
 					{#if pkg.repo_url}
 						<span class="title">repo</span>
 						<div class="content">
-							<a class="chip" title="repo" href={pkg.repo_url}>{pkg.repo_name}</a>
+							<a class="chip" title="repo" href={pkg.repo_url}>{pkg.owner_name}/{pkg.repo_name}</a>
 						</div>
 					{/if}
 					{#if pkg.npm_url}
