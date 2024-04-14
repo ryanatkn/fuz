@@ -85,6 +85,12 @@
 		flex-direction: column;
 		text-align: center;
 	}
+	.link {
+		box-shadow: var(--shadow_inset_md);
+	}
+	.link:active {
+		box-shadow: var(--shadow_inset_inverse_md);
+	}
 	.link.selected .content,
 	.link:hover .content {
 		text-decoration: underline;
