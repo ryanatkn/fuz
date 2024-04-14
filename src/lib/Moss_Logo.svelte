@@ -7,7 +7,9 @@
 		alt?: string;
 	}
 
-	const {size, alt = 'the Moss logo, a little green tuft of moss'}: Props = $props();
+	const {size, alt = 'the Moss logo, a fuzzy tuft of green moss'}: Props = $props();
+
+	// TODO publish a plain SVG probably
 
 	// color:
 	// #298e29
@@ -15,7 +17,6 @@
 	// rgb(41, 142, 41)
 </script>
 
-<!-- TODO could potentially support the `image` option like `Fuz_Logo` -->
 <span
 	aria-label={alt}
 	style:--color="var(--color_b_5)"
@@ -23,3 +24,9 @@
 	style:width={size}
 	style:height={size}><Spider /></span
 >
+
+<style>
+	span {
+		transform: scaleX(-1) rotate(180deg);
+	}
+</style>
