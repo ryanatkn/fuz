@@ -11,15 +11,15 @@
 	import Dialog from '$lib/Dialog.svelte';
 	import Library_Footer from '$lib/Library_Footer.svelte';
 	import {set_library_links} from '$lib/library.svelte.js';
-	import Fuz_Logo from '$lib/Fuz_Logo.svelte';
 
 	interface Props {
 		tomes: Tome[];
 		pkg: Package_Meta;
+		breadcrumb_children?: Snippet<[is_primary_nav: boolean]>;
 		children: Snippet;
 	}
 
-	const {tomes, pkg, children}: Props = $props();
+	const {tomes, pkg, breadcrumb_children, children}: Props = $props();
 
 	// TODO this API is messy, inconsistent usage of props/context
 	const tomes_by_name = new Map(tomes.map((t) => [t.name, t]));
@@ -46,7 +46,7 @@
 <svelte:window bind:innerWidth onhashchange={() => (show_secondary_nav_dialog = false)} />
 
 <div class="library">
-	<Library_Primary_Nav>
+	<Library_Primary_Nav {pkg} {breadcrumb_children}>
 		<div class="nav_dialog_toggle">
 			<button class="plain" type="button" onclick={() => toggle_secondary_nav_dialog()}>menu</button
 			>
@@ -68,7 +68,13 @@
 			<section class="box">
 				<Library_Footer {pkg}>
 					<div class="mb_xl5">
-						<Breadcrumb><Fuz_Logo size="32px" /></Breadcrumb>
+						<Breadcrumb>
+							{#if breadcrumb_children}
+								{@render breadcrumb_children(false)}
+							{:else}
+								{pkg.package_json.icon ?? '🏠'}
+							{/if}
+						</Breadcrumb>
 					</div>
 				</Library_Footer>
 			</section>
@@ -80,7 +86,15 @@
 {#if show_secondary_nav_dialog && innerWidth && innerWidth <= TERTIARY_NAV_BREAKPOINT}
 	<Dialog onclose={() => (show_secondary_nav_dialog = false)}>
 		<div class="pane">
-			<div class="p_xl pb_0"><Breadcrumb><Fuz_Logo size="32px" /></Breadcrumb></div>
+			<div class="p_xl pb_0">
+				<Breadcrumb>
+					{#if breadcrumb_children}
+						{@render breadcrumb_children(false)}
+					{:else}
+						{pkg.package_json.icon ?? '🏠'}
+					{/if}
+				</Breadcrumb>
+			</div>
 			<div class="px_lg pb_xl">
 				<Library_Secondary_Nav {tomes} sidebar={false} />
 				<Library_Tertiary_Nav {tomes} {tomes_by_name} sidebar={false} />

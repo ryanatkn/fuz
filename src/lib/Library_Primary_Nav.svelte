@@ -2,38 +2,40 @@
 	import {page} from '$app/stores';
 	import {is_iframed} from '@ryanatkn/belt/dom.js';
 	import type {Snippet} from 'svelte';
+	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
 
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
-	import Fuz_Logo from '$lib/Fuz_Logo.svelte';
 
 	interface Props {
+		pkg: Package_Meta;
+		breadcrumb_children?: Snippet<[is_primary_nav: boolean]>;
 		children?: Snippet;
 	}
 
-	const {children}: Props = $props();
+	const {pkg, breadcrumb_children, children}: Props = $props();
 
 	// TODO this could be a prop passed by `Breadcrumb`, is commonly needed
 	const {pathname} = $derived($page.url);
-	const root = $derived(pathname === '/');
+	const selected_root = $derived(pathname === '/');
 
 	const iframed = is_iframed();
 	const enabled = !iframed;
 
 	// TODO BLOCK maybe when scrolled to the top, hide shadow, but show otherwise
+
+	// TODO BLOCK make this customizable, using snippet not pkg?
 </script>
 
 {#if enabled}
 	<div class="library_nav shadow_sm">
 		<div class="background" />
 		<div class="content">
-			<nav class:root>
+			<nav class:selected_root>
 				<Breadcrumb>
-					{#if root}
-						<span>fuz</span>
+					{#if breadcrumb_children}
+						{@render breadcrumb_children(true)}
 					{:else}
-						<div class="icon row">
-							<Fuz_Logo size="32px" /> <span class="ml_sm">fuz</span>
-						</div>
+						{pkg.package_json.icon ?? '🏠'}
 					{/if}
 				</Breadcrumb>
 			</nav>
@@ -86,7 +88,7 @@
 		}
 	}
 
-	.root {
+	.selected_root {
 		--text_decoration_selected: none;
 	}
 </style>

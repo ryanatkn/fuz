@@ -7,6 +7,7 @@
 	import Style_Variable_Detail from '$routes/Style_Variable_Detail.svelte';
 	import Dialog from '$lib/Dialog.svelte';
 	import {get_pkg} from '$routes/pkg.js';
+	import Fuz_Logo from '$lib/Fuz_Logo.svelte';
 
 	interface Props {
 		children: Snippet;
@@ -20,6 +21,15 @@
 </script>
 
 <Library {tomes} {pkg}>
+	{#snippet breadcrumb_children(is_primary_nav)}
+		{#if is_primary_nav}
+			<div class="icon row">
+				<Fuz_Logo size="32px" /> <span class="ml_sm">fuz</span>
+			</div>
+		{:else}
+			<Fuz_Logo size="32px" />
+		{/if}
+	{/snippet}
 	{@render children()}
 </Library>
 
