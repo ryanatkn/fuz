@@ -19,8 +19,9 @@ The Svelte components and helpers:
 
 - builds on my CSS design system [Moss](https://github.com/ryanatkn/moss)
 - plain CSS and minimal abstraction
-- near-zero dependencies except for Svelte, SvelteKit, and my utility library
-  [`@ryanatkn/belt`](https://github.com/ryanatkn/belt)
+- near-zero dependencies except for Svelte, SvelteKit,
+  my CSS framework [Moss](https://github.com/ryanatkn/moss),
+  and my utility library [`@ryanatkn/belt`](https://github.com/ryanatkn/belt)
   (not all components require SvelteKit but some do import its modules, which could be polyfilled)
 - not a fully-featured enterprise-ready set of components,
   it's being developed for the needs of specific projects, though eventually it will fill out
@@ -44,20 +45,22 @@ The Svelte components and helpers:
 npm i -D @ryanatkn/fuz
 ```
 
+Fuz uses my style framework [Moss](https://github.com/ryanatkn/moss).
 Import modules at their full paths:
 
 ```ts
-// plain CSS stylesheets from Moss:
+// Moss has one main plain CSS stylesheet:
 import '@ryanatkn/moss/style.css';
-import '@ryanatkn/moss/theme.css'; // or bring your own
 // or import individual parts of `@ryanatkn/moss/style.css`:
 import '@ryanatkn/moss/style_reset.css'; // required
 import '@ryanatkn/moss/style_utilities.css'; // optional
 import '@ryanatkn/moss/style_components.css'; // optional
 import '@ryanatkn/moss/style_animations.css'; // optional
-// Svelte components:
+// and import a Moss theme:
+import '@ryanatkn/moss/theme.css'; // or bring your own
+// then import Fuz Svelte components:
 import Themed from '@ryanatkn/fuz/Themed.svelte';
-// TypeScript modules:
+// and Fuz TypeScript modules:
 import {type Theme, get_theme} from '@ryanatkn/fuz/theme.js';
 ```
 
