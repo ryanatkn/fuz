@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.96.8
+
+### Patch Changes
+
+- update `Moss_Logo` ([3e035b1](https://github.com/ryanatkn/fuz/commit/3e035b1))
+
 ## 0.96.7
 
 ### Patch Changes
