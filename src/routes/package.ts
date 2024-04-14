@@ -6,7 +6,8 @@ import type {Src_Json} from '@ryanatkn/gro/src_json.js';
 export const package_json = {
 	name: '@ryanatkn/fuz',
 	version: '0.97.1',
-	description: 'Svelte UI library and CSS design system',
+	description: 'Svelte UI library',
+	motto: 'friendly user zystem',
 	icon: '🧶',
 	public: true,
 	license: 'MIT',
@@ -31,9 +32,9 @@ export const package_json = {
 		'@ryanatkn/belt': '^0.20.10',
 		'@ryanatkn/eslint-config': '^0.1.2',
 		'@ryanatkn/fuz_code': '^0.11.0',
-		'@ryanatkn/gro': '^0.115.0',
+		'@ryanatkn/gro': '^0.115.2',
 		'@sveltejs/adapter-static': '^3.0.1',
-		'@sveltejs/kit': '^2.5.5',
+		'@sveltejs/kit': '^2.5.6',
 		'@sveltejs/package': '^2.3.1',
 		'@sveltejs/vite-plugin-svelte': '^3.1.0',
 		'@types/node': '^20.12.7',
@@ -46,7 +47,7 @@ export const package_json = {
 		'prettier-plugin-svelte': '^3.2.3',
 		'prism-svelte': '^0.5.0',
 		prismjs: '^1.29.0',
-		svelte: '^5.0.0-next.102',
+		svelte: '^5.0.0-next.103',
 		'svelte-check': '^3.6.9',
 		tslib: '^2.6.2',
 		typescript: '^5.4.5',
@@ -327,6 +328,7 @@ export const package_json = {
 			types: './dist/Zzz_Logo.svelte.d.ts',
 		},
 	},
+	dependencies: {'@ryanatkn/fuz': '^0.97.1'},
 } satisfies Package_Json;
 
 export const src_json = {
