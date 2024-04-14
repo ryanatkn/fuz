@@ -1,5 +1,12 @@
 # @ryanatkn/fuz
 
+## 0.96.3
+
+### Patch Changes
+
+- improve package components ([b25a4c6](https://github.com/ryanatkn/fuz/commit/b25a4c6))
+- add `icon_size_xl3` ([b25a4c6](https://github.com/ryanatkn/fuz/commit/b25a4c6))
+
 ## 0.96.2
 
 ### Patch Changes
