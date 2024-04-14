@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.96.7
+
+### Patch Changes
+
+- add `Zzz_Logo` ([dcc26b1](https://github.com/ryanatkn/fuz/commit/dcc26b1))
+
 ## 0.96.6
 
 ### Patch Changes
