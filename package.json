@@ -388,6 +388,11 @@
     "./variables.js": {
       "default": "./dist/variables.js",
       "types": "./dist/variables.d.ts"
+    },
+    "./Zzz_Logo.svelte": {
+      "svelte": "./dist/Zzz_Logo.svelte",
+      "default": "./dist/Zzz_Logo.svelte",
+      "types": "./dist/Zzz_Logo.svelte.d.ts"
     }
   }
 }

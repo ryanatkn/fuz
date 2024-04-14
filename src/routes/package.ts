@@ -321,6 +321,11 @@ export const package_json = {
 		'./tome.js': {default: './dist/tome.js', types: './dist/tome.d.ts'},
 		'./variable_data.js': {default: './dist/variable_data.js', types: './dist/variable_data.d.ts'},
 		'./variables.js': {default: './dist/variables.js', types: './dist/variables.d.ts'},
+		'./Zzz_Logo.svelte': {
+			svelte: './dist/Zzz_Logo.svelte',
+			default: './dist/Zzz_Logo.svelte',
+			types: './dist/Zzz_Logo.svelte.d.ts',
+		},
 	},
 } satisfies Package_Json;
 
@@ -736,6 +741,7 @@ export const src_json = {
 				{name: 'default_variables', kind: 'variable'},
 			],
 		},
+		'./Zzz_Logo.svelte': {path: 'Zzz_Logo.svelte', declarations: []},
 	},
 } satisfies Src_Json;
 

@@ -7,18 +7,18 @@
 		alt?: string;
 	}
 
-	const {size, alt = 'the Moss logo, a little green tuft of moss'}: Props = $props();
+	const {size, alt = 'the Zzz logo, a little pink spider'}: Props = $props();
 
 	// color:
-	// #298e29
-	// hsl(120, 55%, 36%)
-	// rgb(41, 142, 41)
+	// #e03e81
+	// hsl(335, 72%, 56%)
+	// rgb(224, 62, 129)
 </script>
 
 <!-- TODO could potentially support the `image` option like `Fuz_Logo` -->
 <span
 	aria-label={alt}
-	style:--color="var(--color_b_5)"
+	style:--color="var(--color_g_5)"
 	class="inline_block"
 	style:width={size}
 	style:height={size}><Spider /></span
