@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.97.0
+
+### Minor Changes
+
+- rework logo component APIs ([9222875](https://github.com/ryanatkn/fuz/commit/9222875))
+
 ## 0.96.8
 
 ### Patch Changes
