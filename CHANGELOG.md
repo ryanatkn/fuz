@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.96.2
+
+### Patch Changes
+
+- hoist `repo_name` out of `Library_Content` ([a7e6c77](https://github.com/ryanatkn/fuz/commit/a7e6c77))
+
 ## 0.96.1
 
 ### Patch Changes
