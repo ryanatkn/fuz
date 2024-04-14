@@ -1,5 +1,13 @@
 # @ryanatkn/fuz
 
+## 0.97.2
+
+### Patch Changes
+
+- improve `Package_Detail` ([b10f1ee](https://github.com/ryanatkn/fuz/commit/b10f1ee))
+- Updated dependencies [b10f1ee]
+  - @ryanatkn/fuz@0.97.2
+
 ## 0.97.1
 
 ### Patch Changes
