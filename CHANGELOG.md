@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.96.5
+
+### Patch Changes
+
+- add `Fuz_Template_Logo` ([6e6d7a6](https://github.com/ryanatkn/fuz/commit/6e6d7a6))
+
 ## 0.96.4
 
 ### Patch Changes
