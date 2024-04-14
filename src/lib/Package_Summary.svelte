@@ -50,7 +50,7 @@
 			{@render homepage_url(pkg.homepage_url)}
 		{:else}
 			<div class="homepage_url">
-				<a class="chip" class:selected={homepage_url === $page.url.href} href={homepage_url}
+				<a class="chip" class:selected={pkg.homepage_url === $page.url.href} href={pkg.homepage_url}
 					>{format_url(pkg.homepage_url)}</a
 				>
 			</div>
