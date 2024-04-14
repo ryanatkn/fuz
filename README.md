@@ -47,14 +47,14 @@ npm i -D @ryanatkn/fuz
 Import modules at their full paths:
 
 ```ts
-// plain CSS stylesheets:
-import '@ryanatkn/fuz/style.css';
-import '@ryanatkn/fuz/theme.css'; // or bring your own
-// or import individual parts of `@ryanatkn/fuz/style.css`:
-import '@ryanatkn/fuz/style_reset.css'; // required
-import '@ryanatkn/fuz/style_utilities.css'; // optional
-import '@ryanatkn/fuz/style_components.css'; // optional
-import '@ryanatkn/fuz/style_animations.css'; // optional
+// plain CSS stylesheets from Moss:
+import '@ryanatkn/moss/style.css';
+import '@ryanatkn/moss/theme.css'; // or bring your own
+// or import individual parts of `@ryanatkn/moss/style.css`:
+import '@ryanatkn/moss/style_reset.css'; // required
+import '@ryanatkn/moss/style_utilities.css'; // optional
+import '@ryanatkn/moss/style_components.css'; // optional
+import '@ryanatkn/moss/style_animations.css'; // optional
 // Svelte components:
 import Themed from '@ryanatkn/fuz/Themed.svelte';
 // TypeScript modules:
