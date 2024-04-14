@@ -4,10 +4,10 @@
 	// TODO think about this API
 	interface Props {
 		size?: string;
-		alt?: string;
+		label?: string;
 	}
 
-	const {size, alt = 'the Moss logo, a fuzzy tuft of green moss'}: Props = $props();
+	const {size, label = 'the Moss logo, a fuzzy tuft of green moss'}: Props = $props();
 
 	// TODO publish a plain SVG probably
 
@@ -17,12 +17,8 @@
 	// rgb(41, 142, 41)
 </script>
 
-<span
-	aria-label={alt}
-	style:--color="var(--color_b_5)"
-	class="inline_block"
-	style:width={size}
-	style:height={size}><Spider /></span
+<span style:--color="var(--color_b_5)" class="inline_block" style:width={size} style:height={size}
+	><Spider {label} /></span
 >
 
 <style>

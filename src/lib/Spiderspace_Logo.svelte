@@ -4,10 +4,10 @@
 	// TODO think about this API
 	interface Props {
 		size?: string;
-		alt?: string;
+		label?: string;
 	}
 
-	const {size, alt = 'the Spiderspace logo, a little yellow spider'}: Props = $props();
+	const {size, label = 'the Spiderspace logo, a little yellow spider'}: Props = $props();
 
 	// color:
 	// #b19a25
@@ -16,10 +16,6 @@
 </script>
 
 <!-- TODO could potentially support the `image` option like `Fuz_Logo` -->
-<span
-	aria-label={alt}
-	style:--color="var(--color_e_5)"
-	class="inline_block"
-	style:width={size}
-	style:height={size}><Spider /></span
+<span style:--color="var(--color_e_5)" class="inline_block" style:width={size} style:height={size}
+	><Spider {label} /></span
 >
