@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.96.2",
+  "version": "0.96.3",
   "modules": {
     "./package.json": {
       "path": "package.json",
@@ -1387,6 +1387,10 @@
         },
         {
           "name": "icon_size_xl2",
+          "kind": "variable"
+        },
+        {
+          "name": "icon_size_xl3",
           "kind": "variable"
         },
         {
