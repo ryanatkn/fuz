@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.96.3",
+  "version": "0.96.4",
   "description": "Svelte UI library and CSS design system",
   "icon": "🧶",
   "public": true,
@@ -287,6 +287,11 @@
       "svelte": "./dist/Spiders.svelte",
       "default": "./dist/Spiders.svelte",
       "types": "./dist/Spiders.svelte.d.ts"
+    },
+    "./Spiderspace_Logo.svelte": {
+      "svelte": "./dist/Spiderspace_Logo.svelte",
+      "default": "./dist/Spiderspace_Logo.svelte",
+      "types": "./dist/Spiderspace_Logo.svelte.d.ts"
     },
     "./style_animations.css": {
       "default": "./dist/style_animations.css"

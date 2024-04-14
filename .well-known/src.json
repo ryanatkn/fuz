@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.96.3",
+  "version": "0.96.4",
   "modules": {
     "./package.json": {
       "path": "package.json",
@@ -302,6 +302,10 @@
     },
     "./Spiders.svelte": {
       "path": "Spiders.svelte",
+      "declarations": []
+    },
+    "./Spiderspace_Logo.svelte": {
+      "path": "Spiderspace_Logo.svelte",
       "declarations": []
     },
     "./style_animations.css": {
