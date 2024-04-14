@@ -31,7 +31,7 @@
 			style:width="var(--size, var(--icon_size_xl2))"
 			style:height="var(--size, var(--icon_size_xl2))"
 			src="{pkg.homepage_url}/favicon.png"
-			alt="favicon for {pkg.repo_name}"
+			alt="logo for {pkg.repo_name}"
 		/>
 	</header>
 	{#if package_json.description}

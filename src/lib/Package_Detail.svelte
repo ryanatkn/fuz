@@ -65,92 +65,110 @@
 
 <div class="package_detail">
 	<!-- TODO maybe continue this snippet pattern, or maybe simplify? -->
-	<header>
-		{#if repo_name}
-			{@render repo_name(pkg.repo_name)}
-		{:else}
-			<div class="repo_name">
-				{pkg.repo_name}{#if package_json.icon}{' '}{package_json.icon}{/if}
+	<div class="info">
+		<div class="flex flex_1">
+			<!-- add yet another wrapper so it flows like we want -->
+			<div>
+				<header>
+					{#if repo_name}
+						{@render repo_name(pkg.repo_name)}
+					{:else}
+						<div class="repo_name">
+							{pkg.repo_name}{#if package_json.icon}{' '}{package_json.icon}{/if}
+						</div>
+					{/if}
+				</header>
+				{#if children}{@render children(pkg)}{/if}
+				{#if package_json.description}
+					{#if description}
+						{@render description(package_json.description)}
+					{:else}
+						<div class="description">{package_json.description}</div>
+					{/if}
+				{/if}
+				{#if pkg.npm_url}
+					{#if npm_url}
+						{@render npm_url(pkg.npm_url)}
+					{:else}
+						<blockquote class="npm_url">npm i -D {package_json.name}</blockquote>
+					{/if}
+				{/if}
+				<!-- TODO accessible HTML -->
+				<section class="properties">
+					{#if pkg.homepage_url}
+						{#if homepage_url}
+							{@render homepage_url(pkg.homepage_url)}
+						{:else}
+							<span class="title">homepage</span>
+							<div class="content">
+								<a
+									class="chip"
+									class:selected={pkg.homepage_url === $page.url.href}
+									href={pkg.homepage_url}
+								>
+									<img
+										src="{ensure_end(pkg.homepage_url, '/')}favicon.png"
+										alt="favicon to homepage at {pkg.homepage_url}"
+										style:width="16px"
+										style:height="16px"
+										style:margin-right="var(--space_xs)"
+									/>
+									{format_url(pkg.homepage_url)}
+								</a>
+							</div>
+						{/if}
+					{/if}
+					{#if pkg.repo_url}
+						<span class="title">repo</span>
+						<div class="content">
+							<a class="chip" title="repo" href={pkg.repo_url}>{pkg.repo_name}</a>
+						</div>
+					{/if}
+					{#if pkg.npm_url}
+						<span class="title">npm</span>
+						<div class="content">
+							<a class="chip" title="npm" href={pkg.npm_url}>{package_json.name}</a>
+						</div>
+					{/if}
+					{#if pkg.changelog_url}
+						<span class="title">version</span>
+						<div class="content">
+							<a class="chip" title="version" href={pkg.changelog_url}>{package_json.version}</a>
+						</div>
+					{/if}
+					{#if license_url}
+						<span class="title">license</span>
+						<div class="content">
+							<a class="chip" title="license" href={license_url}>{package_json.license}</a>
+						</div>
+					{/if}
+					{#if pkg.homepage_url}
+						<span class="title">data</span>
+						<div class="content">
+							<a
+								class="chip"
+								title="data"
+								href="{ensure_end(pkg.homepage_url, '/')}.well-known/package.json">package.json</a
+							>
+							<a
+								class="chip"
+								title="data"
+								href="{ensure_end(pkg.homepage_url, '/')}.well-known/src.json">src.json</a
+							>
+						</div>
+					{/if}
+				</section>
 			</div>
-		{/if}
-	</header>
-	{#if children}{@render children(pkg)}{/if}
-	{#if package_json.description}
-		{#if description}
-			{@render description(package_json.description)}
-		{:else}
-			<div class="description">{package_json.description}</div>
-		{/if}
-	{/if}
-	{#if pkg.npm_url}
-		{#if npm_url}
-			{@render npm_url(pkg.npm_url)}
-		{:else}
-			<blockquote class="npm_url">npm i -D {package_json.name}</blockquote>
-		{/if}
-	{/if}
-	<section class="properties">
-		{#if pkg.homepage_url}
-			{#if homepage_url}
-				{@render homepage_url(pkg.homepage_url)}
-			{:else}
-				<span class="title">homepage</span>
-				<div class="content">
-					<a
-						class="chip"
-						class:selected={pkg.homepage_url === $page.url.href}
-						href={pkg.homepage_url}
-					>
-						<img
-							src="{ensure_end(pkg.homepage_url, '/')}favicon.png"
-							alt="favicon to homepage at {pkg.homepage_url}"
-							style:width="16px"
-							style:height="16px"
-							style:margin-right="var(--space_xs)"
-						/>
-						{format_url(pkg.homepage_url)}
-					</a>
-				</div>
-			{/if}
-		{/if}
-		{#if pkg.repo_url}
-			<span class="title">repo</span>
-			<div class="content">
-				<a class="chip" title="repo" href={pkg.repo_url}>{pkg.repo_name}</a>
-			</div>
-		{/if}
-		{#if pkg.npm_url}
-			<span class="title">npm</span>
-			<div class="content">
-				<a class="chip" title="npm" href={pkg.npm_url}>{package_json.name}</a>
-			</div>
-		{/if}
-		{#if pkg.changelog_url}
-			<span class="title">version</span>
-			<div class="content">
-				<a class="chip" title="version" href={pkg.changelog_url}>{package_json.version}</a>
-			</div>
-		{/if}
-		{#if license_url}
-			<span class="title">license</span>
-			<div class="content">
-				<a class="chip" title="license" href={license_url}>{package_json.license}</a>
-			</div>
-		{/if}
-		{#if pkg.homepage_url}
-			<span class="title">data</span>
-			<div class="content">
-				<a
-					class="chip"
-					title="data"
-					href="{ensure_end(pkg.homepage_url, '/')}.well-known/package.json">package.json</a
-				>
-				<a class="chip" title="data" href="{ensure_end(pkg.homepage_url, '/')}.well-known/src.json"
-					>src.json</a
-				>
-			</div>
-		{/if}
-	</section>
+		</div>
+		<div class="logo">
+			<img
+				style:width="var(--size, var(--icon_size_xl3))"
+				style:height="var(--size, var(--icon_size_xl3))"
+				src="{pkg.homepage_url}/favicon.png"
+				alt="logo for {pkg.repo_name}"
+			/>
+		</div>
+	</div>
 	{#if modules && pkg.repo_url}
 		<section>
 			<menu class="unstyled">
@@ -204,9 +222,22 @@
 		width: 100%;
 		max-width: var(--max_width, var(--width_md));
 	}
+
+	.info {
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.logo {
+		flex-shrink: 0;
+		padding: 0 var(--space_xl);
+	}
+
 	header {
 		margin-bottom: var(--space_lg);
 	}
+
 	section {
 		width: 100%;
 		margin-bottom: var(--space_lg);
