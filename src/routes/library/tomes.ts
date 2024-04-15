@@ -1,4 +1,5 @@
 import {init_tome, type Tome} from '$lib/tome.js';
+import introduction from '$routes/library/introduction/+page.svelte';
 import Themed from '$routes/library/Themed/+page.svelte';
 import Pending_Animation from '$routes/library/Pending_Animation/+page.svelte';
 import Pending_Button from '$routes/library/Pending_Button/+page.svelte';
@@ -18,6 +19,14 @@ import Card from '$routes/library/Card/+page.svelte';
 // TODO maybe decouple `related` from `Tome` to get bidirectionality for free
 
 export const tomes: Tome[] = [
+	{
+		name: 'introduction',
+		slug: 'introduction',
+		pathname: '',
+		category: 'guide',
+		component: introduction,
+		related: [],
+	},
 	{
 		name: 'Themed',
 		slug: 'Themed',
