@@ -28,6 +28,7 @@ export const set_tomes = (tomes: Map<string, Tome>): Map<string, Tome> =>
 export const get_tome = (name: string): Tome => {
 	const tomes = get_tomes();
 	const tome = tomes.get(name);
+	if (!tome) debugger;
 	if (!tome) throw Error('unable to find tome ' + name);
 	return tome;
 };
