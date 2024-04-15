@@ -35,7 +35,7 @@ If you feel comfortable looking at the source code,
 Fuz is ready to use in your own projects,
 with the major caveat that there will be a lot of breaking changes ahead.
 The code is significantly incomplete but I think it's stable enough to use
-if you're willing to keep up with the relatively fast-moving changelog.
+if you're willing to keep up with the relatively fast-moving [changelog](CHANGELOG.md).
 See the dev channels in [Discord](https://discord.gg/YU5tyeK72X)
 and [GitHub issues](https://github.com/ryanatkn/fuz/issues).
 
