@@ -17,7 +17,7 @@ I run community spaces for my projects, including Fuz,
 on [Discord](https://discord.gg/YU5tyeK72X)
 and [Spiderspace](https://www.spiderspace.org/).
 
-Please [open issues](https://github.com/ryanatkn/fuz/issues) with any bugs
+Please [open issues](https://github.com/ryanatkn/fuz/issues) with any bugs, proposals,
 or other things you would like to discuss.
 Prefer the Discord for most questions and discussions.
 
