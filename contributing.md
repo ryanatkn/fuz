@@ -9,9 +9,7 @@ I'm an independent dev making this library to support [my other projects](http:/
 that focus on end-users. Like every UI library, Fuz can't satisfy everyone's needs,
 and it has opinions and design choices that make it more specialized than most UI libraries.
 
-That said, Fuz does want to be broadly useful,
-and I invite developers who vibe with the design
-to join [the Discord](https://discord.gg/YU5tyeK72X) and help make Fuz the best it can be.
+Fuz does want to be broadly useful, and I always appreciate help making it the best it can be.
 
 ## Community
 

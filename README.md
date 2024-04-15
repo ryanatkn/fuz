@@ -31,7 +31,8 @@ The Svelte components and helpers:
 ## Usage
 
 > ⚠️ Expect a lot of breaking changes. If you want to help stabilize the API,
-> please join [the Discord](https://discord.gg/YU5tyeK72X), your input is appreciated.
+> please join [the Discord](https://discord.gg/YU5tyeK72X)
+> and see [contributing.md](contributing.md), your input is appreciated.
 >
 > If you feel comfortable looking at the source code,
 > Fuz is ready to use in your own projects,
