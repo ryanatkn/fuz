@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.98.1
+
+### Patch Changes
+
+- add `@ryanatkn/moss` to peer deps ([5acbaf2](https://github.com/ryanatkn/fuz/commit/5acbaf2))
+
 ## 0.98.0
 
 ### Minor Changes
