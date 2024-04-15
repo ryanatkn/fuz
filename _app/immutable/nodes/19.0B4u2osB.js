@@ -1,0 +1,1 @@
+import{a as p,t as e}from"../chunks/disclose-version.Ddj0amtR.js";import{p as s,a as t}from"../chunks/runtime.N2A2yyIi.js";import{i}from"../chunks/lifecycle.B02H3xRw.js";var m=e("The <code>Library</code> docs is a work in progress.",1);function d(o,a){t(a,!1),i();var r=m();p(o,r),s()}export{d as component};

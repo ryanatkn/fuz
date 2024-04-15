@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.97.2",
+  "version": "0.98.0",
   "description": "Svelte UI library",
   "motto": "friendly user zystem",
   "icon": "🧶",
@@ -44,6 +44,7 @@
     "@ryanatkn/eslint-config": "^0.1.2",
     "@ryanatkn/fuz_code": "^0.11.0",
     "@ryanatkn/gro": "^0.115.2",
+    "@ryanatkn/moss": "^0.1.0",
     "@sveltejs/adapter-static": "^3.0.1",
     "@sveltejs/kit": "^2.5.6",
     "@sveltejs/package": "^2.3.1",
@@ -304,25 +305,6 @@
       "default": "./dist/Spiderspace_Logo.svelte",
       "types": "./dist/Spiderspace_Logo.svelte.d.ts"
     },
-    "./style_animations.css": {
-      "default": "./dist/style_animations.css"
-    },
-    "./style_components.css": {
-      "default": "./dist/style_components.css"
-    },
-    "./style_reset.css": {
-      "default": "./dist/style_reset.css"
-    },
-    "./style_utilities.css": {
-      "default": "./dist/style_utilities.css"
-    },
-    "./style.css": {
-      "default": "./dist/style.css"
-    },
-    "./style.gen.css.js": {
-      "default": "./dist/style.gen.css.js",
-      "types": "./dist/style.gen.css.d.ts"
-    },
     "./Teleport.svelte": {
       "svelte": "./dist/Teleport.svelte",
       "default": "./dist/Teleport.svelte",
@@ -333,17 +315,6 @@
       "default": "./dist/Theme_Input.svelte",
       "types": "./dist/Theme_Input.svelte.d.ts"
     },
-    "./theme.css": {
-      "default": "./dist/theme.css"
-    },
-    "./theme.gen.css.js": {
-      "default": "./dist/theme.gen.css.js",
-      "types": "./dist/theme.gen.css.d.ts"
-    },
-    "./theme.js": {
-      "default": "./dist/theme.js",
-      "types": "./dist/theme.d.ts"
-    },
     "./Themed_Scope.svelte": {
       "svelte": "./dist/Themed_Scope.svelte",
       "default": "./dist/Themed_Scope.svelte",
@@ -353,10 +324,6 @@
       "svelte": "./dist/Themed.svelte",
       "default": "./dist/Themed.svelte",
       "types": "./dist/Themed.svelte.d.ts"
-    },
-    "./themes.js": {
-      "default": "./dist/themes.js",
-      "types": "./dist/themes.d.ts"
     },
     "./Tome_Detail.svelte": {
       "svelte": "./dist/Tome_Detail.svelte",
@@ -382,21 +349,10 @@
       "default": "./dist/tome.js",
       "types": "./dist/tome.d.ts"
     },
-    "./variable_data.js": {
-      "default": "./dist/variable_data.js",
-      "types": "./dist/variable_data.d.ts"
-    },
-    "./variables.js": {
-      "default": "./dist/variables.js",
-      "types": "./dist/variables.d.ts"
-    },
     "./Zzz_Logo.svelte": {
       "svelte": "./dist/Zzz_Logo.svelte",
       "default": "./dist/Zzz_Logo.svelte",
       "types": "./dist/Zzz_Logo.svelte.d.ts"
     }
-  },
-  "dependencies": {
-    "@ryanatkn/fuz": "^0.97.2"
   }
 }
