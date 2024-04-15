@@ -14,11 +14,11 @@
 		<section class="box">
 			<h1 class="mt_xl4 mb_lg">fuz</h1>
 			<div class="box mb_xl"><Fuz_Logo size="120px" /></div>
-			<blockquote class="shadow_inset_inverse_md">friendly user zystem</blockquote>
-			<div class="width_sm panel p_xs shadow_inset_inverse_md">
-				<div class="panel p_md shadow_md bg">
+			<blockquote class="shadow_inset_inverse_md px_xl">friendly user zystem</blockquote>
+			<div class="width_sm panel p_xs shadow_inset_inverse_md bg">
+				<div class="panel p_lg shadow_inset_inverse_md bg">
 					<p>
-						Fuz is a Svelte UI library. It's in early alpha and there will be many breaking changes.
+						Fuz is a Svelte UI library. It's in early alpha and it'll have many breaking changes.
 					</p>
 					<p>
 						Fuz is being made to support <a href="https://www.ryanatkn.com/table"
