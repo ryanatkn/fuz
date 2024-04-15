@@ -41,6 +41,7 @@
 			<blockquote class="description">
 				{package_json.description}
 				{package_json.icon}
+				{package_json.motto}
 			</blockquote>
 		{/if}
 	{/if}

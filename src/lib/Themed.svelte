@@ -13,14 +13,24 @@
 	export const set_color_scheme = (
 		store: Writable<Color_Scheme | null>,
 	): Writable<Color_Scheme | null> => setContext(COLOR_SCHEME_KEY, store);
+
+	/**
+	 * Creates an HTML style string to be inserted into the `head`
+	 * that overrides the theme for a part of the page.
+	 * @param style same as the result of a call to `render_theme_style`
+	 * @returns HTML string with the style tag and its contents
+	 */
+	export const create_theme_style_html = (
+		style: string,
+	): string => `<style nonce="%sveltekit.nonce%">
+	${style}
+</style>`;
 </script>
 
 <script lang="ts">
 	import {getContext, onDestroy, onMount, setContext, type Snippet} from 'svelte';
 	import {writable, type Writable} from 'svelte/store';
-
 	import {
-		create_theme_style_html,
 		render_theme_style,
 		type Theme,
 		create_theme_setup_script,
@@ -30,8 +40,8 @@
 		sync_color_scheme as default_sync_color_scheme,
 		save_theme as default_save_theme,
 		load_theme as default_load_theme,
-	} from '$lib/theme.js';
-	import {DEFAULT_THEME} from '$lib/themes.js';
+	} from '@ryanatkn/moss/theme.js';
+	import {DEFAULT_THEME} from '@ryanatkn/moss/themes.js';
 
 	interface Props {
 		sync_color_scheme?: typeof default_sync_color_scheme;

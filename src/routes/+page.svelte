@@ -14,37 +14,49 @@
 		<section class="box">
 			<h1 class="mt_xl4 mb_lg">fuz</h1>
 			<div class="box mb_xl"><Fuz_Logo size="120px" /></div>
-			<blockquote>friendly user zystem</blockquote>
-			<div class="width_sm panel p_md">
-				<p>
-					Fuz is a Svelte UI library and CSS design system. It's in early alpha and there will be
-					many breaking changes.
-				</p>
-				<p>
-					Fuz is being made to support <a href="https://www.ryanatkn.com/table">my other projects</a
-					>
-					that focus on end-users. Fuz emphasizes capability and efficiency and tries to be simple for
-					those goals. Compared to most UI libraries, Fuz has fewer features and more opinions.
-				</p>
-				<p>
-					To learn more see <a href="https://www.fuz.dev/library">the docs</a>
-					and <a href="https://github.com/ryanatkn/fuz#readme">readme</a>. Feel free to take the
-					ideas and <a href="https://github.com/ryanatkn/fuz">code</a> for your own purposes.
-				</p>
+			<blockquote class="shadow_inset_inverse_md px_xl">friendly user zystem</blockquote>
+			<div class="width_sm panel p_xs shadow_inset_inverse_md bg">
+				<div class="panel p_lg shadow_inset_inverse_md bg">
+					<p>
+						Fuz is a Svelte UI library. It's in early alpha and it'll have many breaking changes.
+					</p>
+					<p>
+						Fuz is being made to support <a href="https://www.ryanatkn.com/table"
+							>my other projects</a
+						>
+						that focus on end-users. Fuz emphasizes capability and efficiency and tries to be simple
+						for those goals. Compared to most UI libraries, Fuz has fewer features and more opinions.
+					</p>
+					<p>
+						To learn more see <a href="{base}/library">the docs</a>
+						and <a href="https://github.com/ryanatkn/fuz#readme">readme</a>. Feel free to take the
+						ideas and <a href="https://github.com/ryanatkn/fuz">code</a> for your own purposes.
+					</p>
+				</div>
 			</div>
 		</section>
 		<section>
 			<Card href="{base}/library">library{#snippet icon()}🧶{/snippet}</Card>
 		</section>
-		<section class="panel p_lg">
-			<!-- TODO ideally this wouldn't duplicate metadata like descriptions, but adding fuz_gitops to this repo is heavy -->
-			<h2 class="mt_0">other packages</h2>
-			<menu class="unstyled">
-				<a class="chip" href="https://template.fuz.dev/">fuz_template</a>
-				<a class="chip" href="https://gitops.fuz.dev/">fuz_gitops</a>
-				<a class="chip" href="https://code.fuz.dev/">fuz_code</a>
-				<a class="chip" href="https://mastodon.fuz.dev/">fuz_mastodon</a>
-			</menu>
+		<section class="panel p_xs shadow_inset_inverse_md bg">
+			<div class="panel p_lg shadow_inset_inverse_md bg">
+				<!-- TODO ideally this wouldn't duplicate metadata like descriptions, but adding fuz_gitops to this repo is heavy -->
+				<h2 class="mt_0 mb_xl2 px_md">other packages</h2>
+				<menu class="unstyled">
+					<a class="chip bg shadow_inset_md px_md py_xs2 radius_sm" href="https://template.fuz.dev/"
+						>fuz_template</a
+					>
+					<a class="chip bg shadow_inset_md px_md py_xs2 radius_sm" href="https://gitops.fuz.dev/"
+						>fuz_gitops</a
+					>
+					<a class="chip bg shadow_inset_md px_md py_xs2 radius_sm" href="https://code.fuz.dev/"
+						>fuz_code</a
+					>
+					<a class="chip bg shadow_inset_md px_md py_xs2 radius_sm" href="https://mastodon.fuz.dev/"
+						>fuz_mastodon</a
+					>
+				</menu>
+			</div>
 		</section>
 		<section>
 			<Library_Footer {pkg}>
@@ -54,7 +66,12 @@
 				<div hidden>
 					@ryanatkn@hci.social on <a rel="me" href="https://hci.social/@ryanatkn">Mastodon</a>
 				</div>
-			</Library_Footer>
+				<div hidden>
+					@webdevladder@mastodon.social on <a rel="me" href="https://mastodon.social/@webdevladder"
+						>Mastodon</a
+					>
+				</div></Library_Footer
+			>
 		</section>
 	</div>
 </main>
@@ -65,7 +82,10 @@
 		display: flex;
 		gap: var(--space_lg);
 		flex-direction: column;
-		align-items: center;
+		align-items: flex-start;
 		font-size: var(--size_lg);
+	}
+	a.chip:active {
+		box-shadow: var(--shadow_inset_inverse_md);
 	}
 </style>

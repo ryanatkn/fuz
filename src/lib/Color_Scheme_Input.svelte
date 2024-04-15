@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type {Writable} from 'svelte/store';
 	import {swallow} from '@ryanatkn/belt/dom.js';
+	import {color_schemes, type Color_Scheme} from '@ryanatkn/moss/theme.js';
 
-	import {color_schemes, type Color_Scheme} from '$lib/theme.js';
 	import {get_color_scheme} from '$lib/Themed.svelte';
 
 	interface Props {

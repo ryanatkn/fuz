@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
+	import {size_variants} from '@ryanatkn/moss/variable_data.js';
 
-	import {size_variants} from '$lib/variable_data.js';
 	import Style_Variable_Button from '$routes/Style_Variable_Button.svelte';
 
 	interface Props {
