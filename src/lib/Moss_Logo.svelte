@@ -1,23 +1,15 @@
 <script lang="ts">
-	import {base} from '$app/paths';
-	import Spider from '@ryanatkn/fuz/Spider.svelte';
-
-	// Moss doesn't publish any Svelte, so we include this logo here like the GitHub/MDN ones
+	import Spider from '$lib/Spider.svelte';
 
 	// TODO think about this API
 	interface Props {
 		size?: string;
-		image?: boolean;
-		src?: string;
-		alt?: string;
+		label?: string;
 	}
 
-	const {
-		size,
-		image = false,
-		src,
-		alt = 'the Moss logo, a fuzzy tuft of green moss',
-	}: Props = $props();
+	const {size, label = 'the Moss logo, a fuzzy tuft of green moss'}: Props = $props();
+
+	// TODO publish a plain SVG probably
 
 	// color:
 	// #298e29
@@ -25,13 +17,9 @@
 	// rgb(41, 142, 41)
 </script>
 
-{#if image}<img src={src ?? `${base}/favicon.png`} {alt} width={size} height={size} />{:else}<span
-		aria-label={alt}
-		style:--color="var(--color_b_5)"
-		class="inline_block"
-		style:width={size}
-		style:height={size}><Spider /></span
-	>{/if}
+<span style:--color="var(--color_b_5)" class="inline_block" style:width={size} style:height={size}
+	><Spider {label} /></span
+>
 
 <style>
 	span {

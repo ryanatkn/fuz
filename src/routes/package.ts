@@ -5,7 +5,7 @@ import type {Src_Json} from '@ryanatkn/gro/src_json.js';
 
 export const package_json = {
 	name: '@ryanatkn/fuz',
-	version: '0.96.4',
+	version: '0.97.2',
 	description: 'Svelte UI library',
 	motto: 'friendly user zystem',
 	icon: '🧶',
@@ -149,6 +149,11 @@ export const package_json = {
 			svelte: './dist/Fuz_Logo.svelte',
 			default: './dist/Fuz_Logo.svelte',
 			types: './dist/Fuz_Logo.svelte.d.ts',
+		},
+		'./Fuz_Template_Logo.svelte': {
+			svelte: './dist/Fuz_Template_Logo.svelte',
+			default: './dist/Fuz_Template_Logo.svelte',
+			types: './dist/Fuz_Template_Logo.svelte.d.ts',
 		},
 		'./Github_Logo.svelte': {
 			svelte: './dist/Github_Logo.svelte',
@@ -305,12 +310,18 @@ export const package_json = {
 			types: './dist/Tome_Title.svelte.d.ts',
 		},
 		'./tome.js': {default: './dist/tome.js', types: './dist/tome.d.ts'},
+		'./Zzz_Logo.svelte': {
+			svelte: './dist/Zzz_Logo.svelte',
+			default: './dist/Zzz_Logo.svelte',
+			types: './dist/Zzz_Logo.svelte.d.ts',
+		},
 	},
+	dependencies: {'@ryanatkn/fuz': '^0.97.2'},
 } satisfies Package_Json;
 
 export const src_json = {
 	name: '@ryanatkn/fuz',
-	version: '0.96.4',
+	version: '0.97.2',
 	modules: {
 		'./package.json': {path: 'package.json', declarations: []},
 		'./Alert.svelte': {path: 'Alert.svelte', declarations: []},
@@ -377,6 +388,7 @@ export const src_json = {
 			declarations: [{name: 'Dimensions', kind: 'class'}],
 		},
 		'./Fuz_Logo.svelte': {path: 'Fuz_Logo.svelte', declarations: []},
+		'./Fuz_Template_Logo.svelte': {path: 'Fuz_Template_Logo.svelte', declarations: []},
 		'./Github_Logo.svelte': {path: 'Github_Logo.svelte', declarations: []},
 		'./Hashlink.svelte': {path: 'Hashlink.svelte', declarations: []},
 		'./Hue_Input.svelte': {path: 'Hue_Input.svelte', declarations: []},
@@ -428,6 +440,7 @@ export const src_json = {
 				{name: 'get_tome', kind: 'function'},
 			],
 		},
+		'./Zzz_Logo.svelte': {path: 'Zzz_Logo.svelte', declarations: []},
 	},
 } satisfies Src_Json;
 

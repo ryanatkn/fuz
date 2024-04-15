@@ -1,5 +1,49 @@
 # @ryanatkn/fuz
 
+## 0.97.2
+
+### Patch Changes
+
+- improve `Package_Detail` ([b10f1ee](https://github.com/ryanatkn/fuz/commit/b10f1ee))
+- Updated dependencies [b10f1ee]
+  - @ryanatkn/fuz@0.97.2
+
+## 0.97.1
+
+### Patch Changes
+
+- add `Card` link styling ([470608c](https://github.com/ryanatkn/fuz/commit/470608c))
+
+## 0.97.0
+
+### Minor Changes
+
+- rework logo component APIs ([9222875](https://github.com/ryanatkn/fuz/commit/9222875))
+
+## 0.96.8
+
+### Patch Changes
+
+- update `Moss_Logo` ([3e035b1](https://github.com/ryanatkn/fuz/commit/3e035b1))
+
+## 0.96.7
+
+### Patch Changes
+
+- add `Zzz_Logo` ([dcc26b1](https://github.com/ryanatkn/fuz/commit/dcc26b1))
+
+## 0.96.6
+
+### Patch Changes
+
+- add `Moss_Logo` ([00edf68](https://github.com/ryanatkn/fuz/commit/00edf68))
+
+## 0.96.5
+
+### Patch Changes
+
+- add `Fuz_Template_Logo` ([6e6d7a6](https://github.com/ryanatkn/fuz/commit/6e6d7a6))
+
 ## 0.96.4
 
 ### Patch Changes

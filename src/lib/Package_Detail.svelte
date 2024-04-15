@@ -11,12 +11,13 @@
 		pkg: Package_Meta; // TODO normalized version with cached primitives?
 		repo_name?: Snippet<[repo_name: string]>;
 		description?: Snippet<[description: string]>;
+		motto?: Snippet<[description: string]>;
 		npm_url?: Snippet<[npm_url: string]>;
 		homepage_url?: Snippet<[homepage_url: string]>;
 		children?: Snippet<[pkg: Package_Meta]>;
 	}
 
-	const {pkg, repo_name, description, npm_url, homepage_url, children}: Props = $props();
+	const {pkg, repo_name, description, motto, npm_url, homepage_url, children}: Props = $props();
 
 	// TODO show other data (lines of code)
 
@@ -86,6 +87,13 @@
 						<div class="description">{package_json.description}</div>
 					{/if}
 				{/if}
+				{#if package_json.motto}
+					{#if motto}
+						{@render motto(package_json.motto)}
+					{:else}
+						<div class="motto">{package_json.motto}</div>
+					{/if}
+				{/if}
 				{#if pkg.npm_url}
 					{#if npm_url}
 						{@render npm_url(pkg.npm_url)}
@@ -121,7 +129,7 @@
 					{#if pkg.repo_url}
 						<span class="title">repo</span>
 						<div class="content">
-							<a class="chip" title="repo" href={pkg.repo_url}>{pkg.repo_name}</a>
+							<a class="chip" title="repo" href={pkg.repo_url}>{pkg.owner_name}/{pkg.repo_name}</a>
 						</div>
 					{/if}
 					{#if pkg.npm_url}
@@ -245,7 +253,6 @@
 	.repo_name {
 		font-size: var(--size_xl2);
 		font-weight: 400;
-		text-align: center;
 	}
 	.npm_url {
 		font-family: var(--font_mono);
@@ -253,6 +260,9 @@
 		margin-bottom: var(--space_lg);
 	}
 	.description {
+		margin-bottom: var(--space_lg);
+	}
+	.motto {
 		margin-bottom: var(--space_lg);
 	}
 	.properties {

@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.96.4",
+  "version": "0.97.2",
   "description": "Svelte UI library",
   "motto": "friendly user zystem",
   "icon": "🧶",
@@ -185,6 +185,11 @@
       "default": "./dist/Fuz_Logo.svelte",
       "types": "./dist/Fuz_Logo.svelte.d.ts"
     },
+    "./Fuz_Template_Logo.svelte": {
+      "svelte": "./dist/Fuz_Template_Logo.svelte",
+      "default": "./dist/Fuz_Template_Logo.svelte",
+      "types": "./dist/Fuz_Template_Logo.svelte.d.ts"
+    },
     "./Github_Logo.svelte": {
       "svelte": "./dist/Github_Logo.svelte",
       "default": "./dist/Github_Logo.svelte",
@@ -342,6 +347,14 @@
     "./tome.js": {
       "default": "./dist/tome.js",
       "types": "./dist/tome.d.ts"
+    },
+    "./Zzz_Logo.svelte": {
+      "svelte": "./dist/Zzz_Logo.svelte",
+      "default": "./dist/Zzz_Logo.svelte",
+      "types": "./dist/Zzz_Logo.svelte.d.ts"
     }
+  },
+  "dependencies": {
+    "@ryanatkn/fuz": "^0.97.2"
   }
 }
