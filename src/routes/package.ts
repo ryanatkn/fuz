@@ -317,7 +317,6 @@ export const package_json = {
 			types: './dist/Zzz_Logo.svelte.d.ts',
 		},
 	},
-	dependencies: {'@ryanatkn/fuz': '^0.97.2'},
 } satisfies Package_Json;
 
 export const src_json = {
