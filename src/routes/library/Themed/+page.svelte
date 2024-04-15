@@ -16,7 +16,7 @@
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
 	import Themed_Scope from '$lib/Themed_Scope.svelte';
 
-	const LIBRARY_ITEM_NAME = 'themes';
+	const LIBRARY_ITEM_NAME = 'Themed';
 
 	const tome = get_tome(LIBRARY_ITEM_NAME);
 

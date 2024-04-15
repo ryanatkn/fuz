@@ -64,7 +64,7 @@ export const tomes: Tome[] = [
 		pathname: '',
 		category: 'components',
 		component: Details,
-		related: ['elements'],
+		related: [],
 	},
 	{
 		name: 'Dialog',
@@ -80,7 +80,7 @@ export const tomes: Tome[] = [
 		pathname: '',
 		category: 'components',
 		component: Hue_Input,
-		related: ['forms'], // TODO externals?
+		related: [], // TODO externals?
 	},
 	// TODO implement
 	// {
