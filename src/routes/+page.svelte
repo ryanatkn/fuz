@@ -38,20 +38,25 @@
 		<section>
 			<Card href="{base}/library">library{#snippet icon()}🧶{/snippet}</Card>
 		</section>
-		<section class="panel p_lg shadow_inset_inverse_md">
+		<section class="panel p_lg shadow_inset_inverse_md bg">
 			<!-- TODO ideally this wouldn't duplicate metadata like descriptions, but adding fuz_gitops to this repo is heavy -->
 			<h2 class="mt_0 mb_xl2 px_md">other packages</h2>
 			<menu class="unstyled">
-				<a class="chip bg shadow_md px_md py_xs2 radius_sm" href="https://template.fuz.dev/"
-					>fuz_template</a
+				<a
+					class="chip bg shadow_inset_inverse_md px_md py_xs2 radius_sm"
+					href="https://template.fuz.dev/">fuz_template</a
 				>
-				<a class="chip bg shadow_md px_md py_xs2 radius_sm" href="https://gitops.fuz.dev/"
-					>fuz_gitops</a
+				<a
+					class="chip bg shadow_inset_inverse_md px_md py_xs2 radius_sm"
+					href="https://gitops.fuz.dev/">fuz_gitops</a
 				>
-				<a class="chip bg shadow_md px_md py_xs2 radius_sm" href="https://code.fuz.dev/">fuz_code</a
+				<a
+					class="chip bg shadow_inset_inverse_md px_md py_xs2 radius_sm"
+					href="https://code.fuz.dev/">fuz_code</a
 				>
-				<a class="chip bg shadow_md px_md py_xs2 radius_sm" href="https://mastodon.fuz.dev/"
-					>fuz_mastodon</a
+				<a
+					class="chip bg shadow_inset_inverse_md px_md py_xs2 radius_sm"
+					href="https://mastodon.fuz.dev/">fuz_mastodon</a
 				>
 			</menu>
 		</section>
