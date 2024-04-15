@@ -1,5 +1,12 @@
 # @ryanatkn/fuz
 
+## 0.98.0
+
+### Minor Changes
+
+- extract @ryanatkn/moss - ([#20](https://github.com/ryanatkn/fuz/pull/20))
+  [github.com/ryanatkn/moss/pull/1](https://github.com/ryanatkn/moss/pull/1)
+
 ## 0.97.2
 
 ### Patch Changes
