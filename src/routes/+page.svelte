@@ -14,9 +14,11 @@
 		<section class="box">
 			<h1 class="mt_xl4 mb_lg">fuz</h1>
 			<div class="box mb_xl"><Fuz_Logo size="120px" /></div>
-			<blockquote class="shadow_inset_sm px_xl">friendly user zystem</blockquote>
-			<div class="width_sm panel p_xs shadow_inset_sm bg">
-				<div class="panel p_lg shadow_inset_sm bg">
+			<div class="shadow_outset_xs mb_lg panel p_xs2 radius_sm bg_f_1">
+				<blockquote class="shadow_inset_xs px_xl bg">friendly user zystem</blockquote>
+			</div>
+			<div class="width_sm panel pt_xs3 pr_xs2 pb_xs2 pl_xs3 shadow_inset_xs bg_f_1">
+				<div class="panel p_lg shadow_inset_xs bg">
 					<p>
 						Fuz is a Svelte UI library with components and helpers for making excellent websites.
 						It's in early alpha and it will go through many breaking changes.
@@ -37,10 +39,11 @@
 			</div>
 		</section>
 		<section>
+			<!-- TODO add color variants -->
 			<Card href="{base}/library">library{#snippet icon()}🧶{/snippet}</Card>
 		</section>
 		<section class="panel p_xs shadow_inset_xs bg">
-			<div class="panel p_lg shadow_inset_sm bg">
+			<div class="panel p_lg shadow_inset_xs bg">
 				<!-- TODO ideally this wouldn't duplicate metadata like descriptions, but adding fuz_gitops to this repo is heavy -->
 				<h2 class="mt_0 mb_xl2 px_md">other packages</h2>
 				<menu class="unstyled">
@@ -89,6 +92,6 @@
 		font-size: var(--size_lg);
 	}
 	a.chip:active {
-		box-shadow: var(--shadow_inset_sm);
+		box-shadow: var(--shadow_inset_xs);
 	}
 </style>
