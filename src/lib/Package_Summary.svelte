@@ -7,13 +7,14 @@
 	interface Props {
 		pkg: Package_Meta; // TODO normalized version with cached primitives?
 		repo_name?: Snippet<[repo_name: string]>;
+		motto?: Snippet<[motto: string, icon?: string]>;
 		description?: Snippet<[description: string, icon?: string]>;
 		npm_url?: Snippet<[npm_url: string]>;
 		homepage_url?: Snippet<[homepage_url: string]>;
 		children?: Snippet;
 	}
 
-	const {pkg, repo_name, description, npm_url, homepage_url, children}: Props = $props();
+	const {pkg, repo_name, motto, description, npm_url, homepage_url, children}: Props = $props();
 
 	const {package_json} = $derived(pkg);
 </script>
@@ -34,15 +35,26 @@
 			alt="logo for {pkg.repo_name}"
 		/>
 	</header>
+	{#if package_json.motto}
+		{#if motto}
+			{@render motto(package_json.motto, package_json.icon)}
+		{:else}
+			<blockquote>
+				{package_json.motto}
+				{package_json.icon}
+			</blockquote>
+		{/if}
+	{/if}
 	{#if package_json.description}
 		{#if description}
 			{@render description(package_json.description, package_json.icon)}
 		{:else}
-			<blockquote class="description">
+			<p>
 				{package_json.description}
-				{package_json.icon}
-				{package_json.motto}
-			</blockquote>
+				{#if !package_json.motto}
+					{package_json.icon}
+				{/if}
+			</p>
 		{/if}
 	{/if}
 	{#if children}{@render children()}{/if}
@@ -94,10 +106,6 @@
 	.links {
 		display: flex;
 		margin-bottom: var(--space_lg);
-	}
-	.description {
-		margin-bottom: var(--space_lg);
-		text-align: center;
 	}
 	.homepage_url {
 		margin-bottom: var(--space_lg);

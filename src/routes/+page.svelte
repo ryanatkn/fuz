@@ -14,11 +14,12 @@
 		<section class="box">
 			<h1 class="mt_xl4 mb_lg">fuz</h1>
 			<div class="box mb_xl"><Fuz_Logo size="120px" /></div>
-			<blockquote class="shadow_inset_inverse_md px_xl">friendly user zystem</blockquote>
-			<div class="width_sm panel p_xs shadow_inset_inverse_md bg">
-				<div class="panel p_lg shadow_inset_inverse_md bg">
+			<blockquote class="shadow_inset_sm px_xl">friendly user zystem</blockquote>
+			<div class="width_sm panel p_xs shadow_inset_sm bg">
+				<div class="panel p_lg shadow_inset_sm bg">
 					<p>
-						Fuz is a Svelte UI library. It's in early alpha and it'll have many breaking changes.
+						Fuz is a Svelte UI library with components and helpers for making excellent websites.
+						It's in early alpha and it will go through many breaking changes.
 					</p>
 					<p>
 						Fuz is being made to support <a href="https://www.ryanatkn.com/table"
@@ -38,22 +39,24 @@
 		<section>
 			<Card href="{base}/library">library{#snippet icon()}🧶{/snippet}</Card>
 		</section>
-		<section class="panel p_xs shadow_inset_inverse_md bg">
-			<div class="panel p_lg shadow_inset_inverse_md bg">
+		<section class="panel p_xs shadow_inset_xs bg">
+			<div class="panel p_lg shadow_inset_sm bg">
 				<!-- TODO ideally this wouldn't duplicate metadata like descriptions, but adding fuz_gitops to this repo is heavy -->
 				<h2 class="mt_0 mb_xl2 px_md">other packages</h2>
 				<menu class="unstyled">
-					<a class="chip bg shadow_inset_md px_md py_xs2 radius_sm" href="https://template.fuz.dev/"
-						>fuz_template</a
+					<a
+						class="chip bg shadow_outset_xs px_md py_xs2 radius_sm"
+						href="https://template.fuz.dev/">fuz_template</a
 					>
-					<a class="chip bg shadow_inset_md px_md py_xs2 radius_sm" href="https://gitops.fuz.dev/"
+					<a class="chip bg shadow_outset_xs px_md py_xs2 radius_sm" href="https://gitops.fuz.dev/"
 						>fuz_gitops</a
 					>
-					<a class="chip bg shadow_inset_md px_md py_xs2 radius_sm" href="https://code.fuz.dev/"
+					<a class="chip bg shadow_outset_xs px_md py_xs2 radius_sm" href="https://code.fuz.dev/"
 						>fuz_code</a
 					>
-					<a class="chip bg shadow_inset_md px_md py_xs2 radius_sm" href="https://mastodon.fuz.dev/"
-						>fuz_mastodon</a
+					<a
+						class="chip bg shadow_outset_xs px_md py_xs2 radius_sm"
+						href="https://mastodon.fuz.dev/">fuz_mastodon</a
 					>
 				</menu>
 			</div>
@@ -86,6 +89,6 @@
 		font-size: var(--size_lg);
 	}
 	a.chip:active {
-		box-shadow: var(--shadow_inset_inverse_md);
+		box-shadow: var(--shadow_inset_sm);
 	}
 </style>

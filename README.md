@@ -4,8 +4,9 @@
 
 > friendly user zystem 🧶 [fuz.dev](https://www.fuz.dev/)
 
-Fuz is a [Svelte](https://svelte.dev/) UI library.
-It's in early alpha and there will be many breaking changes.
+Fuz is a [Svelte](https://svelte.dev/) UI library
+with components and helpers for making excellent websites.
+It's in early alpha and it will go through many breaking changes.
 
 Fuz is being made to support [my other projects](https://www.ryanatkn.com/)
 that focus on end-users.

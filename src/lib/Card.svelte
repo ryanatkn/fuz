@@ -86,10 +86,10 @@
 		text-align: center;
 	}
 	.link {
-		box-shadow: var(--shadow_inset_md);
+		box-shadow: var(--shadow, var(--shadow_outset_sm));
 	}
 	.link:active {
-		box-shadow: var(--shadow_inset_inverse_md);
+		box-shadow: var(--shadow, var(--shadow_inset_sm));
 	}
 	.link.selected .content,
 	.link:hover .content {

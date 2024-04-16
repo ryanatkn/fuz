@@ -27,7 +27,7 @@
 </script>
 
 {#if enabled}
-	<div class="library_nav shadow_sm">
+	<div class="library_nav shadow_xs">
 		<div class="background" />
 		<div class="content">
 			<nav class:selected_root>
