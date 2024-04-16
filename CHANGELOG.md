@@ -1,5 +1,16 @@
 # @ryanatkn/fuz
 
+## 0.99.0
+
+### Minor Changes
+
+- upgrade: `@ryanatkn/moss@0.2.0` ([72056e3](https://github.com/ryanatkn/fuz/commit/72056e3))
+
+### Patch Changes
+
+- Updated dependencies [72056e3]
+  - @ryanatkn/fuz@0.99.0
+
 ## 0.98.1
 
 ### Patch Changes
