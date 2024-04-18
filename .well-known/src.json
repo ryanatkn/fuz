@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.99.0",
+  "version": "0.99.1",
   "modules": {
     "./package.json": {
       "path": "package.json",
@@ -261,6 +261,10 @@
         {
           "name": "get_library_links",
           "kind": "function"
+        },
+        {
+          "name": "Library_Link_Tag",
+          "kind": "type"
         },
         {
           "name": "Library_Link_Data",
