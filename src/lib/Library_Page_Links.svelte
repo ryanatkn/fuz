@@ -28,13 +28,8 @@
 {#snippet content()}
 	<ul class="unstyled">
 		{#each library_links.library_links as item (item.id)}
-			<li role="none" transition:slide>
-				<a
-					class="menu_item"
-					href="#{item.slug}"
-					class:selected={item.slug === hash}
-					class:ml_xl4={item.tag === 'h4'}>{item.text}</a
-				>
+			<li role="none" transition:slide class:pl_xl4={item.tag === 'h4'}>
+				<a class="menu_item" href="#{item.slug}" class:selected={item.slug === hash}>{item.text}</a>
 			</li>
 		{/each}
 	</ul>
