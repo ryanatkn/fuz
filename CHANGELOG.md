@@ -1,5 +1,13 @@
 # @ryanatkn/fuz
 
+## 0.99.2
+
+### Patch Changes
+
+- fix `Tome_Subheading` indentation ([4c4c111](https://github.com/ryanatkn/fuz/commit/4c4c111))
+- Updated dependencies [4c4c111]
+  - @ryanatkn/fuz@0.99.2
+
 ## 0.99.1
 
 ### Patch Changes
