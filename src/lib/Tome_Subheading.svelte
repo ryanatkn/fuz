@@ -45,11 +45,11 @@
 {/snippet}
 
 <style>
-	h3 {
+	:is(h3, h4) {
 		position: relative;
 	}
 	/* TODO @multiple how can this be done composably? currently using `:global` at usage site - ideally we'd continue to use :hover instead of JS */
-	h3:hover :global(.hashlink) {
+	:is(h3, h4):hover :global(.hashlink) {
 		opacity: 1;
 	}
 </style>
