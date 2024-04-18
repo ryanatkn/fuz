@@ -1,5 +1,13 @@
 # @ryanatkn/fuz
 
+## 0.99.3
+
+### Patch Changes
+
+- fix `Tome_Subheading` h4 links ([60a6ec1](https://github.com/ryanatkn/fuz/commit/60a6ec1))
+- Updated dependencies [60a6ec1]
+  - @ryanatkn/fuz@0.99.3
+
 ## 0.99.2
 
 ### Patch Changes
