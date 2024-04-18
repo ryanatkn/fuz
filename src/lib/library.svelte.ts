@@ -25,24 +25,29 @@ export const get_library_links = (): Library_Links => {
 	return links as Library_Links;
 };
 
-export type Library_Link_Data = {id: string; text: string; slug: string};
+export type Library_Link_Tag = 'h3' | 'h4';
+
+export type Library_Link_Data = {id: string; text: string; slug: string; tag: Library_Link_Tag};
 
 export class Library_Links {
 	library_links: Library_Link_Data[] = $state([]);
 
 	constructor(public readonly root_path = DEFAULT_LIBRARY_PATH) {}
 
-	add(id: string, text: string, slug: string): void {
+	add(id: string, text: string, slug: string, tag: Library_Link_Tag): void {
 		const index = this.library_links.findIndex((t) => t.id === id);
+		const v: Library_Link_Data = {id, text, slug, tag};
 		if (index === -1) {
-			this.library_links.push({id, text, slug});
+			this.library_links.push(v);
 		} else {
-			this.library_links[index] = {id, text, slug};
+			this.library_links[index] = v;
 		}
 	}
 
-	remove(id: string): void {
+	remove(id: string): boolean {
 		const index = this.library_links.findIndex((t) => t.id === id);
-		if (index !== -1) this.library_links.splice(index, 1);
+		if (index === -1) return false;
+		this.library_links.splice(index, 1);
+		return true;
 	}
 }

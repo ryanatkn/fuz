@@ -9,16 +9,17 @@
 	import {base} from '$app/paths';
 
 	import Hashlink from '$lib/Hashlink.svelte';
-	import {get_library_links} from '$lib/library.svelte.js';
+	import {get_library_links, type Library_Link_Tag} from '$lib/library.svelte.js';
 
 	interface Props {
 		text: string;
 		slug: string;
+		tag?: Library_Link_Tag;
 		attrs?: SvelteHTMLElements['h3'];
 		children?: Snippet;
 	}
 
-	const {text, slug, attrs, children}: Props = $props();
+	const {text, slug, tag = 'h3', attrs, children}: Props = $props();
 
 	const id = 'tome_subheading_' + _id++;
 
@@ -27,15 +28,21 @@
 	// Add subheadings only if not on the root page.
 	// TODO make reactive?
 	if ($page.url.pathname !== base + library_links.root_path) {
-		library_links.add(id, text, slug);
+		library_links.add(id, text, slug, tag);
 		onDestroy(() => library_links.remove(id));
 	}
 </script>
 
-<h3 {...attrs}>
+{#if tag === 'h4'}
+	<h4 {...attrs}>{@render content()}</h4>
+{:else}
+	<h3 {...attrs}>{@render content()}</h3>
+{/if}
+
+{#snippet content()}
 	{#if children}{@render children()}{:else}{text}{/if}
 	<Hashlink {slug} />
-</h3>
+{/snippet}
 
 <style>
 	h3 {
