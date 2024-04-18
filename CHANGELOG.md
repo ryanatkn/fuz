@@ -1,10 +1,18 @@
 # @ryanatkn/fuz
 
+## 0.99.1
+
+### Patch Changes
+
+- add support for `tag` prop value `'h4'` to `Tome_Subheading` ([df0bb3c](https://github.com/ryanatkn/fuz/commit/df0bb3c))
+- Updated dependencies [df0bb3c]
+  - @ryanatkn/fuz@0.99.1
+
 ## 0.99.0
 
 ### Minor Changes
 
-- upgrade: `@ryanatkn/moss@0.2.0` ([72056e3](https://github.com/ryanatkn/fuz/commit/72056e3))
+- `@ryanatkn/moss@0.2.0` ([72056e3](https://github.com/ryanatkn/fuz/commit/72056e3)) ([upgrade](https://github.com/ryanatkn/fuz/commit/upgrade))
 
 ### Patch Changes
 
