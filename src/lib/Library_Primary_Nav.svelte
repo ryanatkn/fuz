@@ -21,13 +21,16 @@
 	const iframed = is_iframed();
 	const enabled = !iframed;
 
-	// TODO BLOCK maybe when scrolled to the top, hide shadow, but show otherwise
-
 	// TODO BLOCK make this customizable, using snippet not pkg?
+
+	let scrollY = $state(0);
+	const scrolled = $derived(scrollY > 0);
 </script>
 
+<svelte:window bind:scrollY />
+
 {#if enabled}
-	<div class="library_nav shadow_xs">
+	<div class="library_primary_nav" class:scrolled>
 		<div class="background" />
 		<div class="content">
 			<nav class:selected_root>
@@ -45,12 +48,18 @@
 {/if}
 
 <style>
-	.library_nav {
+	.library_primary_nav {
 		position: sticky;
 		top: 0;
 		z-index: 10;
 		background-color: var(--bg);
 		height: var(--library_primary_nav_height);
+		transition: box-shadow var(--duration_2);
+		box-shadow: none;
+	}
+
+	.scrolled {
+		box-shadow: var(--shadow_xs);
 	}
 
 	.background {
