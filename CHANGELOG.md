@@ -1,5 +1,13 @@
 # @ryanatkn/fuz
 
+## 0.99.4
+
+### Patch Changes
+
+- show shadow on `Library_Primary_Nav` only when scrolled down the page ([98a2798](https://github.com/ryanatkn/fuz/commit/98a2798))
+- Updated dependencies [98a2798]
+  - @ryanatkn/fuz@0.99.4
+
 ## 0.99.3
 
 ### Patch Changes

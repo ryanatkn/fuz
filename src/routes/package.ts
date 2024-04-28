@@ -5,7 +5,7 @@ import type {Src_Json} from '@ryanatkn/gro/src_json.js';
 
 export const package_json = {
 	name: '@ryanatkn/fuz',
-	version: '0.99.3',
+	version: '0.99.4',
 	description: 'Svelte UI library',
 	motto: 'friendly user zystem',
 	icon: '🧶',
@@ -322,12 +322,12 @@ export const package_json = {
 			types: './dist/Zzz_Logo.svelte.d.ts',
 		},
 	},
-	dependencies: {'@ryanatkn/fuz': '^0.99.3'},
+	dependencies: {'@ryanatkn/fuz': '^0.99.4'},
 } satisfies Package_Json;
 
 export const src_json = {
 	name: '@ryanatkn/fuz',
-	version: '0.99.3',
+	version: '0.99.4',
 	modules: {
 		'./package.json': {path: 'package.json', declarations: []},
 		'./Alert.svelte': {path: 'Alert.svelte', declarations: []},
