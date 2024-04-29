@@ -301,7 +301,7 @@
 {/if}
 
 {#if !custom_layout}
-	<div class="contextmenu_layout" bind:clientHeight bind:clientWidth />
+	<div class="contextmenu_layout" bind:clientHeight bind:clientWidth aria-hidden></div>
 {/if}
 <!-- TODO Maybe animate a subtle highlight around the contextmenu as it appears? -->
 {#if contextmenu.opened}

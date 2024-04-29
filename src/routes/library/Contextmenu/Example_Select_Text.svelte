@@ -62,16 +62,16 @@ Try selecting text and then opening the contextmenu on it.`;
 				default contextmenu.
 			</p>
 			<label>
-				<textarea placeholder="paste text here?" bind:value />
+				<textarea placeholder="paste text here?" bind:value></textarea>
 			</label>
 			<p>
 				<Mdn_Link href="Web/HTML/Global_attributes/contenteditable" /> likewise has your browser's default
 				contextmenu behavior.
 			</p>
 			<p><code>contenteditable</code></p>
-			<blockquote contenteditable bind:innerText={value} />
+			<blockquote contenteditable bind:innerText={value}></blockquote>
 			<p><code>contenteditable="plaintext-only"</code></p>
-			<blockquote contenteditable="plaintext-only" bind:innerText={value} />
+			<blockquote contenteditable="plaintext-only" bind:innerText={value}></blockquote>
 		</div>
 	</Contextmenu>
 </Contextmenu_Root>

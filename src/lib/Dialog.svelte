@@ -128,7 +128,7 @@
 	>
 		<div class="dialog_layout">
 			<div class="dialog_wrapper">
-				<div class="dialog_bg" role="none" onmousedown={close} />
+				<div class="dialog_bg" onmousedown={close} aria-hidden></div>
 				<div
 					class="dialog_content"
 					bind:this={content_el}

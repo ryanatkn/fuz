@@ -47,8 +47,8 @@
 		<!-- TODO how to do this with the `state` API? the `bind` in particular -- maybe make them stores? -->
 		<Teleport to={swap ? teleport_1 : teleport_2}>🐰</Teleport>
 		<div class="teleports">
-			<div class="panel" bind:this={teleport_1} />
-			<div class="panel" bind:this={teleport_2} />
+			<div class="panel" bind:this={teleport_1}></div>
+			<div class="panel" bind:this={teleport_2}></div>
 		</div>
 		<button onclick={() => (swap = !swap)}> teleport the bunny </button>
 	</section>
