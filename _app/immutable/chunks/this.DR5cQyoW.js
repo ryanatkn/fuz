@@ -1,1 +1,0 @@
-import{h as a,r as T,u as b,S as c}from"./runtime.N2A2yyIi.js";function x(f,r){var s;var h=f&&((s=f[c])==null?void 0:s.t);return f===r||h===r}function u(f,r,h,s){a(()=>{var S,i;return T(()=>{S=i,i=(s==null?void 0:s())||[],b(()=>{f!==h(...i)&&(r(f,...i),S&&x(h(...S),f)&&r(null,...S))})}),()=>{a(()=>{i&&x(h(...i),f)&&r(null,...i)})}})}export{u as b};
