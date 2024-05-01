@@ -5,7 +5,7 @@ import type {Src_Json} from '@ryanatkn/gro/src_json.js';
 
 export const package_json = {
 	name: '@ryanatkn/fuz',
-	version: '0.100.0',
+	version: '0.100.1',
 	description: 'Svelte UI library',
 	motto: 'friendly user zystem',
 	icon: '🧶',
@@ -36,6 +36,7 @@ export const package_json = {
 		'@changesets/changelog-git': '^0.2.0',
 		'@ryanatkn/belt': '^0.20.10',
 		'@ryanatkn/eslint-config': '^0.1.2',
+		'@ryanatkn/fuz_code': '^0.12.0',
 		'@ryanatkn/gro': '^0.115.3',
 		'@ryanatkn/moss': '^0.3.0',
 		'@sveltejs/adapter-static': '^3.0.1',
@@ -326,7 +327,7 @@ export const package_json = {
 
 export const src_json = {
 	name: '@ryanatkn/fuz',
-	version: '0.100.0',
+	version: '0.100.1',
 	modules: {
 		'./package.json': {path: 'package.json', declarations: []},
 		'./Alert.svelte': {path: 'Alert.svelte', declarations: []},
