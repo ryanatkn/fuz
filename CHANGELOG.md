@@ -1,5 +1,14 @@
 # @ryanatkn/fuz
 
+## 0.101.0
+
+### Minor Changes
+
+- rename ts modules that differ only in case from components ([#24](https://github.com/ryanatkn/fuz/pull/24))
+
+  - `$lib/contextmenu_helpers.svelte.ts` from `$lib/contextmenu.svelte.ts`
+  - `$lib/library_helpers.svelte.ts` from `$lib/library.svelte.ts`
+
 ## 0.100.2
 
 ### Patch Changes
