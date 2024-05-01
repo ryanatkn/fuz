@@ -30,18 +30,17 @@
 <script lang="ts">
 	import {getContext, onDestroy, onMount, setContext, type Snippet} from 'svelte';
 	import {writable, type Writable} from 'svelte/store';
+	import {render_theme_style, type Theme, type Color_Scheme} from '@ryanatkn/moss/theme.js';
+	import {DEFAULT_THEME} from '@ryanatkn/moss/themes.js';
+
 	import {
-		render_theme_style,
-		type Theme,
 		create_theme_setup_script,
-		type Color_Scheme,
 		load_color_scheme as default_load_color_scheme,
 		save_color_scheme as default_save_color_scheme,
 		sync_color_scheme as default_sync_color_scheme,
 		save_theme as default_save_theme,
 		load_theme as default_load_theme,
-	} from '@ryanatkn/moss/theme.js';
-	import {DEFAULT_THEME} from '@ryanatkn/moss/themes.js';
+	} from '$lib/theme.js';
 
 	interface Props {
 		sync_color_scheme?: typeof default_sync_color_scheme;
