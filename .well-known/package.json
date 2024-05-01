@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.100.1",
+  "version": "0.100.2",
   "description": "Svelte UI library",
   "motto": "friendly user zystem",
   "icon": "🧶",
@@ -37,7 +37,7 @@
     "@ryanatkn/belt": "*",
     "@ryanatkn/moss": "*",
     "@sveltejs/kit": "^2",
-    "svelte": "^5"
+    "svelte": "^5.0.0-next.0"
   },
   "devDependencies": {
     "@changesets/changelog-git": "^0.2.0",

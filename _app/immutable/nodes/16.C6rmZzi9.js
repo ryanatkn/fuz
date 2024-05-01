@@ -1,0 +1,13 @@
+import{b as R,a as r,t as n,f as l,s as e,c as i}from"../chunks/disclose-version.5tIm47j5.js";import{p as k,a as C}from"../chunks/runtime.BhNP7HCo.js";import{i as H}from"../chunks/lifecycle.BtGfaPtt.js";import{C as m}from"../chunks/Code.DoKnE_1e.js";import{T as N}from"../chunks/Tome_Detail.BFttKidM.js";import{D}from"../chunks/Details.BQhqIyiK.js";import{g as O}from"../chunks/tome.DYc5lYMi.js";import{M as T}from"../chunks/Mdn_Link.Bv_GM05g.js";import{T as d}from"../chunks/Tome_Subheading.MBqdM13a.js";var S=n("summary content",1),Y=n("lazy children content",1),U=n("summary content",1),X=n("eager children content",1),j=n("With the base <!> element",1),q=n(`<section><p>The <code>Details</code> component is an alternative to the <!> element. By default it's lazy, and you can pass <code>eager</code> to render the children immediately
+			like the base element.</p> <p>Benefits of lazy children:</p> <ul><li>children are transitioned in/out with an animation (TODO this may be doable with eager
+				children, if so it would probably be the better default, and then the prop should be swapped
+				to <code>lazy</code>)</li> <li>improved performance, can significantly improve UX in some cases</li></ul> <p>Tradeoffs:</p> <ul><li><code>ctrl+f</code> does not work to find text and auto-open the details</li> <li>you may desire some behavior caused by mounting the children</li></ul></section> <section><!> <!> <!></section> <section><!> <!> <!></section> <section><!> <!> <details><summary>a summary element instead of a snippet</summary> the plain details</details></section>`,1);function ne(M,$){k($,!1);const z=O("Details");H();var c=R(),E=l(c);N(E,{tome:z,children:(W,G)=>{var p=q(),u=l(p),w=i(u),x=e(i(w)),L=e(e(x,!0));T(L,{href:"Web/HTML/Element/details"});var h=e(e(u,!0)),f=i(h);d(f,{text:"With lazy rendering by default",slug:"lazy-rendering-by-default"});var _=e(e(f,!0));m(_,{content:`<Details>
+  {#snippet summary()}summary content{/snippet}
+  lazy children content
+</Details>`});var A=e(e(_,!0));D(A,{summary:t=>{var a=S();r(t,a)},children:(t,a)=>{var o=Y();r(t,o)}});var v=e(e(h,!0)),y=i(v);d(y,{text:"With eager rendering",slug:"eager-rendering"});var g=e(e(y,!0));m(g,{content:`<Details eager>
+  {#snippet summary()}summary content{/snippet}
+  eager children content
+</Details>`});var B=e(e(g,!0));D(B,{eager:!0,summary:t=>{var a=U();r(t,a)},children:(t,a)=>{var o=X();r(t,o)}});var I=e(e(v,!0)),b=i(I);d(b,{text:"With the base details element",slug:"base-details-element",children:(s,t)=>{var a=j(),o=e(l(a,!0));T(o,{href:"Web/HTML/Element/details"}),r(s,a)}});var P=e(e(b,!0));m(P,{content:`<details>
+  <summary>a summary element instead of a snippet</summary>
+  the plain details
+</details>`}),r(W,p)}}),r(M,c),C()}export{ne as component};
