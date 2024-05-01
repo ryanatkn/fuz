@@ -285,6 +285,7 @@ export const package_json = {
 			default: './dist/Theme_Input.svelte',
 			types: './dist/Theme_Input.svelte.d.ts',
 		},
+		'./theme.js': {default: './dist/theme.js', types: './dist/theme.d.ts'},
 		'./Themed_Scope.svelte': {
 			svelte: './dist/Themed_Scope.svelte',
 			default: './dist/Themed_Scope.svelte',
@@ -431,6 +432,19 @@ export const src_json = {
 		'./Spiderspace_Logo.svelte': {path: 'Spiderspace_Logo.svelte', declarations: []},
 		'./Teleport.svelte': {path: 'Teleport.svelte', declarations: []},
 		'./Theme_Input.svelte': {path: 'Theme_Input.svelte', declarations: []},
+		'./theme.js': {
+			path: 'theme.ts',
+			declarations: [
+				{name: 'sync_color_scheme', kind: 'function'},
+				{name: 'COLOR_SCHEME_STORAGE_KEY', kind: 'variable'},
+				{name: 'save_color_scheme', kind: 'function'},
+				{name: 'load_color_scheme', kind: 'function'},
+				{name: 'THEME_STORAGE_KEY', kind: 'variable'},
+				{name: 'save_theme', kind: 'function'},
+				{name: 'load_theme', kind: 'function'},
+				{name: 'create_theme_setup_script', kind: 'function'},
+			],
+		},
 		'./Themed_Scope.svelte': {path: 'Themed_Scope.svelte', declarations: []},
 		'./Themed.svelte': {path: 'Themed.svelte', declarations: []},
 		'./Tome_Detail.svelte': {path: 'Tome_Detail.svelte', declarations: []},

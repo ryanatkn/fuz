@@ -316,6 +316,10 @@
       "default": "./dist/Theme_Input.svelte",
       "types": "./dist/Theme_Input.svelte.d.ts"
     },
+    "./theme.js": {
+      "default": "./dist/theme.js",
+      "types": "./dist/theme.d.ts"
+    },
     "./Themed_Scope.svelte": {
       "svelte": "./dist/Themed_Scope.svelte",
       "default": "./dist/Themed_Scope.svelte",
