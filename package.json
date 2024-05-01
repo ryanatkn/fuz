@@ -359,8 +359,5 @@
       "default": "./dist/Zzz_Logo.svelte",
       "types": "./dist/Zzz_Logo.svelte.d.ts"
     }
-  },
-  "dependencies": {
-    "@ryanatkn/fuz": "^0.100.0"
   }
 }
