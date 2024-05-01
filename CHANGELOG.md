@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.100.2
+
+### Patch Changes
+
+- fix: change `svelte` peer dep to `^5.0.0-next.0` from `^5` ([9e40ee2](https://github.com/ryanatkn/fuz/commit/9e40ee2))
+
 ## 0.100.1
 
 ### Patch Changes
