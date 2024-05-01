@@ -30,7 +30,7 @@ export const package_json = {
 		'@ryanatkn/belt': '*',
 		'@ryanatkn/moss': '*',
 		'@sveltejs/kit': '^2',
-		svelte: '^5',
+		svelte: '^5.0.0-next.0',
 	},
 	devDependencies: {
 		'@changesets/changelog-git': '^0.2.0',
