@@ -1,0 +1,3 @@
+import{b as i,a as o,t as c,f as p}from"../chunks/disclose-version.P6j1kb0M.js";import{p as f,a as d}from"../chunks/runtime.BNZvPhR8.js";import{i as l}from"../chunks/lifecycle.8yebCWgY.js";import{T as h}from"../chunks/Tome_Detail.Du0bsHiA.js";import{g as _}from"../chunks/tome.C2gfJtcL.js";var u=c(`<section><blockquote>⚠️ Docs are a work in progress. <a href="https://moss.ryanatkn.com/">Moss</a> was recently
+			extracted from Fuz, and these docs are incomplete and misleading in some cases. For an
+			overview see <a href="https://github.com/ryanatkn/fuz#readme">the readme</a>.</blockquote></section>`);function E(a,t){f(t,!1);const s=_("introduction");l();var e=i(),r=p(e);h(r,{tome:s,children:(n,v)=>{var m=u();o(n,m)}}),o(a,e),d()}export{E as component};

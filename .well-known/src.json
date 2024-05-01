@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.99.4",
+  "version": "0.100.0",
   "modules": {
     "./package.json": {
       "path": "package.json",
@@ -327,6 +327,43 @@
     "./Theme_Input.svelte": {
       "path": "Theme_Input.svelte",
       "declarations": []
+    },
+    "./theme.js": {
+      "path": "theme.ts",
+      "declarations": [
+        {
+          "name": "sync_color_scheme",
+          "kind": "function"
+        },
+        {
+          "name": "COLOR_SCHEME_STORAGE_KEY",
+          "kind": "variable"
+        },
+        {
+          "name": "save_color_scheme",
+          "kind": "function"
+        },
+        {
+          "name": "load_color_scheme",
+          "kind": "function"
+        },
+        {
+          "name": "THEME_STORAGE_KEY",
+          "kind": "variable"
+        },
+        {
+          "name": "save_theme",
+          "kind": "function"
+        },
+        {
+          "name": "load_theme",
+          "kind": "function"
+        },
+        {
+          "name": "create_theme_setup_script",
+          "kind": "function"
+        }
+      ]
     },
     "./Themed_Scope.svelte": {
       "path": "Themed_Scope.svelte",
