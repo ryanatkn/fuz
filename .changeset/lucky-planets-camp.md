@@ -2,4 +2,4 @@
 '@ryanatkn/fuz': minor
 ---
 
-fix peer deps for `svelte` and `@sveltejs/kit`
+fix: pin peer deps for `svelte` and `@sveltejs/kit`
