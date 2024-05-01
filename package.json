@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.99.4",
+  "version": "0.100.0",
   "description": "Svelte UI library",
   "motto": "friendly user zystem",
   "icon": "🧶",
@@ -361,6 +361,6 @@
     }
   },
   "dependencies": {
-    "@ryanatkn/fuz": "^0.99.4"
+    "@ryanatkn/fuz": "^0.100.0"
   }
 }

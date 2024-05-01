@@ -1,5 +1,18 @@
 # @ryanatkn/fuz
 
+## 0.100.0
+
+### Minor Changes
+
+- fix: pin peer deps for `svelte` and `@sveltejs/kit` ([#22](https://github.com/ryanatkn/fuz/pull/22))
+
+### Patch Changes
+
+- feat: add theme helpers from `@ryanatkn/moss` ([#22](https://github.com/ryanatkn/fuz/pull/22))
+- Updated dependencies [401496e]
+- Updated dependencies [401496e]
+  - @ryanatkn/fuz@0.100.0
+
 ## 0.99.4
 
 ### Patch Changes
