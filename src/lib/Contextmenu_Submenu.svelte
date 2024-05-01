@@ -6,7 +6,7 @@
 		get_contextmenu,
 		get_contextmenu_dimensions,
 		set_contextmenu_dimensions,
-	} from '$lib/contextmenu.svelte.js';
+	} from '$lib/contextmenu_helpers.svelte.js';
 	import type {Dimensions} from '$lib/dimensions.svelte.js';
 
 	interface Props {

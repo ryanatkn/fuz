@@ -7,7 +7,7 @@
 		set_contextmenu_dimensions,
 		Contextmenu_Store,
 		open_contextmenu,
-	} from '$lib/contextmenu.svelte.js';
+	} from '$lib/contextmenu_helpers.svelte.js';
 	import Contextmenu_Link_Entry from '$lib/Contextmenu_Link_Entry.svelte';
 	import Contextmenu_Text_Entry from '$lib/Contextmenu_Text_Entry.svelte';
 
