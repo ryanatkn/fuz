@@ -51,7 +51,7 @@
 		</div>
 	</label>
 	<div class="minimap_wrapper">
-		<div class="minimap" onclick={set_hue_from_minimap} aria-hidden></div>
+		<div class="minimap" onclick={set_hue_from_minimap} aria-hidden="true"></div>
 	</div>
 	<input
 		bind:this={el}

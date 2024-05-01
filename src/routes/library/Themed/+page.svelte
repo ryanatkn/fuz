@@ -1,7 +1,7 @@
 <script lang="ts">
 	import {writable} from 'svelte/store';
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
-	import {type Theme, save_theme} from '@ryanatkn/moss/theme.js';
+	import type {Theme} from '@ryanatkn/moss/theme.js';
 	import {default_themes} from '@ryanatkn/moss/themes.js';
 
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
@@ -15,6 +15,7 @@
 	import Theme_Form from '$routes/Theme_Form.svelte';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
 	import Themed_Scope from '$lib/Themed_Scope.svelte';
+	import {save_theme} from '$lib/theme.js';
 
 	const LIBRARY_ITEM_NAME = 'Themed';
 

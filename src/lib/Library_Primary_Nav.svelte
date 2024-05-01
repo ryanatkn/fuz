@@ -31,7 +31,7 @@
 
 {#if enabled}
 	<div class="library_primary_nav" class:scrolled>
-		<div class="background" aria-hidden></div>
+		<div class="background" aria-hidden="true"></div>
 		<div class="content">
 			<nav class:selected_root>
 				<Breadcrumb>
