@@ -82,7 +82,7 @@
 			</div>
 			<div class="title">{@render children()}</div>
 		</div>
-		<div class="chevron" aria-hidden></div>
+		<div class="chevron" aria-hidden="true"></div>
 	</div>
 	{#if selected}
 		<menu

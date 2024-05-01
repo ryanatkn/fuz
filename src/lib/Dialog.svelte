@@ -121,14 +121,14 @@
 		class:ready
 		class:layout_page={layout === 'page'}
 		role="dialog"
-		aria-modal
+		aria-modal="true"
 		bind:this={dialog_el}
 		tabindex="-1"
 		style:z-index={100 + index}
 	>
 		<div class="dialog_layout">
 			<div class="dialog_wrapper">
-				<div class="dialog_bg" onmousedown={close} aria-hidden></div>
+				<div class="dialog_bg" onmousedown={close} aria-hidden="true"></div>
 				<div
 					class="dialog_content"
 					bind:this={content_el}

@@ -12,7 +12,7 @@
 <a class="hashlink" href="#{slug}" aria-label="hashlink"
 	>{#if children}{@render children()}{:else}🔗{/if}</a
 >
-<span class="hashlink_scroll_target" id={slug} aria-hidden></span>
+<span class="hashlink_scroll_target" id={slug} aria-hidden="true"></span>
 
 <style>
 	/* TODO @multiple how can this be done generically so it's composable? currently using `:global` at usage site - ideally we'd continue to use :hover instead of JS */
