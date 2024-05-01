@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.100.0",
+  "version": "0.100.1",
   "description": "Svelte UI library",
   "motto": "friendly user zystem",
   "icon": "🧶",
@@ -43,8 +43,8 @@
     "@changesets/changelog-git": "^0.2.0",
     "@ryanatkn/belt": "^0.20.10",
     "@ryanatkn/eslint-config": "^0.1.2",
-    "@ryanatkn/fuz_code": "^0.11.0",
-    "@ryanatkn/gro": "^0.115.2",
+    "@ryanatkn/fuz_code": "^0.12.0",
+    "@ryanatkn/gro": "^0.115.3",
     "@ryanatkn/moss": "^0.3.0",
     "@sveltejs/adapter-static": "^3.0.1",
     "@sveltejs/kit": "^2.5.7",
@@ -359,8 +359,5 @@
       "default": "./dist/Zzz_Logo.svelte",
       "types": "./dist/Zzz_Logo.svelte.d.ts"
     }
-  },
-  "dependencies": {
-    "@ryanatkn/fuz": "^0.100.0"
   }
 }
