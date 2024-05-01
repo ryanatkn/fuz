@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.100.1
+
+### Patch Changes
+
+- fix: remove accidental self-dependency ([#23](https://github.com/ryanatkn/fuz/pull/23))
+
 ## 0.100.0
 
 ### Minor Changes
