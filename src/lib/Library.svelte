@@ -10,7 +10,7 @@
 	import Library_Tertiary_Nav from '$lib/Library_Tertiary_Nav.svelte';
 	import Dialog from '$lib/Dialog.svelte';
 	import Library_Footer from '$lib/Library_Footer.svelte';
-	import {set_library_links} from '$lib/library.svelte.js';
+	import {set_library_links} from '$lib/library_helpers.svelte.js';
 
 	interface Props {
 		tomes: Tome[];

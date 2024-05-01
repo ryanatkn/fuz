@@ -2,7 +2,7 @@
 	import {page} from '$app/stores';
 	import {slide} from 'svelte/transition';
 
-	import type {Library_Links} from '$lib/library.svelte.js';
+	import type {Library_Links} from '$lib/library_helpers.svelte.js';
 
 	interface Props {
 		library_links: Library_Links;

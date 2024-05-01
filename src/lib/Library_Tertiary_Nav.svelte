@@ -4,7 +4,7 @@
 	import Library_Menu from '$lib/Library_Menu.svelte';
 	import Library_Page_Links from '$lib/Library_Page_Links.svelte';
 	import {Tome} from '$lib/tome.js';
-	import {get_library_links} from '$lib/library.svelte.js';
+	import {get_library_links} from '$lib/library_helpers.svelte.js';
 
 	interface Props {
 		tomes: Tome[];

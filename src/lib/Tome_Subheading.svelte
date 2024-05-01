@@ -9,7 +9,7 @@
 	import {base} from '$app/paths';
 
 	import Hashlink from '$lib/Hashlink.svelte';
-	import {get_library_links, type Library_Link_Tag} from '$lib/library.svelte.js';
+	import {get_library_links, type Library_Link_Tag} from '$lib/library_helpers.svelte.js';
 
 	interface Props {
 		text: string;
