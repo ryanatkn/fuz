@@ -97,6 +97,10 @@ export const package_json = {
 			default: './dist/Contextmenu_Entry.svelte',
 			types: './dist/Contextmenu_Entry.svelte.d.ts',
 		},
+		'./contextmenu_helpers.svelte.js': {
+			default: './dist/contextmenu_helpers.svelte.js',
+			types: './dist/contextmenu_helpers.svelte.d.ts',
+		},
 		'./Contextmenu_Link_Entry.svelte': {
 			svelte: './dist/Contextmenu_Link_Entry.svelte',
 			default: './dist/Contextmenu_Link_Entry.svelte',
@@ -121,10 +125,6 @@ export const package_json = {
 			svelte: './dist/Contextmenu.svelte',
 			default: './dist/Contextmenu.svelte',
 			types: './dist/Contextmenu.svelte.d.ts',
-		},
-		'./contextmenu.svelte.js': {
-			default: './dist/contextmenu.svelte.js',
-			types: './dist/contextmenu.svelte.d.ts',
 		},
 		'./Copy_To_Clipboard.svelte': {
 			svelte: './dist/Copy_To_Clipboard.svelte',
@@ -186,6 +186,10 @@ export const package_json = {
 			default: './dist/Library_Footer.svelte',
 			types: './dist/Library_Footer.svelte.d.ts',
 		},
+		'./library_helpers.svelte.js': {
+			default: './dist/library_helpers.svelte.js',
+			types: './dist/library_helpers.svelte.d.ts',
+		},
 		'./Library_Menu.svelte': {
 			svelte: './dist/Library_Menu.svelte',
 			default: './dist/Library_Menu.svelte',
@@ -215,10 +219,6 @@ export const package_json = {
 			svelte: './dist/Library.svelte',
 			default: './dist/Library.svelte',
 			types: './dist/Library.svelte.d.ts',
-		},
-		'./library.svelte.js': {
-			default: './dist/library.svelte.js',
-			types: './dist/library.svelte.d.ts',
 		},
 		'./Mdn_Link.svelte': {
 			svelte: './dist/Mdn_Link.svelte',
@@ -350,13 +350,8 @@ export const src_json = {
 			],
 		},
 		'./Contextmenu_Entry.svelte': {path: 'Contextmenu_Entry.svelte', declarations: []},
-		'./Contextmenu_Link_Entry.svelte': {path: 'Contextmenu_Link_Entry.svelte', declarations: []},
-		'./Contextmenu_Root.svelte': {path: 'Contextmenu_Root.svelte', declarations: []},
-		'./Contextmenu_Submenu.svelte': {path: 'Contextmenu_Submenu.svelte', declarations: []},
-		'./Contextmenu_Text_Entry.svelte': {path: 'Contextmenu_Text_Entry.svelte', declarations: []},
-		'./Contextmenu.svelte': {path: 'Contextmenu.svelte', declarations: []},
-		'./contextmenu.svelte.js': {
-			path: 'contextmenu.svelte.ts',
+		'./contextmenu_helpers.svelte.js': {
+			path: 'contextmenu_helpers.svelte.ts',
 			declarations: [
 				{name: 'Contextmenu_Params', kind: 'type'},
 				{name: 'Item_State', kind: 'type'},
@@ -376,6 +371,11 @@ export const src_json = {
 				{name: 'get_contextmenu_dimensions', kind: 'function'},
 			],
 		},
+		'./Contextmenu_Link_Entry.svelte': {path: 'Contextmenu_Link_Entry.svelte', declarations: []},
+		'./Contextmenu_Root.svelte': {path: 'Contextmenu_Root.svelte', declarations: []},
+		'./Contextmenu_Submenu.svelte': {path: 'Contextmenu_Submenu.svelte', declarations: []},
+		'./Contextmenu_Text_Entry.svelte': {path: 'Contextmenu_Text_Entry.svelte', declarations: []},
+		'./Contextmenu.svelte': {path: 'Contextmenu.svelte', declarations: []},
 		'./Copy_To_Clipboard.svelte': {path: 'Copy_To_Clipboard.svelte', declarations: []},
 		'./Details.svelte': {path: 'Details.svelte', declarations: []},
 		'./Dialog.svelte': {path: 'Dialog.svelte', declarations: []},
@@ -400,14 +400,8 @@ export const src_json = {
 		'./Hue_Input.svelte': {path: 'Hue_Input.svelte', declarations: []},
 		'./Library_Content.svelte': {path: 'Library_Content.svelte', declarations: []},
 		'./Library_Footer.svelte': {path: 'Library_Footer.svelte', declarations: []},
-		'./Library_Menu.svelte': {path: 'Library_Menu.svelte', declarations: []},
-		'./Library_Page_Links.svelte': {path: 'Library_Page_Links.svelte', declarations: []},
-		'./Library_Primary_Nav.svelte': {path: 'Library_Primary_Nav.svelte', declarations: []},
-		'./Library_Secondary_Nav.svelte': {path: 'Library_Secondary_Nav.svelte', declarations: []},
-		'./Library_Tertiary_Nav.svelte': {path: 'Library_Tertiary_Nav.svelte', declarations: []},
-		'./Library.svelte': {path: 'Library.svelte', declarations: []},
-		'./library.svelte.js': {
-			path: 'library.svelte.ts',
+		'./library_helpers.svelte.js': {
+			path: 'library_helpers.svelte.ts',
 			declarations: [
 				{name: 'DEFAULT_LIBRARY_PATH', kind: 'variable'},
 				{name: 'to_library_path_info', kind: 'function'},
@@ -418,6 +412,12 @@ export const src_json = {
 				{name: 'Library_Links', kind: 'class'},
 			],
 		},
+		'./Library_Menu.svelte': {path: 'Library_Menu.svelte', declarations: []},
+		'./Library_Page_Links.svelte': {path: 'Library_Page_Links.svelte', declarations: []},
+		'./Library_Primary_Nav.svelte': {path: 'Library_Primary_Nav.svelte', declarations: []},
+		'./Library_Secondary_Nav.svelte': {path: 'Library_Secondary_Nav.svelte', declarations: []},
+		'./Library_Tertiary_Nav.svelte': {path: 'Library_Tertiary_Nav.svelte', declarations: []},
+		'./Library.svelte': {path: 'Library.svelte', declarations: []},
 		'./Mdn_Link.svelte': {path: 'Mdn_Link.svelte', declarations: []},
 		'./Mdn_Logo.svelte': {path: 'Mdn_Logo.svelte', declarations: []},
 		'./Moss_Logo.svelte': {path: 'Moss_Logo.svelte', declarations: []},

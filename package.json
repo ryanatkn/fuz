@@ -125,6 +125,10 @@
       "default": "./dist/Contextmenu_Entry.svelte",
       "types": "./dist/Contextmenu_Entry.svelte.d.ts"
     },
+    "./contextmenu_helpers.svelte.js": {
+      "default": "./dist/contextmenu_helpers.svelte.js",
+      "types": "./dist/contextmenu_helpers.svelte.d.ts"
+    },
     "./Contextmenu_Link_Entry.svelte": {
       "svelte": "./dist/Contextmenu_Link_Entry.svelte",
       "default": "./dist/Contextmenu_Link_Entry.svelte",
@@ -149,10 +153,6 @@
       "svelte": "./dist/Contextmenu.svelte",
       "default": "./dist/Contextmenu.svelte",
       "types": "./dist/Contextmenu.svelte.d.ts"
-    },
-    "./contextmenu.svelte.js": {
-      "default": "./dist/contextmenu.svelte.js",
-      "types": "./dist/contextmenu.svelte.d.ts"
     },
     "./Copy_To_Clipboard.svelte": {
       "svelte": "./dist/Copy_To_Clipboard.svelte",
@@ -217,6 +217,10 @@
       "default": "./dist/Library_Footer.svelte",
       "types": "./dist/Library_Footer.svelte.d.ts"
     },
+    "./library_helpers.svelte.js": {
+      "default": "./dist/library_helpers.svelte.js",
+      "types": "./dist/library_helpers.svelte.d.ts"
+    },
     "./Library_Menu.svelte": {
       "svelte": "./dist/Library_Menu.svelte",
       "default": "./dist/Library_Menu.svelte",
@@ -246,10 +250,6 @@
       "svelte": "./dist/Library.svelte",
       "default": "./dist/Library.svelte",
       "types": "./dist/Library.svelte.d.ts"
-    },
-    "./library.svelte.js": {
-      "default": "./dist/library.svelte.js",
-      "types": "./dist/library.svelte.d.ts"
     },
     "./Mdn_Link.svelte": {
       "svelte": "./dist/Mdn_Link.svelte",
