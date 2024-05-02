@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.101.2
+
+### Patch Changes
+
+- fix: update `text_color` from `color` ([e10330a](https://github.com/ryanatkn/fuz/commit/e10330a))
+
 ## 0.101.1
 
 ### Patch Changes
