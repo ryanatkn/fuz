@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.101.1
+
+### Patch Changes
+
+- fix: update moss color variable usage ([f8792fa](https://github.com/ryanatkn/fuz/commit/f8792fa))
+
 ## 0.101.0
 
 ### Minor Changes
