@@ -23,7 +23,7 @@
 		>
 		<Code content={`<Hue_Input bind:value />`} />
 		<Hue_Input bind:value />
-		<div class="mt_md" style:--color="hsl({value} 62% 31%)">
+		<div class="mt_md" style:--text_color="hsl({value} 62% 31%)">
 			<code>bind:value === {value}</code>
 		</div>
 	</section>
@@ -37,7 +37,7 @@
 />`}
 		/>
 		<Hue_Input oninput={(v) => (value_from_oninput = v)} />
-		<div class="mt_md" style:--color="hsl({value} 62% 31%)">
+		<div class="mt_md" style:--text_color="hsl({value} 62% 31%)">
 			<code>value_from_oninput === {value_from_oninput + ''}</code>
 		</div>
 	</section>

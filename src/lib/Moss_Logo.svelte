@@ -17,8 +17,11 @@
 	// rgb(41, 142, 41)
 </script>
 
-<span style:--color="var(--color_b_5)" class="inline_block" style:width={size} style:height={size}
-	><Spider {label} /></span
+<span
+	style:--text_color="var(--color_b_5)"
+	class="inline_block"
+	style:width={size}
+	style:height={size}><Spider {label} /></span
 >
 
 <style>

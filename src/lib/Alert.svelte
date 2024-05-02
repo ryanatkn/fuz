@@ -33,11 +33,18 @@
 </script>
 
 {#if onclick}
-	<button class="message" type="button" style:--color={final_color} {onclick} {disabled} {...attrs}>
+	<button
+		class="message"
+		type="button"
+		style:--text_color={final_color}
+		{onclick}
+		{disabled}
+		{...attrs}
+	>
 		{@render content()}
 	</button>
 {:else}
-	<div role="alert" class="message panel" style:--color={final_color} {...attrs}>
+	<div role="alert" class="message panel" style:--text_color={final_color} {...attrs}>
 		{@render content()}
 	</div>
 {/if}

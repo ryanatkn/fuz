@@ -16,6 +16,9 @@
 </script>
 
 <!-- TODO could potentially support the `image` option like `Fuz_Logo` -->
-<span style:--color="var(--color_d_5)" class="inline_block" style:width={size} style:height={size}
-	><Spider {label} /></span
+<span
+	style:--text_color="var(--color_d_5)"
+	class="inline_block"
+	style:width={size}
+	style:height={size}><Spider {label} /></span
 >
