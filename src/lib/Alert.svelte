@@ -62,12 +62,12 @@
 	.message {
 		min-height: var(--message_min_height);
 		width: 100%;
-		color: var(--color);
+		color: var(--text_color);
 		font-weight: 700;
 		font-size: var(--size_md);
 		border-width: var(--border_width_1);
 		border-style: var(--border_style);
-		border-color: var(--color);
+		border-color: var(--text_color);
 		display: flex;
 		justify-content: flex-start; /* override button horizontal centering */
 		align-items: center;

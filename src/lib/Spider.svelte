@@ -11,7 +11,7 @@
 
 	const {
 		size = '100%',
-		fill = 'var(--color, #000)',
+		fill = 'var(--text_color, #000)',
 		label = 'a little brown spider',
 		path_attrs,
 		attrs,
