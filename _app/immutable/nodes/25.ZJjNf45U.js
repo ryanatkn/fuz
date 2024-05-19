@@ -1,0 +1,10 @@
+import{b as Y,a as i,t as w,f as b,s as e,c as o}from"../chunks/disclose-version.Dxr0gsna.js";import{p as z,a as J,g as t,v as p,J as l,d as O}from"../chunks/runtime.jOsey7ll.js";import{d as U}from"../chunks/render.DebiWJO9.js";import{p as y}from"../chunks/proxy.Cl3psK3T.js";import{b as $}from"../chunks/this.C6AUypjL.js";import{C as k}from"../chunks/Code.BVkDTZyU.js";import{g as j}from"../chunks/tome.B0jujVAD.js";import{T as q}from"../chunks/Teleport.D2ck8zZG.js";import{T as F}from"../chunks/Tome_Detail.Biv7CnIw.js";import{T as G}from"../chunks/Tome_Link.K_bM4psM.js";var H=w("🐰",1),K=(d,r)=>p(r,!t(r)),Q=w(`<section><p>Relocates elements in the DOM, in the rare cases that's useful and the best solution. The <!> uses this to mount dialogs from any component without inheriting styles.</p> <aside><p>Use only when necessary or fun.</p></aside></section> <section><div class="mb_lg"><!></div> <!></section> <section><!> <div class="teleports svelte-1lm68os"><div class="panel svelte-1lm68os"></div> <div class="panel svelte-1lm68os"></div></div> <button>teleport the bunny</button></section>`,1);function le(d,r){z(r,!0);const M=j("Teleport");let m=l(!0),a=l(void 0),n=l(void 0);var v=Y(),R=b(v);F(R,{tome:M,children:(A,V)=>{var c=Q(),u=b(c),D=o(u),E=e(o(D));G(E,{name:"Dialog"});var _=e(e(u,!0)),f=o(_),I=o(f);k(I,{content:"import Teleport from '@ryanatkn/fuz/Teleport.svelte';",lang:"ts"});var L=e(e(f,!0));k(L,{content:`<Teleport to={swap ? teleport_1 : teleport_2}>
+	🐰
+</Teleport>
+<div class="teleports">
+	<div class="panel" bind:this={teleport_1} />
+	<div class="panel" bind:this={teleport_2} />
+</div>
+<button onclick={() => (swap = !swap)}>
+	teleport the bunny
+</button>`});var x=e(e(_,!0)),h=o(x),B=O(()=>t(m)?t(a):t(n));q(h,{get to(){return t(B)},children:(s,W)=>{var P=H();i(s,P)},$$slots:{default:!0}});var g=e(e(h,!0)),T=o(g);$(T,s=>p(a,y(s)),()=>t(a));var C=e(e(T,!0));$(C,s=>p(n,y(s)),()=>t(n));var N=e(e(g,!0));N.__click=[K,m],i(A,c)},$$slots:{default:!0}}),i(d,v),J()}U(["click"]);export{le as component};
