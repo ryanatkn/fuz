@@ -17,8 +17,8 @@
 			<blockquote class="shadow_inset_xs px_xl bg">friendly user zystem 🧶</blockquote>
 			<div class="width_sm panel p_lg shadow_inset_xs bg">
 				<p>
-					Fuz is a Svelte UI library with components and helpers for making excellent websites. It's
-					in early alpha and it will go through many breaking changes.
+					Fuz is a Svelte UI library with components and helpers for making friendly and helpful
+					websites. It's in early alpha and it will go through many breaking changes.
 				</p>
 				<p>
 					Fuz is being made to support <a href="https://zzz.ryanatkn.com/">Zzz</a> and
