@@ -272,11 +272,11 @@ const CONTEXTMENU_DOM_QUERY = `a,[data-${CONTEXTMENU_DATASET_KEY}]`;
 const contextmenu_cache = new Map<string, Contextmenu_Params | Contextmenu_Params[]>();
 let cache_key_counter = 0;
 
-// TODO BLOCK  | null | undefined - can we return null from the function to simplify?
 export const contextmenu_action = <T extends Contextmenu_Params, U extends T | T[]>(
 	el: HTMLElement | SVGElement,
-	params: U,
-): ActionReturn<U> => {
+	params: U | null | undefined,
+): ActionReturn<U> | undefined => {
+	if (params == null) return;
 	const key = cache_key_counter++ + '';
 	el.dataset[CONTEXTMENU_DATASET_KEY] = key;
 	contextmenu_cache.set(key, params);
