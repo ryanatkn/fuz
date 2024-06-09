@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.101.3
+
+### Patch Changes
+
+- relax `contextmenu_action` type to accept `null | undefined` ([#26](https://github.com/ryanatkn/fuz/pull/26))
+
 ## 0.101.2
 
 ### Patch Changes
