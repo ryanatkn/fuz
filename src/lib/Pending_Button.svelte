@@ -19,9 +19,9 @@
 </script>
 
 <button type="button" {...attrs} disabled={disabled ?? pending} {title} class:pending {onclick}>
-	<div class="content">
+	<span class="content">
 		{@render children()}
-	</div>
+	</span>
 	{#if pending}
 		<div class="animation">
 			<Pending_Animation {running} />

@@ -10,7 +10,7 @@
 </script>
 
 <a class="hashlink" href="#{slug}" aria-label="hashlink"
-	>{#if children}{@render children()}{:else}🔗{/if}</a
+	>{#if children}{@render children()}{:else}#{/if}</a
 >
 <span class="hashlink_scroll_target" id={slug} aria-hidden="true"></span>
 
@@ -20,9 +20,8 @@
 
 	.hashlink {
 		font-size: var(--size_lg);
-		position: absolute;
-		left: -3.5rem;
-		bottom: calc(var(--size, var(--size_md)) * 0.1);
+		padding: 0 var(--space_sm);
+		margin-left: var(--space_sm);
 		opacity: 0;
 		transition: opacity var(--duration_2);
 	}
@@ -31,13 +30,6 @@
 		position: absolute;
 		top: calc(var(--size, var(--size_md)) * -4);
 		left: 0;
-	}
-
-	/* sync this breakpoint with `Library` */
-	@media (max-width: 1000px) {
-		.hashlink {
-			position: static;
-		}
 	}
 
 	/* sync this breakpoint with `Library` */

@@ -31,13 +31,11 @@
 		library_links.add(id, text, slug, tag);
 		onDestroy(() => library_links.remove(id));
 	}
+
+	const classes = $derived('tome_subheading' + (attrs?.class ? ' ' + attrs.class : ''));
 </script>
 
-{#if tag === 'h4'}
-	<h4 {...attrs}>{@render content()}</h4>
-{:else}
-	<h3 {...attrs}>{@render content()}</h3>
-{/if}
+<svelte:element this={tag} {...attrs} class={classes}>{@render content()}</svelte:element>
 
 {#snippet content()}
 	{#if children}{@render children()}{:else}{text}{/if}
@@ -45,11 +43,14 @@
 {/snippet}
 
 <style>
-	:is(h3, h4) {
+	.tome_subheading {
 		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
 	}
 	/* TODO @multiple how can this be done composably? currently using `:global` at usage site - ideally we'd continue to use :hover instead of JS */
-	:is(h3, h4):hover :global(.hashlink) {
+	.tome_subheading:hover :global(.hashlink) {
 		opacity: 1;
 	}
 </style>

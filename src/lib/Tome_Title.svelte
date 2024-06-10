@@ -48,8 +48,11 @@
 
 <style>
 	.tome_title {
-		margin-top: var(--space_xl4);
 		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-top: var(--space_xl4);
 	}
 	/* TODO @multiple how can this be done composably? currently using `:global` at usage site - ideally we'd continue to use :hover instead of JS */
 	.tome_title:hover :global(.hashlink) {
