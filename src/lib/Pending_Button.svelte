@@ -15,14 +15,20 @@
 
 	const {pending, onclick, running, title, disabled, attrs, children}: Props = $props();
 
+	let el: HTMLButtonElement | undefined; // intentionally not `$state`, would need to use `untrack` in the helpers below if changed
+
 	/**
 	 * This API pattern is an experiment in contrast to exposing `el` through a bindable prop.
-	 * The prop exposes more API surface area than is usually necessary,
-	 * and although I'm inclined to give consumers more control,
-	 * this also avoids some grossness with the ESLint `prefer-const` rule.
-	 * (that's a poor reason to shape the API though, hence why I'm calling it an experiment)
+	 * This is non-reactive, which I believe is generally what consumers want,
+	 * but this forces the issue which may cause issues.
+	 *
+	 * The initial motivation is to avoid grossness with `prefer-const` and `$props`,
+	 * which is admittedly not a good motivation to shape the API.
+	 * A better fix would be to have the ESLint plugin disable `prefer-const` for `$props`,
+	 * or perhaps that's something for the language tools to handle internally by, for example,
+	 * making each `$prop` a separate declaration that defaults to `const` for non-bindables.
 	 */
-	let el: HTMLButtonElement | undefined;
+	export const get_el = (): HTMLButtonElement | undefined => el;
 
 	export const focus = (): void => el?.focus();
 
