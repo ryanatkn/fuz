@@ -1,0 +1,1 @@
+import{r as _}from"./runtime.B6fxmSPv.js";import{l as u}from"./shared.eSyeuxmi.js";function f(e,r,l){u(e,"input",()=>{l(n(e)?t(e.value):e.value)}),_(()=>{var a=r();e.__value=a,!(n(e)&&a===t(e.value))&&(e.type==="date"&&!a&&!e.value||(e.value=a??""))})}function n(e){var r=e.type;return r==="number"||r==="range"}function t(e){return e===""?null:+e}export{f as b};
