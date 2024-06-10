@@ -23,9 +23,9 @@
 		{@render children()}
 	</span>
 	{#if pending}
-		<div class="animation">
+		<span class="animation">
 			<Pending_Animation {running} />
-		</div>
+		</span>
 	{/if}
 </button>
 
