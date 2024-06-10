@@ -25,6 +25,8 @@
 		children, // eslint-disable-line prefer-const
 	}: Props = $props();
 
+	el; // TODO @see https://github.com/sveltejs/language-tools/issues/2268
+
 	// TODO maybe this shouldn't disable? just visually look disabled, maybe with `.disabled`?
 	// TODO cancelable?
 </script>
