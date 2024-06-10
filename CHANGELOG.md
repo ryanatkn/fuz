@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.101.5
+
+### Patch Changes
+
+- add `$bindable` prop `el` to `Pending_Button` ([#28](https://github.com/ryanatkn/fuz/pull/28))
+
 ## 0.101.4
 
 ### Patch Changes
