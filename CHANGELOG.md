@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.101.4
+
+### Patch Changes
+
+- improve library headings ([#27](https://github.com/ryanatkn/fuz/pull/27))
+
 ## 0.101.3
 
 ### Patch Changes
