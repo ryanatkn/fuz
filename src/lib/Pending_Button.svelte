@@ -10,15 +10,36 @@
 		title?: string;
 		disabled?: boolean;
 		attrs?: any;
+		el?: HTMLButtonElement | undefined;
 		children: Snippet;
 	}
 
-	// TODO maybe this shouldn't disable? cancelable?
+	let {
+		pending, // eslint-disable-line prefer-const
+		onclick, // eslint-disable-line prefer-const
+		running, // eslint-disable-line prefer-const
+		title, // eslint-disable-line prefer-const
+		disabled, // eslint-disable-line prefer-const
+		attrs, // eslint-disable-line prefer-const
+		el = $bindable(),
+		children, // eslint-disable-line prefer-const
+	}: Props = $props();
 
-	const {pending, onclick, running, title, disabled, attrs, children}: Props = $props();
+	el; // TODO @see https://github.com/sveltejs/language-tools/issues/2268
+
+	// TODO maybe this shouldn't disable? just visually look disabled, maybe with `.disabled`?
+	// TODO cancelable?
 </script>
 
-<button type="button" {...attrs} disabled={disabled ?? pending} {title} class:pending {onclick}>
+<button
+	bind:this={el}
+	type="button"
+	{...attrs}
+	disabled={disabled ?? pending}
+	{title}
+	class:pending
+	{onclick}
+>
 	<span class="content">
 		{@render children()}
 	</span>
