@@ -33,11 +33,7 @@
 	}
 </script>
 
-{#if tag === 'h4'}
-	<h4 {...attrs}>{@render content()}</h4>
-{:else}
-	<h3 {...attrs}>{@render content()}</h3>
-{/if}
+<svelte:element this={tag} {...attrs}>{@render content()}</svelte:element>
 
 {#snippet content()}
 	{#if children}{@render children()}{:else}{text}{/if}
