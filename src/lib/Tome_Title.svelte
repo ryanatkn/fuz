@@ -48,6 +48,9 @@
 
 <style>
 	.tome_title {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
 		margin-top: var(--space_xl4);
 		position: relative;
 	}
