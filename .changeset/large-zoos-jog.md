@@ -1,5 +1,5 @@
 ---
-"@ryanatkn/fuz": patch
+'@ryanatkn/fuz': patch
 ---
 
-add `focus` to the `Pending_Button` exported API
+add `$bindable` prop `el` to `Pending_Button`
