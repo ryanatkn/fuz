@@ -1,12 +1,12 @@
 <script lang="ts">
-	import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
+	import Contextmenu from '$lib/Contextmenu.svelte';
 	import Contextmenu_Entry from '$lib/Contextmenu_Entry.svelte';
 	import Contextmenu from '$lib/Contextmenu.svelte';
-	import {Contextmenu_Store} from '$lib/contextmenu_helpers.svelte.js';
+	import {Contextmenu_State} from '$lib/contextmenu_helpers.svelte.js';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
 	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
-	const contextmenu = new Contextmenu_Store();
+	const contextmenu = new Contextmenu_State();
 
 	// TODO maybe pass `contextmenu` to the children snippet
 
@@ -35,7 +35,7 @@ Try selecting text and then opening the contextmenu on it.`;
 	const highlighted = $derived(value === text1 || value === text2 || value === text3);
 </script>
 
-<Contextmenu_Root {contextmenu} scoped>
+<Contextmenu {contextmenu} scoped>
 	<div class:color_d_5={highlighted}>
 		<Tome_Subheading text="Select text" slug="select-text" />
 	</div>
@@ -74,7 +74,7 @@ Try selecting text and then opening the contextmenu on it.`;
 			<blockquote contenteditable="plaintext-only" bind:innerText={value}></blockquote>
 		</div>
 	</Contextmenu>
-</Contextmenu_Root>
+</Contextmenu>
 
 <style>
 	label {

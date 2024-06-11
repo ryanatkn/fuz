@@ -1,19 +1,19 @@
 <script lang="ts">
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
-	import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
+	import Contextmenu from '$lib/Contextmenu.svelte';
 	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 </script>
 
-<Contextmenu_Root scoped>
+<Contextmenu scoped>
 	<Tome_Subheading text="Default behaviors" slug="default-behaviors" />
 	<div class="panel p_md">
 		<Code
-			content={`<Contextmenu_Root scoped>
+			content={`<Contextmenu scoped>
   ...<a href="https://www.fuz.dev/">
     a link like this one
   </a>...
-</Contextmenu_Root>`}
+</Contextmenu>`}
 		/>
 		<p>
 			Opening the contextmenu on <a href="https://www.fuz.dev/">a link like this one</a> has special
@@ -30,4 +30,4 @@
 			browser's default contextmenu, because we didn't include any behaviors.
 		</aside>
 	</div>
-</Contextmenu_Root>
+</Contextmenu>

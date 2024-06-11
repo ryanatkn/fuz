@@ -60,17 +60,17 @@ export interface Contextmenu_Run {
 	(): unknown | Promise<Activate_Result>;
 }
 
-export interface Contextmenu_Store_Options {
+export interface Contextmenu_State_Options {
 	link_snippet?: [href: string, icon?: Snippet<[icon: string]>];
 	text_snippet?: [content: string, icon: string];
-	layout?: Dimensions; // TODO consider making this a prop on `Contextmenu_Root`, and being assigned here
+	layout?: Dimensions; // TODO consider making this a prop on `Contextmenu`, and being assigned here
 }
 
 /**
  * Creates a `contextmenu` store.
- * See usage with `Contextmenu_Root.svelte` and `Contextmenu.svelte`.
+ * See usage with `Contextmenu.svelte` and `Contextmenu.svelte`.
  */
-export class Contextmenu_Store {
+export class Contextmenu_State {
 	layout: Dimensions; // TODO $state?
 	/**
 	 * If an initial layout is provided, control is deferred externally.
@@ -92,7 +92,7 @@ export class Contextmenu_Store {
 	root_menu: Root_Menu_State = $state(new Root_Menu_State());
 	selections: Item_State[] = $state([]);
 
-	constructor(options?: Contextmenu_Store_Options) {
+	constructor(options?: Contextmenu_State_Options) {
 		this.initial_layout = options?.layout;
 
 		this.layout = this.initial_layout || new Dimensions();
@@ -305,7 +305,7 @@ export const open_contextmenu = (
 	target: HTMLElement | SVGElement,
 	x: number,
 	y: number,
-	contextmenu: Contextmenu_Store,
+	contextmenu: Contextmenu_State,
 ): boolean => {
 	const params = query_contextmenu_params(target);
 	if (!params?.length) return false;
@@ -364,9 +364,9 @@ const query_contextmenu_params = (
 };
 
 const CONTEXTMENU_STORE_KEY = Symbol();
-export const set_contextmenu = (contextmenu: Contextmenu_Store): Contextmenu_Store =>
+export const set_contextmenu = (contextmenu: Contextmenu_State): Contextmenu_State =>
 	setContext(CONTEXTMENU_STORE_KEY, contextmenu);
-export const get_contextmenu = (): Contextmenu_Store => getContext(CONTEXTMENU_STORE_KEY);
+export const get_contextmenu = (): Contextmenu_State => getContext(CONTEXTMENU_STORE_KEY);
 
 const CONTEXTMENU_STATE_KEY = Symbol();
 export const set_contextmenu_submenu = (submenu: Submenu_State): Submenu_State =>

@@ -26,11 +26,10 @@
 		action.
 	</p>
 	<p>
-		When you rightclick or longpress inside a <code>Contextmenu_Root</code>, it searches for
-		behaviors defined with <code>Contextmenu</code> starting from the target element up to the root.
-		If any behaviors are found, the Fuz contextmenu opens, with the caveats below. The contextmenu displays
-		the available behaviors which you can then activate. If no behaviors are found, the system contextmenu
-		opens.
+		When you rightclick or longpress inside a <code>Contextmenu</code>, it searches for behaviors
+		defined with <code>Contextmenu</code> starting from the target element up to the root. If any behaviors
+		are found, the Fuz contextmenu opens, with the caveats below. The contextmenu displays the available
+		behaviors which you can then activate. If no behaviors are found, the system contextmenu opens.
 	</p>
 	<h4>Devices with a mouse</h4>
 	<ul>

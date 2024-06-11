@@ -11,7 +11,7 @@
 	import {package_json, src_json} from '$routes/package.js';
 	import Spiders from '$lib/Spiders.svelte';
 	// TODO re-enable this, see comment below
-	// import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
+	// import Contextmenu from '$lib/Contextmenu.svelte';
 	// import Dialog from '$lib/Dialog.svelte';
 	// import Settings from '$routes/Settings.svelte';
 	// import {contextmenu_action} from '$lib/contextmenu_helpers.svelte.js';
@@ -34,10 +34,10 @@
 <Themed>
 	<!-- TODO add all of this and fixed scoped, so the library examples work as expected,
 		or maybe disable this main contextmenu when in the library -->
-	<!-- <Contextmenu_Root> -->
+	<!-- <Contextmenu> -->
 	{@render children()}
 	<Spiders />
-	<!-- </Contextmenu_Root> -->
+	<!-- </Contextmenu> -->
 	<!-- {#if show_settings}
 		<Dialog onclose={() => (show_settings = false)}>
 			<div class="pane">

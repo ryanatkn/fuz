@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
-	import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
+	import Contextmenu from '$lib/Contextmenu.svelte';
 	import Contextmenu_Entry from '$lib/Contextmenu_Entry.svelte';
 	import Contextmenu from '$lib/Contextmenu.svelte';
 	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
@@ -12,7 +12,7 @@
 </script>
 
 <Tome_Subheading text="Basic usage" slug="basic-usage" />
-<Contextmenu_Root scoped>
+<Contextmenu scoped>
 	<Contextmenu>
 		{#snippet entries()}
 			<Contextmenu_Entry run={() => (greeted = !greeted)}>Hello world</Contextmenu_Entry>
@@ -27,7 +27,7 @@
 		<div class="panel p_md">
 			<p>Try opening the contextmenu on this panel with rightclick or longpress.</p>
 			<Code
-				content={`<Contextmenu_Root scoped>
+				content={`<Contextmenu scoped>
   <Contextmenu>
     {#snippet entries()}
       <Contextmenu_Entry run={() => (greeted = !greeted)}> <!-- ${greeted} />
@@ -44,7 +44,7 @@
     ...markup with the above contextmenu behavior...
   </Contextmenu>
   ...markup with only default contextmenu behavior...
-</Contextmenu_Root>
+</Contextmenu>
 ...markup without contextmenu behavior...`}
 			/>
 			<div><code class:color_g_5={greeted}>greeted = {greeted}</code></div>
@@ -64,4 +64,4 @@
 			</aside>
 		</div>
 	</Contextmenu>
-</Contextmenu_Root>
+</Contextmenu>

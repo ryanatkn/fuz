@@ -4,7 +4,7 @@
 	import {quintOut} from 'svelte/easing';
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
-	import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
+	import Contextmenu from '$lib/Contextmenu.svelte';
 	import Contextmenu from '$lib/Contextmenu.svelte';
 	import Details from '$lib/Details.svelte';
 	import Contextmenu_Text_Entry from '$lib/Contextmenu_Text_Entry.svelte';
@@ -126,7 +126,7 @@
 	});
 </script>
 
-<Contextmenu_Root scoped>
+<Contextmenu scoped>
 	<Tome_Subheading text="Full example" slug="full-example" />
 	<Contextmenu>
 		{#snippet entries()}
@@ -184,7 +184,7 @@
 			</Details>
 		</section>
 	</Contextmenu>
-</Contextmenu_Root>
+</Contextmenu>
 
 {#if show_about_dialog}
 	<Dialog onclose={() => (show_about_dialog = false)}>
