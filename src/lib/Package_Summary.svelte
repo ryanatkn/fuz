@@ -29,6 +29,7 @@
 		{/if}
 		<!-- TODO maybe add this value to package.json, `icon_alt` -->
 		<img
+			class="pixelated"
 			style:width="var(--size, var(--icon_size_xl2))"
 			style:height="var(--size, var(--icon_size_xl2))"
 			src="{pkg.homepage_url}/favicon.png"
@@ -49,7 +50,7 @@
 		{#if description}
 			{@render description(package_json.description, package_json.icon)}
 		{:else}
-			<p>
+			<p class="text_align_center">
 				{package_json.description}
 				{#if !package_json.motto}
 					{package_json.icon}
