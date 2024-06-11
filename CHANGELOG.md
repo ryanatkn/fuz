@@ -1,5 +1,15 @@
 # @ryanatkn/fuz
 
+## 0.102.0
+
+### Minor Changes
+
+- remove `el` from `Pending_Button` props in favor of an exported `focus` method ([#29](https://github.com/ryanatkn/fuz/pull/29))
+
+### Patch Changes
+
+- tweak `Package_Summary` styles ([ae718b1](https://github.com/ryanatkn/fuz/commit/ae718b1))
+
 ## 0.101.5
 
 ### Patch Changes
