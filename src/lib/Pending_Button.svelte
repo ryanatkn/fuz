@@ -18,7 +18,7 @@
 
 	let el: HTMLButtonElement | undefined; // intentionally not reactive
 
-	const focus = (options?: FocusOptions | undefined): void => el?.focus(options);
+	export const focus = (options?: FocusOptions | undefined): void => el?.focus(options);
 
 	// TODO maybe this shouldn't disable? just visually look disabled, maybe with `.disabled`?
 </script>
