@@ -14,21 +14,13 @@
 		children: Snippet;
 	}
 
-	let {
-		pending, // eslint-disable-line prefer-const
-		onclick, // eslint-disable-line prefer-const
-		running, // eslint-disable-line prefer-const
-		title, // eslint-disable-line prefer-const
-		disabled, // eslint-disable-line prefer-const
-		attrs, // eslint-disable-line prefer-const
-		el = $bindable(),
-		children, // eslint-disable-line prefer-const
-	}: Props = $props();
+	const {pending, onclick, running, title, disabled, attrs, children}: Props = $props();
 
-	el; // TODO @see https://github.com/sveltejs/language-tools/issues/2268
+	let el: HTMLButtonElement | undefined; // intentionally not reactive
+
+	export const focus = (options?: FocusOptions | undefined): void => el?.focus(options);
 
 	// TODO maybe this shouldn't disable? just visually look disabled, maybe with `.disabled`?
-	// TODO cancelable?
 </script>
 
 <button
