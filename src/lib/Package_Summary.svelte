@@ -6,7 +6,9 @@
 
 	interface Props {
 		pkg: Package_Meta; // TODO normalized version with cached primitives?
+		pixelated_logo?: boolean;
 		repo_name?: Snippet<[repo_name: string]>;
+		logo?: Snippet<[logo_url: string]>;
 		motto?: Snippet<[motto: string, icon?: string]>;
 		description?: Snippet<[description: string, icon?: string]>;
 		npm_url?: Snippet<[npm_url: string]>;
@@ -14,9 +16,21 @@
 		children?: Snippet;
 	}
 
-	const {pkg, repo_name, motto, description, npm_url, homepage_url, children}: Props = $props();
+	const {
+		pkg,
+		pixelated_logo,
+		repo_name,
+		logo,
+		motto,
+		description,
+		npm_url,
+		homepage_url,
+		children,
+	}: Props = $props();
 
 	const {package_json} = $derived(pkg);
+
+	const logo_url = $derived(pkg.homepage_url + '/favicon.png');
 </script>
 
 <div class="package_summary">
@@ -27,14 +41,19 @@
 		{:else}
 			<div class="repo_name">{pkg.repo_name}</div>
 		{/if}
-		<!-- TODO maybe add this value to package.json, `icon_alt` -->
-		<img
-			class="pixelated"
-			style:width="var(--size, var(--icon_size_xl2))"
-			style:height="var(--size, var(--icon_size_xl2))"
-			src="{pkg.homepage_url}/favicon.png"
-			alt="logo for {pkg.repo_name}"
-		/>
+		<!-- TODO maybe add `icon_alt` to package.json -->
+		<!-- TODO what about svg logos? maybe a package.json logo url that defaults to favicon? -->
+		{#if logo}
+			{@render logo(logo_url)}
+		{:else}
+			<img
+				class:pixelated={pixelated_logo}
+				style:width="var(--size, var(--icon_size_xl2))"
+				style:height="var(--size, var(--icon_size_xl2))"
+				src={logo_url}
+				alt="logo for {pkg.repo_name}"
+			/>
+		{/if}
 	</header>
 	{#if package_json.motto}
 		{#if motto}
