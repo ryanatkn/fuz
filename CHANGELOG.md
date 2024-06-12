@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.102.1
+
+### Patch Changes
+
+- improve `Package_Summary` logo ([#31](https://github.com/ryanatkn/fuz/pull/31))
+
 ## 0.102.0
 
 ### Minor Changes
