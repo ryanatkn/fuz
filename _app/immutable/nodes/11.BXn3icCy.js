@@ -1,1 +1,0 @@
-import{a as s,t as m,f as p,s as e}from"../chunks/disclose-version.9fjPYoA6.js";import{B as n}from"../chunks/Breadcrumb_Example.Bsb6Pn-d.js";import{T as i}from"../chunks/Tome_Subheading.DBGKI4kE.js";var d=m("<!> <!>",1);function l(o){var a=d(),t=p(a);i(t,{text:"Custom paths",slug:"custom-paths"});var r=e(e(t,!0));n(r,{selected_path:"/a/b"}),s(o,a)}export{l as component};
