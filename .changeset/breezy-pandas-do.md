@@ -1,5 +1,5 @@
 ---
-"@ryanatkn/fuz": patch
+'@ryanatkn/fuz': patch
 ---
 
-style tweaks
+improve `Package_Summary` logo
