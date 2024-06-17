@@ -3,7 +3,6 @@ import type {ComponentProps, ComponentType, SvelteComponent} from 'svelte';
 import type Dialog from '$lib/Dialog.svelte';
 
 // TODO @multiple added this hack with Svelte 4, didn't see an open issue about it
-/* eslint-disable @typescript-eslint/no-redundant-type-constituents */
 
 /**
  * This helper function is needed to construct `Dialog_Params` with type safety.
