@@ -1,0 +1,1 @@
+import{r as f}from"./runtime.BNQUFw9P.js";import{c as i}from"./attributes.BbCbgtXg.js";function a(r,_,o,e=!0){e&&o();for(var t of _)r.addEventListener(t,o);f(()=>()=>{for(var n of _)r.removeEventListener(n,o)})}function c(r,_,o,e=o){r.addEventListener(_,o);const t=r.__on_r;t?r.__on_r=()=>{t(),e()}:r.__on_r=e,i()}export{a,c as l};
