@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.103.0
+
+### Minor Changes
+
+- upgrade @ryanatkn/gro@0.119 ([d364646](https://github.com/ryanatkn/fuz/commit/d364646))
+
 ## 0.102.1
 
 ### Patch Changes
