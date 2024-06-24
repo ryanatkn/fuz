@@ -1,4 +1,4 @@
-import {Url} from '@ryanatkn/gro/paths.js';
+import {Url} from '@ryanatkn/gro/package_json.js';
 import type {Logger} from '@ryanatkn/belt/log.js';
 import {join} from 'node:path';
 import {z} from 'zod';
