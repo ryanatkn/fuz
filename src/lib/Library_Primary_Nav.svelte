@@ -21,8 +21,6 @@
 	const iframed = is_iframed();
 	const enabled = !iframed;
 
-	// TODO BLOCK make this customizable, using snippet not pkg?
-
 	let scrollY = $state(0);
 	const scrolled = $derived(scrollY > 0);
 </script>
