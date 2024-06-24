@@ -1,4 +1,4 @@
-import type {ComponentProps, ComponentType, SvelteComponent} from 'svelte';
+import type {ComponentProps, Component} from 'svelte';
 
 import type Dialog from '$lib/Dialog.svelte';
 
@@ -11,8 +11,8 @@ import type Dialog from '$lib/Dialog.svelte';
  * which do not work for plain objects as of v5.0.4.
  * * `ContextmenuParams` uses a similar strategy.
  */
-export const to_dialog_params = <T extends SvelteComponent>(
-	Component: ComponentType<T>,
+export const to_dialog_params = <T extends Component>(
+	Component: T,
 	props: ComponentProps<T>,
 	dialog_props?: ComponentProps<Dialog>,
 ): Dialog_Params<T> => ({
@@ -28,8 +28,8 @@ export const to_dialog_params = <T extends SvelteComponent>(
  * so we use `to_dialog_params` to construct instances in most cases.
  * Definining `Dialog_Params` with no concrete `T` lacks typechecking for `props`.
  */
-export interface Dialog_Params<T extends SvelteComponent = SvelteComponent> {
-	Component: ComponentType<T>;
+export interface Dialog_Params<T extends Component = Component<any>> {
+	Component: T;
 	props: ComponentProps<T>;
 	dialog_props?: ComponentProps<Dialog> | undefined;
 }
