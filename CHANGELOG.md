@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.104.0
+
+### Minor Changes
+
+- upgrade `node@22.3` ([#32](https://github.com/ryanatkn/fuz/pull/32))
+
 ## 0.103.0
 
 ### Minor Changes
