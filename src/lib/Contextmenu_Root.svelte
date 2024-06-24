@@ -267,6 +267,7 @@
 	};
 
 	// TODO change the events below to the callback form, but the passive/nonpassive modifiers need to be handled with an action? assuming we still need them
+	/* eslint-disable svelte/valid-compile */
 </script>
 
 <!--

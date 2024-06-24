@@ -5,16 +5,14 @@ import type {ActionReturn} from 'svelte/action';
 
 import {Dimensions} from '$lib/dimensions.svelte.js';
 
-// TODO @multiple added this hack with Svelte 4, didn't see an open issue about it
-/* eslint-disable @typescript-eslint/no-redundant-type-constituents */
-
 export type Contextmenu_Params =
 	| Snippet
 	// TODO maybe this should be generic?
 	| {snippet: 'link'; props: {href: string; icon?: string}}
 	| {snippet: 'text'; props: {content: string; icon: string; run: Contextmenu_Run}};
 
-type Activate_Result = Result<any, {message?: string}> | any;
+// TODO fix this type
+type Activate_Result = Result<any, {message?: string}> | any; // eslint-disable-line @typescript-eslint/no-redundant-type-constituents
 
 export type Item_State = Submenu_State | Entry_State;
 
@@ -57,7 +55,8 @@ export class Root_Menu_State {
 }
 
 export interface Contextmenu_Run {
-	(): unknown | Promise<Activate_Result>;
+	// TODO fix this type
+	(): unknown | Promise<Activate_Result>; // eslint-disable-line @typescript-eslint/no-redundant-type-constituents
 }
 
 export interface Contextmenu_Store_Options {
