@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.105.1
+
+### Patch Changes
+
+- downgrade `svelte@5.0.0-next.164` to fix dist types ([1ba6a42](https://github.com/ryanatkn/fuz/commit/1ba6a42))
+
 ## 0.105.0
 
 ### Minor Changes
