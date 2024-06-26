@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.105.0
+
+### Minor Changes
+
+- support `node@20.12` and later ([3d29f10](https://github.com/ryanatkn/fuz/commit/3d29f10))
+
 ## 0.104.1
 
 ### Patch Changes
