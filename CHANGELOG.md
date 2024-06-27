@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.105.2
+
+### Patch Changes
+
+- upgrade gro with correctly formatted exports ([f499ced](https://github.com/ryanatkn/fuz/commit/f499ced))
+
 ## 0.105.1
 
 ### Patch Changes
