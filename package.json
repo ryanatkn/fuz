@@ -3,7 +3,7 @@
   "version": "0.105.1",
   "description": "Svelte UI library",
   "motto": "friendly user zystem",
-  "icon": "🧶",
+  "glyph": "🧶",
   "public": true,
   "license": "MIT",
   "homepage": "https://www.fuz.dev/",
@@ -41,10 +41,10 @@
   },
   "devDependencies": {
     "@changesets/changelog-git": "^0.2.0",
-    "@ryanatkn/belt": "^0.22.0",
+    "@ryanatkn/belt": "^0.23.0",
     "@ryanatkn/eslint-config": "^0.1.3",
     "@ryanatkn/fuz_code": "^0.15.0",
-    "@ryanatkn/gro": "^0.124.0",
+    "@ryanatkn/gro": "^0.125.1",
     "@ryanatkn/moss": "^0.6.0",
     "@sveltejs/adapter-static": "^3.0.2",
     "@sveltejs/kit": "^2.5.17",
@@ -93,271 +93,271 @@
   "exports": {
     "./package.json": "./package.json",
     "./Alert.svelte": {
+      "types": "./dist/Alert.svelte.d.ts",
       "svelte": "./dist/Alert.svelte",
-      "default": "./dist/Alert.svelte",
-      "types": "./dist/Alert.svelte.d.ts"
+      "default": "./dist/Alert.svelte"
     },
     "./alert.js": {
-      "default": "./dist/alert.js",
-      "types": "./dist/alert.d.ts"
+      "types": "./dist/alert.d.ts",
+      "default": "./dist/alert.js"
     },
     "./Breadcrumb.svelte": {
+      "types": "./dist/Breadcrumb.svelte.d.ts",
       "svelte": "./dist/Breadcrumb.svelte",
-      "default": "./dist/Breadcrumb.svelte",
-      "types": "./dist/Breadcrumb.svelte.d.ts"
+      "default": "./dist/Breadcrumb.svelte"
     },
     "./Card.svelte": {
+      "types": "./dist/Card.svelte.d.ts",
       "svelte": "./dist/Card.svelte",
-      "default": "./dist/Card.svelte",
-      "types": "./dist/Card.svelte.d.ts"
+      "default": "./dist/Card.svelte"
     },
     "./Color_Scheme_Input.svelte": {
+      "types": "./dist/Color_Scheme_Input.svelte.d.ts",
       "svelte": "./dist/Color_Scheme_Input.svelte",
-      "default": "./dist/Color_Scheme_Input.svelte",
-      "types": "./dist/Color_Scheme_Input.svelte.d.ts"
+      "default": "./dist/Color_Scheme_Input.svelte"
     },
     "./config.js": {
-      "default": "./dist/config.js",
-      "types": "./dist/config.d.ts"
+      "types": "./dist/config.d.ts",
+      "default": "./dist/config.js"
     },
     "./Contextmenu_Entry.svelte": {
+      "types": "./dist/Contextmenu_Entry.svelte.d.ts",
       "svelte": "./dist/Contextmenu_Entry.svelte",
-      "default": "./dist/Contextmenu_Entry.svelte",
-      "types": "./dist/Contextmenu_Entry.svelte.d.ts"
+      "default": "./dist/Contextmenu_Entry.svelte"
     },
     "./contextmenu_helpers.svelte.js": {
-      "default": "./dist/contextmenu_helpers.svelte.js",
-      "types": "./dist/contextmenu_helpers.svelte.d.ts"
+      "types": "./dist/contextmenu_helpers.svelte.d.ts",
+      "default": "./dist/contextmenu_helpers.svelte.js"
     },
     "./Contextmenu_Link_Entry.svelte": {
+      "types": "./dist/Contextmenu_Link_Entry.svelte.d.ts",
       "svelte": "./dist/Contextmenu_Link_Entry.svelte",
-      "default": "./dist/Contextmenu_Link_Entry.svelte",
-      "types": "./dist/Contextmenu_Link_Entry.svelte.d.ts"
+      "default": "./dist/Contextmenu_Link_Entry.svelte"
     },
     "./Contextmenu_Root.svelte": {
+      "types": "./dist/Contextmenu_Root.svelte.d.ts",
       "svelte": "./dist/Contextmenu_Root.svelte",
-      "default": "./dist/Contextmenu_Root.svelte",
-      "types": "./dist/Contextmenu_Root.svelte.d.ts"
+      "default": "./dist/Contextmenu_Root.svelte"
     },
     "./Contextmenu_Submenu.svelte": {
+      "types": "./dist/Contextmenu_Submenu.svelte.d.ts",
       "svelte": "./dist/Contextmenu_Submenu.svelte",
-      "default": "./dist/Contextmenu_Submenu.svelte",
-      "types": "./dist/Contextmenu_Submenu.svelte.d.ts"
+      "default": "./dist/Contextmenu_Submenu.svelte"
     },
     "./Contextmenu_Text_Entry.svelte": {
+      "types": "./dist/Contextmenu_Text_Entry.svelte.d.ts",
       "svelte": "./dist/Contextmenu_Text_Entry.svelte",
-      "default": "./dist/Contextmenu_Text_Entry.svelte",
-      "types": "./dist/Contextmenu_Text_Entry.svelte.d.ts"
+      "default": "./dist/Contextmenu_Text_Entry.svelte"
     },
     "./Contextmenu.svelte": {
+      "types": "./dist/Contextmenu.svelte.d.ts",
       "svelte": "./dist/Contextmenu.svelte",
-      "default": "./dist/Contextmenu.svelte",
-      "types": "./dist/Contextmenu.svelte.d.ts"
+      "default": "./dist/Contextmenu.svelte"
     },
     "./Copy_To_Clipboard.svelte": {
+      "types": "./dist/Copy_To_Clipboard.svelte.d.ts",
       "svelte": "./dist/Copy_To_Clipboard.svelte",
-      "default": "./dist/Copy_To_Clipboard.svelte",
-      "types": "./dist/Copy_To_Clipboard.svelte.d.ts"
+      "default": "./dist/Copy_To_Clipboard.svelte"
     },
     "./Details.svelte": {
+      "types": "./dist/Details.svelte.d.ts",
       "svelte": "./dist/Details.svelte",
-      "default": "./dist/Details.svelte",
-      "types": "./dist/Details.svelte.d.ts"
+      "default": "./dist/Details.svelte"
     },
     "./Dialog.svelte": {
+      "types": "./dist/Dialog.svelte.d.ts",
       "svelte": "./dist/Dialog.svelte",
-      "default": "./dist/Dialog.svelte",
-      "types": "./dist/Dialog.svelte.d.ts"
+      "default": "./dist/Dialog.svelte"
     },
     "./dialog.js": {
-      "default": "./dist/dialog.js",
-      "types": "./dist/dialog.d.ts"
+      "types": "./dist/dialog.d.ts",
+      "default": "./dist/dialog.js"
     },
     "./Dialogs.svelte": {
+      "types": "./dist/Dialogs.svelte.d.ts",
       "svelte": "./dist/Dialogs.svelte",
-      "default": "./dist/Dialogs.svelte",
-      "types": "./dist/Dialogs.svelte.d.ts"
+      "default": "./dist/Dialogs.svelte"
     },
     "./dimensions.svelte.js": {
-      "default": "./dist/dimensions.svelte.js",
-      "types": "./dist/dimensions.svelte.d.ts"
+      "types": "./dist/dimensions.svelte.d.ts",
+      "default": "./dist/dimensions.svelte.js"
     },
     "./Fuz_Logo.svelte": {
+      "types": "./dist/Fuz_Logo.svelte.d.ts",
       "svelte": "./dist/Fuz_Logo.svelte",
-      "default": "./dist/Fuz_Logo.svelte",
-      "types": "./dist/Fuz_Logo.svelte.d.ts"
+      "default": "./dist/Fuz_Logo.svelte"
     },
     "./Fuz_Template_Logo.svelte": {
+      "types": "./dist/Fuz_Template_Logo.svelte.d.ts",
       "svelte": "./dist/Fuz_Template_Logo.svelte",
-      "default": "./dist/Fuz_Template_Logo.svelte",
-      "types": "./dist/Fuz_Template_Logo.svelte.d.ts"
+      "default": "./dist/Fuz_Template_Logo.svelte"
     },
     "./Github_Logo.svelte": {
+      "types": "./dist/Github_Logo.svelte.d.ts",
       "svelte": "./dist/Github_Logo.svelte",
-      "default": "./dist/Github_Logo.svelte",
-      "types": "./dist/Github_Logo.svelte.d.ts"
+      "default": "./dist/Github_Logo.svelte"
     },
     "./Hashlink.svelte": {
+      "types": "./dist/Hashlink.svelte.d.ts",
       "svelte": "./dist/Hashlink.svelte",
-      "default": "./dist/Hashlink.svelte",
-      "types": "./dist/Hashlink.svelte.d.ts"
+      "default": "./dist/Hashlink.svelte"
     },
     "./Hue_Input.svelte": {
+      "types": "./dist/Hue_Input.svelte.d.ts",
       "svelte": "./dist/Hue_Input.svelte",
-      "default": "./dist/Hue_Input.svelte",
-      "types": "./dist/Hue_Input.svelte.d.ts"
+      "default": "./dist/Hue_Input.svelte"
     },
     "./Library_Content.svelte": {
+      "types": "./dist/Library_Content.svelte.d.ts",
       "svelte": "./dist/Library_Content.svelte",
-      "default": "./dist/Library_Content.svelte",
-      "types": "./dist/Library_Content.svelte.d.ts"
+      "default": "./dist/Library_Content.svelte"
     },
     "./Library_Footer.svelte": {
+      "types": "./dist/Library_Footer.svelte.d.ts",
       "svelte": "./dist/Library_Footer.svelte",
-      "default": "./dist/Library_Footer.svelte",
-      "types": "./dist/Library_Footer.svelte.d.ts"
+      "default": "./dist/Library_Footer.svelte"
     },
     "./library_helpers.svelte.js": {
-      "default": "./dist/library_helpers.svelte.js",
-      "types": "./dist/library_helpers.svelte.d.ts"
+      "types": "./dist/library_helpers.svelte.d.ts",
+      "default": "./dist/library_helpers.svelte.js"
     },
     "./Library_Menu.svelte": {
+      "types": "./dist/Library_Menu.svelte.d.ts",
       "svelte": "./dist/Library_Menu.svelte",
-      "default": "./dist/Library_Menu.svelte",
-      "types": "./dist/Library_Menu.svelte.d.ts"
+      "default": "./dist/Library_Menu.svelte"
     },
     "./Library_Page_Links.svelte": {
+      "types": "./dist/Library_Page_Links.svelte.d.ts",
       "svelte": "./dist/Library_Page_Links.svelte",
-      "default": "./dist/Library_Page_Links.svelte",
-      "types": "./dist/Library_Page_Links.svelte.d.ts"
+      "default": "./dist/Library_Page_Links.svelte"
     },
     "./Library_Primary_Nav.svelte": {
+      "types": "./dist/Library_Primary_Nav.svelte.d.ts",
       "svelte": "./dist/Library_Primary_Nav.svelte",
-      "default": "./dist/Library_Primary_Nav.svelte",
-      "types": "./dist/Library_Primary_Nav.svelte.d.ts"
+      "default": "./dist/Library_Primary_Nav.svelte"
     },
     "./Library_Secondary_Nav.svelte": {
+      "types": "./dist/Library_Secondary_Nav.svelte.d.ts",
       "svelte": "./dist/Library_Secondary_Nav.svelte",
-      "default": "./dist/Library_Secondary_Nav.svelte",
-      "types": "./dist/Library_Secondary_Nav.svelte.d.ts"
+      "default": "./dist/Library_Secondary_Nav.svelte"
     },
     "./Library_Tertiary_Nav.svelte": {
+      "types": "./dist/Library_Tertiary_Nav.svelte.d.ts",
       "svelte": "./dist/Library_Tertiary_Nav.svelte",
-      "default": "./dist/Library_Tertiary_Nav.svelte",
-      "types": "./dist/Library_Tertiary_Nav.svelte.d.ts"
+      "default": "./dist/Library_Tertiary_Nav.svelte"
     },
     "./Library.svelte": {
+      "types": "./dist/Library.svelte.d.ts",
       "svelte": "./dist/Library.svelte",
-      "default": "./dist/Library.svelte",
-      "types": "./dist/Library.svelte.d.ts"
+      "default": "./dist/Library.svelte"
     },
     "./Mdn_Link.svelte": {
+      "types": "./dist/Mdn_Link.svelte.d.ts",
       "svelte": "./dist/Mdn_Link.svelte",
-      "default": "./dist/Mdn_Link.svelte",
-      "types": "./dist/Mdn_Link.svelte.d.ts"
+      "default": "./dist/Mdn_Link.svelte"
     },
     "./Mdn_Logo.svelte": {
+      "types": "./dist/Mdn_Logo.svelte.d.ts",
       "svelte": "./dist/Mdn_Logo.svelte",
-      "default": "./dist/Mdn_Logo.svelte",
-      "types": "./dist/Mdn_Logo.svelte.d.ts"
+      "default": "./dist/Mdn_Logo.svelte"
     },
     "./Moss_Logo.svelte": {
+      "types": "./dist/Moss_Logo.svelte.d.ts",
       "svelte": "./dist/Moss_Logo.svelte",
-      "default": "./dist/Moss_Logo.svelte",
-      "types": "./dist/Moss_Logo.svelte.d.ts"
+      "default": "./dist/Moss_Logo.svelte"
     },
     "./Package_Detail.svelte": {
+      "types": "./dist/Package_Detail.svelte.d.ts",
       "svelte": "./dist/Package_Detail.svelte",
-      "default": "./dist/Package_Detail.svelte",
-      "types": "./dist/Package_Detail.svelte.d.ts"
+      "default": "./dist/Package_Detail.svelte"
     },
     "./Package_Summary.svelte": {
+      "types": "./dist/Package_Summary.svelte.d.ts",
       "svelte": "./dist/Package_Summary.svelte",
-      "default": "./dist/Package_Summary.svelte",
-      "types": "./dist/Package_Summary.svelte.d.ts"
+      "default": "./dist/Package_Summary.svelte"
     },
     "./Pending_Animation.svelte": {
+      "types": "./dist/Pending_Animation.svelte.d.ts",
       "svelte": "./dist/Pending_Animation.svelte",
-      "default": "./dist/Pending_Animation.svelte",
-      "types": "./dist/Pending_Animation.svelte.d.ts"
+      "default": "./dist/Pending_Animation.svelte"
     },
     "./Pending_Button.svelte": {
+      "types": "./dist/Pending_Button.svelte.d.ts",
       "svelte": "./dist/Pending_Button.svelte",
-      "default": "./dist/Pending_Button.svelte",
-      "types": "./dist/Pending_Button.svelte.d.ts"
+      "default": "./dist/Pending_Button.svelte"
     },
     "./Redirect.svelte": {
+      "types": "./dist/Redirect.svelte.d.ts",
       "svelte": "./dist/Redirect.svelte",
-      "default": "./dist/Redirect.svelte",
-      "types": "./dist/Redirect.svelte.d.ts"
+      "default": "./dist/Redirect.svelte"
     },
     "./Spider.svelte": {
+      "types": "./dist/Spider.svelte.d.ts",
       "svelte": "./dist/Spider.svelte",
-      "default": "./dist/Spider.svelte",
-      "types": "./dist/Spider.svelte.d.ts"
+      "default": "./dist/Spider.svelte"
     },
     "./Spiders.svelte": {
+      "types": "./dist/Spiders.svelte.d.ts",
       "svelte": "./dist/Spiders.svelte",
-      "default": "./dist/Spiders.svelte",
-      "types": "./dist/Spiders.svelte.d.ts"
+      "default": "./dist/Spiders.svelte"
     },
     "./Spiderspace_Logo.svelte": {
+      "types": "./dist/Spiderspace_Logo.svelte.d.ts",
       "svelte": "./dist/Spiderspace_Logo.svelte",
-      "default": "./dist/Spiderspace_Logo.svelte",
-      "types": "./dist/Spiderspace_Logo.svelte.d.ts"
+      "default": "./dist/Spiderspace_Logo.svelte"
     },
     "./Teleport.svelte": {
+      "types": "./dist/Teleport.svelte.d.ts",
       "svelte": "./dist/Teleport.svelte",
-      "default": "./dist/Teleport.svelte",
-      "types": "./dist/Teleport.svelte.d.ts"
+      "default": "./dist/Teleport.svelte"
     },
     "./Theme_Input.svelte": {
+      "types": "./dist/Theme_Input.svelte.d.ts",
       "svelte": "./dist/Theme_Input.svelte",
-      "default": "./dist/Theme_Input.svelte",
-      "types": "./dist/Theme_Input.svelte.d.ts"
+      "default": "./dist/Theme_Input.svelte"
     },
     "./theme.js": {
-      "default": "./dist/theme.js",
-      "types": "./dist/theme.d.ts"
+      "types": "./dist/theme.d.ts",
+      "default": "./dist/theme.js"
     },
     "./Themed_Scope.svelte": {
+      "types": "./dist/Themed_Scope.svelte.d.ts",
       "svelte": "./dist/Themed_Scope.svelte",
-      "default": "./dist/Themed_Scope.svelte",
-      "types": "./dist/Themed_Scope.svelte.d.ts"
+      "default": "./dist/Themed_Scope.svelte"
     },
     "./Themed.svelte": {
+      "types": "./dist/Themed.svelte.d.ts",
       "svelte": "./dist/Themed.svelte",
-      "default": "./dist/Themed.svelte",
-      "types": "./dist/Themed.svelte.d.ts"
+      "default": "./dist/Themed.svelte"
     },
     "./Tome_Detail.svelte": {
+      "types": "./dist/Tome_Detail.svelte.d.ts",
       "svelte": "./dist/Tome_Detail.svelte",
-      "default": "./dist/Tome_Detail.svelte",
-      "types": "./dist/Tome_Detail.svelte.d.ts"
+      "default": "./dist/Tome_Detail.svelte"
     },
     "./Tome_Link.svelte": {
+      "types": "./dist/Tome_Link.svelte.d.ts",
       "svelte": "./dist/Tome_Link.svelte",
-      "default": "./dist/Tome_Link.svelte",
-      "types": "./dist/Tome_Link.svelte.d.ts"
+      "default": "./dist/Tome_Link.svelte"
     },
     "./Tome_Subheading.svelte": {
+      "types": "./dist/Tome_Subheading.svelte.d.ts",
       "svelte": "./dist/Tome_Subheading.svelte",
-      "default": "./dist/Tome_Subheading.svelte",
-      "types": "./dist/Tome_Subheading.svelte.d.ts"
+      "default": "./dist/Tome_Subheading.svelte"
     },
     "./Tome_Title.svelte": {
+      "types": "./dist/Tome_Title.svelte.d.ts",
       "svelte": "./dist/Tome_Title.svelte",
-      "default": "./dist/Tome_Title.svelte",
-      "types": "./dist/Tome_Title.svelte.d.ts"
+      "default": "./dist/Tome_Title.svelte"
     },
     "./tome.js": {
-      "default": "./dist/tome.js",
-      "types": "./dist/tome.d.ts"
+      "types": "./dist/tome.d.ts",
+      "default": "./dist/tome.js"
     },
     "./Zzz_Logo.svelte": {
+      "types": "./dist/Zzz_Logo.svelte.d.ts",
       "svelte": "./dist/Zzz_Logo.svelte",
-      "default": "./dist/Zzz_Logo.svelte",
-      "types": "./dist/Zzz_Logo.svelte.d.ts"
+      "default": "./dist/Zzz_Logo.svelte"
     }
   }
 }

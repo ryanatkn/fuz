@@ -9,8 +9,8 @@
 		pixelated_logo?: boolean;
 		repo_name?: Snippet<[repo_name: string]>;
 		logo?: Snippet<[logo_url: string]>;
-		motto?: Snippet<[motto: string, icon?: string]>;
-		description?: Snippet<[description: string, icon?: string]>;
+		motto?: Snippet<[motto: string, glyph?: string]>;
+		description?: Snippet<[description: string, glyph?: string]>;
 		npm_url?: Snippet<[npm_url: string]>;
 		homepage_url?: Snippet<[homepage_url: string]>;
 		children?: Snippet;
@@ -57,22 +57,22 @@
 	</header>
 	{#if package_json.motto}
 		{#if motto}
-			{@render motto(package_json.motto, package_json.icon)}
+			{@render motto(package_json.motto, package_json.glyph)}
 		{:else}
 			<blockquote>
 				{package_json.motto}
-				{package_json.icon}
+				{package_json.glyph}
 			</blockquote>
 		{/if}
 	{/if}
 	{#if package_json.description}
 		{#if description}
-			{@render description(package_json.description, package_json.icon)}
+			{@render description(package_json.description, package_json.glyph)}
 		{:else}
 			<p class="text_align_center">
 				{package_json.description}
 				{#if !package_json.motto}
-					{package_json.icon}
+					{package_json.glyph}
 				{/if}
 			</p>
 		{/if}

@@ -75,7 +75,7 @@
 						{@render repo_name(pkg.repo_name)}
 					{:else}
 						<div class="repo_name">
-							{pkg.repo_name}{#if package_json.icon}{' '}{package_json.icon}{/if}
+							{pkg.repo_name}{#if package_json.glyph}{' '}{package_json.glyph}{/if}
 						</div>
 					{/if}
 				</header>

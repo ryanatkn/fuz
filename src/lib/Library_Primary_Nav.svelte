@@ -36,7 +36,7 @@
 					{#if breadcrumb_children}
 						{@render breadcrumb_children(true)}
 					{:else}
-						{pkg.package_json.icon ?? '🏠'}
+						{pkg.package_json.glyph ?? '🏠'}
 					{/if}
 				</Breadcrumb>
 			</nav>

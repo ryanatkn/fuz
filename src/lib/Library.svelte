@@ -72,7 +72,7 @@
 							{#if breadcrumb_children}
 								{@render breadcrumb_children(false)}
 							{:else}
-								{pkg.package_json.icon ?? '🏠'}
+								{pkg.package_json.glyph ?? '🏠'}
 							{/if}
 						</Breadcrumb>
 					</div>
@@ -91,7 +91,7 @@
 					{#if breadcrumb_children}
 						{@render breadcrumb_children(false)}
 					{:else}
-						{pkg.package_json.icon ?? '🏠'}
+						{pkg.package_json.glyph ?? '🏠'}
 					{/if}
 				</Breadcrumb>
 			</div>
