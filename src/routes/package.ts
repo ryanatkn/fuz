@@ -25,7 +25,6 @@ export const package_json = {
 		start: 'gro start',
 		test: 'gro test',
 	},
-	files: ['dist', 'CHANGELOG.md'],
 	peerDependencies: {
 		'@ryanatkn/belt': '*',
 		'@ryanatkn/moss': '*',
@@ -68,6 +67,8 @@ export const package_json = {
 		bracketSpacing: false,
 		overrides: [{files: 'package.json', options: {useTabs: false}}],
 	},
+	sideEffects: ['**/*.css'],
+	files: ['dist'],
 	exports: {
 		'./package.json': './package.json',
 		'./Alert.svelte': {
