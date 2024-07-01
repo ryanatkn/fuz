@@ -2,6 +2,7 @@
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
 	interface Props {
+		fill?: string;
 		/**
 		 * Sets both the `width` and `height` of the svg. Overridden by the `width` and `height` props.
 		 */
@@ -14,7 +15,6 @@
 		 * Sets the `height` of the svg. Overrides `size`.
 		 */
 		height?: string;
-		fill?: string;
 		label?: string;
 		classes?: string;
 		path_attrs?: SvelteHTMLElements['path'];
@@ -22,10 +22,10 @@
 	}
 
 	const {
+		fill = '#f75e22', // TODO change to Moss orange color when it's added
 		size,
 		width,
 		height,
-		fill = '#f75e22', // TODO change to Moss orange color when it's added
 		label = 'a friendly pixelated spider facing you',
 		classes,
 		path_attrs,

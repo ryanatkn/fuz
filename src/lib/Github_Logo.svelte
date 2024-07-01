@@ -1,5 +1,6 @@
 <script lang="ts">
 	interface Props {
+		fill?: string;
 		/**
 		 * Sets both the `width` and `height` of the svg. Overridden by the `width` and `height` props.
 		 */
@@ -12,17 +13,16 @@
 		 * Sets the `height` of the svg. Overrides `size`.
 		 */
 		height?: string;
-		fill?: string;
 		label?: string;
 		classes?: string;
 		attrs?: any; // TODO type
 	}
 
 	const {
+		fill = 'var(--text_color, #000)',
 		size = 'var(--space_xl7, 64px)',
 		width,
 		height,
-		fill = 'var(--text_color, #000)',
 		label = 'the GitHub icon, an octocat silhouette',
 		classes,
 		attrs,

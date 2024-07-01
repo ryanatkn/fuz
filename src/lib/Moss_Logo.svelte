@@ -35,15 +35,6 @@
 		attrs,
 	}: Props = $props();
 
-	// TODO publish a plain SVG probably
-
-	// color:
-	// #298e29
-	// hsl(120, 55%, 36%)
-	// rgb(41, 142, 41)
-
-	// TODO BLOCK make the color `fill` and remove the span? could use `:global(.spider)` for the transform until a real svg is created
-
 	const transform = 'transform: scaleX(-1) rotate(180deg)';
 	const style = $derived(attrs?.style ? transform + '; ' + attrs.style : transform);
 </script>

@@ -1,5 +1,6 @@
 <script lang="ts">
 	interface Props {
+		fill?: string;
 		/**
 		 * Sets both the `width` and `height` of the svg. Overridden by the `width` and `height` props.
 		 */
@@ -12,7 +13,6 @@
 		 * Sets the `height` of the svg. Overrides `size`.
 		 */
 		height?: string;
-		fill?: string;
 		label?: string;
 		classes?: string;
 		attrs?: any;

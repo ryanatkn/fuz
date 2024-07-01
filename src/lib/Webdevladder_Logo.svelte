@@ -2,6 +2,7 @@
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
 	interface Props {
+		fill?: string;
 		/**
 		 * Sets both the `width` and `height` of the svg. Overridden by the `width` and `height` props.
 		 */
@@ -14,7 +15,6 @@
 		 * Sets the `height` of the svg. Overrides `size`.
 		 */
 		height?: string;
-		fill?: string;
 		label?: string;
 		classes?: string;
 		path_attrs?: SvelteHTMLElements['path'];
@@ -22,10 +22,10 @@
 	}
 
 	const {
+		fill = 'var(--text_color, #000)',
 		size,
 		width,
 		height,
-		fill = 'var(--text_color, #000)',
 		label = 'a spider web between the rungs of a ladder',
 		classes,
 		path_attrs,
