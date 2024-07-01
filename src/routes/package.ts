@@ -10,6 +10,7 @@ export const package_json = {
 	motto: 'friendly user zystem',
 	glyph: '🧶',
 	logo: 'logo.svg',
+	logo_alt: 'a friendly brown spider facing you',
 	public: true,
 	license: 'MIT',
 	homepage: 'https://www.fuz.dev/',
@@ -157,11 +158,6 @@ export const package_json = {
 			types: './dist/Fuz_Logo.svelte.d.ts',
 			svelte: './dist/Fuz_Logo.svelte',
 			default: './dist/Fuz_Logo.svelte',
-		},
-		'./Fuz_Template_Logo.svelte': {
-			types: './dist/Fuz_Template_Logo.svelte.d.ts',
-			svelte: './dist/Fuz_Template_Logo.svelte',
-			default: './dist/Fuz_Template_Logo.svelte',
 		},
 		'./Fuzling.svelte': {
 			types: './dist/Fuzling.svelte.d.ts',
@@ -406,7 +402,6 @@ export const src_json = {
 			declarations: [{name: 'Dimensions', kind: 'class'}],
 		},
 		'./Fuz_Logo.svelte': {path: 'Fuz_Logo.svelte', declarations: []},
-		'./Fuz_Template_Logo.svelte': {path: 'Fuz_Template_Logo.svelte', declarations: []},
 		'./Fuzling.svelte': {path: 'Fuzling.svelte', declarations: []},
 		'./Github_Logo.svelte': {path: 'Github_Logo.svelte', declarations: []},
 		'./Hashlink.svelte': {path: 'Hashlink.svelte', declarations: []},
