@@ -25,7 +25,7 @@
 		size,
 		width,
 		height,
-		fill = '#f75e22',
+		fill = '#f75e22', // TODO change to Moss orange color when it's added
 		label = 'a friendly pixelated spider facing you',
 		classes,
 		path_attrs,
