@@ -195,6 +195,11 @@
       "svelte": "./dist/Fuz_Template_Logo.svelte",
       "default": "./dist/Fuz_Template_Logo.svelte"
     },
+    "./Fuzling.svelte": {
+      "types": "./dist/Fuzling.svelte.d.ts",
+      "svelte": "./dist/Fuzling.svelte",
+      "default": "./dist/Fuzling.svelte"
+    },
     "./Github_Logo.svelte": {
       "types": "./dist/Github_Logo.svelte.d.ts",
       "svelte": "./dist/Github_Logo.svelte",
