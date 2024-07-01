@@ -8,7 +8,7 @@
 	interface Props {
 		pkg: Package_Meta; // TODO normalized version with cached primitives?
 		repo_name?: Snippet<[repo_name: string]>;
-		logo?: Snippet<[logo_url: string]>;
+		logo?: Snippet<[logo_url: string, logo_alt: string]>;
 		motto?: Snippet<[motto: string, glyph?: string]>;
 		description?: Snippet<[description: string, glyph?: string]>;
 		npm_url?: Snippet<[npm_url: string]>;
@@ -22,9 +22,11 @@
 	const {package_json} = $derived(pkg);
 
 	const logo_url = $derived(
-		pkg.homepage_url ? ensure_end(pkg.homepage_url, '/') + (pkg.logo ?? 'favicon.png') : undefined,
+		pkg.homepage_url
+			? ensure_end(pkg.homepage_url, '/') + (pkg.package_json.logo ?? 'favicon.png')
+			: undefined,
 	);
-	const logo_alt = pkg.logo_alt ?? `logo for ${pkg.repo_name}`;
+	const logo_alt = pkg.package_json.logo_alt ?? `logo for ${pkg.repo_name}`;
 </script>
 
 <div class="package_summary">
@@ -37,15 +39,17 @@
 		{/if}
 		<!-- TODO maybe add `icon_alt` to package.json -->
 		<!-- TODO what about svg logos? maybe a package.json logo url that defaults to favicon? -->
-		{#if logo}
-			{@render logo(logo_url, logo_alt)}
-		{:else}
-			<img
-				src={logo_url}
-				alt={logo_alt}
-				style:width="var(--size, var(--icon_size_xl2))"
-				style:height="var(--size, var(--icon_size_xl2))"
-			/>
+		{#if logo_url}
+			{#if logo}
+				{@render logo(logo_url, logo_alt)}
+			{:else}
+				<img
+					src={logo_url}
+					alt={logo_alt}
+					style:width="var(--size, var(--icon_size_xl2))"
+					style:height="var(--size, var(--icon_size_xl2))"
+				/>
+			{/if}
 		{/if}
 	</header>
 	{#if package_json.motto}

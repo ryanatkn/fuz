@@ -64,9 +64,11 @@
 	);
 
 	const logo_url = $derived(
-		pkg.homepage_url ? ensure_end(pkg.homepage_url, '/') + (pkg.logo ?? 'favicon.png') : undefined,
+		pkg.homepage_url
+			? ensure_end(pkg.homepage_url, '/') + (pkg.package_json.logo ?? 'favicon.png')
+			: undefined,
 	);
-	const logo_alt = pkg.logo_alt ?? `logo for ${pkg.repo_name}`;
+	const logo_alt = pkg.package_json.logo_alt ?? `logo for ${pkg.repo_name}`;
 </script>
 
 <div class="package_detail">
