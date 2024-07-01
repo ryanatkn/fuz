@@ -1,7 +1,11 @@
 <script lang="ts">
+	import type {SvelteHTMLElements} from 'svelte/elements';
+
 	import Spider from '$lib/Spider.svelte';
 
+	// TODO think about this API
 	interface Props {
+		fill?: string;
 		/**
 		 * Sets both the `width` and `height` of the svg. Overridden by the `width` and `height` props.
 		 */
@@ -16,12 +20,20 @@
 		height?: string;
 		label?: string;
 		classes?: string;
+		path_attrs?: SvelteHTMLElements['path'];
+		attrs?: SvelteHTMLElements['svg'];
 	}
 
-	const {size, width, height, label = 'a fuzzy tuft of green moss', classes}: Props = $props();
-
-	const final_width = $derived(width ?? size);
-	const final_height = $derived(height ?? size);
+	const {
+		fill = 'var(--color_b_5)',
+		size,
+		width,
+		height,
+		label = 'a fuzzy tuft of green moss',
+		classes,
+		path_attrs,
+		attrs,
+	}: Props = $props();
 
 	// TODO publish a plain SVG probably
 
@@ -31,17 +43,9 @@
 	// rgb(41, 142, 41)
 
 	// TODO BLOCK make the color `fill` and remove the span? could use `:global(.spider)` for the transform until a real svg is created
+
+	const transform = 'transform: scaleX(-1) rotate(180deg)';
+	const style = $derived(attrs?.style ? transform + '; ' + attrs.style : transform);
 </script>
 
-<span
-	style:--text_color="var(--color_b_5)"
-	class="inline_block"
-	style:width={final_width}
-	style:height={final_height}><Spider {label} {classes} /></span
->
-
-<style>
-	span {
-		transform: scaleX(-1) rotate(180deg);
-	}
-</style>
+<Spider {fill} {size} {width} {height} {label} {classes} {path_attrs} attrs={{...attrs, style}} />

@@ -1,8 +1,11 @@
 <script lang="ts">
+	import type {SvelteHTMLElements} from 'svelte/elements';
+
 	import Spider from '$lib/Spider.svelte';
 
 	// TODO think about this API
 	interface Props {
+		fill?: string;
 		/**
 		 * Sets both the `width` and `height` of the svg. Overridden by the `width` and `height` props.
 		 */
@@ -17,31 +20,20 @@
 		height?: string;
 		label?: string;
 		classes?: string;
+		path_attrs?: SvelteHTMLElements['path'];
+		attrs?: SvelteHTMLElements['svg'];
 	}
 
 	const {
+		fill = 'var(--color_e_5)',
 		size,
 		width,
 		height,
 		label = 'a friendly yellow spider facing you',
 		classes,
+		path_attrs,
+		attrs,
 	}: Props = $props();
-
-	const final_width = $derived(width ?? size);
-	const final_height = $derived(height ?? size);
-
-	// color:
-	// #b19a25
-	// hsl(50, 65%, 42%)
-	// rgb(177, 154, 37)
-
-	// TODO BLOCK make the color `fill` and remove the span?
 </script>
 
-<!-- TODO could potentially support the `image` option like `Fuz_Logo` -->
-<span
-	style:--text_color="var(--color_e_5)"
-	class="inline_block"
-	style:width={final_width}
-	style:height={final_height}><Spider {label} {classes} /></span
->
+<Spider {fill} {size} {width} {height} {label} {classes} {path_attrs} {attrs} />

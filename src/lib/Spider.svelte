@@ -2,6 +2,7 @@
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
 	interface Props {
+		fill?: string;
 		/**
 		 * Sets both the `width` and `height` of the svg. Overridden by the `width` and `height` props.
 		 */
@@ -14,18 +15,17 @@
 		 * Sets the `height` of the svg. Overrides `size`.
 		 */
 		height?: string;
-		fill?: string;
 		label?: string;
 		classes?: string;
-		path_attrs?: SvelteHTMLElements['path']; // TODO BLOCK forward for all derivatives
-		attrs?: SvelteHTMLElements['svg']; // TODO BLOCK forward for all derivatives
+		path_attrs?: SvelteHTMLElements['path'];
+		attrs?: SvelteHTMLElements['svg'];
 	}
 
 	const {
+		fill = 'var(--text_color, #000)',
 		size,
 		width,
 		height,
-		fill = 'var(--text_color, #000)',
 		label = 'a friendly spider facing you',
 		classes,
 		path_attrs,
