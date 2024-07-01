@@ -3,10 +3,10 @@
 	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
 	import type {Snippet} from 'svelte';
 	import {format_url} from '@ryanatkn/belt/url.js';
+	import {ensure_end} from '@ryanatkn/belt/string.js';
 
 	interface Props {
 		pkg: Package_Meta; // TODO normalized version with cached primitives?
-		pixelated_logo?: boolean;
 		repo_name?: Snippet<[repo_name: string]>;
 		logo?: Snippet<[logo_url: string]>;
 		motto?: Snippet<[motto: string, glyph?: string]>;
@@ -16,21 +16,15 @@
 		children?: Snippet;
 	}
 
-	const {
-		pkg,
-		pixelated_logo,
-		repo_name,
-		logo,
-		motto,
-		description,
-		npm_url,
-		homepage_url,
-		children,
-	}: Props = $props();
+	const {pkg, repo_name, logo, motto, description, npm_url, homepage_url, children}: Props =
+		$props();
 
 	const {package_json} = $derived(pkg);
 
-	const logo_url = $derived(pkg.homepage_url + '/favicon.png');
+	const logo_url = $derived(
+		pkg.homepage_url ? ensure_end(pkg.homepage_url, '/') + (pkg.logo ?? 'favicon.png') : undefined,
+	);
+	const logo_alt = pkg.logo_alt ?? `logo for ${pkg.repo_name}`;
 </script>
 
 <div class="package_summary">
@@ -44,14 +38,13 @@
 		<!-- TODO maybe add `icon_alt` to package.json -->
 		<!-- TODO what about svg logos? maybe a package.json logo url that defaults to favicon? -->
 		{#if logo}
-			{@render logo(logo_url)}
+			{@render logo(logo_url, logo_alt)}
 		{:else}
 			<img
-				class:pixelated={pixelated_logo}
+				src={logo_url}
+				alt={logo_alt}
 				style:width="var(--size, var(--icon_size_xl2))"
 				style:height="var(--size, var(--icon_size_xl2))"
-				src={logo_url}
-				alt="logo for {pkg.repo_name}"
 			/>
 		{/if}
 	</header>
