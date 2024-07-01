@@ -26,7 +26,7 @@
 		width,
 		height,
 		fill = 'var(--text_color, #000)',
-		label = 'a little brown spider',
+		label = 'a friendly spider facing you',
 		classes,
 		path_attrs,
 		attrs,

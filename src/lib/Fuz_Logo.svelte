@@ -18,7 +18,13 @@
 		classes?: string;
 	}
 
-	const {size, width, height, label = 'a little brown spider', classes}: Props = $props();
+	const {
+		size,
+		width,
+		height,
+		label = 'a friendly brown spider facing you',
+		classes,
+	}: Props = $props();
 
 	const final_width = $derived(width ?? size);
 	const final_height = $derived(height ?? size);
