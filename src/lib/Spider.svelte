@@ -24,7 +24,6 @@
 	viewBox="0 0 100 100"
 	width={size}
 	height={size}
-	fill="none"
 	{...attrs}
 >
 	<path

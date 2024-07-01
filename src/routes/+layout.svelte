@@ -9,6 +9,7 @@
 	import Themed from '$lib/Themed.svelte';
 	import {set_pkg} from '$routes/pkg.js';
 	import {package_json, src_json} from '$routes/package.js';
+	import Webdevladder_Logo from '$lib/Webdevladder_Logo.svelte';
 	import Spiders from '$lib/Spiders.svelte';
 	// TODO re-enable this, see comment below
 	// import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
@@ -36,6 +37,17 @@
 		or maybe disable this main contextmenu when in the library -->
 	<!-- <Contextmenu_Root> -->
 	{@render children()}
+	<div class="box row wrap">
+		<div style:width="512px">
+			<Webdevladder_Logo />
+		</div>
+		<div style:width="512px">
+			<Webdevladder_Logo fill="var(--color_b_5)" />
+		</div>
+		<div style:width="512px">
+			<Webdevladder_Logo size="128px" fill="var(--color_c_5)" />
+		</div>
+	</div>
 	<Spiders />
 	<!-- </Contextmenu_Root> -->
 	<!-- {#if show_settings}

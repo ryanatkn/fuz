@@ -20,7 +20,6 @@
 	viewBox="0 0 1024 1024"
 	style:width={size}
 	style:height={size}
-	fill="none"
 	{...attrs}
 >
 	<path
