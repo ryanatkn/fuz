@@ -9,11 +9,6 @@
 	import Themed from '$lib/Themed.svelte';
 	import {set_pkg} from '$routes/pkg.js';
 	import {package_json, src_json} from '$routes/package.js';
-	import Webdevladder_Logo from '$lib/Webdevladder_Logo.svelte';
-	import Zzz_Logo from '$lib/Zzz_Logo.svelte';
-	import Fuz_Logo from '$lib/Fuz_Logo.svelte';
-	import Moss_Logo from '$lib/Moss_Logo.svelte';
-	import Fuzling from '$lib/Fuzling.svelte';
 	import Spiders from '$lib/Spiders.svelte';
 	// TODO re-enable this, see comment below
 	// import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
@@ -41,64 +36,6 @@
 		or maybe disable this main contextmenu when in the library -->
 	<!-- <Contextmenu_Root> -->
 	{@render children()}
-	<div class="box row wrap">
-		<div style:width="92px"><img src="logo.svg" /></div>
-	</div>
-	<div class="box row wrap">
-		<div style:width="512px">
-			<Fuzling />
-		</div>
-		<div style:width="512px">
-			<Fuzling fill="var(--color_b_5)" />
-		</div>
-		<div style:width="512px">
-			<Fuzling size="128px" fill="var(--color_c_5)" />
-		</div>
-	</div>
-	<div class="box row wrap">
-		<div style:width="512px">
-			<Fuz_Logo />
-		</div>
-		<div style:width="512px">
-			<Fuz_Logo fill="var(--color_b_5)" />
-		</div>
-		<div style:width="512px">
-			<Fuz_Logo size="128px" fill="var(--color_c_5)" />
-		</div>
-	</div>
-	<div class="box row wrap">
-		<div style:width="512px">
-			<Moss_Logo />
-		</div>
-		<div style:width="512px">
-			<Moss_Logo fill="var(--color_b_5)" />
-		</div>
-		<div style:width="512px">
-			<Moss_Logo size="128px" fill="var(--color_c_5)" />
-		</div>
-	</div>
-	<div class="box row wrap">
-		<div style:width="512px">
-			<Webdevladder_Logo />
-		</div>
-		<div style:width="512px">
-			<Webdevladder_Logo fill="var(--color_b_5)" />
-		</div>
-		<div style:width="512px">
-			<Webdevladder_Logo size="128px" fill="var(--color_c_5)" />
-		</div>
-	</div>
-	<div class="box row wrap">
-		<div style:width="512px">
-			<Zzz_Logo />
-		</div>
-		<div style:width="512px">
-			<Zzz_Logo fill="var(--color_b_5)" />
-		</div>
-		<div style:width="512px">
-			<Zzz_Logo size="128px" fill="var(--color_c_5)" />
-		</div>
-	</div>
 	<Spiders />
 	<!-- </Contextmenu_Root> -->
 	<!-- {#if show_settings}
