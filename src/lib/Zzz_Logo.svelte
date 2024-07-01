@@ -1,24 +1,48 @@
 <script lang="ts">
-	import Spider from '$lib/Spider.svelte';
+	import type {SvelteHTMLElements} from 'svelte/elements';
 
-	// TODO think about this API
 	interface Props {
 		size?: string;
+		fill?: string;
 		label?: string;
+		path_attrs?: SvelteHTMLElements['path'];
+		attrs?: SvelteHTMLElements['svg'];
 	}
 
-	const {size, label = 'the Zzz logo, a little pink spider'}: Props = $props();
-
-	// color:
-	// #e03e81
-	// hsl(335, 72%, 56%)
-	// rgb(224, 62, 129)
+	const {
+		size = '100%',
+		fill = 'var(--text_color, #000)',
+		label = "three sleepy z's",
+		path_attrs,
+		attrs,
+	}: Props = $props();
 </script>
 
-<!-- TODO could potentially support the `image` option like `Fuz_Logo` -->
-<span
-	style:--text_color="var(--color_g_5)"
-	class="inline_block"
-	style:width={size}
-	style:height={size}><Spider {label} /></span
+<svg
+	xmlns="http://www.w3.org/2000/svg"
+	aria-label={label}
+	width={size}
+	height={size}
+	viewBox="0 0 100 100"
+	{...attrs}
 >
+	<g>
+		<path
+			style="fill:{fill}"
+			d="m 75.29285,61.962268 1.752156,1.914421 14.843359,1.811307 L 74.065203,86.193332 99.966781,85.408255 98.719988,83.648246 85.143565,82.136577 98.430963,62.887945"
+			{...path_attrs}
+		/>
+	</g>
+	<g>
+		<path
+			d="m 47.636533,44.203704 2.295155,2.48945 25.618425,0.406407 L 45.93783,91.082857 89.425317,93.78003 87.862334,91.36274 61.57861,83.03068 86.244719,42.177019"
+			style="fill:{fill}"
+			{...path_attrs}
+		/>
+		<path
+			style="fill:{fill}"
+			d="M 0.62464489,0.27405496 3.9721704,4.0993769 50.515703,10.089712 0.04581262,99.957542 68.009395,98.901532 65.391343,95.487941 24.119119,88.067804 66.301842,2.2896897"
+			{...path_attrs}
+		/>
+	</g>
+</svg>
