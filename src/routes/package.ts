@@ -318,10 +318,10 @@ export const package_json = {
 			default: './dist/Tome_Title.svelte',
 		},
 		'./tome.js': {types: './dist/tome.d.ts', default: './dist/tome.js'},
-		'./Wedevladder_Logo.svelte': {
-			types: './dist/Wedevladder_Logo.svelte.d.ts',
-			svelte: './dist/Wedevladder_Logo.svelte',
-			default: './dist/Wedevladder_Logo.svelte',
+		'./Webdevladder_Logo.svelte': {
+			types: './dist/Webdevladder_Logo.svelte.d.ts',
+			svelte: './dist/Webdevladder_Logo.svelte',
+			default: './dist/Webdevladder_Logo.svelte',
 		},
 		'./Zzz_Logo.svelte': {
 			types: './dist/Zzz_Logo.svelte.d.ts',
@@ -466,7 +466,7 @@ export const src_json = {
 				{name: 'get_tome', kind: 'function'},
 			],
 		},
-		'./Wedevladder_Logo.svelte': {path: 'Wedevladder_Logo.svelte', declarations: []},
+		'./Webdevladder_Logo.svelte': {path: 'Webdevladder_Logo.svelte', declarations: []},
 		'./Zzz_Logo.svelte': {path: 'Zzz_Logo.svelte', declarations: []},
 	},
 } satisfies Src_Json;

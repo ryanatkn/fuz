@@ -356,10 +356,10 @@
       "types": "./dist/tome.d.ts",
       "default": "./dist/tome.js"
     },
-    "./Wedevladder_Logo.svelte": {
-      "types": "./dist/Wedevladder_Logo.svelte.d.ts",
-      "svelte": "./dist/Wedevladder_Logo.svelte",
-      "default": "./dist/Wedevladder_Logo.svelte"
+    "./Webdevladder_Logo.svelte": {
+      "types": "./dist/Webdevladder_Logo.svelte.d.ts",
+      "svelte": "./dist/Webdevladder_Logo.svelte",
+      "default": "./dist/Webdevladder_Logo.svelte"
     },
     "./Zzz_Logo.svelte": {
       "types": "./dist/Zzz_Logo.svelte.d.ts",
