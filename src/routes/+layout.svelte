@@ -11,6 +11,8 @@
 	import {package_json, src_json} from '$routes/package.js';
 	import Webdevladder_Logo from '$lib/Webdevladder_Logo.svelte';
 	import Zzz_Logo from '$lib/Zzz_Logo.svelte';
+	import Fuz_Logo from '$lib/Fuz_Logo.svelte';
+	import Moss_Logo from '$lib/Moss_Logo.svelte';
 	import Fuzling from '$lib/Fuzling.svelte';
 	import Spiders from '$lib/Spiders.svelte';
 	// TODO re-enable this, see comment below
@@ -40,7 +42,7 @@
 	<!-- <Contextmenu_Root> -->
 	{@render children()}
 	<div class="box row wrap">
-		<div style:width="592px"><img src="favicon.svg" /></div>
+		<div style:width="592px"><img src="logo.svg" /></div>
 	</div>
 	<div class="box row wrap">
 		<div style:width="512px">
@@ -51,6 +53,28 @@
 		</div>
 		<div style:width="512px">
 			<Fuzling size="128px" fill="var(--color_c_5)" />
+		</div>
+	</div>
+	<div class="box row wrap">
+		<div style:width="512px">
+			<Fuz_Logo />
+		</div>
+		<div style:width="512px">
+			<Fuz_Logo fill="var(--color_b_5)" />
+		</div>
+		<div style:width="512px">
+			<Fuz_Logo size="128px" fill="var(--color_c_5)" />
+		</div>
+	</div>
+	<div class="box row wrap">
+		<div style:width="512px">
+			<Moss_Logo />
+		</div>
+		<div style:width="512px">
+			<Moss_Logo fill="var(--color_b_5)" />
+		</div>
+		<div style:width="512px">
+			<Moss_Logo size="128px" fill="var(--color_c_5)" />
 		</div>
 	</div>
 	<div class="box row wrap">
