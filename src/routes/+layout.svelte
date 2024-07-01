@@ -42,7 +42,7 @@
 	<!-- <Contextmenu_Root> -->
 	{@render children()}
 	<div class="box row wrap">
-		<div style:width="592px"><img src="logo.svg" /></div>
+		<div style:width="92px"><img src="logo.svg" /></div>
 	</div>
 	<div class="box row wrap">
 		<div style:width="512px">
