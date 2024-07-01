@@ -4,6 +4,7 @@
   "description": "Svelte UI library",
   "motto": "friendly user zystem",
   "glyph": "🧶",
+  "logo": "logo.svg",
   "public": true,
   "license": "MIT",
   "homepage": "https://www.fuz.dev/",
@@ -18,16 +19,16 @@
   },
   "bugs": "https://github.com/ryanatkn/fuz/issues",
   "funding": "https://www.ryanatkn.com/funding",
-  "type": "module",
-  "engines": {
-    "node": ">=20.12"
-  },
   "scripts": {
     "dev": "gro dev",
     "build": "gro build",
     "deploy": "gro deploy",
     "start": "gro start",
     "test": "gro test"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=20.12"
   },
   "peerDependencies": {
     "@ryanatkn/belt": "*",
