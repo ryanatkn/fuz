@@ -12,7 +12,7 @@
 	const {
 		size = '100%',
 		fill = 'var(--text_color, #000)',
-		label = 'a spider web between the runes of a ladder',
+		label = 'a spider web between the rungs of a ladder',
 		path_attrs,
 		attrs,
 	}: Props = $props();

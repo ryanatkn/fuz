@@ -39,6 +39,9 @@
 	<!-- <Contextmenu_Root> -->
 	{@render children()}
 	<div class="box row wrap">
+		<div style:width="592px"><img src="favicon.svg" /></div>
+	</div>
+	<div class="box row wrap">
 		<div style:width="512px">
 			<Webdevladder_Logo />
 		</div>
