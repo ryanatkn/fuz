@@ -16,6 +16,7 @@
 		height?: string;
 		fill?: string;
 		label?: string;
+		classes?: string;
 		path_attrs?: SvelteHTMLElements['path'];
 		attrs?: SvelteHTMLElements['svg'];
 	}
@@ -26,6 +27,7 @@
 		height,
 		fill = '#f75e22',
 		label = 'a friendly pixelated spider facing you',
+		classes,
 		path_attrs,
 		attrs,
 	}: Props = $props();
@@ -37,10 +39,11 @@
 <svg
 	xmlns="http://www.w3.org/2000/svg"
 	viewBox="0 0 100 100"
+	{...attrs}
 	aria-label={label}
 	width={final_width}
 	height={final_height}
-	{...attrs}
+	class={classes}
 >
 	<g>
 		<path

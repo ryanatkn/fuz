@@ -14,6 +14,7 @@
 		height?: string;
 		fill?: string;
 		label?: string;
+		classes?: string;
 		attrs?: any;
 	}
 
@@ -23,6 +24,7 @@
 		height,
 		fill = '#8cb4ff',
 		label = 'GitHub icon',
+		classes,
 		attrs,
 	}: Props = $props();
 
@@ -33,10 +35,11 @@
 <svg
 	xmlns="http://www.w3.org/2000/svg"
 	viewBox="0 0 100 100"
+	{...attrs}
 	aria-label={label}
 	style:width={final_width}
 	style:height={final_height}
-	{...attrs}
+	class={classes}
 >
 	<path
 		d="M42 .2 13.4 92.3H1.7L30.2.2Zm10.4 0v92.1H42V.2Zm40.3 0L64.2 92.3H52.5L81 .2Zm10.4 0v92.1H92.7V.2Z"

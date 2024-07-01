@@ -14,6 +14,7 @@
 		height?: string;
 		fill?: string;
 		label?: string;
+		classes?: string;
 		attrs?: any; // TODO type
 	}
 
@@ -23,6 +24,7 @@
 		height,
 		fill = 'var(--text_color, #000)',
 		label = 'the GitHub icon, an octocat silhouette',
+		classes,
 		attrs,
 	}: Props = $props();
 
@@ -33,10 +35,11 @@
 <svg
 	xmlns="http://www.w3.org/2000/svg"
 	viewBox="0 0 1024 1024"
+	{...attrs}
 	aria-label={label}
 	style:width={final_width}
 	style:height={final_height}
-	{...attrs}
+	class={classes}
 >
 	<path
 		{fill}

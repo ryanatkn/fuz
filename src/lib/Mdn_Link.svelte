@@ -26,7 +26,8 @@
 </script>
 
 <a {...attrs} href={final_href} class="chip">
-	<span class="logo_wrapper"><Mdn_Logo /></span>{#if typeof final_children === 'string'}
+	<span class="logo_wrapper"><Mdn_Logo classes="inline_block" /></span
+	>{#if typeof final_children === 'string'}
 		<span class="font_mono">{final_children}</span>
 	{:else}
 		{@render final_children()}

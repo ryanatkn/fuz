@@ -16,8 +16,9 @@
 		height?: string;
 		fill?: string;
 		label?: string;
-		path_attrs?: SvelteHTMLElements['path'];
-		attrs?: SvelteHTMLElements['svg'];
+		classes?: string;
+		path_attrs?: SvelteHTMLElements['path']; // TODO BLOCK forward for all derivatives
+		attrs?: SvelteHTMLElements['svg']; // TODO BLOCK forward for all derivatives
 	}
 
 	const {
@@ -26,6 +27,7 @@
 		height,
 		fill = 'var(--text_color, #000)',
 		label = 'a little brown spider',
+		classes,
 		path_attrs,
 		attrs,
 	}: Props = $props();
@@ -37,10 +39,11 @@
 <svg
 	xmlns="http://www.w3.org/2000/svg"
 	viewBox="0 0 100 100"
+	{...attrs}
 	aria-label={label}
 	width={final_width}
 	height={final_height}
-	{...attrs}
+	class={classes}
 >
 	<path
 		{fill}

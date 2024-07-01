@@ -16,9 +16,10 @@
 		 */
 		height?: string;
 		label?: string;
+		classes?: string;
 	}
 
-	const {size, width, height, label = 'a little yellow spider'}: Props = $props();
+	const {size, width, height, label = 'a little yellow spider', classes}: Props = $props();
 
 	const final_width = $derived(width ?? size);
 	const final_height = $derived(height ?? size);
@@ -36,5 +37,5 @@
 	style:--text_color="var(--color_e_5)"
 	class="inline_block"
 	style:width={final_width}
-	style:height={final_height}><Spider {label} /></span
+	style:height={final_height}><Spider {label} {classes} /></span
 >
