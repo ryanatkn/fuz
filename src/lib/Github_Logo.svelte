@@ -1,6 +1,17 @@
 <script lang="ts">
 	interface Props {
+		/**
+		 * Sets both `width` and `height`.
+		 */
 		size?: string;
+		/**
+		 * Overrides `size`.
+		 */
+		width?: string;
+		/**
+		 * Overrides `size`.
+		 */
+		height?: string;
 		fill?: string;
 		label?: string;
 		attrs?: any; // TODO type
@@ -8,18 +19,23 @@
 
 	const {
 		size = 'var(--space_xl7, 64px)',
+		width,
+		height,
 		fill = 'var(--text_color, #000)',
 		label = 'the GitHub icon, an octocat silhouette',
 		attrs,
 	}: Props = $props();
+
+	const final_width = $derived(width ?? size);
+	const final_height = $derived(height ?? size);
 </script>
 
 <svg
 	xmlns="http://www.w3.org/2000/svg"
-	aria-label={label}
 	viewBox="0 0 1024 1024"
-	style:width={size}
-	style:height={size}
+	aria-label={label}
+	style:width={final_width}
+	style:height={final_height}
 	{...attrs}
 >
 	<path

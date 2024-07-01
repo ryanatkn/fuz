@@ -11,6 +11,7 @@
 	import {package_json, src_json} from '$routes/package.js';
 	import Webdevladder_Logo from '$lib/Webdevladder_Logo.svelte';
 	import Zzz_Logo from '$lib/Zzz_Logo.svelte';
+	import Fuzling from '$lib/Fuzling.svelte';
 	import Spiders from '$lib/Spiders.svelte';
 	// TODO re-enable this, see comment below
 	// import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
@@ -40,6 +41,17 @@
 	{@render children()}
 	<div class="box row wrap">
 		<div style:width="592px"><img src="favicon.svg" /></div>
+	</div>
+	<div class="box row wrap">
+		<div style:width="512px">
+			<Fuzling />
+		</div>
+		<div style:width="512px">
+			<Fuzling fill="var(--color_b_5)" />
+		</div>
+		<div style:width="512px">
+			<Fuzling size="128px" fill="var(--color_c_5)" />
+		</div>
 	</div>
 	<div class="box row wrap">
 		<div style:width="512px">

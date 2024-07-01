@@ -1,13 +1,26 @@
 <script lang="ts">
 	import Spider from '$lib/Spider.svelte';
 
-	// TODO think about this API
 	interface Props {
+		/**
+		 * Sets both `width` and `height`.
+		 */
 		size?: string;
+		/**
+		 * Overrides `size`.
+		 */
+		width?: string;
+		/**
+		 * Overrides `size`.
+		 */
+		height?: string;
 		label?: string;
 	}
 
-	const {size, label = 'the Moss logo, a fuzzy tuft of green moss'}: Props = $props();
+	const {size, width, height, label = 'a fuzzy tuft of green moss'}: Props = $props();
+
+	const final_width = $derived(width ?? size);
+	const final_height = $derived(height ?? size);
 
 	// TODO publish a plain SVG probably
 
@@ -15,13 +28,15 @@
 	// #298e29
 	// hsl(120, 55%, 36%)
 	// rgb(41, 142, 41)
+
+	// TODO BLOCK make the color `fill` and remove the span? could use `:global(.spider)` for the transform until a real svg is created
 </script>
 
 <span
 	style:--text_color="var(--color_b_5)"
 	class="inline_block"
-	style:width={size}
-	style:height={size}><Spider {label} /></span
+	style:width={final_width}
+	style:height={final_height}><Spider {label} /></span
 >
 
 <style>

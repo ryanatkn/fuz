@@ -2,7 +2,18 @@
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
 	interface Props {
+		/**
+		 * Sets both `width` and `height`.
+		 */
 		size?: string;
+		/**
+		 * Overrides `size`.
+		 */
+		width?: string;
+		/**
+		 * Overrides `size`.
+		 */
+		height?: string;
 		fill?: string;
 		label?: string;
 		path_attrs?: SvelteHTMLElements['path'];
@@ -11,19 +22,24 @@
 
 	const {
 		size = '100%',
+		width,
+		height,
 		fill = 'var(--text_color, #000)',
 		label = 'a little brown spider',
 		path_attrs,
 		attrs,
 	}: Props = $props();
+
+	const final_width = $derived(width ?? size);
+	const final_height = $derived(height ?? size);
 </script>
 
 <svg
 	xmlns="http://www.w3.org/2000/svg"
-	aria-label={label}
 	viewBox="0 0 100 100"
-	width={size}
-	height={size}
+	aria-label={label}
+	width={final_width}
+	height={final_height}
 	{...attrs}
 >
 	<path

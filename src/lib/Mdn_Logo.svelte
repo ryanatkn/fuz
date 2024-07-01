@@ -1,6 +1,17 @@
 <script lang="ts">
 	interface Props {
+		/**
+		 * Sets both `width` and `height`.
+		 */
 		size?: string;
+		/**
+		 * Overrides `size`.
+		 */
+		width?: string;
+		/**
+		 * Overrides `size`.
+		 */
+		height?: string;
 		fill?: string;
 		label?: string;
 		attrs?: any;
@@ -8,20 +19,23 @@
 
 	const {
 		size = 'var(--size, var(--size_md))',
+		width,
+		height,
 		fill = '#8cb4ff',
 		label = 'GitHub icon',
 		attrs,
 	}: Props = $props();
 
-	// TODO do something more optimal
+	const final_width = $derived(width ?? size);
+	const final_height = $derived(height ?? size);
 </script>
 
 <svg
 	xmlns="http://www.w3.org/2000/svg"
-	aria-label={label}
 	viewBox="0 0 100 100"
-	style:width={size}
-	style:height={size}
+	aria-label={label}
+	style:width={final_width}
+	style:height={final_height}
 	{...attrs}
 >
 	<path
