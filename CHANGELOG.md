@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.106.0
+
+### Minor Changes
+
+- bump minor for breaking changes ([45ebcbb](https://github.com/ryanatkn/fuz/commit/45ebcbb))
+
 ## 0.105.3
 
 ### Patch Changes
