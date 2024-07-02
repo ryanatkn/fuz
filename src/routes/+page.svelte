@@ -18,13 +18,16 @@
 			<div class="width_sm panel p_lg shadow_inset_xs bg">
 				<p>
 					Fuz is a Svelte UI library with components and helpers for making friendly and helpful
-					websites. It's in early alpha and it will go through many breaking changes.
+					websites. It builds on my CSS framework <a href="https://moss.ryanatkn.com/">Moss</a>,
+					which is based on CSS custom properties, and Fuz continues those patterns. It's in early
+					alpha and will have many breaking changes.
 				</p>
 				<p>
 					Fuz is being made to support <a href="https://zzz.ryanatkn.com/">Zzz</a> and
 					<a href="https://www.ryanatkn.com/table">my other projects</a>
 					that focus on end-users. Fuz emphasizes capability and efficiency and tries to be simple for
-					those goals. Compared to most UI libraries, Fuz has fewer features and more opinions.
+					those goals. Compared to most UI libraries, Fuz has fewer features and more opinions, but the
+					eventual goal is to be fully-featured with high flexibility.
 				</p>
 				<p>
 					To learn more see <a href="{base}/library">the docs</a>
