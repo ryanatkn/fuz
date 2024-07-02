@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.105.2",
+  "version": "0.105.3",
   "modules": {
     "./package.json": {
       "path": "package.json",
@@ -195,8 +195,8 @@
       "path": "Fuz_Logo.svelte",
       "declarations": []
     },
-    "./Fuz_Template_Logo.svelte": {
-      "path": "Fuz_Template_Logo.svelte",
+    "./Fuzling.svelte": {
+      "path": "Fuzling.svelte",
       "declarations": []
     },
     "./Github_Logo.svelte": {
@@ -413,6 +413,10 @@
           "kind": "function"
         }
       ]
+    },
+    "./Webdevladder_Logo.svelte": {
+      "path": "Webdevladder_Logo.svelte",
+      "declarations": []
     },
     "./Zzz_Logo.svelte": {
       "path": "Zzz_Logo.svelte",
