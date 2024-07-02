@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.106.4
+
+### Patch Changes
+
+- add `Gro_Logo` ([33009ce](https://github.com/ryanatkn/fuz/commit/33009ce))
+
 ## 0.106.3
 
 ### Patch Changes
