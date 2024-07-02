@@ -9,6 +9,8 @@ export const package_json = {
 	description: 'Svelte UI library',
 	motto: 'friendly user zystem',
 	glyph: '🧶',
+	logo: 'logo.svg',
+	logo_alt: 'a friendly brown spider facing you',
 	public: true,
 	license: 'MIT',
 	homepage: 'https://www.fuz.dev/',
@@ -16,8 +18,6 @@ export const package_json = {
 	repository: {type: 'git', url: 'git+https://github.com/ryanatkn/fuz.git'},
 	bugs: 'https://github.com/ryanatkn/fuz/issues',
 	funding: 'https://www.ryanatkn.com/funding',
-	type: 'module',
-	engines: {node: '>=20.12'},
 	scripts: {
 		dev: 'gro dev',
 		build: 'gro build',
@@ -25,6 +25,8 @@ export const package_json = {
 		start: 'gro start',
 		test: 'gro test',
 	},
+	type: 'module',
+	engines: {node: '>=20.12'},
 	peerDependencies: {
 		'@ryanatkn/belt': '*',
 		'@ryanatkn/moss': '*',
@@ -36,8 +38,8 @@ export const package_json = {
 		'@ryanatkn/belt': '^0.23.0',
 		'@ryanatkn/eslint-config': '^0.1.3',
 		'@ryanatkn/fuz_code': '^0.15.0',
-		'@ryanatkn/gro': '^0.127.0',
-		'@ryanatkn/moss': '^0.6.2',
+		'@ryanatkn/gro': '^0.127.1',
+		'@ryanatkn/moss': '^0.6.3',
 		'@sveltejs/adapter-static': '^3.0.2',
 		'@sveltejs/kit': '^2.5.17',
 		'@sveltejs/package': '^2.3.2',
@@ -157,10 +159,10 @@ export const package_json = {
 			svelte: './dist/Fuz_Logo.svelte',
 			default: './dist/Fuz_Logo.svelte',
 		},
-		'./Fuz_Template_Logo.svelte': {
-			types: './dist/Fuz_Template_Logo.svelte.d.ts',
-			svelte: './dist/Fuz_Template_Logo.svelte',
-			default: './dist/Fuz_Template_Logo.svelte',
+		'./Fuzling.svelte': {
+			types: './dist/Fuzling.svelte.d.ts',
+			svelte: './dist/Fuzling.svelte',
+			default: './dist/Fuzling.svelte',
 		},
 		'./Github_Logo.svelte': {
 			types: './dist/Github_Logo.svelte.d.ts',
@@ -318,6 +320,11 @@ export const package_json = {
 			default: './dist/Tome_Title.svelte',
 		},
 		'./tome.js': {types: './dist/tome.d.ts', default: './dist/tome.js'},
+		'./Webdevladder_Logo.svelte': {
+			types: './dist/Webdevladder_Logo.svelte.d.ts',
+			svelte: './dist/Webdevladder_Logo.svelte',
+			default: './dist/Webdevladder_Logo.svelte',
+		},
 		'./Zzz_Logo.svelte': {
 			types: './dist/Zzz_Logo.svelte.d.ts',
 			svelte: './dist/Zzz_Logo.svelte',
@@ -395,7 +402,7 @@ export const src_json = {
 			declarations: [{name: 'Dimensions', kind: 'class'}],
 		},
 		'./Fuz_Logo.svelte': {path: 'Fuz_Logo.svelte', declarations: []},
-		'./Fuz_Template_Logo.svelte': {path: 'Fuz_Template_Logo.svelte', declarations: []},
+		'./Fuzling.svelte': {path: 'Fuzling.svelte', declarations: []},
 		'./Github_Logo.svelte': {path: 'Github_Logo.svelte', declarations: []},
 		'./Hashlink.svelte': {path: 'Hashlink.svelte', declarations: []},
 		'./Hue_Input.svelte': {path: 'Hue_Input.svelte', declarations: []},
@@ -461,6 +468,7 @@ export const src_json = {
 				{name: 'get_tome', kind: 'function'},
 			],
 		},
+		'./Webdevladder_Logo.svelte': {path: 'Webdevladder_Logo.svelte', declarations: []},
 		'./Zzz_Logo.svelte': {path: 'Zzz_Logo.svelte', declarations: []},
 	},
 } satisfies Src_Json;

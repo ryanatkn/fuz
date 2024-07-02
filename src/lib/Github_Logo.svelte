@@ -1,27 +1,45 @@
 <script lang="ts">
 	interface Props {
-		size?: string;
 		fill?: string;
+		/**
+		 * Sets both the `width` and `height` of the svg. Overridden by the `width` and `height` props.
+		 */
+		size?: string;
+		/**
+		 * Sets the `width` of the svg. Overrides `size`.
+		 */
+		width?: string;
+		/**
+		 * Sets the `height` of the svg. Overrides `size`.
+		 */
+		height?: string;
 		label?: string;
+		classes?: string;
 		attrs?: any; // TODO type
 	}
 
 	const {
-		size = 'var(--space_xl7, 64px)',
 		fill = 'var(--text_color, #000)',
+		size = 'var(--space_xl7, 64px)',
+		width,
+		height,
 		label = 'the GitHub icon, an octocat silhouette',
+		classes,
 		attrs,
 	}: Props = $props();
+
+	const final_width = $derived(width ?? size);
+	const final_height = $derived(height ?? size);
 </script>
 
 <svg
 	xmlns="http://www.w3.org/2000/svg"
-	aria-label={label}
 	viewBox="0 0 1024 1024"
-	style:width={size}
-	style:height={size}
-	fill="none"
 	{...attrs}
+	aria-label={label}
+	style:width={final_width}
+	style:height={final_height}
+	class={classes}
 >
 	<path
 		{fill}

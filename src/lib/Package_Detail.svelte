@@ -62,6 +62,13 @@
 				})
 			: null,
 	);
+
+	const logo_url = $derived(
+		pkg.homepage_url
+			? ensure_end(pkg.homepage_url, '/') + (pkg.package_json.logo ?? 'favicon.png')
+			: undefined,
+	);
+	const logo_alt = pkg.package_json.logo_alt ?? `logo for ${pkg.repo_name}`;
 </script>
 
 <div class="package_detail">
@@ -115,8 +122,8 @@
 									href={pkg.homepage_url}
 								>
 									<img
-										src="{ensure_end(pkg.homepage_url, '/')}favicon.png"
-										alt="favicon to homepage at {pkg.homepage_url}"
+										src={logo_url}
+										alt={logo_alt}
 										style:width="16px"
 										style:height="16px"
 										style:margin-right="var(--space_xs)"
@@ -168,14 +175,16 @@
 				</section>
 			</div>
 		</div>
-		<div class="logo">
-			<img
-				style:width="var(--size, var(--icon_size_xl3))"
-				style:height="var(--size, var(--icon_size_xl3))"
-				src="{pkg.homepage_url}/favicon.png"
-				alt="logo for {pkg.repo_name}"
-			/>
-		</div>
+		{#if logo_url}
+			<div class="logo">
+				<img
+					src={logo_url}
+					alt={logo_alt}
+					style:width="var(--size, var(--icon_size_xl3))"
+					style:height="var(--size, var(--icon_size_xl3))"
+				/>
+			</div>
+		{/if}
 	</div>
 	{#if modules && pkg.repo_url}
 		<section>

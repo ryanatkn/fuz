@@ -42,9 +42,7 @@
 <!-- TODO show when intersected in viewport, maybe inline `svelte-intersect` in Fuz? -->
 <div class="spiders" style:--width="{100 / spiders.length}%">
 	{#each shuffled as color, i (color)}
-		<div style:--text_color={color} class="col_2" style:transform="rotate({rotations[i]}deg)">
-			<Spider />
-		</div>
+		<Spider fill={color} attrs={{style: `transform: rotate(${rotations[i]}deg)`}} />
 	{/each}
 </div>
 
