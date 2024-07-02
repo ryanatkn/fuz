@@ -169,6 +169,11 @@ export const package_json = {
 			svelte: './dist/Github_Logo.svelte',
 			default: './dist/Github_Logo.svelte',
 		},
+		'./Gro_Logo.svelte': {
+			types: './dist/Gro_Logo.svelte.d.ts',
+			svelte: './dist/Gro_Logo.svelte',
+			default: './dist/Gro_Logo.svelte',
+		},
 		'./Hashlink.svelte': {
 			types: './dist/Hashlink.svelte.d.ts',
 			svelte: './dist/Hashlink.svelte',
@@ -404,6 +409,7 @@ export const src_json = {
 		'./Fuz_Logo.svelte': {path: 'Fuz_Logo.svelte', declarations: []},
 		'./Fuzling.svelte': {path: 'Fuzling.svelte', declarations: []},
 		'./Github_Logo.svelte': {path: 'Github_Logo.svelte', declarations: []},
+		'./Gro_Logo.svelte': {path: 'Gro_Logo.svelte', declarations: []},
 		'./Hashlink.svelte': {path: 'Hashlink.svelte', declarations: []},
 		'./Hue_Input.svelte': {path: 'Hue_Input.svelte', declarations: []},
 		'./Library_Content.svelte': {path: 'Library_Content.svelte', declarations: []},
