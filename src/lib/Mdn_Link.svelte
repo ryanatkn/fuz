@@ -9,23 +9,23 @@
 		/**
 		 * @example Web/HTML/Element
 		 */
-		href: string;
+		path: string;
 		attrs?: SvelteHTMLElements['a'];
 		children?: Snippet;
 	}
 
-	const {href, attrs, children}: Props = $props();
+	const {path, attrs, children}: Props = $props();
 
-	const final_href = $derived(
-		href.startsWith('https://')
-			? href
-			: `https://developer.mozilla.org/en-US/docs/${strip_start(href, '/')}`,
+	const href = $derived(
+		path.startsWith('https://')
+			? path
+			: `https://developer.mozilla.org/en-US/docs/${strip_start(path, '/')}`,
 	);
 
-	const final_children = $derived(children ?? strip_end(href, '/').split('/').at(-1)!);
+	const final_children = $derived(children ?? strip_end(path, '/').split('/').at(-1)!);
 </script>
 
-<a {...attrs} href={final_href} class="chip nowrap">
+<a {...attrs} {href} class="chip nowrap">
 	<Mdn_Logo
 		classes="inline_block mr_sm vertical_align_middle"
 	/>{#if typeof final_children === 'string'}

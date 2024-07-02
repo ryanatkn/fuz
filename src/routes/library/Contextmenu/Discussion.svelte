@@ -14,13 +14,13 @@
 	</p>
 	<p>
 		On touch devices, we detect tap-and-hold (aka longpress) instead of simply overriding the web's
-		<Mdn_Link href="Web/API/Element/contextmenu_event"
+		<Mdn_Link path="Web/API/Element/contextmenu_event"
 			><span class="font_mono">contextmenu</span> event</Mdn_Link
 		>
 		because iOS does not support this web standard as of July 2023 as described in
 		<a href="https://bugs.webkit.org/show_bug.cgi?id=213953">this WebKit bug report</a>. The Fuz
 		implementation therefore has hacks that may cause corner case bugs on various devices and
-		browsers, and it breaks <Mdn_Link href="Web/API/Navigator/vibrate"
+		browsers, and it breaks <Mdn_Link path="Web/API/Navigator/vibrate"
 			><span class="font_mono">navigator.vibrate</span></Mdn_Link
 		> on all mobile browsers that I've tested because it triggers the gesture on a timeout, not a user
 		action.
@@ -63,7 +63,7 @@
 			opened it
 		</li>
 		<li>
-			gives haptic feedback on open with <Mdn_Link href="Web/API/Navigator/vibrate"
+			gives haptic feedback on open with <Mdn_Link path="Web/API/Navigator/vibrate"
 				><span class="font_mono">navigator.vibrate</span></Mdn_Link
 			>
 			(currently broken, may remain so due to the iOS longpress workaround)

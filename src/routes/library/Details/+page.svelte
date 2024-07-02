@@ -16,7 +16,7 @@
 	<section>
 		<p>
 			The <code>Details</code> component is an alternative to the <Mdn_Link
-				href="Web/HTML/Element/details"
+				path="Web/HTML/Element/details"
 			/> element. By default it's lazy, and you can pass <code>eager</code> to render the children immediately
 			like the base element.
 		</p>
@@ -63,7 +63,7 @@
 	</section>
 	<section>
 		<Tome_Subheading text="With the base details element" slug="base-details-element">
-			With the base <Mdn_Link href="Web/HTML/Element/details" /> element
+			With the base <Mdn_Link path="Web/HTML/Element/details" /> element
 		</Tome_Subheading>
 		<Code
 			content={`<details>

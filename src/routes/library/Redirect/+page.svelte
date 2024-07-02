@@ -13,11 +13,11 @@
 <Tome_Detail {tome}>
 	<section>
 		<p>
-			Adds a redirect for a page using <Mdn_Link href="Web/HTTP/Redirections#html_redirections"
+			Adds a redirect for a page using <Mdn_Link path="Web/HTTP/Redirections#html_redirections"
 				>a meta tag</Mdn_Link
 			>
 			with
-			<Mdn_Link href="Web/HTML/Element/meta#http-equiv"
+			<Mdn_Link path="Web/HTML/Element/meta#http-equiv"
 				>the <span class="font_mono">refresh</span> header</Mdn_Link
 			>. Includes a rendered link and JS navigation fallback.
 		</p>

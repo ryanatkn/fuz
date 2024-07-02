@@ -65,7 +65,7 @@ Try selecting text and then opening the contextmenu on it.`;
 				<textarea placeholder="paste text here?" bind:value></textarea>
 			</label>
 			<p>
-				<Mdn_Link href="Web/HTML/Global_attributes/contenteditable" /> likewise has your browser's default
+				<Mdn_Link path="Web/HTML/Global_attributes/contenteditable" /> likewise has your browser's default
 				contextmenu behavior.
 			</p>
 			<p><code>contenteditable</code></p>
