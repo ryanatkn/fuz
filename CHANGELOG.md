@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.106.3
+
+### Patch Changes
+
+- fix logo size prop ([dc8b326](https://github.com/ryanatkn/fuz/commit/dc8b326))
+
 ## 0.106.2
 
 ### Patch Changes
