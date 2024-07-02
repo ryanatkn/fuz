@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.106.3",
+  "version": "0.106.4",
   "description": "Svelte UI library",
   "motto": "friendly user zystem",
   "glyph": "🧶",
@@ -200,6 +200,11 @@
       "types": "./dist/Github_Logo.svelte.d.ts",
       "svelte": "./dist/Github_Logo.svelte",
       "default": "./dist/Github_Logo.svelte"
+    },
+    "./Gro_Logo.svelte": {
+      "types": "./dist/Gro_Logo.svelte.d.ts",
+      "svelte": "./dist/Gro_Logo.svelte",
+      "default": "./dist/Gro_Logo.svelte"
     },
     "./Hashlink.svelte": {
       "types": "./dist/Hashlink.svelte.d.ts",
