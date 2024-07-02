@@ -15,8 +15,8 @@
 			>. It's in early alpha and there will be many breaking changes. I'm making it to support
 			<a href="https://zzz.ryanatkn.com/">Zzz</a>
 			and
-			<a href="https://www.ryanatkn.com/">my other projects</a> that focus on end-users, so it'll grow
-			slowly as I find the time and usecases.
+			<a href="https://www.ryanatkn.com/">my other projects</a> that focus on end-users, so it'll continue
+			to grow slowly as I find the time and usecases.
 		</p>
 		<p>
 			These docs are a work in progress - for an overview see

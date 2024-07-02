@@ -40,6 +40,11 @@
 <Tome_Detail {tome}>
 	<section class="theme">
 		<p>
+			Fuz provides UI components that use <a href="https://moss.ryanatkn.com/library/themes"
+				>Moss' theming system</a
+			> for dark mode and custom themes.
+		</p>
+		<p>
 			<code>Themed</code> adds global support for both the browser's
 			<Mdn_Link href="Web/CSS/color-scheme" />
 			and custom themes based on
