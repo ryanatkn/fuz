@@ -1,6 +1,6 @@
-[<img src="/static/logo.svg" alt="a friendly brown spider facing you" align="right" width="192" height="192">](https://www.fuz.dev/)
-
 # `@ryanatkn/fuz`
+
+[<img src="static/logo.svg" alt="a friendly brown spider facing you" align="right" width="192" height="192">](https://www.fuz.dev/)
 
 > friendly user zystem 🧶 [fuz.dev](https://www.fuz.dev/)
 
