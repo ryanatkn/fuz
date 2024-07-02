@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.107.0
+
+### Minor Changes
+
+- rename `Mdn_Link` prop `path` from `href` ([38ee414](https://github.com/ryanatkn/fuz/commit/38ee414))
+
 ## 0.106.4
 
 ### Patch Changes
