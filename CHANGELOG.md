@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.106.2
+
+### Patch Changes
+
+- fix logo colors ([619e744](https://github.com/ryanatkn/fuz/commit/619e744))
+
 ## 0.106.1
 
 ### Patch Changes
