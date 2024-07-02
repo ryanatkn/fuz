@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.106.1
+
+### Patch Changes
+
+- use standard favicon size in `Package_Detail` ([2d7a92f](https://github.com/ryanatkn/fuz/commit/2d7a92f))
+
 ## 0.106.0
 
 ### Minor Changes
