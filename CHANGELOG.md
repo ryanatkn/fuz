@@ -1,5 +1,13 @@
 # @ryanatkn/fuz
 
+## 0.105.3
+
+### Patch Changes
+
+- add logos for webdevladder and zzz ([#33](https://github.com/ryanatkn/fuz/pull/33))
+- add support for `logo` and `logo_alt` in `Package_Json` ([#33](https://github.com/ryanatkn/fuz/pull/33))
+- add `sideEffects` to `package.json` ([85b92a8](https://github.com/ryanatkn/fuz/commit/85b92a8))
+
 ## 0.105.2
 
 ### Patch Changes
