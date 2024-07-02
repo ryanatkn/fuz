@@ -24,12 +24,12 @@
 		</p>
 		<p>
 			The goal is to make a fully-featured Svelte UI library, but it'll take extra time to get
-			there. That lets us prioritize patterns like APIs above features in the meantime, making it an
-			interesting project for learning and experimentation. Feel free to take the code and ideas for
-			your own purposes. If you're interested in using Fuz, helping out, or just following along,
-			see <a href="https://github.com/ryanatkn/fuz/blob/main/contributing.md">contributing.md</a>
-			and visit
-			<a href="https://discord.gg/YU5tyeK72X">the Discord</a>.
+			there. That lets us prioritize patterns like APIs above features, making it an interesting
+			project for learning and experimentation. If you're interested in using Fuz, helping out, or
+			just following along, see <a href="https://github.com/ryanatkn/fuz/blob/main/contributing.md"
+				>contributing.md</a
+			>
+			and visit <a href="https://discord.gg/YU5tyeK72X">the Discord</a>.
 		</p>
 	</section>
 </Tome_Detail>
