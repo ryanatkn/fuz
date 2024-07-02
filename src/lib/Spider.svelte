@@ -41,8 +41,8 @@
 	viewBox="0 0 100 100"
 	{...attrs}
 	aria-label={label}
-	width={final_width}
-	height={final_height}
+	style:width={final_width}
+	style:height={final_height}
 	class={classes}
 >
 	<path
