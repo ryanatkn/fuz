@@ -180,8 +180,8 @@
 				<img
 					src={logo_url}
 					alt={logo_alt}
-					style:width="var(--size, var(--icon_size_xl3))"
-					style:height="var(--size, var(--icon_size_xl3))"
+					style:width="var(--size, var(--icon_size_xl2))"
+					style:height="var(--size, var(--icon_size_xl2))"
 				/>
 			</div>
 		{/if}
