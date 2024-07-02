@@ -22,7 +22,7 @@
 	}
 
 	const {
-		fill = 'var(--text_color, #000)',
+		fill = 'var(--color_g_5)',
 		size,
 		width,
 		height,

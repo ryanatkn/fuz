@@ -22,11 +22,11 @@
 	}
 
 	const {
-		fill = 'var(--text_color, #000)',
+		fill = 'var(--color_b_5)',
 		size,
 		width,
 		height,
-		label = 'a spider web between the rungs of a ladder',
+		label = 'a spider web between two rungs of a ladder',
 		classes,
 		path_attrs,
 		attrs,
