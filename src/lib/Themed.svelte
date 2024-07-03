@@ -28,7 +28,7 @@
 </script>
 
 <script lang="ts">
-	import {getContext, onDestroy, onMount, setContext, type Snippet} from 'svelte';
+	import {getContext, onDestroy, onMount, setContext, untrack, type Snippet} from 'svelte';
 	import {writable, type Writable} from 'svelte/store';
 	import {render_theme_style, type Theme, type Color_Scheme} from '@ryanatkn/moss/theme.js';
 	import {DEFAULT_THEME} from '@ryanatkn/moss/themes.js';
@@ -129,22 +129,34 @@
 	const theme_style_html = $derived(style ? create_theme_style_html(style) : null);
 	const theme_setup_script = $derived(create_theme_setup_script(color_scheme_fallback));
 
-	// TODO improve this pattern? got worse bc the $effect needs to read the value before the short-circuiting check
-	let c1 = 0; // hackily skip the first call
+	// TODO BLOCK improve this pattern with a reusable helper
+	let c1 = false; // hackily skip the first call
 	$effect(() => {
 		const v = $selected_color_scheme;
-		if (c1++) sync_color_scheme?.(v);
+		if (!untrack(() => c1)) {
+			c1 = true;
+		} else {
+			sync_color_scheme?.(v);
+		}
 	});
-	let c2 = 0; // hackily skip the first call
+	let c2 = false; // hackily skip the first call
 	$effect(() => {
 		const v = $selected_color_scheme;
-		if (c2++) save_color_scheme?.(v);
+		if (!untrack(() => c2)) {
+			c2 = true;
+		} else {
+			save_color_scheme?.(v);
+		}
 	});
 
-	let t = 0; // hackily skip the first call
+	let t = false; // hackily skip the first call
 	$effect(() => {
 		const v = $selected_theme;
-		if (t++) save_theme?.(v);
+		if (!untrack(() => t)) {
+			t = true;
+		} else {
+			save_theme?.(v);
+		}
 	});
 
 	// TODO this is messy and probably wrong -- do we want both values?
