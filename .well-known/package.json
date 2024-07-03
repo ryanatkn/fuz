@@ -301,6 +301,10 @@
       "svelte": "./dist/Redirect.svelte",
       "default": "./dist/Redirect.svelte"
     },
+    "./rune_helpers.svelte.js": {
+      "types": "./dist/rune_helpers.svelte.d.ts",
+      "default": "./dist/rune_helpers.svelte.js"
+    },
     "./Spider.svelte": {
       "types": "./dist/Spider.svelte.d.ts",
       "svelte": "./dist/Spider.svelte",

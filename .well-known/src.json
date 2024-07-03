@@ -312,6 +312,15 @@
       "path": "Redirect.svelte",
       "declarations": []
     },
+    "./rune_helpers.svelte.js": {
+      "path": "rune_helpers.svelte.ts",
+      "declarations": [
+        {
+          "name": "effect_skip",
+          "kind": "function"
+        }
+      ]
+    },
     "./Spider.svelte": {
       "path": "Spider.svelte",
       "declarations": []
