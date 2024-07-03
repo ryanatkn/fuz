@@ -219,7 +219,7 @@
 	<section class="theme">
 		<Tome_Subheading text="Theme usage" slug="theme-usage" />
 		<p>Themes are plain CSS that can be sourced in a variety of ways.</p>
-		<p>To use fuz's base theme:</p>
+		<p>To use Fuz's base theme:</p>
 		<Code
 			content={`<!-- +layout.svelte -->
 <script>
@@ -265,7 +265,7 @@ $selected_theme.name; // '${$selected_theme.name}'
 import {get_color_scheme} from '@ryanatkn/fuz/theme.js';
 const selected_color_scheme = get_color_scheme();
 $selected_color_scheme; // '${$selected_color_scheme}'`}
-			lang="js"
+			lang="ts"
 		/>
 		<Details>
 			{#snippet summary()}More about <code>Themed</code>{/snippet}
