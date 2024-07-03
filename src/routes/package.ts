@@ -269,6 +269,10 @@ export const package_json = {
 			svelte: './dist/Redirect.svelte',
 			default: './dist/Redirect.svelte',
 		},
+		'./rune_helpers.svelte.js': {
+			types: './dist/rune_helpers.svelte.d.ts',
+			default: './dist/rune_helpers.svelte.js',
+		},
 		'./Spider.svelte': {
 			types: './dist/Spider.svelte.d.ts',
 			svelte: './dist/Spider.svelte',
@@ -441,6 +445,10 @@ export const src_json = {
 		'./Pending_Animation.svelte': {path: 'Pending_Animation.svelte', declarations: []},
 		'./Pending_Button.svelte': {path: 'Pending_Button.svelte', declarations: []},
 		'./Redirect.svelte': {path: 'Redirect.svelte', declarations: []},
+		'./rune_helpers.svelte.js': {
+			path: 'rune_helpers.svelte.ts',
+			declarations: [{name: 'effect_skip', kind: 'function'}],
+		},
 		'./Spider.svelte': {path: 'Spider.svelte', declarations: []},
 		'./Spiders.svelte': {path: 'Spiders.svelte', declarations: []},
 		'./Spiderspace_Logo.svelte': {path: 'Spiderspace_Logo.svelte', declarations: []},

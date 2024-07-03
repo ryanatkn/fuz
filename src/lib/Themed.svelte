@@ -42,6 +42,7 @@
 		save_theme as default_save_theme,
 		load_theme as default_load_theme,
 	} from '$lib/theme.js';
+	import {effect_skip} from '$lib/rune_helpers.svelte.js';
 
 	interface Props {
 		sync_color_scheme?: typeof default_sync_color_scheme;
@@ -129,22 +130,20 @@
 	const theme_style_html = $derived(style ? create_theme_style_html(style) : null);
 	const theme_setup_script = $derived(create_theme_setup_script(color_scheme_fallback));
 
-	// TODO improve this pattern? got worse bc the $effect needs to read the value before the short-circuiting check
-	let c1 = 0; // hackily skip the first call
-	$effect(() => {
+	effect_skip((skip) => {
 		const v = $selected_color_scheme;
-		if (c1++) sync_color_scheme?.(v);
+		if (skip) return;
+		sync_color_scheme?.(v);
 	});
-	let c2 = 0; // hackily skip the first call
-	$effect(() => {
+	effect_skip((skip) => {
 		const v = $selected_color_scheme;
-		if (c2++) save_color_scheme?.(v);
+		if (skip) return;
+		save_color_scheme?.(v); // helper may change, so is separate from `sync_color_scheme`
 	});
-
-	let t = 0; // hackily skip the first call
-	$effect(() => {
+	effect_skip((skip) => {
 		const v = $selected_theme;
-		if (t++) save_theme?.(v);
+		if (skip) return;
+		save_theme?.(v);
 	});
 
 	// TODO this is messy and probably wrong -- do we want both values?
