@@ -21,11 +21,13 @@
   "bugs": "https://github.com/ryanatkn/fuz/issues",
   "funding": "https://www.ryanatkn.com/funding",
   "scripts": {
+    "start": "gro dev",
     "dev": "gro dev",
     "build": "gro build",
-    "deploy": "gro deploy",
-    "start": "gro start",
-    "test": "gro test"
+    "check": "gro check",
+    "test": "gro test",
+    "preview": "vite preview",
+    "deploy": "gro deploy"
   },
   "type": "module",
   "engines": {
