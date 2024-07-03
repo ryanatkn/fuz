@@ -6,6 +6,7 @@
 	import {get, writable, type Writable} from 'svelte/store';
 	import type {Snippet} from 'svelte';
 	import {render_theme_style, type Theme, type Color_Scheme} from '@ryanatkn/moss/theme.js';
+	import {BROWSER} from 'esm-env';
 
 	import {
 		set_color_scheme,
@@ -76,7 +77,7 @@
 	const final_color__scheme = $derived(
 		$selected_color_scheme === 'dark' || $selected_color_scheme === 'light'
 			? $selected_color_scheme
-			: !import.meta.env.SSR && matchMedia('(prefers-color-scheme: dark)').matches
+			: BROWSER && matchMedia('(prefers-color-scheme: dark)').matches
 				? 'dark'
 				: 'light',
 	); // fallback to best guess
