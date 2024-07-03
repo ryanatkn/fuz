@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.107.1
+
+### Patch Changes
+
+- switch to use `esm-env` from `import.meta.env` ([#35](https://github.com/ryanatkn/fuz/pull/35))
+
 ## 0.107.0
 
 ### Minor Changes
