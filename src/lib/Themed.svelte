@@ -32,6 +32,7 @@
 	import {writable, type Writable} from 'svelte/store';
 	import {render_theme_style, type Theme, type Color_Scheme} from '@ryanatkn/moss/theme.js';
 	import {DEFAULT_THEME} from '@ryanatkn/moss/themes.js';
+	import {BROWSER, DEV} from 'esm-env';
 
 	import {
 		create_theme_setup_script,
@@ -94,7 +95,7 @@
 
 	// In dev mode only, warn about misuse of the singleton `Themed`.
 	// Use `Themed_Scope` for non-global themes and color schemes.
-	if (import.meta.env.DEV) {
+	if (DEV) {
 		onMount(() => {
 			if (mounted) {
 				console.warn('more than one Themed was mounted, use Themed_Scope if this was intended'); // eslint-disable-line no-console
@@ -152,7 +153,7 @@
 		color_scheme_css ??
 			(color_scheme_fallback === 'dark' || color_scheme_fallback === 'light'
 				? color_scheme_fallback
-				: !import.meta.env.SSR && matchMedia('(prefers-color-scheme: dark)').matches
+				: BROWSER && matchMedia('(prefers-color-scheme: dark)').matches
 					? 'dark light'
 					: 'light dark'),
 	);

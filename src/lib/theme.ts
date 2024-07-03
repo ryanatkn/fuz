@@ -1,8 +1,9 @@
 import {color_schemes, type Color_Scheme, type Theme} from '@ryanatkn/moss/theme.js';
 import {default_themes} from '@ryanatkn/moss/themes.js';
+import {BROWSER} from 'esm-env';
 
 export const sync_color_scheme = (color_scheme: Color_Scheme | null): void => {
-	if (import.meta.env.SSR) return;
+	if (!BROWSER) return;
 	if (
 		color_scheme === 'dark' ||
 		(color_scheme !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches)
@@ -20,7 +21,7 @@ export const save_color_scheme = (
 	color_scheme: Color_Scheme | null,
 	key = COLOR_SCHEME_STORAGE_KEY,
 ): void => {
-	if (import.meta.env.SSR) return;
+	if (!BROWSER) return;
 	try {
 		if (color_scheme === null) {
 			localStorage.removeItem(key);
@@ -34,7 +35,7 @@ export const load_color_scheme = (
 	fallback: Color_Scheme | null = 'auto',
 	key = COLOR_SCHEME_STORAGE_KEY,
 ): Color_Scheme | null => {
-	if (import.meta.env.SSR) return null;
+	if (!BROWSER) return null;
 	let stored: any;
 	try {
 		stored = localStorage.getItem(key);
@@ -51,7 +52,7 @@ export const load_color_scheme = (
 export const THEME_STORAGE_KEY = 'theme';
 
 export const save_theme = (theme: Theme | null, key = THEME_STORAGE_KEY): void => {
-	if (import.meta.env.SSR) return;
+	if (!BROWSER) return;
 	try {
 		if (theme === null) {
 			localStorage.removeItem(key);
@@ -62,7 +63,7 @@ export const save_theme = (theme: Theme | null, key = THEME_STORAGE_KEY): void =
 };
 
 export const load_theme = (fallback: Theme = default_themes[0], key = THEME_STORAGE_KEY): Theme => {
-	if (import.meta.env.SSR) return fallback;
+	if (!BROWSER) return fallback;
 	try {
 		const v = localStorage.getItem(key);
 		const stored = v === null ? v : JSON.parse(v);
