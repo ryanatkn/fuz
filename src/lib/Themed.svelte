@@ -28,7 +28,7 @@
 </script>
 
 <script lang="ts">
-	import {getContext, onDestroy, onMount, setContext, untrack, type Snippet} from 'svelte';
+	import {getContext, onDestroy, onMount, setContext, type Snippet} from 'svelte';
 	import {writable, type Writable} from 'svelte/store';
 	import {render_theme_style, type Theme, type Color_Scheme} from '@ryanatkn/moss/theme.js';
 	import {DEFAULT_THEME} from '@ryanatkn/moss/themes.js';
@@ -42,6 +42,7 @@
 		save_theme as default_save_theme,
 		load_theme as default_load_theme,
 	} from '$lib/theme.js';
+	import {effect_skip} from '$lib/rune_helpers.svelte.js';
 
 	interface Props {
 		sync_color_scheme?: typeof default_sync_color_scheme;
@@ -129,34 +130,20 @@
 	const theme_style_html = $derived(style ? create_theme_style_html(style) : null);
 	const theme_setup_script = $derived(create_theme_setup_script(color_scheme_fallback));
 
-	// TODO BLOCK improve this pattern with a reusable helper
-	let c1 = false; // hackily skip the first call
-	$effect(() => {
+	effect_skip((skip) => {
 		const v = $selected_color_scheme;
-		if (!untrack(() => c1)) {
-			c1 = true;
-		} else {
-			sync_color_scheme?.(v);
-		}
+		if (skip) return;
+		sync_color_scheme?.(v);
 	});
-	let c2 = false; // hackily skip the first call
-	$effect(() => {
+	effect_skip((skip) => {
 		const v = $selected_color_scheme;
-		if (!untrack(() => c2)) {
-			c2 = true;
-		} else {
-			save_color_scheme?.(v);
-		}
+		if (skip) return;
+		save_color_scheme?.(v); // helper may change, so is separate from `sync_color_scheme`
 	});
-
-	let t = false; // hackily skip the first call
-	$effect(() => {
+	effect_skip((skip) => {
 		const v = $selected_theme;
-		if (!untrack(() => t)) {
-			t = true;
-		} else {
-			save_theme?.(v);
-		}
+		if (skip) return;
+		save_theme?.(v);
 	});
 
 	// TODO this is messy and probably wrong -- do we want both values?
