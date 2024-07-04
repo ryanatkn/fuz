@@ -8,7 +8,7 @@
 		children?: Snippet;
 	}
 
-	let {value = $bindable(180), oninput, children}: Props = $props(); // eslint-disable-line prefer-const
+	let {value = $bindable(180), oninput, children}: Props = $props();
 
 	// TODO probably upstream this to belt
 	const parse_hue = (v: any): Hue | null => {
