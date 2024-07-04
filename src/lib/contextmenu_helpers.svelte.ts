@@ -2,6 +2,7 @@ import {getContext, onDestroy, setContext, type Snippet} from 'svelte';
 import type {Result} from '@ryanatkn/belt/result.js';
 import {is_promise} from '@ryanatkn/belt/async.js';
 import type {ActionReturn} from 'svelte/action';
+import {BROWSER} from 'esm-env';
 
 import {Dimensions} from '$lib/dimensions.svelte.js';
 
@@ -12,6 +13,7 @@ export type Contextmenu_Params =
 	| {snippet: 'text'; props: {content: string; icon: string; run: Contextmenu_Run}};
 
 // TODO fix this type
+// eslint-disable-next-line @typescript-eslint/no-duplicate-type-constituents
 type Activate_Result = Result<any, {message?: string}> | any; // eslint-disable-line @typescript-eslint/no-redundant-type-constituents
 
 export type Item_State = Submenu_State | Entry_State;
@@ -54,10 +56,8 @@ export class Root_Menu_State {
 	items: Item_State[] = $state([]);
 }
 
-export interface Contextmenu_Run {
-	// TODO fix this type
-	(): unknown | Promise<Activate_Result>; // eslint-disable-line @typescript-eslint/no-redundant-type-constituents
-}
+// TODO fix this type
+export type Contextmenu_Run = () => unknown | Promise<Activate_Result>; // eslint-disable-line @typescript-eslint/no-redundant-type-constituents
 
 export interface Contextmenu_Store_Options {
 	link_snippet?: [href: string, icon?: Snippet<[icon: string]>];
@@ -94,7 +94,7 @@ export class Contextmenu_Store {
 	constructor(options?: Contextmenu_Store_Options) {
 		this.initial_layout = options?.layout;
 
-		this.layout = this.initial_layout || new Dimensions();
+		this.layout = this.initial_layout ?? new Dimensions();
 	}
 
 	open(params: Contextmenu_Params[], x: number, y: number): void {
@@ -174,8 +174,11 @@ export class Contextmenu_Store {
 	}
 
 	activate_selected(): void | boolean | Promise<Activate_Result> {
-		const selected = this.selections.at(-1)!;
-		return selected ? this.activate(selected) : this.select_first();
+		const selected = this.selections.at(-1);
+		if (selected) {
+			return this.activate(selected);
+		}
+		this.select_first();
 	}
 
 	// Instead of diffing, this does the simple thing and
@@ -186,14 +189,14 @@ export class Contextmenu_Store {
 	 * Activates the selected entry, or if none, selects the first.
 	 */
 	select(item: Item_State): void {
-		if (this.selections.at(-1)! === item) return;
+		if (this.selections.at(-1) === item) return;
 		for (const s of this.selections) s.selected = false;
 		this.selections.length = 0;
 		let i: Item_State | Root_Menu_State = item;
 		do {
 			i.selected = true;
 			this.selections.unshift(i);
-		} while ((i = i.menu) && i.menu);
+		} while ((i = i.menu) && i.menu); // eslint-disable-line @typescript-eslint/no-unnecessary-condition
 	}
 
 	collapse_selected(): void {
@@ -203,7 +206,7 @@ export class Contextmenu_Store {
 	}
 
 	expand_selected(): void {
-		const parent = this.selections.at(-1)!;
+		const parent = this.selections.at(-1);
 		if (!parent?.is_menu) return;
 		const selected = parent.items[0];
 		selected.selected = true;
@@ -211,26 +214,32 @@ export class Contextmenu_Store {
 	}
 
 	select_next(): void {
-		if (!this.selections.length) return this.select_first();
+		if (!this.selections.length) {
+			this.select_first();
+			return;
+		}
 		const item = this.selections.at(-1)!;
 		const index = item.menu.items.indexOf(item);
 		this.select(item.menu.items[index === item.menu.items.length - 1 ? 0 : index + 1]);
 	}
 
 	select_previous(): void {
-		if (!this.selections.length) return this.select_last();
+		if (!this.selections.length) {
+			this.select_last();
+			return;
+		}
 		const item = this.selections.at(-1)!;
 		const index = item.menu.items.indexOf(item);
 		this.select(item.menu.items[index === 0 ? item.menu.items.length - 1 : index - 1]);
 	}
 
 	select_first(): void {
-		this.select((this.selections.at(-1)?.menu || this.root_menu).items[0]);
+		this.select((this.selections.at(-1)?.menu ?? this.root_menu).items[0]);
 	}
 
 	select_last(): void {
-		const {items} = this.selections.at(-1)?.menu || this.root_menu;
-		return this.select(items.at(-1)!);
+		const {items} = this.selections.at(-1)?.menu ?? this.root_menu;
+		this.select(items.at(-1)!);
 	}
 
 	/**
@@ -238,7 +247,7 @@ export class Contextmenu_Store {
 	 * @initializes
 	 */
 	add_entry(run: Contextmenu_Run): Entry_State {
-		const menu = get_contextmenu_submenu() || this.root_menu;
+		const menu = get_contextmenu_submenu() ?? this.root_menu;
 		const entry = new Entry_State(menu, run);
 		menu.items.push(entry);
 		// TODO messy, runs more than needed
@@ -252,7 +261,7 @@ export class Contextmenu_Store {
 	 * @initializes
 	 */
 	add_submenu(): Submenu_State {
-		const menu = get_contextmenu_submenu() || this.root_menu;
+		const menu = get_contextmenu_submenu() ?? this.root_menu;
 		const submenu = new Submenu_State(menu, menu.depth + 1);
 		menu.items.push(submenu);
 		set_contextmenu_submenu(submenu);
@@ -268,7 +277,7 @@ export class Contextmenu_Store {
 // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset
 const CONTEXTMENU_DATASET_KEY = 'contextmenu';
 const CONTEXTMENU_DOM_QUERY = `a,[data-${CONTEXTMENU_DATASET_KEY}]`;
-const contextmenu_cache = new Map<string, Contextmenu_Params | Contextmenu_Params[]>();
+const contextmenu_cache: Map<string, Contextmenu_Params | Contextmenu_Params[]> = new Map();
 let cache_key_counter = 0;
 
 export const contextmenu_action = <T extends Contextmenu_Params, U extends T | T[]>(
@@ -312,7 +321,9 @@ export const open_contextmenu = (
 	// Unfortunately `vibrate` this gets blocked by some (all?) browsers the way we're doing it
 	// outside of a user interaction in a custom `longpress` gesture that triggers on a timeout,
 	// which exists only because iOS doesn't support the contextmenu event.
-	navigator.vibrate?.(CONTEXTMENU_OPEN_VIBRATE_DURATION);
+	if (BROWSER && (navigator.vibrate as unknown)) {
+		navigator.vibrate(CONTEXTMENU_OPEN_VIBRATE_DURATION);
+	}
 	return true;
 };
 
@@ -332,13 +343,13 @@ const query_contextmenu_params = (
 			}
 			// preserve bubbling order
 			if (Array.isArray(cached)) {
-				(params || (params = [])).push(...cached);
+				(params ??= []).push(...cached);
 			} else {
-				(params || (params = [])).push(cached);
+				(params ??= []).push(cached);
 			}
 		}
 		if (el.tagName === 'A') {
-			(params || (params = [])).push({
+			(params ??= []).push({
 				snippet: 'link',
 				props: {href: (el as HTMLAnchorElement).href},
 			});

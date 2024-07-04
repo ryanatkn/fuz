@@ -133,17 +133,17 @@
 	effect_skip((skip) => {
 		const v = $selected_color_scheme;
 		if (skip) return;
-		sync_color_scheme?.(v);
+		sync_color_scheme(v);
 	});
 	effect_skip((skip) => {
 		const v = $selected_color_scheme;
 		if (skip) return;
-		save_color_scheme?.(v); // helper may change, so is separate from `sync_color_scheme`
+		save_color_scheme(v); // helper may change, so is separate from `sync_color_scheme`
 	});
 	effect_skip((skip) => {
 		const v = $selected_theme;
 		if (skip) return;
-		save_theme?.(v);
+		save_theme(v);
 	});
 
 	// TODO this is messy and probably wrong -- do we want both values?

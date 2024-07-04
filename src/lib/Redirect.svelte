@@ -1,9 +1,9 @@
 <script lang="ts">
-	import {browser} from '$app/environment';
 	import {page} from '$app/stores';
 	import {strip_start} from '@ryanatkn/belt/string.js';
 	import {goto} from '$app/navigation';
 	import type {Snippet} from 'svelte';
+	import {BROWSER} from 'esm-env';
 
 	interface Props {
 		/**
@@ -34,7 +34,7 @@
 
 	const url = host + final_path;
 
-	if (auto && browser) void goto(url, {replaceState: true});
+	if (auto && BROWSER) void goto(url, {replaceState: true});
 </script>
 
 <svelte:head>
