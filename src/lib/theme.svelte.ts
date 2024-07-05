@@ -56,7 +56,7 @@ export const sync_color_scheme = (color_scheme: Color_Scheme | null): void => {
 
 export const COLOR_SCHEME_STORAGE_KEY = 'color-scheme';
 
-// TODO @multiple refactor, probably with a storage util
+// TODO @multiple refactor with a util
 export const save_color_scheme = (
 	color_scheme: Color_Scheme | null,
 	key = COLOR_SCHEME_STORAGE_KEY,
@@ -71,24 +71,25 @@ export const save_color_scheme = (
 	} catch (_) {}
 };
 
+// TODO @multiple refactor with a util
 export const load_color_scheme = (
 	fallback: Color_Scheme = 'auto',
 	key = COLOR_SCHEME_STORAGE_KEY,
 ): Color_Scheme => {
 	if (!BROWSER) return fallback;
-	let stored: any;
+	let loaded: any;
 	try {
-		stored = localStorage.getItem(key);
+		loaded = localStorage.getItem(key);
 	} catch (_) {
 		return fallback;
 	}
-	if (color_schemes.includes(stored)) {
-		return stored; // TODO should parse, and also delete the stored key on failures
+	if (color_schemes.includes(loaded)) {
+		return loaded; // TODO should parse, and also delete the stored key on failures
 	}
 	return fallback;
 };
 
-// TODO @multiple refactor, probably with a storage util
+// TODO @multiple refactor with a util
 export const THEME_STORAGE_KEY = 'theme';
 
 export const save_theme = (theme: Theme | null, key = THEME_STORAGE_KEY): void => {
@@ -102,13 +103,14 @@ export const save_theme = (theme: Theme | null, key = THEME_STORAGE_KEY): void =
 	} catch (_) {}
 };
 
+// TODO @multiple refactor with a util
 export const load_theme = (fallback: Theme = default_themes[0], key = THEME_STORAGE_KEY): Theme => {
 	if (!BROWSER) return fallback;
 	try {
 		const v = localStorage.getItem(key);
-		const stored = v === null ? v : JSON.parse(v);
-		if (stored) {
-			return stored;
+		const loaded = v === null ? v : JSON.parse(v);
+		if (loaded) {
+			return loaded;
 		}
 	} catch (_) {}
 	return fallback;
