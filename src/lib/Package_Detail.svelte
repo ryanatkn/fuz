@@ -65,7 +65,8 @@
 
 	const logo_url = $derived(
 		pkg.homepage_url
-			? ensure_end(pkg.homepage_url, '/') + (pkg.package_json.logo ?? 'favicon.png')
+			? ensure_end(pkg.homepage_url, '/') +
+					(pkg.package_json.logo ? strip_start(pkg.package_json.logo, '/') : 'favicon.png')
 			: undefined,
 	);
 	const logo_alt = pkg.package_json.logo_alt ?? `logo for ${pkg.repo_name}`;

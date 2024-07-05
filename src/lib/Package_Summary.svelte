@@ -3,7 +3,7 @@
 	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
 	import type {Snippet} from 'svelte';
 	import {format_url} from '@ryanatkn/belt/url.js';
-	import {ensure_end} from '@ryanatkn/belt/string.js';
+	import {ensure_end, strip_start} from '@ryanatkn/belt/string.js';
 
 	interface Props {
 		pkg: Package_Meta; // TODO normalized version with cached primitives?
@@ -23,7 +23,8 @@
 
 	const logo_url = $derived(
 		pkg.homepage_url
-			? ensure_end(pkg.homepage_url, '/') + (pkg.package_json.logo ?? 'favicon.png')
+			? ensure_end(pkg.homepage_url, '/') +
+					(pkg.package_json.logo ? strip_start(pkg.package_json.logo, '/') : 'favicon.png')
 			: undefined,
 	);
 	const logo_alt = pkg.package_json.logo_alt ?? `logo for ${pkg.repo_name}`;
