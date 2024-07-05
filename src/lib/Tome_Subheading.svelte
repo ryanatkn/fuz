@@ -25,9 +25,12 @@
 
 	const library_links = get_library_links();
 
+	// TODO find the other of these hacks - what's going on? I can't seem to find anything searching online about this, it's `.` on SSR for some reason
+	const TODO_HACK_base = (base as any) === '.' ? '' : base;
+
 	// Add subheadings only if not on the root page.
 	// TODO make reactive?
-	if ($page.url.pathname !== base + library_links.root_path) {
+	if ($page.url.pathname !== TODO_HACK_base + library_links.root_path) {
 		library_links.add(id, text, slug, tag);
 		onDestroy(() => library_links.remove(id));
 	}
