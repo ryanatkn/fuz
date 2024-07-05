@@ -254,29 +254,24 @@
 </Themed>`}
 		/>
 		<p>
-			<code>Themed</code> can be customized with the nonreactive, bindable, writable store props
-			<code>selected_theme</code>
-			and <code>selected_color_scheme</code>:
+			<code>Themed</code> can be customized with the the nonreactive prop
+			<code>selected_theme_state</code>:
 		</p>
 		<Code
-			content={`<Themed {selected_theme} {selected_color_scheme}>
+			content={`<Themed {selected_theme_state}>
 	{@render children()}
 </Themed>`}
 		/>
 		<p>
-			<code>Themed</code> sets the writable stores <code>selected_theme</code>
-			and <code>selected_color_scheme</code> in the Svelte context:
+			<code>Themed</code> sets the <code>selected_theme_state</code> in the Svelte context:
 		</p>
 		<Code
 			content={`// get values from the Svelte context provided by
 // the nearest \`Themed\` or \`Themed_Scope\` ancestor:
 
-import {get_theme} from '@ryanatkn/fuz/theme.js';
-const selected_theme = get_theme();
+import {get_theme_state} from '@ryanatkn/fuz/theme.js';
+const selected_theme_state = get_theme_state();
 selected_theme_state.theme.name; // '${selected_theme_state.theme.name}'
-
-import {get_color_scheme} from '@ryanatkn/fuz/theme.js';
-const selected_color_scheme = get_color_scheme();
 selected_theme_state.color_scheme; // '${selected_theme_state.color_scheme}'`}
 			lang="ts"
 		/>

@@ -40,10 +40,10 @@
 		selected_theme_state?: Theme_State;
 		children: Snippet<
 			[
+				selected_theme_state: Theme_State,
 				style: string | null,
 				theme_style_html: string | null,
 				theme_setup_script: string,
-				selected_theme_state: Theme_State,
 			]
 		>;
 	}
@@ -128,4 +128,4 @@
 	{#if theme_setup_script}{@html theme_setup_script}{/if}
 </svelte:head>
 
-{@render children(style, theme_style_html, theme_setup_script, selected_theme_state)}
+{@render children(selected_theme_state, style, theme_style_html, theme_setup_script)}
