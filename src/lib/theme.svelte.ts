@@ -148,8 +148,7 @@ export const create_theme_setup_script = (
 								? 'dark light'
 								: 'light dark',
 				);
-			console.log('el', document.querySelector('meta[name="color-scheme"]').content);
-		} catch (_) { console.log('err', _); ${fallback === 'dark' ? "document.documentElement.classList.add('dark');" : ''} }
+		} catch (_) { ${fallback === 'dark' ? "document.documentElement.classList.add('dark');" : ''} }
 	</script>
 `;
 
