@@ -86,18 +86,18 @@
 		/>
 	</section>
 	<section>
-		<button class="mb_lg" onclick={() => (opened = true)}> open a dialog </button>
-		<button class="mb_lg" onclick={() => (dialog_overflowing_opened = true)}
+		<button type="button" class="mb_lg" onclick={() => (opened = true)}> open a dialog </button>
+		<button type="button" class="mb_lg" onclick={() => (dialog_overflowing_opened = true)}
 			>open a dialog that overflows vertically</button
 		>
-		<button class="mb_lg" onclick={() => (dialog_layout_page_opened = true)}
+		<button type="button" class="mb_lg" onclick={() => (dialog_layout_page_opened = true)}
 			>open a dialog with <code>layout="page"</code> instead of the default
 			<code>layout='centered'</code></button
 		>
-		<button class="mb_lg" onclick={() => (dialog_nested_1_opened = true)}
+		<button type="button" class="mb_lg" onclick={() => (dialog_nested_1_opened = true)}
 			>open a dialog containing another dialog</button
 		>
-		<button class="mb_lg" onclick={() => add_dialogs(5)}>open many dialogs</button>
+		<button type="button" class="mb_lg" onclick={() => add_dialogs(5)}>open many dialogs</button>
 	</section>
 </Tome_Detail>
 {#if opened}
@@ -106,7 +106,7 @@
 			<div class="pane p_xl box">
 				<h1>attention</h1>
 				<p>this is a dialog</p>
-				<button onclick={close}>ok</button>
+				<button type="button" onclick={close}>ok</button>
 			</div>
 		{/snippet}
 	</Dialog>
@@ -119,7 +119,7 @@
 				{#each {length: 120} as _}
 					<p>this is a dialog that overflows vertically</p>
 				{/each}
-				<button onclick={close}>close</button>
+				<button type="button" onclick={close}>close</button>
 			</div>
 		{/snippet}
 	</Dialog>
@@ -165,12 +165,14 @@
 					<Alert status="error">eek a bug! unknown layout "{selected_layout}"</Alert>
 				{/if}
 				<p>
-					<button onclick={() => add_item()}>add item</button>
-					<button disabled={!items.length} onclick={() => reset_items()}>remove all</button>
+					<button type="button" onclick={() => add_item()}>add item</button>
+					<button type="button" disabled={!items.length} onclick={() => reset_items()}
+						>remove all</button
+					>
 				</p>
 				{#each items as item (item)}
 					<p transition:slide>
-						<button onclick={() => remove_item(item)}>✕</button>
+						<button type="button" onclick={() => remove_item(item)}>✕</button>
 						new stuff appears {#if selected_layout === 'page'}gracefully{:else if selected_layout === 'centered'}ungracefully{/if}
 					</p>
 				{/each}
@@ -184,7 +186,9 @@
 		<div class="pane p_xl">
 			<h1>dialog 1</h1>
 			<p>dialogs can open more dialogs</p>
-			<button onclick={() => (dialog_nested_2_opened = true)}>open another dialog</button>
+			<button type="button" onclick={() => (dialog_nested_2_opened = true)}
+				>open another dialog</button
+			>
 		</div>
 	</Dialog>
 {/if}
@@ -194,7 +198,9 @@
 			<h1>dialog 2</h1>
 			<p>this dialog can open more dialogs</p>
 			<p>this is the second dialog</p>
-			<button onclick={() => (dialog_nested_3_opened = true)}>open another dialog</button>
+			<button type="button" onclick={() => (dialog_nested_3_opened = true)}
+				>open another dialog</button
+			>
 		</div>
 	</Dialog>
 {/if}
@@ -202,11 +208,12 @@
 	<Dialog onclose={() => (dialog_nested_3_opened = false)}>
 		<div class="pane p_xl" style:margin-bottom="var(--space_xl3)">
 			<h1>3 dialogs!</h1>
-			<button onclick={() => (dialog_nested_3_opened = false)}>close dialog</button>
+			<button type="button" onclick={() => (dialog_nested_3_opened = false)}>close dialog</button>
 		</div>
 		<div class="pane p_xl">
 			<h1>and another <code>.pane</code></h1>
 			<button
+				type="button"
 				onclick={() => {
 					dialog_nested_1_opened = dialog_nested_2_opened = dialog_nested_3_opened = false;
 				}}>close all dialogs</button

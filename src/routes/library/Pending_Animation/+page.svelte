@@ -28,7 +28,10 @@
 		<div class="mb_lg">
 			<Pending_Animation running={pendingAnimation0Running} />
 		</div>
-		<button class="mb_lg" onclick={() => (pendingAnimation0Running = !pendingAnimation0Running)}
+		<button
+			type="button"
+			class="mb_lg"
+			onclick={() => (pendingAnimation0Running = !pendingAnimation0Running)}
 			>{#if pendingAnimation0Running}pause animation{:else}play animation{/if}</button
 		>
 		<Code
@@ -52,10 +55,13 @@
 		/>
 		<p>
 			with children <input bind:value={turtleSlot} />
-			<button onclick={() => (turtleSlot = '🐢🐢🐢')}>🐢🐢🐢</button>
-			<button onclick={() => (turtleSlot = (turtleSlot + turtleSlot).substring(0, 24))}>* 2</button>
+			<button type="button" onclick={() => (turtleSlot = '🐢🐢🐢')}>🐢🐢🐢</button>
+			<button
+				type="button"
+				onclick={() => (turtleSlot = (turtleSlot + turtleSlot).substring(0, 24))}>* 2</button
+			>
 		</p>
-		<button onclick={() => (pendingAnimation1Running = !pendingAnimation1Running)}>
+		<button type="button" onclick={() => (pendingAnimation1Running = !pendingAnimation1Running)}>
 			{#if pendingAnimation1Running}pause animation{:else}play animation{/if}
 		</button>
 		<div
@@ -88,7 +94,8 @@
 		<p>
 			with
 			<code
-				>running={'{'}<button onclick={() => (frogsRunning = !frogsRunning)}>{frogsRunning}</button
+				>running={'{'}<button type="button" onclick={() => (frogsRunning = !frogsRunning)}
+					>{frogsRunning}</button
 				>{'}'}</code
 			>
 		</p>
@@ -99,7 +106,7 @@
 		<Pending_Animation running={frogsRunning}>
 			{#snippet children(index)}
 				<div class="row box">
-					<span style="font-size: var(--size_xl5)">{turtleSlot2a}</span>
+					<span class="size_xl5">{turtleSlot2a}</span>
 					<span class="index">{index}</span>
 					{turtleSlot2b}
 				</div>

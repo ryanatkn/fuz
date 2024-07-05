@@ -50,7 +50,7 @@
 			<div class="panel" bind:this={teleport_1}></div>
 			<div class="panel" bind:this={teleport_2}></div>
 		</div>
-		<button onclick={() => (swap = !swap)}> teleport the bunny </button>
+		<button type="button" onclick={() => (swap = !swap)}> teleport the bunny </button>
 	</section>
 </Tome_Detail>
 

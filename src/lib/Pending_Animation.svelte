@@ -12,11 +12,11 @@
 </script>
 
 <div {...attrs} class:pending_animation={true} class:running>
-	<span style="animation-delay: 0s"
+	<span style:animation-delay="0s"
 		>{#if children}{@render children(0)}{:else}•{/if}</span
-	><span style="animation-delay: 0.09s"
+	><span style:animation-delay="0.09s"
 		>{#if children}{@render children(1)}{:else}•{/if}</span
-	><span style="animation-delay: 0.3s"
+	><span style:animation-delay="0.3s"
 		>{#if children}{@render children(2)}{:else}•{/if}</span
 	>
 </div>

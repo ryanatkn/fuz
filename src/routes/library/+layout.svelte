@@ -40,7 +40,7 @@
 				<div class="panel p_lg box">
 					<Style_Variable_Detail variable={$selected_variable} />
 					<aside>⚠️ This is unfinished and will change.</aside>
-					<button onclick={close}>ok</button>
+					<button type="button" onclick={close}>ok</button>
 				</div>
 			</div>
 		{/snippet}
