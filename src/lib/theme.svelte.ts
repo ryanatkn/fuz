@@ -115,6 +115,7 @@ export const load_theme = (fallback: Theme = default_themes[0], key = THEME_STOR
 	return fallback;
 };
 
+// TODO BLOCK the `meta` may not be doing what we want here, do we instead need CSS that overrides the Moss value? or delete it?
 /**
  * Creates an HTML script string to be inserted into the `head`
  * that initializes the dark/light color scheme.
