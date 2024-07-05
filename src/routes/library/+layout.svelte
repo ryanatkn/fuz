@@ -9,13 +9,6 @@
 	import {get_pkg} from '$routes/pkg.js';
 	import Fuz_Logo from '$lib/Fuz_Logo.svelte';
 
-	// TODO why is this import needed? `Code` already imports it.
-	// Fails in dev with SSR enabled without it.
-	// I there a Vite config option that would be better?
-	// I tried the combinations of `ssr.external/noExternal` with `@ryanatkn/fuz_code` and `prismjs`.
-	import Prism from 'prismjs';
-	Prism;
-
 	interface Props {
 		children: Snippet;
 	}
