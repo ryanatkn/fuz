@@ -148,7 +148,7 @@ export const create_theme_setup_script = (
 								? 'dark light'
 								: 'light dark',
 				);
-		} catch (_) { ${fallback === 'dark' ? "document.documentElement.classList.add('dark');" : ''} }
+		} catch (_) {${fallback === 'dark' ? " document.documentElement.classList.add('dark'); " : ''}}
 	</script>
 `;
 
