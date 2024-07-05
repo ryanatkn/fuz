@@ -81,10 +81,10 @@
 
 	/**
 	 * `Themed` adds global color scheme and theme support to the page.
-	 * It also sets writable stores containing the theme and color scheme in the Svelte context.
+	 * It also sets in the Svelte context a reactive `theme_state` containing the theme and color scheme.
 	 *
 	 * To scope the theme to only a part of the page, use `Themed_Scope`.
-	 * There is some copied code between the two,
+	 * There is some duplicated code between the two,
 	 * but combining them was too complicated both internally and externally.
 	 */
 
