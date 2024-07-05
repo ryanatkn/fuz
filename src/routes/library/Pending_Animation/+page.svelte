@@ -84,7 +84,7 @@
 		<div class="row box">
 			{${turtleSlot2a}}
 			{index}
-			<span style="font-size: var(--size_xl5)">
+			<span class="size_xl5">
 				{${turtleSlot2b}}
 			</span>}
 		</div>
