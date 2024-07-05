@@ -42,7 +42,6 @@ export const get_theme_state = (): Theme_State => getContext(THEME_STATE_KEY);
 export const set_theme_state = (theme_state: Theme_State): Theme_State =>
 	setContext(THEME_STATE_KEY, theme_state);
 
-// TODO BLOCK needs to be called, effect where?
 export const sync_color_scheme = (color_scheme: Color_Scheme | null): void => {
 	if (!BROWSER) return;
 	if (
