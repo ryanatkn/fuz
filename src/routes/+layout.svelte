@@ -5,11 +5,14 @@
 
 	import {parse_package_meta} from '@ryanatkn/gro/package_meta.js';
 	import type {Snippet} from 'svelte';
+	import Prism from 'prismjs';
+	Prism; // TODO why is this import needed? Is there a Vite config option that would be better?
 
 	import Themed from '$lib/Themed.svelte';
 	import {set_pkg} from '$routes/pkg.js';
 	import {package_json, src_json} from '$routes/package.js';
 	import Spiders from '$lib/Spiders.svelte';
+
 	// TODO re-enable this, see comment below
 	// import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
 	// import Dialog from '$lib/Dialog.svelte';

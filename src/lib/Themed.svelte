@@ -165,14 +165,9 @@
 	{#if theme_style_html}{@html theme_style_html}{/if}
 	{#if theme_setup_script}
 		<meta name="color-scheme" content={final_color_scheme_css} />
-		<!--
-			This works around the Svelte 5 warning for `<svelte:element this="literal"`.
-			We can't use the actual script tag because it causes other parsing errors.
-			Maybe there's a better way to do this besides creating a script in the `head`?
-			@see https://github.com/sveltejs/svelte/pull/11454
-			@see https://github.com/sveltejs/svelte/issues/11398
-		-->
-		<svelte:element this={'script'}>{@html theme_setup_script}</svelte:element>
+		<!-- Work around HTML parsing, can't use `script` in a tag. -->
+		<!-- eslint-disable-next-line no-useless-concat -->
+		{@html '<' + 'script>' + theme_setup_script + '<' + '/script>'}
 	{/if}
 </svelte:head>
 
