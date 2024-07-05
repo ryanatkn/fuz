@@ -17,7 +17,7 @@
 
 	const link = $derived(!!href);
 	const selected = $derived(link && $page.url.pathname === href);
-	const final_tag = $derived(tag || (link ? 'a' : 'div'));
+	const final_tag = $derived(tag ?? (link ? 'a' : 'div'));
 	const inferred_attrs = $derived(link ? {href} : undefined);
 
 	const left = $derived(align === 'left');

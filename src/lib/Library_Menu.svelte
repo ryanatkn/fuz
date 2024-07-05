@@ -14,14 +14,11 @@
 	const {tomes, children}: Props = $props();
 
 	const tomes_by_category = $derived(
-		tomes.reduce(
-			(result, c) => {
-				if (!(c.category in result)) result[c.category] = [];
-				result[c.category].push(c);
-				return result;
-			},
-			{} as Record<string, Tome[]>,
-		),
+		tomes.reduce<Record<string, Tome[]>>((result, c) => {
+			if (!(c.category in result)) result[c.category] = [];
+			result[c.category].push(c);
+			return result;
+		}, {}),
 	);
 
 	// TODO remove CSS below with reusable CSS or a Svelte component

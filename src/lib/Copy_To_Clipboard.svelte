@@ -15,7 +15,7 @@
 		failed = false;
 		try {
 			await navigator.clipboard.writeText(text);
-		} catch (err) {
+		} catch (_err) {
 			failed = true;
 			return;
 		}

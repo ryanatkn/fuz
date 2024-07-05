@@ -25,7 +25,7 @@
 		children: Snippet;
 	}
 
-	let {open = $bindable(), eager, attrs, summary_attrs, summary, children}: Props = $props(); // eslint-disable-line prefer-const
+	let {open = $bindable(), eager, attrs, summary_attrs, summary, children}: Props = $props();
 
 	// TODO why doesn't the slide out work?
 </script>

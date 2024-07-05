@@ -2,8 +2,7 @@
 	import type {Snippet} from 'svelte';
 	import type {HTMLAttributes} from 'svelte/elements';
 
-	import type {Alert_Status} from '$lib/alert.js';
-	import {alert_status_options} from '$lib/alert.js';
+	import {alert_status_options, type Alert_Status} from '$lib/alert.js';
 
 	// TODO think through Alert+Card APIs together, one can be a button and the other a link atm
 

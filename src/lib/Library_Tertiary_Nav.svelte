@@ -17,7 +17,7 @@
 	const selected_item = $derived(tomes.find((c) => c.pathname === $page.url.pathname));
 
 	const tomes_related_to_selected = $derived(
-		selected_item?.related?.map((r) => tomes_by_name.get(r)!),
+		selected_item?.related.map((r) => tomes_by_name.get(r)!),
 	);
 
 	const library_links = get_library_links();

@@ -21,7 +21,7 @@ export const load_fuz_config = async (
 	} catch (err) {
 		try {
 			log?.error(`invalid ${path}: ${JSON.parse(err.message)[0].message}`);
-		} catch (err) {}
+		} catch (_err) {}
 		throw err;
 	}
 };

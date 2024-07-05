@@ -27,12 +27,12 @@ export const get_library_links = (): Library_Links => {
 
 export type Library_Link_Tag = 'h3' | 'h4';
 
-export type Library_Link_Data = {
+export interface Library_Link_Data {
 	id: string;
 	text: string;
 	slug: string;
 	tag: Library_Link_Tag | undefined; // TODO hacky, maybe `depth` or similar is better?
-};
+}
 
 export class Library_Links {
 	library_links: Library_Link_Data[] = $state([]);
