@@ -1,20 +1,19 @@
 <script lang="ts">
-	import type {Writable} from 'svelte/store';
 	import {swallow} from '@ryanatkn/belt/dom.js';
 	import {color_schemes, type Color_Scheme} from '@ryanatkn/moss/theme.js';
 
-	import {get_color_scheme} from '$lib/Themed.svelte';
+	import {get_theme_state} from '$lib/theme.svelte.js';
 
 	interface Props {
-		selected_color_scheme?: Writable<Color_Scheme | null>;
+		selected_color_scheme?: {color_scheme: Color_Scheme};
 		select?: ((color_scheme: Color_Scheme) => void | boolean) | null;
 		onselect?: (color_scheme: Color_Scheme) => void;
 	}
 
 	const {
-		selected_color_scheme = get_color_scheme(),
+		selected_color_scheme = get_theme_state(),
 		select = (color_scheme) => {
-			$selected_color_scheme = color_scheme;
+			selected_color_scheme.color_scheme = color_scheme;
 		},
 		onselect,
 	}: Props = $props();
@@ -24,7 +23,7 @@
 https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/menubar_role -->
 <menu class="color_scheme_control unstyled">
 	{#each color_schemes as color_scheme (color_scheme)}
-		{@const selected = color_scheme === $selected_color_scheme}
+		{@const selected = color_scheme === selected_color_scheme.color_scheme}
 		<button
 			class="color_scheme"
 			type="button"

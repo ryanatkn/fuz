@@ -1,7 +1,43 @@
 import {color_schemes, type Color_Scheme, type Theme} from '@ryanatkn/moss/theme.js';
 import {default_themes} from '@ryanatkn/moss/themes.js';
 import {BROWSER} from 'esm-env';
+import {getContext, setContext} from 'svelte';
 
+// TODO BLOCK can we solve the problem of theme flashing? serialize the whole `Theme_State`?
+
+// TODO BLOCK single word name? `Theme` is taken by Moss
+export class Theme_State {
+	theme: Theme = $state()!; // TODO better initialization?
+	// TODO BLOCK should color_scheme be nullable like it was before?
+	color_scheme: Color_Scheme = $state()!; // TODO better initialization?
+
+	constructor(theme: Theme = default_themes[0], color_scheme: Color_Scheme = 'auto') {
+		if (!color_schemes.includes(color_scheme)) {
+			throw Error('unknown color scheme: ' + color_scheme);
+		}
+		this.theme = theme;
+		this.color_scheme = color_scheme;
+	}
+
+	toJSON(): Theme_State_Json {
+		return {
+			theme: this.theme,
+			color_scheme: this.color_scheme,
+		};
+	}
+}
+
+export interface Theme_State_Json {
+	theme: Theme;
+	color_scheme: Color_Scheme;
+}
+
+const THEME_STATE_KEY = Symbol('theme_state');
+export const get_theme_state = (): Theme_State => getContext(THEME_STATE_KEY);
+export const set_theme_state = (theme_state: Theme_State): Theme_State =>
+	setContext(THEME_STATE_KEY, theme_state);
+
+// TODO BLOCK needs to be called, effect where?
 export const sync_color_scheme = (color_scheme: Color_Scheme | null): void => {
 	if (!BROWSER) return;
 	if (
@@ -32,10 +68,10 @@ export const save_color_scheme = (
 };
 
 export const load_color_scheme = (
-	fallback: Color_Scheme | null = 'auto',
+	fallback: Color_Scheme = 'auto',
 	key = COLOR_SCHEME_STORAGE_KEY,
-): Color_Scheme | null => {
-	if (!BROWSER) return null;
+): Color_Scheme => {
+	if (!BROWSER) return fallback;
 	let stored: any;
 	try {
 		stored = localStorage.getItem(key);
@@ -88,11 +124,25 @@ export const create_theme_setup_script = (
 	fallback: Color_Scheme = 'light',
 	key = COLOR_SCHEME_STORAGE_KEY,
 ): string => `
-	try {
-		let c = localStorage.getItem('${key}');
-		if (c === 'auto' || (c !== 'dark' && c !== 'light')) {
-			c = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-		}
-		if (c === 'dark') document.documentElement.classList.add('dark');
-	} catch (_) { ${fallback === 'dark' ? "document.documentElement.classList.add('dark');" : ''} }
+	<script nonce="%sveltekit.nonce%">
+		try {
+			let c = localStorage.getItem('${key}');
+			if (c === 'auto' || (c !== 'dark' && c !== 'light')) {
+				c = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+			}
+			if (c === 'dark') document.documentElement.classList.add('dark');
+		} catch (_) { ${fallback === 'dark' ? "document.documentElement.classList.add('dark');" : ''} }
+	</script>
 `;
+
+// TODO does the `nonce` here and above behave as desired?
+
+/**
+ * Creates an HTML style string to be inserted into the `head`
+ * that overrides the theme for a part of the page.
+ * @param style same as the result of a call to `render_theme_style`
+ * @returns HTML string with the style tag and its contents
+ */
+export const create_theme_style_html = (style: string): string => `<style nonce="%sveltekit.nonce%">
+	${style}
+</style>`;

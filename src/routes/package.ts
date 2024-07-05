@@ -298,7 +298,7 @@ export const package_json = {
 			svelte: './dist/Theme_Input.svelte',
 			default: './dist/Theme_Input.svelte',
 		},
-		'./theme.js': {types: './dist/theme.d.ts', default: './dist/theme.js'},
+		'./theme.svelte.js': {types: './dist/theme.svelte.d.ts', default: './dist/theme.svelte.js'},
 		'./Themed_Scope.svelte': {
 			types: './dist/Themed_Scope.svelte.d.ts',
 			svelte: './dist/Themed_Scope.svelte',
@@ -454,9 +454,13 @@ export const src_json = {
 		'./Spiderspace_Logo.svelte': {path: 'Spiderspace_Logo.svelte', declarations: []},
 		'./Teleport.svelte': {path: 'Teleport.svelte', declarations: []},
 		'./Theme_Input.svelte': {path: 'Theme_Input.svelte', declarations: []},
-		'./theme.js': {
-			path: 'theme.ts',
+		'./theme.svelte.js': {
+			path: 'theme.svelte.ts',
 			declarations: [
+				{name: 'Theme_State', kind: 'class'},
+				{name: 'Theme_State_Json', kind: 'type'},
+				{name: 'get_theme_state', kind: 'function'},
+				{name: 'set_theme_state', kind: 'function'},
 				{name: 'sync_color_scheme', kind: 'function'},
 				{name: 'COLOR_SCHEME_STORAGE_KEY', kind: 'variable'},
 				{name: 'save_color_scheme', kind: 'function'},
@@ -465,6 +469,7 @@ export const src_json = {
 				{name: 'save_theme', kind: 'function'},
 				{name: 'load_theme', kind: 'function'},
 				{name: 'create_theme_setup_script', kind: 'function'},
+				{name: 'create_theme_style_html', kind: 'function'},
 			],
 		},
 		'./Themed_Scope.svelte': {path: 'Themed_Scope.svelte', declarations: []},

@@ -324,9 +324,9 @@
       "svelte": "./dist/Theme_Input.svelte",
       "default": "./dist/Theme_Input.svelte"
     },
-    "./theme.js": {
-      "types": "./dist/theme.d.ts",
-      "default": "./dist/theme.js"
+    "./theme.svelte.js": {
+      "types": "./dist/theme.svelte.d.ts",
+      "default": "./dist/theme.svelte.js"
     },
     "./Themed_Scope.svelte": {
       "types": "./dist/Themed_Scope.svelte.d.ts",

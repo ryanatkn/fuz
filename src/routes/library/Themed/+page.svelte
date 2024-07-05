@@ -1,24 +1,23 @@
 <script lang="ts">
-	import {writable} from 'svelte/store';
 	// TODO @multiple why is this import needed? `Code` already imports it. Fails in dev with SSR enabled without it. Is there a Vite config option that would be better? I tried the combinations of `ssr.external/noExternal/external` with `@ryanatkn/fuz_code` and `prismjs`.
 	import Prism from 'prismjs';
 	Prism;
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 	import type {Theme} from '@ryanatkn/moss/theme.js';
 	import {default_themes} from '@ryanatkn/moss/themes.js';
+	import {untrack} from 'svelte';
 
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
 	import Details from '$lib/Details.svelte';
 	import Dialog from '$lib/Dialog.svelte';
 	import {get_tome} from '$lib/tome.js';
 	import Color_Scheme_Input from '$lib/Color_Scheme_Input.svelte';
-	import {get_theme, get_color_scheme} from '$lib/Themed.svelte';
 	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 	import Theme_Input from '$lib/Theme_Input.svelte';
 	import Theme_Form from '$routes/Theme_Form.svelte';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
 	import Themed_Scope from '$lib/Themed_Scope.svelte';
-	import {save_theme} from '$lib/theme.js';
+	import {get_theme_state, save_theme, Theme_State} from '$lib/theme.svelte.js';
 
 	const LIBRARY_ITEM_NAME = 'Themed';
 
@@ -26,18 +25,19 @@
 
 	const themes = default_themes.slice();
 
-	const selected_theme = get_theme();
-	const selected_color_scheme = get_color_scheme();
+	const selected_theme_state = get_theme_state();
 
 	// This is only needed for the custom controls below,
 	// it's automated by default with `Theme_Input` and the top-level `Themed`.
 	const select_theme = (theme: Theme): void => {
-		$selected_theme = theme;
+		selected_theme_state.theme = theme;
 		save_theme(theme);
 	};
 
 	// let show_create_theme_dialog = false;
 	let editing_theme: null | Theme = $state(null);
+
+	// TODO BLOCK update docs below
 </script>
 
 <Tome_Detail {tome}>
@@ -116,11 +116,11 @@
 		<Code content="<Color_Scheme_Input />" />
 		<p>Pass a prop to override the default:</p>
 		<Code
-			content={`<Color_Scheme_Input\n\tselected_color_scheme={writable(${
-				$selected_color_scheme
-					? "'" + JSON.stringify($selected_color_scheme).replace(/"/gu, '') + "'"
+			content={`<Color_Scheme_Input\n\tselected_color_scheme={{color_scheme: ${
+				selected_theme_state.color_scheme
+					? "'" + JSON.stringify(selected_theme_state.color_scheme).replace(/"/gu, '') + "'"
 					: 'null'
-			})}\n/>`}
+			}}}\n/>`}
 		/>
 		<p>
 			The builtin themes support both dark and light color schemes. Custom themes may support one or
@@ -175,8 +175,14 @@
 				{#each themes as theme (theme.name)}
 					<!-- TODO @multiple proper equality check, won't work when we allow editing, need an id or unique names and a deep equality check -->
 					{@const selected =
-						$selected_color_scheme === 'light' && theme.name === $selected_theme.name}
-					<Themed_Scope selected_theme={writable(theme)} selected_color_scheme={writable('light')}>
+						selected_theme_state.color_scheme === 'light' &&
+						theme.name === selected_theme_state.theme.name}
+					<Themed_Scope
+						selected_theme_state={new Theme_State(
+							untrack(() => theme),
+							'light',
+						)}
+					>
 						<div class="box row p_sm">
 							<button
 								type="button"
@@ -184,7 +190,7 @@
 								class:selected
 								onclick={() => {
 									select_theme(theme);
-									$selected_color_scheme = 'light';
+									selected_theme_state.color_scheme = 'light';
 								}}
 								>{#if selected}★{:else}☆{/if}</button
 							>
@@ -197,8 +203,14 @@
 				{#each themes as theme (theme.name)}
 					<!-- TODO @multiple proper equality check, won't work when we allow editing, need an id or unique names and a deep equality check -->
 					{@const selected =
-						$selected_color_scheme === 'dark' && theme.name === $selected_theme.name}
-					<Themed_Scope selected_theme={writable(theme)} selected_color_scheme={writable('dark')}>
+						selected_theme_state.color_scheme === 'dark' &&
+						theme.name === selected_theme_state.theme.name}
+					<Themed_Scope
+						selected_theme_state={new Theme_State(
+							untrack(() => theme),
+							'dark',
+						)}
+					>
 						<div class="box row p_sm">
 							<button
 								type="button"
@@ -206,7 +218,7 @@
 								class:selected
 								onclick={() => {
 									select_theme(theme);
-									$selected_color_scheme = 'dark';
+									selected_theme_state.color_scheme = 'dark';
 								}}
 								>{#if selected}★{:else}☆{/if}</button
 							>
@@ -263,11 +275,11 @@
 
 import {get_theme} from '@ryanatkn/fuz/theme.js';
 const selected_theme = get_theme();
-$selected_theme.name; // '${$selected_theme.name}'
+selected_theme_state.theme.name; // '${selected_theme_state.theme.name}'
 
 import {get_color_scheme} from '@ryanatkn/fuz/theme.js';
 const selected_color_scheme = get_color_scheme();
-$selected_color_scheme; // '${$selected_color_scheme}'`}
+selected_theme_state.color_scheme; // '${selected_theme_state.color_scheme}'`}
 			lang="ts"
 		/>
 		<Details>
