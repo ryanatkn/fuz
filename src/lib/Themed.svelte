@@ -3,6 +3,8 @@
 
 	// TODO change API to use runes
 
+	// TODO move these to `theme.ts`?
+
 	const THEME_KEY = Symbol('theme');
 	export const get_theme = (): Writable<Theme> => getContext(THEME_KEY);
 	export const set_theme = (store: Writable<Theme>): Writable<Theme> =>
