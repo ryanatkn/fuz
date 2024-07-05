@@ -1,0 +1,10 @@
+import{b as Y,a as i,t as w,f as T,s as t,c as o}from"../chunks/disclose-version.BPChegCu.js";import{p as z,a as O,g as e,w as p,I as l,d as U}from"../chunks/runtime.TAR74xOU.js";import{d as j}from"../chunks/render.CccNZJne.js";import{p as y}from"../chunks/proxy.Gev7vO7-.js";import{b as $}from"../chunks/this.B_FYlvDc.js";import{C as k}from"../chunks/Code.CipLiXoy.js";import{g as q}from"../chunks/tome.Dl_Z6kQH.js";import{T as F}from"../chunks/Teleport.DbLT5xQ8.js";import{T as G}from"../chunks/Tome_Detail.Bn7h2gFg.js";import{T as H}from"../chunks/Tome_Link.Bv8Fbo-L.js";var J=w("🐰",1),K=(d,r)=>p(r,!e(r)),Q=w(`<section><p>Relocates elements in the DOM, in the rare cases that's useful and the best solution. The <!> uses this to mount dialogs from any component without inheriting styles.</p> <aside><p>Use only when necessary or fun.</p></aside></section> <section><div class="mb_lg"><!></div> <!></section> <section><!> <div class="teleports svelte-1lm68os"><div class="panel svelte-1lm68os"></div> <div class="panel svelte-1lm68os"></div></div> <button type="button">teleport the bunny</button></section>`,1);function lt(d,r){z(r,!0);const I=q("Teleport");let m=l(!0),a=l(void 0),n=l(void 0);var v=Y(),M=T(v);G(M,{tome:I,children:(R,V)=>{var c=Q(),u=T(c),A=o(u),E=t(o(A));H(E,{name:"Dialog"});var _=t(t(u,!0)),f=o(_),D=o(f);k(D,{content:"import Teleport from '@ryanatkn/fuz/Teleport.svelte';",lang:"ts"});var L=t(t(f,!0));k(L,{content:`<Teleport to={swap ? teleport_1 : teleport_2}>
+	🐰
+</Teleport>
+<div class="teleports">
+	<div class="panel" bind:this={teleport_1} />
+	<div class="panel" bind:this={teleport_2} />
+</div>
+<button onclick={() => (swap = !swap)}>
+	teleport the bunny
+</button>`});var x=t(t(_,!0)),h=o(x),B=U(()=>e(m)?e(a):e(n));F(h,{get to(){return e(B)},children:(s,W)=>{var P=J();i(s,P)},$$slots:{default:!0}});var b=t(t(h,!0)),g=o(b);$(g,s=>p(a,y(s)),()=>e(a));var C=t(t(g,!0));$(C,s=>p(n,y(s)),()=>e(n));var N=t(t(b,!0));N.__click=[K,m],i(R,c)},$$slots:{default:!0}}),i(d,v),O()}j(["click"]);export{lt as component};
