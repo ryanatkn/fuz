@@ -81,12 +81,12 @@
 				<p>
 					<code>Themed</code> is designed to wrap every page at the top level so it can provide the
 					selected theme and color scheme in the Svelte context. It works without children, but
-					<code>get_theme</code> and <code>get_color_scheme</code> will fail unless you call
-					<code>set_theme</code> and <code>set_color_scheme</code> yourself.
+					<code>get_theme_state</code> will fail unless you call
+					<code>set_theme_state</code> yourself.
 				</p>
 				<p>
-					These context helpers provide the <code>writable</code> stores to your code, and they also
-					reduce boilerplate in the helper components documented below.
+					These context helpers provide the reactive <code>Theme_State</code> class instance to your
+					code, and they also reduce boilerplate in the helper components documented below.
 				</p>
 				<p>
 					If you set stores in context manually, they must be the same references as the <code
