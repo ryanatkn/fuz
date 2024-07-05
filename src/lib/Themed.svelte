@@ -115,7 +115,6 @@
 		if (skip) return;
 		sync_color_scheme_meta(c);
 	});
-	console.log(`theme_style_html`, theme_style_html);
 </script>
 
 <!-- eslint-disable svelte/no-at-html-tags -->
