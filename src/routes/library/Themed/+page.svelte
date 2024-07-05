@@ -117,9 +117,7 @@
 		<p>Pass a prop to override the default:</p>
 		<Code
 			content={`<Color_Scheme_Input\n\tselected_color_scheme={{color_scheme: ${
-				selected_theme_state.color_scheme
-					? "'" + JSON.stringify(selected_theme_state.color_scheme).replace(/"/gu, '') + "'"
-					: 'null'
+				"'" + JSON.stringify(selected_theme_state.color_scheme).replace(/"/gu, '') + "'"
 			}}}\n/>`}
 		/>
 		<p>

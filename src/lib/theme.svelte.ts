@@ -3,12 +3,12 @@ import {default_themes} from '@ryanatkn/moss/themes.js';
 import {BROWSER} from 'esm-env';
 import {getContext, setContext} from 'svelte';
 
-// TODO BLOCK can we solve the problem of theme flashing? serialize the whole `Theme_State`?
+// TODO Can we solve the problem of theme flashing? serialize the whole `Theme_State`?
+// I think so but we'd need Moss' `render_theme_style` to be available in the head somehow.
 
 // TODO BLOCK single word name? `Theme` is taken by Moss
 export class Theme_State {
 	theme: Theme = $state()!; // TODO better initialization?
-	// TODO BLOCK should color_scheme be nullable like it was before?
 	color_scheme: Color_Scheme = $state()!; // TODO better initialization?
 
 	constructor(theme: Theme = default_themes[0], color_scheme: Color_Scheme = 'auto') {
