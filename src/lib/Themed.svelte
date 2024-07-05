@@ -4,7 +4,7 @@
 
 <script lang="ts">
 	import {onDestroy, onMount, type Snippet} from 'svelte';
-	import {render_theme_style, type Color_Scheme} from '@ryanatkn/moss/theme.js';
+	import {render_theme_style, type Color_Scheme, type Theme} from '@ryanatkn/moss/theme.js';
 	import {DEFAULT_THEME} from '@ryanatkn/moss/themes.js';
 	import {DEV} from 'esm-env';
 
@@ -28,6 +28,7 @@
 		save_color_scheme?: typeof default_save_color_scheme;
 		load_theme?: typeof default_load_theme;
 		save_theme?: typeof default_save_theme;
+		theme_fallback?: Theme | undefined;
 		color_scheme_fallback?: Color_Scheme | undefined;
 		/**
 		 * A reactive class containing the selected theme and color scheme.
@@ -53,8 +54,12 @@
 		save_color_scheme = default_save_color_scheme,
 		load_theme = default_load_theme,
 		save_theme = default_save_theme,
+		theme_fallback,
 		color_scheme_fallback,
-		selected_theme_state = new Theme_State(load_theme(), load_color_scheme(color_scheme_fallback)), // TODO BLOCK theme fallback?
+		selected_theme_state = new Theme_State(
+			load_theme(theme_fallback),
+			load_color_scheme(color_scheme_fallback),
+		),
 		children,
 	}: Props = $props();
 
