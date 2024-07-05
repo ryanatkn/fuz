@@ -5,6 +5,11 @@ import {getContext, setContext} from 'svelte';
 
 // TODO Can we solve the problem of theme flashing? serialize the whole `Theme_State`?
 // I think so but we'd need Moss' `render_theme_style` to be available in the head somehow.
+// The current problem is that `render_theme_style` depends on all of the variables for the base theme,
+// but I think that can be fixed.
+// These get added to `create_theme_setup_script`:
+// render_theme_style_fn: string,
+// const render_theme_style = ${render_theme_style_fn};
 
 // TODO BLOCK single word name? `Theme` is taken by Moss
 export class Theme_State {

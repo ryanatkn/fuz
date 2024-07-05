@@ -93,7 +93,9 @@
 			: render_theme_style(selected_theme_state.theme),
 	);
 	const theme_style_html = $derived(style ? create_theme_style_html(style) : null);
-	const theme_setup_script = $derived(create_theme_setup_script(color_scheme_fallback));
+	const theme_setup_script = $derived(
+		create_theme_setup_script(color_scheme_fallback, render_theme_style.toString()),
+	);
 
 	effect_skip((skip) => {
 		const v = selected_theme_state.color_scheme;
