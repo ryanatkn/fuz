@@ -168,19 +168,6 @@ export const sync_color_scheme_meta = (color_scheme: Color_Scheme): void => {
 	);
 };
 
-// TODO BLOCK this is messy and probably wrong -- do we want both values?
-// or only one if there's a defined fallback? how to sync with the setup script?
-// maybe add the meta tag in the theme setup script, or change its content?
-// const final_color_scheme_css = $derived(
-// 	color_scheme_css ??
-// 		(color_scheme_fallback === 'dark' || color_scheme_fallback === 'light'
-// 			? color_scheme_fallback
-// 			: BROWSER && matchMedia('(prefers-color-scheme: dark)').matches
-// 				? 'dark light'
-// 				: 'light dark'),
-// );
-// <meta name="color-scheme" content={final_color_scheme_css} />
-
 // TODO does the `nonce` here and above behave as desired?
 
 /**
