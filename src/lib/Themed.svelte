@@ -6,7 +6,7 @@
 	import {onDestroy, onMount, type Snippet} from 'svelte';
 	import {render_theme_style, type Color_Scheme} from '@ryanatkn/moss/theme.js';
 	import {DEFAULT_THEME} from '@ryanatkn/moss/themes.js';
-	import {BROWSER, DEV} from 'esm-env';
+	import {DEV} from 'esm-env';
 
 	import {
 		create_theme_setup_script,
@@ -18,6 +18,7 @@
 		set_theme_state,
 		create_theme_style_html,
 		Theme_State,
+		sync_color_scheme_meta,
 	} from '$lib/theme.svelte.js';
 	import {effect_skip} from '$lib/rune_helpers.svelte.js';
 
@@ -27,6 +28,7 @@
 		save_color_scheme?: typeof default_save_color_scheme;
 		load_theme?: typeof default_load_theme;
 		save_theme?: typeof default_save_theme;
+		color_scheme_fallback?: Color_Scheme | undefined;
 		/**
 		 * A reactive class containing the selected theme and color scheme.
 		 * Defaults to the first default theme.
@@ -35,8 +37,6 @@
 		 * @nonreactive
 		 */
 		selected_theme_state?: Theme_State;
-		color_scheme_fallback?: Color_Scheme | undefined;
-		color_scheme_css?: string | undefined;
 		children: Snippet<
 			[
 				style: string | null,
@@ -53,9 +53,8 @@
 		save_color_scheme = default_save_color_scheme,
 		load_theme = default_load_theme,
 		save_theme = default_save_theme,
-		selected_theme_state = new Theme_State(load_theme(), load_color_scheme()),
 		color_scheme_fallback,
-		color_scheme_css,
+		selected_theme_state = new Theme_State(load_theme(), load_color_scheme(color_scheme_fallback)), // TODO BLOCK theme fallback?
 		children,
 	}: Props = $props();
 
@@ -111,27 +110,18 @@
 		save_theme(v);
 	});
 
-	// TODO BLOCK this is messy and probably wrong -- do we want both values?
-	// or only one if there's a defined fallback? how to sync with the setup script?
-	// maybe add the meta tag in the theme setup script, or change its content?
-	const final_color_scheme_css = $derived(
-		color_scheme_css ??
-			(color_scheme_fallback === 'dark' || color_scheme_fallback === 'light'
-				? color_scheme_fallback
-				: BROWSER && matchMedia('(prefers-color-scheme: dark)').matches
-					? 'dark light'
-					: 'light dark'),
-	);
+	effect_skip((skip) => {
+		const c = selected_theme_state.color_scheme;
+		if (skip) return;
+		sync_color_scheme_meta(c);
+	});
 	console.log(`theme_style_html`, theme_style_html);
 </script>
 
 <!-- eslint-disable svelte/no-at-html-tags -->
 <svelte:head>
 	{#if theme_style_html}{@html theme_style_html}{/if}
-	{#if theme_setup_script}
-		<meta name="color-scheme" content={final_color_scheme_css} />
-		{@html theme_setup_script}
-	{/if}
+	{#if theme_setup_script}{@html theme_setup_script}{/if}
 </svelte:head>
 
 {@render children(style, theme_style_html, theme_setup_script, selected_theme_state)}

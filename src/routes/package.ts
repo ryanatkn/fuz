@@ -469,6 +469,7 @@ export const src_json = {
 				{name: 'save_theme', kind: 'function'},
 				{name: 'load_theme', kind: 'function'},
 				{name: 'create_theme_setup_script', kind: 'function'},
+				{name: 'sync_color_scheme_meta', kind: 'function'},
 				{name: 'create_theme_style_html', kind: 'function'},
 			],
 		},
