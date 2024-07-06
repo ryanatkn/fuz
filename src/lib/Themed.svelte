@@ -18,7 +18,6 @@
 		set_themer,
 		create_theme_style_html,
 		Themer,
-		sync_color_scheme_meta,
 	} from '$lib/theme.svelte.js';
 	import {effect_skip} from '$lib/rune_helpers.svelte.js';
 
@@ -113,12 +112,6 @@
 		const v = selected_themer.theme;
 		if (skip) return;
 		save_theme(v);
-	});
-
-	effect_skip((skip) => {
-		const c = selected_themer.color_scheme;
-		if (skip) return;
-		sync_color_scheme_meta(c);
 	});
 </script>
 

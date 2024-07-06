@@ -129,7 +129,7 @@ export const create_theme_setup_script = (
 	fallback: Color_Scheme = 'light',
 	key = COLOR_SCHEME_STORAGE_KEY,
 ): string => `
-	<meta name="color-scheme" content="light dark" />
+	<meta name="color-scheme" content="${fallback === 'dark' ? 'dark light' : 'light dark'}" />
 	<script nonce="%sveltekit.nonce%">
 		try {
 			let c = localStorage.getItem('${key}');
@@ -137,36 +137,9 @@ export const create_theme_setup_script = (
 				c = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 			}
 			if (c === 'dark') document.documentElement.classList.add('dark');
-			document.querySelector('meta[name="color-scheme"]')
-				.setAttribute(
-					'content',
-					c === 'dark'
-						? 'dark light'
-						: c === 'light'
-							? 'light dark'
-							: matchMedia('(prefers-color-scheme: dark)').matches
-								? 'dark light'
-								: 'light dark',
-				);
 		} catch (_) {${fallback === 'dark' ? " document.documentElement.classList.add('dark'); " : ''}}
 	</script>
 `;
-
-export const sync_color_scheme_meta = (color_scheme: Color_Scheme): void => {
-	if (!BROWSER) return;
-	const el = document.querySelector('meta[name="color-scheme"]');
-	if (!el) throw Error('expected to find color-scheme meta element');
-	el.setAttribute(
-		'content',
-		color_scheme === 'dark'
-			? 'dark light'
-			: color_scheme === 'light'
-				? 'light dark'
-				: matchMedia('(prefers-color-scheme: dark)').matches
-					? 'dark light'
-					: 'light dark',
-	);
-};
 
 // TODO does the `nonce` here and above behave as desired?
 
