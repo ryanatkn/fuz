@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.108.2
+
+### Patch Changes
+
+- add base path hack to `Library_Content.svelte` ([6b2b337](https://github.com/ryanatkn/fuz/commit/6b2b337))
+
 ## 0.108.1
 
 ### Patch Changes
