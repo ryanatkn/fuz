@@ -25,7 +25,7 @@
 
 	const library_links = get_library_links();
 
-	// TODO find the other of these hacks - what's going on? I can't seem to find anything searching online about this, it's `.` on SSR for some reason
+	// TODO @multiple find the other of these hacks - what's going on? I can't seem to find anything searching online about this, it's `.` on SSR for some reason
 	const TODO_HACK_base = (base as any) === '.' ? '' : base;
 
 	// Add subheadings only if not on the root page.
