@@ -69,8 +69,7 @@
 		{#if editing}edit{:else}create{/if} theme
 	</h2>
 	<aside>
-		Creating and editing themes at runtime is a work in progress, but you can click around to see
-		where it's going!
+		⚠️ Creating and editing themes at runtime is a work in progress i.e. totally unfinished.
 	</aside>
 	<header>
 		<div class="variables_header">

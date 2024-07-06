@@ -13,7 +13,7 @@
 
 	interface Props {
 		text: string;
-		slug: string;
+		slug: string; // TODO doesn't handle duplicate slugs for subheadings under different `Tome_Title`s, e.g. "more-details" may cause issues
 		tag?: Library_Link_Tag;
 		attrs?: SvelteHTMLElements['h3'];
 		children?: Snippet;

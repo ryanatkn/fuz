@@ -138,8 +138,9 @@
 				<p>
 					By default, <code>Color_Scheme_Input</code> works with <code>Themed</code>'s
 					<code>themer</code> in context to save the user's preference to <code>localStorage</code>.
-					To customize this behavior, pass a custom <code>value</code> or <code>onchange</code> function
-					prop.
+					To customize this behavior, pass your own <code>value</code> or <code>onchange</code>
+					props. The <code>value</code> defaults to <code>get_themer()</code> so technically you
+					could call <code>set_themer</code>, but it's unlikely you want to override it in context.
 				</p>
 			</aside>
 		</Details>
@@ -160,11 +161,13 @@
 		<!-- <button class="mb_lg" onclick={() => (show_create_theme_dialog = true)} disabled
 				>create a new theme (todo)</button
 			> -->
-		<aside>⚠️ The builtin themes need more work, but the proof of concept is ready!</aside>
+		<aside>
+			⚠️ The builtin themes need a lot more work, but the proof of concept seems to work.
+		</aside>
 		<aside>
 			⚠️ Custom themes currently pop in on page load. To see this, change from the base theme and
 			refresh the page. This can be fixed using a similar strategy that we use to avoid pop-in of
-			user-defined color schemes.
+			user-defined color schemes, but it's more involved.
 		</aside>
 	</section>
 	<!-- TODO @multiple revisit Themed_Scope
@@ -238,7 +241,7 @@
 	</section>
 	-->
 	<section class="theme">
-		<Tome_Subheading text="Theme usage" slug="theme-usage" />
+		<Tome_Subheading text="Example usage" slug="example-usage" />
 		<p>Themes are plain CSS that can be sourced in a variety of ways.</p>
 		<p>To use Fuz's base theme:</p>
 		<Code
@@ -266,10 +269,18 @@
 			<code>themer</code>:
 		</p>
 		<Code
+			content={`import {Themer} from '@ryanatkn/fuz/theme.svelte.js';\nconst themer = new Themer(...);`}
+			lang="ts"
+		/>
+		<Code
 			content={`<Themed {themer}>
 	{@render children()}
 </Themed>`}
 		/>
+		<aside>
+			The <code>themer</code> prop is not reactive because it's put in Svelte context without a wrapper.
+			This could be fixed, let me know if you have a usecase.
+		</aside>
 		<p>
 			<code>Themed</code> sets the <code>themer</code> in the Svelte context:
 		</p>
@@ -286,32 +297,31 @@ themer.theme.name; // '${themer.theme.name}'
 themer.color_scheme; // '${themer.color_scheme}'`}
 			lang="ts"
 		/>
-		<Details>
-			{#snippet summary()}More about <code>Themed</code>{/snippet}
-			<aside>
-				<p>
-					<code>Themed</code> initializes the system's theme support. Without it, the page will not
-					reflect the user's system
-					<code>color-scheme</code>. By default, <code>Themed</code> applies the base theme to the
-					root of the page via <code>create_theme_setup_script</code>. It uses JS to add the
-					<code>.dark</code> CSS class to the <code>:root</code> element.
-				</p>
-				<p>
-					This strategy enables color scheme and theme support with minimal CSS and optimal
-					performance for most use cases. The system supports plain CSS usage that can be static or
-					dynamic, scoped or global, or imported at buildtime or runtime. It also allows runtime
-					access to the data if you want to pay the performance costs.
-				</p>
-				<p>
-					The theme setup script interacts with <code>sync_color_scheme</code> to save the user's
-					preference to <code>localStorage</code>. See also <code>Color_Scheme_Input</code>.
-				</p>
-				<p>
-					The setup script avoids flash-on-load due to color scheme, but currently themes flash in
-					after loading. We'll try to fix this when the system stabilizes.
-				</p>
-			</aside>
-		</Details>
+	</section>
+	<section>
+		<Tome_Subheading text="More details" slug="more-details" />
+		<p>
+			<code>Themed</code> initializes the system's theme support. Without it, the page will not
+			reflect the user's system
+			<code>color-scheme</code>. By default, <code>Themed</code> applies the base theme to the root
+			of the page via <code>create_theme_setup_script</code>. It uses JS to add the
+			<code>.dark</code> CSS class to the <code>:root</code> element.
+		</p>
+		<p>
+			This strategy enables color scheme and theme support with minimal CSS and optimal performance
+			for most use cases. The system supports plain CSS usage that can be static or dynamic, or
+			imported at buildtime or runtime. It also allows runtime access to the underlying data like
+			the <a href="https://moss.ryanatkn.com/library/variables">style variables</a> if you want to pay
+			the performance costs. Scoped theming to one part of the page is planned.
+		</p>
+		<p>
+			The theme setup script interacts with <code>sync_color_scheme</code> to save the user's
+			preference to <code>localStorage</code>. See also <code>Color_Scheme_Input</code>.
+		</p>
+		<p>
+			The setup script avoids flash-on-load due to color scheme, but currently themes flash in after
+			loading. We'll try to fix this when the system stabilizes.
+		</p>
 	</section>
 </Tome_Detail>
 
