@@ -95,6 +95,16 @@ export const package_json = {
 			svelte: './dist/Color_Scheme_Input.svelte',
 			default: './dist/Color_Scheme_Input.svelte',
 		},
+		'./Community_Links_Panel.svelte': {
+			types: './dist/Community_Links_Panel.svelte.d.ts',
+			svelte: './dist/Community_Links_Panel.svelte',
+			default: './dist/Community_Links_Panel.svelte',
+		},
+		'./Community_Links.svelte': {
+			types: './dist/Community_Links.svelte.d.ts',
+			svelte: './dist/Community_Links.svelte',
+			default: './dist/Community_Links.svelte',
+		},
 		'./config.js': {types: './dist/config.d.ts', default: './dist/config.js'},
 		'./Contextmenu_Entry.svelte': {
 			types: './dist/Contextmenu_Entry.svelte.d.ts',
@@ -179,6 +189,11 @@ export const package_json = {
 			types: './dist/Hashlink.svelte.d.ts',
 			svelte: './dist/Hashlink.svelte',
 			default: './dist/Hashlink.svelte',
+		},
+		'./Hidden_Personal_Links.svelte': {
+			types: './dist/Hidden_Personal_Links.svelte.d.ts',
+			svelte: './dist/Hidden_Personal_Links.svelte',
+			default: './dist/Hidden_Personal_Links.svelte',
 		},
 		'./Hue_Input.svelte': {
 			types: './dist/Hue_Input.svelte.d.ts',
@@ -355,6 +370,8 @@ export const src_json = {
 		'./Breadcrumb.svelte': {path: 'Breadcrumb.svelte', declarations: []},
 		'./Card.svelte': {path: 'Card.svelte', declarations: []},
 		'./Color_Scheme_Input.svelte': {path: 'Color_Scheme_Input.svelte', declarations: []},
+		'./Community_Links_Panel.svelte': {path: 'Community_Links_Panel.svelte', declarations: []},
+		'./Community_Links.svelte': {path: 'Community_Links.svelte', declarations: []},
 		'./config.js': {
 			path: 'config.ts',
 			declarations: [
@@ -411,6 +428,7 @@ export const src_json = {
 		'./Github_Logo.svelte': {path: 'Github_Logo.svelte', declarations: []},
 		'./Gro_Logo.svelte': {path: 'Gro_Logo.svelte', declarations: []},
 		'./Hashlink.svelte': {path: 'Hashlink.svelte', declarations: []},
+		'./Hidden_Personal_Links.svelte': {path: 'Hidden_Personal_Links.svelte', declarations: []},
 		'./Hue_Input.svelte': {path: 'Hue_Input.svelte', declarations: []},
 		'./Library_Content.svelte': {path: 'Library_Content.svelte', declarations: []},
 		'./Library_Footer.svelte': {path: 'Library_Footer.svelte', declarations: []},

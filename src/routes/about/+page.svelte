@@ -5,6 +5,7 @@
 	import Fuz_Logo from '$lib/Fuz_Logo.svelte';
 
 	import {get_pkg} from '$routes/pkg.js';
+	import Community_Links_Panel from '$lib/Community_Links_Panel.svelte';
 
 	const pkg = get_pkg();
 
@@ -18,6 +19,7 @@
 		</header>
 		<Breadcrumb><Fuz_Logo size="32px" /></Breadcrumb>
 	</section>
+	<Community_Links_Panel />
 	<section class="box w_100 mb_lg">
 		<div class="panel p_md width_md">
 			<Package_Detail {pkg} />

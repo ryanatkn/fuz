@@ -115,6 +115,16 @@
       "svelte": "./dist/Color_Scheme_Input.svelte",
       "default": "./dist/Color_Scheme_Input.svelte"
     },
+    "./Community_Links_Panel.svelte": {
+      "types": "./dist/Community_Links_Panel.svelte.d.ts",
+      "svelte": "./dist/Community_Links_Panel.svelte",
+      "default": "./dist/Community_Links_Panel.svelte"
+    },
+    "./Community_Links.svelte": {
+      "types": "./dist/Community_Links.svelte.d.ts",
+      "svelte": "./dist/Community_Links.svelte",
+      "default": "./dist/Community_Links.svelte"
+    },
     "./config.js": {
       "types": "./dist/config.d.ts",
       "default": "./dist/config.js"
@@ -205,6 +215,11 @@
       "types": "./dist/Hashlink.svelte.d.ts",
       "svelte": "./dist/Hashlink.svelte",
       "default": "./dist/Hashlink.svelte"
+    },
+    "./Hidden_Personal_Links.svelte": {
+      "types": "./dist/Hidden_Personal_Links.svelte.d.ts",
+      "svelte": "./dist/Hidden_Personal_Links.svelte",
+      "default": "./dist/Hidden_Personal_Links.svelte"
     },
     "./Hue_Input.svelte": {
       "types": "./dist/Hue_Input.svelte.d.ts",

@@ -5,6 +5,7 @@
 	import Card from '$lib/Card.svelte';
 	import {get_pkg} from '$routes/pkg.js';
 	import Fuz_Logo from '$lib/Fuz_Logo.svelte';
+	import Hidden_Personal_Links from '$lib/Hidden_Personal_Links.svelte';
 
 	const pkg = get_pkg();
 </script>
@@ -63,15 +64,8 @@
 				{#snippet logo_header()}
 					<a href="{base}/about" class="mb_xs">about</a>
 				{/snippet}
-				<div hidden>
-					@ryanatkn@hci.social on <a rel="me" href="https://hci.social/@ryanatkn">Mastodon</a>
-				</div>
-				<div hidden>
-					@webdevladder@mastodon.social on <a rel="me" href="https://mastodon.social/@webdevladder"
-						>Mastodon</a
-					>
-				</div></Library_Footer
-			>
+				<Hidden_Personal_Links />
+			</Library_Footer>
 		</section>
 	</div>
 </main>
