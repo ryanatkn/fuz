@@ -3,7 +3,7 @@
 </script>
 
 <script lang="ts">
-	import {onDestroy, onMount, type Snippet} from 'svelte';
+	import {onMount, type Snippet} from 'svelte';
 	import {render_theme_style, type Color_Scheme, type Theme} from '@ryanatkn/moss/theme.js';
 	import {DEFAULT_THEME} from '@ryanatkn/moss/themes.js';
 	import {DEV} from 'esm-env';
@@ -73,9 +73,9 @@
 				console.warn('more than one Themed was mounted, use Themed_Scope if this was intended'); // eslint-disable-line no-console
 			}
 			mounted = true;
-		});
-		onDestroy(() => {
-			mounted = false;
+			return () => {
+				mounted = false;
+			};
 		});
 	}
 

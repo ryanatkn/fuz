@@ -32,7 +32,9 @@
 	// TODO make reactive?
 	if ($page.url.pathname !== TODO_HACK_base + library_links.root_path) {
 		library_links.add(id, text, slug, tag);
-		onDestroy(() => library_links.remove(id));
+		onDestroy(() => {
+			library_links.remove(id);
+		});
 	}
 
 	const classes = $derived('tome_subheading' + (attrs?.class ? ' ' + attrs.class : ''));
