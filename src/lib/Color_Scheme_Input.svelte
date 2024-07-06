@@ -2,7 +2,7 @@
 	import {swallow} from '@ryanatkn/belt/dom.js';
 	import {color_schemes, type Color_Scheme} from '@ryanatkn/moss/theme.js';
 
-	import {get_theme_state} from '$lib/theme.svelte.js';
+	import {get_themer} from '$lib/theme.svelte.js';
 
 	interface Props {
 		selected_color_scheme?: {color_scheme: Color_Scheme};
@@ -11,7 +11,7 @@
 	}
 
 	const {
-		selected_color_scheme = get_theme_state(),
+		selected_color_scheme = get_themer(),
 		select = (color_scheme) => {
 			selected_color_scheme.color_scheme = color_scheme;
 		},

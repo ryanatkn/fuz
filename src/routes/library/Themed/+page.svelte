@@ -17,7 +17,7 @@
 	import Theme_Form from '$routes/Theme_Form.svelte';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
 	import Themed_Scope from '$lib/Themed_Scope.svelte';
-	import {get_theme_state, save_theme, Theme_State} from '$lib/theme.svelte.js';
+	import {get_themer, save_theme, Themer} from '$lib/theme.svelte.js';
 
 	const LIBRARY_ITEM_NAME = 'Themed';
 
@@ -25,12 +25,12 @@
 
 	const themes = default_themes.slice();
 
-	const selected_theme_state = get_theme_state();
+	const selected_themer = get_themer();
 
 	// This is only needed for the custom controls below,
 	// it's automated by default with `Theme_Input` and the top-level `Themed`.
 	const select_theme = (theme: Theme): void => {
-		selected_theme_state.theme = theme;
+		selected_themer.theme = theme;
 		save_theme(theme);
 	};
 
@@ -81,12 +81,12 @@
 				<p>
 					<code>Themed</code> is designed to wrap every page at the top level so it can provide the
 					selected theme and color scheme in the Svelte context. It works without children, but
-					<code>get_theme_state</code> will fail unless you call
-					<code>set_theme_state</code> yourself.
+					<code>get_themer</code> will fail unless you call
+					<code>set_themer</code> yourself.
 				</p>
 				<p>
-					These context helpers provide the reactive <code>Theme_State</code> class instance to your
-					code, and they also reduce boilerplate in the helper components documented below.
+					These context helpers provide the reactive <code>Themer</code> class instance to your code,
+					and they also reduce boilerplate in the helper components documented below.
 				</p>
 				<p>
 					If you set stores in context manually, they must be the same references as the <code
@@ -117,7 +117,7 @@
 		<p>Pass a prop to override the default:</p>
 		<Code
 			content={`<Color_Scheme_Input\n\tselected_color_scheme={{color_scheme: ${
-				"'" + JSON.stringify(selected_theme_state.color_scheme).replace(/"/gu, '') + "'"
+				"'" + JSON.stringify(selected_themer.color_scheme).replace(/"/gu, '') + "'"
 			}}}\n/>`}
 		/>
 		<p>
@@ -173,10 +173,9 @@
 				{#each themes as theme (theme.name)}
 					<!-- TODO @multiple proper equality check, won't work when we allow editing, need an id or unique names and a deep equality check -->
 					{@const selected =
-						selected_theme_state.color_scheme === 'light' &&
-						theme.name === selected_theme_state.theme.name}
+						selected_themer.color_scheme === 'light' && theme.name === selected_themer.theme.name}
 					<Themed_Scope
-						selected_theme_state={new Theme_State(
+						selected_themer={new Themer(
 							untrack(() => theme),
 							'light',
 						)}
@@ -188,7 +187,7 @@
 								class:selected
 								onclick={() => {
 									select_theme(theme);
-									selected_theme_state.color_scheme = 'light';
+									selected_themer.color_scheme = 'light';
 								}}
 								>{#if selected}★{:else}☆{/if}</button
 							>
@@ -201,10 +200,9 @@
 				{#each themes as theme (theme.name)}
 					<!-- TODO @multiple proper equality check, won't work when we allow editing, need an id or unique names and a deep equality check -->
 					{@const selected =
-						selected_theme_state.color_scheme === 'dark' &&
-						theme.name === selected_theme_state.theme.name}
+						selected_themer.color_scheme === 'dark' && theme.name === selected_themer.theme.name}
 					<Themed_Scope
-						selected_theme_state={new Theme_State(
+						selected_themer={new Themer(
 							untrack(() => theme),
 							'dark',
 						)}
@@ -216,7 +214,7 @@
 								class:selected
 								onclick={() => {
 									select_theme(theme);
-									selected_theme_state.color_scheme = 'dark';
+									selected_themer.color_scheme = 'dark';
 								}}
 								>{#if selected}★{:else}☆{/if}</button
 							>
@@ -255,24 +253,24 @@
 		/>
 		<p>
 			<code>Themed</code> can be customized with the the nonreactive prop
-			<code>selected_theme_state</code>:
+			<code>selected_themer</code>:
 		</p>
 		<Code
-			content={`<Themed {selected_theme_state}>
+			content={`<Themed {selected_themer}>
 	{@render children()}
 </Themed>`}
 		/>
 		<p>
-			<code>Themed</code> sets the <code>selected_theme_state</code> in the Svelte context:
+			<code>Themed</code> sets the <code>selected_themer</code> in the Svelte context:
 		</p>
 		<Code
 			content={`// get values from the Svelte context provided by
 // the nearest \`Themed\` or \`Themed_Scope\` ancestor:
 
-import {get_theme_state} from '@ryanatkn/fuz/theme.js';
-const selected_theme_state = get_theme_state();
-selected_theme_state.theme.name; // '${selected_theme_state.theme.name}'
-selected_theme_state.color_scheme; // '${selected_theme_state.color_scheme}'`}
+import {get_themer} from '@ryanatkn/fuz/theme.js';
+const selected_themer = get_themer();
+selected_themer.theme.name; // '${selected_themer.theme.name}'
+selected_themer.color_scheme; // '${selected_themer.color_scheme}'`}
 			lang="ts"
 		/>
 		<Details>

@@ -457,10 +457,10 @@ export const src_json = {
 		'./theme.svelte.js': {
 			path: 'theme.svelte.ts',
 			declarations: [
-				{name: 'Theme_State', kind: 'class'},
-				{name: 'Theme_State_Json', kind: 'type'},
-				{name: 'get_theme_state', kind: 'function'},
-				{name: 'set_theme_state', kind: 'function'},
+				{name: 'Themer', kind: 'class'},
+				{name: 'Themer_Json', kind: 'type'},
+				{name: 'get_themer', kind: 'function'},
+				{name: 'set_themer', kind: 'function'},
 				{name: 'sync_color_scheme', kind: 'function'},
 				{name: 'COLOR_SCHEME_STORAGE_KEY', kind: 'variable'},
 				{name: 'save_color_scheme', kind: 'function'},

@@ -3,7 +3,7 @@ import {default_themes} from '@ryanatkn/moss/themes.js';
 import {BROWSER} from 'esm-env';
 import {getContext, setContext} from 'svelte';
 
-// TODO Can we solve the problem of theme flashing? serialize the whole `Theme_State`?
+// TODO Can we solve the problem of theme flashing? serialize the whole `Themer`?
 // I think so but we'd need Moss' `render_theme_style` to be available in the head somehow.
 // The current problem is that `render_theme_style` depends on all of the variables for the base theme,
 // but I think that can be fixed.
@@ -11,8 +11,7 @@ import {getContext, setContext} from 'svelte';
 // render_theme_style_fn: string,
 // const render_theme_style = ${render_theme_style_fn};
 
-// TODO BLOCK single word name? `Theme` is taken by Moss
-export class Theme_State {
+export class Themer {
 	theme: Theme = $state()!; // TODO better initialization?
 	color_scheme: Color_Scheme = $state()!; // TODO better initialization?
 
@@ -24,7 +23,7 @@ export class Theme_State {
 		this.color_scheme = color_scheme;
 	}
 
-	toJSON(): Theme_State_Json {
+	toJSON(): Themer_Json {
 		return {
 			theme: this.theme,
 			color_scheme: this.color_scheme,
@@ -32,15 +31,14 @@ export class Theme_State {
 	}
 }
 
-export interface Theme_State_Json {
+export interface Themer_Json {
 	theme: Theme;
 	color_scheme: Color_Scheme;
 }
 
-const THEME_STATE_KEY = Symbol('theme_state');
-export const get_theme_state = (): Theme_State => getContext(THEME_STATE_KEY);
-export const set_theme_state = (theme_state: Theme_State): Theme_State =>
-	setContext(THEME_STATE_KEY, theme_state);
+const THEME_STATE_KEY = Symbol('themer');
+export const get_themer = (): Themer => getContext(THEME_STATE_KEY);
+export const set_themer = (themer: Themer): Themer => setContext(THEME_STATE_KEY, themer);
 
 export const sync_color_scheme = (color_scheme: Color_Scheme | null): void => {
 	if (!BROWSER) return;
