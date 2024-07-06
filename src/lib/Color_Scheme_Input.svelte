@@ -1,22 +1,19 @@
 <script lang="ts">
-	import type {Writable} from 'svelte/store';
 	import {swallow} from '@ryanatkn/belt/dom.js';
 	import {color_schemes, type Color_Scheme} from '@ryanatkn/moss/theme.js';
 
-	import {get_color_scheme} from '$lib/Themed.svelte';
+	import {get_themer} from '$lib/theme.svelte.js';
 
 	interface Props {
-		selected_color_scheme?: Writable<Color_Scheme | null>;
-		select?: ((color_scheme: Color_Scheme) => void | boolean) | null;
-		onselect?: (color_scheme: Color_Scheme) => void;
+		value?: {color_scheme: Color_Scheme};
+		onchange?: (color_scheme: Color_Scheme) => void;
 	}
 
 	const {
-		selected_color_scheme = get_color_scheme(),
-		select = (color_scheme) => {
-			$selected_color_scheme = color_scheme;
+		value = get_themer(),
+		onchange = (color_scheme) => {
+			value.color_scheme = color_scheme; // won't work with POJOs but users could provide their own onchange in that case
 		},
-		onselect,
 	}: Props = $props();
 </script>
 
@@ -24,7 +21,7 @@
 https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/menubar_role -->
 <menu class="color_scheme_control unstyled">
 	{#each color_schemes as color_scheme (color_scheme)}
-		{@const selected = color_scheme === $selected_color_scheme}
+		{@const selected = color_scheme === value.color_scheme}
 		<button
 			class="color_scheme"
 			type="button"
@@ -36,9 +33,7 @@ https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/menubar_ro
 			aria-checked={selected}
 			onclick={(e) => {
 				swallow(e);
-				if (select?.(color_scheme) !== false) {
-					onselect?.(color_scheme);
-				}
+				onchange(color_scheme);
 			}}
 		>
 			<div class="content">{color_scheme}</div>

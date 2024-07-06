@@ -28,7 +28,9 @@
 	// const slug = $derived(slugify(tome.name));
 	// $effect(() => library_links.add(id, tome.name, slug));
 
-	onDestroy(() => library_links.remove(id));
+	onDestroy(() => {
+		library_links.remove(id);
+	});
 
 	const {path, path_is_selected} = $derived(to_library_path_info(tome.slug, $page.url.pathname));
 </script>

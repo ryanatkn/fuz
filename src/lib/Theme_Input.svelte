@@ -1,13 +1,12 @@
 <script lang="ts">
-	import type {Readable} from 'svelte/store';
 	import {swallow} from '@ryanatkn/belt/dom.js';
 	import type {Theme} from '@ryanatkn/moss/theme.js';
 	import {default_themes} from '@ryanatkn/moss/themes.js';
 
-	import {get_theme} from '$lib/Themed.svelte';
+	import {get_themer} from '$lib/theme.svelte.js';
 
 	interface Props {
-		selected_theme?: Readable<Theme | null>;
+		selected_theme?: {theme: Theme};
 		themes?: Theme[];
 		enable_editing?: boolean;
 		select?: ((theme: Theme) => void | boolean) | null;
@@ -16,23 +15,21 @@
 	}
 
 	const {
-		selected_theme = get_theme(),
+		selected_theme = get_themer(),
 		themes = default_themes,
 		enable_editing = false,
 		select = (theme) => {
-			$selected_theme = theme;
+			selected_theme.theme = theme;
 		},
 		onselect,
 		onedit,
 	}: Props = $props();
-
-	const selected_theme_name = $derived($selected_theme?.name);
 </script>
 
 <menu class="theme_input unstyled">
 	{#each themes as theme (theme.name)}
 		<!-- TODO @multiple proper equality check, won't work when we allow editing, need an id or unique names and a deep equality check -->
-		{@const selected = theme.name === selected_theme_name}
+		{@const selected = theme.name === selected_theme.theme.name}
 		<li class="row" role="none">
 			<button
 				type="button"

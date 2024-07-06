@@ -1,5 +1,7 @@
 <script lang="ts">
-	import {writable} from 'svelte/store';
+	// TODO @multiple why is this import needed? `Code` already imports it. Fails in dev with SSR enabled without it. Is there a Vite config option that would be better? I tried the combinations of `ssr.external/noExternal/external` with `@ryanatkn/fuz_code` and `prismjs`.
+	import Prism from 'prismjs';
+	Prism;
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 	import type {Theme} from '@ryanatkn/moss/theme.js';
 	import {default_themes} from '@ryanatkn/moss/themes.js';
@@ -9,13 +11,12 @@
 	import Dialog from '$lib/Dialog.svelte';
 	import {get_tome} from '$lib/tome.js';
 	import Color_Scheme_Input from '$lib/Color_Scheme_Input.svelte';
-	import {get_theme, get_color_scheme} from '$lib/Themed.svelte';
 	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 	import Theme_Input from '$lib/Theme_Input.svelte';
 	import Theme_Form from '$routes/Theme_Form.svelte';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
-	import Themed_Scope from '$lib/Themed_Scope.svelte';
-	import {save_theme} from '$lib/theme.js';
+	// import Themed_Scope from '$routes/library/Themed/Themed_Scope.svelte'; // TODO @multiple revisit Themed_Scope
+	import {get_themer} from '$lib/theme.svelte.js';
 
 	const LIBRARY_ITEM_NAME = 'Themed';
 
@@ -23,15 +24,7 @@
 
 	const themes = default_themes.slice();
 
-	const selected_theme = get_theme();
-	const selected_color_scheme = get_color_scheme();
-
-	// This is only needed for the custom controls below,
-	// it's automated by default with `Theme_Input` and the top-level `Themed`.
-	const select_theme = (theme: Theme): void => {
-		$selected_theme = theme;
-		save_theme(theme);
-	};
+	const themer = get_themer();
 
 	// let show_create_theme_dialog = false;
 	let editing_theme: null | Theme = $state(null);
@@ -57,6 +50,7 @@
 		<Details>
 			{#snippet summary()}Why the singleton?{/snippet}
 			<aside>
+				<p>Most theme usage affects the whole page, so Fuz makes that easy.</p>
 				<p>
 					By default <code>Themed</code> syncs its settings to the global <code>:root</code> tag and
 					persists to <code>localStorage</code>.
@@ -69,7 +63,8 @@
 					<li><code>load_theme</code></li>
 					<li><code>save_theme</code></li>
 				</ul>
-				<p>See <code>Themed_Scope</code> below to theme one branch of the DOM tree.</p>
+				<p>A feature to support partial page theming is planned with <code>Themed_Scope</code>.</p>
+				<!-- TODO @multiple revisit Themed_Scope <p>See <code>Themed_Scope</code> below to theme one branch of the DOM tree.</p> -->
 			</aside>
 		</Details>
 		<Details>
@@ -77,22 +72,32 @@
 			<aside>
 				<p>
 					<code>Themed</code> is designed to wrap every page at the top level so it can provide the
-					selected theme and color scheme in the Svelte context. It works without children, but
-					<code>get_theme</code> and <code>get_color_scheme</code> will fail unless you call
-					<code>set_theme</code> and <code>set_color_scheme</code> yourself.
+					selected theme and color scheme in the Svelte context via a <code>themer</code> instance.
+					It works without children, but <code>get_themer</code> will fail unless you call
+					<code>set_themer</code> yourself.
 				</p>
 				<p>
-					These context helpers provide the <code>writable</code> stores to your code, and they also
-					reduce boilerplate in the helper components documented below.
+					This lets you call <code>get_themer</code> to access the reactive <code>Themer</code>
+					class instance anywhere in your code. The helper components on this page like
+					<code>Color_Scheme_Input</code> and <code>Theme_Input</code> use it so they don't require
+					a <code>themer</code> prop.
 				</p>
 				<p>
-					If you set stores in context manually, they must be the same references as the <code
-						>Themed</code
-					> props:
+					If you don't don't want to wrap everything in <code>Themed</code> for some reason, you can
+					set a <code>Themer</code> in context manually. It must be the same reference as the
+					<code>Themed</code> prop:
 				</p>
 				<Code
 					content={'<' +
-						`script>\n\tconst theme = writable(...);\n\tconst color_scheme = writable(...);\n\tset_theme(theme);\n\tset_color_scheme(color_scheme);\n</script>\n<Themed\n\tselected_theme={theme}\n\tselected_color_scheme={color_scheme}\n/>\n<!-- sibling content... -->`}
+						`script>
+	const themer = new Themer(...);
+	set_themer(themer);
+</script>
+<Themed {themer} />
+<!--
+	sibling components not nested in \`Themed\`
+	can now call \`get_themer\`
+-->`}
 				/>
 			</aside>
 		</Details>
@@ -111,13 +116,12 @@
 			lang="ts"
 		/>
 		<Code content="<Color_Scheme_Input />" />
-		<p>Pass a prop to override the default:</p>
+		<p>Pass props to override the default:</p>
+		<!-- TODO this is bugged on page load, auto is SSR'd but doesn't update here, repro and report to Svelte -->
 		<Code
-			content={`<Color_Scheme_Input\n\tselected_color_scheme={writable(${
-				$selected_color_scheme
-					? "'" + JSON.stringify($selected_color_scheme).replace(/"/gu, '') + "'"
-					: 'null'
-			})}\n/>`}
+			content={`<Color_Scheme_Input\n\tvalue={{color_scheme: ${
+				"'" + JSON.stringify(themer.color_scheme).replace(/"/gu, '') + "'"
+			}}}\n\tonchange={...}\n/>`}
 		/>
 		<p>
 			The builtin themes support both dark and light color schemes. Custom themes may support one or
@@ -131,10 +135,11 @@
 					boilerplate.
 				</p>
 				<p>
-					By default, <code>Color_Scheme_Input</code> works with <code>Themed</code> to save the
-					user's preference to <code>localStorage</code>. To customize this behavior, pass a custom
-					<code>selected_color_scheme</code>
-					or <code>select</code> function prop.
+					By default, <code>Color_Scheme_Input</code> works with <code>Themed</code>'s
+					<code>themer</code> in context to save the user's preference to <code>localStorage</code>.
+					To customize this behavior, pass your own <code>value</code> or <code>onchange</code>
+					props. The <code>value</code> defaults to <code>get_themer()</code> so technically you
+					could call <code>set_themer</code>, but it's unlikely you want to override it in context.
 				</p>
 			</aside>
 		</Details>
@@ -155,8 +160,16 @@
 		<!-- <button class="mb_lg" onclick={() => (show_create_theme_dialog = true)} disabled
 				>create a new theme (todo)</button
 			> -->
-		<aside>The builtin themes need more work, but the proof of concept is ready!</aside>
+		<aside>
+			⚠️ The builtin themes need a lot more work, but the proof of concept seems to work.
+		</aside>
+		<aside>
+			⚠️ Custom themes currently pop in on page load. To see this, change from the base theme and
+			refresh the page. This can be fixed using a similar strategy that we use to avoid pop-in of
+			user-defined color schemes, but it's more involved.
+		</aside>
 	</section>
+	<!-- TODO @multiple revisit Themed_Scope
 	<section class="theme">
 		<Tome_Subheading text="Scoped themes" slug="scoped-themes" />
 		<Details>
@@ -168,12 +181,16 @@
 				<Code content={`<Themed_Scope {selected_theme}>\n\t\t...\n</Themed_Scope>`} />
 			</div>
 			<div>
-				<!-- TODO this is a lot of copypasta -->
 				{#each themes as theme (theme.name)}
-					<!-- TODO @multiple proper equality check, won't work when we allow editing, need an id or unique names and a deep equality check -->
+					TODO @multiple proper equality check, won't work when we allow editing, need an id or unique names and a deep equality check
 					{@const selected =
-						$selected_color_scheme === 'light' && theme.name === $selected_theme.name}
-					<Themed_Scope selected_theme={writable(theme)} selected_color_scheme={writable('light')}>
+						themer.color_scheme === 'light' && theme.name === themer.theme.name}
+					<Themed_Scope
+						themer={new Themer(
+							untrack(() => theme),
+							'light',
+						)}
+					>
 						<div class="box row p_sm">
 							<button
 								type="button"
@@ -181,7 +198,7 @@
 								class:selected
 								onclick={() => {
 									select_theme(theme);
-									$selected_color_scheme = 'light';
+									themer.color_scheme = 'light';
 								}}
 								>{#if selected}★{:else}☆{/if}</button
 							>
@@ -192,10 +209,15 @@
 					</Themed_Scope>
 				{/each}
 				{#each themes as theme (theme.name)}
-					<!-- TODO @multiple proper equality check, won't work when we allow editing, need an id or unique names and a deep equality check -->
+					@multiple proper equality check, won't work when we allow editing, need an id or unique names and a deep equality check
 					{@const selected =
-						$selected_color_scheme === 'dark' && theme.name === $selected_theme.name}
-					<Themed_Scope selected_theme={writable(theme)} selected_color_scheme={writable('dark')}>
+						themer.color_scheme === 'dark' && theme.name === themer.theme.name}
+					<Themed_Scope
+						themer={new Themer(
+							untrack(() => theme),
+							'dark',
+						)}
+					>
 						<div class="box row p_sm">
 							<button
 								type="button"
@@ -203,7 +225,7 @@
 								class:selected
 								onclick={() => {
 									select_theme(theme);
-									$selected_color_scheme = 'dark';
+									themer.color_scheme = 'dark';
 								}}
 								>{#if selected}★{:else}☆{/if}</button
 							>
@@ -216,8 +238,9 @@
 			</div>
 		</Details>
 	</section>
+	-->
 	<section class="theme">
-		<Tome_Subheading text="Theme usage" slug="theme-usage" />
+		<Tome_Subheading text="Example usage" slug="example-usage" />
 		<p>Themes are plain CSS that can be sourced in a variety of ways.</p>
 		<p>To use Fuz's base theme:</p>
 		<Code
@@ -241,58 +264,67 @@
 </Themed>`}
 		/>
 		<p>
-			<code>Themed</code> can be customized with the nonreactive, bindable, writable store props
-			<code>selected_theme</code>
-			and <code>selected_color_scheme</code>:
+			<code>Themed</code> can be customized with the the nonreactive prop
+			<code>themer</code>:
 		</p>
 		<Code
-			content={`<Themed {selected_theme} {selected_color_scheme}>
+			content={`import {Themer} from '@ryanatkn/fuz/theme.svelte.js';\nconst themer = new Themer(...);`}
+			lang="ts"
+		/>
+		<Code
+			content={`<Themed {themer}>
 	{@render children()}
 </Themed>`}
 		/>
+		<aside>
+			The <code>themer</code> prop is not reactive because it's put in Svelte context without a wrapper.
+			This could be fixed, let me know if you have a usecase.
+		</aside>
 		<p>
-			<code>Themed</code> sets the writable stores <code>selected_theme</code>
-			and <code>selected_color_scheme</code> in the Svelte context:
+			<code>Themed</code> sets the <code>themer</code> in the Svelte context:
 		</p>
+		<!-- TODO @multiple revisit Themed_Scope
+		 	// the nearest \`Themed\` or \`Themed_Scope\` ancestor:
+		-->
 		<Code
 			content={`// get values from the Svelte context provided by
-// the nearest \`Themed\` or \`Themed_Scope\` ancestor:
-
-import {get_theme} from '@ryanatkn/fuz/theme.js';
-const selected_theme = get_theme();
-$selected_theme.name; // '${$selected_theme.name}'
-
-import {get_color_scheme} from '@ryanatkn/fuz/theme.js';
-const selected_color_scheme = get_color_scheme();
-$selected_color_scheme; // '${$selected_color_scheme}'`}
+// the nearest \`Themed\` ancestor:
+import {get_themer} from '@ryanatkn/fuz/theme.js';
+const themer = get_themer();
+themer.theme.name; // '${themer.theme.name}'
+themer.color_scheme; // '${themer.color_scheme}'`}
 			lang="ts"
 		/>
-		<Details>
-			{#snippet summary()}More about <code>Themed</code>{/snippet}
-			<aside>
-				<p>
-					<code>Themed</code> initializes the system's theme support. Without it, the page will not
-					reflect the user's system
-					<code>color-scheme</code>. By default, <code>Themed</code> applies the base theme to the
-					root of the page via <code>create_theme_setup_script</code>. It uses JS to add the
-					<code>.dark</code> CSS class to the <code>:root</code> element.
-				</p>
-				<p>
-					This strategy enables color scheme and theme support with minimal CSS and optimal
-					performance for most use cases. The system supports plain CSS usage that can be static or
-					dynamic, scoped or global, or imported at buildtime or runtime. It also allows runtime
-					access to the data if you want to pay the performance costs.
-				</p>
-				<p>
-					The theme setup script interacts with <code>sync_color_scheme</code> to save the user's
-					preference to <code>localStorage</code>. See also <code>Color_Scheme_Input</code>.
-				</p>
-				<p>
-					The setup script avoids flash-on-load due to color scheme, but currently themes flash in
-					after loading. We'll try to fix this when the system stabilizes.
-				</p>
-			</aside>
-		</Details>
+		<p>
+			For a more complete example, see <a href="https://github.com/ryanatkn/fuz_template"
+				>fuz_template</a
+			>.
+		</p>
+	</section>
+	<section>
+		<Tome_Subheading text="More details" slug="more-details" />
+		<p>
+			<code>Themed</code> initializes the system's theme support. Without it, the page will not
+			reflect the user's system
+			<code>color-scheme</code>. By default, <code>Themed</code> applies the base theme to the root
+			of the page via <code>create_theme_setup_script</code>. It uses JS to add the
+			<code>.dark</code> CSS class to the <code>:root</code> element.
+		</p>
+		<p>
+			This strategy enables color scheme and theme support with minimal CSS and optimal performance
+			for most use cases. The system supports plain CSS usage that can be static or dynamic, or
+			imported at buildtime or runtime. It also allows runtime access to the underlying data like
+			the <a href="https://moss.ryanatkn.com/library/variables">style variables</a> if you want to pay
+			the performance costs. Scoped theming to one part of the page is planned.
+		</p>
+		<p>
+			The theme setup script interacts with <code>sync_color_scheme</code> to save the user's
+			preference to <code>localStorage</code>. See also <code>Color_Scheme_Input</code>.
+		</p>
+		<p>
+			The setup script avoids flash-on-load due to color scheme, but currently themes flash in after
+			loading. We'll try to fix this when the system stabilizes.
+		</p>
 	</section>
 </Tome_Detail>
 

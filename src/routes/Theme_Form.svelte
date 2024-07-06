@@ -1,4 +1,7 @@
 <script lang="ts">
+	// TODO @multiple why is this import needed? `Code` already imports it. Fails in dev with SSR enabled without it. Is there a Vite config option that would be better? I tried the combinations of `ssr.external/noExternal/external` with `@ryanatkn/fuz_code` and `prismjs`.
+	import Prism from 'prismjs';
+	Prism;
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 	import {swallow} from '@ryanatkn/belt/dom.js';
 	import {render_theme_style, type Style_Variable, type Theme} from '@ryanatkn/moss/theme.js';
@@ -66,8 +69,7 @@
 		{#if editing}edit{:else}create{/if} theme
 	</h2>
 	<aside>
-		Creating and editing themes at runtime is a work in progress, but you can click around to see
-		where it's going!
+		⚠️ Creating and editing themes at runtime is a work in progress i.e. totally unfinished.
 	</aside>
 	<header>
 		<div class="variables_header">
