@@ -25,7 +25,6 @@
 	const themes = default_themes.slice();
 
 	const themer = get_themer();
-	console.log(`init themer.color_scheme`, themer.color_scheme);
 
 	// let show_create_theme_dialog = false;
 	let editing_theme: null | Theme = $state(null);
