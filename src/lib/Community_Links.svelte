@@ -56,9 +56,3 @@
 		support me at <a href="https://www.ryanatkn.com/funding">ryanatkn.com/funding</a>
 	</li>
 </ul>
-
-<style>
-	li > a {
-		word-break: break-all;
-	}
-</style>
