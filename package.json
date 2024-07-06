@@ -305,6 +305,11 @@
       "svelte": "./dist/Pending_Button.svelte",
       "default": "./dist/Pending_Button.svelte"
     },
+    "./Project_Links.svelte": {
+      "types": "./dist/Project_Links.svelte.d.ts",
+      "svelte": "./dist/Project_Links.svelte",
+      "default": "./dist/Project_Links.svelte"
+    },
     "./Redirect.svelte": {
       "types": "./dist/Redirect.svelte.d.ts",
       "svelte": "./dist/Redirect.svelte",

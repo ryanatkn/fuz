@@ -1,11 +1,10 @@
 <script lang="ts">
+	import {get_pkg} from '$routes/pkg.js';
+	import Community_Links_Panel from '$lib/Community_Links_Panel.svelte';
 	import Package_Detail from '$lib/Package_Detail.svelte';
 	import Library_Footer from '$lib/Library_Footer.svelte';
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
 	import Fuz_Logo from '$lib/Fuz_Logo.svelte';
-
-	import {get_pkg} from '$routes/pkg.js';
-	import Community_Links_Panel from '$lib/Community_Links_Panel.svelte';
 
 	const pkg = get_pkg();
 

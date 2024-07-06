@@ -279,6 +279,11 @@ export const package_json = {
 			svelte: './dist/Pending_Button.svelte',
 			default: './dist/Pending_Button.svelte',
 		},
+		'./Project_Links.svelte': {
+			types: './dist/Project_Links.svelte.d.ts',
+			svelte: './dist/Project_Links.svelte',
+			default: './dist/Project_Links.svelte',
+		},
 		'./Redirect.svelte': {
 			types: './dist/Redirect.svelte.d.ts',
 			svelte: './dist/Redirect.svelte',
@@ -457,6 +462,7 @@ export const src_json = {
 		'./Package_Summary.svelte': {path: 'Package_Summary.svelte', declarations: []},
 		'./Pending_Animation.svelte': {path: 'Pending_Animation.svelte', declarations: []},
 		'./Pending_Button.svelte': {path: 'Pending_Button.svelte', declarations: []},
+		'./Project_Links.svelte': {path: 'Project_Links.svelte', declarations: []},
 		'./Redirect.svelte': {path: 'Redirect.svelte', declarations: []},
 		'./rune_helpers.svelte.js': {
 			path: 'rune_helpers.svelte.ts',
