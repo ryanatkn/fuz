@@ -41,10 +41,10 @@
   },
   "devDependencies": {
     "@changesets/changelog-git": "^0.2.0",
-    "@ryanatkn/belt": "^0.24.1",
+    "@ryanatkn/belt": "^0.24.3",
     "@ryanatkn/eslint-config": "^0.4.0",
     "@ryanatkn/fuz_code": "^0.15.0",
-    "@ryanatkn/gro": "^0.129.0",
+    "@ryanatkn/gro": "^0.129.4",
     "@ryanatkn/moss": "^0.7.0",
     "@sveltejs/adapter-static": "^3.0.2",
     "@sveltejs/kit": "^2.5.18",
