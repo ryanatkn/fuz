@@ -36,10 +36,10 @@
 		 * because it's set in context without a wrapper, use `{#key theme}` if it changes.
 		 * @nonreactive
 		 */
-		selected_themer?: Themer;
+		themer?: Themer;
 		children: Snippet<
 			[
-				selected_themer: Themer,
+				themer: Themer,
 				style: string | null,
 				theme_style_html: string | null,
 				theme_setup_script: string,
@@ -55,10 +55,7 @@
 		save_theme = default_save_theme,
 		theme_fallback,
 		color_scheme_fallback,
-		selected_themer = new Themer(
-			load_theme(theme_fallback),
-			load_color_scheme(color_scheme_fallback),
-		),
+		themer = new Themer(load_theme(theme_fallback), load_color_scheme(color_scheme_fallback)),
 		children,
 	}: Props = $props();
 
@@ -87,29 +84,29 @@
 	 * but combining them was too complicated both internally and externally.
 	 */
 
-	set_themer(selected_themer);
+	set_themer(themer);
 
-	const selected_theme_name = $derived(selected_themer.theme.name);
+	const selected_theme_name = $derived(themer.theme.name);
 	const style = $derived(
 		selected_theme_name === DEFAULT_THEME.name // TODO @multiple proper equality check, won't work when we allow editing, need an id or unique names and a deep equality check
 			? null
-			: render_theme_style(selected_themer.theme),
+			: render_theme_style(themer.theme),
 	);
 	const theme_style_html = $derived(style ? create_theme_style_html(style) : null);
 	const theme_setup_script = $derived(create_theme_setup_script(color_scheme_fallback));
 
 	effect_skip((skip) => {
-		const v = selected_themer.color_scheme;
+		const v = themer.color_scheme;
 		if (skip) return;
 		sync_color_scheme(v);
 	});
 	effect_skip((skip) => {
-		const v = selected_themer.color_scheme;
+		const v = themer.color_scheme;
 		if (skip) return;
 		save_color_scheme(v); // helper may change, so is separate from `sync_color_scheme`
 	});
 	effect_skip((skip) => {
-		const v = selected_themer.theme;
+		const v = themer.theme;
 		if (skip) return;
 		save_theme(v);
 	});
@@ -121,4 +118,4 @@
 	{#if theme_setup_script}{@html theme_setup_script}{/if}
 </svelte:head>
 
-{@render children(selected_themer, style, theme_style_html, theme_setup_script)}
+{@render children(themer, style, theme_style_html, theme_setup_script)}
