@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.108.1
+
+### Patch Changes
+
+- fix word-break on `Community_Links.svelte` ([2a21db8](https://github.com/ryanatkn/fuz/commit/2a21db8))
+
 ## 0.108.0
 
 ### Minor Changes
