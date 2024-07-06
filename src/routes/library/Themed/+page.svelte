@@ -5,7 +5,6 @@
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 	import type {Theme} from '@ryanatkn/moss/theme.js';
 	import {default_themes} from '@ryanatkn/moss/themes.js';
-	import {untrack} from 'svelte';
 
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
 	import Details from '$lib/Details.svelte';
@@ -16,8 +15,8 @@
 	import Theme_Input from '$lib/Theme_Input.svelte';
 	import Theme_Form from '$routes/Theme_Form.svelte';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
-	import Themed_Scope from '$lib/Themed_Scope.svelte';
-	import {get_themer, save_theme, Themer} from '$lib/theme.svelte.js';
+	// import Themed_Scope from '$routes/library/Themed/Themed_Scope.svelte';
+	import {get_themer} from '$lib/theme.svelte.js';
 
 	const LIBRARY_ITEM_NAME = 'Themed';
 
@@ -26,13 +25,6 @@
 	const themes = default_themes.slice();
 
 	const selected_themer = get_themer();
-
-	// This is only needed for the custom controls below,
-	// it's automated by default with `Theme_Input` and the top-level `Themed`.
-	const select_theme = (theme: Theme): void => {
-		selected_themer.theme = theme;
-		save_theme(theme);
-	};
 
 	// let show_create_theme_dialog = false;
 	let editing_theme: null | Theme = $state(null);
@@ -158,6 +150,7 @@
 			> -->
 		<aside>The builtin themes need more work, but the proof of concept is ready!</aside>
 	</section>
+	<!-- TODO revisit this, is too broken to include right now
 	<section class="theme">
 		<Tome_Subheading text="Scoped themes" slug="scoped-themes" />
 		<Details>
@@ -169,9 +162,8 @@
 				<Code content={`<Themed_Scope {selected_theme}>\n\t\t...\n</Themed_Scope>`} />
 			</div>
 			<div>
-				<!-- TODO this is a lot of copypasta -->
 				{#each themes as theme (theme.name)}
-					<!-- TODO @multiple proper equality check, won't work when we allow editing, need an id or unique names and a deep equality check -->
+					TODO @multiple proper equality check, won't work when we allow editing, need an id or unique names and a deep equality check
 					{@const selected =
 						selected_themer.color_scheme === 'light' && theme.name === selected_themer.theme.name}
 					<Themed_Scope
@@ -198,7 +190,7 @@
 					</Themed_Scope>
 				{/each}
 				{#each themes as theme (theme.name)}
-					<!-- TODO @multiple proper equality check, won't work when we allow editing, need an id or unique names and a deep equality check -->
+					@multiple proper equality check, won't work when we allow editing, need an id or unique names and a deep equality check
 					{@const selected =
 						selected_themer.color_scheme === 'dark' && theme.name === selected_themer.theme.name}
 					<Themed_Scope
@@ -227,6 +219,7 @@
 			</div>
 		</Details>
 	</section>
+	-->
 	<section class="theme">
 		<Tome_Subheading text="Theme usage" slug="theme-usage" />
 		<p>Themes are plain CSS that can be sourced in a variety of ways.</p>

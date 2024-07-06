@@ -114,14 +114,13 @@ export const load_theme = (fallback: Theme = default_themes[0], key = THEME_STOR
 	return fallback;
 };
 
-// TODO BLOCK the `meta` may not be doing what we want here, do we instead need CSS that overrides the Moss value? or delete it?
 /**
  * Creates an HTML script string to be inserted into the `head`
  * that initializes the dark/light color scheme.
  * https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme
  * Prefers a value in `localStorage` if available, and if not detects using `matchMedia`.
  * On unexpected errors, like if `localStorage` is disabled, the `fallback` value is used.
- * @param fallback
+ * @param fallback sets `content` of `<meta name="color-scheme">` and the default if something fails
  * @param key
  * @returns HTML string with the color scheme setup script and a `color-schema` meta tag
  */
