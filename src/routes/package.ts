@@ -299,11 +299,6 @@ export const package_json = {
 			default: './dist/Theme_Input.svelte',
 		},
 		'./theme.svelte.js': {types: './dist/theme.svelte.d.ts', default: './dist/theme.svelte.js'},
-		'./Themed_Scope.svelte': {
-			types: './dist/Themed_Scope.svelte.d.ts',
-			svelte: './dist/Themed_Scope.svelte',
-			default: './dist/Themed_Scope.svelte',
-		},
 		'./Themed.svelte': {
 			types: './dist/Themed.svelte.d.ts',
 			svelte: './dist/Themed.svelte',
@@ -469,11 +464,9 @@ export const src_json = {
 				{name: 'save_theme', kind: 'function'},
 				{name: 'load_theme', kind: 'function'},
 				{name: 'create_theme_setup_script', kind: 'function'},
-				{name: 'sync_color_scheme_meta', kind: 'function'},
 				{name: 'create_theme_style_html', kind: 'function'},
 			],
 		},
-		'./Themed_Scope.svelte': {path: 'Themed_Scope.svelte', declarations: []},
 		'./Themed.svelte': {path: 'Themed.svelte', declarations: []},
 		'./Tome_Detail.svelte': {path: 'Tome_Detail.svelte', declarations: []},
 		'./Tome_Link.svelte': {path: 'Tome_Link.svelte', declarations: []},

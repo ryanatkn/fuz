@@ -62,11 +62,11 @@
 	// TODO improve this so it works without `unsafe-inline` in the CSP - hash/nonce?
 
 	// In dev mode only, warn about misuse of the singleton `Themed`.
-	// Use `Themed_Scope` for non-global themes and color schemes.
 	if (DEV) {
 		onMount(() => {
 			if (mounted) {
-				console.warn('more than one Themed was mounted, use Themed_Scope if this was intended'); // eslint-disable-line no-console
+				console.warn('more than one Themed was mounted'); // eslint-disable-line no-console
+				// console.warn('more than one Themed was mounted, use Themed_Scope if this was intended'); // TODO @multiple revisit Themed_Scope
 			}
 			mounted = true;
 			return () => {
@@ -78,11 +78,12 @@
 	/**
 	 * `Themed` adds global color scheme and theme support to the page.
 	 * It also sets in the Svelte context a reactive `themer` containing the theme and color scheme.
-	 *
-	 * To scope the theme to only a part of the page, use `Themed_Scope`.
-	 * There is some duplicated code between the two,
-	 * but combining them was too complicated both internally and externally.
 	 */
+
+	//  TODO @multiple revisit Themed_Scope
+	//  * To scope the theme to only a part of the page, use `Themed_Scope`.
+	//  * There is some duplicated code between the two,
+	//  * but combining them was too complicated both internally and externally.
 
 	set_themer(themer);
 

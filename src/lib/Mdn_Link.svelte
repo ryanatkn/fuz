@@ -25,12 +25,11 @@
 	const final_children = $derived(children ?? strip_end(path, '/').split('/').at(-1)!);
 </script>
 
-<a {...attrs} {href} class="chip nowrap">
-	<Mdn_Logo
-		classes="inline_block mr_sm vertical_align_middle"
-	/>{#if typeof final_children === 'string'}
+<a {...attrs} {href} class="chip nowrap"
+	>{#if typeof final_children === 'string'}
 		<span class="font_mono">{final_children}</span>
 	{:else}
 		{@render final_children()}
 	{/if}
-</a>
+	<Mdn_Logo classes="inline_block mx_xs3 vertical_align_middle" /></a
+>

@@ -328,11 +328,6 @@
       "types": "./dist/theme.svelte.d.ts",
       "default": "./dist/theme.svelte.js"
     },
-    "./Themed_Scope.svelte": {
-      "types": "./dist/Themed_Scope.svelte.d.ts",
-      "svelte": "./dist/Themed_Scope.svelte",
-      "default": "./dist/Themed_Scope.svelte"
-    },
     "./Themed.svelte": {
       "types": "./dist/Themed.svelte.d.ts",
       "svelte": "./dist/Themed.svelte",

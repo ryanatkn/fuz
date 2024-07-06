@@ -9,7 +9,7 @@
 
 	import {get_themer, set_themer, Themer, create_theme_style_html} from '$lib/theme.svelte.js';
 
-	// TODO revisit this, currently disabled
+	// TODO @multiple revisit Themed_Scope
 
 	interface Props {
 		/**

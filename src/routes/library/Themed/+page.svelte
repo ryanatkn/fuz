@@ -15,7 +15,7 @@
 	import Theme_Input from '$lib/Theme_Input.svelte';
 	import Theme_Form from '$routes/Theme_Form.svelte';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
-	// import Themed_Scope from '$routes/library/Themed/Themed_Scope.svelte';
+	// import Themed_Scope from '$routes/library/Themed/Themed_Scope.svelte'; // TODO @multiple revisit Themed_Scope
 	import {get_themer} from '$lib/theme.svelte.js';
 
 	const LIBRARY_ITEM_NAME = 'Themed';
@@ -28,8 +28,6 @@
 
 	// let show_create_theme_dialog = false;
 	let editing_theme: null | Theme = $state(null);
-
-	// TODO BLOCK update docs below
 </script>
 
 <Tome_Detail {tome}>
@@ -64,7 +62,7 @@
 					<li><code>load_theme</code></li>
 					<li><code>save_theme</code></li>
 				</ul>
-				<p>See <code>Themed_Scope</code> below to theme one branch of the DOM tree.</p>
+				<!-- TODO @multiple revisit Themed_Scope <p>See <code>Themed_Scope</code> below to theme one branch of the DOM tree.</p> -->
 			</aside>
 		</Details>
 		<Details>
@@ -148,9 +146,14 @@
 		<!-- <button class="mb_lg" onclick={() => (show_create_theme_dialog = true)} disabled
 				>create a new theme (todo)</button
 			> -->
-		<aside>The builtin themes need more work, but the proof of concept is ready!</aside>
+		<aside>⚠️ The builtin themes need more work, but the proof of concept is ready!</aside>
+		<aside>
+			⚠️ Custom themes currently pop in on page load. To see this, change from the base theme and
+			refresh the page. This can be fixed using a similar strategy that we use to avoid pop-in of
+			user-defined color schemes.
+		</aside>
 	</section>
-	<!-- TODO revisit this, is too broken to include right now
+	<!-- TODO @multiple revisit Themed_Scope
 	<section class="theme">
 		<Tome_Subheading text="Scoped themes" slug="scoped-themes" />
 		<Details>
@@ -256,9 +259,12 @@
 		<p>
 			<code>Themed</code> sets the <code>selected_themer</code> in the Svelte context:
 		</p>
+		<!-- TODO @multiple revisit Themed_Scope
+		 	// the nearest \`Themed\` or \`Themed_Scope\` ancestor:
+		-->
 		<Code
 			content={`// get values from the Svelte context provided by
-// the nearest \`Themed\` or \`Themed_Scope\` ancestor:
+// the nearest \`Themed\` ancestor:
 
 import {get_themer} from '@ryanatkn/fuz/theme.js';
 const selected_themer = get_themer();
