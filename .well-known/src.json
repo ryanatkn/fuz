@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.107.1",
+  "version": "0.108.0",
   "modules": {
     "./package.json": {
       "path": "package.json",
@@ -37,6 +37,14 @@
     },
     "./Color_Scheme_Input.svelte": {
       "path": "Color_Scheme_Input.svelte",
+      "declarations": []
+    },
+    "./Community_Links_Panel.svelte": {
+      "path": "Community_Links_Panel.svelte",
+      "declarations": []
+    },
+    "./Community_Links.svelte": {
+      "path": "Community_Links.svelte",
       "declarations": []
     },
     "./config.js": {
@@ -211,6 +219,10 @@
       "path": "Hashlink.svelte",
       "declarations": []
     },
+    "./Hidden_Personal_Links.svelte": {
+      "path": "Hidden_Personal_Links.svelte",
+      "declarations": []
+    },
     "./Hue_Input.svelte": {
       "path": "Hue_Input.svelte",
       "declarations": []
@@ -341,9 +353,25 @@
       "path": "Theme_Input.svelte",
       "declarations": []
     },
-    "./theme.js": {
-      "path": "theme.ts",
+    "./theme.svelte.js": {
+      "path": "theme.svelte.ts",
       "declarations": [
+        {
+          "name": "Themer",
+          "kind": "class"
+        },
+        {
+          "name": "Themer_Json",
+          "kind": "type"
+        },
+        {
+          "name": "get_themer",
+          "kind": "function"
+        },
+        {
+          "name": "set_themer",
+          "kind": "function"
+        },
         {
           "name": "sync_color_scheme",
           "kind": "function"
@@ -375,12 +403,12 @@
         {
           "name": "create_theme_setup_script",
           "kind": "function"
+        },
+        {
+          "name": "create_theme_style_html",
+          "kind": "function"
         }
       ]
-    },
-    "./Themed_Scope.svelte": {
-      "path": "Themed_Scope.svelte",
-      "declarations": []
     },
     "./Themed.svelte": {
       "path": "Themed.svelte",
