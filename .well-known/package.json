@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.108.2",
+  "version": "0.108.3",
   "description": "Svelte UI library",
   "motto": "friendly user zystem",
   "glyph": "🧶",
@@ -304,6 +304,11 @@
       "types": "./dist/Pending_Button.svelte.d.ts",
       "svelte": "./dist/Pending_Button.svelte",
       "default": "./dist/Pending_Button.svelte"
+    },
+    "./Project_Links.svelte": {
+      "types": "./dist/Project_Links.svelte.d.ts",
+      "svelte": "./dist/Project_Links.svelte",
+      "default": "./dist/Project_Links.svelte"
     },
     "./Redirect.svelte": {
       "types": "./dist/Redirect.svelte.d.ts",

@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.108.2",
+  "version": "0.108.3",
   "modules": {
     "./package.json": {
       "path": "package.json",
@@ -318,6 +318,10 @@
     },
     "./Pending_Button.svelte": {
       "path": "Pending_Button.svelte",
+      "declarations": []
+    },
+    "./Project_Links.svelte": {
+      "path": "Project_Links.svelte",
       "declarations": []
     },
     "./Redirect.svelte": {
