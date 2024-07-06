@@ -1,5 +1,22 @@
 # @ryanatkn/fuz
 
+## 0.108.0
+
+### Minor Changes
+
+- rework `Themed.svelte` ([#38](https://github.com/ryanatkn/fuz/pull/38))
+
+  - move some helpers from `Themed.svelte` to `theme.ts`
+  - replace `get_theme` and `get_color_scheme` with `get_themer`
+  - remove `Themed_Scope.svelte` for now because it's too broken
+
+### Patch Changes
+
+- add `effect_skip` helper ([#36](https://github.com/ryanatkn/fuz/pull/36))
+- allow package_json logo to have a starting slash ([bed6aa2](https://github.com/ryanatkn/fuz/commit/bed6aa2))
+- fix ssr ([#38](https://github.com/ryanatkn/fuz/pull/38))
+- add `Community_Links.svelte`, `Community_Links_Panel.svelte`, and `Hidden_Personal_Links.svelte` ([d422d79](https://github.com/ryanatkn/fuz/commit/d422d79))
+
 ## 0.107.1
 
 ### Patch Changes
