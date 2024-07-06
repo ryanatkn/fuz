@@ -290,13 +290,17 @@
 		<Code
 			content={`// get values from the Svelte context provided by
 // the nearest \`Themed\` ancestor:
-
 import {get_themer} from '@ryanatkn/fuz/theme.js';
 const themer = get_themer();
 themer.theme.name; // '${themer.theme.name}'
 themer.color_scheme; // '${themer.color_scheme}'`}
 			lang="ts"
 		/>
+		<p>
+			For a more complete example, see <a href="https://github.com/ryanatkn/fuz_template"
+				>fuz_template</a
+			>.
+		</p>
 	</section>
 	<section>
 		<Tome_Subheading text="More details" slug="more-details" />
