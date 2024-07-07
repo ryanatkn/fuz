@@ -1,5 +1,13 @@
 # @ryanatkn/fuz
 
+## 0.108.4
+
+### Patch Changes
+
+- publish src files ([54ed762](https://github.com/ryanatkn/fuz/commit/54ed762))
+- enable tsconfig `declaration` and `declarationMap` ([0f0b344](https://github.com/ryanatkn/fuz/commit/0f0b344))
+- add tsconfig `sourceRoot` ([bf9d234](https://github.com/ryanatkn/fuz/commit/bf9d234))
+
 ## 0.108.3
 
 ### Patch Changes
