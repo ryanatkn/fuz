@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.108.5",
+  "version": "0.108.6",
   "description": "Svelte UI library",
   "motto": "friendly user zystem",
   "glyph": "🧶",
@@ -193,6 +193,11 @@
     "./dimensions.svelte.js": {
       "types": "./dist/dimensions.svelte.d.ts",
       "default": "./dist/dimensions.svelte.js"
+    },
+    "./Earbetter_Logo.svelte": {
+      "types": "./dist/Earbetter_Logo.svelte.d.ts",
+      "svelte": "./dist/Earbetter_Logo.svelte",
+      "default": "./dist/Earbetter_Logo.svelte"
     },
     "./Fuz_Logo.svelte": {
       "types": "./dist/Fuz_Logo.svelte.d.ts",
