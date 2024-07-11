@@ -194,6 +194,11 @@
       "types": "./dist/dimensions.svelte.d.ts",
       "default": "./dist/dimensions.svelte.js"
     },
+    "./Fuz_Blog_Logo.svelte": {
+      "types": "./dist/Fuz_Blog_Logo.svelte.d.ts",
+      "svelte": "./dist/Fuz_Blog_Logo.svelte",
+      "default": "./dist/Fuz_Blog_Logo.svelte"
+    },
     "./Fuz_Logo.svelte": {
       "types": "./dist/Fuz_Logo.svelte.d.ts",
       "svelte": "./dist/Fuz_Logo.svelte",

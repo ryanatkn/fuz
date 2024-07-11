@@ -40,7 +40,7 @@ export const package_json = {
 		'@ryanatkn/belt': '^0.24.4',
 		'@ryanatkn/eslint-config': '^0.4.0',
 		'@ryanatkn/fuz_code': '^0.15.2',
-		'@ryanatkn/gro': '^0.129.15',
+		'@ryanatkn/gro': '^0.130.0',
 		'@ryanatkn/moss': '^0.7.1',
 		'@sveltejs/adapter-static': '^3.0.2',
 		'@sveltejs/kit': '^2.5.18',
@@ -164,6 +164,11 @@ export const package_json = {
 		'./dimensions.svelte.js': {
 			types: './dist/dimensions.svelte.d.ts',
 			default: './dist/dimensions.svelte.js',
+		},
+		'./Fuz_Blog_Logo.svelte': {
+			types: './dist/Fuz_Blog_Logo.svelte.d.ts',
+			svelte: './dist/Fuz_Blog_Logo.svelte',
+			default: './dist/Fuz_Blog_Logo.svelte',
 		},
 		'./Fuz_Logo.svelte': {
 			types: './dist/Fuz_Logo.svelte.d.ts',
@@ -428,6 +433,7 @@ export const src_json = {
 			path: 'dimensions.svelte.ts',
 			declarations: [{name: 'Dimensions', kind: 'class'}],
 		},
+		'./Fuz_Blog_Logo.svelte': {path: 'Fuz_Blog_Logo.svelte', declarations: []},
 		'./Fuz_Logo.svelte': {path: 'Fuz_Logo.svelte', declarations: []},
 		'./Fuzling.svelte': {path: 'Fuzling.svelte', declarations: []},
 		'./Github_Logo.svelte': {path: 'Github_Logo.svelte', declarations: []},
