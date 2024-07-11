@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.108.6
+
+### Patch Changes
+
+- add earbetter logo ([6d167fc](https://github.com/ryanatkn/fuz/commit/6d167fc))
+
 ## 0.108.5
 
 ### Patch Changes
