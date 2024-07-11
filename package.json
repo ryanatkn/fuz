@@ -199,6 +199,10 @@
       "svelte": "./dist/Fuz_Logo.svelte",
       "default": "./dist/Fuz_Logo.svelte"
     },
+    "./fuz.js": {
+      "types": "./dist/fuz.d.ts",
+      "default": "./dist/fuz.js"
+    },
     "./Fuzling.svelte": {
       "types": "./dist/Fuzling.svelte.d.ts",
       "svelte": "./dist/Fuzling.svelte",

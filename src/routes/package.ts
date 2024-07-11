@@ -170,6 +170,7 @@ export const package_json = {
 			svelte: './dist/Fuz_Logo.svelte',
 			default: './dist/Fuz_Logo.svelte',
 		},
+		'./fuz.js': {types: './dist/fuz.d.ts', default: './dist/fuz.js'},
 		'./Fuzling.svelte': {
 			types: './dist/Fuzling.svelte.d.ts',
 			svelte: './dist/Fuzling.svelte',
@@ -429,6 +430,14 @@ export const src_json = {
 			declarations: [{name: 'Dimensions', kind: 'class'}],
 		},
 		'./Fuz_Logo.svelte': {path: 'Fuz_Logo.svelte', declarations: []},
+		'./fuz.js': {
+			path: 'fuz.ts',
+			declarations: [
+				{name: 'Fuz_Project_Name', kind: 'type'},
+				{name: 'to_fuz_project_color', kind: 'function'},
+				{name: 'to_fuz_project_color_name', kind: 'function'},
+			],
+		},
 		'./Fuzling.svelte': {path: 'Fuzling.svelte', declarations: []},
 		'./Github_Logo.svelte': {path: 'Github_Logo.svelte', declarations: []},
 		'./Gro_Logo.svelte': {path: 'Gro_Logo.svelte', declarations: []},
