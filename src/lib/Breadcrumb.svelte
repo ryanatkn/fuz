@@ -25,7 +25,7 @@
 
 	const root_path = $derived(final_base_path || '/');
 
-	// TODO animate these, need to use in a layout though, but then how to opt out?
+	// TODO animate these
 	// `transition:slide={{axis: 'x'}}`
 </script>
 
