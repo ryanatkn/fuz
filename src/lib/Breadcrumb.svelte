@@ -10,6 +10,9 @@
 		 * `null` means none and `undefined` is detected from the current url.
 		 */
 		selected_path?: string | null | undefined;
+		/**
+		 * Customize the `base` from `$app/paths`.
+		 */
 		base_path?: string;
 		separator?: Snippet;
 		children?: Snippet;
