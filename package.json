@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.108.3",
+  "version": "0.108.4",
   "description": "Svelte UI library",
   "motto": "friendly user zystem",
   "glyph": "🧶",
@@ -87,7 +87,10 @@
     "**/*.css"
   ],
   "files": [
-    "dist"
+    "dist",
+    "src/lib/**/*.ts",
+    "!src/lib/**/*.test.*",
+    "!dist/**/*.test.*"
   ],
   "exports": {
     "./package.json": "./package.json",

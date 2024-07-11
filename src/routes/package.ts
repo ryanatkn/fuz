@@ -5,7 +5,7 @@ import type {Src_Json} from '@ryanatkn/gro/src_json.js';
 
 export const package_json = {
 	name: '@ryanatkn/fuz',
-	version: '0.108.3',
+	version: '0.108.4',
 	description: 'Svelte UI library',
 	motto: 'friendly user zystem',
 	glyph: '🧶',
@@ -71,7 +71,7 @@ export const package_json = {
 		overrides: [{files: 'package.json', options: {useTabs: false}}],
 	},
 	sideEffects: ['**/*.css'],
-	files: ['dist'],
+	files: ['dist', 'src/lib/**/*.ts', '!src/lib/**/*.test.*', '!dist/**/*.test.*'],
 	exports: {
 		'./package.json': './package.json',
 		'./Alert.svelte': {
@@ -360,7 +360,7 @@ export const package_json = {
 
 export const src_json = {
 	name: '@ryanatkn/fuz',
-	version: '0.108.3',
+	version: '0.108.4',
 	modules: {
 		'./package.json': {path: 'package.json', declarations: []},
 		'./Alert.svelte': {path: 'Alert.svelte', declarations: []},
