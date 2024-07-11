@@ -42,7 +42,7 @@
 			<!-- TODO add color variants -->
 			<Card href="{base}/library">library{#snippet icon()}🧶{/snippet}</Card>
 		</section>
-		<section class="panel p_lg shadow_inset_xs bg">
+		<section class="panel p_lg shadow_inset_xs">
 			<!-- TODO ideally this wouldn't duplicate metadata like descriptions, but adding fuz_gitops to this repo is heavy -->
 			<h2 class="mt_0 mb_xl2 px_md">other packages</h2>
 			<menu class="unstyled size_lg">
