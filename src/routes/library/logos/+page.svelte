@@ -11,6 +11,7 @@
 	import Webdevladder_Logo from '$lib/Webdevladder_Logo.svelte';
 	import Moss_Logo from '$lib/Moss_Logo.svelte';
 	import Gro_Logo from '$lib/Gro_Logo.svelte';
+	import Spiderspace_Logo from '$lib/Spiderspace_Logo.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Teleport';
 	const tome = get_tome(LIBRARY_ITEM_NAME);
@@ -48,12 +49,12 @@
 				<Fuz_Logo project="fuz_gitops" size="var(--icon_size_xl3)" />
 			</li>
 			<li>
-				<Code content={`<Webdevladder_Logo />`} />
-				<Webdevladder_Logo size="var(--icon_size_xl3)" />
-			</li>
-			<li>
 				<Code content={`<Zzz_Logo />`} />
 				<Zzz_Logo size="var(--icon_size_xl3)" />
+			</li>
+			<li>
+				<Code content={`<Webdevladder_Logo />`} />
+				<Webdevladder_Logo size="var(--icon_size_xl3)" />
 			</li>
 			<li>
 				<Code content={`<Spiderspace_Logo />`} />
