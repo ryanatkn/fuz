@@ -15,12 +15,9 @@
 	}
 
 	const {root_path = '/library', tomes, pkg, repo_name}: Props = $props();
-
-	// TODO @multiple  the other of these hacks - what's going on? I can't seem to find anything searching online about this, it's `.` on SSR for some reason
-	const TODO_HACK_base = (base as any) === '.' ? '' : base;
 </script>
 
-{#if $page.url.pathname === TODO_HACK_base + root_path}
+{#if $page.url.pathname === base + root_path}
 	<div class="box mb_xl5">
 		<Package_Summary {pkg} {repo_name} />
 	</div>
