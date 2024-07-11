@@ -22,51 +22,62 @@
 		<ul class="box text_align_center unstyled">
 			<li>
 				<Code content={`<Moss_Logo />`} />
-				<Moss_Logo size="var(--icon_size_xl3)" />
+				<a href="https://moss.ryanatkn.com/"><Moss_Logo size="var(--icon_size_xl3)" /></a>
 			</li>
 			<li>
 				<Code content={`<Gro_Logo />`} />
-				<Gro_Logo size="var(--icon_size_xl3)" />
+				<a href="https://gro.ryanatkn.com/"><Gro_Logo size="var(--icon_size_xl3)" /></a>
 			</li>
 			<li>
 				<Code content={`<Fuz_Logo />`} />
-				<Fuz_Logo size="var(--icon_size_xl3)" />
+				<a href="https://www.fuz.dev/"><Fuz_Logo size="var(--icon_size_xl3)" /></a>
 			</li>
 			<li>
 				<Code content={`<Fuz_Logo project="fuz_code" />`} />
-				<Fuz_Logo project="fuz_code" size="var(--icon_size_xl3)" />
+				<a href="https://code.fuz.dev/"
+					><Fuz_Logo project="fuz_code" size="var(--icon_size_xl3)" /></a
+				>
 			</li>
 			<li>
 				<Code content={`<Fuz_Logo project="fuz_blog" />`} />
-				<Fuz_Logo project="fuz_blog" size="var(--icon_size_xl3)" />
+				<a href="https://blog.fuz.dev/"
+					><Fuz_Logo project="fuz_blog" size="var(--icon_size_xl3)" /></a
+				>
 			</li>
 			<li>
 				<Code content={`<Fuz_Logo project="fuz_mastodon" />`} />
-				<Fuz_Logo project="fuz_mastodon" size="var(--icon_size_xl3)" />
+				<a href="https://mastodon.fuz.dev/"
+					><Fuz_Logo project="fuz_mastodon" size="var(--icon_size_xl3)" /></a
+				>
 			</li>
 			<li>
 				<Code content={`<Fuz_Logo project="fuz_gitops" />`} />
-				<Fuz_Logo project="fuz_gitops" size="var(--icon_size_xl3)" />
+				<a href="https://gitops.fuz.dev/"
+					><Fuz_Logo project="fuz_gitops" size="var(--icon_size_xl3)" /></a
+				>
 			</li>
 			<li>
 				<Code content={`<Zzz_Logo />`} />
-				<Zzz_Logo size="var(--icon_size_xl3)" />
+				<a href="https://zzz.ryanatkn.com/"><Zzz_Logo size="var(--icon_size_xl3)" /></a>
 			</li>
 			<li>
 				<Code content={`<Webdevladder_Logo />`} />
-				<Webdevladder_Logo size="var(--icon_size_xl3)" />
+				<a href="https://www.webdevladder.net/"><Webdevladder_Logo size="var(--icon_size_xl3)" /></a
+				>
 			</li>
 			<li>
 				<Code content={`<Spiderspace_Logo />`} />
-				<Spiderspace_Logo size="var(--icon_size_xl3)" />
+				<a href="https://www.spiderspace.org/"><Spiderspace_Logo size="var(--icon_size_xl3)" /></a>
 			</li>
 			<li>
 				<Code content={`<Github_Logo />`} />
-				<Github_Logo size="var(--icon_size_xl3)" />
+				<a href="https://github.com/"
+					><Github_Logo fill="var(--text_1)" size="var(--icon_size_xl3)" /></a
+				>
 			</li>
 			<li>
 				<Code content={`<Mdn_Logo />`} />
-				<Mdn_Logo size="var(--icon_size_xl3)" />
+				<a href="https://developer.mozilla.org/"><Mdn_Logo size="var(--icon_size_xl3)" /></a>
 			</li>
 		</ul>
 	</section>
