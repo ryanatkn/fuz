@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.108.5
+
+### Patch Changes
+
+- add fuz logo variants ([9b161c7](https://github.com/ryanatkn/fuz/commit/9b161c7))
+
 ## 0.108.4
 
 ### Patch Changes
