@@ -9,6 +9,7 @@
 	import Mdn_Logo from '$lib/Mdn_Logo.svelte';
 	import Zzz_Logo from '$lib/Zzz_Logo.svelte';
 	import Webdevladder_Logo from '$lib/Webdevladder_Logo.svelte';
+	import Earbetter_Logo from '$lib/Earbetter_Logo.svelte';
 	import Moss_Logo from '$lib/Moss_Logo.svelte';
 	import Gro_Logo from '$lib/Gro_Logo.svelte';
 	import Spiderspace_Logo from '$lib/Spiderspace_Logo.svelte';
@@ -64,6 +65,10 @@
 				<Code content={`<Webdevladder_Logo />`} />
 				<a href="https://www.webdevladder.net/"><Webdevladder_Logo size="var(--icon_size_xl3)" /></a
 				>
+			</li>
+			<li>
+				<Code content={`<Earbetter_Logo />`} />
+				<a href="https://earbetter.ryanatkn.com/"><Earbetter_Logo size="var(--icon_size_xl3)" /></a>
 			</li>
 			<li>
 				<Code content={`<Spiderspace_Logo />`} />

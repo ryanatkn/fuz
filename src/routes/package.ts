@@ -165,6 +165,11 @@ export const package_json = {
 			types: './dist/dimensions.svelte.d.ts',
 			default: './dist/dimensions.svelte.js',
 		},
+		'./Earbetter_Logo.svelte': {
+			types: './dist/Earbetter_Logo.svelte.d.ts',
+			svelte: './dist/Earbetter_Logo.svelte',
+			default: './dist/Earbetter_Logo.svelte',
+		},
 		'./Fuz_Logo.svelte': {
 			types: './dist/Fuz_Logo.svelte.d.ts',
 			svelte: './dist/Fuz_Logo.svelte',
@@ -429,6 +434,7 @@ export const src_json = {
 			path: 'dimensions.svelte.ts',
 			declarations: [{name: 'Dimensions', kind: 'class'}],
 		},
+		'./Earbetter_Logo.svelte': {path: 'Earbetter_Logo.svelte', declarations: []},
 		'./Fuz_Logo.svelte': {path: 'Fuz_Logo.svelte', declarations: []},
 		'./fuz.js': {
 			path: 'fuz.ts',
