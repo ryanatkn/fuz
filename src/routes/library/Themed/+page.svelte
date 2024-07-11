@@ -1,5 +1,5 @@
 <script lang="ts">
-	// TODO @multiple why is this import needed? `Code` already imports it. Fails in dev with SSR enabled without it. Is there a Vite config option that would be better? I tried the combinations of `ssr.external/noExternal/external` with `@ryanatkn/fuz_code` and `prismjs`.
+	// TODO @many why is this import needed? `Code` already imports it. Fails in dev with SSR enabled without it. Is there a Vite config option that would be better? I tried the combinations of `ssr.external/noExternal/external` with `@ryanatkn/fuz_code` and `prismjs`.
 	import 'prismjs';
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 	import type {Theme} from '@ryanatkn/moss/theme.js';
@@ -14,7 +14,7 @@
 	import Theme_Input from '$lib/Theme_Input.svelte';
 	import Theme_Form from '$routes/Theme_Form.svelte';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
-	// import Themed_Scope from '$routes/library/Themed/Themed_Scope.svelte'; // TODO @multiple revisit Themed_Scope
+	// import Themed_Scope from '$routes/library/Themed/Themed_Scope.svelte'; // TODO @many revisit Themed_Scope
 	import {get_themer} from '$lib/theme.svelte.js';
 
 	const LIBRARY_ITEM_NAME = 'Themed';
@@ -63,7 +63,7 @@
 					<li><code>save_theme</code></li>
 				</ul>
 				<p>A feature to support partial page theming is planned with <code>Themed_Scope</code>.</p>
-				<!-- TODO @multiple revisit Themed_Scope <p>See <code>Themed_Scope</code> below to theme one branch of the DOM tree.</p> -->
+				<!-- TODO @many revisit Themed_Scope <p>See <code>Themed_Scope</code> below to theme one branch of the DOM tree.</p> -->
 			</aside>
 		</Details>
 		<Details>
@@ -168,7 +168,7 @@
 			user-defined color schemes, but it's more involved.
 		</aside>
 	</section>
-	<!-- TODO @multiple revisit Themed_Scope
+	<!-- TODO @many revisit Themed_Scope
 	<section class="theme">
 		<Tome_Subheading text="Scoped themes" slug="scoped-themes" />
 		<Details>
@@ -181,7 +181,7 @@
 			</div>
 			<div>
 				{#each themes as theme (theme.name)}
-					TODO @multiple proper equality check, won't work when we allow editing, need an id or unique names and a deep equality check
+					TODO @many proper equality check, won't work when we allow editing, need an id or unique names and a deep equality check
 					{@const selected =
 						themer.color_scheme === 'light' && theme.name === themer.theme.name}
 					<Themed_Scope
@@ -208,7 +208,7 @@
 					</Themed_Scope>
 				{/each}
 				{#each themes as theme (theme.name)}
-					@multiple proper equality check, won't work when we allow editing, need an id or unique names and a deep equality check
+					@many proper equality check, won't work when we allow editing, need an id or unique names and a deep equality check
 					{@const selected =
 						themer.color_scheme === 'dark' && theme.name === themer.theme.name}
 					<Themed_Scope
@@ -282,7 +282,7 @@
 		<p>
 			<code>Themed</code> sets the <code>themer</code> in the Svelte context:
 		</p>
-		<!-- TODO @multiple revisit Themed_Scope
+		<!-- TODO @many revisit Themed_Scope
 		 	// the nearest \`Themed\` or \`Themed_Scope\` ancestor:
 		-->
 		<Code

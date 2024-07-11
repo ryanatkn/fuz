@@ -25,7 +25,7 @@
 	const tomes_by_name = new Map(tomes.map((t) => [t.name, t]));
 	set_tomes(tomes_by_name);
 
-	// TODO @multiple dialog navs - this is messy to satisfy SSR with the current design that puts the secondary nav in a dialog
+	// TODO @many dialog navs - this is messy to satisfy SSR with the current design that puts the secondary nav in a dialog
 	const TERTIARY_NAV_BREAKPOINT = 1000;
 	const SECONDARY_NAV_BREAKPOINT = 800;
 
@@ -52,7 +52,7 @@
 			>
 		</div>
 	</Library_Primary_Nav>
-	<!-- TODO @multiple dialog navs -->
+	<!-- TODO @many dialog navs -->
 	{#if !innerWidth || innerWidth > SECONDARY_NAV_BREAKPOINT}
 		<div class="secondary_nav_wrapper">
 			<Library_Secondary_Nav {tomes} />
@@ -61,7 +61,7 @@
 	<main>
 		<div class="content">
 			{@render children()}
-			<!-- TODO @multiple dialog navs -->
+			<!-- TODO @many dialog navs -->
 			{#if !innerWidth || innerWidth > TERTIARY_NAV_BREAKPOINT}
 				<Library_Tertiary_Nav {tomes} {tomes_by_name} />
 			{/if}
@@ -81,7 +81,7 @@
 		</div>
 	</main>
 </div>
-<!-- TODO @multiple dialog navs - instead of a dialog, probably use a popover (new component) -->
+<!-- TODO @many dialog navs - instead of a dialog, probably use a popover (new component) -->
 <!-- TODO this is messy rendering `Library_Secondary_Nav` twice to handle responsive states with SSR correctly -->
 {#if show_secondary_nav_dialog && innerWidth && innerWidth <= TERTIARY_NAV_BREAKPOINT}
 	<Dialog onclose={() => (show_secondary_nav_dialog = false)}>

@@ -28,7 +28,7 @@
 
 <menu class="theme_input unstyled">
 	{#each themes as theme (theme.name)}
-		<!-- TODO @multiple proper equality check, won't work when we allow editing, need an id or unique names and a deep equality check -->
+		<!-- TODO @many proper equality check, won't work when we allow editing, need an id or unique names and a deep equality check -->
 		{@const selected = theme.name === selected_theme.theme.name}
 		<li class="row" role="none">
 			<button

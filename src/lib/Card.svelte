@@ -108,7 +108,7 @@
 		display: flex;
 		justify-content: center;
 	}
-	/* TODO @multiple remove all :global usage after https://github.com/sveltejs/svelte/issues/10143 */
+	/* TODO @many remove all :global usage after https://github.com/sveltejs/svelte/issues/10143 */
 	.left :global(.icon) {
 		margin-right: var(--icon_margin);
 	}

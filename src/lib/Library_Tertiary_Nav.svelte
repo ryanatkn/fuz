@@ -9,7 +9,7 @@
 	interface Props {
 		tomes: Tome[];
 		tomes_by_name: Map<string, Tome>;
-		sidebar?: boolean; // TODO @multiple dialog navs (this shouldn't exist)
+		sidebar?: boolean; // TODO @many dialog navs (this shouldn't exist)
 	}
 
 	const {tomes, tomes_by_name, sidebar = true}: Props = $props();

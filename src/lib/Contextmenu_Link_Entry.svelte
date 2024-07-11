@@ -8,8 +8,8 @@
 
 	interface Props {
 		href: string;
-		icon?: string | Snippet<[icon: string]>; // TODO @multiple rethink this API
-		children?: Snippet; // TODO @multiple rethink this API
+		icon?: string | Snippet<[icon: string]>; // TODO @many rethink this API
+		children?: Snippet; // TODO @many rethink this API
 	}
 
 	const {href, icon = DEFAULT_LINK_ICON, children}: Props = $props();

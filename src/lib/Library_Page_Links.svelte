@@ -6,7 +6,7 @@
 
 	interface Props {
 		library_links: Library_Links;
-		sidebar?: boolean; // TODO @multiple dialog navs (this shouldn't exist)
+		sidebar?: boolean; // TODO @many dialog navs (this shouldn't exist)
 	}
 
 	const {library_links, sidebar = true}: Props = $props();
@@ -46,7 +46,7 @@
 		flex-direction: column;
 		align-items: flex-start;
 	}
-	/* TODO @multiple remove all :global usage after https://github.com/sveltejs/svelte/issues/10143 */
+	/* TODO @many remove all :global usage after https://github.com/sveltejs/svelte/issues/10143 */
 	.sidebar_wrapper :global(ul) {
 		min-width: var(--library_menu_width);
 	}

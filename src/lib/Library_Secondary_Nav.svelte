@@ -4,7 +4,7 @@
 
 	interface Props {
 		tomes: Tome[];
-		sidebar?: boolean; // TODO @multiple dialog navs (this shouldn't exist)
+		sidebar?: boolean; // TODO @many dialog navs (this shouldn't exist)
 	}
 
 	const {tomes, sidebar = true}: Props = $props();
@@ -44,7 +44,7 @@
 			overflow: initial;
 		}
 	}
-	/* TODO @multiple dialog navs  */
+	/* TODO @many dialog navs  */
 	.library_secondary_nav:not(.sidebar) {
 		position: static;
 		background-color: initial;
