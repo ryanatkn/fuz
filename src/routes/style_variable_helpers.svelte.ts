@@ -1,5 +1,4 @@
 import {getContext, setContext} from 'svelte';
-
 import type {Style_Variable} from '@ryanatkn/moss/theme.js';
 
 // TODO maybe change this to a generic wrapper class for any value?

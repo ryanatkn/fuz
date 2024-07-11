@@ -5,6 +5,7 @@
 	import Card from '$lib/Card.svelte';
 	import {get_pkg} from '$routes/pkg.js';
 	import Fuz_Logo from '$lib/Fuz_Logo.svelte';
+	import Fuzling from '$lib/Fuzling.svelte';
 	import Hidden_Personal_Links from '$lib/Hidden_Personal_Links.svelte';
 
 	const pkg = get_pkg();
@@ -44,18 +45,33 @@
 		<section class="panel p_lg shadow_inset_xs bg">
 			<!-- TODO ideally this wouldn't duplicate metadata like descriptions, but adding fuz_gitops to this repo is heavy -->
 			<h2 class="mt_0 mb_xl2 px_md">other packages</h2>
-			<menu class="unstyled">
-				<a class="chip bg shadow_outset_xs px_md py_xs2 radius_sm" href="https://template.fuz.dev/"
-					>fuz_template</a
+			<menu class="unstyled size_lg">
+				<a
+					class="row chip bg shadow_outset_xs px_md py_xs radius_sm mb_lg"
+					href="https://template.fuz.dev/"
+					><Fuzling size="var(--icon_size_lg)" /> <span class="ml_lg">fuz_template</span></a
 				>
-				<a class="chip bg shadow_outset_xs px_md py_xs2 radius_sm" href="https://gitops.fuz.dev/"
-					>fuz_gitops</a
+				<a
+					class="row chip bg shadow_outset_xs px_md py_xs radius_sm mb_lg"
+					href="https://blog.fuz.dev/"
+					><Fuz_Logo project="fuz_blog" size="var(--icon_size_lg)" />
+					<span class="ml_lg">fuz_blog</span></a
 				>
-				<a class="chip bg shadow_outset_xs px_md py_xs2 radius_sm" href="https://code.fuz.dev/"
-					>fuz_code</a
+				<a
+					class="row chip bg shadow_outset_xs px_md py_xs radius_sm mb_lg"
+					href="https://mastodon.fuz.dev/"
+					><Fuz_Logo project="fuz_mastodon" size="var(--icon_size_lg)" />
+					<span class="ml_lg">fuz_mastodon</span></a
 				>
-				<a class="chip bg shadow_outset_xs px_md py_xs2 radius_sm" href="https://mastodon.fuz.dev/"
-					>fuz_mastodon</a
+				<a
+					class="row chip bg shadow_outset_xs px_md py_xs radius_sm mb_lg"
+					href="https://code.fuz.dev/"
+					><Fuz_Logo project="fuz_code" size="var(--icon_size_lg)" />
+					<span class="ml_lg">fuz_code</span></a
+				>
+				<a class="row chip bg shadow_outset_xs px_md py_xs radius_sm" href="https://gitops.fuz.dev/"
+					><Fuz_Logo project="fuz_gitops" size="var(--icon_size_lg)" />
+					<span class="ml_lg">fuz_gitops</span></a
 				>
 			</menu>
 		</section>
@@ -72,12 +88,6 @@
 
 <style>
 	menu {
-		width: 100%;
-		display: flex;
-		gap: var(--space_lg);
-		flex-direction: column;
-		align-items: flex-start;
-		font-size: var(--size_lg);
 	}
 	a.chip:active {
 		box-shadow: var(--shadow_inset_xs);
