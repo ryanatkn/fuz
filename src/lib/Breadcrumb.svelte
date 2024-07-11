@@ -7,7 +7,7 @@
 	interface Props {
 		path?: string | undefined;
 		/**
-		 * `null` means none
+		 * `null` means none and `undefined` is detected from the current url.
 		 */
 		selected_path?: string | null | undefined;
 		base_path?: string;
