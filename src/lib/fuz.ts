@@ -18,7 +18,7 @@ export const to_fuz_project_color = (name: Fuz_Project_Name): string => {
 		case 'fuz_template':
 			return '#f75e22';
 		case 'fuz_blog':
-			return '#d22d2d';
+			return '#b19a25';
 		case 'fuz_gitops':
 			return '#397fc6';
 		case 'fuz_code':
@@ -40,7 +40,7 @@ export const to_fuz_project_color_name = (name: Fuz_Project_Name): string => {
 		case 'fuz_template':
 			return 'orange';
 		case 'fuz_blog':
-			return 'red';
+			return 'yellow';
 		case 'fuz_gitops':
 			return 'blue';
 		case 'fuz_code':
