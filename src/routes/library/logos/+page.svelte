@@ -13,7 +13,7 @@
 	import Gro_Logo from '$lib/Gro_Logo.svelte';
 	import Spiderspace_Logo from '$lib/Spiderspace_Logo.svelte';
 
-	const LIBRARY_ITEM_NAME = 'Teleport';
+	const LIBRARY_ITEM_NAME = 'logos';
 	const tome = get_tome(LIBRARY_ITEM_NAME);
 </script>
 
