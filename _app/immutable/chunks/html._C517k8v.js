@@ -1,1 +1,0 @@
-import{b as o,c as h,j as l}from"./runtime.VNSPx__r.js";import{h as m,d as e,e as s,g as d,i as c}from"./disclose-version.BHqvyKx-.js";function b(f,n,g,_){var r="",t;o(()=>{r!==(r=n())&&(t&&(l(t),t=null),r!==""&&(t=h(()=>{if(m){e(d(),s[s.length-1]);return}var i=r+"",a=c(i);e(a.firstChild,a.lastChild),f.before(a)})))})}export{b as h};

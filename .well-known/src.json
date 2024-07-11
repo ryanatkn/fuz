@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.108.4",
+  "version": "0.108.5",
   "modules": {
     "./package.json": {
       "path": "package.json",
@@ -202,6 +202,23 @@
     "./Fuz_Logo.svelte": {
       "path": "Fuz_Logo.svelte",
       "declarations": []
+    },
+    "./fuz.js": {
+      "path": "fuz.ts",
+      "declarations": [
+        {
+          "name": "Fuz_Project_Name",
+          "kind": "type"
+        },
+        {
+          "name": "to_fuz_project_color",
+          "kind": "function"
+        },
+        {
+          "name": "to_fuz_project_color_name",
+          "kind": "function"
+        }
+      ]
     },
     "./Fuzling.svelte": {
       "path": "Fuzling.svelte",
