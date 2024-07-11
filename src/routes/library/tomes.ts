@@ -15,6 +15,7 @@ import Redirect from '$routes/library/Redirect/+page.svelte';
 import Hue_Input from '$routes/library/Hue_Input/+page.svelte';
 import Breadcrumb from '$routes/library/Breadcrumb/+page.svelte';
 import Card from '$routes/library/Card/+page.svelte';
+import logos from '$routes/library/logos/+page.svelte';
 
 // TODO maybe decouple `related` from `Tome` to get bidirectionality for free
 
@@ -101,12 +102,20 @@ export const tomes: Tome[] = [
 	// 	related: [],
 	// },
 	{
+		name: 'logos',
+		slug: 'logos',
+		pathname: '',
+		category: 'components',
+		component: logos,
+		related: ['Package_Detail', 'Package_Summary'],
+	},
+	{
 		name: 'Package_Detail',
 		slug: 'Package_Detail',
 		pathname: '',
 		category: 'components',
 		component: Package_Detail,
-		related: ['Package_Summary'],
+		related: ['logos', 'Package_Summary'],
 	},
 	{
 		name: 'Package_Summary',
@@ -114,7 +123,7 @@ export const tomes: Tome[] = [
 		pathname: '',
 		category: 'components',
 		component: Package_Summary,
-		related: ['Package_Detail'],
+		related: ['logos', 'Package_Detail'],
 	},
 	{
 		name: 'Pending_Animation',
