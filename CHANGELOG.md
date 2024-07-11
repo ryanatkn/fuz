@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.109.0
+
+### Minor Changes
+
+- change `Dialogs.svelte` to take a plain array `stores` prop instead of a store (no more stores!) ([#41](https://github.com/ryanatkn/fuz/pull/41))
+
 ## 0.108.7
 
 ### Patch Changes
