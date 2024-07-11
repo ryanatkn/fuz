@@ -67,7 +67,7 @@
 <style>
 	.hue_input {
 		--outline_color: hsl(var(--hue) 50% 60%);
-		/* TODO @multiple figure these variables out so they're easily customized (similar pattern in a lot of places) */
+		/* TODO @many figure these variables out so they're easily customized (similar pattern in a lot of places) */
 		/* --thumb_background_color: hsl(var(--hue) 50% 50%); */
 	}
 	.preview {

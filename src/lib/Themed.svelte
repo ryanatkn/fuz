@@ -66,7 +66,7 @@
 		onMount(() => {
 			if (mounted) {
 				console.warn('more than one Themed was mounted'); // eslint-disable-line no-console
-				// console.warn('more than one Themed was mounted, use Themed_Scope if this was intended'); // TODO @multiple revisit Themed_Scope
+				// console.warn('more than one Themed was mounted, use Themed_Scope if this was intended'); // TODO @many revisit Themed_Scope
 			}
 			mounted = true;
 			return () => {
@@ -80,7 +80,7 @@
 	 * It also sets in the Svelte context a reactive `themer` containing the theme and color scheme.
 	 */
 
-	//  TODO @multiple revisit Themed_Scope
+	//  TODO @many revisit Themed_Scope
 	//  * To scope the theme to only a part of the page, use `Themed_Scope`.
 	//  * There is some duplicated code between the two,
 	//  * but combining them was too complicated both internally and externally.
@@ -89,7 +89,7 @@
 
 	const selected_theme_name = $derived(themer.theme.name);
 	const style = $derived(
-		selected_theme_name === DEFAULT_THEME.name // TODO @multiple proper equality check, won't work when we allow editing, need an id or unique names and a deep equality check
+		selected_theme_name === DEFAULT_THEME.name // TODO @many proper equality check, won't work when we allow editing, need an id or unique names and a deep equality check
 			? null
 			: render_theme_style(themer.theme),
 	);

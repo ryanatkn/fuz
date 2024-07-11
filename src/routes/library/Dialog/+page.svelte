@@ -1,7 +1,6 @@
 <script lang="ts">
 	import {slide} from 'svelte/transition';
-	import {writable} from 'svelte/store';
-	// TODO @multiple why is this import needed? `Code` already imports it. Fails in dev with SSR enabled without it. Is there a Vite config option that would be better? I tried the combinations of `ssr.external/noExternal/external` with `@ryanatkn/fuz_code` and `prismjs`.
+	// TODO @many why is this import needed? `Code` already imports it. Fails in dev with SSR enabled without it. Is there a Vite config option that would be better? I tried the combinations of `ssr.external/noExternal/external` with `@ryanatkn/fuz_code` and `prismjs`.
 	import 'prismjs';
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
@@ -44,10 +43,10 @@
 		items = [];
 	};
 
-	const dialogs = writable([] as Dialog_Params[]);
+	let dialogs: Dialog_Params[] = $state([]);
 	const add_dialogs = (count: number) => {
 		const to_text = (index: number) => '!'.repeat(count * 3 - index * 3);
-		$dialogs = Array.from({length: count}, (_, i) =>
+		dialogs = Array.from({length: count}, (_, i) =>
 			to_dialog_params(Text, {
 				text: to_text(i),
 				size: 'var(--size_xl4)',
@@ -226,7 +225,7 @@
 <Dialogs
 	{dialogs}
 	onclose={() => {
-		$dialogs = $dialogs.slice(0, -1);
+		dialogs = dialogs.slice(0, -1);
 	}}
 >
 	{#snippet children(dialog)}

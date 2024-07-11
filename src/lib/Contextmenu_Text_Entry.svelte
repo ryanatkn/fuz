@@ -4,8 +4,8 @@
 
 	interface Props {
 		run: Contextmenu_Run;
-		content: string; // TODO @multiple rethink this API
-		icon: string; // TODO @multiple rethink this API
+		content: string; // TODO @many rethink this API
+		icon: string; // TODO @many rethink this API
 	}
 
 	const {run, content, icon: icon_text}: Props = $props();

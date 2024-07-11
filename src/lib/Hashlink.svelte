@@ -15,7 +15,7 @@
 <span class="hashlink_scroll_target" id={slug} aria-hidden="true"></span>
 
 <style>
-	/* TODO @multiple how can this be done generically so it's composable? currently using `:global` at usage site - ideally we'd continue to use :hover instead of JS */
+	/* TODO @many how can this be done generically so it's composable? currently using `:global` at usage site - ideally we'd continue to use :hover instead of JS */
 	/* .some_parent:hover :global(.hashlink) { opacity: 1; } .some_parent { position: relative; } */
 
 	.hashlink {
