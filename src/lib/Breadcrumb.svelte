@@ -7,9 +7,12 @@
 	interface Props {
 		path?: string | undefined;
 		/**
-		 * `null` means none
+		 * `null` means none and `undefined` is detected from the current url.
 		 */
 		selected_path?: string | null | undefined;
+		/**
+		 * Customize the `base` from `$app/paths`.
+		 */
 		base_path?: string;
 		separator?: Snippet;
 		children?: Snippet;
@@ -25,16 +28,16 @@
 
 	const root_path = $derived(final_base_path || '/');
 
-	// TODO animate these, need to use in a layout though, but then how to opt out?
+	// TODO animate these
 	// `transition:slide={{axis: 'x'}}`
 </script>
 
 <div class="breadcrumb">
 	<a href={root_path} class:selected={root_path === final_selected_path}
 		>{#if children}{@render children()}{:else}•{/if}</a
-	>{#each path_pieces as pathPiece}{#if pathPiece.type === 'piece'}<a
-				href={final_base_path + pathPiece.path}
-				class:selected={pathPiece.path === final_selected_path}>{pathPiece.name}</a
+	>{#each path_pieces as path_piece}{#if path_piece.type === 'piece'}<a
+				href={final_base_path + path_piece.path}
+				class:selected={path_piece.path === final_selected_path}>{path_piece.name}</a
 			>{:else}<span class="separator"
 				>{#if separator}{@render separator()}{:else}/{/if}</span
 			>{/if}{/each}
