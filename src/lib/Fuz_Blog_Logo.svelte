@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Spider from '@ryanatkn/fuz/Spider.svelte';
+	import Spider from '$lib/Spider.svelte';
 
 	// TODO upstream to Fuz, remove size and `inline_block`
 </script>
