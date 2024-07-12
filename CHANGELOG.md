@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.110.1
+
+### Patch Changes
+
+- update Spiderspace logo ([346a5b8](https://github.com/ryanatkn/fuz/commit/346a5b8))
+
 ## 0.110.0
 
 ### Minor Changes
