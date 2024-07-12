@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.110.2
+
+### Patch Changes
+
+- add alt text to spiderspace logo ([25f5576](https://github.com/ryanatkn/fuz/commit/25f5576))
+
 ## 0.110.1
 
 ### Patch Changes
