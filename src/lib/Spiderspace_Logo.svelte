@@ -24,7 +24,7 @@
 		size,
 		width,
 		height,
-		label = 'a pixelated green oak acorn with a glint of sun',
+		label = 'a galaxy full of twinkling star spiders',
 		classes,
 		path_attrs,
 		attrs,
