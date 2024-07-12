@@ -83,11 +83,11 @@ export type Alert_Status = 'inform' | 'help' | 'error';"
 		/>
 		<Alert status="help">here's how to fix it</Alert>
 		<Code
-			content={`<Alert status="help" color="var(--color_d_5)">
+			content={`<Alert status="help" color="hsl(var(--color_d_5))">
 	the <code>color</code> prop overrides the status color
 </Alert>`}
 		/>
-		<Alert status="help" color="var(--color_d_5)"
+		<Alert status="help" color="hsl(var(--color_d_5))"
 			>the <code>color</code> prop overrides the status color</Alert
 		>
 	</section>

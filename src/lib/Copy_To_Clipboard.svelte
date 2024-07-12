@@ -27,8 +27,8 @@
 	<button type="button" class="icon_button" style:font-size="var(--size_lg)" onclick={copy}
 		>📋</button
 	>
-	{#if copied}<small style:color="var(--color_b_5)">copied!</small>{/if}
-	{#if failed}<small style:color="var(--color_c_5)">failed</small>{/if}
+	{#if copied}<small class="color_b_5">copied!</small>{/if}
+	{#if failed}<small class="color_c_5">failed</small>{/if}
 </div>
 
 <style>

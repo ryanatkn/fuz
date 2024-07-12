@@ -25,7 +25,7 @@
 	}
 
 	const {
-		fill = 'var(--color_b_5)',
+		fill = 'hsl(var(--color_b_5))',
 		size,
 		width,
 		height,

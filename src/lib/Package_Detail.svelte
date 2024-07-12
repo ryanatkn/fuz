@@ -302,16 +302,16 @@
 		padding: var(--space_xs);
 	}
 	.ts {
-		--link_color: var(--color_a_5);
+		--link_color: hsl(var(--color_a_5));
 	}
 	.svelte {
-		--link_color: var(--color_e_5);
+		--link_color: hsl(var(--color_e_5));
 	}
 	.css {
-		--link_color: var(--color_b_5);
+		--link_color: hsl(var(--color_b_5));
 	}
 	.json {
-		--link_color: var(--color_f_5);
+		--link_color: hsl(var(--color_f_5));
 	}
 	/* TODO extract */
 	.declarations {
@@ -330,15 +330,15 @@
 		margin-right: var(--space_xs2);
 	}
 	.variable_declaration {
-		color: var(--color_d_5);
+		color: hsl(var(--color_d_5));
 	}
 	.function_declaration {
-		color: var(--color_c_5);
+		color: hsl(var(--color_c_5));
 	}
 	.type_declaration {
-		color: var(--color_g_5);
+		color: hsl(var(--color_g_5));
 	}
 	.class_declaration {
-		color: var(--color_f_5);
+		color: hsl(var(--color_f_5));
 	}
 </style>
