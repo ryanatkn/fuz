@@ -1,0 +1,10 @@
+import{a as y,t as M,s as t,c as s,d as P,r as e,f as Y}from"../chunks/disclose-version.BnDvccPf.js";import{p as z,a as O,g as o,n as u,C as m,d as U}from"../chunks/runtime.CkCVmNqE.js";import{d as j}from"../chunks/render.Bl162W7G.js";import{p as $}from"../chunks/proxy.CsZV8cf8.js";import{b as k}from"../chunks/this.DMrt6DID.js";import{C as w}from"../chunks/Code.eYB644OU.js";import{g as q}from"../chunks/tome.DY2a_032.js";import{T as F}from"../chunks/Teleport.BIJxbnjo.js";import{T as G}from"../chunks/Tome_Detail.DfpNI3hG.js";import{T as H}from"../chunks/Tome_Link.DDakxGqJ.js";var J=M("🐰",1),K=(_,a)=>u(a,!o(a)),Q=M(`<section><p>Relocates elements in the DOM, in the rare cases that's useful and the best solution. The <!> uses this to mount dialogs from any component without inheriting styles.</p> <aside><p>Use only when necessary or fun.</p></aside></section> <section><div class="mb_lg"><!></div> <!></section> <section><!> <div class="teleports svelte-1lm68os"><div class="panel svelte-1lm68os"></div> <div class="panel svelte-1lm68os"></div></div> <button type="button">teleport the bunny</button></section>`,1);function lt(_,a){z(a,!0);const R=q("Teleport");let f=m(!0),n=m(void 0),i=m(void 0);G(_,{tome:R,children:(A,V)=>{var h=Q(),l=Y(h),p=s(l),E=t(s(p));H(E,{name:"Dialog"}),P(),e(p);var I=t(t(p,!0));e(I),e(l);var d=t(t(l,!0)),v=s(d),x=s(v);w(x,{content:"import Teleport from '@ryanatkn/fuz/Teleport.svelte';",lang:"ts"}),e(v);var C=t(t(v,!0));w(C,{content:`<Teleport to={swap ? teleport_1 : teleport_2}>
+	🐰
+</Teleport>
+<div class="teleports">
+	<div class="panel" bind:this={teleport_1} />
+	<div class="panel" bind:this={teleport_2} />
+</div>
+<button onclick={() => (swap = !swap)}>
+	teleport the bunny
+</button>`}),e(d);var b=t(t(d,!0)),g=s(b),D=U(()=>o(f)?o(n):o(i));F(g,{get to(){return o(D)},children:(r,W)=>{var N=J();y(r,N)},$$slots:{default:!0}});var c=t(t(g,!0)),T=s(c);k(T,r=>u(n,$(r)),()=>o(n));var L=t(t(T,!0));k(L,r=>u(i,$(r)),()=>o(i)),e(c);var B=t(t(c,!0));B.__click=[K,f],e(b),y(A,h)},$$slots:{default:!0}}),O()}j(["click"]);export{lt as component};
