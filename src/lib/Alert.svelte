@@ -27,7 +27,7 @@
 	const {color: status_color, icon: status_icon} = $derived(options);
 	const final_color = $derived(color ?? status_color);
 	const final_icon = $derived(
-		typeof icon === 'string' ? icon : status_icon ?? alert_status_options.inform.icon!,
+		typeof icon === 'string' ? icon : (status_icon ?? alert_status_options.inform.icon!),
 	);
 </script>
 
