@@ -5,6 +5,7 @@
 <script lang="ts">
 	import {page} from '$app/stores';
 	import {onDestroy} from 'svelte';
+	import {slugify} from '@ryanatkn/belt/path.js';
 
 	import type {Tome} from '$lib/tome.js';
 	import Hashlink from '$lib/Hashlink.svelte';
@@ -17,8 +18,6 @@
 	const {tome}: Props = $props();
 
 	const id = 'tome_title_' + _id++;
-
-	const slugify = (str: string) => str.toLowerCase().replaceAll(/\s/gu, '-').replaceAll(/\W/gu, ''); // TODO extract to helper
 
 	const library_links = get_library_links();
 
