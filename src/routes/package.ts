@@ -31,7 +31,7 @@ export const package_json = {
 	engines: {node: '>=20.12'},
 	peerDependencies: {
 		'@ryanatkn/belt': '^0.24.9',
-		'@ryanatkn/gro': '^0.130.2',
+		'@ryanatkn/gro': '^0.131.0',
 		'@ryanatkn/moss': '^0.8.0',
 		'@sveltejs/kit': '^2',
 		svelte: '^5.0.0-next.0',
@@ -41,7 +41,7 @@ export const package_json = {
 		'@ryanatkn/belt': '^0.24.9',
 		'@ryanatkn/eslint-config': '^0.4.2',
 		'@ryanatkn/fuz_code': '^0.16.0',
-		'@ryanatkn/gro': '^0.130.2',
+		'@ryanatkn/gro': '^0.131.0',
 		'@ryanatkn/moss': '^0.8.0',
 		'@sveltejs/adapter-static': '^3.0.2',
 		'@sveltejs/kit': '^2.5.18',
