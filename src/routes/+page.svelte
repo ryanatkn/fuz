@@ -87,8 +87,6 @@
 </main>
 
 <style>
-	menu {
-	}
 	a.chip:active {
 		box-shadow: var(--shadow_inset_xs);
 	}
