@@ -1,5 +1,4 @@
 import {Url} from '@ryanatkn/gro/package_json.js';
-import type {Logger} from '@ryanatkn/belt/log.js';
 import {join} from 'node:path';
 import {existsSync} from 'node:fs';
 
@@ -23,18 +22,6 @@ export const create_empty_fuz_config = (): Fuz_Config => ({
 	repos: [],
 });
 
-export const load_fuz_config = async (): Promise<Fuz_Config> => {
-	const config = (await import(join(dir, path))).default; // TODO error handling
-	try {
-		return Fuz_Config.parse(config);
-	} catch (err) {
-		try {
-			log?.error(`invalid ${path}: ${JSON.parse(err.message)[0].message}`);
-		} catch (_err) {}
-		throw err;
-	}
-};
-
 /**
  * Transforms a `Raw_Fuz_Config` to the more strict `Fuz_Config`.
  * This allows users to provide a more relaxed config.
@@ -53,20 +40,14 @@ export interface Fuz_Config_Module {
 	readonly default: Raw_Fuz_Config | Create_Fuz_Config;
 }
 
-export const load_fuz_config = async (
-	path: string,
-	dir: string,
-	log?: Logger,
-): Promise<Fuz_Config> => {
-	const default_config = normalize_fuz_config(
-		await create_default_config(create_empty_fuz_config()),
-	);
-	const config_path = join(dir, GRO_CONFIG_PATH);
+export const load_fuz_config = async (path: string, dir: string): Promise<Fuz_Config> => {
+	const default_config = create_empty_fuz_config();
+	const config_path = join(dir, path);
 	if (!existsSync(config_path)) {
 		// No user config file found, so return the default.
 		return default_config;
 	}
-	// Import the user's `gro.config.ts`.
+	// Import the user's `fuz.config.ts`.
 	const config_module = await import(config_path);
 	validate_fuz_config_module(config_module, config_path);
 	return normalize_fuz_config(
