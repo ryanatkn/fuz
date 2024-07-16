@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.112.0
+
+### Minor Changes
+
+- rework config ([#43](https://github.com/ryanatkn/fuz/pull/43))
+
 ## 0.111.0
 
 ### Minor Changes
