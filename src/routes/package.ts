@@ -56,7 +56,7 @@ export const package_json = {
 		'prettier-plugin-svelte': '^3.2.5',
 		'prism-svelte': '^0.5.0',
 		prismjs: '^1.29.0',
-		svelte: '^5.0.0-next.184',
+		svelte: '^5.0.0-next.185',
 		'svelte-check': '^3.8.4',
 		tslib: '^2.6.3',
 		typescript: '^5.5.3',
@@ -106,7 +106,6 @@ export const package_json = {
 			svelte: './dist/Community_Links.svelte',
 			default: './dist/Community_Links.svelte',
 		},
-		'./config.js': {types: './dist/config.d.ts', default: './dist/config.js'},
 		'./Contextmenu_Entry.svelte': {
 			types: './dist/Contextmenu_Entry.svelte.d.ts',
 			svelte: './dist/Contextmenu_Entry.svelte',
@@ -171,6 +170,7 @@ export const package_json = {
 			svelte: './dist/Earbetter_Logo.svelte',
 			default: './dist/Earbetter_Logo.svelte',
 		},
+		'./fuz_config.js': {types: './dist/fuz_config.d.ts', default: './dist/fuz_config.js'},
 		'./Fuz_Logo.svelte': {
 			types: './dist/Fuz_Logo.svelte.d.ts',
 			svelte: './dist/Fuz_Logo.svelte',
@@ -384,20 +384,6 @@ export const src_json = {
 		'./Color_Scheme_Input.svelte': {path: 'Color_Scheme_Input.svelte', declarations: []},
 		'./Community_Links_Panel.svelte': {path: 'Community_Links_Panel.svelte', declarations: []},
 		'./Community_Links.svelte': {path: 'Community_Links.svelte', declarations: []},
-		'./config.js': {
-			path: 'config.ts',
-			declarations: [
-				{name: 'Fuz_Config', kind: 'type'},
-				{name: 'Raw_Fuz_Config', kind: 'type'},
-				{name: 'Fuz_Repo', kind: 'type'},
-				{name: 'Create_Fuz_Config', kind: 'type'},
-				{name: 'create_empty_fuz_config', kind: 'function'},
-				{name: 'normalize_fuz_config', kind: 'function'},
-				{name: 'Fuz_Config_Module', kind: 'type'},
-				{name: 'load_fuz_config', kind: 'function'},
-				{name: 'validate_fuz_config_module', kind: 'function'},
-			],
-		},
 		'./Contextmenu_Entry.svelte': {path: 'Contextmenu_Entry.svelte', declarations: []},
 		'./contextmenu_helpers.svelte.js': {
 			path: 'contextmenu_helpers.svelte.ts',
@@ -443,6 +429,20 @@ export const src_json = {
 			declarations: [{name: 'Dimensions', kind: 'class'}],
 		},
 		'./Earbetter_Logo.svelte': {path: 'Earbetter_Logo.svelte', declarations: []},
+		'./fuz_config.js': {
+			path: 'fuz_config.ts',
+			declarations: [
+				{name: 'Fuz_Config', kind: 'type'},
+				{name: 'Raw_Fuz_Config', kind: 'type'},
+				{name: 'Fuz_Repo', kind: 'type'},
+				{name: 'Create_Fuz_Config', kind: 'type'},
+				{name: 'create_empty_fuz_config', kind: 'function'},
+				{name: 'normalize_fuz_config', kind: 'function'},
+				{name: 'Fuz_Config_Module', kind: 'type'},
+				{name: 'load_fuz_config', kind: 'function'},
+				{name: 'validate_fuz_config_module', kind: 'function'},
+			],
+		},
 		'./Fuz_Logo.svelte': {path: 'Fuz_Logo.svelte', declarations: []},
 		'./fuz.js': {
 			path: 'fuz.ts',
