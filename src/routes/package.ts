@@ -387,8 +387,15 @@ export const src_json = {
 		'./config.js': {
 			path: 'config.ts',
 			declarations: [
-				{name: 'Fuz_Config', kind: 'variable'},
+				{name: 'Fuz_Config', kind: 'type'},
+				{name: 'Raw_Fuz_Config', kind: 'type'},
+				{name: 'Fuz_Repo', kind: 'type'},
+				{name: 'Create_Fuz_Config', kind: 'type'},
+				{name: 'create_empty_fuz_config', kind: 'function'},
 				{name: 'load_fuz_config', kind: 'function'},
+				{name: 'normalize_fuz_config', kind: 'function'},
+				{name: 'Fuz_Config_Module', kind: 'type'},
+				{name: 'validate_fuz_config_module', kind: 'function'},
 			],
 		},
 		'./Contextmenu_Entry.svelte': {path: 'Contextmenu_Entry.svelte', declarations: []},
