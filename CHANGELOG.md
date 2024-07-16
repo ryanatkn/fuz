@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.111.0
+
+### Minor Changes
+
+- pin peer deps ([c4a48ea](https://github.com/ryanatkn/fuz/commit/c4a48ea))
+
 ## 0.110.4
 
 ### Patch Changes
