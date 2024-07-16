@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.111.0",
+  "version": "0.112.0",
   "modules": {
     "./package.json": {
       "path": "package.json",
@@ -46,19 +46,6 @@
     "./Community_Links.svelte": {
       "path": "Community_Links.svelte",
       "declarations": []
-    },
-    "./config.js": {
-      "path": "config.ts",
-      "declarations": [
-        {
-          "name": "Fuz_Config",
-          "kind": "variable"
-        },
-        {
-          "name": "load_fuz_config",
-          "kind": "function"
-        }
-      ]
     },
     "./Contextmenu_Entry.svelte": {
       "path": "Contextmenu_Entry.svelte",
@@ -202,6 +189,47 @@
     "./Earbetter_Logo.svelte": {
       "path": "Earbetter_Logo.svelte",
       "declarations": []
+    },
+    "./fuz_config.js": {
+      "path": "fuz_config.ts",
+      "declarations": [
+        {
+          "name": "Fuz_Config",
+          "kind": "type"
+        },
+        {
+          "name": "Raw_Fuz_Config",
+          "kind": "type"
+        },
+        {
+          "name": "Fuz_Repo",
+          "kind": "type"
+        },
+        {
+          "name": "Create_Fuz_Config",
+          "kind": "type"
+        },
+        {
+          "name": "create_empty_fuz_config",
+          "kind": "function"
+        },
+        {
+          "name": "normalize_fuz_config",
+          "kind": "function"
+        },
+        {
+          "name": "Fuz_Config_Module",
+          "kind": "type"
+        },
+        {
+          "name": "load_fuz_config",
+          "kind": "function"
+        },
+        {
+          "name": "validate_fuz_config_module",
+          "kind": "function"
+        }
+      ]
     },
     "./Fuz_Logo.svelte": {
       "path": "Fuz_Logo.svelte",
