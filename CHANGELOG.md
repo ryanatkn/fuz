@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.114.0
+
+### Minor Changes
+
+- remove `fuz_config.ts` and replace with `@ryanatkn/fuz_gitops/gitops_config.ts` ([9b74ece](https://github.com/ryanatkn/fuz/commit/9b74ece))
+
 ## 0.113.0
 
 ### Minor Changes
