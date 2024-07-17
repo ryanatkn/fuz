@@ -196,10 +196,6 @@
       "svelte": "./dist/Earbetter_Logo.svelte",
       "default": "./dist/Earbetter_Logo.svelte"
     },
-    "./fuz_config.js": {
-      "types": "./dist/fuz_config.d.ts",
-      "default": "./dist/fuz_config.js"
-    },
     "./Fuz_Logo.svelte": {
       "types": "./dist/Fuz_Logo.svelte.d.ts",
       "svelte": "./dist/Fuz_Logo.svelte",

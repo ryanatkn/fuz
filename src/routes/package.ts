@@ -170,7 +170,6 @@ export const package_json = {
 			svelte: './dist/Earbetter_Logo.svelte',
 			default: './dist/Earbetter_Logo.svelte',
 		},
-		'./fuz_config.js': {types: './dist/fuz_config.d.ts', default: './dist/fuz_config.js'},
 		'./Fuz_Logo.svelte': {
 			types: './dist/Fuz_Logo.svelte.d.ts',
 			svelte: './dist/Fuz_Logo.svelte',
@@ -429,20 +428,6 @@ export const src_json = {
 			declarations: [{name: 'Dimensions', kind: 'class'}],
 		},
 		'./Earbetter_Logo.svelte': {path: 'Earbetter_Logo.svelte', declarations: []},
-		'./fuz_config.js': {
-			path: 'fuz_config.ts',
-			declarations: [
-				{name: 'Fuz_Config', kind: 'type'},
-				{name: 'Raw_Fuz_Config', kind: 'type'},
-				{name: 'Fuz_Repo_Config', kind: 'type'},
-				{name: 'Create_Fuz_Config', kind: 'type'},
-				{name: 'create_empty_fuz_config', kind: 'function'},
-				{name: 'normalize_fuz_config', kind: 'function'},
-				{name: 'Fuz_Config_Module', kind: 'type'},
-				{name: 'load_fuz_config', kind: 'function'},
-				{name: 'validate_fuz_config_module', kind: 'function'},
-			],
-		},
 		'./Fuz_Logo.svelte': {path: 'Fuz_Logo.svelte', declarations: []},
 		'./fuz.js': {
 			path: 'fuz.ts',
