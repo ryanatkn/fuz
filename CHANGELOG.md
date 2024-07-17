@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.115.0
+
+### Minor Changes
+
+- upgrade `@ryanatkn/gro@0.133.0` from 0.132.0 ([49b6948](https://github.com/ryanatkn/fuz/commit/49b6948))
+
 ## 0.114.0
 
 ### Minor Changes
