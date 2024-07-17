@@ -3,14 +3,14 @@ import {join} from 'node:path';
 import {existsSync} from 'node:fs';
 
 export interface Fuz_Config {
-	repos: Fuz_Repo[];
+	repos: Fuz_Repo_Config[];
 }
 
 export interface Raw_Fuz_Config {
-	repos?: Array<Url | Fuz_Repo>;
+	repos?: Array<Url | Fuz_Repo_Config>;
 }
 
-export interface Fuz_Repo {
+export interface Fuz_Repo_Config {
 	url: Url;
 }
 
