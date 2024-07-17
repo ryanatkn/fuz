@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.113.0
+
+### Minor Changes
+
+- rename `Fuz_Repo` to `Fuz_Repo_Config` and its `url` property to `repo_url` ([#44](https://github.com/ryanatkn/fuz/pull/44))
+
 ## 0.112.0
 
 ### Minor Changes
