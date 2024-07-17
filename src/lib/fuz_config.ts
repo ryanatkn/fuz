@@ -3,15 +3,15 @@ import {join} from 'node:path';
 import {existsSync} from 'node:fs';
 
 export interface Fuz_Config {
-	repos: Fuz_Repo[];
+	repos: Fuz_Repo_Config[];
 }
 
 export interface Raw_Fuz_Config {
-	repos?: Array<Url | Fuz_Repo>;
+	repos?: Array<Url | Fuz_Repo_Config>;
 }
 
-export interface Fuz_Repo {
-	url: Url;
+export interface Fuz_Repo_Config {
+	repo_url: Url;
 }
 
 export type Create_Fuz_Config = (
@@ -32,7 +32,9 @@ export const normalize_fuz_config = (raw_config: Raw_Fuz_Config): Fuz_Config => 
 	// so fall back to the empty values when `undefined`.
 	const {repos} = raw_config;
 	return {
-		repos: repos ? repos.map((r) => (typeof r === 'string' ? {url: r} : r)) : empty_config.repos,
+		repos: repos
+			? repos.map((r) => (typeof r === 'string' ? {repo_url: r} : r))
+			: empty_config.repos,
 	};
 };
 
