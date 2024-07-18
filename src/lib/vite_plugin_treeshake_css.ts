@@ -21,14 +21,16 @@ export const treeshake_css = ({matcher = /.+\.css$/}: Treeshake_Css_Options = {}
 			name: 'optimize_moss_css_TEST1',
 			enforce: 'pre',
 			load: (id: string) => {
-				if (matcher.test(id)) console.log(`pre id`, id);
+				console.log(`pre id`, id);
+				// if (matcher.test(id))
 			},
 		},
 		{
 			name: 'optimize_moss_css_TEST2',
 			enforce: 'post',
 			load: (id: string) => {
-				if (matcher.test(id)) console.log(`post id`, id);
+				console.log(`post id`, id);
+				// if (matcher.test(id))
 			},
 		},
 		// {
