@@ -1,5 +1,6 @@
 import {transform} from 'lightningcss';
 import {readFileSync} from 'fs';
+import {EMPTY_ARRAY} from '@ryanatkn/belt/array.js';
 
 // TODO BLOCK delete unoptimized.css and this module
 
@@ -38,7 +39,7 @@ const transformed = transform({
 						if (selector_component.type === 'class') {
 							console.log(`selector_component.name`, selector_component.name);
 							if (selector_component.name === 'b') {
-								return [];
+								return EMPTY_ARRAY;
 							}
 						}
 					}
