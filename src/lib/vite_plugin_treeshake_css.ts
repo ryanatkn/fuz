@@ -12,6 +12,16 @@ export interface Treeshake_Css_Options {
 	matcher?: RegExp;
 }
 
+// TODO BLOCK expect:
+/*
+
+.panel preserved via `Alert.svelte`
+
+.mb_xl4 preserved via `Code.svelte` (added directly in a hack)
+.inline preserved via `Code.svelte` (a false-positive but ok, delete the above once we see it)
+
+*/
+
 // TODO BLOCK remove
 const skipped = (id: string) => {
 	return (
