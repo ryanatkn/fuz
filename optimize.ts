@@ -4,7 +4,7 @@ import {EMPTY_ARRAY} from '@ryanatkn/belt/array.js';
 
 // TODO BLOCK delete unoptimized.css and this module
 
-// TODO BLOCK decide if this should be in moss not fuz
+// TODO BLOCK decide if this should be in fuz, moss, or a new repo
 
 /**
  * Ignores the default prismjs theme.
@@ -39,7 +39,7 @@ const transformed = transform({
 						if (selector_component.type === 'class') {
 							console.log(`selector_component.name`, selector_component.name);
 							if (selector_component.name === 'b') {
-								return EMPTY_ARRAY;
+								return EMPTY_ARRAY; // TODO better way to do this? `null` and `undefined` and `{}` don't work
 							}
 						}
 					}
