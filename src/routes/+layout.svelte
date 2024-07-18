@@ -2,6 +2,9 @@
 	import '@ryanatkn/moss/style.css';
 	import '@ryanatkn/moss/theme.css';
 
+	import 'prismjs';
+	import 'prism-svelte';
+
 	import type {Snippet} from 'svelte';
 
 	interface Props {

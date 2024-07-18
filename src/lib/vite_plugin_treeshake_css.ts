@@ -2,6 +2,7 @@ import type {PluginOption} from 'vite';
 import {transform} from 'lightningcss';
 import {readFileSync} from 'fs';
 import {EMPTY_ARRAY} from '@ryanatkn/belt/array.js';
+import {cyan, green, magenta} from '@ryanatkn/belt/styletext.js';
 
 // TODO BLOCK delete unoptimized.css and this module
 
@@ -10,6 +11,17 @@ import {EMPTY_ARRAY} from '@ryanatkn/belt/array.js';
 export interface Treeshake_Css_Options {
 	matcher?: RegExp;
 }
+
+// TODO BLOCK remove
+const skipped = (id: string) => {
+	return (
+		((id.includes('/node_modules/') && !id.includes('/node_modules/@ryanatkn/')) ||
+			id.includes('/.svelte-kit/') ||
+			id.includes('vite/') ||
+			id.includes('virtual:')) &&
+		!id.includes('.css')
+	);
+};
 
 /**
  * Ignores the default prismjs theme.
@@ -21,15 +33,25 @@ export const treeshake_css = ({matcher = /.+\.css$/}: Treeshake_Css_Options = {}
 			name: 'optimize_moss_css_TEST1',
 			enforce: 'pre',
 			load: (id: string) => {
-				console.log(`pre id`, id);
+				if (skipped(id)) return;
+				console.log(green(`pre id`), id);
 				// if (matcher.test(id))
 			},
 		},
 		{
 			name: 'optimize_moss_css_TEST2',
+			load: (id: string) => {
+				if (skipped(id)) return;
+				console.log(magenta(`mid id`), id);
+				// if (matcher.test(id))
+			},
+		},
+		{
+			name: 'optimize_moss_css_TEST3',
 			enforce: 'post',
 			load: (id: string) => {
-				console.log(`post id`, id);
+				if (skipped(id)) return;
+				console.log(cyan(`post id`), id);
 				// if (matcher.test(id))
 			},
 		},
