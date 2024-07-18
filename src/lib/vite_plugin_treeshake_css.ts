@@ -22,10 +22,10 @@ export interface Treeshake_Css_Options {
 
 */
 
-// TODO BLOCK remove
+// TODO BLOCK should we exclude most external files from searching? need to include actual deps though
 const skipped = (id: string) => {
 	return (
-		((id.includes('/node_modules/') && !id.includes('/node_modules/@ryanatkn/')) ||
+		((id.includes('/node_modules/') && !id.includes('/node_modules/@ryanatkn/')) || // TODO BLOCK hack
 			id.includes('/.svelte-kit/') ||
 			id.includes('vite/') ||
 			id.includes('virtual:')) &&
