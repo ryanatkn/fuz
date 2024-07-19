@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.115.1
+
+### Patch Changes
+
+- make `@ryanatkn/gro` and optional peer dep ([589aef5](https://github.com/ryanatkn/fuz/commit/589aef5))
+
 ## 0.115.0
 
 ### Minor Changes
