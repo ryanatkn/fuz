@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.116.0",
+  "version": "0.117.0",
   "modules": {
     "./package.json": {
       "path": "package.json",
@@ -51,8 +51,16 @@
       "path": "Contextmenu_Entry.svelte",
       "declarations": []
     },
-    "./contextmenu_helpers.svelte.js": {
-      "path": "contextmenu_helpers.svelte.ts",
+    "./Contextmenu_Link_Entry.svelte": {
+      "path": "Contextmenu_Link_Entry.svelte",
+      "declarations": []
+    },
+    "./Contextmenu_Root.svelte": {
+      "path": "Contextmenu_Root.svelte",
+      "declarations": []
+    },
+    "./contextmenu_state.svelte.js": {
+      "path": "contextmenu_state.svelte.ts",
       "declarations": [
         {
           "name": "Contextmenu_Params",
@@ -79,11 +87,11 @@
           "kind": "type"
         },
         {
-          "name": "Contextmenu_Store_Options",
+          "name": "Contextmenu_State_Options",
           "kind": "type"
         },
         {
-          "name": "Contextmenu_Store",
+          "name": "Contextmenu_State",
           "kind": "class"
         },
         {
@@ -119,14 +127,6 @@
           "kind": "function"
         }
       ]
-    },
-    "./Contextmenu_Link_Entry.svelte": {
-      "path": "Contextmenu_Link_Entry.svelte",
-      "declarations": []
-    },
-    "./Contextmenu_Root.svelte": {
-      "path": "Contextmenu_Root.svelte",
-      "declarations": []
     },
     "./Contextmenu_Submenu.svelte": {
       "path": "Contextmenu_Submenu.svelte",
