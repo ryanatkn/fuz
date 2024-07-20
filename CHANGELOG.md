@@ -1,5 +1,17 @@
 # @ryanatkn/fuz
 
+## 0.117.0
+
+### Minor Changes
+
+- loosen peer deps temporarily ([ca9a88a](https://github.com/ryanatkn/fuz/commit/ca9a88a))
+- rename `contextmenu_state.svelte.ts` from `contextmenu_helpers.svelte.ts` and `Contextmenu_State` from `Contextmenu_Store` ([ca9a88a](https://github.com/ryanatkn/fuz/commit/ca9a88a))
+
+### Patch Changes
+
+- fix `Tome_Subheading` layout and add `content_attrs` prop ([ca9a88a](https://github.com/ryanatkn/fuz/commit/ca9a88a))
+- fix secondary nav layout for small screens ([ca9a88a](https://github.com/ryanatkn/fuz/commit/ca9a88a))
+
 ## 0.116.0
 
 ### Minor Changes
