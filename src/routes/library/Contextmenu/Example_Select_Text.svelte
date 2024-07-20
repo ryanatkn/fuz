@@ -2,21 +2,21 @@
 	import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
 	import Contextmenu_Entry from '$lib/Contextmenu_Entry.svelte';
 	import Contextmenu from '$lib/Contextmenu.svelte';
-	import {Contextmenu_Store} from '$lib/contextmenu_helpers.svelte.js';
+	import {Contextmenu_State} from '$lib/contextmenu_state.svelte.js';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
 	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
-	const contextmenu = new Contextmenu_Store();
+	const contextmenu = new Contextmenu_State();
 
 	// TODO maybe pass `contextmenu` to the children snippet
 
 	let toggled = $state(false);
 
-	let text_el: HTMLElement;
+	let text_el: HTMLElement | undefined = $state();
 
 	const select_text = () => {
 		const selection = window.getSelection();
-		if (!selection) return;
+		if (!selection || !text_el) return;
 		const range = document.createRange();
 		range.selectNodeContents(text_el);
 		selection.removeAllRanges();

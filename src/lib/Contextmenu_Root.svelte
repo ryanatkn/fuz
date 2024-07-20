@@ -5,9 +5,9 @@
 	import {
 		set_contextmenu,
 		set_contextmenu_dimensions,
-		Contextmenu_Store,
+		Contextmenu_State,
 		open_contextmenu,
-	} from '$lib/contextmenu_helpers.svelte.js';
+	} from '$lib/contextmenu_state.svelte.js';
 	import Contextmenu_Link_Entry from '$lib/Contextmenu_Link_Entry.svelte';
 	import Contextmenu_Text_Entry from '$lib/Contextmenu_Text_Entry.svelte';
 
@@ -27,7 +27,7 @@
 		 * https://svelte.dev/docs#template-syntax-key
 		 * @nonreactive
 		 */
-		contextmenu?: Contextmenu_Store;
+		contextmenu?: Contextmenu_State;
 		/**
 		 * The number of pixels the pointer can be moved without canceling `longpress`.
 		 * Defaults to half the default `--input_height`.
@@ -73,7 +73,7 @@
 	}
 
 	const {
-		contextmenu = new Contextmenu_Store(),
+		contextmenu = new Contextmenu_State(),
 		longpress_move_tolerance = 21,
 		longpress_duration = 633,
 		bypass_with_tap_then_longpress = true,

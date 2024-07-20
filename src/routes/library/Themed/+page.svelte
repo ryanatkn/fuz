@@ -116,7 +116,7 @@
 		/>
 		<Code content="<Color_Scheme_Input />" />
 		<p>Pass props to override the default:</p>
-		<!-- TODO this is bugged on page load, auto is SSR'd but doesn't update here, repro and report to Svelte -->
+		<!-- TODO this is bugged on page load, auto is SSR'd but doesn't update here, can we fix? Should Svelte prefer the client value? -->
 		<Code
 			content={`<Color_Scheme_Input\n\tvalue={{color_scheme: ${
 				"'" + JSON.stringify(themer.color_scheme).replace(/"/g, '') + "'"

@@ -45,7 +45,8 @@
 
 <style>
 	.library_menu {
-		width: var(--library_menu_width);
+		width: 100%;
+		max-width: var(--library_menu_width);
 	}
 
 	.category {

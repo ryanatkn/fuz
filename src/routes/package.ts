@@ -30,9 +30,9 @@ export const package_json = {
 	type: 'module',
 	engines: {node: '>=20.12'},
 	peerDependencies: {
-		'@ryanatkn/belt': '^0.24.9',
-		'@ryanatkn/gro': '^0.133.1',
-		'@ryanatkn/moss': '^0.9.0',
+		'@ryanatkn/belt': '*',
+		'@ryanatkn/gro': '*',
+		'@ryanatkn/moss': '*',
 		'@sveltejs/kit': '^2',
 		svelte: '^5.0.0-next.0',
 	},
@@ -112,10 +112,6 @@ export const package_json = {
 			svelte: './dist/Contextmenu_Entry.svelte',
 			default: './dist/Contextmenu_Entry.svelte',
 		},
-		'./contextmenu_helpers.svelte.js': {
-			types: './dist/contextmenu_helpers.svelte.d.ts',
-			default: './dist/contextmenu_helpers.svelte.js',
-		},
 		'./Contextmenu_Link_Entry.svelte': {
 			types: './dist/Contextmenu_Link_Entry.svelte.d.ts',
 			svelte: './dist/Contextmenu_Link_Entry.svelte',
@@ -125,6 +121,10 @@ export const package_json = {
 			types: './dist/Contextmenu_Root.svelte.d.ts',
 			svelte: './dist/Contextmenu_Root.svelte',
 			default: './dist/Contextmenu_Root.svelte',
+		},
+		'./contextmenu_state.svelte.js': {
+			types: './dist/contextmenu_state.svelte.d.ts',
+			default: './dist/contextmenu_state.svelte.js',
 		},
 		'./Contextmenu_Submenu.svelte': {
 			types: './dist/Contextmenu_Submenu.svelte.d.ts',
@@ -385,8 +385,10 @@ export const src_json = {
 		'./Community_Links_Panel.svelte': {path: 'Community_Links_Panel.svelte', declarations: []},
 		'./Community_Links.svelte': {path: 'Community_Links.svelte', declarations: []},
 		'./Contextmenu_Entry.svelte': {path: 'Contextmenu_Entry.svelte', declarations: []},
-		'./contextmenu_helpers.svelte.js': {
-			path: 'contextmenu_helpers.svelte.ts',
+		'./Contextmenu_Link_Entry.svelte': {path: 'Contextmenu_Link_Entry.svelte', declarations: []},
+		'./Contextmenu_Root.svelte': {path: 'Contextmenu_Root.svelte', declarations: []},
+		'./contextmenu_state.svelte.js': {
+			path: 'contextmenu_state.svelte.ts',
 			declarations: [
 				{name: 'Contextmenu_Params', kind: 'type'},
 				{name: 'Item_State', kind: 'type'},
@@ -394,8 +396,8 @@ export const src_json = {
 				{name: 'Submenu_State', kind: 'class'},
 				{name: 'Root_Menu_State', kind: 'class'},
 				{name: 'Contextmenu_Run', kind: 'type'},
-				{name: 'Contextmenu_Store_Options', kind: 'type'},
-				{name: 'Contextmenu_Store', kind: 'class'},
+				{name: 'Contextmenu_State_Options', kind: 'type'},
+				{name: 'Contextmenu_State', kind: 'class'},
 				{name: 'contextmenu_action', kind: 'function'},
 				{name: 'open_contextmenu', kind: 'function'},
 				{name: 'set_contextmenu', kind: 'function'},
@@ -406,8 +408,6 @@ export const src_json = {
 				{name: 'get_contextmenu_dimensions', kind: 'function'},
 			],
 		},
-		'./Contextmenu_Link_Entry.svelte': {path: 'Contextmenu_Link_Entry.svelte', declarations: []},
-		'./Contextmenu_Root.svelte': {path: 'Contextmenu_Root.svelte', declarations: []},
 		'./Contextmenu_Submenu.svelte': {path: 'Contextmenu_Submenu.svelte', declarations: []},
 		'./Contextmenu_Text_Entry.svelte': {path: 'Contextmenu_Text_Entry.svelte', declarations: []},
 		'./Contextmenu.svelte': {path: 'Contextmenu.svelte', declarations: []},

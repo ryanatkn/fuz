@@ -2,7 +2,7 @@
 	import {strip_start} from '@ryanatkn/belt/string.js';
 	import type {Snippet} from 'svelte';
 
-	import {get_contextmenu} from '$lib/contextmenu_helpers.svelte.js';
+	import {get_contextmenu} from '$lib/contextmenu_state.svelte.js';
 
 	const DEFAULT_LINK_ICON = '🔗';
 

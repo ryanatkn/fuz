@@ -15,11 +15,12 @@
 		text: string;
 		slug: string; // TODO doesn't handle duplicate slugs for subheadings under different `Tome_Title`s, e.g. the generic "example-usage" and "more-details" will cause issues if they're used elsewhere
 		tag?: Library_Link_Tag;
+		content_attrs?: SvelteHTMLElements['div'];
 		attrs?: SvelteHTMLElements['h3'];
 		children?: Snippet;
 	}
 
-	const {text, slug, tag = 'h3', attrs, children}: Props = $props();
+	const {text, slug, tag = 'h3', content_attrs, attrs, children}: Props = $props();
 
 	const id = 'tome_subheading_' + _id++;
 
@@ -33,14 +34,16 @@
 			library_links.remove(id);
 		});
 	}
-
-	const classes = $derived('tome_subheading' + (attrs?.class ? ' ' + attrs.class : ''));
 </script>
 
-<svelte:element this={tag} {...attrs} class={classes}>{@render content()}</svelte:element>
+<svelte:element this={tag} {...attrs} class:tome_subheading={true}
+	>{@render content()}</svelte:element
+>
 
 {#snippet content()}
-	{#if children}{@render children()}{:else}{text}{/if}
+	<div {...content_attrs}>
+		{#if children}{@render children()}{:else}{text}{/if}
+	</div>
 	<Hashlink {slug} />
 {/snippet}
 

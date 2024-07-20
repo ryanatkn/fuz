@@ -34,9 +34,9 @@
     "node": ">=20.12"
   },
   "peerDependencies": {
-    "@ryanatkn/belt": "^0.24.9",
-    "@ryanatkn/gro": "^0.133.1",
-    "@ryanatkn/moss": "^0.9.0",
+    "@ryanatkn/belt": "*",
+    "@ryanatkn/gro": "*",
+    "@ryanatkn/moss": "*",
     "@sveltejs/kit": "^2",
     "svelte": "^5.0.0-next.0"
   },
@@ -139,10 +139,6 @@
       "svelte": "./dist/Contextmenu_Entry.svelte",
       "default": "./dist/Contextmenu_Entry.svelte"
     },
-    "./contextmenu_helpers.svelte.js": {
-      "types": "./dist/contextmenu_helpers.svelte.d.ts",
-      "default": "./dist/contextmenu_helpers.svelte.js"
-    },
     "./Contextmenu_Link_Entry.svelte": {
       "types": "./dist/Contextmenu_Link_Entry.svelte.d.ts",
       "svelte": "./dist/Contextmenu_Link_Entry.svelte",
@@ -152,6 +148,10 @@
       "types": "./dist/Contextmenu_Root.svelte.d.ts",
       "svelte": "./dist/Contextmenu_Root.svelte",
       "default": "./dist/Contextmenu_Root.svelte"
+    },
+    "./contextmenu_state.svelte.js": {
+      "types": "./dist/contextmenu_state.svelte.d.ts",
+      "default": "./dist/contextmenu_state.svelte.js"
     },
     "./Contextmenu_Submenu.svelte": {
       "types": "./dist/Contextmenu_Submenu.svelte.d.ts",

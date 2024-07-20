@@ -7,10 +7,10 @@
 	import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
 	import Contextmenu_Entry from '$lib/Contextmenu_Entry.svelte';
 	import Contextmenu from '$lib/Contextmenu.svelte';
-	import {Contextmenu_Store} from '$lib/contextmenu_helpers.svelte.js';
+	import {Contextmenu_State} from '$lib/contextmenu_state.svelte.js';
 	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
-	const contextmenu = new Contextmenu_Store();
+	const contextmenu = new Contextmenu_State();
 
 	// TODO add some initial option that customizes the behavior
 	// TODO maybe pass `contextmenu` to the children snippet

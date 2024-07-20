@@ -22,7 +22,7 @@
 	}
 
 	const {
-		fill = '#f75e22', // TODO change to Moss orange color when it's added
+		fill = '#f67c4c',
 		size,
 		width,
 		height,

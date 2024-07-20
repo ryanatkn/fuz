@@ -28,11 +28,14 @@
 			--library_secondary_nav_padding
 		); /* needed with `overflow: auto` to avoid cutting off outline */
 		margin-bottom: 0;
+		overflow: auto;
+		background-color: var(--fg_1);
+	}
+
+	nav {
 		display: flex;
 		flex-direction: column;
 		align-items: flex-end;
-		overflow: auto;
-		background-color: var(--fg_1);
 	}
 
 	/* sync this breakpoint with `Library` */

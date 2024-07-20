@@ -10,13 +10,12 @@
 		title?: string;
 		disabled?: boolean;
 		attrs?: any;
-		el?: HTMLButtonElement | undefined;
 		children: Snippet;
 	}
 
 	const {pending, onclick, running, title, disabled, attrs, children}: Props = $props();
 
-	let el: HTMLButtonElement | undefined; // intentionally not reactive
+	let el: HTMLButtonElement | undefined = $state();
 
 	export const focus = (options?: FocusOptions | undefined): void => el?.focus(options);
 

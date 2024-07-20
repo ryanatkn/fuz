@@ -110,8 +110,9 @@
 		--library_menu_width: 180px;
 		--library_content_padding: var(--space_xl5);
 		--library_content_max_width: calc(var(--width_md) + var(--library_content_padding) * 2);
+		/* the `+ 1px` solves some issue when scaling */
 		--library_sidebar_width: max(
-			calc(var(--library_menu_width) + var(--library_secondary_nav_padding) * 2),
+			calc(var(--library_menu_width) + 1px + var(--library_secondary_nav_padding) * 2),
 			calc((100% - var(--library_content_max_width)) / 2)
 		);
 		display: contents;
