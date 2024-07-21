@@ -50,6 +50,11 @@ export const sync_color_scheme = (color_scheme: Color_Scheme | null): void => {
 	} else {
 		document.documentElement.classList.remove('dark');
 	}
+	if (color_scheme === 'light') {
+		document.documentElement.classList.add('light');
+	} else {
+		document.documentElement.classList.remove('light');
+	}
 };
 
 export const COLOR_SCHEME_STORAGE_KEY = 'color-scheme';
@@ -114,12 +119,20 @@ export const load_theme = (fallback: Theme = default_themes[0], key = THEME_STOR
 	return fallback;
 };
 
+// TODO BLOCK ensure `:root:root` is overriden by `:root.light|dark`
+
 /**
  * Creates an HTML script string to be inserted into the `head`
  * that initializes the dark/light color scheme.
  * https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme
  * Prefers a value in `localStorage` if available, and if not detects using `matchMedia`.
  * On unexpected errors, like if `localStorage` is disabled, the `fallback` value is used.
+ * The `light` class is added only if the user has explicitly chosen the light theme,
+ * whereas the `dark` class is always added if the dark theme is chosen or detected.
+ *
+ * A `meta` tag is added for immediate parsing, and in the case of dark mode,
+ * a `:root:root` dark mode `color-scheme` is applied to override the Moss default.
+ *
  * @param fallback sets `content` of `<meta name="color-scheme">` and the default if something fails
  * @param key
  * @returns HTML string with the color scheme setup script and a `color-schema` meta tag
@@ -129,11 +142,14 @@ export const create_theme_setup_script = (
 	key = COLOR_SCHEME_STORAGE_KEY,
 ): string => `
 	<meta name="color-scheme" content="${fallback === 'dark' ? 'dark light' : 'light dark'}" />
+	${fallback === 'dark' ? "<style nonce='%sveltekit.nonce%'>:root:root { color-scheme: dark light; }</style>" : ''}
 	<script nonce="%sveltekit.nonce%">
 		try {
 			let c = localStorage.getItem('${key}');
 			if (c === 'auto' || (c !== 'dark' && c !== 'light')) {
 				c = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+			} else if (c === 'light') {
+			 document.documentElement.classList.add('light');
 			}
 			if (c === 'dark') document.documentElement.classList.add('dark');
 		} catch (_) {${fallback === 'dark' ? " document.documentElement.classList.add('dark'); " : ''}}
