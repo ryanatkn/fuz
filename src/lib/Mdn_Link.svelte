@@ -25,7 +25,7 @@
 	const final_children = $derived(children ?? strip_end(path, '/').split('/').at(-1)!);
 </script>
 
-<a {...attrs} {href} class="chip nowrap"
+<a {...attrs} {href} class="chip white_space_nowrap"
 	>{#if typeof final_children === 'string'}
 		<span class="font_mono">{final_children}</span>
 	{:else}
