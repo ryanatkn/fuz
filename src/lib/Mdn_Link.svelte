@@ -31,5 +31,5 @@
 	{:else}
 		{@render final_children()}
 	{/if}
-	<Mdn_Logo classes="inline_block mx_xs3 vertical_align_middle" /></a
+	<Mdn_Logo inline classes="mx_xs3" /></a
 >

@@ -14,6 +14,7 @@
 		 */
 		height?: string;
 		label?: string;
+		inline?: boolean;
 		classes?: string;
 		attrs?: any;
 	}
@@ -24,6 +25,7 @@
 		height,
 		fill = '#8cb4ff',
 		label = 'GitHub icon',
+		inline,
 		classes,
 		attrs,
 	}: Props = $props();
@@ -40,9 +42,17 @@
 	style:width={final_width}
 	style:height={final_height}
 	class={classes}
+	class:inline
 >
 	<path
 		d="M42 .2 13.4 92.3H1.7L30.2.2Zm10.4 0v92.1H42V.2Zm40.3 0L64.2 92.3H52.5L81 .2Zm10.4 0v92.1H92.7V.2Z"
 		{fill}
 	/>
 </svg>
+
+<style>
+	.inline {
+		display: inline-block;
+		vertical-align: middle;
+	}
+</style>

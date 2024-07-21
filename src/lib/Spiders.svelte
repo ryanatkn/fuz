@@ -22,13 +22,13 @@
 
 	const {
 		spiders = [
-			'hsl(var(--color_a_5))',
-			'hsl(var(--color_b_5))',
-			'hsl(var(--color_c_5))',
-			'hsl(var(--color_d_5))',
-			'hsl(var(--color_e_5))',
-			'hsl(var(--color_f_5))',
-			'hsl(var(--color_g_5))',
+			'var(--color_a_5)',
+			'var(--color_b_5)',
+			'var(--color_c_5)',
+			'var(--color_d_5)',
+			'var(--color_e_5)',
+			'var(--color_f_5)',
+			'var(--color_g_5)',
 		],
 		seed = minute_of_day(),
 		random = create_random_alea(seed),

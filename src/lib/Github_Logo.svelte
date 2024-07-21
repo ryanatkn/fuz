@@ -14,6 +14,7 @@
 		 */
 		height?: string;
 		label?: string;
+		inline?: boolean;
 		classes?: string;
 		attrs?: any; // TODO type
 	}
@@ -24,6 +25,7 @@
 		width,
 		height,
 		label = 'the GitHub icon, an octocat silhouette',
+		inline,
 		classes,
 		attrs,
 	}: Props = $props();
@@ -40,6 +42,7 @@
 	style:width={final_width}
 	style:height={final_height}
 	class={classes}
+	class:inline
 >
 	<path
 		{fill}
@@ -59,3 +62,10 @@
 		transform="scale(64)"
 	/>
 </svg>
+
+<style>
+	.inline {
+		display: inline-block;
+		vertical-align: middle;
+	}
+</style>
