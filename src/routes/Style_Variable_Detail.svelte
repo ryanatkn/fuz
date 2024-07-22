@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type {Style_Variable} from '@ryanatkn/moss/theme.js';
+	import type {Style_Variable} from '@ryanatkn/moss/variable.js';
 
 	interface Props {
 		variable: Style_Variable | null;

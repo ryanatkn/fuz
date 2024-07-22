@@ -16,17 +16,19 @@
 		 */
 		height?: string;
 		label?: string;
+		inline?: boolean;
 		classes?: string;
 		path_attrs?: SvelteHTMLElements['path'];
 		attrs?: SvelteHTMLElements['svg'];
 	}
 
 	const {
-		fill = 'hsl(var(--color_g_5))',
+		fill = 'var(--color_g_5)',
 		size,
 		width,
 		height,
 		label = "three sleepy z's",
+		inline,
 		classes,
 		path_attrs,
 		attrs,
@@ -44,6 +46,7 @@
 	style:width={final_width}
 	style:height={final_height}
 	class={classes}
+	class:inline
 >
 	<g>
 		<path
@@ -65,3 +68,10 @@
 		/>
 	</g>
 </svg>
+
+<style>
+	.inline {
+		display: inline-block;
+		vertical-align: middle;
+	}
+</style>

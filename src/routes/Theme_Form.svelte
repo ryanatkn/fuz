@@ -3,7 +3,8 @@
 	import 'prismjs';
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 	import {swallow} from '@ryanatkn/belt/dom.js';
-	import {render_theme_style, type Style_Variable, type Theme} from '@ryanatkn/moss/theme.js';
+	import {render_theme_style, type Theme} from '@ryanatkn/moss/theme.js';
+	import type {Style_Variable} from '@ryanatkn/moss/variable.js';
 
 	import Copy_To_Clipboard from '$lib/Copy_To_Clipboard.svelte';
 	import Dialog from '$lib/Dialog.svelte';

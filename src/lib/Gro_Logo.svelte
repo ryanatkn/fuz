@@ -15,6 +15,7 @@
 		 */
 		height?: string;
 		label?: string;
+		inline?: boolean;
 		classes?: string;
 		path_attrs?: SvelteHTMLElements['path'];
 		attrs?: SvelteHTMLElements['svg'];
@@ -25,6 +26,7 @@
 		width,
 		height,
 		label = 'a pixelated green oak acorn with a glint of sun',
+		inline,
 		classes,
 		path_attrs,
 		attrs,
@@ -42,6 +44,7 @@
 	style:width={final_width}
 	style:height={final_height}
 	class={classes}
+	class:inline
 >
 	<path
 		{...path_attrs}
@@ -79,3 +82,10 @@
 		d="M 93.75,31.25 H 87.5 V 25 h 6.25 v 6.25 H 100 v 12.5 H 93.75 Z M 75,18.75 h 6.25 V 25 H 75 Z M 37.5,12.5 H 50 V 6.25 h 6.25 v 6.25 h 12.5 v 6.25 H 53.125 37.5 Z"
 	/>
 </svg>
+
+<style>
+	.inline {
+		display: inline-block;
+		vertical-align: middle;
+	}
+</style>

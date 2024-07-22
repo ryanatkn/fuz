@@ -19,17 +19,19 @@
 		 */
 		height?: string;
 		label?: string;
+		inline?: boolean;
 		classes?: string;
 		path_attrs?: SvelteHTMLElements['path'];
 		attrs?: SvelteHTMLElements['svg'];
 	}
 
 	const {
-		fill = 'hsl(var(--color_b_5))',
+		fill = 'var(--color_b_5)',
 		size,
 		width,
 		height,
 		label = 'a fuzzy tuft of green moss',
+		inline,
 		classes,
 		path_attrs,
 		attrs,
@@ -39,4 +41,14 @@
 	const style = $derived(attrs?.style ? transform + '; ' + attrs.style : transform);
 </script>
 
-<Spider {fill} {size} {width} {height} {label} {classes} {path_attrs} attrs={{...attrs, style}} />
+<Spider
+	{fill}
+	{size}
+	{width}
+	{height}
+	{label}
+	{inline}
+	{classes}
+	{path_attrs}
+	attrs={{...attrs, style}}
+/>

@@ -1,5 +1,5 @@
 import {getContext, setContext} from 'svelte';
-import type {Style_Variable} from '@ryanatkn/moss/theme.js';
+import type {Style_Variable} from '@ryanatkn/moss/variable.js';
 
 // TODO maybe change this to a generic wrapper class for any value?
 // TODO @many add to $lib?
