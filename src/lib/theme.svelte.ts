@@ -119,8 +119,6 @@ export const load_theme = (fallback: Theme = default_themes[0], key = THEME_STOR
 	return fallback;
 };
 
-// TODO BLOCK ensure `:root:root` is overriden by `:root.light|dark`
-
 /**
  * Creates an HTML script string to be inserted into the `head`
  * that initializes the dark/light color scheme.
