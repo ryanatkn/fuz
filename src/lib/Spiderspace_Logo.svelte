@@ -15,6 +15,7 @@
 		 */
 		height?: string;
 		label?: string;
+		inline?: boolean;
 		classes?: string;
 		path_attrs?: SvelteHTMLElements['path'];
 		attrs?: SvelteHTMLElements['svg'];
@@ -25,6 +26,7 @@
 		width,
 		height,
 		label = 'a galaxy full of twinkling star spiders',
+		inline,
 		classes,
 		path_attrs,
 		attrs,
@@ -42,6 +44,7 @@
 	style:width={final_width}
 	style:height={final_height}
 	class={classes}
+	class:inline
 >
 	<defs>
 		<radialGradient id="spiderspace_logo_galaxy_radial_gradient">
@@ -105,3 +108,10 @@
 		fill="url('#spiderspace_logo_galaxy_radial_gradient')"
 	/>
 </svg>
+
+<style>
+	.inline {
+		display: inline-block;
+		vertical-align: middle;
+	}
+</style>

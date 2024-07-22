@@ -25,12 +25,14 @@
 		 */
 		height?: string;
 		label?: string;
+		inline?: boolean;
 		classes?: string;
 		path_attrs?: SvelteHTMLElements['path'];
 		attrs?: SvelteHTMLElements['svg'];
 	}
 
-	const {project, fill, size, width, height, label, classes, path_attrs, attrs}: Props = $props();
+	const {project, fill, size, width, height, label, inline, classes, path_attrs, attrs}: Props =
+		$props();
 
 	const final_fill = $derived(
 		project ? to_fuz_project_color(project) : (fill ?? 'var(--color_f_5)'),
@@ -51,6 +53,7 @@
 	{width}
 	{height}
 	label={final_label}
+	{inline}
 	{classes}
 	{path_attrs}
 	{attrs}
