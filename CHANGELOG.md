@@ -1,5 +1,15 @@
 # @ryanatkn/fuz
 
+## 0.118.0
+
+### Minor Changes
+
+- upgrade `@ryanatkn/moss@0.11` from `0.10.1` ([#45](https://github.com/ryanatkn/fuz/pull/45))
+
+### Patch Changes
+
+- add `light` class to `:root` when not auto ([#45](https://github.com/ryanatkn/fuz/pull/45))
+
 ## 0.117.0
 
 ### Minor Changes
