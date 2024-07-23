@@ -286,7 +286,7 @@
 	}
 	.module {
 		margin-bottom: var(--space_xs);
-		--link_color: var(--text_2);
+		--link_color: var(--text_color_2);
 	}
 	.module_content {
 		background-color: var(--bg_3);
