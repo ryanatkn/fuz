@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.118.1
+
+### Patch Changes
+
+- fix shadows ([2bd4177](https://github.com/ryanatkn/fuz/commit/2bd4177))
+
 ## 0.118.0
 
 ### Minor Changes
