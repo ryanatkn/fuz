@@ -1,0 +1,21 @@
+import{f as rt,c as a,s as t,a as s,J as kt,t as v,r as o,d as S}from"../chunks/disclose-version.D-YpP91c.js";import{p as yt,a as zt,g as n,t as Y,n as _,C as p,V as Tt,d as y}from"../chunks/runtime.CLWtUI7-.js";import{s as g}from"../chunks/render.DYN3TrTz.js";import{i as at}from"../chunks/if.t2Adprt1.js";import{r as D}from"../chunks/attributes.w-7YtrUH.js";import{e as wt}from"../chunks/svelte-head.BiNYCvkA.js";import{s as z}from"../chunks/style.iv2mhl8q.js";import{b as J}from"../chunks/input.Dg7Z5plX.js";import{p as Et}from"../chunks/proxy.CnlAnLU8.js";import{C as f}from"../chunks/Code.MOrgNCcM.js";import{g as It}from"../chunks/tome.BEaQ-Zqd.js";import{P as T}from"../chunks/Pending_Animation.DToeN1qi.js";import{T as Mt}from"../chunks/Tome_Detail.DRH-mEpa.js";import{T as ot}from"../chunks/Tome_Subheading.Be0D4t04.js";var Rt=(l,r)=>_(r,!n(r)),Ct=v("pause animation",1),Ft=v("play animation",1),Vt=(l,r)=>_(r,"🐢🐢🐢"),Wt=(l,r)=>_(r,Et((n(r)+n(r)).substring(0,24))),Bt=(l,r)=>_(r,!n(r)),Lt=v("pause animation",1),Nt=v("play animation",1),St=v("With children <code>index</code> prop",1),Yt=(l,r)=>_(r,!n(r)),Dt=v('<div class="row box"><span class="size_xl5"> </span> <span class="index svelte-1tring4"> </span> </div>'),Jt=v('<section><!> <!> <div class="mb_lg"><!></div> <button type="button" class="mb_lg"><!></button> <!> <div class="box" role="none"><!></div></section> <section><!> <!> <p>with children <input> <button type="button">🐢🐢🐢</button> <button type="button">* 2</button></p> <button type="button"><!></button> <div><!></div></section> <section><!> <!> <p>with <code> <button type="button"> </button> </code></p> <p>and children <input> <input></p> <!></section>',1);function sn(l,r){yt(r,!0);const it=It("Pending_Animation");let d=p("🐢"),b=p("🐸"),x=p("⏳"),h=p(!1),c=p(!0),$=p(!1);Mt(l,{tome:it,children:(st,qt)=>{var j=Jt(),w=rt(j),q=a(w);f(q,{content:"import Pending_Animation from '@ryanatkn/fuz/Pending_Animation.svelte';",lang:"ts"});var G=t(t(q,!0)),_t=y(()=>`<Pending_Animation running={${n(c)}} />`);f(G,{get content(){return n(_t)}});var E=t(t(G,!0)),ut=a(E);T(ut,{get running(){return n(c)}}),o(E);var A=t(t(E,!0));A.__click=[Rt,c];var vt=a(A);at(vt,()=>n(c),e=>{var i=Ct();s(e,i)},e=>{var i=Ft();s(e,i)}),o(A);var H=t(t(A,!0)),lt=y(()=>`<Pending_Animation
+	attrs={{class: 'size_xl5'}}
+	running={${n(c)}}
+/>`);f(H,{get content(){return n(lt)}});var I=t(t(H,!0));z(I,"align-items","flex-start");var dt=a(I);T(dt,{attrs:{class:"size_xl5"},get running(){return n(c)}}),o(I),o(w);var M=t(t(w,!0)),K=a(M);ot(K,{text:"With custom children",slug:"custom-children"});var O=t(t(K,!0)),ct=y(()=>`<div
+	style:font-size="var(--size_xl6)"
+	style:--animation_duration="var(--duration_6)"
+>
+	<Pending_Animation running={${n($)}}>
+		{${n(d)}}
+	</Pending_Animation>
+</div>`);f(O,{get content(){return n(ct)}});var R=t(t(O,!0)),C=t(a(R));D(C);var Q=t(t(C,!0));Q.__click=[Vt,d];var pt=t(t(Q,!0));pt.__click=[Wt,d],o(R);var P=t(t(R,!0));P.__click=[Bt,$];var mt=a(P);at(mt,()=>n($),e=>{var i=Lt();s(e,i)},e=>{var i=Nt();s(e,i)}),o(P);var m=t(t(P,!0));z(m,"font-size","var(--size_xl6)"),z(m,"--animation_duration","var(--duration_6)"),z(m,"text-align","center");var gt=a(m);T(gt,{get running(){return n($)},children:(e,i)=>{S();var u=kt();Y(()=>g(u,n(d))),s(e,u)},$$slots:{default:!0}}),o(m),o(M);var U=t(t(M,!0)),X=a(U);ot(X,{text:"With children index prop",slug:"children-index-prop",children:(e,i)=>{S();var u=St();t(rt(u,!0)),S(),s(e,u)},$$slots:{default:!0}});var Z=t(t(X,!0)),ft=y(()=>`<Pending_Animation running={${n(h)}}>
+	{#snippet children(index)}
+		<div class="row box">
+			{${n(b)}}
+			{index}
+			<span class="size_xl5">
+				{${n(x)}}
+			</span>}
+		</div>
+	{/snippet}
+</Pending_Animation>`);f(Z,{get content(){return n(ft)}});var F=t(t(Z,!0)),tt=t(a(F)),nt=a(tt);nt.nodeValue="running={";var k=t(nt);k.__click=[Yt,h];var bt=a(k);o(k);var xt=t(k,!0);xt.nodeValue="}",o(tt),o(F);var V=t(t(F,!0)),W=t(a(V));D(W);var et=t(t(W,!0));D(et),o(V);var ht=t(t(V,!0));T(ht,{get running(){return n(h)},children:(i,u=Tt)=>{var B=Dt(),L=a(B),$t=a(L);o(L);var N=t(t(L,!0)),At=a(N);o(N);var Pt=t(N,!0);o(B),Y(()=>{g($t,n(b)),g(At,u()),g(Pt,` ${n(x)??""}`)}),s(i,B)}}),o(U),Y(()=>g(bt,n(h))),J(C,()=>n(d),e=>_(d,e)),J(W,()=>n(b),e=>_(b,e)),J(et,()=>n(x),e=>_(x,e)),s(st,j)},$$slots:{default:!0}}),zt()}wt(["click"]);export{sn as component};
