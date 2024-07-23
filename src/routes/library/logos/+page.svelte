@@ -77,7 +77,7 @@
 			<li>
 				<Code content={`<Github_Logo />`} />
 				<a href="https://github.com/"
-					><Github_Logo fill="var(--text_color_1)" size="var(--icon_size_xl3)" /></a
+					><Github_Logo fill="var(--text_color_2)" size="var(--icon_size_xl3)" /></a
 				>
 			</li>
 			<li>
