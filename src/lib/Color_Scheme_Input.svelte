@@ -23,8 +23,8 @@ https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/menubar_ro
 	{#each color_schemes as color_scheme (color_scheme)}
 		{@const selected = color_scheme === value.color_scheme}
 		<button
-			class="color_scheme"
 			type="button"
+			class="color_scheme color_a"
 			role="menuitemradio"
 			title={selected
 				? `${color_scheme} color scheme is selected`
