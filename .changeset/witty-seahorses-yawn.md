@@ -1,5 +1,5 @@
 ---
-'@ryanatkn/fuz': patch
+'@ryanatkn/fuz': minor
 ---
 
-update styles
+upgrade `@ryanatkn/moss@0.12` from `0.11.1`
