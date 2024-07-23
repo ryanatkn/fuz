@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.118.2
+
+### Patch Changes
+
+- fix card shadows ([6517d8c](https://github.com/ryanatkn/fuz/commit/6517d8c))
+
 ## 0.118.1
 
 ### Patch Changes
