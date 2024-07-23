@@ -33,7 +33,7 @@
 		<li class="row" role="none">
 			<button
 				type="button"
-				class="theme_button"
+				class="theme_button color_a"
 				role="menuitemradio"
 				aria-label="{theme.name} theme"
 				aria-checked={selected}
