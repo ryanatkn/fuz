@@ -15,7 +15,7 @@
 
 	const tomes_by_category = $derived(
 		tomes.reduce<Record<string, Tome[]>>((result, c) => {
-			if (!(c.category in result)) result[c.category] = [];
+			result[c.category] ??= [];
 			result[c.category].push(c);
 			return result;
 		}, {}),

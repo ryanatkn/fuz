@@ -336,7 +336,7 @@ const query_contextmenu_params = (
 	let cache_key: string, cached: Contextmenu_Params | Contextmenu_Params[] | undefined;
 	while ((el = el?.closest(CONTEXTMENU_DOM_QUERY))) {
 		if ((cache_key = el.dataset[CONTEXTMENU_DATASET_KEY]!)) {
-			if (!params) params = [];
+			params ??= [];
 			cached = contextmenu_cache.get(cache_key);
 			if (cached === undefined) {
 				continue;
