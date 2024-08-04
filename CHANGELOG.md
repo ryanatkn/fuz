@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.119.3
+
+### Patch Changes
+
+- fix `Copy_To_Clipboard` text size for non-icons ([3769839](https://github.com/ryanatkn/fuz/commit/3769839))
+
 ## 0.119.2
 
 ### Patch Changes
