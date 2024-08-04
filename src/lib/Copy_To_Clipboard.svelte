@@ -13,14 +13,7 @@
 
 	// TODO add library entry
 
-	const {
-		text,
-		classes = '',
-		button_classes = 'icon_button',
-		button_attrs,
-		attrs,
-		children,
-	}: Props = $props();
+	const {text, classes = '', button_classes, button_attrs, attrs, children}: Props = $props();
 
 	let copied = $state(false);
 	let failed = $state(false);
@@ -42,7 +35,7 @@
 	<button
 		{...button_attrs}
 		type="button"
-		class={button_classes}
+		class={button_classes ?? (children ? undefined : 'icon_button')}
 		style:font-size="var(--size_lg)"
 		onclick={copy}
 		>{#if children}{@render children(copied, failed)}{:else}📋{/if}</button
