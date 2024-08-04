@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.119.1
+
+### Patch Changes
+
+- add options to `Copy_To_Clipboard` ([c4bd56e](https://github.com/ryanatkn/fuz/commit/c4bd56e))
+
 ## 0.119.0
 
 ### Minor Changes
