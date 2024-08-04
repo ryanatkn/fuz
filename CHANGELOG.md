@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.119.2
+
+### Patch Changes
+
+- fix `Copy_To_Clipboard` for non-icons ([5f904ee](https://github.com/ryanatkn/fuz/commit/5f904ee))
+
 ## 0.119.1
 
 ### Patch Changes
