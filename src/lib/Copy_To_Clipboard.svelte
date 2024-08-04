@@ -35,8 +35,7 @@
 	<button
 		{...button_attrs}
 		type="button"
-		class={button_classes ?? (children ? undefined : 'icon_button')}
-		style:font-size="var(--size_lg)"
+		class={button_classes ?? (children ? undefined : 'icon_button size_lg')}
 		onclick={copy}
 		>{#if children}{@render children(copied, failed)}{:else}📋{/if}</button
 	>
