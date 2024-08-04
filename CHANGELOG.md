@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.120.0
+
+### Minor Changes
+
+- simplify `Copy_To_Clipboard` to not include a wrapper ([4abb6ab](https://github.com/ryanatkn/fuz/commit/4abb6ab))
+
 ## 0.119.3
 
 ### Patch Changes
