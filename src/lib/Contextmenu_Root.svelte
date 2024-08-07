@@ -294,7 +294,7 @@
 			},
 			destroy: () => {
 				if (listener) {
-					el.removeEventListener(params.event, listener);
+					el.removeEventListener(event!, listener);
 				}
 			},
 		};
