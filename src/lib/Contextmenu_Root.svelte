@@ -311,12 +311,12 @@
 		event: 'contextmenu',
 		passive: false,
 		cb: on_window_contextmenu,
-		disabled: !scoped,
+		disabled: scoped,
 	}}
-	use:passive_event={{event: 'touchstart', passive: true, cb: touchstart, disabled: !scoped}}
-	use:passive_event={{event: 'touchmove', passive: true, cb: touchmove, disabled: !scoped}}
-	use:passive_event={{event: 'touchend', passive: false, cb: touchend, disabled: !scoped}}
-	use:passive_event={{event: 'touchcancel', passive: false, cb: touchend, disabled: !scoped}}
+	use:passive_event={{event: 'touchstart', passive: true, cb: touchstart, disabled: scoped}}
+	use:passive_event={{event: 'touchmove', passive: true, cb: touchmove, disabled: scoped}}
+	use:passive_event={{event: 'touchend', passive: false, cb: touchend, disabled: scoped}}
+	use:passive_event={{event: 'touchcancel', passive: false, cb: touchend, disabled: scoped}}
 	use:passive_event={{
 		event: 'mousedown',
 		passive: true,
