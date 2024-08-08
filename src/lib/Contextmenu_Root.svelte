@@ -1,6 +1,7 @@
 <script lang="ts">
 	import {is_editable, swallow, inside_editable} from '@ryanatkn/belt/dom.js';
-	import type {Snippet} from 'svelte';
+	import type {ComponentProps, Snippet} from 'svelte';
+	import type {Action} from 'svelte/action';
 
 	import {
 		set_contextmenu,
@@ -266,34 +267,74 @@
 		handler();
 	};
 
-	// TODO change the events below to the callback form, but the passive/nonpassive modifiers need to be handled with an action? assuming we still need them
-	/* eslint-disable svelte/valid-compile */
+	// TODO this is a mess because some events need to be passive or nonpassive on some mobile devices, but a lot of this is unnecessary, needs a full pass
+	interface Passive_Event_Params {
+		event: string;
+		passive: boolean;
+		cb: (...args: any) => void;
+		disabled?: boolean;
+	}
+	const passive_event: Action<HTMLElement, Passive_Event_Params> = (el, params) => {
+		let listener: Passive_Event_Params['cb'] | null = null;
+		let event: string | null = null;
+		const sync_event = (p: Passive_Event_Params) => {
+			if (listener) {
+				el.removeEventListener(event!, listener);
+			}
+			if (!p.disabled) {
+				el.addEventListener(p.event, p.cb, {capture: true, passive: p.passive});
+				listener = p.cb;
+				event = p.event;
+			}
+		};
+		sync_event(params);
+		return {
+			update: (p) => {
+				sync_event(p);
+			},
+			destroy: () => {
+				if (listener) {
+					el.removeEventListener(event!, listener);
+				}
+			},
+		};
+	};
 </script>
 
 <!--
-	Some of these modifiers may be unnecessary, but some browsers need some of them.
-	The `nonpassive` option is needed to swallow events.
+	TODO Some of these modifiers are unnecessary, but some browsers need some of them.
+	The `nonpassive` option is needed to swallow events. See the todo above about doing a full pass.
 -->
 <!-- Capture keydown so it can handle the event before any dialogs. -->
 <svelte:window
-	on:contextmenu|capture|nonpassive={scoped ? undefined : on_window_contextmenu}
-	on:touchstart|capture|passive={scoped ? undefined : touchstart}
-	on:touchmove|capture|passive={scoped ? undefined : touchmove}
-	on:touchend|capture|nonpassive={scoped ? undefined : touchend}
-	on:touchcancel|capture|nonpassive={scoped ? undefined : touchend}
-	on:mousedown|capture|passive={contextmenu.opened ? mousedown : undefined}
-	on:keydown|capture|nonpassive={contextmenu.opened ? keydown : undefined}
+	use:passive_event={{
+		event: 'contextmenu',
+		passive: false,
+		cb: on_window_contextmenu,
+		disabled: scoped,
+	}}
+	use:passive_event={{event: 'touchstart', passive: true, cb: touchstart, disabled: scoped}}
+	use:passive_event={{event: 'touchmove', passive: true, cb: touchmove, disabled: scoped}}
+	use:passive_event={{event: 'touchend', passive: false, cb: touchend, disabled: scoped}}
+	use:passive_event={{event: 'touchcancel', passive: false, cb: touchend, disabled: scoped}}
+	use:passive_event={{
+		event: 'mousedown',
+		passive: true,
+		cb: mousedown,
+		disabled: !contextmenu.opened,
+	}}
+	use:passive_event={{event: 'keydown', passive: false, cb: keydown, disabled: !contextmenu.opened}}
 />
 
 {#if scoped}
 	<div
 		class="contextmenu_root"
 		role="region"
-		on:contextmenu|capture|nonpassive={on_window_contextmenu}
-		on:touchstart|capture|passive={touchstart}
-		on:touchmove|capture|passive={touchmove}
-		on:touchend|capture|nonpassive={touchend}
-		on:touchcancel|capture|nonpassive={touchend}
+		use:passive_event={{event: 'contextmenu', passive: false, cb: on_window_contextmenu}}
+		use:passive_event={{event: 'touchstart', passive: true, cb: touchstart}}
+		use:passive_event={{event: 'touchmove', passive: true, cb: touchmove}}
+		use:passive_event={{event: 'touchend', passive: false, cb: touchend}}
+		use:passive_event={{event: 'touchcancel', passive: false, cb: touchend}}
 	>
 		{@render children()}
 	</div>
@@ -326,11 +367,11 @@
 	</menu>
 {/if}
 
-{#snippet link_entry(props)}
+{#snippet link_entry(props: ComponentProps<Contextmenu_Link_Entry>)}
 	<Contextmenu_Link_Entry {...props} />
 {/snippet}
 
-{#snippet text_entry(props)}
+{#snippet text_entry(props: ComponentProps<Contextmenu_Text_Entry>)}
 	<Contextmenu_Text_Entry {...props} />
 {/snippet}
 
