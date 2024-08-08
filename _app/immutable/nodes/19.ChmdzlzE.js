@@ -1,1 +1,0 @@
-import{s as o,f as s,a as t,t as i,d as r}from"../chunks/disclose-version.D-YpP91c.js";var n=i("The <code>Library</code> docs is a work in progress.",1);function c(e){r();var a=n();o(s(a,!0)),r(),t(e,a)}export{c as component};
