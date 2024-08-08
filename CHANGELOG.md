@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.120.1
+
+### Patch Changes
+
+- update contextmenu events for Svelte 5 ([#47](https://github.com/ryanatkn/fuz/pull/47))
+
 ## 0.120.0
 
 ### Minor Changes
