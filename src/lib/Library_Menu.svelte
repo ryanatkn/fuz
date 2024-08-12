@@ -32,7 +32,7 @@
 				{#each tomes as item (item.slug)}
 					<li role="none" transition:slide>
 						<a
-							class="menu_item"
+							class="menu_item ellipsis line_height_lg"
 							href="{base}/library/{item.slug}"
 							class:selected={item.pathname === $page.url.pathname}>{item.name}</a
 						>

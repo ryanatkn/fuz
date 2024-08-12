@@ -11,7 +11,7 @@
 </script>
 
 <aside class="library_secondary_nav unstyled" class:sidebar>
-	<nav>
+	<nav aria-label="Secondary">
 		<Library_Menu {tomes} />
 	</nav>
 </aside>

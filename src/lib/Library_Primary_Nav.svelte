@@ -31,7 +31,7 @@
 	<div class="library_primary_nav" class:scrolled>
 		<div class="background" aria-hidden="true"></div>
 		<div class="content">
-			<nav class:selected_root>
+			<nav aria-label="Primary" class:selected_root>
 				<Breadcrumb>
 					{#if breadcrumb_children}
 						{@render breadcrumb_children(true)}

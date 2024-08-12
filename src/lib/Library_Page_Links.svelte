@@ -26,13 +26,19 @@
 </div>
 
 {#snippet content()}
-	<ul class="unstyled">
-		{#each library_links.library_links as item (item.id)}
-			<li role="none" transition:slide class:pl_xl4={item.tag === 'h4'}>
-				<a class="menu_item" href="#{item.slug}" class:selected={item.slug === hash}>{item.text}</a>
-			</li>
-		{/each}
-	</ul>
+	<nav aria-label="On this page" class="w_100">
+		<ul class="unstyled">
+			{#each library_links.library_links as item (item.id)}
+				<li role="none" transition:slide class:pl_xl4={item.tag === 'h4'}>
+					<a
+						class="menu_item overflow_wrap_anywhere line_height_sm"
+						href="#{item.slug}"
+						class:selected={item.slug === hash}>{item.text}</a
+					>
+				</li>
+			{/each}
+		</ul>
+	</nav>
 {/snippet}
 
 <style>
