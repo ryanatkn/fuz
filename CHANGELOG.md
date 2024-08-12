@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.120.2
+
+### Patch Changes
+
+- fix sidebar nav text overflow ([2e27112](https://github.com/ryanatkn/fuz/commit/2e27112))
+
 ## 0.120.1
 
 ### Patch Changes
