@@ -20,8 +20,7 @@
 		{...dialog.dialog_props}
 		{index}
 		active={index === dialogs.length - 1}
-		>{#if children}{@render children(dialog)}{:else}<svelte:component
-				this={dialog.Component}
+		>{#if children}{@render children(dialog)}{:else}<dialog.Component
 				{...dialog.props}
 			/>{/if}</Dialog
 	>{/each}

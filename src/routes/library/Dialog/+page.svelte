@@ -230,7 +230,7 @@
 >
 	{#snippet children(dialog)}
 		<div class="pane">
-			<svelte:component this={dialog.Component} {...dialog.props} />
+			<dialog.Component {...dialog.props} />
 		</div>
 	{/snippet}
 </Dialogs>

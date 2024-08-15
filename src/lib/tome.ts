@@ -7,6 +7,7 @@ export const Tome = z.object({
 	name: z.string(),
 	// TODO ? summary: z.string(),
 	category: z.string(),
+	// TODO uppercase this
 	component: z.any(), // TODO type
 	related: z.array(z.string()),
 });

@@ -24,7 +24,7 @@
 {/if}
 <div class="tomes">
 	{#each tomes as tome (tome)}
-		<svelte:component this={tome.component} />
+		<tome.component />
 	{/each}
 </div>
 
