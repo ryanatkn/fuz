@@ -57,7 +57,7 @@
 	}
 
 	.scrolled {
-		box-shadow: var(--shadow_xs) var(--shadow_color_xs);
+		box-shadow: var(--shadow_xs) var(--shadow_color_1);
 	}
 
 	.background {

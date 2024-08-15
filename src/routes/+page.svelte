@@ -88,6 +88,6 @@
 
 <style>
 	a.chip:active {
-		box-shadow: var(--shadow_inset_xs) var(--shadow_color_xs);
+		box-shadow: var(--shadow_inset_xs) var(--shadow_color_1);
 	}
 </style>
