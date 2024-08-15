@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.120.4
+
+### Patch Changes
+
+- fix shadows after moss upgrade ([b96342f](https://github.com/ryanatkn/fuz/commit/b96342f))
+
 ## 0.120.3
 
 ### Patch Changes
