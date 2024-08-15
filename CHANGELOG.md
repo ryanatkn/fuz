@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.120.3
+
+### Patch Changes
+
+- migrate svelte:component usage ([299549e](https://github.com/ryanatkn/fuz/commit/299549e))
+
 ## 0.120.2
 
 ### Patch Changes
