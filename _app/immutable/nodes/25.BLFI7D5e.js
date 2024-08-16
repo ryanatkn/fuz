@@ -1,0 +1,10 @@
+import{f as P,c as t,s as e,a as $,t as M,d as k,r as o}from"../chunks/disclose-version.BDhqTD1c.js";import{p as Y,a as z,g as s,n as u,A as m,d as O}from"../chunks/runtime.BIep0U5Y.js";import{e as U}from"../chunks/utils.BasVy1Zn.js";import{b as w}from"../chunks/this.gzNVxY_l.js";import{C as A}from"../chunks/Code.DRZWXb4x.js";import{g as j}from"../chunks/tome.1RKNoXyc.js";import{T as q}from"../chunks/Teleport.C8Bok_ts.js";import{T as F}from"../chunks/Tome_Detail.4D958Kj0.js";import{T as G}from"../chunks/Tome_Link.B768CcWW.js";var H=M("🐰",1),J=(_,a)=>u(a,!s(a)),K=M(`<section><p>Relocates elements in the DOM, in the rare cases that's useful and the best solution. The <!> uses this to mount dialogs from any component without inheriting styles.</p> <aside><p>Use only when necessary or fun.</p></aside></section> <section><div class="mb_lg"><!></div> <!></section> <section><!> <div class="teleports svelte-1lm68os"><div class="panel svelte-1lm68os"></div> <div class="panel svelte-1lm68os"></div></div> <button type="button">teleport the bunny</button></section>`,1);function ne(_,a){Y(a,!0);const R=j("Teleport");let f=m(!0),n=m(void 0),i=m(void 0);F(_,{tome:R,children:(E,S)=>{var h=K(),l=P(h),p=t(l),I=e(t(p));G(I,{name:"Dialog"}),k(),o(p);var b=e(e(p,!0));t(b),o(b),o(l);var d=e(e(l,!0)),v=t(d),D=t(v);A(D,{content:"import Teleport from '@ryanatkn/fuz/Teleport.svelte';",lang:"ts"}),o(v);var L=e(e(v,!0));A(L,{content:`<Teleport to={swap ? teleport_1 : teleport_2}>
+	🐰
+</Teleport>
+<div class="teleports">
+	<div class="panel" bind:this={teleport_1} />
+	<div class="panel" bind:this={teleport_2} />
+</div>
+<button onclick={() => (swap = !swap)}>
+	teleport the bunny
+</button>`}),o(d);var g=e(e(d,!0)),T=t(g),x=O(()=>s(f)?s(n):s(i));q(T,{get to(){return s(x)},children:(r,V)=>{k();var N=H();$(r,N)},$$slots:{default:!0}});var c=e(e(T,!0)),y=t(c);w(y,r=>u(n,r),()=>s(n));var B=e(e(y,!0));w(B,r=>u(i,r),()=>s(i)),o(c);var C=e(e(c,!0));C.__click=[J,f],o(g),$(E,h)},$$slots:{default:!0}}),z()}U(["click"]);export{ne as component};
