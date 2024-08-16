@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.120.5
+
+### Patch Changes
+
+- fix library sidebar nav width ([acfa03d](https://github.com/ryanatkn/fuz/commit/acfa03d))
+
 ## 0.120.4
 
 ### Patch Changes
