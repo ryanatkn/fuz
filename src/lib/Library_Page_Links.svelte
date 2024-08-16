@@ -54,7 +54,8 @@
 	}
 	/* TODO @many remove all :global usage after https://github.com/sveltejs/svelte/issues/10143 */
 	.sidebar_wrapper :global(ul) {
-		min-width: var(--library_menu_width);
+		width: 100%;
+		max-width: var(--library_menu_width);
 	}
 
 	/* TODO should be a CSS class or variable, maybe should be the default?
