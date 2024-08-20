@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.120.6
+
+### Patch Changes
+
+- uncenter breadcrumb text ([953f4fa](https://github.com/ryanatkn/fuz/commit/953f4fa))
+
 ## 0.120.5
 
 ### Patch Changes
