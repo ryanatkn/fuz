@@ -4,6 +4,7 @@
 
 	interface Props {
 		text: string;
+		onclick?: (text: string | null, e: MouseEvent) => void;
 		classes?: string;
 		attrs?: SvelteHTMLElements['button'];
 		children?: Snippet<[copied: boolean, failed: boolean]>;
@@ -11,21 +12,23 @@
 
 	// TODO add library entry
 
-	const {text, classes, attrs, children}: Props = $props();
+	const {text, onclick, classes, attrs, children}: Props = $props();
 
 	let copied = $state(false);
 	let failed = $state(false);
 
-	const copy = async () => {
+	const copy = async (e: MouseEvent) => {
 		copied = false;
 		failed = false;
 		try {
 			await navigator.clipboard.writeText(text);
 		} catch (_err) {
 			failed = true;
+			onclick?.(null, e);
 			return;
 		}
 		copied = true;
+		onclick?.(text, e);
 	};
 </script>
 
