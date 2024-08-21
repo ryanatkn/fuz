@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.120.7
+
+### Patch Changes
+
+- add `onclick` prop to `Copy_To_Clipboard` ([10b7ccc](https://github.com/ryanatkn/fuz/commit/10b7ccc))
+
 ## 0.120.6
 
 ### Patch Changes
