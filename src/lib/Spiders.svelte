@@ -42,7 +42,7 @@
 
 <!-- TODO animate each in randomly -->
 <!-- TODO show when intersected in viewport, maybe inline `svelte-intersect` in Fuz? -->
-<div class="spiders" style:--width="{100 / spiders.length}%">
+<div class="spiders" style:--spider_count={spiders.length}>
 	{#each shuffled as color, i (color)}
 		<Spider fill={color} attrs={{style: `transform: rotate(${rotations[i]}deg)`}} />
 	{/each}
@@ -50,11 +50,12 @@
 
 <style>
 	.spiders {
+		--width: calc(100% / var(--spider_count));
 		position: relative;
 		z-index: -1;
 		overflow: hidden;
 		margin-top: var(--space_xl9);
 		display: grid;
-		grid-template-columns: repeat(7, 1fr);
+		grid-template-columns: repeat(var(--spider_count), 1fr);
 	}
 </style>
