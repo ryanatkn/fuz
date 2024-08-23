@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.120.10
+
+### Patch Changes
+
+- fix spiders ([e8db76e](https://github.com/ryanatkn/fuz/commit/e8db76e))
+
 ## 0.120.9
 
 ### Patch Changes
