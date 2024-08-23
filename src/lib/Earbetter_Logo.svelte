@@ -23,7 +23,7 @@
 	}
 
 	const {
-		fill = '#6a40bf',
+		fill = '#8866cc',
 		size,
 		width,
 		height,
@@ -58,6 +58,5 @@
 	.inline {
 		display: inline-block;
 		vertical-align: middle;
-		color: color-mix(in srgb, #6a40bf 50%, #a68cd9 50%);
 	}
 </style>
