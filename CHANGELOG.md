@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.120.8
+
+### Patch Changes
+
+- update `Earbetter_Logo` ([#48](https://github.com/ryanatkn/fuz/pull/48))
+
 ## 0.120.7
 
 ### Patch Changes
