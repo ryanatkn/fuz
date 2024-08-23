@@ -23,7 +23,7 @@ export const to_fuz_project_color = (name: Fuz_Project_Name): string => {
 		case 'fuz_blog':
 			return '#b19a25';
 		case 'fuz_mastodon':
-			return '#6a40bf';
+			return '#8866cc';
 		case 'fuz_gitops':
 			return '#397fc6';
 		default:
