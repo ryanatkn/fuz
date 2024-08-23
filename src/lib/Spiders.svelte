@@ -1,4 +1,4 @@
-<script context="module" lang="ts">
+<script module lang="ts">
 	/**
 	 * Returns the minute of the current day.
 	 */
