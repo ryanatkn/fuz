@@ -47,12 +47,12 @@
 	const CONTAINER_ID = 'fuz_dialog';
 
 	let container_el: HTMLElement | undefined = $state();
-	$effect(() => {
-		// TODO guard some other way
-		if (BROWSER) {
+	if (BROWSER) {
+		// TODO change to `derived.by`?
+		$effect(() => {
 			update_container_el(container);
-		}
-	});
+		});
+	}
 
 	const update_container_el = (container: HTMLElement | undefined): void => {
 		if (container) {
