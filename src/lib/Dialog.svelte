@@ -48,7 +48,8 @@
 
 	let container_el: HTMLElement | undefined = $state();
 	if (BROWSER) {
-		// TODO change to `derived.by`?
+		// TODO BLOCK change to `derived.by`?
+		// TODO BLOCK add `container_id` and extract a helper to create this element?
 		$effect(() => {
 			update_container_el(container);
 		});
