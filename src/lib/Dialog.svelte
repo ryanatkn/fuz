@@ -46,7 +46,6 @@
 	const CONTAINER_ID = 'fuz_dialog';
 
 	let container_el: HTMLElement | undefined = $state();
-	// TODO BLOCK change to `derived.by`?
 	// TODO BLOCK add `container_id` and extract a helper to create this element?
 	$effect(() => {
 		update_container_el(container);
