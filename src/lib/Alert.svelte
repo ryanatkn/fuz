@@ -4,6 +4,10 @@
 
 	import {alert_status_options, type Alert_Status} from '$lib/alert.js';
 
+	/**
+	 * @see https://www.w3.org/WAI/ARIA/apg/patterns/alert/
+	 */
+
 	// TODO think through Alert+Card APIs together, one can be a button and the other a link atm
 
 	interface Props {
