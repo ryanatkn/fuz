@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.120.11
+
+### Patch Changes
+
+- fix `Dialog_Params['dialog_props']` type to be partial ([a158542](https://github.com/ryanatkn/fuz/commit/a158542))
+
 ## 0.120.10
 
 ### Patch Changes
