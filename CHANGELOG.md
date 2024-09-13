@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.121.0
+
+### Minor Changes
+
+- upgrade `@ryanatkn/moss@0.15.0` ([91ad06b](https://github.com/ryanatkn/fuz/commit/91ad06b))
+
 ## 0.120.11
 
 ### Patch Changes
