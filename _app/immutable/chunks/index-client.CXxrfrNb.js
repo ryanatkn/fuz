@@ -1,0 +1,1 @@
+import{aa as o,ab as e,ac as u,v as a}from"./runtime.BWxa1ILi.js";function c(n){o===null&&e(),o.l!==null?i(o).m.push(n):u(()=>{const t=a(n);if(typeof t=="function")return t})}function r(n){o===null&&e(),c(()=>()=>a(n))}function i(n){var t=n.l;return t.u??(t.u={a:[],b:[],m:[]})}export{c as a,r as o};
