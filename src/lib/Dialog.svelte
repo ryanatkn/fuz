@@ -148,7 +148,8 @@
 
 <style>
 	.dialog {
-		--pane_shadow: var(--shadow_xl) var(--shadow_color_5);
+		--pane_shadow: var(--shadow_bottom_xl)
+			color-mix(in hsl, var(--shadow_color) var(--shadow_alpha_5), transparent);
 		position: fixed;
 		inset: 0;
 		overflow: auto;

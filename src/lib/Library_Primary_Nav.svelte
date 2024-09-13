@@ -57,7 +57,8 @@
 	}
 
 	.scrolled {
-		box-shadow: var(--shadow_xs) var(--shadow_color_1);
+		box-shadow: var(--shadow_bottom_xs)
+			color-mix(in hsl, var(--shadow_color) var(--shadow_alpha_1), transparent);
 	}
 
 	.background {
