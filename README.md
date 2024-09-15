@@ -53,15 +53,19 @@ Import modules at their full paths:
 ```ts
 // Moss has one main plain CSS stylesheet:
 import '@ryanatkn/moss/style.css';
+
 // or import individual parts of `@ryanatkn/moss/style.css`:
 import '@ryanatkn/moss/style_reset.css'; // required
 import '@ryanatkn/moss/style_utilities.css'; // optional
 import '@ryanatkn/moss/style_components.css'; // optional
 import '@ryanatkn/moss/style_animations.css'; // optional
+
 // and import a Moss theme:
 import '@ryanatkn/moss/theme.css'; // or bring your own
+
 // then import Fuz Svelte components:
 import Themed from '@ryanatkn/fuz/Themed.svelte';
+
 // and Fuz TypeScript modules:
 import {type Theme, get_theme} from '@ryanatkn/fuz/theme.js';
 ```

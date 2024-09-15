@@ -86,10 +86,18 @@
 		text-align: center;
 	}
 	.link {
-		box-shadow: var(--shadow, var(--shadow_outset_sm) var(--shadow_color_2));
+		box-shadow: var(
+			--shadow,
+			var(--shadow_inset_bottom_sm)
+				color-mix(in hsl, var(--shadow_color) var(--shadow_alpha_2), transparent)
+		);
 	}
 	.link:active {
-		box-shadow: var(--shadow, var(--shadow_inset_sm) var(--shadow_color_2));
+		box-shadow: var(
+			--shadow,
+			var(--shadow_inset_top_sm)
+				color-mix(in hsl, var(--shadow_color) var(--shadow_alpha_2), transparent)
+		);
 	}
 	.link.selected .content,
 	.link:hover .content {

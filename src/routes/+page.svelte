@@ -46,30 +46,22 @@
 			<!-- TODO ideally this wouldn't duplicate metadata like descriptions, but adding fuz_gitops to this repo is heavy -->
 			<h2 class="mt_0 mb_xl2 px_md">other packages</h2>
 			<menu class="unstyled size_lg">
-				<a
-					class="row chip bg shadow_outset_xs px_md py_xs radius_sm mb_lg"
-					href="https://template.fuz.dev/"
+				<a class="row chip bg px_md py_xs radius_sm mb_lg" href="https://template.fuz.dev/"
 					><Fuzling size="var(--icon_size_lg)" /> <span class="ml_lg">fuz_template</span></a
 				>
-				<a
-					class="row chip bg shadow_outset_xs px_md py_xs radius_sm mb_lg"
-					href="https://blog.fuz.dev/"
+				<a class="row chip bg px_md py_xs radius_sm mb_lg" href="https://blog.fuz.dev/"
 					><Fuz_Logo project="fuz_blog" size="var(--icon_size_lg)" />
 					<span class="ml_lg">fuz_blog</span></a
 				>
-				<a
-					class="row chip bg shadow_outset_xs px_md py_xs radius_sm mb_lg"
-					href="https://mastodon.fuz.dev/"
+				<a class="row chip bg px_md py_xs radius_sm mb_lg" href="https://mastodon.fuz.dev/"
 					><Fuz_Logo project="fuz_mastodon" size="var(--icon_size_lg)" />
 					<span class="ml_lg">fuz_mastodon</span></a
 				>
-				<a
-					class="row chip bg shadow_outset_xs px_md py_xs radius_sm mb_lg"
-					href="https://code.fuz.dev/"
+				<a class="row chip bg px_md py_xs radius_sm mb_lg" href="https://code.fuz.dev/"
 					><Fuz_Logo project="fuz_code" size="var(--icon_size_lg)" />
 					<span class="ml_lg">fuz_code</span></a
 				>
-				<a class="row chip bg shadow_outset_xs px_md py_xs radius_sm" href="https://gitops.fuz.dev/"
+				<a class="row chip bg px_md py_xs radius_sm" href="https://gitops.fuz.dev/"
 					><Fuz_Logo project="fuz_gitops" size="var(--icon_size_lg)" />
 					<span class="ml_lg">fuz_gitops</span></a
 				>
@@ -87,7 +79,16 @@
 </main>
 
 <style>
+	a.chip {
+		box-shadow: var(--shadow_bottom_xs)
+			color-mix(in hsl, var(--shadow_color) var(--shadow_alpha_1), transparent);
+	}
+	a.chip:hover {
+		box-shadow: var(--shadow_bottom_sm)
+			color-mix(in hsl, var(--shadow_color) var(--shadow_alpha_1), transparent);
+	}
 	a.chip:active {
-		box-shadow: var(--shadow_inset_xs) var(--shadow_color_1);
+		box-shadow: var(--shadow_top_xs)
+			color-mix(in hsl, var(--shadow_color) var(--shadow_alpha_1), transparent);
 	}
 </style>

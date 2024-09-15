@@ -1,5 +1,23 @@
 # @ryanatkn/fuz
 
+## 0.121.0
+
+### Minor Changes
+
+- upgrade `@ryanatkn/moss@0.15.0` ([91ad06b](https://github.com/ryanatkn/fuz/commit/91ad06b))
+
+## 0.120.11
+
+### Patch Changes
+
+- fix `Dialog_Params['dialog_props']` type to be partial ([a158542](https://github.com/ryanatkn/fuz/commit/a158542))
+
+## 0.120.10
+
+### Patch Changes
+
+- fix spiders ([e8db76e](https://github.com/ryanatkn/fuz/commit/e8db76e))
+
 ## 0.120.9
 
 ### Patch Changes
