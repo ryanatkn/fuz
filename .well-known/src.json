@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.122.1",
+  "version": "0.123.0",
   "modules": {
     "./package.json": {
       "path": "package.json",
@@ -426,8 +426,8 @@
       "path": "Themed.svelte",
       "declarations": []
     },
-    "./Tome_Detail.svelte": {
-      "path": "Tome_Detail.svelte",
+    "./Tome_Content.svelte": {
+      "path": "Tome_Content.svelte",
       "declarations": []
     },
     "./Tome_Link.svelte": {
