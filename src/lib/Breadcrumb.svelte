@@ -5,13 +5,18 @@
 	import type {Snippet} from 'svelte';
 
 	interface Props {
+		/**
+		 * Prefixed with a slash and relative to the base path.
+		 */
 		path?: string | undefined;
 		/**
+		 * Prefixed with a slash and relative to the base path.
 		 * `null` means none and `undefined` is detected from the current url.
 		 */
 		selected_path?: string | null | undefined;
 		/**
-		 * Customize the `base` from `$app/paths`.
+		 * Sets a custom base path of `path` and `selected_path`.
+		 * Defaults to `base` from `$app/paths`.
 		 */
 		base_path?: string;
 		separator?: Snippet;
