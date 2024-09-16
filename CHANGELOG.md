@@ -1,5 +1,12 @@
 # @ryanatkn/fuz
 
+## 0.123.0
+
+### Minor Changes
+
+- rename `Tome_Content` from `Tome_Content` ([#53](https://github.com/ryanatkn/fuz/pull/53))
+- add snippets to `Library_Content` to customize the root page and remove the `root_path` prop ([#52](https://github.com/ryanatkn/fuz/pull/52))
+
 ## 0.122.1
 
 ### Patch Changes
