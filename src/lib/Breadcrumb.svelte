@@ -38,12 +38,6 @@
 
 	const root_path = $derived(ensure_end(final_base_path, '/'));
 
-	console.log('\nfinal_path', final_path);
-	console.log('final_selected_path', final_selected_path);
-	console.log('final_base_path', final_base_path);
-	console.log('path_pieces', path_pieces);
-	console.log('root_path', root_path, '\n');
-
 	// TODO animate these
 	// `transition:slide={{axis: 'x'}}`
 </script>
