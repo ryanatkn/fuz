@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.122.1
+
+### Patch Changes
+
+- fix `Breadcrumb` when `base` is defined ([#51](https://github.com/ryanatkn/fuz/pull/51))
+
 ## 0.122.0
 
 ### Minor Changes
