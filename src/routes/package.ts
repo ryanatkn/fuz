@@ -331,10 +331,10 @@ export const package_json = {
 			svelte: './dist/Themed.svelte',
 			default: './dist/Themed.svelte',
 		},
-		'./Tome_Detail.svelte': {
-			types: './dist/Tome_Detail.svelte.d.ts',
-			svelte: './dist/Tome_Detail.svelte',
-			default: './dist/Tome_Detail.svelte',
+		'./Tome_Content.svelte': {
+			types: './dist/Tome_Content.svelte.d.ts',
+			svelte: './dist/Tome_Content.svelte',
+			default: './dist/Tome_Content.svelte',
 		},
 		'./Tome_Link.svelte': {
 			types: './dist/Tome_Link.svelte.d.ts',
@@ -501,7 +501,7 @@ export const src_json = {
 			],
 		},
 		'./Themed.svelte': {path: 'Themed.svelte', declarations: []},
-		'./Tome_Detail.svelte': {path: 'Tome_Detail.svelte', declarations: []},
+		'./Tome_Content.svelte': {path: 'Tome_Content.svelte', declarations: []},
 		'./Tome_Link.svelte': {path: 'Tome_Link.svelte', declarations: []},
 		'./Tome_Subheading.svelte': {path: 'Tome_Subheading.svelte', declarations: []},
 		'./Tome_Title.svelte': {path: 'Tome_Title.svelte', declarations: []},

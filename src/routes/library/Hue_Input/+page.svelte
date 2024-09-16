@@ -5,7 +5,7 @@
 
 	import {get_tome} from '$lib/tome.js';
 	import Hue_Input from '$lib/Hue_Input.svelte';
-	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import Tome_Content from '$lib/Tome_Content.svelte';
 	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Hue_Input';
@@ -15,7 +15,7 @@
 	let value_from_oninput: number | undefined = $state();
 </script>
 
-<Tome_Detail {tome}>
+<Tome_Content {tome}>
 	<section>
 		<Code content={`import Hue_Input from '@ryanatkn/fuz/Hue_Input.svelte';`} lang="ts" />
 	</section>
@@ -54,4 +54,4 @@
 		/>
 		<Hue_Input>Some colorful hue input</Hue_Input>
 	</section>
-</Tome_Detail>
+</Tome_Content>

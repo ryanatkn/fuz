@@ -6,7 +6,7 @@
 
 	import {get_tome} from '$lib/tome.js';
 	import Card from '$lib/Card.svelte';
-	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import Tome_Content from '$lib/Tome_Content.svelte';
 	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Card';
@@ -15,7 +15,7 @@
 	const href = `${base}/library`;
 </script>
 
-<Tome_Detail {tome}>
+<Tome_Content {tome}>
 	<section>
 		<!-- TODO make this a generic data-driven helper -->
 		<Code content={`import Card from '@ryanatkn/fuz/Card.svelte';`} lang="ts" />
@@ -121,4 +121,4 @@
 			icon below
 		</Card>
 	</section>
-</Tome_Detail>
+</Tome_Content>

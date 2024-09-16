@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import Tome_Content from '$lib/Tome_Content.svelte';
 	import {get_tome} from '$lib/tome.js';
 	import Contextmenu_Discussion from '$routes/library/Contextmenu/Discussion.svelte';
 	import Example_Full from '$routes/library/Contextmenu/Example_Full.svelte';
@@ -16,7 +16,7 @@
 </script>
 
 <!-- TODO demonstrate usage of a custom `link_snippet` and `linkProps`  -->
-<Tome_Detail {tome}>
+<Tome_Content {tome}>
 	<section>
 		<aside>
 			<p>
@@ -33,4 +33,4 @@
 	<section><Example_Select_Text /></section>
 	<section><Example_Full /></section>
 	<section><Contextmenu_Discussion /></section>
-</Tome_Detail>
+</Tome_Content>
