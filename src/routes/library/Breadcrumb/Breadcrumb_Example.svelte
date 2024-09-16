@@ -15,7 +15,7 @@
 
 <Code
 	content={`<Breadcrumb
-	path="{base}/a/b/c/d"
+	path="/a/b/c/d"
 	selected_path="${selected_path}"
 	base_path="{base}/library/Breadcrumb"	
 >
@@ -23,7 +23,7 @@
 	{#snippet separator()}.{/snippet}
 </Breadcrumb>`}
 />
-<Breadcrumb path="{base}/a/b/c/d" {selected_path} base_path="{base}/library/Breadcrumb">
+<Breadcrumb path="/a/b/c/d" {selected_path} base_path="{base}/library/Breadcrumb">
 	<span class="size_xl">🔡</span>
 	{#snippet separator()}.{/snippet}
 </Breadcrumb>
