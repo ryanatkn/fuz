@@ -48,10 +48,7 @@
 
 	let container_el: HTMLElement | undefined = $state();
 	$effect(() => {
-		// TODO guard some other way
-		if (BROWSER) {
-			update_container_el(container);
-		}
+		update_container_el(container);
 	});
 
 	const update_container_el = (container: HTMLElement | undefined): void => {
