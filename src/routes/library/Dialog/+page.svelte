@@ -5,7 +5,7 @@
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	import Alert from '$lib/Alert.svelte';
-	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import Tome_Content from '$lib/Tome_Content.svelte';
 	import {get_tome} from '$lib/tome.js';
 	import Dialog from '$lib/Dialog.svelte';
 	import Tome_Link from '$lib/Tome_Link.svelte';
@@ -56,7 +56,7 @@
 	};
 </script>
 
-<Tome_Detail {tome}>
+<Tome_Content {tome}>
 	<section>
 		<p>
 			A modal that overlays the entire page. Uses <Tome_Link name="Teleport" /> to allow usage from any
@@ -100,7 +100,7 @@
 		>
 		<button type="button" class="mb_lg" onclick={() => add_dialogs(5)}>open many dialogs</button>
 	</section>
-</Tome_Detail>
+</Tome_Content>
 {#if opened}
 	<Dialog onclose={() => (opened = false)}>
 		{#snippet children(close)}

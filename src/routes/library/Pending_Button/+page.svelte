@@ -5,7 +5,7 @@
 
 	import {get_tome} from '$lib/tome.js';
 	import Pending_Button from '$lib/Pending_Button.svelte';
-	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import Tome_Content from '$lib/Tome_Content.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Pending_Button';
 	const tome = get_tome(LIBRARY_ITEM_NAME);
@@ -18,7 +18,7 @@
 		Extract a common thing to make arbitrary things not change width.
 	-->
 
-<Tome_Detail {tome}>
+<Tome_Content {tome}>
 	<section>
 		<p>Preserves a button's normal width while animating.</p>
 		<aside>
@@ -60,4 +60,4 @@
 			do another
 		</Pending_Button>
 	</section>
-</Tome_Detail>
+</Tome_Content>

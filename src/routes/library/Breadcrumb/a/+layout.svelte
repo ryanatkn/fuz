@@ -2,7 +2,7 @@
 	import type {Snippet} from 'svelte';
 
 	import {get_tome} from '$lib/tome.js';
-	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import Tome_Content from '$lib/Tome_Content.svelte';
 
 	interface Props {
 		children: Snippet;
@@ -15,6 +15,6 @@
 	const tome = get_tome(LIBRARY_ITEM_NAME);
 </script>
 
-<Tome_Detail {tome}>
+<Tome_Content {tome}>
 	{@render children()}
-</Tome_Detail>
+</Tome_Content>

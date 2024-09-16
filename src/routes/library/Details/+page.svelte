@@ -3,7 +3,7 @@
 	import 'prismjs';
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
-	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import Tome_Content from '$lib/Tome_Content.svelte';
 	import Details from '$lib/Details.svelte';
 	import {get_tome} from '$lib/tome.js';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
@@ -14,7 +14,7 @@
 	const tome = get_tome(LIBRARY_ITEM_NAME);
 </script>
 
-<Tome_Detail {tome}>
+<Tome_Content {tome}>
 	<section>
 		<p>
 			The <code>Details</code> component is an alternative to the <Mdn_Link
@@ -78,4 +78,4 @@
 			the plain details
 		</details>
 	</section>
-</Tome_Detail>
+</Tome_Content>

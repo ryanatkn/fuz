@@ -5,7 +5,7 @@
 
 	import {get_tome} from '$lib/tome.js';
 	import Alert from '$lib/Alert.svelte';
-	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import Tome_Content from '$lib/Tome_Content.svelte';
 	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Alert';
@@ -16,7 +16,7 @@
 	// TODO add examples for colored buttons - visually they're broken because they look like selected buttons
 </script>
 
-<Tome_Detail {tome}>
+<Tome_Content {tome}>
 	<section>
 		<!-- TODO make this a generic data-driven helper -->
 		<Code content={`import Alert from '@ryanatkn/fuz/Alert.svelte';`} lang="ts" />
@@ -91,4 +91,4 @@ export type Alert_Status = 'inform' | 'help' | 'error';"
 			>the <code>color</code> prop overrides the status color</Alert
 		>
 	</section>
-</Tome_Detail>
+</Tome_Content>

@@ -5,7 +5,7 @@
 
 	import {get_tome} from '$lib/tome.js';
 	import Pending_Animation from '$lib/Pending_Animation.svelte';
-	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import Tome_Content from '$lib/Tome_Content.svelte';
 	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Pending_Animation';
@@ -19,7 +19,7 @@
 	let pendingAnimation1Running = $state(false);
 </script>
 
-<Tome_Detail {tome}>
+<Tome_Content {tome}>
 	<section>
 		<!-- TODO make this a generic data-driven helper -->
 		<Code
@@ -115,7 +115,7 @@
 			{/snippet}
 		</Pending_Animation>
 	</section>
-</Tome_Detail>
+</Tome_Content>
 
 <style>
 	.index {

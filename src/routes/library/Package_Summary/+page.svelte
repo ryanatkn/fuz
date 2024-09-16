@@ -5,7 +5,7 @@
 
 	import {get_tome} from '$lib/tome.js';
 	import Package_Summary from '$lib/Package_Summary.svelte';
-	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import Tome_Content from '$lib/Tome_Content.svelte';
 	import {get_pkg} from '$routes/pkg.js';
 
 	const LIBRARY_ITEM_NAME = 'Package_Summary';
@@ -14,7 +14,7 @@
 	const pkg = get_pkg();
 </script>
 
-<Tome_Detail {tome}>
+<Tome_Content {tome}>
 	<section>
 		<p>
 			This is a component related to <a
@@ -31,4 +31,4 @@
 	<section>
 		<Package_Summary {pkg} />
 	</section>
-</Tome_Detail>
+</Tome_Content>

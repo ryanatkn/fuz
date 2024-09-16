@@ -5,7 +5,7 @@
 
 	import {get_tome} from '$lib/tome.js';
 	import Teleport from '$lib/Teleport.svelte';
-	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import Tome_Content from '$lib/Tome_Content.svelte';
 	import Tome_Link from '$lib/Tome_Link.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Teleport';
@@ -16,7 +16,7 @@
 	let teleport_2: HTMLElement | undefined = $state();
 </script>
 
-<Tome_Detail {tome}>
+<Tome_Content {tome}>
 	<section>
 		<p>
 			Relocates elements in the DOM, in the rare cases that's useful and the best solution. The <Tome_Link
@@ -54,7 +54,7 @@
 		</div>
 		<button type="button" onclick={() => (swap = !swap)}> teleport the bunny </button>
 	</section>
-</Tome_Detail>
+</Tome_Content>
 
 <style>
 	.teleports {
