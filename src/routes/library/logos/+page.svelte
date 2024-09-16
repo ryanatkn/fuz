@@ -3,7 +3,7 @@
 	import 'prismjs';
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 	import {get_tome} from '$lib/tome.js';
-	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import Tome_Content from '$lib/Tome_Content.svelte';
 	import Fuz_Logo from '$lib/Fuz_Logo.svelte';
 	import Github_Logo from '$lib/Github_Logo.svelte';
 	import Mdn_Logo from '$lib/Mdn_Logo.svelte';
@@ -18,7 +18,7 @@
 	const tome = get_tome(LIBRARY_ITEM_NAME);
 </script>
 
-<Tome_Detail {tome}>
+<Tome_Content {tome}>
 	<section>
 		<ul class="box text_align_center unstyled">
 			<li>
@@ -86,7 +86,7 @@
 			</li>
 		</ul>
 	</section>
-</Tome_Detail>
+</Tome_Content>
 
 <style>
 	li {

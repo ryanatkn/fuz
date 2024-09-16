@@ -5,7 +5,7 @@
 	import type {Theme} from '@ryanatkn/moss/theme.js';
 	import {default_themes} from '@ryanatkn/moss/themes.js';
 
-	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import Tome_Content from '$lib/Tome_Content.svelte';
 	import Details from '$lib/Details.svelte';
 	import Dialog from '$lib/Dialog.svelte';
 	import {get_tome} from '$lib/tome.js';
@@ -29,7 +29,7 @@
 	let editing_theme: null | Theme = $state(null);
 </script>
 
-<Tome_Detail {tome}>
+<Tome_Content {tome}>
 	<section class="theme">
 		<p>
 			Fuz provides UI components that use <a href="https://moss.ryanatkn.com/library/themes"
@@ -325,7 +325,7 @@ themer.color_scheme; // '${themer.color_scheme}'`}
 			loading. We'll try to fix this when the system stabilizes.
 		</p>
 	</section>
-</Tome_Detail>
+</Tome_Content>
 
 <!-- TODO enable creating themes -->
 <!-- {#if show_create_theme_dialog}

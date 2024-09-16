@@ -2,4 +2,4 @@
 '@ryanatkn/fuz': minor
 ---
 
-rename `Tome_Content` from `Tome_Detail`
+rename `Tome_Content` from `Tome_Content`
