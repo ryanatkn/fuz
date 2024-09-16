@@ -12,20 +12,30 @@
 		tomes: Tome[];
 		pkg: Package_Meta;
 		repo_name?: Snippet<[repo_name: string]>;
+		content?: Snippet;
+		root_header?: Snippet;
 	}
 
-	const {root_path = '/library', tomes, pkg, repo_name}: Props = $props();
+	const {root_path = '/library', tomes, pkg, repo_name, content, root_header}: Props = $props();
 </script>
 
 {#if $page.url.pathname === base + root_path}
-	<div class="box mb_xl5">
-		<Package_Summary {pkg} {repo_name} />
-	</div>
+	{#if root_header}
+		{@render root_header()}
+	{:else}
+		<div class="box mb_xl5">
+			<Package_Summary {pkg} {repo_name} />
+		</div>
+	{/if}
 {/if}
 <div class="tomes">
-	{#each tomes as tome (tome)}
-		<tome.component />
-	{/each}
+	{#if content}
+		{@render content()}
+	{:else}
+		{#each tomes as tome (tome)}
+			<tome.component />
+		{/each}
+	{/if}
 </div>
 
 <style>
