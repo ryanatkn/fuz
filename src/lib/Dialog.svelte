@@ -2,7 +2,6 @@
 	import type {Snippet} from 'svelte';
 	import {is_editable, swallow} from '@ryanatkn/belt/dom.js';
 	import {wait} from '@ryanatkn/belt/async.js';
-	import {BROWSER} from 'esm-env';
 
 	import Teleport from '$lib/Teleport.svelte';
 	import type {Dialog_Layout} from '$lib/dialog.js';
