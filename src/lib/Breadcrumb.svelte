@@ -3,15 +3,21 @@
 	import {base} from '$app/paths';
 	import {page} from '$app/stores';
 	import type {Snippet} from 'svelte';
+	import {strip_start, ensure_end} from '@ryanatkn/belt/string.js';
 
 	interface Props {
+		/**
+		 * Prefixed with a slash and relative to the base path.
+		 */
 		path?: string | undefined;
 		/**
+		 * Prefixed with a slash and relative to the base path.
 		 * `null` means none and `undefined` is detected from the current url.
 		 */
 		selected_path?: string | null | undefined;
 		/**
-		 * Customize the `base` from `$app/paths`.
+		 * Sets a custom base path of `path` and `selected_path`.
+		 * Defaults to `base` from `$app/paths`.
 		 */
 		base_path?: string;
 		separator?: Snippet;
@@ -20,22 +26,24 @@
 
 	const {path, selected_path, base_path, separator, children}: Props = $props();
 
-	const final_path = $derived(path ?? $page.url.pathname);
+	const final_base_path = $derived(base_path ?? base);
+
+	const final_path = $derived(path ?? strip_start($page.url.pathname, final_base_path));
+
 	const final_selected_path = $derived(
 		selected_path === null ? null : (selected_path ?? final_path),
 	);
-	const final_base_path = $derived(base_path ?? base);
 
 	const path_pieces = $derived(parse_path_pieces(final_path));
 
-	const root_path = $derived(final_base_path || '/');
+	const root_path = $derived(ensure_end(final_base_path, '/'));
 
 	// TODO animate these
 	// `transition:slide={{axis: 'x'}}`
 </script>
 
 <div class="breadcrumb">
-	<a href={root_path} class:selected={root_path === final_selected_path}
+	<a href={root_path} class:selected={root_path === final_base_path + final_selected_path}
 		>{#if children}{@render children()}{:else}•{/if}</a
 	>{#each path_pieces as path_piece}{#if path_piece.type === 'piece'}<a
 				href={final_base_path + path_piece.path}
