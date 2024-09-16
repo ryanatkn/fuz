@@ -3,7 +3,7 @@
 	import {base} from '$app/paths';
 	import {page} from '$app/stores';
 	import type {Snippet} from 'svelte';
-	import {strip_start} from '@ryanatkn/belt/string.js';
+	import {strip_start, ensure_end} from '@ryanatkn/belt/string.js';
 
 	interface Props {
 		/**
@@ -36,7 +36,7 @@
 
 	const path_pieces = $derived(parse_path_pieces(final_path));
 
-	const root_path = $derived(final_base_path || '/');
+	const root_path = $derived(ensure_end(final_base_path, '/'));
 
 	console.log('\nfinal_path', final_path);
 	console.log('final_selected_path', final_selected_path);
@@ -49,7 +49,7 @@
 </script>
 
 <div class="breadcrumb">
-	<a href={root_path} class:selected={root_path === final_selected_path}
+	<a href={root_path} class:selected={root_path === final_base_path + final_selected_path}
 		>{#if children}{@render children()}{:else}•{/if}</a
 	>{#each path_pieces as path_piece}{#if path_piece.type === 'piece'}<a
 				href={final_base_path + path_piece.path}
