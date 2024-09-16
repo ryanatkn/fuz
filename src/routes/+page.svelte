@@ -7,6 +7,7 @@
 	import Fuz_Logo from '$lib/Fuz_Logo.svelte';
 	import Fuzling from '$lib/Fuzling.svelte';
 	import Hidden_Personal_Links from '$lib/Hidden_Personal_Links.svelte';
+	import Breadcrumb from '$lib/Breadcrumb.svelte';
 
 	const pkg = get_pkg();
 </script>
@@ -76,6 +77,7 @@
 			</Library_Footer>
 		</section>
 	</div>
+	<Breadcrumb />
 </main>
 
 <style>

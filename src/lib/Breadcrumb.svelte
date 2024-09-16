@@ -52,7 +52,7 @@
 	<a href={root_path} class:selected={root_path === final_selected_path}
 		>{#if children}{@render children()}{:else}•{/if}</a
 	>{#each path_pieces as path_piece}{#if path_piece.type === 'piece'}<a
-				href={path_piece.path}
+				href={final_base_path + path_piece.path}
 				class:selected={path_piece.path === final_selected_path}>{path_piece.name}</a
 			>{:else}<span class="separator"
 				>{#if separator}{@render separator()}{:else}/{/if}</span

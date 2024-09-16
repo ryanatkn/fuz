@@ -25,5 +25,4 @@
 />
 <Breadcrumb path="/a/b/c/d" {selected_path} base_path="{base}/library/Breadcrumb">
 	<span class="size_xl">🔡</span>
-	{#snippet separator()}.{/snippet}
 </Breadcrumb>
