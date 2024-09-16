@@ -3,6 +3,7 @@
 	import {base} from '$app/paths';
 	import {page} from '$app/stores';
 	import type {Snippet} from 'svelte';
+	import {strip_start} from '@ryanatkn/belt/string.js';
 
 	interface Props {
 		/**
@@ -27,14 +28,10 @@
 
 	const final_base_path = $derived(base_path ?? base);
 
-	const final_path = $derived(path ?? $page.url.pathname);
+	const final_path = $derived(path ?? strip_start($page.url.pathname, final_base_path));
 
 	const final_selected_path = $derived(
-		selected_path === null
-			? null
-			: selected_path === undefined
-				? final_path
-				: final_base_path + selected_path,
+		selected_path === null ? null : (selected_path ?? final_path),
 	);
 
 	const path_pieces = $derived(parse_path_pieces(final_path));
