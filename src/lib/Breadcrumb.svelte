@@ -30,14 +30,6 @@
 
 	const root_path = $derived(final_base_path || '/');
 
-	console.log('final_path', final_path);
-	console.log('final_selected_path', final_selected_path);
-	console.log('final_base_path', final_base_path);
-	console.log('path_pieces', path_pieces);
-	console.log('root_path', root_path);
-	const final_paths = path_pieces.map((p) => (p.type === 'piece' ? p.path : '')).filter(Boolean);
-	console.log(`final_paths`, final_paths);
-
 	// TODO animate these
 	// `transition:slide={{axis: 'x'}}`
 </script>
