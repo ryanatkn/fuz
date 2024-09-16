@@ -20,15 +20,27 @@
 
 	const {path, selected_path, base_path, separator, children}: Props = $props();
 
-	const final_path = $derived(path ?? $page.url.pathname);
-	const final_selected_path = $derived(
-		selected_path === null ? null : (selected_path ?? final_path),
-	);
 	const final_base_path = $derived(base_path ?? base);
+
+	const final_path = $derived(path ?? $page.url.pathname);
+
+	const final_selected_path = $derived(
+		selected_path === null
+			? null
+			: selected_path === undefined
+				? final_path
+				: final_base_path + selected_path,
+	);
 
 	const path_pieces = $derived(parse_path_pieces(final_path));
 
 	const root_path = $derived(final_base_path || '/');
+
+	console.log('\nfinal_path', final_path);
+	console.log('final_selected_path', final_selected_path);
+	console.log('final_base_path', final_base_path);
+	console.log('path_pieces', path_pieces);
+	console.log('root_path', root_path, '\n');
 
 	// TODO animate these
 	// `transition:slide={{axis: 'x'}}`
