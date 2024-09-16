@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.122.0
+
+### Minor Changes
+
+- bump required node version to `20.17` ([7a52122](https://github.com/ryanatkn/fuz/commit/7a52122))
+
 ## 0.121.0
 
 ### Minor Changes
