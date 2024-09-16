@@ -30,6 +30,14 @@
 
 	const root_path = $derived(final_base_path || '/');
 
+	console.log('final_path', final_path);
+	console.log('final_selected_path', final_selected_path);
+	console.log('final_base_path', final_base_path);
+	console.log('path_pieces', path_pieces);
+	console.log('root_path', root_path);
+	const final_paths = path_pieces.map((p) => (p.type === 'piece' ? p.path : '')).filter(Boolean);
+	console.log(`final_paths`, final_paths);
+
 	// TODO animate these
 	// `transition:slide={{axis: 'x'}}`
 </script>
@@ -38,7 +46,7 @@
 	<a href={root_path} class:selected={root_path === final_selected_path}
 		>{#if children}{@render children()}{:else}•{/if}</a
 	>{#each path_pieces as path_piece}{#if path_piece.type === 'piece'}<a
-				href={final_base_path + path_piece.path}
+				href={path_piece.path}
 				class:selected={path_piece.path === final_selected_path}>{path_piece.name}</a
 			>{:else}<span class="separator"
 				>{#if separator}{@render separator()}{:else}/{/if}</span
