@@ -1,6 +1,4 @@
 <script lang="ts">
-	import {page} from '$app/stores';
-	import {base} from '$app/paths';
 	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
 	import type {Snippet} from 'svelte';
 
@@ -13,22 +11,20 @@
 		pkg: Package_Meta;
 		repo_name?: Snippet<[repo_name: string]>;
 		content?: Snippet;
-		root_header?: Snippet;
+		header?: Snippet;
 	}
 
-	const {root_path = '/library', tomes, pkg, repo_name, content, root_header}: Props = $props();
+	const {tomes, pkg, repo_name, content, header}: Props = $props();
 </script>
 
-{#if $page.url.pathname === base + root_path}
-	{#if root_header}
-		{@render root_header()}
-	{:else}
-		<div class="box mb_xl5">
-			<Package_Summary {pkg} {repo_name} />
-		</div>
-	{/if}
+{#if header}
+	{@render header()}
+{:else}
+	<div class="box mb_xl5">
+		<Package_Summary {pkg} {repo_name} />
+	</div>
 {/if}
-<div class="tomes">
+<div>
 	{#if content}
 		{@render content()}
 	{:else}
@@ -37,9 +33,3 @@
 		{/each}
 	{/if}
 </div>
-
-<style>
-	.tomes {
-		width: 100%;
-	}
-</style>
