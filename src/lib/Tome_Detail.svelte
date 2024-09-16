@@ -12,7 +12,7 @@
 
 	const {tome, header, children}: Props = $props();
 
-	// TODO component name? maybe `Tome_Content` to match `Library_Content`?
+	// TODO component name?
 </script>
 
 <div class="tome_detail width_md">
