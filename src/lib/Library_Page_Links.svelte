@@ -44,6 +44,8 @@
 <style>
 	.library_page_links {
 		margin: var(--space_xl6) 0;
+		width: var(--library_menu_width);
+		min-width: var(--library_menu_width);
 	}
 
 	/* this is needed because `.library_page_links` needs to be a block to collapse the vertical margin */
@@ -51,11 +53,6 @@
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
-	}
-	/* TODO @many remove all :global usage after https://github.com/sveltejs/svelte/issues/10143 */
-	.sidebar_wrapper :global(ul) {
-		width: 100%;
-		max-width: var(--library_menu_width);
 	}
 
 	/* TODO should be a CSS class or variable, maybe should be the default?

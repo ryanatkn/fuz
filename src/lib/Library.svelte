@@ -29,6 +29,8 @@
 	const TERTIARY_NAV_BREAKPOINT = 1000;
 	const SECONDARY_NAV_BREAKPOINT = 800;
 
+	const library_menu_width = '180px';
+
 	let innerWidth: number | undefined = $state();
 
 	let show_secondary_nav_dialog = $state(false);
@@ -45,7 +47,7 @@
 
 <svelte:window bind:innerWidth onhashchange={() => (show_secondary_nav_dialog = false)} />
 
-<div class="library">
+<div class="library" style:--library_menu_width={library_menu_width}>
 	<Library_Primary_Nav {pkg} {breadcrumb_children}>
 		<div class="nav_dialog_toggle">
 			<button class="plain" type="button" onclick={() => toggle_secondary_nav_dialog()}>menu</button
@@ -85,7 +87,7 @@
 <!-- TODO this is messy rendering `Library_Secondary_Nav` twice to handle responsive states with SSR correctly -->
 {#if show_secondary_nav_dialog && innerWidth && innerWidth <= TERTIARY_NAV_BREAKPOINT}
 	<Dialog onclose={() => (show_secondary_nav_dialog = false)}>
-		<div class="pane">
+		<div class="pane" style:--library_menu_width={library_menu_width}>
 			<div class="p_xl pb_0">
 				<Breadcrumb>
 					{#if breadcrumb_children}
@@ -107,7 +109,6 @@
 	.library {
 		--library_primary_nav_height: 60px;
 		--library_secondary_nav_padding: var(--space_md); /* also used by the tertiary nav */
-		--library_menu_width: 180px;
 		--library_content_padding: var(--space_xl5);
 		--library_content_max_width: calc(var(--width_md) + var(--library_content_padding) * 2);
 		/* the `+ 1px` solves some issue when scaling */
