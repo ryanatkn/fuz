@@ -16,7 +16,11 @@
 
 <section
 	use:intersect={({intersecting}) => {
-		selections?.mutate((v) => (intersecting ? v.add(view.name) : v.delete(view.name)));
+		if (intersecting) {
+			v.add(header_props.slug);
+		} else {
+			v.delete(header_props.slug);
+		}
 	}}
 >
 	<Tome_Section_Header {...header_props} />
