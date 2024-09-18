@@ -341,15 +341,15 @@ export const package_json = {
 			svelte: './dist/Tome_Link.svelte',
 			default: './dist/Tome_Link.svelte',
 		},
-		'./Tome_Section_Title.svelte': {
-			types: './dist/Tome_Section_Title.svelte.d.ts',
-			svelte: './dist/Tome_Section_Title.svelte',
-			default: './dist/Tome_Section_Title.svelte',
+		'./Tome_Section_Header.svelte': {
+			types: './dist/Tome_Section_Header.svelte.d.ts',
+			svelte: './dist/Tome_Section_Header.svelte',
+			default: './dist/Tome_Section_Header.svelte',
 		},
-		'./Tome_Title.svelte': {
-			types: './dist/Tome_Title.svelte.d.ts',
-			svelte: './dist/Tome_Title.svelte',
-			default: './dist/Tome_Title.svelte',
+		'./Tome_Header.svelte': {
+			types: './dist/Tome_Header.svelte.d.ts',
+			svelte: './dist/Tome_Header.svelte',
+			default: './dist/Tome_Header.svelte',
 		},
 		'./tome.js': {types: './dist/tome.d.ts', default: './dist/tome.js'},
 		'./Webdevladder_Logo.svelte': {
@@ -503,8 +503,8 @@ export const src_json = {
 		'./Themed.svelte': {path: 'Themed.svelte', declarations: []},
 		'./Tome_Content.svelte': {path: 'Tome_Content.svelte', declarations: []},
 		'./Tome_Link.svelte': {path: 'Tome_Link.svelte', declarations: []},
-		'./Tome_Section_Title.svelte': {path: 'Tome_Section_Title.svelte', declarations: []},
-		'./Tome_Title.svelte': {path: 'Tome_Title.svelte', declarations: []},
+		'./Tome_Section_Header.svelte': {path: 'Tome_Section_Header.svelte', declarations: []},
+		'./Tome_Header.svelte': {path: 'Tome_Header.svelte', declarations: []},
 		'./tome.js': {
 			path: 'tome.ts',
 			declarations: [

@@ -7,7 +7,7 @@
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
 	import Tome_Content from '$lib/Tome_Content.svelte';
 	import Breadcrumb_Example from '$routes/library/Breadcrumb/Breadcrumb_Example.svelte';
-	import Tome_Section_Title from '$lib/Tome_Section_Title.svelte';
+	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Breadcrumb';
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
@@ -21,12 +21,12 @@
 		<Breadcrumb />
 	</section>
 	<section>
-		<Tome_Section_Title text="With custom icon" slug="custom-icon" />
+		<Tome_Section_Header text="With custom icon" slug="custom-icon" />
 		<Code content={`<Breadcrumb>🏠</Breadcrumb>`} />
 		<Breadcrumb>🏠</Breadcrumb>
 	</section>
 	<section>
-		<Tome_Section_Title text="With custom separator" slug="custom-separator" />
+		<Tome_Section_Header text="With custom separator" slug="custom-separator" />
 		<Code
 			content={`<Breadcrumb>
 	{#snippet separator()}.{/snippet}
@@ -35,7 +35,7 @@
 		<Breadcrumb>{#snippet separator()}.{/snippet}</Breadcrumb>
 	</section>
 	<section>
-		<Tome_Section_Title text="With custom paths" slug="custom-paths" />
+		<Tome_Section_Header text="With custom paths" slug="custom-paths" />
 		<Breadcrumb_Example selected_path="/a/b" />
 	</section>
 </Tome_Content>

@@ -20,7 +20,7 @@
 	import Theme_Input from '$lib/Theme_Input.svelte';
 	import Dialog from '$lib/Dialog.svelte';
 	import file_contents from '$routes/library/Contextmenu/Example_Full.svelte?raw';
-	import Tome_Section_Title from '$lib/Tome_Section_Title.svelte';
+	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
 
 	const alyssa = 'Alyssa';
 	const ben = 'Ben';
@@ -129,7 +129,7 @@
 </script>
 
 <Contextmenu_Root scoped>
-	<Tome_Section_Title text="Full example" slug="full-example" />
+	<Tome_Section_Header text="Full example" slug="full-example" />
 	<Contextmenu>
 		{#snippet entries()}
 			{#if can_reset}

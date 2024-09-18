@@ -4,11 +4,11 @@
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
-	import Tome_Section_Title from '$lib/Tome_Section_Title.svelte';
+	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
 </script>
 
 <Contextmenu_Root scoped>
-	<Tome_Section_Title text="Default behaviors" slug="default-behaviors" />
+	<Tome_Section_Header text="Default behaviors" slug="default-behaviors" />
 	<div class="panel p_md">
 		<Code
 			content={`<Contextmenu_Root scoped>

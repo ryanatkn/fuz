@@ -6,14 +6,14 @@
 	import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
 	import Contextmenu_Entry from '$lib/Contextmenu_Entry.svelte';
 	import Contextmenu from '$lib/Contextmenu.svelte';
-	import Tome_Section_Title from '$lib/Tome_Section_Title.svelte';
+	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
 
 	let greeted = $state(false);
 	let greeted_icon_snippet = $state(false);
 	let greeted_icon_string = $state(false);
 </script>
 
-<Tome_Section_Title text="Basic usage" slug="basic-usage" />
+<Tome_Section_Header text="Basic usage" slug="basic-usage" />
 <Contextmenu_Root scoped>
 	<Contextmenu>
 		{#snippet entries()}

@@ -7,7 +7,7 @@
 	import Details from '$lib/Details.svelte';
 	import {get_tome_by_name} from '$lib/tome.js';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
-	import Tome_Section_Title from '$lib/Tome_Section_Title.svelte';
+	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Details';
 
@@ -38,7 +38,7 @@
 		</ul>
 	</section>
 	<section>
-		<Tome_Section_Title text="With lazy rendering by default" slug="lazy-rendering-by-default" />
+		<Tome_Section_Header text="With lazy rendering by default" slug="lazy-rendering-by-default" />
 		<Code
 			content={`<Details>
   {#snippet summary()}summary content{/snippet}
@@ -51,7 +51,7 @@
 		</Details>
 	</section>
 	<section>
-		<Tome_Section_Title text="With eager rendering" slug="eager-rendering" />
+		<Tome_Section_Header text="With eager rendering" slug="eager-rendering" />
 		<Code
 			content={`<Details eager>
   {#snippet summary()}summary content{/snippet}
@@ -64,9 +64,9 @@
 		</Details>
 	</section>
 	<section>
-		<Tome_Section_Title text="With the base details element" slug="base-details-element">
+		<Tome_Section_Header text="With the base details element" slug="base-details-element">
 			With the base <Mdn_Link path="Web/HTML/Element/details" /> element
-		</Tome_Section_Title>
+		</Tome_Section_Header>
 		<Code
 			content={`<details>
   <summary>a summary element instead of a snippet</summary>

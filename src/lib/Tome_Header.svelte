@@ -13,9 +13,9 @@
 	import {get_library_links, to_library_path_info} from '$lib/library_helpers.svelte.js';
 
 	const tome = get_tome();
-	if (DEV && !tome) throw Error('Tome_Title expects a tome in context'); // eslint-disable-line @typescript-eslint/no-unnecessary-condition
+	if (DEV && !tome) throw Error('Tome_Header expects a tome in context'); // eslint-disable-line @typescript-eslint/no-unnecessary-condition
 
-	const id = 'tome_title_' + _id++;
+	const id = 'tome_header_' + _id++;
 
 	const library_links = get_library_links();
 
@@ -32,21 +32,23 @@
 	const {path, path_is_selected} = $derived(to_library_path_info(tome.slug, $page.url.pathname));
 </script>
 
-<svelte:element this={path_is_selected ? 'h1' : 'h2'} class="tome_title">
-	{#if path_is_selected}
-		{@render content(tome.name)}
-	{:else}
-		<a href={path}>{@render content(tome.name)}</a>
-	{/if}
-	<Hashlink {slug} />
-</svelte:element>
+<header>
+	<svelte:element this={path_is_selected ? 'h1' : 'h2'} class="tome_header">
+		{#if path_is_selected}
+			{@render content(tome.name)}
+		{:else}
+			<a href={path}>{@render content(tome.name)}</a>
+		{/if}
+		<Hashlink {slug} />
+	</svelte:element>
+</header>
 
 {#snippet content(name: string)}
 	{name}
 {/snippet}
 
 <style>
-	.tome_title {
+	.tome_header {
 		position: relative;
 		display: flex;
 		align-items: center;
@@ -54,7 +56,7 @@
 		margin-top: var(--space_xl4);
 	}
 	/* TODO @many how can this be done composably? currently using `:global` at usage site - ideally we'd continue to use :hover instead of JS */
-	.tome_title:hover :global(.hashlink) {
+	.tome_header:hover :global(.hashlink) {
 		opacity: 1;
 	}
 </style>

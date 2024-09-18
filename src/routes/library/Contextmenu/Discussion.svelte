@@ -1,12 +1,12 @@
 <script lang="ts">
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
-	import Tome_Section_Title from '$lib/Tome_Section_Title.svelte';
+	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
 
 	// TODO buggy animations, maybe will be fixed before Svelte 5 release
 </script>
 
 <section>
-	<Tome_Section_Title text="Expected behaviors" slug="expected-behaviors" />
+	<Tome_Section_Header text="Expected behaviors" slug="expected-behaviors" />
 	<p>
 		The <code>Contextmenu</code> overrides the system contextmenu to provide capabilities specific
 		to your app.
@@ -71,7 +71,7 @@
 	</ul>
 </section>
 <section>
-	<Tome_Section_Title text="Motivation" slug="motivation" />
+	<Tome_Section_Header text="Motivation" slug="motivation" />
 	<p>Fuz takes two things very seriously, in no particular order:</p>
 	<ol>
 		<li>giving users a powerful and customizable UX</li>

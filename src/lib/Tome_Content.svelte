@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
 
-	import Tome_Title from '$lib/Tome_Title.svelte';
+	import Tome_Header from '$lib/Tome_Header.svelte';
 	import {set_tome, type Tome} from '$lib/tome.js';
 
 	interface Props {
@@ -15,16 +15,16 @@
 	set_tome(tome);
 </script>
 
-<div class="tome_content width_md">
+<section class="tome_content width_md">
 	<header>
 		{#if header}
 			{@render header()}
 		{:else}
-			<Tome_Title />
+			<Tome_Header />
 		{/if}
 	</header>
 	{@render children()}
-</div>
+</section>
 
 <style>
 	.tome_content {

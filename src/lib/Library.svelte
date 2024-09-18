@@ -148,7 +148,7 @@
 		} */
 	}
 
-	/* sync this breakpoint with `Library_Tertiary_Nav` and `Tome_Section_Title` */
+	/* sync this breakpoint with `Library_Tertiary_Nav` and `Tome_Section_Header` */
 	@media (max-width: 1000px) {
 		/* main { */
 		/* --library_content_max_width: calc(var(--width_md) + var(--library_content_padding)); */
@@ -165,7 +165,7 @@
 		}
 	}
 
-	/* sync this breakpoint with `Library_Primary_Nav`, `Library_Secondary_Nav`, and `Tome_Section_Title` */
+	/* sync this breakpoint with `Library_Primary_Nav`, `Library_Secondary_Nav`, and `Tome_Section_Header` */
 	@media (max-width: 800px) {
 		.content {
 			/* handle the moved `Library_Secondary_Nav` */

@@ -3,9 +3,8 @@
 
 	export interface Props {
 		text: string;
-		slug: string; // TODO doesn't handle duplicate slugs for section titles under different `Tome_Title`s, e.g. the generic "example-usage" and "more-details" will cause issues if they're used elsewhere
+		slug: string; // TODO doesn't handle duplicate slugs for section titles under different `Tome_Header`s, e.g. the generic "example-usage" and "more-details" will cause issues if they're used elsewhere
 		tag?: Library_Link_Tag;
-		content_attrs?: SvelteHTMLElements['div'];
 		attrs?: SvelteHTMLElements['h3'];
 		children?: Snippet;
 	}
@@ -20,9 +19,9 @@
 	import Hashlink from '$lib/Hashlink.svelte';
 	import {get_library_links, type Library_Link_Tag} from '$lib/library_helpers.svelte.js';
 
-	const {text, slug, tag = 'h3', content_attrs, attrs, children}: Props = $props();
+	const {text, slug, tag = 'h3', attrs, children}: Props = $props();
 
-	const id = 'tome_section_title_' + _id++;
+	const id = 'tome_section_header_' + _id++;
 
 	const library_links = get_library_links();
 
@@ -36,26 +35,28 @@
 	}
 </script>
 
-<svelte:element this={tag} {...attrs} class:tome_section_title={true}
-	>{@render content()}</svelte:element
->
-
-{#snippet content()}
-	<div {...content_attrs}>
-		{#if children}{@render children()}{:else}{text}{/if}
-	</div>
-	<Hashlink {slug} />
-{/snippet}
+<header>
+	<svelte:element this={tag} {...attrs} class:tome_section_header={true}>
+		<div>
+			{#if children}
+				{@render children()}
+			{:else}
+				{text}
+			{/if}
+		</div>
+		<Hashlink {slug} />
+	</svelte:element>
+</header>
 
 <style>
-	.tome_section_title {
+	.tome_section_header {
 		position: relative;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 	}
 	/* TODO @many how can this be done composably? currently using `:global` at usage site - ideally we'd continue to use :hover instead of JS */
-	.tome_section_title:hover :global(.hashlink) {
+	.tome_section_header:hover :global(.hashlink) {
 		opacity: 1;
 	}
 </style>
