@@ -15,7 +15,7 @@
 	// TODO component name?
 </script>
 
-<div class="tome_detail width_md">
+<div class="tome_content width_md">
 	<header>
 		{#if header}
 			{@render header()}
@@ -27,7 +27,7 @@
 </div>
 
 <style>
-	.tome_detail {
+	.tome_content {
 		margin-bottom: var(--space_xl9);
 	}
 	header {
