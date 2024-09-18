@@ -454,7 +454,7 @@ export const src_json = {
 				{name: 'set_library_links', kind: 'function'},
 				{name: 'get_library_links', kind: 'function'},
 				{name: 'Library_Link_Tag', kind: 'type'},
-				{name: 'Library_Link_Data', kind: 'type'},
+				{name: 'Library_Link', kind: 'type'},
 				{name: 'Library_Links', kind: 'class'},
 			],
 		},

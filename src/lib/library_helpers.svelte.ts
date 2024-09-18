@@ -27,7 +27,7 @@ export const get_library_links = (): Library_Links => {
 
 export type Library_Link_Tag = 'h3' | 'h4';
 
-export interface Library_Link_Data {
+export interface Library_Link {
 	id: string;
 	text: string;
 	slug: string;
@@ -35,13 +35,13 @@ export interface Library_Link_Data {
 }
 
 export class Library_Links {
-	library_links: Library_Link_Data[] = $state([]);
+	library_links: Library_Link[] = $state([]);
 
 	constructor(public readonly root_path = DEFAULT_LIBRARY_PATH) {}
 
 	add(id: string, text: string, slug: string, tag?: Library_Link_Tag): void {
 		const index = this.library_links.findIndex((t) => t.id === id);
-		const v: Library_Link_Data = {id, text, slug, tag};
+		const v: Library_Link = {id, text, slug, tag};
 		if (index === -1) {
 			this.library_links.push(v);
 		} else {
