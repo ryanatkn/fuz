@@ -341,10 +341,10 @@ export const package_json = {
 			svelte: './dist/Tome_Link.svelte',
 			default: './dist/Tome_Link.svelte',
 		},
-		'./Tome_Subheading.svelte': {
-			types: './dist/Tome_Subheading.svelte.d.ts',
-			svelte: './dist/Tome_Subheading.svelte',
-			default: './dist/Tome_Subheading.svelte',
+		'./Tome_Section_Title.svelte': {
+			types: './dist/Tome_Section_Title.svelte.d.ts',
+			svelte: './dist/Tome_Section_Title.svelte',
+			default: './dist/Tome_Section_Title.svelte',
 		},
 		'./Tome_Title.svelte': {
 			types: './dist/Tome_Title.svelte.d.ts',
@@ -503,7 +503,7 @@ export const src_json = {
 		'./Themed.svelte': {path: 'Themed.svelte', declarations: []},
 		'./Tome_Content.svelte': {path: 'Tome_Content.svelte', declarations: []},
 		'./Tome_Link.svelte': {path: 'Tome_Link.svelte', declarations: []},
-		'./Tome_Subheading.svelte': {path: 'Tome_Subheading.svelte', declarations: []},
+		'./Tome_Section_Title.svelte': {path: 'Tome_Section_Title.svelte', declarations: []},
 		'./Tome_Title.svelte': {path: 'Tome_Title.svelte', declarations: []},
 		'./tome.js': {
 			path: 'tome.ts',

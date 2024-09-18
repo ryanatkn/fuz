@@ -4,7 +4,7 @@
 	import Contextmenu from '$lib/Contextmenu.svelte';
 	import {Contextmenu_State} from '$lib/contextmenu_state.svelte.js';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
-	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
+	import Tome_Section_Title from '$lib/Tome_Section_Title.svelte';
 
 	const contextmenu = new Contextmenu_State();
 
@@ -37,7 +37,7 @@ Try selecting text and then opening the contextmenu on it.`;
 
 <Contextmenu_Root {contextmenu} scoped>
 	<div class:color_d_5={highlighted}>
-		<Tome_Subheading text="Select text" slug="select-text" />
+		<Tome_Section_Title text="Select text" slug="select-text" />
 	</div>
 	<Contextmenu>
 		{#snippet entries()}

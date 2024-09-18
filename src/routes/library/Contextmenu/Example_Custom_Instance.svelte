@@ -8,7 +8,7 @@
 	import Contextmenu_Entry from '$lib/Contextmenu_Entry.svelte';
 	import Contextmenu from '$lib/Contextmenu.svelte';
 	import {Contextmenu_State} from '$lib/contextmenu_state.svelte.js';
-	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
+	import Tome_Section_Title from '$lib/Tome_Section_Title.svelte';
 
 	const contextmenu = new Contextmenu_State();
 
@@ -19,7 +19,7 @@
 </script>
 
 <Contextmenu_Root {contextmenu} scoped>
-	<Tome_Subheading text="Custom instance" slug="custom-instance" />
+	<Tome_Section_Title text="Custom instance" slug="custom-instance" />
 	<Contextmenu>
 		{#snippet entries()}
 			<Contextmenu_Entry run={() => (toggled = !toggled)}>Toggle</Contextmenu_Entry>

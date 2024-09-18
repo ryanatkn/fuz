@@ -1,5 +1,14 @@
 <script lang="ts" module>
 	let _id = 0;
+
+	export interface Props {
+		text: string;
+		slug: string; // TODO doesn't handle duplicate slugs for section titles under different `Tome_Title`s, e.g. the generic "example-usage" and "more-details" will cause issues if they're used elsewhere
+		tag?: Library_Link_Tag;
+		content_attrs?: SvelteHTMLElements['div'];
+		attrs?: SvelteHTMLElements['h3'];
+		children?: Snippet;
+	}
 </script>
 
 <script lang="ts">
@@ -11,22 +20,13 @@
 	import Hashlink from '$lib/Hashlink.svelte';
 	import {get_library_links, type Library_Link_Tag} from '$lib/library_helpers.svelte.js';
 
-	interface Props {
-		text: string;
-		slug: string; // TODO doesn't handle duplicate slugs for subheadings under different `Tome_Title`s, e.g. the generic "example-usage" and "more-details" will cause issues if they're used elsewhere
-		tag?: Library_Link_Tag;
-		content_attrs?: SvelteHTMLElements['div'];
-		attrs?: SvelteHTMLElements['h3'];
-		children?: Snippet;
-	}
-
 	const {text, slug, tag = 'h3', content_attrs, attrs, children}: Props = $props();
 
-	const id = 'tome_subheading_' + _id++;
+	const id = 'tome_section_title_' + _id++;
 
 	const library_links = get_library_links();
 
-	// Add subheadings only if not on the root page.
+	// Add section titles only if not on the root page.
 	// TODO make reactive?
 	if ($page.url.pathname !== base + library_links.root_path) {
 		library_links.add(id, text, slug, tag);
@@ -36,7 +36,7 @@
 	}
 </script>
 
-<svelte:element this={tag} {...attrs} class:tome_subheading={true}
+<svelte:element this={tag} {...attrs} class:tome_section_title={true}
 	>{@render content()}</svelte:element
 >
 
@@ -48,14 +48,14 @@
 {/snippet}
 
 <style>
-	.tome_subheading {
+	.tome_section_title {
 		position: relative;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 	}
 	/* TODO @many how can this be done composably? currently using `:global` at usage site - ideally we'd continue to use :hover instead of JS */
-	.tome_subheading:hover :global(.hashlink) {
+	.tome_section_title:hover :global(.hashlink) {
 		opacity: 1;
 	}
 </style>

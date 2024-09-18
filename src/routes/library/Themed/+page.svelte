@@ -10,7 +10,7 @@
 	import Dialog from '$lib/Dialog.svelte';
 	import {get_tome_by_name} from '$lib/tome.js';
 	import Color_Scheme_Input from '$lib/Color_Scheme_Input.svelte';
-	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
+	import Tome_Section_Title from '$lib/Tome_Section_Title.svelte';
 	import Theme_Input from '$lib/Theme_Input.svelte';
 	import Theme_Form from '$routes/Theme_Form.svelte';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
@@ -102,7 +102,7 @@
 		</Details>
 	</section>
 	<section class="theme">
-		<Tome_Subheading text="Color scheme" slug="color-scheme" />
+		<Tome_Section_Title text="Color scheme" slug="color-scheme" />
 		<p>
 			<code>Themed</code> defaults to automatic
 			<Mdn_Link path="Web/CSS/color-scheme" />
@@ -144,7 +144,7 @@
 		</Details>
 	</section>
 	<section class="theme">
-		<Tome_Subheading text="Builtin themes" slug="builtin-themes" />
+		<Tome_Section_Title text="Builtin themes" slug="builtin-themes" />
 		<p>
 			A theme is a simple JSON collection of <a href="https://moss.ryanatkn.com/library/variables"
 				>Moss style variables</a
@@ -170,7 +170,7 @@
 	</section>
 	<!-- TODO @many revisit Themed_Scope
 	<section class="theme">
-		<Tome_Subheading text="Scoped themes" slug="scoped-themes" />
+		<Tome_Section_Title text="Scoped themes" slug="scoped-themes" />
 		<Details>
 			{#snippet summary()}⚠️ Scoped themes are a work in progress and may not be supported depending
 				on complexity. It shouldn't worsen the unscoped API.{/snippet}
@@ -239,7 +239,7 @@
 	</section>
 	-->
 	<section class="theme">
-		<Tome_Subheading text="Example usage" slug="example-usage" />
+		<Tome_Section_Title text="Example usage" slug="example-usage" />
 		<p>Themes are plain CSS that can be sourced in a variety of ways.</p>
 		<p>To use Fuz's base theme:</p>
 		<Code
@@ -301,7 +301,7 @@ themer.color_scheme; // '${themer.color_scheme}'`}
 		</p>
 	</section>
 	<section>
-		<Tome_Subheading text="More details" slug="more-details" />
+		<Tome_Section_Title text="More details" slug="more-details" />
 		<p>
 			<code>Themed</code> initializes the system's theme support. Without it, the page will not
 			reflect the user's system
