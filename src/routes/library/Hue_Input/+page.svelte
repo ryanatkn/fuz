@@ -3,13 +3,13 @@
 	import 'prismjs';
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
-	import {get_tome} from '$lib/tome.js';
+	import {get_tome_by_name} from '$lib/tome.js';
 	import Hue_Input from '$lib/Hue_Input.svelte';
 	import Tome_Content from '$lib/Tome_Content.svelte';
 	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Hue_Input';
-	const tome = get_tome(LIBRARY_ITEM_NAME);
+	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
 
 	let value: number = $state(180);
 	let value_from_oninput: number | undefined = $state();

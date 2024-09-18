@@ -3,12 +3,12 @@
 	import 'prismjs';
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
-	import {get_tome} from '$lib/tome.js';
+	import {get_tome_by_name} from '$lib/tome.js';
 	import Pending_Button from '$lib/Pending_Button.svelte';
 	import Tome_Content from '$lib/Tome_Content.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Pending_Button';
-	const tome = get_tome(LIBRARY_ITEM_NAME);
+	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
 
 	let pending_1 = $state(false);
 	let pending_2 = $state(true);

@@ -3,13 +3,13 @@
 	import 'prismjs';
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
-	import {get_tome} from '$lib/tome.js';
+	import {get_tome_by_name} from '$lib/tome.js';
 	import Redirect from '$lib/Redirect.svelte';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
 	import Tome_Content from '$lib/Tome_Content.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Redirect';
-	const tome = get_tome(LIBRARY_ITEM_NAME);
+	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
 </script>
 
 <Tome_Content {tome}>

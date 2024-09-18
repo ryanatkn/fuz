@@ -3,13 +3,13 @@
 	import 'prismjs';
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
-	import {get_tome} from '$lib/tome.js';
+	import {get_tome_by_name} from '$lib/tome.js';
 	import Package_Summary from '$lib/Package_Summary.svelte';
 	import Tome_Content from '$lib/Tome_Content.svelte';
 	import {get_pkg} from '$routes/pkg.js';
 
 	const LIBRARY_ITEM_NAME = 'Package_Summary';
-	const tome = get_tome(LIBRARY_ITEM_NAME);
+	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
 
 	const pkg = get_pkg();
 </script>

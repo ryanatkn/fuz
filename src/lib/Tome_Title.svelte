@@ -6,16 +6,14 @@
 	import {page} from '$app/stores';
 	import {onDestroy} from 'svelte';
 	import {slugify} from '@ryanatkn/belt/path.js';
+	import {DEV} from 'esm-env';
 
-	import type {Tome} from '$lib/tome.js';
+	import {get_tome} from '$lib/tome.js';
 	import Hashlink from '$lib/Hashlink.svelte';
 	import {get_library_links, to_library_path_info} from '$lib/library_helpers.svelte.js';
 
-	interface Props {
-		tome: Tome;
-	}
-
-	const {tome}: Props = $props();
+	const tome = get_tome();
+	if (DEV && !tome) throw Error('Tome_Title expects a tome in context'); // eslint-disable-line @typescript-eslint/no-unnecessary-condition
 
 	const id = 'tome_title_' + _id++;
 

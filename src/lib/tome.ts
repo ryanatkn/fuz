@@ -21,14 +21,17 @@ export const init_tome = <T extends Tome>(item: T): T => {
 };
 
 const TOMES_KEY = Symbol();
-
 export const get_tomes = (): Map<string, Tome> => getContext(TOMES_KEY);
 export const set_tomes = (tomes: Map<string, Tome>): Map<string, Tome> =>
 	setContext(TOMES_KEY, tomes);
 
-export const get_tome = (name: string): Tome => {
+export const get_tome_by_name = (name: string): Tome => {
 	const tomes = get_tomes();
 	const tome = tomes.get(name);
 	if (!tome) throw Error(`unable to find tome "${name}"`);
 	return tome;
 };
+
+const TOME_KEY = Symbol();
+export const get_tome = (): Tome => getContext(TOME_KEY);
+export const set_tome = (tome: Tome): Tome => setContext(TOME_KEY, tome);

@@ -2,7 +2,7 @@
 	import type {Snippet} from 'svelte';
 
 	import Tome_Title from '$lib/Tome_Title.svelte';
-	import type {Tome} from '$lib/tome.js';
+	import {set_tome, type Tome} from '$lib/tome.js';
 
 	interface Props {
 		tome: Tome;
@@ -12,7 +12,7 @@
 
 	const {tome, header, children}: Props = $props();
 
-	// TODO component name?
+	set_tome(tome);
 </script>
 
 <div class="tome_content width_md">
@@ -20,7 +20,7 @@
 		{#if header}
 			{@render header()}
 		{:else}
-			<Tome_Title {tome} />
+			<Tome_Title />
 		{/if}
 	</header>
 	{@render children()}

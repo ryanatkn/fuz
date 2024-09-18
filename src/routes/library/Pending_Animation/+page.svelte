@@ -3,13 +3,13 @@
 	import 'prismjs';
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
-	import {get_tome} from '$lib/tome.js';
+	import {get_tome_by_name} from '$lib/tome.js';
 	import Pending_Animation from '$lib/Pending_Animation.svelte';
 	import Tome_Content from '$lib/Tome_Content.svelte';
 	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Pending_Animation';
-	const tome = get_tome(LIBRARY_ITEM_NAME);
+	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
 
 	let turtleSlot = $state('🐢');
 	let turtleSlot2a = $state('🐸');

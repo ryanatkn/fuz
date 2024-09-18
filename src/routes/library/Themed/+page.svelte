@@ -8,7 +8,7 @@
 	import Tome_Content from '$lib/Tome_Content.svelte';
 	import Details from '$lib/Details.svelte';
 	import Dialog from '$lib/Dialog.svelte';
-	import {get_tome} from '$lib/tome.js';
+	import {get_tome_by_name} from '$lib/tome.js';
 	import Color_Scheme_Input from '$lib/Color_Scheme_Input.svelte';
 	import Tome_Subheading from '$lib/Tome_Subheading.svelte';
 	import Theme_Input from '$lib/Theme_Input.svelte';
@@ -19,7 +19,7 @@
 
 	const LIBRARY_ITEM_NAME = 'Themed';
 
-	const tome = get_tome(LIBRARY_ITEM_NAME);
+	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
 
 	const themes = default_themes.slice();
 

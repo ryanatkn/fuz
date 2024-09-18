@@ -6,7 +6,7 @@
 
 	import Alert from '$lib/Alert.svelte';
 	import Tome_Content from '$lib/Tome_Content.svelte';
-	import {get_tome} from '$lib/tome.js';
+	import {get_tome_by_name} from '$lib/tome.js';
 	import Dialog from '$lib/Dialog.svelte';
 	import Tome_Link from '$lib/Tome_Link.svelte';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
@@ -21,7 +21,7 @@
 
 	const LIBRARY_ITEM_NAME = 'Dialog';
 
-	const tome = get_tome(LIBRARY_ITEM_NAME);
+	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
 
 	let opened = $state(false);
 	let dialog_overflowing_opened = $state(false);
