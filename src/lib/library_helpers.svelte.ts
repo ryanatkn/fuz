@@ -1,16 +1,17 @@
 import {getContext, setContext} from 'svelte';
 import {base} from '$app/paths';
+import {SvelteSet} from 'svelte/reactivity';
 
 export const DEFAULT_LIBRARY_PATH = '/library';
 
 export const to_library_path_info = (
-	name: string,
+	slug: string,
 	pathname: string,
 	root_path = DEFAULT_LIBRARY_PATH,
 ): {path: string; path_is_selected: boolean; path_segment: string | undefined} => {
 	const path_segment = pathname.split('/').at(-1);
-	const path = base + root_path + '/' + name;
-	const path_is_selected = path_segment === name; // messy but works
+	const path = base + root_path + '/' + slug;
+	const path_is_selected = path_segment === slug; // messy but works
 	return {path, path_is_selected, path_segment};
 };
 
@@ -36,6 +37,8 @@ export interface Library_Link {
 
 export class Library_Links {
 	library_links: Library_Link[] = $state([]);
+
+	slugs_onscreen: SvelteSet<string> = $state(new SvelteSet());
 
 	constructor(public readonly root_path = DEFAULT_LIBRARY_PATH) {}
 

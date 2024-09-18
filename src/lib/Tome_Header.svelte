@@ -20,8 +20,8 @@
 	const library_links = get_library_links();
 
 	// TODO how to make reactive?
-	const slug = slugify(tome.name, false);
-	library_links.add(id, tome.name, slug);
+	const slug = slugify(tome.name, false); // TODO BLOCK either remove this and use `tome.slug` or remove `tome.slug`
+	library_links.add(id, tome.name, tome.slug);
 	// const slug = $derived(slugify(tome.name));
 	// $effect(() => library_links.add(id, tome.name, slug));
 

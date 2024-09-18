@@ -53,12 +53,12 @@
 		margin: var(--space_xl6) 0;
 	}
 
-	/* TODO should be a CSS class or variable, maybe should be the default?
+	/* TODO @many should be a CSS class or variable, maybe should be the default?
 	problem is it doesn't work on .bg, maybe needs a variant/modifier in the name? */
-	ul a:hover {
+	a:hover {
 		background-color: var(--bg_5);
 	}
-	ul a:is(:active, .selected) {
+	a:is(:active, .selected) {
 		background-color: var(--bg_7);
 	}
 </style>

@@ -30,7 +30,7 @@
 		</Library_Menu>
 	{/if}
 	{#if library_links.library_links.length > 1}
-		<Library_Page_Links {library_links} {sidebar} />
+		<Library_Page_Links {sidebar} />
 	{/if}
 </aside>
 

@@ -2,16 +2,17 @@
 	import {page} from '$app/stores';
 	import {slide} from 'svelte/transition';
 
-	import type {Library_Links} from '$lib/library_helpers.svelte.js';
+	import {get_library_links} from '$lib/library_helpers.svelte.js';
 
 	interface Props {
-		library_links: Library_Links;
 		sidebar?: boolean; // TODO @many dialog navs (this shouldn't exist)
 	}
 
-	const {library_links, sidebar = true}: Props = $props();
+	const {sidebar = true}: Props = $props();
 
 	// TODO remove CSS below with reusable CSS or a Svelte component
+
+	const library_links = get_library_links();
 
 	const hash = $derived($page.url.hash.slice(1));
 </script>
@@ -33,7 +34,8 @@
 					<a
 						class="menu_item overflow_wrap_anywhere line_height_sm"
 						href="#{item.slug}"
-						class:selected={item.slug === hash}>{item.text}</a
+						class:selected={item.slug === hash}
+						class:highlighted={library_links.slugs_onscreen.has(item.slug)}>{item.text}</a
 					>
 				</li>
 			{/each}
@@ -55,12 +57,15 @@
 		align-items: flex-start;
 	}
 
-	/* TODO should be a CSS class or variable, maybe should be the default?
+	/* TODO @many should be a CSS component class or variable, maybe should be the default?
 	problem is it doesn't work on .bg, maybe needs a variant/modifier in the name? */
-	ul a:hover {
+	a.highlighted {
+		background-color: var(--bg_3);
+	}
+	a:hover {
 		background-color: var(--bg_5);
 	}
-	ul a:is(:active, .selected) {
+	a:is(:active, .selected) {
 		background-color: var(--bg_7);
 	}
 </style>
