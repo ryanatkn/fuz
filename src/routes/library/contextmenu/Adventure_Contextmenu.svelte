@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Contextmenu_Entry from '$lib/Contextmenu_Entry.svelte';
 	import Contextmenu_Submenu from '$lib/Contextmenu_Submenu.svelte';
-	import {type History_Item, type Cat, to_cats_label} from '$routes/library/Contextmenu/helpers.js';
-	import Cat_Contextmenu from '$routes/library/Contextmenu/Cat_Contextmenu.svelte';
+	import {type History_Item, type Cat, to_cats_label} from '$routes/library/contextmenu/helpers.js';
+	import Cat_Contextmenu from '$routes/library/contextmenu/Cat_Contextmenu.svelte';
 
 	interface Props {
 		home_cats: Cat[];

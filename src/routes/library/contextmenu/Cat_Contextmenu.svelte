@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Contextmenu_Entry from '$lib/Contextmenu_Entry.svelte';
 	import Contextmenu_Submenu from '$lib/Contextmenu_Submenu.svelte';
-	import type {Cat_Position, History_Item} from '$routes/library/Contextmenu/helpers.js';
+	import type {Cat_Position, History_Item} from '$routes/library/contextmenu/helpers.js';
 
 	interface Props {
 		name?: string;

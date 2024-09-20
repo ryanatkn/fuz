@@ -1,20 +1,20 @@
 import type {Tome} from '$lib/tome.js';
 import introduction from '$routes/library/introduction/+page.svelte';
-import Themed from '$routes/library/Themed/+page.svelte';
-import Pending_Animation from '$routes/library/Pending_Animation/+page.svelte';
-import Pending_Button from '$routes/library/Pending_Button/+page.svelte';
-import Package_Summary from '$routes/library/Package_Summary/+page.svelte';
-import Package_Detail from '$routes/library/Package_Detail/+page.svelte';
-import Details from '$routes/library/Details/+page.svelte';
-import Dialog from '$routes/library/Dialog/+page.svelte';
-import Teleport from '$routes/library/Teleport/+page.svelte';
-import Alert from '$routes/library/Alert/+page.svelte';
-import Library from '$routes/library/Library/+page.svelte';
-import Contextmenu from '$routes/library/Contextmenu/+page.svelte';
-import Redirect from '$routes/library/Redirect/+page.svelte';
-import Hue_Input from '$routes/library/Hue_Input/+page.svelte';
-import Breadcrumb from '$routes/library/Breadcrumb/+page.svelte';
-import Card from '$routes/library/Card/+page.svelte';
+import Themed from '$routes/library/themed/+page.svelte';
+import Pending_Animation from '$routes/library/pending_animation/+page.svelte';
+import Pending_Button from '$routes/library/pending_button/+page.svelte';
+import Package_Summary from '$routes/library/package_summary/+page.svelte';
+import Package_Detail from '$routes/library/package_detail/+page.svelte';
+import Details from '$routes/library/details/+page.svelte';
+import Dialog from '$routes/library/dialog/+page.svelte';
+import Teleport from '$routes/library/teleport/+page.svelte';
+import Alert from '$routes/library/alert/+page.svelte';
+import Library from '$routes/library/library/+page.svelte';
+import Contextmenu from '$routes/library/contextmenu/+page.svelte';
+import Redirect from '$routes/library/redirect/+page.svelte';
+import Hue_Input from '$routes/library/hue_input/+page.svelte';
+import Breadcrumb from '$routes/library/breadcrumb/+page.svelte';
+import Card from '$routes/library/card/+page.svelte';
 import logos from '$routes/library/logos/+page.svelte';
 
 // TODO maybe decouple `related` from `Tome` to get bidirectionality for free

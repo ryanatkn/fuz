@@ -10,16 +10,16 @@
 	import Contextmenu from '$lib/Contextmenu.svelte';
 	import Details from '$lib/Details.svelte';
 	import Contextmenu_Text_Entry from '$lib/Contextmenu_Text_Entry.svelte';
-	import Cat_Contextmenu from '$routes/library/Contextmenu/Cat_Contextmenu.svelte';
-	import App_Contextmenu from '$routes/library/Contextmenu/App_Contextmenu.svelte';
-	import Home_Contextmenu from '$routes/library/Contextmenu/Home_Contextmenu.svelte';
-	import Adventure_Contextmenu from '$routes/library/Contextmenu/Adventure_Contextmenu.svelte';
-	import Cat_View from '$routes/library/Contextmenu/Cat_View.svelte';
-	import type {Cat, Cat_Position, History_Item} from '$routes/library/Contextmenu/helpers.js';
+	import Cat_Contextmenu from '$routes/library/contextmenu/Cat_Contextmenu.svelte';
+	import App_Contextmenu from '$routes/library/contextmenu/App_Contextmenu.svelte';
+	import Home_Contextmenu from '$routes/library/contextmenu/Home_Contextmenu.svelte';
+	import Adventure_Contextmenu from '$routes/library/contextmenu/Adventure_Contextmenu.svelte';
+	import Cat_View from '$routes/library/contextmenu/Cat_View.svelte';
+	import type {Cat, Cat_Position, History_Item} from '$routes/library/contextmenu/helpers.js';
 	import Color_Scheme_Input from '$lib/Color_Scheme_Input.svelte';
 	import Theme_Input from '$lib/Theme_Input.svelte';
 	import Dialog from '$lib/Dialog.svelte';
-	import file_contents from '$routes/library/Contextmenu/Example_Full.svelte?raw';
+	import file_contents from '$routes/library/contextmenu/Example_Full.svelte?raw';
 	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
 
 	const alyssa = 'Alyssa';

@@ -61,7 +61,7 @@
 	<section>
 		<Tome_Section_Header text="As the selected link" slug="as-selected-link" />
 		<Code
-			content={`<Card href="${base}/library/Card">
+			content={`<Card href="${base}/library/card">
   href is<br />
   selected
 </Card>`}

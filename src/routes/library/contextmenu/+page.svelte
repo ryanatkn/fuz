@@ -1,12 +1,12 @@
 <script lang="ts">
 	import Tome_Content from '$lib/Tome_Content.svelte';
 	import {get_tome_by_name} from '$lib/tome.js';
-	import Contextmenu_Discussion from '$routes/library/Contextmenu/Discussion.svelte';
-	import Example_Full from '$routes/library/Contextmenu/Example_Full.svelte';
-	import Example_Basic from '$routes/library/Contextmenu/Example_Basic.svelte';
-	import Example_Custom_Instance from '$routes/library/Contextmenu/Example_Custom_Instance.svelte';
-	import Example_Select_Text from '$routes/library/Contextmenu/Example_Select_Text.svelte';
-	import Example_Default_Behaviors from '$routes/library/Contextmenu/Example_Default_Behaviors.svelte';
+	import Contextmenu_Discussion from '$routes/library/contextmenu/Discussion.svelte';
+	import Example_Full from '$routes/library/contextmenu/Example_Full.svelte';
+	import Example_Basic from '$routes/library/contextmenu/Example_Basic.svelte';
+	import Example_Custom_Instance from '$routes/library/contextmenu/Example_Custom_Instance.svelte';
+	import Example_Select_Text from '$routes/library/contextmenu/Example_Select_Text.svelte';
+	import Example_Default_Behaviors from '$routes/library/contextmenu/Example_Default_Behaviors.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Contextmenu';
 

@@ -14,7 +14,7 @@
 	import Theme_Input from '$lib/Theme_Input.svelte';
 	import Theme_Form from '$routes/Theme_Form.svelte';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
-	// import Themed_Scope from '$routes/library/Themed/Themed_Scope.svelte'; // TODO @many revisit Themed_Scope
+	// import Themed_Scope from '$routes/library/themed/Themed_Scope.svelte'; // TODO @many revisit Themed_Scope
 	import {get_themer} from '$lib/theme.svelte.js';
 
 	const LIBRARY_ITEM_NAME = 'Themed';
