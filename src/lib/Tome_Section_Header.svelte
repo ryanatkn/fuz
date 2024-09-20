@@ -1,12 +1,5 @@
 <script lang="ts" module>
 	let _id = 0;
-
-	export interface Props {
-		text: string;
-		tag?: Library_Link_Tag;
-		attrs?: SvelteHTMLElements['h3'];
-		children?: Snippet;
-	}
 </script>
 
 <script lang="ts">
@@ -19,9 +12,18 @@
 	import Hashlink from '$lib/Hashlink.svelte';
 	import {get_library_links, type Library_Link_Tag} from '$lib/library_helpers.svelte.js';
 
+	interface Props {
+		text: string;
+		tag?: Library_Link_Tag;
+		attrs?: SvelteHTMLElements['h3'];
+		children?: Snippet;
+	}
+
 	const {text, tag = 'h3', attrs, children}: Props = $props();
 
 	const slug = slugify(text);
+
+	get_tome_section().register(slug);
 
 	const id = 'tome_section_header_' + _id++;
 
