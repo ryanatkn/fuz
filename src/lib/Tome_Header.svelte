@@ -12,24 +12,21 @@
 	import Hashlink from '$lib/Hashlink.svelte';
 	import {get_library_links, to_library_path_info} from '$lib/library_helpers.svelte.js';
 
-	const tome = get_tome();
+	const tome = get_tome(); // TODO make reactive?
 	if (DEV && !tome) throw Error('Tome_Header expects a tome in context'); // eslint-disable-line @typescript-eslint/no-unnecessary-condition
 
 	const id = 'tome_header_' + _id++;
 
 	const library_links = get_library_links();
 
-	// TODO how to make reactive?
-	const slug = slugify(tome.name, false); // TODO BLOCK either remove this and use `tome.slug` or remove `tome.slug`
-	library_links.add(id, tome.name, tome.slug);
-	// const slug = $derived(slugify(tome.name));
-	// $effect(() => library_links.add(id, tome.name, slug));
+	const slug = slugify(tome.name);
+	library_links.add(id, tome.name, slug);
 
 	onDestroy(() => {
 		library_links.remove(id);
 	});
 
-	const {path, path_is_selected} = $derived(to_library_path_info(tome.slug, $page.url.pathname));
+	const {path, path_is_selected} = $derived(to_library_path_info(slug, $page.url.pathname));
 </script>
 
 <header>

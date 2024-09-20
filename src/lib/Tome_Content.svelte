@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
+	import {slugify} from '@ryanatkn/belt/path.js';
 
 	import Tome_Header from '$lib/Tome_Header.svelte';
 	import {set_tome, type Tome} from '$lib/tome.js';
@@ -16,18 +17,18 @@
 
 	const library_links = get_library_links();
 
-	set_tome(tome);
+	set_tome(tome); // TODO make reactive?
+
+	const slug = slugify(tome.name);
 </script>
 
 <section class="tome_content width_md">
 	<header
 		use:intersect={({intersecting}) => {
-			console.log(`tome`, tome);
-			console.log(`intersecting`, intersecting, tome.slug);
 			if (intersecting) {
-				library_links.slugs_onscreen.add(tome.slug);
+				library_links.slugs_onscreen.add(slug);
 			} else {
-				library_links.slugs_onscreen.delete(tome.slug);
+				library_links.slugs_onscreen.delete(slug);
 			}
 		}}
 	>

@@ -528,7 +528,7 @@ export const src_json = {
 			path: 'tome.ts',
 			declarations: [
 				{name: 'Tome', kind: 'variable'},
-				{name: 'init_tome', kind: 'function'},
+				{name: 'to_tome_pathname', kind: 'function'},
 				{name: 'get_tomes', kind: 'function'},
 				{name: 'set_tomes', kind: 'function'},
 				{name: 'get_tome_by_name', kind: 'function'},
