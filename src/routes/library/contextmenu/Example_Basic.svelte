@@ -13,7 +13,7 @@
 	let greeted_icon_string = $state(false);
 </script>
 
-<Tome_Section_Header text="Basic usage" slug="basic-usage" />
+<Tome_Section_Header text="Basic usage" />
 <Contextmenu_Root scoped>
 	<Contextmenu>
 		{#snippet entries()}

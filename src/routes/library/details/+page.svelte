@@ -38,7 +38,7 @@
 		</ul>
 	</section>
 	<section>
-		<Tome_Section_Header text="With lazy rendering by default" slug="lazy-rendering-by-default" />
+		<Tome_Section_Header text="With lazy rendering by default" />
 		<Code
 			content={`<Details>
   {#snippet summary()}summary content{/snippet}
@@ -51,7 +51,7 @@
 		</Details>
 	</section>
 	<section>
-		<Tome_Section_Header text="With eager rendering" slug="eager-rendering" />
+		<Tome_Section_Header text="With eager rendering" />
 		<Code
 			content={`<Details eager>
   {#snippet summary()}summary content{/snippet}
@@ -64,7 +64,7 @@
 		</Details>
 	</section>
 	<section>
-		<Tome_Section_Header text="With the base details element" slug="base-details-element">
+		<Tome_Section_Header text="With the base details element">
 			With the base <Mdn_Link path="Web/HTML/Element/details" /> element
 		</Tome_Section_Header>
 		<Code

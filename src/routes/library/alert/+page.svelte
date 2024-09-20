@@ -23,7 +23,7 @@
 		<Code content={`<Alert>info</Alert>`} />
 		<Alert>info</Alert>
 	</section>
-	<Tome_Section header_props={{text: 'With custom icon', slug: 'custom-icon'}}>
+	<Tome_Section header_props={{text: 'With custom icon'}}>
 		<p><code>icon</code> can be a string prop or snippet:</p>
 		<Code
 			content={`<Alert icon="▷">
@@ -42,7 +42,7 @@
 			icon as a snippet
 		</Alert>
 	</Tome_Section>
-	<Tome_Section header_props={{text: 'As optional button', slug: 'optional-button'}}>
+	<Tome_Section header_props={{text: 'As optional button'}}>
 		<p>
 			Alerts can be buttons by including an <code>onclick</code> prop. This API may change because
 			it's a bit of a mess - a separate <code>Alert_Button</code> may be better.
@@ -57,7 +57,7 @@
 		</Alert>
 		<p>clicks: {clicks}</p>
 	</Tome_Section>
-	<Tome_Section header_props={{text: 'With custom status', slug: 'custom-status'}}>
+	<Tome_Section header_props={{text: 'With custom status'}}>
 		<p>
 			The <code>status</code> prop, which defaults to <code>'inform'</code>, changes the default
 			icon and color.

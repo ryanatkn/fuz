@@ -102,7 +102,7 @@
 		</Details>
 	</section>
 	<section class="theme">
-		<Tome_Section_Header text="Color scheme" slug="color-scheme" />
+		<Tome_Section_Header text="Color scheme" />
 		<p>
 			<code>Themed</code> defaults to automatic
 			<Mdn_Link path="Web/CSS/color-scheme" />
@@ -144,7 +144,7 @@
 		</Details>
 	</section>
 	<section class="theme">
-		<Tome_Section_Header text="Builtin themes" slug="builtin-themes" />
+		<Tome_Section_Header text="Builtin themes" />
 		<p>
 			A theme is a simple JSON collection of <a href="https://moss.ryanatkn.com/library/variables"
 				>Moss style variables</a
@@ -170,7 +170,7 @@
 	</section>
 	<!-- TODO @many revisit Themed_Scope
 	<section class="theme">
-		<Tome_Section_Header text="Scoped themes" slug="scoped-themes" />
+		<Tome_Section_Header text="Scoped themes"/>
 		<Details>
 			{#snippet summary()}⚠️ Scoped themes are a work in progress and may not be supported depending
 				on complexity. It shouldn't worsen the unscoped API.{/snippet}
@@ -239,7 +239,7 @@
 	</section>
 	-->
 	<section class="theme">
-		<Tome_Section_Header text="Example usage" slug="example-usage" />
+		<Tome_Section_Header text="Example usage" />
 		<p>Themes are plain CSS that can be sourced in a variety of ways.</p>
 		<p>To use Fuz's base theme:</p>
 		<Code
@@ -301,7 +301,7 @@ themer.color_scheme; // '${themer.color_scheme}'`}
 		</p>
 	</section>
 	<section>
-		<Tome_Section_Header text="More details" slug="more-details" />
+		<Tome_Section_Header text="More details" />
 		<p>
 			<code>Themed</code> initializes the system's theme support. Without it, the page will not
 			reflect the user's system

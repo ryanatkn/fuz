@@ -44,7 +44,7 @@
 		</div>
 	</section>
 	<section>
-		<Tome_Section_Header text="With custom children" slug="custom-children" />
+		<Tome_Section_Header text="With custom children" />
 		<Code
 			content={`<div
 	style:font-size="var(--size_xl6)"
@@ -77,7 +77,7 @@
 		</div>
 	</section>
 	<section>
-		<Tome_Section_Header text="With children index prop" slug="children-index-prop"
+		<Tome_Section_Header text="With children index prop"
 			>With children <code>index</code> prop</Tome_Section_Header
 		>
 		<Code

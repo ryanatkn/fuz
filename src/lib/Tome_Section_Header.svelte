@@ -3,7 +3,6 @@
 
 	export interface Props {
 		text: string;
-		slug: string; // TODO doesn't handle duplicate slugs for section titles under different `Tome_Header`s, e.g. the generic "example-usage" and "more-details" will cause issues if they're used elsewhere
 		tag?: Library_Link_Tag;
 		attrs?: SvelteHTMLElements['h3'];
 		children?: Snippet;
@@ -15,11 +14,14 @@
 	import type {SvelteHTMLElements} from 'svelte/elements';
 	import {page} from '$app/stores';
 	import {base} from '$app/paths';
+	import {slugify} from '@ryanatkn/belt/path.js';
 
 	import Hashlink from '$lib/Hashlink.svelte';
 	import {get_library_links, type Library_Link_Tag} from '$lib/library_helpers.svelte.js';
 
-	const {text, slug, tag = 'h3', attrs, children}: Props = $props();
+	const {text, tag = 'h3', attrs, children}: Props = $props();
+
+	const slug = slugify(text);
 
 	const id = 'tome_section_header_' + _id++;
 

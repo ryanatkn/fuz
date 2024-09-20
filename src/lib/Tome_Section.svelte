@@ -1,5 +1,6 @@
 <script lang="ts">
 	import {type Snippet} from 'svelte';
+	import {slugify} from '@ryanatkn/belt/path.js';
 
 	import Tome_Section_Header, {type Props as Header_Props} from '$lib/Tome_Section_Header.svelte';
 	import {intersect} from '$lib/intersect.ts';
@@ -11,6 +12,8 @@
 	}
 
 	const {header_props, children}: Props = $props();
+
+	const slug = $derived(slugify(header_props.text));
 
 	const library_links = get_library_links();
 
@@ -24,9 +27,9 @@
 <section
 	use:intersect={({intersecting}) => {
 		if (intersecting) {
-			library_links.slugs_onscreen.add(header_props.slug);
+			library_links.slugs_onscreen.add(slug);
 		} else {
-			library_links.slugs_onscreen.delete(header_props.slug);
+			library_links.slugs_onscreen.delete(slug);
 		}
 	}}
 >

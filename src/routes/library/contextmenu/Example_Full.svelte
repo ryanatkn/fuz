@@ -129,7 +129,7 @@
 </script>
 
 <Contextmenu_Root scoped>
-	<Tome_Section_Header text="Full example" slug="full-example" />
+	<Tome_Section_Header text="Full example" />
 	<Contextmenu>
 		{#snippet entries()}
 			{#if can_reset}
