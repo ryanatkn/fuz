@@ -78,7 +78,7 @@
 	>
 		<div class="content">
 			<div class="icon">
-				{#if icon}{@render icon()}{/if}
+				{@render icon?.()}
 			</div>
 			<div class="title">{@render children()}</div>
 		</div>
