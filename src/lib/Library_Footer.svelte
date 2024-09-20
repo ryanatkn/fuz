@@ -19,7 +19,7 @@
 </script>
 
 <footer class="box">
-	{#if children}{@render children()}{/if}
+	{@render children?.()}
 	<div class="logo box panel p_lg shadow_inset_xs">
 		{#if logo_header}{@render logo_header()}{/if}
 		<a href={pkg.repo_url} rel="me" title="source code on GitHub"

@@ -16,7 +16,7 @@
 
 <span class="cat" class:has-icon={show_icon}>
 	{#if show_icon}<span class="icon">{icon}</span>{/if}{#if show_name}<span class="name"
-			>{#if children}{@render children()}{/if}{name}</span
+			>{@render children?.()}{name}</span
 		>{/if}
 </span>
 

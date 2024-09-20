@@ -79,7 +79,7 @@
 						</div>
 					{/if}
 				</header>
-				{#if children}{@render children(pkg)}{/if}
+				{@render children?.(pkg)}
 				{#if package_json.description}
 					{#if description}
 						{@render description(package_json.description)}

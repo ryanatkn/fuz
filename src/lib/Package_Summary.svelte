@@ -66,7 +66,7 @@
 			</p>
 		{/if}
 	{/if}
-	{#if children}{@render children()}{/if}
+	{@render children?.()}
 	{#if pkg.homepage_url}
 		{#if homepage_url}
 			{@render homepage_url(pkg.homepage_url)}

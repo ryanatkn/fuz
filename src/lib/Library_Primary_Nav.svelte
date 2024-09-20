@@ -40,7 +40,7 @@
 					{/if}
 				</Breadcrumb>
 			</nav>
-			{#if children}{@render children()}{/if}
+			{@render children?.()}
 		</div>
 	</div>
 {/if}
