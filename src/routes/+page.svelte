@@ -16,26 +16,28 @@
 		<section class="box">
 			<h1 class="mt_xl4 mb_lg">fuz</h1>
 			<div class="box mb_xl"><Fuz_Logo size="var(--icon_size_xl2)" /></div>
-			<blockquote class="shadow_inset_xs px_xl bg">friendly user zystem 🧶</blockquote>
-			<div class="width_sm panel p_lg shadow_inset_xs bg">
-				<p>
-					Fuz is a Svelte UI library with components and helpers for making friendly and helpful
-					websites. It builds on my CSS framework <a href="https://moss.ryanatkn.com/">Moss</a>,
-					which is based on CSS custom properties, and Fuz continues those patterns. It's in early
-					alpha and will have many breaking changes.
-				</p>
-				<p>
-					Fuz is being made to support <a href="https://zzz.ryanatkn.com/">Zzz</a> and
-					<a href="https://www.ryanatkn.com/table">my other projects</a>
-					that focus on end-users. Fuz emphasizes capability and efficiency and tries to be simple for
-					those goals. Compared to most UI libraries, Fuz has fewer features and more opinions, but the
-					eventual goal is to be fully-featured with high flexibility.
-				</p>
-				<p>
-					To learn more see <a href="{base}/library">the docs</a>
-					and <a href="https://github.com/ryanatkn/fuz#readme">readme</a>. Feel free to take the
-					ideas and <a href="https://github.com/ryanatkn/fuz">code</a> for your own purposes.
-				</p>
+			<blockquote class="shadow_sm px_xl bg">friendly user zystem 🧶</blockquote>
+			<div class="mb_lg p_xs2 shadow_md radius_sm">
+				<div class="width_sm panel p_lg shadow_inset_xs bg">
+					<p>
+						Fuz is a Svelte UI library with components and helpers for making friendly and helpful
+						websites. It builds on my CSS framework <a href="https://moss.ryanatkn.com/">Moss</a>,
+						which is based on CSS custom properties, and Fuz continues those patterns. It's in early
+						alpha and will have many breaking changes.
+					</p>
+					<p>
+						Fuz is being made to support <a href="https://zzz.ryanatkn.com/">Zzz</a> and
+						<a href="https://www.ryanatkn.com/table">my other projects</a>
+						that focus on end-users. Fuz emphasizes capability and efficiency and tries to be simple
+						for those goals. Compared to most UI libraries, Fuz has fewer features and more opinions,
+						but the eventual goal is to be fully-featured with high flexibility.
+					</p>
+					<p>
+						To learn more see <a href="{base}/library">the docs</a>
+						and <a href="https://github.com/ryanatkn/fuz#readme">readme</a>. Feel free to take the
+						ideas and <a href="https://github.com/ryanatkn/fuz">code</a> for your own purposes.
+					</p>
+				</div>
 			</div>
 		</section>
 		<section>
