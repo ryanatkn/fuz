@@ -16,7 +16,7 @@
 		<section class="box">
 			<h1 class="mt_xl4 mb_lg">fuz</h1>
 			<div class="box mb_xl"><Fuz_Logo size="var(--icon_size_xl2)" /></div>
-			<blockquote class="shadow_sm px_xl bg">friendly user zystem 🧶</blockquote>
+			<blockquote class="shadow_bottom_sm px_xl bg">friendly user zystem 🧶</blockquote>
 			<div class="mb_lg p_xs2 shadow_md radius_sm">
 				<div class="width_sm panel p_lg shadow_inset_xs bg">
 					<p>
