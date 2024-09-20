@@ -6,7 +6,7 @@
 	import {get_tome_by_name} from '$lib/tome.js';
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
 	import Tome_Content from '$lib/Tome_Content.svelte';
-	import Breadcrumb_Example from '$routes/library/Breadcrumb/Breadcrumb_Example.svelte';
+	import Breadcrumb_Example from '$routes/library/breadcrumb/Breadcrumb_Example.svelte';
 	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Breadcrumb';

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Breadcrumb_Example from '$routes/library/Breadcrumb/Breadcrumb_Example.svelte';
+	import Breadcrumb_Example from '$routes/library/breadcrumb/Breadcrumb_Example.svelte';
 	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
 </script>
 

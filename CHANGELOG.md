@@ -1127,7 +1127,7 @@
   ([#330](https://github.com/ryanatkn/fuz/pull/330))
 - fix theme when SSR is disabled
   ([#317](https://github.com/ryanatkn/fuz/pull/317))
-- add and publish `@ryanatkn/fuz_library/Copy_To_Clipboard.svelte`
+- add and publish `@ryanatkn/fuz/Copy_To_Clipboard.svelte`
   ([#318](https://github.com/ryanatkn/fuz/pull/318))
 - publish `$lib/prism.css`
   ([#318](https://github.com/ryanatkn/fuz/pull/318))
