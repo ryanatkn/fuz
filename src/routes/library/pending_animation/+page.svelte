@@ -7,6 +7,7 @@
 	import Pending_Animation from '$lib/Pending_Animation.svelte';
 	import Tome_Content from '$lib/Tome_Content.svelte';
 	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
+	import Tome_Section from '$lib/Tome_Section.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Pending_Animation';
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
@@ -43,7 +44,7 @@
 			<Pending_Animation attrs={{class: 'size_xl5'}} running={pendingAnimation0Running} />
 		</div>
 	</section>
-	<section>
+	<Tome_Section>
 		<Tome_Section_Header text="With custom children" />
 		<Code
 			content={`<div
@@ -75,8 +76,8 @@
 				{turtleSlot}
 			</Pending_Animation>
 		</div>
-	</section>
-	<section>
+	</Tome_Section>
+	<Tome_Section>
 		<Tome_Section_Header text="With children index prop"
 			>With children <code>index</code> prop</Tome_Section_Header
 		>
@@ -114,7 +115,7 @@
 				</div>
 			{/snippet}
 		</Pending_Animation>
-	</section>
+	</Tome_Section>
 </Tome_Content>
 
 <style>

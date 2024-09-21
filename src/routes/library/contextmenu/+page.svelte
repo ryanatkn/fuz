@@ -27,10 +27,10 @@
 			<p>todo: for mobile, probably change to a drawer-from-bottom design</p>
 		</aside>
 	</section>
-	<section><Example_Basic /></section>
-	<section><Example_Default_Behaviors /></section>
-	<section><Example_Custom_Instance /></section>
-	<section><Example_Select_Text /></section>
-	<section><Example_Full /></section>
-	<section><Contextmenu_Discussion /></section>
+	<Example_Basic />
+	<Example_Default_Behaviors />
+	<Example_Custom_Instance />
+	<Example_Select_Text />
+	<Example_Full />
+	<Contextmenu_Discussion />
 </Tome_Content>

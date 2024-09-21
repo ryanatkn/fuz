@@ -21,6 +21,7 @@
 	import Dialog from '$lib/Dialog.svelte';
 	import file_contents from '$routes/library/contextmenu/Example_Full.svelte?raw';
 	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
+	import Tome_Section from '$lib/Tome_Section.svelte';
 
 	const alyssa = 'Alyssa';
 	const ben = 'Ben';
@@ -129,63 +130,75 @@
 </script>
 
 <Contextmenu_Root scoped>
-	<Tome_Section_Header text="Full example" />
-	<Contextmenu>
-		{#snippet entries()}
-			{#if can_reset}
-				<Contextmenu_Text_Entry run={reset} content="Reset" icon="↻" />
-			{/if}
-			<App_Contextmenu {toggle_about_dialog} />
-		{/snippet}
-		<section>
-			<Contextmenu>
-				{#snippet entries()}
-					<Home_Contextmenu {act} {home_cats} {adventure_cats} />
-				{/snippet}
-				<div class="position home">
-					<div class="icon">🏠</div>
-					<div class="cats">
-						{#each home_cats as { name, icon, position } (name)}
-							<div class="cat_wrapper" in:receive={{key: name}} out:send={{key: name}} animate:flip>
-								<Contextmenu>
-									{#snippet entries()}
-										<Cat_Contextmenu {act} {name} {icon} {position} />
-									{/snippet}
-									<Cat_View {name} {icon} />
-								</Contextmenu>
-							</div>
-						{/each}
+	<Tome_Section>
+		<Tome_Section_Header text="Full example" />
+		<Contextmenu>
+			{#snippet entries()}
+				{#if can_reset}
+					<Contextmenu_Text_Entry run={reset} content="Reset" icon="↻" />
+				{/if}
+				<App_Contextmenu {toggle_about_dialog} />
+			{/snippet}
+			<section>
+				<Contextmenu>
+					{#snippet entries()}
+						<Home_Contextmenu {act} {home_cats} {adventure_cats} />
+					{/snippet}
+					<div class="position home">
+						<div class="icon">🏠</div>
+						<div class="cats">
+							{#each home_cats as { name, icon, position } (name)}
+								<div
+									class="cat_wrapper"
+									in:receive={{key: name}}
+									out:send={{key: name}}
+									animate:flip
+								>
+									<Contextmenu>
+										{#snippet entries()}
+											<Cat_Contextmenu {act} {name} {icon} {position} />
+										{/snippet}
+										<Cat_View {name} {icon} />
+									</Contextmenu>
+								</div>
+							{/each}
+						</div>
 					</div>
-				</div>
-			</Contextmenu>
-			<Contextmenu>
-				{#snippet entries()}
-					<Adventure_Contextmenu {act} {home_cats} {adventure_cats} />
-				{/snippet}
-				<div class="position adventure">
-					<div class="icon">🌄</div>
-					<div class="cats">
-						{#each adventure_cats as { name, icon, position } (name)}
-							<div class="cat_wrapper" in:receive={{key: name}} out:send={{key: name}} animate:flip>
-								<Contextmenu>
-									{#snippet entries()}
-										<Cat_Contextmenu {act} {name} {icon} {position} />
-									{/snippet}
-									<Cat_View {name} {icon} />
-								</Contextmenu>
-							</div>
-						{/each}
+				</Contextmenu>
+				<Contextmenu>
+					{#snippet entries()}
+						<Adventure_Contextmenu {act} {home_cats} {adventure_cats} />
+					{/snippet}
+					<div class="position adventure">
+						<div class="icon">🌄</div>
+						<div class="cats">
+							{#each adventure_cats as { name, icon, position } (name)}
+								<div
+									class="cat_wrapper"
+									in:receive={{key: name}}
+									out:send={{key: name}}
+									animate:flip
+								>
+									<Contextmenu>
+										{#snippet entries()}
+											<Cat_Contextmenu {act} {name} {icon} {position} />
+										{/snippet}
+										<Cat_View {name} {icon} />
+									</Contextmenu>
+								</div>
+							{/each}
+						</div>
 					</div>
-				</div>
-			</Contextmenu>
-		</section>
-		<section>
-			<Details>
-				{#snippet summary()}View example source{/snippet}
-				<Code content={file_contents} />
-			</Details>
-		</section>
-	</Contextmenu>
+				</Contextmenu>
+			</section>
+			<section>
+				<Details>
+					{#snippet summary()}View example source{/snippet}
+					<Code content={file_contents} />
+				</Details>
+			</section>
+		</Contextmenu>
+	</Tome_Section>
 </Contextmenu_Root>
 
 {#if show_about_dialog}

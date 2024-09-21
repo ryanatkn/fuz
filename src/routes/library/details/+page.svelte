@@ -8,6 +8,7 @@
 	import {get_tome_by_name} from '$lib/tome.js';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
 	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
+	import Tome_Section from '$lib/Tome_Section.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Details';
 
@@ -37,7 +38,7 @@
 			<li>you may desire some behavior caused by mounting the children</li>
 		</ul>
 	</section>
-	<section>
+	<Tome_Section>
 		<Tome_Section_Header text="With lazy rendering by default" />
 		<Code
 			content={`<Details>
@@ -49,8 +50,8 @@
 			{#snippet summary()}summary content{/snippet}
 			lazy children content
 		</Details>
-	</section>
-	<section>
+	</Tome_Section>
+	<Tome_Section>
 		<Tome_Section_Header text="With eager rendering" />
 		<Code
 			content={`<Details eager>
@@ -62,8 +63,8 @@
 			{#snippet summary()}summary content{/snippet}
 			eager children content
 		</Details>
-	</section>
-	<section>
+	</Tome_Section>
+	<Tome_Section>
 		<Tome_Section_Header text="With the base details element">
 			With the base <Mdn_Link path="Web/HTML/Element/details" /> element
 		</Tome_Section_Header>
@@ -77,5 +78,5 @@
 			<summary>a summary element instead of a snippet</summary>
 			the plain details
 		</details>
-	</section>
+	</Tome_Section>
 </Tome_Content>

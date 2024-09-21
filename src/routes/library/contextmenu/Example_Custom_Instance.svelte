@@ -9,6 +9,7 @@
 	import Contextmenu from '$lib/Contextmenu.svelte';
 	import {Contextmenu_State} from '$lib/contextmenu_state.svelte.js';
 	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
+	import Tome_Section from '$lib/Tome_Section.svelte';
 
 	const contextmenu = new Contextmenu_State();
 
@@ -19,24 +20,26 @@
 </script>
 
 <Contextmenu_Root {contextmenu} scoped>
-	<Tome_Section_Header text="Custom instance" />
-	<Contextmenu>
-		{#snippet entries()}
-			<Contextmenu_Entry run={() => (toggled = !toggled)}>Toggle</Contextmenu_Entry>
-		{/snippet}
-		<div class="panel p_md">
-			<Code lang="ts" content={`const contextmenu = create_contextmenu();`} />
-			<Code content={`<Contextmenu_Root {contextmenu} scoped>...`} />
-			<p>
-				The <code>Contextmenu_Root</code> prop <code>contextmenu</code> provides more control. Try opening
-				the contextmenu on this panel.
-			</p>
-			<!-- TODO this extra wrapper is only for the last-child margin behavior, but that may be removed -->
-			<div>
-				{#if toggled}
-					<div transition:slide>toggled</div>
-				{/if}
+	<Tome_Section>
+		<Tome_Section_Header text="Custom instance" />
+		<Contextmenu>
+			{#snippet entries()}
+				<Contextmenu_Entry run={() => (toggled = !toggled)}>Toggle</Contextmenu_Entry>
+			{/snippet}
+			<div class="panel p_md">
+				<Code lang="ts" content={`const contextmenu = create_contextmenu();`} />
+				<Code content={`<Contextmenu_Root {contextmenu} scoped>...`} />
+				<p>
+					The <code>Contextmenu_Root</code> prop <code>contextmenu</code> provides more control. Try
+					opening the contextmenu on this panel.
+				</p>
+				<!-- TODO this extra wrapper is only for the last-child margin behavior, but that may be removed -->
+				<div>
+					{#if toggled}
+						<div transition:slide>toggled</div>
+					{/if}
+				</div>
 			</div>
-		</div>
-	</Contextmenu>
+		</Contextmenu>
+	</Tome_Section>
 </Contextmenu_Root>

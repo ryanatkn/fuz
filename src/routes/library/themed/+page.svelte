@@ -11,6 +11,7 @@
 	import {get_tome_by_name} from '$lib/tome.js';
 	import Color_Scheme_Input from '$lib/Color_Scheme_Input.svelte';
 	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
+	import Tome_Section from '$lib/Tome_Section.svelte';
 	import Theme_Input from '$lib/Theme_Input.svelte';
 	import Theme_Form from '$routes/Theme_Form.svelte';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
@@ -101,7 +102,7 @@
 			</aside>
 		</Details>
 	</section>
-	<section class="theme">
+	<Tome_Section>
 		<Tome_Section_Header text="Color scheme" />
 		<p>
 			<code>Themed</code> defaults to automatic
@@ -142,8 +143,8 @@
 				</p>
 			</aside>
 		</Details>
-	</section>
-	<section class="theme">
+	</Tome_Section>
+	<Tome_Section>
 		<Tome_Section_Header text="Builtin themes" />
 		<p>
 			A theme is a simple JSON collection of <a href="https://moss.ryanatkn.com/library/variables"
@@ -167,9 +168,9 @@
 			refresh the page. This can be fixed using a similar strategy that we use to avoid pop-in of
 			user-defined color schemes, but it's more involved.
 		</aside>
-	</section>
+	</Tome_Section>
 	<!-- TODO @many revisit Themed_Scope
-	<section class="theme">
+	<Tome_Section class="theme">
 		<Tome_Section_Header text="Scoped themes"/>
 		<Details>
 			{#snippet summary()}⚠️ Scoped themes are a work in progress and may not be supported depending
@@ -236,9 +237,9 @@
 				{/each}
 			</div>
 		</Details>
-	</section>
+	</Tome_Section>
 	-->
-	<section class="theme">
+	<Tome_Section>
 		<Tome_Section_Header text="Example usage" />
 		<p>Themes are plain CSS that can be sourced in a variety of ways.</p>
 		<p>To use Fuz's base theme:</p>
@@ -299,8 +300,8 @@ themer.color_scheme; // '${themer.color_scheme}'`}
 				>fuz_template</a
 			>.
 		</p>
-	</section>
-	<section>
+	</Tome_Section>
+	<Tome_Section>
 		<Tome_Section_Header text="More details" />
 		<p>
 			<code>Themed</code> initializes the system's theme support. Without it, the page will not
@@ -324,7 +325,7 @@ themer.color_scheme; // '${themer.color_scheme}'`}
 			The setup script avoids flash-on-load due to color scheme, but currently themes flash in after
 			loading. We'll try to fix this when the system stabilizes.
 		</p>
-	</section>
+	</Tome_Section>
 </Tome_Content>
 
 <!-- TODO enable creating themes -->

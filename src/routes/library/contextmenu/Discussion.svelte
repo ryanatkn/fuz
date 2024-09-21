@@ -1,11 +1,12 @@
 <script lang="ts">
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
 	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
+	import Tome_Section from '$lib/Tome_Section.svelte';
 
 	// TODO buggy animations, maybe will be fixed before Svelte 5 release
 </script>
 
-<section>
+<Tome_Section>
 	<Tome_Section_Header text="Expected behaviors" />
 	<p>
 		The <code>Contextmenu</code> overrides the system contextmenu to provide capabilities specific
@@ -69,8 +70,8 @@
 			(currently broken, may remain so due to the iOS longpress workaround)
 		</li>
 	</ul>
-</section>
-<section>
+</Tome_Section>
+<Tome_Section>
 	<Tome_Section_Header text="Motivation" />
 	<p>Fuz takes two things very seriously, in no particular order:</p>
 	<ol>
@@ -114,4 +115,4 @@
 			default, so to access your system's functionality on links, tap-and-hold twice.
 		</li>
 	</ul>
-</section>
+</Tome_Section>
