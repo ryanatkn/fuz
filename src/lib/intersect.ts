@@ -26,7 +26,7 @@ export interface Intersect_Params {
 export type Intersect_Params_Or_Callback = On_Intersect | Intersect_Params;
 
 // TODO how to forward generic `el` type?
-export const intersect: Action<HTMLElement | SVGElement, Intersect_Params_Or_Callback> = (
+export const intersect: Action<HTMLElement | SVGElement, Intersect_Params_Or_Callback | null> = (
 	el,
 	initial_params,
 ) => {
@@ -37,8 +37,10 @@ export const intersect: Action<HTMLElement | SVGElement, Intersect_Params_Or_Cal
 	let intersecting: boolean;
 	let intersections: number;
 	let observer: IntersectionObserver | null;
+	let current_params: Intersect_Params_Or_Callback | null;
 
-	const set_params = (params: Intersect_Params_Or_Callback): void => {
+	const set_params = (params: Intersect_Params_Or_Callback | null): void => {
+		current_params = params;
 		// TODO not sure about this? should there be a `reset` API?
 		intersections = 0;
 		if (typeof params === 'function') {
@@ -46,26 +48,19 @@ export const intersect: Action<HTMLElement | SVGElement, Intersect_Params_Or_Cal
 			ondisconnect = undefined;
 			count = undefined;
 			options = undefined;
-		} else {
+		} else if (params) {
 			onintersect = params.onintersect;
 			ondisconnect = params.ondisconnect;
 			count = params.count;
 			options = params.options;
 		}
-	};
-	const disconnect = (): void => {
-		if (!observer) return;
-		observer.disconnect();
-		if (ondisconnect) {
-			ondisconnect({intersecting, intersections, el, observer});
-		}
-		observer = null;
+		observe();
 	};
 	const observe = (): void => {
 		if (observer) {
 			disconnect();
 		}
-		if (count === 0) return; // disable when `count` is `0`, no need to create the observer
+		if (current_params === null || count === 0) return; // disable when `count` is `0`, no need to create the observer
 		observer = new IntersectionObserver((entries) => {
 			intersecting = entries[0].isIntersecting;
 			if (onintersect && observer) {
@@ -83,14 +78,20 @@ export const intersect: Action<HTMLElement | SVGElement, Intersect_Params_Or_Cal
 		}, options);
 		observer.observe(el);
 	};
+	const disconnect = (): void => {
+		if (!observer) return;
+		observer.disconnect();
+		if (ondisconnect) {
+			ondisconnect({intersecting, intersections, el, observer});
+		}
+		observer = null;
+	};
 
 	set_params(initial_params);
-	observe();
 
 	return {
 		update: (params) => {
 			set_params(params);
-			observe();
 		},
 		destroy: disconnect,
 	};
