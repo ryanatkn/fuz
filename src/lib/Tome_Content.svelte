@@ -5,7 +5,7 @@
 	import Tome_Header from '$lib/Tome_Header.svelte';
 	import {set_tome, type Tome} from '$lib/tome.js';
 	import {get_library_links} from '$lib/library_helpers.svelte.js';
-	import {intersect} from '$lib/intersect.ts';
+	import {intersect} from '$lib/intersect.js';
 
 	interface Props {
 		tome: Tome;
