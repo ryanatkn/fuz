@@ -26,7 +26,6 @@
 
 	// TODO extract somewhere?
 	const at_root = $derived($page.url.pathname === base + library_path);
-	$inspect('at_root', at_root);
 </script>
 
 <section
