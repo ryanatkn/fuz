@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.124.3
+
+### Patch Changes
+
+- fix library layout ([2420668](https://github.com/ryanatkn/fuz/commit/2420668))
+
 ## 0.124.2
 
 ### Patch Changes
