@@ -22,16 +22,17 @@
 	const slug = slugify(tome.name);
 </script>
 
-<section class="tome_content width_md">
-	<header
-		use:intersect={({intersecting}) => {
-			if (intersecting) {
-				library_links.slugs_onscreen.add(slug);
-			} else {
-				library_links.slugs_onscreen.delete(slug);
-			}
-		}}
-	>
+<section
+	class="tome_content width_md"
+	use:intersect={({intersecting}) => {
+		if (intersecting) {
+			library_links.slugs_onscreen.add(slug);
+		} else {
+			library_links.slugs_onscreen.delete(slug);
+		}
+	}}
+>
+	<header>
 		{#if header}
 			{@render header()}
 		{:else}
