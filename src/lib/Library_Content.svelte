@@ -16,19 +16,21 @@
 	const {tomes, pkg, repo_name, content, header}: Props = $props();
 </script>
 
-{#if header}
-	{@render header()}
-{:else}
-	<div class="box mb_xl5">
-		<Package_Summary {pkg} {repo_name} />
-	</div>
-{/if}
-<div>
-	{#if content}
-		{@render content()}
+<div class="width_md">
+	{#if header}
+		{@render header()}
 	{:else}
-		{#each tomes as tome (tome)}
-			<tome.component />
-		{/each}
+		<div class="box mb_xl5">
+			<Package_Summary {pkg} {repo_name} />
+		</div>
 	{/if}
+	<div>
+		{#if content}
+			{@render content()}
+		{:else}
+			{#each tomes as tome (tome)}
+				<tome.component />
+			{/each}
+		{/if}
+	</div>
 </div>

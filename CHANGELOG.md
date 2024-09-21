@@ -152,7 +152,7 @@
 
 ### Patch Changes
 
-- fix `Tome_Subheading` layout and add `content_attrs` prop ([ca9a88a](https://github.com/ryanatkn/fuz/commit/ca9a88a))
+- fix `Tome_Section_Header` layout and add `content_attrs` prop ([ca9a88a](https://github.com/ryanatkn/fuz/commit/ca9a88a))
 - fix secondary nav layout for small screens ([ca9a88a](https://github.com/ryanatkn/fuz/commit/ca9a88a))
 
 ## 0.116.0
@@ -472,7 +472,7 @@
 
 ### Patch Changes
 
-- fix `Tome_Subheading` h4 links ([60a6ec1](https://github.com/ryanatkn/fuz/commit/60a6ec1))
+- fix `Tome_Section_Header` h4 links ([60a6ec1](https://github.com/ryanatkn/fuz/commit/60a6ec1))
 - Updated dependencies [60a6ec1]
   - @ryanatkn/fuz@0.99.3
 
@@ -480,7 +480,7 @@
 
 ### Patch Changes
 
-- fix `Tome_Subheading` indentation ([4c4c111](https://github.com/ryanatkn/fuz/commit/4c4c111))
+- fix `Tome_Section_Header` indentation ([4c4c111](https://github.com/ryanatkn/fuz/commit/4c4c111))
 - Updated dependencies [4c4c111]
   - @ryanatkn/fuz@0.99.2
 
@@ -488,7 +488,7 @@
 
 ### Patch Changes
 
-- add support for `tag` prop value `'h4'` to `Tome_Subheading` ([df0bb3c](https://github.com/ryanatkn/fuz/commit/df0bb3c))
+- add support for `tag` prop value `'h4'` to `Tome_Section_Header` ([df0bb3c](https://github.com/ryanatkn/fuz/commit/df0bb3c))
 - Updated dependencies [df0bb3c]
   - @ryanatkn/fuz@0.99.1
 
@@ -1127,7 +1127,7 @@
   ([#330](https://github.com/ryanatkn/fuz/pull/330))
 - fix theme when SSR is disabled
   ([#317](https://github.com/ryanatkn/fuz/pull/317))
-- add and publish `@ryanatkn/fuz_library/Copy_To_Clipboard.svelte`
+- add and publish `@ryanatkn/fuz/Copy_To_Clipboard.svelte`
   ([#318](https://github.com/ryanatkn/fuz/pull/318))
 - publish `$lib/prism.css`
   ([#318](https://github.com/ryanatkn/fuz/pull/318))

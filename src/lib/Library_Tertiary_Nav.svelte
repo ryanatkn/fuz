@@ -3,7 +3,7 @@
 
 	import Library_Menu from '$lib/Library_Menu.svelte';
 	import Library_Page_Links from '$lib/Library_Page_Links.svelte';
-	import {Tome} from '$lib/tome.js';
+	import {to_tome_pathname, Tome} from '$lib/tome.js';
 	import {get_library_links} from '$lib/library_helpers.svelte.js';
 
 	interface Props {
@@ -14,7 +14,7 @@
 
 	const {tomes, tomes_by_name, sidebar = true}: Props = $props();
 
-	const selected_item = $derived(tomes.find((c) => c.pathname === $page.url.pathname));
+	const selected_item = $derived(tomes.find((t) => to_tome_pathname(t) === $page.url.pathname));
 
 	const tomes_related_to_selected = $derived(
 		selected_item?.related.map((r) => tomes_by_name.get(r)!),
@@ -30,7 +30,7 @@
 		</Library_Menu>
 	{/if}
 	{#if library_links.library_links.length > 1}
-		<Library_Page_Links {library_links} {sidebar} />
+		<Library_Page_Links {sidebar} />
 	{/if}
 </aside>
 
