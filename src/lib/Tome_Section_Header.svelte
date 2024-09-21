@@ -11,7 +11,7 @@
 
 	import Hashlink from '$lib/Hashlink.svelte';
 	import {get_register_section_header} from '$lib/Tome_Section.svelte';
-	import {get_library_links, type Library_Link_Tag} from '$lib/library_helpers.svelte.js';
+	import {library_links_context, type Library_Link_Tag} from '$lib/library_helpers.svelte.js';
 
 	interface Props {
 		text: string;
@@ -32,7 +32,7 @@
 
 	const id = 'tome_section_header_' + _id++;
 
-	const library_links = get_library_links();
+	const library_links = library_links_context.get();
 
 	// Add section titles only if not on the root page.
 	// TODO make reactive?

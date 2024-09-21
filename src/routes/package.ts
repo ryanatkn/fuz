@@ -396,7 +396,10 @@ export const src_json = {
 		'./Community_Links.svelte': {path: 'Community_Links.svelte', declarations: []},
 		'./context_helpers.js': {
 			path: 'context_helpers.ts',
-			declarations: [{name: 'SvelteContext', kind: 'class'}],
+			declarations: [
+				{name: 'Svelte_Context_Options', kind: 'type'},
+				{name: 'Svelte_Context', kind: 'class'},
+			],
 		},
 		'./Contextmenu_Entry.svelte': {path: 'Contextmenu_Entry.svelte', declarations: []},
 		'./Contextmenu_Link_Entry.svelte': {path: 'Contextmenu_Link_Entry.svelte', declarations: []},
@@ -477,8 +480,7 @@ export const src_json = {
 			declarations: [
 				{name: 'DEFAULT_LIBRARY_PATH', kind: 'variable'},
 				{name: 'to_library_path_info', kind: 'function'},
-				{name: 'set_library_links', kind: 'function'},
-				{name: 'get_library_links', kind: 'function'},
+				{name: 'library_links_context', kind: 'variable'},
 				{name: 'Library_Link_Tag', kind: 'type'},
 				{name: 'Library_Link', kind: 'type'},
 				{name: 'Library_Links', kind: 'class'},
@@ -513,8 +515,7 @@ export const src_json = {
 			declarations: [
 				{name: 'Themer', kind: 'class'},
 				{name: 'Themer_Json', kind: 'type'},
-				{name: 'get_themer', kind: 'function'},
-				{name: 'set_themer', kind: 'function'},
+				{name: 'themer_context', kind: 'variable'},
 				{name: 'sync_color_scheme', kind: 'function'},
 				{name: 'COLOR_SCHEME_STORAGE_KEY', kind: 'variable'},
 				{name: 'save_color_scheme', kind: 'function'},

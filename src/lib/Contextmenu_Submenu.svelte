@@ -3,9 +3,8 @@
 	import {swallow} from '@ryanatkn/belt/dom.js';
 
 	import {
-		get_contextmenu,
-		get_contextmenu_dimensions,
-		set_contextmenu_dimensions,
+		contextmenu_context,
+		contextmenu_dimensions_context,
 	} from '$lib/contextmenu_state.svelte.js';
 	import type {Dimensions} from '$lib/dimensions.svelte.js';
 
@@ -17,7 +16,7 @@
 
 	const {icon, menu, children}: Props = $props();
 
-	const contextmenu = get_contextmenu();
+	const contextmenu = contextmenu_context.get();
 
 	const submenu = contextmenu.add_submenu();
 
@@ -27,8 +26,8 @@
 
 	let el: HTMLElement | undefined = $state();
 
-	const parent_dimensions = get_contextmenu_dimensions();
-	const dimensions = set_contextmenu_dimensions();
+	const parent_dimensions = contextmenu_dimensions_context.get();
+	const dimensions = contextmenu_dimensions_context.set();
 
 	let translate_x = $state(0);
 	let translate_y = $state(0);

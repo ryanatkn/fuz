@@ -37,6 +37,7 @@ export interface Themer_Json {
 	color_scheme: Color_Scheme;
 }
 
+// TODO BLOCK this was requiring the `themer` to `set`, maybe `Svelte_Context_Required`?
 export const themer_context = new Svelte_Context({label: 'themer', fallback: () => new Themer()});
 
 export const sync_color_scheme = (color_scheme: Color_Scheme | null): void => {
