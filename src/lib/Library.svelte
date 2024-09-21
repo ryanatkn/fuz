@@ -119,6 +119,10 @@
 		display: contents;
 	}
 
+	main {
+		min-height: calc(100vh - var(--library_primary_nav_height));
+	}
+
 	.content {
 		position: relative;
 		width: calc(100% - var(--library_sidebar_width) * 2);
@@ -142,17 +146,8 @@
 		border-radius: 0;
 	}
 
-	@media (max-width: 1200px) {
-		/* main {
-			flex-direction: column;
-		} */
-	}
-
 	/* sync this breakpoint with `Library_Tertiary_Nav` and `Tome_Section_Header` */
 	@media (max-width: 1000px) {
-		/* main { */
-		/* --library_content_max_width: calc(var(--width_md) + var(--library_content_padding)); */
-		/* } */
 		.content {
 			--library_content_padding: var(--space_xl);
 			/* handle the moved `Library_Tertiary_Nav` */
