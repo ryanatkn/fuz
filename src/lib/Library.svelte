@@ -61,26 +61,24 @@
 		</div>
 	{/if}
 	<main>
-		<div class="content">
-			{@render children()}
-			<!-- TODO @many dialog navs -->
-			{#if !innerWidth || innerWidth > TERTIARY_NAV_BREAKPOINT}
-				<Library_Tertiary_Nav {tomes} {tomes_by_name} />
-			{/if}
-			<section class="box">
-				<Library_Footer {pkg}>
-					<div class="mb_xl5">
-						<Breadcrumb>
-							{#if breadcrumb_children}
-								{@render breadcrumb_children(false)}
-							{:else}
-								{pkg.package_json.glyph ?? '🏠'}
-							{/if}
-						</Breadcrumb>
-					</div>
-				</Library_Footer>
-			</section>
-		</div>
+		{@render children()}
+		<!-- TODO @many dialog navs -->
+		{#if !innerWidth || innerWidth > TERTIARY_NAV_BREAKPOINT}
+			<Library_Tertiary_Nav {tomes} {tomes_by_name} />
+		{/if}
+		<section class="box align_self_end">
+			<Library_Footer {pkg}>
+				<div class="mb_xl5">
+					<Breadcrumb>
+						{#if breadcrumb_children}
+							{@render breadcrumb_children(false)}
+						{:else}
+							{pkg.package_json.glyph ?? '🏠'}
+						{/if}
+					</Breadcrumb>
+				</div>
+			</Library_Footer>
+		</section>
 	</main>
 </div>
 <!-- TODO @many dialog navs - instead of a dialog, probably use a popover (new component) -->
@@ -120,17 +118,15 @@
 	}
 
 	main {
-		min-height: calc(100vh - var(--library_primary_nav_height));
-	}
-
-	.content {
 		position: relative;
+		min-height: calc(100vh - var(--library_primary_nav_height));
 		width: calc(100% - var(--library_sidebar_width) * 2);
 		max-width: var(--library_content_max_width);
 		padding: var(--library_content_padding);
 		padding-top: 0;
 		margin: 0 auto;
-		overflow: hidden; /* maybe heavy-handed */
+		display: grid;
+		/* TODO maybe add `overflow: hidden;` if there are problems */
 	}
 
 	.secondary_nav_wrapper {
@@ -148,7 +144,7 @@
 
 	/* sync this breakpoint with `Library_Tertiary_Nav` and `Tome_Section_Header` */
 	@media (max-width: 1000px) {
-		.content {
+		main {
 			--library_content_padding: var(--space_xl);
 			/* handle the moved `Library_Tertiary_Nav` */
 			width: calc(100% - var(--library_sidebar_width));
@@ -162,7 +158,7 @@
 
 	/* sync this breakpoint with `Library_Primary_Nav`, `Library_Secondary_Nav`, and `Tome_Section_Header` */
 	@media (max-width: 800px) {
-		.content {
+		main {
 			/* handle the moved `Library_Secondary_Nav` */
 			width: 100%;
 			margin-left: 0;

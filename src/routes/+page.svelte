@@ -12,7 +12,7 @@
 </script>
 
 <main class="box w_100">
-	<div class="box width_md">
+	<div class="box width_md mb_xl9">
 		<section class="box">
 			<h1 class="mt_xl4 mb_lg">fuz</h1>
 			<div class="box mb_xl"><Fuz_Logo size="var(--icon_size_xl2)" /></div>

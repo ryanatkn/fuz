@@ -23,7 +23,7 @@
 </script>
 
 <section
-	class="tome_content width_md"
+	class="tome_content width_md mb_xl9"
 	use:intersect={({intersecting}) => {
 		if (intersecting) {
 			library_links.slugs_onscreen.add(slug);
@@ -32,7 +32,7 @@
 		}
 	}}
 >
-	<header>
+	<header class="mb_xl3">
 		{#if header}
 			{@render header()}
 		{:else}
@@ -41,12 +41,3 @@
 	</header>
 	{@render children()}
 </section>
-
-<style>
-	.tome_content {
-		margin-bottom: var(--space_xl9);
-	}
-	header {
-		margin-bottom: var(--space_xl3);
-	}
-</style>
