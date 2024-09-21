@@ -62,12 +62,12 @@
 	<Tome_Section>
 		<Tome_Section_Header text="As the selected link" />
 		<Code
-			content={`<Card href="${base}/library/card">
+			content={`<Card href="${href}/card">
   href is<br />
   selected
 </Card>`}
 		/>
-		<Card href="{href}/Card">
+		<Card href="{href}/card">
 			href is<br />
 			selected
 		</Card>
