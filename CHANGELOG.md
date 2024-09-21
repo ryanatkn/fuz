@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.124.4
+
+### Patch Changes
+
+- fix library nav highlight ([#55](https://github.com/ryanatkn/fuz/pull/55))
+
 ## 0.124.3
 
 ### Patch Changes
