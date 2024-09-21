@@ -16,7 +16,7 @@
 	import Theme_Form from '$routes/Theme_Form.svelte';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
 	// import Themed_Scope from '$routes/library/themed/Themed_Scope.svelte'; // TODO @many revisit Themed_Scope
-	import {get_themer} from '$lib/theme.svelte.js';
+	import {themer_context} from '$lib/theme.svelte.js';
 
 	const LIBRARY_ITEM_NAME = 'Themed';
 
@@ -24,7 +24,7 @@
 
 	const themes = default_themes.slice();
 
-	const themer = get_themer();
+	const themer = themer_context.get_or_throw();
 
 	// let show_create_theme_dialog = false;
 	let editing_theme: null | Theme = $state(null);
@@ -73,11 +73,12 @@
 				<p>
 					<code>Themed</code> is designed to wrap every page at the top level so it can provide the
 					selected theme and color scheme in the Svelte context via a <code>themer</code> instance.
-					It works without children, but <code>get_themer</code> will fail unless you call
-					<code>set_themer</code> yourself.
+					It works without children, but <code>themer_context.get()</code> will fail unless you call
+					<code>themer_context.set()</code> yourself.
 				</p>
 				<p>
-					This lets you call <code>get_themer</code> to access the reactive <code>Themer</code>
+					This lets you call <code>themer_context.get()</code> to access the reactive
+					<code>Themer</code>
 					class instance anywhere in your code. The helper components on this page like
 					<code>Color_Scheme_Input</code> and <code>Theme_Input</code> use it so they don't require
 					a <code>themer</code> prop.
@@ -96,7 +97,7 @@
 <Themed {themer} />
 <!--
 	sibling components not nested in \`Themed\`
-	can now call \`get_themer\`
+	can now call \`themer_context.get()\`
 -->`}
 				/>
 			</aside>
@@ -138,8 +139,9 @@
 					By default, <code>Color_Scheme_Input</code> works with <code>Themed</code>'s
 					<code>themer</code> in context to save the user's preference to <code>localStorage</code>.
 					To customize this behavior, pass your own <code>value</code> or <code>onchange</code>
-					props. The <code>value</code> defaults to <code>get_themer()</code> so technically you
-					could call <code>set_themer</code>, but it's unlikely you want to override it in context.
+					props. The <code>value</code> defaults to <code>themer_context.get()</code> so technically
+					you could call <code>set_themer</code>, but it's unlikely you want to override it in
+					context.
 				</p>
 			</aside>
 		</Details>
@@ -289,8 +291,8 @@
 		<Code
 			content={`// get values from the Svelte context provided by
 // the nearest \`Themed\` ancestor:
-import {get_themer} from '@ryanatkn/fuz/theme.js';
-const themer = get_themer();
+import {themer_context} from '@ryanatkn/fuz/theme.js';
+const themer = themer_context.get();
 themer.theme.name; // '${themer.theme.name}'
 themer.color_scheme; // '${themer.color_scheme}'`}
 			lang="ts"
