@@ -125,11 +125,7 @@
 		padding: var(--library_content_padding);
 		padding-top: 0;
 		margin: 0 auto;
-		overflow: hidden; /* TODO maybe remove this and force users to deal with it, do in combination with the below */
-		/* TODO tried this along with `align_self_end` on the `box`
-		to put the breadcrumb at the bottom but it messes up the Moss layout, revisit
-		display: grid;
-		 */
+		overflow: hidden; /* TODO maybe heavy handed */
 	}
 
 	.secondary_nav_wrapper {

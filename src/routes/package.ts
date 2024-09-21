@@ -107,6 +107,10 @@ export const package_json = {
 			svelte: './dist/Community_Links.svelte',
 			default: './dist/Community_Links.svelte',
 		},
+		'./context_helpers.js': {
+			types: './dist/context_helpers.d.ts',
+			default: './dist/context_helpers.js',
+		},
 		'./Contextmenu_Entry.svelte': {
 			types: './dist/Contextmenu_Entry.svelte.d.ts',
 			svelte: './dist/Contextmenu_Entry.svelte',
@@ -390,6 +394,10 @@ export const src_json = {
 		'./Color_Scheme_Input.svelte': {path: 'Color_Scheme_Input.svelte', declarations: []},
 		'./Community_Links_Panel.svelte': {path: 'Community_Links_Panel.svelte', declarations: []},
 		'./Community_Links.svelte': {path: 'Community_Links.svelte', declarations: []},
+		'./context_helpers.js': {
+			path: 'context_helpers.ts',
+			declarations: [{name: 'SvelteContext', kind: 'class'}],
+		},
 		'./Contextmenu_Entry.svelte': {path: 'Contextmenu_Entry.svelte', declarations: []},
 		'./Contextmenu_Link_Entry.svelte': {path: 'Contextmenu_Link_Entry.svelte', declarations: []},
 		'./Contextmenu_Root.svelte': {path: 'Contextmenu_Root.svelte', declarations: []},

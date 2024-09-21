@@ -3,7 +3,7 @@
 
 	import Library from '$lib/Library.svelte';
 	import {tomes} from '$routes/library/tomes.js';
-	import {set_selected_variable} from '$routes/style_variable_helpers.svelte.js';
+	import {selected_variable_context} from '$routes/style_variable_helpers.svelte.js';
 	import Style_Variable_Detail from '$routes/Style_Variable_Detail.svelte';
 	import Dialog from '$lib/Dialog.svelte';
 	import {get_pkg} from '$routes/pkg.js';
@@ -15,7 +15,8 @@
 
 	const {children}: Props = $props();
 
-	const selected_variable = set_selected_variable();
+	const selected_variable = selected_variable_context.set();
+	console.log(`selected_variable.value`, selected_variable.value);
 
 	const pkg = get_pkg();
 </script>
