@@ -16,7 +16,7 @@
 
 	// TODO this could be a prop passed by `Breadcrumb`, is commonly needed
 	const {pathname} = $derived($page.url);
-	const selected_root = $derived(pathname === '/');
+	const selected_root = $derived(pathname === '/'); // TODO BLOCK at_root
 
 	const iframed = is_iframed();
 	const enabled = !iframed;
