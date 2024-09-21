@@ -1,1 +1,0 @@
-import{ag as o,ah as e,ai as a,v as u}from"./runtime.CdlCIzqX.js";function c(n){o===null&&e(),o.l!==null?i(o).m.push(n):a(()=>{const t=u(n);if(typeof t=="function")return t})}function r(n){o===null&&e(),c(()=>()=>u(n))}function i(n){var t=n.l;return t.u??(t.u={a:[],b:[],m:[]})}export{c as a,r as o};

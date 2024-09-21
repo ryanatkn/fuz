@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.123.0",
+  "version": "0.124.0",
   "modules": {
     "./package.json": {
       "path": "package.json",
@@ -235,6 +235,39 @@
       "path": "Hue_Input.svelte",
       "declarations": []
     },
+    "./intersect.js": {
+      "path": "intersect.ts",
+      "declarations": [
+        {
+          "name": "Intersect_Params",
+          "kind": "type"
+        },
+        {
+          "name": "Intersect_Params_Or_Callback",
+          "kind": "type"
+        },
+        {
+          "name": "intersect",
+          "kind": "function"
+        },
+        {
+          "name": "On_Intersect",
+          "kind": "type"
+        },
+        {
+          "name": "Intersect_State",
+          "kind": "type"
+        },
+        {
+          "name": "On_Disconnect",
+          "kind": "type"
+        },
+        {
+          "name": "Disconnect_State",
+          "kind": "type"
+        }
+      ]
+    },
     "./Library_Content.svelte": {
       "path": "Library_Content.svelte",
       "declarations": []
@@ -267,7 +300,7 @@
           "kind": "type"
         },
         {
-          "name": "Library_Link_Data",
+          "name": "Library_Link",
           "kind": "type"
         },
         {
@@ -430,16 +463,20 @@
       "path": "Tome_Content.svelte",
       "declarations": []
     },
+    "./Tome_Header.svelte": {
+      "path": "Tome_Header.svelte",
+      "declarations": []
+    },
     "./Tome_Link.svelte": {
       "path": "Tome_Link.svelte",
       "declarations": []
     },
-    "./Tome_Subheading.svelte": {
-      "path": "Tome_Subheading.svelte",
+    "./Tome_Section_Header.svelte": {
+      "path": "Tome_Section_Header.svelte",
       "declarations": []
     },
-    "./Tome_Title.svelte": {
-      "path": "Tome_Title.svelte",
+    "./Tome_Section.svelte": {
+      "path": "Tome_Section.svelte",
       "declarations": []
     },
     "./tome.js": {
@@ -450,7 +487,7 @@
           "kind": "variable"
         },
         {
-          "name": "init_tome",
+          "name": "to_tome_pathname",
           "kind": "function"
         },
         {
@@ -462,7 +499,15 @@
           "kind": "function"
         },
         {
+          "name": "get_tome_by_name",
+          "kind": "function"
+        },
+        {
           "name": "get_tome",
+          "kind": "function"
+        },
+        {
+          "name": "set_tome",
           "kind": "function"
         }
       ]
