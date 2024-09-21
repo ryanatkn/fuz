@@ -5,6 +5,10 @@ export interface Svelte_Context_Options<T> {
 	fallback?: () => T;
 }
 
+/**
+ * Wraps Svelte's `setContext` and `getContext` for better ergonmics.
+ * The `label` option enhances error messages.
+ */
 export class Svelte_Context<T> {
 	label?: string;
 	key: symbol;
