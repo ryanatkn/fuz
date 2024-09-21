@@ -10,7 +10,7 @@
 	}
 
 	const {
-		value = themer_context.get_or_throw(),
+		value = themer_context.get(),
 		onchange = (color_scheme) => {
 			value.color_scheme = color_scheme; // won't work with POJOs but users could provide their own onchange in that case
 		},

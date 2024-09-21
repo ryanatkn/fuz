@@ -26,7 +26,7 @@
 		return v;
 	});
 
-	const selected_variable = selected_variable_context.get_or_throw();
+	const selected_variable = selected_variable_context.get();
 </script>
 
 <button

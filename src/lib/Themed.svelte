@@ -15,7 +15,7 @@
 		sync_color_scheme as default_sync_color_scheme,
 		save_theme as default_save_theme,
 		load_theme as default_load_theme,
-		set_themer,
+		themer_context,
 		create_theme_style_html,
 		Themer,
 	} from '$lib/theme.svelte.js';
@@ -85,7 +85,7 @@
 	//  * There is some duplicated code between the two,
 	//  * but combining them was too complicated both internally and externally.
 
-	set_themer(themer);
+	themer_context.set(themer);
 
 	const selected_theme_name = $derived(themer.theme.name);
 	const style = $derived(

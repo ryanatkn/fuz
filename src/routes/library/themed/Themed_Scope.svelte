@@ -27,10 +27,7 @@
 	}
 
 	const {
-		themer = new Themer(
-			themer_context.get_or_throw().theme,
-			themer_context.get_or_throw().color_scheme,
-		),
+		themer = new Themer(themer_context.get().theme, themer_context.get().color_scheme),
 		tagName = 'div',
 		children,
 	}: Props = $props();

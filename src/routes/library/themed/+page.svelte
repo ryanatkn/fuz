@@ -24,7 +24,7 @@
 
 	const themes = default_themes.slice();
 
-	const themer = themer_context.get_or_throw();
+	const themer = themer_context.get();
 
 	// let show_create_theme_dialog = false;
 	let editing_theme: null | Theme = $state(null);

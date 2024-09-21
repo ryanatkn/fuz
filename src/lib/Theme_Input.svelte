@@ -15,7 +15,7 @@
 	}
 
 	const {
-		selected_theme = themer_context.get_or_throw(),
+		selected_theme = themer_context.get(),
 		themes = default_themes,
 		enable_editing = false,
 		select = (theme) => {

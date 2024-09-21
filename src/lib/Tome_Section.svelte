@@ -22,7 +22,7 @@
 
 	const {attrs, children}: Props = $props();
 
-	const library_links = library_links_context.get_or_throw();
+	const library_links = library_links_context.get();
 
 	let slug: string;
 

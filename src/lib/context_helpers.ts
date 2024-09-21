@@ -20,12 +20,14 @@ export class Svelte_Context<T> {
 		this.fallback = options?.fallback;
 	}
 
-	get(): T | undefined {
+	// TODO this is incorrectly named in the case that a fallback is provided, there's no maybe in that case,
+	// and I can't see how to get the ideal API with a single class because it depends on the `fallback` constructor option
+	maybe_get(): T | undefined {
 		return getContext(this.key) ?? this.fallback?.();
 	}
 
-	get_or_throw(message?: string): T {
-		const value = this.get();
+	get(message?: string): T {
+		const value = this.maybe_get();
 		if (value === undefined) {
 			throw Error(message ?? 'context value not set' + (this.label ? ` for "${this.label}"` : ''));
 		}

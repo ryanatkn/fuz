@@ -4,7 +4,7 @@
 	import Library_Menu from '$lib/Library_Menu.svelte';
 	import Library_Page_Links from '$lib/Library_Page_Links.svelte';
 	import {to_tome_pathname, Tome} from '$lib/tome.js';
-	import {get_library_links} from '$lib/library_helpers.svelte.js';
+	import {library_links_context} from '$lib/library_helpers.svelte.js';
 
 	interface Props {
 		tomes: Tome[];
@@ -20,7 +20,7 @@
 		selected_item?.related.map((r) => tomes_by_name.get(r)!),
 	);
 
-	const library_links = get_library_links();
+	const library_links = library_links_context.get();
 </script>
 
 <aside class="library_tertiary_nav unstyled">
