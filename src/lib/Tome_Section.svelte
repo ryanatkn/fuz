@@ -10,6 +10,7 @@
 <script lang="ts">
 	import {getContext, setContext, type Snippet} from 'svelte';
 	import type {SvelteHTMLElements} from 'svelte/elements';
+	import {DEV} from 'esm-env';
 
 	import {intersect} from '$lib/intersect.ts';
 	import {get_library_links} from '$lib/library_helpers.svelte.js';
@@ -39,6 +40,10 @@
 <section
 	{...attrs}
 	use:intersect={({intersecting}) => {
+		if (!slug) {
+			if (DEV) console.error('Tome_Section_Header must be a child of Tome_Section'); // eslint-disable-line no-console
+			return;
+		}
 		if (intersecting) {
 			library_links.slugs_onscreen.add(slug);
 		} else {

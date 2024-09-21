@@ -60,7 +60,7 @@
 	/* TODO @many should be a CSS component class or variable, maybe should be the default?
 	problem is it doesn't work on .bg, maybe needs a variant/modifier in the name? */
 	a.highlighted {
-		background-color: var(--bg_3);
+		background-color: var(--bg_4);
 	}
 	a:hover {
 		background-color: var(--bg_5);
