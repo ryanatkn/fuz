@@ -1,14 +1,19 @@
 import {getContext, setContext} from 'svelte';
 
-export class SvelteContext<T> {
+export interface Svelte_Context_Options<T> {
+	label?: string;
+	fallback?: () => T;
+}
+
+export class Svelte_Context<T> {
 	label?: string;
 	key: symbol;
 	fallback: (() => T) | undefined;
 
-	constructor(fallback?: () => T, label?: string) {
-		this.fallback = fallback;
-		this.label = label;
-		this.key = Symbol(label);
+	constructor(options?: Svelte_Context_Options<T>) {
+		this.label = options?.label;
+		this.key = Symbol(this.label);
+		this.fallback = options?.fallback;
 	}
 
 	get(): T | undefined {

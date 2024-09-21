@@ -16,7 +16,6 @@
 	const {children}: Props = $props();
 
 	const selected_variable = selected_variable_context.set();
-	console.log(`selected_variable.value`, selected_variable.value);
 
 	const pkg = get_pkg();
 </script>
