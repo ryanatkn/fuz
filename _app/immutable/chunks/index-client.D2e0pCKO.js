@@ -1,1 +1,0 @@
-import{af as o,ag as e,ah as a,u}from"./runtime.TFn0e1ji.js";function c(n){o===null&&e(),o.l!==null?f(o).m.push(n):a(()=>{const t=u(n);if(typeof t=="function")return t})}function l(n){o===null&&e(),c(()=>()=>u(n))}function f(n){var t=n.l;return t.u??(t.u={a:[],b:[],m:[]})}export{c as a,l as o};
