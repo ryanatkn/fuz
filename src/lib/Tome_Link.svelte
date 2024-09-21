@@ -5,7 +5,7 @@
 	import {DEV} from 'esm-env';
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
-	import {get_tome_by_name} from '$lib/tome.ts';
+	import {get_tome_by_name} from '$lib/tome.js';
 
 	interface Props {
 		name: string; // TODO type, generate from `tomes`?

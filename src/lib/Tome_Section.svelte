@@ -12,7 +12,7 @@
 	import type {SvelteHTMLElements} from 'svelte/elements';
 	import {DEV} from 'esm-env';
 
-	import {intersect} from '$lib/intersect.ts';
+	import {intersect} from '$lib/intersect.js';
 	import {get_library_links} from '$lib/library_helpers.svelte.js';
 
 	interface Props {
