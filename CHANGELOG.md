@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.124.2
+
+### Patch Changes
+
+- fix more imports ([7eec3af](https://github.com/ryanatkn/fuz/commit/7eec3af))
+
 ## 0.124.1
 
 ### Patch Changes
