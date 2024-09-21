@@ -24,7 +24,6 @@
 
 	const slug = slugify(tome.name);
 
-	// TODO extract somewhere?
 	const at_root = $derived($page.url.pathname === base + library_path);
 </script>
 
