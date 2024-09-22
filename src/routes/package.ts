@@ -186,11 +186,6 @@ export const package_json = {
 			svelte: './dist/Fuzling.svelte',
 			default: './dist/Fuzling.svelte',
 		},
-		'./Gro_Logo.svelte': {
-			types: './dist/Gro_Logo.svelte.d.ts',
-			svelte: './dist/Gro_Logo.svelte',
-			default: './dist/Gro_Logo.svelte',
-		},
 		'./Hashlink.svelte': {
 			types: './dist/Hashlink.svelte.d.ts',
 			svelte: './dist/Hashlink.svelte',
@@ -452,7 +447,6 @@ export const src_json = {
 			],
 		},
 		'./Fuzling.svelte': {path: 'Fuzling.svelte', declarations: []},
-		'./Gro_Logo.svelte': {path: 'Gro_Logo.svelte', declarations: []},
 		'./Hashlink.svelte': {path: 'Hashlink.svelte', declarations: []},
 		'./Hidden_Personal_Links.svelte': {path: 'Hidden_Personal_Links.svelte', declarations: []},
 		'./Hue_Input.svelte': {path: 'Hue_Input.svelte', declarations: []},
@@ -487,7 +481,13 @@ export const src_json = {
 		'./Library_Secondary_Nav.svelte': {path: 'Library_Secondary_Nav.svelte', declarations: []},
 		'./Library_Tertiary_Nav.svelte': {path: 'Library_Tertiary_Nav.svelte', declarations: []},
 		'./Library.svelte': {path: 'Library.svelte', declarations: []},
-		'./logos.js': {path: 'logos.ts', declarations: [{name: 'github_logo', kind: 'variable'}]},
+		'./logos.js': {
+			path: 'logos.ts',
+			declarations: [
+				{name: 'gro_logo', kind: 'variable'},
+				{name: 'github_logo', kind: 'variable'},
+			],
+		},
 		'./Mdn_Link.svelte': {path: 'Mdn_Link.svelte', declarations: []},
 		'./Mdn_Logo.svelte': {path: 'Mdn_Logo.svelte', declarations: []},
 		'./Moss_Logo.svelte': {path: 'Moss_Logo.svelte', declarations: []},

@@ -2,8 +2,9 @@
 	import Zzz_Logo from '$lib/Zzz_Logo.svelte';
 	import Moss_Logo from '$lib/Moss_Logo.svelte';
 	import Fuz_Logo from '$lib/Fuz_Logo.svelte';
-	import Gro_Logo from '$lib/Gro_Logo.svelte';
 	import Fuzling from '$lib/Fuzling.svelte';
+	import Svg from '$lib/Svg.svelte';
+	import {gro_logo} from '$lib/logos.js';
 
 	const size = 'var(--icon_size_lg)';
 </script>
@@ -22,7 +23,7 @@
 <a
 	class="project_link"
 	title="Gro - task runner and toolkit extending SvelteKit"
-	href="https://gro.ryanatkn.com/"><Gro_Logo {size} /><span class="name">Gro</span></a
+	href="https://gro.ryanatkn.com/"><Svg data={gro_logo} {size} /><span class="name">Gro</span></a
 >
 <a
 	class="project_link"

@@ -10,10 +10,9 @@
 	import Webdevladder_Logo from '$lib/Webdevladder_Logo.svelte';
 	import Earbetter_Logo from '$lib/Earbetter_Logo.svelte';
 	import Moss_Logo from '$lib/Moss_Logo.svelte';
-	import Gro_Logo from '$lib/Gro_Logo.svelte';
 	import Spiderspace_Logo from '$lib/Spiderspace_Logo.svelte';
 	import Svg from '$lib/Svg.svelte';
-	import {github_logo} from '$lib/logos.js';
+	import {gro_logo, github_logo} from '$lib/logos.js';
 
 	const LIBRARY_ITEM_NAME = 'logos';
 
@@ -30,8 +29,8 @@
 				<a href="https://moss.ryanatkn.com/"><Moss_Logo size="var(--icon_size_xl3)" /></a>
 			</li>
 			<li>
-				<Code content={`<Gro_Logo />`} />
-				<a href="https://gro.ryanatkn.com/"><Gro_Logo size="var(--icon_size_xl3)" /></a>
+				<Code content={`<Svg data={gro_logo} />`} />
+				<a href="https://gro.ryanatkn.com/"><Svg data={gro_logo} size="var(--icon_size_xl3)" /></a>
 			</li>
 			<li>
 				<Code content={`<Fuz_Logo />`} />
