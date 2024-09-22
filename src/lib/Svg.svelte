@@ -43,9 +43,12 @@
 	class={classes}
 	class:inline
 >
-	{#each data.paths as path (path)}
-		<path fill={final_fill} {...path} />
-	{/each}
+	{#if data.raw}{@html data.raw}{/if}<!-- eslint-disable-line svelte/no-at-html-tags -->
+	{#if data.paths}
+		{#each data.paths as path (path)}
+			<path fill={final_fill} {...path} />
+		{/each}
+	{/if}
 </svg>
 
 <style>

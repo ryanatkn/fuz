@@ -7,9 +7,15 @@
 	import Fuz_Logo from '$lib/Fuz_Logo.svelte';
 	import Mdn_Logo from '$lib/Mdn_Logo.svelte';
 	import Moss_Logo from '$lib/Moss_Logo.svelte';
-	import Spiderspace_Logo from '$lib/Spiderspace_Logo.svelte';
 	import Svg from '$lib/Svg.svelte';
-	import {zzz_logo, gro_logo, webdevladder_logo, earbetter_logo, github_logo} from '$lib/logos.js';
+	import {
+		zzz_logo,
+		gro_logo,
+		webdevladder_logo,
+		earbetter_logo,
+		spiderspace_logo,
+		github_logo,
+	} from '$lib/logos.js';
 
 	const LIBRARY_ITEM_NAME = 'logos';
 
@@ -72,8 +78,10 @@
 				>
 			</li>
 			<li>
-				<Code content={`<Spiderspace_Logo />`} />
-				<a href="https://www.spiderspace.org/"><Spiderspace_Logo size="var(--icon_size_xl3)" /></a>
+				<Code content={`<Svg data={spiderspace_logo} />`} />
+				<a href="https://www.spiderspace.org/"
+					><Svg data={spiderspace_logo} size="var(--icon_size_xl3)" /></a
+				>
 			</li>
 			<li>
 				<Code content={`<Svg data={github_logo} />`} />

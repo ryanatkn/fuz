@@ -301,11 +301,6 @@ export const package_json = {
 			svelte: './dist/Spiders.svelte',
 			default: './dist/Spiders.svelte',
 		},
-		'./Spiderspace_Logo.svelte': {
-			types: './dist/Spiderspace_Logo.svelte.d.ts',
-			svelte: './dist/Spiderspace_Logo.svelte',
-			default: './dist/Spiderspace_Logo.svelte',
-		},
 		'./Svg.svelte': {
 			types: './dist/Svg.svelte.d.ts',
 			svelte: './dist/Svg.svelte',
@@ -472,6 +467,7 @@ export const src_json = {
 				{name: 'gro_logo', kind: 'variable'},
 				{name: 'webdevladder_logo', kind: 'variable'},
 				{name: 'earbetter_logo', kind: 'variable'},
+				{name: 'spiderspace_logo', kind: 'variable'},
 				{name: 'github_logo', kind: 'variable'},
 			],
 		},
@@ -490,7 +486,6 @@ export const src_json = {
 		},
 		'./Spider.svelte': {path: 'Spider.svelte', declarations: []},
 		'./Spiders.svelte': {path: 'Spiders.svelte', declarations: []},
-		'./Spiderspace_Logo.svelte': {path: 'Spiderspace_Logo.svelte', declarations: []},
 		'./Svg.svelte': {path: 'Svg.svelte', declarations: []},
 		'./svg.js': {path: 'svg.ts', declarations: [{name: 'Svg_Data', kind: 'type'}]},
 		'./Teleport.svelte': {path: 'Teleport.svelte', declarations: []},

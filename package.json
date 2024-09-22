@@ -340,11 +340,6 @@
       "svelte": "./dist/Spiders.svelte",
       "default": "./dist/Spiders.svelte"
     },
-    "./Spiderspace_Logo.svelte": {
-      "types": "./dist/Spiderspace_Logo.svelte.d.ts",
-      "svelte": "./dist/Spiderspace_Logo.svelte",
-      "default": "./dist/Spiderspace_Logo.svelte"
-    },
     "./Svg.svelte": {
       "types": "./dist/Svg.svelte.d.ts",
       "svelte": "./dist/Svg.svelte",
