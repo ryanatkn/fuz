@@ -60,6 +60,8 @@ export function create_context<T>(options: {
 // The only advantage I see of this version is that
 // the user gets to decide if it's required or optional with each get,
 // instead of defining optionality up front.
+// It can be rewritten as 3 different classes, but that's a lot more code to ship
+// and would still need the `create_context` function to avoid pushing the complexity onto users.
 
 // export interface Svelte_Context_Options<T> {
 // 	/**
