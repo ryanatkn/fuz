@@ -2,7 +2,13 @@ import {getContext, setContext} from 'svelte';
 import {DEV} from 'esm-env';
 
 export interface Svelte_Context_Options<T> {
+	/**
+	 * Improves error messages.
+	 */
 	label?: string;
+	/**
+	 * Provides a default value when the context is not set.
+	 */
 	fallback?: () => T;
 }
 
