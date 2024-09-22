@@ -11,7 +11,6 @@ export const github_logo: Svg_Data = {
 			transform: 'scale(64)',
 		},
 	],
-	fill: 'var(--text_color, #000)', // TODO BLOCK remove? maybe this should be the default in the `Svg` component?
 	label: 'the GitHub icon, an octocat silhouette',
 	viewBox: '0 0 1024 1024',
 };

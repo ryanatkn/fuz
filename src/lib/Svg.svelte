@@ -30,8 +30,8 @@
 	const {data, fill, size, width, height, label, inline, classes, attrs}: Props = $props();
 
 	const final_fill = $derived(fill ?? data.fill ?? 'var(--text_color, #000)');
-	const final_width = $derived(width ?? size); // TODO @many default value?
-	const final_height = $derived(height ?? size); // TODO @many default value?
+	const final_width = $derived(width ?? size); // TODO @many default value? `100%` or omitted or something else?
+	const final_height = $derived(height ?? size); // TODO @many default value? `100%` or omitted or something else?
 </script>
 
 <svg
