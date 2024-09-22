@@ -2,11 +2,7 @@ import {getContext, setContext} from 'svelte';
 
 // This uses a function instead of a class because of the overloaded type signatures.
 // The first attempt at a class-based version is commented out at the bottom of the file.
-
-// TODO document examples:
-// const context = create_context({label: 'required_with_fallback', fallback: () => 'fallback'});
-// const context = create_context<SomeType>({label: 'required_and_throws_on_undefined'});
-// const context = create_context<SomeType>({label: 'optional_and_may_get_undefined', optional: true});
+// See https://github.com/ryanatkn/fuz/pull/56 for more.
 
 /**
  * Wraps Svelte's `setContext` and `getContext` for better ergonmics.
