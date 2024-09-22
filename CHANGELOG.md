@@ -1,5 +1,60 @@
 # @ryanatkn/fuz
 
+## 0.125.0
+
+### Minor Changes
+
+- add a `create_context` helper ([#56](https://github.com/ryanatkn/fuz/pull/56))
+
+## 0.124.4
+
+### Patch Changes
+
+- fix library nav highlight ([#55](https://github.com/ryanatkn/fuz/pull/55))
+
+## 0.124.3
+
+### Patch Changes
+
+- fix library layout ([2420668](https://github.com/ryanatkn/fuz/commit/2420668))
+
+## 0.124.2
+
+### Patch Changes
+
+- fix more imports ([7eec3af](https://github.com/ryanatkn/fuz/commit/7eec3af))
+
+## 0.124.1
+
+### Patch Changes
+
+- fix imports ([b23c745](https://github.com/ryanatkn/fuz/commit/b23c745))
+
+## 0.124.0
+
+### Minor Changes
+
+- improve library styles ([#54](https://github.com/ryanatkn/fuz/pull/54))
+
+  - rename `Tome_Header` from `Tome_Title`
+  - rename `Tome_Section_Header` from `Tome_Subheading`
+  - rename `Library_Link` from `Library_Link_Data`
+  - rename `get_tome_by_name` from `get_tome`
+  - use belt's `slugify`, which lowercases, and remove `tome.slug` and `tome.pathname`
+
+## 0.123.0
+
+### Minor Changes
+
+- rename `Tome_Content` from `Tome_Content` ([#53](https://github.com/ryanatkn/fuz/pull/53))
+- add snippets to `Library_Content` to customize the root page and remove the `root_path` prop ([#52](https://github.com/ryanatkn/fuz/pull/52))
+
+## 0.122.1
+
+### Patch Changes
+
+- fix `Breadcrumb` when `base` is defined ([#51](https://github.com/ryanatkn/fuz/pull/51))
+
 ## 0.122.0
 
 ### Minor Changes
@@ -139,7 +194,7 @@
 
 ### Patch Changes
 
-- fix `Tome_Subheading` layout and add `content_attrs` prop ([ca9a88a](https://github.com/ryanatkn/fuz/commit/ca9a88a))
+- fix `Tome_Section_Header` layout and add `content_attrs` prop ([ca9a88a](https://github.com/ryanatkn/fuz/commit/ca9a88a))
 - fix secondary nav layout for small screens ([ca9a88a](https://github.com/ryanatkn/fuz/commit/ca9a88a))
 
 ## 0.116.0
@@ -459,7 +514,7 @@
 
 ### Patch Changes
 
-- fix `Tome_Subheading` h4 links ([60a6ec1](https://github.com/ryanatkn/fuz/commit/60a6ec1))
+- fix `Tome_Section_Header` h4 links ([60a6ec1](https://github.com/ryanatkn/fuz/commit/60a6ec1))
 - Updated dependencies [60a6ec1]
   - @ryanatkn/fuz@0.99.3
 
@@ -467,7 +522,7 @@
 
 ### Patch Changes
 
-- fix `Tome_Subheading` indentation ([4c4c111](https://github.com/ryanatkn/fuz/commit/4c4c111))
+- fix `Tome_Section_Header` indentation ([4c4c111](https://github.com/ryanatkn/fuz/commit/4c4c111))
 - Updated dependencies [4c4c111]
   - @ryanatkn/fuz@0.99.2
 
@@ -475,7 +530,7 @@
 
 ### Patch Changes
 
-- add support for `tag` prop value `'h4'` to `Tome_Subheading` ([df0bb3c](https://github.com/ryanatkn/fuz/commit/df0bb3c))
+- add support for `tag` prop value `'h4'` to `Tome_Section_Header` ([df0bb3c](https://github.com/ryanatkn/fuz/commit/df0bb3c))
 - Updated dependencies [df0bb3c]
   - @ryanatkn/fuz@0.99.1
 
@@ -1114,7 +1169,7 @@
   ([#330](https://github.com/ryanatkn/fuz/pull/330))
 - fix theme when SSR is disabled
   ([#317](https://github.com/ryanatkn/fuz/pull/317))
-- add and publish `@ryanatkn/fuz_library/Copy_To_Clipboard.svelte`
+- add and publish `@ryanatkn/fuz/Copy_To_Clipboard.svelte`
   ([#318](https://github.com/ryanatkn/fuz/pull/318))
 - publish `$lib/prism.css`
   ([#318](https://github.com/ryanatkn/fuz/pull/318))

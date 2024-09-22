@@ -1,5 +1,4 @@
 <script lang="ts">
-	import {page} from '$app/stores';
 	import {is_iframed} from '@ryanatkn/belt/dom.js';
 	import type {Snippet} from 'svelte';
 	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
@@ -14,10 +13,6 @@
 
 	const {pkg, breadcrumb_children, children}: Props = $props();
 
-	// TODO this could be a prop passed by `Breadcrumb`, is commonly needed
-	const {pathname} = $derived($page.url);
-	const selected_root = $derived(pathname === '/');
-
 	const iframed = is_iframed();
 	const enabled = !iframed;
 
@@ -31,7 +26,7 @@
 	<div class="library_primary_nav" class:scrolled>
 		<div class="background" aria-hidden="true"></div>
 		<div class="content">
-			<nav aria-label="Primary" class:selected_root>
+			<nav aria-label="Primary">
 				<Breadcrumb>
 					{#if breadcrumb_children}
 						{@render breadcrumb_children(true)}
@@ -40,7 +35,7 @@
 					{/if}
 				</Breadcrumb>
 			</nav>
-			{#if children}{@render children()}{/if}
+			{@render children?.()}
 		</div>
 	</div>
 {/if}
@@ -94,9 +89,5 @@
 		nav {
 			--size: var(--size_md);
 		}
-	}
-
-	.selected_root {
-		--text_decoration_selected: none;
 	}
 </style>

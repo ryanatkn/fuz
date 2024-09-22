@@ -3,7 +3,7 @@
 	import type {Theme} from '@ryanatkn/moss/theme.js';
 	import {default_themes} from '@ryanatkn/moss/themes.js';
 
-	import {get_themer} from '$lib/theme.svelte.js';
+	import {themer_context} from '$lib/theme.svelte.js';
 
 	interface Props {
 		selected_theme?: {theme: Theme};
@@ -15,7 +15,7 @@
 	}
 
 	const {
-		selected_theme = get_themer(),
+		selected_theme = themer_context.get(),
 		themes = default_themes,
 		enable_editing = false,
 		select = (theme) => {

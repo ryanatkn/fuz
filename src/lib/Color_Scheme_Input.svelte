@@ -2,7 +2,7 @@
 	import {swallow} from '@ryanatkn/belt/dom.js';
 	import {color_schemes, type Color_Scheme} from '@ryanatkn/moss/theme.js';
 
-	import {get_themer} from '$lib/theme.svelte.js';
+	import {themer_context} from '$lib/theme.svelte.js';
 
 	interface Props {
 		value?: {color_scheme: Color_Scheme};
@@ -10,7 +10,7 @@
 	}
 
 	const {
-		value = get_themer(),
+		value = themer_context.get(),
 		onchange = (color_scheme) => {
 			value.color_scheme = color_scheme; // won't work with POJOs but users could provide their own onchange in that case
 		},
