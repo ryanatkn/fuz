@@ -12,30 +12,32 @@
 </script>
 
 <main class="box w_100">
-	<div class="box width_md">
+	<div class="box width_md mb_xl9">
 		<section class="box">
 			<h1 class="mt_xl4 mb_lg">fuz</h1>
 			<div class="box mb_xl"><Fuz_Logo size="var(--icon_size_xl2)" /></div>
-			<blockquote class="shadow_inset_xs px_xl bg">friendly user zystem 🧶</blockquote>
-			<div class="width_sm panel p_lg shadow_inset_xs bg">
-				<p>
-					Fuz is a Svelte UI library with components and helpers for making friendly and helpful
-					websites. It builds on my CSS framework <a href="https://moss.ryanatkn.com/">Moss</a>,
-					which is based on CSS custom properties, and Fuz continues those patterns. It's in early
-					alpha and will have many breaking changes.
-				</p>
-				<p>
-					Fuz is being made to support <a href="https://zzz.ryanatkn.com/">Zzz</a> and
-					<a href="https://www.ryanatkn.com/table">my other projects</a>
-					that focus on end-users. Fuz emphasizes capability and efficiency and tries to be simple for
-					those goals. Compared to most UI libraries, Fuz has fewer features and more opinions, but the
-					eventual goal is to be fully-featured with high flexibility.
-				</p>
-				<p>
-					To learn more see <a href="{base}/library">the docs</a>
-					and <a href="https://github.com/ryanatkn/fuz#readme">readme</a>. Feel free to take the
-					ideas and <a href="https://github.com/ryanatkn/fuz">code</a> for your own purposes.
-				</p>
+			<blockquote class="shadow_bottom_sm px_xl bg">friendly user zystem 🧶</blockquote>
+			<div class="mb_lg p_xs2 shadow_md radius_sm">
+				<div class="width_sm panel p_lg shadow_inset_xs bg">
+					<p>
+						Fuz is a Svelte UI library with components and helpers for making friendly and helpful
+						websites. It builds on my CSS framework <a href="https://moss.ryanatkn.com/">Moss</a>,
+						which is based on CSS custom properties, and Fuz continues those patterns. It's in early
+						alpha and will have many breaking changes.
+					</p>
+					<p>
+						Fuz is being made to support <a href="https://zzz.ryanatkn.com/">Zzz</a> and
+						<a href="https://www.ryanatkn.com/table">my other projects</a>
+						that focus on end-users. Fuz emphasizes capability and efficiency and tries to be simple
+						for those goals. Compared to most UI libraries, Fuz has fewer features and more opinions,
+						but the eventual goal is to be fully-featured with high flexibility.
+					</p>
+					<p>
+						To learn more see <a href="{base}/library">the docs</a>
+						and <a href="https://github.com/ryanatkn/fuz#readme">readme</a>. Feel free to take the
+						ideas and <a href="https://github.com/ryanatkn/fuz">code</a> for your own purposes.
+					</p>
+				</div>
 			</div>
 		</section>
 		<section>
@@ -46,30 +48,22 @@
 			<!-- TODO ideally this wouldn't duplicate metadata like descriptions, but adding fuz_gitops to this repo is heavy -->
 			<h2 class="mt_0 mb_xl2 px_md">other packages</h2>
 			<menu class="unstyled size_lg">
-				<a
-					class="row chip bg shadow_outset_xs px_md py_xs radius_sm mb_lg"
-					href="https://template.fuz.dev/"
+				<a class="row chip bg px_md py_xs radius_sm mb_lg" href="https://template.fuz.dev/"
 					><Fuzling size="var(--icon_size_lg)" /> <span class="ml_lg">fuz_template</span></a
 				>
-				<a
-					class="row chip bg shadow_outset_xs px_md py_xs radius_sm mb_lg"
-					href="https://blog.fuz.dev/"
+				<a class="row chip bg px_md py_xs radius_sm mb_lg" href="https://blog.fuz.dev/"
 					><Fuz_Logo project="fuz_blog" size="var(--icon_size_lg)" />
 					<span class="ml_lg">fuz_blog</span></a
 				>
-				<a
-					class="row chip bg shadow_outset_xs px_md py_xs radius_sm mb_lg"
-					href="https://mastodon.fuz.dev/"
+				<a class="row chip bg px_md py_xs radius_sm mb_lg" href="https://mastodon.fuz.dev/"
 					><Fuz_Logo project="fuz_mastodon" size="var(--icon_size_lg)" />
 					<span class="ml_lg">fuz_mastodon</span></a
 				>
-				<a
-					class="row chip bg shadow_outset_xs px_md py_xs radius_sm mb_lg"
-					href="https://code.fuz.dev/"
+				<a class="row chip bg px_md py_xs radius_sm mb_lg" href="https://code.fuz.dev/"
 					><Fuz_Logo project="fuz_code" size="var(--icon_size_lg)" />
 					<span class="ml_lg">fuz_code</span></a
 				>
-				<a class="row chip bg shadow_outset_xs px_md py_xs radius_sm" href="https://gitops.fuz.dev/"
+				<a class="row chip bg px_md py_xs radius_sm" href="https://gitops.fuz.dev/"
 					><Fuz_Logo project="fuz_gitops" size="var(--icon_size_lg)" />
 					<span class="ml_lg">fuz_gitops</span></a
 				>
@@ -87,7 +81,16 @@
 </main>
 
 <style>
+	a.chip {
+		box-shadow: var(--shadow_bottom_xs)
+			color-mix(in hsl, var(--shadow_color) var(--shadow_alpha_1), transparent);
+	}
+	a.chip:hover {
+		box-shadow: var(--shadow_bottom_sm)
+			color-mix(in hsl, var(--shadow_color) var(--shadow_alpha_1), transparent);
+	}
 	a.chip:active {
-		box-shadow: var(--shadow_inset_xs) var(--shadow_color_1);
+		box-shadow: var(--shadow_top_xs)
+			color-mix(in hsl, var(--shadow_color) var(--shadow_alpha_1), transparent);
 	}
 </style>

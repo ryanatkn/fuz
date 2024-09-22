@@ -32,7 +32,7 @@
 		background-color: var(--fg_1);
 	}
 
-	nav {
+	.sidebar nav {
 		display: flex;
 		flex-direction: column;
 		align-items: flex-end;

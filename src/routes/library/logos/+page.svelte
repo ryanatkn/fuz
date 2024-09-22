@@ -2,8 +2,8 @@
 	// TODO @many why is this import needed? `Code` already imports it. Fails in dev with SSR enabled without it. Is there a Vite config option that would be better? I tried the combinations of `ssr.external/noExternal/external` with `@ryanatkn/fuz_code` and `prismjs`.
 	import 'prismjs';
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
-	import {get_tome} from '$lib/tome.js';
-	import Tome_Detail from '$lib/Tome_Detail.svelte';
+	import {get_tome_by_name} from '$lib/tome.js';
+	import Tome_Content from '$lib/Tome_Content.svelte';
 	import Fuz_Logo from '$lib/Fuz_Logo.svelte';
 	import Mdn_Logo from '$lib/Mdn_Logo.svelte';
 	import Zzz_Logo from '$lib/Zzz_Logo.svelte';
@@ -16,12 +16,13 @@
 	import {github_logo} from '$lib/logos.js';
 
 	const LIBRARY_ITEM_NAME = 'logos';
-	const tome = get_tome(LIBRARY_ITEM_NAME);
+
+	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
 
 	// TODO BLOCK get the `Svg` props below right before doing any others
 </script>
 
-<Tome_Detail {tome}>
+<Tome_Content {tome}>
 	<section>
 		<ul class="box text_align_center unstyled">
 			<li>
@@ -89,7 +90,7 @@
 			</li>
 		</ul>
 	</section>
-</Tome_Detail>
+</Tome_Content>
 
 <style>
 	li {

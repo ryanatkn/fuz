@@ -10,7 +10,7 @@
 	import Library_Tertiary_Nav from '$lib/Library_Tertiary_Nav.svelte';
 	import Dialog from '$lib/Dialog.svelte';
 	import Library_Footer from '$lib/Library_Footer.svelte';
-	import {set_library_links} from '$lib/library_helpers.svelte.js';
+	import {library_links_context} from '$lib/library_helpers.svelte.js';
 
 	interface Props {
 		tomes: Tome[];
@@ -29,6 +29,8 @@
 	const TERTIARY_NAV_BREAKPOINT = 1000;
 	const SECONDARY_NAV_BREAKPOINT = 800;
 
+	const library_menu_width = '180px';
+
 	let innerWidth: number | undefined = $state();
 
 	let show_secondary_nav_dialog = $state(false);
@@ -40,12 +42,12 @@
 		show_secondary_nav_dialog = false;
 	});
 
-	set_library_links();
+	library_links_context.set();
 </script>
 
 <svelte:window bind:innerWidth onhashchange={() => (show_secondary_nav_dialog = false)} />
 
-<div class="library">
+<div class="library" style:--library_menu_width={library_menu_width}>
 	<Library_Primary_Nav {pkg} {breadcrumb_children}>
 		<div class="nav_dialog_toggle">
 			<button class="plain" type="button" onclick={() => toggle_secondary_nav_dialog()}>menu</button
@@ -59,33 +61,31 @@
 		</div>
 	{/if}
 	<main>
-		<div class="content">
-			{@render children()}
-			<!-- TODO @many dialog navs -->
-			{#if !innerWidth || innerWidth > TERTIARY_NAV_BREAKPOINT}
-				<Library_Tertiary_Nav {tomes} {tomes_by_name} />
-			{/if}
-			<section class="box">
-				<Library_Footer {pkg}>
-					<div class="mb_xl5">
-						<Breadcrumb>
-							{#if breadcrumb_children}
-								{@render breadcrumb_children(false)}
-							{:else}
-								{pkg.package_json.glyph ?? '🏠'}
-							{/if}
-						</Breadcrumb>
-					</div>
-				</Library_Footer>
-			</section>
-		</div>
+		{@render children()}
+		<!-- TODO @many dialog navs -->
+		{#if !innerWidth || innerWidth > TERTIARY_NAV_BREAKPOINT}
+			<Library_Tertiary_Nav {tomes} {tomes_by_name} />
+		{/if}
+		<section class="box">
+			<Library_Footer {pkg}>
+				<div class="mb_xl5">
+					<Breadcrumb>
+						{#if breadcrumb_children}
+							{@render breadcrumb_children(false)}
+						{:else}
+							{pkg.package_json.glyph ?? '🏠'}
+						{/if}
+					</Breadcrumb>
+				</div>
+			</Library_Footer>
+		</section>
 	</main>
 </div>
 <!-- TODO @many dialog navs - instead of a dialog, probably use a popover (new component) -->
 <!-- TODO this is messy rendering `Library_Secondary_Nav` twice to handle responsive states with SSR correctly -->
 {#if show_secondary_nav_dialog && innerWidth && innerWidth <= TERTIARY_NAV_BREAKPOINT}
 	<Dialog onclose={() => (show_secondary_nav_dialog = false)}>
-		<div class="pane">
+		<div class="pane" style:--library_menu_width={library_menu_width}>
 			<div class="p_xl pb_0">
 				<Breadcrumb>
 					{#if breadcrumb_children}
@@ -107,7 +107,6 @@
 	.library {
 		--library_primary_nav_height: 60px;
 		--library_secondary_nav_padding: var(--space_md); /* also used by the tertiary nav */
-		--library_menu_width: 180px;
 		--library_content_padding: var(--space_xl5);
 		--library_content_max_width: calc(var(--width_md) + var(--library_content_padding) * 2);
 		/* the `+ 1px` solves some issue when scaling */
@@ -118,14 +117,15 @@
 		display: contents;
 	}
 
-	.content {
+	main {
 		position: relative;
+		min-height: calc(100vh - var(--library_primary_nav_height));
 		width: calc(100% - var(--library_sidebar_width) * 2);
 		max-width: var(--library_content_max_width);
 		padding: var(--library_content_padding);
 		padding-top: 0;
 		margin: 0 auto;
-		overflow: hidden; /* maybe heavy-handed */
+		overflow: hidden; /* TODO maybe heavy handed */
 	}
 
 	.secondary_nav_wrapper {
@@ -141,18 +141,9 @@
 		border-radius: 0;
 	}
 
-	@media (max-width: 1200px) {
-		/* main {
-			flex-direction: column;
-		} */
-	}
-
-	/* sync this breakpoint with `Library_Tertiary_Nav` and `Tome_Subheading` */
+	/* sync this breakpoint with `Library_Tertiary_Nav` and `Tome_Section_Header` */
 	@media (max-width: 1000px) {
-		/* main { */
-		/* --library_content_max_width: calc(var(--width_md) + var(--library_content_padding)); */
-		/* } */
-		.content {
+		main {
 			--library_content_padding: var(--space_xl);
 			/* handle the moved `Library_Tertiary_Nav` */
 			width: calc(100% - var(--library_sidebar_width));
@@ -164,9 +155,9 @@
 		}
 	}
 
-	/* sync this breakpoint with `Library_Primary_Nav`, `Library_Secondary_Nav`, and `Tome_Subheading` */
+	/* sync this breakpoint with `Library_Primary_Nav`, `Library_Secondary_Nav`, and `Tome_Section_Header` */
 	@media (max-width: 800px) {
-		.content {
+		main {
 			/* handle the moved `Library_Secondary_Nav` */
 			width: 100%;
 			margin-left: 0;

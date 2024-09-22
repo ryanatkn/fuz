@@ -1,7 +1,8 @@
 import {color_schemes, type Color_Scheme, type Theme} from '@ryanatkn/moss/theme.js';
 import {default_themes} from '@ryanatkn/moss/themes.js';
 import {BROWSER} from 'esm-env';
-import {getContext, setContext} from 'svelte';
+
+import {create_context} from '$lib/context_helpers.js';
 
 // TODO Can we solve the problem of theme flashing? serialize the whole `Themer`?
 // I think so but we'd need Moss' `render_theme_style` to be available in the head somehow.
@@ -36,9 +37,7 @@ export interface Themer_Json {
 	color_scheme: Color_Scheme;
 }
 
-const THEME_STATE_KEY = Symbol('themer');
-export const get_themer = (): Themer => getContext(THEME_STATE_KEY);
-export const set_themer = (themer: Themer): Themer => setContext(THEME_STATE_KEY, themer);
+export const themer_context = create_context<Themer>();
 
 export const sync_color_scheme = (color_scheme: Color_Scheme | null): void => {
 	if (!BROWSER) return;

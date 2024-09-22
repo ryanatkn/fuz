@@ -54,7 +54,6 @@
 		position: relative;
 		z-index: -1;
 		overflow: hidden;
-		margin-top: var(--space_xl9);
 		display: grid;
 		grid-template-columns: repeat(var(--spider_count), 1fr);
 	}

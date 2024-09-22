@@ -11,7 +11,7 @@ import type Dialog from '$lib/Dialog.svelte';
 export const to_dialog_params = <T extends Component<any>>(
 	Component: T,
 	props: ComponentProps<T>,
-	dialog_props?: ComponentProps<Dialog>,
+	dialog_props?: Partial<ComponentProps<Dialog>>,
 ): Dialog_Params<T> => ({
 	Component,
 	props,
@@ -28,7 +28,7 @@ export const to_dialog_params = <T extends Component<any>>(
 export interface Dialog_Params<T extends Component<any> = Component<any>> {
 	Component: T;
 	props: ComponentProps<T>;
-	dialog_props?: ComponentProps<Dialog> | undefined;
+	dialog_props?: Partial<ComponentProps<Dialog>> | undefined;
 }
 
 export type Dialog_Layout = 'centered' | 'page';

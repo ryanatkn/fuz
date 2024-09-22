@@ -2,7 +2,6 @@
 	import type {Snippet} from 'svelte';
 	import {is_editable, swallow} from '@ryanatkn/belt/dom.js';
 	import {wait} from '@ryanatkn/belt/async.js';
-	import {BROWSER} from 'esm-env';
 
 	import Teleport from '$lib/Teleport.svelte';
 	import type {Dialog_Layout} from '$lib/dialog.js';
@@ -48,10 +47,7 @@
 
 	let container_el: HTMLElement | undefined = $state();
 	$effect(() => {
-		// TODO guard some other way
-		if (BROWSER) {
-			update_container_el(container);
-		}
+		update_container_el(container);
 	});
 
 	const update_container_el = (container: HTMLElement | undefined): void => {
@@ -148,7 +144,8 @@
 
 <style>
 	.dialog {
-		--pane_shadow: var(--shadow_xl) var(--shadow_color_5);
+		--pane_shadow: var(--shadow_bottom_xl)
+			color-mix(in hsl, var(--shadow_color) var(--shadow_alpha_5), transparent);
 		position: fixed;
 		inset: 0;
 		overflow: auto;

@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.120.10",
+  "version": "0.125.0",
   "description": "Svelte UI library",
   "motto": "friendly user zystem",
   "glyph": "🧶",
@@ -31,7 +31,7 @@
   },
   "type": "module",
   "engines": {
-    "node": ">=20.12"
+    "node": ">=20.17"
   },
   "peerDependencies": {
     "@ryanatkn/belt": "*",
@@ -47,29 +47,29 @@
   },
   "devDependencies": {
     "@changesets/changelog-git": "^0.2.0",
-    "@ryanatkn/belt": "^0.24.12",
-    "@ryanatkn/eslint-config": "^0.5.1",
-    "@ryanatkn/fuz_code": "^0.18.0",
-    "@ryanatkn/gro": "^0.133.7",
-    "@ryanatkn/moss": "^0.14.0",
-    "@sveltejs/adapter-static": "^3.0.4",
-    "@sveltejs/kit": "^2.5.24",
-    "@sveltejs/package": "^2.3.4",
+    "@ryanatkn/belt": "^0.25.0",
+    "@ryanatkn/eslint-config": "^0.5.3",
+    "@ryanatkn/fuz_code": "^0.19.0",
+    "@ryanatkn/gro": "^0.135.1",
+    "@ryanatkn/moss": "^0.16.1",
+    "@sveltejs/adapter-static": "^3.0.5",
+    "@sveltejs/kit": "^2.5.28",
+    "@sveltejs/package": "^2.3.5",
     "@sveltejs/vite-plugin-svelte": "^3.1.2",
-    "@types/node": "^22.5.0",
+    "@types/node": "^22.5.5",
     "@types/prismjs": "^1.26.4",
-    "eslint": "^9.9.1",
-    "eslint-plugin-svelte": "^2.43.0",
+    "eslint": "^9.11.0",
+    "eslint-plugin-svelte": "^2.44.0",
     "esm-env": "^1.0.0",
     "prettier": "^3.3.3",
     "prettier-plugin-svelte": "^3.2.6",
     "prism-svelte": "^0.5.0",
     "prismjs": "^1.29.0",
-    "svelte": "^5.0.0-next.236",
-    "svelte-check": "^3.8.6",
+    "svelte": "^5.0.0-next.257",
+    "svelte-check": "^4.0.2",
     "tslib": "^2.7.0",
-    "typescript": "^5.5.4",
-    "typescript-eslint": "^8.2.0",
+    "typescript": "^5.6.2",
+    "typescript-eslint": "^8.6.0",
     "uvu": "^0.5.6"
   },
   "prettier": {
@@ -133,6 +133,10 @@
       "types": "./dist/Community_Links.svelte.d.ts",
       "svelte": "./dist/Community_Links.svelte",
       "default": "./dist/Community_Links.svelte"
+    },
+    "./context_helpers.js": {
+      "types": "./dist/context_helpers.d.ts",
+      "default": "./dist/context_helpers.js"
     },
     "./Contextmenu_Entry.svelte": {
       "types": "./dist/Contextmenu_Entry.svelte.d.ts",
@@ -234,6 +238,10 @@
       "types": "./dist/Hue_Input.svelte.d.ts",
       "svelte": "./dist/Hue_Input.svelte",
       "default": "./dist/Hue_Input.svelte"
+    },
+    "./intersect.js": {
+      "types": "./dist/intersect.d.ts",
+      "default": "./dist/intersect.js"
     },
     "./Library_Content.svelte": {
       "types": "./dist/Library_Content.svelte.d.ts",
@@ -375,25 +383,30 @@
       "svelte": "./dist/Themed.svelte",
       "default": "./dist/Themed.svelte"
     },
-    "./Tome_Detail.svelte": {
-      "types": "./dist/Tome_Detail.svelte.d.ts",
-      "svelte": "./dist/Tome_Detail.svelte",
-      "default": "./dist/Tome_Detail.svelte"
+    "./Tome_Content.svelte": {
+      "types": "./dist/Tome_Content.svelte.d.ts",
+      "svelte": "./dist/Tome_Content.svelte",
+      "default": "./dist/Tome_Content.svelte"
+    },
+    "./Tome_Header.svelte": {
+      "types": "./dist/Tome_Header.svelte.d.ts",
+      "svelte": "./dist/Tome_Header.svelte",
+      "default": "./dist/Tome_Header.svelte"
     },
     "./Tome_Link.svelte": {
       "types": "./dist/Tome_Link.svelte.d.ts",
       "svelte": "./dist/Tome_Link.svelte",
       "default": "./dist/Tome_Link.svelte"
     },
-    "./Tome_Subheading.svelte": {
-      "types": "./dist/Tome_Subheading.svelte.d.ts",
-      "svelte": "./dist/Tome_Subheading.svelte",
-      "default": "./dist/Tome_Subheading.svelte"
+    "./Tome_Section_Header.svelte": {
+      "types": "./dist/Tome_Section_Header.svelte.d.ts",
+      "svelte": "./dist/Tome_Section_Header.svelte",
+      "default": "./dist/Tome_Section_Header.svelte"
     },
-    "./Tome_Title.svelte": {
-      "types": "./dist/Tome_Title.svelte.d.ts",
-      "svelte": "./dist/Tome_Title.svelte",
-      "default": "./dist/Tome_Title.svelte"
+    "./Tome_Section.svelte": {
+      "types": "./dist/Tome_Section.svelte.d.ts",
+      "svelte": "./dist/Tome_Section.svelte",
+      "default": "./dist/Tome_Section.svelte"
     },
     "./tome.js": {
       "types": "./dist/tome.d.ts",
