@@ -13,30 +13,30 @@ import {getContext, setContext} from 'svelte';
  * `get` throws an error if no value is set in the context.
  */
 export function create_context<T>(options: {label?: string; fallback: () => T}): {
-	get: (message?: string) => T;
+	get: (error_message?: string) => T;
 	set: (value?: T) => T;
 };
 export function create_context<T>(options: {label?: string; optional?: false}): {
-	get: (message?: string) => T;
+	get: (error_message?: string) => T;
 	set: (value: T) => T;
 };
 export function create_context<T>(options: {label?: string; optional: true}): {
-	get: (message?: string) => T | undefined;
+	get: (error_message?: string) => T | undefined;
 	set: (value: T) => T;
 };
 export function create_context<T>(options: {
 	label?: string;
 	fallback?: () => T;
 	optional?: boolean;
-}): {get: (message?: string) => T | undefined; set: (value?: T) => T} {
+}): {get: (error_message?: string) => T | undefined; set: (value?: T) => T} {
 	const {label, fallback, optional} = options;
 	const key = Symbol(label);
 	return {
-		get: (message?: string) => {
+		get: (error_message?: string) => {
 			const found: T | undefined = getContext(key); // `null` is a valid value and the typescript-eslint rule below is bugged because `??` would clobber nulls, see issue https://github.com/typescript-eslint/typescript-eslint/issues/7842
 			const value = found === undefined ? fallback?.() : found; // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
 			if (!optional && value === undefined) {
-				throw Error(message ?? 'context value not set' + (label ? ` for "${label}"` : ''));
+				throw Error(error_message ?? 'context value not set' + (label ? ` for "${label}"` : ''));
 			}
 			return value;
 		},
@@ -93,10 +93,10 @@ export class Svelte_Context<T> {
 		return getContext(this.key) ?? this.fallback?.();
 	}
 
-	get(message?: string): T {
+	get(error_message?: string): T {
 		const value = this.maybe_get();
 		if (value === undefined) {
-			throw Error(message ?? 'context value not set' + (this.label ? ` for "${this.label}"` : ''));
+			throw Error(error_message ?? 'context value not set' + (this.label ? ` for "${this.label}"` : ''));
 		}
 		return value;
 	}
