@@ -33,8 +33,8 @@ export function create_context<T>(options: {
 	const key = Symbol(label);
 	return {
 		get: (error_message?: string) => {
-			const found: T | undefined = getContext(key); // `null` is a valid value and the typescript-eslint rule below is bugged because `??` would clobber nulls, see issue https://github.com/typescript-eslint/typescript-eslint/issues/7842
-			const value = found === undefined ? fallback?.() : found; // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
+			const got: T | undefined = getContext(key); // `null` is a valid value and the typescript-eslint rule below is bugged because `??` would clobber nulls, see issue https://github.com/typescript-eslint/typescript-eslint/issues/7842
+			const value = got === undefined ? fallback?.() : got; // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
 			if (!optional && value === undefined) {
 				throw Error(
 					error_message ?? 'context value' + (label ? ` "${label}"` : '') + ' is not set',
