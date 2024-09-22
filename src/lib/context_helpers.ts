@@ -1,8 +1,13 @@
 import {getContext, setContext} from 'svelte';
 
 // This uses a function instead of a class because of the overloaded type signatures.
-// The first attempt at a class-based version is commented out at the bottom of the file.
+// It could be implemented internally with a class like `Svelte_Context`
+// but this is less code and seems a bit simpler.
+// The memory gains of a class appear minimal given the expected usage patterns.
 // See https://github.com/ryanatkn/fuz/pull/56 for more.
+
+// TODO maybe remove `label`?
+// TODO maybe remove `error_message`?
 
 /**
  * Wraps Svelte's `setContext` and `getContext` for better ergonmics.
@@ -55,67 +60,3 @@ export function create_context<T>(options: {
 		},
 	};
 }
-
-// Class-based version that has `TODO BLOCK` comments with its issues.
-// The only advantage I see of this version is that
-// the user gets to decide if it's required or optional with each get,
-// instead of defining optionality up front.
-// It can be rewritten as 3 different classes, but that's a lot more code to ship
-// and would still need the `create_context` function to avoid pushing the complexity onto users.
-
-// export interface Svelte_Context_Options<T> {
-// 	/**
-// 	 * Improves error messages.
-// 	 */
-// 	label?: string;
-// 	/**
-// 	 * Provides a default value when the context is not set.
-// 	 */
-// 	fallback?: () => T;
-// }
-/*
-export class Svelte_Context<T> {
-	label?: string;
-	key: symbol;
-	fallback: (() => T) | undefined;
-
-	constructor(options?: Svelte_Context_Options<T>) {
-		this.label = options?.label;
-		this.key = Symbol(this.label);
-		this.fallback = options?.fallback;
-	}
-
-	maybe_get(): T | undefined {
-		if (DEV && this.fallback) {
-			// TODO BLOCK this method doesn't exist if there's a fallback -
-     // maybe this instead of this check, add a separate class that doesn't have this method?
-     // but that's more complexity for the user and more code to ship
-			throw Error(
-				'`maybe_get` is invalid with a fallback' + (this.label ? ` for "${this.label}"` : ''),
-			);
-		}
-		return getContext(this.key) ?? this.fallback?.();
-	}
-
-	get(error_message?: string): T {
-		const value = this.maybe_get();
-		if (value === undefined) {
-			throw Error(error_message ?? 'context value not set' + (this.label ? ` for "${this.label}"` : ''));
-		}
-		return value;
-	}
-
-	// TODO BLOCK this type is invalid when a fallback is omitted, is required and can't be `undefined`
-	set(value: T | undefined = this.fallback?.()): T {
-		if (value === undefined) {
-			throw Error(
-				'context value' +
-					(this.label ? ` "${this.label}"` : '') +
-					' is not defined - provide a value to `set` or fallback in the constructor',
-			);
-		}
-		setContext(this.key, value);
-		return value;
-	}
-}
-*/
