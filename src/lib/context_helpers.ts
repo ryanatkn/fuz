@@ -55,6 +55,9 @@ export function create_context<T>(options: {
 }
 
 // Class-based version that has `TODO BLOCK` comments with its issues.
+// The only advantage I see of this version is that
+// the user gets to decide if it's required or optional with each get,
+// instead of defining optionality up front.
 
 // export interface Svelte_Context_Options<T> {
 // 	/**
@@ -66,48 +69,49 @@ export function create_context<T>(options: {
 // 	 */
 // 	fallback?: () => T;
 // }
+/*
+export class Svelte_Context<T> {
+	label?: string;
+	key: symbol;
+	fallback: (() => T) | undefined;
 
-// export class Svelte_Context<T> {
-// 	label?: string;
-// 	key: symbol;
-// 	fallback: (() => T) | undefined;
+	constructor(options?: Svelte_Context_Options<T>) {
+		this.label = options?.label;
+		this.key = Symbol(this.label);
+		this.fallback = options?.fallback;
+	}
 
-// 	constructor(options?: Svelte_Context_Options<T>) {
-// 		this.label = options?.label;
-// 		this.key = Symbol(this.label);
-// 		this.fallback = options?.fallback;
-// 	}
+	maybe_get(): T | undefined {
+		if (DEV && this.fallback) {
+			// TODO BLOCK this method doesn't exist if there's a fallback -
+     // maybe this instead of this check, add a separate class that doesn't have this method?
+     // but that's more complexity for the user and more code to ship
+			throw Error(
+				'`maybe_get` is invalid with a fallback' + (this.label ? ` for "${this.label}"` : ''),
+			);
+		}
+		return getContext(this.key) ?? this.fallback?.();
+	}
 
-// 	maybe_get(): T | undefined {
-// 		if (DEV && this.fallback) {
-// 			// TODO BLOCK this method doesn't exist if there's a fallback -
-//      // maybe this instead of this check, add a separate class that doesn't have this method?
-//      // but that's more complexity for the user and more code to ship
-// 			throw Error(
-// 				'`maybe_get` is invalid with a fallback' + (this.label ? ` for "${this.label}"` : ''),
-// 			);
-// 		}
-// 		return getContext(this.key) ?? this.fallback?.();
-// 	}
+	get(message?: string): T {
+		const value = this.maybe_get();
+		if (value === undefined) {
+			throw Error(message ?? 'context value not set' + (this.label ? ` for "${this.label}"` : ''));
+		}
+		return value;
+	}
 
-// 	get(message?: string): T {
-// 		const value = this.maybe_get();
-// 		if (value === undefined) {
-// 			throw Error(message ?? 'context value not set' + (this.label ? ` for "${this.label}"` : ''));
-// 		}
-// 		return value;
-// 	}
-
-// 	// TODO BLOCK this type is invalid when a fallback is omitted, can't be `undefined`
-// 	set(value: T | undefined = this.fallback?.()): T {
-// 		if (value === undefined) {
-// 			throw Error(
-// 				'context value' +
-// 					(this.label ? ` "${this.label}"` : '') +
-// 					' is not defined - provide a value to `set` or fallback in the constructor',
-// 			);
-// 		}
-// 		setContext(this.key, value);
-// 		return value;
-// 	}
-// }
+	// TODO BLOCK this type is invalid when a fallback is omitted, is required and can't be `undefined`
+	set(value: T | undefined = this.fallback?.()): T {
+		if (value === undefined) {
+			throw Error(
+				'context value' +
+					(this.label ? ` "${this.label}"` : '') +
+					' is not defined - provide a value to `set` or fallback in the constructor',
+			);
+		}
+		setContext(this.key, value);
+		return value;
+	}
+}
+*/
