@@ -215,11 +215,6 @@
       "svelte": "./dist/Fuzling.svelte",
       "default": "./dist/Fuzling.svelte"
     },
-    "./Github_Logo.svelte": {
-      "types": "./dist/Github_Logo.svelte.d.ts",
-      "svelte": "./dist/Github_Logo.svelte",
-      "default": "./dist/Github_Logo.svelte"
-    },
     "./Gro_Logo.svelte": {
       "types": "./dist/Gro_Logo.svelte.d.ts",
       "svelte": "./dist/Gro_Logo.svelte",
@@ -284,6 +279,10 @@
       "svelte": "./dist/Library.svelte",
       "default": "./dist/Library.svelte"
     },
+    "./logos.js": {
+      "types": "./dist/logos.d.ts",
+      "default": "./dist/logos.js"
+    },
     "./Mdn_Link.svelte": {
       "types": "./dist/Mdn_Link.svelte.d.ts",
       "svelte": "./dist/Mdn_Link.svelte",
@@ -347,6 +346,15 @@
       "types": "./dist/Spiderspace_Logo.svelte.d.ts",
       "svelte": "./dist/Spiderspace_Logo.svelte",
       "default": "./dist/Spiderspace_Logo.svelte"
+    },
+    "./Svg.svelte": {
+      "types": "./dist/Svg.svelte.d.ts",
+      "svelte": "./dist/Svg.svelte",
+      "default": "./dist/Svg.svelte"
+    },
+    "./svg.js": {
+      "types": "./dist/svg.d.ts",
+      "default": "./dist/svg.js"
     },
     "./Teleport.svelte": {
       "types": "./dist/Teleport.svelte.d.ts",

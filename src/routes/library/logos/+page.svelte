@@ -5,7 +5,6 @@
 	import {get_tome} from '$lib/tome.js';
 	import Tome_Detail from '$lib/Tome_Detail.svelte';
 	import Fuz_Logo from '$lib/Fuz_Logo.svelte';
-	import Github_Logo from '$lib/Github_Logo.svelte';
 	import Mdn_Logo from '$lib/Mdn_Logo.svelte';
 	import Zzz_Logo from '$lib/Zzz_Logo.svelte';
 	import Webdevladder_Logo from '$lib/Webdevladder_Logo.svelte';
@@ -13,9 +12,13 @@
 	import Moss_Logo from '$lib/Moss_Logo.svelte';
 	import Gro_Logo from '$lib/Gro_Logo.svelte';
 	import Spiderspace_Logo from '$lib/Spiderspace_Logo.svelte';
+	import Svg from '$lib/Svg.svelte';
+	import {github_logo} from '$lib/logos.js';
 
 	const LIBRARY_ITEM_NAME = 'logos';
 	const tome = get_tome(LIBRARY_ITEM_NAME);
+
+	// TODO BLOCK get the `Svg` props below right before doing any others
 </script>
 
 <Tome_Detail {tome}>
@@ -77,7 +80,7 @@
 			<li>
 				<Code content={`<Github_Logo />`} />
 				<a href="https://github.com/"
-					><Github_Logo fill="var(--text_color_2)" size="var(--icon_size_xl3)" /></a
+					><Svg data={github_logo} fill="var(--text_color_2)" size="var(--icon_size_xl3)" /></a
 				>
 			</li>
 			<li>

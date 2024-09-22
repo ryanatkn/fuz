@@ -182,11 +182,6 @@ export const package_json = {
 			svelte: './dist/Fuzling.svelte',
 			default: './dist/Fuzling.svelte',
 		},
-		'./Github_Logo.svelte': {
-			types: './dist/Github_Logo.svelte.d.ts',
-			svelte: './dist/Github_Logo.svelte',
-			default: './dist/Github_Logo.svelte',
-		},
 		'./Gro_Logo.svelte': {
 			types: './dist/Gro_Logo.svelte.d.ts',
 			svelte: './dist/Gro_Logo.svelte',
@@ -251,6 +246,7 @@ export const package_json = {
 			svelte: './dist/Library.svelte',
 			default: './dist/Library.svelte',
 		},
+		'./logos.js': {types: './dist/logos.d.ts', default: './dist/logos.js'},
 		'./Mdn_Link.svelte': {
 			types: './dist/Mdn_Link.svelte.d.ts',
 			svelte: './dist/Mdn_Link.svelte',
@@ -315,6 +311,12 @@ export const package_json = {
 			svelte: './dist/Spiderspace_Logo.svelte',
 			default: './dist/Spiderspace_Logo.svelte',
 		},
+		'./Svg.svelte': {
+			types: './dist/Svg.svelte.d.ts',
+			svelte: './dist/Svg.svelte',
+			default: './dist/Svg.svelte',
+		},
+		'./svg.js': {types: './dist/svg.d.ts', default: './dist/svg.js'},
 		'./Teleport.svelte': {
 			types: './dist/Teleport.svelte.d.ts',
 			svelte: './dist/Teleport.svelte',
@@ -439,7 +441,6 @@ export const src_json = {
 			],
 		},
 		'./Fuzling.svelte': {path: 'Fuzling.svelte', declarations: []},
-		'./Github_Logo.svelte': {path: 'Github_Logo.svelte', declarations: []},
 		'./Gro_Logo.svelte': {path: 'Gro_Logo.svelte', declarations: []},
 		'./Hashlink.svelte': {path: 'Hashlink.svelte', declarations: []},
 		'./Hidden_Personal_Links.svelte': {path: 'Hidden_Personal_Links.svelte', declarations: []},
@@ -464,6 +465,7 @@ export const src_json = {
 		'./Library_Secondary_Nav.svelte': {path: 'Library_Secondary_Nav.svelte', declarations: []},
 		'./Library_Tertiary_Nav.svelte': {path: 'Library_Tertiary_Nav.svelte', declarations: []},
 		'./Library.svelte': {path: 'Library.svelte', declarations: []},
+		'./logos.js': {path: 'logos.ts', declarations: [{name: 'github_logo', kind: 'variable'}]},
 		'./Mdn_Link.svelte': {path: 'Mdn_Link.svelte', declarations: []},
 		'./Mdn_Logo.svelte': {path: 'Mdn_Logo.svelte', declarations: []},
 		'./Moss_Logo.svelte': {path: 'Moss_Logo.svelte', declarations: []},
@@ -480,6 +482,8 @@ export const src_json = {
 		'./Spider.svelte': {path: 'Spider.svelte', declarations: []},
 		'./Spiders.svelte': {path: 'Spiders.svelte', declarations: []},
 		'./Spiderspace_Logo.svelte': {path: 'Spiderspace_Logo.svelte', declarations: []},
+		'./Svg.svelte': {path: 'Svg.svelte', declarations: []},
+		'./svg.js': {path: 'svg.ts', declarations: [{name: 'Svg_Data', kind: 'type'}]},
 		'./Teleport.svelte': {path: 'Teleport.svelte', declarations: []},
 		'./Theme_Input.svelte': {path: 'Theme_Input.svelte', declarations: []},
 		'./theme.svelte.js': {

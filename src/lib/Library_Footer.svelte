@@ -4,7 +4,8 @@
 	import {format_url} from '@ryanatkn/belt/url.js';
 	import type {Snippet} from 'svelte';
 
-	import Github_Logo from '$lib/Github_Logo.svelte';
+	import Svg from '$lib/Svg.svelte';
+	import {github_logo} from '$lib/logos.js';
 
 	interface Props {
 		pkg: Package_Meta;
@@ -23,7 +24,7 @@
 	<div class="logo box panel p_lg shadow_inset_xs">
 		{#if logo_header}{@render logo_header()}{/if}
 		<a href={pkg.repo_url} rel="me" title="source code on GitHub"
-			>{#if logo}{@render logo()}{:else}<Github_Logo />{/if}</a
+			>{#if logo}{@render logo()}{:else}<Svg data={github_logo} />{/if}</a
 		>
 		{#if logo_footer}{@render logo_footer()}{/if}
 	</div>
