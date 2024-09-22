@@ -247,11 +247,6 @@ export const package_json = {
 			svelte: './dist/Mdn_Link.svelte',
 			default: './dist/Mdn_Link.svelte',
 		},
-		'./Mdn_Logo.svelte': {
-			types: './dist/Mdn_Logo.svelte.d.ts',
-			svelte: './dist/Mdn_Logo.svelte',
-			default: './dist/Mdn_Logo.svelte',
-		},
 		'./Moss_Logo.svelte': {
 			types: './dist/Moss_Logo.svelte.d.ts',
 			svelte: './dist/Moss_Logo.svelte',
@@ -469,10 +464,10 @@ export const src_json = {
 				{name: 'earbetter_logo', kind: 'variable'},
 				{name: 'spiderspace_logo', kind: 'variable'},
 				{name: 'github_logo', kind: 'variable'},
+				{name: 'mdn_logo', kind: 'variable'},
 			],
 		},
 		'./Mdn_Link.svelte': {path: 'Mdn_Link.svelte', declarations: []},
-		'./Mdn_Logo.svelte': {path: 'Mdn_Logo.svelte', declarations: []},
 		'./Moss_Logo.svelte': {path: 'Moss_Logo.svelte', declarations: []},
 		'./Package_Detail.svelte': {path: 'Package_Detail.svelte', declarations: []},
 		'./Package_Summary.svelte': {path: 'Package_Summary.svelte', declarations: []},
