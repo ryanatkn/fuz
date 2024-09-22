@@ -364,11 +364,6 @@ export const package_json = {
 			svelte: './dist/Webdevladder_Logo.svelte',
 			default: './dist/Webdevladder_Logo.svelte',
 		},
-		'./Zzz_Logo.svelte': {
-			types: './dist/Zzz_Logo.svelte.d.ts',
-			svelte: './dist/Zzz_Logo.svelte',
-			default: './dist/Zzz_Logo.svelte',
-		},
 	},
 } satisfies Package_Json;
 
@@ -484,6 +479,7 @@ export const src_json = {
 		'./logos.js': {
 			path: 'logos.ts',
 			declarations: [
+				{name: 'zzz_logo', kind: 'variable'},
 				{name: 'gro_logo', kind: 'variable'},
 				{name: 'github_logo', kind: 'variable'},
 			],
@@ -544,7 +540,6 @@ export const src_json = {
 			],
 		},
 		'./Webdevladder_Logo.svelte': {path: 'Webdevladder_Logo.svelte', declarations: []},
-		'./Zzz_Logo.svelte': {path: 'Zzz_Logo.svelte', declarations: []},
 	},
 } satisfies Src_Json;
 

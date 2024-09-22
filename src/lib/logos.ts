@@ -1,6 +1,23 @@
 import type {Svg_Data} from '$lib/svg.js';
 
-// TODO BLOCK are there significant performance gains to making this JSON?
+// TODO are there significant performance gains to making this JSON?
+
+export const zzz_logo: Svg_Data = {
+	label: "three sleepy z's",
+	fill: 'var(--color_g_5)', // TODO BLOCK hardcoded? need to update the plain svg
+	// TODO BLOCK remove the `g` from the plain svg
+	paths: [
+		{
+			d: 'm 75.29285,61.962268 1.752156,1.914421 14.843359,1.811307 L 74.065203,86.193332 99.966781,85.408255 98.719988,83.648246 85.143565,82.136577 98.430963,62.887945',
+		},
+		{
+			d: 'm 47.636533,44.203704 2.295155,2.48945 25.618425,0.406407 L 45.93783,91.082857 89.425317,93.78003 87.862334,91.36274 61.57861,83.03068 86.244719,42.177019',
+		},
+		{
+			d: 'M 0.62464489,0.27405496 3.9721704,4.0993769 50.515703,10.089712 0.04581262,99.957542 68.009395,98.901532 65.391343,95.487941 24.119119,88.067804 66.301842,2.2896897',
+		},
+	],
+};
 
 export const gro_logo: Svg_Data = {
 	label: 'a pixelated green oak acorn with a glint of sun',

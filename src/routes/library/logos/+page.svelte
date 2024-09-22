@@ -6,24 +6,25 @@
 	import Tome_Content from '$lib/Tome_Content.svelte';
 	import Fuz_Logo from '$lib/Fuz_Logo.svelte';
 	import Mdn_Logo from '$lib/Mdn_Logo.svelte';
-	import Zzz_Logo from '$lib/Zzz_Logo.svelte';
 	import Webdevladder_Logo from '$lib/Webdevladder_Logo.svelte';
 	import Earbetter_Logo from '$lib/Earbetter_Logo.svelte';
 	import Moss_Logo from '$lib/Moss_Logo.svelte';
 	import Spiderspace_Logo from '$lib/Spiderspace_Logo.svelte';
 	import Svg from '$lib/Svg.svelte';
-	import {gro_logo, github_logo} from '$lib/logos.js';
+	import {zzz_logo, gro_logo, github_logo} from '$lib/logos.js';
 
 	const LIBRARY_ITEM_NAME = 'logos';
 
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
-
-	// TODO BLOCK get the `Svg` props below right before doing any others
 </script>
 
 <Tome_Content {tome}>
 	<section>
 		<ul class="box text_align_center unstyled">
+			<li>
+				<Code content={`<Svg data={zzz_logo} />`} />
+				<a href="https://zzz.ryanatkn.com/"><Svg data={zzz_logo} size="var(--icon_size_xl3)" /></a>
+			</li>
 			<li>
 				<Code content={`<Moss_Logo />`} />
 				<a href="https://moss.ryanatkn.com/"><Moss_Logo size="var(--icon_size_xl3)" /></a>
@@ -59,10 +60,6 @@
 				<a href="https://gitops.fuz.dev/"
 					><Fuz_Logo project="fuz_gitops" size="var(--icon_size_xl3)" /></a
 				>
-			</li>
-			<li>
-				<Code content={`<Zzz_Logo />`} />
-				<a href="https://zzz.ryanatkn.com/"><Zzz_Logo size="var(--icon_size_xl3)" /></a>
 			</li>
 			<li>
 				<Code content={`<Webdevladder_Logo />`} />
