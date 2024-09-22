@@ -6,8 +6,7 @@ import type {Svg_Data} from '$lib/Svg.svelte';
 
 export const zzz_logo = {
 	label: "three sleepy z's",
-	fill: '#e03e81', // TODO BLOCK hardcoded? need to update the plain svg
-	// TODO BLOCK remove the `g` from the plain svg
+	fill: '#e03e81', // TODO BLOCK hardcoded or use variables so it's relative to the color-scheme? need to update the plain svg
 	paths: [
 		{
 			d: 'm 75.29285,61.962268 1.752156,1.914421 14.843359,1.811307 L 74.065203,86.193332 99.966781,85.408255 98.719988,83.648246 85.143565,82.136577 98.430963,62.887945',
@@ -67,7 +66,7 @@ export const fuz_logo = {
 
 export const moss_logo = {
 	label: 'a fuzzy tuft of green moss',
-	fill: 'var(--color_b_5)', // TODO BLOCK hardcoded color
+	fill: 'var(--color_b_5)',
 	paths: fuz_logo.paths,
 	attrs: {style: 'transform: scaleX(-1) rotate(180deg)'}, // TODO BLOCK @many merge attrs? problem is `style` could be overridden on usage accidentally, maybe should be defined more specifically?
 } satisfies Svg_Data;
