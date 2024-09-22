@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.124.4",
+  "version": "0.125.0",
   "modules": {
     "./package.json": {
       "path": "package.json",
@@ -46,6 +46,15 @@
     "./Community_Links.svelte": {
       "path": "Community_Links.svelte",
       "declarations": []
+    },
+    "./context_helpers.js": {
+      "path": "context_helpers.ts",
+      "declarations": [
+        {
+          "name": "create_context",
+          "kind": null
+        }
+      ]
     },
     "./Contextmenu_Entry.svelte": {
       "path": "Contextmenu_Entry.svelte",
@@ -103,28 +112,16 @@
           "kind": "function"
         },
         {
-          "name": "set_contextmenu",
-          "kind": "function"
+          "name": "contextmenu_context",
+          "kind": "variable"
         },
         {
-          "name": "get_contextmenu",
-          "kind": "function"
+          "name": "contextmenu_submenu_context",
+          "kind": "variable"
         },
         {
-          "name": "set_contextmenu_submenu",
-          "kind": "function"
-        },
-        {
-          "name": "get_contextmenu_submenu",
-          "kind": "function"
-        },
-        {
-          "name": "set_contextmenu_dimensions",
-          "kind": "function"
-        },
-        {
-          "name": "get_contextmenu_dimensions",
-          "kind": "function"
+          "name": "contextmenu_dimensions_context",
+          "kind": "variable"
         }
       ]
     },
@@ -288,12 +285,8 @@
           "kind": "function"
         },
         {
-          "name": "set_library_links",
-          "kind": "function"
-        },
-        {
-          "name": "get_library_links",
-          "kind": "function"
+          "name": "library_links_context",
+          "kind": "variable"
         },
         {
           "name": "Library_Link_Tag",
@@ -410,12 +403,8 @@
           "kind": "type"
         },
         {
-          "name": "get_themer",
-          "kind": "function"
-        },
-        {
-          "name": "set_themer",
-          "kind": "function"
+          "name": "themer_context",
+          "kind": "variable"
         },
         {
           "name": "sync_color_scheme",
