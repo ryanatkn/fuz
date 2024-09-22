@@ -20,7 +20,7 @@ export class Themer {
 			throw Error('unknown color scheme: ' + color_scheme);
 		}
 		this.theme = theme;
-		this.color_scheme = color_scheme;
+		this.color_scheme = color_scheme; // TODO `resolved_color_scheme` if auto? users could then do different things based on the final value - would not be added to `Themer_Json`
 	}
 
 	toJSON(): Themer_Json {
