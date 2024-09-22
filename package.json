@@ -200,11 +200,6 @@
       "types": "./dist/dimensions.svelte.d.ts",
       "default": "./dist/dimensions.svelte.js"
     },
-    "./Earbetter_Logo.svelte": {
-      "types": "./dist/Earbetter_Logo.svelte.d.ts",
-      "svelte": "./dist/Earbetter_Logo.svelte",
-      "default": "./dist/Earbetter_Logo.svelte"
-    },
     "./Fuz_Logo.svelte": {
       "types": "./dist/Fuz_Logo.svelte.d.ts",
       "svelte": "./dist/Fuz_Logo.svelte",
