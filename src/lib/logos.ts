@@ -1,6 +1,8 @@
-import type {Svg_Data} from '$lib/svg.js';
+import type {Svg_Data} from '$lib/Svg.svelte';
 
 // TODO are there significant performance gains to making this JSON? a downside would be duplication of the `spider_logo` without special handling
+
+// TODO BLOCK remove `style="fill:` in projects
 
 export const zzz_logo = {
 	label: "three sleepy z's",

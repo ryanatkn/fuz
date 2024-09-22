@@ -280,7 +280,6 @@ export const package_json = {
 			svelte: './dist/Svg.svelte',
 			default: './dist/Svg.svelte',
 		},
-		'./svg.js': {types: './dist/svg.d.ts', default: './dist/svg.js'},
 		'./Teleport.svelte': {
 			types: './dist/Teleport.svelte.d.ts',
 			svelte: './dist/Teleport.svelte',
@@ -456,7 +455,6 @@ export const src_json = {
 		},
 		'./Spiders.svelte': {path: 'Spiders.svelte', declarations: []},
 		'./Svg.svelte': {path: 'Svg.svelte', declarations: []},
-		'./svg.js': {path: 'svg.ts', declarations: [{name: 'Svg_Data', kind: 'type'}]},
 		'./Teleport.svelte': {path: 'Teleport.svelte', declarations: []},
 		'./Theme_Input.svelte': {path: 'Theme_Input.svelte', declarations: []},
 		'./theme.svelte.js': {

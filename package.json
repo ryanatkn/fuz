@@ -316,10 +316,6 @@
       "svelte": "./dist/Svg.svelte",
       "default": "./dist/Svg.svelte"
     },
-    "./svg.js": {
-      "types": "./dist/svg.d.ts",
-      "default": "./dist/svg.js"
-    },
     "./Teleport.svelte": {
       "types": "./dist/Teleport.svelte.d.ts",
       "svelte": "./dist/Teleport.svelte",
