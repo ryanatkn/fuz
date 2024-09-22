@@ -49,7 +49,7 @@ export function create_context<T>(options?: {
 			}
 			return value;
 		},
-		set(value: T | undefined = fallback?.()): T {
+		set: (value: T | undefined = fallback?.()): T => {
 			if (value === undefined) {
 				throw Error(
 					'context value' +
