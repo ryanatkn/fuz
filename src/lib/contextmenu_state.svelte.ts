@@ -374,14 +374,8 @@ const query_contextmenu_params = (
 	return params;
 };
 
-export const contextmenu_context = create_context<Contextmenu_State>({label: 'contextmenu'});
+export const contextmenu_context = create_context<Contextmenu_State>();
 
-export const contextmenu_submenu_context = create_context<Submenu_State>({
-	label: 'contextmenu_submenu',
-	optional: true,
-});
+export const contextmenu_submenu_context = create_context<Submenu_State>({optional: true});
 
-export const contextmenu_dimensions_context = create_context({
-	label: 'contextmenu_dimensions',
-	fallback: () => new Dimensions(),
-});
+export const contextmenu_dimensions_context = create_context({fallback: () => new Dimensions()});

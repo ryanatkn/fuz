@@ -16,10 +16,7 @@ export const to_library_path_info = (
 	return {path, path_is_selected, path_segment};
 };
 
-export const library_links_context = create_context({
-	label: 'library_links',
-	fallback: () => new Library_Links(),
-});
+export const library_links_context = create_context({fallback: () => new Library_Links()});
 
 export type Library_Link_Tag = 'h3' | 'h4';
 

@@ -37,7 +37,7 @@ export interface Themer_Json {
 	color_scheme: Color_Scheme;
 }
 
-export const themer_context = create_context<Themer>({label: 'themer'});
+export const themer_context = create_context<Themer>();
 
 export const sync_color_scheme = (color_scheme: Color_Scheme | null): void => {
 	if (!BROWSER) return;
