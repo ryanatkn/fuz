@@ -1,4 +1,5 @@
 import {getContext, setContext} from 'svelte';
+import {DEV} from 'esm-env';
 
 export interface Svelte_Context_Options<T> {
 	label?: string;
@@ -23,6 +24,10 @@ export class Svelte_Context<T> {
 	// TODO this is incorrectly named in the case that a fallback is provided, there's no maybe in that case,
 	// and I can't see how to get the ideal API with a single class because it depends on the `fallback` constructor option
 	maybe_get(): T | undefined {
+		if (DEV && this.fallback) {
+			// TODO instead of this check, maybe a separate class that doesn't have this method? but that's more complexity for the user and code to ship
+			throw Error('`maybe_get` should not be used when a fallback is provided');
+		}
 		return getContext(this.key) ?? this.fallback?.();
 	}
 
