@@ -21,12 +21,12 @@ export function create_context<T>(options: {label?: string; fallback: () => T}):
 	get: (error_message?: string) => T;
 	set: (value?: T) => T;
 };
-export function create_context<T>(options?: {label?: string; optional?: false}): {
-	get: (error_message?: string) => T;
-	set: (value: T) => T;
-};
 export function create_context<T>(options: {label?: string; optional: true}): {
 	get: (error_message?: string) => T | undefined;
+	set: (value: T) => T;
+};
+export function create_context<T>(options?: {label?: string; optional?: false}): {
+	get: (error_message?: string) => T;
 	set: (value: T) => T;
 };
 export function create_context<T>(options?: {
