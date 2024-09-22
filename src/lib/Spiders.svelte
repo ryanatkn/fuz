@@ -12,7 +12,8 @@
 	import {random_int, shuffle} from '@ryanatkn/belt/random.js';
 	import {create_random_alea} from '@ryanatkn/belt/random_alea.js';
 
-	import Spider from '$lib/Spider.svelte';
+	import Svg from '$lib/Svg.svelte';
+	import {fuz_logo} from '$lib/logos.js';
 
 	interface Props {
 		spiders?: string[]; // for now, just colors
@@ -44,7 +45,7 @@
 <!-- TODO show when intersected in viewport, maybe inline `svelte-intersect` in Fuz? -->
 <div class="spiders" style:--spider_count={spiders.length}>
 	{#each shuffled as color, i (color)}
-		<Spider fill={color} attrs={{style: `transform: rotate(${rotations[i]}deg)`}} />
+		<Svg data={fuz_logo} fill={color} attrs={{style: `transform: rotate(${rotations[i]}deg)`}} />
 	{/each}
 </div>
 

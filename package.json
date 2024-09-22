@@ -200,15 +200,6 @@
       "types": "./dist/dimensions.svelte.d.ts",
       "default": "./dist/dimensions.svelte.js"
     },
-    "./Fuz_Logo.svelte": {
-      "types": "./dist/Fuz_Logo.svelte.d.ts",
-      "svelte": "./dist/Fuz_Logo.svelte",
-      "default": "./dist/Fuz_Logo.svelte"
-    },
-    "./fuz.js": {
-      "types": "./dist/fuz.d.ts",
-      "default": "./dist/fuz.js"
-    },
     "./Fuzling.svelte": {
       "types": "./dist/Fuzling.svelte.d.ts",
       "svelte": "./dist/Fuzling.svelte",
@@ -286,11 +277,6 @@
       "svelte": "./dist/Mdn_Link.svelte",
       "default": "./dist/Mdn_Link.svelte"
     },
-    "./Moss_Logo.svelte": {
-      "types": "./dist/Moss_Logo.svelte.d.ts",
-      "svelte": "./dist/Moss_Logo.svelte",
-      "default": "./dist/Moss_Logo.svelte"
-    },
     "./Package_Detail.svelte": {
       "types": "./dist/Package_Detail.svelte.d.ts",
       "svelte": "./dist/Package_Detail.svelte",
@@ -324,11 +310,6 @@
     "./rune_helpers.svelte.js": {
       "types": "./dist/rune_helpers.svelte.d.ts",
       "default": "./dist/rune_helpers.svelte.js"
-    },
-    "./Spider.svelte": {
-      "types": "./dist/Spider.svelte.d.ts",
-      "svelte": "./dist/Spider.svelte",
-      "default": "./dist/Spider.svelte"
     },
     "./Spiders.svelte": {
       "types": "./dist/Spiders.svelte.d.ts",

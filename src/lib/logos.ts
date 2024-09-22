@@ -1,10 +1,10 @@
 import type {Svg_Data} from '$lib/svg.js';
 
-// TODO are there significant performance gains to making this JSON?
+// TODO are there significant performance gains to making this JSON? a downside would be duplication of the `spider_logo` without special handling
 
 export const zzz_logo = {
 	label: "three sleepy z's",
-	fill: 'var(--color_g_5)', // TODO BLOCK hardcoded? need to update the plain svg
+	fill: '#e03e81', // TODO BLOCK hardcoded? need to update the plain svg
 	// TODO BLOCK remove the `g` from the plain svg
 	paths: [
 		{
@@ -53,9 +53,52 @@ export const gro_logo = {
 	],
 } satisfies Svg_Data;
 
+export const fuz_logo = {
+	label: 'a friendly brown spider facing you',
+	fill: '#6a3e1b',
+	paths: [
+		{
+			d: 'M 26.253917,88.532336 29.904106,71.394855 40.667193,53.342811 40.258534,49.99234 38.417407,49.000991 22.876908,50.369035 9.4865496,53.880193 2.3019024,57.978424 0.42708056,57.27994 7.2642726,51.086985 20.811326,45.373351 37.960128,42.356792 39.354818,40.107008 38.229925,38.149883 26.030989,27.105568 14.46539,21.861786 8.0479986,18.615387 l -0.41428,-1.710463 8.2789464,1.499862 13.012873,5.003724 13.447448,10.696856 1.680801,-0.729547 0.222439,-1.343157 -3.983998,-12.128053 -5.730215,-9.573597 -0.823624,-5.1744052 1.16944,-1.165102 2.604334,6.3355162 6.612025,7.08777 4.874534,11.55989 2.800804,0.515574 4.48815,-1.359246 1.521623,-8.687062 5.685014,-8.620764 2.75965,-6.8316782 1.094578,1.128569 -1.293029,5.4222362 -4.084776,11.06803 -0.484994,8.377408 0.194311,1.192896 1.42954,1.700726 11.563936,-10.644623 9.878262,-8.331535 8.732915,-3.390708 -0.387305,1.402757 -5.294686,3.023816 -10.445054,10.705792 -9.561599,13.627899 -0.438945,1.602755 1.001398,1.666754 17.376932,3.986302 9.537375,6.940531 4.325785,4.636405 0.211208,1.557106 -6.15842,-4.279925 -10.413771,-5.155697 -15.838715,-1.696223 -0.83461,1.144484 0.774499,2.593247 9.737644,16.194355 3.925704,17.214082 0.07146,10.277289 -1.706242,1.13628 -2.009721,-9.21637 -5.894265,-16.88027 -12.292087,-17.295813 -4.177778,-0.585888 -7.294671,2.935716 -11.138052,16.645915 -6.462422,17.752509 -1.634756,7.206641 -2.070766,-1.52923 z',
+		},
+	],
+} satisfies Svg_Data;
+
+export const moss_logo = {
+	label: 'a fuzzy tuft of green moss',
+	fill: 'var(--color_b_5)', // TODO BLOCK hardcoded color
+	paths: fuz_logo.paths,
+	attrs: {style: 'transform: scaleX(-1) rotate(180deg)'}, // TODO BLOCK @many merge attrs? problem is `style` could be overridden on usage accidentally, maybe should be defined more specifically?
+} satisfies Svg_Data;
+
+export const fuz_code_logo = {
+	label: 'a friendly pink spider facing you',
+	fill: '#e03e81',
+	paths: fuz_logo.paths,
+} satisfies Svg_Data;
+
+export const fuz_blog_logo = {
+	label: 'a friendly yellow spider facing you',
+	fill: '#b19a25',
+	paths: fuz_logo.paths,
+} satisfies Svg_Data;
+
+export const fuz_mastodon_logo = {
+	label: 'a friendly purple spider facing you',
+	fill: '#8866cc',
+	paths: fuz_logo.paths,
+} satisfies Svg_Data;
+
+export const fuz_gitops_logo = {
+	label: 'a friendly blue spider facing you',
+	fill: '#397fc6',
+	paths: fuz_logo.paths,
+} satisfies Svg_Data;
+
+// TODO BLOCK fuz_template with fuzling (fuzling_logo?)
+
 export const webdevladder_logo = {
 	label: 'a spider web between two rungs of a ladder',
-	fill: 'var(--color_b_5)',
+	fill: 'var(--color_b_5)', // TODO BLOCK green rgb
 	// TODO BLOCK remove the `g` from the plain svg
 	paths: [
 		{

@@ -32,10 +32,13 @@
 	const final_fill = $derived(fill ?? data.fill ?? 'var(--text_color, #000)'); // can be overridden by each path's `fill` attribute
 	const final_width = $derived(width ?? size); // TODO @many default value? `100%` or omitted or something else?
 	const final_height = $derived(height ?? size); // TODO @many default value? `100%` or omitted or something else?
+
+	// TODO BLOCK @many merge attrs? problem is `style` could be overridden on usage accidentally, maybe should be defined more specifically?
 </script>
 
 <svg
 	viewBox={data.viewBox ?? '0 0 100 100'}
+	{...data.attrs}
 	{...attrs}
 	aria-label={label ?? data.label}
 	style:width={final_width}

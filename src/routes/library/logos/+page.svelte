@@ -4,12 +4,16 @@
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 	import {get_tome_by_name} from '$lib/tome.js';
 	import Tome_Content from '$lib/Tome_Content.svelte';
-	import Fuz_Logo from '$lib/Fuz_Logo.svelte';
-	import Moss_Logo from '$lib/Moss_Logo.svelte';
 	import Svg from '$lib/Svg.svelte';
 	import {
 		zzz_logo,
 		gro_logo,
+		fuz_logo,
+		moss_logo,
+		fuz_code_logo,
+		fuz_blog_logo,
+		fuz_mastodon_logo,
+		fuz_gitops_logo,
 		webdevladder_logo,
 		earbetter_logo,
 		spiderspace_logo,
@@ -30,16 +34,17 @@
 				<a href="https://zzz.ryanatkn.com/"><Svg data={zzz_logo} size="var(--icon_size_xl3)" /></a>
 			</li>
 			<li>
-				<Code content={`<Moss_Logo />`} />
-				<a href="https://moss.ryanatkn.com/"><Moss_Logo size="var(--icon_size_xl3)" /></a>
+				<Code content={`<Svg data={moss_logo} />`} />
+				<a href="https://moss.ryanatkn.com/"><Svg data={moss_logo} size="var(--icon_size_xl3)" /></a
+				>
 			</li>
 			<li>
 				<Code content={`<Svg data={gro_logo} />`} />
 				<a href="https://gro.ryanatkn.com/"><Svg data={gro_logo} size="var(--icon_size_xl3)" /></a>
 			</li>
 			<li>
-				<Code content={`<Fuz_Logo />`} />
-				<a href="https://www.fuz.dev/"><Fuz_Logo size="var(--icon_size_xl3)" /></a>
+				<Code content={`<Svg data={fuz_logo} />`} />
+				<a href="https://www.fuz.dev/"><Svg data={fuz_logo} size="var(--icon_size_xl3)" /></a>
 			</li>
 			<li>
 				<Code content={`<Svg data={webdevladder_logo} />`} />
@@ -48,27 +53,23 @@
 				>
 			</li>
 			<li>
-				<Code content={`<Fuz_Logo project="fuz_code" />`} />
-				<a href="https://code.fuz.dev/"
-					><Fuz_Logo project="fuz_code" size="var(--icon_size_xl3)" /></a
-				>
+				<Code content={`<Svg data={fuz_blog_logo} />`} />
+				<a href="https://blog.fuz.dev/"><Svg data={fuz_blog_logo} size="var(--icon_size_xl3)" /></a>
 			</li>
 			<li>
-				<Code content={`<Fuz_Logo project="fuz_blog" />`} />
-				<a href="https://blog.fuz.dev/"
-					><Fuz_Logo project="fuz_blog" size="var(--icon_size_xl3)" /></a
-				>
-			</li>
-			<li>
-				<Code content={`<Fuz_Logo project="fuz_mastodon" />`} />
+				<Code content={`<Svg data={fuz_mastodon_logo} />`} />
 				<a href="https://mastodon.fuz.dev/"
-					><Fuz_Logo project="fuz_mastodon" size="var(--icon_size_xl3)" /></a
+					><Svg data={fuz_mastodon_logo} size="var(--icon_size_xl3)" /></a
 				>
 			</li>
 			<li>
-				<Code content={`<Fuz_Logo project="fuz_gitops" />`} />
+				<Code content={`<Svg data={fuz_code_logo} />`} />
+				<a href="https://code.fuz.dev/"><Svg data={fuz_code_logo} size="var(--icon_size_xl3)" /></a>
+			</li>
+			<li>
+				<Code content={`<Svg data={fuz_gitops_logo} />`} />
 				<a href="https://gitops.fuz.dev/"
-					><Fuz_Logo project="fuz_gitops" size="var(--icon_size_xl3)" /></a
+					><Svg data={fuz_gitops_logo} size="var(--icon_size_xl3)" /></a
 				>
 			</li>
 			<li>

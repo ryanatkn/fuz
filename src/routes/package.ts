@@ -170,12 +170,6 @@ export const package_json = {
 			types: './dist/dimensions.svelte.d.ts',
 			default: './dist/dimensions.svelte.js',
 		},
-		'./Fuz_Logo.svelte': {
-			types: './dist/Fuz_Logo.svelte.d.ts',
-			svelte: './dist/Fuz_Logo.svelte',
-			default: './dist/Fuz_Logo.svelte',
-		},
-		'./fuz.js': {types: './dist/fuz.d.ts', default: './dist/fuz.js'},
 		'./Fuzling.svelte': {
 			types: './dist/Fuzling.svelte.d.ts',
 			svelte: './dist/Fuzling.svelte',
@@ -247,11 +241,6 @@ export const package_json = {
 			svelte: './dist/Mdn_Link.svelte',
 			default: './dist/Mdn_Link.svelte',
 		},
-		'./Moss_Logo.svelte': {
-			types: './dist/Moss_Logo.svelte.d.ts',
-			svelte: './dist/Moss_Logo.svelte',
-			default: './dist/Moss_Logo.svelte',
-		},
 		'./Package_Detail.svelte': {
 			types: './dist/Package_Detail.svelte.d.ts',
 			svelte: './dist/Package_Detail.svelte',
@@ -285,11 +274,6 @@ export const package_json = {
 		'./rune_helpers.svelte.js': {
 			types: './dist/rune_helpers.svelte.d.ts',
 			default: './dist/rune_helpers.svelte.js',
-		},
-		'./Spider.svelte': {
-			types: './dist/Spider.svelte.d.ts',
-			svelte: './dist/Spider.svelte',
-			default: './dist/Spider.svelte',
 		},
 		'./Spiders.svelte': {
 			types: './dist/Spiders.svelte.d.ts',
@@ -411,15 +395,6 @@ export const src_json = {
 			path: 'dimensions.svelte.ts',
 			declarations: [{name: 'Dimensions', kind: 'class'}],
 		},
-		'./Fuz_Logo.svelte': {path: 'Fuz_Logo.svelte', declarations: []},
-		'./fuz.js': {
-			path: 'fuz.ts',
-			declarations: [
-				{name: 'Fuz_Project_Name', kind: 'type'},
-				{name: 'to_fuz_project_color', kind: 'function'},
-				{name: 'to_fuz_project_color_name', kind: 'function'},
-			],
-		},
 		'./Fuzling.svelte': {path: 'Fuzling.svelte', declarations: []},
 		'./Hashlink.svelte': {path: 'Hashlink.svelte', declarations: []},
 		'./Hidden_Personal_Links.svelte': {path: 'Hidden_Personal_Links.svelte', declarations: []},
@@ -460,6 +435,12 @@ export const src_json = {
 			declarations: [
 				{name: 'zzz_logo', kind: 'variable'},
 				{name: 'gro_logo', kind: 'variable'},
+				{name: 'fuz_logo', kind: 'variable'},
+				{name: 'moss_logo', kind: 'variable'},
+				{name: 'fuz_code_logo', kind: 'variable'},
+				{name: 'fuz_blog_logo', kind: 'variable'},
+				{name: 'fuz_mastodon_logo', kind: 'variable'},
+				{name: 'fuz_gitops_logo', kind: 'variable'},
 				{name: 'webdevladder_logo', kind: 'variable'},
 				{name: 'earbetter_logo', kind: 'variable'},
 				{name: 'spiderspace_logo', kind: 'variable'},
@@ -468,7 +449,6 @@ export const src_json = {
 			],
 		},
 		'./Mdn_Link.svelte': {path: 'Mdn_Link.svelte', declarations: []},
-		'./Moss_Logo.svelte': {path: 'Moss_Logo.svelte', declarations: []},
 		'./Package_Detail.svelte': {path: 'Package_Detail.svelte', declarations: []},
 		'./Package_Summary.svelte': {path: 'Package_Summary.svelte', declarations: []},
 		'./Pending_Animation.svelte': {path: 'Pending_Animation.svelte', declarations: []},
@@ -479,7 +459,6 @@ export const src_json = {
 			path: 'rune_helpers.svelte.ts',
 			declarations: [{name: 'effect_skip', kind: 'function'}],
 		},
-		'./Spider.svelte': {path: 'Spider.svelte', declarations: []},
 		'./Spiders.svelte': {path: 'Spiders.svelte', declarations: []},
 		'./Svg.svelte': {path: 'Svg.svelte', declarations: []},
 		'./svg.js': {path: 'svg.ts', declarations: [{name: 'Svg_Data', kind: 'type'}]},

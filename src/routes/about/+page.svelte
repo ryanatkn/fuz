@@ -4,7 +4,8 @@
 	import Package_Detail from '$lib/Package_Detail.svelte';
 	import Library_Footer from '$lib/Library_Footer.svelte';
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
-	import Fuz_Logo from '$lib/Fuz_Logo.svelte';
+	import Svg from '$lib/Svg.svelte';
+	import {fuz_logo} from '$lib/logos.js';
 
 	const pkg = get_pkg();
 
@@ -16,7 +17,7 @@
 		<header class="box">
 			<h1 class="mt_xl4">{pkg.repo_name}</h1>
 		</header>
-		<Breadcrumb><Fuz_Logo size="32px" /></Breadcrumb>
+		<Breadcrumb><Svg data={fuz_logo} size="32px" /></Breadcrumb>
 	</section>
 	<Community_Links_Panel />
 	<section class="box w_100 mb_lg">
@@ -27,7 +28,7 @@
 	<section class="box mb_xl7">
 		<Library_Footer {pkg}>
 			<div class="mb_xl5">
-				<Breadcrumb><Fuz_Logo size="32px" /></Breadcrumb>
+				<Breadcrumb><Svg data={fuz_logo} size="32px" /></Breadcrumb>
 			</div>
 		</Library_Footer>
 	</section>

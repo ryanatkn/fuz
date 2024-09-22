@@ -1,9 +1,7 @@
 <script lang="ts">
-	import Moss_Logo from '$lib/Moss_Logo.svelte';
-	import Fuz_Logo from '$lib/Fuz_Logo.svelte';
 	import Fuzling from '$lib/Fuzling.svelte';
 	import Svg from '$lib/Svg.svelte';
-	import {zzz_logo, gro_logo} from '$lib/logos.js';
+	import {zzz_logo, gro_logo, fuz_logo, moss_logo} from '$lib/logos.js';
 
 	const size = 'var(--icon_size_lg)';
 </script>
@@ -14,10 +12,10 @@
 	href="https://zzz.ryanatkn.com/"><Svg data={zzz_logo} {size} /><span class="name">Zzz</span></a
 >
 <a class="project_link" title="Moss - CSS framework" href="https://moss.ryanatkn.com/"
-	><Moss_Logo {size} /><span class="name">Moss</span></a
+	><Svg data={moss_logo} {size} /><span class="name">Moss</span></a
 >
 <a class="project_link" title="Fuz - Svelte UI library" href="https://www.fuz.dev/"
-	><Fuz_Logo {size} /><span class="name">Fuz</span></a
+	><Svg data={fuz_logo} {size} /><span class="name">Fuz</span></a
 >
 <a
 	class="project_link"

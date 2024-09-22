@@ -4,7 +4,14 @@
 	import Library_Footer from '$lib/Library_Footer.svelte';
 	import Card from '$lib/Card.svelte';
 	import {get_pkg} from '$routes/pkg.js';
-	import Fuz_Logo from '$lib/Fuz_Logo.svelte';
+	import Svg from '$lib/Svg.svelte';
+	import {
+		fuz_code_logo,
+		fuz_blog_logo,
+		fuz_mastodon_logo,
+		fuz_gitops_logo,
+		fuz_logo,
+	} from '$lib/logos.js';
 	import Fuzling from '$lib/Fuzling.svelte';
 	import Hidden_Personal_Links from '$lib/Hidden_Personal_Links.svelte';
 
@@ -15,7 +22,7 @@
 	<div class="box width_md mb_xl9">
 		<section class="box">
 			<h1 class="mt_xl4 mb_lg">fuz</h1>
-			<div class="box mb_xl"><Fuz_Logo size="var(--icon_size_xl2)" /></div>
+			<div class="box mb_xl"><Svg data={fuz_logo} size="var(--icon_size_xl2)" /></div>
 			<blockquote class="shadow_bottom_sm px_xl bg">friendly user zystem 🧶</blockquote>
 			<div class="mb_lg p_xs2 shadow_md radius_sm">
 				<div class="width_sm panel p_lg shadow_inset_xs bg">
@@ -52,19 +59,19 @@
 					><Fuzling size="var(--icon_size_lg)" /> <span class="ml_lg">fuz_template</span></a
 				>
 				<a class="row chip bg px_md py_xs radius_sm mb_lg" href="https://blog.fuz.dev/"
-					><Fuz_Logo project="fuz_blog" size="var(--icon_size_lg)" />
+					><Svg data={fuz_blog_logo} size="var(--icon_size_lg)" />
 					<span class="ml_lg">fuz_blog</span></a
 				>
 				<a class="row chip bg px_md py_xs radius_sm mb_lg" href="https://mastodon.fuz.dev/"
-					><Fuz_Logo project="fuz_mastodon" size="var(--icon_size_lg)" />
+					><Svg data={fuz_mastodon_logo} size="var(--icon_size_lg)" />
 					<span class="ml_lg">fuz_mastodon</span></a
 				>
 				<a class="row chip bg px_md py_xs radius_sm mb_lg" href="https://code.fuz.dev/"
-					><Fuz_Logo project="fuz_code" size="var(--icon_size_lg)" />
+					><Svg data={fuz_code_logo} size="var(--icon_size_lg)" />
 					<span class="ml_lg">fuz_code</span></a
 				>
 				<a class="row chip bg px_md py_xs radius_sm" href="https://gitops.fuz.dev/"
-					><Fuz_Logo project="fuz_gitops" size="var(--icon_size_lg)" />
+					><Svg data={fuz_gitops_logo} size="var(--icon_size_lg)" />
 					<span class="ml_lg">fuz_gitops</span></a
 				>
 			</menu>

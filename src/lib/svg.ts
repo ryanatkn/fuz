@@ -13,6 +13,7 @@ export interface Svg_Data {
 	 * List of svg `path` attribute objects. The `d` attribute is required.
 	 */
 	paths?: Array<{d: string} & SvelteHTMLElements['path']>;
+	attrs?: SvelteHTMLElements['svg'];
 	fill?: string;
 	width?: string;
 	height?: string;
