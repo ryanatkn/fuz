@@ -1,7 +1,6 @@
 <script lang="ts">
-	import Fuzling from '$lib/Fuzling.svelte';
 	import Svg from '$lib/Svg.svelte';
-	import {zzz_logo, gro_logo, fuz_logo, moss_logo} from '$lib/logos.js';
+	import {zzz_logo, gro_logo, fuz_logo, moss_logo, fuz_template_logo} from '$lib/logos.js';
 
 	const size = 'var(--icon_size_lg)';
 </script>
@@ -25,7 +24,8 @@
 <a
 	class="project_link"
 	title="fuz_template - a static web app and Node library template with TypeScript, Svelte, SvelteKit, Vite, esbuild, Fuz, and Gro"
-	href="https://template.fuz.dev/"><Fuzling {size} /><span class="name">fuz_template</span></a
+	href="https://template.fuz.dev/"
+	><Svg data={fuz_template_logo} {size} /><span class="name">fuz_template</span></a
 >
 
 <style>

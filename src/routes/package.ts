@@ -170,11 +170,6 @@ export const package_json = {
 			types: './dist/dimensions.svelte.d.ts',
 			default: './dist/dimensions.svelte.js',
 		},
-		'./Fuzling.svelte': {
-			types: './dist/Fuzling.svelte.d.ts',
-			svelte: './dist/Fuzling.svelte',
-			default: './dist/Fuzling.svelte',
-		},
 		'./Hashlink.svelte': {
 			types: './dist/Hashlink.svelte.d.ts',
 			svelte: './dist/Hashlink.svelte',
@@ -395,7 +390,6 @@ export const src_json = {
 			path: 'dimensions.svelte.ts',
 			declarations: [{name: 'Dimensions', kind: 'class'}],
 		},
-		'./Fuzling.svelte': {path: 'Fuzling.svelte', declarations: []},
 		'./Hashlink.svelte': {path: 'Hashlink.svelte', declarations: []},
 		'./Hidden_Personal_Links.svelte': {path: 'Hidden_Personal_Links.svelte', declarations: []},
 		'./Hue_Input.svelte': {path: 'Hue_Input.svelte', declarations: []},
@@ -441,6 +435,7 @@ export const src_json = {
 				{name: 'fuz_blog_logo', kind: 'variable'},
 				{name: 'fuz_mastodon_logo', kind: 'variable'},
 				{name: 'fuz_gitops_logo', kind: 'variable'},
+				{name: 'fuz_template_logo', kind: 'variable'},
 				{name: 'webdevladder_logo', kind: 'variable'},
 				{name: 'earbetter_logo', kind: 'variable'},
 				{name: 'spiderspace_logo', kind: 'variable'},

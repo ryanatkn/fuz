@@ -94,7 +94,15 @@ export const fuz_gitops_logo = {
 	paths: fuz_logo.paths,
 } satisfies Svg_Data;
 
-// TODO BLOCK fuz_template with fuzling (fuzling_logo?)
+export const fuz_template_logo = {
+	label: 'a friendly orange pixelated spider facing you',
+	fill: '#f67c4c',
+	paths: [
+		{
+			d: 'm 25,81.200002 h 6.2 v -12.5 h 6.3 v -18.7 h -6.3 v 6.2 H 12.5 v 6.3 H 0 v -6.3 h 6.2 v -6.2 H 25 v -6.3 h 12.5 v -6.2 h -6.3 v -6.3 H 18.7 v -6.2 H 6.2 v -6.3 H 25 v 6.3 h 12.5 v -6.3 H 31.2 V 6.2 h 6.3 v 6.300002 h 6.2 V 31.200001 H 56.2 V 12.500002 h 6.3 V 6.2 h 6.2 v 12.500001 h -6.2 v 18.800001 h 6.2 v -12.5 h 12.5 v -12.5 h 12.5 v 6.2 h -6.2 v 12.5 H 75 v 12.5 h 6.2 v 6.3 h 12.5 v 6.2 h 6.299997 v 6.3 H 87.5 v -6.3 H 75 v -6.2 h -6.3 v 12.5 H 75 v 12.5 h 6.2 V 99.99999 H 75 V 81.200002 h -6.3 v -12.5 h -6.2 v -12.5 H 43.7 v 18.8 h -6.2 v 12.5 H 31.2 V 99.99999 H 25 Z',
+		},
+	],
+} satisfies Svg_Data;
 
 export const webdevladder_logo = {
 	label: 'a spider web between two rungs of a ladder',

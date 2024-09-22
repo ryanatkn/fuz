@@ -6,13 +6,13 @@
 	import {get_pkg} from '$routes/pkg.js';
 	import Svg from '$lib/Svg.svelte';
 	import {
+		fuz_logo,
 		fuz_code_logo,
 		fuz_blog_logo,
 		fuz_mastodon_logo,
 		fuz_gitops_logo,
-		fuz_logo,
+		fuz_template_logo,
 	} from '$lib/logos.js';
-	import Fuzling from '$lib/Fuzling.svelte';
 	import Hidden_Personal_Links from '$lib/Hidden_Personal_Links.svelte';
 
 	const pkg = get_pkg();
@@ -56,7 +56,8 @@
 			<h2 class="mt_0 mb_xl2 px_md">other packages</h2>
 			<menu class="unstyled size_lg">
 				<a class="row chip bg px_md py_xs radius_sm mb_lg" href="https://template.fuz.dev/"
-					><Fuzling size="var(--icon_size_lg)" /> <span class="ml_lg">fuz_template</span></a
+					><Svg data={fuz_template_logo} size="var(--icon_size_lg)" />
+					<span class="ml_lg">fuz_template</span></a
 				>
 				<a class="row chip bg px_md py_xs radius_sm mb_lg" href="https://blog.fuz.dev/"
 					><Svg data={fuz_blog_logo} size="var(--icon_size_lg)" />

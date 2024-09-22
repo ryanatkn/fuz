@@ -19,6 +19,7 @@
 		spiderspace_logo,
 		github_logo,
 		mdn_logo,
+		fuz_template_logo,
 	} from '$lib/logos.js';
 
 	const LIBRARY_ITEM_NAME = 'logos';
@@ -70,6 +71,12 @@
 				<Code content={`<Svg data={fuz_gitops_logo} />`} />
 				<a href="https://gitops.fuz.dev/"
 					><Svg data={fuz_gitops_logo} size="var(--icon_size_xl3)" /></a
+				>
+			</li>
+			<li>
+				<Code content={`<Svg data={fuz_template_logo} />`} />
+				<a href="https://template.fuz.dev/"
+					><Svg data={fuz_template_logo} size="var(--icon_size_xl3)" /></a
 				>
 			</li>
 			<li>

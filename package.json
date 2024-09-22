@@ -200,11 +200,6 @@
       "types": "./dist/dimensions.svelte.d.ts",
       "default": "./dist/dimensions.svelte.js"
     },
-    "./Fuzling.svelte": {
-      "types": "./dist/Fuzling.svelte.d.ts",
-      "svelte": "./dist/Fuzling.svelte",
-      "default": "./dist/Fuzling.svelte"
-    },
     "./Hashlink.svelte": {
       "types": "./dist/Hashlink.svelte.d.ts",
       "svelte": "./dist/Hashlink.svelte",
