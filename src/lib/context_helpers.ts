@@ -21,7 +21,7 @@ export function create_context<T>(options: {label?: string; fallback: () => T}):
 	get: (error_message?: string) => T;
 	set: (value?: T) => T;
 };
-export function create_context<T>(options: {label?: string; optional?: false}): {
+export function create_context<T>(options?: {label?: string; optional?: false}): {
 	get: (error_message?: string) => T;
 	set: (value: T) => T;
 };
@@ -29,12 +29,14 @@ export function create_context<T>(options: {label?: string; optional: true}): {
 	get: (error_message?: string) => T | undefined;
 	set: (value: T) => T;
 };
-export function create_context<T>(options: {
+export function create_context<T>(options?: {
 	label?: string;
 	fallback?: () => T;
 	optional?: boolean;
 }): {get: (error_message?: string) => T | undefined; set: (value?: T) => T} {
-	const {label, fallback, optional} = options;
+	const label = options?.label;
+	const fallback = options?.fallback;
+	const optional = options?.optional;
 	const key = Symbol(label);
 	return {
 		get: (error_message?: string) => {
