@@ -17,11 +17,11 @@ import {getContext, setContext} from 'svelte';
  * `get` throws an error if no value is set in the context.
  */
 export function create_context<T>(options: {fallback: () => T}): {
-	get: (error_message?: string) => T;
+	get: () => T;
 	set: (value?: T) => T;
 };
 export function create_context<T>(options: {optional: true}): {
-	get: (error_message?: string) => T | undefined;
+	get: () => T | undefined;
 	set: (value: T) => T;
 };
 export function create_context<T>(options?: {optional?: false}): {
