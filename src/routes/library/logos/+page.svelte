@@ -6,12 +6,11 @@
 	import Tome_Content from '$lib/Tome_Content.svelte';
 	import Fuz_Logo from '$lib/Fuz_Logo.svelte';
 	import Mdn_Logo from '$lib/Mdn_Logo.svelte';
-	import Webdevladder_Logo from '$lib/Webdevladder_Logo.svelte';
 	import Earbetter_Logo from '$lib/Earbetter_Logo.svelte';
 	import Moss_Logo from '$lib/Moss_Logo.svelte';
 	import Spiderspace_Logo from '$lib/Spiderspace_Logo.svelte';
 	import Svg from '$lib/Svg.svelte';
-	import {zzz_logo, gro_logo, github_logo} from '$lib/logos.js';
+	import {zzz_logo, gro_logo, webdevladder_logo, github_logo} from '$lib/logos.js';
 
 	const LIBRARY_ITEM_NAME = 'logos';
 
@@ -38,6 +37,12 @@
 				<a href="https://www.fuz.dev/"><Fuz_Logo size="var(--icon_size_xl3)" /></a>
 			</li>
 			<li>
+				<Code content={`<Svg data={webdevladder_logo} />`} />
+				<a href="https://www.webdevladder.net/"
+					><Svg data={webdevladder_logo} size="var(--icon_size_xl3)" /></a
+				>
+			</li>
+			<li>
 				<Code content={`<Fuz_Logo project="fuz_code" />`} />
 				<a href="https://code.fuz.dev/"
 					><Fuz_Logo project="fuz_code" size="var(--icon_size_xl3)" /></a
@@ -59,11 +64,6 @@
 				<Code content={`<Fuz_Logo project="fuz_gitops" />`} />
 				<a href="https://gitops.fuz.dev/"
 					><Fuz_Logo project="fuz_gitops" size="var(--icon_size_xl3)" /></a
-				>
-			</li>
-			<li>
-				<Code content={`<Webdevladder_Logo />`} />
-				<a href="https://www.webdevladder.net/"><Webdevladder_Logo size="var(--icon_size_xl3)" /></a
 				>
 			</li>
 			<li>

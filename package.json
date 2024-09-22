@@ -406,11 +406,6 @@
     "./tome.js": {
       "types": "./dist/tome.d.ts",
       "default": "./dist/tome.js"
-    },
-    "./Webdevladder_Logo.svelte": {
-      "types": "./dist/Webdevladder_Logo.svelte.d.ts",
-      "svelte": "./dist/Webdevladder_Logo.svelte",
-      "default": "./dist/Webdevladder_Logo.svelte"
     }
   }
 }

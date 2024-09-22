@@ -359,11 +359,6 @@ export const package_json = {
 			default: './dist/Tome_Section.svelte',
 		},
 		'./tome.js': {types: './dist/tome.d.ts', default: './dist/tome.js'},
-		'./Webdevladder_Logo.svelte': {
-			types: './dist/Webdevladder_Logo.svelte.d.ts',
-			svelte: './dist/Webdevladder_Logo.svelte',
-			default: './dist/Webdevladder_Logo.svelte',
-		},
 	},
 } satisfies Package_Json;
 
@@ -481,6 +476,7 @@ export const src_json = {
 			declarations: [
 				{name: 'zzz_logo', kind: 'variable'},
 				{name: 'gro_logo', kind: 'variable'},
+				{name: 'webdevladder_logo', kind: 'variable'},
 				{name: 'github_logo', kind: 'variable'},
 			],
 		},
@@ -539,7 +535,6 @@ export const src_json = {
 				{name: 'set_tome', kind: 'function'},
 			],
 		},
-		'./Webdevladder_Logo.svelte': {path: 'Webdevladder_Logo.svelte', declarations: []},
 	},
 } satisfies Src_Json;
 
