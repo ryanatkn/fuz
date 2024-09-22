@@ -44,12 +44,6 @@ export function create_context<T>(options?: {fallback?: () => T; optional?: bool
 			}
 			return value;
 		},
-		set: (value: T | undefined = fallback?.()): T => {
-			if (value === undefined) {
-				throw Error('context value must be provided to `set` as an argument or `fallback` option');
-			}
-			setContext(key, value);
-			return value;
-		},
+		set: (value: T | undefined = fallback?.()) => setContext(key, value)!,
 	};
 }
