@@ -80,7 +80,9 @@ export function create_context<T>(options: {
 
 // 	maybe_get(): T | undefined {
 // 		if (DEV && this.fallback) {
-// 			// TODO BLOCK this method doesn't exist if there's a fallback - maybe this instead of this check, add a separate class that doesn't have this method? but that's more complexity for the user and code to ship
+// 			// TODO BLOCK this method doesn't exist if there's a fallback -
+//      // maybe this instead of this check, add a separate class that doesn't have this method?
+//      // but that's more complexity for the user and more code to ship
 // 			throw Error(
 // 				'`maybe_get` is invalid with a fallback' + (this.label ? ` for "${this.label}"` : ''),
 // 			);
