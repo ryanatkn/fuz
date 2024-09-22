@@ -13,7 +13,7 @@ import {getContext, setContext} from 'svelte';
  * `get` throws an error if no value is set in the context.
  */
 export function create_context<T>(options: {label?: string; fallback: () => T}): {
-	get: () => T;
+	get: (message?: string) => T;
 	set: (value?: T) => T;
 };
 export function create_context<T>(options: {label?: string; optional?: false}): {
@@ -21,16 +21,14 @@ export function create_context<T>(options: {label?: string; optional?: false}): 
 	set: (value: T) => T;
 };
 export function create_context<T>(options: {label?: string; optional: true}): {
-	get: () => T | undefined;
+	get: (message?: string) => T | undefined;
 	set: (value: T) => T;
 };
 export function create_context<T>(options: {
 	label?: string;
 	fallback?: () => T;
 	optional?: boolean;
-}):
-	| {get: (message?: string) => T; set: (value: T | undefined) => T}
-	| {get: (message?: string) => T | undefined; set: (value: T | undefined) => T} {
+}): {get: (message?: string) => T | undefined; set: (value?: T) => T} {
 	const {label, fallback, optional} = options;
 	const key = Symbol(label);
 	return {
@@ -47,7 +45,7 @@ export function create_context<T>(options: {
 				throw Error(
 					'context value' +
 						(label ? ` "${label}"` : '') +
-						' is not defined - provide a value to `set` or fallback in the constructor',
+						' is not defined - provide a value to `set` or `fallback` in the options',
 				);
 			}
 			setContext(key, value);
