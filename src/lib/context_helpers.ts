@@ -14,7 +14,6 @@ export interface Svelte_Context_Options<T> {
 
 /**
  * Wraps Svelte's `setContext` and `getContext` for better ergonmics.
- * The `label` option enhances error messages.
  */
 export class Svelte_Context<T> {
 	label?: string;
@@ -30,7 +29,9 @@ export class Svelte_Context<T> {
 	maybe_get(): T | undefined {
 		if (DEV && this.fallback) {
 			// TODO instead of this check, maybe a separate class that doesn't have this method? but that's more complexity for the user and code to ship
-			throw Error('`maybe_get` should not be used when a fallback is provided');
+			throw Error(
+				'`maybe_get` is invalid with a fallback' + (this.label ? ` for "${this.label}"` : ''),
+			);
 		}
 		return getContext(this.key) ?? this.fallback?.();
 	}
