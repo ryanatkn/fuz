@@ -45,7 +45,7 @@ export function create_context<T>(options: {
 				throw Error(
 					'context value' +
 						(label ? ` "${label}"` : '') +
-						' is not defined - provide a value to `set` or `fallback` in the options',
+						' is not defined - provide a value to `set` or a `fallback` option',
 				);
 			}
 			setContext(key, value);
