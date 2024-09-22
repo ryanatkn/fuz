@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.125.0
+
+### Minor Changes
+
+- add a `create_context` helper ([#56](https://github.com/ryanatkn/fuz/pull/56))
+
 ## 0.124.4
 
 ### Patch Changes
