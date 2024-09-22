@@ -1,7 +1,7 @@
 import {base} from '$app/paths';
 import {SvelteSet} from 'svelte/reactivity';
 
-import {Svelte_Context} from '$lib/context_helpers.js';
+import {create_context} from '$lib/context_helpers.js';
 
 export const DEFAULT_LIBRARY_PATH = '/library';
 
@@ -16,7 +16,7 @@ export const to_library_path_info = (
 	return {path, path_is_selected, path_segment};
 };
 
-export const library_links_context = new Svelte_Context({
+export const library_links_context = create_context({
 	label: 'library_links',
 	fallback: () => new Library_Links(),
 });

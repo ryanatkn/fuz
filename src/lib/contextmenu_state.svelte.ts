@@ -5,7 +5,7 @@ import type {ActionReturn} from 'svelte/action';
 import {BROWSER} from 'esm-env';
 
 import {Dimensions} from '$lib/dimensions.svelte.js';
-import {Svelte_Context} from '$lib/context_helpers.js';
+import {create_context} from '$lib/context_helpers.js';
 
 export type Contextmenu_Params =
 	| Snippet
@@ -248,7 +248,7 @@ export class Contextmenu_State {
 	 * @initializes
 	 */
 	add_entry(run: Contextmenu_Run): Entry_State {
-		const menu = contextmenu_submenu_context.maybe_get() ?? this.root_menu;
+		const menu = contextmenu_submenu_context.get() ?? this.root_menu;
 		const entry = new Entry_State(menu, run);
 		menu.items.push(entry);
 		// TODO messy, runs more than needed
@@ -262,7 +262,7 @@ export class Contextmenu_State {
 	 * @initializes
 	 */
 	add_submenu(): Submenu_State {
-		const menu = contextmenu_submenu_context.maybe_get() ?? this.root_menu;
+		const menu = contextmenu_submenu_context.get() ?? this.root_menu;
 		const submenu = new Submenu_State(menu, menu.depth + 1);
 		menu.items.push(submenu);
 		contextmenu_submenu_context.set(submenu);
@@ -374,15 +374,14 @@ const query_contextmenu_params = (
 	return params;
 };
 
-export const contextmenu_context: Svelte_Context<Contextmenu_State> = new Svelte_Context({
-	label: 'contextmenu',
-});
+export const contextmenu_context = create_context<Contextmenu_State>({label: 'contextmenu'});
 
-export const contextmenu_submenu_context: Svelte_Context<Submenu_State> = new Svelte_Context({
+export const contextmenu_submenu_context = create_context<Submenu_State>({
 	label: 'contextmenu_submenu',
+	optional: true,
 });
 
-export const contextmenu_dimensions_context = new Svelte_Context({
+export const contextmenu_dimensions_context = create_context({
 	label: 'contextmenu_dimensions',
 	fallback: () => new Dimensions(),
 });
