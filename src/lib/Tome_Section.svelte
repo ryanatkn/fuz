@@ -13,7 +13,7 @@
 	import {DEV} from 'esm-env';
 
 	import {intersect} from '$lib/intersect.js';
-	import {get_library_links} from '$lib/library_helpers.svelte.js';
+	import {library_links_context} from '$lib/library_helpers.svelte.js';
 
 	interface Props {
 		attrs?: SvelteHTMLElements['section'];
@@ -22,7 +22,7 @@
 
 	const {attrs, children}: Props = $props();
 
-	const library_links = get_library_links();
+	const library_links = library_links_context.get();
 
 	let slug: string;
 

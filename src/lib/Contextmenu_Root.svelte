@@ -4,8 +4,8 @@
 	import type {Action} from 'svelte/action';
 
 	import {
-		set_contextmenu,
-		set_contextmenu_dimensions,
+		contextmenu_context,
+		contextmenu_dimensions_context,
 		Contextmenu_State,
 		open_contextmenu,
 	} from '$lib/contextmenu_state.svelte.js';
@@ -86,7 +86,7 @@
 		children,
 	}: Props = $props();
 
-	set_contextmenu(contextmenu);
+	contextmenu_context.set(contextmenu);
 
 	let el: HTMLElement | undefined = $state();
 
@@ -108,7 +108,7 @@
 		}
 	});
 
-	const dimensions = set_contextmenu_dimensions();
+	const dimensions = contextmenu_dimensions_context.set();
 	$effect(() => {
 		if (el) {
 			const rect = el.getBoundingClientRect();

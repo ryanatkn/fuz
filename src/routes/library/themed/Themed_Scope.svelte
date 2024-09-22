@@ -7,7 +7,7 @@
 	import {render_theme_style} from '@ryanatkn/moss/theme.js';
 	import {BROWSER} from 'esm-env';
 
-	import {get_themer, set_themer, Themer, create_theme_style_html} from '$lib/theme.svelte.js';
+	import {themer_context, Themer, create_theme_style_html} from '$lib/theme.svelte.js';
 
 	// TODO @many revisit Themed_Scope
 
@@ -27,7 +27,7 @@
 	}
 
 	const {
-		themer = new Themer(get_themer().theme, get_themer().color_scheme),
+		themer = new Themer(themer_context.get().theme, themer_context.get().color_scheme),
 		tagName = 'div',
 		children,
 	}: Props = $props();
@@ -47,7 +47,7 @@
 	 * though a more complicated API could be devised to accept an `Element` as a prop.
 	 */
 
-	set_themer(themer);
+	themer_context.set(themer);
 
 	const style = $derived(render_theme_style(themer.theme, {id, empty_default_theme: false}));
 	const theme_style_html = $derived(style ? create_theme_style_html(style) : null);

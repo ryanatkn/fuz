@@ -3,7 +3,7 @@
 	import {swallow} from '@ryanatkn/belt/dom.js';
 
 	import Pending_Animation from '$lib/Pending_Animation.svelte';
-	import {get_contextmenu, type Contextmenu_Run} from '$lib/contextmenu_state.svelte.js';
+	import {contextmenu_context, type Contextmenu_Run} from '$lib/contextmenu_state.svelte.js';
 
 	interface Props {
 		run: Contextmenu_Run;
@@ -13,7 +13,7 @@
 
 	const {run, icon, children}: Props = $props();
 
-	const contextmenu = get_contextmenu();
+	const contextmenu = contextmenu_context.get();
 
 	const entry = contextmenu.add_entry(run);
 

@@ -1,5 +1,6 @@
-import {getContext, setContext} from 'svelte';
 import type {Style_Variable} from '@ryanatkn/moss/variable.js';
+
+import {create_context} from '$lib/context_helpers.js';
 
 // TODO maybe change this to a generic wrapper class for any value?
 // TODO @many add to $lib?
@@ -11,11 +12,6 @@ export class Selected_Style_Variable {
 	}
 }
 
-const SELECTED_VARIABLE_KEY = Symbol('selected_variable');
-
-export const set_selected_variable = (
-	value = new Selected_Style_Variable(null),
-): Selected_Style_Variable => setContext(SELECTED_VARIABLE_KEY, value);
-
-export const get_selected_variable = (): Selected_Style_Variable =>
-	getContext(SELECTED_VARIABLE_KEY);
+export const selected_variable_context = create_context({
+	fallback: () => new Selected_Style_Variable(null),
+});

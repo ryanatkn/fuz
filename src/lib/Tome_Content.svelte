@@ -6,7 +6,7 @@
 
 	import Tome_Header from '$lib/Tome_Header.svelte';
 	import {set_tome, type Tome} from '$lib/tome.js';
-	import {DEFAULT_LIBRARY_PATH, get_library_links} from '$lib/library_helpers.svelte.js';
+	import {DEFAULT_LIBRARY_PATH, library_links_context} from '$lib/library_helpers.svelte.js';
 	import {intersect} from '$lib/intersect.js';
 
 	interface Props {
@@ -18,7 +18,7 @@
 
 	const {tome, library_path = DEFAULT_LIBRARY_PATH, header, children}: Props = $props();
 
-	const library_links = get_library_links();
+	const library_links = library_links_context.get();
 
 	set_tome(tome); // TODO make reactive?
 

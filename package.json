@@ -134,6 +134,10 @@
       "svelte": "./dist/Community_Links.svelte",
       "default": "./dist/Community_Links.svelte"
     },
+    "./context_helpers.js": {
+      "types": "./dist/context_helpers.d.ts",
+      "default": "./dist/context_helpers.js"
+    },
     "./Contextmenu_Entry.svelte": {
       "types": "./dist/Contextmenu_Entry.svelte.d.ts",
       "svelte": "./dist/Contextmenu_Entry.svelte",

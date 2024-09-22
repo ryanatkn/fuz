@@ -2,7 +2,7 @@
 	import {page} from '$app/stores';
 	import {slide} from 'svelte/transition';
 
-	import {get_library_links} from '$lib/library_helpers.svelte.js';
+	import {library_links_context} from '$lib/library_helpers.svelte.js';
 
 	interface Props {
 		sidebar?: boolean; // TODO @many dialog navs (this shouldn't exist)
@@ -12,7 +12,7 @@
 
 	// TODO remove CSS below with reusable CSS or a Svelte component
 
-	const library_links = get_library_links();
+	const library_links = library_links_context.get();
 
 	const hash = $derived($page.url.hash.slice(1));
 </script>

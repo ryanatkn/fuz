@@ -10,7 +10,7 @@
 	import Library_Tertiary_Nav from '$lib/Library_Tertiary_Nav.svelte';
 	import Dialog from '$lib/Dialog.svelte';
 	import Library_Footer from '$lib/Library_Footer.svelte';
-	import {set_library_links} from '$lib/library_helpers.svelte.js';
+	import {library_links_context} from '$lib/library_helpers.svelte.js';
 
 	interface Props {
 		tomes: Tome[];
@@ -42,7 +42,7 @@
 		show_secondary_nav_dialog = false;
 	});
 
-	set_library_links();
+	library_links_context.set();
 </script>
 
 <svelte:window bind:innerWidth onhashchange={() => (show_secondary_nav_dialog = false)} />
@@ -125,11 +125,7 @@
 		padding: var(--library_content_padding);
 		padding-top: 0;
 		margin: 0 auto;
-		overflow: hidden; /* TODO maybe remove this and force users to deal with it, do in combination with the below */
-		/* TODO tried this along with `align_self_end` on the `box`
-		to put the breadcrumb at the bottom but it messes up the Moss layout, revisit
-		display: grid;
-		 */
+		overflow: hidden; /* TODO maybe heavy handed */
 	}
 
 	.secondary_nav_wrapper {

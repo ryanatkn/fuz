@@ -1,6 +1,7 @@
-import {getContext, setContext} from 'svelte';
 import {base} from '$app/paths';
 import {SvelteSet} from 'svelte/reactivity';
+
+import {create_context} from '$lib/context_helpers.js';
 
 export const DEFAULT_LIBRARY_PATH = '/library';
 
@@ -15,16 +16,7 @@ export const to_library_path_info = (
 	return {path, path_is_selected, path_segment};
 };
 
-const LIBRARY_LINKS_KEY = Symbol('library_links');
-
-export const set_library_links = (library_links = new Library_Links()): Library_Links =>
-	setContext(LIBRARY_LINKS_KEY, library_links);
-
-export const get_library_links = (): Library_Links => {
-	const links = getContext(LIBRARY_LINKS_KEY);
-	if (!links) throw Error('get_library_links called before set_library_links');
-	return links as Library_Links;
-};
+export const library_links_context = create_context({fallback: () => new Library_Links()});
 
 export type Library_Link_Tag = 'h3' | 'h4';
 

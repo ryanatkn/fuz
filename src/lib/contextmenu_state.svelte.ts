@@ -1,10 +1,11 @@
-import {getContext, onDestroy, setContext, type Snippet} from 'svelte';
+import {onDestroy, type Snippet} from 'svelte';
 import type {Result} from '@ryanatkn/belt/result.js';
 import {is_promise} from '@ryanatkn/belt/async.js';
 import type {ActionReturn} from 'svelte/action';
 import {BROWSER} from 'esm-env';
 
 import {Dimensions} from '$lib/dimensions.svelte.js';
+import {create_context} from '$lib/context_helpers.js';
 
 export type Contextmenu_Params =
 	| Snippet
@@ -247,7 +248,7 @@ export class Contextmenu_State {
 	 * @initializes
 	 */
 	add_entry(run: Contextmenu_Run): Entry_State {
-		const menu = get_contextmenu_submenu() ?? this.root_menu;
+		const menu = contextmenu_submenu_context.get() ?? this.root_menu;
 		const entry = new Entry_State(menu, run);
 		menu.items.push(entry);
 		// TODO messy, runs more than needed
@@ -261,10 +262,10 @@ export class Contextmenu_State {
 	 * @initializes
 	 */
 	add_submenu(): Submenu_State {
-		const menu = get_contextmenu_submenu() ?? this.root_menu;
+		const menu = contextmenu_submenu_context.get() ?? this.root_menu;
 		const submenu = new Submenu_State(menu, menu.depth + 1);
 		menu.items.push(submenu);
-		set_contextmenu_submenu(submenu);
+		contextmenu_submenu_context.set(submenu);
 		// TODO messy, runs more than needed
 		onDestroy(() => {
 			menu.items.length = 0;
@@ -373,21 +374,8 @@ const query_contextmenu_params = (
 	return params;
 };
 
-const CONTEXTMENU_STORE_KEY = Symbol();
-export const set_contextmenu = (contextmenu: Contextmenu_State): Contextmenu_State =>
-	setContext(CONTEXTMENU_STORE_KEY, contextmenu);
-export const get_contextmenu = (): Contextmenu_State => getContext(CONTEXTMENU_STORE_KEY);
+export const contextmenu_context = create_context<Contextmenu_State>();
 
-const CONTEXTMENU_STATE_KEY = Symbol();
-export const set_contextmenu_submenu = (submenu: Submenu_State): Submenu_State =>
-	setContext(CONTEXTMENU_STATE_KEY, submenu);
-export const get_contextmenu_submenu = (): Submenu_State | undefined =>
-	getContext(CONTEXTMENU_STATE_KEY);
+export const contextmenu_submenu_context = create_context<Submenu_State>({optional: true});
 
-const CONTEXTMENU_DIMENSIONS_STORE_KEY = Symbol();
-export const set_contextmenu_dimensions = (dimensions = new Dimensions()): Dimensions => {
-	setContext(CONTEXTMENU_DIMENSIONS_STORE_KEY, dimensions);
-	return dimensions;
-};
-export const get_contextmenu_dimensions = (): Dimensions =>
-	getContext(CONTEXTMENU_DIMENSIONS_STORE_KEY);
+export const contextmenu_dimensions_context = create_context({fallback: () => new Dimensions()});
