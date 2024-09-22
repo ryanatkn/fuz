@@ -32,5 +32,5 @@
 	{:else}
 		{@render final_children()}
 	{/if}
-	<Svg data={mdn_logo} inline classes="mx_xs3" /></a
+	<Svg data={mdn_logo} inline size="var(--icon_size_xs)" classes="mx_xs3" /></a
 >

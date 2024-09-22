@@ -24,7 +24,10 @@
 	<div class="logo box panel p_lg shadow_inset_xs">
 		{@render logo_header?.()}
 		<a href={pkg.repo_url} rel="me" title="source code on GitHub"
-			>{#if logo}{@render logo()}{:else}<Svg data={github_logo} />{/if}</a
+			>{#if logo}{@render logo()}{:else}<Svg
+					data={github_logo}
+					size="var(--icon_size_lg)"
+				/>{/if}</a
 		>
 		{@render logo_footer?.()}
 	</div>
