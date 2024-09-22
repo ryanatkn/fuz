@@ -4,9 +4,9 @@ import type {SvelteHTMLElements} from 'svelte/elements';
 
 export interface Svg_Data {
 	/**
-	 * List of svg `path` attribute objects.
+	 * List of svg `path` attribute objects. The `d` attribute is required.
 	 */
-	paths: Array<SvelteHTMLElements['path']>; // TODO BLOCK should `d` be required?
+	paths: Array<{d: string} & SvelteHTMLElements['path']>;
 	fill?: string;
 	width?: string;
 	height?: string;
