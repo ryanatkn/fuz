@@ -1,6 +1,6 @@
 import type {Svg_Data} from '$lib/svg.js';
 
-// TODO BLOCK any reason to make this JSON?
+// TODO BLOCK are there significant performance gains to making this JSON?
 
 export const github_logo: Svg_Data = {
 	paths: [
