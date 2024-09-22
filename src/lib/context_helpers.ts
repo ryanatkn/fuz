@@ -28,7 +28,7 @@ export class Svelte_Context<T> {
 
 	maybe_get(): T | undefined {
 		if (DEV && this.fallback) {
-			// TODO instead of this check, maybe a separate class that doesn't have this method? but that's more complexity for the user and code to ship
+			// TODO BLOCK instead of this check, maybe a separate class that doesn't have this method? but that's more complexity for the user and code to ship
 			throw Error(
 				'`maybe_get` is invalid with a fallback' + (this.label ? ` for "${this.label}"` : ''),
 			);
@@ -44,16 +44,16 @@ export class Svelte_Context<T> {
 		return value;
 	}
 
-	set(value?: T): T {
-		const v = value ?? this.fallback?.();
-		if (v === undefined) {
+	// TODO BLOCK this type is invalid when a fallback is omitted, can't be `undefined`
+	set(value: T | undefined = this.fallback?.()): T {
+		if (value === undefined) {
 			throw Error(
 				'context value' +
 					(this.label ? ` "${this.label}"` : '') +
 					' is not defined - provide a value to `set` or fallback in the constructor',
 			);
 		}
-		setContext(this.key, v);
-		return v;
+		setContext(this.key, value);
+		return value;
 	}
 }
