@@ -396,10 +396,7 @@ export const src_json = {
 		'./Community_Links.svelte': {path: 'Community_Links.svelte', declarations: []},
 		'./context_helpers.js': {
 			path: 'context_helpers.ts',
-			declarations: [
-				{name: 'Svelte_Context_Options', kind: 'type'},
-				{name: 'Svelte_Context', kind: 'class'},
-			],
+			declarations: [{name: 'create_context', kind: null}],
 		},
 		'./Contextmenu_Entry.svelte': {path: 'Contextmenu_Entry.svelte', declarations: []},
 		'./Contextmenu_Link_Entry.svelte': {path: 'Contextmenu_Link_Entry.svelte', declarations: []},
