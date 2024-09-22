@@ -79,7 +79,7 @@
 				<a href="https://www.spiderspace.org/"><Spiderspace_Logo size="var(--icon_size_xl3)" /></a>
 			</li>
 			<li>
-				<Code content={`<Github_Logo />`} />
+				<Code content={`<Svg data={github_logo} />`} />
 				<a href="https://github.com/"
 					><Svg data={github_logo} fill="var(--text_color_2)" size="var(--icon_size_xl3)" /></a
 				>
