@@ -5,7 +5,6 @@
 	import {get_tome_by_name} from '$lib/tome.js';
 	import Tome_Content from '$lib/Tome_Content.svelte';
 	import Fuz_Logo from '$lib/Fuz_Logo.svelte';
-	import Mdn_Logo from '$lib/Mdn_Logo.svelte';
 	import Moss_Logo from '$lib/Moss_Logo.svelte';
 	import Svg from '$lib/Svg.svelte';
 	import {
@@ -15,6 +14,7 @@
 		earbetter_logo,
 		spiderspace_logo,
 		github_logo,
+		mdn_logo,
 	} from '$lib/logos.js';
 
 	const LIBRARY_ITEM_NAME = 'logos';
@@ -90,8 +90,10 @@
 				>
 			</li>
 			<li>
-				<Code content={`<Mdn_Logo />`} />
-				<a href="https://developer.mozilla.org/"><Mdn_Logo size="var(--icon_size_xl3)" /></a>
+				<Code content={`<Svg data={mdn_logo} />`} />
+				<a href="https://developer.mozilla.org/"
+					><Svg data={mdn_logo} size="var(--icon_size_xl3)" /></a
+				>
 			</li>
 		</ul>
 	</section>

@@ -3,7 +3,8 @@
 	import type {SvelteHTMLElements} from 'svelte/elements';
 	import type {Snippet} from 'svelte';
 
-	import Mdn_Logo from '$lib/Mdn_Logo.svelte';
+	import Svg from '$lib/Svg.svelte';
+	import {mdn_logo} from '$lib/logos.js';
 
 	interface Props {
 		/**
@@ -31,5 +32,5 @@
 	{:else}
 		{@render final_children()}
 	{/if}
-	<Mdn_Logo inline classes="mx_xs3" /></a
+	<Svg data={mdn_logo} inline classes="mx_xs3" /></a
 >
