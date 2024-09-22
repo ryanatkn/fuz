@@ -2,7 +2,7 @@ import type {Svg_Data} from '$lib/svg.js';
 
 // TODO are there significant performance gains to making this JSON?
 
-export const zzz_logo: Svg_Data = {
+export const zzz_logo = {
 	label: "three sleepy z's",
 	fill: 'var(--color_g_5)', // TODO BLOCK hardcoded? need to update the plain svg
 	// TODO BLOCK remove the `g` from the plain svg
@@ -17,9 +17,9 @@ export const zzz_logo: Svg_Data = {
 			d: 'M 0.62464489,0.27405496 3.9721704,4.0993769 50.515703,10.089712 0.04581262,99.957542 68.009395,98.901532 65.391343,95.487941 24.119119,88.067804 66.301842,2.2896897',
 		},
 	],
-};
+} satisfies Svg_Data;
 
-export const gro_logo: Svg_Data = {
+export const gro_logo = {
 	label: 'a pixelated green oak acorn with a glint of sun',
 	paths: [
 		{
@@ -51,9 +51,9 @@ export const gro_logo: Svg_Data = {
 			d: 'M 93.75,31.25 H 87.5 V 25 h 6.25 v 6.25 H 100 v 12.5 H 93.75 Z M 75,18.75 h 6.25 V 25 H 75 Z M 37.5,12.5 H 50 V 6.25 h 6.25 v 6.25 h 12.5 v 6.25 H 53.125 37.5 Z',
 		},
 	],
-};
+} satisfies Svg_Data;
 
-export const webdevladder_logo: Svg_Data = {
+export const webdevladder_logo = {
 	label: 'a spider web between two rungs of a ladder',
 	fill: 'var(--color_b_5)',
 	// TODO BLOCK remove the `g` from the plain svg
@@ -68,9 +68,9 @@ export const webdevladder_logo: Svg_Data = {
 			d: 'm 50.5769,48.285601 0.966122,3.361133 2.456436,-0.09293 2.944734,-2.586661 -0.487976,-4.866721 -1.365959,-1.908962 -3.545067,0.04669 -2.781093,2.644178 -1.139247,5.065325 1.443893,5.999034 5.886709,0.356695 5.877825,-5.767341 0.765816,-9.526984 -4.632806,-4.416277 -7.978619,-0.418274 -5.522701,6.340293 -1.318243,11.151446 3.639737,9.979651 L 57.644364,63.06574 65.560214,52.529221 68.781299,35.897047 60.700698,29.322838 46.760117,27.037036 36.988493,39.207818 33.631767,58.700914 41.28115,74.499356 60.724825,72.962824 71.958187,55.382886 77.273782,30.412258 65.694639,19.60012 44.511786,14.731021 44.715509,16.675374 64.52349,21.522567 74.843098,31.738084 69.730823,54.159963 59.634025,70.76874 42.717921,72.097706 35.95196,57.551866 l 2.738009,-17.179374 8.834853,-11.13111 12.095799,2.019068 6.862581,6.161296 -3.066403,14.068912 -6.523733,9.299082 -9.939247,0.591529 -2.829727,-8.963835 1.086548,-8.709392 4.596194,-5.524272 6.319767,0.309359 3.579728,3.550699 -0.928078,7.718816 -4.331029,4.154252 -4.574097,-0.220971',
 		},
 	],
-};
+} satisfies Svg_Data;
 
-export const github_logo: Svg_Data = {
+export const github_logo = {
 	label: 'the GitHub icon, an octocat silhouette',
 	paths: [
 		{
@@ -81,4 +81,4 @@ export const github_logo: Svg_Data = {
 		},
 	],
 	viewBox: '0 0 1024 1024',
-};
+} satisfies Svg_Data;
