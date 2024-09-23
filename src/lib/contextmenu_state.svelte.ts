@@ -378,4 +378,4 @@ export const contextmenu_context = create_context<Contextmenu_State>();
 
 export const contextmenu_submenu_context = create_context<Submenu_State>();
 
-export const contextmenu_dimensions_context = create_context({fallback: () => new Dimensions()});
+export const contextmenu_dimensions_context = create_context(() => new Dimensions());
