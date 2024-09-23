@@ -83,7 +83,7 @@ export const moss_logo = {
 	label: 'a fuzzy tuft of green moss',
 	fill: '#3db33d',
 	paths: fuz_logo.paths,
-	attrs: {style: 'transform: scaleX(-1) rotate(180deg)'}, // TODO BLOCK @many merge attrs? problem is `style` could be overridden on usage accidentally, maybe should be defined more specifically?
+	attrs: {style: 'transform: scaleX(-1) rotate(180deg)'},
 } satisfies Svg_Data;
 
 export const fuz_code_logo = {
