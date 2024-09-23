@@ -41,9 +41,7 @@ export function create_context<T>(fallback?: () => T): {
 			return value;
 		},
 		maybe_get,
-		set: (value: T | undefined = fallback?.()): T => {
-			setContext(key, value);
-			return value;
-		},
+		// this is typesafe, so no runtime check:
+		set: (value: T | undefined = fallback?.()) => setContext(key, value)!,
 	};
 }
