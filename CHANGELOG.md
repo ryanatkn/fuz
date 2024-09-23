@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.127.0
+
+### Minor Changes
+
+- optimize icons to use a shared component ([#50](https://github.com/ryanatkn/fuz/pull/50))
+
 ## 0.126.0
 
 ### Minor Changes
