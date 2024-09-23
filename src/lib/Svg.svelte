@@ -1,4 +1,5 @@
 <script lang="ts" module>
+	import {ensure_end} from '@ryanatkn/belt/string.js';
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
 	export interface Svg_Data {
@@ -55,7 +56,12 @@
 	const final_width = $derived(width ?? size); // TODO @many default value? `100%` or omitted or something else?
 	const final_height = $derived(height ?? size); // TODO @many default value? `100%` or omitted or something else?
 
-	// TODO BLOCK @many merge attrs? problem is `style` could be overridden on usage accidentally, maybe should be defined more specifically?
+	// merge `style` so users don't accidentally clobber any style data - maybe support other attrs or somehow clean this up?
+	const style = $derived(
+		data.attrs?.style && attrs?.style
+			? ensure_end(data.attrs.style, ';') + ' ' + attrs.style
+			: (data.attrs?.style ?? attrs?.style),
+	);
 </script>
 
 <svg
@@ -63,6 +69,7 @@
 	{...data.attrs}
 	{...attrs}
 	aria-label={label ?? data.label}
+	{style}
 	style:width={final_width}
 	style:height={final_height}
 	class={classes}

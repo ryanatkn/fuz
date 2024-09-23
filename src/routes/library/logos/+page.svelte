@@ -36,7 +36,8 @@
 			</li>
 			<li>
 				<Code content={`<Svg data={moss_logo} />`} />
-				<a href="https://moss.ryanatkn.com/"><Svg data={moss_logo} size="var(--icon_size_xl3)" /></a
+				<a href="https://moss.ryanatkn.com/"
+					><Svg data={moss_logo} size="var(--icon_size_xl3)" attrs={{style: 'color: red;'}} /></a
 				>
 			</li>
 			<li>
