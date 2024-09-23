@@ -25,10 +25,10 @@
 	{#snippet breadcrumb_children(is_primary_nav)}
 		{#if is_primary_nav}
 			<div class="icon row">
-				<Svg data={fuz_logo} size="32px" /> <span class="ml_sm">fuz</span>
+				<Svg data={fuz_logo} size="var(--icon_size_sm)" /> <span class="ml_sm">fuz</span>
 			</div>
 		{:else}
-			<Svg data={fuz_logo} size="32px" />
+			<Svg data={fuz_logo} size="var(--icon_size_sm)" />
 		{/if}
 	{/snippet}
 	{@render children()}
