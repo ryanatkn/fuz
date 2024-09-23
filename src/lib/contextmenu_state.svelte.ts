@@ -248,7 +248,7 @@ export class Contextmenu_State {
 	 * @initializes
 	 */
 	add_entry(run: Contextmenu_Run): Entry_State {
-		const menu = contextmenu_submenu_context.get() ?? this.root_menu;
+		const menu = contextmenu_submenu_context.maybe_get() ?? this.root_menu;
 		const entry = new Entry_State(menu, run);
 		menu.items.push(entry);
 		// TODO messy, runs more than needed
@@ -262,7 +262,7 @@ export class Contextmenu_State {
 	 * @initializes
 	 */
 	add_submenu(): Submenu_State {
-		const menu = contextmenu_submenu_context.get() ?? this.root_menu;
+		const menu = contextmenu_submenu_context.maybe_get() ?? this.root_menu;
 		const submenu = new Submenu_State(menu, menu.depth + 1);
 		menu.items.push(submenu);
 		contextmenu_submenu_context.set(submenu);
@@ -376,6 +376,6 @@ const query_contextmenu_params = (
 
 export const contextmenu_context = create_context<Contextmenu_State>();
 
-export const contextmenu_submenu_context = create_context<Submenu_State>({optional: true});
+export const contextmenu_submenu_context = create_context<Submenu_State>();
 
 export const contextmenu_dimensions_context = create_context({fallback: () => new Dimensions()});

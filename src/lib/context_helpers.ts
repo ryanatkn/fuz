@@ -13,37 +13,35 @@ import {getContext, setContext} from 'svelte';
  *
  * If a `fallback` is provided, `optional` is implicitly `false`.
  *
- * If `optional` is `false` or `undefined` and no `fallback` is provided,
  * `get` throws an error if no value is set in the context.
  */
 export function create_context<T>(options: {fallback: () => T}): {
 	get: () => T;
 	set: (value?: T) => T;
 };
-export function create_context<T>(options: {optional: true}): {
-	get: () => T | undefined;
-	set: (value: T) => T;
-};
-export function create_context<T>(options?: {optional?: false}): {
+export function create_context<T>(): {
 	get: (error_message?: string) => T;
+	maybe_get: () => T | undefined;
 	set: (value: T) => T;
 };
-export function create_context<T>(options?: {fallback?: () => T; optional?: boolean}): {
-	get: (error_message?: string) => T | undefined;
+export function create_context<T>(options?: {fallback?: () => T}): {
+	get: (error_message?: string) => T;
+	maybe_get: () => T | undefined;
 	set: (value?: T) => T;
 } {
 	const fallback = options?.fallback;
-	const optional = options?.optional;
 	const key = Symbol();
+	const maybe_get = () => {
+		const got: T | undefined = getContext(key); // `null` is a valid value and the typescript-eslint rule below is bugged because `??` would clobber nulls, see issue https://github.com/typescript-eslint/typescript-eslint/issues/7842
+		return got === undefined ? fallback?.() : got; // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
+	};
 	return {
 		get: (error_message?: string) => {
-			const got: T | undefined = getContext(key); // `null` is a valid value and the typescript-eslint rule below is bugged because `??` would clobber nulls, see issue https://github.com/typescript-eslint/typescript-eslint/issues/7842
-			const value = got === undefined ? fallback?.() : got; // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
-			if (!optional && value === undefined) {
-				throw Error(error_message ?? 'context value is not set');
-			}
+			const value = maybe_get();
+			if (value === undefined) throw Error(error_message ?? 'context value is not set');
 			return value;
 		},
+		maybe_get,
 		set: (value: T | undefined = fallback?.()): T => {
 			if (value === undefined) {
 				throw Error('context value must be provided to `set` as an argument or `fallback` option');
