@@ -2,4 +2,4 @@
 '@ryanatkn/fuz': minor
 ---
 
-refine `createContext` API
+refine `create_context` API
