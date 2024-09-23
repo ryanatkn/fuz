@@ -15,7 +15,7 @@ import {getContext, setContext} from 'svelte';
  * If a `fallback` is provided, the `value` argument to `set` is optional
  * and `maybe_get` is omitted from the type.
  */
-export function create_context<T>(options: {fallback: () => T}): {
+export function create_context<T>(fallback: () => T): {
 	get: () => T;
 	set: (value?: T) => T;
 };
@@ -24,12 +24,11 @@ export function create_context<T>(): {
 	maybe_get: () => T | undefined;
 	set: (value: T) => T;
 };
-export function create_context<T>(options?: {fallback?: () => T}): {
+export function create_context<T>(fallback?: () => T): {
 	get: (error_message?: string) => T;
 	maybe_get: () => T | undefined;
 	set: (value?: T) => T;
 } {
-	const fallback = options?.fallback;
 	const key = Symbol();
 	const maybe_get = () => {
 		const got: T | undefined = getContext(key); // treat `null` as a valid value - the `typescript-eslint` rule below is bugged because `??` would clobber nulls, see issue https://github.com/typescript-eslint/typescript-eslint/issues/7842
