@@ -7,7 +7,8 @@
 	import Style_Variable_Detail from '$routes/Style_Variable_Detail.svelte';
 	import Dialog from '$lib/Dialog.svelte';
 	import {get_pkg} from '$routes/pkg.js';
-	import Fuz_Logo from '$lib/Fuz_Logo.svelte';
+	import Svg from '$lib/Svg.svelte';
+	import {fuz_logo} from '$lib/logos.js';
 
 	interface Props {
 		children: Snippet;
@@ -24,10 +25,10 @@
 	{#snippet breadcrumb_children(is_primary_nav)}
 		{#if is_primary_nav}
 			<div class="icon row">
-				<Fuz_Logo size="32px" /> <span class="ml_sm">fuz</span>
+				<Svg data={fuz_logo} size="32px" /> <span class="ml_sm">fuz</span>
 			</div>
 		{:else}
-			<Fuz_Logo size="32px" />
+			<Svg data={fuz_logo} size="32px" />
 		{/if}
 	{/snippet}
 	{@render children()}

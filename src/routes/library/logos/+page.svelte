@@ -4,17 +4,26 @@
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 	import {get_tome_by_name} from '$lib/tome.js';
 	import Tome_Content from '$lib/Tome_Content.svelte';
-	import Fuz_Logo from '$lib/Fuz_Logo.svelte';
-	import Github_Logo from '$lib/Github_Logo.svelte';
-	import Mdn_Logo from '$lib/Mdn_Logo.svelte';
-	import Zzz_Logo from '$lib/Zzz_Logo.svelte';
-	import Webdevladder_Logo from '$lib/Webdevladder_Logo.svelte';
-	import Earbetter_Logo from '$lib/Earbetter_Logo.svelte';
-	import Moss_Logo from '$lib/Moss_Logo.svelte';
-	import Gro_Logo from '$lib/Gro_Logo.svelte';
-	import Spiderspace_Logo from '$lib/Spiderspace_Logo.svelte';
+	import Svg from '$lib/Svg.svelte';
+	import {
+		zzz_logo,
+		gro_logo,
+		fuz_logo,
+		moss_logo,
+		fuz_code_logo,
+		fuz_blog_logo,
+		fuz_mastodon_logo,
+		fuz_gitops_logo,
+		webdevladder_logo,
+		earbetter_logo,
+		spiderspace_logo,
+		github_logo,
+		mdn_logo,
+		fuz_template_logo,
+	} from '$lib/logos.js';
 
 	const LIBRARY_ITEM_NAME = 'logos';
+
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
 </script>
 
@@ -22,67 +31,78 @@
 	<section>
 		<ul class="box text_align_center unstyled">
 			<li>
-				<Code content={`<Moss_Logo />`} />
-				<a href="https://moss.ryanatkn.com/"><Moss_Logo size="var(--icon_size_xl3)" /></a>
+				<Code content={`<Svg data={zzz_logo} />`} />
+				<a href="https://zzz.ryanatkn.com/"><Svg data={zzz_logo} size="var(--icon_size_xl3)" /></a>
 			</li>
 			<li>
-				<Code content={`<Gro_Logo />`} />
-				<a href="https://gro.ryanatkn.com/"><Gro_Logo size="var(--icon_size_xl3)" /></a>
-			</li>
-			<li>
-				<Code content={`<Fuz_Logo />`} />
-				<a href="https://www.fuz.dev/"><Fuz_Logo size="var(--icon_size_xl3)" /></a>
-			</li>
-			<li>
-				<Code content={`<Fuz_Logo project="fuz_code" />`} />
-				<a href="https://code.fuz.dev/"
-					><Fuz_Logo project="fuz_code" size="var(--icon_size_xl3)" /></a
+				<Code content={`<Svg data={moss_logo} />`} />
+				<a href="https://moss.ryanatkn.com/"
+					><Svg data={moss_logo} size="var(--icon_size_xl3)" attrs={{style: 'color: red;'}} /></a
 				>
 			</li>
 			<li>
-				<Code content={`<Fuz_Logo project="fuz_blog" />`} />
-				<a href="https://blog.fuz.dev/"
-					><Fuz_Logo project="fuz_blog" size="var(--icon_size_xl3)" /></a
+				<Code content={`<Svg data={gro_logo} />`} />
+				<a href="https://gro.ryanatkn.com/"><Svg data={gro_logo} size="var(--icon_size_xl3)" /></a>
+			</li>
+			<li>
+				<Code content={`<Svg data={fuz_logo} />`} />
+				<a href="https://www.fuz.dev/"><Svg data={fuz_logo} size="var(--icon_size_xl3)" /></a>
+			</li>
+			<li>
+				<Code content={`<Svg data={webdevladder_logo} />`} />
+				<a href="https://www.webdevladder.net/"
+					><Svg data={webdevladder_logo} size="var(--icon_size_xl3)" /></a
 				>
 			</li>
 			<li>
-				<Code content={`<Fuz_Logo project="fuz_mastodon" />`} />
+				<Code content={`<Svg data={fuz_blog_logo} />`} />
+				<a href="https://blog.fuz.dev/"><Svg data={fuz_blog_logo} size="var(--icon_size_xl3)" /></a>
+			</li>
+			<li>
+				<Code content={`<Svg data={fuz_mastodon_logo} />`} />
 				<a href="https://mastodon.fuz.dev/"
-					><Fuz_Logo project="fuz_mastodon" size="var(--icon_size_xl3)" /></a
+					><Svg data={fuz_mastodon_logo} size="var(--icon_size_xl3)" /></a
 				>
 			</li>
 			<li>
-				<Code content={`<Fuz_Logo project="fuz_gitops" />`} />
+				<Code content={`<Svg data={fuz_code_logo} />`} />
+				<a href="https://code.fuz.dev/"><Svg data={fuz_code_logo} size="var(--icon_size_xl3)" /></a>
+			</li>
+			<li>
+				<Code content={`<Svg data={fuz_gitops_logo} />`} />
 				<a href="https://gitops.fuz.dev/"
-					><Fuz_Logo project="fuz_gitops" size="var(--icon_size_xl3)" /></a
+					><Svg data={fuz_gitops_logo} size="var(--icon_size_xl3)" /></a
 				>
 			</li>
 			<li>
-				<Code content={`<Zzz_Logo />`} />
-				<a href="https://zzz.ryanatkn.com/"><Zzz_Logo size="var(--icon_size_xl3)" /></a>
-			</li>
-			<li>
-				<Code content={`<Webdevladder_Logo />`} />
-				<a href="https://www.webdevladder.net/"><Webdevladder_Logo size="var(--icon_size_xl3)" /></a
+				<Code content={`<Svg data={fuz_template_logo} />`} />
+				<a href="https://template.fuz.dev/"
+					><Svg data={fuz_template_logo} size="var(--icon_size_xl3)" /></a
 				>
 			</li>
 			<li>
-				<Code content={`<Earbetter_Logo />`} />
-				<a href="https://earbetter.ryanatkn.com/"><Earbetter_Logo size="var(--icon_size_xl3)" /></a>
+				<Code content={`<Svg data={earbetter_logo} />`} />
+				<a href="https://earbetter.ryanatkn.com/"
+					><Svg data={earbetter_logo} size="var(--icon_size_xl3)" /></a
+				>
 			</li>
 			<li>
-				<Code content={`<Spiderspace_Logo />`} />
-				<a href="https://www.spiderspace.org/"><Spiderspace_Logo size="var(--icon_size_xl3)" /></a>
+				<Code content={`<Svg data={spiderspace_logo} />`} />
+				<a href="https://www.spiderspace.org/"
+					><Svg data={spiderspace_logo} size="var(--icon_size_xl3)" /></a
+				>
 			</li>
 			<li>
-				<Code content={`<Github_Logo />`} />
+				<Code content={`<Svg data={github_logo} />`} />
 				<a href="https://github.com/"
-					><Github_Logo fill="var(--text_color_2)" size="var(--icon_size_xl3)" /></a
+					><Svg data={github_logo} fill="var(--text_color_2)" size="var(--icon_size_xl3)" /></a
 				>
 			</li>
 			<li>
-				<Code content={`<Mdn_Logo />`} />
-				<a href="https://developer.mozilla.org/"><Mdn_Logo size="var(--icon_size_xl3)" /></a>
+				<Code content={`<Svg data={mdn_logo} />`} />
+				<a href="https://developer.mozilla.org/"
+					><Svg data={mdn_logo} size="var(--icon_size_xl3)" /></a
+				>
 			</li>
 		</ul>
 	</section>

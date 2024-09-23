@@ -200,35 +200,6 @@
       "types": "./dist/dimensions.svelte.d.ts",
       "default": "./dist/dimensions.svelte.js"
     },
-    "./Earbetter_Logo.svelte": {
-      "types": "./dist/Earbetter_Logo.svelte.d.ts",
-      "svelte": "./dist/Earbetter_Logo.svelte",
-      "default": "./dist/Earbetter_Logo.svelte"
-    },
-    "./Fuz_Logo.svelte": {
-      "types": "./dist/Fuz_Logo.svelte.d.ts",
-      "svelte": "./dist/Fuz_Logo.svelte",
-      "default": "./dist/Fuz_Logo.svelte"
-    },
-    "./fuz.js": {
-      "types": "./dist/fuz.d.ts",
-      "default": "./dist/fuz.js"
-    },
-    "./Fuzling.svelte": {
-      "types": "./dist/Fuzling.svelte.d.ts",
-      "svelte": "./dist/Fuzling.svelte",
-      "default": "./dist/Fuzling.svelte"
-    },
-    "./Github_Logo.svelte": {
-      "types": "./dist/Github_Logo.svelte.d.ts",
-      "svelte": "./dist/Github_Logo.svelte",
-      "default": "./dist/Github_Logo.svelte"
-    },
-    "./Gro_Logo.svelte": {
-      "types": "./dist/Gro_Logo.svelte.d.ts",
-      "svelte": "./dist/Gro_Logo.svelte",
-      "default": "./dist/Gro_Logo.svelte"
-    },
     "./Hashlink.svelte": {
       "types": "./dist/Hashlink.svelte.d.ts",
       "svelte": "./dist/Hashlink.svelte",
@@ -292,20 +263,14 @@
       "svelte": "./dist/Library.svelte",
       "default": "./dist/Library.svelte"
     },
+    "./logos.js": {
+      "types": "./dist/logos.d.ts",
+      "default": "./dist/logos.js"
+    },
     "./Mdn_Link.svelte": {
       "types": "./dist/Mdn_Link.svelte.d.ts",
       "svelte": "./dist/Mdn_Link.svelte",
       "default": "./dist/Mdn_Link.svelte"
-    },
-    "./Mdn_Logo.svelte": {
-      "types": "./dist/Mdn_Logo.svelte.d.ts",
-      "svelte": "./dist/Mdn_Logo.svelte",
-      "default": "./dist/Mdn_Logo.svelte"
-    },
-    "./Moss_Logo.svelte": {
-      "types": "./dist/Moss_Logo.svelte.d.ts",
-      "svelte": "./dist/Moss_Logo.svelte",
-      "default": "./dist/Moss_Logo.svelte"
     },
     "./Package_Detail.svelte": {
       "types": "./dist/Package_Detail.svelte.d.ts",
@@ -341,20 +306,15 @@
       "types": "./dist/rune_helpers.svelte.d.ts",
       "default": "./dist/rune_helpers.svelte.js"
     },
-    "./Spider.svelte": {
-      "types": "./dist/Spider.svelte.d.ts",
-      "svelte": "./dist/Spider.svelte",
-      "default": "./dist/Spider.svelte"
-    },
     "./Spiders.svelte": {
       "types": "./dist/Spiders.svelte.d.ts",
       "svelte": "./dist/Spiders.svelte",
       "default": "./dist/Spiders.svelte"
     },
-    "./Spiderspace_Logo.svelte": {
-      "types": "./dist/Spiderspace_Logo.svelte.d.ts",
-      "svelte": "./dist/Spiderspace_Logo.svelte",
-      "default": "./dist/Spiderspace_Logo.svelte"
+    "./Svg.svelte": {
+      "types": "./dist/Svg.svelte.d.ts",
+      "svelte": "./dist/Svg.svelte",
+      "default": "./dist/Svg.svelte"
     },
     "./Teleport.svelte": {
       "types": "./dist/Teleport.svelte.d.ts",
@@ -403,16 +363,6 @@
     "./tome.js": {
       "types": "./dist/tome.d.ts",
       "default": "./dist/tome.js"
-    },
-    "./Webdevladder_Logo.svelte": {
-      "types": "./dist/Webdevladder_Logo.svelte.d.ts",
-      "svelte": "./dist/Webdevladder_Logo.svelte",
-      "default": "./dist/Webdevladder_Logo.svelte"
-    },
-    "./Zzz_Logo.svelte": {
-      "types": "./dist/Zzz_Logo.svelte.d.ts",
-      "svelte": "./dist/Zzz_Logo.svelte",
-      "default": "./dist/Zzz_Logo.svelte"
     }
   }
 }

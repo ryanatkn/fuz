@@ -170,32 +170,6 @@ export const package_json = {
 			types: './dist/dimensions.svelte.d.ts',
 			default: './dist/dimensions.svelte.js',
 		},
-		'./Earbetter_Logo.svelte': {
-			types: './dist/Earbetter_Logo.svelte.d.ts',
-			svelte: './dist/Earbetter_Logo.svelte',
-			default: './dist/Earbetter_Logo.svelte',
-		},
-		'./Fuz_Logo.svelte': {
-			types: './dist/Fuz_Logo.svelte.d.ts',
-			svelte: './dist/Fuz_Logo.svelte',
-			default: './dist/Fuz_Logo.svelte',
-		},
-		'./fuz.js': {types: './dist/fuz.d.ts', default: './dist/fuz.js'},
-		'./Fuzling.svelte': {
-			types: './dist/Fuzling.svelte.d.ts',
-			svelte: './dist/Fuzling.svelte',
-			default: './dist/Fuzling.svelte',
-		},
-		'./Github_Logo.svelte': {
-			types: './dist/Github_Logo.svelte.d.ts',
-			svelte: './dist/Github_Logo.svelte',
-			default: './dist/Github_Logo.svelte',
-		},
-		'./Gro_Logo.svelte': {
-			types: './dist/Gro_Logo.svelte.d.ts',
-			svelte: './dist/Gro_Logo.svelte',
-			default: './dist/Gro_Logo.svelte',
-		},
 		'./Hashlink.svelte': {
 			types: './dist/Hashlink.svelte.d.ts',
 			svelte: './dist/Hashlink.svelte',
@@ -256,20 +230,11 @@ export const package_json = {
 			svelte: './dist/Library.svelte',
 			default: './dist/Library.svelte',
 		},
+		'./logos.js': {types: './dist/logos.d.ts', default: './dist/logos.js'},
 		'./Mdn_Link.svelte': {
 			types: './dist/Mdn_Link.svelte.d.ts',
 			svelte: './dist/Mdn_Link.svelte',
 			default: './dist/Mdn_Link.svelte',
-		},
-		'./Mdn_Logo.svelte': {
-			types: './dist/Mdn_Logo.svelte.d.ts',
-			svelte: './dist/Mdn_Logo.svelte',
-			default: './dist/Mdn_Logo.svelte',
-		},
-		'./Moss_Logo.svelte': {
-			types: './dist/Moss_Logo.svelte.d.ts',
-			svelte: './dist/Moss_Logo.svelte',
-			default: './dist/Moss_Logo.svelte',
 		},
 		'./Package_Detail.svelte': {
 			types: './dist/Package_Detail.svelte.d.ts',
@@ -305,20 +270,15 @@ export const package_json = {
 			types: './dist/rune_helpers.svelte.d.ts',
 			default: './dist/rune_helpers.svelte.js',
 		},
-		'./Spider.svelte': {
-			types: './dist/Spider.svelte.d.ts',
-			svelte: './dist/Spider.svelte',
-			default: './dist/Spider.svelte',
-		},
 		'./Spiders.svelte': {
 			types: './dist/Spiders.svelte.d.ts',
 			svelte: './dist/Spiders.svelte',
 			default: './dist/Spiders.svelte',
 		},
-		'./Spiderspace_Logo.svelte': {
-			types: './dist/Spiderspace_Logo.svelte.d.ts',
-			svelte: './dist/Spiderspace_Logo.svelte',
-			default: './dist/Spiderspace_Logo.svelte',
+		'./Svg.svelte': {
+			types: './dist/Svg.svelte.d.ts',
+			svelte: './dist/Svg.svelte',
+			default: './dist/Svg.svelte',
 		},
 		'./Teleport.svelte': {
 			types: './dist/Teleport.svelte.d.ts',
@@ -362,16 +322,6 @@ export const package_json = {
 			default: './dist/Tome_Section.svelte',
 		},
 		'./tome.js': {types: './dist/tome.d.ts', default: './dist/tome.js'},
-		'./Webdevladder_Logo.svelte': {
-			types: './dist/Webdevladder_Logo.svelte.d.ts',
-			svelte: './dist/Webdevladder_Logo.svelte',
-			default: './dist/Webdevladder_Logo.svelte',
-		},
-		'./Zzz_Logo.svelte': {
-			types: './dist/Zzz_Logo.svelte.d.ts',
-			svelte: './dist/Zzz_Logo.svelte',
-			default: './dist/Zzz_Logo.svelte',
-		},
 	},
 } satisfies Package_Json;
 
@@ -439,19 +389,6 @@ export const src_json = {
 			path: 'dimensions.svelte.ts',
 			declarations: [{name: 'Dimensions', kind: 'class'}],
 		},
-		'./Earbetter_Logo.svelte': {path: 'Earbetter_Logo.svelte', declarations: []},
-		'./Fuz_Logo.svelte': {path: 'Fuz_Logo.svelte', declarations: []},
-		'./fuz.js': {
-			path: 'fuz.ts',
-			declarations: [
-				{name: 'Fuz_Project_Name', kind: 'type'},
-				{name: 'to_fuz_project_color', kind: 'function'},
-				{name: 'to_fuz_project_color_name', kind: 'function'},
-			],
-		},
-		'./Fuzling.svelte': {path: 'Fuzling.svelte', declarations: []},
-		'./Github_Logo.svelte': {path: 'Github_Logo.svelte', declarations: []},
-		'./Gro_Logo.svelte': {path: 'Gro_Logo.svelte', declarations: []},
 		'./Hashlink.svelte': {path: 'Hashlink.svelte', declarations: []},
 		'./Hidden_Personal_Links.svelte': {path: 'Hidden_Personal_Links.svelte', declarations: []},
 		'./Hue_Input.svelte': {path: 'Hue_Input.svelte', declarations: []},
@@ -486,9 +423,26 @@ export const src_json = {
 		'./Library_Secondary_Nav.svelte': {path: 'Library_Secondary_Nav.svelte', declarations: []},
 		'./Library_Tertiary_Nav.svelte': {path: 'Library_Tertiary_Nav.svelte', declarations: []},
 		'./Library.svelte': {path: 'Library.svelte', declarations: []},
+		'./logos.js': {
+			path: 'logos.ts',
+			declarations: [
+				{name: 'zzz_logo', kind: 'variable'},
+				{name: 'gro_logo', kind: 'variable'},
+				{name: 'fuz_logo', kind: 'variable'},
+				{name: 'moss_logo', kind: 'variable'},
+				{name: 'fuz_code_logo', kind: 'variable'},
+				{name: 'fuz_blog_logo', kind: 'variable'},
+				{name: 'fuz_mastodon_logo', kind: 'variable'},
+				{name: 'fuz_gitops_logo', kind: 'variable'},
+				{name: 'fuz_template_logo', kind: 'variable'},
+				{name: 'webdevladder_logo', kind: 'variable'},
+				{name: 'earbetter_logo', kind: 'variable'},
+				{name: 'spiderspace_logo', kind: 'variable'},
+				{name: 'github_logo', kind: 'variable'},
+				{name: 'mdn_logo', kind: 'variable'},
+			],
+		},
 		'./Mdn_Link.svelte': {path: 'Mdn_Link.svelte', declarations: []},
-		'./Mdn_Logo.svelte': {path: 'Mdn_Logo.svelte', declarations: []},
-		'./Moss_Logo.svelte': {path: 'Moss_Logo.svelte', declarations: []},
 		'./Package_Detail.svelte': {path: 'Package_Detail.svelte', declarations: []},
 		'./Package_Summary.svelte': {path: 'Package_Summary.svelte', declarations: []},
 		'./Pending_Animation.svelte': {path: 'Pending_Animation.svelte', declarations: []},
@@ -499,9 +453,8 @@ export const src_json = {
 			path: 'rune_helpers.svelte.ts',
 			declarations: [{name: 'effect_skip', kind: 'function'}],
 		},
-		'./Spider.svelte': {path: 'Spider.svelte', declarations: []},
 		'./Spiders.svelte': {path: 'Spiders.svelte', declarations: []},
-		'./Spiderspace_Logo.svelte': {path: 'Spiderspace_Logo.svelte', declarations: []},
+		'./Svg.svelte': {path: 'Svg.svelte', declarations: []},
 		'./Teleport.svelte': {path: 'Teleport.svelte', declarations: []},
 		'./Theme_Input.svelte': {path: 'Theme_Input.svelte', declarations: []},
 		'./theme.svelte.js': {
@@ -539,8 +492,6 @@ export const src_json = {
 				{name: 'set_tome', kind: 'function'},
 			],
 		},
-		'./Webdevladder_Logo.svelte': {path: 'Webdevladder_Logo.svelte', declarations: []},
-		'./Zzz_Logo.svelte': {path: 'Zzz_Logo.svelte', declarations: []},
 	},
 } satisfies Src_Json;
 
