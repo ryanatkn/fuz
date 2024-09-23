@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.126.0
+
+### Minor Changes
+
+- refine `create_context` API ([#57](https://github.com/ryanatkn/fuz/pull/57))
+
 ## 0.125.0
 
 ### Minor Changes
