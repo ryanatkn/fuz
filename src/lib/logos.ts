@@ -21,7 +21,7 @@ Logo colors are the midpoint between the light and dark versions of color varian
 
 export const zzz_logo = {
 	label: "three sleepy z's",
-	fill: '#e03e81', // TODO BLOCK hardcoded or use variables so it's relative to the color-scheme? need to update the plain svg
+	fill: '#e55d95',
 	paths: [
 		{
 			d: 'm 75.29285,61.962268 1.752156,1.914421 14.843359,1.811307 L 74.065203,86.193332 99.966781,85.408255 98.719988,83.648246 85.143565,82.136577 98.430963,62.887945',
@@ -71,7 +71,7 @@ export const gro_logo = {
 
 export const fuz_logo = {
 	label: 'a friendly brown spider facing you',
-	fill: '#6a3e1b',
+	fill: '#98643a',
 	paths: [
 		{
 			d: 'M 26.253917,88.532336 29.904106,71.394855 40.667193,53.342811 40.258534,49.99234 38.417407,49.000991 22.876908,50.369035 9.4865496,53.880193 2.3019024,57.978424 0.42708056,57.27994 7.2642726,51.086985 20.811326,45.373351 37.960128,42.356792 39.354818,40.107008 38.229925,38.149883 26.030989,27.105568 14.46539,21.861786 8.0479986,18.615387 l -0.41428,-1.710463 8.2789464,1.499862 13.012873,5.003724 13.447448,10.696856 1.680801,-0.729547 0.222439,-1.343157 -3.983998,-12.128053 -5.730215,-9.573597 -0.823624,-5.1744052 1.16944,-1.165102 2.604334,6.3355162 6.612025,7.08777 4.874534,11.55989 2.800804,0.515574 4.48815,-1.359246 1.521623,-8.687062 5.685014,-8.620764 2.75965,-6.8316782 1.094578,1.128569 -1.293029,5.4222362 -4.084776,11.06803 -0.484994,8.377408 0.194311,1.192896 1.42954,1.700726 11.563936,-10.644623 9.878262,-8.331535 8.732915,-3.390708 -0.387305,1.402757 -5.294686,3.023816 -10.445054,10.705792 -9.561599,13.627899 -0.438945,1.602755 1.001398,1.666754 17.376932,3.986302 9.537375,6.940531 4.325785,4.636405 0.211208,1.557106 -6.15842,-4.279925 -10.413771,-5.155697 -15.838715,-1.696223 -0.83461,1.144484 0.774499,2.593247 9.737644,16.194355 3.925704,17.214082 0.07146,10.277289 -1.706242,1.13628 -2.009721,-9.21637 -5.894265,-16.88027 -12.292087,-17.295813 -4.177778,-0.585888 -7.294671,2.935716 -11.138052,16.645915 -6.462422,17.752509 -1.634756,7.206641 -2.070766,-1.52923 z',
@@ -81,20 +81,20 @@ export const fuz_logo = {
 
 export const moss_logo = {
 	label: 'a fuzzy tuft of green moss',
-	fill: 'var(--color_b_5)',
+	fill: '#3db33d',
 	paths: fuz_logo.paths,
 	attrs: {style: 'transform: scaleX(-1) rotate(180deg)'}, // TODO BLOCK @many merge attrs? problem is `style` could be overridden on usage accidentally, maybe should be defined more specifically?
 } satisfies Svg_Data;
 
 export const fuz_code_logo = {
 	label: 'a friendly pink spider facing you',
-	fill: '#e03e81',
+	fill: '#e55d95',
 	paths: fuz_logo.paths,
 } satisfies Svg_Data;
 
 export const fuz_blog_logo = {
 	label: 'a friendly yellow spider facing you',
-	fill: '#b19a25',
+	fill: '#d8bc31',
 	paths: fuz_logo.paths,
 } satisfies Svg_Data;
 
@@ -106,13 +106,13 @@ export const fuz_mastodon_logo = {
 
 export const fuz_gitops_logo = {
 	label: 'a friendly blue spider facing you',
-	fill: '#397fc6',
+	fill: '#6199d1',
 	paths: fuz_logo.paths,
 } satisfies Svg_Data;
 
 export const fuz_template_logo = {
 	label: 'a friendly orange pixelated spider facing you',
-	fill: '#f67c4c',
+	fill: '#f4672f',
 	paths: [
 		{
 			d: 'm 25,81.200002 h 6.2 v -12.5 h 6.3 v -18.7 h -6.3 v 6.2 H 12.5 v 6.3 H 0 v -6.3 h 6.2 v -6.2 H 25 v -6.3 h 12.5 v -6.2 h -6.3 v -6.3 H 18.7 v -6.2 H 6.2 v -6.3 H 25 v 6.3 h 12.5 v -6.3 H 31.2 V 6.2 h 6.3 v 6.300002 h 6.2 V 31.200001 H 56.2 V 12.500002 h 6.3 V 6.2 h 6.2 v 12.500001 h -6.2 v 18.800001 h 6.2 v -12.5 h 12.5 v -12.5 h 12.5 v 6.2 h -6.2 v 12.5 H 75 v 12.5 h 6.2 v 6.3 h 12.5 v 6.2 h 6.299997 v 6.3 H 87.5 v -6.3 H 75 v -6.2 h -6.3 v 12.5 H 75 v 12.5 h 6.2 V 99.99999 H 75 V 81.200002 h -6.3 v -12.5 h -6.2 v -12.5 H 43.7 v 18.8 h -6.2 v 12.5 H 31.2 V 99.99999 H 25 Z',
@@ -122,7 +122,7 @@ export const fuz_template_logo = {
 
 export const webdevladder_logo = {
 	label: 'a spider web between two rungs of a ladder',
-	fill: 'var(--color_b_5)',
+	fill: '#3db33d',
 	paths: [
 		{
 			d: 'M 37.174163,0.4792687 21.634926,39.631201 0.16786597,97.97918 16.575416,99.521374 19.352058,91.559689 68.736056,94.77021 70.61636,84.176728 21.745713,80.516425 33.323161,43.781709 44.12821,16.308249 84.47938,15.069186 86.44336,5.5860536 47.872897,6.9685586 49.611104,1.8736809 M 86.061057,1.9243199 74.915756,51.346436 65.559591,99.975909 82.510118,98.660645 89.82178,48.868054 99.675222,0.2061973',
