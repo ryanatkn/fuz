@@ -2,6 +2,23 @@ import type {Svg_Data} from '$lib/Svg.svelte';
 
 // TODO are there significant performance gains to making this JSON? a downside would be duplication of the `spider_logo` without special handling
 
+/*
+
+Logo colors are the midpoint between the light and dark versions of color variant 5:
+
+```css
+--color_a: #6199d1;
+--color_b: #3db33d;
+--color_c: #d93636;
+--color_d: #8866cc;
+--color_e: #d8bc31;
+--color_f: #98643a;
+--color_g: #e55d95;
+--color_h: #f4672f;
+--color_i: #36e2e2;
+```
+*/
+
 export const zzz_logo = {
 	label: "three sleepy z's",
 	fill: '#e03e81', // TODO BLOCK hardcoded or use variables so it's relative to the color-scheme? need to update the plain svg
