@@ -10,40 +10,38 @@ import {getContext, setContext} from 'svelte';
 
 /**
  * Wraps Svelte's `setContext` and `getContext` for better ergonmics.
- *
- * If a `fallback` is provided, `optional` is implicitly `false`.
- *
- * If `optional` is `false` or `undefined` and no `fallback` is provided,
- * `get` throws an error if no value is set in the context.
+ * When no value is set in the context,
+ * `get` throws an error and `maybe_get` returns `undefined`.
+ * If a `fallback` is provided, the `value` argument to `set` is optional
+ * and `maybe_get` is omitted from the type.
  */
-export function create_context<T>(options: {fallback: () => T}): {
+export function create_context<T>(fallback: () => T): {
 	get: () => T;
 	set: (value?: T) => T;
 };
-export function create_context<T>(options: {optional: true}): {
-	get: () => T | undefined;
-	set: (value: T) => T;
-};
-export function create_context<T>(options?: {optional?: false}): {
+export function create_context<T>(): {
 	get: (error_message?: string) => T;
+	maybe_get: () => T | undefined;
 	set: (value: T) => T;
 };
-export function create_context<T>(options?: {fallback?: () => T; optional?: boolean}): {
-	get: (error_message?: string) => T | undefined;
+export function create_context<T>(fallback?: () => T): {
+	get: (error_message?: string) => T;
+	maybe_get: () => T | undefined;
 	set: (value?: T) => T;
 } {
-	const fallback = options?.fallback;
-	const optional = options?.optional;
 	const key = Symbol();
+	const maybe_get = () => {
+		const value: T | undefined = getContext(key); // treat `null` as a valid value - the `typescript-eslint` rule below is bugged because `??` would clobber nulls, see issue https://github.com/typescript-eslint/typescript-eslint/issues/7842
+		return value === undefined ? fallback?.() : value; // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
+	};
 	return {
 		get: (error_message?: string) => {
-			const got: T | undefined = getContext(key); // `null` is a valid value and the typescript-eslint rule below is bugged because `??` would clobber nulls, see issue https://github.com/typescript-eslint/typescript-eslint/issues/7842
-			const value = got === undefined ? fallback?.() : got; // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
-			if (!optional && value === undefined) {
-				throw Error(error_message ?? 'context value is not set');
-			}
+			const value = maybe_get();
+			if (value === undefined) throw Error(error_message ?? 'context value is not set');
 			return value;
 		},
+		maybe_get,
+		// this is typesafe, so no runtime check:
 		set: (value: T | undefined = fallback?.()) => setContext(key, value)!,
 	};
 }

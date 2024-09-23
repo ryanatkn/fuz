@@ -12,6 +12,4 @@ export class Selected_Style_Variable {
 	}
 }
 
-export const selected_variable_context = create_context({
-	fallback: () => new Selected_Style_Variable(null),
-});
+export const selected_variable_context = create_context(() => new Selected_Style_Variable(null));
