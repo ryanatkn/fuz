@@ -1,1 +1,0 @@
-import{l as s,m as u}from"./runtime.CyUAaF6i.js";function m(t){const o=Symbol(),n=()=>{const e=u(o);return e===void 0?t==null?void 0:t():e};return{get:e=>{const r=n();if(r===void 0)throw Error(e??"context value is not set");return r},maybe_get:n,set:(e=t==null?void 0:t())=>s(o,e)}}export{m as c};

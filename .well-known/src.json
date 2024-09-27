@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.127.0",
+  "version": "0.128.0",
   "modules": {
     "./package.json": {
       "path": "package.json",
@@ -492,24 +492,16 @@
           "kind": "function"
         },
         {
-          "name": "get_tomes",
-          "kind": "function"
-        },
-        {
-          "name": "set_tomes",
-          "kind": "function"
+          "name": "tomes_context",
+          "kind": "variable"
         },
         {
           "name": "get_tome_by_name",
           "kind": "function"
         },
         {
-          "name": "get_tome",
-          "kind": "function"
-        },
-        {
-          "name": "set_tome",
-          "kind": "function"
+          "name": "tome_context",
+          "kind": "variable"
         }
       ]
     }
