@@ -7,7 +7,7 @@
 	import type {Snippet} from 'svelte';
 
 	import Themed from '$lib/Themed.svelte';
-	import {set_pkg} from '$routes/pkg.js';
+	import {pkg_context} from '$routes/pkg.js';
 	import {package_json, src_json} from '$routes/package.js';
 	import Spiders from '$lib/Spiders.svelte';
 
@@ -23,7 +23,7 @@
 
 	const {children}: Props = $props();
 
-	set_pkg(parse_package_meta(package_json, src_json));
+	pkg_context.set(parse_package_meta(package_json, src_json));
 
 	// let show_settings = $state(false);
 </script>

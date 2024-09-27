@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {get_pkg} from '$routes/pkg.js';
+	import {pkg_context} from '$routes/pkg.js';
 	import Community_Links_Panel from '$lib/Community_Links_Panel.svelte';
 	import Package_Detail from '$lib/Package_Detail.svelte';
 	import Library_Footer from '$lib/Library_Footer.svelte';
@@ -7,7 +7,7 @@
 	import Svg from '$lib/Svg.svelte';
 	import {fuz_logo} from '$lib/logos.js';
 
-	const pkg = get_pkg();
+	const pkg = pkg_context.get();
 
 	// TODO standardize
 </script>

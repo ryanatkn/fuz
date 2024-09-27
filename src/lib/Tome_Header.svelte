@@ -8,11 +8,11 @@
 	import {slugify} from '@ryanatkn/belt/path.js';
 	import {DEV} from 'esm-env';
 
-	import {get_tome} from '$lib/tome.js';
+	import {tome_context} from '$lib/tome.js';
 	import Hashlink from '$lib/Hashlink.svelte';
 	import {library_links_context, to_library_path_info} from '$lib/library_helpers.svelte.js';
 
-	const tome = get_tome(); // TODO make reactive?
+	const tome = tome_context.get(); // TODO make reactive?
 	if (DEV && !tome) throw Error('Tome_Header expects a tome in context'); // eslint-disable-line @typescript-eslint/no-unnecessary-condition
 
 	const id = 'tome_header_' + _id++;

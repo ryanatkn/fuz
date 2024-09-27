@@ -10,7 +10,7 @@
 	import {slugify} from '@ryanatkn/belt/path.js';
 
 	import Hashlink from '$lib/Hashlink.svelte';
-	import {get_register_section_header} from '$lib/Tome_Section.svelte';
+	import {register_section_header_context} from '$lib/Tome_Section.svelte';
 	import {library_links_context, type Library_Link_Tag} from '$lib/library_helpers.svelte.js';
 
 	interface Props {
@@ -24,7 +24,7 @@
 
 	const slug = slugify(text);
 
-	const register_section_header = get_register_section_header();
+	const register_section_header = register_section_header_context.get();
 	if (!register_section_header) {
 		throw Error('Tome_Section_Header must be a child of Tome_Section');
 	}

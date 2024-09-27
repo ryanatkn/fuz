@@ -6,7 +6,7 @@
 	import {selected_variable_context} from '$routes/style_variable_helpers.svelte.js';
 	import Style_Variable_Detail from '$routes/Style_Variable_Detail.svelte';
 	import Dialog from '$lib/Dialog.svelte';
-	import {get_pkg} from '$routes/pkg.js';
+	import {pkg_context} from '$routes/pkg.js';
 	import Svg from '$lib/Svg.svelte';
 	import {fuz_logo} from '$lib/logos.js';
 
@@ -18,7 +18,7 @@
 
 	const selected_variable = selected_variable_context.set();
 
-	const pkg = get_pkg();
+	const pkg = pkg_context.get();
 </script>
 
 <Library {tomes} {pkg}>

@@ -4,7 +4,7 @@
 	import {onNavigate} from '$app/navigation';
 
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
-	import {Tome, set_tomes} from '$lib/tome.js';
+	import {Tome, tomes_context} from '$lib/tome.js';
 	import Library_Primary_Nav from '$lib/Library_Primary_Nav.svelte';
 	import Library_Secondary_Nav from '$lib/Library_Secondary_Nav.svelte';
 	import Library_Tertiary_Nav from '$lib/Library_Tertiary_Nav.svelte';
@@ -23,7 +23,7 @@
 
 	// TODO this API is messy, inconsistent usage of props/context
 	const tomes_by_name = new Map(tomes.map((t) => [t.name, t]));
-	set_tomes(tomes_by_name);
+	tomes_context.set(tomes_by_name);
 
 	// TODO @many dialog navs - this is messy to satisfy SSR with the current design that puts the secondary nav in a dialog
 	const TERTIARY_NAV_BREAKPOINT = 1000;

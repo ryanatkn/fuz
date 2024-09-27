@@ -1,17 +1,14 @@
 <script lang="ts" module>
 	export type Register_Section_Header = (slug: string) => void;
-	const KEY = Symbol('register_section_header');
-	export const get_register_section_header = (): Register_Section_Header => getContext(KEY);
-	export const set_register_section_header = (
-		value: Register_Section_Header,
-	): Register_Section_Header => setContext(KEY, value);
+	export const register_section_header_context = create_context<Register_Section_Header>();
 </script>
 
 <script lang="ts">
-	import {getContext, setContext, type Snippet} from 'svelte';
+	import type {Snippet} from 'svelte';
 	import type {SvelteHTMLElements} from 'svelte/elements';
 	import {DEV} from 'esm-env';
 
+	import {create_context} from '$lib/context_helpers.js';
 	import {intersect} from '$lib/intersect.js';
 	import {library_links_context} from '$lib/library_helpers.svelte.js';
 
@@ -26,7 +23,7 @@
 
 	let slug: string;
 
-	set_register_section_header((s) => {
+	register_section_header_context.set((s) => {
 		slug = s;
 	});
 </script>

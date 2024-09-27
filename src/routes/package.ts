@@ -485,11 +485,9 @@ export const src_json = {
 			declarations: [
 				{name: 'Tome', kind: 'variable'},
 				{name: 'to_tome_pathname', kind: 'function'},
-				{name: 'get_tomes', kind: 'function'},
-				{name: 'set_tomes', kind: 'function'},
+				{name: 'tomes_context', kind: 'variable'},
 				{name: 'get_tome_by_name', kind: 'function'},
-				{name: 'get_tome', kind: 'function'},
-				{name: 'set_tome', kind: 'function'},
+				{name: 'tome_context', kind: 'variable'},
 			],
 		},
 	},

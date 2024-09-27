@@ -5,7 +5,7 @@
 	import {base} from '$app/paths';
 
 	import Tome_Header from '$lib/Tome_Header.svelte';
-	import {set_tome, type Tome} from '$lib/tome.js';
+	import {tome_context, type Tome} from '$lib/tome.js';
 	import {DEFAULT_LIBRARY_PATH, library_links_context} from '$lib/library_helpers.svelte.js';
 	import {intersect} from '$lib/intersect.js';
 
@@ -20,7 +20,7 @@
 
 	const library_links = library_links_context.get();
 
-	set_tome(tome); // TODO make reactive?
+	tome_context.set(tome); // TODO make reactive?
 
 	const slug = slugify(tome.name);
 

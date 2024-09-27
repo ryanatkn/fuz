@@ -3,7 +3,7 @@
 
 	import Library_Footer from '$lib/Library_Footer.svelte';
 	import Card from '$lib/Card.svelte';
-	import {get_pkg} from '$routes/pkg.js';
+	import {pkg_context} from '$routes/pkg.js';
 	import Svg from '$lib/Svg.svelte';
 	import {
 		fuz_logo,
@@ -15,7 +15,7 @@
 	} from '$lib/logos.js';
 	import Hidden_Personal_Links from '$lib/Hidden_Personal_Links.svelte';
 
-	const pkg = get_pkg();
+	const pkg = pkg_context.get();
 </script>
 
 <main class="box w_100">
