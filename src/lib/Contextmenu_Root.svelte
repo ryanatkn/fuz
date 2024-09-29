@@ -367,11 +367,11 @@
 	</menu>
 {/if}
 
-{#snippet link_entry(props: ComponentProps<Contextmenu_Link_Entry>)}
+{#snippet link_entry(props: ComponentProps<typeof Contextmenu_Link_Entry>)}
 	<Contextmenu_Link_Entry {...props} />
 {/snippet}
 
-{#snippet text_entry(props: ComponentProps<Contextmenu_Text_Entry>)}
+{#snippet text_entry(props: ComponentProps<typeof Contextmenu_Text_Entry>)}
 	<Contextmenu_Text_Entry {...props} />
 {/snippet}
 

@@ -48,7 +48,7 @@
 		<a rel="me" href="https://hci.social/@ryanatkn">@ryanatkn@hci.social</a>
 	</li>
 	<li>
-		@webdevladder on <a rel="me" href="https://twitter.com/webdevladder">Twitter</a>,
+		@webdevladder on <a rel="me" href="https://x.com/webdevladder">Twitter</a>,
 		<a rel="me" href="https://www.reddit.com/user/webdevladder/">Reddit</a>, and
 		<a href="https://news.ycombinator.com/user?id=webdevladder">Hacker News</a>
 	</li>
