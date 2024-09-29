@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.128.1
+
+### Patch Changes
+
+- webdevladder.net has a blog and YouTube channels ([d31974c](https://github.com/ryanatkn/fuz/commit/d31974c))
+
 ## 0.128.0
 
 ### Minor Changes
