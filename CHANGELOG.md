@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.129.0
+
+### Minor Changes
+
+- upgrade `svelte` ([fbbce1c](https://github.com/ryanatkn/fuz/commit/fbbce1c))
+
 ## 0.128.1
 
 ### Patch Changes
