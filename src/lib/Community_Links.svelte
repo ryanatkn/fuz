@@ -16,7 +16,7 @@
 			href="https://www.webdevladder.net/"
 			class:selected={selected === 'webdevladder.net'}>webdevladder.net</a
 		>
-		- realworld webdev with TypeScript and Svelte, YouTube channels
+		- realworld webdev with TypeScript and Svelte, blog and YouTube channels
 		<a rel="me" href="https://youtube.com/@webdevladder">@webdevladder</a>
 		and
 		<a rel="me" href="https://youtube.com/@webdevladder_vods">@webdevladder_vods</a
