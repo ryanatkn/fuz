@@ -20,6 +20,7 @@
 		github_logo,
 		mdn_logo,
 		fuz_template_logo,
+		belt_logo,
 	} from '$lib/logos.js';
 
 	const LIBRARY_ITEM_NAME = 'logos';
@@ -36,8 +37,12 @@
 			</li>
 			<li>
 				<Code content={`<Svg data={moss_logo} />`} />
-				<a href="https://moss.ryanatkn.com/"
-					><Svg data={moss_logo} size="var(--icon_size_xl3)" attrs={{style: 'color: red;'}} /></a
+				<a href="https://moss.ryanatkn.com/"><Svg data={moss_logo} size="var(--icon_size_xl3)" /></a
+				>
+			</li>
+			<li>
+				<Code content={`<Svg data={belt_logo} />`} />
+				<a href="https://belt.ryanatkn.com/"><Svg data={belt_logo} size="var(--icon_size_xl3)" /></a
 				>
 			</li>
 			<li>

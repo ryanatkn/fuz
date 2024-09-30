@@ -430,6 +430,7 @@ export const src_json = {
 				{name: 'gro_logo', kind: 'variable'},
 				{name: 'fuz_logo', kind: 'variable'},
 				{name: 'moss_logo', kind: 'variable'},
+				{name: 'belt_logo', kind: 'variable'},
 				{name: 'fuz_code_logo', kind: 'variable'},
 				{name: 'fuz_blog_logo', kind: 'variable'},
 				{name: 'fuz_mastodon_logo', kind: 'variable'},
