@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.129.1
+
+### Patch Changes
+
+- add logo for `@ryanatkn/belt` ([#58](https://github.com/ryanatkn/fuz/pull/58))
+
 ## 0.129.0
 
 ### Minor Changes
