@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.129.0",
+  "version": "0.129.1",
   "modules": {
     "./package.json": {
       "path": "package.json",
@@ -306,6 +306,10 @@
         },
         {
           "name": "moss_logo",
+          "kind": "variable"
+        },
+        {
+          "name": "belt_logo",
           "kind": "variable"
         },
         {
