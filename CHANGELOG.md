@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.129.2
+
+### Patch Changes
+
+- relax type of `Copy_To_Clipboard` type `text` to disable when `null` ([87cddf0](https://github.com/ryanatkn/fuz/commit/87cddf0))
+
 ## 0.129.1
 
 ### Patch Changes
