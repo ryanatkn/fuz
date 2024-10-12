@@ -2,7 +2,5 @@
 	@ryanatkn@hci.social on <a rel="me" href="https://hci.social/@ryanatkn">Mastodon</a>
 </div>
 <div hidden>
-	@webdevladder@mastodon.social on <a rel="me" href="https://mastodon.social/@webdevladder"
-		>Mastodon</a
-	>
+	@webdevladder@fosstodon.org on <a rel="me" href="https://fosstodon.org/@webdevladder">Mastodon</a>
 </div>

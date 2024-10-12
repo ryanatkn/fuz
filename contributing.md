@@ -23,7 +23,7 @@ Prefer the Discord for most questions and discussions.
 
 You can also find me as @webdevladder on
 [YouTube](https://www.youtube.com/@webdevladder),
-[Mastodon](https://mastodon.social/@webdevladder),
+[Mastodon](https://fosstodon.org/@webdevladder),
 [Twitter](https://x.com/webdevladder),
 and [Hacker News](https://news.ycombinator.com/user?id=webdevladder).
 I don't run any other communities like Reddit or Fediverse things
