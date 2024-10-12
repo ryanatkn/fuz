@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.129.3
+
+### Patch Changes
+
+- update webdevladder Mastodon link to fosstodon.org/@webdevladder ([bf19a04](https://github.com/ryanatkn/fuz/commit/bf19a04))
+
 ## 0.129.2
 
 ### Patch Changes
