@@ -24,7 +24,7 @@
 			>spiderspace.org</a
 		>
 		- nontechnical design videos where we'll make a social website together with
-		<a href="https://zzz.ryanatkn.com/">Zzz</a> when it's ready, YouTube channel
+		<a href="https://www.zzzbot.dev/">Zzz</a> when it's ready, YouTube channel
 		<a rel="me" href="https://youtube.com/@spiderspace_8000">@spiderspace_8000</a
 		>{#if selected === 'spiderspace.org'}, you are here{/if}
 	</li>

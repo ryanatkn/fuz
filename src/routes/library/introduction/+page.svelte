@@ -13,7 +13,7 @@
 			Fuz is a Svelte UI library that builds on my CSS framework <a
 				href="https://moss.ryanatkn.com/">Moss</a
 			>. It's in early alpha and there will be many breaking changes. I'm making it to support
-			<a href="https://zzz.ryanatkn.com/">Zzz</a>
+			<a href="https://www.zzzbot.dev/">Zzz</a>
 			and
 			<a href="https://www.ryanatkn.com/">my other projects</a> that focus on end-users, so it'll continue
 			to grow slowly as I find the time and usecases.

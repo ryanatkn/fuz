@@ -8,7 +8,7 @@ Fuz is a [Svelte](https://svelte.dev/) UI library
 with components and helpers for making friendly and helpful websites.
 It's in early alpha and it will go through many breaking changes.
 
-Fuz is being made to support [Zzz](https://zzz.ryanatkn.com/)
+Fuz is being made to support [Zzz](https://www.zzzbot.dev/)
 and [my other projects](https://www.ryanatkn.com/)
 that focus on end-users.
 Fuz emphasizes capability and efficiency and tries to be simple for those goals.

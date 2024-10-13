@@ -33,7 +33,7 @@
 		<ul class="box text_align_center unstyled">
 			<li>
 				<Code content={`<Svg data={zzz_logo} />`} />
-				<a href="https://zzz.ryanatkn.com/"><Svg data={zzz_logo} size="var(--icon_size_xl3)" /></a>
+				<a href="https://www.zzzbot.dev/"><Svg data={zzz_logo} size="var(--icon_size_xl3)" /></a>
 			</li>
 			<li>
 				<Code content={`<Svg data={moss_logo} />`} />
