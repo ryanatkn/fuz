@@ -1,0 +1,21 @@
+import{a as i,t as E,g as z,l as xt}from"../chunks/disclose-version.ZoaYz1AU.js";import{p as bt,f as G,a as $t,J as l,g as t,a5 as b,s as n,t as K,c as a,d as W,r,a4 as O,a3 as ht}from"../chunks/runtime.DaB_8cOj.js";import{s as T}from"../chunks/render.DpEwyGnv.js";import{i as rt,p as Pt}from"../chunks/if.BRCK-0uq.js";import{r as Q}from"../chunks/attributes.BPvofiUC.js";import{s as B}from"../chunks/style.Bk7ejTAN.js";import{b as U}from"../chunks/input.D42hkQiW.js";import{C as w}from"../chunks/Code.DozXpeGJ.js";import{g as At}from"../chunks/tome.DeIcXbwy.js";import{P as L}from"../chunks/Pending_Animation.DWdgyn_J.js";import{T as kt}from"../chunks/Tome_Content.daSAKTT3.js";import{T as ot,a as it}from"../chunks/Tome_Section_Header.Bgwtr0Va.js";var yt=(c,e)=>l(e,!t(e)),zt=(c,e)=>l(e,"🐢🐢🐢"),Tt=(c,e)=>l(e,Pt((t(e)+t(e)).substring(0,24))),wt=(c,e)=>l(e,!t(e)),Et=E('<!> <!> <p>with children <input> <button type="button">🐢🐢🐢</button> <button type="button">* 2</button></p> <button type="button"><!></button> <div><!></div>',1),It=E("With children <code>index</code> prop",1),Mt=(c,e)=>l(e,!t(e)),Rt=E('<div class="row box"><span class="size_xl5"> </span> <span class="index svelte-1tring4"> </span> </div>'),Ct=E('<!> <!> <p>with <code> <button type="button"> </button> </code></p> <p>and children <input> <input></p> <!>',1),St=E('<section><!> <!> <div class="mb_lg"><!></div> <button type="button" class="mb_lg"><!></button> <!> <div class="box" role="none"><!></div></section> <!> <!>',1);function Ot(c,e){bt(e,!0);const st=At("Pending_Animation");let u=b("🐢"),I=b("🐸"),M=b("⏳"),R=b(!1),p=b(!0),C=b(!1);kt(c,{tome:st,children:(_t,Bt)=>{var X=St(),N=G(X),Z=a(N);w(Z,{content:"import Pending_Animation from '@ryanatkn/fuz/Pending_Animation.svelte';",lang:"ts"});var tt=n(Z,2),lt=W(()=>`<Pending_Animation running={${t(p)}} />`);w(tt,{get content(){return t(lt)}});var V=n(tt,2),dt=a(V);L(dt,{get running(){return t(p)}}),r(V);var S=n(V,2);S.__click=[yt,p];var vt=a(S);rt(vt,()=>t(p),d=>{var $=z("pause animation");i(d,$)},d=>{var $=z("play animation");i(d,$)}),r(S);var nt=n(S,2),ct=W(()=>`<Pending_Animation
+	attrs={{class: 'size_xl5'}}
+	running={${t(p)}}
+/>`);w(nt,{get content(){return t(ct)}});var Y=n(nt,2);B(Y,"align-items","flex-start");var ut=a(Y);L(ut,{attrs:{class:"size_xl5"},get running(){return t(p)}}),r(Y),r(N);var et=n(N,2);ot(et,{children:(d,$)=>{var h=Et(),P=G(h);it(P,{text:"With custom children"});var A=n(P,2),H=W(()=>`<div
+	style:font-size="var(--size_xl6)"
+	style:--animation_duration="var(--duration_6)"
+>
+	<Pending_Animation running={${t(C)}}>
+		{${t(u)}}
+	</Pending_Animation>
+</div>`);w(A,{get content(){return t(H)}});var v=n(A,2),m=n(a(v));Q(m);var k=n(m,2);k.__click=[zt,u];var g=n(k,2);g.__click=[Tt,u],r(v);var f=n(v,2);f.__click=[wt,C];var J=a(f);rt(J,()=>t(C),o=>{var x=z("pause animation");i(o,x)},o=>{var x=z("play animation");i(o,x)}),r(f);var s=n(f,2);B(s,"font-size","var(--size_xl6)"),B(s,"--animation_duration","var(--duration_6)"),B(s,"text-align","center");var y=a(s);L(y,{get running(){return t(C)},children:(o,x)=>{O();var _=z();K(()=>T(_,t(u))),i(o,_)},$$slots:{default:!0}}),r(s),U(m,()=>t(u),o=>l(u,o)),i(d,h)},$$slots:{default:!0}});var pt=n(et,2);ot(pt,{children:(d,$)=>{var h=Ct(),P=G(h);it(P,{text:"With children index prop",children:(_,at)=>{O();var j=It();O(2),i(_,j)},$$slots:{default:!0}});var A=n(P,2),H=W(()=>`<Pending_Animation running={${t(R)}}>
+	{#snippet children(index)}
+		<div class="row box">
+			{${t(I)}}
+			{index}
+			<span class="size_xl5">
+				{${t(M)}}
+			</span>}
+		</div>
+	{/snippet}
+</Pending_Animation>`);w(A,{get content(){return t(H)}});var v=n(A,2),m=n(a(v)),k=a(m);k.nodeValue="running={";var g=n(k);g.__click=[Mt,R];var f=a(g);r(g);var J=n(g,1,!0);J.nodeValue="}",r(m),r(v);var s=n(v,2),y=n(a(s));Q(y);var o=n(y,2);Q(o),r(s);var x=n(s,2);L(x,{get running(){return t(R)},children:(at,j=ht)=>{var q=Rt(),D=a(q),mt=a(D);r(D);var F=n(D,2),gt=a(F);r(F);var ft=n(F);r(q),K(()=>{T(mt,t(I)),T(gt,j()),T(ft,` ${t(M)??""}`)}),i(at,q)},$$slots:{children:!0}}),K(()=>T(f,t(R))),U(y,()=>t(I),_=>l(I,_)),U(o,()=>t(M),_=>l(M,_)),i(d,h)},$$slots:{default:!0}}),i(_t,X)},$$slots:{default:!0}}),$t()}xt(["click"]);export{Ot as component};
