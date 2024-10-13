@@ -42,8 +42,8 @@ export const package_json = {
 		'@ryanatkn/belt': '^0.25.3',
 		'@ryanatkn/eslint-config': '^0.5.5',
 		'@ryanatkn/fuz_code': '^0.19.0',
-		'@ryanatkn/gro': '0.140.0',
-		'@ryanatkn/moss': '^0.18.2',
+		'@ryanatkn/gro': '^0.140.0',
+		'@ryanatkn/moss': '^0.16.1',
 		'@sveltejs/adapter-static': '^3.0.5',
 		'@sveltejs/kit': '^2.7.0',
 		'@sveltejs/package': '^2.3.5',
@@ -323,6 +323,7 @@ export const package_json = {
 		},
 		'./tome.js': {types: './dist/tome.d.ts', default: './dist/tome.js'},
 	},
+	dependencies: {'@ryanatkn/fuz': '^0.129.5'},
 } satisfies Package_Json;
 
 export const src_json = {
