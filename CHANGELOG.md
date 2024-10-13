@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.129.5
+
+### Patch Changes
+
+- Zzz - bot control hq ([8342f98](https://github.com/ryanatkn/fuz/commit/8342f98))
+
 ## 0.129.4
 
 ### Patch Changes
