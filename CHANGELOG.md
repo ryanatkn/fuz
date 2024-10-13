@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.129.4
+
+### Patch Changes
+
+- remove discord link ([222eb8c](https://github.com/ryanatkn/fuz/commit/222eb8c))
+
 ## 0.129.3
 
 ### Patch Changes
