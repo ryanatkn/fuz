@@ -47,7 +47,7 @@ export const package_json = {
 		'@sveltejs/adapter-static': '^3.0.5',
 		'@sveltejs/kit': '^2.7.0',
 		'@sveltejs/package': '^2.3.5',
-		'@sveltejs/vite-plugin-svelte': '4.0.0-next.6',
+		'@sveltejs/vite-plugin-svelte': '^3.0.0',
 		'@types/node': '^22.7.5',
 		'@types/prismjs': '^1.26.4',
 		eslint: '^9.12.0',
