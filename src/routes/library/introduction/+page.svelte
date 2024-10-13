@@ -24,8 +24,7 @@
 			project for learning and experimentation. If you're interested in using Fuz, helping out, or
 			just following along, see <a href="https://github.com/ryanatkn/fuz/blob/main/contributing.md"
 				>contributing.md</a
-			>
-			and visit <a href="https://discord.gg/YU5tyeK72X">the Discord</a>.
+			>.
 		</p>
 		<p>
 			These docs are a work in progress - for an overview see

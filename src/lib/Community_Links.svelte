@@ -8,9 +8,6 @@
 
 <ul>
 	<li>
-		join <a rel="me" href="https://discord.gg/YU5tyeK72X">the Discord</a> community
-	</li>
-	<li>
 		<a
 			rel="me"
 			href="https://www.webdevladder.net/"

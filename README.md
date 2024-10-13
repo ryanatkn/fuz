@@ -33,15 +33,13 @@ The Svelte components and helpers:
 ## Usage
 
 > ⚠️ Expect a lot of breaking changes. If you want to help stabilize the API,
-> please join [the Discord](https://discord.gg/YU5tyeK72X)
-> and see [contributing.md](contributing.md), your input is appreciated.
+> thank you see [contributing.md](contributing.md), your input is appreciated.
 >
 > If you feel comfortable looking at the source code,
 > Fuz is ready to use in your own projects,
 > with the major caveat that there will be a lot of breaking changes ahead.
 > The code is significantly incomplete but I think it's stable enough to use
 > if you're willing to keep up with the relatively fast-moving changelog.
-> For more see the dev channels in [Discord](https://discord.gg/YU5tyeK72X).
 
 ```bash
 npm i -D @ryanatkn/fuz

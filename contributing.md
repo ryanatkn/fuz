@@ -11,23 +11,8 @@ and it has opinions and design choices that make it more specialized than most U
 
 Fuz does want to be broadly useful, and I always appreciate help making it the best it can be.
 
-## Community
-
-I run community spaces for my projects, including Fuz,
-on [Discord](https://discord.gg/YU5tyeK72X)
-and [Spiderspace](https://www.spiderspace.org/).
-
 Please [open issues](https://github.com/ryanatkn/fuz/issues) with any bugs, proposals,
 or other things you would like to discuss.
-Prefer the Discord for most questions and discussions.
-
-You can also find me as @webdevladder on
-[YouTube](https://www.youtube.com/@webdevladder),
-[Mastodon](https://fosstodon.org/@webdevladder),
-[Twitter](https://x.com/webdevladder),
-and [Hacker News](https://news.ycombinator.com/user?id=webdevladder).
-I don't run any other communities like Reddit or Fediverse things
-but don't let that stop you from making your own.
 
 ## Developers
 
@@ -36,8 +21,7 @@ Fuz is ready to use in your own projects,
 with the major caveat that there will be a lot of breaking changes.
 The code is significantly incomplete but I think it's stable enough to use
 if you're willing to keep up with the relatively fast-moving [changelog](CHANGELOG.md).
-See the dev channels in [Discord](https://discord.gg/YU5tyeK72X)
-and [GitHub issues](https://github.com/ryanatkn/fuz/issues).
+See the [GitHub issues](https://github.com/ryanatkn/fuz/issues).
 
 I'm open to PRs when they fit the project's design goals, which can be subtle and arbitrary.
 Feel free to open PRs for straightforward changes,
