@@ -20,7 +20,8 @@ If you feel comfortable looking at the source code,
 Fuz is ready to use in your own projects,
 with the major caveat that there will be a lot of breaking changes.
 The code is significantly incomplete but I think it's stable enough to use
-if you're willing to keep up with the relatively fast-moving [changelog](CHANGELOG.md).
+if you're willing to keep up with a sometimes-sparse [changelog](CHANGELOG.md).
+(reading PRs may be needed sometimes, I'll work on that)
 See the [GitHub issues](https://github.com/ryanatkn/fuz/issues).
 
 I'm open to PRs when they fit the project's design goals, which can be subtle and arbitrary.
