@@ -1,0 +1,1 @@
+import{n as i}from"./runtime.OOkXorm-.js";import{a as s}from"./attributes.1KJqROqM.js";function v(o,_,r,t=!0){t&&r();for(var n of _)o.addEventListener(n,r);i(()=>{for(var e of _)o.removeEventListener(e,r)})}function d(o,_,r,t=r){o.addEventListener(_,r);const n=o.__on_r;n?o.__on_r=()=>{n(),t()}:o.__on_r=t,s()}export{v as a,d as l};

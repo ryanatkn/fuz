@@ -1,1 +1,0 @@
-import{V as o,W as e,X as c,u}from"./runtime.DaB_8cOj.js";function a(n){o===null&&e(),o.l!==null?i(o).m.push(n):c(()=>{const t=u(n);if(typeof t=="function")return t})}function s(n){o===null&&e(),a(()=>()=>u(n))}function i(n){var t=n.l;return t.u??(t.u={a:[],b:[],m:[]})}export{a,s as o};
