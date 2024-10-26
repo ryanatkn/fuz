@@ -185,7 +185,7 @@
 				{#each modules as module_name, i (module_name)}
 					{@const source_url = to_source_url(pkg.repo_url, module_name)}
 					{@const exports_key = pkg_exports_keys?.[i]}
-					{@const pkg_module = exports_key && pkg_modules?.[exports_key]}
+					{@const pkg_module = exports_key ? pkg_modules?.[exports_key] : undefined}
 					<li
 						class="module"
 						class:ts={module_name.endsWith('.js')}
