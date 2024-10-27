@@ -34,7 +34,7 @@ export const package_json = {
 		'@ryanatkn/gro': '*',
 		'@ryanatkn/moss': '*',
 		'@sveltejs/kit': '^2',
-		svelte: '^5.0.0-next.0',
+		svelte: '^5',
 	},
 	peerDependenciesMeta: {'@ryanatkn/gro': {optional: true}},
 	devDependencies: {
@@ -42,7 +42,7 @@ export const package_json = {
 		'@ryanatkn/belt': '^0.25.3',
 		'@ryanatkn/eslint-config': '^0.5.5',
 		'@ryanatkn/fuz_code': '^0.19.0',
-		'@ryanatkn/gro': '^0.143.0',
+		'@ryanatkn/gro': '^0.143.1',
 		'@ryanatkn/moss': '^0.18.2',
 		'@sveltejs/adapter-static': '^3.0.6',
 		'@sveltejs/kit': '^2.7.3',
