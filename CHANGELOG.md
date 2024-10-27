@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.130.1
+
+### Patch Changes
+
+- fix self dep ([7d54cc3](https://github.com/ryanatkn/fuz/commit/7d54cc3))
+
 ## 0.130.0
 
 ### Minor Changes
