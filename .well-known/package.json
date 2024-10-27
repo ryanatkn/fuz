@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.129.5",
+  "version": "0.130.1",
   "description": "Svelte UI library",
   "motto": "friendly user zystem",
   "glyph": "🧶",
@@ -364,8 +364,5 @@
       "types": "./dist/tome.d.ts",
       "default": "./dist/tome.js"
     }
-  },
-  "dependencies": {
-    "@ryanatkn/fuz": "^0.129.5"
   }
 }
