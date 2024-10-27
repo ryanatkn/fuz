@@ -1,5 +1,16 @@
 # @ryanatkn/fuz
 
+## 0.130.0
+
+### Minor Changes
+
+- upgrade peer dep to Svelte 5 ([69acd1d](https://github.com/ryanatkn/fuz/commit/69acd1d))
+
+### Patch Changes
+
+- Updated dependencies [69acd1d]
+  - @ryanatkn/fuz@0.130.0
+
 ## 0.129.5
 
 ### Patch Changes
