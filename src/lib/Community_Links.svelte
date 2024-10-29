@@ -1,6 +1,6 @@
 <script lang="ts">
 	interface Props {
-		selected?: 'spiderspace.org' | 'webdevladder.net' | 'ryanatkn.com';
+		selected?: 'webdevladder.net' | 'ryanatkn.com'; // 'spiderspace.org' |
 	}
 
 	const {selected}: Props = $props();
@@ -19,7 +19,7 @@
 		<a rel="me" href="https://youtube.com/@webdevladder_vods">@webdevladder_vods</a
 		>{#if selected === 'webdevladder.net'}, you are here{/if}
 	</li>
-	<li>
+	<!-- <li>
 		<a rel="me" href="https://www.spiderspace.org/" class:selected={selected === 'spiderspace.org'}
 			>spiderspace.org</a
 		>
@@ -27,7 +27,7 @@
 		<a href="https://www.zzzbot.dev/">Zzz</a> when it's ready, YouTube channel
 		<a rel="me" href="https://youtube.com/@spiderspace_8000">@spiderspace_8000</a
 		>{#if selected === 'spiderspace.org'}, you are here{/if}
-	</li>
+	</li> -->
 	<li>
 		<a rel="me" href="https://www.ryanatkn.com/" class:selected={selected === 'ryanatkn.com'}
 			>ryanatkn.com</a
