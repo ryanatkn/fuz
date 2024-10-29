@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.130.2
+
+### Patch Changes
+
+- remove spiderspace from `Community_Links` for now ([66f6ec6](https://github.com/ryanatkn/fuz/commit/66f6ec6))
+
 ## 0.130.1
 
 ### Patch Changes
