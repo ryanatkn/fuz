@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.130.3
+
+### Patch Changes
+
+- linkify blog in `Community_Links` ([de2652f](https://github.com/ryanatkn/fuz/commit/de2652f))
+
 ## 0.130.2
 
 ### Patch Changes
