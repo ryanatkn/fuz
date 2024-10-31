@@ -40,7 +40,7 @@ export const package_json = {
 	devDependencies: {
 		'@changesets/changelog-git': '^0.2.0',
 		'@ryanatkn/belt': '^0.26.0',
-		'@ryanatkn/eslint-config': '^0.5.5',
+		'@ryanatkn/eslint-config': '^0.5.6',
 		'@ryanatkn/fuz_code': '^0.20.0',
 		'@ryanatkn/gro': '^0.145.0',
 		'@ryanatkn/moss': '^0.19.0',
@@ -61,7 +61,7 @@ export const package_json = {
 		'svelte-check': '^4.0.5',
 		tslib: '^2.8.0',
 		typescript: '^5.6.3',
-		'typescript-eslint': '^8.11.0',
+		'typescript-eslint': '^8.12.2',
 		uvu: '^0.5.6',
 	},
 	prettier: {
