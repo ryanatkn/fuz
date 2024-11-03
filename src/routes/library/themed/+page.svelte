@@ -245,7 +245,8 @@
 		<p>To use Fuz's base theme:</p>
 		<Code
 			content={`<!-- +layout.svelte -->
-<script>
+<` +
+				`script>
 	import '@ryanatkn/moss/style.css';
 	import '@ryanatkn/moss/theme.css';
 	import Themed from '@ryanatkn/fuz/Themed.svelte';
@@ -256,7 +257,7 @@
 	}
 	
 	const {children}: Props = $props();
-<script>
+</script>
 
 <!-- enable theme and color-scheme support -->
 <Themed>
