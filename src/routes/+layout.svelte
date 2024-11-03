@@ -1,8 +1,8 @@
 <script lang="ts">
 	import '@ryanatkn/moss/style.css';
 	import '@ryanatkn/moss/theme.css';
+	import '@ryanatkn/fuz_code/theme.css';
 	import '$routes/moss.css';
-	import '@ryanatkn/fuz_code/prism.css';
 
 	import {parse_package_meta} from '@ryanatkn/gro/package_meta.js';
 	import type {Snippet} from 'svelte';
