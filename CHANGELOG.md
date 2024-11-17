@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.130.4
+
+### Patch Changes
+
+- remove twitter link and add bluesky ([8f7b211](https://github.com/ryanatkn/fuz/commit/8f7b211))
+
 ## 0.130.3
 
 ### Patch Changes
