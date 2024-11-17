@@ -37,8 +37,8 @@
 		- my homepage{#if selected === 'ryanatkn.com'}, you are here{/if}
 	</li>
 	<li>
-		GitHub - <a rel="me" href="https://github.com/ryanatkn">@ryanatkn</a> and
-		<a rel="me" href="https://github.com/spiderspace">@spiderspace</a>
+		GitHub as <a rel="me" href="https://github.com/ryanatkn">@ryanatkn</a> and Bluesky as
+		<a href="https://bsky.app/profile/ryanatkn.com">@ryanatkn.com</a>
 	</li>
 	<li>
 		Mastodon as
@@ -47,8 +47,7 @@
 		<a rel="me" href="https://hci.social/@ryanatkn">@ryanatkn@hci.social</a>
 	</li>
 	<li>
-		@webdevladder on <a rel="me" href="https://x.com/webdevladder">Twitter</a>,
-		<a rel="me" href="https://www.reddit.com/user/webdevladder/">Reddit</a>, and
+		@webdevladder on <a rel="me" href="https://www.reddit.com/user/webdevladder/">Reddit</a> and
 		<a href="https://news.ycombinator.com/user?id=webdevladder">Hacker News</a>
 	</li>
 	<li>
