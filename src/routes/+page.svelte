@@ -12,6 +12,7 @@
 		fuz_mastodon_logo,
 		fuz_gitops_logo,
 		fuz_template_logo,
+		moss_logo,
 	} from '$lib/logos.js';
 	import Hidden_Personal_Links from '$lib/Hidden_Personal_Links.svelte';
 
@@ -55,6 +56,10 @@
 			<!-- TODO ideally this wouldn't duplicate metadata like descriptions, but adding fuz_gitops to this repo is heavy -->
 			<h2 class="mt_0 mb_xl2 px_md">other packages</h2>
 			<menu class="unstyled size_lg">
+				<a class="row chip bg px_md py_xs radius_sm mb_lg" href="https://moss.ryanatkn.com/"
+					><Svg data={moss_logo} size="var(--icon_size_lg)" />
+					<span class="ml_lg">moss</span></a
+				>
 				<a class="row chip bg px_md py_xs radius_sm mb_lg" href="https://template.fuz.dev/"
 					><Svg data={fuz_template_logo} size="var(--icon_size_lg)" />
 					<span class="ml_lg">fuz_template</span></a
