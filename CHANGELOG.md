@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.130.5
+
+### Patch Changes
+
+- add link to https://fosstodon.org/@ryanatkn ([2b7880c](https://github.com/ryanatkn/fuz/commit/2b7880c))
+
 ## 0.130.4
 
 ### Patch Changes
