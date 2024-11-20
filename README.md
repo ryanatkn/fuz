@@ -62,7 +62,7 @@ import '$routes/moss.css';
 import Themed from '@ryanatkn/fuz/Themed.svelte';
 
 // and Fuz TypeScript modules:
-import {type Theme, themer_context} from '@ryanatkn/fuz/theme.js';
+import {type Theme, themer_context} from '@ryanatkn/fuz/theme.svelte.js';
 ```
 
 See [the library](https://www.fuz.dev/library) for more.

@@ -290,7 +290,7 @@
 		<Code
 			content={`// get values from the Svelte context provided by
 // the nearest \`Themed\` ancestor:
-import {themer_context} from '@ryanatkn/fuz/theme.js';
+import {themer_context} from '@ryanatkn/fuz/theme.svelte.js';
 const themer = themer_context.get();
 themer.theme.name; // '${themer.theme.name}'
 themer.color_scheme; // '${themer.color_scheme}'`}
