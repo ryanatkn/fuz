@@ -118,6 +118,7 @@ export const load_theme = (fallback: Theme = default_themes[0], key = THEME_STOR
 	return fallback;
 };
 
+// TODO BLOCK these don't work with CSP, probably make users inline into `app.html`, needs docs
 /**
  * Creates an HTML script string to be inserted into the `head`
  * that initializes the dark/light color scheme.
