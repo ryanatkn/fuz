@@ -140,8 +140,8 @@ export const create_theme_setup_script = (
 	key = COLOR_SCHEME_STORAGE_KEY,
 ): string => `
 	<meta name="color-scheme" content="${fallback === 'dark' ? 'dark light' : 'light dark'}" />
-	${fallback === 'dark' ? "<style nonce='%sveltekit.nonce%'>:root:root { color-scheme: dark light; }</style>" : ''}
-	<script nonce="%sveltekit.nonce%">
+	${fallback === 'dark' ? '<style>:root:root { color-scheme: dark light; }</style>' : ''}
+	<script>
 		try {
 			let c = localStorage.getItem('${key}');
 			if (c === 'auto' || (c !== 'dark' && c !== 'light')) {
@@ -154,14 +154,12 @@ export const create_theme_setup_script = (
 	</script>
 `;
 
-// TODO does the `nonce` here and above behave as desired?
-
 /**
  * Creates an HTML style string to be inserted into the `head`
  * that overrides the theme for a part of the page.
  * @param style same as the result of a call to `render_theme_style`
  * @returns HTML string with the style tag and its contents
  */
-export const create_theme_style_html = (style: string): string => `<style nonce="%sveltekit.nonce%">
+export const create_theme_style_html = (style: string): string => `<style>
 	${style}
 </style>`;
