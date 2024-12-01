@@ -6,14 +6,14 @@
 	import type {Snippet} from 'svelte';
 
 	interface Props {
-		tomes: Tome[];
+		tomes: Array<Tome>;
 		children?: Snippet<[category: string]>;
 	}
 
 	const {tomes, children}: Props = $props();
 
 	const tomes_by_category = $derived(
-		tomes.reduce<Record<string, Tome[]>>((result, c) => {
+		tomes.reduce<Record<string, Array<Tome>>>((result, c) => {
 			result[c.category] ??= [];
 			result[c.category].push(c);
 			return result;

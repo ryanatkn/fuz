@@ -22,10 +22,12 @@
 		name: string;
 		url: string;
 		logo: Svg_Data;
+		description: string;
+		glyph: string;
 	}
 
 	// prettier-ignore
-	const project_items = [
+	const project_items: Array<Project_Item> = [ 
 		{name: 'moss', url: 'https://moss.ryanatkn.com/', logo: moss_logo, description: 'CSS framework', glyph: '🌿'},
 		{name: 'fuz_template', url: 'https://template.fuz.dev/', logo: fuz_template_logo, description: 'a static web app and Node library template with TypeScript, Svelte, SvelteKit, Vite, esbuild, Fuz, and Gro', glyph: '❄'},
 		{name: 'fuz_blog', url: 'https://blog.fuz.dev/', logo: fuz_blog_logo, description: 'blog software from scratch with SvelteKit', glyph: '🖊️'},
@@ -89,22 +91,37 @@
 </main>
 
 {#snippet package_thumbnail(project_item: Project_Item)}
-	<a class="row chip bg px_md py_xs radius_sm mb_lg" href={project_item.url}
-		><Svg data={project_item.logo} size="var(--icon_size_lg)" />
-		<span class="ml_lg">{project_item.name}</span></a
+	<a class="thumbnail row bg px_md py_xs radius_sm mb_lg" href={project_item.url}
+		><Svg shrink={false} data={project_item.logo} size="var(--icon_size_lg)" />
+		<div class="pl_lg width_sm">
+			<div class="thumbnail_name">{project_item.name}</div>
+			<div class="thumbnail_description size_md text_color_3 font_weight_500">
+				{project_item.description}
+				{project_item.glyph}
+			</div>
+		</div></a
 	>
 {/snippet}
 
 <style>
-	a.chip {
+	.thumbnail {
 		box-shadow: var(--shadow_bottom_xs)
 			color-mix(in hsl, var(--shadow_color) var(--shadow_alpha_1), transparent);
 	}
-	a.chip:hover {
+	.thumbnail:hover {
 		box-shadow: var(--shadow_bottom_sm)
 			color-mix(in hsl, var(--shadow_color) var(--shadow_alpha_1), transparent);
+
+		/* show the underline only on the name, not the description */
+		text-decoration: none;
+		.thumbnail_name {
+			text-decoration: underline;
+		}
+		.thumbnail_description {
+			text-decoration: none;
+		}
 	}
-	a.chip:active {
+	.thumbnail:active {
 		box-shadow: var(--shadow_top_xs)
 			color-mix(in hsl, var(--shadow_color) var(--shadow_alpha_1), transparent);
 	}

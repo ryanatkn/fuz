@@ -38,11 +38,11 @@
 
 	// TODO this is weird but `animate:` needs an `each`?
 	const locate_cats = (
-		cats: Cat[],
+		cats: Array<Cat>,
 		swapped: boolean,
-	): {home_cats: Cat[]; adventure_cats: Cat[]} => {
-		const home_cats: Cat[] = [];
-		const adventure_cats: Cat[] = [];
+	): {home_cats: Array<Cat>; adventure_cats: Array<Cat>} => {
+		const home_cats: Array<Cat> = [];
+		const adventure_cats: Array<Cat> = [];
 		for (const cat of cats) {
 			const list = cat.position === 'home' ? home_cats : adventure_cats;
 			if (swapped) {

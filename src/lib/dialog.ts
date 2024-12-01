@@ -32,4 +32,4 @@ export interface Dialog_Params<T extends Component<any> = Component<any>> {
 }
 
 export type Dialog_Layout = 'centered' | 'page';
-export const dialog_layouts: Dialog_Layout[] = ['centered', 'page'];
+export const dialog_layouts: Array<Dialog_Layout> = ['centered', 'page'];

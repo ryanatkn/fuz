@@ -30,7 +30,7 @@
 
 	let selected_layout: Dialog_Layout = $state('page');
 
-	let items: object[] = $state([]);
+	let items: Array<object> = $state([]);
 	const remove_item = (item: object) => {
 		items = items.filter((i) => i !== item);
 	};
@@ -41,7 +41,7 @@
 		items = [];
 	};
 
-	let dialogs: Dialog_Params[] = $state([]);
+	let dialogs: Array<Dialog_Params> = $state([]);
 	const add_dialogs = (count: number) => {
 		const to_text = (index: number) => '!'.repeat(count * 3 - index * 3);
 		dialogs = Array.from({length: count}, (_, i) =>

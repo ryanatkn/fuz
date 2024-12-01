@@ -5,8 +5,8 @@
 	import Cat_Contextmenu from '$routes/library/contextmenu/Cat_Contextmenu.svelte';
 
 	interface Props {
-		home_cats: Cat[];
-		adventure_cats: Cat[];
+		home_cats: Array<Cat>;
+		adventure_cats: Array<Cat>;
 		act: (item: History_Item) => void;
 	}
 

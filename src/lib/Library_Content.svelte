@@ -6,7 +6,7 @@
 	import Package_Summary from '$lib/Package_Summary.svelte';
 
 	interface Props {
-		tomes: Tome[];
+		tomes: Array<Tome>;
 		pkg: Package_Meta;
 		repo_name?: Snippet<[repo_name: string]>;
 		content?: Snippet;

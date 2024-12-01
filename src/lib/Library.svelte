@@ -13,7 +13,7 @@
 	import {library_links_context} from '$lib/library_helpers.svelte.js';
 
 	interface Props {
-		tomes: Tome[];
+		tomes: Array<Tome>;
 		pkg: Package_Meta;
 		breadcrumb_children?: Snippet<[is_primary_nav: boolean]>;
 		children: Snippet;

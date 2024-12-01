@@ -48,7 +48,7 @@
   "devDependencies": {
     "@changesets/changelog-git": "^0.2.0",
     "@ryanatkn/belt": "^0.28.0",
-    "@ryanatkn/eslint-config": "^0.5.7",
+    "@ryanatkn/eslint-config": "^0.6.0",
     "@ryanatkn/fuz_code": "^0.21.0",
     "@ryanatkn/gro": "^0.147.1",
     "@ryanatkn/moss": "^0.20.2",

@@ -28,7 +28,7 @@ export interface Library_Link {
 }
 
 export class Library_Links {
-	library_links: Library_Link[] = $state([]);
+	library_links: Array<Library_Link> = $state([]);
 
 	slugs_onscreen: SvelteSet<string> = $state(new SvelteSet());
 
