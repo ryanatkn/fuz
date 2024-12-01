@@ -4,7 +4,7 @@
 	import Library_Footer from '$lib/Library_Footer.svelte';
 	import Card from '$lib/Card.svelte';
 	import {pkg_context} from '$routes/pkg.js';
-	import Svg from '$lib/Svg.svelte';
+	import Svg, {type Svg_Data} from '$lib/Svg.svelte';
 	import {
 		fuz_logo,
 		fuz_code_logo,
@@ -17,6 +17,22 @@
 	import Hidden_Personal_Links from '$lib/Hidden_Personal_Links.svelte';
 
 	const pkg = pkg_context.get();
+
+	interface Project_Item {
+		name: string;
+		url: string;
+		logo: Svg_Data;
+	}
+
+	// prettier-ignore
+	const project_items = [
+		{name: 'moss', url: 'https://moss.ryanatkn.com/', logo: moss_logo, description: 'CSS framework', glyph: '🌿'},
+		{name: 'fuz_template', url: 'https://template.fuz.dev/', logo: fuz_template_logo, description: 'a static web app and Node library template with TypeScript, Svelte, SvelteKit, Vite, esbuild, Fuz, and Gro', glyph: '❄'},
+		{name: 'fuz_blog', url: 'https://blog.fuz.dev/', logo: fuz_blog_logo, description: 'blog software from scratch with SvelteKit', glyph: '🖊️'},
+		{name: 'fuz_mastodon', url: 'https://mastodon.fuz.dev/', logo: fuz_mastodon_logo, description: 'Mastodon components and helpers for Svelte, SvelteKit, and Fuz', glyph: '🦣'},
+		{name: 'fuz_code', url: 'https://code.fuz.dev/', logo: fuz_code_logo, description: 'syntax styling utilities and components for TypeScript, Svelte, SvelteKit', glyph: '🎨'},
+		{name: 'fuz_gitops', url: 'https://gitops.fuz.dev/', logo: fuz_gitops_logo, description: 'a tool for managing many repos', glyph: '🪄'},
+	];
 </script>
 
 <main class="box w_100">
@@ -56,30 +72,9 @@
 			<!-- TODO ideally this wouldn't duplicate metadata like descriptions, but adding fuz_gitops to this repo is heavy -->
 			<h2 class="mt_0 mb_xl2 px_md">other packages</h2>
 			<menu class="unstyled size_lg">
-				<a class="row chip bg px_md py_xs radius_sm mb_lg" href="https://moss.ryanatkn.com/"
-					><Svg data={moss_logo} size="var(--icon_size_lg)" />
-					<span class="ml_lg">moss</span></a
-				>
-				<a class="row chip bg px_md py_xs radius_sm mb_lg" href="https://template.fuz.dev/"
-					><Svg data={fuz_template_logo} size="var(--icon_size_lg)" />
-					<span class="ml_lg">fuz_template</span></a
-				>
-				<a class="row chip bg px_md py_xs radius_sm mb_lg" href="https://blog.fuz.dev/"
-					><Svg data={fuz_blog_logo} size="var(--icon_size_lg)" />
-					<span class="ml_lg">fuz_blog</span></a
-				>
-				<a class="row chip bg px_md py_xs radius_sm mb_lg" href="https://mastodon.fuz.dev/"
-					><Svg data={fuz_mastodon_logo} size="var(--icon_size_lg)" />
-					<span class="ml_lg">fuz_mastodon</span></a
-				>
-				<a class="row chip bg px_md py_xs radius_sm mb_lg" href="https://code.fuz.dev/"
-					><Svg data={fuz_code_logo} size="var(--icon_size_lg)" />
-					<span class="ml_lg">fuz_code</span></a
-				>
-				<a class="row chip bg px_md py_xs radius_sm" href="https://gitops.fuz.dev/"
-					><Svg data={fuz_gitops_logo} size="var(--icon_size_lg)" />
-					<span class="ml_lg">fuz_gitops</span></a
-				>
+				{#each project_items as project_item}
+					{@render package_thumbnail(project_item)}
+				{/each}
 			</menu>
 		</section>
 		<section>
@@ -92,6 +87,13 @@
 		</section>
 	</div>
 </main>
+
+{#snippet package_thumbnail(project_item: Project_Item)}
+	<a class="row chip bg px_md py_xs radius_sm mb_lg" href={project_item.url}
+		><Svg data={project_item.logo} size="var(--icon_size_lg)" />
+		<span class="ml_lg">{project_item.name}</span></a
+	>
+{/snippet}
 
 <style>
 	a.chip {
