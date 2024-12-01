@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.130.5",
+  "version": "0.131.0",
   "modules": {
     "./package.json": {
       "path": "package.json",
@@ -386,7 +386,7 @@
       "path": "rune_helpers.svelte.ts",
       "declarations": [
         {
-          "name": "effect_skip",
+          "name": "effect_with_count",
           "kind": "function"
         }
       ]
