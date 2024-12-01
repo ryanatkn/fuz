@@ -452,7 +452,7 @@ export const src_json = {
 		'./Redirect.svelte': {path: 'Redirect.svelte', declarations: []},
 		'./rune_helpers.svelte.js': {
 			path: 'rune_helpers.svelte.ts',
-			declarations: [{name: 'effect_skip', kind: 'function'}],
+			declarations: [{name: 'effect_with_count', kind: 'function'}],
 		},
 		'./Spiders.svelte': {path: 'Spiders.svelte', declarations: []},
 		'./Svg.svelte': {path: 'Svg.svelte', declarations: []},
