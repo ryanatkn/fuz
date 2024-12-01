@@ -1,5 +1,15 @@
 # @ryanatkn/fuz
 
+## 0.131.0
+
+### Minor Changes
+
+- replace `effect_skip` with `effect_with_count` ([#60](https://github.com/ryanatkn/fuz/pull/60))
+
+### Patch Changes
+
+- add `shrink` prop to `Svg` ([fc28782](https://github.com/ryanatkn/fuz/commit/fc28782))
+
 ## 0.130.5
 
 ### Patch Changes
