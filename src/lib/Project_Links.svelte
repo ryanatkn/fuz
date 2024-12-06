@@ -1,15 +1,16 @@
 <script lang="ts">
 	import Svg from '$lib/Svg.svelte';
-	import {zzz_logo, gro_logo, fuz_logo, moss_logo, fuz_template_logo} from '$lib/logos.js';
+	import {gro_logo, fuz_logo, moss_logo, fuz_template_logo} from '$lib/logos.js';
 
 	const size = 'var(--icon_size_lg)';
 </script>
 
-<!--<a href="https://www.spiderspace.org/"></a>--><!--<a href="https://www.webdevladder.net/"></a>--><a
+<!--<a href="https://www.spiderspace.org/"></a>--><!--<a href="https://www.webdevladder.net/"></a>-->
+<!-- <a
 	class="project_link"
 	title="Zzz - bot control hq"
 	href="https://www.zzzbot.dev/"><Svg data={zzz_logo} {size} /><span class="name">Zzz</span></a
->
+> -->
 <a class="project_link" title="Moss - CSS framework" href="https://moss.ryanatkn.com/"
 	><Svg data={moss_logo} {size} /><span class="name">Moss</span></a
 >
