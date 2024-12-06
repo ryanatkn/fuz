@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.131.1
+
+### Patch Changes
+
+- remove Zzz from project links for now ([e342fd8](https://github.com/ryanatkn/fuz/commit/e342fd8))
+
 ## 0.131.0
 
 ### Minor Changes
