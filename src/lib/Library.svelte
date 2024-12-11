@@ -2,6 +2,7 @@
 	import type {Snippet} from 'svelte';
 	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
 	import {onNavigate} from '$app/navigation';
+	import {innerWidth} from 'svelte/reactivity/window';
 
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
 	import {Tome, tomes_context} from '$lib/tome.js';
@@ -31,8 +32,6 @@
 
 	const library_menu_width = '180px';
 
-	let innerWidth: number | undefined = $state();
-
 	let show_secondary_nav_dialog = $state(false);
 	const toggle_secondary_nav_dialog = (show?: boolean): void => {
 		show_secondary_nav_dialog = show ?? !show_secondary_nav_dialog;
@@ -45,7 +44,7 @@
 	library_links_context.set();
 </script>
 
-<svelte:window bind:innerWidth onhashchange={() => (show_secondary_nav_dialog = false)} />
+<svelte:window onhashchange={() => (show_secondary_nav_dialog = false)} />
 
 <div class="library" style:--library_menu_width={library_menu_width}>
 	<Library_Primary_Nav {pkg} {breadcrumb_children}>
@@ -55,7 +54,7 @@
 		</div>
 	</Library_Primary_Nav>
 	<!-- TODO @many dialog navs -->
-	{#if !innerWidth || innerWidth > SECONDARY_NAV_BREAKPOINT}
+	{#if !innerWidth.current || innerWidth.current > SECONDARY_NAV_BREAKPOINT}
 		<div class="secondary_nav_wrapper">
 			<Library_Secondary_Nav {tomes} />
 		</div>
@@ -63,7 +62,7 @@
 	<main>
 		{@render children()}
 		<!-- TODO @many dialog navs -->
-		{#if !innerWidth || innerWidth > TERTIARY_NAV_BREAKPOINT}
+		{#if !innerWidth.current || innerWidth.current > TERTIARY_NAV_BREAKPOINT}
 			<Library_Tertiary_Nav {tomes} {tomes_by_name} />
 		{/if}
 		<section class="box">
@@ -83,7 +82,7 @@
 </div>
 <!-- TODO @many dialog navs - instead of a dialog, probably use a popover (new component) -->
 <!-- TODO this is messy rendering `Library_Secondary_Nav` twice to handle responsive states with SSR correctly -->
-{#if show_secondary_nav_dialog && innerWidth && innerWidth <= TERTIARY_NAV_BREAKPOINT}
+{#if show_secondary_nav_dialog && innerWidth.current && innerWidth.current <= TERTIARY_NAV_BREAKPOINT}
 	<Dialog onclose={() => (show_secondary_nav_dialog = false)}>
 		<div class="pane" style:--library_menu_width={library_menu_width}>
 			<div class="p_xl pb_0">
