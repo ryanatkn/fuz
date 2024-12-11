@@ -1,1 +1,0 @@
-import{V as t,W as e,X as u,u as c}from"./runtime.B-gUiV1I.js";function f(n){t===null&&e(),u(()=>{const o=c(n);if(typeof o=="function")return o})}function a(n){t===null&&e(),f(()=>()=>c(n))}export{f as a,a as o};
