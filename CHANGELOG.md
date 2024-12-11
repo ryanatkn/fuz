@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.131.2
+
+### Patch Changes
+
+- use Svelte's `on` in `Contextmenu_Root` instead of DOM event API ([#61](https://github.com/ryanatkn/fuz/pull/61))
+
 ## 0.131.1
 
 ### Patch Changes
