@@ -2,6 +2,7 @@
 	import {is_editable, swallow, inside_editable} from '@ryanatkn/belt/dom.js';
 	import type {ComponentProps, Snippet} from 'svelte';
 	import type {Action} from 'svelte/action';
+	import {on} from 'svelte/events';
 
 	import {
 		contextmenu_context,
@@ -275,16 +276,14 @@
 		disabled?: boolean;
 	}
 	const passive_event: Action<HTMLElement, Passive_Event_Params> = (el, params) => {
-		let listener: Passive_Event_Params['cb'] | null = null;
-		let event: string | null = null;
+		let cleanup: (() => void) | null = null;
 		const sync_event = (p: Passive_Event_Params) => {
-			if (listener) {
-				el.removeEventListener(event!, listener);
+			if (cleanup) {
+				cleanup();
+				cleanup = null;
 			}
 			if (!p.disabled) {
-				el.addEventListener(p.event, p.cb, {capture: true, passive: p.passive});
-				listener = p.cb;
-				event = p.event;
+				cleanup = on(el, p.event, p.cb, {capture: true, passive: p.passive});
 			}
 		};
 		sync_event(params);
@@ -293,9 +292,7 @@
 				sync_event(p);
 			},
 			destroy: () => {
-				if (listener) {
-					el.removeEventListener(event!, listener);
-				}
+				cleanup?.();
 			},
 		};
 	};
