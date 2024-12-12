@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.131.3
+
+### Patch Changes
+
+- rearrange `Project_Links` ([cf2f5b9](https://github.com/ryanatkn/fuz/commit/cf2f5b9))
+
 ## 0.131.2
 
 ### Patch Changes
