@@ -46,10 +46,10 @@
 			<div class="mb_lg p_xs2 shadow_md radius_sm">
 				<div class="width_sm panel p_lg shadow_inset_xs bg">
 					<p>
-						Fuz is a Svelte UI library with components and helpers for making friendly and helpful
-						websites. It builds on my CSS framework <a href="https://moss.ryanatkn.com/">Moss</a>,
-						which is based on CSS custom properties, and Fuz continues those patterns. It's in early
-						alpha and will have many breaking changes.
+						Fuz is a Svelte UI library with components and helpers for making modern websites. It
+						builds on my CSS framework <a href="https://moss.ryanatkn.com/">Moss</a>, which is based
+						on CSS custom properties, and Fuz continues those patterns. It's in early alpha and will
+						have many breaking changes.
 					</p>
 					<p>
 						Fuz is being made to support <a href="https://www.zzzbot.dev/">Zzz</a> and
