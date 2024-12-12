@@ -11,16 +11,16 @@
 	title="Zzz - bot control hq"
 	href="https://www.zzzbot.dev/"><Svg data={zzz_logo} {size} /><span class="name">Zzz</span></a
 > -->
+<a
+	class="project_link"
+	title="Gro - task runner and toolkit extending SvelteKit"
+	href="https://gro.ryanatkn.com/"><Svg data={gro_logo} {size} /><span class="name">Gro</span></a
+>
 <a class="project_link" title="Moss - CSS framework" href="https://moss.ryanatkn.com/"
 	><Svg data={moss_logo} {size} /><span class="name">Moss</span></a
 >
 <a class="project_link" title="Fuz - Svelte UI library" href="https://www.fuz.dev/"
 	><Svg data={fuz_logo} {size} /><span class="name">Fuz</span></a
->
-<a
-	class="project_link"
-	title="Gro - task runner and toolkit extending SvelteKit"
-	href="https://gro.ryanatkn.com/"><Svg data={gro_logo} {size} /><span class="name">Gro</span></a
 >
 <a
 	class="project_link"
