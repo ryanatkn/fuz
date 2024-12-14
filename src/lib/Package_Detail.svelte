@@ -213,7 +213,7 @@
 
 	<section>
 		<Details>
-			{#snippet summary()}raw data for <code>pkg: Package_Meta</code>{/snippet}
+			{#snippet summary()}raw package metadata{/snippet}
 			<pre><code>{JSON.stringify(pkg, null, '\t')}</code></pre>
 		</Details>
 	</section>
