@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.131.4
+
+### Patch Changes
+
+- tweak `Package_Detail` package metadata text ([38f009f](https://github.com/ryanatkn/fuz/commit/38f009f))
+
 ## 0.131.3
 
 ### Patch Changes
