@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.131.5
+
+### Patch Changes
+
+- remove funding from `Community_Links` ([e5dab77](https://github.com/ryanatkn/fuz/commit/e5dab77))
+
 ## 0.131.4
 
 ### Patch Changes
