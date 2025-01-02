@@ -42,10 +42,8 @@
 	</li>
 	<li>
 		Mastodon as
-		<a rel="me" href="https://fosstodon.org/@ryanatkn">@ryanatkn@fosstodon.org</a>,
+		<a rel="me" href="https://fosstodon.org/@ryanatkn">@ryanatkn@fosstodon.org</a> and
 		<a rel="me" href="https://fosstodon.org/@webdevladder">@webdevladder@fosstodon.org</a>
-		and
-		<a rel="me" href="https://hci.social/@ryanatkn">@ryanatkn@hci.social</a>
 	</li>
 	<li>
 		@webdevladder on <a rel="me" href="https://www.reddit.com/user/webdevladder/">Reddit</a> and
