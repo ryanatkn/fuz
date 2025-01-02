@@ -51,7 +51,7 @@
 		@webdevladder on <a rel="me" href="https://www.reddit.com/user/webdevladder/">Reddit</a> and
 		<a href="https://news.ycombinator.com/user?id=webdevladder">Hacker News</a>
 	</li>
-	<li>
+	<!-- <li>
 		support me at <a href="https://www.ryanatkn.com/funding">ryanatkn.com/funding</a>
-	</li>
+	</li> -->
 </ul>
