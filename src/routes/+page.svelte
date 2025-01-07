@@ -12,6 +12,7 @@
 		fuz_mastodon_logo,
 		fuz_gitops_logo,
 		fuz_template_logo,
+		gro_logo,
 		moss_logo,
 	} from '$lib/logos.js';
 	import Hidden_Personal_Links from '$lib/Hidden_Personal_Links.svelte';
@@ -28,7 +29,8 @@
 
 	// prettier-ignore
 	const project_items: Array<Project_Item> = [ 
-		{name: 'moss', url: 'https://moss.ryanatkn.com/', logo: moss_logo, description: 'CSS framework', glyph: '🌿'},
+		{name: 'moss', url: 'https://moss.ryanatkn.com/', logo: moss_logo, description: 'CSS framework and design system', glyph: '🌿'},
+		{name: 'gro', url: 'https://gro.ryanatkn.com/', logo: gro_logo, description: 'task runner and toolkit extending SvelteKit', glyph: '🌰'},
 		{name: 'fuz_template', url: 'https://template.fuz.dev/', logo: fuz_template_logo, description: 'a static web app and Node library template with TypeScript, Svelte, SvelteKit, Vite, esbuild, Fuz, and Gro', glyph: '❄'},
 		{name: 'fuz_blog', url: 'https://blog.fuz.dev/', logo: fuz_blog_logo, description: 'blog software from scratch with SvelteKit', glyph: '🖊️'},
 		{name: 'fuz_mastodon', url: 'https://mastodon.fuz.dev/', logo: fuz_mastodon_logo, description: 'Mastodon components and helpers for Svelte, SvelteKit, and Fuz', glyph: '🦣'},
