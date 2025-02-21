@@ -6,6 +6,7 @@ import {BROWSER} from 'esm-env';
 
 import {Dimensions} from '$lib/dimensions.svelte.js';
 import {create_context} from '$lib/context_helpers.js';
+import {GLYPH_COPY} from '$lib/Copy_To_Clipboard.svelte';
 
 export type Contextmenu_Params =
 	| Snippet
@@ -365,7 +366,7 @@ const query_contextmenu_params = (
 				snippet: 'text',
 				props: {
 					content: 'Copy text',
-					icon: '📋',
+					icon: GLYPH_COPY,
 					run: () => void navigator.clipboard.writeText(text),
 				},
 			});

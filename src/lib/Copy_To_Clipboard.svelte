@@ -1,3 +1,7 @@
+<script lang="ts" module>
+	export const GLYPH_COPY = '⧉';
+</script>
+
 <script lang="ts">
 	import type {Snippet} from 'svelte';
 	import type {SvelteHTMLElements} from 'svelte/elements';
@@ -39,7 +43,7 @@
 	class={classes ?? (children ? undefined : 'icon_button size_lg')}
 	onclick={copy}
 	disabled={attrs?.disabled ?? text === null}
-	>{#if children}{@render children(copied, failed)}{:else}📋{/if}{#if copied}<small
+	>{#if children}{@render children(copied, failed)}{:else}{GLYPH_COPY}{/if}{#if copied}<small
 			class="indicator color_b_5">copied!</small
 		>{/if}{#if failed}<small class="indicator color_c_5">failed</small>{/if}</button
 >
