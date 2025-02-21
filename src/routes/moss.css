@@ -32,12 +32,6 @@ a.chip {
 	font-weight: 700;
 }
 
-.color_b_5 {
-	color: var(--color_b_5);
-}
-.color_c_5 {
-	color: var(--color_c_5);
-}
 .color_d_5 {
 	color: var(--color_d_5);
 }
@@ -347,7 +341,6 @@ a.chip {
 	white-space: nowrap;
 }
 
-/* TODO rename these? use to be columns, maybe should be? */
 .width_md {
 	width: 100%;
 	max-width: var(--width_md);
