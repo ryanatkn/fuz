@@ -70,7 +70,8 @@
 		width: 14px;
 		height: 16px;
 		background-color: var(--bg);
-		border: 1px solid var(--border_color_4);
+		border: 1px solid var(--border_color_5);
+		border-radius: 3px;
 	}
 
 	.item_a {
