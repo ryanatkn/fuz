@@ -51,7 +51,7 @@
 
 <button
 	type="button"
-	title="copy"
+	title="copy to clipboard"
 	{...attrs}
 	class={classes ?? (children ? undefined : 'icon_button size_lg')}
 	class:copied
