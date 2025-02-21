@@ -17,9 +17,11 @@
 	let copied = $state(false);
 	let failed = $state(false);
 
+	let set_copied_timeout: NodeJS.Timeout | undefined;
 	let reset_copied_timeout: NodeJS.Timeout | undefined;
 
 	const copy = async (e: MouseEvent) => {
+		clearTimeout(set_copied_timeout);
 		clearTimeout(reset_copied_timeout);
 		if (text === null) return;
 		const was_copied = copied;
@@ -34,7 +36,7 @@
 		}
 		if (was_copied) {
 			// ensures it always visually changes
-			setTimeout(() => {
+			set_copied_timeout = setTimeout(() => {
 				copied = true;
 			}, 200);
 		} else {
@@ -42,7 +44,7 @@
 		}
 		reset_copied_timeout = setTimeout(() => {
 			copied = false;
-		}, 1000);
+		}, 750);
 		onclick?.(text, e);
 	};
 </script>
@@ -64,6 +66,24 @@
 	button {
 		position: relative;
 	}
+	button:hover {
+		.item_a {
+			transform: translate(1px, 1px);
+		}
+
+		.item_b {
+			transform: translate(1px, 0px);
+		}
+	}
+	button:active {
+		.item_a {
+			transform: translate(2px, 1px);
+		}
+
+		.item_b {
+			transform: translate(3px, -1px);
+		}
+	}
 
 	.item_a,
 	.item_b {
@@ -72,6 +92,7 @@
 		background-color: var(--bg);
 		border: 1px solid var(--border_color_5);
 		border-radius: 3px;
+		transform-origin: center;
 	}
 
 	.item_a {
@@ -86,5 +107,13 @@
 		z-index: 0;
 		top: calc(50% - 10px);
 		left: calc(50% - 5px);
+	}
+
+	button.copied .item_a {
+		transform: translate(2px, 1px) scale(1.3);
+	}
+
+	button.copied .item_b {
+		transform: translate(3px, -1px) scale(0.85);
 	}
 </style>
