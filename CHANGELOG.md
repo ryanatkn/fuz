@@ -1,5 +1,12 @@
 # @ryanatkn/fuz
 
+## 0.131.6
+
+### Patch Changes
+
+- remove hci.social Mastodon link ([88f1927](https://github.com/ryanatkn/fuz/commit/88f1927))
+- improve `Copy_To_Clipboard` style ([#62](https://github.com/ryanatkn/fuz/pull/62))
+
 ## 0.131.5
 
 ### Patch Changes
