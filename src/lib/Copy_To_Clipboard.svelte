@@ -17,8 +17,14 @@
 	let copied = $state(false);
 	let failed = $state(false);
 
+	let set_copied_timeout: NodeJS.Timeout | undefined;
+	let reset_copied_timeout: NodeJS.Timeout | undefined;
+
 	const copy = async (e: MouseEvent) => {
+		clearTimeout(set_copied_timeout);
+		clearTimeout(reset_copied_timeout);
 		if (text === null) return;
+		const was_copied = copied;
 		copied = false;
 		failed = false;
 		try {
@@ -28,48 +34,86 @@
 			onclick?.(null, e);
 			return;
 		}
-		copied = true;
+		if (was_copied) {
+			// ensures it always visually changes
+			set_copied_timeout = setTimeout(() => {
+				copied = true;
+			}, 200);
+		} else {
+			copied = true;
+		}
+		reset_copied_timeout = setTimeout(() => {
+			copied = false;
+		}, 750);
 		onclick?.(text, e);
 	};
 </script>
 
 <button
-	{...attrs}
 	type="button"
+	title="copy to clipboard"
+	{...attrs}
 	class={classes ?? (children ? undefined : 'icon_button size_lg')}
+	class:copied
+	class:failed
 	onclick={copy}
 	disabled={attrs?.disabled ?? text === null}
-	>{#if children}{@render children(copied, failed)}{:else}📋{/if}{#if copied}<small
-			class="indicator color_b_5">copied!</small
-		>{/if}{#if failed}<small class="indicator color_c_5">failed</small>{/if}</button
+	>{#if children}{@render children(copied, failed)}{:else}<div class="item_a"></div>
+		<div class="item_b"></div>{/if}</button
 >
 
 <style>
 	button {
 		position: relative;
 	}
+	button:hover {
+		.item_a {
+			transform: translate(1px, 1px);
+		}
 
-	small {
-		font-weight: 700;
-		margin-top: var(--space_xs);
-		opacity: 0;
-		animation: fade-in 1.5s ease-in reverse;
+		.item_b {
+			transform: translate(1px, 0px);
+		}
+	}
+	button:active {
+		.item_a {
+			transform: translate(2px, 1px);
+		}
+
+		.item_b {
+			transform: translate(3px, -1px);
+		}
 	}
 
-	.indicator {
+	.item_a,
+	.item_b {
+		width: 14px;
+		height: 16px;
+		background-color: var(--bg);
+		border: 1px solid var(--border_color_5);
+		border-radius: 3px;
+		transform-origin: center;
+	}
+
+	.item_a {
+		position: relative;
+		z-index: 1;
+		top: 3px;
+		left: -3px;
+	}
+
+	.item_b {
 		position: absolute;
-		bottom: -2.5rem;
-		margin-left: auto;
-		margin-right: auto;
+		z-index: 0;
+		top: calc(50% - 10px);
+		left: calc(50% - 5px);
 	}
 
-	/* TODO upstream to Moss? need to extract animation names */
-	@keyframes fade-in {
-		from {
-			opacity: 0;
-		}
-		to {
-			opacity: 1;
-		}
+	button.copied .item_a {
+		transform: translate(2px, 1px) scale(1.3);
+	}
+
+	button.copied .item_b {
+		transform: translate(3px, -1px) scale(0.85);
 	}
 </style>
