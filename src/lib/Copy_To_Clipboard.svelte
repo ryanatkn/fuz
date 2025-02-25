@@ -51,7 +51,8 @@
 	type="button"
 	title="copy to clipboard"
 	{...attrs}
-	class={attrs?.class ?? 'icon_button'}
+	class={attrs?.class}
+	class:icon_button={!children}
 	class:copied
 	class:failed
 	onclick={copy}
