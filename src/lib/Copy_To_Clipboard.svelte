@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type {Async_Status} from '@ryanatkn/belt/async.js';
 	import type {Snippet} from 'svelte';
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
@@ -7,14 +6,15 @@
 		text: string | null;
 		oncopy?: (text: string | null, e: MouseEvent) => void;
 		attrs?: SvelteHTMLElements['button'];
-		children?: Snippet<[status: Async_Status]>;
+		children?: Snippet<[copied: boolean, failed: boolean]>;
 	}
 
-	// TODO add library entry, see also Paste_From_Clipboard.svelte
+	// TODO add library entry
 
 	const {text, oncopy, attrs, children}: Props = $props();
 
-	let status: Async_Status = $state('initial');
+	let copied = $state(false);
+	let failed = $state(false);
 
 	let set_copied_timeout: NodeJS.Timeout | undefined;
 	let reset_copied_timeout: NodeJS.Timeout | undefined;
@@ -23,77 +23,67 @@
 		clearTimeout(set_copied_timeout);
 		clearTimeout(reset_copied_timeout);
 		if (text === null) return;
-		status = 'pending';
+		const was_copied = copied;
+		copied = false;
+		failed = false;
 		try {
 			await navigator.clipboard.writeText(text);
-			status = 'success';
 		} catch (_err) {
-			status = 'failure';
-			oncopy?.(null, e);
+			failed = true;
 			return;
 		}
+		if (was_copied) {
+			// ensures it always visually changes
+			set_copied_timeout = setTimeout(() => {
+				copied = true;
+			}, 200);
+		} else {
+			copied = true;
+		}
+		reset_copied_timeout = setTimeout(() => {
+			copied = false;
+		}, 750);
 		oncopy?.(text, e);
 	};
-
-	const disabled = $derived(attrs?.disabled ?? text === null);
 </script>
 
 <button
 	type="button"
 	title="copy to clipboard"
 	{...attrs}
-	class={attrs?.class ?? (children ? undefined : 'icon_button size_lg')}
+	class={attrs?.class ?? 'icon_button'}
+	class:copied
+	class:failed
 	onclick={copy}
-	{disabled}
-	>{#if children}{@render children(status)}{:else}<div class="item_a"></div>
-		<div class="item_b"></div>{/if}</button
+	disabled={attrs?.disabled ?? text === null}
 >
+	{#if children}
+		{@render children(copied, failed)}
+	{:else}
+		<span class="icon"
+			>{#if copied}✓{:else}⧉{/if}</span
+		>
+	{/if}
+</button>
 
 <style>
-	button {
-		position: relative;
+	.icon {
+		transition: transform 80ms ease;
 	}
 
-	.item_a,
-	.item_b {
-		width: 14px;
-		height: 16px;
-		background-color: var(--bg);
-		border: 1px solid var(--border_color_5);
-		border-radius: 3px;
-		transform-origin: center;
+	button:hover:not(:disabled) .icon {
+		transform: scale(1.1);
 	}
 
-	.item_a {
-		position: relative;
-		z-index: 1;
-		top: 3px;
-		left: -3px;
+	button:active:not(:disabled) .icon {
+		transform: scale(0.95);
 	}
 
-	.item_b {
-		position: absolute;
-		z-index: 0;
-		top: calc(50% - 10px);
-		left: calc(50% - 5px);
+	button.copied:not(:disabled) .icon {
+		transform: scale(1.4);
 	}
 
-	button:hover:not(:disabled) {
-		.item_a {
-			transform: translate(1px, 1px);
-		}
-
-		.item_b {
-			transform: translate(1px, 0px);
-		}
-	}
-	button:active:not(:disabled) {
-		.item_a {
-			transform: translate(2px, 1px) scale(1.29);
-		}
-
-		.item_b {
-			transform: translate(3px, -1px) scale(0.85);
-		}
+	button.failed .icon {
+		color: var(--color_c_5);
 	}
 </style>
