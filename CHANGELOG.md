@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.132.3
+
+### Patch Changes
+
+- improve `Community_Links` ([25fe36b](https://github.com/ryanatkn/fuz/commit/25fe36b))
+
 ## 0.132.2
 
 ### Patch Changes
