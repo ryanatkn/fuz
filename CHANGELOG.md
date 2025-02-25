@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.132.2
+
+### Patch Changes
+
+- improve `Copy_To_Clipboard` ([#64](https://github.com/ryanatkn/fuz/pull/64))
+
 ## 0.132.1
 
 ### Patch Changes
