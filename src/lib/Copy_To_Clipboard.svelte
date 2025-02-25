@@ -4,15 +4,14 @@
 
 	interface Props {
 		text: string | null;
-		onclick?: (text: string | null, e: MouseEvent) => void;
-		classes?: string;
+		oncopy?: (text: string | null, e: MouseEvent) => void;
 		attrs?: SvelteHTMLElements['button'];
 		children?: Snippet<[copied: boolean, failed: boolean]>;
 	}
 
 	// TODO add library entry
 
-	const {text, onclick, classes, attrs, children}: Props = $props();
+	const {text, oncopy, attrs, children}: Props = $props();
 
 	let copied = $state(false);
 	let failed = $state(false);
@@ -31,7 +30,6 @@
 			await navigator.clipboard.writeText(text);
 		} catch (_err) {
 			failed = true;
-			onclick?.(null, e);
 			return;
 		}
 		if (was_copied) {
@@ -45,7 +43,7 @@
 		reset_copied_timeout = setTimeout(() => {
 			copied = false;
 		}, 750);
-		onclick?.(text, e);
+		oncopy?.(text, e);
 	};
 </script>
 
@@ -53,67 +51,39 @@
 	type="button"
 	title="copy to clipboard"
 	{...attrs}
-	class={classes ?? (children ? undefined : 'icon_button size_lg')}
+	class={attrs?.class ?? 'icon_button'}
 	class:copied
 	class:failed
 	onclick={copy}
 	disabled={attrs?.disabled ?? text === null}
-	>{#if children}{@render children(copied, failed)}{:else}<div class="item_a"></div>
-		<div class="item_b"></div>{/if}</button
 >
+	{#if children}
+		{@render children(copied, failed)}
+	{:else}
+		<span class="icon"
+			>{#if copied}✓{:else}⧉{/if}</span
+		>
+	{/if}
+</button>
 
 <style>
-	button {
-		position: relative;
-	}
-	button:hover {
-		.item_a {
-			transform: translate(1px, 1px);
-		}
-
-		.item_b {
-			transform: translate(1px, 0px);
-		}
-	}
-	button:active {
-		.item_a {
-			transform: translate(2px, 1px);
-		}
-
-		.item_b {
-			transform: translate(3px, -1px);
-		}
+	.icon {
+		transition: transform 80ms ease;
 	}
 
-	.item_a,
-	.item_b {
-		width: 14px;
-		height: 16px;
-		background-color: var(--bg);
-		border: 1px solid var(--border_color_5);
-		border-radius: 3px;
-		transform-origin: center;
+	button:hover:not(:disabled) .icon {
+		transform: scale(1.1);
 	}
 
-	.item_a {
-		position: relative;
-		z-index: 1;
-		top: 3px;
-		left: -3px;
+	button:active:not(:disabled) .icon {
+		transform: scale(0.95);
 	}
 
-	.item_b {
-		position: absolute;
-		z-index: 0;
-		top: calc(50% - 10px);
-		left: calc(50% - 5px);
+	button.copied:not(:disabled) .icon {
+		transform: scale(1.4);
 	}
 
-	button.copied .item_a {
-		transform: translate(2px, 1px) scale(1.3);
-	}
-
-	button.copied .item_b {
-		transform: translate(3px, -1px) scale(0.85);
+	button.failed .icon {
+		color: var(--color_c_5);
 	}
 </style>

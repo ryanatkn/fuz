@@ -7,14 +7,13 @@
 
 	interface Props {
 		name: string; // TODO type? generate from `tomes`? or keep extensible?
-		classes?: string;
 		inline?: boolean;
 		plain?: boolean;
 		attrs?: SvelteHTMLElements['button'];
 		children?: Snippet;
 	}
 
-	const {name, classes, inline = false, plain = true, attrs, children}: Props = $props();
+	const {name, inline = false, plain = true, attrs, children}: Props = $props();
 
 	// TODO @many add to $lib?
 
@@ -32,7 +31,6 @@
 <button
 	type="button"
 	{...attrs}
-	class={classes}
 	class:inline
 	class:plain
 	onclick={() => (selected_variable.value = variable)}

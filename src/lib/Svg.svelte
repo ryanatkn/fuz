@@ -50,22 +50,10 @@
 		 * Flex shrink behavior? Defaults to `true`.
 		 */
 		shrink?: boolean;
-		classes?: string;
 		attrs?: SvelteHTMLElements['svg'];
 	}
 
-	const {
-		data,
-		fill,
-		size,
-		width,
-		height,
-		label,
-		inline,
-		shrink = true,
-		classes,
-		attrs,
-	}: Props = $props();
+	const {data, fill, size, width, height, label, inline, shrink = true, attrs}: Props = $props();
 
 	const final_fill = $derived(fill ?? data.fill ?? 'var(--text_color, #000)'); // can be overridden by each path's `fill` attribute
 	const final_width = $derived(width ?? size); // TODO @many default value? `100%` or omitted or something else?
@@ -87,7 +75,6 @@
 	{style}
 	style:width={final_width}
 	style:height={final_height}
-	class={classes}
 	class:inline
 	style:flex-shrink={shrink ? 1 : 0}
 >
