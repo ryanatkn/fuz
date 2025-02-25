@@ -55,6 +55,7 @@
 	class:icon_button={!children}
 	class:copied
 	class:failed
+	class:color_c={failed}
 	onclick={copy}
 	disabled={attrs?.disabled ?? text === null}
 >
@@ -70,7 +71,6 @@
 <style>
 	.icon {
 		transform-origin: center;
-		transition: transform var(--duration_5);
 	}
 
 	button:hover:not(:disabled) .icon {
@@ -106,9 +106,5 @@
 		100% {
 			transform: scale(1);
 		}
-	}
-
-	button.failed .icon {
-		color: var(--color_c_5);
 	}
 </style>
