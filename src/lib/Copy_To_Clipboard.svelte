@@ -61,15 +61,16 @@
 	{#if children}
 		{@render children(copied, failed)}
 	{:else}
-		<span class="icon"
-			>{#if copied}✓{:else}⧉{/if}</span
-		>
+		<div class="icon">
+			{#if copied}✓{:else}⧉{/if}
+		</div>
 	{/if}
 </button>
 
 <style>
 	.icon {
-		transition: transform var(--duration_1) ease;
+		transform-origin: center;
+		transition: transform var(--duration_5);
 	}
 
 	button:hover:not(:disabled) .icon {
@@ -81,7 +82,31 @@
 	}
 
 	button.copied:not(:disabled) .icon {
-		transform: scale(1.4);
+		animation: check-mark-scale var(--duration_1) forwards;
+	}
+
+	/* When transitioning back from copied state */
+	button:not(.copied) .icon {
+		animation: check-mark-scale-down var(--duration_5) forwards;
+	}
+
+	@keyframes check-mark-scale {
+		0% {
+			transform: scale(0.4);
+		}
+		100% {
+			transform: scale(1.4);
+		}
+	}
+
+	@keyframes check-mark-scale-down {
+		0% {
+			/* only using `1.2` instead of the `1.4` above because we're using unicode icons, ideally should be svg */
+			transform: scale(1.2);
+		}
+		100% {
+			transform: scale(1);
+		}
 	}
 
 	button.failed .icon {
