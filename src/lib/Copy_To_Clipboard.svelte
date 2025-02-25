@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type {Async_Status} from '@ryanatkn/belt/async.js';
 	import type {Snippet} from 'svelte';
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
@@ -6,15 +7,14 @@
 		text: string | null;
 		onclick?: (text: string | null, e: MouseEvent) => void;
 		attrs?: SvelteHTMLElements['button'];
-		children?: Snippet<[copied: boolean, failed: boolean]>;
+		children?: Snippet<[status: Async_Status]>;
 	}
 
 	// TODO add library entry
 
 	const {text, onclick, attrs, children}: Props = $props();
 
-	let copied = $state(false);
-	let failed = $state(false);
+	let status: Async_Status = $state('initial');
 
 	let set_copied_timeout: NodeJS.Timeout | undefined;
 	let reset_copied_timeout: NodeJS.Timeout | undefined;
@@ -23,29 +23,19 @@
 		clearTimeout(set_copied_timeout);
 		clearTimeout(reset_copied_timeout);
 		if (text === null) return;
-		const was_copied = copied;
-		copied = false;
-		failed = false;
+		status = 'pending';
 		try {
 			await navigator.clipboard.writeText(text);
+			status = 'success';
 		} catch (_err) {
-			failed = true;
+			status = 'failure';
 			onclick?.(null, e);
 			return;
 		}
-		if (was_copied) {
-			// ensures it always visually changes
-			set_copied_timeout = setTimeout(() => {
-				copied = true;
-			}, 200);
-		} else {
-			copied = true;
-		}
-		reset_copied_timeout = setTimeout(() => {
-			copied = false;
-		}, 750);
 		onclick?.(text, e);
 	};
+
+	const disabled = $derived(attrs?.disabled ?? text === null);
 </script>
 
 <button
@@ -53,35 +43,15 @@
 	title="copy to clipboard"
 	{...attrs}
 	class={attrs?.class ?? (children ? undefined : 'icon_button size_lg')}
-	class:copied
-	class:failed
 	onclick={copy}
-	disabled={attrs?.disabled ?? text === null}
-	>{#if children}{@render children(copied, failed)}{:else}<div class="item_a"></div>
+	{disabled}
+	>{#if children}{@render children(status)}{:else}<div class="item_a"></div>
 		<div class="item_b"></div>{/if}</button
 >
 
 <style>
 	button {
 		position: relative;
-	}
-	button:hover {
-		.item_a {
-			transform: translate(1px, 1px);
-		}
-
-		.item_b {
-			transform: translate(1px, 0px);
-		}
-	}
-	button:active {
-		.item_a {
-			transform: translate(2px, 1px);
-		}
-
-		.item_b {
-			transform: translate(3px, -1px);
-		}
 	}
 
 	.item_a,
@@ -108,11 +78,22 @@
 		left: calc(50% - 5px);
 	}
 
-	button.copied .item_a {
-		transform: translate(2px, 1px) scale(1.3);
-	}
+	button:hover:not(:disabled) {
+		.item_a {
+			transform: translate(1px, 1px);
+		}
 
-	button.copied .item_b {
-		transform: translate(3px, -1px) scale(0.85);
+		.item_b {
+			transform: translate(1px, 0px);
+		}
+	}
+	button:active:not(:disabled) {
+		.item_a {
+			transform: translate(2px, 1px) scale(1.29);
+		}
+
+		.item_b {
+			transform: translate(3px, -1px) scale(0.85);
+		}
 	}
 </style>
