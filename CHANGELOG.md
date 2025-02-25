@@ -1,5 +1,12 @@
 # @ryanatkn/fuz
 
+## 0.132.1
+
+### Patch Changes
+
+- add `onerror` prop to `Paste_From_Clipboard` ([68e3c3e](https://github.com/ryanatkn/fuz/commit/68e3c3e))
+- fix `.icon_button` for `Copy_To_Clipboard` ([3b2c0c1](https://github.com/ryanatkn/fuz/commit/3b2c0c1))
+
 ## 0.132.0
 
 ### Minor Changes
