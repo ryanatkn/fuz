@@ -2,6 +2,8 @@
 	import type {Snippet} from 'svelte';
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
+	// TODO @many should this have the Button suffix?
+
 	interface Props {
 		onpaste: (text: string) => void;
 		onerror?: (error: Error) => void;

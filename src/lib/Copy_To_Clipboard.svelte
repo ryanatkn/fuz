@@ -1,48 +1,47 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
 	import type {SvelteHTMLElements} from 'svelte/elements';
+	import {scale, slide} from 'svelte/transition';
+
+	// TODO @many should this have the Button suffix?
+
+	// TODO add library entry, see also Paste_From_Clipboard.svelte
 
 	interface Props {
 		text: string | null;
+		copied_display_duration?: number;
 		oncopy?: (text: string | null, e: MouseEvent) => void;
 		attrs?: SvelteHTMLElements['button'];
 		children?: Snippet<[copied: boolean, failed: boolean]>;
 	}
 
-	// TODO add library entry
+	const {text, copied_display_duration = 1000, oncopy, attrs, children}: Props = $props();
 
-	const {text, oncopy, attrs, children}: Props = $props();
-
+	// These are for visual feedback
 	let copied = $state(false);
 	let failed = $state(false);
-
-	let set_copied_timeout: NodeJS.Timeout | undefined;
-	let reset_copied_timeout: NodeJS.Timeout | undefined;
+	let copy_timeout: NodeJS.Timeout | undefined;
 
 	const copy = async (e: MouseEvent) => {
-		clearTimeout(set_copied_timeout);
-		clearTimeout(reset_copied_timeout);
-		if (text === null) return;
-		const was_copied = copied;
+		clearTimeout(copy_timeout);
+		if (text === null) return; // allows copying ''
+
 		copied = false;
 		failed = false;
+
 		try {
 			await navigator.clipboard.writeText(text);
+			copied = true;
 		} catch (_err) {
 			failed = true;
 			return;
 		}
-		if (was_copied) {
-			// ensures it always visually changes
-			set_copied_timeout = setTimeout(() => {
-				copied = true;
-			}, 200); // TODO is `duration_2`, add to Moss' `variable_data.ts`
-		} else {
-			copied = true;
-		}
-		reset_copied_timeout = setTimeout(() => {
+
+		// Reset after display duration
+		copy_timeout = setTimeout(() => {
 			copied = false;
-		}, 750);
+		}, copied_display_duration);
+
 		oncopy?.(text, e);
 	};
 </script>
@@ -55,36 +54,20 @@
 	class:icon_button={!children}
 	class:copied
 	class:failed
+	class:color_c={failed}
 	onclick={copy}
 	disabled={attrs?.disabled ?? text === null}
 >
 	{#if children}
 		{@render children(copied, failed)}
 	{:else}
-		<span class="icon"
-			>{#if copied}✓{:else}⧉{/if}</span
-		>
+		<div class="icon">
+			{#if copied}
+				<!-- ✓ -->
+				<div in:scale={{duration: 200}}>✓</div>
+			{:else}
+				<div in:slide>⧉</div>
+			{/if}
+		</div>
 	{/if}
 </button>
-
-<style>
-	.icon {
-		transition: transform var(--duration_1) ease;
-	}
-
-	button:hover:not(:disabled) .icon {
-		transform: scale(1.1);
-	}
-
-	button:active:not(:disabled) .icon {
-		transform: scale(0.95);
-	}
-
-	button.copied:not(:disabled) .icon {
-		transform: scale(1.4);
-	}
-
-	button.failed .icon {
-		color: var(--color_c_5);
-	}
-</style>
