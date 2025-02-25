@@ -59,42 +59,10 @@
 	{:else}
 		<div class="icon">
 			{#if copied}
-				<!-- Unicode Symbols: -->
-				✓ <!-- (Current) -->
-				<!-- ✔ (Heavy check mark) -->
-				<!-- ✓̶ (Check with slash) -->
-				<!-- ■ (Black square) -->
-				<!-- ► (Right-pointing triangle) -->
-				<!-- ★ (Star) -->
-				<!-- ⚫ (Black circle) -->
-				<!-- ‣ (Triangular bullet) -->
-				<!-- ◆ (Black diamond) -->
-				<!-- ⬤ (Black large circle) -->
-				<!-- ✰ (Outlined star) -->
-				<!-- ◉ (Fisheye) -->
-				<!-- ⚑ (Flag) -->
-				<!-- ⌘ (Command key) -->
-				<!-- ◎ (Bullseye) -->
-				<!-- ○ (White circle) -->
-				<!-- ◯ (Large circle) -->
-				<!-- □ (White square) -->
-				<!-- ⬚ (Square) -->
-				<!-- ⎷ (Square root) -->
-				<!-- ⚐ (White flag) -->
-				<!-- ⌾ (Position indicator) -->
-				<!-- ∎ (End of proof) -->
-				<!-- ◊ (Lozenge) -->
-				<!-- ⌥ (Option key) -->
-
-				<!-- Text Alternatives: -->
-				<!-- OK -->
-				<!-- Done -->
-				<!-- Copied -->
-				<!-- Saved -->
-				<!-- Got it -->
-				<!-- Ready -->
-				<!-- Yes -->
-			{:else}⧉{/if}
+				✓
+			{:else}
+				⧉
+			{/if}
 		</div>
 	{/if}
 </button>
