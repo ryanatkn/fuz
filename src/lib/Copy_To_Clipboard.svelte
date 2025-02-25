@@ -36,7 +36,7 @@
 			// ensures it always visually changes
 			set_copied_timeout = setTimeout(() => {
 				copied = true;
-			}, 200);
+			}, 200); // TODO is `duration_2`, add to Moss' `variable_data.ts`
 		} else {
 			copied = true;
 		}
@@ -69,7 +69,7 @@
 
 <style>
 	.icon {
-		transition: transform 80ms ease;
+		transition: transform var(--duration_1) ease;
 	}
 
 	button:hover:not(:disabled) .icon {
