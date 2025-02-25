@@ -128,7 +128,6 @@
 		transform: scale(1);
 	}
 
-	/* Default state - quick transitions when interacting */
 	button:not(.cooling_down):not(.just_copied):not(.copied):not(.copied_start) .icon {
 		transition: transform var(--duration_2) ease-out;
 	}
@@ -143,7 +142,6 @@
 		transition: transform var(--duration_1) cubic-bezier(0.6, -0.28, 0.735, 0.045);
 	}
 
-	/* Initial tiny checkmark */
 	button.copied_start:not(:disabled) .icon {
 		transform: scale(0.4);
 		transition: none;
@@ -154,13 +152,11 @@
 		transition: transform var(--duration_1) cubic-bezier(0.12, 2, 0.2, 1.5);
 	}
 
-	/* Intermediate state - immediately after copied */
 	button.just_copied:not(:disabled) .icon {
 		transform: scale(1.2);
-		transition: none; /* Immediate transition */
+		transition: none;
 	}
 
-	/* Cooling down state - slow transition back to normal */
 	button.cooling_down:not(:disabled) .icon {
 		transform: scale(1);
 		transition: transform var(--duration_5) cubic-bezier(0.4, 0, 0.2, 1);
