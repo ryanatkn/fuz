@@ -1,17 +1,19 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
 	import type {SvelteHTMLElements} from 'svelte/elements';
+	import {scale, slide} from 'svelte/transition';
+
+	// TODO @many should this have the Button suffix?
 
 	interface Props {
 		text: string | null;
+		copied_display_duration?: number;
 		oncopy?: (text: string | null, e: MouseEvent) => void;
 		attrs?: SvelteHTMLElements['button'];
 		children?: Snippet<[copied: boolean, failed: boolean]>;
 	}
 
-	const COPIED_DISPLAY_DURATION = 1000;
-
-	const {text, oncopy, attrs, children}: Props = $props();
+	const {text, copied_display_duration = 1000, oncopy, attrs, children}: Props = $props();
 
 	// These are for visual feedback
 	let copied = $state(false);
@@ -36,7 +38,7 @@
 		// Reset after display duration
 		copy_timeout = setTimeout(() => {
 			copied = false;
-		}, COPIED_DISPLAY_DURATION);
+		}, copied_display_duration);
 
 		oncopy?.(text, e);
 	};
@@ -59,32 +61,11 @@
 	{:else}
 		<div class="icon">
 			{#if copied}
-				✓
+				<!-- ✓ -->
+				<div in:scale={{duration: 200}}>✓</div>
 			{:else}
-				⧉
+				<div in:slide>⧉</div>
 			{/if}
 		</div>
 	{/if}
 </button>
-
-<style>
-	.icon {
-		transform-origin: center;
-		transform: scale(1);
-	}
-
-	button:hover:not(:disabled) .icon {
-		transform: scale(1.1);
-		transition: none;
-	}
-
-	button:active:not(:disabled) .icon {
-		transform: scale(0.95);
-		transition: transform var(--duration_1) cubic-bezier(0.6, -0.28, 0.735, 0.045);
-	}
-
-	button.copied:not(:disabled) .icon {
-		transform: scale(1.4);
-		transition: transform var(--duration_1) cubic-bezier(0.12, 2, 0.2, 1.5);
-	}
-</style>
