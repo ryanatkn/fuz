@@ -9,11 +9,11 @@
 		children?: Snippet<[copied: boolean, failed: boolean]>;
 	}
 
-	// Visual feedback duration
 	const COPIED_DISPLAY_DURATION = 1000;
 
 	const {text, oncopy, attrs, children}: Props = $props();
 
+	// These are for visual feedback
 	let copied = $state(false);
 	let failed = $state(false);
 	let copy_timeout: NodeJS.Timeout | undefined;
