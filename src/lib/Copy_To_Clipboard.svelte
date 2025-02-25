@@ -71,40 +71,26 @@
 <style>
 	.icon {
 		transform-origin: center;
+		transform: scale(1);
+		/* Slow transition when returning to normal state */
+		transition: transform var(--duration_5) ease-out;
 	}
 
 	button:hover:not(:disabled) .icon {
 		transform: scale(1.1);
+		transition: transform var(--duration_1) cubic-bezier(0.175, 0.885, 0.32, 1.275);
 	}
 
 	button:active:not(:disabled) .icon {
 		transform: scale(0.95);
+		/* Quick compression effect when clicked */
+		transition: transform var(--duration_1) cubic-bezier(0.6, -0.28, 0.735, 0.045);
 	}
 
 	button.copied:not(:disabled) .icon {
-		animation: check-mark-scale var(--duration_1) forwards;
-	}
-
-	/* When transitioning back from copied state */
-	button:not(.copied) .icon {
-		animation: check-mark-scale-down var(--duration_5) forwards;
-	}
-
-	@keyframes check-mark-scale {
-		0% {
-			transform: scale(0.1);
-		}
-		100% {
-			transform: scale(1.4);
-		}
-	}
-
-	@keyframes check-mark-scale-down {
-		0% {
-			transform: scale(1.2);
-		}
-		100% {
-			transform: scale(1);
-		}
+		/* Dramatic growth for the checkmark */
+		transform: scale(1.4);
+		/* Dramatic, very fast growth with extreme bounce for the checkmark */
+		transition: transform var(--duration_1) cubic-bezier(0.12, 2, 0.2, 1.5);
 	}
 </style>
