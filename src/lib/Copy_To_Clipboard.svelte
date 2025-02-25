@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type {Snippet} from 'svelte';
+	import {tick, type Snippet} from 'svelte';
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
 	interface Props {
@@ -11,11 +11,10 @@
 
 	// TODO source from Moss
 	const DURATION_2 = 200;
-	const DURATION_3 = 500;
 
 	// Visual feedback duration
 	const COPIED_DISPLAY_DURATION = 750;
-	const COOLING_DOWN_DURATION = DURATION_3;
+	const COOLING_DOWN_DURATION = COPIED_DISPLAY_DURATION * 2;
 
 	const {text, oncopy, attrs, children}: Props = $props();
 
@@ -28,14 +27,12 @@
 	let set_copied_timeout: NodeJS.Timeout | undefined;
 	let reset_copied_timeout: NodeJS.Timeout | undefined;
 	let cooling_down_timeout: NodeJS.Timeout | undefined;
-	let just_copied_timeout: NodeJS.Timeout | undefined;
 	let copied_start_timeout: NodeJS.Timeout | undefined;
 
 	const clear_all_timeouts = () => {
 		clearTimeout(set_copied_timeout);
 		clearTimeout(reset_copied_timeout);
 		clearTimeout(cooling_down_timeout);
-		clearTimeout(just_copied_timeout);
 		clearTimeout(copied_start_timeout);
 	};
 
@@ -78,20 +75,19 @@
 			}, 17);
 		}
 
-		reset_copied_timeout = setTimeout(() => {
+		reset_copied_timeout = setTimeout(async () => {
 			copied = false;
 			copied_start = false;
 			just_copied = true; // Enter intermediate state at scale 1.2
 
 			// Almost immediately transition to cooling down
-			just_copied_timeout = setTimeout(() => {
-				just_copied = false;
-				cooling_down = true;
+			await tick(); // TODO is this needed?
+			just_copied = false;
+			cooling_down = true;
 
-				cooling_down_timeout = setTimeout(() => {
-					cooling_down = false;
-				}, COOLING_DOWN_DURATION);
-			}, 17); // Very short duration for the transition
+			cooling_down_timeout = setTimeout(() => {
+				cooling_down = false;
+			}, COOLING_DOWN_DURATION);
 		}, COPIED_DISPLAY_DURATION);
 
 		oncopy?.(text, e);
@@ -129,7 +125,7 @@
 	}
 
 	button:hover:not(:disabled) .icon {
-		transform: scale(1.1);
+		transform: scale(1.12);
 		transition: none;
 	}
 
