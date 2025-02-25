@@ -5,14 +5,13 @@
 	interface Props {
 		text: string | null;
 		onclick?: (text: string | null, e: MouseEvent) => void;
-		classes?: string;
 		attrs?: SvelteHTMLElements['button'];
 		children?: Snippet<[copied: boolean, failed: boolean]>;
 	}
 
 	// TODO add library entry
 
-	const {text, onclick, classes, attrs, children}: Props = $props();
+	const {text, onclick, attrs, children}: Props = $props();
 
 	let copied = $state(false);
 	let failed = $state(false);
@@ -53,7 +52,7 @@
 	type="button"
 	title="copy to clipboard"
 	{...attrs}
-	class={classes ?? (children ? undefined : 'icon_button size_lg')}
+	class={attrs?.class ?? (children ? undefined : 'icon_button size_lg')}
 	class:copied
 	class:failed
 	onclick={copy}
