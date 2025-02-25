@@ -5,6 +5,8 @@
 
 	// TODO @many should this have the Button suffix?
 
+	// TODO add library entry, see also Paste_From_Clipboard.svelte
+
 	interface Props {
 		text: string | null;
 		copied_display_duration?: number;
