@@ -1,5 +1,19 @@
 # @ryanatkn/fuz
 
+## 0.132.0
+
+### Minor Changes
+
+- remove classes from props interfaces for attrs ([#63](https://github.com/ryanatkn/fuz/pull/63))
+- update ([#63](https://github.com/ryanatkn/fuz/pull/63))
+
+  - change `Copy_To_Clipboard` to pass a status to children
+  - change `onclick` to `oncopy`
+
+### Patch Changes
+
+- add `Paste_From_Clipboard` ([#63](https://github.com/ryanatkn/fuz/pull/63))
+
 ## 0.131.6
 
 ### Patch Changes
