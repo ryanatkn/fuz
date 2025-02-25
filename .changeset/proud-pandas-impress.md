@@ -2,4 +2,7 @@
 '@ryanatkn/fuz': minor
 ---
 
-improve `Copy_To_Clipboard` to pass a status to children
+update
+
+- change `Copy_To_Clipboard` to pass a status to children
+- change `onclick` to `oncopy`

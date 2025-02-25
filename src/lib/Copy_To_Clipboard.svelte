@@ -5,14 +5,14 @@
 
 	interface Props {
 		text: string | null;
-		onclick?: (text: string | null, e: MouseEvent) => void;
+		oncopy?: (text: string | null, e: MouseEvent) => void;
 		attrs?: SvelteHTMLElements['button'];
 		children?: Snippet<[status: Async_Status]>;
 	}
 
-	// TODO add library entry
+	// TODO add library entry, see also Paste_From_Clipboard.svelte
 
-	const {text, onclick, attrs, children}: Props = $props();
+	const {text, oncopy, attrs, children}: Props = $props();
 
 	let status: Async_Status = $state('initial');
 
@@ -29,10 +29,10 @@
 			status = 'success';
 		} catch (_err) {
 			status = 'failure';
-			onclick?.(null, e);
+			oncopy?.(null, e);
 			return;
 		}
-		onclick?.(text, e);
+		oncopy?.(text, e);
 	};
 
 	const disabled = $derived(attrs?.disabled ?? text === null);

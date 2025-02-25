@@ -246,6 +246,11 @@ export const package_json = {
 			svelte: './dist/Package_Summary.svelte',
 			default: './dist/Package_Summary.svelte',
 		},
+		'./Paste_From_Clipboard.svelte': {
+			types: './dist/Paste_From_Clipboard.svelte.d.ts',
+			svelte: './dist/Paste_From_Clipboard.svelte',
+			default: './dist/Paste_From_Clipboard.svelte',
+		},
 		'./Pending_Animation.svelte': {
 			types: './dist/Pending_Animation.svelte.d.ts',
 			svelte: './dist/Pending_Animation.svelte',
@@ -446,6 +451,7 @@ export const src_json = {
 		'./Mdn_Link.svelte': {path: 'Mdn_Link.svelte', declarations: []},
 		'./Package_Detail.svelte': {path: 'Package_Detail.svelte', declarations: []},
 		'./Package_Summary.svelte': {path: 'Package_Summary.svelte', declarations: []},
+		'./Paste_From_Clipboard.svelte': {path: 'Paste_From_Clipboard.svelte', declarations: []},
 		'./Pending_Animation.svelte': {path: 'Pending_Animation.svelte', declarations: []},
 		'./Pending_Button.svelte': {path: 'Pending_Button.svelte', declarations: []},
 		'./Project_Links.svelte': {path: 'Project_Links.svelte', declarations: []},
