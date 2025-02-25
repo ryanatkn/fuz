@@ -128,10 +128,6 @@
 		transform: scale(1);
 	}
 
-	button:not(.cooling_down):not(.just_copied):not(.copied):not(.copied_start) .icon {
-		transition: transform var(--duration_2) ease-out;
-	}
-
 	button:hover:not(:disabled) .icon {
 		transform: scale(1.1);
 		transition: none;
