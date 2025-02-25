@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {tick, type Snippet} from 'svelte';
+	import type {Snippet} from 'svelte';
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
 	interface Props {
@@ -15,6 +15,9 @@
 	// Visual feedback duration
 	const COPIED_DISPLAY_DURATION = 750;
 	const COOLING_DOWN_DURATION = COPIED_DISPLAY_DURATION * 2;
+
+	// Add a constant for the duration of the just_copied state
+	const JUST_COPIED_DURATION = 50; // Short but noticeable delay
 
 	const {text, oncopy, attrs, children}: Props = $props();
 
@@ -75,19 +78,20 @@
 			}, 17);
 		}
 
-		reset_copied_timeout = setTimeout(async () => {
+		reset_copied_timeout = setTimeout(() => {
 			copied = false;
 			copied_start = false;
 			just_copied = true; // Enter intermediate state at scale 1.2
 
-			// Almost immediately transition to cooling down
-			await tick(); // TODO is this needed?
-			just_copied = false;
-			cooling_down = true;
+			// Add a small delay to make the just_copied state visible
+			setTimeout(() => {
+				just_copied = false;
+				cooling_down = true;
 
-			cooling_down_timeout = setTimeout(() => {
-				cooling_down = false;
-			}, COOLING_DOWN_DURATION);
+				cooling_down_timeout = setTimeout(() => {
+					cooling_down = false;
+				}, COOLING_DOWN_DURATION);
+			}, JUST_COPIED_DURATION);
 		}, COPIED_DISPLAY_DURATION);
 
 		oncopy?.(text, e);
@@ -125,7 +129,7 @@
 	}
 
 	button:hover:not(:disabled) .icon {
-		transform: scale(1.12);
+		transform: scale(1.1);
 		transition: none;
 	}
 
