@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.131.6",
+  "version": "0.132.0",
   "description": "Svelte UI library",
   "motto": "friendly user zystem",
   "glyph": "🧶",
@@ -281,6 +281,11 @@
       "types": "./dist/Package_Summary.svelte.d.ts",
       "svelte": "./dist/Package_Summary.svelte",
       "default": "./dist/Package_Summary.svelte"
+    },
+    "./Paste_From_Clipboard.svelte": {
+      "types": "./dist/Paste_From_Clipboard.svelte.d.ts",
+      "svelte": "./dist/Paste_From_Clipboard.svelte",
+      "default": "./dist/Paste_From_Clipboard.svelte"
     },
     "./Pending_Animation.svelte": {
       "types": "./dist/Pending_Animation.svelte.d.ts",

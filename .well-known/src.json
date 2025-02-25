@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.131.6",
+  "version": "0.132.0",
   "modules": {
     "./package.json": {
       "path": "package.json",
@@ -364,6 +364,10 @@
     },
     "./Package_Summary.svelte": {
       "path": "Package_Summary.svelte",
+      "declarations": []
+    },
+    "./Paste_From_Clipboard.svelte": {
+      "path": "Paste_From_Clipboard.svelte",
       "declarations": []
     },
     "./Pending_Animation.svelte": {
