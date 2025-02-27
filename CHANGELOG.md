@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.133.0
+
+### Minor Changes
+
+- break: add `allow_copying_empty_string` to `Copy_To_Clipboard` and change its default to false ([e2ef554](https://github.com/ryanatkn/fuz/commit/e2ef554))
+
 ## 0.132.5
 
 ### Patch Changes
