@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.132.3",
+  "version": "0.132.4",
   "modules": {
     "./package.json": {
       "path": "package.json",
@@ -350,6 +350,22 @@
         },
         {
           "name": "mdn_logo",
+          "kind": "variable"
+        },
+        {
+          "name": "chatgpt_logo",
+          "kind": "variable"
+        },
+        {
+          "name": "claude_logo",
+          "kind": "variable"
+        },
+        {
+          "name": "gemini_logo",
+          "kind": "variable"
+        },
+        {
+          "name": "ollama_logo",
           "kind": "variable"
         }
       ]
