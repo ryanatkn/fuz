@@ -56,11 +56,17 @@ a.chip {
 .flex_1 {
 	flex: 1;
 }
+.flex_wrap {
+	flex-wrap: wrap;
+}
 .font_mono {
 	font-family: var(--font_mono);
 }
 .font_weight_500 {
 	font-weight: 500;
+}
+.gap_lg {
+	gap: var(--space_lg);
 }
 
 /* TODO other button variants? */
@@ -78,6 +84,9 @@ a.chip {
 
 .inline {
 	display: inline;
+}
+.justify_content_center {
+	justify-content: center;
 }
 .line_height_lg {
 	line-height: var(--line_height_lg);
