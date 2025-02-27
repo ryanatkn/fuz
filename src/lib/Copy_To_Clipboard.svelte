@@ -11,6 +11,10 @@
 		text: string | null;
 		copied_display_duration?: number;
 		allow_copying_empty_string?: boolean;
+		/**
+		 * Defaults to `true`, ignored if `children` is provided.
+		 */
+		icon_button?: boolean;
 		oncopy?: (text: string | null, e: MouseEvent) => void;
 		attrs?: SvelteHTMLElements['button'];
 		children?: Snippet<[copied: boolean, failed: boolean]>;
@@ -20,6 +24,7 @@
 		text,
 		copied_display_duration = 1000,
 		allow_copying_empty_string,
+		icon_button = true,
 		oncopy,
 		attrs,
 		children,
@@ -59,7 +64,7 @@
 	title="copy to clipboard"
 	{...attrs}
 	class={attrs?.class}
-	class:icon_button={!children}
+	class:icon_button={children ? false : icon_button}
 	class:copied
 	class:failed
 	class:color_c={failed}
