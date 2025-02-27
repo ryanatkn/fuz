@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.132.4
+
+### Patch Changes
+
+- add logos for AI providers ([#65](https://github.com/ryanatkn/fuz/pull/65))
+
 ## 0.132.3
 
 ### Patch Changes
