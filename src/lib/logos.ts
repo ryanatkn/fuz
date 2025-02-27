@@ -286,18 +286,9 @@ export const gemini_logo = {
 				r="1"
 				gradientUnits="userSpaceOnUse"
 				gradientTransform="matrix(100.83118,34.096523,-273.13486,807.72196,9.9243877,40.642075)">
-				<stop
-					offset="0.0671246"
-					stop-color="#9168C0"
-				/>
-				<stop
-					offset="0.342551"
-					stop-color="#5684D1"
-				/>
-				<stop
-					offset="0.672076"
-					stop-color="#1BA1E3"
-				/>
+				<stop offset="0.0671246" stop-color="#9168C0" />
+				<stop offset="0.342551" stop-color="#5684D1" />
+				<stop offset="0.672076" stop-color="#1BA1E3" />
 			</radialGradient>
 		</defs>
 	`,
