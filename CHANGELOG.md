@@ -1,5 +1,12 @@
 # @ryanatkn/fuz
 
+## 0.133.1
+
+### Patch Changes
+
+- relax `Svg_Data` type to accept `null` for all values ([92f5b2a](https://github.com/ryanatkn/fuz/commit/92f5b2a))
+- add `icon_button` prop to `Copy_To_Clipboard` ([caddfe8](https://github.com/ryanatkn/fuz/commit/caddfe8))
+
 ## 0.133.0
 
 ### Minor Changes
