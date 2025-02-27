@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.132.5
+
+### Patch Changes
+
+- improve inline `Svg` rendering ([612f4dc](https://github.com/ryanatkn/fuz/commit/612f4dc))
+
 ## 0.132.4
 
 ### Patch Changes
