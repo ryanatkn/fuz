@@ -45,6 +45,9 @@
 		 */
 		height?: string;
 		label?: string;
+		/**
+		 * Renders the SVG as an inline block with spacing appropriate for text. Defaults to `false`.
+		 */
 		inline?: boolean;
 		/**
 		 * Flex shrink behavior? Defaults to `true`.
@@ -75,7 +78,8 @@
 	style:width={final_width}
 	style:height={final_height}
 	style:display={inline ? 'inline-block' : undefined}
-	style:vertical-align={inline ? 'middle' : undefined}
+	style:position={inline ? 'relative' : undefined}
+	style:top={inline ? '0.1em' : undefined}
 	style:flex-shrink={shrink ? 1 : 0}
 	{style}
 >
