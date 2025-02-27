@@ -19,6 +19,8 @@ import logos from '$routes/library/logos/+page.svelte';
 
 // TODO maybe decouple `related` from `Tome` to get bidirectionality for free
 
+// TODO @many add `Svg` library entry
+
 export const tomes: Array<Tome> = [
 	{
 		name: 'introduction',
