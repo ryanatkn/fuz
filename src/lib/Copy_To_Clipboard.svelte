@@ -10,12 +10,20 @@
 	interface Props {
 		text: string | null;
 		copied_display_duration?: number;
+		allow_copying_empty_string?: boolean;
 		oncopy?: (text: string | null, e: MouseEvent) => void;
 		attrs?: SvelteHTMLElements['button'];
 		children?: Snippet<[copied: boolean, failed: boolean]>;
 	}
 
-	const {text, copied_display_duration = 1000, oncopy, attrs, children}: Props = $props();
+	const {
+		text,
+		copied_display_duration = 1000,
+		allow_copying_empty_string,
+		oncopy,
+		attrs,
+		children,
+	}: Props = $props();
 
 	// These are for visual feedback
 	let copied = $state(false);
@@ -56,7 +64,7 @@
 	class:failed
 	class:color_c={failed}
 	onclick={copy}
-	disabled={attrs?.disabled ?? text === null}
+	disabled={attrs?.disabled ?? (allow_copying_empty_string ? text === null : !text)}
 >
 	{#if children}
 		{@render children(copied, failed)}
