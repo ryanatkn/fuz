@@ -72,11 +72,12 @@
 	{...data.attrs}
 	{...attrs}
 	aria-label={label ?? data.label}
-	{style}
 	style:width={final_width}
 	style:height={final_height}
-	class:inline
+	style:display={inline ? 'inline-block' : undefined}
+	style:vertical-align={inline ? 'middle' : undefined}
 	style:flex-shrink={shrink ? 1 : 0}
+	{style}
 >
 	{#if data.raw}{@html data.raw}{/if}<!-- eslint-disable-line svelte/no-at-html-tags -->
 	{#if data.paths}
@@ -85,10 +86,3 @@
 		{/each}
 	{/if}
 </svg>
-
-<style>
-	.inline {
-		display: inline-block;
-		vertical-align: middle;
-	}
-</style>
