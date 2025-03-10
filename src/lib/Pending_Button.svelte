@@ -26,7 +26,7 @@
 	bind:this={el}
 	type="button"
 	{...attrs}
-	disabled={disabled ?? pending}
+	disabled={disabled ?? attrs?.disabled ?? pending}
 	{title}
 	class:pending
 	{onclick}
