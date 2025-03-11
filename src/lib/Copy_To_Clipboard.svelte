@@ -73,14 +73,9 @@
 >
 	{#if children}
 		{@render children(copied, failed)}
+	{:else if copied}
+		<div in:scale={{duration: 200}}>✓</div>
 	{:else}
-		<div class="icon">
-			{#if copied}
-				<!-- ✓ -->
-				<div in:scale={{duration: 200}}>✓</div>
-			{:else}
-				<div in:slide>⧉</div>
-			{/if}
-		</div>
+		<div in:slide>⧉</div>
 	{/if}
 </button>
