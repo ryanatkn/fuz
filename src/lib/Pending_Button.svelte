@@ -27,7 +27,7 @@
 	type="button"
 	{...attrs}
 	disabled={disabled ?? attrs?.disabled ?? pending}
-	{title}
+	title={title ?? attrs?.title}
 	class:pending
 	{onclick}
 >
