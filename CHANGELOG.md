@@ -1,5 +1,13 @@
 # @ryanatkn/fuz
 
+## 0.133.2
+
+### Patch Changes
+
+- fix `Pending_Button` to accept `attrs.title` ([1a94e28](https://github.com/ryanatkn/fuz/commit/1a94e28))
+- fix `Pending_Button` disabled fallback ([c20bf54](https://github.com/ryanatkn/fuz/commit/c20bf54))
+- add default title to `Paste_From_Clipboard` ([8132235](https://github.com/ryanatkn/fuz/commit/8132235))
+
 ## 0.133.1
 
 ### Patch Changes
