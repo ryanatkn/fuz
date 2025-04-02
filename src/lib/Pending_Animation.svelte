@@ -3,23 +3,32 @@
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
 	interface Props {
+		inline?: boolean;
 		running?: boolean;
-		attrs?: SvelteHTMLElements['div'];
+		item_attrs?: SvelteHTMLElements['span'];
+		attrs?: SvelteHTMLElements['span'];
 		children?: Snippet<[index: number]>;
 	}
 
-	const {running = true, attrs, children}: Props = $props();
+	const {inline, running = true, item_attrs, attrs, children}: Props = $props();
 </script>
 
-<div {...attrs} class:pending_animation={true} class:running>
-	<span style:animation-delay="0s"
+<span
+	{...attrs}
+	class="pending_animation {attrs?.class}"
+	class:running
+	class:block={!inline}
+	class:inline_flex={inline}
+	class:align_items_center={inline}
+>
+	<span {...item_attrs} style:animation-delay="0s"
 		>{#if children}{@render children(0)}{:else}•{/if}</span
-	><span style:animation-delay="0.09s"
+	><span {...item_attrs} style:animation-delay="0.09s"
 		>{#if children}{@render children(1)}{:else}•{/if}</span
-	><span style:animation-delay="0.3s"
+	><span {...item_attrs} style:animation-delay="0.3s"
 		>{#if children}{@render children(2)}{:else}•{/if}</span
 	>
-</div>
+</span>
 
 <style>
 	.pending_animation {
@@ -27,7 +36,6 @@
 		--scale_x: 0.42;
 		--scale_y: 0.42;
 		--scale_z: 0.42;
-		display: flex;
 	}
 	span {
 		transform: scale3d(var(--scale_x), var(--scale_y), var(--scale_z));

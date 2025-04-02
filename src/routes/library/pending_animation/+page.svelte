@@ -16,6 +16,7 @@
 	let frogsRunning = $state(false);
 	let pendingAnimation0Running = $state(true);
 	let pendingAnimation1Running = $state(false);
+	let inline = $state(true);
 </script>
 
 <Tome_Content {tome}>
@@ -113,6 +114,18 @@
 				</div>
 			{/snippet}
 		</Pending_Animation>
+	</Tome_Section>
+	<Tome_Section>
+		<Tome_Section_Header text="With inline">With <code>inline</code></Tome_Section_Header>
+		<Code content={`<Pending_Animation inline={${inline}} />`} />
+		<p>
+			with
+			<code
+				>inline={'{'}<button type="button" onclick={() => (inline = !inline)}>{inline}</button
+				>{'}'}</code
+			>
+			<Pending_Animation {inline} />
+		</p>
 	</Tome_Section>
 </Tome_Content>
 
