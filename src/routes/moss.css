@@ -6,9 +6,6 @@
 .bg {
 	background-color: var(--bg);
 }
-.block {
-	display: block;
-}
 
 .box {
 	display: flex;
@@ -345,6 +342,9 @@ a.chip {
 }
 .size_xl {
 	font-size: var(--size_xl);
+}
+.size_xl3 {
+	font-size: var(--size_xl3);
 }
 .size_xl5 {
 	font-size: var(--size_xl5);

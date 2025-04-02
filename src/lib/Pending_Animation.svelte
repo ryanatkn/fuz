@@ -17,7 +17,7 @@
 	{...attrs}
 	class="pending_animation {attrs?.class}"
 	class:running
-	class:block={!inline}
+	class:flex={!inline}
 	class:inline_flex={inline}
 	class:align_items_center={inline}
 >
