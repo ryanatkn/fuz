@@ -6,7 +6,8 @@
 	import Teleport from '$lib/Teleport.svelte';
 	import type {Dialog_Layout} from '$lib/dialog.js';
 
-	// TODO use `<dialog>` here
+	// TODO use `<dialog>` here instead of `Teleport`
+	// https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog
 
 	/*
 
@@ -186,11 +187,11 @@
 	.dialog_content {
 		width: 100%;
 		/* TODO height? */
-		transform: scale3d(0.99, 0.99, 0.99);
+		transform: scale(0.99);
 		transition: transform var(--duration_1) ease;
 		padding: 40px;
 	}
 	.ready .dialog_content {
-		transform: scale3d(1, 1, 1);
+		transform: scale(1);
 	}
 </style>
