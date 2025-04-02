@@ -1,5 +1,5 @@
 ---
-"@ryanatkn/fuz": minor
+'@ryanatkn/fuz': minor
 ---
 
-break: add `allow_copying_empty_string` to `Copy_To_Clipboard` and change its default to false
+break: automatic `Svg` sizing - the `size` prop now has a default that uses `--size`
