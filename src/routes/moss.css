@@ -68,6 +68,9 @@ a.chip {
 .gap_lg {
 	gap: var(--space_lg);
 }
+.gap_xl3 {
+	gap: var(--space_xl3);
+}
 
 /* TODO other button variants? */
 /* TODO this is slightly strange that it doesn't use --icon_size */
