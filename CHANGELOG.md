@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.134.0
+
+### Minor Changes
+
+- change dialog to support flexible content layouts without hacks ([#67](https://github.com/ryanatkn/fuz/pull/67))
+
 ## 0.133.2
 
 ### Patch Changes

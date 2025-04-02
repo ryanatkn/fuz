@@ -6,7 +6,8 @@
 	import Teleport from '$lib/Teleport.svelte';
 	import type {Dialog_Layout} from '$lib/dialog.js';
 
-	// TODO use `<dialog>` here
+	// TODO use `<dialog>` here instead of `Teleport`
+	// https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog
 
 	/*
 
@@ -23,12 +24,25 @@
 	interface Props {
 		// TODO maybe change this API away from an element to a selector? or remove the API completely?
 		container?: HTMLElement;
+		/**
+		 * @default 'centered'
+		 */
 		layout?: Dialog_Layout;
 		/**
 		 * index 0 is under 1 is under 2 etc -- the topmost dialog is the last in the array
+		 * @default 0
 		 */
 		index?: number;
+		/**
+		 * @default true
+		 */
 		active?: boolean;
+		/**
+		 * If provided, prevents clicks that would close the dialog
+		 * from bubbling past any elements matching this selector.
+		 * @default '.pane'
+		 */
+		content_selector?: string | null;
 		onclose?: () => void;
 		children: Snippet<[close: (e?: Event) => void]>;
 	}
@@ -38,6 +52,7 @@
 		layout = 'centered',
 		index = 0,
 		active = true,
+		content_selector = '.pane',
 		onclose,
 		children,
 	}: Props = $props();
@@ -124,16 +139,24 @@
 		style:z-index={100 + index}
 	>
 		<div class="dialog_layout">
-			<div class="dialog_wrapper">
-				<div class="dialog_bg" onmousedown={close} aria-hidden="true"></div>
-				<div
-					class="dialog_content"
-					bind:this={content_el}
-					role="none"
-					onmousedown={(e) => {
-						if (e.target === content_el) close(e);
-					}}
-				>
+			<div
+				class="dialog_wrapper"
+				role="none"
+				onmousedown={(e) => {
+					// Close if clicking outside `content_el` but inside the wrapper
+					const target = e.target as Element;
+					if (
+						content_el &&
+						(content_el === target ||
+							!content_el.contains(target) ||
+							(content_selector && !target.closest(content_selector)))
+					) {
+						close(e);
+					}
+				}}
+			>
+				<div class="dialog_bg" aria-hidden="true"></div>
+				<div class="dialog_content" bind:this={content_el}>
 					<!-- mount the content only after teleporting to avoid issues -->
 					{#if ready}{@render children(close)}{/if}
 				</div>
@@ -154,6 +177,18 @@
 		TODO check if this behaves as desired after switching to use the `dialog` element */
 		overscroll-behavior: contain;
 	}
+
+	.dialog_wrapper {
+		position: relative; /* for the bg */
+		min-height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.layout_page .dialog_wrapper {
+		align-items: start;
+	}
+
 	.dialog_bg {
 		position: absolute;
 		inset: 0;
@@ -165,30 +200,20 @@
 	.ready .dialog_bg {
 		opacity: 1;
 	}
+
 	.dialog_layout {
-		width: 100%;
 		height: 100%;
 		/* makes the content overflow downwards instead of upwards+downwards because it's centered */
 		max-height: 100%;
 	}
-	.dialog_wrapper {
-		position: relative;
-		width: 100%;
-		min-height: 100%;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-	}
-	.layout_page .dialog_wrapper {
-		justify-content: flex-start;
-	}
+
 	.dialog_content {
-		transform: scale3d(0.96, 0.96, 0.96);
-		transition: transform var(--duration_2) ease;
+		width: 100%;
+		transform: scale(0.99);
+		transition: transform var(--duration_1) ease;
 		padding: 40px;
 	}
 	.ready .dialog_content {
-		transform: scale3d(1, 1, 1);
+		transform: scale(1);
 	}
 </style>
