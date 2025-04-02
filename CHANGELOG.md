@@ -1,5 +1,32 @@
 # @ryanatkn/fuz
 
+## 0.134.0
+
+### Minor Changes
+
+- change dialog to support flexible content layouts without hacks ([#67](https://github.com/ryanatkn/fuz/pull/67))
+
+## 0.133.2
+
+### Patch Changes
+
+- fix `Pending_Button` to accept `attrs.title` ([1a94e28](https://github.com/ryanatkn/fuz/commit/1a94e28))
+- fix `Pending_Button` disabled fallback ([c20bf54](https://github.com/ryanatkn/fuz/commit/c20bf54))
+- add default title to `Paste_From_Clipboard` ([8132235](https://github.com/ryanatkn/fuz/commit/8132235))
+
+## 0.133.1
+
+### Patch Changes
+
+- relax `Svg_Data` type to accept `null` for all values ([92f5b2a](https://github.com/ryanatkn/fuz/commit/92f5b2a))
+- add `icon_button` prop to `Copy_To_Clipboard` ([caddfe8](https://github.com/ryanatkn/fuz/commit/caddfe8))
+
+## 0.133.0
+
+### Minor Changes
+
+- break: add `allow_copying_empty_string` to `Copy_To_Clipboard` and change its default to false ([e2ef554](https://github.com/ryanatkn/fuz/commit/e2ef554))
+
 ## 0.132.5
 
 ### Patch Changes

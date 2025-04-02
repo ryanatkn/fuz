@@ -74,10 +74,12 @@
 {#if opened}
 	<Dialog onclose={() => (opened = false)}>
 		{#snippet children(close)}
-			<div class="pane p_xl box">
-				<h1>attention</h1>
-				<p>this is a dialog</p>
-				<button onclick={close}>ok</button>
+			<div class="box">
+				<div class="pane p_xl box">
+					<h1>attention</h1>
+					<p>this is a dialog</p>
+					<button onclick={close}>ok</button>
+				</div>
 			</div>
 		{/snippet}
 	</Dialog>
@@ -102,10 +104,12 @@
 {#if opened}
 	<Dialog onclose={() => (opened = false)}>
 		{#snippet children(close)}
-			<div class="pane p_xl box">
-				<h1>attention</h1>
-				<p>this is a dialog</p>
-				<button type="button" onclick={close}>ok</button>
+			<div class="box">
+				<div class="pane p_xl box">
+					<h1>attention</h1>
+					<p>this is a dialog</p>
+					<button type="button" onclick={close}>ok</button>
+				</div>
 			</div>
 		{/snippet}
 	</Dialog>
@@ -113,12 +117,14 @@
 {#if dialog_overflowing_opened}
 	<Dialog onclose={() => (dialog_overflowing_opened = false)}>
 		{#snippet children(close)}
-			<div class="pane p_xl">
-				<h1>attention</h1>
-				{#each {length: 120} as _}
-					<p>this is a dialog that overflows vertically</p>
-				{/each}
-				<button type="button" onclick={close}>close</button>
+			<div class="box">
+				<div class="pane p_xl">
+					<h1>attention</h1>
+					{#each {length: 120} as _}
+						<p>this is a dialog that overflows vertically</p>
+					{/each}
+					<button type="button" onclick={close}>close</button>
+				</div>
 			</div>
 		{/snippet}
 	</Dialog>
@@ -129,94 +135,103 @@
 		layout={selected_layout}
 	>
 		{#snippet children(close)}
-			<div class="pane p_xl width_md">
-				{#if selected_layout === 'page'}
+			<div class="box">
+				<div class="pane p_xl width_md">
+					{#if selected_layout === 'page'}
+						<p>
+							This is a <code>Dialog</code> with
+							<code
+								>layout="<select bind:value={selected_layout}
+									>{#each dialog_layouts as layout}
+										<option value={layout}>{layout}</option>
+									{/each}
+								</select>"</code
+							>.
+						</p>
+						<p>
+							Instead of being centered by default, the dialog's contents are aligned to the top of
+							the page and grow downward. It's useful when the dialog's contents change in height.
+						</p>
+					{:else if selected_layout === 'centered'}
+						<p>
+							This is a <code>Dialog</code> with
+							<code
+								>layout="<select bind:value={selected_layout}
+									>{#each dialog_layouts as layout}
+										<option value={layout}>{layout}</option>
+									{/each}
+								</select>"</code
+							>, the default value.
+						</p>
+						<p>
+							It's often the best choice, but it can be undesirable in some situations, like when
+							the height of the content changes as the user does things, leading to a janky
+							experience.
+						</p>
+					{:else}
+						<Alert status="error">eek a bug! unknown layout "{selected_layout}"</Alert>
+					{/if}
 					<p>
-						This is a <code>Dialog</code> with
-						<code
-							>layout="<select bind:value={selected_layout}
-								>{#each dialog_layouts as layout}
-									<option value={layout}>{layout}</option>
-								{/each}
-							</select>"</code
-						>.
+						<button type="button" onclick={() => add_item()}>add item</button>
+						<button type="button" disabled={!items.length} onclick={() => reset_items()}
+							>remove all</button
+						>
 					</p>
-					<p>
-						Instead of being centered by default, the dialog's contents are aligned to the top of
-						the page and grow downward. It's useful when the dialog's contents change in height.
-					</p>
-				{:else if selected_layout === 'centered'}
-					<p>
-						This is a <code>Dialog</code> with
-						<code
-							>layout="<select bind:value={selected_layout}
-								>{#each dialog_layouts as layout}
-									<option value={layout}>{layout}</option>
-								{/each}
-							</select>"</code
-						>, the default value.
-					</p>
-					<p>
-						It's often the best choice, but it can be undesirable in some situations, like when the
-						height of the content changes as the user does things, leading to a janky experience.
-					</p>
-				{:else}
-					<Alert status="error">eek a bug! unknown layout "{selected_layout}"</Alert>
-				{/if}
-				<p>
-					<button type="button" onclick={() => add_item()}>add item</button>
-					<button type="button" disabled={!items.length} onclick={() => reset_items()}
-						>remove all</button
-					>
-				</p>
-				{#each items as item (item)}
-					<p transition:slide>
-						<button type="button" onclick={() => remove_item(item)}>✕</button>
-						new stuff appears {#if selected_layout === 'page'}gracefully{:else if selected_layout === 'centered'}ungracefully{/if}
-					</p>
-				{/each}
-				<button type="button" onclick={close}>close</button>
+					{#each items as item (item)}
+						<p transition:slide>
+							<button type="button" onclick={() => remove_item(item)}>✕</button>
+							new stuff appears {#if selected_layout === 'page'}gracefully{:else if selected_layout === 'centered'}ungracefully{/if}
+						</p>
+					{/each}
+					<button type="button" onclick={close}>close</button>
+				</div>
 			</div>
 		{/snippet}
 	</Dialog>
 {/if}
 {#if dialog_nested_1_opened}
 	<Dialog onclose={() => (dialog_nested_1_opened = false)}>
-		<div class="pane p_xl">
-			<h1>dialog 1</h1>
-			<p>dialogs can open more dialogs</p>
-			<button type="button" onclick={() => (dialog_nested_2_opened = true)}
-				>open another dialog</button
-			>
+		<div class="box">
+			<div class="pane p_xl">
+				<h1>dialog 1</h1>
+				<p>dialogs can open more dialogs</p>
+				<button type="button" onclick={() => (dialog_nested_2_opened = true)}
+					>open another dialog</button
+				>
+			</div>
 		</div>
 	</Dialog>
 {/if}
 {#if dialog_nested_2_opened}
 	<Dialog onclose={() => (dialog_nested_2_opened = false)}>
-		<div class="pane p_xl">
-			<h1>dialog 2</h1>
-			<p>this dialog can open more dialogs</p>
-			<p>this is the second dialog</p>
-			<button type="button" onclick={() => (dialog_nested_3_opened = true)}
-				>open another dialog</button
-			>
+		<div class="box">
+			<div class="pane p_xl">
+				<h1>dialog 2</h1>
+				<p>this dialog can open more dialogs</p>
+				<p>this is the second dialog</p>
+				<button type="button" onclick={() => (dialog_nested_3_opened = true)}
+					>open another dialog</button
+				>
+			</div>
 		</div>
 	</Dialog>
 {/if}
 {#if dialog_nested_3_opened}
 	<Dialog onclose={() => (dialog_nested_3_opened = false)}>
-		<div class="pane p_xl" style:margin-bottom="var(--space_xl3)">
-			<h1>3 dialogs!</h1>
-			<button type="button" onclick={() => (dialog_nested_3_opened = false)}>close dialog</button>
-		</div>
-		<div class="pane p_xl">
-			<h1>and another <code>.pane</code></h1>
-			<button
-				type="button"
-				onclick={() => {
-					dialog_nested_1_opened = dialog_nested_2_opened = dialog_nested_3_opened = false;
-				}}>close all dialogs</button
-			>
+		<div class="box gap_xl3">
+			<div class="pane p_xl">
+				<h1>3 dialogs!</h1>
+				<button type="button" onclick={() => (dialog_nested_3_opened = false)}>close dialog</button>
+			</div>
+			<div class="pane p_xl">
+				<h1>and another <code>.pane</code></h1>
+				<button
+					type="button"
+					onclick={() => {
+						dialog_nested_1_opened = dialog_nested_2_opened = dialog_nested_3_opened = false;
+					}}>close all dialogs</button
+				>
+			</div>
 		</div>
 	</Dialog>
 {/if}
@@ -227,8 +242,10 @@
 	}}
 >
 	{#snippet children(dialog)}
-		<div class="pane">
-			<dialog.Component {...dialog.props} />
+		<div class="box">
+			<div class="pane">
+				<dialog.Component {...dialog.props} />
+			</div>
 		</div>
 	{/snippet}
 </Dialogs>

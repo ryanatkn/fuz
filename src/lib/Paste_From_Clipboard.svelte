@@ -17,6 +17,7 @@
 
 <button
 	type="button"
+	title="paste from clipboard"
 	{...attrs}
 	onclick={async () => {
 		try {
