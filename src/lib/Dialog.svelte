@@ -184,8 +184,10 @@
 		justify-content: flex-start;
 	}
 	.dialog_content {
-		transform: scale3d(0.96, 0.96, 0.96);
-		transition: transform var(--duration_2) ease;
+		width: 100%;
+		/* TODO height? */
+		transform: scale3d(0.99, 0.99, 0.99);
+		transition: transform var(--duration_1) ease;
 		padding: 40px;
 	}
 	.ready .dialog_content {
