@@ -20,15 +20,14 @@
 	class:flex={!inline}
 	class:inline_flex={inline}
 	class:align_items_center={inline}
->
-	<span {...item_attrs} style:animation-delay="0s"
+	><span {...item_attrs} style:animation-delay="0s"
 		>{#if children}{@render children(0)}{:else}•{/if}</span
 	><span {...item_attrs} style:animation-delay="0.09s"
 		>{#if children}{@render children(1)}{:else}•{/if}</span
 	><span {...item_attrs} style:animation-delay="0.3s"
 		>{#if children}{@render children(2)}{:else}•{/if}</span
-	>
-</span>
+	></span
+>
 
 <style>
 	.pending_animation {
@@ -37,13 +36,18 @@
 		--scale_y: 0.42;
 		--scale_z: 0.42;
 	}
-	span {
+
+	.pending_animation span {
+		font-size: var(--size, inherit);
+		display: inline-block;
 		transform: scale3d(var(--scale_x), var(--scale_y), var(--scale_z));
 		animation: dot var(--animation_duration, var(--duration_5, 1.5s)) infinite paused;
 	}
+
 	.running span {
 		animation-play-state: running;
 	}
+
 	@keyframes dot {
 		0% {
 			transform: scale3d(var(--scale_x), var(--scale_y), var(--scale_z));

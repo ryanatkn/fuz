@@ -36,13 +36,33 @@
 			onclick={() => (pending_animation_0_running = !pending_animation_0_running)}
 			>{#if pending_animation_0_running}pause animation{:else}play animation{/if}</button
 		>
+		<p>Set size with custom properties:</p>
 		<Code
-			content={`<Pending_Animation\n\tattrs={{class: 'size_xl5'}}\n\trunning={${pending_animation_0_running}}\n/>`}
+			content={`<Pending_Animation\n\t--size="var(--size_xl5)"\n\trunning={${pending_animation_0_running}}\n/>`}
+		/>
+		<div class="box mb_lg" style:align-items="flex-start" role="none">
+			<Pending_Animation --size="var(--size_xl5)" running={pending_animation_0_running} />
+		</div>
+		<p>Set size with classes:</p>
+		<Code
+			content={`<Pending_Animation\n\tattrs={{class: 'size_xl3'}}\n\trunning={${pending_animation_0_running}}\n/>`}
 		/>
 		<div class="box" style:align-items="flex-start" role="none">
-			<Pending_Animation attrs={{class: 'size_xl5'}} running={pending_animation_0_running} />
+			<Pending_Animation attrs={{class: 'size_xl3'}} running={pending_animation_0_running} />
 		</div>
 	</section>
+	<Tome_Section>
+		<Tome_Section_Header text="With inline">With <code>inline</code></Tome_Section_Header>
+		<Code content={`<Pending_Animation inline={${inline}} />`} />
+		<p>
+			with
+			<code
+				>inline={'{'}<button type="button" onclick={() => (inline = !inline)}>{inline}</button
+				>{'}'}</code
+			>
+			<Pending_Animation {inline} running={pending_animation_0_running} />
+		</p>
+	</Tome_Section>
 	<Tome_Section>
 		<Tome_Section_Header text="With custom children and duration" />
 		<Code
@@ -115,15 +135,35 @@
 		</Pending_Animation>
 	</Tome_Section>
 	<Tome_Section>
-		<Tome_Section_Header text="With inline">With <code>inline</code></Tome_Section_Header>
-		<Code content={`<Pending_Animation inline={${inline}} />`} />
+		<Tome_Section_Header text="With custom children and duration" />
+		<Code
+			content={`<div style:font-size="var(--size_xl6)">
+	<Pending_Animation running={${pending_animation_1_running}} --animation_duration="var(--duration_6)">
+		{${turtle_slot}}
+	</Pending_Animation>
+</div>`}
+		/>
 		<p>
-			with
-			<code
-				>inline={'{'}<button type="button" onclick={() => (inline = !inline)}>{inline}</button
-				>{'}'}</code
+			with children <input bind:value={turtle_slot} />
+			<button type="button" onclick={() => (turtle_slot = '🐢🐢🐢')}>🐢🐢🐢</button>
+			<button
+				type="button"
+				onclick={() => (turtle_slot = (turtle_slot + turtle_slot).substring(0, 24))}>* 2</button
 			>
-			<Pending_Animation {inline} />
 		</p>
+		<button
+			type="button"
+			onclick={() => (pending_animation_1_running = !pending_animation_1_running)}
+		>
+			{#if pending_animation_1_running}pause animation{:else}play animation{/if}
+		</button>
+		<div style:font-size="var(--size_xl6)">
+			<Pending_Animation
+				running={pending_animation_1_running}
+				--animation_duration="var(--duration_6)"
+			>
+				{turtle_slot}
+			</Pending_Animation>
+		</div>
 	</Tome_Section>
 </Tome_Content>
