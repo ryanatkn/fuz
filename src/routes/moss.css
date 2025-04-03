@@ -197,6 +197,10 @@ a.chip {
 	margin-left: var(--space_xs3);
 	margin-right: var(--space_xs3);
 }
+.my_lg {
+	margin-top: var(--space_lg);
+	margin-bottom: var(--space_lg);
+}
 .overflow_wrap_anywhere {
 	overflow-wrap: anywhere;
 }
@@ -345,6 +349,9 @@ a.chip {
 }
 .size_xl3 {
 	font-size: var(--size_xl3);
+}
+.size_xl4 {
+	font-size: var(--size_xl4);
 }
 .size_xl5 {
 	font-size: var(--size_xl5);
