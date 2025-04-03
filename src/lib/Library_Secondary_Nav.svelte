@@ -3,7 +3,7 @@
 	import {Tome} from '$lib/tome.js';
 
 	interface Props {
-		tomes: Tome[];
+		tomes: Array<Tome>;
 		sidebar?: boolean; // TODO @many dialog navs (this shouldn't exist)
 	}
 

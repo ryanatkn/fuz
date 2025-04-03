@@ -7,7 +7,7 @@
 
 	interface Props {
 		selected_theme?: {theme: Theme};
-		themes?: Theme[];
+		themes?: Array<Theme>;
 		enable_editing?: boolean;
 		select?: ((theme: Theme) => void | boolean) | null;
 		onselect?: (theme: Theme) => void;

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import {is_iframed} from '@ryanatkn/belt/dom.js';
 	import type {Snippet} from 'svelte';
+	import {scrollY} from 'svelte/reactivity/window';
 	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
 
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
@@ -16,11 +17,8 @@
 	const iframed = is_iframed();
 	const enabled = !iframed;
 
-	let scrollY = $state(0);
-	const scrolled = $derived(scrollY > 0);
+	const scrolled = $derived(scrollY.current && scrollY.current > 0);
 </script>
-
-<svelte:window bind:scrollY />
 
 {#if enabled}
 	<div class="library_primary_nav" class:scrolled>

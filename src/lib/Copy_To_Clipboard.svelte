@@ -1,75 +1,81 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
 	import type {SvelteHTMLElements} from 'svelte/elements';
+	import {scale, slide} from 'svelte/transition';
+
+	// TODO @many should this have the Button suffix?
+
+	// TODO add library entry, see also Paste_From_Clipboard.svelte
 
 	interface Props {
 		text: string | null;
-		onclick?: (text: string | null, e: MouseEvent) => void;
-		classes?: string;
+		copied_display_duration?: number;
+		allow_copying_empty_string?: boolean;
+		/**
+		 * Defaults to `true`, ignored if `children` is provided.
+		 */
+		icon_button?: boolean;
+		oncopy?: (text: string | null, e: MouseEvent) => void;
 		attrs?: SvelteHTMLElements['button'];
 		children?: Snippet<[copied: boolean, failed: boolean]>;
 	}
 
-	// TODO add library entry
+	const {
+		text,
+		copied_display_duration = 1000,
+		allow_copying_empty_string,
+		icon_button = true,
+		oncopy,
+		attrs,
+		children,
+	}: Props = $props();
 
-	const {text, onclick, classes, attrs, children}: Props = $props();
-
+	// These are for visual feedback
 	let copied = $state(false);
 	let failed = $state(false);
+	let copy_timeout: NodeJS.Timeout | undefined;
 
 	const copy = async (e: MouseEvent) => {
-		if (text === null) return;
+		clearTimeout(copy_timeout);
+		if (text === null) return; // allows copying ''
+
 		copied = false;
 		failed = false;
+
 		try {
 			await navigator.clipboard.writeText(text);
+			copied = true;
 		} catch (_err) {
 			failed = true;
-			onclick?.(null, e);
 			return;
 		}
-		copied = true;
-		onclick?.(text, e);
+
+		// Reset after display duration
+		copy_timeout = setTimeout(() => {
+			copied = false;
+		}, copied_display_duration);
+
+		oncopy?.(text, e);
 	};
 </script>
 
 <button
-	{...attrs}
 	type="button"
-	class={classes ?? (children ? undefined : 'icon_button size_lg')}
+	title="copy to clipboard"
+	{...attrs}
+	class={attrs?.class}
+	class:icon_button={children ? false : icon_button}
+	class:copied
+	class:failed
+	class:color_c={failed}
 	onclick={copy}
-	disabled={attrs?.disabled ?? text === null}
-	>{#if children}{@render children(copied, failed)}{:else}📋{/if}{#if copied}<small
-			class="indicator color_b_5">copied!</small
-		>{/if}{#if failed}<small class="indicator color_c_5">failed</small>{/if}</button
+	disabled={attrs?.disabled ?? (allow_copying_empty_string ? text === null : !text)}
 >
-
-<style>
-	button {
-		position: relative;
-	}
-
-	small {
-		font-weight: 700;
-		margin-top: var(--space_xs);
-		opacity: 0;
-		animation: fade-in 1.5s ease-in reverse;
-	}
-
-	.indicator {
-		position: absolute;
-		bottom: -2.5rem;
-		margin-left: auto;
-		margin-right: auto;
-	}
-
-	/* TODO upstream to Moss? need to extract animation names */
-	@keyframes fade-in {
-		from {
-			opacity: 0;
-		}
-		to {
-			opacity: 1;
-		}
-	}
-</style>
+	{#if children}
+		{@render children(copied, failed)}
+	{:else if copied}
+		<div in:scale={{duration: 200}}>✓</div>
+	{:else}
+		<div in:slide>⧉</div>
+	{/if}
+</button>

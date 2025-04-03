@@ -7,7 +7,7 @@
 	import {library_links_context} from '$lib/library_helpers.svelte.js';
 
 	interface Props {
-		tomes: Tome[];
+		tomes: Array<Tome>;
 		tomes_by_name: Map<string, Tome>;
 		sidebar?: boolean; // TODO @many dialog navs (this shouldn't exist)
 	}

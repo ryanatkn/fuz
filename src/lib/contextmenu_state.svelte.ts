@@ -41,7 +41,7 @@ export class Submenu_State {
 	readonly depth: number;
 
 	selected: boolean = $state(false);
-	items: Item_State[] = $state([]);
+	items: Array<Item_State> = $state([]);
 
 	constructor(menu: Submenu_State | Root_Menu_State, depth: number) {
 		this.menu = menu;
@@ -54,7 +54,7 @@ export class Root_Menu_State {
 	readonly menu = null;
 	readonly depth = 1;
 
-	items: Item_State[] = $state([]);
+	items: Array<Item_State> = $state([]);
 }
 
 // TODO fix this type
@@ -82,7 +82,7 @@ export class Contextmenu_State {
 	opened: boolean = $state(false);
 	x: number = $state(0);
 	y: number = $state(0);
-	params: Contextmenu_Params[] = $state([]);
+	params: Array<Contextmenu_Params> = $state([]);
 	error: string | undefined = $state();
 
 	// These two properties are mutated internally.
@@ -90,7 +90,7 @@ export class Contextmenu_State {
 	// then access the mutable non-reactive  `contextmenu.root_menu` and `contextmenu.selections`.
 	// See `Contextmenu_Entry.svelte` and `Contextmenu_Submenu.svelte` for reactive usage examples.
 	root_menu: Root_Menu_State = $state(new Root_Menu_State());
-	selections: Item_State[] = $state([]);
+	selections: Array<Item_State> = $state([]);
 
 	constructor(options?: Contextmenu_State_Options) {
 		this.initial_layout = options?.layout;
@@ -98,7 +98,7 @@ export class Contextmenu_State {
 		this.layout = this.initial_layout ?? new Dimensions();
 	}
 
-	open(params: Contextmenu_Params[], x: number, y: number): void {
+	open(params: Array<Contextmenu_Params>, x: number, y: number): void {
 		this.selections.length = 0;
 		this.opened = true;
 		this.x = x;
@@ -112,7 +112,7 @@ export class Contextmenu_State {
 		this.opened = false;
 	}
 
-	reset_items(items: Item_State[]): void {
+	reset_items(items: Array<Item_State>): void {
 		for (const item of items) {
 			if (item.is_menu) {
 				this.reset_items(item.items);
@@ -278,10 +278,10 @@ export class Contextmenu_State {
 // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset
 const CONTEXTMENU_DATASET_KEY = 'contextmenu';
 const CONTEXTMENU_DOM_QUERY = `a,[data-${CONTEXTMENU_DATASET_KEY}]`;
-const contextmenu_cache: Map<string, Contextmenu_Params | Contextmenu_Params[]> = new Map();
+const contextmenu_cache: Map<string, Contextmenu_Params | Array<Contextmenu_Params>> = new Map();
 let cache_key_counter = 0;
 
-export const contextmenu_action = <T extends Contextmenu_Params, U extends T | T[]>(
+export const contextmenu_action = <T extends Contextmenu_Params, U extends T | Array<T>>(
 	el: HTMLElement | SVGElement,
 	params: U | null | undefined,
 ): ActionReturn<U> | undefined => {
@@ -330,11 +330,11 @@ export const open_contextmenu = (
 
 const query_contextmenu_params = (
 	target: HTMLElement | SVGElement,
-): null | Contextmenu_Params[] => {
-	let params: null | Contextmenu_Params[] = null;
+): null | Array<Contextmenu_Params> => {
+	let params: null | Array<Contextmenu_Params> = null;
 	// crawl DOM for contextmenu entries
 	let el: HTMLElement | SVGElement | null | undefined = target;
-	let cache_key: string, cached: Contextmenu_Params | Contextmenu_Params[] | undefined;
+	let cache_key: string, cached: Contextmenu_Params | Array<Contextmenu_Params> | undefined;
 	while ((el = el?.closest(CONTEXTMENU_DOM_QUERY))) {
 		if ((cache_key = el.dataset[CONTEXTMENU_DATASET_KEY]!)) {
 			params ??= [];

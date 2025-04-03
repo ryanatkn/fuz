@@ -1,5 +1,131 @@
 # @ryanatkn/fuz
 
+## 0.135.0
+
+### Minor Changes
+
+- break: rework `Pending_Animation` to support `inline` variants and custom attrs ([#68](https://github.com/ryanatkn/fuz/pull/68))
+- break: automatic `Svg` sizing - the `size` prop now has a default that uses `--size` ([#66](https://github.com/ryanatkn/fuz/pull/66))
+
+## 0.134.0
+
+### Minor Changes
+
+- change dialog to support flexible content layouts without hacks ([#67](https://github.com/ryanatkn/fuz/pull/67))
+
+## 0.133.2
+
+### Patch Changes
+
+- fix `Pending_Button` to accept `attrs.title` ([1a94e28](https://github.com/ryanatkn/fuz/commit/1a94e28))
+- fix `Pending_Button` disabled fallback ([c20bf54](https://github.com/ryanatkn/fuz/commit/c20bf54))
+- add default title to `Paste_From_Clipboard` ([8132235](https://github.com/ryanatkn/fuz/commit/8132235))
+
+## 0.133.1
+
+### Patch Changes
+
+- relax `Svg_Data` type to accept `null` for all values ([92f5b2a](https://github.com/ryanatkn/fuz/commit/92f5b2a))
+- add `icon_button` prop to `Copy_To_Clipboard` ([caddfe8](https://github.com/ryanatkn/fuz/commit/caddfe8))
+
+## 0.133.0
+
+### Minor Changes
+
+- break: add `allow_copying_empty_string` to `Copy_To_Clipboard` and change its default to false ([e2ef554](https://github.com/ryanatkn/fuz/commit/e2ef554))
+
+## 0.132.5
+
+### Patch Changes
+
+- improve inline `Svg` rendering ([612f4dc](https://github.com/ryanatkn/fuz/commit/612f4dc))
+
+## 0.132.4
+
+### Patch Changes
+
+- add logos for AI providers ([#65](https://github.com/ryanatkn/fuz/pull/65))
+
+## 0.132.3
+
+### Patch Changes
+
+- improve `Community_Links` ([25fe36b](https://github.com/ryanatkn/fuz/commit/25fe36b))
+
+## 0.132.2
+
+### Patch Changes
+
+- improve `Copy_To_Clipboard` ([#64](https://github.com/ryanatkn/fuz/pull/64))
+
+## 0.132.1
+
+### Patch Changes
+
+- add `onerror` prop to `Paste_From_Clipboard` ([68e3c3e](https://github.com/ryanatkn/fuz/commit/68e3c3e))
+- fix `.icon_button` for `Copy_To_Clipboard` ([3b2c0c1](https://github.com/ryanatkn/fuz/commit/3b2c0c1))
+
+## 0.132.0
+
+### Minor Changes
+
+- remove classes from props interfaces for attrs ([#63](https://github.com/ryanatkn/fuz/pull/63))
+- update ([#63](https://github.com/ryanatkn/fuz/pull/63))
+
+  - change `Copy_To_Clipboard` to pass a status to children
+  - change `onclick` to `oncopy`
+
+### Patch Changes
+
+- add `Paste_From_Clipboard` ([#63](https://github.com/ryanatkn/fuz/pull/63))
+
+## 0.131.6
+
+### Patch Changes
+
+- remove hci.social Mastodon link ([88f1927](https://github.com/ryanatkn/fuz/commit/88f1927))
+- improve `Copy_To_Clipboard` style ([#62](https://github.com/ryanatkn/fuz/pull/62))
+
+## 0.131.5
+
+### Patch Changes
+
+- remove funding from `Community_Links` ([e5dab77](https://github.com/ryanatkn/fuz/commit/e5dab77))
+
+## 0.131.4
+
+### Patch Changes
+
+- tweak `Package_Detail` package metadata text ([38f009f](https://github.com/ryanatkn/fuz/commit/38f009f))
+
+## 0.131.3
+
+### Patch Changes
+
+- rearrange `Project_Links` ([cf2f5b9](https://github.com/ryanatkn/fuz/commit/cf2f5b9))
+
+## 0.131.2
+
+### Patch Changes
+
+- use Svelte's `on` in `Contextmenu_Root` instead of DOM event API ([#61](https://github.com/ryanatkn/fuz/pull/61))
+
+## 0.131.1
+
+### Patch Changes
+
+- remove Zzz from project links for now ([e342fd8](https://github.com/ryanatkn/fuz/commit/e342fd8))
+
+## 0.131.0
+
+### Minor Changes
+
+- replace `effect_skip` with `effect_with_count` ([#60](https://github.com/ryanatkn/fuz/pull/60))
+
+### Patch Changes
+
+- add `shrink` prop to `Svg` ([fc28782](https://github.com/ryanatkn/fuz/commit/fc28782))
+
 ## 0.130.5
 
 ### Patch Changes

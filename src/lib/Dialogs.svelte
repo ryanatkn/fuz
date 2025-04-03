@@ -7,7 +7,7 @@
 	// TODO this is experimental
 
 	interface Props {
-		dialogs: Dialog_Params[];
+		dialogs: Array<Dialog_Params>;
 		onclose?: () => void;
 		children?: Snippet<[dialog: Dialog_Params]>;
 	}

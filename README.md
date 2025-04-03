@@ -1,18 +1,18 @@
-# `@ryanatkn/fuz`
+# Fuz
 
 [<img src="static/logo.svg" alt="a friendly brown spider facing you" align="right" width="192" height="192">](https://www.fuz.dev/)
 
 > friendly user zystem 🧶 [fuz.dev](https://www.fuz.dev/)
 
 Fuz is a [Svelte](https://svelte.dev/) UI library
-with components and helpers for making friendly and helpful websites.
+with components and helpers for making modern websites.
 It's in early alpha and it will go through many breaking changes.
 
-Fuz is being made to support [Zzz](https://www.zzzbot.dev/)
-and [my other projects](https://www.ryanatkn.com/)
+Fuz is being made to support
+[my other projects](https://www.ryanatkn.com/)
 that focus on end-users.
 Fuz emphasizes capability and efficiency and tries to be simple for those goals.
-Compared to most UI libraries, Fuz has fewer features and more opinions.
+Compared to most UI libraries, Fuz has fewer conventional features and more opinions.
 
 To learn more see [the docs](https://www.fuz.dev/library) and [contributing.md](contributing.md).
 Feel free to take the ideas and code for your own purposes.

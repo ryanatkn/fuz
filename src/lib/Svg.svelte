@@ -8,20 +8,20 @@
 		 * This is an escape hatch for non-`path` markup -
 		 * generally, you should instead use the `paths` property to avoid security/CSP implications.
 		 */
-		raw?: string;
+		raw?: string | null;
 		/**
 		 * List of svg `path` attribute objects. The `d` attribute is required.
 		 */
-		paths?: Array<{d: string} & SvelteHTMLElements['path']>;
-		attrs?: SvelteHTMLElements['svg'];
-		fill?: string;
-		width?: string;
-		height?: string;
-		label?: string;
+		paths?: Array<{d: string} & SvelteHTMLElements['path']> | null;
+		attrs?: SvelteHTMLElements['svg'] | null;
+		fill?: string | null;
+		width?: string | null;
+		height?: string | null;
+		label?: string | null;
 		/**
 		 * Defaults to `"0 0 100 100"`.
 		 */
-		viewBox?: string;
+		viewBox?: string | null;
 	}
 </script>
 
@@ -45,12 +45,28 @@
 		 */
 		height?: string;
 		label?: string;
+		/**
+		 * Renders the SVG as an inline block with spacing appropriate for text. Defaults to `false`.
+		 */
 		inline?: boolean;
-		classes?: string;
+		/**
+		 * Flex shrink behavior? Defaults to `true`.
+		 */
+		shrink?: boolean;
 		attrs?: SvelteHTMLElements['svg'];
 	}
 
-	const {data, fill, size, width, height, label, inline, classes, attrs}: Props = $props();
+	const {
+		data,
+		fill,
+		size = 'var(--size, auto)',
+		width,
+		height,
+		label,
+		inline,
+		shrink = true,
+		attrs,
+	}: Props = $props();
 
 	const final_fill = $derived(fill ?? data.fill ?? 'var(--text_color, #000)'); // can be overridden by each path's `fill` attribute
 	const final_width = $derived(width ?? size); // TODO @many default value? `100%` or omitted or something else?
@@ -69,11 +85,13 @@
 	{...data.attrs}
 	{...attrs}
 	aria-label={label ?? data.label}
-	{style}
 	style:width={final_width}
 	style:height={final_height}
-	class={classes}
-	class:inline
+	style:display={inline ? 'inline-block' : undefined}
+	style:position={inline ? 'relative' : undefined}
+	style:top={inline ? '0.1em' : undefined}
+	style:flex-shrink={shrink ? 1 : 0}
+	{style}
 >
 	{#if data.raw}{@html data.raw}{/if}<!-- eslint-disable-line svelte/no-at-html-tags -->
 	{#if data.paths}
@@ -82,10 +100,3 @@
 		{/each}
 	{/if}
 </svg>
-
-<style>
-	.inline {
-		display: inline-block;
-		vertical-align: middle;
-	}
-</style>

@@ -19,7 +19,7 @@
 		create_theme_style_html,
 		Themer,
 	} from '$lib/theme.svelte.js';
-	import {effect_skip} from '$lib/rune_helpers.svelte.js';
+	import {effect_with_count} from '$lib/rune_helpers.svelte.js';
 
 	interface Props {
 		sync_color_scheme?: typeof default_sync_color_scheme;
@@ -96,19 +96,19 @@
 	const theme_style_html = $derived(style ? create_theme_style_html(style) : null);
 	const theme_setup_script = $derived(create_theme_setup_script(color_scheme_fallback));
 
-	effect_skip((skip) => {
+	effect_with_count((count) => {
 		const v = themer.color_scheme;
-		if (skip) return;
+		if (count === 1) return;
 		sync_color_scheme(v);
 	});
-	effect_skip((skip) => {
+	effect_with_count((count) => {
 		const v = themer.color_scheme;
-		if (skip) return;
+		if (count === 1) return;
 		save_color_scheme(v); // helper may change, so is separate from `sync_color_scheme`
 	});
-	effect_skip((skip) => {
+	effect_with_count((count) => {
 		const v = themer.theme;
-		if (skip) return;
+		if (count === 1) return;
 		save_theme(v);
 	});
 </script>

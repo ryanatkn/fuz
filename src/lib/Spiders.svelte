@@ -16,7 +16,7 @@
 	import {fuz_logo} from '$lib/logos.js';
 
 	interface Props {
-		spiders?: string[]; // for now, just colors
+		spiders?: Array<string>; // for now, just colors
 		seed?: unknown;
 		random?: typeof Math.random;
 	}
