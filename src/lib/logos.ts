@@ -1,5 +1,7 @@
 import type {Svg_Data} from '$lib/Svg.svelte';
 
+// TODO these can be optimized during builds, helpers and gen files?
+
 /*
 
 Logo colors are the midpoint between the light and dark versions of color variant 5:
