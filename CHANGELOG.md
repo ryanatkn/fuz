@@ -1,5 +1,12 @@
 # @ryanatkn/fuz
 
+## 0.135.0
+
+### Minor Changes
+
+- break: rework `Pending_Animation` to support `inline` variants and custom attrs ([#68](https://github.com/ryanatkn/fuz/pull/68))
+- break: automatic `Svg` sizing - the `size` prop now has a default that uses `--size` ([#66](https://github.com/ryanatkn/fuz/pull/66))
+
 ## 0.134.0
 
 ### Minor Changes
