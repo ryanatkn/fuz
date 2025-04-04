@@ -20,6 +20,8 @@
 	export const focus = (options?: FocusOptions): void => el?.focus(options);
 
 	// TODO maybe this shouldn't disable? just visually look disabled, maybe with `.disabled`?
+
+	// TODO forward props to Pending_Animation
 </script>
 
 <button
