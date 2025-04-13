@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.136.1
+
+### Patch Changes
+
+- fix a11y for `Contextmenu_Root` ([820d1b1](https://github.com/ryanatkn/fuz/commit/820d1b1))
+
 ## 0.136.0
 
 ### Minor Changes
