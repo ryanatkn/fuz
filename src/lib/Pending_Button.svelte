@@ -10,10 +10,11 @@
 		title?: string;
 		disabled?: boolean;
 		attrs?: any;
+		animation?: Snippet;
 		children: Snippet;
 	}
 
-	const {pending, onclick, running, title, disabled, attrs, children}: Props = $props();
+	const {pending, onclick, running, title, disabled, attrs, animation, children}: Props = $props();
 
 	let el: HTMLButtonElement | undefined = $state();
 
@@ -36,7 +37,11 @@
 	</span>
 	{#if pending}
 		<span class="animation">
-			<Pending_Animation {running} />
+			{#if animation}
+				{@render animation()}
+			{:else}
+				<Pending_Animation {running} />
+			{/if}
 		</span>
 	{/if}
 </button>

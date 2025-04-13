@@ -32,7 +32,7 @@ export function create_context<T>(fallback?: () => T): {
 	const key = Symbol();
 	const maybe_get = () => {
 		const value: T | undefined = getContext(key); // treat `null` as a valid value - the `typescript-eslint` rule below is bugged because `??` would clobber nulls, see issue https://github.com/typescript-eslint/typescript-eslint/issues/7842
-		return value === undefined ? fallback?.() : value; // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
+		return value === undefined ? fallback?.() : value;
 	};
 	return {
 		get: (error_message?: string) => {

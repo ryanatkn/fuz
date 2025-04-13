@@ -12,6 +12,8 @@
 	const pkg = pkg_context.get();
 </script>
 
+<!-- eslint-disable svelte/no-useless-mustaches -->
+
 <Tome_Content {tome}>
 	<section>
 		<p>
