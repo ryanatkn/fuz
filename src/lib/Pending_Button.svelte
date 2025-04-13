@@ -10,18 +10,17 @@
 		title?: string;
 		disabled?: boolean;
 		attrs?: any;
+		animation?: Snippet;
 		children: Snippet;
 	}
 
-	const {pending, onclick, running, title, disabled, attrs, children}: Props = $props();
+	const {pending, onclick, running, title, disabled, attrs, animation, children}: Props = $props();
 
 	let el: HTMLButtonElement | undefined = $state();
 
 	export const focus = (options?: FocusOptions): void => el?.focus(options);
 
 	// TODO maybe this shouldn't disable? just visually look disabled, maybe with `.disabled`?
-
-	// TODO forward props to Pending_Animation
 </script>
 
 <button
@@ -38,7 +37,11 @@
 	</span>
 	{#if pending}
 		<span class="animation">
-			<Pending_Animation {running} />
+			{#if animation}
+				{@render animation()}
+			{:else}
+				<Pending_Animation {running} />
+			{/if}
 		</span>
 	{/if}
 </button>
