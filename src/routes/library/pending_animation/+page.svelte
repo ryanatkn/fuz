@@ -25,6 +25,8 @@
 	};
 </script>
 
+<!-- eslint-disable svelte/no-useless-mustaches -->
+
 <Tome_Content {tome}>
 	<section>
 		<!-- TODO make this a generic data-driven helper -->

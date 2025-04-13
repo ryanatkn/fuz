@@ -14,6 +14,8 @@
 	let value_from_oninput: number | undefined = $state();
 </script>
 
+<!-- eslint-disable svelte/no-useless-mustaches -->
+
 <Tome_Content {tome}>
 	<section>
 		<Code content={`import Hue_Input from '@ryanatkn/fuz/Hue_Input.svelte';`} lang="ts" />

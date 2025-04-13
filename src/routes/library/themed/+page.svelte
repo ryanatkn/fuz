@@ -28,6 +28,8 @@
 	let editing_theme: null | Theme = $state(null);
 </script>
 
+<!-- eslint-disable svelte/no-useless-mustaches -->
+
 <Tome_Content {tome}>
 	<section class="theme">
 		<p>

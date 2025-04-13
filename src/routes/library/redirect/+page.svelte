@@ -10,6 +10,8 @@
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
 </script>
 
+<!-- eslint-disable svelte/no-useless-mustaches -->
+
 <Tome_Content {tome}>
 	<section>
 		<p>
