@@ -39,10 +39,10 @@ export const package_json = {
 	peerDependenciesMeta: {'@ryanatkn/gro': {optional: true}},
 	devDependencies: {
 		'@changesets/changelog-git': '^0.2.1',
-		'@ryanatkn/belt': '^0.30.1',
+		'@ryanatkn/belt': '^0.30.2',
 		'@ryanatkn/eslint-config': '^0.8.0',
-		'@ryanatkn/fuz_code': '^0.21.0',
-		'@ryanatkn/gro': '^0.150.0',
+		'@ryanatkn/fuz_code': '^0.22.0',
+		'@ryanatkn/gro': '^0.150.1',
 		'@ryanatkn/moss': '^0.24.3',
 		'@sveltejs/adapter-static': '^3.0.8',
 		'@sveltejs/kit': '^2.20.5',
