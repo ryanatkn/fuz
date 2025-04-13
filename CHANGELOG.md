@@ -1,5 +1,15 @@
 # @ryanatkn/fuz
 
+## 0.136.0
+
+### Minor Changes
+
+- bump required node version to >=22.11 ([#69](https://github.com/ryanatkn/fuz/pull/69))
+
+### Patch Changes
+
+- add `animation` prop to customize `Pending_Button` ([#69](https://github.com/ryanatkn/fuz/pull/69))
+
 ## 0.135.0
 
 ### Minor Changes
