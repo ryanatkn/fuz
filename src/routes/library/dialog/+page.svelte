@@ -22,7 +22,7 @@
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
 
 	let opened = $state(false);
-	let dialog_overflowing_opened = $state(false); // TODO BLOCK broken how?
+	let dialog_overflowing_opened = $state(false);
 	let dialog_layout_page_opened = $state(false);
 	let dialog_nested_1_opened = $state(false);
 	let dialog_nested_2_opened = $state(false);
@@ -120,7 +120,7 @@
 			<div class="box">
 				<div class="pane p_xl">
 					<h1>attention</h1>
-					{#each {length: 120} as i (i)}
+					{#each {length: 120} as _, i (i)}
 						<p>this is a dialog that overflows vertically</p>
 					{/each}
 					<button type="button" onclick={close}>close</button>
