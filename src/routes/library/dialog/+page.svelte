@@ -22,7 +22,7 @@
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
 
 	let opened = $state(false);
-	let dialog_overflowing_opened = $state(false);
+	let dialog_overflowing_opened = $state(false); // TODO BLOCK broken how?
 	let dialog_layout_page_opened = $state(false);
 	let dialog_nested_1_opened = $state(false);
 	let dialog_nested_2_opened = $state(false);
