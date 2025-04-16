@@ -385,6 +385,10 @@ a.chip {
 .ml_sm {
 	margin-left: var(--space_sm);
 }
+.mx_auto {
+	margin-left: auto;
+	margin-right: auto;
+}
 .mx_xs3 {
 	margin-left: var(--space_xs3);
 	margin-right: var(--space_xs3);

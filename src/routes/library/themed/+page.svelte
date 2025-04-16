@@ -111,7 +111,9 @@
 			detection with
 			<Mdn_Link path="Web/CSS/@media/prefers-color-scheme" />, and users can also set it directly:
 		</p>
-		<Color_Scheme_Input />
+		<div class="mb_lg">
+			<Color_Scheme_Input />
+		</div>
 		<Code
 			content={`import Color_Scheme_Input from '@ryanatkn/fuz/Color_Scheme_Input.svelte';`}
 			lang="ts"
