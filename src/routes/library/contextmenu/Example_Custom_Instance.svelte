@@ -17,6 +17,8 @@
 	let toggled = $state(false);
 </script>
 
+<!-- eslint-disable svelte/no-useless-mustaches -->
+
 <Contextmenu_Root {contextmenu} scoped>
 	<Tome_Section>
 		<Tome_Section_Header text="Custom instance" />

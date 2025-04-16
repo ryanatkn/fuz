@@ -75,7 +75,7 @@
 						{@render repo_name(pkg.repo_name)}
 					{:else}
 						<div class="repo_name">
-							{pkg.repo_name}{#if package_json.glyph}{' '}{package_json.glyph}{/if}
+							{pkg.repo_name}{#if package_json.glyph}&nbsp;{package_json.glyph}{/if}
 						</div>
 					{/if}
 				</header>
@@ -197,7 +197,7 @@
 							<a class="chip" href={source_url}>{module_name}</a>
 							{#if pkg_module?.declarations.length}
 								<ul class="declarations unstyled">
-									{#each pkg_module.declarations as { name, kind }}
+									{#each pkg_module.declarations as { name, kind } (name)}
 										<li class="declaration chip {kind}_declaration">
 											{name}
 										</li>

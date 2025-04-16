@@ -201,24 +201,26 @@
 
 {#if show_about_dialog}
 	<Dialog onclose={() => (show_about_dialog = false)}>
-		<div class="pane p_xl box text_align_center">
-			<h1>About Fuz</h1>
-			<blockquote>Svelte UI library</blockquote>
-			<blockquote>
-				free and open source at<br /><a href="https://github.com/ryanatkn/fuz"
-					>github.com/ryanatkn/fuz</a
+		<div class="mx_auto box">
+			<div class="pane p_xl text_align_center">
+				<h1>About Fuz</h1>
+				<blockquote>Svelte UI library</blockquote>
+				<blockquote>
+					free and open source at<br /><a href="https://github.com/ryanatkn/fuz"
+						>github.com/ryanatkn/fuz</a
+					>
+				</blockquote>
+				<code class="p_md mb_lg"
+					>npm i -D <a href="https://www.npmjs.com/package/@fuz.dev/fuz_contextmenu"
+						>@fuz.dev/fuz_contextmenu</a
+					></code
 				>
-			</blockquote>
-			<code class="p_md mb_lg"
-				>npm i -D <a href="https://www.npmjs.com/package/@fuz.dev/fuz_contextmenu"
-					>@fuz.dev/fuz_contextmenu</a
-				></code
-			>
-			<div class="p_xl box">
-				<h2>Color Scheme</h2>
-				<Color_Scheme_Input />
-				<h2>Theme</h2>
-				<Theme_Input />
+				<div class="p_xl box">
+					<h2>Color scheme</h2>
+					<Color_Scheme_Input />
+					<h2>Theme</h2>
+					<Theme_Input />
+				</div>
 			</div>
 		</div>
 	</Dialog>

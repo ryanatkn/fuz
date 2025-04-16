@@ -12,9 +12,7 @@
 	let pending_2 = $state(true);
 </script>
 
-<!-- TODO maybe Pending_Button shouldn't be a component? action? Or renderless maybe?
-		Extract a common thing to make arbitrary things not change width.
-	-->
+<!-- eslint-disable svelte/no-useless-mustaches -->
 
 <Tome_Content {tome}>
 	<section>

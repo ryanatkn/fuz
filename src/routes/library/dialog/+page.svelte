@@ -120,7 +120,7 @@
 			<div class="box">
 				<div class="pane p_xl">
 					<h1>attention</h1>
-					{#each {length: 120} as _}
+					{#each {length: 120} as _, i (i)}
 						<p>this is a dialog that overflows vertically</p>
 					{/each}
 					<button type="button" onclick={close}>close</button>
@@ -142,7 +142,7 @@
 							This is a <code>Dialog</code> with
 							<code
 								>layout="<select bind:value={selected_layout}
-									>{#each dialog_layouts as layout}
+									>{#each dialog_layouts as layout (layout)}
 										<option value={layout}>{layout}</option>
 									{/each}
 								</select>"</code
@@ -157,7 +157,7 @@
 							This is a <code>Dialog</code> with
 							<code
 								>layout="<select bind:value={selected_layout}
-									>{#each dialog_layouts as layout}
+									>{#each dialog_layouts as layout (layout)}
 										<option value={layout}>{layout}</option>
 									{/each}
 								</select>"</code
@@ -242,10 +242,8 @@
 	}}
 >
 	{#snippet children(dialog)}
-		<div class="box">
-			<div class="pane">
-				<dialog.Component {...dialog.props} />
-			</div>
+		<div class="pane p_md width_md mx_auto">
+			<dialog.Component {...dialog.props} />
 		</div>
 	{/snippet}
 </Dialogs>

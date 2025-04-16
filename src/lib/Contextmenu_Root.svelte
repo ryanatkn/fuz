@@ -344,9 +344,10 @@
 {/if}
 <!-- TODO Maybe animate a subtle highlight around the contextmenu as it appears? -->
 {#if contextmenu.opened}
-	<menu
+	<ul
 		class="contextmenu unstyled pane"
-		role="dialog"
+		role="menu"
+		aria-label="context menu"
 		tabindex="-1"
 		bind:this={el}
 		style:transform="translate3d({x}px, {y}px, 0)"
@@ -361,7 +362,7 @@
 				{@render text_entry(p.props)}
 			{/if}
 		{/each}
-	</menu>
+	</ul>
 {/if}
 
 {#snippet link_entry(props: ComponentProps<typeof Contextmenu_Link_Entry>)}

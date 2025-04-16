@@ -15,6 +15,8 @@
 	// TODO add examples for colored buttons - visually they're broken because they look like selected buttons
 </script>
 
+<!-- eslint-disable svelte/no-useless-mustaches -->
+
 <Tome_Content {tome}>
 	<section>
 		<!-- TODO make this a generic data-driven helper -->

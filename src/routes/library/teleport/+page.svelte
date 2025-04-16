@@ -14,6 +14,8 @@
 	let teleport_2: HTMLElement | undefined = $state();
 </script>
 
+<!-- eslint-disable svelte/no-useless-mustaches -->
+
 <Tome_Content {tome}>
 	<section>
 		<p>

@@ -76,7 +76,7 @@
 			<!-- TODO ideally this wouldn't duplicate metadata like descriptions, but adding fuz_gitops to this repo is heavy -->
 			<h2 class="mt_0 mb_xl2 px_md">other packages</h2>
 			<menu class="unstyled size_lg">
-				{#each project_items as project_item}
+				{#each project_items as project_item (project_item.name)}
 					{@render package_thumbnail(project_item)}
 				{/each}
 			</menu>
