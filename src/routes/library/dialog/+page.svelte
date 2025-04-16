@@ -242,10 +242,8 @@
 	}}
 >
 	{#snippet children(dialog)}
-		<div class="box">
-			<div class="pane">
-				<dialog.Component {...dialog.props} />
-			</div>
+		<div class="pane p_md width_md mx_auto">
+			<dialog.Component {...dialog.props} />
 		</div>
 	{/snippet}
 </Dialogs>
