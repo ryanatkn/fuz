@@ -36,7 +36,7 @@
 		/**
 		 * @default true
 		 */
-		active?: boolean;
+		active?: boolean; // TODO remove this? maybe have a bindable `show` prop?
 		/**
 		 * If provided, prevents clicks that would close the dialog
 		 * from bubbling past any elements matching this selector.
