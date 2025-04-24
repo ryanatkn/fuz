@@ -56,7 +56,7 @@ export const sync_color_scheme = (color_scheme: Color_Scheme | null): void => {
 	}
 };
 
-export const COLOR_SCHEME_STORAGE_KEY = 'color-scheme';
+export const COLOR_SCHEME_STORAGE_KEY = 'fuz:color-scheme';
 
 // TODO @many refactor with a util
 export const save_color_scheme = (
