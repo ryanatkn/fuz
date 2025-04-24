@@ -1,4 +1,4 @@
-// TODO BLOCK move this where? customize with a filter/mapping callback?
+// TODO BLOCK move this where, belt? customize with a filter/mapping callback?
 
 /**
  * Generates a strict Content Security Policy with default-src 'none'
