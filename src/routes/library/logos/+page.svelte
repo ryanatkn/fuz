@@ -41,7 +41,7 @@
 	<section>
 		<ul class="flex flex_wrap justify_content_center gap_lg text_align_center unstyled">
 			<li>
-				<a href="https://www.zzzbot.dev/"><Svg data={zzz_logo} size="var(--icon_size_xl3)" /></a>
+				<a href="https://www.zzz.software/"><Svg data={zzz_logo} size="var(--icon_size_xl3)" /></a>
 				<Code content={`<Svg data={zzz_logo} />`} />
 			</li>
 			<li>

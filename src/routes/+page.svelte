@@ -54,7 +54,7 @@
 						have many breaking changes.
 					</p>
 					<p>
-						Fuz is being made to support <a href="https://www.zzzbot.dev/">Zzz</a> and
+						Fuz is being made to support <a href="https://www.zzz.software/">Zzz</a> and
 						<a href="https://www.ryanatkn.com/table">my other projects</a>
 						that focus on end-users. Fuz emphasizes capability and efficiency and tries to be simple
 						for those goals. Compared to most UI libraries, Fuz has fewer features and more opinions,

@@ -9,7 +9,7 @@
 <!-- <a
 	class="project_link"
 	title="Zzz - bot control hq"
-	href="https://www.zzzbot.dev/"><Svg data={zzz_logo} {size} /><span class="name">Zzz</span></a
+	href="https://www.zzz.software/"><Svg data={zzz_logo} {size} /><span class="name">Zzz</span></a
 > -->
 <a
 	class="project_link"
