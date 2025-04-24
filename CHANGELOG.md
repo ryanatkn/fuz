@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.136.2
+
+### Patch Changes
+
+- zzz.software ([98dab44](https://github.com/ryanatkn/fuz/commit/98dab44))
+
 ## 0.136.1
 
 ### Patch Changes
