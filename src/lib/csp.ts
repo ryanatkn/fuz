@@ -111,16 +111,14 @@ export const create_csp_directives = <
 
 			if (computed_value !== undefined) {
 				// No need to clone primitives, only clone arrays
-				result[k] = Array.isArray(computed_value)
-					? Object.freeze(computed_value.slice())
-					: computed_value;
+				result[k] = Array.isArray(computed_value) ? computed_value.slice() : computed_value;
 			} else {
 				// If function returns undefined, remove from result
 				delete result[k]; // eslint-disable-line @typescript-eslint/no-dynamic-delete
 			}
 		} else {
 			// Direct value assignment (overrides trusted sources)
-			result[k] = Array.isArray(value_or_fn) ? Object.freeze(value_or_fn.slice()) : value_or_fn;
+			result[k] = Array.isArray(value_or_fn) ? value_or_fn.slice() : value_or_fn;
 		}
 	}
 
