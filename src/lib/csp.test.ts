@@ -344,41 +344,6 @@ test('generate_csp throws on invalid trusted_directive_keys', () => {
 	);
 });
 
-test('generate_csp with custom trusted directive keys type checking', () => {
-	// Valid directive keys - all in TRUSTED_CSP_DIRECTIVE_KEYS
-	const valid_directives: Array<Trusted_Csp_Directive> = ['script-src', 'connect-src', 'img-src'];
-
-	// This should compile and run without errors
-	create_csp_directives({
-		trusted_sources: 'trusted.domain',
-		trusted_directive_keys: valid_directives,
-	});
-
-	// Runtime type checking for invalid directive
-	assert.throws(
-		() =>
-			create_csp_directives({
-				trusted_sources: 'trusted.domain',
-				// @ts-expect-error - Invalid directive key
-				trusted_directive_keys: ['not-a-valid-directive'],
-			}),
-		/Invalid CSP trusted directive key: 'not-a-valid-directive'/,
-		'Should throw on invalid directive keys at runtime',
-	);
-
-	// Runtime type checking for directive not in TRUSTED_CSP_DIRECTIVE_KEYS
-	assert.throws(
-		() =>
-			create_csp_directives({
-				trusted_sources: 'trusted.domain',
-				// @ts-expect-error - Invalid directive key
-				trusted_directive_keys: ['default-src'],
-			}),
-		/Invalid CSP trusted directive key: 'default-src'/,
-		'Should throw on directive keys not in TRUSTED_CSP_DIRECTIVE_KEYS',
-	);
-});
-
 test('generate_csp with directive override', () => {
 	const csp = create_csp_directives({
 		trusted_sources: 'trusted.domain',
