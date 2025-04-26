@@ -302,7 +302,7 @@ test('create_csp_directives with nonce and hash trusted_sources', () => {
 	assert.equal(csp['frame-ancestors'], ['self', SHA_HASH, NONCE]);
 });
 
-test('create_csp_directives trusted_sources with custom directive keys', () => {
+test('create_csp_directives trusted_sources with custom directives', () => {
 	const csp = create_csp_directives({
 		trusted_sources: TRUSTED,
 		trusted_directives: ['script-src', 'connect-src'],
@@ -323,11 +323,11 @@ test('create_csp_directives throws on non-trusted directives in trusted_directiv
 		() =>
 			create_csp_directives({
 				trusted_sources: TRUSTED,
-				// @ts-expect-error - Invalid directive key
+				// @ts-expect-error - Invalid directive
 				trusted_directives: ['script-src', 'default-src'],
 			}),
-		/Invalid CSP trusted directive key: 'default-src'/,
-		'Should throw when non-trusted directive keys are provided',
+		/Invalid CSP trusted directive: 'default-src'/,
+		'Should throw when non-trusted directives are provided',
 	);
 });
 
@@ -336,11 +336,11 @@ test('create_csp_directives throws on invalid trusted_directives', () => {
 		() =>
 			create_csp_directives({
 				trusted_sources: TRUSTED,
-				// @ts-expect-error - Invalid directive key
+				// @ts-expect-error - Invalid directive
 				trusted_directives: ['not-a-directive'],
 			}),
-		/Invalid CSP trusted directive key: 'not-a-directive'/,
-		'Should throw on invalid directive keys',
+		/Invalid CSP trusted directive: 'not-a-directive'/,
+		'Should throw on invalid directives',
 	);
 });
 
@@ -613,6 +613,60 @@ test('create_csp_directives with empty trusted_directives array', () => {
 	assert.equal(csp['script-src'], ['self']);
 	assert.equal(csp['connect-src'], ['self']);
 	assert.equal(csp['img-src'], ['self', 'data:']);
+});
+
+test("create_csp_directives should not add trusted sources to directives with value ['none']", () => {
+	// First, create a custom defaults with some directives set to ['none']
+	const custom_defaults: Csp_Directives = {
+		'script-src': ['none'], // Override the default of ['self'] with ['none']
+		'connect-src': ['self'], // Keep as ['self']
+		'img-src': ['none'], // Override with ['none']
+		'style-src': ['none'], // Override with ['none']
+	};
+
+	const csp = create_csp_directives({
+		defaults: custom_defaults,
+		trusted_sources: TRUSTED,
+		trusted_directives: ['script-src', 'connect-src', 'img-src', 'style-src'],
+	});
+
+	// Directives with ['none'] should remain ['none'], trusted sources should not be added
+	assert.equal(csp['script-src'], ['none'], "script-src should remain ['none']");
+	assert.equal(csp['img-src'], ['none'], "img-src should remain ['none']");
+	assert.equal(csp['style-src'], ['none'], "style-src should remain ['none']");
+
+	// Directives not set to ['none'] should still get trusted sources
+	assert.equal(csp['connect-src'], ['self', TRUSTED], 'connect-src should get trusted sources');
+});
+
+test("create_csp_directives with function config can override directives with value ['none']", () => {
+	// Create a custom defaults with some directives set to ['none']
+	const custom_defaults: Csp_Directives = {
+		'default-src': ['none'],
+		'script-src': ['none'],
+	};
+
+	const csp = create_csp_directives({
+		defaults: custom_defaults,
+		trusted_sources: TRUSTED,
+		config: {
+			// Function should be able to override ['none'] and will receive the original ['none']
+			'script-src': (defaults) => {
+				assert.equal(defaults, ['none'], "Function should receive the original ['none'] value");
+				return ['self', TRUSTED];
+			},
+		},
+	});
+
+	// Function override should work even for ['none'] directives
+	assert.equal(
+		csp['script-src'],
+		['self', TRUSTED],
+		"Function should be able to override ['none']",
+	);
+
+	// Other ['none'] directives should remain unchanged
+	assert.equal(csp['default-src'], ['none'], "default-src should remain ['none']");
 });
 
 test.run();

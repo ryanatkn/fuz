@@ -75,7 +75,7 @@ export const create_csp_directives = <
 			// Ensure the key is actually in `TRUSTED_CSP_DIRECTIVES`
 			if (!TRUSTED_CSP_DIRECTIVES.includes(key)) {
 				throw new Error(
-					`Invalid CSP trusted directive key: '${key}'. Must be one of: ${TRUSTED_CSP_DIRECTIVES.join(', ')}`,
+					`Invalid CSP trusted directive: '${key}'. Must be one of: ${TRUSTED_CSP_DIRECTIVES.join(', ')}`,
 				);
 			}
 
@@ -84,7 +84,9 @@ export const create_csp_directives = <
 				if (!Array.isArray(value)) continue;
 				// Only add trusted sources if the directive isn't being completely overridden in config
 				if (!(key in config) || typeof config[key] === 'function') {
-					// TODO BLOCK what if the default is `['none']`?
+					// Skip adding trusted sources if the directive is explicitly set to 'none' for security
+					if (value.includes('none')) continue;
+
 					(result as any)[key] = [...value, ...trusted_sources];
 				}
 			}
