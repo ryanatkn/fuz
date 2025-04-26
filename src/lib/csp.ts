@@ -51,9 +51,6 @@ export interface Csp_Options<D extends Partial<Csp_Directives> = typeof csp_defa
 
 /**
  * Generates a Content Security Policy configuration by combining defaults with custom settings.
- *
- * @param options - Configuration options for CSP generation
- * @returns Final CSP directives after applying all configuration
  */
 export const generate_csp = <D extends Partial<Csp_Directives> = typeof csp_defaults_strict>(
 	options?: Csp_Options<D>,
