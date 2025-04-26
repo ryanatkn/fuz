@@ -320,6 +320,10 @@
       "svelte": "./dist/Spiders.svelte",
       "default": "./dist/Spiders.svelte"
     },
+    "./storage.js": {
+      "types": "./dist/storage.d.ts",
+      "default": "./dist/storage.js"
+    },
     "./Svg.svelte": {
       "types": "./dist/Svg.svelte.d.ts",
       "svelte": "./dist/Svg.svelte",
@@ -335,14 +339,14 @@
       "svelte": "./dist/Theme_Input.svelte",
       "default": "./dist/Theme_Input.svelte"
     },
-    "./themer.svelte.js": {
-      "types": "./dist/themer.svelte.d.ts",
-      "default": "./dist/themer.svelte.js"
-    },
     "./Themed.svelte": {
       "types": "./dist/Themed.svelte.d.ts",
       "svelte": "./dist/Themed.svelte",
       "default": "./dist/Themed.svelte"
+    },
+    "./themer.svelte.js": {
+      "types": "./dist/themer.svelte.d.ts",
+      "default": "./dist/themer.svelte.js"
     },
     "./Tome_Content.svelte": {
       "types": "./dist/Tome_Content.svelte.d.ts",

@@ -281,6 +281,7 @@ export const package_json = {
 			svelte: './dist/Spiders.svelte',
 			default: './dist/Spiders.svelte',
 		},
+		'./storage.js': {types: './dist/storage.d.ts', default: './dist/storage.js'},
 		'./Svg.svelte': {
 			types: './dist/Svg.svelte.d.ts',
 			svelte: './dist/Svg.svelte',
@@ -296,12 +297,12 @@ export const package_json = {
 			svelte: './dist/Theme_Input.svelte',
 			default: './dist/Theme_Input.svelte',
 		},
-		'./themer.svelte.js': {types: './dist/themer.svelte.d.ts', default: './dist/themer.svelte.js'},
 		'./Themed.svelte': {
 			types: './dist/Themed.svelte.d.ts',
 			svelte: './dist/Themed.svelte',
 			default: './dist/Themed.svelte',
 		},
+		'./themer.svelte.js': {types: './dist/themer.svelte.d.ts', default: './dist/themer.svelte.js'},
 		'./Tome_Content.svelte': {
 			types: './dist/Tome_Content.svelte.d.ts',
 			svelte: './dist/Tome_Content.svelte',
@@ -482,9 +483,17 @@ export const src_json = {
 			declarations: [{name: 'effect_with_count', kind: 'function'}],
 		},
 		'./Spiders.svelte': {path: 'Spiders.svelte', declarations: []},
+		'./storage.js': {
+			path: 'storage.ts',
+			declarations: [
+				{name: 'save_to_storage', kind: 'function'},
+				{name: 'load_from_storage', kind: 'function'},
+			],
+		},
 		'./Svg.svelte': {path: 'Svg.svelte', declarations: []},
 		'./Teleport.svelte': {path: 'Teleport.svelte', declarations: []},
 		'./Theme_Input.svelte': {path: 'Theme_Input.svelte', declarations: []},
+		'./Themed.svelte': {path: 'Themed.svelte', declarations: []},
 		'./themer.svelte.js': {
 			path: 'themer.svelte.ts',
 			declarations: [
@@ -493,14 +502,13 @@ export const src_json = {
 				{name: 'themer_context', kind: 'variable'},
 				{name: 'sync_color_scheme', kind: 'function'},
 				{name: 'COLOR_SCHEME_STORAGE_KEY', kind: 'variable'},
+				{name: 'THEME_STORAGE_KEY', kind: 'variable'},
 				{name: 'save_color_scheme', kind: 'function'},
 				{name: 'load_color_scheme', kind: 'function'},
-				{name: 'THEME_STORAGE_KEY', kind: 'variable'},
 				{name: 'save_theme', kind: 'function'},
 				{name: 'load_theme', kind: 'function'},
 			],
 		},
-		'./Themed.svelte': {path: 'Themed.svelte', declarations: []},
 		'./Tome_Content.svelte': {path: 'Tome_Content.svelte', declarations: []},
 		'./Tome_Header.svelte': {path: 'Tome_Header.svelte', declarations: []},
 		'./Tome_Link.svelte': {path: 'Tome_Link.svelte', declarations: []},
