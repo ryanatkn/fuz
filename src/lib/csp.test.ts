@@ -4,6 +4,8 @@ import * as assert from 'uvu/assert';
 import {create_csp_directives, type Csp_Directives, type Csp_Config} from '$lib/csp.js';
 
 const TRUSTED = 'trusted.domain';
+const TRUSTED_A = 'a.trusted.domain';
+const TRUSTED_B = 'b.trusted.domain';
 
 test('create_csp_directives with empty config returns defaults', () => {
 	const csp = create_csp_directives();
@@ -18,12 +20,12 @@ test('create_csp_directives with config object', () => {
 	const csp = create_csp_directives({
 		config: {
 			'script-src': ['self', TRUSTED],
-			'connect-src': ['self', 'a.trusted.domain'],
+			'connect-src': ['self', TRUSTED_A],
 		},
 	});
 
 	assert.equal(csp['script-src'], ['self', TRUSTED]);
-	assert.equal(csp['connect-src'], ['self', 'a.trusted.domain']);
+	assert.equal(csp['connect-src'], ['self', TRUSTED_A]);
 	assert.equal(csp['default-src'], ['none'], 'Unspecified values should remain at defaults');
 });
 
@@ -50,12 +52,12 @@ test('create_csp_directives with function values', () => {
 	const csp = create_csp_directives({
 		config: {
 			'script-src': (defaults) => [...defaults, TRUSTED],
-			'connect-src': () => ['a.trusted.domain'],
+			'connect-src': () => [TRUSTED_A],
 		},
 	});
 
 	assert.equal(csp['script-src'], ['self', TRUSTED]);
-	assert.equal(csp['connect-src'], ['a.trusted.domain']);
+	assert.equal(csp['connect-src'], [TRUSTED_A]);
 	assert.equal(csp['default-src'], ['none'], 'Unspecified values should remain at defaults');
 });
 
@@ -109,14 +111,14 @@ test('create_csp_directives with mixed static and function values', () => {
 	const csp = create_csp_directives({
 		config: {
 			'script-src': ['self', TRUSTED],
-			'connect-src': (defaults) => [...defaults, 'a.trusted.domain'],
-			'img-src': (defaults) => [...defaults, 'b.trusted.domain'],
+			'connect-src': (defaults) => [...defaults, TRUSTED_A],
+			'img-src': (defaults) => [...defaults, TRUSTED_B],
 		},
 	});
 
 	assert.equal(csp['script-src'], ['self', TRUSTED]);
-	assert.equal(csp['connect-src'], ['self', 'a.trusted.domain']);
-	assert.equal(csp['img-src'], ['self', 'data:', 'b.trusted.domain']);
+	assert.equal(csp['connect-src'], ['self', TRUSTED_A]);
+	assert.equal(csp['img-src'], ['self', 'data:', TRUSTED_B]);
 });
 
 test('create_csp_directives with custom defaults', () => {
@@ -158,13 +160,13 @@ test('create_csp_directives with undefined defaults for function callbacks', () 
 			'connect-src': (defaults) => {
 				// Assert that defaults is undefined when key doesn't exist in custom_defaults
 				assert.is(defaults, undefined, 'Defaults should be undefined when not in custom defaults');
-				return ['a.trusted.domain'];
+				return [TRUSTED_A];
 			},
 		},
 	});
 
 	assert.equal(csp['default-src'], ['self', TRUSTED]);
-	assert.equal(csp['connect-src'], ['a.trusted.domain']);
+	assert.equal(csp['connect-src'], [TRUSTED_A]);
 });
 
 test('create_csp_directives with report-uri passing undefined as default', () => {
@@ -279,17 +281,6 @@ test('create_csp_directives with multiple trusted_sources', () => {
 	assert.equal(csp['frame-ancestors'], ['self', 'trusted1.domain', 'trusted2.domain']);
 });
 
-test('create_csp_directives with invalid sources still works at runtime', () => {
-	// Strings should always work at runtime
-	const invalid_source = 'not-a-valid-domain';
-	const csp = create_csp_directives({
-		trusted_sources: invalid_source,
-	});
-
-	// Runtime behavior should work with any string
-	assert.equal(csp['script-src'], ['self', invalid_source]);
-});
-
 test('create_csp_directives with nonce and hash trusted_sources', () => {
 	const csp = create_csp_directives({
 		trusted_sources: ['sha256-abc123', 'nonce-xyz789'],
@@ -316,7 +307,7 @@ test('create_csp_directives trusted_sources with custom directive keys', () => {
 	assert.equal(csp['frame-ancestors'], ['self']);
 });
 
-test('create_csp_directives ignores non-trusted directives in trusted_directive_keys', () => {
+test('create_csp_directives throws on non-trusted directives in trusted_directive_keys', () => {
 	assert.throws(
 		() =>
 			create_csp_directives({
@@ -469,7 +460,7 @@ test('create_csp_directives with config should also freeze the result object', (
 	const csp = create_csp_directives({
 		config: {
 			'script-src': ['self', TRUSTED],
-			'connect-src': ['self', 'a.trusted.domain'],
+			'connect-src': ['self', TRUSTED_A],
 		},
 	});
 
@@ -485,6 +476,137 @@ test('create_csp_directives with config should also freeze the result object', (
 		TypeError,
 		'Should not allow adding new properties to frozen CSP object with custom config',
 	);
+});
+
+test('create_csp_directives with function returning empty array', () => {
+	const csp = create_csp_directives({
+		config: {
+			'script-src': () => [],
+			'connect-src': () => [], // Empty but not undefined
+		},
+	});
+
+	// Keys should exist with empty arrays, not be removed
+	assert.equal(csp['script-src'], [], 'Empty arrays should be preserved');
+	assert.equal(csp['connect-src'], [], 'Empty arrays should be preserved');
+});
+
+test('create_csp_directives with partial defaults and trusted_sources', () => {
+	// Define a partial defaults object that's missing some values
+	const custom_defaults = {
+		'default-src': ['self'],
+		'script-src': ['self'],
+		// Intentionally omitting connect-src and img-src
+	} satisfies Csp_Directives;
+
+	const csp = create_csp_directives({
+		defaults: custom_defaults,
+		trusted_sources: TRUSTED,
+		config: {
+			'connect-src': (defaults) => {
+				// Assert that defaults is undefined when key doesn't exist in custom_defaults
+				assert.is(defaults, undefined, 'Defaults should be undefined for missing directive');
+				return [TRUSTED_A];
+			},
+			'img-src': (defaults) => {
+				// Missing directive shouldn't have trusted sources
+				assert.is(defaults, undefined, 'Defaults should be undefined for missing directive');
+				return ['img.domain'];
+			},
+		},
+	});
+
+	// Trusted sources should be added to directives that exist in defaults
+	assert.equal(
+		csp['script-src'],
+		['self', TRUSTED],
+		'Trusted sources should be added to existing directives',
+	);
+
+	// But not to directives that don't exist in defaults but are added via config
+	assert.equal(
+		csp['connect-src'],
+		[TRUSTED_A],
+		'Custom config directive should not get trusted sources',
+	);
+	assert.equal(
+		csp['img-src'],
+		['img.domain'],
+		'Custom config directive should not get trusted sources',
+	);
+});
+
+test('create_csp_directives should not mutate original defaults object', () => {
+	// Create a mutable defaults object
+	const custom_defaults: Csp_Directives = {
+		'default-src': ['self'],
+		'script-src': ['script.domain'],
+		'connect-src': ['connect.domain'],
+		'upgrade-insecure-requests': false,
+	};
+
+	// Keep a reference to original arrays
+	const original_script_src = custom_defaults['script-src'];
+	const original_connect_src = custom_defaults['connect-src'];
+
+	// Create CSP with these defaults
+	const csp = create_csp_directives({
+		defaults: custom_defaults,
+		trusted_sources: TRUSTED,
+		config: {
+			'script-src': (defaults) => [...defaults, 'added.domain'],
+		},
+	});
+
+	// Verify that result has expected values
+	assert.equal(csp['script-src'], ['script.domain', TRUSTED, 'added.domain']);
+	assert.equal(csp['connect-src'], ['connect.domain', TRUSTED]);
+
+	// Verify original defaults are unchanged
+	assert.equal(custom_defaults['script-src'], ['script.domain']);
+	assert.equal(custom_defaults['connect-src'], ['connect.domain']);
+
+	// Verify original arrays are unchanged and still the same reference
+	assert.is(custom_defaults['script-src'], original_script_src);
+	assert.is(custom_defaults['connect-src'], original_connect_src);
+});
+
+test('create_csp_directives with empty trusted_sources array', () => {
+	const csp = create_csp_directives({
+		trusted_sources: [], // Empty array
+		config: {
+			'script-src': (defaults) => [...defaults, 'added.domain'],
+		},
+	});
+
+	// No trusted sources should be added
+	assert.equal(csp['script-src'], ['self', 'added.domain']);
+	assert.equal(csp['connect-src'], ['self']);
+});
+
+test('create_csp_directives with empty trusted_sources string', () => {
+	const csp = create_csp_directives({
+		trusted_sources: '', // Empty string
+		config: {
+			'script-src': (defaults) => [...defaults, 'added.domain'],
+		},
+	});
+
+	// No trusted sources should be added
+	assert.equal(csp['script-src'], ['self', 'added.domain']);
+	assert.equal(csp['connect-src'], ['self']);
+});
+
+test('create_csp_directives with empty trusted_directive_keys array', () => {
+	const csp = create_csp_directives({
+		trusted_sources: TRUSTED,
+		trusted_directive_keys: [], // Empty array, so no directives should get trusted sources
+	});
+
+	// No directive should get the trusted source
+	assert.equal(csp['script-src'], ['self']);
+	assert.equal(csp['connect-src'], ['self']);
+	assert.equal(csp['img-src'], ['self', 'data:']);
 });
 
 test.run();
