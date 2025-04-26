@@ -22,7 +22,7 @@ export type Csp_Config<D extends Partial<Csp_Directives> = Csp_Directives> = {
 };
 
 export interface Csp_Options<
-	D extends Partial<Csp_Directives> = typeof STRICT_CSP_DIRECTIVE_DEFAULTS,
+	D extends Partial<Csp_Directives> = typeof CSP_DIRECTIVES_STRICT_DEFAULTS,
 > {
 	/**
 	 * Custom CSP directive configuration that can override defaults with values or functions.
@@ -30,22 +30,22 @@ export interface Csp_Options<
 	config?: Csp_Config<D>;
 
 	/**
-	 * Base CSP directives. Defaults to `STRICT_CSP_DIRECTIVE_DEFAULTS`.
+	 * Base CSP directives. Defaults to `CSP_DIRECTIVES_STRICT_DEFAULTS`.
 	 */
 	defaults?: D;
 
 	/**
-	 * Sources to trust across relevant CSP directives listed in `trusted_directive_keys`.
+	 * Sources to trust across relevant CSP directives listed in `trusted_directives`.
 	 * Can include domains, hashes, or nonces.
 	 */
 	trusted_sources?: string | Array<string>;
 
 	/**
 	 * Customize which directives should have `trusted_sources` added.
-	 * Must use keys from `TRUSTED_CSP_DIRECTIVE_KEYS`.
-	 * Defaults to all values in `TRUSTED_CSP_DIRECTIVE_KEYS`.
+	 * Must use keys from `TRUSTED_CSP_DIRECTIVES`.
+	 * Defaults to all values in `TRUSTED_CSP_DIRECTIVES`.
 	 */
-	trusted_directive_keys?: ReadonlyArray<Trusted_Csp_Directive>;
+	trusted_directives?: ReadonlyArray<Trusted_Csp_Directive>;
 }
 
 /**
@@ -53,29 +53,29 @@ export interface Csp_Options<
  * combining strict defaults with custom settings.
  */
 export const create_csp_directives = <
-	D extends Partial<Csp_Directives> = typeof STRICT_CSP_DIRECTIVE_DEFAULTS,
+	D extends Partial<Csp_Directives> = typeof CSP_DIRECTIVES_STRICT_DEFAULTS,
 >(
 	options?: Csp_Options<D>,
 ): Csp_Directives => {
 	const config = options?.config || {};
-	const defaults = options?.defaults || (STRICT_CSP_DIRECTIVE_DEFAULTS as unknown as D);
+	const defaults = options?.defaults || (CSP_DIRECTIVES_STRICT_DEFAULTS as unknown as D);
 	const trusted_sources = options?.trusted_sources
 		? typeof options.trusted_sources === 'string'
 			? [options.trusted_sources]
 			: options.trusted_sources
 		: null;
-	const trusted_directive_keys = options?.trusted_directive_keys || TRUSTED_CSP_DIRECTIVE_KEYS;
+	const trusted_directives = options?.trusted_directives || TRUSTED_CSP_DIRECTIVES;
 
 	// Clone the defaults to avoid mutation
 	const result: Csp_Directives = structuredClone(defaults);
 
 	// Process trusted sources if any are provided
 	if (trusted_sources && trusted_sources.length > 0) {
-		for (const key of trusted_directive_keys) {
-			// Ensure the key is actually in `TRUSTED_CSP_DIRECTIVE_KEYS`
-			if (!TRUSTED_CSP_DIRECTIVE_KEYS.includes(key)) {
+		for (const key of trusted_directives) {
+			// Ensure the key is actually in `TRUSTED_CSP_DIRECTIVES`
+			if (!TRUSTED_CSP_DIRECTIVES.includes(key)) {
 				throw new Error(
-					`Invalid CSP trusted directive key: '${key}'. Must be one of: ${TRUSTED_CSP_DIRECTIVE_KEYS.join(', ')}`,
+					`Invalid CSP trusted directive key: '${key}'. Must be one of: ${TRUSTED_CSP_DIRECTIVES.join(', ')}`,
 				);
 			}
 
@@ -121,16 +121,16 @@ export const create_csp_directives = <
 	}
 
 	// Freeze any remaining arrays that came from defaults
-	freeze_csp_directives(result);
+	freeze_directives(result);
 
 	return result;
 };
 
 /**
  * Directives where trusted sources are added by default.
- * Can be customized in `create_csp_directives` with `options.trusted_directive_keys`.
+ * Can be customized in `create_csp_directives` with `options.trusted_directives`.
  */
-export const TRUSTED_CSP_DIRECTIVE_KEYS = Object.freeze([
+export const TRUSTED_CSP_DIRECTIVES = Object.freeze([
 	'base-uri',
 	'script-src',
 	'script-src-elem',
@@ -147,15 +147,15 @@ export const TRUSTED_CSP_DIRECTIVE_KEYS = Object.freeze([
 ] as const satisfies Array<Csp_Directive>);
 
 /**
- * Type inferred from `TRUSTED_CSP_DIRECTIVE_KEYS` array.
+ * Type inferred from `TRUSTED_CSP_DIRECTIVES` array.
  */
-export type Trusted_Csp_Directive = (typeof TRUSTED_CSP_DIRECTIVE_KEYS)[number];
+export type Trusted_Csp_Directive = (typeof TRUSTED_CSP_DIRECTIVES)[number];
 
 /**
  * Default strict CSP directives used as base configuration.
  * Can be customized in `create_csp_directives` with `options.defaults`.
  */
-export const STRICT_CSP_DIRECTIVE_DEFAULTS = {
+export const CSP_DIRECTIVES_STRICT_DEFAULTS = {
 	// Core defaults
 	'default-src': ['none'], // Block everything by default
 	'base-uri': ['self'], // Prevent base tag hijacking
@@ -181,7 +181,7 @@ export const STRICT_CSP_DIRECTIVE_DEFAULTS = {
 	// 'report-uri': [], // Report violations (e.g. `'/csp-violation-report'`)
 } as const satisfies Csp_Directives;
 
-const freeze_csp_directives = (directives: Partial<Csp_Directives>): void => {
+const freeze_directives = (directives: Partial<Csp_Directives>): void => {
 	for (const key in directives) {
 		const value = (directives as any)[key];
 		if (Array.isArray(value) && !Object.isFrozen(value)) {

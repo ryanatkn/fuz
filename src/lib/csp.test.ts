@@ -258,7 +258,7 @@ test('create_csp_directives with trusted_sources adds sources to relevant direct
 		trusted_sources: TRUSTED,
 	});
 
-	// Check that trusted source is added to directives in TRUSTED_CSP_DIRECTIVE_KEYS
+	// Check that trusted source is added to directives in TRUSTED_CSP_DIRECTIVES
 	assert.equal(csp['script-src'], ['self', TRUSTED]);
 	assert.equal(csp['connect-src'], ['self', TRUSTED]);
 	assert.equal(csp['img-src'], ['self', 'data:', TRUSTED]);
@@ -294,7 +294,7 @@ test('create_csp_directives with nonce and hash trusted_sources', () => {
 test('create_csp_directives trusted_sources with custom directive keys', () => {
 	const csp = create_csp_directives({
 		trusted_sources: TRUSTED,
-		trusted_directive_keys: ['script-src', 'connect-src'],
+		trusted_directives: ['script-src', 'connect-src'],
 	});
 
 	// Should be added to the specified directives
@@ -307,26 +307,26 @@ test('create_csp_directives trusted_sources with custom directive keys', () => {
 	assert.equal(csp['frame-ancestors'], ['self']);
 });
 
-test('create_csp_directives throws on non-trusted directives in trusted_directive_keys', () => {
+test('create_csp_directives throws on non-trusted directives in trusted_directives', () => {
 	assert.throws(
 		() =>
 			create_csp_directives({
 				trusted_sources: TRUSTED,
 				// @ts-expect-error - Invalid directive key
-				trusted_directive_keys: ['script-src', 'default-src'],
+				trusted_directives: ['script-src', 'default-src'],
 			}),
 		/Invalid CSP trusted directive key: 'default-src'/,
 		'Should throw when non-trusted directive keys are provided',
 	);
 });
 
-test('create_csp_directives throws on invalid trusted_directive_keys', () => {
+test('create_csp_directives throws on invalid trusted_directives', () => {
 	assert.throws(
 		() =>
 			create_csp_directives({
 				trusted_sources: TRUSTED,
 				// @ts-expect-error - Invalid directive key
-				trusted_directive_keys: ['not-a-directive'],
+				trusted_directives: ['not-a-directive'],
 			}),
 		/Invalid CSP trusted directive key: 'not-a-directive'/,
 		'Should throw on invalid directive keys',
@@ -403,7 +403,7 @@ test('create_csp_directives comprehensive example', () => {
 	// A complex example that tests all features together
 	const csp = create_csp_directives({
 		trusted_sources: ['trusted1.domain', 'trusted2.domain'],
-		trusted_directive_keys: ['script-src', 'connect-src', 'img-src'],
+		trusted_directives: ['script-src', 'connect-src', 'img-src'],
 		config: {
 			'script-src': (defaults) => [...defaults, 'config-added.com'],
 			'connect-src': ['self', 'static-override.com'],
@@ -426,7 +426,7 @@ test('create_csp_directives comprehensive example', () => {
 	assert.equal(csp['default-src'], ['self']); // Overridden from 'none'
 	assert.is(csp['upgrade-insecure-requests'], false);
 
-	// Check directives not in trusted_directive_keys
+	// Check directives not in trusted_directives
 	assert.equal(csp['style-src'], ['self', 'unsafe-inline']); // Not modified by trusted sources
 });
 
@@ -597,10 +597,10 @@ test('create_csp_directives with empty trusted_sources string', () => {
 	assert.equal(csp['connect-src'], ['self']);
 });
 
-test('create_csp_directives with empty trusted_directive_keys array', () => {
+test('create_csp_directives with empty trusted_directives array', () => {
 	const csp = create_csp_directives({
 		trusted_sources: TRUSTED,
-		trusted_directive_keys: [], // Empty array, so no directives should get trusted sources
+		trusted_directives: [], // Empty array, so no directives should get trusted sources
 	});
 
 	// No directive should get the trusted source
