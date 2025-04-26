@@ -6,6 +6,17 @@ import {create_csp_directives, type Csp_Directives, type Csp_Config} from '$lib/
 const TRUSTED = 'trusted.domain';
 const TRUSTED_A = 'a.trusted.domain';
 const TRUSTED_B = 'b.trusted.domain';
+const TRUSTED_2 = 'trusted2.domain';
+const SHA_HASH = 'sha256-abc123';
+const NONCE = 'nonce-xyz789';
+const SPECIFIC_DOMAIN = 'specific.domain';
+const CONFIG_ADDED = 'config-added.domain';
+const STATIC_OVERRIDE = 'static-override.domain';
+const FUNCTION_ADDED = 'function-added.domain';
+const ALLOWED_PARENT = 'allowed-parent.domain';
+const COMPLETE_OVERRIDE = 'complete-override.domain';
+const EVIL_DOMAIN = 'evil.domain';
+const IMG_DOMAIN = 'img.domain';
 
 test('create_csp_directives with empty config returns defaults', () => {
 	const csp = create_csp_directives();
@@ -192,7 +203,7 @@ test('create_csp_directives should not allow array values to be mutated external
 	});
 
 	// Attempt to modify the original array
-	array.push('evil.domain');
+	array.push(EVIL_DOMAIN);
 
 	// CSP should have a clone and remain unchanged
 	assert.equal(csp['script-src'], ['self', TRUSTED]);
@@ -209,7 +220,7 @@ test('create_csp_directives should freeze arrays to prevent mutation', () => {
 	// Attempt to modify the array in the result
 	const script_src = csp['script-src'];
 	assert.throws(
-		() => script_src!.push('evil.domain'),
+		() => script_src!.push(EVIL_DOMAIN),
 		TypeError,
 		'Arrays in the result should be frozen and not allow mutation',
 	);
@@ -220,7 +231,7 @@ test('create_csp_directives should freeze arrays to prevent mutation', () => {
 	// Also verify that inherited default arrays are frozen
 	const connect_src = csp['connect-src']; // This comes from defaults
 	assert.throws(
-		() => connect_src!.push('evil.domain'),
+		() => connect_src!.push(EVIL_DOMAIN),
 		TypeError,
 		'Arrays inherited from defaults should also be frozen',
 	);
@@ -237,13 +248,13 @@ test('create_csp_directives should freeze arrays when no config is passed', () =
 	const img_src = csp['img-src'];
 
 	assert.throws(
-		() => script_src!.push('evil.domain'),
+		() => script_src!.push(EVIL_DOMAIN),
 		TypeError,
 		'Default script-src array should be frozen',
 	);
 
 	assert.throws(
-		() => img_src!.push('evil.domain'),
+		() => img_src!.push(EVIL_DOMAIN),
 		TypeError,
 		'Default img-src array should be frozen',
 	);
@@ -272,23 +283,23 @@ test('create_csp_directives with trusted_sources adds sources to relevant direct
 
 test('create_csp_directives with multiple trusted_sources', () => {
 	const csp = create_csp_directives({
-		trusted_sources: ['trusted1.domain', 'trusted2.domain'],
+		trusted_sources: [TRUSTED, TRUSTED_2],
 	});
 
 	// Check that all trusted sources are added
-	assert.equal(csp['script-src'], ['self', 'trusted1.domain', 'trusted2.domain']);
-	assert.equal(csp['connect-src'], ['self', 'trusted1.domain', 'trusted2.domain']);
-	assert.equal(csp['frame-ancestors'], ['self', 'trusted1.domain', 'trusted2.domain']);
+	assert.equal(csp['script-src'], ['self', TRUSTED, TRUSTED_2]);
+	assert.equal(csp['connect-src'], ['self', TRUSTED, TRUSTED_2]);
+	assert.equal(csp['frame-ancestors'], ['self', TRUSTED, TRUSTED_2]);
 });
 
 test('create_csp_directives with nonce and hash trusted_sources', () => {
 	const csp = create_csp_directives({
-		trusted_sources: ['sha256-abc123', 'nonce-xyz789'],
+		trusted_sources: [SHA_HASH, NONCE],
 	});
 
 	// Should add cryptographic sources to appropriate directives
-	assert.equal(csp['script-src'], ['self', 'sha256-abc123', 'nonce-xyz789']);
-	assert.equal(csp['frame-ancestors'], ['self', 'sha256-abc123', 'nonce-xyz789']);
+	assert.equal(csp['script-src'], ['self', SHA_HASH, NONCE]);
+	assert.equal(csp['frame-ancestors'], ['self', SHA_HASH, NONCE]);
 });
 
 test('create_csp_directives trusted_sources with custom directive keys', () => {
@@ -355,13 +366,13 @@ test('create_csp_directives directive with function override', () => {
 			'script-src': (defaults) => {
 				// Defaults should include trusted sources
 				assert.equal(defaults, ['self', TRUSTED]);
-				return ['specific.domain', 'another-site.com'];
+				return [SPECIFIC_DOMAIN, 'another-site.domain'];
 			},
 		},
 	});
 
 	// Function should override the directive
-	assert.equal(csp['script-src'], ['specific.domain', 'another-site.com']);
+	assert.equal(csp['script-src'], [SPECIFIC_DOMAIN, 'another-site.domain']);
 });
 
 test('create_csp_directives trusted_sources with config static overrides', () => {
@@ -369,12 +380,12 @@ test('create_csp_directives trusted_sources with config static overrides', () =>
 		trusted_sources: TRUSTED,
 		config: {
 			// Static array should completely override, even with trusted sources
-			'script-src': ['self', 'static-override.com'],
+			'script-src': ['self', STATIC_OVERRIDE],
 		},
 	});
 
 	// Static override should take precedence (trusted sources not added)
-	assert.equal(csp['script-src'], ['self', 'static-override.com']);
+	assert.equal(csp['script-src'], ['self', STATIC_OVERRIDE]);
 
 	// Other directives still get trusted sources
 	assert.equal(csp['connect-src'], ['self', TRUSTED]);
@@ -386,43 +397,38 @@ test('create_csp_directives trusted_sources with function overrides', () => {
 		trusted_sources: TRUSTED,
 		config: {
 			// Function receives value with trusted sources already included
-			'script-src': (defaults) => [...defaults, 'function-added.com'],
+			'script-src': (defaults) => [...defaults, FUNCTION_ADDED],
 			// Function completely overrides
-			'connect-src': () => ['complete-override.com'],
+			'connect-src': () => [COMPLETE_OVERRIDE],
 		},
 	});
 
 	// Function with defaults should see trusted sources
-	assert.equal(csp['script-src'], ['self', TRUSTED, 'function-added.com']);
+	assert.equal(csp['script-src'], ['self', TRUSTED, FUNCTION_ADDED]);
 
 	// Function without defaults completely overrides
-	assert.equal(csp['connect-src'], ['complete-override.com']);
+	assert.equal(csp['connect-src'], [COMPLETE_OVERRIDE]);
 });
 
 test('create_csp_directives comprehensive example', () => {
 	// A complex example that tests all features together
 	const csp = create_csp_directives({
-		trusted_sources: ['trusted1.domain', 'trusted2.domain'],
+		trusted_sources: [TRUSTED, TRUSTED_2],
 		trusted_directives: ['script-src', 'connect-src', 'img-src'],
 		config: {
-			'script-src': (defaults) => [...defaults, 'config-added.com'],
-			'connect-src': ['self', 'static-override.com'],
-			'frame-ancestors': ['allowed-parent.com'], // Explicit override
+			'script-src': (defaults) => [...defaults, CONFIG_ADDED],
+			'connect-src': ['self', STATIC_OVERRIDE],
+			'frame-ancestors': [ALLOWED_PARENT], // Explicit override
 			'default-src': ['self'], // Override default-src from 'none' to 'self'
 			'upgrade-insecure-requests': false,
 		},
 	});
 
 	// Check all values are as expected
-	assert.equal(csp['script-src'], [
-		'self',
-		'trusted1.domain',
-		'trusted2.domain',
-		'config-added.com',
-	]);
-	assert.equal(csp['connect-src'], ['self', 'static-override.com']); // Static overrides trusted sources
-	assert.equal(csp['frame-ancestors'], ['allowed-parent.com']); // Explicit config override
-	assert.equal(csp['img-src'], ['self', 'data:', 'trusted1.domain', 'trusted2.domain']);
+	assert.equal(csp['script-src'], ['self', TRUSTED, TRUSTED_2, CONFIG_ADDED]);
+	assert.equal(csp['connect-src'], ['self', STATIC_OVERRIDE]); // Static overrides trusted sources
+	assert.equal(csp['frame-ancestors'], [ALLOWED_PARENT]); // Explicit config override
+	assert.equal(csp['img-src'], ['self', 'data:', TRUSTED, TRUSTED_2]);
 	assert.equal(csp['default-src'], ['self']); // Overridden from 'none'
 	assert.is(csp['upgrade-insecure-requests'], false);
 
@@ -440,7 +446,7 @@ test('create_csp_directives freezes the result object itself to prevent mutation
 	assert.throws(
 		() => {
 			// @ts-expect-error - Intentionally trying to modify frozen object
-			csp['new-directive'] = ['evil.domain'];
+			csp['new-directive'] = [EVIL_DOMAIN];
 		},
 		TypeError,
 		'Should not allow adding new properties to frozen CSP object',
@@ -449,7 +455,7 @@ test('create_csp_directives freezes the result object itself to prevent mutation
 	// Attempt to modify existing property on CSP object
 	assert.throws(
 		() => {
-			csp['script-src'] = ['evil.domain'];
+			csp['script-src'] = [EVIL_DOMAIN];
 		},
 		TypeError,
 		'Should not allow modifying properties on frozen CSP object',
@@ -471,7 +477,7 @@ test('create_csp_directives with config should also freeze the result object', (
 	assert.throws(
 		() => {
 			// @ts-expect-error - Intentionally trying to modify frozen object
-			csp['new-directive'] = ['evil.domain'];
+			csp['new-directive'] = [EVIL_DOMAIN];
 		},
 		TypeError,
 		'Should not allow adding new properties to frozen CSP object with custom config',
@@ -511,7 +517,7 @@ test('create_csp_directives with partial defaults and trusted_sources', () => {
 			'img-src': (defaults) => {
 				// Missing directive shouldn't have trusted sources
 				assert.is(defaults, undefined, 'Defaults should be undefined for missing directive');
-				return ['img.domain'];
+				return [IMG_DOMAIN];
 			},
 		},
 	});
@@ -531,7 +537,7 @@ test('create_csp_directives with partial defaults and trusted_sources', () => {
 	);
 	assert.equal(
 		csp['img-src'],
-		['img.domain'],
+		[IMG_DOMAIN],
 		'Custom config directive should not get trusted sources',
 	);
 });
