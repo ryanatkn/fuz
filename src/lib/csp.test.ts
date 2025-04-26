@@ -2,14 +2,14 @@ import {test} from 'uvu';
 import * as assert from 'uvu/assert';
 
 import {
-	generate_csp,
+	create_csp_directives,
 	type Csp_Directives,
 	type Csp_Config,
 	type Trusted_Csp_Directive,
 } from '$lib/csp.js';
 
 test('generate_csp with empty config returns defaults', () => {
-	const csp = generate_csp();
+	const csp = create_csp_directives();
 
 	// Check a sample of default values
 	assert.equal(csp['default-src'], ['none']);
@@ -19,7 +19,7 @@ test('generate_csp with empty config returns defaults', () => {
 });
 
 test('generate_csp with config object', () => {
-	const csp = generate_csp({
+	const csp = create_csp_directives({
 		config: {
 			'script-src': ['self', 'trusted.domain'],
 			'connect-src': ['self', 'a.trusted.domain'],
@@ -32,7 +32,7 @@ test('generate_csp with config object', () => {
 });
 
 test('generate_csp with boolean directive values', () => {
-	const csp = generate_csp({
+	const csp = create_csp_directives({
 		config: {
 			'upgrade-insecure-requests': false,
 		},
@@ -41,7 +41,7 @@ test('generate_csp with boolean directive values', () => {
 	assert.is(csp['upgrade-insecure-requests'], false);
 
 	// Test the inverse as well
-	const csp2 = generate_csp({
+	const csp2 = create_csp_directives({
 		config: {
 			'upgrade-insecure-requests': true,
 		},
@@ -51,7 +51,7 @@ test('generate_csp with boolean directive values', () => {
 });
 
 test('generate_csp with function values', () => {
-	const csp = generate_csp({
+	const csp = create_csp_directives({
 		config: {
 			'script-src': (defaults) => [...defaults, 'trusted.domain'],
 			'connect-src': () => ['a.trusted.domain'],
@@ -64,7 +64,7 @@ test('generate_csp with function values', () => {
 });
 
 test('generate_csp with explicit undefined values', () => {
-	const csp = generate_csp({
+	const csp = create_csp_directives({
 		config: {
 			'script-src': ['self', 'trusted.domain'],
 			'connect-src': undefined,
@@ -87,7 +87,7 @@ test('generate_csp with explicit undefined values', () => {
 });
 
 test('generate_csp with function that returns undefined', () => {
-	const csp = generate_csp({
+	const csp = create_csp_directives({
 		config: {
 			'script-src': (defaults) => [...defaults, 'trusted.domain'],
 			'connect-src': () => undefined,
@@ -110,7 +110,7 @@ test('generate_csp with function that returns undefined', () => {
 });
 
 test('generate_csp with mixed static and function values', () => {
-	const csp = generate_csp({
+	const csp = create_csp_directives({
 		config: {
 			'script-src': ['self', 'trusted.domain'],
 			'connect-src': (defaults) => [...defaults, 'a.trusted.domain'],
@@ -131,7 +131,7 @@ test('generate_csp with custom defaults', () => {
 		'upgrade-insecure-requests': false,
 	};
 
-	const csp = generate_csp({
+	const csp = create_csp_directives({
 		defaults: custom_defaults,
 		config: {
 			'script-src': ['self', 'trusted.domain'],
@@ -155,7 +155,7 @@ test('generate_csp with undefined defaults for function callbacks', () => {
 		// Intentionally omitting connect-src to test undefined defaults
 	} satisfies Csp_Directives;
 
-	const csp = generate_csp({
+	const csp = create_csp_directives({
 		defaults: custom_defaults,
 		config: {
 			'default-src': (defaults) => [...defaults, 'trusted.domain'],
@@ -172,7 +172,7 @@ test('generate_csp with undefined defaults for function callbacks', () => {
 });
 
 test('generate_csp with report-uri passing undefined as default', () => {
-	const csp = generate_csp({
+	const csp = create_csp_directives({
 		config: {
 			'report-uri': (defaults) => {
 				assert.is(defaults, undefined, 'report-uri should be undefined in default strict CSP');
@@ -187,7 +187,7 @@ test('generate_csp with report-uri passing undefined as default', () => {
 test('generate_csp should not allow array values to be mutated externally', () => {
 	const array: Csp_Config['script-src'] = ['self', 'trusted.domain'];
 
-	const csp = generate_csp({
+	const csp = create_csp_directives({
 		config: {
 			'script-src': array,
 		},
@@ -202,7 +202,7 @@ test('generate_csp should not allow array values to be mutated externally', () =
 });
 
 test('generate_csp should freeze arrays to prevent mutation', () => {
-	const csp = generate_csp({
+	const csp = create_csp_directives({
 		config: {
 			'script-src': ['self', 'trusted.domain'],
 		},
@@ -232,7 +232,7 @@ test('generate_csp should freeze arrays to prevent mutation', () => {
 });
 
 test('generate_csp should freeze arrays when no config is passed', () => {
-	const csp = generate_csp();
+	const csp = create_csp_directives();
 
 	// Attempt to modify arrays in the default configuration
 	const script_src = csp['script-src'];
@@ -256,11 +256,11 @@ test('generate_csp should freeze arrays when no config is passed', () => {
 });
 
 test('generate_csp with trusted_sources adds sources to relevant directives', () => {
-	const csp = generate_csp({
+	const csp = create_csp_directives({
 		trusted_sources: 'trusted.domain',
 	});
 
-	// Check that trusted source is added to directives with 'self' in TRUSTED_DIRECTIVE_KEYS
+	// Check that trusted source is added to directives with 'self' in TRUSTED_CSP_DIRECTIVE_KEYS
 	assert.equal(csp['script-src'], ['self', 'trusted.domain']);
 	assert.equal(csp['connect-src'], ['self', 'trusted.domain']);
 	assert.equal(csp['img-src'], ['self', 'data:', 'trusted.domain']);
@@ -276,7 +276,7 @@ test('generate_csp with trusted_sources adds sources to relevant directives', ()
 });
 
 test('generate_csp with multiple trusted_sources', () => {
-	const csp = generate_csp({
+	const csp = create_csp_directives({
 		trusted_sources: ['trusted1.domain', 'trusted2.domain'],
 	});
 
@@ -288,7 +288,7 @@ test('generate_csp with multiple trusted_sources', () => {
 test('generate_csp with invalid sources still works at runtime', () => {
 	// Strings should always work at runtime
 	const invalid_source = 'not-a-valid-domain';
-	const csp = generate_csp({
+	const csp = create_csp_directives({
 		trusted_sources: invalid_source,
 	});
 
@@ -297,7 +297,7 @@ test('generate_csp with invalid sources still works at runtime', () => {
 });
 
 test('generate_csp with nonce and hash trusted_sources', () => {
-	const csp = generate_csp({
+	const csp = create_csp_directives({
 		trusted_sources: ['sha256-abc123', 'nonce-xyz789'],
 	});
 
@@ -306,7 +306,7 @@ test('generate_csp with nonce and hash trusted_sources', () => {
 });
 
 test('generate_csp trusted_sources with custom directive keys', () => {
-	const csp = generate_csp({
+	const csp = create_csp_directives({
 		trusted_sources: 'trusted.domain',
 		trusted_directive_keys: ['script-src', 'connect-src'],
 	});
@@ -325,7 +325,7 @@ test('generate_csp ignores non-trusted directives in trusted_directive_keys', ()
 	// Replace with a test that checks for error throwing
 	assert.throws(
 		() =>
-			generate_csp({
+			create_csp_directives({
 				trusted_sources: 'trusted.domain',
 				trusted_directive_keys: ['script-src', 'frame-ancestors' as Trusted_Csp_Directive],
 			}),
@@ -338,7 +338,7 @@ test('generate_csp throws on invalid trusted_directive_keys', () => {
 	// Test with completely invalid directive
 	assert.throws(
 		() =>
-			generate_csp({
+			create_csp_directives({
 				trusted_sources: 'trusted.domain',
 				trusted_directive_keys: ['not-a-directive' as Trusted_Csp_Directive],
 			}),
@@ -346,19 +346,19 @@ test('generate_csp throws on invalid trusted_directive_keys', () => {
 		'Should throw on invalid directive keys',
 	);
 
-	// Test with directive that exists but isn't in TRUSTED_DIRECTIVE_KEYS
+	// Test with directive that exists but isn't in TRUSTED_CSP_DIRECTIVE_KEYS
 	assert.throws(
 		() =>
-			generate_csp({
+			create_csp_directives({
 				trusted_sources: 'trusted.domain',
 				trusted_directive_keys: ['default-src' as Trusted_Csp_Directive],
 			}),
 		/Invalid CSP trusted directive key: 'default-src'/,
-		'Should throw on valid directives not in TRUSTED_DIRECTIVE_KEYS',
+		'Should throw on valid directives not in TRUSTED_CSP_DIRECTIVE_KEYS',
 	);
 
 	// Ensure valid directive keys work correctly
-	const csp = generate_csp({
+	const csp = create_csp_directives({
 		trusted_sources: 'trusted.domain',
 		trusted_directive_keys: ['script-src', 'connect-src'],
 	});
@@ -368,7 +368,7 @@ test('generate_csp throws on invalid trusted_directive_keys', () => {
 });
 
 test('generate_csp with explicit frame-ancestors override', () => {
-	const csp = generate_csp({
+	const csp = create_csp_directives({
 		trusted_sources: 'trusted.domain',
 		config: {
 			'frame-ancestors': ['trusted.domain'],
@@ -383,7 +383,7 @@ test('generate_csp with explicit frame-ancestors override', () => {
 });
 
 test('generate_csp frame-ancestors with function override', () => {
-	const csp = generate_csp({
+	const csp = create_csp_directives({
 		trusted_sources: 'trusted.domain',
 		config: {
 			'frame-ancestors': (defaults) => {
@@ -399,10 +399,10 @@ test('generate_csp frame-ancestors with function override', () => {
 });
 
 test('generate_csp with custom trusted directive keys type checking', () => {
-	// Valid directive keys - all in TRUSTED_DIRECTIVE_KEYS
+	// Valid directive keys - all in TRUSTED_CSP_DIRECTIVE_KEYS
 	const valid_directives: Array<Trusted_Csp_Directive> = ['script-src', 'connect-src', 'img-src'];
 
-	generate_csp({
+	create_csp_directives({
 		trusted_sources: 'trusted.domain',
 		trusted_directive_keys: valid_directives,
 	});
@@ -418,7 +418,7 @@ test('generate_csp with custom trusted directive keys type checking', () => {
 });
 
 test('generate_csp trusted_sources with config static overrides', () => {
-	const csp = generate_csp({
+	const csp = create_csp_directives({
 		trusted_sources: 'trusted.domain',
 		config: {
 			// Static array should completely override, even with trusted sources
@@ -434,7 +434,7 @@ test('generate_csp trusted_sources with config static overrides', () => {
 });
 
 test('generate_csp trusted_sources with function overrides', () => {
-	const csp = generate_csp({
+	const csp = create_csp_directives({
 		trusted_sources: 'trusted.domain',
 		config: {
 			// Function receives value with trusted sources already included
@@ -453,7 +453,7 @@ test('generate_csp trusted_sources with function overrides', () => {
 
 test('generate_csp comprehensive example', () => {
 	// A complex example that tests all features together
-	const csp = generate_csp({
+	const csp = create_csp_directives({
 		trusted_sources: ['trusted1.domain', 'trusted2.domain'],
 		trusted_directive_keys: ['script-src', 'connect-src', 'img-src'],
 		config: {
@@ -483,7 +483,7 @@ test('generate_csp comprehensive example', () => {
 });
 
 test('generate_csp freezes the result object itself to prevent mutation', () => {
-	const csp = generate_csp();
+	const csp = create_csp_directives();
 
 	// Verify that the result object is frozen
 	assert.is(Object.isFrozen(csp), true, 'The CSP object itself should be frozen');
@@ -509,7 +509,7 @@ test('generate_csp freezes the result object itself to prevent mutation', () => 
 });
 
 test('generate_csp with config should also freeze the result object', () => {
-	const csp = generate_csp({
+	const csp = create_csp_directives({
 		config: {
 			'script-src': ['self', 'trusted.domain'],
 			'connect-src': ['self', 'a.trusted.domain'],
