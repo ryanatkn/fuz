@@ -15,7 +15,6 @@ test('generate_csp with empty config returns defaults', () => {
 	assert.equal(csp['default-src'], ['none']);
 	assert.equal(csp['script-src'], ['self']);
 	assert.equal(csp['connect-src'], ['self']);
-	assert.equal(csp['frame-ancestors'], ['none']);
 });
 
 test('generate_csp with config object', () => {
@@ -260,19 +259,15 @@ test('generate_csp with trusted_sources adds sources to relevant directives', ()
 		trusted_sources: 'trusted.domain',
 	});
 
-	// Check that trusted source is added to directives with 'self' in TRUSTED_CSP_DIRECTIVE_KEYS
+	// Check that trusted source is added to directives in TRUSTED_CSP_DIRECTIVE_KEYS
 	assert.equal(csp['script-src'], ['self', 'trusted.domain']);
 	assert.equal(csp['connect-src'], ['self', 'trusted.domain']);
 	assert.equal(csp['img-src'], ['self', 'data:', 'trusted.domain']);
 	assert.equal(csp['style-src'], ['self', 'unsafe-inline', 'trusted.domain']);
+	assert.equal(csp['frame-ancestors'], ['self', 'trusted.domain']);
 
 	// Shouldn't be added to directives that have ['none']
 	assert.equal(csp['default-src'], ['none']);
-	assert.equal(
-		csp['frame-ancestors'],
-		['none'],
-		'frame-ancestors should not receive trusted sources by default',
-	);
 });
 
 test('generate_csp with multiple trusted_sources', () => {
@@ -283,6 +278,7 @@ test('generate_csp with multiple trusted_sources', () => {
 	// Check that all trusted sources are added
 	assert.equal(csp['script-src'], ['self', 'trusted1.domain', 'trusted2.domain']);
 	assert.equal(csp['connect-src'], ['self', 'trusted1.domain', 'trusted2.domain']);
+	assert.equal(csp['frame-ancestors'], ['self', 'trusted1.domain', 'trusted2.domain']);
 });
 
 test('generate_csp with invalid sources still works at runtime', () => {
@@ -303,6 +299,7 @@ test('generate_csp with nonce and hash trusted_sources', () => {
 
 	// Should add cryptographic sources to appropriate directives
 	assert.equal(csp['script-src'], ['self', 'sha256-abc123', 'nonce-xyz789']);
+	assert.equal(csp['frame-ancestors'], ['self', 'sha256-abc123', 'nonce-xyz789']);
 });
 
 test('generate_csp trusted_sources with custom directive keys', () => {
@@ -318,103 +315,99 @@ test('generate_csp trusted_sources with custom directive keys', () => {
 	// Should not be added to other directives with 'self'
 	assert.equal(csp['img-src'], ['self', 'data:']);
 	assert.equal(csp['style-src'], ['self', 'unsafe-inline']);
-	assert.equal(csp['frame-ancestors'], ['none']);
+	assert.equal(csp['frame-ancestors'], ['self']);
 });
 
 test('generate_csp ignores non-trusted directives in trusted_directive_keys', () => {
-	// Replace with a test that checks for error throwing
 	assert.throws(
 		() =>
 			create_csp_directives({
 				trusted_sources: 'trusted.domain',
-				trusted_directive_keys: ['script-src', 'frame-ancestors' as Trusted_Csp_Directive],
+				// @ts-expect-error - Invalid directive key
+				trusted_directive_keys: ['script-src', 'default-src'],
 			}),
-		/Invalid CSP trusted directive key: 'frame-ancestors'/,
+		/Invalid CSP trusted directive key: 'default-src'/,
 		'Should throw when non-trusted directive keys are provided',
 	);
 });
 
 test('generate_csp throws on invalid trusted_directive_keys', () => {
-	// Test with completely invalid directive
 	assert.throws(
 		() =>
 			create_csp_directives({
 				trusted_sources: 'trusted.domain',
-				trusted_directive_keys: ['not-a-directive' as Trusted_Csp_Directive],
+				// @ts-expect-error - Invalid directive key
+				trusted_directive_keys: ['not-a-directive'],
 			}),
 		/Invalid CSP trusted directive key: 'not-a-directive'/,
 		'Should throw on invalid directive keys',
 	);
-
-	// Test with directive that exists but isn't in TRUSTED_CSP_DIRECTIVE_KEYS
-	assert.throws(
-		() =>
-			create_csp_directives({
-				trusted_sources: 'trusted.domain',
-				trusted_directive_keys: ['default-src' as Trusted_Csp_Directive],
-			}),
-		/Invalid CSP trusted directive key: 'default-src'/,
-		'Should throw on valid directives not in TRUSTED_CSP_DIRECTIVE_KEYS',
-	);
-
-	// Ensure valid directive keys work correctly
-	const csp = create_csp_directives({
-		trusted_sources: 'trusted.domain',
-		trusted_directive_keys: ['script-src', 'connect-src'],
-	});
-
-	assert.equal(csp['script-src'], ['self', 'trusted.domain']);
-	assert.equal(csp['connect-src'], ['self', 'trusted.domain']);
-});
-
-test('generate_csp with explicit frame-ancestors override', () => {
-	const csp = create_csp_directives({
-		trusted_sources: 'trusted.domain',
-		config: {
-			'frame-ancestors': ['trusted.domain'],
-		},
-	});
-
-	// frame-ancestors should be explicitly set, trusted_sources has no effect on it
-	assert.equal(csp['frame-ancestors'], ['trusted.domain']);
-
-	// Other directives still get trusted sources
-	assert.equal(csp['script-src'], ['self', 'trusted.domain']);
-});
-
-test('generate_csp frame-ancestors with function override', () => {
-	const csp = create_csp_directives({
-		trusted_sources: 'trusted.domain',
-		config: {
-			'frame-ancestors': (defaults) => {
-				// Defaults for frame-ancestors should be ['none']
-				assert.equal(defaults, ['none']);
-				return ['trusted.domain', 'another-site.com'];
-			},
-		},
-	});
-
-	// Function should set frame-ancestors
-	assert.equal(csp['frame-ancestors'], ['trusted.domain', 'another-site.com']);
 });
 
 test('generate_csp with custom trusted directive keys type checking', () => {
 	// Valid directive keys - all in TRUSTED_CSP_DIRECTIVE_KEYS
 	const valid_directives: Array<Trusted_Csp_Directive> = ['script-src', 'connect-src', 'img-src'];
 
+	// This should compile and run without errors
 	create_csp_directives({
 		trusted_sources: 'trusted.domain',
 		trusted_directive_keys: valid_directives,
 	});
 
-	// @ts-expect-error - Not a valid trusted directive
-	const invalid_directives: Array<Trusted_Csp_Directive> = ['not-a-valid-directive']; // eslint-disable-line @typescript-eslint/no-unused-vars
+	// Runtime type checking for invalid directive
+	assert.throws(
+		() =>
+			create_csp_directives({
+				trusted_sources: 'trusted.domain',
+				// @ts-expect-error - Invalid directive key
+				trusted_directive_keys: ['not-a-valid-directive'],
+			}),
+		/Invalid CSP trusted directive key: 'not-a-valid-directive'/,
+		'Should throw on invalid directive keys at runtime',
+	);
 
-	// @ts-expect-error - default-src is not in Trusted_Csp_Directive
-	const not_trusted: Trusted_Csp_Directive = 'default-src'; // eslint-disable-line @typescript-eslint/no-unused-vars
+	// Runtime type checking for directive not in TRUSTED_CSP_DIRECTIVE_KEYS
+	assert.throws(
+		() =>
+			create_csp_directives({
+				trusted_sources: 'trusted.domain',
+				// @ts-expect-error - Invalid directive key
+				trusted_directive_keys: ['default-src'],
+			}),
+		/Invalid CSP trusted directive key: 'default-src'/,
+		'Should throw on directive keys not in TRUSTED_CSP_DIRECTIVE_KEYS',
+	);
+});
 
-	// @ts-expect-error - frame-ancestors is not in Trusted_Csp_Directive
-	const also_not_trusted: Trusted_Csp_Directive = 'frame-ancestors'; // eslint-disable-line @typescript-eslint/no-unused-vars
+test('generate_csp with directive override', () => {
+	const csp = create_csp_directives({
+		trusted_sources: 'trusted.domain',
+		config: {
+			'script-src': ['other.domain'],
+		},
+	});
+
+	// The directive should be explicitly set by config, not affected by trusted_sources
+	assert.equal(csp['script-src'], ['other.domain']);
+
+	// Other directives still get trusted sources
+	assert.equal(csp['connect-src'], ['self', 'trusted.domain']);
+});
+
+test('generate_csp directive with function override', () => {
+	const csp = create_csp_directives({
+		trusted_sources: 'trusted.domain',
+		config: {
+			'script-src': (defaults) => {
+				// Defaults should include trusted sources
+				assert.equal(defaults, ['self', 'trusted.domain']);
+				return ['specific.domain', 'another-site.com'];
+			},
+		},
+	});
+
+	// Function should override the directive
+	assert.equal(csp['script-src'], ['specific.domain', 'another-site.com']);
 });
 
 test('generate_csp trusted_sources with config static overrides', () => {
@@ -431,6 +424,7 @@ test('generate_csp trusted_sources with config static overrides', () => {
 
 	// Other directives still get trusted sources
 	assert.equal(csp['connect-src'], ['self', 'trusted.domain']);
+	assert.equal(csp['frame-ancestors'], ['self', 'trusted.domain']);
 });
 
 test('generate_csp trusted_sources with function overrides', () => {
@@ -459,7 +453,7 @@ test('generate_csp comprehensive example', () => {
 		config: {
 			'script-src': (defaults) => [...defaults, 'config-added.com'],
 			'connect-src': ['self', 'static-override.com'],
-			'frame-ancestors': ['trusted1.domain', 'trusted2.domain'], // Explicit override, not via trusted_directive_keys
+			'frame-ancestors': ['allowed-parent.com'], // Explicit override
 			'default-src': ['self'], // Override default-src from 'none' to 'self'
 			'upgrade-insecure-requests': false,
 		},
@@ -473,7 +467,7 @@ test('generate_csp comprehensive example', () => {
 		'config-added.com',
 	]);
 	assert.equal(csp['connect-src'], ['self', 'static-override.com']); // Static overrides trusted sources
-	assert.equal(csp['frame-ancestors'], ['trusted1.domain', 'trusted2.domain']); // Explicit config override
+	assert.equal(csp['frame-ancestors'], ['allowed-parent.com']); // Explicit config override
 	assert.equal(csp['img-src'], ['self', 'data:', 'trusted1.domain', 'trusted2.domain']);
 	assert.equal(csp['default-src'], ['self']); // Overridden from 'none'
 	assert.is(csp['upgrade-insecure-requests'], false);

@@ -153,6 +153,7 @@ export const TRUSTED_CSP_DIRECTIVE_KEYS = Object.freeze([
 	'manifest-src',
 	'connect-src',
 	'frame-src',
+	'frame-ancestors',
 	'form-action',
 	'worker-src',
 ] as const satisfies Array<Csp_Directive>);
@@ -183,7 +184,7 @@ export const STRICT_CSP_DIRECTIVE_DEFAULTS = {
 	// Network and embedding
 	'connect-src': ['self'], // XHR, fetch, WebSockets
 	'frame-src': ['self'], // Frames/iframes
-	'frame-ancestors': ['none'], // Prevent clickjacking
+	'frame-ancestors': ['self'], // Control what can embed this page
 	'form-action': ['self'], // Form submission targets
 	'worker-src': ['self'], // Web workers
 	// Extra security controls
