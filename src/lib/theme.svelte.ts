@@ -4,17 +4,9 @@ import {BROWSER} from 'esm-env';
 
 import {create_context} from '$lib/context_helpers.js';
 
-// TODO Can we solve the problem of theme flashing? serialize the whole `Themer`?
-// I think so but we'd need Moss' `render_theme_style` to be available in the head somehow.
-// The current problem is that `render_theme_style` depends on all of the variables for the base theme,
-// but I think that can be fixed.
-// These get added to `create_theme_setup_script`:
-// render_theme_style_fn: string,
-// const render_theme_style = ${render_theme_style_fn};
-
 export class Themer {
-	theme: Theme = $state()!; // TODO better initialization?
-	color_scheme: Color_Scheme = $state()!; // TODO better initialization?
+	theme: Theme = $state()!;
+	color_scheme: Color_Scheme = $state()!;
 
 	constructor(theme: Theme = default_themes[0], color_scheme: Color_Scheme = 'auto') {
 		if (!color_schemes.includes(color_scheme)) {
@@ -41,19 +33,11 @@ export const themer_context = create_context<Themer>();
 
 export const sync_color_scheme = (color_scheme: Color_Scheme | null): void => {
 	if (!BROWSER) return;
-	if (
+	const dark =
 		color_scheme === 'dark' ||
-		(color_scheme !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches)
-	) {
-		document.documentElement.classList.add('dark');
-	} else {
-		document.documentElement.classList.remove('dark');
-	}
-	if (color_scheme === 'light') {
-		document.documentElement.classList.add('light');
-	} else {
-		document.documentElement.classList.remove('light');
-	}
+		(color_scheme !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
+	document.documentElement.classList.add(dark ? 'dark' : 'light');
+	document.documentElement.classList.remove(dark ? 'light' : 'dark');
 };
 
 export const COLOR_SCHEME_STORAGE_KEY = 'fuz:color-scheme';
@@ -92,7 +76,7 @@ export const load_color_scheme = (
 };
 
 // TODO @many refactor with a util
-export const THEME_STORAGE_KEY = 'theme';
+export const THEME_STORAGE_KEY = 'fuz:theme';
 
 export const save_theme = (theme: Theme | null, key = THEME_STORAGE_KEY): void => {
 	if (!BROWSER) return;
@@ -117,39 +101,3 @@ export const load_theme = (fallback: Theme = default_themes[0], key = THEME_STOR
 	} catch (_) {}
 	return fallback;
 };
-
-// TODO BLOCK these don't work with CSP, probably make users inline into `app.html`, needs docs
-/**
- * Creates an HTML script string to be inserted into the `head`
- * that initializes the dark/light color scheme.
- * https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme
- * Prefers a value in `localStorage` if available, and if not detects using `matchMedia`.
- * On unexpected errors, like if `localStorage` is disabled, the `fallback` value is used.
- * The `light` class is added only if the user has explicitly chosen the light theme,
- * whereas the `dark` class is always added if the dark theme is chosen or detected.
- *
- * A `meta` tag is added for immediate parsing, and in the case of dark mode,
- * a `:root:root` dark mode `color-scheme` is applied to override the Moss default.
- *
- * @param fallback sets `content` of `<meta name="color-scheme">` and the default if something fails
- * @param key
- * @returns HTML string with the color scheme setup script and a `color-schema` meta tag
- */
-export const create_theme_setup_script = (
-	fallback: Color_Scheme = 'light',
-	key = COLOR_SCHEME_STORAGE_KEY,
-): string => `
-	<meta name="color-scheme" content="${fallback === 'dark' ? 'dark light' : 'light dark'}" />
-	${fallback === 'dark' ? '<style>:root:root { color-scheme: dark light; }</style>' : ''}
-	<script>
-		try {
-			let c = localStorage.getItem('${key}');
-			if (c === 'auto' || (c !== 'dark' && c !== 'light')) {
-				c = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-			} else if (c === 'light') {
-			 document.documentElement.classList.add('light');
-			}
-			if (c === 'dark') document.documentElement.classList.add('dark');
-		} catch (_) {${fallback === 'dark' ? " document.documentElement.classList.add('dark'); " : ''}}
-	</script>
-`;
