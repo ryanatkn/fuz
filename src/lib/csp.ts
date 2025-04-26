@@ -35,7 +35,7 @@ export interface Csp_Options<
 	defaults?: D;
 
 	/**
-	 * Sources to trust across relevant CSP directives listed in `trusted_directives`.
+	 * Sources to trust across all CSP directives listed in `trusted_directives`.
 	 * Can include domains, hashes, or nonces.
 	 */
 	trusted_sources?: string | Array<string>;
@@ -178,7 +178,7 @@ export const CSP_DIRECTIVES_STRICT_DEFAULTS = {
 	// Extra security controls
 	'object-src': ['none'], // Block plugins (Flash, Java, etc.)
 	'upgrade-insecure-requests': true, // Upgrade HTTP to HTTPS
-	// 'report-uri': [], // Report violations (e.g. `'/csp-violation-report'`)
+	// 'report-to': [], // Report violations (e.g. `'/csp-violation-report'`)
 } as const satisfies Csp_Directives;
 
 const freeze_directives = (directives: Partial<Csp_Directives>): void => {

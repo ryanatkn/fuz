@@ -180,17 +180,17 @@ test('create_csp_directives with undefined defaults for function callbacks', () 
 	assert.equal(csp['connect-src'], [TRUSTED_A]);
 });
 
-test('create_csp_directives with report-uri passing undefined as default', () => {
+test('create_csp_directives with report-to passing undefined as default', () => {
 	const csp = create_csp_directives({
 		config: {
-			'report-uri': (defaults) => {
-				assert.is(defaults, undefined, 'report-uri should be undefined in default strict CSP');
+			'report-to': (defaults) => {
+				assert.is(defaults, undefined, 'report-to should be undefined in default strict CSP');
 				return ['/csp-violations'];
 			},
 		},
 	});
 
-	assert.equal(csp['report-uri'], ['/csp-violations']);
+	assert.equal(csp['report-to'], ['/csp-violations']);
 });
 
 test('create_csp_directives should not allow array values to be mutated externally', () => {
