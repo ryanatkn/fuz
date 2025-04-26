@@ -14,7 +14,7 @@
 	import Theme_Form from '$routes/Theme_Form.svelte';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
 	// import Themed_Scope from '$routes/library/themed/Themed_Scope.svelte'; // TODO @many revisit Themed_Scope
-	import {themer_context} from '$lib/theme.svelte.js';
+	import {themer_context} from '$lib/themer.svelte.js';
 
 	const LIBRARY_ITEM_NAME = 'Themed';
 
@@ -273,7 +273,7 @@
 			<code>themer</code>:
 		</p>
 		<Code
-			content={`import {Themer} from '@ryanatkn/fuz/theme.svelte.js';\nconst themer = new Themer(...);`}
+			content={`import {Themer} from '@ryanatkn/fuz/themer.svelte.js';\nconst themer = new Themer(...);`}
 			lang="ts"
 		/>
 		<Code
@@ -294,7 +294,7 @@
 		<Code
 			content={`// get values from the Svelte context provided by
 // the nearest \`Themed\` ancestor:
-import {themer_context} from '@ryanatkn/fuz/theme.svelte.js';
+import {themer_context} from '@ryanatkn/fuz/themer.svelte.js';
 const themer = themer_context.get();
 themer.theme.name; // '${themer.theme.name}'
 themer.color_scheme; // '${themer.color_scheme}'`}

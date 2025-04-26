@@ -7,7 +7,7 @@
 	import {render_theme_style} from '@ryanatkn/moss/theme.js';
 	import {BROWSER} from 'esm-env';
 
-	import {themer_context, Themer} from '$lib/theme.svelte.js';
+	import {themer_context, Themer} from '$lib/themer.svelte.js';
 
 	// TODO @many revisit Themed_Scope
 

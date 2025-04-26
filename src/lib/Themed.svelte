@@ -16,7 +16,7 @@
 		load_theme as default_load_theme,
 		themer_context,
 		Themer,
-	} from '$lib/theme.svelte.js';
+	} from '$lib/themer.svelte.js';
 	import {effect_with_count} from '$lib/rune_helpers.svelte.js';
 
 	interface Props {

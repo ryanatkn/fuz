@@ -296,7 +296,7 @@ export const package_json = {
 			svelte: './dist/Theme_Input.svelte',
 			default: './dist/Theme_Input.svelte',
 		},
-		'./theme.svelte.js': {types: './dist/theme.svelte.d.ts', default: './dist/theme.svelte.js'},
+		'./themer.svelte.js': {types: './dist/themer.svelte.d.ts', default: './dist/themer.svelte.js'},
 		'./Themed.svelte': {
 			types: './dist/Themed.svelte.d.ts',
 			svelte: './dist/Themed.svelte',
@@ -485,8 +485,8 @@ export const src_json = {
 		'./Svg.svelte': {path: 'Svg.svelte', declarations: []},
 		'./Teleport.svelte': {path: 'Teleport.svelte', declarations: []},
 		'./Theme_Input.svelte': {path: 'Theme_Input.svelte', declarations: []},
-		'./theme.svelte.js': {
-			path: 'theme.svelte.ts',
+		'./themer.svelte.js': {
+			path: 'themer.svelte.ts',
 			declarations: [
 				{name: 'Themer', kind: 'class'},
 				{name: 'Themer_Json', kind: 'type'},

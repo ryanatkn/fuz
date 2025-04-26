@@ -3,13 +3,14 @@ import {default_themes} from '@ryanatkn/moss/themes.js';
 import {BROWSER} from 'esm-env';
 
 import {create_context} from '$lib/context_helpers.js';
+import {load_from_storage, save_to_storage} from '$lib/storage.js';
 
 export class Themer {
 	theme: Theme = $state()!;
 	color_scheme: Color_Scheme = $state()!;
 
 	constructor(theme: Theme = default_themes[0], color_scheme: Color_Scheme = 'auto') {
-		if (!color_schemes.includes(color_scheme)) {
+		if (parse_color_scheme(color_scheme) === null) {
 			throw Error('unknown color scheme: ' + color_scheme);
 		}
 		this.theme = theme;
@@ -41,63 +42,27 @@ export const sync_color_scheme = (color_scheme: Color_Scheme | null): void => {
 };
 
 export const COLOR_SCHEME_STORAGE_KEY = 'fuz:color-scheme';
+export const THEME_STORAGE_KEY = 'fuz:theme';
 
-// TODO @many refactor with a util
 export const save_color_scheme = (
 	color_scheme: Color_Scheme | null,
 	key = COLOR_SCHEME_STORAGE_KEY,
 ): void => {
-	if (!BROWSER) return;
-	try {
-		if (color_scheme === null) {
-			localStorage.removeItem(key);
-		} else {
-			localStorage.setItem(key, color_scheme);
-		}
-	} catch (_) {}
+	save_to_storage(key, color_scheme);
 };
 
-// TODO @many refactor with a util
 export const load_color_scheme = (
 	fallback: Color_Scheme = 'auto',
 	key = COLOR_SCHEME_STORAGE_KEY,
-): Color_Scheme => {
-	if (!BROWSER) return fallback;
-	let loaded: any;
-	try {
-		loaded = localStorage.getItem(key);
-	} catch (_) {
-		return fallback;
-	}
-	if (color_schemes.includes(loaded)) {
-		return loaded; // TODO should parse, and also delete the stored key on failures
-	}
-	return fallback;
-};
-
-// TODO @many refactor with a util
-export const THEME_STORAGE_KEY = 'fuz:theme';
+): Color_Scheme => load_from_storage(key, false, parse_color_scheme) ?? fallback;
 
 export const save_theme = (theme: Theme | null, key = THEME_STORAGE_KEY): void => {
-	if (!BROWSER) return;
-	try {
-		if (theme === null) {
-			localStorage.removeItem(key);
-		} else {
-			localStorage.setItem(key, JSON.stringify(theme));
-		}
-	} catch (_) {}
+	save_to_storage(key, theme, true);
 };
 
-// TODO @many refactor with a util
-export const load_theme = (fallback: Theme = default_themes[0], key = THEME_STORAGE_KEY): Theme => {
-	if (!BROWSER) return fallback;
-	try {
-		const v = localStorage.getItem(key);
-		const loaded = v === null ? v : JSON.parse(v);
-		if (loaded) {
-			return loaded;
-		}
-	} catch (_) {}
-	return fallback;
-};
+export const load_theme = (fallback: Theme = default_themes[0], key = THEME_STORAGE_KEY): Theme =>
+	load_from_storage<Theme>(key, true) ?? fallback; // TODO use `parse_theme` from moss
+
+// TODO move to moss
+const parse_color_scheme = (value: unknown): Color_Scheme | null =>
+	color_schemes.includes(value as any) ? (value as Color_Scheme) : null;
