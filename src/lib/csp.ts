@@ -3,13 +3,14 @@ import type {Defined} from '@ryanatkn/belt/types.js';
 
 export type Csp = Defined<KitConfig['csp']>;
 export type Csp_Directives = Defined<Csp['directives']>;
+export type Csp_Directive = keyof Csp_Directives;
 
-// Define a type helper to determine the value type for each directive
-export type Csp_Directive_Value<T extends keyof Csp_Directives> = Defined<Csp_Directives[T]>;
+// type helper to determine the value type for each directive
+export type Csp_Directive_Value<T extends Csp_Directive> = Defined<Csp_Directives[T]>;
 
-// Define the config type that handles both static values and functions that may return undefined
+// config type that handles both static values and functions that may return undefined
 export type Csp_Directive_Config<
-	T extends keyof Csp_Directives,
+	T extends Csp_Directive,
 	D extends Partial<Csp_Directives> = Csp_Directives,
 > =
 	| Csp_Directive_Value<T>
@@ -19,40 +20,86 @@ export type Csp_Directive_Config<
 	  ) => Csp_Directive_Value<T> | undefined);
 
 export type Csp_Config<D extends Partial<Csp_Directives> = Csp_Directives> = {
-	[K in keyof Csp_Directives]?: Csp_Directive_Config<K, D>;
+	[K in Csp_Directive]?: Csp_Directive_Config<K, D>;
 };
 
-// TODO BLOCK add `trusted` domains via an option for simple usage
-// TODO BLOCK ensure it allows iframing on trusted domains
+export interface Csp_Options<D extends Partial<Csp_Directives> = typeof csp_defaults_strict> {
+	/**
+	 * Custom CSP directive configuration that can override defaults with values or functions.
+	 */
+	config?: Csp_Config<D>;
+
+	/**
+	 * Base CSP directives to use (defaults to strict CSP if not provided).
+	 */
+	defaults?: D;
+
+	/**
+	 * Sources to trust across all relevant CSP directives.
+	 * By default, will be added to directives in TRUSTED_DIRECTIVE_KEYS.
+	 * Can include domains, hashes, or nonces.
+	 */
+	trusted_sources?: string | Array<string>;
+
+	/**
+	 * Customize which directives should have trusted sources added.
+	 * All keys must be from TRUSTED_DIRECTIVE_KEYS.
+	 * Defaults to all values in TRUSTED_DIRECTIVE_KEYS.
+	 */
+	trusted_directive_keys?: ReadonlyArray<Trusted_Csp_Directive>;
+}
 
 /**
  * Generates a Content Security Policy configuration by combining defaults with custom settings.
  *
- * @param config - Custom CSP configuration that can override defaults with values or functions
- * @param defaults - Base CSP directives to use as defaults (uses strict CSP by default)
+ * @param options - Configuration options for CSP generation
  * @returns Final CSP directives after applying all configuration
  */
-export const generate_csp = <
-	D extends Partial<Csp_Directives> = typeof csp_defaults_strict,
-	T extends Csp_Config<D> = Csp_Config<D>,
->(
-	config?: T,
-	defaults: D = csp_defaults_strict as unknown as D,
+export const generate_csp = <D extends Partial<Csp_Directives> = typeof csp_defaults_strict>(
+	options?: Csp_Options<D>,
 ): Csp_Directives => {
-	// Clone the defaults to avoid mutation
-	const result = structuredClone(defaults) as Csp_Directives;
+	const config = options?.config || {};
+	const defaults = options?.defaults || (csp_defaults_strict as unknown as D);
+	const trusted_sources = options?.trusted_sources
+		? typeof options.trusted_sources === 'string'
+			? [options.trusted_sources]
+			: options.trusted_sources
+		: null;
+	const trusted_directive_keys = options?.trusted_directive_keys || TRUSTED_DIRECTIVE_KEYS;
 
-	// If no config is provided, return the cloned defaults
-	if (!config) {
-		// Freeze arrays in result to prevent mutation
-		freeze_csp_directives(result);
-		return result;
+	// Clone the defaults to avoid mutation
+	const result: Csp_Directives = structuredClone(defaults);
+
+	// Process trusted sources if any are provided
+	if (trusted_sources && trusted_sources.length > 0) {
+		// Apply trusted sources only to directives in TRUSTED_DIRECTIVE_KEYS
+		for (const key of trusted_directive_keys) {
+			// Ensure the key is actually in TRUSTED_DIRECTIVE_KEYS
+			if (!TRUSTED_DIRECTIVE_KEYS.includes(key)) {
+				throw new Error(
+					`Invalid CSP trusted directive key: '${key}'. Must be one of: ${TRUSTED_DIRECTIVE_KEYS.join(', ')}`,
+				);
+			}
+
+			if (key in result) {
+				const value = result[key];
+				if (Array.isArray(value) && value.length > 0) {
+					// Only add trusted sources if the directive isn't being completely overridden in config
+					if (!(key in config) || typeof config[key] === 'function') {
+						// Don't add trusted sources to ['none'] values
+						if (!(value.length === 1 && value[0] === 'none')) {
+							(result as any)[key] = [...value, ...trusted_sources];
+						}
+					}
+				}
+			}
+		}
 	}
 
-	// Process config values or functions
+	// Process config values or functions, if any
 	for (const key in config) {
 		const k = key as keyof typeof result;
-		const value_or_fn = config[key];
+		const value_or_fn = (config as any)[key];
 		const default_value = defaults[k];
 
 		// If explicitly undefined in config, remove from result
@@ -62,7 +109,10 @@ export const generate_csp = <
 		}
 
 		if (typeof value_or_fn === 'function') {
-			const computed_value = value_or_fn(default_value);
+			// For functions, pass the current value of result[k] which may already include trusted sources
+			const current_value = result[k] !== undefined ? result[k] : default_value;
+			const computed_value = value_or_fn(current_value);
+
 			if (computed_value !== undefined) {
 				// No need to clone primitives, only clone arrays
 				result[k] = Array.isArray(computed_value)
@@ -73,10 +123,8 @@ export const generate_csp = <
 				delete result[k]; // eslint-disable-line @typescript-eslint/no-dynamic-delete
 			}
 		} else {
-			// No need to clone primitives, only clone arrays
-			result[k] = Array.isArray(value_or_fn)
-				? Object.freeze(value_or_fn.slice())
-				: (value_or_fn as any);
+			// Direct value assignment (overrides trusted sources)
+			result[k] = Array.isArray(value_or_fn) ? Object.freeze(value_or_fn.slice()) : value_or_fn;
 		}
 	}
 
@@ -85,6 +133,33 @@ export const generate_csp = <
 
 	return result;
 };
+
+/**
+ * Directives where trusted sources are typically added.
+ * These are directives that commonly accept domains and should
+ * receive trusted sources by default.
+ * This can be narrowed in the options, but cannot be expanded.
+ * All cases not listed here must be handled in the `config`.
+ */
+export const TRUSTED_DIRECTIVE_KEYS = Object.freeze([
+	'base-uri',
+	'script-src',
+	'script-src-elem',
+	'style-src',
+	'img-src',
+	'font-src',
+	'media-src',
+	'manifest-src',
+	'connect-src',
+	'frame-src',
+	'form-action',
+	'worker-src',
+] as const satisfies Array<Csp_Directive>);
+
+/**
+ * Type inferred from TRUSTED_DIRECTIVE_KEYS array.
+ */
+export type Trusted_Csp_Directive = (typeof TRUSTED_DIRECTIVE_KEYS)[number];
 
 /**
  * Default strict CSP directives used as a base configuration.
@@ -117,96 +192,11 @@ export const csp_defaults_strict = {
 
 const freeze_csp_directives = (directives: Partial<Csp_Directives>): void => {
 	for (const key in directives) {
-		if (Array.isArray((directives as any)[key]) && !Object.isFrozen((directives as any)[key])) {
-			Object.freeze((directives as any)[key]);
+		const value = (directives as any)[key];
+		if (Array.isArray(value) && !Object.isFrozen(value)) {
+			Object.freeze(value);
 		}
 	}
+	// Also freeze the directives object itself
+	Object.freeze(directives);
 };
-
-// Here are the Svelte types for reference (they're not exported, instead we pull them off the KitConfig above):
-// export namespace Csp {
-// 	type ActionSource = 'strict-dynamic' | 'report-sample';
-// 	type BaseSource =
-// 		| 'self'
-// 		| 'unsafe-eval'
-// 		| 'unsafe-hashes'
-// 		| 'unsafe-inline'
-// 		| 'wasm-unsafe-eval'
-// 		| 'none';
-// 	type CryptoSource = `${'nonce' | 'sha256' | 'sha384' | 'sha512'}-${string}`;
-// 	type FrameSource = HostSource | SchemeSource | 'self' | 'none';
-// 	type HostNameScheme = `${string}.${string}` | 'localhost';
-// 	type HostSource = `${HostProtocolSchemes}${HostNameScheme}${PortScheme}`;
-// 	type HostProtocolSchemes = `${string}://` | '';
-// 	type HttpDelineator = '/' | '?' | '#' | '\\';
-// 	type PortScheme = `:${number}` | '' | ':*`;
-// 	type SchemeSource = 'http:' | 'https:' | 'data:' | 'mediastream:' | 'blob:' | 'filesystem:';
-// 	type Source = HostSource | SchemeSource | CryptoSource | BaseSource;
-// 	type Sources = Source[];
-// }
-// export interface CspDirectives {
-// 	'child-src'?: Csp.Sources;
-// 	'default-src'?: Array<Csp.Source | Csp.ActionSource>;
-// 	'frame-src'?: Csp.Sources;
-// 	'worker-src'?: Csp.Sources;
-// 	'connect-src'?: Csp.Sources;
-// 	'font-src'?: Csp.Sources;
-// 	'img-src'?: Csp.Sources;
-// 	'manifest-src'?: Csp.Sources;
-// 	'media-src'?: Csp.Sources;
-// 	'object-src'?: Csp.Sources;
-// 	'prefetch-src'?: Csp.Sources;
-// 	'script-src'?: Array<Csp.Source | Csp.ActionSource>;
-// 	'script-src-elem'?: Csp.Sources;
-// 	'script-src-attr'?: Csp.Sources;
-// 	'style-src'?: Array<Csp.Source | Csp.ActionSource>;
-// 	'style-src-elem'?: Csp.Sources;
-// 	'style-src-attr'?: Csp.Sources;
-// 	'base-uri'?: Array<Csp.Source | Csp.ActionSource>;
-// 	sandbox?: Array<
-// 		| 'allow-downloads-without-user-activation'
-// 		| 'allow-forms'
-// 		| 'allow-modals'
-// 		| 'allow-orientation-lock'
-// 		| 'allow-pointer-lock'
-// 		| 'allow-popups'
-// 		| 'allow-popups-to-escape-sandbox'
-// 		| 'allow-presentation'
-// 		| 'allow-same-origin'
-// 		| 'allow-scripts'
-// 		| 'allow-storage-access-by-user-activation'
-// 		| 'allow-top-navigation'
-// 		| 'allow-top-navigation-by-user-activation'
-// 	>;
-// 	'form-action'?: Array<Csp.Source | Csp.ActionSource>;
-// 	'frame-ancestors'?: Array<Csp.HostSource | Csp.SchemeSource | Csp.FrameSource>;
-// 	'navigate-to'?: Array<Csp.Source | Csp.ActionSource>;
-// 	'report-uri'?: string[];
-// 	'report-to'?: string[];
-
-// 	'require-trusted-types-for'?: Array<'script'>;
-// 	'trusted-types'?: Array<'none' | 'allow-duplicates' | '*' | string>;
-// 	'upgrade-insecure-requests'?: boolean;
-
-// 	/** @deprecated */
-// 	'require-sri-for'?: Array<'script' | 'style' | 'script style'>;
-
-// 	/** @deprecated */
-// 	'block-all-mixed-content'?: boolean;
-
-// 	/** @deprecated */
-// 	'plugin-types'?: Array<`${string}/${string}` | 'none'>;
-
-// 	/** @deprecated */
-// 	referrer?: Array<
-// 		| 'no-referrer'
-// 		| 'no-referrer-when-downgrade'
-// 		| 'origin'
-// 		| 'origin-when-cross-origin'
-// 		| 'same-origin'
-// 		| 'strict-origin'
-// 		| 'strict-origin-when-cross-origin'
-// 		| 'unsafe-url'
-// 		| 'none'
-// 	>;
-// }
