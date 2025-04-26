@@ -5,10 +5,8 @@ export type Csp = Defined<KitConfig['csp']>;
 export type Csp_Directives = Defined<Csp['directives']>;
 export type Csp_Directive = keyof Csp_Directives;
 
-// type helper to determine the value type for each directive
 export type Csp_Directive_Value<T extends Csp_Directive> = Defined<Csp_Directives[T]>;
 
-// config type that handles both static values and functions that may return undefined
 export type Csp_Directive_Config<
 	T extends Csp_Directive,
 	D extends Partial<Csp_Directives> = Csp_Directives,
@@ -37,22 +35,22 @@ export interface Csp_Options<
 	defaults?: D;
 
 	/**
-	 * Sources to trust across all relevant CSP directives, those in `trusted_directive_keys`.
+	 * Sources to trust across relevant CSP directives listed in `trusted_directive_keys`.
 	 * Can include domains, hashes, or nonces.
 	 */
 	trusted_sources?: string | Array<string>;
 
 	/**
 	 * Customize which directives should have `trusted_sources` added.
-	 * All keys must be from `TRUSTED_CSP_DIRECTIVE_KEYS`.
+	 * Must use keys from `TRUSTED_CSP_DIRECTIVE_KEYS`.
 	 * Defaults to all values in `TRUSTED_CSP_DIRECTIVE_KEYS`.
 	 */
 	trusted_directive_keys?: ReadonlyArray<Trusted_Csp_Directive>;
 }
 
 /**
- * Creates directives for SvelteKit's Content Security Policy (CSP) config,
- * `config.kit.csp.directives`, by combining strict defaults with custom settings.
+ * Creates directives for SvelteKit's Content Security Policy config at `config.kit.csp.directives`,
+ * combining strict defaults with custom settings.
  */
 export const create_csp_directives = <
 	D extends Partial<Csp_Directives> = typeof STRICT_CSP_DIRECTIVE_DEFAULTS,
@@ -136,11 +134,8 @@ export const create_csp_directives = <
 };
 
 /**
- * Directives where trusted sources are typically added.
- * These are directives that commonly accept domains and should
- * receive trusted sources by default.
- * This can be narrowed in the options, but cannot be expanded.
- * All cases not listed here must be handled in the `config`.
+ * Directives where trusted sources are added by default.
+ * Can be customized in `create_csp_directives` with `options.trusted_directive_keys`.
  */
 export const TRUSTED_CSP_DIRECTIVE_KEYS = Object.freeze([
 	'base-uri',
@@ -164,7 +159,7 @@ export const TRUSTED_CSP_DIRECTIVE_KEYS = Object.freeze([
 export type Trusted_Csp_Directive = (typeof TRUSTED_CSP_DIRECTIVE_KEYS)[number];
 
 /**
- * Default strict CSP directives used as a base configuration.
+ * Default strict CSP directives used as base configuration.
  * Can be customized in `create_csp_directives` with `options.defaults`.
  */
 export const STRICT_CSP_DIRECTIVE_DEFAULTS = {
@@ -200,6 +195,5 @@ const freeze_csp_directives = (directives: Partial<Csp_Directives>): void => {
 			Object.freeze(value);
 		}
 	}
-	// Also freeze the directives object itself
 	Object.freeze(directives);
 };
