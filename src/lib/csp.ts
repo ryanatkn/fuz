@@ -57,14 +57,14 @@ export const create_csp_directives = <
 >(
 	options?: Csp_Options<D>,
 ): Csp_Directives => {
-	const config = options?.config || {};
-	const defaults = options?.defaults || (CSP_DIRECTIVES_STRICT_DEFAULTS as unknown as D);
+	const config = options?.config ?? {};
+	const defaults = options?.defaults ?? (CSP_DIRECTIVES_STRICT_DEFAULTS as unknown as D);
 	const trusted_sources = options?.trusted_sources
 		? typeof options.trusted_sources === 'string'
 			? [options.trusted_sources]
 			: options.trusted_sources
 		: null;
-	const trusted_directives = options?.trusted_directives || TRUSTED_CSP_DIRECTIVES;
+	const trusted_directives = options?.trusted_directives ?? TRUSTED_CSP_DIRECTIVES;
 
 	// Clone the defaults to avoid mutation
 	const result: Csp_Directives = structuredClone(defaults);
@@ -84,6 +84,7 @@ export const create_csp_directives = <
 				if (!Array.isArray(value)) continue;
 				// Only add trusted sources if the directive isn't being completely overridden in config
 				if (!(key in config) || typeof config[key] === 'function') {
+					// TODO BLOCK what if the default is `['none']`?
 					(result as any)[key] = [...value, ...trusted_sources];
 				}
 			}
@@ -135,10 +136,12 @@ export const TRUSTED_CSP_DIRECTIVES = Object.freeze([
 	'script-src',
 	'script-src-elem',
 	'style-src',
+	'style-src-elem',
 	'img-src',
 	'font-src',
 	'media-src',
 	'manifest-src',
+	'child-src',
 	'connect-src',
 	'frame-src',
 	'frame-ancestors',
@@ -164,12 +167,15 @@ export const CSP_DIRECTIVES_STRICT_DEFAULTS = {
 	'script-src-elem': ['self'], // Script elements (standalone scripts)
 	'script-src-attr': ['none'], // Block scripts in HTML attributes
 	// Content and resources
-	'style-src': ['self', 'unsafe-inline'], // CSS styles (including unsafe-inline but network connections are disallowed by other directives)
+	'style-src': ['self', 'unsafe-inline'], // Main style directive (uses unsafe-inline but network connections are disallowed by other directives)
+	'style-src-elem': ['self', 'unsafe-inline'], // Style elements (standalone stylesheets)
+	'style-src-attr': ['unsafe-inline'], // Style attributes
 	'img-src': ['self', 'data:'], // Images (including data: URIs)
 	'font-src': ['self'], // Fonts
 	'media-src': ['self'], // Audio/video
 	'manifest-src': ['self'], // Web app manifests
 	// Network and embedding
+	'child-src': ['self'], // Fallback for frame-src and worker-src
 	'connect-src': ['self'], // XHR, fetch, WebSockets
 	'frame-src': ['self'], // Frames/iframes
 	'frame-ancestors': ['self'], // Control what can embed this page

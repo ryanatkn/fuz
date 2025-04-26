@@ -484,11 +484,11 @@ test('create_csp_directives with config should also freeze the result object', (
 	);
 });
 
-test('create_csp_directives with function returning empty array', () => {
+test('create_csp_directives with empty arrays', () => {
 	const csp = create_csp_directives({
 		config: {
-			'script-src': () => [],
-			'connect-src': () => [], // Empty but not undefined
+			'script-src': [],
+			'connect-src': () => [],
 		},
 	});
 
