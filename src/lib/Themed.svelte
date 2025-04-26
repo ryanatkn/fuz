@@ -16,7 +16,6 @@
 		save_theme as default_save_theme,
 		load_theme as default_load_theme,
 		themer_context,
-		create_theme_style_html,
 		Themer,
 	} from '$lib/theme.svelte.js';
 	import {effect_with_count} from '$lib/rune_helpers.svelte.js';
@@ -93,7 +92,7 @@
 			? null
 			: render_theme_style(themer.theme),
 	);
-	const theme_style_html = $derived(style ? create_theme_style_html(style) : null);
+	const theme_style_html = $derived(style ? `<style>${style}</style>` : null);
 	const theme_setup_script = $derived(create_theme_setup_script(color_scheme_fallback));
 
 	effect_with_count((count) => {

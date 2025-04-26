@@ -153,13 +153,3 @@ export const create_theme_setup_script = (
 		} catch (_) {${fallback === 'dark' ? " document.documentElement.classList.add('dark'); " : ''}}
 	</script>
 `;
-
-/**
- * Creates an HTML style string to be inserted into the `head`
- * that overrides the theme for a part of the page.
- * @param style same as the result of a call to `render_theme_style`
- * @returns HTML string with the style tag and its contents
- */
-export const create_theme_style_html = (style: string): string => `<style>
-	${style}
-</style>`;

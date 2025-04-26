@@ -7,7 +7,7 @@
 	import {render_theme_style} from '@ryanatkn/moss/theme.js';
 	import {BROWSER} from 'esm-env';
 
-	import {themer_context, Themer, create_theme_style_html} from '$lib/theme.svelte.js';
+	import {themer_context, Themer} from '$lib/theme.svelte.js';
 
 	// TODO @many revisit Themed_Scope
 
@@ -50,7 +50,7 @@
 	themer_context.set(themer);
 
 	const style = $derived(render_theme_style(themer.theme, {id, empty_default_theme: false}));
-	const theme_style_html = $derived(style ? create_theme_style_html(style) : null);
+	const theme_style_html = $derived(style ? `<style>${style}</style>` : null);
 
 	const final_color_scheme = $derived(
 		themer.color_scheme === 'dark' || themer.color_scheme === 'light'
