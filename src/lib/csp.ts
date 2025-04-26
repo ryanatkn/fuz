@@ -145,7 +145,6 @@ export const TRUSTED_CSP_DIRECTIVES = Object.freeze([
 	'font-src',
 	'media-src',
 	'manifest-src',
-	'child-src',
 	'connect-src',
 	'frame-src',
 	'frame-ancestors',
@@ -179,7 +178,7 @@ export const CSP_DIRECTIVES_STRICT_DEFAULTS = {
 	'media-src': ['self'], // Audio/video
 	'manifest-src': ['self'], // Web app manifests
 	// Network and embedding
-	'child-src': ['self'], // Fallback for frame-src and worker-src
+	'child-src': ['none'], // Not trusted, extends default-src so worker-src and frame-src are additionally blocked
 	'connect-src': ['self'], // XHR, fetch, WebSockets
 	'frame-src': ['self'], // Frames/iframes
 	'frame-ancestors': ['self'], // Control what can embed this page
