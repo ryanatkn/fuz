@@ -123,7 +123,7 @@ export const create_csp_directives = <
 		}
 	}
 
-	// Freeze any remaining arrays that came from defaults
+	// Freeze the object and any remaining arrays that came from defaults
 	freeze_directives(result);
 
 	return result;
@@ -131,7 +131,9 @@ export const create_csp_directives = <
 
 /**
  * Directives where trusted sources are added by default.
- * Can be customized in `create_csp_directives` with `options.trusted_directives`.
+ * Can be customized in `create_csp_directives` with `options.trusted_directives`,
+ * but can only be narrowed.
+ * Other directives can be explicitly overridden in `options.config`.
  */
 export const TRUSTED_CSP_DIRECTIVES = Object.freeze([
 	'base-uri',
@@ -152,7 +154,7 @@ export const TRUSTED_CSP_DIRECTIVES = Object.freeze([
 ] as const satisfies Array<Csp_Directive>);
 
 /**
- * Type inferred from `TRUSTED_CSP_DIRECTIVES` array.
+ * Inferred from `TRUSTED_CSP_DIRECTIVES`.
  */
 export type Trusted_Csp_Directive = (typeof TRUSTED_CSP_DIRECTIVES)[number];
 
