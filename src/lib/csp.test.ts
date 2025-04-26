@@ -263,8 +263,9 @@ test('create_csp_directives with trusted_sources adds sources to relevant direct
 	assert.equal(csp['style-src'], ['self', 'unsafe-inline', TRUSTED]);
 	assert.equal(csp['frame-ancestors'], ['self', TRUSTED]);
 
-	// Shouldn't be added to directives that have ['none']
+	// Untrusted directives don't get trusted sources
 	assert.equal(csp['default-src'], ['none']);
+	assert.equal(csp['object-src'], ['none']);
 });
 
 test('create_csp_directives with multiple trusted_sources', () => {

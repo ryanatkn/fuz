@@ -82,13 +82,10 @@ export const create_csp_directives = <
 
 			if (key in result) {
 				const value = result[key];
-				if (Array.isArray(value) && value.length > 0) {
+				if (Array.isArray(value)) {
 					// Only add trusted sources if the directive isn't being completely overridden in config
 					if (!(key in config) || typeof config[key] === 'function') {
-						// Don't add trusted sources to ['none'] values
-						if (!(value.length === 1 && value[0] === 'none')) {
-							(result as any)[key] = [...value, ...trusted_sources];
-						}
+						(result as any)[key] = [...value, ...trusted_sources];
 					}
 				}
 			}
