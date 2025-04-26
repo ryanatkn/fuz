@@ -177,6 +177,10 @@
       "svelte": "./dist/Copy_To_Clipboard.svelte",
       "default": "./dist/Copy_To_Clipboard.svelte"
     },
+    "./csp.js": {
+      "types": "./dist/csp.d.ts",
+      "default": "./dist/csp.js"
+    },
     "./Details.svelte": {
       "types": "./dist/Details.svelte.d.ts",
       "svelte": "./dist/Details.svelte",

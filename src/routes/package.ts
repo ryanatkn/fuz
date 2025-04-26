@@ -150,6 +150,7 @@ export const package_json = {
 			svelte: './dist/Copy_To_Clipboard.svelte',
 			default: './dist/Copy_To_Clipboard.svelte',
 		},
+		'./csp.js': {types: './dist/csp.d.ts', default: './dist/csp.js'},
 		'./Details.svelte': {
 			types: './dist/Details.svelte.d.ts',
 			svelte: './dist/Details.svelte',
@@ -378,6 +379,22 @@ export const src_json = {
 		'./Contextmenu_Text_Entry.svelte': {path: 'Contextmenu_Text_Entry.svelte', declarations: []},
 		'./Contextmenu.svelte': {path: 'Contextmenu.svelte', declarations: []},
 		'./Copy_To_Clipboard.svelte': {path: 'Copy_To_Clipboard.svelte', declarations: []},
+		'./csp.js': {
+			path: 'csp.ts',
+			declarations: [
+				{name: 'Csp', kind: 'type'},
+				{name: 'Csp_Directives', kind: 'type'},
+				{name: 'Csp_Directive', kind: 'type'},
+				{name: 'Csp_Directive_Value', kind: 'type'},
+				{name: 'Csp_Directive_Config', kind: 'type'},
+				{name: 'Csp_Config', kind: 'type'},
+				{name: 'Csp_Options', kind: 'type'},
+				{name: 'generate_csp', kind: 'function'},
+				{name: 'TRUSTED_DIRECTIVE_KEYS', kind: 'variable'},
+				{name: 'Trusted_Csp_Directive', kind: 'type'},
+				{name: 'csp_defaults_strict', kind: 'variable'},
+			],
+		},
 		'./Details.svelte': {path: 'Details.svelte', declarations: []},
 		'./Dialog.svelte': {path: 'Dialog.svelte', declarations: []},
 		'./dialog.js': {
