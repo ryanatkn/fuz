@@ -498,7 +498,6 @@ export const src_json = {
 				{name: 'THEME_STORAGE_KEY', kind: 'variable'},
 				{name: 'save_theme', kind: 'function'},
 				{name: 'load_theme', kind: 'function'},
-				{name: 'create_theme_setup_script', kind: 'function'},
 			],
 		},
 		'./Themed.svelte': {path: 'Themed.svelte', declarations: []},
