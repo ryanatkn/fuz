@@ -177,10 +177,6 @@
       "svelte": "./dist/Copy_To_Clipboard.svelte",
       "default": "./dist/Copy_To_Clipboard.svelte"
     },
-    "./csp_directive_specs.js": {
-      "types": "./dist/csp_directive_specs.d.ts",
-      "default": "./dist/csp_directive_specs.js"
-    },
     "./csp_of_ryanatkn.js": {
       "types": "./dist/csp_of_ryanatkn.d.ts",
       "default": "./dist/csp_of_ryanatkn.js"

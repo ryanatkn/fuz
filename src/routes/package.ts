@@ -150,10 +150,6 @@ export const package_json = {
 			svelte: './dist/Copy_To_Clipboard.svelte',
 			default: './dist/Copy_To_Clipboard.svelte',
 		},
-		'./csp_directive_specs.js': {
-			types: './dist/csp_directive_specs.d.ts',
-			default: './dist/csp_directive_specs.js',
-		},
 		'./csp_of_ryanatkn.js': {
 			types: './dist/csp_of_ryanatkn.d.ts',
 			default: './dist/csp_of_ryanatkn.js',
@@ -209,6 +205,11 @@ export const package_json = {
 		'./library_helpers.svelte.js': {
 			types: './dist/library_helpers.svelte.d.ts',
 			default: './dist/library_helpers.svelte.js',
+		},
+		'./Library_Menu_Header.svelte': {
+			types: './dist/Library_Menu_Header.svelte.d.ts',
+			svelte: './dist/Library_Menu_Header.svelte',
+			default: './dist/Library_Menu_Header.svelte',
 		},
 		'./Library_Menu.svelte': {
 			types: './dist/Library_Menu.svelte.d.ts',
@@ -389,13 +390,6 @@ export const src_json = {
 		'./Contextmenu_Text_Entry.svelte': {path: 'Contextmenu_Text_Entry.svelte', declarations: []},
 		'./Contextmenu.svelte': {path: 'Contextmenu.svelte', declarations: []},
 		'./Copy_To_Clipboard.svelte': {path: 'Copy_To_Clipboard.svelte', declarations: []},
-		'./csp_directive_specs.js': {
-			path: 'csp_directive_specs.ts',
-			declarations: [
-				{name: 'csp_directive_specs', kind: 'variable'},
-				{name: 'csp_directive_spec_by_name', kind: 'variable'},
-			],
-		},
 		'./csp_of_ryanatkn.js': {
 			path: 'csp_of_ryanatkn.ts',
 			declarations: [{name: 'csp_trusted_sources_of_ryanatkn', kind: 'variable'}],
@@ -417,6 +411,8 @@ export const src_json = {
 				{name: 'is_csp_trusted', kind: 'function'},
 				{name: 'csp_directive_value_defaults', kind: 'variable'},
 				{name: 'csp_directive_required_trust_defaults', kind: 'variable'},
+				{name: 'csp_directive_specs', kind: 'variable'},
+				{name: 'csp_directive_spec_by_name', kind: 'variable'},
 				{name: 'Csp_Action_Source', kind: 'type'},
 				{name: 'Csp_Base_Source', kind: 'type'},
 				{name: 'Csp_Crypto_Source', kind: 'type'},
@@ -476,6 +472,7 @@ export const src_json = {
 				{name: 'Library_Links', kind: 'class'},
 			],
 		},
+		'./Library_Menu_Header.svelte': {path: 'Library_Menu_Header.svelte', declarations: []},
 		'./Library_Menu.svelte': {path: 'Library_Menu.svelte', declarations: []},
 		'./Library_Page_Links.svelte': {path: 'Library_Page_Links.svelte', declarations: []},
 		'./Library_Primary_Nav.svelte': {path: 'Library_Primary_Nav.svelte', declarations: []},
