@@ -48,7 +48,7 @@ export const package_json = {
 		'@sveltejs/kit': '^2.20.7',
 		'@sveltejs/package': '^2.3.11',
 		'@sveltejs/vite-plugin-svelte': '^5.0.3',
-		'@types/node': '^22.14.1',
+		'@types/node': '^22.15.3',
 		'@types/prismjs': '^1.26.5',
 		eslint: '^9.25.1',
 		'eslint-plugin-svelte': '^3.5.1',
@@ -61,7 +61,7 @@ export const package_json = {
 		'svelte-check': '^4.1.6',
 		tslib: '^2.8.1',
 		typescript: '^5.8.3',
-		'typescript-eslint': '^8.31.0',
+		'typescript-eslint': '^8.31.1',
 		uvu: '^0.5.6',
 	},
 	prettier: {
