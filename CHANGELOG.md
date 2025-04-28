@@ -1,5 +1,20 @@
 # @ryanatkn/fuz
 
+## 0.137.0
+
+### Minor Changes
+
+- fix inline theme script with CSP ([#59](https://github.com/ryanatkn/fuz/pull/59))
+
+  - remove `create_theme_style_html`
+  - change `COLOR_SCHEME_STORAGE_KEY` value to have a prefix, `'fuz:color-scheme'`
+  - rename `themer.svelte.ts` from `theme.svelte.ts`
+  - add `storage.ts` localStorage helpers
+
+### Patch Changes
+
+- add `csp.ts` module ([#59](https://github.com/ryanatkn/fuz/pull/59))
+
 ## 0.136.2
 
 ### Patch Changes
