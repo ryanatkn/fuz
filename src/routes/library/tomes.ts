@@ -15,6 +15,8 @@ import Redirect from '$routes/library/redirect/+page.svelte';
 import Hue_Input from '$routes/library/hue_input/+page.svelte';
 import Breadcrumb from '$routes/library/breadcrumb/+page.svelte';
 import Card from '$routes/library/card/+page.svelte';
+import Svg from '$routes/library/svg/+page.svelte';
+import csp from '$routes/library/csp/+page.svelte';
 import logos from '$routes/library/logos/+page.svelte';
 
 // TODO maybe decouple `related` from `Tome` to get bidirectionality for free
@@ -33,6 +35,18 @@ export const tomes: Array<Tome> = [
 		category: 'theming',
 		component: Themed,
 		related: [],
+	},
+	{
+		name: 'csp',
+		category: 'helpers',
+		component: csp,
+		related: [],
+	},
+	{
+		name: 'logos',
+		category: 'helpers',
+		component: logos,
+		related: ['Package_Detail', 'Package_Summary', 'Svg'],
 	},
 	{
 		name: 'Alert',
@@ -83,12 +97,6 @@ export const tomes: Array<Tome> = [
 		related: [],
 	},
 	{
-		name: 'logos',
-		category: 'components',
-		component: logos,
-		related: ['Package_Detail', 'Package_Summary'],
-	},
-	{
 		name: 'Package_Detail',
 		category: 'components',
 		component: Package_Detail,
@@ -117,6 +125,12 @@ export const tomes: Array<Tome> = [
 		category: 'components',
 		component: Redirect,
 		related: ['Breadcrumb'],
+	},
+	{
+		name: 'Svg',
+		category: 'components',
+		component: Svg,
+		related: ['logos'],
 	},
 	{
 		name: 'Teleport',

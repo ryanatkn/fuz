@@ -391,7 +391,10 @@ export const src_json = {
 		'./Copy_To_Clipboard.svelte': {path: 'Copy_To_Clipboard.svelte', declarations: []},
 		'./csp_directive_specs.js': {
 			path: 'csp_directive_specs.ts',
-			declarations: [{name: 'csp_directive_specs', kind: 'variable'}],
+			declarations: [
+				{name: 'csp_directive_specs', kind: 'variable'},
+				{name: 'csp_directive_spec_by_name', kind: 'variable'},
+			],
 		},
 		'./csp_of_ryanatkn.js': {
 			path: 'csp_of_ryanatkn.ts',
@@ -401,16 +404,17 @@ export const src_json = {
 			path: 'csp.ts',
 			declarations: [
 				{name: 'create_csp_directives', kind: null},
+				{name: 'Create_Csp_Directives_Options', kind: 'type'},
 				{name: 'Csp_Directive', kind: 'type'},
 				{name: 'parse_csp_directive', kind: 'function'},
 				{name: 'Csp_Directive_Value', kind: 'type'},
 				{name: 'csp_trust_levels', kind: 'variable'},
+				{name: 'csp_trust_level_value', kind: 'variable'},
 				{name: 'Csp_Trust_Level', kind: 'type'},
 				{name: 'parse_csp_trust_level', kind: 'function'},
 				{name: 'Csp_Source_Spec', kind: 'type'},
 				{name: 'Csp_Directive_Spec', kind: 'type'},
 				{name: 'is_csp_trusted', kind: 'function'},
-				{name: 'Create_Csp_Directives_Options', kind: 'type'},
 				{name: 'csp_directive_value_defaults', kind: 'variable'},
 				{name: 'csp_directive_required_trust_defaults', kind: 'variable'},
 				{name: 'Csp_Action_Source', kind: 'type'},

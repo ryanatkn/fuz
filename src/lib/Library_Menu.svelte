@@ -1,9 +1,10 @@
 <script lang="ts">
 	import {page} from '$app/stores';
 	import {slide} from 'svelte/transition';
+	import type {Snippet} from 'svelte';
 
 	import {to_tome_pathname, type Tome} from '$lib/tome.js';
-	import type {Snippet} from 'svelte';
+	import Library_Menu_Header from '$lib/Library_Menu_Header.svelte';
 
 	interface Props {
 		tomes: Array<Tome>;
@@ -14,8 +15,7 @@
 
 	const tomes_by_category = $derived(
 		tomes.reduce<Record<string, Array<Tome>>>((result, c) => {
-			result[c.category] ??= [];
-			result[c.category].push(c);
+			(result[c.category] ??= []).push(c);
 			return result;
 		}, {}),
 	);
@@ -26,7 +26,9 @@
 <ul class="library_menu unstyled">
 	{#each Object.entries(tomes_by_category) as [category, tomes] (category)}
 		<li class="category">
-			{#if children}{@render children(category)}{:else}<h6>{category}</h6>{/if}
+			{#if children}{@render children(category)}{:else}<Library_Menu_Header
+					>{category}</Library_Menu_Header
+				>{/if}
 			<ul class="unstyled">
 				{#each tomes as item (item)}
 					{@const pathname = to_tome_pathname(item)}

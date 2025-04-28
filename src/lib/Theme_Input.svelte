@@ -50,7 +50,7 @@
 			{#if enable_editing}
 				<button
 					type="button"
-					class="icon_button plain"
+					class="icon_button plain ml_sm"
 					onclick={(e) => {
 						swallow(e);
 						onedit?.(theme);
@@ -64,5 +64,14 @@
 <style>
 	.theme_button {
 		flex: 1;
+		border-radius: 0;
+	}
+	li:first-child .theme_button {
+		border-top-left-radius: var(--radius_sm);
+		border-top-right-radius: var(--radius_sm);
+	}
+	li:last-child .theme_button {
+		border-bottom-left-radius: var(--radius_sm);
+		border-bottom-right-radius: var(--radius_sm);
 	}
 </style>

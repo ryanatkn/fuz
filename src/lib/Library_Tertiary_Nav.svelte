@@ -26,7 +26,7 @@
 <aside class="library_tertiary_nav unstyled">
 	{#if tomes_related_to_selected?.length}
 		<Library_Menu tomes={tomes_related_to_selected}>
-			{#snippet children(category)}<h6>related {category}</h6>{/snippet}
+			{#snippet children(category)}<h4 class="mb_sm">related {category}</h4>{/snippet}
 		</Library_Menu>
 	{/if}
 	{#if library_links.library_links.length > 1}

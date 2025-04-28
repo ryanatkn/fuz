@@ -18,7 +18,7 @@
 </script>
 
 <div class="library_page_links">
-	<h6>On this page</h6>
+	<h4 class="mb_sm">on this page</h4>
 	{#if sidebar}
 		<div class="sidebar_wrapper">{@render content()}</div>
 	{:else}
@@ -27,7 +27,7 @@
 </div>
 
 {#snippet content()}
-	<nav aria-label="On this page" class="w_100">
+	<nav aria-label="on this page" class="w_100">
 		<ul class="unstyled">
 			{#each library_links.library_links as item (item.id)}
 				<li role="none" transition:slide class:pl_xl4={item.tag === 'h4'}>

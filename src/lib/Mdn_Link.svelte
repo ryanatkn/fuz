@@ -27,10 +27,10 @@
 </script>
 
 <a {...attrs} {href} class="chip white_space_nowrap"
-	>{#if typeof final_children === 'string'}
+	><Svg data={mdn_logo} inline size="var(--icon_size_xs)" attrs={{class: 'mx_xs3'}} />
+	{#if typeof final_children === 'string'}
 		<span class="font_mono">{final_children}</span>
 	{:else}
 		{@render final_children()}
-	{/if}
-	<Svg data={mdn_logo} inline size="var(--icon_size_xs)" attrs={{class: 'mx_xs3'}} /></a
+	{/if}</a
 >
