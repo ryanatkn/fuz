@@ -249,6 +249,11 @@
       "types": "./dist/library_helpers.svelte.d.ts",
       "default": "./dist/library_helpers.svelte.js"
     },
+    "./Library_Menu_Header.svelte": {
+      "types": "./dist/Library_Menu_Header.svelte.d.ts",
+      "svelte": "./dist/Library_Menu_Header.svelte",
+      "default": "./dist/Library_Menu_Header.svelte"
+    },
     "./Library_Menu.svelte": {
       "types": "./dist/Library_Menu.svelte.d.ts",
       "svelte": "./dist/Library_Menu.svelte",
