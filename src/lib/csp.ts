@@ -227,6 +227,8 @@ export const is_csp_trusted = (
 const is_none_directive = (value: unknown): boolean =>
 	Array.isArray(value) && value.includes('none');
 
+export const COLOR_SCHEME_SCRIPT_HASH = 'sha256-QOxqn7EUzb3ydF9SALJoJGWSvywW9R0AfTDSenB83Z8=';
+
 /**
  * The base CSP directive defaults.
  * Prioritizes safety but loosens around media and styles, relying on defense-in-depth.
@@ -237,8 +239,8 @@ export const csp_directive_value_defaults: Record<
 	Csp_Directive_Value<Csp_Directive> | null
 > = Object.freeze({
 	'default-src': ['none'],
-	'script-src': ['self'], // Locked down, eval is opt-in
-	'script-src-elem': ['self'], // Script elements (standalone scripts)
+	'script-src': ['self', COLOR_SCHEME_SCRIPT_HASH], // Eval is opt-in, scripting is locked down except for self and the color scheme loader script
+	'script-src-elem': ['self', COLOR_SCHEME_SCRIPT_HASH], // Block script elements except for self and the color scheme loader
 	'script-src-attr': ['none'], // Block scripts in HTML attributes
 	'style-src': ['self', 'unsafe-inline'], // Main style directive (uses unsafe-inline but network connections are disallowed by other directives)
 	'style-src-elem': ['self', 'unsafe-inline'], // Style elements (standalone stylesheets)

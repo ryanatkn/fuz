@@ -14,6 +14,7 @@ import {
 	type Csp_Directives,
 	csp_directive_value_defaults,
 	csp_directive_specs,
+	COLOR_SCHEME_SCRIPT_HASH,
 } from '$lib/csp.js';
 
 // Type tests, this errors if Csp_Directives is not assignable to SvelteKit's directives type. (which isn't exported directly)
@@ -55,7 +56,7 @@ test('create_csp_directives produces defaults with no options', () => {
 
 	// Check specific examples
 	assert.equal(csp['default-src'], ['none']);
-	assert.equal(csp['script-src'], ['self']);
+	assert.equal(csp['script-src'], ['self', COLOR_SCHEME_SCRIPT_HASH]);
 	assert.equal(csp['img-src'], ['self', 'data:', 'blob:', 'filesystem:']);
 	assert.is(csp['upgrade-insecure-requests'], true);
 });
@@ -759,7 +760,7 @@ test('defaults option overrides base defaults', () => {
 	assert.equal(csp['connect-src'], ['self', DEFAULT_OVERRIDE]);
 
 	// Other directives should use original defaults
-	assert.equal(csp['script-src'], ['self']);
+	assert.equal(csp['script-src'], ['self', COLOR_SCHEME_SCRIPT_HASH]);
 });
 
 test('defaults are overridden by directives option', () => {

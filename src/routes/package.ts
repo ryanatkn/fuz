@@ -409,6 +409,7 @@ export const src_json = {
 				{name: 'Csp_Source_Spec', kind: 'type'},
 				{name: 'Csp_Directive_Spec', kind: 'type'},
 				{name: 'is_csp_trusted', kind: 'function'},
+				{name: 'COLOR_SCHEME_SCRIPT_HASH', kind: 'variable'},
 				{name: 'csp_directive_value_defaults', kind: 'variable'},
 				{name: 'csp_directive_required_trust_defaults', kind: 'variable'},
 				{name: 'csp_directive_specs', kind: 'variable'},
