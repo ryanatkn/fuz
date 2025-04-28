@@ -56,7 +56,7 @@ const csp = create_csp_directives({
   trusted_sources: my_csp_trusted_sources,
 });
 
-// Or get the default with no trusted sources:
+// Or get the default with no trusted sources except 'self':
 const csp = create_csp_directives();
 
 // You can also override or transform directives:
