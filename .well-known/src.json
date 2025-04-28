@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.137.0",
+  "version": "0.137.1",
   "modules": {
     "./package.json": {
       "path": "package.json",
@@ -200,6 +200,10 @@
         {
           "name": "is_csp_trusted",
           "kind": "function"
+        },
+        {
+          "name": "COLOR_SCHEME_SCRIPT_HASH",
+          "kind": "variable"
         },
         {
           "name": "csp_directive_value_defaults",

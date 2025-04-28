@@ -1,2 +1,0 @@
-import{t as a,a as n}from"../chunks/ZFNbJ4mV.js";import{p as i,a as m}from"../chunks/C1MeiME0.js";import{g as p}from"../chunks/BcG1No6H.js";import{T as c}from"../chunks/BfwEmL_Q.js";var h=a(`<section>The <code>Library</code> is the component behind these docs. Its docs are unfinished - for now
-		see usage in <a href="https://github.com/ryanatkn/moss/blob/main/src/routes/library/%2Blayout.svelte">Moss</a>.</section>`);function y(o,t){i(t,!0);const e=p("Library");c(o,{tome:e,children:(s,_)=>{var r=h();n(s,r)},$$slots:{default:!0}}),m()}export{y as component};
