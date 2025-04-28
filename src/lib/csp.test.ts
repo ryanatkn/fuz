@@ -13,8 +13,8 @@ import {
 	type Csp_Source_Spec,
 	type Csp_Directives,
 	csp_directive_value_defaults,
+	csp_directive_specs,
 } from '$lib/csp.js';
-import {csp_directive_specs} from '$lib/csp_directive_specs.js';
 
 // Type tests, this errors if Csp_Directives is not assignable to SvelteKit's directives type. (which isn't exported directly)
 type Kit_Csp_Directives = Defined<KitConfig['csp']>['directives'];
