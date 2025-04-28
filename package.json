@@ -177,6 +177,14 @@
       "svelte": "./dist/Copy_To_Clipboard.svelte",
       "default": "./dist/Copy_To_Clipboard.svelte"
     },
+    "./csp_of_ryanatkn.js": {
+      "types": "./dist/csp_of_ryanatkn.d.ts",
+      "default": "./dist/csp_of_ryanatkn.js"
+    },
+    "./csp.js": {
+      "types": "./dist/csp.d.ts",
+      "default": "./dist/csp.js"
+    },
     "./Details.svelte": {
       "types": "./dist/Details.svelte.d.ts",
       "svelte": "./dist/Details.svelte",
@@ -205,6 +213,10 @@
       "svelte": "./dist/Hashlink.svelte",
       "default": "./dist/Hashlink.svelte"
     },
+    "./helpers.js": {
+      "types": "./dist/helpers.d.ts",
+      "default": "./dist/helpers.js"
+    },
     "./Hidden_Personal_Links.svelte": {
       "types": "./dist/Hidden_Personal_Links.svelte.d.ts",
       "svelte": "./dist/Hidden_Personal_Links.svelte",
@@ -232,6 +244,11 @@
     "./library_helpers.svelte.js": {
       "types": "./dist/library_helpers.svelte.d.ts",
       "default": "./dist/library_helpers.svelte.js"
+    },
+    "./Library_Menu_Header.svelte": {
+      "types": "./dist/Library_Menu_Header.svelte.d.ts",
+      "svelte": "./dist/Library_Menu_Header.svelte",
+      "default": "./dist/Library_Menu_Header.svelte"
     },
     "./Library_Menu.svelte": {
       "types": "./dist/Library_Menu.svelte.d.ts",
@@ -316,6 +333,10 @@
       "svelte": "./dist/Spiders.svelte",
       "default": "./dist/Spiders.svelte"
     },
+    "./storage.js": {
+      "types": "./dist/storage.d.ts",
+      "default": "./dist/storage.js"
+    },
     "./Svg.svelte": {
       "types": "./dist/Svg.svelte.d.ts",
       "svelte": "./dist/Svg.svelte",
@@ -331,14 +352,14 @@
       "svelte": "./dist/Theme_Input.svelte",
       "default": "./dist/Theme_Input.svelte"
     },
-    "./theme.svelte.js": {
-      "types": "./dist/theme.svelte.d.ts",
-      "default": "./dist/theme.svelte.js"
-    },
     "./Themed.svelte": {
       "types": "./dist/Themed.svelte.d.ts",
       "svelte": "./dist/Themed.svelte",
       "default": "./dist/Themed.svelte"
+    },
+    "./themer.svelte.js": {
+      "types": "./dist/themer.svelte.d.ts",
+      "default": "./dist/themer.svelte.js"
     },
     "./Tome_Content.svelte": {
       "types": "./dist/Tome_Content.svelte.d.ts",

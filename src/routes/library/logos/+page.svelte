@@ -2,6 +2,7 @@
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 	import {get_tome_by_name} from '$lib/tome.js';
 	import Tome_Content from '$lib/Tome_Content.svelte';
+	import Tome_Link from '$lib/Tome_Link.svelte';
 	import Svg from '$lib/Svg.svelte';
 	import {
 		zzz_logo,
@@ -34,7 +35,9 @@
 	<section>
 		<!-- TODO @many add `Svg` library entry -->
 		<p>
-			Fuz includes a number of logos available as data that can be mounted with the <code>Svg</code>
+			Fuz includes a number of logos available as data that can be mounted with the <Tome_Link
+				name="Svg"
+			/>
 			component. Only the ones you use are included in your bundle.
 		</p>
 	</section>
