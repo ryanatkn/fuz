@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.137.1
+
+### Patch Changes
+
+- fix color-scheme loader script to use a hash ([a68e699](https://github.com/ryanatkn/fuz/commit/a68e699))
+
 ## 0.137.0
 
 ### Minor Changes
