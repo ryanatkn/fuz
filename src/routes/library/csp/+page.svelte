@@ -44,8 +44,7 @@
 		</p>
 		<!-- TODO make this a generic data-driven helper -->
 		<Code
-			content={`import {create_csp_directives} from '@ryanatkn/fuz/csp.js';
-import type {Csp_Source_Spec} from '@ryanatkn/fuz/csp.js';
+			content={`import {create_csp_directives, type Csp_Source_Spec} from '@ryanatkn/fuz/csp.js';
 
 export const my_csp_trusted_sources: Array<Csp_Source_Spec> = [
 	{source: 'https://*.me.com/', trust: 'high'},
