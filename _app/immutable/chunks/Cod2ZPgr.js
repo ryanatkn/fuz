@@ -1,1 +1,0 @@
-import{U as t,V as f,W as e,j as c}from"./DgHdyJao.js";function u(n){e===null&&t(),f(()=>{const o=c(n);if(typeof o=="function")return o})}function a(n){e===null&&t(),u(()=>()=>c(n))}export{u as a,a as o};

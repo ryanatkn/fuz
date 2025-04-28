@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.136.2",
+  "version": "0.137.0",
   "modules": {
     "./package.json": {
       "path": "package.json",
@@ -141,6 +141,132 @@
       "path": "Copy_To_Clipboard.svelte",
       "declarations": []
     },
+    "./csp_of_ryanatkn.js": {
+      "path": "csp_of_ryanatkn.ts",
+      "declarations": [
+        {
+          "name": "csp_trusted_sources_of_ryanatkn",
+          "kind": "variable"
+        }
+      ]
+    },
+    "./csp.js": {
+      "path": "csp.ts",
+      "declarations": [
+        {
+          "name": "create_csp_directives",
+          "kind": null
+        },
+        {
+          "name": "Create_Csp_Directives_Options",
+          "kind": "type"
+        },
+        {
+          "name": "Csp_Directive",
+          "kind": "type"
+        },
+        {
+          "name": "parse_csp_directive",
+          "kind": "function"
+        },
+        {
+          "name": "Csp_Directive_Value",
+          "kind": "type"
+        },
+        {
+          "name": "csp_trust_levels",
+          "kind": "variable"
+        },
+        {
+          "name": "csp_trust_level_value",
+          "kind": "variable"
+        },
+        {
+          "name": "Csp_Trust_Level",
+          "kind": "type"
+        },
+        {
+          "name": "parse_csp_trust_level",
+          "kind": "function"
+        },
+        {
+          "name": "Csp_Source_Spec",
+          "kind": "type"
+        },
+        {
+          "name": "Csp_Directive_Spec",
+          "kind": "type"
+        },
+        {
+          "name": "is_csp_trusted",
+          "kind": "function"
+        },
+        {
+          "name": "csp_directive_value_defaults",
+          "kind": "variable"
+        },
+        {
+          "name": "csp_directive_required_trust_defaults",
+          "kind": "variable"
+        },
+        {
+          "name": "csp_directive_specs",
+          "kind": "variable"
+        },
+        {
+          "name": "csp_directive_spec_by_name",
+          "kind": "variable"
+        },
+        {
+          "name": "Csp_Action_Source",
+          "kind": "type"
+        },
+        {
+          "name": "Csp_Base_Source",
+          "kind": "type"
+        },
+        {
+          "name": "Csp_Crypto_Source",
+          "kind": "type"
+        },
+        {
+          "name": "Csp_Frame_Source",
+          "kind": "type"
+        },
+        {
+          "name": "Csp_Host_Name_Scheme",
+          "kind": "type"
+        },
+        {
+          "name": "Csp_Host_Source",
+          "kind": "type"
+        },
+        {
+          "name": "Csp_Host_Protocol_Schemes",
+          "kind": "type"
+        },
+        {
+          "name": "Csp_Port_Scheme",
+          "kind": "type"
+        },
+        {
+          "name": "Csp_Scheme_Source",
+          "kind": "type"
+        },
+        {
+          "name": "Csp_Source",
+          "kind": "type"
+        },
+        {
+          "name": "Csp_Sources",
+          "kind": "type"
+        },
+        {
+          "name": "Csp_Directives",
+          "kind": "type"
+        }
+      ]
+    },
     "./Details.svelte": {
       "path": "Details.svelte",
       "declarations": []
@@ -186,6 +312,15 @@
     "./Hashlink.svelte": {
       "path": "Hashlink.svelte",
       "declarations": []
+    },
+    "./helpers.js": {
+      "path": "helpers.ts",
+      "declarations": [
+        {
+          "name": "deep_freeze",
+          "kind": "function"
+        }
+      ]
     },
     "./Hidden_Personal_Links.svelte": {
       "path": "Hidden_Personal_Links.svelte",
@@ -264,6 +399,10 @@
           "kind": "class"
         }
       ]
+    },
+    "./Library_Menu_Header.svelte": {
+      "path": "Library_Menu_Header.svelte",
+      "declarations": []
     },
     "./Library_Menu.svelte": {
       "path": "Library_Menu.svelte",
@@ -415,6 +554,19 @@
       "path": "Spiders.svelte",
       "declarations": []
     },
+    "./storage.js": {
+      "path": "storage.ts",
+      "declarations": [
+        {
+          "name": "save_to_storage",
+          "kind": "function"
+        },
+        {
+          "name": "load_from_storage",
+          "kind": "function"
+        }
+      ]
+    },
     "./Svg.svelte": {
       "path": "Svg.svelte",
       "declarations": []
@@ -427,8 +579,12 @@
       "path": "Theme_Input.svelte",
       "declarations": []
     },
-    "./theme.svelte.js": {
-      "path": "theme.svelte.ts",
+    "./Themed.svelte": {
+      "path": "Themed.svelte",
+      "declarations": []
+    },
+    "./themer.svelte.js": {
+      "path": "themer.svelte.ts",
       "declarations": [
         {
           "name": "Themer",
@@ -451,6 +607,10 @@
           "kind": "variable"
         },
         {
+          "name": "THEME_STORAGE_KEY",
+          "kind": "variable"
+        },
+        {
           "name": "save_color_scheme",
           "kind": "function"
         },
@@ -459,30 +619,14 @@
           "kind": "function"
         },
         {
-          "name": "THEME_STORAGE_KEY",
-          "kind": "variable"
-        },
-        {
           "name": "save_theme",
           "kind": "function"
         },
         {
           "name": "load_theme",
           "kind": "function"
-        },
-        {
-          "name": "create_theme_setup_script",
-          "kind": "function"
-        },
-        {
-          "name": "create_theme_style_html",
-          "kind": "function"
         }
       ]
-    },
-    "./Themed.svelte": {
-      "path": "Themed.svelte",
-      "declarations": []
     },
     "./Tome_Content.svelte": {
       "path": "Tome_Content.svelte",
