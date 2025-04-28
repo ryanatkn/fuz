@@ -45,17 +45,21 @@
 		<!-- TODO make this a generic data-driven helper -->
 		<Code
 			content={`import {create_csp_directives} from '@ryanatkn/fuz/csp.js';
-import {csp_trusted_sources_of_ryanatkn} from '@ryanatkn/fuz/csp_of_ryanatkn.js';
+import type {Csp_Source_Spec} from '@ryanatkn/fuz/csp.js';
 
-// Create CSP directives with these trusted sources
+export const my_csp_trusted_sources: Array<Csp_Source_Spec> = [
+	{source: 'https://*.me.com/', trust: 'high'},
+	{source: 'https://*.my.domain/', trust: 'medium'}, // no scripting allowed
+	{source: 'https://me.github.io/', trust: 'low', directives: ['script-src-elem']}, // low but allow script
+];
+
 const csp = create_csp_directives({
-	// Here's mine, bring your own \`my_csp_trusted_sources\`:
-  trusted_sources: csp_trusted_sources_of_ryanatkn,
+  trusted_sources: my_csp_trusted_sources,
 });
 
 // You can also override or transform directives:
 const custom_csp = create_csp_directives({
-  trusted_sources: csp_trusted_sources_of_ryanatkn,
+  trusted_sources: my_csp_trusted_sources,
   directives: {
     // Add additional domains to existing values:
     'img-src': (v) => [...v, 'trusted.domain'], // extend trusted sources
@@ -96,19 +100,6 @@ const custom_csp = create_csp_directives({
  *
  */
 export type Csp_Trust_Level = Array_Element<typeof csp_trust_levels>;`}
-		/>
-	</section>
-	<section>
-		<p>Define your own trusted sources:</p>
-		<Code
-			lang="ts"
-			content={`import type {Csp_Source_Spec} from '@ryanatkn/fuz/csp.js';
-
-export const my_csp_trusted_sources: Array<Csp_Source_Spec> = [
-	{source: 'https://*.me.com/', trust: 'high'},
-	{source: 'https://*.my.domain/', trust: 'medium'}, // no scripting allowed
-	{source: 'https://me.github.io/', trust: 'low', directives: ['script-src-elem']}, // low but allow script
-];`}
 		/>
 	</section>
 </Tome_Content>
