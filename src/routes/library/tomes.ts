@@ -18,6 +18,7 @@ import Card from '$routes/library/card/+page.svelte';
 import Svg from '$routes/library/svg/+page.svelte';
 import csp from '$routes/library/csp/+page.svelte';
 import logos from '$routes/library/logos/+page.svelte';
+import theming from '$routes/library/theming/+page.svelte';
 
 // TODO maybe decouple `related` from `Tome` to get bidirectionality for free
 
@@ -31,9 +32,9 @@ export const tomes: Array<Tome> = [
 		related: [],
 	},
 	{
-		name: 'Themed',
-		category: 'theming',
-		component: Themed,
+		name: 'theming',
+		category: 'guide',
+		component: theming,
 		related: [],
 	},
 	{
@@ -137,5 +138,11 @@ export const tomes: Array<Tome> = [
 		category: 'components',
 		component: Teleport,
 		related: ['Dialog'],
+	},
+	{
+		name: 'Themed',
+		category: 'components',
+		component: Themed,
+		related: ['theming'],
 	},
 ];
