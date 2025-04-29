@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.139.0
+
+### Minor Changes
+
+- rename Docs from Library ([#72](https://github.com/ryanatkn/fuz/pull/72))
+
 ## 0.138.0
 
 ### Minor Changes
