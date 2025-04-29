@@ -1,3 +1,0 @@
-import{t as i,a as c}from"../chunks/ZFNbJ4mV.js";import{p as _,a as d,s as h,Z as s,a3 as f,_ as t}from"../chunks/C1MeiME0.js";import{g as l}from"../chunks/wJVb1i8F.js";import{T as u}from"../chunks/T89TZDpA.js";import{T}from"../chunks/DrnwSoVG.js";var S=i(`<section><p>Fuz bases its theme support on my CSS framework <a href="https://moss.ryanatkn.com/">Moss</a>,
-			which is based on CSS custom properties, and adds Svelte components and TypeScript helpers.
-			For more see <!>.</p></section>`);function I(a,r){_(r,!0);const m=l("theming");u(a,{tome:m,children:(n,v)=>{var e=S(),o=s(e),p=h(s(o),3);T(p,{name:"Themed"}),f(),t(o),t(e),c(n,e)},$$slots:{default:!0}}),d()}export{I as component};

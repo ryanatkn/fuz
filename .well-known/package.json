@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.138.0",
+  "version": "0.139.0",
   "description": "Svelte UI library",
   "motto": "friendly user zystem",
   "glyph": "🧶",
@@ -208,6 +208,55 @@
       "types": "./dist/dimensions.svelte.d.ts",
       "default": "./dist/dimensions.svelte.js"
     },
+    "./Docs_Content.svelte": {
+      "types": "./dist/Docs_Content.svelte.d.ts",
+      "svelte": "./dist/Docs_Content.svelte",
+      "default": "./dist/Docs_Content.svelte"
+    },
+    "./Docs_Footer.svelte": {
+      "types": "./dist/Docs_Footer.svelte.d.ts",
+      "svelte": "./dist/Docs_Footer.svelte",
+      "default": "./dist/Docs_Footer.svelte"
+    },
+    "./docs_helpers.svelte.js": {
+      "types": "./dist/docs_helpers.svelte.d.ts",
+      "default": "./dist/docs_helpers.svelte.js"
+    },
+    "./Docs_Menu_Header.svelte": {
+      "types": "./dist/Docs_Menu_Header.svelte.d.ts",
+      "svelte": "./dist/Docs_Menu_Header.svelte",
+      "default": "./dist/Docs_Menu_Header.svelte"
+    },
+    "./Docs_Menu.svelte": {
+      "types": "./dist/Docs_Menu.svelte.d.ts",
+      "svelte": "./dist/Docs_Menu.svelte",
+      "default": "./dist/Docs_Menu.svelte"
+    },
+    "./Docs_Page_Links.svelte": {
+      "types": "./dist/Docs_Page_Links.svelte.d.ts",
+      "svelte": "./dist/Docs_Page_Links.svelte",
+      "default": "./dist/Docs_Page_Links.svelte"
+    },
+    "./Docs_Primary_Nav.svelte": {
+      "types": "./dist/Docs_Primary_Nav.svelte.d.ts",
+      "svelte": "./dist/Docs_Primary_Nav.svelte",
+      "default": "./dist/Docs_Primary_Nav.svelte"
+    },
+    "./Docs_Secondary_Nav.svelte": {
+      "types": "./dist/Docs_Secondary_Nav.svelte.d.ts",
+      "svelte": "./dist/Docs_Secondary_Nav.svelte",
+      "default": "./dist/Docs_Secondary_Nav.svelte"
+    },
+    "./Docs_Tertiary_Nav.svelte": {
+      "types": "./dist/Docs_Tertiary_Nav.svelte.d.ts",
+      "svelte": "./dist/Docs_Tertiary_Nav.svelte",
+      "default": "./dist/Docs_Tertiary_Nav.svelte"
+    },
+    "./Docs.svelte": {
+      "types": "./dist/Docs.svelte.d.ts",
+      "svelte": "./dist/Docs.svelte",
+      "default": "./dist/Docs.svelte"
+    },
     "./Hashlink.svelte": {
       "types": "./dist/Hashlink.svelte.d.ts",
       "svelte": "./dist/Hashlink.svelte",
@@ -230,55 +279,6 @@
     "./intersect.js": {
       "types": "./dist/intersect.d.ts",
       "default": "./dist/intersect.js"
-    },
-    "./Library_Content.svelte": {
-      "types": "./dist/Library_Content.svelte.d.ts",
-      "svelte": "./dist/Library_Content.svelte",
-      "default": "./dist/Library_Content.svelte"
-    },
-    "./Library_Footer.svelte": {
-      "types": "./dist/Library_Footer.svelte.d.ts",
-      "svelte": "./dist/Library_Footer.svelte",
-      "default": "./dist/Library_Footer.svelte"
-    },
-    "./library_helpers.svelte.js": {
-      "types": "./dist/library_helpers.svelte.d.ts",
-      "default": "./dist/library_helpers.svelte.js"
-    },
-    "./Library_Menu_Header.svelte": {
-      "types": "./dist/Library_Menu_Header.svelte.d.ts",
-      "svelte": "./dist/Library_Menu_Header.svelte",
-      "default": "./dist/Library_Menu_Header.svelte"
-    },
-    "./Library_Menu.svelte": {
-      "types": "./dist/Library_Menu.svelte.d.ts",
-      "svelte": "./dist/Library_Menu.svelte",
-      "default": "./dist/Library_Menu.svelte"
-    },
-    "./Library_Page_Links.svelte": {
-      "types": "./dist/Library_Page_Links.svelte.d.ts",
-      "svelte": "./dist/Library_Page_Links.svelte",
-      "default": "./dist/Library_Page_Links.svelte"
-    },
-    "./Library_Primary_Nav.svelte": {
-      "types": "./dist/Library_Primary_Nav.svelte.d.ts",
-      "svelte": "./dist/Library_Primary_Nav.svelte",
-      "default": "./dist/Library_Primary_Nav.svelte"
-    },
-    "./Library_Secondary_Nav.svelte": {
-      "types": "./dist/Library_Secondary_Nav.svelte.d.ts",
-      "svelte": "./dist/Library_Secondary_Nav.svelte",
-      "default": "./dist/Library_Secondary_Nav.svelte"
-    },
-    "./Library_Tertiary_Nav.svelte": {
-      "types": "./dist/Library_Tertiary_Nav.svelte.d.ts",
-      "svelte": "./dist/Library_Tertiary_Nav.svelte",
-      "default": "./dist/Library_Tertiary_Nav.svelte"
-    },
-    "./Library.svelte": {
-      "types": "./dist/Library.svelte.d.ts",
-      "svelte": "./dist/Library.svelte",
-      "default": "./dist/Library.svelte"
     },
     "./logos.js": {
       "types": "./dist/logos.d.ts",

@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.138.0",
+  "version": "0.139.0",
   "modules": {
     "./package.json": {
       "path": "package.json",
@@ -313,6 +313,71 @@
         }
       ]
     },
+    "./Docs_Content.svelte": {
+      "path": "Docs_Content.svelte",
+      "declarations": []
+    },
+    "./Docs_Footer.svelte": {
+      "path": "Docs_Footer.svelte",
+      "declarations": []
+    },
+    "./docs_helpers.svelte.js": {
+      "path": "docs_helpers.svelte.ts",
+      "declarations": [
+        {
+          "name": "DEFAULT_LIBRARY_PATH",
+          "kind": "variable"
+        },
+        {
+          "name": "to_docs_path_info",
+          "kind": "function"
+        },
+        {
+          "name": "docs_links_context",
+          "kind": "variable"
+        },
+        {
+          "name": "Docs_Link_Tag",
+          "kind": "type"
+        },
+        {
+          "name": "Docs_Link",
+          "kind": "type"
+        },
+        {
+          "name": "Docs_Links",
+          "kind": "class"
+        }
+      ]
+    },
+    "./Docs_Menu_Header.svelte": {
+      "path": "Docs_Menu_Header.svelte",
+      "declarations": []
+    },
+    "./Docs_Menu.svelte": {
+      "path": "Docs_Menu.svelte",
+      "declarations": []
+    },
+    "./Docs_Page_Links.svelte": {
+      "path": "Docs_Page_Links.svelte",
+      "declarations": []
+    },
+    "./Docs_Primary_Nav.svelte": {
+      "path": "Docs_Primary_Nav.svelte",
+      "declarations": []
+    },
+    "./Docs_Secondary_Nav.svelte": {
+      "path": "Docs_Secondary_Nav.svelte",
+      "declarations": []
+    },
+    "./Docs_Tertiary_Nav.svelte": {
+      "path": "Docs_Tertiary_Nav.svelte",
+      "declarations": []
+    },
+    "./Docs.svelte": {
+      "path": "Docs.svelte",
+      "declarations": []
+    },
     "./Hashlink.svelte": {
       "path": "Hashlink.svelte",
       "declarations": []
@@ -366,71 +431,6 @@
           "kind": "type"
         }
       ]
-    },
-    "./Library_Content.svelte": {
-      "path": "Library_Content.svelte",
-      "declarations": []
-    },
-    "./Library_Footer.svelte": {
-      "path": "Library_Footer.svelte",
-      "declarations": []
-    },
-    "./library_helpers.svelte.js": {
-      "path": "library_helpers.svelte.ts",
-      "declarations": [
-        {
-          "name": "DEFAULT_LIBRARY_PATH",
-          "kind": "variable"
-        },
-        {
-          "name": "to_library_path_info",
-          "kind": "function"
-        },
-        {
-          "name": "library_links_context",
-          "kind": "variable"
-        },
-        {
-          "name": "Library_Link_Tag",
-          "kind": "type"
-        },
-        {
-          "name": "Library_Link",
-          "kind": "type"
-        },
-        {
-          "name": "Library_Links",
-          "kind": "class"
-        }
-      ]
-    },
-    "./Library_Menu_Header.svelte": {
-      "path": "Library_Menu_Header.svelte",
-      "declarations": []
-    },
-    "./Library_Menu.svelte": {
-      "path": "Library_Menu.svelte",
-      "declarations": []
-    },
-    "./Library_Page_Links.svelte": {
-      "path": "Library_Page_Links.svelte",
-      "declarations": []
-    },
-    "./Library_Primary_Nav.svelte": {
-      "path": "Library_Primary_Nav.svelte",
-      "declarations": []
-    },
-    "./Library_Secondary_Nav.svelte": {
-      "path": "Library_Secondary_Nav.svelte",
-      "declarations": []
-    },
-    "./Library_Tertiary_Nav.svelte": {
-      "path": "Library_Tertiary_Nav.svelte",
-      "declarations": []
-    },
-    "./Library.svelte": {
-      "path": "Library.svelte",
-      "declarations": []
     },
     "./logos.js": {
       "path": "logos.ts",
