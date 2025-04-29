@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.138.0
+
+### Minor Changes
+
+- add the `theming` tome and move the `Themed` tome to components ([54a8a95](https://github.com/ryanatkn/fuz/commit/54a8a95))
+
 ## 0.137.1
 
 ### Patch Changes
