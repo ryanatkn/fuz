@@ -2,4 +2,4 @@
 '@ryanatkn/fuz': minor
 ---
 
-rename Docs from Docs
+rename Docs from Library
