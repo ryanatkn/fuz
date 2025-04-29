@@ -567,7 +567,7 @@ export const csp_directive_spec_by_name: Map<Csp_Directive, Csp_Directive_Spec> 
 
 import type {Csp_Source_Spec} from '$lib/csp.js';
 
-// TODO BLOCK make a library entry for this
+// TODO BLOCK make a docs entry for this
 
 /**
  * List of trusted sources owned by ryanatkn (me, ryanatkn.com).

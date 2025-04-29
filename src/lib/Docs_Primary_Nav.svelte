@@ -77,7 +77,7 @@
 		padding-left: var(--space_md);
 	}
 
-	/* sync this breakpoint with `Library` */
+	/* sync this breakpoint with `Docs` */
 	@media (max-width: 800px) {
 		nav {
 			--size: var(--size_lg);

@@ -9,7 +9,7 @@ import Details from '$routes/docs/details/+page.svelte';
 import Dialog from '$routes/docs/dialog/+page.svelte';
 import Teleport from '$routes/docs/teleport/+page.svelte';
 import Alert from '$routes/docs/alert/+page.svelte';
-import Library from '$routes/docs/docs/+page.svelte';
+import Docs from '$routes/docs/docs/+page.svelte';
 import Contextmenu from '$routes/docs/contextmenu/+page.svelte';
 import Redirect from '$routes/docs/redirect/+page.svelte';
 import Hue_Input from '$routes/docs/hue_input/+page.svelte';
@@ -21,8 +21,6 @@ import logos from '$routes/docs/logos/+page.svelte';
 import theming from '$routes/docs/theming/+page.svelte';
 
 // TODO maybe decouple `related` from `Tome` to get bidirectionality for free
-
-// TODO @many add `Svg` library entry
 
 export const tomes: Array<Tome> = [
 	{
@@ -92,9 +90,9 @@ export const tomes: Array<Tome> = [
 		related: [], // TODO externals?
 	},
 	{
-		name: 'Library',
+		name: 'Docs',
 		category: 'components',
-		component: Library,
+		component: Docs,
 		related: [],
 	},
 	{

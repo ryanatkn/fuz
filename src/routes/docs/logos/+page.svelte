@@ -33,7 +33,6 @@
 
 <Tome_Content {tome}>
 	<section>
-		<!-- TODO @many add `Svg` library entry -->
 		<p>
 			Fuz includes a number of logos available as data that can be mounted with the <Tome_Link
 				name="Svg"

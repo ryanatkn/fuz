@@ -46,7 +46,7 @@
 
 <svelte:window onhashchange={() => (show_secondary_nav_dialog = false)} />
 
-<div class="library" style:--docs_menu_width={docs_menu_width}>
+<div class="docs" style:--docs_menu_width={docs_menu_width}>
 	<Docs_Primary_Nav {pkg} {breadcrumb_children}>
 		<div class="nav_dialog_toggle">
 			<button class="plain" type="button" onclick={() => toggle_secondary_nav_dialog()}>menu</button
@@ -103,7 +103,7 @@
 {/if}
 
 <style>
-	.library {
+	.docs {
 		--docs_primary_nav_height: 60px;
 		--docs_secondary_nav_padding: var(--space_md); /* also used by the tertiary nav */
 		--docs_content_padding: var(--space_xl5);

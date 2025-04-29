@@ -38,7 +38,7 @@
 		align-items: flex-end;
 	}
 
-	/* sync this breakpoint with `Library` */
+	/* sync this breakpoint with `Docs` */
 	@media (max-width: 800px) {
 		.docs_secondary_nav {
 			position: static;

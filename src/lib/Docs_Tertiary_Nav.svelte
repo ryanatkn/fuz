@@ -49,7 +49,7 @@
 		background-color: var(--fg_1);
 	}
 
-	/* sync this breakpoint with `library/+layout` */
+	/* sync this breakpoint with `/docs/+layout` */
 	@media (max-width: 1000px) {
 		.docs_tertiary_nav {
 			position: static;

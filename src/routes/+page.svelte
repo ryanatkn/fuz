@@ -70,7 +70,7 @@
 		</section>
 		<section>
 			<!-- TODO add color variants -->
-			<Card href="{base}/docs">library{#snippet icon()}🧶{/snippet}</Card>
+			<Card href="{base}/docs">docs{#snippet icon()}🧶{/snippet}</Card>
 		</section>
 		<section class="panel p_lg shadow_inset_xs">
 			<!-- TODO ideally this wouldn't duplicate metadata like descriptions, but adding fuz_gitops to this repo is heavy -->

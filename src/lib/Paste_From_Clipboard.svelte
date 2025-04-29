@@ -12,7 +12,7 @@
 	}
 	const {onpaste, onerror, attrs, children}: Props = $props();
 
-	// TODO add library entry, see also Copy_To_Clipboard.svelte
+	// TODO add docs entry, see also Copy_To_Clipboard.svelte
 </script>
 
 <button

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
 
-	import Library from '$lib/Docs.svelte';
+	import Docs from '$lib/Docs.svelte';
 	import {tomes} from '$routes/docs/tomes.js';
 	import {selected_variable_context} from '$routes/style_variable_helpers.svelte.js';
 	import Style_Variable_Detail from '$routes/Style_Variable_Detail.svelte';
@@ -21,7 +21,7 @@
 	const pkg = pkg_context.get();
 </script>
 
-<Library {tomes} {pkg}>
+<Docs {tomes} {pkg}>
 	{#snippet breadcrumb_children(is_primary_nav)}
 		{#if is_primary_nav}
 			<div class="icon row">
@@ -32,7 +32,7 @@
 		{/if}
 	{/snippet}
 	{@render children()}
-</Library>
+</Docs>
 
 {#if selected_variable.value}
 	<Dialog onclose={() => (selected_variable.value = null)}>
