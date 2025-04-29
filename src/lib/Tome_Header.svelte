@@ -10,23 +10,23 @@
 
 	import {tome_context} from '$lib/tome.js';
 	import Hashlink from '$lib/Hashlink.svelte';
-	import {library_links_context, to_library_path_info} from '$lib/library_helpers.svelte.js';
+	import {docs_links_context, to_docs_path_info} from '$lib/docs_helpers.svelte.js';
 
 	const tome = tome_context.get(); // TODO make reactive?
 	if (DEV && !tome) throw Error('Tome_Header expects a tome in context'); // eslint-disable-line @typescript-eslint/no-unnecessary-condition
 
 	const id = 'tome_header_' + _id++;
 
-	const library_links = library_links_context.get();
+	const docs_links = docs_links_context.get();
 
 	const slug = slugify(tome.name);
-	library_links.add(id, tome.name, slug);
+	docs_links.add(id, tome.name, slug);
 
 	onDestroy(() => {
-		library_links.remove(id);
+		docs_links.remove(id);
 	});
 
-	const {path, path_is_selected} = $derived(to_library_path_info(slug, $page.url.pathname));
+	const {path, path_is_selected} = $derived(to_docs_path_info(slug, $page.url.pathname));
 </script>
 
 <header>

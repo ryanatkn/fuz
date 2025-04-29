@@ -5,7 +5,7 @@
 
 	// TODO @many should this have the Button suffix?
 
-	// TODO add library entry, see also Paste_From_Clipboard.svelte
+	// TODO add docs entry, see also Paste_From_Clipboard.svelte
 
 	interface Props {
 		text: string | null;

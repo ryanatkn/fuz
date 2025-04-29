@@ -10,7 +10,7 @@
 
 	import {create_context} from '$lib/context_helpers.js';
 	import {intersect} from '$lib/intersect.js';
-	import {library_links_context} from '$lib/library_helpers.svelte.js';
+	import {docs_links_context} from '$lib/docs_helpers.svelte.js';
 
 	interface Props {
 		attrs?: SvelteHTMLElements['section'];
@@ -19,7 +19,7 @@
 
 	const {attrs, children}: Props = $props();
 
-	const library_links = library_links_context.get();
+	const docs_links = docs_links_context.get();
 
 	let slug: string;
 
@@ -36,9 +36,9 @@
 			return;
 		}
 		if (intersecting) {
-			library_links.slugs_onscreen.add(slug);
+			docs_links.slugs_onscreen.add(slug);
 		} else {
-			library_links.slugs_onscreen.delete(slug);
+			docs_links.slugs_onscreen.delete(slug);
 		}
 	}}
 >

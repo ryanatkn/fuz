@@ -2,7 +2,7 @@
 	import {pkg_context} from '$routes/pkg.js';
 	import Community_Links_Panel from '$lib/Community_Links_Panel.svelte';
 	import Package_Detail from '$lib/Package_Detail.svelte';
-	import Library_Footer from '$lib/Library_Footer.svelte';
+	import Docs_Footer from '$lib/Docs_Footer.svelte';
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
 	import Svg from '$lib/Svg.svelte';
 	import {fuz_logo} from '$lib/logos.js';
@@ -26,11 +26,11 @@
 		</div>
 	</section>
 	<section class="box mb_xl7">
-		<Library_Footer {pkg}>
+		<Docs_Footer {pkg}>
 			<div class="mb_xl5">
 				<Breadcrumb><Svg data={fuz_logo} size="var(--icon_size_sm)" /></Breadcrumb>
 			</div>
-		</Library_Footer>
+		</Docs_Footer>
 	</section>
 </main>
 

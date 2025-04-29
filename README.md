@@ -14,7 +14,7 @@ that focus on end-users.
 Fuz emphasizes capability and efficiency and tries to be simple for those goals.
 Compared to most UI libraries, Fuz has fewer conventional features and more opinions.
 
-To learn more see [the docs](https://www.fuz.dev/library) and [contributing.md](contributing.md).
+To learn more see [the docs](https://www.fuz.dev/docs) and [contributing.md](contributing.md).
 Feel free to take the ideas and code for your own purposes.
 
 The Svelte components and helpers:
@@ -65,7 +65,7 @@ import Themed from '@ryanatkn/fuz/Themed.svelte';
 import {type Theme, themer_context} from '@ryanatkn/fuz/themer.svelte.js';
 ```
 
-See [the library](https://www.fuz.dev/library) for more.
+See [the library](https://www.fuz.dev/docs) for more.
 
 ## Contributing
 

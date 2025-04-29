@@ -1,7 +1,7 @@
 <script lang="ts">
 	import {base} from '$app/paths';
 
-	import Library_Footer from '$lib/Library_Footer.svelte';
+	import Docs_Footer from '$lib/Docs_Footer.svelte';
 	import Card from '$lib/Card.svelte';
 	import {pkg_context} from '$routes/pkg.js';
 	import Svg, {type Svg_Data} from '$lib/Svg.svelte';
@@ -61,7 +61,7 @@
 						but the eventual goal is to be fully-featured with high flexibility.
 					</p>
 					<p>
-						To learn more see <a href="{base}/library">the docs</a>
+						To learn more see <a href="{base}/docs">the docs</a>
 						and <a href="https://github.com/ryanatkn/fuz#readme">readme</a>. Feel free to take the
 						ideas and <a href="https://github.com/ryanatkn/fuz">code</a> for your own purposes.
 					</p>
@@ -70,7 +70,7 @@
 		</section>
 		<section>
 			<!-- TODO add color variants -->
-			<Card href="{base}/library">library{#snippet icon()}🧶{/snippet}</Card>
+			<Card href="{base}/docs">docs{#snippet icon()}🧶{/snippet}</Card>
 		</section>
 		<section class="panel p_lg shadow_inset_xs">
 			<!-- TODO ideally this wouldn't duplicate metadata like descriptions, but adding fuz_gitops to this repo is heavy -->
@@ -82,12 +82,12 @@
 			</menu>
 		</section>
 		<section>
-			<Library_Footer {pkg}>
+			<Docs_Footer {pkg}>
 				{#snippet logo_header()}
 					<a href="{base}/about" class="mb_xs">about</a>
 				{/snippet}
 				<Hidden_Personal_Links />
-			</Library_Footer>
+			</Docs_Footer>
 		</section>
 	</div>
 </main>

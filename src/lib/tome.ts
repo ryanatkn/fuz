@@ -3,7 +3,7 @@ import {slugify} from '@ryanatkn/belt/path.js';
 import {z} from 'zod';
 
 import {create_context} from '$lib/context_helpers.js';
-import {DEFAULT_LIBRARY_PATH} from '$lib/library_helpers.svelte.js';
+import {DEFAULT_LIBRARY_PATH} from '$lib/docs_helpers.svelte.js';
 
 export const Tome = z.object({
 	name: z.string(),
@@ -17,9 +17,9 @@ export type Tome = z.infer<typeof Tome>;
 
 export const to_tome_pathname = (
 	item: Tome,
-	library_path = DEFAULT_LIBRARY_PATH,
+	docs_path = DEFAULT_LIBRARY_PATH,
 	base_path = base,
-): string => base_path + library_path + '/' + slugify(item.name);
+): string => base_path + docs_path + '/' + slugify(item.name);
 
 export const tomes_context = create_context<Map<string, Tome>>();
 

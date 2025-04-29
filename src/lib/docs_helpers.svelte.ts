@@ -1,0 +1,53 @@
+import {base} from '$app/paths';
+import {SvelteSet} from 'svelte/reactivity';
+
+import {create_context} from '$lib/context_helpers.js';
+
+export const DEFAULT_LIBRARY_PATH = '/docs';
+
+export const to_docs_path_info = (
+	slug: string,
+	pathname: string,
+	root_path = DEFAULT_LIBRARY_PATH,
+): {path: string; path_is_selected: boolean; path_segment: string | undefined} => {
+	const path_segment = pathname.split('/').at(-1);
+	const path = base + root_path + '/' + slug;
+	const path_is_selected = path_segment === slug; // messy but works
+	return {path, path_is_selected, path_segment};
+};
+
+export const docs_links_context = create_context(() => new Docs_Links());
+
+export type Docs_Link_Tag = 'h3' | 'h4';
+
+export interface Docs_Link {
+	id: string;
+	text: string;
+	slug: string;
+	tag: Docs_Link_Tag | undefined; // TODO hacky, maybe `depth` or similar is better?
+}
+
+export class Docs_Links {
+	docs_links: Array<Docs_Link> = $state([]);
+
+	slugs_onscreen: SvelteSet<string> = $state(new SvelteSet());
+
+	constructor(public readonly root_path = DEFAULT_LIBRARY_PATH) {}
+
+	add(id: string, text: string, slug: string, tag?: Docs_Link_Tag): void {
+		const index = this.docs_links.findIndex((t) => t.id === id);
+		const v: Docs_Link = {id, text, slug, tag};
+		if (index === -1) {
+			this.docs_links.push(v);
+		} else {
+			this.docs_links[index] = v;
+		}
+	}
+
+	remove(id: string): boolean {
+		const index = this.docs_links.findIndex((t) => t.id === id);
+		if (index === -1) return false;
+		this.docs_links.splice(index, 1);
+		return true;
+	}
+}

@@ -6,25 +6,25 @@
 
 	import Tome_Header from '$lib/Tome_Header.svelte';
 	import {tome_context, type Tome} from '$lib/tome.js';
-	import {DEFAULT_LIBRARY_PATH, library_links_context} from '$lib/library_helpers.svelte.js';
+	import {DEFAULT_LIBRARY_PATH, docs_links_context} from '$lib/docs_helpers.svelte.js';
 	import {intersect} from '$lib/intersect.js';
 
 	interface Props {
 		tome: Tome;
-		library_path?: string;
+		docs_path?: string;
 		header?: Snippet;
 		children: Snippet;
 	}
 
-	const {tome, library_path = DEFAULT_LIBRARY_PATH, header, children}: Props = $props();
+	const {tome, docs_path = DEFAULT_LIBRARY_PATH, header, children}: Props = $props();
 
-	const library_links = library_links_context.get();
+	const docs_links = docs_links_context.get();
 
 	tome_context.set(tome); // TODO make reactive?
 
 	const slug = slugify(tome.name);
 
-	const at_root = $derived($page.url.pathname === base + library_path);
+	const at_root = $derived($page.url.pathname === base + docs_path);
 </script>
 
 <section
@@ -32,9 +32,9 @@
 	use:intersect={at_root
 		? ({intersecting}) => {
 				if (intersecting) {
-					library_links.slugs_onscreen.add(slug);
+					docs_links.slugs_onscreen.add(slug);
 				} else {
-					library_links.slugs_onscreen.delete(slug);
+					docs_links.slugs_onscreen.delete(slug);
 				}
 			}
 		: null}
@@ -45,9 +45,9 @@
 			? null
 			: ({intersecting}) => {
 					if (intersecting) {
-						library_links.slugs_onscreen.add(slug);
+						docs_links.slugs_onscreen.add(slug);
 					} else {
-						library_links.slugs_onscreen.delete(slug);
+						docs_links.slugs_onscreen.delete(slug);
 					}
 				}}
 	>

@@ -11,11 +11,11 @@
 
 	import Hashlink from '$lib/Hashlink.svelte';
 	import {register_section_header_context} from '$lib/Tome_Section.svelte';
-	import {library_links_context, type Library_Link_Tag} from '$lib/library_helpers.svelte.js';
+	import {docs_links_context, type Docs_Link_Tag} from '$lib/docs_helpers.svelte.js';
 
 	interface Props {
 		text: string;
-		tag?: Library_Link_Tag;
+		tag?: Docs_Link_Tag;
 		attrs?: SvelteHTMLElements['h3'];
 		children?: Snippet;
 	}
@@ -32,14 +32,14 @@
 
 	const id = 'tome_section_header_' + _id++;
 
-	const library_links = library_links_context.get();
+	const docs_links = docs_links_context.get();
 
 	// Add section titles only if not on the root page.
 	// TODO make reactive?
-	if ($page.url.pathname !== base + library_links.root_path) {
-		library_links.add(id, text, slug, tag);
+	if ($page.url.pathname !== base + docs_links.root_path) {
+		docs_links.add(id, text, slug, tag);
 		onDestroy(() => {
-			library_links.remove(id);
+			docs_links.remove(id);
 		});
 	}
 </script>

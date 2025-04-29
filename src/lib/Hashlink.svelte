@@ -32,7 +32,7 @@
 		left: 0;
 	}
 
-	/* sync this breakpoint with `Library` */
+	/* sync this breakpoint with `Docs` */
 	@media (max-width: 800px) {
 		.hashlink {
 			opacity: 1;
