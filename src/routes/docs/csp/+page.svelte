@@ -27,12 +27,17 @@
 		</p>
 		<p>
 			The goal is to provide a simple trust modeling system that balances safety+security+privacy
-			with ergonomics, helping users maintain secure policies without unhelpful burden or
-			restriction.
+			with ergonomics in the hopes of finding a better global maximum, helping users maintain secure
+			policies without unhelpful burden or restriction.
 		</p>
 		<p>
 			Auditability and transparency are key concerns for the API, but we trade away some of this for
-			ergonomics. Fuz defines three levels of trust/risk/sensitivity (low/medium/high, <code
+			ergonomics, with the idea that we make it easy for users to safely configure basic scenarios,
+			and advanced users can opt into using the API with full declarative transparency (and more
+			verbosity and information load).
+		</p>
+		<p>
+			Fuz defines three levels of trust/risk/sensitivity (low/medium/high, <code
 				>Csp_Trust_Level</code
 			>) that can be configured for each trusted source to give blanket permissions at a specified
 			tier, and then granular overrides are straightforward and declarative.
