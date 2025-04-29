@@ -108,9 +108,9 @@
 		--docs_secondary_nav_padding: var(--space_md); /* also used by the tertiary nav */
 		--docs_content_padding: var(--space_xl5);
 		--docs_content_max_width: calc(var(--width_md) + var(--docs_content_padding) * 2);
-		/* the `+ 1px` solves some issue when scaling */
+		/* TODO this is broken for scrollbars, so we add `+ 10px` as a messy safeguard (there may be `+ 1px` needed for scaling issues too) */
 		--docs_sidebar_width: max(
-			calc(var(--docs_menu_width) + 1px + var(--docs_secondary_nav_padding) * 2),
+			calc(var(--docs_menu_width) + 10px + var(--docs_secondary_nav_padding) * 2),
 			calc((100% - var(--docs_content_max_width)) / 2)
 		);
 		display: contents;
