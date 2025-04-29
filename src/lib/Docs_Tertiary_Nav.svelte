@@ -36,6 +36,7 @@
 
 <style>
 	.docs_tertiary_nav {
+		/* TODO @many lots of duplicate code between `Docs_Secondary_Nav` and `Docs_Tertiary_Nav` */
 		position: fixed;
 		right: 0;
 		top: var(--docs_primary_nav_height);
@@ -46,6 +47,7 @@
 			--docs_secondary_nav_padding
 		); /* needed with `overflow: auto` to avoid cutting off outline */
 		overflow: auto;
+		scrollbar-width: thin;
 		background-color: var(--fg_1);
 	}
 
