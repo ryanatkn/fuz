@@ -3,7 +3,7 @@ import {SvelteSet} from 'svelte/reactivity';
 
 import {create_context} from '$lib/context_helpers.js';
 
-export const DEFAULT_LIBRARY_PATH = '/library';
+export const DEFAULT_LIBRARY_PATH = '/docs';
 
 export const to_docs_path_info = (
 	slug: string,
