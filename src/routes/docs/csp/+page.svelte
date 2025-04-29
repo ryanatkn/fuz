@@ -78,30 +78,33 @@ const custom_csp = create_csp_directives({
 		/>
 	</section>
 	<section>
+		<!-- TODO make this a header if it stabilizes -->
+		<h3>Trust</h3>
+		<p>
+			Fuz's CSP abstraction provides three trust levels (<code>Csp_Trust_Level</code>) with
+			escalating risk.
+		</p>
+		<ul>
+			<li>
+				<code>null</code> - No trust. This is used for directives that don't support sources.
+			</li>
+			<li>
+				<code>'low'</code> - Passive resources only - no script execution, no styling or UI control
+			</li>
+			<li>
+				<code>'medium'</code> - Content that may affect layout, styling, or embed external browsing contexts,
+				but cannot directly run code in the page's JS execution environment or perform other high-risk
+				actions
+			</li>
+			<li>
+				<code>'high'</code> - Sources that can execute code in the page's context
+			</li>
+		</ul>
 		<aside>
 			⚠️ Apologies, these docs are a work in progress, see the <a
 				href="https://github.com/ryanatkn/fuz/blob/main/src/lib/csp.ts">source code</a
 			> for now. The API feels near-complete, and includes full customization of the default directive
 			values and trust levels.
 		</aside>
-		<Code
-			lang="ts"
-			content={`/**
- * Trust levels for CSP sources.
- *
- * With the base defaults, trust levels roughly correspond to:
- *
- * - \`low\` – Passive resources only (no script execution, no styling or UI control).
- * 		Examples: \`img-src\`, \`font-src\`.
- * - \`medium\` – Content that may affect layout, styling, or embed external browsing contexts,
- *    but cannot directly run code in the page's JS execution environment or
- * 		perform other high-risk actions. Examples: \`style-src\`, \`frame-src\`, \`frame-ancestors\`.
- * - \`high\` – Sources that can execute code in the page's context or open powerful network
- *    channels. Examples: \`script-src\`, \`connect-src\`, \`child-src\`.
- * - \`null\` – No trust. This is used for directives that don't support sources.
- *
- */
-export type Csp_Trust_Level = Array_Element<typeof csp_trust_levels>;`}
-		/>
 	</section>
 </Tome_Content>

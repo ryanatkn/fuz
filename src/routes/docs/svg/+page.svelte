@@ -43,7 +43,7 @@
 	<Tome_Section>
 		<Tome_Section_Header text="With custom color" />
 		<p>
-			Set <code>color</code>: (see the
+			Set <code>fill</code>: (see the
 			<a href="https://moss.ryanatkn.com/docs/colors#color-variables">Moss colors docs</a>)
 		</p>
 		<Code content={`<Svg data={fuz_logo} fill="var(--color_d_5)" />`} />
