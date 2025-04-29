@@ -21,7 +21,7 @@
 </script>
 
 {#if enabled}
-	<div class="library_primary_nav" class:scrolled>
+	<div class="docs_primary_nav" class:scrolled>
 		<div class="background" aria-hidden="true"></div>
 		<div class="content">
 			<nav aria-label="Primary">
@@ -39,12 +39,12 @@
 {/if}
 
 <style>
-	.library_primary_nav {
+	.docs_primary_nav {
 		position: sticky;
 		top: 0;
 		z-index: 10;
 		background-color: var(--bg);
-		height: var(--library_primary_nav_height);
+		height: var(--docs_primary_nav_height);
 		transition: box-shadow var(--duration_2);
 		box-shadow: none;
 	}

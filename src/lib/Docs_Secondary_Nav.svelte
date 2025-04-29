@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Library_Menu from '$lib/Library_Menu.svelte';
+	import Docs_Menu from '$lib/Docs_Menu.svelte';
 	import {Tome} from '$lib/tome.js';
 
 	interface Props {
@@ -10,22 +10,22 @@
 	const {tomes, sidebar = true}: Props = $props();
 </script>
 
-<aside class="library_secondary_nav unstyled" class:sidebar>
+<aside class="docs_secondary_nav unstyled" class:sidebar>
 	<nav aria-label="Secondary">
-		<Library_Menu {tomes} />
+		<Docs_Menu {tomes} />
 	</nav>
 </aside>
 
 <style>
-	.library_secondary_nav {
+	.docs_secondary_nav {
 		position: fixed;
 		left: 0;
-		top: var(--library_primary_nav_height);
+		top: var(--docs_primary_nav_height);
 		z-index: 1;
-		width: var(--library_sidebar_width);
-		height: calc(100% - var(--library_primary_nav_height));
+		width: var(--docs_sidebar_width);
+		height: calc(100% - var(--docs_primary_nav_height));
 		padding: var(
-			--library_secondary_nav_padding
+			--docs_secondary_nav_padding
 		); /* needed with `overflow: auto` to avoid cutting off outline */
 		margin-bottom: 0;
 		overflow: auto;
@@ -40,7 +40,7 @@
 
 	/* sync this breakpoint with `Library` */
 	@media (max-width: 800px) {
-		.library_secondary_nav {
+		.docs_secondary_nav {
 			position: static;
 			background-color: initial;
 			align-items: initial;
@@ -48,7 +48,7 @@
 		}
 	}
 	/* TODO @many dialog navs  */
-	.library_secondary_nav:not(.sidebar) {
+	.docs_secondary_nav:not(.sidebar) {
 		position: static;
 		background-color: initial;
 		align-items: initial;

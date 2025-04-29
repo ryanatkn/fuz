@@ -4,7 +4,7 @@
 	import type {Snippet} from 'svelte';
 
 	import {to_tome_pathname, type Tome} from '$lib/tome.js';
-	import Library_Menu_Header from '$lib/Library_Menu_Header.svelte';
+	import Docs_Menu_Header from '$lib/Docs_Menu_Header.svelte';
 
 	interface Props {
 		tomes: Array<Tome>;
@@ -23,11 +23,11 @@
 	// TODO remove CSS below with reusable CSS or a Svelte component
 </script>
 
-<ul class="library_menu unstyled">
+<ul class="docs_menu unstyled">
 	{#each Object.entries(tomes_by_category) as [category, tomes] (category)}
 		<li class="category">
-			{#if children}{@render children(category)}{:else}<Library_Menu_Header
-					>{category}</Library_Menu_Header
+			{#if children}{@render children(category)}{:else}<Docs_Menu_Header
+					>{category}</Docs_Menu_Header
 				>{/if}
 			<ul class="unstyled">
 				{#each tomes as item (item)}
@@ -46,9 +46,9 @@
 </ul>
 
 <style>
-	.library_menu {
-		width: var(--library_menu_width);
-		min-width: var(--library_menu_width);
+	.docs_menu {
+		width: var(--docs_menu_width);
+		min-width: var(--docs_menu_width);
 	}
 
 	.category {

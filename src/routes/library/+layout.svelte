@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
 
-	import Library from '$lib/Library.svelte';
+	import Library from '$lib/Docs.svelte';
 	import {tomes} from '$routes/library/tomes.js';
 	import {selected_variable_context} from '$routes/style_variable_helpers.svelte.js';
 	import Style_Variable_Detail from '$routes/Style_Variable_Detail.svelte';

@@ -2,7 +2,7 @@
 	import {page} from '$app/stores';
 	import {slide} from 'svelte/transition';
 
-	import {library_links_context} from '$lib/library_helpers.svelte.js';
+	import {docs_links_context} from '$lib/docs_helpers.svelte.js';
 
 	interface Props {
 		sidebar?: boolean; // TODO @many dialog navs (this shouldn't exist)
@@ -12,12 +12,12 @@
 
 	// TODO remove CSS below with reusable CSS or a Svelte component
 
-	const library_links = library_links_context.get();
+	const docs_links = docs_links_context.get();
 
 	const hash = $derived($page.url.hash.slice(1));
 </script>
 
-<div class="library_page_links">
+<div class="docs_page_links">
 	<h4 class="mb_sm">on this page</h4>
 	{#if sidebar}
 		<div class="sidebar_wrapper">{@render content()}</div>
@@ -29,13 +29,13 @@
 {#snippet content()}
 	<nav aria-label="on this page" class="w_100">
 		<ul class="unstyled">
-			{#each library_links.library_links as item (item.id)}
+			{#each docs_links.docs_links as item (item.id)}
 				<li role="none" transition:slide class:pl_xl4={item.tag === 'h4'}>
 					<a
 						class="menu_item overflow_wrap_anywhere line_height_sm"
 						href="#{item.slug}"
 						class:selected={item.slug === hash}
-						class:highlighted={library_links.slugs_onscreen.has(item.slug)}>{item.text}</a
+						class:highlighted={docs_links.slugs_onscreen.has(item.slug)}>{item.text}</a
 					>
 				</li>
 			{/each}
@@ -44,13 +44,13 @@
 {/snippet}
 
 <style>
-	.library_page_links {
+	.docs_page_links {
 		margin: var(--space_xl6) 0;
-		width: var(--library_menu_width);
-		min-width: var(--library_menu_width);
+		width: var(--docs_menu_width);
+		min-width: var(--docs_menu_width);
 	}
 
-	/* this is needed because `.library_page_links` needs to be a block to collapse the vertical margin */
+	/* this is needed because `.docs_page_links` needs to be a block to collapse the vertical margin */
 	.sidebar_wrapper {
 		display: flex;
 		flex-direction: column;

@@ -6,11 +6,11 @@
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
 	import {get_tome_by_name} from '$lib/tome.js';
-	import {DEFAULT_LIBRARY_PATH} from '$lib/library_helpers.svelte.js';
+	import {DEFAULT_LIBRARY_PATH} from '$lib/docs_helpers.svelte.js';
 
 	interface Props {
 		name: string; // TODO type, generate from `tomes`?
-		library_path?: string;
+		docs_path?: string;
 		hash?: string;
 		chip?: boolean;
 		attrs?: SvelteHTMLElements['a'];
@@ -19,7 +19,7 @@
 
 	const {
 		name,
-		library_path = DEFAULT_LIBRARY_PATH,
+		docs_path = DEFAULT_LIBRARY_PATH,
 		hash,
 		chip = true,
 		attrs,
@@ -31,7 +31,7 @@
 	// TODO add contextmenu behavior
 </script>
 
-<a {...attrs} class:chip href="{base}{library_path}/{slugify(name)}{hash ? `#${hash}` : ''}"
+<a {...attrs} class:chip href="{base}{docs_path}/{slugify(name)}{hash ? `#${hash}` : ''}"
 	>{#if children}{@render children()}{:else}{name}{/if}</a
 >
 

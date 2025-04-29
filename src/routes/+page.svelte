@@ -1,7 +1,7 @@
 <script lang="ts">
 	import {base} from '$app/paths';
 
-	import Library_Footer from '$lib/Library_Footer.svelte';
+	import Docs_Footer from '$lib/Docs_Footer.svelte';
 	import Card from '$lib/Card.svelte';
 	import {pkg_context} from '$routes/pkg.js';
 	import Svg, {type Svg_Data} from '$lib/Svg.svelte';
@@ -82,12 +82,12 @@
 			</menu>
 		</section>
 		<section>
-			<Library_Footer {pkg}>
+			<Docs_Footer {pkg}>
 				{#snippet logo_header()}
 					<a href="{base}/about" class="mb_xs">about</a>
 				{/snippet}
 				<Hidden_Personal_Links />
-			</Library_Footer>
+			</Docs_Footer>
 		</section>
 	</div>
 </main>

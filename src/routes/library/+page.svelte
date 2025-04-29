@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Library_Content from '$lib/Library_Content.svelte';
+	import Docs_Content from '$lib/Docs_Content.svelte';
 	import {tomes_context} from '$lib/tome.js';
 	import {pkg_context} from '$routes/pkg.js';
 
@@ -10,8 +10,8 @@
 	const pkg = pkg_context.get();
 </script>
 
-<Library_Content {tomes} {pkg}>
+<Docs_Content {tomes} {pkg}>
 	{#snippet repo_name()}
 		<h1 class="mb_sm">fuz</h1>
 	{/snippet}
-</Library_Content>
+</Docs_Content>

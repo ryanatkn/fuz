@@ -5,7 +5,7 @@ import {create_context} from '$lib/context_helpers.js';
 
 export const DEFAULT_LIBRARY_PATH = '/library';
 
-export const to_library_path_info = (
+export const to_docs_path_info = (
 	slug: string,
 	pathname: string,
 	root_path = DEFAULT_LIBRARY_PATH,
@@ -16,38 +16,38 @@ export const to_library_path_info = (
 	return {path, path_is_selected, path_segment};
 };
 
-export const library_links_context = create_context(() => new Library_Links());
+export const docs_links_context = create_context(() => new Docs_Links());
 
-export type Library_Link_Tag = 'h3' | 'h4';
+export type Docs_Link_Tag = 'h3' | 'h4';
 
-export interface Library_Link {
+export interface Docs_Link {
 	id: string;
 	text: string;
 	slug: string;
-	tag: Library_Link_Tag | undefined; // TODO hacky, maybe `depth` or similar is better?
+	tag: Docs_Link_Tag | undefined; // TODO hacky, maybe `depth` or similar is better?
 }
 
-export class Library_Links {
-	library_links: Array<Library_Link> = $state([]);
+export class Docs_Links {
+	docs_links: Array<Docs_Link> = $state([]);
 
 	slugs_onscreen: SvelteSet<string> = $state(new SvelteSet());
 
 	constructor(public readonly root_path = DEFAULT_LIBRARY_PATH) {}
 
-	add(id: string, text: string, slug: string, tag?: Library_Link_Tag): void {
-		const index = this.library_links.findIndex((t) => t.id === id);
-		const v: Library_Link = {id, text, slug, tag};
+	add(id: string, text: string, slug: string, tag?: Docs_Link_Tag): void {
+		const index = this.docs_links.findIndex((t) => t.id === id);
+		const v: Docs_Link = {id, text, slug, tag};
 		if (index === -1) {
-			this.library_links.push(v);
+			this.docs_links.push(v);
 		} else {
-			this.library_links[index] = v;
+			this.docs_links[index] = v;
 		}
 	}
 
 	remove(id: string): boolean {
-		const index = this.library_links.findIndex((t) => t.id === id);
+		const index = this.docs_links.findIndex((t) => t.id === id);
 		if (index === -1) return false;
-		this.library_links.splice(index, 1);
+		this.docs_links.splice(index, 1);
 		return true;
 	}
 }

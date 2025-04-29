@@ -1,10 +1,10 @@
 <script lang="ts">
 	import {page} from '$app/stores';
 
-	import Library_Menu from '$lib/Library_Menu.svelte';
-	import Library_Page_Links from '$lib/Library_Page_Links.svelte';
+	import Docs_Menu from '$lib/Docs_Menu.svelte';
+	import Docs_Page_Links from '$lib/Docs_Page_Links.svelte';
 	import {to_tome_pathname, Tome} from '$lib/tome.js';
-	import {library_links_context} from '$lib/library_helpers.svelte.js';
+	import {docs_links_context} from '$lib/docs_helpers.svelte.js';
 
 	interface Props {
 		tomes: Array<Tome>;
@@ -20,30 +20,30 @@
 		selected_item?.related.map((r) => tomes_by_name.get(r)!),
 	);
 
-	const library_links = library_links_context.get();
+	const docs_links = docs_links_context.get();
 </script>
 
-<aside class="library_tertiary_nav unstyled">
+<aside class="docs_tertiary_nav unstyled">
 	{#if tomes_related_to_selected?.length}
-		<Library_Menu tomes={tomes_related_to_selected}>
+		<Docs_Menu tomes={tomes_related_to_selected}>
 			{#snippet children(category)}<h4 class="mb_sm">related {category}</h4>{/snippet}
-		</Library_Menu>
+		</Docs_Menu>
 	{/if}
-	{#if library_links.library_links.length > 1}
-		<Library_Page_Links {sidebar} />
+	{#if docs_links.docs_links.length > 1}
+		<Docs_Page_Links {sidebar} />
 	{/if}
 </aside>
 
 <style>
-	.library_tertiary_nav {
+	.docs_tertiary_nav {
 		position: fixed;
 		right: 0;
-		top: var(--library_primary_nav_height);
+		top: var(--docs_primary_nav_height);
 		z-index: 1;
-		width: var(--library_sidebar_width);
-		height: calc(100% - var(--library_primary_nav_height));
+		width: var(--docs_sidebar_width);
+		height: calc(100% - var(--docs_primary_nav_height));
 		padding: var(
-			--library_secondary_nav_padding
+			--docs_secondary_nav_padding
 		); /* needed with `overflow: auto` to avoid cutting off outline */
 		overflow: auto;
 		background-color: var(--fg_1);
@@ -51,7 +51,7 @@
 
 	/* sync this breakpoint with `library/+layout` */
 	@media (max-width: 1000px) {
-		.library_tertiary_nav {
+		.docs_tertiary_nav {
 			position: static;
 			background-color: initial;
 			overflow: initial;
