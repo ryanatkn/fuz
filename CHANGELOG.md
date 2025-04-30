@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.139.1
+
+### Patch Changes
+
+- add `data:` to `media-src` in the default csp ([2947384](https://github.com/ryanatkn/fuz/commit/2947384))
+
 ## 0.139.0
 
 ### Minor Changes
