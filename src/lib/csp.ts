@@ -246,7 +246,7 @@ export const csp_directive_value_defaults: Record<
 	'style-src-elem': ['self', 'unsafe-inline'], // Style elements (standalone stylesheets)
 	'style-src-attr': ['unsafe-inline'], // Style attributes
 	'img-src': ['self', 'data:', 'blob:', 'filesystem:'], // Images
-	'media-src': ['self', 'blob:', 'mediastream:', 'filesystem:'], // Audio/video
+	'media-src': ['self', 'data:', 'blob:', 'mediastream:', 'filesystem:'], // Audio/video
 	'font-src': ['self', 'data:'], // Fonts
 	'manifest-src': ['self'], // Web app manifests
 	'child-src': ['none'], // Not trusted, extends default-src so worker-src and frame-src are additionally blocked
