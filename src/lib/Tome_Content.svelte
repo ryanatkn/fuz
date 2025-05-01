@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
 	import {slugify} from '@ryanatkn/belt/path.js';
-	import {page} from '$app/stores';
+	import {page} from '$app/state';
 	import {base} from '$app/paths';
 
 	import Tome_Header from '$lib/Tome_Header.svelte';
@@ -24,7 +24,7 @@
 
 	const slug = slugify(tome.name);
 
-	const at_root = $derived($page.url.pathname === base + docs_path);
+	const at_root = $derived(page.url.pathname === base + docs_path);
 </script>
 
 <section

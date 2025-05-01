@@ -1,7 +1,7 @@
 <script lang="ts">
 	import {parse_path_pieces} from '@ryanatkn/belt/path.js';
 	import {base} from '$app/paths';
-	import {page} from '$app/stores';
+	import {page} from '$app/state';
 	import type {Snippet} from 'svelte';
 	import {strip_start, ensure_end} from '@ryanatkn/belt/string.js';
 
@@ -28,7 +28,7 @@
 
 	const final_base_path = $derived(base_path ?? base);
 
-	const final_path = $derived(path ?? strip_start($page.url.pathname, final_base_path));
+	const final_path = $derived(path ?? strip_start(page.url.pathname, final_base_path));
 
 	const final_selected_path = $derived(
 		selected_path === null ? null : (selected_path ?? final_path),

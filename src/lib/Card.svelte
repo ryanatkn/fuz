@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {page} from '$app/stores';
+	import {page} from '$app/state';
 	import type {Snippet} from 'svelte';
 
 	// TODO think through Alert+Card APIs together, one can be a button and the other a link atm
@@ -16,7 +16,7 @@
 	const {tag, href, align = 'left', attrs, icon, children}: Props = $props();
 
 	const link = $derived(!!href);
-	const selected = $derived(link && $page.url.pathname === href);
+	const selected = $derived(link && page.url.pathname === href);
 	const final_tag = $derived(tag ?? (link ? 'a' : 'div'));
 	const inferred_attrs = $derived(link ? {href} : undefined);
 

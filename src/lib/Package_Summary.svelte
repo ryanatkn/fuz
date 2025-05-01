@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {page} from '$app/stores';
+	import {page} from '$app/state';
 	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
 	import type {Snippet} from 'svelte';
 	import {format_url} from '@ryanatkn/belt/url.js';
@@ -73,7 +73,7 @@
 			{@render homepage_url(pkg.homepage_url)}
 		{:else}
 			<div class="homepage_url">
-				<a class="chip" class:selected={pkg.homepage_url === $page.url.href} href={pkg.homepage_url}
+				<a class="chip" class:selected={pkg.homepage_url === page.url.href} href={pkg.homepage_url}
 					>{format_url(pkg.homepage_url)}</a
 				>
 			</div>

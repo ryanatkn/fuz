@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {page} from '$app/stores';
+	import {page} from '$app/state';
 	import {slide} from 'svelte/transition';
 	import type {Snippet} from 'svelte';
 
@@ -36,7 +36,7 @@
 						<a
 							class="menu_item ellipsis line_height_lg"
 							href={pathname}
-							class:selected={pathname === $page.url.pathname}>{item.name}</a
+							class:selected={pathname === page.url.pathname}>{item.name}</a
 						>
 					</li>
 				{/each}
