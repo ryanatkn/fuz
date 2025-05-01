@@ -10,8 +10,6 @@
 
 	const LIBRARY_ITEM_NAME = 'Svg';
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
-
-	// TODO add examples for colored buttons - visually they're broken because they look like selected buttons
 </script>
 
 <!-- eslint-disable svelte/no-useless-mustaches -->

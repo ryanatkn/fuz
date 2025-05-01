@@ -4,11 +4,14 @@
 	import {get_tome_by_name} from '$lib/tome.js';
 	import Tome_Content from '$lib/Tome_Content.svelte';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
+	import {
+		csp_directive_required_trust_defaults,
+		csp_directive_specs,
+		csp_trust_levels,
+	} from '$lib/csp.js';
 
 	const LIBRARY_ITEM_NAME = 'csp';
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
-
-	// TODO add examples for colored buttons - visually they're broken because they look like selected buttons
 
 	// TODO add a Svelte logo svg and make the below a special component that Mdn_Link also extends (Mdn_Link only exists because it has special inference logic for its href)
 </script>
@@ -105,11 +108,76 @@ const custom_csp = create_csp_directives({
 				<code>'high'</code> - Sources that can execute code in the page's context
 			</li>
 		</ul>
-		<aside>
-			⚠️ Apologies, these docs are a work in progress, see the <a
-				href="https://github.com/ryanatkn/fuz/blob/main/src/lib/csp.ts">source code</a
-			> for now. The API feels near-complete, and includes full customization of the default directive
-			values and trust levels.
-		</aside>
 	</section>
+	<section>
+		<h3>Default directive trust levels</h3>
+		<table>
+			<thead>
+				<tr>
+					<th class="white_space_nowrap">trust level</th>
+					<th>directives</th>
+				</tr>
+			</thead>
+			<tbody>
+				{#each ([null] as Array<string | null>).concat(csp_trust_levels) as trust_level (trust_level)}
+					<tr>
+						<td>{trust_level === null ? 'null' : trust_level}</td>
+						<td>
+							{Object.entries(csp_directive_required_trust_defaults)
+								.filter(([_, value]) => value === trust_level)
+								.map(([key]) => key)
+								.join(', ')}
+						</td>
+					</tr>
+				{/each}
+			</tbody>
+		</table>
+	</section>
+	<section>
+		<h3>Directive specs</h3>
+		<table>
+			<thead>
+				<tr>
+					<th>directive</th>
+					<th>fallback</th>
+					<th>fallback of</th>
+				</tr>
+			</thead>
+			<tbody>
+				{#each csp_directive_specs as spec (spec.name)}
+					<tr>
+						<td>{spec.name}</td>
+						<td>{spec.fallback?.join(', ') || ''}</td>
+						<td>{spec.fallback_of?.join(', ') || ''}</td>
+					</tr>
+				{/each}
+			</tbody>
+		</table>
+	</section>
+	<aside>
+		⚠️ Apologies, these docs are a work in progress, see the <a
+			href="https://github.com/ryanatkn/fuz/blob/main/src/lib/csp.ts">source code</a
+		> for now. The API feels near-complete, and includes full customization of the default directive
+		values and trust levels. Some details may change and input is welcome.
+	</aside>
 </Tome_Content>
+
+<style>
+	table {
+		border-collapse: collapse;
+	}
+
+	th,
+	td {
+		padding: var(--space_xs3) var(--space_sm);
+	}
+
+	th {
+		background-color: var(--bg_1);
+		font-weight: bold;
+	}
+
+	tr:nth-child(even) {
+		background-color: var(--fg_1);
+	}
+</style>
