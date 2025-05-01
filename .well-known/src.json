@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.139.1",
+  "version": "0.139.2",
   "modules": {
     "./package.json": {
       "path": "package.json",
@@ -46,6 +46,15 @@
     "./Community_Links.svelte": {
       "path": "Community_Links.svelte",
       "declarations": []
+    },
+    "./constants.js": {
+      "path": "constants.ts",
+      "declarations": [
+        {
+          "name": "MAIN_HEADER_MARGIN_TOP",
+          "kind": "variable"
+        }
+      ]
     },
     "./context_helpers.js": {
       "path": "context_helpers.ts",
@@ -397,6 +406,10 @@
     },
     "./Hue_Input.svelte": {
       "path": "Hue_Input.svelte",
+      "declarations": []
+    },
+    "./Img_Or_Svg.svelte": {
+      "path": "Img_Or_Svg.svelte",
       "declarations": []
     },
     "./intersect.js": {
