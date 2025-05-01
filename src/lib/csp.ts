@@ -1,5 +1,3 @@
-// src/lib/csp.ts
-
 import type {Array_Element, Defined} from '@ryanatkn/belt/types.js';
 
 import {deep_freeze} from '$lib/helpers.js';

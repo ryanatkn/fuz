@@ -1,5 +1,3 @@
-// src/lib/csp.test.ts
-
 import {test} from 'uvu';
 import * as assert from 'uvu/assert';
 import type {KitConfig} from '@sveltejs/kit';

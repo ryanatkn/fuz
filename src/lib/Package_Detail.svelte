@@ -6,6 +6,7 @@
 	import type {Snippet} from 'svelte';
 
 	import Details from '$lib/Details.svelte';
+	import Img_Or_Svg from '$lib/Img_Or_Svg.svelte';
 
 	interface Props {
 		pkg: Package_Meta; // TODO normalized version with cached primitives?
@@ -114,13 +115,14 @@
 									class:selected={pkg.homepage_url === $page.url.href}
 									href={pkg.homepage_url}
 								>
-									<img
-										src={pkg.logo_url}
-										alt={pkg.logo_alt}
-										style:width="16px"
-										style:height="16px"
-										style:margin-right="var(--space_xs)"
-									/>
+									{#if pkg.logo_url}
+										<Img_Or_Svg
+											src={pkg.logo_url}
+											label={pkg.logo_alt}
+											size="16px"
+											attrs={{class: 'mr_xs'}}
+										/>
+									{/if}
 									{format_url(pkg.homepage_url)}
 								</a>
 							</div>
@@ -170,11 +172,10 @@
 		</div>
 		{#if pkg.logo_url}
 			<div class="logo">
-				<img
+				<Img_Or_Svg
 					src={pkg.logo_url}
-					alt={pkg.logo_alt}
-					style:width="var(--size, var(--icon_size_xl2))"
-					style:height="var(--size, var(--icon_size_xl2))"
+					label={pkg.logo_alt}
+					size="var(--size, var(--icon_size_xl2))"
 				/>
 			</div>
 		{/if}

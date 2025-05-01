@@ -16,6 +16,7 @@
 		moss_logo,
 	} from '$lib/logos.js';
 	import Hidden_Personal_Links from '$lib/Hidden_Personal_Links.svelte';
+	import {MAIN_HEADER_MARGIN_TOP} from '$lib/constants.js';
 
 	const pkg = pkg_context.get();
 
@@ -42,8 +43,8 @@
 <main class="box w_100">
 	<div class="box width_md mb_xl9">
 		<section class="box">
-			<h1 class="mt_xl4 mb_lg">fuz</h1>
-			<div class="box mb_xl"><Svg data={fuz_logo} size="var(--icon_size_xl2)" /></div>
+			<h1 class="mb_sm" style:margin-top={MAIN_HEADER_MARGIN_TOP}>fuz</h1>
+			<div class="box mb_lg"><Svg data={fuz_logo} size="var(--icon_size_xl2)" /></div>
 			<blockquote class="shadow_bottom_sm px_xl bg">friendly user zystem 🧶</blockquote>
 			<div class="mb_lg p_xs2 shadow_md radius_sm">
 				<div class="width_sm panel p_lg shadow_inset_xs bg">

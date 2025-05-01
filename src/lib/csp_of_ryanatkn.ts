@@ -1,5 +1,3 @@
-// src/lib/csp_of_ryanatkn.ts
-
 import type {Csp_Source_Spec} from '$lib/csp.js';
 
 /**

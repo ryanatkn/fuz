@@ -297,6 +297,9 @@ a.chip {
 .w_100 {
 	width: 100%;
 }
+.h_100 {
+	height: 100%;
+}
 .p_xs2 {
 	padding: var(--space_xs2);
 }
@@ -349,8 +352,8 @@ a.chip {
 .mt_lg {
 	margin-top: var(--space_lg);
 }
-.mt_xl4 {
-	margin-top: var(--space_xl4);
+.mr_xs {
+	margin-right: var(--space_xs);
 }
 .mb_0 {
 	margin-bottom: 0;
@@ -363,9 +366,6 @@ a.chip {
 }
 .mb_lg {
 	margin-bottom: var(--space_lg);
-}
-.mb_xl {
-	margin-bottom: var(--space_xl);
 }
 .mb_xl2 {
 	margin-bottom: var(--space_xl2);
