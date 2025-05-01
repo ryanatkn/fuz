@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.139.2
+
+### Patch Changes
+
+- add `Img_Or_Svg` ([#73](https://github.com/ryanatkn/fuz/pull/73))
+
 ## 0.139.1
 
 ### Patch Changes
