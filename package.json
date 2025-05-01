@@ -134,6 +134,10 @@
       "svelte": "./dist/Community_Links.svelte",
       "default": "./dist/Community_Links.svelte"
     },
+    "./constants.js": {
+      "types": "./dist/constants.d.ts",
+      "default": "./dist/constants.js"
+    },
     "./context_helpers.js": {
       "types": "./dist/context_helpers.d.ts",
       "default": "./dist/context_helpers.js"
@@ -275,6 +279,11 @@
       "types": "./dist/Hue_Input.svelte.d.ts",
       "svelte": "./dist/Hue_Input.svelte",
       "default": "./dist/Hue_Input.svelte"
+    },
+    "./Img_Or_Svg.svelte": {
+      "types": "./dist/Img_Or_Svg.svelte.d.ts",
+      "svelte": "./dist/Img_Or_Svg.svelte",
+      "default": "./dist/Img_Or_Svg.svelte"
     },
     "./intersect.js": {
       "types": "./dist/intersect.d.ts",
