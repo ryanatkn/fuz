@@ -6,6 +6,7 @@
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
 	import Svg from '$lib/Svg.svelte';
 	import {fuz_logo} from '$lib/logos.js';
+	import {MAIN_HEADER_MARGIN_TOP} from '$lib/constants.js';
 
 	const pkg = pkg_context.get();
 
@@ -15,7 +16,9 @@
 <main class="width_md">
 	<section>
 		<header class="box">
-			<h1 class="mt_xl4">{pkg.repo_name}</h1>
+			<h1 class="mb_xl5" style:margin-top={MAIN_HEADER_MARGIN_TOP}>
+				{pkg.repo_name}
+			</h1>
 		</header>
 		<Breadcrumb><Svg data={fuz_logo} size="var(--icon_size_sm)" /></Breadcrumb>
 	</section>

@@ -42,10 +42,10 @@ export const package_json = {
 		'@ryanatkn/belt': '^0.30.2',
 		'@ryanatkn/eslint-config': '^0.8.0',
 		'@ryanatkn/fuz_code': '^0.22.0',
-		'@ryanatkn/gro': '^0.151.1',
+		'@ryanatkn/gro': '^0.152.0',
 		'@ryanatkn/moss': '^0.26.0',
 		'@sveltejs/adapter-static': '^3.0.8',
-		'@sveltejs/kit': '^2.20.7',
+		'@sveltejs/kit': '^2.20.8',
 		'@sveltejs/package': '^2.3.11',
 		'@sveltejs/vite-plugin-svelte': '^5.0.3',
 		'@types/node': '^22.15.3',
@@ -57,7 +57,7 @@ export const package_json = {
 		'prettier-plugin-svelte': '^3.3.3',
 		'prism-svelte': '^0.5.0',
 		prismjs: '^1.30.0',
-		svelte: '^5.27.1',
+		svelte: '^5.28.2',
 		'svelte-check': '^4.1.6',
 		tslib: '^2.8.1',
 		typescript: '^5.8.3',
@@ -107,6 +107,7 @@ export const package_json = {
 			svelte: './dist/Community_Links.svelte',
 			default: './dist/Community_Links.svelte',
 		},
+		'./constants.js': {types: './dist/constants.d.ts', default: './dist/constants.js'},
 		'./context_helpers.js': {
 			types: './dist/context_helpers.d.ts',
 			default: './dist/context_helpers.js',
@@ -240,6 +241,11 @@ export const package_json = {
 			svelte: './dist/Hue_Input.svelte',
 			default: './dist/Hue_Input.svelte',
 		},
+		'./Img_Or_Svg.svelte': {
+			types: './dist/Img_Or_Svg.svelte.d.ts',
+			svelte: './dist/Img_Or_Svg.svelte',
+			default: './dist/Img_Or_Svg.svelte',
+		},
 		'./intersect.js': {types: './dist/intersect.d.ts', default: './dist/intersect.js'},
 		'./logos.js': {types: './dist/logos.d.ts', default: './dist/logos.js'},
 		'./Mdn_Link.svelte': {
@@ -361,6 +367,10 @@ export const src_json = {
 		'./Color_Scheme_Input.svelte': {path: 'Color_Scheme_Input.svelte', declarations: []},
 		'./Community_Links_Panel.svelte': {path: 'Community_Links_Panel.svelte', declarations: []},
 		'./Community_Links.svelte': {path: 'Community_Links.svelte', declarations: []},
+		'./constants.js': {
+			path: 'constants.ts',
+			declarations: [{name: 'MAIN_HEADER_MARGIN_TOP', kind: 'variable'}],
+		},
 		'./context_helpers.js': {
 			path: 'context_helpers.ts',
 			declarations: [{name: 'create_context', kind: null}],
@@ -468,6 +478,7 @@ export const src_json = {
 		'./helpers.js': {path: 'helpers.ts', declarations: [{name: 'deep_freeze', kind: 'function'}]},
 		'./Hidden_Personal_Links.svelte': {path: 'Hidden_Personal_Links.svelte', declarations: []},
 		'./Hue_Input.svelte': {path: 'Hue_Input.svelte', declarations: []},
+		'./Img_Or_Svg.svelte': {path: 'Img_Or_Svg.svelte', declarations: []},
 		'./intersect.js': {
 			path: 'intersect.ts',
 			declarations: [

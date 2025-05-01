@@ -3,7 +3,7 @@
 </script>
 
 <script lang="ts">
-	import {page} from '$app/stores';
+	import {page} from '$app/state';
 	import {onDestroy} from 'svelte';
 	import {slugify} from '@ryanatkn/belt/path.js';
 	import {DEV} from 'esm-env';
@@ -26,7 +26,7 @@
 		docs_links.remove(id);
 	});
 
-	const {path, path_is_selected} = $derived(to_docs_path_info(slug, $page.url.pathname));
+	const {path, path_is_selected} = $derived(to_docs_path_info(slug, page.url.pathname));
 </script>
 
 <header>

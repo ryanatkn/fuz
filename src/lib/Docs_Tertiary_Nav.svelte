@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {page} from '$app/stores';
+	import {page} from '$app/state';
 
 	import Docs_Menu from '$lib/Docs_Menu.svelte';
 	import Docs_Page_Links from '$lib/Docs_Page_Links.svelte';
@@ -14,7 +14,7 @@
 
 	const {tomes, tomes_by_name, sidebar = true}: Props = $props();
 
-	const selected_item = $derived(tomes.find((t) => to_tome_pathname(t) === $page.url.pathname));
+	const selected_item = $derived(tomes.find((t) => to_tome_pathname(t) === page.url.pathname));
 
 	const tomes_related_to_selected = $derived(
 		selected_item?.related.map((r) => tomes_by_name.get(r)!),

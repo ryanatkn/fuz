@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {page} from '$app/stores';
+	import {page} from '$app/state';
 	import {slide} from 'svelte/transition';
 
 	import {docs_links_context} from '$lib/docs_helpers.svelte.js';
@@ -14,7 +14,7 @@
 
 	const docs_links = docs_links_context.get();
 
-	const hash = $derived($page.url.hash.slice(1));
+	const hash = $derived(page.url.hash.slice(1));
 </script>
 
 <div class="docs_page_links">

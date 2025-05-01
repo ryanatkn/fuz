@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {page} from '$app/stores';
+	import {page} from '$app/state';
 	import {strip_start} from '@ryanatkn/belt/string.js';
 	import {goto} from '$app/navigation';
 	import type {Snippet} from 'svelte';
@@ -24,15 +24,9 @@
 		children?: Snippet<[url: string]>;
 	}
 
-	const {host = '', path = undefined, auto = true, children}: Props = $props();
+	const {host = '', path = page.url.pathname, auto = true, children}: Props = $props();
 
-	// TODO This line shouldn't exist, `path = undefined`, should be `path = $page.url.pathname`,
-	// but it appears to be a bug in Svelte (or possibly SvelteKit) during SSR:
-	// `ReferenceError: $page is not defined`, the `$page` isn't a variable in the file as expected.
-	// Look to see if it's reported, and if not make a reproduction.
-	const final_path = path ?? $page.url.pathname;
-
-	const url = host + final_path;
+	const url = host + path;
 
 	if (auto && BROWSER) void goto(url, {replaceState: true});
 </script>

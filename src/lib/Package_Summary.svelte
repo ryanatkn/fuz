@@ -1,8 +1,10 @@
 <script lang="ts">
-	import {page} from '$app/stores';
+	import {page} from '$app/state';
 	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
 	import type {Snippet} from 'svelte';
 	import {format_url} from '@ryanatkn/belt/url.js';
+
+	import Img_Or_Svg from '$lib/Img_Or_Svg.svelte';
 
 	interface Props {
 		pkg: Package_Meta; // TODO normalized version with cached primitives?
@@ -35,11 +37,10 @@
 			{#if logo}
 				{@render logo(pkg.logo_url, pkg.logo_alt)}
 			{:else}
-				<img
+				<Img_Or_Svg
 					src={pkg.logo_url}
-					alt={pkg.logo_alt}
-					style:width="var(--size, var(--icon_size_xl2))"
-					style:height="var(--size, var(--icon_size_xl2))"
+					label={pkg.logo_alt}
+					size="var(--size, var(--icon_size_xl2))"
 				/>
 			{/if}
 		{/if}
@@ -48,7 +49,7 @@
 		{#if motto}
 			{@render motto(package_json.motto, package_json.glyph)}
 		{:else}
-			<blockquote>
+			<blockquote class="px_xl">
 				{package_json.motto}
 				{package_json.glyph}
 			</blockquote>
@@ -72,7 +73,7 @@
 			{@render homepage_url(pkg.homepage_url)}
 		{:else}
 			<div class="homepage_url">
-				<a class="chip" class:selected={pkg.homepage_url === $page.url.href} href={pkg.homepage_url}
+				<a class="chip" class:selected={pkg.homepage_url === page.url.href} href={pkg.homepage_url}
 					>{format_url(pkg.homepage_url)}</a
 				>
 			</div>
