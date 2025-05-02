@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.140.0
+
+### Minor Changes
+
+- upgrade moss@0.27.0 from 0.26.0 ([#74](https://github.com/ryanatkn/fuz/pull/74))
+
 ## 0.139.2
 
 ### Patch Changes
