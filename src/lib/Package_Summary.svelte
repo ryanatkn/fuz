@@ -108,7 +108,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		max-width: var(--max_width, var(--width_sm));
+		max-width: var(--max_width, var(--distance_sm));
 	}
 	header {
 		margin-bottom: var(--space_lg);

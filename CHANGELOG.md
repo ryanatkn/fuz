@@ -1588,7 +1588,7 @@
     and `--shadow_lg`
   - drop the `font_` from `--font_size_X` (later changed to `size_`, see below)
   - rename `.column` to `.width_md` and `.column-sm` to `.width_sm`
-  - rename `--column_width` to `--width_md` and `--column_width_sm` to `--width_sm`
+  - rename `--column_width` to `--distance_md` and `--column_width_sm` to `--distance_sm`
   - rename `--link_text_decoration` to `--text_decoration` and
     `--link_text_decoration_X` to `--text_decoration_X`
   - rename `DialogData` to `DialogParams`

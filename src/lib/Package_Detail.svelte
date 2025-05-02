@@ -231,7 +231,7 @@
 		flex-direction: column;
 		align-items: flex-start;
 		width: 100%;
-		max-width: var(--max_width, var(--width_md));
+		max-width: var(--max_width, var(--distance_md));
 	}
 
 	.info {

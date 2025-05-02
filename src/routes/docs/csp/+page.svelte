@@ -13,6 +13,8 @@
 	const LIBRARY_ITEM_NAME = 'csp';
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
 
+	// TODO maybe subheadings, needs polish/reworking tho
+
 	// TODO add a Svelte logo svg and make the below a special component that Mdn_Link also extends (Mdn_Link only exists because it has special inference logic for its href)
 </script>
 
@@ -90,7 +92,7 @@ const custom_csp = create_csp_directives({
 		<h3>Trust</h3>
 		<p>
 			Fuz's CSP abstraction provides three trust levels (<code>Csp_Trust_Level</code>) with
-			escalating risk.
+			escalating risk. Each directive has a default value that can be customized:
 		</p>
 		<ul>
 			<li>
@@ -111,6 +113,7 @@ const custom_csp = create_csp_directives({
 	</section>
 	<section>
 		<h3>Default directive trust levels</h3>
+		<p>The defaults of option <code>required_trust_defaults</code>:</p>
 		<table>
 			<thead>
 				<tr>
@@ -161,23 +164,3 @@ const custom_csp = create_csp_directives({
 		values and trust levels. Some details may change and input is welcome.
 	</aside>
 </Tome_Content>
-
-<style>
-	table {
-		border-collapse: collapse;
-	}
-
-	th,
-	td {
-		padding: var(--space_xs3) var(--space_sm);
-	}
-
-	th {
-		background-color: var(--bg_1);
-		font-weight: bold;
-	}
-
-	tr:nth-child(even) {
-		background-color: var(--fg_1);
-	}
-</style>
