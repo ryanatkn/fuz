@@ -366,7 +366,7 @@ themer.color_scheme; // '${themer.color_scheme}'`}
 
 <style>
 	.theme_editor_wrapper {
-		width: var(--width_md);
+		width: var(--distance_md);
 		padding: var(--space_lg);
 	}
 </style>
