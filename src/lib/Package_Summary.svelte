@@ -121,6 +121,7 @@
 		margin-bottom: var(--space_lg);
 	}
 	.repo_name {
+		font-family: var(--font_serif);
 		font-size: var(--size_xl2);
 		font-weight: 400;
 		text-align: center;
