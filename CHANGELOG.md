@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.140.1
+
+### Patch Changes
+
+- change `Package_Detail` and `Package_Summary` headers to serif ([dc26875](https://github.com/ryanatkn/fuz/commit/dc26875))
+
 ## 0.140.0
 
 ### Minor Changes
