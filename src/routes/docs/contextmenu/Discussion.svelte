@@ -91,7 +91,8 @@
 	<p>
 		Balancing these two concerns is going to be an ongoing challenge, and my current belief is that
 		the contextmenu is too useful and powerful to ignore. I'm open to critical feedback, and I'll do
-		what I can to minimize the harmful effects of choices like this.
+		what I can to minimize the harmful effects of choices like this. iOS in particular seems buggy
+		despite my attempts to accommodate it, help is appreciated.
 	</p>
 	<p>Mitigations:</p>
 	<ul>
