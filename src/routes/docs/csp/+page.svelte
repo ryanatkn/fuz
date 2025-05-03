@@ -32,7 +32,8 @@
 				path="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Content_Security_Policy"
 				>Content Security Policies</Mdn_Link
 			> with the
-			<code>create_csp_directives</code> helper. Fuz also provides related helpers, types, and CSP data.
+			<Identifier name="create_csp_directives" /> helper. Fuz also provides related helpers, types, and
+			CSP data.
 		</p>
 		<p>
 			The goal is to provide a simple trust modeling system that balances safety+security+privacy
@@ -46,9 +47,9 @@
 			API with full declarative transparency (and more verbosity and information load).
 		</p>
 		<p>
-			Fuz defines three levels of trust/risk/sensitivity (low/medium/high, <code
-				>Csp_Trust_Level</code
-			>) that can be configured for each trusted source to give blanket permissions at a specified
+			Fuz defines three levels of trust/risk/sensitivity (low/medium/high, <Identifier
+				name="Csp_Trust_Level"
+			/>) that can be configured for each trusted source to give blanket permissions at a specified
 			tier, and then granular overrides are straightforward and declarative.
 		</p>
 		<p>
@@ -60,7 +61,7 @@
 		<Code
 			content={`import {create_csp_directives, type Csp_Source_Spec} from '@ryanatkn/fuz/csp.js';
 
-// Create the default CSP with no trusted sources except 'self'.
+// Create the default CSP with no trusted sources except 'self' and some sensible fallbacks.
 // This tries to balance security and privacy with usability,
 // helping nonexperts write secure policies while still supporting advanced users.
 // More later on the details of the defaults.
@@ -80,18 +81,19 @@ const csp = create_csp_directives({
 });
 
 // Create a CSP that opts out of using Fuz's trust abstraction:
-const csp = create_csp_directives({
+create_csp_directives({
 	directives: {
 		'img-src': ['self', 'https://*.my.domain/'],
-		// [your explicit directives]
+		// ...your explicit directives
 	},
 	// Simply omit \`trusted_sources\`,
 	// but note the above directives extend the base defaults.
 });
 
-// Create a CSP with no hidden defaults, fully declarative,
-// like not using Fuz's CSP abstraction at all:
-const csp = create_csp_directives({
+// Create a CSP with no hidden base defaults,
+// so it's fully declarative and explicit,
+// like not using Fuz's CSP helpers at all:
+const precise_csp = create_csp_directives({
 	value_defaults_base: null,
 	required_trust_defaults_base: null,
 	value_defaults: {
@@ -99,8 +101,12 @@ const csp = create_csp_directives({
 		'connect-src': ['self', 'https://my.domain/'],
 	},
 });
+// assert.equal(precise_csp, {
+// 	'img-src': ['self', 'https://my.domain/'],
+// 	'connect-src': ['self', 'https://my.domain/'],
+// });
 
-// You can also transform directives by passing a function:
+// Transform/extend directives by passing a function:
 const custom_csp = create_csp_directives({
   trusted_sources: my_csp_trusted_sources,
   directives: {
@@ -115,7 +121,7 @@ const custom_csp = create_csp_directives({
     'script-src-elem': (v) => [...v, 'unsafe-eval', 'wasm-unsafe-eval'], // alert alert
 
 		// Returning \`undefined\` or \`null\` removes the directive,
-		// all other values are passed through to SvelteKit
+		// all other values are passed through to SvelteKit.
   },
 });`}
 			lang="ts"
@@ -125,7 +131,11 @@ const custom_csp = create_csp_directives({
 	<Tome_Section>
 		<Tome_Section_Header text="Explicit directives" />
 		<!-- TODO make this a header if it stabilizes -->
-		<p>Fuz's CSP provides a convenient, declarative API for defining directives per source.</p>
+		<p>
+			The CSP helpers have a convenient, declarative API for defining directives per source. These
+			override any defaults, and unlike <code>trust</code>, the <code>directives</code> do not depend
+			on an abstraction layer, so WYSIWYG.
+		</p>
 		<Code
 			content={`export const my_csp_trusted_sources: Array<Csp_Source_Spec> = [
 	{source: 'https://a.domain/'}, // No explicit directives, will use trust level if any
@@ -145,10 +155,10 @@ const custom_csp = create_csp_directives({
 			content={`// Example: explicitly allowing a source for specific directives regardless of trust
 export const my_csp_trusted_sources: Array<Csp_Source_Spec> = [
 	// Allow for specific directives (adds to what trust level allows):
-	{source: 'https://api.example.com/', trust: 'low', directives: ['connect-src']},
+	{source: 'https://a.domain/', trust: 'low', directives: ['connect-src']},
 	
 	// Trust-level provides baseline permissions, explicit directives add specific ones:
-	{source: 'https://trusted-cdn.com/', trust: 'high', directives: ['script-src-elem', 'style-src-elem']},
+	{source: 'https://b.domain/', trust: 'medium', directives: ['script-src-elem']},
 	
 	// Both mechanisms work together - trust level provides baseline permissions
 	// and explicit directives add specific permissions
@@ -179,7 +189,7 @@ export const my_csp_trusted_sources: Array<Csp_Source_Spec> = [
 				<tr>
 					<th class="white_space_nowrap">trust level</th>
 					<th>what it means</th>
-					<th>configured by <code>required_trust_defaults_base</code></th>
+					<th>configured by <Identifier name="required_trust_defaults_base" /></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -211,13 +221,23 @@ export const my_csp_trusted_sources: Array<Csp_Source_Spec> = [
 				{/each}
 			</tbody>
 		</table>
+		<p>
+			The trust system introduces opt-in abstraction and indirection, and a downside of the design
+			is that it encourages over-permissioning at each individual tier. The maintainers currently
+			feel that this granularity with 3 tiers offers an intuitive base that gets most of the
+			important questions right most of the time for most users, and additional safeguards are
+			available for those that want tighter control or less chance of error.
+		</p>
 	</Tome_Section>
 
 	<Tome_Section>
 		<Tome_Section_Header text="Base defaults" />
 		<p>
-			The options <code>value_defaults_base</code> and <code>required_trust_defaults_base</code> afford
-			full control over defaults:
+			The options <code>value_defaults_base</code> (defaults to <Identifier
+				name="csp_directive_value_defaults"
+			/>) and <code>required_trust_defaults_base</code> (defaults to <Identifier
+				name="csp_directive_required_trust_defaults"
+			/>) afford full control over defaults:
 		</p>
 
 		<Code
