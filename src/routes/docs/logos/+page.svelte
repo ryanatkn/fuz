@@ -43,27 +43,21 @@
 	<section>
 		<ul class="display_flex flex_wrap justify_content_center gap_lg text_align_center unstyled">
 			<li>
-				<a href="https://www.zzz.software/"
-					><Svg data={zzz_logo} size="var(--icon_size_xl3)" /></a
-				>
+				<a href="https://www.zzz.software/"><Svg data={zzz_logo} size="var(--icon_size_xl3)" /></a>
 				<Code content={`<Svg data={zzz_logo} />`} />
 			</li>
 			<li>
-				<a href="https://moss.ryanatkn.com/"
-					><Svg data={moss_logo} size="var(--icon_size_xl3)" /></a
+				<a href="https://moss.ryanatkn.com/"><Svg data={moss_logo} size="var(--icon_size_xl3)" /></a
 				>
 				<Code content={`<Svg data={moss_logo} />`} />
 			</li>
 			<li>
-				<a href="https://belt.ryanatkn.com/"
-					><Svg data={belt_logo} size="var(--icon_size_xl3)" /></a
+				<a href="https://belt.ryanatkn.com/"><Svg data={belt_logo} size="var(--icon_size_xl3)" /></a
 				>
 				<Code content={`<Svg data={belt_logo} />`} />
 			</li>
 			<li>
-				<a href="https://gro.ryanatkn.com/"
-					><Svg data={gro_logo} size="var(--icon_size_xl3)" /></a
-				>
+				<a href="https://gro.ryanatkn.com/"><Svg data={gro_logo} size="var(--icon_size_xl3)" /></a>
 				<Code content={`<Svg data={gro_logo} />`} />
 			</li>
 			<li>
@@ -77,9 +71,7 @@
 				<Code content={`<Svg data={webdevladder_logo} />`} />
 			</li>
 			<li>
-				<a href="https://blog.fuz.dev/"
-					><Svg data={fuz_blog_logo} size="var(--icon_size_xl3)" /></a
-				>
+				<a href="https://blog.fuz.dev/"><Svg data={fuz_blog_logo} size="var(--icon_size_xl3)" /></a>
 				<Code content={`<Svg data={fuz_blog_logo} />`} />
 			</li>
 			<li>
@@ -89,9 +81,7 @@
 				<Code content={`<Svg data={fuz_mastodon_logo} />`} />
 			</li>
 			<li>
-				<a href="https://code.fuz.dev/"
-					><Svg data={fuz_code_logo} size="var(--icon_size_xl3)" /></a
-				>
+				<a href="https://code.fuz.dev/"><Svg data={fuz_code_logo} size="var(--icon_size_xl3)" /></a>
 				<Code content={`<Svg data={fuz_code_logo} />`} />
 			</li>
 			<li>
@@ -119,8 +109,7 @@
 				<Code content={`<Svg data={spiderspace_logo} />`} />
 			</li>
 			<li>
-				<a href="https://github.com/"><Svg data={github_logo} size="var(--icon_size_xl3)" /></a
-				>
+				<a href="https://github.com/"><Svg data={github_logo} size="var(--icon_size_xl3)" /></a>
 				<Code content={`<Svg data={github_logo} />`} />
 			</li>
 			<li>
@@ -130,9 +119,7 @@
 				<Code content={`<Svg data={mdn_logo} />`} />
 			</li>
 			<li>
-				<a href="https://chatgpt.com/"
-					><Svg data={chatgpt_logo} size="var(--icon_size_xl3)" /></a
-				>
+				<a href="https://chatgpt.com/"><Svg data={chatgpt_logo} size="var(--icon_size_xl3)" /></a>
 				<Code content={`<Svg data={chatgpt_logo} />`} />
 			</li>
 			<li>
@@ -146,8 +133,7 @@
 				<Code content={`<Svg data={gemini_logo} />`} />
 			</li>
 			<li>
-				<a href="https://ollama.com/"><Svg data={ollama_logo} size="var(--icon_size_xl3)" /></a
-				>
+				<a href="https://ollama.com/"><Svg data={ollama_logo} size="var(--icon_size_xl3)" /></a>
 				<Code content={`<Svg data={ollama_logo} />`} />
 			</li>
 		</ul>
