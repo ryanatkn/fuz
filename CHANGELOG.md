@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.141.0
+
+### Minor Changes
+
+- upgrade moss and gro ([#75](https://github.com/ryanatkn/fuz/pull/75)) ([0158616](https://github.com/ryanatkn/fuz/commit/0158616))
+
 ## 0.140.1
 
 ### Patch Changes
