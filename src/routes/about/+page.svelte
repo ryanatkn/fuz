@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {pkg_context} from '$routes/pkg.js';
+	import {pkg_context} from '$lib/pkg.js';
 	import Community_Links_Panel from '$lib/Community_Links_Panel.svelte';
 	import Package_Detail from '$lib/Package_Detail.svelte';
 	import Docs_Footer from '$lib/Docs_Footer.svelte';

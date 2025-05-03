@@ -50,7 +50,7 @@ export const package_json = {
 		'@sveltejs/vite-plugin-svelte': '^5.0.3',
 		'@types/node': '^22.15.3',
 		'@types/prismjs': '^1.26.5',
-		eslint: '^9.25.1',
+		eslint: '^9.26.0',
 		'eslint-plugin-svelte': '^3.5.1',
 		'esm-env': '^1.2.2',
 		prettier: '^3.5.3',
@@ -58,7 +58,7 @@ export const package_json = {
 		'prism-svelte': '^0.5.0',
 		prismjs: '^1.30.0',
 		svelte: '^5.28.2',
-		'svelte-check': '^4.1.6',
+		'svelte-check': '^4.1.7',
 		tslib: '^2.8.1',
 		typescript: '^5.8.3',
 		'typescript-eslint': '^8.31.1',
@@ -283,6 +283,7 @@ export const package_json = {
 			svelte: './dist/Pending_Button.svelte',
 			default: './dist/Pending_Button.svelte',
 		},
+		'./pkg.js': {types: './dist/pkg.d.ts', default: './dist/pkg.js'},
 		'./Project_Links.svelte': {
 			types: './dist/Project_Links.svelte.d.ts',
 			svelte: './dist/Project_Links.svelte',
@@ -533,6 +534,7 @@ export const src_json = {
 		'./Paste_From_Clipboard.svelte': {path: 'Paste_From_Clipboard.svelte', declarations: []},
 		'./Pending_Animation.svelte': {path: 'Pending_Animation.svelte', declarations: []},
 		'./Pending_Button.svelte': {path: 'Pending_Button.svelte', declarations: []},
+		'./pkg.js': {path: 'pkg.ts', declarations: [{name: 'pkg_context', kind: 'variable'}]},
 		'./Project_Links.svelte': {path: 'Project_Links.svelte', declarations: []},
 		'./Redirect.svelte': {path: 'Redirect.svelte', declarations: []},
 		'./rune_helpers.svelte.js': {
