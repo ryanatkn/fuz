@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.141.1
+
+### Patch Changes
+
+- add pkg.ts ([dcb7e16](https://github.com/ryanatkn/fuz/commit/dcb7e16))
+
 ## 0.141.0
 
 ### Minor Changes
