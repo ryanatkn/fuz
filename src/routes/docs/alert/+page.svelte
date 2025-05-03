@@ -17,7 +17,10 @@
 
 <!-- eslint-disable svelte/no-useless-mustaches -->
 
-<Tome_Content {tome}>
+<Tome_Content {tome}
+	><section>
+		<aside>⚠️ This API is unfinished and will likely change.</aside>
+	</section>
 	<section>
 		<!-- TODO make this a generic data-driven helper -->
 		<Code content={`import Alert from '@ryanatkn/fuz/Alert.svelte';`} lang="ts" />
