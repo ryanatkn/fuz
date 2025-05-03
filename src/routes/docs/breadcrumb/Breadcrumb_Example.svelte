@@ -17,10 +17,10 @@
 	selected_path="${selected_path}"
 	base_path="{base}/docs/breadcrumb"	
 >
-	<span class="size_xl">🔡</span>
+	<span class="font_size_xl">🔡</span>
 	{#snippet separator()}.{/snippet}
 </Breadcrumb>`}
 />
 <Breadcrumb path="/a/b/c/d" {selected_path} base_path="{base}/docs/breadcrumb">
-	<span class="size_xl">🔡</span>
+	<span class="font_size_xl">🔡</span>
 </Breadcrumb>

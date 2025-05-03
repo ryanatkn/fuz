@@ -12,7 +12,7 @@
 </script>
 
 <Contextmenu_Link_Entry href="https://github.com/ryanatkn/fuz">
-	{#snippet icon()}<Svg data={github_logo} size="var(--icon_size_xs)" />{/snippet}
+	{#snippet icon()}<Svg data={github_logo} size="var(--icon_font_size_xs)" />{/snippet}
 	Source code
 </Contextmenu_Link_Entry>
 <Contextmenu_Entry run={toggle_about_dialog}>

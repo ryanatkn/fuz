@@ -378,7 +378,7 @@
 		display: contents;
 	}
 	.contextmenu {
-		--icon_size: var(--icon_size_xs);
+		--icon_size: var(--icon_font_size_xs);
 		/* TODO maybe make this responsive or a max of the page width
 		minus some space to tap items covered by the menu on the side,
 		or consider a totally different design for small screens (more dialog-like)  */
@@ -400,7 +400,7 @@
 		border: var(--contextmenu_border_width, var(--border_width))
 			var(--contextmenu_border_style, var(--border_style))
 			var(--contextmenu_border_color, var(--border_color));
-		border-radius: var(--contextmenu_border_radius, var(--radius_xs));
+		border-radius: var(--contextmenu_border_radius, var(--border_radius_xs));
 	}
 
 	/* TODO better way to do this? */

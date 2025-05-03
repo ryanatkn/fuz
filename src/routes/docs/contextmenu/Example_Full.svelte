@@ -228,7 +228,7 @@
 
 <style>
 	.position {
-		border-radius: var(--radius_md);
+		border-radius: var(--border_radius_md);
 		background-color: var(--fg_1);
 		display: flex;
 		border: transparent var(--border_width_4) double;
@@ -237,7 +237,7 @@
 		border-color: var(--border_color_1);
 	}
 	.position .icon {
-		font-size: var(--icon_size_xl);
+		font-size: var(--icon_font_size_xl);
 	}
 	.cats {
 		display: flex;

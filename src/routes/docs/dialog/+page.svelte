@@ -47,7 +47,7 @@
 		dialogs = Array.from({length: count}, (_, i) =>
 			to_dialog_params(Text, {
 				text: to_text(i),
-				size: 'var(--size_xl4)',
+				size: 'var(--font_size_xl4)',
 				padding: 'var(--space_sm) var(--space_lg)',
 			}),
 		);

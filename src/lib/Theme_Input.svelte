@@ -67,11 +67,11 @@
 		border-radius: 0;
 	}
 	li:first-child .theme_button {
-		border-top-left-radius: var(--radius_sm);
-		border-top-right-radius: var(--radius_sm);
+		border-top-left-radius: var(--border_radius_sm);
+		border-top-right-radius: var(--border_radius_sm);
 	}
 	li:last-child .theme_button {
-		border-bottom-left-radius: var(--radius_sm);
-		border-bottom-right-radius: var(--radius_sm);
+		border-bottom-left-radius: var(--border_radius_sm);
+		border-bottom-right-radius: var(--border_radius_sm);
 	}
 </style>

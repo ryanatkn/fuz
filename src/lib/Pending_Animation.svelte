@@ -31,7 +31,7 @@
 
 <style>
 	.pending_animation span {
-		font-size: var(--size, inherit);
+		font-size: var(--font_size, inherit);
 		display: inline-block;
 		transform: scale3d(var(--scale_x, 0.4), var(--scale_y, 0.4), var(--scale_z, 0.4));
 		animation: dot var(--animation_duration, var(--duration_5, 1.5s)) infinite paused;

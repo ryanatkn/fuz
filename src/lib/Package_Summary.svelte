@@ -40,7 +40,7 @@
 				<Img_Or_Svg
 					src={pkg.logo_url}
 					label={pkg.logo_alt}
-					size="var(--size, var(--icon_size_xl2))"
+					size="var(--font_size, var(--icon_font_size_xl2))"
 				/>
 			{/if}
 		{/if}
@@ -121,14 +121,14 @@
 		margin-bottom: var(--space_lg);
 	}
 	.repo_name {
-		font-family: var(--font_serif);
-		font-size: var(--size_xl2);
+		font-family: var(--font_family_serif);
+		font-size: var(--font_size_xl2);
 		font-weight: 400;
 		text-align: center;
 		margin-bottom: var(--space_lg);
 	}
 	.npm_url {
-		font-family: var(--font_mono);
+		font-family: var(--font_family_mono);
 		text-align: center;
 	}
 	.chip {

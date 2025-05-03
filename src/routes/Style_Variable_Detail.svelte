@@ -34,7 +34,7 @@
 		padding: var(--space_xs) 0;
 	}
 	.name {
-		font-size: var(--size_xl);
+		font-size: var(--font_size_xl);
 		text-align: center;
 		margin-bottom: var(--space_xl);
 	}

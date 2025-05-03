@@ -20,7 +20,7 @@
 			>
 			with
 			<Mdn_Link path="Web/HTML/Element/meta#http-equiv"
-				>the <span class="font_mono">refresh</span> header</Mdn_Link
+				>the <span class="font_family_mono">refresh</span> header</Mdn_Link
 			>. Includes a rendered link and JS navigation fallback.
 		</p>
 		<!-- TODO make this a generic data-driven helper -->

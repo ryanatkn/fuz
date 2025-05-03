@@ -74,7 +74,7 @@
 		width: 100%;
 		color: var(--text_color);
 		font-weight: 700;
-		font-size: var(--size_md);
+		font-size: var(--font_size_md);
 		border-width: var(--border_width_1);
 		border-style: var(--border_style);
 		border-color: var(--text_color);
@@ -92,8 +92,8 @@
 		align-items: center;
 		justify-content: center;
 		margin-right: var(--space_md);
-		font-size: var(--size_xl2);
-		min-width: var(--size_xl2);
+		font-size: var(--font_size_xl2);
+		min-width: var(--font_size_xl2);
 		text-align: center;
 	}
 	.content {

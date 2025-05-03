@@ -59,7 +59,7 @@
 	const {
 		data,
 		fill,
-		size = 'var(--size, auto)',
+		size = 'var(--font_size, auto)',
 		width,
 		height,
 		label,

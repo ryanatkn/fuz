@@ -2,7 +2,7 @@
 	import Svg from '$lib/Svg.svelte';
 	import {gro_logo, fuz_logo, moss_logo, fuz_template_logo} from '$lib/logos.js';
 
-	const size = 'var(--icon_size_lg)';
+	const size = 'var(--icon_font_size_lg)';
 </script>
 
 <!--<a href="https://www.spiderspace.org/"></a>--><!--<a href="https://www.webdevladder.net/"></a>-->
@@ -47,8 +47,8 @@
 
 	.project_link .name {
 		display: block;
-		margin-top: var(--size_sm);
-		font-size: var(--size_lg);
+		margin-top: var(--font_size_sm);
+		font-size: var(--font_size_lg);
 		font-weight: 400;
 	}
 </style>
