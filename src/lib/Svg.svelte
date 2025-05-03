@@ -85,10 +85,10 @@
 	{...data.attrs}
 	{...attrs}
 	aria-label={label ?? data.label}
+	class:display_inline_block={inline}
+	class:relative={inline}
 	style:width={final_width}
 	style:height={final_height}
-	style:display={inline ? 'inline-block' : undefined}
-	style:position={inline ? 'relative' : undefined}
 	style:top={inline ? '0.1em' : undefined}
 	style:flex-shrink={shrink ? 1 : 0}
 	{style}

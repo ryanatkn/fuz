@@ -68,7 +68,7 @@
 <div class="package_detail">
 	<!-- TODO maybe continue this snippet pattern, or maybe simplify? -->
 	<div class="info">
-		<div class="flex flex_1">
+		<div class="display_flex flex_1">
 			<!-- add yet another wrapper so it flows like we want -->
 			<div>
 				<header>

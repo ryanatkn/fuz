@@ -46,21 +46,21 @@
 		<Code
 			content={`<Pending_Animation --font_size="var(--font_size_xl5)"${to_boolean_attr('running', running)} />`}
 		/>
-		<div class="mb_lg" style:align-items="flex-start" role="none">
+		<div class="mb_lg align_items_flex_start" role="none">
 			<Pending_Animation --font_size="var(--font_size_xl5)" {running} />
 		</div>
 		<p>Set size with classes:</p>
 		<Code
 			content={`<Pending_Animation attrs={{class: 'font_size_xl3'}}${to_boolean_attr('running', running)} />`}
 		/>
-		<div style:align-items="flex-start" role="none">
+		<div class="align_items_flex_start" role="none">
 			<Pending_Animation attrs={{class: 'font_size_xl3'}} {running} />
 		</div>
 		<p>Size is inherited by default:</p>
 		<Code
 			content={`<div class="font_size_xl4"><Pending_Animation${to_boolean_attr('running', running)} /></div>`}
 		/>
-		<div class="font_size_xl4" style:align-items="flex-start" role="none">
+		<div class="font_size_xl4 align_items_flex_start" role="none">
 			<Pending_Animation {running} />
 		</div>
 	</section>

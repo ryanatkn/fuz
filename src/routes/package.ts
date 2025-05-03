@@ -475,7 +475,13 @@ export const src_json = {
 		'./Docs_Tertiary_Nav.svelte': {path: 'Docs_Tertiary_Nav.svelte', declarations: []},
 		'./Docs.svelte': {path: 'Docs.svelte', declarations: []},
 		'./Hashlink.svelte': {path: 'Hashlink.svelte', declarations: []},
-		'./helpers.js': {path: 'helpers.ts', declarations: [{name: 'deep_freeze', kind: 'function'}]},
+		'./helpers.js': {
+			path: 'helpers.ts',
+			declarations: [
+				{name: 'deep_freeze', kind: 'function'},
+				{name: 'render_value_to_string', kind: 'function'},
+			],
+		},
 		'./Hidden_Personal_Links.svelte': {path: 'Hidden_Personal_Links.svelte', declarations: []},
 		'./Hue_Input.svelte': {path: 'Hue_Input.svelte', declarations: []},
 		'./Img_Or_Svg.svelte': {path: 'Img_Or_Svg.svelte', declarations: []},
