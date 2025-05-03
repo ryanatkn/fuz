@@ -80,8 +80,8 @@
 		font-weight: 700;
 		color: var(--bg);
 		padding-left: var(--space_xl);
-		border-top-left-radius: var(--border_radius, var(--radius_md));
-		border-top-right-radius: var(--border_radius, var(--radius_md));
+		border-top-left-radius: var(--border_radius, var(--border_radius_md));
+		border-top-right-radius: var(--border_radius, var(--border_radius_md));
 	}
 	.minimap_wrapper {
 		padding: 0 var(--input_padding_x);
@@ -113,11 +113,11 @@
 		width: 10rem;
 		min-width: 10rem;
 		margin-left: var(--space_lg);
-		font-size: var(--size_lg);
+		font-size: var(--font_size_lg);
 		text-align: center;
 		background-color: transparent;
 		border: none;
-		border-radius: var(--border_radius, var(--radius_md));
+		border-radius: var(--border_radius, var(--border_radius_md));
 		/* TODO why is this necessary? */
 		height: var(--input_height);
 		color: var(--bg);

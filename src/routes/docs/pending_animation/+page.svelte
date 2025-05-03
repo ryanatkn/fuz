@@ -44,23 +44,23 @@
 		</p>
 		<p>Set size with custom properties:</p>
 		<Code
-			content={`<Pending_Animation --size="var(--size_xl5)"${to_boolean_attr('running', running)} />`}
+			content={`<Pending_Animation --font_size="var(--font_size_xl5)"${to_boolean_attr('running', running)} />`}
 		/>
-		<div class="mb_lg" style:align-items="flex-start" role="none">
-			<Pending_Animation --size="var(--size_xl5)" {running} />
+		<div class="mb_lg align_items_flex_start" role="none">
+			<Pending_Animation --font_size="var(--font_size_xl5)" {running} />
 		</div>
 		<p>Set size with classes:</p>
 		<Code
-			content={`<Pending_Animation attrs={{class: 'size_xl3'}}${to_boolean_attr('running', running)} />`}
+			content={`<Pending_Animation attrs={{class: 'font_size_xl3'}}${to_boolean_attr('running', running)} />`}
 		/>
-		<div style:align-items="flex-start" role="none">
-			<Pending_Animation attrs={{class: 'size_xl3'}} {running} />
+		<div class="align_items_flex_start" role="none">
+			<Pending_Animation attrs={{class: 'font_size_xl3'}} {running} />
 		</div>
 		<p>Size is inherited by default:</p>
 		<Code
-			content={`<div class="size_xl4"><Pending_Animation${to_boolean_attr('running', running)} /></div>`}
+			content={`<div class="font_size_xl4"><Pending_Animation${to_boolean_attr('running', running)} /></div>`}
 		/>
-		<div class="size_xl4" style:align-items="flex-start" role="none">
+		<div class="font_size_xl4 align_items_flex_start" role="none">
 			<Pending_Animation {running} />
 		</div>
 	</section>
@@ -83,7 +83,7 @@
 	<Tome_Section>
 		<Tome_Section_Header text="With custom children" />
 		<Code
-			content={`<Pending_Animation --size="var(--size_xl6)"${to_boolean_attr('running', running)}>
+			content={`<Pending_Animation --font_size="var(--font_size_xl6)"${to_boolean_attr('running', running)}>
 	{${turtle_slot}}
 </Pending_Animation>`}
 		/>
@@ -95,7 +95,7 @@
 				onclick={() => (turtle_slot = (turtle_slot + turtle_slot).substring(0, 24))}>* 2</button
 			>
 		</p>
-		<Pending_Animation {running} --size="var(--size_xl6)">
+		<Pending_Animation {running} --font_size="var(--font_size_xl6)">
 			{turtle_slot}
 		</Pending_Animation>
 		<button type="button" onclick={() => (running = !running)}>
@@ -113,7 +113,7 @@
 		<div class="box">
 			{${turtle_slot_2a}}
 			{index}
-			<span class="size_xl5">
+			<span class="font_size_xl5">
 				{${turtle_slot_2b}}
 			</span>}
 		</div>
@@ -134,8 +134,8 @@
 		<Pending_Animation {running}>
 			{#snippet children(index)}
 				<div class="row">
-					<span class="size_xl5">{turtle_slot_2a}</span>
-					<span class="size_xl3">{index}</span>
+					<span class="font_size_xl5">{turtle_slot_2a}</span>
+					<span class="font_size_xl3">{index}</span>
 					{turtle_slot_2b}
 				</div>
 			{/snippet}
@@ -145,9 +145,13 @@
 	<Tome_Section>
 		<Tome_Section_Header text="With custom duration" />
 		<Code
-			content={`<Pending_Animation --animation_duration="var(--duration_6)" --size="var(--size_xl4)"${to_boolean_attr('running', running)} />`}
+			content={`<Pending_Animation --animation_duration="var(--duration_6)" --font_size="var(--font_size_xl4)"${to_boolean_attr('running', running)} />`}
 		/>
-		<Pending_Animation {running} --animation_duration="var(--duration_6)" --size="var(--size_xl4)">
+		<Pending_Animation
+			{running}
+			--animation_duration="var(--duration_6)"
+			--font_size="var(--font_size_xl4)"
+		>
 			{turtle_slot}
 		</Pending_Animation>
 		<button type="button" onclick={() => (running = !running)}>

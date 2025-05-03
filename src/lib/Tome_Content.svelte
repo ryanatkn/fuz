@@ -40,7 +40,7 @@
 		: null}
 >
 	<header
-		class="mb_xl3"
+		class="mb_xl3 position_sticky top_0"
 		use:intersect={at_root
 			? null
 			: ({intersecting}) => {

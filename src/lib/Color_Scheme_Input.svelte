@@ -57,11 +57,11 @@ https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/menubar_ro
 		border-radius: 0;
 	}
 	.color_scheme:first-child {
-		border-top-left-radius: var(--border_radius, var(--radius_md));
-		border-bottom-left-radius: var(--border_radius, var(--radius_md));
+		border-top-left-radius: var(--border_radius, var(--border_radius_md));
+		border-bottom-left-radius: var(--border_radius, var(--border_radius_md));
 	}
 	.color_scheme:last-child {
-		border-top-right-radius: var(--border_radius, var(--radius_md));
-		border-bottom-right-radius: var(--border_radius, var(--radius_md));
+		border-top-right-radius: var(--border_radius, var(--border_radius_md));
+		border-bottom-right-radius: var(--border_radius, var(--border_radius_md));
 	}
 </style>

@@ -47,8 +47,8 @@
 
 	.project_link .name {
 		display: block;
-		margin-top: var(--size_sm);
-		font-size: var(--size_lg);
+		margin-top: var(--font_size_sm);
+		font-size: var(--font_size_lg);
 		font-weight: 400;
 	}
 </style>

@@ -68,12 +68,12 @@
 		--icon_size: var(--icon_size_lg);
 		--icon_margin: var(--space_lg);
 		display: flex;
-		font-size: var(--size_xl2);
+		font-size: var(--font_size_xl2);
 		align-items: center;
 		padding: var(--space_lg);
 		width: var(--card_width);
 		background-color: var(--fg_1);
-		border-radius: var(--border_radius, var(--radius_md));
+		border-radius: var(--border_radius, var(--border_radius_md));
 		text-decoration: none;
 		text-align: left;
 	}
@@ -131,14 +131,14 @@
 	}
 	@media (max-width: 460px) {
 		.card {
-			font-size: var(--size_xl);
+			font-size: var(--font_size_xl);
 		}
 	}
 	@media (max-width: 380px) {
 		.card {
 			--icon_size: var(--icon_size_md);
 			--icon_margin: var(--space_sm);
-			font-size: var(--size_lg);
+			font-size: var(--font_size_lg);
 		}
 		.icon {
 			font-size: var(--icon_size_md);

@@ -70,7 +70,7 @@
 	}
 
 	nav {
-		--size: var(--size_xl);
+		--font_size: var(--font_size_xl);
 		height: 100%;
 		display: flex;
 		flex: 1;
@@ -80,12 +80,12 @@
 	/* sync this breakpoint with `Docs` */
 	@media (max-width: 800px) {
 		nav {
-			--size: var(--size_lg);
+			--font_size: var(--font_size_lg);
 		}
 	}
 	@media (max-width: 550px) {
 		nav {
-			--size: var(--size_md);
+			--font_size: var(--font_size_md);
 		}
 	}
 </style>

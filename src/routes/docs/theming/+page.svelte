@@ -13,9 +13,8 @@
 	<section>
 		<p>
 			Fuz bases its theme support on my CSS framework <a href="https://moss.ryanatkn.com/">Moss</a>,
-			which is based on <Mdn_Link path="Web/CSS/--*">CSS custom properties</Mdn_Link>. For more see <Tome_Link
-				name="Themed"
-			/>.
+			which is based on <Mdn_Link path="Web/CSS/--*">CSS custom properties</Mdn_Link>. For usage
+			docs see <Tome_Link name="Themed" />.
 		</p>
 	</section>
 </Tome_Content>

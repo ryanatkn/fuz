@@ -13,6 +13,7 @@ import {
 	csp_directive_value_defaults,
 	csp_directive_specs,
 	COLOR_SCHEME_SCRIPT_HASH,
+	type Create_Csp_Directives_Options,
 } from '$lib/csp.js';
 
 // Type tests, this errors if Csp_Directives is not assignable to SvelteKit's directives type. (which isn't exported directly)
@@ -848,6 +849,234 @@ test('defaults option with null values', () => {
 
 	// Other directives should still exist
 	assert.ok('script-src' in csp, 'script-src should still exist');
+});
+
+test('value_defaults_base can completely reset defaults', () => {
+	// Using null to completely reset defaults
+	const csp_no_defaults = create_csp_directives({
+		value_defaults_base: null,
+		// Add just one directive for testing
+		value_defaults: {
+			'script-src': ['self', 'https://example.com'],
+		},
+		trusted_sources: [create_test_source(TRUSTED, 'high')],
+	});
+
+	// Only the explicitly added directive should exist
+	assert.equal(csp_no_defaults['script-src'], ['self', 'https://example.com', TRUSTED]);
+
+	// No other directives should be present
+	assert.is('img-src' in csp_no_defaults, false, 'img-src should not exist in the result');
+	assert.is('connect-src' in csp_no_defaults, false, 'connect-src should not exist in the result');
+	assert.is(
+		'upgrade-insecure-requests' in csp_no_defaults,
+		false,
+		'upgrade-insecure-requests should not exist',
+	);
+});
+
+test('value_defaults_base can be set to empty object', () => {
+	// Using empty object to reset defaults
+	const csp_empty_defaults = create_csp_directives({
+		value_defaults_base: {},
+		// Add just one directive for testing
+		value_defaults: {
+			'script-src': ['self', 'https://example.com'],
+		},
+	});
+
+	// Only the explicitly added directive should exist
+	assert.equal(csp_empty_defaults['script-src'], ['self', 'https://example.com']);
+
+	// No other directives should be present
+	assert.is('img-src' in csp_empty_defaults, false, 'img-src should not exist in the result');
+	assert.is(
+		'connect-src' in csp_empty_defaults,
+		false,
+		'connect-src should not exist in the result',
+	);
+});
+
+test('value_defaults_base can provide custom base defaults', () => {
+	// Create a completely custom set of base defaults
+	const custom_base = {
+		'script-src': ['https://custom-base.com'],
+		'img-src': ['https://custom-images.com'],
+	};
+
+	const csp = create_csp_directives({
+		value_defaults_base: custom_base,
+		// Override one directive
+		value_defaults: {
+			'script-src': ['self', 'https://example.com'],
+		},
+	});
+
+	// The overridden directive should have the new values
+	assert.equal(csp['script-src'], ['self', 'https://example.com']);
+
+	// The non-overridden directive should use the custom base
+	assert.equal(csp['img-src'], ['https://custom-images.com']);
+
+	// Directives not in the custom base should not be present
+	assert.is('connect-src' in csp, false, 'connect-src should not exist in the result');
+});
+
+test('required_trust_defaults_base can completely reset trust requirements', () => {
+	// Using null to completely reset trust requirements
+	const csp_no_trust = create_csp_directives({
+		required_trust_defaults_base: null,
+		// Add one explicit trust requirement
+		required_trust_defaults: {
+			'script-src': 'low',
+		},
+		trusted_sources: [create_test_source(TRUSTED, 'low'), create_test_source(TRUSTED_2, 'low')],
+		// Ensure the directives exist for testing trust levels
+		value_defaults: {
+			'script-src': ['self'],
+			'img-src': ['self'],
+			'connect-src': ['self'],
+		},
+	});
+
+	// Only the explicitly trusted directive should include trusted sources
+	assert.ok(
+		csp_no_trust['script-src']!.includes(TRUSTED),
+		'script-src should include low trust source when explicit',
+	);
+	assert.ok(
+		csp_no_trust['script-src']!.includes(TRUSTED_2),
+		'script-src should include second low trust source when explicit',
+	);
+
+	// Other directives should not include trusted sources since there are no trust requirements
+	assert.not.ok(
+		csp_no_trust['img-src']!.includes(TRUSTED),
+		'img-src should not include trusted source when trust requirements are reset',
+	);
+	assert.not.ok(
+		csp_no_trust['connect-src']!.includes(TRUSTED),
+		'connect-src should not include trusted source when trust requirements are reset',
+	);
+});
+
+test('required_trust_defaults_base can be set to empty object', () => {
+	const csp = create_csp_directives({
+		required_trust_defaults_base: {},
+		// Add one explicit trust requirement
+		required_trust_defaults: {
+			'script-src': 'low',
+			'img-src': 'low',
+		},
+		trusted_sources: [create_test_source(TRUSTED, 'low')],
+		// Ensure the directives exist for testing trust levels
+		value_defaults: {
+			'script-src': ['self'],
+			'img-src': ['self'],
+			'connect-src': ['self'], // No trust requirement for this one
+		},
+	});
+
+	// Only explicitly trusted directives should include trusted sources
+	assert.ok(
+		csp['script-src']!.includes(TRUSTED),
+		'script-src should include trusted source with explicit trust',
+	);
+	assert.ok(
+		csp['img-src']!.includes(TRUSTED),
+		'img-src should include trusted source with explicit trust',
+	);
+
+	// Directive without explicit trust requirement should not include trusted sources
+	assert.not.ok(
+		csp['connect-src']!.includes(TRUSTED),
+		'connect-src should not include trusted source without explicit trust',
+	);
+});
+
+test('required_trust_defaults_base can provide custom trust requirements', () => {
+	const custom_trust_base: Create_Csp_Directives_Options['required_trust_defaults_base'] = {
+		'script-src': 'low',
+		'connect-src': 'low',
+	};
+
+	const csp = create_csp_directives({
+		required_trust_defaults_base: custom_trust_base,
+		// Override one directive
+		required_trust_defaults: {
+			'script-src': 'medium', // Raise requirement
+		},
+		trusted_sources: [create_test_source(TRUSTED, 'low'), create_test_source(TRUSTED_2, 'medium')],
+		// Ensure the directives exist for testing trust levels
+		value_defaults: {
+			'script-src': ['self'],
+			'connect-src': ['self'],
+			'img-src': ['self'], // No trust requirement for this one
+		},
+	});
+
+	// Low trust source should not be in script-src due to raised requirement
+	assert.not.ok(
+		csp['script-src']!.includes(TRUSTED),
+		'script-src should not include low trust source when requirement is medium',
+	);
+
+	// Medium trust source should be in script-src
+	assert.ok(
+		csp['script-src']!.includes(TRUSTED_2),
+		'script-src should include medium trust source',
+	);
+
+	// Both sources should be in connect-src since requirement is low
+	assert.ok(csp['connect-src']!.includes(TRUSTED), 'connect-src should include low trust source');
+	assert.ok(
+		csp['connect-src']!.includes(TRUSTED_2),
+		'connect-src should include medium trust source',
+	);
+
+	// No sources should be in img-src since it has no trust requirement
+	assert.not.ok(
+		csp['img-src']!.includes(TRUSTED),
+		'img-src should not include trusted sources without a trust requirement',
+	);
+	assert.not.ok(
+		csp['img-src']!.includes(TRUSTED_2),
+		'img-src should not include trusted sources without a trust requirement',
+	);
+});
+
+test('completely minimal defaults with empty bases', () => {
+	// Test a completely minimal configuration with empty bases
+	assert.equal(
+		create_csp_directives({
+			value_defaults_base: null,
+			required_trust_defaults_base: null,
+			value_defaults: {'script-src': ['self']},
+		}),
+		{'script-src': ['self']},
+	);
+
+	// And again with `{}` instead of null
+	assert.equal(
+		create_csp_directives({
+			value_defaults_base: {},
+			required_trust_defaults_base: {},
+			value_defaults: {'script-src': ['self']},
+		}),
+		{'script-src': ['self']},
+	);
+
+	// But undefined uses the default base
+
+	// And again with `{}` instead of null
+	assert.not.equal(
+		create_csp_directives({
+			value_defaults_base: undefined,
+			required_trust_defaults_base: undefined,
+			value_defaults: {'script-src': ['self']},
+		}),
+		{'script-src': ['self']},
+	);
 });
 
 test.run();

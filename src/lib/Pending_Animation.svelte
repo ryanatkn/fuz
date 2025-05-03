@@ -18,7 +18,7 @@
 	class="pending_animation {attrs?.class}"
 	class:running
 	class:flex={!inline}
-	class:inline_flex={inline}
+	class:display_inline_flex={inline}
 	class:align_items_center={inline}
 	><span {...item_attrs} style:animation-delay="0s"
 		>{#if children}{@render children(0)}{:else}•{/if}</span
@@ -31,7 +31,7 @@
 
 <style>
 	.pending_animation span {
-		font-size: var(--size, inherit);
+		font-size: var(--font_size, inherit);
 		display: inline-block;
 		transform: scale3d(var(--scale_x, 0.4), var(--scale_y, 0.4), var(--scale_z, 0.4));
 		animation: dot var(--animation_duration, var(--duration_5, 1.5s)) infinite paused;

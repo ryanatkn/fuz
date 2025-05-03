@@ -18,6 +18,9 @@
 
 <Tome_Content {tome}>
 	<section>
+		<aside>⚠️ This API is unfinished and will likely change.</aside>
+	</section>
+	<section>
 		<!-- TODO make this a generic data-driven helper -->
 		<Code content={`import Card from '@ryanatkn/fuz/Card.svelte';`} lang="ts" />
 		<Code

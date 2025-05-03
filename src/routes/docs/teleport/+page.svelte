@@ -65,7 +65,7 @@
 	.teleports > div {
 		width: var(--space_xl8);
 		height: var(--space_xl8);
-		font-size: var(--size_xl3);
+		font-size: var(--font_size_xl3);
 		display: flex;
 		align-items: center;
 		justify-content: center;

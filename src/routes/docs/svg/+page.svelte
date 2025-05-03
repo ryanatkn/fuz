@@ -33,10 +33,12 @@
 		<Code content={`<Svg data={fuz_logo} size="var(--icon_size_sm)" />`} />
 		<p><Svg data={fuz_logo} size="var(--icon_size_sm)" /></p>
 		<p>
-			Set <code>--size</code> on the component or a parent:
+			Set <code>--font_size</code> on the component or a parent:
 		</p>
-		<Code content={`<span style:--size="var(--icon_size_xl)"><Svg data={fuz_logo} /></span>`} />
-		<p><span style:--size="var(--icon_size_xl)"><Svg data={fuz_logo} /></span></p>
+		<Code
+			content={`<span style:--font_size="var(--icon_size_xl)"><Svg data={fuz_logo} /></span>`}
+		/>
+		<p><span style:--font_size="var(--icon_size_xl)"><Svg data={fuz_logo} /></span></p>
 	</Tome_Section>
 	<Tome_Section>
 		<Tome_Section_Header text="With custom color" />

@@ -42,12 +42,10 @@
 		and YouTube channels
 		<a rel="me" href="https://youtube.com/@webdevladder">@webdevladder</a>
 		and
-		<a rel="me" href="https://youtube.com/@webdevladder_vods">@webdevladder_vods</a
-		>{#if selected === 'webdevladder.net'}, you are here{/if}
-	</li>
-	<li>
+		<a rel="me" href="https://youtube.com/@webdevladder_vods">@webdevladder_vods</a>, also
 		@webdevladder on <a rel="me" href="https://www.reddit.com/user/webdevladder/">Reddit</a> and
-		<a href="https://news.ycombinator.com/user?id=webdevladder">Hacker News</a>
+		<a href="https://news.ycombinator.com/user?id=webdevladder">Hacker News</a
+		>{#if selected === 'webdevladder.net'}, you are here{/if}
 	</li>
 	<!-- <li>
 		support me at <a href="https://www.ryanatkn.com/funding">ryanatkn.com/funding</a>

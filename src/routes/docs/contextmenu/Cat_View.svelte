@@ -25,7 +25,7 @@
 		display: flex;
 		align-items: center;
 		background-color: var(--bg_3);
-		border-radius: var(--radius_md);
+		border-radius: var(--border_radius_md);
 		border: transparent var(--border_width_4) double;
 	}
 	.cat:hover {

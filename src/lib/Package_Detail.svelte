@@ -68,7 +68,7 @@
 <div class="package_detail">
 	<!-- TODO maybe continue this snippet pattern, or maybe simplify? -->
 	<div class="info">
-		<div class="flex flex_1">
+		<div class="display_flex flex_1">
 			<!-- add yet another wrapper so it flows like we want -->
 			<div>
 				<header>
@@ -175,7 +175,7 @@
 				<Img_Or_Svg
 					src={pkg.logo_url}
 					label={pkg.logo_alt}
-					size="var(--size, var(--icon_size_xl2))"
+					size="var(--font_size, var(--icon_size_xl2))"
 				/>
 			</div>
 		{/if}
@@ -254,12 +254,12 @@
 		margin-bottom: var(--space_lg);
 	}
 	.repo_name {
-		font-family: var(--font_serif);
-		font-size: var(--size_xl2);
+		font-family: var(--font_family_serif);
+		font-size: var(--font_size_xl2);
 		font-weight: 400;
 	}
 	.npm_url {
-		font-family: var(--font_mono);
+		font-family: var(--font_family_mono);
 		text-align: center;
 		margin-bottom: var(--space_lg);
 	}
@@ -292,7 +292,7 @@
 	}
 	.module_content {
 		background-color: var(--bg_3);
-		border-radius: var(--radius_sm);
+		border-radius: var(--border_radius_sm);
 		padding: var(--space_xs);
 	}
 	.ts {
@@ -318,8 +318,8 @@
 		padding-top: var(--space_xs);
 	}
 	.declaration {
-		font-family: var(--font_mono);
-		font-size: var(--size_sm);
+		font-family: var(--font_family_mono);
+		font-size: var(--font_size_sm);
 		margin-left: var(--space_xs2);
 		margin-right: var(--space_xs2);
 	}

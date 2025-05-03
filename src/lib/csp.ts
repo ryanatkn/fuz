@@ -24,15 +24,29 @@ export interface Create_Csp_Directives_Options {
 
 	/**
 	 * Override default values for specific directives,
-	 * falling back to `csp_directive_value_defaults`.
+	 * merging with `value_defaults_base` (or replacing if that directive is null in the base).
 	 */
 	value_defaults?: Partial<typeof csp_directive_value_defaults>;
 
 	/**
+	 * Base values for directive defaults.
+	 * Set to `null` or `{}` to start with no defaults.
+	 * Defaults to `csp_directive_value_defaults`.
+	 */
+	value_defaults_base?: Partial<typeof csp_directive_value_defaults> | null;
+
+	/**
 	 * Override trust requirements for specific directives,
-	 * falling back to `csp_directive_required_trust_defaults`.
+	 * merging with `required_trust_defaults_base` (or replacing if that directive is null in the base).
 	 */
 	required_trust_defaults?: Partial<typeof csp_directive_required_trust_defaults>;
+
+	/**
+	 * Base values for directive trust requirements.
+	 * Set to `null` or `{}` to start with no trust requirements.
+	 * Defaults to `csp_directive_required_trust_defaults`.
+	 */
+	required_trust_defaults_base?: Partial<typeof csp_directive_required_trust_defaults> | null;
 }
 
 /**
@@ -46,13 +60,24 @@ export interface Create_Csp_Directives_Options {
  * are out of scope and left to SvelteKit.
  */
 export function create_csp_directives(options: Create_Csp_Directives_Options = {}): Csp_Directives {
+	const {
+		directives: directives_option,
+		trusted_sources,
+		value_defaults_base = csp_directive_value_defaults,
+		value_defaults: value_defaults_option,
+		required_trust_defaults_base = csp_directive_required_trust_defaults,
+		required_trust_defaults: required_trust_defaults_option,
+	} = options;
+
 	const directives: Csp_Directives = {};
 
 	// Shallowly merge any provided defaults with the base defaults
-	const value_defaults = {...csp_directive_value_defaults, ...options.value_defaults};
+	const value_defaults = {...value_defaults_base, ...value_defaults_option};
+
+	// Merge required trust defaults with the base
 	const required_trust_defaults = {
-		...csp_directive_required_trust_defaults,
-		...options.required_trust_defaults,
+		...required_trust_defaults_base,
+		...required_trust_defaults_option,
 	};
 
 	// Apply defaults from directive specs
@@ -75,7 +100,7 @@ export function create_csp_directives(options: Create_Csp_Directives_Options = {
 	}
 
 	// Apply trusted sources to directives
-	if (options.trusted_sources?.length) {
+	if (trusted_sources?.length) {
 		for (const [key, value] of Object.entries(directives)) {
 			const directive = parse_csp_directive(key);
 			if (directive === null) {
@@ -92,7 +117,7 @@ export function create_csp_directives(options: Create_Csp_Directives_Options = {
 			if (required_trust == null) continue;
 
 			// Add matching sources - separate the filtering into trust-based and directive-based inclusion
-			const sources_to_add = options.trusted_sources
+			const sources_to_add = trusted_sources
 				.filter((spec) => {
 					// Check for explicit inclusion in directives list
 					const explicitly_included = spec.directives?.includes(directive) ?? false;
@@ -113,8 +138,8 @@ export function create_csp_directives(options: Create_Csp_Directives_Options = {
 	}
 
 	// Apply directive overrides/transformations
-	if (options.directives) {
-		for (const [key, value_or_fn] of Object.entries(options.directives)) {
+	if (directives_option) {
+		for (const [key, value_or_fn] of Object.entries(directives_option)) {
 			const directive = parse_csp_directive(key);
 			if (directive === null) {
 				throw new Error(`Invalid directive in options.directives: ${key}`);
