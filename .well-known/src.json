@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.140.1",
+  "version": "0.141.1",
   "modules": {
     "./package.json": {
       "path": "package.json",
@@ -397,6 +397,10 @@
         {
           "name": "deep_freeze",
           "kind": "function"
+        },
+        {
+          "name": "render_value_to_string",
+          "kind": "function"
         }
       ]
     },
@@ -406,6 +410,10 @@
     },
     "./Hue_Input.svelte": {
       "path": "Hue_Input.svelte",
+      "declarations": []
+    },
+    "./Identifier.svelte": {
+      "path": "Identifier.svelte",
       "declarations": []
     },
     "./Img_Or_Svg.svelte": {
@@ -549,6 +557,15 @@
     "./Pending_Button.svelte": {
       "path": "Pending_Button.svelte",
       "declarations": []
+    },
+    "./pkg.js": {
+      "path": "pkg.ts",
+      "declarations": [
+        {
+          "name": "pkg_context",
+          "kind": "variable"
+        }
+      ]
     },
     "./Project_Links.svelte": {
       "path": "Project_Links.svelte",
