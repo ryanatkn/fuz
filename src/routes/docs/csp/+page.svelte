@@ -40,24 +40,7 @@
 			with ergonomics in the hopes of finding a better global maximum, helping users maintain secure
 			policies without unhelpful burden or restriction.
 		</p>
-		<p>
-			Auditability and transparency are key concerns for the API, but some features are designed to
-			help you to trade away some directness for ergonomics, with the idea that we make it easy for
-			nonexpert users to safely configure basic scenarios, and advanced users can opt into using the
-			API with full declarative transparency (and more verbosity and information load).
-		</p>
-		<p>
-			Fuz defines three levels of trust/risk/sensitivity (low/medium/high, <Identifier
-				name="Csp_Trust_Level"
-			/>) that can be configured for each trusted source to give blanket permissions at a specified
-			tier, and then granular overrides are straightforward and declarative.
-		</p>
-		<p>
-			I'm trying to design for clear, intuitive boundaries with escalating security and privacy
-			implications. Fuz includes a debatable set of defaults, and input is appreciated to help tune
-			the tradeoffs.
-		</p>
-		<!-- TODO make this a generic data-driven helper -->
+		<p>Example usage:</p>
 		<Code
 			content={`import {create_csp_directives, type Csp_Source_Spec} from '@ryanatkn/fuz/csp.js';
 
@@ -66,6 +49,8 @@
 // helping nonexperts write secure policies while still supporting advanced users.
 // More later on the details of the defaults.
 const csp = create_csp_directives();
+// Use in svelte.config.js:
+// export default {kit: {csp}}
 
 // Create a CSP with some trusted sources, using Fuz's CSP default trust levels:
 export const my_csp_trusted_sources: Array<Csp_Source_Spec> = [
@@ -126,54 +111,33 @@ const custom_csp = create_csp_directives({
 });`}
 			lang="ts"
 		/>
+		<p>
+			Auditability and transparency are key concerns for the API, but some features are designed to
+			help you to trade away some directness for ergonomics, with the idea that we make it easy for
+			nonexpert users to safely configure basic scenarios, and advanced users can opt into using the
+			API with full declarative transparency (and more verbosity and information load).
+		</p>
+		<p>
+			Fuz defines an optional system with three levels of trust/risk/sensitivity (low/medium/high, <Identifier
+				name="Csp_Trust_Level"
+			/>) that can be configured for each trusted source to give blanket permissions at a specified
+			tier. Granular overrides are straightforward and declarative.
+		</p>
+		<p>
+			I'm trying to design for full customizability with clear, intuitive boundaries with escalating
+			security and privacy implications. Fuz includes a debatable set of defaults, and input is
+			appreciated to help tune the tradeoffs.
+		</p>
 	</section>
-
-	<Tome_Section>
-		<Tome_Section_Header text="Explicit directives" />
-		<!-- TODO make this a header if it stabilizes -->
-		<p>
-			The CSP helpers have a convenient, declarative API for defining directives per source. These
-			override any defaults, and unlike <code>trust</code>, the <code>directives</code> do not depend
-			on an abstraction layer, so WYSIWYG.
-		</p>
-		<Code
-			content={`export const my_csp_trusted_sources: Array<Csp_Source_Spec> = [
-	{source: 'https://a.domain/'}, // No explicit directives, will use trust level if any
-	{source: 'https://b.domain/', directives: null}, // Explicitly no directives
-	{source: 'https://c.domain/', directives: ['img-src']}, // Only use for images
-	{source: 'https://d.domain/', directives: ['connect-src', 'font-src']}, // Allow for connections and fonts
-];`}
-			lang="ts"
-		/>
-		<p>
-			Explicit directives are additive with the trust-based permission system. For example, a source
-			with
-			<code>trust: 'low'</code> would normally not be allowed for <code>connect-src</code>, but you
-			can explicitly permit this by including <code>connect-src</code> in the directives array.
-		</p>
-		<Code
-			content={`// Example: explicitly allowing a source for specific directives regardless of trust
-export const my_csp_trusted_sources: Array<Csp_Source_Spec> = [
-	// Allow for specific directives (adds to what trust level allows):
-	{source: 'https://a.domain/', trust: 'low', directives: ['connect-src']},
-	
-	// Trust-level provides baseline permissions, explicit directives add specific ones:
-	{source: 'https://b.domain/', trust: 'medium', directives: ['script-src-elem']},
-	
-	// Both mechanisms work together - trust level provides baseline permissions
-	// and explicit directives add specific permissions
-];`}
-			lang="ts"
-		/>
-	</Tome_Section>
 
 	<Tome_Section>
 		<Tome_Section_Header text="Trust" />
 		<!-- TODO make this a header if it stabilizes -->
 		<p>
-			Fuz's CSP abstraction provides three trust levels (of type <Identifier
+			Fuz provides an optional CSP abstraction with three trust levels (of type <Identifier
 				name="Csp_Trust_Level"
-			/>) with escalating risk. Each directive has a default value that can be customized.
+			/>) with tiers of escalating risk and implied permission. Sources can opt-in to blanket
+			permissions at a specific level:
 		</p>
 		<Code
 			content={`export const my_csp_trusted_sources: Array<Csp_Source_Spec> = [
@@ -228,6 +192,44 @@ export const my_csp_trusted_sources: Array<Csp_Source_Spec> = [
 			important questions right most of the time for most users, and additional safeguards are
 			available for those that want tighter control or less chance of error.
 		</p>
+	</Tome_Section>
+
+	<Tome_Section>
+		<Tome_Section_Header text="Explicit directives" />
+		<!-- TODO make this a header if it stabilizes -->
+		<p>
+			The CSP helpers have a convenient, declarative API for defining directives per source. These
+			override any defaults, and unlike <code>trust</code>, the <code>directives</code> do not depend
+			on an abstraction layer, so WYSIWYG.
+		</p>
+		<Code
+			content={`export const my_csp_trusted_sources: Array<Csp_Source_Spec> = [
+	{source: 'https://a.domain/'}, // No explicit directives, will use trust level if any
+	{source: 'https://b.domain/', directives: null}, // Explicitly no directives
+	{source: 'https://c.domain/', directives: ['img-src']}, // Only use for images
+	{source: 'https://d.domain/', directives: ['connect-src', 'font-src']}, // Allow for connections and fonts
+];`}
+			lang="ts"
+		/>
+		<p>
+			Explicit directives are additive with the trust system. For example, a source with
+			<code>trust: 'low'</code> would normally not be allowed for <code>connect-src</code>, but you
+			can explicitly permit this by including <code>connect-src</code> in the directives array.
+		</p>
+		<Code
+			content={`// Example: explicitly allowing a source for specific directives regardless of trust
+export const my_csp_trusted_sources: Array<Csp_Source_Spec> = [
+	// Allow for specific directives (adds to what trust level allows):
+	{source: 'https://a.domain/', trust: 'low', directives: ['connect-src']},
+	
+	// Trust-level provides baseline permissions, explicit directives add specific ones:
+	{source: 'https://b.domain/', trust: 'medium', directives: ['script-src-elem']},
+	
+	// Both mechanisms work together - trust level provides baseline permissions
+	// and explicit directives add specific permissions
+];`}
+			lang="ts"
+		/>
 	</Tome_Section>
 
 	<Tome_Section>
@@ -324,7 +326,9 @@ create_csp_directives({
 	<aside>
 		For more, see the <a href="https://github.com/ryanatkn/fuz/blob/main/src/lib/csp.ts"
 			>source code</a
-		>. The API feels near-complete, and includes full customization of the default directive values
-		and trust levels. Some details may change and input is welcome.
+		>
+		and <a href="https://github.com/ryanatkn/fuz/blob/main/src/lib/csp.test.ts">tests</a>. The API
+		feels near-complete, and includes full customization of the default directive values and trust
+		levels. Some details may change and input is welcome.
 	</aside>
 </Tome_Content>
