@@ -1,2 +1,0 @@
-import{t as n,a as r}from"../chunks/BVHb_Il8.js";import{p as c,a as m}from"../chunks/KxkgHfFn.js";import{g as p}from"../chunks/CNcd3v7g.js";import{T as i}from"../chunks/DETB_U9V.js";var d=n(`<section>The <code>Docs</code> is the component behind these docs. Its docs are unfinished - for now see
-		usage in <a href="https://github.com/ryanatkn/moss/blob/main/src/routes/docs/%2Blayout.svelte">Moss</a>.</section>`);function g(o,t){c(t,!0);const e=p("Docs");i(o,{tome:e,children:(s,u)=>{var a=d();r(s,a)},$$slots:{default:!0}}),m()}export{g as component};
