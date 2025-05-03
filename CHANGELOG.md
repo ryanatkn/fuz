@@ -84,7 +84,7 @@
 ### Minor Changes
 
 - break: rework `Pending_Animation` to support `inline` variants and custom attrs ([#68](https://github.com/ryanatkn/fuz/pull/68))
-- break: automatic `Svg` sizing - the `size` prop now has a default that uses `--font_size` ([#66](https://github.com/ryanatkn/fuz/pull/66))
+- break: automatic `Svg` sizing - the `size` prop now has a default that uses `--size` ([#66](https://github.com/ryanatkn/fuz/pull/66))
 
 ## 0.134.0
 
@@ -953,7 +953,7 @@
 - - use `:where` in the reset stylesheet to lower specificity of most selectors ([#21](https://github.com/ryanatkn/fuz/pull/21))
   - rename `link_color_selected` from `link_active`
   - remove generic variables to support generic fallbacks:
-    - `var(--font_size)` becomes `var(--font_size, var(--font_size_md))`
+    - `var(--size)` becomes `var(--size, var(--size_md))`
     - `var(--icon_size)` becomes `var(--icon_size, var(--icon_size_md))`
 
 ## 0.93.3
@@ -978,7 +978,7 @@
 
 ### Minor Changes
 
-- rename `font_family_sans` and `font_family_mono` from `font_family_sans` and `font_family_mono` ([#15](https://github.com/ryanatkn/fuz/pull/15))
+- rename `font_sans` and `font_mono` from `font_family_sans` and `font_family_mono` ([#15](https://github.com/ryanatkn/fuz/pull/15))
 - remove `nav` styles ([#15](https://github.com/ryanatkn/fuz/pull/15))
 - remove `Page_Header` and `Page_Footer` ([#15](https://github.com/ryanatkn/fuz/pull/15))
 - remove the `border_radius` variable ([#15](https://github.com/ryanatkn/fuz/pull/15))
@@ -1058,7 +1058,7 @@
 
 - extract optional stylesheets from `style.css` ([#16](https://github.com/ryanatkn/fuz/pull/16))
 - rename `Tome_Link` from `Library_Tome_Link` ([#14](https://github.com/ryanatkn/fuz/pull/14))
-- - rename `font_family_sans` variable from `font_family` ([#16](https://github.com/ryanatkn/fuz/pull/16))
+- - rename `font_sans` variable from `font_family` ([#16](https://github.com/ryanatkn/fuz/pull/16))
   - remove `spaced_hz`, use `mr_lg`
   - remove `spaced`, use `mb_lg`
   - remove `padded` variables, use `p` variants
@@ -1105,15 +1105,15 @@
   - `space_xl7` from `space_7`
   - `space_xl8` from `space_8`
   - `space_xl9` from `space_9`
-  - `font_size_xl` from `font_size_1`
-  - `font_size_xl2` from `font_size_2`
-  - `font_size_xl3` from `font_size_3`
-  - `font_size_xl4` from `font_size_4`
-  - `font_size_xl5` from `font_size_5`
-  - `font_size_xl6` from `font_size_6`
-  - `font_size_xl7` from `font_size_7`
-  - `font_size_xl8` from `font_size_8`
-  - `font_size_xl9` from `font_size_9`
+  - `size_xl` from `size_1`
+  - `size_xl2` from `size_2`
+  - `size_xl3` from `size_3`
+  - `size_xl4` from `size_4`
+  - `size_xl5` from `size_5`
+  - `size_xl6` from `size_6`
+  - `size_xl7` from `size_7`
+  - `size_xl8` from `size_8`
+  - `size_xl9` from `size_9`
   - `icon_size_xl` from `icon_size_1`
   - `icon_size_xl2` from `icon_size_2`
   - `icon_size_xl3` from `icon_size_3`
@@ -1309,7 +1309,7 @@
 
   - set base `--line_height` to `normal` and override for `.prose` and some elements
   - set height for `body` to `100vh`
-  - simplify default `--font_family_sans`
+  - simplify default `--font_sans`
 
 ### Patch Changes
 
@@ -1445,7 +1445,7 @@
   ([#337](https://github.com/ryanatkn/fuz/pull/337))
 - add classes `.inline`, `.inline_block`, `.block`, `.flex`, and `.flex_1`
   ([#337](https://github.com/ryanatkn/fuz/pull/337))
-- add `--border_radius_xs2`
+- add `--radius_xs2`
   ([#342](https://github.com/ryanatkn/fuz/pull/342))
 
 ## 0.64.0
@@ -1598,7 +1598,7 @@
   - snake_case `.padded-X` to `.p_X` and `.icon-button` to `.icon_button`
   - rename `--shadow_dark` and `--shadow_dark` to `--shadow_lg`
     and `--shadow_lg`
-  - drop the `font_` from `--size_X` (later changed to `font_size_`, see below)
+  - drop the `font_` from `--font_size_X` (later changed to `size_`, see below)
   - rename `.column` to `.width_md` and `.column-sm` to `.width_sm`
   - rename `--column_width` to `--distance_md` and `--column_width_sm` to `--distance_sm`
   - rename `--link_text_decoration` to `--text_decoration` and
@@ -1613,7 +1613,7 @@
 - **break**: more style changes
   ([#304](https://github.com/ryanatkn/fuz/pull/304))
   - publish `$lib/Theme_Input.svelte`
-  - rename `--font_X` to `--font_size_X`
+  - rename `--font_X` to `--size_X`
   - rename `--input_padding_v` to `--input_padding_y` and
     `--input_padding_h` to `--input_padding_x` to disambiguate the `h`
     being "horizontal" versus the incorrect but similar "height"
@@ -1960,8 +1960,8 @@
 
 ## 0.30.0
 
-- **break**: replace `--border_radius_xl` and `--border_radius_xl5` with `--border_radius_xl2` to 5,
-  and rename `--border_radius_xl2` and `border_radius_xl3` to 2 and 3, respectively
+- **break**: replace `--radius_xl` and `--radius_xl5` with `--radius_xl2` to 5,
+  and rename `--radius_xl2` and `radius_xl3` to 2 and 3, respectively
   ([#204](https://github.com/ryanatkn/fuz/pull/204))
 - add `fade-in` animation
   ([#205](https://github.com/ryanatkn/fuz/pull/205))
