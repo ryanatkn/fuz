@@ -263,9 +263,9 @@ create_csp_directives({
 		</table>
 	</Tome_Section>
 	<aside>
-		⚠️ Apologies, these docs are a work in progress, see the <a
-			href="https://github.com/ryanatkn/fuz/blob/main/src/lib/csp.ts">source code</a
-		> for now. The API feels near-complete, and includes full customization of the default directive
-		values and trust levels. Some details may change and input is welcome.
+		For more, see the <a href="https://github.com/ryanatkn/fuz/blob/main/src/lib/csp.ts"
+			>source code</a
+		>. The API feels near-complete, and includes full customization of the default directive values
+		and trust levels. Some details may change and input is welcome.
 	</aside>
 </Tome_Content>
