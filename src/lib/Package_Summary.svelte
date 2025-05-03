@@ -40,7 +40,7 @@
 				<Img_Or_Svg
 					src={pkg.logo_url}
 					label={pkg.logo_alt}
-					size="var(--font_size, var(--icon_font_size_xl2))"
+					size="var(--font_size, var(--icon_size_xl2))"
 				/>
 			{/if}
 		{/if}

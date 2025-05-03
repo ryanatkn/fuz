@@ -919,7 +919,7 @@
 ### Patch Changes
 
 - improve package components ([b25a4c6](https://github.com/ryanatkn/fuz/commit/b25a4c6))
-- add `icon_font_size_xl3` ([b25a4c6](https://github.com/ryanatkn/fuz/commit/b25a4c6))
+- add `icon_size_xl3` ([b25a4c6](https://github.com/ryanatkn/fuz/commit/b25a4c6))
 
 ## 0.96.2
 
@@ -954,7 +954,7 @@
   - rename `link_color_selected` from `link_active`
   - remove generic variables to support generic fallbacks:
     - `var(--font_size)` becomes `var(--font_size, var(--font_size_md))`
-    - `var(--icon_size)` becomes `var(--icon_size, var(--icon_font_size_md))`
+    - `var(--icon_size)` becomes `var(--icon_size, var(--icon_size_md))`
 
 ## 0.93.3
 
@@ -1073,7 +1073,7 @@
 
 ### Minor Changes
 
-- remove variables `icon_font_size_xl3` and `icon_font_size_xl4` ([#13](https://github.com/ryanatkn/fuz/pull/13))
+- remove variables `icon_size_xl3` and `icon_size_xl4` ([#13](https://github.com/ryanatkn/fuz/pull/13))
 - rename variable pattern `xsN` from `Nxs` and `xlN` from `Nxl` ([#13](https://github.com/ryanatkn/fuz/pull/13))
 - rename `border_color_N` from `border_N` ([#13](https://github.com/ryanatkn/fuz/pull/13))
 
@@ -1114,10 +1114,10 @@
   - `font_size_xl7` from `font_size_7`
   - `font_size_xl8` from `font_size_8`
   - `font_size_xl9` from `font_size_9`
-  - `icon_font_size_xl` from `icon_font_size_1`
-  - `icon_font_size_xl2` from `icon_font_size_2`
-  - `icon_font_size_xl3` from `icon_font_size_3`
-  - `icon_font_size_xl4` from `icon_font_size_4`
+  - `icon_size_xl` from `icon_size_1`
+  - `icon_size_xl2` from `icon_size_2`
+  - `icon_size_xl3` from `icon_size_3`
+  - `icon_size_xl4` from `icon_size_4`
 
 ### Patch Changes
 
@@ -1549,7 +1549,7 @@
   - make `Color_Scheme_Input` sync by default
   - rename `--button_color` to `--button_bg`, `--button_hover` to `--button_bg_hover`,
     `--button_active` to `--button_bg_active`, and `--button_disabled` to `--button_bg_disabled`
-  - replace `--icon_X` with `--icon_font_size_X`
+  - replace `--icon_X` with `--icon_size_X`
   - add `enable_editing` to `Theme_Input`
   - add `.formatted` CSS helper class
   - add `.chip` CSS helper class
@@ -1577,7 +1577,7 @@
     and `--pink` with `--color_N`
   - replace `--border_color_darker`, `--border_color_dark`, `--border_color_medium`,
     `--border_color_light`, and `--border_color_lighter` with `--border_color_N`
-  - replace `--icon_font_size_X` with `--icon_X` (reverted in 0.57.0)
+  - replace `--icon_size_X` with `--icon_X` (reverted in 0.57.0)
   - remove `--color_N_lightness` and `--color_N_saturation`
   - rename `--color_N_hue` to `--hue_N`
   - remove `--black` and its pieces
@@ -1879,7 +1879,7 @@
   ([#224](https://github.com/ryanatkn/fuz/pull/224))
   - remove `--input_border_width` - use `--border_width` instead
   - remove `--border` - use each variable directly instead so they can be overidden
-  - remove `--icon_max` - use `--icon_font_size_xl4` instead
+  - remove `--icon_max` - use `--icon_size_xl4` instead
   - remove `--button_border_width` and `--button_text_color`
   - rename `--interactive_` variables to `--button_`
   - remove `--interactive_color_active_dark`
@@ -1982,7 +1982,7 @@
 
 - **break**: remove `last` from `util/array.ts`
   ([#195](https://github.com/ryanatkn/fuz/pull/195))
-- add `--icon_size` which defaults to `--icon_font_size_md`
+- add `--icon_size` which defaults to `--icon_size_md`
   ([#195](https://github.com/ryanatkn/fuz/pull/195))
 
 ## 0.27.1

@@ -237,7 +237,7 @@
 		border-color: var(--border_color_1);
 	}
 	.position .icon {
-		font-size: var(--icon_font_size_xl);
+		font-size: var(--icon_size_xl);
 	}
 	.cats {
 		display: flex;

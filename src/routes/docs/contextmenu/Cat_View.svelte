@@ -38,6 +38,6 @@
 		padding: 0 var(--space_xs3);
 	}
 	.icon {
-		font-size: var(--icon_font_size_md);
+		font-size: var(--icon_size_md);
 	}
 </style>

@@ -27,7 +27,7 @@
 </script>
 
 <a {...attrs} {href} class="chip white_space_nowrap"
-	><Svg data={mdn_logo} inline size="var(--icon_font_size_xs)" attrs={{class: 'mx_xs3'}} />
+	><Svg data={mdn_logo} inline size="var(--icon_size_xs)" attrs={{class: 'mx_xs3'}} />
 	{#if typeof final_children === 'string'}
 		<span class="font_family_mono">{final_children}</span>
 	{:else}

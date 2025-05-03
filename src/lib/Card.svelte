@@ -65,7 +65,7 @@
 
 <style>
 	.card {
-		--icon_size: var(--icon_font_size_lg);
+		--icon_size: var(--icon_size_lg);
 		--icon_margin: var(--space_lg);
 		display: flex;
 		font-size: var(--font_size_xl2);
@@ -111,7 +111,7 @@
 		padding-left: var(--space_sm);
 	}
 	.icon {
-		font-size: var(--icon_size, var(--icon_font_size_md));
+		font-size: var(--icon_size, var(--icon_size_md));
 		text-align: center;
 		display: flex;
 		justify-content: center;
@@ -136,12 +136,12 @@
 	}
 	@media (max-width: 380px) {
 		.card {
-			--icon_size: var(--icon_font_size_md);
+			--icon_size: var(--icon_size_md);
 			--icon_margin: var(--space_sm);
 			font-size: var(--font_size_lg);
 		}
 		.icon {
-			font-size: var(--icon_font_size_md);
+			font-size: var(--icon_size_md);
 			margin-right: var(--space_sm);
 		}
 		.right :global(.icon) {

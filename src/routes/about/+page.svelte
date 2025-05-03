@@ -20,7 +20,7 @@
 				{pkg.repo_name}
 			</h1>
 		</header>
-		<Breadcrumb><Svg data={fuz_logo} size="var(--icon_font_size_sm)" /></Breadcrumb>
+		<Breadcrumb><Svg data={fuz_logo} size="var(--icon_size_sm)" /></Breadcrumb>
 	</section>
 	<Community_Links_Panel />
 	<section class="box w_100 mb_lg">
@@ -31,7 +31,7 @@
 	<section class="box mb_xl7">
 		<Docs_Footer {pkg}>
 			<div class="mb_xl5">
-				<Breadcrumb><Svg data={fuz_logo} size="var(--icon_font_size_sm)" /></Breadcrumb>
+				<Breadcrumb><Svg data={fuz_logo} size="var(--icon_size_sm)" /></Breadcrumb>
 			</div>
 		</Docs_Footer>
 	</section>
