@@ -11,6 +11,13 @@
 	import {tome_context} from '$lib/tome.js';
 	import Hashlink from '$lib/Hashlink.svelte';
 	import {docs_links_context, to_docs_path_info} from '$lib/docs_helpers.svelte.js';
+	import type {SvelteHTMLElements} from 'svelte/elements';
+
+	interface Props {
+		attrs?: SvelteHTMLElements['h1'] | SvelteHTMLElements['h2']; // eslint-disable-line @typescript-eslint/no-duplicate-type-constituents
+	}
+
+	const {attrs}: Props = $props();
 
 	const tome = tome_context.get(); // TODO make reactive?
 	if (DEV && !tome) throw Error('Tome_Header expects a tome in context'); // eslint-disable-line @typescript-eslint/no-unnecessary-condition
@@ -29,16 +36,14 @@
 	const {path, path_is_selected} = $derived(to_docs_path_info(slug, page.url.pathname));
 </script>
 
-<header>
-	<svelte:element this={path_is_selected ? 'h1' : 'h2'} class="tome_header">
-		{#if path_is_selected}
-			{@render content(tome.name)}
-		{:else}
-			<a href={path}>{@render content(tome.name)}</a>
-		{/if}
-		<Hashlink {slug} />
-	</svelte:element>
-</header>
+<svelte:element this={path_is_selected ? 'h1' : 'h2'} {...attrs} class="tome_header">
+	{#if path_is_selected}
+		{@render content(tome.name)}
+	{:else}
+		<a href={path}>{@render content(tome.name)}</a>
+	{/if}
+	<Hashlink {slug} />
+</svelte:element>
 
 {#snippet content(name: string)}
 	{name}
