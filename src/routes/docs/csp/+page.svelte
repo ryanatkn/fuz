@@ -12,6 +12,7 @@
 	import {render_value_to_string} from '$lib/helpers.js';
 	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
 	import Tome_Section from '$lib/Tome_Section.svelte';
+	import Identifier from '$lib/Identifier.svelte';
 
 	const LIBRARY_ITEM_NAME = 'csp';
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
@@ -122,11 +123,47 @@ const custom_csp = create_csp_directives({
 	</section>
 
 	<Tome_Section>
+		<Tome_Section_Header text="Explicit directives" />
+		<!-- TODO make this a header if it stabilizes -->
+		<p>Fuz's CSP provides a convenient, declarative API for defining directives per source.</p>
+		<Code
+			content={`export const my_csp_trusted_sources: Array<Csp_Source_Spec> = [
+	{source: 'https://a.domain/'}, // No explicit directives, will use trust level if any
+	{source: 'https://b.domain/', directives: null}, // Explicitly no directives
+	{source: 'https://c.domain/', directives: ['img-src']}, // Only use for images
+	{source: 'https://d.domain/', directives: ['connect-src', 'font-src']}, // Allow for connections and fonts
+];`}
+			lang="ts"
+		/>
+		<p>
+			Explicit directives are additive with the trust-based permission system. For example, a source
+			with
+			<code>trust: 'low'</code> would normally not be allowed for <code>connect-src</code>, but you
+			can explicitly permit this by including <code>connect-src</code> in the directives array.
+		</p>
+		<Code
+			content={`// Example: explicitly allowing a source for specific directives regardless of trust
+export const my_csp_trusted_sources: Array<Csp_Source_Spec> = [
+	// Allow for specific directives (adds to what trust level allows):
+	{source: 'https://api.example.com/', trust: 'low', directives: ['connect-src']},
+	
+	// Trust-level provides baseline permissions, explicit directives add specific ones:
+	{source: 'https://trusted-cdn.com/', trust: 'high', directives: ['script-src-elem', 'style-src-elem']},
+	
+	// Both mechanisms work together - trust level provides baseline permissions
+	// and explicit directives add specific permissions
+];`}
+			lang="ts"
+		/>
+	</Tome_Section>
+
+	<Tome_Section>
 		<Tome_Section_Header text="Trust" />
 		<!-- TODO make this a header if it stabilizes -->
 		<p>
-			Fuz's CSP abstraction provides three trust levels (of type <code>Csp_Trust_Level</code>) with
-			escalating risk. Each directive has a default value that can be customized.
+			Fuz's CSP abstraction provides three trust levels (of type <Identifier
+				name="Csp_Trust_Level"
+			/>) with escalating risk. Each directive has a default value that can be customized.
 		</p>
 		<Code
 			content={`export const my_csp_trusted_sources: Array<Csp_Source_Spec> = [
@@ -240,8 +277,10 @@ create_csp_directives({
 	<Tome_Section>
 		<Tome_Section_Header text="Directive specs" />
 		<p>
-			The exported <code>csp_directive_specs</code> has JSON data about the CSP directives. Fuz omits
-			deprecated directives.
+			<!-- TODO component for the `code` here to reference identifier -->
+			The exported <Identifier name="csp_directive_specs" /> has JSON data about the
+			<Mdn_Link path="Web/HTTP/Reference/Headers/Content-Security-Policy">CSP directives</Mdn_Link>.
+			Fuz omits deprecated directives.
 		</p>
 		<table>
 			<thead>
