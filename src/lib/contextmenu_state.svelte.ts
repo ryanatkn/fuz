@@ -89,7 +89,7 @@ export class Contextmenu_State {
 	// If you need reactivity, use `$contextmenu` in a reactive statement to react to all changes, and
 	// then access the mutable non-reactive  `contextmenu.root_menu` and `contextmenu.selections`.
 	// See `Contextmenu_Entry.svelte` and `Contextmenu_Submenu.svelte` for reactive usage examples.
-	root_menu: Root_Menu_State = $state(new Root_Menu_State());
+	readonly root_menu: Root_Menu_State = new Root_Menu_State();
 	selections: Array<Item_State> = $state([]);
 
 	constructor(options?: Contextmenu_State_Options) {

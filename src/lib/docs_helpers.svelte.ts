@@ -28,11 +28,15 @@ export interface Docs_Link {
 }
 
 export class Docs_Links {
+	readonly root_path: string;
+
 	docs_links: Array<Docs_Link> = $state([]);
 
-	slugs_onscreen: SvelteSet<string> = $state(new SvelteSet());
+	readonly slugs_onscreen: SvelteSet<string> = new SvelteSet();
 
-	constructor(public readonly root_path = DEFAULT_LIBRARY_PATH) {}
+	constructor(root_path = DEFAULT_LIBRARY_PATH) {
+		this.root_path = root_path;
+	}
 
 	add(id: string, text: string, slug: string, tag?: Docs_Link_Tag): void {
 		const index = this.docs_links.findIndex((t) => t.id === id);
