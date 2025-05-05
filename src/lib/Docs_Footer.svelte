@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type {Url} from '@ryanatkn/gro/package_json.js';
-	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
 	import {format_url} from '@ryanatkn/belt/url.js';
 	import type {Snippet} from 'svelte';
 
+	import type {Package_Meta} from '$lib/package_meta.js';
 	import Svg from '$lib/Svg.svelte';
 	import {github_logo} from '$lib/logos.js';
 

@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
 	import type {Snippet} from 'svelte';
 
+	import type {Package_Meta} from '$lib/package_meta.js';
 	import type {Tome} from '$lib/tome.js';
 	import Package_Summary from '$lib/Package_Summary.svelte';
 

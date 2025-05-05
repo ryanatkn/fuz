@@ -4,9 +4,9 @@
 	import '@ryanatkn/fuz_code/theme.css';
 	import '$routes/moss.css';
 
-	import {parse_package_meta} from '@ryanatkn/gro/package_meta.js';
 	import type {Snippet} from 'svelte';
 
+	import {parse_package_meta} from '$lib/package_meta.js';
 	import Themed from '$lib/Themed.svelte';
 	import {pkg_context} from '$lib/pkg.js';
 	import {package_json, src_json} from '$routes/package.js';

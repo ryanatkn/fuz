@@ -2,9 +2,9 @@
 	import {page} from '$app/state';
 	import {ensure_end, strip_end, strip_start} from '@ryanatkn/belt/string.js';
 	import {format_url} from '@ryanatkn/belt/url.js';
-	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
 	import type {Snippet} from 'svelte';
 
+	import type {Package_Meta} from '$lib/package_meta.js';
 	import Details from '$lib/Details.svelte';
 	import Img_Or_Svg from '$lib/Img_Or_Svg.svelte';
 

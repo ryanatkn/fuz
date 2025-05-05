@@ -3,8 +3,8 @@
 	import type {Snippet} from 'svelte';
 	import type {SvelteHTMLElements} from 'svelte/elements';
 	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
-	import type {Src_Module, Src_Module_Declaration} from '@ryanatkn/gro/src_json.js';
 
+	import type {Src_Module, Src_Module_Declaration} from '$lib/src_json.js';
 	import {pkg_context} from '$lib/pkg.js';
 
 	interface Props {

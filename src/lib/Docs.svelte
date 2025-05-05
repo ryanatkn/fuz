@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
-	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
 	import {onNavigate} from '$app/navigation';
 	import {innerWidth} from 'svelte/reactivity/window';
 
+	import type {Package_Meta} from '$lib/package_meta.js';
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
 	import {Tome, tomes_context} from '$lib/tome.js';
 	import Docs_Primary_Nav from '$lib/Docs_Primary_Nav.svelte';

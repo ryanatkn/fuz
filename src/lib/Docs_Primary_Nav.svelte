@@ -2,8 +2,8 @@
 	import {is_iframed} from '@ryanatkn/belt/dom.js';
 	import type {Snippet} from 'svelte';
 	import {scrollY} from 'svelte/reactivity/window';
-	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
 
+	import type {Package_Meta} from '$lib/package_meta.js';
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
 
 	interface Props {
