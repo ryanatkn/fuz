@@ -42,7 +42,7 @@ export const package_json = {
 		'@ryanatkn/belt': '^0.30.2',
 		'@ryanatkn/eslint-config': '^0.8.0',
 		'@ryanatkn/fuz_code': '^0.23.0',
-		'@ryanatkn/gro': '^0.156.0',
+		'@ryanatkn/gro': '^0.157.0',
 		'@ryanatkn/moss': '^0.28.0',
 		'@sveltejs/adapter-static': '^3.0.8',
 		'@sveltejs/kit': '^2.20.8',
@@ -50,7 +50,7 @@ export const package_json = {
 		'@sveltejs/vite-plugin-svelte': '^5.0.3',
 		'@types/node': '^22.15.3',
 		'@types/prismjs': '^1.26.5',
-		eslint: '^9.26.0',
+		eslint: '9.25.1',
 		'eslint-plugin-svelte': '^3.5.1',
 		'esm-env': '^1.2.2',
 		prettier: '^3.5.3',
@@ -61,7 +61,7 @@ export const package_json = {
 		'svelte-check': '^4.1.7',
 		tslib: '^2.8.1',
 		typescript: '^5.8.3',
-		'typescript-eslint': '^8.31.1',
+		'typescript-eslint': '^8.32.0',
 		uvu: '^0.5.6',
 	},
 	prettier: {
@@ -358,8 +358,8 @@ export const src_json = {
 	name: '@ryanatkn/fuz',
 	version: '0.141.1',
 	modules: {
-		'./package.json': {path: 'package.json', declarations: []},
-		'./Alert.svelte': {path: 'Alert.svelte', declarations: []},
+		'./package.json': {path: 'package.json', declarations: [{name: 'default', kind: 'json'}]},
+		'./Alert.svelte': {path: 'Alert.svelte', declarations: [{name: 'default', kind: 'component'}]},
 		'./alert.js': {
 			path: 'alert.ts',
 			declarations: [
@@ -368,22 +368,43 @@ export const src_json = {
 				{name: 'alert_status_options', kind: 'variable'},
 			],
 		},
-		'./Breadcrumb.svelte': {path: 'Breadcrumb.svelte', declarations: []},
-		'./Card.svelte': {path: 'Card.svelte', declarations: []},
-		'./Color_Scheme_Input.svelte': {path: 'Color_Scheme_Input.svelte', declarations: []},
-		'./Community_Links_Panel.svelte': {path: 'Community_Links_Panel.svelte', declarations: []},
-		'./Community_Links.svelte': {path: 'Community_Links.svelte', declarations: []},
+		'./Breadcrumb.svelte': {
+			path: 'Breadcrumb.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./Card.svelte': {path: 'Card.svelte', declarations: [{name: 'default', kind: 'component'}]},
+		'./Color_Scheme_Input.svelte': {
+			path: 'Color_Scheme_Input.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./Community_Links_Panel.svelte': {
+			path: 'Community_Links_Panel.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./Community_Links.svelte': {
+			path: 'Community_Links.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
 		'./constants.js': {
 			path: 'constants.ts',
 			declarations: [{name: 'MAIN_HEADER_MARGIN_TOP', kind: 'variable'}],
 		},
 		'./context_helpers.js': {
 			path: 'context_helpers.ts',
-			declarations: [{name: 'create_context', kind: null}],
+			declarations: [{name: 'create_context', kind: 'function'}],
 		},
-		'./Contextmenu_Entry.svelte': {path: 'Contextmenu_Entry.svelte', declarations: []},
-		'./Contextmenu_Link_Entry.svelte': {path: 'Contextmenu_Link_Entry.svelte', declarations: []},
-		'./Contextmenu_Root.svelte': {path: 'Contextmenu_Root.svelte', declarations: []},
+		'./Contextmenu_Entry.svelte': {
+			path: 'Contextmenu_Entry.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./Contextmenu_Link_Entry.svelte': {
+			path: 'Contextmenu_Link_Entry.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./Contextmenu_Root.svelte': {
+			path: 'Contextmenu_Root.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
 		'./contextmenu_state.svelte.js': {
 			path: 'contextmenu_state.svelte.ts',
 			declarations: [
@@ -402,10 +423,22 @@ export const src_json = {
 				{name: 'contextmenu_dimensions_context', kind: 'variable'},
 			],
 		},
-		'./Contextmenu_Submenu.svelte': {path: 'Contextmenu_Submenu.svelte', declarations: []},
-		'./Contextmenu_Text_Entry.svelte': {path: 'Contextmenu_Text_Entry.svelte', declarations: []},
-		'./Contextmenu.svelte': {path: 'Contextmenu.svelte', declarations: []},
-		'./Copy_To_Clipboard.svelte': {path: 'Copy_To_Clipboard.svelte', declarations: []},
+		'./Contextmenu_Submenu.svelte': {
+			path: 'Contextmenu_Submenu.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./Contextmenu_Text_Entry.svelte': {
+			path: 'Contextmenu_Text_Entry.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./Contextmenu.svelte': {
+			path: 'Contextmenu.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./Copy_To_Clipboard.svelte': {
+			path: 'Copy_To_Clipboard.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
 		'./csp_of_ryanatkn.js': {
 			path: 'csp_of_ryanatkn.ts',
 			declarations: [{name: 'csp_trusted_sources_of_ryanatkn', kind: 'variable'}],
@@ -413,7 +446,7 @@ export const src_json = {
 		'./csp.js': {
 			path: 'csp.ts',
 			declarations: [
-				{name: 'create_csp_directives', kind: null},
+				{name: 'create_csp_directives', kind: 'function'},
 				{name: 'Create_Csp_Directives_Options', kind: 'type'},
 				{name: 'Csp_Directive', kind: 'type'},
 				{name: 'parse_csp_directive', kind: 'function'},
@@ -444,8 +477,14 @@ export const src_json = {
 				{name: 'Csp_Directives', kind: 'type'},
 			],
 		},
-		'./Details.svelte': {path: 'Details.svelte', declarations: []},
-		'./Dialog.svelte': {path: 'Dialog.svelte', declarations: []},
+		'./Details.svelte': {
+			path: 'Details.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./Dialog.svelte': {
+			path: 'Dialog.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
 		'./dialog.js': {
 			path: 'dialog.ts',
 			declarations: [
@@ -455,13 +494,22 @@ export const src_json = {
 				{name: 'dialog_layouts', kind: 'variable'},
 			],
 		},
-		'./Dialogs.svelte': {path: 'Dialogs.svelte', declarations: []},
+		'./Dialogs.svelte': {
+			path: 'Dialogs.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
 		'./dimensions.svelte.js': {
 			path: 'dimensions.svelte.ts',
 			declarations: [{name: 'Dimensions', kind: 'class'}],
 		},
-		'./Docs_Content.svelte': {path: 'Docs_Content.svelte', declarations: []},
-		'./Docs_Footer.svelte': {path: 'Docs_Footer.svelte', declarations: []},
+		'./Docs_Content.svelte': {
+			path: 'Docs_Content.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./Docs_Footer.svelte': {
+			path: 'Docs_Footer.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
 		'./docs_helpers.svelte.js': {
 			path: 'docs_helpers.svelte.ts',
 			declarations: [
@@ -473,14 +521,35 @@ export const src_json = {
 				{name: 'Docs_Links', kind: 'class'},
 			],
 		},
-		'./Docs_Menu_Header.svelte': {path: 'Docs_Menu_Header.svelte', declarations: []},
-		'./Docs_Menu.svelte': {path: 'Docs_Menu.svelte', declarations: []},
-		'./Docs_Page_Links.svelte': {path: 'Docs_Page_Links.svelte', declarations: []},
-		'./Docs_Primary_Nav.svelte': {path: 'Docs_Primary_Nav.svelte', declarations: []},
-		'./Docs_Secondary_Nav.svelte': {path: 'Docs_Secondary_Nav.svelte', declarations: []},
-		'./Docs_Tertiary_Nav.svelte': {path: 'Docs_Tertiary_Nav.svelte', declarations: []},
-		'./Docs.svelte': {path: 'Docs.svelte', declarations: []},
-		'./Hashlink.svelte': {path: 'Hashlink.svelte', declarations: []},
+		'./Docs_Menu_Header.svelte': {
+			path: 'Docs_Menu_Header.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./Docs_Menu.svelte': {
+			path: 'Docs_Menu.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./Docs_Page_Links.svelte': {
+			path: 'Docs_Page_Links.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./Docs_Primary_Nav.svelte': {
+			path: 'Docs_Primary_Nav.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./Docs_Secondary_Nav.svelte': {
+			path: 'Docs_Secondary_Nav.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./Docs_Tertiary_Nav.svelte': {
+			path: 'Docs_Tertiary_Nav.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./Docs.svelte': {path: 'Docs.svelte', declarations: [{name: 'default', kind: 'component'}]},
+		'./Hashlink.svelte': {
+			path: 'Hashlink.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
 		'./helpers.js': {
 			path: 'helpers.ts',
 			declarations: [
@@ -488,10 +557,22 @@ export const src_json = {
 				{name: 'render_value_to_string', kind: 'function'},
 			],
 		},
-		'./Hidden_Personal_Links.svelte': {path: 'Hidden_Personal_Links.svelte', declarations: []},
-		'./Hue_Input.svelte': {path: 'Hue_Input.svelte', declarations: []},
-		'./Identifier.svelte': {path: 'Identifier.svelte', declarations: []},
-		'./Img_Or_Svg.svelte': {path: 'Img_Or_Svg.svelte', declarations: []},
+		'./Hidden_Personal_Links.svelte': {
+			path: 'Hidden_Personal_Links.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./Hue_Input.svelte': {
+			path: 'Hue_Input.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./Identifier.svelte': {
+			path: 'Identifier.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./Img_Or_Svg.svelte': {
+			path: 'Img_Or_Svg.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
 		'./intersect.js': {
 			path: 'intersect.ts',
 			declarations: [
@@ -528,20 +609,47 @@ export const src_json = {
 				{name: 'ollama_logo', kind: 'variable'},
 			],
 		},
-		'./Mdn_Link.svelte': {path: 'Mdn_Link.svelte', declarations: []},
-		'./Package_Detail.svelte': {path: 'Package_Detail.svelte', declarations: []},
-		'./Package_Summary.svelte': {path: 'Package_Summary.svelte', declarations: []},
-		'./Paste_From_Clipboard.svelte': {path: 'Paste_From_Clipboard.svelte', declarations: []},
-		'./Pending_Animation.svelte': {path: 'Pending_Animation.svelte', declarations: []},
-		'./Pending_Button.svelte': {path: 'Pending_Button.svelte', declarations: []},
+		'./Mdn_Link.svelte': {
+			path: 'Mdn_Link.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./Package_Detail.svelte': {
+			path: 'Package_Detail.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./Package_Summary.svelte': {
+			path: 'Package_Summary.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./Paste_From_Clipboard.svelte': {
+			path: 'Paste_From_Clipboard.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./Pending_Animation.svelte': {
+			path: 'Pending_Animation.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./Pending_Button.svelte': {
+			path: 'Pending_Button.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
 		'./pkg.js': {path: 'pkg.ts', declarations: [{name: 'pkg_context', kind: 'variable'}]},
-		'./Project_Links.svelte': {path: 'Project_Links.svelte', declarations: []},
-		'./Redirect.svelte': {path: 'Redirect.svelte', declarations: []},
+		'./Project_Links.svelte': {
+			path: 'Project_Links.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./Redirect.svelte': {
+			path: 'Redirect.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
 		'./rune_helpers.svelte.js': {
 			path: 'rune_helpers.svelte.ts',
 			declarations: [{name: 'effect_with_count', kind: 'function'}],
 		},
-		'./Spiders.svelte': {path: 'Spiders.svelte', declarations: []},
+		'./Spiders.svelte': {
+			path: 'Spiders.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
 		'./storage.js': {
 			path: 'storage.ts',
 			declarations: [
@@ -549,10 +657,19 @@ export const src_json = {
 				{name: 'load_from_storage', kind: 'function'},
 			],
 		},
-		'./Svg.svelte': {path: 'Svg.svelte', declarations: []},
-		'./Teleport.svelte': {path: 'Teleport.svelte', declarations: []},
-		'./Theme_Input.svelte': {path: 'Theme_Input.svelte', declarations: []},
-		'./Themed.svelte': {path: 'Themed.svelte', declarations: []},
+		'./Svg.svelte': {path: 'Svg.svelte', declarations: [{name: 'default', kind: 'component'}]},
+		'./Teleport.svelte': {
+			path: 'Teleport.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./Theme_Input.svelte': {
+			path: 'Theme_Input.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./Themed.svelte': {
+			path: 'Themed.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
 		'./themer.svelte.js': {
 			path: 'themer.svelte.ts',
 			declarations: [
@@ -568,11 +685,26 @@ export const src_json = {
 				{name: 'load_theme', kind: 'function'},
 			],
 		},
-		'./Tome_Content.svelte': {path: 'Tome_Content.svelte', declarations: []},
-		'./Tome_Header.svelte': {path: 'Tome_Header.svelte', declarations: []},
-		'./Tome_Link.svelte': {path: 'Tome_Link.svelte', declarations: []},
-		'./Tome_Section_Header.svelte': {path: 'Tome_Section_Header.svelte', declarations: []},
-		'./Tome_Section.svelte': {path: 'Tome_Section.svelte', declarations: []},
+		'./Tome_Content.svelte': {
+			path: 'Tome_Content.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./Tome_Header.svelte': {
+			path: 'Tome_Header.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./Tome_Link.svelte': {
+			path: 'Tome_Link.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./Tome_Section_Header.svelte': {
+			path: 'Tome_Section_Header.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./Tome_Section.svelte': {
+			path: 'Tome_Section.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
 		'./tome.js': {
 			path: 'tome.ts',
 			declarations: [
