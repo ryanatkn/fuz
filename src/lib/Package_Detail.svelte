@@ -184,9 +184,11 @@
 		<section>
 			<menu class="unstyled">
 				{#each modules as module_name, i (module_name)}
+					<!-- TODO improve rendering and enrich data - start with the type (not just extension - mime?) -->
 					{@const source_url = to_source_url(pkg.repo_url, module_name)}
 					{@const exports_key = pkg_exports_keys?.[i]}
 					{@const pkg_module = exports_key ? pkg_modules?.[exports_key] : undefined}
+					{@const declarations = pkg_module?.declarations.filter((d) => d.name !== 'default')}
 					<li
 						class="module"
 						class:ts={module_name.endsWith('.js')}
@@ -196,9 +198,9 @@
 					>
 						<div class="module_content">
 							<a class="chip" href={source_url}>{module_name}</a>
-							{#if pkg_module?.declarations.length}
+							{#if declarations?.length}
 								<ul class="declarations unstyled">
-									{#each pkg_module.declarations as { name, kind } (name)}
+									{#each declarations as { name, kind } (name)}
 										<li class="declaration chip {kind}_declaration">
 											{name}
 										</li>
