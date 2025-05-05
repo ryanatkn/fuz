@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.142.1
+
+### Patch Changes
+
+- tweak `Package_Detail` declarations to not render `'default'` ([f7655b0](https://github.com/ryanatkn/fuz/commit/f7655b0))
+
 ## 0.142.0
 
 ### Minor Changes
