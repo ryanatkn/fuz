@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.142.0
+
+### Minor Changes
+
+- bump node@22.15 from 22.11 ([commit](https://github.com/ryanatkn/fuz/commit/5eb3485f53c39d6bd748f64bd1c586755950db50)) ([0388e3a](https://github.com/ryanatkn/fuz/commit/0388e3a))
+
 ## 0.141.1
 
 ### Patch Changes
