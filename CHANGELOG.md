@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.143.0
+
+### Minor Changes
+
+- upgrade gro dep ([6f01882](https://github.com/ryanatkn/fuz/commit/6f01882))
+
 ## 0.142.1
 
 ### Patch Changes
