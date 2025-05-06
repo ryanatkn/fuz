@@ -188,7 +188,7 @@
 					{@const source_url = to_source_url(pkg.repo_url, module_name)}
 					{@const exports_key = pkg_exports_keys?.[i]}
 					{@const pkg_module = exports_key ? pkg_modules?.[exports_key] : undefined}
-					{@const declarations = pkg_module?.declarations.filter((d) => d.name !== 'default')}
+					{@const declarations = pkg_module?.declarations?.filter((d) => d.name !== 'default')}
 					<li
 						class="module"
 						class:ts={module_name.endsWith('.js')}
