@@ -42,7 +42,7 @@ export const package_json = {
 		'@ryanatkn/belt': '^0.30.2',
 		'@ryanatkn/eslint-config': '^0.8.0',
 		'@ryanatkn/fuz_code': '^0.23.0',
-		'@ryanatkn/gro': '^0.158.0',
+		'@ryanatkn/gro': '^0.159.0',
 		'@ryanatkn/moss': '^0.31.0',
 		'@sveltejs/adapter-static': '^3.0.8',
 		'@sveltejs/kit': '^2.20.8',

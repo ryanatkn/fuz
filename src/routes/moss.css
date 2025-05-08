@@ -197,8 +197,11 @@ a.chip {
 	display: block;
 }
 
-.overflow_wrap_anywhere {
-	overflow-wrap: anywhere;
+.position_relative {
+	position: relative;
+}
+.position_sticky {
+	position: sticky;
 }
 .display_contents {
 	display: contents;
@@ -214,6 +217,9 @@ a.chip {
 /** Same as `display: inline flex`. */
 .display_inline_flex {
 	display: inline-flex;
+}
+.overflow_wrap_anywhere {
+	overflow-wrap: anywhere;
 }
 .flex_1 {
 	flex: 1;
