@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.144.0
+
+### Minor Changes
+
+- upgrade moss ([9cc1502](https://github.com/ryanatkn/fuz/commit/9cc1502))
+
 ## 0.143.0
 
 ### Minor Changes
