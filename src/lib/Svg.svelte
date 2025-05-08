@@ -86,7 +86,7 @@
 	{...attrs}
 	aria-label={label ?? data.label}
 	class:display_inline_block={inline}
-	class:relative={inline}
+	class:position_relative={inline}
 	style:width={final_width}
 	style:height={final_height}
 	style:top={inline ? '0.1em' : undefined}
