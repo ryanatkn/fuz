@@ -22,6 +22,8 @@
 	*/
 
 	interface Props {
+		show?: boolean | undefined;
+
 		// TODO maybe change this API away from an element to a selector? or remove the API completely?
 		container?: HTMLElement;
 		/**
@@ -33,10 +35,7 @@
 		 * @default 0
 		 */
 		index?: number;
-		/**
-		 * @default true
-		 */
-		active?: boolean;
+
 		/**
 		 * If provided, prevents clicks that would close the dialog
 		 * from bubbling past any elements matching this selector.
@@ -48,10 +47,10 @@
 	}
 
 	const {
+		show,
 		container,
 		layout = 'centered',
 		index = 0,
-		active = true,
 		content_selector = '.pane',
 		onclose,
 		children,
@@ -111,59 +110,61 @@
 	let ready = $state(false);
 </script>
 
-<svelte:window onkeydown={active ? on_window_keydown : undefined} />
+<svelte:window onkeydown={show ? on_window_keydown : undefined} />
 
-<!--
+{#if show}
+	<!--
 	The `tabindex` and `el.focus()` fix scrolling with the keyboard,
 	needed because SvelteKit puts `tabindex` on the body,
 	but there's more that needs to be done for accessibility, like focus capture.
 	For more see: https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_modal
 	and https://developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets
 -->
-<Teleport
-	to={container_el}
-	onmove={async () => {
-		await wait(); // TODO this is a hack to get animations working, `Teleport` now mounts synchronously?!
-		ready = true;
-		dialog_el?.focus(); // TODO make this more declarative? probably want to focus only after moving though, not on mount, which makes an action trickier
-	}}
->
-	<div
-		class="dialog"
-		class:ready
-		class:layout_page={layout === 'page'}
-		role="dialog"
-		aria-modal="true"
-		bind:this={dialog_el}
-		tabindex="-1"
-		style:z-index={100 + index}
+	<Teleport
+		to={container_el}
+		onmove={async () => {
+			await wait(); // TODO this is a hack to get animations working, `Teleport` now mounts synchronously?!
+			ready = true;
+			dialog_el?.focus(); // TODO make this more declarative? probably want to focus only after moving though, not on mount, which makes an action trickier
+		}}
 	>
-		<div class="dialog_layout">
-			<div
-				class="dialog_wrapper"
-				role="none"
-				onmousedown={(e) => {
-					// Close if clicking outside `content_el` but inside the wrapper
-					const target = e.target as Element;
-					if (
-						content_el &&
-						(content_el === target ||
-							!content_el.contains(target) ||
-							(content_selector && !target.closest(content_selector)))
-					) {
-						close(e);
-					}
-				}}
-			>
-				<div class="dialog_bg" aria-hidden="true"></div>
-				<div class="dialog_content" bind:this={content_el}>
-					<!-- mount the content only after teleporting to avoid issues -->
-					{#if ready}{@render children(close)}{/if}
+		<div
+			class="dialog"
+			class:ready
+			class:layout_page={layout === 'page'}
+			role="dialog"
+			aria-modal="true"
+			bind:this={dialog_el}
+			tabindex="-1"
+			style:z-index={100 + index}
+		>
+			<div class="dialog_layout">
+				<div
+					class="dialog_wrapper"
+					role="none"
+					onmousedown={(e) => {
+						// Close if clicking outside `content_el` but inside the wrapper
+						const target = e.target as Element;
+						if (
+							content_el &&
+							(content_el === target ||
+								!content_el.contains(target) ||
+								(content_selector && !target.closest(content_selector)))
+						) {
+							close(e);
+						}
+					}}
+				>
+					<div class="dialog_bg" aria-hidden="true"></div>
+					<div class="dialog_content" bind:this={content_el}>
+						<!-- mount the content only after teleporting to avoid issues -->
+						{#if ready}{@render children(close)}{/if}
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</Teleport>
+	</Teleport>
+{/if}
 
 <style>
 	.dialog {
