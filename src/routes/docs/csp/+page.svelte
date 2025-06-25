@@ -37,8 +37,9 @@
 		</p>
 		<p>
 			The goal is to provide a simple trust modeling system that balances safety+security+privacy
-			with ergonomics in the hopes of finding a better global maximum, helping users maintain secure
-			policies without unhelpful burden or restriction.
+			with ergonomics, helping users maintain secure policies without unhelpful burden or
+			restriction. It's restrictive by default and easy to set granular overrides, and there's
+			tiered grants for convenience.
 		</p>
 		<p>Example usage:</p>
 		<Code
