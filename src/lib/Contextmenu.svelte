@@ -1,13 +1,16 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
 	import {contextmenu_action} from '$lib/contextmenu_state.svelte.js';
+	import type {SvelteHTMLElements} from 'svelte/elements';
 
 	interface Props {
+		// TODO custom tag?
+		attrs?: SvelteHTMLElements['span'];
 		entries: Snippet;
 		children: Snippet;
 	}
 
-	const {entries, children}: Props = $props();
+	const {attrs, entries, children}: Props = $props();
 
 	// Ideally this wouldn't have a wrapper element,
 	// but I don't see a decent way to map DOM click events
@@ -17,4 +20,6 @@
 	// but probably wait until Svelte 5 has the successor to actions
 </script>
 
-<span use:contextmenu_action={entries} class="display_contents">{@render children()}</span>
+<span {...attrs} use:contextmenu_action={entries} class="display_contents {attrs?.class}"
+	>{@render children()}</span
+>
