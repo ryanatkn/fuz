@@ -1,5 +1,12 @@
 # @ryanatkn/fuz
 
+## 0.144.2
+
+### Patch Changes
+
+- fix: make `Contextmenu` attrs override base `class` attribute ([1e74c08](https://github.com/ryanatkn/fuz/commit/1e74c08))
+- feat: add `Contextmenu` `tag` prop ([1e74c08](https://github.com/ryanatkn/fuz/commit/1e74c08))
+
 ## 0.144.1
 
 ### Patch Changes
