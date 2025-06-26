@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.144.1
+
+### Patch Changes
+
+- feat: add `attrs` to `Contextmenu` ([1b73c63](https://github.com/ryanatkn/fuz/commit/1b73c63))
+
 ## 0.144.0
 
 ### Minor Changes
