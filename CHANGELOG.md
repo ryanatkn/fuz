@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.144.3
+
+### Patch Changes
+
+- fix: `Pending_Animation` flex class ([1617c87](https://github.com/ryanatkn/fuz/commit/1617c87))
+
 ## 0.144.2
 
 ### Patch Changes
