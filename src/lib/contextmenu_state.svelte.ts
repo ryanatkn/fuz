@@ -357,14 +357,14 @@ const query_contextmenu_params = (
 		}
 		el = el.parentElement;
 	}
-	// add "Copy text" entry if anything is selected and we have any other entries
+	// add "copy text" entry if anything is selected and we have any other entries
 	if (params) {
 		const text = window.getSelection()?.toString();
 		if (text) {
 			params.unshift({
 				snippet: 'text',
 				props: {
-					content: 'Copy text',
+					content: 'copy text',
 					icon: '📋',
 					run: () => void navigator.clipboard.writeText(text),
 				},
