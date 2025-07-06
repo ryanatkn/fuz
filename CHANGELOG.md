@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.144.4
+
+### Patch Changes
+
+- chore: tweak "copy text" capitalization ([16bb77a](https://github.com/ryanatkn/fuz/commit/16bb77a))
+
 ## 0.144.3
 
 ### Patch Changes
@@ -102,7 +108,6 @@
 ### Minor Changes
 
 - fix inline theme script with CSP ([#59](https://github.com/ryanatkn/fuz/pull/59))
-
   - remove `create_theme_style_html`
   - change `COLOR_SCHEME_STORAGE_KEY` value to have a prefix, `'fuz:color-scheme'`
   - rename `themer.svelte.ts` from `theme.svelte.ts`
@@ -205,7 +210,6 @@
 
 - remove classes from props interfaces for attrs ([#63](https://github.com/ryanatkn/fuz/pull/63))
 - update ([#63](https://github.com/ryanatkn/fuz/pull/63))
-
   - change `Copy_To_Clipboard` to pass a status to children
   - change `onclick` to `oncopy`
 
@@ -396,7 +400,6 @@
 ### Minor Changes
 
 - improve library styles ([#54](https://github.com/ryanatkn/fuz/pull/54))
-
   - rename `Tome_Header` from `Tome_Title`
   - rename `Tome_Section_Header` from `Tome_Subheading`
   - rename `Library_Link` from `Library_Link_Data`
@@ -685,7 +688,6 @@
 ### Minor Changes
 
 - rework `Themed.svelte` ([#38](https://github.com/ryanatkn/fuz/pull/38))
-
   - move some helpers from `Themed.svelte` to `theme.ts`
   - replace `get_theme` and `get_color_scheme` with `get_themer`
   - remove `Themed_Scope.svelte` for now because it's too broken
@@ -834,7 +836,6 @@
 ### Minor Changes
 
 - rename ts modules that differ only in case from components ([#24](https://github.com/ryanatkn/fuz/pull/24))
-
   - `$lib/contextmenu_helpers.svelte.ts` from `$lib/contextmenu.svelte.ts`
   - `$lib/docs_helpers.svelte.ts` from `$lib/docs.svelte.ts`
 
@@ -1039,13 +1040,11 @@
 - remove the `border_radius` variable ([#15](https://github.com/ryanatkn/fuz/pull/15))
 - remove `h1-6` `margin-top` and compensate by increasing `margin-bottom` ([#15](https://github.com/ryanatkn/fuz/pull/15))
 - upgrade to svelte@5 including many breaking changes to components ([#15](https://github.com/ryanatkn/fuz/pull/15))
-
   - convert slots to snippets
   - change events to callbacks
   - remove `Devmode_Controls`
 
 - change `line_height` vaiables ([#15](https://github.com/ryanatkn/fuz/pull/15))
-
   - rename `line_height_xs` from `line_height_1`
   - remove `line_height_2`
   - rename `line_height_sm` from `line_height_3`
@@ -1055,7 +1054,6 @@
   - rename `line_height_xl` from `line_height_7`
 
 - change shadow variables ([#15](https://github.com/ryanatkn/fuz/pull/15))
-
   - rename `shadow` to `shadow_md`
   - rename `shadow_inset` to `shadow_inset_md`
   - rename `shadow_inset_active` to `shadow_inset_inverse_md`
@@ -1064,7 +1062,6 @@
 
 - add `Details` ([#15](https://github.com/ryanatkn/fuz/pull/15))
 - remove `.prose` ([#15](https://github.com/ryanatkn/fuz/pull/15))
-
   - use `.unstyled` to get the old behavior for `ul|ol|menu`
   - `a` is now the default `diplay: inline` instead of `flex`
 
@@ -1140,7 +1137,6 @@
 - rename `Style_Variable` from `Theme_Variable` ([#12](https://github.com/ryanatkn/fuz/pull/12))
 - rename `Theme` property `variables` from `items` ([#12](https://github.com/ryanatkn/fuz/pull/12))
 - rename some variables ([#12](https://github.com/ryanatkn/fuz/pull/12))
-
   - `fade_N` from `faded_N`
   - `radius_N` from `border_radius_N`
   - `space_xs5` from `space_xs5`
@@ -1185,7 +1181,6 @@
 
 - remove `theme_color` from `Themed` and `THEME_COLOR` ([#9](https://github.com/ryanatkn/fuz/pull/9))
 - add suffix `_5` to all base variable names ([#9](https://github.com/ryanatkn/fuz/pull/9))
-
   - `color_a` to `color_a_5`
   - `color_b` to `color_b_5`
   - `color_c` to `color_c_5`
@@ -1203,7 +1198,6 @@
 ### Minor Changes
 
 - rename colors ([#8](https://github.com/ryanatkn/fuz/pull/8))
-
   - `color_1` to `color_a_5` and `hue_1` to `hue_a` (primary)
   - `color_2` to `color_b_5` and `hue_2` to `hue_b` (success)
   - `color_3` to `color_d_5` and `hue_3` to `hue_d`
@@ -1361,7 +1355,6 @@
 ### Minor Changes
 
 - improve base styles in reference to CSS resets ([d8ab48d](https://github.com/ryanatkn/fuz/commit/d8ab48d))
-
   - set base `--line_height` to `normal` and override for `.prose` and some elements
   - set height for `body` to `100vh`
   - simplify default `--font_sans`
