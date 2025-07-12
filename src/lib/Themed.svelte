@@ -97,6 +97,8 @@
 		if (count === 1) return;
 		save_theme(v);
 	});
+
+	// TODO @many @html making me nervous
 </script>
 
 <!-- eslint-disable svelte/no-at-html-tags -->

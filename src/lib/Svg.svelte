@@ -78,6 +78,8 @@
 			? ensure_end(data.attrs.style, ';') + ' ' + attrs.style
 			: (data.attrs?.style ?? attrs?.style),
 	);
+
+	// TODO @html making me nervous
 </script>
 
 <svg
