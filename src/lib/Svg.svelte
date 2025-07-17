@@ -31,7 +31,7 @@
 		/**
 		 * Overrides `data.fill`.
 		 */
-		fill?: string;
+		fill?: string | null;
 		/**
 		 * Sets both the `width` and `height` of the svg. Overridden by the `width` and `height` props.
 		 */
