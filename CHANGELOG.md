@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.144.5
+
+### Patch Changes
+
+- loosen `Svg` `fill` prop to be nullable ([6607b03](https://github.com/ryanatkn/fuz/commit/6607b03))
+
 ## 0.144.4
 
 ### Patch Changes
