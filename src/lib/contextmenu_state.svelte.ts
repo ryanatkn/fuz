@@ -7,6 +7,8 @@ import {BROWSER} from 'esm-env';
 import {Dimensions} from '$lib/dimensions.svelte.js';
 import {create_context} from '$lib/context_helpers.js';
 
+// TODO use $state.raw for the arrays here, maybe other data structure refactoring too
+
 export type Contextmenu_Params =
 	| Snippet
 	// TODO maybe this should be generic?

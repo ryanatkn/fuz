@@ -31,7 +31,7 @@ export interface Docs_Link {
 export class Docs_Links {
 	readonly root_path: string;
 
-	docs_links: Array<Docs_Link> = $state([]);
+	docs_links: Array<Docs_Link> = $state.raw([]);
 
 	readonly slugs_onscreen: SvelteSet<string> = new SvelteSet();
 
@@ -43,16 +43,16 @@ export class Docs_Links {
 		const index = this.docs_links.findIndex((t) => t.id === id);
 		const v: Docs_Link = {id, text, slug, tag};
 		if (index === -1) {
-			this.docs_links.push(v);
+			this.docs_links = [...this.docs_links, v];
 		} else {
-			this.docs_links[index] = v;
+			this.docs_links = this.docs_links.map((link, i) => (i === index ? v : link));
 		}
 	}
 
 	remove(id: string): boolean {
 		const index = this.docs_links.findIndex((t) => t.id === id);
 		if (index === -1) return false;
-		this.docs_links.splice(index, 1);
+		this.docs_links = this.docs_links.filter((_, i) => i !== index);
 		return true;
 	}
 }
