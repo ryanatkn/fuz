@@ -35,8 +35,8 @@
   },
   "peerDependencies": {
     "@ryanatkn/belt": "file:../belt",
-    "@ryanatkn/gro": "*",
-    "@ryanatkn/moss": "*",
+    "@ryanatkn/gro": "file:../gro",
+    "@ryanatkn/moss": "file:../moss",
     "@sveltejs/kit": "^2.26",
     "svelte": "^5"
   },
@@ -50,8 +50,8 @@
     "@ryanatkn/belt": "file:../belt",
     "@ryanatkn/eslint-config": "^0.8.0",
     "@ryanatkn/fuz_code": "^0.24.0",
-    "@ryanatkn/gro": "^0.160.0",
-    "@ryanatkn/moss": "^0.31.0",
+    "@ryanatkn/gro": "file:../gro",
+    "@ryanatkn/moss": "file:../moss",
     "@sveltejs/adapter-static": "^3.0.8",
     "@sveltejs/kit": "^2.27.0",
     "@sveltejs/package": "^2.4.0",
