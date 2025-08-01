@@ -60,7 +60,7 @@ export const package_json = {
 		svelte: '^5.37.2',
 		'svelte-check': '^4.3.0',
 		tslib: '^2.8.1',
-		typescript: '^5.9.2',
+		typescript: '~5.8',
 		'typescript-eslint': '^8.38.0',
 		uvu: '^0.5.6',
 	},
