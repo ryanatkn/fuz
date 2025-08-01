@@ -4,8 +4,7 @@ import {count_graphemes, ensure_end, strip_end, strip_start} from '@ryanatkn/bel
 
 import {create_context} from '$lib/context_helpers.js';
 
-// TODO either upstream this to Gro or more likely, extract its stuff elsewhere, here or Belt?
-export const pkg_context = create_context<Package_Meta>();
+export const pkg_context = create_context<Package_Meta>(); // TODO BLOCK name conflict
 
 // TODO @many belongs elsewhere
 export const Url = z.string();
