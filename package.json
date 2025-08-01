@@ -34,7 +34,7 @@
     "node": ">=22.15"
   },
   "peerDependencies": {
-    "@ryanatkn/belt": "*",
+    "@ryanatkn/belt": "file:../belt",
     "@ryanatkn/gro": "*",
     "@ryanatkn/moss": "*",
     "@sveltejs/kit": "^2.26",
@@ -47,7 +47,7 @@
   },
   "devDependencies": {
     "@changesets/changelog-git": "^0.2.1",
-    "@ryanatkn/belt": "^0.31.1",
+    "@ryanatkn/belt": "file:../belt",
     "@ryanatkn/eslint-config": "^0.8.0",
     "@ryanatkn/fuz_code": "^0.24.0",
     "@ryanatkn/gro": "^0.160.0",

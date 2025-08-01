@@ -3,8 +3,8 @@
 	import {ensure_end, strip_end, strip_start} from '@ryanatkn/belt/string.js';
 	import {format_url} from '@ryanatkn/belt/url.js';
 	import type {Snippet} from 'svelte';
+	import type {Pkg} from '@ryanatkn/belt/pkg.js';
 
-	import type {Pkg} from '$lib/pkg.js';
 	import Details from '$lib/Details.svelte';
 	import Img_Or_Svg from '$lib/Img_Or_Svg.svelte';
 

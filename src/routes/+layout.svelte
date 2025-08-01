@@ -5,9 +5,10 @@
 	import '$routes/moss.css';
 
 	import type {Snippet} from 'svelte';
+	import {parse_pkg} from '@ryanatkn/belt/pkg.js';
 
 	import Themed from '$lib/Themed.svelte';
-	import {parse_pkg, pkg_context} from '$lib/pkg.js';
+	import {pkg_context} from '$lib/pkg.js';
 	import {package_json, src_json} from '$routes/package.js';
 	import Spiders from '$lib/Spiders.svelte';
 

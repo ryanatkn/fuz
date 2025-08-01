@@ -3,8 +3,9 @@
 	import type {Snippet} from 'svelte';
 	import type {SvelteHTMLElements} from 'svelte/elements';
 	import type {Src_Module, Src_Module_Declaration} from '@ryanatkn/gro/src_json.js';
+	import type {Pkg} from '@ryanatkn/belt/pkg.js';
 
-	import {pkg_context, type Pkg} from '$lib/pkg.js';
+	import {pkg_context} from '$lib/pkg.js';
 
 	interface Props {
 		name: string;

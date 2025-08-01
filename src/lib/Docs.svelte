@@ -2,8 +2,8 @@
 	import type {Snippet} from 'svelte';
 	import {onNavigate} from '$app/navigation';
 	import {innerWidth} from 'svelte/reactivity/window';
+	import type {Pkg} from '@ryanatkn/belt/pkg.js';
 
-	import type {Pkg} from '$lib/pkg.js';
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
 	import {Tome, tomes_context} from '$lib/tome.js';
 	import Docs_Primary_Nav from '$lib/Docs_Primary_Nav.svelte';

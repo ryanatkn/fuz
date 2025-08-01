@@ -2,8 +2,8 @@
 	import type {Url} from '@ryanatkn/gro/package_json.js';
 	import {format_url} from '@ryanatkn/belt/url.js';
 	import type {Snippet} from 'svelte';
+	import type {Pkg} from '@ryanatkn/belt/pkg.js';
 
-	import type {Pkg} from '$lib/pkg.js';
 	import Svg from '$lib/Svg.svelte';
 	import {github_logo} from '$lib/logos.js';
 
