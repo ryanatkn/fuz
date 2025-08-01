@@ -332,6 +332,10 @@
       "svelte": "./dist/Pending_Button.svelte",
       "default": "./dist/Pending_Button.svelte"
     },
+    "./pkg.js": {
+      "types": "./dist/pkg.d.ts",
+      "default": "./dist/pkg.js"
+    },
     "./Project_Links.svelte": {
       "types": "./dist/Project_Links.svelte.d.ts",
       "svelte": "./dist/Project_Links.svelte",

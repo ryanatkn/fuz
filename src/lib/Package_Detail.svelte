@@ -2,20 +2,20 @@
 	import {page} from '$app/state';
 	import {ensure_end, strip_end, strip_start} from '@ryanatkn/belt/string.js';
 	import {format_url} from '@ryanatkn/belt/url.js';
-	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
 	import type {Snippet} from 'svelte';
 
+	import type {Pkg} from '$lib/pkg.js';
 	import Details from '$lib/Details.svelte';
 	import Img_Or_Svg from '$lib/Img_Or_Svg.svelte';
 
 	interface Props {
-		pkg: Package_Meta; // TODO normalized version with cached primitives?
+		pkg: Pkg; // TODO normalized version with cached primitives?
 		repo_name?: Snippet<[repo_name: string]>;
 		description?: Snippet<[description: string]>;
 		motto?: Snippet<[description: string]>;
 		npm_url?: Snippet<[npm_url: string]>;
 		homepage_url?: Snippet<[homepage_url: string]>;
-		children?: Snippet<[pkg: Package_Meta]>;
+		children?: Snippet<[pkg: Pkg]>;
 	}
 
 	const {pkg, repo_name, description, motto, npm_url, homepage_url, children}: Props = $props();

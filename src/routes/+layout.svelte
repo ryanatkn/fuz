@@ -4,11 +4,10 @@
 	import '@ryanatkn/fuz_code/theme.css';
 	import '$routes/moss.css';
 
-	import {parse_package_meta} from '@ryanatkn/gro/package_meta.js';
 	import type {Snippet} from 'svelte';
 
 	import Themed from '$lib/Themed.svelte';
-	import {pkg_context} from '$lib/package_helpers.js';
+	import {parse_pkg, pkg_context} from '$lib/pkg.js';
 	import {package_json, src_json} from '$routes/package.js';
 	import Spiders from '$lib/Spiders.svelte';
 
@@ -24,7 +23,7 @@
 
 	const {children}: Props = $props();
 
-	pkg_context.set(parse_package_meta(package_json, src_json));
+	pkg_context.set(parse_pkg(package_json, src_json));
 
 	// let show_settings = $state(false);
 </script>

@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
-	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
 	import {onNavigate} from '$app/navigation';
 	import {innerWidth} from 'svelte/reactivity/window';
 
+	import type {Pkg} from '$lib/pkg.js';
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
 	import {Tome, tomes_context} from '$lib/tome.js';
 	import Docs_Primary_Nav from '$lib/Docs_Primary_Nav.svelte';
@@ -15,7 +15,7 @@
 
 	interface Props {
 		tomes: Array<Tome>;
-		pkg: Package_Meta;
+		pkg: Pkg;
 		breadcrumb_children?: Snippet<[is_primary_nav: boolean]>;
 		children: Snippet;
 	}

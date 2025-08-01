@@ -287,6 +287,7 @@ export const package_json = {
 			svelte: './dist/Pending_Button.svelte',
 			default: './dist/Pending_Button.svelte',
 		},
+		'./pkg.js': {types: './dist/pkg.d.ts', default: './dist/pkg.js'},
 		'./Project_Links.svelte': {
 			types: './dist/Project_Links.svelte.d.ts',
 			svelte: './dist/Project_Links.svelte',
@@ -620,7 +621,6 @@ export const src_json = {
 		'./package_helpers.js': {
 			path: 'package_helpers.ts',
 			declarations: [
-				{name: 'pkg_context', kind: 'variable'},
 				{name: 'Url', kind: 'variable'},
 				{name: 'Email', kind: 'variable'},
 				{name: 'transform_empty_object_to_undefined', kind: 'function'},
@@ -635,10 +635,6 @@ export const src_json = {
 				{name: 'Src_Module', kind: 'variable'},
 				{name: 'Src_Modules', kind: 'variable'},
 				{name: 'Src_Json', kind: 'variable'},
-				{name: 'Package_Meta', kind: 'type'},
-				{name: 'parse_package_meta', kind: 'function'},
-				{name: 'parse_repo_name', kind: 'function'},
-				{name: 'parse_org_url', kind: 'function'},
 			],
 		},
 		'./Package_Summary.svelte': {
@@ -656,6 +652,16 @@ export const src_json = {
 		'./Pending_Button.svelte': {
 			path: 'Pending_Button.svelte',
 			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./pkg.js': {
+			path: 'pkg.ts',
+			declarations: [
+				{name: 'pkg_context', kind: 'variable'},
+				{name: 'Pkg', kind: 'type'},
+				{name: 'parse_pkg', kind: 'function'},
+				{name: 'parse_repo_name', kind: 'function'},
+				{name: 'parse_org_url', kind: 'function'},
+			],
 		},
 		'./Project_Links.svelte': {
 			path: 'Project_Links.svelte',

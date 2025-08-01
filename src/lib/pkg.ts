@@ -3,10 +3,10 @@ import {ensure_end, strip_end, strip_start} from '@ryanatkn/belt/string.js';
 import {create_context} from '$lib/context_helpers.js';
 import type {Package_Json, Src_Json, Url} from '$lib/package_helpers.js';
 
-export const pkg_context = create_context<Package_Meta>(); // TODO BLOCK name conflict
+export const pkg_context = create_context<Pkg>(); // TODO BLOCK name conflict
 
 // TODO needs refactoring, more clarity
-export interface Package_Meta {
+export interface Pkg {
 	package_json: Package_Json;
 	src_json: Src_Json;
 	name: string; // '@ryanatkn/fuz_library'
@@ -24,10 +24,7 @@ export interface Package_Meta {
 	published: boolean;
 }
 
-export const parse_package_meta = (
-	package_json: Package_Json,
-	src_json: Src_Json,
-): Package_Meta => {
+export const parse_pkg = (package_json: Package_Json, src_json: Src_Json): Pkg => {
 	const {name} = package_json;
 
 	// TODO hacky
@@ -44,7 +41,7 @@ export const parse_package_meta = (
 			: null,
 	);
 	if (!repo_url) {
-		throw Error('failed to parse package_meta - `repo_url` is required in package_json');
+		throw Error('failed to parse pkg - `repo_url` is required in package_json');
 	}
 
 	const homepage_url = package_json.homepage ?? null;
@@ -88,7 +85,7 @@ export const parse_package_meta = (
 export const parse_repo_name = (name: string): string =>
 	name[0] === '@' ? name.split('/')[1] : name;
 
-export const parse_org_url = (pkg: Package_Meta): string | null => {
+export const parse_org_url = (pkg: Pkg): string | null => {
 	const {repo_name, repo_url} = pkg;
 	if (!repo_url) return null;
 	const suffix = '/' + repo_name;

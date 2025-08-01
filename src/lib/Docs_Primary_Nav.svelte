@@ -2,12 +2,12 @@
 	import {is_iframed} from '@ryanatkn/belt/dom.js';
 	import type {Snippet} from 'svelte';
 	import {scrollY} from 'svelte/reactivity/window';
-	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
 
+	import type {Pkg} from '$lib/pkg.js';
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
 
 	interface Props {
-		pkg: Package_Meta;
+		pkg: Pkg;
 		breadcrumb_children?: Snippet<[is_primary_nav: boolean]>;
 		children?: Snippet;
 	}
