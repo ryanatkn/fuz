@@ -5,7 +5,10 @@ import type {Package_Json, Src_Json, Url} from '$lib/package_helpers.js';
 
 export const pkg_context = create_context<Pkg>(); // TODO BLOCK name conflict
 
-// TODO needs refactoring, more clarity
+// TODO could probably improve this a lot
+/**
+ * Combines `package_json` and `src_json` into a more convenient format.
+ */
 export interface Pkg {
 	package_json: Package_Json;
 	src_json: Src_Json;
