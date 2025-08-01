@@ -1,7 +1,5 @@
 import type {Array_Element, Defined} from '@ryanatkn/belt/types.js';
 
-import {deep_freeze} from '$lib/helpers.js';
-
 // TODO schemas, but I may be moving to ArkType from Zod if precompilation looks good
 
 export interface Create_Csp_Directives_Options {
@@ -158,8 +156,7 @@ export function create_csp_directives(options: Create_Csp_Directives_Options = {
 		}
 	}
 
-	// Return immutable result
-	return deep_freeze(directives);
+	return directives;
 }
 
 export type Csp_Directive = keyof Csp_Directives;
@@ -171,18 +168,18 @@ export const parse_csp_directive = (directive: unknown): Csp_Directive | null =>
 
 export type Csp_Directive_Value<T extends Csp_Directive> = Defined<Csp_Directives[T]>;
 
-export const csp_trust_levels = Object.freeze(['low', 'medium', 'high'] as const);
+export const csp_trust_levels = ['low', 'medium', 'high'] as const;
 
 /**
  * Numeric values for CSP trust levels, `csp_trust_levels`.
  * Lower is less trusted.
  * Includes `undefined` in the type for safety.
  */
-export const csp_trust_level_value: Record<Csp_Trust_Level, number | undefined> = Object.freeze({
+export const csp_trust_level_value: Record<Csp_Trust_Level, number | undefined> = {
 	low: 0,
 	medium: 1,
 	high: 2,
-});
+};
 
 /**
  * Trust levels for CSP sources.
@@ -260,7 +257,7 @@ export const COLOR_SCHEME_SCRIPT_HASH = 'sha256-QOxqn7EUzb3ydF9SALJoJGWSvywW9R0A
 export const csp_directive_value_defaults: Record<
 	Csp_Directive,
 	Csp_Directive_Value<Csp_Directive> | null
-> = Object.freeze({
+> = {
 	'default-src': ['none'],
 	'script-src': ['self', COLOR_SCHEME_SCRIPT_HASH], // Eval is opt-in, scripting is locked down except for self and the color scheme loader script
 	'script-src-elem': ['self', COLOR_SCHEME_SCRIPT_HASH], // Block script elements except for self and the color scheme loader
@@ -285,7 +282,7 @@ export const csp_directive_value_defaults: Record<
 	'require-trusted-types-for': null,
 	'trusted-types': null,
 	sandbox: null,
-});
+};
 
 /**
  * Sources that meet this trust requirement are included for it by default.
@@ -295,7 +292,7 @@ export const csp_directive_value_defaults: Record<
  * Feedback is welcome, please see the issues - https://github.com/ryanatkn/fuz/issues
  */
 export const csp_directive_required_trust_defaults: Record<Csp_Directive, Csp_Trust_Level | null> =
-	Object.freeze({
+	{
 		'default-src': null,
 		'script-src': 'high',
 		'script-src-elem': 'high',
@@ -320,7 +317,7 @@ export const csp_directive_required_trust_defaults: Record<Csp_Directive, Csp_Tr
 		'require-trusted-types-for': null,
 		'trusted-types': null,
 		sandbox: null,
-	});
+	};
 
 /**
  * Static data descriptors for the CSP directives.
