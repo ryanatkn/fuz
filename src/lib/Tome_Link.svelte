@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {base} from '$app/paths';
+	import {resolve} from '$app/paths';
 	import {slugify} from '@ryanatkn/belt/path.js';
 	import type {Snippet} from 'svelte';
 	import {DEV} from 'esm-env';
@@ -31,7 +31,10 @@
 	// TODO add contextmenu behavior
 </script>
 
-<a {...attrs} class:chip href="{base}{docs_path}/{slugify(name)}{hash ? `#${hash}` : ''}"
+<a
+	{...attrs}
+	class:chip
+	href={resolve(`${docs_path}/${slugify(name)}${hash ? `#${hash}` : ''}` as any)}
 	>{#if children}{@render children()}{:else}{name}{/if}</a
 >
 

@@ -1,4 +1,4 @@
-import {base} from '$app/paths';
+import {resolve} from '$app/paths';
 import {slugify} from '@ryanatkn/belt/path.js';
 import {z} from 'zod';
 
@@ -15,11 +15,8 @@ export const Tome = z.object({
 });
 export type Tome = z.infer<typeof Tome>;
 
-export const to_tome_pathname = (
-	item: Tome,
-	docs_path = DEFAULT_LIBRARY_PATH,
-	base_path = base,
-): string => base_path + docs_path + '/' + slugify(item.name);
+export const to_tome_pathname = (item: Tome, docs_path = DEFAULT_LIBRARY_PATH): string =>
+	resolve((docs_path + '/' + slugify(item.name)) as any); // TODO @many check sometime if typecast is still needed
 
 export const tomes_context = create_context<Map<string, Tome>>();
 

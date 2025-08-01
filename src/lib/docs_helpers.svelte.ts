@@ -1,5 +1,6 @@
-import {base} from '$app/paths';
+import {resolve} from '$app/paths';
 import {SvelteSet} from 'svelte/reactivity';
+import {ensure_end, ensure_start} from '@ryanatkn/belt/string.js';
 
 import {create_context} from '$lib/context_helpers.js';
 
@@ -11,7 +12,7 @@ export const to_docs_path_info = (
 	root_path = DEFAULT_LIBRARY_PATH,
 ): {path: string; path_is_selected: boolean; path_segment: string | undefined} => {
 	const path_segment = pathname.split('/').at(-1);
-	const path = base + root_path + '/' + slug;
+	const path = resolve((ensure_end(ensure_start(root_path, '/'), '/') + slug) as any); // TODO @many check sometime if typecast is still needed
 	const path_is_selected = path_segment === slug; // messy but works
 	return {path, path_is_selected, path_segment};
 };

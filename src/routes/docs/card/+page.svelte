@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {base} from '$app/paths';
+	import {resolve} from '$app/paths';
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	import {get_tome_by_name} from '$lib/tome.js';
@@ -11,7 +11,7 @@
 	const LIBRARY_ITEM_NAME = 'Card';
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
 
-	const href = `${base}/docs`;
+	const href = resolve('/docs');
 </script>
 
 <!-- eslint-disable svelte/no-useless-mustaches -->
@@ -52,12 +52,12 @@
 	<Tome_Section>
 		<Tome_Section_Header text="As a link" />
 		<Code
-			content={`<Card href="${base}/">
+			content={`<Card href="${resolve('/')}">
   a<br />
   link
 </Card>`}
 		/>
-		<Card href="{base}/">
+		<Card href={resolve('/')}>
 			a<br />
 			link
 		</Card>
