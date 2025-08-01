@@ -34,9 +34,9 @@
     "node": ">=22.15"
   },
   "peerDependencies": {
-    "@ryanatkn/belt": "file:../belt",
-    "@ryanatkn/gro": "file:../gro",
-    "@ryanatkn/moss": "file:../moss",
+    "@ryanatkn/belt": "*",
+    "@ryanatkn/gro": "*",
+    "@ryanatkn/moss": "*",
     "@sveltejs/kit": "^2.26",
     "svelte": "^5"
   },
@@ -47,7 +47,7 @@
   },
   "devDependencies": {
     "@changesets/changelog-git": "^0.2.1",
-    "@ryanatkn/belt": "file:../belt",
+    "@ryanatkn/belt": "^0.32.0",
     "@ryanatkn/eslint-config": "^0.8.0",
     "@ryanatkn/fuz_code": "^0.24.0",
     "@ryanatkn/gro": "file:../gro",
@@ -307,10 +307,6 @@
       "types": "./dist/Package_Detail.svelte.d.ts",
       "svelte": "./dist/Package_Detail.svelte",
       "default": "./dist/Package_Detail.svelte"
-    },
-    "./package_helpers.js": {
-      "types": "./dist/package_helpers.d.ts",
-      "default": "./dist/package_helpers.js"
     },
     "./Package_Summary.svelte": {
       "types": "./dist/Package_Summary.svelte.d.ts",
