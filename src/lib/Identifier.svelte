@@ -5,7 +5,7 @@
 	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
 	import type {Src_Module, Src_Module_Declaration} from '@ryanatkn/gro/src_json.js';
 
-	import {pkg_context} from '$lib/pkg.js';
+	import {pkg_context} from '$lib/package_helpers.js';
 
 	interface Props {
 		name: string;

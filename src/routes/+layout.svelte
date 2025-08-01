@@ -8,7 +8,7 @@
 	import type {Snippet} from 'svelte';
 
 	import Themed from '$lib/Themed.svelte';
-	import {pkg_context} from '$lib/pkg.js';
+	import {pkg_context} from '$lib/package_helpers.js';
 	import {package_json, src_json} from '$routes/package.js';
 	import Spiders from '$lib/Spiders.svelte';
 

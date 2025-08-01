@@ -6,7 +6,7 @@
 	import {selected_variable_context} from '$routes/style_variable_helpers.svelte.js';
 	import Style_Variable_Detail from '$routes/Style_Variable_Detail.svelte';
 	import Dialog from '$lib/Dialog.svelte';
-	import {pkg_context} from '$lib/pkg.js';
+	import {pkg_context} from '$lib/package_helpers.js';
 	import Svg from '$lib/Svg.svelte';
 	import {fuz_logo} from '$lib/logos.js';
 

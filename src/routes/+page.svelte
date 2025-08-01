@@ -3,7 +3,7 @@
 
 	import Docs_Footer from '$lib/Docs_Footer.svelte';
 	import Card from '$lib/Card.svelte';
-	import {pkg_context} from '$lib/pkg.js';
+	import {pkg_context} from '$lib/package_helpers.js';
 	import Svg, {type Svg_Data} from '$lib/Svg.svelte';
 	import {
 		fuz_logo,
