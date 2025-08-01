@@ -308,6 +308,10 @@
       "svelte": "./dist/Package_Detail.svelte",
       "default": "./dist/Package_Detail.svelte"
     },
+    "./package_helpers.js": {
+      "types": "./dist/package_helpers.d.ts",
+      "default": "./dist/package_helpers.js"
+    },
     "./Package_Summary.svelte": {
       "types": "./dist/Package_Summary.svelte.d.ts",
       "svelte": "./dist/Package_Summary.svelte",
@@ -327,10 +331,6 @@
       "types": "./dist/Pending_Button.svelte.d.ts",
       "svelte": "./dist/Pending_Button.svelte",
       "default": "./dist/Pending_Button.svelte"
-    },
-    "./pkg.js": {
-      "types": "./dist/pkg.d.ts",
-      "default": "./dist/pkg.js"
     },
     "./Project_Links.svelte": {
       "types": "./dist/Project_Links.svelte.d.ts",

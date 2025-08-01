@@ -263,6 +263,10 @@ export const package_json = {
 			svelte: './dist/Package_Detail.svelte',
 			default: './dist/Package_Detail.svelte',
 		},
+		'./package_helpers.js': {
+			types: './dist/package_helpers.d.ts',
+			default: './dist/package_helpers.js',
+		},
 		'./Package_Summary.svelte': {
 			types: './dist/Package_Summary.svelte.d.ts',
 			svelte: './dist/Package_Summary.svelte',
@@ -283,7 +287,6 @@ export const package_json = {
 			svelte: './dist/Pending_Button.svelte',
 			default: './dist/Pending_Button.svelte',
 		},
-		'./pkg.js': {types: './dist/pkg.d.ts', default: './dist/pkg.js'},
 		'./Project_Links.svelte': {
 			types: './dist/Project_Links.svelte.d.ts',
 			svelte: './dist/Project_Links.svelte',
@@ -614,6 +617,30 @@ export const src_json = {
 			path: 'Package_Detail.svelte',
 			declarations: [{name: 'default', kind: 'component'}],
 		},
+		'./package_helpers.js': {
+			path: 'package_helpers.ts',
+			declarations: [
+				{name: 'pkg_context', kind: 'variable'},
+				{name: 'Url', kind: 'variable'},
+				{name: 'Email', kind: 'variable'},
+				{name: 'transform_empty_object_to_undefined', kind: 'function'},
+				{name: 'Package_Json_Repository', kind: 'variable'},
+				{name: 'Package_Json_Author', kind: 'variable'},
+				{name: 'Package_Json_Funding', kind: 'variable'},
+				{name: 'Export_Value', kind: 'variable'},
+				{name: 'Package_Json_Exports', kind: 'variable'},
+				{name: 'Package_Json', kind: 'variable'},
+				{name: 'Src_Module_Declaration_Kind', kind: 'variable'},
+				{name: 'Src_Module_Declaration', kind: 'variable'},
+				{name: 'Src_Module', kind: 'variable'},
+				{name: 'Src_Modules', kind: 'variable'},
+				{name: 'Src_Json', kind: 'variable'},
+				{name: 'Package_Meta', kind: 'type'},
+				{name: 'parse_package_meta', kind: 'function'},
+				{name: 'parse_repo_name', kind: 'function'},
+				{name: 'parse_org_url', kind: 'function'},
+			],
+		},
 		'./Package_Summary.svelte': {
 			path: 'Package_Summary.svelte',
 			declarations: [{name: 'default', kind: 'component'}],
@@ -630,7 +657,6 @@ export const src_json = {
 			path: 'Pending_Button.svelte',
 			declarations: [{name: 'default', kind: 'component'}],
 		},
-		'./pkg.js': {path: 'pkg.ts', declarations: [{name: 'pkg_context', kind: 'variable'}]},
 		'./Project_Links.svelte': {
 			path: 'Project_Links.svelte',
 			declarations: [{name: 'default', kind: 'component'}],
