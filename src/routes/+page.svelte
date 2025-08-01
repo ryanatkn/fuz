@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {base} from '$app/paths';
+	import {resolve} from '$app/paths';
 
 	import Docs_Footer from '$lib/Docs_Footer.svelte';
 	import Card from '$lib/Card.svelte';
@@ -62,7 +62,7 @@
 						but the eventual goal is to be fully-featured with high flexibility.
 					</p>
 					<p>
-						To learn more see <a href="{base}/docs">the docs</a>
+						To learn more see <a href={resolve('/docs')}>the docs</a>
 						and <a href="https://github.com/ryanatkn/fuz#readme">readme</a>. Feel free to take the
 						ideas and <a href="https://github.com/ryanatkn/fuz">code</a> for your own purposes.
 					</p>
@@ -71,7 +71,7 @@
 		</section>
 		<section>
 			<!-- TODO add color variants -->
-			<Card href="{base}/docs">docs{#snippet icon()}🧶{/snippet}</Card>
+			<Card href={resolve('/docs')}>docs{#snippet icon()}🧶{/snippet}</Card>
 		</section>
 		<section class="panel p_lg shadow_inset_xs">
 			<!-- TODO ideally this wouldn't duplicate metadata like descriptions, but adding fuz_gitops to this repo is heavy -->
@@ -85,7 +85,7 @@
 		<section>
 			<Docs_Footer {pkg}>
 				{#snippet logo_header()}
-					<a href="{base}/about" class="mb_xs">about</a>
+					<a href={resolve('/about')} class="mb_xs">about</a>
 				{/snippet}
 				<Hidden_Personal_Links />
 			</Docs_Footer>

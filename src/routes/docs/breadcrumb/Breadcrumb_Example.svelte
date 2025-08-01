@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
-	import {base} from '$app/paths';
+	import {resolve} from '$app/paths';
 
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
 
@@ -15,12 +15,12 @@
 	content={`<Breadcrumb
 	path="/a/b/c/d"
 	selected_path="${selected_path}"
-	base_path="{base}/docs/breadcrumb"	
+	base_path={resolve('/docs/breadcrumb')}
 >
 	<span class="font_size_xl">🔡</span>
 	{#snippet separator()}.{/snippet}
 </Breadcrumb>`}
 />
-<Breadcrumb path="/a/b/c/d" {selected_path} base_path="{base}/docs/breadcrumb">
+<Breadcrumb path="/a/b/c/d" {selected_path} base_path={resolve('/docs/breadcrumb')}>
 	<span class="font_size_xl">🔡</span>
 </Breadcrumb>
