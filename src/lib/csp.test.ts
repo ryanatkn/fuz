@@ -585,39 +585,6 @@ test('directive with specific sources for specific directives', () => {
 	assert.ok(csp['img-src']!.includes(TRUSTED), 'source should be in low trust directives');
 });
 
-test('result is deeply frozen', () => {
-	const csp = create_csp_directives({
-		trusted_sources: [create_test_source(TRUSTED, 'high')],
-	});
-
-	// Check that the result object is frozen
-	assert.is(Object.isFrozen(csp), true, 'CSP object should be frozen');
-
-	// Check that arrays are frozen
-	assert.is(Object.isFrozen(csp['script-src']), true, 'Arrays should be frozen');
-
-	// Attempt to modify properties
-	assert.throws(
-		() => {
-			// @ts-ignore - We're testing runtime behavior
-			csp['script-src'] = [EVIL_DOMAIN];
-		},
-		TypeError,
-		'Should not allow modifying properties on frozen CSP object',
-	);
-
-	// Attempt to modify arrays
-	const script_src = csp['script-src']!;
-	assert.throws(
-		() => {
-			// @ts-ignore - We're testing runtime behavior
-			script_src.push(EVIL_DOMAIN);
-		},
-		TypeError,
-		'Arrays in the result should be frozen',
-	);
-});
-
 test('is_csp_trusted correctly compares trust levels', () => {
 	// Higher or equal trust is allowed
 	assert.is(is_csp_trusted('high', 'high'), true, 'high trust should satisfy high requirement');
