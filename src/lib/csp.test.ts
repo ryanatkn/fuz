@@ -28,7 +28,6 @@ const TRUSTED_2 = 'trusted2.domain';
 const STATIC_OVERRIDE = 'static-override.domain';
 const FUNCTION_ADDED = 'function-added.domain';
 const COMPLETE_OVERRIDE = 'complete-override.domain';
-const EVIL_DOMAIN = 'evil.domain';
 const DEFAULT_OVERRIDE = 'default-override.domain';
 const SECONDARY_DEFAULT = 'secondary-default.domain';
 
