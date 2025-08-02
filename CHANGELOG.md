@@ -1,5 +1,13 @@
 # @ryanatkn/fuz
 
+## 0.145.0
+
+### Minor Changes
+
+- remove freeze behavior from csp ([#78](https://github.com/ryanatkn/fuz/pull/78))
+- upgrade deps ([#80](https://github.com/ryanatkn/fuz/pull/80))
+- upgrade SvelteKit and use `resolve`, bump minimum version to 2.26 ([#79](https://github.com/ryanatkn/fuz/pull/79))
+
 ## 0.144.5
 
 ### Patch Changes
