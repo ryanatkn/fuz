@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.144.5",
+  "version": "0.145.0",
   "modules": {
     "./package.json": {
       "path": "package.json",
@@ -529,10 +529,6 @@
     "./helpers.js": {
       "path": "helpers.ts",
       "declarations": [
-        {
-          "name": "deep_freeze",
-          "kind": "function"
-        },
         {
           "name": "render_value_to_string",
           "kind": "function"
