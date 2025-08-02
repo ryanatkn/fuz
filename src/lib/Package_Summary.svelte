@@ -1,13 +1,13 @@
 <script lang="ts">
 	import {page} from '$app/state';
-	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
 	import type {Snippet} from 'svelte';
 	import {format_url} from '@ryanatkn/belt/url.js';
+	import type {Pkg} from '@ryanatkn/belt/pkg.js';
 
 	import Img_Or_Svg from '$lib/Img_Or_Svg.svelte';
 
 	interface Props {
-		pkg: Package_Meta; // TODO normalized version with cached primitives?
+		pkg: Pkg; // TODO normalized version with cached primitives?
 		repo_name?: Snippet<[repo_name: string]>;
 		logo?: Snippet<[logo_url: string, logo_alt: string]>;
 		motto?: Snippet<[motto: string, glyph?: string]>;

@@ -2,8 +2,8 @@
 	import {DEV} from 'esm-env';
 	import type {Snippet} from 'svelte';
 	import type {SvelteHTMLElements} from 'svelte/elements';
-	import type {Package_Meta} from '@ryanatkn/gro/package_meta.js';
-	import type {Src_Module, Src_Module_Declaration} from '@ryanatkn/gro/src_json.js';
+	import type {Src_Module, Src_Module_Declaration} from '@ryanatkn/belt/src_json.js';
+	import type {Pkg} from '@ryanatkn/belt/pkg.js';
 
 	import {pkg_context} from '$lib/pkg.js';
 
@@ -23,7 +23,7 @@
 		);
 	}
 
-	const pkg: Package_Meta = pkg_context.get();
+	const pkg: Pkg = pkg_context.get();
 
 	/**
 	 * Searches for the identifier name in package metadata.
@@ -31,7 +31,7 @@
 	 */
 	const find_identifier = (
 		name: string,
-		pkg: Package_Meta,
+		pkg: Pkg,
 		// TODO type
 	): undefined | {src_module: Src_Module; declaration: Src_Module_Declaration} => {
 		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
