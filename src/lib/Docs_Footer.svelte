@@ -1,6 +1,5 @@
 <script lang="ts">
-	import type {Url} from '@ryanatkn/belt/url.js';
-	import {format_url} from '@ryanatkn/belt/url.js';
+	import {format_url, type Url} from '@ryanatkn/belt/url.js';
 	import type {Snippet} from 'svelte';
 	import type {Pkg} from '@ryanatkn/belt/pkg.js';
 
