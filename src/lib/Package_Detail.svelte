@@ -46,6 +46,7 @@
 		package_json.license && repository_url ? repository_url + '/blob/main/LICENSE' : null,
 	);
 
+	// TODO BLOCK bugged with package.json for example, needs new/reworked abstractions probably
 	// TODO refactor
 	const to_source_url = (repo_url: string, module_name: string): string =>
 		repo_url +
