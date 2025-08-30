@@ -374,6 +374,11 @@
 {/snippet}
 
 <style>
+	:global(body) {
+		-webkit-touch-callout: none !important;
+		/*a {-webkit-user-select: none !important} */
+	}
+
 	.contextmenu_root {
 		display: contents;
 	}
