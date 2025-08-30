@@ -62,7 +62,7 @@ export const package_json: Package_Json = {
 		tslib: '^2.8.1',
 		typescript: '~5.8',
 		'typescript-eslint': '^8.38.0',
-		uvu: '^0.5.6',
+		vitest: '^3.2.4',
 	},
 	prettier: {
 		plugins: ['prettier-plugin-svelte'],
