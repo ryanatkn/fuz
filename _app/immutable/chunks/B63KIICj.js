@@ -1,1 +1,0 @@
-import{C as t,A as S,D as b,z as h,S as k}from"./hvi78P_d.js";function u(r,i){return r===i||r?.[k]===i}function c(r={},i,a,A){return t(()=>{var f,s;return S(()=>{f=s,s=[],h(()=>{r!==a(...s)&&(i(r,...s),f&&u(a(...f),r)&&i(null,...f))})}),()=>{b(()=>{s&&u(a(...s),r)&&i(null,...s)})}}),r}export{c as b};
