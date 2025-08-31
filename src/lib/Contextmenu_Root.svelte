@@ -375,7 +375,7 @@
 
 <style>
 	:global(body) {
-		/* TODO fix for iOS -- still does not work */
+		/* TODO fix for iOS -- still does not work to disable iOS default behavior */
 		-webkit-touch-callout: none !important;
 		/*a {-webkit-user-select: none !important} */
 	}
@@ -395,7 +395,7 @@
 		z-index: var(--contextmenu_z_index, 200);
 		max-width: var(--contextmenu_width);
 		width: 100%;
-		/* TODO fix for iOS -- still does not work */
+		/* TODO fix for iOS -- still does not work to disable iOS default behavior */
 		-webkit-touch-callout: initial !important;
 		-webkit-user-select: none !important;
 		user-select: none;
