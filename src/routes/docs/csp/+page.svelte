@@ -87,7 +87,7 @@ const precise_csp = create_csp_directives({
 		'connect-src': ['self', 'https://my.domain/'],
 	},
 });
-// assert.equal(precise_csp, {
+// assert.deepEqual(precise_csp, {
 // 	'img-src': ['self', 'https://my.domain/'],
 // 	'connect-src': ['self', 'https://my.domain/'],
 // });
@@ -257,7 +257,7 @@ const minimal_csp = create_csp_directives({
 	},
 });
 // The above is equivalent to not using Fuz's CSP abstraction at all:
-assert.equal(minimal_csp, {
+assert.deepEqual(minimal_csp, {
 	'script-src': ['self'],
 	'img-src': ['self', 'data:'],
 });

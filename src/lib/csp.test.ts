@@ -1,5 +1,4 @@
-import {test} from 'uvu';
-import * as assert from 'uvu/assert';
+import {test, assert} from 'vitest';
 import type {KitConfig} from '@sveltejs/kit';
 import type {Defined} from '@ryanatkn/belt/types.js';
 
@@ -44,7 +43,7 @@ test('create_csp_directives produces defaults with no options', () => {
 	for (const spec of csp_directive_specs) {
 		const default_value = csp_directive_value_defaults[spec.name];
 		if (default_value !== null) {
-			assert.equal(
+			assert.deepEqual(
 				csp[spec.name],
 				default_value,
 				`${spec.name} should match its spec default value`,
@@ -53,10 +52,10 @@ test('create_csp_directives produces defaults with no options', () => {
 	}
 
 	// Check specific examples
-	assert.equal(csp['default-src'], ['none']);
-	assert.equal(csp['script-src'], ['self', COLOR_SCHEME_SCRIPT_HASH]);
-	assert.equal(csp['img-src'], ['self', 'data:', 'blob:', 'filesystem:']);
-	assert.is(csp['upgrade-insecure-requests'], true);
+	assert.deepEqual(csp['default-src'], ['none']);
+	assert.deepEqual(csp['script-src'], ['self', COLOR_SCHEME_SCRIPT_HASH]);
+	assert.deepEqual(csp['img-src'], ['self', 'data:', 'blob:', 'filesystem:']);
+	assert.strictEqual(csp['upgrade-insecure-requests'], true);
 });
 
 test('trusted sources are added to directives based on trust level', () => {
@@ -83,12 +82,12 @@ test('trusted sources are added to directives based on trust level', () => {
 	});
 
 	// Medium trust sources should not be in high trust directives
-	assert.not.ok(
-		csp_medium['script-src']!.includes(TRUSTED),
+	assert.ok(
+		!csp_medium['script-src']!.includes(TRUSTED),
 		'medium trust source should not be in script-src',
 	);
-	assert.not.ok(
-		csp_medium['script-src-elem']!.includes(TRUSTED),
+	assert.ok(
+		!csp_medium['script-src-elem']!.includes(TRUSTED),
 		'medium trust source should not be in script-src-elem',
 	);
 
@@ -105,16 +104,16 @@ test('trusted sources are added to directives based on trust level', () => {
 	});
 
 	// Low trust sources should not be in high or medium trust directives
-	assert.not.ok(
-		csp_low['script-src']!.includes(TRUSTED),
+	assert.ok(
+		!csp_low['script-src']!.includes(TRUSTED),
 		'low trust source should not be in script-src',
 	);
-	assert.not.ok(
-		csp_low['connect-src']!.includes(TRUSTED),
+	assert.ok(
+		!csp_low['connect-src']!.includes(TRUSTED),
 		'low trust source should not be in connect-src',
 	);
-	assert.not.ok(
-		csp_low['style-src']!.includes(TRUSTED),
+	assert.ok(
+		!csp_low['style-src']!.includes(TRUSTED),
 		'low trust source should not be in style-src',
 	);
 
@@ -137,22 +136,19 @@ test('multiple trusted sources with different trust levels', () => {
 	assert.ok(csp['img-src']!.includes(TRUSTED), 'high trust source should be in img-src');
 
 	// Check medium trust source
-	assert.not.ok(
-		csp['script-src']!.includes(TRUSTED_2),
+	assert.ok(
+		!csp['script-src']!.includes(TRUSTED_2),
 		'medium trust source should not be in script-src',
 	);
 	assert.ok(csp['style-src']!.includes(TRUSTED_2), 'medium trust source should be in style-src');
 	assert.ok(csp['img-src']!.includes(TRUSTED_2), 'medium trust source should be in img-src');
 
 	// Check low trust source
-	assert.not.ok(
-		csp['script-src']!.includes(TRUSTED_A),
+	assert.ok(
+		!csp['script-src']!.includes(TRUSTED_A),
 		'low trust source should not be in script-src',
 	);
-	assert.not.ok(
-		csp['style-src']!.includes(TRUSTED_A),
-		'low trust source should not be in style-src',
-	);
+	assert.ok(!csp['style-src']!.includes(TRUSTED_A), 'low trust source should not be in style-src');
 	assert.ok(csp['img-src']!.includes(TRUSTED_A), 'low trust source should be in img-src');
 });
 
@@ -165,7 +161,7 @@ test('static directive replacement', () => {
 	});
 
 	// The static replacement should override defaults and trusted sources
-	assert.equal(csp['script-src'], ['self', STATIC_OVERRIDE]);
+	assert.deepEqual(csp['script-src'], ['self', STATIC_OVERRIDE]);
 
 	// Other directives should still have trusted sources
 	assert.ok(
@@ -188,8 +184,8 @@ test('directive transformer function', () => {
 	assert.ok(csp['script-src']!.includes(FUNCTION_ADDED), 'script-src should add function source');
 
 	// Other directives should be unaffected
-	assert.not.ok(
-		csp['connect-src']!.includes(FUNCTION_ADDED),
+	assert.ok(
+		!csp['connect-src']!.includes(FUNCTION_ADDED),
 		'connect-src should not have function source',
 	);
 });
@@ -203,7 +199,7 @@ test('directive transformer with complete replacement', () => {
 	});
 
 	// The transform should completely replace the values, including defaults and trusted sources
-	assert.equal(csp['connect-src'], [COMPLETE_OVERRIDE]);
+	assert.deepEqual(csp['connect-src'], [COMPLETE_OVERRIDE]);
 
 	// Other directives should still have trusted sources
 	assert.ok(csp['script-src']!.includes(TRUSTED), 'script-src should keep trusted source');
@@ -224,7 +220,7 @@ test('transformers receive values after trusted sources are added', () => {
 
 	// Verify that trusted sources were added before transform was called
 	assert.ok(received_value.includes(TRUSTED), 'Trusted sources should be added before transform');
-	assert.equal(csp['connect-src'], [COMPLETE_OVERRIDE]);
+	assert.deepEqual(csp['connect-src'], [COMPLETE_OVERRIDE]);
 });
 
 test('difference between append and replace transform patterns', () => {
@@ -250,17 +246,17 @@ test('difference between append and replace transform patterns', () => {
 	});
 
 	// transform with complete replacement should completely replace with just the provided values
-	assert.equal(
+	assert.deepEqual(
 		replace_csp['connect-src'],
 		[FUNCTION_ADDED],
 		'transform with replacement should use only provided values',
 	);
-	assert.not.ok(
-		replace_csp['connect-src']!.includes('self'),
+	assert.ok(
+		!replace_csp['connect-src']!.includes('self'),
 		'transform with replacement should not keep default values',
 	);
-	assert.not.ok(
-		replace_csp['connect-src']!.includes(TRUSTED),
+	assert.ok(
+		!replace_csp['connect-src']!.includes(TRUSTED),
 		'transform with replacement should not keep trusted sources',
 	);
 });
@@ -276,24 +272,24 @@ test('directives option takes precedence over trusted sources', () => {
 	});
 
 	// Static directives should override defaults and not include trusted sources
-	assert.equal(
+	assert.deepEqual(
 		csp1['script-src'],
 		['self', STATIC_OVERRIDE],
 		'static directive should override defaults and trusted sources',
 	);
-	assert.equal(
+	assert.deepEqual(
 		csp1['connect-src'],
 		['self', STATIC_OVERRIDE],
 		'static directive should override defaults and trusted sources',
 	);
 
 	// Values should not contain trusted sources
-	assert.not.ok(
-		csp1['script-src']!.includes(TRUSTED),
+	assert.ok(
+		!csp1['script-src']!.includes(TRUSTED),
 		'static directive should remove trusted sources',
 	);
-	assert.not.ok(
-		csp1['connect-src']!.includes(TRUSTED),
+	assert.ok(
+		!csp1['connect-src']!.includes(TRUSTED),
 		'static directive should remove trusted sources',
 	);
 });
@@ -308,9 +304,9 @@ test('both static and transformer directives work together', () => {
 	});
 
 	// Check static directive worked
-	assert.equal(csp['script-src'], ['self', STATIC_OVERRIDE]);
-	assert.not.ok(
-		csp['script-src']!.includes(TRUSTED),
+	assert.deepEqual(csp['script-src'], ['self', STATIC_OVERRIDE]);
+	assert.ok(
+		!csp['script-src']!.includes(TRUSTED),
 		'static directive should remove trusted sources',
 	);
 
@@ -338,8 +334,8 @@ test('required_trust_overrides changes which sources are included', () => {
 	);
 
 	// Medium trust source should no longer be included in img-src (default requirement is low)
-	assert.not.ok(
-		csp['img-src']!.includes(TRUSTED),
+	assert.ok(
+		!csp['img-src']!.includes(TRUSTED),
 		'medium source should not be in img-src after raising requirement',
 	);
 });
@@ -353,8 +349,8 @@ test('required_trust_overrides of null prevents trusted sources from being added
 	});
 
 	// No trusted sources should be added to connect-src
-	assert.not.ok(
-		csp['connect-src']!.includes(TRUSTED),
+	assert.ok(
+		!csp['connect-src']!.includes(TRUSTED),
 		'connect-src should not include trusted source when required_trust is null',
 	);
 
@@ -371,8 +367,8 @@ test('directive transformer returning null return removes directive', () => {
 	});
 
 	// The directive should be removed from the output
-	assert.is(csp['script-src'], undefined, 'script-src should be undefined/removed');
-	assert.is('script-src' in csp, false, 'script-src should not be in the object');
+	assert.strictEqual(csp['script-src'], undefined, 'script-src should be undefined/removed');
+	assert.strictEqual('script-src' in csp, false, 'script-src should not be in the object');
 
 	// Other directives should still exist
 	assert.ok('connect-src' in csp, 'connect-src should still exist');
@@ -389,8 +385,8 @@ test('directive transformer returning undefined return removes directive', () =>
 	});
 
 	// The directive should be removed from the output
-	assert.is(csp['script-src'], undefined, 'script-src should be undefined/removed');
-	assert.is('script-src' in csp, false, 'script-src should not be in the object');
+	assert.strictEqual(csp['script-src'], undefined, 'script-src should be undefined/removed');
+	assert.strictEqual('script-src' in csp, false, 'script-src should not be in the object');
 
 	// Other directives should still exist
 	assert.ok('connect-src' in csp, 'connect-src should still exist');
@@ -405,7 +401,7 @@ test('trusted sources are not added to directives with value ["none"]', () => {
 	});
 
 	// Directive with ['none'] should remain ['none'], trusted sources should not be added
-	assert.equal(csp['script-src'], ['none'], "script-src should remain ['none']");
+	assert.deepEqual(csp['script-src'], ['none'], "script-src should remain ['none']");
 
 	// Other directives should still get trusted sources
 	assert.ok(csp['connect-src']!.includes(TRUSTED), 'connect-src should get trusted sources');
@@ -417,14 +413,14 @@ test('transformer can change directives with ["none"]', () => {
 			'script-src': ['none'], // First set to none
 			'default-src': (value) => {
 				// default-src is already ['none'] by default
-				assert.equal(value, ['none'], "Function should receive the original ['none'] value");
+				assert.deepEqual(value, ['none'], "Function should receive the original ['none'] value");
 				return ['self', TRUSTED];
 			},
 		},
 	});
 
 	// Function should be able to override ['none'] directives
-	assert.equal(csp['default-src'], ['self', TRUSTED]);
+	assert.deepEqual(csp['default-src'], ['self', TRUSTED]);
 });
 
 test('source with both trust level and specific directives uses both behaviors additively', () => {
@@ -451,12 +447,12 @@ test('source with both trust level and specific directives uses both behaviors a
 	);
 
 	// Source should NOT be in medium or high trust directives (only where explicitly added)
-	assert.not.ok(
-		csp_combined['style-src']!.includes(TRUSTED),
+	assert.ok(
+		!csp_combined['style-src']!.includes(TRUSTED),
 		'low trust source should not be in style-src (medium trust)',
 	);
-	assert.not.ok(
-		csp_combined['connect-src']!.includes(TRUSTED),
+	assert.ok(
+		!csp_combined['connect-src']!.includes(TRUSTED),
 		'low trust source should not be in connect-src (high trust)',
 	);
 });
@@ -478,16 +474,16 @@ test('source with only specific directives is added only to those directives', (
 	);
 
 	// Source should NOT be in other directives when no trust is specified
-	assert.not.ok(
-		csp_directives_only['img-src']!.includes(TRUSTED_2),
+	assert.ok(
+		!csp_directives_only['img-src']!.includes(TRUSTED_2),
 		'source with only directives should not be in low trust directive (img-src)',
 	);
-	assert.not.ok(
-		csp_directives_only['style-src']!.includes(TRUSTED_2),
+	assert.ok(
+		!csp_directives_only['style-src']!.includes(TRUSTED_2),
 		'source with only directives should not be in medium trust directive (style-src)',
 	);
-	assert.not.ok(
-		csp_directives_only['connect-src']!.includes(TRUSTED_2),
+	assert.ok(
+		!csp_directives_only['connect-src']!.includes(TRUSTED_2),
 		'source with only directives should not be in high trust directive (connect-src)',
 	);
 });
@@ -508,8 +504,8 @@ test('trust is optional when directives are specified', () => {
 	assert.ok(csp['connect-src']!.includes(TRUSTED), 'source should be in connect-src');
 
 	// Source should not be added to other directives
-	assert.not.ok(csp['img-src']!.includes(TRUSTED), 'source should not be in img-src');
-	assert.not.ok(csp['style-src']!.includes(TRUSTED), 'source should not be in style-src');
+	assert.ok(!csp['img-src']!.includes(TRUSTED), 'source should not be in img-src');
+	assert.ok(!csp['style-src']!.includes(TRUSTED), 'source should not be in style-src');
 });
 
 test('directives is optional when trust is specified', () => {
@@ -525,8 +521,8 @@ test('directives is optional when trust is specified', () => {
 	});
 
 	// Should follow trust level rules
-	assert.not.ok(
-		csp['script-src']!.includes(TRUSTED),
+	assert.ok(
+		!csp['script-src']!.includes(TRUSTED),
 		'medium trusted source should not be in script-src',
 	);
 	assert.ok(csp['style-src']!.includes(TRUSTED), 'medium trusted source should be in style-src');
@@ -553,8 +549,8 @@ test('both trust and directives can be specified for additive behavior', () => {
 	);
 
 	// Trust level should still apply normally for non-specified directives
-	assert.not.ok(
-		csp['script-src']!.includes(TRUSTED),
+	assert.ok(
+		!csp['script-src']!.includes(TRUSTED),
 		'medium trusted source should not be in script-src',
 	);
 	assert.ok(csp['style-src']!.includes(TRUSTED), 'medium trusted source should be in style-src');
@@ -586,41 +582,69 @@ test('directive with specific sources for specific directives', () => {
 
 test('is_csp_trusted correctly compares trust levels', () => {
 	// Higher or equal trust is allowed
-	assert.is(is_csp_trusted('high', 'high'), true, 'high trust should satisfy high requirement');
-	assert.is(is_csp_trusted('medium', 'high'), true, 'high trust should satisfy medium requirement');
-	assert.is(is_csp_trusted('low', 'high'), true, 'high trust should satisfy low requirement');
+	assert.strictEqual(
+		is_csp_trusted('high', 'high'),
+		true,
+		'high trust should satisfy high requirement',
+	);
+	assert.strictEqual(
+		is_csp_trusted('medium', 'high'),
+		true,
+		'high trust should satisfy medium requirement',
+	);
+	assert.strictEqual(
+		is_csp_trusted('low', 'high'),
+		true,
+		'high trust should satisfy low requirement',
+	);
 
-	assert.is(
+	assert.strictEqual(
 		is_csp_trusted('medium', 'medium'),
 		true,
 		'medium trust should satisfy medium requirement',
 	);
-	assert.is(is_csp_trusted('low', 'medium'), true, 'medium trust should satisfy low requirement');
+	assert.strictEqual(
+		is_csp_trusted('low', 'medium'),
+		true,
+		'medium trust should satisfy low requirement',
+	);
 
-	assert.is(is_csp_trusted('low', 'low'), true, 'low trust should satisfy low requirement');
+	assert.strictEqual(
+		is_csp_trusted('low', 'low'),
+		true,
+		'low trust should satisfy low requirement',
+	);
 
 	// Lower trust is not allowed
-	assert.is(
+	assert.strictEqual(
 		is_csp_trusted('high', 'medium'),
 		false,
 		'medium trust should not satisfy high requirement',
 	);
-	assert.is(is_csp_trusted('high', 'low'), false, 'low trust should not satisfy high requirement');
-	assert.is(
+	assert.strictEqual(
+		is_csp_trusted('high', 'low'),
+		false,
+		'low trust should not satisfy high requirement',
+	);
+	assert.strictEqual(
 		is_csp_trusted('medium', 'low'),
 		false,
 		'low trust should not satisfy medium requirement',
 	);
 
 	// Null or undefined values
-	assert.is(is_csp_trusted(null, 'high'), false, 'null required_trust should return false');
-	assert.is(is_csp_trusted('high', null), false, 'null granted_trust should return false');
-	assert.is(
+	assert.strictEqual(
+		is_csp_trusted(null, 'high'),
+		false,
+		'null required_trust should return false',
+	);
+	assert.strictEqual(is_csp_trusted('high', null), false, 'null granted_trust should return false');
+	assert.strictEqual(
 		is_csp_trusted(undefined, 'high'),
 		false,
 		'undefined required_trust should return false',
 	);
-	assert.is(
+	assert.strictEqual(
 		is_csp_trusted('high', undefined),
 		false,
 		'undefined granted_trust should return false',
@@ -628,14 +652,14 @@ test('is_csp_trusted correctly compares trust levels', () => {
 });
 
 test('parse_csp_trust_level validates trust levels', () => {
-	assert.is(parse_csp_trust_level('high'), 'high');
-	assert.is(parse_csp_trust_level('medium'), 'medium');
-	assert.is(parse_csp_trust_level('low'), 'low');
+	assert.strictEqual(parse_csp_trust_level('high'), 'high');
+	assert.strictEqual(parse_csp_trust_level('medium'), 'medium');
+	assert.strictEqual(parse_csp_trust_level('low'), 'low');
 
-	assert.is(parse_csp_trust_level('invalid'), null);
-	assert.is(parse_csp_trust_level(undefined), null);
-	assert.is(parse_csp_trust_level(null), null);
-	assert.is(parse_csp_trust_level(123), null);
+	assert.strictEqual(parse_csp_trust_level('invalid'), null);
+	assert.strictEqual(parse_csp_trust_level(undefined), null);
+	assert.strictEqual(parse_csp_trust_level(null), null);
+	assert.strictEqual(parse_csp_trust_level(123), null);
 });
 
 test('non-array directives are handled correctly', () => {
@@ -646,7 +670,11 @@ test('non-array directives are handled correctly', () => {
 		},
 	});
 
-	assert.is(csp['upgrade-insecure-requests'], false, 'boolean directive should be set correctly');
+	assert.strictEqual(
+		csp['upgrade-insecure-requests'],
+		false,
+		'boolean directive should be set correctly',
+	);
 });
 
 test('directive with specific sources for specific directives', () => {
@@ -695,21 +723,19 @@ test('mixed directives and trusted_sources with trust overrides', () => {
 
 	// Check style-src transform worked with trusted sources
 	assert.ok(csp['style-src']!.includes(TRUSTED), 'medium trust source should be in style-src');
-	assert.not.ok(
-		csp['style-src']!.includes(TRUSTED_2),
-		'low trust source should not be in style-src',
-	);
+	assert.ok(!csp['style-src']!.includes(TRUSTED_2), 'low trust source should not be in style-src');
 	assert.ok(
 		csp['style-src']!.includes(FUNCTION_ADDED),
 		'function added source should be in style-src',
 	);
 
 	// Check img-src static override completely replaced trusted sources
-	assert.equal(csp['img-src'], ['self', STATIC_OVERRIDE], 'img-src should be completely replaced');
-	assert.not.ok(
-		csp['img-src']!.includes(TRUSTED),
-		'trusted sources should not be in static override',
+	assert.deepEqual(
+		csp['img-src'],
+		['self', STATIC_OVERRIDE],
+		'img-src should be completely replaced',
 	);
+	assert.ok(!csp['img-src']!.includes(TRUSTED), 'trusted sources should not be in static override');
 });
 
 test('defaults option overrides base defaults', () => {
@@ -721,11 +747,11 @@ test('defaults option overrides base defaults', () => {
 	});
 
 	// Check that defaults are applied
-	assert.equal(csp['img-src'], ['self', DEFAULT_OVERRIDE]);
-	assert.equal(csp['connect-src'], ['self', DEFAULT_OVERRIDE]);
+	assert.deepEqual(csp['img-src'], ['self', DEFAULT_OVERRIDE]);
+	assert.deepEqual(csp['connect-src'], ['self', DEFAULT_OVERRIDE]);
 
 	// Other directives should use original defaults
-	assert.equal(csp['script-src'], ['self', COLOR_SCHEME_SCRIPT_HASH]);
+	assert.deepEqual(csp['script-src'], ['self', COLOR_SCHEME_SCRIPT_HASH]);
 });
 
 test('defaults are overridden by directives option', () => {
@@ -740,10 +766,10 @@ test('defaults are overridden by directives option', () => {
 	});
 
 	// The directives option should take precedence over defaults
-	assert.equal(csp['img-src'], ['self', STATIC_OVERRIDE]);
+	assert.deepEqual(csp['img-src'], ['self', STATIC_OVERRIDE]);
 
 	// Other default changes should still apply
-	assert.equal(csp['connect-src'], ['self', DEFAULT_OVERRIDE]);
+	assert.deepEqual(csp['connect-src'], ['self', DEFAULT_OVERRIDE]);
 });
 
 test('defaults option with trusted sources', () => {
@@ -769,7 +795,7 @@ test('boolean directive in defaults', () => {
 		},
 	});
 
-	assert.is(csp_with_boolean['upgrade-insecure-requests'], false);
+	assert.strictEqual(csp_with_boolean['upgrade-insecure-requests'], false);
 });
 
 test('multiple defaults combined with other options', () => {
@@ -810,8 +836,8 @@ test('defaults option with null values', () => {
 	});
 
 	// The directive should be removed
-	assert.is(csp['img-src'], undefined, 'img-src should be undefined/removed');
-	assert.is('img-src' in csp, false, 'img-src should not be in the object');
+	assert.strictEqual(csp['img-src'], undefined, 'img-src should be undefined/removed');
+	assert.strictEqual('img-src' in csp, false, 'img-src should not be in the object');
 
 	// Other directives should still exist
 	assert.ok('script-src' in csp, 'script-src should still exist');
@@ -829,12 +855,16 @@ test('value_defaults_base can completely reset defaults', () => {
 	});
 
 	// Only the explicitly added directive should exist
-	assert.equal(csp_no_defaults['script-src'], ['self', 'https://example.com', TRUSTED]);
+	assert.deepEqual(csp_no_defaults['script-src'], ['self', 'https://example.com', TRUSTED]);
 
 	// No other directives should be present
-	assert.is('img-src' in csp_no_defaults, false, 'img-src should not exist in the result');
-	assert.is('connect-src' in csp_no_defaults, false, 'connect-src should not exist in the result');
-	assert.is(
+	assert.strictEqual('img-src' in csp_no_defaults, false, 'img-src should not exist in the result');
+	assert.strictEqual(
+		'connect-src' in csp_no_defaults,
+		false,
+		'connect-src should not exist in the result',
+	);
+	assert.strictEqual(
 		'upgrade-insecure-requests' in csp_no_defaults,
 		false,
 		'upgrade-insecure-requests should not exist',
@@ -852,11 +882,15 @@ test('value_defaults_base can be set to empty object', () => {
 	});
 
 	// Only the explicitly added directive should exist
-	assert.equal(csp_empty_defaults['script-src'], ['self', 'https://example.com']);
+	assert.deepEqual(csp_empty_defaults['script-src'], ['self', 'https://example.com']);
 
 	// No other directives should be present
-	assert.is('img-src' in csp_empty_defaults, false, 'img-src should not exist in the result');
-	assert.is(
+	assert.strictEqual(
+		'img-src' in csp_empty_defaults,
+		false,
+		'img-src should not exist in the result',
+	);
+	assert.strictEqual(
 		'connect-src' in csp_empty_defaults,
 		false,
 		'connect-src should not exist in the result',
@@ -879,13 +913,13 @@ test('value_defaults_base can provide custom base defaults', () => {
 	});
 
 	// The overridden directive should have the new values
-	assert.equal(csp['script-src'], ['self', 'https://example.com']);
+	assert.deepEqual(csp['script-src'], ['self', 'https://example.com']);
 
 	// The non-overridden directive should use the custom base
-	assert.equal(csp['img-src'], ['https://custom-images.com']);
+	assert.deepEqual(csp['img-src'], ['https://custom-images.com']);
 
 	// Directives not in the custom base should not be present
-	assert.is('connect-src' in csp, false, 'connect-src should not exist in the result');
+	assert.strictEqual('connect-src' in csp, false, 'connect-src should not exist in the result');
 });
 
 test('required_trust_defaults_base can completely reset trust requirements', () => {
@@ -916,12 +950,12 @@ test('required_trust_defaults_base can completely reset trust requirements', () 
 	);
 
 	// Other directives should not include trusted sources since there are no trust requirements
-	assert.not.ok(
-		csp_no_trust['img-src']!.includes(TRUSTED),
+	assert.ok(
+		!csp_no_trust['img-src']!.includes(TRUSTED),
 		'img-src should not include trusted source when trust requirements are reset',
 	);
-	assert.not.ok(
-		csp_no_trust['connect-src']!.includes(TRUSTED),
+	assert.ok(
+		!csp_no_trust['connect-src']!.includes(TRUSTED),
 		'connect-src should not include trusted source when trust requirements are reset',
 	);
 });
@@ -954,8 +988,8 @@ test('required_trust_defaults_base can be set to empty object', () => {
 	);
 
 	// Directive without explicit trust requirement should not include trusted sources
-	assert.not.ok(
-		csp['connect-src']!.includes(TRUSTED),
+	assert.ok(
+		!csp['connect-src']!.includes(TRUSTED),
 		'connect-src should not include trusted source without explicit trust',
 	);
 });
@@ -982,8 +1016,8 @@ test('required_trust_defaults_base can provide custom trust requirements', () =>
 	});
 
 	// Low trust source should not be in script-src due to raised requirement
-	assert.not.ok(
-		csp['script-src']!.includes(TRUSTED),
+	assert.ok(
+		!csp['script-src']!.includes(TRUSTED),
 		'script-src should not include low trust source when requirement is medium',
 	);
 
@@ -1001,19 +1035,19 @@ test('required_trust_defaults_base can provide custom trust requirements', () =>
 	);
 
 	// No sources should be in img-src since it has no trust requirement
-	assert.not.ok(
-		csp['img-src']!.includes(TRUSTED),
+	assert.ok(
+		!csp['img-src']!.includes(TRUSTED),
 		'img-src should not include trusted sources without a trust requirement',
 	);
-	assert.not.ok(
-		csp['img-src']!.includes(TRUSTED_2),
+	assert.ok(
+		!csp['img-src']!.includes(TRUSTED_2),
 		'img-src should not include trusted sources without a trust requirement',
 	);
 });
 
 test('completely minimal defaults with empty bases', () => {
 	// Test a completely minimal configuration with empty bases
-	assert.equal(
+	assert.deepEqual(
 		create_csp_directives({
 			value_defaults_base: null,
 			required_trust_defaults_base: null,
@@ -1023,7 +1057,7 @@ test('completely minimal defaults with empty bases', () => {
 	);
 
 	// And again with `{}` instead of null
-	assert.equal(
+	assert.deepEqual(
 		create_csp_directives({
 			value_defaults_base: {},
 			required_trust_defaults_base: {},
@@ -1035,7 +1069,7 @@ test('completely minimal defaults with empty bases', () => {
 	// But undefined uses the default base
 
 	// And again with `{}` instead of null
-	assert.not.equal(
+	assert.notDeepEqual(
 		create_csp_directives({
 			value_defaults_base: undefined,
 			required_trust_defaults_base: undefined,
@@ -1044,5 +1078,3 @@ test('completely minimal defaults with empty bases', () => {
 		{'script-src': ['self']},
 	);
 });
-
-test.run();
