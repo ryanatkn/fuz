@@ -38,10 +38,14 @@
     "@ryanatkn/gro": "*",
     "@ryanatkn/moss": "*",
     "@sveltejs/kit": "^2.26",
+    "esm-env": "^1",
     "svelte": "^5"
   },
   "peerDependenciesMeta": {
     "@ryanatkn/gro": {
+      "optional": true
+    },
+    "esm-env": {
       "optional": true
     }
   },
