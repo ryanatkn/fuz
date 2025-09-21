@@ -1,5 +1,12 @@
 # @ryanatkn/fuz
 
+## 0.146.0
+
+### Minor Changes
+
+- add esm-env peer dep ([#82](https://github.com/ryanatkn/fuz/pull/82))
+- upgrade gro ([#83](https://github.com/ryanatkn/fuz/pull/83))
+
 ## 0.145.0
 
 ### Minor Changes
