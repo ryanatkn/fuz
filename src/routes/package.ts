@@ -31,7 +31,7 @@ export const package_json: Package_Json = {
 	engines: {node: '>=22.15'},
 	peerDependencies: {
 		'@ryanatkn/belt': '*',
-		'@ryanatkn/gro': '*',
+		'@ryanatkn/gro': '>=0.165.0',
 		'@ryanatkn/moss': '*',
 		'@sveltejs/kit': '^2.26',
 		svelte: '^5',
