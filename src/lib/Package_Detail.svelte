@@ -52,12 +52,12 @@
 		'/blob/main/src/lib/' +
 		(module_name.endsWith('.js') ? module_name.slice(0, -3) + '.ts' : module_name);
 
-	const pkg_exports_keys = $derived(package_json.exports && Object.keys(package_json.exports)); // TODO hacky, see usage
+	const pkg_exports_keys = $derived(src_json.modules && Object.keys(src_json.modules)); // TODO hacky, see usage
 
 	// TODO helper, look at existing code
 	const modules = $derived(
-		package_json.exports
-			? Object.keys(package_json.exports).map((k) => {
+		src_json.modules
+			? Object.keys(src_json.modules).map((k) => {
 					const v = strip_start(k, './');
 					return v === '.' ? 'index.js' : v;
 				})
