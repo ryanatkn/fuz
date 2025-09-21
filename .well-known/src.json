@@ -1,25 +1,7 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.145.0",
+  "version": "0.146.0",
   "modules": {
-    "./package.json": {
-      "path": "package.json",
-      "declarations": [
-        {
-          "name": "default",
-          "kind": "json"
-        }
-      ]
-    },
-    "./Alert.svelte": {
-      "path": "Alert.svelte",
-      "declarations": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
     "./alert.js": {
       "path": "alert.ts",
       "declarations": [
@@ -34,51 +16,6 @@
         {
           "name": "alert_status_options",
           "kind": "variable"
-        }
-      ]
-    },
-    "./Breadcrumb.svelte": {
-      "path": "Breadcrumb.svelte",
-      "declarations": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    "./Card.svelte": {
-      "path": "Card.svelte",
-      "declarations": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    "./Color_Scheme_Input.svelte": {
-      "path": "Color_Scheme_Input.svelte",
-      "declarations": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    "./Community_Links_Panel.svelte": {
-      "path": "Community_Links_Panel.svelte",
-      "declarations": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    "./Community_Links.svelte": {
-      "path": "Community_Links.svelte",
-      "declarations": [
-        {
-          "name": "default",
-          "kind": "component"
         }
       ]
     },
@@ -97,33 +34,6 @@
         {
           "name": "create_context",
           "kind": "function"
-        }
-      ]
-    },
-    "./Contextmenu_Entry.svelte": {
-      "path": "Contextmenu_Entry.svelte",
-      "declarations": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    "./Contextmenu_Link_Entry.svelte": {
-      "path": "Contextmenu_Link_Entry.svelte",
-      "declarations": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    "./Contextmenu_Root.svelte": {
-      "path": "Contextmenu_Root.svelte",
-      "declarations": [
-        {
-          "name": "default",
-          "kind": "component"
         }
       ]
     },
@@ -181,42 +91,6 @@
         {
           "name": "contextmenu_dimensions_context",
           "kind": "variable"
-        }
-      ]
-    },
-    "./Contextmenu_Submenu.svelte": {
-      "path": "Contextmenu_Submenu.svelte",
-      "declarations": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    "./Contextmenu_Text_Entry.svelte": {
-      "path": "Contextmenu_Text_Entry.svelte",
-      "declarations": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    "./Contextmenu.svelte": {
-      "path": "Contextmenu.svelte",
-      "declarations": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    "./Copy_To_Clipboard.svelte": {
-      "path": "Copy_To_Clipboard.svelte",
-      "declarations": [
-        {
-          "name": "default",
-          "kind": "component"
         }
       ]
     },
@@ -350,24 +224,6 @@
         }
       ]
     },
-    "./Details.svelte": {
-      "path": "Details.svelte",
-      "declarations": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    "./Dialog.svelte": {
-      "path": "Dialog.svelte",
-      "declarations": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
     "./dialog.js": {
       "path": "dialog.ts",
       "declarations": [
@@ -389,39 +245,12 @@
         }
       ]
     },
-    "./Dialogs.svelte": {
-      "path": "Dialogs.svelte",
-      "declarations": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
     "./dimensions.svelte.js": {
       "path": "dimensions.svelte.ts",
       "declarations": [
         {
           "name": "Dimensions",
           "kind": "class"
-        }
-      ]
-    },
-    "./Docs_Content.svelte": {
-      "path": "Docs_Content.svelte",
-      "declarations": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    "./Docs_Footer.svelte": {
-      "path": "Docs_Footer.svelte",
-      "declarations": [
-        {
-          "name": "default",
-          "kind": "component"
         }
       ]
     },
@@ -454,120 +283,12 @@
         }
       ]
     },
-    "./Docs_Menu_Header.svelte": {
-      "path": "Docs_Menu_Header.svelte",
-      "declarations": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    "./Docs_Menu.svelte": {
-      "path": "Docs_Menu.svelte",
-      "declarations": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    "./Docs_Page_Links.svelte": {
-      "path": "Docs_Page_Links.svelte",
-      "declarations": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    "./Docs_Primary_Nav.svelte": {
-      "path": "Docs_Primary_Nav.svelte",
-      "declarations": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    "./Docs_Secondary_Nav.svelte": {
-      "path": "Docs_Secondary_Nav.svelte",
-      "declarations": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    "./Docs_Tertiary_Nav.svelte": {
-      "path": "Docs_Tertiary_Nav.svelte",
-      "declarations": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    "./Docs.svelte": {
-      "path": "Docs.svelte",
-      "declarations": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    "./Hashlink.svelte": {
-      "path": "Hashlink.svelte",
-      "declarations": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
     "./helpers.js": {
       "path": "helpers.ts",
       "declarations": [
         {
           "name": "render_value_to_string",
           "kind": "function"
-        }
-      ]
-    },
-    "./Hidden_Personal_Links.svelte": {
-      "path": "Hidden_Personal_Links.svelte",
-      "declarations": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    "./Hue_Input.svelte": {
-      "path": "Hue_Input.svelte",
-      "declarations": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    "./Identifier.svelte": {
-      "path": "Identifier.svelte",
-      "declarations": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    "./Img_Or_Svg.svelte": {
-      "path": "Img_Or_Svg.svelte",
-      "declarations": [
-        {
-          "name": "default",
-          "kind": "component"
         }
       ]
     },
@@ -685,6 +406,377 @@
         }
       ]
     },
+    "./pkg.js": {
+      "path": "pkg.ts",
+      "declarations": [
+        {
+          "name": "pkg_context",
+          "kind": "variable"
+        }
+      ]
+    },
+    "./rune_helpers.svelte.js": {
+      "path": "rune_helpers.svelte.ts",
+      "declarations": [
+        {
+          "name": "effect_with_count",
+          "kind": "function"
+        }
+      ]
+    },
+    "./storage.js": {
+      "path": "storage.ts",
+      "declarations": [
+        {
+          "name": "save_to_storage",
+          "kind": "function"
+        },
+        {
+          "name": "load_from_storage",
+          "kind": "function"
+        }
+      ]
+    },
+    "./themer.svelte.js": {
+      "path": "themer.svelte.ts",
+      "declarations": [
+        {
+          "name": "Themer",
+          "kind": "class"
+        },
+        {
+          "name": "Themer_Json",
+          "kind": "type"
+        },
+        {
+          "name": "themer_context",
+          "kind": "variable"
+        },
+        {
+          "name": "sync_color_scheme",
+          "kind": "function"
+        },
+        {
+          "name": "COLOR_SCHEME_STORAGE_KEY",
+          "kind": "variable"
+        },
+        {
+          "name": "THEME_STORAGE_KEY",
+          "kind": "variable"
+        },
+        {
+          "name": "save_color_scheme",
+          "kind": "function"
+        },
+        {
+          "name": "load_color_scheme",
+          "kind": "function"
+        },
+        {
+          "name": "save_theme",
+          "kind": "function"
+        },
+        {
+          "name": "load_theme",
+          "kind": "function"
+        }
+      ]
+    },
+    "./tome.js": {
+      "path": "tome.ts",
+      "declarations": [
+        {
+          "name": "Tome",
+          "kind": "variable"
+        },
+        {
+          "name": "to_tome_pathname",
+          "kind": "function"
+        },
+        {
+          "name": "tomes_context",
+          "kind": "variable"
+        },
+        {
+          "name": "get_tome_by_name",
+          "kind": "function"
+        },
+        {
+          "name": "tome_context",
+          "kind": "variable"
+        }
+      ]
+    },
+    "./Alert.svelte": {
+      "path": "Alert.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Breadcrumb.svelte": {
+      "path": "Breadcrumb.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Card.svelte": {
+      "path": "Card.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Color_Scheme_Input.svelte": {
+      "path": "Color_Scheme_Input.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Community_Links_Panel.svelte": {
+      "path": "Community_Links_Panel.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Community_Links.svelte": {
+      "path": "Community_Links.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Contextmenu_Entry.svelte": {
+      "path": "Contextmenu_Entry.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Contextmenu_Link_Entry.svelte": {
+      "path": "Contextmenu_Link_Entry.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Contextmenu_Root.svelte": {
+      "path": "Contextmenu_Root.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Contextmenu_Submenu.svelte": {
+      "path": "Contextmenu_Submenu.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Contextmenu_Text_Entry.svelte": {
+      "path": "Contextmenu_Text_Entry.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Contextmenu.svelte": {
+      "path": "Contextmenu.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Copy_To_Clipboard.svelte": {
+      "path": "Copy_To_Clipboard.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Details.svelte": {
+      "path": "Details.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Dialog.svelte": {
+      "path": "Dialog.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Dialogs.svelte": {
+      "path": "Dialogs.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Docs_Content.svelte": {
+      "path": "Docs_Content.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Docs_Footer.svelte": {
+      "path": "Docs_Footer.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Docs_Menu_Header.svelte": {
+      "path": "Docs_Menu_Header.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Docs_Menu.svelte": {
+      "path": "Docs_Menu.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Docs_Page_Links.svelte": {
+      "path": "Docs_Page_Links.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Docs_Primary_Nav.svelte": {
+      "path": "Docs_Primary_Nav.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Docs_Secondary_Nav.svelte": {
+      "path": "Docs_Secondary_Nav.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Docs_Tertiary_Nav.svelte": {
+      "path": "Docs_Tertiary_Nav.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Docs.svelte": {
+      "path": "Docs.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Hashlink.svelte": {
+      "path": "Hashlink.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Hidden_Personal_Links.svelte": {
+      "path": "Hidden_Personal_Links.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Hue_Input.svelte": {
+      "path": "Hue_Input.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Identifier.svelte": {
+      "path": "Identifier.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Img_Or_Svg.svelte": {
+      "path": "Img_Or_Svg.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
     "./Mdn_Link.svelte": {
       "path": "Mdn_Link.svelte",
       "declarations": [
@@ -739,15 +831,6 @@
         }
       ]
     },
-    "./pkg.js": {
-      "path": "pkg.ts",
-      "declarations": [
-        {
-          "name": "pkg_context",
-          "kind": "variable"
-        }
-      ]
-    },
     "./Project_Links.svelte": {
       "path": "Project_Links.svelte",
       "declarations": [
@@ -766,34 +849,12 @@
         }
       ]
     },
-    "./rune_helpers.svelte.js": {
-      "path": "rune_helpers.svelte.ts",
-      "declarations": [
-        {
-          "name": "effect_with_count",
-          "kind": "function"
-        }
-      ]
-    },
     "./Spiders.svelte": {
       "path": "Spiders.svelte",
       "declarations": [
         {
           "name": "default",
           "kind": "component"
-        }
-      ]
-    },
-    "./storage.js": {
-      "path": "storage.ts",
-      "declarations": [
-        {
-          "name": "save_to_storage",
-          "kind": "function"
-        },
-        {
-          "name": "load_from_storage",
-          "kind": "function"
         }
       ]
     },
@@ -830,51 +891,6 @@
         {
           "name": "default",
           "kind": "component"
-        }
-      ]
-    },
-    "./themer.svelte.js": {
-      "path": "themer.svelte.ts",
-      "declarations": [
-        {
-          "name": "Themer",
-          "kind": "class"
-        },
-        {
-          "name": "Themer_Json",
-          "kind": "type"
-        },
-        {
-          "name": "themer_context",
-          "kind": "variable"
-        },
-        {
-          "name": "sync_color_scheme",
-          "kind": "function"
-        },
-        {
-          "name": "COLOR_SCHEME_STORAGE_KEY",
-          "kind": "variable"
-        },
-        {
-          "name": "THEME_STORAGE_KEY",
-          "kind": "variable"
-        },
-        {
-          "name": "save_color_scheme",
-          "kind": "function"
-        },
-        {
-          "name": "load_color_scheme",
-          "kind": "function"
-        },
-        {
-          "name": "save_theme",
-          "kind": "function"
-        },
-        {
-          "name": "load_theme",
-          "kind": "function"
         }
       ]
     },
@@ -920,31 +936,6 @@
         {
           "name": "default",
           "kind": "component"
-        }
-      ]
-    },
-    "./tome.js": {
-      "path": "tome.ts",
-      "declarations": [
-        {
-          "name": "Tome",
-          "kind": "variable"
-        },
-        {
-          "name": "to_tome_pathname",
-          "kind": "function"
-        },
-        {
-          "name": "tomes_context",
-          "kind": "variable"
-        },
-        {
-          "name": "get_tome_by_name",
-          "kind": "function"
-        },
-        {
-          "name": "tome_context",
-          "kind": "variable"
         }
       ]
     }
