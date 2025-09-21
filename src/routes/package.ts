@@ -34,9 +34,10 @@ export const package_json: Package_Json = {
 		'@ryanatkn/gro': '>=0.165.0',
 		'@ryanatkn/moss': '*',
 		'@sveltejs/kit': '^2.26',
+		'esm-env': '^1',
 		svelte: '^5',
 	},
-	peerDependenciesMeta: {'@ryanatkn/gro': {optional: true}},
+	peerDependenciesMeta: {'@ryanatkn/gro': {optional: true}, 'esm-env': {optional: true}},
 	devDependencies: {
 		'@changesets/changelog-git': '^0.2.1',
 		'@ryanatkn/belt': '^0.34.1',
