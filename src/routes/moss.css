@@ -117,7 +117,7 @@
 .menu_item.selected {
 	/* TODO different patterns for border and bg? */
 	--border_color: var(--color_a_5);
-	background-color: var(--fg_1);
+	background-color: var(--bg_1);
 	z-index: 1;
 	cursor: default;
 }
@@ -126,12 +126,12 @@
 }
 .menu_item:hover {
 	--border_color: var(--border_color_3);
-	background-color: var(--fg_0);
+	background-color: var(--bg_0);
 }
 .menu_item:active,
 .menu_item.selected:hover {
 	--border_color: var(--border_color_3);
-	background-color: var(--fg_2);
+	background-color: var(--bg_2);
 }
 .menu_item.plain {
 	border: none;
@@ -174,7 +174,7 @@
 	font-weight: 500;
 	padding-left: var(--space_xs);
 	padding-right: var(--space_xs);
-	background-color: var(--fg_1);
+	background-color: var(--bg_1);
 	border-radius: var(--border_radius_xs);
 }
 a.chip {

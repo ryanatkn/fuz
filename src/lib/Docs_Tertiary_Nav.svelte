@@ -48,7 +48,7 @@
 		); /* needed with `overflow: auto` to avoid cutting off outline */
 		overflow: auto;
 		scrollbar-width: thin;
-		background-color: var(--fg_1);
+		background-color: var(--bg_1);
 	}
 
 	/* sync this breakpoint with `/docs/+layout` */

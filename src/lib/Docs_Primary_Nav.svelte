@@ -59,7 +59,7 @@
 		z-index: -1;
 		width: 100%;
 		height: 100%;
-		background-color: var(--fg_1);
+		background-color: var(--bg_1);
 	}
 
 	.content {

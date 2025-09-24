@@ -31,7 +31,7 @@
 		margin-bottom: 0;
 		overflow: auto;
 		scrollbar-width: thin;
-		background-color: var(--fg_1);
+		background-color: var(--bg_1);
 	}
 
 	.sidebar nav {
