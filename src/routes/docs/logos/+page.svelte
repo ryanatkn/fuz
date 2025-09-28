@@ -21,7 +21,6 @@
 		fuz_template_logo,
 		belt_logo,
 		gemini_logo,
-		ollama_logo,
 		claude_logo,
 		chatgpt_logo,
 	} from '$lib/logos.js';
@@ -133,10 +132,6 @@
 					><Svg data={gemini_logo} size="var(--icon_size_xl3)" /></a
 				>
 				<Code content={`<Svg data={gemini_logo} />`} />
-			</li>
-			<li>
-				<a href="https://ollama.com/"><Svg data={ollama_logo} size="var(--icon_size_xl3)" /></a>
-				<Code content={`<Svg data={ollama_logo} />`} />
 			</li>
 		</ul>
 	</section>
