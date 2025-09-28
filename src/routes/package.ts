@@ -223,7 +223,6 @@ export const src_json: Src_Json = {
 				{name: 'chatgpt_logo', kind: 'variable'},
 				{name: 'claude_logo', kind: 'variable'},
 				{name: 'gemini_logo', kind: 'variable'},
-				{name: 'ollama_logo', kind: 'variable'},
 			],
 		},
 		'./pkg.js': {path: 'pkg.ts', declarations: [{name: 'pkg_context', kind: 'variable'}]},
