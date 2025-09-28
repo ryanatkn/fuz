@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.146.0",
+  "version": "0.147.0",
   "modules": {
     "./alert.js": {
       "path": "alert.ts",
@@ -398,10 +398,6 @@
         },
         {
           "name": "gemini_logo",
-          "kind": "variable"
-        },
-        {
-          "name": "ollama_logo",
           "kind": "variable"
         }
       ]
