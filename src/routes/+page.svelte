@@ -40,14 +40,14 @@
 	];
 </script>
 
-<main class="box w_100">
-	<div class="box width_md mb_xl9">
+<main class="box width_100">
+	<div class="box width_upto_md mb_xl9">
 		<section class="box">
 			<h1 class="mb_sm" style:margin-top={MAIN_HEADER_MARGIN_TOP}>fuz</h1>
 			<div class="box mb_lg"><Svg data={fuz_logo} size="var(--icon_size_xl2)" /></div>
 			<blockquote class="shadow_bottom_sm px_xl bg">friendly user zystem 🧶</blockquote>
 			<div class="mb_lg p_xs2 shadow_md border_radius_sm">
-				<div class="width_sm panel p_lg shadow_inset_xs bg">
+				<div class="width_upto_sm panel p_lg shadow_inset_xs bg">
 					<p>
 						Fuz is a Svelte UI library with components and helpers for making modern websites. It
 						builds on my CSS framework <a href="https://moss.ryanatkn.com/">Moss</a>, which is based
@@ -96,7 +96,7 @@
 {#snippet package_thumbnail(project_item: Project_Item)}
 	<a class="thumbnail row bg px_md py_xs border_radius_sm mb_lg" href={project_item.url}
 		><Svg shrink={false} data={project_item.logo} size="var(--icon_size_lg)" />
-		<div class="pl_lg width_sm">
+		<div class="pl_lg width_upto_sm">
 			<div class="thumbnail_name">{project_item.name}</div>
 			<div class="thumbnail_description font_size_md text_color_3 font_weight_500">
 				{project_item.description}

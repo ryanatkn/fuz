@@ -24,7 +24,7 @@
 	<div class="docs_primary_nav" class:scrolled>
 		<div class="background" aria-hidden="true"></div>
 		<div class="content">
-			<nav aria-label="Primary">
+			<nav aria-label="Primary nav">
 				<Breadcrumb>
 					{#if breadcrumb_children}
 						{@render breadcrumb_children(true)}

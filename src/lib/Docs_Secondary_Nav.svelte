@@ -11,7 +11,7 @@
 </script>
 
 <aside class="docs_secondary_nav unstyled" class:sidebar>
-	<nav aria-label="Secondary">
+	<nav aria-label="Secondary nav">
 		<Docs_Menu {tomes} />
 	</nav>
 </aside>
