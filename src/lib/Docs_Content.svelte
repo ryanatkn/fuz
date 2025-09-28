@@ -16,7 +16,7 @@
 	const {tomes, pkg, repo_name, content, header}: Props = $props();
 </script>
 
-<div class="width_md">
+<div class="width_upto_md">
 	{#if header}
 		{@render header()}
 	{:else}

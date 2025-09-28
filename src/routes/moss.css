@@ -224,7 +224,7 @@ a.chip {
 .flex_1 {
 	flex: 1;
 }
-.flex_wrap {
+.flex_wrap_wrap {
 	flex-wrap: wrap;
 }
 .align_items_center {

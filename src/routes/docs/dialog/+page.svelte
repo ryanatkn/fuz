@@ -136,7 +136,7 @@
 	>
 		{#snippet children(close)}
 			<div class="box">
-				<div class="pane p_xl width_md">
+				<div class="pane p_xl width_upto_md">
 					{#if selected_layout === 'page'}
 						<p>
 							This is a <code>Dialog</code> with
@@ -242,7 +242,7 @@
 	}}
 >
 	{#snippet children(dialog)}
-		<div class="pane p_md width_md mx_auto">
+		<div class="pane p_md width_upto_md mx_auto">
 			<dialog.Component {...dialog.props} />
 		</div>
 	{/snippet}

@@ -13,7 +13,7 @@
 	// TODO standardize
 </script>
 
-<main class="width_md">
+<main class="width_upto_md">
 	<section>
 		<header class="box">
 			<h1 class="mb_xl5" style:margin-top={MAIN_HEADER_MARGIN_TOP}>
@@ -23,8 +23,8 @@
 		<Breadcrumb><Svg data={fuz_logo} size="var(--icon_size_sm)" /></Breadcrumb>
 	</section>
 	<Community_Links_Panel />
-	<section class="box w_100 mb_lg">
-		<div class="panel p_md width_md">
+	<section class="box width_100 mb_lg">
+		<div class="panel p_md width_upto_md">
 			<Package_Detail {pkg} />
 		</div>
 	</section>
