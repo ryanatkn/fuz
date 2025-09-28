@@ -7,6 +7,8 @@ import {BROWSER} from 'esm-env';
 import {Dimensions} from '$lib/dimensions.svelte.js';
 import {create_context} from '$lib/context_helpers.js';
 
+// TODO use $state.raw for the arrays here, maybe other data structure refactoring too
+
 export type Contextmenu_Params =
 	| Snippet
 	// TODO maybe this should be generic?
@@ -357,14 +359,14 @@ const query_contextmenu_params = (
 		}
 		el = el.parentElement;
 	}
-	// add "Copy text" entry if anything is selected and we have any other entries
+	// add "copy text" entry if anything is selected and we have any other entries
 	if (params) {
 		const text = window.getSelection()?.toString();
 		if (text) {
 			params.unshift({
 				snippet: 'text',
 				props: {
-					content: 'Copy text',
+					content: 'copy text',
 					icon: '📋',
 					run: () => void navigator.clipboard.writeText(text),
 				},

@@ -2,7 +2,7 @@
 	import type {Snippet} from 'svelte';
 	import {slugify} from '@ryanatkn/belt/path.js';
 	import {page} from '$app/state';
-	import {base} from '$app/paths';
+	import {resolve} from '$app/paths';
 
 	import Tome_Header from '$lib/Tome_Header.svelte';
 	import {tome_context, type Tome} from '$lib/tome.js';
@@ -24,11 +24,11 @@
 
 	const slug = slugify(tome.name);
 
-	const at_root = $derived(page.url.pathname === base + docs_path);
+	const at_root = $derived(page.url.pathname === resolve(docs_path as any)); // TODO @many check sometime if typecast is still needed
 </script>
 
 <section
-	class="tome_content width_md mb_xl9"
+	class="tome_content width_upto_md mb_xl9"
 	use:intersect={at_root
 		? ({intersecting}) => {
 				if (intersecting) {

@@ -21,7 +21,6 @@
 		fuz_template_logo,
 		belt_logo,
 		gemini_logo,
-		ollama_logo,
 		claude_logo,
 		chatgpt_logo,
 	} from '$lib/logos.js';
@@ -41,7 +40,9 @@
 		</p>
 	</section>
 	<section>
-		<ul class="display_flex flex_wrap justify_content_center gap_lg text_align_center unstyled">
+		<ul
+			class="display_flex flex_wrap_wrap justify_content_center gap_lg text_align_center unstyled"
+		>
 			<li>
 				<a href="https://www.zzz.software/"><Svg data={zzz_logo} size="var(--icon_size_xl3)" /></a>
 				<Code content={`<Svg data={zzz_logo} />`} />
@@ -131,10 +132,6 @@
 					><Svg data={gemini_logo} size="var(--icon_size_xl3)" /></a
 				>
 				<Code content={`<Svg data={gemini_logo} />`} />
-			</li>
-			<li>
-				<a href="https://ollama.com/"><Svg data={ollama_logo} size="var(--icon_size_xl3)" /></a>
-				<Code content={`<Svg data={ollama_logo} />`} />
 			</li>
 		</ul>
 	</section>

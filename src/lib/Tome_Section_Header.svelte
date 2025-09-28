@@ -6,7 +6,7 @@
 	import {onDestroy, type Snippet} from 'svelte';
 	import type {SvelteHTMLElements} from 'svelte/elements';
 	import {page} from '$app/state';
-	import {base} from '$app/paths';
+	import {resolve} from '$app/paths';
 	import {slugify} from '@ryanatkn/belt/path.js';
 
 	import Hashlink from '$lib/Hashlink.svelte';
@@ -36,7 +36,7 @@
 
 	// Add section titles only if not on the root page.
 	// TODO make reactive?
-	if (page.url.pathname !== base + docs_links.root_path) {
+	if (page.url.pathname !== resolve(docs_links.root_path as any)) {
 		docs_links.add(id, text, slug, tag);
 		onDestroy(() => {
 			docs_links.remove(id);

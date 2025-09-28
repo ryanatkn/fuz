@@ -72,7 +72,8 @@
 	<header>
 		<div class="variables_header">
 			<p>variables: {light_count} light, {dark_count} dark</p>
-			<button type="button" class="w_100" onclick={add_variable} disabled>add a variable</button>
+			<button type="button" class="width_100" onclick={add_variable} disabled>add a variable</button
+			>
 		</div>
 		<form>
 			<label>
@@ -105,7 +106,7 @@
 {#if selected_variable}
 	<Dialog onclose={() => (selected_variable = null)}>
 		{#snippet children(close)}
-			<div class="pane p_md width_md mx_auto">
+			<div class="pane p_md width_upto_md mx_auto">
 				<div class="panel p_lg box">
 					<Style_Variable_Detail variable={selected_variable} />
 					<aside>⚠️ This is unfinished and will change.</aside>

@@ -1,13 +1,20 @@
-<script lang="ts">
+<script lang="ts" generics="T extends string = 'span'">
 	import type {Snippet} from 'svelte';
 	import {contextmenu_action} from '$lib/contextmenu_state.svelte.js';
+	import type {SvelteHTMLElements} from 'svelte/elements';
 
-	interface Props {
+	const {
+		tag = 'span' as T, // TODO why is casting needed?
+		attrs,
+		entries,
+		children,
+	}: {
+		// TODO custom tag?
+		tag?: T;
+		attrs?: SvelteHTMLElements[T];
 		entries: Snippet;
 		children: Snippet;
-	}
-
-	const {entries, children}: Props = $props();
+	} = $props();
 
 	// Ideally this wouldn't have a wrapper element,
 	// but I don't see a decent way to map DOM click events
@@ -17,4 +24,6 @@
 	// but probably wait until Svelte 5 has the successor to actions
 </script>
 
-<span use:contextmenu_action={entries} class="display_contents">{@render children()}</span>
+<svelte:element this={tag} class="display_contents" {...attrs} use:contextmenu_action={entries}
+	>{@render children()}</svelte:element
+>

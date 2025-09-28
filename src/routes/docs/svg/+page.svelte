@@ -47,11 +47,11 @@
 			<a href="https://moss.ryanatkn.com/docs/colors#color-variables">Moss colors docs</a>)
 		</p>
 		<Code content={`<Svg data={fuz_logo} fill="var(--color_d_5)" />`} />
-		<p class="width_sm">
+		<p class="width_upto_sm">
 			<Svg data={fuz_logo} fill="var(--color_d_5)" />
 		</p>
 		<Code content={`<Svg data={fuz_logo} fill="var(--color_b_5)" />`} />
-		<p class="width_sm">
+		<p class="width_upto_sm">
 			<Svg data={fuz_logo} fill="var(--color_b_5)" />
 		</p>
 		<p>
@@ -60,7 +60,7 @@
 		<Code
 			content={`<span style:--text_color="var(--color_i_5)"><Svg data={github_logo} /></span>`}
 		/>
-		<p class="width_sm">
+		<p class="width_upto_sm">
 			<span style:--text_color="var(--color_i_5)"><Svg data={github_logo} /></span>
 		</p>
 	</Tome_Section>

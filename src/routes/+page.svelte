@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {base} from '$app/paths';
+	import {resolve} from '$app/paths';
 
 	import Docs_Footer from '$lib/Docs_Footer.svelte';
 	import Card from '$lib/Card.svelte';
@@ -40,14 +40,14 @@
 	];
 </script>
 
-<main class="box w_100">
-	<div class="box width_md mb_xl9">
+<main class="box width_100">
+	<div class="box width_upto_md mb_xl9">
 		<section class="box">
 			<h1 class="mb_sm" style:margin-top={MAIN_HEADER_MARGIN_TOP}>fuz</h1>
 			<div class="box mb_lg"><Svg data={fuz_logo} size="var(--icon_size_xl2)" /></div>
 			<blockquote class="shadow_bottom_sm px_xl bg">friendly user zystem 🧶</blockquote>
 			<div class="mb_lg p_xs2 shadow_md border_radius_sm">
-				<div class="width_sm panel p_lg shadow_inset_xs bg">
+				<div class="width_upto_sm panel p_lg shadow_inset_xs bg">
 					<p>
 						Fuz is a Svelte UI library with components and helpers for making modern websites. It
 						builds on my CSS framework <a href="https://moss.ryanatkn.com/">Moss</a>, which is based
@@ -62,7 +62,7 @@
 						but the eventual goal is to be fully-featured with high flexibility.
 					</p>
 					<p>
-						To learn more see <a href="{base}/docs">the docs</a>
+						To learn more see <a href={resolve('/docs')}>the docs</a>
 						and <a href="https://github.com/ryanatkn/fuz#readme">readme</a>. Feel free to take the
 						ideas and <a href="https://github.com/ryanatkn/fuz">code</a> for your own purposes.
 					</p>
@@ -71,7 +71,7 @@
 		</section>
 		<section>
 			<!-- TODO add color variants -->
-			<Card href="{base}/docs">docs{#snippet icon()}🧶{/snippet}</Card>
+			<Card href={resolve('/docs')}>docs{#snippet icon()}🧶{/snippet}</Card>
 		</section>
 		<section class="panel p_lg shadow_inset_xs">
 			<!-- TODO ideally this wouldn't duplicate metadata like descriptions, but adding fuz_gitops to this repo is heavy -->
@@ -85,7 +85,7 @@
 		<section>
 			<Docs_Footer {pkg}>
 				{#snippet logo_header()}
-					<a href="{base}/about" class="mb_xs">about</a>
+					<a href={resolve('/about')} class="mb_xs">about</a>
 				{/snippet}
 				<Hidden_Personal_Links />
 			</Docs_Footer>
@@ -96,7 +96,7 @@
 {#snippet package_thumbnail(project_item: Project_Item)}
 	<a class="thumbnail row bg px_md py_xs border_radius_sm mb_lg" href={project_item.url}
 		><Svg shrink={false} data={project_item.logo} size="var(--icon_size_lg)" />
-		<div class="pl_lg width_sm">
+		<div class="pl_lg width_upto_sm">
 			<div class="thumbnail_name">{project_item.name}</div>
 			<div class="thumbnail_description font_size_md text_color_3 font_weight_500">
 				{project_item.description}

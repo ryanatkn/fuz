@@ -1,5 +1,6 @@
-import {base} from '$app/paths';
+import {resolve} from '$app/paths';
 import {SvelteSet} from 'svelte/reactivity';
+import {ensure_end, ensure_start} from '@ryanatkn/belt/string.js';
 
 import {create_context} from '$lib/context_helpers.js';
 
@@ -11,7 +12,7 @@ export const to_docs_path_info = (
 	root_path = DEFAULT_LIBRARY_PATH,
 ): {path: string; path_is_selected: boolean; path_segment: string | undefined} => {
 	const path_segment = pathname.split('/').at(-1);
-	const path = base + root_path + '/' + slug;
+	const path = resolve((ensure_end(ensure_start(root_path, '/'), '/') + slug) as any); // TODO @many check sometime if typecast is still needed
 	const path_is_selected = path_segment === slug; // messy but works
 	return {path, path_is_selected, path_segment};
 };
@@ -30,7 +31,7 @@ export interface Docs_Link {
 export class Docs_Links {
 	readonly root_path: string;
 
-	docs_links: Array<Docs_Link> = $state([]);
+	docs_links: Array<Docs_Link> = $state.raw([]);
 
 	readonly slugs_onscreen: SvelteSet<string> = new SvelteSet();
 
@@ -42,16 +43,16 @@ export class Docs_Links {
 		const index = this.docs_links.findIndex((t) => t.id === id);
 		const v: Docs_Link = {id, text, slug, tag};
 		if (index === -1) {
-			this.docs_links.push(v);
+			this.docs_links = [...this.docs_links, v];
 		} else {
-			this.docs_links[index] = v;
+			this.docs_links = this.docs_links.map((link, i) => (i === index ? v : link));
 		}
 	}
 
 	remove(id: string): boolean {
 		const index = this.docs_links.findIndex((t) => t.id === id);
 		if (index === -1) return false;
-		this.docs_links.splice(index, 1);
+		this.docs_links = this.docs_links.filter((_, i) => i !== index);
 		return true;
 	}
 }

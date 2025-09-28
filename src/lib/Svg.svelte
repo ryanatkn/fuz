@@ -31,7 +31,7 @@
 		/**
 		 * Overrides `data.fill`.
 		 */
-		fill?: string;
+		fill?: string | null;
 		/**
 		 * Sets both the `width` and `height` of the svg. Overridden by the `width` and `height` props.
 		 */
@@ -78,6 +78,8 @@
 			? ensure_end(data.attrs.style, ';') + ' ' + attrs.style
 			: (data.attrs?.style ?? attrs?.style),
 	);
+
+	// TODO @html making me nervous
 </script>
 
 <svg
@@ -86,7 +88,7 @@
 	{...attrs}
 	aria-label={label ?? data.label}
 	class:display_inline_block={inline}
-	class:relative={inline}
+	class:position_relative={inline}
 	style:width={final_width}
 	style:height={final_height}
 	style:top={inline ? '0.1em' : undefined}

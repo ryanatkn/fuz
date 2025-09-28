@@ -11,13 +11,15 @@
 	}
 
 	const {inline, running = true, item_attrs, attrs, children}: Props = $props();
+
+	// TODO maybe switch to an `inline` class instead of setting multiple classes
 </script>
 
 <span
 	{...attrs}
 	class="pending_animation {attrs?.class}"
 	class:running
-	class:flex={!inline}
+	class:display_flex={!inline}
 	class:display_inline_flex={inline}
 	class:align_items_center={inline}
 	><span {...item_attrs} style:animation-delay="0s"

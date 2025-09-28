@@ -27,9 +27,9 @@
 	let value = $state('');
 
 	// TODO very hacky
-	const text1 = `If a contextmenu is triggered on selected text, it includes a Copy text entry.  Try selecting text and then opening the contextmenu on it.`;
-	const text2 = `If a contextmenu is triggered on selected text, it includes a Copy text entry.\n\n\nTry selecting text and then opening the contextmenu on it.`;
-	const text3 = `If a contextmenu is triggered on selected text, it includes a Copy text entry.
+	const text1 = `If a contextmenu is triggered on selected text, it includes a 'copy text' entry.  Try selecting text and then opening the contextmenu on it.`;
+	const text2 = `If a contextmenu is triggered on selected text, it includes a 'copy text' entry.\n\n\nTry selecting text and then opening the contextmenu on it.`;
+	const text3 = `If a contextmenu is triggered on selected text, it includes a 'copy text' entry.
 
 Try selecting text and then opening the contextmenu on it.`;
 
@@ -48,7 +48,7 @@ Try selecting text and then opening the contextmenu on it.`;
 			<div class="panel p_md" class:color_g_5={highlighted}>
 				<div bind:this={text_el} class="mb_lg">
 					<p>
-						If a contextmenu is triggered on selected text, it includes a <code>Copy text</code>
+						If a contextmenu is triggered on selected text, it includes a <code>copy text</code>
 						entry.
 					</p>
 					<p>

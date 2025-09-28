@@ -32,6 +32,7 @@
 			'var(--color_g_5)',
 			'var(--color_h_5)',
 			'var(--color_i_5)',
+			'var(--color_j_5)',
 		],
 		seed = minute_of_day(),
 		random = create_random_alea(seed),
