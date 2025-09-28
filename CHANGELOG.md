@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.147.0
+
+### Minor Changes
+
+- upgrade @ryanatkn/moss@0.36 ([#84](https://github.com/ryanatkn/fuz/pull/84))
+
 ## 0.146.0
 
 ### Minor Changes
