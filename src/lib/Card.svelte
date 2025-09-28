@@ -72,7 +72,7 @@
 		align-items: center;
 		padding: var(--space_lg);
 		width: var(--card_width);
-		background-color: var(--bg_1);
+		background-color: var(--fg_1);
 		border-radius: var(--border_radius, var(--border_radius_md));
 		text-decoration: none;
 		text-align: left;

@@ -24,7 +24,7 @@
 	<div class="docs_primary_nav" class:scrolled>
 		<div class="background" aria-hidden="true"></div>
 		<div class="content">
-			<nav aria-label="Primary">
+			<nav aria-label="Primary nav">
 				<Breadcrumb>
 					{#if breadcrumb_children}
 						{@render breadcrumb_children(true)}
@@ -59,7 +59,7 @@
 		z-index: -1;
 		width: 100%;
 		height: 100%;
-		background-color: var(--bg_1);
+		background-color: var(--fg_1);
 	}
 
 	.content {

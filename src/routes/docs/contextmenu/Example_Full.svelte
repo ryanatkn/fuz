@@ -229,7 +229,7 @@
 <style>
 	.position {
 		border-radius: var(--border_radius_md);
-		background-color: var(--bg_1);
+		background-color: var(--fg_1);
 		display: flex;
 		border: transparent var(--border_width_4) double;
 	}

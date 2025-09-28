@@ -23,6 +23,7 @@
 	const docs_links = docs_links_context.get();
 </script>
 
+<!-- TODO probably add a `nav` wrapper? around which? -->
 <aside class="docs_tertiary_nav unstyled">
 	{#if tomes_related_to_selected?.length}
 		<Docs_Menu tomes={tomes_related_to_selected}>
