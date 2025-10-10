@@ -40,10 +40,10 @@ export const package_json: Package_Json = {
 	peerDependenciesMeta: {'@ryanatkn/gro': {optional: true}, 'esm-env': {optional: true}},
 	devDependencies: {
 		'@changesets/changelog-git': '^0.2.1',
-		'@ryanatkn/belt': '^0.34.1',
+		'@ryanatkn/belt': '^0.35.1',
 		'@ryanatkn/eslint-config': '^0.8.0',
-		'@ryanatkn/fuz_code': '^0.26.0',
-		'@ryanatkn/gro': '^0.167.1',
+		'@ryanatkn/fuz_code': '^0.27.1',
+		'@ryanatkn/gro': '^0.169.1',
 		'@ryanatkn/moss': '^0.36.0',
 		'@sveltejs/adapter-static': '^3.0.9',
 		'@sveltejs/kit': '^2.37.0',
@@ -78,6 +78,7 @@ export const package_json: Package_Json = {
 	exports: {
 		'./package.json': './package.json',
 		'./*.js': {types: './dist/*.d.ts', default: './dist/*.js'},
+		'./*.ts': {types: './dist/*.d.ts', default: './dist/*.js'},
 		'./*.svelte': {
 			types: './dist/*.svelte.d.ts',
 			svelte: './dist/*.svelte',
