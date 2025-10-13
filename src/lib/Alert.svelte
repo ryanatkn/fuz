@@ -73,7 +73,6 @@
 		min-height: var(--message_min_height);
 		width: 100%;
 		color: var(--text_color);
-		font-weight: 700;
 		font-size: var(--font_size_md);
 		border-width: var(--border_width_1);
 		border-style: var(--border_style);
