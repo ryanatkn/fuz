@@ -53,7 +53,6 @@
 		onMount(() => {
 			if (mounted) {
 				console.warn('more than one Themed was mounted'); // eslint-disable-line no-console
-				// console.warn('more than one Themed was mounted, use Themed_Scope if this was intended'); // TODO @many revisit Themed_Scope
 			}
 			mounted = true;
 			return () => {
@@ -66,11 +65,6 @@
 	 * `Themed` adds global color scheme and theme support to the page.
 	 * It also sets in the Svelte context a reactive `themer` containing the theme and color scheme.
 	 */
-
-	//  TODO @many revisit Themed_Scope
-	//  * To scope the theme to only a part of the page, use `Themed_Scope`.
-	//  * There is some duplicated code between the two,
-	//  * but combining them was too complicated both internally and externally.
 
 	themer_context.set(themer);
 

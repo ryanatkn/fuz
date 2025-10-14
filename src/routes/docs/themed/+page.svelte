@@ -13,7 +13,6 @@
 	import Theme_Input from '$lib/Theme_Input.svelte';
 	import Theme_Form from '$routes/Theme_Form.svelte';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
-	// import Themed_Scope from '$routes/docs/themed/Themed_Scope.svelte'; // TODO @many revisit Themed_Scope
 	import {themer_context} from '$lib/themer.svelte.js';
 
 	const LIBRARY_ITEM_NAME = 'Themed';
@@ -63,8 +62,6 @@
 					<li><code>load_theme</code></li>
 					<li><code>save_theme</code></li>
 				</ul>
-				<p>A feature to support partial page theming is planned with <code>Themed_Scope</code>.</p>
-				<!-- TODO @many revisit Themed_Scope <p>See <code>Themed_Scope</code> below to theme one branch of the DOM tree.</p> -->
 			</aside>
 		</Details>
 		<Details>
@@ -173,76 +170,6 @@
 			user-defined color schemes, but it's more involved.
 		</aside>
 	</Tome_Section>
-	<!-- TODO @many revisit Themed_Scope
-	<Tome_Section class="theme">
-		<Tome_Section_Header text="Scoped themes"/>
-		<Details>
-			{#snippet summary()}⚠️ Scoped themes are a work in progress and may not be supported depending
-				on complexity. It shouldn't worsen the unscoped API.{/snippet}
-			<div class="mb_lg">
-				<p>Scope a theme to one branch of the DOM tree with <code>Themed_Scope</code>:</p>
-				<Code content={`import Themed_Scope from '@ryanatkn/fuz/Themed_Scope.svelte';`} lang="ts" />
-				<Code content={`<Themed_Scope {selected_theme}>\n\t\t...\n</Themed_Scope>`} />
-			</div>
-			<div>
-				{#each themes as theme (theme.name)}
-					TODO @many proper equality check, won't work when we allow editing, need an id or unique names and a deep equality check
-					{@const selected =
-						themer.color_scheme === 'light' && theme.name === themer.theme.name}
-					<Themed_Scope
-						themer={new Themer(
-							untrack(() => theme),
-							'light',
-						)}
-					>
-						<div class="box row p_sm">
-							<button
-								type="button"
-								class="icon_button"
-								class:selected
-								onclick={() => {
-									select_theme(theme);
-									themer.color_scheme = 'light';
-								}}
-								>{#if selected}★{:else}☆{/if}</button
-							>
-							<div style:flex="1" class="p_md">
-								the <code>{theme.name}</code> theme
-							</div>
-						</div>
-					</Themed_Scope>
-				{/each}
-				{#each themes as theme (theme.name)}
-					@many proper equality check, won't work when we allow editing, need an id or unique names and a deep equality check
-					{@const selected =
-						themer.color_scheme === 'dark' && theme.name === themer.theme.name}
-					<Themed_Scope
-						themer={new Themer(
-							untrack(() => theme),
-							'dark',
-						)}
-					>
-						<div class="box row p_sm">
-							<button
-								type="button"
-								class="icon_button"
-								class:selected
-								onclick={() => {
-									select_theme(theme);
-									themer.color_scheme = 'dark';
-								}}
-								>{#if selected}★{:else}☆{/if}</button
-							>
-							<div style:flex="1" class="p_md">
-								the <code>{theme.name}</code> theme
-							</div>
-						</div>
-					</Themed_Scope>
-				{/each}
-			</div>
-		</Details>
-	</Tome_Section>
-	-->
 	<Tome_Section>
 		<Tome_Section_Header text="Example usage" />
 		<p>Themes are plain CSS that can be sourced in a variety of ways.</p>
@@ -288,9 +215,6 @@
 		<p>
 			<code>Themed</code> sets the <code>themer</code> in the Svelte context:
 		</p>
-		<!-- TODO @many revisit Themed_Scope
-		 	// the nearest \`Themed\` or \`Themed_Scope\` ancestor:
-		-->
 		<Code
 			content={`// get values from the Svelte context provided by
 // the nearest \`Themed\` ancestor:
