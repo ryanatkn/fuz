@@ -2,22 +2,26 @@
 	import type {Snippet} from 'svelte';
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
-	interface Props {
+	const {
+		inline,
+		running = true,
+		item_attrs,
+		class: class_prop,
+		children,
+		...rest
+	}: SvelteHTMLElements['span'] & {
 		inline?: boolean;
 		running?: boolean;
 		item_attrs?: SvelteHTMLElements['span'];
-		attrs?: SvelteHTMLElements['span'];
 		children?: Snippet<[index: number]>;
-	}
-
-	const {inline, running = true, item_attrs, attrs, children}: Props = $props();
+	} = $props();
 
 	// TODO maybe switch to an `inline` class instead of setting multiple classes
 </script>
 
 <span
-	{...attrs}
-	class="pending_animation {attrs?.class}"
+	{...rest}
+	class="pending_animation {class_prop}"
 	class:running
 	class:display_flex={!inline}
 	class:display_inline_flex={inline}

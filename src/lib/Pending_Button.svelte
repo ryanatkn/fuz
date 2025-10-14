@@ -2,19 +2,26 @@
 	import type {Snippet} from 'svelte';
 
 	import Pending_Animation from '$lib/Pending_Animation.svelte';
+	import type {SvelteHTMLElements} from 'svelte/elements';
 
-	interface Props {
+	const {
+		pending,
+		onclick,
+		running,
+		title: title_prop,
+		disabled: disabled_prop,
+		animation,
+		children,
+		...rest
+	}: SvelteHTMLElements['button'] & {
 		pending: boolean;
 		onclick: () => void;
 		running?: boolean;
 		title?: string;
 		disabled?: boolean;
-		attrs?: any;
 		animation?: Snippet;
 		children: Snippet;
-	}
-
-	const {pending, onclick, running, title, disabled, attrs, animation, children}: Props = $props();
+	} = $props();
 
 	let el: HTMLButtonElement | undefined = $state();
 
@@ -26,9 +33,9 @@
 <button
 	bind:this={el}
 	type="button"
-	{...attrs}
-	disabled={disabled ?? attrs?.disabled ?? pending}
-	title={title ?? attrs?.title}
+	{...rest}
+	disabled={disabled_prop ?? pending}
+	title={title_prop}
 	class:pending
 	{onclick}
 >
