@@ -54,7 +54,7 @@
 			content={`<Pending_Animation attrs={{class: 'font_size_xl3'}}${to_boolean_attr('running', running)} />`}
 		/>
 		<div class="align_items_flex_start" role="none">
-			<Pending_Animation attrs={{class: 'font_size_xl3'}} {running} />
+			<Pending_Animation class="font_size_xl3" {running} />
 		</div>
 		<p>Size is inherited by default:</p>
 		<Code

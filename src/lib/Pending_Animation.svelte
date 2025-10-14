@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type {Omit_Strict} from '@ryanatkn/belt/types.js';
 	import type {Snippet} from 'svelte';
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
@@ -9,7 +10,7 @@
 		class: class_prop,
 		children,
 		...rest
-	}: SvelteHTMLElements['span'] & {
+	}: Omit_Strict<SvelteHTMLElements['span'], 'children'> & {
 		inline?: boolean;
 		running?: boolean;
 		item_attrs?: SvelteHTMLElements['span'];
