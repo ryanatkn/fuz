@@ -13,11 +13,8 @@
 	import {docs_links_context, to_docs_path_info} from '$lib/docs_helpers.svelte.js';
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
-	interface Props {
-		attrs?: SvelteHTMLElements['h1'] | SvelteHTMLElements['h2']; // eslint-disable-line @typescript-eslint/no-duplicate-type-constituents
-	}
-
-	const {attrs}: Props = $props();
+	// eslint-disable-next-line @typescript-eslint/no-duplicate-type-constituents
+	const props: SvelteHTMLElements['h1'] | SvelteHTMLElements['h2'] = $props();
 
 	const tome = tome_context.get(); // TODO make reactive?
 	if (DEV && !tome) throw Error('Tome_Header expects a tome in context'); // eslint-disable-line @typescript-eslint/no-unnecessary-condition
@@ -36,7 +33,7 @@
 	const {path, path_is_selected} = $derived(to_docs_path_info(slug, page.url.pathname));
 </script>
 
-<svelte:element this={path_is_selected ? 'h1' : 'h2'} {...attrs} class="tome_header">
+<svelte:element this={path_is_selected ? 'h1' : 'h2'} {...props} class="tome_header">
 	{#if path_is_selected}
 		{@render content(tome.name)}
 	{:else}

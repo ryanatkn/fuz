@@ -13,14 +13,17 @@
 	import {register_section_header_context} from '$lib/Tome_Section.svelte';
 	import {docs_links_context, type Docs_Link_Tag} from '$lib/docs_helpers.svelte.js';
 
-	interface Props {
+	const {
+		text,
+		tag = 'h3',
+		children,
+		...rest
+	}: // eslint-disable-next-line @typescript-eslint/no-duplicate-type-constituents
+	(SvelteHTMLElements['h3'] | SvelteHTMLElements['h4']) & {
 		text: string;
 		tag?: Docs_Link_Tag;
-		attrs?: SvelteHTMLElements['h3'];
 		children?: Snippet;
-	}
-
-	const {text, tag = 'h3', attrs, children}: Props = $props();
+	} = $props();
 
 	const slug = slugify(text);
 
@@ -45,7 +48,7 @@
 </script>
 
 <header>
-	<svelte:element this={tag} {...attrs} class:tome_section_header={true}>
+	<svelte:element this={tag} {...rest} class:tome_section_header={true}>
 		<div>
 			{#if children}
 				{@render children()}
