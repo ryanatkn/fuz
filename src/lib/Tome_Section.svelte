@@ -12,12 +12,12 @@
 	import {intersect} from '$lib/intersect.js';
 	import {docs_links_context} from '$lib/docs_helpers.svelte.js';
 
-	interface Props {
-		attrs?: SvelteHTMLElements['section'];
+	const {
+		children,
+		...rest
+	}: SvelteHTMLElements['section'] & {
 		children: Snippet;
-	}
-
-	const {attrs, children}: Props = $props();
+	} = $props();
 
 	const docs_links = docs_links_context.get();
 
@@ -29,7 +29,7 @@
 </script>
 
 <section
-	{...attrs}
+	{...rest}
 	use:intersect={({intersecting}) => {
 		if (!slug) {
 			if (DEV) console.error('Tome_Section_Header must be a child of Tome_Section'); // eslint-disable-line no-console
