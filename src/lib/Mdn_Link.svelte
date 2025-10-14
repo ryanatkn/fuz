@@ -6,16 +6,18 @@
 	import Svg from '$lib/Svg.svelte';
 	import {mdn_logo} from '$lib/logos.js';
 
-	interface Props {
+	const {
+		path,
+		children,
+		class: class_prop,
+		...rest
+	}: SvelteHTMLElements['a'] & {
 		/**
 		 * @example Web/HTML/Element
 		 */
 		path: string;
-		attrs?: SvelteHTMLElements['a'];
 		children?: Snippet;
-	}
-
-	const {path, attrs, children}: Props = $props();
+	} = $props();
 
 	const href = $derived(
 		path.startsWith('https://')
@@ -26,7 +28,7 @@
 	const final_children = $derived(children ?? strip_end(path, '/').split('/').at(-1)!);
 </script>
 
-<a {...attrs} {href} class="chip white_space_nowrap"
+<a {...rest} {href} class="chip white_space_nowrap {class_prop}"
 	><Svg data={mdn_logo} inline size="var(--icon_size_xs)" attrs={{class: 'mx_xs3'}} />
 	{#if typeof final_children === 'string'}
 		<span class="font_family_mono">{final_children}</span>

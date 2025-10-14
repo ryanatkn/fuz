@@ -8,23 +8,20 @@
 	import {get_tome_by_name} from '$lib/tome.js';
 	import {DEFAULT_LIBRARY_PATH} from '$lib/docs_helpers.svelte.js';
 
-	interface Props {
-		name: string; // TODO type, generate from `tomes`?
-		docs_path?: string;
-		hash?: string;
-		chip?: boolean;
-		attrs?: SvelteHTMLElements['a'];
-		children?: Snippet;
-	}
-
 	const {
 		name,
 		docs_path = DEFAULT_LIBRARY_PATH,
 		hash,
 		chip = true,
-		attrs,
 		children,
-	}: Props = $props();
+		...rest
+	}: SvelteHTMLElements['a'] & {
+		name: string; // TODO type, generate from `tomes`?
+		docs_path?: string;
+		hash?: string;
+		chip?: boolean;
+		children?: Snippet;
+	} = $props();
 
 	if (DEV) get_tome_by_name(name); // throws if not found
 
@@ -32,7 +29,7 @@
 </script>
 
 <a
-	{...attrs}
+	{...rest}
 	class:chip
 	href={resolve(`${docs_path}/${slugify(name)}${hash ? `#${hash}` : ''}` as any)}
 	>{#if children}{@render children()}{:else}{name}{/if}</a
