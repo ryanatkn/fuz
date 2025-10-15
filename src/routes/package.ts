@@ -354,6 +354,7 @@ export const src_json: Src_Json = {
 			declarations: [{name: 'default', kind: 'component'}],
 		},
 		'./Docs.svelte': {path: 'Docs.svelte', declarations: [{name: 'default', kind: 'component'}]},
+		'./Glyph.svelte': {path: 'Glyph.svelte', declarations: [{name: 'default', kind: 'component'}]},
 		'./Hashlink.svelte': {
 			path: 'Hashlink.svelte',
 			declarations: [{name: 'default', kind: 'component'}],

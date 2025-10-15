@@ -9,7 +9,15 @@
 	/**
 	 * Like `details` but renders children lazily by default.
 	 */
-	interface Props {
+
+	let {
+		open = $bindable(),
+		eager,
+		summary_attrs,
+		summary,
+		children,
+		...rest
+	}: SvelteHTMLElements['details'] & {
 		open?: boolean;
 		/**
 		 * Children are lazily rendered by default,
@@ -19,18 +27,15 @@
 		 * Consider a `<details>` element instead of making this component eager.
 		 */
 		eager?: boolean;
-		attrs?: SvelteHTMLElements['details'];
 		summary: Snippet;
 		summary_attrs?: SvelteHTMLElements['summary'];
 		children: Snippet;
-	}
-
-	let {open = $bindable(), eager, attrs, summary_attrs, summary, children}: Props = $props();
+	} = $props();
 
 	// TODO why doesn't the slide out work?
 </script>
 
-<details {...attrs} bind:open>
+<details {...rest} bind:open>
 	<summary {...summary_attrs}>{@render summary()}</summary>
 	{#if eager}
 		{@render children()}

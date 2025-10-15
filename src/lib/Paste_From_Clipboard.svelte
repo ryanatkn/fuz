@@ -4,13 +4,16 @@
 
 	// TODO @many should this have the Button suffix?
 
-	interface Props {
+	const {
+		onpaste,
+		onerror,
+		children,
+		...rest
+	}: SvelteHTMLElements['button'] & {
 		onpaste: (text: string) => void;
 		onerror?: (error: Error) => void;
-		attrs?: SvelteHTMLElements['button'];
 		children?: Snippet;
-	}
-	const {onpaste, onerror, attrs, children}: Props = $props();
+	} = $props();
 
 	// TODO add docs entry, see also Copy_To_Clipboard.svelte
 </script>
@@ -18,7 +21,7 @@
 <button
 	type="button"
 	title="paste from clipboard"
-	{...attrs}
+	{...rest}
 	onclick={async () => {
 		try {
 			const text = await navigator.clipboard.readText();
