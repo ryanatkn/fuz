@@ -11,6 +11,7 @@
 	This is the recommended default because:
 	- Simpler, more maintainable code (~220 lines vs ~430)
 	- No mobile-specific hacks or edge cases
+	- Supports navigator.vibrate() haptic feedback (works because triggered from direct user event)
 	- Easier to understand and customize
 	- Most web apps target desktop browsers
 

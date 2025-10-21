@@ -321,9 +321,9 @@ export const open_contextmenu = (
 	const params = query_contextmenu_params(target);
 	if (!params?.length) return false;
 	contextmenu.open(params, x, y);
-	// Unfortunately `vibrate` this gets blocked by some (all?) browsers the way we're doing it
-	// outside of a user interaction in a custom `longpress` gesture that triggers on a timeout,
-	// which exists only because iOS doesn't support the contextmenu event.
+	// `navigator.vibrate()` works with the simplified `Contextmenu_Root` (triggered from direct user event),
+	// but gets blocked when used with `Contextmenu_Root_For_Safari_Compatibility` because the longpress
+	// workaround triggers from a timeout rather than a direct user interaction.
 	if (BROWSER && (navigator.vibrate as unknown)) {
 		navigator.vibrate(CONTEXTMENU_OPEN_VIBRATE_DURATION);
 	}

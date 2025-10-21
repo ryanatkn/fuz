@@ -43,7 +43,10 @@
 			Has edge cases and complexity due to working around platform limitations (see
 			<a href="https://bugs.webkit.org/show_bug.cgi?id=213953">WebKit bug #213953</a>)
 		</li>
-		<li>Breaks <span class="font_family_mono">navigator.vibrate</span> on mobile browsers</li>
+		<li>
+			Browsers block <span class="font_family_mono">navigator.vibrate</span> haptic feedback due
+			to longpress timeout workaround
+		</li>
 		<li>
 			<strong>Opt into this version</strong> only if you need iOS Safari support and are willing to accept
 			the added complexity
@@ -86,10 +89,10 @@
 		because iOS does not support this web standard as of 2025 as described in
 		<a href="https://bugs.webkit.org/show_bug.cgi?id=213953">this WebKit bug report</a>. The Fuz
 		implementation therefore has hacks that may cause corner case bugs on various devices and
-		browsers, and it breaks <Mdn_Link path="Web/API/Navigator/vibrate"
+		browsers, and it calls <Mdn_Link path="Web/API/Navigator/vibrate"
 			><span class="font_family_mono">navigator.vibrate</span></Mdn_Link
-		> on all mobile browsers that I've tested because it triggers the gesture on a timeout, not a user
-		action.
+		> for haptic feedback but browsers block it because the gesture triggers on a timeout rather than
+		a direct user action.
 	</p>
 	<p>
 		When you rightclick or longpress inside a <code>Contextmenu_Root</code>, it searches for
@@ -129,10 +132,10 @@
 			opened it
 		</li>
 		<li>
-			gives haptic feedback on open with <Mdn_Link path="Web/API/Navigator/vibrate"
+			attempts haptic feedback with <Mdn_Link path="Web/API/Navigator/vibrate"
 				><span class="font_family_mono">navigator.vibrate</span></Mdn_Link
 			>
-			(currently broken, may remain so due to the iOS longpress workaround)
+			(blocked by browsers due to longpress timeout)
 		</li>
 	</ul>
 </Tome_Section>

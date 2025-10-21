@@ -27,7 +27,7 @@
 				</Contextmenu_Entry>
 			{/snippet}
 			<div class="panel p_md">
-				<p>Try opening the contextmenu on this panel with rightclick or longpress.</p>
+				<p>Try opening the contextmenu on this panel with rightclick or tap-and-hold.</p>
 				<Code
 					content={`<Contextmenu_Root scoped>
   <Contextmenu>

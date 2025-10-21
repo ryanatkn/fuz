@@ -13,7 +13,7 @@
 	- Longpress detection with configurable timing and movement tolerance
 	- Tap-then-longpress bypass gesture for accessing system contextmenu
 	- Complex passive/nonpassive event handling
-	- Breaks navigator.vibrate on mobile browsers
+	- Calls navigator.vibrate() for haptic feedback, but browsers block it due to longpress timeout workaround
 
 	Only use this version if:
 	- You need iOS Safari support
@@ -153,7 +153,7 @@
 	let longpress_bypass: boolean | undefined = $state();
 
 	const reset_longpress = (): void => {
-		if (longpress_opened) longpress_opened = false;
+		longpress_opened = false;
 		if (longpress_timeout == null) return;
 		clearTimeout(longpress_timeout);
 		longpress_timeout = null;
@@ -191,7 +191,7 @@
 
 	// Needed for the iOS workaround, is passive.
 	const touchstart = (e: TouchEvent): void => {
-		if (longpress_opened) longpress_opened = false;
+		longpress_opened = false;
 		const {touches, target} = e;
 		if (
 			contextmenu.opened ||
