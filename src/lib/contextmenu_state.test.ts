@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/require-await */
+/* eslint-disable @typescript-eslint/no-empty-function */
 import {describe, test, assert, beforeEach} from 'vitest';
 import {
 	Contextmenu_State,
@@ -258,7 +260,7 @@ describe('Contextmenu_State', () => {
 			});
 
 			contextmenu.open([], 0, 0);
-			contextmenu.activate(entry);
+			void contextmenu.activate(entry);
 
 			assert.strictEqual(ran, true);
 			assert.strictEqual(contextmenu.opened, false);
@@ -269,7 +271,7 @@ describe('Contextmenu_State', () => {
 				throw new Error('test error');
 			});
 
-			contextmenu.activate(entry);
+			void contextmenu.activate(entry);
 
 			assert.strictEqual(entry.error_message, 'test error');
 			assert.strictEqual(contextmenu.error, 'test error');
@@ -327,7 +329,7 @@ describe('Contextmenu_State', () => {
 			submenu.items.push(child);
 
 			contextmenu.select(submenu);
-			contextmenu.activate(submenu);
+			void contextmenu.activate(submenu);
 
 			assert.strictEqual(child.selected, true);
 		});
@@ -340,7 +342,7 @@ describe('Contextmenu_State', () => {
 
 			contextmenu.open([], 0, 0);
 			contextmenu.select(entry);
-			contextmenu.activate_selected();
+			void contextmenu.activate_selected();
 
 			assert.strictEqual(ran, true);
 		});
@@ -349,7 +351,7 @@ describe('Contextmenu_State', () => {
 			const entry = new Entry_State(contextmenu.root_menu, () => {});
 			contextmenu.root_menu.items.push(entry);
 
-			contextmenu.activate_selected();
+			void contextmenu.activate_selected();
 
 			assert.strictEqual(entry.selected, true);
 		});
@@ -380,11 +382,11 @@ describe('Contextmenu_State', () => {
 			contextmenu.open([], 0, 0);
 
 			// First activation
-			contextmenu.activate(entry);
+			void contextmenu.activate(entry);
 			assert.strictEqual(entry.pending, true);
 
 			// Second activation (should replace first promise)
-			contextmenu.activate(entry);
+			void contextmenu.activate(entry);
 
 			// Resolve first promise (should be ignored)
 			resolve1({ok: true});

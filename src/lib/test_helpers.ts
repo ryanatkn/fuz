@@ -3,6 +3,7 @@
  * Provides helpers for component mounting and DOM event creation.
  */
 
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import {mount, unmount, type Component, flushSync} from 'svelte';
 
 /**
@@ -121,4 +122,45 @@ export const set_event_target = (event: Event, target: EventTarget): void => {
  */
 export const flush_updates = (): void => {
 	flushSync();
+};
+
+/**
+ * Create a touch event with one or more touches.
+ *
+ * @example
+ * const event = create_touch_event('touchstart', [{clientX: 100, clientY: 200}]);
+ * element.dispatchEvent(event);
+ */
+export const create_touch_event = (
+	type: string,
+	touches: Array<{clientX: number; clientY: number; target?: EventTarget}>,
+	options: TouchEventInit = {},
+): TouchEvent => {
+	// Create Touch objects (mocked for testing)
+	const touch_objects = touches.map(
+		(touch, index) =>
+			({
+				identifier: index,
+				clientX: touch.clientX,
+				clientY: touch.clientY,
+				screenX: touch.clientX,
+				screenY: touch.clientY,
+				pageX: touch.clientX,
+				pageY: touch.clientY,
+				radiusX: 0,
+				radiusY: 0,
+				rotationAngle: 0,
+				force: 1,
+				target: touch.target ?? document.body,
+			}) as Touch,
+	);
+
+	return new TouchEvent(type, {
+		bubbles: true,
+		cancelable: true,
+		touches: touch_objects as unknown as TouchList,
+		targetTouches: touch_objects as unknown as TouchList,
+		changedTouches: touch_objects as unknown as TouchList,
+		...options,
+	});
 };

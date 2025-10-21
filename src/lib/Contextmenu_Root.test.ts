@@ -1,6 +1,8 @@
 /**
  * @vitest-environment jsdom
  */
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/non-nullable-type-assertion-style */
 import {describe, test, assert, beforeEach, afterEach, vi} from 'vitest';
 import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
 import {Contextmenu_State} from '$lib/contextmenu_state.svelte.js';

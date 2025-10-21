@@ -54,6 +54,7 @@ export const package_json: Package_Json = {
 		eslint: '^9.34.0',
 		'eslint-plugin-svelte': '^3.11.0',
 		'esm-env': '^1.2.2',
+		jsdom: '^27.0.1',
 		prettier: '^3.6.2',
 		'prettier-plugin-svelte': '^3.4.0',
 		'prism-svelte': '^0.5.0',
@@ -238,6 +239,19 @@ export const src_json: Src_Json = {
 				{name: 'load_from_storage', kind: 'function'},
 			],
 		},
+		'./test_helpers.js': {
+			path: 'test_helpers.ts',
+			declarations: [
+				{name: 'mount_component', kind: 'function'},
+				{name: 'unmount_component', kind: 'function'},
+				{name: 'create_contextmenu_event', kind: 'function'},
+				{name: 'create_keyboard_event', kind: 'function'},
+				{name: 'create_mouse_event', kind: 'function'},
+				{name: 'set_event_target', kind: 'function'},
+				{name: 'flush_updates', kind: 'function'},
+			],
+		},
+		'./test_setup.js': {path: 'test_setup.ts'},
 		'./themer.svelte.js': {
 			path: 'themer.svelte.ts',
 			declarations: [
@@ -287,6 +301,10 @@ export const src_json: Src_Json = {
 		},
 		'./Contextmenu_Link_Entry.svelte': {
 			path: 'Contextmenu_Link_Entry.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./Contextmenu_Root_For_Safari_Compatibility.svelte': {
+			path: 'Contextmenu_Root_For_Safari_Compatibility.svelte',
 			declarations: [{name: 'default', kind: 'component'}],
 		},
 		'./Contextmenu_Root.svelte': {
