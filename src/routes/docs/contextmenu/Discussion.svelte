@@ -7,6 +7,65 @@
 </script>
 
 <Tome_Section>
+	<Tome_Section_Header text="Root component versions" />
+	<p>
+		Fuz provides two versions of the contextmenu root component with different tradeoffs:
+	</p>
+	<h4>Contextmenu_Root (default, simplified)</h4>
+	<ul>
+		<li>
+			Relies entirely on the browser's native <Mdn_Link path="Web/API/Element/contextmenu_event"
+				><span class="font_family_mono">contextmenu</span> event</Mdn_Link
+			>
+		</li>
+		<li>~220 lines of code vs ~430 in the compatibility version</li>
+		<li>No mobile-specific code or touch event handlers</li>
+		<li>Works perfectly on all modern desktop browsers</li>
+		<li>
+			<strong>Does not work on iOS Safari</strong> which doesn't fire the
+			<span class="font_family_mono">contextmenu</span> event (as of 2025, see
+			<a href="https://bugs.webkit.org/show_bug.cgi?id=213953">WebKit bug #213953</a>)
+		</li>
+		<li>Simpler architecture makes it easier to understand, modify, and maintain</li>
+		<li>
+			<strong>This is the default.</strong> Use this if your app targets desktop users or non-Safari
+			mobile browsers
+		</li>
+	</ul>
+	<h4>Contextmenu_Root_For_Safari_Compatibility (opt-in for iOS)</h4>
+	<ul>
+		<li>
+			Implements custom "longpress" detection to work around iOS Safari not supporting the
+			<span class="font_family_mono">contextmenu</span> event
+		</li>
+		<li>~430 lines with complex touch event handling, gesture detection, and state management</li>
+		<li>Includes tap-then-longpress bypass gesture and configurable timing/tolerance</li>
+		<li>Works on all devices including iOS Safari</li>
+		<li>
+			Has edge cases and complexity due to working around platform limitations (see
+			<a href="https://bugs.webkit.org/show_bug.cgi?id=213953">WebKit bug #213953</a>)
+		</li>
+		<li>Breaks <span class="font_family_mono">navigator.vibrate</span> on mobile browsers</li>
+		<li>
+			<strong>Opt into this version</strong> only if you need iOS Safari support and are willing to
+			accept the added complexity
+		</li>
+	</ul>
+	<aside>
+		<p>
+			<strong>Breaking change:</strong> The default <code>Contextmenu_Root</code> is now the simplified
+			version. If you need iOS Safari support, explicitly import
+			<code>Contextmenu_Root_For_Safari_Compatibility</code> instead.
+		</p>
+	</aside>
+	<p>
+		The design choice to provide both versions acknowledges that iOS Safari support adds
+		significant complexity, and not all applications require it. The simplified version is the
+		default because it demonstrates the core contextmenu pattern without iOS workarounds, making
+		it easier to understand, maintain, and customize.
+	</p>
+</Tome_Section>
+<Tome_Section>
 	<Tome_Section_Header text="Expected behaviors" />
 	<p>
 		The <code>Contextmenu</code> overrides the system contextmenu to provide capabilities specific
@@ -14,11 +73,19 @@
 		<a href="#motivation">The motivation docs</a> explain why Fuz breaks web platform expectations.
 	</p>
 	<p>
-		On touch devices, we detect tap-and-hold (aka longpress) instead of simply overriding the web's
+		<strong>Note:</strong> The default <code>Contextmenu_Root</code> only handles the standard
+		<Mdn_Link path="Web/API/Element/contextmenu_event"
+			><span class="font_family_mono">contextmenu</span> event</Mdn_Link
+		> and does not include touch device support or iOS workarounds. The behaviors below marked "compatibility
+		version only" apply only to <code>Contextmenu_Root_For_Safari_Compatibility</code>.
+	</p>
+	<p>
+		On touch devices with <code>Contextmenu_Root_For_Safari_Compatibility</code>, we detect
+		tap-and-hold (aka longpress) instead of simply overriding the web's
 		<Mdn_Link path="Web/API/Element/contextmenu_event"
 			><span class="font_family_mono">contextmenu</span> event</Mdn_Link
 		>
-		because iOS does not support this web standard as of July 2023 as described in
+		because iOS does not support this web standard as of 2025 as described in
 		<a href="https://bugs.webkit.org/show_bug.cgi?id=213953">this WebKit bug report</a>. The Fuz
 		implementation therefore has hacks that may cause corner case bugs on various devices and
 		browsers, and it breaks <Mdn_Link path="Web/API/Navigator/vibrate"
@@ -33,7 +100,7 @@
 		the available behaviors which you can then activate. If no behaviors are found, the system contextmenu
 		opens.
 	</p>
-	<h4>Devices with a mouse</h4>
+	<h4>Devices with a mouse (both versions)</h4>
 	<ul>
 		<li>
 			rightclick opens the Fuz contextmenu and not the system contextmenu except on
@@ -47,7 +114,7 @@
 			>
 		</li>
 	</ul>
-	<h4>Touch devices</h4>
+	<h4>Touch devices (Contextmenu_Root_For_Safari_Compatibility only)</h4>
 	<ul>
 		<li>longpress opens the Fuz contextmenu and not the system contextmenu</li>
 		<li>longpress on the Fuz contextmenu (two longpresses) opens the system contextmenu</li>
