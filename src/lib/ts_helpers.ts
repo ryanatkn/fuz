@@ -45,18 +45,18 @@ export const extract_jsdoc = (
 	| {
 			full_text: string;
 			summary: string;
-			examples: string[];
+			examples: Array<string>;
 			deprecated?: string;
-			see_also: string[];
+			see_also: Array<string>;
 	  }
 	| undefined => {
 	const jsdoc_comments = ts.getJSDocCommentsAndTags(node);
 	if (jsdoc_comments.length === 0) return undefined;
 
 	let full_text = '';
-	const examples: string[] = [];
+	const examples: Array<string> = [];
 	let deprecated: string | undefined;
-	const see_also: string[] = [];
+	const see_also: Array<string> = [];
 
 	for (const comment of jsdoc_comments) {
 		if (ts.isJSDoc(comment) && comment.comment) {
@@ -120,7 +120,7 @@ export const extract_function_info = (
 				};
 			});
 		}
-	} catch (err) {
+	} catch (_errerr) {
 		// Ignore type errors
 	}
 
@@ -144,7 +144,7 @@ export const extract_type_info = (
 	try {
 		const type = checker.getTypeAtLocation(node);
 		enhanced.type_signature = checker.typeToString(type);
-	} catch (err) {
+	} catch (_err) {
 		// Ignore
 	}
 
@@ -190,7 +190,7 @@ export const extract_class_info = (
 	enhanced.members = [];
 	for (const member of node.members) {
 		if (ts.isPropertyDeclaration(member) || ts.isMethodDeclaration(member)) {
-			const member_name = (member.name as ts.Identifier)?.text;
+			const member_name = (member.name as ts.Identifier).text;
 			if (member_name) {
 				enhanced.members.push({
 					name: member_name,
@@ -213,7 +213,7 @@ export const extract_variable_info = (
 	try {
 		const type = checker.getTypeOfSymbolAtLocation(symbol, node);
 		enhanced.type_signature = checker.typeToString(type);
-	} catch (err) {
+	} catch (_err) {
 		// Ignore
 	}
 };
@@ -255,15 +255,11 @@ export const extract_module_comment = (source_file: ts.SourceFile): string | und
 /**
  * Extract import statements
  */
-export const extract_imports = (source_file: ts.SourceFile): string[] => {
-	const imports: string[] = [];
+export const extract_imports = (source_file: ts.SourceFile): Array<string> => {
+	const imports: Array<string> = [];
 
 	ts.forEachChild(source_file, (node) => {
-		if (
-			ts.isImportDeclaration(node) &&
-			node.moduleSpecifier &&
-			ts.isStringLiteral(node.moduleSpecifier)
-		) {
+		if (ts.isImportDeclaration(node) && ts.isStringLiteral(node.moduleSpecifier)) {
 			imports.push(node.moduleSpecifier.text);
 		}
 	});

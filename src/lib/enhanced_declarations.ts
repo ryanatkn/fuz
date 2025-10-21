@@ -54,7 +54,7 @@ export interface Enhanced_Declaration extends Src_Module_Declaration {
 	/**
 	 * Parameter information (for functions/methods)
 	 */
-	parameters?: Parameter_Info[];
+	parameters?: Array<Parameter_Info>;
 
 	/**
 	 * Return type (for functions/methods)
@@ -65,12 +65,12 @@ export interface Enhanced_Declaration extends Src_Module_Declaration {
 	 * Generic type parameters
 	 * e.g. ["T", "K extends keyof T"]
 	 */
-	generic_params?: string[];
+	generic_params?: Array<string>;
 
 	/**
 	 * Code examples from @example tags
 	 */
-	examples?: string[];
+	examples?: Array<string>;
 
 	/**
 	 * Deprecation message from @deprecated tag
@@ -80,7 +80,7 @@ export interface Enhanced_Declaration extends Src_Module_Declaration {
 	/**
 	 * Related items from @see tags
 	 */
-	see_also?: string[];
+	see_also?: Array<string>;
 
 	/**
 	 * Whether this is exported
@@ -91,22 +91,22 @@ export interface Enhanced_Declaration extends Src_Module_Declaration {
 	 * For types: the underlying type definition
 	 * For interfaces: extends clause
 	 */
-	extends?: string[];
+	extends?: Array<string>;
 
 	/**
 	 * For classes: implements clause
 	 */
-	implements?: string[];
+	implements?: Array<string>;
 
 	/**
 	 * Class members (for classes)
 	 */
-	members?: Enhanced_Declaration[];
+	members?: Array<Enhanced_Declaration>;
 
 	/**
 	 * Interface/type properties (for types/interfaces)
 	 */
-	properties?: Enhanced_Declaration[];
+	properties?: Array<Enhanced_Declaration>;
 }
 
 /**
@@ -115,7 +115,7 @@ export interface Enhanced_Declaration extends Src_Module_Declaration {
 export interface Enhanced_Module {
 	[x: string]: unknown;
 	path: string;
-	declarations?: Enhanced_Declaration[];
+	declarations?: Array<Enhanced_Declaration>;
 	/**
 	 * Module-level JSDoc comment
 	 */
@@ -123,11 +123,11 @@ export interface Enhanced_Module {
 	/**
 	 * Direct imports from other modules
 	 */
-	imports?: string[];
+	imports?: Array<string>;
 	/**
 	 * Modules that import this module
 	 */
-	imported_by?: string[];
+	imported_by?: Array<string>;
 }
 
 /**
@@ -178,7 +178,7 @@ export const get_type_summary = (decl: Enhanced_Declaration): string | undefined
  */
 export const get_doc_summary = (doc_comment: string | undefined): string | undefined => {
 	if (!doc_comment) return undefined;
-	const first_para = doc_comment.split('\n\n')[0];
+	const first_para = doc_comment.split('\n\n')[0] as string | undefined;
 	return first_para?.trim();
 };
 

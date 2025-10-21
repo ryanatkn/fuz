@@ -18,7 +18,7 @@
 
 	// Group by module
 	const grouped = $derived.by(() => {
-		const groups = new Map<string, Array<{module_path: string; decl: any; module: any}>>();
+		const groups: Map<string, Array<{module_path: string; decl: any; module: any}>> = new Map(); // eslint-disable-line svelte/prefer-svelte-reactivity
 
 		for (const item of filtered_declarations) {
 			const existing = groups.get(item.module_path) ?? [];

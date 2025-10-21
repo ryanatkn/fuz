@@ -84,7 +84,7 @@ export const get_all_modules = (): Array<{
 /**
  * Get dependencies (modules this module imports)
  */
-export const get_dependencies = (module_path: string): string[] => {
+export const get_dependencies = (module_path: string): Array<string> => {
 	const mod = src_json.modules?.[module_path];
 	return mod?.imports ?? [];
 };
@@ -92,7 +92,7 @@ export const get_dependencies = (module_path: string): string[] => {
 /**
  * Get dependents (modules that import this module)
  */
-export const get_dependents = (module_path: string): string[] => {
+export const get_dependents = (module_path: string): Array<string> => {
 	const mod = src_json.modules?.[module_path];
 	return mod?.imported_by ?? [];
 };

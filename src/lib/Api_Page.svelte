@@ -1,6 +1,8 @@
 <script lang="ts">
-	import type {Enhanced_Declaration} from '$lib/enhanced_declarations.js';
-	import {get_declaration_display_name} from '$lib/enhanced_declarations.js';
+	import {
+		get_declaration_display_name,
+		type Enhanced_Declaration,
+	} from '$lib/enhanced_declarations.js';
 	import Details from '$lib/Details.svelte';
 
 	interface Props {
@@ -37,6 +39,7 @@
 			</div>
 		{/if}
 
+		<!-- eslint-disable @typescript-eslint/no-deprecated -->
 		{#if decl.deprecated}
 			<div class="deprecated_warning pane">
 				<strong>⚠️ Deprecated:</strong>
@@ -79,7 +82,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					{#each decl.parameters as param}
+					{#each decl.parameters as param (param)}
 						<tr>
 							<td><code>{param.name}</code></td>
 							<td><code class="type">{param.type}</code></td>
@@ -107,7 +110,7 @@
 		<section class="section">
 			<h2>Generic Parameters</h2>
 			<ul class="generic_list">
-				{#each decl.generic_params as generic}
+				{#each decl.generic_params as generic (generic)}
 					<li><code>{generic}</code></li>
 				{/each}
 			</ul>
@@ -122,7 +125,7 @@
 				<div>
 					<strong>Extends:</strong>
 					<ul class="inheritance_list">
-						{#each decl.extends as ext}
+						{#each decl.extends as ext (ext)}
 							<li><code>{ext}</code></li>
 						{/each}
 					</ul>
@@ -132,7 +135,7 @@
 				<div>
 					<strong>Implements:</strong>
 					<ul class="inheritance_list">
-						{#each decl.implements as impl}
+						{#each decl.implements as impl (impl)}
 							<li><code>{impl}</code></li>
 						{/each}
 					</ul>
@@ -145,7 +148,7 @@
 	{#if decl.examples?.length}
 		<section class="section">
 			<h2>Examples</h2>
-			{#each decl.examples as example, i}
+			{#each decl.examples as example, i (example)}
 				<Details>
 					{#snippet summary()}Example {i + 1}{/snippet}
 					<pre class="example_code pane"><code>{example}</code></pre>
@@ -159,7 +162,7 @@
 		<section class="section">
 			<h2>See Also</h2>
 			<ul class="see_also_list">
-				{#each decl.see_also as ref}
+				{#each decl.see_also as ref (ref)}
 					<li>{ref}</li>
 				{/each}
 			</ul>
@@ -171,7 +174,7 @@
 		<section class="section">
 			<h2>Members</h2>
 			<ul class="members_list">
-				{#each decl.members as member}
+				{#each decl.members as member (member)}
 					<li class="member">
 						<code class="member_name">{member.name}</code>
 						{#if member.kind}
@@ -188,7 +191,7 @@
 		<section class="section">
 			<h2>Properties</h2>
 			<ul class="members_list">
-				{#each decl.properties as prop}
+				{#each decl.properties as prop (prop)}
 					<li class="member">
 						<code class="member_name">{prop.name}</code>
 						{#if prop.kind}

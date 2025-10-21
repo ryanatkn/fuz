@@ -207,7 +207,7 @@
 												{decl}
 												module_path={exports_key || `./${module_name}`}
 												pkg_name={package_json.name}
-												repo_url={pkg.repo_url ?? undefined}
+												repo_url={pkg.repo_url}
 												homepage_url={pkg.homepage_url ?? undefined}
 											/>
 										</li>

@@ -1,6 +1,7 @@
 /**
  * @vitest-environment jsdom
  */
+/* eslint-disable @typescript-eslint/no-empty-function */
 import {describe, test, assert, beforeEach, afterEach, vi} from 'vitest';
 import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
 import {Contextmenu_State} from '$lib/contextmenu_state.svelte.js';
@@ -25,9 +26,9 @@ describe('Contextmenu_Root', () => {
 		contextmenu.layout.height = 768;
 	});
 
-	afterEach(() => {
+	afterEach(async () => {
 		if (mounted) {
-			unmount_component(mounted.instance, mounted.container);
+			await unmount_component(mounted.instance, mounted.container);
 			mounted = null;
 		}
 	});
@@ -474,7 +475,7 @@ describe('Contextmenu_Root', () => {
 			contextmenu.open([(() => {}) as any], 100, 200);
 			flush_updates(); // Wait for DOM to update
 
-			const menu = container.querySelector('.contextmenu') as HTMLElement;
+			const menu = container.querySelector('.contextmenu') as HTMLElement; // eslint-disable-line @typescript-eslint/non-nullable-type-assertion-style
 			assert.ok(menu);
 
 			// The transform includes the derived x/y which may have edge adjustments
@@ -505,7 +506,7 @@ describe('Contextmenu_Root', () => {
 			contextmenu.open([(() => {}) as any], 1020, 100);
 			flush_updates();
 
-			const menu = container.querySelector('.contextmenu') as HTMLElement;
+			const menu = container.querySelector('.contextmenu') as HTMLElement; // eslint-disable-line @typescript-eslint/non-nullable-type-assertion-style
 			assert.ok(menu);
 
 			// Menu should be repositioned - the x position in transform should be adjusted left
@@ -526,7 +527,7 @@ describe('Contextmenu_Root', () => {
 			contextmenu.open([(() => {}) as any], 100, 760);
 			flush_updates();
 
-			const menu = container.querySelector('.contextmenu') as HTMLElement;
+			const menu = container.querySelector('.contextmenu') as HTMLElement; // eslint-disable-line @typescript-eslint/non-nullable-type-assertion-style
 			assert.ok(menu);
 
 			// Menu should have transform (positioning logic handles overflow)

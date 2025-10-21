@@ -36,8 +36,8 @@ export const mount_component = <Props extends Record<string, any>>(
  * const mounted = mount_component(MyComponent, {});
  * unmount_component(mounted.instance, mounted.container);
  */
-export const unmount_component = (instance: any, container: HTMLElement): void => {
-	unmount(instance);
+export const unmount_component = async (instance: any, container: HTMLElement): Promise<void> => {
+	await unmount(instance);
 	container.remove();
 };
 
