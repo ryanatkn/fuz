@@ -70,7 +70,10 @@ export const create_contextmenu_event = (
  * const event = create_keyboard_event('Escape');
  * window.dispatchEvent(event);
  */
-export const create_keyboard_event = (key: string, options: KeyboardEventInit = {}): KeyboardEvent => {
+export const create_keyboard_event = (
+	key: string,
+	options: KeyboardEventInit = {},
+): KeyboardEvent => {
 	return new KeyboardEvent('keydown', {
 		bubbles: true,
 		cancelable: true,
@@ -158,9 +161,9 @@ export const create_touch_event = (
 	return new TouchEvent(type, {
 		bubbles: true,
 		cancelable: true,
-		touches: touch_objects as unknown as TouchList,
-		targetTouches: touch_objects as unknown as TouchList,
-		changedTouches: touch_objects as unknown as TouchList,
+		touches: touch_objects as any,
+		targetTouches: touch_objects as any,
+		changedTouches: touch_objects as any,
 		...options,
 	});
 };

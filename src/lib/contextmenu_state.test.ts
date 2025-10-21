@@ -48,7 +48,9 @@ describe('Contextmenu_State', () => {
 
 	describe('open and close', () => {
 		test('open sets state correctly', () => {
-			const params = [{snippet: 'text' as const, props: {content: 'Test', icon: '🧪', run: () => {}}}];
+			const params = [
+				{snippet: 'text' as const, props: {content: 'Test', icon: '🧪', run: () => {}}},
+			];
 			contextmenu.open(params, 100, 200);
 
 			assert.strictEqual(contextmenu.opened, true);
