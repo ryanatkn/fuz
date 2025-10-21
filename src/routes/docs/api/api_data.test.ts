@@ -146,10 +146,7 @@ describe('api_data helpers', () => {
 
 			// Exact match should be highly ranked (ideally first, but at least top 5)
 			const index = results.indexOf(exact_match);
-			assert.ok(
-				index < 5,
-				`exact match should be in top 5 results, but was at index ${index}`,
-			);
+			assert.ok(index < 5, `exact match should be in top 5 results, but was at index ${index}`);
 		});
 	});
 
