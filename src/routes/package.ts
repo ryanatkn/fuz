@@ -1028,8 +1028,8 @@ export const src_json: Enhanced_Src_Json = {
 						end_line: 42,
 						end_column: 1,
 					},
-					type_signature: '(instance: any, container: HTMLElement): void',
-					return_type: 'void',
+					type_signature: '(instance: any, container: HTMLElement): Promise<void>',
+					return_type: 'Promise<void>',
 					parameters: [
 						{
 							name: 'instance',
@@ -1583,9 +1583,9 @@ export const src_json: Enhanced_Src_Json = {
 						end_column: 1,
 					},
 					type_signature:
-						'(node: Node, _source_file: SourceFile): { full_text: string; summary: string; examples: Array<string>; deprecated?: string | undefined; see_also: Array<string>; } | undefined',
+						'(node: Node, _source_file: SourceFile): { full_text: string; summary: string; examples: string[]; deprecated?: string | undefined; see_also: string[]; } | undefined',
 					return_type:
-						'{ full_text: string; summary: string; examples: Array<string>; deprecated?: string | undefined; see_also: Array<string>; } | undefined',
+						'{ full_text: string; summary: string; examples: string[]; deprecated?: string | undefined; see_also: string[]; } | undefined',
 					parameters: [
 						{
 							name: 'node',
@@ -1614,7 +1614,7 @@ export const src_json: Enhanced_Src_Json = {
 						end_column: 1,
 					},
 					type_signature:
-						'(node: Node, symbol: Symbol, checker: TypeChecker, enhanced: Enhanced_Declaration, _jsdoc: { full_text: string; summary: string; examples: Array<string>; deprecated?: string | undefined; see_also: Array<string>; } | undefined): void',
+						'(node: Node, symbol: Symbol, checker: TypeChecker, enhanced: Enhanced_Declaration, _jsdoc: { full_text: string; summary: string; examples: string[]; deprecated?: string | undefined; see_also: string[]; } | undefined): void',
 					return_type: 'void',
 					parameters: [
 						{
@@ -1639,7 +1639,7 @@ export const src_json: Enhanced_Src_Json = {
 						},
 						{
 							name: '_jsdoc',
-							type: '{ full_text: string; summary: string; examples: Array<string>; deprecated?: string | undefined; see_also: Array<string>; } | undefined',
+							type: '{ full_text: string; summary: string; examples: string[]; deprecated?: string | undefined; see_also: string[]; } | undefined',
 							optional: false,
 						},
 					],
@@ -1823,11 +1823,11 @@ export const src_json: Enhanced_Src_Json = {
 					source_location: {
 						line: 258,
 						column: 13,
-						end_line: 272,
+						end_line: 268,
 						end_column: 1,
 					},
-					type_signature: '(source_file: SourceFile): Array<string>',
-					return_type: 'Array<string>',
+					type_signature: '(source_file: SourceFile): string[]',
+					return_type: 'string[]',
 					parameters: [
 						{
 							name: 'source_file',
@@ -1845,9 +1845,9 @@ export const src_json: Enhanced_Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 277,
+						line: 273,
 						column: 13,
-						end_line: 288,
+						end_line: 284,
 						end_column: 1,
 					},
 					type_signature: '(log: any): Program | null',
@@ -1984,12 +1984,12 @@ export const src_json: Enhanced_Src_Json = {
 						end_column: 55,
 					},
 					type_signature:
-						'(item: { name: string; category: string; component: any; related: Array<string>; }, docs_path?: string): string',
+						'(item: { name: string; category: string; component: any; related: string[]; }, docs_path?: string): string',
 					return_type: 'string',
 					parameters: [
 						{
 							name: 'item',
-							type: '{ name: string; category: string; component: any; related: Array<string>; }',
+							type: '{ name: string; category: string; component: any; related: string[]; }',
 							optional: false,
 						},
 						{
@@ -2010,7 +2010,7 @@ export const src_json: Enhanced_Src_Json = {
 						end_column: 64,
 					},
 					type_signature:
-						'{ get: (error_message?: string | undefined) => Map<string, { name: string; category: string; component: any; related: Array<string>; }>; maybe_get: () => Map<string, { name: string; category: string; component: any; related: Array<string>; }> | undefined; set: (value: Map<...>) => Map<...>; }',
+						'{ get: (error_message?: string | undefined) => Map<string, { name: string; category: string; component: any; related: string[]; }>; maybe_get: () => Map<string, { name: string; category: string; component: any; related: string[]; }> | undefined; set: (value: Map<...>) => Map<...>; }',
 					exported: false,
 				},
 				{
@@ -2023,9 +2023,8 @@ export const src_json: Enhanced_Src_Json = {
 						end_column: 1,
 					},
 					type_signature:
-						'(name: string): { name: string; category: string; component: any; related: Array<string>; }',
-					return_type:
-						'{ name: string; category: string; component: any; related: Array<string>; }',
+						'(name: string): { name: string; category: string; component: any; related: string[]; }',
+					return_type: '{ name: string; category: string; component: any; related: string[]; }',
 					parameters: [
 						{
 							name: 'name',
@@ -2045,7 +2044,7 @@ export const src_json: Enhanced_Src_Json = {
 						end_column: 50,
 					},
 					type_signature:
-						'{ get: (error_message?: string | undefined) => { name: string; category: string; component: any; related: Array<string>; }; maybe_get: () => { name: string; category: string; component: any; related: Array<string>; } | undefined; set: (value: { ...; }) => { ...; }; }',
+						'{ get: (error_message?: string | undefined) => { name: string; category: string; component: any; related: string[]; }; maybe_get: () => { name: string; category: string; component: any; related: string[]; } | undefined; set: (value: { ...; }) => { ...; }; }',
 					exported: false,
 				},
 			],
@@ -2591,7 +2590,7 @@ export const src_json: Enhanced_Src_Json = {
 						end_column: 1,
 					},
 					type_signature:
-						'Record<keyof Csp_Directives, boolean | Array<string> | (Csp_Source | Csp_Action_Source)[] | Csp_Sources | (`${string}.${string}` | ... 18 more ... | "none")[] | "script"[] | ("allow-downloads-without-user-activation" | ... 11 more ... | "allow-top-navigation-by-user-activation")[] | null>',
+						'Record<keyof Csp_Directives, boolean | string[] | (Csp_Source | Csp_Action_Source)[] | Csp_Sources | (`${string}.${string}` | ... 18 more ... | "none")[] | "script"[] | ("allow-downloads-without-user-activation" | ... 11 more ... | "allow-top-navigation-by-user-activation")[] | null>',
 					exported: false,
 				},
 				{
