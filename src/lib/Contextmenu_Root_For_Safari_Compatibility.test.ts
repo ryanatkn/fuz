@@ -1,5 +1,8 @@
+/**
+ * @vitest-environment jsdom
+ */
 /* eslint-disable @typescript-eslint/no-empty-function */
-// @vitest-environment jsdom
+/* eslint-disable @typescript-eslint/non-nullable-type-assertion-style */
 import {describe, test, assert, beforeEach, afterEach, vi} from 'vitest';
 import {tick} from 'svelte';
 
@@ -22,6 +25,9 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 
 	beforeEach(() => {
 		contextmenu = new Contextmenu_State();
+		// Mock layout dimensions
+		contextmenu.layout.width = 1024;
+		contextmenu.layout.height = 768;
 		mounted = null;
 		vi.useFakeTimers();
 	});
@@ -771,7 +777,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 			contextmenu.open([(() => {}) as any], 150, 250);
 			flush_updates();
 
-			const menu = container.querySelector('.contextmenu') as HTMLElement; // eslint-disable-line @typescript-eslint/non-nullable-type-assertion-style
+			const menu = container.querySelector('.contextmenu') as HTMLElement;
 			assert.ok(menu);
 			// Transform uses translate3d format
 			const transform = menu.style.transform;
@@ -790,7 +796,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 			contextmenu.open([(() => {}) as any], window.innerWidth - 50, 100);
 			flush_updates();
 
-			const menu = container.querySelector('.contextmenu') as HTMLElement; // eslint-disable-line @typescript-eslint/non-nullable-type-assertion-style
+			const menu = container.querySelector('.contextmenu') as HTMLElement;
 			assert.ok(menu);
 
 			// Should reposition to fit
@@ -809,7 +815,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 			contextmenu.open([(() => {}) as any], 100, window.innerHeight - 50);
 			flush_updates();
 
-			const menu = container.querySelector('.contextmenu') as HTMLElement; // eslint-disable-line @typescript-eslint/non-nullable-type-assertion-style
+			const menu = container.querySelector('.contextmenu') as HTMLElement;
 			assert.ok(menu);
 
 			// Should reposition to fit
