@@ -1235,7 +1235,7 @@ export const src_json: Enhanced_Src_Json = {
 					source_location: {
 						line: 11,
 						column: 0,
-						end_line: 65,
+						end_line: 67,
 						end_column: 1,
 					},
 					members: [
@@ -1282,9 +1282,9 @@ export const src_json: Enhanced_Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 70,
+						line: 72,
 						column: 13,
-						end_line: 70,
+						end_line: 72,
 						end_column: 62,
 					},
 					type_signature:
