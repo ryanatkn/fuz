@@ -356,23 +356,23 @@ src/
 ├── lib/
 │   ├── enhanced_declarations.ts          ✅ DONE
 │   ├── ts_helpers.ts                     ✅ DONE
-│   ├── Tooltip.svelte                    📝 TODO
-│   ├── tooltip_state.svelte.ts           📝 TODO
-│   ├── Declaration_Link.svelte           📝 TODO
-│   ├── Api_Page.svelte                   📝 TODO
-│   ├── declaration_contextmenu.ts        📝 TODO
-│   └── api_search.svelte.ts              📝 TODO
+│   ├── Tooltip.svelte                    ✅ DONE
+│   ├── tooltip_state.svelte.ts           ✅ DONE
+│   ├── Declaration_Link.svelte           ✅ DONE
+│   ├── Api_Page.svelte                   ✅ DONE
+│   ├── declaration_contextmenu.ts        ✅ DONE
+│   └── api_search.svelte.ts              ⏭️ SKIPPED (built into +page)
 ├── routes/
 │   ├── package.gen.ts                    ✅ DONE (custom generator)
 │   ├── package.ts                        ✅ DONE (generated output)
 │   └── docs/
 │       └── api/
-│           ├── +page.svelte              📝 TODO (index)
-│           ├── api_data.svelte.ts        📝 TODO (helpers)
+│           ├── +page.svelte              ✅ DONE (index with search)
+│           ├── api_data.svelte.ts        ✅ DONE (helpers)
 │           └── [module]/
-│               ├── +layout.svelte        📝 TODO
+│               ├── +layout.svelte        ⏭️ SKIPPED
 │               └── [identifier]/
-│                   └── +page.svelte      📝 TODO
+│                   └── +page.svelte      ✅ DONE
 ```
 
 ## Implementation Order
@@ -380,16 +380,16 @@ src/
 1. ✅ **Enhanced type system** (`enhanced_declarations.ts`)
 2. ✅ **TS helpers** (`ts_helpers.ts`)
 3. ✅ **Package generator** (`package.gen.ts`)
-4. 📝 **Tooltip system** (global state + component)
-5. 📝 **Declaration link** (with tooltip integration)
-6. 📝 **API identifier page** (test with one identifier)
-7. 📝 **API data helpers** (lookup functions)
-8. 📝 **API index page** (all identifiers)
-9. 📝 **API module layout** (module overview)
-10. 📝 **Update Package_Detail** (use Declaration_Link)
-11. 📝 **Contextmenu integration** (actions)
-12. 📝 **Search** (fuzzy finder)
-13. 📝 **Polish & test**
+4. ✅ **Tooltip system** (global state + component)
+5. ✅ **Declaration link** (with tooltip integration)
+6. ✅ **API identifier page** (test with one identifier)
+7. ✅ **API data helpers** (lookup functions)
+8. ✅ **API index page** (all identifiers)
+9. ⏭️ **API module layout** (module overview) - SKIPPED
+10. ✅ **Update Package_Detail** (use Declaration_Link)
+11. ✅ **Contextmenu integration** (actions)
+12. ✅ **Search** (fuzzy finder)
+13. 🔄 **Polish & test** (IN PROGRESS - fixing type errors)
 
 ## Success Criteria
 

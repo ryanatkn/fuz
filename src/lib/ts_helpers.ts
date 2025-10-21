@@ -40,14 +40,16 @@ export const infer_declaration_kind = (
  */
 export const extract_jsdoc = (
 	node: ts.Node,
-	source_file: ts.SourceFile,
-): {
-	full_text: string;
-	summary: string;
-	examples: string[];
-	deprecated?: string;
-	see_also: string[];
-} | undefined => {
+	_source_file: ts.SourceFile,
+):
+	| {
+			full_text: string;
+			summary: string;
+			examples: string[];
+			deprecated?: string;
+			see_also: string[];
+	  }
+	| undefined => {
 	const jsdoc_comments = ts.getJSDocCommentsAndTags(node);
 	if (jsdoc_comments.length === 0) return undefined;
 
@@ -94,7 +96,7 @@ export const extract_function_info = (
 	symbol: ts.Symbol,
 	checker: ts.TypeChecker,
 	enhanced: Enhanced_Declaration,
-	jsdoc: ReturnType<typeof extract_jsdoc>,
+	_jsdoc: ReturnType<typeof extract_jsdoc>,
 ): void => {
 	try {
 		const type = checker.getTypeOfSymbolAtLocation(symbol, node);
@@ -123,11 +125,7 @@ export const extract_function_info = (
 	}
 
 	// Extract generic type parameters
-	if (
-		ts.isFunctionDeclaration(node) ||
-		ts.isArrowFunction(node) ||
-		ts.isFunctionExpression(node)
-	) {
+	if (ts.isFunctionDeclaration(node) || ts.isArrowFunction(node) || ts.isFunctionExpression(node)) {
 		if (node.typeParameters?.length) {
 			enhanced.generic_params = node.typeParameters.map((tp) => tp.getText());
 		}
@@ -139,7 +137,7 @@ export const extract_function_info = (
  */
 export const extract_type_info = (
 	node: ts.Node,
-	symbol: ts.Symbol,
+	_symbol: ts.Symbol,
 	checker: ts.TypeChecker,
 	enhanced: Enhanced_Declaration,
 ): void => {
@@ -168,8 +166,8 @@ export const extract_type_info = (
  */
 export const extract_class_info = (
 	node: ts.Node,
-	symbol: ts.Symbol,
-	checker: ts.TypeChecker,
+	_symbol: ts.Symbol,
+	_checker: ts.TypeChecker,
 	enhanced: Enhanced_Declaration,
 ): void => {
 	if (!ts.isClassDeclaration(node)) return;

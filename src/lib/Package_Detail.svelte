@@ -7,6 +7,7 @@
 
 	import Details from '$lib/Details.svelte';
 	import Img_Or_Svg from '$lib/Img_Or_Svg.svelte';
+	import Declaration_Link from '$lib/Declaration_Link.svelte';
 
 	interface Props {
 		pkg: Pkg; // TODO normalized version with cached primitives?
@@ -200,9 +201,15 @@
 							<a class="chip" href={source_url}>{module_name}</a>
 							{#if declarations?.length}
 								<ul class="declarations unstyled">
-									{#each declarations as { name, kind } (name)}
-										<li class="declaration chip {kind}_declaration">
-											{name}
+									{#each declarations as decl (decl.name)}
+										<li>
+											<Declaration_Link
+												{decl}
+												module_path={exports_key || `./${module_name}`}
+												pkg_name={package_json.name}
+												repo_url={pkg.repo_url ?? undefined}
+												homepage_url={pkg.homepage_url ?? undefined}
+											/>
 										</li>
 									{/each}
 								</ul>
@@ -318,23 +325,5 @@
 		align-items: flex-start;
 		gap: var(--space_xs) 0;
 		padding-top: var(--space_xs);
-	}
-	.declaration {
-		font-family: var(--font_family_mono);
-		font-size: var(--font_size_sm);
-		margin-left: var(--space_xs2);
-		margin-right: var(--space_xs2);
-	}
-	.variable_declaration {
-		color: var(--color_d_5);
-	}
-	.function_declaration {
-		color: var(--color_c_5);
-	}
-	.type_declaration {
-		color: var(--color_g_5);
-	}
-	.class_declaration {
-		color: var(--color_f_5);
 	}
 </style>

@@ -1,4 +1,4 @@
-import type {Src_Module_Declaration, Src_Module_Declaration_Kind} from '@ryanatkn/belt/src_json.js';
+import type {Src_Module_Declaration} from '@ryanatkn/belt/src_json.js';
 
 /**
  * Enhanced parameter information for functions and methods
@@ -29,6 +29,7 @@ export interface Source_Location {
  * type signatures, and structural information.
  */
 export interface Enhanced_Declaration extends Src_Module_Declaration {
+	[x: string]: unknown;
 	/**
 	 * Full JSDoc/TSDoc comment text (cleaned, without comment markers)
 	 */
@@ -112,6 +113,7 @@ export interface Enhanced_Declaration extends Src_Module_Declaration {
  * Enhanced module information with rich metadata
  */
 export interface Enhanced_Module {
+	[x: string]: unknown;
 	path: string;
 	declarations?: Enhanced_Declaration[];
 	/**

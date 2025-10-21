@@ -8,9 +8,7 @@
 
 <Tome_Section>
 	<Tome_Section_Header text="Root component versions" />
-	<p>
-		Fuz provides two versions of the contextmenu root component with different tradeoffs:
-	</p>
+	<p>Fuz provides two versions of the contextmenu root component with different tradeoffs:</p>
 	<h4>Contextmenu_Root (default, simplified)</h4>
 	<ul>
 		<li>
@@ -47,22 +45,22 @@
 		</li>
 		<li>Breaks <span class="font_family_mono">navigator.vibrate</span> on mobile browsers</li>
 		<li>
-			<strong>Opt into this version</strong> only if you need iOS Safari support and are willing to
-			accept the added complexity
+			<strong>Opt into this version</strong> only if you need iOS Safari support and are willing to accept
+			the added complexity
 		</li>
 	</ul>
 	<aside>
 		<p>
-			<strong>Breaking change:</strong> The default <code>Contextmenu_Root</code> is now the simplified
-			version. If you need iOS Safari support, explicitly import
+			<strong>Breaking change:</strong> The default <code>Contextmenu_Root</code> is now the
+			simplified version. If you need iOS Safari support, explicitly import
 			<code>Contextmenu_Root_For_Safari_Compatibility</code> instead.
 		</p>
 	</aside>
 	<p>
-		The design choice to provide both versions acknowledges that iOS Safari support adds
-		significant complexity, and not all applications require it. The simplified version is the
-		default because it demonstrates the core contextmenu pattern without iOS workarounds, making
-		it easier to understand, maintain, and customize.
+		The design choice to provide both versions acknowledges that iOS Safari support adds significant
+		complexity, and not all applications require it. The simplified version is the default because
+		it demonstrates the core contextmenu pattern without iOS workarounds, making it easier to
+		understand, maintain, and customize.
 	</p>
 </Tome_Section>
 <Tome_Section>
