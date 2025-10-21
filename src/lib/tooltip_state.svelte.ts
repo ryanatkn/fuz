@@ -37,6 +37,12 @@ export class Tooltip_State {
 	 * Hide tooltip (with optional delay for sticky behavior)
 	 */
 	hide(delay = 0): void {
+		// Clear any existing hide timer
+		if (this.#hide_timer) {
+			clearTimeout(this.#hide_timer);
+			this.#hide_timer = null;
+		}
+
 		if (delay > 0) {
 			this.#hide_timer = setTimeout(() => {
 				this.opened = false;
@@ -44,10 +50,6 @@ export class Tooltip_State {
 				this.#hide_timer = null;
 			}, delay);
 		} else {
-			if (this.#hide_timer) {
-				clearTimeout(this.#hide_timer);
-				this.#hide_timer = null;
-			}
 			this.opened = false;
 			this.content = null;
 		}

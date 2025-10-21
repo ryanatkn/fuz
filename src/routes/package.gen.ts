@@ -112,6 +112,14 @@ export const gen: Gen = async ({log, filer}) => {
 
 		// Extract declarations based on file type
 		if (module_path.endsWith('.svelte')) {
+			// TODO: Integrate Svelte language tools to extract component metadata
+			// Currently only TypeScript Compiler API is used, which cannot parse .svelte files
+			// To get full component documentation, we need to:
+			// 1. Parse <script> blocks with svelte-parse or svelte/compiler
+			// 2. Extract prop types and JSDoc comments
+			// 3. Document events, slots, and component props
+			// 4. Preserve type information from TypeScript in <script lang="ts">
+			// See: https://github.com/sveltejs/language-tools for integration examples
 			// Svelte components export a default component
 			enhanced_module.declarations!.push({
 				name: 'default',
