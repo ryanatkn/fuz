@@ -13,7 +13,7 @@ export type Contextmenu_Params =
 	| Snippet
 	// TODO maybe this should be generic?
 	| {snippet: 'link'; props: {href: string; icon?: string}}
-	| {snippet: 'text'; props: {content: string; icon: string; run: () => Contextmenu_Run}}
+	| {snippet: 'text'; props: {content: string; icon: string; run: Contextmenu_Run}}
 	| {snippet: 'separator'};
 
 // TODO fix this type
@@ -379,7 +379,9 @@ const query_contextmenu_params = (
 				props: {
 					content: 'copy text',
 					icon: '📋',
-					run: () => () => navigator.clipboard.writeText(text),
+					run: async () => {
+						await navigator.clipboard.writeText(text);
+					},
 				},
 			});
 		}
