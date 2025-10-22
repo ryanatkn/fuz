@@ -1,13 +1,12 @@
 <!--
 	This alternative to `Contextmenu_Root`
 	implements custom touch event handlers and "longpress" detection to work
-	around iOS Safari not firing the standard `contextmenu` event (see
-	https://bugs.webkit.org/show_bug.cgi?id=213953).
+	around iOS Safari not firing the standard `contextmenu` event -- see
+	https://bugs.webkit.org/show_bug.cgi?id=213953.
 
-	Use `Contextmenu_Root.svelte` (the default) unless you
-	specifically need iOS Safari support.
+	Prefer `Contextmenu_Root.svelte` unless you specifically need iOS Safari support.
 
-	This is a complex implementation (~430 lines) with many iOS-specific hacks and edge cases:
+	This is a complex implementation with many iOS-specific hacks and edge cases:
 	- Custom touch event handlers (touchstart, touchmove, touchend)
 	- Longpress detection with configurable timing and movement tolerance
 	- Tap-then-longpress bypass gesture for accessing system contextmenu

@@ -1,17 +1,14 @@
 <!--
-	This is the default contextmenu root component. It relies entirely on the standard
-	browser `contextmenu` event, resulting in a clean ~220 line implementation that works
-	perfectly on all modern desktop browsers.
-
-	Does NOT work on iOS Safari, which doesn't fire the `contextmenu` event as of 2025
+	This is the default contextmenu root component.
+	It relies on the standard	browser `contextmenu` event
+	which means it does not work on iOS Safari,
+	which doesn't fire the `contextmenu` event as of October 2025
 	(see https://bugs.webkit.org/show_bug.cgi?id=213953).
 
-	This is the recommended default because:
-	- Simpler, more maintainable code (~220 lines vs ~430)
-	- No mobile-specific hacks or edge cases
-	- Supports navigator.vibrate() haptic feedback (works because triggered from direct user event)
-	- Easier to understand and customize
-	- Most web apps target desktop browsers
+	This is the recommended default because
+	it supports haptic feedback with `navigator.vibrate()` --
+	longpress cannot work with `navigator.vibrate()` on Android devices
+	because it's not triggered from a direct user event.
 
 	If you need iOS Safari support, use `Contextmenu_Root_For_Safari_Compatibility.svelte`
 	instead. That version implements custom touch handlers and longpress detection at the

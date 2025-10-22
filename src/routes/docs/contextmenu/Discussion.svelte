@@ -16,9 +16,8 @@
 				><span class="font_family_mono">contextmenu</span> event</Mdn_Link
 			>
 		</li>
-		<li>~220 lines of code vs ~430 in the compatibility version</li>
 		<li>No mobile-specific code or touch event handlers</li>
-		<li>Works perfectly on all modern desktop browsers</li>
+		<li>Works in all browsers that support the <code>contextmenu</code> event.</li>
 		<li>
 			<strong>Does not work on iOS Safari</strong> which doesn't fire the
 			<span class="font_family_mono">contextmenu</span> event (as of 2025, see
@@ -64,7 +63,7 @@
 	<p>
 		The <code>Contextmenu</code> overrides the system contextmenu to provide capabilities specific
 		to your app.
-		<a href="#motivation">The motivation docs</a> explain why Fuz breaks web platform expectations.
+		<a href="#caveats">The caveats docs</a> explain why Fuz breaks web platform expectations.
 	</p>
 	<p>
 		<strong>Note:</strong> The default <code>Contextmenu_Root</code> only handles the standard
@@ -133,7 +132,7 @@
 	</ul>
 </Tome_Section>
 <Tome_Section>
-	<Tome_Section_Header text="Motivation" />
+	<Tome_Section_Header text="Caveats" />
 	<p>Fuz takes two things very seriously, in no particular order:</p>
 	<ol>
 		<li>giving users a powerful and customizable UX</li>
