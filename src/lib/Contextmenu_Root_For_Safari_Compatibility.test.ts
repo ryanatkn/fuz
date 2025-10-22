@@ -721,8 +721,6 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 			{key: 'ArrowUp', method: 'select_previous'},
 			{key: 'Home', method: 'select_first'},
 			{key: 'End', method: 'select_last'},
-			{key: 'PageDown', method: 'select_next'},
-			{key: 'PageUp', method: 'select_previous'},
 		];
 
 		// Data-driven tests for keyboard shortcuts

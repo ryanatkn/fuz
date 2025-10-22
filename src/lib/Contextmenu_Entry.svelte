@@ -9,15 +9,20 @@
 		run: Contextmenu_Run;
 		icon?: string | Snippet;
 		children: Snippet;
+		disabled?: boolean;
 	}
 
-	const {run, icon, children}: Props = $props();
+	const {run, icon, children, disabled: disabled_prop = false}: Props = $props();
 
 	const contextmenu = contextmenu_context.get();
 
-	const entry = contextmenu.add_entry(() => run);
+	const entry = contextmenu.add_entry(
+		() => run,
+		() => disabled_prop,
+	);
 
 	const {selected, pending, error_message} = $derived(entry);
+	const disabled = $derived(entry.disabled());
 </script>
 
 <!-- disabling the a11y warning because a parent element handles keyboard events -->
@@ -25,19 +30,25 @@
 <li
 	class="menu_item plain selectable deselectable"
 	class:selected
+	class:disabled
 	role="menuitem"
 	aria-label="contextmenu entry"
+	aria-disabled={disabled}
 	tabindex="-1"
 	title={error_message ? `Error: ${error_message}` : undefined}
-	onclick={() => {
-		// This timeout lets event handlers react to the current DOM
-		// before the item's changes are applied.
-		setTimeout(() => contextmenu.activate(entry));
-	}}
-	onmouseenter={(e) => {
-		swallow(e);
-		contextmenu.select(entry);
-	}}
+	onclick={disabled
+		? undefined
+		: () => {
+				// This timeout lets event handlers react to the current DOM
+				// before the item's changes are applied.
+				setTimeout(() => contextmenu.activate(entry));
+			}}
+	onmouseenter={disabled
+		? undefined
+		: (e) => {
+				swallow(e);
+				contextmenu.select(entry);
+			}}
 >
 	<div class="content">
 		<div class="icon">

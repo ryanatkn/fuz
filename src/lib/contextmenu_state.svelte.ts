@@ -13,7 +13,8 @@ export type Contextmenu_Params =
 	| Snippet
 	// TODO maybe this should be generic?
 	| {snippet: 'link'; props: {href: string; icon?: string}}
-	| {snippet: 'text'; props: {content: string; icon: string; run: () => Contextmenu_Run}};
+	| {snippet: 'text'; props: {content: string; icon: string; run: () => Contextmenu_Run}}
+	| {snippet: 'separator'};
 
 // TODO fix this type
 // eslint-disable-next-line @typescript-eslint/no-duplicate-type-constituents
@@ -25,15 +26,22 @@ export class Entry_State {
 	readonly is_menu = false; // TODO rename to `type`?
 	readonly menu: Submenu_State | Root_Menu_State;
 
+	readonly run: () => Contextmenu_Run;
+	readonly disabled: () => boolean;
+
 	selected: boolean = $state(false);
-	run: () => Contextmenu_Run = $state()!;
 	pending: boolean = $state(false);
 	error_message: string | null = $state(null);
 	promise: Promise<any> | null = $state(null);
 
-	constructor(menu: Submenu_State | Root_Menu_State, run: () => Contextmenu_Run) {
+	constructor(
+		menu: Submenu_State | Root_Menu_State,
+		run: () => Contextmenu_Run,
+		disabled: () => boolean = () => false,
+	) {
 		this.menu = menu;
 		this.run = run;
+		this.disabled = disabled;
 	}
 }
 
@@ -129,6 +137,7 @@ export class Contextmenu_State {
 		if (item.is_menu) {
 			this.expand_selected();
 		} else {
+			if (item.disabled()) return false;
 			let returned;
 			try {
 				returned = item.run()();
@@ -191,6 +200,7 @@ export class Contextmenu_State {
 	/**
 	 * Activates the selected entry, or if none, selects the first.
 	 */
+	// TODO implement focus management per APG: call .focus() on the selected item's DOM element (requires storing element refs in Entry_State/Submenu_State)
 	select(item: Item_State): void {
 		if (this.selections.at(-1) === item) return;
 		for (const s of this.selections) s.selected = false;
@@ -249,9 +259,9 @@ export class Contextmenu_State {
 	 * Used by `Contextmenu_Entry` and custom entry components
 	 * @initializes
 	 */
-	add_entry(run: () => Contextmenu_Run): Entry_State {
+	add_entry(run: () => Contextmenu_Run, disabled: () => boolean = () => false): Entry_State {
 		const menu = contextmenu_submenu_context.maybe_get() ?? this.root_menu;
-		const entry = new Entry_State(menu, run);
+		const entry = new Entry_State(menu, run, disabled);
 		menu.items.push(entry);
 		// TODO messy, runs more than needed
 		onDestroy(() => {

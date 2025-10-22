@@ -26,6 +26,7 @@
 	} from '$lib/contextmenu_state.svelte.js';
 	import Contextmenu_Link_Entry from '$lib/Contextmenu_Link_Entry.svelte';
 	import Contextmenu_Text_Entry from '$lib/Contextmenu_Text_Entry.svelte';
+	import Contextmenu_Separator from '$lib/Contextmenu_Separator.svelte';
 	import {
 		CONTEXTMENU_DEFAULT_OPEN_OFFSET_X,
 		CONTEXTMENU_DEFAULT_OPEN_OFFSET_Y,
@@ -254,6 +255,7 @@
 	<div class="contextmenu_layout" bind:clientHeight bind:clientWidth aria-hidden="true"></div>
 {/if}
 <!-- TODO animate the contextmenu as it appears somehow -->
+<!-- TODO implement focus management per APG: store `document.activeElement` when opening, focus menu on mount, restore focus on close if element `isConnected` -->
 {#if contextmenu.opened}
 	<ul
 		class="contextmenu unstyled pane"
@@ -267,10 +269,14 @@
 		{#each contextmenu.params as p (p)}
 			{#if typeof p === 'function'}
 				{@render p()}
-			{:else if p.snippet === 'link'}
-				{@render link_entry(p.props)}
-			{:else if p.snippet === 'text'}
-				{@render text_entry(p.props)}
+			{:else if typeof p === 'object' && 'snippet' in p}
+				{#if p.snippet === 'link'}
+					{@render link_entry(p.props)}
+				{:else if p.snippet === 'text'}
+					{@render text_entry(p.props)}
+				{:else if p.snippet === 'separator'}
+					<Contextmenu_Separator />
+				{/if}
 			{/if}
 		{/each}
 	</ul>

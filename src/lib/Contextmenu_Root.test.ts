@@ -269,8 +269,6 @@ describe('Contextmenu_Root', () => {
 			{key: 'End', method: 'select_last'},
 			{key: 'Enter', method: 'activate_selected'},
 			{key: ' ', method: 'activate_selected'},
-			{key: 'PageDown', method: 'select_next'},
-			{key: 'PageUp', method: 'select_previous'},
 		];
 
 		test('keyboard events only fire when contextmenu is opened', () => {

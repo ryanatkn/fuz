@@ -324,6 +324,10 @@ export const src_json: Src_Json = {
 			path: 'Contextmenu_Root.svelte',
 			declarations: [{name: 'default', kind: 'component'}],
 		},
+		'./Contextmenu_Separator.svelte': {
+			path: 'Contextmenu_Separator.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
 		'./Contextmenu_Submenu.svelte': {
 			path: 'Contextmenu_Submenu.svelte',
 			declarations: [{name: 'default', kind: 'component'}],
