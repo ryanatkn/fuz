@@ -1,11 +1,10 @@
 <!--
-	Contextmenu_Root_For_Safari_Compatibility - iOS Safari compatible version (opt-in)
-
-	This version implements custom touch event handlers and "longpress" detection to work
+	This alternative to `Contextmenu_Root`
+	implements custom touch event handlers and "longpress" detection to work
 	around iOS Safari not firing the standard `contextmenu` event (see
 	https://bugs.webkit.org/show_bug.cgi?id=213953).
 
-	This is NOT the default. Use `Contextmenu_Root.svelte` (the default) unless you
+	Use `Contextmenu_Root.svelte` (the default) unless you
 	specifically need iOS Safari support.
 
 	This is a complex implementation (~430 lines) with many iOS-specific hacks and edge cases:
@@ -38,7 +37,18 @@
 	import Contextmenu_Link_Entry from '$lib/Contextmenu_Link_Entry.svelte';
 	import Contextmenu_Text_Entry from '$lib/Contextmenu_Text_Entry.svelte';
 
-	interface Props {
+	const {
+		contextmenu = new Contextmenu_State(),
+		longpress_move_tolerance = 21,
+		longpress_duration = 633,
+		bypass_with_tap_then_longpress = true,
+		tap_then_longpress_duration = 660,
+		tap_then_longpress_move_tolerance = 7,
+		open_offset_x = -2,
+		open_offset_y = -2,
+		scoped = false,
+		children,
+	}: {
 		/**
 		 * The `contextmenu` prop is not reactive because that's a rare corner case and
 		 * it's easier to put the `contextmenu` directly in the context
@@ -90,20 +100,7 @@
 		 */
 		scoped?: boolean;
 		children: Snippet;
-	}
-
-	const {
-		contextmenu = new Contextmenu_State(),
-		longpress_move_tolerance = 21,
-		longpress_duration = 633,
-		bypass_with_tap_then_longpress = true,
-		tap_then_longpress_duration = 660,
-		tap_then_longpress_move_tolerance = 7,
-		open_offset_x = -2,
-		open_offset_y = -2,
-		scoped = false,
-		children,
-	}: Props = $props();
+	} = $props();
 
 	contextmenu_context.set(contextmenu);
 

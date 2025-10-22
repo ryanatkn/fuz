@@ -1,6 +1,4 @@
 <!--
-	Contextmenu_Root - Simplified default contextmenu implementation
-
 	This is the default contextmenu root component. It relies entirely on the standard
 	browser `contextmenu` event, resulting in a clean ~220 line implementation that works
 	perfectly on all modern desktop browsers.
@@ -35,7 +33,13 @@
 	const DEFAULT_OPEN_OFFSET_X = -2;
 	const DEFAULT_OPEN_OFFSET_Y = -2;
 
-	interface Props {
+	const {
+		contextmenu = new Contextmenu_State(),
+		open_offset_x = DEFAULT_OPEN_OFFSET_X,
+		open_offset_y = DEFAULT_OPEN_OFFSET_Y,
+		scoped = false,
+		children,
+	}: {
 		/**
 		 * The `contextmenu` prop is not reactive because that's a rare corner case and
 		 * it's easier to put the `contextmenu` directly in the context
@@ -60,15 +64,7 @@
 		 */
 		scoped?: boolean;
 		children: Snippet;
-	}
-
-	const {
-		contextmenu = new Contextmenu_State(),
-		open_offset_x = DEFAULT_OPEN_OFFSET_X,
-		open_offset_y = DEFAULT_OPEN_OFFSET_Y,
-		scoped = false,
-		children,
-	}: Props = $props();
+	} = $props();
 
 	contextmenu_context.set(contextmenu);
 
