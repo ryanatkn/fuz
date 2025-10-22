@@ -33,7 +33,7 @@ export const unmount_component = async (instance: any, container: HTMLElement): 
 };
 
 /**
- * Create a contextmenu (right-click) mouse event.
+ * Create a contextmenu (rightclick) mouse event.
  */
 export const create_contextmenu_event = (
 	x: number,

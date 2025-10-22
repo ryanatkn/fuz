@@ -113,7 +113,7 @@
 			The Fuz contextmenu does not open on elements that allow clipboard pasting like inputs,
 			textareas, and contenteditables.
 		</li>
-		<li>To bypass on devices with a keyboard, hold Shift while right-clicking.</li>
+		<li>To bypass on devices with a keyboard, hold Shift while rightclicking.</li>
 		<li>
 			To bypass on touch devices (e.g. to select text), use double-tap-and-hold instead of
 			tap-and-hold.
@@ -124,7 +124,7 @@
 		</li>
 		<li>
 			Triggering the contextmenu inside the Fuz contextmenu shows the system contextmenu
-			(double-right-click or longpress twice).
+			(double-rightclick/longpress).
 		</li>
 	</ul>
 </Tome_Section>

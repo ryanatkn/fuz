@@ -65,7 +65,7 @@ describe('Contextmenu_Root', () => {
 	});
 
 	describe('contextmenu event handling', () => {
-		test('right-click opens contextmenu with entries', async () => {
+		test('rightclick opens contextmenu with entries', async () => {
 			mounted = mount_with_contextmenu();
 
 			const {container} = mounted;
@@ -90,7 +90,7 @@ describe('Contextmenu_Root', () => {
 			assert.strictEqual(event.defaultPrevented, true, 'event should be prevented when menu opens');
 		});
 
-		test('shift+right-click prevents opening', () => {
+		test('shift+rightclick prevents opening', () => {
 			mounted = mount_with_contextmenu();
 
 			const event = create_contextmenu_event(100, 200, {shiftKey: true});
@@ -101,7 +101,7 @@ describe('Contextmenu_Root', () => {
 			assert.strictEqual(event.defaultPrevented, false);
 		});
 
-		test('right-click on input prevents opening', () => {
+		test('rightclick on input prevents opening', () => {
 			mounted = mount_with_contextmenu();
 
 			const {container} = mounted;
@@ -117,7 +117,7 @@ describe('Contextmenu_Root', () => {
 			assert.strictEqual(contextmenu.opened, false);
 		});
 
-		test('right-click on textarea prevents opening', () => {
+		test('rightclick on textarea prevents opening', () => {
 			mounted = mount_with_contextmenu();
 
 			const {container} = mounted;
@@ -133,7 +133,7 @@ describe('Contextmenu_Root', () => {
 			assert.strictEqual(contextmenu.opened, false);
 		});
 
-		test('right-click on contenteditable prevents opening', () => {
+		test('rightclick on contenteditable prevents opening', () => {
 			mounted = mount_with_contextmenu();
 
 			const {container} = mounted;
@@ -150,7 +150,7 @@ describe('Contextmenu_Root', () => {
 			assert.strictEqual(contextmenu.opened, false);
 		});
 
-		test('right-click on contextmenu element itself prevents opening', async () => {
+		test('rightclick on contextmenu element itself prevents opening', async () => {
 			mounted = mount_with_contextmenu();
 
 			const {container} = mounted;

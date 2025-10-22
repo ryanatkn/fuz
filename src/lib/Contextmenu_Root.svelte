@@ -69,7 +69,7 @@
 		open_offset_y?: number;
 		/**
 		 * Whether to detect tap-then-longpress to bypass the custom contextmenu.
-		 * This allows access to the system contextmenu by tapping once then right-clicking/long-pressing.
+		 * This allows access to the system contextmenu by tapping once then rightclicking/long-pressing.
 		 * Setting to `false` disables the gesture.
 		 */
 		bypass_with_tap_then_longpress?: boolean;
@@ -160,7 +160,7 @@
 	 * Touch event handler for tap-then-longpress bypass detection.
 	 *
 	 * This allows users to access the native context menu by performing a tap
-	 * followed by a longpress/right-click within a specified time window.
+	 * followed by a longpress/rightclick within a specified time window.
 	 * The bypass gesture is useful for accessing browser features like text selection
 	 * or the native context menu when the custom contextmenu would normally override it.
 	 *

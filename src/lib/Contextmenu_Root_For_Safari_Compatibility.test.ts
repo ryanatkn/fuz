@@ -564,7 +564,9 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 			]);
 
 			// First tap on editable element - should reset any previous state
-			const touchstart1 = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target: input}]);
+			const touchstart1 = create_touch_event('touchstart', [
+				{clientX: 100, clientY: 200, target: input},
+			]);
 			set_event_target(touchstart1, input);
 			window.dispatchEvent(touchstart1);
 
