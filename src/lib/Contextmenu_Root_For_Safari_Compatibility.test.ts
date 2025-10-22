@@ -43,6 +43,16 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 	};
 
+	// Helper to setup contextmenu action on element
+	const setup_contextmenu_action = async (
+		element: HTMLElement | SVGElement,
+		params: Array<any>,
+	) => {
+		element.dataset.contextmenu = 'test';
+		const {contextmenu_action} = await import('$lib/contextmenu_state.svelte.js');
+		contextmenu_action(element, params);
+	};
+
 	beforeEach(() => {
 		contextmenu = create_test_contextmenu();
 		mounted = null;
@@ -59,18 +69,25 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 	});
 
 	describe('contextmenu event handling', () => {
-		test('opens on contextmenu event', () => {
+		test('opens on contextmenu event', async () => {
 			mounted = mount_with_contextmenu();
 
 			const target = document.createElement('div');
-			target.dataset.contextmenu = '0';
 			document.body.appendChild(target);
+
+			// Setup contextmenu action
+			await setup_contextmenu_action(target, [
+				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => {}}},
+			]);
 
 			const event = create_contextmenu_event(100, 200);
 			set_event_target(event, target);
 			window.dispatchEvent(event);
 
-			assert.strictEqual(contextmenu.opened, false); // No menu items registered
+			assert.strictEqual(contextmenu.opened, true);
+			assert.strictEqual(contextmenu.x, 98); // 100 + offset_x (-2)
+			assert.strictEqual(contextmenu.y, 198); // 200 + offset_y (-2)
+			assert.strictEqual(event.defaultPrevented, true);
 			target.remove();
 		});
 
@@ -168,14 +185,18 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 	});
 
 	describe('touch event handling', () => {
-		test('starts longpress timer on touchstart', () => {
+		test('starts longpress timer on touchstart', async () => {
 			mounted = mount_with_contextmenu(undefined, {
 				longpress_duration: 500,
 			});
 
 			const target = document.createElement('div');
-			target.dataset.contextmenu = '0';
 			document.body.appendChild(target);
+
+			// Setup contextmenu action
+			await setup_contextmenu_action(target, [
+				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => {}}},
+			]);
 
 			const event = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
 			set_event_target(event, target);
@@ -187,35 +208,9 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 			vi.advanceTimersByTime(500);
 			flushSync();
 
-			assert.strictEqual(contextmenu.opened, false); // No items registered
-			target.remove();
-		});
-
-		test('opens contextmenu after longpress duration', () => {
-			mounted = mount_with_contextmenu(undefined, {
-				longpress_duration: 500,
-			});
-
-			const target = document.createElement('div');
-			target.dataset.contextmenu = '0';
-			document.body.appendChild(target);
-
-			// Register a contextmenu action to make it work
-			// For this test, we'll just manually set params
-			const params = [(() => {}) as any];
-
-			const event = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
-			set_event_target(event, target);
-			window.dispatchEvent(event);
-
-			assert.strictEqual(contextmenu.opened, false);
-
-			// Manually open with params to simulate the action
-			contextmenu.open(params, 98, 198); // offset by -2
-
-			assert.strictEqual(contextmenu.opened, true);
-			assert.strictEqual(contextmenu.x, 98);
-			assert.strictEqual(contextmenu.y, 198);
+			assert.strictEqual(contextmenu.opened, true); // Now opened after longpress
+			assert.strictEqual(contextmenu.x, 98); // 100 + offset_x (-2)
+			assert.strictEqual(contextmenu.y, 198); // 200 + offset_y (-2)
 			target.remove();
 		});
 
@@ -398,7 +393,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 			target.remove();
 		});
 
-		test('does not bypass if second tap is too far', () => {
+		test('does not bypass if second tap is too far', async () => {
 			mounted = mount_with_contextmenu(undefined, {
 				longpress_duration: 500,
 				bypass_with_tap_then_longpress: true,
@@ -408,6 +403,11 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 
 			const target = document.createElement('div');
 			document.body.appendChild(target);
+
+			// Setup contextmenu action
+			await setup_contextmenu_action(target, [
+				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => {}}},
+			]);
 
 			// First tap
 			const touchstart1 = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
@@ -424,12 +424,15 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 			set_event_target(touchstart2, target);
 			window.dispatchEvent(touchstart2);
 
-			// Should proceed with longpress (would open if items registered)
-			assert.strictEqual(contextmenu.opened, false); // No items registered
+			// Should proceed with longpress (not bypassed)
+			vi.advanceTimersByTime(500);
+			flushSync();
+
+			assert.strictEqual(contextmenu.opened, true);
 			target.remove();
 		});
 
-		test('does not bypass if second tap is too late', () => {
+		test('does not bypass if second tap is too late', async () => {
 			mounted = mount_with_contextmenu(undefined, {
 				longpress_duration: 500,
 				bypass_with_tap_then_longpress: true,
@@ -438,6 +441,11 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 
 			const target = document.createElement('div');
 			document.body.appendChild(target);
+
+			// Setup contextmenu action
+			await setup_contextmenu_action(target, [
+				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => {}}},
+			]);
 
 			// First tap
 			const touchstart1 = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
@@ -454,12 +462,15 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 			set_event_target(touchstart2, target);
 			window.dispatchEvent(touchstart2);
 
-			// Should proceed with longpress
-			assert.strictEqual(contextmenu.opened, false); // No items registered
+			// Should proceed with longpress (not bypassed)
+			vi.advanceTimersByTime(500);
+			flushSync();
+
+			assert.strictEqual(contextmenu.opened, true);
 			target.remove();
 		});
 
-		test('bypass can be disabled', () => {
+		test('bypass can be disabled', async () => {
 			mounted = mount_with_contextmenu(undefined, {
 				longpress_duration: 500,
 				bypass_with_tap_then_longpress: false,
@@ -467,6 +478,11 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 
 			const target = document.createElement('div');
 			document.body.appendChild(target);
+
+			// Setup contextmenu action
+			await setup_contextmenu_action(target, [
+				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => {}}},
+			]);
 
 			// Double tap
 			const touchstart1 = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
@@ -483,7 +499,10 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 			window.dispatchEvent(touchstart2);
 
 			// Should still allow longpress since bypass is disabled
-			assert.strictEqual(contextmenu.opened, false); // No items registered
+			vi.advanceTimersByTime(500);
+			flushSync();
+
+			assert.strictEqual(contextmenu.opened, true);
 			target.remove();
 		});
 	});

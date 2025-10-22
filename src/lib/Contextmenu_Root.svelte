@@ -241,8 +241,8 @@
 
 <svelte:window
 	oncontextmenu={scoped ? undefined : on_window_contextmenu}
-	onmousedown={contextmenu.opened ? mousedown : undefined}
-	onkeydown={contextmenu.opened ? keydown : undefined}
+	onmousedown={!contextmenu.opened ? undefined : mousedown}
+	onkeydown={!contextmenu.opened ? undefined : keydown}
 	ontouchstartcapture={scoped || !bypass_with_tap_then_longpress ? undefined : touchstart}
 	ontouchcancelcapture={scoped || !bypass_with_tap_then_longpress ? undefined : touchcancel}
 />

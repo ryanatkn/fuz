@@ -277,7 +277,9 @@
 </script>
 
 <svelte:window
-	{@attach scoped ? undefined : ((el) => on(el, 'contextmenu', on_window_contextmenu, {capture: true}))}
+	{@attach scoped
+		? undefined
+		: (el) => on(el, 'contextmenu', on_window_contextmenu, {capture: true})}
 	ontouchstartcapture={scoped ? undefined : touchstart}
 	ontouchmovecapture={scoped ? undefined : touchmove}
 	ontouchendcapture={scoped ? undefined : touchend}
