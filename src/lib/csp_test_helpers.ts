@@ -62,7 +62,7 @@ export const assert_source_in_directive = (
 ): void => {
 	const directive_value = csp[directive];
 	assert.ok(
-		Array.isArray(directive_value) && (directive_value as any[]).includes(source),
+		Array.isArray(directive_value) && (directive_value as Array<any>).includes(source),
 		message || `${source} should be in ${directive}`,
 	);
 };
@@ -78,7 +78,7 @@ export const assert_source_not_in_directive = (
 ): void => {
 	const directive_value = csp[directive];
 	assert.ok(
-		!Array.isArray(directive_value) || !(directive_value as any[]).includes(source),
+		!Array.isArray(directive_value) || !(directive_value as Array<any>).includes(source),
 		message || `${source} should not be in ${directive}`,
 	);
 };

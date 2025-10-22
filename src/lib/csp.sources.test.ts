@@ -1,4 +1,4 @@
-import {test, assert} from 'vitest';
+import {test, assert, describe} from 'vitest';
 
 import {create_csp_directives} from '$lib/csp.js';
 import {
@@ -12,382 +12,447 @@ import {
 
 const {TRUSTED, TRUSTED_A, TRUSTED_2} = TEST_SOURCES;
 
-// ============================================================================
-// Sources with trust levels only
-// ============================================================================
+describe('sources with trust levels only', () => {
+	test('high trust sources are included in all applicable directives', () => {
+		const csp = create_csp_directives({
+			trusted_sources: [create_test_source(TRUSTED, 'high')],
+		});
 
-test('high trust sources are included in all applicable directives', () => {
-	const csp = create_csp_directives({
-		trusted_sources: [create_test_source(TRUSTED, 'high')],
+		// High trust sources should be in all directives with required_trust
+		assert_source_in_directive(
+			csp,
+			'script-src',
+			TRUSTED,
+			'high trust source should be in script-src',
+		);
+		assert_source_in_directive(
+			csp,
+			'script-src-elem',
+			TRUSTED,
+			'high trust source should be in script-src-elem',
+		);
+		assert_source_in_directive(
+			csp,
+			'connect-src',
+			TRUSTED,
+			'high trust source should be in connect-src',
+		);
+		assert_source_in_directive(
+			csp,
+			'style-src',
+			TRUSTED,
+			'high trust source should be in style-src (medium)',
+		);
+		assert_source_in_directive(
+			csp,
+			'img-src',
+			TRUSTED,
+			'high trust source should be in img-src (low)',
+		);
 	});
 
-	// High trust sources should be in all directives with required_trust
-	assert_source_in_directive(csp, 'script-src', TRUSTED, 'high trust source should be in script-src');
-	assert_source_in_directive(csp, 'script-src-elem', TRUSTED, 'high trust source should be in script-src-elem');
-	assert_source_in_directive(csp, 'connect-src', TRUSTED, 'high trust source should be in connect-src');
-	assert_source_in_directive(csp, 'style-src', TRUSTED, 'high trust source should be in style-src (medium)');
-	assert_source_in_directive(csp, 'img-src', TRUSTED, 'high trust source should be in img-src (low)');
-});
+	test('medium trust sources not in high, included in medium and low', () => {
+		const csp = create_csp_directives({
+			trusted_sources: [create_test_source(TRUSTED, 'medium')],
+		});
 
-test('medium trust sources not in high, included in medium and low', () => {
-	const csp = create_csp_directives({
-		trusted_sources: [create_test_source(TRUSTED, 'medium')],
+		// Medium trust sources should not be in high trust directives
+		assert_source_not_in_directive(
+			csp,
+			'script-src',
+			TRUSTED,
+			'medium trust source should not be in script-src',
+		);
+		assert_source_not_in_directive(
+			csp,
+			'script-src-elem',
+			TRUSTED,
+			'medium trust source should not be in script-src-elem',
+		);
+
+		// Medium trust sources should be in medium and low trust directives
+		assert_source_in_directive(
+			csp,
+			'style-src',
+			TRUSTED,
+			'medium trust source should be in style-src',
+		);
+		assert_source_in_directive(
+			csp,
+			'connect-src',
+			TRUSTED,
+			'medium trust source should be in connect-src',
+		);
+		assert_source_in_directive(csp, 'img-src', TRUSTED, 'medium trust source should be in img-src');
 	});
 
-	// Medium trust sources should not be in high trust directives
-	assert_source_not_in_directive(
-		csp,
-		'script-src',
-		TRUSTED,
-		'medium trust source should not be in script-src',
-	);
-	assert_source_not_in_directive(
-		csp,
-		'script-src-elem',
-		TRUSTED,
-		'medium trust source should not be in script-src-elem',
-	);
+	test('low trust sources only in low directives', () => {
+		const csp = create_csp_directives({
+			trusted_sources: [create_test_source(TRUSTED, 'low')],
+		});
 
-	// Medium trust sources should be in medium and low trust directives
-	assert_source_in_directive(csp, 'style-src', TRUSTED, 'medium trust source should be in style-src');
-	assert_source_in_directive(csp, 'connect-src', TRUSTED, 'medium trust source should be in connect-src');
-	assert_source_in_directive(csp, 'img-src', TRUSTED, 'medium trust source should be in img-src');
-});
+		// Low trust sources should not be in high or medium trust directives
+		assert_source_not_in_directive(
+			csp,
+			'script-src',
+			TRUSTED,
+			'low trust source should not be in script-src',
+		);
+		assert_source_not_in_directive(
+			csp,
+			'connect-src',
+			TRUSTED,
+			'low trust source should not be in connect-src',
+		);
+		assert_source_not_in_directive(
+			csp,
+			'style-src',
+			TRUSTED,
+			'low trust source should not be in style-src',
+		);
 
-test('low trust sources only in low directives', () => {
-	const csp = create_csp_directives({
-		trusted_sources: [create_test_source(TRUSTED, 'low')],
+		// Low trust sources should be in low trust directives
+		assert_source_in_directive(csp, 'img-src', TRUSTED, 'low trust source should be in img-src');
+		assert_source_in_directive(
+			csp,
+			'media-src',
+			TRUSTED,
+			'low trust source should be in media-src',
+		);
+		assert_source_in_directive(csp, 'font-src', TRUSTED, 'low trust source should be in font-src');
 	});
 
-	// Low trust sources should not be in high or medium trust directives
-	assert_source_not_in_directive(
-		csp,
-		'script-src',
-		TRUSTED,
-		'low trust source should not be in script-src',
-	);
-	assert_source_not_in_directive(
-		csp,
-		'connect-src',
-		TRUSTED,
-		'low trust source should not be in connect-src',
-	);
-	assert_source_not_in_directive(
-		csp,
-		'style-src',
-		TRUSTED,
-		'low trust source should not be in style-src',
-	);
+	test('multiple sources with different trust levels', () => {
+		const sources = [
+			create_test_source(TRUSTED, 'high'),
+			create_test_source(TRUSTED_2, 'medium'),
+			create_test_source(TRUSTED_A, 'low'),
+		];
 
-	// Low trust sources should be in low trust directives
-	assert_source_in_directive(csp, 'img-src', TRUSTED, 'low trust source should be in img-src');
-	assert_source_in_directive(csp, 'media-src', TRUSTED, 'low trust source should be in media-src');
-	assert_source_in_directive(csp, 'font-src', TRUSTED, 'low trust source should be in font-src');
+		const csp = create_csp_directives({trusted_sources: sources});
+
+		// Check high trust source
+		assert_source_in_directive(
+			csp,
+			'script-src',
+			TRUSTED,
+			'high trust source should be in script-src',
+		);
+		assert_source_in_directive(
+			csp,
+			'style-src',
+			TRUSTED,
+			'high trust source should be in style-src',
+		);
+		assert_source_in_directive(csp, 'img-src', TRUSTED, 'high trust source should be in img-src');
+
+		// Check medium trust source
+		assert_source_not_in_directive(
+			csp,
+			'script-src',
+			TRUSTED_2,
+			'medium trust source should not be in script-src',
+		);
+		assert_source_in_directive(
+			csp,
+			'style-src',
+			TRUSTED_2,
+			'medium trust source should be in style-src',
+		);
+		assert_source_in_directive(
+			csp,
+			'img-src',
+			TRUSTED_2,
+			'medium trust source should be in img-src',
+		);
+
+		// Check low trust source
+		assert_source_not_in_directive(
+			csp,
+			'script-src',
+			TRUSTED_A,
+			'low trust source should not be in script-src',
+		);
+		assert_source_not_in_directive(
+			csp,
+			'style-src',
+			TRUSTED_A,
+			'low trust source should not be in style-src',
+		);
+		assert_source_in_directive(csp, 'img-src', TRUSTED_A, 'low trust source should be in img-src');
+	});
 });
 
-test('multiple sources with different trust levels', () => {
-	const sources = [
-		create_test_source(TRUSTED, 'high'),
-		create_test_source(TRUSTED_2, 'medium'),
-		create_test_source(TRUSTED_A, 'low'),
-	];
+describe('sources with explicit directives only', () => {
+	test('source with only directives is added only to those directives', () => {
+		const csp = create_csp_directives({
+			trusted_sources: [create_test_source_with_directives(TRUSTED_2, ['script-src'])],
+		});
 
-	const csp = create_csp_directives({trusted_sources: sources});
+		// Source should be in script-src due to explicit inclusion
+		assert_source_in_directive(
+			csp,
+			'script-src',
+			TRUSTED_2,
+			'source with only directives should be in specified directive',
+		);
 
-	// Check high trust source
-	assert_source_in_directive(csp, 'script-src', TRUSTED, 'high trust source should be in script-src');
-	assert_source_in_directive(csp, 'style-src', TRUSTED, 'high trust source should be in style-src');
-	assert_source_in_directive(csp, 'img-src', TRUSTED, 'high trust source should be in img-src');
-
-	// Check medium trust source
-	assert_source_not_in_directive(
-		csp,
-		'script-src',
-		TRUSTED_2,
-		'medium trust source should not be in script-src',
-	);
-	assert_source_in_directive(csp, 'style-src', TRUSTED_2, 'medium trust source should be in style-src');
-	assert_source_in_directive(csp, 'img-src', TRUSTED_2, 'medium trust source should be in img-src');
-
-	// Check low trust source
-	assert_source_not_in_directive(
-		csp,
-		'script-src',
-		TRUSTED_A,
-		'low trust source should not be in script-src',
-	);
-	assert_source_not_in_directive(
-		csp,
-		'style-src',
-		TRUSTED_A,
-		'low trust source should not be in style-src',
-	);
-	assert_source_in_directive(csp, 'img-src', TRUSTED_A, 'low trust source should be in img-src');
-});
-
-// ============================================================================
-// Sources with explicit directives only
-// ============================================================================
-
-test('source with only directives is added only to those directives', () => {
-	const csp = create_csp_directives({
-		trusted_sources: [create_test_source_with_directives(TRUSTED_2, ['script-src'])],
+		// Source should NOT be in other directives when no trust is specified
+		assert_source_not_in_directive(
+			csp,
+			'img-src',
+			TRUSTED_2,
+			'source with only directives should not be in low trust directive (img-src)',
+		);
+		assert_source_not_in_directive(
+			csp,
+			'style-src',
+			TRUSTED_2,
+			'source with only directives should not be in medium trust directive (style-src)',
+		);
+		assert_source_not_in_directive(
+			csp,
+			'connect-src',
+			TRUSTED_2,
+			'source with only directives should not be in high trust directive (connect-src)',
+		);
 	});
 
-	// Source should be in script-src due to explicit inclusion
-	assert_source_in_directive(
-		csp,
-		'script-src',
-		TRUSTED_2,
-		'source with only directives should be in specified directive',
-	);
+	test('source with multiple explicit directives', () => {
+		const csp = create_csp_directives({
+			trusted_sources: [create_test_source_with_directives(TRUSTED, ['script-src', 'connect-src'])],
+		});
 
-	// Source should NOT be in other directives when no trust is specified
-	assert_source_not_in_directive(
-		csp,
-		'img-src',
-		TRUSTED_2,
-		'source with only directives should not be in low trust directive (img-src)',
-	);
-	assert_source_not_in_directive(
-		csp,
-		'style-src',
-		TRUSTED_2,
-		'source with only directives should not be in medium trust directive (style-src)',
-	);
-	assert_source_not_in_directive(
-		csp,
-		'connect-src',
-		TRUSTED_2,
-		'source with only directives should not be in high trust directive (connect-src)',
-	);
+		// Source should be added to explicitly specified directives
+		assert_source_in_directive(csp, 'script-src', TRUSTED, 'source should be in script-src');
+		assert_source_in_directive(csp, 'connect-src', TRUSTED, 'source should be in connect-src');
+
+		// Source should not be added to other directives
+		assert_source_not_in_directive(csp, 'img-src', TRUSTED, 'source should not be in img-src');
+		assert_source_not_in_directive(csp, 'style-src', TRUSTED, 'source should not be in style-src');
+	});
 });
 
-test('source with multiple explicit directives', () => {
-	const csp = create_csp_directives({
-		trusted_sources: [create_test_source_with_directives(TRUSTED, ['script-src', 'connect-src'])],
+describe('sources with both trust and directives (additive behavior)', () => {
+	test('source with both trust and directives uses additive behavior', () => {
+		const csp = create_csp_directives({
+			trusted_sources: [
+				create_test_source_with_both(TRUSTED, 'low', ['script-src']), // Explicit + low trust
+			],
+		});
+
+		// Source should be in script-src due to explicit directive inclusion
+		assert_source_in_directive(
+			csp,
+			'script-src',
+			TRUSTED,
+			'source should be in explicitly specified directive despite low trust level',
+		);
+
+		// Source should also be in other low-trust directives due to trust level
+		assert_source_in_directive(
+			csp,
+			'img-src',
+			TRUSTED,
+			'source should also be in img-src due to low trust level',
+		);
+
+		// Source should NOT be in medium or high trust directives (only where explicitly added)
+		assert_source_not_in_directive(
+			csp,
+			'style-src',
+			TRUSTED,
+			'low trust source should not be in style-src (medium trust)',
+		);
+		assert_source_not_in_directive(
+			csp,
+			'connect-src',
+			TRUSTED,
+			'low trust source should not be in connect-src (high trust)',
+		);
 	});
 
-	// Source should be added to explicitly specified directives
-	assert_source_in_directive(csp, 'script-src', TRUSTED, 'source should be in script-src');
-	assert_source_in_directive(csp, 'connect-src', TRUSTED, 'source should be in connect-src');
+	test('medium trust with explicit high-trust directive', () => {
+		const csp = create_csp_directives({
+			trusted_sources: [
+				create_test_source_with_both(TRUSTED, 'medium', ['connect-src']), // Add to connect-src despite medium trust
+			],
+		});
 
-	// Source should not be added to other directives
-	assert_source_not_in_directive(csp, 'img-src', TRUSTED, 'source should not be in img-src');
-	assert_source_not_in_directive(csp, 'style-src', TRUSTED, 'source should not be in style-src');
+		// Explicit directive should work regardless of trust
+		assert_source_in_directive(
+			csp,
+			'connect-src',
+			TRUSTED,
+			'medium trusted source should be in connect-src due to explicit directive',
+		);
+
+		// Trust level should still apply normally for non-specified directives
+		assert_source_not_in_directive(
+			csp,
+			'script-src',
+			TRUSTED,
+			'medium trusted source should not be in script-src',
+		);
+		assert_source_in_directive(
+			csp,
+			'style-src',
+			TRUSTED,
+			'medium trusted source should be in style-src',
+		);
+		assert_source_in_directive(
+			csp,
+			'img-src',
+			TRUSTED,
+			'medium trusted source should be in img-src',
+		);
+	});
 });
 
-// ============================================================================
-// Sources with both trust and directives (additive behavior)
-// ============================================================================
+describe('edge cases for source specs', () => {
+	test('source with empty directives array', () => {
+		const csp = create_csp_directives({
+			trusted_sources: [
+				{
+					source: TRUSTED as any,
+					directives: [], // Empty array
+				},
+			],
+		});
 
-test('source with both trust and directives uses additive behavior', () => {
-	const csp = create_csp_directives({
-		trusted_sources: [
-			create_test_source_with_both(TRUSTED, 'low', ['script-src']), // Explicit + low trust
-		],
+		// Source should not be in any directives since there's no trust level
+		assert_source_not_in_directive(csp, 'script-src', TRUSTED);
+		assert_source_not_in_directive(csp, 'img-src', TRUSTED);
+		assert_source_not_in_directive(csp, 'style-src', TRUSTED);
 	});
 
-	// Source should be in script-src due to explicit directive inclusion
-	assert_source_in_directive(
-		csp,
-		'script-src',
-		TRUSTED,
-		'source should be in explicitly specified directive despite low trust level',
-	);
+	test('source with neither trust nor directives', () => {
+		const csp = create_csp_directives({
+			trusted_sources: [
+				{
+					source: TRUSTED as any,
+					// Neither trust nor directives specified
+				},
+			],
+		});
 
-	// Source should also be in other low-trust directives due to trust level
-	assert_source_in_directive(
-		csp,
-		'img-src',
-		TRUSTED,
-		'source should also be in img-src due to low trust level',
-	);
-
-	// Source should NOT be in medium or high trust directives (only where explicitly added)
-	assert_source_not_in_directive(
-		csp,
-		'style-src',
-		TRUSTED,
-		'low trust source should not be in style-src (medium trust)',
-	);
-	assert_source_not_in_directive(
-		csp,
-		'connect-src',
-		TRUSTED,
-		'low trust source should not be in connect-src (high trust)',
-	);
-});
-
-test('medium trust with explicit high-trust directive', () => {
-	const csp = create_csp_directives({
-		trusted_sources: [
-			create_test_source_with_both(TRUSTED, 'medium', ['connect-src']), // Add to connect-src despite medium trust
-		],
+		// Source should not be in any directives
+		assert_source_not_in_directive(csp, 'script-src', TRUSTED);
+		assert_source_not_in_directive(csp, 'img-src', TRUSTED);
+		assert_source_not_in_directive(csp, 'style-src', TRUSTED);
 	});
 
-	// Explicit directive should work regardless of trust
-	assert_source_in_directive(
-		csp,
-		'connect-src',
-		TRUSTED,
-		'medium trusted source should be in connect-src due to explicit directive',
-	);
+	test('multiple sources with mixed specs', () => {
+		const csp = create_csp_directives({
+			trusted_sources: [
+				create_test_source(TRUSTED, 'high'), // Trust only
+				create_test_source_with_directives(TRUSTED_2, ['img-src']), // Directives only
+				create_test_source_with_both(TRUSTED_A, 'medium', ['script-src']), // Both
+			],
+		});
 
-	// Trust level should still apply normally for non-specified directives
-	assert_source_not_in_directive(
-		csp,
-		'script-src',
-		TRUSTED,
-		'medium trusted source should not be in script-src',
-	);
-	assert_source_in_directive(csp, 'style-src', TRUSTED, 'medium trusted source should be in style-src');
-	assert_source_in_directive(csp, 'img-src', TRUSTED, 'medium trusted source should be in img-src');
+		// TRUSTED (high trust) should be everywhere
+		assert_source_in_directive(csp, 'script-src', TRUSTED);
+		assert_source_in_directive(csp, 'style-src', TRUSTED);
+		assert_source_in_directive(csp, 'img-src', TRUSTED);
+
+		// TRUSTED_2 (directives only) should only be in img-src
+		assert_source_not_in_directive(csp, 'script-src', TRUSTED_2);
+		assert_source_not_in_directive(csp, 'style-src', TRUSTED_2);
+		assert_source_in_directive(csp, 'img-src', TRUSTED_2);
+
+		// TRUSTED_A (medium + script-src) should be in script-src, style-src, img-src, connect-src
+		assert_source_in_directive(csp, 'script-src', TRUSTED_A);
+		assert_source_in_directive(csp, 'style-src', TRUSTED_A);
+		assert_source_in_directive(csp, 'img-src', TRUSTED_A);
+		assert_source_in_directive(csp, 'connect-src', TRUSTED_A); // Medium is sufficient for connect-src
+	});
 });
 
-// ============================================================================
-// Edge cases for source specs
-// ============================================================================
-
-test('source with empty directives array', () => {
-	const csp = create_csp_directives({
-		trusted_sources: [
-			{
-				source: TRUSTED as any,
-				directives: [], // Empty array
+describe('sources not added to special directives', () => {
+	test('sources not added to ["none"] directives', () => {
+		const csp = create_csp_directives({
+			trusted_sources: [create_test_source(TRUSTED, 'high')],
+			directives: {
+				'script-src': ['none'],
 			},
-		],
+		});
+
+		// Directive with ['none'] should remain ['none'], trusted sources should not be added
+		assert.deepEqual(csp['script-src'], ['none'], "script-src should remain ['none']");
+
+		// Other directives should still get trusted sources
+		assert_source_in_directive(
+			csp,
+			'connect-src',
+			TRUSTED,
+			'connect-src should get trusted sources',
+		);
 	});
 
-	// Source should not be in any directives since there's no trust level
-	assert_source_not_in_directive(csp, 'script-src', TRUSTED);
-	assert_source_not_in_directive(csp, 'img-src', TRUSTED);
-	assert_source_not_in_directive(csp, 'style-src', TRUSTED);
+	test('sources not added to non-array directives', () => {
+		const csp = create_csp_directives({
+			trusted_sources: [create_test_source(TRUSTED, 'high')],
+		});
+
+		// Boolean directive should not have sources added
+		assert.strictEqual(csp['upgrade-insecure-requests'], true);
+		assert.strictEqual(typeof csp['upgrade-insecure-requests'], 'boolean');
+	});
 });
 
-test('source with neither trust nor directives', () => {
-	const csp = create_csp_directives({
-		trusted_sources: [
-			{
-				source: TRUSTED as any,
-				// Neither trust nor directives specified
+describe('interaction with value_defaults', () => {
+	test('sources added to custom value_defaults', () => {
+		const csp = create_csp_directives({
+			value_defaults: {
+				'connect-src': ['self', 'https://api.example.com'],
 			},
-		],
+			trusted_sources: [create_test_source(TRUSTED, 'high')],
+		});
+
+		// Trusted source should be added to custom defaults
+		assert_source_in_directive(csp, 'connect-src', 'self');
+		assert_source_in_directive(csp, 'connect-src', 'https://api.example.com' as any);
+		assert_source_in_directive(csp, 'connect-src', TRUSTED);
 	});
 
-	// Source should not be in any directives
-	assert_source_not_in_directive(csp, 'script-src', TRUSTED);
-	assert_source_not_in_directive(csp, 'img-src', TRUSTED);
-	assert_source_not_in_directive(csp, 'style-src', TRUSTED);
-});
+	test('sources added when value_defaults overrides base', () => {
+		const csp = create_csp_directives({
+			value_defaults: {
+				'script-src': ['self'], // Remove COLOR_SCHEME_SCRIPT_HASH
+			},
+			trusted_sources: [create_test_source(TRUSTED, 'high')],
+		});
 
-test('multiple sources with mixed specs', () => {
-	const csp = create_csp_directives({
-		trusted_sources: [
-			create_test_source(TRUSTED, 'high'), // Trust only
-			create_test_source_with_directives(TRUSTED_2, ['img-src']), // Directives only
-			create_test_source_with_both(TRUSTED_A, 'medium', ['script-src']), // Both
-		],
+		// Trusted source should be added to the new defaults
+		assert_source_in_directive(csp, 'script-src', 'self');
+		assert_source_in_directive(csp, 'script-src', TRUSTED);
+		// COLOR_SCHEME_SCRIPT_HASH should not be present
+		assert.ok(
+			!csp['script-src']!.includes('sha256-QOxqn7EUzb3ydF9SALJoJGWSvywW9R0AfTDSenB83Z8=' as any),
+		);
 	});
 
-	// TRUSTED (high trust) should be everywhere
-	assert_source_in_directive(csp, 'script-src', TRUSTED);
-	assert_source_in_directive(csp, 'style-src', TRUSTED);
-	assert_source_in_directive(csp, 'img-src', TRUSTED);
+	test('source added only once when both trust and explicit directives match', () => {
+		// Source with high trust + explicit img-src (which is low trust by default)
+		// Should only appear once even though it matches via both paths
+		const csp = create_csp_directives({
+			trusted_sources: [
+				create_test_source_with_both(TRUSTED, 'high', ['img-src']), // High trust + explicit img-src
+			],
+		});
 
-	// TRUSTED_2 (directives only) should only be in img-src
-	assert_source_not_in_directive(csp, 'script-src', TRUSTED_2);
-	assert_source_not_in_directive(csp, 'style-src', TRUSTED_2);
-	assert_source_in_directive(csp, 'img-src', TRUSTED_2);
+		// Count occurrences - should be exactly 1, not 2
+		const img_src_values = csp['img-src']!;
+		const occurrences = img_src_values.filter((v) => v === TRUSTED).length;
 
-	// TRUSTED_A (medium + script-src) should be in script-src, style-src, img-src, connect-src
-	assert_source_in_directive(csp, 'script-src', TRUSTED_A);
-	assert_source_in_directive(csp, 'style-src', TRUSTED_A);
-	assert_source_in_directive(csp, 'img-src', TRUSTED_A);
-	assert_source_in_directive(csp, 'connect-src', TRUSTED_A); // Medium is sufficient for connect-src
-});
+		assert.strictEqual(
+			occurrences,
+			1,
+			'source should appear exactly once even though it matches via trust and explicit directive',
+		);
 
-// ============================================================================
-// Sources not added to special directives
-// ============================================================================
-
-test('sources not added to ["none"] directives', () => {
-	const csp = create_csp_directives({
-		trusted_sources: [create_test_source(TRUSTED, 'high')],
-		directives: {
-			'script-src': ['none'],
-		},
+		// Verify it's actually there
+		assert_source_in_directive(csp, 'img-src', TRUSTED);
 	});
-
-	// Directive with ['none'] should remain ['none'], trusted sources should not be added
-	assert.deepEqual(csp['script-src'], ['none'], "script-src should remain ['none']");
-
-	// Other directives should still get trusted sources
-	assert_source_in_directive(csp, 'connect-src', TRUSTED, 'connect-src should get trusted sources');
-});
-
-test('sources not added to non-array directives', () => {
-	const csp = create_csp_directives({
-		trusted_sources: [create_test_source(TRUSTED, 'high')],
-	});
-
-	// Boolean directive should not have sources added
-	assert.strictEqual(csp['upgrade-insecure-requests'], true);
-	assert.strictEqual(typeof csp['upgrade-insecure-requests'], 'boolean');
-});
-
-// ============================================================================
-// Interaction with value_defaults
-// ============================================================================
-
-test('sources added to custom value_defaults', () => {
-	const csp = create_csp_directives({
-		value_defaults: {
-			'connect-src': ['self', 'https://api.example.com'],
-		},
-		trusted_sources: [create_test_source(TRUSTED, 'high')],
-	});
-
-	// Trusted source should be added to custom defaults
-	assert_source_in_directive(csp, 'connect-src', 'self');
-	assert_source_in_directive(csp, 'connect-src', 'https://api.example.com' as any);
-	assert_source_in_directive(csp, 'connect-src', TRUSTED);
-});
-
-test('sources added when value_defaults overrides base', () => {
-	const csp = create_csp_directives({
-		value_defaults: {
-			'script-src': ['self'], // Remove COLOR_SCHEME_SCRIPT_HASH
-		},
-		trusted_sources: [create_test_source(TRUSTED, 'high')],
-	});
-
-	// Trusted source should be added to the new defaults
-	assert_source_in_directive(csp, 'script-src', 'self');
-	assert_source_in_directive(csp, 'script-src', TRUSTED);
-	// COLOR_SCHEME_SCRIPT_HASH should not be present
-	assert.ok(!csp['script-src']!.includes('sha256-QOxqn7EUzb3ydF9SALJoJGWSvywW9R0AfTDSenB83Z8=' as any));
-});
-
-test('source added only once when both trust and explicit directives match', () => {
-	// Source with high trust + explicit img-src (which is low trust by default)
-	// Should only appear once even though it matches via both paths
-	const csp = create_csp_directives({
-		trusted_sources: [
-			create_test_source_with_both(TRUSTED, 'high', ['img-src']), // High trust + explicit img-src
-		],
-	});
-
-	// Count occurrences - should be exactly 1, not 2
-	const img_src_values = csp['img-src']!;
-	const occurrences = img_src_values.filter((v) => v === TRUSTED).length;
-
-	assert.strictEqual(
-		occurrences,
-		1,
-		'source should appear exactly once even though it matches via trust and explicit directive',
-	);
-
-	// Verify it's actually there
-	assert_source_in_directive(csp, 'img-src', TRUSTED);
 });
