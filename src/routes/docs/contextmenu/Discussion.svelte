@@ -44,21 +44,14 @@
 			<a href="https://bugs.webkit.org/show_bug.cgi?id=213953">WebKit bug #213953</a>)
 		</li>
 		<li>
-			Browsers block <span class="font_family_mono">navigator.vibrate</span> haptic feedback due
-			to longpress timeout workaround
+			Browsers block <span class="font_family_mono">navigator.vibrate</span> haptic feedback due to longpress
+			timeout workaround
 		</li>
 		<li>
 			<strong>Opt into this version</strong> only if you need iOS Safari support and are willing to accept
 			the added complexity
 		</li>
 	</ul>
-	<aside>
-		<p>
-			<strong>Breaking change:</strong> The default <code>Contextmenu_Root</code> is now the
-			simplified version. If you need iOS Safari support, explicitly import
-			<code>Contextmenu_Root_For_Safari_Compatibility</code> instead.
-		</p>
-	</aside>
 	<p>
 		The design choice to provide both versions acknowledges that iOS Safari support adds significant
 		complexity, and not all applications require it. The simplified version is the default because
@@ -148,19 +141,19 @@
 	</ol>
 	<p>
 		For #1, Fuz includes a custom contextmenu. Like Google Docs, when you right-click or
-		tap-and-hold (aka longpress) on an element inside Fuz's
-		<code>Contextmenu</code>, you'll see app-specific options and actions for your current context.
+		tap-and-hold (aka longpress) on an element inside a Fuz
+		<code>Contextmenu</code>, you'll see app-specific options and actions for that event target and
+		its ancestors.
 	</p>
 	<p>
-		This is a powerful UX pattern, but it violates #2. The Fuz contextmenu breaks the normal browser
-		behavior of showing the system contextmenu and device-specific behaviors like selecting text on
-		a longpress.
+		This is a powerful UX pattern, but it's in tension with #2. The Fuz contextmenu breaks the
+		normal browser behavior of showing the system contextmenu and device-specific behaviors like
+		selecting text on a longpress.
 	</p>
 	<p>
 		Balancing these two concerns is going to be an ongoing challenge, and my current belief is that
-		the contextmenu is too useful and powerful to ignore. I'm open to critical feedback, and I'll do
-		what I can to minimize the harmful effects of choices like this. iOS in particular seems buggy
-		despite my attempts to accommodate it, help is appreciated.
+		the contextmenu is too useful and powerful to ignore for some usecases. I'm open to critical
+		feedback, and I'll do what I can to minimize the harmful effects of choices like this.
 	</p>
 	<p>Mitigations:</p>
 	<ul>
@@ -172,7 +165,9 @@
 		<li>
 			To bypass the Fuz contextmenu on a touch device, like to select text, tap one extra time
 			before your longpress. This means double-tap-and-hold should behave the same as tap-and-hold
-			on standard web pages.
+			on standard web pages. This double tap gesture obviously can't work for clickable targets like
+			links, but for links, they're displayed as the first contextmenu entry, and longpressing that
+			one does the standard browser action.
 		</li>
 		<li>
 			Triggering the contextmenu inside of the Fuz contextmenu shows your system contextmenu. This

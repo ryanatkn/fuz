@@ -324,7 +324,8 @@ export const open_contextmenu = (
 	// `navigator.vibrate()` works with the simplified `Contextmenu_Root` (triggered from direct user event),
 	// but gets blocked when used with `Contextmenu_Root_For_Safari_Compatibility` because the longpress
 	// workaround triggers from a timeout rather than a direct user interaction.
-	if (BROWSER && (navigator.vibrate as unknown)) {
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+	if (BROWSER && navigator.vibrate) {
 		navigator.vibrate(CONTEXTMENU_OPEN_VIBRATE_DURATION);
 	}
 	return true;

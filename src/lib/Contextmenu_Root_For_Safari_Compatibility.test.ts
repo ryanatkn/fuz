@@ -1,10 +1,8 @@
 /**
  * @vitest-environment jsdom
  */
-/* eslint-disable @typescript-eslint/no-empty-function */
-/* eslint-disable @typescript-eslint/non-nullable-type-assertion-style */
 import {describe, test, assert, beforeEach, afterEach, vi} from 'vitest';
-import {tick} from 'svelte';
+import {flushSync, tick} from 'svelte';
 
 import Contextmenu_Root_For_Safari_Compatibility from '$lib/Contextmenu_Root_For_Safari_Compatibility.svelte';
 import {Contextmenu_State} from '$lib/contextmenu_state.svelte.js';
@@ -16,25 +14,44 @@ import {
 	create_mouse_event,
 	create_touch_event,
 	set_event_target,
-	flush_updates,
 } from '$lib/test_helpers.js';
+
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/non-nullable-type-assertion-style */
 
 describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 	let contextmenu: Contextmenu_State;
 	let mounted: ReturnType<typeof mount_component> | null;
 
+	// Helper to create a contextmenu with standard layout
+	const create_test_contextmenu = () => {
+		const cm = new Contextmenu_State();
+		cm.layout.width = 1024;
+		cm.layout.height = 768;
+		return cm;
+	};
+
+	// Helper to mount component with contextmenu
+	const mount_with_contextmenu = (cm?: Contextmenu_State, props: Record<string, any> = {}) => {
+		const ctx = cm || contextmenu;
+		return mount_component(Contextmenu_Root_For_Safari_Compatibility, {
+			contextmenu: ctx,
+			children: (() => {
+				// Empty children snippet
+			}) as any,
+			...props,
+		});
+	};
+
 	beforeEach(() => {
-		contextmenu = new Contextmenu_State();
-		// Mock layout dimensions
-		contextmenu.layout.width = 1024;
-		contextmenu.layout.height = 768;
+		contextmenu = create_test_contextmenu();
 		mounted = null;
 		vi.useFakeTimers();
 	});
 
-	afterEach(() => {
+	afterEach(async () => {
 		if (mounted) {
-			unmount_component(mounted.instance, mounted.container);
+			await unmount_component(mounted.instance, mounted.container);
 			mounted = null;
 		}
 		vi.restoreAllMocks();
@@ -43,10 +60,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 
 	describe('contextmenu event handling', () => {
 		test('opens on contextmenu event', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			const target = document.createElement('div');
 			target.dataset.contextmenu = '0';
@@ -61,13 +75,10 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 
 		test('prevents default on contextmenu when opened', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			contextmenu.open([(() => {}) as any], 100, 200);
-			flush_updates();
+			flushSync();
 
 			const event = create_contextmenu_event(150, 250);
 			set_event_target(event, document.body);
@@ -77,10 +88,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 
 		test('ignores contextmenu with shift key', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			const event = create_contextmenu_event(100, 200, {shiftKey: true});
 			set_event_target(event, document.body);
@@ -91,10 +99,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 
 		test('ignores contextmenu on editable elements', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			const input = document.createElement('input');
 			document.body.appendChild(input);
@@ -109,10 +114,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 
 		test('ignores contextmenu inside editable elements', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			const contenteditable = document.createElement('div');
 			contenteditable.contentEditable = 'true';
@@ -130,14 +132,11 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 
 		test('ignores contextmenu on the menu itself', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 			const {container} = mounted;
 
 			contextmenu.open([(() => {}) as any], 100, 200);
-			flush_updates();
+			flushSync();
 
 			const menu = container.querySelector('.contextmenu');
 			assert.ok(menu);
@@ -151,11 +150,9 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 
 		test('applies offset to contextmenu position', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
+			mounted = mount_with_contextmenu(undefined, {
 				open_offset_x: 5,
 				open_offset_y: 10,
-				children: (() => {}) as any,
 			});
 
 			const target = document.createElement('div');
@@ -172,10 +169,8 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 
 	describe('touch event handling', () => {
 		test('starts longpress timer on touchstart', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
+			mounted = mount_with_contextmenu(undefined, {
 				longpress_duration: 500,
-				children: (() => {}) as any,
 			});
 
 			const target = document.createElement('div');
@@ -190,17 +185,15 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 
 			// Advance timer
 			vi.advanceTimersByTime(500);
-			flush_updates();
+			flushSync();
 
 			assert.strictEqual(contextmenu.opened, false); // No items registered
 			target.remove();
 		});
 
 		test('opens contextmenu after longpress duration', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
+			mounted = mount_with_contextmenu(undefined, {
 				longpress_duration: 500,
-				children: (() => {}) as any,
 			});
 
 			const target = document.createElement('div');
@@ -227,11 +220,9 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 
 		test('cancels longpress on touchmove beyond tolerance', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
+			mounted = mount_with_contextmenu(undefined, {
 				longpress_duration: 500,
 				longpress_move_tolerance: 10,
-				children: (() => {}) as any,
 			});
 
 			const target = document.createElement('div');
@@ -249,18 +240,16 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 
 			// Advance timer - should not open
 			vi.advanceTimersByTime(500);
-			flush_updates();
+			flushSync();
 
 			assert.strictEqual(contextmenu.opened, false);
 			target.remove();
 		});
 
 		test('allows longpress with movement within tolerance', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
+			mounted = mount_with_contextmenu(undefined, {
 				longpress_duration: 500,
 				longpress_move_tolerance: 10,
-				children: (() => {}) as any,
 			});
 
 			const target = document.createElement('div');
@@ -282,10 +271,8 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 
 		test('cancels longpress on touchend', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
+			mounted = mount_with_contextmenu(undefined, {
 				longpress_duration: 500,
-				children: (() => {}) as any,
 			});
 
 			const target = document.createElement('div');
@@ -303,21 +290,19 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 
 			// Advance timer - should not open
 			vi.advanceTimersByTime(500);
-			flush_updates();
+			flushSync();
 
 			assert.strictEqual(contextmenu.opened, false);
 			target.remove();
 		});
 
 		test('ignores touchstart when contextmenu already open', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
+			mounted = mount_with_contextmenu(undefined, {
 				longpress_duration: 500,
-				children: (() => {}) as any,
 			});
 
 			contextmenu.open([(() => {}) as any], 50, 50);
-			flush_updates();
+			flushSync();
 
 			const target = document.createElement('div');
 			document.body.appendChild(target);
@@ -328,7 +313,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 
 			// Should not start a new longpress
 			vi.advanceTimersByTime(500);
-			flush_updates();
+			flushSync();
 
 			// Position should be unchanged
 			assert.strictEqual(contextmenu.x, 50);
@@ -337,10 +322,8 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 
 		test('ignores touchstart with multiple touches', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
+			mounted = mount_with_contextmenu(undefined, {
 				longpress_duration: 500,
-				children: (() => {}) as any,
 			});
 
 			const target = document.createElement('div');
@@ -354,17 +337,15 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 			window.dispatchEvent(event);
 
 			vi.advanceTimersByTime(500);
-			flush_updates();
+			flushSync();
 
 			assert.strictEqual(contextmenu.opened, false);
 			target.remove();
 		});
 
 		test('ignores touchstart on editable elements', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
+			mounted = mount_with_contextmenu(undefined, {
 				longpress_duration: 500,
-				children: (() => {}) as any,
 			});
 
 			const input = document.createElement('input');
@@ -375,7 +356,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 			window.dispatchEvent(event);
 
 			vi.advanceTimersByTime(500);
-			flush_updates();
+			flushSync();
 
 			assert.strictEqual(contextmenu.opened, false);
 			input.remove();
@@ -384,13 +365,11 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 
 	describe('tap-then-longpress bypass gesture', () => {
 		test('bypasses contextmenu on tap-then-longpress', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
+			mounted = mount_with_contextmenu(undefined, {
 				longpress_duration: 500,
 				bypass_with_tap_then_longpress: true,
 				tap_then_longpress_duration: 600,
 				tap_then_longpress_move_tolerance: 5,
-				children: (() => {}) as any,
 			});
 
 			const target = document.createElement('div');
@@ -413,20 +392,18 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 
 			// Should not start longpress due to bypass
 			vi.advanceTimersByTime(500);
-			flush_updates();
+			flushSync();
 
 			assert.strictEqual(contextmenu.opened, false);
 			target.remove();
 		});
 
 		test('does not bypass if second tap is too far', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
+			mounted = mount_with_contextmenu(undefined, {
 				longpress_duration: 500,
 				bypass_with_tap_then_longpress: true,
 				tap_then_longpress_duration: 600,
 				tap_then_longpress_move_tolerance: 5,
-				children: (() => {}) as any,
 			});
 
 			const target = document.createElement('div');
@@ -453,12 +430,10 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 
 		test('does not bypass if second tap is too late', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
+			mounted = mount_with_contextmenu(undefined, {
 				longpress_duration: 500,
 				bypass_with_tap_then_longpress: true,
 				tap_then_longpress_duration: 600,
-				children: (() => {}) as any,
 			});
 
 			const target = document.createElement('div');
@@ -485,11 +460,9 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 
 		test('bypass can be disabled', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
+			mounted = mount_with_contextmenu(undefined, {
 				longpress_duration: 500,
 				bypass_with_tap_then_longpress: false,
-				children: (() => {}) as any,
 			});
 
 			const target = document.createElement('div');
@@ -517,13 +490,10 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 
 	describe('closing behavior', () => {
 		test('closes on mousedown outside menu', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			contextmenu.open([(() => {}) as any], 100, 200);
-			flush_updates();
+			flushSync();
 
 			const event = create_mouse_event('mousedown', {clientX: 50, clientY: 50});
 			set_event_target(event, document.body);
@@ -533,14 +503,11 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 
 		test('does not close on mousedown inside menu', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 			const {container} = mounted;
 
 			contextmenu.open([(() => {}) as any], 100, 200);
-			flush_updates();
+			flushSync();
 
 			const menu = container.querySelector('.contextmenu');
 			assert.ok(menu);
@@ -553,13 +520,10 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 
 		test('closes on Escape key', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			contextmenu.open([(() => {}) as any], 100, 200);
-			flush_updates();
+			flushSync();
 
 			const event = create_keyboard_event('Escape');
 			window.dispatchEvent(event);
@@ -571,13 +535,10 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 
 	describe('keyboard navigation', () => {
 		test('ArrowDown calls select_next', async () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			contextmenu.open([], 100, 200);
-			flush_updates();
+			flushSync();
 			await tick(); // Wait for passive_event action to update
 			const spy = vi.spyOn(contextmenu, 'select_next');
 
@@ -586,13 +547,10 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 
 		test('ArrowUp calls select_previous', async () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			contextmenu.open([], 100, 200);
-			flush_updates();
+			flushSync();
 			await tick();
 			const spy = vi.spyOn(contextmenu, 'select_previous');
 
@@ -601,13 +559,10 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 
 		test('Home calls select_first', async () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			contextmenu.open([], 100, 200);
-			flush_updates();
+			flushSync();
 			await tick();
 			const spy = vi.spyOn(contextmenu, 'select_first');
 
@@ -616,13 +571,10 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 
 		test('End calls select_last', async () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			contextmenu.open([], 100, 200);
-			flush_updates();
+			flushSync();
 			await tick();
 			const spy = vi.spyOn(contextmenu, 'select_last');
 
@@ -631,13 +583,10 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 
 		test('PageDown calls select_next', async () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			contextmenu.open([], 100, 200);
-			flush_updates();
+			flushSync();
 			await tick();
 			const spy = vi.spyOn(contextmenu, 'select_next');
 
@@ -646,13 +595,10 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 
 		test('PageUp calls select_previous', async () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			contextmenu.open([], 100, 200);
-			flush_updates();
+			flushSync();
 			await tick();
 			const spy = vi.spyOn(contextmenu, 'select_previous');
 
@@ -661,15 +607,12 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 
 		test('Space activates selected item', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			let activated = false;
 			contextmenu.open([() => (activated = true) as any], 100, 200);
 			contextmenu.select_first();
-			flush_updates();
+			flushSync();
 
 			const event = create_keyboard_event(' ');
 			window.dispatchEvent(event);
@@ -679,15 +622,12 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 
 		test('Enter activates selected item', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			let activated = false;
 			contextmenu.open([() => (activated = true) as any], 100, 200);
 			contextmenu.select_first();
-			flush_updates();
+			flushSync();
 
 			const event = create_keyboard_event('Enter');
 			window.dispatchEvent(event);
@@ -697,10 +637,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 
 		test('keyboard events ignored when not open', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			const event = create_keyboard_event('ArrowDown');
 			window.dispatchEvent(event);
@@ -710,13 +647,10 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 
 		test('keyboard events ignored on editable elements', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			contextmenu.open([(() => {}) as any], 100, 200);
-			flush_updates();
+			flushSync();
 
 			const input = document.createElement('input');
 			document.body.appendChild(input);
@@ -731,16 +665,13 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 
 		test('ArrowRight expands submenu', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			// Create a submenu structure manually
 			const submenu = contextmenu.root_menu.items[0] as any;
 			if (submenu?.is_menu) {
 				contextmenu.select(submenu);
-				flush_updates();
+				flushSync();
 
 				const event = create_keyboard_event('ArrowRight');
 				window.dispatchEvent(event);
@@ -750,14 +681,11 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 
 		test('ArrowLeft collapses selection', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			contextmenu.open([(() => {}) as any], 100, 200);
 			contextmenu.select_first();
-			flush_updates();
+			flushSync();
 
 			const event = create_keyboard_event('ArrowLeft');
 			window.dispatchEvent(event);
@@ -768,14 +696,11 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 
 	describe('positioning', () => {
 		test('positions menu at specified coordinates', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 			const {container} = mounted;
 
 			contextmenu.open([(() => {}) as any], 150, 250);
-			flush_updates();
+			flushSync();
 
 			const menu = container.querySelector('.contextmenu') as HTMLElement;
 			assert.ok(menu);
@@ -786,15 +711,12 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 
 		test('repositions when menu would overflow right edge', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 			const {container} = mounted;
 
 			// Open near right edge
 			contextmenu.open([(() => {}) as any], window.innerWidth - 50, 100);
-			flush_updates();
+			flushSync();
 
 			const menu = container.querySelector('.contextmenu') as HTMLElement;
 			assert.ok(menu);
@@ -805,15 +727,12 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 
 		test('repositions when menu would overflow bottom edge', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 			const {container} = mounted;
 
 			// Open near bottom edge
 			contextmenu.open([(() => {}) as any], 100, window.innerHeight - 50);
-			flush_updates();
+			flushSync();
 
 			const menu = container.querySelector('.contextmenu') as HTMLElement;
 			assert.ok(menu);
@@ -827,24 +746,18 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 			const custom_layout = {width: 800, height: 600};
 			const custom_contextmenu = new Contextmenu_State({layout: custom_layout as any});
 
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu: custom_contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu(custom_contextmenu);
 			const {container} = mounted;
 
 			custom_contextmenu.open([(() => {}) as any], 100, 200);
-			flush_updates();
+			flushSync();
 
 			const layout_el = container.querySelector('.contextmenu_layout');
 			assert.strictEqual(layout_el, null); // Custom layout, no layout element
 		});
 
 		test('tracks layout dimensions automatically', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 			const {container} = mounted;
 
 			const layout_el = container.querySelector('.contextmenu_layout');
@@ -852,10 +765,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 
 		test('uses default offset values', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			// The default offset is -2, -2
 			// This is tested indirectly through the positioning tests
@@ -865,10 +775,8 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 
 	describe('scoped mode', () => {
 		test('scoped mode listens to scoped element only', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
+			mounted = mount_with_contextmenu(undefined, {
 				scoped: true,
-				children: (() => {}) as any,
 			});
 			const {container} = mounted;
 
@@ -877,10 +785,8 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 
 		test('scoped mode ignores window events', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
+			mounted = mount_with_contextmenu(undefined, {
 				scoped: true,
-				children: (() => {}) as any,
 			});
 
 			// Window event should be ignored in scoped mode
@@ -892,10 +798,8 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 
 		test('scoped mode handles events on scoped element', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
+			mounted = mount_with_contextmenu(undefined, {
 				scoped: true,
-				children: (() => {}) as any,
 			});
 			const {container} = mounted;
 
@@ -913,10 +817,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 
 	describe('rendering', () => {
 		test('does not render contextmenu when closed', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 			const {container} = mounted;
 
 			const menu = container.querySelector('.contextmenu');
@@ -924,14 +825,11 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 
 		test('renders contextmenu when opened', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 			const {container} = mounted;
 
 			contextmenu.open([(() => {}) as any], 100, 200);
-			flush_updates();
+			flushSync();
 
 			const menu = container.querySelector('.contextmenu');
 			assert.ok(menu);
@@ -953,14 +851,11 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 
 		test('applies contextmenu CSS classes', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 			const {container} = mounted;
 
 			contextmenu.open([(() => {}) as any], 100, 200);
-			flush_updates();
+			flushSync();
 
 			const menu = container.querySelector('.contextmenu');
 			assert.ok(menu);
@@ -972,10 +867,8 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 
 	describe('longpress timing configurations', () => {
 		test('respects custom longpress_duration', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
+			mounted = mount_with_contextmenu(undefined, {
 				longpress_duration: 1000,
-				children: (() => {}) as any,
 			});
 
 			const target = document.createElement('div');
@@ -987,7 +880,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 
 			// Should not open after 500ms
 			vi.advanceTimersByTime(500);
-			flush_updates();
+			flushSync();
 			assert.strictEqual(contextmenu.opened, false);
 
 			// Would open after 1000ms (if items registered)
@@ -995,11 +888,9 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 
 		test('respects custom longpress_move_tolerance', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
+			mounted = mount_with_contextmenu(undefined, {
 				longpress_duration: 500,
 				longpress_move_tolerance: 50,
-				children: (() => {}) as any,
 			});
 
 			const target = document.createElement('div');
@@ -1020,13 +911,11 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 
 		test('respects custom tap_then_longpress_duration', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
+			mounted = mount_with_contextmenu(undefined, {
 				longpress_duration: 500,
 				bypass_with_tap_then_longpress: true,
 				tap_then_longpress_duration: 1000,
 				tap_then_longpress_move_tolerance: 5,
-				children: (() => {}) as any,
 			});
 
 			const target = document.createElement('div');
@@ -1050,13 +939,11 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 		});
 
 		test('respects custom tap_then_longpress_move_tolerance', () => {
-			mounted = mount_component(Contextmenu_Root_For_Safari_Compatibility, {
-				contextmenu,
+			mounted = mount_with_contextmenu(undefined, {
 				longpress_duration: 500,
 				bypass_with_tap_then_longpress: true,
 				tap_then_longpress_duration: 600,
 				tap_then_longpress_move_tolerance: 20,
-				children: (() => {}) as any,
 			});
 
 			const target = document.createElement('div');

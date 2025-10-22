@@ -1,9 +1,9 @@
 /**
  * @vitest-environment jsdom
  */
-/* eslint-disable @typescript-eslint/no-empty-function */
-/* eslint-disable @typescript-eslint/non-nullable-type-assertion-style */
 import {describe, test, assert, beforeEach, afterEach, vi} from 'vitest';
+import {flushSync} from 'svelte';
+
 import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
 import {Contextmenu_State} from '$lib/contextmenu_state.svelte.js';
 import {
@@ -13,44 +13,68 @@ import {
 	create_keyboard_event,
 	create_mouse_event,
 	set_event_target,
-	flush_updates,
 } from '$lib/test_helpers.js';
+
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/non-nullable-type-assertion-style */
 
 describe('Contextmenu_Root', () => {
 	let contextmenu: Contextmenu_State;
 	let mounted: ReturnType<typeof mount_component> | null = null;
 
+	// Helper to create a contextmenu with standard layout
+	const create_test_contextmenu = () => {
+		const cm = new Contextmenu_State();
+		cm.layout.width = 1024;
+		cm.layout.height = 768;
+		return cm;
+	};
+
+	// Helper to mount component with contextmenu
+	const mount_with_contextmenu = (cm?: Contextmenu_State, props: Record<string, any> = {}) => {
+		const ctx = cm || contextmenu;
+		return mount_component(Contextmenu_Root, {
+			contextmenu: ctx,
+			children: (() => {
+				// Empty children snippet
+			}) as any,
+			...props,
+		});
+	};
+
+	// Helper to setup contextmenu action on element
+	const setup_contextmenu_action = async (
+		element: HTMLElement | SVGElement,
+		params: Array<any>,
+	) => {
+		element.dataset.contextmenu = 'test';
+		const {contextmenu_action} = await import('$lib/contextmenu_state.svelte.js');
+		contextmenu_action(element as any, params);
+	};
+
 	beforeEach(() => {
-		contextmenu = new Contextmenu_State();
-		// Mock layout dimensions
-		contextmenu.layout.width = 1024;
-		contextmenu.layout.height = 768;
+		contextmenu = create_test_contextmenu();
 	});
 
-	afterEach(() => {
+	afterEach(async () => {
 		if (mounted) {
-			unmount_component(mounted.instance, mounted.container);
+			await unmount_component(mounted.instance, mounted.container);
 			mounted = null;
 		}
 	});
 
 	describe('contextmenu event handling', () => {
 		test('right-click opens contextmenu with entries', async () => {
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			const {container} = mounted;
 
 			// Add a div with contextmenu data
 			const target = document.createElement('div');
-			target.dataset.contextmenu = 'test';
 			container.appendChild(target);
 
-			// Mock the contextmenu cache
-			const {contextmenu_action} = await import('$lib/contextmenu_state.svelte.js');
-			contextmenu_action(target, [
+			// Setup contextmenu action
+			await setup_contextmenu_action(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => {}}} as any,
 			]);
 
@@ -66,10 +90,7 @@ describe('Contextmenu_Root', () => {
 		});
 
 		test('shift+right-click prevents opening', () => {
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			const event = create_contextmenu_event(100, 200, {shiftKey: true});
 
@@ -80,10 +101,7 @@ describe('Contextmenu_Root', () => {
 		});
 
 		test('right-click on input prevents opening', () => {
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			const {container} = mounted;
 
@@ -99,10 +117,7 @@ describe('Contextmenu_Root', () => {
 		});
 
 		test('right-click on textarea prevents opening', () => {
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			const {container} = mounted;
 
@@ -118,10 +133,7 @@ describe('Contextmenu_Root', () => {
 		});
 
 		test('right-click on contenteditable prevents opening', () => {
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			const {container} = mounted;
 
@@ -138,16 +150,13 @@ describe('Contextmenu_Root', () => {
 		});
 
 		test('right-click on contextmenu element itself prevents opening', async () => {
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			const {container} = mounted;
 
 			// Open menu first
 			contextmenu.open([(() => {}) as any], 100, 200);
-			flush_updates();
+			flushSync();
 
 			const menu_el = container.querySelector('.contextmenu');
 			assert.ok(menu_el);
@@ -175,21 +184,17 @@ describe('Contextmenu_Root', () => {
 		});
 
 		test('applies custom offsets', async () => {
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu,
+			mounted = mount_with_contextmenu(undefined, {
 				open_offset_x: 10,
 				open_offset_y: 20,
-				children: (() => {}) as any,
 			});
 
 			const {container} = mounted;
 
 			const target = document.createElement('div');
-			target.dataset.contextmenu = 'test';
 			container.appendChild(target);
 
-			const {contextmenu_action} = await import('$lib/contextmenu_state.svelte.js');
-			contextmenu_action(target, [
+			await setup_contextmenu_action(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => {}}} as any,
 			]);
 
@@ -206,14 +211,11 @@ describe('Contextmenu_Root', () => {
 
 	describe('closing behavior', () => {
 		test('mousedown outside closes contextmenu', () => {
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			// Open the menu first
 			contextmenu.open([], 100, 200);
-			flush_updates(); // Wait for DOM to update
+			flushSync(); // Wait for DOM to update
 			assert.strictEqual(contextmenu.opened, true);
 
 			// Click outside
@@ -225,15 +227,12 @@ describe('Contextmenu_Root', () => {
 		});
 
 		test('mousedown inside keeps contextmenu open', () => {
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			const {container} = mounted;
 
 			contextmenu.open([(() => {}) as any], 100, 200);
-			flush_updates(); // Wait for DOM to update
+			flushSync(); // Wait for DOM to update
 
 			// Find the contextmenu element
 			const menu_el = container.querySelector('.contextmenu');
@@ -247,10 +246,7 @@ describe('Contextmenu_Root', () => {
 		});
 
 		test('Escape key closes contextmenu', () => {
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			contextmenu.open([], 100, 200);
 
@@ -262,11 +258,22 @@ describe('Contextmenu_Root', () => {
 	});
 
 	describe('keyboard navigation', () => {
+		// Test data for keyboard navigation
+		const keyboard_test_cases = [
+			{key: 'ArrowDown', method: 'select_next'},
+			{key: 'ArrowUp', method: 'select_previous'},
+			{key: 'ArrowRight', method: 'expand_selected'},
+			{key: 'ArrowLeft', method: 'collapse_selected'},
+			{key: 'Home', method: 'select_first'},
+			{key: 'End', method: 'select_last'},
+			{key: 'Enter', method: 'activate_selected'},
+			{key: ' ', method: 'activate_selected'},
+			{key: 'PageDown', method: 'select_next'},
+			{key: 'PageUp', method: 'select_previous'},
+		];
+
 		test('keyboard events only fire when contextmenu is opened', () => {
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			// Create a spy on contextmenu methods
 			const select_next_spy = vi.spyOn(contextmenu, 'select_next');
@@ -284,141 +291,19 @@ describe('Contextmenu_Root', () => {
 			assert.strictEqual(select_next_spy.mock.calls.length, 1);
 		});
 
-		test('ArrowDown calls select_next', () => {
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+		// Data-driven tests for keyboard shortcuts
+		test.each(keyboard_test_cases)('$key calls $method', ({key, method}) => {
+			mounted = mount_with_contextmenu();
 
 			contextmenu.open([], 100, 200);
-			const spy = vi.spyOn(contextmenu, 'select_next');
+			const spy = vi.spyOn(contextmenu, method as any);
 
-			window.dispatchEvent(create_keyboard_event('ArrowDown'));
-			assert.strictEqual(spy.mock.calls.length, 1);
-		});
-
-		test('ArrowUp calls select_previous', () => {
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
-
-			contextmenu.open([], 100, 200);
-			const spy = vi.spyOn(contextmenu, 'select_previous');
-
-			window.dispatchEvent(create_keyboard_event('ArrowUp'));
-			assert.strictEqual(spy.mock.calls.length, 1);
-		});
-
-		test('ArrowRight calls expand_selected', () => {
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
-
-			contextmenu.open([], 100, 200);
-			const spy = vi.spyOn(contextmenu, 'expand_selected');
-
-			window.dispatchEvent(create_keyboard_event('ArrowRight'));
-			assert.strictEqual(spy.mock.calls.length, 1);
-		});
-
-		test('ArrowLeft calls collapse_selected', () => {
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
-
-			contextmenu.open([], 100, 200);
-			const spy = vi.spyOn(contextmenu, 'collapse_selected');
-
-			window.dispatchEvent(create_keyboard_event('ArrowLeft'));
-			assert.strictEqual(spy.mock.calls.length, 1);
-		});
-
-		test('Home calls select_first', () => {
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
-
-			contextmenu.open([], 100, 200);
-			const spy = vi.spyOn(contextmenu, 'select_first');
-
-			window.dispatchEvent(create_keyboard_event('Home'));
-			assert.strictEqual(spy.mock.calls.length, 1);
-		});
-
-		test('End calls select_last', () => {
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
-
-			contextmenu.open([], 100, 200);
-			const spy = vi.spyOn(contextmenu, 'select_last');
-
-			window.dispatchEvent(create_keyboard_event('End'));
-			assert.strictEqual(spy.mock.calls.length, 1);
-		});
-
-		test('Enter calls activate_selected', () => {
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
-
-			contextmenu.open([], 100, 200);
-			const spy = vi.spyOn(contextmenu, 'activate_selected');
-
-			window.dispatchEvent(create_keyboard_event('Enter'));
-			assert.strictEqual(spy.mock.calls.length, 1);
-		});
-
-		test('Space calls activate_selected', () => {
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
-
-			contextmenu.open([], 100, 200);
-			const spy = vi.spyOn(contextmenu, 'activate_selected');
-
-			window.dispatchEvent(create_keyboard_event(' '));
-			assert.strictEqual(spy.mock.calls.length, 1);
-		});
-
-		test('PageDown calls select_next', () => {
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
-
-			contextmenu.open([], 100, 200);
-			const spy = vi.spyOn(contextmenu, 'select_next');
-
-			window.dispatchEvent(create_keyboard_event('PageDown'));
-			assert.strictEqual(spy.mock.calls.length, 1);
-		});
-
-		test('PageUp calls select_previous', () => {
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
-
-			contextmenu.open([], 100, 200);
-			const spy = vi.spyOn(contextmenu, 'select_previous');
-
-			window.dispatchEvent(create_keyboard_event('PageUp'));
+			window.dispatchEvent(create_keyboard_event(key));
 			assert.strictEqual(spy.mock.calls.length, 1);
 		});
 
 		test('keyboard events on editable elements are ignored', () => {
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			const {container} = mounted;
 
@@ -438,10 +323,7 @@ describe('Contextmenu_Root', () => {
 		});
 
 		test('keyboard events are prevented', () => {
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			contextmenu.open([], 100, 200);
 
@@ -454,10 +336,7 @@ describe('Contextmenu_Root', () => {
 
 	describe('positioning', () => {
 		test('menu positioned at click coordinates with offset', () => {
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			contextmenu.open([], 100, 200);
 
@@ -466,15 +345,12 @@ describe('Contextmenu_Root', () => {
 		});
 
 		test('menu element receives transform style', () => {
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			const {container} = mounted;
 
 			contextmenu.open([(() => {}) as any], 100, 200);
-			flush_updates(); // Wait for DOM to update
+			flushSync(); // Wait for DOM to update
 
 			const menu = container.querySelector('.contextmenu') as HTMLElement;
 			assert.ok(menu);
@@ -484,10 +360,7 @@ describe('Contextmenu_Root', () => {
 		});
 
 		test('contextmenu layout tracking updates layout dimensions', () => {
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			// Verify layout has the dimensions from beforeEach
 			assert.ok(contextmenu.layout);
@@ -496,16 +369,13 @@ describe('Contextmenu_Root', () => {
 		});
 
 		test('menu repositions when near right edge', () => {
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			const {container} = mounted;
 
 			// Open menu near right edge (1020 + assumed menu width would overflow 1024)
 			contextmenu.open([(() => {}) as any], 1020, 100);
-			flush_updates();
+			flushSync();
 
 			const menu = container.querySelector('.contextmenu') as HTMLElement;
 			assert.ok(menu);
@@ -517,16 +387,13 @@ describe('Contextmenu_Root', () => {
 		});
 
 		test('menu repositions when near bottom edge', () => {
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			const {container} = mounted;
 
 			// Open menu near bottom edge
 			contextmenu.open([(() => {}) as any], 100, 760);
-			flush_updates();
+			flushSync();
 
 			const menu = container.querySelector('.contextmenu') as HTMLElement;
 			assert.ok(menu);
@@ -540,10 +407,7 @@ describe('Contextmenu_Root', () => {
 			const custom_layout = {width: 800, height: 600};
 			const cm = new Contextmenu_State({layout: custom_layout as any});
 
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu: cm,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu(cm);
 
 			// Custom layout should remain unchanged
 			assert.strictEqual(cm.layout.width, 800);
@@ -553,11 +417,7 @@ describe('Contextmenu_Root', () => {
 
 	describe('scoped mode', () => {
 		test('scoped=true wraps children in div', () => {
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu,
-				scoped: true,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu(undefined, {scoped: true});
 
 			const {container} = mounted;
 
@@ -580,11 +440,7 @@ describe('Contextmenu_Root', () => {
 		});
 
 		test('scoped=true disables window contextmenu handler', () => {
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu,
-				scoped: true,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu(undefined, {scoped: true});
 
 			// Try to trigger contextmenu on window
 			const event = create_contextmenu_event(100, 200);
@@ -597,10 +453,7 @@ describe('Contextmenu_Root', () => {
 
 	describe('rendering', () => {
 		test('contextmenu not rendered when closed', () => {
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			const {container} = mounted;
 
@@ -609,15 +462,12 @@ describe('Contextmenu_Root', () => {
 		});
 
 		test('contextmenu rendered when opened', () => {
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			const {container} = mounted;
 
 			contextmenu.open([(() => {}) as any], 100, 200);
-			flush_updates(); // Wait for DOM to update
+			flushSync(); // Wait for DOM to update
 
 			const menu = container.querySelector('.contextmenu');
 			assert.ok(menu);
@@ -630,10 +480,7 @@ describe('Contextmenu_Root', () => {
 		});
 
 		test('contextmenu_layout rendered when no custom layout', () => {
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu();
 
 			const {container} = mounted;
 
@@ -646,15 +493,135 @@ describe('Contextmenu_Root', () => {
 			const custom_layout = {width: 800, height: 600};
 			const cm = new Contextmenu_State({layout: custom_layout as any});
 
-			mounted = mount_component(Contextmenu_Root, {
-				contextmenu: cm,
-				children: (() => {}) as any,
-			});
+			mounted = mount_with_contextmenu(cm);
 
 			const {container} = mounted;
 
 			const layout = container.querySelector('.contextmenu_layout');
 			assert.strictEqual(layout, null);
+		});
+	});
+
+	describe('edge cases', () => {
+		test('handles SVG elements as targets', async () => {
+			mounted = mount_with_contextmenu();
+			const {container} = mounted;
+
+			const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+			const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+			svg.appendChild(rect);
+			container.appendChild(svg);
+
+			await setup_contextmenu_action(rect, [
+				{snippet: 'text', props: {content: 'SVG Test', icon: '🎨', run: () => {}}} as any,
+			]);
+
+			const event = create_contextmenu_event(100, 200);
+			set_event_target(event, rect);
+			window.dispatchEvent(event);
+
+			assert.strictEqual(contextmenu.opened, true);
+			assert.strictEqual(event.defaultPrevented, true);
+
+			svg.remove();
+		});
+
+		test('handles function snippet params', () => {
+			mounted = mount_with_contextmenu();
+
+			const snippet = (() => {
+				// Test snippet function
+			}) as any;
+
+			contextmenu.open([snippet], 100, 200);
+			flushSync();
+
+			assert.strictEqual(contextmenu.opened, true);
+			assert.strictEqual(contextmenu.params[0], snippet);
+		});
+
+		test('handles empty params array', () => {
+			mounted = mount_with_contextmenu();
+
+			contextmenu.open([], 100, 200);
+			flushSync();
+
+			assert.strictEqual(contextmenu.opened, true);
+			assert.strictEqual(contextmenu.params.length, 0);
+		});
+
+		test('handles rapid open/close sequences', () => {
+			mounted = mount_with_contextmenu();
+
+			// Rapid open/close/open
+			contextmenu.open([(() => {}) as any], 50, 50);
+			assert.strictEqual(contextmenu.opened, true);
+			assert.strictEqual(contextmenu.x, 50);
+
+			contextmenu.close();
+			assert.strictEqual(contextmenu.opened, false);
+
+			contextmenu.open([(() => {}) as any], 100, 100);
+			assert.strictEqual(contextmenu.opened, true);
+			assert.strictEqual(contextmenu.x, 100);
+
+			contextmenu.open([(() => {}) as any], 150, 150);
+			assert.strictEqual(contextmenu.opened, true);
+			assert.strictEqual(contextmenu.x, 150);
+		});
+
+		test('handles mixed HTML and SVG targets', async () => {
+			mounted = mount_with_contextmenu();
+			const {container} = mounted;
+
+			// First open on HTML element
+			const div = document.createElement('div');
+			container.appendChild(div);
+			await setup_contextmenu_action(div, [
+				{snippet: 'text', props: {content: 'HTML', icon: '📄', run: () => {}}} as any,
+			]);
+
+			const event1 = create_contextmenu_event(100, 100);
+			set_event_target(event1, div);
+			window.dispatchEvent(event1);
+
+			assert.strictEqual(contextmenu.opened, true);
+			contextmenu.close();
+
+			// Then open on SVG element
+			const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+			container.appendChild(circle);
+			await setup_contextmenu_action(circle, [
+				{snippet: 'text', props: {content: 'SVG', icon: '🎨', run: () => {}}} as any,
+			]);
+
+			const event2 = create_contextmenu_event(200, 200);
+			set_event_target(event2, circle);
+			window.dispatchEvent(event2);
+
+			assert.strictEqual(contextmenu.opened, true);
+
+			// Cleanup
+			div.remove();
+			circle.remove();
+		});
+
+		test('prevents contextmenu when no params available', () => {
+			mounted = mount_with_contextmenu();
+			const {container} = mounted;
+
+			const div = document.createElement('div');
+			// Not setting up contextmenu params
+			container.appendChild(div);
+
+			const event = create_contextmenu_event(100, 200);
+			set_event_target(event, div);
+			window.dispatchEvent(event);
+
+			assert.strictEqual(contextmenu.opened, false);
+			assert.strictEqual(event.defaultPrevented, false);
+
+			div.remove();
 		});
 	});
 });

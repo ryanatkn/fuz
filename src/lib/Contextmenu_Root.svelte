@@ -32,6 +32,9 @@
 	import Contextmenu_Link_Entry from '$lib/Contextmenu_Link_Entry.svelte';
 	import Contextmenu_Text_Entry from '$lib/Contextmenu_Text_Entry.svelte';
 
+	const DEFAULT_OPEN_OFFSET_X = -2;
+	const DEFAULT_OPEN_OFFSET_Y = -2;
+
 	interface Props {
 		/**
 		 * The `contextmenu` prop is not reactive because that's a rare corner case and
@@ -61,8 +64,8 @@
 
 	const {
 		contextmenu = new Contextmenu_State(),
-		open_offset_x = -2,
-		open_offset_y = -2,
+		open_offset_x = DEFAULT_OPEN_OFFSET_X,
+		open_offset_y = DEFAULT_OPEN_OFFSET_Y,
 		scoped = false,
 		children,
 	}: Props = $props();
