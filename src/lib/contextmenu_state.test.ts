@@ -49,7 +49,7 @@ describe('Contextmenu_State', () => {
 	describe('open and close', () => {
 		test('open sets state correctly', () => {
 			const params = [
-				{snippet: 'text' as const, props: {content: 'Test', icon: '🧪', run: () => {}}},
+				{snippet: 'text' as const, props: {content: 'Test', icon: '🧪', run: () => () => {}}},
 			];
 			contextmenu.open(params, 100, 200);
 
@@ -61,7 +61,7 @@ describe('Contextmenu_State', () => {
 
 		test('open clears selections', () => {
 			// Setup some selections first
-			const entry = new Entry_State(contextmenu.root_menu, () => {});
+			const entry = new Entry_State(contextmenu.root_menu, () => () => {});
 			entry.selected = true;
 			contextmenu.selections.push(entry);
 
@@ -78,7 +78,7 @@ describe('Contextmenu_State', () => {
 		});
 
 		test('close resets entry states', () => {
-			const entry = new Entry_State(contextmenu.root_menu, () => {});
+			const entry = new Entry_State(contextmenu.root_menu, () => () => {});
 			entry.promise = Promise.resolve();
 			entry.error_message = 'test error';
 			contextmenu.root_menu.items.push(entry);
@@ -98,7 +98,7 @@ describe('Contextmenu_State', () => {
 
 		test('close resets nested submenu items', () => {
 			const submenu = new Submenu_State(contextmenu.root_menu, 2);
-			const entry = new Entry_State(submenu, () => {});
+			const entry = new Entry_State(submenu, () => () => {});
 			entry.error_message = 'error';
 			submenu.items.push(entry);
 			contextmenu.root_menu.items.push(submenu);
@@ -116,9 +116,9 @@ describe('Contextmenu_State', () => {
 		let entry3: Entry_State;
 
 		beforeEach(() => {
-			entry1 = new Entry_State(contextmenu.root_menu, () => {});
-			entry2 = new Entry_State(contextmenu.root_menu, () => {});
-			entry3 = new Entry_State(contextmenu.root_menu, () => {});
+			entry1 = new Entry_State(contextmenu.root_menu, () => () => {});
+			entry2 = new Entry_State(contextmenu.root_menu, () => () => {});
+			entry3 = new Entry_State(contextmenu.root_menu, () => () => {});
 			contextmenu.root_menu.items.push(entry1, entry2, entry3);
 		});
 
@@ -215,7 +215,7 @@ describe('Contextmenu_State', () => {
 
 		test('collapse_selected() deselects nested item', () => {
 			const submenu = new Submenu_State(contextmenu.root_menu, 2);
-			const nested_entry = new Entry_State(submenu, () => {});
+			const nested_entry = new Entry_State(submenu, () => () => {});
 			submenu.items.push(nested_entry);
 
 			// Manually set up a nested selection
@@ -241,7 +241,7 @@ describe('Contextmenu_State', () => {
 
 		test('expand_selected() selects first child of submenu', () => {
 			const submenu = new Submenu_State(contextmenu.root_menu, 2);
-			const child = new Entry_State(submenu, () => {});
+			const child = new Entry_State(submenu, () => () => {});
 			submenu.items.push(child);
 			contextmenu.root_menu.items = [submenu];
 
@@ -257,7 +257,7 @@ describe('Contextmenu_State', () => {
 	describe('activation', () => {
 		test('activate() runs synchronous callback and closes', () => {
 			let ran = false;
-			const entry = new Entry_State(contextmenu.root_menu, () => {
+			const entry = new Entry_State(contextmenu.root_menu, () => () => {
 				ran = true;
 			});
 
@@ -281,7 +281,7 @@ describe('Contextmenu_State', () => {
 
 		test('activate() handles async success and closes', async () => {
 			let resolved = false;
-			const entry = new Entry_State(contextmenu.root_menu, async () => {
+			const entry = new Entry_State(contextmenu.root_menu, () => async () => {
 				resolved = true;
 				return {ok: true};
 			});
@@ -300,7 +300,7 @@ describe('Contextmenu_State', () => {
 		});
 
 		test('activate() handles async error', async () => {
-			const entry = new Entry_State(contextmenu.root_menu, async () => {
+			const entry = new Entry_State(contextmenu.root_menu, () => async () => {
 				throw new Error('async error');
 			});
 
@@ -313,7 +313,7 @@ describe('Contextmenu_State', () => {
 		});
 
 		test('activate() handles async failure result', async () => {
-			const entry = new Entry_State(contextmenu.root_menu, async () => {
+			const entry = new Entry_State(contextmenu.root_menu, () => async () => {
 				return {ok: false, message: 'failed'};
 			});
 
@@ -327,7 +327,7 @@ describe('Contextmenu_State', () => {
 
 		test('activate() on submenu calls expand_selected', () => {
 			const submenu = new Submenu_State(contextmenu.root_menu, 2);
-			const child = new Entry_State(submenu, () => {});
+			const child = new Entry_State(submenu, () => () => {});
 			submenu.items.push(child);
 
 			contextmenu.select(submenu);
@@ -338,7 +338,7 @@ describe('Contextmenu_State', () => {
 
 		test('activate_selected() activates current selection', () => {
 			let ran = false;
-			const entry = new Entry_State(contextmenu.root_menu, () => {
+			const entry = new Entry_State(contextmenu.root_menu, () => () => {
 				ran = true;
 			});
 
@@ -350,7 +350,7 @@ describe('Contextmenu_State', () => {
 		});
 
 		test('activate_selected() selects first when no selection', () => {
-			const entry = new Entry_State(contextmenu.root_menu, () => {});
+			const entry = new Entry_State(contextmenu.root_menu, () => () => {});
 			contextmenu.root_menu.items.push(entry);
 
 			void contextmenu.activate_selected();
@@ -359,7 +359,7 @@ describe('Contextmenu_State', () => {
 		});
 
 		test('activate() closes on async non-result return', async () => {
-			const entry = new Entry_State(contextmenu.root_menu, async () => {
+			const entry = new Entry_State(contextmenu.root_menu, () => async () => {
 				return 'some value';
 			});
 
@@ -376,7 +376,7 @@ describe('Contextmenu_State', () => {
 			const promise2 = new Promise((r) => (resolve2 = r));
 
 			let call_count = 0;
-			const entry = new Entry_State(contextmenu.root_menu, () => {
+			const entry = new Entry_State(contextmenu.root_menu, () => () => {
 				call_count++;
 				return call_count === 1 ? promise1 : promise2;
 			});
@@ -407,12 +407,12 @@ describe('Contextmenu_State', () => {
 	describe('menu structure', () => {
 		test('Entry_State initializes correctly', () => {
 			const run = () => {};
-			const entry = new Entry_State(contextmenu.root_menu, run);
+			const entry = new Entry_State(contextmenu.root_menu, () => run);
 
 			assert.strictEqual(entry.is_menu, false);
 			assert.strictEqual(entry.menu, contextmenu.root_menu);
 			assert.strictEqual(entry.selected, false);
-			assert.strictEqual(entry.run, run);
+			assert.strictEqual(entry.run(), run);
 			assert.strictEqual(entry.pending, false);
 			assert.strictEqual(entry.error_message, null);
 			assert.strictEqual(entry.promise, null);
@@ -440,7 +440,7 @@ describe('Contextmenu_State', () => {
 		test('nested menu hierarchy', () => {
 			const submenu1 = new Submenu_State(contextmenu.root_menu, 2);
 			const submenu2 = new Submenu_State(submenu1, 3);
-			const entry = new Entry_State(submenu2, () => {});
+			const entry = new Entry_State(submenu2, () => () => {});
 
 			assert.strictEqual(entry.menu, submenu2);
 			assert.strictEqual(submenu2.menu, submenu1);
@@ -451,7 +451,7 @@ describe('Contextmenu_State', () => {
 
 	describe('reset_items', () => {
 		test('resets entry promise and error', () => {
-			const entry = new Entry_State(contextmenu.root_menu, () => {});
+			const entry = new Entry_State(contextmenu.root_menu, () => () => {});
 			entry.promise = Promise.resolve();
 			entry.error_message = 'error';
 
@@ -463,7 +463,7 @@ describe('Contextmenu_State', () => {
 
 		test('recursively resets submenu items', () => {
 			const submenu = new Submenu_State(contextmenu.root_menu, 2);
-			const entry = new Entry_State(submenu, () => {});
+			const entry = new Entry_State(submenu, () => () => {});
 			entry.promise = Promise.resolve();
 			entry.error_message = 'error';
 			submenu.items.push(entry);
@@ -482,7 +482,7 @@ describe('Contextmenu_State', () => {
 		test('handles deeply nested structure', () => {
 			const submenu1 = new Submenu_State(contextmenu.root_menu, 2);
 			const submenu2 = new Submenu_State(submenu1, 3);
-			const entry = new Entry_State(submenu2, () => {});
+			const entry = new Entry_State(submenu2, () => () => {});
 			entry.error_message = 'error';
 			submenu2.items.push(entry);
 			submenu1.items.push(submenu2);

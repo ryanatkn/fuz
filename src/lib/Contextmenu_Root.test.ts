@@ -169,7 +169,7 @@ describe('Contextmenu_Root', () => {
 
 			const {contextmenu_action} = await import('$lib/contextmenu_state.svelte.js');
 			contextmenu_action(target, [
-				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => {}}},
+				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => () => {}}},
 			]);
 
 			// Try to open another contextmenu from within the existing menu
@@ -853,7 +853,7 @@ describe('Contextmenu_Root', () => {
 
 			// Open the contextmenu first
 			contextmenu.open(
-				[{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => {}}}],
+				[{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => () => {}}}],
 				100,
 				200,
 			);

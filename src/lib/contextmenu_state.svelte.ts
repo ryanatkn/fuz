@@ -13,7 +13,7 @@ export type Contextmenu_Params =
 	| Snippet
 	// TODO maybe this should be generic?
 	| {snippet: 'link'; props: {href: string; icon?: string}}
-	| {snippet: 'text'; props: {content: string; icon: string; run: Contextmenu_Run}};
+	| {snippet: 'text'; props: {content: string; icon: string; run: () => Contextmenu_Run}};
 
 // TODO fix this type
 // eslint-disable-next-line @typescript-eslint/no-duplicate-type-constituents
@@ -26,12 +26,12 @@ export class Entry_State {
 	readonly menu: Submenu_State | Root_Menu_State;
 
 	selected: boolean = $state(false);
-	run: Contextmenu_Run = $state()!;
+	run: () => Contextmenu_Run = $state()!;
 	pending: boolean = $state(false);
 	error_message: string | null = $state(null);
 	promise: Promise<any> | null = $state(null);
 
-	constructor(menu: Submenu_State | Root_Menu_State, run: Contextmenu_Run) {
+	constructor(menu: Submenu_State | Root_Menu_State, run: () => Contextmenu_Run) {
 		this.menu = menu;
 		this.run = run;
 	}
@@ -131,7 +131,7 @@ export class Contextmenu_State {
 		} else {
 			let returned;
 			try {
-				returned = item.run();
+				returned = item.run()();
 			} catch (err) {
 				const message = typeof err?.message === 'string' ? err.message : undefined;
 				item.error_message = message ?? 'unknown error';
@@ -249,7 +249,7 @@ export class Contextmenu_State {
 	 * Used by `Contextmenu_Entry` and custom entry components
 	 * @initializes
 	 */
-	add_entry(run: Contextmenu_Run): Entry_State {
+	add_entry(run: () => Contextmenu_Run): Entry_State {
 		const menu = contextmenu_submenu_context.maybe_get() ?? this.root_menu;
 		const entry = new Entry_State(menu, run);
 		menu.items.push(entry);
@@ -369,7 +369,7 @@ const query_contextmenu_params = (
 				props: {
 					content: 'copy text',
 					icon: '📋',
-					run: () => void navigator.clipboard.writeText(text),
+					run: () => () => void navigator.clipboard.writeText(text),
 				},
 			});
 		}

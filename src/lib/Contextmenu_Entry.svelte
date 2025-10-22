@@ -15,14 +15,7 @@
 
 	const contextmenu = contextmenu_context.get();
 
-	const entry = contextmenu.add_entry(run);
-
-	// TODO refactor
-	// This store makes `run` reactive
-	// because it's a param to `contextmenu.add_entry` which @initializes.
-	$effect(() => {
-		entry.run = run;
-	});
+	const entry = contextmenu.add_entry(() => run);
 
 	const {selected, pending, error_message} = $derived(entry);
 </script>
