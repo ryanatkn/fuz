@@ -17,6 +17,8 @@
 	 */
 	import {is_editable, swallow, inside_editable} from '@ryanatkn/belt/dom.js';
 	import type {ComponentProps, Snippet} from 'svelte';
+	import type {Action} from 'svelte/action';
+	import {on} from 'svelte/events';
 
 	import {
 		contextmenu_context,
@@ -34,6 +36,9 @@
 		contextmenu = new Contextmenu_State(),
 		open_offset_x = DEFAULT_OPEN_OFFSET_X,
 		open_offset_y = DEFAULT_OPEN_OFFSET_Y,
+		bypass_with_tap_then_longpress = true,
+		tap_then_longpress_duration = 660,
+		tap_then_longpress_move_tolerance = 7,
 		scoped = false,
 		children,
 	}: {
@@ -56,6 +61,24 @@
 		 * Useful to ensure the first menu item is immediately under the pointer.
 		 */
 		open_offset_y?: number;
+		/**
+		 * Whether to detect tap-then-longpress to bypass the custom contextmenu.
+		 * This allows access to the system contextmenu by tapping once then right-clicking/long-pressing.
+		 * Setting to `false` disables the gesture.
+		 */
+		bypass_with_tap_then_longpress?: boolean;
+		/**
+		 * The number of milliseconds between taps to detect a gesture that bypasses the custom contextmenu.
+		 * Used only when `bypass_with_tap_then_longpress` is true.
+		 * If the duration is too long, it'll detect more false positives and interrupt normal usage,
+		 * but too short and some people will have difficulty performing the gesture.
+		 */
+		tap_then_longpress_duration?: number;
+		/**
+		 * The number of pixels the pointer can be moved between taps to detect a tap-then-longpress.
+		 * Used only when `bypass_with_tap_then_longpress` is true.
+		 */
+		tap_then_longpress_move_tolerance?: number;
 		/**
 		 * If `true`, wraps `children` with a div and listens to events on it instead of the window.
 		 */
@@ -100,7 +123,18 @@
 		contextmenu.y + Math.min(0, layout.height - (contextmenu.y + dimensions.height)),
 	);
 
+	// State for tap-then-longpress bypass detection
+	let touch_x: number | undefined = $state();
+	let touch_y: number | undefined = $state();
+	let longpress_start_time: number | undefined = $state();
+	let longpress_bypass: boolean | undefined = $state();
+
 	const on_window_contextmenu = (e: MouseEvent) => {
+		// Handle the tap-then-longpress bypass gesture
+		if (longpress_bypass) {
+			longpress_bypass = false;
+			return;
+		}
 		const {target} = e;
 		if (
 			e.shiftKey ||
@@ -116,6 +150,69 @@
 		) {
 			swallow(e);
 		}
+	};
+
+	/**
+	 * Touch event handler for tap-then-longpress bypass detection.
+	 *
+	 * This allows users to access the native context menu by performing a tap
+	 * followed by a longpress/right-click within a specified time window.
+	 * The bypass gesture is useful for accessing browser features like text selection
+	 * or the native context menu when the custom contextmenu would normally override it.
+	 *
+	 * Note: preventDefault is not called as we're only observing touch patterns,
+	 * not intercepting them. The actual bypass happens in on_window_contextmenu.
+	 */
+	const touchstart = (e: TouchEvent): void => {
+		if (!bypass_with_tap_then_longpress) return;
+
+		const {touches, target} = e;
+		if (
+			contextmenu.opened ||
+			touches.length !== 1 ||
+			e.shiftKey ||
+			!(target instanceof HTMLElement || target instanceof SVGElement) ||
+			is_editable(target) ||
+			inside_editable(target)
+		) {
+			// Reset state if conditions aren't met
+			longpress_start_time = undefined;
+			touch_x = undefined;
+			touch_y = undefined;
+			return;
+		}
+
+		const {clientX, clientY} = touches[0];
+
+		// Check if this is a tap-then-longpress gesture
+		if (
+			longpress_start_time !== undefined &&
+			performance.now() - longpress_start_time < tap_then_longpress_duration &&
+			Math.hypot(clientX - touch_x!, clientY - touch_y!) < tap_then_longpress_move_tolerance
+		) {
+			// This is a tap-then-longpress - set bypass flag
+			longpress_bypass = true;
+			longpress_start_time = undefined;
+			touch_x = undefined;
+			touch_y = undefined;
+			return;
+		}
+
+		// Record this tap for potential future bypass detection
+		longpress_start_time = performance.now();
+		touch_x = clientX;
+		touch_y = clientY;
+	};
+
+	/**
+	 * Reset state when touch is cancelled (e.g., when scrolling starts).
+	 */
+	const touchcancel = (): void => {
+		// Reset all bypass detection state
+		longpress_start_time = undefined;
+		touch_x = undefined;
+		touch_y = undefined;
+		longpress_bypass = false;
 	};
 
 	// Passive listener that runs during the event's `capture` phase
@@ -145,16 +242,49 @@
 		swallow(e);
 		handler();
 	};
+
+	// Passive event action for attaching touch events with proper passive flag
+	interface Passive_Event_Params {
+		event: string;
+		passive: boolean;
+		cb: (...args: any) => void;
+		disabled?: boolean;
+	}
+	const passive_event: Action<HTMLElement, Passive_Event_Params> = (el, params) => {
+		let cleanup: (() => void) | null = null;
+		const sync_event = (p: Passive_Event_Params) => {
+			if (cleanup) {
+				cleanup();
+				cleanup = null;
+			}
+			if (!p.disabled) {
+				cleanup = on(el, p.event, p.cb, {capture: true, passive: p.passive});
+			}
+		};
+		sync_event(params);
+		return {
+			update: (p) => {
+				sync_event(p);
+			},
+			destroy: () => {
+				cleanup?.();
+			},
+		};
+	};
 </script>
 
 <svelte:window
 	oncontextmenu={scoped ? undefined : on_window_contextmenu}
 	onmousedown={contextmenu.opened ? mousedown : undefined}
 	onkeydown={contextmenu.opened ? keydown : undefined}
+	use:passive_event={{event: 'touchstart', passive: true, cb: touchstart, disabled: scoped || !bypass_with_tap_then_longpress}}
+	use:passive_event={{event: 'touchcancel', passive: true, cb: touchcancel, disabled: scoped || !bypass_with_tap_then_longpress}}
 />
 
 {#if scoped}
-	<div class="contextmenu_root" role="region" oncontextmenu={on_window_contextmenu}>
+	<div class="contextmenu_root" role="region" oncontextmenu={on_window_contextmenu}
+		use:passive_event={{event: 'touchstart', passive: true, cb: touchstart, disabled: !bypass_with_tap_then_longpress}}
+		use:passive_event={{event: 'touchcancel', passive: true, cb: touchcancel, disabled: !bypass_with_tap_then_longpress}}>
 		{@render children()}
 	</div>
 {:else}

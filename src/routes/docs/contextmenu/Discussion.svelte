@@ -12,11 +12,11 @@
 	<h4>Contextmenu_Root (default, simplified)</h4>
 	<ul>
 		<li>
-			Relies entirely on the browser's native <Mdn_Link path="Web/API/Element/contextmenu_event"
+			Relies on the browser's native <Mdn_Link path="Web/API/Element/contextmenu_event"
 				><span class="font_family_mono">contextmenu</span> event</Mdn_Link
 			>
 		</li>
-		<li>No mobile-specific code or touch event handlers</li>
+		<li>Includes tap-then-longpress bypass gesture for accessing system contextmenu</li>
 		<li>Works in all browsers that support the <code>contextmenu</code> event.</li>
 		<li>
 			<strong>Does not work on iOS Safari</strong> which doesn't fire the
@@ -36,7 +36,7 @@
 			<span class="font_family_mono">contextmenu</span> event
 		</li>
 		<li>~430 lines with complex touch event handling, gesture detection, and state management</li>
-		<li>Includes tap-then-longpress bypass gesture and configurable timing/tolerance</li>
+		<li>Includes full longpress support with movement tolerance and configurable timing</li>
 		<li>Works on all devices including iOS Safari</li>
 		<li>
 			Has edge cases and complexity due to working around platform limitations (see
@@ -66,11 +66,11 @@
 		<a href="#caveats">The caveats docs</a> explain why Fuz breaks web platform expectations.
 	</p>
 	<p>
-		<strong>Note:</strong> The default <code>Contextmenu_Root</code> only handles the standard
+		<strong>Note:</strong> The default <code>Contextmenu_Root</code> handles the standard
 		<Mdn_Link path="Web/API/Element/contextmenu_event"
 			><span class="font_family_mono">contextmenu</span> event</Mdn_Link
-		> and does not include touch device support or iOS workarounds. The behaviors below marked "compatibility
-		version only" apply only to <code>Contextmenu_Root_For_Safari_Compatibility</code>.
+		> and includes the tap-then-longpress bypass gesture. Full longpress detection and iOS Safari support
+		are only available in <code>Contextmenu_Root_For_Safari_Compatibility</code>.
 	</p>
 	<p>
 		On touch devices with <code>Contextmenu_Root_For_Safari_Compatibility</code>, we detect
@@ -107,17 +107,21 @@
 			>
 		</li>
 	</ul>
-	<h4>Touch devices (Contextmenu_Root_For_Safari_Compatibility only)</h4>
+	<h4>Touch devices</h4>
+	<p><strong>Both versions:</strong></p>
 	<ul>
-		<li>longpress opens the Fuz contextmenu and not the system contextmenu</li>
-		<li>longpress on the Fuz contextmenu (two longpresses) opens the system contextmenu</li>
 		<li>
 			double-tap-and-hold (aka tap-then-longpress) opens the system contextmenu or performs other
 			default behavior like selecting text - does not work for cases where the first tap performs
 			some action on an element, like links - use two longpresses for those cases (this may need
 			more design work, possibly adding a different gesture or a contextmenu entry for touch devices
-			that triggers the system conextmenu on the next longpress)
+			that triggers the system contextmenu on the next longpress)
 		</li>
+	</ul>
+	<p><strong>Contextmenu_Root_For_Safari_Compatibility only:</strong></p>
+	<ul>
+		<li>longpress opens the Fuz contextmenu and not the system contextmenu</li>
+		<li>longpress on the Fuz contextmenu (two longpresses) opens the system contextmenu</li>
 		<li>a longpress is canceled if you move the touch past a threshold before it triggers</li>
 		<li>
 			the contextmenu closes if you move past a threshold without lifting the longpress touch that
@@ -133,7 +137,7 @@
 </Tome_Section>
 <Tome_Section>
 	<Tome_Section_Header text="Caveats" />
-	<p>Fuz takes two things very seriously, in no particular order:</p>
+	<p>Fuz prioritizes two things:</p>
 	<ol>
 		<li>giving users a powerful and customizable UX</li>
 		<li>aligning with the web platform and not breaking its standard behaviors</li>
@@ -150,9 +154,9 @@
 		selecting text on a longpress.
 	</p>
 	<p>
-		Balancing these two concerns is going to be an ongoing challenge, and my current belief is that
-		the contextmenu is too useful and powerful to ignore for some usecases. I'm open to critical
-		feedback, and I'll do what I can to minimize the harmful effects of choices like this.
+		Balancing these two concerns requires careful consideration. The contextmenu provides significant value
+		for many usecases. I'm open to critical
+		feedback, and I'll work to mitigate the tradeoffs of choices like this.
 	</p>
 	<p>Mitigations:</p>
 	<ul>
@@ -164,7 +168,7 @@
 		<li>
 			To bypass the Fuz contextmenu on a touch device, like to select text, tap one extra time
 			before your longpress. This means double-tap-and-hold should behave the same as tap-and-hold
-			on standard web pages. This double tap gesture obviously can't work for clickable targets like
+			on standard web pages. This double tap gesture doesn't work for clickable targets like
 			links, but for links, they're displayed as the first contextmenu entry, and longpressing that
 			one does the standard browser action.
 		</li>
