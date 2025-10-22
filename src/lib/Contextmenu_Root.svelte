@@ -1,20 +1,20 @@
-<!--
-	This is the default contextmenu root component.
-	It relies on the standard browser `contextmenu` event
-	which means it does not work on iOS Safari,
-	which doesn't fire the `contextmenu` event as of October 2025
-	(see https://bugs.webkit.org/show_bug.cgi?id=213953).
-
-	This is the recommended default because
-	it supports haptic feedback with `navigator.vibrate()` --
-	longpress cannot work with `navigator.vibrate()` on Android devices
-	because it's not triggered from a direct user event.
-
-	If you need iOS Safari support, use `Contextmenu_Root_For_Safari_Compatibility.svelte`
-	instead. That version implements custom touch handlers and longpress detection at the
-	cost of significantly more complexity.
--->
 <script lang="ts">
+	/**
+	 * This is the default contextmenu root component.
+	 * It relies on the standard browser `contextmenu` event
+	 * which means it does not work on iOS Safari,
+	 * which doesn't fire the `contextmenu` event as of October 2025
+	 * (see https://bugs.webkit.org/show_bug.cgi?id=213953).
+	 *
+	 * This is the recommended default because
+	 * it supports haptic feedback with `navigator.vibrate()` --
+	 * longpress cannot work with `navigator.vibrate()` on Android devices
+	 * because it's not triggered from a direct user event.
+	 *
+	 * If you need iOS Safari support, use `Contextmenu_Root_For_Safari_Compatibility.svelte`
+	 * instead. That version implements custom touch handlers and longpress detection at the
+	 * cost of significantly more complexity.
+	 */
 	import {is_editable, swallow, inside_editable} from '@ryanatkn/belt/dom.js';
 	import type {ComponentProps, Snippet} from 'svelte';
 

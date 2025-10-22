@@ -1,27 +1,23 @@
-<!--
-	This alternative to `Contextmenu_Root`
-	implements custom touch event handlers and "longpress" detection to work
-	around iOS Safari not firing the standard `contextmenu` event -- see
-	https://bugs.webkit.org/show_bug.cgi?id=213953.
-
-	Prefer `Contextmenu_Root.svelte` unless you specifically need iOS Safari support.
-
-	This is a complex implementation with many iOS-specific hacks and edge cases:
-	- Custom touch event handlers (touchstart, touchmove, touchend)
-	- Longpress detection with configurable timing and movement tolerance
-	- Tap-then-longpress bypass gesture for accessing system contextmenu
-	- Complex passive/nonpassive event handling
-	- Calls navigator.vibrate() for haptic feedback, but browsers block it due to longpress timeout workaround
-
-	Only use this version if:
-	- You need iOS Safari support
-	- Your app targets mobile users
-	- You're willing to accept the added complexity and edge cases
-
-	Otherwise, use the default `Contextmenu_Root.svelte` which is dramatically simpler
-	(~220 lines) and relies entirely on the standard `contextmenu` event.
--->
 <script lang="ts">
+	/**
+	 * This alternative to `Contextmenu_Root`
+	 * implements custom touch event handlers and "longpress" detection to work
+	 * around iOS Safari not firing the standard `contextmenu` event -- see
+	 * https://bugs.webkit.org/show_bug.cgi?id=213953.
+	 *
+	 * Prefer `Contextmenu_Root.svelte` unless you specifically need iOS Safari support.
+	 *
+	 * This is a complex implementation with many iOS-specific hacks and edge cases:
+	 *
+	 * - Custom touch event handlers (touchstart, touchmove, touchend)
+	 * - Longpress detection with configurable timing and movement tolerance
+	 * - Tap-then-longpress bypass gesture for accessing system contextmenu
+	 * - Complex passive/nonpassive event handling
+	 * - Calls navigator.vibrate() for haptic feedback, but browsers block it due to longpress timeout workaround
+	 *
+	 * Otherwise, use the default `Contextmenu_Root.svelte` which is much simpler
+	 * and relies on the standard `contextmenu` event.
+	 */
 	import {is_editable, swallow, inside_editable} from '@ryanatkn/belt/dom.js';
 	import type {ComponentProps, Snippet} from 'svelte';
 	import type {Action} from 'svelte/action';
