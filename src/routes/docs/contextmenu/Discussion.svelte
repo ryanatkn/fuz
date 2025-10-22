@@ -17,46 +17,32 @@
 			>
 		</li>
 		<li>Includes tap-then-longpress bypass gesture for accessing system contextmenu</li>
-		<li>Works in all browsers that support the <code>contextmenu</code> event.</li>
 		<li>
 			<strong>Does not work on iOS Safari</strong> which doesn't fire the
-			<span class="font_family_mono">contextmenu</span> event (as of 2025, see
-			<a href="https://bugs.webkit.org/show_bug.cgi?id=213953">WebKit bug #213953</a>)
+			<span class="font_family_mono">contextmenu</span> event
+			(<a href="https://bugs.webkit.org/show_bug.cgi?id=213953">WebKit bug #213953</a>)
 		</li>
-		<li>Simpler architecture makes it easier to understand, modify, and maintain</li>
+		<li>Simpler implementation, easier to understand and customize</li>
 		<li>
-			<strong>This is the default.</strong> Use this if your app targets desktop users or non-Safari
-			mobile browsers
+			<strong>This is the default.</strong> Use this unless you need iOS Safari support
 		</li>
 	</ul>
 	<h4>Contextmenu_Root_For_Safari_Compatibility (opt-in for iOS)</h4>
 	<ul>
 		<li>
-			Implements custom "longpress" detection to work around iOS Safari not supporting the
-			<span class="font_family_mono">contextmenu</span> event
+			Implements custom longpress detection to work around iOS Safari's lack of
+			<span class="font_family_mono">contextmenu</span> event support
 		</li>
-		<li>~430 lines with complex touch event handling, gesture detection, and state management</li>
-		<li>Includes full longpress support with movement tolerance and configurable timing</li>
 		<li>Works on all devices including iOS Safari</li>
+		<li>More complex implementation with custom touch event handling and gesture detection</li>
 		<li>
-			Has edge cases and complexity due to working around platform limitations (see
-			<a href="https://bugs.webkit.org/show_bug.cgi?id=213953">WebKit bug #213953</a>)
+			Browsers block <span class="font_family_mono">navigator.vibrate</span> haptic feedback due to
+			timeout-based gesture detection
 		</li>
 		<li>
-			Browsers block <span class="font_family_mono">navigator.vibrate</span> haptic feedback due to longpress
-			timeout workaround
-		</li>
-		<li>
-			<strong>Opt into this version</strong> only if you need iOS Safari support and are willing to accept
-			the added complexity
+			<strong>Opt into this version</strong> only if you need iOS Safari support
 		</li>
 	</ul>
-	<p>
-		The design choice to provide both versions acknowledges that iOS Safari support adds significant
-		complexity, and not all applications require it. The simplified version is the default because
-		it demonstrates the core contextmenu pattern without iOS workarounds, making it easier to
-		understand, maintain, and customize.
-	</p>
 </Tome_Section>
 <Tome_Section>
 	<Tome_Section_Header text="Expected behaviors" />
