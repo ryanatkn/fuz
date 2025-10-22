@@ -154,9 +154,9 @@
 		selecting text on a longpress.
 	</p>
 	<p>
-		Balancing these two concerns requires careful consideration. The contextmenu provides significant value
-		for many usecases. I'm open to critical
-		feedback, and I'll work to mitigate the tradeoffs of choices like this.
+		Balancing these two concerns requires careful consideration. The contextmenu provides
+		significant value for many usecases. I'm open to critical feedback, and I'll work to mitigate
+		the tradeoffs of choices like this.
 	</p>
 	<p>Mitigations:</p>
 	<ul>
@@ -168,9 +168,9 @@
 		<li>
 			To bypass the Fuz contextmenu on a touch device, like to select text, tap one extra time
 			before your longpress. This means double-tap-and-hold should behave the same as tap-and-hold
-			on standard web pages. This double tap gesture doesn't work for clickable targets like
-			links, but for links, they're displayed as the first contextmenu entry, and longpressing that
-			one does the standard browser action.
+			on standard web pages. This double tap gesture doesn't work for clickable targets like links,
+			but for links, they're displayed as the first contextmenu entry, and longpressing that one
+			does the standard browser action.
 		</li>
 		<li>
 			Triggering the contextmenu inside of the Fuz contextmenu shows your system contextmenu. This

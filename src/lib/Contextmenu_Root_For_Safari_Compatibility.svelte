@@ -276,7 +276,6 @@
 		swallow(e);
 		handler();
 	};
-
 </script>
 
 <!--

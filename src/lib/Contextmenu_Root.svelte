@@ -28,13 +28,10 @@
 	import Contextmenu_Text_Entry from '$lib/Contextmenu_Text_Entry.svelte';
 	import {capture_event} from '$lib/capture_event.js';
 
-	const DEFAULT_OPEN_OFFSET_X = -2;
-	const DEFAULT_OPEN_OFFSET_Y = -2;
-
 	const {
 		contextmenu = new Contextmenu_State(),
-		open_offset_x = DEFAULT_OPEN_OFFSET_X,
-		open_offset_y = DEFAULT_OPEN_OFFSET_Y,
+		open_offset_x = -2,
+		open_offset_y = -2,
 		bypass_with_tap_then_longpress = true,
 		tap_then_longpress_duration = 660,
 		tap_then_longpress_move_tolerance = 7,
@@ -241,21 +238,40 @@
 		swallow(e);
 		handler();
 	};
-
 </script>
 
 <svelte:window
 	oncontextmenu={scoped ? undefined : on_window_contextmenu}
 	onmousedown={contextmenu.opened ? mousedown : undefined}
 	onkeydown={contextmenu.opened ? keydown : undefined}
-	use:capture_event={{event: 'touchstart', cb: touchstart, disabled: scoped || !bypass_with_tap_then_longpress}}
-	use:capture_event={{event: 'touchcancel', cb: touchcancel, disabled: scoped || !bypass_with_tap_then_longpress}}
+	use:capture_event={{
+		event: 'touchstart',
+		cb: touchstart,
+		disabled: scoped || !bypass_with_tap_then_longpress,
+	}}
+	use:capture_event={{
+		event: 'touchcancel',
+		cb: touchcancel,
+		disabled: scoped || !bypass_with_tap_then_longpress,
+	}}
 />
 
 {#if scoped}
-	<div class="contextmenu_root" role="region" oncontextmenu={on_window_contextmenu}
-		use:capture_event={{event: 'touchstart', cb: touchstart, disabled: !bypass_with_tap_then_longpress}}
-		use:capture_event={{event: 'touchcancel', cb: touchcancel, disabled: !bypass_with_tap_then_longpress}}>
+	<div
+		class="contextmenu_root"
+		role="region"
+		oncontextmenu={on_window_contextmenu}
+		use:capture_event={{
+			event: 'touchstart',
+			cb: touchstart,
+			disabled: !bypass_with_tap_then_longpress,
+		}}
+		use:capture_event={{
+			event: 'touchcancel',
+			cb: touchcancel,
+			disabled: !bypass_with_tap_then_longpress,
+		}}
+	>
 		{@render children()}
 	</div>
 {:else}

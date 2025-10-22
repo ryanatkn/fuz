@@ -852,7 +852,11 @@ describe('Contextmenu_Root', () => {
 			document.body.appendChild(target);
 
 			// Open the contextmenu first
-			contextmenu.open([{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => {}}}], 100, 200);
+			contextmenu.open(
+				[{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => {}}}],
+				100,
+				200,
+			);
 			assert.strictEqual(contextmenu.opened, true);
 
 			// First tap - should be ignored due to contextmenu being open
@@ -897,7 +901,7 @@ describe('Contextmenu_Root', () => {
 			// First tap with two fingers - should be ignored
 			const touchstart1 = create_touch_event('touchstart', [
 				{clientX: 100, clientY: 200, target},
-				{clientX: 150, clientY: 200, target}
+				{clientX: 150, clientY: 200, target},
 			]);
 			window.dispatchEvent(touchstart1);
 			const touchend1 = create_touch_event('touchend', []);
@@ -934,7 +938,9 @@ describe('Contextmenu_Root', () => {
 			document.body.appendChild(input);
 
 			// First tap on input - should be ignored
-			const touchstart1 = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target: input}]);
+			const touchstart1 = create_touch_event('touchstart', [
+				{clientX: 100, clientY: 200, target: input},
+			]);
 			set_event_target(touchstart1, input);
 			window.dispatchEvent(touchstart1);
 			const touchend1 = create_touch_event('touchend', []);
@@ -942,7 +948,9 @@ describe('Contextmenu_Root', () => {
 
 			// Second tap - should NOT create bypass
 			vi.advanceTimersByTime(300);
-			const touchstart2 = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target: input}]);
+			const touchstart2 = create_touch_event('touchstart', [
+				{clientX: 100, clientY: 200, target: input},
+			]);
 			set_event_target(touchstart2, input);
 			window.dispatchEvent(touchstart2);
 
@@ -971,7 +979,9 @@ describe('Contextmenu_Root', () => {
 			]);
 
 			// First tap with shift key - should be ignored
-			const touchstart1 = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}], {shiftKey: true});
+			const touchstart1 = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}], {
+				shiftKey: true,
+			});
 			set_event_target(touchstart1, target);
 			window.dispatchEvent(touchstart1);
 			const touchend1 = create_touch_event('touchend', []);
