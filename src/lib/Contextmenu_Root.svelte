@@ -1,6 +1,6 @@
 <!--
 	This is the default contextmenu root component.
-	It relies on the standard	browser `contextmenu` event
+	It relies on the standard browser `contextmenu` event
 	which means it does not work on iOS Safari,
 	which doesn't fire the `contextmenu` event as of October 2025
 	(see https://bugs.webkit.org/show_bug.cgi?id=213953).
