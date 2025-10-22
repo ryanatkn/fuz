@@ -126,6 +126,20 @@ export const src_json: Src_Json = {
 			path: 'csp_of_ryanatkn.ts',
 			declarations: [{name: 'csp_trusted_sources_of_ryanatkn', kind: 'variable'}],
 		},
+		'./csp_test_helpers.js': {
+			path: 'csp_test_helpers.ts',
+			declarations: [
+				{name: 'TEST_SOURCES', kind: 'variable'},
+				{name: 'create_test_source', kind: 'function'},
+				{name: 'create_test_source_with_directives', kind: 'function'},
+				{name: 'create_test_source_with_both', kind: 'function'},
+				{name: 'assert_source_in_directive', kind: 'function'},
+				{name: 'assert_source_not_in_directive', kind: 'function'},
+				{name: 'assert_directive_exists', kind: 'function'},
+				{name: 'assert_directive_not_exists', kind: 'function'},
+				{name: 'assert_directive_equals', kind: 'function'},
+			],
+		},
 		'./csp.js': {
 			path: 'csp.ts',
 			declarations: [
