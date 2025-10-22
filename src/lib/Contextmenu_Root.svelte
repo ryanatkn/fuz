@@ -124,6 +124,19 @@
 	let longpress_start_time: number | undefined = $state();
 	let longpress_bypass: boolean | undefined = $state();
 
+	/**
+	 * Check if a target element is valid for contextmenu interactions.
+	 * Returns true if valid and narrows the type to HTMLElement | SVGElement.
+	 */
+	const is_valid_target = (
+		target: EventTarget | null,
+		shiftKey: boolean,
+	): target is HTMLElement | SVGElement =>
+		!shiftKey &&
+		(target instanceof HTMLElement || target instanceof SVGElement) &&
+		!is_editable(target) &&
+		!inside_editable(target);
+
 	const on_window_contextmenu = (e: MouseEvent) => {
 		// Handle the tap-then-longpress bypass gesture
 		if (longpress_bypass) {
@@ -131,13 +144,11 @@
 			return;
 		}
 		const {target} = e;
-		if (
-			e.shiftKey ||
-			!(target instanceof HTMLElement || target instanceof SVGElement) ||
-			el?.contains(target) ||
-			is_editable(target) ||
-			inside_editable(target)
-		) {
+		if (!is_valid_target(target, e.shiftKey)) {
+			return;
+		}
+		// Don't open contextmenu when clicking on the menu itself
+		if (el?.contains(target)) {
 			return;
 		}
 		if (
@@ -162,14 +173,7 @@
 		if (!bypass_with_tap_then_longpress) return;
 
 		const {touches, target} = e;
-		if (
-			contextmenu.opened ||
-			touches.length !== 1 ||
-			e.shiftKey ||
-			!(target instanceof HTMLElement || target instanceof SVGElement) ||
-			is_editable(target) ||
-			inside_editable(target)
-		) {
+		if (contextmenu.opened || touches.length !== 1 || !is_valid_target(target, e.shiftKey)) {
 			// Reset state if conditions aren't met
 			longpress_start_time = undefined;
 			touch_x = undefined;

@@ -545,6 +545,126 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 			assert.strictEqual(contextmenu.opened, true);
 			target.remove();
 		});
+
+		test('tap on editable element resets bypass state', async () => {
+			mounted = mount_with_contextmenu(undefined, {
+				longpress_duration: 500,
+				bypass_with_tap_then_longpress: true,
+				tap_then_longpress_duration: 600,
+			});
+
+			const input = document.createElement('input');
+			const target = document.createElement('div');
+			document.body.appendChild(input);
+			document.body.appendChild(target);
+
+			// Setup contextmenu action on div
+			await setup_contextmenu_action(target, [
+				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => {}}},
+			]);
+
+			// First tap on editable element - should reset any previous state
+			const touchstart1 = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target: input}]);
+			set_event_target(touchstart1, input);
+			window.dispatchEvent(touchstart1);
+
+			// Second tap on valid element shortly after
+			vi.advanceTimersByTime(200);
+			const touchstart2 = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
+			set_event_target(touchstart2, target);
+			window.dispatchEvent(touchstart2);
+
+			// Should NOT bypass (first tap was invalid and reset state)
+			// Longpress should proceed normally
+			vi.advanceTimersByTime(500);
+			flushSync();
+
+			assert.strictEqual(contextmenu.opened, true);
+
+			input.remove();
+			target.remove();
+		});
+
+		test('touchcancel after tap resets bypass state', async () => {
+			mounted = mount_with_contextmenu(undefined, {
+				longpress_duration: 500,
+				bypass_with_tap_then_longpress: true,
+				tap_then_longpress_duration: 600,
+			});
+
+			const target = document.createElement('div');
+			document.body.appendChild(target);
+
+			// Setup contextmenu action
+			await setup_contextmenu_action(target, [
+				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => {}}},
+			]);
+
+			// First tap
+			const touchstart1 = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
+			set_event_target(touchstart1, target);
+			window.dispatchEvent(touchstart1);
+
+			const touchend1 = create_touch_event('touchend', []);
+			window.dispatchEvent(touchend1);
+
+			// Touch gets cancelled (e.g., user starts scrolling)
+			const touchcancel = create_touch_event('touchcancel', []);
+			window.dispatchEvent(touchcancel);
+
+			// Second tap after cancel
+			vi.advanceTimersByTime(200);
+			const touchstart2 = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
+			set_event_target(touchstart2, target);
+			window.dispatchEvent(touchstart2);
+
+			// Should NOT bypass (state was reset by touchcancel)
+			vi.advanceTimersByTime(500);
+			flushSync();
+
+			assert.strictEqual(contextmenu.opened, true);
+
+			target.remove();
+		});
+
+		test('touchend during longpress resets bypass state', async () => {
+			mounted = mount_with_contextmenu(undefined, {
+				longpress_duration: 500,
+				bypass_with_tap_then_longpress: true,
+				tap_then_longpress_duration: 600,
+			});
+
+			const target = document.createElement('div');
+			document.body.appendChild(target);
+
+			// Setup contextmenu action
+			await setup_contextmenu_action(target, [
+				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => {}}},
+			]);
+
+			// First tap - start tracking
+			const touchstart1 = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
+			set_event_target(touchstart1, target);
+			window.dispatchEvent(touchstart1);
+
+			// End touch before longpress completes
+			const touchend1 = create_touch_event('touchend', []);
+			window.dispatchEvent(touchend1);
+
+			// Second tap shortly after
+			vi.advanceTimersByTime(200);
+			const touchstart2 = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
+			set_event_target(touchstart2, target);
+			window.dispatchEvent(touchstart2);
+
+			// Should NOT bypass (touchend reset the state)
+			vi.advanceTimersByTime(500);
+			flushSync();
+
+			assert.strictEqual(contextmenu.opened, true);
+
+			target.remove();
+		});
 	});
 
 	describe('closing behavior', () => {
