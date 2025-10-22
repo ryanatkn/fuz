@@ -1041,6 +1041,40 @@ describe('Contextmenu_Root', () => {
 			target.remove();
 		});
 
+		test('touchcancel clears bypass flag if set', () => {
+			mounted = mount_with_contextmenu(undefined, {
+				bypass_with_tap_then_longpress: true,
+			});
+
+			const target = document.createElement('div');
+			document.body.appendChild(target);
+
+			// First tap
+			const touchstart1 = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
+			window.dispatchEvent(touchstart1);
+
+			// Second tap to set bypass flag
+			vi.advanceTimersByTime(200);
+			const touchstart2 = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
+			window.dispatchEvent(touchstart2);
+
+			// Cancel should clear the bypass flag
+			const cancelEvent = create_touch_event('touchcancel', []);
+			window.dispatchEvent(cancelEvent);
+
+			// Now contextmenu event should be handled normally (not bypassed)
+			// Note: No items registered so it won't open, but should not be in bypass mode
+			const contextEvent = create_contextmenu_event(100, 200);
+			set_event_target(contextEvent, target);
+			window.dispatchEvent(contextEvent);
+
+			// Bypass flag was cleared, so event is processed normally (not prevented due to no items)
+			assert.strictEqual(contextEvent.defaultPrevented, false);
+			assert.strictEqual(contextmenu.opened, false);
+
+			target.remove();
+		});
+
 		test('handles rapid tap sequences (3+ taps)', () => {
 			mounted = mount_with_contextmenu(undefined, {
 				bypass_with_tap_then_longpress: true,

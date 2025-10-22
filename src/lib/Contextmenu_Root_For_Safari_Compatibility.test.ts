@@ -356,6 +356,46 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 			assert.strictEqual(contextmenu.opened, false);
 			input.remove();
 		});
+
+		test('swallows native contextmenu event when longpress already opened menu', async () => {
+			mounted = mount_with_contextmenu(undefined, {
+				longpress_duration: 500,
+			});
+
+			const target = document.createElement('div');
+			document.body.appendChild(target);
+
+			// Setup contextmenu action
+			await setup_contextmenu_action(target, [
+				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => {}}},
+			]);
+
+			// Start touch
+			const touchstart = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
+			set_event_target(touchstart, target);
+			window.dispatchEvent(touchstart);
+
+			// Advance timer - longpress opens menu
+			vi.advanceTimersByTime(500);
+			flushSync();
+
+			assert.strictEqual(contextmenu.opened, true);
+			const originalX = contextmenu.x;
+			const originalY = contextmenu.y;
+
+			// Native contextmenu event fires (some Android devices fire this after longpress)
+			const contextEvent = create_contextmenu_event(100, 200);
+			set_event_target(contextEvent, target);
+			window.dispatchEvent(contextEvent);
+
+			// Event should be swallowed (prevented)
+			assert.strictEqual(contextEvent.defaultPrevented, true);
+			// Menu should remain at original position (not re-opened)
+			assert.strictEqual(contextmenu.x, originalX);
+			assert.strictEqual(contextmenu.y, originalY);
+
+			target.remove();
+		});
 	});
 
 	describe('tap-then-longpress bypass gesture', () => {
