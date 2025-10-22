@@ -19,7 +19,6 @@
 	 */
 	import {is_editable, swallow, inside_editable} from '@ryanatkn/belt/dom.js';
 	import type {ComponentProps, Snippet} from 'svelte';
-	import {on} from 'svelte/events';
 
 	import {
 		contextmenu_context,
@@ -277,9 +276,7 @@
 </script>
 
 <svelte:window
-	{@attach scoped
-		? undefined
-		: (el) => on(el, 'contextmenu', on_window_contextmenu, {capture: true})}
+	oncontextmenu={scoped ? undefined : on_window_contextmenu}
 	ontouchstartcapture={scoped ? undefined : touchstart}
 	ontouchmovecapture={scoped ? undefined : touchmove}
 	ontouchendcapture={scoped ? undefined : touchend}
@@ -292,7 +289,7 @@
 	<div
 		class="contextmenu_root"
 		role="region"
-		{@attach (el) => on(el, 'contextmenu', on_window_contextmenu, {capture: true})}
+		oncontextmenu={on_window_contextmenu}
 		ontouchstartcapture={touchstart}
 		ontouchmovecapture={touchmove}
 		ontouchendcapture={touchend}
