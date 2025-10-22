@@ -97,6 +97,19 @@ export function create_csp_directives(options: Create_Csp_Directives_Options = {
 		trust_requirements.set(spec.name, required_trust);
 	}
 
+	// Validate trusted_sources directives
+	if (trusted_sources?.length) {
+		for (const spec of trusted_sources) {
+			if (spec.directives) {
+				for (const directive of spec.directives) {
+					if (parse_csp_directive(directive) === null) {
+						throw new Error(`Invalid directive in trusted_sources: ${directive}`);
+					}
+				}
+			}
+		}
+	}
+
 	// Apply trusted sources to directives
 	if (trusted_sources?.length) {
 		for (const [key, value] of Object.entries(directives)) {
