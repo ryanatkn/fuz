@@ -29,7 +29,7 @@
 	} from '$lib/contextmenu_state.svelte.js';
 	import Contextmenu_Link_Entry from '$lib/Contextmenu_Link_Entry.svelte';
 	import Contextmenu_Text_Entry from '$lib/Contextmenu_Text_Entry.svelte';
-	import {capture_event} from '$lib/capture_event.js';
+	import {capture_passive_event} from '$lib/capture_passive_event.js';
 
 	const {
 		contextmenu = new Contextmenu_State(),
@@ -284,33 +284,52 @@
 -->
 <!-- Capture keydown so it can handle the event before any dialogs. -->
 <svelte:window
-	use:capture_event={{
+	{@attach capture_passive_event({
 		event: 'contextmenu',
 		passive: false,
-		cb: on_window_contextmenu,
+		handler: on_window_contextmenu,
 		disabled: scoped,
-	}}
-	use:capture_event={{event: 'touchstart', cb: touchstart, disabled: scoped}}
-	use:capture_event={{event: 'touchmove', cb: touchmove, disabled: scoped}}
-	use:capture_event={{event: 'touchend', passive: false, cb: touchend, disabled: scoped}}
-	use:capture_event={{event: 'touchcancel', passive: false, cb: touchend, disabled: scoped}}
-	use:capture_event={{
+	})}
+	{@attach capture_passive_event({event: 'touchstart', handler: touchstart, disabled: scoped})}
+	{@attach capture_passive_event({event: 'touchmove', handler: touchmove, disabled: scoped})}
+	{@attach capture_passive_event({
+		event: 'touchend',
+		passive: false,
+		handler: touchend,
+		disabled: scoped,
+	})}
+	{@attach capture_passive_event({
+		event: 'touchcancel',
+		passive: false,
+		handler: touchend,
+		disabled: scoped,
+	})}
+	{@attach capture_passive_event({
 		event: 'mousedown',
-		cb: mousedown,
+		handler: mousedown,
 		disabled: !contextmenu.opened,
-	}}
-	use:capture_event={{event: 'keydown', passive: false, cb: keydown, disabled: !contextmenu.opened}}
+	})}
+	{@attach capture_passive_event({
+		event: 'keydown',
+		passive: false,
+		handler: keydown,
+		disabled: !contextmenu.opened,
+	})}
 />
 
 {#if scoped}
 	<div
 		class="contextmenu_root"
 		role="region"
-		use:capture_event={{event: 'contextmenu', passive: false, cb: on_window_contextmenu}}
-		use:capture_event={{event: 'touchstart', cb: touchstart}}
-		use:capture_event={{event: 'touchmove', cb: touchmove}}
-		use:capture_event={{event: 'touchend', passive: false, cb: touchend}}
-		use:capture_event={{event: 'touchcancel', passive: false, cb: touchend}}
+		{@attach capture_passive_event({
+			event: 'contextmenu',
+			passive: false,
+			handler: on_window_contextmenu,
+		})}
+		{@attach capture_passive_event({event: 'touchstart', handler: touchstart})}
+		{@attach capture_passive_event({event: 'touchmove', handler: touchmove})}
+		{@attach capture_passive_event({event: 'touchend', passive: false, handler: touchend})}
+		{@attach capture_passive_event({event: 'touchcancel', passive: false, handler: touchend})}
 	>
 		{@render children()}
 	</div>
