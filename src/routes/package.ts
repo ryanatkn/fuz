@@ -248,7 +248,6 @@ export const src_json: Src_Json = {
 				{name: 'create_keyboard_event', kind: 'function'},
 				{name: 'create_mouse_event', kind: 'function'},
 				{name: 'set_event_target', kind: 'function'},
-				{name: 'flush_updates', kind: 'function'},
 				{name: 'create_touch_event', kind: 'function'},
 			],
 		},
