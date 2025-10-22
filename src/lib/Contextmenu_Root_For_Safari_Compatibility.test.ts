@@ -553,75 +553,26 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 	});
 
 	describe('keyboard navigation', () => {
-		test('ArrowDown calls select_next', async () => {
-			mounted = mount_with_contextmenu();
+		// Test data for keyboard navigation
+		const keyboard_test_cases = [
+			{key: 'ArrowDown', method: 'select_next'},
+			{key: 'ArrowUp', method: 'select_previous'},
+			{key: 'Home', method: 'select_first'},
+			{key: 'End', method: 'select_last'},
+			{key: 'PageDown', method: 'select_next'},
+			{key: 'PageUp', method: 'select_previous'},
+		];
 
-			contextmenu.open([], 100, 200);
-			flushSync();
-			await tick(); // Wait for passive_event action to update
-			const spy = vi.spyOn(contextmenu, 'select_next');
-
-			window.dispatchEvent(create_keyboard_event('ArrowDown'));
-			assert.strictEqual(spy.mock.calls.length, 1);
-		});
-
-		test('ArrowUp calls select_previous', async () => {
-			mounted = mount_with_contextmenu();
-
-			contextmenu.open([], 100, 200);
-			flushSync();
-			await tick();
-			const spy = vi.spyOn(contextmenu, 'select_previous');
-
-			window.dispatchEvent(create_keyboard_event('ArrowUp'));
-			assert.strictEqual(spy.mock.calls.length, 1);
-		});
-
-		test('Home calls select_first', async () => {
+		// Data-driven tests for keyboard shortcuts
+		test.each(keyboard_test_cases)('$key calls $method', async ({key, method}) => {
 			mounted = mount_with_contextmenu();
 
 			contextmenu.open([], 100, 200);
 			flushSync();
 			await tick();
-			const spy = vi.spyOn(contextmenu, 'select_first');
+			const spy = vi.spyOn(contextmenu, method as any);
 
-			window.dispatchEvent(create_keyboard_event('Home'));
-			assert.strictEqual(spy.mock.calls.length, 1);
-		});
-
-		test('End calls select_last', async () => {
-			mounted = mount_with_contextmenu();
-
-			contextmenu.open([], 100, 200);
-			flushSync();
-			await tick();
-			const spy = vi.spyOn(contextmenu, 'select_last');
-
-			window.dispatchEvent(create_keyboard_event('End'));
-			assert.strictEqual(spy.mock.calls.length, 1);
-		});
-
-		test('PageDown calls select_next', async () => {
-			mounted = mount_with_contextmenu();
-
-			contextmenu.open([], 100, 200);
-			flushSync();
-			await tick();
-			const spy = vi.spyOn(contextmenu, 'select_next');
-
-			window.dispatchEvent(create_keyboard_event('PageDown'));
-			assert.strictEqual(spy.mock.calls.length, 1);
-		});
-
-		test('PageUp calls select_previous', async () => {
-			mounted = mount_with_contextmenu();
-
-			contextmenu.open([], 100, 200);
-			flushSync();
-			await tick();
-			const spy = vi.spyOn(contextmenu, 'select_previous');
-
-			window.dispatchEvent(create_keyboard_event('PageUp'));
+			window.dispatchEvent(create_keyboard_event(key));
 			assert.strictEqual(spy.mock.calls.length, 1);
 		});
 
@@ -881,6 +832,129 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 			assert.ok(menu.classList.contains('contextmenu'));
 			assert.ok(menu.classList.contains('unstyled'));
 			assert.ok(menu.classList.contains('pane'));
+		});
+	});
+
+	describe('edge cases', () => {
+		test('handles SVG elements as targets', async () => {
+			mounted = mount_with_contextmenu();
+			const {container} = mounted;
+
+			const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+			const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+			svg.appendChild(rect);
+			container.appendChild(svg);
+
+			await setup_contextmenu_action(rect, [
+				{snippet: 'text', props: {content: 'SVG Test', icon: '🎨', run: () => {}}},
+			]);
+
+			const event = create_contextmenu_event(100, 200);
+			set_event_target(event, rect);
+			window.dispatchEvent(event);
+
+			assert.strictEqual(contextmenu.opened, true);
+			assert.strictEqual(event.defaultPrevented, true);
+
+			svg.remove();
+		});
+
+		test('handles function snippet params', () => {
+			mounted = mount_with_contextmenu();
+
+			const snippet = (() => {
+				// Test snippet function
+			}) as any;
+
+			contextmenu.open([snippet], 100, 200);
+			flushSync();
+
+			assert.strictEqual(contextmenu.opened, true);
+			assert.strictEqual(contextmenu.params[0], snippet);
+		});
+
+		test('handles empty params array', () => {
+			mounted = mount_with_contextmenu();
+
+			contextmenu.open([], 100, 200);
+			flushSync();
+
+			assert.strictEqual(contextmenu.opened, true);
+			assert.strictEqual(contextmenu.params.length, 0);
+		});
+
+		test('handles rapid open/close sequences', () => {
+			mounted = mount_with_contextmenu();
+
+			// Rapid open/close/open
+			contextmenu.open([(() => {}) as any], 50, 50);
+			assert.strictEqual(contextmenu.opened, true);
+			assert.strictEqual(contextmenu.x, 50);
+
+			contextmenu.close();
+			assert.strictEqual(contextmenu.opened, false);
+
+			contextmenu.open([(() => {}) as any], 100, 100);
+			assert.strictEqual(contextmenu.opened, true);
+			assert.strictEqual(contextmenu.x, 100);
+
+			contextmenu.open([(() => {}) as any], 150, 150);
+			assert.strictEqual(contextmenu.opened, true);
+			assert.strictEqual(contextmenu.x, 150);
+		});
+
+		test('handles mixed HTML and SVG targets', async () => {
+			mounted = mount_with_contextmenu();
+			const {container} = mounted;
+
+			// First open on HTML element
+			const div = document.createElement('div');
+			container.appendChild(div);
+			await setup_contextmenu_action(div, [
+				{snippet: 'text', props: {content: 'HTML', icon: '📄', run: () => {}}},
+			]);
+
+			const event1 = create_contextmenu_event(100, 100);
+			set_event_target(event1, div);
+			window.dispatchEvent(event1);
+
+			assert.strictEqual(contextmenu.opened, true);
+			contextmenu.close();
+
+			// Then open on SVG element
+			const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+			container.appendChild(circle);
+			await setup_contextmenu_action(circle, [
+				{snippet: 'text', props: {content: 'SVG', icon: '🎨', run: () => {}}},
+			]);
+
+			const event2 = create_contextmenu_event(200, 200);
+			set_event_target(event2, circle);
+			window.dispatchEvent(event2);
+
+			assert.strictEqual(contextmenu.opened, true);
+
+			// Cleanup
+			div.remove();
+			circle.remove();
+		});
+
+		test('prevents contextmenu when no params available', () => {
+			mounted = mount_with_contextmenu();
+			const {container} = mounted;
+
+			const div = document.createElement('div');
+			// Not setting up contextmenu params
+			container.appendChild(div);
+
+			const event = create_contextmenu_event(100, 200);
+			set_event_target(event, div);
+			window.dispatchEvent(event);
+
+			assert.strictEqual(contextmenu.opened, false);
+			assert.strictEqual(event.defaultPrevented, false);
+
+			div.remove();
 		});
 	});
 
