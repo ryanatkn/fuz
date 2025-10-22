@@ -1,12 +1,14 @@
-/* eslint-disable @typescript-eslint/require-await */
-/* eslint-disable @typescript-eslint/no-empty-function */
 import {describe, test, assert, beforeEach} from 'vitest';
+
 import {
 	Contextmenu_State,
 	Entry_State,
 	Submenu_State,
 	Root_Menu_State,
 } from '$lib/contextmenu_state.svelte.js';
+
+/* eslint-disable @typescript-eslint/require-await */
+/* eslint-disable @typescript-eslint/no-empty-function */
 
 describe('Contextmenu_State', () => {
 	let contextmenu: Contextmenu_State;

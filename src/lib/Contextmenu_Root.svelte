@@ -15,7 +15,7 @@
 	 * instead. That version implements custom touch handlers and longpress detection at the
 	 * cost of significantly more complexity and no vibrate support.
 	 */
-	import {is_editable, swallow, inside_editable} from '@ryanatkn/belt/dom.js';
+	import {swallow} from '@ryanatkn/belt/dom.js';
 	import type {ComponentProps, Snippet} from 'svelte';
 
 	import {
@@ -26,14 +26,25 @@
 	} from '$lib/contextmenu_state.svelte.js';
 	import Contextmenu_Link_Entry from '$lib/Contextmenu_Link_Entry.svelte';
 	import Contextmenu_Text_Entry from '$lib/Contextmenu_Text_Entry.svelte';
+	import {
+		CONTEXTMENU_DEFAULT_OPEN_OFFSET_X,
+		CONTEXTMENU_DEFAULT_OPEN_OFFSET_Y,
+		CONTEXTMENU_DEFAULT_TAP_THEN_LONGPRESS_DURATION,
+		CONTEXTMENU_DEFAULT_TAP_THEN_LONGPRESS_MOVE_TOLERANCE,
+		contextmenu_is_valid_target,
+		contextmenu_create_keyboard_handlers,
+		contextmenu_create_keydown_handler,
+		contextmenu_calculate_constrained_x,
+		contextmenu_calculate_constrained_y,
+	} from '$lib/contextmenu_helpers.js';
 
 	const {
 		contextmenu = new Contextmenu_State(),
-		open_offset_x = -2,
-		open_offset_y = -2,
+		open_offset_x = CONTEXTMENU_DEFAULT_OPEN_OFFSET_X,
+		open_offset_y = CONTEXTMENU_DEFAULT_OPEN_OFFSET_Y,
 		bypass_with_tap_then_longpress = true,
-		tap_then_longpress_duration = 660,
-		tap_then_longpress_move_tolerance = 7,
+		tap_then_longpress_duration = CONTEXTMENU_DEFAULT_TAP_THEN_LONGPRESS_DURATION,
+		tap_then_longpress_move_tolerance = CONTEXTMENU_DEFAULT_TAP_THEN_LONGPRESS_MOVE_TOLERANCE,
 		scoped = false,
 		children,
 	}: {
@@ -112,10 +123,10 @@
 		}
 	});
 	const x = $derived(
-		contextmenu.x + Math.min(0, layout.width - (contextmenu.x + dimensions.width)),
+		contextmenu_calculate_constrained_x(contextmenu.x, dimensions.width, layout.width),
 	);
 	const y = $derived(
-		contextmenu.y + Math.min(0, layout.height - (contextmenu.y + dimensions.height)),
+		contextmenu_calculate_constrained_y(contextmenu.y, dimensions.height, layout.height),
 	);
 
 	// State for tap-then-longpress bypass detection
@@ -124,19 +135,6 @@
 	let longpress_start_time: number | undefined = $state();
 	let longpress_bypass: boolean | undefined = $state();
 
-	/**
-	 * Check if a target element is valid for contextmenu interactions.
-	 * Returns true if valid and narrows the type to HTMLElement | SVGElement.
-	 */
-	const is_valid_target = (
-		target: EventTarget | null,
-		shiftKey: boolean,
-	): target is HTMLElement | SVGElement =>
-		!shiftKey &&
-		(target instanceof HTMLElement || target instanceof SVGElement) &&
-		!is_editable(target) &&
-		!inside_editable(target);
-
 	const on_window_contextmenu = (e: MouseEvent) => {
 		// Handle the tap-then-longpress bypass gesture
 		if (longpress_bypass) {
@@ -144,7 +142,7 @@
 			return;
 		}
 		const {target} = e;
-		if (!is_valid_target(target, e.shiftKey)) {
+		if (!contextmenu_is_valid_target(target, e.shiftKey)) {
 			return;
 		}
 		// Don't open contextmenu when clicking on the menu itself
@@ -173,7 +171,11 @@
 		if (!bypass_with_tap_then_longpress) return;
 
 		const {touches, target} = e;
-		if (contextmenu.opened || touches.length !== 1 || !is_valid_target(target, e.shiftKey)) {
+		if (
+			contextmenu.opened ||
+			touches.length !== 1 ||
+			!contextmenu_is_valid_target(target, e.shiftKey)
+		) {
 			// Reset state if conditions aren't met
 			longpress_start_time = undefined;
 			touch_x = undefined;
@@ -222,27 +224,8 @@
 		}
 	};
 
-	// TODO maybe bind these to the contextmenu instance instead of including the function wrapper
-	// TODO customize
-	const keyboard_handlers: Map<string, () => void> = new Map([
-		['Escape', () => contextmenu.close()],
-		['ArrowLeft', () => contextmenu.collapse_selected()],
-		['ArrowRight', () => contextmenu.expand_selected()],
-		['ArrowDown', () => contextmenu.select_next()],
-		['PageDown', () => contextmenu.select_next()],
-		['ArrowUp', () => contextmenu.select_previous()],
-		['PageUp', () => contextmenu.select_previous()],
-		['Home', () => contextmenu.select_first()],
-		['End', () => contextmenu.select_last()],
-		[' ', () => contextmenu.activate_selected()],
-		['Enter', () => contextmenu.activate_selected()],
-	]);
-	const keydown = (e: KeyboardEvent): void => {
-		const handler = keyboard_handlers.get(e.key);
-		if (!handler || is_editable(e.target)) return;
-		swallow(e);
-		handler();
-	};
+	const keyboard_handlers = contextmenu_create_keyboard_handlers(contextmenu);
+	const keydown = contextmenu_create_keydown_handler(keyboard_handlers);
 </script>
 
 <svelte:window
