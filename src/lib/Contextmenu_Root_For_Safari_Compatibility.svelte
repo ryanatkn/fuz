@@ -20,8 +20,6 @@
 	 */
 	import {is_editable, swallow, inside_editable} from '@ryanatkn/belt/dom.js';
 	import type {ComponentProps, Snippet} from 'svelte';
-	import type {Action} from 'svelte/action';
-	import {on} from 'svelte/events';
 
 	import {
 		contextmenu_context,
@@ -31,6 +29,7 @@
 	} from '$lib/contextmenu_state.svelte.js';
 	import Contextmenu_Link_Entry from '$lib/Contextmenu_Link_Entry.svelte';
 	import Contextmenu_Text_Entry from '$lib/Contextmenu_Text_Entry.svelte';
+	import {capture_event} from '$lib/capture_event.js';
 
 	const {
 		contextmenu = new Contextmenu_State(),
@@ -278,70 +277,41 @@
 		handler();
 	};
 
-	// TODO this is a mess because some events need to be passive or nonpassive on some mobile devices, but a lot of this is unnecessary, needs a full pass
-	interface Passive_Event_Params {
-		event: string;
-		passive: boolean;
-		cb: (...args: any) => void;
-		disabled?: boolean;
-	}
-	const passive_event: Action<HTMLElement, Passive_Event_Params> = (el, params) => {
-		let cleanup: (() => void) | null = null;
-		const sync_event = (p: Passive_Event_Params) => {
-			if (cleanup) {
-				cleanup();
-				cleanup = null;
-			}
-			if (!p.disabled) {
-				cleanup = on(el, p.event, p.cb, {capture: true, passive: p.passive});
-			}
-		};
-		sync_event(params);
-		return {
-			update: (p) => {
-				sync_event(p);
-			},
-			destroy: () => {
-				cleanup?.();
-			},
-		};
-	};
 </script>
 
 <!--
 	TODO Some of these modifiers are unnecessary, but some browsers need some of them.
-	The `nonpassive` option is needed to swallow events. See the todo above about doing a full pass.
+	The `nonpassive` option is needed to swallow events.
 -->
 <!-- Capture keydown so it can handle the event before any dialogs. -->
 <svelte:window
-	use:passive_event={{
+	use:capture_event={{
 		event: 'contextmenu',
 		passive: false,
 		cb: on_window_contextmenu,
 		disabled: scoped,
 	}}
-	use:passive_event={{event: 'touchstart', passive: true, cb: touchstart, disabled: scoped}}
-	use:passive_event={{event: 'touchmove', passive: true, cb: touchmove, disabled: scoped}}
-	use:passive_event={{event: 'touchend', passive: false, cb: touchend, disabled: scoped}}
-	use:passive_event={{event: 'touchcancel', passive: false, cb: touchend, disabled: scoped}}
-	use:passive_event={{
+	use:capture_event={{event: 'touchstart', cb: touchstart, disabled: scoped}}
+	use:capture_event={{event: 'touchmove', cb: touchmove, disabled: scoped}}
+	use:capture_event={{event: 'touchend', passive: false, cb: touchend, disabled: scoped}}
+	use:capture_event={{event: 'touchcancel', passive: false, cb: touchend, disabled: scoped}}
+	use:capture_event={{
 		event: 'mousedown',
-		passive: true,
 		cb: mousedown,
 		disabled: !contextmenu.opened,
 	}}
-	use:passive_event={{event: 'keydown', passive: false, cb: keydown, disabled: !contextmenu.opened}}
+	use:capture_event={{event: 'keydown', passive: false, cb: keydown, disabled: !contextmenu.opened}}
 />
 
 {#if scoped}
 	<div
 		class="contextmenu_root"
 		role="region"
-		use:passive_event={{event: 'contextmenu', passive: false, cb: on_window_contextmenu}}
-		use:passive_event={{event: 'touchstart', passive: true, cb: touchstart}}
-		use:passive_event={{event: 'touchmove', passive: true, cb: touchmove}}
-		use:passive_event={{event: 'touchend', passive: false, cb: touchend}}
-		use:passive_event={{event: 'touchcancel', passive: false, cb: touchend}}
+		use:capture_event={{event: 'contextmenu', passive: false, cb: on_window_contextmenu}}
+		use:capture_event={{event: 'touchstart', cb: touchstart}}
+		use:capture_event={{event: 'touchmove', cb: touchmove}}
+		use:capture_event={{event: 'touchend', passive: false, cb: touchend}}
+		use:capture_event={{event: 'touchcancel', passive: false, cb: touchend}}
 	>
 		{@render children()}
 	</div>

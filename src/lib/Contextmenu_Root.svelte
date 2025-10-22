@@ -17,8 +17,6 @@
 	 */
 	import {is_editable, swallow, inside_editable} from '@ryanatkn/belt/dom.js';
 	import type {ComponentProps, Snippet} from 'svelte';
-	import type {Action} from 'svelte/action';
-	import {on} from 'svelte/events';
 
 	import {
 		contextmenu_context,
@@ -28,6 +26,7 @@
 	} from '$lib/contextmenu_state.svelte.js';
 	import Contextmenu_Link_Entry from '$lib/Contextmenu_Link_Entry.svelte';
 	import Contextmenu_Text_Entry from '$lib/Contextmenu_Text_Entry.svelte';
+	import {capture_event} from '$lib/capture_event.js';
 
 	const DEFAULT_OPEN_OFFSET_X = -2;
 	const DEFAULT_OPEN_OFFSET_Y = -2;
@@ -243,48 +242,20 @@
 		handler();
 	};
 
-	// Passive event action for attaching touch events with proper passive flag
-	interface Passive_Event_Params {
-		event: string;
-		passive: boolean;
-		cb: (...args: any) => void;
-		disabled?: boolean;
-	}
-	const passive_event: Action<HTMLElement, Passive_Event_Params> = (el, params) => {
-		let cleanup: (() => void) | null = null;
-		const sync_event = (p: Passive_Event_Params) => {
-			if (cleanup) {
-				cleanup();
-				cleanup = null;
-			}
-			if (!p.disabled) {
-				cleanup = on(el, p.event, p.cb, {capture: true, passive: p.passive});
-			}
-		};
-		sync_event(params);
-		return {
-			update: (p) => {
-				sync_event(p);
-			},
-			destroy: () => {
-				cleanup?.();
-			},
-		};
-	};
 </script>
 
 <svelte:window
 	oncontextmenu={scoped ? undefined : on_window_contextmenu}
 	onmousedown={contextmenu.opened ? mousedown : undefined}
 	onkeydown={contextmenu.opened ? keydown : undefined}
-	use:passive_event={{event: 'touchstart', passive: true, cb: touchstart, disabled: scoped || !bypass_with_tap_then_longpress}}
-	use:passive_event={{event: 'touchcancel', passive: true, cb: touchcancel, disabled: scoped || !bypass_with_tap_then_longpress}}
+	use:capture_event={{event: 'touchstart', cb: touchstart, disabled: scoped || !bypass_with_tap_then_longpress}}
+	use:capture_event={{event: 'touchcancel', cb: touchcancel, disabled: scoped || !bypass_with_tap_then_longpress}}
 />
 
 {#if scoped}
 	<div class="contextmenu_root" role="region" oncontextmenu={on_window_contextmenu}
-		use:passive_event={{event: 'touchstart', passive: true, cb: touchstart, disabled: !bypass_with_tap_then_longpress}}
-		use:passive_event={{event: 'touchcancel', passive: true, cb: touchcancel, disabled: !bypass_with_tap_then_longpress}}>
+		use:capture_event={{event: 'touchstart', cb: touchstart, disabled: !bypass_with_tap_then_longpress}}
+		use:capture_event={{event: 'touchcancel', cb: touchcancel, disabled: !bypass_with_tap_then_longpress}}>
 		{@render children()}
 	</div>
 {:else}
