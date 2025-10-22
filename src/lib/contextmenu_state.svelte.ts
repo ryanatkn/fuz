@@ -379,7 +379,7 @@ const query_contextmenu_params = (
 				props: {
 					content: 'copy text',
 					icon: '📋',
-					run: () => () => void navigator.clipboard.writeText(text),
+					run: () => () => navigator.clipboard.writeText(text),
 				},
 			});
 		}
