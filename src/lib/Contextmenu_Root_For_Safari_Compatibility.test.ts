@@ -5,7 +5,7 @@ import {describe, test, assert, beforeEach, afterEach, vi} from 'vitest';
 import {flushSync, tick} from 'svelte';
 
 import Contextmenu_Root_For_Safari_Compatibility from '$lib/Contextmenu_Root_For_Safari_Compatibility.svelte';
-import {Contextmenu_State} from '$lib/contextmenu_state.svelte.js';
+import {Contextmenu_State, type Item_State} from '$lib/contextmenu_state.svelte.js';
 import {
 	mount_component,
 	unmount_component,
@@ -668,7 +668,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 			mounted = mount_with_contextmenu();
 
 			// Create a submenu structure manually
-			const submenu = contextmenu.root_menu.items[0] as any;
+			const submenu = contextmenu.root_menu.items[0] as Item_State | undefined;
 			if (submenu?.is_menu) {
 				contextmenu.select(submenu);
 				flushSync();
@@ -744,7 +744,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 
 		test('respects custom layout dimensions', () => {
 			const custom_layout = {width: 800, height: 600};
-			const custom_contextmenu = new Contextmenu_State({layout: custom_layout as any});
+			const custom_contextmenu = new Contextmenu_State({layout: custom_layout});
 
 			mounted = mount_with_contextmenu(custom_contextmenu);
 			const {container} = mounted;

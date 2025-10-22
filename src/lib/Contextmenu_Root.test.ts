@@ -49,7 +49,7 @@ describe('Contextmenu_Root', () => {
 	) => {
 		element.dataset.contextmenu = 'test';
 		const {contextmenu_action} = await import('$lib/contextmenu_state.svelte.js');
-		contextmenu_action(element as any, params);
+		contextmenu_action(element, params);
 	};
 
 	beforeEach(() => {
@@ -75,7 +75,7 @@ describe('Contextmenu_Root', () => {
 
 			// Setup contextmenu action
 			await setup_contextmenu_action(target, [
-				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => {}}} as any,
+				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => {}}},
 			]);
 
 			const event = create_contextmenu_event(100, 200);
@@ -168,7 +168,7 @@ describe('Contextmenu_Root', () => {
 
 			const {contextmenu_action} = await import('$lib/contextmenu_state.svelte.js');
 			contextmenu_action(target, [
-				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => {}}} as any,
+				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => {}}},
 			]);
 
 			// Try to open another contextmenu from within the existing menu
@@ -195,7 +195,7 @@ describe('Contextmenu_Root', () => {
 			container.appendChild(target);
 
 			await setup_contextmenu_action(target, [
-				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => {}}} as any,
+				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => {}}},
 			]);
 
 			const event = create_contextmenu_event(100, 200);
@@ -405,7 +405,7 @@ describe('Contextmenu_Root', () => {
 
 		test('custom layout is not overridden', () => {
 			const custom_layout = {width: 800, height: 600};
-			const cm = new Contextmenu_State({layout: custom_layout as any});
+			const cm = new Contextmenu_State({layout: custom_layout});
 
 			mounted = mount_with_contextmenu(cm);
 
@@ -491,7 +491,7 @@ describe('Contextmenu_Root', () => {
 
 		test('contextmenu_layout not rendered with custom layout', () => {
 			const custom_layout = {width: 800, height: 600};
-			const cm = new Contextmenu_State({layout: custom_layout as any});
+			const cm = new Contextmenu_State({layout: custom_layout});
 
 			mounted = mount_with_contextmenu(cm);
 
@@ -513,7 +513,7 @@ describe('Contextmenu_Root', () => {
 			container.appendChild(svg);
 
 			await setup_contextmenu_action(rect, [
-				{snippet: 'text', props: {content: 'SVG Test', icon: '🎨', run: () => {}}} as any,
+				{snippet: 'text', props: {content: 'SVG Test', icon: '🎨', run: () => {}}},
 			]);
 
 			const event = create_contextmenu_event(100, 200);
@@ -578,7 +578,7 @@ describe('Contextmenu_Root', () => {
 			const div = document.createElement('div');
 			container.appendChild(div);
 			await setup_contextmenu_action(div, [
-				{snippet: 'text', props: {content: 'HTML', icon: '📄', run: () => {}}} as any,
+				{snippet: 'text', props: {content: 'HTML', icon: '📄', run: () => {}}},
 			]);
 
 			const event1 = create_contextmenu_event(100, 100);
@@ -592,7 +592,7 @@ describe('Contextmenu_Root', () => {
 			const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
 			container.appendChild(circle);
 			await setup_contextmenu_action(circle, [
-				{snippet: 'text', props: {content: 'SVG', icon: '🎨', run: () => {}}} as any,
+				{snippet: 'text', props: {content: 'SVG', icon: '🎨', run: () => {}}},
 			]);
 
 			const event2 = create_contextmenu_event(200, 200);
