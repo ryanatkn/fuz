@@ -218,6 +218,8 @@
 		}
 	};
 
+	// TODO maybe bind these to the contextmenu instance instead of including the function wrapper
+	// TODO customize
 	const keyboard_handlers: Map<string, () => void> = new Map([
 		['Escape', () => contextmenu.close()],
 		['ArrowLeft', () => contextmenu.collapse_selected()],
