@@ -1,7 +1,8 @@
 <script lang="ts">
 	import Tome_Content from '$lib/Tome_Content.svelte';
 	import {get_tome_by_name} from '$lib/tome.js';
-	import Contextmenu_Discussion from '$routes/docs/contextmenu/Discussion.svelte';
+	import Motivation from '$routes/docs/contextmenu/Motivation.svelte';
+	import Discussion from '$routes/docs/contextmenu/Discussion.svelte';
 	import Example_Full from '$routes/docs/contextmenu/Example_Full.svelte';
 	import Example_Basic from '$routes/docs/contextmenu/Example_Basic.svelte';
 	import Example_Custom_Instance from '$routes/docs/contextmenu/Example_Custom_Instance.svelte';
@@ -27,10 +28,11 @@
 			<p>todo: for mobile, probably change to a drawer-from-bottom design</p>
 		</aside>
 	</section>
+	<Motivation />
 	<Example_Basic />
 	<Example_Default_Behaviors />
 	<Example_Custom_Instance />
 	<Example_Select_Text />
 	<Example_Full />
-	<Contextmenu_Discussion />
+	<Discussion />
 </Tome_Content>

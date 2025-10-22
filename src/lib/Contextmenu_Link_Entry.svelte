@@ -1,5 +1,6 @@
 <script lang="ts">
 	import {strip_start} from '@ryanatkn/belt/string.js';
+	import {swallow} from '@ryanatkn/belt/dom.js';
 	import type {Snippet} from 'svelte';
 
 	import {contextmenu_context} from '$lib/contextmenu_state.svelte.js';
@@ -10,11 +11,31 @@
 		href: string;
 		icon?: string | Snippet<[icon: string]>; // TODO @many rethink this API
 		children?: Snippet; // TODO @many rethink this API
+		disabled?: boolean;
 	}
 
-	const {href, icon = DEFAULT_LINK_ICON, children}: Props = $props();
+	const {
+		href,
+		icon = DEFAULT_LINK_ICON,
+		children,
+		disabled: disabled_prop = false,
+	}: Props = $props();
 
 	const contextmenu = contextmenu_context.get();
+
+	let anchor_el: HTMLAnchorElement | undefined = $state();
+
+	// Register with state management for keyboard navigation
+	// When activated via keyboard, programmatically click the anchor to trigger navigation
+	const entry = contextmenu.add_entry(
+		() => () => {
+			if (anchor_el) anchor_el.click();
+		},
+		() => disabled_prop,
+	);
+
+	const {selected} = $derived(entry);
+	const disabled = $derived(entry.disabled());
 
 	// TODO move or upstream? rename? `print_url`?
 	const format_url = (url: string, host: string = location.host): string => {
@@ -27,10 +48,25 @@
 	const rel = $derived(external ? 'noreferrer' : undefined);
 </script>
 
-<!-- TODO this doesn't work with the keyboard controls, need to use `menuitem` -->
-<!-- TODO could do more if we had the original `target` element (but it might go stale on $contextmenu?) -->
 <li role="none">
-	<a class="menu_item plain" role="menuitem" {href} {rel} onclick={() => contextmenu.close()}>
+	<a
+		bind:this={anchor_el}
+		class="menu_item plain"
+		class:selected
+		class:disabled
+		role="menuitem"
+		aria-disabled={disabled}
+		tabindex="-1"
+		{href}
+		{rel}
+		onclick={disabled ? undefined : () => contextmenu.close()}
+		onmouseenter={disabled
+			? undefined
+			: (e) => {
+					swallow(e);
+					contextmenu.select(entry);
+				}}
+	>
 		<div class="content">
 			<div class="icon">
 				{#if typeof icon === 'string'}
