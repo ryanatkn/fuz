@@ -12,7 +12,6 @@
 	 * - Custom touch event handlers (touchstart, touchmove, touchend)
 	 * - Longpress detection with configurable timing and movement tolerance
 	 * - Tap-then-longpress bypass gesture for accessing system contextmenu
-	 * - Complex passive/nonpassive event handling
 	 * - Calls navigator.vibrate() for haptic feedback, but browsers block it due to longpress timeout workaround
 	 *
 	 * Otherwise, use the default `Contextmenu_Root.svelte` which is much simpler
@@ -20,6 +19,7 @@
 	 */
 	import {is_editable, swallow, inside_editable} from '@ryanatkn/belt/dom.js';
 	import type {ComponentProps, Snippet} from 'svelte';
+	import {on} from 'svelte/events';
 
 	import {
 		contextmenu_context,
@@ -29,7 +29,6 @@
 	} from '$lib/contextmenu_state.svelte.js';
 	import Contextmenu_Link_Entry from '$lib/Contextmenu_Link_Entry.svelte';
 	import Contextmenu_Text_Entry from '$lib/Contextmenu_Text_Entry.svelte';
-	import {capture_passive_event} from '$lib/capture_passive_event.js';
 
 	const {
 		contextmenu = new Contextmenu_State(),
@@ -241,8 +240,7 @@
 	// Needed for the iOS workaround, can't be passive.
 	const touchend = (e: TouchEvent): void => {
 		if (longpress_timeout == null) return;
-		// This stops triggering the first item on open, and is the reason the handler is `nonpassive`.
-		// Hopefully we can find a workaround, maybe by delaying the mounting of the contextmenu to the DOM.
+		// This stops triggering the first item on open.
 		if (longpress_opened) swallow(e);
 		reset_longpress();
 	};
@@ -278,58 +276,25 @@
 	};
 </script>
 
-<!--
-	TODO Some of these modifiers are unnecessary, but some browsers need some of them.
-	The `nonpassive` option is needed to swallow events.
--->
-<!-- Capture keydown so it can handle the event before any dialogs. -->
 <svelte:window
-	{@attach capture_passive_event({
-		event: 'contextmenu',
-		passive: false,
-		handler: on_window_contextmenu,
-		disabled: scoped,
-	})}
-	{@attach capture_passive_event({event: 'touchstart', handler: touchstart, disabled: scoped})}
-	{@attach capture_passive_event({event: 'touchmove', handler: touchmove, disabled: scoped})}
-	{@attach capture_passive_event({
-		event: 'touchend',
-		passive: false,
-		handler: touchend,
-		disabled: scoped,
-	})}
-	{@attach capture_passive_event({
-		event: 'touchcancel',
-		passive: false,
-		handler: touchend,
-		disabled: scoped,
-	})}
-	{@attach capture_passive_event({
-		event: 'mousedown',
-		handler: mousedown,
-		disabled: !contextmenu.opened,
-	})}
-	{@attach capture_passive_event({
-		event: 'keydown',
-		passive: false,
-		handler: keydown,
-		disabled: !contextmenu.opened,
-	})}
+	{@attach scoped ? undefined : ((el) => on(el, 'contextmenu', on_window_contextmenu, {capture: true}))}
+	ontouchstartcapture={scoped ? undefined : touchstart}
+	ontouchmovecapture={scoped ? undefined : touchmove}
+	ontouchendcapture={scoped ? undefined : touchend}
+	ontouchcancelcapture={scoped ? undefined : touchend}
+	onmousedown={!contextmenu.opened ? undefined : mousedown}
+	onkeydown={!contextmenu.opened ? undefined : keydown}
 />
 
 {#if scoped}
 	<div
 		class="contextmenu_root"
 		role="region"
-		{@attach capture_passive_event({
-			event: 'contextmenu',
-			passive: false,
-			handler: on_window_contextmenu,
-		})}
-		{@attach capture_passive_event({event: 'touchstart', handler: touchstart})}
-		{@attach capture_passive_event({event: 'touchmove', handler: touchmove})}
-		{@attach capture_passive_event({event: 'touchend', passive: false, handler: touchend})}
-		{@attach capture_passive_event({event: 'touchcancel', passive: false, handler: touchend})}
+		{@attach (el) => on(el, 'contextmenu', on_window_contextmenu, {capture: true})}
+		ontouchstartcapture={touchstart}
+		ontouchmovecapture={touchmove}
+		ontouchendcapture={touchend}
+		ontouchcancelcapture={touchend}
 	>
 		{@render children()}
 	</div>

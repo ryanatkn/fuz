@@ -26,7 +26,6 @@
 	} from '$lib/contextmenu_state.svelte.js';
 	import Contextmenu_Link_Entry from '$lib/Contextmenu_Link_Entry.svelte';
 	import Contextmenu_Text_Entry from '$lib/Contextmenu_Text_Entry.svelte';
-	import {capture_passive_event} from '$lib/capture_passive_event.js';
 
 	const {
 		contextmenu = new Contextmenu_State(),
@@ -244,16 +243,8 @@
 	oncontextmenu={scoped ? undefined : on_window_contextmenu}
 	onmousedown={contextmenu.opened ? mousedown : undefined}
 	onkeydown={contextmenu.opened ? keydown : undefined}
-	{@attach capture_passive_event({
-		event: 'touchstart',
-		handler: touchstart,
-		disabled: scoped || !bypass_with_tap_then_longpress,
-	})}
-	{@attach capture_passive_event({
-		event: 'touchcancel',
-		handler: touchcancel,
-		disabled: scoped || !bypass_with_tap_then_longpress,
-	})}
+	ontouchstartcapture={scoped || !bypass_with_tap_then_longpress ? undefined : touchstart}
+	ontouchcancelcapture={scoped || !bypass_with_tap_then_longpress ? undefined : touchcancel}
 />
 
 {#if scoped}
@@ -261,16 +252,8 @@
 		class="contextmenu_root"
 		role="region"
 		oncontextmenu={on_window_contextmenu}
-		{@attach capture_passive_event({
-			event: 'touchstart',
-			handler: touchstart,
-			disabled: !bypass_with_tap_then_longpress,
-		})}
-		{@attach capture_passive_event({
-			event: 'touchcancel',
-			handler: touchcancel,
-			disabled: !bypass_with_tap_then_longpress,
-		})}
+		ontouchstartcapture={!bypass_with_tap_then_longpress ? undefined : touchstart}
+		ontouchcancelcapture={!bypass_with_tap_then_longpress ? undefined : touchcancel}
 	>
 		{@render children()}
 	</div>
