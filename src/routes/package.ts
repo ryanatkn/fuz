@@ -105,6 +105,22 @@ export const src_json: Src_Json = {
 			path: 'context_helpers.ts',
 			declarations: [{name: 'create_context', kind: 'function'}],
 		},
+		'./contextmenu_helpers.js': {
+			path: 'contextmenu_helpers.ts',
+			declarations: [
+				{name: 'CONTEXTMENU_DEFAULT_OPEN_OFFSET_X', kind: 'variable'},
+				{name: 'CONTEXTMENU_DEFAULT_OPEN_OFFSET_Y', kind: 'variable'},
+				{name: 'CONTEXTMENU_DEFAULT_TAP_THEN_LONGPRESS_DURATION', kind: 'variable'},
+				{name: 'CONTEXTMENU_DEFAULT_TAP_THEN_LONGPRESS_MOVE_TOLERANCE', kind: 'variable'},
+				{name: 'CONTEXTMENU_DEFAULT_LONGPRESS_DURATION', kind: 'variable'},
+				{name: 'CONTEXTMENU_DEFAULT_LONGPRESS_MOVE_TOLERANCE', kind: 'variable'},
+				{name: 'contextmenu_is_valid_target', kind: 'function'},
+				{name: 'contextmenu_create_keyboard_handlers', kind: 'function'},
+				{name: 'contextmenu_create_keydown_handler', kind: 'function'},
+				{name: 'contextmenu_calculate_constrained_x', kind: 'function'},
+				{name: 'contextmenu_calculate_constrained_y', kind: 'function'},
+			],
+		},
 		'./contextmenu_state.svelte.js': {
 			path: 'contextmenu_state.svelte.ts',
 			declarations: [

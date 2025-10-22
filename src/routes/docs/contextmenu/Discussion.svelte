@@ -7,7 +7,7 @@
 </script>
 
 <Tome_Section>
-	<Tome_Section_Header text="Root component versions" />
+	<Tome_Section_Header text="iOS compatibility" />
 	<p>Fuz provides two versions of the contextmenu root component with different tradeoffs:</p>
 	<h4>Contextmenu_Root (default, simplified)</h4>
 	<ul>
