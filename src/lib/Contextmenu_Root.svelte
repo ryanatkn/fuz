@@ -1,8 +1,26 @@
+<!--
+	Contextmenu_Root - Simplified default contextmenu implementation
+
+	This is the default contextmenu root component. It relies entirely on the standard
+	browser `contextmenu` event, resulting in a clean ~220 line implementation that works
+	perfectly on all modern desktop browsers.
+
+	Does NOT work on iOS Safari, which doesn't fire the `contextmenu` event as of 2025
+	(see https://bugs.webkit.org/show_bug.cgi?id=213953).
+
+	This is the recommended default because:
+	- Simpler, more maintainable code (~220 lines vs ~430)
+	- No mobile-specific hacks or edge cases
+	- Easier to understand and customize
+	- Most web apps target desktop browsers
+
+	If you need iOS Safari support, use `Contextmenu_Root_For_Safari_Compatibility.svelte`
+	instead. That version implements custom touch handlers and longpress detection at the
+	cost of significantly more complexity.
+-->
 <script lang="ts">
 	import {is_editable, swallow, inside_editable} from '@ryanatkn/belt/dom.js';
 	import type {ComponentProps, Snippet} from 'svelte';
-	import type {Action} from 'svelte/action';
-	import {on} from 'svelte/events';
 
 	import {
 		contextmenu_context,
@@ -12,13 +30,6 @@
 	} from '$lib/contextmenu_state.svelte.js';
 	import Contextmenu_Link_Entry from '$lib/Contextmenu_Link_Entry.svelte';
 	import Contextmenu_Text_Entry from '$lib/Contextmenu_Text_Entry.svelte';
-
-	// TODO this is full of hacks to implement "longpress"
-	// to work around iOS not firing the `'contextmenu'` event -
-	// besides the hacks, the main negative effect is that vibrate doesn't work for Android either,
-	// though this could potentially be fixed if the code is changed to make sure the longpress delay
-	// is longer than any available `contextmenu` event delay
-	// @see https://bugs.webkit.org/show_bug.cgi?id=213953
 
 	interface Props {
 		/**
@@ -30,33 +41,6 @@
 		 * @nonreactive
 		 */
 		contextmenu?: Contextmenu_State;
-		/**
-		 * The number of pixels the pointer can be moved without canceling `longpress`.
-		 * Defaults to half the default `--input_height`.
-		 */
-		longpress_move_tolerance?: number;
-		/**
-		 * The number of milliseconds after a touch starts before a `longpress` is detected.
-		 * This value needs to be lower than iOS's ~500 so we can intercept its behavior.
-		 */
-		longpress_duration?: number;
-		/**
-		 * Whether to detect tap-then-longpress to bypass `longpress`.
-		 * Setting to `false` disables the gesture.
-		 */
-		bypass_with_tap_then_longpress?: boolean;
-		/**
-		 * The number of milliseconds between taps to detect a gesture that bypasses a `longpress`.
-		 * Used only when `bypass_with_tap_then_longpress` is true.
-		 * If the duration is too long, it'll detect more false positives and interrupt normal usage,
-		 * but too short and some people will have difficulty performing the gesture.
-		 */
-		tap_then_longpress_duration?: number;
-		/**
-		 * The number of pixels the pointer can be moved between taps to detect a tap-then-longpress.
-		 * Used only when `bypass_with_tap_then_longpress` is true.
-		 */
-		tap_then_longpress_move_tolerance?: number;
 		/**
 		 * The number of pixels to offset from the pointer X position when opened.
 		 * Useful to ensure the first menu item is immediately under the pointer.
@@ -76,11 +60,6 @@
 
 	const {
 		contextmenu = new Contextmenu_State(),
-		longpress_move_tolerance = 21,
-		longpress_duration = 633,
-		bypass_with_tap_then_longpress = true,
-		tap_then_longpress_duration = 660,
-		tap_then_longpress_move_tolerance = 7,
 		open_offset_x = -2,
 		open_offset_y = -2,
 		scoped = false,
@@ -124,35 +103,7 @@
 		contextmenu.y + Math.min(0, layout.height - (contextmenu.y + dimensions.height)),
 	);
 
-	// TODO maybe show an indicator fade in at these coordinates
-
-	// These values are `undefined` when unused, and `null` after being reset.
-	let touch_x: number | undefined | null = $state();
-	let touch_y: number | undefined | null = $state();
-	let longpress_start_time: number | undefined | null = $state();
-	let longpress_timeout: NodeJS.Timeout | undefined | null = $state();
-	let longpress_opened: boolean | undefined = $state();
-	let longpress_bypass: boolean | undefined = $state();
-
-	const reset_longpress = (): void => {
-		if (longpress_opened) longpress_opened = false;
-		if (longpress_timeout == null) return;
-		clearTimeout(longpress_timeout);
-		longpress_timeout = null;
-	};
-
 	const on_window_contextmenu = (e: MouseEvent) => {
-		// handle the tap-then-longpress bypass gesture
-		if (longpress_bypass) {
-			longpress_bypass = false;
-			return;
-		}
-		// handle touch devices that trigger `'contextmenu'` slower than our longpress
-		if (longpress_opened) {
-			reset_longpress();
-			swallow(e);
-			return;
-		}
 		const {target} = e;
 		if (
 			e.shiftKey ||
@@ -167,75 +118,7 @@
 			open_contextmenu(target, e.clientX + open_offset_x, e.clientY + open_offset_y, contextmenu)
 		) {
 			swallow(e);
-			reset_longpress(); // handle touch devices that trigger `'contextmenu'` faster than our longpress
 		}
-	};
-
-	// Needed for the iOS workaround, is passive.
-	const touchstart = (e: TouchEvent): void => {
-		if (longpress_opened) longpress_opened = false;
-		const {touches, target} = e;
-		if (
-			contextmenu.opened ||
-			touches.length !== 1 ||
-			e.shiftKey ||
-			!(target instanceof HTMLElement || target instanceof SVGElement) ||
-			is_editable(target) ||
-			inside_editable(target)
-		) {
-			return;
-		}
-
-		const {clientX, clientY} = touches[0];
-
-		// Bypass the contextmenu behavior in certain conditions including a tap-and-longpress gesture.
-		// To handle double-tap-and-hold we need to see if `longpress_start_time`
-		// is less than `tap_then_longpress_duration`, and also allow a small amount
-		// of movement of pointer movement, `tap_then_longpress_move_tolerance`.
-		// The builtin `'contextmenu'` event will still fire for non-iOS browsers,
-		// so `longpress_bypass` is used to tell the handler `on_window_contextmenu` to exit early.
-		if (bypass_with_tap_then_longpress) {
-			if (
-				longpress_start_time != null &&
-				performance.now() - longpress_start_time < tap_then_longpress_duration &&
-				Math.hypot(clientX - touch_x!, clientY - touch_y!) < tap_then_longpress_move_tolerance
-			) {
-				longpress_bypass = true;
-				longpress_start_time = null;
-				return;
-			}
-			longpress_start_time = performance.now();
-		}
-
-		touch_x = clientX;
-		touch_y = clientY;
-
-		if (longpress_timeout != null) reset_longpress();
-		longpress_timeout = setTimeout(() => {
-			longpress_opened = true;
-			open_contextmenu(target, touch_x! + open_offset_x, touch_y! + open_offset_y, contextmenu);
-		}, longpress_duration);
-	};
-
-	// Needed for the iOS workaround, is passive.
-	const touchmove = (e: TouchEvent): void => {
-		if (longpress_timeout == null) return;
-		const {touches} = e;
-		if (touches.length !== 1) return;
-		const {clientX, clientY} = touches[0];
-		const distance = Math.hypot(clientX - touch_x!, clientY - touch_y!);
-		if (distance > longpress_move_tolerance) {
-			if (contextmenu.opened) contextmenu.close();
-			reset_longpress();
-		}
-	};
-	// Needed for the iOS workaround, can't be passive.
-	const touchend = (e: TouchEvent): void => {
-		if (longpress_timeout == null) return;
-		// This stops triggering the first item on open, and is the reason the handler is `nonpassive`.
-		// Hopefully we can find a workaround, maybe by delaying the mounting of the contextmenu to the DOM.
-		if (longpress_opened) swallow(e);
-		reset_longpress();
 	};
 
 	// Passive listener that runs during the event's `capture` phase
@@ -246,8 +129,6 @@
 		}
 	};
 
-	// TODO maybe bind these to the contextmenu instance instead of including the function wrapper
-	// TODO customize
 	const keyboard_handlers: Map<string, () => void> = new Map([
 		['Escape', () => contextmenu.close()],
 		['ArrowLeft', () => contextmenu.collapse_selected()],
@@ -267,72 +148,16 @@
 		swallow(e);
 		handler();
 	};
-
-	// TODO this is a mess because some events need to be passive or nonpassive on some mobile devices, but a lot of this is unnecessary, needs a full pass
-	interface Passive_Event_Params {
-		event: string;
-		passive: boolean;
-		cb: (...args: any) => void;
-		disabled?: boolean;
-	}
-	const passive_event: Action<HTMLElement, Passive_Event_Params> = (el, params) => {
-		let cleanup: (() => void) | null = null;
-		const sync_event = (p: Passive_Event_Params) => {
-			if (cleanup) {
-				cleanup();
-				cleanup = null;
-			}
-			if (!p.disabled) {
-				cleanup = on(el, p.event, p.cb, {capture: true, passive: p.passive});
-			}
-		};
-		sync_event(params);
-		return {
-			update: (p) => {
-				sync_event(p);
-			},
-			destroy: () => {
-				cleanup?.();
-			},
-		};
-	};
 </script>
 
-<!--
-	TODO Some of these modifiers are unnecessary, but some browsers need some of them.
-	The `nonpassive` option is needed to swallow events. See the todo above about doing a full pass.
--->
-<!-- Capture keydown so it can handle the event before any dialogs. -->
 <svelte:window
-	use:passive_event={{
-		event: 'contextmenu',
-		passive: false,
-		cb: on_window_contextmenu,
-		disabled: scoped,
-	}}
-	use:passive_event={{event: 'touchstart', passive: true, cb: touchstart, disabled: scoped}}
-	use:passive_event={{event: 'touchmove', passive: true, cb: touchmove, disabled: scoped}}
-	use:passive_event={{event: 'touchend', passive: false, cb: touchend, disabled: scoped}}
-	use:passive_event={{event: 'touchcancel', passive: false, cb: touchend, disabled: scoped}}
-	use:passive_event={{
-		event: 'mousedown',
-		passive: true,
-		cb: mousedown,
-		disabled: !contextmenu.opened,
-	}}
-	use:passive_event={{event: 'keydown', passive: false, cb: keydown, disabled: !contextmenu.opened}}
+	oncontextmenu={scoped ? undefined : on_window_contextmenu}
+	onmousedown={contextmenu.opened ? mousedown : undefined}
+	onkeydown={contextmenu.opened ? keydown : undefined}
 />
 
 {#if scoped}
-	<div
-		class="contextmenu_root"
-		role="region"
-		use:passive_event={{event: 'contextmenu', passive: false, cb: on_window_contextmenu}}
-		use:passive_event={{event: 'touchstart', passive: true, cb: touchstart}}
-		use:passive_event={{event: 'touchmove', passive: true, cb: touchmove}}
-		use:passive_event={{event: 'touchend', passive: false, cb: touchend}}
-		use:passive_event={{event: 'touchcancel', passive: false, cb: touchend}}
-	>
+	<div class="contextmenu_root" role="region" oncontextmenu={on_window_contextmenu}>
 		{@render children()}
 	</div>
 {:else}
@@ -342,7 +167,7 @@
 {#if !custom_layout}
 	<div class="contextmenu_layout" bind:clientHeight bind:clientWidth aria-hidden="true"></div>
 {/if}
-<!-- TODO Maybe animate a subtle highlight around the contextmenu as it appears? -->
+<!-- TODO animate the contextmenu as it appears somehow -->
 {#if contextmenu.opened}
 	<ul
 		class="contextmenu unstyled pane"
@@ -374,20 +199,11 @@
 {/snippet}
 
 <style>
-	:global(body) {
-		/* TODO fix for iOS -- still does not work to disable iOS default behavior */
-		-webkit-touch-callout: none !important;
-		/*a {-webkit-user-select: none !important} */
-	}
-
 	.contextmenu_root {
 		display: contents;
 	}
 	.contextmenu {
 		--icon_size: var(--icon_size_xs);
-		/* TODO maybe make this responsive or a max of the page width
-		minus some space to tap items covered by the menu on the side,
-		or consider a totally different design for small screens (more dialog-like)  */
 		--contextmenu_width: 320px;
 		position: fixed;
 		left: 0;
@@ -395,12 +211,8 @@
 		z-index: var(--contextmenu_z_index, 200);
 		max-width: var(--contextmenu_width);
 		width: 100%;
-		/* TODO fix for iOS -- still does not work to disable iOS default behavior */
-		-webkit-touch-callout: initial !important;
-		-webkit-user-select: none !important;
 		user-select: none;
 	}
-	/* TODO hacky */
 	.contextmenu,
 	.contextmenu :global(menu.pane) {
 		border: var(--contextmenu_border_width, var(--border_width))
@@ -409,7 +221,6 @@
 		border-radius: var(--contextmenu_border_radius, var(--border_radius_xs));
 	}
 
-	/* TODO better way to do this? */
 	.contextmenu_layout {
 		z-index: -200;
 		position: fixed;

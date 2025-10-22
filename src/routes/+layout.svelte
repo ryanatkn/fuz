@@ -11,6 +11,8 @@
 	import {pkg_context} from '$lib/pkg.js';
 	import {package_json, src_json} from '$routes/package.js';
 	import Spiders from '$lib/Spiders.svelte';
+	import Tooltip from '$lib/Tooltip.svelte';
+	import {Tooltip_State, tooltip_context} from '$lib/tooltip_state.svelte.js';
 
 	// TODO re-enable this, see comment below
 	// import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
@@ -24,7 +26,10 @@
 
 	const {children}: Props = $props();
 
-	pkg_context.set(parse_pkg(package_json, src_json));
+	pkg_context.set(parse_pkg(package_json, src_json as any)); // TODO type
+
+	// Initialize tooltip state
+	tooltip_context.set(new Tooltip_State());
 
 	// let show_settings = $state(false);
 </script>
@@ -39,6 +44,7 @@
 	<!-- <Contextmenu_Root> -->
 	{@render children()}
 	<Spiders />
+	<Tooltip />
 	<!-- </Contextmenu_Root> -->
 	<!-- {#if show_settings}
 		<Dialog onclose={() => (show_settings = false)}>
