@@ -33,7 +33,7 @@
 
 <!-- TODO demonstrate usage of a custom `link_snippet` and `linkProps`  -->
 <Tome_Content {tome}>
-	<Introduction>
+	<Introduction {Contextmenu_Root_Component} {root_component_name}>
 		<fieldset>
 			<legend><h4>Selected root component</h4></legend>
 			<label class="row">
