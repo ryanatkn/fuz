@@ -237,12 +237,13 @@ export class Contextmenu_State {
 	}
 
 	collapse_selected(): void {
-		if (this.selections.length <= 1) return;
+		if (!this.can_collapse) return;
 		const deselected = this.selections.pop()!;
 		deselected.selected = false;
 	}
 
 	expand_selected(): void {
+		if (!this.can_expand) return;
 		const parent = this.selections.at(-1);
 		if (!parent?.is_menu) return;
 		const selected = parent.items[0];

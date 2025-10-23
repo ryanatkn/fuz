@@ -254,6 +254,50 @@ describe('Contextmenu_State', () => {
 			assert.strictEqual(contextmenu.selections.length, 2);
 			assert.strictEqual(contextmenu.selections[1], child);
 		});
+
+		test('collapse_selected() respects can_collapse', () => {
+			const entry = new Entry_State(contextmenu.root_menu, () => () => {});
+			contextmenu.root_menu.items.push(entry);
+			contextmenu.select(entry);
+
+			// At root level, can_collapse is false
+			assert.strictEqual(contextmenu.can_collapse, false);
+
+			// Should be no-op
+			contextmenu.collapse_selected();
+
+			assert.strictEqual(entry.selected, true);
+			assert.strictEqual(contextmenu.selections.length, 1);
+		});
+
+		test('expand_selected() respects can_expand with empty submenu', () => {
+			const empty_submenu = new Submenu_State(contextmenu.root_menu, 2);
+			contextmenu.root_menu.items.push(empty_submenu);
+			contextmenu.select(empty_submenu);
+
+			// Empty submenu, can_expand is false
+			assert.strictEqual(contextmenu.can_expand, false);
+
+			// Should be no-op and not crash
+			contextmenu.expand_selected();
+
+			assert.strictEqual(empty_submenu.selected, true);
+			assert.strictEqual(contextmenu.selections.length, 1);
+		});
+
+		test('expand_selected() does not crash on empty submenu (regression)', () => {
+			// This is a regression test for the bug where expand_selected()
+			// would access parent.items[0] without checking if items is empty
+			const empty_submenu = new Submenu_State(contextmenu.root_menu, 2);
+			contextmenu.root_menu.items.push(empty_submenu);
+			contextmenu.select(empty_submenu);
+
+			// Before fix: would throw "Cannot read property 'selected' of undefined"
+			// After fix: should be a safe no-op
+			assert.doesNotThrow(() => {
+				contextmenu.expand_selected();
+			});
+		});
 	});
 
 	describe('activation', () => {
@@ -522,16 +566,18 @@ describe('Contextmenu_State', () => {
 			});
 
 			test('returns false after collapsing to root level', () => {
-				const submenu = new Submenu_State(contextmenu.root_menu, 2);
-				const entry = new Entry_State(submenu, () => () => {});
-				submenu.items.push(entry);
-				contextmenu.root_menu.items.push(submenu);
+				$effect.root(() => {
+					const submenu = new Submenu_State(contextmenu.root_menu, 2);
+					const entry = new Entry_State(submenu, () => () => {});
+					submenu.items.push(entry);
+					contextmenu.root_menu.items.push(submenu);
 
-				contextmenu.select(submenu);
-				contextmenu.expand_selected();
-				contextmenu.collapse_selected();
+					contextmenu.select(submenu);
+					contextmenu.expand_selected();
+					contextmenu.collapse_selected();
 
-				assert.strictEqual(contextmenu.can_collapse, false);
+					assert.strictEqual(contextmenu.can_collapse, false);
+				});
 			});
 		});
 
@@ -567,16 +613,18 @@ describe('Contextmenu_State', () => {
 			});
 
 			test('returns false after expanding into submenu', () => {
-				const submenu = new Submenu_State(contextmenu.root_menu, 2);
-				const entry = new Entry_State(submenu, () => () => {});
-				submenu.items.push(entry);
-				contextmenu.root_menu.items.push(submenu);
+				$effect.root(() => {
+					const submenu = new Submenu_State(contextmenu.root_menu, 2);
+					const entry = new Entry_State(submenu, () => () => {});
+					submenu.items.push(entry);
+					contextmenu.root_menu.items.push(submenu);
 
-				contextmenu.select(submenu);
-				contextmenu.expand_selected();
+					contextmenu.select(submenu);
+					contextmenu.expand_selected();
 
-				// Now entry is selected, which is not a menu
-				assert.strictEqual(contextmenu.can_expand, false);
+					// Now entry is selected, which is not a menu
+					assert.strictEqual(contextmenu.can_expand, false);
+				});
 			});
 		});
 

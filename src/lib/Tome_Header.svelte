@@ -37,6 +37,7 @@
 	{#if path_is_selected}
 		{@render content(tome.name)}
 	{:else}
+		<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 		<a href={path}>{@render content(tome.name)}</a>
 	{/if}
 	<Hashlink {slug} />
