@@ -22,6 +22,7 @@
 	let selected_color: 'f' | 'g' | 'j' | undefined = $state();
 
 	const selected_color_class = $derived(selected_color ? `color_${selected_color}_5` : undefined);
+	const selected_hue_class = $derived(selected_color ? `color_${selected_color}` : undefined);
 </script>
 
 <!-- eslint-disable svelte/no-useless-mustaches -->
@@ -79,7 +80,7 @@
 						<div class="box">
 							<button
 								type="button"
-								class="border_bottom_left_radius_0 border_bottom_right_radius_0"
+								class="border_bottom_left_radius_0 border_bottom_right_radius_0 {selected_hue_class}"
 								onmousedowncapture={(e) => {
 									swallow(e);
 									contextmenu.select_previous();
@@ -88,7 +89,7 @@
 							<div class="row">
 								<button
 									type="button"
-									class="border_bottom_right_radius_0 border_top_right_radius_0"
+									class="border_bottom_right_radius_0 border_top_right_radius_0 {selected_hue_class}"
 									onmousedowncapture={(e) => {
 										swallow(e);
 										contextmenu.collapse_selected();
@@ -96,7 +97,7 @@
 								>
 								<button
 									type="button"
-									class="border_bottom_left_radius_0 border_top_left_radius_0"
+									class="border_bottom_left_radius_0 border_top_left_radius_0 {selected_hue_class}"
 									onmousedowncapture={(e) => {
 										swallow(e);
 										contextmenu.expand_selected();
@@ -105,7 +106,7 @@
 							</div>
 							<button
 								type="button"
-								class="border_top_left_radius_0 border_top_right_radius_0"
+								class="border_top_left_radius_0 border_top_right_radius_0 {selected_hue_class}"
 								onmousedowncapture={(e) => {
 									swallow(e);
 									contextmenu.select_next();
