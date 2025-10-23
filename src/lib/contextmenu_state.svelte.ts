@@ -102,6 +102,30 @@ export class Contextmenu_State {
 	readonly root_menu: Root_Menu_State = new Root_Menu_State();
 	selections: Array<Item_State> = $state([]);
 
+	can_collapse = $derived(this.selections.length > 1);
+
+	can_expand = $derived.by(() => {
+		const selected = this.selections.at(-1);
+		return !!selected?.is_menu && selected.items.length > 0;
+	});
+
+	can_select_next = $derived.by(() => {
+		const menu = this.selections.at(-1)?.menu ?? this.root_menu;
+		return menu.items.length > 1;
+	});
+
+	can_select_previous = $derived.by(() => {
+		const menu = this.selections.at(-1)?.menu ?? this.root_menu;
+		return menu.items.length > 1;
+	});
+
+	can_activate = $derived.by(() => {
+		const selected = this.selections.at(-1);
+		if (!selected) return false;
+		if (selected.is_menu) return selected.items.length > 0;
+		return !selected.disabled();
+	});
+
 	constructor(options?: Contextmenu_State_Options) {
 		this.initial_layout = options?.layout;
 

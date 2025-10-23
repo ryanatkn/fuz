@@ -494,4 +494,261 @@ describe('Contextmenu_State', () => {
 			assert.strictEqual(entry.error_message, null);
 		});
 	});
+
+	describe('derived validation properties', () => {
+		describe('can_collapse', () => {
+			test('returns false with no selection', () => {
+				assert.strictEqual(contextmenu.can_collapse, false);
+			});
+
+			test('returns false with single selection at root level', () => {
+				const entry = new Entry_State(contextmenu.root_menu, () => () => {});
+				contextmenu.root_menu.items.push(entry);
+				contextmenu.select(entry);
+
+				assert.strictEqual(contextmenu.can_collapse, false);
+			});
+
+			test('returns true with nested selection', () => {
+				const submenu = new Submenu_State(contextmenu.root_menu, 2);
+				const entry = new Entry_State(submenu, () => () => {});
+				submenu.items.push(entry);
+				contextmenu.root_menu.items.push(submenu);
+
+				contextmenu.select(submenu);
+				contextmenu.expand_selected();
+
+				assert.strictEqual(contextmenu.can_collapse, true);
+			});
+
+			test('returns false after collapsing to root level', () => {
+				const submenu = new Submenu_State(contextmenu.root_menu, 2);
+				const entry = new Entry_State(submenu, () => () => {});
+				submenu.items.push(entry);
+				contextmenu.root_menu.items.push(submenu);
+
+				contextmenu.select(submenu);
+				contextmenu.expand_selected();
+				contextmenu.collapse_selected();
+
+				assert.strictEqual(contextmenu.can_collapse, false);
+			});
+		});
+
+		describe('can_expand', () => {
+			test('returns false with no selection', () => {
+				assert.strictEqual(contextmenu.can_expand, false);
+			});
+
+			test('returns false when entry is selected', () => {
+				const entry = new Entry_State(contextmenu.root_menu, () => () => {});
+				contextmenu.root_menu.items.push(entry);
+				contextmenu.select(entry);
+
+				assert.strictEqual(contextmenu.can_expand, false);
+			});
+
+			test('returns true when submenu with items is selected', () => {
+				const submenu = new Submenu_State(contextmenu.root_menu, 2);
+				const entry = new Entry_State(submenu, () => () => {});
+				submenu.items.push(entry);
+				contextmenu.root_menu.items.push(submenu);
+				contextmenu.select(submenu);
+
+				assert.strictEqual(contextmenu.can_expand, true);
+			});
+
+			test('returns false when empty submenu is selected', () => {
+				const submenu = new Submenu_State(contextmenu.root_menu, 2);
+				contextmenu.root_menu.items.push(submenu);
+				contextmenu.select(submenu);
+
+				assert.strictEqual(contextmenu.can_expand, false);
+			});
+
+			test('returns false after expanding into submenu', () => {
+				const submenu = new Submenu_State(contextmenu.root_menu, 2);
+				const entry = new Entry_State(submenu, () => () => {});
+				submenu.items.push(entry);
+				contextmenu.root_menu.items.push(submenu);
+
+				contextmenu.select(submenu);
+				contextmenu.expand_selected();
+
+				// Now entry is selected, which is not a menu
+				assert.strictEqual(contextmenu.can_expand, false);
+			});
+		});
+
+		describe('can_select_next', () => {
+			test('returns false with empty menu', () => {
+				assert.strictEqual(contextmenu.can_select_next, false);
+			});
+
+			test('returns false with single item', () => {
+				const entry = new Entry_State(contextmenu.root_menu, () => () => {});
+				contextmenu.root_menu.items.push(entry);
+
+				assert.strictEqual(contextmenu.can_select_next, false);
+			});
+
+			test('returns true with multiple items', () => {
+				const entry1 = new Entry_State(contextmenu.root_menu, () => () => {});
+				const entry2 = new Entry_State(contextmenu.root_menu, () => () => {});
+				contextmenu.root_menu.items.push(entry1, entry2);
+
+				assert.strictEqual(contextmenu.can_select_next, true);
+			});
+
+			test('returns true with multiple items and selection', () => {
+				const entry1 = new Entry_State(contextmenu.root_menu, () => () => {});
+				const entry2 = new Entry_State(contextmenu.root_menu, () => () => {});
+				contextmenu.root_menu.items.push(entry1, entry2);
+				contextmenu.select(entry1);
+
+				assert.strictEqual(contextmenu.can_select_next, true);
+			});
+
+			test('checks current menu level when in submenu', () => {
+				const submenu = new Submenu_State(contextmenu.root_menu, 2);
+				const entry = new Entry_State(submenu, () => () => {});
+				submenu.items.push(entry);
+				contextmenu.root_menu.items.push(submenu);
+
+				contextmenu.select(submenu);
+				contextmenu.expand_selected();
+
+				// Only one item in submenu
+				assert.strictEqual(contextmenu.can_select_next, false);
+			});
+
+			test('returns true in submenu with multiple items', () => {
+				const submenu = new Submenu_State(contextmenu.root_menu, 2);
+				const entry1 = new Entry_State(submenu, () => () => {});
+				const entry2 = new Entry_State(submenu, () => () => {});
+				submenu.items.push(entry1, entry2);
+				contextmenu.root_menu.items.push(submenu);
+
+				contextmenu.select(submenu);
+				contextmenu.expand_selected();
+
+				assert.strictEqual(contextmenu.can_select_next, true);
+			});
+		});
+
+		describe('can_select_previous', () => {
+			test('returns false with empty menu', () => {
+				assert.strictEqual(contextmenu.can_select_previous, false);
+			});
+
+			test('returns false with single item', () => {
+				const entry = new Entry_State(contextmenu.root_menu, () => () => {});
+				contextmenu.root_menu.items.push(entry);
+
+				assert.strictEqual(contextmenu.can_select_previous, false);
+			});
+
+			test('returns true with multiple items', () => {
+				const entry1 = new Entry_State(contextmenu.root_menu, () => () => {});
+				const entry2 = new Entry_State(contextmenu.root_menu, () => () => {});
+				contextmenu.root_menu.items.push(entry1, entry2);
+
+				assert.strictEqual(contextmenu.can_select_previous, true);
+			});
+
+			test('returns true with multiple items and selection', () => {
+				const entry1 = new Entry_State(contextmenu.root_menu, () => () => {});
+				const entry2 = new Entry_State(contextmenu.root_menu, () => () => {});
+				contextmenu.root_menu.items.push(entry1, entry2);
+				contextmenu.select(entry2);
+
+				assert.strictEqual(contextmenu.can_select_previous, true);
+			});
+
+			test('checks current menu level when in submenu', () => {
+				const submenu = new Submenu_State(contextmenu.root_menu, 2);
+				const entry = new Entry_State(submenu, () => () => {});
+				submenu.items.push(entry);
+				contextmenu.root_menu.items.push(submenu);
+
+				contextmenu.select(submenu);
+				contextmenu.expand_selected();
+
+				// Only one item in submenu
+				assert.strictEqual(contextmenu.can_select_previous, false);
+			});
+		});
+
+		describe('can_activate', () => {
+			test('returns false with no selection', () => {
+				assert.strictEqual(contextmenu.can_activate, false);
+			});
+
+			test('returns true with enabled entry selected', () => {
+				const entry = new Entry_State(contextmenu.root_menu, () => () => {});
+				contextmenu.root_menu.items.push(entry);
+				contextmenu.select(entry);
+
+				assert.strictEqual(contextmenu.can_activate, true);
+			});
+
+			test('returns false with disabled entry selected', () => {
+				const entry = new Entry_State(
+					contextmenu.root_menu,
+					() => () => {},
+					() => true,
+				);
+				contextmenu.root_menu.items.push(entry);
+				contextmenu.select(entry);
+
+				assert.strictEqual(contextmenu.can_activate, false);
+			});
+
+			test('returns true when submenu with items is selected', () => {
+				const submenu = new Submenu_State(contextmenu.root_menu, 2);
+				const entry = new Entry_State(submenu, () => () => {});
+				submenu.items.push(entry);
+				contextmenu.root_menu.items.push(submenu);
+				contextmenu.select(submenu);
+
+				assert.strictEqual(contextmenu.can_activate, true);
+			});
+
+			test('returns false when empty submenu is selected', () => {
+				const submenu = new Submenu_State(contextmenu.root_menu, 2);
+				contextmenu.root_menu.items.push(submenu);
+				contextmenu.select(submenu);
+
+				assert.strictEqual(contextmenu.can_activate, false);
+			});
+
+			test('returns true for entry with async action', () => {
+				const entry = new Entry_State(contextmenu.root_menu, () => async () => {});
+				contextmenu.root_menu.items.push(entry);
+				contextmenu.select(entry);
+
+				assert.strictEqual(contextmenu.can_activate, true);
+			});
+
+			test('evaluates disabled function for entries', () => {
+				let counter = 0;
+				const entry = new Entry_State(
+					contextmenu.root_menu,
+					() => () => {},
+					() => {
+						counter++;
+						return false;
+					},
+				);
+				contextmenu.root_menu.items.push(entry);
+				contextmenu.select(entry);
+
+				// Access the property to trigger evaluation
+				const result = contextmenu.can_activate;
+				assert.strictEqual(result, true);
+				// Verify the disabled function was called
+				assert.ok(counter > 0);
+			});
+		});
+	});
 });

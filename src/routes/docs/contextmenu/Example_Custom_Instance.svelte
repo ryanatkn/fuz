@@ -81,6 +81,7 @@
 							<button
 								type="button"
 								class="border_bottom_left_radius_0 border_bottom_right_radius_0 {selected_hue_class}"
+								disabled={!contextmenu.can_select_previous}
 								onmousedowncapture={(e) => {
 									swallow(e);
 									contextmenu.select_previous();
@@ -90,6 +91,7 @@
 								<button
 									type="button"
 									class="border_bottom_right_radius_0 border_top_right_radius_0 {selected_hue_class}"
+									disabled={!contextmenu.can_collapse}
 									onmousedowncapture={(e) => {
 										swallow(e);
 										contextmenu.collapse_selected();
@@ -97,7 +99,17 @@
 								>
 								<button
 									type="button"
+									class="border_radius_0 {selected_hue_class}"
+									disabled={!contextmenu.can_activate}
+									onmousedowncapture={async (e) => {
+										swallow(e);
+										await contextmenu.activate_selected();
+									}}><Glyph glyph="↵" /></button
+								>
+								<button
+									type="button"
 									class="border_bottom_left_radius_0 border_top_left_radius_0 {selected_hue_class}"
+									disabled={!contextmenu.can_expand}
 									onmousedowncapture={(e) => {
 										swallow(e);
 										contextmenu.expand_selected();
@@ -107,6 +119,7 @@
 							<button
 								type="button"
 								class="border_top_left_radius_0 border_top_right_radius_0 {selected_hue_class}"
+								disabled={!contextmenu.can_select_next}
 								onmousedowncapture={(e) => {
 									swallow(e);
 									contextmenu.select_next();
