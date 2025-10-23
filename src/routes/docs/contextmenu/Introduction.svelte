@@ -126,11 +126,6 @@
 			double-tap-and-hold can't work for clickable elements like links - use two longpresses for
 			those cases
 		</li>
-		<li>a longpress is canceled if you move the touch past a threshold before it triggers</li>
-		<li>
-			the contextmenu closes if you move past a threshold without lifting the longpress touch that
-			opened it
-		</li>
 	</ul>
 	<h4>All devices:</h4>
 	<ul>
