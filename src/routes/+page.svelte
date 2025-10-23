@@ -95,6 +95,7 @@
 </main>
 
 {#snippet package_thumbnail(project_item: Project_Item)}
+	<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 	<a class="thumbnail row bg px_md py_xs border_radius_sm mb_lg" href={project_item.url}
 		><Svg shrink={false} data={project_item.logo} size="var(--icon_size_lg)" />
 		<div class="pl_lg width_upto_sm">
