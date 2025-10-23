@@ -19,7 +19,6 @@
 
 	const contextmenu = new Contextmenu_State();
 
-	let toggled = $state(false);
 	let selected_color: 'f' | 'g' | 'j' | undefined = $state();
 
 	const selected_color_class = $derived(selected_color ? `color_${selected_color}_5` : undefined);
@@ -32,7 +31,6 @@
 		<Tome_Section_Header text="Custom instance" />
 		<Contextmenu>
 			{#snippet entries()}
-				<Contextmenu_Entry run={() => (toggled = !toggled)}>toggle</Contextmenu_Entry>
 				<Contextmenu_Submenu>
 					{#snippet icon()}🎨{/snippet}
 					select color
@@ -61,8 +59,7 @@
 				/>
 				<p class="mb_md">
 					Try opening the contextmenu on this panel, then use the navigation buttons below to cycle
-					through entries — just like the arrow keys. The buttons keep the menu open by calling
-					selection methods directly instead of activating entries.
+					through entries — just like the arrow keys.
 				</p>
 				<div class="mb_md {selected_color_class}">
 					<p>Reactive state:</p>
@@ -117,12 +114,6 @@
 						</div>
 					</div>
 				{/if}
-				<!-- TODO this extra wrapper is only for the last-child margin behavior, but that may be removed -->
-				<div>
-					{#if toggled}
-						<div transition:slide>toggled</div>
-					{/if}
-				</div>
 			</div>
 		</Contextmenu>
 	</Tome_Section>
