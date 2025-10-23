@@ -15,7 +15,7 @@
 	<ul>
 		<li>standard, default implementation</li>
 		<li>
-			relies on the browser's native <Mdn_Link path="Web/API/Element/contextmenu_event"
+			relies on the browser's <Mdn_Link path="Web/API/Element/contextmenu_event"
 				><span class="font_family_mono">contextmenu</span> event</Mdn_Link
 			>
 		</li>
