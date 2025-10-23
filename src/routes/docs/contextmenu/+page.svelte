@@ -7,6 +7,7 @@
 	import Example_Basic from '$routes/docs/contextmenu/Example_Basic.svelte';
 	import Example_Custom_Instance from '$routes/docs/contextmenu/Example_Custom_Instance.svelte';
 	import Example_Select_Text from '$routes/docs/contextmenu/Example_Select_Text.svelte';
+	import Example_Disable_Default_Behaviors from '$routes/docs/contextmenu/Example_Disable_Default_Behaviors.svelte';
 	import Example_Default_Behaviors from '$routes/docs/contextmenu/Example_Default_Behaviors.svelte';
 	import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
 	import Contextmenu_Root_For_Safari_Compatibility from '$lib/Contextmenu_Root_For_Safari_Compatibility.svelte';
@@ -48,8 +49,9 @@
 	</Introduction>
 	<Example_Basic {Contextmenu_Root_Component} {root_component_name} />
 	<Example_Default_Behaviors {Contextmenu_Root_Component} {root_component_name} />
-	<Example_Custom_Instance {Contextmenu_Root_Component} {root_component_name} />
 	<Example_Select_Text {Contextmenu_Root_Component} />
+	<Example_Disable_Default_Behaviors {Contextmenu_Root_Component} />
+	<Example_Custom_Instance {Contextmenu_Root_Component} {root_component_name} />
 	<Example_Full {Contextmenu_Root_Component} />
 	<Discussion />
 	<section>

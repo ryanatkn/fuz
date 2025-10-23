@@ -28,6 +28,7 @@
 	} from '$lib/contextmenu_state.svelte.js';
 	import Contextmenu_Link_Entry from '$lib/Contextmenu_Link_Entry.svelte';
 	import Contextmenu_Text_Entry from '$lib/Contextmenu_Text_Entry.svelte';
+	import Contextmenu_Separator from '$lib/Contextmenu_Separator.svelte';
 	import {
 		CONTEXTMENU_DEFAULT_OPEN_OFFSET_X,
 		CONTEXTMENU_DEFAULT_OPEN_OFFSET_Y,
@@ -52,6 +53,8 @@
 		open_offset_x = CONTEXTMENU_DEFAULT_OPEN_OFFSET_X,
 		open_offset_y = CONTEXTMENU_DEFAULT_OPEN_OFFSET_Y,
 		scoped = false,
+		link_entry = link_entry_default,
+		text_entry = text_entry_default,
 		children,
 	}: {
 		/**
@@ -104,6 +107,18 @@
 		 * If `true`, wraps `children` with a div and listens to events on it instead of the window.
 		 */
 		scoped?: boolean;
+		/**
+		 * Snippet for rendering link entries.
+		 * Set to `null` to disable automatic link detection.
+		 * Defaults to `link_entry_default` which renders `Contextmenu_Link_Entry`.
+		 */
+		link_entry?: Snippet<[ComponentProps<typeof Contextmenu_Link_Entry>]> | null;
+		/**
+		 * Snippet for rendering copy text entries.
+		 * Set to `null` to disable automatic copy text detection.
+		 * Defaults to `text_entry_default` which renders `Contextmenu_Text_Entry`.
+		 */
+		text_entry?: Snippet<[ComponentProps<typeof Contextmenu_Text_Entry>]> | null;
 		children: Snippet;
 	} = $props();
 
@@ -317,19 +332,22 @@
 			{#if typeof p === 'function'}
 				{@render p()}
 			{:else if p.snippet === 'link'}
-				{@render link_entry(p.props)}
+				{@render link_entry?.(p.props)}
 			{:else if p.snippet === 'text'}
-				{@render text_entry(p.props)}
+				{@render text_entry?.(p.props)}
+			{:else if p.snippet === 'separator'}
+				<!-- TODO same pattern as link/text -->
+				<Contextmenu_Separator />
 			{/if}
 		{/each}
 	</ul>
 {/if}
 
-{#snippet link_entry(props: ComponentProps<typeof Contextmenu_Link_Entry>)}
+{#snippet link_entry_default(props: ComponentProps<typeof Contextmenu_Link_Entry>)}
 	<Contextmenu_Link_Entry {...props} />
 {/snippet}
 
-{#snippet text_entry(props: ComponentProps<typeof Contextmenu_Text_Entry>)}
+{#snippet text_entry_default(props: ComponentProps<typeof Contextmenu_Text_Entry>)}
 	<Contextmenu_Text_Entry {...props} />
 {/snippet}
 

@@ -47,6 +47,8 @@
 		tap_then_longpress_duration = CONTEXTMENU_DEFAULT_TAP_THEN_LONGPRESS_DURATION,
 		tap_then_longpress_move_tolerance = CONTEXTMENU_DEFAULT_TAP_THEN_LONGPRESS_MOVE_TOLERANCE,
 		scoped = false,
+		link_entry = link_entry_default,
+		text_entry = text_entry_default,
 		children,
 	}: {
 		/**
@@ -90,6 +92,18 @@
 		 * If `true`, wraps `children` with a div and listens to events on it instead of the window.
 		 */
 		scoped?: boolean;
+		/**
+		 * Snippet for rendering link entries.
+		 * Set to `null` to disable automatic link detection.
+		 * Defaults to `link_entry_default` which renders `Contextmenu_Link_Entry`.
+		 */
+		link_entry?: Snippet<[ComponentProps<typeof Contextmenu_Link_Entry>]> | null;
+		/**
+		 * Snippet for rendering copy text entries.
+		 * Set to `null` to disable automatic copy text detection.
+		 * Defaults to `text_entry_default` which renders `Contextmenu_Text_Entry`.
+		 */
+		text_entry?: Snippet<[ComponentProps<typeof Contextmenu_Text_Entry>]> | null;
 		children: Snippet;
 	} = $props();
 
@@ -269,24 +283,23 @@
 		{#each contextmenu.params as p (p)}
 			{#if typeof p === 'function'}
 				{@render p()}
-			{:else if typeof p === 'object' && 'snippet' in p}
-				{#if p.snippet === 'link'}
-					{@render link_entry(p.props)}
-				{:else if p.snippet === 'text'}
-					{@render text_entry(p.props)}
-				{:else if p.snippet === 'separator'}
-					<Contextmenu_Separator />
-				{/if}
+			{:else if p.snippet === 'link'}
+				{@render link_entry?.(p.props)}
+			{:else if p.snippet === 'text'}
+				{@render text_entry?.(p.props)}
+			{:else if p.snippet === 'separator'}
+				<!-- TODO same pattern as link/text -->
+				<Contextmenu_Separator />
 			{/if}
 		{/each}
 	</ul>
 {/if}
 
-{#snippet link_entry(props: ComponentProps<typeof Contextmenu_Link_Entry>)}
+{#snippet link_entry_default(props: ComponentProps<typeof Contextmenu_Link_Entry>)}
 	<Contextmenu_Link_Entry {...props} />
 {/snippet}
 
-{#snippet text_entry(props: ComponentProps<typeof Contextmenu_Text_Entry>)}
+{#snippet text_entry_default(props: ComponentProps<typeof Contextmenu_Text_Entry>)}
 	<Contextmenu_Text_Entry {...props} />
 {/snippet}
 

@@ -71,8 +71,6 @@ export class Root_Menu_State {
 export type Contextmenu_Run = () => unknown | Promise<Activate_Result>; // eslint-disable-line @typescript-eslint/no-redundant-type-constituents
 
 export interface Contextmenu_State_Options {
-	link_snippet?: [href: string, icon?: Snippet<[icon: string]>];
-	text_snippet?: [content: string, icon: string];
 	layout?: Dimensions; // TODO consider making this a prop on `Contextmenu_Root`, and being assigned here
 }
 
