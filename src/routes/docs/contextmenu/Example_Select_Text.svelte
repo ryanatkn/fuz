@@ -51,8 +51,9 @@ Try selecting text and then opening the contextmenu on it.`;
 			<div class="panel p_md" class:color_g_5={highlighted}>
 				<div bind:this={text_el} class="mb_lg">
 					<p>
-						If a contextmenu is triggered on selected text, it includes a <code>copy text</code>
-						entry.
+						When the Fuz contextmenu opens and the user has selected text, the menu includes a <code
+							>copy text</code
+						> entry.
 					</p>
 					<p>
 						Try <button type="button" onclick={select_text} class:color_a={toggled}
@@ -78,6 +79,12 @@ Try selecting text and then opening the contextmenu on it.`;
 				<blockquote contenteditable bind:innerText={value}></blockquote>
 				<p><code>contenteditable="plaintext-only"</code></p>
 				<blockquote contenteditable="plaintext-only" bind:innerText={value}></blockquote>
+				<aside>
+					Note that if there are no actions found (like the toggle here) the system contextmenu
+					opens instead, bypassing the Fuz contextmenu, as demonstrated in the <a
+						href="#default-behaviors">default behaviors</a
+					>.
+				</aside>
 			</div>
 		</Contextmenu>
 	</Tome_Section>
