@@ -123,8 +123,8 @@
 			default behavior like selecting text, bypassing the Fuz contextmenu
 		</li>
 		<li>
-			double-tap-and-hold can't work for clickable elements like links - use two longpresses for
-			those cases
+			double-tap-and-hold can't work for clickable elements like links, longpress on the first
+			contextmenu entry for those cases (double-longpress)
 		</li>
 	</ul>
 	<h4>All devices:</h4>
