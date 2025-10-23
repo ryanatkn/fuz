@@ -206,6 +206,9 @@ a.chip {
 .display_contents {
 	display: contents;
 }
+.display_block {
+	display: block;
+}
 .display_inline_block {
 	display: inline-block;
 }

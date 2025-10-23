@@ -213,7 +213,7 @@
 						>github.com/ryanatkn/fuz</a
 					>
 				</blockquote>
-				<code class="p_md mb_lg"
+				<code class="display_block p_md mb_lg"
 					>npm i -D <a href="https://www.npmjs.com/package/@fuz.dev/fuz_contextmenu"
 						>@fuz.dev/fuz_contextmenu</a
 					></code

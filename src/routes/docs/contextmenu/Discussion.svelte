@@ -8,25 +8,27 @@
 	<Tome_Section_Header text="iOS compatibility" />
 	<p>
 		Fuz provides two versions of the contextmenu root component with different tradeoffs due to iOS
-		Safari not supporting the <code>contextmenu</code> event, see
+		Safari not supporting the <code>contextmenu</code> event as of October 2025, see
 		<a href="https://bugs.webkit.org/show_bug.cgi?id=213953">WebKit bug #213953</a>.
 	</p>
-	<h4>Contextmenu_Root (default, simplified)</h4>
+	<h4>Contextmenu_Root</h4>
 	<ul>
-		<li>
-			does not work on iOS Safari until
-			<a href="https://bugs.webkit.org/show_bug.cgi?id=213953">WebKit bug #213953</a> is fixed
-		</li>
+		<li>standard, default implementation</li>
 		<li>
 			relies on the browser's native <Mdn_Link path="Web/API/Element/contextmenu_event"
 				><span class="font_family_mono">contextmenu</span> event</Mdn_Link
 			>
 		</li>
-		<li>includes tap-then-longpress bypass gesture for accessing system contextmenu</li>
-		<li>much simpler implementation, fewer edge cases that can go wrong</li>
+		<li>much simpler, fewer edge cases that can go wrong</li>
+		<li>
+			does not work on iOS Safari until <a href="https://bugs.webkit.org/show_bug.cgi?id=213953"
+				>WebKit bug #213953</a
+			> is fixed
+		</li>
 	</ul>
-	<h4>Contextmenu_Root_For_Safari_Compatibility (opt-in for iOS)</h4>
+	<h4>Contextmenu_Root_For_Safari_Compatibility</h4>
 	<ul>
+		<li>opt-in for iOS</li>
 		<li>
 			implements custom longpress detection to work around iOS Safari's lack of
 			<code>contextmenu</code> event support
