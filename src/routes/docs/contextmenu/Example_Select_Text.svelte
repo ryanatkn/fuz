@@ -1,11 +1,14 @@
 <script lang="ts">
-	import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
 	import Contextmenu_Entry from '$lib/Contextmenu_Entry.svelte';
 	import Contextmenu from '$lib/Contextmenu.svelte';
 	import {Contextmenu_State} from '$lib/contextmenu_state.svelte.js';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
 	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
+	import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
 	import Tome_Section from '$lib/Tome_Section.svelte';
+
+	const {Contextmenu_Root_Component}: {Contextmenu_Root_Component: typeof Contextmenu_Root} =
+		$props();
 
 	const contextmenu = new Contextmenu_State();
 
@@ -36,7 +39,7 @@ Try selecting text and then opening the contextmenu on it.`;
 	const highlighted = $derived(value === text1 || value === text2 || value === text3);
 </script>
 
-<Contextmenu_Root {contextmenu} scoped>
+<Contextmenu_Root_Component {contextmenu} scoped>
 	<Tome_Section>
 		<div class:color_d_5={highlighted}>
 			<Tome_Section_Header text="Select text" />
@@ -78,7 +81,7 @@ Try selecting text and then opening the contextmenu on it.`;
 			</div>
 		</Contextmenu>
 	</Tome_Section>
-</Contextmenu_Root>
+</Contextmenu_Root_Component>
 
 <style>
 	label {

@@ -14,45 +14,49 @@
 	<h4>Contextmenu_Root (default, simplified)</h4>
 	<ul>
 		<li>
-			<strong>Does not work on iOS Safari</strong> until
+			does not work on iOS Safari until
 			<a href="https://bugs.webkit.org/show_bug.cgi?id=213953">WebKit bug #213953</a> is fixed
 		</li>
 		<li>
-			Relies on the browser's native <Mdn_Link path="Web/API/Element/contextmenu_event"
-				><code>contextmenu</code> event</Mdn_Link
+			relies on the browser's native <Mdn_Link path="Web/API/Element/contextmenu_event"
+				><span class="font_family_mono">contextmenu</span> event</Mdn_Link
 			>
 		</li>
-		<li>Includes tap-then-longpress bypass gesture for accessing system contextmenu</li>
-		<li>Much simpler implementation, fewer corner cases to go wrong</li>
+		<li>includes tap-then-longpress bypass gesture for accessing system contextmenu</li>
+		<li>much simpler implementation, fewer edge cases that can go wrong</li>
 	</ul>
 	<h4>Contextmenu_Root_For_Safari_Compatibility (opt-in for iOS)</h4>
 	<ul>
 		<li>
-			Implements custom longpress detection to work around iOS Safari's lack of
+			implements custom longpress detection to work around iOS Safari's lack of
 			<code>contextmenu</code> event support
 		</li>
-		<li>Works on all devices including iOS Safari</li>
-		<li>More complex implementation with custom touch event handling and gesture detection</li>
+		<li>works on all devices including iOS Safari</li>
+		<li>more complex implementation with custom touch event handling and gesture detection</li>
 		<li>
-			Browsers block <code>navigator.vibrate</code> haptic feedback due to timeout-based gesture detection
+			some browsers (including mobile Chrome) block <code>navigator.vibrate</code> haptic feedback due
+			to the timeout-based gesture detection (because it's not a direct user action)
 		</li>
-		<li>
-			<strong>Opt into this version</strong> only if you need iOS Safari support
-		</li>
+		<li>opt into this version only if you need iOS Safari support</li>
 	</ul>
 </Tome_Section>
 <Tome_Section>
 	<Tome_Section_Header text="Caveats" />
 	<p>
-		The Fuz contextmenu provides powerful app-specific UX, but it breaks normal browser behavior
-		like showing the system contextmenu and device-specific actions like text selection on
-		longpress. This has tradeoffs similar to apps like Google Docs.
+		The Fuz contextmenu provides powerful app-specific UX, but it breaks from normal browser
+		behavior by replacing the system contextmenu.
 	</p>
-	<p>Mitigations:</p>
+	<p>To mitigate the downsides:</p>
 	<ul>
 		<li>
+			The Fuz contextmenu only replaces the system contextmenu when the DOM tree has defined
+			behaviors, with the exception of <code>a</code> links, which implicitly have contextmenu behaviors.
+			(and this may include other interactive elements in the future)
+		</li>
+		<li>
 			The Fuz contextmenu does not open on elements that allow clipboard pasting like inputs,
-			textareas, and contenteditables.
+			textareas, and contenteditables -- however this may change for better app integration, or be
+			configurable.
 		</li>
 		<li>To bypass on devices with a keyboard, hold Shift while rightclicking.</li>
 		<li>
@@ -68,4 +72,8 @@
 			(double-rightclick/longpress).
 		</li>
 	</ul>
+	<p>
+		See also the <Mdn_Link path="Web/API/Element/contextmenu_event" /> docs and the
+		<a href="https://www.w3.org/TR/uievents/#event-type-contextmenu">w3 spec</a>.
+	</p>
 </Tome_Section>

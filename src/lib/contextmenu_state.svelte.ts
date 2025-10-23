@@ -79,6 +79,8 @@ export interface Contextmenu_State_Options {
 /**
  * Creates a `contextmenu` store.
  * See usage with `Contextmenu_Root.svelte` and `Contextmenu.svelte`.
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event
  */
 export class Contextmenu_State {
 	layout: Dimensions; // TODO $state?

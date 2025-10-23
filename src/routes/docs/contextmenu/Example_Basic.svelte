@@ -1,18 +1,23 @@
 <script lang="ts">
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
-	import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
 	import Contextmenu_Entry from '$lib/Contextmenu_Entry.svelte';
 	import Contextmenu from '$lib/Contextmenu.svelte';
 	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
 	import Tome_Section from '$lib/Tome_Section.svelte';
+	import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
+
+	const {
+		Contextmenu_Root_Component,
+		root_component_name,
+	}: {Contextmenu_Root_Component: typeof Contextmenu_Root; root_component_name: string} = $props();
 
 	let greeted = $state(false);
 	let greeted_icon_snippet = $state(false);
 	let greeted_icon_string = $state(false);
 </script>
 
-<Contextmenu_Root scoped>
+<Contextmenu_Root_Component scoped>
 	<Tome_Section>
 		<Tome_Section_Header text="Basic usage" />
 		<Contextmenu>
@@ -29,24 +34,24 @@
 			<div class="panel p_md">
 				<p>Try opening the contextmenu on this panel with rightclick or tap-and-hold.</p>
 				<Code
-					content={`<Contextmenu_Root scoped>
+					content={`<${root_component_name} scoped>
   <Contextmenu>
     {#snippet entries()}
-      <Contextmenu_Entry run={() => (greeted = !greeted)}> <!-- ${greeted} />
-        Hello world
+      <Contextmenu_Entry run={() => (greeted = !greeted)}>
+        Hello world <!-- ${greeted} -->
       </Contextmenu_Entry>
-      <Contextmenu_Entry run={() => (greeted_icon_snippet = !greeted_icon_snippet)}> <!-- ${greeted_icon_snippet} />
+      <Contextmenu_Entry run={() => (greeted_icon_snippet = !greeted_icon_snippet)}>
         {#snippet icon()}🌞{/snippet}
-        Hello with an optional icon snippet
+        Hello with an optional icon snippet <!-- ${greeted_icon_snippet} -->
       </Contextmenu_Entry>
-      <Contextmenu_Entry run={() => (greeted_icon_string = !greeted_icon_string)} icon="🌚"> <!-- ${greeted_icon_string} />
-        Hello with an optional icon string
+      <Contextmenu_Entry run={() => (greeted_icon_string = !greeted_icon_string)} icon="🌚">
+        Hello with an optional icon string <!-- ${greeted_icon_string} -->
       </Contextmenu_Entry>
     {/snippet}
     ...markup with the above contextmenu behavior...
   </Contextmenu>
   ...markup with only default contextmenu behavior...
-</Contextmenu_Root>
+</${root_component_name}>
 ...markup without contextmenu behavior...`}
 				/>
 				<div><code class:color_g_5={greeted}>greeted = {greeted}</code></div>
@@ -67,4 +72,4 @@
 			</div>
 		</Contextmenu>
 	</Tome_Section>
-</Contextmenu_Root>
+</Contextmenu_Root_Component>

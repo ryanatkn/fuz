@@ -2,12 +2,17 @@
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 	import {slide} from 'svelte/transition';
 
-	import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
 	import Contextmenu_Entry from '$lib/Contextmenu_Entry.svelte';
 	import Contextmenu from '$lib/Contextmenu.svelte';
 	import {Contextmenu_State} from '$lib/contextmenu_state.svelte.js';
 	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
 	import Tome_Section from '$lib/Tome_Section.svelte';
+	import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
+
+	const {
+		Contextmenu_Root_Component,
+		root_component_name,
+	}: {Contextmenu_Root_Component: typeof Contextmenu_Root; root_component_name: string} = $props();
 
 	const contextmenu = new Contextmenu_State();
 
@@ -19,7 +24,7 @@
 
 <!-- eslint-disable svelte/no-useless-mustaches -->
 
-<Contextmenu_Root {contextmenu} scoped>
+<Contextmenu_Root_Component {contextmenu} scoped>
 	<Tome_Section>
 		<Tome_Section_Header text="Custom instance" />
 		<Contextmenu>
@@ -28,10 +33,10 @@
 			{/snippet}
 			<div class="panel p_md">
 				<Code lang="ts" content={`const contextmenu = create_contextmenu();`} />
-				<Code content={`<Contextmenu_Root {contextmenu} scoped>...`} />
+				<Code content={`<${root_component_name} {contextmenu} scoped>...`} />
 				<p>
-					The <code>Contextmenu_Root</code> prop <code>contextmenu</code> provides more control. Try
-					opening the contextmenu on this panel.
+					The <code>{root_component_name}</code> prop <code>contextmenu</code> provides more control.
+					Try opening the contextmenu on this panel.
 				</p>
 				<!-- TODO this extra wrapper is only for the last-child margin behavior, but that may be removed -->
 				<div>
@@ -42,4 +47,4 @@
 			</div>
 		</Contextmenu>
 	</Tome_Section>
-</Contextmenu_Root>
+</Contextmenu_Root_Component>

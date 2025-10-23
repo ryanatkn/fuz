@@ -4,7 +4,6 @@
 	import {quintOut} from 'svelte/easing';
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
-	import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
 	import Contextmenu from '$lib/Contextmenu.svelte';
 	import Details from '$lib/Details.svelte';
 	import Contextmenu_Text_Entry from '$lib/Contextmenu_Text_Entry.svelte';
@@ -19,7 +18,11 @@
 	import Dialog from '$lib/Dialog.svelte';
 	import file_contents from '$routes/docs/contextmenu/Example_Full.svelte?raw';
 	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
+	import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
 	import Tome_Section from '$lib/Tome_Section.svelte';
+
+	const {Contextmenu_Root_Component}: {Contextmenu_Root_Component: typeof Contextmenu_Root} =
+		$props();
 
 	const alyssa = 'Alyssa';
 	const ben = 'Ben';
@@ -127,7 +130,7 @@
 	});
 </script>
 
-<Contextmenu_Root scoped>
+<Contextmenu_Root_Component scoped>
 	<Tome_Section>
 		<Tome_Section_Header text="Full example" />
 		<Contextmenu>
@@ -197,7 +200,7 @@
 			</section>
 		</Contextmenu>
 	</Tome_Section>
-</Contextmenu_Root>
+</Contextmenu_Root_Component>
 
 {#if show_about_dialog}
 	<Dialog onclose={() => (show_about_dialog = false)}>
