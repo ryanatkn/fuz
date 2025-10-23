@@ -46,7 +46,7 @@ Try selecting text and then opening the contextmenu on it.`;
 		</div>
 		<Contextmenu>
 			{#snippet entries()}
-				<Contextmenu_Entry run={() => (toggled = !toggled)}>Toggle something</Contextmenu_Entry>
+				<Contextmenu_Entry run={() => void (toggled = !toggled)}>Toggle something</Contextmenu_Entry>
 			{/snippet}
 			<div class="panel p_md" class:color_g_5={highlighted}>
 				<div bind:this={text_el} class="mb_lg">

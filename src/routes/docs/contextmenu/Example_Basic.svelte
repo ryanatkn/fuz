@@ -22,12 +22,12 @@
 		<Tome_Section_Header text="Basic usage" />
 		<Contextmenu>
 			{#snippet entries()}
-				<Contextmenu_Entry run={() => (greeted = !greeted)}>Hello world</Contextmenu_Entry>
-				<Contextmenu_Entry run={() => (greeted_icon_snippet = !greeted_icon_snippet)}>
+				<Contextmenu_Entry run={() => void (greeted = !greeted)}>Hello world</Contextmenu_Entry>
+				<Contextmenu_Entry run={() => void (greeted_icon_snippet = !greeted_icon_snippet)}>
 					{#snippet icon()}🌞{/snippet}
 					Hello with an optional icon snippet
 				</Contextmenu_Entry>
-				<Contextmenu_Entry run={() => (greeted_icon_string = !greeted_icon_string)} icon="🌚">
+				<Contextmenu_Entry run={() => void (greeted_icon_string = !greeted_icon_string)} icon="🌚">
 					Hello with an optional icon string
 				</Contextmenu_Entry>
 			{/snippet}

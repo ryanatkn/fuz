@@ -82,6 +82,7 @@ describe('Contextmenu_State', () => {
 		test('close resets entry states', () => {
 			const entry = new Entry_State(contextmenu.root_menu, () => () => {});
 			entry.promise = Promise.resolve();
+			entry.pending = true;
 			entry.error_message = 'test error';
 			contextmenu.root_menu.items.push(entry);
 
@@ -89,7 +90,34 @@ describe('Contextmenu_State', () => {
 			contextmenu.close();
 
 			assert.strictEqual(entry.promise, null);
+			assert.strictEqual(entry.pending, false);
 			assert.strictEqual(entry.error_message, null);
+		});
+
+		test('close resets pending state during async operation', async () => {
+			let resolve: any;
+			const promise = new Promise((r) => (resolve = r));
+
+			const entry = new Entry_State(contextmenu.root_menu, () => async () => {
+				await promise;
+				return {ok: true};
+			});
+			contextmenu.root_menu.items.push(entry);
+
+			contextmenu.open([], 0, 0);
+			void contextmenu.activate(entry);
+
+			assert.strictEqual(entry.pending, true);
+
+			// Close menu while async operation is still pending
+			contextmenu.close();
+
+			assert.strictEqual(entry.pending, false);
+			assert.strictEqual(entry.promise, null);
+			assert.strictEqual(contextmenu.opened, false);
+
+			// Resolve the promise after close
+			resolve({ok: true});
 		});
 
 		test('close does nothing when already closed', () => {
@@ -404,9 +432,9 @@ describe('Contextmenu_State', () => {
 			assert.strictEqual(entry.selected, true);
 		});
 
-		test('activate() closes on async non-result return', async () => {
+		test('activate() closes on void return (async)', async () => {
 			const entry = new Entry_State(contextmenu.root_menu, () => async () => {
-				return 'some value';
+				// Implicit undefined/void return
 			});
 
 			contextmenu.open([], 0, 0);
@@ -418,13 +446,13 @@ describe('Contextmenu_State', () => {
 		test('activate() ignores stale promise', async () => {
 			let resolve1: any;
 			let resolve2: any;
-			const promise1 = new Promise((r) => (resolve1 = r));
-			const promise2 = new Promise((r) => (resolve2 = r));
+			const promise1: Promise<{ok: true}> = new Promise((r) => (resolve1 = r));
+			const promise2: Promise<{ok: true}> = new Promise((r) => (resolve2 = r));
 
 			let call_count = 0;
-			const entry = new Entry_State(contextmenu.root_menu, () => () => {
+			const entry = new Entry_State(contextmenu.root_menu, () => async () => {
 				call_count++;
-				return call_count === 1 ? promise1 : promise2;
+				return call_count === 1 ? await promise1 : await promise2;
 			});
 
 			contextmenu.open([], 0, 0);
@@ -434,7 +462,7 @@ describe('Contextmenu_State', () => {
 			assert.strictEqual(entry.pending, true);
 
 			// Second activation (should replace first promise)
-			void contextmenu.activate(entry);
+			const activation2 = contextmenu.activate(entry);
 
 			// Resolve first promise (should be ignored)
 			resolve1({ok: true});
@@ -444,9 +472,76 @@ describe('Contextmenu_State', () => {
 
 			// Resolve second promise (should close)
 			resolve2({ok: true});
-			await promise2;
+			await activation2;
 
 			assert.strictEqual(contextmenu.opened, false);
+		});
+
+		test('activate() with close: false keeps menu open (async)', async () => {
+			const entry = new Entry_State(contextmenu.root_menu, () => async () => {
+				return {ok: true, close: false};
+			});
+
+			contextmenu.open([], 0, 0);
+			await contextmenu.activate(entry);
+
+			assert.strictEqual(contextmenu.opened, true); // Should stay open
+		});
+
+		test('activate() with close: true explicitly closes menu (async)', async () => {
+			const entry = new Entry_State(contextmenu.root_menu, () => async () => {
+				return {ok: true, close: true};
+			});
+
+			contextmenu.open([], 0, 0);
+			await contextmenu.activate(entry);
+
+			assert.strictEqual(contextmenu.opened, false); // Should close
+		});
+
+		test('activate() with {ok: true} defaults to closing (async)', async () => {
+			const entry = new Entry_State(contextmenu.root_menu, () => async () => {
+				return {ok: true};
+			});
+
+			contextmenu.open([], 0, 0);
+			await contextmenu.activate(entry);
+
+			assert.strictEqual(contextmenu.opened, false); // Should close by default
+		});
+
+		test('activate() with close: false keeps menu open (sync)', () => {
+			const entry = new Entry_State(contextmenu.root_menu, () => () => {
+				return {ok: true, close: false};
+			});
+
+			contextmenu.open([], 0, 0);
+			void contextmenu.activate(entry);
+
+			assert.strictEqual(contextmenu.opened, true); // Should stay open
+		});
+
+		test('activate() with {ok: true} defaults to closing (sync)', () => {
+			const entry = new Entry_State(contextmenu.root_menu, () => () => {
+				return {ok: true};
+			});
+
+			contextmenu.open([], 0, 0);
+			void contextmenu.activate(entry);
+
+			assert.strictEqual(contextmenu.opened, false); // Should close by default
+		});
+
+		test('activate() with {ok: false} never closes', async () => {
+			const entry = new Entry_State(contextmenu.root_menu, () => async () => {
+				return {ok: false, message: 'error'};
+			});
+
+			contextmenu.open([], 0, 0);
+			await contextmenu.activate(entry);
+
+			assert.strictEqual(contextmenu.opened, true); // Should not close on error
+			assert.strictEqual(entry.error_message, 'error');
 		});
 	});
 
@@ -505,6 +600,17 @@ describe('Contextmenu_State', () => {
 
 			assert.strictEqual(entry.promise, null);
 			assert.strictEqual(entry.error_message, null);
+		});
+
+		test('resets entry pending flag', () => {
+			const entry = new Entry_State(contextmenu.root_menu, () => () => {});
+			entry.promise = Promise.resolve();
+			entry.pending = true;
+
+			contextmenu.reset_items([entry]);
+
+			assert.strictEqual(entry.promise, null);
+			assert.strictEqual(entry.pending, false);
 		});
 
 		test('recursively resets submenu items', () => {

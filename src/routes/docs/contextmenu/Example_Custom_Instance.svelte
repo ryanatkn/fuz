@@ -36,14 +36,23 @@
 					{#snippet icon()}🎨{/snippet}
 					select color
 					{#snippet menu()}
-						<Contextmenu_Entry run={() => (selected_color = 'f')}
-							><span class="color_f_5">option f</span></Contextmenu_Entry
+						<Contextmenu_Entry
+							run={() => {
+								selected_color = 'f';
+								return {ok: true, close: false};
+							}}><span class="color_f_5">option f</span></Contextmenu_Entry
 						>
-						<Contextmenu_Entry run={() => (selected_color = 'g')}
-							><span class="color_g_5">option g</span></Contextmenu_Entry
+						<Contextmenu_Entry
+							run={() => {
+								selected_color = 'g';
+								return {ok: true, close: false};
+							}}><span class="color_g_5">option g</span></Contextmenu_Entry
 						>
-						<Contextmenu_Entry run={() => (selected_color = 'j')}
-							><span class="color_j_5">option j</span></Contextmenu_Entry
+						<Contextmenu_Entry
+							run={() => {
+								selected_color = 'j';
+								return {ok: true, close: false};
+							}}><span class="color_j_5">option j</span></Contextmenu_Entry
 						>
 					{/snippet}
 				</Contextmenu_Submenu>
@@ -60,7 +69,10 @@
 				/>
 				<p class="mb_md">
 					Try opening the contextmenu on this panel, then use the navigation buttons below to cycle
-					through entries — just like the arrow keys.
+					through entries — just like the arrow keys. The color entries return <code
+						>{'{ok: true, close: false}'}</code
+					> to keep the menu open after activation, allowing you to select multiple colors using the
+					activate button (↵).
 				</p>
 				<div class="mb_md {selected_color_class}">
 					<p>Reactive state:</p>

@@ -32,7 +32,7 @@
 		<Tome_Section_Header text="Disable default behaviors" />
 		<Contextmenu>
 			{#snippet entries()}
-				<Contextmenu_Entry run={() => (toggled = !toggled)}>Toggle something</Contextmenu_Entry>
+				<Contextmenu_Entry run={() => void (toggled = !toggled)}>Toggle something</Contextmenu_Entry>
 			{/snippet}
 			<div class="panel p_md">
 				<p>

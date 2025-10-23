@@ -16,9 +16,10 @@ export type Contextmenu_Params =
 	| {snippet: 'text'; props: {content: string; icon: string; run: Contextmenu_Run}}
 	| {snippet: 'separator'};
 
-// TODO fix this type
-// eslint-disable-next-line @typescript-eslint/no-duplicate-type-constituents
-type Activate_Result = Result<any, {message?: string}> | any; // eslint-disable-line @typescript-eslint/no-redundant-type-constituents
+export type Contextmenu_Activate_Result =
+	| void
+	| undefined
+	| Result<{close?: boolean}, {message?: string}>;
 
 export type Item_State = Submenu_State | Entry_State;
 
@@ -67,8 +68,9 @@ export class Root_Menu_State {
 	items: Array<Item_State> = $state([]);
 }
 
-// TODO fix this type
-export type Contextmenu_Run = () => unknown | Promise<Activate_Result>; // eslint-disable-line @typescript-eslint/no-redundant-type-constituents
+export type Contextmenu_Run = () =>
+	| Contextmenu_Activate_Result
+	| Promise<Contextmenu_Activate_Result>;
 
 export interface Contextmenu_State_Options {
 	layout?: Dimensions; // TODO consider making this a prop on `Contextmenu_Root`, and being assigned here
@@ -151,13 +153,14 @@ export class Contextmenu_State {
 			if (item.is_menu) {
 				this.reset_items(item.items);
 			} else {
-				if (item.promise !== null) item.promise = null;
-				if (item.error_message !== null) item.error_message = null;
+				item.promise = null;
+				item.pending = false;
+				item.error_message = null;
 			}
 		}
 	}
 
-	activate(item: Item_State): boolean | Promise<Activate_Result> {
+	activate(item: Item_State): boolean | Promise<Contextmenu_Activate_Result> {
 		if (item.is_menu) {
 			this.expand_selected();
 		} else {
@@ -179,13 +182,16 @@ export class Contextmenu_State {
 							if (promise !== item.promise) return;
 							if (typeof result?.ok === 'boolean') {
 								if (result.ok) {
-									this.close();
+									if (result.close !== false) {
+										this.close();
+									}
 								} else {
 									const message = typeof result.message === 'string' ? result.message : undefined;
 									item.error_message = message ?? 'unknown error';
 									this.error = message;
 								}
 							} else {
+								// void or undefined - default behavior is to close
 								this.close();
 							}
 							return result;
@@ -204,12 +210,26 @@ export class Contextmenu_State {
 					}));
 				return item.promise; // async path
 			}
-			this.close(); // synchronous path only
+			// synchronous path
+			if (typeof returned?.ok === 'boolean') {
+				if (returned.ok) {
+					if (returned.close !== false) {
+						this.close();
+					}
+				} else {
+					const message = typeof returned.message === 'string' ? returned.message : undefined;
+					item.error_message = message ?? 'unknown error';
+					this.error = message;
+				}
+			} else {
+				// void or undefined - default behavior is to close
+				this.close();
+			}
 		}
 		return true;
 	}
 
-	activate_selected(): void | boolean | Promise<Activate_Result> {
+	activate_selected(): void | boolean | Promise<Contextmenu_Activate_Result> {
 		const selected = this.selections.at(-1);
 		if (selected) {
 			return this.activate(selected);
