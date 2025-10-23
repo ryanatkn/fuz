@@ -27,8 +27,8 @@
 	<Tome_Section_Header text="Introduction" />
 	<p>
 		Fuz provides a customizable contextmenu that overrides the system contextmenu to provide helpful
-		capabilities to users. Popular websites that use this web feature include Google Docs and
-		Discord. Below are
+		capabilities to users. Popular websites with similar features include Google Docs and Discord.
+		Below are
 		<a href="#caveats">caveats</a>
 		about this breaking some user expectations, and a workaround for
 		<a href="#ios-compatibility">iOS Safari support</a>. See also the <Mdn_Link
@@ -93,11 +93,11 @@
 	</Details>
 	<p>
 		This simple hierarchical pattern gives users the full contextual actions by default -- not just
-		the actions for the target being clicked, but all ancestor actions too. This means that unlike
-		in many systems, users don't need to hunt for specific parent elements to find the desired
-		action -- instead, all actions in the tree are available, improving UX convenience and clarity
-		at the cost of more noisy menus. Developers can opt out of this inheritance behavior by simply
-		not nesting <code>Contextmenu</code> declarations, and submenus are useful for managing complexity.
+		the actions for the target being clicked, but all ancestor actions too. This means users don't
+		need to hunt for specific parent elements to find the desired action, unlike many systems --
+		instead, all actions in the tree are available, improving UX convenience and predictability at
+		the cost of more noisy menus. Developers can opt out of this inheritance behavior by simply not
+		nesting <code>Contextmenu</code> declarations, and submenus are useful for managing complexity.
 	</p>
 	<h4>Mouse and keyboard:</h4>
 	<ul>
@@ -124,7 +124,7 @@
 		</li>
 		<li>
 			double-tap-and-hold can't work for clickable elements like links - use two longpresses for
-			those cases instead
+			those cases
 		</li>
 		<li>a longpress is canceled if you move the touch past a threshold before it triggers</li>
 		<li>
