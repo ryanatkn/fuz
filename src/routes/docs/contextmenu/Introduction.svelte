@@ -1,26 +1,20 @@
 <script lang="ts">
-	import type {Snippet} from 'svelte';
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
 	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
 	import Tome_Section from '$lib/Tome_Section.svelte';
 	import Contextmenu from '$lib/Contextmenu.svelte';
-	import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
 	import Contextmenu_Entry from '$lib/Contextmenu_Entry.svelte';
 	import Details from '$lib/Details.svelte';
+	import Root_Component_Selector from '$routes/docs/contextmenu/Root_Component_Selector.svelte';
+	import {selected_contextmenu_root_component_context} from '$routes/docs/contextmenu/selected_root_component.svelte.js';
 
 	/* eslint-disable no-alert */
 
-	const {
-		Contextmenu_Root_Component,
-		root_component_name,
-		children,
-	}: {
-		Contextmenu_Root_Component: typeof Contextmenu_Root;
-		root_component_name: string;
-		children: Snippet;
-	} = $props();
+	const selected = selected_contextmenu_root_component_context.get();
+	const Contextmenu_Root_Component = $derived(selected.component);
+	const root_component_name = $derived(selected.name);
 </script>
 
 <Tome_Section>
@@ -139,5 +133,5 @@
 			>
 		</li>
 	</ul>
-	{@render children()}
+	<Root_Component_Selector />
 </Tome_Section>

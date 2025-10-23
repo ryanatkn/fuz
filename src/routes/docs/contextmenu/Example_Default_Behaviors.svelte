@@ -2,13 +2,12 @@
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
-	import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
 	import Tome_Section from '$lib/Tome_Section.svelte';
+	import {selected_contextmenu_root_component_context} from '$routes/docs/contextmenu/selected_root_component.svelte.js';
 
-	const {
-		Contextmenu_Root_Component,
-		root_component_name,
-	}: {Contextmenu_Root_Component: typeof Contextmenu_Root; root_component_name: string} = $props();
+	const selected = selected_contextmenu_root_component_context.get();
+	const Contextmenu_Root_Component = $derived(selected.component);
+	const root_component_name = $derived(selected.name);
 </script>
 
 <Contextmenu_Root_Component scoped>

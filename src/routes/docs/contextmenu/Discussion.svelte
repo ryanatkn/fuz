@@ -2,6 +2,7 @@
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
 	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
 	import Tome_Section from '$lib/Tome_Section.svelte';
+	import Root_Component_Selector from '$routes/docs/contextmenu/Root_Component_Selector.svelte';
 </script>
 
 <Tome_Section>
@@ -46,6 +47,7 @@
 		</li>
 		<li>opt into this version only if you need iOS Safari support</li>
 	</ul>
+	<Root_Component_Selector />
 </Tome_Section>
 <Tome_Section>
 	<Tome_Section_Header text="Caveats" />
