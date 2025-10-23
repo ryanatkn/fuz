@@ -54,6 +54,12 @@
 								return {ok: true, close: false};
 							}}><span class="color_j_5">option j</span></Contextmenu_Entry
 						>
+						<Contextmenu_Entry
+							run={() => {
+								contextmenu.close();
+								return {ok: true};
+							}}>close contextmenu</Contextmenu_Entry
+						>
 					{/snippet}
 				</Contextmenu_Submenu>
 			{/snippet}
