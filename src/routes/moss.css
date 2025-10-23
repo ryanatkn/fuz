@@ -290,8 +290,14 @@ a.chip {
 .color_e_5 {
 	color: var(--color_e_5);
 }
+.color_f_5 {
+	color: var(--color_f_5);
+}
 .color_g_5 {
 	color: var(--color_g_5);
+}
+.color_j_5 {
+	color: var(--color_j_5);
 }
 .border_radius_sm {
 	border-radius: var(--border_radius_sm);
@@ -422,6 +428,18 @@ a.chip {
 }
 .gap_xl3 {
 	gap: var(--space_xl3);
+}
+.border_bottom_left_radius_0 {
+	border-bottom-left-radius: 0;
+}
+.border_bottom_right_radius_0 {
+	border-bottom-right-radius: 0;
+}
+.border_top_left_radius_0 {
+	border-top-left-radius: 0;
+}
+.border_top_right_radius_0 {
+	border-top-right-radius: 0;
 }
 .font_weight_400 {
 	font-weight: 400;
