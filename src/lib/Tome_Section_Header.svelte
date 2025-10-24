@@ -1,7 +1,3 @@
-<script lang="ts" module>
-	let _id = 0;
-</script>
-
 <script lang="ts">
 	import {onDestroy, type Snippet} from 'svelte';
 	import type {SvelteHTMLElements} from 'svelte/elements';
@@ -33,17 +29,13 @@
 	}
 	register_section_header(slug);
 
-	const id = 'tome_section_header_' + _id++;
-
 	const docs_links = docs_links_context.get();
 
 	// Add section titles only if not on the root page.
 	// TODO make reactive?
 	if (page.url.pathname !== resolve(docs_links.root_path as any)) {
-		docs_links.add(id, text, slug, tag);
-		onDestroy(() => {
-			docs_links.remove(id);
-		});
+		const id = docs_links.add(slug, text, page.url.pathname, tag);
+		onDestroy(() => docs_links.remove(id));
 	}
 </script>
 
