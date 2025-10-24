@@ -209,6 +209,8 @@ export const src_json: Src_Json = {
 			path: 'docs_helpers.svelte.ts',
 			declarations: [
 				{name: 'DEFAULT_LIBRARY_PATH', kind: 'variable'},
+				{name: 'get_next_docs_link_order', kind: 'function'},
+				{name: 'reset_docs_link_order', kind: 'function'},
 				{name: 'to_docs_path_info', kind: 'function'},
 				{name: 'docs_links_context', kind: 'variable'},
 				{name: 'Docs_Link_Tag', kind: 'type'},
