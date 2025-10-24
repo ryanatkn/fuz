@@ -209,7 +209,11 @@
 			return;
 		}
 		if (
-			open_contextmenu(target, e.clientX + open_offset_x, e.clientY + open_offset_y, contextmenu)
+			open_contextmenu(target, e.clientX + open_offset_x, e.clientY + open_offset_y, contextmenu, {
+				link_enabled: link_entry !== null,
+				text_enabled: text_entry !== null,
+				separator_enabled: separator_entry !== null,
+			})
 		) {
 			swallow(e);
 			reset_longpress(); // handle touch devices that trigger `'contextmenu'` faster than our longpress
@@ -259,7 +263,11 @@
 		if (longpress_timeout != null) reset_longpress();
 		longpress_timeout = setTimeout(() => {
 			longpress_opened = true;
-			open_contextmenu(target, touch_x! + open_offset_x, touch_y! + open_offset_y, contextmenu);
+			open_contextmenu(target, touch_x! + open_offset_x, touch_y! + open_offset_y, contextmenu, {
+				link_enabled: link_entry !== null,
+				text_enabled: text_entry !== null,
+				separator_enabled: separator_entry !== null,
+			});
 		}, longpress_duration);
 	};
 

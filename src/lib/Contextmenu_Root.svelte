@@ -172,7 +172,11 @@
 			return;
 		}
 		if (
-			open_contextmenu(target, e.clientX + open_offset_x, e.clientY + open_offset_y, contextmenu)
+			open_contextmenu(target, e.clientX + open_offset_x, e.clientY + open_offset_y, contextmenu, {
+				link_enabled: link_entry !== null,
+				text_enabled: text_entry !== null,
+				separator_enabled: separator_entry !== null,
+			})
 		) {
 			swallow(e);
 		}

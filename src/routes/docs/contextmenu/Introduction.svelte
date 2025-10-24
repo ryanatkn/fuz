@@ -40,7 +40,7 @@
 		Here's a <code>{root_component_name}</code> with a <code>Contextmenu</code> inside another
 		<code>Contextmenu</code>:
 	</p>
-	<Contextmenu_Root_Component>
+	<Contextmenu_Root_Component scoped>
 		<Contextmenu>
 			{#snippet entries()}
 				<Contextmenu_Entry run={() => alert('alert A')}>alert A</Contextmenu_Entry>

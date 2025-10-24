@@ -4,6 +4,7 @@ import {is_promise} from '@ryanatkn/belt/async.js';
 import type {ActionReturn} from 'svelte/action';
 import {BROWSER} from 'esm-env';
 import type {SvelteHTMLElements} from 'svelte/elements';
+import {EMPTY_OBJECT} from '@ryanatkn/belt/object.js';
 
 import {Dimensions} from '$lib/dimensions.svelte.js';
 import {create_context} from '$lib/context_helpers.js';
@@ -359,6 +360,13 @@ export const contextmenu_action = <T extends Contextmenu_Params, U extends T | A
 
 const CONTEXTMENU_OPEN_VIBRATE_DURATION = 17;
 
+export interface Open_Contextmenu_Options {
+	link_enabled?: boolean;
+	text_enabled?: boolean;
+	separator_enabled?: boolean;
+	vibrate?: boolean;
+}
+
 /**
  * Opens the contextmenu, if appropriate,
  * querying the menu items from the DOM starting at the event target.
@@ -366,6 +374,7 @@ const CONTEXTMENU_OPEN_VIBRATE_DURATION = 17;
  * @param x - the page X coordinate at which to open the contextmenu, typically the mouse `pageX`
  * @param y - the page Y coordinate at which to open the contextmenu, typically the mouse `pageY`
  * @param contextmenu - the contextmenu store
+ * @param options - optional configuration for filtering entries and haptic feedback
  * @returns a boolean indicating if the menu was opened or not
  */
 export const open_contextmenu = (
@@ -373,17 +382,36 @@ export const open_contextmenu = (
 	x: number,
 	y: number,
 	contextmenu: Contextmenu_State,
+	options?: Open_Contextmenu_Options,
 ): boolean => {
-	const params = query_contextmenu_params(target);
+	const {
+		link_enabled = true,
+		text_enabled = true,
+		separator_enabled = true,
+		vibrate = true,
+	} = options ?? EMPTY_OBJECT;
+
+	const params = query_contextmenu_params(target)?.filter(
+		(p) =>
+			typeof p === 'function' ||
+			((p.snippet !== 'link' || link_enabled) &&
+				(p.snippet !== 'text' || text_enabled) &&
+				(p.snippet !== 'separator' || separator_enabled)),
+	);
+
+	// No-op if empty
 	if (!params?.length) return false;
+
 	contextmenu.open(params, x, y);
-	// `navigator.vibrate()` works with the simplified `Contextmenu_Root` (triggered from direct user event),
-	// but gets blocked when used with `Contextmenu_Root_For_Safari_Compatibility` because the longpress
+
+	// `navigator.vibrate()` works with `Contextmenu_Root` but gets blocked by some browsers
+	// when used with `Contextmenu_Root_For_Safari_Compatibility` because its longpress
 	// workaround triggers from a timeout rather than a direct user interaction.
 	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-	if (BROWSER && navigator.vibrate) {
+	if (BROWSER && vibrate && navigator.vibrate) {
 		navigator.vibrate(CONTEXTMENU_OPEN_VIBRATE_DURATION);
 	}
+
 	return true;
 };
 
