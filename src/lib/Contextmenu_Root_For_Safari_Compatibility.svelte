@@ -222,13 +222,18 @@
 			reset_tap_tracking(); // Clear bypass state after using it
 			return;
 		}
+		const {target} = e;
 		// handle touch devices that trigger `'contextmenu'` slower than our longpress
 		if (longpress_opened) {
+			// Don't prevent contextmenu events on elements inside our own contextmenu
+			// This allows the browser's native contextmenu (useful for dev tools, inspecting elements, etc.)
+			if (el?.contains(target as Node)) {
+				return; // Let the event pass through
+			}
 			reset_all();
 			swallow(e);
 			return;
 		}
-		const {target} = e;
 		if (!contextmenu_is_valid_target(target, e.shiftKey)) {
 			return;
 		}

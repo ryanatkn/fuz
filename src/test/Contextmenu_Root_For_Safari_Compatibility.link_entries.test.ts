@@ -13,8 +13,19 @@ import {
 } from '$lib/test_helpers.js';
 import {mount_contextmenu_root, setup_contextmenu_action} from '$test/contextmenu_test_helpers.js';
 import {CONTEXTMENU_DEFAULT_LONGPRESS_DURATION} from '$lib/contextmenu_helpers.js';
+import {create_shared_link_entry_tests} from '$test/contextmenu_test_link_entries.js';
 
-describe('Contextmenu_Root_For_Safari_Compatibility - Link Entry Handling', () => {
+// Run shared link entry tests with longpress requirement
+create_shared_link_entry_tests(
+	Contextmenu_Root_For_Safari_Compatibility,
+	'Contextmenu_Root_For_Safari_Compatibility',
+	{
+		requires_longpress: true,
+	},
+);
+
+// Safari-specific additional tests
+describe('Contextmenu_Root_For_Safari_Compatibility - Link Entry Handling (Safari-Specific)', () => {
 	let mounted: ReturnType<typeof mount_contextmenu_root> | null = null;
 
 	beforeEach(() => {
@@ -27,162 +38,6 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Link Entry Handling', () =
 			mounted = null;
 		}
 		vi.useRealTimers();
-	});
-
-	describe('native contextmenu access for links', () => {
-		test('right-clicking on link entry stops propagation', async () => {
-			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility);
-
-			const {container, contextmenu} = mounted;
-
-			const target = document.createElement('div');
-			container.appendChild(target);
-
-			await setup_contextmenu_action(target, [
-				{snippet: 'link', props: {href: 'https://example.com', content: 'Example Link'}},
-			]);
-
-			// Open menu via longpress
-			const touchstart = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
-			set_event_target(touchstart, target);
-			window.dispatchEvent(touchstart);
-
-			vi.advanceTimersByTime(CONTEXTMENU_DEFAULT_LONGPRESS_DURATION);
-			await tick();
-
-			assert.strictEqual(contextmenu.opened, true);
-			flushSync();
-
-			// Find the link element in the menu
-			const link = container.querySelector('a[href="https://example.com"]');
-			assert.ok(link, 'Link entry should be rendered');
-
-			// Right-click on the link entry
-			let propagated = false;
-			window.addEventListener('contextmenu', () => {
-				propagated = true;
-			});
-
-			const ctxmenu = create_contextmenu_event(100, 200);
-			set_event_target(ctxmenu, link);
-
-			// The link entry should stopPropagation but not preventDefault
-			// This allows the browser's native link contextmenu to show
-			link.dispatchEvent(ctxmenu);
-
-			// Since it stops propagation, window handler shouldn't see it
-			assert.strictEqual(propagated, false);
-		});
-
-		test('right-clicking on link entry does not prevent default', async () => {
-			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility);
-
-			const {container} = mounted;
-
-			const target = document.createElement('div');
-			container.appendChild(target);
-
-			await setup_contextmenu_action(target, [
-				{snippet: 'link', props: {href: 'https://example.com', content: 'Example Link'}},
-			]);
-
-			// Open menu
-			const touchstart = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
-			set_event_target(touchstart, target);
-			window.dispatchEvent(touchstart);
-
-			vi.advanceTimersByTime(CONTEXTMENU_DEFAULT_LONGPRESS_DURATION);
-			await tick();
-			flushSync();
-
-			const link = container.querySelector('a[href="https://example.com"]');
-			assert.ok(link);
-
-			// Right-click on link
-			const ctxmenu = create_contextmenu_event(100, 200);
-			set_event_target(ctxmenu, link);
-			link.dispatchEvent(ctxmenu);
-
-			// Should NOT be prevented - browser can show native menu
-			assert.strictEqual(ctxmenu.defaultPrevented, false);
-		});
-
-		test('window contextmenu handler not called for link entries', async () => {
-			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility);
-
-			const {container, contextmenu} = mounted;
-
-			const target = document.createElement('div');
-			container.appendChild(target);
-
-			await setup_contextmenu_action(target, [
-				{snippet: 'link', props: {href: 'https://example.com', content: 'Example Link'}},
-			]);
-
-			// Open menu
-			const touchstart = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
-			set_event_target(touchstart, target);
-			window.dispatchEvent(touchstart);
-
-			vi.advanceTimersByTime(CONTEXTMENU_DEFAULT_LONGPRESS_DURATION);
-			await tick();
-			flushSync();
-
-			const link = container.querySelector('a[href="https://example.com"]');
-			assert.ok(link);
-
-			// Track if window handler is called
-			let window_handler_called = false;
-			const original_open = contextmenu.open.bind(contextmenu);
-			contextmenu.open = ((...args: Array<any>) => {
-				window_handler_called = true;
-				return (original_open as any)(...args);
-			}) as any;
-
-			// Right-click on link
-			const ctxmenu = create_contextmenu_event(100, 200);
-			set_event_target(ctxmenu, link);
-			link.dispatchEvent(ctxmenu);
-
-			// Window handler should not be triggered due to stopPropagation
-			assert.strictEqual(window_handler_called, false);
-		});
-
-		test("allows browser's native link contextmenu to open", async () => {
-			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility);
-
-			const {container, contextmenu} = mounted;
-
-			const target = document.createElement('div');
-			container.appendChild(target);
-
-			await setup_contextmenu_action(target, [
-				{snippet: 'link', props: {href: 'https://example.com', content: 'Example Link'}},
-			]);
-
-			// Open menu
-			const touchstart = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
-			set_event_target(touchstart, target);
-			window.dispatchEvent(touchstart);
-
-			vi.advanceTimersByTime(CONTEXTMENU_DEFAULT_LONGPRESS_DURATION);
-			await tick();
-			flushSync();
-
-			const link = container.querySelector('a[href="https://example.com"]');
-			assert.ok(link);
-
-			// Right-click on link
-			const ctxmenu = create_contextmenu_event(100, 200);
-			set_event_target(ctxmenu, link);
-			link.dispatchEvent(ctxmenu);
-
-			// The event should not be prevented, allowing native menu
-			assert.strictEqual(ctxmenu.defaultPrevented, false);
-
-			// And contextmenu should still be open (not closed by this action)
-			assert.strictEqual(contextmenu.opened, true);
-		});
 	});
 
 	describe('link entry with longpress', () => {
@@ -280,44 +135,6 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Link Entry Handling', () =
 
 			// Should not prevent default - allows native menu
 			assert.strictEqual(ctxmenu.defaultPrevented, false);
-		});
-
-		test('contextmenu position unchanged when right-clicking link entry', async () => {
-			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility);
-
-			const {container, contextmenu} = mounted;
-
-			const target = document.createElement('div');
-			container.appendChild(target);
-
-			await setup_contextmenu_action(target, [
-				{snippet: 'link', props: {href: 'https://example.com', content: 'Example Link'}},
-			]);
-
-			// Open menu at specific position
-			const touchstart = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
-			set_event_target(touchstart, target);
-			window.dispatchEvent(touchstart);
-
-			vi.advanceTimersByTime(CONTEXTMENU_DEFAULT_LONGPRESS_DURATION);
-			await tick();
-
-			const initial_x = contextmenu.x;
-			const initial_y = contextmenu.y;
-
-			flushSync();
-
-			const menu_link = container.querySelector('a[href="https://example.com"]');
-			assert.ok(menu_link);
-
-			// Right-click on link entry
-			const ctxmenu = create_contextmenu_event(150, 250);
-			set_event_target(ctxmenu, menu_link);
-			menu_link.dispatchEvent(ctxmenu);
-
-			// Position should be unchanged
-			assert.strictEqual(contextmenu.x, initial_x);
-			assert.strictEqual(contextmenu.y, initial_y);
 		});
 	});
 
