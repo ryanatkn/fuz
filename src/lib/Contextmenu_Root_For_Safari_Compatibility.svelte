@@ -55,6 +55,7 @@
 		scoped = false,
 		link_entry = link_entry_default,
 		text_entry = text_entry_default,
+		separator_entry = separator_entry_default,
 		children,
 	}: {
 		/**
@@ -119,6 +120,12 @@
 		 * Defaults to `text_entry_default` which renders `Contextmenu_Text_Entry`.
 		 */
 		text_entry?: Snippet<[ComponentProps<typeof Contextmenu_Text_Entry>]> | null;
+		/**
+		 * Snippet for rendering separator entries.
+		 * Set to `null` to disable automatic separator rendering.
+		 * Defaults to `separator_entry_default` which renders `Contextmenu_Separator`.
+		 */
+		separator_entry?: Snippet<[ComponentProps<typeof Contextmenu_Separator>]> | null;
 		children: Snippet;
 	} = $props();
 
@@ -336,8 +343,7 @@
 			{:else if p.snippet === 'text'}
 				{@render text_entry?.(p.props)}
 			{:else if p.snippet === 'separator'}
-				<!-- TODO same pattern as link/text -->
-				<Contextmenu_Separator />
+				{@render separator_entry?.(p.props)}
 			{/if}
 		{/each}
 	</ul>
@@ -349,6 +355,10 @@
 
 {#snippet text_entry_default(props: ComponentProps<typeof Contextmenu_Text_Entry>)}
 	<Contextmenu_Text_Entry {...props} />
+{/snippet}
+
+{#snippet separator_entry_default(props: ComponentProps<typeof Contextmenu_Separator>)}
+	<Contextmenu_Separator {...props} />
 {/snippet}
 
 <style>

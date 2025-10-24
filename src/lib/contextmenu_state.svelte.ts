@@ -3,6 +3,7 @@ import type {Result} from '@ryanatkn/belt/result.js';
 import {is_promise} from '@ryanatkn/belt/async.js';
 import type {ActionReturn} from 'svelte/action';
 import {BROWSER} from 'esm-env';
+import type {SvelteHTMLElements} from 'svelte/elements';
 
 import {Dimensions} from '$lib/dimensions.svelte.js';
 import {create_context} from '$lib/context_helpers.js';
@@ -14,7 +15,7 @@ export type Contextmenu_Params =
 	// TODO maybe this should be generic?
 	| {snippet: 'link'; props: {href: string; icon?: string}}
 	| {snippet: 'text'; props: {content: string; icon: string; run: Contextmenu_Run}}
-	| {snippet: 'separator'};
+	| {snippet: 'separator'; props: SvelteHTMLElements['li']};
 
 export type Contextmenu_Activate_Result =
 	| void

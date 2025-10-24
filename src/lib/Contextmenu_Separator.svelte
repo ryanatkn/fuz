@@ -1,4 +1,10 @@
-<li role="separator" aria-orientation="vertical" class="contextmenu_separator"></li>
+<script lang="ts">
+	import type {SvelteHTMLElements} from 'svelte/elements';
+
+	const {...rest}: SvelteHTMLElements['li'] = $props();
+</script>
+
+<li role="separator" aria-orientation="vertical" {...rest} class:contextmenu_separator={true}></li>
 
 <style>
 	.contextmenu_separator {
