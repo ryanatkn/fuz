@@ -139,6 +139,7 @@ export const src_json: Src_Json = {
 				{name: 'contextmenu_context', kind: 'variable'},
 				{name: 'contextmenu_submenu_context', kind: 'variable'},
 				{name: 'contextmenu_dimensions_context', kind: 'variable'},
+				{name: 'contextmenu_check_global_root', kind: 'function'},
 			],
 		},
 		'./csp_of_ryanatkn.js': {

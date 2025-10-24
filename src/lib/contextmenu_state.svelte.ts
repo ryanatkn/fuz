@@ -468,3 +468,37 @@ export const contextmenu_context = create_context<Contextmenu_State>();
 export const contextmenu_submenu_context = create_context<Submenu_State>();
 
 export const contextmenu_dimensions_context = create_context(() => new Dimensions());
+
+// Global registry of non-scoped contextmenu roots (only used in DEV)
+const non_scoped_roots: Set<symbol> = new Set();
+
+/**
+ * Registers a contextmenu root and warns if multiple non-scoped roots are detected.
+ * Only active in development mode. Automatically handles cleanup on unmount.
+ *
+ * @param get_scoped - Getter function that returns the current scoped value
+ */
+export const contextmenu_check_global_root = (get_scoped: () => boolean): void => {
+	const id = Symbol('contextmenu_root');
+
+	$effect(() => {
+		if (!get_scoped()) {
+			// Register as global (non-scoped)
+			non_scoped_roots.add(id);
+
+			if (non_scoped_roots.size > 1) {
+				// eslint-disable-next-line no-console
+				console.error(
+					`Detected multiple non-scoped contextmenu roots (${non_scoped_roots.size} mounted). ` +
+						'Only one global contextmenu root should be active at a time. ' +
+						'Are you missing a `scoped` attribute?',
+				);
+			}
+		}
+
+		// Cleanup: unregister when scoped changes or component unmounts
+		return () => {
+			non_scoped_roots.delete(id);
+		};
+	});
+};

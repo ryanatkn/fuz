@@ -18,12 +18,14 @@
 	 * and relies on the standard `contextmenu` event.
 	 */
 	import {swallow} from '@ryanatkn/belt/dom.js';
+	import {DEV} from 'esm-env';
 	import type {ComponentProps, Snippet} from 'svelte';
 
 	import {
 		contextmenu_context,
 		contextmenu_dimensions_context,
 		Contextmenu_State,
+		contextmenu_check_global_root,
 		open_contextmenu,
 	} from '$lib/contextmenu_state.svelte.js';
 	import Contextmenu_Link_Entry from '$lib/Contextmenu_Link_Entry.svelte';
@@ -130,6 +132,8 @@
 	} = $props();
 
 	contextmenu_context.set(contextmenu);
+
+	if (DEV) contextmenu_check_global_root(() => scoped); // TODO @many is this import tree-shaken?
 
 	let el: HTMLElement | undefined = $state();
 
