@@ -41,10 +41,6 @@
 			to the timeout-based gesture detection (because it's not a direct user action)
 		</li>
 		<li>a longpress is cancelled if you move the touch past a threshold before it triggers</li>
-		<li>
-			the contextmenu closes if you move past a threshold without lifting the longpress touch that
-			opened it
-		</li>
 		<li>opt into this version only if you need iOS Safari support</li>
 	</ul>
 	<Root_Component_Selector />

@@ -28,7 +28,7 @@ export default {
 	kit: {
 		adapter: adapter(),
 		paths: {relative: false}, // use root-absolute paths: https://kit.svelte.dev/docs/configuration#paths
-		alias: {$routes: 'src/routes'},
+		alias: {$routes: 'src/routes', $test: 'src/test'},
 		csp: {
 			directives: {
 				'default-src': ['none'],

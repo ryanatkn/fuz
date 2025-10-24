@@ -156,15 +156,25 @@
 	);
 
 	// State for tap-then-longpress bypass detection
-	let touch_x: number | undefined = $state();
-	let touch_y: number | undefined = $state();
-	let longpress_start_time: number | undefined = $state();
+	// These values are `undefined` when unused, and `null` after being reset.
+	let touch_x: number | undefined | null = $state();
+	let touch_y: number | undefined | null = $state();
+	let longpress_start_time: number | undefined | null = $state();
 	let longpress_bypass: boolean | undefined = $state();
+	let tap_tracking_timeout: NodeJS.Timeout | undefined | null = $state();
 
 	const on_window_contextmenu = (e: MouseEvent) => {
 		// Handle the tap-then-longpress bypass gesture
 		if (longpress_bypass) {
+			// Clear all tap tracking state after consuming the bypass
 			longpress_bypass = false;
+			longpress_start_time = null;
+			touch_x = null;
+			touch_y = null;
+			if (tap_tracking_timeout != null) {
+				clearTimeout(tap_tracking_timeout);
+				tap_tracking_timeout = null;
+			}
 			return;
 		}
 		const {target} = e;
@@ -206,10 +216,15 @@
 			touches.length !== 1 ||
 			!contextmenu_is_valid_target(target, e.shiftKey)
 		) {
-			// Reset state if conditions aren't met
-			longpress_start_time = undefined;
-			touch_x = undefined;
-			touch_y = undefined;
+			// Reset all state if conditions aren't met
+			longpress_start_time = null;
+			touch_x = null;
+			touch_y = null;
+			longpress_bypass = false;
+			if (tap_tracking_timeout != null) {
+				clearTimeout(tap_tracking_timeout);
+				tap_tracking_timeout = null;
+			}
 			return;
 		}
 
@@ -217,15 +232,19 @@
 
 		// Check if this is a tap-then-longpress gesture
 		if (
-			longpress_start_time !== undefined &&
+			longpress_start_time != null &&
 			performance.now() - longpress_start_time < tap_then_longpress_duration &&
 			Math.hypot(clientX - touch_x!, clientY - touch_y!) < tap_then_longpress_move_tolerance
 		) {
-			// This is a tap-then-longpress - set bypass flag
+			// This is a tap-then-longpress - set bypass flag and clear tap tracking
 			longpress_bypass = true;
-			longpress_start_time = undefined;
-			touch_x = undefined;
-			touch_y = undefined;
+			longpress_start_time = null;
+			touch_x = null;
+			touch_y = null;
+			if (tap_tracking_timeout != null) {
+				clearTimeout(tap_tracking_timeout);
+				tap_tracking_timeout = null;
+			}
 			return;
 		}
 
@@ -233,6 +252,17 @@
 		longpress_start_time = performance.now();
 		touch_x = clientX;
 		touch_y = clientY;
+
+		// Set timeout to clear stale tap tracking after the detection window expires
+		if (tap_tracking_timeout != null) {
+			clearTimeout(tap_tracking_timeout);
+		}
+		tap_tracking_timeout = setTimeout(() => {
+			longpress_start_time = null;
+			touch_x = null;
+			touch_y = null;
+			tap_tracking_timeout = null;
+		}, tap_then_longpress_duration);
 	};
 
 	/**
@@ -240,10 +270,14 @@
 	 */
 	const touchcancel = (): void => {
 		// Reset all bypass detection state
-		longpress_start_time = undefined;
-		touch_x = undefined;
-		touch_y = undefined;
+		longpress_start_time = null;
+		touch_x = null;
+		touch_y = null;
 		longpress_bypass = false;
+		if (tap_tracking_timeout != null) {
+			clearTimeout(tap_tracking_timeout);
+			tap_tracking_timeout = null;
+		}
 	};
 
 	// Passive listener that runs during the event's `capture` phase

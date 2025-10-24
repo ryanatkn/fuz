@@ -179,28 +179,52 @@
 	let longpress_timeout: NodeJS.Timeout | undefined | null = $state();
 	let longpress_opened: boolean | undefined = $state();
 	let longpress_bypass: boolean | undefined = $state();
+	let tap_tracking_timeout: NodeJS.Timeout | undefined | null = $state();
 
-	const reset_longpress = (): void => {
+	/**
+	 * Resets only the longpress timeout state, preserving tap tracking for bypass detection.
+	 * This is called when a touch ends before longpress completes.
+	 */
+	const reset_longpress_timeout = (): void => {
 		longpress_opened = false;
-		if (longpress_timeout == null) return;
-		clearTimeout(longpress_timeout);
-		longpress_timeout = null;
-		// Also reset bypass detection state to prevent stale tap tracking
+		if (longpress_timeout != null) {
+			clearTimeout(longpress_timeout);
+			longpress_timeout = null;
+		}
+		// Don't clear tap tracking state here - we need it for tap-then-longpress detection
+	};
+
+	/**
+	 * Clears tap tracking state and bypass flag used for bypass detection.
+	 */
+	const reset_tap_tracking = (): void => {
 		longpress_start_time = null;
 		touch_x = null;
 		touch_y = null;
 		longpress_bypass = false;
+		if (tap_tracking_timeout != null) {
+			clearTimeout(tap_tracking_timeout);
+			tap_tracking_timeout = null;
+		}
+	};
+
+	/**
+	 * Resets all state - both longpress and tap tracking.
+	 */
+	const reset_all = (): void => {
+		reset_longpress_timeout();
+		reset_tap_tracking();
 	};
 
 	const on_window_contextmenu = (e: MouseEvent) => {
 		// handle the tap-then-longpress bypass gesture
 		if (longpress_bypass) {
-			longpress_bypass = false;
+			reset_tap_tracking(); // Clear bypass state after using it
 			return;
 		}
 		// handle touch devices that trigger `'contextmenu'` slower than our longpress
 		if (longpress_opened) {
-			reset_longpress();
+			reset_all();
 			swallow(e);
 			return;
 		}
@@ -220,7 +244,7 @@
 			})
 		) {
 			swallow(e);
-			reset_longpress(); // handle touch devices that trigger `'contextmenu'` faster than our longpress
+			reset_all(); // handle touch devices that trigger `'contextmenu'` faster than our longpress
 		}
 	};
 
@@ -233,19 +257,17 @@
 			touches.length !== 1 ||
 			!contextmenu_is_valid_target(target, e.shiftKey)
 		) {
-			// Reset bypass detection state when conditions aren't met
-			longpress_start_time = null;
-			touch_x = null;
-			touch_y = null;
+			// Reset all state when conditions aren't met
+			reset_all();
 			return;
 		}
 
 		const {clientX, clientY} = touches[0];
 
 		// Bypass the contextmenu behavior in certain conditions including a tap-and-longpress gesture.
-		// To handle double-tap-and-hold we need to see if `longpress_start_time`
+		// To handle tap-then-longpress we need to see if `longpress_start_time`
 		// is less than `tap_then_longpress_duration`, and also allow a small amount
-		// of movement of pointer movement, `tap_then_longpress_move_tolerance`.
+		// of pointer movement, `tap_then_longpress_move_tolerance`.
 		// The builtin `'contextmenu'` event will still fire for non-iOS browsers,
 		// so `longpress_bypass` is used to tell the handler `on_window_contextmenu` to exit early.
 		if (bypass_with_tap_then_longpress) {
@@ -254,17 +276,33 @@
 				performance.now() - longpress_start_time < tap_then_longpress_duration &&
 				Math.hypot(clientX - touch_x!, clientY - touch_y!) < tap_then_longpress_move_tolerance
 			) {
+				// Tap-then-longpress detected! Set bypass and clear tap tracking state.
+				// Must manually clear state (not call reset_tap_tracking) to preserve bypass flag.
 				longpress_bypass = true;
 				longpress_start_time = null;
+				touch_x = null;
+				touch_y = null;
+				if (tap_tracking_timeout != null) {
+					clearTimeout(tap_tracking_timeout); // Prevent timeout from clearing bypass
+					tap_tracking_timeout = null;
+				}
 				return;
 			}
+			// Record this tap for potential future bypass detection
 			longpress_start_time = performance.now();
+			// Set timeout to clear stale tap tracking after the detection window expires
+			if (tap_tracking_timeout != null) {
+				clearTimeout(tap_tracking_timeout);
+			}
+			tap_tracking_timeout = setTimeout(() => {
+				reset_tap_tracking();
+			}, tap_then_longpress_duration);
 		}
 
 		touch_x = clientX;
 		touch_y = clientY;
 
-		if (longpress_timeout != null) reset_longpress();
+		if (longpress_timeout != null) reset_longpress_timeout();
 		longpress_timeout = setTimeout(() => {
 			longpress_opened = true;
 			open_contextmenu(target, touch_x! + open_offset_x, touch_y! + open_offset_y, contextmenu, {
@@ -277,22 +315,37 @@
 
 	// Needed for the iOS workaround, is passive.
 	const touchmove = (e: TouchEvent): void => {
-		if (longpress_timeout == null) return;
+		// Exit early if no pending longpress or menu is already open
+		if (longpress_timeout == null || contextmenu.opened) return;
 		const {touches} = e;
 		if (touches.length !== 1) return;
 		const {clientX, clientY} = touches[0];
 		const distance = Math.hypot(clientX - touch_x!, clientY - touch_y!);
 		if (distance > longpress_move_tolerance) {
-			if (contextmenu.opened) contextmenu.close();
-			reset_longpress();
+			reset_longpress_timeout();
 		}
 	};
 	// Needed for the iOS workaround, can't be passive.
 	const touchend = (e: TouchEvent): void => {
-		if (longpress_timeout == null) return;
-		// This stops triggering the first item on open.
-		if (longpress_opened) swallow(e);
-		reset_longpress();
+		// Clear longpress timeout if it exists
+		if (longpress_timeout != null) {
+			// This stops triggering the first item on open.
+			if (longpress_opened) swallow(e);
+			reset_longpress_timeout();
+		}
+		// Clear bypass flag if it was set but the contextmenu event hasn't fired yet
+		// This handles the case where bypass is detected but user lifts finger before native menu opens
+		if (longpress_bypass) {
+			reset_tap_tracking();
+		}
+		// Note: We don't clear tap tracking state here - we preserve it for tap-then-longpress detection
+	};
+
+	/**
+	 * Handle touchcancel - this should reset all state since the gesture was interrupted.
+	 */
+	const touchcancel = (): void => {
+		reset_all();
 	};
 
 	// Passive listener that runs during the event's `capture` phase
@@ -312,7 +365,7 @@
 	ontouchstartcapture={scoped ? undefined : touchstart}
 	ontouchmovecapture={scoped ? undefined : touchmove}
 	ontouchendcapture={scoped ? undefined : touchend}
-	ontouchcancelcapture={scoped ? undefined : touchend}
+	ontouchcancelcapture={scoped ? undefined : touchcancel}
 	onmousedown={!contextmenu.opened ? undefined : mousedown}
 	onkeydown={!contextmenu.opened ? undefined : keydown}
 />
@@ -325,7 +378,7 @@
 		ontouchstartcapture={touchstart}
 		ontouchmovecapture={touchmove}
 		ontouchendcapture={touchend}
-		ontouchcancelcapture={touchend}
+		ontouchcancelcapture={touchcancel}
 	>
 		{@render children()}
 	</div>
