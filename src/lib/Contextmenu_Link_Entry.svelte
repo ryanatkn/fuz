@@ -60,6 +60,11 @@
 		{href}
 		{rel}
 		onclick={disabled ? undefined : () => contextmenu.close()}
+		oncontextmenu={(e) => {
+			// Stop propagation to prevent the window handler from opening another Fuz contextmenu.
+			// Allow default to show browser's native contextmenu for the link.
+			e.stopPropagation();
+		}}
 		onmouseenter={disabled
 			? undefined
 			: (e) => {
