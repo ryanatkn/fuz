@@ -70,12 +70,12 @@
 		⚠️ Creating and editing themes at runtime is a work in progress i.e. totally unfinished.
 	</aside>
 	<header>
-		<div class="variables_header">
+		<div class="flex_1">
 			<p>variables: {light_count} light, {dark_count} dark</p>
 			<button type="button" class="width_100" onclick={add_variable} disabled>add a variable</button
 			>
 		</div>
-		<fieldset>
+		<fieldset class="flex_1">
 			<label>
 				<div class="title">name</div>
 				<input bind:value={new_name} placeholder=">" />
@@ -125,10 +125,6 @@
 		display: flex;
 		gap: 1rem;
 		margin-bottom: var(--space_md);
-	}
-	.variables_header,
-	form {
-		flex: 1;
 	}
 	.content {
 		display: flex;
