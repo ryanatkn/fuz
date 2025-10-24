@@ -96,8 +96,8 @@
 	<h4>Mouse and keyboard:</h4>
 	<ul>
 		<li>
-			rightclick opens the Fuz contextmenu and not the system contextmenu (minus exceptions for
-			input/textarea/contenteditable, which may change)
+			rightclick opens the Fuz contextmenu and not the system contextmenu (minus current exceptions
+			for input/textarea/contenteditable)
 		</li>
 		<li>holding Shift opens the system contextmenu, bypassing the Fuz contextmenu</li>
 		<li>
@@ -109,15 +109,15 @@
 	<h4>Touch devices:</h4>
 	<ul>
 		<li>
-			longpress opens the Fuz contextmenu and not the system contextmenu (minus exceptions for
-			input/textarea/contenteditable, which may change)
+			longpress opens the Fuz contextmenu and not the system contextmenu (minus current exceptions
+			for input/textarea/contenteditable)
 		</li>
 		<li>
 			double-tap-and-hold (tap-then-longpress) opens the system contextmenu or performs other
 			default behavior like selecting text, bypassing the Fuz contextmenu
 		</li>
 		<li>
-			double-tap-and-hold can't work for clickable elements like links, longpress on the first
+			double-tap-and-hold can't work for clickable elements like links; longpress on the first
 			contextmenu entry for those cases (double-longpress)
 		</li>
 	</ul>

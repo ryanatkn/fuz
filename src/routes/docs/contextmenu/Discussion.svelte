@@ -59,8 +59,8 @@
 	<ul>
 		<li>
 			The Fuz contextmenu only replaces the system contextmenu when the DOM tree has defined
-			behaviors, with the exception of <code>a</code> links, which implicitly have contextmenu behaviors.
-			(and this may include other interactive elements in the future)
+			behaviors. Note that by default, <code>a</code> links implicitly have contextmenu behaviors. (and
+			possibly other interactive elements will in the future)
 		</li>
 		<li>
 			The Fuz contextmenu does not open on elements that allow clipboard pasting like inputs,
@@ -72,14 +72,7 @@
 			To bypass on touch devices (e.g. to select text), use double-tap-and-hold instead of
 			tap-and-hold.
 		</li>
-		<li>
-			For links on touch devices, they appear as the first contextmenu entry - longpressing this
-			entry performs the default browser action.
-		</li>
-		<li>
-			Triggering the contextmenu inside the Fuz contextmenu shows the system contextmenu
-			(double-rightclick/longpress).
-		</li>
+		<li>Triggering the contextmenu inside the Fuz contextmenu shows the system contextmenu.</li>
 	</ul>
 	<p>
 		See also the <Mdn_Link path="Web/API/Element/contextmenu_event" /> docs and the
