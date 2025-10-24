@@ -46,11 +46,11 @@
 	<fieldset>
 		<label class="row">
 			<input type="checkbox" bind:checked={link_entry_disabled} />
-			disable automatic link entries, <code>link_entry={'{'}null}</code>
+			<span>disable automatic link entries, <code>link_entry={'{'}null}</code></span>
 		</label>
 		<label class="row">
 			<input type="checkbox" bind:checked={text_entry_disabled} />
-			disable automatic copy text entries, <code>text_entry={'{'}null}</code>
+			<span>disable automatic copy text entries, <code>text_entry={'{'}null}</code></span>
 		</label>
 	</fieldset>
 
