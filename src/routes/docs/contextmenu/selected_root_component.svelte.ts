@@ -5,7 +5,7 @@ import Contextmenu_Root_For_Safari_Compatibility from '$lib/Contextmenu_Root_For
 export type Contextmenu_Root_Variant = 'standard' | 'compat';
 
 export class Selected_Contextmenu_Root_Component {
-	variant: Contextmenu_Root_Variant = $state()!;
+	variant: Contextmenu_Root_Variant = $state('standard');
 
 	component = $derived(
 		this.variant === 'standard' ? Contextmenu_Root : Contextmenu_Root_For_Safari_Compatibility,

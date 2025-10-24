@@ -84,7 +84,7 @@
 	</div>
 
 	{#if custom_entry_included || !link_entry_disabled || !text_entry_disabled}
-		<p><strong>Expected:</strong> The Fuz contextmenu will open and show:</p>
+		<p><strong>Expected:</strong> the Fuz contextmenu will open and show:</p>
 		<ul>
 			{#if custom_entry_included}
 				<li>custom "some custom entry" entry</li>
@@ -98,8 +98,8 @@
 		</ul>
 	{:else}
 		<p>
-			<strong>Expected:</strong> No behaviors defined -- the system contextmenu will show (Fuz contextmenu
-			is bypassed).
+			<strong>Expected:</strong> no behaviors defined. The system contextmenu will show, bypassing the
+			Fuz contextmenu.
 		</p>
 	{/if}
 </Tome_Section>
