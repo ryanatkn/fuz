@@ -62,7 +62,10 @@
 		onclick={disabled ? undefined : () => contextmenu.close()}
 		oncontextmenu={(e) => {
 			// Stop propagation to prevent the window handler from opening another Fuz contextmenu.
-			// Allow default to show browser's native contextmenu for the link.
+			// Without this, the event would bubble to the window handler, which calls
+			// `query_contextmenu_params` (contextmenu_state.svelte.ts:410), which auto-detects
+			// `<a>` tags and reopens the Fuz contextmenu instead of showing the browser's native menu.
+			// Allow default behavior to show the browser's native contextmenu for the link.
 			e.stopPropagation();
 		}}
 		onmouseenter={disabled

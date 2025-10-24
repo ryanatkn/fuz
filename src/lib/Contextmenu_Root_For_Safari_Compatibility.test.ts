@@ -1217,5 +1217,108 @@ describe('Contextmenu_Root_For_Safari_Compatibility', () => {
 			assert.strictEqual(contextmenu.opened, false);
 			target.remove();
 		});
+
+		describe('link entry handling', () => {
+			test('right-clicking on link entry stops propagation', () => {
+				mounted = mount_with_contextmenu();
+
+				const {container} = mounted;
+
+				// Open menu with a link entry
+				contextmenu.open(
+					[
+						{
+							snippet: 'link',
+							props: {href: 'https://www.fuz.dev/'},
+						},
+					],
+					100,
+					200,
+				);
+				flushSync();
+
+				const menu = container.querySelector('.contextmenu');
+				assert.ok(menu);
+
+				const link = menu.querySelector('a[href="https://www.fuz.dev/"]');
+				assert.ok(link, 'link entry should be rendered');
+
+				// Track if window handler was called
+				let window_handler_called = false;
+				const window_listener = () => {
+					window_handler_called = true;
+				};
+				window.addEventListener('contextmenu', window_listener);
+
+				try {
+					const event = create_contextmenu_event(150, 250);
+					set_event_target(event, link);
+					link.dispatchEvent(event);
+
+					// Window handler should not be called due to stopPropagation
+					assert.strictEqual(
+						window_handler_called,
+						false,
+						'event should not propagate to window handler',
+					);
+
+					assert.strictEqual(
+						event.defaultPrevented,
+						false,
+						'event should not be prevented to allow browser contextmenu',
+					);
+				} finally {
+					window.removeEventListener('contextmenu', window_listener);
+				}
+			});
+
+			test('link entry works with longpress on touch devices', async () => {
+				mounted = mount_with_contextmenu(undefined, {
+					longpress_duration: 500,
+				});
+
+				const {container} = mounted;
+
+				// Open menu with link entry via longpress
+				const target = document.createElement('div');
+				document.body.appendChild(target);
+
+				await setup_contextmenu_action(target, [
+					{
+						snippet: 'link',
+						props: {href: 'https://touch.fuz.dev/'},
+					},
+				]);
+
+				const touchstart = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
+				set_event_target(touchstart, target);
+				window.dispatchEvent(touchstart);
+
+				vi.advanceTimersByTime(500);
+				flushSync();
+
+				assert.strictEqual(contextmenu.opened, true);
+
+				const menu = container.querySelector('.contextmenu');
+				assert.ok(menu);
+
+				const link = menu.querySelector('a[href="https://touch.fuz.dev/"]');
+				assert.ok(link, 'link should be rendered');
+
+				const original_x = contextmenu.x;
+				const original_y = contextmenu.y;
+
+				// Right-click on the link
+				const contextmenu_event = create_contextmenu_event(150, 250);
+				set_event_target(contextmenu_event, link);
+				link.dispatchEvent(contextmenu_event);
+
+				// Position should not change (didn't reopen)
+				assert.strictEqual(contextmenu.x, original_x);
+				assert.strictEqual(contextmenu.y, original_y);
+
+				target.remove();
+			});
+		});
 	});
 });
