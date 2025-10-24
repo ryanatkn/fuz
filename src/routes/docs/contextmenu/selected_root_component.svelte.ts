@@ -19,16 +19,6 @@ export class Selected_Contextmenu_Root_Component {
 
 	constructor(initial_variant: Contextmenu_Root_Variant = 'standard') {
 		this.variant = initial_variant;
-		console.log('[Selected_Contextmenu_Root_Component] constructed with variant:', initial_variant); // eslint-disable-line no-console
-
-		$effect(() => {
-			console.log(
-				'[Selected_Contextmenu_Root_Component] variant changed to:',
-				this.variant,
-				'name:',
-				this.name,
-			); // eslint-disable-line no-console
-		});
 	}
 }
 
