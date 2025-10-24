@@ -37,11 +37,64 @@
         }
       ]
     },
+    "./contextmenu_helpers.js": {
+      "path": "contextmenu_helpers.ts",
+      "declarations": [
+        {
+          "name": "CONTEXTMENU_DEFAULT_OPEN_OFFSET_X",
+          "kind": "variable"
+        },
+        {
+          "name": "CONTEXTMENU_DEFAULT_OPEN_OFFSET_Y",
+          "kind": "variable"
+        },
+        {
+          "name": "CONTEXTMENU_DEFAULT_TAP_THEN_LONGPRESS_DURATION",
+          "kind": "variable"
+        },
+        {
+          "name": "CONTEXTMENU_DEFAULT_TAP_THEN_LONGPRESS_MOVE_TOLERANCE",
+          "kind": "variable"
+        },
+        {
+          "name": "CONTEXTMENU_DEFAULT_LONGPRESS_DURATION",
+          "kind": "variable"
+        },
+        {
+          "name": "CONTEXTMENU_DEFAULT_LONGPRESS_MOVE_TOLERANCE",
+          "kind": "variable"
+        },
+        {
+          "name": "contextmenu_is_valid_target",
+          "kind": "function"
+        },
+        {
+          "name": "contextmenu_create_keyboard_handlers",
+          "kind": "function"
+        },
+        {
+          "name": "contextmenu_create_keydown_handler",
+          "kind": "function"
+        },
+        {
+          "name": "contextmenu_calculate_constrained_x",
+          "kind": "function"
+        },
+        {
+          "name": "contextmenu_calculate_constrained_y",
+          "kind": "function"
+        }
+      ]
+    },
     "./contextmenu_state.svelte.js": {
       "path": "contextmenu_state.svelte.ts",
       "declarations": [
         {
           "name": "Contextmenu_Params",
+          "kind": "type"
+        },
+        {
+          "name": "Contextmenu_Activate_Result",
           "kind": "type"
         },
         {
@@ -77,6 +130,10 @@
           "kind": "function"
         },
         {
+          "name": "Open_Contextmenu_Options",
+          "kind": "type"
+        },
+        {
           "name": "open_contextmenu",
           "kind": "function"
         },
@@ -91,6 +148,10 @@
         {
           "name": "contextmenu_dimensions_context",
           "kind": "variable"
+        },
+        {
+          "name": "contextmenu_check_global_root",
+          "kind": "function"
         }
       ]
     },
@@ -100,6 +161,47 @@
         {
           "name": "csp_trusted_sources_of_ryanatkn",
           "kind": "variable"
+        }
+      ]
+    },
+    "./csp_test_helpers.js": {
+      "path": "csp_test_helpers.ts",
+      "declarations": [
+        {
+          "name": "TEST_SOURCES",
+          "kind": "variable"
+        },
+        {
+          "name": "create_test_source",
+          "kind": "function"
+        },
+        {
+          "name": "create_test_source_with_directives",
+          "kind": "function"
+        },
+        {
+          "name": "create_test_source_with_both",
+          "kind": "function"
+        },
+        {
+          "name": "assert_source_in_directive",
+          "kind": "function"
+        },
+        {
+          "name": "assert_source_not_in_directive",
+          "kind": "function"
+        },
+        {
+          "name": "assert_directive_exists",
+          "kind": "function"
+        },
+        {
+          "name": "assert_directive_not_exists",
+          "kind": "function"
+        },
+        {
+          "name": "assert_directive_equals",
+          "kind": "function"
         }
       ]
     },
@@ -260,6 +362,14 @@
         {
           "name": "DEFAULT_LIBRARY_PATH",
           "kind": "variable"
+        },
+        {
+          "name": "get_next_docs_link_order",
+          "kind": "function"
+        },
+        {
+          "name": "reset_docs_link_order",
+          "kind": "function"
         },
         {
           "name": "to_docs_path_info",
@@ -433,6 +543,42 @@
         }
       ]
     },
+    "./test_helpers.js": {
+      "path": "test_helpers.ts",
+      "declarations": [
+        {
+          "name": "mount_component",
+          "kind": "function"
+        },
+        {
+          "name": "unmount_component",
+          "kind": "function"
+        },
+        {
+          "name": "create_contextmenu_event",
+          "kind": "function"
+        },
+        {
+          "name": "create_keyboard_event",
+          "kind": "function"
+        },
+        {
+          "name": "create_mouse_event",
+          "kind": "function"
+        },
+        {
+          "name": "set_event_target",
+          "kind": "function"
+        },
+        {
+          "name": "create_touch_event",
+          "kind": "function"
+        }
+      ]
+    },
+    "./test_setup.js": {
+      "path": "test_setup.ts"
+    },
     "./themer.svelte.js": {
       "path": "themer.svelte.ts",
       "declarations": [
@@ -575,8 +721,26 @@
         }
       ]
     },
+    "./Contextmenu_Root_For_Safari_Compatibility.svelte": {
+      "path": "Contextmenu_Root_For_Safari_Compatibility.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
     "./Contextmenu_Root.svelte": {
       "path": "Contextmenu_Root.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Contextmenu_Separator.svelte": {
+      "path": "Contextmenu_Separator.svelte",
       "declarations": [
         {
           "name": "default",
@@ -721,6 +885,15 @@
     },
     "./Docs.svelte": {
       "path": "Docs.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Glyph.svelte": {
+      "path": "Glyph.svelte",
       "declarations": [
         {
           "name": "default",
