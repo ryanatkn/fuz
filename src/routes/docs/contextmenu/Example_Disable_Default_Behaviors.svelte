@@ -63,8 +63,8 @@
 		{#if custom_entry_included}
 			<Contextmenu>
 				{#snippet entries()}
-					<Contextmenu_Entry run={() => void (toggled = !toggled)}
-						>Some custom entry</Contextmenu_Entry
+					<Contextmenu_Entry icon=">" run={() => void (toggled = !toggled)}
+						>some custom entry</Contextmenu_Entry
 					>
 				{/snippet}
 				{@render test_area()}
@@ -79,7 +79,7 @@
 	<div class="mb_md">
 		<label class="row">
 			<input type="checkbox" bind:checked={custom_entry_included} />
-			include a custom entry (ensuring the Fuz contextmenu)
+			include a custom entry, which ensures the Fuz contextmenu is used
 		</label>
 	</div>
 
@@ -87,7 +87,7 @@
 		<p>With the current settings, the contextmenu will <strong>open</strong> and show:</p>
 		<ul>
 			{#if custom_entry_included}
-				<li>custom "Some custom entry" entry</li>
+				<li>custom "some custom entry" entry</li>
 			{/if}
 			{#if !text_entry_disabled}
 				<li>"copy text" entry when text is selected</li>
@@ -107,8 +107,8 @@
 	<div class="panel p_md mb_lg">
 		<p bind:this={text_el}>
 			Try <button type="button" onclick={select_text} class:color_h={toggled}
-				>selecting this text</button
-			> and opening the contextmenu.
+				>selecting some text</button
+			> and opening the contextmenu in this panel.
 		</p>
 		<p>
 			Try opening the contextmenu on <a href={resolve('/')}>this link</a>.
