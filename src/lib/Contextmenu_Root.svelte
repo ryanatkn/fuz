@@ -1,23 +1,3 @@
-<!--
-	Contextmenu_Root - Simplified default contextmenu implementation
-
-	This is the default contextmenu root component. It relies entirely on the standard
-	browser `contextmenu` event, resulting in a clean ~220 line implementation that works
-	perfectly on all modern desktop browsers.
-
-	Does NOT work on iOS Safari, which doesn't fire the `contextmenu` event as of 2025
-	(see https://bugs.webkit.org/show_bug.cgi?id=213953).
-
-	This is the recommended default because:
-	- Simpler, more maintainable code (~220 lines vs ~430)
-	- No mobile-specific hacks or edge cases
-	- Easier to understand and customize
-	- Most web apps target desktop browsers
-
-	If you need iOS Safari support, use `Contextmenu_Root_For_Safari_Compatibility.svelte`
-	instead. That version implements custom touch handlers and longpress detection at the
-	cost of significantly more complexity.
--->
 <script lang="ts">
 	/**
 	 * This is the default contextmenu root component.
