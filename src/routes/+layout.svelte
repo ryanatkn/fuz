@@ -26,7 +26,7 @@
 
 	const {children}: Props = $props();
 
-	pkg_context.set(parse_pkg(package_json, src_json as any)); // TODO type
+	pkg_context.set(parse_pkg(package_json, src_json as any)); // TODO BLOCK type
 
 	// Initialize tooltip state
 	tooltip_context.set(new Tooltip_State());
