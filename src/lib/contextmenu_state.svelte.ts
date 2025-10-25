@@ -90,7 +90,7 @@ export class Contextmenu_State {
 	 * If an initial layout is provided, control is deferred externally.
 	 * Otherwise the layout syncs to the page dimensions.
 	 */
-	initial_layout: Dimensions | undefined; // TODO $state?
+	readonly has_custom_layout: boolean;
 
 	// State for external consumers.
 	opened: boolean = $state(false);
@@ -130,10 +130,11 @@ export class Contextmenu_State {
 		return !selected.disabled();
 	});
 
-	constructor(options?: Contextmenu_State_Options) {
-		this.initial_layout = options?.layout;
+	constructor(options: Contextmenu_State_Options = EMPTY_OBJECT) {
+		const {layout} = options;
 
-		this.layout = this.initial_layout ?? new Dimensions();
+		this.has_custom_layout = !!layout;
+		this.layout = layout ?? new Dimensions();
 	}
 
 	open(params: Array<Contextmenu_Params>, x: number, y: number): void {

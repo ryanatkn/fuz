@@ -21,14 +21,14 @@ describe('Contextmenu_State - Initialization', () => {
 
 		test('creates layout when no initial layout provided', () => {
 			assert.ok(contextmenu.layout);
-			assert.strictEqual(contextmenu.initial_layout, undefined);
+			assert.strictEqual(contextmenu.has_custom_layout, false);
 		});
 
 		test('uses provided initial layout', () => {
 			const custom_layout = {width: 800, height: 600};
 			const cm = new Contextmenu_State({layout: custom_layout as any});
 			assert.strictEqual(cm.layout, custom_layout);
-			assert.strictEqual(cm.initial_layout, custom_layout);
+			assert.strictEqual(cm.has_custom_layout, true);
 		});
 
 		test('has root_menu initialized', () => {

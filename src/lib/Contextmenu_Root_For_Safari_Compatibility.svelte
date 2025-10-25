@@ -137,23 +137,7 @@
 
 	let el: HTMLElement | undefined = $state();
 
-	const {layout, initial_layout} = $derived(contextmenu);
-
-	// Update the layout unless it's custom.
-	// Custom layouts are when `contextmenu.initial_layout` is the same as `contextmenu.layout`.
-	const custom_layout = $derived(layout === initial_layout);
-	let clientWidth: number | undefined = $state();
-	let clientHeight: number | undefined = $state();
-	$effect(() => {
-		if (!custom_layout && clientWidth !== undefined) {
-			layout.width = clientWidth;
-		}
-	});
-	$effect(() => {
-		if (!custom_layout && clientHeight !== undefined) {
-			layout.height = clientHeight;
-		}
-	});
+	const {layout} = $derived(contextmenu);
 
 	const dimensions = contextmenu_dimensions_context.set();
 
@@ -166,6 +150,7 @@
 
 	// TODO maybe show an indicator fade in at these coordinates
 
+	// State for tap-then-longpress bypass detection.
 	// These values are `undefined` when unused, and `null` after being reset.
 	let touch_x: number | undefined | null = $state();
 	let touch_y: number | undefined | null = $state();
@@ -453,9 +438,15 @@
 	{@render children()}
 {/if}
 
-{#if !custom_layout}
-	<div class="contextmenu_layout" bind:clientHeight bind:clientWidth aria-hidden="true"></div>
+{#if !contextmenu.has_custom_layout}
+	<div
+		class="contextmenu_layout"
+		bind:clientWidth={layout.width}
+		bind:clientHeight={layout.height}
+		aria-hidden="true"
+	></div>
 {/if}
+
 <!-- TODO Maybe animate a subtle highlight around the contextmenu as it appears? -->
 {#if contextmenu.opened}
 	<ul
