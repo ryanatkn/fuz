@@ -5,7 +5,7 @@ import type {Contextmenu_State} from '$lib/contextmenu_state.svelte.js';
 // Constants for default prop values
 export const CONTEXTMENU_DEFAULT_OPEN_OFFSET_X = -2;
 export const CONTEXTMENU_DEFAULT_OPEN_OFFSET_Y = -2;
-export const CONTEXTMENU_DEFAULT_BYPASS_WINDOW = 660;
+export const CONTEXTMENU_DEFAULT_BYPASS_WINDOW = 910;
 export const CONTEXTMENU_DEFAULT_BYPASS_MOVE_TOLERANCE = 7;
 export const CONTEXTMENU_DEFAULT_LONGPRESS_DURATION = 633;
 export const CONTEXTMENU_DEFAULT_LONGPRESS_MOVE_TOLERANCE = 21;
