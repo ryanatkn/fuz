@@ -58,6 +58,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Link Entry Handling (Safar
 			set_event_target(touchstart, target);
 			window.dispatchEvent(touchstart);
 
+			// Trigger longpress to open contextmenu
 			vi.advanceTimersByTime(CONTEXTMENU_DEFAULT_LONGPRESS_DURATION);
 			await tick();
 
@@ -92,6 +93,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Link Entry Handling (Safar
 			set_event_target(touchstart, link_target);
 			window.dispatchEvent(touchstart);
 
+			// Trigger longpress to open contextmenu on link element
 			vi.advanceTimersByTime(CONTEXTMENU_DEFAULT_LONGPRESS_DURATION);
 			await tick();
 
@@ -121,6 +123,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Link Entry Handling (Safar
 			set_event_target(touchstart, target);
 			window.dispatchEvent(touchstart);
 
+			// Trigger longpress to open contextmenu
 			vi.advanceTimersByTime(CONTEXTMENU_DEFAULT_LONGPRESS_DURATION);
 			await tick();
 			flushSync();
@@ -159,6 +162,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Link Entry Handling (Safar
 			set_event_target(touchstart, target);
 			window.dispatchEvent(touchstart);
 
+			// Trigger longpress to open contextmenu
 			vi.advanceTimersByTime(CONTEXTMENU_DEFAULT_LONGPRESS_DURATION);
 			await tick();
 			flushSync();
@@ -194,6 +198,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Link Entry Handling (Safar
 			set_event_target(touchstart, target);
 			window.dispatchEvent(touchstart);
 
+			// Trigger longpress to open contextmenu
 			vi.advanceTimersByTime(CONTEXTMENU_DEFAULT_LONGPRESS_DURATION);
 			await tick();
 			flushSync();

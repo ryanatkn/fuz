@@ -55,9 +55,11 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Touch Event Handling', () 
 
 			// But timeout should be started - we can't directly observe this,
 			// but advancing time will prove it
+			// Advance partway through longpress duration
 			vi.advanceTimersByTime(100);
 			assert.strictEqual(contextmenu.opened, false); // Still not open
 
+			// Complete the remaining longpress duration
 			vi.advanceTimersByTime(CONTEXTMENU_DEFAULT_LONGPRESS_DURATION - 100);
 			await tick();
 
@@ -86,6 +88,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Touch Event Handling', () 
 
 			assert.strictEqual(contextmenu.opened, false);
 
+			// Advance to custom longpress_duration (300ms)
 			vi.advanceTimersByTime(300);
 			await tick();
 
@@ -118,7 +121,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Touch Event Handling', () 
 			set_event_target(touchmove, target);
 			window.dispatchEvent(touchmove);
 
-			// Advance time - should not open
+			// Advance past longpress duration - should not open due to movement
 			vi.advanceTimersByTime(500);
 			await tick();
 
@@ -150,7 +153,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Touch Event Handling', () 
 			set_event_target(touchmove, target);
 			window.dispatchEvent(touchmove);
 
-			// Advance time - should open
+			// Advance to custom longpress_duration (300ms) - should open despite movement
 			vi.advanceTimersByTime(300);
 			await tick();
 
@@ -174,15 +177,14 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Touch Event Handling', () 
 			set_event_target(touchstart, target);
 			window.dispatchEvent(touchstart);
 
-			// End touch before timeout
-			const partial_time = 200;
-			vi.advanceTimersByTime(partial_time);
+			// End touch before timeout (200ms into longpress)
+			vi.advanceTimersByTime(200);
 			const touchend = create_touch_event('touchend', []);
 			set_event_target(touchend, target);
 			window.dispatchEvent(touchend);
 
 			// Advance remaining time past when it would have opened
-			vi.advanceTimersByTime(CONTEXTMENU_DEFAULT_LONGPRESS_DURATION - partial_time + 100);
+			vi.advanceTimersByTime(CONTEXTMENU_DEFAULT_LONGPRESS_DURATION - 200 + 100);
 			await tick();
 
 			// Should not open
@@ -214,7 +216,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Touch Event Handling', () 
 			set_event_target(event, target);
 			window.dispatchEvent(event);
 
-			// Advance timers - position should remain unchanged
+			// Advance past longpress duration - position should remain unchanged
 			vi.advanceTimersByTime(500);
 			await tick();
 
@@ -242,7 +244,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Touch Event Handling', () 
 			set_event_target(event, target);
 			window.dispatchEvent(event);
 
-			// Should not start longpress
+			// Should not start longpress with multiple touches
 			vi.advanceTimersByTime(500);
 			await tick();
 
@@ -261,6 +263,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Touch Event Handling', () 
 			set_event_target(event, input);
 			window.dispatchEvent(event);
 
+			// Should not start longpress on editable elements
 			vi.advanceTimersByTime(500);
 			await tick();
 
@@ -347,7 +350,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Touch Event Handling', () 
 			set_event_target(touchstart, target);
 			window.dispatchEvent(touchstart);
 
-			// Browser fires contextmenu at 500ms
+			// Browser fires contextmenu at ~500ms (before our 600ms custom longpress)
 			vi.advanceTimersByTime(500);
 			const ctxmenu = create_contextmenu_event(100, 200);
 			set_event_target(ctxmenu, target);
@@ -357,8 +360,8 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Touch Event Handling', () 
 			assert.strictEqual(contextmenu.opened, true);
 			assert.strictEqual(ctxmenu.defaultPrevented, true);
 
-			// Our longpress timeout should not reopen it
-			vi.advanceTimersByTime(100); // Total 600ms
+			// Our longpress timeout should not reopen it (complete to 600ms total)
+			vi.advanceTimersByTime(100);
 			await tick();
 
 			assert.strictEqual(contextmenu.opened, true);
@@ -383,12 +386,12 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Touch Event Handling', () 
 			set_event_target(touchstart, target);
 			window.dispatchEvent(touchstart);
 
-			// Our longpress opens at 400ms
+			// Our custom longpress opens at 400ms (before browser's ~500ms)
 			vi.advanceTimersByTime(400);
 			await tick();
 			assert.strictEqual(contextmenu.opened, true);
 
-			// Browser fires contextmenu at 500ms
+			// Browser fires contextmenu later at ~500ms (100ms after our longpress)
 			vi.advanceTimersByTime(100);
 			const ctxmenu = create_contextmenu_event(100, 200);
 			set_event_target(ctxmenu, target);
@@ -487,13 +490,13 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Touch Event Handling', () 
 			set_event_target(touchstart, target);
 			window.dispatchEvent(touchstart);
 
-			// End touch before longpress
+			// End touch before longpress completes
 			vi.advanceTimersByTime(200);
 			const touchend = create_touch_event('touchend', []);
 			set_event_target(touchend, target);
 			window.dispatchEvent(touchend);
 
-			// Continue advancing time
+			// Continue advancing past when longpress would have triggered
 			vi.advanceTimersByTime(500);
 			await tick();
 
@@ -518,14 +521,15 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Touch Event Handling', () 
 			set_event_target(touchstart1, target);
 			window.dispatchEvent(touchstart1);
 
+			// First tap duration (short tap)
 			vi.advanceTimersByTime(100);
 
 			const touchend1 = create_touch_event('touchend', []);
 			set_event_target(touchend1, target);
 			window.dispatchEvent(touchend1);
 
-			// Second tap quickly (within bypass window)
-			vi.advanceTimersByTime(100); // Total 200ms
+			// Second tap quickly after first tap ends (total 200ms, within bypass window)
+			vi.advanceTimersByTime(100);
 
 			const touchstart2 = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
 			set_event_target(touchstart2, target);
@@ -565,13 +569,13 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Touch Event Handling', () 
 			set_event_target(touchstart, target);
 			window.dispatchEvent(touchstart);
 
-			// Cancel touch
+			// Cancel touch partway through longpress
 			vi.advanceTimersByTime(200);
 			const touchcancel = create_touch_event('touchcancel', []);
 			set_event_target(touchcancel, target);
 			window.dispatchEvent(touchcancel);
 
-			// Advance time
+			// Advance past when longpress would have triggered
 			vi.advanceTimersByTime(500);
 			await tick();
 
@@ -596,13 +600,14 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Touch Event Handling', () 
 			set_event_target(touchstart1, target);
 			window.dispatchEvent(touchstart1);
 
+			// First tap duration (short tap)
 			vi.advanceTimersByTime(100);
 
 			const touchend1 = create_touch_event('touchend', []);
 			set_event_target(touchend1, target);
 			window.dispatchEvent(touchend1);
 
-			// Second tap
+			// Second tap starts (total 200ms from first tap, within bypass window)
 			vi.advanceTimersByTime(100);
 			const touchstart2 = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
 			set_event_target(touchstart2, target);
@@ -641,13 +646,13 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Touch Event Handling', () 
 			set_event_target(touchstart, target);
 			window.dispatchEvent(touchstart);
 
-			// Cancel before timeout
+			// Cancel partway through longpress (300ms into default 500ms)
 			vi.advanceTimersByTime(300);
 			const touchcancel = create_touch_event('touchcancel', []);
 			set_event_target(touchcancel, target);
 			window.dispatchEvent(touchcancel);
 
-			// Complete the would-be timeout
+			// Complete the would-be timeout (to 500ms total)
 			vi.advanceTimersByTime(200);
 			await tick();
 

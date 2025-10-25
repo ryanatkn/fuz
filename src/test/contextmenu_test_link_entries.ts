@@ -65,6 +65,7 @@ export const create_shared_link_entry_tests = (
 					set_event_target(touchstart, target);
 					window.dispatchEvent(touchstart);
 
+					// Trigger longpress to open contextmenu
 					vi.advanceTimersByTime(CONTEXTMENU_DEFAULT_LONGPRESS_DURATION);
 					await tick();
 				} else {
@@ -140,6 +141,7 @@ export const create_shared_link_entry_tests = (
 					set_event_target(touchstart, target);
 					window.dispatchEvent(touchstart);
 
+					// Trigger longpress to open contextmenu
 					vi.advanceTimersByTime(CONTEXTMENU_DEFAULT_LONGPRESS_DURATION);
 					await tick();
 				} else {
@@ -183,6 +185,7 @@ export const create_shared_link_entry_tests = (
 					set_event_target(touchstart, target);
 					window.dispatchEvent(touchstart);
 
+					// Trigger longpress to open contextmenu
 					vi.advanceTimersByTime(CONTEXTMENU_DEFAULT_LONGPRESS_DURATION);
 					await tick();
 				} else {
@@ -253,6 +256,7 @@ export const create_shared_link_entry_tests = (
 					set_event_target(touchstart, target);
 					window.dispatchEvent(touchstart);
 
+					// Trigger longpress to open contextmenu
 					vi.advanceTimersByTime(CONTEXTMENU_DEFAULT_LONGPRESS_DURATION);
 					await tick();
 				} else {
@@ -310,6 +314,7 @@ export const create_shared_link_entry_tests = (
 					set_event_target(touchstart, target);
 					window.dispatchEvent(touchstart);
 
+					// Trigger longpress to open contextmenu
 					vi.advanceTimersByTime(CONTEXTMENU_DEFAULT_LONGPRESS_DURATION);
 					await tick();
 				} else {
@@ -360,6 +365,7 @@ export const create_shared_link_entry_tests = (
 					set_event_target(touchstart, target);
 					window.dispatchEvent(touchstart);
 
+					// Trigger longpress to open contextmenu
 					vi.advanceTimersByTime(CONTEXTMENU_DEFAULT_LONGPRESS_DURATION);
 					await tick();
 				} else {
@@ -405,6 +411,7 @@ export const create_shared_link_entry_tests = (
 					set_event_target(touchstart, target);
 					window.dispatchEvent(touchstart);
 
+					// Trigger longpress to open contextmenu
 					vi.advanceTimersByTime(CONTEXTMENU_DEFAULT_LONGPRESS_DURATION);
 					await tick();
 				} else {
@@ -510,6 +517,7 @@ export const create_shared_link_entry_tests = (
 					set_event_target(touchstart, target);
 					window.dispatchEvent(touchstart);
 
+					// Trigger longpress to open contextmenu
 					vi.advanceTimersByTime(CONTEXTMENU_DEFAULT_LONGPRESS_DURATION);
 					await tick();
 				} else {

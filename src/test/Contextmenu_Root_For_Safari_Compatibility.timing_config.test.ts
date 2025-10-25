@@ -52,7 +52,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 			set_event_target(touchstart, target);
 			window.dispatchEvent(touchstart);
 
-			// Should open after 200ms
+			// Custom longpress duration (200ms)
 			vi.advanceTimersByTime(200);
 			await tick();
 
@@ -77,12 +77,12 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 			set_event_target(touchstart, target);
 			window.dispatchEvent(touchstart);
 
-			// Should not open before timeout
+			// Just before custom timeout (499ms)
 			vi.advanceTimersByTime(499);
 			await tick();
 			assert.strictEqual(contextmenu.opened, false);
 
-			// Should open at timeout
+			// Reach custom timeout (500ms total)
 			vi.advanceTimersByTime(1);
 			await tick();
 			assert.strictEqual(contextmenu.opened, true);
@@ -106,12 +106,12 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 			set_event_target(touchstart, target);
 			window.dispatchEvent(touchstart);
 
-			// Should not open early
+			// Halfway to custom timeout (1000ms)
 			vi.advanceTimersByTime(1000);
 			await tick();
 			assert.strictEqual(contextmenu.opened, false);
 
-			// Should open after full duration
+			// Reach custom timeout (2000ms total)
 			vi.advanceTimersByTime(1000);
 			await tick();
 			assert.strictEqual(contextmenu.opened, true);
@@ -136,7 +136,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 			set_event_target(touchstart, target);
 			window.dispatchEvent(touchstart);
 
-			// Opens very quickly
+			// Very short custom timeout (100ms) - demonstrates accidental trigger risk
 			vi.advanceTimersByTime(100);
 			await tick();
 
@@ -162,11 +162,12 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 			set_event_target(touchstart, target);
 			window.dispatchEvent(touchstart);
 
-			// User would have to wait a very long time
+			// Two-thirds to custom timeout (2000ms) - demonstrates long wait
 			vi.advanceTimersByTime(2000);
 			await tick();
 			assert.strictEqual(contextmenu.opened, false);
 
+			// Reach custom timeout (3000ms total) - demonstrates poor UX
 			vi.advanceTimersByTime(1000);
 			await tick();
 
@@ -200,6 +201,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 			set_event_target(touchmove, target);
 			window.dispatchEvent(touchmove);
 
+			// Custom longpress duration (300ms) - should be cancelled by movement
 			vi.advanceTimersByTime(300);
 			await tick();
 
@@ -231,6 +233,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 			set_event_target(touchmove, target);
 			window.dispatchEvent(touchmove);
 
+			// Custom longpress duration (300ms) - movement within tolerance
 			vi.advanceTimersByTime(300);
 			await tick();
 
@@ -262,6 +265,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 			set_event_target(touchmove, target);
 			window.dispatchEvent(touchmove);
 
+			// Custom longpress duration (300ms) - generous movement tolerance
 			vi.advanceTimersByTime(300);
 			await tick();
 
@@ -293,6 +297,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 			set_event_target(touchmove, target);
 			window.dispatchEvent(touchmove);
 
+			// Custom longpress duration (300ms) - cancelled by tiny movement
 			vi.advanceTimersByTime(300);
 			await tick();
 
@@ -323,6 +328,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 			set_event_target(touchmove, target);
 			window.dispatchEvent(touchmove);
 
+			// Custom longpress duration (300ms) - very loose tolerance allows large movement
 			vi.advanceTimersByTime(300);
 			await tick();
 
@@ -332,9 +338,8 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 
 	describe('bypass_window configuration', () => {
 		test('respects custom bypass_window (short: 400ms)', async () => {
-			const custom_bypass_window = 400;
 			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility, undefined, {
-				bypass_window: custom_bypass_window,
+				bypass_window: 400,
 			});
 
 			const {container, contextmenu} = mounted;
@@ -351,15 +356,14 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 			set_event_target(touchstart1, target);
 			window.dispatchEvent(touchstart1);
 
-			const first_tap_duration = 100;
-			vi.advanceTimersByTime(first_tap_duration);
+			// First tap held for 100ms
+			vi.advanceTimersByTime(100);
 			const touchend1 = create_touch_event('touchend', []);
 			set_event_target(touchend1, target);
 			window.dispatchEvent(touchend1);
 
-			// Second tap within custom bypass window
-			const time_to_second_tap = 200; // Total: 300ms, within custom_bypass_window (400ms)
-			vi.advanceTimersByTime(time_to_second_tap);
+			// Second tap 200ms after first touchend (total 300ms from first touchstart, within custom 400ms bypass window)
+			vi.advanceTimersByTime(200);
 
 			const touchstart2 = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
 			set_event_target(touchstart2, target);
@@ -391,15 +395,14 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 			set_event_target(touchstart1, target);
 			window.dispatchEvent(touchstart1);
 
-			const first_tap_duration = 100;
-			vi.advanceTimersByTime(first_tap_duration);
+			// First tap held for 100ms
+			vi.advanceTimersByTime(100);
 			const touchend1 = create_touch_event('touchend', []);
 			set_event_target(touchend1, target);
 			window.dispatchEvent(touchend1);
 
-			// Second tap within bypass window
-			const time_to_second_tap = 500; // Total: 600ms, within CONTEXTMENU_DEFAULT_BYPASS_WINDOW (660ms)
-			vi.advanceTimersByTime(time_to_second_tap);
+			// Second tap 500ms after first touchend (total 600ms from first touchstart, within CONTEXTMENU_DEFAULT_BYPASS_WINDOW)
+			vi.advanceTimersByTime(500);
 
 			const touchstart2 = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
 			set_event_target(touchstart2, target);
@@ -413,9 +416,8 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 		});
 
 		test('respects custom bypass_window (long: 1000ms)', async () => {
-			const custom_bypass_window = 1000;
 			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility, undefined, {
-				bypass_window: custom_bypass_window,
+				bypass_window: 1000,
 			});
 
 			const {container, contextmenu} = mounted;
@@ -432,15 +434,14 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 			set_event_target(touchstart1, target);
 			window.dispatchEvent(touchstart1);
 
-			const first_tap_duration = 100;
-			vi.advanceTimersByTime(first_tap_duration);
+			// First tap held for 100ms
+			vi.advanceTimersByTime(100);
 			const touchend1 = create_touch_event('touchend', []);
 			set_event_target(touchend1, target);
 			window.dispatchEvent(touchend1);
 
-			// Second tap within custom bypass window
-			const time_to_second_tap = 800; // Total: 900ms, within custom_bypass_window (1000ms)
-			vi.advanceTimersByTime(time_to_second_tap);
+			// Second tap 800ms after first touchend (total 900ms from first touchstart, within custom 1000ms bypass window)
+			vi.advanceTimersByTime(800);
 
 			const touchstart2 = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
 			set_event_target(touchstart2, target);
@@ -474,12 +475,13 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 			set_event_target(touchstart1, target);
 			window.dispatchEvent(touchstart1);
 
+			// First tap held for 100ms
 			vi.advanceTimersByTime(100);
 			const touchend1 = create_touch_event('touchend', []);
 			set_event_target(touchend1, target);
 			window.dispatchEvent(touchend1);
 
-			// Second tap 4 pixels away (within 5px tolerance)
+			// Second tap 200ms after first touchend, 4 pixels away (within 5px tolerance)
 			vi.advanceTimersByTime(200);
 
 			const touchstart2 = create_touch_event('touchstart', [{clientX: 104, clientY: 200, target}]);
@@ -512,12 +514,13 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 			set_event_target(touchstart1, target);
 			window.dispatchEvent(touchstart1);
 
+			// First tap held for 100ms
 			vi.advanceTimersByTime(100);
 			const touchend1 = create_touch_event('touchend', []);
 			set_event_target(touchend1, target);
 			window.dispatchEvent(touchend1);
 
-			// Second tap 15 pixels away (within 20px tolerance)
+			// Second tap 200ms after first touchend, 15 pixels away (within 20px tolerance)
 			vi.advanceTimersByTime(200);
 
 			const touchstart2 = create_touch_event('touchstart', [{clientX: 115, clientY: 200, target}]);
@@ -534,14 +537,12 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 
 	describe('timing relationship validation', () => {
 		test('warns in DEV when longpress_duration >= bypass_window', async () => {
-			const custom_longpress_duration = 500;
-			const custom_bypass_window = 400;
 			// This test documents expected behavior but can't actually test DEV warnings
 			// In practice, if longpress_duration >= bypass_window,
 			// the longpress would fire before the bypass window expires, making bypass difficult
 			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility, undefined, {
-				longpress_duration: custom_longpress_duration,
-				bypass_window: custom_bypass_window,
+				longpress_duration: 500,
+				bypass_window: 400,
 			});
 
 			const {container, contextmenu} = mounted;
@@ -558,22 +559,20 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 			set_event_target(touchstart1, target);
 			window.dispatchEvent(touchstart1);
 
-			const first_tap_duration = 100;
-			vi.advanceTimersByTime(first_tap_duration);
+			// First tap held for 100ms
+			vi.advanceTimersByTime(100);
 			const touchend1 = create_touch_event('touchend', []);
 			set_event_target(touchend1, target);
 			window.dispatchEvent(touchend1);
 
-			// Second tap within custom bypass window
-			const time_to_second_tap = 250; // Total: 350ms, within custom_bypass_window (400ms)
-			vi.advanceTimersByTime(time_to_second_tap);
+			// Second tap 250ms after first touchend (total 350ms from first touchstart, within custom 400ms bypass window)
+			vi.advanceTimersByTime(250);
 
 			const touchstart2 = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
 			set_event_target(touchstart2, target);
 			window.dispatchEvent(touchstart2);
 
-			// Longpress timer would fire at 500ms (150ms from now)
-			// But bypass should prevent it
+			// Custom longpress duration (500ms) - bypass should prevent it
 			vi.advanceTimersByTime(500);
 			await tick();
 
@@ -629,6 +628,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 			set_event_target(touchstart, target);
 			window.dispatchEvent(touchstart);
 
+			// Custom longpress duration (1000ms) - with misconfigured timings
 			vi.advanceTimersByTime(1000);
 			await tick();
 
@@ -657,7 +657,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 			set_event_target(touchstart, target);
 			window.dispatchEvent(touchstart);
 
-			// Browser fires at ~500ms
+			// Browser contextmenu fires at ~500ms (before custom 600ms longpress)
 			vi.advanceTimersByTime(500);
 			const ctxmenu = create_contextmenu_event(100, 200);
 			set_event_target(ctxmenu, target);
@@ -667,7 +667,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 			assert.strictEqual(contextmenu.opened, true);
 			assert.strictEqual(ctxmenu.defaultPrevented, true);
 
-			// Our longpress should not fire
+			// Wait for when our custom longpress would fire (100ms more to reach 600ms total)
 			vi.advanceTimersByTime(100);
 			await tick();
 
@@ -693,12 +693,12 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 			set_event_target(touchstart, target);
 			window.dispatchEvent(touchstart);
 
-			// Our longpress fires at 400ms
+			// Custom longpress fires at 400ms (before browser's ~500ms)
 			vi.advanceTimersByTime(400);
 			await tick();
 			assert.strictEqual(contextmenu.opened, true);
 
-			// Browser fires at ~500ms
+			// Browser contextmenu fires at ~500ms (100ms after our custom longpress)
 			vi.advanceTimersByTime(100);
 			const ctxmenu = create_contextmenu_event(100, 200);
 			set_event_target(ctxmenu, target);
@@ -728,14 +728,14 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 			set_event_target(touchstart, target);
 			window.dispatchEvent(touchstart);
 
-			// Both fire around same time
+			// Custom longpress and browser both fire around 500ms
 			vi.advanceTimersByTime(500);
 			await tick();
 
 			// Our longpress opened
 			assert.strictEqual(contextmenu.opened, true);
 
-			// Browser event comes in right after
+			// Browser contextmenu event comes in right after
 			const ctxmenu = create_contextmenu_event(100, 200);
 			set_event_target(ctxmenu, target);
 			target.dispatchEvent(ctxmenu);
@@ -761,12 +761,13 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 			set_event_target(touchstart1, target);
 			window.dispatchEvent(touchstart1);
 
+			// First tap held for 100ms
 			vi.advanceTimersByTime(100);
 			const touchend1 = create_touch_event('touchend', []);
 			set_event_target(touchend1, target);
 			window.dispatchEvent(touchend1);
 
-			// Browser contextmenu fires (e.g., from desktop right-click)
+			// Browser contextmenu fires 100ms after first touchend (e.g., from desktop right-click)
 			vi.advanceTimersByTime(100);
 			const ctxmenu = create_contextmenu_event(100, 200);
 			set_event_target(ctxmenu, target);
@@ -792,27 +793,29 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
-			// Bypass gesture
+			// Bypass gesture - first tap
 			const touchstart1 = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
 			set_event_target(touchstart1, target);
 			window.dispatchEvent(touchstart1);
 
+			// First tap held for 100ms
 			vi.advanceTimersByTime(100);
 			const touchend1 = create_touch_event('touchend', []);
 			set_event_target(touchend1, target);
 			window.dispatchEvent(touchend1);
 
+			// Second tap 200ms after first touchend
 			vi.advanceTimersByTime(200);
 			const touchstart2 = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
 			set_event_target(touchstart2, target);
 			window.dispatchEvent(touchstart2);
 
-			// Our longpress would fire at 400ms, but bypass prevents it
+			// Custom longpress would fire at 400ms, but bypass prevents it
 			vi.advanceTimersByTime(400);
 			await tick();
 			assert.strictEqual(contextmenu.opened, false);
 
-			// Browser fires at ~500ms - should bypass
+			// Browser contextmenu fires at ~500ms (100ms after custom longpress would have fired) - should be bypassed
 			vi.advanceTimersByTime(100);
 			const ctxmenu = create_contextmenu_event(100, 200);
 			set_event_target(ctxmenu, target);
@@ -839,7 +842,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 			set_event_target(touchstart, target);
 			window.dispatchEvent(touchstart);
 
-			// Browser would fire first at ~500ms
+			// Browser contextmenu fires at ~500ms (before custom 600ms longpress)
 			vi.advanceTimersByTime(500);
 			const ctxmenu = create_contextmenu_event(100, 200);
 			set_event_target(ctxmenu, target);
@@ -868,13 +871,13 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 			set_event_target(touchstart, target);
 			window.dispatchEvent(touchstart);
 
-			// Both fire around 500ms - component should handle gracefully
+			// Custom longpress and browser both fire around 500ms - component should handle gracefully
 			vi.advanceTimersByTime(500);
 			await tick();
 
 			const opened_via_longpress = contextmenu.opened;
 
-			// Browser event
+			// Browser contextmenu event fires
 			const ctxmenu = create_contextmenu_event(100, 200);
 			set_event_target(ctxmenu, target);
 			target.dispatchEvent(ctxmenu);
