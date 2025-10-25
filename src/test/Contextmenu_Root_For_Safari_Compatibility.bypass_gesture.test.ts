@@ -137,14 +137,16 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Tap-Then-Longpress Bypass 
 			set_event_target(touchstart1, target);
 			window.dispatchEvent(touchstart1);
 
-			vi.advanceTimersByTime(100);
+			const first_tap_duration = 100;
+			vi.advanceTimersByTime(first_tap_duration);
 
 			const touchend1 = create_touch_event('touchend', []);
 			set_event_target(touchend1, target);
 			window.dispatchEvent(touchend1);
 
-			// Second tap too late (700ms when duration is 660ms)
-			vi.advanceTimersByTime(700);
+			// Second tap too late (exceeds bypass window)
+			const time_past_window = CONTEXTMENU_DEFAULT_BYPASS_WINDOW + 40; // 700ms, exceeds CONTEXTMENU_DEFAULT_BYPASS_WINDOW (660ms)
+			vi.advanceTimersByTime(time_past_window);
 
 			const touchstart2 = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
 			set_event_target(touchstart2, target);
@@ -196,8 +198,9 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Tap-Then-Longpress Bypass 
 		});
 
 		test('respects custom bypass_window', async () => {
+			const custom_bypass_window = 1000; // Longer window
 			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility, undefined, {
-				bypass_window: 1000, // Longer window
+				bypass_window: custom_bypass_window,
 			});
 
 			const {container, contextmenu} = mounted;
@@ -214,14 +217,16 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Tap-Then-Longpress Bypass 
 			set_event_target(touchstart1, target);
 			window.dispatchEvent(touchstart1);
 
-			vi.advanceTimersByTime(100);
+			const first_tap_duration = 100;
+			vi.advanceTimersByTime(first_tap_duration);
 
 			const touchend1 = create_touch_event('touchend', []);
 			set_event_target(touchend1, target);
 			window.dispatchEvent(touchend1);
 
-			// Second tap within 1000ms window (total: 900ms < 1000ms)
-			vi.advanceTimersByTime(800);
+			// Second tap within custom bypass window
+			const time_to_second_tap = 800; // Total: 900ms, within custom_bypass_window (1000ms)
+			vi.advanceTimersByTime(time_to_second_tap);
 
 			const touchstart2 = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
 			set_event_target(touchstart2, target);
@@ -480,14 +485,16 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Tap-Then-Longpress Bypass 
 			set_event_target(touchstart1, target);
 			window.dispatchEvent(touchstart1);
 
-			vi.advanceTimersByTime(100);
+			const first_tap_duration = 100;
+			vi.advanceTimersByTime(first_tap_duration);
 
 			const touchend1 = create_touch_event('touchend', []);
 			set_event_target(touchend1, target);
 			window.dispatchEvent(touchend1);
 
 			// Second tap before timeout expires
-			vi.advanceTimersByTime(500); // Within 660ms window
+			const time_to_second_tap = 500; // Total: 600ms, within CONTEXTMENU_DEFAULT_BYPASS_WINDOW (660ms)
+			vi.advanceTimersByTime(time_to_second_tap);
 
 			const touchstart2 = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
 			set_event_target(touchstart2, target);
