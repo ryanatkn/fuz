@@ -23,6 +23,8 @@
 	// TODO remove CSS below with reusable CSS or a Svelte component
 </script>
 
+<!-- eslint-disable svelte/no-navigation-without-resolve -->
+
 <ul class="docs_menu unstyled">
 	{#each Object.entries(tomes_by_category) as [category, tomes] (category)}
 		<li class="category">

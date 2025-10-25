@@ -3,6 +3,8 @@ import type {Result} from '@ryanatkn/belt/result.js';
 import {is_promise} from '@ryanatkn/belt/async.js';
 import type {ActionReturn} from 'svelte/action';
 import {BROWSER} from 'esm-env';
+import type {SvelteHTMLElements} from 'svelte/elements';
+import {EMPTY_OBJECT} from '@ryanatkn/belt/object.js';
 
 import {Dimensions} from '$lib/dimensions.svelte.js';
 import {create_context} from '$lib/context_helpers.js';
@@ -13,11 +15,13 @@ export type Contextmenu_Params =
 	| Snippet
 	// TODO maybe this should be generic?
 	| {snippet: 'link'; props: {href: string; icon?: string}}
-	| {snippet: 'text'; props: {content: string; icon: string; run: Contextmenu_Run}};
+	| {snippet: 'text'; props: {content: string; icon: string; run: Contextmenu_Run}}
+	| {snippet: 'separator'; props: SvelteHTMLElements['li']};
 
-// TODO fix this type
-// eslint-disable-next-line @typescript-eslint/no-duplicate-type-constituents
-type Activate_Result = Result<any, {message?: string}> | any; // eslint-disable-line @typescript-eslint/no-redundant-type-constituents
+export type Contextmenu_Activate_Result =
+	| void
+	| undefined
+	| Result<{close?: boolean}, {message?: string}>;
 
 export type Item_State = Submenu_State | Entry_State;
 
@@ -25,15 +29,22 @@ export class Entry_State {
 	readonly is_menu = false; // TODO rename to `type`?
 	readonly menu: Submenu_State | Root_Menu_State;
 
+	readonly run: () => Contextmenu_Run;
+	readonly disabled: () => boolean;
+
 	selected: boolean = $state(false);
-	run: Contextmenu_Run = $state()!;
 	pending: boolean = $state(false);
 	error_message: string | null = $state(null);
 	promise: Promise<any> | null = $state(null);
 
-	constructor(menu: Submenu_State | Root_Menu_State, run: Contextmenu_Run) {
+	constructor(
+		menu: Submenu_State | Root_Menu_State,
+		run: () => Contextmenu_Run,
+		disabled: () => boolean = () => false,
+	) {
 		this.menu = menu;
 		this.run = run;
+		this.disabled = disabled;
 	}
 }
 
@@ -59,18 +70,19 @@ export class Root_Menu_State {
 	items: Array<Item_State> = $state([]);
 }
 
-// TODO fix this type
-export type Contextmenu_Run = () => unknown | Promise<Activate_Result>; // eslint-disable-line @typescript-eslint/no-redundant-type-constituents
+export type Contextmenu_Run = () =>
+	| Contextmenu_Activate_Result
+	| Promise<Contextmenu_Activate_Result>;
 
 export interface Contextmenu_State_Options {
-	link_snippet?: [href: string, icon?: Snippet<[icon: string]>];
-	text_snippet?: [content: string, icon: string];
 	layout?: Dimensions; // TODO consider making this a prop on `Contextmenu_Root`, and being assigned here
 }
 
 /**
  * Creates a `contextmenu` store.
  * See usage with `Contextmenu_Root.svelte` and `Contextmenu.svelte`.
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event
  */
 export class Contextmenu_State {
 	layout: Dimensions; // TODO $state?
@@ -78,7 +90,7 @@ export class Contextmenu_State {
 	 * If an initial layout is provided, control is deferred externally.
 	 * Otherwise the layout syncs to the page dimensions.
 	 */
-	initial_layout: Dimensions | undefined; // TODO $state?
+	readonly has_custom_layout: boolean;
 
 	// State for external consumers.
 	opened: boolean = $state(false);
@@ -94,10 +106,35 @@ export class Contextmenu_State {
 	readonly root_menu: Root_Menu_State = new Root_Menu_State();
 	selections: Array<Item_State> = $state([]);
 
-	constructor(options?: Contextmenu_State_Options) {
-		this.initial_layout = options?.layout;
+	can_collapse = $derived(this.selections.length > 1);
 
-		this.layout = this.initial_layout ?? new Dimensions();
+	can_expand = $derived.by(() => {
+		const selected = this.selections.at(-1);
+		return !!selected?.is_menu && selected.items.length > 0;
+	});
+
+	can_select_next = $derived.by(() => {
+		const menu = this.selections.at(-1)?.menu ?? this.root_menu;
+		return menu.items.length > 1;
+	});
+
+	can_select_previous = $derived.by(() => {
+		const menu = this.selections.at(-1)?.menu ?? this.root_menu;
+		return menu.items.length > 1;
+	});
+
+	can_activate = $derived.by(() => {
+		const selected = this.selections.at(-1);
+		if (!selected) return false;
+		if (selected.is_menu) return selected.items.length > 0;
+		return !selected.disabled();
+	});
+
+	constructor(options: Contextmenu_State_Options = EMPTY_OBJECT) {
+		const {layout} = options;
+
+		this.has_custom_layout = !!layout;
+		this.layout = layout ?? new Dimensions();
 	}
 
 	open(params: Array<Contextmenu_Params>, x: number, y: number): void {
@@ -119,19 +156,21 @@ export class Contextmenu_State {
 			if (item.is_menu) {
 				this.reset_items(item.items);
 			} else {
-				if (item.promise !== null) item.promise = null;
-				if (item.error_message !== null) item.error_message = null;
+				item.promise = null;
+				item.pending = false;
+				item.error_message = null;
 			}
 		}
 	}
 
-	activate(item: Item_State): boolean | Promise<Activate_Result> {
+	activate(item: Item_State): boolean | Promise<Contextmenu_Activate_Result> {
 		if (item.is_menu) {
 			this.expand_selected();
 		} else {
+			if (item.disabled()) return false;
 			let returned;
 			try {
-				returned = item.run();
+				returned = item.run()();
 			} catch (err) {
 				const message = typeof err?.message === 'string' ? err.message : undefined;
 				item.error_message = message ?? 'unknown error';
@@ -146,13 +185,16 @@ export class Contextmenu_State {
 							if (promise !== item.promise) return;
 							if (typeof result?.ok === 'boolean') {
 								if (result.ok) {
-									this.close();
+									if (result.close !== false) {
+										this.close();
+									}
 								} else {
 									const message = typeof result.message === 'string' ? result.message : undefined;
 									item.error_message = message ?? 'unknown error';
 									this.error = message;
 								}
 							} else {
+								// void or undefined - default behavior is to close
 								this.close();
 							}
 							return result;
@@ -171,12 +213,26 @@ export class Contextmenu_State {
 					}));
 				return item.promise; // async path
 			}
-			this.close(); // synchronous path only
+			// synchronous path
+			if (typeof returned?.ok === 'boolean') {
+				if (returned.ok) {
+					if (returned.close !== false) {
+						this.close();
+					}
+				} else {
+					const message = typeof returned.message === 'string' ? returned.message : undefined;
+					item.error_message = message ?? 'unknown error';
+					this.error = message;
+				}
+			} else {
+				// void or undefined - default behavior is to close
+				this.close();
+			}
 		}
 		return true;
 	}
 
-	activate_selected(): void | boolean | Promise<Activate_Result> {
+	activate_selected(): void | boolean | Promise<Contextmenu_Activate_Result> {
 		const selected = this.selections.at(-1);
 		if (selected) {
 			return this.activate(selected);
@@ -191,6 +247,7 @@ export class Contextmenu_State {
 	/**
 	 * Activates the selected entry, or if none, selects the first.
 	 */
+	// TODO implement focus management per APG: call .focus() on the selected item's DOM element (requires storing element refs in Entry_State/Submenu_State)
 	select(item: Item_State): void {
 		if (this.selections.at(-1) === item) return;
 		for (const s of this.selections) s.selected = false;
@@ -203,12 +260,13 @@ export class Contextmenu_State {
 	}
 
 	collapse_selected(): void {
-		if (this.selections.length <= 1) return;
+		if (!this.can_collapse) return;
 		const deselected = this.selections.pop()!;
 		deselected.selected = false;
 	}
 
 	expand_selected(): void {
+		if (!this.can_expand) return;
 		const parent = this.selections.at(-1);
 		if (!parent?.is_menu) return;
 		const selected = parent.items[0];
@@ -249,9 +307,9 @@ export class Contextmenu_State {
 	 * Used by `Contextmenu_Entry` and custom entry components
 	 * @initializes
 	 */
-	add_entry(run: Contextmenu_Run): Entry_State {
+	add_entry(run: () => Contextmenu_Run, disabled: () => boolean = () => false): Entry_State {
 		const menu = contextmenu_submenu_context.maybe_get() ?? this.root_menu;
-		const entry = new Entry_State(menu, run);
+		const entry = new Entry_State(menu, run, disabled);
 		menu.items.push(entry);
 		// TODO messy, runs more than needed
 		onDestroy(() => {
@@ -303,6 +361,13 @@ export const contextmenu_action = <T extends Contextmenu_Params, U extends T | A
 
 const CONTEXTMENU_OPEN_VIBRATE_DURATION = 17;
 
+export interface Open_Contextmenu_Options {
+	link_enabled?: boolean;
+	text_enabled?: boolean;
+	separator_enabled?: boolean;
+	vibrate?: boolean;
+}
+
 /**
  * Opens the contextmenu, if appropriate,
  * querying the menu items from the DOM starting at the event target.
@@ -310,6 +375,7 @@ const CONTEXTMENU_OPEN_VIBRATE_DURATION = 17;
  * @param x - the page X coordinate at which to open the contextmenu, typically the mouse `pageX`
  * @param y - the page Y coordinate at which to open the contextmenu, typically the mouse `pageY`
  * @param contextmenu - the contextmenu store
+ * @param options - optional configuration for filtering entries and haptic feedback
  * @returns a boolean indicating if the menu was opened or not
  */
 export const open_contextmenu = (
@@ -317,16 +383,36 @@ export const open_contextmenu = (
 	x: number,
 	y: number,
 	contextmenu: Contextmenu_State,
+	options?: Open_Contextmenu_Options,
 ): boolean => {
-	const params = query_contextmenu_params(target);
+	const {
+		link_enabled = true,
+		text_enabled = true,
+		separator_enabled = true,
+		vibrate = true,
+	} = options ?? EMPTY_OBJECT;
+
+	const params = query_contextmenu_params(target)?.filter(
+		(p) =>
+			typeof p === 'function' ||
+			((p.snippet !== 'link' || link_enabled) &&
+				(p.snippet !== 'text' || text_enabled) &&
+				(p.snippet !== 'separator' || separator_enabled)),
+	);
+
+	// No-op if empty
 	if (!params?.length) return false;
+
 	contextmenu.open(params, x, y);
-	// Unfortunately `vibrate` this gets blocked by some (all?) browsers the way we're doing it
-	// outside of a user interaction in a custom `longpress` gesture that triggers on a timeout,
-	// which exists only because iOS doesn't support the contextmenu event.
-	if (BROWSER && (navigator.vibrate as unknown)) {
+
+	// `navigator.vibrate()` works with `Contextmenu_Root` but gets blocked by some browsers
+	// when used with `Contextmenu_Root_For_Safari_Compatibility` because its longpress
+	// workaround triggers from a timeout rather than a direct user interaction.
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+	if (BROWSER && vibrate && navigator.vibrate) {
 		navigator.vibrate(CONTEXTMENU_OPEN_VIBRATE_DURATION);
 	}
+
 	return true;
 };
 
@@ -368,7 +454,9 @@ const query_contextmenu_params = (
 				props: {
 					content: 'copy text',
 					icon: '📋',
-					run: () => void navigator.clipboard.writeText(text),
+					run: async () => {
+						await navigator.clipboard.writeText(text);
+					},
 				},
 			});
 		}
@@ -381,3 +469,37 @@ export const contextmenu_context = create_context<Contextmenu_State>();
 export const contextmenu_submenu_context = create_context<Submenu_State>();
 
 export const contextmenu_dimensions_context = create_context(() => new Dimensions());
+
+// Global registry of non-scoped contextmenu roots (only used in DEV)
+const non_scoped_roots: Set<symbol> = new Set();
+
+/**
+ * Registers a contextmenu root and warns if multiple non-scoped roots are detected.
+ * Only active in development mode. Automatically handles cleanup on unmount.
+ *
+ * @param get_scoped - Getter function that returns the current scoped value
+ */
+export const contextmenu_check_global_root = (get_scoped: () => boolean): void => {
+	const id = Symbol('contextmenu_root');
+
+	$effect(() => {
+		if (!get_scoped()) {
+			// Register as global (non-scoped)
+			non_scoped_roots.add(id);
+
+			if (non_scoped_roots.size > 1) {
+				// eslint-disable-next-line no-console
+				console.error(
+					`Detected multiple non-scoped contextmenu roots (${non_scoped_roots.size} mounted). ` +
+						'Only one global contextmenu root should be active at a time. ' +
+						'Are you missing a `scoped` attribute?',
+				);
+			}
+		}
+
+		// Cleanup: unregister when scoped changes or component unmounts
+		return () => {
+			non_scoped_roots.delete(id);
+		};
+	});
+};
