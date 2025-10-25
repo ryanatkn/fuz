@@ -1,0 +1,1 @@
+import"../chunks/DsnmJJEf.js";import{p as n,c as s,e as p,a as _,g as c,b as i}from"../chunks/B7qs8f6Z.js";import{g as u}from"../chunks/BgV-XZWg.js";import{T as d}from"../chunks/CqaUCo7M.js";function I(e,t){n(t,!0);const r=u("Breadcrumb");d(e,{get tome(){return r},children:(a,l)=>{var o=p(),m=_(o);c(m,()=>t.children),i(a,o)},$$slots:{default:!0}}),s()}export{I as component};
