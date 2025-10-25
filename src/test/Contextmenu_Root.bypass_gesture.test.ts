@@ -30,8 +30,8 @@ describe('Contextmenu_Root - Tap-Then-Longpress Bypass Gesture', () => {
 	test('bypasses contextmenu on tap-then-longpress', () => {
 		mounted = mount_contextmenu_root(Contextmenu_Root, undefined, {
 			bypass_with_tap_then_longpress: true,
-			tap_then_longpress_duration: 600,
-			tap_then_longpress_move_tolerance: 5,
+			bypass_window: 600,
+			bypass_move_tolerance: 5,
 		});
 
 		const {contextmenu} = mounted;
@@ -68,8 +68,8 @@ describe('Contextmenu_Root - Tap-Then-Longpress Bypass Gesture', () => {
 	test('does not bypass if second tap is too far', async () => {
 		mounted = mount_contextmenu_root(Contextmenu_Root, undefined, {
 			bypass_with_tap_then_longpress: true,
-			tap_then_longpress_duration: 600,
-			tap_then_longpress_move_tolerance: 5,
+			bypass_window: 600,
+			bypass_move_tolerance: 5,
 		});
 
 		const {contextmenu} = mounted;
@@ -107,7 +107,7 @@ describe('Contextmenu_Root - Tap-Then-Longpress Bypass Gesture', () => {
 	test('does not bypass if second tap is too late', async () => {
 		mounted = mount_contextmenu_root(Contextmenu_Root, undefined, {
 			bypass_with_tap_then_longpress: true,
-			tap_then_longpress_duration: 600,
+			bypass_window: 600,
 		});
 
 		const {contextmenu} = mounted;
@@ -179,11 +179,11 @@ describe('Contextmenu_Root - Tap-Then-Longpress Bypass Gesture', () => {
 		target.remove();
 	});
 
-	test('respects custom tap_then_longpress_duration', () => {
+	test('respects custom bypass_window', () => {
 		mounted = mount_contextmenu_root(Contextmenu_Root, undefined, {
 			bypass_with_tap_then_longpress: true,
-			tap_then_longpress_duration: 1000,
-			tap_then_longpress_move_tolerance: 5,
+			bypass_window: 1000,
+			bypass_move_tolerance: 5,
 		});
 
 		const {contextmenu} = mounted;
@@ -213,11 +213,11 @@ describe('Contextmenu_Root - Tap-Then-Longpress Bypass Gesture', () => {
 		target.remove();
 	});
 
-	test('respects custom tap_then_longpress_move_tolerance', () => {
+	test('respects custom bypass_move_tolerance', () => {
 		mounted = mount_contextmenu_root(Contextmenu_Root, undefined, {
 			bypass_with_tap_then_longpress: true,
-			tap_then_longpress_duration: 600,
-			tap_then_longpress_move_tolerance: 20,
+			bypass_window: 600,
+			bypass_move_tolerance: 20,
 		});
 
 		const {contextmenu} = mounted;
@@ -494,7 +494,7 @@ describe('Contextmenu_Root - Tap-Then-Longpress Bypass Gesture', () => {
 	test('handles rapid tap sequences (3+ taps)', () => {
 		mounted = mount_contextmenu_root(Contextmenu_Root, undefined, {
 			bypass_with_tap_then_longpress: true,
-			tap_then_longpress_duration: 600,
+			bypass_window: 600,
 		});
 
 		const {contextmenu} = mounted;
@@ -595,8 +595,8 @@ describe('Contextmenu_Root - Tap-Then-Longpress Bypass Gesture', () => {
 	test('bypass works with contextmenu event after gesture', async () => {
 		mounted = mount_contextmenu_root(Contextmenu_Root, undefined, {
 			bypass_with_tap_then_longpress: true,
-			tap_then_longpress_duration: 600,
-			tap_then_longpress_move_tolerance: 5,
+			bypass_window: 600,
+			bypass_move_tolerance: 5,
 		});
 
 		const {contextmenu} = mounted;
@@ -635,7 +635,7 @@ describe('Contextmenu_Root - Tap-Then-Longpress Bypass Gesture', () => {
 	test('contextmenu works normally after bypass is consumed', async () => {
 		mounted = mount_contextmenu_root(Contextmenu_Root, undefined, {
 			bypass_with_tap_then_longpress: true,
-			tap_then_longpress_duration: 600,
+			bypass_window: 600,
 		});
 
 		const {contextmenu} = mounted;

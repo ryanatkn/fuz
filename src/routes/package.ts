@@ -110,8 +110,8 @@ export const src_json: Src_Json = {
 			declarations: [
 				{name: 'CONTEXTMENU_DEFAULT_OPEN_OFFSET_X', kind: 'variable'},
 				{name: 'CONTEXTMENU_DEFAULT_OPEN_OFFSET_Y', kind: 'variable'},
-				{name: 'CONTEXTMENU_DEFAULT_TAP_THEN_LONGPRESS_DURATION', kind: 'variable'},
-				{name: 'CONTEXTMENU_DEFAULT_TAP_THEN_LONGPRESS_MOVE_TOLERANCE', kind: 'variable'},
+				{name: 'CONTEXTMENU_DEFAULT_BYPASS_WINDOW', kind: 'variable'},
+				{name: 'CONTEXTMENU_DEFAULT_BYPASS_MOVE_TOLERANCE', kind: 'variable'},
 				{name: 'CONTEXTMENU_DEFAULT_LONGPRESS_DURATION', kind: 'variable'},
 				{name: 'CONTEXTMENU_DEFAULT_LONGPRESS_MOVE_TOLERANCE', kind: 'variable'},
 				{name: 'contextmenu_is_valid_target', kind: 'function'},

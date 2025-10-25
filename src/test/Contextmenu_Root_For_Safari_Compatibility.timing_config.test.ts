@@ -15,7 +15,7 @@ import {mount_contextmenu_root, setup_contextmenu_action} from '$test/contextmen
 import {
 	CONTEXTMENU_DEFAULT_LONGPRESS_DURATION,
 	CONTEXTMENU_DEFAULT_LONGPRESS_MOVE_TOLERANCE,
-	CONTEXTMENU_DEFAULT_TAP_THEN_LONGPRESS_DURATION,
+	CONTEXTMENU_DEFAULT_BYPASS_WINDOW,
 } from '$lib/contextmenu_helpers.js';
 
 describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', () => {
@@ -330,10 +330,10 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 		});
 	});
 
-	describe('tap_then_longpress_duration configuration', () => {
-		test('respects custom tap_then_longpress_duration (short: 400ms)', async () => {
+	describe('bypass_window configuration', () => {
+		test('respects custom bypass_window (short: 400ms)', async () => {
 			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility, undefined, {
-				tap_then_longpress_duration: 400,
+				bypass_window: 400,
 			});
 
 			const {container, contextmenu} = mounted;
@@ -369,9 +369,9 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 			assert.strictEqual(contextmenu.opened, false);
 		});
 
-		test('respects custom tap_then_longpress_duration (normal: 660ms)', async () => {
+		test('respects custom bypass_window (normal: 660ms)', async () => {
 			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility, undefined, {
-				tap_then_longpress_duration: CONTEXTMENU_DEFAULT_TAP_THEN_LONGPRESS_DURATION,
+				bypass_window: CONTEXTMENU_DEFAULT_BYPASS_WINDOW,
 			});
 
 			const {container, contextmenu} = mounted;
@@ -407,9 +407,9 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 			assert.strictEqual(contextmenu.opened, false);
 		});
 
-		test('respects custom tap_then_longpress_duration (long: 1000ms)', async () => {
+		test('respects custom bypass_window (long: 1000ms)', async () => {
 			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility, undefined, {
-				tap_then_longpress_duration: 1000,
+				bypass_window: 1000,
 			});
 
 			const {container, contextmenu} = mounted;
@@ -446,10 +446,10 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 		});
 	});
 
-	describe('tap_then_longpress_move_tolerance configuration', () => {
-		test('respects custom tap_then_longpress_move_tolerance (5px)', async () => {
+	describe('bypass_move_tolerance configuration', () => {
+		test('respects custom bypass_move_tolerance (5px)', async () => {
 			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility, undefined, {
-				tap_then_longpress_move_tolerance: 5,
+				bypass_move_tolerance: 5,
 			});
 
 			const {container, contextmenu} = mounted;
@@ -485,9 +485,9 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 			assert.strictEqual(contextmenu.opened, false);
 		});
 
-		test('respects custom tap_then_longpress_move_tolerance (20px)', async () => {
+		test('respects custom bypass_move_tolerance (20px)', async () => {
 			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility, undefined, {
-				tap_then_longpress_move_tolerance: 20,
+				bypass_move_tolerance: 20,
 			});
 
 			const {container, contextmenu} = mounted;
@@ -525,13 +525,13 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 	});
 
 	describe('timing relationship validation', () => {
-		test('warns in DEV when longpress_duration >= tap_then_longpress_duration', async () => {
+		test('warns in DEV when longpress_duration >= bypass_window', async () => {
 			// This test documents expected behavior but can't actually test DEV warnings
-			// In practice, if longpress_duration (500ms) >= tap_then_longpress_duration (400ms),
+			// In practice, if longpress_duration (500ms) >= bypass_window (400ms),
 			// the longpress would fire before the bypass window expires, making bypass difficult
 			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility, undefined, {
 				longpress_duration: 500,
-				tap_then_longpress_duration: 400,
+				bypass_window: 400,
 			});
 
 			const {container, contextmenu} = mounted;
@@ -568,10 +568,10 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 			assert.strictEqual(contextmenu.opened, false);
 		});
 
-		test('handles longpress_duration close to tap_then_longpress_duration', async () => {
+		test('handles longpress_duration close to bypass_window', async () => {
 			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility, undefined, {
 				longpress_duration: 450,
-				tap_then_longpress_duration: CONTEXTMENU_DEFAULT_TAP_THEN_LONGPRESS_DURATION,
+				bypass_window: CONTEXTMENU_DEFAULT_BYPASS_WINDOW,
 			});
 
 			const {container, contextmenu} = mounted;
@@ -598,9 +598,9 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 			// Even with poor config, component should not crash
 			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility, undefined, {
 				longpress_duration: 1000,
-				tap_then_longpress_duration: 500,
+				bypass_window: 500,
 				longpress_move_tolerance: 0,
-				tap_then_longpress_move_tolerance: 0,
+				bypass_move_tolerance: 0,
 			});
 
 			const {container} = mounted;
@@ -768,7 +768,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Timing Configurations', ()
 		test('longpress_duration < browser timing (bypass works)', async () => {
 			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility, undefined, {
 				longpress_duration: 400,
-				tap_then_longpress_duration: CONTEXTMENU_DEFAULT_TAP_THEN_LONGPRESS_DURATION,
+				bypass_window: CONTEXTMENU_DEFAULT_BYPASS_WINDOW,
 			});
 
 			const {container, contextmenu} = mounted;

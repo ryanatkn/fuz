@@ -34,8 +34,8 @@
 	import {
 		CONTEXTMENU_DEFAULT_OPEN_OFFSET_X,
 		CONTEXTMENU_DEFAULT_OPEN_OFFSET_Y,
-		CONTEXTMENU_DEFAULT_TAP_THEN_LONGPRESS_DURATION,
-		CONTEXTMENU_DEFAULT_TAP_THEN_LONGPRESS_MOVE_TOLERANCE,
+		CONTEXTMENU_DEFAULT_BYPASS_WINDOW,
+		CONTEXTMENU_DEFAULT_BYPASS_MOVE_TOLERANCE,
 		CONTEXTMENU_DEFAULT_LONGPRESS_DURATION,
 		CONTEXTMENU_DEFAULT_LONGPRESS_MOVE_TOLERANCE,
 		contextmenu_is_valid_target,
@@ -50,8 +50,8 @@
 		longpress_move_tolerance = CONTEXTMENU_DEFAULT_LONGPRESS_MOVE_TOLERANCE,
 		longpress_duration = CONTEXTMENU_DEFAULT_LONGPRESS_DURATION,
 		bypass_with_tap_then_longpress = true,
-		tap_then_longpress_duration = CONTEXTMENU_DEFAULT_TAP_THEN_LONGPRESS_DURATION,
-		tap_then_longpress_move_tolerance = CONTEXTMENU_DEFAULT_TAP_THEN_LONGPRESS_MOVE_TOLERANCE,
+		bypass_window = CONTEXTMENU_DEFAULT_BYPASS_WINDOW,
+		bypass_move_tolerance = CONTEXTMENU_DEFAULT_BYPASS_MOVE_TOLERANCE,
 		open_offset_x = CONTEXTMENU_DEFAULT_OPEN_OFFSET_X,
 		open_offset_y = CONTEXTMENU_DEFAULT_OPEN_OFFSET_Y,
 		scoped = false,
@@ -90,12 +90,12 @@
 		 * If the duration is too long, it'll detect more false positives and interrupt normal usage,
 		 * but too short and some people will have difficulty performing the gesture.
 		 */
-		tap_then_longpress_duration?: number;
+		bypass_window?: number;
 		/**
 		 * The number of pixels the pointer can be moved between taps to detect a tap-then-longpress.
 		 * Used only when `bypass_with_tap_then_longpress` is true.
 		 */
-		tap_then_longpress_move_tolerance?: number;
+		bypass_move_tolerance?: number;
 		/**
 		 * The number of pixels to offset from the pointer X position when opened.
 		 * Useful to ensure the first menu item is immediately under the pointer.
@@ -271,15 +271,15 @@
 
 		// Bypass the contextmenu behavior in certain conditions including a tap-and-longpress gesture.
 		// To handle tap-then-longpress we need to see if `longpress_start_time`
-		// is less than `tap_then_longpress_duration`, and also allow a small amount
-		// of pointer movement, `tap_then_longpress_move_tolerance`.
+		// is less than `bypass_window`, and also allow a small amount
+		// of pointer movement, `bypass_move_tolerance`.
 		// The builtin `'contextmenu'` event will still fire for non-iOS browsers,
 		// so `longpress_bypass` is used to tell the handler `on_window_contextmenu` to exit early.
 		if (bypass_with_tap_then_longpress) {
 			if (
 				longpress_start_time != null &&
-				performance.now() - longpress_start_time < tap_then_longpress_duration &&
-				Math.hypot(clientX - touch_x!, clientY - touch_y!) < tap_then_longpress_move_tolerance
+				performance.now() - longpress_start_time < bypass_window &&
+				Math.hypot(clientX - touch_x!, clientY - touch_y!) < bypass_move_tolerance
 			) {
 				// Tap-then-longpress detected! Set bypass and clear tap tracking state.
 				// Must manually clear state (not call reset_tap_tracking) to preserve bypass flag.
@@ -301,7 +301,7 @@
 			}
 			tap_tracking_timeout = setTimeout(() => {
 				reset_tap_tracking();
-			}, tap_then_longpress_duration);
+			}, bypass_window);
 		}
 
 		touch_x = clientX;

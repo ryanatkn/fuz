@@ -32,8 +32,8 @@
 	import {
 		CONTEXTMENU_DEFAULT_OPEN_OFFSET_X,
 		CONTEXTMENU_DEFAULT_OPEN_OFFSET_Y,
-		CONTEXTMENU_DEFAULT_TAP_THEN_LONGPRESS_DURATION,
-		CONTEXTMENU_DEFAULT_TAP_THEN_LONGPRESS_MOVE_TOLERANCE,
+		CONTEXTMENU_DEFAULT_BYPASS_WINDOW,
+		CONTEXTMENU_DEFAULT_BYPASS_MOVE_TOLERANCE,
 		contextmenu_is_valid_target,
 		contextmenu_create_keyboard_handlers,
 		contextmenu_create_keydown_handler,
@@ -46,8 +46,8 @@
 		open_offset_x = CONTEXTMENU_DEFAULT_OPEN_OFFSET_X,
 		open_offset_y = CONTEXTMENU_DEFAULT_OPEN_OFFSET_Y,
 		bypass_with_tap_then_longpress = true,
-		tap_then_longpress_duration = CONTEXTMENU_DEFAULT_TAP_THEN_LONGPRESS_DURATION,
-		tap_then_longpress_move_tolerance = CONTEXTMENU_DEFAULT_TAP_THEN_LONGPRESS_MOVE_TOLERANCE,
+		bypass_window = CONTEXTMENU_DEFAULT_BYPASS_WINDOW,
+		bypass_move_tolerance = CONTEXTMENU_DEFAULT_BYPASS_MOVE_TOLERANCE,
 		scoped = false,
 		link_entry = link_entry_default,
 		text_entry = text_entry_default,
@@ -85,12 +85,12 @@
 		 * If the duration is too long, it'll detect more false positives and interrupt normal usage,
 		 * but too short and some people will have difficulty performing the gesture.
 		 */
-		tap_then_longpress_duration?: number;
+		bypass_window?: number;
 		/**
 		 * The number of pixels the pointer can be moved between taps to detect a tap-then-longpress.
 		 * Used only when `bypass_with_tap_then_longpress` is true.
 		 */
-		tap_then_longpress_move_tolerance?: number;
+		bypass_move_tolerance?: number;
 		/**
 		 * If `true`, wraps `children` with a div and listens to events on it instead of the window.
 		 */
@@ -233,8 +233,8 @@
 		// Check if this is a tap-then-longpress gesture
 		if (
 			longpress_start_time != null &&
-			performance.now() - longpress_start_time < tap_then_longpress_duration &&
-			Math.hypot(clientX - touch_x!, clientY - touch_y!) < tap_then_longpress_move_tolerance
+			performance.now() - longpress_start_time < bypass_window &&
+			Math.hypot(clientX - touch_x!, clientY - touch_y!) < bypass_move_tolerance
 		) {
 			// This is a tap-then-longpress - set bypass flag and clear tap tracking
 			longpress_bypass = true;
@@ -262,7 +262,7 @@
 			touch_x = null;
 			touch_y = null;
 			tap_tracking_timeout = null;
-		}, tap_then_longpress_duration);
+		}, bypass_window);
 	};
 
 	/**
