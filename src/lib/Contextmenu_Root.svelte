@@ -142,13 +142,7 @@
 	});
 
 	const dimensions = contextmenu_dimensions_context.set();
-	$effect(() => {
-		if (el) {
-			const rect = el.getBoundingClientRect();
-			dimensions.width = rect.width;
-			dimensions.height = rect.height;
-		}
-	});
+
 	const x = $derived(
 		contextmenu_calculate_constrained_x(contextmenu.x, dimensions.width, layout.width),
 	);
@@ -327,6 +321,8 @@
 		aria-label="context menu"
 		tabindex="-1"
 		bind:this={el}
+		bind:offsetWidth={dimensions.width}
+		bind:offsetHeight={dimensions.height}
 		style:transform="translate3d({x}px, {y}px, 0)"
 	>
 		<!-- TODO maybe this should be generic? -->
