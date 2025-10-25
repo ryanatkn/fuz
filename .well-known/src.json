@@ -49,11 +49,11 @@
           "kind": "variable"
         },
         {
-          "name": "CONTEXTMENU_DEFAULT_TAP_THEN_LONGPRESS_DURATION",
+          "name": "CONTEXTMENU_DEFAULT_BYPASS_WINDOW",
           "kind": "variable"
         },
         {
-          "name": "CONTEXTMENU_DEFAULT_TAP_THEN_LONGPRESS_MOVE_TOLERANCE",
+          "name": "CONTEXTMENU_DEFAULT_BYPASS_MOVE_TOLERANCE",
           "kind": "variable"
         },
         {
