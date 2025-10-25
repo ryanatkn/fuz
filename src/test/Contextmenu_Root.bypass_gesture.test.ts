@@ -11,10 +11,7 @@ import {
 	set_event_target,
 } from '$lib/test_helpers.js';
 import {mount_contextmenu_root, setup_contextmenu_action} from '$test/contextmenu_test_helpers.js';
-import {
-	CONTEXTMENU_DEFAULT_BYPASS_WINDOW,
-	CONTEXTMENU_DEFAULT_BYPASS_MOVE_TOLERANCE,
-} from '$lib/contextmenu_helpers.js';
+import {CONTEXTMENU_DEFAULT_BYPASS_WINDOW} from '$lib/contextmenu_helpers.js';
 
 describe('Contextmenu_Root - Tap-Then-Longpress Bypass Gesture', () => {
 	let mounted: ReturnType<typeof mount_contextmenu_root> | null = null;
