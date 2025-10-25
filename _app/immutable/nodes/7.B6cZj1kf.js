@@ -1,0 +1,17 @@
+import"../chunks/DsnmJJEf.js";import{p as H,c as q,f as h,s as t,a as A,d as C,b as o,ad as a,ac as $,r as S,ab as F,t as P,bD as G,h as z,af as J}from"../chunks/B7qs8f6Z.js";import{s as k}from"../chunks/D2Z-uHvG.js";import{C as n}from"../chunks/DpqcPF0n.js";import{g as K}from"../chunks/6oYKUwNN.js";import{A as v}from"../chunks/CugPMGjR.js";import{T as O}from"../chunks/DnoiBR4t.js";import{T,a as y}from"../chunks/CqGkFTy5.js";var Q=h("<!> <p><code>icon</code> can be a string prop or snippet:</p> <!> <!> <!> <!>",1),U=h(`<!> <p>Alerts can be buttons by including an <code>onclick</code> prop. This API may change because
+			it's a bit of a mess - a separate <code>Alert_Button</code> may be better.</p> <!> <!> <p> </p>`,1),V=h("the <code>color</code> prop overrides the status color",1),X=h(`<!> <p>The <code>status</code> prop, which defaults to <code>'inform'</code>, changes the default
+			icon and color.</p> <!> <!> <!> <!> <!> <!> <!>`,1),Z=h("<section><aside>⚠️ This API is unfinished and will likely change.</aside></section> <section><!> <!> <!></section> <!> <!> <!>",1);function dt(L,N){H(N,!0);const W=K("Alert");let g=J(0);O(L,{get tome(){return W},children:(Y,et)=>{var I=Z(),b=t(A(I),2),w=C(b);n(w,{content:"import Alert from '@ryanatkn/fuz/Alert.svelte';",lang:"ts"});var E=t(w,2);n(E,{content:"<Alert>info</Alert>"});var j=t(E,2);v(j,{children:(_,x)=>{a();var r=$("info");o(_,r)},$$slots:{default:!0}}),S(b);var M=t(b,2);T(M,{children:(_,x)=>{var r=Q(),l=A(r);y(l,{text:"With custom icon"});var c=t(l,4);n(c,{content:`<Alert icon="▷">
+	icon as a string prop
+</Alert>`});var i=t(c,2);v(i,{icon:"▷",children:(u,p)=>{a();var s=$("icon as a string prop");o(u,s)},$$slots:{default:!0}});var d=t(i,2);n(d,{content:`<Alert>
+	{#snippet icon(t)}{t}◡{t}{/snippet}
+	icon as a snippet
+</Alert>`});var m=t(d,2);v(m,{icon:(p,s=F)=>{a();var e=$();P(()=>k(e,`${s()??""}◡${s()??""}`)),o(p,e)},children:(p,s)=>{a();var e=$("icon as a snippet");o(p,e)},$$slots:{icon:!0,default:!0}}),o(_,r)},$$slots:{default:!0}});var R=t(M,2);T(R,{children:(_,x)=>{var r=U(),l=A(r);y(l,{text:"As optional button"});var c=t(l,4);n(c,{content:`<Alert onclick={() => clicks++}>
+	alerts can be buttons{'.'.repeat(clicks)}
+</Alert>`});var i=t(c,2);v(i,{onclick:()=>G(g),children:(u,p)=>{a();var s=$();P(e=>k(s,`alerts can be buttons${e??""}`),[()=>".".repeat(z(g))]),o(u,s)},$$slots:{default:!0}});var d=t(i,2),m=C(d);S(d),P(()=>k(m,`clicks: ${z(g)??""}`)),o(_,r)},$$slots:{default:!0}});var D=t(R,2);T(D,{children:(_,x)=>{var r=X(),l=A(r);y(l,{text:"With custom status"});var c=t(l,4);n(c,{content:`// @ryanatkn/fuz/alert.js
+export type Alert_Status = 'inform' | 'help' | 'error';`,lang:"ts"});var i=t(c,2);n(i,{content:`<Alert status="error">
+	the computer is mistaken
+</Alert>`});var d=t(i,2);v(d,{status:"error",children:(e,B)=>{a();var f=$("the computer is mistaken");o(e,f)},$$slots:{default:!0}});var m=t(d,2);n(m,{content:`<Alert status="help">
+	here's how to fix it
+</Alert>`});var u=t(m,2);v(u,{status:"help",children:(e,B)=>{a();var f=$("here's how to fix it");o(e,f)},$$slots:{default:!0}});var p=t(u,2);n(p,{content:`<Alert status="help" color="var(--color_d_5)">
+	the <code>color</code> prop overrides the status color
+</Alert>`});var s=t(p,2);v(s,{status:"help",color:"var(--color_d_5)",children:(e,B)=>{a();var f=V();a(2),o(e,f)},$$slots:{default:!0}}),o(_,r)},$$slots:{default:!0}}),o(Y,I)},$$slots:{default:!0}}),q()}export{dt as component};
