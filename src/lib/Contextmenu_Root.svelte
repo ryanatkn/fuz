@@ -7,9 +7,10 @@
 	 * see https://bugs.webkit.org/show_bug.cgi?id=213953.
 	 *
 	 * This is the recommended default because
-	 * it supports haptic feedback with `navigator.vibrate()` --
-	 * longpress cannot work with `navigator.vibrate()` on Android devices
-	 * because it's triggered by a timeout and not a direct user event.
+	 * it supports haptic feedback with `navigator.vibrate()`.
+	 * The Safari compatibility version uses timeout-based longpress detection,
+	 * which causes browsers to block `navigator.vibrate()` since it's not
+	 * triggered directly by a user event.
 	 *
 	 * If you need iOS Safari support, use `Contextmenu_Root_For_Safari_Compatibility.svelte`
 	 * instead. That version implements custom touch handlers and longpress detection at the
@@ -74,13 +75,13 @@
 		 */
 		open_offset_y?: number;
 		/**
-		 * Whether to detect tap-then-longpress to bypass the custom contextmenu.
+		 * Whether to detect tap-then-longpress to bypass the Fuz contextmenu.
 		 * This allows access to the system contextmenu by tapping once then rightclicking/long-pressing.
 		 * Setting to `false` disables the gesture.
 		 */
 		bypass_with_tap_then_longpress?: boolean;
 		/**
-		 * The number of milliseconds between taps to detect a gesture that bypasses the custom contextmenu.
+		 * The number of milliseconds between taps to detect a gesture that bypasses the Fuz contextmenu.
 		 * Used only when `bypass_with_tap_then_longpress` is true.
 		 * If the duration is too long, it'll detect more false positives and interrupt normal usage,
 		 * but too short and some people will have difficulty performing the gesture.
@@ -159,7 +160,7 @@
 	// These values are `undefined` when unused, and `null` after being reset.
 	let touch_x: number | undefined | null = $state();
 	let touch_y: number | undefined | null = $state();
-	let longpress_start_time: number | undefined | null = $state();
+	let first_tap_time: number | undefined | null = $state();
 	let longpress_bypass: boolean | undefined = $state();
 	let tap_tracking_timeout: NodeJS.Timeout | undefined | null = $state();
 
@@ -168,7 +169,7 @@
 		if (longpress_bypass) {
 			// Clear all tap tracking state after consuming the bypass
 			longpress_bypass = false;
-			longpress_start_time = null;
+			first_tap_time = null;
 			touch_x = null;
 			touch_y = null;
 			if (tap_tracking_timeout != null) {
@@ -202,7 +203,7 @@
 	 * This allows users to access the native context menu by performing a tap
 	 * followed by a longpress/rightclick within a specified time window.
 	 * The bypass gesture is useful for accessing browser features like text selection
-	 * or the native context menu when the custom contextmenu would normally override it.
+	 * or the native context menu when the Fuz contextmenu would normally override it.
 	 *
 	 * Note: preventDefault is not called as we're only observing touch patterns,
 	 * not intercepting them. The actual bypass happens in on_window_contextmenu.
@@ -217,7 +218,7 @@
 			!contextmenu_is_valid_target(target, e.shiftKey)
 		) {
 			// Reset all state if conditions aren't met
-			longpress_start_time = null;
+			first_tap_time = null;
 			touch_x = null;
 			touch_y = null;
 			longpress_bypass = false;
@@ -232,13 +233,13 @@
 
 		// Check if this is a tap-then-longpress gesture
 		if (
-			longpress_start_time != null &&
-			performance.now() - longpress_start_time < bypass_window &&
+			first_tap_time != null &&
+			performance.now() - first_tap_time < bypass_window &&
 			Math.hypot(clientX - touch_x!, clientY - touch_y!) < bypass_move_tolerance
 		) {
 			// This is a tap-then-longpress - set bypass flag and clear tap tracking
 			longpress_bypass = true;
-			longpress_start_time = null;
+			first_tap_time = null;
 			touch_x = null;
 			touch_y = null;
 			if (tap_tracking_timeout != null) {
@@ -249,7 +250,7 @@
 		}
 
 		// Record this tap for potential future bypass detection
-		longpress_start_time = performance.now();
+		first_tap_time = performance.now();
 		touch_x = clientX;
 		touch_y = clientY;
 
@@ -258,7 +259,7 @@
 			clearTimeout(tap_tracking_timeout);
 		}
 		tap_tracking_timeout = setTimeout(() => {
-			longpress_start_time = null;
+			first_tap_time = null;
 			touch_x = null;
 			touch_y = null;
 			tap_tracking_timeout = null;
@@ -270,7 +271,7 @@
 	 */
 	const touchcancel = (): void => {
 		// Reset all bypass detection state
-		longpress_start_time = null;
+		first_tap_time = null;
 		touch_x = null;
 		touch_y = null;
 		longpress_bypass = false;
@@ -368,7 +369,6 @@
 		z-index: var(--contextmenu_z_index, 200);
 		max-width: var(--contextmenu_width);
 		width: 100%;
-		user-select: none;
 	}
 	.contextmenu,
 	.contextmenu :global(menu.pane) {

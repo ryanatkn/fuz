@@ -113,11 +113,11 @@
 			for input/textarea/contenteditable)
 		</li>
 		<li>
-			double-tap-and-hold (tap-then-longpress) opens the system contextmenu or performs other
-			default behavior like selecting text, bypassing the Fuz contextmenu
+			tap-then-longpress opens the system contextmenu or performs other default behavior like
+			selecting text, bypassing the Fuz contextmenu
 		</li>
 		<li>
-			double-tap-and-hold can't work for clickable elements like links; longpress on the first
+			tap-then-longpress can't work for clickable elements like links; longpress on the first
 			contextmenu entry for those cases (double-longpress)
 		</li>
 	</ul>

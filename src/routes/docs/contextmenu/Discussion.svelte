@@ -12,6 +12,10 @@
 		Safari not supporting the <code>contextmenu</code> event as of October 2025, see
 		<a href="https://bugs.webkit.org/show_bug.cgi?id=213953">WebKit bug #213953</a>.
 	</p>
+	<p>
+		Use <code>Contextmenu_Root</code> by default for better performance and haptic feedback. Use
+		<code>Contextmenu_Root_For_Safari_Compatibility</code> only if you need iOS Safari support.
+	</p>
 	<h4>Contextmenu_Root</h4>
 	<ul>
 		<li>standard, default implementation</li>
@@ -20,7 +24,10 @@
 				><span class="font_family_mono">contextmenu</span> event</Mdn_Link
 			>
 		</li>
-		<li>much simpler, fewer edge cases that can go wrong</li>
+		<li>
+			much simpler, better performance with fewer and less intrusive event handlers, fewer edge
+			cases that can go wrong
+		</li>
 		<li>
 			does not work on iOS Safari until <a href="https://bugs.webkit.org/show_bug.cgi?id=213953"
 				>WebKit bug #213953</a
@@ -31,15 +38,15 @@
 	<ul>
 		<li>opt-in for iOS</li>
 		<li>
+			some browsers (including mobile Chrome) block <code>navigator.vibrate</code> haptic feedback due
+			to the timeout-based gesture detection (because it's not a direct user action)
+		</li>
+		<li>
 			implements custom longpress detection to work around iOS Safari's lack of
 			<code>contextmenu</code> event support
 		</li>
 		<li>works on all devices including iOS Safari</li>
 		<li>more complex implementation with custom touch event handling and gesture detection</li>
-		<li>
-			some browsers (including mobile Chrome) block <code>navigator.vibrate</code> haptic feedback due
-			to the timeout-based gesture detection (because it's not a direct user action)
-		</li>
 		<li>a longpress is cancelled if you move the touch past a threshold before it triggers</li>
 		<li>opt into this version only if you need iOS Safari support</li>
 	</ul>
@@ -66,8 +73,7 @@
 		</li>
 		<li>To bypass on devices with a keyboard, hold Shift while rightclicking.</li>
 		<li>
-			To bypass on touch devices (e.g. to select text), use double-tap-and-hold instead of
-			tap-and-hold.
+			To bypass on touch devices (e.g. to select text), use tap-then-longpress instead of longpress.
 		</li>
 		<li>Triggering the contextmenu inside the Fuz contextmenu shows the system contextmenu.</li>
 	</ul>

@@ -8,6 +8,7 @@ import Contextmenu_Root_For_Safari_Compatibility from '$lib/Contextmenu_Root_For
 import {
 	unmount_component,
 	create_touch_event,
+	create_mouse_event,
 	create_contextmenu_event,
 	set_event_target,
 } from '$lib/test_helpers.js';
@@ -848,6 +849,644 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Touch Event Handling', () 
 
 			// Menu should remain open (component checks if menu is open and exits early)
 			assert.strictEqual(contextmenu.opened, true);
+		});
+	});
+
+	describe('synthesized click blocking', () => {
+		test('blocks iOS synthesized click immediately after longpress', async () => {
+			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility);
+
+			const {container, contextmenu} = mounted;
+
+			const target = document.createElement('div');
+			container.appendChild(target);
+
+			let clicked = false;
+			await setup_contextmenu_action(target, [
+				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => (clicked = true)}},
+			]);
+
+			// Start touch
+			const touchstart = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
+			set_event_target(touchstart, target);
+			window.dispatchEvent(touchstart);
+
+			// Wait for longpress to open menu
+			vi.advanceTimersByTime(CONTEXTMENU_DEFAULT_LONGPRESS_DURATION);
+			await tick();
+			flushSync();
+
+			assert.strictEqual(contextmenu.opened, true);
+
+			// Touchend (this sets block_next_click flag)
+			const touchend = create_touch_event('touchend', []);
+			set_event_target(touchend, target);
+			window.dispatchEvent(touchend);
+			flushSync(); // Force Svelte to update the conditional onclickcapture handler
+
+			// iOS synthesizes a click event on the menu shortly after touchend
+			// Find the actual menu element in DOM
+			const menu_element = container.querySelector('.contextmenu');
+			assert.ok(menu_element, 'Menu element should exist');
+
+			const synth_click = create_mouse_event('click', {bubbles: true, cancelable: true});
+			Object.defineProperty(synth_click, 'target', {value: menu_element, configurable: true});
+
+			menu_element.dispatchEvent(synth_click);
+
+			// Click should be blocked (captured and prevented)
+			assert.strictEqual(synth_click.defaultPrevented, true);
+			// Menu item should not have been activated
+			assert.strictEqual(clicked, false);
+		});
+
+		test('allows subsequent clicks after blocking synthesized click', async () => {
+			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility);
+
+			const {container} = mounted;
+
+			const target = document.createElement('div');
+			container.appendChild(target);
+
+			await setup_contextmenu_action(target, [
+				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
+			]);
+
+			// Open menu via longpress
+			const touchstart = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
+			set_event_target(touchstart, target);
+			window.dispatchEvent(touchstart);
+
+			vi.advanceTimersByTime(CONTEXTMENU_DEFAULT_LONGPRESS_DURATION);
+			await tick();
+			flushSync();
+
+			// Touchend (sets block_next_click = true)
+			const touchend = create_touch_event('touchend', []);
+			set_event_target(touchend, target);
+			window.dispatchEvent(touchend);
+			flushSync(); // Force Svelte to update the conditional onclickcapture handler
+
+			const menu_element = container.querySelector('.contextmenu');
+			assert.ok(menu_element);
+
+			// First click (synthesized by iOS) - should be blocked
+			const first_click = create_mouse_event('click', {bubbles: true, cancelable: true});
+			Object.defineProperty(first_click, 'target', {value: menu_element, configurable: true});
+			menu_element.dispatchEvent(first_click);
+
+			assert.strictEqual(first_click.defaultPrevented, true, 'First click should be blocked');
+
+			// Second click (user intentionally clicking menu) - should NOT be blocked
+			const second_click = create_mouse_event('click', {bubbles: true, cancelable: true});
+			Object.defineProperty(second_click, 'target', {value: menu_element, configurable: true});
+			menu_element.dispatchEvent(second_click);
+
+			// Second click should NOT be prevented (block_next_click was cleared after first)
+			assert.strictEqual(
+				second_click.defaultPrevented,
+				false,
+				'Second click should not be blocked',
+			);
+		});
+
+		test('clears block_next_click flag on new touchstart', async () => {
+			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility);
+
+			const {container, contextmenu} = mounted;
+
+			const target = document.createElement('div');
+			container.appendChild(target);
+
+			await setup_contextmenu_action(target, [
+				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
+			]);
+
+			// First interaction: open menu via longpress
+			const touchstart1 = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
+			set_event_target(touchstart1, target);
+			window.dispatchEvent(touchstart1);
+
+			vi.advanceTimersByTime(CONTEXTMENU_DEFAULT_LONGPRESS_DURATION);
+			await tick();
+
+			// Touchend (sets block_next_click = true)
+			const touchend1 = create_touch_event('touchend', []);
+			set_event_target(touchend1, target);
+			window.dispatchEvent(touchend1);
+			flushSync(); // Force Svelte to update
+
+			// Close menu
+			contextmenu.close();
+			await tick();
+
+			// Second interaction: new touchstart should clear the block_next_click flag
+			const touchstart2 = create_touch_event('touchstart', [{clientX: 150, clientY: 250, target}]);
+			set_event_target(touchstart2, target);
+			window.dispatchEvent(touchstart2);
+
+			vi.advanceTimersByTime(CONTEXTMENU_DEFAULT_LONGPRESS_DURATION);
+			await tick();
+			flushSync();
+
+			// Now clicks should not be blocked (flag was cleared on touchstart2)
+			const menu_element = container.querySelector('.contextmenu');
+			assert.ok(menu_element, 'Menu should exist after second longpress');
+
+			const click = create_mouse_event('click', {bubbles: true, cancelable: true});
+			Object.defineProperty(click, 'target', {value: menu_element, configurable: true});
+			menu_element.dispatchEvent(click);
+
+			// Click should NOT be prevented (flag cleared by touchstart2)
+			assert.strictEqual(
+				click.defaultPrevented,
+				false,
+				'Click should not be blocked after flag cleared',
+			);
+		});
+
+		test('only blocks click when block_next_click flag is true', async () => {
+			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility);
+
+			const {container, contextmenu} = mounted;
+
+			const target = document.createElement('div');
+			container.appendChild(target);
+
+			await setup_contextmenu_action(target, [
+				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
+			]);
+
+			// Open menu manually (not via longpress+touchend, so block_next_click not set)
+			contextmenu.open(
+				[{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}}],
+				100,
+				200,
+			);
+			flushSync();
+
+			const menu_element = container.querySelector('.contextmenu');
+			assert.ok(menu_element, 'Menu should exist');
+
+			// Click should work normally (block_next_click is false)
+			const click = create_mouse_event('click', {bubbles: true, cancelable: true});
+			Object.defineProperty(click, 'target', {value: menu_element, configurable: true});
+			menu_element.dispatchEvent(click);
+
+			// Click should NOT be prevented (flag not set)
+			assert.strictEqual(
+				click.defaultPrevented,
+				false,
+				'Click should not be blocked when flag not set',
+			);
+		});
+
+		test('does not set flag when touchend before longpress completes', async () => {
+			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility);
+
+			const {container, contextmenu} = mounted;
+
+			const target = document.createElement('div');
+			container.appendChild(target);
+
+			await setup_contextmenu_action(target, [
+				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
+			]);
+
+			// Start touch
+			const touchstart = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
+			set_event_target(touchstart, target);
+			window.dispatchEvent(touchstart);
+
+			// Touchend BEFORE longpress completes (only 200ms into 633ms default)
+			vi.advanceTimersByTime(200);
+			const touchend = create_touch_event('touchend', []);
+			set_event_target(touchend, target);
+			window.dispatchEvent(touchend);
+			flushSync();
+
+			// Menu should not be open
+			assert.strictEqual(contextmenu.opened, false, 'Menu should not be open');
+
+			// Even though we can't test the internal flag directly, we can verify behavior:
+			// If we manually open a menu now, clicks should NOT be blocked (flag not set)
+			contextmenu.open(
+				[{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}}],
+				100,
+				200,
+			);
+			flushSync();
+
+			const menu_element = container.querySelector('.contextmenu');
+			assert.ok(menu_element, 'Menu should exist');
+
+			const click = create_mouse_event('click', {bubbles: true, cancelable: true});
+			Object.defineProperty(click, 'target', {value: menu_element, configurable: true});
+			menu_element.dispatchEvent(click);
+
+			// Click should NOT be blocked (flag was not set since longpress_opened was false)
+			assert.strictEqual(
+				click.defaultPrevented,
+				false,
+				'Click should not be blocked when touchend happened before longpress',
+			);
+		});
+	});
+
+	describe('CSS class management for iOS selection blocking', () => {
+		test('adds contextmenu_pending class to body on touchstart', async () => {
+			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility);
+
+			const {container} = mounted;
+
+			const target = document.createElement('div');
+			container.appendChild(target);
+
+			await setup_contextmenu_action(target, [
+				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
+			]);
+
+			// touchstart on valid target
+			const touchstart = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
+			set_event_target(touchstart, target);
+			window.dispatchEvent(touchstart);
+
+			// Class should be added immediately
+			assert.strictEqual(
+				document.body.classList.contains('contextmenu_pending'),
+				true,
+				'contextmenu_pending class should be added',
+			);
+		});
+
+		test('removes class when longpress completes', async () => {
+			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility);
+
+			const {container} = mounted;
+
+			const target = document.createElement('div');
+			container.appendChild(target);
+
+			await setup_contextmenu_action(target, [
+				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
+			]);
+
+			// Start touch (adds class)
+			const touchstart = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
+			set_event_target(touchstart, target);
+			window.dispatchEvent(touchstart);
+
+			assert.strictEqual(document.body.classList.contains('contextmenu_pending'), true);
+
+			// Wait for longpress to complete
+			vi.advanceTimersByTime(CONTEXTMENU_DEFAULT_LONGPRESS_DURATION);
+			await tick();
+
+			// Class should be removed when menu opens
+			assert.strictEqual(
+				document.body.classList.contains('contextmenu_pending'),
+				false,
+				'class should be removed when menu opens',
+			);
+		});
+
+		test('removes class when movement exceeds tolerance (scrolling)', async () => {
+			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility);
+
+			const {container} = mounted;
+
+			const target = document.createElement('div');
+			container.appendChild(target);
+
+			await setup_contextmenu_action(target, [
+				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
+			]);
+
+			// Start touch (adds class)
+			const touchstart = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
+			set_event_target(touchstart, target);
+			window.dispatchEvent(touchstart);
+
+			assert.strictEqual(document.body.classList.contains('contextmenu_pending'), true);
+
+			// Move beyond tolerance (user is scrolling)
+			const touchmove = create_touch_event('touchmove', [
+				{clientX: 100 + CONTEXTMENU_DEFAULT_LONGPRESS_MOVE_TOLERANCE + 1, clientY: 200, target},
+			]);
+			set_event_target(touchmove, target);
+			window.dispatchEvent(touchmove);
+
+			// Class should be removed (longpress canceled due to scrolling)
+			assert.strictEqual(
+				document.body.classList.contains('contextmenu_pending'),
+				false,
+				'class should be removed when user scrolls',
+			);
+		});
+
+		test('removes class on touchend before longpress completes', async () => {
+			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility);
+
+			const {container} = mounted;
+
+			const target = document.createElement('div');
+			container.appendChild(target);
+
+			await setup_contextmenu_action(target, [
+				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
+			]);
+
+			// Start touch (adds class)
+			const touchstart = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
+			set_event_target(touchstart, target);
+			window.dispatchEvent(touchstart);
+
+			assert.strictEqual(document.body.classList.contains('contextmenu_pending'), true);
+
+			// End touch before longpress completes
+			vi.advanceTimersByTime(200); // Part way through
+			const touchend = create_touch_event('touchend', []);
+			set_event_target(touchend, target);
+			window.dispatchEvent(touchend);
+
+			// Class should be removed
+			assert.strictEqual(
+				document.body.classList.contains('contextmenu_pending'),
+				false,
+				'class should be removed on touchend',
+			);
+		});
+
+		test('removes class on touchcancel', async () => {
+			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility);
+
+			const {container} = mounted;
+
+			const target = document.createElement('div');
+			container.appendChild(target);
+
+			await setup_contextmenu_action(target, [
+				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
+			]);
+
+			// Start touch (adds class)
+			const touchstart = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
+			set_event_target(touchstart, target);
+			window.dispatchEvent(touchstart);
+
+			assert.strictEqual(document.body.classList.contains('contextmenu_pending'), true);
+
+			// Cancel touch
+			const touchcancel = create_touch_event('touchcancel', []);
+			set_event_target(touchcancel, target);
+			window.dispatchEvent(touchcancel);
+
+			// Class should be removed
+			assert.strictEqual(
+				document.body.classList.contains('contextmenu_pending'),
+				false,
+				'class should be removed on touchcancel',
+			);
+		});
+
+		test('does not add class for invalid targets', () => {
+			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility);
+
+			const {container} = mounted;
+
+			// Use an input element (editable, invalid for contextmenu)
+			const input = document.createElement('input');
+			container.appendChild(input);
+
+			const touchstart = create_touch_event('touchstart', [
+				{clientX: 100, clientY: 200, target: input},
+			]);
+			set_event_target(touchstart, input);
+			window.dispatchEvent(touchstart);
+
+			// Class should NOT be added (invalid target)
+			assert.strictEqual(
+				document.body.classList.contains('contextmenu_pending'),
+				false,
+				'class should not be added for editable elements',
+			);
+		});
+
+		test('does not add class for multiple touches', async () => {
+			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility);
+
+			const {container} = mounted;
+
+			const target = document.createElement('div');
+			container.appendChild(target);
+
+			await setup_contextmenu_action(target, [
+				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
+			]);
+
+			// Two-finger touch (pinch, zoom, etc.)
+			const touchstart = create_touch_event('touchstart', [
+				{clientX: 100, clientY: 200, target},
+				{clientX: 150, clientY: 250, target},
+			]);
+			set_event_target(touchstart, target);
+			window.dispatchEvent(touchstart);
+
+			// Class should NOT be added (multi-touch gesture)
+			assert.strictEqual(
+				document.body.classList.contains('contextmenu_pending'),
+				false,
+				'class should not be added for multi-touch gestures',
+			);
+		});
+
+		test('bypass gesture does not add class or block clicks', async () => {
+			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility);
+
+			const {container, contextmenu} = mounted;
+
+			const target = document.createElement('div');
+			container.appendChild(target);
+
+			await setup_contextmenu_action(target, [
+				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
+			]);
+
+			// First tap
+			const touchstart1 = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
+			set_event_target(touchstart1, target);
+			window.dispatchEvent(touchstart1);
+
+			// Class should be added for first tap
+			assert.strictEqual(document.body.classList.contains('contextmenu_pending'), true);
+
+			// Short tap duration
+			vi.advanceTimersByTime(100);
+
+			const touchend1 = create_touch_event('touchend', []);
+			set_event_target(touchend1, target);
+			window.dispatchEvent(touchend1);
+
+			// Class should be removed after touchend
+			assert.strictEqual(document.body.classList.contains('contextmenu_pending'), false);
+
+			// Second tap quickly (within bypass window) - this triggers bypass
+			vi.advanceTimersByTime(100); // Total 200ms from first tap
+
+			const touchstart2 = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
+			set_event_target(touchstart2, target);
+			window.dispatchEvent(touchstart2);
+
+			// Class should NOT be added (bypass detected, early return)
+			assert.strictEqual(
+				document.body.classList.contains('contextmenu_pending'),
+				false,
+				'class should not be added during bypass gesture',
+			);
+
+			// Hold for longpress duration
+			vi.advanceTimersByTime(CONTEXTMENU_DEFAULT_LONGPRESS_DURATION);
+			await tick();
+
+			// Menu should NOT open (bypass mode)
+			assert.strictEqual(contextmenu.opened, false, 'menu should not open during bypass');
+
+			// Now if we manually open a menu, clicks should NOT be blocked (bypass doesn't set flag)
+			contextmenu.open(
+				[{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}}],
+				100,
+				200,
+			);
+			flushSync();
+
+			const menu_element = container.querySelector('.contextmenu');
+			assert.ok(menu_element);
+
+			const click = create_mouse_event('click', {bubbles: true, cancelable: true});
+			Object.defineProperty(click, 'target', {value: menu_element, configurable: true});
+			menu_element.dispatchEvent(click);
+
+			// Click should NOT be blocked (bypass path doesn't set block_next_click)
+			assert.strictEqual(
+				click.defaultPrevented,
+				false,
+				'clicks should not be blocked after bypass gesture',
+			);
+		});
+	});
+
+	describe('preventDefault in touchmove', () => {
+		test('calls preventDefault when tracking stationary longpress', async () => {
+			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility);
+
+			const {container} = mounted;
+
+			const target = document.createElement('div');
+			container.appendChild(target);
+
+			await setup_contextmenu_action(target, [
+				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
+			]);
+
+			// Start touch
+			const touchstart = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
+			set_event_target(touchstart, target);
+			window.dispatchEvent(touchstart);
+
+			// Move within tolerance (still tracking longpress)
+			const touchmove = create_touch_event('touchmove', [{clientX: 105, clientY: 200, target}]);
+			set_event_target(touchmove, target);
+			window.dispatchEvent(touchmove);
+
+			// preventDefault should have been called
+			assert.strictEqual(touchmove.defaultPrevented, true, 'preventDefault should be called');
+		});
+
+		test('does not call preventDefault when scrolling (beyond tolerance)', async () => {
+			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility);
+
+			const {container} = mounted;
+
+			const target = document.createElement('div');
+			container.appendChild(target);
+
+			await setup_contextmenu_action(target, [
+				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
+			]);
+
+			// Start touch
+			const touchstart = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
+			set_event_target(touchstart, target);
+			window.dispatchEvent(touchstart);
+
+			// Move beyond tolerance (scrolling)
+			const touchmove = create_touch_event('touchmove', [
+				{clientX: 100 + CONTEXTMENU_DEFAULT_LONGPRESS_MOVE_TOLERANCE + 5, clientY: 200, target},
+			]);
+			set_event_target(touchmove, target);
+			window.dispatchEvent(touchmove);
+
+			// preventDefault should NOT be called (allow scrolling)
+			assert.strictEqual(
+				touchmove.defaultPrevented,
+				false,
+				'preventDefault should not be called when scrolling',
+			);
+		});
+
+		test('does not call preventDefault when menu already open', async () => {
+			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility);
+
+			const {container, contextmenu} = mounted;
+
+			const target = document.createElement('div');
+			container.appendChild(target);
+
+			await setup_contextmenu_action(target, [
+				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
+			]);
+
+			// Open menu via longpress
+			const touchstart = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
+			set_event_target(touchstart, target);
+			window.dispatchEvent(touchstart);
+
+			vi.advanceTimersByTime(CONTEXTMENU_DEFAULT_LONGPRESS_DURATION);
+			await tick();
+			assert.strictEqual(contextmenu.opened, true);
+
+			// Now move with menu open
+			const touchmove = create_touch_event('touchmove', [{clientX: 105, clientY: 200, target}]);
+			set_event_target(touchmove, target);
+			window.dispatchEvent(touchmove);
+
+			// preventDefault should NOT be called (menu already open, handler exits early)
+			assert.strictEqual(
+				touchmove.defaultPrevented,
+				false,
+				'preventDefault should not be called when menu already open',
+			);
+		});
+
+		test('does not call preventDefault when not tracking longpress', () => {
+			mounted = mount_contextmenu_root(Contextmenu_Root_For_Safari_Compatibility);
+
+			const {container} = mounted;
+
+			const target = document.createElement('div');
+			container.appendChild(target);
+
+			// touchmove without any touchstart first (no tracking)
+			const touchmove = create_touch_event('touchmove', [{clientX: 105, clientY: 200, target}]);
+			set_event_target(touchmove, target);
+			window.dispatchEvent(touchmove);
+
+			// preventDefault should NOT be called (no longpress being tracked)
+			assert.strictEqual(
+				touchmove.defaultPrevented,
+				false,
+				'preventDefault should not be called when not tracking',
+			);
 		});
 	});
 });

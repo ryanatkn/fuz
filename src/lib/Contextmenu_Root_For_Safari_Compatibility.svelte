@@ -19,6 +19,7 @@
 	 */
 	import {swallow} from '@ryanatkn/belt/dom.js';
 	import {DEV} from 'esm-env';
+	import {on} from 'svelte/events';
 	import type {ComponentProps, Snippet} from 'svelte';
 
 	import {
@@ -71,21 +72,20 @@
 		contextmenu?: Contextmenu_State;
 		/**
 		 * The number of pixels the pointer can be moved without canceling `longpress`.
-		 * Defaults to half the default `--input_height`.
 		 */
 		longpress_move_tolerance?: number;
 		/**
-		 * The number of milliseconds after a touch starts before a `longpress` is detected.
-		 * This value needs to be lower than iOS's ~500 so we can intercept its behavior.
+		 * The number of milliseconds after a touch starts before opening the Fuz contextmenu.
 		 */
 		longpress_duration?: number;
 		/**
-		 * Whether to detect tap-then-longpress to bypass `longpress`.
+		 * Whether to detect tap-then-longpress to bypass the Fuz contextmenu.
+		 * This allows access to the system contextmenu by tapping once then long-pressing.
 		 * Setting to `false` disables the gesture.
 		 */
 		bypass_with_tap_then_longpress?: boolean;
 		/**
-		 * The number of milliseconds between taps to detect a gesture that bypasses a `longpress`.
+		 * The number of milliseconds between taps to detect a gesture that bypasses the Fuz contextmenu.
 		 * Used only when `bypass_with_tap_then_longpress` is true.
 		 * If the duration is too long, it'll detect more false positives and interrupt normal usage,
 		 * but too short and some people will have difficulty performing the gesture.
@@ -175,11 +175,33 @@
 	// These values are `undefined` when unused, and `null` after being reset.
 	let touch_x: number | undefined | null = $state();
 	let touch_y: number | undefined | null = $state();
-	let longpress_start_time: number | undefined | null = $state();
+	let first_tap_time: number | undefined | null = $state();
 	let longpress_timeout: NodeJS.Timeout | undefined | null = $state();
 	let longpress_opened: boolean | undefined = $state();
 	let longpress_bypass: boolean | undefined = $state();
 	let tap_tracking_timeout: NodeJS.Timeout | undefined | null = $state();
+
+	/**
+	 * Blocks the next click event. Set to true when a longpress completes to prevent
+	 * iOS's synthesized click from activating the first menu item.
+	 */
+	let block_next_click = $state(false);
+
+	/**
+	 * Adds contextmenu_pending class to body during longpress tracking.
+	 * This applies aggressive user-select/touch-callout blocking via CSS
+	 * to give iOS the earliest possible signal to not show selection UI.
+	 */
+	const add_contextmenu_pending_class = (): void => {
+		document.body.classList.add('contextmenu_pending');
+	};
+
+	/**
+	 * Removes contextmenu_pending class from body when tracking ends.
+	 */
+	const remove_contextmenu_pending_class = (): void => {
+		document.body.classList.remove('contextmenu_pending');
+	};
 
 	/**
 	 * Resets only the longpress timeout state, preserving tap tracking for bypass detection.
@@ -191,6 +213,7 @@
 			clearTimeout(longpress_timeout);
 			longpress_timeout = null;
 		}
+		remove_contextmenu_pending_class();
 		// Don't clear tap tracking state here - we need it for tap-then-longpress detection
 	};
 
@@ -198,7 +221,7 @@
 	 * Clears tap tracking state and bypass flag used for bypass detection.
 	 */
 	const reset_tap_tracking = (): void => {
-		longpress_start_time = null;
+		first_tap_time = null;
 		touch_x = null;
 		touch_y = null;
 		longpress_bypass = false;
@@ -212,7 +235,7 @@
 	 * Resets all state - both longpress and tap tracking.
 	 */
 	const reset_all = (): void => {
-		reset_longpress_timeout();
+		reset_longpress_timeout(); // Also removes contextmenu_pending class
 		reset_tap_tracking();
 	};
 
@@ -253,9 +276,10 @@
 		}
 	};
 
-	// Needed for the iOS workaround, is passive.
+	// Needed for the iOS workaround. Registered with { passive: false } via $effect (window) or attachment (scoped).
 	const touchstart = (e: TouchEvent): void => {
 		longpress_opened = false;
+		block_next_click = false; // Clear any stale click blocking flag
 		const {touches, target} = e;
 		if (
 			contextmenu.opened ||
@@ -270,21 +294,21 @@
 		const {clientX, clientY} = touches[0];
 
 		// Bypass the contextmenu behavior in certain conditions including a tap-and-longpress gesture.
-		// To handle tap-then-longpress we need to see if `longpress_start_time`
+		// To handle tap-then-longpress we need to see if `first_tap_time`
 		// is less than `bypass_window`, and also allow a small amount
 		// of pointer movement, `bypass_move_tolerance`.
 		// The builtin `'contextmenu'` event will still fire for non-iOS browsers,
 		// so `longpress_bypass` is used to tell the handler `on_window_contextmenu` to exit early.
 		if (bypass_with_tap_then_longpress) {
 			if (
-				longpress_start_time != null &&
-				performance.now() - longpress_start_time < bypass_window &&
+				first_tap_time != null &&
+				performance.now() - first_tap_time < bypass_window &&
 				Math.hypot(clientX - touch_x!, clientY - touch_y!) < bypass_move_tolerance
 			) {
 				// Tap-then-longpress detected! Set bypass and clear tap tracking state.
 				// Must manually clear state (not call reset_tap_tracking) to preserve bypass flag.
 				longpress_bypass = true;
-				longpress_start_time = null;
+				first_tap_time = null;
 				touch_x = null;
 				touch_y = null;
 				if (tap_tracking_timeout != null) {
@@ -294,7 +318,7 @@
 				return;
 			}
 			// Record this tap for potential future bypass detection
-			longpress_start_time = performance.now();
+			first_tap_time = performance.now();
 			// Set timeout to clear stale tap tracking after the detection window expires
 			if (tap_tracking_timeout != null) {
 				clearTimeout(tap_tracking_timeout);
@@ -307,9 +331,13 @@
 		touch_x = clientX;
 		touch_y = clientY;
 
+		// Add pending class to enable aggressive iOS blocking via CSS during tracking
+		add_contextmenu_pending_class();
+
 		if (longpress_timeout != null) reset_longpress_timeout();
 		longpress_timeout = setTimeout(() => {
 			longpress_opened = true;
+			remove_contextmenu_pending_class(); // Tracking complete, menu opening
 			open_contextmenu(target, touch_x! + open_offset_x, touch_y! + open_offset_y, contextmenu, {
 				link_enabled: link_entry !== null,
 				text_enabled: text_entry !== null,
@@ -318,7 +346,7 @@
 		}, longpress_duration);
 	};
 
-	// Needed for the iOS workaround, is passive.
+	// Needed for the iOS workaround. Registered with { passive: false } via $effect (window) or attachment (scoped).
 	const touchmove = (e: TouchEvent): void => {
 		// Exit early if no pending longpress or menu is already open
 		if (longpress_timeout == null || contextmenu.opened) return;
@@ -327,15 +355,23 @@
 		const {clientX, clientY} = touches[0];
 		const distance = Math.hypot(clientX - touch_x!, clientY - touch_y!);
 		if (distance > longpress_move_tolerance) {
+			// User is scrolling - cancel longpress but DON'T preventDefault
 			reset_longpress_timeout();
+			return;
 		}
+		// Still within threshold - this is a longpress
+		// CRITICAL: Prevent iOS from showing magnifier, text selection, and link callouts
+		e.preventDefault();
 	};
-	// Needed for the iOS workaround, can't be passive.
+	// Needed for the iOS workaround. Registered with { passive: false } via $effect.
 	const touchend = (e: TouchEvent): void => {
 		// Clear longpress timeout if it exists
 		if (longpress_timeout != null) {
-			// This stops triggering the first item on open.
-			if (longpress_opened) swallow(e);
+			if (longpress_opened) {
+				swallow(e);
+				// Block the next click to prevent iOS's synthesized click from activating the first menu item
+				block_next_click = true;
+			}
 			reset_longpress_timeout();
 		}
 		// Clear bypass flag if it was set but the contextmenu event hasn't fired yet
@@ -363,16 +399,51 @@
 
 	const keyboard_handlers = contextmenu_create_keyboard_handlers(contextmenu);
 	const keydown = contextmenu_create_keydown_handler(keyboard_handlers);
+
+	/**
+	 * Creates an attachment that registers touch event listeners with { passive: false }
+	 * to enable preventDefault() on iOS Safari. Works for both window (non-scoped mode) and
+	 * HTMLElement (scoped mode). Svelte's declarative touch handlers create passive listeners
+	 * by default, which prevents blocking iOS's default longpress behaviors (magnifier, text
+	 * selection, callouts). Using `on()` from svelte/events ensures proper event ordering
+	 * with Svelte's event delegation system.
+	 *
+	 * The critical fix is calling preventDefault() in the touchmove handler when tracking
+	 * a longpress with movement below threshold.
+	 *
+	 * @param el - The Window or HTMLElement to attach touch listeners to
+	 * @returns Cleanup function to remove all event listeners
+	 */
+	const touch_event_attachment = (el: HTMLElement | Window) => {
+		// touchstart and touchcancel don't call preventDefault, so they can be passive for better performance
+		const passive_options: AddEventListenerOptions = {passive: true, capture: true};
+		// touchmove and touchend need to call preventDefault to block iOS behaviors, so they must be non-passive
+		const nonpassive_options: AddEventListenerOptions = {passive: false, capture: true};
+
+		const cleanup_touchstart = on(el, 'touchstart', touchstart as EventListener, passive_options);
+		const cleanup_touchmove = on(el, 'touchmove', touchmove as EventListener, nonpassive_options);
+		const cleanup_touchend = on(el, 'touchend', touchend as EventListener, nonpassive_options);
+		const cleanup_touchcancel = on(
+			el,
+			'touchcancel',
+			touchcancel as EventListener,
+			passive_options,
+		);
+
+		return () => {
+			cleanup_touchstart();
+			cleanup_touchmove();
+			cleanup_touchend();
+			cleanup_touchcancel();
+		};
+	};
 </script>
 
 <svelte:window
 	oncontextmenu={scoped ? undefined : on_window_contextmenu}
-	ontouchstartcapture={scoped ? undefined : touchstart}
-	ontouchmovecapture={scoped ? undefined : touchmove}
-	ontouchendcapture={scoped ? undefined : touchend}
-	ontouchcancelcapture={scoped ? undefined : touchcancel}
 	onmousedown={!contextmenu.opened ? undefined : mousedown}
 	onkeydown={!contextmenu.opened ? undefined : keydown}
+	{@attach scoped ? undefined : touch_event_attachment}
 />
 
 {#if scoped}
@@ -380,10 +451,7 @@
 		class="contextmenu_root"
 		role="region"
 		oncontextmenu={on_window_contextmenu}
-		ontouchstartcapture={touchstart}
-		ontouchmovecapture={touchmove}
-		ontouchendcapture={touchend}
-		ontouchcancelcapture={touchcancel}
+		{@attach touch_event_attachment}
 	>
 		{@render children()}
 	</div>
@@ -403,6 +471,14 @@
 		tabindex="-1"
 		bind:this={el}
 		style:transform="translate3d({x}px, {y}px, 0)"
+		onclickcapture={block_next_click
+			? (e) => {
+					// iOS synthesizes a click after touchend which
+					// can unintentionally activate the first menu item. This blocks it.
+					block_next_click = false;
+					swallow(e);
+				}
+			: undefined}
 	>
 		<!-- TODO maybe this should be generic? -->
 		{#each contextmenu.params as p (p)}
@@ -432,10 +508,13 @@
 {/snippet}
 
 <style>
-	:global(body) {
-		/* TODO fix for iOS -- still does not work to disable iOS default behavior */
+	:global(body.contextmenu_pending) {
+		/* Applied during active longpress tracking.
+		   Aggressive blocking to give iOS earliest possible signal to not show selection UI.
+		   Combined with preventDefault() in touchmove for defense in depth. */
+		-webkit-user-select: none !important;
+		user-select: none !important;
 		-webkit-touch-callout: none !important;
-		/*a {-webkit-user-select: none !important} */
 	}
 
 	.contextmenu_root {
@@ -453,10 +532,9 @@
 		z-index: var(--contextmenu_z_index, 200);
 		max-width: var(--contextmenu_width);
 		width: 100%;
-		/* TODO fix for iOS -- still does not work to disable iOS default behavior */
+		/* Re-enable callouts on the menu itself to allow native contextmenu (for dev tools).
+		   Resets the global body blocking. Prevents the menu from being selected. */
 		-webkit-touch-callout: initial !important;
-		-webkit-user-select: none !important;
-		user-select: none;
 	}
 	/* TODO hacky */
 	.contextmenu,
