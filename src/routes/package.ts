@@ -59,24 +59,24 @@ export const package_json: Package_Json = {
 		'@changesets/changelog-git': '^0.2.1',
 		'@ryanatkn/belt': '^0.35.1',
 		'@ryanatkn/eslint-config': '^0.8.0',
-		'@ryanatkn/fuz_code': '^0.27.1',
-		'@ryanatkn/gro': '^0.169.1',
-		'@ryanatkn/moss': '^0.36.0',
-		'@sveltejs/adapter-static': '^3.0.9',
-		'@sveltejs/kit': '^2.37.0',
-		'@sveltejs/package': '^2.5.0',
-		'@sveltejs/vite-plugin-svelte': '^6.1.3',
+		'@ryanatkn/fuz_code': '^0.28.0',
+		'@ryanatkn/gro': '^0.170.0',
+		'@ryanatkn/moss': '^0.36.3',
+		'@sveltejs/adapter-static': '^3.0.10',
+		'@sveltejs/kit': '^2.47.3',
+		'@sveltejs/package': '^2.5.4',
+		'@sveltejs/vite-plugin-svelte': '^6.2.1',
 		'@types/node': '^24.3.0',
 		eslint: '^9.34.0',
-		'eslint-plugin-svelte': '^3.11.0',
+		'eslint-plugin-svelte': '^3.12.5',
 		'esm-env': '^1.2.2',
 		jsdom: '^27.0.1',
 		prettier: '^3.6.2',
 		'prettier-plugin-svelte': '^3.4.0',
-		svelte: '^5.38.6',
-		'svelte-check': '^4.3.1',
+		svelte: '^5.41.3',
+		'svelte-check': '^4.3.3',
 		tslib: '^2.8.1',
-		typescript: '^5.9.2',
+		typescript: '^5.9.3',
 		'typescript-eslint': '^8.41.0',
 		vitest: '^3.2.4',
 	},
@@ -596,21 +596,33 @@ export const src_json: Enhanced_Src_Json = {
 					name: 'Contextmenu_Params',
 					kind: 'type',
 					source_location: {
-						line: 12,
+						line: 14,
 						column: 0,
-						end_line: 16,
-						end_column: 83,
+						end_line: 19,
+						end_column: 59,
 					},
 					type_signature: 'Contextmenu_Params',
+					exported: true,
+				},
+				{
+					name: 'Contextmenu_Activate_Result',
+					kind: 'type',
+					source_location: {
+						line: 21,
+						column: 0,
+						end_line: 24,
+						end_column: 49,
+					},
+					type_signature: 'Contextmenu_Activate_Result',
 					exported: true,
 				},
 				{
 					name: 'Item_State',
 					kind: 'type',
 					source_location: {
-						line: 22,
+						line: 26,
 						column: 0,
-						end_line: 22,
+						end_line: 26,
 						end_column: 53,
 					},
 					type_signature: 'Item_State',
@@ -620,9 +632,9 @@ export const src_json: Enhanced_Src_Json = {
 					name: 'Entry_State',
 					kind: 'class',
 					source_location: {
-						line: 24,
+						line: 28,
 						column: 0,
-						end_line: 38,
+						end_line: 49,
 						end_column: 1,
 					},
 					members: [
@@ -635,11 +647,15 @@ export const src_json: Enhanced_Src_Json = {
 							kind: 'variable',
 						},
 						{
-							name: 'selected',
+							name: 'run',
 							kind: 'variable',
 						},
 						{
-							name: 'run',
+							name: 'disabled',
+							kind: 'variable',
+						},
+						{
+							name: 'selected',
 							kind: 'variable',
 						},
 						{
@@ -661,9 +677,9 @@ export const src_json: Enhanced_Src_Json = {
 					name: 'Submenu_State',
 					kind: 'class',
 					source_location: {
-						line: 40,
+						line: 51,
 						column: 0,
-						end_line: 52,
+						end_line: 63,
 						end_column: 1,
 					},
 					members: [
@@ -694,9 +710,9 @@ export const src_json: Enhanced_Src_Json = {
 					name: 'Root_Menu_State',
 					kind: 'class',
 					source_location: {
-						line: 54,
+						line: 65,
 						column: 0,
-						end_line: 60,
+						end_line: 71,
 						end_column: 1,
 					},
 					members: [
@@ -723,10 +739,10 @@ export const src_json: Enhanced_Src_Json = {
 					name: 'Contextmenu_Run',
 					kind: 'type',
 					source_location: {
-						line: 63,
+						line: 73,
 						column: 0,
-						end_line: 63,
-						end_column: 71,
+						end_line: 75,
+						end_column: 40,
 					},
 					type_signature: 'Contextmenu_Run',
 					exported: true,
@@ -735,9 +751,9 @@ export const src_json: Enhanced_Src_Json = {
 					name: 'Contextmenu_State_Options',
 					kind: 'type',
 					source_location: {
-						line: 65,
+						line: 77,
 						column: 0,
-						end_line: 69,
+						end_line: 79,
 						end_column: 1,
 					},
 					type_signature: 'Contextmenu_State_Options',
@@ -751,11 +767,11 @@ export const src_json: Enhanced_Src_Json = {
 					summary:
 						'Creates a `contextmenu` store.\nSee usage with `Contextmenu_Root.svelte` and `Contextmenu.svelte`.',
 					examples: [],
-					see_also: [],
+					see_also: ['://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event'],
 					source_location: {
-						line: 75,
+						line: 87,
 						column: 0,
-						end_line: 277,
+						end_line: 335,
 						end_column: 1,
 					},
 					members: [
@@ -764,7 +780,7 @@ export const src_json: Enhanced_Src_Json = {
 							kind: 'variable',
 						},
 						{
-							name: 'initial_layout',
+							name: 'has_custom_layout',
 							kind: 'variable',
 						},
 						{
@@ -793,6 +809,26 @@ export const src_json: Enhanced_Src_Json = {
 						},
 						{
 							name: 'selections',
+							kind: 'variable',
+						},
+						{
+							name: 'can_collapse',
+							kind: 'variable',
+						},
+						{
+							name: 'can_expand',
+							kind: 'variable',
+						},
+						{
+							name: 'can_select_next',
+							kind: 'variable',
+						},
+						{
+							name: 'can_select_previous',
+							kind: 'variable',
+						},
+						{
+							name: 'can_activate',
 							kind: 'variable',
 						},
 						{
@@ -858,9 +894,9 @@ export const src_json: Enhanced_Src_Json = {
 					name: 'contextmenu_action',
 					kind: 'function',
 					source_location: {
-						line: 286,
+						line: 344,
 						column: 13,
-						end_line: 302,
+						end_line: 360,
 						end_column: 1,
 					},
 					type_signature:
@@ -881,6 +917,18 @@ export const src_json: Enhanced_Src_Json = {
 					exported: false,
 				},
 				{
+					name: 'Open_Contextmenu_Options',
+					kind: 'type',
+					source_location: {
+						line: 364,
+						column: 0,
+						end_line: 369,
+						end_column: 1,
+					},
+					type_signature: 'Open_Contextmenu_Options',
+					exported: true,
+				},
+				{
 					name: 'open_contextmenu',
 					kind: 'function',
 					doc_comment:
@@ -890,13 +938,13 @@ export const src_json: Enhanced_Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 315,
+						line: 381,
 						column: 13,
-						end_line: 331,
+						end_line: 417,
 						end_column: 1,
 					},
 					type_signature:
-						'(target: HTMLElement | SVGElement, x: number, y: number, contextmenu: Contextmenu_State): boolean',
+						'(target: HTMLElement | SVGElement, x: number, y: number, contextmenu: Contextmenu_State, options?: Open_Contextmenu_Options | undefined): boolean',
 					return_type: 'boolean',
 					parameters: [
 						{
@@ -919,6 +967,11 @@ export const src_json: Enhanced_Src_Json = {
 							type: 'Contextmenu_State',
 							optional: false,
 						},
+						{
+							name: 'options',
+							type: 'Open_Contextmenu_Options | undefined',
+							optional: true,
+						},
 					],
 					exported: false,
 				},
@@ -926,9 +979,9 @@ export const src_json: Enhanced_Src_Json = {
 					name: 'contextmenu_context',
 					kind: 'variable',
 					source_location: {
-						line: 379,
+						line: 467,
 						column: 13,
-						end_line: 379,
+						end_line: 467,
 						end_column: 70,
 					},
 					type_signature:
@@ -939,9 +992,9 @@ export const src_json: Enhanced_Src_Json = {
 					name: 'contextmenu_submenu_context',
 					kind: 'variable',
 					source_location: {
-						line: 381,
+						line: 469,
 						column: 13,
-						end_line: 381,
+						end_line: 469,
 						end_column: 74,
 					},
 					type_signature:
@@ -952,13 +1005,39 @@ export const src_json: Enhanced_Src_Json = {
 					name: 'contextmenu_dimensions_context',
 					kind: 'variable',
 					source_location: {
-						line: 383,
+						line: 471,
 						column: 13,
-						end_line: 383,
+						end_line: 471,
 						end_column: 84,
 					},
 					type_signature:
 						'{ get: () => Dimensions; set: (value?: Dimensions | undefined) => Dimensions; }',
+					exported: false,
+				},
+				{
+					name: 'contextmenu_check_global_root',
+					kind: 'function',
+					doc_comment:
+						'Registers a contextmenu root and warns if multiple non-scoped roots are detected.\nOnly active in development mode. Automatically handles cleanup on unmount.',
+					summary:
+						'Registers a contextmenu root and warns if multiple non-scoped roots are detected.\nOnly active in development mode. Automatically handles cleanup on unmount.',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 482,
+						column: 13,
+						end_line: 505,
+						end_column: 1,
+					},
+					type_signature: '(get_scoped: () => boolean): void',
+					return_type: 'void',
+					parameters: [
+						{
+							name: 'get_scoped',
+							type: '() => boolean',
+							optional: false,
+						},
+					],
 					exported: false,
 				},
 			],
@@ -968,10 +1047,12 @@ export const src_json: Enhanced_Src_Json = {
 				'@ryanatkn/belt/async.js',
 				'svelte/action',
 				'esm-env',
+				'svelte/elements',
+				'@ryanatkn/belt/object.js',
 				'$lib/dimensions.svelte.js',
 				'$lib/context_helpers.js',
 			],
-			imported_by: ['./declaration_contextmenu.ts'],
+			imported_by: ['./contextmenu_helpers.ts', './declaration_contextmenu.ts'],
 		},
 		'./test_helpers.ts': {
 			path: 'test_helpers.ts',
@@ -988,9 +1069,9 @@ export const src_json: Enhanced_Src_Json = {
 					],
 					see_also: [],
 					source_location: {
-						line: 17,
+						line: 18,
 						column: 13,
-						end_line: 30,
+						end_line: 31,
 						end_column: 1,
 					},
 					type_signature:
@@ -1020,9 +1101,9 @@ export const src_json: Enhanced_Src_Json = {
 					],
 					see_also: [],
 					source_location: {
-						line: 39,
+						line: 40,
 						column: 13,
-						end_line: 42,
+						end_line: 43,
 						end_column: 1,
 					},
 					type_signature: '(instance: any, container: HTMLElement): Promise<void>',
@@ -1051,9 +1132,9 @@ export const src_json: Enhanced_Src_Json = {
 					],
 					see_also: [],
 					source_location: {
-						line: 51,
+						line: 52,
 						column: 13,
-						end_line: 63,
+						end_line: 64,
 						end_column: 1,
 					},
 					type_signature: '(x: number, y: number, options?: MouseEventInit): MouseEvent',
@@ -1087,9 +1168,9 @@ export const src_json: Enhanced_Src_Json = {
 					],
 					see_also: [],
 					source_location: {
-						line: 72,
+						line: 73,
 						column: 13,
-						end_line: 82,
+						end_line: 83,
 						end_column: 1,
 					},
 					type_signature: '(key: string, options?: KeyboardEventInit): KeyboardEvent',
@@ -1118,9 +1199,9 @@ export const src_json: Enhanced_Src_Json = {
 					],
 					see_also: [],
 					source_location: {
-						line: 91,
+						line: 92,
 						column: 13,
-						end_line: 97,
+						end_line: 98,
 						end_column: 1,
 					},
 					type_signature: '(type: string, options?: MouseEventInit): MouseEvent',
@@ -1151,9 +1232,9 @@ export const src_json: Enhanced_Src_Json = {
 					],
 					see_also: [],
 					source_location: {
-						line: 108,
+						line: 109,
 						column: 13,
-						end_line: 114,
+						end_line: 115,
 						end_column: 1,
 					},
 					type_signature: '(event: Event, target: EventTarget): void',
@@ -1184,9 +1265,9 @@ export const src_json: Enhanced_Src_Json = {
 					],
 					see_also: [],
 					source_location: {
-						line: 125,
+						line: 126,
 						column: 13,
-						end_line: 127,
+						end_line: 128,
 						end_column: 1,
 					},
 					type_signature: '(): void',
@@ -1196,8 +1277,240 @@ export const src_json: Enhanced_Src_Json = {
 				},
 			],
 			imports: ['svelte'],
-			module_comment:
-				'Shared test utilities for vitest tests.\nProvides helpers for component mounting and DOM event creation.',
+		},
+		'./contextmenu_helpers.ts': {
+			path: 'contextmenu_helpers.ts',
+			declarations: [
+				{
+					name: 'CONTEXTMENU_DEFAULT_OPEN_OFFSET_X',
+					kind: 'variable',
+					source_location: {
+						line: 6,
+						column: 13,
+						end_line: 6,
+						end_column: 51,
+					},
+					type_signature: '-2',
+					exported: false,
+				},
+				{
+					name: 'CONTEXTMENU_DEFAULT_OPEN_OFFSET_Y',
+					kind: 'variable',
+					source_location: {
+						line: 7,
+						column: 13,
+						end_line: 7,
+						end_column: 51,
+					},
+					type_signature: '-2',
+					exported: false,
+				},
+				{
+					name: 'CONTEXTMENU_DEFAULT_BYPASS_WINDOW',
+					kind: 'variable',
+					source_location: {
+						line: 8,
+						column: 13,
+						end_line: 8,
+						end_column: 52,
+					},
+					type_signature: '750',
+					exported: false,
+				},
+				{
+					name: 'CONTEXTMENU_DEFAULT_BYPASS_MOVE_TOLERANCE',
+					kind: 'variable',
+					source_location: {
+						line: 9,
+						column: 13,
+						end_line: 9,
+						end_column: 59,
+					},
+					type_signature: '11',
+					exported: false,
+				},
+				{
+					name: 'CONTEXTMENU_DEFAULT_LONGPRESS_DURATION',
+					kind: 'variable',
+					source_location: {
+						line: 10,
+						column: 13,
+						end_line: 10,
+						end_column: 57,
+					},
+					type_signature: '633',
+					exported: false,
+				},
+				{
+					name: 'CONTEXTMENU_DEFAULT_LONGPRESS_MOVE_TOLERANCE',
+					kind: 'variable',
+					source_location: {
+						line: 11,
+						column: 13,
+						end_line: 11,
+						end_column: 62,
+					},
+					type_signature: '21',
+					exported: false,
+				},
+				{
+					name: 'contextmenu_is_valid_target',
+					kind: 'function',
+					doc_comment:
+						'Check if a target element is valid for contextmenu interactions.\nReturns true if valid and narrows the type to HTMLElement | SVGElement.',
+					summary:
+						'Check if a target element is valid for contextmenu interactions.\nReturns true if valid and narrows the type to HTMLElement | SVGElement.',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 17,
+						column: 13,
+						end_line: 24,
+						end_column: 25,
+					},
+					type_signature:
+						'(target: EventTarget | null, shiftKey: boolean): target is HTMLElement | SVGElement',
+					return_type: 'boolean',
+					parameters: [
+						{
+							name: 'target',
+							type: 'EventTarget | null',
+							optional: false,
+						},
+						{
+							name: 'shiftKey',
+							type: 'boolean',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'contextmenu_create_keyboard_handlers',
+					kind: 'function',
+					doc_comment:
+						'Creates the keyboard handler map for contextmenu navigation.\nBinds handlers to the provided contextmenu instance.',
+					summary:
+						'Creates the keyboard handler map for contextmenu navigation.\nBinds handlers to the provided contextmenu instance.',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 32,
+						column: 13,
+						end_line: 45,
+						end_column: 3,
+					},
+					type_signature: '(contextmenu: Contextmenu_State): Map<string, () => void>',
+					return_type: 'Map<string, () => void>',
+					parameters: [
+						{
+							name: 'contextmenu',
+							type: 'Contextmenu_State',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'contextmenu_create_keydown_handler',
+					kind: 'function',
+					doc_comment:
+						'Creates a keydown event handler that uses the provided keyboard handlers map.',
+					summary: 'Creates a keydown event handler that uses the provided keyboard handlers map.',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 50,
+						column: 13,
+						end_line: 59,
+						end_column: 1,
+					},
+					type_signature:
+						'(keyboard_handlers: Map<string, () => void>): (e: KeyboardEvent) => void',
+					return_type: '(e: KeyboardEvent) => void',
+					parameters: [
+						{
+							name: 'keyboard_handlers',
+							type: 'Map<string, () => void>',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'contextmenu_calculate_constrained_x',
+					kind: 'function',
+					doc_comment:
+						'Calculates the constrained X position for the contextmenu,\nensuring it stays within the layout width.',
+					summary:
+						'Calculates the constrained X position for the contextmenu,\nensuring it stays within the layout width.',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 65,
+						column: 13,
+						end_line: 69,
+						end_column: 71,
+					},
+					type_signature: '(menu_x: number, menu_width: number, layout_width: number): number',
+					return_type: 'number',
+					parameters: [
+						{
+							name: 'menu_x',
+							type: 'number',
+							optional: false,
+						},
+						{
+							name: 'menu_width',
+							type: 'number',
+							optional: false,
+						},
+						{
+							name: 'layout_width',
+							type: 'number',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'contextmenu_calculate_constrained_y',
+					kind: 'function',
+					doc_comment:
+						'Calculates the constrained Y position for the contextmenu,\nensuring it stays within the layout height.',
+					summary:
+						'Calculates the constrained Y position for the contextmenu,\nensuring it stays within the layout height.',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 75,
+						column: 13,
+						end_line: 79,
+						end_column: 73,
+					},
+					type_signature: '(menu_y: number, menu_height: number, layout_height: number): number',
+					return_type: 'number',
+					parameters: [
+						{
+							name: 'menu_y',
+							type: 'number',
+							optional: false,
+						},
+						{
+							name: 'menu_height',
+							type: 'number',
+							optional: false,
+						},
+						{
+							name: 'layout_height',
+							type: 'number',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+			],
+			imports: ['@ryanatkn/belt/dom.js', '$lib/contextmenu_state.svelte.js'],
 		},
 		'./pkg.ts': {
 			path: 'pkg.ts',
@@ -2069,12 +2382,40 @@ export const src_json: Enhanced_Src_Json = {
 					exported: false,
 				},
 				{
+					name: 'get_next_docs_link_order',
+					kind: 'function',
+					source_location: {
+						line: 12,
+						column: 13,
+						end_line: 12,
+						end_column: 78,
+					},
+					type_signature: '(): number',
+					return_type: 'number',
+					parameters: [],
+					exported: false,
+				},
+				{
+					name: 'reset_docs_link_order',
+					kind: 'function',
+					source_location: {
+						line: 15,
+						column: 13,
+						end_line: 17,
+						end_column: 1,
+					},
+					type_signature: '(): void',
+					return_type: 'void',
+					parameters: [],
+					exported: false,
+				},
+				{
 					name: 'to_docs_path_info',
 					kind: 'function',
 					source_location: {
-						line: 9,
+						line: 19,
 						column: 13,
-						end_line: 18,
+						end_line: 28,
 						end_column: 1,
 					},
 					type_signature:
@@ -2104,9 +2445,9 @@ export const src_json: Enhanced_Src_Json = {
 					name: 'docs_links_context',
 					kind: 'variable',
 					source_location: {
-						line: 20,
+						line: 30,
 						column: 13,
-						end_line: 20,
+						end_line: 30,
 						end_column: 72,
 					},
 					type_signature:
@@ -2117,9 +2458,9 @@ export const src_json: Enhanced_Src_Json = {
 					name: 'Docs_Link_Tag',
 					kind: 'type',
 					source_location: {
-						line: 22,
+						line: 32,
 						column: 0,
-						end_line: 22,
+						end_line: 32,
 						end_column: 40,
 					},
 					type_signature: 'Docs_Link_Tag',
@@ -2129,9 +2470,9 @@ export const src_json: Enhanced_Src_Json = {
 					name: 'Docs_Link',
 					kind: 'type',
 					source_location: {
-						line: 24,
+						line: 34,
 						column: 0,
-						end_line: 29,
+						end_line: 40,
 						end_column: 1,
 					},
 					type_signature: 'Docs_Link',
@@ -2141,14 +2482,26 @@ export const src_json: Enhanced_Src_Json = {
 					name: 'Docs_Links',
 					kind: 'class',
 					source_location: {
-						line: 31,
+						line: 42,
 						column: 0,
-						end_line: 58,
+						end_line: 88,
 						end_column: 1,
 					},
 					members: [
 						{
 							name: 'root_path',
+							kind: 'variable',
+						},
+						{
+							name: 'links',
+							kind: 'variable',
+						},
+						{
+							name: '#slug_to_order',
+							kind: 'variable',
+						},
+						{
+							name: '#next_id',
 							kind: 'variable',
 						},
 						{
@@ -2178,173 +2531,6 @@ export const src_json: Enhanced_Src_Json = {
 				'$lib/context_helpers.js',
 			],
 			imported_by: ['./tome.ts'],
-		},
-		'./rune_helpers.svelte.ts': {
-			path: 'rune_helpers.svelte.ts',
-			declarations: [
-				{
-					name: 'effect_with_count',
-					kind: 'function',
-					doc_comment:
-						'Runs `fn` in an `$effect`, passing `true` as the `skip` argument for the first `count` runs.\nCalls `fn` even when skipping so callers can read any dependent signals.',
-					summary:
-						'Runs `fn` in an `$effect`, passing `true` as the `skip` argument for the first `count` runs.\nCalls `fn` even when skipping so callers can read any dependent signals.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 5,
-						column: 13,
-						end_line: 10,
-						end_column: 1,
-					},
-					type_signature: '(fn: (count: number) => void, initial?: number): void',
-					return_type: 'void',
-					parameters: [
-						{
-							name: 'fn',
-							type: '(count: number) => void',
-							optional: false,
-						},
-						{
-							name: 'initial',
-							type: 'number',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-			],
-			imports: [],
-			module_comment:
-				'Runs `fn` in an `$effect`, passing `true` as the `skip` argument for the first `count` runs.\nCalls `fn` even when skipping so callers can read any dependent signals.',
-		},
-		'./intersect.ts': {
-			path: 'intersect.ts',
-			declarations: [
-				{
-					name: 'Intersect_Params',
-					kind: 'type',
-					source_location: {
-						line: 3,
-						column: 0,
-						end_line: 24,
-						end_column: 1,
-					},
-					type_signature: 'Intersect_Params',
-					exported: true,
-				},
-				{
-					name: 'Intersect_Params_Or_Callback',
-					kind: 'type',
-					source_location: {
-						line: 26,
-						column: 0,
-						end_line: 26,
-						end_column: 75,
-					},
-					type_signature: 'Intersect_Params_Or_Callback',
-					exported: true,
-				},
-				{
-					name: 'intersect',
-					kind: 'function',
-					source_location: {
-						line: 29,
-						column: 13,
-						end_line: 98,
-						end_column: 1,
-					},
-					type_signature:
-						'<Node extends HTMLElement | SVGElement>(node: Node, parameter: Intersect_Params_Or_Callback | null): void | ActionReturn<Intersect_Params_Or_Callback | null, Record<...>>',
-					return_type:
-						'void | ActionReturn<Intersect_Params_Or_Callback | null, Record<never, any>>',
-					parameters: [
-						{
-							name: 'args',
-							type: '[node: Node, parameter: Intersect_Params_Or_Callback | null]',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'On_Intersect',
-					kind: 'type',
-					source_location: {
-						line: 101,
-						column: 0,
-						end_line: 101,
-						end_column: 60,
-					},
-					type_signature: 'On_Intersect',
-					exported: true,
-				},
-				{
-					name: 'Intersect_State',
-					kind: 'type',
-					source_location: {
-						line: 103,
-						column: 0,
-						end_line: 109,
-						end_column: 1,
-					},
-					type_signature: 'Intersect_State',
-					exported: true,
-				},
-				{
-					name: 'On_Disconnect',
-					kind: 'type',
-					source_location: {
-						line: 112,
-						column: 0,
-						end_line: 112,
-						end_column: 62,
-					},
-					type_signature: 'On_Disconnect',
-					exported: true,
-				},
-				{
-					name: 'Disconnect_State',
-					kind: 'type',
-					source_location: {
-						line: 114,
-						column: 0,
-						end_line: 119,
-						end_column: 1,
-					},
-					type_signature: 'Disconnect_State',
-					exported: true,
-				},
-			],
-			imports: ['svelte/action'],
-		},
-		'./dimensions.svelte.ts': {
-			path: 'dimensions.svelte.ts',
-			declarations: [
-				{
-					name: 'Dimensions',
-					kind: 'class',
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 4,
-						end_column: 1,
-					},
-					members: [
-						{
-							name: 'width',
-							kind: 'variable',
-						},
-						{
-							name: 'height',
-							kind: 'variable',
-						},
-					],
-					exported: true,
-				},
-			],
-			imports: [],
-			imported_by: ['./contextmenu_state.svelte.ts'],
 		},
 		'./csp.ts': {
 			path: 'csp.ts',
@@ -2788,309 +2974,174 @@ export const src_json: Enhanced_Src_Json = {
 				},
 			],
 			imports: ['@ryanatkn/belt/types.js'],
-			imported_by: ['./csp_test_helpers.ts', './csp_of_ryanatkn.ts'],
+			imported_by: ['./csp_of_ryanatkn.ts'],
 		},
-		'./csp_test_helpers.ts': {
-			path: 'csp_test_helpers.ts',
+		'./rune_helpers.svelte.ts': {
+			path: 'rune_helpers.svelte.ts',
 			declarations: [
 				{
-					name: 'TEST_SOURCES',
-					kind: 'variable',
+					name: 'effect_with_count',
+					kind: 'function',
+					doc_comment:
+						'Runs `fn` in an `$effect`, passing `true` as the `skip` argument for the first `count` runs.\nCalls `fn` even when skipping so callers can read any dependent signals.',
+					summary:
+						'Runs `fn` in an `$effect`, passing `true` as the `skip` argument for the first `count` runs.\nCalls `fn` even when skipping so callers can read any dependent signals.',
+					examples: [],
+					see_also: [],
 					source_location: {
 						line: 5,
 						column: 13,
-						end_line: 20,
-						end_column: 10,
-					},
-					type_signature:
-						'{ readonly TRUSTED: "trusted.domain"; readonly TRUSTED_A: "a.trusted.domain"; readonly TRUSTED_2: "trusted2.domain"; readonly STATIC_OVERRIDE: "static-override.domain"; readonly FUNCTION_ADDED: "function-added.domain"; ... 7 more ...; readonly STRIPE: "js.stripe.com"; }',
-					exported: false,
-				},
-				{
-					name: 'create_test_source',
-					kind: 'function',
-					doc_comment: 'Creates a test source spec with a trust level.',
-					summary: 'Creates a test source spec with a trust level.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 25,
-						column: 13,
-						end_line: 28,
-						end_column: 2,
-					},
-					type_signature: '(source: string, trust: "low" | "medium" | "high"): Csp_Source_Spec',
-					return_type: 'Csp_Source_Spec',
-					parameters: [
-						{
-							name: 'source',
-							type: 'string',
-							optional: false,
-						},
-						{
-							name: 'trust',
-							type: '"low" | "medium" | "high"',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'create_test_source_with_directives',
-					kind: 'function',
-					doc_comment: 'Creates a test source spec with explicit directives.',
-					summary: 'Creates a test source spec with explicit directives.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 33,
-						column: 13,
-						end_line: 39,
-						end_column: 2,
-					},
-					type_signature: '(source: string, directives: (keyof Csp_Directives)[]): Csp_Source_Spec',
-					return_type: 'Csp_Source_Spec',
-					parameters: [
-						{
-							name: 'source',
-							type: 'string',
-							optional: false,
-						},
-						{
-							name: 'directives',
-							type: '(keyof Csp_Directives)[]',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'create_test_source_with_both',
-					kind: 'function',
-					doc_comment: 'Creates a test source spec with both trust and directives.',
-					summary: 'Creates a test source spec with both trust and directives.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 44,
-						column: 13,
-						end_line: 52,
-						end_column: 2,
-					},
-					type_signature:
-						'(source: string, trust: "low" | "medium" | "high", directives: (keyof Csp_Directives)[]): Csp_Source_Spec',
-					return_type: 'Csp_Source_Spec',
-					parameters: [
-						{
-							name: 'source',
-							type: 'string',
-							optional: false,
-						},
-						{
-							name: 'trust',
-							type: '"low" | "medium" | "high"',
-							optional: false,
-						},
-						{
-							name: 'directives',
-							type: '(keyof Csp_Directives)[]',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'assert_source_in_directive',
-					kind: 'function',
-					doc_comment: 'Asserts that a source is included in a directive.',
-					summary: 'Asserts that a source is included in a directive.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 57,
-						column: 13,
-						end_line: 68,
+						end_line: 10,
 						end_column: 1,
 					},
-					type_signature:
-						'(csp: Csp_Directives, directive: keyof Csp_Directives, source: string, message?: string | undefined): void',
+					type_signature: '(fn: (count: number) => void, initial?: number): void',
 					return_type: 'void',
 					parameters: [
 						{
-							name: 'csp',
-							type: 'Csp_Directives',
+							name: 'fn',
+							type: '(count: number) => void',
 							optional: false,
 						},
 						{
-							name: 'directive',
-							type: 'keyof Csp_Directives',
+							name: 'initial',
+							type: 'number',
 							optional: false,
-						},
-						{
-							name: 'source',
-							type: 'string',
-							optional: false,
-						},
-						{
-							name: 'message',
-							type: 'string | undefined',
-							optional: true,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'assert_source_not_in_directive',
-					kind: 'function',
-					doc_comment: 'Asserts that a source is not included in a directive.',
-					summary: 'Asserts that a source is not included in a directive.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 73,
-						column: 13,
-						end_line: 84,
-						end_column: 1,
-					},
-					type_signature:
-						'(csp: Csp_Directives, directive: keyof Csp_Directives, source: string, message?: string | undefined): void',
-					return_type: 'void',
-					parameters: [
-						{
-							name: 'csp',
-							type: 'Csp_Directives',
-							optional: false,
-						},
-						{
-							name: 'directive',
-							type: 'keyof Csp_Directives',
-							optional: false,
-						},
-						{
-							name: 'source',
-							type: 'string',
-							optional: false,
-						},
-						{
-							name: 'message',
-							type: 'string | undefined',
-							optional: true,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'assert_directive_exists',
-					kind: 'function',
-					doc_comment: 'Asserts that a directive exists in the CSP.',
-					summary: 'Asserts that a directive exists in the CSP.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 89,
-						column: 13,
-						end_line: 95,
-						end_column: 1,
-					},
-					type_signature:
-						'(csp: Csp_Directives, directive: keyof Csp_Directives, message?: string | undefined): void',
-					return_type: 'void',
-					parameters: [
-						{
-							name: 'csp',
-							type: 'Csp_Directives',
-							optional: false,
-						},
-						{
-							name: 'directive',
-							type: 'keyof Csp_Directives',
-							optional: false,
-						},
-						{
-							name: 'message',
-							type: 'string | undefined',
-							optional: true,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'assert_directive_not_exists',
-					kind: 'function',
-					doc_comment: 'Asserts that a directive does not exist in the CSP.',
-					summary: 'Asserts that a directive does not exist in the CSP.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 100,
-						column: 13,
-						end_line: 106,
-						end_column: 1,
-					},
-					type_signature:
-						'(csp: Csp_Directives, directive: keyof Csp_Directives, message?: string | undefined): void',
-					return_type: 'void',
-					parameters: [
-						{
-							name: 'csp',
-							type: 'Csp_Directives',
-							optional: false,
-						},
-						{
-							name: 'directive',
-							type: 'keyof Csp_Directives',
-							optional: false,
-						},
-						{
-							name: 'message',
-							type: 'string | undefined',
-							optional: true,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'assert_directive_equals',
-					kind: 'function',
-					doc_comment: 'Asserts that a directive has a specific value.',
-					summary: 'Asserts that a directive has a specific value.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 111,
-						column: 13,
-						end_line: 118,
-						end_column: 1,
-					},
-					type_signature:
-						'(csp: Csp_Directives, directive: keyof Csp_Directives, expected: any, message?: string | undefined): void',
-					return_type: 'void',
-					parameters: [
-						{
-							name: 'csp',
-							type: 'Csp_Directives',
-							optional: false,
-						},
-						{
-							name: 'directive',
-							type: 'keyof Csp_Directives',
-							optional: false,
-						},
-						{
-							name: 'expected',
-							type: 'any',
-							optional: false,
-						},
-						{
-							name: 'message',
-							type: 'string | undefined',
-							optional: true,
 						},
 					],
 					exported: false,
 				},
 			],
-			imports: ['vitest', '$lib/csp.js'],
+			imports: [],
+			module_comment:
+				'Runs `fn` in an `$effect`, passing `true` as the `skip` argument for the first `count` runs.\nCalls `fn` even when skipping so callers can read any dependent signals.',
+		},
+		'./intersect.ts': {
+			path: 'intersect.ts',
+			declarations: [
+				{
+					name: 'Intersect_Params',
+					kind: 'type',
+					source_location: {
+						line: 3,
+						column: 0,
+						end_line: 24,
+						end_column: 1,
+					},
+					type_signature: 'Intersect_Params',
+					exported: true,
+				},
+				{
+					name: 'Intersect_Params_Or_Callback',
+					kind: 'type',
+					source_location: {
+						line: 26,
+						column: 0,
+						end_line: 26,
+						end_column: 75,
+					},
+					type_signature: 'Intersect_Params_Or_Callback',
+					exported: true,
+				},
+				{
+					name: 'intersect',
+					kind: 'function',
+					source_location: {
+						line: 29,
+						column: 13,
+						end_line: 98,
+						end_column: 1,
+					},
+					type_signature:
+						'<Node extends HTMLElement | SVGElement>(node: Node, parameter: Intersect_Params_Or_Callback | null): void | ActionReturn<Intersect_Params_Or_Callback | null, Record<...>>',
+					return_type:
+						'void | ActionReturn<Intersect_Params_Or_Callback | null, Record<never, any>>',
+					parameters: [
+						{
+							name: 'args',
+							type: '[node: Node, parameter: Intersect_Params_Or_Callback | null]',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'On_Intersect',
+					kind: 'type',
+					source_location: {
+						line: 101,
+						column: 0,
+						end_line: 101,
+						end_column: 60,
+					},
+					type_signature: 'On_Intersect',
+					exported: true,
+				},
+				{
+					name: 'Intersect_State',
+					kind: 'type',
+					source_location: {
+						line: 103,
+						column: 0,
+						end_line: 109,
+						end_column: 1,
+					},
+					type_signature: 'Intersect_State',
+					exported: true,
+				},
+				{
+					name: 'On_Disconnect',
+					kind: 'type',
+					source_location: {
+						line: 112,
+						column: 0,
+						end_line: 112,
+						end_column: 62,
+					},
+					type_signature: 'On_Disconnect',
+					exported: true,
+				},
+				{
+					name: 'Disconnect_State',
+					kind: 'type',
+					source_location: {
+						line: 114,
+						column: 0,
+						end_line: 119,
+						end_column: 1,
+					},
+					type_signature: 'Disconnect_State',
+					exported: true,
+				},
+			],
+			imports: ['svelte/action'],
+		},
+		'./dimensions.svelte.ts': {
+			path: 'dimensions.svelte.ts',
+			declarations: [
+				{
+					name: 'Dimensions',
+					kind: 'class',
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 4,
+						end_column: 1,
+					},
+					members: [
+						{
+							name: 'width',
+							kind: 'variable',
+						},
+						{
+							name: 'height',
+							kind: 'variable',
+						},
+					],
+					exported: true,
+				},
+			],
+			imports: [],
+			imported_by: ['./contextmenu_state.svelte.ts'],
 		},
 		'./csp_of_ryanatkn.ts': {
 			path: 'csp_of_ryanatkn.ts',
@@ -3105,7 +3156,7 @@ export const src_json: Enhanced_Src_Json = {
 					source_location: {
 						line: 6,
 						column: 13,
-						end_line: 18,
+						end_line: 16,
 						end_column: 1,
 					},
 					type_signature: 'Csp_Source_Spec[]',

@@ -66,6 +66,8 @@
 	);
 </script>
 
+<!-- eslint-disable svelte/no-navigation-without-resolve -->
+
 <div class="package_detail">
 	<!-- TODO maybe continue this snippet pattern, or maybe simplify? -->
 	<div class="info">

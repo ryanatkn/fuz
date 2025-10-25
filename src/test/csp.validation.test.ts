@@ -6,7 +6,7 @@ import {
 	csp_directive_specs,
 	csp_directive_spec_by_name,
 } from '$lib/csp.js';
-import {TEST_SOURCES} from '$lib/csp_test_helpers.js';
+import {TEST_SOURCES} from '$test/csp_test_helpers.js';
 
 const {TRUSTED} = TEST_SOURCES;
 

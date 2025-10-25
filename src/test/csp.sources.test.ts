@@ -8,7 +8,7 @@ import {
 	TEST_SOURCES,
 	assert_source_in_directive,
 	assert_source_not_in_directive,
-} from '$lib/csp_test_helpers.js';
+} from '$test/csp_test_helpers.js';
 
 const {TRUSTED, TRUSTED_A, TRUSTED_2} = TEST_SOURCES;
 
@@ -454,5 +454,177 @@ describe('interaction with value_defaults', () => {
 
 		// Verify it's actually there
 		assert_source_in_directive(csp, 'img-src', TRUSTED);
+	});
+});
+
+describe('source deduplication', () => {
+	test('duplicate sources in trusted_sources array are all added', () => {
+		// Note: The implementation does NOT deduplicate sources from different specs
+		// This test documents current behavior
+		const csp = create_csp_directives({
+			trusted_sources: [
+				create_test_source(TRUSTED, 'high'),
+				create_test_source(TRUSTED, 'high'), // Duplicate
+			],
+		});
+
+		// Both instances should be added (no deduplication between specs)
+		const script_src_values = csp['script-src']!;
+		const occurrences = script_src_values.filter((v) => v === TRUSTED).length;
+
+		// This will be 2 because the implementation doesn't dedupe across specs
+		assert.strictEqual(occurrences, 2, 'duplicate specs result in duplicate source entries');
+	});
+
+	test('source not duplicated when matching via both trust and explicit directives in same spec', () => {
+		// Already covered above but testing different directive combinations
+		const csp = create_csp_directives({
+			trusted_sources: [
+				create_test_source_with_both(TRUSTED, 'medium', ['style-src']), // medium trust + explicit style-src
+			],
+		});
+
+		// style-src requires medium trust, so source matches via both paths
+		const style_src_values = csp['style-src']!;
+		const occurrences = style_src_values.filter((v) => v === TRUSTED).length;
+
+		assert.strictEqual(
+			occurrences,
+			1,
+			'source should appear once when matching via trust and explicit in same spec',
+		);
+	});
+
+	test('multiple different sources with same trust level', () => {
+		const csp = create_csp_directives({
+			trusted_sources: [
+				create_test_source(TRUSTED, 'high'),
+				create_test_source(TRUSTED_2, 'high'),
+				create_test_source(TRUSTED_A, 'high'),
+			],
+		});
+
+		// All three sources should be in high-trust directives
+		assert_source_in_directive(csp, 'script-src', TRUSTED);
+		assert_source_in_directive(csp, 'script-src', TRUSTED_2);
+		assert_source_in_directive(csp, 'script-src', TRUSTED_A);
+
+		// Verify they're all there
+		assert.strictEqual(
+			csp['script-src']!.filter((v) => [TRUSTED, TRUSTED_2, TRUSTED_A].includes(v as any)).length,
+			3,
+		);
+	});
+});
+
+describe('source ordering', () => {
+	test('trusted sources are added after default values', () => {
+		const csp = create_csp_directives({
+			trusted_sources: [create_test_source(TRUSTED, 'low')],
+		});
+
+		// Check that default values come before trusted sources
+		const img_src = csp['img-src']!;
+		const self_index = img_src.indexOf('self');
+		const trusted_index = img_src.indexOf(TRUSTED as any);
+
+		assert.ok(self_index < trusted_index, 'default values should come before trusted sources');
+	});
+
+	test('multiple trusted sources maintain order from array', () => {
+		const csp = create_csp_directives({
+			trusted_sources: [
+				create_test_source(TRUSTED, 'low'),
+				create_test_source(TRUSTED_2, 'low'),
+				create_test_source(TRUSTED_A, 'low'),
+			],
+		});
+
+		const img_src = csp['img-src']!;
+		const trusted_index = img_src.indexOf(TRUSTED as any);
+		const trusted2_index = img_src.indexOf(TRUSTED_2 as any);
+		const trustedA_index = img_src.indexOf(TRUSTED_A as any);
+
+		assert.ok(trusted_index < trusted2_index, 'first trusted source should come before second');
+		assert.ok(trusted2_index < trustedA_index, 'second trusted source should come before third');
+	});
+
+	test('sources added via explicit directives maintain order', () => {
+		const csp = create_csp_directives({
+			trusted_sources: [
+				create_test_source_with_directives(TRUSTED, ['img-src']),
+				create_test_source_with_directives(TRUSTED_2, ['img-src']),
+			],
+		});
+
+		const img_src = csp['img-src']!;
+		const trusted_index = img_src.indexOf(TRUSTED as any);
+		const trusted2_index = img_src.indexOf(TRUSTED_2 as any);
+
+		assert.ok(trusted_index < trusted2_index, 'explicit sources should maintain order');
+	});
+
+	test('trust-based sources come before explicit-only sources in same array', () => {
+		// This tests the filter order in the implementation
+		const csp = create_csp_directives({
+			trusted_sources: [
+				create_test_source(TRUSTED, 'low'), // Added via trust
+				create_test_source_with_directives(TRUSTED_2, ['img-src']), // Added via explicit
+			],
+		});
+
+		const img_src = csp['img-src']!;
+
+		// Both should be present
+		assert_source_in_directive(csp, 'img-src', TRUSTED);
+		assert_source_in_directive(csp, 'img-src', TRUSTED_2);
+
+		// Order depends on filter logic but they should both be after defaults
+		const self_index = img_src.indexOf('self');
+		const trusted_index = img_src.indexOf(TRUSTED as any);
+		const trusted2_index = img_src.indexOf(TRUSTED_2 as any);
+
+		assert.ok(self_index < trusted_index, 'defaults before trusted sources');
+		assert.ok(self_index < trusted2_index, 'defaults before explicit sources');
+	});
+});
+
+describe('empty and unusual source values', () => {
+	test('empty string source is added if provided', () => {
+		// This documents current behavior - empty strings are not filtered
+		const csp = create_csp_directives({
+			trusted_sources: [{source: '' as any, trust: 'low'}],
+		});
+
+		// Empty string should be added
+		assert.ok(csp['img-src']!.includes('' as any), 'empty string source should be added');
+	});
+
+	test('source with only whitespace is added', () => {
+		const csp = create_csp_directives({
+			trusted_sources: [{source: '   ' as any, trust: 'low'}],
+		});
+
+		// Whitespace source should be added
+		assert.ok(csp['img-src']!.includes('   ' as any), 'whitespace source should be added');
+	});
+
+	test('sources with special characters', () => {
+		const special_sources = [
+			'https://example.com:8080',
+			'*.example.com',
+			'wss://websocket.example.com',
+			'data:',
+			'blob:',
+		] as const;
+
+		const csp = create_csp_directives({
+			trusted_sources: special_sources.map((s) => ({source: s as any, trust: 'low' as const})),
+		});
+
+		// All special sources should be added
+		for (const source of special_sources) {
+			assert_source_in_directive(csp, 'img-src', source);
+		}
 	});
 });

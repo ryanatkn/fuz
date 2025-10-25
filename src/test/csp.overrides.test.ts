@@ -7,7 +7,7 @@ import {
 	assert_source_in_directive,
 	assert_source_not_in_directive,
 	assert_directive_not_exists,
-} from '$lib/csp_test_helpers.js';
+} from '$test/csp_test_helpers.js';
 
 const {TRUSTED, STATIC_OVERRIDE, FUNCTION_ADDED, COMPLETE_OVERRIDE, DEFAULT_OVERRIDE} =
 	TEST_SOURCES;
