@@ -1054,230 +1054,6 @@ export const src_json: Enhanced_Src_Json = {
 			],
 			imported_by: ['./contextmenu_helpers.ts', './declaration_contextmenu.ts'],
 		},
-		'./test_helpers.ts': {
-			path: 'test_helpers.ts',
-			declarations: [
-				{
-					name: 'mount_component',
-					kind: 'function',
-					doc_comment:
-						'Mount a Svelte component for testing.\nCreates a container div, appends it to document.body, and mounts the component.',
-					summary:
-						'Mount a Svelte component for testing.\nCreates a container div, appends it to document.body, and mounts the component.',
-					examples: [
-						"const {instance, container} = mount_component(MyComponent, {foo: 'bar'});\n// ... test code\nunmount_component(instance, container);",
-					],
-					see_also: [],
-					source_location: {
-						line: 18,
-						column: 13,
-						end_line: 31,
-						end_column: 1,
-					},
-					type_signature:
-						'<Props extends Record<string, any>>(Component: Component<Props, {}, string>, props: Props): { instance: any; container: HTMLElement; }',
-					return_type: '{ instance: any; container: HTMLElement; }',
-					parameters: [
-						{
-							name: 'Component',
-							type: 'Component<Props, {}, string>',
-							optional: false,
-						},
-						{
-							name: 'props',
-							type: 'Props',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'unmount_component',
-					kind: 'function',
-					doc_comment: 'Unmount a component and remove its container from the DOM.',
-					summary: 'Unmount a component and remove its container from the DOM.',
-					examples: [
-						'const mounted = mount_component(MyComponent, {});\nunmount_component(mounted.instance, mounted.container);',
-					],
-					see_also: [],
-					source_location: {
-						line: 40,
-						column: 13,
-						end_line: 43,
-						end_column: 1,
-					},
-					type_signature: '(instance: any, container: HTMLElement): Promise<void>',
-					return_type: 'Promise<void>',
-					parameters: [
-						{
-							name: 'instance',
-							type: 'any',
-							optional: false,
-						},
-						{
-							name: 'container',
-							type: 'HTMLElement',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'create_contextmenu_event',
-					kind: 'function',
-					doc_comment: 'Create a contextmenu (right-click) mouse event.',
-					summary: 'Create a contextmenu (right-click) mouse event.',
-					examples: [
-						'const event = create_contextmenu_event(100, 200);\nelement.dispatchEvent(event);',
-					],
-					see_also: [],
-					source_location: {
-						line: 52,
-						column: 13,
-						end_line: 64,
-						end_column: 1,
-					},
-					type_signature: '(x: number, y: number, options?: MouseEventInit): MouseEvent',
-					return_type: 'MouseEvent',
-					parameters: [
-						{
-							name: 'x',
-							type: 'number',
-							optional: false,
-						},
-						{
-							name: 'y',
-							type: 'number',
-							optional: false,
-						},
-						{
-							name: 'options',
-							type: 'MouseEventInit',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'create_keyboard_event',
-					kind: 'function',
-					doc_comment: 'Create a keyboard event.',
-					summary: 'Create a keyboard event.',
-					examples: [
-						"const event = create_keyboard_event('Escape');\nwindow.dispatchEvent(event);",
-					],
-					see_also: [],
-					source_location: {
-						line: 73,
-						column: 13,
-						end_line: 83,
-						end_column: 1,
-					},
-					type_signature: '(key: string, options?: KeyboardEventInit): KeyboardEvent',
-					return_type: 'KeyboardEvent',
-					parameters: [
-						{
-							name: 'key',
-							type: 'string',
-							optional: false,
-						},
-						{
-							name: 'options',
-							type: 'KeyboardEventInit',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'create_mouse_event',
-					kind: 'function',
-					doc_comment: 'Create a generic mouse event.',
-					summary: 'Create a generic mouse event.',
-					examples: [
-						"const event = create_mouse_event('mousedown', {clientX: 100});\nelement.dispatchEvent(event);",
-					],
-					see_also: [],
-					source_location: {
-						line: 92,
-						column: 13,
-						end_line: 98,
-						end_column: 1,
-					},
-					type_signature: '(type: string, options?: MouseEventInit): MouseEvent',
-					return_type: 'MouseEvent',
-					parameters: [
-						{
-							name: 'type',
-							type: 'string',
-							optional: false,
-						},
-						{
-							name: 'options',
-							type: 'MouseEventInit',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'set_event_target',
-					kind: 'function',
-					doc_comment:
-						'Set the target property on an event (for testing).\nThe target property is readonly, so we need to use Object.defineProperty.',
-					summary:
-						'Set the target property on an event (for testing).\nThe target property is readonly, so we need to use Object.defineProperty.',
-					examples: [
-						'const event = create_contextmenu_event(100, 200);\nset_event_target(event, myElement);\nwindow.dispatchEvent(event);',
-					],
-					see_also: [],
-					source_location: {
-						line: 109,
-						column: 13,
-						end_line: 115,
-						end_column: 1,
-					},
-					type_signature: '(event: Event, target: EventTarget): void',
-					return_type: 'void',
-					parameters: [
-						{
-							name: 'event',
-							type: 'Event',
-							optional: false,
-						},
-						{
-							name: 'target',
-							type: 'EventTarget',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'flush_updates',
-					kind: 'function',
-					doc_comment:
-						'Flush all pending Svelte updates synchronously.\nUseful in tests when you need the DOM to update immediately after a state change.',
-					summary:
-						'Flush all pending Svelte updates synchronously.\nUseful in tests when you need the DOM to update immediately after a state change.',
-					examples: [
-						"contextmenu.open([], 100, 200);\nflush_updates(); // DOM is now updated\nconst menu = container.querySelector('.contextmenu');",
-					],
-					see_also: [],
-					source_location: {
-						line: 126,
-						column: 13,
-						end_line: 128,
-						end_column: 1,
-					},
-					type_signature: '(): void',
-					return_type: 'void',
-					parameters: [],
-					exported: false,
-				},
-			],
-			imports: ['svelte'],
-		},
 		'./contextmenu_helpers.ts': {
 			path: 'contextmenu_helpers.ts',
 			declarations: [
@@ -1511,6 +1287,233 @@ export const src_json: Enhanced_Src_Json = {
 				},
 			],
 			imports: ['@ryanatkn/belt/dom.js', '$lib/contextmenu_state.svelte.js'],
+		},
+		'./test_helpers.ts': {
+			path: 'test_helpers.ts',
+			declarations: [
+				{
+					name: 'mount_component',
+					kind: 'function',
+					doc_comment:
+						'Mount a Svelte component for testing.\nCreates a container div, appends it to document.body, and mounts the component.',
+					summary:
+						'Mount a Svelte component for testing.\nCreates a container div, appends it to document.body, and mounts the component.',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 12,
+						column: 13,
+						end_line: 25,
+						end_column: 1,
+					},
+					type_signature:
+						'<Props extends Record<string, any>>(Component: Component<Props, {}, string>, props: Props): { instance: any; container: HTMLElement; }',
+					return_type: '{ instance: any; container: HTMLElement; }',
+					parameters: [
+						{
+							name: 'Component',
+							type: 'Component<Props, {}, string>',
+							optional: false,
+						},
+						{
+							name: 'props',
+							type: 'Props',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'unmount_component',
+					kind: 'function',
+					doc_comment: 'Unmount a component and remove its container from the DOM.',
+					summary: 'Unmount a component and remove its container from the DOM.',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 30,
+						column: 13,
+						end_line: 33,
+						end_column: 1,
+					},
+					type_signature: '(instance: any, container: HTMLElement): Promise<void>',
+					return_type: 'Promise<void>',
+					parameters: [
+						{
+							name: 'instance',
+							type: 'any',
+							optional: false,
+						},
+						{
+							name: 'container',
+							type: 'HTMLElement',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'create_contextmenu_event',
+					kind: 'function',
+					doc_comment: 'Create a contextmenu (rightclick) mouse event.',
+					summary: 'Create a contextmenu (rightclick) mouse event.',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 38,
+						column: 13,
+						end_line: 50,
+						end_column: 1,
+					},
+					type_signature: '(x: number, y: number, options?: MouseEventInit): MouseEvent',
+					return_type: 'MouseEvent',
+					parameters: [
+						{
+							name: 'x',
+							type: 'number',
+							optional: false,
+						},
+						{
+							name: 'y',
+							type: 'number',
+							optional: false,
+						},
+						{
+							name: 'options',
+							type: 'MouseEventInit',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'create_keyboard_event',
+					kind: 'function',
+					doc_comment: 'Create a keyboard event.',
+					summary: 'Create a keyboard event.',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 55,
+						column: 13,
+						end_line: 65,
+						end_column: 1,
+					},
+					type_signature: '(key: string, options?: KeyboardEventInit): KeyboardEvent',
+					return_type: 'KeyboardEvent',
+					parameters: [
+						{
+							name: 'key',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'options',
+							type: 'KeyboardEventInit',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'create_mouse_event',
+					kind: 'function',
+					doc_comment: 'Create a generic mouse event.',
+					summary: 'Create a generic mouse event.',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 70,
+						column: 13,
+						end_line: 76,
+						end_column: 1,
+					},
+					type_signature: '(type: string, options?: MouseEventInit): MouseEvent',
+					return_type: 'MouseEvent',
+					parameters: [
+						{
+							name: 'type',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'options',
+							type: 'MouseEventInit',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'set_event_target',
+					kind: 'function',
+					doc_comment:
+						'Set the target property on an event (for testing).\nThe target property is readonly, so we need to use Object.defineProperty.',
+					summary:
+						'Set the target property on an event (for testing).\nThe target property is readonly, so we need to use Object.defineProperty.',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 82,
+						column: 13,
+						end_line: 88,
+						end_column: 1,
+					},
+					type_signature: '(event: Event, target: EventTarget): void',
+					return_type: 'void',
+					parameters: [
+						{
+							name: 'event',
+							type: 'Event',
+							optional: false,
+						},
+						{
+							name: 'target',
+							type: 'EventTarget',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'create_touch_event',
+					kind: 'function',
+					doc_comment: 'Create a touch event with one or more touches.',
+					summary: 'Create a touch event with one or more touches.',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 93,
+						column: 13,
+						end_line: 122,
+						end_column: 1,
+					},
+					type_signature:
+						'(type: string, touches: { clientX: number; clientY: number; target?: EventTarget | undefined; }[], options?: TouchEventInit): TouchEvent',
+					return_type: 'TouchEvent',
+					parameters: [
+						{
+							name: 'type',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'touches',
+							type: '{ clientX: number; clientY: number; target?: EventTarget | undefined; }[]',
+							optional: false,
+						},
+						{
+							name: 'options',
+							type: 'TouchEventInit',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+			],
+			imports: ['svelte'],
+			module_comment:
+				'Shared test utilities for vitest tests.\nProvides helpers for component mounting and DOM event creation.',
 		},
 		'./pkg.ts': {
 			path: 'pkg.ts',
