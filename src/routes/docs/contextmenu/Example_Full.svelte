@@ -4,7 +4,6 @@
 	import {quintOut} from 'svelte/easing';
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
-	import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
 	import Contextmenu from '$lib/Contextmenu.svelte';
 	import Details from '$lib/Details.svelte';
 	import Contextmenu_Text_Entry from '$lib/Contextmenu_Text_Entry.svelte';
@@ -20,6 +19,10 @@
 	import file_contents from '$routes/docs/contextmenu/Example_Full.svelte?raw';
 	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
 	import Tome_Section from '$lib/Tome_Section.svelte';
+	import {selected_contextmenu_root_component_context} from '$routes/docs/contextmenu/selected_root_component.svelte.js';
+
+	const selected = selected_contextmenu_root_component_context.get();
+	const Contextmenu_Root_Component = $derived(selected.component);
 
 	const alyssa = 'Alyssa';
 	const ben = 'Ben';
@@ -127,7 +130,7 @@
 	});
 </script>
 
-<Contextmenu_Root scoped>
+<Contextmenu_Root_Component scoped>
 	<Tome_Section>
 		<Tome_Section_Header text="Full example" />
 		<Contextmenu>
@@ -137,57 +140,59 @@
 				{/if}
 				<App_Contextmenu {toggle_about_dialog} />
 			{/snippet}
-			<section>
-				<Contextmenu>
-					{#snippet entries()}
-						<Home_Contextmenu {act} {home_cats} {adventure_cats} />
-					{/snippet}
-					<div class="position home">
-						<div class="icon">🏠</div>
-						<div class="cats">
-							{#each home_cats as { name, icon, position } (name)}
-								<div
-									class="cat_wrapper"
-									in:receive={{key: name}}
-									out:send={{key: name}}
-									animate:flip
-								>
-									<Contextmenu>
-										{#snippet entries()}
-											<Cat_Contextmenu {act} {name} {icon} {position} />
-										{/snippet}
-										<Cat_View {name} {icon} />
-									</Contextmenu>
-								</div>
-							{/each}
+			<section class="display_flex">
+				<div>
+					<Contextmenu>
+						{#snippet entries()}
+							<Home_Contextmenu {act} {home_cats} {adventure_cats} />
+						{/snippet}
+						<div class="position home">
+							<div class="icon">🏠</div>
+							<div class="cats">
+								{#each home_cats as { name, icon, position } (name)}
+									<div
+										class="cat_wrapper"
+										in:receive={{key: name}}
+										out:send={{key: name}}
+										animate:flip
+									>
+										<Contextmenu>
+											{#snippet entries()}
+												<Cat_Contextmenu {act} {name} {icon} {position} />
+											{/snippet}
+											<Cat_View {name} {icon} />
+										</Contextmenu>
+									</div>
+								{/each}
+							</div>
 						</div>
-					</div>
-				</Contextmenu>
-				<Contextmenu>
-					{#snippet entries()}
-						<Adventure_Contextmenu {act} {home_cats} {adventure_cats} />
-					{/snippet}
-					<div class="position adventure">
-						<div class="icon">🌄</div>
-						<div class="cats">
-							{#each adventure_cats as { name, icon, position } (name)}
-								<div
-									class="cat_wrapper"
-									in:receive={{key: name}}
-									out:send={{key: name}}
-									animate:flip
-								>
-									<Contextmenu>
-										{#snippet entries()}
-											<Cat_Contextmenu {act} {name} {icon} {position} />
-										{/snippet}
-										<Cat_View {name} {icon} />
-									</Contextmenu>
-								</div>
-							{/each}
+					</Contextmenu>
+					<Contextmenu>
+						{#snippet entries()}
+							<Adventure_Contextmenu {act} {home_cats} {adventure_cats} />
+						{/snippet}
+						<div class="position adventure">
+							<div class="icon">🌄</div>
+							<div class="cats">
+								{#each adventure_cats as { name, icon, position } (name)}
+									<div
+										class="cat_wrapper"
+										in:receive={{key: name}}
+										out:send={{key: name}}
+										animate:flip
+									>
+										<Contextmenu>
+											{#snippet entries()}
+												<Cat_Contextmenu {act} {name} {icon} {position} />
+											{/snippet}
+											<Cat_View {name} {icon} />
+										</Contextmenu>
+									</div>
+								{/each}
+							</div>
 						</div>
-					</div>
-				</Contextmenu>
+					</Contextmenu>
+				</div>
 			</section>
 			<section>
 				<Details>
@@ -197,7 +202,7 @@
 			</section>
 		</Contextmenu>
 	</Tome_Section>
-</Contextmenu_Root>
+</Contextmenu_Root_Component>
 
 {#if show_about_dialog}
 	<Dialog onclose={() => (show_about_dialog = false)}>
@@ -210,7 +215,7 @@
 						>github.com/ryanatkn/fuz</a
 					>
 				</blockquote>
-				<code class="p_md mb_lg"
+				<code class="display_block p_md mb_lg"
 					>npm i -D <a href="https://www.npmjs.com/package/@fuz.dev/fuz_contextmenu"
 						>@fuz.dev/fuz_contextmenu</a
 					></code

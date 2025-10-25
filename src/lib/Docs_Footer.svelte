@@ -22,6 +22,7 @@
 	{@render children?.()}
 	<div class="logo box panel p_lg shadow_inset_xs">
 		{@render logo_header?.()}
+		<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 		<a href={pkg.repo_url} rel="me" title="source code on GitHub"
 			>{#if logo}{@render logo()}{:else}<Svg
 					data={github_logo}
@@ -32,6 +33,7 @@
 	</div>
 	{#if root_url}
 		<div class="root_url">
+			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 			<a href={root_url}>{format_url(root_url)}</a>
 		</div>
 	{/if}

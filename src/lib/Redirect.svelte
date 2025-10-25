@@ -28,7 +28,7 @@
 
 	const url = host + path;
 
-	if (auto && BROWSER) void goto(url, {replaceState: true});
+	if (auto && BROWSER) void goto(url, {replaceState: true}); // eslint-disable-line svelte/no-navigation-without-resolve
 </script>
 
 <svelte:head>
@@ -36,5 +36,6 @@
 </svelte:head>
 
 {#if children}{@render children(url)}{:else}<p>
+		<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 		redirect to <a href={url}>{strip_start(url, 'https://')}</a>
 	</p>{/if}

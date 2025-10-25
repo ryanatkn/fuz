@@ -21,6 +21,13 @@
 	);
 
 	const docs_links = docs_links_context.get();
+
+	const should_show_page_links = $derived.by(() => {
+		const length = docs_links.docs_links.length;
+		const should_show = length > 1;
+		console.log('[Docs_Tertiary_Nav] conditional check:', {length, should_show}); // eslint-disable-line no-console
+		return should_show;
+	});
 </script>
 
 <!-- TODO probably add a `nav` wrapper? around which? -->
@@ -30,7 +37,7 @@
 			{#snippet children(category)}<h4 class="mb_sm">related {category}</h4>{/snippet}
 		</Docs_Menu>
 	{/if}
-	{#if docs_links.docs_links.length > 1}
+	{#if should_show_page_links}
 		<Docs_Page_Links {sidebar} />
 	{/if}
 </aside>

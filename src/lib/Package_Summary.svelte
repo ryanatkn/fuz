@@ -73,6 +73,7 @@
 			{@render homepage_url(pkg.homepage_url)}
 		{:else}
 			<div class="homepage_url">
+				<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 				<a class="chip" class:selected={pkg.homepage_url === page.url.href} href={pkg.homepage_url}
 					>{format_url(pkg.homepage_url)}</a
 				>
@@ -81,12 +82,15 @@
 	{/if}
 	<div class="links">
 		{#if pkg.repo_url}
+			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 			<a class="chip" href={pkg.repo_url}>repo</a>
 		{/if}
 		{#if pkg.changelog_url}
+			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 			<a class="chip" title="version" href={pkg.changelog_url}>{package_json.version}</a>
 		{/if}
 		{#if pkg.npm_url}
+			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 			<a class="chip" href={pkg.npm_url}>npm</a>
 		{/if}
 	</div>

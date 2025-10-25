@@ -58,6 +58,7 @@
 </script>
 
 {#if identifier}
+	<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 	<a {...attrs} href="{pkg.repo_url}/blob/main/src/lib/{identifier.src_module.path}">
 		{#if children}
 			{@render children()}

@@ -1,7 +1,3 @@
-<script lang="ts" module>
-	let _id = 0;
-</script>
-
 <script lang="ts">
 	import {page} from '$app/state';
 	import {onDestroy} from 'svelte';
@@ -19,12 +15,10 @@
 	const tome = tome_context.get(); // TODO make reactive?
 	if (DEV && !tome) throw Error('Tome_Header expects a tome in context'); // eslint-disable-line @typescript-eslint/no-unnecessary-condition
 
-	const id = 'tome_header_' + _id++;
-
 	const docs_links = docs_links_context.get();
 
 	const slug = slugify(tome.name);
-	docs_links.add(id, tome.name, slug);
+	const id = docs_links.add(slug, tome.name, page.url.pathname);
 
 	onDestroy(() => {
 		docs_links.remove(id);
@@ -37,6 +31,7 @@
 	{#if path_is_selected}
 		{@render content(tome.name)}
 	{:else}
+		<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 		<a href={path}>{@render content(tome.name)}</a>
 	{/if}
 	<Hashlink {slug} />

@@ -29,7 +29,12 @@
 </script>
 
 <a {...rest} {href} class="chip white_space_nowrap {class_prop}"
-	><Svg data={mdn_logo} inline size="var(--icon_size_xs)" attrs={{class: 'mx_xs3'}} />
+	><Svg
+		data={mdn_logo}
+		inline
+		size="var(--icon_size_xs)"
+		attrs={{class: 'mx_xs3 vertical_align_middle'}}
+	/>
 	{#if typeof final_children === 'string'}
 		<span class="font_family_mono">{final_children}</span>
 	{:else}

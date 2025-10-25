@@ -64,6 +64,7 @@
 		class:selected
 		role="menuitem"
 		aria-label="contextmenu submenmu"
+		aria-haspopup="menu"
 		tabindex="-1"
 		onmouseenter={(e) => {
 			swallow(e);

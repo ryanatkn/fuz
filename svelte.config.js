@@ -15,9 +15,7 @@ const csp_trusted_sources_of_ryanatkn = [
 	'https://*.dealt.dev/',
 	'https://*.fuz.dev/',
 	'https://*.ztack.net/',
-	'https://*.grogarden.org/',
 	'https://*.zzz.software/',
-	'https://*.zzzbot.dev/',
 	'https://*.cosmicplayground.org/',
 	'https://ryanatkn.github.io/',
 ];
@@ -30,7 +28,7 @@ export default {
 	kit: {
 		adapter: adapter(),
 		paths: {relative: false}, // use root-absolute paths: https://kit.svelte.dev/docs/configuration#paths
-		alias: {$routes: 'src/routes'},
+		alias: {$routes: 'src/routes', $test: 'src/test'},
 		csp: {
 			directives: {
 				'default-src': ['none'],
