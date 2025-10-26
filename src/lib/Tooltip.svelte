@@ -83,8 +83,12 @@
 	});
 
 	// Measure tooltip dimensions
+	// Re-measure when tooltip opens or position changes (content may change between shows)
 	$effect(() => {
-		if (el) {
+		if (el && tooltip.opened) {
+			// Include position as dependencies to trigger re-measurement
+			tooltip.x;
+			tooltip.y;
 			const rect = el.getBoundingClientRect();
 			client_width = rect.width;
 			client_height = rect.height;
@@ -93,15 +97,25 @@
 </script>
 
 <svelte:window
-	onmousedown={() => {
-		// Dismiss tooltip on any click (even inside tooltip)
-		// This is intentional: tooltips should not contain interactive content
-		// For interactive popovers, use a dialog/popover component instead
-		if (tooltip.opened) tooltip.hide();
+	onmousedown={(e) => {
+		// ARIA compliance: Dismiss tooltip only when clicking outside
+		// Tooltips should remain open while cursor is over them (ARIA guideline)
+		// This allows reading long tooltips and text selection
+		if (el) {
+			// Tooltip is rendered - only hide if clicking outside
+			const target_is_inside = e.target instanceof Node && el.contains(e.target);
+			if (!target_is_inside) {
+				tooltip.hide();
+			}
+		} else {
+			// Tooltip not rendered but might have pending show - cancel it
+			tooltip.hide();
+		}
 	}}
 	onkeydown={(e) => {
-		// ARIA requirement: Escape dismisses tooltip
-		if (e.key === 'Escape' && tooltip.opened) {
+		// ARIA requirement: Escape dismisses tooltip and cancels pending shows
+		// hide() calls cancel_show() internally, so this handles both cases
+		if (e.key === 'Escape') {
 			tooltip.hide();
 		}
 	}}

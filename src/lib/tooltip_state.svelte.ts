@@ -7,6 +7,17 @@
  * - Keyboard navigation support (immediate show on focus)
  * - Smart positioning with viewport edge detection
  *
+ * ## ARIA Compliance
+ *
+ * Following the [ARIA Tooltip Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/):
+ * - Tooltip has `role="tooltip"` (handled by Tooltip.svelte)
+ * - Tooltip has unique `id` (accessible via `tooltip.id`)
+ * - **IMPORTANT**: Triggering elements MUST reference tooltip via `aria-describedby`
+ * - Escape key dismisses tooltip (handled by Tooltip.svelte)
+ * - Tooltips remain non-focusable
+ *
+ * ## Usage Pattern
+ *
  * @example
  * ```ts
  * import {Tooltip_State, tooltip_context} from '$lib/tooltip_state.svelte.js';
@@ -14,13 +25,49 @@
  * // Create and provide tooltip state
  * const tooltip = new Tooltip_State(400, 200);
  * tooltip_context.set(tooltip);
+ * ```
  *
- * // Use in components
+ * @example
+ * ```svelte
+ * <script lang="ts">
+ * import {tooltip_context} from '$lib/tooltip_state.svelte.js';
+ *
  * const tooltip = tooltip_context.get();
- * tooltip.show_delayed(x, y, content); // Show after delay (hover)
- * tooltip.show(x, y, content);         // Show immediately (focus)
- * tooltip.hide_delayed();              // Hide after delay (sticky)
- * tooltip.hide();                      // Hide immediately
+ * let button_el: HTMLButtonElement;
+ *
+ * // Show on hover (with delay)
+ * const on_mouse_enter = (e: MouseEvent) => {
+ *   tooltip.show_delayed(e.clientX, e.clientY, my_tooltip_content);
+ * };
+ *
+ * // Show on focus (immediate for keyboard users)
+ * const on_focus = () => {
+ *   const rect = button_el.getBoundingClientRect();
+ *   tooltip.show(rect.left + rect.width / 2, rect.bottom, my_tooltip_content);
+ * };
+ *
+ * // Hide with delay (allows moving cursor into tooltip)
+ * const on_mouse_leave = () => tooltip.hide_delayed();
+ *
+ * // Hide immediately on blur
+ * const on_blur = () => tooltip.hide();
+ * </script>
+ *
+ * <!-- IMPORTANT: Set aria-describedby when tooltip is open -->
+ * <button
+ *   bind:this={button_el}
+ *   aria-describedby={tooltip.opened ? tooltip.id : undefined}
+ *   onmouseenter={on_mouse_enter}
+ *   onmouseleave={on_mouse_leave}
+ *   onfocus={on_focus}
+ *   onblur={on_blur}
+ * >
+ *   Hover or focus me
+ * </button>
+ *
+ * {#snippet my_tooltip_content()}
+ *   <div>This is the tooltip content</div>
+ * {/snippet}
  * ```
  */
 import type {Snippet} from 'svelte';
@@ -45,6 +92,16 @@ export class Tooltip_State {
 	content: Snippet | null = $state(null);
 	/**
 	 * Unique ID for the tooltip element (for aria-describedby)
+	 *
+	 * **IMPORTANT**: Triggering elements must reference this ID via aria-describedby
+	 * when the tooltip is open to ensure ARIA compliance.
+	 *
+	 * @example
+	 * ```svelte
+	 * <button aria-describedby={tooltip.opened ? tooltip.id : undefined}>
+	 *   Trigger
+	 * </button>
+	 * ```
 	 */
 	id: string = `tooltip-${++tooltip_id_counter}`;
 	/**
