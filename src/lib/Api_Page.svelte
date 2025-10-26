@@ -1,7 +1,7 @@
 <script lang="ts">
 	import {resolve} from '$app/paths';
 
-	import {get_declaration_display_name, type Src_Module_Declaration} from '$lib/src_json.js';
+	import type {Src_Module_Declaration} from '$lib/src_json.js';
 	import Details from '$lib/Details.svelte';
 
 	interface Props {
@@ -12,8 +12,6 @@
 
 	const {decl, module_path, repo_url}: Props = $props();
 
-	const display_name = $derived(get_declaration_display_name(decl));
-
 	// Generate source URL
 	const source_url = $derived(
 		repo_url && decl.source_location
@@ -22,263 +20,217 @@
 	);
 </script>
 
-<article class="api_page">
-	<!-- Header -->
-	<header class="header">
-		<div class="title_row">
-			<h1 class="name">{display_name}</h1>
-			{#if decl.kind}
-				<span class="kind_badge chip">{decl.kind}</span>
-			{/if}
-		</div>
+<!-- Metadata -->
+{#if source_url}
+	<div class="meta">
+		<a class="chip" href={resolve(source_url as any)} target="_blank" rel="noopener">
+			View source
+		</a>
+	</div>
+{/if}
 
-		{#if source_url}
-			<div class="meta">
-				<a class="chip" href={resolve(source_url as any)} target="_blank" rel="noopener">
-					View source
-				</a>
-			</div>
-		{/if}
-
+<!-- eslint-disable-next-line @typescript-eslint/no-deprecated -->
+{#if decl.deprecated_message}
+	<div class="deprecated_warning pane">
+		<strong>⚠️ Deprecated:</strong>
 		<!-- eslint-disable-next-line @typescript-eslint/no-deprecated -->
-		{#if decl.deprecated_message}
-			<div class="deprecated_warning pane">
-				<strong>⚠️ Deprecated:</strong>
-				<!-- eslint-disable-next-line @typescript-eslint/no-deprecated -->
-				{decl.deprecated_message}
-			</div>
-		{/if}
-	</header>
+		{decl.deprecated_message}
+	</div>
+{/if}
 
-	<!-- Type Signature -->
-	{#if decl.type_signature}
-		<section class="section">
-			<h2>Type Signature</h2>
-			<pre class="type_signature pane"><code>{decl.type_signature}</code></pre>
-		</section>
-	{/if}
+<!-- Type Signature -->
+{#if decl.type_signature}
+	<section class="section">
+		<h2>Type Signature</h2>
+		<pre class="type_signature pane"><code>{decl.type_signature}</code></pre>
+	</section>
+{/if}
 
-	<!-- Documentation -->
-	{#if decl.doc_comment || decl.summary}
-		<section class="section">
-			<h2>Documentation</h2>
-			<div class="doc_content">
-				{decl.doc_comment || decl.summary}
-			</div>
-		</section>
-	{/if}
+<!-- Documentation -->
+{#if decl.doc_comment || decl.summary}
+	<section class="section">
+		<h2>Documentation</h2>
+		<div class="doc_content">
+			{decl.doc_comment || decl.summary}
+		</div>
+	</section>
+{/if}
 
-	<!-- Parameters -->
-	{#if decl.parameters?.length}
-		<section class="section">
-			<h2>Parameters</h2>
-			<table class="params_table">
-				<thead>
+<!-- Parameters -->
+{#if decl.parameters?.length}
+	<section class="section">
+		<h2>Parameters</h2>
+		<table class="params_table">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Type</th>
+					<th>Optional</th>
+					{#if decl.parameters.some((p) => p.description)}
+						<th>Description</th>
+					{/if}
+				</tr>
+			</thead>
+			<tbody>
+				{#each decl.parameters as param (param)}
 					<tr>
-						<th>Name</th>
-						<th>Type</th>
-						<th>Optional</th>
+						<td><code>{param.name}</code></td>
+						<td><code class="type">{param.type}</code></td>
+						<td>{param.optional ? 'yes' : 'no'}</td>
 						{#if decl.parameters.some((p) => p.description)}
-							<th>Description</th>
+							<td>{param.description ?? ''}</td>
 						{/if}
 					</tr>
-				</thead>
-				<tbody>
-					{#each decl.parameters as param (param)}
-						<tr>
-							<td><code>{param.name}</code></td>
-							<td><code class="type">{param.type}</code></td>
-							<td>{param.optional ? 'yes' : 'no'}</td>
-							{#if decl.parameters.some((p) => p.description)}
-								<td>{param.description ?? ''}</td>
-							{/if}
-						</tr>
-					{/each}
-				</tbody>
-			</table>
-		</section>
-	{/if}
+				{/each}
+			</tbody>
+		</table>
+	</section>
+{/if}
 
-	<!-- Component Props (for Svelte components) -->
-	{#if decl.props?.length}
-		<section class="section">
-			<h2>Props</h2>
-			<table class="params_table">
-				<thead>
+<!-- Component Props (for Svelte components) -->
+{#if decl.props?.length}
+	<section class="section">
+		<h2>Props</h2>
+		<table class="params_table">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Type</th>
+					<th>Optional</th>
+					{#if decl.props.some((p) => p.description)}
+						<th>Description</th>
+					{/if}
+					{#if decl.props.some((p) => p.default_value)}
+						<th>Default</th>
+					{/if}
+				</tr>
+			</thead>
+			<tbody>
+				{#each decl.props as prop (prop)}
 					<tr>
-						<th>Name</th>
-						<th>Type</th>
-						<th>Optional</th>
+						<td><code>{prop.name}</code></td>
+						<td><code class="type">{prop.type}</code></td>
+						<td>{prop.optional ? 'yes' : 'no'}</td>
 						{#if decl.props.some((p) => p.description)}
-							<th>Description</th>
+							<td>{prop.description ?? ''}</td>
 						{/if}
 						{#if decl.props.some((p) => p.default_value)}
-							<th>Default</th>
+							<td>{prop.default_value ? `<code>${prop.default_value}</code>` : ''}</td>
 						{/if}
 					</tr>
-				</thead>
-				<tbody>
-					{#each decl.props as prop (prop)}
-						<tr>
-							<td><code>{prop.name}</code></td>
-							<td><code class="type">{prop.type}</code></td>
-							<td>{prop.optional ? 'yes' : 'no'}</td>
-							{#if decl.props.some((p) => p.description)}
-								<td>{prop.description ?? ''}</td>
-							{/if}
-							{#if decl.props.some((p) => p.default_value)}
-								<td>{prop.default_value ? `<code>${prop.default_value}</code>` : ''}</td>
-							{/if}
-						</tr>
-					{/each}
-				</tbody>
-			</table>
-		</section>
-	{/if}
-
-	<!-- Return Type -->
-	{#if decl.return_type}
-		<section class="section">
-			<h2>Return Type</h2>
-			<pre class="type_signature pane"><code>{decl.return_type}</code></pre>
-		</section>
-	{/if}
-
-	<!-- Generic Parameters -->
-	{#if decl.generic_params?.length}
-		<section class="section">
-			<h2>Generic Parameters</h2>
-			<ul class="generic_list">
-				{#each decl.generic_params as generic (generic)}
-					<li><code>{generic}</code></li>
 				{/each}
-			</ul>
-		</section>
-	{/if}
+			</tbody>
+		</table>
+	</section>
+{/if}
 
-	<!-- Extends/Implements -->
-	{#if decl.extends?.length || decl.implements?.length}
-		<section class="section">
-			<h2>Inheritance</h2>
-			{#if decl.extends?.length}
-				<div>
-					<strong>Extends:</strong>
-					<ul class="inheritance_list">
-						{#each decl.extends as ext (ext)}
-							<li><code>{ext}</code></li>
-						{/each}
-					</ul>
-				</div>
-			{/if}
-			{#if decl.implements?.length}
-				<div>
-					<strong>Implements:</strong>
-					<ul class="inheritance_list">
-						{#each decl.implements as impl (impl)}
-							<li><code>{impl}</code></li>
-						{/each}
-					</ul>
-				</div>
-			{/if}
-		</section>
-	{/if}
+<!-- Return Type -->
+{#if decl.return_type}
+	<section class="section">
+		<h2>Return Type</h2>
+		<pre class="type_signature pane"><code>{decl.return_type}</code></pre>
+	</section>
+{/if}
 
-	<!-- Examples -->
-	{#if decl.examples?.length}
-		<section class="section">
-			<h2>Examples</h2>
-			{#each decl.examples as example, i (example)}
-				<Details>
-					{#snippet summary()}Example {i + 1}{/snippet}
-					<pre class="example_code pane"><code>{example}</code></pre>
-				</Details>
+<!-- Generic Parameters -->
+{#if decl.generic_params?.length}
+	<section class="section">
+		<h2>Generic Parameters</h2>
+		<ul class="generic_list">
+			{#each decl.generic_params as generic (generic)}
+				<li><code>{generic}</code></li>
 			{/each}
-		</section>
-	{/if}
+		</ul>
+	</section>
+{/if}
 
-	<!-- See Also -->
-	{#if decl.see_also?.length}
-		<section class="section">
-			<h2>See Also</h2>
-			<ul class="see_also_list">
-				{#each decl.see_also as ref (ref)}
-					<li>{ref}</li>
-				{/each}
-			</ul>
-		</section>
-	{/if}
+<!-- Extends/Implements -->
+{#if decl.extends?.length || decl.implements?.length}
+	<section class="section">
+		<h2>Inheritance</h2>
+		{#if decl.extends?.length}
+			<div>
+				<strong>Extends:</strong>
+				<ul class="inheritance_list">
+					{#each decl.extends as ext (ext)}
+						<li><code>{ext}</code></li>
+					{/each}
+				</ul>
+			</div>
+		{/if}
+		{#if decl.implements?.length}
+			<div>
+				<strong>Implements:</strong>
+				<ul class="inheritance_list">
+					{#each decl.implements as impl (impl)}
+						<li><code>{impl}</code></li>
+					{/each}
+				</ul>
+			</div>
+		{/if}
+	</section>
+{/if}
 
-	<!-- Members (for classes) -->
-	{#if decl.members?.length}
-		<section class="section">
-			<h2>Members</h2>
-			<ul class="members_list">
-				{#each decl.members as member (member)}
-					<li class="member">
-						<code class="member_name">{member.name}</code>
-						{#if member.kind}
-							<span class="kind_badge chip">{member.kind}</span>
-						{/if}
-					</li>
-				{/each}
-			</ul>
-		</section>
-	{/if}
+<!-- Examples -->
+{#if decl.examples?.length}
+	<section class="section">
+		<h2>Examples</h2>
+		{#each decl.examples as example, i (example)}
+			<Details>
+				{#snippet summary()}Example {i + 1}{/snippet}
+				<pre class="example_code pane"><code>{example}</code></pre>
+			</Details>
+		{/each}
+	</section>
+{/if}
 
-	<!-- Properties (for types/interfaces) -->
-	{#if decl.properties?.length}
-		<section class="section">
-			<h2>Properties</h2>
-			<ul class="members_list">
-				{#each decl.properties as prop (prop)}
-					<li class="member">
-						<code class="member_name">{prop.name}</code>
-						{#if prop.kind}
-							<span class="kind_badge chip">{prop.kind}</span>
-						{/if}
-					</li>
-				{/each}
-			</ul>
-		</section>
-	{/if}
-</article>
+<!-- See Also -->
+{#if decl.see_also?.length}
+	<section class="section">
+		<h2>See Also</h2>
+		<ul class="see_also_list">
+			{#each decl.see_also as ref (ref)}
+				<li>{ref}</li>
+			{/each}
+		</ul>
+	</section>
+{/if}
+
+<!-- Members (for classes) -->
+{#if decl.members?.length}
+	<section class="section">
+		<h2>Members</h2>
+		<ul class="members_list">
+			{#each decl.members as member (member)}
+				<li class="member">
+					<code class="member_name">{member.name}</code>
+					{#if member.kind}
+						<span class="kind_badge chip">{member.kind}</span>
+					{/if}
+				</li>
+			{/each}
+		</ul>
+	</section>
+{/if}
+
+<!-- Properties (for types/interfaces) -->
+{#if decl.properties?.length}
+	<section class="section">
+		<h2>Properties</h2>
+		<ul class="members_list">
+			{#each decl.properties as prop (prop)}
+				<li class="member">
+					<code class="member_name">{prop.name}</code>
+					{#if prop.kind}
+						<span class="kind_badge chip">{prop.kind}</span>
+					{/if}
+				</li>
+			{/each}
+		</ul>
+	</section>
+{/if}
 
 <style>
-	.api_page {
-		max-width: var(--max_width, var(--distance_md));
-		padding: var(--space_md);
-	}
-
-	.header {
-		margin-bottom: var(--space_lg);
-		border-bottom: var(--border_width) solid var(--border_color);
-		padding-bottom: var(--space_md);
-	}
-
-	.title_row {
-		display: flex;
-		align-items: baseline;
-		gap: var(--space_md);
-		flex-wrap: wrap;
-		margin-bottom: var(--space_sm);
-	}
-
-	.name {
-		font-family: var(--font_family_mono);
-		font-size: var(--font_size_xl);
-		font-weight: 600;
-		margin: 0;
-	}
-
-	.kind_badge {
-		font-size: var(--font_size_xs);
-		font-weight: 600;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-		background-color: var(--bg_3);
-		padding: 2px 8px;
-	}
-
 	.meta {
 		display: flex;
 		gap: var(--space_sm);

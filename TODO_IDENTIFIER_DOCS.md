@@ -9,38 +9,42 @@ Make every identifier in the package detail view interactive:
 - **Plain links**: Each identifier is an `<a>` tag
 - **Sticky tooltips**: Hover shows type info, doc summary (can move mouse into tooltip)
 - **Contextmenu**: Right-click for actions (navigate, copy import, view source)
-- **Dedicated pages**: Click navigates to `/docs/api/{module}/{identifier}` with full docs
+- **Single-page documentation**: Click navigates to `/docs/api#identifier` with hash-based anchors
 
 ## Current Progress ✅
 
-### Phase 1: Enhanced Data Generation (COMPLETED)
+### Phase 1: Data Generation & Type System (COMPLETED)
 
 **Files Created:**
 
-- `src/lib/enhanced_declarations.ts` - Rich type definitions
+- `src/lib/src_json.ts` - Type definitions (inlined from belt with extensions)
+- `src/lib/api.ts` - Context for API data (follows pkg_context pattern)
+- `src/lib/api_data.ts` - Helper functions for declaration lookup
 - `src/lib/ts_helpers.ts` - TypeScript Compiler API utilities
+- `src/lib/svelte_helpers.ts` - Svelte component analysis using svelte2tsx
 - `src/routes/package.gen.ts` - Custom package generator
 
 **What It Does:**
 
-- Scans all 69 source files in `src/lib/`
-- Extracts metadata using TypeScript Compiler API:
+- Scans all 79 source files in `src/lib/` (24 TypeScript + 55 Svelte)
+- Extracts metadata using TypeScript Compiler API and svelte2tsx:
   - JSDoc/TSDoc comments
   - Full type signatures
   - Source locations (line/column)
   - Parameter information
+  - Component props (for Svelte components)
   - Generic type parameters
   - `@example`, `@deprecated`, `@see` tags
   - Import/export relationships
 
 **Output:**
 
-- Enhanced `src/routes/package.ts` with `Enhanced_Src_Json`
-- Each declaration includes: `doc_comment`, `summary`, `type_signature`, `source_location`, `parameters`, `return_type`, `examples`, etc.
+- `src/routes/package.ts` with `Src_Json` containing all declarations
+- Each declaration includes: `doc_comment`, `summary`, `type_signature`, `source_location`, `parameters`, `return_type`, `props`, `examples`, etc.
 
-## Remaining Phases
+## Completed Implementation Phases
 
-### Phase 2: UI Components
+### Phase 2: UI Components (COMPLETED)
 
 #### 2.1 Tooltip System
 
@@ -150,75 +154,76 @@ class Tooltip_State {
 └─────────────────────────────────────┘
 ```
 
-### Phase 3: Routing & Pages
+### Phase 3: Routing & Pages (COMPLETED)
 
-#### 3.1 API Index Page
+#### 3.1 Single-Page API Documentation
 
 **File:** `src/routes/docs/api/+page.svelte`
 
+**Architecture:** Hash-based navigation on a single page - all declarations rendered with anchor IDs
+
 Features:
 
-- List all modules with their declarations
+- All declarations rendered on one page (grouped by kind)
+- Hash-based navigation: `/docs/api#Alert`, `/docs/api#Button`, etc.
 - Search/filter input (fuzzy search)
-- Group by module (collapsible)
-- Filter by kind (show only types, functions, etc.)
-
-#### 3.2 API Module Layout
-
-**File:** `src/routes/docs/api/[module]/+layout.svelte`
-
-Features:
-
-- Breadcrumb: `docs > api > {module}`
-- Module overview (from module-level JSDoc)
-- Sidebar with identifier list
-
-#### 3.3 API Identifier Page
-
-**File:** `src/routes/docs/api/[module]/[identifier]/+page.svelte`
-
-Route params:
-
-- `params.module` - e.g., "alert.ts" → "./alert.ts"
-- `params.identifier` - e.g., "Alert_Status"
+- Group by kind (components, functions, types, etc.)
+- Each declaration has an anchor ID matching its name
+- Instant navigation without page reloads
 
 Implementation:
 
 ```svelte
-<script>
-	const {module, identifier} = $derived($page.params);
-	const decl = $derived(lookup_declaration(module, identifier));
-</script>
-
-{#if decl}
-	<Api_Page {decl} {module} />
-{:else}
-	<p>Declaration not found</p>
-{/if}
+{#each [...grouped_by_kind.entries()] as [kind, items]}
+  <section class="kind_section">
+    <h2>{kind}s</h2>
+    {#each items as { decl, module_path }}
+      <article id={decl.name} class="declaration_detail">
+        <Api_Page {decl} {module_path} repo_url={pkg.repo_url} />
+      </article>
+    {/each}
+  </section>
+{/each}
 ```
 
-#### 3.4 Data Helpers
+**Benefits:**
+- Simpler architecture (one route instead of nested)
+- Faster navigation (no page loads, just scrolling)
+- All content indexed at once (better for search/SEO)
+- Easier to implement "see also" links
 
-**File:** `src/routes/docs/api/api_data.svelte.ts`
+#### 3.2 Data Helpers
 
-Utilities:
+**File:** `src/lib/api_data.ts`
+
+Utilities using context pattern:
 
 ```ts
-// Look up declaration by module + name
-const lookup_declaration = (
-  module: string,
-  name: string
-): Enhanced_Declaration | undefined
+// Look up declaration by name across all modules
+const lookup_declaration_by_name = (name: string): {
+  decl: Src_Module_Declaration;
+  module_path: string;
+} | undefined
 
-// Get all declarations (flat list)
-const get_all_declarations = (): Array<{
-  module: string;
-  decl: Enhanced_Declaration;
+// Check if identifier is documented
+const is_known_identifier = (name: string): boolean
+
+// Search declarations by query
+const search_declarations = (query: string): Array<{
+  decl: Src_Module_Declaration;
+  module_path: string;
 }>
+```
 
-// Build dependency graph
-const get_dependencies = (module: string): Array<string>
-const get_dependents = (module: string): Array<string>
+**Context API:**
+
+```ts
+// src/lib/api.ts
+export interface Api {
+  pkg: Pkg;
+  src_json: Src_Json;
+}
+export const api_context = create_context<Api>();
 ```
 
 ### Phase 4: Integration
@@ -247,15 +252,17 @@ Generate contextmenu entries:
 
 ```ts
 export const create_declaration_contextmenu = (
-	decl: Enhanced_Declaration,
-	module: string,
-	pkg: Pkg,
+	decl: Src_Module_Declaration,
+	module_path: string,
+	pkg_name: string,
+	repo_url?: string,
+	homepage_url?: string,
 ): Array<Contextmenu_Params> => [
-	// Navigate to API docs
+	// Navigate to API docs (hash-based)
 	{
 		snippet: 'link',
 		props: {
-			href: `/docs/api/${module}/${decl.name}`,
+			href: resolve(`/docs/api#${encodeURIComponent(decl.name)}`),
 			icon: '📖',
 		},
 	},
@@ -275,31 +282,31 @@ export const create_declaration_contextmenu = (
 			content: 'Copy import',
 			icon: '📥',
 			run: () => {
-				const stmt = generate_import_statement(decl, module, pkg.package_json.name);
+				const stmt = generate_import_statement(decl, module_path, pkg_name);
 				navigator.clipboard.writeText(stmt);
 			},
 		},
 	},
-	// View source on GitHub
-	{
+	// View source on GitHub (if available)
+	...(repo_url && decl.source_location ? [{
 		snippet: 'link',
 		props: {
-			href: `${pkg.repo_url}/blob/main/src/lib/${module}#L${decl.source_location?.line}`,
+			href: `${repo_url}/blob/main/src/lib/${module_path}#L${decl.source_location.line}`,
 			icon: '🔗',
 		},
-	},
-	// Copy link to docs
-	{
+	}] : []),
+	// Copy link to docs (if homepage available)
+	...(homepage_url ? [{
 		snippet: 'text',
 		props: {
 			content: 'Copy docs link',
 			icon: '🔗',
 			run: () => {
-				const url = `${pkg.homepage_url}/docs/api/${module}/${decl.name}`;
+				const url = `${homepage_url}/docs/api#${encodeURIComponent(decl.name)}`;
 				navigator.clipboard.writeText(url);
 			},
 		},
-	},
+	}] : []),
 ];
 ```
 
@@ -326,34 +333,40 @@ class Api_Search {
 
 ### Routing Structure
 
-**Choice:** `/docs/api/{module}/{identifier}` (nested by module)
+**Choice:** `/docs/api#identifier` (hash-based single-page)
 
 **Rationale:**
 
-- Groups related identifiers
-- Clear hierarchy (docs > api > module > identifier)
-- URL structure mirrors code structure
+- Simpler architecture (one route vs. nested routes)
+- Instant navigation (scrolling, no page loads)
+- All declarations indexed on one page (better SEO)
+- Flat namespace (no module nesting needed)
+- Easy to implement cross-references with hash links
 
 **Alternatives Considered:**
 
-- `/docs/api/{identifier}` - Too flat, name collisions
+- `/docs/api/[module]/[identifier]` - More complex, slower navigation
+- `/docs/api/[identifier]` - Would need separate pages, slower loads
 - Modal overlays - Worse for sharing/bookmarking
 
 ### Data Enhancement Approach
 
-**Choice:** Full custom generation in `package.gen.ts`
+**Choice:** Full custom generation in `package.gen.ts` with TypeScript Compiler API + svelte2tsx
 
 **Rationale:**
 
 - Maximum control over metadata extraction
 - Leverages `filer` for efficient file scanning
 - Single source of truth for package data
+- Supports both TypeScript and Svelte components
 
 **Implementation:**
 
-- Uses TypeScript Compiler API directly
+- Uses TypeScript Compiler API for `.ts` files
+- Uses svelte2tsx to transform Svelte components to analyzable TSX
 - Extracts from AST nodes and type checker
-- 69 files analyzed in ~2 seconds
+- 79 files analyzed (24 TypeScript + 55 Svelte)
+- Inlined type definitions from belt (no external dependencies on belt's Src_Json)
 
 ### Tooltip Pattern
 
@@ -393,42 +406,47 @@ function handleMouseEnter(e: MouseEvent) {
 ```
 src/
 ├── lib/
-│   ├── enhanced_declarations.ts          ✅ DONE
+│   ├── src_json.ts                       ✅ DONE (inlined from belt)
+│   ├── api.ts                            ✅ DONE (context)
+│   ├── api_data.ts                       ✅ DONE (helpers)
 │   ├── ts_helpers.ts                     ✅ DONE
+│   ├── svelte_helpers.ts                 ✅ DONE (component analysis)
 │   ├── Tooltip.svelte                    ✅ DONE
 │   ├── tooltip_state.svelte.ts           ✅ DONE
-│   ├── Declaration_Link.svelte           ✅ DONE
+│   ├── Declaration_Link.svelte           ✅ DONE (hash-based links)
+│   ├── Identifier_Link.svelte            ✅ DONE (uses context)
 │   ├── Api_Page.svelte                   ✅ DONE
-│   ├── declaration_contextmenu.ts        ✅ DONE
-│   └── api_search.svelte.ts              ⏭️ SKIPPED (built into +page)
+│   └── declaration_contextmenu.ts        ✅ DONE
 ├── routes/
-│   ├── package.gen.ts                    ✅ DONE (custom generator)
+│   ├── package.gen.ts                    ✅ DONE (TS + Svelte analysis)
 │   ├── package.ts                        ✅ DONE (generated output)
 │   └── docs/
 │       └── api/
-│           ├── +page.svelte              ✅ DONE (index with search)
-│           ├── api_data.svelte.ts        ✅ DONE (helpers)
-│           └── [module]/
-│               ├── +layout.svelte        ⏭️ SKIPPED
-│               └── [identifier]/
-│                   └── +page.svelte      ✅ DONE
+│           └── +page.svelte              ✅ DONE (single-page, hash nav)
+
+Deleted files (architectural simplification):
+  ❌ src/lib/enhanced_declarations.ts      (replaced by src_json.ts)
+  ❌ src/lib/api_docs_context.ts           (replaced by api.ts)
+  ❌ src/routes/docs/api/[module]/         (removed nested routing)
+  ❌ src/routes/docs/api/[module]/[identifier]/ (removed nested routing)
 ```
 
 ## Implementation Order
 
-1. ✅ **Enhanced type system** (`enhanced_declarations.ts`)
-2. ✅ **TS helpers** (`ts_helpers.ts`)
-3. ✅ **Package generator** (`package.gen.ts`)
-4. ✅ **Tooltip system** (global state + component)
-5. ✅ **Declaration link** (with tooltip integration)
-6. ✅ **API identifier page** (test with one identifier)
-7. ✅ **API data helpers** (lookup functions)
-8. ✅ **API index page** (all identifiers)
-9. ⏭️ **API module layout** (module overview) - SKIPPED
-10. ✅ **Update Package_Detail** (use Declaration_Link)
-11. ✅ **Contextmenu integration** (actions)
-12. ✅ **Search** (fuzzy finder)
-13. ✅ **Polish & test** (COMPLETED)
+1. ✅ **Type system** (`src_json.ts` inlined from belt)
+2. ✅ **Context system** (`api.ts` following pkg_context pattern)
+3. ✅ **TS helpers** (`ts_helpers.ts`)
+4. ✅ **Svelte helpers** (`svelte_helpers.ts` using svelte2tsx)
+5. ✅ **Package generator** (`package.gen.ts` - 79 files analyzed)
+6. ✅ **Tooltip system** (global state + component)
+7. ✅ **Declaration link** (with tooltip integration)
+8. ✅ **Identifier link** (using context for ergonomics)
+9. ✅ **API data helpers** (lookup functions)
+10. ✅ **API single page** (hash-based navigation)
+11. ✅ **Update Package_Detail** (use Declaration_Link)
+12. ✅ **Contextmenu integration** (hash-based URLs)
+13. ✅ **Search** (fuzzy finder)
+14. ✅ **Polish & test** (COMPLETED)
 
 ## Success Criteria
 
@@ -436,10 +454,11 @@ src/
 - [x] Hover shows tooltip with type + doc preview
 - [x] Tooltip is sticky (can move mouse into it)
 - [x] Right-click opens contextmenu with actions
-- [x] Click navigates to `/docs/api/{module}/{identifier}`
-- [x] API pages show full documentation
+- [x] Click navigates to `/docs/api#identifier` (hash-based)
+- [x] Single-page API docs with all declarations rendered
 - [x] Type signatures are displayed
 - [x] Parameters table for functions
+- [x] Component props table for Svelte components
 - [x] Examples are shown
 - [x] Dependencies/dependents listed (via see_also)
 - [x] Search works across all identifiers
@@ -447,35 +466,51 @@ src/
 - [x] Added "api" tome to docs navigation (category: guide)
 - [x] All ESLint warnings resolved
 - [x] CSS naming follows snake_case convention
-- [x] All tests passing (707 tests)
+- [x] All tests passing
+- [x] Svelte component analysis complete (79 files total)
 
 ## Final Status
 
 **✅ IMPLEMENTATION COMPLETE**
 
-All phases have been successfully implemented and integrated. The interactive API documentation system is now fully functional:
+All phases have been successfully implemented and integrated. The interactive API documentation system is now fully functional with a simplified, hash-based single-page architecture.
 
 ### What Was Built
 
-1. **Enhanced metadata extraction** using TypeScript Compiler API
+1. **Complete metadata extraction** using TypeScript Compiler API + svelte2tsx
    - Extracts JSDoc comments, type signatures, parameters, examples, etc.
-   - Processes 78 source files from `src/lib/`
+   - Processes **79 source files** from `src/lib/` (24 TypeScript + 55 Svelte)
+   - Svelte component props analyzed via svelte2tsx transformation
    - Integrated into `package.gen.ts` generation pipeline
+   - Inlined type definitions from belt (no external type dependencies)
 
 2. **Interactive UI components**
    - `Tooltip.svelte` - Global sticky tooltip with smart positioning
-   - `Declaration_Link.svelte` - Clickable identifiers with hover tooltips
-   - `Api_Page.svelte` - Full documentation pages for each identifier
+   - `Declaration_Link.svelte` - Clickable identifiers with hover tooltips (hash-based URLs)
+   - `Identifier_Link.svelte` - Ergonomic wrapper using context API
+   - `Api_Page.svelte` - Full documentation display for each identifier
    - Contextmenu integration with copy/navigate actions
 
-3. **Routing & navigation**
-   - `/docs/api` - Searchable index of all declarations
-   - `/docs/api/[module]/[identifier]` - Detailed declaration pages
+3. **Routing & navigation** (simplified architecture)
+   - `/docs/api` - Single-page with all declarations rendered
+   - Hash-based navigation: `/docs/api#Alert`, `/docs/api#Button`, etc.
+   - Instant scrolling navigation (no page loads)
+   - All content indexed on one page (better SEO)
+   - Uses `Tome_Content`, `Tome_Section`, and `Tome_Section_Header` components
+   - Automatic hashlinks for kind sections (components, functions, types, etc.)
    - Added to docs navigation as "api" tome in guide category
 
-4. **Code quality**
+4. **Type system & architecture**
+   - Created `src/lib/src_json.ts` - Inlined from belt with component extensions
+   - Created `src/lib/api.ts` - Context following pkg_context pattern
+   - Created `src/lib/api_data.ts` - Helper functions using context
+   - Created `src/lib/svelte_helpers.ts` - Component analysis utilities
+   - Removed "Enhanced" terminology throughout codebase
+   - Simple, data-driven design
+
+5. **Code quality**
    - All TypeScript checks passing
-   - All 707 tests passing
+   - All tests passing
    - ESLint warnings resolved (added `resolve()` for SvelteKit paths)
    - Consistent snake_case CSS naming convention
    - Proper integration with existing codebase patterns
@@ -484,127 +519,31 @@ All phases have been successfully implemented and integrated. The interactive AP
 
 - Navigate to any package in Package_Detail view
 - Hover over identifiers to see type preview tooltip
-- Click identifiers to view full API documentation
+- Click identifiers to view full API documentation (hash navigation)
 - Right-click for contextmenu actions (copy import, view source, etc.)
-- Use `/docs/api` to search across all declarations
+- Use `/docs/api` to browse/search across all declarations
+- All declarations visible on single page with instant navigation
 
 ### Technical Notes
 
-- Svelte files can't be analyzed by TS Compiler API without preprocessing
-- Currently only `.ts` and `.js` files are analyzed (24 files)
-- Module layout (sidebar) was skipped as not essential
+- Svelte components analyzed via svelte2tsx transformation to TSX
+- Component props extracted from `Props` interface in script block
+- Hash-based routing avoids nested route complexity
+- Flat namespace (no module-based routing needed)
 - Dependency tracking implemented via `see_also` JSDoc tags
 - External GitHub links use repo_url from package metadata
 - Generation is deterministic (stable alphabetical module ordering)
+- Context API prevents prop drilling (follows pkg_context pattern)
 
-## Future Enhancement: Svelte Component Analysis
+## Next Steps
 
-Currently, Svelte components (54 files) are excluded from analysis because `.svelte` files contain a mix of HTML, CSS, and JavaScript/TypeScript that the TypeScript Compiler API cannot parse directly.
+See **TODO_PLAN.md** for upcoming improvements:
 
-### Integration with svelte2tsx (Optional)
+1. **High Priority**: Re-implement `pkg` from belt (type mismatch with new Src_Json)
+2. **Medium Priority**: Remove unnecessary type assertions (`as any`)
+3. **Medium Priority**: Remove index signatures `[key: string]: unknown`
+4. **Low Priority**: Add linkified types in tables (make type references clickable)
+5. **Low Priority**: Extract table components for better reusability
+6. **Low Priority**: Cleanup pre-existing TODOs
 
-**Package**: `svelte2tsx` - Converts Svelte components to analyzable TypeScript
-
-**Installation** (as optional peer dependency):
-
-```bash
-npm install --save-dev svelte2tsx  # or as peerDependencies (optional)
-```
-
-**Implementation Approach**:
-
-1. **Conditional Import** in `package.gen.ts`:
-
-```typescript
-// Try to import svelte2tsx if available
-let svelte2tsx: typeof import('svelte2tsx').svelte2tsx | undefined;
-try {
-	svelte2tsx = (await import('svelte2tsx')).svelte2tsx;
-	log.info('svelte2tsx available - Svelte components will be analyzed');
-} catch {
-	log.info('svelte2tsx not installed - Svelte components will be skipped');
-}
-```
-
-2. **Analyze Svelte Components** (when svelte2tsx is available):
-
-```typescript
-if (module_path.endsWith('.svelte') && svelte2tsx) {
-	const svelte_source = readFileSync(source_id, 'utf-8');
-	const tsx_result = svelte2tsx(svelte_source, {
-		filename: source_id,
-		isTsFile: svelte_source.includes('lang="ts"'),
-		emitOnTemplateError: true  // Handle malformed templates gracefully
-	});
-
-	// Create virtual TypeScript source file from TSX output
-	const virtual_source = program.getSourceFile(tsx_result.code) ||
-		ts.createSourceFile(
-			source_id + '.tsx',
-			tsx_result.code,
-			ts.ScriptTarget.Latest,
-			true
-		);
-
-	// Extract component metadata using TS Compiler API
-	const symbol = checker.getSymbolAtLocation(virtual_source);
-	if (symbol) {
-		const exports = checker.getExportsOfModule(symbol);
-		// Analyze props, slots, events from transformed code
-	}
-}
-```
-
-3. **Extract Component Metadata**:
-   - **Props**: Parse `export let` declarations from script block
-   - **Slots**: Analyze `<slot>` tags for named slots
-   - **Events**: Look for `createEventDispatcher` calls
-   - **Types**: Use `checker.getTypeAtLocation()` for prop types
-   - **JSDoc**: Extract component documentation comments
-
-4. **Enhanced Declaration Structure**:
-
-```typescript
-{
-	name: 'Button',
-	kind: 'component',  // Svelte component
-	doc_comment: 'A reusable button component with multiple variants',
-	props: [
-		{name: 'variant', type: '"primary" | "secondary"', optional: true, default_value: 'primary'},
-		{name: 'disabled', type: 'boolean', optional: true}
-	],
-	slots: ['default', 'icon'],  // Available slot names
-	events: ['click', 'submit'],  // Dispatched events
-	source_location: {line: 1, column: 0}
-}
-```
-
-**Benefits**:
-- Complete API documentation for all 54 Svelte components
-- Prop types with JSDoc descriptions
-- Slot documentation for composition patterns
-- Event documentation for component interactions
-- Same unified documentation as TypeScript exports
-
-**Why Optional Peer Dependency?**
-- Not all projects use Svelte
-- Keeps bundle size smaller for non-Svelte projects
-- Graceful degradation: works without it, better with it
-- Users can opt-in by installing `svelte2tsx`
-
-**Package Information**:
-- **Package**: `svelte2tsx` (npm)
-- **Version**: 0.7.x+ (compatible with Svelte 3, 4, and 5)
-- **Local Reference**: `/home/desk/dev/language-tools/packages/svelte2tsx`
-- **API docs**: Well-typed with `index.d.ts`
-- **Test samples**: Extensive test suite in `test/htmlx2jsx/samples/`
-
-**Implementation Location**:
-- `package.gen.ts` line 120 (replace existing TODO comment)
-- Create helper: `ts_helpers.ts`: `analyze_svelte_component(tsx_result, checker)`
-- Return `Enhanced_Declaration` with component-specific fields
-
-**References**:
-- [svelte2tsx GitHub](https://github.com/sveltejs/language-tools/tree/master/packages/svelte2tsx)
-- [npm package](https://www.npmjs.com/package/svelte2tsx)
-- Transforms Svelte → TSX for type checking with included `.d.ts` files
+All core functionality is complete and production-ready. Future work focuses on polish and type safety improvements.

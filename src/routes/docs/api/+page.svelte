@@ -4,8 +4,13 @@
 	import {pkg_context} from '$lib/pkg.js';
 	import type {Src_Json} from '$lib/src_json.js';
 	import Api_Page from '$lib/Api_Page.svelte';
+	import {get_tome_by_name} from '$lib/tome.js';
+	import Tome_Content from '$lib/Tome_Content.svelte';
+	import Tome_Section from '$lib/Tome_Section.svelte';
+	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
 
 	const pkg = pkg_context.get();
+	const tome = get_tome_by_name('api');
 
 	// Set up API context for child components
 	api_context.set({
@@ -17,24 +22,10 @@
 
 	const all_declarations = $derived(get_all_declarations());
 
-	// Search results
-	const filtered_declarations = $derived.by(() => {
-		if (!search_query.trim()) return all_declarations;
-		return search_declarations(search_query);
-	});
-
-	// Group by kind (component, function, type, etc.)
-	const grouped_by_kind = $derived.by(() => {
-		const groups: Map<string, Array<{module_path: string; decl: any; module: any}>> = new Map(); // eslint-disable-line svelte/prefer-svelte-reactivity
-
-		for (const item of filtered_declarations) {
-			const kind = item.decl.kind || 'other';
-			const existing = groups.get(kind) ?? [];
-			existing.push(item);
-			groups.set(kind, existing);
-		}
-
-		return groups;
+	// Search and sort alphabetically
+	const sorted_declarations = $derived.by(() => {
+		const items = search_query.trim() ? search_declarations(search_query) : all_declarations;
+		return items.sort((a, b) => a.decl.name.localeCompare(b.decl.name));
 	});
 </script>
 
@@ -42,9 +33,8 @@
 	<title>API Documentation - {pkg.package_json.name}</title>
 </svelte:head>
 
-<div class="api_page">
+<Tome_Content {tome}>
 	<header class="header">
-		<h1>API Documentation</h1>
 		<p class="subtitle">{pkg.package_json.description}</p>
 
 		<!-- Search -->
@@ -63,41 +53,36 @@
 			</span>
 			{#if search_query}
 				<span class="stat">
-					{filtered_declarations.length} results
+					{sorted_declarations.length} results
 				</span>
 			{/if}
 		</div>
 	</header>
 
-	{#if grouped_by_kind.size === 0}
+	{#if sorted_declarations.length === 0}
 		<div class="no_results pane p_md">
 			<p>No declarations found matching "{search_query}"</p>
 		</div>
 	{:else}
-		<!-- Render all declarations with anchor IDs -->
-		{#each [...grouped_by_kind.entries()] as [kind, items] (kind)}
-			<section class="kind_section">
-				<h2 class="kind_header">
-					<span class="kind_name">{kind}s</span>
-					<span class="count">{items.length}</span>
-				</h2>
+		<!-- Render all declarations alphabetically -->
+		{#each sorted_declarations as { decl, module_path } (decl.name)}
+			<Tome_Section>
+				<Tome_Section_Header text={decl.name}>
+					{decl.name}
+					{#if decl.kind}
+						<span class="kind_badge">{decl.kind}</span>
+					{/if}
+				</Tome_Section_Header>
 
-				{#each items as { decl, module_path } (decl.name)}
-					<article id={decl.name} class="declaration_detail">
-						<Api_Page {decl} {module_path} repo_url={pkg.repo_url} />
-					</article>
-				{/each}
-			</section>
+				<article id={decl.name} class="declaration_detail">
+					<Api_Page {decl} {module_path} repo_url={pkg.repo_url} />
+				</article>
+			</Tome_Section>
 		{/each}
 	{/if}
-</div>
+</Tome_Content>
 
 <style>
-	.api_page {
-		max-width: var(--max_width, var(--distance_md));
-		padding: var(--space_md);
-	}
-
 	.header {
 		margin-bottom: var(--space_xl);
 		border-bottom: var(--border_width) solid var(--border_color);
@@ -106,11 +91,6 @@
 		top: 0;
 		background-color: var(--bg_1);
 		z-index: 10;
-	}
-
-	.header h1 {
-		margin: 0 0 var(--space_xs) 0;
-		font-size: var(--font_size_xl2);
 	}
 
 	.subtitle {
@@ -155,29 +135,15 @@
 		border-radius: var(--border_radius_xs);
 	}
 
-	.kind_section {
-		margin-bottom: var(--space_xl);
-	}
-
-	.kind_header {
-		display: flex;
-		align-items: baseline;
-		gap: var(--space_sm);
-		margin: 0 0 var(--space_lg) 0;
-		font-size: var(--font_size_xl);
-		padding-bottom: var(--space_sm);
-		border-bottom: var(--border_width) solid var(--border_color);
-	}
-
-	.kind_name {
-		color: var(--text_color_2);
-		text-transform: capitalize;
-	}
-
-	.count {
-		font-size: var(--font_size_sm);
-		color: var(--text_color_3);
-		font-weight: normal;
+	.kind_badge {
+		margin-left: var(--space_sm);
+		font-size: var(--font_size_xs);
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		background-color: var(--bg_3);
+		padding: 2px 8px;
+		border-radius: var(--border_radius_xs);
 	}
 
 	.declaration_detail {
