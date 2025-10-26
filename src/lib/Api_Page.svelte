@@ -1,6 +1,9 @@
 <script lang="ts">
 	import type {Src_Module_Declaration} from '$lib/src_json.js';
 	import Details from '$lib/Details.svelte';
+	import Identifier_Link from '$lib/Identifier_Link.svelte';
+	import Code from '@ryanatkn/fuz_code/Code.svelte';
+	import {lookup_declaration_by_name} from '$lib/api_data.js';
 
 	const {
 		decl,
@@ -18,6 +21,8 @@
 			? `${repo_url}/blob/main/src/lib/${module_path.replace(/^\.\//, '')}#L${decl.source_location.line}`
 			: undefined,
 	);
+
+	// TODO verbose and badly laid out -- but we want to be sure it's complete/thorough
 </script>
 
 <!-- Metadata -->
@@ -37,11 +42,18 @@
 	</div>
 {/if}
 
+{#if decl.kind}
+	<section class="section">
+		<h2>kind</h2>
+		<span class="chip font_size_md">{decl.kind}</span>
+	</section>
+{/if}
+
 <!-- type signature -->
 {#if decl.type_signature}
 	<section class="section">
 		<h2>type signature</h2>
-		<pre class="type_signature pane"><code>{decl.type_signature}</code></pre>
+		<Code content={decl.type_signature} lang="ts" />
 	</section>
 {/if}
 
@@ -74,7 +86,13 @@
 				{#each decl.parameters as param (param)}
 					<tr>
 						<td><code>{param.name}</code></td>
-						<td><code class="type">{param.type}</code></td>
+						<td>
+							{#if lookup_declaration_by_name(param.type)}
+								<code><Identifier_Link name={param.type} /></code>
+							{:else}
+								<Code content={param.type} lang="ts" />
+							{/if}
+						</td>
 						<td>{param.optional ? 'yes' : 'no'}</td>
 						{#if decl.parameters.some((p) => p.description)}
 							<td>{param.description ?? ''}</td>
@@ -108,13 +126,23 @@
 				{#each decl.props as prop (prop)}
 					<tr>
 						<td><code>{prop.name}</code></td>
-						<td><code class="type">{prop.type}</code></td>
+						<td>
+							{#if lookup_declaration_by_name(prop.type)}
+								<code><Identifier_Link name={prop.type} /></code>
+							{:else}
+								<Code content={prop.type} lang="ts" />
+							{/if}
+						</td>
 						<td>{prop.optional ? 'yes' : 'no'}</td>
 						{#if decl.props.some((p) => p.description)}
 							<td>{prop.description ?? ''}</td>
 						{/if}
 						{#if decl.props.some((p) => p.default_value)}
-							<td>{prop.default_value ? `<code>${prop.default_value}</code>` : ''}</td>
+							<td>
+								{#if prop.default_value}
+									<Code content={prop.default_value} lang="ts" />
+								{/if}
+							</td>
 						{/if}
 					</tr>
 				{/each}
@@ -127,7 +155,7 @@
 {#if decl.return_type}
 	<section class="section">
 		<h2>return type</h2>
-		<pre class="type_signature pane"><code>{decl.return_type}</code></pre>
+		<Code content={decl.return_type} lang="ts" />
 	</section>
 {/if}
 
@@ -177,7 +205,7 @@
 		{#each decl.examples as example, i (example)}
 			<Details>
 				{#snippet summary()}Example {i + 1}{/snippet}
-				<pre class="example_code pane"><code>{example}</code></pre>
+				<Code content={example} lang="ts" />
 			</Details>
 		{/each}
 	</section>
@@ -204,7 +232,7 @@
 				<li class="member">
 					<code class="member_name">{member.name}</code>
 					{#if member.kind}
-						<span class="kind_badge chip">{member.kind}</span>
+						<span class="chip">{member.kind}</span>
 					{/if}
 				</li>
 			{/each}
@@ -221,7 +249,7 @@
 				<li class="member">
 					<code class="member_name">{prop.name}</code>
 					{#if prop.kind}
-						<span class="kind_badge chip">{prop.kind}</span>
+						<span class="chip">{prop.kind}</span>
 					{/if}
 				</li>
 			{/each}
@@ -255,17 +283,6 @@
 		color: var(--text_color_2);
 	}
 
-	.type_signature {
-		font-family: var(--font_family_mono);
-		font-size: var(--font_size_sm);
-		background-color: var(--bg_3);
-		padding: var(--space_sm);
-		border-radius: var(--border_radius_xs);
-		overflow-x: auto;
-		white-space: pre-wrap;
-		word-break: break-all;
-	}
-
 	.doc_content {
 		line-height: 1.6;
 		white-space: pre-wrap;
@@ -287,11 +304,6 @@
 	.params_table th {
 		font-weight: 600;
 		background-color: var(--bg_3);
-	}
-
-	.params_table code.type {
-		font-size: var(--font_size_xs);
-		color: var(--text_color_3);
 	}
 
 	.generic_list,
@@ -326,15 +338,5 @@
 	.member_name {
 		font-family: var(--font_family_mono);
 		font-size: var(--font_size_sm);
-	}
-
-	.example_code {
-		font-family: var(--font_family_mono);
-		font-size: var(--font_size_xs);
-		background-color: var(--bg_3);
-		padding: var(--space_sm);
-		border-radius: var(--border_radius_xs);
-		overflow-x: auto;
-		white-space: pre;
 	}
 </style>

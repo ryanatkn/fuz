@@ -2,8 +2,8 @@
 	import {page} from '$app/state';
 	import type {Snippet} from 'svelte';
 	import {format_url} from '@ryanatkn/belt/url.js';
-	import type {Pkg} from '@ryanatkn/belt/pkg.js';
 
+	import type {Pkg} from '$lib/pkg.js';
 	import Img_Or_Svg from '$lib/Img_Or_Svg.svelte';
 
 	interface Props {

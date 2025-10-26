@@ -7,9 +7,26 @@
 		 * @nonreactive
 		 */
 		tooltip?: Tooltip_State;
+		/**
+		 * Horizontal offset from anchor point (cursor or element center)
+		 */
+		offset_x?: number;
+		/**
+		 * Vertical offset from anchor point (cursor or element bottom)
+		 */
+		offset_y?: number;
+		/**
+		 * Padding from viewport edges
+		 */
+		viewport_padding?: number;
 	}
 
-	const {tooltip = tooltip_context.get()}: Props = $props();
+	const {
+		tooltip = tooltip_context.get(),
+		offset_x = 6,
+		offset_y = 6,
+		viewport_padding = 10,
+	}: Props = $props();
 
 	let el: HTMLElement | undefined = $state();
 	let clientWidth = $state(0);
@@ -23,14 +40,14 @@
 	const x = $derived.by(() => {
 		if (!tooltip.opened) return 0;
 
-		// Offset slightly from cursor
-		let pos = tooltip.x + 12;
+		// Offset from anchor point (cursor or element center)
+		let pos = tooltip.x + offset_x;
 
 		// Flip to left if would overflow right edge
-		if (pos + clientWidth > viewportWidth - 10) {
-			pos = tooltip.x - clientWidth - 12;
+		if (pos + clientWidth > viewportWidth - viewport_padding) {
+			pos = tooltip.x - clientWidth - offset_x;
 			// Clamp to left edge
-			if (pos < 10) pos = 10;
+			if (pos < viewport_padding) pos = viewport_padding;
 		}
 
 		return pos;
@@ -39,14 +56,14 @@
 	const y = $derived.by(() => {
 		if (!tooltip.opened) return 0;
 
-		// Offset slightly from cursor
-		let pos = tooltip.y + 12;
+		// Offset from anchor point (cursor or element bottom)
+		let pos = tooltip.y + offset_y;
 
 		// Flip to top if would overflow bottom edge
-		if (pos + clientHeight > viewportHeight - 10) {
-			pos = tooltip.y - clientHeight - 12;
+		if (pos + clientHeight > viewportHeight - viewport_padding) {
+			pos = tooltip.y - clientHeight - offset_y;
 			// Clamp to top edge
-			if (pos < 10) pos = 10;
+			if (pos < viewport_padding) pos = viewport_padding;
 		}
 
 		return pos;
@@ -77,12 +94,22 @@
 
 <svelte:window
 	onmousedown={() => {
+		// Dismiss tooltip on any click (even inside tooltip)
+		// This is intentional: tooltips should not contain interactive content
+		// For interactive popovers, use a dialog/popover component instead
 		if (tooltip.opened) tooltip.hide();
+	}}
+	onkeydown={(e) => {
+		// ARIA requirement: Escape dismisses tooltip
+		if (e.key === 'Escape' && tooltip.opened) {
+			tooltip.hide();
+		}
 	}}
 />
 
 {#if tooltip.opened && tooltip.content}
 	<div
+		id={tooltip.id}
 		class="tooltip pane"
 		role="tooltip"
 		bind:this={el}

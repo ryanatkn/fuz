@@ -86,9 +86,6 @@ export interface Src_Module_Declaration {
 	properties?: Array<Src_Module_Declaration>;
 	/** Component props (for Svelte components) */
 	props?: Array<Component_Prop_Info>;
-
-	// Allow additional properties for future extensions
-	[key: string]: unknown;
 }
 
 /**
@@ -105,9 +102,6 @@ export interface Src_Module {
 	imports?: Array<string>;
 	/** Modules that import this module */
 	imported_by?: Array<string>;
-
-	// Allow additional properties
-	[key: string]: unknown;
 }
 
 /**

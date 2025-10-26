@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
 	import {lookup_declaration_by_name} from '$lib/api_data.js';
-	import {api_context} from '$lib/api.js';
+	import {pkg_context} from '$lib/pkg.js';
 	import Declaration_Link from '$lib/Declaration_Link.svelte';
 
 	const {
@@ -18,17 +18,17 @@
 		children?: Snippet;
 	} = $props();
 
-	const api = api_context.maybe_get();
+	const pkg = pkg_context.maybe_get();
 	const result = $derived(lookup_declaration_by_name(name));
 </script>
 
-{#if result && api}
+{#if result && pkg}
 	<Declaration_Link
 		decl={result.decl}
 		module_path={result.module_path}
-		pkg_name={api.pkg.package_json.name}
-		repo_url={api.pkg.repo_url}
-		homepage_url={api.pkg.homepage_url}
+		pkg_name={pkg.package_json.name}
+		repo_url={pkg.repo_url}
+		homepage_url={pkg.homepage_url}
 	>
 		{#if children}
 			{@render children()}

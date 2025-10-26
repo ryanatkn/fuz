@@ -3,7 +3,7 @@
  * Functions for looking up and searching declarations
  */
 
-import {api_context} from '$lib/api.js';
+import {pkg_context} from '$lib/pkg.js';
 import type {Src_Module_Declaration, Src_Module} from '$lib/src_json.js';
 
 /**
@@ -12,10 +12,10 @@ import type {Src_Module_Declaration, Src_Module} from '$lib/src_json.js';
 export const lookup_declaration_by_name = (
 	name: string,
 ): {decl: Src_Module_Declaration; module_path: string; module: Src_Module} | undefined => {
-	const api = api_context.get();
-	if (!api.src_json.modules) return undefined;
+	const pkg = pkg_context.get();
+	if (!pkg.src_json.modules) return undefined;
 
-	for (const [module_path, module] of Object.entries(api.src_json.modules)) {
+	for (const [module_path, module] of Object.entries(pkg.src_json.modules)) {
 		if (!module.declarations) continue;
 
 		const decl = module.declarations.find((d) => d.name === name);
@@ -35,12 +35,12 @@ export const get_all_declarations = (): Array<{
 	module: Src_Module;
 	decl: Src_Module_Declaration;
 }> => {
-	const api = api_context.get();
+	const pkg = pkg_context.get();
 	const all: Array<{module_path: string; module: Src_Module; decl: Src_Module_Declaration}> = [];
 
-	if (!api.src_json.modules) return all;
+	if (!pkg.src_json.modules) return all;
 
-	for (const [module_path, module] of Object.entries(api.src_json.modules)) {
+	for (const [module_path, module] of Object.entries(pkg.src_json.modules)) {
 		if (!module.declarations) continue;
 
 		for (const decl of module.declarations) {

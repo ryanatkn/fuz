@@ -42,6 +42,8 @@
 
 	const tooltip = tooltip_context.maybe_get();
 
+	let link_el: HTMLAnchorElement | undefined = $state();
+
 	// Generate API URL with hash-based navigation
 	const api_url = $derived(`/docs/api#${encodeURIComponent(decl.name)}`);
 
@@ -50,24 +52,42 @@
 		create_declaration_contextmenu(decl, module_path, pkg_name, repo_url, homepage_url),
 	);
 
-	// Tooltip content
-	const show_tooltip = (e: MouseEvent) => {
+	// Tooltip handlers
+	const show_tooltip_hover = (e: MouseEvent) => {
 		if (!tooltip) return;
-
-		tooltip.show(e.clientX, e.clientY, tooltip_content);
+		// ARIA compliance: show after delay for mouse hover
+		tooltip.show_delayed(e.clientX, e.clientY, tooltip_content);
 	};
 
-	const hide_tooltip = () => {
+	const show_tooltip_focus = (_e: FocusEvent) => {
+		if (!tooltip || !link_el) return;
+		// Show immediately for keyboard focus (screen reader users)
+		const rect = link_el.getBoundingClientRect();
+		const x = rect.left + rect.width / 2;
+		const y = rect.bottom;
+		tooltip.show(x, y, tooltip_content);
+	};
+
+	const hide_tooltip_hover = () => {
 		if (!tooltip) return;
-		tooltip.hide(150); // Delay to allow moving into tooltip
+		tooltip.hide(200); // Delay to allow moving into tooltip
+	};
+
+	const hide_tooltip_focus = () => {
+		if (!tooltip) return;
+		tooltip.hide(); // Hide immediately - no sticky behavior for keyboard
 	};
 </script>
 
 <a
+	bind:this={link_el}
 	class="declaration_link chip {decl.kind}_declaration"
 	href={resolve(api_url as any)}
-	onmouseenter={show_tooltip}
-	onmouseleave={hide_tooltip}
+	aria-describedby={tooltip?.opened ? tooltip.id : undefined}
+	onmouseenter={show_tooltip_hover}
+	onmouseleave={hide_tooltip_hover}
+	onfocus={show_tooltip_focus}
+	onblur={hide_tooltip_focus}
 	use:contextmenu_action={contextmenu_entries}
 >
 	{#if children}
@@ -80,9 +100,9 @@
 {#snippet tooltip_content()}
 	{@const type_sig = get_type_summary(decl)}
 	<div class="declaration_tooltip">
-		<div class="kind_badge">{decl.kind}</div>
+		<div class="chip">{decl.kind}</div>
 		{#if type_sig}
-			<code class="type_signature">{type_sig}</code>
+			<code>{type_sig}</code>
 		{/if}
 		{#if decl.summary}
 			<p class="summary">{decl.summary}</p>
@@ -103,24 +123,12 @@
 		opacity: 0.8;
 	}
 
-	/* Match existing Package_Detail styles */
 	:global(.declaration_tooltip) {
 		display: flex;
 		flex-direction: column;
 		gap: var(--space_xs);
 	}
-	:global(.declaration_tooltip .kind_badge) {
-		display: inline-block;
-		padding: 2px 6px;
-		background-color: var(--bg_3);
-		border-radius: var(--border_radius_xs);
-		font-size: var(--font_size_xs);
-		font-weight: 600;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-	}
-	:global(.declaration_tooltip .type_signature) {
-		font-family: var(--font_family_mono);
+	:global(.declaration_tooltip code) {
 		font-size: var(--font_size_xs);
 		background-color: var(--bg_3);
 		padding: var(--space_xs2);

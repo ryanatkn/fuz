@@ -180,27 +180,10 @@ export const src_json: Src_Json = {
 				{
 					name: 'Api_Page',
 					kind: 'component',
-					props: [
-						{
-							name: 'decl',
-							type: 'Src_Module_Declaration',
-							optional: false,
-						},
-						{
-							name: 'module_path',
-							type: 'string',
-							optional: false,
-						},
-						{
-							name: 'repo_url',
-							type: 'string',
-							optional: true,
-						},
-					],
 					source_location: {
 						line: 1,
 						column: 0,
-						end_line: 390,
+						end_line: 343,
 						end_column: 0,
 					},
 					exported: true,
@@ -623,7 +606,7 @@ export const src_json: Src_Json = {
 					source_location: {
 						line: 1,
 						column: 0,
-						end_line: 141,
+						end_line: 149,
 						end_column: 0,
 					},
 					exported: true,
@@ -1170,7 +1153,7 @@ export const src_json: Src_Json = {
 					source_location: {
 						line: 1,
 						column: 0,
-						end_line: 73,
+						end_line: 72,
 						end_column: 0,
 					},
 					exported: true,
@@ -1875,11 +1858,29 @@ export const src_json: Src_Json = {
 							optional: true,
 							description: 'Optional tooltip state - defaults to context value',
 						},
+						{
+							name: 'offset_x',
+							type: 'number',
+							optional: true,
+							description: 'Horizontal offset from anchor point (cursor or element center)',
+						},
+						{
+							name: 'offset_y',
+							type: 'number',
+							optional: true,
+							description: 'Vertical offset from anchor point (cursor or element bottom)',
+						},
+						{
+							name: 'viewport_padding',
+							type: 'number',
+							optional: true,
+							description: 'Padding from viewport edges',
+						},
 					],
 					source_location: {
 						line: 1,
 						column: 0,
-						end_line: 115,
+						end_line: 142,
 						end_column: 0,
 					},
 					exported: true,
@@ -1929,44 +1930,6 @@ export const src_json: Src_Json = {
 			],
 			imports: [],
 			module_comment: '// TODO move to module context?',
-		},
-		'./api.ts': {
-			path: 'api.ts',
-			declarations: [
-				{
-					name: 'Api',
-					kind: 'type',
-					doc_comment: 'API documentation data\nWraps Pkg with properly typed src_json',
-					summary: 'API documentation data\nWraps Pkg with properly typed src_json',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 14,
-						column: 0,
-						end_line: 17,
-						end_column: 1,
-					},
-					type_signature: 'Api',
-					exported: true,
-				},
-				{
-					name: 'api_context',
-					kind: 'variable',
-					source_location: {
-						line: 19,
-						column: 13,
-						end_line: 19,
-						end_column: 48,
-					},
-					type_signature:
-						'{ get: (error_message?: string | undefined) => Api; maybe_get: () => Api | undefined; set: (value: Api) => Api; }',
-					exported: false,
-				},
-			],
-			imports: ['@ryanatkn/belt/pkg.js', '$lib/src_json.js', '$lib/context_helpers.js'],
-			module_comment:
-				'API documentation context\nProvides source metadata and package info for API docs',
-			imported_by: ['./api_data.ts'],
 		},
 		'./api_data.ts': {
 			path: 'api_data.ts',
@@ -2068,7 +2031,7 @@ export const src_json: Src_Json = {
 					exported: false,
 				},
 			],
-			imports: ['$lib/api.js', '$lib/src_json.js'],
+			imports: ['$lib/pkg.js', '$lib/src_json.js'],
 			module_comment:
 				'API documentation data helpers\nFunctions for looking up and searching declarations',
 		},
@@ -2126,7 +2089,6 @@ export const src_json: Src_Json = {
 			],
 			imports: ['svelte'],
 			imported_by: [
-				'./api.ts',
 				'./contextmenu_state.svelte.ts',
 				'./docs_helpers.svelte.ts',
 				'./pkg.ts',
@@ -3663,7 +3625,6 @@ export const src_json: Src_Json = {
 			module_comment:
 				'Renders any value to a string representation\n\n@param value Any JS value to stringify\n@returns A string representation of the value',
 			imported_by: [
-				'./api.ts',
 				'./contextmenu_state.svelte.ts',
 				'./docs_helpers.svelte.ts',
 				'./pkg.ts',
@@ -3999,12 +3960,96 @@ export const src_json: Src_Json = {
 			path: 'pkg.ts',
 			declarations: [
 				{
+					name: 'Pkg',
+					kind: 'type',
+					doc_comment:
+						'Combines `package_json` and `src_json` into a more convenient format.\nThis is our own version that uses our extended Src_Json type.',
+					summary:
+						'Combines `package_json` and `src_json` into a more convenient format.\nThis is our own version that uses our extended Src_Json type.',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 12,
+						column: 0,
+						end_line: 28,
+						end_column: 1,
+					},
+					type_signature: 'Pkg',
+					exported: true,
+				},
+				{
+					name: 'parse_pkg',
+					kind: 'function',
+					source_location: {
+						line: 30,
+						column: 13,
+						end_line: 87,
+						end_column: 1,
+					},
+					type_signature:
+						'(package_json: { [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }, src_json: Src_Json): Pkg',
+					return_type: 'Pkg',
+					parameters: [
+						{
+							name: 'package_json',
+							type: '{ [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }',
+							optional: false,
+						},
+						{
+							name: 'src_json',
+							type: 'Src_Json',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'parse_repo_name',
+					kind: 'function',
+					source_location: {
+						line: 90,
+						column: 13,
+						end_line: 91,
+						end_column: 54,
+					},
+					type_signature: '(name: string): string',
+					return_type: 'string',
+					parameters: [
+						{
+							name: 'name',
+							type: 'string',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'parse_org_url',
+					kind: 'function',
+					source_location: {
+						line: 93,
+						column: 13,
+						end_line: 101,
+						end_column: 1,
+					},
+					type_signature: '(pkg: Pkg): string | null',
+					return_type: 'string | null',
+					parameters: [
+						{
+							name: 'pkg',
+							type: 'Pkg',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
 					name: 'pkg_context',
 					kind: 'variable',
 					source_location: {
-						line: 5,
+						line: 103,
 						column: 13,
-						end_line: 5,
+						end_line: 103,
 						end_column: 48,
 					},
 					type_signature:
@@ -4012,7 +4057,14 @@ export const src_json: Src_Json = {
 					exported: false,
 				},
 			],
-			imports: ['@ryanatkn/belt/pkg.js', '$lib/context_helpers.js'],
+			imports: [
+				'@ryanatkn/belt/string.js',
+				'@ryanatkn/belt/package_json.js',
+				'@ryanatkn/belt/url.js',
+				'$lib/context_helpers.js',
+				'$lib/src_json.js',
+			],
+			imported_by: ['./api_data.ts'],
 		},
 		'./rune_helpers.svelte.ts': {
 			path: 'rune_helpers.svelte.ts',
@@ -4130,7 +4182,7 @@ export const src_json: Src_Json = {
 					source_location: {
 						line: 50,
 						column: 0,
-						end_line: 92,
+						end_line: 89,
 						end_column: 1,
 					},
 					type_signature: 'Src_Module_Declaration',
@@ -4144,9 +4196,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 97,
+						line: 94,
 						column: 0,
-						end_line: 111,
+						end_line: 105,
 						end_column: 1,
 					},
 					type_signature: 'Src_Module',
@@ -4160,9 +4212,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 116,
+						line: 110,
 						column: 0,
-						end_line: 116,
+						end_line: 110,
 						end_column: 53,
 					},
 					type_signature: 'Src_Modules',
@@ -4178,9 +4230,9 @@ export const src_json: Src_Json = {
 						'://github.com/ryanatkn/gro/blob/main/src/docs/gro_plugin_sveltekit_app.md#well-known-src',
 					],
 					source_location: {
-						line: 122,
+						line: 116,
 						column: 0,
-						end_line: 129,
+						end_line: 123,
 						end_column: 1,
 					},
 					type_signature: 'Src_Json',
@@ -4194,9 +4246,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 134,
+						line: 128,
 						column: 13,
-						end_line: 139,
+						end_line: 133,
 						end_column: 1,
 					},
 					type_signature: '(decl: Src_Module_Declaration): string',
@@ -4218,9 +4270,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 144,
+						line: 138,
 						column: 13,
-						end_line: 153,
+						end_line: 147,
 						end_column: 1,
 					},
 					type_signature: '(decl: Src_Module_Declaration): string | undefined',
@@ -4242,9 +4294,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 158,
+						line: 152,
 						column: 13,
-						end_line: 177,
+						end_line: 171,
 						end_column: 1,
 					},
 					type_signature:
@@ -4274,9 +4326,9 @@ export const src_json: Src_Json = {
 			module_comment:
 				'Source code metadata types\nInlined from @ryanatkn/belt with extensions for documentation',
 			imported_by: [
-				'./api.ts',
 				'./api_data.ts',
 				'./declaration_contextmenu.ts',
+				'./pkg.ts',
 				'./svelte_helpers.ts',
 				'./ts_helpers.ts',
 			],
@@ -4954,9 +5006,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 11,
+						line: 16,
 						column: 0,
-						end_line: 67,
+						end_line: 113,
 						end_column: 1,
 					},
 					members: [
@@ -4977,11 +5029,31 @@ export const src_json: Src_Json = {
 							kind: 'variable',
 						},
 						{
+							name: 'id',
+							kind: 'variable',
+						},
+						{
+							name: 'show_delay_ms',
+							kind: 'variable',
+						},
+						{
+							name: '#show_timer',
+							kind: 'variable',
+						},
+						{
 							name: '#hide_timer',
 							kind: 'variable',
 						},
 						{
 							name: 'show',
+							kind: 'function',
+						},
+						{
+							name: 'show_delayed',
+							kind: 'function',
+						},
+						{
+							name: 'cancel_show',
 							kind: 'function',
 						},
 						{
@@ -5003,9 +5075,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 72,
+						line: 118,
 						column: 13,
-						end_line: 72,
+						end_line: 118,
 						end_column: 62,
 					},
 					type_signature:

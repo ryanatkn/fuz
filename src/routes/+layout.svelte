@@ -5,10 +5,9 @@
 	import '$routes/moss.css';
 
 	import type {Snippet} from 'svelte';
-	import {parse_pkg} from '@ryanatkn/belt/pkg.js';
 
 	import Themed from '$lib/Themed.svelte';
-	import {pkg_context} from '$lib/pkg.js';
+	import {pkg_context, parse_pkg} from '$lib/pkg.js';
 	import {package_json, src_json} from '$routes/package.js';
 	import Spiders from '$lib/Spiders.svelte';
 	import Tooltip from '$lib/Tooltip.svelte';
@@ -26,7 +25,7 @@
 
 	const {children}: Props = $props();
 
-	pkg_context.set(parse_pkg(package_json, src_json as any)); // TODO BLOCK type
+	pkg_context.set(parse_pkg(package_json, src_json));
 
 	// Initialize tooltip state
 	tooltip_context.set(new Tooltip_State());

@@ -55,7 +55,7 @@ export const gen: Gen = async ({log, filer}) => {
 	// Create TypeScript program
 	const program = create_ts_program(log);
 	if (!program) {
-		return create_minimal_output(package_json);
+		throw new Error('Failed to create TypeScript program - cannot generate package metadata');
 	}
 
 	const checker = program.getTypeChecker();
@@ -82,8 +82,7 @@ export const gen: Gen = async ({log, filer}) => {
 	log.info(`Found ${source_disknodes.length} source files to analyze`);
 
 	if (source_disknodes.length === 0) {
-		log.warn('No source files found, falling back to minimal output');
-		return create_minimal_output(package_json);
+		throw new Error('No source files found in /src/lib/ - cannot generate package metadata');
 	}
 
 	// Sort for deterministic output (stable alphabetical module ordering)
@@ -235,20 +234,6 @@ export const gen: Gen = async ({log, filer}) => {
 const read_package_json = (): Package_Json => {
 	const text = readFileSync('package.json', 'utf-8');
 	return JSON.parse(text);
-};
-
-/**
- * Create minimal output when TypeScript analysis unavailable
- */
-const create_minimal_output = (package_json: Package_Json) => {
-	const minimal_src_json: Src_Json = {
-		name: package_json.name,
-		version: package_json.version,
-		modules: {},
-	};
-	return {
-		content: generate_package_ts(package_json, minimal_src_json),
-	};
 };
 
 /**

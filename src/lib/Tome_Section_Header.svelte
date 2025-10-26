@@ -41,7 +41,7 @@
 
 <header>
 	<svelte:element this={tag} {...rest} class:tome_section_header={true}>
-		<div>
+		<div class="flex_1">
 			{#if children}
 				{@render children()}
 			{:else}

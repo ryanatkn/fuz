@@ -1,8 +1,6 @@
 <script lang="ts">
 	import {get_all_declarations, search_declarations} from '$lib/api_data.js';
-	import {api_context} from '$lib/api.js';
 	import {pkg_context} from '$lib/pkg.js';
-	import type {Src_Json} from '$lib/src_json.js';
 	import Api_Page from '$lib/Api_Page.svelte';
 	import {get_tome_by_name} from '$lib/tome.js';
 	import Tome_Content from '$lib/Tome_Content.svelte';
@@ -11,12 +9,6 @@
 
 	const pkg = pkg_context.get();
 	const tome = get_tome_by_name('api');
-
-	// Set up API context for child components
-	api_context.set({
-		pkg,
-		src_json: pkg.src_json as Src_Json,
-	});
 
 	let search_query = $state('');
 
@@ -30,13 +22,13 @@
 </script>
 
 <svelte:head>
-	<title>API Documentation - {pkg.package_json.name}</title>
+	<title>API docs - {pkg.package_json.name}</title>
 </svelte:head>
 
 <Tome_Content {tome}>
 	{#snippet header()}
 		<header class="page_header">
-			<h1>API Documentation</h1>
+			<h1 class="mt_xl4">API docs</h1>
 			<p class="subtitle">{pkg.package_json.description}</p>
 
 			<!-- Search -->
@@ -70,13 +62,7 @@
 		<!-- Render all declarations alphabetically -->
 		{#each sorted_declarations as { decl, module_path } (decl.name)}
 			<Tome_Section>
-				<Tome_Section_Header text={decl.name}>
-					{decl.name}
-					{#if decl.kind}
-						<span class="kind_badge">{decl.kind}</span>
-					{/if}
-				</Tome_Section_Header>
-
+				<Tome_Section_Header text={decl.name} />
 				<article id={decl.name} class="declaration_detail">
 					<Api_Page {decl} {module_path} repo_url={pkg.repo_url} />
 				</article>
@@ -90,11 +76,6 @@
 		margin-bottom: var(--space_xl);
 		border-bottom: var(--border_width) solid var(--border_color);
 		padding-bottom: var(--space_md);
-	}
-
-	.page_header h1 {
-		margin: 0 0 var(--space_xs) 0;
-		font-size: var(--font_size_xl2);
 	}
 
 	.subtitle {
@@ -136,17 +117,6 @@
 
 	.no_results {
 		background-color: var(--bg_2);
-		border-radius: var(--border_radius_xs);
-	}
-
-	.kind_badge {
-		margin-left: var(--space_sm);
-		font-size: var(--font_size_xs);
-		font-weight: 600;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-		background-color: var(--bg_3);
-		padding: 2px 8px;
 		border-radius: var(--border_radius_xs);
 	}
 
