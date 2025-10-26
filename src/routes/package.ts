@@ -2535,6 +2535,45 @@ export const src_json: Enhanced_Src_Json = {
 			],
 			imported_by: ['./tome.ts'],
 		},
+		'./rune_helpers.svelte.ts': {
+			path: 'rune_helpers.svelte.ts',
+			declarations: [
+				{
+					name: 'effect_with_count',
+					kind: 'function',
+					doc_comment:
+						'Runs `fn` in an `$effect`, passing `true` as the `skip` argument for the first `count` runs.\nCalls `fn` even when skipping so callers can read any dependent signals.',
+					summary:
+						'Runs `fn` in an `$effect`, passing `true` as the `skip` argument for the first `count` runs.\nCalls `fn` even when skipping so callers can read any dependent signals.',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 5,
+						column: 13,
+						end_line: 10,
+						end_column: 1,
+					},
+					type_signature: '(fn: (count: number) => void, initial?: number): void',
+					return_type: 'void',
+					parameters: [
+						{
+							name: 'fn',
+							type: '(count: number) => void',
+							optional: false,
+						},
+						{
+							name: 'initial',
+							type: 'number',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+			],
+			imports: [],
+			module_comment:
+				'Runs `fn` in an `$effect`, passing `true` as the `skip` argument for the first `count` runs.\nCalls `fn` even when skipping so callers can read any dependent signals.',
+		},
 		'./csp.ts': {
 			path: 'csp.ts',
 			declarations: [
@@ -2978,45 +3017,6 @@ export const src_json: Enhanced_Src_Json = {
 			],
 			imports: ['@ryanatkn/belt/types.js'],
 			imported_by: ['./csp_of_ryanatkn.ts'],
-		},
-		'./rune_helpers.svelte.ts': {
-			path: 'rune_helpers.svelte.ts',
-			declarations: [
-				{
-					name: 'effect_with_count',
-					kind: 'function',
-					doc_comment:
-						'Runs `fn` in an `$effect`, passing `true` as the `skip` argument for the first `count` runs.\nCalls `fn` even when skipping so callers can read any dependent signals.',
-					summary:
-						'Runs `fn` in an `$effect`, passing `true` as the `skip` argument for the first `count` runs.\nCalls `fn` even when skipping so callers can read any dependent signals.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 5,
-						column: 13,
-						end_line: 10,
-						end_column: 1,
-					},
-					type_signature: '(fn: (count: number) => void, initial?: number): void',
-					return_type: 'void',
-					parameters: [
-						{
-							name: 'fn',
-							type: '(count: number) => void',
-							optional: false,
-						},
-						{
-							name: 'initial',
-							type: 'number',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-			],
-			imports: [],
-			module_comment:
-				'Runs `fn` in an `$effect`, passing `true` as the `skip` argument for the first `count` runs.\nCalls `fn` even when skipping so callers can read any dependent signals.',
 		},
 		'./intersect.ts': {
 			path: 'intersect.ts',

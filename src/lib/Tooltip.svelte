@@ -108,7 +108,7 @@
 		font-size: var(--font_size_sm);
 		border: var(--border_width) var(--border_style) var(--border_color);
 		border-radius: var(--border_radius_xs);
-		background-color: var(--bg_2);
+		background-color: var(--bg);
 		box-shadow: var(--shadow_md);
 	}
 </style>
