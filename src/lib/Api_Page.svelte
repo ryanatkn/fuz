@@ -4,13 +4,15 @@
 	import type {Src_Module_Declaration} from '$lib/src_json.js';
 	import Details from '$lib/Details.svelte';
 
-	interface Props {
+	const {
+		decl,
+		module_path,
+		repo_url,
+	}: {
 		decl: Src_Module_Declaration;
 		module_path: string;
 		repo_url?: string;
-	}
-
-	const {decl, module_path, repo_url}: Props = $props();
+	} = $props();
 
 	// Generate source URL
 	const source_url = $derived(
@@ -24,7 +26,7 @@
 {#if source_url}
 	<div class="meta">
 		<a class="chip" href={resolve(source_url as any)} target="_blank" rel="noopener">
-			View source
+			view source
 		</a>
 	</div>
 {/if}
@@ -32,42 +34,42 @@
 <!-- eslint-disable-next-line @typescript-eslint/no-deprecated -->
 {#if decl.deprecated_message}
 	<div class="deprecated_warning pane">
-		<strong>⚠️ Deprecated:</strong>
+		<strong>⚠️ deprecated:</strong>
 		<!-- eslint-disable-next-line @typescript-eslint/no-deprecated -->
 		{decl.deprecated_message}
 	</div>
 {/if}
 
-<!-- Type Signature -->
+<!-- type signature -->
 {#if decl.type_signature}
 	<section class="section">
-		<h2>Type Signature</h2>
+		<h2>type signature</h2>
 		<pre class="type_signature pane"><code>{decl.type_signature}</code></pre>
 	</section>
 {/if}
 
-<!-- Documentation -->
+<!-- documentation -->
 {#if decl.doc_comment || decl.summary}
 	<section class="section">
-		<h2>Documentation</h2>
+		<h2>documentation</h2>
 		<div class="doc_content">
 			{decl.doc_comment || decl.summary}
 		</div>
 	</section>
 {/if}
 
-<!-- Parameters -->
+<!-- parameters -->
 {#if decl.parameters?.length}
 	<section class="section">
-		<h2>Parameters</h2>
+		<h2>parameters</h2>
 		<table class="params_table">
 			<thead>
 				<tr>
-					<th>Name</th>
-					<th>Type</th>
-					<th>Optional</th>
+					<th>name</th>
+					<th>type</th>
+					<th>optional</th>
 					{#if decl.parameters.some((p) => p.description)}
-						<th>Description</th>
+						<th>description</th>
 					{/if}
 				</tr>
 			</thead>
@@ -87,21 +89,21 @@
 	</section>
 {/if}
 
-<!-- Component Props (for Svelte components) -->
+<!-- component props (for Svelte components) -->
 {#if decl.props?.length}
 	<section class="section">
-		<h2>Props</h2>
+		<h2>props</h2>
 		<table class="params_table">
 			<thead>
 				<tr>
-					<th>Name</th>
-					<th>Type</th>
-					<th>Optional</th>
+					<th>name</th>
+					<th>type</th>
+					<th>optional</th>
 					{#if decl.props.some((p) => p.description)}
-						<th>Description</th>
+						<th>description</th>
 					{/if}
 					{#if decl.props.some((p) => p.default_value)}
-						<th>Default</th>
+						<th>default</th>
 					{/if}
 				</tr>
 			</thead>
@@ -124,18 +126,18 @@
 	</section>
 {/if}
 
-<!-- Return Type -->
+<!-- return type -->
 {#if decl.return_type}
 	<section class="section">
-		<h2>Return Type</h2>
+		<h2>return type</h2>
 		<pre class="type_signature pane"><code>{decl.return_type}</code></pre>
 	</section>
 {/if}
 
-<!-- Generic Parameters -->
+<!-- generic parameters -->
 {#if decl.generic_params?.length}
 	<section class="section">
-		<h2>Generic Parameters</h2>
+		<h2>generic parameters</h2>
 		<ul class="generic_list">
 			{#each decl.generic_params as generic (generic)}
 				<li><code>{generic}</code></li>
@@ -147,10 +149,10 @@
 <!-- Extends/Implements -->
 {#if decl.extends?.length || decl.implements?.length}
 	<section class="section">
-		<h2>Inheritance</h2>
+		<h2>inheritance</h2>
 		{#if decl.extends?.length}
 			<div>
-				<strong>Extends:</strong>
+				<strong>extends:</strong>
 				<ul class="inheritance_list">
 					{#each decl.extends as ext (ext)}
 						<li><code>{ext}</code></li>
@@ -160,7 +162,7 @@
 		{/if}
 		{#if decl.implements?.length}
 			<div>
-				<strong>Implements:</strong>
+				<strong>implements:</strong>
 				<ul class="inheritance_list">
 					{#each decl.implements as impl (impl)}
 						<li><code>{impl}</code></li>
@@ -171,10 +173,10 @@
 	</section>
 {/if}
 
-<!-- Examples -->
+<!-- examples -->
 {#if decl.examples?.length}
 	<section class="section">
-		<h2>Examples</h2>
+		<h2>examples</h2>
 		{#each decl.examples as example, i (example)}
 			<Details>
 				{#snippet summary()}Example {i + 1}{/snippet}
@@ -184,10 +186,10 @@
 	</section>
 {/if}
 
-<!-- See Also -->
+<!-- see also -->
 {#if decl.see_also?.length}
 	<section class="section">
-		<h2>See Also</h2>
+		<h2>see also</h2>
 		<ul class="see_also_list">
 			{#each decl.see_also as ref (ref)}
 				<li>{ref}</li>
@@ -196,10 +198,10 @@
 	</section>
 {/if}
 
-<!-- Members (for classes) -->
+<!-- members (for classes) -->
 {#if decl.members?.length}
 	<section class="section">
-		<h2>Members</h2>
+		<h2>members</h2>
 		<ul class="members_list">
 			{#each decl.members as member (member)}
 				<li class="member">
@@ -213,10 +215,10 @@
 	</section>
 {/if}
 
-<!-- Properties (for types/interfaces) -->
+<!-- properties (for types/interfaces) -->
 {#if decl.properties?.length}
 	<section class="section">
-		<h2>Properties</h2>
+		<h2>properties</h2>
 		<ul class="members_list">
 			{#each decl.properties as prop (prop)}
 				<li class="member">
