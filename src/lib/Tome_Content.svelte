@@ -24,7 +24,7 @@
 
 	const slug = slugify(tome.name);
 
-	const at_root = $derived(page.url.pathname === resolve(docs_path as any)); // TODO @many check sometime if typecast is still needed
+	const at_root = $derived(page.url.pathname === resolve(docs_path as any));
 </script>
 
 <section

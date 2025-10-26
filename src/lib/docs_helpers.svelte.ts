@@ -22,7 +22,7 @@ export const to_docs_path_info = (
 	root_path = DEFAULT_LIBRARY_PATH,
 ): {path: string; path_is_selected: boolean; path_segment: string | undefined} => {
 	const path_segment = pathname.split('/').at(-1);
-	const path = resolve((ensure_end(ensure_start(root_path, '/'), '/') + slug) as any); // TODO @many check sometime if typecast is still needed
+	const path = resolve((ensure_end(ensure_start(root_path, '/'), '/') + slug) as any);
 	const path_is_selected = path_segment === slug; // messy but works
 	return {path, path_is_selected, path_segment};
 };
