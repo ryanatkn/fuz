@@ -7,6 +7,8 @@ import {mount_component, unmount_component} from '$lib/test_helpers.js';
 import Tooltip from '$lib/Tooltip.svelte';
 import {Tooltip_State} from '$lib/tooltip_state.svelte.js';
 
+/* eslint-disable @typescript-eslint/no-empty-function */
+
 describe('Tooltip - ARIA Compliance', () => {
 	let tooltip_state: Tooltip_State;
 	let mounted: ReturnType<typeof mount_component> | null = null;
@@ -71,7 +73,7 @@ describe('Tooltip - ARIA Compliance', () => {
 			const id = tooltip_el?.getAttribute('id');
 
 			assert.ok(id, 'should have id attribute');
-			assert.ok(id?.startsWith('tooltip-'), 'id should start with "tooltip-"');
+			assert.ok(id.startsWith('tooltip-'), 'id should start with "tooltip-"');
 		});
 
 		test('id matches tooltip_state.id', () => {
@@ -215,7 +217,7 @@ describe('Tooltip - ARIA Compliance', () => {
 			tooltip_state.show(100, 200, content);
 			flushSync();
 
-			const tooltip_el = mounted.container.querySelector('.tooltip') as HTMLElement;
+			const tooltip_el = mounted.container.querySelector('.tooltip') as HTMLElement; // eslint-disable-line @typescript-eslint/non-nullable-type-assertion-style
 			assert.strictEqual(tooltip_el.getAttribute('tabindex'), null, 'should not have tabindex');
 		});
 
@@ -226,7 +228,7 @@ describe('Tooltip - ARIA Compliance', () => {
 			tooltip_state.show(100, 200, content);
 			flushSync();
 
-			const tooltip_el = mounted.container.querySelector('.tooltip') as HTMLElement;
+			const tooltip_el = mounted.container.querySelector('.tooltip') as HTMLElement; // eslint-disable-line @typescript-eslint/non-nullable-type-assertion-style
 
 			// Try to focus
 			tooltip_el.focus();
@@ -242,7 +244,7 @@ describe('Tooltip - ARIA Compliance', () => {
 			tooltip_state.show(100, 200, content);
 			flushSync();
 
-			const tooltip_el = mounted.container.querySelector('.tooltip') as HTMLElement;
+			const tooltip_el = mounted.container.querySelector('.tooltip') as HTMLElement; // eslint-disable-line @typescript-eslint/non-nullable-type-assertion-style
 
 			// Check for interactive elements
 			const interactives = tooltip_el.querySelectorAll(
@@ -297,7 +299,7 @@ describe('Tooltip - ARIA Compliance', () => {
 			tooltip_state.hide_delayed();
 
 			// Cursor moves into tooltip
-			const tooltip_el = mounted.container.querySelector('.tooltip') as HTMLElement;
+			const tooltip_el = mounted.container.querySelector('.tooltip') as HTMLElement; // eslint-disable-line @typescript-eslint/non-nullable-type-assertion-style
 			tooltip_el.dispatchEvent(new MouseEvent('mouseenter', {bubbles: true}));
 			flushSync();
 
@@ -352,7 +354,7 @@ describe('Tooltip - ARIA Compliance', () => {
 			tooltip_state.show(100, 200, content);
 			flushSync();
 
-			const tooltip_el = mounted.container.querySelector('.tooltip') as HTMLElement;
+			const tooltip_el = mounted.container.querySelector('.tooltip') as HTMLElement; // eslint-disable-line @typescript-eslint/non-nullable-type-assertion-style
 			// Tooltip is rendered in the component's container, which should be in body
 			assert.ok(document.body.contains(tooltip_el), 'tooltip should be in body');
 		});
@@ -376,7 +378,7 @@ describe('Tooltip - ARIA Compliance', () => {
 			tooltip_state.show(100, 200, content);
 			flushSync();
 
-			const tooltip_el = mounted.container.querySelector('.tooltip') as HTMLElement;
+			const tooltip_el = mounted.container.querySelector('.tooltip') as HTMLElement; // eslint-disable-line @typescript-eslint/non-nullable-type-assertion-style
 			const computed = window.getComputedStyle(tooltip_el);
 
 			// Check that z-index is set (either inline or via CSS variable)
