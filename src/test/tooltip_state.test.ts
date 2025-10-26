@@ -20,13 +20,21 @@ describe('Tooltip_State', () => {
 			assert.strictEqual(tooltip.content, null);
 		});
 
-		test('creates with default show delay', () => {
+		test('creates with default delays', () => {
 			assert.strictEqual(tooltip.show_delay_ms, 400);
+			assert.strictEqual(tooltip.hide_delay_ms, 200);
 		});
 
 		test('creates with custom show delay', () => {
 			const custom_tooltip = new Tooltip_State(300);
 			assert.strictEqual(custom_tooltip.show_delay_ms, 300);
+			assert.strictEqual(custom_tooltip.hide_delay_ms, 200);
+		});
+
+		test('creates with custom hide delay', () => {
+			const custom_tooltip = new Tooltip_State(400, 150);
+			assert.strictEqual(custom_tooltip.show_delay_ms, 400);
+			assert.strictEqual(custom_tooltip.hide_delay_ms, 150);
 		});
 
 		test('creates with unique ID', () => {
@@ -64,7 +72,7 @@ describe('Tooltip_State', () => {
 		test('cancels pending hide', () => {
 			const content = () => {};
 			tooltip.show(0, 0, content as Snippet);
-			tooltip.hide(100); // Schedule hide with delay
+			tooltip.hide_delayed(100); // Schedule hide with delay
 
 			// Show again before hide executes
 			const new_content = () => {};
@@ -102,37 +110,69 @@ describe('Tooltip_State', () => {
 			tooltip.show(100, 100, content as Snippet);
 		});
 
-		test('immediately hides with no delay', () => {
-			tooltip.hide(0);
-			assert.strictEqual(tooltip.opened, false);
-			assert.strictEqual(tooltip.content, null);
-		});
-
-		test('immediately hides with default (no argument)', () => {
+		test('immediately hides', () => {
 			tooltip.hide();
 			assert.strictEqual(tooltip.opened, false);
 			assert.strictEqual(tooltip.content, null);
 		});
 
-		test('delays hide when delay is provided', () => {
-			tooltip.hide(100);
+		test('cancels pending show when hiding', () => {
+			const content = () => {};
+			tooltip.show_delayed(100, 200, content as Snippet);
+			tooltip.hide();
 
-			// Should still be opened immediately after calling hide
+			// Should be closed immediately
+			assert.strictEqual(tooltip.opened, false);
+
+			// Advance past when show would have happened
+			vi.advanceTimersByTime(500);
+
+			// Should remain closed
+			assert.strictEqual(tooltip.opened, false);
+		});
+	});
+
+	describe('hide_delayed', () => {
+		beforeEach(() => {
+			const content = () => {};
+			tooltip.show(100, 100, content as Snippet);
+		});
+
+		test('delays hide using default hide_delay_ms', () => {
+			tooltip.hide_delayed();
+
+			// Should still be opened immediately after calling hide_delayed
+			assert.strictEqual(tooltip.opened, true);
+
+			// Advance time partially
+			vi.advanceTimersByTime(100);
+			assert.strictEqual(tooltip.opened, true);
+
+			// Advance past the default delay (200ms)
+			vi.advanceTimersByTime(150);
+			assert.strictEqual(tooltip.opened, false);
+			assert.strictEqual(tooltip.content, null);
+		});
+
+		test('delays hide using custom delay_ms', () => {
+			tooltip.hide_delayed(100);
+
+			// Should still be opened immediately after calling hide_delayed
 			assert.strictEqual(tooltip.opened, true);
 
 			// Advance time partially
 			vi.advanceTimersByTime(50);
 			assert.strictEqual(tooltip.opened, true);
 
-			// Advance past the delay
+			// Advance past the custom delay
 			vi.advanceTimersByTime(60);
 			assert.strictEqual(tooltip.opened, false);
 			assert.strictEqual(tooltip.content, null);
 		});
 
 		test('cancels previous hide timer when hiding again', () => {
-			tooltip.hide(100);
-			tooltip.hide(200);
+			tooltip.hide_delayed(100);
+			tooltip.hide_delayed(200);
 
 			// Advance past first timeout
 			vi.advanceTimersByTime(150);
@@ -141,6 +181,24 @@ describe('Tooltip_State', () => {
 			// Advance to second timeout
 			vi.advanceTimersByTime(100);
 			assert.strictEqual(tooltip.opened, false, 'second timeout should execute');
+		});
+
+		test('cancels pending show when hiding', () => {
+			const content = () => {};
+			tooltip.show_delayed(100, 200, content as Snippet);
+			tooltip.hide_delayed();
+
+			// Advance past when show would have happened
+			vi.advanceTimersByTime(500);
+
+			// Should remain closed (show was cancelled)
+			assert.strictEqual(tooltip.opened, false);
+
+			// Advance past when hide_delayed would complete
+			vi.advanceTimersByTime(500);
+
+			// Should still be closed
+			assert.strictEqual(tooltip.opened, false);
 		});
 	});
 
@@ -151,11 +209,11 @@ describe('Tooltip_State', () => {
 		});
 
 		test('cancels pending hide', () => {
-			tooltip.hide(100);
+			tooltip.hide_delayed();
 			tooltip.cancel_hide();
 
 			// Advance past when hide would have executed
-			vi.advanceTimersByTime(150);
+			vi.advanceTimersByTime(250);
 
 			// Should still be opened
 			assert.strictEqual(tooltip.opened, true);
@@ -168,7 +226,7 @@ describe('Tooltip_State', () => {
 		});
 
 		test('does nothing after immediate hide', () => {
-			tooltip.hide(0);
+			tooltip.hide();
 			tooltip.cancel_hide();
 			assert.strictEqual(tooltip.opened, false);
 			// Should not throw or change state
@@ -242,7 +300,7 @@ describe('Tooltip_State', () => {
 		test('cancels pending hide', () => {
 			const content = () => {};
 			tooltip.show(0, 0, content as Snippet);
-			tooltip.hide(100);
+			tooltip.hide_delayed(100);
 
 			// Start show_delayed before hide completes (this cancels the hide)
 			const new_content = () => {};
@@ -318,7 +376,7 @@ describe('Tooltip_State', () => {
 			assert.strictEqual(tooltip.opened, true);
 
 			// Mouse leaves, start hide timer
-			tooltip.hide(200);
+			tooltip.hide_delayed();
 			assert.strictEqual(tooltip.opened, true);
 
 			// Mouse enters tooltip, cancel hide
@@ -327,7 +385,7 @@ describe('Tooltip_State', () => {
 			assert.strictEqual(tooltip.opened, true, 'should still be open after cancelling');
 
 			// Mouse leaves tooltip again, hide for real
-			tooltip.hide(200);
+			tooltip.hide_delayed();
 			vi.advanceTimersByTime(250);
 			assert.strictEqual(tooltip.opened, false, 'should close after second hide');
 		});

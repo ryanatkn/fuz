@@ -52,13 +52,18 @@
 		create_declaration_contextmenu(decl, module_path, pkg_name, repo_url, homepage_url),
 	);
 
-	// Tooltip handlers
+	/**
+	 * Show tooltip on mouse hover with ARIA-compliant delay
+	 */
 	const show_tooltip_hover = (e: MouseEvent) => {
 		if (!tooltip) return;
 		// ARIA compliance: show after delay for mouse hover
 		tooltip.show_delayed(e.clientX, e.clientY, tooltip_content);
 	};
 
+	/**
+	 * Show tooltip immediately on keyboard focus for screen reader users
+	 */
 	const show_tooltip_focus = (_e: FocusEvent) => {
 		if (!tooltip || !link_el) return;
 		// Show immediately for keyboard focus (screen reader users)
@@ -68,11 +73,17 @@
 		tooltip.show(x, y, tooltip_content);
 	};
 
+	/**
+	 * Hide tooltip with delay on mouse leave (sticky behavior - allows moving into tooltip)
+	 */
 	const hide_tooltip_hover = () => {
 		if (!tooltip) return;
-		tooltip.hide(200); // Delay to allow moving into tooltip
+		tooltip.hide_delayed(); // Delay to allow moving into tooltip
 	};
 
+	/**
+	 * Hide tooltip immediately on blur (no sticky behavior for keyboard)
+	 */
 	const hide_tooltip_focus = () => {
 		if (!tooltip) return;
 		tooltip.hide(); // Hide immediately - no sticky behavior for keyboard

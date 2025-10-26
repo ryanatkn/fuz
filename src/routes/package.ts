@@ -183,7 +183,7 @@ export const src_json: Src_Json = {
 					source_location: {
 						line: 1,
 						column: 0,
-						end_line: 343,
+						end_line: 330,
 						end_column: 0,
 					},
 					exported: true,
@@ -606,7 +606,7 @@ export const src_json: Src_Json = {
 					source_location: {
 						line: 1,
 						column: 0,
-						end_line: 149,
+						end_line: 160,
 						end_column: 0,
 					},
 					exported: true,
@@ -1171,6 +1171,23 @@ export const src_json: Src_Json = {
 						line: 1,
 						column: 0,
 						end_line: 47,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Identifier_Link_Or_Ts.svelte': {
+			path: 'Identifier_Link_Or_Ts.svelte',
+			declarations: [
+				{
+					name: 'Identifier_Link_Or_Ts',
+					kind: 'component',
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 14,
 						end_column: 0,
 					},
 					exported: true,
@@ -5008,7 +5025,7 @@ export const src_json: Src_Json = {
 					source_location: {
 						line: 16,
 						column: 0,
-						end_line: 113,
+						end_line: 128,
 						end_column: 1,
 					},
 					members: [
@@ -5037,6 +5054,10 @@ export const src_json: Src_Json = {
 							kind: 'variable',
 						},
 						{
+							name: 'hide_delay_ms',
+							kind: 'variable',
+						},
+						{
 							name: '#show_timer',
 							kind: 'variable',
 						},
@@ -5061,6 +5082,10 @@ export const src_json: Src_Json = {
 							kind: 'function',
 						},
 						{
+							name: 'hide_delayed',
+							kind: 'function',
+						},
+						{
 							name: 'cancel_hide',
 							kind: 'function',
 						},
@@ -5075,9 +5100,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 118,
+						line: 133,
 						column: 13,
-						end_line: 118,
+						end_line: 133,
 						end_column: 62,
 					},
 					type_signature:

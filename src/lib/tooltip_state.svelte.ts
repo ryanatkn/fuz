@@ -1,3 +1,28 @@
+/**
+ * Tooltip state management for ARIA-compliant tooltips
+ *
+ * This module provides a global tooltip system with:
+ * - ARIA-compliant show delays (hover triggers after ~400ms)
+ * - Sticky behavior (can move cursor into tooltip)
+ * - Keyboard navigation support (immediate show on focus)
+ * - Smart positioning with viewport edge detection
+ *
+ * @example
+ * ```ts
+ * import {Tooltip_State, tooltip_context} from '$lib/tooltip_state.svelte.js';
+ *
+ * // Create and provide tooltip state
+ * const tooltip = new Tooltip_State(400, 200);
+ * tooltip_context.set(tooltip);
+ *
+ * // Use in components
+ * const tooltip = tooltip_context.get();
+ * tooltip.show_delayed(x, y, content); // Show after delay (hover)
+ * tooltip.show(x, y, content);         // Show immediately (focus)
+ * tooltip.hide_delayed();              // Hide after delay (sticky)
+ * tooltip.hide();                      // Hide immediately
+ * ```
+ */
 import type {Snippet} from 'svelte';
 
 import {create_context} from '$lib/context_helpers.js';
@@ -26,14 +51,19 @@ export class Tooltip_State {
 	 * Show delay in milliseconds (ARIA pattern specifies "small delay" before showing)
 	 */
 	show_delay_ms: number;
+	/**
+	 * Hide delay in milliseconds (for sticky behavior - allows moving cursor into tooltip)
+	 */
+	hide_delay_ms: number;
 
 	// Timer for delayed show (ARIA spec compliance)
 	#show_timer: ReturnType<typeof setTimeout> | null = null;
 	// Timer for delayed hide to support sticky behavior
 	#hide_timer: ReturnType<typeof setTimeout> | null = null;
 
-	constructor(show_delay_ms = 400) {
+	constructor(show_delay_ms = 400, hide_delay_ms = 200) {
 		this.show_delay_ms = show_delay_ms;
+		this.hide_delay_ms = hide_delay_ms;
 	}
 
 	/**
@@ -81,24 +111,34 @@ export class Tooltip_State {
 	}
 
 	/**
-	 * Hide tooltip (with optional delay for sticky behavior)
+	 * Hide tooltip immediately
 	 */
-	hide(delay = 0): void {
+	hide(): void {
 		// Clear any pending show (user moved away before tooltip appeared)
 		this.cancel_show();
 		// Clear any existing hide timer
 		this.cancel_hide();
 
-		if (delay > 0) {
-			this.#hide_timer = setTimeout(() => {
-				this.opened = false;
-				this.content = null;
-				this.#hide_timer = null;
-			}, delay);
-		} else {
+		this.opened = false;
+		this.content = null;
+	}
+
+	/**
+	 * Hide tooltip after delay (for sticky behavior - allows moving cursor into tooltip)
+	 */
+	hide_delayed(delay_ms?: number): void {
+		// Clear any pending show (user moved away before tooltip appeared)
+		this.cancel_show();
+		// Clear any existing hide timer
+		this.cancel_hide();
+
+		const delay = delay_ms ?? this.hide_delay_ms;
+
+		this.#hide_timer = setTimeout(() => {
 			this.opened = false;
 			this.content = null;
-		}
+			this.#hide_timer = null;
+		}, delay);
 	}
 
 	/**

@@ -29,12 +29,12 @@
 	}: Props = $props();
 
 	let el: HTMLElement | undefined = $state();
-	let clientWidth = $state(0);
-	let clientHeight = $state(0);
+	let client_width = $state(0);
+	let client_height = $state(0);
 
 	// Get viewport dimensions
-	let viewportWidth = $state(typeof window !== 'undefined' ? window.innerWidth : 0);
-	let viewportHeight = $state(typeof window !== 'undefined' ? window.innerHeight : 0);
+	let viewport_width = $state(typeof window !== 'undefined' ? window.innerWidth : 0);
+	let viewport_height = $state(typeof window !== 'undefined' ? window.innerHeight : 0);
 
 	// Smart positioning - flip if near edge
 	const x = $derived.by(() => {
@@ -44,8 +44,8 @@
 		let pos = tooltip.x + offset_x;
 
 		// Flip to left if would overflow right edge
-		if (pos + clientWidth > viewportWidth - viewport_padding) {
-			pos = tooltip.x - clientWidth - offset_x;
+		if (pos + client_width > viewport_width - viewport_padding) {
+			pos = tooltip.x - client_width - offset_x;
 			// Clamp to left edge
 			if (pos < viewport_padding) pos = viewport_padding;
 		}
@@ -60,8 +60,8 @@
 		let pos = tooltip.y + offset_y;
 
 		// Flip to top if would overflow bottom edge
-		if (pos + clientHeight > viewportHeight - viewport_padding) {
-			pos = tooltip.y - clientHeight - offset_y;
+		if (pos + client_height > viewport_height - viewport_padding) {
+			pos = tooltip.y - client_height - offset_y;
 			// Clamp to top edge
 			if (pos < viewport_padding) pos = viewport_padding;
 		}
@@ -74,8 +74,8 @@
 		if (typeof window === 'undefined') return;
 
 		const handle_resize = () => {
-			viewportWidth = window.innerWidth;
-			viewportHeight = window.innerHeight;
+			viewport_width = window.innerWidth;
+			viewport_height = window.innerHeight;
 		};
 
 		window.addEventListener('resize', handle_resize);
@@ -86,8 +86,8 @@
 	$effect(() => {
 		if (el) {
 			const rect = el.getBoundingClientRect();
-			clientWidth = rect.width;
-			clientHeight = rect.height;
+			client_width = rect.width;
+			client_height = rect.height;
 		}
 	});
 </script>
@@ -115,7 +115,7 @@
 		bind:this={el}
 		style:transform="translate3d({x}px, {y}px, 0)"
 		onmouseenter={() => tooltip.cancel_hide()}
-		onmouseleave={() => tooltip.hide(200)}
+		onmouseleave={() => tooltip.hide_delayed()}
 	>
 		{@render tooltip.content()}
 	</div>

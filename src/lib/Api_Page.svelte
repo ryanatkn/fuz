@@ -1,9 +1,8 @@
 <script lang="ts">
 	import type {Src_Module_Declaration} from '$lib/src_json.js';
 	import Details from '$lib/Details.svelte';
-	import Identifier_Link from '$lib/Identifier_Link.svelte';
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
-	import {lookup_declaration_by_name} from '$lib/api_data.js';
+	import Identifier_Link_Or_Ts from '$lib/Identifier_Link_Or_Ts.svelte';
 
 	const {
 		decl,
@@ -86,13 +85,7 @@
 				{#each decl.parameters as param (param)}
 					<tr>
 						<td><code>{param.name}</code></td>
-						<td>
-							{#if lookup_declaration_by_name(param.type)}
-								<code><Identifier_Link name={param.type} /></code>
-							{:else}
-								<Code content={param.type} lang="ts" />
-							{/if}
-						</td>
+						<td><Identifier_Link_Or_Ts type={param.type} /></td>
 						<td>{param.optional ? 'yes' : 'no'}</td>
 						{#if decl.parameters.some((p) => p.description)}
 							<td>{param.description ?? ''}</td>
@@ -126,13 +119,7 @@
 				{#each decl.props as prop (prop)}
 					<tr>
 						<td><code>{prop.name}</code></td>
-						<td>
-							{#if lookup_declaration_by_name(prop.type)}
-								<code><Identifier_Link name={prop.type} /></code>
-							{:else}
-								<Code content={prop.type} lang="ts" />
-							{/if}
-						</td>
+						<td><Identifier_Link_Or_Ts type={prop.type} /></td>
 						<td>{prop.optional ? 'yes' : 'no'}</td>
 						{#if decl.props.some((p) => p.description)}
 							<td>{prop.description ?? ''}</td>
@@ -165,7 +152,7 @@
 		<h2>generic parameters</h2>
 		<ul class="generic_list">
 			{#each decl.generic_params as generic (generic)}
-				<li><code>{generic}</code></li>
+				<li><Code content={generic} lang="ts" /></li>
 			{/each}
 		</ul>
 	</section>
@@ -180,7 +167,7 @@
 				<strong>extends:</strong>
 				<ul class="inheritance_list">
 					{#each decl.extends as ext (ext)}
-						<li><code>{ext}</code></li>
+						<li><Identifier_Link_Or_Ts type={ext} /></li>
 					{/each}
 				</ul>
 			</div>
@@ -190,7 +177,7 @@
 				<strong>implements:</strong>
 				<ul class="inheritance_list">
 					{#each decl.implements as impl (impl)}
-						<li><code>{impl}</code></li>
+						<li><Identifier_Link_Or_Ts type={impl} /></li>
 					{/each}
 				</ul>
 			</div>
