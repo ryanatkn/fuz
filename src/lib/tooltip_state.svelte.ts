@@ -124,12 +124,19 @@ export class Tooltip_State {
 	}
 
 	/**
+	 * Clear all pending timers (internal helper)
+	 */
+	#clear_timers(): void {
+		this.cancel_show();
+		this.cancel_hide();
+	}
+
+	/**
 	 * Show tooltip immediately at given position with content
 	 */
 	show(x: number, y: number, content: Snippet): void {
 		// Clear any pending timers
-		this.cancel_show();
-		this.cancel_hide();
+		this.#clear_timers();
 
 		this.x = x;
 		this.y = y;
@@ -141,10 +148,8 @@ export class Tooltip_State {
 	 * Show tooltip after delay (ARIA compliance: "appears after a small delay")
 	 */
 	show_delayed(x: number, y: number, content: Snippet, delay_ms?: number): void {
-		// Clear any pending show to restart the timer
-		this.cancel_show();
-		// Clear any pending hide
-		this.cancel_hide();
+		// Clear any pending timers and restart
+		this.#clear_timers();
 
 		const delay = delay_ms ?? this.show_delay_ms;
 
@@ -171,10 +176,8 @@ export class Tooltip_State {
 	 * Hide tooltip immediately
 	 */
 	hide(): void {
-		// Clear any pending show (user moved away before tooltip appeared)
-		this.cancel_show();
-		// Clear any existing hide timer
-		this.cancel_hide();
+		// Clear any pending operations
+		this.#clear_timers();
 
 		this.opened = false;
 		this.content = null;
@@ -184,10 +187,8 @@ export class Tooltip_State {
 	 * Hide tooltip after delay (for sticky behavior - allows moving cursor into tooltip)
 	 */
 	hide_delayed(delay_ms?: number): void {
-		// Clear any pending show (user moved away before tooltip appeared)
-		this.cancel_show();
-		// Clear any existing hide timer
-		this.cancel_hide();
+		// Clear any pending operations and start hide timer
+		this.#clear_timers();
 
 		const delay = delay_ms ?? this.hide_delay_ms;
 

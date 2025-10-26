@@ -1187,7 +1187,7 @@ export const src_json: Src_Json = {
 					source_location: {
 						line: 1,
 						column: 0,
-						end_line: 14,
+						end_line: 16,
 						end_column: 0,
 					},
 					exported: true,
@@ -1868,36 +1868,10 @@ export const src_json: Src_Json = {
 				{
 					name: 'Tooltip',
 					kind: 'component',
-					props: [
-						{
-							name: 'tooltip',
-							type: 'Tooltip_State',
-							optional: true,
-							description: 'Optional tooltip state - defaults to context value',
-						},
-						{
-							name: 'offset_x',
-							type: 'number',
-							optional: true,
-							description: 'Horizontal offset from anchor point (cursor or element center)',
-						},
-						{
-							name: 'offset_y',
-							type: 'number',
-							optional: true,
-							description: 'Vertical offset from anchor point (cursor or element bottom)',
-						},
-						{
-							name: 'viewport_padding',
-							type: 'number',
-							optional: true,
-							description: 'Padding from viewport edges',
-						},
-					],
 					source_location: {
 						line: 1,
 						column: 0,
-						end_line: 142,
+						end_line: 151,
 						end_column: 0,
 					},
 					exported: true,
@@ -5023,9 +4997,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 16,
+						line: 88,
 						column: 0,
-						end_line: 128,
+						end_line: 211,
 						end_column: 1,
 					},
 					members: [
@@ -5066,6 +5040,10 @@ export const src_json: Src_Json = {
 							kind: 'variable',
 						},
 						{
+							name: '#clear_timers',
+							kind: 'function',
+						},
+						{
 							name: 'show',
 							kind: 'function',
 						},
@@ -5100,9 +5078,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 133,
+						line: 216,
 						column: 13,
-						end_line: 133,
+						end_line: 216,
 						end_column: 62,
 					},
 					type_signature:
@@ -5111,6 +5089,8 @@ export const src_json: Src_Json = {
 				},
 			],
 			imports: ['svelte', '$lib/context_helpers.js'],
+			module_comment:
+				'Tooltip state management for ARIA-compliant tooltips\n\nThis module provides a global tooltip system with:\n- ARIA-compliant show delays (hover triggers after ~400ms)\n- Sticky behavior (can move cursor into tooltip)\n- Keyboard navigation support (immediate show on focus)\n- Smart positioning with viewport edge detection\n\n## ARIA Compliance\n\nFollowing the [ARIA Tooltip Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/):\n- Tooltip has `role="tooltip"` (handled by Tooltip.svelte)\n- Tooltip has unique `id` (accessible via `tooltip.id`)\n- **IMPORTANT**: Triggering elements MUST reference tooltip via `aria-describedby`\n- Escape key dismisses tooltip (handled by Tooltip.svelte)\n- Tooltips remain non-focusable\n\n## Usage Pattern\n\n@example\n```ts\nimport {Tooltip_State, tooltip_context} from \'$lib/tooltip_state.svelte.js\';\n\n// Create and provide tooltip state\nconst tooltip = new Tooltip_State(400, 200);\ntooltip_context.set(tooltip);\n```\n\n@example\n```svelte\n<script lang="ts">\nimport {tooltip_context} from \'$lib/tooltip_state.svelte.js\';\n\nconst tooltip = tooltip_context.get();\nlet button_el: HTMLButtonElement;\n\n// Show on hover (with delay)\nconst on_mouse_enter = (e: MouseEvent) => {\n  tooltip.show_delayed(e.clientX, e.clientY, my_tooltip_content);\n};\n\n// Show on focus (immediate for keyboard users)\nconst on_focus = () => {\n  const rect = button_el.getBoundingClientRect();\n  tooltip.show(rect.left + rect.width / 2, rect.bottom, my_tooltip_content);\n};\n\n// Hide with delay (allows moving cursor into tooltip)\nconst on_mouse_leave = () => tooltip.hide_delayed();\n\n// Hide immediately on blur\nconst on_blur = () => tooltip.hide();\n</script>\n\n<!-- IMPORTANT: Set aria-describedby when tooltip is open -->\n<button\n  bind:this={button_el}\n  aria-describedby={tooltip.opened ? tooltip.id : undefined}\n  onmouseenter={on_mouse_enter}\n  onmouseleave={on_mouse_leave}\n  onfocus={on_focus}\n  onblur={on_blur}\n>\n  Hover or focus me\n</button>\n\n{#snippet my_tooltip_content()}\n  <div>This is the tooltip content</div>\n{/snippet}\n```',
 		},
 		'./ts_helpers.ts': {
 			path: 'ts_helpers.ts',

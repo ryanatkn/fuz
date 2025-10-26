@@ -1,7 +1,12 @@
 <script lang="ts">
 	import {tooltip_context, Tooltip_State} from '$lib/tooltip_state.svelte.js';
 
-	interface Props {
+	const {
+		tooltip = tooltip_context.get(),
+		offset_x = 6,
+		offset_y = 6,
+		viewport_padding = 10,
+	}: {
 		/**
 		 * Optional tooltip state - defaults to context value
 		 * @nonreactive
@@ -19,14 +24,7 @@
 		 * Padding from viewport edges
 		 */
 		viewport_padding?: number;
-	}
-
-	const {
-		tooltip = tooltip_context.get(),
-		offset_x = 6,
-		offset_y = 6,
-		viewport_padding = 10,
-	}: Props = $props();
+	} = $props();
 
 	let el: HTMLElement | undefined = $state();
 	let client_width = $state(0);
@@ -38,6 +36,7 @@
 
 	// Smart positioning - flip if near edge
 	const x = $derived.by(() => {
+		// Early return to avoid calculations when tooltip is closed
 		if (!tooltip.opened) return 0;
 
 		// Offset from anchor point (cursor or element center)
@@ -54,6 +53,7 @@
 	});
 
 	const y = $derived.by(() => {
+		// Early return to avoid calculations when tooltip is closed
 		if (!tooltip.opened) return 0;
 
 		// Offset from anchor point (cursor or element bottom)
@@ -86,8 +86,9 @@
 	// Re-measure when tooltip opens or position changes (content may change between shows)
 	$effect(() => {
 		if (el && tooltip.opened) {
-			// Access x/y to track as dependencies (Svelte 5 reactivity pattern)
-			// This ensures effect re-runs when position changes
+			// Note: Accessing tooltip.x and tooltip.y registers them as dependencies
+			// This ensures the effect re-runs when position changes, allowing us to
+			// re-measure if content changes between shows at different positions
 			tooltip.x;
 			tooltip.y;
 			const rect = el.getBoundingClientRect();
@@ -139,7 +140,6 @@
 		z-index: var(--tooltip_z_index, 100);
 		max-width: var(--tooltip_width);
 		pointer-events: auto;
-		user-select: none;
 		padding: var(--space_sm);
 		font-size: var(--font_size_sm);
 		border: var(--border_width) var(--border_style) var(--border_color);
