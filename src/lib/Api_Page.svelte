@@ -1,6 +1,4 @@
 <script lang="ts">
-	import {resolve} from '$app/paths';
-
 	import type {Src_Module_Declaration} from '$lib/src_json.js';
 	import Details from '$lib/Details.svelte';
 
@@ -25,9 +23,8 @@
 <!-- Metadata -->
 {#if source_url}
 	<div class="meta">
-		<a class="chip" href={resolve(source_url as any)} target="_blank" rel="noopener">
-			view source
-		</a>
+		<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+		<a class="chip" href={source_url} target="_blank" rel="noopener"> view source </a>
 	</div>
 {/if}
 
