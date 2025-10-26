@@ -1,4 +1,6 @@
 <script lang="ts">
+	import {resolve} from '$app/paths';
+
 	import {lookup_declaration, get_module} from '$routes/docs/api/api_data.svelte.js';
 	import {pkg_context} from '$lib/pkg.js';
 	import Api_Page from '$lib/Api_Page.svelte';
@@ -30,7 +32,7 @@
 			Could not find declaration <code>{identifier}</code> in module <code>{module}</code>.
 		</p>
 		<p>
-			<a href="/docs/api">← Back to API index</a>
+			<a href={resolve('/docs/api')}>← Back to API index</a>
 		</p>
 	</div>
 {/if}

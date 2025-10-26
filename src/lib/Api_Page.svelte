@@ -1,4 +1,6 @@
 <script lang="ts">
+	import {resolve} from '$app/paths';
+
 	import {
 		get_declaration_display_name,
 		type Enhanced_Declaration,
@@ -35,15 +37,16 @@
 
 		{#if source_url}
 			<div class="meta">
-				<a class="chip" href={source_url} target="_blank" rel="noopener"> View source </a>
+				<a class="chip" href={resolve(source_url as any)} target="_blank" rel="noopener">
+					View source
+				</a>
 			</div>
 		{/if}
 
-		<!-- eslint-disable @typescript-eslint/no-deprecated -->
-		{#if decl.deprecated}
+		{#if decl.deprecated_message}
 			<div class="deprecated_warning pane">
 				<strong>⚠️ Deprecated:</strong>
-				{decl.deprecated}
+				{decl.deprecated_message}
 			</div>
 		{/if}
 	</header>

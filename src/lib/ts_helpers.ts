@@ -46,7 +46,7 @@ export const extract_jsdoc = (
 			full_text: string;
 			summary: string;
 			examples: Array<string>;
-			deprecated?: string;
+			deprecated_message?: string;
 			see_also: Array<string>;
 	  }
 	| undefined => {
@@ -55,7 +55,7 @@ export const extract_jsdoc = (
 
 	let full_text = '';
 	const examples: Array<string> = [];
-	let deprecated: string | undefined;
+	let deprecated_message: string | undefined;
 	const see_also: Array<string> = [];
 
 	for (const comment of jsdoc_comments) {
@@ -76,7 +76,7 @@ export const extract_jsdoc = (
 		if (tag.tagName.text === 'example' && tag_text) {
 			examples.push(tag_text.trim());
 		} else if (tag.tagName.text === 'deprecated' && tag_text) {
-			deprecated = tag_text;
+			deprecated_message = tag_text;
 		} else if (tag.tagName.text === 'see' && tag_text) {
 			see_also.push(tag_text.trim());
 		}
@@ -85,7 +85,7 @@ export const extract_jsdoc = (
 	full_text = full_text.trim();
 	const summary = full_text.split('\n\n')[0].trim();
 
-	return {full_text, summary, examples, deprecated, see_also};
+	return {full_text, summary, examples, deprecated_message, see_also};
 };
 
 /**

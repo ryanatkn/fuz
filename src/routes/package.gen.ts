@@ -57,11 +57,13 @@ export const gen: Gen = async ({log, filer}) => {
 	log.info(`Filer has ${filer.files.size} files total`);
 
 	// Manually filter files - IDs are absolute paths, so we need to check if they include '/src/lib/'
+	// Note: Svelte files are excluded because TypeScript Compiler API cannot parse them
+	// without preprocessing (would need svelte2tsx or similar)
 	const source_disknodes: Array<any> = [];
 	for (const [id, disknode] of filer.files.entries()) {
 		if (
 			id.includes('/src/lib/') &&
-			/\.(ts|js|svelte)$/.test(id) &&
+			/\.(ts|js)$/.test(id) && // Exclude .svelte files - TS can't parse them directly
 			!id.includes('.test.') &&
 			!id.includes('.spec.')
 		) {
@@ -76,6 +78,9 @@ export const gen: Gen = async ({log, filer}) => {
 		return create_minimal_output(package_json);
 	}
 
+	// Sort for deterministic output (stable alphabetical module ordering)
+	source_disknodes.sort((a, b) => a.id.localeCompare(b.id));
+
 	// Build enhanced src.json
 	const enhanced_src_json: Enhanced_Src_Json = {
 		name: package_json.name,
@@ -84,60 +89,74 @@ export const gen: Gen = async ({log, filer}) => {
 	};
 
 	for (const disknode of source_disknodes) {
-		const source_id = disknode.id;
-		// Extract path relative to src/lib (e.g., "/home/desk/dev/fuz/src/lib/Alert.svelte" -> "Alert.svelte")
-		const lib_index = source_id.indexOf('/src/lib/');
-		const module_path = lib_index !== -1 ? source_id.substring(lib_index + 9) : source_id;
-		const module_key = `./${module_path}`;
+		try {
+			const source_id = disknode.id;
+			// Extract path relative to src/lib (e.g., "/home/desk/dev/fuz/src/lib/alert.ts" -> "alert.ts")
+			const lib_index = source_id.indexOf('/src/lib/');
+			const module_path = lib_index !== -1 ? source_id.substring(lib_index + 9) : source_id;
+			const module_key = `./${module_path}`;
 
-		log.info(`Analyzing: ${module_path}`);
+			log.info(`Analyzing: ${module_path}`);
 
-		const source_file = program.getSourceFile(source_id);
-		if (!source_file) {
-			log.warn(`Could not get source file: ${source_id}`);
-			continue;
-		}
+			const source_file = program.getSourceFile(source_id);
+			if (!source_file) {
+				log.warn(`Could not get source file: ${source_id}`);
+				continue;
+			}
 
-		const enhanced_module: Enhanced_Module = {
-			path: module_path,
-			declarations: [],
-			imports: extract_imports(source_file),
-		};
+			const enhanced_module: Enhanced_Module = {
+				path: module_path,
+				declarations: [],
+				imports: extract_imports(source_file),
+			};
 
-		// Extract module-level comment
-		const module_comment = extract_module_comment(source_file);
-		if (module_comment) {
-			enhanced_module.module_comment = module_comment;
-		}
+			// Extract module-level comment
+			const module_comment = extract_module_comment(source_file);
+			if (module_comment) {
+				enhanced_module.module_comment = module_comment;
+			}
 
-		// Extract declarations based on file type
-		if (module_path.endsWith('.svelte')) {
-			// TODO: Integrate Svelte language tools to extract component metadata
-			// Currently only TypeScript Compiler API is used, which cannot parse .svelte files
-			// To get full component documentation, we need to:
-			// 1. Parse <script> blocks with svelte-parse or svelte/compiler
-			// 2. Extract prop types and JSDoc comments
-			// 3. Document events, slots, and component props
-			// 4. Preserve type information from TypeScript in <script lang="ts">
-			// See: https://github.com/sveltejs/language-tools for integration examples
-			// Svelte components export a default component
-			enhanced_module.declarations!.push({
-				name: 'default',
-				kind: 'component',
-			});
-		} else if (module_path.endsWith('.ts') || module_path.endsWith('.js')) {
-			// TypeScript/JavaScript files - extract all exports
-			const symbol = checker.getSymbolAtLocation(source_file);
-			if (symbol) {
-				const exports = checker.getExportsOfModule(symbol);
-				for (const export_symbol of exports) {
-					const enhanced_decl = enhance_declaration(export_symbol, source_file, checker, log);
-					enhanced_module.declarations!.push(enhanced_decl);
+			// Extract declarations based on file type
+			if (module_path.endsWith('.svelte')) {
+				// TODO: Integrate Svelte language tools to extract component metadata
+				// Currently only TypeScript Compiler API is used, which cannot parse .svelte files
+				// To get full component documentation, we need to:
+				// 1. Parse <script> blocks with svelte-parse or svelte/compiler
+				// 2. Extract prop types and JSDoc comments
+				// 3. Document events, slots, and component props
+				// 4. Preserve type information from TypeScript in <script lang="ts">
+				// See: https://github.com/sveltejs/language-tools for integration examples
+				// Svelte components export a default component
+				enhanced_module.declarations!.push({
+					name: 'default',
+					kind: 'component',
+				});
+			} else if (module_path.endsWith('.ts') || module_path.endsWith('.js')) {
+				// TypeScript/JavaScript files - extract all exports
+				const symbol = checker.getSymbolAtLocation(source_file);
+				if (symbol) {
+					const exports = checker.getExportsOfModule(symbol);
+					for (const export_symbol of exports) {
+						const enhanced_decl = enhance_declaration(export_symbol, source_file, checker, log);
+						enhanced_module.declarations!.push(enhanced_decl);
+					}
 				}
 			}
-		}
 
-		enhanced_src_json.modules![module_key] = enhanced_module;
+			enhanced_src_json.modules![module_key] = enhanced_module;
+		} catch (err) {
+			log.error(`Failed to analyze ${disknode.id}:`, err);
+			// Continue with next module
+		}
+	}
+
+	// Sort modules alphabetically for deterministic output and cleaner diffs
+	if (enhanced_src_json.modules) {
+		const sorted_modules: Record<string, Enhanced_Module> = {};
+		for (const key of Object.keys(enhanced_src_json.modules).sort()) {
+			sorted_modules[key] = enhanced_src_json.modules[key]!;
+		}
+		enhanced_src_json.modules = sorted_modules;
 	}
 
 	// Compute imported_by relationships
@@ -202,7 +221,7 @@ const enhance_declaration = (
 			enhanced.doc_comment = jsdoc.full_text;
 			enhanced.summary = jsdoc.summary;
 			enhanced.examples = jsdoc.examples;
-			enhanced.deprecated = jsdoc.deprecated; // eslint-disable-line @typescript-eslint/no-deprecated
+			enhanced.deprecated_message = jsdoc.deprecated_message;
 			enhanced.see_also = jsdoc.see_also;
 		}
 

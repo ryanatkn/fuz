@@ -200,7 +200,6 @@ describe('create_declaration_contextmenu', () => {
 
 				if (entry.snippet === 'link') {
 					assert.ok('href' in entry.props, 'link entry should have href');
-					// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 				} else if (entry.snippet === 'text') {
 					assert.ok('content' in entry.props, 'text entry should have content');
 					assert.ok('icon' in entry.props, 'text entry should have icon');

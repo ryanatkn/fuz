@@ -73,9 +73,10 @@ export interface Enhanced_Declaration extends Src_Module_Declaration {
 	examples?: Array<string>;
 
 	/**
-	 * Deprecation message from @deprecated tag
+	 * Deprecation warning message extracted from JSDoc `@deprecated` annotation.
+	 * When present, indicates this declaration should not be used in new code.
 	 */
-	deprecated?: string;
+	deprecated_message?: string;
 
 	/**
 	 * Related items from @see tags

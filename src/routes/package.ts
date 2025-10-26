@@ -162,432 +162,301 @@ export const src_json: Enhanced_Src_Json = {
 			imports: [],
 			module_comment: '// TODO move to module context?',
 		},
-		'./enhanced_declarations.ts': {
-			path: 'enhanced_declarations.ts',
+		'./constants.ts': {
+			path: 'constants.ts',
 			declarations: [
 				{
-					name: 'Parameter_Info',
-					kind: 'type',
-					doc_comment: 'Enhanced parameter information for functions and methods',
-					summary: 'Enhanced parameter information for functions and methods',
+					name: 'MAIN_HEADER_MARGIN_TOP',
+					kind: 'variable',
+					source_location: {
+						line: 3,
+						column: 13,
+						end_line: 3,
+						end_column: 68,
+					},
+					type_signature: '"calc(60px + var(--space_lg))"',
+					exported: false,
+				},
+			],
+			imports: [],
+			module_comment:
+				'// TODO the 60px is a hack, need `--docs_primary_nav_height` exported or :root values from Fuz -- the --space_lg also needs to be kept in sync',
+		},
+		'./context_helpers.ts': {
+			path: 'context_helpers.ts',
+			declarations: [
+				{
+					name: 'create_context',
+					kind: 'function',
+					doc_comment:
+						"Wraps Svelte's `setContext` and `getContext` for better ergonmics.\nWhen no value is set in the context,\n`get` throws an error and `maybe_get` returns `undefined`.\nIf a `fallback` is provided, the `value` argument to `set` is optional\nand `maybe_get` is omitted from the type.",
+					summary:
+						"Wraps Svelte's `setContext` and `getContext` for better ergonmics.\nWhen no value is set in the context,\n`get` throws an error and `maybe_get` returns `undefined`.\nIf a `fallback` is provided, the `value` argument to `set` is optional\nand `maybe_get` is omitted from the type.",
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 6,
+						line: 18,
 						column: 0,
-						end_line: 12,
-						end_column: 1,
+						end_line: 21,
+						end_column: 2,
 					},
-					type_signature: 'Parameter_Info',
+					type_signature:
+						'<T>(fallback: () => T): { get: () => T; set: (value?: T | undefined) => T; }',
+					return_type: '{ get: () => T; set: (value?: T | undefined) => T; }',
+					parameters: [
+						{
+							name: 'fallback',
+							type: '() => T',
+							optional: false,
+						},
+					],
+					generic_params: ['T'],
 					exported: true,
 				},
+			],
+			imports: ['svelte'],
+			imported_by: [
+				'./contextmenu_state.svelte.ts',
+				'./docs_helpers.svelte.ts',
+				'./pkg.ts',
+				'./themer.svelte.ts',
+				'./tome.ts',
+				'./tooltip_state.svelte.ts',
+			],
+		},
+		'./contextmenu_helpers.ts': {
+			path: 'contextmenu_helpers.ts',
+			declarations: [
 				{
-					name: 'Source_Location',
-					kind: 'type',
-					doc_comment: 'Source location information within a file',
-					summary: 'Source location information within a file',
+					name: 'CONTEXTMENU_DEFAULT_OPEN_OFFSET_X',
+					kind: 'variable',
+					source_location: {
+						line: 6,
+						column: 13,
+						end_line: 6,
+						end_column: 51,
+					},
+					type_signature: '-2',
+					exported: false,
+				},
+				{
+					name: 'CONTEXTMENU_DEFAULT_OPEN_OFFSET_Y',
+					kind: 'variable',
+					source_location: {
+						line: 7,
+						column: 13,
+						end_line: 7,
+						end_column: 51,
+					},
+					type_signature: '-2',
+					exported: false,
+				},
+				{
+					name: 'CONTEXTMENU_DEFAULT_BYPASS_WINDOW',
+					kind: 'variable',
+					source_location: {
+						line: 8,
+						column: 13,
+						end_line: 8,
+						end_column: 52,
+					},
+					type_signature: '750',
+					exported: false,
+				},
+				{
+					name: 'CONTEXTMENU_DEFAULT_BYPASS_MOVE_TOLERANCE',
+					kind: 'variable',
+					source_location: {
+						line: 9,
+						column: 13,
+						end_line: 9,
+						end_column: 59,
+					},
+					type_signature: '11',
+					exported: false,
+				},
+				{
+					name: 'CONTEXTMENU_DEFAULT_LONGPRESS_DURATION',
+					kind: 'variable',
+					source_location: {
+						line: 10,
+						column: 13,
+						end_line: 10,
+						end_column: 57,
+					},
+					type_signature: '633',
+					exported: false,
+				},
+				{
+					name: 'CONTEXTMENU_DEFAULT_LONGPRESS_MOVE_TOLERANCE',
+					kind: 'variable',
+					source_location: {
+						line: 11,
+						column: 13,
+						end_line: 11,
+						end_column: 62,
+					},
+					type_signature: '21',
+					exported: false,
+				},
+				{
+					name: 'contextmenu_is_valid_target',
+					kind: 'function',
+					doc_comment:
+						'Check if a target element is valid for contextmenu interactions.\nReturns true if valid and narrows the type to HTMLElement | SVGElement.',
+					summary:
+						'Check if a target element is valid for contextmenu interactions.\nReturns true if valid and narrows the type to HTMLElement | SVGElement.',
 					examples: [],
 					see_also: [],
 					source_location: {
 						line: 17,
-						column: 0,
-						end_line: 22,
-						end_column: 1,
-					},
-					type_signature: 'Source_Location',
-					exported: true,
-				},
-				{
-					name: 'Enhanced_Declaration',
-					kind: 'type',
-					doc_comment:
-						'Extended declaration type with rich TypeScript metadata\n\nThis extends the base `Src_Module_Declaration` with detailed information\nextracted from TypeScript source code including JSDoc comments,\ntype signatures, and structural information.',
-					summary: 'Extended declaration type with rich TypeScript metadata',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 31,
-						column: 0,
-						end_line: 110,
-						end_column: 1,
-					},
-					type_signature: 'Enhanced_Declaration',
-					extends: ['Src_Module_Declaration'],
-					exported: true,
-				},
-				{
-					name: 'Enhanced_Module',
-					kind: 'type',
-					doc_comment: 'Enhanced module information with rich metadata',
-					summary: 'Enhanced module information with rich metadata',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 115,
-						column: 0,
-						end_line: 131,
-						end_column: 1,
-					},
-					type_signature: 'Enhanced_Module',
-					exported: true,
-				},
-				{
-					name: 'Enhanced_Src_Json',
-					kind: 'type',
-					doc_comment: 'Enhanced src.json structure',
-					summary: 'Enhanced src.json structure',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 136,
-						column: 0,
-						end_line: 140,
-						end_column: 1,
-					},
-					type_signature: 'Enhanced_Src_Json',
-					exported: true,
-				},
-				{
-					name: 'is_enhanced_declaration',
-					kind: 'function',
-					doc_comment: 'Helper to check if a declaration is enhanced',
-					summary: 'Helper to check if a declaration is enhanced',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 145,
 						column: 13,
-						end_line: 149,
-						end_column: 1,
+						end_line: 24,
+						end_column: 25,
 					},
 					type_signature:
-						'(decl: Enhanced_Declaration | { [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "component" | "css" | null; }): decl is Enhanced_Declaration',
+						'(target: EventTarget | null, shiftKey: boolean): target is HTMLElement | SVGElement',
 					return_type: 'boolean',
 					parameters: [
 						{
-							name: 'decl',
-							type: 'Enhanced_Declaration | { [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "component" | "css" | null; }',
+							name: 'target',
+							type: 'EventTarget | null',
+							optional: false,
+						},
+						{
+							name: 'shiftKey',
+							type: 'boolean',
 							optional: false,
 						},
 					],
 					exported: false,
 				},
 				{
-					name: 'get_declaration_display_name',
+					name: 'contextmenu_create_keyboard_handlers',
 					kind: 'function',
-					doc_comment: "Helper to get a declaration's display name",
-					summary: "Helper to get a declaration's display name",
+					doc_comment:
+						'Creates the keyboard handler map for contextmenu navigation.\nBinds handlers to the provided contextmenu instance.',
+					summary:
+						'Creates the keyboard handler map for contextmenu navigation.\nBinds handlers to the provided contextmenu instance.',
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 154,
-						column: 13,
-						end_line: 159,
-						end_column: 1,
-					},
-					type_signature: '(decl: Enhanced_Declaration): string',
-					return_type: 'string',
-					parameters: [
-						{
-							name: 'decl',
-							type: 'Enhanced_Declaration',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'get_type_summary',
-					kind: 'function',
-					doc_comment: 'Helper to get a short type summary for tooltips',
-					summary: 'Helper to get a short type summary for tooltips',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 164,
-						column: 13,
-						end_line: 174,
-						end_column: 1,
-					},
-					type_signature: '(decl: Enhanced_Declaration): string | undefined',
-					return_type: 'string | undefined',
-					parameters: [
-						{
-							name: 'decl',
-							type: 'Enhanced_Declaration',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'get_doc_summary',
-					kind: 'function',
-					doc_comment: 'Helper to extract the first paragraph from doc comment',
-					summary: 'Helper to extract the first paragraph from doc comment',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 179,
-						column: 13,
-						end_line: 183,
-						end_column: 1,
-					},
-					type_signature: '(doc_comment: string | undefined): string | undefined',
-					return_type: 'string | undefined',
-					parameters: [
-						{
-							name: 'doc_comment',
-							type: 'string | undefined',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'generate_import_statement',
-					kind: 'function',
-					doc_comment: 'Generate import statement for a declaration',
-					summary: 'Generate import statement for a declaration',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 188,
-						column: 13,
-						end_line: 212,
-						end_column: 1,
-					},
-					type_signature:
-						'(decl: Enhanced_Declaration, module_path: string, pkg_name: string): string',
-					return_type: 'string',
-					parameters: [
-						{
-							name: 'decl',
-							type: 'Enhanced_Declaration',
-							optional: false,
-						},
-						{
-							name: 'module_path',
-							type: 'string',
-							optional: false,
-						},
-						{
-							name: 'pkg_name',
-							type: 'string',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-			],
-			imports: ['@ryanatkn/belt/src_json.js'],
-			imported_by: ['./ts_helpers.ts', './declaration_contextmenu.ts'],
-		},
-		'./themer.svelte.ts': {
-			path: 'themer.svelte.ts',
-			declarations: [
-				{
-					name: 'Themer',
-					kind: 'class',
-					source_location: {
-						line: 8,
-						column: 0,
-						end_line: 26,
-						end_column: 1,
-					},
-					members: [
-						{
-							name: 'theme',
-							kind: 'variable',
-						},
-						{
-							name: 'color_scheme',
-							kind: 'variable',
-						},
-						{
-							name: 'toJSON',
-							kind: 'function',
-						},
-					],
-					exported: true,
-				},
-				{
-					name: 'Themer_Json',
-					kind: 'type',
-					source_location: {
-						line: 28,
-						column: 0,
-						end_line: 31,
-						end_column: 1,
-					},
-					type_signature: 'Themer_Json',
-					exported: true,
-				},
-				{
-					name: 'themer_context',
-					kind: 'variable',
-					source_location: {
-						line: 33,
-						column: 13,
-						end_line: 33,
-						end_column: 54,
-					},
-					type_signature:
-						'{ get: (error_message?: string | undefined) => Themer; maybe_get: () => Themer | undefined; set: (value: Themer) => Themer; }',
-					exported: false,
-				},
-				{
-					name: 'sync_color_scheme',
-					kind: 'function',
-					source_location: {
-						line: 35,
-						column: 13,
-						end_line: 42,
-						end_column: 1,
-					},
-					type_signature: '(color_scheme: Color_Scheme | null): void',
-					return_type: 'void',
-					parameters: [
-						{
-							name: 'color_scheme',
-							type: 'Color_Scheme | null',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'COLOR_SCHEME_STORAGE_KEY',
-					kind: 'variable',
-					source_location: {
-						line: 44,
-						column: 13,
-						end_line: 44,
-						end_column: 58,
-					},
-					type_signature: '"fuz:color-scheme"',
-					exported: false,
-				},
-				{
-					name: 'THEME_STORAGE_KEY',
-					kind: 'variable',
-					source_location: {
-						line: 45,
+						line: 32,
 						column: 13,
 						end_line: 45,
-						end_column: 44,
+						end_column: 3,
 					},
-					type_signature: '"fuz:theme"',
+					type_signature: '(contextmenu: Contextmenu_State): Map<string, () => void>',
+					return_type: 'Map<string, () => void>',
+					parameters: [
+						{
+							name: 'contextmenu',
+							type: 'Contextmenu_State',
+							optional: false,
+						},
+					],
 					exported: false,
 				},
 				{
-					name: 'save_color_scheme',
+					name: 'contextmenu_create_keydown_handler',
 					kind: 'function',
+					doc_comment:
+						'Creates a keydown event handler that uses the provided keyboard handlers map.',
+					summary: 'Creates a keydown event handler that uses the provided keyboard handlers map.',
+					examples: [],
+					see_also: [],
 					source_location: {
-						line: 47,
+						line: 50,
 						column: 13,
-						end_line: 52,
+						end_line: 59,
 						end_column: 1,
 					},
-					type_signature: '(color_scheme: Color_Scheme | null, key?: string): void',
-					return_type: 'void',
+					type_signature:
+						'(keyboard_handlers: Map<string, () => void>): (e: KeyboardEvent) => void',
+					return_type: '(e: KeyboardEvent) => void',
 					parameters: [
 						{
-							name: 'color_scheme',
-							type: 'Color_Scheme | null',
-							optional: false,
-						},
-						{
-							name: 'key',
-							type: 'string',
+							name: 'keyboard_handlers',
+							type: 'Map<string, () => void>',
 							optional: false,
 						},
 					],
 					exported: false,
 				},
 				{
-					name: 'load_color_scheme',
+					name: 'contextmenu_calculate_constrained_x',
 					kind: 'function',
+					doc_comment:
+						'Calculates the constrained X position for the contextmenu,\nensuring it stays within the layout width.',
+					summary:
+						'Calculates the constrained X position for the contextmenu,\nensuring it stays within the layout width.',
+					examples: [],
+					see_also: [],
 					source_location: {
-						line: 54,
+						line: 65,
 						column: 13,
-						end_line: 57,
-						end_column: 80,
+						end_line: 69,
+						end_column: 71,
 					},
-					type_signature: '(fallback?: Color_Scheme, key?: string): Color_Scheme',
-					return_type: 'Color_Scheme',
+					type_signature: '(menu_x: number, menu_width: number, layout_width: number): number',
+					return_type: 'number',
 					parameters: [
 						{
-							name: 'fallback',
-							type: 'Color_Scheme',
+							name: 'menu_x',
+							type: 'number',
 							optional: false,
 						},
 						{
-							name: 'key',
-							type: 'string',
+							name: 'menu_width',
+							type: 'number',
+							optional: false,
+						},
+						{
+							name: 'layout_width',
+							type: 'number',
 							optional: false,
 						},
 					],
 					exported: false,
 				},
 				{
-					name: 'save_theme',
+					name: 'contextmenu_calculate_constrained_y',
 					kind: 'function',
+					doc_comment:
+						'Calculates the constrained Y position for the contextmenu,\nensuring it stays within the layout height.',
+					summary:
+						'Calculates the constrained Y position for the contextmenu,\nensuring it stays within the layout height.',
+					examples: [],
+					see_also: [],
 					source_location: {
-						line: 59,
+						line: 75,
 						column: 13,
-						end_line: 61,
-						end_column: 1,
+						end_line: 79,
+						end_column: 73,
 					},
-					type_signature: '(theme: Theme | null, key?: string): void',
-					return_type: 'void',
+					type_signature: '(menu_y: number, menu_height: number, layout_height: number): number',
+					return_type: 'number',
 					parameters: [
 						{
-							name: 'theme',
-							type: 'Theme | null',
+							name: 'menu_y',
+							type: 'number',
 							optional: false,
 						},
 						{
-							name: 'key',
-							type: 'string',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'load_theme',
-					kind: 'function',
-					source_location: {
-						line: 63,
-						column: 13,
-						end_line: 64,
-						end_column: 48,
-					},
-					type_signature: '(fallback?: Theme, key?: string): Theme',
-					return_type: 'Theme',
-					parameters: [
-						{
-							name: 'fallback',
-							type: 'Theme',
+							name: 'menu_height',
+							type: 'number',
 							optional: false,
 						},
 						{
-							name: 'key',
-							type: 'string',
+							name: 'layout_height',
+							type: 'number',
 							optional: false,
 						},
 					],
 					exported: false,
 				},
 			],
-			imports: [
-				'@ryanatkn/moss/theme.js',
-				'@ryanatkn/moss/themes.js',
-				'esm-env',
-				'$lib/context_helpers.js',
-				'$lib/storage.js',
-			],
+			imports: ['@ryanatkn/belt/dom.js', '$lib/contextmenu_state.svelte.js'],
 		},
 		'./contextmenu_state.svelte.ts': {
 			path: 'contextmenu_state.svelte.ts',
@@ -1054,1526 +923,6 @@ export const src_json: Enhanced_Src_Json = {
 			],
 			imported_by: ['./contextmenu_helpers.ts', './declaration_contextmenu.ts'],
 		},
-		'./contextmenu_helpers.ts': {
-			path: 'contextmenu_helpers.ts',
-			declarations: [
-				{
-					name: 'CONTEXTMENU_DEFAULT_OPEN_OFFSET_X',
-					kind: 'variable',
-					source_location: {
-						line: 6,
-						column: 13,
-						end_line: 6,
-						end_column: 51,
-					},
-					type_signature: '-2',
-					exported: false,
-				},
-				{
-					name: 'CONTEXTMENU_DEFAULT_OPEN_OFFSET_Y',
-					kind: 'variable',
-					source_location: {
-						line: 7,
-						column: 13,
-						end_line: 7,
-						end_column: 51,
-					},
-					type_signature: '-2',
-					exported: false,
-				},
-				{
-					name: 'CONTEXTMENU_DEFAULT_BYPASS_WINDOW',
-					kind: 'variable',
-					source_location: {
-						line: 8,
-						column: 13,
-						end_line: 8,
-						end_column: 52,
-					},
-					type_signature: '750',
-					exported: false,
-				},
-				{
-					name: 'CONTEXTMENU_DEFAULT_BYPASS_MOVE_TOLERANCE',
-					kind: 'variable',
-					source_location: {
-						line: 9,
-						column: 13,
-						end_line: 9,
-						end_column: 59,
-					},
-					type_signature: '11',
-					exported: false,
-				},
-				{
-					name: 'CONTEXTMENU_DEFAULT_LONGPRESS_DURATION',
-					kind: 'variable',
-					source_location: {
-						line: 10,
-						column: 13,
-						end_line: 10,
-						end_column: 57,
-					},
-					type_signature: '633',
-					exported: false,
-				},
-				{
-					name: 'CONTEXTMENU_DEFAULT_LONGPRESS_MOVE_TOLERANCE',
-					kind: 'variable',
-					source_location: {
-						line: 11,
-						column: 13,
-						end_line: 11,
-						end_column: 62,
-					},
-					type_signature: '21',
-					exported: false,
-				},
-				{
-					name: 'contextmenu_is_valid_target',
-					kind: 'function',
-					doc_comment:
-						'Check if a target element is valid for contextmenu interactions.\nReturns true if valid and narrows the type to HTMLElement | SVGElement.',
-					summary:
-						'Check if a target element is valid for contextmenu interactions.\nReturns true if valid and narrows the type to HTMLElement | SVGElement.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 17,
-						column: 13,
-						end_line: 24,
-						end_column: 25,
-					},
-					type_signature:
-						'(target: EventTarget | null, shiftKey: boolean): target is HTMLElement | SVGElement',
-					return_type: 'boolean',
-					parameters: [
-						{
-							name: 'target',
-							type: 'EventTarget | null',
-							optional: false,
-						},
-						{
-							name: 'shiftKey',
-							type: 'boolean',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'contextmenu_create_keyboard_handlers',
-					kind: 'function',
-					doc_comment:
-						'Creates the keyboard handler map for contextmenu navigation.\nBinds handlers to the provided contextmenu instance.',
-					summary:
-						'Creates the keyboard handler map for contextmenu navigation.\nBinds handlers to the provided contextmenu instance.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 32,
-						column: 13,
-						end_line: 45,
-						end_column: 3,
-					},
-					type_signature: '(contextmenu: Contextmenu_State): Map<string, () => void>',
-					return_type: 'Map<string, () => void>',
-					parameters: [
-						{
-							name: 'contextmenu',
-							type: 'Contextmenu_State',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'contextmenu_create_keydown_handler',
-					kind: 'function',
-					doc_comment:
-						'Creates a keydown event handler that uses the provided keyboard handlers map.',
-					summary: 'Creates a keydown event handler that uses the provided keyboard handlers map.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 50,
-						column: 13,
-						end_line: 59,
-						end_column: 1,
-					},
-					type_signature:
-						'(keyboard_handlers: Map<string, () => void>): (e: KeyboardEvent) => void',
-					return_type: '(e: KeyboardEvent) => void',
-					parameters: [
-						{
-							name: 'keyboard_handlers',
-							type: 'Map<string, () => void>',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'contextmenu_calculate_constrained_x',
-					kind: 'function',
-					doc_comment:
-						'Calculates the constrained X position for the contextmenu,\nensuring it stays within the layout width.',
-					summary:
-						'Calculates the constrained X position for the contextmenu,\nensuring it stays within the layout width.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 65,
-						column: 13,
-						end_line: 69,
-						end_column: 71,
-					},
-					type_signature: '(menu_x: number, menu_width: number, layout_width: number): number',
-					return_type: 'number',
-					parameters: [
-						{
-							name: 'menu_x',
-							type: 'number',
-							optional: false,
-						},
-						{
-							name: 'menu_width',
-							type: 'number',
-							optional: false,
-						},
-						{
-							name: 'layout_width',
-							type: 'number',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'contextmenu_calculate_constrained_y',
-					kind: 'function',
-					doc_comment:
-						'Calculates the constrained Y position for the contextmenu,\nensuring it stays within the layout height.',
-					summary:
-						'Calculates the constrained Y position for the contextmenu,\nensuring it stays within the layout height.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 75,
-						column: 13,
-						end_line: 79,
-						end_column: 73,
-					},
-					type_signature: '(menu_y: number, menu_height: number, layout_height: number): number',
-					return_type: 'number',
-					parameters: [
-						{
-							name: 'menu_y',
-							type: 'number',
-							optional: false,
-						},
-						{
-							name: 'menu_height',
-							type: 'number',
-							optional: false,
-						},
-						{
-							name: 'layout_height',
-							type: 'number',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-			],
-			imports: ['@ryanatkn/belt/dom.js', '$lib/contextmenu_state.svelte.js'],
-		},
-		'./test_helpers.ts': {
-			path: 'test_helpers.ts',
-			declarations: [
-				{
-					name: 'mount_component',
-					kind: 'function',
-					doc_comment:
-						'Mount a Svelte component for testing.\nCreates a container div, appends it to document.body, and mounts the component.',
-					summary:
-						'Mount a Svelte component for testing.\nCreates a container div, appends it to document.body, and mounts the component.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 12,
-						column: 13,
-						end_line: 25,
-						end_column: 1,
-					},
-					type_signature:
-						'<Props extends Record<string, any>>(Component: Component<Props, {}, string>, props: Props): { instance: any; container: HTMLElement; }',
-					return_type: '{ instance: any; container: HTMLElement; }',
-					parameters: [
-						{
-							name: 'Component',
-							type: 'Component<Props, {}, string>',
-							optional: false,
-						},
-						{
-							name: 'props',
-							type: 'Props',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'unmount_component',
-					kind: 'function',
-					doc_comment: 'Unmount a component and remove its container from the DOM.',
-					summary: 'Unmount a component and remove its container from the DOM.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 30,
-						column: 13,
-						end_line: 33,
-						end_column: 1,
-					},
-					type_signature: '(instance: any, container: HTMLElement): Promise<void>',
-					return_type: 'Promise<void>',
-					parameters: [
-						{
-							name: 'instance',
-							type: 'any',
-							optional: false,
-						},
-						{
-							name: 'container',
-							type: 'HTMLElement',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'create_contextmenu_event',
-					kind: 'function',
-					doc_comment: 'Create a contextmenu (rightclick) mouse event.',
-					summary: 'Create a contextmenu (rightclick) mouse event.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 38,
-						column: 13,
-						end_line: 50,
-						end_column: 1,
-					},
-					type_signature: '(x: number, y: number, options?: MouseEventInit): MouseEvent',
-					return_type: 'MouseEvent',
-					parameters: [
-						{
-							name: 'x',
-							type: 'number',
-							optional: false,
-						},
-						{
-							name: 'y',
-							type: 'number',
-							optional: false,
-						},
-						{
-							name: 'options',
-							type: 'MouseEventInit',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'create_keyboard_event',
-					kind: 'function',
-					doc_comment: 'Create a keyboard event.',
-					summary: 'Create a keyboard event.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 55,
-						column: 13,
-						end_line: 65,
-						end_column: 1,
-					},
-					type_signature: '(key: string, options?: KeyboardEventInit): KeyboardEvent',
-					return_type: 'KeyboardEvent',
-					parameters: [
-						{
-							name: 'key',
-							type: 'string',
-							optional: false,
-						},
-						{
-							name: 'options',
-							type: 'KeyboardEventInit',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'create_mouse_event',
-					kind: 'function',
-					doc_comment: 'Create a generic mouse event.',
-					summary: 'Create a generic mouse event.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 70,
-						column: 13,
-						end_line: 76,
-						end_column: 1,
-					},
-					type_signature: '(type: string, options?: MouseEventInit): MouseEvent',
-					return_type: 'MouseEvent',
-					parameters: [
-						{
-							name: 'type',
-							type: 'string',
-							optional: false,
-						},
-						{
-							name: 'options',
-							type: 'MouseEventInit',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'set_event_target',
-					kind: 'function',
-					doc_comment:
-						'Set the target property on an event (for testing).\nThe target property is readonly, so we need to use Object.defineProperty.',
-					summary:
-						'Set the target property on an event (for testing).\nThe target property is readonly, so we need to use Object.defineProperty.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 82,
-						column: 13,
-						end_line: 88,
-						end_column: 1,
-					},
-					type_signature: '(event: Event, target: EventTarget): void',
-					return_type: 'void',
-					parameters: [
-						{
-							name: 'event',
-							type: 'Event',
-							optional: false,
-						},
-						{
-							name: 'target',
-							type: 'EventTarget',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'create_touch_event',
-					kind: 'function',
-					doc_comment: 'Create a touch event with one or more touches.',
-					summary: 'Create a touch event with one or more touches.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 93,
-						column: 13,
-						end_line: 122,
-						end_column: 1,
-					},
-					type_signature:
-						'(type: string, touches: { clientX: number; clientY: number; target?: EventTarget | undefined; }[], options?: TouchEventInit): TouchEvent',
-					return_type: 'TouchEvent',
-					parameters: [
-						{
-							name: 'type',
-							type: 'string',
-							optional: false,
-						},
-						{
-							name: 'touches',
-							type: '{ clientX: number; clientY: number; target?: EventTarget | undefined; }[]',
-							optional: false,
-						},
-						{
-							name: 'options',
-							type: 'TouchEventInit',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-			],
-			imports: ['svelte'],
-			module_comment:
-				'Shared test utilities for vitest tests.\nProvides helpers for component mounting and DOM event creation.',
-		},
-		'./pkg.ts': {
-			path: 'pkg.ts',
-			declarations: [
-				{
-					name: 'pkg_context',
-					kind: 'variable',
-					source_location: {
-						line: 5,
-						column: 13,
-						end_line: 5,
-						end_column: 48,
-					},
-					type_signature:
-						'{ get: (error_message?: string | undefined) => Pkg; maybe_get: () => Pkg | undefined; set: (value: Pkg) => Pkg; }',
-					exported: false,
-				},
-			],
-			imports: ['@ryanatkn/belt/pkg.js', '$lib/context_helpers.js'],
-		},
-		'./tooltip_state.svelte.ts': {
-			path: 'tooltip_state.svelte.ts',
-			declarations: [
-				{
-					name: 'Tooltip_State',
-					kind: 'class',
-					doc_comment:
-						'Global tooltip state manager\n\nManages a single tooltip instance that can be shown/hidden\nwith sticky behavior (can move mouse into tooltip)',
-					summary: 'Global tooltip state manager',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 11,
-						column: 0,
-						end_line: 67,
-						end_column: 1,
-					},
-					members: [
-						{
-							name: 'opened',
-							kind: 'variable',
-						},
-						{
-							name: 'x',
-							kind: 'variable',
-						},
-						{
-							name: 'y',
-							kind: 'variable',
-						},
-						{
-							name: 'content',
-							kind: 'variable',
-						},
-						{
-							name: '#hide_timer',
-							kind: 'variable',
-						},
-						{
-							name: 'show',
-							kind: 'function',
-						},
-						{
-							name: 'hide',
-							kind: 'function',
-						},
-						{
-							name: 'cancel_hide',
-							kind: 'function',
-						},
-					],
-					exported: true,
-				},
-				{
-					name: 'tooltip_context',
-					kind: 'variable',
-					doc_comment: 'Tooltip context for accessing global tooltip state',
-					summary: 'Tooltip context for accessing global tooltip state',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 72,
-						column: 13,
-						end_line: 72,
-						end_column: 62,
-					},
-					type_signature:
-						'{ get: (error_message?: string | undefined) => Tooltip_State; maybe_get: () => Tooltip_State | undefined; set: (value: Tooltip_State) => Tooltip_State; }',
-					exported: false,
-				},
-			],
-			imports: ['svelte', '$lib/context_helpers.js'],
-		},
-		'./logos.ts': {
-			path: 'logos.ts',
-			declarations: [
-				{
-					name: 'zzz_logo',
-					kind: 'variable',
-					source_location: {
-						line: 22,
-						column: 13,
-						end_line: 36,
-						end_column: 20,
-					},
-					type_signature: 'Svg_Data',
-					exported: false,
-				},
-				{
-					name: 'gro_logo',
-					kind: 'variable',
-					source_location: {
-						line: 38,
-						column: 13,
-						end_line: 70,
-						end_column: 20,
-					},
-					type_signature: 'Svg_Data',
-					exported: false,
-				},
-				{
-					name: 'fuz_logo',
-					kind: 'variable',
-					source_location: {
-						line: 72,
-						column: 13,
-						end_line: 80,
-						end_column: 20,
-					},
-					type_signature: 'Svg_Data',
-					exported: false,
-				},
-				{
-					name: 'moss_logo',
-					kind: 'variable',
-					source_location: {
-						line: 82,
-						column: 13,
-						end_line: 87,
-						end_column: 20,
-					},
-					type_signature: 'Svg_Data',
-					exported: false,
-				},
-				{
-					name: 'belt_logo',
-					kind: 'variable',
-					source_location: {
-						line: 89,
-						column: 13,
-						end_line: 113,
-						end_column: 20,
-					},
-					type_signature: 'Svg_Data',
-					exported: false,
-				},
-				{
-					name: 'fuz_code_logo',
-					kind: 'variable',
-					source_location: {
-						line: 115,
-						column: 13,
-						end_line: 119,
-						end_column: 20,
-					},
-					type_signature: 'Svg_Data',
-					exported: false,
-				},
-				{
-					name: 'fuz_blog_logo',
-					kind: 'variable',
-					source_location: {
-						line: 121,
-						column: 13,
-						end_line: 125,
-						end_column: 20,
-					},
-					type_signature: 'Svg_Data',
-					exported: false,
-				},
-				{
-					name: 'fuz_mastodon_logo',
-					kind: 'variable',
-					source_location: {
-						line: 127,
-						column: 13,
-						end_line: 131,
-						end_column: 20,
-					},
-					type_signature: 'Svg_Data',
-					exported: false,
-				},
-				{
-					name: 'fuz_gitops_logo',
-					kind: 'variable',
-					source_location: {
-						line: 133,
-						column: 13,
-						end_line: 137,
-						end_column: 20,
-					},
-					type_signature: 'Svg_Data',
-					exported: false,
-				},
-				{
-					name: 'fuz_template_logo',
-					kind: 'variable',
-					source_location: {
-						line: 139,
-						column: 13,
-						end_line: 147,
-						end_column: 20,
-					},
-					type_signature: 'Svg_Data',
-					exported: false,
-				},
-				{
-					name: 'webdevladder_logo',
-					kind: 'variable',
-					source_location: {
-						line: 149,
-						column: 13,
-						end_line: 163,
-						end_column: 20,
-					},
-					type_signature: 'Svg_Data',
-					exported: false,
-				},
-				{
-					name: 'earbetter_logo',
-					kind: 'variable',
-					source_location: {
-						line: 165,
-						column: 13,
-						end_line: 173,
-						end_column: 20,
-					},
-					type_signature: 'Svg_Data',
-					exported: false,
-				},
-				{
-					name: 'spiderspace_logo',
-					kind: 'variable',
-					source_location: {
-						line: 175,
-						column: 13,
-						end_line: 235,
-						end_column: 20,
-					},
-					type_signature: 'Svg_Data',
-					exported: false,
-				},
-				{
-					name: 'github_logo',
-					kind: 'variable',
-					source_location: {
-						line: 237,
-						column: 13,
-						end_line: 248,
-						end_column: 20,
-					},
-					type_signature: 'Svg_Data',
-					exported: false,
-				},
-				{
-					name: 'mdn_logo',
-					kind: 'variable',
-					source_location: {
-						line: 250,
-						column: 13,
-						end_line: 258,
-						end_column: 20,
-					},
-					type_signature: 'Svg_Data',
-					exported: false,
-				},
-				{
-					name: 'chatgpt_logo',
-					kind: 'variable',
-					source_location: {
-						line: 260,
-						column: 13,
-						end_line: 267,
-						end_column: 20,
-					},
-					type_signature: 'Svg_Data',
-					exported: false,
-				},
-				{
-					name: 'claude_logo',
-					kind: 'variable',
-					source_location: {
-						line: 269,
-						column: 13,
-						end_line: 277,
-						end_column: 20,
-					},
-					type_signature: 'Svg_Data',
-					exported: false,
-				},
-				{
-					name: 'gemini_logo',
-					kind: 'variable',
-					source_location: {
-						line: 279,
-						column: 13,
-						end_line: 302,
-						end_column: 20,
-					},
-					type_signature: 'Svg_Data',
-					exported: false,
-				},
-			],
-			imports: ['$lib/Svg.svelte'],
-		},
-		'./constants.ts': {
-			path: 'constants.ts',
-			declarations: [
-				{
-					name: 'MAIN_HEADER_MARGIN_TOP',
-					kind: 'variable',
-					source_location: {
-						line: 3,
-						column: 13,
-						end_line: 3,
-						end_column: 68,
-					},
-					type_signature: '"calc(60px + var(--space_lg))"',
-					exported: false,
-				},
-			],
-			imports: [],
-			module_comment:
-				'// TODO the 60px is a hack, need `--docs_primary_nav_height` exported or :root values from Fuz -- the --space_lg also needs to be kept in sync',
-		},
-		'./ts_helpers.ts': {
-			path: 'ts_helpers.ts',
-			declarations: [
-				{
-					name: 'infer_declaration_kind',
-					kind: 'function',
-					doc_comment: 'Infer declaration kind from symbol and node',
-					summary: 'Infer declaration kind from symbol and node',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 11,
-						column: 13,
-						end_line: 36,
-						end_column: 1,
-					},
-					type_signature:
-						'(symbol: Symbol, node: Node): "function" | "type" | "variable" | "class" | null',
-					return_type: '"function" | "type" | "variable" | "class" | null',
-					parameters: [
-						{
-							name: 'symbol',
-							type: 'Symbol',
-							optional: false,
-						},
-						{
-							name: 'node',
-							type: 'Node',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'extract_jsdoc',
-					kind: 'function',
-					doc_comment: 'Extract JSDoc comment from node',
-					summary: 'Extract JSDoc comment from node',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 41,
-						column: 13,
-						end_line: 89,
-						end_column: 1,
-					},
-					type_signature:
-						'(node: Node, _source_file: SourceFile): { full_text: string; summary: string; examples: string[]; deprecated?: string | undefined; see_also: string[]; } | undefined',
-					return_type:
-						'{ full_text: string; summary: string; examples: string[]; deprecated?: string | undefined; see_also: string[]; } | undefined',
-					parameters: [
-						{
-							name: 'node',
-							type: 'Node',
-							optional: false,
-						},
-						{
-							name: '_source_file',
-							type: 'SourceFile',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'extract_function_info',
-					kind: 'function',
-					doc_comment: 'Extract function/method information',
-					summary: 'Extract function/method information',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 94,
-						column: 13,
-						end_line: 133,
-						end_column: 1,
-					},
-					type_signature:
-						'(node: Node, symbol: Symbol, checker: TypeChecker, enhanced: Enhanced_Declaration, _jsdoc: { full_text: string; summary: string; examples: string[]; deprecated?: string | undefined; see_also: string[]; } | undefined): void',
-					return_type: 'void',
-					parameters: [
-						{
-							name: 'node',
-							type: 'Node',
-							optional: false,
-						},
-						{
-							name: 'symbol',
-							type: 'Symbol',
-							optional: false,
-						},
-						{
-							name: 'checker',
-							type: 'TypeChecker',
-							optional: false,
-						},
-						{
-							name: 'enhanced',
-							type: 'Enhanced_Declaration',
-							optional: false,
-						},
-						{
-							name: '_jsdoc',
-							type: '{ full_text: string; summary: string; examples: string[]; deprecated?: string | undefined; see_also: string[]; } | undefined',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'extract_type_info',
-					kind: 'function',
-					doc_comment: 'Extract type/interface information',
-					summary: 'Extract type/interface information',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 138,
-						column: 13,
-						end_line: 162,
-						end_column: 1,
-					},
-					type_signature:
-						'(node: Node, _symbol: Symbol, checker: TypeChecker, enhanced: Enhanced_Declaration): void',
-					return_type: 'void',
-					parameters: [
-						{
-							name: 'node',
-							type: 'Node',
-							optional: false,
-						},
-						{
-							name: '_symbol',
-							type: 'Symbol',
-							optional: false,
-						},
-						{
-							name: 'checker',
-							type: 'TypeChecker',
-							optional: false,
-						},
-						{
-							name: 'enhanced',
-							type: 'Enhanced_Declaration',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'extract_class_info',
-					kind: 'function',
-					doc_comment: 'Extract class information',
-					summary: 'Extract class information',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 167,
-						column: 13,
-						end_line: 202,
-						end_column: 1,
-					},
-					type_signature:
-						'(node: Node, _symbol: Symbol, _checker: TypeChecker, enhanced: Enhanced_Declaration): void',
-					return_type: 'void',
-					parameters: [
-						{
-							name: 'node',
-							type: 'Node',
-							optional: false,
-						},
-						{
-							name: '_symbol',
-							type: 'Symbol',
-							optional: false,
-						},
-						{
-							name: '_checker',
-							type: 'TypeChecker',
-							optional: false,
-						},
-						{
-							name: 'enhanced',
-							type: 'Enhanced_Declaration',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'extract_variable_info',
-					kind: 'function',
-					doc_comment: 'Extract variable information',
-					summary: 'Extract variable information',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 207,
-						column: 13,
-						end_line: 219,
-						end_column: 1,
-					},
-					type_signature:
-						'(node: Node, symbol: Symbol, checker: TypeChecker, enhanced: Enhanced_Declaration): void',
-					return_type: 'void',
-					parameters: [
-						{
-							name: 'node',
-							type: 'Node',
-							optional: false,
-						},
-						{
-							name: 'symbol',
-							type: 'Symbol',
-							optional: false,
-						},
-						{
-							name: 'checker',
-							type: 'TypeChecker',
-							optional: false,
-						},
-						{
-							name: 'enhanced',
-							type: 'Enhanced_Declaration',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'is_exported',
-					kind: 'function',
-					doc_comment: 'Check if node is exported',
-					summary: 'Check if node is exported',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 224,
-						column: 13,
-						end_line: 230,
-						end_column: 1,
-					},
-					type_signature: '(node: Node): boolean',
-					return_type: 'boolean',
-					parameters: [
-						{
-							name: 'node',
-							type: 'Node',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'extract_module_comment',
-					kind: 'function',
-					doc_comment: 'Extract module-level comment',
-					summary: 'Extract module-level comment',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 235,
-						column: 13,
-						end_line: 253,
-						end_column: 1,
-					},
-					type_signature: '(source_file: SourceFile): string | undefined',
-					return_type: 'string | undefined',
-					parameters: [
-						{
-							name: 'source_file',
-							type: 'SourceFile',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'extract_imports',
-					kind: 'function',
-					doc_comment: 'Extract import statements',
-					summary: 'Extract import statements',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 258,
-						column: 13,
-						end_line: 268,
-						end_column: 1,
-					},
-					type_signature: '(source_file: SourceFile): string[]',
-					return_type: 'string[]',
-					parameters: [
-						{
-							name: 'source_file',
-							type: 'SourceFile',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'create_ts_program',
-					kind: 'function',
-					doc_comment: 'Create TypeScript program for analysis',
-					summary: 'Create TypeScript program for analysis',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 273,
-						column: 13,
-						end_line: 284,
-						end_column: 1,
-					},
-					type_signature: '(log: any): Program | null',
-					return_type: 'Program | null',
-					parameters: [
-						{
-							name: 'log',
-							type: 'any',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-			],
-			imports: ['typescript', './enhanced_declarations.js'],
-			module_comment: 'TypeScript Compiler API helpers for extracting metadata from source code',
-		},
-		'./context_helpers.ts': {
-			path: 'context_helpers.ts',
-			declarations: [
-				{
-					name: 'create_context',
-					kind: 'function',
-					doc_comment:
-						"Wraps Svelte's `setContext` and `getContext` for better ergonmics.\nWhen no value is set in the context,\n`get` throws an error and `maybe_get` returns `undefined`.\nIf a `fallback` is provided, the `value` argument to `set` is optional\nand `maybe_get` is omitted from the type.",
-					summary:
-						"Wraps Svelte's `setContext` and `getContext` for better ergonmics.\nWhen no value is set in the context,\n`get` throws an error and `maybe_get` returns `undefined`.\nIf a `fallback` is provided, the `value` argument to `set` is optional\nand `maybe_get` is omitted from the type.",
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 18,
-						column: 0,
-						end_line: 21,
-						end_column: 2,
-					},
-					type_signature:
-						'<T>(fallback: () => T): { get: () => T; set: (value?: T | undefined) => T; }',
-					return_type: '{ get: () => T; set: (value?: T | undefined) => T; }',
-					parameters: [
-						{
-							name: 'fallback',
-							type: '() => T',
-							optional: false,
-						},
-					],
-					generic_params: ['T'],
-					exported: true,
-				},
-			],
-			imports: ['svelte'],
-			imported_by: [
-				'./themer.svelte.ts',
-				'./contextmenu_state.svelte.ts',
-				'./pkg.ts',
-				'./tooltip_state.svelte.ts',
-				'./tome.ts',
-				'./docs_helpers.svelte.ts',
-			],
-		},
-		'./declaration_contextmenu.ts': {
-			path: 'declaration_contextmenu.ts',
-			declarations: [
-				{
-					name: 'create_declaration_contextmenu',
-					kind: 'function',
-					doc_comment: 'Create contextmenu entries for a declaration',
-					summary: 'Create contextmenu entries for a declaration',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 7,
-						column: 13,
-						end_line: 80,
-						end_column: 1,
-					},
-					type_signature:
-						'(decl: Enhanced_Declaration, module_path: string, pkg_name: string, repo_url?: string | undefined, homepage_url?: string | null | undefined): Contextmenu_Params[]',
-					return_type: 'Contextmenu_Params[]',
-					parameters: [
-						{
-							name: 'decl',
-							type: 'Enhanced_Declaration',
-							optional: false,
-						},
-						{
-							name: 'module_path',
-							type: 'string',
-							optional: false,
-						},
-						{
-							name: 'pkg_name',
-							type: 'string',
-							optional: false,
-						},
-						{
-							name: 'repo_url',
-							type: 'string | undefined',
-							optional: true,
-						},
-						{
-							name: 'homepage_url',
-							type: 'string | null | undefined',
-							optional: true,
-						},
-					],
-					exported: false,
-				},
-			],
-			imports: ['$lib/enhanced_declarations.js', '$lib/contextmenu_state.svelte.js'],
-		},
-		'./tome.ts': {
-			path: 'tome.ts',
-			declarations: [
-				{
-					name: 'Tome',
-					kind: 'type',
-					source_location: {
-						line: 8,
-						column: 13,
-						end_line: 15,
-						end_column: 2,
-					},
-					type_signature:
-						'ZodObject<{ name: ZodString; category: ZodString; component: ZodAny; related: ZodArray<ZodString>; }, $strip>',
-					exported: false,
-				},
-				{
-					name: 'to_tome_pathname',
-					kind: 'function',
-					source_location: {
-						line: 18,
-						column: 13,
-						end_line: 19,
-						end_column: 55,
-					},
-					type_signature:
-						'(item: { name: string; category: string; component: any; related: string[]; }, docs_path?: string): string',
-					return_type: 'string',
-					parameters: [
-						{
-							name: 'item',
-							type: '{ name: string; category: string; component: any; related: string[]; }',
-							optional: false,
-						},
-						{
-							name: 'docs_path',
-							type: 'string',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'tomes_context',
-					kind: 'variable',
-					source_location: {
-						line: 21,
-						column: 13,
-						end_line: 21,
-						end_column: 64,
-					},
-					type_signature:
-						'{ get: (error_message?: string | undefined) => Map<string, { name: string; category: string; component: any; related: string[]; }>; maybe_get: () => Map<string, { name: string; category: string; component: any; related: string[]; }> | undefined; set: (value: Map<...>) => Map<...>; }',
-					exported: false,
-				},
-				{
-					name: 'get_tome_by_name',
-					kind: 'function',
-					source_location: {
-						line: 23,
-						column: 13,
-						end_line: 28,
-						end_column: 1,
-					},
-					type_signature:
-						'(name: string): { name: string; category: string; component: any; related: string[]; }',
-					return_type: '{ name: string; category: string; component: any; related: string[]; }',
-					parameters: [
-						{
-							name: 'name',
-							type: 'string',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'tome_context',
-					kind: 'variable',
-					source_location: {
-						line: 30,
-						column: 13,
-						end_line: 30,
-						end_column: 50,
-					},
-					type_signature:
-						'{ get: (error_message?: string | undefined) => { name: string; category: string; component: any; related: string[]; }; maybe_get: () => { name: string; category: string; component: any; related: string[]; } | undefined; set: (value: { ...; }) => { ...; }; }',
-					exported: false,
-				},
-			],
-			imports: [
-				'$app/paths',
-				'@ryanatkn/belt/path.js',
-				'zod',
-				'$lib/context_helpers.js',
-				'$lib/docs_helpers.svelte.js',
-			],
-		},
-		'./docs_helpers.svelte.ts': {
-			path: 'docs_helpers.svelte.ts',
-			declarations: [
-				{
-					name: 'DEFAULT_LIBRARY_PATH',
-					kind: 'variable',
-					source_location: {
-						line: 7,
-						column: 13,
-						end_line: 7,
-						end_column: 43,
-					},
-					type_signature: '"/docs"',
-					exported: false,
-				},
-				{
-					name: 'get_next_docs_link_order',
-					kind: 'function',
-					source_location: {
-						line: 12,
-						column: 13,
-						end_line: 12,
-						end_column: 78,
-					},
-					type_signature: '(): number',
-					return_type: 'number',
-					parameters: [],
-					exported: false,
-				},
-				{
-					name: 'reset_docs_link_order',
-					kind: 'function',
-					source_location: {
-						line: 15,
-						column: 13,
-						end_line: 17,
-						end_column: 1,
-					},
-					type_signature: '(): void',
-					return_type: 'void',
-					parameters: [],
-					exported: false,
-				},
-				{
-					name: 'to_docs_path_info',
-					kind: 'function',
-					source_location: {
-						line: 19,
-						column: 13,
-						end_line: 28,
-						end_column: 1,
-					},
-					type_signature:
-						'(slug: string, pathname: string, root_path?: string): { path: string; path_is_selected: boolean; path_segment: string | undefined; }',
-					return_type:
-						'{ path: string; path_is_selected: boolean; path_segment: string | undefined; }',
-					parameters: [
-						{
-							name: 'slug',
-							type: 'string',
-							optional: false,
-						},
-						{
-							name: 'pathname',
-							type: 'string',
-							optional: false,
-						},
-						{
-							name: 'root_path',
-							type: 'string',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'docs_links_context',
-					kind: 'variable',
-					source_location: {
-						line: 30,
-						column: 13,
-						end_line: 30,
-						end_column: 72,
-					},
-					type_signature:
-						'{ get: () => Docs_Links; set: (value?: Docs_Links | undefined) => Docs_Links; }',
-					exported: false,
-				},
-				{
-					name: 'Docs_Link_Tag',
-					kind: 'type',
-					source_location: {
-						line: 32,
-						column: 0,
-						end_line: 32,
-						end_column: 40,
-					},
-					type_signature: 'Docs_Link_Tag',
-					exported: true,
-				},
-				{
-					name: 'Docs_Link',
-					kind: 'type',
-					source_location: {
-						line: 34,
-						column: 0,
-						end_line: 40,
-						end_column: 1,
-					},
-					type_signature: 'Docs_Link',
-					exported: true,
-				},
-				{
-					name: 'Docs_Links',
-					kind: 'class',
-					source_location: {
-						line: 42,
-						column: 0,
-						end_line: 88,
-						end_column: 1,
-					},
-					members: [
-						{
-							name: 'root_path',
-							kind: 'variable',
-						},
-						{
-							name: 'links',
-							kind: 'variable',
-						},
-						{
-							name: '#slug_to_order',
-							kind: 'variable',
-						},
-						{
-							name: '#next_id',
-							kind: 'variable',
-						},
-						{
-							name: 'docs_links',
-							kind: 'variable',
-						},
-						{
-							name: 'slugs_onscreen',
-							kind: 'variable',
-						},
-						{
-							name: 'add',
-							kind: 'function',
-						},
-						{
-							name: 'remove',
-							kind: 'function',
-						},
-					],
-					exported: true,
-				},
-			],
-			imports: [
-				'$app/paths',
-				'svelte/reactivity',
-				'@ryanatkn/belt/string.js',
-				'$lib/context_helpers.js',
-			],
-			imported_by: ['./tome.ts'],
-		},
-		'./rune_helpers.svelte.ts': {
-			path: 'rune_helpers.svelte.ts',
-			declarations: [
-				{
-					name: 'effect_with_count',
-					kind: 'function',
-					doc_comment:
-						'Runs `fn` in an `$effect`, passing `true` as the `skip` argument for the first `count` runs.\nCalls `fn` even when skipping so callers can read any dependent signals.',
-					summary:
-						'Runs `fn` in an `$effect`, passing `true` as the `skip` argument for the first `count` runs.\nCalls `fn` even when skipping so callers can read any dependent signals.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 5,
-						column: 13,
-						end_line: 10,
-						end_column: 1,
-					},
-					type_signature: '(fn: (count: number) => void, initial?: number): void',
-					return_type: 'void',
-					parameters: [
-						{
-							name: 'fn',
-							type: '(count: number) => void',
-							optional: false,
-						},
-						{
-							name: 'initial',
-							type: 'number',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-			],
-			imports: [],
-			module_comment:
-				'Runs `fn` in an `$effect`, passing `true` as the `skip` argument for the first `count` runs.\nCalls `fn` even when skipping so callers can read any dependent signals.',
-		},
 		'./csp.ts': {
 			path: 'csp.ts',
 			declarations: [
@@ -2815,7 +1164,7 @@ export const src_json: Enhanced_Src_Json = {
 						end_column: 1,
 					},
 					type_signature:
-						'Record<keyof Csp_Directives, boolean | string[] | (Csp_Source | Csp_Action_Source)[] | Csp_Sources | (`${string}.${string}` | ... 18 more ... | "none")[] | "script"[] | ("allow-downloads-without-user-activation" | ... 11 more ... | "allow-top-navigation-by-user-activation")[] | null>',
+						'Record<keyof Csp_Directives, boolean | (Csp_Source | Csp_Action_Source)[] | Csp_Sources | (`${string}.${string}` | "localhost" | ... 17 more ... | "none")[] | string[] | "script"[] | ("allow-downloads-without-user-activation" | ... 11 more ... | "allow-top-navigation-by-user-activation")[] | null>',
 					exported: false,
 				},
 				{
@@ -3018,6 +1367,620 @@ export const src_json: Enhanced_Src_Json = {
 			imports: ['@ryanatkn/belt/types.js'],
 			imported_by: ['./csp_of_ryanatkn.ts'],
 		},
+		'./csp_of_ryanatkn.ts': {
+			path: 'csp_of_ryanatkn.ts',
+			declarations: [
+				{
+					name: 'csp_trusted_sources_of_ryanatkn',
+					kind: 'variable',
+					doc_comment: 'List of trusted sources owned by ryanatkn (me, ryanatkn.com).',
+					summary: 'List of trusted sources owned by ryanatkn (me, ryanatkn.com).',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 6,
+						column: 13,
+						end_line: 16,
+						end_column: 1,
+					},
+					type_signature: 'Csp_Source_Spec[]',
+					exported: false,
+				},
+			],
+			imports: ['$lib/csp.js'],
+		},
+		'./declaration_contextmenu.ts': {
+			path: 'declaration_contextmenu.ts',
+			declarations: [
+				{
+					name: 'create_declaration_contextmenu',
+					kind: 'function',
+					doc_comment: 'Create contextmenu entries for a declaration',
+					summary: 'Create contextmenu entries for a declaration',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 7,
+						column: 13,
+						end_line: 80,
+						end_column: 1,
+					},
+					type_signature:
+						'(decl: Enhanced_Declaration, module_path: string, pkg_name: string, repo_url?: string | undefined, homepage_url?: string | null | undefined): Contextmenu_Params[]',
+					return_type: 'Contextmenu_Params[]',
+					parameters: [
+						{
+							name: 'decl',
+							type: 'Enhanced_Declaration',
+							optional: false,
+						},
+						{
+							name: 'module_path',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'pkg_name',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'repo_url',
+							type: 'string | undefined',
+							optional: true,
+						},
+						{
+							name: 'homepage_url',
+							type: 'string | null | undefined',
+							optional: true,
+						},
+					],
+					exported: false,
+				},
+			],
+			imports: ['$lib/enhanced_declarations.js', '$lib/contextmenu_state.svelte.js'],
+		},
+		'./dialog.ts': {
+			path: 'dialog.ts',
+			declarations: [
+				{
+					name: 'to_dialog_params',
+					kind: 'function',
+					doc_comment:
+						"This helper function is needed to construct `Dialog_Params` with type safety.\nIt uses TypeScript's inferred generics for functions,\nwhich do not work for plain objects as of v5.0.4.\n* `ContextmenuParams` uses a similar strategy.",
+					summary:
+						"This helper function is needed to construct `Dialog_Params` with type safety.\nIt uses TypeScript's inferred generics for functions,\nwhich do not work for plain objects as of v5.0.4.\n* `ContextmenuParams` uses a similar strategy.",
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 11,
+						column: 13,
+						end_line: 19,
+						end_column: 2,
+					},
+					type_signature:
+						'<T extends Component<any>>(Component: T, props: ComponentProps<T>, dialog_props?: Partial<Record<string, any>> | undefined): Dialog_Params<T>',
+					return_type: 'Dialog_Params<T>',
+					parameters: [
+						{
+							name: 'Component',
+							type: 'T',
+							optional: false,
+						},
+						{
+							name: 'props',
+							type: 'ComponentProps<T>',
+							optional: false,
+						},
+						{
+							name: 'dialog_props',
+							type: 'Partial<Record<string, any>> | undefined',
+							optional: true,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'Dialog_Params',
+					kind: 'type',
+					doc_comment:
+						'This pattern is based on:\nhttps://github.com/ivanhofer/sveltekit-typescript-showcase/blob/main/src/01-props/09-svelte-component/Component.svelte\nThe main limitation is that the generic cannot be inferred automatically,\nso we use `to_dialog_params` to construct instances in most cases.\nDefinining `Dialog_Params` with no concrete `T` lacks typechecking for `props`.',
+					summary:
+						'This pattern is based on:\nhttps://github.com/ivanhofer/sveltekit-typescript-showcase/blob/main/src/01-props/09-svelte-component/Component.svelte\nThe main limitation is that the generic cannot be inferred automatically,\nso we use `to_dialog_params` to construct instances in most cases.\nDefinining `Dialog_Params` with no concrete `T` lacks typechecking for `props`.',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 28,
+						column: 0,
+						end_line: 32,
+						end_column: 1,
+					},
+					type_signature: 'Dialog_Params<T>',
+					generic_params: ['T extends Component<any> = Component<any>'],
+					exported: true,
+				},
+				{
+					name: 'Dialog_Layout',
+					kind: 'type',
+					source_location: {
+						line: 34,
+						column: 0,
+						end_line: 34,
+						end_column: 48,
+					},
+					type_signature: 'Dialog_Layout',
+					exported: true,
+				},
+				{
+					name: 'dialog_layouts',
+					kind: 'variable',
+					source_location: {
+						line: 35,
+						column: 13,
+						end_line: 35,
+						end_column: 72,
+					},
+					type_signature: 'Dialog_Layout[]',
+					exported: false,
+				},
+			],
+			imports: ['svelte', '$lib/Dialog.svelte'],
+		},
+		'./dimensions.svelte.ts': {
+			path: 'dimensions.svelte.ts',
+			declarations: [
+				{
+					name: 'Dimensions',
+					kind: 'class',
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 4,
+						end_column: 1,
+					},
+					members: [
+						{
+							name: 'width',
+							kind: 'variable',
+						},
+						{
+							name: 'height',
+							kind: 'variable',
+						},
+					],
+					exported: true,
+				},
+			],
+			imports: [],
+			imported_by: ['./contextmenu_state.svelte.ts'],
+		},
+		'./docs_helpers.svelte.ts': {
+			path: 'docs_helpers.svelte.ts',
+			declarations: [
+				{
+					name: 'DEFAULT_LIBRARY_PATH',
+					kind: 'variable',
+					source_location: {
+						line: 7,
+						column: 13,
+						end_line: 7,
+						end_column: 43,
+					},
+					type_signature: '"/docs"',
+					exported: false,
+				},
+				{
+					name: 'get_next_docs_link_order',
+					kind: 'function',
+					source_location: {
+						line: 12,
+						column: 13,
+						end_line: 12,
+						end_column: 78,
+					},
+					type_signature: '(): number',
+					return_type: 'number',
+					parameters: [],
+					exported: false,
+				},
+				{
+					name: 'reset_docs_link_order',
+					kind: 'function',
+					source_location: {
+						line: 15,
+						column: 13,
+						end_line: 17,
+						end_column: 1,
+					},
+					type_signature: '(): void',
+					return_type: 'void',
+					parameters: [],
+					exported: false,
+				},
+				{
+					name: 'to_docs_path_info',
+					kind: 'function',
+					source_location: {
+						line: 19,
+						column: 13,
+						end_line: 28,
+						end_column: 1,
+					},
+					type_signature:
+						'(slug: string, pathname: string, root_path?: string): { path: string; path_is_selected: boolean; path_segment: string | undefined; }',
+					return_type:
+						'{ path: string; path_is_selected: boolean; path_segment: string | undefined; }',
+					parameters: [
+						{
+							name: 'slug',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'pathname',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'root_path',
+							type: 'string',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'docs_links_context',
+					kind: 'variable',
+					source_location: {
+						line: 30,
+						column: 13,
+						end_line: 30,
+						end_column: 72,
+					},
+					type_signature:
+						'{ get: () => Docs_Links; set: (value?: Docs_Links | undefined) => Docs_Links; }',
+					exported: false,
+				},
+				{
+					name: 'Docs_Link_Tag',
+					kind: 'type',
+					source_location: {
+						line: 32,
+						column: 0,
+						end_line: 32,
+						end_column: 40,
+					},
+					type_signature: 'Docs_Link_Tag',
+					exported: true,
+				},
+				{
+					name: 'Docs_Link',
+					kind: 'type',
+					source_location: {
+						line: 34,
+						column: 0,
+						end_line: 40,
+						end_column: 1,
+					},
+					type_signature: 'Docs_Link',
+					exported: true,
+				},
+				{
+					name: 'Docs_Links',
+					kind: 'class',
+					source_location: {
+						line: 42,
+						column: 0,
+						end_line: 88,
+						end_column: 1,
+					},
+					members: [
+						{
+							name: 'root_path',
+							kind: 'variable',
+						},
+						{
+							name: 'links',
+							kind: 'variable',
+						},
+						{
+							name: '#slug_to_order',
+							kind: 'variable',
+						},
+						{
+							name: '#next_id',
+							kind: 'variable',
+						},
+						{
+							name: 'docs_links',
+							kind: 'variable',
+						},
+						{
+							name: 'slugs_onscreen',
+							kind: 'variable',
+						},
+						{
+							name: 'add',
+							kind: 'function',
+						},
+						{
+							name: 'remove',
+							kind: 'function',
+						},
+					],
+					exported: true,
+				},
+			],
+			imports: [
+				'$app/paths',
+				'svelte/reactivity',
+				'@ryanatkn/belt/string.js',
+				'$lib/context_helpers.js',
+			],
+			imported_by: ['./tome.ts'],
+		},
+		'./enhanced_declarations.ts': {
+			path: 'enhanced_declarations.ts',
+			declarations: [
+				{
+					name: 'Parameter_Info',
+					kind: 'type',
+					doc_comment: 'Enhanced parameter information for functions and methods',
+					summary: 'Enhanced parameter information for functions and methods',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 6,
+						column: 0,
+						end_line: 12,
+						end_column: 1,
+					},
+					type_signature: 'Parameter_Info',
+					exported: true,
+				},
+				{
+					name: 'Source_Location',
+					kind: 'type',
+					doc_comment: 'Source location information within a file',
+					summary: 'Source location information within a file',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 17,
+						column: 0,
+						end_line: 22,
+						end_column: 1,
+					},
+					type_signature: 'Source_Location',
+					exported: true,
+				},
+				{
+					name: 'Enhanced_Declaration',
+					kind: 'type',
+					doc_comment:
+						'Extended declaration type with rich TypeScript metadata\n\nThis extends the base `Src_Module_Declaration` with detailed information\nextracted from TypeScript source code including JSDoc comments,\ntype signatures, and structural information.',
+					summary: 'Extended declaration type with rich TypeScript metadata',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 31,
+						column: 0,
+						end_line: 111,
+						end_column: 1,
+					},
+					type_signature: 'Enhanced_Declaration',
+					extends: ['Src_Module_Declaration'],
+					exported: true,
+				},
+				{
+					name: 'Enhanced_Module',
+					kind: 'type',
+					doc_comment: 'Enhanced module information with rich metadata',
+					summary: 'Enhanced module information with rich metadata',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 116,
+						column: 0,
+						end_line: 132,
+						end_column: 1,
+					},
+					type_signature: 'Enhanced_Module',
+					exported: true,
+				},
+				{
+					name: 'Enhanced_Src_Json',
+					kind: 'type',
+					doc_comment: 'Enhanced src.json structure',
+					summary: 'Enhanced src.json structure',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 137,
+						column: 0,
+						end_line: 141,
+						end_column: 1,
+					},
+					type_signature: 'Enhanced_Src_Json',
+					exported: true,
+				},
+				{
+					name: 'is_enhanced_declaration',
+					kind: 'function',
+					doc_comment: 'Helper to check if a declaration is enhanced',
+					summary: 'Helper to check if a declaration is enhanced',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 146,
+						column: 13,
+						end_line: 150,
+						end_column: 1,
+					},
+					type_signature:
+						'(decl: Enhanced_Declaration | { [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "component" | "css" | null; }): decl is Enhanced_Declaration',
+					return_type: 'boolean',
+					parameters: [
+						{
+							name: 'decl',
+							type: 'Enhanced_Declaration | { [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "component" | "css" | null; }',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'get_declaration_display_name',
+					kind: 'function',
+					doc_comment: "Helper to get a declaration's display name",
+					summary: "Helper to get a declaration's display name",
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 155,
+						column: 13,
+						end_line: 160,
+						end_column: 1,
+					},
+					type_signature: '(decl: Enhanced_Declaration): string',
+					return_type: 'string',
+					parameters: [
+						{
+							name: 'decl',
+							type: 'Enhanced_Declaration',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'get_type_summary',
+					kind: 'function',
+					doc_comment: 'Helper to get a short type summary for tooltips',
+					summary: 'Helper to get a short type summary for tooltips',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 165,
+						column: 13,
+						end_line: 175,
+						end_column: 1,
+					},
+					type_signature: '(decl: Enhanced_Declaration): string | undefined',
+					return_type: 'string | undefined',
+					parameters: [
+						{
+							name: 'decl',
+							type: 'Enhanced_Declaration',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'get_doc_summary',
+					kind: 'function',
+					doc_comment: 'Helper to extract the first paragraph from doc comment',
+					summary: 'Helper to extract the first paragraph from doc comment',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 180,
+						column: 13,
+						end_line: 184,
+						end_column: 1,
+					},
+					type_signature: '(doc_comment: string | undefined): string | undefined',
+					return_type: 'string | undefined',
+					parameters: [
+						{
+							name: 'doc_comment',
+							type: 'string | undefined',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'generate_import_statement',
+					kind: 'function',
+					doc_comment: 'Generate import statement for a declaration',
+					summary: 'Generate import statement for a declaration',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 189,
+						column: 13,
+						end_line: 213,
+						end_column: 1,
+					},
+					type_signature:
+						'(decl: Enhanced_Declaration, module_path: string, pkg_name: string): string',
+					return_type: 'string',
+					parameters: [
+						{
+							name: 'decl',
+							type: 'Enhanced_Declaration',
+							optional: false,
+						},
+						{
+							name: 'module_path',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'pkg_name',
+							type: 'string',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+			],
+			imports: ['@ryanatkn/belt/src_json.js'],
+			imported_by: ['./declaration_contextmenu.ts', './ts_helpers.ts'],
+		},
+		'./helpers.ts': {
+			path: 'helpers.ts',
+			declarations: [
+				{
+					name: 'render_value_to_string',
+					kind: 'function',
+					doc_comment: 'Renders any value to a string representation',
+					summary: 'Renders any value to a string representation',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 7,
+						column: 13,
+						end_line: 16,
+						end_column: 1,
+					},
+					type_signature: '(value: unknown): string',
+					return_type: 'string',
+					parameters: [
+						{
+							name: 'value',
+							type: 'unknown',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+			],
+			imports: [],
+			module_comment:
+				'Renders any value to a string representation\n\n@param value Any JS value to stringify\n@returns A string representation of the value',
+			imported_by: [
+				'./contextmenu_state.svelte.ts',
+				'./docs_helpers.svelte.ts',
+				'./pkg.ts',
+				'./themer.svelte.ts',
+				'./tome.ts',
+				'./tooltip_state.svelte.ts',
+			],
+		},
 		'./intersect.ts': {
 			path: 'intersect.ts',
 			declarations: [
@@ -3118,164 +2081,276 @@ export const src_json: Enhanced_Src_Json = {
 			],
 			imports: ['svelte/action'],
 		},
-		'./dimensions.svelte.ts': {
-			path: 'dimensions.svelte.ts',
+		'./logos.ts': {
+			path: 'logos.ts',
 			declarations: [
 				{
-					name: 'Dimensions',
-					kind: 'class',
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 4,
-						end_column: 1,
-					},
-					members: [
-						{
-							name: 'width',
-							kind: 'variable',
-						},
-						{
-							name: 'height',
-							kind: 'variable',
-						},
-					],
-					exported: true,
-				},
-			],
-			imports: [],
-			imported_by: ['./contextmenu_state.svelte.ts'],
-		},
-		'./csp_of_ryanatkn.ts': {
-			path: 'csp_of_ryanatkn.ts',
-			declarations: [
-				{
-					name: 'csp_trusted_sources_of_ryanatkn',
+					name: 'zzz_logo',
 					kind: 'variable',
-					doc_comment: 'List of trusted sources owned by ryanatkn (me, ryanatkn.com).',
-					summary: 'List of trusted sources owned by ryanatkn (me, ryanatkn.com).',
-					examples: [],
-					see_also: [],
 					source_location: {
-						line: 6,
+						line: 22,
 						column: 13,
-						end_line: 16,
-						end_column: 1,
+						end_line: 36,
+						end_column: 20,
 					},
-					type_signature: 'Csp_Source_Spec[]',
+					type_signature: 'Svg_Data',
+					exported: false,
+				},
+				{
+					name: 'gro_logo',
+					kind: 'variable',
+					source_location: {
+						line: 38,
+						column: 13,
+						end_line: 70,
+						end_column: 20,
+					},
+					type_signature: 'Svg_Data',
+					exported: false,
+				},
+				{
+					name: 'fuz_logo',
+					kind: 'variable',
+					source_location: {
+						line: 72,
+						column: 13,
+						end_line: 80,
+						end_column: 20,
+					},
+					type_signature: 'Svg_Data',
+					exported: false,
+				},
+				{
+					name: 'moss_logo',
+					kind: 'variable',
+					source_location: {
+						line: 82,
+						column: 13,
+						end_line: 87,
+						end_column: 20,
+					},
+					type_signature: 'Svg_Data',
+					exported: false,
+				},
+				{
+					name: 'belt_logo',
+					kind: 'variable',
+					source_location: {
+						line: 89,
+						column: 13,
+						end_line: 113,
+						end_column: 20,
+					},
+					type_signature: 'Svg_Data',
+					exported: false,
+				},
+				{
+					name: 'fuz_code_logo',
+					kind: 'variable',
+					source_location: {
+						line: 115,
+						column: 13,
+						end_line: 119,
+						end_column: 20,
+					},
+					type_signature: 'Svg_Data',
+					exported: false,
+				},
+				{
+					name: 'fuz_blog_logo',
+					kind: 'variable',
+					source_location: {
+						line: 121,
+						column: 13,
+						end_line: 125,
+						end_column: 20,
+					},
+					type_signature: 'Svg_Data',
+					exported: false,
+				},
+				{
+					name: 'fuz_mastodon_logo',
+					kind: 'variable',
+					source_location: {
+						line: 127,
+						column: 13,
+						end_line: 131,
+						end_column: 20,
+					},
+					type_signature: 'Svg_Data',
+					exported: false,
+				},
+				{
+					name: 'fuz_gitops_logo',
+					kind: 'variable',
+					source_location: {
+						line: 133,
+						column: 13,
+						end_line: 137,
+						end_column: 20,
+					},
+					type_signature: 'Svg_Data',
+					exported: false,
+				},
+				{
+					name: 'fuz_template_logo',
+					kind: 'variable',
+					source_location: {
+						line: 139,
+						column: 13,
+						end_line: 147,
+						end_column: 20,
+					},
+					type_signature: 'Svg_Data',
+					exported: false,
+				},
+				{
+					name: 'webdevladder_logo',
+					kind: 'variable',
+					source_location: {
+						line: 149,
+						column: 13,
+						end_line: 163,
+						end_column: 20,
+					},
+					type_signature: 'Svg_Data',
+					exported: false,
+				},
+				{
+					name: 'earbetter_logo',
+					kind: 'variable',
+					source_location: {
+						line: 165,
+						column: 13,
+						end_line: 173,
+						end_column: 20,
+					},
+					type_signature: 'Svg_Data',
+					exported: false,
+				},
+				{
+					name: 'spiderspace_logo',
+					kind: 'variable',
+					source_location: {
+						line: 175,
+						column: 13,
+						end_line: 235,
+						end_column: 20,
+					},
+					type_signature: 'Svg_Data',
+					exported: false,
+				},
+				{
+					name: 'github_logo',
+					kind: 'variable',
+					source_location: {
+						line: 237,
+						column: 13,
+						end_line: 248,
+						end_column: 20,
+					},
+					type_signature: 'Svg_Data',
+					exported: false,
+				},
+				{
+					name: 'mdn_logo',
+					kind: 'variable',
+					source_location: {
+						line: 250,
+						column: 13,
+						end_line: 258,
+						end_column: 20,
+					},
+					type_signature: 'Svg_Data',
+					exported: false,
+				},
+				{
+					name: 'chatgpt_logo',
+					kind: 'variable',
+					source_location: {
+						line: 260,
+						column: 13,
+						end_line: 267,
+						end_column: 20,
+					},
+					type_signature: 'Svg_Data',
+					exported: false,
+				},
+				{
+					name: 'claude_logo',
+					kind: 'variable',
+					source_location: {
+						line: 269,
+						column: 13,
+						end_line: 277,
+						end_column: 20,
+					},
+					type_signature: 'Svg_Data',
+					exported: false,
+				},
+				{
+					name: 'gemini_logo',
+					kind: 'variable',
+					source_location: {
+						line: 279,
+						column: 13,
+						end_line: 302,
+						end_column: 20,
+					},
+					type_signature: 'Svg_Data',
 					exported: false,
 				},
 			],
-			imports: ['$lib/csp.js'],
+			imports: ['$lib/Svg.svelte'],
 		},
-		'./dialog.ts': {
-			path: 'dialog.ts',
+		'./pkg.ts': {
+			path: 'pkg.ts',
 			declarations: [
 				{
-					name: 'to_dialog_params',
-					kind: 'function',
-					doc_comment:
-						"This helper function is needed to construct `Dialog_Params` with type safety.\nIt uses TypeScript's inferred generics for functions,\nwhich do not work for plain objects as of v5.0.4.\n* `ContextmenuParams` uses a similar strategy.",
-					summary:
-						"This helper function is needed to construct `Dialog_Params` with type safety.\nIt uses TypeScript's inferred generics for functions,\nwhich do not work for plain objects as of v5.0.4.\n* `ContextmenuParams` uses a similar strategy.",
-					examples: [],
-					see_also: [],
+					name: 'pkg_context',
+					kind: 'variable',
 					source_location: {
-						line: 11,
+						line: 5,
 						column: 13,
-						end_line: 19,
-						end_column: 2,
-					},
-					type_signature:
-						'<T extends Component<any>>(Component: T, props: ComponentProps<T>, dialog_props?: Partial<Record<string, any>> | undefined): Dialog_Params<T>',
-					return_type: 'Dialog_Params<T>',
-					parameters: [
-						{
-							name: 'Component',
-							type: 'T',
-							optional: false,
-						},
-						{
-							name: 'props',
-							type: 'ComponentProps<T>',
-							optional: false,
-						},
-						{
-							name: 'dialog_props',
-							type: 'Partial<Record<string, any>> | undefined',
-							optional: true,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'Dialog_Params',
-					kind: 'type',
-					doc_comment:
-						'This pattern is based on:\nhttps://github.com/ivanhofer/sveltekit-typescript-showcase/blob/main/src/01-props/09-svelte-component/Component.svelte\nThe main limitation is that the generic cannot be inferred automatically,\nso we use `to_dialog_params` to construct instances in most cases.\nDefinining `Dialog_Params` with no concrete `T` lacks typechecking for `props`.',
-					summary:
-						'This pattern is based on:\nhttps://github.com/ivanhofer/sveltekit-typescript-showcase/blob/main/src/01-props/09-svelte-component/Component.svelte\nThe main limitation is that the generic cannot be inferred automatically,\nso we use `to_dialog_params` to construct instances in most cases.\nDefinining `Dialog_Params` with no concrete `T` lacks typechecking for `props`.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 28,
-						column: 0,
-						end_line: 32,
-						end_column: 1,
-					},
-					type_signature: 'Dialog_Params<T>',
-					generic_params: ['T extends Component<any> = Component<any>'],
-					exported: true,
-				},
-				{
-					name: 'Dialog_Layout',
-					kind: 'type',
-					source_location: {
-						line: 34,
-						column: 0,
-						end_line: 34,
+						end_line: 5,
 						end_column: 48,
 					},
-					type_signature: 'Dialog_Layout',
-					exported: true,
-				},
-				{
-					name: 'dialog_layouts',
-					kind: 'variable',
-					source_location: {
-						line: 35,
-						column: 13,
-						end_line: 35,
-						end_column: 72,
-					},
-					type_signature: 'Dialog_Layout[]',
+					type_signature:
+						'{ get: (error_message?: string | undefined) => Pkg; maybe_get: () => Pkg | undefined; set: (value: Pkg) => Pkg; }',
 					exported: false,
 				},
 			],
-			imports: ['svelte', '$lib/Dialog.svelte'],
+			imports: ['@ryanatkn/belt/pkg.js', '$lib/context_helpers.js'],
 		},
-		'./helpers.ts': {
-			path: 'helpers.ts',
+		'./rune_helpers.svelte.ts': {
+			path: 'rune_helpers.svelte.ts',
 			declarations: [
 				{
-					name: 'render_value_to_string',
+					name: 'effect_with_count',
 					kind: 'function',
-					doc_comment: 'Renders any value to a string representation',
-					summary: 'Renders any value to a string representation',
+					doc_comment:
+						'Runs `fn` in an `$effect`, passing `true` as the `skip` argument for the first `count` runs.\nCalls `fn` even when skipping so callers can read any dependent signals.',
+					summary:
+						'Runs `fn` in an `$effect`, passing `true` as the `skip` argument for the first `count` runs.\nCalls `fn` even when skipping so callers can read any dependent signals.',
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 7,
+						line: 5,
 						column: 13,
-						end_line: 16,
+						end_line: 10,
 						end_column: 1,
 					},
-					type_signature: '(value: unknown): string',
-					return_type: 'string',
+					type_signature: '(fn: (count: number) => void, initial?: number): void',
+					return_type: 'void',
 					parameters: [
 						{
-							name: 'value',
-							type: 'unknown',
+							name: 'fn',
+							type: '(count: number) => void',
+							optional: false,
+						},
+						{
+							name: 'initial',
+							type: 'number',
 							optional: false,
 						},
 					],
@@ -3284,15 +2359,7 @@ export const src_json: Enhanced_Src_Json = {
 			],
 			imports: [],
 			module_comment:
-				'Renders any value to a string representation\n\n@param value Any JS value to stringify\n@returns A string representation of the value',
-			imported_by: [
-				'./themer.svelte.ts',
-				'./contextmenu_state.svelte.ts',
-				'./pkg.ts',
-				'./tooltip_state.svelte.ts',
-				'./tome.ts',
-				'./docs_helpers.svelte.ts',
-			],
+				'Runs `fn` in an `$effect`, passing `true` as the `skip` argument for the first `count` runs.\nCalls `fn` even when skipping so callers can read any dependent signals.',
 		},
 		'./storage.ts': {
 			path: 'storage.ts',
@@ -3370,11 +2437,944 @@ export const src_json: Enhanced_Src_Json = {
 			imports: ['esm-env'],
 			imported_by: ['./themer.svelte.ts'],
 		},
+		'./test_helpers.ts': {
+			path: 'test_helpers.ts',
+			declarations: [
+				{
+					name: 'mount_component',
+					kind: 'function',
+					doc_comment:
+						'Mount a Svelte component for testing.\nCreates a container div, appends it to document.body, and mounts the component.',
+					summary:
+						'Mount a Svelte component for testing.\nCreates a container div, appends it to document.body, and mounts the component.',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 12,
+						column: 13,
+						end_line: 25,
+						end_column: 1,
+					},
+					type_signature:
+						'<Props extends Record<string, any>>(Component: Component<Props, {}, string>, props: Props): { instance: any; container: HTMLElement; }',
+					return_type: '{ instance: any; container: HTMLElement; }',
+					parameters: [
+						{
+							name: 'Component',
+							type: 'Component<Props, {}, string>',
+							optional: false,
+						},
+						{
+							name: 'props',
+							type: 'Props',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'unmount_component',
+					kind: 'function',
+					doc_comment: 'Unmount a component and remove its container from the DOM.',
+					summary: 'Unmount a component and remove its container from the DOM.',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 30,
+						column: 13,
+						end_line: 33,
+						end_column: 1,
+					},
+					type_signature: '(instance: any, container: HTMLElement): Promise<void>',
+					return_type: 'Promise<void>',
+					parameters: [
+						{
+							name: 'instance',
+							type: 'any',
+							optional: false,
+						},
+						{
+							name: 'container',
+							type: 'HTMLElement',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'create_contextmenu_event',
+					kind: 'function',
+					doc_comment: 'Create a contextmenu (rightclick) mouse event.',
+					summary: 'Create a contextmenu (rightclick) mouse event.',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 38,
+						column: 13,
+						end_line: 50,
+						end_column: 1,
+					},
+					type_signature: '(x: number, y: number, options?: MouseEventInit): MouseEvent',
+					return_type: 'MouseEvent',
+					parameters: [
+						{
+							name: 'x',
+							type: 'number',
+							optional: false,
+						},
+						{
+							name: 'y',
+							type: 'number',
+							optional: false,
+						},
+						{
+							name: 'options',
+							type: 'MouseEventInit',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'create_keyboard_event',
+					kind: 'function',
+					doc_comment: 'Create a keyboard event.',
+					summary: 'Create a keyboard event.',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 55,
+						column: 13,
+						end_line: 65,
+						end_column: 1,
+					},
+					type_signature: '(key: string, options?: KeyboardEventInit): KeyboardEvent',
+					return_type: 'KeyboardEvent',
+					parameters: [
+						{
+							name: 'key',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'options',
+							type: 'KeyboardEventInit',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'create_mouse_event',
+					kind: 'function',
+					doc_comment: 'Create a generic mouse event.',
+					summary: 'Create a generic mouse event.',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 70,
+						column: 13,
+						end_line: 76,
+						end_column: 1,
+					},
+					type_signature: '(type: string, options?: MouseEventInit): MouseEvent',
+					return_type: 'MouseEvent',
+					parameters: [
+						{
+							name: 'type',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'options',
+							type: 'MouseEventInit',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'set_event_target',
+					kind: 'function',
+					doc_comment:
+						'Set the target property on an event (for testing).\nThe target property is readonly, so we need to use Object.defineProperty.',
+					summary:
+						'Set the target property on an event (for testing).\nThe target property is readonly, so we need to use Object.defineProperty.',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 82,
+						column: 13,
+						end_line: 88,
+						end_column: 1,
+					},
+					type_signature: '(event: Event, target: EventTarget): void',
+					return_type: 'void',
+					parameters: [
+						{
+							name: 'event',
+							type: 'Event',
+							optional: false,
+						},
+						{
+							name: 'target',
+							type: 'EventTarget',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'create_touch_event',
+					kind: 'function',
+					doc_comment: 'Create a touch event with one or more touches.',
+					summary: 'Create a touch event with one or more touches.',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 93,
+						column: 13,
+						end_line: 122,
+						end_column: 1,
+					},
+					type_signature:
+						'(type: string, touches: { clientX: number; clientY: number; target?: EventTarget | undefined; }[], options?: TouchEventInit): TouchEvent',
+					return_type: 'TouchEvent',
+					parameters: [
+						{
+							name: 'type',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'touches',
+							type: '{ clientX: number; clientY: number; target?: EventTarget | undefined; }[]',
+							optional: false,
+						},
+						{
+							name: 'options',
+							type: 'TouchEventInit',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+			],
+			imports: ['svelte'],
+			module_comment:
+				'Shared test utilities for vitest tests.\nProvides helpers for component mounting and DOM event creation.',
+		},
 		'./test_setup.ts': {
 			path: 'test_setup.ts',
 			declarations: [],
 			imports: ['vitest'],
 			module_comment: 'Global test setup for vitest.\nPolyfills APIs not available in jsdom.',
+		},
+		'./themer.svelte.ts': {
+			path: 'themer.svelte.ts',
+			declarations: [
+				{
+					name: 'Themer',
+					kind: 'class',
+					source_location: {
+						line: 8,
+						column: 0,
+						end_line: 26,
+						end_column: 1,
+					},
+					members: [
+						{
+							name: 'theme',
+							kind: 'variable',
+						},
+						{
+							name: 'color_scheme',
+							kind: 'variable',
+						},
+						{
+							name: 'toJSON',
+							kind: 'function',
+						},
+					],
+					exported: true,
+				},
+				{
+					name: 'Themer_Json',
+					kind: 'type',
+					source_location: {
+						line: 28,
+						column: 0,
+						end_line: 31,
+						end_column: 1,
+					},
+					type_signature: 'Themer_Json',
+					exported: true,
+				},
+				{
+					name: 'themer_context',
+					kind: 'variable',
+					source_location: {
+						line: 33,
+						column: 13,
+						end_line: 33,
+						end_column: 54,
+					},
+					type_signature:
+						'{ get: (error_message?: string | undefined) => Themer; maybe_get: () => Themer | undefined; set: (value: Themer) => Themer; }',
+					exported: false,
+				},
+				{
+					name: 'sync_color_scheme',
+					kind: 'function',
+					source_location: {
+						line: 35,
+						column: 13,
+						end_line: 42,
+						end_column: 1,
+					},
+					type_signature: '(color_scheme: Color_Scheme | null): void',
+					return_type: 'void',
+					parameters: [
+						{
+							name: 'color_scheme',
+							type: 'Color_Scheme | null',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'COLOR_SCHEME_STORAGE_KEY',
+					kind: 'variable',
+					source_location: {
+						line: 44,
+						column: 13,
+						end_line: 44,
+						end_column: 58,
+					},
+					type_signature: '"fuz:color-scheme"',
+					exported: false,
+				},
+				{
+					name: 'THEME_STORAGE_KEY',
+					kind: 'variable',
+					source_location: {
+						line: 45,
+						column: 13,
+						end_line: 45,
+						end_column: 44,
+					},
+					type_signature: '"fuz:theme"',
+					exported: false,
+				},
+				{
+					name: 'save_color_scheme',
+					kind: 'function',
+					source_location: {
+						line: 47,
+						column: 13,
+						end_line: 52,
+						end_column: 1,
+					},
+					type_signature: '(color_scheme: Color_Scheme | null, key?: string): void',
+					return_type: 'void',
+					parameters: [
+						{
+							name: 'color_scheme',
+							type: 'Color_Scheme | null',
+							optional: false,
+						},
+						{
+							name: 'key',
+							type: 'string',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'load_color_scheme',
+					kind: 'function',
+					source_location: {
+						line: 54,
+						column: 13,
+						end_line: 57,
+						end_column: 80,
+					},
+					type_signature: '(fallback?: Color_Scheme, key?: string): Color_Scheme',
+					return_type: 'Color_Scheme',
+					parameters: [
+						{
+							name: 'fallback',
+							type: 'Color_Scheme',
+							optional: false,
+						},
+						{
+							name: 'key',
+							type: 'string',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'save_theme',
+					kind: 'function',
+					source_location: {
+						line: 59,
+						column: 13,
+						end_line: 61,
+						end_column: 1,
+					},
+					type_signature: '(theme: Theme | null, key?: string): void',
+					return_type: 'void',
+					parameters: [
+						{
+							name: 'theme',
+							type: 'Theme | null',
+							optional: false,
+						},
+						{
+							name: 'key',
+							type: 'string',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'load_theme',
+					kind: 'function',
+					source_location: {
+						line: 63,
+						column: 13,
+						end_line: 64,
+						end_column: 48,
+					},
+					type_signature: '(fallback?: Theme, key?: string): Theme',
+					return_type: 'Theme',
+					parameters: [
+						{
+							name: 'fallback',
+							type: 'Theme',
+							optional: false,
+						},
+						{
+							name: 'key',
+							type: 'string',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+			],
+			imports: [
+				'@ryanatkn/moss/theme.js',
+				'@ryanatkn/moss/themes.js',
+				'esm-env',
+				'$lib/context_helpers.js',
+				'$lib/storage.js',
+			],
+		},
+		'./tome.ts': {
+			path: 'tome.ts',
+			declarations: [
+				{
+					name: 'Tome',
+					kind: 'type',
+					source_location: {
+						line: 8,
+						column: 13,
+						end_line: 15,
+						end_column: 2,
+					},
+					type_signature:
+						'ZodObject<{ name: ZodString; category: ZodString; component: ZodAny; related: ZodArray<ZodString>; }, $strip>',
+					exported: false,
+				},
+				{
+					name: 'to_tome_pathname',
+					kind: 'function',
+					source_location: {
+						line: 18,
+						column: 13,
+						end_line: 19,
+						end_column: 55,
+					},
+					type_signature:
+						'(item: { name: string; category: string; component: any; related: string[]; }, docs_path?: string): string',
+					return_type: 'string',
+					parameters: [
+						{
+							name: 'item',
+							type: '{ name: string; category: string; component: any; related: string[]; }',
+							optional: false,
+						},
+						{
+							name: 'docs_path',
+							type: 'string',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'tomes_context',
+					kind: 'variable',
+					source_location: {
+						line: 21,
+						column: 13,
+						end_line: 21,
+						end_column: 64,
+					},
+					type_signature:
+						'{ get: (error_message?: string | undefined) => Map<string, { name: string; category: string; component: any; related: string[]; }>; maybe_get: () => Map<string, { name: string; category: string; component: any; related: string[]; }> | undefined; set: (value: Map<...>) => Map<...>; }',
+					exported: false,
+				},
+				{
+					name: 'get_tome_by_name',
+					kind: 'function',
+					source_location: {
+						line: 23,
+						column: 13,
+						end_line: 28,
+						end_column: 1,
+					},
+					type_signature:
+						'(name: string): { name: string; category: string; component: any; related: string[]; }',
+					return_type: '{ name: string; category: string; component: any; related: string[]; }',
+					parameters: [
+						{
+							name: 'name',
+							type: 'string',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'tome_context',
+					kind: 'variable',
+					source_location: {
+						line: 30,
+						column: 13,
+						end_line: 30,
+						end_column: 50,
+					},
+					type_signature:
+						'{ get: (error_message?: string | undefined) => { name: string; category: string; component: any; related: string[]; }; maybe_get: () => { name: string; category: string; component: any; related: string[]; } | undefined; set: (value: { ...; }) => { ...; }; }',
+					exported: false,
+				},
+			],
+			imports: [
+				'$app/paths',
+				'@ryanatkn/belt/path.js',
+				'zod',
+				'$lib/context_helpers.js',
+				'$lib/docs_helpers.svelte.js',
+			],
+		},
+		'./tooltip_state.svelte.ts': {
+			path: 'tooltip_state.svelte.ts',
+			declarations: [
+				{
+					name: 'Tooltip_State',
+					kind: 'class',
+					doc_comment:
+						'Global tooltip state manager\n\nManages a single tooltip instance that can be shown/hidden\nwith sticky behavior (can move mouse into tooltip)',
+					summary: 'Global tooltip state manager',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 11,
+						column: 0,
+						end_line: 67,
+						end_column: 1,
+					},
+					members: [
+						{
+							name: 'opened',
+							kind: 'variable',
+						},
+						{
+							name: 'x',
+							kind: 'variable',
+						},
+						{
+							name: 'y',
+							kind: 'variable',
+						},
+						{
+							name: 'content',
+							kind: 'variable',
+						},
+						{
+							name: '#hide_timer',
+							kind: 'variable',
+						},
+						{
+							name: 'show',
+							kind: 'function',
+						},
+						{
+							name: 'hide',
+							kind: 'function',
+						},
+						{
+							name: 'cancel_hide',
+							kind: 'function',
+						},
+					],
+					exported: true,
+				},
+				{
+					name: 'tooltip_context',
+					kind: 'variable',
+					doc_comment: 'Tooltip context for accessing global tooltip state',
+					summary: 'Tooltip context for accessing global tooltip state',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 72,
+						column: 13,
+						end_line: 72,
+						end_column: 62,
+					},
+					type_signature:
+						'{ get: (error_message?: string | undefined) => Tooltip_State; maybe_get: () => Tooltip_State | undefined; set: (value: Tooltip_State) => Tooltip_State; }',
+					exported: false,
+				},
+			],
+			imports: ['svelte', '$lib/context_helpers.js'],
+		},
+		'./ts_helpers.ts': {
+			path: 'ts_helpers.ts',
+			declarations: [
+				{
+					name: 'infer_declaration_kind',
+					kind: 'function',
+					doc_comment: 'Infer declaration kind from symbol and node',
+					summary: 'Infer declaration kind from symbol and node',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 11,
+						column: 13,
+						end_line: 36,
+						end_column: 1,
+					},
+					type_signature:
+						'(symbol: Symbol, node: Node): "function" | "type" | "variable" | "class" | null',
+					return_type: '"function" | "type" | "variable" | "class" | null',
+					parameters: [
+						{
+							name: 'symbol',
+							type: 'Symbol',
+							optional: false,
+						},
+						{
+							name: 'node',
+							type: 'Node',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'extract_jsdoc',
+					kind: 'function',
+					doc_comment: 'Extract JSDoc comment from node',
+					summary: 'Extract JSDoc comment from node',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 41,
+						column: 13,
+						end_line: 89,
+						end_column: 1,
+					},
+					type_signature:
+						'(node: Node, _source_file: SourceFile): { full_text: string; summary: string; examples: string[]; deprecated_message?: string | undefined; see_also: string[]; } | undefined',
+					return_type:
+						'{ full_text: string; summary: string; examples: string[]; deprecated_message?: string | undefined; see_also: string[]; } | undefined',
+					parameters: [
+						{
+							name: 'node',
+							type: 'Node',
+							optional: false,
+						},
+						{
+							name: '_source_file',
+							type: 'SourceFile',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'extract_function_info',
+					kind: 'function',
+					doc_comment: 'Extract function/method information',
+					summary: 'Extract function/method information',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 94,
+						column: 13,
+						end_line: 133,
+						end_column: 1,
+					},
+					type_signature:
+						'(node: Node, symbol: Symbol, checker: TypeChecker, enhanced: Enhanced_Declaration, _jsdoc: { full_text: string; summary: string; examples: string[]; deprecated_message?: string | undefined; see_also: string[]; } | undefined): void',
+					return_type: 'void',
+					parameters: [
+						{
+							name: 'node',
+							type: 'Node',
+							optional: false,
+						},
+						{
+							name: 'symbol',
+							type: 'Symbol',
+							optional: false,
+						},
+						{
+							name: 'checker',
+							type: 'TypeChecker',
+							optional: false,
+						},
+						{
+							name: 'enhanced',
+							type: 'Enhanced_Declaration',
+							optional: false,
+						},
+						{
+							name: '_jsdoc',
+							type: '{ full_text: string; summary: string; examples: string[]; deprecated_message?: string | undefined; see_also: string[]; } | undefined',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'extract_type_info',
+					kind: 'function',
+					doc_comment: 'Extract type/interface information',
+					summary: 'Extract type/interface information',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 138,
+						column: 13,
+						end_line: 162,
+						end_column: 1,
+					},
+					type_signature:
+						'(node: Node, _symbol: Symbol, checker: TypeChecker, enhanced: Enhanced_Declaration): void',
+					return_type: 'void',
+					parameters: [
+						{
+							name: 'node',
+							type: 'Node',
+							optional: false,
+						},
+						{
+							name: '_symbol',
+							type: 'Symbol',
+							optional: false,
+						},
+						{
+							name: 'checker',
+							type: 'TypeChecker',
+							optional: false,
+						},
+						{
+							name: 'enhanced',
+							type: 'Enhanced_Declaration',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'extract_class_info',
+					kind: 'function',
+					doc_comment: 'Extract class information',
+					summary: 'Extract class information',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 167,
+						column: 13,
+						end_line: 202,
+						end_column: 1,
+					},
+					type_signature:
+						'(node: Node, _symbol: Symbol, _checker: TypeChecker, enhanced: Enhanced_Declaration): void',
+					return_type: 'void',
+					parameters: [
+						{
+							name: 'node',
+							type: 'Node',
+							optional: false,
+						},
+						{
+							name: '_symbol',
+							type: 'Symbol',
+							optional: false,
+						},
+						{
+							name: '_checker',
+							type: 'TypeChecker',
+							optional: false,
+						},
+						{
+							name: 'enhanced',
+							type: 'Enhanced_Declaration',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'extract_variable_info',
+					kind: 'function',
+					doc_comment: 'Extract variable information',
+					summary: 'Extract variable information',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 207,
+						column: 13,
+						end_line: 219,
+						end_column: 1,
+					},
+					type_signature:
+						'(node: Node, symbol: Symbol, checker: TypeChecker, enhanced: Enhanced_Declaration): void',
+					return_type: 'void',
+					parameters: [
+						{
+							name: 'node',
+							type: 'Node',
+							optional: false,
+						},
+						{
+							name: 'symbol',
+							type: 'Symbol',
+							optional: false,
+						},
+						{
+							name: 'checker',
+							type: 'TypeChecker',
+							optional: false,
+						},
+						{
+							name: 'enhanced',
+							type: 'Enhanced_Declaration',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'is_exported',
+					kind: 'function',
+					doc_comment: 'Check if node is exported',
+					summary: 'Check if node is exported',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 224,
+						column: 13,
+						end_line: 230,
+						end_column: 1,
+					},
+					type_signature: '(node: Node): boolean',
+					return_type: 'boolean',
+					parameters: [
+						{
+							name: 'node',
+							type: 'Node',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'extract_module_comment',
+					kind: 'function',
+					doc_comment: 'Extract module-level comment',
+					summary: 'Extract module-level comment',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 235,
+						column: 13,
+						end_line: 253,
+						end_column: 1,
+					},
+					type_signature: '(source_file: SourceFile): string | undefined',
+					return_type: 'string | undefined',
+					parameters: [
+						{
+							name: 'source_file',
+							type: 'SourceFile',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'extract_imports',
+					kind: 'function',
+					doc_comment: 'Extract import statements',
+					summary: 'Extract import statements',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 258,
+						column: 13,
+						end_line: 268,
+						end_column: 1,
+					},
+					type_signature: '(source_file: SourceFile): string[]',
+					return_type: 'string[]',
+					parameters: [
+						{
+							name: 'source_file',
+							type: 'SourceFile',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'create_ts_program',
+					kind: 'function',
+					doc_comment: 'Create TypeScript program for analysis',
+					summary: 'Create TypeScript program for analysis',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 273,
+						column: 13,
+						end_line: 284,
+						end_column: 1,
+					},
+					type_signature: '(log: any): Program | null',
+					return_type: 'Program | null',
+					parameters: [
+						{
+							name: 'log',
+							type: 'any',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+			],
+			imports: ['typescript', './enhanced_declarations.js'],
+			module_comment: 'TypeScript Compiler API helpers for extracting metadata from source code',
 		},
 	},
 };

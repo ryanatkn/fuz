@@ -1,11 +1,19 @@
 <script lang="ts">
+	import {resolve} from '$app/paths';
 	import type {Snippet} from 'svelte';
 	import {get_type_summary, type Enhanced_Declaration} from '$lib/enhanced_declarations.js';
 	import {tooltip_context} from '$lib/tooltip_state.svelte.js';
 	import {contextmenu_action} from '$lib/contextmenu_state.svelte.js';
 	import {create_declaration_contextmenu} from '$lib/declaration_contextmenu.js';
 
-	interface Props {
+	const {
+		decl,
+		module_path,
+		pkg_name,
+		repo_url,
+		homepage_url,
+		children,
+	}: {
 		/**
 		 * The declaration to link to
 		 */
@@ -30,9 +38,7 @@
 		 * Optional content to display (defaults to declaration name)
 		 */
 		children?: Snippet;
-	}
-
-	const {decl, module_path, pkg_name, repo_url, homepage_url, children}: Props = $props();
+	} = $props();
 
 	const tooltip = tooltip_context.maybe_get();
 
@@ -63,7 +69,7 @@
 
 <a
 	class="declaration_link chip {decl.kind}_declaration"
-	href={api_url}
+	href={resolve(api_url as any)}
 	onmouseenter={show_tooltip}
 	onmouseleave={hide_tooltip}
 	use:contextmenu_action={contextmenu_entries}

@@ -1,5 +1,11 @@
 <script lang="ts">
-	import {get_all_modules, get_all_declarations, search_declarations} from './api_data.svelte.js';
+	import {resolve} from '$app/paths';
+
+	import {
+		get_all_modules,
+		get_all_declarations,
+		search_declarations,
+	} from '$routes/docs/api/api_data.svelte.js';
 	import {pkg_context} from '$lib/pkg.js';
 	import Declaration_Link from '$lib/Declaration_Link.svelte';
 
@@ -76,7 +82,7 @@
 					<h2 class="module_header">
 						<a
 							class="module_link"
-							href={`/docs/api/${module_name.replace(/\.(ts|js|svelte)$/, '')}`}
+							href={resolve(`/docs/api/${module_name.replace(/\.(ts|js|svelte)$/, '')}` as any)}
 						>
 							{module_name}
 						</a>
