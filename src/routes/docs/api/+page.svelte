@@ -34,30 +34,33 @@
 </svelte:head>
 
 <Tome_Content {tome}>
-	<header class="header">
-		<p class="subtitle">{pkg.package_json.description}</p>
+	{#snippet header()}
+		<header class="page_header">
+			<h1>API Documentation</h1>
+			<p class="subtitle">{pkg.package_json.description}</p>
 
-		<!-- Search -->
-		<div class="search_box">
-			<input
-				type="text"
-				class="search_input"
-				placeholder="Search declarations..."
-				bind:value={search_query}
-			/>
-		</div>
+			<!-- Search -->
+			<div class="search_box">
+				<input
+					type="text"
+					class="search_input"
+					placeholder="Search declarations..."
+					bind:value={search_query}
+				/>
+			</div>
 
-		<div class="stats">
-			<span class="stat">
-				{all_declarations.length} declarations
-			</span>
-			{#if search_query}
+			<div class="stats">
 				<span class="stat">
-					{sorted_declarations.length} results
+					{all_declarations.length} declarations
 				</span>
-			{/if}
-		</div>
-	</header>
+				{#if search_query}
+					<span class="stat">
+						{sorted_declarations.length} results
+					</span>
+				{/if}
+			</div>
+		</header>
+	{/snippet}
 
 	{#if sorted_declarations.length === 0}
 		<div class="no_results pane p_md">
@@ -83,14 +86,15 @@
 </Tome_Content>
 
 <style>
-	.header {
+	.page_header {
 		margin-bottom: var(--space_xl);
 		border-bottom: var(--border_width) solid var(--border_color);
 		padding-bottom: var(--space_md);
-		position: sticky;
-		top: 0;
-		background-color: var(--bg_1);
-		z-index: 10;
+	}
+
+	.page_header h1 {
+		margin: 0 0 var(--space_xs) 0;
+		font-size: var(--font_size_xl2);
 	}
 
 	.subtitle {
@@ -157,6 +161,5 @@
 
 	.declaration_detail:target {
 		border-color: var(--color_a_5);
-		box-shadow: 0 0 0 2px var(--color_a_2);
 	}
 </style>
