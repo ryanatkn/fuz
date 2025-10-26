@@ -101,9 +101,9 @@ describe('Contextmenu_State - Structure', () => {
 			submenu2.items.push(submenu3);
 
 			// Verify structure is intact
-			assert.strictEqual(contextmenu.root_menu.items[0], submenu1);
-			assert.strictEqual(submenu1.items[0], submenu2);
-			assert.strictEqual(submenu2.items[0], submenu3);
+			assert.strictEqual(contextmenu.root_menu.items[0]!, submenu1);
+			assert.strictEqual(submenu1.items[0]!, submenu2);
+			assert.strictEqual(submenu2.items[0]!, submenu3);
 		});
 
 		test('menu hierarchy validation', () => {

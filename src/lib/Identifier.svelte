@@ -42,10 +42,9 @@
 		// Check if name exists in any module's declarations
 		for (const src_module_key of Object.keys(pkg.src_json.modules)) {
 			const src_module = pkg.src_json.modules[src_module_key];
-			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 			const declaration = src_module?.declarations?.find((decl) => decl.name === name);
 			if (declaration) {
-				return {src_module, declaration};
+				return {src_module: src_module!, declaration};
 			}
 		}
 

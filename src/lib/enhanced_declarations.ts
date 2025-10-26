@@ -12,6 +12,17 @@ export interface Parameter_Info {
 }
 
 /**
+ * Component prop information for Svelte components
+ */
+export interface Component_Prop_Info {
+	name: string;
+	type: string;
+	optional: boolean;
+	description?: string;
+	default_value?: string;
+}
+
+/**
  * Source location information within a file
  */
 export interface Source_Location {
@@ -108,6 +119,11 @@ export interface Enhanced_Declaration extends Src_Module_Declaration {
 	 * Interface/type properties (for types/interfaces)
 	 */
 	properties?: Array<Enhanced_Declaration>;
+
+	/**
+	 * Component props (for Svelte components)
+	 */
+	props?: Array<Component_Prop_Info>;
 }
 
 /**

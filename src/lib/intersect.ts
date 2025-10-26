@@ -62,7 +62,7 @@ export const intersect: Action<HTMLElement | SVGElement, Intersect_Params_Or_Cal
 		}
 		if (current_params === null || count === 0) return; // disable when `count` is `0`, no need to create the observer
 		observer = new IntersectionObserver((entries) => {
-			intersecting = entries[0].isIntersecting;
+			intersecting = entries[0]!.isIntersecting;
 			if (onintersect && observer) {
 				onintersect({intersecting, intersections, el, observer, disconnect});
 			}

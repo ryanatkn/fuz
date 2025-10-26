@@ -252,7 +252,7 @@ describe('Contextmenu_State - Edge Cases', () => {
 
 			// Rapid selections
 			for (let i = 0; i < 100; i++) {
-				contextmenu.select(entries[i % entries.length]);
+				contextmenu.select(entries[i % entries.length]!);
 			}
 
 			// Only one should be selected

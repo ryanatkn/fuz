@@ -110,8 +110,8 @@ describe('Docs_Links', () => {
 			flushSync();
 
 			assert.strictEqual(docs_links.docs_links.length, 1);
-			assert.strictEqual(docs_links.docs_links[0].slug, 'test-slug');
-			assert.strictEqual(docs_links.docs_links[0].text, 'Test Title');
+			assert.strictEqual(docs_links.docs_links[0]!.slug, 'test-slug');
+			assert.strictEqual(docs_links.docs_links[0]!.text, 'Test Title');
 		});
 
 		test('adding same slug twice creates two separate entries', () => {
@@ -254,8 +254,8 @@ describe('Docs_Links', () => {
 
 			assert.strictEqual(docs_links.links.size, 1);
 			assert.strictEqual(docs_links.docs_links.length, 1);
-			assert.strictEqual(docs_links.docs_links[0].text, 'Remounted');
-			assert.strictEqual(docs_links.docs_links[0].id, newId);
+			assert.strictEqual(docs_links.docs_links[0]!.text, 'Remounted');
+			assert.strictEqual(docs_links.docs_links[0]!.id, newId);
 		});
 
 		test('interleaved add and remove operations maintain consistency', () => {
@@ -323,9 +323,9 @@ describe('Docs_Links', () => {
 
 			// Should be sorted by order
 			assert.strictEqual(docs_links.docs_links.length, 3);
-			assert.strictEqual(docs_links.docs_links[0].slug, 'slug-a');
-			assert.strictEqual(docs_links.docs_links[1].slug, 'slug-b');
-			assert.strictEqual(docs_links.docs_links[2].slug, 'slug-c');
+			assert.strictEqual(docs_links.docs_links[0]!.slug, 'slug-a');
+			assert.strictEqual(docs_links.docs_links[1]!.slug, 'slug-b');
+			assert.strictEqual(docs_links.docs_links[2]!.slug, 'slug-c');
 		});
 	});
 
@@ -334,7 +334,7 @@ describe('Docs_Links', () => {
 			const id = docs_links.add('my-slug', 'My Title', '/docs/test');
 			flushSync();
 
-			const link = docs_links.docs_links[0];
+			const link = docs_links.docs_links[0]!;
 			assert.strictEqual(link.id, id);
 			assert.strictEqual(link.slug, 'my-slug');
 		});
@@ -379,9 +379,9 @@ describe('Docs_Links', () => {
 			assert.strictEqual(ids.size, 3);
 
 			// And sorted by order (all have same order=0 since same slug)
-			assert.strictEqual(docs_links.docs_links[0].id, id1);
-			assert.strictEqual(docs_links.docs_links[1].id, id2);
-			assert.strictEqual(docs_links.docs_links[2].id, id3);
+			assert.strictEqual(docs_links.docs_links[0]!.id, id1);
+			assert.strictEqual(docs_links.docs_links[1]!.id, id2);
+			assert.strictEqual(docs_links.docs_links[2]!.id, id3);
 		});
 	});
 });

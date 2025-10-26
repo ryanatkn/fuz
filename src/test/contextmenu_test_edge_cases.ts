@@ -63,7 +63,7 @@ export const create_shared_edge_case_tests = (
 			flushSync();
 
 			assert.strictEqual(contextmenu.opened, true);
-			assert.strictEqual(contextmenu.params[0], snippet);
+			assert.strictEqual(contextmenu.params[0]!, snippet);
 		});
 
 		test('handles empty params array', () => {

@@ -268,8 +268,8 @@ export class Contextmenu_State {
 	expand_selected(): void {
 		if (!this.can_expand) return;
 		const parent = this.selections.at(-1);
-		if (!parent?.is_menu) return;
-		const selected = parent.items[0];
+		if (!parent?.is_menu || !parent.items.length) return;
+		const selected = parent.items[0]!;
 		selected.selected = true;
 		this.selections.push(selected);
 	}
@@ -281,7 +281,7 @@ export class Contextmenu_State {
 		}
 		const item = this.selections.at(-1)!;
 		const index = item.menu.items.indexOf(item);
-		this.select(item.menu.items[index === item.menu.items.length - 1 ? 0 : index + 1]);
+		this.select(item.menu.items[index === item.menu.items.length - 1 ? 0 : index + 1]!);
 	}
 
 	select_previous(): void {
@@ -291,11 +291,13 @@ export class Contextmenu_State {
 		}
 		const item = this.selections.at(-1)!;
 		const index = item.menu.items.indexOf(item);
-		this.select(item.menu.items[index === 0 ? item.menu.items.length - 1 : index - 1]);
+		this.select(item.menu.items[index === 0 ? item.menu.items.length - 1 : index - 1]!);
 	}
 
 	select_first(): void {
-		this.select((this.selections.at(-1)?.menu ?? this.root_menu).items[0]);
+		const menu = this.selections.at(-1)?.menu ?? this.root_menu;
+		if (!menu.items.length) return;
+		this.select(menu.items[0]!);
 	}
 
 	select_last(): void {

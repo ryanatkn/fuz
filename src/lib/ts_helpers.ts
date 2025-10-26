@@ -83,7 +83,7 @@ export const extract_jsdoc = (
 	}
 
 	full_text = full_text.trim();
-	const summary = full_text.split('\n\n')[0].trim();
+	const summary = full_text.split('\n\n')[0]!.trim();
 
 	return {full_text, summary, examples, deprecated_message, see_also};
 };
@@ -103,7 +103,7 @@ export const extract_function_info = (
 		const signatures = type.getCallSignatures();
 
 		if (signatures.length > 0) {
-			const sig = signatures[0];
+			const sig = signatures[0]!;
 			enhanced.type_signature = checker.signatureToString(sig);
 
 			const return_type = checker.getReturnTypeOfSignature(sig);
@@ -237,7 +237,7 @@ export const extract_module_comment = (source_file: ts.SourceFile): string | und
 	const leading_comments = ts.getLeadingCommentRanges(full_text, 0);
 	if (!leading_comments?.length) return undefined;
 
-	const first_comment = leading_comments[0];
+	const first_comment = leading_comments[0]!;
 	let text = full_text.substring(first_comment.pos, first_comment.end);
 
 	// Clean comment markers

@@ -35,6 +35,7 @@ import {
 	extract_variable_info,
 	is_exported,
 } from '$lib/ts_helpers.js';
+import {analyze_svelte_component} from '$lib/svelte_helpers.js';
 
 export const gen: Gen = async ({log, filer}) => {
 	log.info('Generating package metadata with full TypeScript analysis...');
@@ -44,6 +45,16 @@ export const gen: Gen = async ({log, filer}) => {
 
 	// Read package.json
 	const package_json = read_package_json();
+
+	// Try to import svelte2tsx if available
+	let svelte2tsx: typeof import('svelte2tsx').svelte2tsx | undefined;
+	try {
+		const module = await import('svelte2tsx');
+		svelte2tsx = module.svelte2tsx;
+		log.info('svelte2tsx available - Svelte components will be analyzed');
+	} catch {
+		log.info('svelte2tsx not installed - Svelte components will be skipped');
+	}
 
 	// Create TypeScript program
 	const program = create_ts_program(log);
@@ -57,17 +68,18 @@ export const gen: Gen = async ({log, filer}) => {
 	log.info(`Filer has ${filer.files.size} files total`);
 
 	// Manually filter files - IDs are absolute paths, so we need to check if they include '/src/lib/'
-	// Note: Svelte files are excluded because TypeScript Compiler API cannot parse them
-	// without preprocessing (would need svelte2tsx or similar)
+	// Include Svelte files if svelte2tsx is available
 	const source_disknodes: Array<any> = [];
 	for (const [id, disknode] of filer.files.entries()) {
-		if (
-			id.includes('/src/lib/') &&
-			/\.(ts|js)$/.test(id) && // Exclude .svelte files - TS can't parse them directly
-			!id.includes('.test.') &&
-			!id.includes('.spec.')
-		) {
-			source_disknodes.push(disknode);
+		if (id.includes('/src/lib/') && !id.includes('.test.') && !id.includes('.spec.')) {
+			// Always include TypeScript/JavaScript files
+			if (/\.(ts|js)$/.test(id)) {
+				source_disknodes.push(disknode);
+			}
+			// Include Svelte files if svelte2tsx is available
+			else if (/\.svelte$/.test(id) && svelte2tsx) {
+				source_disknodes.push(disknode);
+			}
 		}
 	}
 
@@ -98,6 +110,72 @@ export const gen: Gen = async ({log, filer}) => {
 
 			log.info(`Analyzing: ${module_path}`);
 
+			// Handle Svelte files separately (before trying to get TypeScript source file)
+			if (module_path.endsWith('.svelte')) {
+				const enhanced_module: Enhanced_Module = {
+					path: module_path,
+					declarations: [],
+					imports: [],
+				};
+
+				// Use svelte2tsx to transform Svelte component to TSX for analysis
+				if (svelte2tsx) {
+					try {
+						const svelte_source = readFileSync(source_id, 'utf-8');
+
+						// Check if component uses TypeScript
+						const is_ts_file = svelte_source.includes('lang="ts"');
+
+						// Transform Svelte to TSX
+						const tsx_result = svelte2tsx(svelte_source, {
+							filename: source_id,
+							isTsFile: is_ts_file,
+							emitOnTemplateError: true, // Handle malformed templates gracefully
+						});
+
+						// Get component name from filename
+						const component_name = module_path
+							.replace(/^.*\//, '') // Remove directory
+							.replace(/\.svelte$/, ''); // Remove extension
+
+						// Create a temporary source file from the original Svelte content for JSDoc extraction
+						const temp_source = ts.createSourceFile(
+							source_id,
+							svelte_source,
+							ts.ScriptTarget.Latest,
+							true,
+						);
+
+						// Analyze the component
+						const enhanced_decl = analyze_svelte_component(
+							tsx_result.code,
+							temp_source,
+							checker,
+							component_name,
+						);
+
+						enhanced_module.declarations!.push(enhanced_decl);
+					} catch (err) {
+						log.error(`Failed to analyze Svelte component ${module_path}:`, err);
+						// Fallback to basic component declaration
+						enhanced_module.declarations!.push({
+							name: module_path.replace(/^.*\//, '').replace(/\.svelte$/, ''),
+							kind: 'component',
+						});
+					}
+				} else {
+					// Fallback: just mark as component without detailed analysis
+					enhanced_module.declarations!.push({
+						name: module_path.replace(/^.*\//, '').replace(/\.svelte$/, ''),
+						kind: 'component',
+					});
+				}
+
+				enhanced_src_json.modules![module_key] = enhanced_module;
+				continue; // Skip the TypeScript processing below
+			}
+
+			// For TypeScript/JavaScript files, get the source file from the program
 			const source_file = program.getSourceFile(source_id);
 			if (!source_file) {
 				log.warn(`Could not get source file: ${source_id}`);
@@ -117,21 +195,7 @@ export const gen: Gen = async ({log, filer}) => {
 			}
 
 			// Extract declarations based on file type
-			if (module_path.endsWith('.svelte')) {
-				// TODO: Integrate Svelte language tools to extract component metadata
-				// Currently only TypeScript Compiler API is used, which cannot parse .svelte files
-				// To get full component documentation, we need to:
-				// 1. Parse <script> blocks with svelte-parse or svelte/compiler
-				// 2. Extract prop types and JSDoc comments
-				// 3. Document events, slots, and component props
-				// 4. Preserve type information from TypeScript in <script lang="ts">
-				// See: https://github.com/sveltejs/language-tools for integration examples
-				// Svelte components export a default component
-				enhanced_module.declarations!.push({
-					name: 'default',
-					kind: 'component',
-				});
-			} else if (module_path.endsWith('.ts') || module_path.endsWith('.js')) {
+			if (module_path.endsWith('.ts') || module_path.endsWith('.js')) {
 				// TypeScript/JavaScript files - extract all exports
 				const symbol = checker.getSymbolAtLocation(source_file);
 				if (symbol) {

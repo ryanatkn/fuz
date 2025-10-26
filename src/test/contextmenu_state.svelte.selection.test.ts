@@ -120,10 +120,10 @@ describe('Contextmenu_State - Selection', () => {
 			submenu.items.push(nested_entry);
 
 			// Manually set up a nested selection
-			contextmenu.root_menu.items[0].selected = true;
+			contextmenu.root_menu.items[0]!.selected = true;
 			submenu.selected = true;
 			nested_entry.selected = true;
-			contextmenu.selections = [contextmenu.root_menu.items[0], submenu, nested_entry];
+			contextmenu.selections = [contextmenu.root_menu.items[0]!, submenu, nested_entry];
 
 			contextmenu.collapse_selected();
 
@@ -211,7 +211,7 @@ describe('Contextmenu_State - Selection', () => {
 			assert.strictEqual(entry2.selected, true);
 			assert.strictEqual(entry3.selected, false);
 			assert.strictEqual(contextmenu.selections.length, 1);
-			assert.strictEqual(contextmenu.selections[0], entry2);
+			assert.strictEqual(contextmenu.selections[0]!, entry2);
 		});
 
 		test('selecting disabled items is prevented', () => {
@@ -258,7 +258,7 @@ describe('Contextmenu_State - Selection', () => {
 
 			contextmenu.collapse_selected();
 			assert.strictEqual(contextmenu.selections.length, 1);
-			assert.strictEqual(contextmenu.selections[0], submenu1);
+			assert.strictEqual(contextmenu.selections[0]!, submenu1);
 		});
 
 		test('keyboard navigation boundary conditions', () => {

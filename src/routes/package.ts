@@ -75,6 +75,7 @@ export const package_json: Package_Json = {
 		'prettier-plugin-svelte': '^3.4.0',
 		svelte: '^5.41.3',
 		'svelte-check': '^4.3.3',
+		svelte2tsx: '^0.7.45',
 		tslib: '^2.8.1',
 		typescript: '^5.9.3',
 		'typescript-eslint': '^8.41.0',
@@ -119,6 +120,1756 @@ export const src_json: Enhanced_Src_Json = {
 	name: '@ryanatkn/fuz',
 	version: '0.147.0',
 	modules: {
+		'./Alert.svelte': {
+			path: 'Alert.svelte',
+			declarations: [
+				{
+					name: 'Alert',
+					kind: 'component',
+					props: [
+						{
+							name: 'status',
+							type: 'Alert_Status',
+							optional: true,
+						},
+						{
+							name: 'color',
+							type: 'string',
+							optional: true,
+						},
+						{
+							name: 'onclick',
+							type: '(() => void) | undefined',
+							optional: true,
+						},
+						{
+							name: 'disabled',
+							type: 'boolean',
+							optional: true,
+						},
+						{
+							name: 'attrs',
+							type: 'HTMLAttributes<HTMLElement> | undefined',
+							optional: true,
+						},
+						{
+							name: 'icon',
+							type: 'string | Snippet<[icon: string]> | null | undefined',
+							optional: true,
+						},
+						{
+							name: 'children',
+							type: 'Snippet',
+							optional: false,
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 103,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Api_Page.svelte': {
+			path: 'Api_Page.svelte',
+			declarations: [
+				{
+					name: 'Api_Page',
+					kind: 'component',
+					props: [
+						{
+							name: 'decl',
+							type: 'Enhanced_Declaration',
+							optional: false,
+						},
+						{
+							name: 'module_path',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'repo_url',
+							type: 'string',
+							optional: true,
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 391,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Breadcrumb.svelte': {
+			path: 'Breadcrumb.svelte',
+			declarations: [
+				{
+					name: 'Breadcrumb',
+					kind: 'component',
+					props: [
+						{
+							name: 'path',
+							type: 'string | undefined',
+							optional: true,
+							description: 'Prefixed with a slash and relative to the base path.',
+						},
+						{
+							name: 'selected_path',
+							type: 'string | null | undefined',
+							optional: true,
+							description:
+								'Prefixed with a slash and relative to the base path.\n`null` means none and `undefined` is detected from the current url.',
+						},
+						{
+							name: 'base_path',
+							type: 'string',
+							optional: true,
+							description:
+								'Sets a custom base path of `path` and `selected_path`.\nDefaults to `base` from `$app/paths`.',
+						},
+						{
+							name: 'separator',
+							type: 'Snippet',
+							optional: true,
+						},
+						{
+							name: 'children',
+							type: 'Snippet',
+							optional: true,
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 80,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Card.svelte': {
+			path: 'Card.svelte',
+			declarations: [
+				{
+					name: 'Card',
+					kind: 'component',
+					props: [
+						{
+							name: 'tag',
+							type: 'string | undefined',
+							optional: true,
+						},
+						{
+							name: 'href',
+							type: 'string | undefined',
+							optional: true,
+						},
+						{
+							name: 'align',
+							type: "'left' | 'right' | 'above' | 'below'",
+							optional: true,
+						},
+						{
+							name: 'attrs',
+							type: 'any',
+							optional: true,
+						},
+						{
+							name: 'icon',
+							type: 'string | Snippet',
+							optional: true,
+						},
+						{
+							name: 'children',
+							type: 'Snippet',
+							optional: false,
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 153,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Color_Scheme_Input.svelte': {
+			path: 'Color_Scheme_Input.svelte',
+			declarations: [
+				{
+					name: 'Color_Scheme_Input',
+					kind: 'component',
+					props: [
+						{
+							name: 'value',
+							type: '{color_scheme: Color_Scheme}',
+							optional: true,
+						},
+						{
+							name: 'onchange',
+							type: '(color_scheme: Color_Scheme) => void',
+							optional: true,
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 68,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Community_Links.svelte': {
+			path: 'Community_Links.svelte',
+			declarations: [
+				{
+					name: 'Community_Links',
+					kind: 'component',
+					props: [
+						{
+							name: 'selected',
+							type: "'webdevladder.net' | 'ryanatkn.com'",
+							optional: true,
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 54,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Community_Links_Panel.svelte': {
+			path: 'Community_Links_Panel.svelte',
+			declarations: [
+				{
+					name: 'Community_Links_Panel',
+					kind: 'component',
+					props: [
+						{
+							name: 'children',
+							type: 'Snippet',
+							optional: true,
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 23,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Contextmenu.svelte': {
+			path: 'Contextmenu.svelte',
+			declarations: [
+				{
+					name: 'Contextmenu',
+					kind: 'component',
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 30,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Contextmenu_Entry.svelte': {
+			path: 'Contextmenu_Entry.svelte',
+			declarations: [
+				{
+					name: 'Contextmenu_Entry',
+					kind: 'component',
+					props: [
+						{
+							name: 'run',
+							type: 'Contextmenu_Run',
+							optional: false,
+						},
+						{
+							name: 'icon',
+							type: 'string | Snippet',
+							optional: true,
+						},
+						{
+							name: 'children',
+							type: 'Snippet',
+							optional: false,
+						},
+						{
+							name: 'disabled',
+							type: 'boolean',
+							optional: true,
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 72,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Contextmenu_Link_Entry.svelte': {
+			path: 'Contextmenu_Link_Entry.svelte',
+			declarations: [
+				{
+					name: 'Contextmenu_Link_Entry',
+					kind: 'component',
+					props: [
+						{
+							name: 'href',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'icon',
+							type: 'string | Snippet<[icon: string]>',
+							optional: true,
+						},
+						{
+							name: 'children',
+							type: 'Snippet',
+							optional: true,
+						},
+						{
+							name: 'disabled',
+							type: 'boolean',
+							optional: true,
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 111,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Contextmenu_Root.svelte': {
+			path: 'Contextmenu_Root.svelte',
+			declarations: [
+				{
+					name: 'Contextmenu_Root',
+					kind: 'component',
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 373,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Contextmenu_Root_For_Safari_Compatibility.svelte': {
+			path: 'Contextmenu_Root_For_Safari_Compatibility.svelte',
+			declarations: [
+				{
+					name: 'Contextmenu_Root_For_Safari_Compatibility',
+					kind: 'component',
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 542,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Contextmenu_Separator.svelte': {
+			path: 'Contextmenu_Separator.svelte',
+			declarations: [
+				{
+					name: 'Contextmenu_Separator',
+					kind: 'component',
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 17,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Contextmenu_Submenu.svelte': {
+			path: 'Contextmenu_Submenu.svelte',
+			declarations: [
+				{
+					name: 'Contextmenu_Submenu',
+					kind: 'component',
+					props: [
+						{
+							name: 'icon',
+							type: 'Snippet',
+							optional: true,
+						},
+						{
+							name: 'menu',
+							type: 'Snippet',
+							optional: false,
+						},
+						{
+							name: 'children',
+							type: 'Snippet',
+							optional: false,
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 118,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Contextmenu_Text_Entry.svelte': {
+			path: 'Contextmenu_Text_Entry.svelte',
+			declarations: [
+				{
+					name: 'Contextmenu_Text_Entry',
+					kind: 'component',
+					props: [
+						{
+							name: 'run',
+							type: 'Contextmenu_Run',
+							optional: false,
+						},
+						{
+							name: 'content',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'icon',
+							type: 'string',
+							optional: false,
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 20,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Copy_To_Clipboard.svelte': {
+			path: 'Copy_To_Clipboard.svelte',
+			declarations: [
+				{
+					name: 'Copy_To_Clipboard',
+					kind: 'component',
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 79,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Declaration_Link.svelte': {
+			path: 'Declaration_Link.svelte',
+			declarations: [
+				{
+					name: 'Declaration_Link',
+					kind: 'component',
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 145,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Details.svelte': {
+			path: 'Details.svelte',
+			declarations: [
+				{
+					name: 'Details',
+					kind: 'component',
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 46,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Dialog.svelte': {
+			path: 'Dialog.svelte',
+			declarations: [
+				{
+					name: 'Dialog',
+					kind: 'component',
+					props: [
+						{
+							name: 'container',
+							type: 'HTMLElement',
+							optional: true,
+						},
+						{
+							name: 'layout',
+							type: 'Dialog_Layout',
+							optional: true,
+							description: '',
+						},
+						{
+							name: 'index',
+							type: 'number',
+							optional: true,
+							description:
+								'index 0 is under 1 is under 2 etc -- the topmost dialog is the last in the array',
+						},
+						{
+							name: 'active',
+							type: 'boolean',
+							optional: true,
+							description: '',
+						},
+						{
+							name: 'content_selector',
+							type: 'string | null',
+							optional: true,
+							description:
+								'If provided, prevents clicks that would close the dialog\nfrom bubbling past any elements matching this selector.',
+						},
+						{
+							name: 'onclose',
+							type: '() => void',
+							optional: true,
+						},
+						{
+							name: 'children',
+							type: 'Snippet<[close: (e?: Event) => void]>',
+							optional: false,
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 220,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+			imported_by: ['./dialog.ts'],
+		},
+		'./Dialogs.svelte': {
+			path: 'Dialogs.svelte',
+			declarations: [
+				{
+					name: 'Dialogs',
+					kind: 'component',
+					props: [
+						{
+							name: 'dialogs',
+							type: 'Array<Dialog_Params>',
+							optional: false,
+						},
+						{
+							name: 'onclose',
+							type: '() => void',
+							optional: true,
+						},
+						{
+							name: 'children',
+							type: 'Snippet<[dialog: Dialog_Params]>',
+							optional: true,
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 27,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Docs.svelte': {
+			path: 'Docs.svelte',
+			declarations: [
+				{
+					name: 'Docs',
+					kind: 'component',
+					props: [
+						{
+							name: 'tomes',
+							type: 'Array<Tome>',
+							optional: false,
+						},
+						{
+							name: 'pkg',
+							type: 'Pkg',
+							optional: false,
+						},
+						{
+							name: 'breadcrumb_children',
+							type: 'Snippet<[is_primary_nav: boolean]>',
+							optional: true,
+						},
+						{
+							name: 'children',
+							type: 'Snippet',
+							optional: false,
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 174,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Docs_Content.svelte': {
+			path: 'Docs_Content.svelte',
+			declarations: [
+				{
+					name: 'Docs_Content',
+					kind: 'component',
+					props: [
+						{
+							name: 'tomes',
+							type: 'Array<Tome>',
+							optional: false,
+						},
+						{
+							name: 'pkg',
+							type: 'Pkg',
+							optional: false,
+						},
+						{
+							name: 'repo_name',
+							type: 'Snippet<[repo_name: string]>',
+							optional: true,
+						},
+						{
+							name: 'content',
+							type: 'Snippet',
+							optional: true,
+						},
+						{
+							name: 'header',
+							type: 'Snippet',
+							optional: true,
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 37,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Docs_Footer.svelte': {
+			path: 'Docs_Footer.svelte',
+			declarations: [
+				{
+					name: 'Docs_Footer',
+					kind: 'component',
+					props: [
+						{
+							name: 'pkg',
+							type: 'Pkg',
+							optional: false,
+						},
+						{
+							name: 'root_url',
+							type: 'Url | null',
+							optional: true,
+						},
+						{
+							name: 'logo',
+							type: 'Snippet',
+							optional: true,
+						},
+						{
+							name: 'logo_header',
+							type: 'Snippet',
+							optional: true,
+						},
+						{
+							name: 'logo_footer',
+							type: 'Snippet',
+							optional: true,
+						},
+						{
+							name: 'children',
+							type: 'Snippet',
+							optional: true,
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 60,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Docs_Menu.svelte': {
+			path: 'Docs_Menu.svelte',
+			declarations: [
+				{
+					name: 'Docs_Menu',
+					kind: 'component',
+					props: [
+						{
+							name: 'tomes',
+							type: 'Array<Tome>',
+							optional: false,
+						},
+						{
+							name: 'children',
+							type: 'Snippet<[category: string]>',
+							optional: true,
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 69,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Docs_Menu_Header.svelte': {
+			path: 'Docs_Menu_Header.svelte',
+			declarations: [
+				{
+					name: 'Docs_Menu_Header',
+					kind: 'component',
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 16,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Docs_Page_Links.svelte': {
+			path: 'Docs_Page_Links.svelte',
+			declarations: [
+				{
+					name: 'Docs_Page_Links',
+					kind: 'component',
+					props: [
+						{
+							name: 'sidebar',
+							type: 'boolean',
+							optional: true,
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 72,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Docs_Primary_Nav.svelte': {
+			path: 'Docs_Primary_Nav.svelte',
+			declarations: [
+				{
+					name: 'Docs_Primary_Nav',
+					kind: 'component',
+					props: [
+						{
+							name: 'pkg',
+							type: 'Pkg',
+							optional: false,
+						},
+						{
+							name: 'breadcrumb_children',
+							type: 'Snippet<[is_primary_nav: boolean]>',
+							optional: true,
+						},
+						{
+							name: 'children',
+							type: 'Snippet',
+							optional: true,
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 92,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Docs_Secondary_Nav.svelte': {
+			path: 'Docs_Secondary_Nav.svelte',
+			declarations: [
+				{
+					name: 'Docs_Secondary_Nav',
+					kind: 'component',
+					props: [
+						{
+							name: 'tomes',
+							type: 'Array<Tome>',
+							optional: false,
+						},
+						{
+							name: 'sidebar',
+							type: 'boolean',
+							optional: true,
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 61,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Docs_Tertiary_Nav.svelte': {
+			path: 'Docs_Tertiary_Nav.svelte',
+			declarations: [
+				{
+					name: 'Docs_Tertiary_Nav',
+					kind: 'component',
+					props: [
+						{
+							name: 'tomes',
+							type: 'Array<Tome>',
+							optional: false,
+						},
+						{
+							name: 'tomes_by_name',
+							type: 'Map<string, Tome>',
+							optional: false,
+						},
+						{
+							name: 'sidebar',
+							type: 'boolean',
+							optional: true,
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 71,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Glyph.svelte': {
+			path: 'Glyph.svelte',
+			declarations: [
+				{
+					name: 'Glyph',
+					kind: 'component',
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 29,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Hashlink.svelte': {
+			path: 'Hashlink.svelte',
+			declarations: [
+				{
+					name: 'Hashlink',
+					kind: 'component',
+					props: [
+						{
+							name: 'slug',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'children',
+							type: 'Snippet',
+							optional: true,
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 42,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Hidden_Personal_Links.svelte': {
+			path: 'Hidden_Personal_Links.svelte',
+			declarations: [
+				{
+					name: 'Hidden_Personal_Links',
+					kind: 'component',
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 7,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Hue_Input.svelte': {
+			path: 'Hue_Input.svelte',
+			declarations: [
+				{
+					name: 'Hue_Input',
+					kind: 'component',
+					props: [
+						{
+							name: 'value',
+							type: 'Hue',
+							optional: true,
+						},
+						{
+							name: 'oninput',
+							type: '(hue: Hue) => void',
+							optional: true,
+						},
+						{
+							name: 'children',
+							type: 'Snippet',
+							optional: true,
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 126,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Identifier.svelte': {
+			path: 'Identifier.svelte',
+			declarations: [
+				{
+					name: 'Identifier',
+					kind: 'component',
+					props: [
+						{
+							name: 'name',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'code_attrs',
+							type: "SvelteHTMLElements['code_attrs']",
+							optional: true,
+						},
+						{
+							name: 'attrs',
+							type: "SvelteHTMLElements['a']",
+							optional: true,
+						},
+						{
+							name: 'children',
+							type: 'Snippet',
+							optional: true,
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 73,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Img_Or_Svg.svelte': {
+			path: 'Img_Or_Svg.svelte',
+			declarations: [
+				{
+					name: 'Img_Or_Svg',
+					kind: 'component',
+					props: [
+						{
+							name: 'src',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'label',
+							type: 'string',
+							optional: true,
+						},
+						{
+							name: 'size',
+							type: 'string',
+							optional: true,
+							description:
+								'Sets both the `width` and `height` of the svg. Overridden by the `width` and `height` props.',
+						},
+						{
+							name: 'width',
+							type: 'string',
+							optional: true,
+							description: 'Sets the `width` of the svg. Overrides `size`.',
+						},
+						{
+							name: 'height',
+							type: 'string',
+							optional: true,
+							description: 'Sets the `height` of the svg. Overrides `size`.',
+						},
+						{
+							name: 'svg_attrs',
+							type: "SvelteHTMLElements['svg']",
+							optional: true,
+						},
+						{
+							name: 'img_attrs',
+							type: "SvelteHTMLElements['img']",
+							optional: true,
+						},
+						{
+							name: 'attrs',
+							type: "Pick<SvelteHTMLElements['div'], 'class' | 'style'>",
+							optional: true,
+							description: 'Shared attributes for both img and svg.',
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 52,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Mdn_Link.svelte': {
+			path: 'Mdn_Link.svelte',
+			declarations: [
+				{
+					name: 'Mdn_Link',
+					kind: 'component',
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 44,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Package_Detail.svelte': {
+			path: 'Package_Detail.svelte',
+			declarations: [
+				{
+					name: 'Package_Detail',
+					kind: 'component',
+					props: [
+						{
+							name: 'pkg',
+							type: 'Pkg',
+							optional: false,
+						},
+						{
+							name: 'repo_name',
+							type: 'Snippet<[repo_name: string]>',
+							optional: true,
+						},
+						{
+							name: 'description',
+							type: 'Snippet<[description: string]>',
+							optional: true,
+						},
+						{
+							name: 'motto',
+							type: 'Snippet<[description: string]>',
+							optional: true,
+						},
+						{
+							name: 'npm_url',
+							type: 'Snippet<[npm_url: string]>',
+							optional: true,
+						},
+						{
+							name: 'homepage_url',
+							type: 'Snippet<[homepage_url: string]>',
+							optional: true,
+						},
+						{
+							name: 'children',
+							type: 'Snippet<[pkg: Pkg]>',
+							optional: true,
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 332,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Package_Summary.svelte': {
+			path: 'Package_Summary.svelte',
+			declarations: [
+				{
+					name: 'Package_Summary',
+					kind: 'component',
+					props: [
+						{
+							name: 'pkg',
+							type: 'Pkg',
+							optional: false,
+						},
+						{
+							name: 'repo_name',
+							type: 'Snippet<[repo_name: string]>',
+							optional: true,
+						},
+						{
+							name: 'logo',
+							type: 'Snippet<[logo_url: string, logo_alt: string]>',
+							optional: true,
+						},
+						{
+							name: 'motto',
+							type: 'Snippet<[motto: string, glyph?: string]>',
+							optional: true,
+						},
+						{
+							name: 'description',
+							type: 'Snippet<[description: string, glyph?: string]>',
+							optional: true,
+						},
+						{
+							name: 'npm_url',
+							type: 'Snippet<[npm_url: string]>',
+							optional: true,
+						},
+						{
+							name: 'homepage_url',
+							type: 'Snippet<[homepage_url: string]>',
+							optional: true,
+						},
+						{
+							name: 'children',
+							type: 'Snippet',
+							optional: true,
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 143,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Paste_From_Clipboard.svelte': {
+			path: 'Paste_From_Clipboard.svelte',
+			declarations: [
+				{
+					name: 'Paste_From_Clipboard',
+					kind: 'component',
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 36,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Pending_Animation.svelte': {
+			path: 'Pending_Animation.svelte',
+			declarations: [
+				{
+					name: 'Pending_Animation',
+					kind: 'component',
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 63,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Pending_Button.svelte': {
+			path: 'Pending_Button.svelte',
+			declarations: [
+				{
+					name: 'Pending_Button',
+					kind: 'component',
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 74,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Project_Links.svelte': {
+			path: 'Project_Links.svelte',
+			declarations: [
+				{
+					name: 'Project_Links',
+					kind: 'component',
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 55,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Redirect.svelte': {
+			path: 'Redirect.svelte',
+			declarations: [
+				{
+					name: 'Redirect',
+					kind: 'component',
+					props: [
+						{
+							name: 'host',
+							type: 'string',
+							optional: true,
+							description:
+								'The target host to redirect to. Defaults to the current `location.host`.',
+						},
+						{
+							name: 'path',
+							type: 'string',
+							optional: true,
+							description:
+								'The target path to redirect to. Defaults to the current `location.pathname`.',
+						},
+						{
+							name: 'auto',
+							type: 'boolean',
+							optional: true,
+							description:
+								'Should the redirect happen automatically without user input? Defaults to `true`.',
+						},
+						{
+							name: 'children',
+							type: 'Snippet<[url: string]>',
+							optional: true,
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 42,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Spiders.svelte': {
+			path: 'Spiders.svelte',
+			declarations: [
+				{
+					name: 'Spiders',
+					kind: 'component',
+					props: [
+						{
+							name: 'spiders',
+							type: 'Array<string>',
+							optional: true,
+						},
+						{
+							name: 'seed',
+							type: 'unknown',
+							optional: true,
+						},
+						{
+							name: 'random',
+							type: 'typeof Math.random',
+							optional: true,
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 63,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Svg.svelte': {
+			path: 'Svg.svelte',
+			declarations: [
+				{
+					name: 'Svg',
+					kind: 'component',
+					props: [
+						{
+							name: 'data',
+							type: 'Svg_Data',
+							optional: false,
+						},
+						{
+							name: 'fill',
+							type: 'string | null',
+							optional: true,
+							description: 'Overrides `data.fill`.',
+						},
+						{
+							name: 'size',
+							type: 'string',
+							optional: true,
+							description:
+								'Sets both the `width` and `height` of the svg. Overridden by the `width` and `height` props.',
+						},
+						{
+							name: 'width',
+							type: 'string',
+							optional: true,
+							description: 'Sets the `width` of the svg. Overrides `size`.',
+						},
+						{
+							name: 'height',
+							type: 'string',
+							optional: true,
+							description: 'Sets the `height` of the svg. Overrides `size`.',
+						},
+						{
+							name: 'label',
+							type: 'string',
+							optional: true,
+						},
+						{
+							name: 'inline',
+							type: 'boolean',
+							optional: true,
+							description:
+								'Renders the SVG as an inline block with spacing appropriate for text. Defaults to `false`.',
+						},
+						{
+							name: 'shrink',
+							type: 'boolean',
+							optional: true,
+							description: 'Flex shrink behavior? Defaults to `true`.',
+						},
+						{
+							name: 'attrs',
+							type: "SvelteHTMLElements['svg']",
+							optional: true,
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 105,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+			imported_by: ['./logos.ts'],
+		},
+		'./Teleport.svelte': {
+			path: 'Teleport.svelte',
+			declarations: [
+				{
+					name: 'Teleport',
+					kind: 'component',
+					props: [
+						{
+							name: 'to',
+							type: 'HTMLElement | undefined | null',
+							optional: true,
+							description:
+								"Defaults to `undefined` to lessen friction with SSR.\nWe may want to change this to optionally accept a string selector,\nbut that didn't seem to be the best API for the `Dialog`.",
+						},
+						{
+							name: 'onmove',
+							type: '(el: HTMLElement, to: HTMLElement) => void',
+							optional: true,
+						},
+						{
+							name: 'children',
+							type: 'Snippet',
+							optional: false,
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 47,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Theme_Input.svelte': {
+			path: 'Theme_Input.svelte',
+			declarations: [
+				{
+					name: 'Theme_Input',
+					kind: 'component',
+					props: [
+						{
+							name: 'selected_theme',
+							type: '{theme: Theme}',
+							optional: true,
+						},
+						{
+							name: 'themes',
+							type: 'Array<Theme>',
+							optional: true,
+						},
+						{
+							name: 'enable_editing',
+							type: 'boolean',
+							optional: true,
+						},
+						{
+							name: 'select',
+							type: '((theme: Theme) => void | boolean) | null',
+							optional: true,
+						},
+						{
+							name: 'onselect',
+							type: '(theme: Theme) => void',
+							optional: true,
+						},
+						{
+							name: 'onedit',
+							type: '(theme: Theme) => void',
+							optional: true,
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 78,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Themed.svelte': {
+			path: 'Themed.svelte',
+			declarations: [
+				{
+					name: 'Themed',
+					kind: 'component',
+					props: [
+						{
+							name: 'sync_color_scheme',
+							type: 'typeof default_sync_color_scheme',
+							optional: true,
+						},
+						{
+							name: 'load_color_scheme',
+							type: 'typeof default_load_color_scheme',
+							optional: true,
+						},
+						{
+							name: 'save_color_scheme',
+							type: 'typeof default_save_color_scheme',
+							optional: true,
+						},
+						{
+							name: 'load_theme',
+							type: 'typeof default_load_theme',
+							optional: true,
+						},
+						{
+							name: 'save_theme',
+							type: 'typeof default_save_theme',
+							optional: true,
+						},
+						{
+							name: 'theme_fallback',
+							type: 'Theme | undefined',
+							optional: true,
+						},
+						{
+							name: 'themer',
+							type: 'Themer',
+							optional: true,
+							description:
+								"A reactive class containing the selected theme and color scheme.\nDefaults to the first default theme.\nThe class reference is not reactive\nbecause it's set in context without a wrapper, use `{#key theme}` if it changes.",
+						},
+						{
+							name: 'children',
+							type: 'Snippet<[themer: Themer, style: string | null, theme_style_html: string | null]>',
+							optional: false,
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 104,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Tome_Content.svelte': {
+			path: 'Tome_Content.svelte',
+			declarations: [
+				{
+					name: 'Tome_Content',
+					kind: 'component',
+					props: [
+						{
+							name: 'tome',
+							type: 'Tome',
+							optional: false,
+						},
+						{
+							name: 'docs_path',
+							type: 'string',
+							optional: true,
+						},
+						{
+							name: 'header',
+							type: 'Snippet',
+							optional: true,
+						},
+						{
+							name: 'children',
+							type: 'Snippet',
+							optional: false,
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 62,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Tome_Header.svelte': {
+			path: 'Tome_Header.svelte',
+			declarations: [
+				{
+					name: 'Tome_Header',
+					kind: 'component',
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 57,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Tome_Link.svelte': {
+			path: 'Tome_Link.svelte',
+			declarations: [
+				{
+					name: 'Tome_Link',
+					kind: 'component',
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 43,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Tome_Section.svelte': {
+			path: 'Tome_Section.svelte',
+			declarations: [
+				{
+					name: 'Tome_Section',
+					kind: 'component',
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 47,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Tome_Section_Header.svelte': {
+			path: 'Tome_Section_Header.svelte',
+			declarations: [
+				{
+					name: 'Tome_Section_Header',
+					kind: 'component',
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 67,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Tooltip.svelte': {
+			path: 'Tooltip.svelte',
+			declarations: [
+				{
+					name: 'Tooltip',
+					kind: 'component',
+					props: [
+						{
+							name: 'tooltip',
+							type: 'Tooltip_State',
+							optional: true,
+							description: 'Optional tooltip state - defaults to context value',
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 115,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
 		'./alert.ts': {
 			path: 'alert.ts',
 			declarations: [
@@ -640,7 +2391,7 @@ export const src_json: Enhanced_Src_Json = {
 					source_location: {
 						line: 87,
 						column: 0,
-						end_line: 335,
+						end_line: 337,
 						end_column: 1,
 					},
 					members: [
@@ -763,9 +2514,9 @@ export const src_json: Enhanced_Src_Json = {
 					name: 'contextmenu_action',
 					kind: 'function',
 					source_location: {
-						line: 344,
+						line: 346,
 						column: 13,
-						end_line: 360,
+						end_line: 362,
 						end_column: 1,
 					},
 					type_signature:
@@ -789,9 +2540,9 @@ export const src_json: Enhanced_Src_Json = {
 					name: 'Open_Contextmenu_Options',
 					kind: 'type',
 					source_location: {
-						line: 364,
+						line: 366,
 						column: 0,
-						end_line: 369,
+						end_line: 371,
 						end_column: 1,
 					},
 					type_signature: 'Open_Contextmenu_Options',
@@ -807,9 +2558,9 @@ export const src_json: Enhanced_Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 381,
+						line: 383,
 						column: 13,
-						end_line: 417,
+						end_line: 419,
 						end_column: 1,
 					},
 					type_signature:
@@ -848,9 +2599,9 @@ export const src_json: Enhanced_Src_Json = {
 					name: 'contextmenu_context',
 					kind: 'variable',
 					source_location: {
-						line: 467,
+						line: 469,
 						column: 13,
-						end_line: 467,
+						end_line: 469,
 						end_column: 70,
 					},
 					type_signature:
@@ -861,9 +2612,9 @@ export const src_json: Enhanced_Src_Json = {
 					name: 'contextmenu_submenu_context',
 					kind: 'variable',
 					source_location: {
-						line: 469,
+						line: 471,
 						column: 13,
-						end_line: 469,
+						end_line: 471,
 						end_column: 74,
 					},
 					type_signature:
@@ -874,9 +2625,9 @@ export const src_json: Enhanced_Src_Json = {
 					name: 'contextmenu_dimensions_context',
 					kind: 'variable',
 					source_location: {
-						line: 471,
+						line: 473,
 						column: 13,
-						end_line: 471,
+						end_line: 473,
 						end_column: 84,
 					},
 					type_signature:
@@ -893,9 +2644,9 @@ export const src_json: Enhanced_Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 482,
+						line: 484,
 						column: 13,
-						end_line: 505,
+						end_line: 507,
 						end_column: 1,
 					},
 					type_signature: '(get_scoped: () => boolean): void',
@@ -1740,6 +3491,22 @@ export const src_json: Enhanced_Src_Json = {
 					exported: true,
 				},
 				{
+					name: 'Component_Prop_Info',
+					kind: 'type',
+					doc_comment: 'Component prop information for Svelte components',
+					summary: 'Component prop information for Svelte components',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 17,
+						column: 0,
+						end_line: 23,
+						end_column: 1,
+					},
+					type_signature: 'Component_Prop_Info',
+					exported: true,
+				},
+				{
 					name: 'Source_Location',
 					kind: 'type',
 					doc_comment: 'Source location information within a file',
@@ -1747,9 +3514,9 @@ export const src_json: Enhanced_Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 17,
+						line: 28,
 						column: 0,
-						end_line: 22,
+						end_line: 33,
 						end_column: 1,
 					},
 					type_signature: 'Source_Location',
@@ -1764,9 +3531,9 @@ export const src_json: Enhanced_Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 31,
+						line: 42,
 						column: 0,
-						end_line: 111,
+						end_line: 127,
 						end_column: 1,
 					},
 					type_signature: 'Enhanced_Declaration',
@@ -1781,9 +3548,9 @@ export const src_json: Enhanced_Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 116,
+						line: 132,
 						column: 0,
-						end_line: 132,
+						end_line: 148,
 						end_column: 1,
 					},
 					type_signature: 'Enhanced_Module',
@@ -1797,9 +3564,9 @@ export const src_json: Enhanced_Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 137,
+						line: 153,
 						column: 0,
-						end_line: 141,
+						end_line: 157,
 						end_column: 1,
 					},
 					type_signature: 'Enhanced_Src_Json',
@@ -1813,9 +3580,9 @@ export const src_json: Enhanced_Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 146,
+						line: 162,
 						column: 13,
-						end_line: 150,
+						end_line: 166,
 						end_column: 1,
 					},
 					type_signature:
@@ -1838,9 +3605,9 @@ export const src_json: Enhanced_Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 155,
+						line: 171,
 						column: 13,
-						end_line: 160,
+						end_line: 176,
 						end_column: 1,
 					},
 					type_signature: '(decl: Enhanced_Declaration): string',
@@ -1862,9 +3629,9 @@ export const src_json: Enhanced_Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 165,
+						line: 181,
 						column: 13,
-						end_line: 175,
+						end_line: 191,
 						end_column: 1,
 					},
 					type_signature: '(decl: Enhanced_Declaration): string | undefined',
@@ -1886,9 +3653,9 @@ export const src_json: Enhanced_Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 180,
+						line: 196,
 						column: 13,
-						end_line: 184,
+						end_line: 200,
 						end_column: 1,
 					},
 					type_signature: '(doc_comment: string | undefined): string | undefined',
@@ -1910,9 +3677,9 @@ export const src_json: Enhanced_Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 189,
+						line: 205,
 						column: 13,
-						end_line: 213,
+						end_line: 229,
 						end_column: 1,
 					},
 					type_signature:
@@ -1939,7 +3706,7 @@ export const src_json: Enhanced_Src_Json = {
 				},
 			],
 			imports: ['@ryanatkn/belt/src_json.js'],
-			imported_by: ['./declaration_contextmenu.ts', './ts_helpers.ts'],
+			imported_by: ['./declaration_contextmenu.ts', './svelte_helpers.ts', './ts_helpers.ts'],
 		},
 		'./helpers.ts': {
 			path: 'helpers.ts',
@@ -1976,6 +3743,7 @@ export const src_json: Enhanced_Src_Json = {
 				'./contextmenu_state.svelte.ts',
 				'./docs_helpers.svelte.ts',
 				'./pkg.ts',
+				'./svelte_helpers.ts',
 				'./themer.svelte.ts',
 				'./tome.ts',
 				'./tooltip_state.svelte.ts',
@@ -2436,6 +4204,54 @@ export const src_json: Enhanced_Src_Json = {
 			],
 			imports: ['esm-env'],
 			imported_by: ['./themer.svelte.ts'],
+		},
+		'./svelte_helpers.ts': {
+			path: 'svelte_helpers.ts',
+			declarations: [
+				{
+					name: 'analyze_svelte_component',
+					kind: 'function',
+					doc_comment: 'Analyze a Svelte component from its TSX transformation',
+					summary: 'Analyze a Svelte component from its TSX transformation',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 23,
+						column: 13,
+						end_line: 77,
+						end_column: 1,
+					},
+					type_signature:
+						'(tsx_code: string, source_file: SourceFile, checker: TypeChecker, component_name: string): Enhanced_Declaration',
+					return_type: 'Enhanced_Declaration',
+					parameters: [
+						{
+							name: 'tsx_code',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'source_file',
+							type: 'SourceFile',
+							optional: false,
+						},
+						{
+							name: 'checker',
+							type: 'TypeChecker',
+							optional: false,
+						},
+						{
+							name: 'component_name',
+							type: 'string',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+			],
+			imports: ['typescript', './enhanced_declarations.js', './ts_helpers.js'],
+			module_comment:
+				'Svelte component analysis helpers using svelte2tsx\n\nProvides utilities for extracting metadata from Svelte components:\n- Component props with types and JSDoc\n- Component-level documentation\n- Type information from TypeScript',
 		},
 		'./test_helpers.ts': {
 			path: 'test_helpers.ts',
@@ -3375,6 +5191,7 @@ export const src_json: Enhanced_Src_Json = {
 			],
 			imports: ['typescript', './enhanced_declarations.js'],
 			module_comment: 'TypeScript Compiler API helpers for extracting metadata from source code',
+			imported_by: ['./svelte_helpers.ts'],
 		},
 	},
 };

@@ -100,6 +100,43 @@
 		</section>
 	{/if}
 
+	<!-- Component Props (for Svelte components) -->
+	{#if decl.props?.length}
+		<section class="section">
+			<h2>Props</h2>
+			<table class="params_table">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Type</th>
+						<th>Optional</th>
+						{#if decl.props.some((p) => p.description)}
+							<th>Description</th>
+						{/if}
+						{#if decl.props.some((p) => p.default_value)}
+							<th>Default</th>
+						{/if}
+					</tr>
+				</thead>
+				<tbody>
+					{#each decl.props as prop (prop)}
+						<tr>
+							<td><code>{prop.name}</code></td>
+							<td><code class="type">{prop.type}</code></td>
+							<td>{prop.optional ? 'Yes' : 'No'}</td>
+							{#if decl.props.some((p) => p.description)}
+								<td>{prop.description ?? ''}</td>
+							{/if}
+							{#if decl.props.some((p) => p.default_value)}
+								<td>{prop.default_value ? `<code>${prop.default_value}</code>` : ''}</td>
+							{/if}
+						</tr>
+					{/each}
+				</tbody>
+			</table>
+		</section>
+	{/if}
+
 	<!-- Return Type -->
 	{#if decl.return_type}
 		<section class="section">
