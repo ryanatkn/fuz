@@ -3,7 +3,7 @@
  */
 
 import ts from 'typescript';
-import type {Enhanced_Declaration} from './enhanced_declarations.js';
+import type {Src_Module_Declaration} from './src_json.js';
 
 /**
  * Infer declaration kind from symbol and node
@@ -95,7 +95,7 @@ export const extract_function_info = (
 	node: ts.Node,
 	symbol: ts.Symbol,
 	checker: ts.TypeChecker,
-	enhanced: Enhanced_Declaration,
+	decl: Src_Module_Declaration,
 	_jsdoc: ReturnType<typeof extract_jsdoc>,
 ): void => {
 	try {
@@ -104,12 +104,12 @@ export const extract_function_info = (
 
 		if (signatures.length > 0) {
 			const sig = signatures[0]!;
-			enhanced.type_signature = checker.signatureToString(sig);
+			decl.type_signature = checker.signatureToString(sig);
 
 			const return_type = checker.getReturnTypeOfSignature(sig);
-			enhanced.return_type = checker.typeToString(return_type);
+			decl.return_type = checker.typeToString(return_type);
 
-			enhanced.parameters = sig.parameters.map((param) => {
+			decl.parameters = sig.parameters.map((param) => {
 				const param_decl = param.valueDeclaration;
 				const param_type = checker.getTypeOfSymbolAtLocation(param, param_decl!);
 
@@ -127,7 +127,7 @@ export const extract_function_info = (
 	// Extract generic type parameters
 	if (ts.isFunctionDeclaration(node) || ts.isArrowFunction(node) || ts.isFunctionExpression(node)) {
 		if (node.typeParameters?.length) {
-			enhanced.generic_params = node.typeParameters.map((tp) => tp.getText());
+			decl.generic_params = node.typeParameters.map((tp) => tp.getText());
 		}
 	}
 };
@@ -139,23 +139,23 @@ export const extract_type_info = (
 	node: ts.Node,
 	_symbol: ts.Symbol,
 	checker: ts.TypeChecker,
-	enhanced: Enhanced_Declaration,
+	decl: Src_Module_Declaration,
 ): void => {
 	try {
 		const type = checker.getTypeAtLocation(node);
-		enhanced.type_signature = checker.typeToString(type);
+		decl.type_signature = checker.typeToString(type);
 	} catch (_err) {
 		// Ignore
 	}
 
 	if (ts.isTypeAliasDeclaration(node) || ts.isInterfaceDeclaration(node)) {
 		if (node.typeParameters?.length) {
-			enhanced.generic_params = node.typeParameters.map((tp) => tp.getText());
+			decl.generic_params = node.typeParameters.map((tp) => tp.getText());
 		}
 	}
 
 	if (ts.isInterfaceDeclaration(node) && node.heritageClauses) {
-		enhanced.extends = node.heritageClauses
+		decl.extends = node.heritageClauses
 			.filter((hc) => hc.token === ts.SyntaxKind.ExtendsKeyword)
 			.flatMap((hc) => hc.types.map((t) => t.getText()));
 	}
@@ -168,31 +168,31 @@ export const extract_class_info = (
 	node: ts.Node,
 	_symbol: ts.Symbol,
 	_checker: ts.TypeChecker,
-	enhanced: Enhanced_Declaration,
+	decl: Src_Module_Declaration,
 ): void => {
 	if (!ts.isClassDeclaration(node)) return;
 
 	if (node.heritageClauses) {
-		enhanced.extends = node.heritageClauses
+		decl.extends = node.heritageClauses
 			.filter((hc) => hc.token === ts.SyntaxKind.ExtendsKeyword)
 			.flatMap((hc) => hc.types.map((t) => t.getText()));
 
-		enhanced.implements = node.heritageClauses
+		decl.implements = node.heritageClauses
 			.filter((hc) => hc.token === ts.SyntaxKind.ImplementsKeyword)
 			.flatMap((hc) => hc.types.map((t) => t.getText()));
 	}
 
 	if (node.typeParameters?.length) {
-		enhanced.generic_params = node.typeParameters.map((tp) => tp.getText());
+		decl.generic_params = node.typeParameters.map((tp) => tp.getText());
 	}
 
 	// Extract member names
-	enhanced.members = [];
+	decl.members = [];
 	for (const member of node.members) {
 		if (ts.isPropertyDeclaration(member) || ts.isMethodDeclaration(member)) {
 			const member_name = (member.name as ts.Identifier).text;
 			if (member_name) {
-				enhanced.members.push({
+				decl.members.push({
 					name: member_name,
 					kind: ts.isMethodDeclaration(member) ? 'function' : 'variable',
 				});
@@ -208,11 +208,11 @@ export const extract_variable_info = (
 	node: ts.Node,
 	symbol: ts.Symbol,
 	checker: ts.TypeChecker,
-	enhanced: Enhanced_Declaration,
+	decl: Src_Module_Declaration,
 ): void => {
 	try {
 		const type = checker.getTypeOfSymbolAtLocation(symbol, node);
-		enhanced.type_signature = checker.typeToString(type);
+		decl.type_signature = checker.typeToString(type);
 	} catch (_err) {
 		// Ignore
 	}

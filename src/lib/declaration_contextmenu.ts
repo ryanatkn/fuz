@@ -1,11 +1,12 @@
-import {generate_import_statement, type Enhanced_Declaration} from '$lib/enhanced_declarations.js';
+import {resolve} from '$app/paths';
+import {generate_import_statement, type Src_Module_Declaration} from '$lib/src_json.js';
 import type {Contextmenu_Params} from '$lib/contextmenu_state.svelte.js';
 
 /**
  * Create contextmenu entries for a declaration
  */
 export const create_declaration_contextmenu = (
-	decl: Enhanced_Declaration,
+	decl: Src_Module_Declaration,
 	module_path: string,
 	pkg_name: string,
 	repo_url?: string,
@@ -14,8 +15,7 @@ export const create_declaration_contextmenu = (
 	const entries: Array<Contextmenu_Params> = [];
 
 	// Navigate to API docs
-	const module_slug = module_path.replace(/^\.\//, '').replace(/\.(ts|js|svelte)$/, '');
-	const docs_url = `/docs/api/${encodeURIComponent(module_slug)}/${encodeURIComponent(decl.name)}`;
+	const docs_url = resolve(`/docs/api#${encodeURIComponent(decl.name)}` as any);
 	entries.push({
 		snippet: 'link',
 		props: {
@@ -69,7 +69,7 @@ export const create_declaration_contextmenu = (
 				content: 'Copy docs link',
 				icon: '🔗',
 				run: async () => {
-					const url = `${homepage_url}/docs/api/${module_slug}/${decl.name}`;
+					const url = `${homepage_url}/docs/api#${decl.name}`;
 					await navigator.clipboard.writeText(url);
 				},
 			},

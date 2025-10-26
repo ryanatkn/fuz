@@ -8,7 +8,7 @@
  */
 
 import ts from 'typescript';
-import type {Enhanced_Declaration, Component_Prop_Info} from './enhanced_declarations.js';
+import type {Src_Module_Declaration, Component_Prop_Info} from './src_json.js';
 import {extract_jsdoc} from './ts_helpers.js';
 
 /**
@@ -18,15 +18,15 @@ import {extract_jsdoc} from './ts_helpers.js';
  * @param source_file - Original .svelte source file
  * @param checker - TypeScript type checker
  * @param component_name - Name of the component (derived from filename)
- * @returns Enhanced declaration with component metadata
+ * @returns Declaration with component metadata
  */
 export const analyze_svelte_component = (
 	tsx_code: string,
 	source_file: ts.SourceFile,
 	checker: ts.TypeChecker,
 	component_name: string,
-): Enhanced_Declaration => {
-	const enhanced: Enhanced_Declaration = {
+): Src_Module_Declaration => {
+	const result: Src_Module_Declaration = {
 		name: component_name,
 		kind: 'component',
 	};
@@ -44,36 +44,37 @@ export const analyze_svelte_component = (
 		// Extract component-level JSDoc from original source
 		const component_jsdoc = extract_component_jsdoc(source_file);
 		if (component_jsdoc) {
-			enhanced.doc_comment = component_jsdoc.full_text;
-			enhanced.summary = component_jsdoc.summary;
-			enhanced.examples = component_jsdoc.examples;
-			enhanced.deprecated_message = component_jsdoc.deprecated_message;
-			enhanced.see_also = component_jsdoc.see_also;
+			result.doc_comment = component_jsdoc.full_text;
+			result.summary = component_jsdoc.summary;
+			result.examples = component_jsdoc.examples;
+			result.deprecated_message = component_jsdoc.deprecated_message;
+			result.see_also = component_jsdoc.see_also;
 		}
 
 		// Extract props from Props interface
 		const props = extract_props_from_tsx(virtual_source, checker);
 		if (props.length > 0) {
-			enhanced.props = props;
+			result.props = props;
 		}
 
 		// Extract source location from original file
 		const start_pos = source_file.getLineAndCharacterOfPosition(0);
 		const end_pos = source_file.getLineAndCharacterOfPosition(source_file.end);
-		enhanced.source_location = {
+		result.source_location = {
 			line: start_pos.line + 1,
 			column: start_pos.character,
 			end_line: end_pos.line + 1,
 			end_column: end_pos.character,
 		};
 
-		enhanced.exported = true; // Components are always exported
+		result.exported = true; // Components are always exported
 	} catch (err) {
 		// If analysis fails, return basic component info
+		// eslint-disable-next-line no-console
 		console.error(`Error analyzing Svelte component ${component_name}:`, err);
 	}
 
-	return enhanced;
+	return result;
 };
 
 /**
@@ -123,7 +124,7 @@ const extract_component_jsdoc = (
 			}
 		}
 
-		const deprecated_match = text.match(/@deprecated\s+(.+)/);
+		const deprecated_match = /@deprecated\s+(.+)/.exec(text);
 		if (deprecated_match) {
 			deprecated_message = deprecated_match[1]!.trim();
 		}

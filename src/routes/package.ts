@@ -2,7 +2,7 @@
 // Do not edit directly - regenerated on build
 
 import type {Package_Json} from '@ryanatkn/belt/package_json.js';
-import type {Enhanced_Src_Json} from '$lib/enhanced_declarations.js';
+import type {Src_Json} from '$lib/src_json.js';
 
 export const package_json: Package_Json = {
 	name: '@ryanatkn/fuz',
@@ -116,7 +116,7 @@ export const package_json: Package_Json = {
 	},
 };
 
-export const src_json: Enhanced_Src_Json = {
+export const src_json: Src_Json = {
 	name: '@ryanatkn/fuz',
 	version: '0.147.0',
 	modules: {
@@ -183,7 +183,7 @@ export const src_json: Enhanced_Src_Json = {
 					props: [
 						{
 							name: 'decl',
-							type: 'Enhanced_Declaration',
+							type: 'Src_Module_Declaration',
 							optional: false,
 						},
 						{
@@ -200,7 +200,7 @@ export const src_json: Enhanced_Src_Json = {
 					source_location: {
 						line: 1,
 						column: 0,
-						end_line: 391,
+						end_line: 390,
 						end_column: 0,
 					},
 					exported: true,
@@ -623,7 +623,7 @@ export const src_json: Enhanced_Src_Json = {
 					source_location: {
 						line: 1,
 						column: 0,
-						end_line: 145,
+						end_line: 141,
 						end_column: 0,
 					},
 					exported: true,
@@ -1171,6 +1171,23 @@ export const src_json: Enhanced_Src_Json = {
 						line: 1,
 						column: 0,
 						end_line: 73,
+						end_column: 0,
+					},
+					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Identifier_Link.svelte': {
+			path: 'Identifier_Link.svelte',
+			declarations: [
+				{
+					name: 'Identifier_Link',
+					kind: 'component',
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 47,
 						end_column: 0,
 					},
 					exported: true,
@@ -1913,6 +1930,148 @@ export const src_json: Enhanced_Src_Json = {
 			imports: [],
 			module_comment: '// TODO move to module context?',
 		},
+		'./api.ts': {
+			path: 'api.ts',
+			declarations: [
+				{
+					name: 'Api',
+					kind: 'type',
+					doc_comment: 'API documentation data\nWraps Pkg with properly typed src_json',
+					summary: 'API documentation data\nWraps Pkg with properly typed src_json',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 14,
+						column: 0,
+						end_line: 17,
+						end_column: 1,
+					},
+					type_signature: 'Api',
+					exported: true,
+				},
+				{
+					name: 'api_context',
+					kind: 'variable',
+					source_location: {
+						line: 19,
+						column: 13,
+						end_line: 19,
+						end_column: 48,
+					},
+					type_signature:
+						'{ get: (error_message?: string | undefined) => Api; maybe_get: () => Api | undefined; set: (value: Api) => Api; }',
+					exported: false,
+				},
+			],
+			imports: ['@ryanatkn/belt/pkg.js', '$lib/src_json.js', '$lib/context_helpers.js'],
+			module_comment:
+				'API documentation context\nProvides source metadata and package info for API docs',
+			imported_by: ['./api_data.ts'],
+		},
+		'./api_data.ts': {
+			path: 'api_data.ts',
+			declarations: [
+				{
+					name: 'lookup_declaration_by_name',
+					kind: 'function',
+					doc_comment: 'Look up a declaration by name (flat namespace)',
+					summary: 'Look up a declaration by name (flat namespace)',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 12,
+						column: 13,
+						end_line: 28,
+						end_column: 1,
+					},
+					type_signature:
+						'(name: string): { decl: Src_Module_Declaration; module_path: string; module: Src_Module; } | undefined',
+					return_type:
+						'{ decl: Src_Module_Declaration; module_path: string; module: Src_Module; } | undefined',
+					parameters: [
+						{
+							name: 'name',
+							type: 'string',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'get_all_declarations',
+					kind: 'function',
+					doc_comment: 'Get all declarations as a flat list',
+					summary: 'Get all declarations as a flat list',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 33,
+						column: 13,
+						end_line: 55,
+						end_column: 1,
+					},
+					type_signature:
+						'(): { module_path: string; module: Src_Module; decl: Src_Module_Declaration; }[]',
+					return_type:
+						'{ module_path: string; module: Src_Module; decl: Src_Module_Declaration; }[]',
+					parameters: [],
+					exported: false,
+				},
+				{
+					name: 'is_known_identifier',
+					kind: 'function',
+					doc_comment: 'Check if an identifier is documented',
+					summary: 'Check if an identifier is documented',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 60,
+						column: 13,
+						end_line: 62,
+						end_column: 1,
+					},
+					type_signature: '(name: string): boolean',
+					return_type: 'boolean',
+					parameters: [
+						{
+							name: 'name',
+							type: 'string',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'search_declarations',
+					kind: 'function',
+					doc_comment: 'Search declarations by name (fuzzy match)',
+					summary: 'Search declarations by name (fuzzy match)',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 67,
+						column: 13,
+						end_line: 107,
+						end_column: 1,
+					},
+					type_signature:
+						'(query: string): { module_path: string; module: Src_Module; decl: Src_Module_Declaration; }[]',
+					return_type:
+						'{ module_path: string; module: Src_Module; decl: Src_Module_Declaration; }[]',
+					parameters: [
+						{
+							name: 'query',
+							type: 'string',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+			],
+			imports: ['$lib/api.js', '$lib/src_json.js'],
+			module_comment:
+				'API documentation data helpers\nFunctions for looking up and searching declarations',
+		},
 		'./constants.ts': {
 			path: 'constants.ts',
 			declarations: [
@@ -1967,6 +2126,7 @@ export const src_json: Enhanced_Src_Json = {
 			],
 			imports: ['svelte'],
 			imported_by: [
+				'./api.ts',
 				'./contextmenu_state.svelte.ts',
 				'./docs_helpers.svelte.ts',
 				'./pkg.ts',
@@ -3151,18 +3311,18 @@ export const src_json: Enhanced_Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 7,
+						line: 8,
 						column: 13,
 						end_line: 80,
 						end_column: 1,
 					},
 					type_signature:
-						'(decl: Enhanced_Declaration, module_path: string, pkg_name: string, repo_url?: string | undefined, homepage_url?: string | null | undefined): Contextmenu_Params[]',
+						'(decl: Src_Module_Declaration, module_path: string, pkg_name: string, repo_url?: string | undefined, homepage_url?: string | null | undefined): Contextmenu_Params[]',
 					return_type: 'Contextmenu_Params[]',
 					parameters: [
 						{
 							name: 'decl',
-							type: 'Enhanced_Declaration',
+							type: 'Src_Module_Declaration',
 							optional: false,
 						},
 						{
@@ -3189,7 +3349,7 @@ export const src_json: Enhanced_Src_Json = {
 					exported: false,
 				},
 			],
-			imports: ['$lib/enhanced_declarations.js', '$lib/contextmenu_state.svelte.js'],
+			imports: ['$app/paths', '$lib/src_json.js', '$lib/contextmenu_state.svelte.js'],
 		},
 		'./dialog.ts': {
 			path: 'dialog.ts',
@@ -3471,243 +3631,6 @@ export const src_json: Enhanced_Src_Json = {
 			],
 			imported_by: ['./tome.ts'],
 		},
-		'./enhanced_declarations.ts': {
-			path: 'enhanced_declarations.ts',
-			declarations: [
-				{
-					name: 'Parameter_Info',
-					kind: 'type',
-					doc_comment: 'Enhanced parameter information for functions and methods',
-					summary: 'Enhanced parameter information for functions and methods',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 6,
-						column: 0,
-						end_line: 12,
-						end_column: 1,
-					},
-					type_signature: 'Parameter_Info',
-					exported: true,
-				},
-				{
-					name: 'Component_Prop_Info',
-					kind: 'type',
-					doc_comment: 'Component prop information for Svelte components',
-					summary: 'Component prop information for Svelte components',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 17,
-						column: 0,
-						end_line: 23,
-						end_column: 1,
-					},
-					type_signature: 'Component_Prop_Info',
-					exported: true,
-				},
-				{
-					name: 'Source_Location',
-					kind: 'type',
-					doc_comment: 'Source location information within a file',
-					summary: 'Source location information within a file',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 28,
-						column: 0,
-						end_line: 33,
-						end_column: 1,
-					},
-					type_signature: 'Source_Location',
-					exported: true,
-				},
-				{
-					name: 'Enhanced_Declaration',
-					kind: 'type',
-					doc_comment:
-						'Extended declaration type with rich TypeScript metadata\n\nThis extends the base `Src_Module_Declaration` with detailed information\nextracted from TypeScript source code including JSDoc comments,\ntype signatures, and structural information.',
-					summary: 'Extended declaration type with rich TypeScript metadata',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 42,
-						column: 0,
-						end_line: 127,
-						end_column: 1,
-					},
-					type_signature: 'Enhanced_Declaration',
-					extends: ['Src_Module_Declaration'],
-					exported: true,
-				},
-				{
-					name: 'Enhanced_Module',
-					kind: 'type',
-					doc_comment: 'Enhanced module information with rich metadata',
-					summary: 'Enhanced module information with rich metadata',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 132,
-						column: 0,
-						end_line: 148,
-						end_column: 1,
-					},
-					type_signature: 'Enhanced_Module',
-					exported: true,
-				},
-				{
-					name: 'Enhanced_Src_Json',
-					kind: 'type',
-					doc_comment: 'Enhanced src.json structure',
-					summary: 'Enhanced src.json structure',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 153,
-						column: 0,
-						end_line: 157,
-						end_column: 1,
-					},
-					type_signature: 'Enhanced_Src_Json',
-					exported: true,
-				},
-				{
-					name: 'is_enhanced_declaration',
-					kind: 'function',
-					doc_comment: 'Helper to check if a declaration is enhanced',
-					summary: 'Helper to check if a declaration is enhanced',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 162,
-						column: 13,
-						end_line: 166,
-						end_column: 1,
-					},
-					type_signature:
-						'(decl: Enhanced_Declaration | { [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "component" | "css" | null; }): decl is Enhanced_Declaration',
-					return_type: 'boolean',
-					parameters: [
-						{
-							name: 'decl',
-							type: 'Enhanced_Declaration | { [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "component" | "css" | null; }',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'get_declaration_display_name',
-					kind: 'function',
-					doc_comment: "Helper to get a declaration's display name",
-					summary: "Helper to get a declaration's display name",
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 171,
-						column: 13,
-						end_line: 176,
-						end_column: 1,
-					},
-					type_signature: '(decl: Enhanced_Declaration): string',
-					return_type: 'string',
-					parameters: [
-						{
-							name: 'decl',
-							type: 'Enhanced_Declaration',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'get_type_summary',
-					kind: 'function',
-					doc_comment: 'Helper to get a short type summary for tooltips',
-					summary: 'Helper to get a short type summary for tooltips',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 181,
-						column: 13,
-						end_line: 191,
-						end_column: 1,
-					},
-					type_signature: '(decl: Enhanced_Declaration): string | undefined',
-					return_type: 'string | undefined',
-					parameters: [
-						{
-							name: 'decl',
-							type: 'Enhanced_Declaration',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'get_doc_summary',
-					kind: 'function',
-					doc_comment: 'Helper to extract the first paragraph from doc comment',
-					summary: 'Helper to extract the first paragraph from doc comment',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 196,
-						column: 13,
-						end_line: 200,
-						end_column: 1,
-					},
-					type_signature: '(doc_comment: string | undefined): string | undefined',
-					return_type: 'string | undefined',
-					parameters: [
-						{
-							name: 'doc_comment',
-							type: 'string | undefined',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-				{
-					name: 'generate_import_statement',
-					kind: 'function',
-					doc_comment: 'Generate import statement for a declaration',
-					summary: 'Generate import statement for a declaration',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 205,
-						column: 13,
-						end_line: 229,
-						end_column: 1,
-					},
-					type_signature:
-						'(decl: Enhanced_Declaration, module_path: string, pkg_name: string): string',
-					return_type: 'string',
-					parameters: [
-						{
-							name: 'decl',
-							type: 'Enhanced_Declaration',
-							optional: false,
-						},
-						{
-							name: 'module_path',
-							type: 'string',
-							optional: false,
-						},
-						{
-							name: 'pkg_name',
-							type: 'string',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
-			],
-			imports: ['@ryanatkn/belt/src_json.js'],
-			imported_by: ['./declaration_contextmenu.ts', './svelte_helpers.ts', './ts_helpers.ts'],
-		},
 		'./helpers.ts': {
 			path: 'helpers.ts',
 			declarations: [
@@ -3740,6 +3663,7 @@ export const src_json: Enhanced_Src_Json = {
 			module_comment:
 				'Renders any value to a string representation\n\n@param value Any JS value to stringify\n@returns A string representation of the value',
 			imported_by: [
+				'./api.ts',
 				'./contextmenu_state.svelte.ts',
 				'./docs_helpers.svelte.ts',
 				'./pkg.ts',
@@ -4129,6 +4053,234 @@ export const src_json: Enhanced_Src_Json = {
 			module_comment:
 				'Runs `fn` in an `$effect`, passing `true` as the `skip` argument for the first `count` runs.\nCalls `fn` even when skipping so callers can read any dependent signals.',
 		},
+		'./src_json.ts': {
+			path: 'src_json.ts',
+			declarations: [
+				{
+					name: 'Src_Module_Declaration_Kind',
+					kind: 'type',
+					doc_comment: 'Source code metadata types\nInlined from',
+					summary: 'Source code metadata types\nInlined from',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 6,
+						column: 0,
+						end_line: 13,
+						end_column: 9,
+					},
+					type_signature: 'Src_Module_Declaration_Kind',
+					exported: true,
+				},
+				{
+					name: 'Parameter_Info',
+					kind: 'type',
+					doc_comment: 'Parameter information for functions and methods',
+					summary: 'Parameter information for functions and methods',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 18,
+						column: 0,
+						end_line: 24,
+						end_column: 1,
+					},
+					type_signature: 'Parameter_Info',
+					exported: true,
+				},
+				{
+					name: 'Component_Prop_Info',
+					kind: 'type',
+					doc_comment: 'Component prop information for Svelte components',
+					summary: 'Component prop information for Svelte components',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 29,
+						column: 0,
+						end_line: 35,
+						end_column: 1,
+					},
+					type_signature: 'Component_Prop_Info',
+					exported: true,
+				},
+				{
+					name: 'Source_Location',
+					kind: 'type',
+					doc_comment: 'Source location information within a file',
+					summary: 'Source location information within a file',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 40,
+						column: 0,
+						end_line: 45,
+						end_column: 1,
+					},
+					type_signature: 'Source_Location',
+					exported: true,
+				},
+				{
+					name: 'Src_Module_Declaration',
+					kind: 'type',
+					doc_comment: 'Declaration metadata with rich TypeScript/JSDoc information',
+					summary: 'Declaration metadata with rich TypeScript/JSDoc information',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 50,
+						column: 0,
+						end_line: 92,
+						end_column: 1,
+					},
+					type_signature: 'Src_Module_Declaration',
+					exported: true,
+				},
+				{
+					name: 'Src_Module',
+					kind: 'type',
+					doc_comment: 'Module information with metadata',
+					summary: 'Module information with metadata',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 97,
+						column: 0,
+						end_line: 111,
+						end_column: 1,
+					},
+					type_signature: 'Src_Module',
+					exported: true,
+				},
+				{
+					name: 'Src_Modules',
+					kind: 'type',
+					doc_comment: 'Collection of modules indexed by path',
+					summary: 'Collection of modules indexed by path',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 116,
+						column: 0,
+						end_line: 116,
+						end_column: 53,
+					},
+					type_signature: 'Src_Modules',
+					exported: true,
+				},
+				{
+					name: 'Src_Json',
+					kind: 'type',
+					doc_comment: 'Top-level source metadata',
+					summary: 'Top-level source metadata',
+					examples: [],
+					see_also: [
+						'://github.com/ryanatkn/gro/blob/main/src/docs/gro_plugin_sveltekit_app.md#well-known-src',
+					],
+					source_location: {
+						line: 122,
+						column: 0,
+						end_line: 129,
+						end_column: 1,
+					},
+					type_signature: 'Src_Json',
+					exported: true,
+				},
+				{
+					name: 'get_declaration_display_name',
+					kind: 'function',
+					doc_comment: "Helper to get a declaration's display name",
+					summary: "Helper to get a declaration's display name",
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 134,
+						column: 13,
+						end_line: 139,
+						end_column: 1,
+					},
+					type_signature: '(decl: Src_Module_Declaration): string',
+					return_type: 'string',
+					parameters: [
+						{
+							name: 'decl',
+							type: 'Src_Module_Declaration',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'get_type_summary',
+					kind: 'function',
+					doc_comment: 'Helper to get a short type summary for tooltips',
+					summary: 'Helper to get a short type summary for tooltips',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 144,
+						column: 13,
+						end_line: 153,
+						end_column: 1,
+					},
+					type_signature: '(decl: Src_Module_Declaration): string | undefined',
+					return_type: 'string | undefined',
+					parameters: [
+						{
+							name: 'decl',
+							type: 'Src_Module_Declaration',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+				{
+					name: 'generate_import_statement',
+					kind: 'function',
+					doc_comment: 'Generate import statement for a declaration',
+					summary: 'Generate import statement for a declaration',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 158,
+						column: 13,
+						end_line: 177,
+						end_column: 1,
+					},
+					type_signature:
+						'(decl: Src_Module_Declaration, module_path: string, pkg_name: string): string',
+					return_type: 'string',
+					parameters: [
+						{
+							name: 'decl',
+							type: 'Src_Module_Declaration',
+							optional: false,
+						},
+						{
+							name: 'module_path',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'pkg_name',
+							type: 'string',
+							optional: false,
+						},
+					],
+					exported: false,
+				},
+			],
+			imports: [],
+			module_comment:
+				'Source code metadata types\nInlined from @ryanatkn/belt with extensions for documentation',
+			imported_by: [
+				'./api.ts',
+				'./api_data.ts',
+				'./declaration_contextmenu.ts',
+				'./svelte_helpers.ts',
+				'./ts_helpers.ts',
+			],
+		},
 		'./storage.ts': {
 			path: 'storage.ts',
 			declarations: [
@@ -4218,12 +4370,12 @@ export const src_json: Enhanced_Src_Json = {
 					source_location: {
 						line: 23,
 						column: 13,
-						end_line: 77,
+						end_line: 78,
 						end_column: 1,
 					},
 					type_signature:
-						'(tsx_code: string, source_file: SourceFile, checker: TypeChecker, component_name: string): Enhanced_Declaration',
-					return_type: 'Enhanced_Declaration',
+						'(tsx_code: string, source_file: SourceFile, checker: TypeChecker, component_name: string): Src_Module_Declaration',
+					return_type: 'Src_Module_Declaration',
 					parameters: [
 						{
 							name: 'tsx_code',
@@ -4249,7 +4401,7 @@ export const src_json: Enhanced_Src_Json = {
 					exported: false,
 				},
 			],
-			imports: ['typescript', './enhanced_declarations.js', './ts_helpers.js'],
+			imports: ['typescript', './src_json.js', './ts_helpers.js'],
 			module_comment:
 				'Svelte component analysis helpers using svelte2tsx\n\nProvides utilities for extracting metadata from Svelte components:\n- Component props with types and JSDoc\n- Component-level documentation\n- Type information from TypeScript',
 		},
@@ -4941,7 +5093,7 @@ export const src_json: Enhanced_Src_Json = {
 						end_column: 1,
 					},
 					type_signature:
-						'(node: Node, symbol: Symbol, checker: TypeChecker, enhanced: Enhanced_Declaration, _jsdoc: { full_text: string; summary: string; examples: string[]; deprecated_message?: string | undefined; see_also: string[]; } | undefined): void',
+						'(node: Node, symbol: Symbol, checker: TypeChecker, decl: Src_Module_Declaration, _jsdoc: { full_text: string; summary: string; examples: string[]; deprecated_message?: string | undefined; see_also: string[]; } | undefined): void',
 					return_type: 'void',
 					parameters: [
 						{
@@ -4960,8 +5112,8 @@ export const src_json: Enhanced_Src_Json = {
 							optional: false,
 						},
 						{
-							name: 'enhanced',
-							type: 'Enhanced_Declaration',
+							name: 'decl',
+							type: 'Src_Module_Declaration',
 							optional: false,
 						},
 						{
@@ -4986,7 +5138,7 @@ export const src_json: Enhanced_Src_Json = {
 						end_column: 1,
 					},
 					type_signature:
-						'(node: Node, _symbol: Symbol, checker: TypeChecker, enhanced: Enhanced_Declaration): void',
+						'(node: Node, _symbol: Symbol, checker: TypeChecker, decl: Src_Module_Declaration): void',
 					return_type: 'void',
 					parameters: [
 						{
@@ -5005,8 +5157,8 @@ export const src_json: Enhanced_Src_Json = {
 							optional: false,
 						},
 						{
-							name: 'enhanced',
-							type: 'Enhanced_Declaration',
+							name: 'decl',
+							type: 'Src_Module_Declaration',
 							optional: false,
 						},
 					],
@@ -5026,7 +5178,7 @@ export const src_json: Enhanced_Src_Json = {
 						end_column: 1,
 					},
 					type_signature:
-						'(node: Node, _symbol: Symbol, _checker: TypeChecker, enhanced: Enhanced_Declaration): void',
+						'(node: Node, _symbol: Symbol, _checker: TypeChecker, decl: Src_Module_Declaration): void',
 					return_type: 'void',
 					parameters: [
 						{
@@ -5045,8 +5197,8 @@ export const src_json: Enhanced_Src_Json = {
 							optional: false,
 						},
 						{
-							name: 'enhanced',
-							type: 'Enhanced_Declaration',
+							name: 'decl',
+							type: 'Src_Module_Declaration',
 							optional: false,
 						},
 					],
@@ -5066,7 +5218,7 @@ export const src_json: Enhanced_Src_Json = {
 						end_column: 1,
 					},
 					type_signature:
-						'(node: Node, symbol: Symbol, checker: TypeChecker, enhanced: Enhanced_Declaration): void',
+						'(node: Node, symbol: Symbol, checker: TypeChecker, decl: Src_Module_Declaration): void',
 					return_type: 'void',
 					parameters: [
 						{
@@ -5085,8 +5237,8 @@ export const src_json: Enhanced_Src_Json = {
 							optional: false,
 						},
 						{
-							name: 'enhanced',
-							type: 'Enhanced_Declaration',
+							name: 'decl',
+							type: 'Src_Module_Declaration',
 							optional: false,
 						},
 					],
@@ -5189,7 +5341,7 @@ export const src_json: Enhanced_Src_Json = {
 					exported: false,
 				},
 			],
-			imports: ['typescript', './enhanced_declarations.js'],
+			imports: ['typescript', './src_json.js'],
 			module_comment: 'TypeScript Compiler API helpers for extracting metadata from source code',
 			imported_by: ['./svelte_helpers.ts'],
 		},

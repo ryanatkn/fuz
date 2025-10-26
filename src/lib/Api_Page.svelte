@@ -1,14 +1,11 @@
 <script lang="ts">
 	import {resolve} from '$app/paths';
 
-	import {
-		get_declaration_display_name,
-		type Enhanced_Declaration,
-	} from '$lib/enhanced_declarations.js';
+	import {get_declaration_display_name, type Src_Module_Declaration} from '$lib/src_json.js';
 	import Details from '$lib/Details.svelte';
 
 	interface Props {
-		decl: Enhanced_Declaration;
+		decl: Src_Module_Declaration;
 		module_path: string;
 		repo_url?: string;
 	}
@@ -43,9 +40,11 @@
 			</div>
 		{/if}
 
+		<!-- eslint-disable-next-line @typescript-eslint/no-deprecated -->
 		{#if decl.deprecated_message}
 			<div class="deprecated_warning pane">
 				<strong>⚠️ Deprecated:</strong>
+				<!-- eslint-disable-next-line @typescript-eslint/no-deprecated -->
 				{decl.deprecated_message}
 			</div>
 		{/if}
@@ -89,7 +88,7 @@
 						<tr>
 							<td><code>{param.name}</code></td>
 							<td><code class="type">{param.type}</code></td>
-							<td>{param.optional ? 'Yes' : 'No'}</td>
+							<td>{param.optional ? 'yes' : 'no'}</td>
 							{#if decl.parameters.some((p) => p.description)}
 								<td>{param.description ?? ''}</td>
 							{/if}
@@ -123,7 +122,7 @@
 						<tr>
 							<td><code>{prop.name}</code></td>
 							<td><code class="type">{prop.type}</code></td>
-							<td>{prop.optional ? 'Yes' : 'No'}</td>
+							<td>{prop.optional ? 'yes' : 'no'}</td>
 							{#if decl.props.some((p) => p.description)}
 								<td>{prop.description ?? ''}</td>
 							{/if}

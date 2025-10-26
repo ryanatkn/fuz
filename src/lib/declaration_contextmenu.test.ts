@@ -1,9 +1,9 @@
 import {describe, test, assert} from 'vitest';
 import {create_declaration_contextmenu} from './declaration_contextmenu.js';
-import type {Enhanced_Declaration} from './enhanced_declarations.js';
+import type {Src_Module_Declaration} from './src_json.js';
 
 describe('create_declaration_contextmenu', () => {
-	const base_decl: Enhanced_Declaration = {
+	const base_decl: Src_Module_Declaration = {
 		name: 'MyType',
 		kind: 'type',
 		source_location: {line: 10, column: 0},
@@ -29,7 +29,7 @@ describe('create_declaration_contextmenu', () => {
 		assert.ok(nav_entry, 'should have link entry');
 		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 		if (typeof nav_entry === 'object' && nav_entry.snippet === 'link') {
-			assert.ok(nav_entry.props.href.includes('/docs/api/'));
+			assert.ok(nav_entry.props.href.includes('/docs/api#'));
 			assert.ok(nav_entry.props.href.includes('MyType'));
 		} else {
 			assert.fail('nav_entry should be object with snippet link');
@@ -76,7 +76,7 @@ describe('create_declaration_contextmenu', () => {
 	});
 
 	test('excludes view source entry when no source_location', () => {
-		const decl_no_location: Enhanced_Declaration = {
+		const decl_no_location: Src_Module_Declaration = {
 			name: 'MyType',
 			kind: 'type',
 		};
@@ -131,19 +131,17 @@ describe('create_declaration_contextmenu', () => {
 		assert.ok(nav_entry);
 		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 		if (typeof nav_entry === 'object' && nav_entry.snippet === 'link') {
-			// Should strip ./ prefix and .ts extension
-			// The path might be URL encoded if it contains slashes
+			// Hash-based URLs only include identifier name, not module path
 			const href = nav_entry.props.href;
-			assert.ok(!href.includes('./'), 'should not contain ./ prefix');
-			// Extension should be stripped (whether encoded or not)
-			assert.ok(!href.includes('.ts') && !href.includes('%2Ets'));
+			assert.ok(href.includes('/docs/api#'), 'should use hash-based routing');
+			assert.ok(href.includes('MyType'), 'should include identifier name');
 		} else {
 			assert.fail('nav_entry should be object with snippet link');
 		}
 	});
 
 	test('URL encodes module and identifier names', () => {
-		const special_decl: Enhanced_Declaration = {
+		const special_decl: Src_Module_Declaration = {
 			name: 'My Type',
 			kind: 'type',
 		};

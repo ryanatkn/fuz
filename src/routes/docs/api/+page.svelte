@@ -1,19 +1,20 @@
 <script lang="ts">
-	import {resolve} from '$app/paths';
-
-	import {
-		get_all_modules,
-		get_all_declarations,
-		search_declarations,
-	} from '$routes/docs/api/api_data.svelte.js';
+	import {get_all_declarations, search_declarations} from '$lib/api_data.js';
+	import {api_context} from '$lib/api.js';
 	import {pkg_context} from '$lib/pkg.js';
-	import Declaration_Link from '$lib/Declaration_Link.svelte';
+	import type {Src_Json} from '$lib/src_json.js';
+	import Api_Page from '$lib/Api_Page.svelte';
 
 	const pkg = pkg_context.get();
 
+	// Set up API context for child components
+	api_context.set({
+		pkg,
+		src_json: pkg.src_json as Src_Json,
+	});
+
 	let search_query = $state('');
 
-	const all_modules = $derived(get_all_modules());
 	const all_declarations = $derived(get_all_declarations());
 
 	// Search results
@@ -22,14 +23,15 @@
 		return search_declarations(search_query);
 	});
 
-	// Group by module
-	const grouped = $derived.by(() => {
+	// Group by kind (component, function, type, etc.)
+	const grouped_by_kind = $derived.by(() => {
 		const groups: Map<string, Array<{module_path: string; decl: any; module: any}>> = new Map(); // eslint-disable-line svelte/prefer-svelte-reactivity
 
 		for (const item of filtered_declarations) {
-			const existing = groups.get(item.module_path) ?? [];
+			const kind = item.decl.kind || 'other';
+			const existing = groups.get(kind) ?? [];
 			existing.push(item);
-			groups.set(item.module_path, existing);
+			groups.set(kind, existing);
 		}
 
 		return groups;
@@ -40,7 +42,7 @@
 	<title>API Documentation - {pkg.package_json.name}</title>
 </svelte:head>
 
-<div class="api_index">
+<div class="api_page">
 	<header class="header">
 		<h1>API Documentation</h1>
 		<p class="subtitle">{pkg.package_json.description}</p>
@@ -57,9 +59,6 @@
 
 		<div class="stats">
 			<span class="stat">
-				{all_modules.length} modules
-			</span>
-			<span class="stat">
 				{all_declarations.length} declarations
 			</span>
 			{#if search_query}
@@ -70,57 +69,43 @@
 		</div>
 	</header>
 
-	{#if grouped.size === 0}
+	{#if grouped_by_kind.size === 0}
 		<div class="no_results pane p_md">
 			<p>No declarations found matching "{search_query}"</p>
 		</div>
 	{:else}
-		<div class="modules_list">
-			{#each [...grouped.entries()] as [module_path, items] (module_path)}
-				{@const module_name = module_path.replace(/^\.\//, '')}
-				<section class="module_section">
-					<h2 class="module_header">
-						<a
-							class="module_link"
-							href={resolve(`/docs/api/${module_name.replace(/\.(ts|js|svelte)$/, '')}` as any)}
-						>
-							{module_name}
-						</a>
-						<span class="count">{items.length}</span>
-					</h2>
+		<!-- Render all declarations with anchor IDs -->
+		{#each [...grouped_by_kind.entries()] as [kind, items] (kind)}
+			<section class="kind_section">
+				<h2 class="kind_header">
+					<span class="kind_name">{kind}s</span>
+					<span class="count">{items.length}</span>
+				</h2>
 
-					<ul class="declarations_list unstyled">
-						{#each items as { decl, module_path } (decl.name)}
-							<li class="declaration_item">
-								<Declaration_Link
-									{decl}
-									{module_path}
-									pkg_name={pkg.package_json.name}
-									repo_url={pkg.repo_url}
-									homepage_url={pkg.homepage_url}
-								/>
-								{#if decl.summary}
-									<span class="summary">{decl.summary}</span>
-								{/if}
-							</li>
-						{/each}
-					</ul>
-				</section>
-			{/each}
-		</div>
+				{#each items as { decl, module_path } (decl.name)}
+					<article id={decl.name} class="declaration_detail">
+						<Api_Page {decl} {module_path} repo_url={pkg.repo_url} />
+					</article>
+				{/each}
+			</section>
+		{/each}
 	{/if}
 </div>
 
 <style>
-	.api_index {
+	.api_page {
 		max-width: var(--max_width, var(--distance_md));
 		padding: var(--space_md);
 	}
 
 	.header {
-		margin-bottom: var(--space_lg);
+		margin-bottom: var(--space_xl);
 		border-bottom: var(--border_width) solid var(--border_color);
 		padding-bottom: var(--space_md);
+		position: sticky;
+		top: 0;
+		background-color: var(--bg_1);
+		z-index: 10;
 	}
 
 	.header h1 {
@@ -170,36 +155,23 @@
 		border-radius: var(--border_radius_xs);
 	}
 
-	.modules_list {
-		display: flex;
-		flex-direction: column;
-		gap: var(--space_lg);
+	.kind_section {
+		margin-bottom: var(--space_xl);
 	}
 
-	.module_section {
-		border: var(--border_width) solid var(--border_color);
-		border-radius: var(--border_radius_sm);
-		padding: var(--space_md);
-		background-color: var(--bg_2);
-	}
-
-	.module_header {
+	.kind_header {
 		display: flex;
 		align-items: baseline;
 		gap: var(--space_sm);
-		margin: 0 0 var(--space_md) 0;
-		font-size: var(--font_size_lg);
+		margin: 0 0 var(--space_lg) 0;
+		font-size: var(--font_size_xl);
+		padding-bottom: var(--space_sm);
+		border-bottom: var(--border_width) solid var(--border_color);
 	}
 
-	.module_link {
-		font-family: var(--font_family_mono);
+	.kind_name {
 		color: var(--text_color_2);
-		text-decoration: none;
-		transition: color 0.15s;
-	}
-
-	.module_link:hover {
-		color: var(--color_a_5);
+		text-transform: capitalize;
 	}
 
 	.count {
@@ -208,28 +180,17 @@
 		font-weight: normal;
 	}
 
-	.declarations_list {
-		display: flex;
-		flex-direction: column;
-		gap: var(--space_sm);
+	.declaration_detail {
+		margin-bottom: var(--space_xl);
+		padding: var(--space_md);
+		border: var(--border_width) solid var(--border_color);
+		border-radius: var(--border_radius_sm);
+		background-color: var(--bg_2);
+		scroll-margin-top: calc(var(--space_xl) * 2);
 	}
 
-	.declaration_item {
-		display: flex;
-		align-items: baseline;
-		gap: var(--space_sm);
-		padding: var(--space_xs);
-		border-radius: var(--border_radius_xs);
-		transition: background-color 0.15s;
-	}
-
-	.declaration_item:hover {
-		background-color: var(--bg_3);
-	}
-
-	.summary {
-		font-size: var(--font_size_sm);
-		color: var(--text_color_3);
-		flex: 1;
+	.declaration_detail:target {
+		border-color: var(--color_a_5);
+		box-shadow: 0 0 0 2px var(--color_a_2);
 	}
 </style>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import {resolve} from '$app/paths';
 	import type {Snippet} from 'svelte';
-	import {get_type_summary, type Enhanced_Declaration} from '$lib/enhanced_declarations.js';
+	import {get_type_summary, type Src_Module_Declaration} from '$lib/src_json.js';
 	import {tooltip_context} from '$lib/tooltip_state.svelte.js';
 	import {contextmenu_action} from '$lib/contextmenu_state.svelte.js';
 	import {create_declaration_contextmenu} from '$lib/declaration_contextmenu.js';
@@ -17,7 +17,7 @@
 		/**
 		 * The declaration to link to
 		 */
-		decl: Enhanced_Declaration;
+		decl: Src_Module_Declaration;
 		/**
 		 * Module path (e.g., "alert.ts")
 		 */
@@ -42,12 +42,8 @@
 
 	const tooltip = tooltip_context.maybe_get();
 
-	// Generate API URL
-	// Convert module path like "./alert.ts" to "alert.ts" and identifier name
-	const module_slug = $derived(module_path.replace(/^\.\//, '').replace(/\.(ts|js|svelte)$/, ''));
-	const api_url = $derived(
-		`/docs/api/${encodeURIComponent(module_slug)}/${encodeURIComponent(decl.name)}`,
-	);
+	// Generate API URL with hash-based navigation
+	const api_url = $derived(`/docs/api#${encodeURIComponent(decl.name)}`);
 
 	// Contextmenu entries
 	const contextmenu_entries = $derived(

@@ -1,7 +1,7 @@
 /**
  * Custom package generator with full TypeScript analysis
  *
- * Generates enhanced package.json and src.json with rich metadata:
+ * Generates package.json and src.json with rich metadata:
  * - JSDoc/TSDoc comments
  * - Full type signatures
  * - Source code locations
@@ -9,7 +9,7 @@
  * - Usage examples
  * - Dependency graphs
  *
- * @see src/lib/enhanced_declarations.ts for type definitions
+ * @see src/lib/src_json.ts for type definitions
  * @see src/lib/ts_helpers.ts for TypeScript analysis helpers
  */
 
@@ -18,11 +18,7 @@ import type {Package_Json} from '@ryanatkn/belt/package_json.js';
 import ts from 'typescript';
 import {readFileSync} from 'node:fs';
 
-import type {
-	Enhanced_Declaration,
-	Enhanced_Module,
-	Enhanced_Src_Json,
-} from '$lib/enhanced_declarations.js';
+import type {Src_Module_Declaration, Src_Module, Src_Json} from '$lib/src_json.js';
 import {
 	create_ts_program,
 	extract_imports,
@@ -77,7 +73,7 @@ export const gen: Gen = async ({log, filer}) => {
 				source_disknodes.push(disknode);
 			}
 			// Include Svelte files if svelte2tsx is available
-			else if (/\.svelte$/.test(id) && svelte2tsx) {
+			else if (id.endsWith('.svelte') && svelte2tsx) {
 				source_disknodes.push(disknode);
 			}
 		}
@@ -93,8 +89,8 @@ export const gen: Gen = async ({log, filer}) => {
 	// Sort for deterministic output (stable alphabetical module ordering)
 	source_disknodes.sort((a, b) => a.id.localeCompare(b.id));
 
-	// Build enhanced src.json
-	const enhanced_src_json: Enhanced_Src_Json = {
+	// Build src.json
+	const src_json: Src_Json = {
 		name: package_json.name,
 		version: package_json.version,
 		modules: {},
@@ -112,7 +108,7 @@ export const gen: Gen = async ({log, filer}) => {
 
 			// Handle Svelte files separately (before trying to get TypeScript source file)
 			if (module_path.endsWith('.svelte')) {
-				const enhanced_module: Enhanced_Module = {
+				const mod: Src_Module = {
 					path: module_path,
 					declarations: [],
 					imports: [],
@@ -147,31 +143,31 @@ export const gen: Gen = async ({log, filer}) => {
 						);
 
 						// Analyze the component
-						const enhanced_decl = analyze_svelte_component(
+						const decl = analyze_svelte_component(
 							tsx_result.code,
 							temp_source,
 							checker,
 							component_name,
 						);
 
-						enhanced_module.declarations!.push(enhanced_decl);
+						mod.declarations!.push(decl);
 					} catch (err) {
 						log.error(`Failed to analyze Svelte component ${module_path}:`, err);
 						// Fallback to basic component declaration
-						enhanced_module.declarations!.push({
+						mod.declarations!.push({
 							name: module_path.replace(/^.*\//, '').replace(/\.svelte$/, ''),
 							kind: 'component',
 						});
 					}
 				} else {
 					// Fallback: just mark as component without detailed analysis
-					enhanced_module.declarations!.push({
+					mod.declarations!.push({
 						name: module_path.replace(/^.*\//, '').replace(/\.svelte$/, ''),
 						kind: 'component',
 					});
 				}
 
-				enhanced_src_json.modules![module_key] = enhanced_module;
+				src_json.modules![module_key] = mod;
 				continue; // Skip the TypeScript processing below
 			}
 
@@ -182,7 +178,7 @@ export const gen: Gen = async ({log, filer}) => {
 				continue;
 			}
 
-			const enhanced_module: Enhanced_Module = {
+			const mod: Src_Module = {
 				path: module_path,
 				declarations: [],
 				imports: extract_imports(source_file),
@@ -191,7 +187,7 @@ export const gen: Gen = async ({log, filer}) => {
 			// Extract module-level comment
 			const module_comment = extract_module_comment(source_file);
 			if (module_comment) {
-				enhanced_module.module_comment = module_comment;
+				mod.module_comment = module_comment;
 			}
 
 			// Extract declarations based on file type
@@ -201,13 +197,13 @@ export const gen: Gen = async ({log, filer}) => {
 				if (symbol) {
 					const exports = checker.getExportsOfModule(symbol);
 					for (const export_symbol of exports) {
-						const enhanced_decl = enhance_declaration(export_symbol, source_file, checker, log);
-						enhanced_module.declarations!.push(enhanced_decl);
+						const decl = enhance_declaration(export_symbol, source_file, checker, log);
+						mod.declarations!.push(decl);
 					}
 				}
 			}
 
-			enhanced_src_json.modules![module_key] = enhanced_module;
+			src_json.modules![module_key] = mod;
 		} catch (err) {
 			log.error(`Failed to analyze ${disknode.id}:`, err);
 			// Continue with next module
@@ -215,21 +211,21 @@ export const gen: Gen = async ({log, filer}) => {
 	}
 
 	// Sort modules alphabetically for deterministic output and cleaner diffs
-	if (enhanced_src_json.modules) {
-		const sorted_modules: Record<string, Enhanced_Module> = {};
-		for (const key of Object.keys(enhanced_src_json.modules).sort()) {
-			sorted_modules[key] = enhanced_src_json.modules[key]!;
+	if (src_json.modules) {
+		const sorted_modules: Record<string, Src_Module> = {};
+		for (const key of Object.keys(src_json.modules).sort()) {
+			sorted_modules[key] = src_json.modules[key]!;
 		}
-		enhanced_src_json.modules = sorted_modules;
+		src_json.modules = sorted_modules;
 	}
 
 	// Compute imported_by relationships
-	compute_imported_by(enhanced_src_json);
+	compute_imported_by(src_json);
 
 	log.info('Package metadata generation complete');
 
 	return {
-		content: generate_package_ts(package_json, enhanced_src_json),
+		content: generate_package_ts(package_json, src_json),
 	};
 };
 
@@ -245,7 +241,7 @@ const read_package_json = (): Package_Json => {
  * Create minimal output when TypeScript analysis unavailable
  */
 const create_minimal_output = (package_json: Package_Json) => {
-	const minimal_src_json: Enhanced_Src_Json = {
+	const minimal_src_json: Src_Json = {
 		name: package_json.name,
 		version: package_json.version,
 		modules: {},
@@ -263,9 +259,9 @@ const enhance_declaration = (
 	source_file: ts.SourceFile,
 	checker: ts.TypeChecker,
 	log: any,
-): Enhanced_Declaration => {
+): Src_Module_Declaration => {
 	const name = symbol.name;
-	const enhanced: Enhanced_Declaration = {
+	const result: Src_Module_Declaration = {
 		name,
 		kind: null,
 	};
@@ -273,20 +269,20 @@ const enhance_declaration = (
 	try {
 		const decl_node = symbol.valueDeclaration || symbol.declarations?.[0];
 		if (!decl_node) {
-			return enhanced;
+			return result;
 		}
 
 		// Determine kind
-		enhanced.kind = infer_declaration_kind(symbol, decl_node);
+		result.kind = infer_declaration_kind(symbol, decl_node);
 
 		// Extract JSDoc
 		const jsdoc = extract_jsdoc(decl_node, source_file);
 		if (jsdoc) {
-			enhanced.doc_comment = jsdoc.full_text;
-			enhanced.summary = jsdoc.summary;
-			enhanced.examples = jsdoc.examples;
-			enhanced.deprecated_message = jsdoc.deprecated_message;
-			enhanced.see_also = jsdoc.see_also;
+			result.doc_comment = jsdoc.full_text;
+			result.summary = jsdoc.summary;
+			result.examples = jsdoc.examples;
+			result.deprecated_message = jsdoc.deprecated_message;
+			result.see_also = jsdoc.see_also;
 		}
 
 		// Extract source location
@@ -295,7 +291,7 @@ const enhance_declaration = (
 		const start_pos = source_file.getLineAndCharacterOfPosition(start);
 		const end_pos = source_file.getLineAndCharacterOfPosition(end);
 
-		enhanced.source_location = {
+		result.source_location = {
 			line: start_pos.line + 1,
 			column: start_pos.character,
 			end_line: end_pos.line + 1,
@@ -303,28 +299,28 @@ const enhance_declaration = (
 		};
 
 		// Extract type-specific info
-		if (enhanced.kind === 'function') {
-			extract_function_info(decl_node, symbol, checker, enhanced, jsdoc);
-		} else if (enhanced.kind === 'type') {
-			extract_type_info(decl_node, symbol, checker, enhanced);
-		} else if (enhanced.kind === 'class') {
-			extract_class_info(decl_node, symbol, checker, enhanced);
-		} else if (enhanced.kind === 'variable') {
-			extract_variable_info(decl_node, symbol, checker, enhanced);
+		if (result.kind === 'function') {
+			extract_function_info(decl_node, symbol, checker, result, jsdoc);
+		} else if (result.kind === 'type') {
+			extract_type_info(decl_node, symbol, checker, result);
+		} else if (result.kind === 'class') {
+			extract_class_info(decl_node, symbol, checker, result);
+		} else if (result.kind === 'variable') {
+			extract_variable_info(decl_node, symbol, checker, result);
 		}
 
-		enhanced.exported = is_exported(decl_node);
+		result.exported = is_exported(decl_node);
 	} catch (err) {
 		log.error(`Error enhancing ${name}:`, err);
 	}
 
-	return enhanced;
+	return result;
 };
 
 /**
  * Compute imported_by relationships
  */
-const compute_imported_by = (src_json: Enhanced_Src_Json): void => {
+const compute_imported_by = (src_json: Src_Json): void => {
 	if (!src_json.modules) return;
 
 	for (const [module_key, module] of Object.entries(src_json.modules)) {
@@ -357,15 +353,15 @@ const compute_imported_by = (src_json: Enhanced_Src_Json): void => {
 /**
  * Generate package.ts content
  */
-const generate_package_ts = (package_json: Package_Json, src_json: Enhanced_Src_Json): string => {
+const generate_package_ts = (package_json: Package_Json, src_json: Src_Json): string => {
 	return `// Generated by package.gen.ts
 // Do not edit directly - regenerated on build
 
 import type {Package_Json} from '@ryanatkn/belt/package_json.js';
-import type {Enhanced_Src_Json} from '$lib/enhanced_declarations.js';
+import type {Src_Json} from '$lib/src_json.js';
 
 export const package_json: Package_Json = ${JSON.stringify(package_json, null, '\t')};
 
-export const src_json: Enhanced_Src_Json = ${JSON.stringify(src_json, null, '\t')};
+export const src_json: Src_Json = ${JSON.stringify(src_json, null, '\t')};
 `;
 };
