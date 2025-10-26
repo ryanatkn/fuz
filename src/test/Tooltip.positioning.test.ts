@@ -156,6 +156,14 @@ describe('Tooltip - Positioning', () => {
 			mounted = mount_component(Tooltip, {tooltip: tooltip_state});
 
 			const content = (() => {}) as Snippet;
+			// Test pattern for mocking dimensions:
+			// 1. Show once to create element
+			// 2. Hide to reset
+			// 3. Show again (creates new element in Svelte)
+			// 4. Mock getBoundingClientRect on new element
+			// 5. Change position to trigger effect (which reads mocked dimensions)
+			// This is necessary because mocking doesn't automatically trigger Svelte effects
+
 			// Position near right edge
 			tooltip_state.show(900, 200, content);
 			flushSync();
@@ -243,6 +251,9 @@ describe('Tooltip - Positioning', () => {
 			mounted = mount_component(Tooltip, {tooltip: tooltip_state});
 
 			const content = (() => {}) as Snippet;
+			// Test pattern: hide/show/mock/show to trigger effect with mocked dimensions
+			// See horizontal flip test above for detailed explanation
+
 			// Position near bottom edge
 			tooltip_state.show(200, 700, content);
 			flushSync();

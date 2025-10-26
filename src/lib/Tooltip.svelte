@@ -86,7 +86,8 @@
 	// Re-measure when tooltip opens or position changes (content may change between shows)
 	$effect(() => {
 		if (el && tooltip.opened) {
-			// Include position as dependencies to trigger re-measurement
+			// Access x/y to track as dependencies (Svelte 5 reactivity pattern)
+			// This ensures effect re-runs when position changes
 			tooltip.x;
 			tooltip.y;
 			const rect = el.getBoundingClientRect();
@@ -101,15 +102,9 @@
 		// ARIA compliance: Dismiss tooltip only when clicking outside
 		// Tooltips should remain open while cursor is over them (ARIA guideline)
 		// This allows reading long tooltips and text selection
-		if (el) {
-			// Tooltip is rendered - only hide if clicking outside
-			const target_is_inside = e.target instanceof Node && el.contains(e.target);
-			if (!target_is_inside) {
-				tooltip.hide();
-			}
-		} else {
-			// Tooltip not rendered but might have pending show - cancel it
-			tooltip.hide();
+		const target_is_inside = el && e.target instanceof Node && el.contains(e.target);
+		if (!target_is_inside) {
+			tooltip.hide(); // Also cancels pending shows
 		}
 	}}
 	onkeydown={(e) => {
