@@ -2,15 +2,19 @@
  * Custom package generator with full TypeScript analysis
  *
  * Generates package.json and src.json with rich metadata:
- * - JSDoc/TSDoc comments
+ * - JSDoc/TSDoc comments with full tag support
  * - Full type signatures
  * - Source code locations
- * - Parameter information
+ * - Parameter information with descriptions and defaults
+ * - Return value documentation
  * - Usage examples
  * - Dependency graphs
+ * - Svelte component props
  *
  * @see src/lib/src_json.ts for type definitions
- * @see src/lib/ts_helpers.ts for TypeScript analysis helpers
+ * @see src/lib/tsdoc_helpers.ts for JSDoc/TSDoc parsing
+ * @see src/lib/ts_helpers.ts for TypeScript analysis
+ * @see src/lib/svelte_helpers.ts for Svelte component analysis
  */
 
 import type {Gen} from '@ryanatkn/gro';
@@ -20,18 +24,18 @@ import {readFileSync} from 'node:fs';
 
 import type {Src_Module_Declaration, Src_Module, Src_Json} from '$lib/src_json.js';
 import {
-	create_ts_program,
-	extract_imports,
-	extract_module_comment,
-	infer_declaration_kind,
-	extract_jsdoc,
-	extract_function_info,
-	extract_type_info,
-	extract_class_info,
-	extract_variable_info,
-	is_exported,
+	ts_create_program,
+	ts_extract_imports,
+	ts_extract_module_comment,
+	ts_infer_declaration_kind,
+	ts_extract_function_info,
+	ts_extract_type_info,
+	ts_extract_class_info,
+	ts_extract_variable_info,
+	ts_is_exported,
 } from '$lib/ts_helpers.js';
-import {analyze_svelte_component} from '$lib/svelte_helpers.js';
+import {tsdoc_parse} from '$lib/tsdoc_helpers.js';
+import {svelte_analyze_component} from '$lib/svelte_helpers.js';
 
 export const gen: Gen = async ({log, filer}) => {
 	log.info('Generating package metadata with full TypeScript analysis...');
@@ -53,7 +57,7 @@ export const gen: Gen = async ({log, filer}) => {
 	}
 
 	// Create TypeScript program
-	const program = create_ts_program(log);
+	const program = ts_create_program(log);
 	if (!program) {
 		throw new Error('Failed to create TypeScript program - cannot generate package metadata');
 	}
@@ -142,7 +146,7 @@ export const gen: Gen = async ({log, filer}) => {
 						);
 
 						// Analyze the component
-						const decl = analyze_svelte_component(
+						const decl = svelte_analyze_component(
 							tsx_result.code,
 							temp_source,
 							checker,
@@ -180,11 +184,11 @@ export const gen: Gen = async ({log, filer}) => {
 			const mod: Src_Module = {
 				path: module_path,
 				declarations: [],
-				imports: extract_imports(source_file),
+				imports: ts_extract_imports(source_file),
 			};
 
 			// Extract module-level comment
-			const module_comment = extract_module_comment(source_file);
+			const module_comment = ts_extract_module_comment(source_file);
 			if (module_comment) {
 				mod.module_comment = module_comment;
 			}
@@ -258,10 +262,10 @@ const enhance_declaration = (
 		}
 
 		// Determine kind
-		result.kind = infer_declaration_kind(symbol, decl_node);
+		result.kind = ts_infer_declaration_kind(symbol, decl_node);
 
 		// Extract JSDoc
-		const jsdoc = extract_jsdoc(decl_node, source_file);
+		const jsdoc = tsdoc_parse(decl_node, source_file);
 		if (jsdoc) {
 			result.doc_comment = jsdoc.full_text;
 			result.summary = jsdoc.summary;
@@ -285,16 +289,16 @@ const enhance_declaration = (
 
 		// Extract type-specific info
 		if (result.kind === 'function') {
-			extract_function_info(decl_node, symbol, checker, result, jsdoc);
+			ts_extract_function_info(decl_node, symbol, checker, result, jsdoc);
 		} else if (result.kind === 'type') {
-			extract_type_info(decl_node, symbol, checker, result);
+			ts_extract_type_info(decl_node, symbol, checker, result);
 		} else if (result.kind === 'class') {
-			extract_class_info(decl_node, symbol, checker, result);
+			ts_extract_class_info(decl_node, symbol, checker, result);
 		} else if (result.kind === 'variable') {
-			extract_variable_info(decl_node, symbol, checker, result);
+			ts_extract_variable_info(decl_node, symbol, checker, result);
 		}
 
-		result.exported = is_exported(decl_node);
+		result.exported = ts_is_exported(decl_node);
 	} catch (err) {
 		log.error(`Error enhancing ${name}:`, err);
 	}

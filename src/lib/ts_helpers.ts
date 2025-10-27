@@ -1,14 +1,17 @@
 /**
  * TypeScript Compiler API helpers for extracting metadata from source code
+ *
+ * All functions are prefixed with `ts_` for clarity.
  */
 
 import ts from 'typescript';
 import type {Src_Module_Declaration} from './src_json.js';
+import {tsdoc_parse} from './tsdoc_helpers.js';
 
 /**
  * Infer declaration kind from symbol and node
  */
-export const infer_declaration_kind = (
+export const ts_infer_declaration_kind = (
 	symbol: ts.Symbol,
 	node: ts.Node,
 ): 'function' | 'type' | 'variable' | 'class' | null => {
@@ -36,67 +39,14 @@ export const infer_declaration_kind = (
 };
 
 /**
- * Extract JSDoc comment from node
+ * Extract function/method information including parameters with descriptions and default values
  */
-export const extract_jsdoc = (
-	node: ts.Node,
-	_source_file: ts.SourceFile,
-):
-	| {
-			full_text: string;
-			summary: string;
-			examples: Array<string>;
-			deprecated_message?: string;
-			see_also: Array<string>;
-	  }
-	| undefined => {
-	const jsdoc_comments = ts.getJSDocCommentsAndTags(node);
-	if (jsdoc_comments.length === 0) return undefined;
-
-	let full_text = '';
-	const examples: Array<string> = [];
-	let deprecated_message: string | undefined;
-	const see_also: Array<string> = [];
-
-	for (const comment of jsdoc_comments) {
-		if (ts.isJSDoc(comment) && comment.comment) {
-			const text =
-				typeof comment.comment === 'string'
-					? comment.comment
-					: comment.comment.map((c) => c.text).join('');
-			full_text += text + '\n';
-		}
-	}
-
-	const tags = ts.getJSDocTags(node);
-	for (const tag of tags) {
-		const tag_text =
-			typeof tag.comment === 'string' ? tag.comment : tag.comment?.map((c) => c.text).join('');
-
-		if (tag.tagName.text === 'example' && tag_text) {
-			examples.push(tag_text.trim());
-		} else if (tag.tagName.text === 'deprecated' && tag_text) {
-			deprecated_message = tag_text;
-		} else if (tag.tagName.text === 'see' && tag_text) {
-			see_also.push(tag_text.trim());
-		}
-	}
-
-	full_text = full_text.trim();
-	const summary = full_text.split('\n\n')[0]!.trim();
-
-	return {full_text, summary, examples, deprecated_message, see_also};
-};
-
-/**
- * Extract function/method information
- */
-export const extract_function_info = (
+export const ts_extract_function_info = (
 	node: ts.Node,
 	symbol: ts.Symbol,
 	checker: ts.TypeChecker,
 	decl: Src_Module_Declaration,
-	_jsdoc: ReturnType<typeof extract_jsdoc>,
+	jsdoc: ReturnType<typeof tsdoc_parse>,
 ): void => {
 	try {
 		const type = checker.getTypeOfSymbolAtLocation(symbol, node);
@@ -109,18 +59,35 @@ export const extract_function_info = (
 			const return_type = checker.getReturnTypeOfSignature(sig);
 			decl.return_type = checker.typeToString(return_type);
 
+			// Extract return description from JSDoc
+			if (jsdoc?.returns) {
+				decl.return_description = jsdoc.returns;
+			}
+
+			// Extract parameters with descriptions and default values
 			decl.parameters = sig.parameters.map((param) => {
 				const param_decl = param.valueDeclaration;
 				const param_type = checker.getTypeOfSymbolAtLocation(param, param_decl!);
+
+				// Get JSDoc description for this parameter
+				const description = jsdoc?.params.get(param.name);
+
+				// Extract default value from AST
+				let default_value: string | undefined;
+				if (param_decl && ts.isParameter(param_decl) && param_decl.initializer) {
+					default_value = param_decl.initializer.getText();
+				}
 
 				return {
 					name: param.name,
 					type: checker.typeToString(param_type),
 					optional: !!(param_decl && ts.isParameter(param_decl) && param_decl.questionToken),
+					description,
+					default_value,
 				};
 			});
 		}
-	} catch (_errerr) {
+	} catch (_err) {
 		// Ignore type errors
 	}
 
@@ -135,7 +102,7 @@ export const extract_function_info = (
 /**
  * Extract type/interface information
  */
-export const extract_type_info = (
+export const ts_extract_type_info = (
 	node: ts.Node,
 	_symbol: ts.Symbol,
 	checker: ts.TypeChecker,
@@ -164,7 +131,7 @@ export const extract_type_info = (
 /**
  * Extract class information
  */
-export const extract_class_info = (
+export const ts_extract_class_info = (
 	node: ts.Node,
 	_symbol: ts.Symbol,
 	_checker: ts.TypeChecker,
@@ -204,7 +171,7 @@ export const extract_class_info = (
 /**
  * Extract variable information
  */
-export const extract_variable_info = (
+export const ts_extract_variable_info = (
 	node: ts.Node,
 	symbol: ts.Symbol,
 	checker: ts.TypeChecker,
@@ -221,7 +188,7 @@ export const extract_variable_info = (
 /**
  * Check if node is exported
  */
-export const is_exported = (node: ts.Node): boolean => {
+export const ts_is_exported = (node: ts.Node): boolean => {
 	return (
 		(ts.canHaveModifiers(node) &&
 			ts.getModifiers(node)?.some((m) => m.kind === ts.SyntaxKind.ExportKeyword)) ||
@@ -232,7 +199,7 @@ export const is_exported = (node: ts.Node): boolean => {
 /**
  * Extract module-level comment
  */
-export const extract_module_comment = (source_file: ts.SourceFile): string | undefined => {
+export const ts_extract_module_comment = (source_file: ts.SourceFile): string | undefined => {
 	const full_text = source_file.getFullText();
 	const leading_comments = ts.getLeadingCommentRanges(full_text, 0);
 	if (!leading_comments?.length) return undefined;
@@ -255,7 +222,7 @@ export const extract_module_comment = (source_file: ts.SourceFile): string | und
 /**
  * Extract import statements
  */
-export const extract_imports = (source_file: ts.SourceFile): Array<string> => {
+export const ts_extract_imports = (source_file: ts.SourceFile): Array<string> => {
 	const imports: Array<string> = [];
 
 	ts.forEachChild(source_file, (node) => {
@@ -270,7 +237,7 @@ export const extract_imports = (source_file: ts.SourceFile): Array<string> => {
 /**
  * Create TypeScript program for analysis
  */
-export const create_ts_program = (log: any): ts.Program | null => {
+export const ts_create_program = (log: any): ts.Program | null => {
 	const config_path = ts.findConfigFile('./', ts.sys.fileExists, 'tsconfig.json');
 	if (!config_path) {
 		log.warn('No tsconfig.json found');

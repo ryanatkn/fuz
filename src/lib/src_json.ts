@@ -1,6 +1,17 @@
 /**
  * Source code metadata types
- * Inlined from @ryanatkn/belt with extensions for documentation
+ *
+ * Originally inlined from @ryanatkn/belt, extended with rich documentation features:
+ * - Function parameter descriptions and default values
+ * - Return value documentation
+ * - JSDoc tag extraction (@ example, @ deprecated, @ see, @ since)
+ * - Component prop metadata for Svelte
+ * - Source location tracking
+ * - Generic type parameters
+ *
+ * @see tsdoc_helpers.ts for JSDoc/TSDoc parsing
+ * @see ts_helpers.ts for TypeScript AST extraction
+ * @see svelte_helpers.ts for Svelte component analysis
  */
 
 export type Src_Module_Declaration_Kind =
@@ -14,6 +25,12 @@ export type Src_Module_Declaration_Kind =
 
 /**
  * Parameter information for functions and methods
+ *
+ * Note: Kept distinct from Component_Prop_Info despite structural similarity.
+ * Function parameters form a tuple - the collection has positional semantics:
+ * - Calling order matters: `fn(a, b)` vs `fn(b, a)`
+ * - May include rest parameters, destructuring patterns
+ * - Individual parameters are named, but position-dependent
  */
 export interface Parameter_Info {
 	name: string;
@@ -25,6 +42,12 @@ export interface Parameter_Info {
 
 /**
  * Component prop information for Svelte components
+ *
+ * Note: Kept distinct from Parameter_Info despite structural similarity.
+ * Component props are passed as named attributes with different semantics:
+ * - No positional order when passing: `<Foo {a} {b} />` = `<Foo {b} {a} />`
+ * - Support two-way binding via $bindable rune
+ * - Different runtime behavior and constraints
  */
 export interface Component_Prop_Info {
 	name: string;
@@ -66,6 +89,8 @@ export interface Src_Module_Declaration {
 	parameters?: Array<Parameter_Info>;
 	/** Function return type */
 	return_type?: string;
+	/** Function return value description from @returns/@return */
+	return_description?: string;
 	/** Generic type parameters */
 	generic_params?: Array<string>;
 	/** Code examples from @ example tags */
