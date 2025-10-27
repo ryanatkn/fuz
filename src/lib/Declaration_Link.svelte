@@ -1,5 +1,7 @@
 <script lang="ts">
 	import {resolve} from '$app/paths';
+	import Code from '@ryanatkn/fuz_code/Code.svelte';
+
 	import type {Snippet} from 'svelte';
 	import {get_type_summary, type Src_Module_Declaration} from '$lib/src_json.js';
 	import {tooltip_context} from '$lib/tooltip_state.svelte.js';
@@ -110,15 +112,19 @@
 
 {#snippet tooltip_content()}
 	{@const type_sig = get_type_summary(decl)}
-	<div class="declaration_tooltip">
-		<div class="chip">{decl.kind}</div>
+	<div>
+		<p>
+			<a href={resolve(api_url as any)}><code>{decl.name}</code></a>
+		</p>
+		<p class="chip">{decl.kind}</p>
 		{#if type_sig}
-			<code>{type_sig}</code>
+			<p>
+				<Code content={type_sig} lang="ts" />
+			</p>
 		{/if}
 		{#if decl.summary}
-			<p class="summary">{decl.summary}</p>
+			<p>{decl.summary}</p>
 		{/if}
-		<span class="hint">Click for full docs • Right-click for options</span>
 	</div>
 {/snippet}
 
@@ -132,28 +138,5 @@
 	}
 	.declaration_link:hover {
 		opacity: 0.8;
-	}
-
-	:global(.declaration_tooltip) {
-		display: flex;
-		flex-direction: column;
-		gap: var(--space_xs);
-	}
-	:global(.declaration_tooltip code) {
-		font-size: var(--font_size_xs);
-		background-color: var(--bg_3);
-		padding: var(--space_xs2);
-		border-radius: var(--border_radius_xs);
-		overflow-wrap: break-word;
-	}
-	:global(.declaration_tooltip .summary) {
-		font-size: var(--font_size_sm);
-		margin: 0;
-		line-height: 1.4;
-	}
-	:global(.declaration_tooltip .hint) {
-		font-size: var(--font_size_xs);
-		color: var(--text_color_3);
-		font-style: italic;
 	}
 </style>

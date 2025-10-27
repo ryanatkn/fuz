@@ -1,4 +1,5 @@
 <script lang="ts">
+	import {onNavigate} from '$app/navigation';
 	import {tooltip_context, Tooltip_State} from '$lib/tooltip_state.svelte.js';
 
 	const {
@@ -95,6 +96,11 @@
 			client_width = rect.width;
 			client_height = rect.height;
 		}
+	});
+
+	// Close tooltip on navigation
+	onNavigate(() => {
+		tooltip.hide();
 	});
 </script>
 
