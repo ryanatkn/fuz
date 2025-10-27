@@ -28,6 +28,29 @@ const ts_parse_generic_param = (param: ts.TypeParameterDeclaration): Generic_Par
 };
 
 /**
+ * Extract modifier keywords from a node's modifiers
+ *
+ * Returns an array of modifier strings like ['public', 'readonly', 'static']
+ */
+const ts_extract_modifiers = (
+	modifiers: ReadonlyArray<ts.ModifierLike> | undefined,
+): Array<string> => {
+	const modifier_flags: Array<string> = [];
+	if (!modifiers) return modifier_flags;
+
+	for (const mod of modifiers) {
+		if (mod.kind === ts.SyntaxKind.PublicKeyword) modifier_flags.push('public');
+		else if (mod.kind === ts.SyntaxKind.PrivateKeyword) modifier_flags.push('private');
+		else if (mod.kind === ts.SyntaxKind.ProtectedKeyword) modifier_flags.push('protected');
+		else if (mod.kind === ts.SyntaxKind.ReadonlyKeyword) modifier_flags.push('readonly');
+		else if (mod.kind === ts.SyntaxKind.StaticKeyword) modifier_flags.push('static');
+		else if (mod.kind === ts.SyntaxKind.AbstractKeyword) modifier_flags.push('abstract');
+	}
+
+	return modifier_flags;
+};
+
+/**
  * Infer declaration kind from symbol and node
  */
 export const ts_infer_declaration_kind = (
@@ -65,7 +88,7 @@ export const ts_extract_function_info = (
 	symbol: ts.Symbol,
 	checker: ts.TypeChecker,
 	decl: Src_Module_Declaration,
-	jsdoc: ReturnType<typeof tsdoc_parse>,
+	tsdoc: ReturnType<typeof tsdoc_parse>,
 ): void => {
 	try {
 		const type = checker.getTypeOfSymbolAtLocation(symbol, node);
@@ -78,17 +101,17 @@ export const ts_extract_function_info = (
 			const return_type = checker.getReturnTypeOfSignature(sig);
 			decl.return_type = checker.typeToString(return_type);
 
-			// Extract return description from JSDoc
-			if (jsdoc?.returns) {
-				decl.return_description = jsdoc.returns;
+			// Extract return description from TSDoc
+			if (tsdoc?.returns) {
+				decl.return_description = tsdoc.returns;
 			}
 
-			// Extract throws and since from JSDoc
-			if (jsdoc?.throws.length) {
-				decl.throws = jsdoc.throws;
+			// Extract throws and since from TSDoc
+			if (tsdoc?.throws.length) {
+				decl.throws = tsdoc.throws;
 			}
-			if (jsdoc?.since) {
-				decl.since = jsdoc.since;
+			if (tsdoc?.since) {
+				decl.since = tsdoc.since;
 			}
 
 			// Extract parameters with descriptions and default values
@@ -96,8 +119,8 @@ export const ts_extract_function_info = (
 				const param_decl = param.valueDeclaration;
 				const param_type = checker.getTypeOfSymbolAtLocation(param, param_decl!);
 
-				// Get JSDoc description for this parameter
-				const description = jsdoc?.params.get(param.name);
+				// Get TSDoc description for this parameter
+				const description = tsdoc?.params.get(param.name);
 
 				// Extract default value from AST
 				let default_value: string | undefined;
@@ -115,7 +138,7 @@ export const ts_extract_function_info = (
 			});
 		}
 	} catch (_err) {
-		// Ignore type errors
+		// Ignore: Type checker errors are expected when analyzing incomplete or complex signatures
 	}
 
 	// Extract generic type parameters
@@ -139,7 +162,7 @@ export const ts_extract_type_info = (
 		const type = checker.getTypeAtLocation(node);
 		decl.type_signature = checker.typeToString(type);
 	} catch (_err) {
-		// Ignore
+		// Ignore: Type checker may fail on complex or recursive types
 	}
 
 	if (ts.isTypeAliasDeclaration(node) || ts.isInterfaceDeclaration(node)) {
@@ -165,10 +188,10 @@ export const ts_extract_type_info = (
 					kind: 'variable',
 				};
 
-				// Extract readonly modifier
-				const modifiers = ts.getModifiers(member);
-				if (modifiers?.some((m) => m.kind === ts.SyntaxKind.ReadonlyKeyword)) {
-					prop_decl.summary = 'readonly';
+				// Extract modifiers
+				const modifier_flags = ts_extract_modifiers(ts.getModifiers(member));
+				if (modifier_flags.length > 0) {
+					prop_decl.summary = modifier_flags.join(' ');
 				}
 
 				// Extract type
@@ -176,12 +199,12 @@ export const ts_extract_type_info = (
 					prop_decl.type_signature = member.type.getText();
 				}
 
-				// Extract JSDoc
-				const prop_jsdoc = tsdoc_parse(member, node.getSourceFile());
-				if (prop_jsdoc) {
-					prop_decl.doc_comment = prop_jsdoc.full_text;
+				// Extract TSDoc
+				const prop_tsdoc = tsdoc_parse(member, node.getSourceFile());
+				if (prop_tsdoc) {
+					prop_decl.doc_comment = prop_tsdoc.full_text;
 					if (!prop_decl.summary) {
-						prop_decl.summary = prop_jsdoc.summary;
+						prop_decl.summary = prop_tsdoc.summary;
 					}
 				}
 
@@ -229,20 +252,9 @@ export const ts_extract_class_info = (
 			};
 
 			// Extract visibility and modifiers
-			const modifiers = ts.getModifiers(member);
-			const modifier_flags: Array<string> = [];
-			if (modifiers) {
-				for (const mod of modifiers) {
-					if (mod.kind === ts.SyntaxKind.PublicKeyword) modifier_flags.push('public');
-					else if (mod.kind === ts.SyntaxKind.PrivateKeyword) modifier_flags.push('private');
-					else if (mod.kind === ts.SyntaxKind.ProtectedKeyword) modifier_flags.push('protected');
-					else if (mod.kind === ts.SyntaxKind.ReadonlyKeyword) modifier_flags.push('readonly');
-					else if (mod.kind === ts.SyntaxKind.StaticKeyword) modifier_flags.push('static');
-					else if (mod.kind === ts.SyntaxKind.AbstractKeyword) modifier_flags.push('abstract');
-				}
-			}
+			const modifier_flags = ts_extract_modifiers(ts.getModifiers(member));
 
-			// Store modifiers as summary (we can add a proper field later if needed)
+			// Store modifiers as summary for display
 			if (modifier_flags.length > 0) {
 				member_decl.summary = modifier_flags.join(' ');
 			}
@@ -260,15 +272,15 @@ export const ts_extract_class_info = (
 					}
 				}
 			} catch (_err) {
-				// Ignore type extraction errors
+				// Ignore: Type checker may fail on complex member signatures
 			}
 
-			// Extract JSDoc
-			const member_jsdoc = tsdoc_parse(member, node.getSourceFile());
-			if (member_jsdoc) {
-				member_decl.doc_comment = member_jsdoc.full_text;
+			// Extract TSDoc
+			const member_tsdoc = tsdoc_parse(member, node.getSourceFile());
+			if (member_tsdoc) {
+				member_decl.doc_comment = member_tsdoc.full_text;
 				if (!member_decl.summary) {
-					member_decl.summary = member_jsdoc.summary;
+					member_decl.summary = member_tsdoc.summary;
 				}
 			}
 
@@ -290,7 +302,7 @@ export const ts_extract_variable_info = (
 		const type = checker.getTypeOfSymbolAtLocation(symbol, node);
 		decl.type_signature = checker.typeToString(type);
 	} catch (_err) {
-		// Ignore
+		// Ignore: Type checker may fail on complex variable types
 	}
 };
 

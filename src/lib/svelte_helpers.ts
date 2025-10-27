@@ -2,7 +2,7 @@
  * Svelte component analysis helpers using svelte2tsx
  *
  * Provides utilities for extracting metadata from Svelte components:
- * - Component props with types and JSDoc
+ * - Component props with types and TSDoc
  * - Component-level documentation
  * - Type information from TypeScript
  *
@@ -37,14 +37,14 @@ export const svelte_analyze_component = (
 			ts.ScriptKind.TSX,
 		);
 
-		// Extract component-level JSDoc from original source
-		const component_jsdoc = svelte_extract_component_jsdoc(source_file);
-		if (component_jsdoc) {
-			result.doc_comment = component_jsdoc.full_text;
-			result.summary = component_jsdoc.summary;
-			result.examples = component_jsdoc.examples;
-			result.deprecated_message = component_jsdoc.deprecated_message;
-			result.see_also = component_jsdoc.see_also;
+		// Extract component-level TSDoc from original source
+		const component_tsdoc = svelte_extract_component_tsdoc(source_file);
+		if (component_tsdoc) {
+			result.doc_comment = component_tsdoc.full_text;
+			result.summary = component_tsdoc.summary;
+			result.examples = component_tsdoc.examples;
+			result.deprecated_message = component_tsdoc.deprecated_message;
+			result.see_also = component_tsdoc.see_also;
 		}
 
 		// Extract props from Props interface
@@ -74,12 +74,12 @@ export const svelte_analyze_component = (
 };
 
 /**
- * Extract component-level JSDoc comment from Svelte source
+ * Extract component-level TSDoc comment from Svelte source
  */
-const svelte_extract_component_jsdoc = (
+const svelte_extract_component_tsdoc = (
 	source_file: ts.SourceFile,
 ): ReturnType<typeof tsdoc_parse_from_text> => {
-	// Look for JSDoc comments before <script> tag or at the start of the file
+	// Look for TSDoc comments before <script> tag or at the start of the file
 	const full_text = source_file.getFullText();
 	const leading_comments = ts.getLeadingCommentRanges(full_text, 0);
 	if (!leading_comments?.length) return undefined;
@@ -126,14 +126,14 @@ const svelte_extract_props_from_tsx = (
 						}
 					}
 
-					// Extract JSDoc description
+					// Extract TSDoc description
 					let description: string | undefined;
-					const jsdoc = tsdoc_parse(member, virtual_source);
-					if (jsdoc) {
-						description = jsdoc.summary || jsdoc.full_text;
+					const tsdoc = tsdoc_parse(member, virtual_source);
+					if (tsdoc) {
+						description = tsdoc.summary || tsdoc.full_text;
 					}
 
-					// Extract default value (if available in JSDoc or initializer)
+					// Extract default value (if available in TSDoc or initializer)
 					let default_value: string | undefined;
 					const default_match = description?.match(/@default\s+(.+)/);
 					if (default_match) {

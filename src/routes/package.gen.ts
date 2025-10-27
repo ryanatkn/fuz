@@ -264,19 +264,19 @@ const enhance_declaration = (
 		// Determine kind
 		result.kind = ts_infer_declaration_kind(symbol, decl_node);
 
-		// Extract JSDoc
-		const jsdoc = tsdoc_parse(decl_node, source_file);
-		if (jsdoc) {
-			result.doc_comment = jsdoc.full_text;
-			result.summary = jsdoc.summary;
-			result.examples = jsdoc.examples;
-			result.deprecated_message = jsdoc.deprecated_message;
-			result.see_also = jsdoc.see_also;
-			if (jsdoc.throws.length) {
-				result.throws = jsdoc.throws;
+		// Extract TSDoc
+		const tsdoc = tsdoc_parse(decl_node, source_file);
+		if (tsdoc) {
+			result.doc_comment = tsdoc.full_text;
+			result.summary = tsdoc.summary;
+			result.examples = tsdoc.examples;
+			result.deprecated_message = tsdoc.deprecated_message;
+			result.see_also = tsdoc.see_also;
+			if (tsdoc.throws.length) {
+				result.throws = tsdoc.throws;
 			}
-			if (jsdoc.since) {
-				result.since = jsdoc.since;
+			if (tsdoc.since) {
+				result.since = tsdoc.since;
 			}
 		}
 
@@ -295,7 +295,7 @@ const enhance_declaration = (
 
 		// Extract type-specific info
 		if (result.kind === 'function') {
-			ts_extract_function_info(decl_node, symbol, checker, result, jsdoc);
+			ts_extract_function_info(decl_node, symbol, checker, result, tsdoc);
 		} else if (result.kind === 'type') {
 			ts_extract_type_info(decl_node, symbol, checker, result);
 		} else if (result.kind === 'class') {

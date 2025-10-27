@@ -183,7 +183,7 @@ export const src_json: Src_Json = {
 					source_location: {
 						line: 1,
 						column: 0,
-						end_line: 350,
+						end_line: 351,
 						end_column: 0,
 					},
 					exported: true,
@@ -5213,7 +5213,7 @@ export const src_json: Src_Json = {
 			],
 			imports: ['typescript', './src_json.js', './tsdoc_helpers.js'],
 			module_comment:
-				'Svelte component analysis helpers using svelte2tsx\n\nProvides utilities for extracting metadata from Svelte components:\n- Component props with types and JSDoc\n- Component-level documentation\n- Type information from TypeScript\n\nAll functions are prefixed with `svelte_` for clarity.',
+				'Svelte component analysis helpers using svelte2tsx\n\nProvides utilities for extracting metadata from Svelte components:\n- Component props with types and TSDoc\n- Component-level documentation\n- Type information from TypeScript\n\nAll functions are prefixed with `svelte_` for clarity.',
 		},
 		'./test_helpers.ts': {
 			path: 'test_helpers.ts',
@@ -5941,9 +5941,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 33,
+						line: 54,
 						column: 13,
-						end_line: 58,
+						end_line: 79,
 						end_column: 1,
 					},
 					type_signature:
@@ -5973,13 +5973,13 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 63,
+						line: 84,
 						column: 13,
-						end_line: 127,
+						end_line: 148,
 						end_column: 1,
 					},
 					type_signature:
-						'(node: Node, symbol: Symbol, checker: TypeChecker, decl: Src_Module_Declaration, jsdoc: Tsdoc_Parsed_Comment | undefined): void',
+						'(node: Node, symbol: Symbol, checker: TypeChecker, decl: Src_Module_Declaration, tsdoc: Tsdoc_Parsed_Comment | undefined): void',
 					return_type: 'void',
 					parameters: [
 						{
@@ -6003,7 +6003,7 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 						{
-							name: 'jsdoc',
+							name: 'tsdoc',
 							type: 'Tsdoc_Parsed_Comment | undefined',
 							optional: false,
 						},
@@ -6018,9 +6018,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 132,
+						line: 153,
 						column: 13,
-						end_line: 192,
+						end_line: 213,
 						end_column: 1,
 					},
 					type_signature:
@@ -6058,9 +6058,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 197,
+						line: 218,
 						column: 13,
-						end_line: 278,
+						end_line: 288,
 						end_column: 1,
 					},
 					type_signature:
@@ -6098,9 +6098,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 283,
+						line: 293,
 						column: 13,
-						end_line: 295,
+						end_line: 305,
 						end_column: 1,
 					},
 					type_signature:
@@ -6138,9 +6138,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 300,
+						line: 310,
 						column: 13,
-						end_line: 306,
+						end_line: 316,
 						end_column: 1,
 					},
 					type_signature: '(node: Node): boolean',
@@ -6162,9 +6162,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 311,
+						line: 321,
 						column: 13,
-						end_line: 329,
+						end_line: 339,
 						end_column: 1,
 					},
 					type_signature: '(source_file: SourceFile): string | undefined',
@@ -6186,9 +6186,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 334,
+						line: 344,
 						column: 13,
-						end_line: 344,
+						end_line: 354,
 						end_column: 1,
 					},
 					type_signature: '(source_file: SourceFile): string[]',
@@ -6210,9 +6210,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 349,
+						line: 359,
 						column: 13,
-						end_line: 360,
+						end_line: 370,
 						end_column: 1,
 					},
 					type_signature: '(log: any): Program | null',
