@@ -22,55 +22,54 @@
 	);
 
 	// TODO verbose and badly laid out -- but we want to be sure it's complete/thorough
+
+	// TODO BLOCK need to improve the h4 and sections
 </script>
 
 <!-- Metadata -->
 {#if source_url}
-	<div class="meta">
+	<p>
 		<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 		<a class="chip" href={source_url} target="_blank" rel="noopener"> view source </a>
-	</div>
+	</p>
 {/if}
 
 <!-- eslint-disable-next-line @typescript-eslint/no-deprecated -->
 {#if decl.deprecated_message}
-	<div class="deprecated_warning pane">
+	<p>
 		<strong>⚠️ deprecated:</strong>
 		<!-- eslint-disable-next-line @typescript-eslint/no-deprecated -->
 		{decl.deprecated_message}
-	</div>
+	</p>
 {/if}
 
 {#if decl.kind}
-	<section class="section">
+	<p>
 		<span class="chip font_size_md">{decl.kind}</span>
-	</section>
+	</p>
 {/if}
 
 <!-- type signature -->
 {#if decl.type_signature}
-	<section class="section">
+	<p>
 		<Code content={decl.type_signature} lang="ts" />
-	</section>
+	</p>
 {/if}
 
 <!-- documentation -->
 {#if decl.doc_comment || decl.summary}
-	<section class="section">
-		<div class="doc_content">
-			{decl.doc_comment || decl.summary}
-		</div>
-	</section>
+	<p>
+		{decl.doc_comment || decl.summary}
+	</p>
 {/if}
 
 <!-- parameters -->
 {#if decl.parameters?.length}
-	<section class="section">
-		<h2>parameters</h2>
-		<table class="params_table">
+	<section>
+		<table>
 			<thead>
 				<tr>
-					<th>name</th>
+					<th>parameter</th>
 					<th>type</th>
 					<th>optional</th>
 					{#if decl.parameters.some((p) => p.description)}
@@ -96,12 +95,11 @@
 
 <!-- component props (for Svelte components) -->
 {#if decl.props?.length}
-	<section class="section">
-		<h2>props</h2>
-		<table class="params_table">
+	<section>
+		<table>
 			<thead>
 				<tr>
-					<th>name</th>
+					<th>prop</th>
 					<th>type</th>
 					<th>optional</th>
 					{#if decl.props.some((p) => p.description)}
@@ -137,17 +135,17 @@
 
 <!-- return type -->
 {#if decl.return_type}
-	<section class="section">
-		<h2>return type</h2>
+	<section>
+		<h4>return type</h4>
 		<Code content={decl.return_type} lang="ts" />
 	</section>
 {/if}
 
 <!-- generic parameters -->
 {#if decl.generic_params?.length}
-	<section class="section">
-		<h2>generic parameters</h2>
-		<ul class="generic_list">
+	<section>
+		<h4>generic parameters</h4>
+		<ul>
 			{#each decl.generic_params as generic (generic)}
 				<li><Code content={generic} lang="ts" /></li>
 			{/each}
@@ -157,12 +155,12 @@
 
 <!-- Extends/Implements -->
 {#if decl.extends?.length || decl.implements?.length}
-	<section class="section">
-		<h2>inheritance</h2>
+	<section>
+		<h4>inheritance</h4>
 		{#if decl.extends?.length}
 			<div>
 				<strong>extends:</strong>
-				<ul class="inheritance_list">
+				<ul>
 					{#each decl.extends as ext (ext)}
 						<li><Identifier_Link_Or_Ts type={ext} /></li>
 					{/each}
@@ -172,7 +170,7 @@
 		{#if decl.implements?.length}
 			<div>
 				<strong>implements:</strong>
-				<ul class="inheritance_list">
+				<ul>
 					{#each decl.implements as impl (impl)}
 						<li><Identifier_Link_Or_Ts type={impl} /></li>
 					{/each}
@@ -184,8 +182,8 @@
 
 <!-- examples -->
 {#if decl.examples?.length}
-	<section class="section">
-		<h2>examples</h2>
+	<section>
+		<h4>examples</h4>
 		{#each decl.examples as example, i (example)}
 			<Details>
 				{#snippet summary()}Example {i + 1}{/snippet}
@@ -197,9 +195,9 @@
 
 <!-- see also -->
 {#if decl.see_also?.length}
-	<section class="section">
-		<h2>see also</h2>
-		<ul class="see_also_list">
+	<section>
+		<h4>see also</h4>
+		<ul>
 			{#each decl.see_also as ref (ref)}
 				<li>{ref}</li>
 			{/each}
@@ -209,12 +207,12 @@
 
 <!-- members (for classes) -->
 {#if decl.members?.length}
-	<section class="section">
-		<h2>members</h2>
-		<ul class="members_list">
+	<section>
+		<h4>members</h4>
+		<ul>
 			{#each decl.members as member (member)}
-				<li class="member">
-					<code class="member_name">{member.name}</code>
+				<li>
+					<code>{member.name}</code>
 					{#if member.kind}
 						<span class="chip">{member.kind}</span>
 					{/if}
@@ -226,12 +224,12 @@
 
 <!-- properties (for types/interfaces) -->
 {#if decl.properties?.length}
-	<section class="section">
-		<h2>properties</h2>
-		<ul class="members_list">
+	<section>
+		<h4>properties</h4>
+		<ul>
 			{#each decl.properties as prop (prop)}
-				<li class="member">
-					<code class="member_name">{prop.name}</code>
+				<li>
+					<code>{prop.name}</code>
 					{#if prop.kind}
 						<span class="chip">{prop.kind}</span>
 					{/if}
@@ -240,73 +238,3 @@
 		</ul>
 	</section>
 {/if}
-
-<style>
-	.meta {
-		display: flex;
-		gap: var(--space_sm);
-		margin-bottom: var(--space_sm);
-	}
-
-	.deprecated_warning {
-		background-color: var(--color_c_1);
-		border: var(--border_width) solid var(--color_c_5);
-		padding: var(--space_sm);
-		border-radius: var(--border_radius_xs);
-		margin-top: var(--space_md);
-	}
-
-	.section {
-		margin-bottom: var(--space_lg);
-	}
-
-	.section h2 {
-		font-size: var(--font_size_lg);
-		font-weight: 600;
-		margin: 0 0 var(--space_md) 0;
-		color: var(--text_color_2);
-	}
-
-	.doc_content {
-		line-height: 1.6;
-		white-space: pre-wrap;
-	}
-
-	.params_table {
-		width: 100%;
-	}
-
-	.generic_list,
-	.inheritance_list,
-	.see_also_list,
-	.members_list {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-	}
-
-	.generic_list li,
-	.inheritance_list li {
-		padding: var(--space_xs2);
-		font-family: var(--font_family_mono);
-		font-size: var(--font_size_sm);
-	}
-
-	.see_also_list li {
-		padding: var(--space_xs2);
-		font-size: var(--font_size_sm);
-	}
-
-	.members_list .member {
-		display: flex;
-		align-items: center;
-		gap: var(--space_sm);
-		padding: var(--space_xs);
-		border-bottom: var(--border_width) solid var(--border_color);
-	}
-
-	.member_name {
-		font-family: var(--font_family_mono);
-		font-size: var(--font_size_sm);
-	}
-</style>
