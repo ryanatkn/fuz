@@ -277,20 +277,6 @@
 
 	.params_table {
 		width: 100%;
-		border-collapse: collapse;
-		font-size: var(--font_size_sm);
-	}
-
-	.params_table th,
-	.params_table td {
-		text-align: left;
-		padding: var(--space_xs) var(--space_sm);
-		border-bottom: var(--border_width) solid var(--border_color);
-	}
-
-	.params_table th {
-		font-weight: 600;
-		background-color: var(--bg_3);
 	}
 
 	.generic_list,
