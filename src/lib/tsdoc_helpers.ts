@@ -47,8 +47,8 @@ export const tsdoc_parse = (
 	node: ts.Node,
 	_source_file: ts.SourceFile,
 ): Tsdoc_Parsed_Comment | undefined => {
-	const jsdoc_comments = ts.getJSDocCommentsAndTags(node);
-	if (jsdoc_comments.length === 0) return undefined;
+	const tsdoc_comments = ts.getJSDocCommentsAndTags(node);
+	if (tsdoc_comments.length === 0) return undefined;
 
 	let full_text = '';
 	const params: Map<string, string> = new Map();
@@ -60,7 +60,7 @@ export const tsdoc_parse = (
 	let since: string | undefined;
 
 	// Extract main comment text
-	for (const comment of jsdoc_comments) {
+	for (const comment of tsdoc_comments) {
 		if (ts.isJSDoc(comment) && comment.comment) {
 			const text =
 				typeof comment.comment === 'string'
