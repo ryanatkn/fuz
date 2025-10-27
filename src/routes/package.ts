@@ -183,7 +183,7 @@ export const src_json: Src_Json = {
 					source_location: {
 						line: 1,
 						column: 0,
-						end_line: 242,
+						end_line: 291,
 						end_column: 0,
 					},
 					exported: true,
@@ -4137,14 +4137,15 @@ export const src_json: Src_Json = {
 				{
 					name: 'Parameter_Info',
 					kind: 'type',
-					doc_comment: 'Parameter information for functions and methods',
+					doc_comment:
+						'Parameter information for functions and methods\n\nNote: Kept distinct from Component_Prop_Info despite structural similarity.\nFunction parameters form a tuple - the collection has positional semantics:\n- Calling order matters: `fn(a, b)` vs `fn(b, a)`\n- May include rest parameters, destructuring patterns\n- Individual parameters are named, but position-dependent',
 					summary: 'Parameter information for functions and methods',
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 29,
+						line: 35,
 						column: 0,
-						end_line: 35,
+						end_line: 41,
 						end_column: 1,
 					},
 					type_signature: 'Parameter_Info',
@@ -4153,14 +4154,15 @@ export const src_json: Src_Json = {
 				{
 					name: 'Component_Prop_Info',
 					kind: 'type',
-					doc_comment: 'Component prop information for Svelte components',
+					doc_comment:
+						'Component prop information for Svelte components\n\nNote: Kept distinct from Parameter_Info despite structural similarity.\nComponent props are passed as named attributes with different semantics:\n- No positional order when passing: `<Foo {a} {b} />` = `<Foo {b} {a} />`\n- Support two-way binding via $bindable rune\n- Different runtime behavior and constraints',
 					summary: 'Component prop information for Svelte components',
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 40,
+						line: 52,
 						column: 0,
-						end_line: 46,
+						end_line: 58,
 						end_column: 1,
 					},
 					type_signature: 'Component_Prop_Info',
@@ -4174,9 +4176,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 51,
+						line: 63,
 						column: 0,
-						end_line: 56,
+						end_line: 68,
 						end_column: 1,
 					},
 					type_signature: 'Source_Location',
@@ -4190,9 +4192,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 61,
+						line: 73,
 						column: 0,
-						end_line: 102,
+						end_line: 118,
 						end_column: 1,
 					},
 					type_signature: 'Src_Module_Declaration',
@@ -4206,9 +4208,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 107,
+						line: 123,
 						column: 0,
-						end_line: 118,
+						end_line: 134,
 						end_column: 1,
 					},
 					type_signature: 'Src_Module',
@@ -4222,9 +4224,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 123,
+						line: 139,
 						column: 0,
-						end_line: 123,
+						end_line: 139,
 						end_column: 53,
 					},
 					type_signature: 'Src_Modules',
@@ -4240,9 +4242,9 @@ export const src_json: Src_Json = {
 						'://github.com/ryanatkn/gro/blob/main/src/docs/gro_plugin_sveltekit_app.md#well-known-src',
 					],
 					source_location: {
-						line: 129,
+						line: 145,
 						column: 0,
-						end_line: 136,
+						end_line: 152,
 						end_column: 1,
 					},
 					type_signature: 'Src_Json',
@@ -4256,9 +4258,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 141,
+						line: 157,
 						column: 13,
-						end_line: 146,
+						end_line: 162,
 						end_column: 1,
 					},
 					type_signature: '(decl: Src_Module_Declaration): string',
@@ -4280,9 +4282,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 151,
+						line: 167,
 						column: 13,
-						end_line: 160,
+						end_line: 176,
 						end_column: 1,
 					},
 					type_signature: '(decl: Src_Module_Declaration): string | undefined',
@@ -4304,9 +4306,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 165,
+						line: 181,
 						column: 13,
-						end_line: 184,
+						end_line: 200,
 						end_column: 1,
 					},
 					type_signature:
@@ -5173,7 +5175,7 @@ export const src_json: Src_Json = {
 					source_location: {
 						line: 44,
 						column: 13,
-						end_line: 100,
+						end_line: 108,
 						end_column: 1,
 					},
 					type_signature:
@@ -5216,9 +5218,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 105,
+						line: 113,
 						column: 13,
-						end_line: 129,
+						end_line: 137,
 						end_column: 1,
 					},
 					type_signature:
@@ -5256,9 +5258,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 134,
+						line: 142,
 						column: 13,
-						end_line: 169,
+						end_line: 177,
 						end_column: 1,
 					},
 					type_signature:
@@ -5296,9 +5298,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 174,
+						line: 182,
 						column: 13,
-						end_line: 186,
+						end_line: 194,
 						end_column: 1,
 					},
 					type_signature:
@@ -5336,9 +5338,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 191,
+						line: 199,
 						column: 13,
-						end_line: 197,
+						end_line: 205,
 						end_column: 1,
 					},
 					type_signature: '(node: Node): boolean',
@@ -5360,9 +5362,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 202,
+						line: 210,
 						column: 13,
-						end_line: 220,
+						end_line: 228,
 						end_column: 1,
 					},
 					type_signature: '(source_file: SourceFile): string | undefined',
@@ -5384,9 +5386,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 225,
+						line: 233,
 						column: 13,
-						end_line: 235,
+						end_line: 243,
 						end_column: 1,
 					},
 					type_signature: '(source_file: SourceFile): string[]',
@@ -5408,9 +5410,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 240,
+						line: 248,
 						column: 13,
-						end_line: 251,
+						end_line: 259,
 						end_column: 1,
 					},
 					type_signature: '(log: any): Program | null',

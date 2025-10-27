@@ -38,7 +38,7 @@ import {tsdoc_parse} from '$lib/tsdoc_helpers.js';
 import {svelte_analyze_component} from '$lib/svelte_helpers.js';
 
 export const gen: Gen = async ({log, filer}) => {
-	log.info('Generating package metadata with full TypeScript analysis...');
+	log.info('generating package metadata with full TypeScript analysis...');
 
 	// Ensure filer is initialized
 	await filer.init();
@@ -65,7 +65,7 @@ export const gen: Gen = async ({log, filer}) => {
 	const checker = program.getTypeChecker();
 
 	// Get source files from filer
-	log.info(`Filer has ${filer.files.size} files total`);
+	log.info(`filer has ${filer.files.size} files total`);
 
 	// Manually filter files - IDs are absolute paths, so we need to check if they include '/src/lib/'
 	// Include Svelte files if svelte2tsx is available
@@ -83,7 +83,7 @@ export const gen: Gen = async ({log, filer}) => {
 		}
 	}
 
-	log.info(`Found ${source_disknodes.length} source files to analyze`);
+	log.info(`found ${source_disknodes.length} source files to analyze`);
 
 	if (source_disknodes.length === 0) {
 		throw new Error('No source files found in /src/lib/ - cannot generate package metadata');
@@ -107,7 +107,7 @@ export const gen: Gen = async ({log, filer}) => {
 			const module_path = lib_index !== -1 ? source_id.substring(lib_index + 9) : source_id;
 			const module_key = `./${module_path}`;
 
-			log.info(`Analyzing: ${module_path}`);
+			log.info(`analyzing: ${module_path}`);
 
 			// Handle Svelte files separately (before trying to get TypeScript source file)
 			if (module_path.endsWith('.svelte')) {
@@ -225,7 +225,7 @@ export const gen: Gen = async ({log, filer}) => {
 	// Compute imported_by relationships
 	compute_imported_by(src_json);
 
-	log.info('Package metadata generation complete');
+	log.info('package metadata generation complete');
 
 	return {
 		content: generate_package_ts(package_json, src_json),
@@ -272,6 +272,12 @@ const enhance_declaration = (
 			result.examples = jsdoc.examples;
 			result.deprecated_message = jsdoc.deprecated_message;
 			result.see_also = jsdoc.see_also;
+			if (jsdoc.throws.length) {
+				result.throws = jsdoc.throws;
+			}
+			if (jsdoc.since) {
+				result.since = jsdoc.since;
+			}
 		}
 
 		// Extract source location

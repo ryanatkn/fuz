@@ -22,9 +22,7 @@
 	);
 
 	// TODO verbose and badly laid out -- but we want to be sure it's complete/thorough
-
-	// TODO BLOCK need to improve the h4 and sections
-	// TODO BLOCK members needs to be a table
+	// (all parsed data is now rendered; layout improvements can come later)
 </script>
 
 <!-- Metadata -->
@@ -76,6 +74,9 @@
 					{#if decl.parameters.some((p) => p.description)}
 						<th>description</th>
 					{/if}
+					{#if decl.parameters.some((p) => p.default_value)}
+						<th>default</th>
+					{/if}
 				</tr>
 			</thead>
 			<tbody>
@@ -86,6 +87,13 @@
 						<td>{param.optional ? 'yes' : 'no'}</td>
 						{#if decl.parameters.some((p) => p.description)}
 							<td>{param.description ?? ''}</td>
+						{/if}
+						{#if decl.parameters.some((p) => p.default_value)}
+							<td>
+								{#if param.default_value}
+									<Code content={param.default_value} lang="ts" />
+								{/if}
+							</td>
 						{/if}
 					</tr>
 				{/each}
@@ -139,6 +147,9 @@
 	<section>
 		<h4>return type</h4>
 		<Code content={decl.return_type} lang="ts" />
+		{#if decl.return_description}
+			<p>{decl.return_description}</p>
+		{/if}
 	</section>
 {/if}
 
@@ -181,6 +192,32 @@
 	</section>
 {/if}
 
+<!-- throws -->
+{#if decl.throws?.length}
+	<section>
+		<h4>throws</h4>
+		<ul>
+			{#each decl.throws as thrown (thrown)}
+				<li>
+					{#if thrown.type}
+						<code>{thrown.type}</code> - {thrown.description}
+					{:else}
+						{thrown.description}
+					{/if}
+				</li>
+			{/each}
+		</ul>
+	</section>
+{/if}
+
+<!-- since -->
+{#if decl.since}
+	<section>
+		<h4>since</h4>
+		<p>{decl.since}</p>
+	</section>
+{/if}
+
 <!-- examples -->
 {#if decl.examples?.length}
 	<section>
@@ -209,33 +246,43 @@
 <!-- members (for classes) -->
 {#if decl.members?.length}
 	<section>
-		<h4>members</h4>
-		<ul>
-			{#each decl.members as member (member)}
-				<li>
-					<code>{member.name}</code>
-					{#if member.kind}
-						<span class="chip">{member.kind}</span>
-					{/if}
-				</li>
-			{/each}
-		</ul>
+		<table>
+			<thead>
+				<tr>
+					<th>member</th>
+					<th>kind</th>
+				</tr>
+			</thead>
+			<tbody>
+				{#each decl.members as member (member)}
+					<tr>
+						<td><code>{member.name}</code></td>
+						<td>{member.kind ?? ''}</td>
+					</tr>
+				{/each}
+			</tbody>
+		</table>
 	</section>
 {/if}
 
 <!-- properties (for types/interfaces) -->
 {#if decl.properties?.length}
 	<section>
-		<h4>properties</h4>
-		<ul>
-			{#each decl.properties as prop (prop)}
-				<li>
-					<code>{prop.name}</code>
-					{#if prop.kind}
-						<span class="chip">{prop.kind}</span>
-					{/if}
-				</li>
-			{/each}
-		</ul>
+		<table>
+			<thead>
+				<tr>
+					<th>property</th>
+					<th>kind</th>
+				</tr>
+			</thead>
+			<tbody>
+				{#each decl.properties as prop (prop)}
+					<tr>
+						<td><code>{prop.name}</code></td>
+						<td>{prop.kind ?? ''}</td>
+					</tr>
+				{/each}
+			</tbody>
+		</table>
 	</section>
 {/if}

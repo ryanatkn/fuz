@@ -64,6 +64,14 @@ export const ts_extract_function_info = (
 				decl.return_description = jsdoc.returns;
 			}
 
+			// Extract throws and since from JSDoc
+			if (jsdoc?.throws.length) {
+				decl.throws = jsdoc.throws;
+			}
+			if (jsdoc?.since) {
+				decl.since = jsdoc.since;
+			}
+
 			// Extract parameters with descriptions and default values
 			decl.parameters = sig.parameters.map((param) => {
 				const param_decl = param.valueDeclaration;

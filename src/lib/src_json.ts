@@ -99,6 +99,10 @@ export interface Src_Module_Declaration {
 	deprecated_message?: string;
 	/** Related items from @ see tags */
 	see_also?: Array<string>;
+	/** Exceptions/errors thrown from @ throws tags */
+	throws?: Array<{type?: string; description: string}>;
+	/** Version information from @ since tag */
+	since?: string;
 	/** Whether this is exported */
 	exported?: boolean;
 	/** For types/interfaces: extends clause */
