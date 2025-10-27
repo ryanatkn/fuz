@@ -141,7 +141,6 @@
 		max-width: var(--tooltip_width);
 		pointer-events: auto;
 		padding: var(--space_sm);
-		font-size: var(--font_size_sm);
 		border: var(--border_width) var(--border_style) var(--border_color);
 		border-radius: var(--border_radius_xs);
 		background-color: var(--bg);

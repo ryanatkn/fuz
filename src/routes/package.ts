@@ -1871,7 +1871,7 @@ export const src_json: Src_Json = {
 					source_location: {
 						line: 1,
 						column: 0,
-						end_line: 151,
+						end_line: 150,
 						end_column: 0,
 					},
 					exported: true,
