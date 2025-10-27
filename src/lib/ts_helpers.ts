@@ -1,5 +1,5 @@
 /**
- * TypeScript Compiler API helpers for extracting metadata from source code
+ * TypeScript compiler API helpers for extracting metadata from source code.
  *
  * All functions are prefixed with `ts_` for clarity.
  */
@@ -10,7 +10,7 @@ import type {Src_Module_Declaration, Generic_Param_Info} from './src_json.js';
 import {tsdoc_parse} from './tsdoc_helpers.js';
 
 /**
- * Parse a generic type parameter into structured information
+ * Parse a generic type parameter into structured information.
  */
 const ts_parse_generic_param = (param: ts.TypeParameterDeclaration): Generic_Param_Info => {
 	const result: Generic_Param_Info = {
@@ -29,7 +29,7 @@ const ts_parse_generic_param = (param: ts.TypeParameterDeclaration): Generic_Par
 };
 
 /**
- * Extract modifier keywords from a node's modifiers
+ * Extract modifier keywords from a node's modifiers.
  *
  * Returns an array of modifier strings like ['public', 'readonly', 'static']
  */
@@ -52,7 +52,7 @@ const ts_extract_modifiers = (
 };
 
 /**
- * Infer declaration kind from symbol and node
+ * Infer declaration kind from symbol and node.
  */
 export const ts_infer_declaration_kind = (
 	symbol: ts.Symbol,
@@ -82,7 +82,8 @@ export const ts_infer_declaration_kind = (
 };
 
 /**
- * Extract function/method information including parameters with descriptions and default values
+ * Extract function/method information including parameters
+ * with descriptions and default values.
  */
 export const ts_extract_function_info = (
 	node: ts.Node,
@@ -151,7 +152,7 @@ export const ts_extract_function_info = (
 };
 
 /**
- * Extract type/interface information with rich property metadata
+ * Extract type/interface information with rich property metadata.
  */
 export const ts_extract_type_info = (
 	node: ts.Node,
@@ -216,7 +217,7 @@ export const ts_extract_type_info = (
 };
 
 /**
- * Extract class information with rich member metadata
+ * Extract class information with rich member metadata.
  */
 export const ts_extract_class_info = (
 	node: ts.Node,
@@ -291,7 +292,7 @@ export const ts_extract_class_info = (
 };
 
 /**
- * Extract variable information
+ * Extract variable information.
  */
 export const ts_extract_variable_info = (
 	node: ts.Node,
@@ -308,7 +309,7 @@ export const ts_extract_variable_info = (
 };
 
 /**
- * Check if node is exported
+ * Check if node is exported.
  */
 export const ts_is_exported = (node: ts.Node): boolean => {
 	return (
@@ -319,7 +320,7 @@ export const ts_is_exported = (node: ts.Node): boolean => {
 };
 
 /**
- * Extract module-level comment
+ * Extract module-level comment.
  */
 export const ts_extract_module_comment = (source_file: ts.SourceFile): string | undefined => {
 	const full_text = source_file.getFullText();
@@ -342,7 +343,7 @@ export const ts_extract_module_comment = (source_file: ts.SourceFile): string | 
 };
 
 /**
- * Extract import statements
+ * Extract import statements.
  */
 export const ts_extract_imports = (source_file: ts.SourceFile): Array<string> => {
 	const imports: Array<string> = [];
@@ -357,7 +358,7 @@ export const ts_extract_imports = (source_file: ts.SourceFile): Array<string> =>
 };
 
 /**
- * Create TypeScript program for analysis
+ * Create TypeScript program for analysis.
  */
 export const ts_create_program = (log: {warn: (message: string) => void}): ts.Program | null => {
 	const config_path = ts.findConfigFile('./', ts.sys.fileExists, 'tsconfig.json');

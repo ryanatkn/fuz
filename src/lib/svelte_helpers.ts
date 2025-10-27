@@ -16,7 +16,7 @@ import type {Src_Module_Declaration, Component_Prop_Info} from './src_json.js';
 import {tsdoc_parse, tsdoc_parse_from_text} from './tsdoc_helpers.js';
 
 /**
- * Analyze a Svelte component from its TSX transformation
+ * Analyze a Svelte component from its TSX transformation.
  */
 export const svelte_analyze_component = (
 	ts_code: string,
@@ -76,7 +76,7 @@ export const svelte_analyze_component = (
 };
 
 /**
- * Extract component-level TSDoc comment from Svelte source
+ * Extract component-level TSDoc comment from Svelte source.
  */
 const svelte_extract_component_tsdoc = (
 	source_file: ts.SourceFile,
@@ -97,7 +97,7 @@ const svelte_extract_component_tsdoc = (
 };
 
 /**
- * Extract props from Props interface in TSX
+ * Extract props from Props interface in TSX.
  */
 const svelte_extract_props_from_tsx = (
 	virtual_source: ts.SourceFile,
