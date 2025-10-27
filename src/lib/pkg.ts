@@ -86,9 +86,17 @@ export const parse_pkg = (package_json: Package_Json, src_json: Src_Json): Pkg =
 	};
 };
 
-// TODO proper parsing
-export const parse_repo_name = (name: string): string =>
-	name[0] === '@' ? (name.split('/')[1] ?? name) : name;
+// TODO proper parsing with a schema
+export const parse_repo_name = (name: string): string => {
+	if (name[0] === '@') {
+		const parts = name.split('/');
+		if (parts.length < 2) {
+			throw new Error(`invalid scoped package name: "${name}" (expected format: @org/package)`);
+		}
+		return parts[1]!;
+	}
+	return name;
+};
 
 export const parse_org_url = (pkg: Pkg): string | null => {
 	const {repo_name, repo_url} = pkg;
