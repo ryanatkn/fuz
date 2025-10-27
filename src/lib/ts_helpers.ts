@@ -358,7 +358,7 @@ export const ts_extract_imports = (source_file: ts.SourceFile): Array<string> =>
 /**
  * Create TypeScript program for analysis
  */
-export const ts_create_program = (log: any): ts.Program | null => {
+export const ts_create_program = (log: {warn: (message: string) => void}): ts.Program | null => {
 	const config_path = ts.findConfigFile('./', ts.sys.fileExists, 'tsconfig.json');
 	if (!config_path) {
 		log.warn('No tsconfig.json found');
