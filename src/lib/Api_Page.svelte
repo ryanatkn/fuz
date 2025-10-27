@@ -43,7 +43,6 @@
 
 {#if decl.kind}
 	<section class="section">
-		<h2>kind</h2>
 		<span class="chip font_size_md">{decl.kind}</span>
 	</section>
 {/if}
@@ -51,7 +50,6 @@
 <!-- type signature -->
 {#if decl.type_signature}
 	<section class="section">
-		<h2>type signature</h2>
 		<Code content={decl.type_signature} lang="ts" />
 	</section>
 {/if}
@@ -59,7 +57,6 @@
 <!-- documentation -->
 {#if decl.doc_comment || decl.summary}
 	<section class="section">
-		<h2>documentation</h2>
 		<div class="doc_content">
 			{decl.doc_comment || decl.summary}
 		</div>
