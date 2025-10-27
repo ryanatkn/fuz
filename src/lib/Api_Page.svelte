@@ -24,6 +24,7 @@
 	// TODO verbose and badly laid out -- but we want to be sure it's complete/thorough
 
 	// TODO BLOCK need to improve the h4 and sections
+	// TODO BLOCK members needs to be a table
 </script>
 
 <!-- Metadata -->
