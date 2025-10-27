@@ -1,5 +1,5 @@
 /**
- * TSDoc/JSDoc parsing helpers
+ * TSDoc/JSDoc parsing helpers.
  *
  * Pure JSDoc/TSDoc parsing utilities with no TypeScript Compiler API dependencies.
  * All functions are prefixed with `tsdoc_` for clarity.
@@ -8,7 +8,7 @@
 import ts from 'typescript';
 
 /**
- * Parsed JSDoc/TSDoc comment with structured metadata
+ * Parsed JSDoc/TSDoc comment with structured metadata.
  */
 export interface Tsdoc_Parsed_Comment {
 	/** Full comment text (excluding comment markers) */
@@ -32,9 +32,10 @@ export interface Tsdoc_Parsed_Comment {
 }
 
 /**
- * Parse JSDoc comment from a TypeScript node
+ * Parse JSDoc comment from a TypeScript node.
  *
  * Extracts and parses all JSDoc tags including:
+ *
  * - @ param - parameter descriptions
  * - @ returns/@ return - return value description
  * - @ throws - error documentation
@@ -121,7 +122,7 @@ export const tsdoc_parse = (
 };
 
 /**
- * Parse JSDoc comment from raw comment text (for Svelte files)
+ * Parse JSDoc comment from raw comment text (for Svelte files).
  *
  * Parses JSDoc tags from plain text without TypeScript Compiler API.
  * Useful for extracting documentation from Svelte component comments.
