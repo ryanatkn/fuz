@@ -10,6 +10,7 @@
  */
 
 import ts from 'typescript';
+
 import type {Src_Module_Declaration, Component_Prop_Info} from './src_json.js';
 import {tsdoc_parse, tsdoc_parse_from_text} from './tsdoc_helpers.js';
 

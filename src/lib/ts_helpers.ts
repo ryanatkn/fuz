@@ -5,6 +5,7 @@
  */
 
 import ts from 'typescript';
+
 import type {Src_Module_Declaration, Generic_Param_Info} from './src_json.js';
 import {tsdoc_parse} from './tsdoc_helpers.js';
 
