@@ -1,10 +1,11 @@
 /**
- * Svelte component analysis helpers using svelte2tsx
+ * Svelte component analysis helpers using svelte2tsx.
  *
  * Provides utilities for extracting metadata from Svelte components:
- * - Component props with types and TSDoc
- * - Component-level documentation
- * - Type information from TypeScript
+ *
+ * - component props with types and TSDoc
+ * - component-level documentation
+ * - type information from TypeScript
  *
  * All functions are prefixed with `svelte_` for clarity.
  */
@@ -18,7 +19,7 @@ import {tsdoc_parse, tsdoc_parse_from_text} from './tsdoc_helpers.js';
  * Analyze a Svelte component from its TSX transformation
  */
 export const svelte_analyze_component = (
-	tsx_code: string,
+	ts_code: string,
 	source_file: ts.SourceFile,
 	checker: ts.TypeChecker,
 	component_name: string,
@@ -32,7 +33,7 @@ export const svelte_analyze_component = (
 		// Create a virtual source file from the TSX code
 		const virtual_source = ts.createSourceFile(
 			source_file.fileName + '.tsx',
-			tsx_code,
+			ts_code,
 			ts.ScriptTarget.Latest,
 			true,
 			ts.ScriptKind.TSX,

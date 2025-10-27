@@ -5184,11 +5184,11 @@ export const src_json: Src_Json = {
 						end_column: 1,
 					},
 					type_signature:
-						'(tsx_code: string, source_file: SourceFile, checker: TypeChecker, component_name: string): Src_Module_Declaration',
+						'(ts_code: string, source_file: SourceFile, checker: TypeChecker, component_name: string): Src_Module_Declaration',
 					return_type: 'Src_Module_Declaration',
 					parameters: [
 						{
-							name: 'tsx_code',
+							name: 'ts_code',
 							type: 'string',
 							optional: false,
 						},
