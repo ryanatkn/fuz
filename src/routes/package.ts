@@ -183,7 +183,7 @@ export const src_json: Src_Json = {
 					source_location: {
 						line: 1,
 						column: 0,
-						end_line: 291,
+						end_line: 350,
 						end_column: 0,
 					},
 					exported: true,
@@ -1904,6 +1904,18 @@ export const src_json: Src_Json = {
 						end_column: 1,
 					},
 					type_signature: 'Alert_Status_Options',
+					properties: [
+						{
+							name: 'color',
+							kind: 'variable',
+							type_signature: 'string',
+						},
+						{
+							name: 'icon',
+							kind: 'variable',
+							type_signature: 'string | null',
+						},
+					],
 					exported: true,
 				},
 				{
@@ -2074,7 +2086,11 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					generic_params: ['T'],
+					generic_params: [
+						{
+							name: 'T',
+						},
+					],
 					exported: true,
 				},
 			],
@@ -2374,34 +2390,45 @@ export const src_json: Src_Json = {
 						{
 							name: 'is_menu',
 							kind: 'variable',
+							summary: 'readonly',
 						},
 						{
 							name: 'menu',
 							kind: 'variable',
+							summary: 'readonly',
+							type_signature: 'Submenu_State | Root_Menu_State',
 						},
 						{
 							name: 'run',
 							kind: 'variable',
+							summary: 'readonly',
+							type_signature: '() => Contextmenu_Run',
 						},
 						{
 							name: 'disabled',
 							kind: 'variable',
+							summary: 'readonly',
+							type_signature: '() => boolean',
 						},
 						{
 							name: 'selected',
 							kind: 'variable',
+							type_signature: 'boolean',
 						},
 						{
 							name: 'pending',
 							kind: 'variable',
+							type_signature: 'boolean',
 						},
 						{
 							name: 'error_message',
 							kind: 'variable',
+							type_signature: 'string | null',
 						},
 						{
 							name: 'promise',
 							kind: 'variable',
+							type_signature: 'Promise<any> | null',
 						},
 					],
 					exported: true,
@@ -2419,22 +2446,29 @@ export const src_json: Src_Json = {
 						{
 							name: 'is_menu',
 							kind: 'variable',
+							summary: 'readonly',
 						},
 						{
 							name: 'menu',
 							kind: 'variable',
+							summary: 'readonly',
+							type_signature: 'Submenu_State | Root_Menu_State',
 						},
 						{
 							name: 'depth',
 							kind: 'variable',
+							summary: 'readonly',
+							type_signature: 'number',
 						},
 						{
 							name: 'selected',
 							kind: 'variable',
+							type_signature: 'boolean',
 						},
 						{
 							name: 'items',
 							kind: 'variable',
+							type_signature: 'Array<Item_State>',
 						},
 					],
 					exported: true,
@@ -2452,18 +2486,22 @@ export const src_json: Src_Json = {
 						{
 							name: 'is_menu',
 							kind: 'variable',
+							summary: 'readonly',
 						},
 						{
 							name: 'menu',
 							kind: 'variable',
+							summary: 'readonly',
 						},
 						{
 							name: 'depth',
 							kind: 'variable',
+							summary: 'readonly',
 						},
 						{
 							name: 'items',
 							kind: 'variable',
+							type_signature: 'Array<Item_State>',
 						},
 					],
 					exported: true,
@@ -2490,6 +2528,13 @@ export const src_json: Src_Json = {
 						end_column: 1,
 					},
 					type_signature: 'Contextmenu_State_Options',
+					properties: [
+						{
+							name: 'layout',
+							kind: 'variable',
+							type_signature: 'Dimensions',
+						},
+					],
 					exported: true,
 				},
 				{
@@ -2511,38 +2556,51 @@ export const src_json: Src_Json = {
 						{
 							name: 'layout',
 							kind: 'variable',
+							type_signature: 'Dimensions',
 						},
 						{
 							name: 'has_custom_layout',
 							kind: 'variable',
+							summary: 'readonly',
+							type_signature: 'boolean',
+							doc_comment:
+								'If an initial layout is provided, control is deferred externally.\nOtherwise the layout syncs to the page dimensions.',
 						},
 						{
 							name: 'opened',
 							kind: 'variable',
+							type_signature: 'boolean',
 						},
 						{
 							name: 'x',
 							kind: 'variable',
+							type_signature: 'number',
 						},
 						{
 							name: 'y',
 							kind: 'variable',
+							type_signature: 'number',
 						},
 						{
 							name: 'params',
 							kind: 'variable',
+							type_signature: 'Array<Contextmenu_Params>',
 						},
 						{
 							name: 'error',
 							kind: 'variable',
+							type_signature: 'string | undefined',
 						},
 						{
 							name: 'root_menu',
 							kind: 'variable',
+							summary: 'readonly',
+							type_signature: 'Root_Menu_State',
 						},
 						{
 							name: 'selections',
 							kind: 'variable',
+							type_signature: 'Array<Item_State>',
 						},
 						{
 							name: 'can_collapse',
@@ -2567,58 +2625,80 @@ export const src_json: Src_Json = {
 						{
 							name: 'open',
 							kind: 'function',
+							type_signature: '(params: Contextmenu_Params[], x: number, y: number) => void',
 						},
 						{
 							name: 'close',
 							kind: 'function',
+							type_signature: '() => void',
 						},
 						{
 							name: 'reset_items',
 							kind: 'function',
+							type_signature: '(items: Item_State[]) => void',
 						},
 						{
 							name: 'activate',
 							kind: 'function',
+							type_signature:
+								'(item: Item_State) => boolean | Promise<Contextmenu_Activate_Result>',
 						},
 						{
 							name: 'activate_selected',
 							kind: 'function',
+							type_signature: '() => boolean | void | Promise<Contextmenu_Activate_Result>',
 						},
 						{
 							name: 'select',
 							kind: 'function',
+							type_signature: '(item: Item_State) => void',
+							doc_comment: 'Activates the selected entry, or if none, selects the first.',
+							summary: 'Activates the selected entry, or if none, selects the first.',
 						},
 						{
 							name: 'collapse_selected',
 							kind: 'function',
+							type_signature: '() => void',
 						},
 						{
 							name: 'expand_selected',
 							kind: 'function',
+							type_signature: '() => void',
 						},
 						{
 							name: 'select_next',
 							kind: 'function',
+							type_signature: '() => void',
 						},
 						{
 							name: 'select_previous',
 							kind: 'function',
+							type_signature: '() => void',
 						},
 						{
 							name: 'select_first',
 							kind: 'function',
+							type_signature: '() => void',
 						},
 						{
 							name: 'select_last',
 							kind: 'function',
+							type_signature: '() => void',
 						},
 						{
 							name: 'add_entry',
 							kind: 'function',
+							type_signature:
+								'(run: () => Contextmenu_Run, disabled?: () => boolean) => Entry_State',
+							doc_comment: 'Used by `Contextmenu_Entry` and custom entry components',
+							summary: 'Used by `Contextmenu_Entry` and custom entry components',
 						},
 						{
 							name: 'add_submenu',
 							kind: 'function',
+							type_signature: '() => Submenu_State',
+							doc_comment: '',
+							summary: '',
 						},
 					],
 					exported: true,
@@ -2659,6 +2739,28 @@ export const src_json: Src_Json = {
 						end_column: 1,
 					},
 					type_signature: 'Open_Contextmenu_Options',
+					properties: [
+						{
+							name: 'link_enabled',
+							kind: 'variable',
+							type_signature: 'boolean',
+						},
+						{
+							name: 'text_enabled',
+							kind: 'variable',
+							type_signature: 'boolean',
+						},
+						{
+							name: 'separator_enabled',
+							kind: 'variable',
+							type_signature: 'boolean',
+						},
+						{
+							name: 'vibrate',
+							kind: 'variable',
+							type_signature: 'boolean',
+						},
+					],
 					exported: true,
 				},
 				{
@@ -2836,6 +2938,61 @@ export const src_json: Src_Json = {
 						end_column: 1,
 					},
 					type_signature: 'Create_Csp_Directives_Options',
+					properties: [
+						{
+							name: 'directives',
+							kind: 'variable',
+							type_signature:
+								'{\n\t\t[K in Csp_Directive]?:\n\t\t\t| Csp_Directive_Value<K> // Static value replacement\n\t\t\t| null // Removes the directive\n\t\t\t// Transform function returning one of the previous types\n\t\t\t| ((value: Csp_Directive_Value<K>) => Csp_Directive_Value<K> | null);\n\t}',
+							doc_comment:
+								'Override or transform specific directives.\nReturning `null` or `undefined` from a transform function will remove the directive.',
+							summary:
+								'Override or transform specific directives.\nReturning `null` or `undefined` from a transform function will remove the directive.',
+						},
+						{
+							name: 'trusted_sources',
+							kind: 'variable',
+							type_signature: 'Array<Csp_Source_Spec>',
+							doc_comment: 'Sources to include based on their trust levels.',
+							summary: 'Sources to include based on their trust levels.',
+						},
+						{
+							name: 'value_defaults',
+							kind: 'variable',
+							type_signature: 'Partial<typeof csp_directive_value_defaults>',
+							doc_comment:
+								'Override default values for specific directives,\nmerging with `value_defaults_base` (or replacing if that directive is null in the base).',
+							summary:
+								'Override default values for specific directives,\nmerging with `value_defaults_base` (or replacing if that directive is null in the base).',
+						},
+						{
+							name: 'value_defaults_base',
+							kind: 'variable',
+							type_signature: 'Partial<typeof csp_directive_value_defaults> | null',
+							doc_comment:
+								'Base values for directive defaults.\nSet to `null` or `{}` to start with no defaults.\nDefaults to `csp_directive_value_defaults`.',
+							summary:
+								'Base values for directive defaults.\nSet to `null` or `{}` to start with no defaults.\nDefaults to `csp_directive_value_defaults`.',
+						},
+						{
+							name: 'required_trust_defaults',
+							kind: 'variable',
+							type_signature: 'Partial<typeof csp_directive_required_trust_defaults>',
+							doc_comment:
+								'Override trust requirements for specific directives,\nmerging with `required_trust_defaults_base` (or replacing if that directive is null in the base).',
+							summary:
+								'Override trust requirements for specific directives,\nmerging with `required_trust_defaults_base` (or replacing if that directive is null in the base).',
+						},
+						{
+							name: 'required_trust_defaults_base',
+							kind: 'variable',
+							type_signature: 'Partial<typeof csp_directive_required_trust_defaults> | null',
+							doc_comment:
+								'Base values for directive trust requirements.\nSet to `null` or `{}` to start with no trust requirements.\nDefaults to `csp_directive_required_trust_defaults`.',
+							summary:
+								'Base values for directive trust requirements.\nSet to `null` or `{}` to start with no trust requirements.\nDefaults to `csp_directive_required_trust_defaults`.',
+						},
+					],
 					exported: true,
 				},
 				{
@@ -2880,7 +3037,12 @@ export const src_json: Src_Json = {
 						end_column: 86,
 					},
 					type_signature: 'Csp_Directive_Value<T>',
-					generic_params: ['T extends Csp_Directive'],
+					generic_params: [
+						{
+							name: 'T',
+							constraint: 'Csp_Directive',
+						},
+					],
 					exported: true,
 				},
 				{
@@ -2964,6 +3126,23 @@ export const src_json: Src_Json = {
 						end_column: 1,
 					},
 					type_signature: 'Csp_Source_Spec',
+					properties: [
+						{
+							name: 'source',
+							kind: 'variable',
+							type_signature: 'Csp_Source',
+						},
+						{
+							name: 'trust',
+							kind: 'variable',
+							type_signature: 'Csp_Trust_Level',
+						},
+						{
+							name: 'directives',
+							kind: 'variable',
+							type_signature: 'Array<Csp_Directive>',
+						},
+					],
 					exported: true,
 				},
 				{
@@ -2976,6 +3155,23 @@ export const src_json: Src_Json = {
 						end_column: 1,
 					},
 					type_signature: 'Csp_Directive_Spec',
+					properties: [
+						{
+							name: 'name',
+							kind: 'variable',
+							type_signature: 'Csp_Directive',
+						},
+						{
+							name: 'fallback',
+							kind: 'variable',
+							type_signature: 'Array<Csp_Directive> | null',
+						},
+						{
+							name: 'fallback_of',
+							kind: 'variable',
+							type_signature: 'Array<Csp_Directive> | null',
+						},
+					],
 					exported: true,
 				},
 				{
@@ -3235,6 +3431,14 @@ export const src_json: Src_Json = {
 						end_column: 1,
 					},
 					type_signature: 'Csp_Directives',
+					properties: [
+						{
+							name: 'sandbox',
+							kind: 'variable',
+							type_signature:
+								"Array<\n\t\t| 'allow-downloads-without-user-activation'\n\t\t| 'allow-forms'\n\t\t| 'allow-modals'\n\t\t| 'allow-orientation-lock'\n\t\t| 'allow-pointer-lock'\n\t\t| 'allow-popups'\n\t\t| 'allow-popups-to-escape-sandbox'\n\t\t| 'allow-presentation'\n\t\t| 'allow-same-origin'\n\t\t| 'allow-scripts'\n\t\t| 'allow-storage-access-by-user-activation'\n\t\t| 'allow-top-navigation'\n\t\t| 'allow-top-navigation-by-user-activation'\n\t>",
+						},
+					],
 					exported: true,
 				},
 			],
@@ -3370,7 +3574,30 @@ export const src_json: Src_Json = {
 						end_column: 1,
 					},
 					type_signature: 'Dialog_Params<T>',
-					generic_params: ['T extends Component<any> = Component<any>'],
+					generic_params: [
+						{
+							name: 'T',
+							constraint: 'Component<any>',
+							default_type: 'Component<any>',
+						},
+					],
+					properties: [
+						{
+							name: 'Component',
+							kind: 'variable',
+							type_signature: 'T',
+						},
+						{
+							name: 'props',
+							kind: 'variable',
+							type_signature: 'ComponentProps<T>',
+						},
+						{
+							name: 'dialog_props',
+							kind: 'variable',
+							type_signature: 'Partial<ComponentProps<typeof Dialog>> | undefined',
+						},
+					],
 					exported: true,
 				},
 				{
@@ -3416,10 +3643,12 @@ export const src_json: Src_Json = {
 						{
 							name: 'width',
 							kind: 'variable',
+							type_signature: 'number',
 						},
 						{
 							name: 'height',
 							kind: 'variable',
+							type_signature: 'number',
 						},
 					],
 					exported: true,
@@ -3539,6 +3768,33 @@ export const src_json: Src_Json = {
 						end_column: 1,
 					},
 					type_signature: 'Docs_Link',
+					properties: [
+						{
+							name: 'id',
+							kind: 'variable',
+							type_signature: 'string',
+						},
+						{
+							name: 'text',
+							kind: 'variable',
+							type_signature: 'string',
+						},
+						{
+							name: 'slug',
+							kind: 'variable',
+							type_signature: 'string',
+						},
+						{
+							name: 'tag',
+							kind: 'variable',
+							type_signature: 'Docs_Link_Tag | undefined',
+						},
+						{
+							name: 'order',
+							kind: 'variable',
+							type_signature: 'number',
+						},
+					],
 					exported: true,
 				},
 				{
@@ -3554,14 +3810,19 @@ export const src_json: Src_Json = {
 						{
 							name: 'root_path',
 							kind: 'variable',
+							summary: 'readonly',
+							type_signature: 'string',
 						},
 						{
 							name: 'links',
 							kind: 'variable',
+							summary: 'readonly',
+							type_signature: 'SvelteMap<string, Docs_Link>',
 						},
 						{
 							name: '#slug_to_order',
 							kind: 'variable',
+							type_signature: 'Map<string, number>',
 						},
 						{
 							name: '#next_id',
@@ -3574,14 +3835,19 @@ export const src_json: Src_Json = {
 						{
 							name: 'slugs_onscreen',
 							kind: 'variable',
+							summary: 'readonly',
+							type_signature: 'SvelteSet<string>',
 						},
 						{
 							name: 'add',
 							kind: 'function',
+							type_signature:
+								'(slug: string, text: string, pathname: string, tag?: Docs_Link_Tag | undefined) => string',
 						},
 						{
 							name: 'remove',
 							kind: 'function',
+							type_signature: '(id: string) => void',
 						},
 					],
 					exported: true,
@@ -3652,6 +3918,43 @@ export const src_json: Src_Json = {
 						end_column: 1,
 					},
 					type_signature: 'Intersect_Params',
+					properties: [
+						{
+							name: 'onintersect',
+							kind: 'variable',
+							type_signature: 'On_Intersect',
+							doc_comment:
+								'Called when the element enters or leaves the viewport until disconnected.',
+							summary: 'Called when the element enters or leaves the viewport until disconnected.',
+						},
+						{
+							name: 'ondisconnect',
+							kind: 'variable',
+							type_signature: 'On_Disconnect',
+							doc_comment:
+								"Called when the action's observer is disconnected,\neither by the user calling disconnect or the action being destroyed.",
+							summary:
+								"Called when the action's observer is disconnected,\neither by the user calling disconnect or the action being destroyed.",
+						},
+						{
+							name: 'count',
+							kind: 'variable',
+							type_signature: 'number',
+							doc_comment:
+								"A value of `1` disconnects after `el` enters and leaves the viewport one time,\nsimilar to 'once' for an event.\n`0` disables and `undefined` or a negative number like `-1` never disconnects.",
+							summary:
+								"A value of `1` disconnects after `el` enters and leaves the viewport one time,\nsimilar to 'once' for an event.\n`0` disables and `undefined` or a negative number like `-1` never disconnects.",
+						},
+						{
+							name: 'options',
+							kind: 'variable',
+							type_signature: 'IntersectionObserverInit',
+							doc_comment:
+								'Same as the `options` param to\n[`IntersectionObserver`](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/IntersectionObserver#options)',
+							summary:
+								'Same as the `options` param to\n[`IntersectionObserver`](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/IntersectionObserver#options)',
+						},
+					],
 					exported: true,
 				},
 				{
@@ -3710,6 +4013,33 @@ export const src_json: Src_Json = {
 						end_column: 1,
 					},
 					type_signature: 'Intersect_State',
+					properties: [
+						{
+							name: 'intersecting',
+							kind: 'variable',
+							type_signature: 'boolean',
+						},
+						{
+							name: 'intersections',
+							kind: 'variable',
+							type_signature: 'number',
+						},
+						{
+							name: 'el',
+							kind: 'variable',
+							type_signature: 'HTMLElement | SVGElement',
+						},
+						{
+							name: 'observer',
+							kind: 'variable',
+							type_signature: 'IntersectionObserver',
+						},
+						{
+							name: 'disconnect',
+							kind: 'variable',
+							type_signature: '() => void',
+						},
+					],
 					exported: true,
 				},
 				{
@@ -3734,6 +4064,28 @@ export const src_json: Src_Json = {
 						end_column: 1,
 					},
 					type_signature: 'Disconnect_State',
+					properties: [
+						{
+							name: 'intersecting',
+							kind: 'variable',
+							type_signature: 'boolean',
+						},
+						{
+							name: 'intersections',
+							kind: 'variable',
+							type_signature: 'number',
+						},
+						{
+							name: 'el',
+							kind: 'variable',
+							type_signature: 'HTMLElement | SVGElement',
+						},
+						{
+							name: 'observer',
+							kind: 'variable',
+							type_signature: 'IntersectionObserver',
+						},
+					],
 					exported: true,
 				},
 			],
@@ -3980,6 +4332,70 @@ export const src_json: Src_Json = {
 						end_column: 1,
 					},
 					type_signature: 'Pkg',
+					properties: [
+						{
+							name: 'package_json',
+							kind: 'variable',
+							type_signature: 'Package_Json',
+						},
+						{
+							name: 'src_json',
+							kind: 'variable',
+							type_signature: 'Src_Json',
+						},
+						{
+							name: 'name',
+							kind: 'variable',
+							type_signature: 'string',
+						},
+						{
+							name: 'repo_name',
+							kind: 'variable',
+							type_signature: 'string',
+						},
+						{
+							name: 'repo_url',
+							kind: 'variable',
+							type_signature: 'Url',
+						},
+						{
+							name: 'owner_name',
+							kind: 'variable',
+							type_signature: 'string | null',
+							doc_comment: 'The github user/org.',
+							summary: 'The github user/org.',
+						},
+						{
+							name: 'homepage_url',
+							kind: 'variable',
+							type_signature: 'Url | null',
+						},
+						{
+							name: 'logo_url',
+							kind: 'variable',
+							type_signature: 'Url | null',
+						},
+						{
+							name: 'logo_alt',
+							kind: 'variable',
+							type_signature: 'string',
+						},
+						{
+							name: 'npm_url',
+							kind: 'variable',
+							type_signature: 'Url | null',
+						},
+						{
+							name: 'changelog_url',
+							kind: 'variable',
+							type_signature: 'Url | null',
+						},
+						{
+							name: 'published',
+							kind: 'variable',
+							type_signature: 'boolean',
+						},
+					],
 					exported: true,
 				},
 				{
@@ -4149,6 +4565,33 @@ export const src_json: Src_Json = {
 						end_column: 1,
 					},
 					type_signature: 'Parameter_Info',
+					properties: [
+						{
+							name: 'name',
+							kind: 'variable',
+							type_signature: 'string',
+						},
+						{
+							name: 'type',
+							kind: 'variable',
+							type_signature: 'string',
+						},
+						{
+							name: 'optional',
+							kind: 'variable',
+							type_signature: 'boolean',
+						},
+						{
+							name: 'description',
+							kind: 'variable',
+							type_signature: 'string',
+						},
+						{
+							name: 'default_value',
+							kind: 'variable',
+							type_signature: 'string',
+						},
+					],
 					exported: true,
 				},
 				{
@@ -4166,6 +4609,72 @@ export const src_json: Src_Json = {
 						end_column: 1,
 					},
 					type_signature: 'Component_Prop_Info',
+					properties: [
+						{
+							name: 'name',
+							kind: 'variable',
+							type_signature: 'string',
+						},
+						{
+							name: 'type',
+							kind: 'variable',
+							type_signature: 'string',
+						},
+						{
+							name: 'optional',
+							kind: 'variable',
+							type_signature: 'boolean',
+						},
+						{
+							name: 'description',
+							kind: 'variable',
+							type_signature: 'string',
+						},
+						{
+							name: 'default_value',
+							kind: 'variable',
+							type_signature: 'string',
+						},
+					],
+					exported: true,
+				},
+				{
+					name: 'Generic_Param_Info',
+					kind: 'type',
+					doc_comment: 'Generic type parameter information',
+					summary: 'Generic type parameter information',
+					examples: [],
+					see_also: [],
+					source_location: {
+						line: 63,
+						column: 0,
+						end_line: 70,
+						end_column: 1,
+					},
+					type_signature: 'Generic_Param_Info',
+					properties: [
+						{
+							name: 'name',
+							kind: 'variable',
+							type_signature: 'string',
+							doc_comment: 'Parameter name (e.g., "T")',
+							summary: 'Parameter name (e.g., "T")',
+						},
+						{
+							name: 'constraint',
+							kind: 'variable',
+							type_signature: 'string',
+							doc_comment: 'Constraint if any (e.g., "string" from "T extends string")',
+							summary: 'Constraint if any (e.g., "string" from "T extends string")',
+						},
+						{
+							name: 'default_type',
+							kind: 'variable',
+							type_signature: 'string',
+							doc_comment: 'Default type if any (e.g., "unknown" from "T = unknown")',
+							summary: 'Default type if any (e.g., "unknown" from "T = unknown")',
+						},
+					],
 					exported: true,
 				},
 				{
@@ -4176,12 +4685,34 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 63,
+						line: 75,
 						column: 0,
-						end_line: 68,
+						end_line: 80,
 						end_column: 1,
 					},
 					type_signature: 'Source_Location',
+					properties: [
+						{
+							name: 'line',
+							kind: 'variable',
+							type_signature: 'number',
+						},
+						{
+							name: 'column',
+							kind: 'variable',
+							type_signature: 'number',
+						},
+						{
+							name: 'end_line',
+							kind: 'variable',
+							type_signature: 'number',
+						},
+						{
+							name: 'end_column',
+							kind: 'variable',
+							type_signature: 'number',
+						},
+					],
 					exported: true,
 				},
 				{
@@ -4192,12 +4723,161 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 73,
+						line: 85,
 						column: 0,
-						end_line: 118,
+						end_line: 130,
 						end_column: 1,
 					},
 					type_signature: 'Src_Module_Declaration',
+					properties: [
+						{
+							name: 'name',
+							kind: 'variable',
+							type_signature: 'string',
+							doc_comment: 'Export identifier',
+							summary: 'Export identifier',
+						},
+						{
+							name: 'kind',
+							kind: 'variable',
+							type_signature: 'Src_Module_Declaration_Kind | null',
+							doc_comment: 'Declaration kind',
+							summary: 'Declaration kind',
+						},
+						{
+							name: 'doc_comment',
+							kind: 'variable',
+							type_signature: 'string',
+							doc_comment: 'Full JSDoc/TSDoc comment text',
+							summary: 'Full JSDoc/TSDoc comment text',
+						},
+						{
+							name: 'summary',
+							kind: 'variable',
+							type_signature: 'string',
+							doc_comment: 'Concise summary (first paragraph)',
+							summary: 'Concise summary (first paragraph)',
+						},
+						{
+							name: 'type_signature',
+							kind: 'variable',
+							type_signature: 'string',
+							doc_comment: 'Full TypeScript type signature',
+							summary: 'Full TypeScript type signature',
+						},
+						{
+							name: 'source_location',
+							kind: 'variable',
+							type_signature: 'Source_Location',
+							doc_comment: 'Source location within the file',
+							summary: 'Source location within the file',
+						},
+						{
+							name: 'parameters',
+							kind: 'variable',
+							type_signature: 'Array<Parameter_Info>',
+							doc_comment: 'Function/method parameters',
+							summary: 'Function/method parameters',
+						},
+						{
+							name: 'return_type',
+							kind: 'variable',
+							type_signature: 'string',
+							doc_comment: 'Function return type',
+							summary: 'Function return type',
+						},
+						{
+							name: 'return_description',
+							kind: 'variable',
+							type_signature: 'string',
+							doc_comment: 'Function return value description from',
+							summary: 'Function return value description from',
+						},
+						{
+							name: 'generic_params',
+							kind: 'variable',
+							type_signature: 'Array<Generic_Param_Info>',
+							doc_comment: 'Generic type parameters with constraints',
+							summary: 'Generic type parameters with constraints',
+						},
+						{
+							name: 'examples',
+							kind: 'variable',
+							type_signature: 'Array<string>',
+							doc_comment: 'Code examples from @ example tags',
+							summary: 'Code examples from @ example tags',
+						},
+						{
+							name: 'deprecated_message',
+							kind: 'variable',
+							type_signature: 'string',
+							doc_comment: 'Deprecation warning from @ deprecated tag',
+							summary: 'Deprecation warning from @ deprecated tag',
+						},
+						{
+							name: 'see_also',
+							kind: 'variable',
+							type_signature: 'Array<string>',
+							doc_comment: 'Related items from @ see tags',
+							summary: 'Related items from @ see tags',
+						},
+						{
+							name: 'throws',
+							kind: 'variable',
+							type_signature: 'Array<{type?: string; description: string}>',
+							doc_comment: 'Exceptions/errors thrown from @ throws tags',
+							summary: 'Exceptions/errors thrown from @ throws tags',
+						},
+						{
+							name: 'since',
+							kind: 'variable',
+							type_signature: 'string',
+							doc_comment: 'Version information from @ since tag',
+							summary: 'Version information from @ since tag',
+						},
+						{
+							name: 'exported',
+							kind: 'variable',
+							type_signature: 'boolean',
+							doc_comment: 'Whether this is exported',
+							summary: 'Whether this is exported',
+						},
+						{
+							name: 'extends',
+							kind: 'variable',
+							type_signature: 'Array<string>',
+							doc_comment: 'For types/interfaces: extends clause',
+							summary: 'For types/interfaces: extends clause',
+						},
+						{
+							name: 'implements',
+							kind: 'variable',
+							type_signature: 'Array<string>',
+							doc_comment: 'For classes: implements clause',
+							summary: 'For classes: implements clause',
+						},
+						{
+							name: 'members',
+							kind: 'variable',
+							type_signature: 'Array<Src_Module_Declaration>',
+							doc_comment: 'Class members',
+							summary: 'Class members',
+						},
+						{
+							name: 'properties',
+							kind: 'variable',
+							type_signature: 'Array<Src_Module_Declaration>',
+							doc_comment: 'Interface/type properties',
+							summary: 'Interface/type properties',
+						},
+						{
+							name: 'props',
+							kind: 'variable',
+							type_signature: 'Array<Component_Prop_Info>',
+							doc_comment: 'Component props (for Svelte components)',
+							summary: 'Component props (for Svelte components)',
+						},
+					],
 					exported: true,
 				},
 				{
@@ -4208,12 +4888,49 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 123,
+						line: 135,
 						column: 0,
-						end_line: 134,
+						end_line: 146,
 						end_column: 1,
 					},
 					type_signature: 'Src_Module',
+					properties: [
+						{
+							name: 'path',
+							kind: 'variable',
+							type_signature: 'string',
+							doc_comment: 'Module path relative to src/lib',
+							summary: 'Module path relative to src/lib',
+						},
+						{
+							name: 'declarations',
+							kind: 'variable',
+							type_signature: 'Array<Src_Module_Declaration>',
+							doc_comment: 'Exported declarations',
+							summary: 'Exported declarations',
+						},
+						{
+							name: 'module_comment',
+							kind: 'variable',
+							type_signature: 'string',
+							doc_comment: 'Module-level JSDoc comment',
+							summary: 'Module-level JSDoc comment',
+						},
+						{
+							name: 'imports',
+							kind: 'variable',
+							type_signature: 'Array<string>',
+							doc_comment: 'Direct imports from other modules',
+							summary: 'Direct imports from other modules',
+						},
+						{
+							name: 'imported_by',
+							kind: 'variable',
+							type_signature: 'Array<string>',
+							doc_comment: 'Modules that import this module',
+							summary: 'Modules that import this module',
+						},
+					],
 					exported: true,
 				},
 				{
@@ -4224,9 +4941,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 139,
+						line: 151,
 						column: 0,
-						end_line: 139,
+						end_line: 151,
 						end_column: 53,
 					},
 					type_signature: 'Src_Modules',
@@ -4242,12 +4959,35 @@ export const src_json: Src_Json = {
 						'://github.com/ryanatkn/gro/blob/main/src/docs/gro_plugin_sveltekit_app.md#well-known-src',
 					],
 					source_location: {
-						line: 145,
+						line: 157,
 						column: 0,
-						end_line: 152,
+						end_line: 164,
 						end_column: 1,
 					},
 					type_signature: 'Src_Json',
+					properties: [
+						{
+							name: 'name',
+							kind: 'variable',
+							type_signature: 'string',
+							doc_comment: 'Package name (same as package.json)',
+							summary: 'Package name (same as package.json)',
+						},
+						{
+							name: 'version',
+							kind: 'variable',
+							type_signature: 'string',
+							doc_comment: 'Package version (same as package.json)',
+							summary: 'Package version (same as package.json)',
+						},
+						{
+							name: 'modules',
+							kind: 'variable',
+							type_signature: 'Src_Modules',
+							doc_comment: 'Source modules',
+							summary: 'Source modules',
+						},
+					],
 					exported: true,
 				},
 				{
@@ -4258,9 +4998,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 157,
+						line: 169,
 						column: 13,
-						end_line: 162,
+						end_line: 182,
 						end_column: 1,
 					},
 					type_signature: '(decl: Src_Module_Declaration): string',
@@ -4282,9 +5022,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 167,
+						line: 187,
 						column: 13,
-						end_line: 176,
+						end_line: 196,
 						end_column: 1,
 					},
 					type_signature: '(decl: Src_Module_Declaration): string | undefined',
@@ -4306,9 +5046,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 181,
+						line: 201,
 						column: 13,
-						end_line: 200,
+						end_line: 220,
 						end_column: 1,
 					},
 					type_signature:
@@ -4728,14 +5468,17 @@ export const src_json: Src_Json = {
 						{
 							name: 'theme',
 							kind: 'variable',
+							type_signature: 'Theme',
 						},
 						{
 							name: 'color_scheme',
 							kind: 'variable',
+							type_signature: 'Color_Scheme',
 						},
 						{
 							name: 'toJSON',
 							kind: 'function',
+							type_signature: '() => Themer_Json',
 						},
 					],
 					exported: true,
@@ -4750,6 +5493,18 @@ export const src_json: Src_Json = {
 						end_column: 1,
 					},
 					type_signature: 'Themer_Json',
+					properties: [
+						{
+							name: 'theme',
+							kind: 'variable',
+							type_signature: 'Theme',
+						},
+						{
+							name: 'color_scheme',
+							kind: 'variable',
+							type_signature: 'Color_Scheme',
+						},
+					],
 					exported: true,
 				},
 				{
@@ -5044,66 +5799,111 @@ export const src_json: Src_Json = {
 						{
 							name: 'opened',
 							kind: 'variable',
+							type_signature: 'boolean',
 						},
 						{
 							name: 'x',
 							kind: 'variable',
+							type_signature: 'number',
 						},
 						{
 							name: 'y',
 							kind: 'variable',
+							type_signature: 'number',
 						},
 						{
 							name: 'content',
 							kind: 'variable',
+							type_signature: 'Snippet | null',
 						},
 						{
 							name: 'id',
 							kind: 'variable',
+							type_signature: 'string',
+							doc_comment:
+								'Unique ID for the tooltip element (for aria-describedby)\n\n**IMPORTANT**: Triggering elements must reference this ID via aria-describedby\nwhen the tooltip is open to ensure ARIA compliance.',
+							summary: 'Unique ID for the tooltip element (for aria-describedby)',
 						},
 						{
 							name: 'show_delay_ms',
 							kind: 'variable',
+							type_signature: 'number',
+							doc_comment:
+								'Show delay in milliseconds (ARIA pattern specifies "small delay" before showing)',
+							summary:
+								'Show delay in milliseconds (ARIA pattern specifies "small delay" before showing)',
 						},
 						{
 							name: 'hide_delay_ms',
 							kind: 'variable',
+							type_signature: 'number',
+							doc_comment:
+								'Hide delay in milliseconds (for sticky behavior - allows moving cursor into tooltip)',
+							summary:
+								'Hide delay in milliseconds (for sticky behavior - allows moving cursor into tooltip)',
 						},
 						{
 							name: '#show_timer',
 							kind: 'variable',
+							type_signature: 'ReturnType<typeof setTimeout> | null',
 						},
 						{
 							name: '#hide_timer',
 							kind: 'variable',
+							type_signature: 'ReturnType<typeof setTimeout> | null',
 						},
 						{
 							name: '#clear_timers',
 							kind: 'function',
+							type_signature: '() => void',
+							doc_comment: 'Clear all pending timers (internal helper)',
+							summary: 'Clear all pending timers (internal helper)',
 						},
 						{
 							name: 'show',
 							kind: 'function',
+							type_signature: '(x: number, y: number, content: Snippet<[]>) => void',
+							doc_comment: 'Show tooltip immediately at given position with content',
+							summary: 'Show tooltip immediately at given position with content',
 						},
 						{
 							name: 'show_delayed',
 							kind: 'function',
+							type_signature:
+								'(x: number, y: number, content: Snippet<[]>, delay_ms?: number | undefined) => void',
+							doc_comment:
+								'Show tooltip after delay (ARIA compliance: "appears after a small delay")',
+							summary: 'Show tooltip after delay (ARIA compliance: "appears after a small delay")',
 						},
 						{
 							name: 'cancel_show',
 							kind: 'function',
+							type_signature: '() => void',
+							doc_comment: 'Cancel a pending show operation',
+							summary: 'Cancel a pending show operation',
 						},
 						{
 							name: 'hide',
 							kind: 'function',
+							type_signature: '() => void',
+							doc_comment: 'Hide tooltip immediately',
+							summary: 'Hide tooltip immediately',
 						},
 						{
 							name: 'hide_delayed',
 							kind: 'function',
+							type_signature: '(delay_ms?: number | undefined) => void',
+							doc_comment:
+								'Hide tooltip after delay (for sticky behavior - allows moving cursor into tooltip)',
+							summary:
+								'Hide tooltip after delay (for sticky behavior - allows moving cursor into tooltip)',
 						},
 						{
 							name: 'cancel_hide',
 							kind: 'function',
+							type_signature: '() => void',
+							doc_comment: 'Cancel a pending hide operation (for sticky behavior)',
+							summary: 'Cancel a pending hide operation (for sticky behavior)',
 						},
 					],
 					exported: true,
@@ -5141,9 +5941,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 14,
+						line: 33,
 						column: 13,
-						end_line: 39,
+						end_line: 58,
 						end_column: 1,
 					},
 					type_signature:
@@ -5173,9 +5973,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 44,
+						line: 63,
 						column: 13,
-						end_line: 108,
+						end_line: 127,
 						end_column: 1,
 					},
 					type_signature:
@@ -5213,14 +6013,14 @@ export const src_json: Src_Json = {
 				{
 					name: 'ts_extract_type_info',
 					kind: 'function',
-					doc_comment: 'Extract type/interface information',
-					summary: 'Extract type/interface information',
+					doc_comment: 'Extract type/interface information with rich property metadata',
+					summary: 'Extract type/interface information with rich property metadata',
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 113,
+						line: 132,
 						column: 13,
-						end_line: 137,
+						end_line: 192,
 						end_column: 1,
 					},
 					type_signature:
@@ -5253,18 +6053,18 @@ export const src_json: Src_Json = {
 				{
 					name: 'ts_extract_class_info',
 					kind: 'function',
-					doc_comment: 'Extract class information',
-					summary: 'Extract class information',
+					doc_comment: 'Extract class information with rich member metadata',
+					summary: 'Extract class information with rich member metadata',
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 142,
+						line: 197,
 						column: 13,
-						end_line: 177,
+						end_line: 278,
 						end_column: 1,
 					},
 					type_signature:
-						'(node: Node, _symbol: Symbol, _checker: TypeChecker, decl: Src_Module_Declaration): void',
+						'(node: Node, _symbol: Symbol, checker: TypeChecker, decl: Src_Module_Declaration): void',
 					return_type: 'void',
 					parameters: [
 						{
@@ -5278,7 +6078,7 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 						{
-							name: '_checker',
+							name: 'checker',
 							type: 'TypeChecker',
 							optional: false,
 						},
@@ -5298,9 +6098,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 182,
+						line: 283,
 						column: 13,
-						end_line: 194,
+						end_line: 295,
 						end_column: 1,
 					},
 					type_signature:
@@ -5338,9 +6138,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 199,
+						line: 300,
 						column: 13,
-						end_line: 205,
+						end_line: 306,
 						end_column: 1,
 					},
 					type_signature: '(node: Node): boolean',
@@ -5362,9 +6162,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 210,
+						line: 311,
 						column: 13,
-						end_line: 228,
+						end_line: 329,
 						end_column: 1,
 					},
 					type_signature: '(source_file: SourceFile): string | undefined',
@@ -5386,9 +6186,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 233,
+						line: 334,
 						column: 13,
-						end_line: 243,
+						end_line: 344,
 						end_column: 1,
 					},
 					type_signature: '(source_file: SourceFile): string[]',
@@ -5410,9 +6210,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 248,
+						line: 349,
 						column: 13,
-						end_line: 259,
+						end_line: 360,
 						end_column: 1,
 					},
 					type_signature: '(log: any): Program | null',
@@ -5448,6 +6248,71 @@ export const src_json: Src_Json = {
 						end_column: 1,
 					},
 					type_signature: 'Tsdoc_Parsed_Comment',
+					properties: [
+						{
+							name: 'full_text',
+							kind: 'variable',
+							type_signature: 'string',
+							doc_comment: 'Full comment text (excluding comment markers)',
+							summary: 'Full comment text (excluding comment markers)',
+						},
+						{
+							name: 'summary',
+							kind: 'variable',
+							type_signature: 'string',
+							doc_comment: 'First paragraph summary',
+							summary: 'First paragraph summary',
+						},
+						{
+							name: 'params',
+							kind: 'variable',
+							type_signature: 'Map<string, string>',
+							doc_comment: 'Parameter descriptions mapped by parameter name',
+							summary: 'Parameter descriptions mapped by parameter name',
+						},
+						{
+							name: 'returns',
+							kind: 'variable',
+							type_signature: 'string',
+							doc_comment: 'Return value description from @ returns or @ return',
+							summary: 'Return value description from @ returns or @ return',
+						},
+						{
+							name: 'throws',
+							kind: 'variable',
+							type_signature: 'Array<{type?: string; description: string}>',
+							doc_comment: 'Thrown errors from @ throws',
+							summary: 'Thrown errors from @ throws',
+						},
+						{
+							name: 'examples',
+							kind: 'variable',
+							type_signature: 'Array<string>',
+							doc_comment: 'Code examples from @ example',
+							summary: 'Code examples from @ example',
+						},
+						{
+							name: 'deprecated_message',
+							kind: 'variable',
+							type_signature: 'string',
+							doc_comment: 'Deprecation message from @ deprecated',
+							summary: 'Deprecation message from @ deprecated',
+						},
+						{
+							name: 'see_also',
+							kind: 'variable',
+							type_signature: 'Array<string>',
+							doc_comment: 'Related references from @ see',
+							summary: 'Related references from @ see',
+						},
+						{
+							name: 'since',
+							kind: 'variable',
+							type_signature: 'string',
+							doc_comment: 'Version information from @ since',
+							summary: 'Version information from @ since',
+						},
+					],
 					exported: true,
 				},
 				{

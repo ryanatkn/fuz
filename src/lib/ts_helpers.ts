@@ -5,8 +5,27 @@
  */
 
 import ts from 'typescript';
-import type {Src_Module_Declaration} from './src_json.js';
+import type {Src_Module_Declaration, Generic_Param_Info} from './src_json.js';
 import {tsdoc_parse} from './tsdoc_helpers.js';
+
+/**
+ * Parse a generic type parameter into structured information
+ */
+const ts_parse_generic_param = (param: ts.TypeParameterDeclaration): Generic_Param_Info => {
+	const result: Generic_Param_Info = {
+		name: param.name.text,
+	};
+
+	if (param.constraint) {
+		result.constraint = param.constraint.getText();
+	}
+
+	if (param.default) {
+		result.default_type = param.default.getText();
+	}
+
+	return result;
+};
 
 /**
  * Infer declaration kind from symbol and node
@@ -102,13 +121,13 @@ export const ts_extract_function_info = (
 	// Extract generic type parameters
 	if (ts.isFunctionDeclaration(node) || ts.isArrowFunction(node) || ts.isFunctionExpression(node)) {
 		if (node.typeParameters?.length) {
-			decl.generic_params = node.typeParameters.map((tp) => tp.getText());
+			decl.generic_params = node.typeParameters.map(ts_parse_generic_param);
 		}
 	}
 };
 
 /**
- * Extract type/interface information
+ * Extract type/interface information with rich property metadata
  */
 export const ts_extract_type_info = (
 	node: ts.Node,
@@ -125,24 +144,60 @@ export const ts_extract_type_info = (
 
 	if (ts.isTypeAliasDeclaration(node) || ts.isInterfaceDeclaration(node)) {
 		if (node.typeParameters?.length) {
-			decl.generic_params = node.typeParameters.map((tp) => tp.getText());
+			decl.generic_params = node.typeParameters.map(ts_parse_generic_param);
 		}
 	}
 
-	if (ts.isInterfaceDeclaration(node) && node.heritageClauses) {
-		decl.extends = node.heritageClauses
-			.filter((hc) => hc.token === ts.SyntaxKind.ExtendsKeyword)
-			.flatMap((hc) => hc.types.map((t) => t.getText()));
+	if (ts.isInterfaceDeclaration(node)) {
+		if (node.heritageClauses) {
+			decl.extends = node.heritageClauses
+				.filter((hc) => hc.token === ts.SyntaxKind.ExtendsKeyword)
+				.flatMap((hc) => hc.types.map((t) => t.getText()));
+		}
+
+		// Extract properties with full metadata
+		decl.properties = [];
+		for (const member of node.members) {
+			if (ts.isPropertySignature(member) && ts.isIdentifier(member.name)) {
+				const prop_name = member.name.text;
+				const prop_decl: Src_Module_Declaration = {
+					name: prop_name,
+					kind: 'variable',
+				};
+
+				// Extract readonly modifier
+				const modifiers = ts.getModifiers(member);
+				if (modifiers?.some((m) => m.kind === ts.SyntaxKind.ReadonlyKeyword)) {
+					prop_decl.summary = 'readonly';
+				}
+
+				// Extract type
+				if (member.type) {
+					prop_decl.type_signature = member.type.getText();
+				}
+
+				// Extract JSDoc
+				const prop_jsdoc = tsdoc_parse(member, node.getSourceFile());
+				if (prop_jsdoc) {
+					prop_decl.doc_comment = prop_jsdoc.full_text;
+					if (!prop_decl.summary) {
+						prop_decl.summary = prop_jsdoc.summary;
+					}
+				}
+
+				decl.properties.push(prop_decl);
+			}
+		}
 	}
 };
 
 /**
- * Extract class information
+ * Extract class information with rich member metadata
  */
 export const ts_extract_class_info = (
 	node: ts.Node,
 	_symbol: ts.Symbol,
-	_checker: ts.TypeChecker,
+	checker: ts.TypeChecker,
 	decl: Src_Module_Declaration,
 ): void => {
 	if (!ts.isClassDeclaration(node)) return;
@@ -158,20 +213,66 @@ export const ts_extract_class_info = (
 	}
 
 	if (node.typeParameters?.length) {
-		decl.generic_params = node.typeParameters.map((tp) => tp.getText());
+		decl.generic_params = node.typeParameters.map(ts_parse_generic_param);
 	}
 
-	// Extract member names
+	// Extract members with full metadata
 	decl.members = [];
 	for (const member of node.members) {
 		if (ts.isPropertyDeclaration(member) || ts.isMethodDeclaration(member)) {
-			const member_name = (member.name as ts.Identifier).text;
-			if (member_name) {
-				decl.members.push({
-					name: member_name,
-					kind: ts.isMethodDeclaration(member) ? 'function' : 'variable',
-				});
+			const member_name = ts.isIdentifier(member.name) ? member.name.text : member.name.getText();
+			if (!member_name) continue;
+
+			const member_decl: Src_Module_Declaration = {
+				name: member_name,
+				kind: ts.isMethodDeclaration(member) ? 'function' : 'variable',
+			};
+
+			// Extract visibility and modifiers
+			const modifiers = ts.getModifiers(member);
+			const modifier_flags: Array<string> = [];
+			if (modifiers) {
+				for (const mod of modifiers) {
+					if (mod.kind === ts.SyntaxKind.PublicKeyword) modifier_flags.push('public');
+					else if (mod.kind === ts.SyntaxKind.PrivateKeyword) modifier_flags.push('private');
+					else if (mod.kind === ts.SyntaxKind.ProtectedKeyword) modifier_flags.push('protected');
+					else if (mod.kind === ts.SyntaxKind.ReadonlyKeyword) modifier_flags.push('readonly');
+					else if (mod.kind === ts.SyntaxKind.StaticKeyword) modifier_flags.push('static');
+					else if (mod.kind === ts.SyntaxKind.AbstractKeyword) modifier_flags.push('abstract');
+				}
 			}
+
+			// Store modifiers as summary (we can add a proper field later if needed)
+			if (modifier_flags.length > 0) {
+				member_decl.summary = modifier_flags.join(' ');
+			}
+
+			// Extract type information
+			try {
+				if (ts.isPropertyDeclaration(member) && member.type) {
+					member_decl.type_signature = member.type.getText();
+				} else if (ts.isMethodDeclaration(member)) {
+					// For methods, get full signature
+					const member_symbol = checker.getSymbolAtLocation(member.name);
+					if (member_symbol) {
+						const member_type = checker.getTypeOfSymbolAtLocation(member_symbol, member);
+						member_decl.type_signature = checker.typeToString(member_type);
+					}
+				}
+			} catch (_err) {
+				// Ignore type extraction errors
+			}
+
+			// Extract JSDoc
+			const member_jsdoc = tsdoc_parse(member, node.getSourceFile());
+			if (member_jsdoc) {
+				member_decl.doc_comment = member_jsdoc.full_text;
+				if (!member_decl.summary) {
+					member_decl.summary = member_jsdoc.summary;
+				}
+			}
+
+			decl.members.push(member_decl);
 		}
 	}
 };

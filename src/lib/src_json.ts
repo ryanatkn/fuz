@@ -58,6 +58,18 @@ export interface Component_Prop_Info {
 }
 
 /**
+ * Generic type parameter information
+ */
+export interface Generic_Param_Info {
+	/** Parameter name (e.g., "T") */
+	name: string;
+	/** Constraint if any (e.g., "string" from "T extends string") */
+	constraint?: string;
+	/** Default type if any (e.g., "unknown" from "T = unknown") */
+	default_type?: string;
+}
+
+/**
  * Source location information within a file
  */
 export interface Source_Location {
@@ -91,8 +103,8 @@ export interface Src_Module_Declaration {
 	return_type?: string;
 	/** Function return value description from @returns/@return */
 	return_description?: string;
-	/** Generic type parameters */
-	generic_params?: Array<string>;
+	/** Generic type parameters with constraints */
+	generic_params?: Array<Generic_Param_Info>;
 	/** Code examples from @ example tags */
 	examples?: Array<string>;
 	/** Deprecation warning from @ deprecated tag */
@@ -156,7 +168,15 @@ export interface Src_Json {
  */
 export const get_declaration_display_name = (decl: Src_Module_Declaration): string => {
 	if (decl.generic_params?.length) {
-		return `${decl.name}<${decl.generic_params.join(', ')}>`;
+		const params_str = decl.generic_params
+			.map((p) => {
+				let result = p.name;
+				if (p.constraint) result += ` extends ${p.constraint}`;
+				if (p.default_type) result += ` = ${p.default_type}`;
+				return result;
+			})
+			.join(', ');
+		return `${decl.name}<${params_str}>`;
 	}
 	return decl.name;
 };

@@ -42,11 +42,12 @@
 	</p>
 {/if}
 
-{#if decl.kind}
+<!-- TODO doesnt seem useful right? -->
+<!-- {#if decl.kind}
 	<p>
 		<span class="chip font_size_md">{decl.kind}</span>
 	</p>
-{/if}
+{/if} -->
 
 <!-- type signature -->
 {#if decl.type_signature}
@@ -157,11 +158,40 @@
 {#if decl.generic_params?.length}
 	<section>
 		<h4>generic parameters</h4>
-		<ul>
-			{#each decl.generic_params as generic (generic)}
-				<li><Code content={generic} lang="ts" /></li>
-			{/each}
-		</ul>
+		<table>
+			<thead>
+				<tr>
+					<th>parameter</th>
+					{#if decl.generic_params.some((g) => g.constraint)}
+						<th>constraint</th>
+					{/if}
+					{#if decl.generic_params.some((g) => g.default_type)}
+						<th>default</th>
+					{/if}
+				</tr>
+			</thead>
+			<tbody>
+				{#each decl.generic_params as generic (generic)}
+					<tr>
+						<td><code>{generic.name}</code></td>
+						{#if decl.generic_params.some((g) => g.constraint)}
+							<td>
+								{#if generic.constraint}
+									<Identifier_Link_Or_Ts type={generic.constraint} />
+								{/if}
+							</td>
+						{/if}
+						{#if decl.generic_params.some((g) => g.default_type)}
+							<td>
+								{#if generic.default_type}
+									<Identifier_Link_Or_Ts type={generic.default_type} />
+								{/if}
+							</td>
+						{/if}
+					</tr>
+				{/each}
+			</tbody>
+		</table>
 	</section>
 {/if}
 
@@ -250,14 +280,30 @@
 			<thead>
 				<tr>
 					<th>member</th>
-					<th>kind</th>
+					<th>type</th>
+					{#if decl.members.some((m) => m.summary)}
+						<th>modifiers</th>
+					{/if}
+					{#if decl.members.some((m) => m.doc_comment)}
+						<th>description</th>
+					{/if}
 				</tr>
 			</thead>
 			<tbody>
 				{#each decl.members as member (member)}
 					<tr>
 						<td><code>{member.name}</code></td>
-						<td>{member.kind ?? ''}</td>
+						<td>
+							{#if member.type_signature}
+								<Identifier_Link_Or_Ts type={member.type_signature} />
+							{/if}
+						</td>
+						{#if decl.members.some((m) => m.summary)}
+							<td>{member.summary ?? ''}</td>
+						{/if}
+						{#if decl.members.some((m) => m.doc_comment)}
+							<td>{member.doc_comment ?? ''}</td>
+						{/if}
 					</tr>
 				{/each}
 			</tbody>
@@ -272,14 +318,30 @@
 			<thead>
 				<tr>
 					<th>property</th>
-					<th>kind</th>
+					<th>type</th>
+					{#if decl.properties.some((p) => p.summary)}
+						<th>modifiers</th>
+					{/if}
+					{#if decl.properties.some((p) => p.doc_comment)}
+						<th>description</th>
+					{/if}
 				</tr>
 			</thead>
 			<tbody>
 				{#each decl.properties as prop (prop)}
 					<tr>
 						<td><code>{prop.name}</code></td>
-						<td>{prop.kind ?? ''}</td>
+						<td>
+							{#if prop.type_signature}
+								<Identifier_Link_Or_Ts type={prop.type_signature} />
+							{/if}
+						</td>
+						{#if decl.properties.some((p) => p.summary)}
+							<td>{prop.summary ?? ''}</td>
+						{/if}
+						{#if decl.properties.some((p) => p.doc_comment)}
+							<td>{prop.doc_comment ?? ''}</td>
+						{/if}
 					</tr>
 				{/each}
 			</tbody>
