@@ -681,4 +681,251 @@ function createUser(name: string, age: number, options?: any) {}
 			assert.strictEqual(result.since, '1.0.0');
 		});
 	});
+
+	describe('node type compatibility', () => {
+		test('extracts JSDoc from variable statement', () => {
+			const code = `
+/** Component-level documentation */
+let x = 42;
+`;
+			const node = get_first_statement(code);
+			const source_file = create_source_file(code);
+			const result = tsdoc_parse(node, source_file);
+
+			assert.ok(result);
+			assert.strictEqual(result.full_text, 'Component-level documentation');
+			assert.strictEqual(result.summary, 'Component-level documentation');
+		});
+
+		test('extracts JSDoc from variable declaration within statement', () => {
+			const code = `
+/** Variable with JSDoc */
+const myVar = 42;
+`;
+			const source_file = create_source_file(code);
+			const stmt = source_file.statements[0];
+			assert.ok(stmt && ts.isVariableStatement(stmt));
+
+			// Get the variable declaration
+			const declaration = stmt.declarationList.declarations[0];
+			assert.ok(declaration);
+
+			const result = tsdoc_parse(declaration, source_file);
+
+			assert.ok(result);
+			assert.strictEqual(result.full_text, 'Variable with JSDoc');
+		});
+
+		test('extracts JSDoc from class declaration', () => {
+			const code = `
+/**
+ * A test class.
+ *
+ * @since 1.0.0
+ */
+class MyClass {}
+`;
+			const node = get_first_statement(code);
+			const source_file = create_source_file(code);
+			const result = tsdoc_parse(node, source_file);
+
+			assert.ok(result);
+			assert.strictEqual(result.summary, 'A test class.');
+			assert.strictEqual(result.since, '1.0.0');
+		});
+
+		test('extracts JSDoc from type alias declaration', () => {
+			const code = `
+/**
+ * Component props type.
+ */
+type ComponentProps = {name: string};
+`;
+			const node = get_first_statement(code);
+			const source_file = create_source_file(code);
+			const result = tsdoc_parse(node, source_file);
+
+			assert.ok(result);
+			assert.strictEqual(result.full_text, 'Component props type.');
+		});
+
+		test('extracts JSDoc from interface declaration', () => {
+			const code = `
+/**
+ * Interface documentation.
+ *
+ * @example
+ * const obj: MyInterface = {value: 42}
+ */
+interface MyInterface {
+	value: number;
+}
+`;
+			const node = get_first_statement(code);
+			const source_file = create_source_file(code);
+			const result = tsdoc_parse(node, source_file);
+
+			assert.ok(result);
+			assert.strictEqual(result.summary, 'Interface documentation.');
+			assert.strictEqual(result.examples.length, 1);
+		});
+
+		test('extracts JSDoc from property signature in interface', () => {
+			const code = `
+interface Props {
+	/**
+	 * The user's name.
+	 */
+	name: string;
+}
+`;
+			const source_file = create_source_file(code);
+			const interfaceDecl = source_file.statements[0];
+			assert.ok(interfaceDecl && ts.isInterfaceDeclaration(interfaceDecl));
+
+			const property = interfaceDecl.members[0];
+			assert.ok(property);
+
+			const result = tsdoc_parse(property, source_file);
+
+			assert.ok(result);
+			assert.ok(result.full_text.includes("user's name"));
+		});
+	});
+
+	describe('svelte2tsx patterns', () => {
+		test('extracts component-level JSDoc from svelte2tsx-like pattern', () => {
+			// Simulates the pattern svelte2tsx creates
+			const code = `
+function $$render() {
+	/**
+	 * Like details but renders children lazily by default.
+	 */
+	let {open, children}: Props = $props();
+}
+`;
+			const source_file = create_source_file(code);
+			const funcDecl = source_file.statements[0];
+			assert.ok(funcDecl && ts.isFunctionDeclaration(funcDecl));
+
+			// Find the variable statement inside the function
+			const funcBody = funcDecl.body;
+			assert.ok(funcBody);
+			const varStmt = funcBody.statements[0];
+			assert.ok(varStmt && ts.isVariableStatement(varStmt));
+
+			const result = tsdoc_parse(varStmt, source_file);
+
+			assert.ok(result);
+			assert.ok(result.full_text.includes('renders children lazily'));
+		});
+
+		test('extracts prop JSDoc from type literal pattern', () => {
+			// Simulates $$ComponentProps pattern
+			const code = `
+type $$ComponentProps = {
+	/**
+	 * Whether to render eagerly.
+	 */
+	eager?: boolean;
+};
+`;
+			const source_file = create_source_file(code);
+			const typeAlias = source_file.statements[0];
+			assert.ok(typeAlias && ts.isTypeAliasDeclaration(typeAlias));
+
+			const typeLiteral = typeAlias.type;
+			assert.ok(ts.isTypeLiteralNode(typeLiteral));
+
+			const property = typeLiteral.members[0];
+			assert.ok(property);
+
+			const result = tsdoc_parse(property, source_file);
+
+			assert.ok(result);
+			assert.ok(result.full_text.includes('render eagerly'));
+		});
+	});
+
+	describe('multiline tag content', () => {
+		test('handles multiline param description', () => {
+			const code = `
+/**
+ * @param config - Configuration object
+ *   with multiple properties
+ *   spanning several lines
+ */
+function foo(config: any) {}
+`;
+			const node = get_first_statement(code);
+			const source_file = create_source_file(code);
+			const result = tsdoc_parse(node, source_file);
+
+			assert.ok(result);
+			const param_desc = result.params.get('config');
+			assert.ok(param_desc);
+			// TypeScript API should preserve the multiline content
+			assert.ok(param_desc.includes('Configuration object'));
+			assert.ok(param_desc.includes('multiple properties'));
+		});
+
+		test('handles multiline example', () => {
+			const code = `
+/**
+ * @example
+ * const result = foo({
+ *   key: 'value',
+ *   nested: true
+ * });
+ */
+function foo(x: any) {}
+`;
+			const node = get_first_statement(code);
+			const source_file = create_source_file(code);
+			const result = tsdoc_parse(node, source_file);
+
+			assert.ok(result);
+			assert.strictEqual(result.examples.length, 1);
+			const example = result.examples[0]!;
+			assert.ok(example.includes('const result'));
+			assert.ok(example.includes('nested: true'));
+		});
+
+		test('handles multiline returns description', () => {
+			const code = `
+/**
+ * @returns A complex object
+ *   with nested properties
+ *   and detailed structure
+ */
+function foo() {}
+`;
+			const node = get_first_statement(code);
+			const source_file = create_source_file(code);
+			const result = tsdoc_parse(node, source_file);
+
+			assert.ok(result);
+			assert.ok(result.returns);
+			assert.ok(result.returns.includes('complex object'));
+			assert.ok(result.returns.includes('nested properties'));
+		});
+	});
+
+	describe('empty collection behavior', () => {
+		test('returns empty arrays for missing tags', () => {
+			const code = `
+/** Simple comment with no tags */
+function foo() {}
+`;
+			const node = get_first_statement(code);
+			const source_file = create_source_file(code);
+			const result = tsdoc_parse(node, source_file);
+
+			assert.ok(result);
+			assert.strictEqual(result.throws.length, 0);
+			assert.strictEqual(result.examples.length, 0);
+			assert.strictEqual(result.see_also.length, 0);
+			assert.strictEqual(result.params.size, 0);
+		});
+	});
 });

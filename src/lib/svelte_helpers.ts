@@ -33,12 +33,13 @@ export const svelte_analyze_component = (
 
 	try {
 		// Create a virtual source file from the svelte2tsx output
+		// svelte2tsx generates plain TypeScript (not TSX/JSX)
 		const virtual_source = ts.createSourceFile(
-			source_file.fileName + '.tsx',
+			source_file.fileName + '.ts',
 			ts_code,
 			ts.ScriptTarget.Latest,
 			true,
-			ts.ScriptKind.TSX,
+			ts.ScriptKind.TS,
 		);
 
 		// Extract component-level TSDoc from svelte2tsx transformed output

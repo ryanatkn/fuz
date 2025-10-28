@@ -5477,7 +5477,7 @@ export const src_json: Src_Json = {
 					source_location: {
 						line: 23,
 						column: 13,
-						end_line: 78,
+						end_line: 79,
 						end_column: 1,
 					},
 					type_signature:
@@ -6621,9 +6621,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 66,
+						line: 69,
 						column: 13,
-						end_line: 141,
+						end_line: 144,
 						end_column: 1,
 					},
 					type_signature:
@@ -6634,11 +6634,13 @@ export const src_json: Src_Json = {
 							name: 'node',
 							type: 'Node',
 							optional: false,
+							description: '- The TypeScript node to extract JSDoc from',
 						},
 						{
 							name: '_source_file',
 							type: 'SourceFile',
 							optional: false,
+							description: '- Source file (unused, kept for API consistency)',
 						},
 					],
 					exported: false,
@@ -6646,7 +6648,7 @@ export const src_json: Src_Json = {
 			],
 			imports: ['typescript'],
 			module_comment:
-				'TSDoc/JSDoc parsing helpers using the TypeScript Compiler API.\n\nProvides `tsdoc_parse()` for extracting JSDoc/TSDoc from TypeScript nodes.\n\n## How it works\n\nUses TypeScript\'s built-in `ts.getJSDocCommentsAndTags()` API to extract\nstructured documentation from AST nodes.\n\n## Behavioral notes (due to TS Compiler API)\n\n- Preserves dash separator in @param descriptions: `@param x - desc` → `"- desc"`\n- @throws tags have {Type} stripped by TS API; regex then extracts first word as type\n- @see tags return unreliable values ("*" or undefined) from TS API\n\n## Usage\n\nWorks on all TypeScript/TSX nodes, including:\n- Regular TypeScript files (.ts, .tsx)\n- TSX output from svelte2tsx transformations\n- Any node with JSDoc comments in the AST\n\nAll functions are prefixed with `tsdoc_` for clarity.',
+				'TSDoc/JSDoc parsing helpers using the TypeScript Compiler API.\n\nProvides `tsdoc_parse()` for extracting JSDoc/TSDoc from TypeScript nodes.\n\n## How it works\n\nUses TypeScript\'s built-in `ts.getJSDocCommentsAndTags()` API to extract\nstructured documentation from AST nodes.\n\n## Behavioral notes (due to TS Compiler API)\n\n- Preserves dash separator in @param descriptions: `@param x - desc` → `"- desc"`\n- @throws tags have {Type} stripped by TS API; fallback regex extracts first word as error type\n- @see tags return unreliable values ("*" or undefined) from TS API\n\n## Usage\n\nWorks on all TypeScript nodes, including:\n- Regular TypeScript files (.ts, .tsx)\n- Transformed output from svelte2tsx\n- Any node with JSDoc comments in the AST\n\nAll functions are prefixed with `tsdoc_` for clarity.',
 			imported_by: ['./svelte_helpers.ts', './ts_helpers.ts'],
 		},
 	},

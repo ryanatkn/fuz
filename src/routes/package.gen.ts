@@ -1,3 +1,5 @@
+// TODO BLOCK needs to be exported
+
 /**
  * Custom package generator with full TypeScript analysis
  *
@@ -117,7 +119,7 @@ export const gen: Gen = async ({log, filer}) => {
 					imports: [],
 				};
 
-				// Use svelte2tsx to transform Svelte component to TSX for analysis
+				// Use svelte2tsx to transform Svelte component to TS (not TSX) for analysis
 				if (svelte2tsx) {
 					try {
 						const svelte_source = readFileSync(source_id, 'utf-8');
@@ -125,8 +127,8 @@ export const gen: Gen = async ({log, filer}) => {
 						// Check if component uses TypeScript
 						const is_ts_file = svelte_source.includes('lang="ts"');
 
-						// Transform Svelte to TSX
-						const tsx_result = svelte2tsx(svelte_source, {
+						// Transform Svelte to TS
+						const ts_result = svelte2tsx(svelte_source, {
 							filename: source_id,
 							isTsFile: is_ts_file,
 							emitOnTemplateError: true, // Handle malformed templates gracefully
@@ -147,7 +149,7 @@ export const gen: Gen = async ({log, filer}) => {
 
 						// Analyze the component
 						const decl = svelte_analyze_component(
-							tsx_result.code,
+							ts_result.code,
 							temp_source,
 							checker,
 							component_name,

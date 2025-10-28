@@ -11,14 +11,14 @@
  * ## Behavioral notes (due to TS Compiler API)
  *
  * - Preserves dash separator in @param descriptions: `@param x - desc` → `"- desc"`
- * - @throws tags have {Type} stripped by TS API; regex then extracts first word as type
+ * - @throws tags have {Type} stripped by TS API; fallback regex extracts first word as error type
  * - @see tags return unreliable values ("*" or undefined) from TS API
  *
  * ## Usage
  *
- * Works on all TypeScript/TSX nodes, including:
+ * Works on all TypeScript nodes, including:
  * - Regular TypeScript files (.ts, .tsx)
- * - TSX output from svelte2tsx transformations
+ * - Transformed output from svelte2tsx
  * - Any node with JSDoc comments in the AST
  *
  * All functions are prefixed with `tsdoc_` for clarity.
@@ -62,6 +62,9 @@ export interface Tsdoc_Parsed_Comment {
  * - @ deprecated - deprecation warnings
  * - @ see - related references
  * - @ since - version information
+ *
+ * @param node - The TypeScript node to extract JSDoc from
+ * @param _source_file - Source file (unused, kept for API consistency)
  */
 export const tsdoc_parse = (
 	node: ts.Node,
