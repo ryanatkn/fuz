@@ -6242,9 +6242,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 13,
+						line: 50,
 						column: 0,
-						end_line: 32,
+						end_line: 69,
 						end_column: 1,
 					},
 					type_signature: 'Tsdoc_Parsed_Comment',
@@ -6324,9 +6324,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 47,
+						line: 84,
 						column: 13,
-						end_line: 122,
+						end_line: 159,
 						end_column: 1,
 					},
 					type_signature:
@@ -6355,9 +6355,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 130,
+						line: 167,
 						column: 13,
-						end_line: 217,
+						end_line: 271,
 						end_column: 1,
 					},
 					type_signature: '(text: string): Tsdoc_Parsed_Comment | undefined',
@@ -6374,7 +6374,7 @@ export const src_json: Src_Json = {
 			],
 			imports: ['typescript'],
 			module_comment:
-				'TSDoc/JSDoc parsing helpers.\n\nPure JSDoc/TSDoc parsing utilities with no TypeScript Compiler API dependencies.\nAll functions are prefixed with `tsdoc_` for clarity.',
+				'TSDoc/JSDoc parsing helpers.\n\nThis module provides TWO complementary parsing functions for different use cases:\n\n## 1. `tsdoc_parse()` - TypeScript Compiler API-based parsing\n\n**Use for**: Regular TypeScript files, TSX output from svelte2tsx transformations\n\n**How it works**: Uses TypeScript\'s built-in `ts.getJSDocCommentsAndTags()` API\n\n**Behavioral quirks** (due to TS Compiler API limitations):\n- Preserves dash separator in @param descriptions: `@param x - desc` → `"- desc"`\n- @throws tags have {Type} stripped by TS API, regex then extracts first word as type\n- @see tags return unreliable values ("*" or undefined) from TS API\n\n## 2. `tsdoc_parse_from_text()` - Regex-based parsing from raw text\n\n**Use for**: Raw Svelte component JSDoc (appears before `<script>` tag in .svelte files)\n\n**How it works**: Uses regex patterns to extract tags from raw comment text\n\n**Why needed**: svelte2tsx transforms Svelte → TSX, but component-level JSDoc comments\n(appearing before `<script>`) don\'t survive the transformation in a way that\'s easily\nparseable by the TypeScript Compiler API. We parse these from the original Svelte source.\n\n**Behavioral differences from tsdoc_parse()**:\n- Strips dash separator from @param: `@param x - desc` → `"desc"`\n- Correctly extracts @throws {Type} from raw text\n- Handles @see tags reliably\n\n**Used by**: `svelte_extract_component_tsdoc()` in svelte_helpers.ts\n\n## Summary: Why Both Functions?\n\nThey parse different sources for different contexts:\n- `tsdoc_parse()` → TypeScript nodes (props, functions in .ts/.tsx files)\n- `tsdoc_parse_from_text()` → Raw Svelte source (component-level docs in .svelte files)\n\nThe dual approach is intentional and necessary for comprehensive Svelte+TS documentation.\n\nAll functions are prefixed with `tsdoc_` for clarity.',
 			imported_by: ['./svelte_helpers.ts', './ts_helpers.ts'],
 		},
 	},
