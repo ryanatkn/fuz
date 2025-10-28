@@ -67,8 +67,6 @@ export const svelte_analyze_component = (
 			end_line: end_pos.line + 1,
 			end_column: end_pos.character,
 		};
-
-		result.exported = true; // Components are always exported
 	} catch (err) {
 		// If analysis fails, return basic component info
 		// eslint-disable-next-line no-console

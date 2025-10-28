@@ -309,17 +309,6 @@ export const ts_extract_variable_info = (
 };
 
 /**
- * Check if node is exported.
- */
-export const ts_is_exported = (node: ts.Node): boolean => {
-	return (
-		(ts.canHaveModifiers(node) &&
-			ts.getModifiers(node)?.some((m) => m.kind === ts.SyntaxKind.ExportKeyword)) ||
-		false
-	);
-};
-
-/**
  * Extract module-level comment.
  */
 export const ts_extract_module_comment = (source_file: ts.SourceFile): string | undefined => {

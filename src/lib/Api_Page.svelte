@@ -1,17 +1,26 @@
 <script lang="ts">
+	import Code from '@ryanatkn/fuz_code/Code.svelte';
+
 	import type {Src_Module_Declaration} from '$lib/src_json.js';
 	import Details from '$lib/Details.svelte';
-	import Code from '@ryanatkn/fuz_code/Code.svelte';
 	import Identifier_Link_Or_Ts from '$lib/Identifier_Link_Or_Ts.svelte';
+	import Module_Link from '$lib/Module_Link.svelte';
 
+	// TODO BLOCK simplify this interface
 	const {
 		decl,
 		module_path,
+		src_module,
+		pkg_name,
 		repo_url,
+		homepage_url,
 	}: {
 		decl: Src_Module_Declaration;
 		module_path: string;
+		src_module?: any; // TODO: import Src_Module type
+		pkg_name?: string;
 		repo_url?: string;
+		homepage_url?: string;
 	} = $props();
 
 	// Generate source URL
@@ -26,7 +35,11 @@
 </script>
 
 <!-- Metadata -->
-{#if source_url}
+{#if module_path && pkg_name}
+	<p>
+		<Module_Link {module_path} {src_module} {pkg_name} {repo_url} {homepage_url} />
+	</p>
+{:else if source_url}
 	<p>
 		<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 		<a class="chip" href={source_url} target="_blank" rel="noopener"> view source </a>
@@ -42,7 +55,7 @@
 	</p>
 {/if}
 
-<!-- TODO doesnt seem useful right? -->
+<!-- TODO is this useful sometimes? -->
 <!-- {#if decl.kind}
 	<p>
 		<span class="chip font_size_md">{decl.kind}</span>
@@ -92,7 +105,7 @@
 						{#if decl.parameters.some((p) => p.default_value)}
 							<td>
 								{#if param.default_value}
-									<Code content={param.default_value} lang="ts" />
+									<Code inline content={param.default_value} lang="ts" />
 								{/if}
 							</td>
 						{/if}
@@ -132,7 +145,7 @@
 						{#if decl.props.some((p) => p.default_value)}
 							<td>
 								{#if prop.default_value}
-									<Code content={prop.default_value} lang="ts" />
+									<Code inline content={prop.default_value} lang="ts" />
 								{/if}
 							</td>
 						{/if}

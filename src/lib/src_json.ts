@@ -115,8 +115,6 @@ export interface Src_Module_Declaration {
 	throws?: Array<{type?: string; description: string}>;
 	/** Version information from @ since tag */
 	since?: string;
-	/** Whether this is exported */
-	exported?: boolean;
 	/** For types/interfaces: extends clause */
 	extends?: Array<string>;
 	/** For classes: implements clause */

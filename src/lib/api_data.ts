@@ -11,16 +11,16 @@ import type {Src_Module_Declaration, Src_Module} from '$lib/src_json.js';
  */
 export const lookup_declaration_by_name = (
 	name: string,
-): {decl: Src_Module_Declaration; module_path: string; module: Src_Module} | undefined => {
+): {decl: Src_Module_Declaration; module_path: string; src_module: Src_Module} | undefined => {
 	const pkg = pkg_context.get();
 	if (!pkg.src_json.modules) return undefined;
 
-	for (const [module_path, module] of Object.entries(pkg.src_json.modules)) {
-		if (!module.declarations) continue;
+	for (const [module_path, src_module] of Object.entries(pkg.src_json.modules)) {
+		if (!src_module.declarations) continue;
 
-		const decl = module.declarations.find((d) => d.name === name);
+		const decl = src_module.declarations.find((d) => d.name === name);
 		if (decl) {
-			return {decl, module_path, module};
+			return {decl, module_path, src_module};
 		}
 	}
 
@@ -32,22 +32,23 @@ export const lookup_declaration_by_name = (
  */
 export const get_all_declarations = (): Array<{
 	module_path: string;
-	module: Src_Module;
+	src_module: Src_Module;
 	decl: Src_Module_Declaration;
 }> => {
 	const pkg = pkg_context.get();
-	const all: Array<{module_path: string; module: Src_Module; decl: Src_Module_Declaration}> = [];
+	const all: Array<{module_path: string; src_module: Src_Module; decl: Src_Module_Declaration}> =
+		[];
 
 	if (!pkg.src_json.modules) return all;
 
-	for (const [module_path, module] of Object.entries(pkg.src_json.modules)) {
-		if (!module.declarations) continue;
+	for (const [module_path, src_module] of Object.entries(pkg.src_json.modules)) {
+		if (!src_module.declarations) continue;
 
-		for (const decl of module.declarations) {
+		for (const decl of src_module.declarations) {
 			// Skip default exports
 			if (decl.name === 'default') continue;
 
-			all.push({module_path, module, decl});
+			all.push({module_path, src_module, decl});
 		}
 	}
 
@@ -66,7 +67,7 @@ export const is_known_identifier = (name: string): boolean => {
  */
 export const search_declarations = (
 	query: string,
-): Array<{module_path: string; module: Src_Module; decl: Src_Module_Declaration}> => {
+): Array<{module_path: string; src_module: Src_Module; decl: Src_Module_Declaration}> => {
 	if (!query.trim()) return [];
 
 	const all = get_all_declarations();

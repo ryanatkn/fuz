@@ -169,7 +169,6 @@ export const src_json: Src_Json = {
 						end_line: 103,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -192,7 +191,22 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 						{
+							name: 'module',
+							type: 'any',
+							optional: true,
+						},
+						{
+							name: 'pkg_name',
+							type: 'string',
+							optional: true,
+						},
+						{
 							name: 'repo_url',
+							type: 'string',
+							optional: true,
+						},
+						{
+							name: 'homepage_url',
 							type: 'string',
 							optional: true,
 						},
@@ -200,10 +214,9 @@ export const src_json: Src_Json = {
 					source_location: {
 						line: 1,
 						column: 0,
-						end_line: 351,
+						end_line: 362,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -252,7 +265,6 @@ export const src_json: Src_Json = {
 						end_line: 80,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -301,7 +313,6 @@ export const src_json: Src_Json = {
 						end_line: 153,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -330,7 +341,6 @@ export const src_json: Src_Json = {
 						end_line: 68,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -354,7 +364,6 @@ export const src_json: Src_Json = {
 						end_line: 54,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -378,7 +387,6 @@ export const src_json: Src_Json = {
 						end_line: 23,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -395,7 +403,6 @@ export const src_json: Src_Json = {
 						end_line: 30,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -434,7 +441,6 @@ export const src_json: Src_Json = {
 						end_line: 72,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -473,7 +479,6 @@ export const src_json: Src_Json = {
 						end_line: 111,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -572,7 +577,6 @@ export const src_json: Src_Json = {
 						end_line: 373,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -686,7 +690,6 @@ export const src_json: Src_Json = {
 						end_line: 542,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -703,7 +706,6 @@ export const src_json: Src_Json = {
 						end_line: 17,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -737,7 +739,6 @@ export const src_json: Src_Json = {
 						end_line: 118,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -771,7 +772,6 @@ export const src_json: Src_Json = {
 						end_line: 20,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -788,7 +788,6 @@ export const src_json: Src_Json = {
 						end_line: 79,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -847,7 +846,6 @@ export const src_json: Src_Json = {
 						end_line: 143,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -868,7 +866,6 @@ export const src_json: Src_Json = {
 						end_line: 46,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -928,7 +925,6 @@ export const src_json: Src_Json = {
 						end_line: 220,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -963,7 +959,6 @@ export const src_json: Src_Json = {
 						end_line: 27,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -1002,7 +997,6 @@ export const src_json: Src_Json = {
 						end_line: 174,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -1046,7 +1040,6 @@ export const src_json: Src_Json = {
 						end_line: 37,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -1095,7 +1088,6 @@ export const src_json: Src_Json = {
 						end_line: 60,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -1124,7 +1116,6 @@ export const src_json: Src_Json = {
 						end_line: 69,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -1141,7 +1132,6 @@ export const src_json: Src_Json = {
 						end_line: 16,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -1165,7 +1155,6 @@ export const src_json: Src_Json = {
 						end_line: 72,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -1199,7 +1188,6 @@ export const src_json: Src_Json = {
 						end_line: 92,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -1228,7 +1216,6 @@ export const src_json: Src_Json = {
 						end_line: 61,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -1262,7 +1249,6 @@ export const src_json: Src_Json = {
 						end_line: 71,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -1279,7 +1265,6 @@ export const src_json: Src_Json = {
 						end_line: 29,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -1308,7 +1293,6 @@ export const src_json: Src_Json = {
 						end_line: 42,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -1325,7 +1309,6 @@ export const src_json: Src_Json = {
 						end_line: 7,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -1359,7 +1342,6 @@ export const src_json: Src_Json = {
 						end_line: 126,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -1404,7 +1386,6 @@ export const src_json: Src_Json = {
 						end_line: 72,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -1433,7 +1414,6 @@ export const src_json: Src_Json = {
 						end_line: 47,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -1457,7 +1437,6 @@ export const src_json: Src_Json = {
 						end_line: 16,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -1521,7 +1500,6 @@ export const src_json: Src_Json = {
 						end_line: 52,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -1538,7 +1516,60 @@ export const src_json: Src_Json = {
 						end_line: 44,
 						end_column: 0,
 					},
-					exported: true,
+				},
+			],
+			imports: [],
+		},
+		'./Module_Link.svelte': {
+			path: 'Module_Link.svelte',
+			declarations: [
+				{
+					name: 'Module_Link',
+					kind: 'component',
+					props: [
+						{
+							name: 'module_path',
+							type: 'string',
+							optional: false,
+							description: 'Module path (e.g., "alert.ts")',
+						},
+						{
+							name: 'module',
+							type: 'Src_Module',
+							optional: true,
+							description: 'Module data with declarations',
+						},
+						{
+							name: 'pkg_name',
+							type: 'string',
+							optional: false,
+							description: 'Package name for generating import statements',
+						},
+						{
+							name: 'repo_url',
+							type: 'string',
+							optional: true,
+							description: 'Repository URL for source links',
+						},
+						{
+							name: 'homepage_url',
+							type: 'string | null',
+							optional: true,
+							description: 'Homepage URL for docs links',
+						},
+						{
+							name: 'children',
+							type: 'Snippet',
+							optional: true,
+							description: 'Optional content to display (defaults to module path)',
+						},
+					],
+					source_location: {
+						line: 1,
+						column: 0,
+						end_line: 114,
+						end_column: 0,
+					},
 				},
 			],
 			imports: [],
@@ -1589,10 +1620,9 @@ export const src_json: Src_Json = {
 					source_location: {
 						line: 1,
 						column: 0,
-						end_line: 332,
+						end_line: 334,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -1651,7 +1681,6 @@ export const src_json: Src_Json = {
 						end_line: 143,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -1668,7 +1697,6 @@ export const src_json: Src_Json = {
 						end_line: 36,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -1685,7 +1713,6 @@ export const src_json: Src_Json = {
 						end_line: 63,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -1702,7 +1729,6 @@ export const src_json: Src_Json = {
 						end_line: 74,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -1719,7 +1745,6 @@ export const src_json: Src_Json = {
 						end_line: 55,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -1764,7 +1789,6 @@ export const src_json: Src_Json = {
 						end_line: 42,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -1802,7 +1826,6 @@ export const src_json: Src_Json = {
 						end_line: 63,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -1874,7 +1897,6 @@ export const src_json: Src_Json = {
 						end_line: 105,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -1911,7 +1933,6 @@ export const src_json: Src_Json = {
 						end_line: 47,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -1960,7 +1981,6 @@ export const src_json: Src_Json = {
 						end_line: 78,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -2021,7 +2041,6 @@ export const src_json: Src_Json = {
 						end_line: 104,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -2060,7 +2079,6 @@ export const src_json: Src_Json = {
 						end_line: 62,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -2077,7 +2095,6 @@ export const src_json: Src_Json = {
 						end_line: 57,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -2094,7 +2111,6 @@ export const src_json: Src_Json = {
 						end_line: 43,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -2111,7 +2127,6 @@ export const src_json: Src_Json = {
 						end_line: 47,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -2128,7 +2143,6 @@ export const src_json: Src_Json = {
 						end_line: 67,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -2171,7 +2185,6 @@ export const src_json: Src_Json = {
 						end_line: 156,
 						end_column: 0,
 					},
-					exported: true,
 				},
 			],
 			imports: [],
@@ -2189,7 +2202,6 @@ export const src_json: Src_Json = {
 						end_column: 55,
 					},
 					type_signature: 'Alert_Status',
-					exported: true,
 				},
 				{
 					name: 'Alert_Status_Options',
@@ -2213,7 +2225,6 @@ export const src_json: Src_Json = {
 							type_signature: 'string | null',
 						},
 					],
-					exported: true,
 				},
 				{
 					name: 'alert_status_options',
@@ -2225,7 +2236,6 @@ export const src_json: Src_Json = {
 						end_column: 1,
 					},
 					type_signature: 'Record<Alert_Status, Alert_Status_Options>',
-					exported: false,
 				},
 			],
 			imports: [],
@@ -2248,9 +2258,9 @@ export const src_json: Src_Json = {
 						end_column: 1,
 					},
 					type_signature:
-						'(name: string): { decl: Src_Module_Declaration; module_path: string; module: Src_Module; } | undefined',
+						'(name: string): { decl: Src_Module_Declaration; module_path: string; src_module: Src_Module; } | undefined',
 					return_type:
-						'{ decl: Src_Module_Declaration; module_path: string; module: Src_Module; } | undefined',
+						'{ decl: Src_Module_Declaration; module_path: string; src_module: Src_Module; } | undefined',
 					parameters: [
 						{
 							name: 'name',
@@ -2258,7 +2268,6 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					exported: false,
 				},
 				{
 					name: 'get_all_declarations',
@@ -2270,15 +2279,14 @@ export const src_json: Src_Json = {
 					source_location: {
 						line: 33,
 						column: 13,
-						end_line: 55,
+						end_line: 56,
 						end_column: 1,
 					},
 					type_signature:
-						'(): { module_path: string; module: Src_Module; decl: Src_Module_Declaration; }[]',
+						'(): { module_path: string; src_module: Src_Module; decl: Src_Module_Declaration; }[]',
 					return_type:
-						'{ module_path: string; module: Src_Module; decl: Src_Module_Declaration; }[]',
+						'{ module_path: string; src_module: Src_Module; decl: Src_Module_Declaration; }[]',
 					parameters: [],
-					exported: false,
 				},
 				{
 					name: 'is_known_identifier',
@@ -2288,9 +2296,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 60,
+						line: 61,
 						column: 13,
-						end_line: 62,
+						end_line: 63,
 						end_column: 1,
 					},
 					type_signature: '(name: string): boolean',
@@ -2302,7 +2310,6 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					exported: false,
 				},
 				{
 					name: 'search_declarations',
@@ -2312,15 +2319,15 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 67,
+						line: 68,
 						column: 13,
-						end_line: 107,
+						end_line: 108,
 						end_column: 1,
 					},
 					type_signature:
-						'(query: string): { module_path: string; module: Src_Module; decl: Src_Module_Declaration; }[]',
+						'(query: string): { module_path: string; src_module: Src_Module; decl: Src_Module_Declaration; }[]',
 					return_type:
-						'{ module_path: string; module: Src_Module; decl: Src_Module_Declaration; }[]',
+						'{ module_path: string; src_module: Src_Module; decl: Src_Module_Declaration; }[]',
 					parameters: [
 						{
 							name: 'query',
@@ -2328,7 +2335,6 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					exported: false,
 				},
 			],
 			imports: ['$lib/pkg.js', '$lib/src_json.js'],
@@ -2348,7 +2354,6 @@ export const src_json: Src_Json = {
 						end_column: 68,
 					},
 					type_signature: '"calc(60px + var(--space_lg))"',
-					exported: false,
 				},
 			],
 			imports: [],
@@ -2388,7 +2393,6 @@ export const src_json: Src_Json = {
 							name: 'T',
 						},
 					],
-					exported: true,
 				},
 			],
 			imports: ['svelte'],
@@ -2414,7 +2418,6 @@ export const src_json: Src_Json = {
 						end_column: 51,
 					},
 					type_signature: '-2',
-					exported: false,
 				},
 				{
 					name: 'CONTEXTMENU_DEFAULT_OPEN_OFFSET_Y',
@@ -2426,7 +2429,6 @@ export const src_json: Src_Json = {
 						end_column: 51,
 					},
 					type_signature: '-2',
-					exported: false,
 				},
 				{
 					name: 'CONTEXTMENU_DEFAULT_BYPASS_WINDOW',
@@ -2438,7 +2440,6 @@ export const src_json: Src_Json = {
 						end_column: 52,
 					},
 					type_signature: '750',
-					exported: false,
 				},
 				{
 					name: 'CONTEXTMENU_DEFAULT_BYPASS_MOVE_TOLERANCE',
@@ -2450,7 +2451,6 @@ export const src_json: Src_Json = {
 						end_column: 59,
 					},
 					type_signature: '11',
-					exported: false,
 				},
 				{
 					name: 'CONTEXTMENU_DEFAULT_LONGPRESS_DURATION',
@@ -2462,7 +2462,6 @@ export const src_json: Src_Json = {
 						end_column: 57,
 					},
 					type_signature: '633',
-					exported: false,
 				},
 				{
 					name: 'CONTEXTMENU_DEFAULT_LONGPRESS_MOVE_TOLERANCE',
@@ -2474,7 +2473,6 @@ export const src_json: Src_Json = {
 						end_column: 62,
 					},
 					type_signature: '21',
-					exported: false,
 				},
 				{
 					name: 'contextmenu_is_valid_target',
@@ -2506,7 +2504,6 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					exported: false,
 				},
 				{
 					name: 'contextmenu_create_keyboard_handlers',
@@ -2532,7 +2529,6 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					exported: false,
 				},
 				{
 					name: 'contextmenu_create_keydown_handler',
@@ -2558,7 +2554,6 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					exported: false,
 				},
 				{
 					name: 'contextmenu_calculate_constrained_x',
@@ -2594,7 +2589,6 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					exported: false,
 				},
 				{
 					name: 'contextmenu_calculate_constrained_y',
@@ -2630,7 +2624,6 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					exported: false,
 				},
 			],
 			imports: ['@ryanatkn/belt/dom.js', '$lib/contextmenu_state.svelte.js'],
@@ -2648,7 +2641,6 @@ export const src_json: Src_Json = {
 						end_column: 59,
 					},
 					type_signature: 'Contextmenu_Params',
-					exported: true,
 				},
 				{
 					name: 'Contextmenu_Activate_Result',
@@ -2660,7 +2652,6 @@ export const src_json: Src_Json = {
 						end_column: 49,
 					},
 					type_signature: 'Contextmenu_Activate_Result',
-					exported: true,
 				},
 				{
 					name: 'Item_State',
@@ -2672,7 +2663,6 @@ export const src_json: Src_Json = {
 						end_column: 53,
 					},
 					type_signature: 'Item_State',
-					exported: true,
 				},
 				{
 					name: 'Entry_State',
@@ -2728,7 +2718,6 @@ export const src_json: Src_Json = {
 							type_signature: 'Promise<any> | null',
 						},
 					],
-					exported: true,
 				},
 				{
 					name: 'Submenu_State',
@@ -2768,7 +2757,6 @@ export const src_json: Src_Json = {
 							type_signature: 'Array<Item_State>',
 						},
 					],
-					exported: true,
 				},
 				{
 					name: 'Root_Menu_State',
@@ -2801,7 +2789,6 @@ export const src_json: Src_Json = {
 							type_signature: 'Array<Item_State>',
 						},
 					],
-					exported: true,
 				},
 				{
 					name: 'Contextmenu_Run',
@@ -2813,7 +2800,6 @@ export const src_json: Src_Json = {
 						end_column: 40,
 					},
 					type_signature: 'Contextmenu_Run',
-					exported: true,
 				},
 				{
 					name: 'Contextmenu_State_Options',
@@ -2832,7 +2818,6 @@ export const src_json: Src_Json = {
 							type_signature: 'Dimensions',
 						},
 					],
-					exported: true,
 				},
 				{
 					name: 'Contextmenu_State',
@@ -2998,7 +2983,6 @@ export const src_json: Src_Json = {
 							summary: '',
 						},
 					],
-					exported: true,
 				},
 				{
 					name: 'contextmenu_action',
@@ -3024,7 +3008,6 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					exported: false,
 				},
 				{
 					name: 'Open_Contextmenu_Options',
@@ -3058,7 +3041,6 @@ export const src_json: Src_Json = {
 							type_signature: 'boolean',
 						},
 					],
-					exported: true,
 				},
 				{
 					name: 'open_contextmenu',
@@ -3113,7 +3095,6 @@ export const src_json: Src_Json = {
 							description: '- optional configuration for filtering entries and haptic feedback',
 						},
 					],
-					exported: false,
 				},
 				{
 					name: 'contextmenu_context',
@@ -3126,7 +3107,6 @@ export const src_json: Src_Json = {
 					},
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Contextmenu_State; maybe_get: () => Contextmenu_State | undefined; set: (value: Contextmenu_State) => Contextmenu_State; }',
-					exported: false,
 				},
 				{
 					name: 'contextmenu_submenu_context',
@@ -3139,7 +3119,6 @@ export const src_json: Src_Json = {
 					},
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Submenu_State; maybe_get: () => Submenu_State | undefined; set: (value: Submenu_State) => Submenu_State; }',
-					exported: false,
 				},
 				{
 					name: 'contextmenu_dimensions_context',
@@ -3152,7 +3131,6 @@ export const src_json: Src_Json = {
 					},
 					type_signature:
 						'{ get: () => Dimensions; set: (value?: Dimensions | undefined) => Dimensions; }',
-					exported: false,
 				},
 				{
 					name: 'contextmenu_check_global_root',
@@ -3179,7 +3157,6 @@ export const src_json: Src_Json = {
 							description: '- Getter function that returns the current scoped value',
 						},
 					],
-					exported: false,
 				},
 			],
 			imports: [
@@ -3223,7 +3200,6 @@ export const src_json: Src_Json = {
 							default_value: '{}',
 						},
 					],
-					exported: true,
 				},
 				{
 					name: 'Create_Csp_Directives_Options',
@@ -3290,7 +3266,6 @@ export const src_json: Src_Json = {
 								'Base values for directive trust requirements.\nSet to `null` or `{}` to start with no trust requirements.\nDefaults to `csp_directive_required_trust_defaults`.',
 						},
 					],
-					exported: true,
 				},
 				{
 					name: 'Csp_Directive',
@@ -3302,7 +3277,6 @@ export const src_json: Src_Json = {
 						end_column: 49,
 					},
 					type_signature: 'keyof Csp_Directives',
-					exported: true,
 				},
 				{
 					name: 'parse_csp_directive',
@@ -3322,7 +3296,6 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					exported: false,
 				},
 				{
 					name: 'Csp_Directive_Value',
@@ -3340,7 +3313,6 @@ export const src_json: Src_Json = {
 							constraint: 'Csp_Directive',
 						},
 					],
-					exported: true,
 				},
 				{
 					name: 'csp_trust_levels',
@@ -3352,7 +3324,6 @@ export const src_json: Src_Json = {
 						end_column: 66,
 					},
 					type_signature: 'readonly ["low", "medium", "high"]',
-					exported: false,
 				},
 				{
 					name: 'csp_trust_level_value',
@@ -3370,7 +3341,6 @@ export const src_json: Src_Json = {
 						end_column: 1,
 					},
 					type_signature: 'Record<"low" | "medium" | "high", number | undefined>',
-					exported: false,
 				},
 				{
 					name: 'Csp_Trust_Level',
@@ -3387,7 +3357,6 @@ export const src_json: Src_Json = {
 						end_column: 69,
 					},
 					type_signature: '"low" | "medium" | "high"',
-					exported: true,
 				},
 				{
 					name: 'parse_csp_trust_level',
@@ -3411,7 +3380,6 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					exported: false,
 				},
 				{
 					name: 'Csp_Source_Spec',
@@ -3440,7 +3408,6 @@ export const src_json: Src_Json = {
 							type_signature: 'Array<Csp_Directive>',
 						},
 					],
-					exported: true,
 				},
 				{
 					name: 'Csp_Directive_Spec',
@@ -3469,7 +3436,6 @@ export const src_json: Src_Json = {
 							type_signature: 'Array<Csp_Directive> | null',
 						},
 					],
-					exported: true,
 				},
 				{
 					name: 'is_csp_trusted',
@@ -3501,7 +3467,6 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					exported: false,
 				},
 				{
 					name: 'COLOR_SCHEME_SCRIPT_HASH',
@@ -3513,7 +3478,6 @@ export const src_json: Src_Json = {
 						end_column: 93,
 					},
 					type_signature: '"sha256-QOxqn7EUzb3ydF9SALJoJGWSvywW9R0AfTDSenB83Z8="',
-					exported: false,
 				},
 				{
 					name: 'csp_directive_value_defaults',
@@ -3532,7 +3496,6 @@ export const src_json: Src_Json = {
 					},
 					type_signature:
 						'Record<keyof Csp_Directives, boolean | (Csp_Source | Csp_Action_Source)[] | Csp_Sources | (`${string}.${string}` | "localhost" | ... 17 more ... | "none")[] | string[] | "script"[] | ("allow-downloads-without-user-activation" | ... 11 more ... | "allow-top-navigation-by-user-activation")[] | null>',
-					exported: false,
 				},
 				{
 					name: 'csp_directive_required_trust_defaults',
@@ -3550,7 +3513,6 @@ export const src_json: Src_Json = {
 						end_column: 2,
 					},
 					type_signature: 'Record<keyof Csp_Directives, "low" | "medium" | "high" | null>',
-					exported: false,
 				},
 				{
 					name: 'csp_directive_specs',
@@ -3570,7 +3532,6 @@ export const src_json: Src_Json = {
 						end_column: 1,
 					},
 					type_signature: 'Csp_Directive_Spec[]',
-					exported: false,
 				},
 				{
 					name: 'csp_directive_spec_by_name',
@@ -3582,7 +3543,6 @@ export const src_json: Src_Json = {
 						end_column: 1,
 					},
 					type_signature: 'Map<keyof Csp_Directives, Csp_Directive_Spec>',
-					exported: false,
 				},
 				{
 					name: 'Csp_Action_Source',
@@ -3594,7 +3554,6 @@ export const src_json: Src_Json = {
 						end_column: 67,
 					},
 					type_signature: 'Csp_Action_Source',
-					exported: true,
 				},
 				{
 					name: 'Csp_Base_Source',
@@ -3606,7 +3565,6 @@ export const src_json: Src_Json = {
 						end_column: 10,
 					},
 					type_signature: 'Csp_Base_Source',
-					exported: true,
 				},
 				{
 					name: 'Csp_Crypto_Source',
@@ -3619,7 +3577,6 @@ export const src_json: Src_Json = {
 					},
 					type_signature:
 						'`nonce-${string}` | `sha256-${string}` | `sha384-${string}` | `sha512-${string}`',
-					exported: true,
 				},
 				{
 					name: 'Csp_Frame_Source',
@@ -3631,7 +3588,6 @@ export const src_json: Src_Json = {
 						end_column: 85,
 					},
 					type_signature: 'Csp_Frame_Source',
-					exported: true,
 				},
 				{
 					name: 'Csp_Host_Name_Scheme',
@@ -3643,7 +3599,6 @@ export const src_json: Src_Json = {
 						end_column: 71,
 					},
 					type_signature: 'Csp_Host_Name_Scheme',
-					exported: true,
 				},
 				{
 					name: 'Csp_Host_Source',
@@ -3656,7 +3611,6 @@ export const src_json: Src_Json = {
 					},
 					type_signature:
 						'`${string}.${string}` | "localhost" | `${string}.${string}:${number}` | `${string}.${string}:*` | `localhost:${number}` | "localhost:*" | `${string}://${string}.${string}` | `${string}://${string}.${string}:${number}` | `${string}://${string}.${string}:*` | `${string}://localhost` | `${string}://localhost:${number}`...',
-					exported: true,
 				},
 				{
 					name: 'Csp_Host_Protocol_Schemes',
@@ -3668,7 +3622,6 @@ export const src_json: Src_Json = {
 						end_column: 60,
 					},
 					type_signature: 'Csp_Host_Protocol_Schemes',
-					exported: true,
 				},
 				{
 					name: 'Csp_Port_Scheme',
@@ -3680,7 +3633,6 @@ export const src_json: Src_Json = {
 						end_column: 55,
 					},
 					type_signature: 'Csp_Port_Scheme',
-					exported: true,
 				},
 				{
 					name: 'Csp_Scheme_Source',
@@ -3692,7 +3644,6 @@ export const src_json: Src_Json = {
 						end_column: 17,
 					},
 					type_signature: 'Csp_Scheme_Source',
-					exported: true,
 				},
 				{
 					name: 'Csp_Source',
@@ -3704,7 +3655,6 @@ export const src_json: Src_Json = {
 						end_column: 99,
 					},
 					type_signature: 'Csp_Source',
-					exported: true,
 				},
 				{
 					name: 'Csp_Sources',
@@ -3716,7 +3666,6 @@ export const src_json: Src_Json = {
 						end_column: 44,
 					},
 					type_signature: 'Csp_Sources',
-					exported: true,
 				},
 				{
 					name: 'Csp_Directives',
@@ -3736,7 +3685,6 @@ export const src_json: Src_Json = {
 								"Array<\n\t\t| 'allow-downloads-without-user-activation'\n\t\t| 'allow-forms'\n\t\t| 'allow-modals'\n\t\t| 'allow-orientation-lock'\n\t\t| 'allow-pointer-lock'\n\t\t| 'allow-popups'\n\t\t| 'allow-popups-to-escape-sandbox'\n\t\t| 'allow-presentation'\n\t\t| 'allow-same-origin'\n\t\t| 'allow-scripts'\n\t\t| 'allow-storage-access-by-user-activation'\n\t\t| 'allow-top-navigation'\n\t\t| 'allow-top-navigation-by-user-activation'\n\t>",
 						},
 					],
-					exported: true,
 				},
 			],
 			imports: ['@ryanatkn/belt/types.js'],
@@ -3759,7 +3707,6 @@ export const src_json: Src_Json = {
 						end_column: 1,
 					},
 					type_signature: 'Csp_Source_Spec[]',
-					exported: false,
 				},
 			],
 			imports: ['$lib/csp.js'],
@@ -3810,7 +3757,6 @@ export const src_json: Src_Json = {
 							optional: true,
 						},
 					],
-					exported: false,
 				},
 			],
 			imports: ['$app/paths', '$lib/src_json.js', '$lib/contextmenu_state.svelte.js'],
@@ -3853,7 +3799,6 @@ export const src_json: Src_Json = {
 							optional: true,
 						},
 					],
-					exported: false,
 				},
 				{
 					name: 'Dialog_Params',
@@ -3895,7 +3840,6 @@ export const src_json: Src_Json = {
 							type_signature: 'Partial<ComponentProps<typeof Dialog>> | undefined',
 						},
 					],
-					exported: true,
 				},
 				{
 					name: 'Dialog_Layout',
@@ -3907,7 +3851,6 @@ export const src_json: Src_Json = {
 						end_column: 48,
 					},
 					type_signature: 'Dialog_Layout',
-					exported: true,
 				},
 				{
 					name: 'dialog_layouts',
@@ -3919,7 +3862,6 @@ export const src_json: Src_Json = {
 						end_column: 72,
 					},
 					type_signature: 'Dialog_Layout[]',
-					exported: false,
 				},
 			],
 			imports: ['svelte', '$lib/Dialog.svelte'],
@@ -3948,7 +3890,6 @@ export const src_json: Src_Json = {
 							type_signature: 'number',
 						},
 					],
-					exported: true,
 				},
 			],
 			imports: [],
@@ -3967,7 +3908,6 @@ export const src_json: Src_Json = {
 						end_column: 43,
 					},
 					type_signature: '"/docs"',
-					exported: false,
 				},
 				{
 					name: 'get_next_docs_link_order',
@@ -3981,7 +3921,6 @@ export const src_json: Src_Json = {
 					type_signature: '(): number',
 					return_type: 'number',
 					parameters: [],
-					exported: false,
 				},
 				{
 					name: 'reset_docs_link_order',
@@ -3995,7 +3934,6 @@ export const src_json: Src_Json = {
 					type_signature: '(): void',
 					return_type: 'void',
 					parameters: [],
-					exported: false,
 				},
 				{
 					name: 'to_docs_path_info',
@@ -4028,7 +3966,6 @@ export const src_json: Src_Json = {
 							default_value: 'DEFAULT_LIBRARY_PATH',
 						},
 					],
-					exported: false,
 				},
 				{
 					name: 'docs_links_context',
@@ -4041,7 +3978,6 @@ export const src_json: Src_Json = {
 					},
 					type_signature:
 						'{ get: () => Docs_Links; set: (value?: Docs_Links | undefined) => Docs_Links; }',
-					exported: false,
 				},
 				{
 					name: 'Docs_Link_Tag',
@@ -4053,7 +3989,6 @@ export const src_json: Src_Json = {
 						end_column: 40,
 					},
 					type_signature: 'Docs_Link_Tag',
-					exported: true,
 				},
 				{
 					name: 'Docs_Link',
@@ -4092,7 +4027,6 @@ export const src_json: Src_Json = {
 							type_signature: 'number',
 						},
 					],
-					exported: true,
 				},
 				{
 					name: 'Docs_Links',
@@ -4147,7 +4081,6 @@ export const src_json: Src_Json = {
 							type_signature: '(id: string) => void',
 						},
 					],
-					exported: true,
 				},
 			],
 			imports: [
@@ -4185,7 +4118,6 @@ export const src_json: Src_Json = {
 							description: 'Any JS value to stringify',
 						},
 					],
-					exported: false,
 				},
 			],
 			imports: [],
@@ -4252,7 +4184,6 @@ export const src_json: Src_Json = {
 								'Same as the `options` param to\n[`IntersectionObserver`](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/IntersectionObserver#options)',
 						},
 					],
-					exported: true,
 				},
 				{
 					name: 'Intersect_Params_Or_Callback',
@@ -4264,7 +4195,6 @@ export const src_json: Src_Json = {
 						end_column: 75,
 					},
 					type_signature: 'Intersect_Params_Or_Callback',
-					exported: true,
 				},
 				{
 					name: 'intersect',
@@ -4286,7 +4216,6 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					exported: false,
 				},
 				{
 					name: 'On_Intersect',
@@ -4298,7 +4227,6 @@ export const src_json: Src_Json = {
 						end_column: 60,
 					},
 					type_signature: 'On_Intersect',
-					exported: true,
 				},
 				{
 					name: 'Intersect_State',
@@ -4337,7 +4265,6 @@ export const src_json: Src_Json = {
 							type_signature: '() => void',
 						},
 					],
-					exported: true,
 				},
 				{
 					name: 'On_Disconnect',
@@ -4349,7 +4276,6 @@ export const src_json: Src_Json = {
 						end_column: 62,
 					},
 					type_signature: 'On_Disconnect',
-					exported: true,
 				},
 				{
 					name: 'Disconnect_State',
@@ -4383,7 +4309,6 @@ export const src_json: Src_Json = {
 							type_signature: 'IntersectionObserver',
 						},
 					],
-					exported: true,
 				},
 			],
 			imports: ['svelte/action'],
@@ -4401,7 +4326,6 @@ export const src_json: Src_Json = {
 						end_column: 20,
 					},
 					type_signature: 'Svg_Data',
-					exported: false,
 				},
 				{
 					name: 'gro_logo',
@@ -4413,7 +4337,6 @@ export const src_json: Src_Json = {
 						end_column: 20,
 					},
 					type_signature: 'Svg_Data',
-					exported: false,
 				},
 				{
 					name: 'fuz_logo',
@@ -4425,7 +4348,6 @@ export const src_json: Src_Json = {
 						end_column: 20,
 					},
 					type_signature: 'Svg_Data',
-					exported: false,
 				},
 				{
 					name: 'moss_logo',
@@ -4437,7 +4359,6 @@ export const src_json: Src_Json = {
 						end_column: 20,
 					},
 					type_signature: 'Svg_Data',
-					exported: false,
 				},
 				{
 					name: 'belt_logo',
@@ -4449,7 +4370,6 @@ export const src_json: Src_Json = {
 						end_column: 20,
 					},
 					type_signature: 'Svg_Data',
-					exported: false,
 				},
 				{
 					name: 'fuz_code_logo',
@@ -4461,7 +4381,6 @@ export const src_json: Src_Json = {
 						end_column: 20,
 					},
 					type_signature: 'Svg_Data',
-					exported: false,
 				},
 				{
 					name: 'fuz_blog_logo',
@@ -4473,7 +4392,6 @@ export const src_json: Src_Json = {
 						end_column: 20,
 					},
 					type_signature: 'Svg_Data',
-					exported: false,
 				},
 				{
 					name: 'fuz_mastodon_logo',
@@ -4485,7 +4403,6 @@ export const src_json: Src_Json = {
 						end_column: 20,
 					},
 					type_signature: 'Svg_Data',
-					exported: false,
 				},
 				{
 					name: 'fuz_gitops_logo',
@@ -4497,7 +4414,6 @@ export const src_json: Src_Json = {
 						end_column: 20,
 					},
 					type_signature: 'Svg_Data',
-					exported: false,
 				},
 				{
 					name: 'fuz_template_logo',
@@ -4509,7 +4425,6 @@ export const src_json: Src_Json = {
 						end_column: 20,
 					},
 					type_signature: 'Svg_Data',
-					exported: false,
 				},
 				{
 					name: 'webdevladder_logo',
@@ -4521,7 +4436,6 @@ export const src_json: Src_Json = {
 						end_column: 20,
 					},
 					type_signature: 'Svg_Data',
-					exported: false,
 				},
 				{
 					name: 'earbetter_logo',
@@ -4533,7 +4447,6 @@ export const src_json: Src_Json = {
 						end_column: 20,
 					},
 					type_signature: 'Svg_Data',
-					exported: false,
 				},
 				{
 					name: 'spiderspace_logo',
@@ -4545,7 +4458,6 @@ export const src_json: Src_Json = {
 						end_column: 20,
 					},
 					type_signature: 'Svg_Data',
-					exported: false,
 				},
 				{
 					name: 'github_logo',
@@ -4557,7 +4469,6 @@ export const src_json: Src_Json = {
 						end_column: 20,
 					},
 					type_signature: 'Svg_Data',
-					exported: false,
 				},
 				{
 					name: 'mdn_logo',
@@ -4569,7 +4480,6 @@ export const src_json: Src_Json = {
 						end_column: 20,
 					},
 					type_signature: 'Svg_Data',
-					exported: false,
 				},
 				{
 					name: 'chatgpt_logo',
@@ -4581,7 +4491,6 @@ export const src_json: Src_Json = {
 						end_column: 20,
 					},
 					type_signature: 'Svg_Data',
-					exported: false,
 				},
 				{
 					name: 'claude_logo',
@@ -4593,7 +4502,6 @@ export const src_json: Src_Json = {
 						end_column: 20,
 					},
 					type_signature: 'Svg_Data',
-					exported: false,
 				},
 				{
 					name: 'gemini_logo',
@@ -4605,7 +4513,6 @@ export const src_json: Src_Json = {
 						end_column: 20,
 					},
 					type_signature: 'Svg_Data',
-					exported: false,
 				},
 			],
 			imports: ['$lib/Svg.svelte'],
@@ -4693,7 +4600,6 @@ export const src_json: Src_Json = {
 							type_signature: 'boolean',
 						},
 					],
-					exported: true,
 				},
 				{
 					name: 'parse_pkg',
@@ -4719,7 +4625,6 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					exported: false,
 				},
 				{
 					name: 'parse_repo_name',
@@ -4739,7 +4644,6 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					exported: false,
 				},
 				{
 					name: 'parse_org_url',
@@ -4759,7 +4663,6 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					exported: false,
 				},
 				{
 					name: 'pkg_context',
@@ -4772,7 +4675,6 @@ export const src_json: Src_Json = {
 					},
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Pkg; maybe_get: () => Pkg | undefined; set: (value: Pkg) => Pkg; }',
-					exported: false,
 				},
 			],
 			imports: [
@@ -4817,7 +4719,6 @@ export const src_json: Src_Json = {
 							default_value: '0',
 						},
 					],
-					exported: false,
 				},
 			],
 			imports: [],
@@ -4845,7 +4746,6 @@ export const src_json: Src_Json = {
 						end_column: 9,
 					},
 					type_signature: 'Src_Module_Declaration_Kind',
-					exported: true,
 				},
 				{
 					name: 'Parameter_Info',
@@ -4889,7 +4789,6 @@ export const src_json: Src_Json = {
 							type_signature: 'string',
 						},
 					],
-					exported: true,
 				},
 				{
 					name: 'Component_Prop_Info',
@@ -4933,7 +4832,6 @@ export const src_json: Src_Json = {
 							type_signature: 'string',
 						},
 					],
-					exported: true,
 				},
 				{
 					name: 'Generic_Param_Info',
@@ -4972,7 +4870,6 @@ export const src_json: Src_Json = {
 							summary: 'Default type if any (e.g., "unknown" from "T = unknown")',
 						},
 					],
-					exported: true,
 				},
 				{
 					name: 'Source_Location',
@@ -5010,7 +4907,6 @@ export const src_json: Src_Json = {
 							type_signature: 'number',
 						},
 					],
-					exported: true,
 				},
 				{
 					name: 'Src_Module_Declaration',
@@ -5022,7 +4918,7 @@ export const src_json: Src_Json = {
 					source_location: {
 						line: 85,
 						column: 0,
-						end_line: 130,
+						end_line: 128,
 						end_column: 1,
 					},
 					type_signature: 'Src_Module_Declaration',
@@ -5133,13 +5029,6 @@ export const src_json: Src_Json = {
 							summary: 'Version information from @ since tag',
 						},
 						{
-							name: 'exported',
-							kind: 'variable',
-							type_signature: 'boolean',
-							doc_comment: 'Whether this is exported',
-							summary: 'Whether this is exported',
-						},
-						{
 							name: 'extends',
 							kind: 'variable',
 							type_signature: 'Array<string>',
@@ -5175,7 +5064,6 @@ export const src_json: Src_Json = {
 							summary: 'Component props (for Svelte components)',
 						},
 					],
-					exported: true,
 				},
 				{
 					name: 'Src_Module',
@@ -5185,9 +5073,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 135,
+						line: 133,
 						column: 0,
-						end_line: 146,
+						end_line: 144,
 						end_column: 1,
 					},
 					type_signature: 'Src_Module',
@@ -5228,7 +5116,6 @@ export const src_json: Src_Json = {
 							summary: 'Modules that import this module',
 						},
 					],
-					exported: true,
 				},
 				{
 					name: 'Src_Modules',
@@ -5238,13 +5125,12 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 151,
+						line: 149,
 						column: 0,
-						end_line: 151,
+						end_line: 149,
 						end_column: 53,
 					},
 					type_signature: 'Src_Modules',
-					exported: true,
 				},
 				{
 					name: 'Src_Json',
@@ -5256,9 +5142,9 @@ export const src_json: Src_Json = {
 						'://github.com/ryanatkn/gro/blob/main/src/docs/gro_plugin_sveltekit_app.md#well-known-src',
 					],
 					source_location: {
-						line: 157,
+						line: 155,
 						column: 0,
-						end_line: 164,
+						end_line: 162,
 						end_column: 1,
 					},
 					type_signature: 'Src_Json',
@@ -5285,7 +5171,6 @@ export const src_json: Src_Json = {
 							summary: 'Source modules',
 						},
 					],
-					exported: true,
 				},
 				{
 					name: 'get_declaration_display_name',
@@ -5295,9 +5180,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 169,
+						line: 167,
 						column: 13,
-						end_line: 182,
+						end_line: 180,
 						end_column: 1,
 					},
 					type_signature: '(decl: Src_Module_Declaration): string',
@@ -5309,7 +5194,6 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					exported: false,
 				},
 				{
 					name: 'get_type_summary',
@@ -5319,9 +5203,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 187,
+						line: 185,
 						column: 13,
-						end_line: 196,
+						end_line: 194,
 						end_column: 1,
 					},
 					type_signature: '(decl: Src_Module_Declaration): string | undefined',
@@ -5333,7 +5217,6 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					exported: false,
 				},
 				{
 					name: 'generate_import_statement',
@@ -5343,9 +5226,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 201,
+						line: 199,
 						column: 13,
-						end_line: 220,
+						end_line: 218,
 						end_column: 1,
 					},
 					type_signature:
@@ -5368,7 +5251,6 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					exported: false,
 				},
 			],
 			imports: [],
@@ -5418,7 +5300,6 @@ export const src_json: Src_Json = {
 							default_value: 'false',
 						},
 					],
-					exported: false,
 				},
 				{
 					name: 'load_from_storage',
@@ -5458,7 +5339,6 @@ export const src_json: Src_Json = {
 							description: 'Optional custom parsing function to transform the value',
 						},
 					],
-					exported: false,
 				},
 			],
 			imports: ['esm-env'],
@@ -5477,7 +5357,7 @@ export const src_json: Src_Json = {
 					source_location: {
 						line: 23,
 						column: 13,
-						end_line: 79,
+						end_line: 77,
 						end_column: 1,
 					},
 					type_signature:
@@ -5505,7 +5385,6 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					exported: false,
 				},
 			],
 			imports: ['typescript', './src_json.js', './tsdoc_helpers.js'],
@@ -5541,7 +5420,6 @@ export const src_json: Src_Json = {
 							type_signature: '() => Themer_Json',
 						},
 					],
-					exported: true,
 				},
 				{
 					name: 'Themer_Json',
@@ -5565,7 +5443,6 @@ export const src_json: Src_Json = {
 							type_signature: 'Color_Scheme',
 						},
 					],
-					exported: true,
 				},
 				{
 					name: 'themer_context',
@@ -5578,7 +5455,6 @@ export const src_json: Src_Json = {
 					},
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Themer; maybe_get: () => Themer | undefined; set: (value: Themer) => Themer; }',
-					exported: false,
 				},
 				{
 					name: 'sync_color_scheme',
@@ -5598,7 +5474,6 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					exported: false,
 				},
 				{
 					name: 'COLOR_SCHEME_STORAGE_KEY',
@@ -5610,7 +5485,6 @@ export const src_json: Src_Json = {
 						end_column: 58,
 					},
 					type_signature: '"fuz:color-scheme"',
-					exported: false,
 				},
 				{
 					name: 'THEME_STORAGE_KEY',
@@ -5622,7 +5496,6 @@ export const src_json: Src_Json = {
 						end_column: 44,
 					},
 					type_signature: '"fuz:theme"',
-					exported: false,
 				},
 				{
 					name: 'save_color_scheme',
@@ -5648,7 +5521,6 @@ export const src_json: Src_Json = {
 							default_value: 'COLOR_SCHEME_STORAGE_KEY',
 						},
 					],
-					exported: false,
 				},
 				{
 					name: 'load_color_scheme',
@@ -5675,7 +5547,6 @@ export const src_json: Src_Json = {
 							default_value: 'COLOR_SCHEME_STORAGE_KEY',
 						},
 					],
-					exported: false,
 				},
 				{
 					name: 'save_theme',
@@ -5701,7 +5572,6 @@ export const src_json: Src_Json = {
 							default_value: 'THEME_STORAGE_KEY',
 						},
 					],
-					exported: false,
 				},
 				{
 					name: 'load_theme',
@@ -5728,7 +5598,6 @@ export const src_json: Src_Json = {
 							default_value: 'THEME_STORAGE_KEY',
 						},
 					],
-					exported: false,
 				},
 			],
 			imports: [
@@ -5753,7 +5622,6 @@ export const src_json: Src_Json = {
 					},
 					type_signature:
 						'ZodObject<{ name: ZodString; category: ZodString; component: ZodAny; related: ZodArray<ZodString>; }, $strip>',
-					exported: false,
 				},
 				{
 					name: 'to_tome_pathname',
@@ -5780,7 +5648,6 @@ export const src_json: Src_Json = {
 							default_value: 'DEFAULT_LIBRARY_PATH',
 						},
 					],
-					exported: false,
 				},
 				{
 					name: 'tomes_context',
@@ -5793,7 +5660,6 @@ export const src_json: Src_Json = {
 					},
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Map<string, { name: string; category: string; component: any; related: string[]; }>; maybe_get: () => Map<string, { name: string; category: string; component: any; related: string[]; }> | undefined; set: (value: Map<...>) => Map<...>; }',
-					exported: false,
 				},
 				{
 					name: 'get_tome_by_name',
@@ -5814,7 +5680,6 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					exported: false,
 				},
 				{
 					name: 'tome_context',
@@ -5827,7 +5692,6 @@ export const src_json: Src_Json = {
 					},
 					type_signature:
 						'{ get: (error_message?: string | undefined) => { name: string; category: string; component: any; related: string[]; }; maybe_get: () => { name: string; category: string; component: any; related: string[]; } | undefined; set: (value: { ...; }) => { ...; }; }',
-					exported: false,
 				},
 			],
 			imports: [
@@ -5966,7 +5830,6 @@ export const src_json: Src_Json = {
 							summary: 'Cancel a pending hide operation (for sticky behavior)',
 						},
 					],
-					exported: true,
 				},
 				{
 					name: 'tooltip_context',
@@ -5983,7 +5846,6 @@ export const src_json: Src_Json = {
 					},
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Tooltip_State; maybe_get: () => Tooltip_State | undefined; set: (value: Tooltip_State) => Tooltip_State; }',
-					exported: false,
 				},
 			],
 			imports: ['svelte', '$lib/context_helpers.js'],
@@ -6021,7 +5883,6 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					exported: false,
 				},
 				{
 					name: 'ts_extract_function_info',
@@ -6068,7 +5929,6 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					exported: false,
 				},
 				{
 					name: 'ts_extract_type_info',
@@ -6108,7 +5968,6 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					exported: false,
 				},
 				{
 					name: 'ts_extract_class_info',
@@ -6148,7 +6007,6 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					exported: false,
 				},
 				{
 					name: 'ts_extract_variable_info',
@@ -6188,31 +6046,6 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					exported: false,
-				},
-				{
-					name: 'ts_is_exported',
-					kind: 'function',
-					doc_comment: 'Check if node is exported.',
-					summary: 'Check if node is exported.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 314,
-						column: 13,
-						end_line: 320,
-						end_column: 1,
-					},
-					type_signature: '(node: Node): boolean',
-					return_type: 'boolean',
-					parameters: [
-						{
-							name: 'node',
-							type: 'Node',
-							optional: false,
-						},
-					],
-					exported: false,
 				},
 				{
 					name: 'ts_extract_module_comment',
@@ -6222,9 +6055,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 325,
+						line: 314,
 						column: 13,
-						end_line: 343,
+						end_line: 332,
 						end_column: 1,
 					},
 					type_signature: '(source_file: SourceFile): string | undefined',
@@ -6236,7 +6069,6 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					exported: false,
 				},
 				{
 					name: 'ts_extract_imports',
@@ -6246,9 +6078,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 348,
+						line: 337,
 						column: 13,
-						end_line: 358,
+						end_line: 347,
 						end_column: 1,
 					},
 					type_signature: '(source_file: SourceFile): string[]',
@@ -6260,7 +6092,6 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					exported: false,
 				},
 				{
 					name: 'ts_create_program',
@@ -6270,9 +6101,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 363,
+						line: 352,
 						column: 13,
-						end_line: 374,
+						end_line: 363,
 						end_column: 1,
 					},
 					type_signature: '(log: { warn: (message: string) => void; }): Program | null',
@@ -6284,7 +6115,6 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					exported: false,
 				},
 			],
 			imports: ['typescript', './src_json.js', './tsdoc_helpers.js'],
@@ -6373,7 +6203,6 @@ export const src_json: Src_Json = {
 							summary: 'Version information from @ since',
 						},
 					],
-					exported: true,
 				},
 				{
 					name: 'tsdoc_parse',
@@ -6406,7 +6235,6 @@ export const src_json: Src_Json = {
 							description: '- Source file (unused, kept for API consistency)',
 						},
 					],
-					exported: false,
 				},
 			],
 			imports: ['typescript'],

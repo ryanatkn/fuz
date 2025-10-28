@@ -34,7 +34,6 @@ import {
 	ts_extract_type_info,
 	ts_extract_class_info,
 	ts_extract_variable_info,
-	ts_is_exported,
 } from '$lib/ts_helpers.js';
 import {tsdoc_parse} from '$lib/tsdoc_helpers.js';
 import {svelte_analyze_component} from '$lib/svelte_helpers.js';
@@ -109,7 +108,7 @@ export const gen: Gen = async ({log, filer}) => {
 			const module_path = lib_index !== -1 ? source_id.substring(lib_index + 9) : source_id;
 			const module_key = `./${module_path}`;
 
-			log.info(`analyzing: ${module_path}`);
+			// log.info(`analyzing: ${module_path}`);
 
 			// Handle Svelte files separately (before trying to get TypeScript source file)
 			if (module_path.endsWith('.svelte')) {
@@ -305,8 +304,6 @@ const enhance_declaration = (
 		} else if (result.kind === 'variable') {
 			ts_extract_variable_info(decl_node, symbol, checker, result);
 		}
-
-		result.exported = ts_is_exported(decl_node);
 	} catch (err) {
 		log.error(`Error enhancing ${name}:`, err);
 	}
