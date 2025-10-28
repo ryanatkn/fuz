@@ -25,8 +25,8 @@
 
 	// Generate source URL
 	const source_url = $derived(
-		repo_url && decl.source_location
-			? `${repo_url}/blob/main/src/lib/${module_path.replace(/^\.\//, '')}#L${decl.source_location.line}`
+		repo_url && decl.source_line
+			? `${repo_url}/blob/main/src/lib/${module_path.replace(/^\.\//, '')}#L${decl.source_line}`
 			: undefined,
 	);
 

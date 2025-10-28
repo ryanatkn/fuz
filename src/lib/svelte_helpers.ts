@@ -47,9 +47,13 @@ export const svelte_analyze_component = (
 		if (component_tsdoc) {
 			result.doc_comment = component_tsdoc.full_text;
 			result.summary = component_tsdoc.summary;
-			result.examples = component_tsdoc.examples;
+			if (component_tsdoc.examples?.length) {
+				result.examples = component_tsdoc.examples;
+			}
 			result.deprecated_message = component_tsdoc.deprecated_message;
-			result.see_also = component_tsdoc.see_also;
+			if (component_tsdoc.see_also?.length) {
+				result.see_also = component_tsdoc.see_also;
+			}
 		}
 
 		// Extract props from svelte2tsx transformed output
@@ -58,15 +62,9 @@ export const svelte_analyze_component = (
 			result.props = props;
 		}
 
-		// Extract source location from original file
+		// Extract source line from original file
 		const start_pos = source_file.getLineAndCharacterOfPosition(0);
-		const end_pos = source_file.getLineAndCharacterOfPosition(source_file.end);
-		result.source_location = {
-			line: start_pos.line + 1,
-			column: start_pos.character,
-			end_line: end_pos.line + 1,
-			end_column: end_pos.character,
-		};
+		result.source_line = start_pos.line + 1;
 	} catch (err) {
 		// If analysis fails, return basic component info
 		// eslint-disable-next-line no-console

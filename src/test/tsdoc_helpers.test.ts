@@ -73,8 +73,8 @@ function foo(name: string, age: number) {}
 			assert.strictEqual(result.params.get('name'), 'The name parameter');
 			assert.strictEqual(result.params.get('age'), 'The age parameter');
 			assert.ok(result.returns?.includes('result value'));
-			assert.strictEqual(result.throws.length, 1);
-			assert.strictEqual(result.examples.length, 1);
+			assert.strictEqual(result.throws?.length, 1);
+			assert.strictEqual(result.examples?.length, 1);
 			assert.ok(result.deprecated_message?.includes('bar'));
 			// Note: @see tags have unreliable comment text from TypeScript API, so omitted here
 			assert.strictEqual(result.since, '1.0.0');
@@ -343,11 +343,11 @@ function foo() {}
 			const result = tsdoc_parse(node, source_file);
 
 			assert.ok(result);
-			assert.strictEqual(result.throws.length, 1);
+			assert.strictEqual(result.throws?.length, 1);
 			// TypeScript API gives us "When something fails" (without {Error})
 			// The regex then treats "When" as the type
-			assert.strictEqual(result.throws[0]!.type, 'When');
-			assert.strictEqual(result.throws[0]!.description, 'something fails');
+			assert.strictEqual(result.throws?.[0]!.type, 'When');
+			assert.strictEqual(result.throws?.[0]!.description, 'something fails');
 		});
 
 		test('extracts throws with capitalized first word', () => {
@@ -362,10 +362,10 @@ function foo() {}
 			const result = tsdoc_parse(node, source_file);
 
 			assert.ok(result);
-			assert.strictEqual(result.throws.length, 1);
+			assert.strictEqual(result.throws?.length, 1);
 			// First word "TypeError" is treated as the type
-			assert.strictEqual(result.throws[0]!.type, 'TypeError');
-			assert.strictEqual(result.throws[0]!.description, 'Invalid type provided');
+			assert.strictEqual(result.throws?.[0]!.type, 'TypeError');
+			assert.strictEqual(result.throws?.[0]!.description, 'Invalid type provided');
 		});
 
 		test('extracts throws with lowercase first word', () => {
@@ -380,10 +380,10 @@ function foo() {}
 			const result = tsdoc_parse(node, source_file);
 
 			assert.ok(result);
-			assert.strictEqual(result.throws.length, 1);
+			assert.strictEqual(result.throws?.length, 1);
 			// First word "validation" is treated as the type
-			assert.strictEqual(result.throws[0]!.type, 'validation');
-			assert.strictEqual(result.throws[0]!.description, 'fails in this case');
+			assert.strictEqual(result.throws?.[0]!.type, 'validation');
+			assert.strictEqual(result.throws?.[0]!.description, 'fails in this case');
 		});
 
 		test('extracts multiple throws tags', () => {
@@ -400,11 +400,11 @@ function foo() {}
 			const result = tsdoc_parse(node, source_file);
 
 			assert.ok(result);
-			assert.strictEqual(result.throws.length, 3);
+			assert.strictEqual(result.throws?.length, 3);
 			// Each throws extracts first word as type
-			assert.strictEqual(result.throws[0]!.type, 'First');
-			assert.strictEqual(result.throws[1]!.type, 'Second');
-			assert.strictEqual(result.throws[2]!.type, 'Validation');
+			assert.strictEqual(result.throws?.[0]!.type, 'First');
+			assert.strictEqual(result.throws?.[1]!.type, 'Second');
+			assert.strictEqual(result.throws?.[2]!.type, 'Validation');
 		});
 
 		test('handles throws with no word at start - regex fails', () => {
@@ -421,10 +421,10 @@ function foo() {}
 			const result = tsdoc_parse(node, source_file);
 
 			assert.ok(result);
-			assert.strictEqual(result.throws.length, 1);
+			assert.strictEqual(result.throws?.length, 1);
 			// Regex doesn't match, falls back to description-only
-			assert.strictEqual(result.throws[0]!.type, undefined);
-			assert.strictEqual(result.throws[0]!.description, '- description starting with non-word');
+			assert.strictEqual(result.throws?.[0]!.type, undefined);
+			assert.strictEqual(result.throws?.[0]!.description, '- description starting with non-word');
 		});
 
 		test('handles single word throws', () => {
@@ -439,11 +439,11 @@ function foo() {}
 			const result = tsdoc_parse(node, source_file);
 
 			assert.ok(result);
-			assert.strictEqual(result.throws.length, 1);
+			assert.strictEqual(result.throws?.length, 1);
 			// Single word doesn't match the regex (requires \w+\s+.+)
 			// So it falls back to description-only
-			assert.strictEqual(result.throws[0]!.type, undefined);
-			assert.strictEqual(result.throws[0]!.description, 'Error');
+			assert.strictEqual(result.throws?.[0]!.type, undefined);
+			assert.strictEqual(result.throws?.[0]!.description, 'Error');
 		});
 	});
 
@@ -463,9 +463,9 @@ function foo(x: string) {}
 			const result = tsdoc_parse(node, source_file);
 
 			assert.ok(result);
-			assert.strictEqual(result.examples.length, 2);
-			assert.ok(result.examples[0]!.includes('hello'));
-			assert.ok(result.examples[1]!.includes('world'));
+			assert.strictEqual(result.examples?.length, 2);
+			assert.ok(result.examples?.[0]!.includes('hello'));
+			assert.ok(result.examples?.[1]!.includes('world'));
 		});
 
 		test('extracts deprecated message', () => {
@@ -500,8 +500,8 @@ function foo() {}
 			assert.ok(result);
 			// Only the first see tag is extracted (with "*" as the text)
 			// Second tag has undefined comment and is filtered by the `tag_text` check
-			assert.strictEqual(result.see_also.length, 1);
-			assert.strictEqual(result.see_also[0], '*');
+			assert.strictEqual(result.see_also?.length, 1);
+			assert.strictEqual(result.see_also?.[0], '*');
 		});
 
 		test('extracts since tag', () => {
@@ -675,8 +675,8 @@ function createUser(name: string, age: number, options?: any) {}
 			assert.strictEqual(result.params.get('age'), "- User's age (with dash)");
 			assert.ok(result.params.get('options')?.includes('foo - bar - baz'));
 			assert.ok(result.returns?.includes('UserObject'));
-			assert.strictEqual(result.throws.length, 2);
-			assert.strictEqual(result.examples.length, 2);
+			assert.strictEqual(result.throws?.length, 2);
+			assert.strictEqual(result.examples?.length, 2);
 			assert.ok(result.deprecated_message?.includes('createUserV2'));
 			assert.strictEqual(result.since, '1.0.0');
 		});
@@ -767,7 +767,7 @@ interface MyInterface {
 
 			assert.ok(result);
 			assert.strictEqual(result.summary, 'Interface documentation.');
-			assert.strictEqual(result.examples.length, 1);
+			assert.strictEqual(result.examples?.length, 1);
 		});
 
 		test('extracts JSDoc from property signature in interface', () => {
@@ -885,10 +885,10 @@ function foo(x: any) {}
 			const result = tsdoc_parse(node, source_file);
 
 			assert.ok(result);
-			assert.strictEqual(result.examples.length, 1);
-			const example = result.examples[0]!;
-			assert.ok(example.includes('const result'));
-			assert.ok(example.includes('nested: true'));
+			assert.strictEqual(result.examples?.length, 1);
+			const example = result.examples?.[0];
+			assert.ok(example!.includes('const result'));
+			assert.ok(example!.includes('nested: true'));
 		});
 
 		test('handles multiline returns description', () => {
@@ -922,9 +922,9 @@ function foo() {}
 			const result = tsdoc_parse(node, source_file);
 
 			assert.ok(result);
-			assert.strictEqual(result.throws.length, 0);
-			assert.strictEqual(result.examples.length, 0);
-			assert.strictEqual(result.see_also.length, 0);
+			assert.strictEqual(result.throws?.length, 0);
+			assert.strictEqual(result.examples?.length, 0);
+			assert.strictEqual(result.see_also?.length, 0);
 			assert.strictEqual(result.params.size, 0);
 		});
 	});

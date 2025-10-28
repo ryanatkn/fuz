@@ -7,7 +7,7 @@ describe('create_declaration_contextmenu', () => {
 	const base_decl: Src_Module_Declaration = {
 		name: 'MyType',
 		kind: 'type',
-		source_location: {line: 10, column: 0},
+		source_line: 10,
 	};
 
 	test('returns array of contextmenu entries', () => {

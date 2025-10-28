@@ -39,13 +39,13 @@ export interface Tsdoc_Parsed_Comment {
 	/** Return value description from @ returns or @ return */
 	returns?: string;
 	/** Thrown errors from @ throws */
-	throws: Array<{type?: string; description: string}>;
+	throws?: Array<{type?: string; description: string}>;
 	/** Code examples from @ example */
-	examples: Array<string>;
+	examples?: Array<string>;
 	/** Deprecation message from @ deprecated */
 	deprecated_message?: string;
 	/** Related references from @ see */
-	see_also: Array<string>;
+	see_also?: Array<string>;
 	/** Version information from @ since */
 	since?: string;
 }
@@ -135,10 +135,10 @@ export const tsdoc_parse = (
 		summary,
 		params,
 		returns,
-		throws,
-		examples,
+		...(throws.length && {throws}),
+		...(examples.length && {examples}),
 		deprecated_message,
-		see_also,
+		...(see_also.length && {see_also}),
 		since,
 	};
 };

@@ -70,16 +70,6 @@ export interface Generic_Param_Info {
 }
 
 /**
- * Source location information within a file
- */
-export interface Source_Location {
-	line: number;
-	column: number;
-	end_line?: number;
-	end_column?: number;
-}
-
-/**
  * Declaration metadata with rich TypeScript/JSDoc information
  */
 export interface Src_Module_Declaration {
@@ -95,8 +85,8 @@ export interface Src_Module_Declaration {
 	summary?: string;
 	/** Full TypeScript type signature */
 	type_signature?: string;
-	/** Source location within the file */
-	source_location?: Source_Location;
+	/** Source line number within the file */
+	source_line?: number;
 	/** Function/method parameters */
 	parameters?: Array<Parameter_Info>;
 	/** Function return type */

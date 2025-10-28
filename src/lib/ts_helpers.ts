@@ -109,7 +109,7 @@ export const ts_extract_function_info = (
 			}
 
 			// Extract throws and since from TSDoc
-			if (tsdoc?.throws.length) {
+			if (tsdoc?.throws?.length) {
 				decl.throws = tsdoc.throws;
 			}
 			if (tsdoc?.since) {

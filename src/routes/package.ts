@@ -163,15 +163,9 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 103,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Api_Page.svelte': {
 			path: 'Api_Page.svelte',
@@ -191,7 +185,7 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 						{
-							name: 'module',
+							name: 'src_module',
 							type: 'any',
 							optional: true,
 						},
@@ -211,15 +205,9 @@ export const src_json: Src_Json = {
 							optional: true,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 362,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Breadcrumb.svelte': {
 			path: 'Breadcrumb.svelte',
@@ -259,15 +247,9 @@ export const src_json: Src_Json = {
 							optional: true,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 80,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Card.svelte': {
 			path: 'Card.svelte',
@@ -307,15 +289,9 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 153,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Color_Scheme_Input.svelte': {
 			path: 'Color_Scheme_Input.svelte',
@@ -335,15 +311,9 @@ export const src_json: Src_Json = {
 							optional: true,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 68,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Community_Links.svelte': {
 			path: 'Community_Links.svelte',
@@ -358,15 +328,9 @@ export const src_json: Src_Json = {
 							optional: true,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 54,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Community_Links_Panel.svelte': {
 			path: 'Community_Links_Panel.svelte',
@@ -381,15 +345,9 @@ export const src_json: Src_Json = {
 							optional: true,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 23,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Contextmenu.svelte': {
 			path: 'Contextmenu.svelte',
@@ -397,15 +355,9 @@ export const src_json: Src_Json = {
 				{
 					name: 'Contextmenu',
 					kind: 'component',
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 30,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Contextmenu_Entry.svelte': {
 			path: 'Contextmenu_Entry.svelte',
@@ -435,15 +387,9 @@ export const src_json: Src_Json = {
 							optional: true,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 72,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Contextmenu_Link_Entry.svelte': {
 			path: 'Contextmenu_Link_Entry.svelte',
@@ -473,15 +419,9 @@ export const src_json: Src_Json = {
 							optional: true,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 111,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Contextmenu_Root.svelte': {
 			path: 'Contextmenu_Root.svelte',
@@ -492,8 +432,6 @@ export const src_json: Src_Json = {
 					doc_comment:
 						"Touch event handler for tap-then-longpress bypass detection.\n\nThis allows users to access the native context menu by performing a tap\nfollowed by a longpress/rightclick within a specified time window.\nThe bypass gesture is useful for accessing browser features like text selection\nor the native context menu when the Fuz contextmenu would normally override it.\n\nNote: preventDefault is not called as we're only observing touch patterns,\nnot intercepting them. The actual bypass happens in on_window_contextmenu.",
 					summary: 'Touch event handler for tap-then-longpress bypass detection.',
-					examples: [],
-					see_also: [],
 					props: [
 						{
 							name: 'contextmenu',
@@ -571,15 +509,9 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 373,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Contextmenu_Root_For_Safari_Compatibility.svelte': {
 			path: 'Contextmenu_Root_For_Safari_Compatibility.svelte',
@@ -591,8 +523,6 @@ export const src_json: Src_Json = {
 						"Blocks the next click event. Set to true when a longpress completes to prevent\niOS's synthesized click from activating the first menu item.",
 					summary:
 						"Blocks the next click event. Set to true when a longpress completes to prevent\niOS's synthesized click from activating the first menu item.",
-					examples: [],
-					see_also: [],
 					props: [
 						{
 							name: 'contextmenu',
@@ -684,15 +614,9 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 542,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Contextmenu_Separator.svelte': {
 			path: 'Contextmenu_Separator.svelte',
@@ -700,15 +624,9 @@ export const src_json: Src_Json = {
 				{
 					name: 'Contextmenu_Separator',
 					kind: 'component',
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 17,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Contextmenu_Submenu.svelte': {
 			path: 'Contextmenu_Submenu.svelte',
@@ -733,15 +651,9 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 118,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Contextmenu_Text_Entry.svelte': {
 			path: 'Contextmenu_Text_Entry.svelte',
@@ -766,15 +678,9 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 20,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Copy_To_Clipboard.svelte': {
 			path: 'Copy_To_Clipboard.svelte',
@@ -782,15 +688,9 @@ export const src_json: Src_Json = {
 				{
 					name: 'Copy_To_Clipboard',
 					kind: 'component',
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 79,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Declaration_Link.svelte': {
 			path: 'Declaration_Link.svelte',
@@ -800,8 +700,6 @@ export const src_json: Src_Json = {
 					kind: 'component',
 					doc_comment: 'Show tooltip on mouse hover with ARIA-compliant delay',
 					summary: 'Show tooltip on mouse hover with ARIA-compliant delay',
-					examples: [],
-					see_also: [],
 					props: [
 						{
 							name: 'decl',
@@ -840,15 +738,9 @@ export const src_json: Src_Json = {
 							description: 'Optional content to display (defaults to declaration name)',
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 143,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Details.svelte': {
 			path: 'Details.svelte',
@@ -858,17 +750,9 @@ export const src_json: Src_Json = {
 					kind: 'component',
 					doc_comment: 'Like `details` but renders children lazily by default.',
 					summary: 'Like `details` but renders children lazily by default.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 46,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Dialog.svelte': {
 			path: 'Dialog.svelte',
@@ -919,15 +803,9 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 220,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 			imported_by: ['./dialog.ts'],
 		},
 		'./Dialogs.svelte': {
@@ -953,15 +831,9 @@ export const src_json: Src_Json = {
 							optional: true,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 27,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Docs.svelte': {
 			path: 'Docs.svelte',
@@ -991,15 +863,9 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 174,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Docs_Content.svelte': {
 			path: 'Docs_Content.svelte',
@@ -1034,15 +900,9 @@ export const src_json: Src_Json = {
 							optional: true,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 37,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Docs_Footer.svelte': {
 			path: 'Docs_Footer.svelte',
@@ -1082,15 +942,9 @@ export const src_json: Src_Json = {
 							optional: true,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 60,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Docs_Menu.svelte': {
 			path: 'Docs_Menu.svelte',
@@ -1110,15 +964,9 @@ export const src_json: Src_Json = {
 							optional: true,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 69,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Docs_Menu_Header.svelte': {
 			path: 'Docs_Menu_Header.svelte',
@@ -1126,15 +974,9 @@ export const src_json: Src_Json = {
 				{
 					name: 'Docs_Menu_Header',
 					kind: 'component',
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 16,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Docs_Page_Links.svelte': {
 			path: 'Docs_Page_Links.svelte',
@@ -1149,15 +991,9 @@ export const src_json: Src_Json = {
 							optional: true,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 72,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Docs_Primary_Nav.svelte': {
 			path: 'Docs_Primary_Nav.svelte',
@@ -1182,15 +1018,9 @@ export const src_json: Src_Json = {
 							optional: true,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 92,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Docs_Secondary_Nav.svelte': {
 			path: 'Docs_Secondary_Nav.svelte',
@@ -1210,15 +1040,9 @@ export const src_json: Src_Json = {
 							optional: true,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 61,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Docs_Tertiary_Nav.svelte': {
 			path: 'Docs_Tertiary_Nav.svelte',
@@ -1243,15 +1067,9 @@ export const src_json: Src_Json = {
 							optional: true,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 71,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Glyph.svelte': {
 			path: 'Glyph.svelte',
@@ -1259,15 +1077,9 @@ export const src_json: Src_Json = {
 				{
 					name: 'Glyph',
 					kind: 'component',
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 29,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Hashlink.svelte': {
 			path: 'Hashlink.svelte',
@@ -1287,15 +1099,9 @@ export const src_json: Src_Json = {
 							optional: true,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 42,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Hidden_Personal_Links.svelte': {
 			path: 'Hidden_Personal_Links.svelte',
@@ -1303,15 +1109,9 @@ export const src_json: Src_Json = {
 				{
 					name: 'Hidden_Personal_Links',
 					kind: 'component',
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 7,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Hue_Input.svelte': {
 			path: 'Hue_Input.svelte',
@@ -1336,15 +1136,9 @@ export const src_json: Src_Json = {
 							optional: true,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 126,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Identifier.svelte': {
 			path: 'Identifier.svelte',
@@ -1356,8 +1150,6 @@ export const src_json: Src_Json = {
 						'Searches for the identifier name in package metadata.\nReturns true if the identifier exists in the package modules.',
 					summary:
 						'Searches for the identifier name in package metadata.\nReturns true if the identifier exists in the package modules.',
-					examples: [],
-					see_also: [],
 					props: [
 						{
 							name: 'name',
@@ -1380,15 +1172,9 @@ export const src_json: Src_Json = {
 							optional: true,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 72,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Identifier_Link.svelte': {
 			path: 'Identifier_Link.svelte',
@@ -1408,15 +1194,9 @@ export const src_json: Src_Json = {
 							optional: true,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 47,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Identifier_Link_Or_Ts.svelte': {
 			path: 'Identifier_Link_Or_Ts.svelte',
@@ -1431,15 +1211,9 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 16,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Img_Or_Svg.svelte': {
 			path: 'Img_Or_Svg.svelte',
@@ -1494,15 +1268,9 @@ export const src_json: Src_Json = {
 							description: 'Shared attributes for both img and svg.',
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 52,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Mdn_Link.svelte': {
 			path: 'Mdn_Link.svelte',
@@ -1510,15 +1278,9 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdn_Link',
 					kind: 'component',
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 44,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Module_Link.svelte': {
 			path: 'Module_Link.svelte',
@@ -1531,48 +1293,36 @@ export const src_json: Src_Json = {
 							name: 'module_path',
 							type: 'string',
 							optional: false,
-							description: 'Module path (e.g., "alert.ts")',
 						},
 						{
-							name: 'module',
+							name: 'src_module',
 							type: 'Src_Module',
 							optional: true,
-							description: 'Module data with declarations',
 						},
 						{
 							name: 'pkg_name',
 							type: 'string',
 							optional: false,
-							description: 'Package name for generating import statements',
 						},
 						{
 							name: 'repo_url',
 							type: 'string',
 							optional: true,
-							description: 'Repository URL for source links',
 						},
 						{
 							name: 'homepage_url',
 							type: 'string | null',
 							optional: true,
-							description: 'Homepage URL for docs links',
 						},
 						{
 							name: 'children',
 							type: 'Snippet',
 							optional: true,
-							description: 'Optional content to display (defaults to module path)',
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 114,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Package_Detail.svelte': {
 			path: 'Package_Detail.svelte',
@@ -1617,15 +1367,9 @@ export const src_json: Src_Json = {
 							optional: true,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 334,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Package_Summary.svelte': {
 			path: 'Package_Summary.svelte',
@@ -1675,15 +1419,9 @@ export const src_json: Src_Json = {
 							optional: true,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 143,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Paste_From_Clipboard.svelte': {
 			path: 'Paste_From_Clipboard.svelte',
@@ -1691,15 +1429,9 @@ export const src_json: Src_Json = {
 				{
 					name: 'Paste_From_Clipboard',
 					kind: 'component',
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 36,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Pending_Animation.svelte': {
 			path: 'Pending_Animation.svelte',
@@ -1707,15 +1439,9 @@ export const src_json: Src_Json = {
 				{
 					name: 'Pending_Animation',
 					kind: 'component',
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 63,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Pending_Button.svelte': {
 			path: 'Pending_Button.svelte',
@@ -1723,15 +1449,9 @@ export const src_json: Src_Json = {
 				{
 					name: 'Pending_Button',
 					kind: 'component',
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 74,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Project_Links.svelte': {
 			path: 'Project_Links.svelte',
@@ -1739,15 +1459,9 @@ export const src_json: Src_Json = {
 				{
 					name: 'Project_Links',
 					kind: 'component',
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 55,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Redirect.svelte': {
 			path: 'Redirect.svelte',
@@ -1783,15 +1497,9 @@ export const src_json: Src_Json = {
 							optional: true,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 42,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Spiders.svelte': {
 			path: 'Spiders.svelte',
@@ -1801,8 +1509,6 @@ export const src_json: Src_Json = {
 					kind: 'component',
 					doc_comment: 'Returns the minute of the current day.',
 					summary: 'Returns the minute of the current day.',
-					examples: [],
-					see_also: [],
 					props: [
 						{
 							name: 'spiders',
@@ -1820,15 +1526,9 @@ export const src_json: Src_Json = {
 							optional: true,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 63,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Svg.svelte': {
 			path: 'Svg.svelte',
@@ -1891,15 +1591,9 @@ export const src_json: Src_Json = {
 							optional: true,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 105,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 			imported_by: ['./logos.ts'],
 		},
 		'./Teleport.svelte': {
@@ -1927,15 +1621,9 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 47,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Theme_Input.svelte': {
 			path: 'Theme_Input.svelte',
@@ -1975,15 +1663,9 @@ export const src_json: Src_Json = {
 							optional: true,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 78,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Themed.svelte': {
 			path: 'Themed.svelte',
@@ -2035,15 +1717,9 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 104,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Tome_Content.svelte': {
 			path: 'Tome_Content.svelte',
@@ -2073,15 +1749,9 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 62,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Tome_Header.svelte': {
 			path: 'Tome_Header.svelte',
@@ -2089,15 +1759,9 @@ export const src_json: Src_Json = {
 				{
 					name: 'Tome_Header',
 					kind: 'component',
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 57,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Tome_Link.svelte': {
 			path: 'Tome_Link.svelte',
@@ -2105,15 +1769,9 @@ export const src_json: Src_Json = {
 				{
 					name: 'Tome_Link',
 					kind: 'component',
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 43,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Tome_Section.svelte': {
 			path: 'Tome_Section.svelte',
@@ -2121,15 +1779,9 @@ export const src_json: Src_Json = {
 				{
 					name: 'Tome_Section',
 					kind: 'component',
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 47,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Tome_Section_Header.svelte': {
 			path: 'Tome_Section_Header.svelte',
@@ -2137,15 +1789,9 @@ export const src_json: Src_Json = {
 				{
 					name: 'Tome_Section_Header',
 					kind: 'component',
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 67,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./Tooltip.svelte': {
 			path: 'Tooltip.svelte',
@@ -2179,15 +1825,9 @@ export const src_json: Src_Json = {
 							description: 'Padding from viewport edges',
 						},
 					],
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 156,
-						end_column: 0,
-					},
+					source_line: 1,
 				},
 			],
-			imports: [],
 		},
 		'./alert.ts': {
 			path: 'alert.ts',
@@ -2195,23 +1835,13 @@ export const src_json: Src_Json = {
 				{
 					name: 'Alert_Status',
 					kind: 'type',
-					source_location: {
-						line: 3,
-						column: 0,
-						end_line: 3,
-						end_column: 55,
-					},
+					source_line: 3,
 					type_signature: 'Alert_Status',
 				},
 				{
 					name: 'Alert_Status_Options',
 					kind: 'type',
-					source_location: {
-						line: 5,
-						column: 0,
-						end_line: 8,
-						end_column: 1,
-					},
+					source_line: 5,
 					type_signature: 'Alert_Status_Options',
 					properties: [
 						{
@@ -2229,16 +1859,10 @@ export const src_json: Src_Json = {
 				{
 					name: 'alert_status_options',
 					kind: 'variable',
-					source_location: {
-						line: 10,
-						column: 13,
-						end_line: 14,
-						end_column: 1,
-					},
+					source_line: 10,
 					type_signature: 'Record<Alert_Status, Alert_Status_Options>',
 				},
 			],
-			imports: [],
 			module_comment: '// TODO move to module context?',
 		},
 		'./api_data.ts': {
@@ -2249,14 +1873,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Look up a declaration by name (flat namespace)',
 					summary: 'Look up a declaration by name (flat namespace)',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 12,
-						column: 13,
-						end_line: 28,
-						end_column: 1,
-					},
+					source_line: 12,
 					type_signature:
 						'(name: string): { decl: Src_Module_Declaration; module_path: string; src_module: Src_Module; } | undefined',
 					return_type:
@@ -2274,14 +1891,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Get all declarations as a flat list',
 					summary: 'Get all declarations as a flat list',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 33,
-						column: 13,
-						end_line: 56,
-						end_column: 1,
-					},
+					source_line: 33,
 					type_signature:
 						'(): { module_path: string; src_module: Src_Module; decl: Src_Module_Declaration; }[]',
 					return_type:
@@ -2293,14 +1903,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Check if an identifier is documented',
 					summary: 'Check if an identifier is documented',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 61,
-						column: 13,
-						end_line: 63,
-						end_column: 1,
-					},
+					source_line: 61,
 					type_signature: '(name: string): boolean',
 					return_type: 'boolean',
 					parameters: [
@@ -2316,14 +1919,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Search declarations by name (fuzzy match)',
 					summary: 'Search declarations by name (fuzzy match)',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 68,
-						column: 13,
-						end_line: 108,
-						end_column: 1,
-					},
+					source_line: 68,
 					type_signature:
 						'(query: string): { module_path: string; src_module: Src_Module; decl: Src_Module_Declaration; }[]',
 					return_type:
@@ -2347,16 +1943,10 @@ export const src_json: Src_Json = {
 				{
 					name: 'MAIN_HEADER_MARGIN_TOP',
 					kind: 'variable',
-					source_location: {
-						line: 3,
-						column: 13,
-						end_line: 3,
-						end_column: 68,
-					},
+					source_line: 3,
 					type_signature: '"calc(60px + var(--space_lg))"',
 				},
 			],
-			imports: [],
 			module_comment:
 				'// TODO the 60px is a hack, need `--docs_primary_nav_height` exported or :root values from Fuz -- the --space_lg also needs to be kept in sync',
 		},
@@ -2370,14 +1960,7 @@ export const src_json: Src_Json = {
 						"Wraps Svelte's `setContext` and `getContext` for better ergonmics.\nWhen no value is set in the context,\n`get` throws an error and `maybe_get` returns `undefined`.\nIf a `fallback` is provided, the `value` argument to `set` is optional\nand `maybe_get` is omitted from the type.",
 					summary:
 						"Wraps Svelte's `setContext` and `getContext` for better ergonmics.\nWhen no value is set in the context,\n`get` throws an error and `maybe_get` returns `undefined`.\nIf a `fallback` is provided, the `value` argument to `set` is optional\nand `maybe_get` is omitted from the type.",
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 18,
-						column: 0,
-						end_line: 21,
-						end_column: 2,
-					},
+					source_line: 18,
 					type_signature:
 						'<T>(fallback: () => T): { get: () => T; set: (value?: T | undefined) => T; }',
 					return_type: '{ get: () => T; set: (value?: T | undefined) => T; }',
@@ -2411,67 +1994,37 @@ export const src_json: Src_Json = {
 				{
 					name: 'CONTEXTMENU_DEFAULT_OPEN_OFFSET_X',
 					kind: 'variable',
-					source_location: {
-						line: 6,
-						column: 13,
-						end_line: 6,
-						end_column: 51,
-					},
+					source_line: 6,
 					type_signature: '-2',
 				},
 				{
 					name: 'CONTEXTMENU_DEFAULT_OPEN_OFFSET_Y',
 					kind: 'variable',
-					source_location: {
-						line: 7,
-						column: 13,
-						end_line: 7,
-						end_column: 51,
-					},
+					source_line: 7,
 					type_signature: '-2',
 				},
 				{
 					name: 'CONTEXTMENU_DEFAULT_BYPASS_WINDOW',
 					kind: 'variable',
-					source_location: {
-						line: 8,
-						column: 13,
-						end_line: 8,
-						end_column: 52,
-					},
+					source_line: 8,
 					type_signature: '750',
 				},
 				{
 					name: 'CONTEXTMENU_DEFAULT_BYPASS_MOVE_TOLERANCE',
 					kind: 'variable',
-					source_location: {
-						line: 9,
-						column: 13,
-						end_line: 9,
-						end_column: 59,
-					},
+					source_line: 9,
 					type_signature: '11',
 				},
 				{
 					name: 'CONTEXTMENU_DEFAULT_LONGPRESS_DURATION',
 					kind: 'variable',
-					source_location: {
-						line: 10,
-						column: 13,
-						end_line: 10,
-						end_column: 57,
-					},
+					source_line: 10,
 					type_signature: '633',
 				},
 				{
 					name: 'CONTEXTMENU_DEFAULT_LONGPRESS_MOVE_TOLERANCE',
 					kind: 'variable',
-					source_location: {
-						line: 11,
-						column: 13,
-						end_line: 11,
-						end_column: 62,
-					},
+					source_line: 11,
 					type_signature: '21',
 				},
 				{
@@ -2481,14 +2034,7 @@ export const src_json: Src_Json = {
 						'Check if a target element is valid for contextmenu interactions.\nReturns true if valid and narrows the type to HTMLElement | SVGElement.',
 					summary:
 						'Check if a target element is valid for contextmenu interactions.\nReturns true if valid and narrows the type to HTMLElement | SVGElement.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 17,
-						column: 13,
-						end_line: 24,
-						end_column: 25,
-					},
+					source_line: 17,
 					type_signature:
 						'(target: EventTarget | null, shiftKey: boolean): target is HTMLElement | SVGElement',
 					return_type: 'boolean',
@@ -2512,14 +2058,7 @@ export const src_json: Src_Json = {
 						'Creates the keyboard handler map for contextmenu navigation.\nBinds handlers to the provided contextmenu instance.',
 					summary:
 						'Creates the keyboard handler map for contextmenu navigation.\nBinds handlers to the provided contextmenu instance.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 32,
-						column: 13,
-						end_line: 45,
-						end_column: 3,
-					},
+					source_line: 32,
 					type_signature: '(contextmenu: Contextmenu_State): Map<string, () => void>',
 					return_type: 'Map<string, () => void>',
 					parameters: [
@@ -2536,14 +2075,7 @@ export const src_json: Src_Json = {
 					doc_comment:
 						'Creates a keydown event handler that uses the provided keyboard handlers map.',
 					summary: 'Creates a keydown event handler that uses the provided keyboard handlers map.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 50,
-						column: 13,
-						end_line: 59,
-						end_column: 1,
-					},
+					source_line: 50,
 					type_signature:
 						'(keyboard_handlers: Map<string, () => void>): (e: KeyboardEvent) => void',
 					return_type: '(e: KeyboardEvent) => void',
@@ -2562,14 +2094,7 @@ export const src_json: Src_Json = {
 						'Calculates the constrained X position for the contextmenu,\nensuring it stays within the layout width.',
 					summary:
 						'Calculates the constrained X position for the contextmenu,\nensuring it stays within the layout width.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 65,
-						column: 13,
-						end_line: 69,
-						end_column: 71,
-					},
+					source_line: 65,
 					type_signature: '(menu_x: number, menu_width: number, layout_width: number): number',
 					return_type: 'number',
 					parameters: [
@@ -2597,14 +2122,7 @@ export const src_json: Src_Json = {
 						'Calculates the constrained Y position for the contextmenu,\nensuring it stays within the layout height.',
 					summary:
 						'Calculates the constrained Y position for the contextmenu,\nensuring it stays within the layout height.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 75,
-						column: 13,
-						end_line: 79,
-						end_column: 73,
-					},
+					source_line: 75,
 					type_signature: '(menu_y: number, menu_height: number, layout_height: number): number',
 					return_type: 'number',
 					parameters: [
@@ -2634,45 +2152,25 @@ export const src_json: Src_Json = {
 				{
 					name: 'Contextmenu_Params',
 					kind: 'type',
-					source_location: {
-						line: 14,
-						column: 0,
-						end_line: 19,
-						end_column: 59,
-					},
+					source_line: 14,
 					type_signature: 'Contextmenu_Params',
 				},
 				{
 					name: 'Contextmenu_Activate_Result',
 					kind: 'type',
-					source_location: {
-						line: 21,
-						column: 0,
-						end_line: 24,
-						end_column: 49,
-					},
+					source_line: 21,
 					type_signature: 'Contextmenu_Activate_Result',
 				},
 				{
 					name: 'Item_State',
 					kind: 'type',
-					source_location: {
-						line: 26,
-						column: 0,
-						end_line: 26,
-						end_column: 53,
-					},
+					source_line: 26,
 					type_signature: 'Item_State',
 				},
 				{
 					name: 'Entry_State',
 					kind: 'class',
-					source_location: {
-						line: 28,
-						column: 0,
-						end_line: 49,
-						end_column: 1,
-					},
+					source_line: 28,
 					members: [
 						{
 							name: 'is_menu',
@@ -2722,12 +2220,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Submenu_State',
 					kind: 'class',
-					source_location: {
-						line: 51,
-						column: 0,
-						end_line: 63,
-						end_column: 1,
-					},
+					source_line: 51,
 					members: [
 						{
 							name: 'is_menu',
@@ -2761,12 +2254,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Root_Menu_State',
 					kind: 'class',
-					source_location: {
-						line: 65,
-						column: 0,
-						end_line: 71,
-						end_column: 1,
-					},
+					source_line: 65,
 					members: [
 						{
 							name: 'is_menu',
@@ -2793,23 +2281,13 @@ export const src_json: Src_Json = {
 				{
 					name: 'Contextmenu_Run',
 					kind: 'type',
-					source_location: {
-						line: 73,
-						column: 0,
-						end_line: 75,
-						end_column: 40,
-					},
+					source_line: 73,
 					type_signature: 'Contextmenu_Run',
 				},
 				{
 					name: 'Contextmenu_State_Options',
 					kind: 'type',
-					source_location: {
-						line: 77,
-						column: 0,
-						end_line: 79,
-						end_column: 1,
-					},
+					source_line: 77,
 					type_signature: 'Contextmenu_State_Options',
 					properties: [
 						{
@@ -2826,14 +2304,8 @@ export const src_json: Src_Json = {
 						'Creates a `contextmenu` store.\nSee usage with `Contextmenu_Root.svelte` and `Contextmenu.svelte`.',
 					summary:
 						'Creates a `contextmenu` store.\nSee usage with `Contextmenu_Root.svelte` and `Contextmenu.svelte`.',
-					examples: [],
 					see_also: ['://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event'],
-					source_location: {
-						line: 87,
-						column: 0,
-						end_line: 337,
-						end_column: 1,
-					},
+					source_line: 87,
 					members: [
 						{
 							name: 'layout',
@@ -2987,12 +2459,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'contextmenu_action',
 					kind: 'function',
-					source_location: {
-						line: 346,
-						column: 13,
-						end_line: 362,
-						end_column: 1,
-					},
+					source_line: 346,
 					type_signature:
 						'<T extends Contextmenu_Params, U extends T | Array<T>>(el: HTMLElement | SVGElement, params: U | null | undefined): ActionReturn<U, Record<never, any>> | undefined',
 					return_type: 'ActionReturn<U, Record<never, any>> | undefined',
@@ -3012,12 +2479,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Open_Contextmenu_Options',
 					kind: 'type',
-					source_location: {
-						line: 366,
-						column: 0,
-						end_line: 371,
-						end_column: 1,
-					},
+					source_line: 366,
 					type_signature: 'Open_Contextmenu_Options',
 					properties: [
 						{
@@ -3049,14 +2511,7 @@ export const src_json: Src_Json = {
 						'Opens the contextmenu, if appropriate,\nquerying the menu items from the DOM starting at the event target.',
 					summary:
 						'Opens the contextmenu, if appropriate,\nquerying the menu items from the DOM starting at the event target.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 383,
-						column: 13,
-						end_line: 419,
-						end_column: 1,
-					},
+					source_line: 383,
 					type_signature:
 						'(target: HTMLElement | SVGElement, x: number, y: number, contextmenu: Contextmenu_State, options?: Open_Contextmenu_Options | undefined): boolean',
 					return_type: 'boolean',
@@ -3099,36 +2554,21 @@ export const src_json: Src_Json = {
 				{
 					name: 'contextmenu_context',
 					kind: 'variable',
-					source_location: {
-						line: 469,
-						column: 13,
-						end_line: 469,
-						end_column: 70,
-					},
+					source_line: 469,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Contextmenu_State; maybe_get: () => Contextmenu_State | undefined; set: (value: Contextmenu_State) => Contextmenu_State; }',
 				},
 				{
 					name: 'contextmenu_submenu_context',
 					kind: 'variable',
-					source_location: {
-						line: 471,
-						column: 13,
-						end_line: 471,
-						end_column: 74,
-					},
+					source_line: 471,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Submenu_State; maybe_get: () => Submenu_State | undefined; set: (value: Submenu_State) => Submenu_State; }',
 				},
 				{
 					name: 'contextmenu_dimensions_context',
 					kind: 'variable',
-					source_location: {
-						line: 473,
-						column: 13,
-						end_line: 473,
-						end_column: 84,
-					},
+					source_line: 473,
 					type_signature:
 						'{ get: () => Dimensions; set: (value?: Dimensions | undefined) => Dimensions; }',
 				},
@@ -3139,14 +2579,7 @@ export const src_json: Src_Json = {
 						'Registers a contextmenu root and warns if multiple non-scoped roots are detected.\nOnly active in development mode. Automatically handles cleanup on unmount.',
 					summary:
 						'Registers a contextmenu root and warns if multiple non-scoped roots are detected.\nOnly active in development mode. Automatically handles cleanup on unmount.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 484,
-						column: 13,
-						end_line: 507,
-						end_column: 1,
-					},
+					source_line: 484,
 					type_signature: '(get_scoped: () => boolean): void',
 					return_type: 'void',
 					parameters: [
@@ -3182,14 +2615,7 @@ export const src_json: Src_Json = {
 						"This is designed for compatibility with SvelteKit\nand maps to the `KitConfig` `directives` option.\nThe goal is to provide an ergonomic, modern, and safe API\nfor Content Security Policy (CSP) creation\nthat's simple to write and audit, and isn't error-prone.\n\nThings like validation and rendering to a string\nare out of scope and left to SvelteKit.",
 					summary:
 						"This is designed for compatibility with SvelteKit\nand maps to the `KitConfig` `directives` option.\nThe goal is to provide an ergonomic, modern, and safe API\nfor Content Security Policy (CSP) creation\nthat's simple to write and audit, and isn't error-prone.",
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 60,
-						column: 0,
-						end_line: 173,
-						end_column: 1,
-					},
+					source_line: 60,
 					type_signature: '(options?: Create_Csp_Directives_Options): Csp_Directives',
 					return_type: 'Csp_Directives',
 					parameters: [
@@ -3204,12 +2630,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Create_Csp_Directives_Options',
 					kind: 'type',
-					source_location: {
-						line: 5,
-						column: 0,
-						end_line: 48,
-						end_column: 1,
-					},
+					source_line: 5,
 					type_signature: 'Create_Csp_Directives_Options',
 					properties: [
 						{
@@ -3270,23 +2691,13 @@ export const src_json: Src_Json = {
 				{
 					name: 'Csp_Directive',
 					kind: 'type',
-					source_location: {
-						line: 175,
-						column: 0,
-						end_line: 175,
-						end_column: 49,
-					},
+					source_line: 175,
 					type_signature: 'keyof Csp_Directives',
 				},
 				{
 					name: 'parse_csp_directive',
 					kind: 'function',
-					source_location: {
-						line: 177,
-						column: 13,
-						end_line: 180,
-						end_column: 8,
-					},
+					source_line: 177,
 					type_signature: '(directive: unknown): keyof Csp_Directives | null',
 					return_type: 'keyof Csp_Directives | null',
 					parameters: [
@@ -3300,12 +2711,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Csp_Directive_Value',
 					kind: 'type',
-					source_location: {
-						line: 182,
-						column: 0,
-						end_line: 182,
-						end_column: 86,
-					},
+					source_line: 182,
 					type_signature: 'Csp_Directive_Value<T>',
 					generic_params: [
 						{
@@ -3317,12 +2723,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'csp_trust_levels',
 					kind: 'variable',
-					source_location: {
-						line: 184,
-						column: 13,
-						end_line: 184,
-						end_column: 66,
-					},
+					source_line: 184,
 					type_signature: 'readonly ["low", "medium", "high"]',
 				},
 				{
@@ -3332,14 +2733,7 @@ export const src_json: Src_Json = {
 						'Numeric values for CSP trust levels, `csp_trust_levels`.\nLower is less trusted.\nIncludes `undefined` in the type for safety.',
 					summary:
 						'Numeric values for CSP trust levels, `csp_trust_levels`.\nLower is less trusted.\nIncludes `undefined` in the type for safety.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 191,
-						column: 13,
-						end_line: 195,
-						end_column: 1,
-					},
+					source_line: 191,
 					type_signature: 'Record<"low" | "medium" | "high", number | undefined>',
 				},
 				{
@@ -3348,14 +2742,7 @@ export const src_json: Src_Json = {
 					doc_comment:
 						"Trust levels for CSP sources.\n\nWith the base defaults, trust levels roughly correspond to:\n\n- `low` – Passive resources only (no script execution, no styling or UI control).\n\t\tExamples: `img-src`, `font-src`.\n- `medium` – Content that may affect layout, styling, or embed external browsing contexts,\n   but cannot directly run code in the page's JS execution environment or\n\t\tperform other high-risk actions. Examples: `style-src`, `frame-src`, `frame-ancestors`.\n- `high` – Sources that can execute code in the page's context or open powerful network\n   channels. Examples: `script-src`, `connect-src`, `child-src`.\n- `null` – No trust. This is used for directives that don't support sources.",
 					summary: 'Trust levels for CSP sources.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 212,
-						column: 0,
-						end_line: 212,
-						end_column: 69,
-					},
+					source_line: 212,
 					type_signature: '"low" | "medium" | "high"',
 				},
 				{
@@ -3363,14 +2750,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Validates and extracts a CSP trust level from an unknown value.',
 					summary: 'Validates and extracts a CSP trust level from an unknown value.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 217,
-						column: 13,
-						end_line: 218,
-						end_column: 76,
-					},
+					source_line: 217,
 					type_signature: '(trust: unknown): "low" | "medium" | "high" | null',
 					return_type: '"low" | "medium" | "high" | null',
 					parameters: [
@@ -3384,12 +2764,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Csp_Source_Spec',
 					kind: 'type',
-					source_location: {
-						line: 220,
-						column: 0,
-						end_line: 224,
-						end_column: 1,
-					},
+					source_line: 220,
 					type_signature: 'Csp_Source_Spec',
 					properties: [
 						{
@@ -3412,12 +2787,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Csp_Directive_Spec',
 					kind: 'type',
-					source_location: {
-						line: 226,
-						column: 0,
-						end_line: 230,
-						end_column: 1,
-					},
+					source_line: 226,
 					type_signature: 'Csp_Directive_Spec',
 					properties: [
 						{
@@ -3444,14 +2814,7 @@ export const src_json: Src_Json = {
 						"Determines if a granted trust level is sufficient to satisfy a required trust level.\n\nTrust levels have the following hierarchy:\n- 'high' sources can be used in high, medium, and low trust directives (highest privilege)\n- 'medium' sources can be used in medium and low trust directives\n- 'low' sources can only be used in low trust directives (lowest privilege)",
 					summary:
 						'Determines if a granted trust level is sufficient to satisfy a required trust level.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 240,
-						column: 13,
-						end_line: 254,
-						end_column: 1,
-					},
+					source_line: 240,
 					type_signature:
 						'(required_trust: "low" | "medium" | "high" | null | undefined, granted_trust: "low" | "medium" | "high" | null | undefined): boolean',
 					return_type: 'boolean',
@@ -3471,12 +2834,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'COLOR_SCHEME_SCRIPT_HASH',
 					kind: 'variable',
-					source_location: {
-						line: 263,
-						column: 13,
-						end_line: 263,
-						end_column: 93,
-					},
+					source_line: 263,
 					type_signature: '"sha256-QOxqn7EUzb3ydF9SALJoJGWSvywW9R0AfTDSenB83Z8="',
 				},
 				{
@@ -3486,14 +2844,7 @@ export const src_json: Src_Json = {
 						'The base CSP directive defaults.\nPrioritizes safety but loosens around media and styles, relying on defense-in-depth.\nCustomizable via `Create_Csp_Directives_Options.defaults`.',
 					summary:
 						'The base CSP directive defaults.\nPrioritizes safety but loosens around media and styles, relying on defense-in-depth.\nCustomizable via `Create_Csp_Directives_Options.defaults`.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 270,
-						column: 13,
-						end_line: 298,
-						end_column: 1,
-					},
+					source_line: 270,
 					type_signature:
 						'Record<keyof Csp_Directives, boolean | (Csp_Source | Csp_Action_Source)[] | Csp_Sources | (`${string}.${string}` | "localhost" | ... 17 more ... | "none")[] | string[] | "script"[] | ("allow-downloads-without-user-activation" | ... 11 more ... | "allow-top-navigation-by-user-activation")[] | null>',
 				},
@@ -3504,14 +2855,7 @@ export const src_json: Src_Json = {
 						"Sources that meet this trust requirement are included for it by default.\nIf null, no trusted sources are added to the directive automatically.\nDirectives that don't support sources or default to `['none']` are null.\n\nFeedback is welcome, please see the issues - https://github.com/ryanatkn/fuz/issues",
 					summary:
 						"Sources that meet this trust requirement are included for it by default.\nIf null, no trusted sources are added to the directive automatically.\nDirectives that don't support sources or default to `['none']` are null.",
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 307,
-						column: 13,
-						end_line: 333,
-						end_column: 2,
-					},
+					source_line: 307,
 					type_signature: 'Record<keyof Csp_Directives, "low" | "medium" | "high" | null>',
 				},
 				{
@@ -3521,161 +2865,90 @@ export const src_json: Src_Json = {
 						'Static data descriptors for the CSP directives.\nFuz excludes deprecated directives, so those are intentionally omitted,\nbut any newer missing directives are bugs.\n\nCould be moved to `csp.ts` but is currently here to keep that module smaller.',
 					summary:
 						'Static data descriptors for the CSP directives.\nFuz excludes deprecated directives, so those are intentionally omitted,\nbut any newer missing directives are bugs.',
-					examples: [],
 					see_also: [
 						'://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy',
 					],
-					source_location: {
-						line: 344,
-						column: 13,
-						end_line: 480,
-						end_column: 1,
-					},
+					source_line: 344,
 					type_signature: 'Csp_Directive_Spec[]',
 				},
 				{
 					name: 'csp_directive_spec_by_name',
 					kind: 'variable',
-					source_location: {
-						line: 482,
-						column: 13,
-						end_line: 484,
-						end_column: 1,
-					},
+					source_line: 482,
 					type_signature: 'Map<keyof Csp_Directives, Csp_Directive_Spec>',
 				},
 				{
 					name: 'Csp_Action_Source',
 					kind: 'type',
-					source_location: {
-						line: 514,
-						column: 0,
-						end_line: 514,
-						end_column: 67,
-					},
+					source_line: 514,
 					type_signature: 'Csp_Action_Source',
 				},
 				{
 					name: 'Csp_Base_Source',
 					kind: 'type',
-					source_location: {
-						line: 515,
-						column: 0,
-						end_line: 521,
-						end_column: 10,
-					},
+					source_line: 515,
 					type_signature: 'Csp_Base_Source',
 				},
 				{
 					name: 'Csp_Crypto_Source',
 					kind: 'type',
-					source_location: {
-						line: 522,
-						column: 0,
-						end_line: 522,
-						end_column: 88,
-					},
+					source_line: 522,
 					type_signature:
 						'`nonce-${string}` | `sha256-${string}` | `sha384-${string}` | `sha512-${string}`',
 				},
 				{
 					name: 'Csp_Frame_Source',
 					kind: 'type',
-					source_location: {
-						line: 523,
-						column: 0,
-						end_line: 523,
-						end_column: 85,
-					},
+					source_line: 523,
 					type_signature: 'Csp_Frame_Source',
 				},
 				{
 					name: 'Csp_Host_Name_Scheme',
 					kind: 'type',
-					source_location: {
-						line: 524,
-						column: 0,
-						end_line: 524,
-						end_column: 71,
-					},
+					source_line: 524,
 					type_signature: 'Csp_Host_Name_Scheme',
 				},
 				{
 					name: 'Csp_Host_Source',
 					kind: 'type',
-					source_location: {
-						line: 525,
-						column: 0,
-						end_line: 526,
-						end_column: 73,
-					},
+					source_line: 525,
 					type_signature:
 						'`${string}.${string}` | "localhost" | `${string}.${string}:${number}` | `${string}.${string}:*` | `localhost:${number}` | "localhost:*" | `${string}://${string}.${string}` | `${string}://${string}.${string}:${number}` | `${string}://${string}.${string}:*` | `${string}://localhost` | `${string}://localhost:${number}`...',
 				},
 				{
 					name: 'Csp_Host_Protocol_Schemes',
 					kind: 'type',
-					source_location: {
-						line: 527,
-						column: 0,
-						end_line: 527,
-						end_column: 60,
-					},
+					source_line: 527,
 					type_signature: 'Csp_Host_Protocol_Schemes',
 				},
 				{
 					name: 'Csp_Port_Scheme',
 					kind: 'type',
-					source_location: {
-						line: 528,
-						column: 0,
-						end_line: 528,
-						end_column: 55,
-					},
+					source_line: 528,
 					type_signature: 'Csp_Port_Scheme',
 				},
 				{
 					name: 'Csp_Scheme_Source',
 					kind: 'type',
-					source_location: {
-						line: 529,
-						column: 0,
-						end_line: 535,
-						end_column: 17,
-					},
+					source_line: 529,
 					type_signature: 'Csp_Scheme_Source',
 				},
 				{
 					name: 'Csp_Source',
 					kind: 'type',
-					source_location: {
-						line: 536,
-						column: 0,
-						end_line: 536,
-						end_column: 99,
-					},
+					source_line: 536,
 					type_signature: 'Csp_Source',
 				},
 				{
 					name: 'Csp_Sources',
 					kind: 'type',
-					source_location: {
-						line: 537,
-						column: 0,
-						end_line: 537,
-						end_column: 44,
-					},
+					source_line: 537,
 					type_signature: 'Csp_Sources',
 				},
 				{
 					name: 'Csp_Directives',
 					kind: 'type',
-					source_location: {
-						line: 539,
-						column: 0,
-						end_line: 578,
-						end_column: 1,
-					},
+					source_line: 539,
 					type_signature: 'Csp_Directives',
 					properties: [
 						{
@@ -3698,14 +2971,7 @@ export const src_json: Src_Json = {
 					kind: 'variable',
 					doc_comment: 'List of trusted sources owned by ryanatkn (me, ryanatkn.com).',
 					summary: 'List of trusted sources owned by ryanatkn (me, ryanatkn.com).',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 6,
-						column: 13,
-						end_line: 16,
-						end_column: 1,
-					},
+					source_line: 6,
 					type_signature: 'Csp_Source_Spec[]',
 				},
 			],
@@ -3719,14 +2985,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Create contextmenu entries for a declaration',
 					summary: 'Create contextmenu entries for a declaration',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 8,
-						column: 13,
-						end_line: 80,
-						end_column: 1,
-					},
+					source_line: 8,
 					type_signature:
 						'(decl: Src_Module_Declaration, module_path: string, pkg_name: string, repo_url?: string | undefined, homepage_url?: string | null | undefined): Contextmenu_Params[]',
 					return_type: 'Contextmenu_Params[]',
@@ -3771,14 +3030,7 @@ export const src_json: Src_Json = {
 						"This helper function is needed to construct `Dialog_Params` with type safety.\nIt uses TypeScript's inferred generics for functions,\nwhich do not work for plain objects as of v5.0.4.\n* `ContextmenuParams` uses a similar strategy.",
 					summary:
 						"This helper function is needed to construct `Dialog_Params` with type safety.\nIt uses TypeScript's inferred generics for functions,\nwhich do not work for plain objects as of v5.0.4.\n* `ContextmenuParams` uses a similar strategy.",
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 11,
-						column: 13,
-						end_line: 19,
-						end_column: 2,
-					},
+					source_line: 11,
 					type_signature:
 						'<T extends Component<any>>(Component: T, props: ComponentProps<T>, dialog_props?: Partial<Record<string, any>> | undefined): Dialog_Params<T>',
 					return_type: 'Dialog_Params<T>',
@@ -3807,14 +3059,7 @@ export const src_json: Src_Json = {
 						'This pattern is based on:\nhttps://github.com/ivanhofer/sveltekit-typescript-showcase/blob/main/src/01-props/09-svelte-component/Component.svelte\nThe main limitation is that the generic cannot be inferred automatically,\nso we use `to_dialog_params` to construct instances in most cases.\nDefinining `Dialog_Params` with no concrete `T` lacks typechecking for `props`.',
 					summary:
 						'This pattern is based on:\nhttps://github.com/ivanhofer/sveltekit-typescript-showcase/blob/main/src/01-props/09-svelte-component/Component.svelte\nThe main limitation is that the generic cannot be inferred automatically,\nso we use `to_dialog_params` to construct instances in most cases.\nDefinining `Dialog_Params` with no concrete `T` lacks typechecking for `props`.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 28,
-						column: 0,
-						end_line: 32,
-						end_column: 1,
-					},
+					source_line: 28,
 					type_signature: 'Dialog_Params<T>',
 					generic_params: [
 						{
@@ -3844,23 +3089,13 @@ export const src_json: Src_Json = {
 				{
 					name: 'Dialog_Layout',
 					kind: 'type',
-					source_location: {
-						line: 34,
-						column: 0,
-						end_line: 34,
-						end_column: 48,
-					},
+					source_line: 34,
 					type_signature: 'Dialog_Layout',
 				},
 				{
 					name: 'dialog_layouts',
 					kind: 'variable',
-					source_location: {
-						line: 35,
-						column: 13,
-						end_line: 35,
-						end_column: 72,
-					},
+					source_line: 35,
 					type_signature: 'Dialog_Layout[]',
 				},
 			],
@@ -3872,12 +3107,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Dimensions',
 					kind: 'class',
-					source_location: {
-						line: 1,
-						column: 0,
-						end_line: 4,
-						end_column: 1,
-					},
+					source_line: 1,
 					members: [
 						{
 							name: 'width',
@@ -3892,7 +3122,6 @@ export const src_json: Src_Json = {
 					],
 				},
 			],
-			imports: [],
 			imported_by: ['./contextmenu_state.svelte.ts'],
 		},
 		'./docs_helpers.svelte.ts': {
@@ -3901,23 +3130,13 @@ export const src_json: Src_Json = {
 				{
 					name: 'DEFAULT_LIBRARY_PATH',
 					kind: 'variable',
-					source_location: {
-						line: 7,
-						column: 13,
-						end_line: 7,
-						end_column: 43,
-					},
+					source_line: 7,
 					type_signature: '"/docs"',
 				},
 				{
 					name: 'get_next_docs_link_order',
 					kind: 'function',
-					source_location: {
-						line: 12,
-						column: 13,
-						end_line: 12,
-						end_column: 78,
-					},
+					source_line: 12,
 					type_signature: '(): number',
 					return_type: 'number',
 					parameters: [],
@@ -3925,12 +3144,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'reset_docs_link_order',
 					kind: 'function',
-					source_location: {
-						line: 15,
-						column: 13,
-						end_line: 17,
-						end_column: 1,
-					},
+					source_line: 15,
 					type_signature: '(): void',
 					return_type: 'void',
 					parameters: [],
@@ -3938,12 +3152,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'to_docs_path_info',
 					kind: 'function',
-					source_location: {
-						line: 19,
-						column: 13,
-						end_line: 28,
-						end_column: 1,
-					},
+					source_line: 19,
 					type_signature:
 						'(slug: string, pathname: string, root_path?: string): { path: string; path_is_selected: boolean; path_segment: string | undefined; }',
 					return_type:
@@ -3970,35 +3179,20 @@ export const src_json: Src_Json = {
 				{
 					name: 'docs_links_context',
 					kind: 'variable',
-					source_location: {
-						line: 30,
-						column: 13,
-						end_line: 30,
-						end_column: 72,
-					},
+					source_line: 30,
 					type_signature:
 						'{ get: () => Docs_Links; set: (value?: Docs_Links | undefined) => Docs_Links; }',
 				},
 				{
 					name: 'Docs_Link_Tag',
 					kind: 'type',
-					source_location: {
-						line: 32,
-						column: 0,
-						end_line: 32,
-						end_column: 40,
-					},
+					source_line: 32,
 					type_signature: 'Docs_Link_Tag',
 				},
 				{
 					name: 'Docs_Link',
 					kind: 'type',
-					source_location: {
-						line: 34,
-						column: 0,
-						end_line: 40,
-						end_column: 1,
-					},
+					source_line: 34,
 					type_signature: 'Docs_Link',
 					properties: [
 						{
@@ -4031,12 +3225,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Docs_Links',
 					kind: 'class',
-					source_location: {
-						line: 42,
-						column: 0,
-						end_line: 88,
-						end_column: 1,
-					},
+					source_line: 42,
 					members: [
 						{
 							name: 'root_path',
@@ -4099,14 +3288,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Renders any value to a string representation',
 					summary: 'Renders any value to a string representation',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 7,
-						column: 13,
-						end_line: 16,
-						end_column: 1,
-					},
+					source_line: 7,
 					type_signature: '(value: unknown): string',
 					return_type: 'string',
 					return_description: 'A string representation of the value',
@@ -4120,7 +3302,6 @@ export const src_json: Src_Json = {
 					],
 				},
 			],
-			imports: [],
 			module_comment:
 				'Renders any value to a string representation\n\n@param value Any JS value to stringify\n@returns A string representation of the value',
 			imported_by: [
@@ -4140,12 +3321,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Intersect_Params',
 					kind: 'type',
-					source_location: {
-						line: 3,
-						column: 0,
-						end_line: 24,
-						end_column: 1,
-					},
+					source_line: 3,
 					type_signature: 'Intersect_Params',
 					properties: [
 						{
@@ -4188,23 +3364,13 @@ export const src_json: Src_Json = {
 				{
 					name: 'Intersect_Params_Or_Callback',
 					kind: 'type',
-					source_location: {
-						line: 26,
-						column: 0,
-						end_line: 26,
-						end_column: 75,
-					},
+					source_line: 26,
 					type_signature: 'Intersect_Params_Or_Callback',
 				},
 				{
 					name: 'intersect',
 					kind: 'function',
-					source_location: {
-						line: 29,
-						column: 13,
-						end_line: 98,
-						end_column: 1,
-					},
+					source_line: 29,
 					type_signature:
 						'<Node extends HTMLElement | SVGElement>(node: Node, parameter: Intersect_Params_Or_Callback | null): void | ActionReturn<Intersect_Params_Or_Callback | null, Record<...>>',
 					return_type:
@@ -4220,23 +3386,13 @@ export const src_json: Src_Json = {
 				{
 					name: 'On_Intersect',
 					kind: 'type',
-					source_location: {
-						line: 101,
-						column: 0,
-						end_line: 101,
-						end_column: 60,
-					},
+					source_line: 101,
 					type_signature: 'On_Intersect',
 				},
 				{
 					name: 'Intersect_State',
 					kind: 'type',
-					source_location: {
-						line: 103,
-						column: 0,
-						end_line: 109,
-						end_column: 1,
-					},
+					source_line: 103,
 					type_signature: 'Intersect_State',
 					properties: [
 						{
@@ -4269,23 +3425,13 @@ export const src_json: Src_Json = {
 				{
 					name: 'On_Disconnect',
 					kind: 'type',
-					source_location: {
-						line: 112,
-						column: 0,
-						end_line: 112,
-						end_column: 62,
-					},
+					source_line: 112,
 					type_signature: 'On_Disconnect',
 				},
 				{
 					name: 'Disconnect_State',
 					kind: 'type',
-					source_location: {
-						line: 114,
-						column: 0,
-						end_line: 119,
-						end_column: 1,
-					},
+					source_line: 114,
 					type_signature: 'Disconnect_State',
 					properties: [
 						{
@@ -4319,199 +3465,109 @@ export const src_json: Src_Json = {
 				{
 					name: 'zzz_logo',
 					kind: 'variable',
-					source_location: {
-						line: 22,
-						column: 13,
-						end_line: 36,
-						end_column: 20,
-					},
+					source_line: 22,
 					type_signature: 'Svg_Data',
 				},
 				{
 					name: 'gro_logo',
 					kind: 'variable',
-					source_location: {
-						line: 38,
-						column: 13,
-						end_line: 70,
-						end_column: 20,
-					},
+					source_line: 38,
 					type_signature: 'Svg_Data',
 				},
 				{
 					name: 'fuz_logo',
 					kind: 'variable',
-					source_location: {
-						line: 72,
-						column: 13,
-						end_line: 80,
-						end_column: 20,
-					},
+					source_line: 72,
 					type_signature: 'Svg_Data',
 				},
 				{
 					name: 'moss_logo',
 					kind: 'variable',
-					source_location: {
-						line: 82,
-						column: 13,
-						end_line: 87,
-						end_column: 20,
-					},
+					source_line: 82,
 					type_signature: 'Svg_Data',
 				},
 				{
 					name: 'belt_logo',
 					kind: 'variable',
-					source_location: {
-						line: 89,
-						column: 13,
-						end_line: 113,
-						end_column: 20,
-					},
+					source_line: 89,
 					type_signature: 'Svg_Data',
 				},
 				{
 					name: 'fuz_code_logo',
 					kind: 'variable',
-					source_location: {
-						line: 115,
-						column: 13,
-						end_line: 119,
-						end_column: 20,
-					},
+					source_line: 115,
 					type_signature: 'Svg_Data',
 				},
 				{
 					name: 'fuz_blog_logo',
 					kind: 'variable',
-					source_location: {
-						line: 121,
-						column: 13,
-						end_line: 125,
-						end_column: 20,
-					},
+					source_line: 121,
 					type_signature: 'Svg_Data',
 				},
 				{
 					name: 'fuz_mastodon_logo',
 					kind: 'variable',
-					source_location: {
-						line: 127,
-						column: 13,
-						end_line: 131,
-						end_column: 20,
-					},
+					source_line: 127,
 					type_signature: 'Svg_Data',
 				},
 				{
 					name: 'fuz_gitops_logo',
 					kind: 'variable',
-					source_location: {
-						line: 133,
-						column: 13,
-						end_line: 137,
-						end_column: 20,
-					},
+					source_line: 133,
 					type_signature: 'Svg_Data',
 				},
 				{
 					name: 'fuz_template_logo',
 					kind: 'variable',
-					source_location: {
-						line: 139,
-						column: 13,
-						end_line: 147,
-						end_column: 20,
-					},
+					source_line: 139,
 					type_signature: 'Svg_Data',
 				},
 				{
 					name: 'webdevladder_logo',
 					kind: 'variable',
-					source_location: {
-						line: 149,
-						column: 13,
-						end_line: 163,
-						end_column: 20,
-					},
+					source_line: 149,
 					type_signature: 'Svg_Data',
 				},
 				{
 					name: 'earbetter_logo',
 					kind: 'variable',
-					source_location: {
-						line: 165,
-						column: 13,
-						end_line: 173,
-						end_column: 20,
-					},
+					source_line: 165,
 					type_signature: 'Svg_Data',
 				},
 				{
 					name: 'spiderspace_logo',
 					kind: 'variable',
-					source_location: {
-						line: 175,
-						column: 13,
-						end_line: 235,
-						end_column: 20,
-					},
+					source_line: 175,
 					type_signature: 'Svg_Data',
 				},
 				{
 					name: 'github_logo',
 					kind: 'variable',
-					source_location: {
-						line: 237,
-						column: 13,
-						end_line: 248,
-						end_column: 20,
-					},
+					source_line: 237,
 					type_signature: 'Svg_Data',
 				},
 				{
 					name: 'mdn_logo',
 					kind: 'variable',
-					source_location: {
-						line: 250,
-						column: 13,
-						end_line: 258,
-						end_column: 20,
-					},
+					source_line: 250,
 					type_signature: 'Svg_Data',
 				},
 				{
 					name: 'chatgpt_logo',
 					kind: 'variable',
-					source_location: {
-						line: 260,
-						column: 13,
-						end_line: 267,
-						end_column: 20,
-					},
+					source_line: 260,
 					type_signature: 'Svg_Data',
 				},
 				{
 					name: 'claude_logo',
 					kind: 'variable',
-					source_location: {
-						line: 269,
-						column: 13,
-						end_line: 277,
-						end_column: 20,
-					},
+					source_line: 269,
 					type_signature: 'Svg_Data',
 				},
 				{
 					name: 'gemini_logo',
 					kind: 'variable',
-					source_location: {
-						line: 279,
-						column: 13,
-						end_line: 302,
-						end_column: 20,
-					},
+					source_line: 279,
 					type_signature: 'Svg_Data',
 				},
 			],
@@ -4527,14 +3583,7 @@ export const src_json: Src_Json = {
 						'Combines `package_json` and `src_json` into a more convenient format.\nThis is our own version that uses our extended Src_Json type.',
 					summary:
 						'Combines `package_json` and `src_json` into a more convenient format.\nThis is our own version that uses our extended Src_Json type.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 12,
-						column: 0,
-						end_line: 28,
-						end_column: 1,
-					},
+					source_line: 12,
 					type_signature: 'Pkg',
 					properties: [
 						{
@@ -4604,12 +3653,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'parse_pkg',
 					kind: 'function',
-					source_location: {
-						line: 30,
-						column: 13,
-						end_line: 87,
-						end_column: 1,
-					},
+					source_line: 30,
 					type_signature:
 						'(package_json: { [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }, src_json: Src_Json): Pkg',
 					return_type: 'Pkg',
@@ -4629,12 +3673,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'parse_repo_name',
 					kind: 'function',
-					source_location: {
-						line: 90,
-						column: 13,
-						end_line: 99,
-						end_column: 1,
-					},
+					source_line: 90,
 					type_signature: '(name: string): string',
 					return_type: 'string',
 					parameters: [
@@ -4648,12 +3687,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'parse_org_url',
 					kind: 'function',
-					source_location: {
-						line: 101,
-						column: 13,
-						end_line: 109,
-						end_column: 1,
-					},
+					source_line: 101,
 					type_signature: '(pkg: Pkg): string | null',
 					return_type: 'string | null',
 					parameters: [
@@ -4667,12 +3701,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'pkg_context',
 					kind: 'variable',
-					source_location: {
-						line: 111,
-						column: 13,
-						end_line: 111,
-						end_column: 48,
-					},
+					source_line: 111,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Pkg; maybe_get: () => Pkg | undefined; set: (value: Pkg) => Pkg; }',
 				},
@@ -4696,14 +3725,7 @@ export const src_json: Src_Json = {
 						'Runs `fn` in an `$effect`, passing `true` as the `skip` argument for the first `count` runs.\nCalls `fn` even when skipping so callers can read any dependent signals.',
 					summary:
 						'Runs `fn` in an `$effect`, passing `true` as the `skip` argument for the first `count` runs.\nCalls `fn` even when skipping so callers can read any dependent signals.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 5,
-						column: 13,
-						end_line: 10,
-						end_column: 1,
-					},
+					source_line: 5,
 					type_signature: '(fn: (count: number) => void, initial?: number): void',
 					return_type: 'void',
 					parameters: [
@@ -4721,7 +3743,6 @@ export const src_json: Src_Json = {
 					],
 				},
 			],
-			imports: [],
 			module_comment:
 				'Runs `fn` in an `$effect`, passing `true` as the `skip` argument for the first `count` runs.\nCalls `fn` even when skipping so callers can read any dependent signals.',
 		},
@@ -4733,18 +3754,12 @@ export const src_json: Src_Json = {
 					kind: 'type',
 					doc_comment: 'Source code metadata types\n\nOriginally inlined from',
 					summary: 'Source code metadata types',
-					examples: [],
 					see_also: [
 						'for JSDoc/TSDoc parsing',
 						'for TypeScript AST extraction',
 						'for Svelte component analysis',
 					],
-					source_location: {
-						line: 17,
-						column: 0,
-						end_line: 24,
-						end_column: 9,
-					},
+					source_line: 17,
 					type_signature: 'Src_Module_Declaration_Kind',
 				},
 				{
@@ -4753,14 +3768,7 @@ export const src_json: Src_Json = {
 					doc_comment:
 						'Parameter information for functions and methods\n\nNote: Kept distinct from Component_Prop_Info despite structural similarity.\nFunction parameters form a tuple - the collection has positional semantics:\n- Calling order matters: `fn(a, b)` vs `fn(b, a)`\n- May include rest parameters, destructuring patterns\n- Individual parameters are named, but position-dependent',
 					summary: 'Parameter information for functions and methods',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 35,
-						column: 0,
-						end_line: 41,
-						end_column: 1,
-					},
+					source_line: 35,
 					type_signature: 'Parameter_Info',
 					properties: [
 						{
@@ -4796,14 +3804,7 @@ export const src_json: Src_Json = {
 					doc_comment:
 						'Component prop information for Svelte components\n\nNote: Kept distinct from Parameter_Info despite structural similarity.\nComponent props are passed as named attributes with different semantics:\n- No positional order when passing: `<Foo {a} {b} />` = `<Foo {b} {a} />`\n- Support two-way binding via $bindable rune\n- Different runtime behavior and constraints',
 					summary: 'Component prop information for Svelte components',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 52,
-						column: 0,
-						end_line: 58,
-						end_column: 1,
-					},
+					source_line: 52,
 					type_signature: 'Component_Prop_Info',
 					properties: [
 						{
@@ -4838,14 +3839,7 @@ export const src_json: Src_Json = {
 					kind: 'type',
 					doc_comment: 'Generic type parameter information',
 					summary: 'Generic type parameter information',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 63,
-						column: 0,
-						end_line: 70,
-						end_column: 1,
-					},
+					source_line: 63,
 					type_signature: 'Generic_Param_Info',
 					properties: [
 						{
@@ -4872,55 +3866,11 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'Source_Location',
-					kind: 'type',
-					doc_comment: 'Source location information within a file',
-					summary: 'Source location information within a file',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 75,
-						column: 0,
-						end_line: 80,
-						end_column: 1,
-					},
-					type_signature: 'Source_Location',
-					properties: [
-						{
-							name: 'line',
-							kind: 'variable',
-							type_signature: 'number',
-						},
-						{
-							name: 'column',
-							kind: 'variable',
-							type_signature: 'number',
-						},
-						{
-							name: 'end_line',
-							kind: 'variable',
-							type_signature: 'number',
-						},
-						{
-							name: 'end_column',
-							kind: 'variable',
-							type_signature: 'number',
-						},
-					],
-				},
-				{
 					name: 'Src_Module_Declaration',
 					kind: 'type',
 					doc_comment: 'Declaration metadata with rich TypeScript/JSDoc information',
 					summary: 'Declaration metadata with rich TypeScript/JSDoc information',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 85,
-						column: 0,
-						end_line: 128,
-						end_column: 1,
-					},
+					source_line: 75,
 					type_signature: 'Src_Module_Declaration',
 					properties: [
 						{
@@ -4959,11 +3909,11 @@ export const src_json: Src_Json = {
 							summary: 'Full TypeScript type signature',
 						},
 						{
-							name: 'source_location',
+							name: 'source_line',
 							kind: 'variable',
-							type_signature: 'Source_Location',
-							doc_comment: 'Source location within the file',
-							summary: 'Source location within the file',
+							type_signature: 'number',
+							doc_comment: 'Source line number within the file',
+							summary: 'Source line number within the file',
 						},
 						{
 							name: 'parameters',
@@ -5070,14 +4020,7 @@ export const src_json: Src_Json = {
 					kind: 'type',
 					doc_comment: 'Module information with metadata',
 					summary: 'Module information with metadata',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 133,
-						column: 0,
-						end_line: 144,
-						end_column: 1,
-					},
+					source_line: 123,
 					type_signature: 'Src_Module',
 					properties: [
 						{
@@ -5122,14 +4065,7 @@ export const src_json: Src_Json = {
 					kind: 'type',
 					doc_comment: 'Collection of modules indexed by path',
 					summary: 'Collection of modules indexed by path',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 149,
-						column: 0,
-						end_line: 149,
-						end_column: 53,
-					},
+					source_line: 139,
 					type_signature: 'Src_Modules',
 				},
 				{
@@ -5137,16 +4073,10 @@ export const src_json: Src_Json = {
 					kind: 'type',
 					doc_comment: 'Top-level source metadata',
 					summary: 'Top-level source metadata',
-					examples: [],
 					see_also: [
 						'://github.com/ryanatkn/gro/blob/main/src/docs/gro_plugin_sveltekit_app.md#well-known-src',
 					],
-					source_location: {
-						line: 155,
-						column: 0,
-						end_line: 162,
-						end_column: 1,
-					},
+					source_line: 145,
 					type_signature: 'Src_Json',
 					properties: [
 						{
@@ -5177,14 +4107,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: "Helper to get a declaration's display name",
 					summary: "Helper to get a declaration's display name",
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 167,
-						column: 13,
-						end_line: 180,
-						end_column: 1,
-					},
+					source_line: 157,
 					type_signature: '(decl: Src_Module_Declaration): string',
 					return_type: 'string',
 					parameters: [
@@ -5200,14 +4123,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Helper to get a short type summary for tooltips',
 					summary: 'Helper to get a short type summary for tooltips',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 185,
-						column: 13,
-						end_line: 194,
-						end_column: 1,
-					},
+					source_line: 175,
 					type_signature: '(decl: Src_Module_Declaration): string | undefined',
 					return_type: 'string | undefined',
 					parameters: [
@@ -5223,14 +4139,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Generate import statement for a declaration',
 					summary: 'Generate import statement for a declaration',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 199,
-						column: 13,
-						end_line: 218,
-						end_column: 1,
-					},
+					source_line: 189,
 					type_signature:
 						'(decl: Src_Module_Declaration, module_path: string, pkg_name: string): string',
 					return_type: 'string',
@@ -5253,7 +4162,6 @@ export const src_json: Src_Json = {
 					],
 				},
 			],
-			imports: [],
 			module_comment:
 				'Source code metadata types\n\nOriginally inlined from @ryanatkn/belt, extended with rich documentation features:\n- Function parameter descriptions and default values\n- Return value documentation\n- JSDoc tag extraction (@ example, @ deprecated, @ see, @ since)\n- Component prop metadata for Svelte\n- Source location tracking\n- Generic type parameters\n\n@see tsdoc_helpers.ts for JSDoc/TSDoc parsing\n@see ts_helpers.ts for TypeScript AST extraction\n@see svelte_helpers.ts for Svelte component analysis',
 			imported_by: [
@@ -5272,14 +4180,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Utility function to save a value to `localStorage`.',
 					summary: 'Utility function to save a value to `localStorage`.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 8,
-						column: 13,
-						end_line: 17,
-						end_column: 1,
-					},
+					source_line: 8,
 					type_signature: '(key: string, value: any, is_json?: boolean): void',
 					return_type: 'void',
 					parameters: [
@@ -5306,14 +4207,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Utility function to load a value from `localStorage` with optional parsing',
 					summary: 'Utility function to load a value from `localStorage` with optional parsing',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 26,
-						column: 13,
-						end_line: 48,
-						end_column: 1,
-					},
+					source_line: 26,
 					type_signature:
 						'<T>(key: string, is_json?: boolean, parse_fn?: ((value: unknown) => T | null) | undefined): T | null',
 					return_type: 'T | null',
@@ -5352,14 +4246,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Analyze a Svelte component from its svelte2tsx transformation.',
 					summary: 'Analyze a Svelte component from its svelte2tsx transformation.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 23,
-						column: 13,
-						end_line: 77,
-						end_column: 1,
-					},
+					source_line: 23,
 					type_signature:
 						'(ts_code: string, source_file: SourceFile, checker: TypeChecker, component_name: string): Src_Module_Declaration',
 					return_type: 'Src_Module_Declaration',
@@ -5397,12 +4284,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Themer',
 					kind: 'class',
-					source_location: {
-						line: 8,
-						column: 0,
-						end_line: 26,
-						end_column: 1,
-					},
+					source_line: 8,
 					members: [
 						{
 							name: 'theme',
@@ -5424,12 +4306,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Themer_Json',
 					kind: 'type',
-					source_location: {
-						line: 28,
-						column: 0,
-						end_line: 31,
-						end_column: 1,
-					},
+					source_line: 28,
 					type_signature: 'Themer_Json',
 					properties: [
 						{
@@ -5447,24 +4324,14 @@ export const src_json: Src_Json = {
 				{
 					name: 'themer_context',
 					kind: 'variable',
-					source_location: {
-						line: 33,
-						column: 13,
-						end_line: 33,
-						end_column: 54,
-					},
+					source_line: 33,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Themer; maybe_get: () => Themer | undefined; set: (value: Themer) => Themer; }',
 				},
 				{
 					name: 'sync_color_scheme',
 					kind: 'function',
-					source_location: {
-						line: 35,
-						column: 13,
-						end_line: 42,
-						end_column: 1,
-					},
+					source_line: 35,
 					type_signature: '(color_scheme: Color_Scheme | null): void',
 					return_type: 'void',
 					parameters: [
@@ -5478,34 +4345,19 @@ export const src_json: Src_Json = {
 				{
 					name: 'COLOR_SCHEME_STORAGE_KEY',
 					kind: 'variable',
-					source_location: {
-						line: 44,
-						column: 13,
-						end_line: 44,
-						end_column: 58,
-					},
+					source_line: 44,
 					type_signature: '"fuz:color-scheme"',
 				},
 				{
 					name: 'THEME_STORAGE_KEY',
 					kind: 'variable',
-					source_location: {
-						line: 45,
-						column: 13,
-						end_line: 45,
-						end_column: 44,
-					},
+					source_line: 45,
 					type_signature: '"fuz:theme"',
 				},
 				{
 					name: 'save_color_scheme',
 					kind: 'function',
-					source_location: {
-						line: 47,
-						column: 13,
-						end_line: 52,
-						end_column: 1,
-					},
+					source_line: 47,
 					type_signature: '(color_scheme: Color_Scheme | null, key?: string): void',
 					return_type: 'void',
 					parameters: [
@@ -5525,12 +4377,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'load_color_scheme',
 					kind: 'function',
-					source_location: {
-						line: 54,
-						column: 13,
-						end_line: 57,
-						end_column: 80,
-					},
+					source_line: 54,
 					type_signature: '(fallback?: Color_Scheme, key?: string): Color_Scheme',
 					return_type: 'Color_Scheme',
 					parameters: [
@@ -5551,12 +4398,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'save_theme',
 					kind: 'function',
-					source_location: {
-						line: 59,
-						column: 13,
-						end_line: 61,
-						end_column: 1,
-					},
+					source_line: 59,
 					type_signature: '(theme: Theme | null, key?: string): void',
 					return_type: 'void',
 					parameters: [
@@ -5576,12 +4418,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'load_theme',
 					kind: 'function',
-					source_location: {
-						line: 63,
-						column: 13,
-						end_line: 64,
-						end_column: 48,
-					},
+					source_line: 63,
 					type_signature: '(fallback?: Theme, key?: string): Theme',
 					return_type: 'Theme',
 					parameters: [
@@ -5614,24 +4451,14 @@ export const src_json: Src_Json = {
 				{
 					name: 'Tome',
 					kind: 'type',
-					source_location: {
-						line: 8,
-						column: 13,
-						end_line: 15,
-						end_column: 2,
-					},
+					source_line: 8,
 					type_signature:
 						'ZodObject<{ name: ZodString; category: ZodString; component: ZodAny; related: ZodArray<ZodString>; }, $strip>',
 				},
 				{
 					name: 'to_tome_pathname',
 					kind: 'function',
-					source_location: {
-						line: 18,
-						column: 13,
-						end_line: 19,
-						end_column: 55,
-					},
+					source_line: 18,
 					type_signature:
 						'(item: { name: string; category: string; component: any; related: string[]; }, docs_path?: string): string',
 					return_type: 'string',
@@ -5652,24 +4479,14 @@ export const src_json: Src_Json = {
 				{
 					name: 'tomes_context',
 					kind: 'variable',
-					source_location: {
-						line: 21,
-						column: 13,
-						end_line: 21,
-						end_column: 64,
-					},
+					source_line: 21,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Map<string, { name: string; category: string; component: any; related: string[]; }>; maybe_get: () => Map<string, { name: string; category: string; component: any; related: string[]; }> | undefined; set: (value: Map<...>) => Map<...>; }',
 				},
 				{
 					name: 'get_tome_by_name',
 					kind: 'function',
-					source_location: {
-						line: 23,
-						column: 13,
-						end_line: 28,
-						end_column: 1,
-					},
+					source_line: 23,
 					type_signature:
 						'(name: string): { name: string; category: string; component: any; related: string[]; }',
 					return_type: '{ name: string; category: string; component: any; related: string[]; }',
@@ -5684,12 +4501,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'tome_context',
 					kind: 'variable',
-					source_location: {
-						line: 30,
-						column: 13,
-						end_line: 30,
-						end_column: 50,
-					},
+					source_line: 30,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => { name: string; category: string; component: any; related: string[]; }; maybe_get: () => { name: string; category: string; component: any; related: string[]; } | undefined; set: (value: { ...; }) => { ...; }; }',
 				},
@@ -5711,14 +4523,7 @@ export const src_json: Src_Json = {
 					doc_comment:
 						'Global tooltip state manager\n\nManages a single tooltip instance that can be shown/hidden\nwith sticky behavior (can move mouse into tooltip)',
 					summary: 'Global tooltip state manager',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 88,
-						column: 0,
-						end_line: 211,
-						end_column: 1,
-					},
+					source_line: 88,
 					members: [
 						{
 							name: 'opened',
@@ -5836,14 +4641,7 @@ export const src_json: Src_Json = {
 					kind: 'variable',
 					doc_comment: 'Tooltip context for accessing global tooltip state',
 					summary: 'Tooltip context for accessing global tooltip state',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 216,
-						column: 13,
-						end_line: 216,
-						end_column: 62,
-					},
+					source_line: 216,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Tooltip_State; maybe_get: () => Tooltip_State | undefined; set: (value: Tooltip_State) => Tooltip_State; }',
 				},
@@ -5860,14 +4658,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Infer declaration kind from symbol and node.',
 					summary: 'Infer declaration kind from symbol and node.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 57,
-						column: 13,
-						end_line: 82,
-						end_column: 1,
-					},
+					source_line: 57,
 					type_signature:
 						'(symbol: Symbol, node: Node): "function" | "type" | "variable" | "class" | null',
 					return_type: '"function" | "type" | "variable" | "class" | null',
@@ -5891,14 +4682,7 @@ export const src_json: Src_Json = {
 						'Extract function/method information including parameters\nwith descriptions and default values.',
 					summary:
 						'Extract function/method information including parameters\nwith descriptions and default values.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 88,
-						column: 13,
-						end_line: 152,
-						end_column: 1,
-					},
+					source_line: 88,
 					type_signature:
 						'(node: Node, symbol: Symbol, checker: TypeChecker, decl: Src_Module_Declaration, tsdoc: Tsdoc_Parsed_Comment | undefined): void',
 					return_type: 'void',
@@ -5935,14 +4719,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Extract type/interface information with rich property metadata.',
 					summary: 'Extract type/interface information with rich property metadata.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 157,
-						column: 13,
-						end_line: 217,
-						end_column: 1,
-					},
+					source_line: 157,
 					type_signature:
 						'(node: Node, _symbol: Symbol, checker: TypeChecker, decl: Src_Module_Declaration): void',
 					return_type: 'void',
@@ -5974,14 +4751,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Extract class information with rich member metadata.',
 					summary: 'Extract class information with rich member metadata.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 222,
-						column: 13,
-						end_line: 292,
-						end_column: 1,
-					},
+					source_line: 222,
 					type_signature:
 						'(node: Node, _symbol: Symbol, checker: TypeChecker, decl: Src_Module_Declaration): void',
 					return_type: 'void',
@@ -6013,14 +4783,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Extract variable information.',
 					summary: 'Extract variable information.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 297,
-						column: 13,
-						end_line: 309,
-						end_column: 1,
-					},
+					source_line: 297,
 					type_signature:
 						'(node: Node, symbol: Symbol, checker: TypeChecker, decl: Src_Module_Declaration): void',
 					return_type: 'void',
@@ -6052,14 +4815,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Extract module-level comment.',
 					summary: 'Extract module-level comment.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 314,
-						column: 13,
-						end_line: 332,
-						end_column: 1,
-					},
+					source_line: 314,
 					type_signature: '(source_file: SourceFile): string | undefined',
 					return_type: 'string | undefined',
 					parameters: [
@@ -6075,14 +4831,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Extract import statements.',
 					summary: 'Extract import statements.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 337,
-						column: 13,
-						end_line: 347,
-						end_column: 1,
-					},
+					source_line: 337,
 					type_signature: '(source_file: SourceFile): string[]',
 					return_type: 'string[]',
 					parameters: [
@@ -6098,14 +4847,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Create TypeScript program for analysis.',
 					summary: 'Create TypeScript program for analysis.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 352,
-						column: 13,
-						end_line: 363,
-						end_column: 1,
-					},
+					source_line: 352,
 					type_signature: '(log: { warn: (message: string) => void; }): Program | null',
 					return_type: 'Program | null',
 					parameters: [
@@ -6129,14 +4871,7 @@ export const src_json: Src_Json = {
 					kind: 'type',
 					doc_comment: 'Parsed JSDoc/TSDoc comment with structured metadata.',
 					summary: 'Parsed JSDoc/TSDoc comment with structured metadata.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 32,
-						column: 0,
-						end_line: 51,
-						end_column: 1,
-					},
+					source_line: 32,
 					type_signature: 'Tsdoc_Parsed_Comment',
 					properties: [
 						{
@@ -6210,14 +4945,7 @@ export const src_json: Src_Json = {
 					doc_comment:
 						'Parse JSDoc comment from a TypeScript node.\n\nExtracts and parses all JSDoc tags including:\n\n- @ param - parameter descriptions\n- @ returns/@ return - return value description\n- @ throws - error documentation\n- @ example - code examples\n- @ deprecated - deprecation warnings\n- @ see - related references\n- @ since - version information',
 					summary: 'Parse JSDoc comment from a TypeScript node.',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 69,
-						column: 13,
-						end_line: 144,
-						end_column: 1,
-					},
+					source_line: 69,
 					type_signature:
 						'(node: Node, _source_file: SourceFile): Tsdoc_Parsed_Comment | undefined',
 					return_type: 'Tsdoc_Parsed_Comment | undefined',

@@ -50,8 +50,8 @@ export const create_declaration_contextmenu = (
 	});
 
 	// View source on GitHub
-	if (repo_url && decl.source_location) {
-		const source_url = `${repo_url}/blob/main/src/lib/${module_path.replace(/^\.\//, '')}#L${decl.source_location.line}`;
+	if (repo_url && decl.source_line) {
+		const source_url = `${repo_url}/blob/main/src/lib/${module_path.replace(/^\.\//, '')}#L${decl.source_line}`;
 		entries.push({
 			snippet: 'link',
 			props: {

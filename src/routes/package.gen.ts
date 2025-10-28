@@ -115,7 +115,6 @@ export const gen: Gen = async ({log, filer}) => {
 				const mod: Src_Module = {
 					path: module_path,
 					declarations: [],
-					imports: [],
 				};
 
 				// Use svelte2tsx to transform Svelte component to TS (not TSX) for analysis
@@ -185,8 +184,13 @@ export const gen: Gen = async ({log, filer}) => {
 			const mod: Src_Module = {
 				path: module_path,
 				declarations: [],
-				imports: ts_extract_imports(source_file),
 			};
+
+			// Only assign imports if non-empty
+			const imports = ts_extract_imports(source_file);
+			if (imports.length) {
+				mod.imports = imports;
+			}
 
 			// Extract module-level comment
 			const module_comment = ts_extract_module_comment(source_file);
@@ -270,10 +274,14 @@ const enhance_declaration = (
 		if (tsdoc) {
 			result.doc_comment = tsdoc.full_text;
 			result.summary = tsdoc.summary;
-			result.examples = tsdoc.examples;
+			if (tsdoc.examples?.length) {
+				result.examples = tsdoc.examples;
+			}
 			result.deprecated_message = tsdoc.deprecated_message;
-			result.see_also = tsdoc.see_also;
-			if (tsdoc.throws.length) {
+			if (tsdoc.see_also?.length) {
+				result.see_also = tsdoc.see_also;
+			}
+			if (tsdoc.throws?.length) {
 				result.throws = tsdoc.throws;
 			}
 			if (tsdoc.since) {
@@ -281,18 +289,10 @@ const enhance_declaration = (
 			}
 		}
 
-		// Extract source location
+		// Extract source line
 		const start = decl_node.getStart(source_file);
-		const end = decl_node.getEnd();
 		const start_pos = source_file.getLineAndCharacterOfPosition(start);
-		const end_pos = source_file.getLineAndCharacterOfPosition(end);
-
-		result.source_location = {
-			line: start_pos.line + 1,
-			column: start_pos.character,
-			end_line: end_pos.line + 1,
-			end_column: end_pos.character,
-		};
+		result.source_line = start_pos.line + 1;
 
 		// Extract type-specific info
 		if (result.kind === 'function') {
