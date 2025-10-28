@@ -9,8 +9,6 @@ import type {Attachment} from 'svelte/attachments';
 import {Dimensions} from '$lib/dimensions.svelte.js';
 import {create_context} from '$lib/context_helpers.js';
 
-// TODO use $state.raw for the arrays here, maybe other data structure refactoring too
-
 export type Contextmenu_Params =
 	| Snippet
 	// TODO maybe this should be generic?
@@ -54,7 +52,7 @@ export class Submenu_State {
 	readonly depth: number;
 
 	selected: boolean = $state(false);
-	items: Array<Item_State> = $state([]);
+	items: ReadonlyArray<Item_State> = $state.raw([]);
 
 	constructor(menu: Submenu_State | Root_Menu_State, depth: number) {
 		this.menu = menu;
@@ -67,7 +65,7 @@ export class Root_Menu_State {
 	readonly menu = null;
 	readonly depth = 1;
 
-	items: Array<Item_State> = $state([]);
+	items: ReadonlyArray<Item_State> = $state.raw([]);
 }
 
 export type Contextmenu_Run = () =>
@@ -96,15 +94,15 @@ export class Contextmenu_State {
 	opened: boolean = $state(false);
 	x: number = $state(0);
 	y: number = $state(0);
-	params: Array<Contextmenu_Params> = $state([]);
+	params: ReadonlyArray<Contextmenu_Params> = $state.raw([]);
 	error: string | undefined = $state();
 
-	// These two properties are mutated internally.
+	// These arrays use immutable updates (reassignment, not mutation).
 	// If you need reactivity, use `$contextmenu` in a reactive statement to react to all changes, and
-	// then access the mutable non-reactive  `contextmenu.root_menu` and `contextmenu.selections`.
+	// then access the immutable `contextmenu.root_menu` and `contextmenu.selections`.
 	// See `Contextmenu_Entry.svelte` and `Contextmenu_Submenu.svelte` for reactive usage examples.
 	readonly root_menu: Root_Menu_State = new Root_Menu_State();
-	selections: Array<Item_State> = $state([]);
+	selections: ReadonlyArray<Item_State> = $state.raw([]);
 
 	can_collapse = $derived(this.selections.length > 1);
 
@@ -138,7 +136,7 @@ export class Contextmenu_State {
 	}
 
 	open(params: Array<Contextmenu_Params>, x: number, y: number): void {
-		this.selections.length = 0;
+		this.selections = [];
 		this.opened = true;
 		this.x = x;
 		this.y = y;
@@ -151,7 +149,7 @@ export class Contextmenu_State {
 		this.opened = false;
 	}
 
-	reset_items(items: Array<Item_State>): void {
+	reset_items(items: ReadonlyArray<Item_State>): void {
 		for (const item of items) {
 			if (item.is_menu) {
 				this.reset_items(item.items);
@@ -251,18 +249,20 @@ export class Contextmenu_State {
 	select(item: Item_State): void {
 		if (this.selections.at(-1) === item) return;
 		for (const s of this.selections) s.selected = false;
-		this.selections.length = 0;
+		const new_selections: Array<Item_State> = [];
 		let i: Item_State | Root_Menu_State = item;
 		do {
 			i.selected = true;
-			this.selections.unshift(i);
+			new_selections.unshift(i);
 		} while ((i = i.menu) && i.menu); // eslint-disable-line @typescript-eslint/no-unnecessary-condition
+		this.selections = new_selections;
 	}
 
 	collapse_selected(): void {
 		if (!this.can_collapse) return;
-		const deselected = this.selections.pop()!;
+		const deselected = this.selections.at(-1)!;
 		deselected.selected = false;
+		this.selections = this.selections.slice(0, -1);
 	}
 
 	expand_selected(): void {
@@ -271,7 +271,7 @@ export class Contextmenu_State {
 		if (!parent?.is_menu || !parent.items.length) return;
 		const selected = parent.items[0]!;
 		selected.selected = true;
-		this.selections.push(selected);
+		this.selections = [...this.selections, selected];
 	}
 
 	select_next(): void {
@@ -312,10 +312,10 @@ export class Contextmenu_State {
 	add_entry(run: () => Contextmenu_Run, disabled: () => boolean = () => false): Entry_State {
 		const menu = contextmenu_submenu_context.maybe_get() ?? this.root_menu;
 		const entry = new Entry_State(menu, run, disabled);
-		menu.items.push(entry);
+		menu.items = [...menu.items, entry];
 		// TODO messy, runs more than needed
 		onDestroy(() => {
-			menu.items.length = 0;
+			menu.items = [];
 		});
 		return entry;
 	}
@@ -326,11 +326,11 @@ export class Contextmenu_State {
 	add_submenu(): Submenu_State {
 		const menu = contextmenu_submenu_context.maybe_get() ?? this.root_menu;
 		const submenu = new Submenu_State(menu, menu.depth + 1);
-		menu.items.push(submenu);
+		menu.items = [...menu.items, submenu];
 		contextmenu_submenu_context.set(submenu);
 		// TODO messy, runs more than needed
 		onDestroy(() => {
-			menu.items.length = 0;
+			menu.items = [];
 		});
 		return submenu;
 	}
