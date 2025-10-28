@@ -5173,14 +5173,14 @@ export const src_json: Src_Json = {
 				{
 					name: 'svelte_analyze_component',
 					kind: 'function',
-					doc_comment: 'Analyze a Svelte component from its TSX transformation',
-					summary: 'Analyze a Svelte component from its TSX transformation',
+					doc_comment: 'Analyze a Svelte component from its TSX transformation.',
+					summary: 'Analyze a Svelte component from its TSX transformation.',
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 19,
+						line: 21,
 						column: 13,
-						end_line: 74,
+						end_line: 76,
 						end_column: 1,
 					},
 					type_signature:
@@ -5213,7 +5213,7 @@ export const src_json: Src_Json = {
 			],
 			imports: ['typescript', './src_json.js', './tsdoc_helpers.js'],
 			module_comment:
-				'Svelte component analysis helpers using svelte2tsx\n\nProvides utilities for extracting metadata from Svelte components:\n- Component props with types and TSDoc\n- Component-level documentation\n- Type information from TypeScript\n\nAll functions are prefixed with `svelte_` for clarity.',
+				'Svelte component analysis helpers using svelte2tsx.\n\nProvides utilities for extracting metadata from Svelte components:\n\n- component props with types and TSDoc\n- component-level documentation\n- type information from TypeScript\n\nAll functions are prefixed with `svelte_` for clarity.',
 		},
 		'./test_helpers.ts': {
 			path: 'test_helpers.ts',
@@ -5936,14 +5936,14 @@ export const src_json: Src_Json = {
 				{
 					name: 'ts_infer_declaration_kind',
 					kind: 'function',
-					doc_comment: 'Infer declaration kind from symbol and node',
-					summary: 'Infer declaration kind from symbol and node',
+					doc_comment: 'Infer declaration kind from symbol and node.',
+					summary: 'Infer declaration kind from symbol and node.',
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 54,
+						line: 57,
 						column: 13,
-						end_line: 79,
+						end_line: 82,
 						end_column: 1,
 					},
 					type_signature:
@@ -5967,15 +5967,15 @@ export const src_json: Src_Json = {
 					name: 'ts_extract_function_info',
 					kind: 'function',
 					doc_comment:
-						'Extract function/method information including parameters with descriptions and default values',
+						'Extract function/method information including parameters\nwith descriptions and default values.',
 					summary:
-						'Extract function/method information including parameters with descriptions and default values',
+						'Extract function/method information including parameters\nwith descriptions and default values.',
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 84,
+						line: 88,
 						column: 13,
-						end_line: 148,
+						end_line: 152,
 						end_column: 1,
 					},
 					type_signature:
@@ -6013,14 +6013,14 @@ export const src_json: Src_Json = {
 				{
 					name: 'ts_extract_type_info',
 					kind: 'function',
-					doc_comment: 'Extract type/interface information with rich property metadata',
-					summary: 'Extract type/interface information with rich property metadata',
+					doc_comment: 'Extract type/interface information with rich property metadata.',
+					summary: 'Extract type/interface information with rich property metadata.',
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 153,
+						line: 157,
 						column: 13,
-						end_line: 213,
+						end_line: 217,
 						end_column: 1,
 					},
 					type_signature:
@@ -6053,14 +6053,14 @@ export const src_json: Src_Json = {
 				{
 					name: 'ts_extract_class_info',
 					kind: 'function',
-					doc_comment: 'Extract class information with rich member metadata',
-					summary: 'Extract class information with rich member metadata',
+					doc_comment: 'Extract class information with rich member metadata.',
+					summary: 'Extract class information with rich member metadata.',
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 218,
+						line: 222,
 						column: 13,
-						end_line: 288,
+						end_line: 292,
 						end_column: 1,
 					},
 					type_signature:
@@ -6093,14 +6093,14 @@ export const src_json: Src_Json = {
 				{
 					name: 'ts_extract_variable_info',
 					kind: 'function',
-					doc_comment: 'Extract variable information',
-					summary: 'Extract variable information',
+					doc_comment: 'Extract variable information.',
+					summary: 'Extract variable information.',
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 293,
+						line: 297,
 						column: 13,
-						end_line: 305,
+						end_line: 309,
 						end_column: 1,
 					},
 					type_signature:
@@ -6133,14 +6133,14 @@ export const src_json: Src_Json = {
 				{
 					name: 'ts_is_exported',
 					kind: 'function',
-					doc_comment: 'Check if node is exported',
-					summary: 'Check if node is exported',
+					doc_comment: 'Check if node is exported.',
+					summary: 'Check if node is exported.',
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 310,
+						line: 314,
 						column: 13,
-						end_line: 316,
+						end_line: 320,
 						end_column: 1,
 					},
 					type_signature: '(node: Node): boolean',
@@ -6157,14 +6157,14 @@ export const src_json: Src_Json = {
 				{
 					name: 'ts_extract_module_comment',
 					kind: 'function',
-					doc_comment: 'Extract module-level comment',
-					summary: 'Extract module-level comment',
+					doc_comment: 'Extract module-level comment.',
+					summary: 'Extract module-level comment.',
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 321,
+						line: 325,
 						column: 13,
-						end_line: 339,
+						end_line: 343,
 						end_column: 1,
 					},
 					type_signature: '(source_file: SourceFile): string | undefined',
@@ -6181,14 +6181,14 @@ export const src_json: Src_Json = {
 				{
 					name: 'ts_extract_imports',
 					kind: 'function',
-					doc_comment: 'Extract import statements',
-					summary: 'Extract import statements',
+					doc_comment: 'Extract import statements.',
+					summary: 'Extract import statements.',
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 344,
+						line: 348,
 						column: 13,
-						end_line: 354,
+						end_line: 358,
 						end_column: 1,
 					},
 					type_signature: '(source_file: SourceFile): string[]',
@@ -6205,22 +6205,22 @@ export const src_json: Src_Json = {
 				{
 					name: 'ts_create_program',
 					kind: 'function',
-					doc_comment: 'Create TypeScript program for analysis',
-					summary: 'Create TypeScript program for analysis',
+					doc_comment: 'Create TypeScript program for analysis.',
+					summary: 'Create TypeScript program for analysis.',
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 359,
+						line: 363,
 						column: 13,
-						end_line: 370,
+						end_line: 374,
 						end_column: 1,
 					},
-					type_signature: '(log: any): Program | null',
+					type_signature: '(log: { warn: (message: string) => void; }): Program | null',
 					return_type: 'Program | null',
 					parameters: [
 						{
 							name: 'log',
-							type: 'any',
+							type: '{ warn: (message: string) => void; }',
 							optional: false,
 						},
 					],
@@ -6229,7 +6229,7 @@ export const src_json: Src_Json = {
 			],
 			imports: ['typescript', './src_json.js', './tsdoc_helpers.js'],
 			module_comment:
-				'TypeScript Compiler API helpers for extracting metadata from source code\n\nAll functions are prefixed with `ts_` for clarity.',
+				'TypeScript compiler API helpers for extracting metadata from source code.\n\nAll functions are prefixed with `ts_` for clarity.',
 		},
 		'./tsdoc_helpers.ts': {
 			path: 'tsdoc_helpers.ts',
@@ -6237,8 +6237,8 @@ export const src_json: Src_Json = {
 				{
 					name: 'Tsdoc_Parsed_Comment',
 					kind: 'type',
-					doc_comment: 'Parsed JSDoc/TSDoc comment with structured metadata',
-					summary: 'Parsed JSDoc/TSDoc comment with structured metadata',
+					doc_comment: 'Parsed JSDoc/TSDoc comment with structured metadata.',
+					summary: 'Parsed JSDoc/TSDoc comment with structured metadata.',
 					examples: [],
 					see_also: [],
 					source_location: {
@@ -6319,14 +6319,14 @@ export const src_json: Src_Json = {
 					name: 'tsdoc_parse',
 					kind: 'function',
 					doc_comment:
-						'Parse JSDoc comment from a TypeScript node\n\nExtracts and parses all JSDoc tags including:\n- @ param - parameter descriptions\n- @ returns/@ return - return value description\n- @ throws - error documentation\n- @ example - code examples\n- @ deprecated - deprecation warnings\n- @ see - related references\n- @ since - version information',
-					summary: 'Parse JSDoc comment from a TypeScript node',
+						'Parse JSDoc comment from a TypeScript node.\n\nExtracts and parses all JSDoc tags including:\n\n- @ param - parameter descriptions\n- @ returns/@ return - return value description\n- @ throws - error documentation\n- @ example - code examples\n- @ deprecated - deprecation warnings\n- @ see - related references\n- @ since - version information',
+					summary: 'Parse JSDoc comment from a TypeScript node.',
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 46,
+						line: 47,
 						column: 13,
-						end_line: 121,
+						end_line: 122,
 						end_column: 1,
 					},
 					type_signature:
@@ -6350,14 +6350,14 @@ export const src_json: Src_Json = {
 					name: 'tsdoc_parse_from_text',
 					kind: 'function',
 					doc_comment:
-						'Parse JSDoc comment from raw comment text (for Svelte files)\n\nParses JSDoc tags from plain text without TypeScript Compiler API.\nUseful for extracting documentation from Svelte component comments.',
-					summary: 'Parse JSDoc comment from raw comment text (for Svelte files)',
+						'Parse JSDoc comment from raw comment text (for Svelte files).\n\nParses JSDoc tags from plain text without TypeScript Compiler API.\nUseful for extracting documentation from Svelte component comments.',
+					summary: 'Parse JSDoc comment from raw comment text (for Svelte files).',
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 129,
+						line: 130,
 						column: 13,
-						end_line: 216,
+						end_line: 217,
 						end_column: 1,
 					},
 					type_signature: '(text: string): Tsdoc_Parsed_Comment | undefined',
@@ -6374,7 +6374,7 @@ export const src_json: Src_Json = {
 			],
 			imports: ['typescript'],
 			module_comment:
-				'TSDoc/JSDoc parsing helpers\n\nPure JSDoc/TSDoc parsing utilities with no TypeScript Compiler API dependencies.\nAll functions are prefixed with `tsdoc_` for clarity.',
+				'TSDoc/JSDoc parsing helpers.\n\nPure JSDoc/TSDoc parsing utilities with no TypeScript Compiler API dependencies.\nAll functions are prefixed with `tsdoc_` for clarity.',
 			imported_by: ['./svelte_helpers.ts', './ts_helpers.ts'],
 		},
 	},
