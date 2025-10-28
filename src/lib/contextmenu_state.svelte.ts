@@ -33,7 +33,7 @@ export class Entry_State {
 	selected: boolean = $state(false);
 	pending: boolean = $state(false);
 	error_message: string | null = $state(null);
-	promise: Promise<any> | null = $state(null);
+	promise: Promise<Contextmenu_Activate_Result> | null = $state.raw(null);
 
 	constructor(
 		menu: Submenu_State | Root_Menu_State,

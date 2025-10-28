@@ -89,7 +89,7 @@ export class Tooltip_State {
 	opened: boolean = $state(false);
 	x: number = $state(0);
 	y: number = $state(0);
-	content: Snippet | null = $state(null);
+	content: Snippet | null = $state.raw(null);
 	/**
 	 * Unique ID for the tooltip element (for aria-describedby)
 	 *
