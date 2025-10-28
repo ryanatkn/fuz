@@ -15,7 +15,7 @@
 import ts from 'typescript';
 
 import type {Src_Module_Declaration, Component_Prop_Info} from './src_json.js';
-import {tsdoc_parse} from './tsdoc_helpers.js';
+import {tsdoc_parse, tsdoc_apply_to_declaration} from './tsdoc_helpers.js';
 
 /**
  * Analyze a Svelte component from its svelte2tsx transformation.
@@ -44,17 +44,7 @@ export const svelte_analyze_component = (
 
 		// Extract component-level TSDoc from svelte2tsx transformed output
 		const component_tsdoc = svelte_extract_component_tsdoc(virtual_source);
-		if (component_tsdoc) {
-			result.doc_comment = component_tsdoc.full_text;
-			result.summary = component_tsdoc.summary;
-			if (component_tsdoc.examples?.length) {
-				result.examples = component_tsdoc.examples;
-			}
-			result.deprecated_message = component_tsdoc.deprecated_message;
-			if (component_tsdoc.see_also?.length) {
-				result.see_also = component_tsdoc.see_also;
-			}
-		}
+		tsdoc_apply_to_declaration(result, component_tsdoc);
 
 		// Extract props from svelte2tsx transformed output
 		const props = svelte_extract_props(virtual_source, checker);

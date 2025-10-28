@@ -142,3 +142,37 @@ export const tsdoc_parse = (
 		since,
 	};
 };
+
+/**
+ * Apply parsed TSDoc metadata to a declaration.
+ *
+ * Consolidates the common pattern of assigning TSDoc fields to declarations,
+ * with conditional assignment for array fields (only if non-empty).
+ *
+ * @param decl - The declaration to update
+ * @param tsdoc - The parsed TSDoc comment (if available)
+ */
+export const tsdoc_apply_to_declaration = (
+	decl: any, // Using any to avoid circular import with src_json.ts
+	tsdoc: Tsdoc_Parsed_Comment | undefined,
+): void => {
+	if (!tsdoc) return;
+
+	decl.doc_comment = tsdoc.full_text;
+	decl.summary = tsdoc.summary;
+	decl.deprecated_message = tsdoc.deprecated_message;
+
+	// Only assign arrays if they have content
+	if (tsdoc.examples?.length) {
+		decl.examples = tsdoc.examples;
+	}
+	if (tsdoc.see_also?.length) {
+		decl.see_also = tsdoc.see_also;
+	}
+	if (tsdoc.throws?.length) {
+		decl.throws = tsdoc.throws;
+	}
+	if (tsdoc.since) {
+		decl.since = tsdoc.since;
+	}
+};

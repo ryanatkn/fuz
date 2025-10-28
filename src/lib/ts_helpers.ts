@@ -202,6 +202,8 @@ export const ts_extract_type_info = (
 				}
 
 				// Extract TSDoc
+				// Note: We don't use tsdoc_apply_to_declaration here because we want to preserve
+				// modifier-based summary (e.g., "readonly", "public") over TSDoc summary
 				const prop_tsdoc = tsdoc_parse(member, node.getSourceFile());
 				if (prop_tsdoc) {
 					prop_decl.doc_comment = prop_tsdoc.full_text;
@@ -278,6 +280,8 @@ export const ts_extract_class_info = (
 			}
 
 			// Extract TSDoc
+			// Note: We don't use tsdoc_apply_to_declaration here because we want to preserve
+			// modifier-based summary (e.g., "private", "static") over TSDoc summary
 			const member_tsdoc = tsdoc_parse(member, node.getSourceFile());
 			if (member_tsdoc) {
 				member_decl.doc_comment = member_tsdoc.full_text;
