@@ -1,11 +1,13 @@
 /**
- * Svelte component analysis helpers using svelte2tsx.
+ * Svelte component analysis helpers.
  *
- * Provides utilities for extracting metadata from Svelte components:
+ * Extracts metadata from Svelte components using svelte2tsx transformations:
  *
- * - component props with types and TSDoc
- * - component-level documentation
- * - type information from TypeScript
+ * - Component props with types and JSDoc
+ * - Component-level documentation
+ * - Type information
+ *
+ * Uses the TypeScript Compiler API to parse the transformed output from svelte2tsx.
  *
  * All functions are prefixed with `svelte_` for clarity.
  */
@@ -13,10 +15,10 @@
 import ts from 'typescript';
 
 import type {Src_Module_Declaration, Component_Prop_Info} from './src_json.js';
-import {tsdoc_parse, tsdoc_parse_from_text} from './tsdoc_helpers.js';
+import {tsdoc_parse} from './tsdoc_helpers.js';
 
 /**
- * Analyze a Svelte component from its TSX transformation.
+ * Analyze a Svelte component from its svelte2tsx transformation.
  */
 export const svelte_analyze_component = (
 	ts_code: string,
@@ -30,7 +32,7 @@ export const svelte_analyze_component = (
 	};
 
 	try {
-		// Create a virtual source file from the TSX code
+		// Create a virtual source file from the svelte2tsx output
 		const virtual_source = ts.createSourceFile(
 			source_file.fileName + '.tsx',
 			ts_code,
@@ -39,8 +41,8 @@ export const svelte_analyze_component = (
 			ts.ScriptKind.TSX,
 		);
 
-		// Extract component-level TSDoc from original source
-		const component_tsdoc = svelte_extract_component_tsdoc(source_file);
+		// Extract component-level TSDoc from svelte2tsx transformed output
+		const component_tsdoc = svelte_extract_component_tsdoc(virtual_source);
 		if (component_tsdoc) {
 			result.doc_comment = component_tsdoc.full_text;
 			result.summary = component_tsdoc.summary;
@@ -49,8 +51,8 @@ export const svelte_analyze_component = (
 			result.see_also = component_tsdoc.see_also;
 		}
 
-		// Extract props from Props interface
-		const props = svelte_extract_props_from_tsx(virtual_source, checker);
+		// Extract props from svelte2tsx transformed output
+		const props = svelte_extract_props(virtual_source, checker);
 		if (props.length > 0) {
 			result.props = props;
 		}
@@ -76,79 +78,125 @@ export const svelte_analyze_component = (
 };
 
 /**
- * Extract component-level TSDoc comment from Svelte source.
+ * Extract component-level TSDoc comment from svelte2tsx transformed output.
+ *
+ * svelte2tsx places component-level JSDoc inside the $$render() function,
+ * attached to a variable statement (usually before the props destructuring).
+ * This function searches the AST recursively to find it.
  */
 const svelte_extract_component_tsdoc = (
 	source_file: ts.SourceFile,
-): ReturnType<typeof tsdoc_parse_from_text> => {
-	// Look for TSDoc comments before <script> tag or at the start of the file
-	const full_text = source_file.getFullText();
-	const leading_comments = ts.getLeadingCommentRanges(full_text, 0);
-	if (!leading_comments?.length) return undefined;
+): ReturnType<typeof tsdoc_parse> => {
+	let found_tsdoc: ReturnType<typeof tsdoc_parse> = undefined;
 
-	let doc_text = '';
+	// Recursively search for component-level JSDoc
+	function visit(node: ts.Node) {
+		if (found_tsdoc) return; // Already found, stop searching
 
-	for (const comment of leading_comments) {
-		const text = full_text.substring(comment.pos, comment.end);
-		doc_text += text + '\n';
+		// Skip PropertySignature nodes - those are prop-level JSDoc, not component-level
+		if (ts.isPropertySignature(node)) {
+			return; // Don't recurse into property signatures
+		}
+
+		// Check for JSDoc on VariableStatement or VariableDeclaration
+		// Component-level JSDoc is attached to these node types
+		if (ts.isVariableStatement(node) || ts.isVariableDeclaration(node)) {
+			const tsdoc = tsdoc_parse(node, source_file);
+			if (tsdoc) {
+				found_tsdoc = tsdoc;
+				return;
+			}
+		}
+
+		// Continue searching child nodes
+		ts.forEachChild(node, visit);
 	}
 
-	return tsdoc_parse_from_text(doc_text.trim());
+	visit(source_file);
+	return found_tsdoc;
 };
 
 /**
- * Extract props from Props interface in TSX.
+ * Helper to extract prop info from a property signature member.
  */
-const svelte_extract_props_from_tsx = (
+const extract_prop_from_member = (
+	member: ts.PropertySignature,
+	source_file: ts.SourceFile,
+	checker: ts.TypeChecker,
+): Component_Prop_Info | undefined => {
+	if (!ts.isIdentifier(member.name)) return undefined;
+
+	const prop_name = member.name.text;
+	const optional = !!member.questionToken;
+
+	// Get type string
+	let type_string = 'any';
+	if (member.type) {
+		type_string = member.type.getText(source_file);
+	} else {
+		// Try to get type from type checker
+		try {
+			const prop_type = checker.getTypeAtLocation(member);
+			type_string = checker.typeToString(prop_type);
+		} catch {
+			// Fallback to 'any'
+		}
+	}
+
+	// Extract TSDoc description
+	let description: string | undefined;
+	const tsdoc = tsdoc_parse(member, source_file);
+	if (tsdoc) {
+		description = tsdoc.summary || tsdoc.full_text;
+	}
+
+	// Extract default value (if available in TSDoc or initializer)
+	let default_value: string | undefined;
+	const default_match = description?.match(/@default\s+(.+)/);
+	if (default_match) {
+		default_value = default_match[1]!.trim();
+	}
+
+	return {
+		name: prop_name,
+		type: type_string,
+		optional,
+		description,
+		default_value,
+	};
+};
+
+/**
+ * Extract props from svelte2tsx transformed output.
+ *
+ * svelte2tsx generates a `$$ComponentProps` type alias containing the component props.
+ * This function extracts prop metadata from that type.
+ */
+const svelte_extract_props = (
 	virtual_source: ts.SourceFile,
 	checker: ts.TypeChecker,
 ): Array<Component_Prop_Info> => {
 	const props: Array<Component_Prop_Info> = [];
 
-	// Find the Props interface
+	// Look for $$ComponentProps type alias or Props interface
 	ts.forEachChild(virtual_source, (node) => {
-		if (ts.isInterfaceDeclaration(node) && node.name.text === 'Props') {
-			// Iterate through interface members
+		// Check for type alias ($$ComponentProps)
+		if (ts.isTypeAliasDeclaration(node) && node.name.text === '$$ComponentProps') {
+			if (ts.isTypeLiteralNode(node.type)) {
+				for (const member of node.type.members) {
+					if (ts.isPropertySignature(member)) {
+						const prop_info = extract_prop_from_member(member, virtual_source, checker);
+						if (prop_info) props.push(prop_info);
+					}
+				}
+			}
+		}
+		// Also check for Props interface (fallback/older format)
+		else if (ts.isInterfaceDeclaration(node) && node.name.text === 'Props') {
 			for (const member of node.members) {
-				if (ts.isPropertySignature(member) && ts.isIdentifier(member.name)) {
-					const prop_name = member.name.text;
-					const optional = !!member.questionToken;
-
-					// Get type string
-					let type_string = 'any';
-					if (member.type) {
-						type_string = member.type.getText(virtual_source);
-					} else {
-						// Try to get type from type checker
-						try {
-							const prop_type = checker.getTypeAtLocation(member);
-							type_string = checker.typeToString(prop_type);
-						} catch {
-							// Fallback to 'any'
-						}
-					}
-
-					// Extract TSDoc description
-					let description: string | undefined;
-					const tsdoc = tsdoc_parse(member, virtual_source);
-					if (tsdoc) {
-						description = tsdoc.summary || tsdoc.full_text;
-					}
-
-					// Extract default value (if available in TSDoc or initializer)
-					let default_value: string | undefined;
-					const default_match = description?.match(/@default\s+(.+)/);
-					if (default_match) {
-						default_value = default_match[1]!.trim();
-					}
-
-					props.push({
-						name: prop_name,
-						type: type_string,
-						optional,
-						description,
-						default_value,
-					});
+				if (ts.isPropertySignature(member)) {
+					const prop_info = extract_prop_from_member(member, virtual_source, checker);
+					if (prop_info) props.push(prop_info);
 				}
 			}
 		}

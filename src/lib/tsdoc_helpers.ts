@@ -1,43 +1,25 @@
 /**
- * TSDoc/JSDoc parsing helpers.
+ * TSDoc/JSDoc parsing helpers using the TypeScript Compiler API.
  *
- * This module provides TWO complementary parsing functions for different use cases:
+ * Provides `tsdoc_parse()` for extracting JSDoc/TSDoc from TypeScript nodes.
  *
- * ## 1. `tsdoc_parse()` - TypeScript Compiler API-based parsing
+ * ## How it works
  *
- * **Use for**: Regular TypeScript files, TSX output from svelte2tsx transformations
+ * Uses TypeScript's built-in `ts.getJSDocCommentsAndTags()` API to extract
+ * structured documentation from AST nodes.
  *
- * **How it works**: Uses TypeScript's built-in `ts.getJSDocCommentsAndTags()` API
+ * ## Behavioral notes (due to TS Compiler API)
  *
- * **Behavioral quirks** (due to TS Compiler API limitations):
  * - Preserves dash separator in @param descriptions: `@param x - desc` → `"- desc"`
- * - @throws tags have {Type} stripped by TS API, regex then extracts first word as type
+ * - @throws tags have {Type} stripped by TS API; regex then extracts first word as type
  * - @see tags return unreliable values ("*" or undefined) from TS API
  *
- * ## 2. `tsdoc_parse_from_text()` - Regex-based parsing from raw text
+ * ## Usage
  *
- * **Use for**: Raw Svelte component JSDoc (appears before `<script>` tag in .svelte files)
- *
- * **How it works**: Uses regex patterns to extract tags from raw comment text
- *
- * **Why needed**: svelte2tsx transforms Svelte → TSX, but component-level JSDoc comments
- * (appearing before `<script>`) don't survive the transformation in a way that's easily
- * parseable by the TypeScript Compiler API. We parse these from the original Svelte source.
- *
- * **Behavioral differences from tsdoc_parse()**:
- * - Strips dash separator from @param: `@param x - desc` → `"desc"`
- * - Correctly extracts @throws {Type} from raw text
- * - Handles @see tags reliably
- *
- * **Used by**: `svelte_extract_component_tsdoc()` in svelte_helpers.ts
- *
- * ## Summary: Why Both Functions?
- *
- * They parse different sources for different contexts:
- * - `tsdoc_parse()` → TypeScript nodes (props, functions in .ts/.tsx files)
- * - `tsdoc_parse_from_text()` → Raw Svelte source (component-level docs in .svelte files)
- *
- * The dual approach is intentional and necessary for comprehensive Svelte+TS documentation.
+ * Works on all TypeScript/TSX nodes, including:
+ * - Regular TypeScript files (.ts, .tsx)
+ * - TSX output from svelte2tsx transformations
+ * - Any node with JSDoc comments in the AST
  *
  * All functions are prefixed with `tsdoc_` for clarity.
  */
@@ -143,118 +125,6 @@ export const tsdoc_parse = (
 	}
 
 	full_text = full_text.trim();
-	const summary = full_text.split('\n\n')[0]!.trim();
-
-	return {
-		full_text,
-		summary,
-		params,
-		returns,
-		throws,
-		examples,
-		deprecated_message,
-		see_also,
-		since,
-	};
-};
-
-/**
- * Parse JSDoc comment from raw comment text (for Svelte files).
- *
- * Parses JSDoc tags from plain text without TypeScript Compiler API.
- * Useful for extracting documentation from Svelte component comments.
- */
-export const tsdoc_parse_from_text = (text: string): Tsdoc_Parsed_Comment | undefined => {
-	if (!text.trim()) return undefined;
-
-	// Clean comment markers
-	const cleaned = text
-		.replace(/^\/\*\*/, '')
-		.replace(/\*\/$/, '')
-		.replace(/^\/\//, '')
-		.split('\n')
-		.map((line) => line.replace(/^\s*\*\s?/, '').trimEnd())
-		.join('\n')
-		.trim();
-
-	if (!cleaned) return undefined;
-
-	const params: Map<string, string> = new Map();
-	let returns: string | undefined;
-	const throws: Array<{type?: string; description: string}> = [];
-	const examples: Array<string> = [];
-	let deprecated_message: string | undefined;
-	const see_also: Array<string> = [];
-	let since: string | undefined;
-
-	// Extract @param tags
-	// Regex explanation:
-	// - `@param\s+` - Match "@param" followed by whitespace
-	// - `(?:\{(?:[^{}]|\{[^{}]*\})*\}\s+)?` - Optional type annotation with nested braces support
-	//   - Matches {Type}, {Type|Other}, {Array<{key: Type}>}, etc.
-	//   - Uses pattern: { + (non-braces OR nested-{...}) + }
-	// - `(\w+)` - Capture parameter name
-	// - `\s+(?:-\s+)?` - Whitespace, optional dash separator (stripped)
-	// - `(.+?)` - Capture description (non-greedy)
-	// - `(?=\n@|\n\n|$)` - Stop at: next tag, double newline, or end of string
-	const param_regex = /@param\s+(?:\{(?:[^{}]|\{[^{}]*\})*\}\s+)?(\w+)\s+(?:-\s+)?(.+?)(?=\n@|\n\n|$)/gs;
-	let match;
-	while ((match = param_regex.exec(cleaned))) {
-		const param_name = match[1];
-		const param_desc = match[2]!.trim();
-		if (param_name && param_desc) {
-			params.set(param_name, param_desc);
-		}
-	}
-
-	// Extract @returns or @return
-	// Matches: @returns {Type} description OR @return description
-	// Note: Type annotation uses simpler pattern since @returns typically has flat types
-	const returns_match = /@returns?\s+(?:\{[^}]+\}\s+)?(.+?)(?=\n@|\n\n|$)/s.exec(cleaned);
-	if (returns_match) {
-		returns = returns_match[1]!.trim();
-	}
-
-	// Extract @throws
-	// Matches: @throws {ErrorType} description OR @throws description
-	// Captures error type separately if provided in braces
-	const throws_regex = /@throws\s+(?:\{(\w+)\}\s+)?(.+?)(?=\n@|\n\n|$)/gs;
-	while ((match = throws_regex.exec(cleaned))) {
-		const type = match[1];
-		const description = match[2]!.trim();
-		throws.push(type ? {type, description} : {description});
-	}
-
-	// Extract @example tags
-	// Uses [\s\S] to match across multiple lines (including newlines)
-	const example_regex = /@example\s+([\s\S]+?)(?=\n@|\n\n|$)/g;
-	while ((match = example_regex.exec(cleaned))) {
-		examples.push(match[1]!.trim());
-	}
-
-	// Extract @deprecated
-	// Captures deprecation message which may span multiple lines
-	const deprecated_match = /@deprecated\s+(.+?)(?=\n@|\n\n|$)/s.exec(cleaned);
-	if (deprecated_match) {
-		deprecated_message = deprecated_match[1]!.trim();
-	}
-
-	// Extract @see tags
-	// Simpler boundary: stops at next tag or end of line (not double newline)
-	const see_regex = /@see\s+(.+?)(?=\n@|$)/g;
-	while ((match = see_regex.exec(cleaned))) {
-		see_also.push(match[1]!.trim());
-	}
-
-	// Extract @since
-	// Captures version information (may include dates or ranges)
-	const since_match = /@since\s+(.+?)(?=\n@|$)/s.exec(cleaned);
-	if (since_match) {
-		since = since_match[1]!.trim();
-	}
-
-	// Remove all @tags to get the main description
-	const full_text = cleaned.replace(/@\w+\s+[\s\S]*$/m, '').trim();
 	const summary = full_text.split('\n\n')[0]!.trim();
 
 	return {

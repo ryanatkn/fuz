@@ -180,6 +180,23 @@ export const src_json: Src_Json = {
 				{
 					name: 'Api_Page',
 					kind: 'component',
+					props: [
+						{
+							name: 'decl',
+							type: 'Src_Module_Declaration',
+							optional: false,
+						},
+						{
+							name: 'module_path',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'repo_url',
+							type: 'string',
+							optional: true,
+						},
+					],
 					source_location: {
 						line: 1,
 						column: 0,
@@ -467,6 +484,88 @@ export const src_json: Src_Json = {
 				{
 					name: 'Contextmenu_Root',
 					kind: 'component',
+					doc_comment:
+						"Touch event handler for tap-then-longpress bypass detection.\n\nThis allows users to access the native context menu by performing a tap\nfollowed by a longpress/rightclick within a specified time window.\nThe bypass gesture is useful for accessing browser features like text selection\nor the native context menu when the Fuz contextmenu would normally override it.\n\nNote: preventDefault is not called as we're only observing touch patterns,\nnot intercepting them. The actual bypass happens in on_window_contextmenu.",
+					summary: 'Touch event handler for tap-then-longpress bypass detection.',
+					examples: [],
+					see_also: [],
+					props: [
+						{
+							name: 'contextmenu',
+							type: 'Contextmenu_State',
+							optional: true,
+							description:
+								"The `contextmenu` prop is not reactive because that's a rare corner case and\nit's easier to put the `contextmenu` directly in the context\nrather than wrapping with a store or other reactivity.\nIf you need to change the contextmenu prop for some reason, use a `{#key contextmenu}` block:\nhttps://svelte.dev/docs#template-syntax-key",
+						},
+						{
+							name: 'open_offset_x',
+							type: 'number',
+							optional: true,
+							description:
+								'The number of pixels to offset from the pointer X position when opened.\nUseful to ensure the first menu item is immediately under the pointer.',
+						},
+						{
+							name: 'open_offset_y',
+							type: 'number',
+							optional: true,
+							description:
+								'The number of pixels to offset from the pointer Y position when opened.\nUseful to ensure the first menu item is immediately under the pointer.',
+						},
+						{
+							name: 'bypass_with_tap_then_longpress',
+							type: 'boolean',
+							optional: true,
+							description:
+								'Whether to detect tap-then-longpress to bypass the Fuz contextmenu.\nThis allows access to the system contextmenu by tapping once then rightclicking/long-pressing.\nSetting to `false` disables the gesture.',
+						},
+						{
+							name: 'bypass_window',
+							type: 'number',
+							optional: true,
+							description:
+								"The number of milliseconds between taps to detect a gesture that bypasses the Fuz contextmenu.\nUsed only when `bypass_with_tap_then_longpress` is true.\nIf the duration is too long, it'll detect more false positives and interrupt normal usage,\nbut too short and some people will have difficulty performing the gesture.",
+						},
+						{
+							name: 'bypass_move_tolerance',
+							type: 'number',
+							optional: true,
+							description:
+								'The number of pixels the pointer can be moved between taps to detect a tap-then-longpress.\nUsed only when `bypass_with_tap_then_longpress` is true.',
+						},
+						{
+							name: 'scoped',
+							type: 'boolean',
+							optional: true,
+							description:
+								'If `true`, wraps `children` with a div and listens to events on it instead of the window.',
+						},
+						{
+							name: 'link_entry',
+							type: 'Snippet<[ComponentProps<typeof Contextmenu_Link_Entry>]> | null',
+							optional: true,
+							description:
+								'Snippet for rendering link entries.\nSet to `null` to disable automatic link detection.\nDefaults to `link_entry_default` which renders `Contextmenu_Link_Entry`.',
+						},
+						{
+							name: 'text_entry',
+							type: 'Snippet<[ComponentProps<typeof Contextmenu_Text_Entry>]> | null',
+							optional: true,
+							description:
+								'Snippet for rendering copy text entries.\nSet to `null` to disable automatic copy text detection.\nDefaults to `text_entry_default` which renders `Contextmenu_Text_Entry`.',
+						},
+						{
+							name: 'separator_entry',
+							type: 'Snippet<[ComponentProps<typeof Contextmenu_Separator>]> | null',
+							optional: true,
+							description:
+								'Snippet for rendering separator entries.\nSet to `null` to disable automatic separator rendering.\nDefaults to `separator_entry_default` which renders `Contextmenu_Separator`.',
+						},
+						{
+							name: 'children',
+							type: 'Snippet',
+							optional: false,
+						},
+					],
 					source_location: {
 						line: 1,
 						column: 0,
@@ -484,6 +583,103 @@ export const src_json: Src_Json = {
 				{
 					name: 'Contextmenu_Root_For_Safari_Compatibility',
 					kind: 'component',
+					doc_comment:
+						"Blocks the next click event. Set to true when a longpress completes to prevent\niOS's synthesized click from activating the first menu item.",
+					summary:
+						"Blocks the next click event. Set to true when a longpress completes to prevent\niOS's synthesized click from activating the first menu item.",
+					examples: [],
+					see_also: [],
+					props: [
+						{
+							name: 'contextmenu',
+							type: 'Contextmenu_State',
+							optional: true,
+							description:
+								"The `contextmenu` prop is not reactive because that's a rare corner case and\nit's easier to put the `contextmenu` directly in the context\nrather than wrapping with a store or other reactivity.\nIf you need to change the contextmenu prop for some reason, use a `{#key contextmenu}` block:\nhttps://svelte.dev/docs#template-syntax-key",
+						},
+						{
+							name: 'longpress_move_tolerance',
+							type: 'number',
+							optional: true,
+							description:
+								'The number of pixels the pointer can be moved without canceling `longpress`.',
+						},
+						{
+							name: 'longpress_duration',
+							type: 'number',
+							optional: true,
+							description:
+								'The number of milliseconds after a touch starts before opening the Fuz contextmenu.',
+						},
+						{
+							name: 'bypass_with_tap_then_longpress',
+							type: 'boolean',
+							optional: true,
+							description:
+								'Whether to detect tap-then-longpress to bypass the Fuz contextmenu.\nThis allows access to the system contextmenu by tapping once then long-pressing.\nSetting to `false` disables the gesture.',
+						},
+						{
+							name: 'bypass_window',
+							type: 'number',
+							optional: true,
+							description:
+								"The number of milliseconds between taps to detect a gesture that bypasses the Fuz contextmenu.\nUsed only when `bypass_with_tap_then_longpress` is true.\nIf the duration is too long, it'll detect more false positives and interrupt normal usage,\nbut too short and some people will have difficulty performing the gesture.",
+						},
+						{
+							name: 'bypass_move_tolerance',
+							type: 'number',
+							optional: true,
+							description:
+								'The number of pixels the pointer can be moved between taps to detect a tap-then-longpress.\nUsed only when `bypass_with_tap_then_longpress` is true.',
+						},
+						{
+							name: 'open_offset_x',
+							type: 'number',
+							optional: true,
+							description:
+								'The number of pixels to offset from the pointer X position when opened.\nUseful to ensure the first menu item is immediately under the pointer.',
+						},
+						{
+							name: 'open_offset_y',
+							type: 'number',
+							optional: true,
+							description:
+								'The number of pixels to offset from the pointer Y position when opened.\nUseful to ensure the first menu item is immediately under the pointer.',
+						},
+						{
+							name: 'scoped',
+							type: 'boolean',
+							optional: true,
+							description:
+								'If `true`, wraps `children` with a div and listens to events on it instead of the window.',
+						},
+						{
+							name: 'link_entry',
+							type: 'Snippet<[ComponentProps<typeof Contextmenu_Link_Entry>]> | null',
+							optional: true,
+							description:
+								'Snippet for rendering link entries.\nSet to `null` to disable automatic link detection.\nDefaults to `link_entry_default` which renders `Contextmenu_Link_Entry`.',
+						},
+						{
+							name: 'text_entry',
+							type: 'Snippet<[ComponentProps<typeof Contextmenu_Text_Entry>]> | null',
+							optional: true,
+							description:
+								'Snippet for rendering copy text entries.\nSet to `null` to disable automatic copy text detection.\nDefaults to `text_entry_default` which renders `Contextmenu_Text_Entry`.',
+						},
+						{
+							name: 'separator_entry',
+							type: 'Snippet<[ComponentProps<typeof Contextmenu_Separator>]> | null',
+							optional: true,
+							description:
+								'Snippet for rendering separator entries.\nSet to `null` to disable automatic separator rendering.\nDefaults to `separator_entry_default` which renders `Contextmenu_Separator`.',
+						},
+						{
+							name: 'children',
+							type: 'Snippet',
+							optional: false,
+						},
+					],
 					source_location: {
 						line: 1,
 						column: 0,
@@ -603,6 +799,48 @@ export const src_json: Src_Json = {
 				{
 					name: 'Declaration_Link',
 					kind: 'component',
+					doc_comment: 'Show tooltip on mouse hover with ARIA-compliant delay',
+					summary: 'Show tooltip on mouse hover with ARIA-compliant delay',
+					examples: [],
+					see_also: [],
+					props: [
+						{
+							name: 'decl',
+							type: 'Src_Module_Declaration',
+							optional: false,
+							description: 'The declaration to link to',
+						},
+						{
+							name: 'module_path',
+							type: 'string',
+							optional: false,
+							description: 'Module path (e.g., "alert.ts")',
+						},
+						{
+							name: 'pkg_name',
+							type: 'string',
+							optional: false,
+							description: 'Package name for generating import statements',
+						},
+						{
+							name: 'repo_url',
+							type: 'string',
+							optional: true,
+							description: 'Repository URL for source links',
+						},
+						{
+							name: 'homepage_url',
+							type: 'string | null',
+							optional: true,
+							description: 'Homepage URL for docs links',
+						},
+						{
+							name: 'children',
+							type: 'Snippet',
+							optional: true,
+							description: 'Optional content to display (defaults to declaration name)',
+						},
+					],
 					source_location: {
 						line: 1,
 						column: 0,
@@ -620,6 +858,10 @@ export const src_json: Src_Json = {
 				{
 					name: 'Details',
 					kind: 'component',
+					doc_comment: 'Like `details` but renders children lazily by default.',
+					summary: 'Like `details` but renders children lazily by default.',
+					examples: [],
+					see_also: [],
 					source_location: {
 						line: 1,
 						column: 0,
@@ -1128,6 +1370,12 @@ export const src_json: Src_Json = {
 				{
 					name: 'Identifier',
 					kind: 'component',
+					doc_comment:
+						'Searches for the identifier name in package metadata.\nReturns true if the identifier exists in the package modules.',
+					summary:
+						'Searches for the identifier name in package metadata.\nReturns true if the identifier exists in the package modules.',
+					examples: [],
+					see_also: [],
 					props: [
 						{
 							name: 'name',
@@ -1167,6 +1415,18 @@ export const src_json: Src_Json = {
 				{
 					name: 'Identifier_Link',
 					kind: 'component',
+					props: [
+						{
+							name: 'name',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'children',
+							type: 'Snippet',
+							optional: true,
+						},
+					],
 					source_location: {
 						line: 1,
 						column: 0,
@@ -1184,6 +1444,13 @@ export const src_json: Src_Json = {
 				{
 					name: 'Identifier_Link_Or_Ts',
 					kind: 'component',
+					props: [
+						{
+							name: 'type',
+							type: 'string',
+							optional: false,
+						},
+					],
 					source_location: {
 						line: 1,
 						column: 0,
@@ -1508,6 +1775,10 @@ export const src_json: Src_Json = {
 				{
 					name: 'Spiders',
 					kind: 'component',
+					doc_comment: 'Returns the minute of the current day.',
+					summary: 'Returns the minute of the current day.',
+					examples: [],
+					see_also: [],
 					props: [
 						{
 							name: 'spiders',
@@ -1868,6 +2139,32 @@ export const src_json: Src_Json = {
 				{
 					name: 'Tooltip',
 					kind: 'component',
+					props: [
+						{
+							name: 'tooltip',
+							type: 'Tooltip_State',
+							optional: true,
+							description: 'Optional tooltip state - defaults to context value',
+						},
+						{
+							name: 'offset_x',
+							type: 'number',
+							optional: true,
+							description: 'Horizontal offset from anchor point (cursor or element center)',
+						},
+						{
+							name: 'offset_y',
+							type: 'number',
+							optional: true,
+							description: 'Vertical offset from anchor point (cursor or element bottom)',
+						},
+						{
+							name: 'viewport_padding',
+							type: 'number',
+							optional: true,
+							description: 'Padding from viewport edges',
+						},
+					],
 					source_location: {
 						line: 1,
 						column: 0,
@@ -5173,14 +5470,14 @@ export const src_json: Src_Json = {
 				{
 					name: 'svelte_analyze_component',
 					kind: 'function',
-					doc_comment: 'Analyze a Svelte component from its TSX transformation.',
-					summary: 'Analyze a Svelte component from its TSX transformation.',
+					doc_comment: 'Analyze a Svelte component from its svelte2tsx transformation.',
+					summary: 'Analyze a Svelte component from its svelte2tsx transformation.',
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 21,
+						line: 23,
 						column: 13,
-						end_line: 76,
+						end_line: 78,
 						end_column: 1,
 					},
 					type_signature:
@@ -5213,7 +5510,7 @@ export const src_json: Src_Json = {
 			],
 			imports: ['typescript', './src_json.js', './tsdoc_helpers.js'],
 			module_comment:
-				'Svelte component analysis helpers using svelte2tsx.\n\nProvides utilities for extracting metadata from Svelte components:\n\n- component props with types and TSDoc\n- component-level documentation\n- type information from TypeScript\n\nAll functions are prefixed with `svelte_` for clarity.',
+				'Svelte component analysis helpers.\n\nExtracts metadata from Svelte components using svelte2tsx transformations:\n\n- Component props with types and JSDoc\n- Component-level documentation\n- Type information\n\nUses the TypeScript Compiler API to parse the transformed output from svelte2tsx.\n\nAll functions are prefixed with `svelte_` for clarity.',
 		},
 		'./test_helpers.ts': {
 			path: 'test_helpers.ts',
@@ -6242,9 +6539,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 50,
+						line: 32,
 						column: 0,
-						end_line: 69,
+						end_line: 51,
 						end_column: 1,
 					},
 					type_signature: 'Tsdoc_Parsed_Comment',
@@ -6324,9 +6621,9 @@ export const src_json: Src_Json = {
 					examples: [],
 					see_also: [],
 					source_location: {
-						line: 84,
+						line: 66,
 						column: 13,
-						end_line: 159,
+						end_line: 141,
 						end_column: 1,
 					},
 					type_signature:
@@ -6346,35 +6643,10 @@ export const src_json: Src_Json = {
 					],
 					exported: false,
 				},
-				{
-					name: 'tsdoc_parse_from_text',
-					kind: 'function',
-					doc_comment:
-						'Parse JSDoc comment from raw comment text (for Svelte files).\n\nParses JSDoc tags from plain text without TypeScript Compiler API.\nUseful for extracting documentation from Svelte component comments.',
-					summary: 'Parse JSDoc comment from raw comment text (for Svelte files).',
-					examples: [],
-					see_also: [],
-					source_location: {
-						line: 167,
-						column: 13,
-						end_line: 271,
-						end_column: 1,
-					},
-					type_signature: '(text: string): Tsdoc_Parsed_Comment | undefined',
-					return_type: 'Tsdoc_Parsed_Comment | undefined',
-					parameters: [
-						{
-							name: 'text',
-							type: 'string',
-							optional: false,
-						},
-					],
-					exported: false,
-				},
 			],
 			imports: ['typescript'],
 			module_comment:
-				'TSDoc/JSDoc parsing helpers.\n\nThis module provides TWO complementary parsing functions for different use cases:\n\n## 1. `tsdoc_parse()` - TypeScript Compiler API-based parsing\n\n**Use for**: Regular TypeScript files, TSX output from svelte2tsx transformations\n\n**How it works**: Uses TypeScript\'s built-in `ts.getJSDocCommentsAndTags()` API\n\n**Behavioral quirks** (due to TS Compiler API limitations):\n- Preserves dash separator in @param descriptions: `@param x - desc` → `"- desc"`\n- @throws tags have {Type} stripped by TS API, regex then extracts first word as type\n- @see tags return unreliable values ("*" or undefined) from TS API\n\n## 2. `tsdoc_parse_from_text()` - Regex-based parsing from raw text\n\n**Use for**: Raw Svelte component JSDoc (appears before `<script>` tag in .svelte files)\n\n**How it works**: Uses regex patterns to extract tags from raw comment text\n\n**Why needed**: svelte2tsx transforms Svelte → TSX, but component-level JSDoc comments\n(appearing before `<script>`) don\'t survive the transformation in a way that\'s easily\nparseable by the TypeScript Compiler API. We parse these from the original Svelte source.\n\n**Behavioral differences from tsdoc_parse()**:\n- Strips dash separator from @param: `@param x - desc` → `"desc"`\n- Correctly extracts @throws {Type} from raw text\n- Handles @see tags reliably\n\n**Used by**: `svelte_extract_component_tsdoc()` in svelte_helpers.ts\n\n## Summary: Why Both Functions?\n\nThey parse different sources for different contexts:\n- `tsdoc_parse()` → TypeScript nodes (props, functions in .ts/.tsx files)\n- `tsdoc_parse_from_text()` → Raw Svelte source (component-level docs in .svelte files)\n\nThe dual approach is intentional and necessary for comprehensive Svelte+TS documentation.\n\nAll functions are prefixed with `tsdoc_` for clarity.',
+				'TSDoc/JSDoc parsing helpers using the TypeScript Compiler API.\n\nProvides `tsdoc_parse()` for extracting JSDoc/TSDoc from TypeScript nodes.\n\n## How it works\n\nUses TypeScript\'s built-in `ts.getJSDocCommentsAndTags()` API to extract\nstructured documentation from AST nodes.\n\n## Behavioral notes (due to TS Compiler API)\n\n- Preserves dash separator in @param descriptions: `@param x - desc` → `"- desc"`\n- @throws tags have {Type} stripped by TS API; regex then extracts first word as type\n- @see tags return unreliable values ("*" or undefined) from TS API\n\n## Usage\n\nWorks on all TypeScript/TSX nodes, including:\n- Regular TypeScript files (.ts, .tsx)\n- TSX output from svelte2tsx transformations\n- Any node with JSDoc comments in the AST\n\nAll functions are prefixed with `tsdoc_` for clarity.',
 			imported_by: ['./svelte_helpers.ts', './ts_helpers.ts'],
 		},
 	},
