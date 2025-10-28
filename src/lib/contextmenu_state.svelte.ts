@@ -1,10 +1,10 @@
 import {onDestroy, type Snippet} from 'svelte';
 import type {Result} from '@ryanatkn/belt/result.js';
 import {is_promise} from '@ryanatkn/belt/async.js';
-import type {ActionReturn} from 'svelte/action';
 import {BROWSER} from 'esm-env';
 import type {SvelteHTMLElements} from 'svelte/elements';
 import {EMPTY_OBJECT} from '@ryanatkn/belt/object.js';
+import type {Attachment} from 'svelte/attachments';
 
 import {Dimensions} from '$lib/dimensions.svelte.js';
 import {create_context} from '$lib/context_helpers.js';
@@ -343,23 +343,30 @@ const CONTEXTMENU_DOM_QUERY = `a,[data-${CONTEXTMENU_DATASET_KEY}]`;
 const contextmenu_cache: Map<string, Contextmenu_Params | Array<Contextmenu_Params>> = new Map();
 let cache_key_counter = 0;
 
-export const contextmenu_action = <T extends Contextmenu_Params, U extends T | Array<T>>(
-	el: HTMLElement | SVGElement,
-	params: U | null | undefined,
-): ActionReturn<U> | undefined => {
-	if (params == null) return;
-	const key = cache_key_counter++ + '';
-	el.dataset[CONTEXTMENU_DATASET_KEY] = key;
-	contextmenu_cache.set(key, params);
-	return {
-		update: (p: U) => {
-			contextmenu_cache.set(key, p);
-		},
-		destroy: () => {
+/**
+ * Creates an attachment that sets up contextmenu behavior on an element.
+ * @param params - Contextmenu parameters or nullish to disable
+ */
+export const contextmenu_attachment =
+	<T extends Contextmenu_Params, U extends T | Array<T>>(
+		params: U | null | undefined,
+	): Attachment<HTMLElement | SVGElement> =>
+	(el): undefined | (() => void) => {
+		if (params == null) return;
+
+		// Only create key once per element, reuse on updates
+		let key = el.dataset[CONTEXTMENU_DATASET_KEY];
+		if (!key) {
+			key = cache_key_counter++ + '';
+			el.dataset[CONTEXTMENU_DATASET_KEY] = key;
+		}
+
+		contextmenu_cache.set(key, params);
+
+		return () => {
 			contextmenu_cache.delete(key);
-		},
+		};
 	};
-};
 
 const CONTEXTMENU_OPEN_VIBRATE_DURATION = 17;
 

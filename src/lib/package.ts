@@ -2140,25 +2140,25 @@ export const src_json: Src_Json = {
 				{
 					name: 'Contextmenu_Params',
 					kind: 'type',
-					source_line: 14,
+					source_line: 13,
 					type_signature: 'Contextmenu_Params',
 				},
 				{
 					name: 'Contextmenu_Activate_Result',
 					kind: 'type',
-					source_line: 21,
+					source_line: 20,
 					type_signature: 'Contextmenu_Activate_Result',
 				},
 				{
 					name: 'Item_State',
 					kind: 'type',
-					source_line: 26,
+					source_line: 25,
 					type_signature: 'Item_State',
 				},
 				{
 					name: 'Entry_State',
 					kind: 'class',
-					source_line: 28,
+					source_line: 27,
 					members: [
 						{
 							name: 'is_menu',
@@ -2208,7 +2208,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Submenu_State',
 					kind: 'class',
-					source_line: 51,
+					source_line: 50,
 					members: [
 						{
 							name: 'is_menu',
@@ -2242,7 +2242,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Root_Menu_State',
 					kind: 'class',
-					source_line: 65,
+					source_line: 64,
 					members: [
 						{
 							name: 'is_menu',
@@ -2269,13 +2269,13 @@ export const src_json: Src_Json = {
 				{
 					name: 'Contextmenu_Run',
 					kind: 'type',
-					source_line: 73,
+					source_line: 72,
 					type_signature: 'Contextmenu_Run',
 				},
 				{
 					name: 'Contextmenu_State_Options',
 					kind: 'type',
-					source_line: 77,
+					source_line: 76,
 					type_signature: 'Contextmenu_State_Options',
 					properties: [
 						{
@@ -2293,7 +2293,7 @@ export const src_json: Src_Json = {
 					summary:
 						'Creates a `contextmenu` store.\nSee usage with `Contextmenu_Root.svelte` and `Contextmenu.svelte`.',
 					see_also: ['://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event'],
-					source_line: 87,
+					source_line: 86,
 					members: [
 						{
 							name: 'layout',
@@ -2445,29 +2445,27 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'contextmenu_action',
+					name: 'contextmenu_attachment',
 					kind: 'function',
-					source_line: 346,
+					doc_comment: 'Creates an attachment that sets up contextmenu behavior on an element.',
+					summary: 'Creates an attachment that sets up contextmenu behavior on an element.',
+					source_line: 349,
 					type_signature:
-						'<T extends Contextmenu_Params, U extends T | Array<T>>(el: HTMLElement | SVGElement, params: U | null | undefined): ActionReturn<U, Record<never, any>> | undefined',
-					return_type: 'ActionReturn<U, Record<never, any>> | undefined',
+						'<T extends Contextmenu_Params, U extends T | Array<T>>(params: U | null | undefined): (el: HTMLElement | SVGElement) => (() => void) | undefined',
+					return_type: '(el: HTMLElement | SVGElement) => (() => void) | undefined',
 					parameters: [
-						{
-							name: 'el',
-							type: 'HTMLElement | SVGElement',
-							optional: false,
-						},
 						{
 							name: 'params',
 							type: 'U | null | undefined',
 							optional: false,
+							description: '- Contextmenu parameters or nullish to disable',
 						},
 					],
 				},
 				{
 					name: 'Open_Contextmenu_Options',
 					kind: 'type',
-					source_line: 366,
+					source_line: 370,
 					type_signature: 'Open_Contextmenu_Options',
 					properties: [
 						{
@@ -2499,7 +2497,7 @@ export const src_json: Src_Json = {
 						'Opens the contextmenu, if appropriate,\nquerying the menu items from the DOM starting at the event target.',
 					summary:
 						'Opens the contextmenu, if appropriate,\nquerying the menu items from the DOM starting at the event target.',
-					source_line: 383,
+					source_line: 387,
 					type_signature:
 						'(target: HTMLElement | SVGElement, x: number, y: number, contextmenu: Contextmenu_State, options?: Open_Contextmenu_Options | undefined): boolean',
 					return_type: 'boolean',
@@ -2542,21 +2540,21 @@ export const src_json: Src_Json = {
 				{
 					name: 'contextmenu_context',
 					kind: 'variable',
-					source_line: 469,
+					source_line: 473,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Contextmenu_State; maybe_get: () => Contextmenu_State | undefined; set: (value: Contextmenu_State) => Contextmenu_State; }',
 				},
 				{
 					name: 'contextmenu_submenu_context',
 					kind: 'variable',
-					source_line: 471,
+					source_line: 475,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Submenu_State; maybe_get: () => Submenu_State | undefined; set: (value: Submenu_State) => Submenu_State; }',
 				},
 				{
 					name: 'contextmenu_dimensions_context',
 					kind: 'variable',
-					source_line: 473,
+					source_line: 477,
 					type_signature:
 						'{ get: () => Dimensions; set: (value?: Dimensions | undefined) => Dimensions; }',
 				},
@@ -2567,7 +2565,7 @@ export const src_json: Src_Json = {
 						'Registers a contextmenu root and warns if multiple non-scoped roots are detected.\nOnly active in development mode. Automatically handles cleanup on unmount.',
 					summary:
 						'Registers a contextmenu root and warns if multiple non-scoped roots are detected.\nOnly active in development mode. Automatically handles cleanup on unmount.',
-					source_line: 484,
+					source_line: 488,
 					type_signature: '(get_scoped: () => boolean): void',
 					return_type: 'void',
 					parameters: [
@@ -3290,9 +3288,9 @@ export const src_json: Src_Json = {
 							kind: 'variable',
 							type_signature: 'On_Disconnect',
 							doc_comment:
-								"Called when the action's observer is disconnected,\neither by the user calling disconnect or the action being destroyed.",
+								"Called when the attachment's observer is disconnected,\neither by the user calling disconnect or the attachment being destroyed.",
 							summary:
-								"Called when the action's observer is disconnected,\neither by the user calling disconnect or the action being destroyed.",
+								"Called when the attachment's observer is disconnected,\neither by the user calling disconnect or the attachment being destroyed.",
 						},
 						{
 							name: 'count',
@@ -3321,31 +3319,15 @@ export const src_json: Src_Json = {
 					type_signature: 'Intersect_Params_Or_Callback',
 				},
 				{
-					name: 'intersect',
-					kind: 'function',
-					source_line: 29,
-					type_signature:
-						'<Node extends HTMLElement | SVGElement>(node: Node, parameter: Intersect_Params_Or_Callback | null): void | ActionReturn<Intersect_Params_Or_Callback | null, Record<...>>',
-					return_type:
-						'void | ActionReturn<Intersect_Params_Or_Callback | null, Record<never, any>>',
-					parameters: [
-						{
-							name: 'args',
-							type: '[node: Node, parameter: Intersect_Params_Or_Callback | null]',
-							optional: false,
-						},
-					],
-				},
-				{
 					name: 'On_Intersect',
 					kind: 'type',
-					source_line: 101,
+					source_line: 29,
 					type_signature: 'On_Intersect',
 				},
 				{
 					name: 'Intersect_State',
 					kind: 'type',
-					source_line: 103,
+					source_line: 31,
 					type_signature: 'Intersect_State',
 					properties: [
 						{
@@ -3378,13 +3360,13 @@ export const src_json: Src_Json = {
 				{
 					name: 'On_Disconnect',
 					kind: 'type',
-					source_line: 112,
+					source_line: 40,
 					type_signature: 'On_Disconnect',
 				},
 				{
 					name: 'Disconnect_State',
 					kind: 'type',
-					source_line: 114,
+					source_line: 42,
 					type_signature: 'Disconnect_State',
 					properties: [
 						{
@@ -3406,6 +3388,24 @@ export const src_json: Src_Json = {
 							name: 'observer',
 							kind: 'variable',
 							type_signature: 'IntersectionObserver',
+						},
+					],
+				},
+				{
+					name: 'intersect_attachment',
+					kind: 'function',
+					doc_comment: 'Creates an attachment that observes element viewport intersection.',
+					summary: 'Creates an attachment that observes element viewport intersection.',
+					source_line: 53,
+					type_signature:
+						'(params: Intersect_Params_Or_Callback | null | undefined): Attachment<Element>',
+					return_type: 'Attachment<Element>',
+					parameters: [
+						{
+							name: 'params',
+							type: 'Intersect_Params_Or_Callback | null | undefined',
+							optional: false,
+							description: '- Callback function or params object, or nullish to disable',
 						},
 					],
 				},

@@ -5,7 +5,7 @@
 	import type {Snippet} from 'svelte';
 	import {get_type_summary, type Src_Module_Declaration} from '$lib/src_json.js';
 	import {tooltip_context} from '$lib/tooltip_state.svelte.js';
-	import {contextmenu_action} from '$lib/contextmenu_state.svelte.js';
+	import {contextmenu_attachment} from '$lib/contextmenu_state.svelte.js';
 	import {create_declaration_contextmenu} from '$lib/declaration_contextmenu.js';
 
 	const {
@@ -101,7 +101,7 @@
 	onmouseleave={hide_tooltip_hover}
 	onfocus={show_tooltip_focus}
 	onblur={hide_tooltip_focus}
-	use:contextmenu_action={contextmenu_entries}
+	{@attach contextmenu_attachment(contextmenu_entries)}
 >
 	{#if children}
 		{@render children()}

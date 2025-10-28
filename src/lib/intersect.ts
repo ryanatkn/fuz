@@ -1,4 +1,4 @@
-import type {Action} from 'svelte/action';
+import type {Attachment} from 'svelte/attachments';
 
 export interface Intersect_Params {
 	/**
@@ -6,8 +6,8 @@ export interface Intersect_Params {
 	 */
 	onintersect?: On_Intersect;
 	/**
-	 * Called when the action's observer is disconnected,
-	 * either by the user calling disconnect or the action being destroyed.
+	 * Called when the attachment's observer is disconnected,
+	 * either by the user calling disconnect or the attachment being destroyed.
 	 */
 	ondisconnect?: On_Disconnect;
 	/**
@@ -25,77 +25,65 @@ export interface Intersect_Params {
 
 export type Intersect_Params_Or_Callback = On_Intersect | Intersect_Params;
 
-// TODO how to forward generic `el` type?
-export const intersect: Action<HTMLElement | SVGElement, Intersect_Params_Or_Callback | null> = (
-	el,
-	initial_params,
-) => {
-	let onintersect: On_Intersect | undefined;
-	let ondisconnect: On_Disconnect | undefined;
-	let count: number | undefined;
-	let options: IntersectionObserverInit | undefined;
-	let intersecting: boolean;
-	let intersections: number;
-	let observer: IntersectionObserver | null;
-	let current_params: Intersect_Params_Or_Callback | null;
+/**
+ * Creates an attachment that observes element viewport intersection.
+ * @param params - Callback function or params object, or nullish to disable
+ */
+export const intersect_attachment =
+	(params: Intersect_Params_Or_Callback | null | undefined): Attachment<HTMLElement | SVGElement> =>
+	(el) => {
+		if (params == null) return;
 
-	const set_params = (params: Intersect_Params_Or_Callback | null): void => {
-		current_params = params;
-		// TODO not sure about this? should there be a `reset` API?
-		intersections = 0;
+		let onintersect: On_Intersect | undefined;
+		let ondisconnect: On_Disconnect | undefined;
+		let count: number | undefined;
+		let options: IntersectionObserverInit | undefined;
+		let intersecting: boolean;
+		let intersections = 0;
+		let observer: IntersectionObserver | null = null;
+
+		// Parse params
 		if (typeof params === 'function') {
 			onintersect = params;
-			ondisconnect = undefined;
-			count = undefined;
-			options = undefined;
-		} else if (params) {
+		} else {
 			onintersect = params.onintersect;
 			ondisconnect = params.ondisconnect;
 			count = params.count;
 			options = params.options;
 		}
-		observe();
-	};
-	const observe = (): void => {
-		if (observer) {
-			disconnect();
-		}
-		if (current_params === null || count === 0) return; // disable when `count` is `0`, no need to create the observer
-		observer = new IntersectionObserver((entries) => {
-			intersecting = entries[0]!.isIntersecting;
-			if (onintersect && observer) {
-				onintersect({intersecting, intersections, el, observer, disconnect});
+
+		const disconnect = (): void => {
+			if (!observer) return;
+			observer.disconnect();
+			if (ondisconnect) {
+				ondisconnect({intersecting, intersections, el, observer});
 			}
-			if (intersecting) {
-				// track each the count of times it enters the viewport
-				intersections++;
-			} else {
-				// when leaving the viewport, check if it's done
-				if (count && count > 0 && intersections >= count) {
-					disconnect();
+			observer = null;
+		};
+
+		// Set up observer if not disabled
+		if (count !== 0) {
+			observer = new IntersectionObserver((entries) => {
+				intersecting = entries[0]!.isIntersecting;
+				if (onintersect && observer) {
+					onintersect({intersecting, intersections, el, observer, disconnect});
 				}
-			}
-		}, options);
-		observer.observe(el);
-	};
-	const disconnect = (): void => {
-		if (!observer) return;
-		observer.disconnect();
-		if (ondisconnect) {
-			ondisconnect({intersecting, intersections, el, observer});
+				if (intersecting) {
+					// track count of times it enters the viewport
+					intersections++;
+				} else {
+					// when leaving the viewport, check if it's done
+					if (count && count > 0 && intersections >= count) {
+						disconnect();
+					}
+				}
+			}, options);
+			observer.observe(el);
 		}
-		observer = null;
-	};
 
-	set_params(initial_params);
-
-	return {
-		update: (params) => {
-			set_params(params);
-		},
-		destroy: disconnect,
+		// Return cleanup function
+		return disconnect;
 	};
-};
 
 // TODO how to forward generic `el` type?
 export type On_Intersect = (state: Intersect_State) => void;

@@ -44,19 +44,21 @@ export const mount_contextmenu_root = <Props extends Record<string, any>>(
 };
 
 /**
- * Setup contextmenu action on an element with test params.
+ * Setup contextmenu attachment on an element with test params.
  * This registers the element so it responds to contextmenu events.
  *
  * @param element - The HTML or SVG element to setup
  * @param params - Array of contextmenu params (entries, snippets, etc.)
+ * @returns Cleanup function to call when done
  */
 export const setup_contextmenu_action = async (
 	element: HTMLElement | SVGElement,
 	params: Array<any>,
-): Promise<void> => {
+): Promise<(() => void) | undefined> => {
 	element.dataset.contextmenu = 'test';
-	const {contextmenu_action} = await import('$lib/contextmenu_state.svelte.js');
-	contextmenu_action(element, params);
+	const {contextmenu_attachment} = await import('$lib/contextmenu_state.svelte.js');
+	const attachment = contextmenu_attachment(params);
+	return attachment(element);
 };
 
 /**

@@ -163,10 +163,11 @@ export const create_shared_core_tests = (
 					target.dataset.contextmenu = 'test';
 					menu_el.appendChild(target);
 
-					const {contextmenu_action} = await import('$lib/contextmenu_state.svelte.js');
-					contextmenu_action(target, [
+					const {contextmenu_attachment} = await import('$lib/contextmenu_state.svelte.js');
+					const attachment = contextmenu_attachment([
 						{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 					]);
+					attachment(target);
 
 					// Try to open another contextmenu from within the existing menu
 					const event = create_contextmenu_event(150, 250);
