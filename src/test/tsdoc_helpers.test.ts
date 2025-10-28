@@ -578,7 +578,7 @@ function foo() {}
 			const result = tsdoc_parse(node, source_file);
 
 			assert.ok(result);
-			assert.ok(Array.isArray(result.see_also));
+			assert.strictEqual(result.see_also, undefined);
 		});
 
 		test('optional fields are undefined when absent', () => {
@@ -922,9 +922,9 @@ function foo() {}
 			const result = tsdoc_parse(node, source_file);
 
 			assert.ok(result);
-			assert.strictEqual(result.throws?.length, 0);
-			assert.strictEqual(result.examples?.length, 0);
-			assert.strictEqual(result.see_also?.length, 0);
+			assert.strictEqual(result.throws, undefined);
+			assert.strictEqual(result.examples, undefined);
+			assert.strictEqual(result.see_also, undefined);
 			assert.strictEqual(result.params.size, 0);
 		});
 	});
