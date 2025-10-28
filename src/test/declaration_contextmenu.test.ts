@@ -1,6 +1,7 @@
 import {describe, test, assert} from 'vitest';
-import {create_declaration_contextmenu} from './declaration_contextmenu.js';
-import type {Src_Module_Declaration} from './src_json.js';
+
+import {create_declaration_contextmenu} from '$lib/declaration_contextmenu.js';
+import type {Src_Module_Declaration} from '$lib/src_json.js';
 
 describe('create_declaration_contextmenu', () => {
 	const base_decl: Src_Module_Declaration = {

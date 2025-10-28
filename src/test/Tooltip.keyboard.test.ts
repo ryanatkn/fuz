@@ -4,7 +4,7 @@
 import {describe, test, assert, beforeEach, afterEach, vi} from 'vitest';
 import {flushSync, type Snippet} from 'svelte';
 
-import {mount_component, unmount_component, create_keyboard_event} from '$lib/test_helpers.js';
+import {mount_component, unmount_component, create_keyboard_event} from '$test/test_helpers.js';
 import Tooltip from '$lib/Tooltip.svelte';
 import {Tooltip_State} from '$lib/tooltip_state.svelte.js';
 

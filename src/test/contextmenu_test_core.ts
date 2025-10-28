@@ -5,13 +5,14 @@
 
 import {describe, test, assert, afterEach} from 'vitest';
 import {flushSync} from 'svelte';
+
 import {
 	unmount_component,
 	create_contextmenu_event,
 	create_mouse_event,
 	create_keyboard_event,
 	set_event_target,
-} from '$lib/test_helpers.js';
+} from '$test/test_helpers.js';
 import {
 	mount_contextmenu_root,
 	setup_contextmenu_action,
