@@ -8,18 +8,6 @@
  */
 
 /**
- * File extension patterns for different source types
- */
-export const MODULE_EXTENSIONS = {
-	/** TypeScript and JS files */
-	TYPESCRIPT: /\.(ts|js)$/,
-	/** Svelte component files */
-	SVELTE: /\.svelte$/,
-	/** Test files */
-	TEST: /\.(test|spec)\./,
-} as const;
-
-/**
  * Extract module path relative to src/lib from absolute source ID.
  *
  * @example
@@ -63,11 +51,11 @@ export const module_get_key = (module_path: string): string => `./${module_path}
  * Check if path is a TypeScript or JS file.
  */
 export const module_is_typescript = (path: string): boolean =>
-	MODULE_EXTENSIONS.TYPESCRIPT.test(path);
+	path.endsWith('.ts') || path.endsWith('.js');
 
-export const module_is_svelte = (path: string): boolean => MODULE_EXTENSIONS.SVELTE.test(path); // eslint-disable-line @typescript-eslint/prefer-string-starts-ends-with
+export const module_is_svelte = (path: string): boolean => path.endsWith('.svelte');
 
-export const module_is_test = (path: string): boolean => MODULE_EXTENSIONS.TEST.test(path);
+export const module_is_test = (path: string): boolean => path.endsWith('.test.ts');
 
 /**
  * Check if ID is a source file in /src/lib/ (excluding tests).

@@ -3578,15 +3578,6 @@ export const src_json: Src_Json = {
 			path: 'module_helpers.ts',
 			declarations: [
 				{
-					name: 'MODULE_EXTENSIONS',
-					kind: 'variable',
-					doc_comment: 'File extension patterns for different source types',
-					summary: 'File extension patterns for different source types',
-					source_line: 13,
-					type_signature:
-						'{ readonly TYPESCRIPT: RegExp; readonly SVELTE: RegExp; readonly TEST: RegExp; }',
-				},
-				{
 					name: 'module_extract_path',
 					kind: 'function',
 					doc_comment: 'Extract module path relative to src/lib from absolute source ID.',
@@ -3594,7 +3585,7 @@ export const src_json: Src_Json = {
 					examples: [
 						"module_extract_path('/home/user/project/src/lib/foo.ts') // => 'foo.ts'\nmodule_extract_path('/home/user/project/src/lib/nested/bar.svelte') // => 'nested/bar.svelte'",
 					],
-					source_line: 29,
+					source_line: 17,
 					type_signature: '(source_id: string): string',
 					return_type: 'string',
 					parameters: [
@@ -3613,7 +3604,7 @@ export const src_json: Src_Json = {
 					examples: [
 						"module_get_component_name('Alert.svelte') // => 'Alert'\nmodule_get_component_name('components/Button.svelte') // => 'Button'",
 					],
-					source_line: 41,
+					source_line: 29,
 					type_signature: '(module_path: string): string',
 					return_type: 'string',
 					parameters: [
@@ -3632,7 +3623,7 @@ export const src_json: Src_Json = {
 					examples: [
 						"module_normalize_name('foo.ts') // => 'foo'\nmodule_normalize_name('bar.svelte') // => 'bar'",
 					],
-					source_line: 51,
+					source_line: 39,
 					type_signature: '(path: string): string',
 					return_type: 'string',
 					parameters: [
@@ -3649,7 +3640,7 @@ export const src_json: Src_Json = {
 					doc_comment: 'Convert module path to module key format (with ./ prefix).',
 					summary: 'Convert module path to module key format (with ./ prefix).',
 					examples: ["module_get_key('foo.ts') // => './foo.ts'"],
-					source_line: 60,
+					source_line: 48,
 					type_signature: '(module_path: string): string',
 					return_type: 'string',
 					parameters: [
@@ -3665,7 +3656,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Check if path is a TypeScript or JS file.',
 					summary: 'Check if path is a TypeScript or JS file.',
-					source_line: 65,
+					source_line: 53,
 					type_signature: '(path: string): boolean',
 					return_type: 'boolean',
 					parameters: [
@@ -3679,7 +3670,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'module_is_svelte',
 					kind: 'function',
-					source_line: 68,
+					source_line: 56,
 					type_signature: '(path: string): boolean',
 					return_type: 'boolean',
 					parameters: [
@@ -3693,7 +3684,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'module_is_test',
 					kind: 'function',
-					source_line: 70,
+					source_line: 58,
 					type_signature: '(path: string): boolean',
 					return_type: 'boolean',
 					parameters: [
@@ -3709,7 +3700,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Check if ID is a source file in /src/lib/ (excluding tests).',
 					summary: 'Check if ID is a source file in /src/lib/ (excluding tests).',
-					source_line: 75,
+					source_line: 63,
 					type_signature: '(id: string): boolean',
 					return_type: 'boolean',
 					parameters: [
@@ -3729,7 +3720,7 @@ export const src_json: Src_Json = {
 					examples: [
 						"module_matches_import('./foo', 'foo') // => true\nmodule_matches_import('$lib/foo', 'foo') // => true\nmodule_matches_import('$lib/nested/bar', 'bar') // => true",
 					],
-					source_line: 88,
+					source_line: 76,
 					type_signature: '(import_spec: string, module_name: string): boolean',
 					return_type: 'boolean',
 					parameters: [
