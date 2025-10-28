@@ -30,16 +30,6 @@ export const module_get_component_name = (module_path: string): string =>
 	module_path.replace(/^.*\//, '').replace(/\.svelte$/, '');
 
 /**
- * Normalize module name by removing file extensions.
- *
- * @example
- * module_normalize_name('foo.ts') // => 'foo'
- * module_normalize_name('bar.svelte') // => 'bar'
- */
-export const module_normalize_name = (path: string): string =>
-	path.replace(/\.(ts|js|svelte)$/, '');
-
-/**
  * Convert module path to module key format (with ./ prefix).
  *
  * @example
@@ -62,24 +52,3 @@ export const module_is_test = (path: string): boolean => path.endsWith('.test.ts
  */
 export const module_is_source = (id: string): boolean =>
 	id.includes('/src/lib/') && !module_is_test(id);
-
-/**
- * Check if an import specifier matches a module name.
- *
- * Handles both relative (./) and $lib/ import styles.
- *
- * @example
- * module_matches_import('./foo', 'foo') // => true
- * module_matches_import('$lib/foo', 'foo') // => true
- * module_matches_import('$lib/nested/bar', 'bar') // => true
- */
-export const module_matches_import = (import_spec: string, module_name: string): boolean => {
-	if (import_spec.startsWith('./') && import_spec.includes(module_name)) {
-		return true;
-	}
-	if (import_spec.startsWith('$lib/')) {
-		const import_path = import_spec.replace('$lib/', '');
-		return import_path.includes(module_name);
-	}
-	return false;
-};

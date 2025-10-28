@@ -336,21 +336,6 @@ export const ts_extract_module_comment = (source_file: ts.SourceFile): string | 
 };
 
 /**
- * Extract import statements.
- */
-export const ts_extract_imports = (source_file: ts.SourceFile): Array<string> => {
-	const imports: Array<string> = [];
-
-	ts.forEachChild(source_file, (node) => {
-		if (ts.isImportDeclaration(node) && ts.isStringLiteral(node.moduleSpecifier)) {
-			imports.push(node.moduleSpecifier.text);
-		}
-	});
-
-	return imports;
-};
-
-/**
  * Create TypeScript program for analysis.
  */
 export const ts_create_program = (log: {warn: (message: string) => void}): ts.Program | null => {

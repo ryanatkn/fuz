@@ -21,15 +21,14 @@ import type {Gen} from '@ryanatkn/gro';
 import type {Filer} from '@ryanatkn/gro/filer.js';
 import type {Package_Json} from '@ryanatkn/belt/package_json.js';
 import type {Logger} from '@ryanatkn/belt/log.js';
-import type {Result} from '@ryanatkn/belt/result.js';
 import ts from 'typescript';
 import {readFileSync} from 'node:fs';
 import {load_package_json} from '@ryanatkn/gro/package_json.js';
+import {svelte2tsx} from 'svelte2tsx';
 
 import type {Src_Module_Declaration, Src_Module, Src_Json} from '$lib/src_json.js';
 import {
 	ts_create_program,
-	ts_extract_imports,
 	ts_extract_module_comment,
 	ts_infer_declaration_kind,
 	ts_extract_function_info,
@@ -46,8 +45,6 @@ import {
 	module_is_typescript,
 	module_is_svelte,
 	module_is_source,
-	module_normalize_name,
-	module_matches_import,
 } from '$lib/module_helpers.js';
 
 export const gen: Gen = async ({log, filer}) => {
@@ -59,16 +56,6 @@ export const gen: Gen = async ({log, filer}) => {
 	// Read package.json
 	const package_json = load_package_json();
 
-	// Try to import svelte2tsx if available
-	let svelte2tsx: typeof import('svelte2tsx').svelte2tsx | undefined;
-	try {
-		const module = await import('svelte2tsx');
-		svelte2tsx = module.svelte2tsx;
-		log.info('svelte2tsx available - Svelte components will be analyzed');
-	} catch {
-		log.info('svelte2tsx not installed - Svelte components will be skipped');
-	}
-
 	// Create TypeScript program
 	const program = ts_create_program(log);
 	if (!program) {
@@ -78,7 +65,7 @@ export const gen: Gen = async ({log, filer}) => {
 	const checker = program.getTypeChecker();
 
 	// Collect source files from filer
-	const source_disknodes = collect_source_files(filer, svelte2tsx, log);
+	const source_disknodes = collect_source_files(filer, log);
 
 	// Build src.json
 	const src_json: Src_Json = {
@@ -91,12 +78,13 @@ export const gen: Gen = async ({log, filer}) => {
 		const source_id = disknode.id;
 		const module_path = module_extract_path(source_id);
 		const module_key = module_get_key(module_path);
+		const is_svelte = module_is_svelte(module_path);
 
-		let result: Result<Src_Module, {message: string}>;
+		let mod: Src_Module | null;
 
 		// Handle Svelte files separately (before trying to get TypeScript source file)
-		if (module_is_svelte(module_path)) {
-			result = analyze_svelte_file(source_id, module_path, svelte2tsx, checker);
+		if (is_svelte) {
+			mod = analyze_svelte_file(source_id, module_path, checker);
 		} else {
 			// For TypeScript/JS files, get the source file from the program
 			const source_file = program.getSourceFile(source_id);
@@ -105,31 +93,20 @@ export const gen: Gen = async ({log, filer}) => {
 				continue;
 			}
 
-			result = analyze_typescript_file(source_file, module_path, checker, log);
+			mod = analyze_typescript_file(source_file, module_path, checker, log);
 		}
 
-		if (!result.ok) {
-			const file_type = module_is_svelte(module_path) ? 'Svelte component' : 'TypeScript file';
-			log.error(`Failed to analyze ${file_type} ${module_path}:`, result.message);
+		if (!mod) {
+			const file_type = is_svelte ? 'Svelte component' : 'TypeScript file';
+			log.error(`Failed to analyze ${file_type} ${module_path}`);
 			continue;
 		}
 
-		// Extract Src_Module from the Result (remove 'ok' field)
-		const {ok: _, ...mod} = result;
 		src_json.modules![module_key] = mod;
 	}
 
 	// Sort modules alphabetically for deterministic output and cleaner diffs
-	if (src_json.modules) {
-		const sorted_modules: Record<string, Src_Module> = {};
-		for (const key of Object.keys(src_json.modules).sort()) {
-			sorted_modules[key] = src_json.modules[key]!;
-		}
-		src_json.modules = sorted_modules;
-	}
-
-	// Compute imported_by relationships
-	compute_imported_by(src_json);
+	src_json.modules = src_json.modules ? sort_modules(src_json.modules) : undefined;
 
 	log.info('package metadata generation complete');
 
@@ -188,25 +165,15 @@ const enhance_declaration = (
 	return result;
 };
 
-const compute_imported_by = (src_json: Src_Json): void => {
-	if (!src_json.modules) return;
-
-	for (const [module_key, module] of Object.entries(src_json.modules)) {
-		if (!module.imports) continue;
-
-		for (const import_spec of module.imports) {
-			// Find matching modules
-			for (const [_other_key, other_module] of Object.entries(src_json.modules)) {
-				const module_name = module_normalize_name(other_module.path);
-				if (module_matches_import(import_spec, module_name)) {
-					other_module.imported_by ??= [];
-					if (!other_module.imported_by.includes(module_key)) {
-						other_module.imported_by.push(module_key);
-					}
-				}
-			}
-		}
+/**
+ * Sort modules alphabetically by key for deterministic output and cleaner diffs.
+ */
+const sort_modules = (modules: Record<string, Src_Module>): Record<string, Src_Module> => {
+	const sorted: Record<string, Src_Module> = {};
+	for (const key of Object.keys(modules).sort()) {
+		sorted[key] = modules[key]!;
 	}
+	return sorted;
 };
 
 const generate_package_ts = (package_json: Package_Json, src_json: Src_Json): string => {
@@ -225,25 +192,16 @@ export const src_json: Src_Json = ${JSON.stringify(src_json, null, '\t')};
 /**
  * Collect and filter source files from filer.
  *
- * Returns disknodes for TypeScript/JS files and Svelte components
- * (if svelte2tsx is available) from /src/lib/, excluding test files.
+ * Returns disknodes for TypeScript/JS files and Svelte components from /src/lib/, excluding test files.
  */
-const collect_source_files = (
-	filer: Filer,
-	svelte2tsx: typeof import('svelte2tsx').svelte2tsx | undefined,
-	log: Logger,
-): Array<any> => {
+const collect_source_files = (filer: Filer, log: Logger): Array<any> => {
 	log.info(`filer has ${filer.files.size} files total`);
 
 	const source_disknodes: Array<any> = [];
 	for (const [id, disknode] of filer.files.entries()) {
 		if (module_is_source(id)) {
-			// Always include TypeScript/JS files
-			if (module_is_typescript(id)) {
-				source_disknodes.push(disknode);
-			}
-			// Include Svelte files if svelte2tsx is available
-			else if (module_is_svelte(id) && svelte2tsx) {
+			// Include TypeScript/JS files and Svelte components
+			if (module_is_typescript(id) || module_is_svelte(id)) {
 				source_disknodes.push(disknode);
 			}
 		}
@@ -264,18 +222,8 @@ const collect_source_files = (
 const analyze_svelte_file = (
 	source_id: string,
 	module_path: string,
-	svelte2tsx: typeof import('svelte2tsx').svelte2tsx | undefined,
 	checker: ts.TypeChecker,
-): Result<Src_Module, {message: string}> => {
-	const mod: Src_Module = {
-		path: module_path,
-		declarations: [],
-	};
-
-	if (!svelte2tsx) {
-		return {ok: false, message: 'svelte2tsx is required to analyze Svelte components'};
-	}
-
+): Src_Module | null => {
 	try {
 		const svelte_source = readFileSync(source_id, 'utf-8');
 
@@ -298,10 +246,12 @@ const analyze_svelte_file = (
 		// Analyze the component
 		const decl = svelte_analyze_component(ts_result.code, temp_source, checker, component_name);
 
-		mod.declarations!.push(decl);
-		return {ok: true, ...mod};
-	} catch (err) {
-		return {ok: false, message: err instanceof Error ? err.message : String(err)};
+		return {
+			path: module_path,
+			declarations: [decl],
+		};
+	} catch (_err) {
+		return null;
 	}
 };
 
@@ -310,17 +260,11 @@ const analyze_typescript_file = (
 	module_path: string,
 	checker: ts.TypeChecker,
 	log: Logger,
-): Result<Src_Module, {message: string}> => {
+): Src_Module | null => {
 	const mod: Src_Module = {
 		path: module_path,
 		declarations: [],
 	};
-
-	// Only assign imports if non-empty
-	const imports = ts_extract_imports(source_file);
-	if (imports.length) {
-		mod.imports = imports;
-	}
 
 	// Extract module-level comment
 	const module_comment = ts_extract_module_comment(source_file);
@@ -338,5 +282,5 @@ const analyze_typescript_file = (
 		}
 	}
 
-	return {ok: true, ...mod};
+	return mod;
 };

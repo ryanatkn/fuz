@@ -46,6 +46,7 @@ export const package_json: Package_Json = {
 		'@sveltejs/kit': '^2.26',
 		'esm-env': '^1',
 		svelte: '^5',
+		svelte2tsx: '^0.7.45',
 	},
 	peerDependenciesMeta: {
 		'@ryanatkn/gro': {
@@ -806,7 +807,6 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
-			imported_by: ['./dialog.ts'],
 		},
 		'./Dialogs.svelte': {
 			path: 'Dialogs.svelte',
@@ -1594,7 +1594,6 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
-			imported_by: ['./logos.ts'],
 		},
 		'./Teleport.svelte': {
 			path: 'Teleport.svelte',
@@ -1933,7 +1932,6 @@ export const src_json: Src_Json = {
 					],
 				},
 			],
-			imports: ['$lib/pkg.js', '$lib/src_json.js'],
 			module_comment:
 				'API documentation data helpers\nFunctions for looking up and searching declarations',
 		},
@@ -1977,15 +1975,6 @@ export const src_json: Src_Json = {
 						},
 					],
 				},
-			],
-			imports: ['svelte'],
-			imported_by: [
-				'./contextmenu_state.svelte.ts',
-				'./docs_helpers.svelte.ts',
-				'./pkg.ts',
-				'./themer.svelte.ts',
-				'./tome.ts',
-				'./tooltip_state.svelte.ts',
 			],
 		},
 		'./contextmenu_helpers.ts': {
@@ -2144,7 +2133,6 @@ export const src_json: Src_Json = {
 					],
 				},
 			],
-			imports: ['@ryanatkn/belt/dom.js', '$lib/contextmenu_state.svelte.js'],
 		},
 		'./contextmenu_state.svelte.ts': {
 			path: 'contextmenu_state.svelte.ts',
@@ -2592,18 +2580,6 @@ export const src_json: Src_Json = {
 					],
 				},
 			],
-			imports: [
-				'svelte',
-				'@ryanatkn/belt/result.js',
-				'@ryanatkn/belt/async.js',
-				'svelte/action',
-				'esm-env',
-				'svelte/elements',
-				'@ryanatkn/belt/object.js',
-				'$lib/dimensions.svelte.js',
-				'$lib/context_helpers.js',
-			],
-			imported_by: ['./contextmenu_helpers.ts', './declaration_contextmenu.ts'],
 		},
 		'./csp.ts': {
 			path: 'csp.ts',
@@ -2960,8 +2936,6 @@ export const src_json: Src_Json = {
 					],
 				},
 			],
-			imports: ['@ryanatkn/belt/types.js'],
-			imported_by: ['./csp_of_ryanatkn.ts'],
 		},
 		'./csp_of_ryanatkn.ts': {
 			path: 'csp_of_ryanatkn.ts',
@@ -2975,7 +2949,6 @@ export const src_json: Src_Json = {
 					type_signature: 'Csp_Source_Spec[]',
 				},
 			],
-			imports: ['$lib/csp.js'],
 		},
 		'./declaration_contextmenu.ts': {
 			path: 'declaration_contextmenu.ts',
@@ -3018,7 +2991,6 @@ export const src_json: Src_Json = {
 					],
 				},
 			],
-			imports: ['$app/paths', '$lib/src_json.js', '$lib/contextmenu_state.svelte.js'],
 		},
 		'./dialog.ts': {
 			path: 'dialog.ts',
@@ -3099,7 +3071,6 @@ export const src_json: Src_Json = {
 					type_signature: 'Dialog_Layout[]',
 				},
 			],
-			imports: ['svelte', '$lib/Dialog.svelte'],
 		},
 		'./dimensions.svelte.ts': {
 			path: 'dimensions.svelte.ts',
@@ -3122,7 +3093,6 @@ export const src_json: Src_Json = {
 					],
 				},
 			],
-			imported_by: ['./contextmenu_state.svelte.ts'],
 		},
 		'./docs_helpers.svelte.ts': {
 			path: 'docs_helpers.svelte.ts',
@@ -3272,13 +3242,6 @@ export const src_json: Src_Json = {
 					],
 				},
 			],
-			imports: [
-				'$app/paths',
-				'svelte/reactivity',
-				'@ryanatkn/belt/string.js',
-				'$lib/context_helpers.js',
-			],
-			imported_by: ['./tome.ts'],
 		},
 		'./helpers.ts': {
 			path: 'helpers.ts',
@@ -3304,17 +3267,6 @@ export const src_json: Src_Json = {
 			],
 			module_comment:
 				'Renders any value to a string representation\n\n@param value Any JS value to stringify\n@returns A string representation of the value',
-			imported_by: [
-				'./contextmenu_state.svelte.ts',
-				'./docs_helpers.svelte.ts',
-				'./package.gen.ts',
-				'./pkg.ts',
-				'./svelte_helpers.ts',
-				'./themer.svelte.ts',
-				'./tome.ts',
-				'./tooltip_state.svelte.ts',
-				'./ts_helpers.ts',
-			],
 		},
 		'./intersect.ts': {
 			path: 'intersect.ts',
@@ -3458,7 +3410,6 @@ export const src_json: Src_Json = {
 					],
 				},
 			],
-			imports: ['svelte/action'],
 		},
 		'./logos.ts': {
 			path: 'logos.ts',
@@ -3572,7 +3523,6 @@ export const src_json: Src_Json = {
 					type_signature: 'Svg_Data',
 				},
 			],
-			imports: ['$lib/Svg.svelte'],
 		},
 		'./module_helpers.ts': {
 			path: 'module_helpers.ts',
@@ -3616,31 +3566,12 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'module_normalize_name',
-					kind: 'function',
-					doc_comment: 'Normalize module name by removing file extensions.',
-					summary: 'Normalize module name by removing file extensions.',
-					examples: [
-						"module_normalize_name('foo.ts') // => 'foo'\nmodule_normalize_name('bar.svelte') // => 'bar'",
-					],
-					source_line: 39,
-					type_signature: '(path: string): string',
-					return_type: 'string',
-					parameters: [
-						{
-							name: 'path',
-							type: 'string',
-							optional: false,
-						},
-					],
-				},
-				{
 					name: 'module_get_key',
 					kind: 'function',
 					doc_comment: 'Convert module path to module key format (with ./ prefix).',
 					summary: 'Convert module path to module key format (with ./ prefix).',
 					examples: ["module_get_key('foo.ts') // => './foo.ts'"],
-					source_line: 48,
+					source_line: 38,
 					type_signature: '(module_path: string): string',
 					return_type: 'string',
 					parameters: [
@@ -3656,7 +3587,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Check if path is a TypeScript or JS file.',
 					summary: 'Check if path is a TypeScript or JS file.',
-					source_line: 53,
+					source_line: 43,
 					type_signature: '(path: string): boolean',
 					return_type: 'boolean',
 					parameters: [
@@ -3670,7 +3601,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'module_is_svelte',
 					kind: 'function',
-					source_line: 56,
+					source_line: 46,
 					type_signature: '(path: string): boolean',
 					return_type: 'boolean',
 					parameters: [
@@ -3684,7 +3615,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'module_is_test',
 					kind: 'function',
-					source_line: 58,
+					source_line: 48,
 					type_signature: '(path: string): boolean',
 					return_type: 'boolean',
 					parameters: [
@@ -3700,7 +3631,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Check if ID is a source file in /src/lib/ (excluding tests).',
 					summary: 'Check if ID is a source file in /src/lib/ (excluding tests).',
-					source_line: 63,
+					source_line: 53,
 					type_signature: '(id: string): boolean',
 					return_type: 'boolean',
 					parameters: [
@@ -3711,35 +3642,9 @@ export const src_json: Src_Json = {
 						},
 					],
 				},
-				{
-					name: 'module_matches_import',
-					kind: 'function',
-					doc_comment:
-						'Check if an import specifier matches a module name.\n\nHandles both relative (./) and $lib/ import styles.',
-					summary: 'Check if an import specifier matches a module name.',
-					examples: [
-						"module_matches_import('./foo', 'foo') // => true\nmodule_matches_import('$lib/foo', 'foo') // => true\nmodule_matches_import('$lib/nested/bar', 'bar') // => true",
-					],
-					source_line: 76,
-					type_signature: '(import_spec: string, module_name: string): boolean',
-					return_type: 'boolean',
-					parameters: [
-						{
-							name: 'import_spec',
-							type: 'string',
-							optional: false,
-						},
-						{
-							name: 'module_name',
-							type: 'string',
-							optional: false,
-						},
-					],
-				},
 			],
 			module_comment:
 				'Module path and metadata helpers.\n\nProvides utilities for working with source module paths, file types,\nand import relationships in the package generation system.\n\nAll functions are prefixed with `module_` for clarity.',
-			imported_by: ['./package.gen.ts'],
 		},
 		'./package.gen.ts': {
 			path: 'package.gen.ts',
@@ -3747,23 +3652,8 @@ export const src_json: Src_Json = {
 				{
 					name: 'gen',
 					kind: 'function',
-					source_line: 53,
+					source_line: 50,
 				},
-			],
-			imports: [
-				'@ryanatkn/gro',
-				'@ryanatkn/gro/filer.js',
-				'@ryanatkn/belt/package_json.js',
-				'@ryanatkn/belt/log.js',
-				'@ryanatkn/belt/result.js',
-				'typescript',
-				'node:fs',
-				'@ryanatkn/gro/package_json.js',
-				'$lib/src_json.js',
-				'$lib/ts_helpers.js',
-				'$lib/tsdoc_helpers.js',
-				'$lib/svelte_helpers.js',
-				'$lib/module_helpers.js',
 			],
 			module_comment:
 				'Custom package generator with full TypeScript analysis\n\nGenerates package.json and src.json with rich metadata:\n- JSDoc/TSDoc comments with full tag support\n- Full type signatures\n- Source code locations\n- Parameter information with descriptions and defaults\n- Return value documentation\n- Usage examples\n- Dependency graphs\n- Svelte component props\n\n@see src/lib/src_json.ts for type definitions\n@see src/lib/tsdoc_helpers.ts for JSDoc/TSDoc parsing\n@see src/lib/ts_helpers.ts for TypeScript analysis\n@see src/lib/svelte_helpers.ts for Svelte component analysis',
@@ -3781,11 +3671,10 @@ export const src_json: Src_Json = {
 				{
 					name: 'src_json',
 					kind: 'variable',
-					source_line: 119,
+					source_line: 120,
 					type_signature: 'Src_Json',
 				},
 			],
-			imports: ['@ryanatkn/belt/package_json.js', '$lib/src_json.js'],
 			module_comment: '// Generated by package.gen.ts',
 		},
 		'./pkg.ts': {
@@ -3921,14 +3810,6 @@ export const src_json: Src_Json = {
 						'{ get: (error_message?: string | undefined) => Pkg; maybe_get: () => Pkg | undefined; set: (value: Pkg) => Pkg; }',
 				},
 			],
-			imports: [
-				'@ryanatkn/belt/string.js',
-				'@ryanatkn/belt/package_json.js',
-				'@ryanatkn/belt/url.js',
-				'$lib/context_helpers.js',
-				'$lib/src_json.js',
-			],
-			imported_by: ['./api_data.ts'],
 		},
 		'./rune_helpers.svelte.ts': {
 			path: 'rune_helpers.svelte.ts',
@@ -4259,20 +4140,6 @@ export const src_json: Src_Json = {
 							doc_comment: 'Module-level JSDoc comment',
 							summary: 'Module-level JSDoc comment',
 						},
-						{
-							name: 'imports',
-							kind: 'variable',
-							type_signature: 'Array<string>',
-							doc_comment: 'Direct imports from other modules',
-							summary: 'Direct imports from other modules',
-						},
-						{
-							name: 'imported_by',
-							kind: 'variable',
-							type_signature: 'Array<string>',
-							doc_comment: 'Modules that import this module',
-							summary: 'Modules that import this module',
-						},
 					],
 				},
 				{
@@ -4280,7 +4147,7 @@ export const src_json: Src_Json = {
 					kind: 'type',
 					doc_comment: 'Collection of modules indexed by path',
 					summary: 'Collection of modules indexed by path',
-					source_line: 139,
+					source_line: 135,
 					type_signature: 'Src_Modules',
 				},
 				{
@@ -4291,7 +4158,7 @@ export const src_json: Src_Json = {
 					see_also: [
 						'://github.com/ryanatkn/gro/blob/main/src/docs/gro_plugin_sveltekit_app.md#well-known-src',
 					],
-					source_line: 145,
+					source_line: 141,
 					type_signature: 'Src_Json',
 					properties: [
 						{
@@ -4322,7 +4189,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: "Helper to get a declaration's display name",
 					summary: "Helper to get a declaration's display name",
-					source_line: 157,
+					source_line: 153,
 					type_signature: '(decl: Src_Module_Declaration): string',
 					return_type: 'string',
 					parameters: [
@@ -4338,7 +4205,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Helper to get a short type summary for tooltips',
 					summary: 'Helper to get a short type summary for tooltips',
-					source_line: 175,
+					source_line: 171,
 					type_signature: '(decl: Src_Module_Declaration): string | undefined',
 					return_type: 'string | undefined',
 					parameters: [
@@ -4354,7 +4221,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Generate import statement for a declaration',
 					summary: 'Generate import statement for a declaration',
-					source_line: 189,
+					source_line: 185,
 					type_signature:
 						'(decl: Src_Module_Declaration, module_path: string, pkg_name: string): string',
 					return_type: 'string',
@@ -4379,15 +4246,6 @@ export const src_json: Src_Json = {
 			],
 			module_comment:
 				'Source code metadata types\n\nOriginally inlined from @ryanatkn/belt, extended with rich documentation features:\n- Function parameter descriptions and default values\n- Return value documentation\n- JSDoc tag extraction (@ example, @ deprecated, @ see, @ since)\n- Component prop metadata for Svelte\n- Source location tracking\n- Generic type parameters\n\n@see tsdoc_helpers.ts for JSDoc/TSDoc parsing\n@see ts_helpers.ts for TypeScript AST extraction\n@see svelte_helpers.ts for Svelte component analysis',
-			imported_by: [
-				'./api_data.ts',
-				'./declaration_contextmenu.ts',
-				'./package.gen.ts',
-				'./package.ts',
-				'./pkg.ts',
-				'./svelte_helpers.ts',
-				'./ts_helpers.ts',
-			],
 		},
 		'./storage.ts': {
 			path: 'storage.ts',
@@ -4452,8 +4310,6 @@ export const src_json: Src_Json = {
 					],
 				},
 			],
-			imports: ['esm-env'],
-			imported_by: ['./themer.svelte.ts'],
 		},
 		'./svelte_helpers.ts': {
 			path: 'svelte_helpers.ts',
@@ -4491,10 +4347,8 @@ export const src_json: Src_Json = {
 					],
 				},
 			],
-			imports: ['typescript', './src_json.js', './tsdoc_helpers.js'],
 			module_comment:
 				'Svelte component analysis helpers.\n\nExtracts metadata from Svelte components using svelte2tsx transformations:\n\n- Component props with types and JSDoc\n- Component-level documentation\n- Type information\n\nUses the TypeScript Compiler API to parse the transformed output from svelte2tsx.\n\nAll functions are prefixed with `svelte_` for clarity.',
-			imported_by: ['./package.gen.ts'],
 		},
 		'./themer.svelte.ts': {
 			path: 'themer.svelte.ts',
@@ -4655,13 +4509,6 @@ export const src_json: Src_Json = {
 					],
 				},
 			],
-			imports: [
-				'@ryanatkn/moss/theme.js',
-				'@ryanatkn/moss/themes.js',
-				'esm-env',
-				'$lib/context_helpers.js',
-				'$lib/storage.js',
-			],
 		},
 		'./tome.ts': {
 			path: 'tome.ts',
@@ -4723,13 +4570,6 @@ export const src_json: Src_Json = {
 					type_signature:
 						'{ get: (error_message?: string | undefined) => { name: string; category: string; component: any; related: string[]; }; maybe_get: () => { name: string; category: string; component: any; related: string[]; } | undefined; set: (value: { ...; }) => { ...; }; }',
 				},
-			],
-			imports: [
-				'$app/paths',
-				'@ryanatkn/belt/path.js',
-				'zod',
-				'$lib/context_helpers.js',
-				'$lib/docs_helpers.svelte.js',
 			],
 		},
 		'./tooltip_state.svelte.ts': {
@@ -4864,7 +4704,6 @@ export const src_json: Src_Json = {
 						'{ get: (error_message?: string | undefined) => Tooltip_State; maybe_get: () => Tooltip_State | undefined; set: (value: Tooltip_State) => Tooltip_State; }',
 				},
 			],
-			imports: ['svelte', '$lib/context_helpers.js'],
 			module_comment:
 				'Tooltip state management for ARIA-compliant tooltips\n\nThis module provides a global tooltip system with:\n- ARIA-compliant show delays (hover triggers after ~400ms)\n- Sticky behavior (can move cursor into tooltip)\n- Keyboard navigation support (immediate show on focus)\n- Smart positioning with viewport edge detection\n\n## ARIA Compliance\n\nFollowing the [ARIA Tooltip Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/):\n- Tooltip has `role="tooltip"` (handled by Tooltip.svelte)\n- Tooltip has unique `id` (accessible via `tooltip.id`)\n- **IMPORTANT**: Triggering elements MUST reference tooltip via `aria-describedby`\n- Escape key dismisses tooltip (handled by Tooltip.svelte)\n- Tooltips remain non-focusable\n\n## Usage Pattern\n\n@example\n```ts\nimport {Tooltip_State, tooltip_context} from \'$lib/tooltip_state.svelte.js\';\n\n// Create and provide tooltip state\nconst tooltip = new Tooltip_State(400, 200);\ntooltip_context.set(tooltip);\n```\n\n@example\n```svelte\n<script lang="ts">\nimport {tooltip_context} from \'$lib/tooltip_state.svelte.js\';\n\nconst tooltip = tooltip_context.get();\nlet button_el: HTMLButtonElement;\n\n// Show on hover (with delay)\nconst on_mouse_enter = (e: MouseEvent) => {\n  tooltip.show_delayed(e.clientX, e.clientY, my_tooltip_content);\n};\n\n// Show on focus (immediate for keyboard users)\nconst on_focus = () => {\n  const rect = button_el.getBoundingClientRect();\n  tooltip.show(rect.left + rect.width / 2, rect.bottom, my_tooltip_content);\n};\n\n// Hide with delay (allows moving cursor into tooltip)\nconst on_mouse_leave = () => tooltip.hide_delayed();\n\n// Hide immediately on blur\nconst on_blur = () => tooltip.hide();\n</script>\n\n<!-- IMPORTANT: Set aria-describedby when tooltip is open -->\n<button\n  bind:this={button_el}\n  aria-describedby={tooltip.opened ? tooltip.id : undefined}\n  onmouseenter={on_mouse_enter}\n  onmouseleave={on_mouse_leave}\n  onfocus={on_focus}\n  onblur={on_blur}\n>\n  Hover or focus me\n</button>\n\n{#snippet my_tooltip_content()}\n  <div>This is the tooltip content</div>\n{/snippet}\n```',
 		},
@@ -5045,27 +4884,11 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'ts_extract_imports',
-					kind: 'function',
-					doc_comment: 'Extract import statements.',
-					summary: 'Extract import statements.',
-					source_line: 341,
-					type_signature: '(source_file: SourceFile): string[]',
-					return_type: 'string[]',
-					parameters: [
-						{
-							name: 'source_file',
-							type: 'SourceFile',
-							optional: false,
-						},
-					],
-				},
-				{
 					name: 'ts_create_program',
 					kind: 'function',
 					doc_comment: 'Create TypeScript program for analysis.',
 					summary: 'Create TypeScript program for analysis.',
-					source_line: 356,
+					source_line: 341,
 					type_signature: '(log: { warn: (message: string) => void; }): Program | null',
 					return_type: 'Program | null',
 					parameters: [
@@ -5077,10 +4900,8 @@ export const src_json: Src_Json = {
 					],
 				},
 			],
-			imports: ['typescript', './src_json.js', './tsdoc_helpers.js'],
 			module_comment:
 				'TypeScript compiler API helpers for extracting metadata from source code.\n\nAll functions are prefixed with `ts_` for clarity.',
-			imported_by: ['./package.gen.ts'],
 		},
 		'./tsdoc_helpers.ts': {
 			path: 'tsdoc_helpers.ts',
@@ -5208,10 +5029,8 @@ export const src_json: Src_Json = {
 					],
 				},
 			],
-			imports: ['typescript'],
 			module_comment:
 				'TSDoc/JSDoc parsing helpers using the TypeScript Compiler API.\n\nProvides `tsdoc_parse()` for extracting JSDoc/TSDoc from TypeScript nodes.\n\n## How it works\n\nUses TypeScript\'s built-in `ts.getJSDocCommentsAndTags()` API to extract\nstructured documentation from AST nodes.\n\n## Behavioral notes (due to TS Compiler API)\n\n- Preserves dash separator in @param descriptions: `@param x - desc` → `"- desc"`\n- @throws tags have {Type} stripped by TS API; fallback regex extracts first word as error type\n- @see tags return unreliable values ("*" or undefined) from TS API\n\n## Usage\n\nWorks on all TypeScript nodes, including:\n- Regular TypeScript files (.ts, .tsx)\n- Transformed output from svelte2tsx\n- Any node with JSDoc comments in the AST\n\nAll functions are prefixed with `tsdoc_` for clarity.',
-			imported_by: ['./package.gen.ts', './svelte_helpers.ts', './ts_helpers.ts'],
 		},
 	},
 };

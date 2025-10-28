@@ -127,10 +127,6 @@ export interface Src_Module {
 	declarations?: Array<Src_Module_Declaration>;
 	/** Module-level JSDoc comment */
 	module_comment?: string;
-	/** Direct imports from other modules */
-	imports?: Array<string>;
-	/** Modules that import this module */
-	imported_by?: Array<string>;
 }
 
 /**

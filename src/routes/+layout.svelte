@@ -8,7 +8,7 @@
 
 	import Themed from '$lib/Themed.svelte';
 	import {pkg_context, parse_pkg} from '$lib/pkg.js';
-	import {package_json, src_json} from '$routes/package.js';
+	import {package_json, src_json} from '$lib/package.js';
 	import Spiders from '$lib/Spiders.svelte';
 	import Tooltip from '$lib/Tooltip.svelte';
 	import {Tooltip_State, tooltip_context} from '$lib/tooltip_state.svelte.js';
