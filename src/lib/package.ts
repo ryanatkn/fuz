@@ -699,8 +699,6 @@ export const src_json: Src_Json = {
 				{
 					name: 'Declaration_Link',
 					kind: 'component',
-					doc_comment: 'Show tooltip on mouse hover with ARIA-compliant delay',
-					summary: 'Show tooltip on mouse hover with ARIA-compliant delay',
 					props: [
 						{
 							name: 'decl',
@@ -1792,18 +1790,20 @@ export const src_json: Src_Json = {
 				},
 			],
 		},
-		'./Tooltip.svelte': {
-			path: 'Tooltip.svelte',
+		'./Tooltip_Root.svelte': {
+			path: 'Tooltip_Root.svelte',
 			declarations: [
 				{
-					name: 'Tooltip',
+					name: 'Tooltip_Root',
 					kind: 'component',
+					doc_comment: 'Calculate tooltip x position with smart positioning',
+					summary: 'Calculate tooltip x position with smart positioning',
 					props: [
 						{
-							name: 'tooltip',
-							type: 'Tooltip_State',
+							name: 'manager',
+							type: 'Tooltip_Manager',
 							optional: true,
-							description: 'Optional tooltip state - defaults to context value',
+							description: 'The tooltip manager instance',
 						},
 						{
 							name: 'offset_x',
@@ -1822,6 +1822,11 @@ export const src_json: Src_Json = {
 							type: 'number',
 							optional: true,
 							description: 'Padding from viewport edges',
+						},
+						{
+							name: 'children',
+							type: 'any',
+							optional: false,
 						},
 					],
 					source_line: 1,
@@ -2140,25 +2145,25 @@ export const src_json: Src_Json = {
 				{
 					name: 'Contextmenu_Params',
 					kind: 'type',
-					source_line: 13,
+					source_line: 12,
 					type_signature: 'Contextmenu_Params',
 				},
 				{
 					name: 'Contextmenu_Activate_Result',
 					kind: 'type',
-					source_line: 20,
+					source_line: 19,
 					type_signature: 'Contextmenu_Activate_Result',
 				},
 				{
 					name: 'Item_State',
 					kind: 'type',
-					source_line: 25,
+					source_line: 24,
 					type_signature: 'Item_State',
 				},
 				{
 					name: 'Entry_State',
 					kind: 'class',
-					source_line: 27,
+					source_line: 26,
 					members: [
 						{
 							name: 'is_menu',
@@ -2201,14 +2206,14 @@ export const src_json: Src_Json = {
 						{
 							name: 'promise',
 							kind: 'variable',
-							type_signature: 'Promise<any> | null',
+							type_signature: 'Promise<Contextmenu_Activate_Result> | null',
 						},
 					],
 				},
 				{
 					name: 'Submenu_State',
 					kind: 'class',
-					source_line: 50,
+					source_line: 49,
 					members: [
 						{
 							name: 'is_menu',
@@ -2235,14 +2240,14 @@ export const src_json: Src_Json = {
 						{
 							name: 'items',
 							kind: 'variable',
-							type_signature: 'Array<Item_State>',
+							type_signature: 'ReadonlyArray<Item_State>',
 						},
 					],
 				},
 				{
 					name: 'Root_Menu_State',
 					kind: 'class',
-					source_line: 64,
+					source_line: 63,
 					members: [
 						{
 							name: 'is_menu',
@@ -2262,20 +2267,20 @@ export const src_json: Src_Json = {
 						{
 							name: 'items',
 							kind: 'variable',
-							type_signature: 'Array<Item_State>',
+							type_signature: 'ReadonlyArray<Item_State>',
 						},
 					],
 				},
 				{
 					name: 'Contextmenu_Run',
 					kind: 'type',
-					source_line: 72,
+					source_line: 71,
 					type_signature: 'Contextmenu_Run',
 				},
 				{
 					name: 'Contextmenu_State_Options',
 					kind: 'type',
-					source_line: 76,
+					source_line: 75,
 					type_signature: 'Contextmenu_State_Options',
 					properties: [
 						{
@@ -2293,7 +2298,7 @@ export const src_json: Src_Json = {
 					summary:
 						'Creates a `contextmenu` store.\nSee usage with `Contextmenu_Root.svelte` and `Contextmenu.svelte`.',
 					see_also: ['://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event'],
-					source_line: 86,
+					source_line: 85,
 					members: [
 						{
 							name: 'layout',
@@ -2326,7 +2331,7 @@ export const src_json: Src_Json = {
 						{
 							name: 'params',
 							kind: 'variable',
-							type_signature: 'Array<Contextmenu_Params>',
+							type_signature: 'ReadonlyArray<Contextmenu_Params>',
 						},
 						{
 							name: 'error',
@@ -2342,7 +2347,7 @@ export const src_json: Src_Json = {
 						{
 							name: 'selections',
 							kind: 'variable',
-							type_signature: 'Array<Item_State>',
+							type_signature: 'ReadonlyArray<Item_State>',
 						},
 						{
 							name: 'can_collapse',
@@ -2377,7 +2382,7 @@ export const src_json: Src_Json = {
 						{
 							name: 'reset_items',
 							kind: 'function',
-							type_signature: '(items: Item_State[]) => void',
+							type_signature: '(items: readonly Item_State[]) => void',
 						},
 						{
 							name: 'activate',
@@ -2449,10 +2454,10 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Creates an attachment that sets up contextmenu behavior on an element.',
 					summary: 'Creates an attachment that sets up contextmenu behavior on an element.',
-					source_line: 349,
+					source_line: 350,
 					type_signature:
-						'<T extends Contextmenu_Params, U extends T | Array<T>>(params: U | null | undefined): (el: HTMLElement | SVGElement) => (() => void) | undefined',
-					return_type: '(el: HTMLElement | SVGElement) => (() => void) | undefined',
+						'<T extends Contextmenu_Params, U extends T | Array<T>>(params: U | null | undefined): Attachment<HTMLElement | SVGElement>',
+					return_type: 'Attachment<HTMLElement | SVGElement>',
 					parameters: [
 						{
 							name: 'params',
@@ -2465,7 +2470,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Open_Contextmenu_Options',
 					kind: 'type',
-					source_line: 370,
+					source_line: 373,
 					type_signature: 'Open_Contextmenu_Options',
 					properties: [
 						{
@@ -2497,7 +2502,7 @@ export const src_json: Src_Json = {
 						'Opens the contextmenu, if appropriate,\nquerying the menu items from the DOM starting at the event target.',
 					summary:
 						'Opens the contextmenu, if appropriate,\nquerying the menu items from the DOM starting at the event target.',
-					source_line: 387,
+					source_line: 390,
 					type_signature:
 						'(target: HTMLElement | SVGElement, x: number, y: number, contextmenu: Contextmenu_State, options?: Open_Contextmenu_Options | undefined): boolean',
 					return_type: 'boolean',
@@ -2540,21 +2545,21 @@ export const src_json: Src_Json = {
 				{
 					name: 'contextmenu_context',
 					kind: 'variable',
-					source_line: 473,
+					source_line: 476,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Contextmenu_State; maybe_get: () => Contextmenu_State | undefined; set: (value: Contextmenu_State) => Contextmenu_State; }',
 				},
 				{
 					name: 'contextmenu_submenu_context',
 					kind: 'variable',
-					source_line: 475,
+					source_line: 478,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Submenu_State; maybe_get: () => Submenu_State | undefined; set: (value: Submenu_State) => Submenu_State; }',
 				},
 				{
 					name: 'contextmenu_dimensions_context',
 					kind: 'variable',
-					source_line: 477,
+					source_line: 480,
 					type_signature:
 						'{ get: () => Dimensions; set: (value?: Dimensions | undefined) => Dimensions; }',
 				},
@@ -2565,7 +2570,7 @@ export const src_json: Src_Json = {
 						'Registers a contextmenu root and warns if multiple non-scoped roots are detected.\nOnly active in development mode. Automatically handles cleanup on unmount.',
 					summary:
 						'Registers a contextmenu root and warns if multiple non-scoped roots are detected.\nOnly active in development mode. Automatically handles cleanup on unmount.',
-					source_line: 488,
+					source_line: 491,
 					type_signature: '(get_scoped: () => boolean): void',
 					return_type: 'void',
 					parameters: [
@@ -3319,15 +3324,33 @@ export const src_json: Src_Json = {
 					type_signature: 'Intersect_Params_Or_Callback',
 				},
 				{
+					name: 'intersect_attachment',
+					kind: 'function',
+					doc_comment: 'Creates an attachment that observes element viewport intersection.',
+					summary: 'Creates an attachment that observes element viewport intersection.',
+					source_line: 32,
+					type_signature:
+						'(params: Intersect_Params_Or_Callback | null | undefined): Attachment<HTMLElement | SVGElement>',
+					return_type: 'Attachment<HTMLElement | SVGElement>',
+					parameters: [
+						{
+							name: 'params',
+							type: 'Intersect_Params_Or_Callback | null | undefined',
+							optional: false,
+							description: '- Callback function or params object, or nullish to disable',
+						},
+					],
+				},
+				{
 					name: 'On_Intersect',
 					kind: 'type',
-					source_line: 29,
+					source_line: 89,
 					type_signature: 'On_Intersect',
 				},
 				{
 					name: 'Intersect_State',
 					kind: 'type',
-					source_line: 31,
+					source_line: 91,
 					type_signature: 'Intersect_State',
 					properties: [
 						{
@@ -3360,13 +3383,13 @@ export const src_json: Src_Json = {
 				{
 					name: 'On_Disconnect',
 					kind: 'type',
-					source_line: 40,
+					source_line: 100,
 					type_signature: 'On_Disconnect',
 				},
 				{
 					name: 'Disconnect_State',
 					kind: 'type',
-					source_line: 42,
+					source_line: 102,
 					type_signature: 'Disconnect_State',
 					properties: [
 						{
@@ -3388,24 +3411,6 @@ export const src_json: Src_Json = {
 							name: 'observer',
 							kind: 'variable',
 							type_signature: 'IntersectionObserver',
-						},
-					],
-				},
-				{
-					name: 'intersect_attachment',
-					kind: 'function',
-					doc_comment: 'Creates an attachment that observes element viewport intersection.',
-					summary: 'Creates an attachment that observes element viewport intersection.',
-					source_line: 53,
-					type_signature:
-						'(params: Intersect_Params_Or_Callback | null | undefined): Attachment<Element>',
-					return_type: 'Attachment<Element>',
-					parameters: [
-						{
-							name: 'params',
-							type: 'Intersect_Params_Or_Callback | null | undefined',
-							optional: false,
-							description: '- Callback function or params object, or nullish to disable',
 						},
 					],
 				},
@@ -4579,9 +4584,9 @@ export const src_json: Src_Json = {
 					name: 'Tooltip_State',
 					kind: 'class',
 					doc_comment:
-						'Global tooltip state manager\n\nManages a single tooltip instance that can be shown/hidden\nwith sticky behavior (can move mouse into tooltip)',
-					summary: 'Global tooltip state manager',
-					source_line: 88,
+						'Individual tooltip state instance\n\nEach attachment gets its own instance with:\n- Position (x, y)\n- Content snippet\n- Open/closed state\n- Delayed show/hide timers',
+					summary: 'Individual tooltip state instance',
+					source_line: 56,
 					members: [
 						{
 							name: 'opened',
@@ -4607,8 +4612,7 @@ export const src_json: Src_Json = {
 							name: 'id',
 							kind: 'variable',
 							type_signature: 'string',
-							doc_comment:
-								'Unique ID for the tooltip element (for aria-describedby)\n\n**IMPORTANT**: Triggering elements must reference this ID via aria-describedby\nwhen the tooltip is open to ensure ARIA compliance.',
+							doc_comment: 'Unique ID for the tooltip element (for aria-describedby)',
 							summary: 'Unique ID for the tooltip element (for aria-describedby)',
 						},
 						{
@@ -4695,17 +4699,71 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'tooltip_context',
+					name: 'Tooltip_Manager',
+					kind: 'class',
+					doc_comment:
+						'Manages multiple active tooltip instances\n\nTracks all tooltips that are currently visible or waiting to be shown.\nThe Tooltip_Root component reads this to render all active tooltips.',
+					summary: 'Manages multiple active tooltip instances',
+					source_line: 177,
+					members: [
+						{
+							name: 'tooltips',
+							kind: 'variable',
+							type_signature: 'ReadonlyArray<Tooltip_State>',
+						},
+						{
+							name: 'register',
+							kind: 'function',
+							type_signature: '(tooltip: Tooltip_State) => void',
+							doc_comment: 'Register a tooltip with the manager',
+							summary: 'Register a tooltip with the manager',
+						},
+						{
+							name: 'unregister',
+							kind: 'function',
+							type_signature: '(tooltip: Tooltip_State) => void',
+							doc_comment: 'Unregister a tooltip from the manager',
+							summary: 'Unregister a tooltip from the manager',
+						},
+					],
+				},
+				{
+					name: 'tooltip_manager_context',
 					kind: 'variable',
-					doc_comment: 'Tooltip context for accessing global tooltip state',
-					summary: 'Tooltip context for accessing global tooltip state',
-					source_line: 216,
+					doc_comment: 'Tooltip manager context for accessing the manager',
+					summary: 'Tooltip manager context for accessing the manager',
+					source_line: 198,
 					type_signature:
-						'{ get: (error_message?: string | undefined) => Tooltip_State; maybe_get: () => Tooltip_State | undefined; set: (value: Tooltip_State) => Tooltip_State; }',
+						'{ get: (error_message?: string | undefined) => Tooltip_Manager; maybe_get: () => Tooltip_Manager | undefined; set: (value: Tooltip_Manager) => Tooltip_Manager; }',
+				},
+				{
+					name: 'tooltip_attachment',
+					kind: 'function',
+					doc_comment:
+						'Creates an attachment that sets up tooltip behavior on an element.\n\nAutomatically manages:\n- Tooltip state lifecycle (creation, registration, cleanup)\n- Mouse events (mouseenter, mouseleave for sticky behavior)\n- Keyboard events (focus, blur)\n- aria-describedby attribute for ARIA compliance\n- Tooltip positioning relative to cursor or element',
+					summary: 'Creates an attachment that sets up tooltip behavior on an element.',
+					source_line: 213,
+					type_signature:
+						'(content: Snippet<[]>, options?: { show_delay_ms?: number | undefined; hide_delay_ms?: number | undefined; } | undefined): Attachment<HTMLElement>',
+					return_type: 'Attachment<HTMLElement>',
+					parameters: [
+						{
+							name: 'content',
+							type: 'Snippet<[]>',
+							optional: false,
+							description: '- The tooltip content to display',
+						},
+						{
+							name: 'options',
+							type: '{ show_delay_ms?: number | undefined; hide_delay_ms?: number | undefined; } | undefined',
+							optional: true,
+							description: '- Optional configuration',
+						},
+					],
 				},
 			],
 			module_comment:
-				'Tooltip state management for ARIA-compliant tooltips\n\nThis module provides a global tooltip system with:\n- ARIA-compliant show delays (hover triggers after ~400ms)\n- Sticky behavior (can move cursor into tooltip)\n- Keyboard navigation support (immediate show on focus)\n- Smart positioning with viewport edge detection\n\n## ARIA Compliance\n\nFollowing the [ARIA Tooltip Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/):\n- Tooltip has `role="tooltip"` (handled by Tooltip.svelte)\n- Tooltip has unique `id` (accessible via `tooltip.id`)\n- **IMPORTANT**: Triggering elements MUST reference tooltip via `aria-describedby`\n- Escape key dismisses tooltip (handled by Tooltip.svelte)\n- Tooltips remain non-focusable\n\n## Usage Pattern\n\n@example\n```ts\nimport {Tooltip_State, tooltip_context} from \'$lib/tooltip_state.svelte.js\';\n\n// Create and provide tooltip state\nconst tooltip = new Tooltip_State(400, 200);\ntooltip_context.set(tooltip);\n```\n\n@example\n```svelte\n<script lang="ts">\nimport {tooltip_context} from \'$lib/tooltip_state.svelte.js\';\n\nconst tooltip = tooltip_context.get();\nlet button_el: HTMLButtonElement;\n\n// Show on hover (with delay)\nconst on_mouse_enter = (e: MouseEvent) => {\n  tooltip.show_delayed(e.clientX, e.clientY, my_tooltip_content);\n};\n\n// Show on focus (immediate for keyboard users)\nconst on_focus = () => {\n  const rect = button_el.getBoundingClientRect();\n  tooltip.show(rect.left + rect.width / 2, rect.bottom, my_tooltip_content);\n};\n\n// Hide with delay (allows moving cursor into tooltip)\nconst on_mouse_leave = () => tooltip.hide_delayed();\n\n// Hide immediately on blur\nconst on_blur = () => tooltip.hide();\n</script>\n\n<!-- IMPORTANT: Set aria-describedby when tooltip is open -->\n<button\n  bind:this={button_el}\n  aria-describedby={tooltip.opened ? tooltip.id : undefined}\n  onmouseenter={on_mouse_enter}\n  onmouseleave={on_mouse_leave}\n  onfocus={on_focus}\n  onblur={on_blur}\n>\n  Hover or focus me\n</button>\n\n{#snippet my_tooltip_content()}\n  <div>This is the tooltip content</div>\n{/snippet}\n```',
+				'Tooltip state management for ARIA-compliant tooltips\n\nThis module provides a tooltip attachment system with:\n- ARIA-compliant show delays (hover triggers after ~400ms)\n- Sticky behavior (can move cursor into tooltip)\n- Keyboard navigation support (immediate show on focus)\n- Smart positioning with viewport edge detection\n- Support for multiple simultaneous tooltips\n\n## ARIA Compliance\n\nFollowing the [ARIA Tooltip Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/):\n- Tooltip has `role="tooltip"` (handled by Tooltip_Root.svelte)\n- Tooltip has unique `id` (accessible via `tooltip.id`)\n- Triggering elements automatically get `aria-describedby` when tooltip is open\n- Escape key dismisses tooltip (handled by Tooltip_Root.svelte)\n- Tooltips remain non-focusable\n\n## Usage Pattern\n\n@example\n```svelte\n<script lang="ts">\nimport {tooltip_attachment} from \'$lib/tooltip_state.svelte.js\';\n</script>\n\n<button {@attach tooltip_attachment(tooltip_content)}>\n  Hover me\n</button>\n\n{#snippet tooltip_content()}\n  <div>This is a tooltip!</div>\n{/snippet}\n```',
 		},
 		'./ts_helpers.ts': {
 			path: 'ts_helpers.ts',

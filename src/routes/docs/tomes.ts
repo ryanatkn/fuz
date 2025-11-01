@@ -16,7 +16,6 @@ import Hue_Input from '$routes/docs/hue_input/+page.svelte';
 import Breadcrumb from '$routes/docs/breadcrumb/+page.svelte';
 import Card from '$routes/docs/card/+page.svelte';
 import Svg from '$routes/docs/svg/+page.svelte';
-import Tooltip from '$routes/docs/tooltip/+page.svelte';
 import csp from '$routes/docs/csp/+page.svelte';
 import logos from '$routes/docs/logos/+page.svelte';
 import theming from '$routes/docs/theming/+page.svelte';
@@ -77,7 +76,7 @@ export const tomes: Array<Tome> = [
 		name: 'Contextmenu',
 		category: 'components',
 		component: Contextmenu,
-		related: ['Tooltip'],
+		related: [],
 	},
 	{
 		name: 'Details',
@@ -150,11 +149,5 @@ export const tomes: Array<Tome> = [
 		category: 'components',
 		component: Themed,
 		related: ['theming'],
-	},
-	{
-		name: 'Tooltip',
-		category: 'components',
-		component: Tooltip,
-		related: ['Contextmenu'],
 	},
 ];
