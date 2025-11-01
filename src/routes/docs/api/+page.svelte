@@ -60,18 +60,11 @@
 		</div>
 	{:else}
 		<!-- Render all declarations alphabetically -->
-		{#each sorted_declarations as { decl, module_path, src_module: module } (decl.name)}
+		{#each sorted_declarations as { decl, module_path } (decl.name)}
 			<Tome_Section>
 				<Tome_Section_Header text={decl.name} />
 				<article id={decl.name} class="declaration_detail">
-					<Api_Page
-						{decl}
-						{module_path}
-						src_module={module}
-						pkg_name={pkg.package_json.name}
-						repo_url={pkg.repo_url}
-						homepage_url={pkg.homepage_url ?? undefined}
-					/>
+					<Api_Page {decl} {module_path} pkg_name={pkg.package_json.name} repo_url={pkg.repo_url} />
 				</article>
 			</Tome_Section>
 		{/each}

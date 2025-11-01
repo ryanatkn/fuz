@@ -10,17 +10,13 @@
 	const {
 		decl,
 		module_path,
-		src_module,
 		pkg_name,
 		repo_url,
-		homepage_url,
 	}: {
 		decl: Src_Module_Declaration;
 		module_path: string;
-		src_module?: any; // TODO: import Src_Module type
 		pkg_name?: string;
 		repo_url?: string;
-		homepage_url?: string;
 	} = $props();
 
 	// Generate source URL
@@ -37,7 +33,7 @@
 <!-- Metadata -->
 {#if module_path && pkg_name}
 	<p>
-		<Module_Link {module_path} {src_module} {pkg_name} {repo_url} {homepage_url} />
+		<Module_Link {module_path} {repo_url} />
 	</p>
 {:else if source_url}
 	<p>

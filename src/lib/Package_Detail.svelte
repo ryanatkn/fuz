@@ -194,13 +194,7 @@
 						class:json={module_name.endsWith('.json')}
 					>
 						<div class="module_content">
-							<Module_Link
-								module_path={exports_key || `./${module_name}`}
-								src_module={pkg_module}
-								pkg_name={package_json.name}
-								repo_url={pkg.repo_url}
-								homepage_url={pkg.homepage_url ?? undefined}
-							>
+							<Module_Link module_path={exports_key || `./${module_name}`} repo_url={pkg.repo_url}>
 								{module_name}
 							</Module_Link>
 							{#if declarations?.length}

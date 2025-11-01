@@ -1,9 +1,8 @@
 <script lang="ts">
 	import {resolve} from '$app/paths';
-	import Code from '@ryanatkn/fuz_code/Code.svelte';
-
 	import type {Snippet} from 'svelte';
-	import {get_type_summary, type Src_Module_Declaration} from '$lib/src_json.js';
+
+	import type {Src_Module_Declaration} from '$lib/src_json.js';
 	import {contextmenu_attachment} from '$lib/contextmenu_state.svelte.js';
 	import {create_declaration_contextmenu} from '$lib/declaration_contextmenu.js';
 
