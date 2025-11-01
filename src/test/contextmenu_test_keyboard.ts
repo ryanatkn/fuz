@@ -4,7 +4,7 @@
  */
 
 import {describe, test, assert, afterEach, vi} from 'vitest';
-import {unmount_component, create_keyboard_event, set_event_target} from '$lib/test_helpers.js';
+import {unmount_component, create_keyboard_event, set_event_target} from '$test/test_helpers.js';
 import {mount_contextmenu_root, type Shared_Test_Options} from '$test/contextmenu_test_helpers.js';
 
 export const create_shared_keyboard_tests = (

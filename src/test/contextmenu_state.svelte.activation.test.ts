@@ -86,7 +86,7 @@ describe('Contextmenu_State - Activation', () => {
 		test('activate() on submenu calls expand_selected', () => {
 			const submenu = new Submenu_State(contextmenu.root_menu, 2);
 			const child = new Entry_State(submenu, () => () => {});
-			submenu.items.push(child);
+			submenu.items = [...submenu.items, child];
 
 			contextmenu.select(submenu);
 			void contextmenu.activate(submenu);
@@ -109,7 +109,7 @@ describe('Contextmenu_State - Activation', () => {
 
 		test('activate_selected() selects first when no selection', () => {
 			const entry = new Entry_State(contextmenu.root_menu, () => () => {});
-			contextmenu.root_menu.items.push(entry);
+			contextmenu.root_menu.items = [...contextmenu.root_menu.items, entry];
 
 			void contextmenu.activate_selected();
 
@@ -246,7 +246,7 @@ describe('Contextmenu_State - Activation', () => {
 				return {ok: true};
 			});
 
-			contextmenu.root_menu.items.push(entry1, entry2);
+			contextmenu.root_menu.items = [...contextmenu.root_menu.items, entry1, entry2];
 			contextmenu.open([], 0, 0);
 
 			// Start both activations
@@ -316,7 +316,7 @@ describe('Contextmenu_State - Activation', () => {
 			const entry2 = new Entry_State(contextmenu.root_menu, () => () => {
 				return {ok: true};
 			});
-			contextmenu.root_menu.items.push(entry2);
+			contextmenu.root_menu.items = [...contextmenu.root_menu.items, entry2];
 
 			void contextmenu.activate(entry2);
 			assert.strictEqual(contextmenu.opened, false);
@@ -365,7 +365,7 @@ describe('Contextmenu_State - Activation', () => {
 				() => true, // disabled function returns true
 			);
 
-			contextmenu.root_menu.items.push(disabled_entry);
+			contextmenu.root_menu.items = [...contextmenu.root_menu.items, disabled_entry];
 			contextmenu.select(disabled_entry);
 
 			// can_activate should return false for disabled entries

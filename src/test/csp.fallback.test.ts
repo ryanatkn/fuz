@@ -287,7 +287,7 @@ describe('fallback chain length limits', () => {
 			while (current?.fallback && depth < MAX_DEPTH) {
 				depth++;
 				// Follow the first fallback
-				current = csp_directive_spec_by_name.get(current.fallback[0]);
+				current = csp_directive_spec_by_name.get(current.fallback[0]!);
 			}
 
 			assert.ok(

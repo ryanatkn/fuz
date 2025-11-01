@@ -423,12 +423,12 @@ describe('concurrent calls', () => {
 		return Promise.all(promises).then((results) => {
 			// Each result should have only its own source
 			for (let i = 0; i < results.length; i++) {
-				assert.ok(results[i]['img-src']!.includes(`source${i}.com` as any));
+				assert.ok(results[i]!['img-src']!.includes(`source${i}.com` as any));
 
 				// Should not have other sources
 				for (let j = 0; j < results.length; j++) {
 					if (i !== j) {
-						assert.ok(!results[i]['img-src']!.includes(`source${j}.com` as any));
+						assert.ok(!results[i]!['img-src']!.includes(`source${j}.com` as any));
 					}
 				}
 			}

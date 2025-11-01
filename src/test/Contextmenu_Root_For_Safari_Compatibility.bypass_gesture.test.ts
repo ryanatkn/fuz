@@ -10,12 +10,20 @@ import {
 	create_touch_event,
 	create_contextmenu_event,
 	set_event_target,
-} from '$lib/test_helpers.js';
+} from '$test/test_helpers.js';
 import {mount_contextmenu_root, setup_contextmenu_action} from '$test/contextmenu_test_helpers.js';
 import {
 	CONTEXTMENU_DEFAULT_LONGPRESS_DURATION,
 	CONTEXTMENU_DEFAULT_BYPASS_WINDOW,
 } from '$lib/contextmenu_helpers.js';
+
+// ResizeObserver is not currently available in jsdom
+class ResizeObserverMock {
+	observe = vi.fn();
+	unobserve = vi.fn();
+	disconnect = vi.fn();
+}
+vi.stubGlobal('ResizeObserver', ResizeObserverMock);
 
 describe('Contextmenu_Root_For_Safari_Compatibility - Tap-Then-Longpress Bypass Gesture', () => {
 	let mounted: ReturnType<typeof mount_contextmenu_root> | null = null;

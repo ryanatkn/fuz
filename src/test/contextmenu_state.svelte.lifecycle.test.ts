@@ -29,7 +29,7 @@ describe('Contextmenu_State - Lifecycle', () => {
 			// Setup some selections first
 			const entry = new Entry_State(contextmenu.root_menu, () => () => {});
 			entry.selected = true;
-			contextmenu.selections.push(entry);
+			contextmenu.selections = [...contextmenu.selections, entry];
 
 			contextmenu.open([], 0, 0);
 			assert.strictEqual(contextmenu.selections.length, 0);
@@ -48,7 +48,7 @@ describe('Contextmenu_State - Lifecycle', () => {
 			entry.promise = Promise.resolve();
 			entry.pending = true;
 			entry.error_message = 'test error';
-			contextmenu.root_menu.items.push(entry);
+			contextmenu.root_menu.items = [...contextmenu.root_menu.items, entry];
 
 			contextmenu.open([], 0, 0); // Must open first, otherwise close() returns early
 			contextmenu.close();
@@ -66,7 +66,7 @@ describe('Contextmenu_State - Lifecycle', () => {
 				await promise;
 				return {ok: true};
 			});
-			contextmenu.root_menu.items.push(entry);
+			contextmenu.root_menu.items = [...contextmenu.root_menu.items, entry];
 
 			contextmenu.open([], 0, 0);
 			void contextmenu.activate(entry);
@@ -94,8 +94,8 @@ describe('Contextmenu_State - Lifecycle', () => {
 			const submenu = new Submenu_State(contextmenu.root_menu, 2);
 			const entry = new Entry_State(submenu, () => () => {});
 			entry.error_message = 'error';
-			submenu.items.push(entry);
-			contextmenu.root_menu.items.push(submenu);
+			submenu.items = [...submenu.items, entry];
+			contextmenu.root_menu.items = [...contextmenu.root_menu.items, submenu];
 
 			contextmenu.open([], 0, 0); // Must open first, otherwise close() returns early
 			contextmenu.close();
@@ -161,8 +161,8 @@ describe('Contextmenu_State - Lifecycle', () => {
 			const entry = new Entry_State(contextmenu.root_menu, () => () => {});
 			entry.error_message = 'old error';
 			entry.selected = true;
-			contextmenu.selections.push(entry);
-			contextmenu.root_menu.items.push(entry);
+			contextmenu.selections = [...contextmenu.selections, entry];
+			contextmenu.root_menu.items = [...contextmenu.root_menu.items, entry];
 
 			const params = [
 				{snippet: 'text' as const, props: {content: 'New', icon: '🆕', run: () => {}}},
@@ -189,7 +189,7 @@ describe('Contextmenu_State - Lifecycle', () => {
 				ran_to_completion = true;
 				return {ok: true};
 			});
-			contextmenu.root_menu.items.push(entry);
+			contextmenu.root_menu.items = [...contextmenu.root_menu.items, entry];
 
 			contextmenu.open([], 0, 0);
 			const activation = contextmenu.activate(entry);

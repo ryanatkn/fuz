@@ -9,7 +9,7 @@
 	import {DEV} from 'esm-env';
 
 	import {create_context} from '$lib/context_helpers.js';
-	import {intersect} from '$lib/intersect.js';
+	import {intersect_attachment} from '$lib/intersect.js';
 	import {docs_links_context} from '$lib/docs_helpers.svelte.js';
 
 	const {
@@ -30,7 +30,7 @@
 
 <section
 	{...rest}
-	use:intersect={({intersecting}) => {
+	{@attach intersect_attachment(({intersecting}) => {
 		if (!slug) {
 			if (DEV) console.error('Tome_Section_Header must be a child of Tome_Section'); // eslint-disable-line no-console
 			return;
@@ -40,7 +40,7 @@
 		} else {
 			docs_links.slugs_onscreen.delete(slug);
 		}
-	}}
+	})}
 >
 	{@render children()}
 </section>

@@ -270,7 +270,7 @@
 			return;
 		}
 
-		const {clientX, clientY} = touches[0];
+		const {clientX, clientY} = touches[0]!;
 
 		// Bypass the contextmenu behavior in certain conditions including a tap-and-longpress gesture.
 		// To handle tap-then-longpress we need to see if `first_tap_time`
@@ -331,7 +331,7 @@
 		if (longpress_timeout == null || contextmenu.opened) return;
 		const {touches} = e;
 		if (touches.length !== 1) return;
-		const {clientX, clientY} = touches[0];
+		const {clientX, clientY} = touches[0]!;
 		const distance = Math.hypot(clientX - touch_x!, clientY - touch_y!);
 		if (distance > longpress_move_tolerance) {
 			// User is scrolling - cancel longpress but DON'T preventDefault

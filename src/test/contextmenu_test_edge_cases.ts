@@ -5,7 +5,7 @@
 
 import {describe, test, assert, afterEach} from 'vitest';
 import {flushSync} from 'svelte';
-import {unmount_component, create_contextmenu_event, set_event_target} from '$lib/test_helpers.js';
+import {unmount_component, create_contextmenu_event, set_event_target} from '$test/test_helpers.js';
 import {
 	mount_contextmenu_root,
 	setup_contextmenu_action,
@@ -63,7 +63,7 @@ export const create_shared_edge_case_tests = (
 			flushSync();
 
 			assert.strictEqual(contextmenu.opened, true);
-			assert.strictEqual(contextmenu.params[0], snippet);
+			assert.strictEqual(contextmenu.params[0]!, snippet);
 		});
 
 		test('handles empty params array', () => {

@@ -9,7 +9,7 @@ export class Themer {
 	theme: Theme = $state()!;
 	color_scheme: Color_Scheme = $state()!;
 
-	constructor(theme: Theme = default_themes[0], color_scheme: Color_Scheme = 'auto') {
+	constructor(theme: Theme = default_themes[0]!, color_scheme: Color_Scheme = 'auto') {
 		if (parse_color_scheme(color_scheme) === null) {
 			throw Error('unknown color scheme: ' + color_scheme);
 		}
@@ -60,7 +60,7 @@ export const save_theme = (theme: Theme | null, key = THEME_STORAGE_KEY): void =
 	save_to_storage(key, theme, true);
 };
 
-export const load_theme = (fallback: Theme = default_themes[0], key = THEME_STORAGE_KEY): Theme =>
+export const load_theme = (fallback: Theme = default_themes[0]!, key = THEME_STORAGE_KEY): Theme =>
 	load_from_storage<Theme>(key, true) ?? fallback; // TODO use `parse_theme` from moss
 
 // TODO move to moss

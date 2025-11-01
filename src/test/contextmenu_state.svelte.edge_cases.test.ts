@@ -63,7 +63,7 @@ describe('Contextmenu_State - Edge Cases', () => {
 				return {ok: true};
 			});
 
-			contextmenu.root_menu.items.push(failing_entry, success_entry);
+			contextmenu.root_menu.items = [...contextmenu.root_menu.items, failing_entry, success_entry];
 			contextmenu.open([], 0, 0);
 
 			void contextmenu.activate(failing_entry);
@@ -78,7 +78,7 @@ describe('Contextmenu_State - Edge Cases', () => {
 			const entry = new Entry_State(contextmenu.root_menu, () => async () => {
 				throw new Error('error to clear');
 			});
-			contextmenu.root_menu.items.push(entry);
+			contextmenu.root_menu.items = [...contextmenu.root_menu.items, entry];
 
 			contextmenu.open([], 0, 0);
 
@@ -101,7 +101,7 @@ describe('Contextmenu_State - Edge Cases', () => {
 			const entry = new Entry_State(contextmenu.root_menu, () => async () => {
 				throw new Error('old error');
 			});
-			contextmenu.root_menu.items.push(entry);
+			contextmenu.root_menu.items = [...contextmenu.root_menu.items, entry];
 
 			contextmenu.open([], 0, 0);
 			await contextmenu.activate(entry);
@@ -188,7 +188,7 @@ describe('Contextmenu_State - Edge Cases', () => {
 
 		test('single item menus', () => {
 			const entry = new Entry_State(contextmenu.root_menu, () => () => {});
-			contextmenu.root_menu.items.push(entry);
+			contextmenu.root_menu.items = [...contextmenu.root_menu.items, entry];
 
 			contextmenu.select_next();
 			assert.strictEqual(entry.selected, true);
@@ -209,14 +209,14 @@ describe('Contextmenu_State - Edge Cases', () => {
 				const submenu = new Submenu_State(current_menu, i + 1) as any;
 				// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 				if (current_menu.is_menu) {
-					current_menu.items.push(submenu);
+					current_menu.items = [...current_menu.items, submenu];
 				}
 				current_menu = submenu;
 			}
 
 			// Add entry at deepest level
 			const deepest_entry = new Entry_State(current_menu, () => () => {});
-			current_menu.items.push(deepest_entry);
+			current_menu.items = [...current_menu.items, deepest_entry];
 
 			// Verify structure depth
 			let walker: any = deepest_entry;
@@ -248,11 +248,11 @@ describe('Contextmenu_State - Edge Cases', () => {
 				{length: 10},
 				() => new Entry_State(contextmenu.root_menu, () => () => {}),
 			);
-			contextmenu.root_menu.items.push(...entries);
+			contextmenu.root_menu.items = [...contextmenu.root_menu.items, ...entries];
 
 			// Rapid selections
 			for (let i = 0; i < 100; i++) {
-				contextmenu.select(entries[i % entries.length]);
+				contextmenu.select(entries[i % entries.length]!);
 			}
 
 			// Only one should be selected
@@ -269,7 +269,7 @@ describe('Contextmenu_State - Edge Cases', () => {
 						return {ok: true};
 					}),
 			);
-			contextmenu.root_menu.items.push(...entries);
+			contextmenu.root_menu.items = [...contextmenu.root_menu.items, ...entries];
 
 			contextmenu.open([], 0, 0);
 
@@ -314,7 +314,7 @@ describe('Contextmenu_State - Edge Cases', () => {
 				{length: 5},
 				() => new Entry_State(contextmenu.root_menu, () => () => {}),
 			);
-			contextmenu.root_menu.items.push(...entries);
+			contextmenu.root_menu.items = [...contextmenu.root_menu.items, ...entries];
 
 			// Iterate and mutate
 			contextmenu.root_menu.items.forEach((entry, i) => {

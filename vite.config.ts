@@ -5,7 +5,4 @@ export default defineConfig(({mode}) => ({
 	plugins: [sveltekit()],
 	// In test mode, use browser conditions so Svelte's mount() resolves to the client version
 	resolve: mode === 'test' ? {conditions: ['browser']} : undefined,
-	test: {
-		setupFiles: ['src/lib/test_setup.ts'],
-	},
 }));

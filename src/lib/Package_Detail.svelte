@@ -3,10 +3,12 @@
 	import {ensure_end, strip_end, strip_start} from '@ryanatkn/belt/string.js';
 	import {format_url} from '@ryanatkn/belt/url.js';
 	import type {Snippet} from 'svelte';
-	import type {Pkg} from '@ryanatkn/belt/pkg.js';
 
+	import type {Pkg} from '$lib/pkg.js';
 	import Details from '$lib/Details.svelte';
 	import Img_Or_Svg from '$lib/Img_Or_Svg.svelte';
+	import Declaration_Link from '$lib/Declaration_Link.svelte';
+	import Module_Link from '$lib/Module_Link.svelte';
 
 	interface Props {
 		pkg: Pkg; // TODO normalized version with cached primitives?
@@ -45,12 +47,6 @@
 	const license_url = $derived(
 		package_json.license && repository_url ? repository_url + '/blob/main/LICENSE' : null,
 	);
-
-	// TODO refactor
-	const to_source_url = (repo_url: string, module_name: string): string =>
-		repo_url +
-		'/blob/main/src/lib/' +
-		(module_name.endsWith('.js') ? module_name.slice(0, -3) + '.ts' : module_name);
 
 	const pkg_exports_keys = $derived(src_json.modules && Object.keys(src_json.modules)); // TODO hacky, see usage
 
@@ -187,7 +183,6 @@
 			<menu class="unstyled">
 				{#each modules as module_name, i (module_name)}
 					<!-- TODO improve rendering and enrich data - start with the type (not just extension - mime?) -->
-					{@const source_url = to_source_url(pkg.repo_url, module_name)}
 					{@const exports_key = pkg_exports_keys?.[i]}
 					{@const pkg_module = exports_key ? pkg_modules?.[exports_key] : undefined}
 					{@const declarations = pkg_module?.declarations?.filter((d) => d.name !== 'default')}
@@ -199,12 +194,20 @@
 						class:json={module_name.endsWith('.json')}
 					>
 						<div class="module_content">
-							<a class="chip" href={source_url}>{module_name}</a>
+							<Module_Link module_path={exports_key || `./${module_name}`} repo_url={pkg.repo_url}>
+								{module_name}
+							</Module_Link>
 							{#if declarations?.length}
 								<ul class="declarations unstyled">
-									{#each declarations as { name, kind } (name)}
-										<li class="declaration chip {kind}_declaration">
-											{name}
+									{#each declarations as decl (decl.name)}
+										<li>
+											<Declaration_Link
+												{decl}
+												module_path={exports_key || `./${module_name}`}
+												pkg_name={package_json.name}
+												repo_url={pkg.repo_url}
+												homepage_url={pkg.homepage_url ?? undefined}
+											/>
 										</li>
 									{/each}
 								</ul>
@@ -320,23 +323,5 @@
 		align-items: flex-start;
 		gap: var(--space_xs) 0;
 		padding-top: var(--space_xs);
-	}
-	.declaration {
-		font-family: var(--font_family_mono);
-		font-size: var(--font_size_sm);
-		margin-left: var(--space_xs2);
-		margin-right: var(--space_xs2);
-	}
-	.variable_declaration {
-		color: var(--color_d_5);
-	}
-	.function_declaration {
-		color: var(--color_c_5);
-	}
-	.type_declaration {
-		color: var(--color_g_5);
-	}
-	.class_declaration {
-		color: var(--color_f_5);
 	}
 </style>

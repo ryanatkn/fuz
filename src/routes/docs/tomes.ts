@@ -19,6 +19,7 @@ import Svg from '$routes/docs/svg/+page.svelte';
 import csp from '$routes/docs/csp/+page.svelte';
 import logos from '$routes/docs/logos/+page.svelte';
 import theming from '$routes/docs/theming/+page.svelte';
+import api from '$routes/docs/api/+page.svelte';
 
 // TODO maybe decouple `related` from `Tome` to get bidirectionality for free
 
@@ -34,6 +35,12 @@ export const tomes: Array<Tome> = [
 		category: 'guide',
 		component: theming,
 		related: [],
+	},
+	{
+		name: 'api',
+		category: 'guide',
+		component: api,
+		related: ['Package_Detail'],
 	},
 	{
 		name: 'csp',

@@ -20,7 +20,7 @@ describe('Contextmenu_State - Selection', () => {
 			entry1 = new Entry_State(contextmenu.root_menu, () => () => {});
 			entry2 = new Entry_State(contextmenu.root_menu, () => () => {});
 			entry3 = new Entry_State(contextmenu.root_menu, () => () => {});
-			contextmenu.root_menu.items.push(entry1, entry2, entry3);
+			contextmenu.root_menu.items = [entry1, entry2, entry3];
 		});
 
 		test('select() marks item as selected', () => {
@@ -117,13 +117,13 @@ describe('Contextmenu_State - Selection', () => {
 		test('collapse_selected() deselects nested item', () => {
 			const submenu = new Submenu_State(contextmenu.root_menu, 2);
 			const nested_entry = new Entry_State(submenu, () => () => {});
-			submenu.items.push(nested_entry);
+			submenu.items = [...submenu.items, nested_entry];
 
 			// Manually set up a nested selection
-			contextmenu.root_menu.items[0].selected = true;
+			contextmenu.root_menu.items[0]!.selected = true;
 			submenu.selected = true;
 			nested_entry.selected = true;
-			contextmenu.selections = [contextmenu.root_menu.items[0], submenu, nested_entry];
+			contextmenu.selections = [contextmenu.root_menu.items[0]!, submenu, nested_entry];
 
 			contextmenu.collapse_selected();
 
@@ -143,7 +143,7 @@ describe('Contextmenu_State - Selection', () => {
 		test('expand_selected() selects first child of submenu', () => {
 			const submenu = new Submenu_State(contextmenu.root_menu, 2);
 			const child = new Entry_State(submenu, () => () => {});
-			submenu.items.push(child);
+			submenu.items = [...submenu.items, child];
 			contextmenu.root_menu.items = [submenu];
 
 			contextmenu.select(submenu);
@@ -156,7 +156,7 @@ describe('Contextmenu_State - Selection', () => {
 
 		test('collapse_selected() respects can_collapse', () => {
 			const entry = new Entry_State(contextmenu.root_menu, () => () => {});
-			contextmenu.root_menu.items.push(entry);
+			contextmenu.root_menu.items = [...contextmenu.root_menu.items, entry];
 			contextmenu.select(entry);
 
 			// At root level, can_collapse is false
@@ -171,7 +171,7 @@ describe('Contextmenu_State - Selection', () => {
 
 		test('expand_selected() respects can_expand with empty submenu', () => {
 			const empty_submenu = new Submenu_State(contextmenu.root_menu, 2);
-			contextmenu.root_menu.items.push(empty_submenu);
+			contextmenu.root_menu.items = [...contextmenu.root_menu.items, empty_submenu];
 			contextmenu.select(empty_submenu);
 
 			// Empty submenu, can_expand is false
@@ -188,7 +188,7 @@ describe('Contextmenu_State - Selection', () => {
 			// This is a regression test for the bug where expand_selected()
 			// would access parent.items[0] without checking if items is empty
 			const empty_submenu = new Submenu_State(contextmenu.root_menu, 2);
-			contextmenu.root_menu.items.push(empty_submenu);
+			contextmenu.root_menu.items = [...contextmenu.root_menu.items, empty_submenu];
 			contextmenu.select(empty_submenu);
 
 			// Before fix: would throw "Cannot read property 'selected' of undefined"
@@ -211,7 +211,7 @@ describe('Contextmenu_State - Selection', () => {
 			assert.strictEqual(entry2.selected, true);
 			assert.strictEqual(entry3.selected, false);
 			assert.strictEqual(contextmenu.selections.length, 1);
-			assert.strictEqual(contextmenu.selections[0], entry2);
+			assert.strictEqual(contextmenu.selections[0]!, entry2);
 		});
 
 		test('selecting disabled items is prevented', () => {
@@ -220,7 +220,7 @@ describe('Contextmenu_State - Selection', () => {
 				() => () => {},
 				() => true, // disabled function returns true
 			);
-			contextmenu.root_menu.items.push(disabled_entry);
+			contextmenu.root_menu.items = [...contextmenu.root_menu.items, disabled_entry];
 
 			// Select disabled item
 			contextmenu.select(disabled_entry);
@@ -235,8 +235,8 @@ describe('Contextmenu_State - Selection', () => {
 			const submenu2 = new Submenu_State(submenu1, 3);
 			const deep_entry = new Entry_State(submenu2, () => () => {});
 
-			submenu2.items.push(deep_entry);
-			submenu1.items.push(submenu2);
+			submenu2.items = [...submenu2.items, deep_entry];
+			submenu1.items = [...submenu1.items, submenu2];
 			contextmenu.root_menu.items = [submenu1];
 
 			// Navigate down
@@ -258,7 +258,7 @@ describe('Contextmenu_State - Selection', () => {
 
 			contextmenu.collapse_selected();
 			assert.strictEqual(contextmenu.selections.length, 1);
-			assert.strictEqual(contextmenu.selections[0], submenu1);
+			assert.strictEqual(contextmenu.selections[0]!, submenu1);
 		});
 
 		test('keyboard navigation boundary conditions', () => {

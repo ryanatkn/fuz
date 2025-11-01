@@ -27,7 +27,6 @@ export default {
 	vitePlugin: {inspector: true},
 	kit: {
 		adapter: adapter(),
-		paths: {relative: false}, // use root-absolute paths: https://kit.svelte.dev/docs/configuration#paths
 		alias: {$routes: 'src/routes', $test: 'src/test'},
 		csp: {
 			directives: {

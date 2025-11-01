@@ -10,10 +10,18 @@ import {
 	create_touch_event,
 	create_contextmenu_event,
 	set_event_target,
-} from '$lib/test_helpers.js';
+} from '$test/test_helpers.js';
 import {mount_contextmenu_root, setup_contextmenu_action} from '$test/contextmenu_test_helpers.js';
 import {CONTEXTMENU_DEFAULT_LONGPRESS_DURATION} from '$lib/contextmenu_helpers.js';
 import {create_shared_link_entry_tests} from '$test/contextmenu_test_link_entries.js';
+
+// ResizeObserver is not currently available in jsdom
+class ResizeObserverMock {
+	observe = vi.fn();
+	unobserve = vi.fn();
+	disconnect = vi.fn();
+}
+vi.stubGlobal('ResizeObserver', ResizeObserverMock);
 
 // Run shared link entry tests with longpress requirement
 create_shared_link_entry_tests(
