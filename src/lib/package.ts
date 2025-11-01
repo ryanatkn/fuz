@@ -186,22 +186,12 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 						{
-							name: 'src_module',
-							type: 'any',
-							optional: true,
-						},
-						{
 							name: 'pkg_name',
 							type: 'string',
 							optional: true,
 						},
 						{
 							name: 'repo_url',
-							type: 'string',
-							optional: true,
-						},
-						{
-							name: 'homepage_url',
 							type: 'string',
 							optional: true,
 						},
@@ -1293,23 +1283,8 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 						{
-							name: 'src_module',
-							type: 'Src_Module',
-							optional: true,
-						},
-						{
-							name: 'pkg_name',
-							type: 'string',
-							optional: false,
-						},
-						{
 							name: 'repo_url',
 							type: 'string',
-							optional: true,
-						},
-						{
-							name: 'homepage_url',
-							type: 'string | null',
 							optional: true,
 						},
 						{
