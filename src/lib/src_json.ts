@@ -99,6 +99,7 @@ export interface Component_Prop_Info {
 	optional: boolean;
 	description?: string;
 	default_value?: string;
+	bindable?: boolean;
 }
 
 /**

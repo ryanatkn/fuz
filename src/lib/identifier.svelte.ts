@@ -190,6 +190,13 @@ export class Identifier {
 	}
 
 	/**
+	 * Check if component has any bindable props (Svelte 5 $bindable rune)
+	 */
+	has_bindable_props(): boolean {
+		return !!(this.decl.props && this.decl.props.some((prop) => prop.bindable));
+	}
+
+	/**
 	 * Check if function has a return type
 	 */
 	has_return_type(): boolean {

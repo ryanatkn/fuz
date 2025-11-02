@@ -106,7 +106,7 @@ const svelte_extract_component_tsdoc = (
 /**
  * Helper to extract prop info from a property signature member.
  */
-const extract_prop_from_member = (
+const svelte_extract_prop_from_member = (
 	member: ts.PropertySignature,
 	source_file: ts.SourceFile,
 	checker: ts.TypeChecker,
@@ -154,6 +154,68 @@ const extract_prop_from_member = (
 };
 
 /**
+ * Extract bindable prop names from svelte2tsx transformed output.
+ *
+ * svelte2tsx marks bindable props with `__sveltets_$$bindings('prop1', 'prop2', ...)`.
+ * This function extracts those prop names.
+ */
+const svelte_extract_bindable_props = (virtual_source: ts.SourceFile): Set<string> => {
+	const bindable_props: Set<string> = new Set();
+
+	// Search for __sveltets_$$bindings call
+	function visit(node: ts.Node) {
+		if (ts.isCallExpression(node)) {
+			const expr = node.expression;
+			if (ts.isIdentifier(expr) && expr.text === '__sveltets_$$bindings') {
+				// Extract string literal arguments
+				for (const arg of node.arguments) {
+					if (ts.isStringLiteral(arg)) {
+						bindable_props.add(arg.text);
+					}
+				}
+			}
+		}
+		ts.forEachChild(node, visit);
+	}
+
+	visit(virtual_source);
+	return bindable_props;
+};
+
+/**
+ * Extract props from a type node (handles type literals and intersection types).
+ */
+const svelte_extract_props_from_type = (
+	type_node: ts.TypeNode,
+	virtual_source: ts.SourceFile,
+	checker: ts.TypeChecker,
+	bindable_props: Set<string>,
+	props: Array<Component_Prop_Info>,
+): void => {
+	if (ts.isTypeLiteralNode(type_node)) {
+		// Handle direct type literal: { prop1: type1, prop2: type2 }
+		for (const member of type_node.members) {
+			if (ts.isPropertySignature(member)) {
+				const prop_info = svelte_extract_prop_from_member(member, virtual_source, checker);
+				if (prop_info) {
+					// Mark as bindable if found in bindings
+					if (bindable_props.has(prop_info.name)) {
+						prop_info.bindable = true;
+					}
+					props.push(prop_info);
+				}
+			}
+		}
+	} else if (ts.isIntersectionTypeNode(type_node)) {
+		// Handle intersection type: TypeA & TypeB & { prop: type }
+		for (const type_part of type_node.types) {
+			svelte_extract_props_from_type(type_part, virtual_source, checker, bindable_props, props);
+		}
+	}
+	// Skip other type references like SvelteHTMLElements['details'] since we can't easily resolve them
+};
+
+/**
  * Extract props from svelte2tsx transformed output.
  *
  * svelte2tsx generates a `$$ComponentProps` type alias containing the component props.
@@ -164,26 +226,26 @@ const svelte_extract_props = (
 	checker: ts.TypeChecker,
 ): Array<Component_Prop_Info> => {
 	const props: Array<Component_Prop_Info> = [];
+	const bindable_props = svelte_extract_bindable_props(virtual_source);
 
 	// Look for $$ComponentProps type alias or Props interface
 	ts.forEachChild(virtual_source, (node) => {
 		// Check for type alias ($$ComponentProps)
 		if (ts.isTypeAliasDeclaration(node) && node.name.text === '$$ComponentProps') {
-			if (ts.isTypeLiteralNode(node.type)) {
-				for (const member of node.type.members) {
-					if (ts.isPropertySignature(member)) {
-						const prop_info = extract_prop_from_member(member, virtual_source, checker);
-						if (prop_info) props.push(prop_info);
-					}
-				}
-			}
+			svelte_extract_props_from_type(node.type, virtual_source, checker, bindable_props, props);
 		}
 		// Also check for Props interface (fallback/older format)
 		else if (ts.isInterfaceDeclaration(node) && node.name.text === 'Props') {
 			for (const member of node.members) {
 				if (ts.isPropertySignature(member)) {
-					const prop_info = extract_prop_from_member(member, virtual_source, checker);
-					if (prop_info) props.push(prop_info);
+					const prop_info = svelte_extract_prop_from_member(member, virtual_source, checker);
+					if (prop_info) {
+						// Mark as bindable if found in bindings
+						if (bindable_props.has(prop_info.name)) {
+							prop_info.bindable = true;
+						}
+						props.push(prop_info);
+					}
 				}
 			}
 		}

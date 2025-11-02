@@ -1409,6 +1409,39 @@ export const src_json: Src_Json = {
 				{
 					name: 'Copy_To_Clipboard',
 					kind: 'component',
+					props: [
+						{
+							name: 'text',
+							type: 'string | null',
+							optional: false,
+						},
+						{
+							name: 'copied_display_duration',
+							type: 'number',
+							optional: true,
+						},
+						{
+							name: 'allow_copying_empty_string',
+							type: 'boolean',
+							optional: true,
+						},
+						{
+							name: 'icon_button',
+							type: 'boolean',
+							optional: true,
+							description: 'Defaults to `true`, ignored if `children` is provided.',
+						},
+						{
+							name: 'oncopy',
+							type: '(text: string | null, e: MouseEvent) => void',
+							optional: true,
+						},
+						{
+							name: 'children',
+							type: 'Snippet<[copied: boolean, failed: boolean]>',
+							optional: true,
+						},
+					],
 					source_line: 1,
 				},
 			],
@@ -1814,6 +1847,36 @@ export const src_json: Src_Json = {
 					kind: 'component',
 					doc_comment: 'Like `details` but renders children lazily by default.',
 					summary: 'Like `details` but renders children lazily by default.',
+					props: [
+						{
+							name: 'open',
+							type: 'boolean',
+							optional: true,
+							bindable: true,
+						},
+						{
+							name: 'eager',
+							type: 'boolean',
+							optional: true,
+							description:
+								'Children are lazily rendered by default,\nenabling transitions and improving performance, sometimes significantly.\nPass `true` to render children eagerly to gain\n`ctrl+f` functionality while trading away the benefits.\nConsider a `<details>` element instead of making this component eager.',
+						},
+						{
+							name: 'summary',
+							type: 'Snippet',
+							optional: false,
+						},
+						{
+							name: 'summary_attrs',
+							type: "SvelteHTMLElements['summary']",
+							optional: true,
+						},
+						{
+							name: 'children',
+							type: 'Snippet',
+							optional: false,
+						},
+					],
 					source_line: 1,
 				},
 			],
@@ -2234,6 +2297,13 @@ export const src_json: Src_Json = {
 				{
 					name: 'Docs_Menu_Header',
 					kind: 'component',
+					props: [
+						{
+							name: 'children',
+							type: 'Snippet',
+							optional: false,
+						},
+					],
 					source_line: 1,
 				},
 			],
@@ -2391,6 +2461,18 @@ export const src_json: Src_Json = {
 				{
 					name: 'Glyph',
 					kind: 'component',
+					props: [
+						{
+							name: 'glyph',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'size',
+							type: 'string | undefined',
+							optional: true,
+						},
+					],
 					source_line: 1,
 				},
 			],
@@ -2463,6 +2545,7 @@ export const src_json: Src_Json = {
 							name: 'value',
 							type: 'Hue',
 							optional: true,
+							bindable: true,
 						},
 						{
 							name: 'oninput',
@@ -3031,6 +3114,19 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdn_Link',
 					kind: 'component',
+					props: [
+						{
+							name: 'path',
+							type: 'string',
+							optional: false,
+							description: '',
+						},
+						{
+							name: 'children',
+							type: 'Snippet',
+							optional: true,
+						},
+					],
 					source_line: 1,
 				},
 			],
@@ -3384,6 +3480,23 @@ export const src_json: Src_Json = {
 				{
 					name: 'Paste_From_Clipboard',
 					kind: 'component',
+					props: [
+						{
+							name: 'onpaste',
+							type: '(text: string) => void',
+							optional: false,
+						},
+						{
+							name: 'onerror',
+							type: '(error: Error) => void',
+							optional: true,
+						},
+						{
+							name: 'children',
+							type: 'Snippet',
+							optional: true,
+						},
+					],
 					source_line: 1,
 				},
 			],
@@ -3394,6 +3507,28 @@ export const src_json: Src_Json = {
 				{
 					name: 'Pending_Animation',
 					kind: 'component',
+					props: [
+						{
+							name: 'inline',
+							type: 'boolean',
+							optional: true,
+						},
+						{
+							name: 'running',
+							type: 'boolean',
+							optional: true,
+						},
+						{
+							name: 'item_attrs',
+							type: "SvelteHTMLElements['span']",
+							optional: true,
+						},
+						{
+							name: 'children',
+							type: 'Snippet<[index: number]>',
+							optional: true,
+						},
+					],
 					source_line: 1,
 				},
 			],
@@ -3404,6 +3539,43 @@ export const src_json: Src_Json = {
 				{
 					name: 'Pending_Button',
 					kind: 'component',
+					props: [
+						{
+							name: 'pending',
+							type: 'boolean',
+							optional: false,
+						},
+						{
+							name: 'onclick',
+							type: '() => void',
+							optional: false,
+						},
+						{
+							name: 'running',
+							type: 'boolean',
+							optional: true,
+						},
+						{
+							name: 'title',
+							type: 'string',
+							optional: true,
+						},
+						{
+							name: 'disabled',
+							type: 'boolean',
+							optional: true,
+						},
+						{
+							name: 'animation',
+							type: 'Snippet',
+							optional: true,
+						},
+						{
+							name: 'children',
+							type: 'Snippet',
+							optional: false,
+						},
+					],
 					source_line: 1,
 				},
 			],
@@ -3755,6 +3927,11 @@ export const src_json: Src_Json = {
 							kind: 'variable',
 							type_signature: 'string',
 						},
+						{
+							name: 'bindable',
+							kind: 'variable',
+							type_signature: 'boolean',
+						},
 					],
 				},
 				{
@@ -3762,7 +3939,7 @@ export const src_json: Src_Json = {
 					kind: 'type',
 					doc_comment: 'Generic type parameter information',
 					summary: 'Generic type parameter information',
-					source_line: 107,
+					source_line: 108,
 					type_signature: 'Generic_Param_Info',
 					properties: [
 						{
@@ -3793,7 +3970,7 @@ export const src_json: Src_Json = {
 					kind: 'type',
 					doc_comment: 'Declaration metadata with rich TypeScript/JSDoc information',
 					summary: 'Declaration metadata with rich TypeScript/JSDoc information',
-					source_line: 119,
+					source_line: 120,
 					type_signature: 'Src_Module_Declaration',
 					properties: [
 						{
@@ -3943,7 +4120,7 @@ export const src_json: Src_Json = {
 					kind: 'type',
 					doc_comment: 'Module information with metadata',
 					summary: 'Module information with metadata',
-					source_line: 167,
+					source_line: 168,
 					type_signature: 'Src_Module',
 					properties: [
 						{
@@ -3977,7 +4154,7 @@ export const src_json: Src_Json = {
 					see_also: [
 						'://github.com/ryanatkn/gro/blob/main/src/docs/gro_plugin_sveltekit_app.md#well-known-src',
 					],
-					source_line: 180,
+					source_line: 181,
 					type_signature: 'Src_Json',
 					properties: [
 						{
@@ -4010,7 +4187,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: "Helper to get a declaration's display name",
 					summary: "Helper to get a declaration's display name",
-					source_line: 192,
+					source_line: 193,
 					type_signature: '(decl: Src_Module_Declaration): string',
 					return_type: 'string',
 					parameters: [
@@ -4026,7 +4203,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Helper to get a short type summary for tooltips',
 					summary: 'Helper to get a short type summary for tooltips',
-					source_line: 210,
+					source_line: 211,
 					type_signature: '(decl: Src_Module_Declaration): string | undefined',
 					return_type: 'string | undefined',
 					parameters: [
@@ -4042,7 +4219,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Generate import statement for a declaration',
 					summary: 'Generate import statement for a declaration',
-					source_line: 224,
+					source_line: 225,
 					type_signature:
 						'(decl: Src_Module_Declaration, module_path: string, pkg_name: string): string',
 					return_type: 'string',
@@ -4569,6 +4746,33 @@ export const src_json: Src_Json = {
 				{
 					name: 'Tome_Link',
 					kind: 'component',
+					props: [
+						{
+							name: 'name',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'docs_path',
+							type: 'string',
+							optional: true,
+						},
+						{
+							name: 'hash',
+							type: 'string',
+							optional: true,
+						},
+						{
+							name: 'chip',
+							type: 'boolean',
+							optional: true,
+						},
+						{
+							name: 'children',
+							type: 'Snippet',
+							optional: true,
+						},
+					],
 					source_line: 1,
 				},
 			],
@@ -4579,6 +4783,23 @@ export const src_json: Src_Json = {
 				{
 					name: 'Tome_Section_Header',
 					kind: 'component',
+					props: [
+						{
+							name: 'text',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'tag',
+							type: 'Docs_Link_Tag',
+							optional: true,
+						},
+						{
+							name: 'children',
+							type: 'Snippet',
+							optional: true,
+						},
+					],
 					source_line: 1,
 				},
 			],
@@ -4589,6 +4810,13 @@ export const src_json: Src_Json = {
 				{
 					name: 'Tome_Section',
 					kind: 'component',
+					props: [
+						{
+							name: 'children',
+							type: 'Snippet',
+							optional: false,
+						},
+					],
 					source_line: 1,
 				},
 			],
