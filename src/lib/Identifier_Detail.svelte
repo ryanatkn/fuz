@@ -105,6 +105,9 @@
 					<th>prop</th>
 					<th>type</th>
 					<th>optional</th>
+					{#if decl.props.some((p) => p.bindable)}
+						<th>bindable</th>
+					{/if}
 					{#if decl.props.some((p) => p.description)}
 						<th>description</th>
 					{/if}
@@ -119,6 +122,9 @@
 						<td><code>{prop.name}</code></td>
 						<td><Identifier_Link_Or_Ts type={prop.type} /></td>
 						<td>{prop.optional ? 'yes' : 'no'}</td>
+						{#if decl.props.some((p) => p.bindable)}
+							<td>{prop.bindable ? 'yes' : 'no'}</td>
+						{/if}
 						{#if decl.props.some((p) => p.description)}
 							<td>{prop.description ?? ''}</td>
 						{/if}
