@@ -2601,10 +2601,10 @@ export const src_json: Src_Json = {
 			],
 		},
 		{
-			path: 'Identifier_Link_Or_Ts.svelte',
+			path: 'Type_Link.svelte',
 			declarations: [
 				{
-					name: 'Identifier_Link_Or_Ts',
+					name: 'Type_Link',
 					kind: 'component',
 					props: [
 						{

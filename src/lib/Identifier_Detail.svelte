@@ -3,7 +3,7 @@
 
 	import type {Identifier} from '$lib/identifier.svelte.js';
 	import Details from '$lib/Details.svelte';
-	import Identifier_Link_Or_Ts from '$lib/Identifier_Link_Or_Ts.svelte';
+	import Type_Link from '$lib/Type_Link.svelte';
 	import Module_Link from '$lib/Module_Link.svelte';
 
 	const {identifier}: {identifier: Identifier} = $props();
@@ -77,7 +77,7 @@
 				{#each decl.parameters as param (param)}
 					<tr>
 						<td><code>{param.name}</code></td>
-						<td><Identifier_Link_Or_Ts type={param.type} /></td>
+						<td><Type_Link type={param.type} /></td>
 						<td>{param.optional ? 'yes' : 'no'}</td>
 						{#if decl.parameters.some((p) => p.description)}
 							<td>{param.description ?? ''}</td>
@@ -120,7 +120,7 @@
 				{#each decl.props as prop (prop)}
 					<tr>
 						<td><code>{prop.name}</code></td>
-						<td><Identifier_Link_Or_Ts type={prop.type} /></td>
+						<td><Type_Link type={prop.type} /></td>
 						<td>{prop.optional ? 'yes' : 'no'}</td>
 						{#if decl.props.some((p) => p.bindable)}
 							<td>{prop.bindable ? 'yes' : 'no'}</td>
@@ -176,14 +176,14 @@
 						{#if decl.generic_params.some((g) => g.constraint)}
 							<td>
 								{#if generic.constraint}
-									<Identifier_Link_Or_Ts type={generic.constraint} />
+									<Type_Link type={generic.constraint} />
 								{/if}
 							</td>
 						{/if}
 						{#if decl.generic_params.some((g) => g.default_type)}
 							<td>
 								{#if generic.default_type}
-									<Identifier_Link_Or_Ts type={generic.default_type} />
+									<Type_Link type={generic.default_type} />
 								{/if}
 							</td>
 						{/if}
@@ -203,7 +203,7 @@
 				<strong>extends:</strong>
 				<ul>
 					{#each decl.extends as ext (ext)}
-						<li><Identifier_Link_Or_Ts type={ext} /></li>
+						<li><Type_Link type={ext} /></li>
 					{/each}
 				</ul>
 			</div>
@@ -213,7 +213,7 @@
 				<strong>implements:</strong>
 				<ul>
 					{#each decl.implements as impl (impl)}
-						<li><Identifier_Link_Or_Ts type={impl} /></li>
+						<li><Type_Link type={impl} /></li>
 					{/each}
 				</ul>
 			</div>
@@ -294,7 +294,7 @@
 						<td><code>{member.name}</code></td>
 						<td>
 							{#if member.type_signature}
-								<Identifier_Link_Or_Ts type={member.type_signature} />
+								<Type_Link type={member.type_signature} />
 							{/if}
 						</td>
 						{#if decl.members.some((m) => m.summary)}
@@ -332,7 +332,7 @@
 						<td><code>{prop.name}</code></td>
 						<td>
 							{#if prop.type_signature}
-								<Identifier_Link_Or_Ts type={prop.type_signature} />
+								<Type_Link type={prop.type_signature} />
 							{/if}
 						</td>
 						{#if decl.properties.some((p) => p.summary)}
