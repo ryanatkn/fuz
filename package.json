@@ -117,5 +117,8 @@
       "svelte": "./dist/*.svelte",
       "default": "./dist/*.svelte"
     }
+  },
+  "dependencies": {
+    "zod": "^4.1.12"
   }
 }

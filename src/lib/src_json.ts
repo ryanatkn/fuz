@@ -14,14 +14,58 @@
  * @see svelte_helpers.ts for Svelte component analysis
  */
 
-export type Src_Module_Declaration_Kind =
-	| 'type'
-	| 'function'
-	| 'variable'
-	| 'class'
-	| 'component'
-	| 'json'
-	| 'css';
+import {z} from 'zod';
+
+// ==============================================================================
+// BELT BASELINE (minimal serializable types from @ryanatkn/belt/src/lib/src_json.ts)
+// ==============================================================================
+// These are the core zod schemas from belt that define the base structure.
+// Fuz extends these with additional fields for rich documentation.
+
+/**
+ * Helper from belt to transform empty objects to undefined
+ * (not currently used in fuz, kept for reference)
+ */
+// const transform_empty_object_to_undefined = <T>(obj: T): T | undefined => {
+// 	if (obj && Object.keys(obj).length === 0) {
+// 		return;
+// 	}
+// 	return obj;
+// };
+
+export const Src_Module_Declaration_Kind = z.enum([
+	'type',
+	'function',
+	'variable',
+	'class',
+	'component',
+	'json',
+	'css',
+]);
+export type Src_Module_Declaration_Kind = z.infer<typeof Src_Module_Declaration_Kind>;
+
+export const Src_Module_Declaration_Minimal = z.looseObject({
+	name: z.string(), // the export identifier
+	kind: Src_Module_Declaration_Kind.nullable(),
+});
+
+export const Src_Module_Minimal = z.looseObject({
+	path: z.string(),
+	declarations: z.array(Src_Module_Declaration_Minimal).optional(),
+});
+
+// NOTE: Belt uses z.record(z.string(), Src_Module) but fuz uses Array<Src_Module>
+// to eliminate path duplication. This is a breaking change from belt's format.
+
+export const Src_Json_Minimal = z.looseObject({
+	name: z.string(),
+	version: z.string(),
+	modules: z.array(Src_Module_Minimal).optional(), // Changed from z.record to z.array
+});
+
+// ==============================================================================
+// FUZ EXTENSIONS (rich documentation metadata)
+// ==============================================================================
 
 /**
  * Parameter information for functions and methods
@@ -130,11 +174,6 @@ export interface Src_Module {
 }
 
 /**
- * Collection of modules indexed by path
- */
-export type Src_Modules = Record<string, Src_Module>;
-
-/**
  * Top-level source metadata
  * @see https://github.com/ryanatkn/gro/blob/main/src/docs/gro_plugin_sveltekit_app.md#well-known-src
  */
@@ -143,8 +182,8 @@ export interface Src_Json {
 	name: string;
 	/** Package version (same as package.json) */
 	version: string;
-	/** Source modules */
-	modules?: Src_Modules;
+	/** Source modules (changed from Record to Array to eliminate path duplication) */
+	modules?: Array<Src_Module>;
 }
 
 /**

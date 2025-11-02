@@ -1,49 +1,33 @@
 <script lang="ts">
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
-	import type {Src_Module_Declaration} from '$lib/src_json.js';
+	import type {Identifier} from '$lib/identifier.svelte.js';
 	import Details from '$lib/Details.svelte';
 	import Identifier_Link_Or_Ts from '$lib/Identifier_Link_Or_Ts.svelte';
 	import Module_Link from '$lib/Module_Link.svelte';
 
-	// TODO BLOCK simplify this interface
-	const {
-		decl,
-		module_path,
-		pkg_name,
-		repo_url,
-	}: {
-		decl: Src_Module_Declaration;
-		module_path: string;
-		pkg_name?: string;
-		repo_url?: string;
-	} = $props();
+	const {identifier}: {identifier: Identifier} = $props();
 
-	// Generate source URL
-	const source_url = $derived(
-		repo_url && decl.source_line
-			? `${repo_url}/blob/main/src/lib/${module_path.replace(/^\.\//, '')}#L${decl.source_line}`
-			: undefined,
-	);
+	// Convenience accessor to the underlying identifier data
+	const decl = $derived(identifier.decl);
 
 	// TODO verbose and badly laid out -- but we want to be sure it's complete/thorough
 	// (all parsed data is now rendered; layout improvements can come later)
 </script>
 
 <!-- Metadata -->
-{#if module_path && pkg_name}
-	<p>
-		<Module_Link {module_path} {repo_url} />
-	</p>
-{:else if source_url}
+<p>
+	<Module_Link module_path={identifier.module_path} repo_url={identifier.pkg.repo_url} />
+</p>
+{#if identifier.source_url}
 	<p>
 		<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-		<a class="chip" href={source_url} target="_blank" rel="noopener"> view source </a>
+		<a class="chip" href={identifier.source_url} target="_blank" rel="noopener"> view source </a>
 	</p>
 {/if}
 
 <!-- eslint-disable-next-line @typescript-eslint/no-deprecated -->
-{#if decl.deprecated_message}
+{#if identifier.is_deprecated()}
 	<p>
 		<strong>⚠️ deprecated:</strong>
 		<!-- eslint-disable-next-line @typescript-eslint/no-deprecated -->
@@ -52,9 +36,9 @@
 {/if}
 
 <!-- TODO is this useful sometimes? -->
-<!-- {#if decl.kind}
+<!-- {#if identifier.kind}
 	<p>
-		<span class="chip font_size_md">{decl.kind}</span>
+		<span class="chip font_size_md">{identifier.kind}</span>
 	</p>
 {/if} -->
 
@@ -66,7 +50,7 @@
 {/if}
 
 <!-- documentation -->
-{#if decl.doc_comment || decl.summary}
+{#if identifier.has_documentation()}
 	<p>
 		{decl.doc_comment || decl.summary}
 	</p>

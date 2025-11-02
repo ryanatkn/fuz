@@ -1,7 +1,7 @@
 <script lang="ts">
-	import {get_all_declarations, search_declarations} from '$lib/api_data.js';
+	import {get_all_identifiers, search_identifiers} from '$lib/api_data.js';
 	import {pkg_context} from '$lib/pkg.js';
-	import Api_Page from '$lib/Api_Page.svelte';
+	import Identifier_Detail from '$lib/Identifier_Detail.svelte';
 	import {get_tome_by_name} from '$lib/tome.js';
 	import Tome_Content from '$lib/Tome_Content.svelte';
 	import Tome_Section from '$lib/Tome_Section.svelte';
@@ -12,12 +12,12 @@
 
 	let search_query = $state('');
 
-	const all_declarations = $derived(get_all_declarations());
+	const all_identifiers = $derived(get_all_identifiers());
 
 	// Search and sort alphabetically
-	const sorted_declarations = $derived.by(() => {
-		const items = search_query.trim() ? search_declarations(search_query) : all_declarations;
-		return items.sort((a, b) => a.decl.name.localeCompare(b.decl.name));
+	const sorted_identifiers = $derived.by(() => {
+		const items = search_query.trim() ? search_identifiers(search_query) : all_identifiers;
+		return items.sort((a, b) => a.name.localeCompare(b.name));
 	});
 </script>
 
@@ -43,28 +43,28 @@
 
 			<div class="stats">
 				<span class="stat">
-					{all_declarations.length} declarations
+					{all_identifiers.length} identifiers
 				</span>
 				{#if search_query}
 					<span class="stat">
-						{sorted_declarations.length} results
+						{sorted_identifiers.length} results
 					</span>
 				{/if}
 			</div>
 		</header>
 	{/snippet}
 
-	{#if sorted_declarations.length === 0}
+	{#if sorted_identifiers.length === 0}
 		<div class="no_results pane p_md">
-			<p>No declarations found matching "{search_query}"</p>
+			<p>No identifiers found matching "{search_query}"</p>
 		</div>
 	{:else}
-		<!-- Render all declarations alphabetically -->
-		{#each sorted_declarations as { decl, module_path } (decl.name)}
+		<!-- Render all identifiers alphabetically -->
+		{#each sorted_identifiers as identifier (identifier.name)}
 			<Tome_Section>
-				<Tome_Section_Header text={decl.name} />
-				<article id={decl.name} class="declaration_detail">
-					<Api_Page {decl} {module_path} pkg_name={pkg.package_json.name} repo_url={pkg.repo_url} />
+				<Tome_Section_Header text={identifier.name} />
+				<article id={identifier.name} class="declaration_detail">
+					<Identifier_Detail {identifier} />
 				</article>
 			</Tome_Section>
 		{/each}

@@ -5,6 +5,7 @@
 	import type {Snippet} from 'svelte';
 
 	import type {Pkg} from '$lib/pkg.js';
+	import {Module} from '$lib/module.svelte.js';
 	import Details from '$lib/Details.svelte';
 	import Img_Or_Svg from '$lib/Img_Or_Svg.svelte';
 	import Declaration_Link from '$lib/Declaration_Link.svelte';
@@ -25,7 +26,11 @@
 	// TODO show other data (lines of code)
 
 	const {package_json, src_json} = $derived(pkg);
-	const {modules: pkg_modules} = $derived(src_json);
+
+	// Create Module instances from src_json
+	const rich_modules = $derived(
+		src_json.modules ? src_json.modules.map((src_module) => new Module(pkg, src_module)) : [],
+	);
 
 	// TODO helper (zod parser?)
 	const repository_url = $derived(
@@ -46,18 +51,6 @@
 	);
 	const license_url = $derived(
 		package_json.license && repository_url ? repository_url + '/blob/main/LICENSE' : null,
-	);
-
-	const pkg_exports_keys = $derived(src_json.modules && Object.keys(src_json.modules)); // TODO hacky, see usage
-
-	// TODO helper, look at existing code
-	const modules = $derived(
-		src_json.modules
-			? Object.keys(src_json.modules).map((k) => {
-					const v = strip_start(k, './');
-					return v === '.' ? 'index.js' : v;
-				})
-			: null,
 	);
 </script>
 
@@ -178,36 +171,28 @@
 			</div>
 		{/if}
 	</div>
-	{#if modules && pkg.repo_url}
+	{#if rich_modules.length > 0 && pkg.repo_url}
 		<section>
 			<menu class="unstyled">
-				{#each modules as module_name, i (module_name)}
+				{#each rich_modules as module (module.path)}
 					<!-- TODO improve rendering and enrich data - start with the type (not just extension - mime?) -->
-					{@const exports_key = pkg_exports_keys?.[i]}
-					{@const pkg_module = exports_key ? pkg_modules?.[exports_key] : undefined}
-					{@const declarations = pkg_module?.declarations?.filter((d) => d.name !== 'default')}
+					{@const module_display_name = strip_start(module.path, './')}
 					<li
 						class="module"
-						class:ts={module_name.endsWith('.js')}
-						class:svelte={module_name.endsWith('.svelte')}
-						class:css={module_name.endsWith('.css')}
-						class:json={module_name.endsWith('.json')}
+						class:ts={module_display_name.endsWith('.js')}
+						class:svelte={module_display_name.endsWith('.svelte')}
+						class:css={module_display_name.endsWith('.css')}
+						class:json={module_display_name.endsWith('.json')}
 					>
 						<div class="module_content">
-							<Module_Link module_path={exports_key || `./${module_name}`} repo_url={pkg.repo_url}>
-								{module_name}
+							<Module_Link module_path={module.path} repo_url={pkg.repo_url}>
+								{module_display_name === '.' ? 'index.js' : module_display_name}
 							</Module_Link>
-							{#if declarations?.length}
-								<ul class="declarations unstyled">
-									{#each declarations as decl (decl.name)}
+							{#if module.identifiers.length > 0}
+								<ul class="identifiers unstyled">
+									{#each module.identifiers as identifier (identifier.name)}
 										<li>
-											<Declaration_Link
-												{decl}
-												module_path={exports_key || `./${module_name}`}
-												pkg_name={package_json.name}
-												repo_url={pkg.repo_url}
-												homepage_url={pkg.homepage_url ?? undefined}
-											/>
+											<Declaration_Link {identifier} />
 										</li>
 									{/each}
 								</ul>
@@ -315,7 +300,7 @@
 		--link_color: var(--color_f_5);
 	}
 	/* TODO extract */
-	.declarations {
+	.identifiers {
 		display: flex;
 		flex: 1;
 		flex-direction: row;

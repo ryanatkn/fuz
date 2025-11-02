@@ -1,9 +1,67 @@
 import {describe, test, assert} from 'vitest';
 
-import {create_declaration_contextmenu} from '$lib/declaration_contextmenu.js';
-import type {Src_Module_Declaration} from '$lib/src_json.js';
+import {create_identifier_contextmenu} from '$lib/identifier_contextmenu.js';
+import type {Src_Module_Declaration, Src_Module, Src_Json} from '$lib/src_json.js';
+import type {Package_Json} from '@ryanatkn/belt/package_json.js';
+import type {Pkg} from '$lib/pkg.js';
+import {Module} from '$lib/module.svelte.js';
+import {Identifier} from '$lib/identifier.svelte.js';
 
-describe('create_declaration_contextmenu', () => {
+// Helper to create a mock Pkg for testing
+const create_mock_pkg = (options?: {
+	pkg_name?: string;
+	repo_url?: string;
+	homepage_url?: string;
+}): Pkg => {
+	const pkg_name = options?.pkg_name ?? '@pkg/name';
+	const repo_url = options?.repo_url ?? 'https://github.com/test/repo';
+	const homepage_url = options?.homepage_url ?? null;
+
+	const package_json: Package_Json = {
+		name: pkg_name,
+		version: '1.0.0',
+		repository: {type: 'git', url: repo_url},
+		homepage: homepage_url ?? undefined,
+	} as Package_Json;
+
+	const src_json: Src_Json = {
+		name: pkg_name,
+		version: '1.0.0',
+		modules: [],
+	};
+
+	return {
+		package_json,
+		src_json,
+		name: pkg_name,
+		repo_name: pkg_name.split('/')[1] ?? pkg_name,
+		repo_url,
+		owner_name: 'test',
+		homepage_url,
+		logo_url: null,
+		logo_alt: 'test logo',
+		npm_url: null,
+		changelog_url: null,
+		published: false,
+	};
+};
+
+// Helper to create an Identifier for testing
+const create_test_identifier = (
+	decl: Src_Module_Declaration,
+	module_path: string,
+	pkg_options?: Parameters<typeof create_mock_pkg>[0],
+): Identifier => {
+	const pkg = create_mock_pkg(pkg_options);
+	const src_module: Src_Module = {
+		path: module_path,
+		declarations: [decl],
+	};
+	const module = new Module(pkg, src_module);
+	return new Identifier(module, decl);
+};
+
+describe('create_identifier_contextmenu', () => {
 	const base_decl: Src_Module_Declaration = {
 		name: 'MyType',
 		kind: 'type',
@@ -11,20 +69,19 @@ describe('create_declaration_contextmenu', () => {
 	};
 
 	test('returns array of contextmenu entries', () => {
-		const entries = create_declaration_contextmenu(
-			base_decl,
-			'./types.ts',
-			'@pkg/name',
-			'https://github.com/user/repo',
-			'https://example.com',
-		);
+		const identifier = create_test_identifier(base_decl, './types.ts', {
+			repo_url: 'https://github.com/user/repo',
+			homepage_url: 'https://example.com',
+		});
+		const entries = create_identifier_contextmenu(identifier);
 
 		assert.ok(Array.isArray(entries));
 		assert.ok(entries.length > 0);
 	});
 
 	test('includes navigate to API docs entry', () => {
-		const entries = create_declaration_contextmenu(base_decl, './types.ts', '@pkg/name');
+		const identifier = create_test_identifier(base_decl, './types.ts');
+		const entries = create_identifier_contextmenu(identifier);
 
 		const nav_entry = entries.find((e) => typeof e === 'object' && e.snippet === 'link');
 		assert.ok(nav_entry, 'should have link entry');
@@ -38,7 +95,8 @@ describe('create_declaration_contextmenu', () => {
 	});
 
 	test('includes copy name entry', () => {
-		const entries = create_declaration_contextmenu(base_decl, './types.ts', '@pkg/name');
+		const identifier = create_test_identifier(base_decl, './types.ts');
+		const entries = create_identifier_contextmenu(identifier);
 
 		const copy_entries = entries.filter(
 			(e) => typeof e === 'object' && e.snippet === 'text' && e.props.content.includes('Copy name'),
@@ -47,7 +105,8 @@ describe('create_declaration_contextmenu', () => {
 	});
 
 	test('includes copy import entry', () => {
-		const entries = create_declaration_contextmenu(base_decl, './types.ts', '@pkg/name');
+		const identifier = create_test_identifier(base_decl, './types.ts');
+		const entries = create_identifier_contextmenu(identifier);
 
 		const import_entry = entries.find(
 			(e) => typeof e === 'object' && e.snippet === 'text' && e.props.content === 'Copy import',
@@ -56,24 +115,24 @@ describe('create_declaration_contextmenu', () => {
 	});
 
 	test('includes view source entry when repo_url and source_location provided', () => {
-		const entries = create_declaration_contextmenu(
-			base_decl,
-			'./types.ts',
-			'@pkg/name',
-			'https://github.com/user/repo',
-		);
+		const identifier = create_test_identifier(base_decl, './types.ts', {
+			repo_url: 'https://github.com/user/repo',
+		});
+		const entries = create_identifier_contextmenu(identifier);
 
 		const source_entries = entries.filter((e) => typeof e === 'object' && e.snippet === 'link');
 		// Should have both navigate to docs and view source
 		assert.ok(source_entries.length >= 2, 'should have source link when repo_url provided');
 	});
 
-	test('excludes view source entry when no repo_url', () => {
-		const entries = create_declaration_contextmenu(base_decl, './types.ts', '@pkg/name');
+	test('includes view source entry with default repo_url', () => {
+		// repo_url is required in Pkg interface, so it always has a value (uses default in test helper)
+		const identifier = create_test_identifier(base_decl, './types.ts');
+		const entries = create_identifier_contextmenu(identifier);
 
 		const link_entries = entries.filter((e) => typeof e === 'object' && e.snippet === 'link');
-		// Should only have navigate to docs, not view source
-		assert.strictEqual(link_entries.length, 1, 'should only have docs link when no repo_url');
+		// Should have both navigate to docs and view source (since base_decl has source_line)
+		assert.strictEqual(link_entries.length, 2, 'should have both docs and source links');
 	});
 
 	test('excludes view source entry when no source_location', () => {
@@ -81,12 +140,10 @@ describe('create_declaration_contextmenu', () => {
 			name: 'MyType',
 			kind: 'type',
 		};
-		const entries = create_declaration_contextmenu(
-			decl_no_location,
-			'./types.ts',
-			'@pkg/name',
-			'https://github.com/user/repo',
-		);
+		const identifier = create_test_identifier(decl_no_location, './types.ts', {
+			repo_url: 'https://github.com/user/repo',
+		});
+		const entries = create_identifier_contextmenu(identifier);
 
 		const link_entries = entries.filter((e) => typeof e === 'object' && e.snippet === 'link');
 		// Should only have navigate to docs, not view source
@@ -98,13 +155,10 @@ describe('create_declaration_contextmenu', () => {
 	});
 
 	test('includes copy docs link entry when homepage_url provided', () => {
-		const entries = create_declaration_contextmenu(
-			base_decl,
-			'./types.ts',
-			'@pkg/name',
-			undefined,
-			'https://example.com',
-		);
+		const identifier = create_test_identifier(base_decl, './types.ts', {
+			homepage_url: 'https://example.com',
+		});
+		const entries = create_identifier_contextmenu(identifier);
 
 		const copy_link_entry = entries.find(
 			(e) => typeof e === 'object' && e.snippet === 'text' && e.props.content === 'Copy docs link',
@@ -113,7 +167,8 @@ describe('create_declaration_contextmenu', () => {
 	});
 
 	test('excludes copy docs link entry when no homepage_url', () => {
-		const entries = create_declaration_contextmenu(base_decl, './types.ts', '@pkg/name');
+		const identifier = create_test_identifier(base_decl, './types.ts');
+		const entries = create_identifier_contextmenu(identifier);
 
 		const copy_link_entry = entries.find(
 			(e) => typeof e === 'object' && e.snippet === 'text' && e.props.content === 'Copy docs link',
@@ -126,7 +181,8 @@ describe('create_declaration_contextmenu', () => {
 	});
 
 	test('handles module path with ./ prefix', () => {
-		const entries = create_declaration_contextmenu(base_decl, './foo/bar.ts', '@pkg/name');
+		const identifier = create_test_identifier(base_decl, './foo/bar.ts');
+		const entries = create_identifier_contextmenu(identifier);
 
 		const nav_entry = entries.find((e) => typeof e === 'object' && e.snippet === 'link');
 		assert.ok(nav_entry);
@@ -146,7 +202,8 @@ describe('create_declaration_contextmenu', () => {
 			name: 'My Type',
 			kind: 'type',
 		};
-		const entries = create_declaration_contextmenu(special_decl, './my module.ts', '@pkg/name');
+		const identifier = create_test_identifier(special_decl, './my module.ts');
+		const entries = create_identifier_contextmenu(identifier);
 
 		const nav_entry = entries.find((e) => typeof e === 'object' && e.snippet === 'link');
 		assert.ok(nav_entry);
@@ -160,12 +217,10 @@ describe('create_declaration_contextmenu', () => {
 	});
 
 	test('source URL includes line number', () => {
-		const entries = create_declaration_contextmenu(
-			base_decl,
-			'./types.ts',
-			'@pkg/name',
-			'https://github.com/user/repo',
-		);
+		const identifier = create_test_identifier(base_decl, './types.ts', {
+			repo_url: 'https://github.com/user/repo',
+		});
+		const entries = create_identifier_contextmenu(identifier);
 
 		const source_entry = entries.find(
 			(e) =>
@@ -183,13 +238,11 @@ describe('create_declaration_contextmenu', () => {
 	});
 
 	test('all entries have required structure', () => {
-		const entries = create_declaration_contextmenu(
-			base_decl,
-			'./types.ts',
-			'@pkg/name',
-			'https://github.com/user/repo',
-			'https://example.com',
-		);
+		const identifier = create_test_identifier(base_decl, './types.ts', {
+			repo_url: 'https://github.com/user/repo',
+			homepage_url: 'https://example.com',
+		});
+		const entries = create_identifier_contextmenu(identifier);
 
 		for (const entry of entries) {
 			assert.ok(typeof entry === 'object', 'entry should be an object');

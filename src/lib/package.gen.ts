@@ -41,7 +41,6 @@ import {svelte_analyze_component} from '$lib/svelte_helpers.js';
 import {
 	module_extract_path,
 	module_get_component_name,
-	module_get_key,
 	module_is_typescript,
 	module_is_svelte,
 	module_is_source,
@@ -67,17 +66,16 @@ export const gen: Gen = async ({log, filer}) => {
 	// Collect source files from filer
 	const source_disknodes = collect_source_files(filer, log);
 
-	// Build src.json
+	// Build src.json with array-based modules
 	const src_json: Src_Json = {
 		name: package_json.name,
 		version: package_json.version,
-		modules: {},
+		modules: [],
 	};
 
 	for (const disknode of source_disknodes) {
 		const source_id = disknode.id;
 		const module_path = module_extract_path(source_id);
-		const module_key = module_get_key(module_path);
 		const is_svelte = module_is_svelte(module_path);
 
 		let mod: Src_Module | null;
@@ -102,7 +100,7 @@ export const gen: Gen = async ({log, filer}) => {
 			continue;
 		}
 
-		src_json.modules![module_key] = mod;
+		src_json.modules!.push(mod);
 	}
 
 	// Sort modules alphabetically for deterministic output and cleaner diffs
@@ -166,14 +164,10 @@ const enhance_declaration = (
 };
 
 /**
- * Sort modules alphabetically by key for deterministic output and cleaner diffs.
+ * Sort modules alphabetically by path for deterministic output and cleaner diffs.
  */
-const sort_modules = (modules: Record<string, Src_Module>): Record<string, Src_Module> => {
-	const sorted: Record<string, Src_Module> = {};
-	for (const key of Object.keys(modules).sort()) {
-		sorted[key] = modules[key]!;
-	}
-	return sorted;
+const sort_modules = (modules: Array<Src_Module>): Array<Src_Module> => {
+	return modules.slice().sort((a, b) => a.path.localeCompare(b.path));
 };
 
 const generate_package_ts = (package_json: Package_Json, src_json: Src_Json): string => {
