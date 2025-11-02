@@ -6,8 +6,8 @@
 
 import ts from 'typescript';
 
-import type {Src_Module_Declaration, Generic_Param_Info} from './src_json.js';
-import {tsdoc_parse} from './tsdoc_helpers.js';
+import type {Src_Module_Declaration, Generic_Param_Info} from '$lib/src_json.js';
+import {tsdoc_parse} from '$lib/tsdoc_helpers.js';
 
 /**
  * Parse a generic type parameter into structured information.

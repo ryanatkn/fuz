@@ -10,12 +10,14 @@
  */
 
 import type {Module} from '$lib/module.svelte.js';
-import type {Src_Module_Declaration} from '$lib/src_json.js';
 import {
+	type Src_Module_Declaration,
+	Src_Module_Declaration_Kind,
 	generate_import_statement,
 	get_declaration_display_name,
 	get_type_summary,
 } from '$lib/src_json.js';
+import type {Pkg} from '$lib/pkg.js';
 
 /**
  * Rich runtime representation of an exported identifier with computed properties.
@@ -42,7 +44,7 @@ export class Identifier {
 	/**
 	 * Get parent Pkg for accessing package metadata
 	 */
-	get pkg() {
+	get pkg(): Pkg {
 		return this.module.pkg;
 	}
 
@@ -63,7 +65,7 @@ export class Identifier {
 	/**
 	 * Declaration kind (type, function, class, etc.)
 	 */
-	get kind() {
+	get kind(): Src_Module_Declaration_Kind | null {
 		return this.decl.kind;
 	}
 
