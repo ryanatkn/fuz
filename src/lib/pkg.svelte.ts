@@ -6,6 +6,15 @@ import type {Src_Json} from '$lib/src_json.js';
 import {Identifier} from '$lib/identifier.svelte.js';
 import {Module} from '$lib/module.svelte.js';
 
+// TODO where does this belong? repo_helpers?
+/**
+ * Parse repository URL from package.json format.
+ */
+const parse_repo = (r: string | null | undefined): string | null => {
+	if (!r) return null;
+	return strip_end(strip_start(strip_end(r, '.git'), 'git+'), '/');
+};
+
 /**
  * Rich runtime package representation following the "minimal + rich" pattern.
  *
@@ -36,29 +45,30 @@ export class Pkg {
 	/**
 	 * GitHub repository URL (e.g., 'https://github.com/ryanatkn/fuz').
 	 */
-	repo_url = $derived((() => {
-		const parse_repo = (r: string | null | undefined): string | null => {
-			if (!r) return null;
-			return strip_end(strip_start(strip_end(r, '.git'), 'git+'), '/');
-		};
-
-		const url = parse_repo(
-			this.package_json.repository
-				? typeof this.package_json.repository === 'string'
-					? this.package_json.repository
-					: this.package_json.repository.url
-				: null,
-		);
-		if (!url) {
-			throw Error('failed to parse pkg - `repo_url` is required in package_json');
-		}
-		return url;
-	})());
+	repo_url = $derived(
+		(() => {
+			const url = parse_repo(
+				this.package_json.repository
+					? typeof this.package_json.repository === 'string'
+						? this.package_json.repository
+						: this.package_json.repository.url
+					: null,
+			);
+			if (!url) {
+				throw Error('failed to parse pkg - `repo_url` is required in package_json');
+			}
+			return url;
+		})(),
+	);
 
 	/**
 	 * GitHub owner/org name (e.g., 'ryanatkn').
 	 */
-	owner_name = $derived(strip_start(this.repo_url, 'https://github.com/').split('/')[0] ?? null);
+	owner_name = $derived(
+		this.repo_url
+			? (strip_start(this.repo_url, 'https://github.com/').split('/')[0] ?? null)
+			: null,
+	);
 
 	/**
 	 * Homepage URL (e.g., 'https://www.fuz.dev/').
@@ -106,19 +116,19 @@ export class Pkg {
 	/**
 	 * Organization URL (e.g., 'https://github.com/ryanatkn').
 	 */
-	org_url = $derived((() => {
-		const suffix = '/' + this.repo_name;
-		if (this.repo_url.endsWith(suffix)) {
-			return strip_end(this.repo_url, suffix);
-		}
-		return null;
-	})());
+	org_url = $derived(
+		this.repo_url.endsWith('/' + this.repo_name)
+			? strip_end(this.repo_url, '/' + this.repo_name)
+			: null,
+	);
 
 	/**
 	 * All modules as rich Module instances (cached via $derived).
 	 */
 	modules = $derived(
-		this.src_json.modules ? this.src_json.modules.map((src_module) => new Module(this, src_module)) : [],
+		this.src_json.modules
+			? this.src_json.modules.map((src_module) => new Module(this, src_module))
+			: [],
 	);
 
 	/**

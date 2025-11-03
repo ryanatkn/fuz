@@ -32,8 +32,8 @@
 				path="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Content_Security_Policy"
 				>Content Security Policies</Mdn_Link
 			> with the
-			<Identifier_Link name="create_csp_directives" /> helper. Fuz also provides related helpers, types, and
-			CSP data.
+			<Identifier_Link name="create_csp_directives" /> helper. Fuz also provides related helpers, types,
+			and CSP data.
 		</p>
 		<p>
 			The goal is to provide a simple trust modeling system that balances safety+security+privacy

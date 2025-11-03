@@ -5,7 +5,9 @@ import type {Contextmenu_Params} from '$lib/contextmenu_state.svelte.js';
 /**
  * Create contextmenu entries for an identifier
  */
-export const create_identifier_contextmenu = (identifier: Identifier): Array<Contextmenu_Params> => {
+export const create_identifier_contextmenu = (
+	identifier: Identifier,
+): Array<Contextmenu_Params> => {
 	const entries: Array<Contextmenu_Params> = [];
 
 	// Navigate to API docs
