@@ -5,23 +5,56 @@
 
 import {Identifier} from '$lib/identifier.svelte.js';
 import {Module} from '$lib/module.svelte.js';
-import {pkg_context} from '$lib/pkg.js';
+import {pkg_context, type Pkg} from '$lib/pkg.js';
 
 /**
- * Get all modules as Module instances
+ * Cache for modules per Pkg instance
+ * Using WeakMap so cache is garbage collected when pkg is no longer referenced
+ */
+const modules_cache: WeakMap<Pkg, Array<Module>> = new WeakMap();
+
+/**
+ * Cache for identifiers per Pkg instance
+ * Using WeakMap so cache is garbage collected when pkg is no longer referenced
+ */
+const identifiers_cache: WeakMap<Pkg, Array<Identifier>> = new WeakMap();
+
+/**
+ * Get all modules as Module instances (cached per Pkg)
  */
 export const get_all_modules = (): Array<Module> => {
 	const pkg = pkg_context.get();
+
+	// Check cache first
+	const cached = modules_cache.get(pkg);
+	if (cached) return cached;
+
+	// Create modules if not cached
 	if (!pkg.src_json.modules) return [];
-	return pkg.src_json.modules.map((src_module) => new Module(pkg, src_module));
+	const modules = pkg.src_json.modules.map((src_module) => new Module(pkg, src_module));
+
+	// Cache and return
+	modules_cache.set(pkg, modules);
+	return modules;
 };
 
 /**
- * Get all identifiers as a flat list of Identifier instances
+ * Get all identifiers as a flat list of Identifier instances (cached per Pkg)
  */
 export const get_all_identifiers = (): Array<Identifier> => {
+	const pkg = pkg_context.get();
+
+	// Check cache first
+	const cached = identifiers_cache.get(pkg);
+	if (cached) return cached;
+
+	// Create identifiers if not cached
 	const modules = get_all_modules();
-	return modules.flatMap((module) => module.identifiers);
+	const identifiers = modules.flatMap((module) => module.identifiers);
+
+	// Cache and return
+	identifiers_cache.set(pkg, identifiers);
+	return identifiers;
 };
 
 /**

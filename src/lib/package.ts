@@ -47,6 +47,7 @@ export const package_json: Package_Json = {
 		'esm-env': '^1',
 		svelte: '^5',
 		svelte2tsx: '^0.7.45',
+		zod: '^4.1.12',
 	},
 	peerDependenciesMeta: {
 		'@ryanatkn/gro': {
@@ -81,6 +82,7 @@ export const package_json: Package_Json = {
 		typescript: '^5.9.3',
 		'typescript-eslint': '^8.41.0',
 		vitest: '^3.2.4',
+		zod: '^4.1.12',
 	},
 	prettier: {
 		plugins: ['prettier-plugin-svelte'],
@@ -114,9 +116,6 @@ export const package_json: Package_Json = {
 			svelte: './dist/*.svelte',
 			default: './dist/*.svelte',
 		},
-	},
-	dependencies: {
-		zod: '^4.1.12',
 	},
 };
 
@@ -213,9 +212,9 @@ export const src_json: Src_Json = {
 				{
 					name: 'get_all_modules',
 					kind: 'function',
-					doc_comment: 'Get all modules as Module instances',
-					summary: 'Get all modules as Module instances',
-					source_line: 13,
+					doc_comment: 'Get all modules as Module instances (cached per Pkg)',
+					summary: 'Get all modules as Module instances (cached per Pkg)',
+					source_line: 25,
 					type_signature: '(): Module[]',
 					return_type: 'Module[]',
 					parameters: [],
@@ -223,9 +222,10 @@ export const src_json: Src_Json = {
 				{
 					name: 'get_all_identifiers',
 					kind: 'function',
-					doc_comment: 'Get all identifiers as a flat list of Identifier instances',
-					summary: 'Get all identifiers as a flat list of Identifier instances',
-					source_line: 22,
+					doc_comment:
+						'Get all identifiers as a flat list of Identifier instances (cached per Pkg)',
+					summary: 'Get all identifiers as a flat list of Identifier instances (cached per Pkg)',
+					source_line: 44,
 					type_signature: '(): Identifier[]',
 					return_type: 'Identifier[]',
 					parameters: [],
@@ -237,7 +237,7 @@ export const src_json: Src_Json = {
 						'Look up an identifier by name (flat namespace)\nReturns an Identifier instance if found',
 					summary:
 						'Look up an identifier by name (flat namespace)\nReturns an Identifier instance if found',
-					source_line: 31,
+					source_line: 64,
 					type_signature: '(name: string): Identifier | undefined',
 					return_type: 'Identifier | undefined',
 					parameters: [
@@ -253,7 +253,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Check if an identifier is documented',
 					summary: 'Check if an identifier is documented',
-					source_line: 39,
+					source_line: 72,
 					type_signature: '(name: string): boolean',
 					return_type: 'boolean',
 					parameters: [
@@ -271,7 +271,7 @@ export const src_json: Src_Json = {
 						'Search identifiers by name (fuzzy match)\nReturns Identifier instances sorted by relevance',
 					summary:
 						'Search identifiers by name (fuzzy match)\nReturns Identifier instances sorted by relevance',
-					source_line: 47,
+					source_line: 80,
 					type_signature: '(query: string): Identifier[]',
 					return_type: 'Identifier[]',
 					parameters: [
@@ -2601,23 +2601,6 @@ export const src_json: Src_Json = {
 			],
 		},
 		{
-			path: 'Type_Link.svelte',
-			declarations: [
-				{
-					name: 'Type_Link',
-					kind: 'component',
-					props: [
-						{
-							name: 'type',
-							type: 'string',
-							optional: false,
-						},
-					],
-					source_line: 1,
-				},
-			],
-		},
-		{
 			path: 'Identifier_Link.svelte',
 			declarations: [
 				{
@@ -2649,7 +2632,7 @@ export const src_json: Src_Json = {
 						'Rich runtime representation of an exported identifier with computed properties.\n\nCombines:\n- Minimal Src_Module_Declaration data (serializable)\n- Parent Module reference (provides Pkg context)\n- Lazy-computed URLs, import statements, etc.\n- Query methods for ergonomic usage',
 					summary:
 						'Rich runtime representation of an exported identifier with computed properties.',
-					source_line: 29,
+					source_line: 31,
 					members: [
 						{
 							name: 'module',
@@ -3468,7 +3451,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'src_json',
 					kind: 'variable',
-					source_line: 123,
+					source_line: 122,
 					type_signature: 'Src_Json',
 				},
 			],
@@ -5207,6 +5190,23 @@ export const src_json: Src_Json = {
 			],
 			module_comment:
 				'TSDoc/JSDoc parsing helpers using the TypeScript Compiler API.\n\nProvides `tsdoc_parse()` for extracting JSDoc/TSDoc from TypeScript nodes.\n\n## How it works\n\nUses TypeScript\'s built-in `ts.getJSDocCommentsAndTags()` API to extract\nstructured documentation from AST nodes.\n\n## Behavioral notes (due to TS Compiler API)\n\n- Preserves dash separator in @param descriptions: `@param x - desc` → `"- desc"`\n- @throws tags have {Type} stripped by TS API; fallback regex extracts first word as error type\n- @see tags return unreliable values ("*" or undefined) from TS API\n\n## Usage\n\nWorks on all TypeScript nodes, including:\n- Regular TypeScript files (.ts, .tsx)\n- Transformed output from svelte2tsx\n- Any node with JSDoc comments in the AST\n\nAll functions are prefixed with `tsdoc_` for clarity.',
+		},
+		{
+			path: 'Type_Link.svelte',
+			declarations: [
+				{
+					name: 'Type_Link',
+					kind: 'component',
+					props: [
+						{
+							name: 'type',
+							type: 'string',
+							optional: false,
+						},
+					],
+					source_line: 1,
+				},
+			],
 		},
 	],
 };
