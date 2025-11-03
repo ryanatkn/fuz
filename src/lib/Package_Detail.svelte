@@ -6,7 +6,7 @@
 	import type {Pkg} from '$lib/pkg.svelte.js';
 	import Details from '$lib/Details.svelte';
 	import Img_Or_Svg from '$lib/Img_Or_Svg.svelte';
-	import Declaration_Link from '$lib/Declaration_Link.svelte';
+	import Identifier_Link from '$lib/Identifier_Link.svelte';
 	import Module_Link from '$lib/Module_Link.svelte';
 	import {github_file_url, repo_url_parse, well_known_url} from '$lib/package_helpers.js';
 	import {
@@ -171,7 +171,7 @@
 								<ul class="identifiers unstyled">
 									{#each module.identifiers as identifier (identifier.name)}
 										<li>
-											<Declaration_Link {identifier} />
+											<Identifier_Link name={identifier.name} />
 										</li>
 									{/each}
 								</ul>
