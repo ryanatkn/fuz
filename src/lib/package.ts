@@ -3334,7 +3334,7 @@ export const src_json: Src_Json = {
 			path: 'package_helpers.ts',
 			declarations: [
 				{
-					name: 'parse_repo_url',
+					name: 'repo_url_parse',
 					kind: 'function',
 					doc_comment:
 						"Parse repository URL from package.json format.\nStrips 'git+', '.git', and trailing slashes.",
@@ -3353,7 +3353,7 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'parse_repo_name',
+					name: 'repo_name_parse',
 					kind: 'function',
 					doc_comment:
 						"Extract repository name without scope from package name.\nExamples: '@org/pkg' -> 'pkg', 'pkg' -> 'pkg'",
@@ -3371,7 +3371,7 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'url_github_file',
+					name: 'github_file_url',
 					kind: 'function',
 					doc_comment: 'Build GitHub file URL for a repository.',
 					summary: 'Build GitHub file URL for a repository.',
@@ -3398,7 +3398,7 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'url_npm_package',
+					name: 'npm_package_url',
 					kind: 'function',
 					doc_comment: 'Build npm package URL.',
 					summary: 'Build npm package URL.',
@@ -3414,7 +3414,7 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'url_api_doc',
+					name: 'api_doc_url',
 					kind: 'function',
 					doc_comment:
 						'Build project-relative API documentation URL with hash anchor (calls resolve internally).',
@@ -3432,10 +3432,10 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'url_api_doc_absolute',
+					name: 'api_doc_url_full',
 					kind: 'function',
-					doc_comment: 'Build absolute API documentation URL with domain and hash anchor.',
-					summary: 'Build absolute API documentation URL with domain and hash anchor.',
+					doc_comment: 'Build full API documentation URL with domain and hash anchor.',
+					summary: 'Build full API documentation URL with domain and hash anchor.',
 					source_line: 55,
 					type_signature: '(homepage: string, identifier_name: string): string',
 					return_type: 'string',
@@ -3453,7 +3453,7 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'parse_github_owner',
+					name: 'github_owner_parse',
 					kind: 'function',
 					doc_comment:
 						"Parse GitHub owner/org name from repository URL.\nExample: 'https://github.com/ryanatkn/fuz' -> 'ryanatkn'",
@@ -3471,7 +3471,7 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'url_github_org',
+					name: 'github_org_url',
 					kind: 'function',
 					doc_comment:
 						"Build GitHub organization URL from repo URL and repo name.\nExample: ('https://github.com/ryanatkn/fuz', 'fuz') -> 'https://github.com/ryanatkn'",
@@ -3494,7 +3494,7 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'is_package_published',
+					name: 'package_is_published',
 					kind: 'function',
 					doc_comment:
 						'Check if a package is published to npm.\nPublished packages are not private, have exports, and have a version beyond 0.0.1.',
@@ -3513,7 +3513,7 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'url_well_known',
+					name: 'well_known_url',
 					kind: 'function',
 					doc_comment:
 						"Build .well-known URL for package metadata files.\nExample: ('https://fuz.dev/', 'src.json') -> 'https://fuz.dev/.well-known/src.json'",
@@ -3536,7 +3536,7 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'url_package_logo',
+					name: 'package_logo_url',
 					kind: 'function',
 					doc_comment:
 						'Build package logo URL with favicon.png fallback.\nReturns null if no homepage URL is provided.',

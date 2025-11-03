@@ -9,7 +9,7 @@
 	import Img_Or_Svg from '$lib/Img_Or_Svg.svelte';
 	import Declaration_Link from '$lib/Declaration_Link.svelte';
 	import Module_Link from '$lib/Module_Link.svelte';
-	import {parse_repo_url, url_github_file, url_well_known} from '$lib/package_helpers.js';
+	import {github_file_url, repo_url_parse, well_known_url} from '$lib/package_helpers.js';
 
 	interface Props {
 		pkg: Pkg; // TODO normalized version with cached primitives?
@@ -27,9 +27,9 @@
 
 	const {package_json} = $derived(pkg);
 
-	const repository_url = $derived(parse_repo_url(package_json.repository));
+	const repository_url = $derived(repo_url_parse(package_json.repository));
 	const license_url = $derived(
-		package_json.license && repository_url ? url_github_file(repository_url, 'LICENSE') : null,
+		package_json.license && repository_url ? github_file_url(repository_url, 'LICENSE') : null,
 	);
 </script>
 
@@ -125,10 +125,10 @@
 					{#if pkg.homepage_url}
 						<span class="title">data</span>
 						<div class="content">
-							<a class="chip" title="data" href={url_well_known(pkg.homepage_url, 'package.json')}
+							<a class="chip" title="data" href={well_known_url(pkg.homepage_url, 'package.json')}
 								>package.json</a
 							>
-							<a class="chip" title="data" href={url_well_known(pkg.homepage_url, 'src.json')}
+							<a class="chip" title="data" href={well_known_url(pkg.homepage_url, 'src.json')}
 								>src.json</a
 							>
 						</div>

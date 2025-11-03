@@ -5,14 +5,14 @@ import type {Src_Json} from '$lib/src_json.js';
 import {Identifier} from '$lib/identifier.svelte.js';
 import {Module} from '$lib/module.svelte.js';
 import {
-	is_package_published,
-	parse_github_owner,
-	parse_repo_name,
-	parse_repo_url,
-	url_github_file,
-	url_github_org,
-	url_npm_package,
-	url_package_logo,
+	github_file_url,
+	github_org_url,
+	github_owner_parse,
+	npm_package_url,
+	package_is_published,
+	package_logo_url,
+	repo_name_parse,
+	repo_url_parse,
 } from '$lib/package_helpers.js';
 
 /**
@@ -40,14 +40,14 @@ export class Pkg {
 	/**
 	 * Repository name without scope (e.g., 'fuz').
 	 */
-	repo_name = $derived(parse_repo_name(this.package_json.name));
+	repo_name = $derived(repo_name_parse(this.package_json.name));
 
 	/**
 	 * GitHub repository URL (e.g., 'https://github.com/ryanatkn/fuz').
 	 */
 	repo_url = $derived(
 		(() => {
-			const url = parse_repo_url(this.package_json.repository);
+			const url = repo_url_parse(this.package_json.repository);
 			if (!url) {
 				throw Error('failed to parse pkg - `repo_url` is required in package_json');
 			}
@@ -58,7 +58,7 @@ export class Pkg {
 	/**
 	 * GitHub owner/org name (e.g., 'ryanatkn').
 	 */
-	owner_name = $derived(this.repo_url ? parse_github_owner(this.repo_url) : null);
+	owner_name = $derived(this.repo_url ? github_owner_parse(this.repo_url) : null);
 
 	/**
 	 * Homepage URL (e.g., 'https://www.fuz.dev/').
@@ -68,7 +68,7 @@ export class Pkg {
 	/**
 	 * Logo URL (falls back to favicon.png).
 	 */
-	logo_url = $derived(url_package_logo(this.homepage_url, this.package_json.logo));
+	logo_url = $derived(package_logo_url(this.homepage_url, this.package_json.logo));
 
 	/**
 	 * Logo alt text.
@@ -78,24 +78,24 @@ export class Pkg {
 	/**
 	 * Whether package is published to npm.
 	 */
-	published = $derived(is_package_published(this.package_json));
+	published = $derived(package_is_published(this.package_json));
 
 	/**
 	 * npm package URL (if published).
 	 */
-	npm_url = $derived(this.published ? url_npm_package(this.package_json.name) : null);
+	npm_url = $derived(this.published ? npm_package_url(this.package_json.name) : null);
 
 	/**
 	 * Changelog URL (if published).
 	 */
 	changelog_url = $derived(
-		this.published && this.repo_url ? url_github_file(this.repo_url, 'CHANGELOG.md') : null,
+		this.published && this.repo_url ? github_file_url(this.repo_url, 'CHANGELOG.md') : null,
 	);
 
 	/**
 	 * Organization URL (e.g., 'https://github.com/ryanatkn').
 	 */
-	org_url = $derived(url_github_org(this.repo_url, this.repo_name));
+	org_url = $derived(github_org_url(this.repo_url, this.repo_name));
 
 	/**
 	 * All modules as rich Module instances (cached via $derived).

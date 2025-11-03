@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
 
-	import {url_github_file} from '$lib/package_helpers.js';
+	import {github_file_url} from '$lib/package_helpers.js';
 
 	const {
 		module_path,
@@ -16,7 +16,7 @@
 	// generate GitHub source URL
 	const source_url = $derived(
 		repo_url
-			? url_github_file(
+			? github_file_url(
 					repo_url,
 					`src/lib/${module_path.replace(/^\.\//, '').replace(/\.js$/, '.ts')}`,
 				)

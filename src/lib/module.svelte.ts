@@ -12,7 +12,7 @@
 import {Identifier} from '$lib/identifier.svelte.js';
 import type {Pkg} from '$lib/pkg.svelte.js';
 import type {Src_Module} from '$lib/src_json.js';
-import {url_github_file} from '$lib/package_helpers.js';
+import {github_file_url} from '$lib/package_helpers.js';
 
 /**
  * Rich runtime representation of a source module with computed properties.
@@ -53,7 +53,7 @@ export class Module {
 	 * GitHub source URL for the module file.
 	 */
 	module_url = $derived(
-		this.pkg.repo_url ? url_github_file(this.pkg.repo_url, `src/lib/${this.path}`) : undefined,
+		this.pkg.repo_url ? github_file_url(this.pkg.repo_url, `src/lib/${this.path}`) : undefined,
 	);
 
 	constructor(pkg: Pkg, src_module: Src_Module) {
