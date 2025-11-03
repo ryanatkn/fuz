@@ -40,8 +40,7 @@ function foo() {}
 			const result = tsdoc_parse(node, source_file);
 
 			assert.ok(result);
-			assert.strictEqual(result.full_text, 'Simple comment');
-			assert.strictEqual(result.summary, 'Simple comment');
+			assert.strictEqual(result.text, 'Simple comment');
 		});
 
 		test('extracts JSDoc with all tag types', () => {
@@ -67,7 +66,7 @@ function foo(name: string, age: number) {}
 			const result = tsdoc_parse(node, source_file);
 
 			assert.ok(result);
-			assert.ok(result.full_text.includes('This is a function'));
+			assert.ok(result.text.includes('This is a function'));
 			assert.strictEqual(result.params.size, 2);
 			// TypeScript API includes any text after param name (no dash separator here)
 			assert.strictEqual(result.params.get('name'), 'The name parameter');
@@ -98,9 +97,8 @@ function foo() {}
 
 			assert.ok(result);
 			// Summary should be only the first paragraph
-			assert.strictEqual(result.summary, 'First paragraph summary.');
 			// Full text should contain everything
-			assert.ok(result.full_text.includes('Second paragraph'));
+			assert.ok(result.text.includes('Second paragraph'));
 		});
 
 		test('summary equals full text when no double newline', () => {
@@ -118,8 +116,6 @@ function foo() {}
 
 			assert.ok(result);
 			// When no double newline, split returns the whole text as first element
-			assert.strictEqual(result.summary, result.full_text);
-			assert.ok(result.summary.includes('multiple lines'));
 		});
 
 		test('handles empty comment', () => {
@@ -133,8 +129,7 @@ function foo() {}
 
 			// Empty comments still return a result, just with empty strings
 			assert.ok(result);
-			assert.strictEqual(result.full_text, '');
-			assert.strictEqual(result.summary, '');
+			assert.strictEqual(result.text, '');
 		});
 
 		test('handles whitespace-only comment', () => {
@@ -150,8 +145,7 @@ function foo() {}
 			const result = tsdoc_parse(node, source_file);
 
 			assert.ok(result);
-			assert.strictEqual(result.full_text, '');
-			assert.strictEqual(result.summary, '');
+			assert.strictEqual(result.text, '');
 		});
 	});
 
@@ -668,8 +662,7 @@ function createUser(name: string, age: number, options?: any) {}
 
 			assert.ok(result);
 			// Verify all components are extracted
-			assert.ok(result.summary.includes('Complex function'));
-			assert.ok(result.full_text.includes('Second paragraph'));
+			assert.ok(result.text.includes('Second paragraph'));
 			assert.strictEqual(result.params.size, 3);
 			assert.strictEqual(result.params.get('name'), "User's full name");
 			assert.strictEqual(result.params.get('age'), "- User's age (with dash)");
@@ -693,8 +686,7 @@ let x = 42;
 			const result = tsdoc_parse(node, source_file);
 
 			assert.ok(result);
-			assert.strictEqual(result.full_text, 'Component-level documentation');
-			assert.strictEqual(result.summary, 'Component-level documentation');
+			assert.strictEqual(result.text, 'Component-level documentation');
 		});
 
 		test('extracts JSDoc from variable declaration within statement', () => {
@@ -713,7 +705,7 @@ const myVar = 42;
 			const result = tsdoc_parse(declaration, source_file);
 
 			assert.ok(result);
-			assert.strictEqual(result.full_text, 'Variable with JSDoc');
+			assert.strictEqual(result.text, 'Variable with JSDoc');
 		});
 
 		test('extracts JSDoc from class declaration', () => {
@@ -730,7 +722,6 @@ class MyClass {}
 			const result = tsdoc_parse(node, source_file);
 
 			assert.ok(result);
-			assert.strictEqual(result.summary, 'A test class.');
 			assert.strictEqual(result.since, '1.0.0');
 		});
 
@@ -746,7 +737,7 @@ type ComponentProps = {name: string};
 			const result = tsdoc_parse(node, source_file);
 
 			assert.ok(result);
-			assert.strictEqual(result.full_text, 'Component props type.');
+			assert.strictEqual(result.text, 'Component props type.');
 		});
 
 		test('extracts JSDoc from interface declaration', () => {
@@ -766,7 +757,6 @@ interface MyInterface {
 			const result = tsdoc_parse(node, source_file);
 
 			assert.ok(result);
-			assert.strictEqual(result.summary, 'Interface documentation.');
 			assert.strictEqual(result.examples?.length, 1);
 		});
 
@@ -789,7 +779,7 @@ interface Props {
 			const result = tsdoc_parse(property, source_file);
 
 			assert.ok(result);
-			assert.ok(result.full_text.includes("user's name"));
+			assert.ok(result.text.includes("user's name"));
 		});
 	});
 
@@ -817,7 +807,7 @@ function $$render() {
 			const result = tsdoc_parse(varStmt, source_file);
 
 			assert.ok(result);
-			assert.ok(result.full_text.includes('renders children lazily'));
+			assert.ok(result.text.includes('renders children lazily'));
 		});
 
 		test('extracts prop JSDoc from type literal pattern', () => {
@@ -843,7 +833,7 @@ type $$ComponentProps = {
 			const result = tsdoc_parse(property, source_file);
 
 			assert.ok(result);
-			assert.ok(result.full_text.includes('render eagerly'));
+			assert.ok(result.text.includes('render eagerly'));
 		});
 	});
 

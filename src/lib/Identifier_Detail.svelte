@@ -52,7 +52,7 @@
 <!-- documentation -->
 {#if identifier.has_documentation()}
 	<p>
-		{decl.doc_comment || decl.summary}
+		{decl.doc_comment}
 	</p>
 {/if}
 
@@ -280,7 +280,7 @@
 				<tr>
 					<th>member</th>
 					<th>type</th>
-					{#if decl.members.some((m) => m.summary)}
+					{#if decl.members.some((m) => m.modifiers?.length)}
 						<th>modifiers</th>
 					{/if}
 					{#if decl.members.some((m) => m.doc_comment)}
@@ -297,8 +297,8 @@
 								<Type_Link type={member.type_signature} />
 							{/if}
 						</td>
-						{#if decl.members.some((m) => m.summary)}
-							<td>{member.summary ?? ''}</td>
+						{#if decl.members.some((m) => m.modifiers?.length)}
+							<td>{member.modifiers?.join(' ') ?? ''}</td>
 						{/if}
 						{#if decl.members.some((m) => m.doc_comment)}
 							<td>{member.doc_comment ?? ''}</td>
@@ -318,7 +318,7 @@
 				<tr>
 					<th>property</th>
 					<th>type</th>
-					{#if decl.properties.some((p) => p.summary)}
+					{#if decl.properties.some((p) => p.modifiers?.length)}
 						<th>modifiers</th>
 					{/if}
 					{#if decl.properties.some((p) => p.doc_comment)}
@@ -335,8 +335,8 @@
 								<Type_Link type={prop.type_signature} />
 							{/if}
 						</td>
-						{#if decl.properties.some((p) => p.summary)}
-							<td>{prop.summary ?? ''}</td>
+						{#if decl.properties.some((p) => p.modifiers?.length)}
+							<td>{prop.modifiers?.join(' ') ?? ''}</td>
 						{/if}
 						{#if decl.properties.some((p) => p.doc_comment)}
 							<td>{prop.doc_comment ?? ''}</td>

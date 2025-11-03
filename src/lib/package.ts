@@ -367,8 +367,6 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						"Wraps Svelte's `setContext` and `getContext` for better ergonmics.\nWhen no value is set in the context,\n`get` throws an error and `maybe_get` returns `undefined`.\nIf a `fallback` is provided, the `value` argument to `set` is optional\nand `maybe_get` is omitted from the type.",
-					summary:
-						"Wraps Svelte's `setContext` and `getContext` for better ergonmics.\nWhen no value is set in the context,\n`get` throws an error and `maybe_get` returns `undefined`.\nIf a `fallback` is provided, the `value` argument to `set` is optional\nand `maybe_get` is omitted from the type.",
 					source_line: 18,
 					type_signature:
 						'<T>(fallback: () => T): { get: () => T; set: (value?: T | undefined) => T; }',
@@ -464,8 +462,6 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Check if a target element is valid for contextmenu interactions.\nReturns true if valid and narrows the type to HTMLElement | SVGElement.',
-					summary:
-						'Check if a target element is valid for contextmenu interactions.\nReturns true if valid and narrows the type to HTMLElement | SVGElement.',
 					source_line: 17,
 					type_signature:
 						'(target: EventTarget | null, shiftKey: boolean): target is HTMLElement | SVGElement',
@@ -488,8 +484,6 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Creates the keyboard handler map for contextmenu navigation.\nBinds handlers to the provided contextmenu instance.',
-					summary:
-						'Creates the keyboard handler map for contextmenu navigation.\nBinds handlers to the provided contextmenu instance.',
 					source_line: 32,
 					type_signature: '(contextmenu: Contextmenu_State): Map<string, () => void>',
 					return_type: 'Map<string, () => void>',
@@ -506,7 +500,6 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Creates a keydown event handler that uses the provided keyboard handlers map.',
-					summary: 'Creates a keydown event handler that uses the provided keyboard handlers map.',
 					source_line: 50,
 					type_signature:
 						'(keyboard_handlers: Map<string, () => void>): (e: KeyboardEvent) => void',
@@ -523,8 +516,6 @@ export const src_json: Src_Json = {
 					name: 'contextmenu_calculate_constrained_x',
 					kind: 'function',
 					doc_comment:
-						'Calculates the constrained X position for the contextmenu,\nensuring it stays within the layout width.',
-					summary:
 						'Calculates the constrained X position for the contextmenu,\nensuring it stays within the layout width.',
 					source_line: 65,
 					type_signature: '(menu_x: number, menu_width: number, layout_width: number): number',
@@ -551,8 +542,6 @@ export const src_json: Src_Json = {
 					name: 'contextmenu_calculate_constrained_y',
 					kind: 'function',
 					doc_comment:
-						'Calculates the constrained Y position for the contextmenu,\nensuring it stays within the layout height.',
-					summary:
 						'Calculates the constrained Y position for the contextmenu,\nensuring it stays within the layout height.',
 					source_line: 75,
 					type_signature: '(menu_y: number, menu_height: number, layout_height: number): number',
@@ -616,8 +605,6 @@ export const src_json: Src_Json = {
 					name: 'Contextmenu_Root_For_Safari_Compatibility',
 					kind: 'component',
 					doc_comment:
-						"Blocks the next click event. Set to true when a longpress completes to prevent\niOS's synthesized click from activating the first menu item.",
-					summary:
 						"Blocks the next click event. Set to true when a longpress completes to prevent\niOS's synthesized click from activating the first menu item.",
 					props: [
 						{
@@ -722,7 +709,6 @@ export const src_json: Src_Json = {
 					kind: 'component',
 					doc_comment:
 						"Touch event handler for tap-then-longpress bypass detection.\n\nThis allows users to access the native context menu by performing a tap\nfollowed by a longpress/rightclick within a specified time window.\nThe bypass gesture is useful for accessing browser features like text selection\nor the native context menu when the Fuz contextmenu would normally override it.\n\nNote: preventDefault is not called as we're only observing touch patterns,\nnot intercepting them. The actual bypass happens in on_window_contextmenu.",
-					summary: 'Touch event handler for tap-then-longpress bypass detection.',
 					props: [
 						{
 							name: 'contextmenu',
@@ -843,24 +829,24 @@ export const src_json: Src_Json = {
 						{
 							name: 'is_menu',
 							kind: 'variable',
-							summary: 'readonly',
+							modifiers: ['readonly'],
 						},
 						{
 							name: 'menu',
 							kind: 'variable',
-							summary: 'readonly',
+							modifiers: ['readonly'],
 							type_signature: 'Submenu_State | Root_Menu_State',
 						},
 						{
 							name: 'run',
 							kind: 'variable',
-							summary: 'readonly',
+							modifiers: ['readonly'],
 							type_signature: '() => Contextmenu_Run',
 						},
 						{
 							name: 'disabled',
 							kind: 'variable',
-							summary: 'readonly',
+							modifiers: ['readonly'],
 							type_signature: '() => boolean',
 						},
 						{
@@ -893,18 +879,18 @@ export const src_json: Src_Json = {
 						{
 							name: 'is_menu',
 							kind: 'variable',
-							summary: 'readonly',
+							modifiers: ['readonly'],
 						},
 						{
 							name: 'menu',
 							kind: 'variable',
-							summary: 'readonly',
+							modifiers: ['readonly'],
 							type_signature: 'Submenu_State | Root_Menu_State',
 						},
 						{
 							name: 'depth',
 							kind: 'variable',
-							summary: 'readonly',
+							modifiers: ['readonly'],
 							type_signature: 'number',
 						},
 						{
@@ -927,17 +913,17 @@ export const src_json: Src_Json = {
 						{
 							name: 'is_menu',
 							kind: 'variable',
-							summary: 'readonly',
+							modifiers: ['readonly'],
 						},
 						{
 							name: 'menu',
 							kind: 'variable',
-							summary: 'readonly',
+							modifiers: ['readonly'],
 						},
 						{
 							name: 'depth',
 							kind: 'variable',
-							summary: 'readonly',
+							modifiers: ['readonly'],
 						},
 						{
 							name: 'items',
@@ -970,8 +956,6 @@ export const src_json: Src_Json = {
 					kind: 'class',
 					doc_comment:
 						'Creates a `contextmenu` store.\nSee usage with `Contextmenu_Root.svelte` and `Contextmenu.svelte`.',
-					summary:
-						'Creates a `contextmenu` store.\nSee usage with `Contextmenu_Root.svelte` and `Contextmenu.svelte`.',
 					see_also: ['://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event'],
 					source_line: 85,
 					members: [
@@ -983,7 +967,7 @@ export const src_json: Src_Json = {
 						{
 							name: 'has_custom_layout',
 							kind: 'variable',
-							summary: 'readonly',
+							modifiers: ['readonly'],
 							type_signature: 'boolean',
 							doc_comment:
 								'If an initial layout is provided, control is deferred externally.\nOtherwise the layout syncs to the page dimensions.',
@@ -1016,7 +1000,7 @@ export const src_json: Src_Json = {
 						{
 							name: 'root_menu',
 							kind: 'variable',
-							summary: 'readonly',
+							modifiers: ['readonly'],
 							type_signature: 'Root_Menu_State',
 						},
 						{
@@ -1075,7 +1059,6 @@ export const src_json: Src_Json = {
 							kind: 'function',
 							type_signature: '(item: Item_State) => void',
 							doc_comment: 'Activates the selected entry, or if none, selects the first.',
-							summary: 'Activates the selected entry, or if none, selects the first.',
 						},
 						{
 							name: 'collapse_selected',
@@ -1113,14 +1096,12 @@ export const src_json: Src_Json = {
 							type_signature:
 								'(run: () => Contextmenu_Run, disabled?: () => boolean) => Entry_State',
 							doc_comment: 'Used by `Contextmenu_Entry` and custom entry components',
-							summary: 'Used by `Contextmenu_Entry` and custom entry components',
 						},
 						{
 							name: 'add_submenu',
 							kind: 'function',
 							type_signature: '() => Submenu_State',
 							doc_comment: '',
-							summary: '',
 						},
 					],
 				},
@@ -1128,7 +1109,6 @@ export const src_json: Src_Json = {
 					name: 'contextmenu_attachment',
 					kind: 'function',
 					doc_comment: 'Creates an attachment that sets up contextmenu behavior on an element.',
-					summary: 'Creates an attachment that sets up contextmenu behavior on an element.',
 					source_line: 350,
 					type_signature:
 						'<T extends Contextmenu_Params, U extends T | Array<T>>(params: U | null | undefined): Attachment<HTMLElement | SVGElement>',
@@ -1174,8 +1154,6 @@ export const src_json: Src_Json = {
 					name: 'open_contextmenu',
 					kind: 'function',
 					doc_comment:
-						'Opens the contextmenu, if appropriate,\nquerying the menu items from the DOM starting at the event target.',
-					summary:
 						'Opens the contextmenu, if appropriate,\nquerying the menu items from the DOM starting at the event target.',
 					source_line: 390,
 					type_signature:
@@ -1242,8 +1220,6 @@ export const src_json: Src_Json = {
 					name: 'contextmenu_check_global_root',
 					kind: 'function',
 					doc_comment:
-						'Registers a contextmenu root and warns if multiple non-scoped roots are detected.\nOnly active in development mode. Automatically handles cleanup on unmount.',
-					summary:
 						'Registers a contextmenu root and warns if multiple non-scoped roots are detected.\nOnly active in development mode. Automatically handles cleanup on unmount.',
 					source_line: 491,
 					type_signature: '(get_scoped: () => boolean): void',
@@ -1373,7 +1349,6 @@ export const src_json: Src_Json = {
 					name: 'csp_trusted_sources_of_ryanatkn',
 					kind: 'variable',
 					doc_comment: 'List of trusted sources owned by ryanatkn (me, ryanatkn.com).',
-					summary: 'List of trusted sources owned by ryanatkn (me, ryanatkn.com).',
 					source_line: 6,
 					type_signature: 'Csp_Source_Spec[]',
 				},
@@ -1387,8 +1362,6 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						"This is designed for compatibility with SvelteKit\nand maps to the `KitConfig` `directives` option.\nThe goal is to provide an ergonomic, modern, and safe API\nfor Content Security Policy (CSP) creation\nthat's simple to write and audit, and isn't error-prone.\n\nThings like validation and rendering to a string\nare out of scope and left to SvelteKit.",
-					summary:
-						"This is designed for compatibility with SvelteKit\nand maps to the `KitConfig` `directives` option.\nThe goal is to provide an ergonomic, modern, and safe API\nfor Content Security Policy (CSP) creation\nthat's simple to write and audit, and isn't error-prone.",
 					source_line: 60,
 					type_signature: '(options?: Create_Csp_Directives_Options): Csp_Directives',
 					return_type: 'Csp_Directives',
@@ -1414,23 +1387,18 @@ export const src_json: Src_Json = {
 								'{\n\t\t[K in Csp_Directive]?:\n\t\t\t| Csp_Directive_Value<K> // Static value replacement\n\t\t\t| null // Removes the directive\n\t\t\t// Transform function returning one of the previous types\n\t\t\t| ((value: Csp_Directive_Value<K>) => Csp_Directive_Value<K> | null);\n\t}',
 							doc_comment:
 								'Override or transform specific directives.\nReturning `null` or `undefined` from a transform function will remove the directive.',
-							summary:
-								'Override or transform specific directives.\nReturning `null` or `undefined` from a transform function will remove the directive.',
 						},
 						{
 							name: 'trusted_sources',
 							kind: 'variable',
 							type_signature: 'Array<Csp_Source_Spec>',
 							doc_comment: 'Sources to include based on their trust levels.',
-							summary: 'Sources to include based on their trust levels.',
 						},
 						{
 							name: 'value_defaults',
 							kind: 'variable',
 							type_signature: 'Partial<typeof csp_directive_value_defaults>',
 							doc_comment:
-								'Override default values for specific directives,\nmerging with `value_defaults_base` (or replacing if that directive is null in the base).',
-							summary:
 								'Override default values for specific directives,\nmerging with `value_defaults_base` (or replacing if that directive is null in the base).',
 						},
 						{
@@ -1439,8 +1407,6 @@ export const src_json: Src_Json = {
 							type_signature: 'Partial<typeof csp_directive_value_defaults> | null',
 							doc_comment:
 								'Base values for directive defaults.\nSet to `null` or `{}` to start with no defaults.\nDefaults to `csp_directive_value_defaults`.',
-							summary:
-								'Base values for directive defaults.\nSet to `null` or `{}` to start with no defaults.\nDefaults to `csp_directive_value_defaults`.',
 						},
 						{
 							name: 'required_trust_defaults',
@@ -1448,16 +1414,12 @@ export const src_json: Src_Json = {
 							type_signature: 'Partial<typeof csp_directive_required_trust_defaults>',
 							doc_comment:
 								'Override trust requirements for specific directives,\nmerging with `required_trust_defaults_base` (or replacing if that directive is null in the base).',
-							summary:
-								'Override trust requirements for specific directives,\nmerging with `required_trust_defaults_base` (or replacing if that directive is null in the base).',
 						},
 						{
 							name: 'required_trust_defaults_base',
 							kind: 'variable',
 							type_signature: 'Partial<typeof csp_directive_required_trust_defaults> | null',
 							doc_comment:
-								'Base values for directive trust requirements.\nSet to `null` or `{}` to start with no trust requirements.\nDefaults to `csp_directive_required_trust_defaults`.',
-							summary:
 								'Base values for directive trust requirements.\nSet to `null` or `{}` to start with no trust requirements.\nDefaults to `csp_directive_required_trust_defaults`.',
 						},
 					],
@@ -1505,8 +1467,6 @@ export const src_json: Src_Json = {
 					kind: 'variable',
 					doc_comment:
 						'Numeric values for CSP trust levels, `csp_trust_levels`.\nLower is less trusted.\nIncludes `undefined` in the type for safety.',
-					summary:
-						'Numeric values for CSP trust levels, `csp_trust_levels`.\nLower is less trusted.\nIncludes `undefined` in the type for safety.',
 					source_line: 191,
 					type_signature: 'Record<"low" | "medium" | "high", number | undefined>',
 				},
@@ -1515,7 +1475,6 @@ export const src_json: Src_Json = {
 					kind: 'type',
 					doc_comment:
 						"Trust levels for CSP sources.\n\nWith the base defaults, trust levels roughly correspond to:\n\n- `low` – Passive resources only (no script execution, no styling or UI control).\n\t\tExamples: `img-src`, `font-src`.\n- `medium` – Content that may affect layout, styling, or embed external browsing contexts,\n   but cannot directly run code in the page's JS execution environment or\n\t\tperform other high-risk actions. Examples: `style-src`, `frame-src`, `frame-ancestors`.\n- `high` – Sources that can execute code in the page's context or open powerful network\n   channels. Examples: `script-src`, `connect-src`, `child-src`.\n- `null` – No trust. This is used for directives that don't support sources.",
-					summary: 'Trust levels for CSP sources.',
 					source_line: 212,
 					type_signature: '"low" | "medium" | "high"',
 				},
@@ -1523,7 +1482,6 @@ export const src_json: Src_Json = {
 					name: 'parse_csp_trust_level',
 					kind: 'function',
 					doc_comment: 'Validates and extracts a CSP trust level from an unknown value.',
-					summary: 'Validates and extracts a CSP trust level from an unknown value.',
 					source_line: 217,
 					type_signature: '(trust: unknown): "low" | "medium" | "high" | null',
 					return_type: '"low" | "medium" | "high" | null',
@@ -1586,8 +1544,6 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						"Determines if a granted trust level is sufficient to satisfy a required trust level.\n\nTrust levels have the following hierarchy:\n- 'high' sources can be used in high, medium, and low trust directives (highest privilege)\n- 'medium' sources can be used in medium and low trust directives\n- 'low' sources can only be used in low trust directives (lowest privilege)",
-					summary:
-						'Determines if a granted trust level is sufficient to satisfy a required trust level.',
 					source_line: 240,
 					type_signature:
 						'(required_trust: "low" | "medium" | "high" | null | undefined, granted_trust: "low" | "medium" | "high" | null | undefined): boolean',
@@ -1616,8 +1572,6 @@ export const src_json: Src_Json = {
 					kind: 'variable',
 					doc_comment:
 						'The base CSP directive defaults.\nPrioritizes safety but loosens around media and styles, relying on defense-in-depth.\nCustomizable via `Create_Csp_Directives_Options.defaults`.',
-					summary:
-						'The base CSP directive defaults.\nPrioritizes safety but loosens around media and styles, relying on defense-in-depth.\nCustomizable via `Create_Csp_Directives_Options.defaults`.',
 					source_line: 270,
 					type_signature:
 						'Record<keyof Csp_Directives, boolean | (Csp_Source | Csp_Action_Source)[] | Csp_Sources | (`${string}.${string}` | "localhost" | ... 17 more ... | "none")[] | string[] | "script"[] | ("allow-downloads-without-user-activation" | ... 11 more ... | "allow-top-navigation-by-user-activation")[] | null>',
@@ -1627,8 +1581,6 @@ export const src_json: Src_Json = {
 					kind: 'variable',
 					doc_comment:
 						"Sources that meet this trust requirement are included for it by default.\nIf null, no trusted sources are added to the directive automatically.\nDirectives that don't support sources or default to `['none']` are null.\n\nFeedback is welcome, please see the issues - https://github.com/ryanatkn/fuz/issues",
-					summary:
-						"Sources that meet this trust requirement are included for it by default.\nIf null, no trusted sources are added to the directive automatically.\nDirectives that don't support sources or default to `['none']` are null.",
 					source_line: 307,
 					type_signature: 'Record<keyof Csp_Directives, "low" | "medium" | "high" | null>',
 				},
@@ -1637,8 +1589,6 @@ export const src_json: Src_Json = {
 					kind: 'variable',
 					doc_comment:
 						'Static data descriptors for the CSP directives.\nFuz excludes deprecated directives, so those are intentionally omitted,\nbut any newer missing directives are bugs.\n\nCould be moved to `csp.ts` but is currently here to keep that module smaller.',
-					summary:
-						'Static data descriptors for the CSP directives.\nFuz excludes deprecated directives, so those are intentionally omitted,\nbut any newer missing directives are bugs.',
 					see_also: [
 						'://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy',
 					],
@@ -1766,7 +1716,6 @@ export const src_json: Src_Json = {
 					name: 'Details',
 					kind: 'component',
 					doc_comment: 'Like `details` but renders children lazily by default.',
-					summary: 'Like `details` but renders children lazily by default.',
 					props: [
 						{
 							name: 'open',
@@ -1862,8 +1811,6 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						"This helper function is needed to construct `Dialog_Params` with type safety.\nIt uses TypeScript's inferred generics for functions,\nwhich do not work for plain objects as of v5.0.4.\n* `ContextmenuParams` uses a similar strategy.",
-					summary:
-						"This helper function is needed to construct `Dialog_Params` with type safety.\nIt uses TypeScript's inferred generics for functions,\nwhich do not work for plain objects as of v5.0.4.\n* `ContextmenuParams` uses a similar strategy.",
 					source_line: 11,
 					type_signature:
 						'<T extends Component<any>>(Component: T, props: ComponentProps<T>, dialog_props?: Partial<Record<string, any>> | undefined): Dialog_Params<T>',
@@ -1890,8 +1837,6 @@ export const src_json: Src_Json = {
 					name: 'Dialog_Params',
 					kind: 'type',
 					doc_comment:
-						'This pattern is based on:\nhttps://github.com/ivanhofer/sveltekit-typescript-showcase/blob/main/src/01-props/09-svelte-component/Component.svelte\nThe main limitation is that the generic cannot be inferred automatically,\nso we use `to_dialog_params` to construct instances in most cases.\nDefinining `Dialog_Params` with no concrete `T` lacks typechecking for `props`.',
-					summary:
 						'This pattern is based on:\nhttps://github.com/ivanhofer/sveltekit-typescript-showcase/blob/main/src/01-props/09-svelte-component/Component.svelte\nThe main limitation is that the generic cannot be inferred automatically,\nso we use `to_dialog_params` to construct instances in most cases.\nDefinining `Dialog_Params` with no concrete `T` lacks typechecking for `props`.',
 					source_line: 28,
 					type_signature: 'Dialog_Params<T>',
@@ -2168,13 +2113,13 @@ export const src_json: Src_Json = {
 						{
 							name: 'root_path',
 							kind: 'variable',
-							summary: 'readonly',
+							modifiers: ['readonly'],
 							type_signature: 'string',
 						},
 						{
 							name: 'links',
 							kind: 'variable',
-							summary: 'readonly',
+							modifiers: ['readonly'],
 							type_signature: 'SvelteMap<string, Docs_Link>',
 						},
 						{
@@ -2193,7 +2138,7 @@ export const src_json: Src_Json = {
 						{
 							name: 'slugs_onscreen',
 							kind: 'variable',
-							summary: 'readonly',
+							modifiers: ['readonly'],
 							type_signature: 'SvelteSet<string>',
 						},
 						{
@@ -2426,7 +2371,6 @@ export const src_json: Src_Json = {
 					name: 'render_value_to_string',
 					kind: 'function',
 					doc_comment: 'Renders any value to a string representation',
-					summary: 'Renders any value to a string representation',
 					source_line: 7,
 					type_signature: '(value: unknown): string',
 					return_type: 'string',
@@ -2489,7 +2433,6 @@ export const src_json: Src_Json = {
 					name: 'create_identifier_contextmenu',
 					kind: 'function',
 					doc_comment: 'Create contextmenu entries for an identifier',
-					summary: 'Create contextmenu entries for an identifier',
 					source_line: 7,
 					type_signature: '(identifier: Identifier): Contextmenu_Params[]',
 					return_type: 'Contextmenu_Params[]',
@@ -2550,52 +2493,44 @@ export const src_json: Src_Json = {
 					kind: 'class',
 					doc_comment:
 						'Rich runtime representation of an exported identifier with computed properties.\n\nCombines:\n- Minimal Src_Module_Declaration data (serializable)\n- Parent Module reference (provides Pkg context)\n- Lazy-computed URLs, import statements, etc.\n- Query methods for ergonomic usage',
-					summary:
-						'Rich runtime representation of an exported identifier with computed properties.',
-					source_line: 31,
+					source_line: 30,
 					members: [
 						{
 							name: 'module',
 							kind: 'variable',
-							summary: 'readonly',
+							modifiers: ['readonly'],
 							type_signature: 'Module',
 						},
 						{
 							name: 'decl',
 							kind: 'variable',
-							summary: 'readonly',
+							modifiers: ['readonly'],
 							type_signature: 'Src_Module_Declaration',
 						},
 						{
 							name: 'pkg',
 							kind: 'variable',
 							doc_comment: 'Get parent Pkg for accessing package metadata.',
-							summary: 'Get parent Pkg for accessing package metadata.',
 						},
 						{
 							name: 'module_path',
 							kind: 'variable',
 							doc_comment: 'Module path where this identifier is defined (e.g., "./Alert.ts").',
-							summary: 'Module path where this identifier is defined (e.g., "./Alert.ts").',
 						},
 						{
 							name: 'name',
 							kind: 'variable',
 							doc_comment: 'Identifier name (export name).',
-							summary: 'Identifier name (export name).',
 						},
 						{
 							name: 'kind',
 							kind: 'variable',
 							doc_comment: 'Declaration kind (type, function, class, etc.).',
-							summary: 'Declaration kind (type, function, class, etc.).',
 						},
 						{
 							name: 'source_url',
 							kind: 'variable',
 							doc_comment:
-								'GitHub source URL with line number.\nExample: "https://github.com/ryanatkn/fuz/blob/main/src/lib/Alert.ts#L42"',
-							summary:
 								'GitHub source URL with line number.\nExample: "https://github.com/ryanatkn/fuz/blob/main/src/lib/Alert.ts#L42"',
 						},
 						{
@@ -2603,14 +2538,11 @@ export const src_json: Src_Json = {
 							kind: 'variable',
 							doc_comment:
 								'API documentation URL (hash-based navigation).\nExample: "/docs/api#Alert"',
-							summary: 'API documentation URL (hash-based navigation).\nExample: "/docs/api#Alert"',
 						},
 						{
 							name: 'import_statement',
 							kind: 'variable',
 							doc_comment:
-								'Generated TypeScript import statement.\nExample: "import {Alert} from \'@ryanatkn/fuz/Alert.js\';"',
-							summary:
 								'Generated TypeScript import statement.\nExample: "import {Alert} from \'@ryanatkn/fuz/Alert.js\';"',
 						},
 						{
@@ -2618,101 +2550,78 @@ export const src_json: Src_Json = {
 							kind: 'variable',
 							doc_comment:
 								'Public documentation link (if homepage_url is available).\nExample: "https://fuz.ryanatkn.com/docs/api#Alert"',
-							summary:
-								'Public documentation link (if homepage_url is available).\nExample: "https://fuz.ryanatkn.com/docs/api#Alert"',
 						},
 						{
 							name: 'display_name',
 							kind: 'variable',
 							doc_comment:
 								'Display name with generic parameters.\nExample: "Map<K extends string, V = unknown>"',
-							summary:
-								'Display name with generic parameters.\nExample: "Map<K extends string, V = unknown>"',
-						},
-						{
-							name: 'type_summary',
-							kind: 'variable',
-							doc_comment:
-								"Truncated type signature for tooltips.\nExample: \"type Alert = { status: 'info' | 'success'...\"",
-							summary:
-								"Truncated type signature for tooltips.\nExample: \"type Alert = { status: 'info' | 'success'...\"",
 						},
 						{
 							name: 'has_examples',
 							kind: 'function',
 							type_signature: '() => boolean',
 							doc_comment: 'Check if identifier has code examples.',
-							summary: 'Check if identifier has code examples.',
 						},
 						{
 							name: 'is_deprecated',
 							kind: 'function',
 							type_signature: '() => boolean',
 							doc_comment: 'Check if identifier is deprecated.',
-							summary: 'Check if identifier is deprecated.',
 						},
 						{
 							name: 'has_documentation',
 							kind: 'function',
 							type_signature: '() => boolean',
-							doc_comment: 'Check if identifier has documentation (doc comment or summary).',
-							summary: 'Check if identifier has documentation (doc comment or summary).',
+							doc_comment: 'Check if identifier has documentation.',
 						},
 						{
 							name: 'is_function',
 							kind: 'function',
 							type_signature: '() => boolean',
 							doc_comment: 'Check if identifier is a function.',
-							summary: 'Check if identifier is a function.',
 						},
 						{
 							name: 'is_type',
 							kind: 'function',
 							type_signature: '() => boolean',
 							doc_comment: 'Check if identifier is a type.',
-							summary: 'Check if identifier is a type.',
 						},
 						{
 							name: 'is_component',
 							kind: 'function',
 							type_signature: '() => boolean',
 							doc_comment: 'Check if identifier is a Svelte component.',
-							summary: 'Check if identifier is a Svelte component.',
 						},
 						{
 							name: 'is_class',
 							kind: 'function',
 							type_signature: '() => boolean',
 							doc_comment: 'Check if identifier is a class.',
-							summary: 'Check if identifier is a class.',
 						},
 						{
 							name: 'has_parameters',
 							kind: 'function',
 							type_signature: '() => boolean',
 							doc_comment: 'Check if function/method has parameters.',
-							summary: 'Check if function/method has parameters.',
 						},
 						{
 							name: 'has_props',
 							kind: 'function',
 							type_signature: '() => boolean',
 							doc_comment: 'Check if component has props.',
-							summary: 'Check if component has props.',
 						},
 						{
 							name: 'has_return_type',
 							kind: 'function',
 							type_signature: '() => boolean',
 							doc_comment: 'Check if function has a return type.',
-							summary: 'Check if function has a return type.',
 						},
 						{
 							name: 'has_generics',
 							kind: 'function',
 							type_signature: '() => boolean',
 							doc_comment: 'Check if type/function has generic parameters.',
-							summary: 'Check if type/function has generic parameters.',
 						},
 					],
 				},
@@ -2792,15 +2701,12 @@ export const src_json: Src_Json = {
 							type_signature: 'On_Intersect',
 							doc_comment:
 								'Called when the element enters or leaves the viewport until disconnected.',
-							summary: 'Called when the element enters or leaves the viewport until disconnected.',
 						},
 						{
 							name: 'ondisconnect',
 							kind: 'variable',
 							type_signature: 'On_Disconnect',
 							doc_comment:
-								"Called when the attachment's observer is disconnected,\neither by the user calling disconnect or the attachment being destroyed.",
-							summary:
 								"Called when the attachment's observer is disconnected,\neither by the user calling disconnect or the attachment being destroyed.",
 						},
 						{
@@ -2809,16 +2715,12 @@ export const src_json: Src_Json = {
 							type_signature: 'number',
 							doc_comment:
 								"A value of `1` disconnects after `el` enters and leaves the viewport one time,\nsimilar to 'once' for an event.\n`0` disables and `undefined` or a negative number like `-1` never disconnects.",
-							summary:
-								"A value of `1` disconnects after `el` enters and leaves the viewport one time,\nsimilar to 'once' for an event.\n`0` disables and `undefined` or a negative number like `-1` never disconnects.",
 						},
 						{
 							name: 'options',
 							kind: 'variable',
 							type_signature: 'IntersectionObserverInit',
 							doc_comment:
-								'Same as the `options` param to\n[`IntersectionObserver`](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/IntersectionObserver#options)',
-							summary:
 								'Same as the `options` param to\n[`IntersectionObserver`](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/IntersectionObserver#options)',
 						},
 					],
@@ -2833,7 +2735,6 @@ export const src_json: Src_Json = {
 					name: 'intersect_attachment',
 					kind: 'function',
 					doc_comment: 'Creates an attachment that observes element viewport intersection.',
-					summary: 'Creates an attachment that observes element viewport intersection.',
 					source_line: 32,
 					type_signature:
 						'(params: Intersect_Params_Or_Callback | null | undefined): Attachment<HTMLElement | SVGElement>',
@@ -3065,7 +2966,6 @@ export const src_json: Src_Json = {
 					name: 'module_extract_path',
 					kind: 'function',
 					doc_comment: 'Extract module path relative to src/lib from absolute source ID.',
-					summary: 'Extract module path relative to src/lib from absolute source ID.',
 					examples: [
 						"module_extract_path('/home/user/project/src/lib/foo.ts') // => 'foo.ts'\nmodule_extract_path('/home/user/project/src/lib/nested/bar.svelte') // => 'nested/bar.svelte'",
 					],
@@ -3084,7 +2984,6 @@ export const src_json: Src_Json = {
 					name: 'module_get_component_name',
 					kind: 'function',
 					doc_comment: 'Extract component name from a Svelte module path.',
-					summary: 'Extract component name from a Svelte module path.',
 					examples: [
 						"module_get_component_name('Alert.svelte') // => 'Alert'\nmodule_get_component_name('components/Button.svelte') // => 'Button'",
 					],
@@ -3103,7 +3002,6 @@ export const src_json: Src_Json = {
 					name: 'module_get_key',
 					kind: 'function',
 					doc_comment: 'Convert module path to module key format (with ./ prefix).',
-					summary: 'Convert module path to module key format (with ./ prefix).',
 					examples: ["module_get_key('foo.ts') // => './foo.ts'"],
 					source_line: 38,
 					type_signature: '(module_path: string): string',
@@ -3120,7 +3018,6 @@ export const src_json: Src_Json = {
 					name: 'module_is_typescript',
 					kind: 'function',
 					doc_comment: 'Check if path is a TypeScript or JS file.',
-					summary: 'Check if path is a TypeScript or JS file.',
 					source_line: 43,
 					type_signature: '(path: string): boolean',
 					return_type: 'boolean',
@@ -3164,7 +3061,6 @@ export const src_json: Src_Json = {
 					name: 'module_is_source',
 					kind: 'function',
 					doc_comment: 'Check if ID is a source file in /src/lib/ (excluding tests).',
-					summary: 'Check if ID is a source file in /src/lib/ (excluding tests).',
 					source_line: 53,
 					type_signature: '(id: string): boolean',
 					return_type: 'boolean',
@@ -3215,67 +3111,58 @@ export const src_json: Src_Json = {
 					kind: 'class',
 					doc_comment:
 						'Rich runtime representation of a source module with computed properties.\n\nCombines:\n- Minimal Src_Module data (serializable)\n- Full Pkg reference (for generating URLs, import statements, etc.)\n- Lazy-computed Identifier instances\n- Query methods for ergonomic usage',
-					summary: 'Rich runtime representation of a source module with computed properties.',
 					source_line: 26,
 					members: [
 						{
 							name: 'pkg',
 							kind: 'variable',
-							summary: 'readonly',
+							modifiers: ['readonly'],
 							type_signature: 'Pkg',
 						},
 						{
 							name: 'src_module',
 							kind: 'variable',
-							summary: 'readonly',
+							modifiers: ['readonly'],
 							type_signature: 'Src_Module',
 						},
 						{
 							name: 'path',
 							kind: 'variable',
 							doc_comment: 'Module path relative to src/lib (e.g., "./Alert.ts").',
-							summary: 'Module path relative to src/lib (e.g., "./Alert.ts").',
 						},
 						{
 							name: 'module_comment',
 							kind: 'variable',
 							doc_comment: 'Module-level JSDoc comment.',
-							summary: 'Module-level JSDoc comment.',
 						},
 						{
 							name: 'identifiers',
 							kind: 'variable',
 							doc_comment:
 								'Lazy-computed array of Identifier instances.\nFilters out default exports and creates rich Identifier objects.',
-							summary:
-								'Lazy-computed array of Identifier instances.\nFilters out default exports and creates rich Identifier objects.',
 						},
 						{
 							name: 'module_url',
 							kind: 'variable',
 							doc_comment: 'GitHub source URL for the module file.',
-							summary: 'GitHub source URL for the module file.',
 						},
 						{
 							name: 'has_declarations',
 							kind: 'function',
 							type_signature: '() => boolean',
 							doc_comment: 'Check if module has any declarations.',
-							summary: 'Check if module has any declarations.',
 						},
 						{
 							name: 'has_module_comment',
 							kind: 'function',
 							type_signature: '() => boolean',
 							doc_comment: 'Check if module has a module-level comment.',
-							summary: 'Check if module has a module-level comment.',
 						},
 						{
 							name: 'get_identifier_by_name',
 							kind: 'function',
 							type_signature: '(name: string) => Identifier | undefined',
 							doc_comment: 'Look up an identifier by name within this module.',
-							summary: 'Look up an identifier by name within this module.',
 						},
 					],
 				},
@@ -3338,8 +3225,6 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Build project-relative API documentation URL with hash anchor (calls resolve internally).',
-					summary:
-						'Build project-relative API documentation URL with hash anchor (calls resolve internally).',
 					source_line: 8,
 					type_signature: '(identifier_name: string): string',
 					return_type: 'string',
@@ -3355,7 +3240,6 @@ export const src_json: Src_Json = {
 					name: 'api_doc_url_full',
 					kind: 'function',
 					doc_comment: 'Build full API documentation URL with domain and hash anchor.',
-					summary: 'Build full API documentation URL with domain and hash anchor.',
 					source_line: 14,
 					type_signature: '(homepage: string, identifier_name: string): string',
 					return_type: 'string',
@@ -3376,7 +3260,6 @@ export const src_json: Src_Json = {
 					name: 'github_file_url',
 					kind: 'function',
 					doc_comment: 'Build GitHub file URL for a repository.',
-					summary: 'Build GitHub file URL for a repository.',
 					source_line: 20,
 					type_signature:
 						'(repo_url: string, file_path: string, line?: number | undefined): string',
@@ -3404,8 +3287,6 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						"Build GitHub organization URL from repo URL and repo name.\nExample: ('https://github.com/ryanatkn/fuz', 'fuz') -> 'https://github.com/ryanatkn'",
-					summary:
-						"Build GitHub organization URL from repo URL and repo name.\nExample: ('https://github.com/ryanatkn/fuz', 'fuz') -> 'https://github.com/ryanatkn'",
 					source_line: 30,
 					type_signature: '(repo_url: string, repo_name: string): string | null',
 					return_type: 'string | null',
@@ -3427,8 +3308,6 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						"Parse GitHub owner/org name from repository URL.\nExample: 'https://github.com/ryanatkn/fuz' -> 'ryanatkn'",
-					summary:
-						"Parse GitHub owner/org name from repository URL.\nExample: 'https://github.com/ryanatkn/fuz' -> 'ryanatkn'",
 					source_line: 38,
 					type_signature: '(repo_url: string): string | null',
 					return_type: 'string | null',
@@ -3444,7 +3323,6 @@ export const src_json: Src_Json = {
 					name: 'npm_package_url',
 					kind: 'function',
 					doc_comment: 'Build npm package URL.',
-					summary: 'Build npm package URL.',
 					source_line: 47,
 					type_signature: '(package_name: string): string',
 					return_type: 'string',
@@ -3460,8 +3338,6 @@ export const src_json: Src_Json = {
 					name: 'package_is_published',
 					kind: 'function',
 					doc_comment:
-						'Check if a package is published to npm.\nPublished packages are not private, have exports, and have a version beyond 0.0.1.',
-					summary:
 						'Check if a package is published to npm.\nPublished packages are not private, have exports, and have a version beyond 0.0.1.',
 					source_line: 54,
 					type_signature:
@@ -3479,8 +3355,6 @@ export const src_json: Src_Json = {
 					name: 'package_logo_url',
 					kind: 'function',
 					doc_comment:
-						'Build package logo URL with favicon.png fallback.\nReturns null if no homepage URL is provided.',
-					summary:
 						'Build package logo URL with favicon.png fallback.\nReturns null if no homepage URL is provided.',
 					source_line: 62,
 					type_signature:
@@ -3504,8 +3378,6 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						"Extract repository name without scope from package name.\nExamples: '@org/pkg' -> 'pkg', 'pkg' -> 'pkg'",
-					summary:
-						"Extract repository name without scope from package name.\nExamples: '@org/pkg' -> 'pkg', 'pkg' -> 'pkg'",
 					source_line: 75,
 					type_signature: '(name: string): string',
 					return_type: 'string',
@@ -3521,8 +3393,6 @@ export const src_json: Src_Json = {
 					name: 'repo_url_parse',
 					kind: 'function',
 					doc_comment:
-						"Parse repository URL from package.json format.\nStrips 'git+', '.git', and trailing slashes.",
-					summary:
 						"Parse repository URL from package.json format.\nStrips 'git+', '.git', and trailing slashes.",
 					source_line: 90,
 					type_signature:
@@ -3540,8 +3410,6 @@ export const src_json: Src_Json = {
 					name: 'well_known_url',
 					kind: 'function',
 					doc_comment:
-						"Build .well-known URL for package metadata files.\nExample: ('https://fuz.dev/', 'src.json') -> 'https://fuz.dev/.well-known/src.json'",
-					summary:
 						"Build .well-known URL for package metadata files.\nExample: ('https://fuz.dev/', 'src.json') -> 'https://fuz.dev/.well-known/src.json'",
 					source_line: 101,
 					type_signature: '(homepage_url: string, filename: string): string',
@@ -3758,107 +3626,91 @@ export const src_json: Src_Json = {
 					kind: 'class',
 					doc_comment:
 						'Rich runtime package representation following the "minimal + rich" pattern.\n\nWraps minimal serializable data (package_json, src_json) with computed properties\nand provides the root of the API documentation hierarchy:\nPkg -> modules -> identifiers\n\nAll computed properties are automatically cached via Svelte\'s $derived mechanism,\nincluding the identifier_map which enables O(1) lookups by name.',
-					summary: 'Rich runtime package representation following the "minimal + rich" pattern.',
 					see_also: ['for Module class', 'for Identifier class'],
 					source_line: 31,
 					members: [
 						{
 							name: 'package_json',
 							kind: 'variable',
-							summary: 'readonly',
+							modifiers: ['readonly'],
 							type_signature: 'Package_Json',
 						},
 						{
 							name: 'src_json',
 							kind: 'variable',
-							summary: 'readonly',
+							modifiers: ['readonly'],
 							type_signature: 'Src_Json',
 						},
 						{
 							name: 'name',
 							kind: 'variable',
 							doc_comment: "Package name (e.g., '@ryanatkn/fuz').",
-							summary: "Package name (e.g., '@ryanatkn/fuz').",
 						},
 						{
 							name: 'repo_name',
 							kind: 'variable',
 							doc_comment: "Repository name without scope (e.g., 'fuz').",
-							summary: "Repository name without scope (e.g., 'fuz').",
 						},
 						{
 							name: 'repo_url',
 							kind: 'variable',
 							doc_comment: "GitHub repository URL (e.g., 'https://github.com/ryanatkn/fuz').",
-							summary: "GitHub repository URL (e.g., 'https://github.com/ryanatkn/fuz').",
 						},
 						{
 							name: 'owner_name',
 							kind: 'variable',
 							doc_comment: "GitHub owner/org name (e.g., 'ryanatkn').",
-							summary: "GitHub owner/org name (e.g., 'ryanatkn').",
 						},
 						{
 							name: 'homepage_url',
 							kind: 'variable',
 							doc_comment: "Homepage URL (e.g., 'https://www.fuz.dev/').",
-							summary: "Homepage URL (e.g., 'https://www.fuz.dev/').",
 						},
 						{
 							name: 'logo_url',
 							kind: 'variable',
 							doc_comment: 'Logo URL (falls back to favicon.png).',
-							summary: 'Logo URL (falls back to favicon.png).',
 						},
 						{
 							name: 'logo_alt',
 							kind: 'variable',
 							doc_comment: 'Logo alt text.',
-							summary: 'Logo alt text.',
 						},
 						{
 							name: 'published',
 							kind: 'variable',
 							doc_comment: 'Whether package is published to npm.',
-							summary: 'Whether package is published to npm.',
 						},
 						{
 							name: 'npm_url',
 							kind: 'variable',
 							doc_comment: 'npm package URL (if published).',
-							summary: 'npm package URL (if published).',
 						},
 						{
 							name: 'changelog_url',
 							kind: 'variable',
 							doc_comment: 'Changelog URL (if published).',
-							summary: 'Changelog URL (if published).',
 						},
 						{
 							name: 'org_url',
 							kind: 'variable',
 							doc_comment: "Organization URL (e.g., 'https://github.com/ryanatkn').",
-							summary: "Organization URL (e.g., 'https://github.com/ryanatkn').",
 						},
 						{
 							name: 'modules',
 							kind: 'variable',
 							doc_comment: 'All modules as rich Module instances (cached via $derived).',
-							summary: 'All modules as rich Module instances (cached via $derived).',
 						},
 						{
 							name: 'identifiers',
 							kind: 'variable',
 							doc_comment:
 								'All identifiers across all modules as a flat array (cached via $derived).',
-							summary: 'All identifiers across all modules as a flat array (cached via $derived).',
 						},
 						{
 							name: 'identifier_map',
 							kind: 'variable',
 							doc_comment:
-								'Identifier lookup map by name (cached via $derived).\nProvides O(1) lookup after first access.',
-							summary:
 								'Identifier lookup map by name (cached via $derived).\nProvides O(1) lookup after first access.',
 						},
 						{
@@ -3866,21 +3718,18 @@ export const src_json: Src_Json = {
 							kind: 'function',
 							type_signature: '(name: string) => Identifier | undefined',
 							doc_comment: 'Look up an identifier by name.',
-							summary: 'Look up an identifier by name.',
 						},
 						{
 							name: 'has_identifier',
 							kind: 'function',
 							type_signature: '(name: string) => boolean',
 							doc_comment: 'Check if an identifier exists.',
-							summary: 'Check if an identifier exists.',
 						},
 						{
 							name: 'search_identifiers',
 							kind: 'function',
 							type_signature: '(query: string) => Identifier[]',
 							doc_comment: 'Search identifiers by query string.',
-							summary: 'Search identifiers by query string.',
 						},
 					],
 				},
@@ -3888,8 +3737,6 @@ export const src_json: Src_Json = {
 					name: 'parse_pkg',
 					kind: 'function',
 					doc_comment:
-						'Convenience factory function for creating Pkg instances\n(kept for backward compatibility during migration)',
-					summary:
 						'Convenience factory function for creating Pkg instances\n(kept for backward compatibility during migration)',
 					source_line: 187,
 					type_signature:
@@ -3973,8 +3820,6 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Runs `fn` in an `$effect`, passing `true` as the `skip` argument for the first `count` runs.\nCalls `fn` even when skipping so callers can read any dependent signals.',
-					summary:
-						'Runs `fn` in an `$effect`, passing `true` as the `skip` argument for the first `count` runs.\nCalls `fn` even when skipping so callers can read any dependent signals.',
 					source_line: 5,
 					type_signature: '(fn: (count: number) => void, initial?: number): void',
 					return_type: 'void',
@@ -4003,7 +3848,6 @@ export const src_json: Src_Json = {
 					name: 'Spiders',
 					kind: 'component',
 					doc_comment: 'Returns the minute of the current day.',
-					summary: 'Returns the minute of the current day.',
 					props: [
 						{
 							name: 'spiders',
@@ -4033,30 +3877,28 @@ export const src_json: Src_Json = {
 					kind: 'type',
 					doc_comment:
 						'Helper from belt to transform empty objects to undefined\n(not currently used in fuz, kept for reference)',
-					summary:
-						'Helper from belt to transform empty objects to undefined\n(not currently used in fuz, kept for reference)',
-					source_line: 36,
+					source_line: 33,
 					type_signature:
 						'ZodEnum<{ function: "function"; type: "type"; variable: "variable"; class: "class"; component: "component"; json: "json"; css: "css"; }>',
 				},
 				{
 					name: 'Src_Module_Declaration_Minimal',
 					kind: 'variable',
-					source_line: 47,
+					source_line: 44,
 					type_signature:
 						'ZodObject<{ name: ZodString; kind: ZodNullable<ZodEnum<{ function: "function"; type: "type"; variable: "variable"; class: "class"; component: "component"; json: "json"; css: "css"; }>>; }, $loose>',
 				},
 				{
 					name: 'Src_Module_Minimal',
 					kind: 'variable',
-					source_line: 52,
+					source_line: 49,
 					type_signature:
 						'ZodObject<{ path: ZodString; declarations: ZodOptional<ZodArray<ZodObject<{ name: ZodString; kind: ZodNullable<ZodEnum<{ function: "function"; type: "type"; variable: "variable"; class: "class"; component: "component"; json: "json"; css: "css"; }>>; }, $loose>>>; }, $loose>',
 				},
 				{
 					name: 'Src_Json_Minimal',
 					kind: 'variable',
-					source_line: 60,
+					source_line: 57,
 					type_signature:
 						'ZodObject<{ name: ZodString; version: ZodString; modules: ZodOptional<ZodArray<ZodObject<{ path: ZodString; declarations: ZodOptional<ZodArray<ZodObject<{ name: ZodString; kind: ZodNullable<ZodEnum<{ function: "function"; ... 5 more ...; css: "css"; }>>; }, $loose>>>; }, $loose>>>; }, $loose>',
 				},
@@ -4065,8 +3907,7 @@ export const src_json: Src_Json = {
 					kind: 'type',
 					doc_comment:
 						'Parameter information for functions and methods\n\nNote: Kept distinct from Component_Prop_Info despite structural similarity.\nFunction parameters form a tuple - the collection has positional semantics:\n- Calling order matters: `fn(a, b)` vs `fn(b, a)`\n- May include rest parameters, destructuring patterns\n- Individual parameters are named, but position-dependent',
-					summary: 'Parameter information for functions and methods',
-					source_line: 79,
+					source_line: 72,
 					type_signature: 'Parameter_Info',
 					properties: [
 						{
@@ -4101,8 +3942,7 @@ export const src_json: Src_Json = {
 					kind: 'type',
 					doc_comment:
 						'Component prop information for Svelte components\n\nNote: Kept distinct from Parameter_Info despite structural similarity.\nComponent props are passed as named attributes with different semantics:\n- No positional order when passing: `<Foo {a} {b} />` = `<Foo {b} {a} />`\n- Support two-way binding via $bindable rune\n- Different runtime behavior and constraints',
-					summary: 'Component prop information for Svelte components',
-					source_line: 96,
+					source_line: 89,
 					type_signature: 'Component_Prop_Info',
 					properties: [
 						{
@@ -4141,8 +3981,7 @@ export const src_json: Src_Json = {
 					name: 'Generic_Param_Info',
 					kind: 'type',
 					doc_comment: 'Generic type parameter information',
-					summary: 'Generic type parameter information',
-					source_line: 108,
+					source_line: 101,
 					type_signature: 'Generic_Param_Info',
 					properties: [
 						{
@@ -4150,21 +3989,18 @@ export const src_json: Src_Json = {
 							kind: 'variable',
 							type_signature: 'string',
 							doc_comment: 'Parameter name (e.g., "T")',
-							summary: 'Parameter name (e.g., "T")',
 						},
 						{
 							name: 'constraint',
 							kind: 'variable',
 							type_signature: 'string',
 							doc_comment: 'Constraint if any (e.g., "string" from "T extends string")',
-							summary: 'Constraint if any (e.g., "string" from "T extends string")',
 						},
 						{
 							name: 'default_type',
 							kind: 'variable',
 							type_signature: 'string',
 							doc_comment: 'Default type if any (e.g., "unknown" from "T = unknown")',
-							summary: 'Default type if any (e.g., "unknown" from "T = unknown")',
 						},
 					],
 				},
@@ -4172,8 +4008,7 @@ export const src_json: Src_Json = {
 					name: 'Src_Module_Declaration',
 					kind: 'type',
 					doc_comment: 'Declaration metadata with rich TypeScript/JSDoc information',
-					summary: 'Declaration metadata with rich TypeScript/JSDoc information',
-					source_line: 120,
+					source_line: 113,
 					type_signature: 'Src_Module_Declaration',
 					properties: [
 						{
@@ -4181,140 +4016,120 @@ export const src_json: Src_Json = {
 							kind: 'variable',
 							type_signature: 'string',
 							doc_comment: 'Export identifier',
-							summary: 'Export identifier',
 						},
 						{
 							name: 'kind',
 							kind: 'variable',
 							type_signature: 'Src_Module_Declaration_Kind | null',
 							doc_comment: 'Declaration kind',
-							summary: 'Declaration kind',
 						},
 						{
 							name: 'doc_comment',
 							kind: 'variable',
 							type_signature: 'string',
 							doc_comment: 'Full JSDoc/TSDoc comment text',
-							summary: 'Full JSDoc/TSDoc comment text',
-						},
-						{
-							name: 'summary',
-							kind: 'variable',
-							type_signature: 'string',
-							doc_comment: 'Concise summary (first paragraph)',
-							summary: 'Concise summary (first paragraph)',
 						},
 						{
 							name: 'type_signature',
 							kind: 'variable',
 							type_signature: 'string',
 							doc_comment: 'Full TypeScript type signature',
-							summary: 'Full TypeScript type signature',
+						},
+						{
+							name: 'modifiers',
+							kind: 'variable',
+							type_signature: 'Array<string>',
+							doc_comment: 'TypeScript modifiers (e.g., readonly, private, static)',
 						},
 						{
 							name: 'source_line',
 							kind: 'variable',
 							type_signature: 'number',
 							doc_comment: 'Source line number within the file',
-							summary: 'Source line number within the file',
 						},
 						{
 							name: 'parameters',
 							kind: 'variable',
 							type_signature: 'Array<Parameter_Info>',
 							doc_comment: 'Function/method parameters',
-							summary: 'Function/method parameters',
 						},
 						{
 							name: 'return_type',
 							kind: 'variable',
 							type_signature: 'string',
 							doc_comment: 'Function return type',
-							summary: 'Function return type',
 						},
 						{
 							name: 'return_description',
 							kind: 'variable',
 							type_signature: 'string',
 							doc_comment: 'Function return value description from',
-							summary: 'Function return value description from',
 						},
 						{
 							name: 'generic_params',
 							kind: 'variable',
 							type_signature: 'Array<Generic_Param_Info>',
 							doc_comment: 'Generic type parameters with constraints',
-							summary: 'Generic type parameters with constraints',
 						},
 						{
 							name: 'examples',
 							kind: 'variable',
 							type_signature: 'Array<string>',
 							doc_comment: 'Code examples from @ example tags',
-							summary: 'Code examples from @ example tags',
 						},
 						{
 							name: 'deprecated_message',
 							kind: 'variable',
 							type_signature: 'string',
 							doc_comment: 'Deprecation warning from @ deprecated tag',
-							summary: 'Deprecation warning from @ deprecated tag',
 						},
 						{
 							name: 'see_also',
 							kind: 'variable',
 							type_signature: 'Array<string>',
 							doc_comment: 'Related items from @ see tags',
-							summary: 'Related items from @ see tags',
 						},
 						{
 							name: 'throws',
 							kind: 'variable',
 							type_signature: 'Array<{type?: string; description: string}>',
 							doc_comment: 'Exceptions/errors thrown from @ throws tags',
-							summary: 'Exceptions/errors thrown from @ throws tags',
 						},
 						{
 							name: 'since',
 							kind: 'variable',
 							type_signature: 'string',
 							doc_comment: 'Version information from @ since tag',
-							summary: 'Version information from @ since tag',
 						},
 						{
 							name: 'extends',
 							kind: 'variable',
 							type_signature: 'Array<string>',
 							doc_comment: 'For types/interfaces: extends clause',
-							summary: 'For types/interfaces: extends clause',
 						},
 						{
 							name: 'implements',
 							kind: 'variable',
 							type_signature: 'Array<string>',
 							doc_comment: 'For classes: implements clause',
-							summary: 'For classes: implements clause',
 						},
 						{
 							name: 'members',
 							kind: 'variable',
 							type_signature: 'Array<Src_Module_Declaration>',
 							doc_comment: 'Class members',
-							summary: 'Class members',
 						},
 						{
 							name: 'properties',
 							kind: 'variable',
 							type_signature: 'Array<Src_Module_Declaration>',
 							doc_comment: 'Interface/type properties',
-							summary: 'Interface/type properties',
 						},
 						{
 							name: 'props',
 							kind: 'variable',
 							type_signature: 'Array<Component_Prop_Info>',
 							doc_comment: 'Component props (for Svelte components)',
-							summary: 'Component props (for Svelte components)',
 						},
 					],
 				},
@@ -4322,8 +4137,7 @@ export const src_json: Src_Json = {
 					name: 'Src_Module',
 					kind: 'type',
 					doc_comment: 'Module information with metadata',
-					summary: 'Module information with metadata',
-					source_line: 168,
+					source_line: 161,
 					type_signature: 'Src_Module',
 					properties: [
 						{
@@ -4331,21 +4145,18 @@ export const src_json: Src_Json = {
 							kind: 'variable',
 							type_signature: 'string',
 							doc_comment: 'Module path relative to src/lib',
-							summary: 'Module path relative to src/lib',
 						},
 						{
 							name: 'declarations',
 							kind: 'variable',
 							type_signature: 'Array<Src_Module_Declaration>',
 							doc_comment: 'Exported declarations',
-							summary: 'Exported declarations',
 						},
 						{
 							name: 'module_comment',
 							kind: 'variable',
 							type_signature: 'string',
 							doc_comment: 'Module-level JSDoc comment',
-							summary: 'Module-level JSDoc comment',
 						},
 					],
 				},
@@ -4353,11 +4164,10 @@ export const src_json: Src_Json = {
 					name: 'Src_Json',
 					kind: 'type',
 					doc_comment: 'Top-level source metadata',
-					summary: 'Top-level source metadata',
 					see_also: [
 						'://github.com/ryanatkn/gro/blob/main/src/docs/gro_plugin_sveltekit_app.md#well-known-src',
 					],
-					source_line: 181,
+					source_line: 174,
 					type_signature: 'Src_Json',
 					properties: [
 						{
@@ -4365,22 +4175,18 @@ export const src_json: Src_Json = {
 							kind: 'variable',
 							type_signature: 'string',
 							doc_comment: 'Package name (same as package.json)',
-							summary: 'Package name (same as package.json)',
 						},
 						{
 							name: 'version',
 							kind: 'variable',
 							type_signature: 'string',
 							doc_comment: 'Package version (same as package.json)',
-							summary: 'Package version (same as package.json)',
 						},
 						{
 							name: 'modules',
 							kind: 'variable',
 							type_signature: 'Array<Src_Module>',
 							doc_comment:
-								'Source modules (changed from Record to Array to eliminate path duplication)',
-							summary:
 								'Source modules (changed from Record to Array to eliminate path duplication)',
 						},
 					],
@@ -4389,26 +4195,9 @@ export const src_json: Src_Json = {
 					name: 'get_declaration_display_name',
 					kind: 'function',
 					doc_comment: "Helper to get a declaration's display name",
-					summary: "Helper to get a declaration's display name",
-					source_line: 193,
+					source_line: 186,
 					type_signature: '(decl: Src_Module_Declaration): string',
 					return_type: 'string',
-					parameters: [
-						{
-							name: 'decl',
-							type: 'Src_Module_Declaration',
-							optional: false,
-						},
-					],
-				},
-				{
-					name: 'get_type_summary',
-					kind: 'function',
-					doc_comment: 'Helper to get a short type summary for tooltips',
-					summary: 'Helper to get a short type summary for tooltips',
-					source_line: 211,
-					type_signature: '(decl: Src_Module_Declaration): string | undefined',
-					return_type: 'string | undefined',
 					parameters: [
 						{
 							name: 'decl',
@@ -4421,8 +4210,7 @@ export const src_json: Src_Json = {
 					name: 'generate_import_statement',
 					kind: 'function',
 					doc_comment: 'Generate import statement for a declaration',
-					summary: 'Generate import statement for a declaration',
-					source_line: 225,
+					source_line: 204,
 					type_signature:
 						'(decl: Src_Module_Declaration, module_path: string, pkg_name: string): string',
 					return_type: 'string',
@@ -4455,7 +4243,6 @@ export const src_json: Src_Json = {
 					name: 'save_to_storage',
 					kind: 'function',
 					doc_comment: 'Utility function to save a value to `localStorage`.',
-					summary: 'Utility function to save a value to `localStorage`.',
 					source_line: 8,
 					type_signature: '(key: string, value: any, is_json?: boolean): void',
 					return_type: 'void',
@@ -4482,7 +4269,6 @@ export const src_json: Src_Json = {
 					name: 'load_from_storage',
 					kind: 'function',
 					doc_comment: 'Utility function to load a value from `localStorage` with optional parsing',
-					summary: 'Utility function to load a value from `localStorage` with optional parsing',
 					source_line: 26,
 					type_signature:
 						'<T>(key: string, is_json?: boolean, parse_fn?: ((value: unknown) => T | null) | undefined): T | null',
@@ -4519,7 +4305,6 @@ export const src_json: Src_Json = {
 					name: 'svelte_analyze_component',
 					kind: 'function',
 					doc_comment: 'Analyze a Svelte component from its svelte2tsx transformation.',
-					summary: 'Analyze a Svelte component from its svelte2tsx transformation.',
 					source_line: 23,
 					type_signature:
 						'(ts_code: string, source_file: SourceFile, checker: TypeChecker, component_name: string): Src_Module_Declaration',
@@ -5037,7 +4822,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'to_tome_pathname',
 					kind: 'function',
-					source_line: 18,
+					source_line: 17,
 					type_signature:
 						'(item: { name: string; category: string; component: any; related: string[]; }, docs_path?: string): string',
 					return_type: 'string',
@@ -5058,14 +4843,14 @@ export const src_json: Src_Json = {
 				{
 					name: 'tomes_context',
 					kind: 'variable',
-					source_line: 21,
+					source_line: 20,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Map<string, { name: string; category: string; component: any; related: string[]; }>; maybe_get: () => Map<string, { name: string; category: string; component: any; related: string[]; }> | undefined; set: (value: Map<...>) => Map<...>; }',
 				},
 				{
 					name: 'get_tome_by_name',
 					kind: 'function',
-					source_line: 23,
+					source_line: 22,
 					type_signature:
 						'(name: string): { name: string; category: string; component: any; related: string[]; }',
 					return_type: '{ name: string; category: string; component: any; related: string[]; }',
@@ -5080,7 +4865,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'tome_context',
 					kind: 'variable',
-					source_line: 30,
+					source_line: 29,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => { name: string; category: string; component: any; related: string[]; }; maybe_get: () => { name: string; category: string; component: any; related: string[]; } | undefined; set: (value: { ...; }) => { ...; }; }',
 				},
@@ -5093,7 +4878,6 @@ export const src_json: Src_Json = {
 					name: 'ts_infer_declaration_kind',
 					kind: 'function',
 					doc_comment: 'Infer declaration kind from symbol and node.',
-					summary: 'Infer declaration kind from symbol and node.',
 					source_line: 57,
 					type_signature:
 						'(symbol: Symbol, node: Node): "function" | "type" | "variable" | "class" | null',
@@ -5115,8 +4899,6 @@ export const src_json: Src_Json = {
 					name: 'ts_extract_function_info',
 					kind: 'function',
 					doc_comment:
-						'Extract function/method information including parameters\nwith descriptions and default values.',
-					summary:
 						'Extract function/method information including parameters\nwith descriptions and default values.',
 					source_line: 88,
 					type_signature:
@@ -5154,7 +4936,6 @@ export const src_json: Src_Json = {
 					name: 'ts_extract_type_info',
 					kind: 'function',
 					doc_comment: 'Extract type/interface information with rich property metadata.',
-					summary: 'Extract type/interface information with rich property metadata.',
 					source_line: 157,
 					type_signature:
 						'(node: Node, _symbol: Symbol, checker: TypeChecker, decl: Src_Module_Declaration): void',
@@ -5186,8 +4967,7 @@ export const src_json: Src_Json = {
 					name: 'ts_extract_class_info',
 					kind: 'function',
 					doc_comment: 'Extract class information with rich member metadata.',
-					summary: 'Extract class information with rich member metadata.',
-					source_line: 224,
+					source_line: 219,
 					type_signature:
 						'(node: Node, _symbol: Symbol, checker: TypeChecker, decl: Src_Module_Declaration): void',
 					return_type: 'void',
@@ -5218,8 +4998,7 @@ export const src_json: Src_Json = {
 					name: 'ts_extract_variable_info',
 					kind: 'function',
 					doc_comment: 'Extract variable information.',
-					summary: 'Extract variable information.',
-					source_line: 301,
+					source_line: 289,
 					type_signature:
 						'(node: Node, symbol: Symbol, checker: TypeChecker, decl: Src_Module_Declaration): void',
 					return_type: 'void',
@@ -5250,8 +5029,7 @@ export const src_json: Src_Json = {
 					name: 'ts_extract_module_comment',
 					kind: 'function',
 					doc_comment: 'Extract module-level comment.',
-					summary: 'Extract module-level comment.',
-					source_line: 318,
+					source_line: 306,
 					type_signature: '(source_file: SourceFile): string | undefined',
 					return_type: 'string | undefined',
 					parameters: [
@@ -5266,8 +5044,7 @@ export const src_json: Src_Json = {
 					name: 'ts_create_program',
 					kind: 'function',
 					doc_comment: 'Create TypeScript program for analysis.',
-					summary: 'Create TypeScript program for analysis.',
-					source_line: 341,
+					source_line: 329,
 					type_signature: '(log: { warn: (message: string) => void; }): Program | null',
 					return_type: 'Program | null',
 					parameters: [
@@ -5289,72 +5066,56 @@ export const src_json: Src_Json = {
 					name: 'Tsdoc_Parsed_Comment',
 					kind: 'type',
 					doc_comment: 'Parsed JSDoc/TSDoc comment with structured metadata.',
-					summary: 'Parsed JSDoc/TSDoc comment with structured metadata.',
 					source_line: 32,
 					type_signature: 'Tsdoc_Parsed_Comment',
 					properties: [
 						{
-							name: 'full_text',
+							name: 'text',
 							kind: 'variable',
 							type_signature: 'string',
-							doc_comment: 'Full comment text (excluding comment markers)',
-							summary: 'Full comment text (excluding comment markers)',
-						},
-						{
-							name: 'summary',
-							kind: 'variable',
-							type_signature: 'string',
-							doc_comment: 'First paragraph summary',
-							summary: 'First paragraph summary',
+							doc_comment: 'Comment text (excluding comment markers)',
 						},
 						{
 							name: 'params',
 							kind: 'variable',
 							type_signature: 'Map<string, string>',
 							doc_comment: 'Parameter descriptions mapped by parameter name',
-							summary: 'Parameter descriptions mapped by parameter name',
 						},
 						{
 							name: 'returns',
 							kind: 'variable',
 							type_signature: 'string',
 							doc_comment: 'Return value description from @ returns or @ return',
-							summary: 'Return value description from @ returns or @ return',
 						},
 						{
 							name: 'throws',
 							kind: 'variable',
 							type_signature: 'Array<{type?: string; description: string}>',
 							doc_comment: 'Thrown errors from @ throws',
-							summary: 'Thrown errors from @ throws',
 						},
 						{
 							name: 'examples',
 							kind: 'variable',
 							type_signature: 'Array<string>',
 							doc_comment: 'Code examples from @ example',
-							summary: 'Code examples from @ example',
 						},
 						{
 							name: 'deprecated_message',
 							kind: 'variable',
 							type_signature: 'string',
 							doc_comment: 'Deprecation message from @ deprecated',
-							summary: 'Deprecation message from @ deprecated',
 						},
 						{
 							name: 'see_also',
 							kind: 'variable',
 							type_signature: 'Array<string>',
 							doc_comment: 'Related references from @ see',
-							summary: 'Related references from @ see',
 						},
 						{
 							name: 'since',
 							kind: 'variable',
 							type_signature: 'string',
 							doc_comment: 'Version information from @ since',
-							summary: 'Version information from @ since',
 						},
 					],
 				},
@@ -5363,8 +5124,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Parse JSDoc comment from a TypeScript node.\n\nExtracts and parses all JSDoc tags including:\n\n- @ param - parameter descriptions\n- @ returns/@ return - return value description\n- @ throws - error documentation\n- @ example - code examples\n- @ deprecated - deprecation warnings\n- @ see - related references\n- @ since - version information',
-					summary: 'Parse JSDoc comment from a TypeScript node.',
-					source_line: 69,
+					source_line: 67,
 					type_signature:
 						'(node: Node, _source_file: SourceFile): Tsdoc_Parsed_Comment | undefined',
 					return_type: 'Tsdoc_Parsed_Comment | undefined',
@@ -5388,8 +5148,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Apply parsed TSDoc metadata to a declaration.\n\nConsolidates the common pattern of assigning TSDoc fields to declarations,\nwith conditional assignment for array fields (only if non-empty).',
-					summary: 'Apply parsed TSDoc metadata to a declaration.',
-					source_line: 155,
+					source_line: 151,
 					type_signature: '(decl: any, tsdoc: Tsdoc_Parsed_Comment | undefined): void',
 					return_type: 'void',
 					parameters: [

@@ -15,7 +15,6 @@ import {
 	type Src_Module_Declaration,
 	generate_import_statement,
 	get_declaration_display_name,
-	get_type_summary,
 } from '$lib/src_json.js';
 import {api_doc_url, api_doc_url_full, github_file_url} from '$lib/package_helpers.js';
 
@@ -31,10 +30,6 @@ import {api_doc_url, api_doc_url_full, github_file_url} from '$lib/package_helpe
 export class Identifier {
 	readonly module: Module = $state.raw()!;
 	readonly decl: Src_Module_Declaration = $state.raw()!;
-
-	// ============================================================================
-	// convenience accessors
-	// ============================================================================
 
 	/**
 	 * Get parent Pkg for accessing package metadata.
@@ -55,10 +50,6 @@ export class Identifier {
 	 * Declaration kind (type, function, class, etc.).
 	 */
 	kind = $derived(this.decl.kind);
-
-	// ============================================================================
-	// lazy-computed properties (cached automatically by Svelte)
-	// ============================================================================
 
 	/**
 	 * GitHub source URL with line number.
@@ -98,20 +89,10 @@ export class Identifier {
 	 */
 	display_name = $derived(get_declaration_display_name(this.decl));
 
-	/**
-	 * Truncated type signature for tooltips.
-	 * Example: "type Alert = { status: 'info' | 'success'..."
-	 */
-	type_summary = $derived(get_type_summary(this.decl));
-
 	constructor(module: Module, decl: Src_Module_Declaration) {
 		this.module = module;
 		this.decl = decl;
 	}
-
-	// ============================================================================
-	// query methods
-	// ============================================================================
 
 	/**
 	 * Check if identifier has code examples.
@@ -128,10 +109,10 @@ export class Identifier {
 	}
 
 	/**
-	 * Check if identifier has documentation (doc comment or summary).
+	 * Check if identifier has documentation.
 	 */
 	has_documentation(): boolean {
-		return !!(this.decl.doc_comment || this.decl.summary);
+		return !!this.decl.doc_comment;
 	}
 
 	/**

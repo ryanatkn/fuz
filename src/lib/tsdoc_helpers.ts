@@ -30,10 +30,8 @@ import ts from 'typescript';
  * Parsed JSDoc/TSDoc comment with structured metadata.
  */
 export interface Tsdoc_Parsed_Comment {
-	/** Full comment text (excluding comment markers) */
-	full_text: string;
-	/** First paragraph summary */
-	summary: string;
+	/** Comment text (excluding comment markers) */
+	text: string;
 	/** Parameter descriptions mapped by parameter name */
 	params: Map<string, string>;
 	/** Return value description from @ returns or @ return */
@@ -128,11 +126,9 @@ export const tsdoc_parse = (
 	}
 
 	full_text = full_text.trim();
-	const summary = full_text.split('\n\n')[0]!.trim();
 
 	return {
-		full_text,
-		summary,
+		text: full_text,
 		params,
 		returns,
 		...(throws.length && {throws}),
@@ -158,8 +154,7 @@ export const tsdoc_apply_to_declaration = (
 ): void => {
 	if (!tsdoc) return;
 
-	decl.doc_comment = tsdoc.full_text;
-	decl.summary = tsdoc.summary;
+	decl.doc_comment = tsdoc.text;
 	decl.deprecated_message = tsdoc.deprecated_message;
 
 	// Only assign arrays if they have content

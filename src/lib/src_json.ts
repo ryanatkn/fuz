@@ -16,9 +16,6 @@
 
 import {z} from 'zod';
 
-// ==============================================================================
-// BELT BASELINE (minimal serializable types from @ryanatkn/belt/src/lib/src_json.ts)
-// ==============================================================================
 // These are the core zod schemas from belt that define the base structure.
 // Fuz extends these with additional fields for rich documentation.
 
@@ -62,10 +59,6 @@ export const Src_Json_Minimal = z.looseObject({
 	version: z.string(),
 	modules: z.array(Src_Module_Minimal).optional(), // Changed from z.record to z.array
 });
-
-// ==============================================================================
-// FUZ EXTENSIONS (rich documentation metadata)
-// ==============================================================================
 
 /**
  * Parameter information for functions and methods
@@ -126,10 +119,10 @@ export interface Src_Module_Declaration {
 	// Documentation fields
 	/** Full JSDoc/TSDoc comment text */
 	doc_comment?: string;
-	/** Concise summary (first paragraph) */
-	summary?: string;
 	/** Full TypeScript type signature */
 	type_signature?: string;
+	/** TypeScript modifiers (e.g., readonly, private, static) */
+	modifiers?: Array<string>;
 	/** Source line number within the file */
 	source_line?: number;
 	/** Function/method parameters */
@@ -203,20 +196,6 @@ export const get_declaration_display_name = (decl: Src_Module_Declaration): stri
 		return `${decl.name}<${params_str}>`;
 	}
 	return decl.name;
-};
-
-/**
- * Helper to get a short type summary for tooltips
- */
-export const get_type_summary = (decl: Src_Module_Declaration): string | undefined => {
-	if (decl.type_signature) {
-		const max_length = 100;
-		if (decl.type_signature.length > max_length) {
-			return decl.type_signature.slice(0, max_length) + '...';
-		}
-		return decl.type_signature;
-	}
-	return undefined;
 };
 
 /**

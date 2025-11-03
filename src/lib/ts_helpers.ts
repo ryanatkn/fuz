@@ -193,7 +193,7 @@ export const ts_extract_type_info = (
 				// Extract modifiers
 				const modifier_flags = ts_extract_modifiers(ts.getModifiers(member));
 				if (modifier_flags.length > 0) {
-					prop_decl.summary = modifier_flags.join(' ');
+					prop_decl.modifiers = modifier_flags;
 				}
 
 				// Extract type
@@ -202,14 +202,9 @@ export const ts_extract_type_info = (
 				}
 
 				// Extract TSDoc
-				// Note: We don't use tsdoc_apply_to_declaration here because we want to preserve
-				// modifier-based summary (e.g., "readonly", "public") over TSDoc summary
 				const prop_tsdoc = tsdoc_parse(member, node.getSourceFile());
 				if (prop_tsdoc) {
-					prop_decl.doc_comment = prop_tsdoc.full_text;
-					if (!prop_decl.summary) {
-						prop_decl.summary = prop_tsdoc.summary;
-					}
+					prop_decl.doc_comment = prop_tsdoc.text;
 				}
 
 				decl.properties.push(prop_decl);
@@ -257,10 +252,8 @@ export const ts_extract_class_info = (
 
 			// Extract visibility and modifiers
 			const modifier_flags = ts_extract_modifiers(ts.getModifiers(member));
-
-			// Store modifiers as summary for display
 			if (modifier_flags.length > 0) {
-				member_decl.summary = modifier_flags.join(' ');
+				member_decl.modifiers = modifier_flags;
 			}
 
 			// Extract type information
@@ -280,14 +273,9 @@ export const ts_extract_class_info = (
 			}
 
 			// Extract TSDoc
-			// Note: We don't use tsdoc_apply_to_declaration here because we want to preserve
-			// modifier-based summary (e.g., "private", "static") over TSDoc summary
 			const member_tsdoc = tsdoc_parse(member, node.getSourceFile());
 			if (member_tsdoc) {
-				member_decl.doc_comment = member_tsdoc.full_text;
-				if (!member_decl.summary) {
-					member_decl.summary = member_tsdoc.summary;
-				}
+				member_decl.doc_comment = member_tsdoc.text;
 			}
 
 			decl.members.push(member_decl);

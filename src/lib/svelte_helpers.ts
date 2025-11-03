@@ -134,7 +134,7 @@ const svelte_extract_prop_from_member = (
 	let description: string | undefined;
 	const tsdoc = tsdoc_parse(member, source_file);
 	if (tsdoc) {
-		description = tsdoc.summary || tsdoc.full_text;
+		description = tsdoc.text;
 	}
 
 	// Extract default value (if available in TSDoc or initializer)
