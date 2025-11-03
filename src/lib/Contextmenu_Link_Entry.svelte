@@ -49,6 +49,8 @@
 </script>
 
 <li role="none">
+	<!-- TODO -next-line doesnt work? -->
+	<!-- eslint-disable svelte/no-navigation-without-resolve -->
 	<a
 		bind:this={anchor_el}
 		class="menu_item plain"

@@ -28,6 +28,8 @@
 	const final_children = $derived(children ?? strip_end(path, '/').split('/').at(-1)!);
 </script>
 
+<!-- TODO -next-line doesnt work? -->
+<!-- eslint-disable svelte/no-navigation-without-resolve -->
 <a {...rest} {href} class="chip white_space_nowrap {class_prop}"
 	><Svg
 		data={mdn_logo}

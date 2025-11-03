@@ -23,6 +23,8 @@
 	const contextmenu_entries = $derived(create_identifier_contextmenu(identifier));
 </script>
 
+<!-- TODO -next-line doesnt work? -->
+<!-- eslint-disable svelte/no-navigation-without-resolve -->
 <a
 	class="identifier_link chip {identifier.kind}_identifier"
 	href={identifier.api_url}
