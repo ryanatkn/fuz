@@ -107,6 +107,11 @@ export class Pkg {
 	);
 
 	/**
+	 * All modules sorted alphabetically by path (cached via $derived).
+	 */
+	modules_sorted = $derived([...this.modules].sort((a, b) => a.path.localeCompare(b.path)));
+
+	/**
 	 * All identifiers across all modules as a flat array (cached via $derived).
 	 */
 	identifiers = $derived(this.modules.flatMap((module) => module.identifiers));
@@ -134,6 +139,13 @@ export class Pkg {
 	 */
 	has_identifier(name: string): boolean {
 		return this.identifier_map.has(name);
+	}
+
+	/**
+	 * Look up a module by its canonical path.
+	 */
+	lookup_module(path: string): Module | undefined {
+		return this.modules.find((m) => m.path === path);
 	}
 
 	/**

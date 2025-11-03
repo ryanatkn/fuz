@@ -1,6 +1,5 @@
 <script lang="ts">
 	import {page} from '$app/state';
-	import {strip_start} from '@ryanatkn/belt/string.js';
 	import {format_url} from '@ryanatkn/belt/url.js';
 	import type {Snippet} from 'svelte';
 
@@ -10,6 +9,12 @@
 	import Declaration_Link from '$lib/Declaration_Link.svelte';
 	import Module_Link from '$lib/Module_Link.svelte';
 	import {github_file_url, repo_url_parse, well_known_url} from '$lib/package_helpers.js';
+	import {
+		module_is_typescript,
+		module_is_svelte,
+		module_is_css,
+		module_is_json,
+	} from '$lib/module_helpers.js';
 
 	interface Props {
 		pkg: Pkg; // TODO normalized version with cached primitives?
@@ -151,17 +156,16 @@
 			<menu class="unstyled">
 				{#each pkg.modules as module (module.path)}
 					<!-- TODO improve rendering and enrich data - start with the type (not just extension - mime?) -->
-					{@const module_display_name = strip_start(module.path, './')}
 					<li
 						class="module"
-						class:ts={module_display_name.endsWith('.js')}
-						class:svelte={module_display_name.endsWith('.svelte')}
-						class:css={module_display_name.endsWith('.css')}
-						class:json={module_display_name.endsWith('.json')}
+						class:ts={module_is_typescript(module.path)}
+						class:svelte={module_is_svelte(module.path)}
+						class:css={module_is_css(module.path)}
+						class:json={module_is_json(module.path)}
 					>
 						<div class="module_content">
-							<Module_Link module_path={module.path} repo_url={pkg.repo_url}>
-								{module_display_name === '.' ? 'index.js' : module_display_name}
+							<Module_Link module_path={module.path}>
+								{module.path}
 							</Module_Link>
 							{#if module.identifiers.length > 0}
 								<ul class="identifiers unstyled">

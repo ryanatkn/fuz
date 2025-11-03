@@ -174,6 +174,10 @@ gro check        # check types
 gro test         # test
 ```
 
+**IMPORTANT for AI agents:**
+Do NOT run `npm run dev` or `gro dev` - the developer will manage the dev server.
+Only run `gro check`, `gro test`, `gro gen`, etc. for validation and code generation.
+
 ### Project standards
 
 - **TypeScript** - strict typing throughout

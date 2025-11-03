@@ -48,6 +48,7 @@
 </ul>
 
 <style>
+	/* TODO @many repeated pattern, also I think we want to support this growing? */
 	.docs_menu {
 		width: var(--docs_menu_width);
 		min-width: var(--docs_menu_width);

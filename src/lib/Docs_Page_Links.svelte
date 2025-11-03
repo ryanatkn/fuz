@@ -44,6 +44,7 @@
 {/snippet}
 
 <style>
+	/* TODO @many repeated pattern, also I think we want to support this growing? */
 	.docs_page_links {
 		margin: var(--space_xl6) 0;
 		width: var(--docs_menu_width);

@@ -216,7 +216,7 @@
 					>
 				</blockquote>
 				<code class="display_block p_md mb_lg"
-					>npm i -D <a href="https://www.npmjs.com/package/@ryanatkn/fuz">@fuz.dev/fuz</a></code
+					>npm i -D <a href="https://www.npmjs.com/package/@ryanatkn/fuz">@ryanatkn/fuz</a></code
 				>
 				<div class="p_xl box">
 					<h2>Color scheme</h2>

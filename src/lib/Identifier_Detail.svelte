@@ -17,7 +17,7 @@
 
 <!-- Metadata -->
 <p>
-	<Module_Link module_path={identifier.module_path} repo_url={identifier.pkg.repo_url} />
+	<Module_Link module_path={identifier.module_path} />
 </p>
 {#if identifier.source_url}
 	<p>

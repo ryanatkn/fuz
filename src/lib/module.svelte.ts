@@ -13,6 +13,7 @@ import {Identifier} from '$lib/identifier.svelte.js';
 import type {Pkg} from '$lib/pkg.svelte.js';
 import type {Src_Module} from '$lib/src_json.js';
 import {github_file_url} from '$lib/package_helpers.js';
+import {DOCS_API_PATH} from '$lib/docs_helpers.svelte.js';
 
 /**
  * Rich runtime representation of a source module with computed properties.
@@ -28,9 +29,22 @@ export class Module {
 	readonly src_module: Src_Module = $state.raw()!;
 
 	/**
-	 * Module path relative to src/lib (e.g., "./Alert.ts").
+	 * Canonical module path (no prefix) - matches storage, URLs, display.
+	 * Examples: 'Alert.ts', 'helpers/foo.ts'
 	 */
 	path = $derived(this.src_module.path);
+
+	/**
+	 * Full docs URL pathname for this module page.
+	 * Examples: '/docs/api/Alert.ts', '/docs/api/helpers/foo.ts'
+	 */
+	path_docs = $derived(`${DOCS_API_PATH}/${this.path}`);
+
+	/**
+	 * Import-style path with ./ prefix for import statements.
+	 * Examples: './Alert.ts', './helpers/foo.ts'
+	 */
+	path_import = $derived('./' + this.path);
 
 	/**
 	 * Module-level JSDoc comment.

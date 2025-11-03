@@ -4,7 +4,8 @@ import {ensure_end, ensure_start} from '@ryanatkn/belt/string.js';
 
 import {create_context} from '$lib/context_helpers.js';
 
-export const DEFAULT_LIBRARY_PATH = '/docs';
+export const DOCS_PATH_DEFAULT = '/docs';
+export const DOCS_API_PATH = resolve(`${DOCS_PATH_DEFAULT}/api` as any);
 
 // Shared order counter for all docs links (headers and sections)
 // This ensures proper document order even when components mount/unmount
@@ -19,7 +20,7 @@ export const reset_docs_link_order = (): void => {
 export const to_docs_path_info = (
 	slug: string,
 	pathname: string,
-	root_path = DEFAULT_LIBRARY_PATH,
+	root_path = DOCS_PATH_DEFAULT,
 ): {path: string; path_is_selected: boolean; path_segment: string | undefined} => {
 	const path_segment = pathname.split('/').at(-1);
 	const path = resolve((ensure_end(ensure_start(root_path, '/'), '/') + slug) as any);
@@ -60,7 +61,7 @@ export class Docs_Links {
 
 	readonly slugs_onscreen: SvelteSet<string> = new SvelteSet();
 
-	constructor(root_path = DEFAULT_LIBRARY_PATH) {
+	constructor(root_path = DOCS_PATH_DEFAULT) {
 		this.root_path = root_path;
 	}
 

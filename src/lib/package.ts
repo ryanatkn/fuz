@@ -1125,7 +1125,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Open_Contextmenu_Options',
 					kind: 'type',
-					source_line: 373,
+					source_line: 374,
 					type_signature: 'Open_Contextmenu_Options',
 					properties: [
 						{
@@ -1155,7 +1155,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Opens the contextmenu, if appropriate,\nquerying the menu items from the DOM starting at the event target.',
-					source_line: 390,
+					source_line: 391,
 					type_signature:
 						'(target: HTMLElement | SVGElement, x: number, y: number, contextmenu: Contextmenu_State, options?: Open_Contextmenu_Options | undefined): boolean',
 					return_type: 'boolean',
@@ -1198,21 +1198,21 @@ export const src_json: Src_Json = {
 				{
 					name: 'contextmenu_context',
 					kind: 'variable',
-					source_line: 476,
+					source_line: 477,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Contextmenu_State; maybe_get: () => Contextmenu_State | undefined; set: (value: Contextmenu_State) => Contextmenu_State; }',
 				},
 				{
 					name: 'contextmenu_submenu_context',
 					kind: 'variable',
-					source_line: 478,
+					source_line: 479,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Submenu_State; maybe_get: () => Submenu_State | undefined; set: (value: Submenu_State) => Submenu_State; }',
 				},
 				{
 					name: 'contextmenu_dimensions_context',
 					kind: 'variable',
-					source_line: 480,
+					source_line: 481,
 					type_signature:
 						'{ get: () => Dimensions; set: (value?: Dimensions | undefined) => Dimensions; }',
 				},
@@ -1221,7 +1221,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Registers a contextmenu root and warns if multiple non-scoped roots are detected.\nOnly active in development mode. Automatically handles cleanup on unmount.',
-					source_line: 491,
+					source_line: 492,
 					type_signature: '(get_scoped: () => boolean): void',
 					return_type: 'void',
 					parameters: [
@@ -2011,15 +2011,22 @@ export const src_json: Src_Json = {
 			path: 'docs_helpers.svelte.ts',
 			declarations: [
 				{
-					name: 'DEFAULT_LIBRARY_PATH',
+					name: 'DOCS_PATH_DEFAULT',
 					kind: 'variable',
 					source_line: 7,
 					type_signature: '"/docs"',
 				},
 				{
+					name: 'DOCS_API_PATH',
+					kind: 'variable',
+					source_line: 8,
+					type_signature:
+						'"/docs" | "/" | "/about" | "/docs/alert" | "/docs/api" | "/docs/breadcrumb" | "/docs/breadcrumb/a" | "/docs/breadcrumb/a/b" | "/docs/breadcrumb/a/b/c" | "/docs/breadcrumb/a/b/c/d" | ... 78 more ... | `/${string}/help/`',
+				},
+				{
 					name: 'get_next_docs_link_order',
 					kind: 'function',
-					source_line: 12,
+					source_line: 13,
 					type_signature: '(): number',
 					return_type: 'number',
 					parameters: [],
@@ -2027,7 +2034,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'reset_docs_link_order',
 					kind: 'function',
-					source_line: 15,
+					source_line: 16,
 					type_signature: '(): void',
 					return_type: 'void',
 					parameters: [],
@@ -2035,7 +2042,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'to_docs_path_info',
 					kind: 'function',
-					source_line: 19,
+					source_line: 20,
 					type_signature:
 						'(slug: string, pathname: string, root_path?: string): { path: string; path_is_selected: boolean; path_segment: string | undefined; }',
 					return_type:
@@ -2055,27 +2062,27 @@ export const src_json: Src_Json = {
 							name: 'root_path',
 							type: 'string',
 							optional: false,
-							default_value: 'DEFAULT_LIBRARY_PATH',
+							default_value: 'DOCS_PATH_DEFAULT',
 						},
 					],
 				},
 				{
 					name: 'docs_links_context',
 					kind: 'variable',
-					source_line: 30,
+					source_line: 31,
 					type_signature:
 						'{ get: () => Docs_Links; set: (value?: Docs_Links | undefined) => Docs_Links; }',
 				},
 				{
 					name: 'Docs_Link_Tag',
 					kind: 'type',
-					source_line: 32,
+					source_line: 33,
 					type_signature: 'Docs_Link_Tag',
 				},
 				{
 					name: 'Docs_Link',
 					kind: 'type',
-					source_line: 34,
+					source_line: 35,
 					type_signature: 'Docs_Link',
 					properties: [
 						{
@@ -2108,7 +2115,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Docs_Links',
 					kind: 'class',
-					source_line: 42,
+					source_line: 43,
 					members: [
 						{
 							name: 'root_path',
@@ -3017,8 +3024,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'module_is_typescript',
 					kind: 'function',
-					doc_comment: 'Check if path is a TypeScript or JS file.',
-					source_line: 43,
+					source_line: 41,
 					type_signature: '(path: string): boolean',
 					return_type: 'boolean',
 					parameters: [
@@ -3032,7 +3038,35 @@ export const src_json: Src_Json = {
 				{
 					name: 'module_is_svelte',
 					kind: 'function',
+					source_line: 44,
+					type_signature: '(path: string): boolean',
+					return_type: 'boolean',
+					parameters: [
+						{
+							name: 'path',
+							type: 'string',
+							optional: false,
+						},
+					],
+				},
+				{
+					name: 'module_is_css',
+					kind: 'function',
 					source_line: 46,
+					type_signature: '(path: string): boolean',
+					return_type: 'boolean',
+					parameters: [
+						{
+							name: 'path',
+							type: 'string',
+							optional: false,
+						},
+					],
+				},
+				{
+					name: 'module_is_json',
+					kind: 'function',
+					source_line: 48,
 					type_signature: '(path: string): boolean',
 					return_type: 'boolean',
 					parameters: [
@@ -3046,7 +3080,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'module_is_test',
 					kind: 'function',
-					source_line: 48,
+					source_line: 50,
 					type_signature: '(path: string): boolean',
 					return_type: 'boolean',
 					parameters: [
@@ -3061,7 +3095,7 @@ export const src_json: Src_Json = {
 					name: 'module_is_source',
 					kind: 'function',
 					doc_comment: 'Check if ID is a source file in /src/lib/ (excluding tests).',
-					source_line: 53,
+					source_line: 55,
 					type_signature: '(id: string): boolean',
 					return_type: 'boolean',
 					parameters: [
@@ -3089,11 +3123,6 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 						{
-							name: 'repo_url',
-							type: 'string',
-							optional: true,
-						},
-						{
 							name: 'children',
 							type: 'Snippet',
 							optional: true,
@@ -3111,7 +3140,7 @@ export const src_json: Src_Json = {
 					kind: 'class',
 					doc_comment:
 						'Rich runtime representation of a source module with computed properties.\n\nCombines:\n- Minimal Src_Module data (serializable)\n- Full Pkg reference (for generating URLs, import statements, etc.)\n- Lazy-computed Identifier instances\n- Query methods for ergonomic usage',
-					source_line: 26,
+					source_line: 27,
 					members: [
 						{
 							name: 'pkg',
@@ -3128,7 +3157,20 @@ export const src_json: Src_Json = {
 						{
 							name: 'path',
 							kind: 'variable',
-							doc_comment: 'Module path relative to src/lib (e.g., "./Alert.ts").',
+							doc_comment:
+								"Canonical module path (no prefix) - matches storage, URLs, display.\nExamples: 'Alert.ts', 'helpers/foo.ts'",
+						},
+						{
+							name: 'path_docs',
+							kind: 'variable',
+							doc_comment:
+								"Full docs URL pathname for this module page.\nExamples: '/docs/api/Alert.ts', '/docs/api/helpers/foo.ts'",
+						},
+						{
+							name: 'path_import',
+							kind: 'variable',
+							doc_comment:
+								"Import-style path with ./ prefix for import statements.\nExamples: './Alert.ts', './helpers/foo.ts'",
 						},
 						{
 							name: 'module_comment',
@@ -3223,9 +3265,8 @@ export const src_json: Src_Json = {
 				{
 					name: 'api_doc_url',
 					kind: 'function',
-					doc_comment:
-						'Build project-relative API documentation URL with hash anchor (calls resolve internally).',
-					source_line: 8,
+					doc_comment: 'Build project-relative API documentation URL with hash anchor.',
+					source_line: 9,
 					type_signature: '(identifier_name: string): string',
 					return_type: 'string',
 					parameters: [
@@ -3240,7 +3281,7 @@ export const src_json: Src_Json = {
 					name: 'api_doc_url_full',
 					kind: 'function',
 					doc_comment: 'Build full API documentation URL with domain and hash anchor.',
-					source_line: 14,
+					source_line: 15,
 					type_signature: '(homepage: string, identifier_name: string): string',
 					return_type: 'string',
 					parameters: [
@@ -3257,10 +3298,29 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
+					name: 'module_doc_url',
+					kind: 'function',
+					doc_comment:
+						'Build project-relative module documentation URL.\nStrips the `./` prefix from module paths.',
+					examples: [
+						"module_doc_url('./Alert.ts') // => '/docs/api/Alert.ts'\nmodule_doc_url('./helpers/foo.ts') // => '/docs/api/helpers/foo.ts'",
+					],
+					source_line: 25,
+					type_signature: '(module_path: string): string',
+					return_type: 'string',
+					parameters: [
+						{
+							name: 'module_path',
+							type: 'string',
+							optional: false,
+						},
+					],
+				},
+				{
 					name: 'github_file_url',
 					kind: 'function',
 					doc_comment: 'Build GitHub file URL for a repository.',
-					source_line: 20,
+					source_line: 31,
 					type_signature:
 						'(repo_url: string, file_path: string, line?: number | undefined): string',
 					return_type: 'string',
@@ -3287,7 +3347,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						"Build GitHub organization URL from repo URL and repo name.\nExample: ('https://github.com/ryanatkn/fuz', 'fuz') -> 'https://github.com/ryanatkn'",
-					source_line: 30,
+					source_line: 41,
 					type_signature: '(repo_url: string, repo_name: string): string | null',
 					return_type: 'string | null',
 					parameters: [
@@ -3308,7 +3368,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						"Parse GitHub owner/org name from repository URL.\nExample: 'https://github.com/ryanatkn/fuz' -> 'ryanatkn'",
-					source_line: 38,
+					source_line: 49,
 					type_signature: '(repo_url: string): string | null',
 					return_type: 'string | null',
 					parameters: [
@@ -3323,7 +3383,7 @@ export const src_json: Src_Json = {
 					name: 'npm_package_url',
 					kind: 'function',
 					doc_comment: 'Build npm package URL.',
-					source_line: 47,
+					source_line: 58,
 					type_signature: '(package_name: string): string',
 					return_type: 'string',
 					parameters: [
@@ -3339,7 +3399,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Check if a package is published to npm.\nPublished packages are not private, have exports, and have a version beyond 0.0.1.',
-					source_line: 54,
+					source_line: 65,
 					type_signature:
 						'(package_json: { [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }): boolean',
 					return_type: 'boolean',
@@ -3356,7 +3416,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Build package logo URL with favicon.png fallback.\nReturns null if no homepage URL is provided.',
-					source_line: 62,
+					source_line: 73,
 					type_signature:
 						'(homepage_url: string | null, logo_path?: string | undefined): string | null',
 					return_type: 'string | null',
@@ -3378,7 +3438,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						"Extract repository name without scope from package name.\nExamples: '@org/pkg' -> 'pkg', 'pkg' -> 'pkg'",
-					source_line: 75,
+					source_line: 86,
 					type_signature: '(name: string): string',
 					return_type: 'string',
 					parameters: [
@@ -3394,7 +3454,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						"Parse repository URL from package.json format.\nStrips 'git+', '.git', and trailing slashes.",
-					source_line: 90,
+					source_line: 101,
 					type_signature:
 						'(repository: string | { [x: string]: unknown; type: string; url: string; directory?: string | undefined; } | undefined): string | null',
 					return_type: 'string | null',
@@ -3411,7 +3471,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						"Build .well-known URL for package metadata files.\nExample: ('https://fuz.dev/', 'src.json') -> 'https://fuz.dev/.well-known/src.json'",
-					source_line: 101,
+					source_line: 112,
 					type_signature: '(homepage_url: string, filename: string): string',
 					return_type: 'string',
 					parameters: [
@@ -3702,6 +3762,11 @@ export const src_json: Src_Json = {
 							doc_comment: 'All modules as rich Module instances (cached via $derived).',
 						},
 						{
+							name: 'modules_sorted',
+							kind: 'variable',
+							doc_comment: 'All modules sorted alphabetically by path (cached via $derived).',
+						},
+						{
 							name: 'identifiers',
 							kind: 'variable',
 							doc_comment:
@@ -3726,6 +3791,12 @@ export const src_json: Src_Json = {
 							doc_comment: 'Check if an identifier exists.',
 						},
 						{
+							name: 'lookup_module',
+							kind: 'function',
+							type_signature: '(path: string) => Module | undefined',
+							doc_comment: 'Look up a module by its canonical path.',
+						},
+						{
 							name: 'search_identifiers',
 							kind: 'function',
 							type_signature: '(query: string) => Identifier[]',
@@ -3738,7 +3809,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Convenience factory function for creating Pkg instances\n(kept for backward compatibility during migration)',
-					source_line: 187,
+					source_line: 199,
 					type_signature:
 						'(package_json: { [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }, src_json: Src_Json): Pkg',
 					return_type: 'Pkg',
@@ -3758,7 +3829,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'pkg_context',
 					kind: 'variable',
-					source_line: 191,
+					source_line: 203,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Pkg; maybe_get: () => Pkg | undefined; set: (value: Pkg) => Pkg; }',
 				},
@@ -4008,7 +4079,7 @@ export const src_json: Src_Json = {
 					name: 'Src_Module_Declaration',
 					kind: 'type',
 					doc_comment: 'Declaration metadata with rich TypeScript/JSDoc information',
-					source_line: 113,
+					source_line: 114,
 					type_signature: 'Src_Module_Declaration',
 					properties: [
 						{
@@ -4137,7 +4208,7 @@ export const src_json: Src_Json = {
 					name: 'Src_Module',
 					kind: 'type',
 					doc_comment: 'Module information with metadata',
-					source_line: 161,
+					source_line: 162,
 					type_signature: 'Src_Module',
 					properties: [
 						{
@@ -4167,7 +4238,7 @@ export const src_json: Src_Json = {
 					see_also: [
 						'://github.com/ryanatkn/gro/blob/main/src/docs/gro_plugin_sveltekit_app.md#well-known-src',
 					],
-					source_line: 174,
+					source_line: 175,
 					type_signature: 'Src_Json',
 					properties: [
 						{
@@ -4195,7 +4266,7 @@ export const src_json: Src_Json = {
 					name: 'get_declaration_display_name',
 					kind: 'function',
 					doc_comment: "Helper to get a declaration's display name",
-					source_line: 186,
+					source_line: 187,
 					type_signature: '(decl: Src_Module_Declaration): string',
 					return_type: 'string',
 					parameters: [
@@ -4210,7 +4281,7 @@ export const src_json: Src_Json = {
 					name: 'generate_import_statement',
 					kind: 'function',
 					doc_comment: 'Generate import statement for a declaration',
-					source_line: 204,
+					source_line: 205,
 					type_signature:
 						'(decl: Src_Module_Declaration, module_path: string, pkg_name: string): string',
 					return_type: 'string',
@@ -4836,7 +4907,7 @@ export const src_json: Src_Json = {
 							name: 'docs_path',
 							type: 'string',
 							optional: false,
-							default_value: 'DEFAULT_LIBRARY_PATH',
+							default_value: 'DOCS_PATH_DEFAULT',
 						},
 					],
 				},

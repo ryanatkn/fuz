@@ -37,7 +37,7 @@ export class Identifier {
 	pkg = $derived(this.module.pkg);
 
 	/**
-	 * Module path where this identifier is defined (e.g., "./Alert.ts").
+	 * Module path where this identifier is defined (e.g., "Alert.ts").
 	 */
 	module_path = $derived(this.module.path);
 

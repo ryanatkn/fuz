@@ -1,41 +1,26 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
 
-	import {github_file_url} from '$lib/package_helpers.js';
+	import {module_doc_url} from '$lib/package_helpers.js';
 
 	const {
 		module_path,
-		repo_url,
 		children,
 	}: {
 		module_path: string;
-		repo_url?: string;
 		children?: Snippet;
 	} = $props();
 
-	// generate GitHub source URL
-	const source_url = $derived(
-		repo_url
-			? github_file_url(
-					repo_url,
-					`src/lib/${module_path.replace(/^\.\//, '').replace(/\.js$/, '.ts')}`,
-				)
-			: undefined,
-	);
+	// generate module doc URL
+	const doc_url = $derived(module_doc_url(module_path));
 </script>
 
-{#if source_url}
-	<!-- eslint-disable svelte/no-navigation-without-resolve -->
-	<a class="chip" href={source_url} target="_blank" rel="noopener">
-		<!-- eslint-enable svelte/no-navigation-without-resolve -->
-		{#if children}
-			{@render children()}
-		{:else}
-			{module_path.replace(/^\.\//, '')}
-		{/if}
-	</a>
-{:else if children}
-	{@render children()}
-{:else}
-	{module_path.replace(/^\.\//, '')}
-{/if}
+<!-- eslint-disable svelte/no-navigation-without-resolve -->
+<a class="chip" href={doc_url}>
+	<!-- eslint-enable svelte/no-navigation-without-resolve -->
+	{#if children}
+		{@render children()}
+	{:else}
+		{module_path}
+	{/if}
+</a>

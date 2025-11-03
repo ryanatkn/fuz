@@ -6,11 +6,11 @@
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
 	import {get_tome_by_name} from '$lib/tome.js';
-	import {DEFAULT_LIBRARY_PATH} from '$lib/docs_helpers.svelte.js';
+	import {DOCS_PATH_DEFAULT} from '$lib/docs_helpers.svelte.js';
 
 	const {
 		name,
-		docs_path = DEFAULT_LIBRARY_PATH,
+		docs_path = DOCS_PATH_DEFAULT,
 		hash,
 		chip = true,
 		children,

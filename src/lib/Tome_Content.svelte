@@ -6,7 +6,7 @@
 
 	import Tome_Header from '$lib/Tome_Header.svelte';
 	import {tome_context, type Tome} from '$lib/tome.js';
-	import {DEFAULT_LIBRARY_PATH, docs_links_context} from '$lib/docs_helpers.svelte.js';
+	import {DOCS_PATH_DEFAULT, docs_links_context} from '$lib/docs_helpers.svelte.js';
 	import {intersect_attachment} from '$lib/intersect.js';
 
 	interface Props {
@@ -16,7 +16,7 @@
 		children: Snippet;
 	}
 
-	const {tome, docs_path = DEFAULT_LIBRARY_PATH, header, children}: Props = $props();
+	const {tome, docs_path = DOCS_PATH_DEFAULT, header, children}: Props = $props();
 
 	const docs_links = docs_links_context.get();
 

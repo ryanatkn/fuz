@@ -37,13 +37,15 @@ export const module_get_component_name = (module_path: string): string =>
  */
 export const module_get_key = (module_path: string): string => `./${module_path}`;
 
-/**
- * Check if path is a TypeScript or JS file.
- */
+// TODO BLOCK type union?
 export const module_is_typescript = (path: string): boolean =>
 	path.endsWith('.ts') || path.endsWith('.js');
 
 export const module_is_svelte = (path: string): boolean => path.endsWith('.svelte');
+
+export const module_is_css = (path: string): boolean => path.endsWith('.css');
+
+export const module_is_json = (path: string): boolean => path.endsWith('.json');
 
 export const module_is_test = (path: string): boolean => path.endsWith('.test.ts');
 

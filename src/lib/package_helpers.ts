@@ -1,18 +1,24 @@
 import {ensure_end, strip_end, strip_start} from '@ryanatkn/belt/string.js';
 import type {Package_Json} from '@ryanatkn/belt/package_json.js';
-import {resolve} from '$app/paths';
+
+import {DOCS_API_PATH} from '$lib/docs_helpers.svelte.js';
 
 /**
- * Build project-relative API documentation URL with hash anchor (calls resolve internally).
+ * Build project-relative API documentation URL with hash anchor.
  */
 export const api_doc_url = (identifier_name: string): string =>
-	resolve(`/docs/api#${encodeURIComponent(identifier_name)}` as any);
+	`${DOCS_API_PATH}#${encodeURIComponent(identifier_name)}`;
 
 /**
  * Build full API documentation URL with domain and hash anchor.
  */
 export const api_doc_url_full = (homepage: string, identifier_name: string): string =>
 	`${homepage}/docs/api#${encodeURIComponent(identifier_name)}`;
+
+/**
+ * Build project-relative module documentation URL.
+ */
+export const module_doc_url = (module_path: string): string => `${DOCS_API_PATH}/${module_path}`;
 
 /**
  * Build GitHub file URL for a repository.

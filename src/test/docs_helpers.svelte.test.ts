@@ -4,7 +4,7 @@ import {flushSync} from 'svelte';
 import {
 	to_docs_path_info,
 	Docs_Links,
-	DEFAULT_LIBRARY_PATH,
+	DOCS_PATH_DEFAULT,
 	reset_docs_link_order,
 } from '$lib/docs_helpers.svelte.js';
 
@@ -51,7 +51,7 @@ describe('Docs_Links', () => {
 	describe('constructor', () => {
 		test('initializes with default root_path', () => {
 			const instance = new Docs_Links();
-			assert.strictEqual(instance.root_path, DEFAULT_LIBRARY_PATH);
+			assert.strictEqual(instance.root_path, DOCS_PATH_DEFAULT);
 		});
 
 		test('initializes with custom root_path', () => {

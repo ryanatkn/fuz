@@ -107,6 +107,7 @@ export interface Generic_Param_Info {
 	default_type?: string;
 }
 
+// TODO BLOCK Identifier_Json and similar renames
 /**
  * Declaration metadata with rich TypeScript/JSDoc information
  */
