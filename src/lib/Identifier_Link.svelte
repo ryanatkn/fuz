@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
-	import {lookup_identifier_by_name} from '$lib/api_data.js';
+	import {pkg_context} from '$lib/pkg.svelte.js';
 	import Declaration_Link from '$lib/Declaration_Link.svelte';
 
 	const {
@@ -17,7 +17,8 @@
 		children?: Snippet;
 	} = $props();
 
-	const identifier = $derived(lookup_identifier_by_name(name));
+	const pkg = pkg_context.get();
+	const identifier = $derived(pkg.lookup_identifier(name));
 </script>
 
 {#if identifier}

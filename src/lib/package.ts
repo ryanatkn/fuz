@@ -207,86 +207,6 @@ export const src_json: Src_Json = {
 			module_comment: '// TODO move to module context?',
 		},
 		{
-			path: 'api_data.ts',
-			declarations: [
-				{
-					name: 'get_all_modules',
-					kind: 'function',
-					doc_comment: 'Get all modules as Module instances (cached per Pkg)',
-					summary: 'Get all modules as Module instances (cached per Pkg)',
-					source_line: 25,
-					type_signature: '(): Module[]',
-					return_type: 'Module[]',
-					parameters: [],
-				},
-				{
-					name: 'get_all_identifiers',
-					kind: 'function',
-					doc_comment:
-						'Get all identifiers as a flat list of Identifier instances (cached per Pkg)',
-					summary: 'Get all identifiers as a flat list of Identifier instances (cached per Pkg)',
-					source_line: 44,
-					type_signature: '(): Identifier[]',
-					return_type: 'Identifier[]',
-					parameters: [],
-				},
-				{
-					name: 'lookup_identifier_by_name',
-					kind: 'function',
-					doc_comment:
-						'Look up an identifier by name (flat namespace)\nReturns an Identifier instance if found',
-					summary:
-						'Look up an identifier by name (flat namespace)\nReturns an Identifier instance if found',
-					source_line: 64,
-					type_signature: '(name: string): Identifier | undefined',
-					return_type: 'Identifier | undefined',
-					parameters: [
-						{
-							name: 'name',
-							type: 'string',
-							optional: false,
-						},
-					],
-				},
-				{
-					name: 'is_known_identifier',
-					kind: 'function',
-					doc_comment: 'Check if an identifier is documented',
-					summary: 'Check if an identifier is documented',
-					source_line: 72,
-					type_signature: '(name: string): boolean',
-					return_type: 'boolean',
-					parameters: [
-						{
-							name: 'name',
-							type: 'string',
-							optional: false,
-						},
-					],
-				},
-				{
-					name: 'search_identifiers',
-					kind: 'function',
-					doc_comment:
-						'Search identifiers by name (fuzzy match)\nReturns Identifier instances sorted by relevance',
-					summary:
-						'Search identifiers by name (fuzzy match)\nReturns Identifier instances sorted by relevance',
-					source_line: 80,
-					type_signature: '(query: string): Identifier[]',
-					return_type: 'Identifier[]',
-					parameters: [
-						{
-							name: 'query',
-							type: 'string',
-							optional: false,
-						},
-					],
-				},
-			],
-			module_comment:
-				'API documentation data helpers\nFunctions for looking up and searching identifiers using rich Module/Identifier classes',
-		},
-		{
 			path: 'Breadcrumb.svelte',
 			declarations: [
 				{
@@ -2632,7 +2552,7 @@ export const src_json: Src_Json = {
 						'Rich runtime representation of an exported identifier with computed properties.\n\nCombines:\n- Minimal Src_Module_Declaration data (serializable)\n- Parent Module reference (provides Pkg context)\n- Lazy-computed URLs, import statements, etc.\n- Query methods for ergonomic usage',
 					summary:
 						'Rich runtime representation of an exported identifier with computed properties.',
-					source_line: 31,
+					source_line: 30,
 					members: [
 						{
 							name: 'module',
@@ -2647,134 +2567,158 @@ export const src_json: Src_Json = {
 							type_signature: 'Src_Module_Declaration',
 						},
 						{
+							name: 'pkg',
+							kind: 'variable',
+							doc_comment: 'Get parent Pkg for accessing package metadata.',
+							summary: 'Get parent Pkg for accessing package metadata.',
+						},
+						{
+							name: 'module_path',
+							kind: 'variable',
+							doc_comment: 'Module path where this identifier is defined (e.g., "./Alert.ts").',
+							summary: 'Module path where this identifier is defined (e.g., "./Alert.ts").',
+						},
+						{
+							name: 'name',
+							kind: 'variable',
+							doc_comment: 'Identifier name (export name).',
+							summary: 'Identifier name (export name).',
+						},
+						{
+							name: 'kind',
+							kind: 'variable',
+							doc_comment: 'Declaration kind (type, function, class, etc.).',
+							summary: 'Declaration kind (type, function, class, etc.).',
+						},
+						{
 							name: 'source_url',
 							kind: 'variable',
 							doc_comment:
-								'GitHub source URL with line number\nExample: "https://github.com/ryanatkn/fuz/blob/main/src/lib/Alert.ts#L42"',
+								'GitHub source URL with line number.\nExample: "https://github.com/ryanatkn/fuz/blob/main/src/lib/Alert.ts#L42"',
 							summary:
-								'GitHub source URL with line number\nExample: "https://github.com/ryanatkn/fuz/blob/main/src/lib/Alert.ts#L42"',
+								'GitHub source URL with line number.\nExample: "https://github.com/ryanatkn/fuz/blob/main/src/lib/Alert.ts#L42"',
 						},
 						{
 							name: 'api_url',
 							kind: 'variable',
 							doc_comment:
-								'API documentation URL (hash-based navigation)\nExample: "/docs/api#Alert"',
-							summary: 'API documentation URL (hash-based navigation)\nExample: "/docs/api#Alert"',
+								'API documentation URL (hash-based navigation).\nExample: "/docs/api#Alert"',
+							summary: 'API documentation URL (hash-based navigation).\nExample: "/docs/api#Alert"',
 						},
 						{
 							name: 'import_statement',
 							kind: 'variable',
 							doc_comment:
-								'Generated TypeScript import statement\nExample: "import {Alert} from \'@ryanatkn/fuz/Alert.js\';"',
+								'Generated TypeScript import statement.\nExample: "import {Alert} from \'@ryanatkn/fuz/Alert.js\';"',
 							summary:
-								'Generated TypeScript import statement\nExample: "import {Alert} from \'@ryanatkn/fuz/Alert.js\';"',
+								'Generated TypeScript import statement.\nExample: "import {Alert} from \'@ryanatkn/fuz/Alert.js\';"',
 						},
 						{
 							name: 'docs_link',
 							kind: 'variable',
 							doc_comment:
-								'Public documentation link (if homepage_url is available)\nExample: "https://fuz.ryanatkn.com/docs/api#Alert"',
+								'Public documentation link (if homepage_url is available).\nExample: "https://fuz.ryanatkn.com/docs/api#Alert"',
 							summary:
-								'Public documentation link (if homepage_url is available)\nExample: "https://fuz.ryanatkn.com/docs/api#Alert"',
+								'Public documentation link (if homepage_url is available).\nExample: "https://fuz.ryanatkn.com/docs/api#Alert"',
 						},
 						{
 							name: 'display_name',
 							kind: 'variable',
 							doc_comment:
-								'Display name with generic parameters\nExample: "Map<K extends string, V = unknown>"',
+								'Display name with generic parameters.\nExample: "Map<K extends string, V = unknown>"',
 							summary:
-								'Display name with generic parameters\nExample: "Map<K extends string, V = unknown>"',
+								'Display name with generic parameters.\nExample: "Map<K extends string, V = unknown>"',
 						},
 						{
 							name: 'type_summary',
 							kind: 'variable',
 							doc_comment:
-								"Truncated type signature for tooltips\nExample: \"type Alert = { status: 'info' | 'success'...\"",
+								"Truncated type signature for tooltips.\nExample: \"type Alert = { status: 'info' | 'success'...\"",
 							summary:
-								"Truncated type signature for tooltips\nExample: \"type Alert = { status: 'info' | 'success'...\"",
+								"Truncated type signature for tooltips.\nExample: \"type Alert = { status: 'info' | 'success'...\"",
 						},
 						{
 							name: 'has_examples',
 							kind: 'function',
 							type_signature: '() => boolean',
-							doc_comment: 'Check if identifier has code examples',
-							summary: 'Check if identifier has code examples',
+							doc_comment: 'Check if identifier has code examples.',
+							summary: 'Check if identifier has code examples.',
 						},
 						{
 							name: 'is_deprecated',
 							kind: 'function',
 							type_signature: '() => boolean',
-							doc_comment: 'Check if identifier is deprecated',
-							summary: 'Check if identifier is deprecated',
+							doc_comment: 'Check if identifier is deprecated.',
+							summary: 'Check if identifier is deprecated.',
 						},
 						{
 							name: 'has_documentation',
 							kind: 'function',
 							type_signature: '() => boolean',
-							doc_comment: 'Check if identifier has documentation (doc comment or summary)',
-							summary: 'Check if identifier has documentation (doc comment or summary)',
+							doc_comment: 'Check if identifier has documentation (doc comment or summary).',
+							summary: 'Check if identifier has documentation (doc comment or summary).',
 						},
 						{
 							name: 'is_function',
 							kind: 'function',
 							type_signature: '() => boolean',
-							doc_comment: 'Check if identifier is a function',
-							summary: 'Check if identifier is a function',
+							doc_comment: 'Check if identifier is a function.',
+							summary: 'Check if identifier is a function.',
 						},
 						{
 							name: 'is_type',
 							kind: 'function',
 							type_signature: '() => boolean',
-							doc_comment: 'Check if identifier is a type',
-							summary: 'Check if identifier is a type',
+							doc_comment: 'Check if identifier is a type.',
+							summary: 'Check if identifier is a type.',
 						},
 						{
 							name: 'is_component',
 							kind: 'function',
 							type_signature: '() => boolean',
-							doc_comment: 'Check if identifier is a Svelte component',
-							summary: 'Check if identifier is a Svelte component',
+							doc_comment: 'Check if identifier is a Svelte component.',
+							summary: 'Check if identifier is a Svelte component.',
 						},
 						{
 							name: 'is_class',
 							kind: 'function',
 							type_signature: '() => boolean',
-							doc_comment: 'Check if identifier is a class',
-							summary: 'Check if identifier is a class',
+							doc_comment: 'Check if identifier is a class.',
+							summary: 'Check if identifier is a class.',
 						},
 						{
 							name: 'has_parameters',
 							kind: 'function',
 							type_signature: '() => boolean',
-							doc_comment: 'Check if function/method has parameters',
-							summary: 'Check if function/method has parameters',
+							doc_comment: 'Check if function/method has parameters.',
+							summary: 'Check if function/method has parameters.',
 						},
 						{
 							name: 'has_props',
 							kind: 'function',
 							type_signature: '() => boolean',
-							doc_comment: 'Check if component has props',
-							summary: 'Check if component has props',
+							doc_comment: 'Check if component has props.',
+							summary: 'Check if component has props.',
 						},
 						{
 							name: 'has_return_type',
 							kind: 'function',
 							type_signature: '() => boolean',
-							doc_comment: 'Check if function has a return type',
-							summary: 'Check if function has a return type',
+							doc_comment: 'Check if function has a return type.',
+							summary: 'Check if function has a return type.',
 						},
 						{
 							name: 'has_generics',
 							kind: 'function',
 							type_signature: '() => boolean',
-							doc_comment: 'Check if type/function has generic parameters',
-							summary: 'Check if type/function has generic parameters',
+							doc_comment: 'Check if type/function has generic parameters.',
+							summary: 'Check if type/function has generic parameters.',
 						},
 					],
 				},
 			],
 			module_comment:
-				'Rich runtime Identifier class following the "minimal + rich" pattern.\n\nRepresents an exported identifier from a module (function, type, class, component, etc.)\nWraps minimal serializable declaration data with computed properties and query methods.\nPattern inspired by Pkg class in pkg.ts.\n\n@see src_json.ts for minimal serializable types\n@see module.svelte.ts for parent Module class',
+				'Rich runtime Identifier class following the "minimal + rich" pattern.\n\nRepresents an exported identifier from a module (function, type, class, component, etc.)\nWraps minimal serializable declaration data with computed properties and query methods.\nPart of the API documentation hierarchy: Pkg -> Module -> Identifier\n\n@see module.svelte.ts for parent Module class\n@see pkg.svelte.ts for root Pkg class\n@see src_json.ts for minimal serializable types',
 		},
 		{
 			path: 'Img_Or_Svg.svelte',
@@ -3272,7 +3216,7 @@ export const src_json: Src_Json = {
 					doc_comment:
 						'Rich runtime representation of a source module with computed properties.\n\nCombines:\n- Minimal Src_Module data (serializable)\n- Full Pkg reference (for generating URLs, import statements, etc.)\n- Lazy-computed Identifier instances\n- Query methods for ergonomic usage',
 					summary: 'Rich runtime representation of a source module with computed properties.',
-					source_line: 24,
+					source_line: 25,
 					members: [
 						{
 							name: 'pkg',
@@ -3287,45 +3231,57 @@ export const src_json: Src_Json = {
 							type_signature: 'Src_Module',
 						},
 						{
+							name: 'path',
+							kind: 'variable',
+							doc_comment: 'Module path relative to src/lib (e.g., "./Alert.ts").',
+							summary: 'Module path relative to src/lib (e.g., "./Alert.ts").',
+						},
+						{
+							name: 'module_comment',
+							kind: 'variable',
+							doc_comment: 'Module-level JSDoc comment.',
+							summary: 'Module-level JSDoc comment.',
+						},
+						{
 							name: 'identifiers',
 							kind: 'variable',
 							doc_comment:
-								'Lazy-computed array of Identifier instances\nFilters out default exports and creates rich Identifier objects',
+								'Lazy-computed array of Identifier instances.\nFilters out default exports and creates rich Identifier objects.',
 							summary:
-								'Lazy-computed array of Identifier instances\nFilters out default exports and creates rich Identifier objects',
+								'Lazy-computed array of Identifier instances.\nFilters out default exports and creates rich Identifier objects.',
 						},
 						{
 							name: 'module_url',
 							kind: 'variable',
-							doc_comment: 'GitHub source URL for the module file',
-							summary: 'GitHub source URL for the module file',
+							doc_comment: 'GitHub source URL for the module file.',
+							summary: 'GitHub source URL for the module file.',
 						},
 						{
 							name: 'has_declarations',
 							kind: 'function',
 							type_signature: '() => boolean',
-							doc_comment: 'Check if module has any declarations',
-							summary: 'Check if module has any declarations',
+							doc_comment: 'Check if module has any declarations.',
+							summary: 'Check if module has any declarations.',
 						},
 						{
 							name: 'has_module_comment',
 							kind: 'function',
 							type_signature: '() => boolean',
-							doc_comment: 'Check if module has a module-level comment',
-							summary: 'Check if module has a module-level comment',
+							doc_comment: 'Check if module has a module-level comment.',
+							summary: 'Check if module has a module-level comment.',
 						},
 						{
 							name: 'get_identifier_by_name',
 							kind: 'function',
 							type_signature: '(name: string) => Identifier | undefined',
-							doc_comment: 'Look up an identifier by name within this module',
-							summary: 'Look up an identifier by name within this module',
+							doc_comment: 'Look up an identifier by name within this module.',
+							summary: 'Look up an identifier by name within this module.',
 						},
 					],
 				},
 			],
 			module_comment:
-				'Rich runtime Module class following the "minimal + rich" pattern.\n\nWraps minimal serializable Src_Module data with computed properties and query methods.\nPattern inspired by Pkg class in pkg.ts.\n\n@see src_json.ts for minimal serializable types\n@see identifier.svelte.ts for child Identifier class',
+				'Rich runtime Module class following the "minimal + rich" pattern.\n\nWraps minimal serializable Src_Module data with computed properties and query methods.\nPart of the API documentation hierarchy: Pkg -> Module -> Identifier\n\n@see pkg.svelte.ts for parent Pkg class\n@see identifier.svelte.ts for child Identifier class\n@see src_json.ts for minimal serializable types',
 		},
 		{
 			path: 'Package_Detail.svelte',
@@ -3564,86 +3520,147 @@ export const src_json: Src_Json = {
 			],
 		},
 		{
-			path: 'pkg.ts',
+			path: 'pkg.svelte.ts',
 			declarations: [
 				{
 					name: 'Pkg',
-					kind: 'type',
+					kind: 'class',
 					doc_comment:
-						'Combines `package_json` and `src_json` into a more convenient format.\nThis is our own version that uses our extended Src_Json type.',
-					summary:
-						'Combines `package_json` and `src_json` into a more convenient format.\nThis is our own version that uses our extended Src_Json type.',
-					source_line: 12,
-					type_signature: 'Pkg',
-					properties: [
+						'Rich runtime package representation following the "minimal + rich" pattern.\n\nWraps minimal serializable data (package_json, src_json) with computed properties\nand provides the root of the API documentation hierarchy:\nPkg -> modules -> identifiers\n\nAll computed properties are automatically cached via Svelte\'s $derived mechanism,\nincluding the identifier_map which enables O(1) lookups by name.',
+					summary: 'Rich runtime package representation following the "minimal + rich" pattern.',
+					see_also: ['for Module class', 'for Identifier class'],
+					source_line: 22,
+					members: [
 						{
 							name: 'package_json',
 							kind: 'variable',
+							summary: 'readonly',
 							type_signature: 'Package_Json',
 						},
 						{
 							name: 'src_json',
 							kind: 'variable',
+							summary: 'readonly',
 							type_signature: 'Src_Json',
 						},
 						{
 							name: 'name',
 							kind: 'variable',
-							type_signature: 'string',
+							doc_comment: "Package name (e.g., '@ryanatkn/fuz').",
+							summary: "Package name (e.g., '@ryanatkn/fuz').",
 						},
 						{
 							name: 'repo_name',
 							kind: 'variable',
-							type_signature: 'string',
+							doc_comment: "Repository name without scope (e.g., 'fuz').",
+							summary: "Repository name without scope (e.g., 'fuz').",
 						},
 						{
 							name: 'repo_url',
 							kind: 'variable',
-							type_signature: 'Url',
+							doc_comment: "GitHub repository URL (e.g., 'https://github.com/ryanatkn/fuz').",
+							summary: "GitHub repository URL (e.g., 'https://github.com/ryanatkn/fuz').",
 						},
 						{
 							name: 'owner_name',
 							kind: 'variable',
-							type_signature: 'string | null',
-							doc_comment: 'The github user/org.',
-							summary: 'The github user/org.',
+							doc_comment: "GitHub owner/org name (e.g., 'ryanatkn').",
+							summary: "GitHub owner/org name (e.g., 'ryanatkn').",
 						},
 						{
 							name: 'homepage_url',
 							kind: 'variable',
-							type_signature: 'Url | null',
+							doc_comment: "Homepage URL (e.g., 'https://www.fuz.dev/').",
+							summary: "Homepage URL (e.g., 'https://www.fuz.dev/').",
 						},
 						{
 							name: 'logo_url',
 							kind: 'variable',
-							type_signature: 'Url | null',
+							doc_comment: 'Logo URL (falls back to favicon.png).',
+							summary: 'Logo URL (falls back to favicon.png).',
 						},
 						{
 							name: 'logo_alt',
 							kind: 'variable',
-							type_signature: 'string',
-						},
-						{
-							name: 'npm_url',
-							kind: 'variable',
-							type_signature: 'Url | null',
-						},
-						{
-							name: 'changelog_url',
-							kind: 'variable',
-							type_signature: 'Url | null',
+							doc_comment: 'Logo alt text.',
+							summary: 'Logo alt text.',
 						},
 						{
 							name: 'published',
 							kind: 'variable',
-							type_signature: 'boolean',
+							doc_comment: 'Whether package is published to npm.',
+							summary: 'Whether package is published to npm.',
+						},
+						{
+							name: 'npm_url',
+							kind: 'variable',
+							doc_comment: 'npm package URL (if published).',
+							summary: 'npm package URL (if published).',
+						},
+						{
+							name: 'changelog_url',
+							kind: 'variable',
+							doc_comment: 'Changelog URL (if published).',
+							summary: 'Changelog URL (if published).',
+						},
+						{
+							name: 'org_url',
+							kind: 'variable',
+							doc_comment: "Organization URL (e.g., 'https://github.com/ryanatkn').",
+							summary: "Organization URL (e.g., 'https://github.com/ryanatkn').",
+						},
+						{
+							name: 'modules',
+							kind: 'variable',
+							doc_comment: 'All modules as rich Module instances (cached via $derived).',
+							summary: 'All modules as rich Module instances (cached via $derived).',
+						},
+						{
+							name: 'identifiers',
+							kind: 'variable',
+							doc_comment:
+								'All identifiers across all modules as a flat array (cached via $derived).',
+							summary: 'All identifiers across all modules as a flat array (cached via $derived).',
+						},
+						{
+							name: 'identifier_map',
+							kind: 'variable',
+							doc_comment:
+								'Identifier lookup map by name (cached via $derived).\nProvides O(1) lookup after first access.',
+							summary:
+								'Identifier lookup map by name (cached via $derived).\nProvides O(1) lookup after first access.',
+						},
+						{
+							name: 'lookup_identifier',
+							kind: 'function',
+							type_signature: '(name: string) => Identifier | undefined',
+							doc_comment: 'Look up an identifier by name.',
+							summary: 'Look up an identifier by name.',
+						},
+						{
+							name: 'has_identifier',
+							kind: 'function',
+							type_signature: '(name: string) => boolean',
+							doc_comment: 'Check if an identifier exists.',
+							summary: 'Check if an identifier exists.',
+						},
+						{
+							name: 'search_identifiers',
+							kind: 'function',
+							type_signature: '(query: string) => Identifier[]',
+							doc_comment: 'Search identifiers by query string.',
+							summary: 'Search identifiers by query string.',
 						},
 					],
 				},
 				{
 					name: 'parse_pkg',
 					kind: 'function',
-					source_line: 30,
+					doc_comment:
+						'Convenience factory function for creating Pkg instances\n(kept for backward compatibility during migration)',
+					summary:
+						'Convenience factory function for creating Pkg instances\n(kept for backward compatibility during migration)',
+					source_line: 202,
 					type_signature:
 						'(package_json: { [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }, src_json: Src_Json): Pkg',
 					return_type: 'Pkg',
@@ -3663,7 +3680,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'parse_repo_name',
 					kind: 'function',
-					source_line: 90,
+					source_line: 207,
 					type_signature: '(name: string): string',
 					return_type: 'string',
 					parameters: [
@@ -3675,23 +3692,9 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'parse_org_url',
-					kind: 'function',
-					source_line: 101,
-					type_signature: '(pkg: Pkg): string | null',
-					return_type: 'string | null',
-					parameters: [
-						{
-							name: 'pkg',
-							type: 'Pkg',
-							optional: false,
-						},
-					],
-				},
-				{
 					name: 'pkg_context',
 					kind: 'variable',
-					source_line: 111,
+					source_line: 218,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Pkg; maybe_get: () => Pkg | undefined; set: (value: Pkg) => Pkg; }',
 				},

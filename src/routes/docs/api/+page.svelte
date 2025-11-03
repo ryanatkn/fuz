@@ -1,6 +1,5 @@
 <script lang="ts">
-	import {get_all_identifiers, search_identifiers} from '$lib/api_data.js';
-	import {pkg_context} from '$lib/pkg.js';
+	import {pkg_context} from '$lib/pkg.svelte.js';
 	import Identifier_Detail from '$lib/Identifier_Detail.svelte';
 	import {get_tome_by_name} from '$lib/tome.js';
 	import Tome_Content from '$lib/Tome_Content.svelte';
@@ -12,11 +11,11 @@
 
 	let search_query = $state('');
 
-	const all_identifiers = $derived(get_all_identifiers());
+	const all_identifiers = $derived(pkg.identifiers);
 
 	// Search and sort alphabetically
 	const sorted_identifiers = $derived.by(() => {
-		const items = search_query.trim() ? search_identifiers(search_query) : all_identifiers;
+		const items = search_query.trim() ? pkg.search_identifiers(search_query) : all_identifiers;
 		return items.sort((a, b) => a.name.localeCompare(b.name));
 	});
 </script>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
 
-	import type {Pkg} from '$lib/pkg.js';
+	import type {Pkg} from '$lib/pkg.svelte.js';
 	import type {Tome} from '$lib/tome.js';
 	import Package_Summary from '$lib/Package_Summary.svelte';
 

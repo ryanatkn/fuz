@@ -3,7 +3,7 @@
 	import type {Snippet} from 'svelte';
 	import {format_url} from '@ryanatkn/belt/url.js';
 
-	import type {Pkg} from '$lib/pkg.js';
+	import type {Pkg} from '$lib/pkg.svelte.js';
 	import Img_Or_Svg from '$lib/Img_Or_Svg.svelte';
 
 	interface Props {

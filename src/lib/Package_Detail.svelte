@@ -4,8 +4,7 @@
 	import {format_url} from '@ryanatkn/belt/url.js';
 	import type {Snippet} from 'svelte';
 
-	import type {Pkg} from '$lib/pkg.js';
-	import {Module} from '$lib/module.svelte.js';
+	import type {Pkg} from '$lib/pkg.svelte.js';
 	import Details from '$lib/Details.svelte';
 	import Img_Or_Svg from '$lib/Img_Or_Svg.svelte';
 	import Declaration_Link from '$lib/Declaration_Link.svelte';
@@ -25,12 +24,7 @@
 
 	// TODO show other data (lines of code)
 
-	const {package_json, src_json} = $derived(pkg);
-
-	// Create Module instances from src_json
-	const rich_modules = $derived(
-		src_json.modules ? src_json.modules.map((src_module) => new Module(pkg, src_module)) : [],
-	);
+	const {package_json} = $derived(pkg);
 
 	// TODO helper (zod parser?)
 	const repository_url = $derived(
@@ -171,10 +165,10 @@
 			</div>
 		{/if}
 	</div>
-	{#if rich_modules.length > 0 && pkg.repo_url}
+	{#if pkg.modules.length > 0 && pkg.repo_url}
 		<section>
 			<menu class="unstyled">
-				{#each rich_modules as module (module.path)}
+				{#each pkg.modules as module (module.path)}
 					<!-- TODO improve rendering and enrich data - start with the type (not just extension - mime?) -->
 					{@const module_display_name = strip_start(module.path, './')}
 					<li

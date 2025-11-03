@@ -3,7 +3,7 @@ import {describe, test, assert} from 'vitest';
 import {create_identifier_contextmenu} from '$lib/identifier_contextmenu.js';
 import type {Src_Module_Declaration, Src_Module, Src_Json} from '$lib/src_json.js';
 import type {Package_Json} from '@ryanatkn/belt/package_json.js';
-import type {Pkg} from '$lib/pkg.js';
+import {Pkg} from '$lib/pkg.svelte.js';
 import {Module} from '$lib/module.svelte.js';
 import {Identifier} from '$lib/identifier.svelte.js';
 
@@ -30,20 +30,7 @@ const create_mock_pkg = (options?: {
 		modules: [],
 	};
 
-	return {
-		package_json,
-		src_json,
-		name: pkg_name,
-		repo_name: pkg_name.split('/')[1] ?? pkg_name,
-		repo_url,
-		owner_name: 'test',
-		homepage_url,
-		logo_url: null,
-		logo_alt: 'test logo',
-		npm_url: null,
-		changelog_url: null,
-		published: false,
-	};
+	return new Pkg(package_json, src_json);
 };
 
 // Helper to create an Identifier for testing

@@ -57,6 +57,7 @@ Fuz uses distinctive naming conventions compared to typical TypeScript/Svelte pr
 - Tab indentation, 100 character line width
 - Tends toward flat file structure with co-located related code
 - Heavy use of Svelte 5's new `*.svelte.ts` pattern for reactive state management
+- **JSDoc comments** (`/** ... */`) use proper sentence structure with periods; inline comments (`//`) can be sentence fragments and should not start with capital letters
 
 This style is consistent across the author's projects (Moss, Belt, Gro) and emphasizes readability and simplicity over conventional JavaScript/TypeScript patterns.
 
