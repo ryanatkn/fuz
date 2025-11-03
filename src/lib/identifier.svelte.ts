@@ -94,6 +94,8 @@ export class Identifier {
 		this.decl = decl;
 	}
 
+	// TODO BLOCK maybe refactor these to $derived?
+
 	/**
 	 * Check if identifier has code examples.
 	 */
