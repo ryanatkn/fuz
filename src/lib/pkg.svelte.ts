@@ -5,15 +5,12 @@ import {create_context} from '$lib/context_helpers.js';
 import type {Src_Json} from '$lib/src_json.js';
 import {Identifier} from '$lib/identifier.svelte.js';
 import {Module} from '$lib/module.svelte.js';
-
-// TODO where does this belong? repo_helpers?
-/**
- * Parse repository URL from package.json format.
- */
-const parse_repo = (r: string | null | undefined): string | null => {
-	if (!r) return null;
-	return strip_end(strip_start(strip_end(r, '.git'), 'git+'), '/');
-};
+import {
+	parse_repo_name,
+	parse_repo_url,
+	url_github_file,
+	url_npm_package,
+} from '$lib/package_helpers.js';
 
 /**
  * Rich runtime package representation following the "minimal + rich" pattern.
@@ -47,13 +44,7 @@ export class Pkg {
 	 */
 	repo_url = $derived(
 		(() => {
-			const url = parse_repo(
-				this.package_json.repository
-					? typeof this.package_json.repository === 'string'
-						? this.package_json.repository
-						: this.package_json.repository.url
-					: null,
-			);
+			const url = parse_repo_url(this.package_json.repository);
 			if (!url) {
 				throw Error('failed to parse pkg - `repo_url` is required in package_json');
 			}
@@ -102,15 +93,13 @@ export class Pkg {
 	/**
 	 * npm package URL (if published).
 	 */
-	npm_url = $derived(
-		this.published ? 'https://www.npmjs.com/package/' + this.package_json.name : null,
-	);
+	npm_url = $derived(this.published ? url_npm_package(this.package_json.name) : null);
 
 	/**
 	 * Changelog URL (if published).
 	 */
 	changelog_url = $derived(
-		this.published && this.repo_url ? this.repo_url + '/blob/main/CHANGELOG.md' : null,
+		this.published && this.repo_url ? url_github_file(this.repo_url, 'CHANGELOG.md') : null,
 	);
 
 	/**
@@ -211,18 +200,6 @@ export class Pkg {
  */
 export const parse_pkg = (package_json: Package_Json, src_json: Src_Json): Pkg => {
 	return new Pkg(package_json, src_json);
-};
-
-// TODO proper parsing with a schema
-export const parse_repo_name = (name: string): string => {
-	if (name[0] === '@') {
-		const parts = name.split('/');
-		if (parts.length < 2) {
-			throw new Error(`invalid scoped package name: "${name}" (expected format: @org/package)`);
-		}
-		return parts[1]!;
-	}
-	return name;
 };
 
 export const pkg_context = create_context<Pkg>();

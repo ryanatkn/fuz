@@ -1,6 +1,6 @@
 <script lang="ts">
 	import {page} from '$app/state';
-	import {ensure_end, strip_end, strip_start} from '@ryanatkn/belt/string.js';
+	import {ensure_end, strip_start} from '@ryanatkn/belt/string.js';
 	import {format_url} from '@ryanatkn/belt/url.js';
 	import type {Snippet} from 'svelte';
 
@@ -9,6 +9,7 @@
 	import Img_Or_Svg from '$lib/Img_Or_Svg.svelte';
 	import Declaration_Link from '$lib/Declaration_Link.svelte';
 	import Module_Link from '$lib/Module_Link.svelte';
+	import {parse_repo_url, url_github_file} from '$lib/package_helpers.js';
 
 	interface Props {
 		pkg: Pkg; // TODO normalized version with cached primitives?
@@ -26,25 +27,9 @@
 
 	const {package_json} = $derived(pkg);
 
-	// TODO helper (zod parser?)
-	const repository_url = $derived(
-		package_json.repository
-			? strip_start(
-					strip_end(
-						strip_end(
-							typeof package_json.repository === 'string'
-								? package_json.repository
-								: package_json.repository.url,
-							'.git',
-						),
-						'/',
-					),
-					'git+',
-				)
-			: null,
-	);
+	const repository_url = $derived(parse_repo_url(package_json.repository));
 	const license_url = $derived(
-		package_json.license && repository_url ? repository_url + '/blob/main/LICENSE' : null,
+		package_json.license && repository_url ? url_github_file(repository_url, 'LICENSE') : null,
 	);
 </script>
 

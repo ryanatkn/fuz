@@ -17,6 +17,7 @@ import {
 	get_declaration_display_name,
 	get_type_summary,
 } from '$lib/src_json.js';
+import {url_github_file} from '$lib/package_helpers.js';
 
 /**
  * Rich runtime representation of an exported identifier with computed properties.
@@ -64,11 +65,9 @@ export class Identifier {
 	 * Example: "https://github.com/ryanatkn/fuz/blob/main/src/lib/Alert.ts#L42"
 	 */
 	source_url = $derived(
-		(() => {
-			if (!this.pkg.repo_url || !this.decl.source_line) return undefined;
-			const clean_path = this.module_path.replace(/^\.\//, '');
-			return `${this.pkg.repo_url}/blob/main/src/lib/${clean_path}#L${this.decl.source_line}`;
-		})(),
+		this.pkg.repo_url && this.decl.source_line
+			? url_github_file(this.pkg.repo_url, `src/lib/${this.module_path}`, this.decl.source_line)
+			: undefined,
 	);
 
 	/**

@@ -2552,7 +2552,7 @@ export const src_json: Src_Json = {
 						'Rich runtime representation of an exported identifier with computed properties.\n\nCombines:\n- Minimal Src_Module_Declaration data (serializable)\n- Parent Module reference (provides Pkg context)\n- Lazy-computed URLs, import statements, etc.\n- Query methods for ergonomic usage',
 					summary:
 						'Rich runtime representation of an exported identifier with computed properties.',
-					source_line: 30,
+					source_line: 31,
 					members: [
 						{
 							name: 'module',
@@ -3216,7 +3216,7 @@ export const src_json: Src_Json = {
 					doc_comment:
 						'Rich runtime representation of a source module with computed properties.\n\nCombines:\n- Minimal Src_Module data (serializable)\n- Full Pkg reference (for generating URLs, import statements, etc.)\n- Lazy-computed Identifier instances\n- Query methods for ergonomic usage',
 					summary: 'Rich runtime representation of a source module with computed properties.',
-					source_line: 25,
+					source_line: 26,
 					members: [
 						{
 							name: 'pkg',
@@ -3327,6 +3327,91 @@ export const src_json: Src_Json = {
 						},
 					],
 					source_line: 1,
+				},
+			],
+		},
+		{
+			path: 'package_helpers.ts',
+			declarations: [
+				{
+					name: 'parse_repo_url',
+					kind: 'function',
+					doc_comment:
+						"Parse repository URL from package.json format.\nStrips 'git+', '.git', and trailing slashes.",
+					summary:
+						"Parse repository URL from package.json format.\nStrips 'git+', '.git', and trailing slashes.",
+					source_line: 8,
+					type_signature:
+						'(repository: string | { [x: string]: unknown; type: string; url: string; directory?: string | undefined; } | undefined): string | null',
+					return_type: 'string | null',
+					parameters: [
+						{
+							name: 'repository',
+							type: 'string | { [x: string]: unknown; type: string; url: string; directory?: string | undefined; } | undefined',
+							optional: false,
+						},
+					],
+				},
+				{
+					name: 'parse_repo_name',
+					kind: 'function',
+					doc_comment:
+						"Extract repository name without scope from package name.\nExamples: '@org/pkg' -> 'pkg', 'pkg' -> 'pkg'",
+					summary:
+						"Extract repository name without scope from package name.\nExamples: '@org/pkg' -> 'pkg', 'pkg' -> 'pkg'",
+					source_line: 19,
+					type_signature: '(name: string): string',
+					return_type: 'string',
+					parameters: [
+						{
+							name: 'name',
+							type: 'string',
+							optional: false,
+						},
+					],
+				},
+				{
+					name: 'url_github_file',
+					kind: 'function',
+					doc_comment: 'Build GitHub file URL for a repository.',
+					summary: 'Build GitHub file URL for a repository.',
+					source_line: 33,
+					type_signature:
+						'(repo_url: string, file_path: string, line?: number | undefined): string',
+					return_type: 'string',
+					parameters: [
+						{
+							name: 'repo_url',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'file_path',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'line',
+							type: 'number | undefined',
+							optional: true,
+						},
+					],
+				},
+				{
+					name: 'url_npm_package',
+					kind: 'function',
+					doc_comment: 'Build npm package URL.',
+					summary: 'Build npm package URL.',
+					source_line: 46,
+					type_signature: '(package_name: string): string',
+					return_type: 'string',
+					parameters: [
+						{
+							name: 'package_name',
+							type: 'string',
+							optional: false,
+						},
+					],
 				},
 			],
 		},
@@ -3529,7 +3614,7 @@ export const src_json: Src_Json = {
 						'Rich runtime package representation following the "minimal + rich" pattern.\n\nWraps minimal serializable data (package_json, src_json) with computed properties\nand provides the root of the API documentation hierarchy:\nPkg -> modules -> identifiers\n\nAll computed properties are automatically cached via Svelte\'s $derived mechanism,\nincluding the identifier_map which enables O(1) lookups by name.',
 					summary: 'Rich runtime package representation following the "minimal + rich" pattern.',
 					see_also: ['for Module class', 'for Identifier class'],
-					source_line: 31,
+					source_line: 28,
 					members: [
 						{
 							name: 'package_json',
@@ -3660,7 +3745,7 @@ export const src_json: Src_Json = {
 						'Convenience factory function for creating Pkg instances\n(kept for backward compatibility during migration)',
 					summary:
 						'Convenience factory function for creating Pkg instances\n(kept for backward compatibility during migration)',
-					source_line: 212,
+					source_line: 201,
 					type_signature:
 						'(package_json: { [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }, src_json: Src_Json): Pkg',
 					return_type: 'Pkg',
@@ -3678,23 +3763,9 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'parse_repo_name',
-					kind: 'function',
-					source_line: 217,
-					type_signature: '(name: string): string',
-					return_type: 'string',
-					parameters: [
-						{
-							name: 'name',
-							type: 'string',
-							optional: false,
-						},
-					],
-				},
-				{
 					name: 'pkg_context',
 					kind: 'variable',
-					source_line: 228,
+					source_line: 205,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Pkg; maybe_get: () => Pkg | undefined; set: (value: Pkg) => Pkg; }',
 				},
