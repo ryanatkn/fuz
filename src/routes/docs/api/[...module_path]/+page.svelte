@@ -5,6 +5,7 @@
 	import Tome_Content from '$lib/Tome_Content.svelte';
 	import Tome_Section from '$lib/Tome_Section.svelte';
 	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
+	import Module_Search from '$routes/docs/api/Module_Search.svelte';
 
 	const {params} = $props();
 
@@ -53,18 +54,14 @@
 			</blockquote>
 		{/if}
 
-		<input
-			type="search"
-			placeholder="Search identifiers in this module..."
-			bind:value={search_query}
-		/>
-
-		<p class="mt_sm">
-			{all_identifiers.length} identifiers
-			{#if search_query}
-				· {sorted_identifiers.length} results
-			{/if}
-		</p>
+		{#if all_identifiers.length > 1}
+			<Module_Search
+				placeholder="search identifiers in this module..."
+				total_count={all_identifiers.length}
+				result_count={sorted_identifiers.length}
+				bind:search_query
+			/>
+		{/if}
 
 		{#if source_url}
 			<p>
