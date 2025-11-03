@@ -17,7 +17,7 @@ import {
 	get_declaration_display_name,
 	get_type_summary,
 } from '$lib/src_json.js';
-import {url_github_file} from '$lib/package_helpers.js';
+import {url_api_doc, url_api_doc_absolute, url_github_file} from '$lib/package_helpers.js';
 
 /**
  * Rich runtime representation of an exported identifier with computed properties.
@@ -74,7 +74,7 @@ export class Identifier {
 	 * API documentation URL (hash-based navigation).
 	 * Example: "/docs/api#Alert"
 	 */
-	api_url = $derived(`/docs/api#${encodeURIComponent(this.name)}`);
+	api_url = $derived(url_api_doc(this.name));
 
 	/**
 	 * Generated TypeScript import statement.
@@ -89,9 +89,7 @@ export class Identifier {
 	 * Example: "https://fuz.ryanatkn.com/docs/api#Alert"
 	 */
 	docs_link = $derived(
-		this.pkg.homepage_url
-			? `${this.pkg.homepage_url}/docs/api#${encodeURIComponent(this.name)}`
-			: undefined,
+		this.pkg.homepage_url ? url_api_doc_absolute(this.pkg.homepage_url, this.name) : undefined,
 	);
 
 	/**

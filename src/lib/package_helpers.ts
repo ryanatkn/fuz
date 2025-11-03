@@ -1,5 +1,6 @@
 import {strip_end, strip_start} from '@ryanatkn/belt/string.js';
 import type {Package_Json} from '@ryanatkn/belt/package_json.js';
+import {resolve} from '$app/paths';
 
 /**
  * Parse repository URL from package.json format.
@@ -30,11 +31,7 @@ export const parse_repo_name = (name: string): string => {
 /**
  * Build GitHub file URL for a repository.
  */
-export const url_github_file = (
-	repo_url: string,
-	file_path: string,
-	line?: number,
-): string => {
+export const url_github_file = (repo_url: string, file_path: string, line?: number): string => {
 	const clean_path = file_path.replace(/^\.\//, '');
 	const base = `${repo_url}/blob/main/${clean_path}`;
 	return line ? `${base}#L${line}` : base;
@@ -45,3 +42,15 @@ export const url_github_file = (
  */
 export const url_npm_package = (package_name: string): string =>
 	'https://www.npmjs.com/package/' + package_name;
+
+/**
+ * Build project-relative API documentation URL with hash anchor (calls resolve internally).
+ */
+export const url_api_doc = (identifier_name: string): string =>
+	resolve(`/docs/api#${encodeURIComponent(identifier_name)}` as any);
+
+/**
+ * Build absolute API documentation URL with domain and hash anchor.
+ */
+export const url_api_doc_absolute = (homepage: string, identifier_name: string): string =>
+	`${homepage}/docs/api#${encodeURIComponent(identifier_name)}`;

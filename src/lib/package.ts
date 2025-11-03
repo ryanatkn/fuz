@@ -2490,7 +2490,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Create contextmenu entries for an identifier',
 					summary: 'Create contextmenu entries for an identifier',
-					source_line: 8,
+					source_line: 7,
 					type_signature: '(identifier: Identifier): Contextmenu_Params[]',
 					return_type: 'Contextmenu_Params[]',
 					parameters: [
@@ -3340,7 +3340,7 @@ export const src_json: Src_Json = {
 						"Parse repository URL from package.json format.\nStrips 'git+', '.git', and trailing slashes.",
 					summary:
 						"Parse repository URL from package.json format.\nStrips 'git+', '.git', and trailing slashes.",
-					source_line: 8,
+					source_line: 9,
 					type_signature:
 						'(repository: string | { [x: string]: unknown; type: string; url: string; directory?: string | undefined; } | undefined): string | null',
 					return_type: 'string | null',
@@ -3359,7 +3359,7 @@ export const src_json: Src_Json = {
 						"Extract repository name without scope from package name.\nExamples: '@org/pkg' -> 'pkg', 'pkg' -> 'pkg'",
 					summary:
 						"Extract repository name without scope from package name.\nExamples: '@org/pkg' -> 'pkg', 'pkg' -> 'pkg'",
-					source_line: 19,
+					source_line: 20,
 					type_signature: '(name: string): string',
 					return_type: 'string',
 					parameters: [
@@ -3375,7 +3375,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Build GitHub file URL for a repository.',
 					summary: 'Build GitHub file URL for a repository.',
-					source_line: 33,
+					source_line: 34,
 					type_signature:
 						'(repo_url: string, file_path: string, line?: number | undefined): string',
 					return_type: 'string',
@@ -3402,12 +3402,51 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Build npm package URL.',
 					summary: 'Build npm package URL.',
-					source_line: 46,
+					source_line: 43,
 					type_signature: '(package_name: string): string',
 					return_type: 'string',
 					parameters: [
 						{
 							name: 'package_name',
+							type: 'string',
+							optional: false,
+						},
+					],
+				},
+				{
+					name: 'url_api_doc',
+					kind: 'function',
+					doc_comment:
+						'Build project-relative API documentation URL with hash anchor (calls resolve internally).',
+					summary:
+						'Build project-relative API documentation URL with hash anchor (calls resolve internally).',
+					source_line: 49,
+					type_signature: '(identifier_name: string): string',
+					return_type: 'string',
+					parameters: [
+						{
+							name: 'identifier_name',
+							type: 'string',
+							optional: false,
+						},
+					],
+				},
+				{
+					name: 'url_api_doc_absolute',
+					kind: 'function',
+					doc_comment: 'Build absolute API documentation URL with domain and hash anchor.',
+					summary: 'Build absolute API documentation URL with domain and hash anchor.',
+					source_line: 55,
+					type_signature: '(homepage: string, identifier_name: string): string',
+					return_type: 'string',
+					parameters: [
+						{
+							name: 'homepage',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'identifier_name',
 							type: 'string',
 							optional: false,
 						},

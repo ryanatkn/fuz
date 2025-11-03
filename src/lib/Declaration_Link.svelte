@@ -1,5 +1,4 @@
 <script lang="ts">
-	import {resolve} from '$app/paths';
 	import type {Snippet} from 'svelte';
 
 	import type {Identifier} from '$lib/identifier.svelte.js';
@@ -26,7 +25,7 @@
 
 <a
 	class="identifier_link chip {identifier.kind}_identifier"
-	href={resolve(identifier.api_url as any)}
+	href={identifier.api_url}
 	{@attach contextmenu_attachment(contextmenu_entries)}
 >
 	{#if children}
