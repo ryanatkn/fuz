@@ -3,6 +3,8 @@
 	import {pkg_context} from '$lib/pkg.svelte.js';
 	import Declaration_Link from '$lib/Declaration_Link.svelte';
 
+	// TODO BLOCK @many maybe merge Declaration_Link/Identifier_Link
+
 	const {
 		/**
 		 * Identifier name to link to

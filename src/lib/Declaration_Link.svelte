@@ -5,6 +5,8 @@
 	import {contextmenu_attachment} from '$lib/contextmenu_state.svelte.js';
 	import {create_identifier_contextmenu} from '$lib/identifier_contextmenu.js';
 
+	// TODO BLOCK @many maybe merge Declaration_Link/Identifier_Link
+
 	const {
 		identifier,
 		children,
