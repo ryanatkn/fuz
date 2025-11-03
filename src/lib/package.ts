@@ -3529,7 +3529,7 @@ export const src_json: Src_Json = {
 						'Rich runtime package representation following the "minimal + rich" pattern.\n\nWraps minimal serializable data (package_json, src_json) with computed properties\nand provides the root of the API documentation hierarchy:\nPkg -> modules -> identifiers\n\nAll computed properties are automatically cached via Svelte\'s $derived mechanism,\nincluding the identifier_map which enables O(1) lookups by name.',
 					summary: 'Rich runtime package representation following the "minimal + rich" pattern.',
 					see_also: ['for Module class', 'for Identifier class'],
-					source_line: 30,
+					source_line: 31,
 					members: [
 						{
 							name: 'package_json',
@@ -3660,7 +3660,7 @@ export const src_json: Src_Json = {
 						'Convenience factory function for creating Pkg instances\n(kept for backward compatibility during migration)',
 					summary:
 						'Convenience factory function for creating Pkg instances\n(kept for backward compatibility during migration)',
-					source_line: 211,
+					source_line: 212,
 					type_signature:
 						'(package_json: { [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }, src_json: Src_Json): Pkg',
 					return_type: 'Pkg',
@@ -3680,7 +3680,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'parse_repo_name',
 					kind: 'function',
-					source_line: 216,
+					source_line: 217,
 					type_signature: '(name: string): string',
 					return_type: 'string',
 					parameters: [
@@ -3694,7 +3694,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'pkg_context',
 					kind: 'variable',
-					source_line: 227,
+					source_line: 228,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Pkg; maybe_get: () => Pkg | undefined; set: (value: Pkg) => Pkg; }',
 				},
