@@ -4822,7 +4822,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'to_tome_pathname',
 					kind: 'function',
-					source_line: 17,
+					source_line: 18,
 					type_signature:
 						'(item: { name: string; category: string; component: any; related: string[]; }, docs_path?: string): string',
 					return_type: 'string',
@@ -4843,14 +4843,14 @@ export const src_json: Src_Json = {
 				{
 					name: 'tomes_context',
 					kind: 'variable',
-					source_line: 20,
+					source_line: 21,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Map<string, { name: string; category: string; component: any; related: string[]; }>; maybe_get: () => Map<string, { name: string; category: string; component: any; related: string[]; }> | undefined; set: (value: Map<...>) => Map<...>; }',
 				},
 				{
 					name: 'get_tome_by_name',
 					kind: 'function',
-					source_line: 22,
+					source_line: 23,
 					type_signature:
 						'(name: string): { name: string; category: string; component: any; related: string[]; }',
 					return_type: '{ name: string; category: string; component: any; related: string[]; }',
@@ -4865,7 +4865,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'tome_context',
 					kind: 'variable',
-					source_line: 29,
+					source_line: 30,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => { name: string; category: string; component: any; related: string[]; }; maybe_get: () => { name: string; category: string; component: any; related: string[]; } | undefined; set: (value: { ...; }) => { ...; }; }',
 				},
