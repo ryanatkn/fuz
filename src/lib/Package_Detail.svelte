@@ -1,6 +1,6 @@
 <script lang="ts">
 	import {page} from '$app/state';
-	import {ensure_end, strip_start} from '@ryanatkn/belt/string.js';
+	import {strip_start} from '@ryanatkn/belt/string.js';
 	import {format_url} from '@ryanatkn/belt/url.js';
 	import type {Snippet} from 'svelte';
 
@@ -9,7 +9,7 @@
 	import Img_Or_Svg from '$lib/Img_Or_Svg.svelte';
 	import Declaration_Link from '$lib/Declaration_Link.svelte';
 	import Module_Link from '$lib/Module_Link.svelte';
-	import {parse_repo_url, url_github_file} from '$lib/package_helpers.js';
+	import {parse_repo_url, url_github_file, url_well_known} from '$lib/package_helpers.js';
 
 	interface Props {
 		pkg: Pkg; // TODO normalized version with cached primitives?
@@ -125,15 +125,11 @@
 					{#if pkg.homepage_url}
 						<span class="title">data</span>
 						<div class="content">
-							<a
-								class="chip"
-								title="data"
-								href="{ensure_end(pkg.homepage_url, '/')}.well-known/package.json">package.json</a
+							<a class="chip" title="data" href={url_well_known(pkg.homepage_url, 'package.json')}
+								>package.json</a
 							>
-							<a
-								class="chip"
-								title="data"
-								href="{ensure_end(pkg.homepage_url, '/')}.well-known/src.json">src.json</a
+							<a class="chip" title="data" href={url_well_known(pkg.homepage_url, 'src.json')}
+								>src.json</a
 							>
 						</div>
 					{/if}

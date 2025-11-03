@@ -70,7 +70,7 @@ export const package_json: Package_Json = {
 		'@sveltejs/vite-plugin-svelte': '^6.2.1',
 		'@types/node': '^24.3.0',
 		eslint: '^9.34.0',
-		'eslint-plugin-svelte': '^3.12.5',
+		'eslint-plugin-svelte': '^3.13.0',
 		'esm-env': '^1.2.2',
 		jsdom: '^27.0.1',
 		prettier: '^3.6.2',
@@ -3452,6 +3452,113 @@ export const src_json: Src_Json = {
 						},
 					],
 				},
+				{
+					name: 'parse_github_owner',
+					kind: 'function',
+					doc_comment:
+						"Parse GitHub owner/org name from repository URL.\nExample: 'https://github.com/ryanatkn/fuz' -> 'ryanatkn'",
+					summary:
+						"Parse GitHub owner/org name from repository URL.\nExample: 'https://github.com/ryanatkn/fuz' -> 'ryanatkn'",
+					source_line: 62,
+					type_signature: '(repo_url: string): string | null',
+					return_type: 'string | null',
+					parameters: [
+						{
+							name: 'repo_url',
+							type: 'string',
+							optional: false,
+						},
+					],
+				},
+				{
+					name: 'url_github_org',
+					kind: 'function',
+					doc_comment:
+						"Build GitHub organization URL from repo URL and repo name.\nExample: ('https://github.com/ryanatkn/fuz', 'fuz') -> 'https://github.com/ryanatkn'",
+					summary:
+						"Build GitHub organization URL from repo URL and repo name.\nExample: ('https://github.com/ryanatkn/fuz', 'fuz') -> 'https://github.com/ryanatkn'",
+					source_line: 72,
+					type_signature: '(repo_url: string, repo_name: string): string | null',
+					return_type: 'string | null',
+					parameters: [
+						{
+							name: 'repo_url',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'repo_name',
+							type: 'string',
+							optional: false,
+						},
+					],
+				},
+				{
+					name: 'is_package_published',
+					kind: 'function',
+					doc_comment:
+						'Check if a package is published to npm.\nPublished packages are not private, have exports, and have a version beyond 0.0.1.',
+					summary:
+						'Check if a package is published to npm.\nPublished packages are not private, have exports, and have a version beyond 0.0.1.',
+					source_line: 80,
+					type_signature:
+						'(package_json: { [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }): boolean',
+					return_type: 'boolean',
+					parameters: [
+						{
+							name: 'package_json',
+							type: '{ [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }',
+							optional: false,
+						},
+					],
+				},
+				{
+					name: 'url_well_known',
+					kind: 'function',
+					doc_comment:
+						"Build .well-known URL for package metadata files.\nExample: ('https://fuz.dev/', 'src.json') -> 'https://fuz.dev/.well-known/src.json'",
+					summary:
+						"Build .well-known URL for package metadata files.\nExample: ('https://fuz.dev/', 'src.json') -> 'https://fuz.dev/.well-known/src.json'",
+					source_line: 88,
+					type_signature: '(homepage_url: string, filename: string): string',
+					return_type: 'string',
+					parameters: [
+						{
+							name: 'homepage_url',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'filename',
+							type: 'string',
+							optional: false,
+						},
+					],
+				},
+				{
+					name: 'url_package_logo',
+					kind: 'function',
+					doc_comment:
+						'Build package logo URL with favicon.png fallback.\nReturns null if no homepage URL is provided.',
+					summary:
+						'Build package logo URL with favicon.png fallback.\nReturns null if no homepage URL is provided.',
+					source_line: 96,
+					type_signature:
+						'(homepage_url: string | null, logo_path?: string | undefined): string | null',
+					return_type: 'string | null',
+					parameters: [
+						{
+							name: 'homepage_url',
+							type: 'string | null',
+							optional: false,
+						},
+						{
+							name: 'logo_path',
+							type: 'string | undefined',
+							optional: true,
+						},
+					],
+				},
 			],
 		},
 		{
@@ -3653,7 +3760,7 @@ export const src_json: Src_Json = {
 						'Rich runtime package representation following the "minimal + rich" pattern.\n\nWraps minimal serializable data (package_json, src_json) with computed properties\nand provides the root of the API documentation hierarchy:\nPkg -> modules -> identifiers\n\nAll computed properties are automatically cached via Svelte\'s $derived mechanism,\nincluding the identifier_map which enables O(1) lookups by name.',
 					summary: 'Rich runtime package representation following the "minimal + rich" pattern.',
 					see_also: ['for Module class', 'for Identifier class'],
-					source_line: 28,
+					source_line: 31,
 					members: [
 						{
 							name: 'package_json',
@@ -3784,7 +3891,7 @@ export const src_json: Src_Json = {
 						'Convenience factory function for creating Pkg instances\n(kept for backward compatibility during migration)',
 					summary:
 						'Convenience factory function for creating Pkg instances\n(kept for backward compatibility during migration)',
-					source_line: 201,
+					source_line: 187,
 					type_signature:
 						'(package_json: { [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }, src_json: Src_Json): Pkg',
 					return_type: 'Pkg',
@@ -3804,7 +3911,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'pkg_context',
 					kind: 'variable',
-					source_line: 205,
+					source_line: 191,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Pkg; maybe_get: () => Pkg | undefined; set: (value: Pkg) => Pkg; }',
 				},

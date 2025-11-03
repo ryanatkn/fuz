@@ -1,4 +1,3 @@
-import {ensure_end, strip_end, strip_start} from '@ryanatkn/belt/string.js';
 import type {Package_Json} from '@ryanatkn/belt/package_json.js';
 
 import {create_context} from '$lib/context_helpers.js';
@@ -6,10 +5,14 @@ import type {Src_Json} from '$lib/src_json.js';
 import {Identifier} from '$lib/identifier.svelte.js';
 import {Module} from '$lib/module.svelte.js';
 import {
+	is_package_published,
+	parse_github_owner,
 	parse_repo_name,
 	parse_repo_url,
 	url_github_file,
+	url_github_org,
 	url_npm_package,
+	url_package_logo,
 } from '$lib/package_helpers.js';
 
 /**
@@ -55,11 +58,7 @@ export class Pkg {
 	/**
 	 * GitHub owner/org name (e.g., 'ryanatkn').
 	 */
-	owner_name = $derived(
-		this.repo_url
-			? (strip_start(this.repo_url, 'https://github.com/').split('/')[0] ?? null)
-			: null,
-	);
+	owner_name = $derived(this.repo_url ? parse_github_owner(this.repo_url) : null);
 
 	/**
 	 * Homepage URL (e.g., 'https://www.fuz.dev/').
@@ -69,12 +68,7 @@ export class Pkg {
 	/**
 	 * Logo URL (falls back to favicon.png).
 	 */
-	logo_url = $derived(
-		this.homepage_url
-			? ensure_end(this.homepage_url, '/') +
-					(this.package_json.logo ? strip_start(this.package_json.logo, '/') : 'favicon.png')
-			: null,
-	);
+	logo_url = $derived(url_package_logo(this.homepage_url, this.package_json.logo));
 
 	/**
 	 * Logo alt text.
@@ -84,11 +78,7 @@ export class Pkg {
 	/**
 	 * Whether package is published to npm.
 	 */
-	published = $derived(
-		!this.package_json.private &&
-			!!this.package_json.exports &&
-			this.package_json.version !== '0.0.1',
-	);
+	published = $derived(is_package_published(this.package_json));
 
 	/**
 	 * npm package URL (if published).
@@ -105,11 +95,7 @@ export class Pkg {
 	/**
 	 * Organization URL (e.g., 'https://github.com/ryanatkn').
 	 */
-	org_url = $derived(
-		this.repo_url.endsWith('/' + this.repo_name)
-			? strip_end(this.repo_url, '/' + this.repo_name)
-			: null,
-	);
+	org_url = $derived(url_github_org(this.repo_url, this.repo_name));
 
 	/**
 	 * All modules as rich Module instances (cached via $derived).
