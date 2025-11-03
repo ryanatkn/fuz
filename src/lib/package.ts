@@ -3334,37 +3334,39 @@ export const src_json: Src_Json = {
 			path: 'package_helpers.ts',
 			declarations: [
 				{
-					name: 'repo_url_parse',
+					name: 'api_doc_url',
 					kind: 'function',
 					doc_comment:
-						"Parse repository URL from package.json format.\nStrips 'git+', '.git', and trailing slashes.",
+						'Build project-relative API documentation URL with hash anchor (calls resolve internally).',
 					summary:
-						"Parse repository URL from package.json format.\nStrips 'git+', '.git', and trailing slashes.",
-					source_line: 9,
-					type_signature:
-						'(repository: string | { [x: string]: unknown; type: string; url: string; directory?: string | undefined; } | undefined): string | null',
-					return_type: 'string | null',
+						'Build project-relative API documentation URL with hash anchor (calls resolve internally).',
+					source_line: 8,
+					type_signature: '(identifier_name: string): string',
+					return_type: 'string',
 					parameters: [
 						{
-							name: 'repository',
-							type: 'string | { [x: string]: unknown; type: string; url: string; directory?: string | undefined; } | undefined',
+							name: 'identifier_name',
+							type: 'string',
 							optional: false,
 						},
 					],
 				},
 				{
-					name: 'repo_name_parse',
+					name: 'api_doc_url_full',
 					kind: 'function',
-					doc_comment:
-						"Extract repository name without scope from package name.\nExamples: '@org/pkg' -> 'pkg', 'pkg' -> 'pkg'",
-					summary:
-						"Extract repository name without scope from package name.\nExamples: '@org/pkg' -> 'pkg', 'pkg' -> 'pkg'",
-					source_line: 20,
-					type_signature: '(name: string): string',
+					doc_comment: 'Build full API documentation URL with domain and hash anchor.',
+					summary: 'Build full API documentation URL with domain and hash anchor.',
+					source_line: 14,
+					type_signature: '(homepage: string, identifier_name: string): string',
 					return_type: 'string',
 					parameters: [
 						{
-							name: 'name',
+							name: 'homepage',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'identifier_name',
 							type: 'string',
 							optional: false,
 						},
@@ -3375,7 +3377,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Build GitHub file URL for a repository.',
 					summary: 'Build GitHub file URL for a repository.',
-					source_line: 34,
+					source_line: 20,
 					type_signature:
 						'(repo_url: string, file_path: string, line?: number | undefined): string',
 					return_type: 'string',
@@ -3398,86 +3400,13 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'npm_package_url',
-					kind: 'function',
-					doc_comment: 'Build npm package URL.',
-					summary: 'Build npm package URL.',
-					source_line: 43,
-					type_signature: '(package_name: string): string',
-					return_type: 'string',
-					parameters: [
-						{
-							name: 'package_name',
-							type: 'string',
-							optional: false,
-						},
-					],
-				},
-				{
-					name: 'api_doc_url',
-					kind: 'function',
-					doc_comment:
-						'Build project-relative API documentation URL with hash anchor (calls resolve internally).',
-					summary:
-						'Build project-relative API documentation URL with hash anchor (calls resolve internally).',
-					source_line: 49,
-					type_signature: '(identifier_name: string): string',
-					return_type: 'string',
-					parameters: [
-						{
-							name: 'identifier_name',
-							type: 'string',
-							optional: false,
-						},
-					],
-				},
-				{
-					name: 'api_doc_url_full',
-					kind: 'function',
-					doc_comment: 'Build full API documentation URL with domain and hash anchor.',
-					summary: 'Build full API documentation URL with domain and hash anchor.',
-					source_line: 55,
-					type_signature: '(homepage: string, identifier_name: string): string',
-					return_type: 'string',
-					parameters: [
-						{
-							name: 'homepage',
-							type: 'string',
-							optional: false,
-						},
-						{
-							name: 'identifier_name',
-							type: 'string',
-							optional: false,
-						},
-					],
-				},
-				{
-					name: 'github_owner_parse',
-					kind: 'function',
-					doc_comment:
-						"Parse GitHub owner/org name from repository URL.\nExample: 'https://github.com/ryanatkn/fuz' -> 'ryanatkn'",
-					summary:
-						"Parse GitHub owner/org name from repository URL.\nExample: 'https://github.com/ryanatkn/fuz' -> 'ryanatkn'",
-					source_line: 62,
-					type_signature: '(repo_url: string): string | null',
-					return_type: 'string | null',
-					parameters: [
-						{
-							name: 'repo_url',
-							type: 'string',
-							optional: false,
-						},
-					],
-				},
-				{
 					name: 'github_org_url',
 					kind: 'function',
 					doc_comment:
 						"Build GitHub organization URL from repo URL and repo name.\nExample: ('https://github.com/ryanatkn/fuz', 'fuz') -> 'https://github.com/ryanatkn'",
 					summary:
 						"Build GitHub organization URL from repo URL and repo name.\nExample: ('https://github.com/ryanatkn/fuz', 'fuz') -> 'https://github.com/ryanatkn'",
-					source_line: 72,
+					source_line: 30,
 					type_signature: '(repo_url: string, repo_name: string): string | null',
 					return_type: 'string | null',
 					parameters: [
@@ -3494,13 +3423,47 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
+					name: 'github_owner_parse',
+					kind: 'function',
+					doc_comment:
+						"Parse GitHub owner/org name from repository URL.\nExample: 'https://github.com/ryanatkn/fuz' -> 'ryanatkn'",
+					summary:
+						"Parse GitHub owner/org name from repository URL.\nExample: 'https://github.com/ryanatkn/fuz' -> 'ryanatkn'",
+					source_line: 38,
+					type_signature: '(repo_url: string): string | null',
+					return_type: 'string | null',
+					parameters: [
+						{
+							name: 'repo_url',
+							type: 'string',
+							optional: false,
+						},
+					],
+				},
+				{
+					name: 'npm_package_url',
+					kind: 'function',
+					doc_comment: 'Build npm package URL.',
+					summary: 'Build npm package URL.',
+					source_line: 47,
+					type_signature: '(package_name: string): string',
+					return_type: 'string',
+					parameters: [
+						{
+							name: 'package_name',
+							type: 'string',
+							optional: false,
+						},
+					],
+				},
+				{
 					name: 'package_is_published',
 					kind: 'function',
 					doc_comment:
 						'Check if a package is published to npm.\nPublished packages are not private, have exports, and have a version beyond 0.0.1.',
 					summary:
 						'Check if a package is published to npm.\nPublished packages are not private, have exports, and have a version beyond 0.0.1.',
-					source_line: 80,
+					source_line: 54,
 					type_signature:
 						'(package_json: { [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }): boolean',
 					return_type: 'boolean',
@@ -3513,36 +3476,13 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'well_known_url',
-					kind: 'function',
-					doc_comment:
-						"Build .well-known URL for package metadata files.\nExample: ('https://fuz.dev/', 'src.json') -> 'https://fuz.dev/.well-known/src.json'",
-					summary:
-						"Build .well-known URL for package metadata files.\nExample: ('https://fuz.dev/', 'src.json') -> 'https://fuz.dev/.well-known/src.json'",
-					source_line: 88,
-					type_signature: '(homepage_url: string, filename: string): string',
-					return_type: 'string',
-					parameters: [
-						{
-							name: 'homepage_url',
-							type: 'string',
-							optional: false,
-						},
-						{
-							name: 'filename',
-							type: 'string',
-							optional: false,
-						},
-					],
-				},
-				{
 					name: 'package_logo_url',
 					kind: 'function',
 					doc_comment:
 						'Build package logo URL with favicon.png fallback.\nReturns null if no homepage URL is provided.',
 					summary:
 						'Build package logo URL with favicon.png fallback.\nReturns null if no homepage URL is provided.',
-					source_line: 96,
+					source_line: 62,
 					type_signature:
 						'(homepage_url: string | null, logo_path?: string | undefined): string | null',
 					return_type: 'string | null',
@@ -3556,6 +3496,66 @@ export const src_json: Src_Json = {
 							name: 'logo_path',
 							type: 'string | undefined',
 							optional: true,
+						},
+					],
+				},
+				{
+					name: 'repo_name_parse',
+					kind: 'function',
+					doc_comment:
+						"Extract repository name without scope from package name.\nExamples: '@org/pkg' -> 'pkg', 'pkg' -> 'pkg'",
+					summary:
+						"Extract repository name without scope from package name.\nExamples: '@org/pkg' -> 'pkg', 'pkg' -> 'pkg'",
+					source_line: 75,
+					type_signature: '(name: string): string',
+					return_type: 'string',
+					parameters: [
+						{
+							name: 'name',
+							type: 'string',
+							optional: false,
+						},
+					],
+				},
+				{
+					name: 'repo_url_parse',
+					kind: 'function',
+					doc_comment:
+						"Parse repository URL from package.json format.\nStrips 'git+', '.git', and trailing slashes.",
+					summary:
+						"Parse repository URL from package.json format.\nStrips 'git+', '.git', and trailing slashes.",
+					source_line: 90,
+					type_signature:
+						'(repository: string | { [x: string]: unknown; type: string; url: string; directory?: string | undefined; } | undefined): string | null',
+					return_type: 'string | null',
+					parameters: [
+						{
+							name: 'repository',
+							type: 'string | { [x: string]: unknown; type: string; url: string; directory?: string | undefined; } | undefined',
+							optional: false,
+						},
+					],
+				},
+				{
+					name: 'well_known_url',
+					kind: 'function',
+					doc_comment:
+						"Build .well-known URL for package metadata files.\nExample: ('https://fuz.dev/', 'src.json') -> 'https://fuz.dev/.well-known/src.json'",
+					summary:
+						"Build .well-known URL for package metadata files.\nExample: ('https://fuz.dev/', 'src.json') -> 'https://fuz.dev/.well-known/src.json'",
+					source_line: 101,
+					type_signature: '(homepage_url: string, filename: string): string',
+					return_type: 'string',
+					parameters: [
+						{
+							name: 'homepage_url',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'filename',
+							type: 'string',
+							optional: false,
 						},
 					],
 				},
