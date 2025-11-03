@@ -26,7 +26,7 @@ import {readFileSync} from 'node:fs';
 import {load_package_json} from '@ryanatkn/gro/package_json.js';
 import {svelte2tsx} from 'svelte2tsx';
 
-import type {Src_Module_Declaration, Src_Module, Src_Json} from '$lib/src_json.js';
+import type {Identifier_Json, Module_Json, Src_Json} from '$lib/src_json.js';
 import {
 	ts_create_program,
 	ts_extract_module_comment,
@@ -78,7 +78,7 @@ export const gen: Gen = async ({log, filer}) => {
 		const module_path = module_extract_path(source_id);
 		const is_svelte = module_is_svelte(module_path);
 
-		let mod: Src_Module | null;
+		let mod: Module_Json | null;
 
 		// Handle Svelte files separately (before trying to get TypeScript source file)
 		if (is_svelte) {
@@ -121,9 +121,9 @@ const enhance_declaration = (
 	source_file: ts.SourceFile,
 	checker: ts.TypeChecker,
 	log: Logger,
-): Src_Module_Declaration => {
+): Identifier_Json => {
 	const name = symbol.name;
-	const result: Src_Module_Declaration = {
+	const result: Identifier_Json = {
 		name,
 		kind: null,
 	};
@@ -166,7 +166,7 @@ const enhance_declaration = (
 /**
  * Sort modules alphabetically by path for deterministic output and cleaner diffs.
  */
-const sort_modules = (modules: Array<Src_Module>): Array<Src_Module> => {
+const sort_modules = (modules: Array<Module_Json>): Array<Module_Json> => {
 	return modules.slice().sort((a, b) => a.path.localeCompare(b.path));
 };
 
@@ -217,7 +217,7 @@ const analyze_svelte_file = (
 	source_id: string,
 	module_path: string,
 	checker: ts.TypeChecker,
-): Src_Module | null => {
+): Module_Json | null => {
 	try {
 		const svelte_source = readFileSync(source_id, 'utf-8');
 
@@ -254,8 +254,8 @@ const analyze_typescript_file = (
 	module_path: string,
 	checker: ts.TypeChecker,
 	log: Logger,
-): Src_Module | null => {
-	const mod: Src_Module = {
+): Module_Json | null => {
+	const mod: Module_Json = {
 		path: module_path,
 		declarations: [],
 	};

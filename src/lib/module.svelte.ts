@@ -1,7 +1,7 @@
 /**
  * Rich runtime Module class following the "minimal + rich" pattern.
  *
- * Wraps minimal serializable Src_Module data with computed properties and query methods.
+ * Wraps minimal serializable Module_Json data with computed properties and query methods.
  * Part of the API documentation hierarchy: Pkg -> Module -> Identifier
  *
  * @see pkg.svelte.ts for parent Pkg class
@@ -11,7 +11,7 @@
 
 import {Identifier} from '$lib/identifier.svelte.js';
 import type {Pkg} from '$lib/pkg.svelte.js';
-import type {Src_Module} from '$lib/src_json.js';
+import type {Module_Json} from '$lib/src_json.js';
 import {github_file_url} from '$lib/package_helpers.js';
 import {DOCS_API_PATH} from '$lib/docs_helpers.svelte.js';
 
@@ -19,14 +19,14 @@ import {DOCS_API_PATH} from '$lib/docs_helpers.svelte.js';
  * Rich runtime representation of a source module with computed properties.
  *
  * Combines:
- * - Minimal Src_Module data (serializable)
+ * - Minimal Module_Json data (serializable)
  * - Full Pkg reference (for generating URLs, import statements, etc.)
  * - Lazy-computed Identifier instances
  * - Query methods for ergonomic usage
  */
 export class Module {
 	readonly pkg: Pkg = $state.raw()!;
-	readonly src_module: Src_Module = $state.raw()!;
+	readonly src_module: Module_Json = $state.raw()!;
 
 	/**
 	 * Canonical module path (no prefix) - matches storage, URLs, display.
@@ -70,7 +70,7 @@ export class Module {
 		this.pkg.repo_url ? github_file_url(this.pkg.repo_url, `src/lib/${this.path}`) : undefined,
 	);
 
-	constructor(pkg: Pkg, src_module: Src_Module) {
+	constructor(pkg: Pkg, src_module: Module_Json) {
 		this.pkg = pkg;
 		this.src_module = src_module;
 	}

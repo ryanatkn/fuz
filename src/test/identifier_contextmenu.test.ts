@@ -1,7 +1,7 @@
 import {describe, test, assert} from 'vitest';
 
 import {create_identifier_contextmenu} from '$lib/identifier_contextmenu.js';
-import type {Src_Module_Declaration, Src_Module, Src_Json} from '$lib/src_json.js';
+import type {Identifier_Json, Module_Json, Src_Json} from '$lib/src_json.js';
 import type {Package_Json} from '@ryanatkn/belt/package_json.js';
 import {Pkg} from '$lib/pkg.svelte.js';
 import {Module} from '$lib/module.svelte.js';
@@ -35,12 +35,12 @@ const create_mock_pkg = (options?: {
 
 // Helper to create an Identifier for testing
 const create_test_identifier = (
-	decl: Src_Module_Declaration,
+	decl: Identifier_Json,
 	module_path: string,
 	pkg_options?: Parameters<typeof create_mock_pkg>[0],
 ): Identifier => {
 	const pkg = create_mock_pkg(pkg_options);
-	const src_module: Src_Module = {
+	const src_module: Module_Json = {
 		path: module_path,
 		declarations: [decl],
 	};
@@ -49,7 +49,7 @@ const create_test_identifier = (
 };
 
 describe('create_identifier_contextmenu', () => {
-	const base_decl: Src_Module_Declaration = {
+	const base_decl: Identifier_Json = {
 		name: 'MyType',
 		kind: 'type',
 		source_line: 10,
@@ -123,7 +123,7 @@ describe('create_identifier_contextmenu', () => {
 	});
 
 	test('excludes view source entry when no source_location', () => {
-		const decl_no_location: Src_Module_Declaration = {
+		const decl_no_location: Identifier_Json = {
 			name: 'MyType',
 			kind: 'type',
 		};
@@ -185,7 +185,7 @@ describe('create_identifier_contextmenu', () => {
 	});
 
 	test('URL encodes module and identifier names', () => {
-		const special_decl: Src_Module_Declaration = {
+		const special_decl: Identifier_Json = {
 			name: 'My Type',
 			kind: 'type',
 		};

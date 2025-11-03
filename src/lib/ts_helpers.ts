@@ -6,7 +6,7 @@
 
 import ts from 'typescript';
 
-import type {Src_Module_Declaration, Generic_Param_Info} from '$lib/src_json.js';
+import type {Identifier_Json, Generic_Param_Info} from '$lib/src_json.js';
 import {tsdoc_parse} from '$lib/tsdoc_helpers.js';
 
 /**
@@ -89,7 +89,7 @@ export const ts_extract_function_info = (
 	node: ts.Node,
 	symbol: ts.Symbol,
 	checker: ts.TypeChecker,
-	decl: Src_Module_Declaration,
+	decl: Identifier_Json,
 	tsdoc: ReturnType<typeof tsdoc_parse>,
 ): void => {
 	try {
@@ -158,7 +158,7 @@ export const ts_extract_type_info = (
 	node: ts.Node,
 	_symbol: ts.Symbol,
 	checker: ts.TypeChecker,
-	decl: Src_Module_Declaration,
+	decl: Identifier_Json,
 ): void => {
 	try {
 		const type = checker.getTypeAtLocation(node);
@@ -185,7 +185,7 @@ export const ts_extract_type_info = (
 		for (const member of node.members) {
 			if (ts.isPropertySignature(member) && ts.isIdentifier(member.name)) {
 				const prop_name = member.name.text;
-				const prop_decl: Src_Module_Declaration = {
+				const prop_decl: Identifier_Json = {
 					name: prop_name,
 					kind: 'variable',
 				};
@@ -220,7 +220,7 @@ export const ts_extract_class_info = (
 	node: ts.Node,
 	_symbol: ts.Symbol,
 	checker: ts.TypeChecker,
-	decl: Src_Module_Declaration,
+	decl: Identifier_Json,
 ): void => {
 	if (!ts.isClassDeclaration(node)) return;
 
@@ -245,7 +245,7 @@ export const ts_extract_class_info = (
 			const member_name = ts.isIdentifier(member.name) ? member.name.text : member.name.getText();
 			if (!member_name) continue;
 
-			const member_decl: Src_Module_Declaration = {
+			const member_decl: Identifier_Json = {
 				name: member_name,
 				kind: ts.isMethodDeclaration(member) ? 'function' : 'variable',
 			};
@@ -290,7 +290,7 @@ export const ts_extract_variable_info = (
 	node: ts.Node,
 	symbol: ts.Symbol,
 	checker: ts.TypeChecker,
-	decl: Src_Module_Declaration,
+	decl: Identifier_Json,
 ): void => {
 	try {
 		const type = checker.getTypeOfSymbolAtLocation(symbol, node);

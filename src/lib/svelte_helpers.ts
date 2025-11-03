@@ -14,7 +14,7 @@
 
 import ts from 'typescript';
 
-import type {Src_Module_Declaration, Component_Prop_Info} from '$lib/src_json.js';
+import type {Identifier_Json, Component_Prop_Info} from '$lib/src_json.js';
 import {tsdoc_parse, tsdoc_apply_to_declaration} from '$lib/tsdoc_helpers.js';
 
 /**
@@ -25,8 +25,8 @@ export const svelte_analyze_component = (
 	source_file: ts.SourceFile,
 	checker: ts.TypeChecker,
 	component_name: string,
-): Src_Module_Declaration => {
-	const result: Src_Module_Declaration = {
+): Identifier_Json => {
+	const result: Identifier_Json = {
 		name: component_name,
 		kind: 'component',
 	};

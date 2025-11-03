@@ -12,7 +12,7 @@
 
 import type {Module} from '$lib/module.svelte.js';
 import {
-	type Src_Module_Declaration,
+	type Identifier_Json,
 	generate_import_statement,
 	get_declaration_display_name,
 } from '$lib/src_json.js';
@@ -22,14 +22,14 @@ import {api_doc_url, api_doc_url_full, github_file_url} from '$lib/package_helpe
  * Rich runtime representation of an exported identifier with computed properties.
  *
  * Combines:
- * - Minimal Src_Module_Declaration data (serializable)
+ * - Minimal Identifier_Json data (serializable)
  * - Parent Module reference (provides Pkg context)
  * - Lazy-computed URLs, import statements, etc.
  * - Query methods for ergonomic usage
  */
 export class Identifier {
 	readonly module: Module = $state.raw()!;
-	readonly decl: Src_Module_Declaration = $state.raw()!;
+	readonly decl: Identifier_Json = $state.raw()!;
 
 	/**
 	 * Get parent Pkg for accessing package metadata.
@@ -89,7 +89,7 @@ export class Identifier {
 	 */
 	display_name = $derived(get_declaration_display_name(this.decl));
 
-	constructor(module: Module, decl: Src_Module_Declaration) {
+	constructor(module: Module, decl: Identifier_Json) {
 		this.module = module;
 		this.decl = decl;
 	}
