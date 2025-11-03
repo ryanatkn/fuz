@@ -125,7 +125,7 @@ export const src_json: Src_Json = {
 	modules: [
 		{
 			path: 'Alert.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Alert',
 					kind: 'component',
@@ -172,7 +172,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'alert.ts',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Alert_Status',
 					kind: 'type',
@@ -208,7 +208,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Breadcrumb.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Breadcrumb',
 					kind: 'component',
@@ -250,7 +250,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Card.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Card',
 					kind: 'component',
@@ -292,7 +292,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Color_Scheme_Input.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Color_Scheme_Input',
 					kind: 'component',
@@ -314,7 +314,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Community_Links_Panel.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Community_Links_Panel',
 					kind: 'component',
@@ -331,7 +331,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Community_Links.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Community_Links',
 					kind: 'component',
@@ -348,7 +348,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'constants.ts',
-			declarations: [
+			identifiers: [
 				{
 					name: 'MAIN_HEADER_MARGIN_TOP',
 					kind: 'variable',
@@ -361,7 +361,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'context_helpers.ts',
-			declarations: [
+			identifiers: [
 				{
 					name: 'create_context',
 					kind: 'function',
@@ -388,7 +388,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Contextmenu_Entry.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Contextmenu_Entry',
 					kind: 'component',
@@ -420,7 +420,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'contextmenu_helpers.ts',
-			declarations: [
+			identifiers: [
 				{
 					name: 'CONTEXTMENU_DEFAULT_OPEN_OFFSET_X',
 					kind: 'variable',
@@ -568,7 +568,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Contextmenu_Link_Entry.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Contextmenu_Link_Entry',
 					kind: 'component',
@@ -600,7 +600,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Contextmenu_Root_For_Safari_Compatibility.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Contextmenu_Root_For_Safari_Compatibility',
 					kind: 'component',
@@ -703,7 +703,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Contextmenu_Root.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Contextmenu_Root',
 					kind: 'component',
@@ -792,7 +792,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Contextmenu_Separator.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Contextmenu_Separator',
 					kind: 'component',
@@ -802,7 +802,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'contextmenu_state.svelte.ts',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Contextmenu_Params',
 					kind: 'type',
@@ -1237,7 +1237,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Contextmenu_Submenu.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Contextmenu_Submenu',
 					kind: 'component',
@@ -1264,7 +1264,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Contextmenu_Text_Entry.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Contextmenu_Text_Entry',
 					kind: 'component',
@@ -1291,7 +1291,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Contextmenu.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Contextmenu',
 					kind: 'component',
@@ -1301,7 +1301,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Copy_To_Clipboard.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Copy_To_Clipboard',
 					kind: 'component',
@@ -1344,7 +1344,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'csp_of_ryanatkn.ts',
-			declarations: [
+			identifiers: [
 				{
 					name: 'csp_trusted_sources_of_ryanatkn',
 					kind: 'variable',
@@ -1356,7 +1356,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'csp.ts',
-			declarations: [
+			identifiers: [
 				{
 					name: 'create_csp_directives',
 					kind: 'function',
@@ -1687,7 +1687,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Details.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Details',
 					kind: 'component',
@@ -1728,7 +1728,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Dialog.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Dialog',
 					kind: 'component',
@@ -1781,7 +1781,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'dialog.ts',
-			declarations: [
+			identifiers: [
 				{
 					name: 'to_dialog_params',
 					kind: 'function',
@@ -1857,7 +1857,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Dialogs.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Dialogs',
 					kind: 'component',
@@ -1884,7 +1884,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'dimensions.svelte.ts',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Dimensions',
 					kind: 'class',
@@ -1906,7 +1906,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Docs_Content.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Docs_Content',
 					kind: 'component',
@@ -1943,7 +1943,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Docs_Footer.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Docs_Footer',
 					kind: 'component',
@@ -1985,7 +1985,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'docs_helpers.svelte.ts',
-			declarations: [
+			identifiers: [
 				{
 					name: 'DOCS_PATH_DEFAULT',
 					kind: 'variable',
@@ -2141,7 +2141,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Docs_Menu_Header.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Docs_Menu_Header',
 					kind: 'component',
@@ -2158,7 +2158,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Docs_Menu.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Docs_Menu',
 					kind: 'component',
@@ -2180,7 +2180,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Docs_Page_Links.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Docs_Page_Links',
 					kind: 'component',
@@ -2197,7 +2197,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Docs_Primary_Nav.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Docs_Primary_Nav',
 					kind: 'component',
@@ -2224,7 +2224,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Docs_Secondary_Nav.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Docs_Secondary_Nav',
 					kind: 'component',
@@ -2246,7 +2246,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Docs_Tertiary_Nav.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Docs_Tertiary_Nav',
 					kind: 'component',
@@ -2273,7 +2273,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Docs.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Docs',
 					kind: 'component',
@@ -2305,7 +2305,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Glyph.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Glyph',
 					kind: 'component',
@@ -2327,7 +2327,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Hashlink.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Hashlink',
 					kind: 'component',
@@ -2349,7 +2349,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'helpers.ts',
-			declarations: [
+			identifiers: [
 				{
 					name: 'render_value_to_string',
 					kind: 'function',
@@ -2373,7 +2373,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Hidden_Personal_Links.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Hidden_Personal_Links',
 					kind: 'component',
@@ -2383,7 +2383,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Hue_Input.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Hue_Input',
 					kind: 'component',
@@ -2411,7 +2411,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'identifier_contextmenu.ts',
-			declarations: [
+			identifiers: [
 				{
 					name: 'create_identifier_contextmenu',
 					kind: 'function',
@@ -2431,7 +2431,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Identifier_Detail.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Identifier_Detail',
 					kind: 'component',
@@ -2448,7 +2448,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Identifier_Link.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Identifier_Link',
 					kind: 'component',
@@ -2470,7 +2470,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'identifier.svelte.ts',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Identifier',
 					kind: 'class',
@@ -2610,11 +2610,11 @@ export const src_json: Src_Json = {
 				},
 			],
 			module_comment:
-				'Rich runtime Identifier class following the "minimal + rich" pattern.\n\nRepresents an exported identifier from a module (function, type, class, component, etc.)\nWraps minimal serializable declaration data with computed properties and query methods.\nPart of the API documentation hierarchy: Pkg -> Module -> Identifier\n\n@see module.svelte.ts for parent Module class\n@see pkg.svelte.ts for root Pkg class\n@see src_json.ts for minimal serializable types',
+				'Rich runtime Identifier class following the "minimal + rich" pattern.\n\nRepresents an exported identifier from a module (function, type, class, component, etc.)\nWraps minimal serializable identifier data with computed properties and query methods.\nPart of the API documentation hierarchy: Pkg -> Module -> Identifier\n\n@see module.svelte.ts for parent Module class\n@see pkg.svelte.ts for root Pkg class\n@see src_json.ts for minimal serializable types',
 		},
 		{
 			path: 'Img_Or_Svg.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Img_Or_Svg',
 					kind: 'component',
@@ -2671,7 +2671,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'intersect.ts',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Intersect_Params',
 					kind: 'type',
@@ -2808,7 +2808,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'logos.ts',
-			declarations: [
+			identifiers: [
 				{
 					name: 'zzz_logo',
 					kind: 'variable',
@@ -2921,7 +2921,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Mdn_Link.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Mdn_Link',
 					kind: 'component',
@@ -2944,7 +2944,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'module_helpers.ts',
-			declarations: [
+			identifiers: [
 				{
 					name: 'module_extract_path',
 					kind: 'function',
@@ -3088,7 +3088,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Module_Link.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Module_Link',
 					kind: 'component',
@@ -3110,7 +3110,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'module.svelte.ts',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Module',
 					kind: 'class',
@@ -3165,10 +3165,10 @@ export const src_json: Src_Json = {
 							doc_comment: 'GitHub source URL for the module file.',
 						},
 						{
-							name: 'has_declarations',
+							name: 'has_identifiers',
 							kind: 'function',
 							type_signature: '() => boolean',
-							doc_comment: 'Check if module has any declarations.',
+							doc_comment: 'Check if module has any identifiers.',
 						},
 						{
 							name: 'has_module_comment',
@@ -3190,7 +3190,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Package_Detail.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Package_Detail',
 					kind: 'component',
@@ -3237,7 +3237,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'package_helpers.ts',
-			declarations: [
+			identifiers: [
 				{
 					name: 'api_doc_url',
 					kind: 'function',
@@ -3463,7 +3463,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Package_Summary.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Package_Summary',
 					kind: 'component',
@@ -3515,7 +3515,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'package.gen.ts',
-			declarations: [
+			identifiers: [
 				{
 					name: 'gen',
 					kind: 'function',
@@ -3527,7 +3527,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'package.ts',
-			declarations: [
+			identifiers: [
 				{
 					name: 'package_json',
 					kind: 'variable',
@@ -3546,7 +3546,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Paste_From_Clipboard.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Paste_From_Clipboard',
 					kind: 'component',
@@ -3573,7 +3573,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Pending_Animation.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Pending_Animation',
 					kind: 'component',
@@ -3605,7 +3605,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Pending_Button.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Pending_Button',
 					kind: 'component',
@@ -3652,7 +3652,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'pkg.svelte.ts',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Pkg',
 					kind: 'class',
@@ -3809,7 +3809,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Project_Links.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Project_Links',
 					kind: 'component',
@@ -3819,7 +3819,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Redirect.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Redirect',
 					kind: 'component',
@@ -3857,7 +3857,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'rune_helpers.svelte.ts',
-			declarations: [
+			identifiers: [
 				{
 					name: 'effect_with_count',
 					kind: 'function',
@@ -3886,7 +3886,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Spiders.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Spiders',
 					kind: 'component',
@@ -3914,197 +3914,155 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'src_json.ts',
-			declarations: [
-				{
-					name: 'Src_Json',
-					kind: 'type',
-					doc_comment: 'Top-level source metadata.',
-					see_also: [
-						'://github.com/ryanatkn/gro/blob/main/src/docs/gro_plugin_sveltekit_app.md#well-known-src',
-					],
-					source_line: 5,
-					type_signature: 'Src_Json',
-					properties: [
-						{
-							name: 'name',
-							kind: 'variable',
-							type_signature: 'string',
-							doc_comment: 'Package name (same as package.json)',
-						},
-						{
-							name: 'version',
-							kind: 'variable',
-							type_signature: 'string',
-							doc_comment: 'Package version (same as package.json)',
-						},
-						{
-							name: 'modules',
-							kind: 'variable',
-							type_signature: 'Array<Module_Json>',
-							doc_comment:
-								'Source modules (changed from Record to Array to eliminate path duplication)',
-						},
-					],
-				},
-				{
-					name: 'Module_Json',
-					kind: 'type',
-					doc_comment: 'Module information with metadata.',
-					source_line: 17,
-					type_signature: 'Module_Json',
-					properties: [
-						{
-							name: 'path',
-							kind: 'variable',
-							type_signature: 'string',
-							doc_comment: 'Module path relative to src/lib',
-						},
-						{
-							name: 'declarations',
-							kind: 'variable',
-							type_signature: 'Array<Identifier_Json>',
-							doc_comment: 'Exported declarations',
-						},
-						{
-							name: 'module_comment',
-							kind: 'variable',
-							type_signature: 'string',
-							doc_comment: 'Module-level JSDoc comment',
-						},
-					],
-				},
+			identifiers: [
 				{
 					name: 'Identifier_Kind',
 					kind: 'type',
-					source_line: 26,
+					source_line: 1,
 					type_signature: 'Identifier_Kind',
 				},
 				{
 					name: 'Identifier_Json',
 					kind: 'type',
-					doc_comment: 'Declaration metadata with rich TypeScript/JSDoc information.',
-					source_line: 38,
+					doc_comment: 'Identifier metadata with rich TypeScript/JSDoc information.',
+					source_line: 13,
 					type_signature: 'Identifier_Json',
 					properties: [
 						{
 							name: 'name',
 							kind: 'variable',
 							type_signature: 'string',
-							doc_comment: 'Export identifier',
+							doc_comment: 'Identifier name.',
 						},
 						{
 							name: 'kind',
 							kind: 'variable',
 							type_signature: 'Identifier_Kind | null',
-							doc_comment: 'Declaration kind',
+							doc_comment: 'Identifier kind.',
 						},
 						{
 							name: 'doc_comment',
 							kind: 'variable',
 							type_signature: 'string',
-							doc_comment: 'Full JSDoc/TSDoc comment text',
 						},
 						{
 							name: 'type_signature',
 							kind: 'variable',
 							type_signature: 'string',
-							doc_comment: 'Full TypeScript type signature',
 						},
 						{
 							name: 'modifiers',
 							kind: 'variable',
 							type_signature: 'Array<string>',
-							doc_comment: 'TypeScript modifiers (e.g., readonly, private, static)',
+							doc_comment: 'TypeScript modifiers like `readonly`, `private`, or `static`.',
 						},
 						{
 							name: 'source_line',
 							kind: 'variable',
 							type_signature: 'number',
-							doc_comment: 'Source line number within the file',
 						},
 						{
 							name: 'parameters',
 							kind: 'variable',
 							type_signature: 'Array<Parameter_Info>',
-							doc_comment: 'Function/method parameters',
 						},
 						{
 							name: 'return_type',
 							kind: 'variable',
 							type_signature: 'string',
-							doc_comment: 'Function return type',
 						},
 						{
 							name: 'return_description',
 							kind: 'variable',
 							type_signature: 'string',
-							doc_comment: 'Function return value description from',
+							doc_comment: 'Function return value description from `@returns` or `@return` tag.',
 						},
 						{
 							name: 'generic_params',
 							kind: 'variable',
 							type_signature: 'Array<Generic_Param_Info>',
-							doc_comment: 'Generic type parameters with constraints',
 						},
 						{
 							name: 'examples',
 							kind: 'variable',
 							type_signature: 'Array<string>',
-							doc_comment: 'Code examples from @ example tags',
+							doc_comment: 'Code examples from `@example` tags.',
 						},
 						{
 							name: 'deprecated_message',
 							kind: 'variable',
 							type_signature: 'string',
-							doc_comment: 'Deprecation warning from @ deprecated tag',
+							doc_comment: 'Deprecation warning from `@deprecated` tag.',
 						},
 						{
 							name: 'see_also',
 							kind: 'variable',
 							type_signature: 'Array<string>',
-							doc_comment: 'Related items from @ see tags',
+							doc_comment: 'Related items from `@see` tags.',
 						},
 						{
 							name: 'throws',
 							kind: 'variable',
 							type_signature: 'Array<{type?: string; description: string}>',
-							doc_comment: 'Exceptions/errors thrown from @ throws tags',
+							doc_comment: 'Exceptions/errors thrown from `@throws` tags.',
 						},
 						{
 							name: 'since',
 							kind: 'variable',
 							type_signature: 'string',
-							doc_comment: 'Version information from @ since tag',
+							doc_comment: 'Version information from `@since` tag.',
 						},
 						{
 							name: 'extends',
 							kind: 'variable',
 							type_signature: 'Array<string>',
-							doc_comment: 'For types/interfaces: extends clause',
 						},
 						{
 							name: 'implements',
 							kind: 'variable',
 							type_signature: 'Array<string>',
-							doc_comment: 'For classes: implements clause',
 						},
 						{
 							name: 'members',
 							kind: 'variable',
 							type_signature: 'Array<Identifier_Json>',
-							doc_comment: 'Class members',
 						},
 						{
 							name: 'properties',
 							kind: 'variable',
 							type_signature: 'Array<Identifier_Json>',
-							doc_comment: 'Interface/type properties',
 						},
 						{
 							name: 'props',
 							kind: 'variable',
 							type_signature: 'Array<Component_Prop_Info>',
-							doc_comment: 'Component props (for Svelte components)',
+						},
+					],
+				},
+				{
+					name: 'Generic_Param_Info',
+					kind: 'type',
+					doc_comment: 'Generic type parameter information.',
+					source_line: 49,
+					type_signature: 'Generic_Param_Info',
+					properties: [
+						{
+							name: 'name',
+							kind: 'variable',
+							type_signature: 'string',
+							doc_comment: 'Parameter name like `T`.',
+						},
+						{
+							name: 'constraint',
+							kind: 'variable',
+							type_signature: 'string',
+							doc_comment: 'Constraint like `string` from `T extends string`.',
+						},
+						{
+							name: 'default_type',
+							kind: 'variable',
+							type_signature: 'string',
+							doc_comment: 'Default type like `unknown` from `T = unknown`.',
 						},
 					],
 				},
@@ -4112,8 +4070,8 @@ export const src_json: Src_Json = {
 					name: 'Parameter_Info',
 					kind: 'type',
 					doc_comment:
-						'Parameter information for functions and methods.\n\nNote: Kept distinct from Component_Prop_Info despite structural similarity.\nFunction parameters form a tuple - the collection has positional semantics:\n- Calling order matters: `fn(a, b)` vs `fn(b, a)`\n- May include rest parameters, destructuring patterns\n- Individual parameters are named, but position-dependent',
-					source_line: 92,
+						'Parameter information for functions and methods.\n\nKept distinct from Component_Prop_Info despite structural similarity.\nFunction parameters form a tuple with positional semantics:\ncalling order matters (`fn(a, b)` vs `fn(b, a)`),\nmay include rest parameters and destructuring patterns.',
+					source_line: 66,
 					type_signature: 'Parameter_Info',
 					properties: [
 						{
@@ -4147,8 +4105,8 @@ export const src_json: Src_Json = {
 					name: 'Component_Prop_Info',
 					kind: 'type',
 					doc_comment:
-						'Component prop information for Svelte components.\n\nNote: Kept distinct from Parameter_Info despite structural similarity.\nComponent props are passed as named attributes with different semantics:\n\n- no positional order when passing: `<Foo {a} {b} />` = `<Foo {b} {a} />`\n- support two-way binding via $bindable rune\n- different runtime behavior and constraints',
-					source_line: 110,
+						'Component prop information for Svelte components.\n\nKept distinct from Parameter_Info despite structural similarity.\nComponent props are named attributes with different semantics:\nno positional order when passing (`<Foo {a} {b} />` = `<Foo {b} {a} />`),\nsupport two-way binding via `$bindable` rune.',
+					source_line: 82,
 					type_signature: 'Component_Prop_Info',
 					properties: [
 						{
@@ -4184,42 +4142,67 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'Generic_Param_Info',
+					name: 'Module_Json',
 					kind: 'type',
-					doc_comment: 'Generic type parameter information.',
-					source_line: 122,
-					type_signature: 'Generic_Param_Info',
+					doc_comment: 'Module information with metadata.',
+					source_line: 94,
+					type_signature: 'Module_Json',
+					properties: [
+						{
+							name: 'path',
+							kind: 'variable',
+							type_signature: 'string',
+							doc_comment: 'Module path relative to `src/lib`.',
+						},
+						{
+							name: 'identifiers',
+							kind: 'variable',
+							type_signature: 'Array<Identifier_Json>',
+						},
+						{
+							name: 'module_comment',
+							kind: 'variable',
+							type_signature: 'string',
+						},
+					],
+				},
+				{
+					name: 'Src_Json',
+					kind: 'type',
+					doc_comment: 'Top-level source metadata.',
+					see_also: [
+						'://github.com/ryanatkn/gro/blob/main/src/docs/gro_plugin_sveltekit_app.md#well-known-src',
+					],
+					source_line: 106,
+					type_signature: 'Src_Json',
 					properties: [
 						{
 							name: 'name',
 							kind: 'variable',
 							type_signature: 'string',
-							doc_comment: 'Parameter name (e.g., "T")',
 						},
 						{
-							name: 'constraint',
+							name: 'version',
 							kind: 'variable',
 							type_signature: 'string',
-							doc_comment: 'Constraint if any (e.g., "string" from "T extends string")',
 						},
 						{
-							name: 'default_type',
+							name: 'modules',
 							kind: 'variable',
-							type_signature: 'string',
-							doc_comment: 'Default type if any (e.g., "unknown" from "T = unknown")',
+							type_signature: 'Array<Module_Json>',
 						},
 					],
 				},
 				{
-					name: 'get_declaration_display_name',
+					name: 'get_identifier_display_name',
 					kind: 'function',
-					doc_comment: "Helper to get a declaration's display name.",
-					source_line: 133,
-					type_signature: '(decl: Identifier_Json): string',
+					doc_comment: "Gets an identifier's display name with generic parameters.",
+					source_line: 115,
+					type_signature: '(identifier: Identifier_Json): string',
 					return_type: 'string',
 					parameters: [
 						{
-							name: 'decl',
+							name: 'identifier',
 							type: 'Identifier_Json',
 							optional: false,
 						},
@@ -4228,13 +4211,14 @@ export const src_json: Src_Json = {
 				{
 					name: 'generate_import_statement',
 					kind: 'function',
-					doc_comment: 'Generate import statement for a declaration.',
-					source_line: 151,
-					type_signature: '(decl: Identifier_Json, module_path: string, pkg_name: string): string',
+					doc_comment: 'Generates an import statement for an identifier.',
+					source_line: 133,
+					type_signature:
+						'(identifier: Identifier_Json, module_path: string, pkg_name: string): string',
 					return_type: 'string',
 					parameters: [
 						{
-							name: 'decl',
+							name: 'identifier',
 							type: 'Identifier_Json',
 							optional: false,
 						},
@@ -4251,12 +4235,10 @@ export const src_json: Src_Json = {
 					],
 				},
 			],
-			module_comment:
-				'Top-level source metadata.\n@see https://github.com/ryanatkn/gro/blob/main/src/docs/gro_plugin_sveltekit_app.md#well-known-src',
 		},
 		{
 			path: 'storage.ts',
-			declarations: [
+			identifiers: [
 				{
 					name: 'save_to_storage',
 					kind: 'function',
@@ -4318,7 +4300,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'svelte_helpers.ts',
-			declarations: [
+			identifiers: [
 				{
 					name: 'svelte_analyze_component',
 					kind: 'function',
@@ -4356,7 +4338,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Svg.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Svg',
 					kind: 'component',
@@ -4421,7 +4403,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Teleport.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Teleport',
 					kind: 'component',
@@ -4450,7 +4432,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Theme_Input.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Theme_Input',
 					kind: 'component',
@@ -4492,7 +4474,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Themed.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Themed',
 					kind: 'component',
@@ -4546,7 +4528,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'themer.svelte.ts',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Themer',
 					kind: 'class',
@@ -4706,7 +4688,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Tome_Content.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Tome_Content',
 					kind: 'component',
@@ -4738,7 +4720,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Tome_Header.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Tome_Header',
 					kind: 'component',
@@ -4748,7 +4730,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Tome_Link.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Tome_Link',
 					kind: 'component',
@@ -4785,7 +4767,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Tome_Section_Header.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Tome_Section_Header',
 					kind: 'component',
@@ -4812,7 +4794,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Tome_Section.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Tome_Section',
 					kind: 'component',
@@ -4829,7 +4811,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'tome.ts',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Tome',
 					kind: 'type',
@@ -4891,15 +4873,14 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'ts_helpers.ts',
-			declarations: [
+			identifiers: [
 				{
 					name: 'ts_infer_declaration_kind',
 					kind: 'function',
 					doc_comment: 'Infer declaration kind from symbol and node.',
 					source_line: 57,
-					type_signature:
-						'(symbol: Symbol, node: Node): "function" | "type" | "variable" | "class" | null',
-					return_type: '"function" | "type" | "variable" | "class" | null',
+					type_signature: '(symbol: Symbol, node: Node): Identifier_Kind | null',
+					return_type: 'Identifier_Kind | null',
 					parameters: [
 						{
 							name: 'symbol',
@@ -5079,7 +5060,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'tsdoc_helpers.ts',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Tsdoc_Parsed_Comment',
 					kind: 'type',
@@ -5190,7 +5171,7 @@ export const src_json: Src_Json = {
 		},
 		{
 			path: 'Type_Link.svelte',
-			declarations: [
+			identifiers: [
 				{
 					name: 'Type_Link',
 					kind: 'component',

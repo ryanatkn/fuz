@@ -1,28 +1,3 @@
-/**
- * Top-level source metadata.
- * @see https://github.com/ryanatkn/gro/blob/main/src/docs/gro_plugin_sveltekit_app.md#well-known-src
- */
-export interface Src_Json {
-	/** Package name (same as package.json) */
-	name: string;
-	/** Package version (same as package.json) */
-	version: string;
-	/** Source modules (changed from Record to Array to eliminate path duplication) */
-	modules?: Array<Module_Json>;
-}
-
-/**
- * Module information with metadata.
- */
-export interface Module_Json {
-	/** Module path relative to src/lib */
-	path: string;
-	/** Exported declarations */
-	declarations?: Array<Identifier_Json>;
-	/** Module-level JSDoc comment */
-	module_comment?: string;
-}
-
 export type Identifier_Kind =
 	| 'type'
 	| 'function'
@@ -33,61 +8,60 @@ export type Identifier_Kind =
 	| 'css';
 
 /**
- * Declaration metadata with rich TypeScript/JSDoc information.
+ * Identifier metadata with rich TypeScript/JSDoc information.
  */
 export interface Identifier_Json {
-	/** Export identifier */
+	/** Identifier name. */
 	name: string;
-	/** Declaration kind */
+	/** Identifier kind. */
 	kind: Identifier_Kind | null;
 
-	// Documentation fields
-	/** Full JSDoc/TSDoc comment text */
 	doc_comment?: string;
-	/** Full TypeScript type signature */
 	type_signature?: string;
-	/** TypeScript modifiers (e.g., readonly, private, static) */
+	/** TypeScript modifiers like `readonly`, `private`, or `static`. */
 	modifiers?: Array<string>;
-	/** Source line number within the file */
 	source_line?: number;
-	/** Function/method parameters */
 	parameters?: Array<Parameter_Info>;
-	/** Function return type */
 	return_type?: string;
-	/** Function return value description from @returns/@return */
+	/** Function return value description from `@returns` or `@return` tag. */
 	return_description?: string;
-	/** Generic type parameters with constraints */
 	generic_params?: Array<Generic_Param_Info>;
-	/** Code examples from @ example tags */
+	/** Code examples from `@example` tags. */
 	examples?: Array<string>;
-	/** Deprecation warning from @ deprecated tag */
+	/** Deprecation warning from `@deprecated` tag. */
 	deprecated_message?: string;
-	/** Related items from @ see tags */
+	/** Related items from `@see` tags. */
 	see_also?: Array<string>;
-	/** Exceptions/errors thrown from @ throws tags */
+	/** Exceptions/errors thrown from `@throws` tags. */
 	throws?: Array<{type?: string; description: string}>;
-	/** Version information from @ since tag */
+	/** Version information from `@since` tag. */
 	since?: string;
-	/** For types/interfaces: extends clause */
 	extends?: Array<string>;
-	/** For classes: implements clause */
 	implements?: Array<string>;
-	/** Class members */
 	members?: Array<Identifier_Json>;
-	/** Interface/type properties */
 	properties?: Array<Identifier_Json>;
-	/** Component props (for Svelte components) */
 	props?: Array<Component_Prop_Info>;
+}
+
+/**
+ * Generic type parameter information.
+ */
+export interface Generic_Param_Info {
+	/** Parameter name like `T`. */
+	name: string;
+	/** Constraint like `string` from `T extends string`. */
+	constraint?: string;
+	/** Default type like `unknown` from `T = unknown`. */
+	default_type?: string;
 }
 
 /**
  * Parameter information for functions and methods.
  *
- * Note: Kept distinct from Component_Prop_Info despite structural similarity.
- * Function parameters form a tuple - the collection has positional semantics:
- * - Calling order matters: `fn(a, b)` vs `fn(b, a)`
- * - May include rest parameters, destructuring patterns
- * - Individual parameters are named, but position-dependent
+ * Kept distinct from Component_Prop_Info despite structural similarity.
+ * Function parameters form a tuple with positional semantics:
+ * calling order matters (`fn(a, b)` vs `fn(b, a)`),
+ * may include rest parameters and destructuring patterns.
  */
 export interface Parameter_Info {
 	name: string;
@@ -100,12 +74,10 @@ export interface Parameter_Info {
 /**
  * Component prop information for Svelte components.
  *
- * Note: Kept distinct from Parameter_Info despite structural similarity.
- * Component props are passed as named attributes with different semantics:
- *
- * - no positional order when passing: `<Foo {a} {b} />` = `<Foo {b} {a} />`
- * - support two-way binding via $bindable rune
- * - different runtime behavior and constraints
+ * Kept distinct from Parameter_Info despite structural similarity.
+ * Component props are named attributes with different semantics:
+ * no positional order when passing (`<Foo {a} {b} />` = `<Foo {b} {a} />`),
+ * support two-way binding via `$bindable` rune.
  */
 export interface Component_Prop_Info {
 	name: string;
@@ -117,22 +89,32 @@ export interface Component_Prop_Info {
 }
 
 /**
- * Generic type parameter information.
+ * Module information with metadata.
  */
-export interface Generic_Param_Info {
-	/** Parameter name (e.g., "T") */
-	name: string;
-	/** Constraint if any (e.g., "string" from "T extends string") */
-	constraint?: string;
-	/** Default type if any (e.g., "unknown" from "T = unknown") */
-	default_type?: string;
+export interface Module_Json {
+	/** Module path relative to `src/lib`. */
+	path: string;
+	identifiers?: Array<Identifier_Json>;
+	module_comment?: string;
 }
+
 /**
- * Helper to get a declaration's display name.
+ * Top-level source metadata.
+ *
+ * @see https://github.com/ryanatkn/gro/blob/main/src/docs/gro_plugin_sveltekit_app.md#well-known-src
  */
-export const get_declaration_display_name = (decl: Identifier_Json): string => {
-	if (decl.generic_params?.length) {
-		const params_str = decl.generic_params
+export interface Src_Json {
+	name: string;
+	version: string;
+	modules?: Array<Module_Json>;
+}
+
+/**
+ * Gets an identifier's display name with generic parameters.
+ */
+export const get_identifier_display_name = (identifier: Identifier_Json): string => {
+	if (identifier.generic_params?.length) {
+		const params_str = identifier.generic_params
 			.map((p) => {
 				let result = p.name;
 				if (p.constraint) result += ` extends ${p.constraint}`;
@@ -140,22 +122,22 @@ export const get_declaration_display_name = (decl: Identifier_Json): string => {
 				return result;
 			})
 			.join(', ');
-		return `${decl.name}<${params_str}>`;
+		return `${identifier.name}<${params_str}>`;
 	}
-	return decl.name;
+	return identifier.name;
 };
 
 /**
- * Generate import statement for a declaration.
+ * Generates an import statement for an identifier.
  */
 export const generate_import_statement = (
-	decl: Identifier_Json,
+	identifier: Identifier_Json,
 	module_path: string,
 	pkg_name: string,
 ): string => {
 	const specifier = module_path.replace('./', `${pkg_name}/`);
 
-	if (decl.name === 'default') {
+	if (identifier.name === 'default') {
 		const module_name = module_path.replace('./', '').replace(/\.(js|ts|svelte)$/, '');
 		const pascal_case = module_name
 			.split(/[-_]/)
@@ -164,7 +146,7 @@ export const generate_import_statement = (
 		return `import ${pascal_case} from '${specifier}';`;
 	}
 
-	const is_type = decl.kind === 'type';
+	const is_type = identifier.kind === 'type';
 	const prefix = is_type ? 'import type ' : 'import ';
-	return `${prefix}{${decl.name}} from '${specifier}';`;
+	return `${prefix}{${identifier.name}} from '${specifier}';`;
 };

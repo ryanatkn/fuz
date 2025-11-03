@@ -2,7 +2,7 @@
  * Rich runtime Identifier class following the "minimal + rich" pattern.
  *
  * Represents an exported identifier from a module (function, type, class, component, etc.)
- * Wraps minimal serializable declaration data with computed properties and query methods.
+ * Wraps minimal serializable identifier data with computed properties and query methods.
  * Part of the API documentation hierarchy: Pkg -> Module -> Identifier
  *
  * @see module.svelte.ts for parent Module class
@@ -14,7 +14,7 @@ import type {Module} from '$lib/module.svelte.js';
 import {
 	type Identifier_Json,
 	generate_import_statement,
-	get_declaration_display_name,
+	get_identifier_display_name,
 } from '$lib/src_json.js';
 import {api_doc_url, api_doc_url_full, github_file_url} from '$lib/package_helpers.js';
 
@@ -87,7 +87,7 @@ export class Identifier {
 	 * Display name with generic parameters.
 	 * Example: "Map<K extends string, V = unknown>"
 	 */
-	display_name = $derived(get_declaration_display_name(this.decl));
+	display_name = $derived(get_identifier_display_name(this.decl));
 
 	constructor(module: Module, decl: Identifier_Json) {
 		this.module = module;

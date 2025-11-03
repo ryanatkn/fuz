@@ -238,11 +238,11 @@ const analyze_svelte_file = (
 		const temp_source = ts.createSourceFile(source_id, svelte_source, ts.ScriptTarget.Latest, true);
 
 		// Analyze the component
-		const decl = svelte_analyze_component(ts_result.code, temp_source, checker, component_name);
+		const identifier_json = svelte_analyze_component(ts_result.code, temp_source, checker, component_name);
 
 		return {
 			path: module_path,
-			declarations: [decl],
+			identifiers: [identifier_json],
 		};
 	} catch (_err) {
 		return null;
@@ -257,7 +257,7 @@ const analyze_typescript_file = (
 ): Module_Json | null => {
 	const mod: Module_Json = {
 		path: module_path,
-		declarations: [],
+		identifiers: [],
 	};
 
 	// Extract module-level comment
@@ -266,13 +266,13 @@ const analyze_typescript_file = (
 		mod.module_comment = module_comment;
 	}
 
-	// Extract declarations - extract all exports
+	// Extract identifiers - extract all exports
 	const symbol = checker.getSymbolAtLocation(source_file);
 	if (symbol) {
 		const exports = checker.getExportsOfModule(symbol);
 		for (const export_symbol of exports) {
-			const decl = enhance_declaration(export_symbol, source_file, checker, log);
-			mod.declarations!.push(decl);
+			const identifier_json = enhance_declaration(export_symbol, source_file, checker, log);
+			mod.identifiers!.push(identifier_json);
 		}
 	}
 

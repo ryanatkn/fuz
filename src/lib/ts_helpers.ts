@@ -6,7 +6,7 @@
 
 import ts from 'typescript';
 
-import type {Identifier_Json, Generic_Param_Info} from '$lib/src_json.js';
+import type {Identifier_Json, Generic_Param_Info, Identifier_Kind} from '$lib/src_json.js';
 import {tsdoc_parse} from '$lib/tsdoc_helpers.js';
 
 /**
@@ -57,7 +57,7 @@ const ts_extract_modifiers = (
 export const ts_infer_declaration_kind = (
 	symbol: ts.Symbol,
 	node: ts.Node,
-): 'function' | 'type' | 'variable' | 'class' | null => {
+): Identifier_Kind | null => {
 	// Check symbol flags
 	if (symbol.flags & ts.SymbolFlags.Class) return 'class';
 	if (symbol.flags & ts.SymbolFlags.Function) return 'function';

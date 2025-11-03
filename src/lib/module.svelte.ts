@@ -56,10 +56,10 @@ export class Module {
 	 * Filters out default exports and creates rich Identifier objects.
 	 */
 	identifiers = $derived(
-		this.src_module.declarations
-			? this.src_module.declarations
-					.filter((decl) => decl.name !== 'default') // skip default exports
-					.map((decl) => new Identifier(this, decl))
+		this.src_module.identifiers
+			? this.src_module.identifiers
+					.filter((identifier_json) => identifier_json.name !== 'default') // skip default exports
+					.map((identifier_json) => new Identifier(this, identifier_json))
 			: [],
 	);
 
@@ -76,10 +76,10 @@ export class Module {
 	}
 
 	/**
-	 * Check if module has any declarations.
+	 * Check if module has any identifiers.
 	 */
-	has_declarations(): boolean {
-		return !!(this.src_module.declarations && this.src_module.declarations.length > 0);
+	has_identifiers(): boolean {
+		return !!(this.src_module.identifiers && this.src_module.identifiers.length > 0);
 	}
 
 	/**

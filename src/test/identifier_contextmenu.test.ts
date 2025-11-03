@@ -42,7 +42,7 @@ const create_test_identifier = (
 	const pkg = create_mock_pkg(pkg_options);
 	const src_module: Module_Json = {
 		path: module_path,
-		declarations: [decl],
+		identifiers: [decl],
 	};
 	const module = new Module(pkg, src_module);
 	return new Identifier(module, decl);
