@@ -3210,14 +3210,14 @@ export const src_json: Src_Json = {
 						},
 						{
 							name: 'has_identifiers',
-							kind: 'function',
-							type_signature: '() => boolean',
+							kind: 'variable',
+							type_signature: 'boolean',
 							doc_comment: 'Check if module has any identifiers.',
 						},
 						{
 							name: 'has_module_comment',
-							kind: 'function',
-							type_signature: '() => boolean',
+							kind: 'variable',
+							type_signature: 'boolean',
 							doc_comment: 'Check if module has a module-level comment.',
 						},
 						{

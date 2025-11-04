@@ -70,23 +70,21 @@ export class Module {
 		this.pkg.repo_url ? github_file_url(this.pkg.repo_url, `src/lib/${this.path}`) : undefined,
 	);
 
-	constructor(pkg: Pkg, src_module: Module_Json) {
-		this.pkg = pkg;
-		this.src_module = src_module;
-	}
-
 	/**
 	 * Check if module has any identifiers.
 	 */
-	has_identifiers(): boolean {
-		return !!(this.src_module.identifiers && this.src_module.identifiers.length > 0);
-	}
+	has_identifiers: boolean = $derived(
+		!!(this.src_module.identifiers && this.src_module.identifiers.length > 0),
+	);
 
 	/**
 	 * Check if module has a module-level comment.
 	 */
-	has_module_comment(): boolean {
-		return !!this.src_module.module_comment;
+	has_module_comment: boolean = $derived(!!this.src_module.module_comment);
+
+	constructor(pkg: Pkg, src_module: Module_Json) {
+		this.pkg = pkg;
+		this.src_module = src_module;
 	}
 
 	/**
