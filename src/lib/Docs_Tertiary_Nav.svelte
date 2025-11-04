@@ -15,6 +15,8 @@
 
 	const {tomes, tomes_by_name, sidebar = true}: Props = $props();
 
+	const pkg = pkg_context.get();
+
 	const selected_item = $derived(tomes.find((t) => to_tome_pathname(t) === page.url.pathname));
 
 	const tomes_related_to_selected = $derived(
@@ -30,9 +32,7 @@
 		return should_show;
 	});
 
-	// detect if we're on a module page
-	const pkg = pkg_context.get();
-	const is_module_page = $derived(
+	const page_is_module = $derived(
 		page.url.pathname.startsWith(DOCS_API_PATH + '/') && page.url.pathname !== DOCS_API_PATH,
 	);
 </script>
@@ -47,7 +47,7 @@
 	{#if should_show_page_links}
 		<Docs_Page_Links {sidebar} />
 	{/if}
-	{#if is_module_page}
+	{#if page_is_module}
 		<div class="modules_list">
 			<h4 class="mb_sm">modules</h4>
 			<ul class="unstyled">
