@@ -93,89 +93,121 @@ export class Identifier {
 	 */
 	display_name = $derived(get_identifier_display_name(this.identifier_json));
 
-	constructor(module: Module, identifier_json: Identifier_Json) {
-		this.module = module;
-		this.identifier_json = identifier_json;
-	}
+	// Direct accessors for identifier_json properties
+	// These provide convenient access without repeatedly typing `.identifier_json`
 
-	// TODO BLOCK maybe refactor these to $derived?
+	/**
+	 * TypeScript type signature.
+	 */
+	type_signature = $derived(this.identifier_json.type_signature);
+
+	/**
+	 * Main documentation comment.
+	 */
+	doc_comment = $derived(this.identifier_json.doc_comment);
+
+	/**
+	 * Deprecation message if identifier is deprecated.
+	 */
+	deprecated_message = $derived(this.identifier_json.deprecated_message);
+
+	/**
+	 * Function/method parameters.
+	 */
+	parameters = $derived(this.identifier_json.parameters);
+
+	/**
+	 * Svelte component props.
+	 */
+	props = $derived(this.identifier_json.props);
+
+	/**
+	 * Return type for functions/methods.
+	 */
+	return_type = $derived(this.identifier_json.return_type);
+
+	/**
+	 * Return type description from JSDoc @returns.
+	 */
+	return_description = $derived(this.identifier_json.return_description);
+
+	/**
+	 * Generic type parameters.
+	 */
+	generic_params = $derived(this.identifier_json.generic_params);
+
+	/**
+	 * Base classes/types this extends.
+	 */
+	extends = $derived(this.identifier_json.extends);
+
+	/**
+	 * Interfaces this implements.
+	 */
+	implements = $derived(this.identifier_json.implements);
+
+	/**
+	 * Exception types this may throw.
+	 */
+	throws = $derived(this.identifier_json.throws);
+
+	/**
+	 * Version when this was introduced (from @since).
+	 */
+	since = $derived(this.identifier_json.since);
+
+	/**
+	 * Code examples from JSDoc @example.
+	 */
+	examples = $derived(this.identifier_json.examples);
+
+	/**
+	 * See-also references from JSDoc @see.
+	 */
+	see_also = $derived(this.identifier_json.see_also);
+
+	/**
+	 * Class members (for classes).
+	 */
+	members = $derived(this.identifier_json.members);
+
+	/**
+	 * Type/interface properties.
+	 */
+	properties = $derived(this.identifier_json.properties);
 
 	/**
 	 * Check if identifier has code examples.
 	 */
-	has_examples(): boolean {
-		return !!(this.identifier_json.examples && this.identifier_json.examples.length > 0);
-	}
+	has_examples = $derived(!!(this.examples && this.examples.length > 0));
 
 	/**
 	 * Check if identifier is deprecated.
 	 */
-	is_deprecated(): boolean {
-		return !!this.identifier_json.deprecated_message;
-	}
+	is_deprecated = $derived(!!this.deprecated_message);
 
 	/**
 	 * Check if identifier has documentation.
 	 */
-	has_documentation(): boolean {
-		return !!this.identifier_json.doc_comment;
-	}
-
-	/**
-	 * Check if identifier is a function.
-	 */
-	is_function(): boolean {
-		return this.identifier_json.kind === 'function';
-	}
-
-	/**
-	 * Check if identifier is a type.
-	 */
-	is_type(): boolean {
-		return this.identifier_json.kind === 'type';
-	}
-
-	/**
-	 * Check if identifier is a Svelte component.
-	 */
-	is_component(): boolean {
-		return this.identifier_json.kind === 'component';
-	}
-
-	/**
-	 * Check if identifier is a class.
-	 */
-	is_class(): boolean {
-		return this.identifier_json.kind === 'class';
-	}
+	has_documentation = $derived(!!this.doc_comment);
 
 	/**
 	 * Check if function/method has parameters.
 	 */
-	has_parameters(): boolean {
-		return !!(this.identifier_json.parameters && this.identifier_json.parameters.length > 0);
-	}
+	has_parameters = $derived(!!(this.parameters && this.parameters.length > 0));
 
 	/**
 	 * Check if component has props.
 	 */
-	has_props(): boolean {
-		return !!(this.identifier_json.props && this.identifier_json.props.length > 0);
-	}
-
-	/**
-	 * Check if function has a return type.
-	 */
-	has_return_type(): boolean {
-		return !!this.identifier_json.return_type;
-	}
+	has_props = $derived(!!(this.props && this.props.length > 0));
 
 	/**
 	 * Check if type/function has generic parameters.
 	 */
-	has_generics(): boolean {
-		return !!(
-			this.identifier_json.generic_params && this.identifier_json.generic_params.length > 0
-		);
+	has_generics = $derived(!!(this.generic_params && this.generic_params.length > 0));
+
+	constructor(module: Module, identifier_json: Identifier_Json) {
+		this.module = module;
+		this.identifier_json = identifier_json;
 	}
 }

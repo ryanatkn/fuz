@@ -146,7 +146,6 @@ export const generate_import_statement = (
 		return `import ${pascal_case} from '${specifier}';`;
 	}
 
-	const is_type = identifier.kind === 'type';
-	const prefix = is_type ? 'import type ' : 'import ';
+	const prefix = identifier.kind === 'type' ? 'import type ' : 'import ';
 	return `${prefix}{${identifier.name}} from '${specifier}';`;
 };
