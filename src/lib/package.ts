@@ -2485,7 +2485,7 @@ export const src_json: Src_Json = {
 							type_signature: 'Module',
 						},
 						{
-							name: 'decl',
+							name: 'identifier_json',
 							kind: 'variable',
 							modifiers: ['readonly'],
 							type_signature: 'Identifier_Json',
@@ -4901,7 +4901,7 @@ export const src_json: Src_Json = {
 						'Extract function/method information including parameters\nwith descriptions and default values.',
 					source_line: 88,
 					type_signature:
-						'(node: Node, symbol: Symbol, checker: TypeChecker, decl: Identifier_Json, tsdoc: Tsdoc_Parsed_Comment | undefined): void',
+						'(node: Node, symbol: Symbol, checker: TypeChecker, identifier: Identifier_Json, tsdoc: Tsdoc_Parsed_Comment | undefined): void',
 					return_type: 'void',
 					parameters: [
 						{
@@ -4920,7 +4920,7 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 						{
-							name: 'decl',
+							name: 'identifier',
 							type: 'Identifier_Json',
 							optional: false,
 						},
@@ -4937,7 +4937,7 @@ export const src_json: Src_Json = {
 					doc_comment: 'Extract type/interface information with rich property metadata.',
 					source_line: 157,
 					type_signature:
-						'(node: Node, _symbol: Symbol, checker: TypeChecker, decl: Identifier_Json): void',
+						'(node: Node, _symbol: Symbol, checker: TypeChecker, identifier: Identifier_Json): void',
 					return_type: 'void',
 					parameters: [
 						{
@@ -4956,7 +4956,7 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 						{
-							name: 'decl',
+							name: 'identifier',
 							type: 'Identifier_Json',
 							optional: false,
 						},
@@ -4968,7 +4968,7 @@ export const src_json: Src_Json = {
 					doc_comment: 'Extract class information with rich member metadata.',
 					source_line: 219,
 					type_signature:
-						'(node: Node, _symbol: Symbol, checker: TypeChecker, decl: Identifier_Json): void',
+						'(node: Node, _symbol: Symbol, checker: TypeChecker, identifier: Identifier_Json): void',
 					return_type: 'void',
 					parameters: [
 						{
@@ -4987,7 +4987,7 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 						{
-							name: 'decl',
+							name: 'identifier',
 							type: 'Identifier_Json',
 							optional: false,
 						},
@@ -4999,7 +4999,7 @@ export const src_json: Src_Json = {
 					doc_comment: 'Extract variable information.',
 					source_line: 289,
 					type_signature:
-						'(node: Node, symbol: Symbol, checker: TypeChecker, decl: Identifier_Json): void',
+						'(node: Node, symbol: Symbol, checker: TypeChecker, identifier: Identifier_Json): void',
 					return_type: 'void',
 					parameters: [
 						{
@@ -5018,7 +5018,7 @@ export const src_json: Src_Json = {
 							optional: false,
 						},
 						{
-							name: 'decl',
+							name: 'identifier',
 							type: 'Identifier_Json',
 							optional: false,
 						},
@@ -5146,16 +5146,16 @@ export const src_json: Src_Json = {
 					name: 'tsdoc_apply_to_declaration',
 					kind: 'function',
 					doc_comment:
-						'Apply parsed TSDoc metadata to a declaration.\n\nConsolidates the common pattern of assigning TSDoc fields to declarations,\nwith conditional assignment for array fields (only if non-empty).',
+						'Apply parsed TSDoc metadata to an identifier.\n\nConsolidates the common pattern of assigning TSDoc fields to identifiers,\nwith conditional assignment for array fields (only if non-empty).',
 					source_line: 151,
-					type_signature: '(decl: any, tsdoc: Tsdoc_Parsed_Comment | undefined): void',
+					type_signature: '(identifier: any, tsdoc: Tsdoc_Parsed_Comment | undefined): void',
 					return_type: 'void',
 					parameters: [
 						{
-							name: 'decl',
+							name: 'identifier',
 							type: 'any',
 							optional: false,
-							description: '- The declaration to update',
+							description: '- The identifier to update',
 						},
 						{
 							name: 'tsdoc',

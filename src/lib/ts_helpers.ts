@@ -89,7 +89,7 @@ export const ts_extract_function_info = (
 	node: ts.Node,
 	symbol: ts.Symbol,
 	checker: ts.TypeChecker,
-	decl: Identifier_Json,
+	identifier: Identifier_Json,
 	tsdoc: ReturnType<typeof tsdoc_parse>,
 ): void => {
 	try {
@@ -98,26 +98,26 @@ export const ts_extract_function_info = (
 
 		if (signatures.length > 0) {
 			const sig = signatures[0]!;
-			decl.type_signature = checker.signatureToString(sig);
+			identifier.type_signature = checker.signatureToString(sig);
 
 			const return_type = checker.getReturnTypeOfSignature(sig);
-			decl.return_type = checker.typeToString(return_type);
+			identifier.return_type = checker.typeToString(return_type);
 
 			// Extract return description from TSDoc
 			if (tsdoc?.returns) {
-				decl.return_description = tsdoc.returns;
+				identifier.return_description = tsdoc.returns;
 			}
 
 			// Extract throws and since from TSDoc
 			if (tsdoc?.throws?.length) {
-				decl.throws = tsdoc.throws;
+				identifier.throws = tsdoc.throws;
 			}
 			if (tsdoc?.since) {
-				decl.since = tsdoc.since;
+				identifier.since = tsdoc.since;
 			}
 
 			// Extract parameters with descriptions and default values
-			decl.parameters = sig.parameters.map((param) => {
+			identifier.parameters = sig.parameters.map((param) => {
 				const param_decl = param.valueDeclaration;
 				const param_type = checker.getTypeOfSymbolAtLocation(param, param_decl!);
 
@@ -146,7 +146,7 @@ export const ts_extract_function_info = (
 	// Extract generic type parameters
 	if (ts.isFunctionDeclaration(node) || ts.isArrowFunction(node) || ts.isFunctionExpression(node)) {
 		if (node.typeParameters?.length) {
-			decl.generic_params = node.typeParameters.map(ts_parse_generic_param);
+			identifier.generic_params = node.typeParameters.map(ts_parse_generic_param);
 		}
 	}
 };
@@ -158,34 +158,34 @@ export const ts_extract_type_info = (
 	node: ts.Node,
 	_symbol: ts.Symbol,
 	checker: ts.TypeChecker,
-	decl: Identifier_Json,
+	identifier: Identifier_Json,
 ): void => {
 	try {
 		const type = checker.getTypeAtLocation(node);
-		decl.type_signature = checker.typeToString(type);
+		identifier.type_signature = checker.typeToString(type);
 	} catch (_err) {
 		// Ignore: Type checker may fail on complex or recursive types
 	}
 
 	if (ts.isTypeAliasDeclaration(node) || ts.isInterfaceDeclaration(node)) {
 		if (node.typeParameters?.length) {
-			decl.generic_params = node.typeParameters.map(ts_parse_generic_param);
+			identifier.generic_params = node.typeParameters.map(ts_parse_generic_param);
 		}
 	}
 
 	if (ts.isInterfaceDeclaration(node)) {
 		if (node.heritageClauses) {
-			decl.extends = node.heritageClauses
+			identifier.extends = node.heritageClauses
 				.filter((hc) => hc.token === ts.SyntaxKind.ExtendsKeyword)
 				.flatMap((hc) => hc.types.map((t) => t.getText()));
 		}
 
 		// Extract properties with full metadata
-		decl.properties = [];
+		identifier.properties = [];
 		for (const member of node.members) {
 			if (ts.isPropertySignature(member) && ts.isIdentifier(member.name)) {
 				const prop_name = member.name.text;
-				const prop_decl: Identifier_Json = {
+				const prop_identifier: Identifier_Json = {
 					name: prop_name,
 					kind: 'variable',
 				};
@@ -193,21 +193,21 @@ export const ts_extract_type_info = (
 				// Extract modifiers
 				const modifier_flags = ts_extract_modifiers(ts.getModifiers(member));
 				if (modifier_flags.length > 0) {
-					prop_decl.modifiers = modifier_flags;
+					prop_identifier.modifiers = modifier_flags;
 				}
 
 				// Extract type
 				if (member.type) {
-					prop_decl.type_signature = member.type.getText();
+					prop_identifier.type_signature = member.type.getText();
 				}
 
 				// Extract TSDoc
 				const prop_tsdoc = tsdoc_parse(member, node.getSourceFile());
 				if (prop_tsdoc) {
-					prop_decl.doc_comment = prop_tsdoc.text;
+					prop_identifier.doc_comment = prop_tsdoc.text;
 				}
 
-				decl.properties.push(prop_decl);
+				identifier.properties.push(prop_identifier);
 			}
 		}
 	}
@@ -220,32 +220,32 @@ export const ts_extract_class_info = (
 	node: ts.Node,
 	_symbol: ts.Symbol,
 	checker: ts.TypeChecker,
-	decl: Identifier_Json,
+	identifier: Identifier_Json,
 ): void => {
 	if (!ts.isClassDeclaration(node)) return;
 
 	if (node.heritageClauses) {
-		decl.extends = node.heritageClauses
+		identifier.extends = node.heritageClauses
 			.filter((hc) => hc.token === ts.SyntaxKind.ExtendsKeyword)
 			.flatMap((hc) => hc.types.map((t) => t.getText()));
 
-		decl.implements = node.heritageClauses
+		identifier.implements = node.heritageClauses
 			.filter((hc) => hc.token === ts.SyntaxKind.ImplementsKeyword)
 			.flatMap((hc) => hc.types.map((t) => t.getText()));
 	}
 
 	if (node.typeParameters?.length) {
-		decl.generic_params = node.typeParameters.map(ts_parse_generic_param);
+		identifier.generic_params = node.typeParameters.map(ts_parse_generic_param);
 	}
 
 	// Extract members with full metadata
-	decl.members = [];
+	identifier.members = [];
 	for (const member of node.members) {
 		if (ts.isPropertyDeclaration(member) || ts.isMethodDeclaration(member)) {
 			const member_name = ts.isIdentifier(member.name) ? member.name.text : member.name.getText();
 			if (!member_name) continue;
 
-			const member_decl: Identifier_Json = {
+			const member_identifier: Identifier_Json = {
 				name: member_name,
 				kind: ts.isMethodDeclaration(member) ? 'function' : 'variable',
 			};
@@ -253,19 +253,19 @@ export const ts_extract_class_info = (
 			// Extract visibility and modifiers
 			const modifier_flags = ts_extract_modifiers(ts.getModifiers(member));
 			if (modifier_flags.length > 0) {
-				member_decl.modifiers = modifier_flags;
+				member_identifier.modifiers = modifier_flags;
 			}
 
 			// Extract type information
 			try {
 				if (ts.isPropertyDeclaration(member) && member.type) {
-					member_decl.type_signature = member.type.getText();
+					member_identifier.type_signature = member.type.getText();
 				} else if (ts.isMethodDeclaration(member)) {
 					// For methods, get full signature
 					const member_symbol = checker.getSymbolAtLocation(member.name);
 					if (member_symbol) {
 						const member_type = checker.getTypeOfSymbolAtLocation(member_symbol, member);
-						member_decl.type_signature = checker.typeToString(member_type);
+						member_identifier.type_signature = checker.typeToString(member_type);
 					}
 				}
 			} catch (_err) {
@@ -275,10 +275,10 @@ export const ts_extract_class_info = (
 			// Extract TSDoc
 			const member_tsdoc = tsdoc_parse(member, node.getSourceFile());
 			if (member_tsdoc) {
-				member_decl.doc_comment = member_tsdoc.text;
+				member_identifier.doc_comment = member_tsdoc.text;
 			}
 
-			decl.members.push(member_decl);
+			identifier.members.push(member_identifier);
 		}
 	}
 };
@@ -290,11 +290,11 @@ export const ts_extract_variable_info = (
 	node: ts.Node,
 	symbol: ts.Symbol,
 	checker: ts.TypeChecker,
-	decl: Identifier_Json,
+	identifier: Identifier_Json,
 ): void => {
 	try {
 		const type = checker.getTypeOfSymbolAtLocation(symbol, node);
-		decl.type_signature = checker.typeToString(type);
+		identifier.type_signature = checker.typeToString(type);
 	} catch (_err) {
 		// Ignore: Type checker may fail on complex variable types
 	}

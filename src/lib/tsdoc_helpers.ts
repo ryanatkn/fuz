@@ -140,34 +140,34 @@ export const tsdoc_parse = (
 };
 
 /**
- * Apply parsed TSDoc metadata to a declaration.
+ * Apply parsed TSDoc metadata to an identifier.
  *
- * Consolidates the common pattern of assigning TSDoc fields to declarations,
+ * Consolidates the common pattern of assigning TSDoc fields to identifiers,
  * with conditional assignment for array fields (only if non-empty).
  *
- * @param decl - The declaration to update
+ * @param identifier - The identifier to update
  * @param tsdoc - The parsed TSDoc comment (if available)
  */
 export const tsdoc_apply_to_declaration = (
-	decl: any, // Using any to avoid circular import with src_json.ts
+	identifier: any, // Using any to avoid circular import with src_json.ts
 	tsdoc: Tsdoc_Parsed_Comment | undefined,
 ): void => {
 	if (!tsdoc) return;
 
-	decl.doc_comment = tsdoc.text;
-	decl.deprecated_message = tsdoc.deprecated_message;
+	identifier.doc_comment = tsdoc.text;
+	identifier.deprecated_message = tsdoc.deprecated_message;
 
 	// Only assign arrays if they have content
 	if (tsdoc.examples?.length) {
-		decl.examples = tsdoc.examples;
+		identifier.examples = tsdoc.examples;
 	}
 	if (tsdoc.see_also?.length) {
-		decl.see_also = tsdoc.see_also;
+		identifier.see_also = tsdoc.see_also;
 	}
 	if (tsdoc.throws?.length) {
-		decl.throws = tsdoc.throws;
+		identifier.throws = tsdoc.throws;
 	}
 	if (tsdoc.since) {
-		decl.since = tsdoc.since;
+		identifier.since = tsdoc.since;
 	}
 };

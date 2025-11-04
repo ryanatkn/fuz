@@ -114,9 +114,9 @@ export const gen: Gen = async ({log, filer}) => {
 };
 
 /**
- * Enhance a single declaration with rich metadata
+ * Enhance a single identifier with rich metadata
  */
-const enhance_declaration = (
+const enhance_identifier = (
 	symbol: ts.Symbol,
 	source_file: ts.SourceFile,
 	checker: ts.TypeChecker,
@@ -238,7 +238,12 @@ const analyze_svelte_file = (
 		const temp_source = ts.createSourceFile(source_id, svelte_source, ts.ScriptTarget.Latest, true);
 
 		// Analyze the component
-		const identifier_json = svelte_analyze_component(ts_result.code, temp_source, checker, component_name);
+		const identifier_json = svelte_analyze_component(
+			ts_result.code,
+			temp_source,
+			checker,
+			component_name,
+		);
 
 		return {
 			path: module_path,
@@ -271,7 +276,7 @@ const analyze_typescript_file = (
 	if (symbol) {
 		const exports = checker.getExportsOfModule(symbol);
 		for (const export_symbol of exports) {
-			const identifier_json = enhance_declaration(export_symbol, source_file, checker, log);
+			const identifier_json = enhance_identifier(export_symbol, source_file, checker, log);
 			mod.identifiers!.push(identifier_json);
 		}
 	}

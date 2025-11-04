@@ -35,28 +35,28 @@ const create_mock_pkg = (options?: {
 
 // Helper to create an Identifier for testing
 const create_test_identifier = (
-	decl: Identifier_Json,
+	identifier_json: Identifier_Json,
 	module_path: string,
 	pkg_options?: Parameters<typeof create_mock_pkg>[0],
 ): Identifier => {
 	const pkg = create_mock_pkg(pkg_options);
 	const src_module: Module_Json = {
 		path: module_path,
-		identifiers: [decl],
+		identifiers: [identifier_json],
 	};
 	const module = new Module(pkg, src_module);
-	return new Identifier(module, decl);
+	return new Identifier(module, identifier_json);
 };
 
 describe('create_identifier_contextmenu', () => {
-	const base_decl: Identifier_Json = {
+	const base_identifier: Identifier_Json = {
 		name: 'MyType',
 		kind: 'type',
 		source_line: 10,
 	};
 
 	test('returns array of contextmenu entries', () => {
-		const identifier = create_test_identifier(base_decl, './types.ts', {
+		const identifier = create_test_identifier(base_identifier, './types.ts', {
 			repo_url: 'https://github.com/user/repo',
 			homepage_url: 'https://example.com',
 		});
@@ -67,7 +67,7 @@ describe('create_identifier_contextmenu', () => {
 	});
 
 	test('includes navigate to API docs entry', () => {
-		const identifier = create_test_identifier(base_decl, './types.ts');
+		const identifier = create_test_identifier(base_identifier, './types.ts');
 		const entries = create_identifier_contextmenu(identifier);
 
 		const nav_entry = entries.find((e) => typeof e === 'object' && e.snippet === 'link');
@@ -82,7 +82,7 @@ describe('create_identifier_contextmenu', () => {
 	});
 
 	test('includes copy name entry', () => {
-		const identifier = create_test_identifier(base_decl, './types.ts');
+		const identifier = create_test_identifier(base_identifier, './types.ts');
 		const entries = create_identifier_contextmenu(identifier);
 
 		const copy_entries = entries.filter(
@@ -92,7 +92,7 @@ describe('create_identifier_contextmenu', () => {
 	});
 
 	test('includes copy import entry', () => {
-		const identifier = create_test_identifier(base_decl, './types.ts');
+		const identifier = create_test_identifier(base_identifier, './types.ts');
 		const entries = create_identifier_contextmenu(identifier);
 
 		const import_entry = entries.find(
@@ -102,7 +102,7 @@ describe('create_identifier_contextmenu', () => {
 	});
 
 	test('includes view source entry when repo_url and source_location provided', () => {
-		const identifier = create_test_identifier(base_decl, './types.ts', {
+		const identifier = create_test_identifier(base_identifier, './types.ts', {
 			repo_url: 'https://github.com/user/repo',
 		});
 		const entries = create_identifier_contextmenu(identifier);
@@ -114,20 +114,20 @@ describe('create_identifier_contextmenu', () => {
 
 	test('includes view source entry with default repo_url', () => {
 		// repo_url is required in Pkg interface, so it always has a value (uses default in test helper)
-		const identifier = create_test_identifier(base_decl, './types.ts');
+		const identifier = create_test_identifier(base_identifier, './types.ts');
 		const entries = create_identifier_contextmenu(identifier);
 
 		const link_entries = entries.filter((e) => typeof e === 'object' && e.snippet === 'link');
-		// Should have both navigate to docs and view source (since base_decl has source_line)
+		// Should have both navigate to docs and view source (since base_identifier has source_line)
 		assert.strictEqual(link_entries.length, 2, 'should have both docs and source links');
 	});
 
 	test('excludes view source entry when no source_location', () => {
-		const decl_no_location: Identifier_Json = {
+		const identifier_no_location: Identifier_Json = {
 			name: 'MyType',
 			kind: 'type',
 		};
-		const identifier = create_test_identifier(decl_no_location, './types.ts', {
+		const identifier = create_test_identifier(identifier_no_location, './types.ts', {
 			repo_url: 'https://github.com/user/repo',
 		});
 		const entries = create_identifier_contextmenu(identifier);
@@ -142,7 +142,7 @@ describe('create_identifier_contextmenu', () => {
 	});
 
 	test('includes copy docs link entry when homepage_url provided', () => {
-		const identifier = create_test_identifier(base_decl, './types.ts', {
+		const identifier = create_test_identifier(base_identifier, './types.ts', {
 			homepage_url: 'https://example.com',
 		});
 		const entries = create_identifier_contextmenu(identifier);
@@ -154,7 +154,7 @@ describe('create_identifier_contextmenu', () => {
 	});
 
 	test('excludes copy docs link entry when no homepage_url', () => {
-		const identifier = create_test_identifier(base_decl, './types.ts');
+		const identifier = create_test_identifier(base_identifier, './types.ts');
 		const entries = create_identifier_contextmenu(identifier);
 
 		const copy_link_entry = entries.find(
@@ -168,7 +168,7 @@ describe('create_identifier_contextmenu', () => {
 	});
 
 	test('handles module path with ./ prefix', () => {
-		const identifier = create_test_identifier(base_decl, './foo/bar.ts');
+		const identifier = create_test_identifier(base_identifier, './foo/bar.ts');
 		const entries = create_identifier_contextmenu(identifier);
 
 		const nav_entry = entries.find((e) => typeof e === 'object' && e.snippet === 'link');
@@ -185,11 +185,11 @@ describe('create_identifier_contextmenu', () => {
 	});
 
 	test('URL encodes module and identifier names', () => {
-		const special_decl: Identifier_Json = {
+		const special_identifier: Identifier_Json = {
 			name: 'My Type',
 			kind: 'type',
 		};
-		const identifier = create_test_identifier(special_decl, './my module.ts');
+		const identifier = create_test_identifier(special_identifier, './my module.ts');
 		const entries = create_identifier_contextmenu(identifier);
 
 		const nav_entry = entries.find((e) => typeof e === 'object' && e.snippet === 'link');
@@ -204,7 +204,7 @@ describe('create_identifier_contextmenu', () => {
 	});
 
 	test('source URL includes line number', () => {
-		const identifier = create_test_identifier(base_decl, './types.ts', {
+		const identifier = create_test_identifier(base_identifier, './types.ts', {
 			repo_url: 'https://github.com/user/repo',
 		});
 		const entries = create_identifier_contextmenu(identifier);
@@ -225,7 +225,7 @@ describe('create_identifier_contextmenu', () => {
 	});
 
 	test('all entries have required structure', () => {
-		const identifier = create_test_identifier(base_decl, './types.ts', {
+		const identifier = create_test_identifier(base_identifier, './types.ts', {
 			repo_url: 'https://github.com/user/repo',
 			homepage_url: 'https://example.com',
 		});

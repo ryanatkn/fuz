@@ -29,7 +29,7 @@ import {api_doc_url, api_doc_url_full, github_file_url} from '$lib/package_helpe
  */
 export class Identifier {
 	readonly module: Module = $state.raw()!;
-	readonly decl: Identifier_Json = $state.raw()!;
+	readonly identifier_json: Identifier_Json = $state.raw()!;
 
 	/**
 	 * Get parent Pkg for accessing package metadata.
@@ -44,20 +44,24 @@ export class Identifier {
 	/**
 	 * Identifier name (export name).
 	 */
-	name = $derived(this.decl.name);
+	name = $derived(this.identifier_json.name);
 
 	/**
 	 * Declaration kind (type, function, class, etc.).
 	 */
-	kind = $derived(this.decl.kind);
+	kind = $derived(this.identifier_json.kind);
 
 	/**
 	 * GitHub source URL with line number.
 	 * Example: "https://github.com/ryanatkn/fuz/blob/main/src/lib/Alert.ts#L42"
 	 */
 	source_url = $derived(
-		this.pkg.repo_url && this.decl.source_line
-			? github_file_url(this.pkg.repo_url, `src/lib/${this.module_path}`, this.decl.source_line)
+		this.pkg.repo_url && this.identifier_json.source_line
+			? github_file_url(
+					this.pkg.repo_url,
+					`src/lib/${this.module_path}`,
+					this.identifier_json.source_line,
+				)
 			: undefined,
 	);
 
@@ -72,7 +76,7 @@ export class Identifier {
 	 * Example: "import {Alert} from '@ryanatkn/fuz/Alert.js';"
 	 */
 	import_statement = $derived(
-		generate_import_statement(this.decl, this.module_path, this.pkg.package_json.name),
+		generate_import_statement(this.identifier_json, this.module_path, this.pkg.package_json.name),
 	);
 
 	/**
@@ -87,11 +91,11 @@ export class Identifier {
 	 * Display name with generic parameters.
 	 * Example: "Map<K extends string, V = unknown>"
 	 */
-	display_name = $derived(get_identifier_display_name(this.decl));
+	display_name = $derived(get_identifier_display_name(this.identifier_json));
 
-	constructor(module: Module, decl: Identifier_Json) {
+	constructor(module: Module, identifier_json: Identifier_Json) {
 		this.module = module;
-		this.decl = decl;
+		this.identifier_json = identifier_json;
 	}
 
 	// TODO BLOCK maybe refactor these to $derived?
@@ -100,76 +104,78 @@ export class Identifier {
 	 * Check if identifier has code examples.
 	 */
 	has_examples(): boolean {
-		return !!(this.decl.examples && this.decl.examples.length > 0);
+		return !!(this.identifier_json.examples && this.identifier_json.examples.length > 0);
 	}
 
 	/**
 	 * Check if identifier is deprecated.
 	 */
 	is_deprecated(): boolean {
-		return !!this.decl.deprecated_message;
+		return !!this.identifier_json.deprecated_message;
 	}
 
 	/**
 	 * Check if identifier has documentation.
 	 */
 	has_documentation(): boolean {
-		return !!this.decl.doc_comment;
+		return !!this.identifier_json.doc_comment;
 	}
 
 	/**
 	 * Check if identifier is a function.
 	 */
 	is_function(): boolean {
-		return this.decl.kind === 'function';
+		return this.identifier_json.kind === 'function';
 	}
 
 	/**
 	 * Check if identifier is a type.
 	 */
 	is_type(): boolean {
-		return this.decl.kind === 'type';
+		return this.identifier_json.kind === 'type';
 	}
 
 	/**
 	 * Check if identifier is a Svelte component.
 	 */
 	is_component(): boolean {
-		return this.decl.kind === 'component';
+		return this.identifier_json.kind === 'component';
 	}
 
 	/**
 	 * Check if identifier is a class.
 	 */
 	is_class(): boolean {
-		return this.decl.kind === 'class';
+		return this.identifier_json.kind === 'class';
 	}
 
 	/**
 	 * Check if function/method has parameters.
 	 */
 	has_parameters(): boolean {
-		return !!(this.decl.parameters && this.decl.parameters.length > 0);
+		return !!(this.identifier_json.parameters && this.identifier_json.parameters.length > 0);
 	}
 
 	/**
 	 * Check if component has props.
 	 */
 	has_props(): boolean {
-		return !!(this.decl.props && this.decl.props.length > 0);
+		return !!(this.identifier_json.props && this.identifier_json.props.length > 0);
 	}
 
 	/**
 	 * Check if function has a return type.
 	 */
 	has_return_type(): boolean {
-		return !!this.decl.return_type;
+		return !!this.identifier_json.return_type;
 	}
 
 	/**
 	 * Check if type/function has generic parameters.
 	 */
 	has_generics(): boolean {
-		return !!(this.decl.generic_params && this.decl.generic_params.length > 0);
+		return !!(
+			this.identifier_json.generic_params && this.identifier_json.generic_params.length > 0
+		);
 	}
 }
