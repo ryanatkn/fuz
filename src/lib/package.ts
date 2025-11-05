@@ -2494,7 +2494,7 @@ export const src_json: Src_Json = {
 					name: 'create_identifier_contextmenu',
 					kind: 'function',
 					doc_comment: 'Create contextmenu entries for an identifier',
-					source_line: 7,
+					source_line: 9,
 					type_signature: '(identifier: Identifier): Contextmenu_Params[]',
 					return_type: 'Contextmenu_Params[]',
 					parameters: [
@@ -2785,7 +2785,7 @@ export const src_json: Src_Json = {
 			],
 		},
 		{
-			path: 'intersect.ts',
+			path: 'intersect.svelte.ts',
 			identifiers: [
 				{
 					name: 'Intersect_Params',
@@ -2832,30 +2832,31 @@ export const src_json: Src_Json = {
 				{
 					name: 'intersect_attachment',
 					kind: 'function',
-					doc_comment: 'Creates an attachment that observes element viewport intersection.',
-					source_line: 32,
+					doc_comment:
+						'Creates an attachment that observes element viewport intersection.\nUses the lazy function pattern to optimize reactivity:\ncallbacks can update without recreating the observer, preserving state.',
+					source_line: 34,
 					type_signature:
-						'(params: Intersect_Params_Or_Callback | null | undefined): Attachment<HTMLElement | SVGElement>',
+						'(get_params: () => Intersect_Params_Or_Callback | null | undefined): Attachment<HTMLElement | SVGElement>',
 					return_type: 'Attachment<HTMLElement | SVGElement>',
 					parameters: [
 						{
-							name: 'params',
-							type: 'Intersect_Params_Or_Callback | null | undefined',
+							name: 'get_params',
+							type: '() => Intersect_Params_Or_Callback | null | undefined',
 							optional: false,
-							description: '- Callback function or params object, or nullish to disable',
+							description: '- Function that returns callback, params object, or nullish to disable',
 						},
 					],
 				},
 				{
 					name: 'On_Intersect',
 					kind: 'type',
-					source_line: 89,
+					source_line: 143,
 					type_signature: 'On_Intersect',
 				},
 				{
 					name: 'Intersect_State',
 					kind: 'type',
-					source_line: 91,
+					source_line: 145,
 					type_signature: 'Intersect_State',
 					properties: [
 						{
@@ -2888,13 +2889,13 @@ export const src_json: Src_Json = {
 				{
 					name: 'On_Disconnect',
 					kind: 'type',
-					source_line: 100,
+					source_line: 154,
 					type_signature: 'On_Disconnect',
 				},
 				{
 					name: 'Disconnect_State',
 					kind: 'type',
-					source_line: 102,
+					source_line: 156,
 					type_signature: 'Disconnect_State',
 					properties: [
 						{
@@ -4020,7 +4021,7 @@ export const src_json: Src_Json = {
 					see_also: [
 						'://github.com/ryanatkn/gro/blob/main/src/docs/gro_plugin_sveltekit_app.md#well-known-src',
 					],
-					source_line: 6,
+					source_line: 8,
 					type_signature: 'Src_Json',
 					properties: [
 						{
@@ -4044,7 +4045,7 @@ export const src_json: Src_Json = {
 					name: 'Module_Json',
 					kind: 'type',
 					doc_comment: 'Module information with metadata.',
-					source_line: 15,
+					source_line: 17,
 					type_signature: 'Module_Json',
 					properties: [
 						{
@@ -4068,14 +4069,14 @@ export const src_json: Src_Json = {
 				{
 					name: 'Identifier_Kind',
 					kind: 'type',
-					source_line: 22,
+					source_line: 24,
 					type_signature: 'Identifier_Kind',
 				},
 				{
 					name: 'Identifier_Json',
 					kind: 'type',
 					doc_comment: 'Identifier metadata with rich TypeScript/JSDoc information.',
-					source_line: 34,
+					source_line: 36,
 					type_signature: 'Identifier_Json',
 					properties: [
 						{
@@ -4193,7 +4194,7 @@ export const src_json: Src_Json = {
 					name: 'Generic_Param_Info',
 					kind: 'type',
 					doc_comment: 'Generic type parameter information.',
-					source_line: 70,
+					source_line: 72,
 					type_signature: 'Generic_Param_Info',
 					properties: [
 						{
@@ -4221,7 +4222,7 @@ export const src_json: Src_Json = {
 					kind: 'type',
 					doc_comment:
 						'Parameter information for functions and methods.\n\nKept distinct from Component_Prop_Info despite structural similarity.\nFunction parameters form a tuple with positional semantics:\ncalling order matters (`fn(a, b)` vs `fn(b, a)`),\nmay include rest parameters and destructuring patterns.',
-					source_line: 87,
+					source_line: 89,
 					type_signature: 'Parameter_Info',
 					properties: [
 						{
@@ -4256,7 +4257,7 @@ export const src_json: Src_Json = {
 					kind: 'type',
 					doc_comment:
 						'Component prop information for Svelte components.\n\nKept distinct from Parameter_Info despite structural similarity.\nComponent props are named attributes with different semantics:\nno positional order when passing (`<Foo {a} {b} />` = `<Foo {b} {a} />`),\nsupport two-way binding via `$bindable` rune.',
-					source_line: 103,
+					source_line: 105,
 					type_signature: 'Component_Prop_Info',
 					properties: [
 						{
@@ -4295,7 +4296,7 @@ export const src_json: Src_Json = {
 					name: 'get_identifier_display_name',
 					kind: 'function',
 					doc_comment: "Gets an identifier's display name with generic parameters.",
-					source_line: 115,
+					source_line: 117,
 					type_signature: '(identifier: Identifier_Json): string',
 					return_type: 'string',
 					parameters: [
@@ -4310,7 +4311,7 @@ export const src_json: Src_Json = {
 					name: 'generate_import_statement',
 					kind: 'function',
 					doc_comment: 'Generates an import statement for an identifier.',
-					source_line: 133,
+					source_line: 135,
 					type_signature:
 						'(identifier: Identifier_Json, module_path: string, pkg_name: string): string',
 					return_type: 'string',
@@ -4333,8 +4334,7 @@ export const src_json: Src_Json = {
 					],
 				},
 			],
-			module_comment:
-				'Top-level source metadata.\n\n@see https://github.com/ryanatkn/gro/blob/main/src/docs/gro_plugin_sveltekit_app.md#well-known-src',
+			module_comment: '// TODO BLOCK either rename pkg -> src or Src_Json to Pkg_Json',
 		},
 		{
 			path: 'storage.ts',
