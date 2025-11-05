@@ -48,7 +48,7 @@
 	{/snippet}
 
 	<section>
-		{#if module?.has_module_comment()}
+		{#if module?.module_comment}
 			<blockquote>
 				{module.module_comment}
 			</blockquote>

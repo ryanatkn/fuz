@@ -352,7 +352,7 @@ export const contextmenu_attachment =
 		params: U | null | undefined,
 	): Attachment<HTMLElement | SVGElement> =>
 	(el): undefined | (() => void) => {
-		// TODO BLOCK clean up the dataset attr?
+		// TODO could clean up the dataset attr, maybe use a weakmap?
 		if (params == null) return;
 
 		// Only create key once per element, reuse on updates
