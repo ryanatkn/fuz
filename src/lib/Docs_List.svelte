@@ -30,7 +30,7 @@
 		margin: var(--space_xl6) 0;
 	}
 
-	/* TODO @many should be fixed upstream in moss */
+	/* TODO should be fixed upstream in moss */
 	.docs_list :global(a.highlighted) {
 		background-color: var(--bg_4);
 	}
