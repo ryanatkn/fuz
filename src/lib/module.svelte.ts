@@ -15,13 +15,13 @@ import {DOCS_API_PATH} from '$lib/docs_helpers.svelte.js';
  */
 export class Module {
 	readonly pkg: Pkg = $state.raw()!;
-	readonly src_module: Module_Json = $state.raw()!;
+	readonly module_json: Module_Json = $state.raw()!;
 
 	/**
 	 * Canonical module path (no prefix) - matches storage, URLs, display.
 	 * Examples: 'Alert.ts', 'helpers/foo.ts'
 	 */
-	path = $derived(this.src_module.path);
+	path = $derived(this.module_json.path);
 
 	/**
 	 * Full docs URL pathname for this module page.
@@ -38,15 +38,15 @@ export class Module {
 	/**
 	 * Module-level JSDoc comment.
 	 */
-	module_comment = $derived(this.src_module.module_comment);
+	module_comment = $derived(this.module_json.module_comment);
 
 	/**
 	 * Lazy-computed array of Identifier instances.
 	 * Filters out default exports and creates rich Identifier objects.
 	 */
 	identifiers = $derived(
-		this.src_module.identifiers
-			? this.src_module.identifiers
+		this.module_json.identifiers
+			? this.module_json.identifiers
 					.filter((identifier_json) => identifier_json.name !== 'default') // skip default exports
 					.map((identifier_json) => new Identifier(this, identifier_json))
 			: [],
@@ -63,17 +63,17 @@ export class Module {
 	 * Check if module has any identifiers.
 	 */
 	has_identifiers: boolean = $derived(
-		!!(this.src_module.identifiers && this.src_module.identifiers.length > 0),
+		!!(this.module_json.identifiers && this.module_json.identifiers.length > 0),
 	);
 
 	/**
 	 * Check if module has a module-level comment.
 	 */
-	has_module_comment: boolean = $derived(!!this.src_module.module_comment);
+	has_module_comment: boolean = $derived(!!this.module_json.module_comment);
 
-	constructor(pkg: Pkg, src_module: Module_Json) {
+	constructor(pkg: Pkg, module_json: Module_Json) {
 		this.pkg = pkg;
-		this.src_module = src_module;
+		this.module_json = module_json;
 	}
 
 	/**

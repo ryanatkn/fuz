@@ -1,3 +1,24 @@
+/**
+ * Top-level source metadata.
+ *
+ * @see https://github.com/ryanatkn/gro/blob/main/src/docs/gro_plugin_sveltekit_app.md#well-known-src
+ */
+export interface Src_Json {
+	name: string;
+	version: string;
+	modules?: Array<Module_Json>;
+}
+
+/**
+ * Module information with metadata.
+ */
+export interface Module_Json {
+	/** Module path relative to `src/lib`. */
+	path: string;
+	identifiers?: Array<Identifier_Json>;
+	module_comment?: string;
+}
+
 export type Identifier_Kind =
 	| 'type'
 	| 'function'
@@ -86,27 +107,6 @@ export interface Component_Prop_Info {
 	description?: string;
 	default_value?: string;
 	bindable?: boolean;
-}
-
-/**
- * Module information with metadata.
- */
-export interface Module_Json {
-	/** Module path relative to `src/lib`. */
-	path: string;
-	identifiers?: Array<Identifier_Json>;
-	module_comment?: string;
-}
-
-/**
- * Top-level source metadata.
- *
- * @see https://github.com/ryanatkn/gro/blob/main/src/docs/gro_plugin_sveltekit_app.md#well-known-src
- */
-export interface Src_Json {
-	name: string;
-	version: string;
-	modules?: Array<Module_Json>;
 }
 
 /**

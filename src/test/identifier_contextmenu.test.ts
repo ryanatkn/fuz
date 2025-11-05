@@ -40,11 +40,11 @@ const create_test_identifier = (
 	pkg_options?: Parameters<typeof create_mock_pkg>[0],
 ): Identifier => {
 	const pkg = create_mock_pkg(pkg_options);
-	const src_module: Module_Json = {
+	const module_json: Module_Json = {
 		path: module_path,
 		identifiers: [identifier_json],
 	};
-	const module = new Module(pkg, src_module);
+	const module = new Module(pkg, module_json);
 	return new Identifier(module, identifier_json);
 };
 

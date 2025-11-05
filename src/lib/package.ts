@@ -2476,7 +2476,7 @@ export const src_json: Src_Json = {
 					kind: 'class',
 					doc_comment:
 						'Rich runtime representation of an exported identifier with computed properties.\n\nCombines:\n- Minimal Identifier_Json data (serializable)\n- Parent Module reference (provides Pkg context)\n- Lazy-computed URLs, import statements, etc.\n- Query methods for ergonomic usage',
-					source_line: 30,
+					source_line: 18,
 					members: [
 						{
 							name: 'module',
@@ -2653,8 +2653,6 @@ export const src_json: Src_Json = {
 					],
 				},
 			],
-			module_comment:
-				'Rich runtime Identifier class following the "minimal + rich" pattern.\n\nRepresents an exported identifier from a module (function, type, class, component, etc.)\nWraps minimal serializable identifier data with computed properties and query methods.\nPart of the API documentation hierarchy: Pkg -> Module -> Identifier\n\n@see module.svelte.ts for parent Module class\n@see pkg.svelte.ts for root Pkg class\n@see src_json.ts for minimal serializable types',
 		},
 		{
 			path: 'Img_Or_Svg.svelte',
@@ -3044,7 +3042,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'module_is_typescript',
 					kind: 'function',
-					source_line: 41,
+					source_line: 40,
 					type_signature: '(path: string): boolean',
 					return_type: 'boolean',
 					parameters: [
@@ -3058,7 +3056,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'module_is_svelte',
 					kind: 'function',
-					source_line: 44,
+					source_line: 43,
 					type_signature: '(path: string): boolean',
 					return_type: 'boolean',
 					parameters: [
@@ -3072,7 +3070,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'module_is_css',
 					kind: 'function',
-					source_line: 46,
+					source_line: 45,
 					type_signature: '(path: string): boolean',
 					return_type: 'boolean',
 					parameters: [
@@ -3086,7 +3084,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'module_is_json',
 					kind: 'function',
-					source_line: 48,
+					source_line: 47,
 					type_signature: '(path: string): boolean',
 					return_type: 'boolean',
 					parameters: [
@@ -3100,7 +3098,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'module_is_test',
 					kind: 'function',
-					source_line: 50,
+					source_line: 49,
 					type_signature: '(path: string): boolean',
 					return_type: 'boolean',
 					parameters: [
@@ -3115,7 +3113,7 @@ export const src_json: Src_Json = {
 					name: 'module_is_source',
 					kind: 'function',
 					doc_comment: 'Check if ID is a source file in /src/lib/ (excluding tests).',
-					source_line: 55,
+					source_line: 54,
 					type_signature: '(id: string): boolean',
 					return_type: 'boolean',
 					parameters: [
@@ -3159,8 +3157,8 @@ export const src_json: Src_Json = {
 					name: 'Module',
 					kind: 'class',
 					doc_comment:
-						'Rich runtime representation of a source module with computed properties.\n\nCombines:\n- Minimal Module_Json data (serializable)\n- Full Pkg reference (for generating URLs, import statements, etc.)\n- Lazy-computed Identifier instances\n- Query methods for ergonomic usage',
-					source_line: 27,
+						'Rich runtime representation of Module_Json with computed properties.\n\nCombines:\n- Minimal Module_Json data (serializable)\n- Full Pkg reference (for generating URLs, import statements, etc.)\n- Lazy-computed Identifier instances\n- Query methods for ergonomic usage',
+					source_line: 16,
 					members: [
 						{
 							name: 'pkg',
@@ -3169,7 +3167,7 @@ export const src_json: Src_Json = {
 							type_signature: 'Pkg',
 						},
 						{
-							name: 'src_module',
+							name: 'module_json',
 							kind: 'variable',
 							modifiers: ['readonly'],
 							type_signature: 'Module_Json',
@@ -3229,8 +3227,6 @@ export const src_json: Src_Json = {
 					],
 				},
 			],
-			module_comment:
-				'Rich runtime Module class following the "minimal + rich" pattern.\n\nWraps minimal serializable Module_Json data with computed properties and query methods.\nPart of the API documentation hierarchy: Pkg -> Module -> Identifier\n\n@see pkg.svelte.ts for parent Pkg class\n@see identifier.svelte.ts for child Identifier class\n@see src_json.ts for minimal serializable types',
 		},
 		{
 			path: 'Package_Detail.svelte',
@@ -3701,7 +3697,7 @@ export const src_json: Src_Json = {
 					name: 'Pkg',
 					kind: 'class',
 					doc_comment:
-						'Rich runtime package representation following the "minimal + rich" pattern.\n\nWraps minimal serializable data (package_json, src_json) with computed properties\nand provides the root of the API documentation hierarchy:\nPkg -> modules -> identifiers\n\nAll computed properties are automatically cached via Svelte\'s $derived mechanism,\nincluding the identifier_map which enables O(1) lookups by name.',
+						"Rich runtime package representation of a package.\n\nWraps minimal serializable data (package_json, src_json) with computed properties\nand provides the root of the API documentation hierarchy:\nPkg -> modules -> identifiers\n\nAll computed properties are automatically cached via Svelte's $derived mechanism,\nincluding the identifier_map which enables O(1) lookups by name.",
 					see_also: ['for Module class', 'for Identifier class'],
 					source_line: 31,
 					members: [
@@ -3960,16 +3956,68 @@ export const src_json: Src_Json = {
 			path: 'src_json.ts',
 			identifiers: [
 				{
+					name: 'Src_Json',
+					kind: 'type',
+					doc_comment: 'Top-level source metadata.',
+					see_also: [
+						'://github.com/ryanatkn/gro/blob/main/src/docs/gro_plugin_sveltekit_app.md#well-known-src',
+					],
+					source_line: 6,
+					type_signature: 'Src_Json',
+					properties: [
+						{
+							name: 'name',
+							kind: 'variable',
+							type_signature: 'string',
+						},
+						{
+							name: 'version',
+							kind: 'variable',
+							type_signature: 'string',
+						},
+						{
+							name: 'modules',
+							kind: 'variable',
+							type_signature: 'Array<Module_Json>',
+						},
+					],
+				},
+				{
+					name: 'Module_Json',
+					kind: 'type',
+					doc_comment: 'Module information with metadata.',
+					source_line: 15,
+					type_signature: 'Module_Json',
+					properties: [
+						{
+							name: 'path',
+							kind: 'variable',
+							type_signature: 'string',
+							doc_comment: 'Module path relative to `src/lib`.',
+						},
+						{
+							name: 'identifiers',
+							kind: 'variable',
+							type_signature: 'Array<Identifier_Json>',
+						},
+						{
+							name: 'module_comment',
+							kind: 'variable',
+							type_signature: 'string',
+						},
+					],
+				},
+				{
 					name: 'Identifier_Kind',
 					kind: 'type',
-					source_line: 1,
+					source_line: 22,
 					type_signature: 'Identifier_Kind',
 				},
 				{
 					name: 'Identifier_Json',
 					kind: 'type',
 					doc_comment: 'Identifier metadata with rich TypeScript/JSDoc information.',
-					source_line: 13,
+					source_line: 34,
 					type_signature: 'Identifier_Json',
 					properties: [
 						{
@@ -4087,7 +4135,7 @@ export const src_json: Src_Json = {
 					name: 'Generic_Param_Info',
 					kind: 'type',
 					doc_comment: 'Generic type parameter information.',
-					source_line: 49,
+					source_line: 70,
 					type_signature: 'Generic_Param_Info',
 					properties: [
 						{
@@ -4115,7 +4163,7 @@ export const src_json: Src_Json = {
 					kind: 'type',
 					doc_comment:
 						'Parameter information for functions and methods.\n\nKept distinct from Component_Prop_Info despite structural similarity.\nFunction parameters form a tuple with positional semantics:\ncalling order matters (`fn(a, b)` vs `fn(b, a)`),\nmay include rest parameters and destructuring patterns.',
-					source_line: 66,
+					source_line: 87,
 					type_signature: 'Parameter_Info',
 					properties: [
 						{
@@ -4150,7 +4198,7 @@ export const src_json: Src_Json = {
 					kind: 'type',
 					doc_comment:
 						'Component prop information for Svelte components.\n\nKept distinct from Parameter_Info despite structural similarity.\nComponent props are named attributes with different semantics:\nno positional order when passing (`<Foo {a} {b} />` = `<Foo {b} {a} />`),\nsupport two-way binding via `$bindable` rune.',
-					source_line: 82,
+					source_line: 103,
 					type_signature: 'Component_Prop_Info',
 					properties: [
 						{
@@ -4182,58 +4230,6 @@ export const src_json: Src_Json = {
 							name: 'bindable',
 							kind: 'variable',
 							type_signature: 'boolean',
-						},
-					],
-				},
-				{
-					name: 'Module_Json',
-					kind: 'type',
-					doc_comment: 'Module information with metadata.',
-					source_line: 94,
-					type_signature: 'Module_Json',
-					properties: [
-						{
-							name: 'path',
-							kind: 'variable',
-							type_signature: 'string',
-							doc_comment: 'Module path relative to `src/lib`.',
-						},
-						{
-							name: 'identifiers',
-							kind: 'variable',
-							type_signature: 'Array<Identifier_Json>',
-						},
-						{
-							name: 'module_comment',
-							kind: 'variable',
-							type_signature: 'string',
-						},
-					],
-				},
-				{
-					name: 'Src_Json',
-					kind: 'type',
-					doc_comment: 'Top-level source metadata.',
-					see_also: [
-						'://github.com/ryanatkn/gro/blob/main/src/docs/gro_plugin_sveltekit_app.md#well-known-src',
-					],
-					source_line: 106,
-					type_signature: 'Src_Json',
-					properties: [
-						{
-							name: 'name',
-							kind: 'variable',
-							type_signature: 'string',
-						},
-						{
-							name: 'version',
-							kind: 'variable',
-							type_signature: 'string',
-						},
-						{
-							name: 'modules',
-							kind: 'variable',
-							type_signature: 'Array<Module_Json>',
 						},
 					],
 				},
@@ -4279,6 +4275,8 @@ export const src_json: Src_Json = {
 					],
 				},
 			],
+			module_comment:
+				'Top-level source metadata.\n\n@see https://github.com/ryanatkn/gro/blob/main/src/docs/gro_plugin_sveltekit_app.md#well-known-src',
 		},
 		{
 			path: 'storage.ts',

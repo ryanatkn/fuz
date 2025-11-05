@@ -102,7 +102,7 @@ export class Pkg {
 	 */
 	modules = $derived(
 		this.src_json.modules
-			? this.src_json.modules.map((src_module) => new Module(this, src_module))
+			? this.src_json.modules.map((module_json) => new Module(this, module_json))
 			: [],
 	);
 

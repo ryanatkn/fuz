@@ -37,9 +37,8 @@ export const module_get_component_name = (module_path: string): string =>
  */
 export const module_get_key = (module_path: string): string => `./${module_path}`;
 
-// TODO BLOCK type union?
 export const module_is_typescript = (path: string): boolean =>
-	path.endsWith('.ts') || path.endsWith('.js');
+	path.endsWith('.ts') || path.endsWith('.js'); // hackyy but fine?
 
 export const module_is_svelte = (path: string): boolean => path.endsWith('.svelte');
 
