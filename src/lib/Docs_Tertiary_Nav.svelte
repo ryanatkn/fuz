@@ -35,6 +35,8 @@
 	const page_is_module = $derived(
 		page.url.pathname.startsWith(DOCS_API_PATH + '/') && page.url.pathname !== DOCS_API_PATH,
 	);
+
+	// TODO BLOCK overflow works differently in different places, and should it grow?
 </script>
 
 <!-- TODO probably add a `nav` wrapper? around which? -->
