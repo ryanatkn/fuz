@@ -2830,7 +2830,7 @@ export const src_json: Src_Json = {
 					type_signature: 'Intersect_Params_Or_Callback',
 				},
 				{
-					name: 'intersect_attachment',
+					name: 'intersect',
 					kind: 'function',
 					doc_comment:
 						'Creates an attachment that observes element viewport intersection.\nUses the lazy function pattern to optimize reactivity:\ncallbacks can update without recreating the observer, preserving state.',

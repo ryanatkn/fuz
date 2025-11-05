@@ -31,7 +31,7 @@ export type Intersect_Params_Or_Callback = On_Intersect | Intersect_Params;
  * callbacks can update without recreating the observer, preserving state.
  * @param get_params - Function that returns callback, params object, or nullish to disable
  */
-export const intersect_attachment =
+export const intersect =
 	(
 		get_params: () => Intersect_Params_Or_Callback | null | undefined,
 	): Attachment<HTMLElement | SVGElement> =>

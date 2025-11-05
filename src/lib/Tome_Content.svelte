@@ -7,7 +7,7 @@
 	import Tome_Header from '$lib/Tome_Header.svelte';
 	import {tome_context, type Tome} from '$lib/tome.js';
 	import {DOCS_PATH_DEFAULT, docs_links_context} from '$lib/docs_helpers.svelte.js';
-	import {intersect_attachment} from '$lib/intersect.svelte.js';
+	import {intersect} from '$lib/intersect.svelte.js';
 
 	interface Props {
 		tome: Tome;
@@ -29,7 +29,7 @@
 
 <section
 	class="tome_content width_upto_md mb_xl9"
-	{@attach intersect_attachment(() =>
+	{@attach intersect(() =>
 		at_root
 			? ({intersecting}) => {
 					if (intersecting) {
@@ -43,7 +43,7 @@
 >
 	<header
 		class="mb_xl3 position_sticky top_0"
-		{@attach intersect_attachment(() =>
+		{@attach intersect(() =>
 			at_root
 				? null
 				: ({intersecting}) => {

@@ -2,7 +2,7 @@
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	import {get_tome_by_name} from '$lib/tome.js';
-	import {intersect_attachment} from '$lib/intersect.svelte.js';
+	import {intersect} from '$lib/intersect.svelte.js';
 	import Tome_Content from '$lib/Tome_Content.svelte';
 	import Tome_Section from '$lib/Tome_Section.svelte';
 	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
@@ -48,12 +48,9 @@
 		</p>
 	</section>
 	<section>
+		<Code content={`import {intersect} from '@ryanatkn/fuz/intersect.svelte.js';`} lang="ts" />
 		<Code
-			content={`import {intersect_attachment} from '@ryanatkn/fuz/intersect.svelte.js';`}
-			lang="ts"
-		/>
-		<Code
-			content={`<div {@attach intersect_attachment(() => ({intersecting}) => {
+			content={`<div {@attach intersect(() => ({intersecting}) => {
   console.log(intersecting ? 'entered' : 'left');
 })}>
   scroll me into view
@@ -92,7 +89,7 @@
 			<ul class="scrolling_list">
 				{#each items as item (item)}
 					<li
-						{@attach intersect_attachment(() => ({
+						{@attach intersect(() => ({
 							onintersect: ({intersecting, el}) => {
 								el.classList.toggle('intersecting', intersecting);
 							},
@@ -115,7 +112,7 @@
 		<Code
 			content={`let loaded = $state(false);
 
-<div {@attach intersect_attachment(() => loaded ? null : ({intersecting}) => {
+<div {@attach intersect(() => loaded ? null : ({intersecting}) => {
   if (intersecting) loaded = true;
 })}>
   {#if loaded}
@@ -128,7 +125,7 @@
 			{#each lazy_items as item (item)}
 				<div
 					class="lazy_box"
-					{@attach intersect_attachment(() =>
+					{@attach intersect(() =>
 						lazy_visible.has(item)
 							? null
 							: ({intersecting}) => {
@@ -157,7 +154,7 @@
 			of <code>0</code> disables observation. Negative or <code>undefined</code> never disconnects.
 		</p>
 		<Code
-			content={`<div {@attach intersect_attachment(() => ({
+			content={`<div {@attach intersect(() => ({
   onintersect: ({intersecting}) => {
     if (intersecting) trigger_animation();
   },
@@ -172,7 +169,7 @@
 				<div
 					class="trigger_box"
 					class:triggered={triggered_items.has(item)}
-					{@attach intersect_attachment(() => ({
+					{@attach intersect(() => ({
 						onintersect: ({intersecting}) => {
 							if (intersecting) {
 								triggered_items.add(item);
@@ -195,7 +192,7 @@
 			<code>options</code> recreates the observer and resets state. Changing callbacks does not.
 		</p>
 		<Code
-			content={`<div {@attach intersect_attachment(() => ({
+			content={`<div {@attach intersect(() => ({
   onintersect: ({intersecting, intersections}) => {
     console.log({intersecting, intersections});
   },
@@ -219,7 +216,7 @@
 		<Code
 			content={`let enabled = $state(true);
 
-<div {@attach intersect_attachment(() => enabled ? callback : null)}>
+<div {@attach intersect(() => enabled ? callback : null)}>
   observes when enabled
 </div>`}
 		/>
@@ -231,7 +228,7 @@
 			<div
 				class="conditional_box"
 				class:intersecting={enabled_intersecting}
-				{@attach intersect_attachment(() =>
+				{@attach intersect(() =>
 					observation_enabled
 						? ({intersecting}) => {
 								enabled_intersecting = intersecting;

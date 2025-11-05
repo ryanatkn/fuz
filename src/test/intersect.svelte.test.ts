@@ -4,7 +4,7 @@
 import {test, assert, describe, beforeEach, afterEach, vi} from 'vitest';
 import {flushSync} from 'svelte';
 
-import {intersect_attachment} from '$lib/intersect.svelte.js';
+import {intersect} from '$lib/intersect.svelte.js';
 
 // Mock IntersectionObserver
 let observer_callback: IntersectionObserverCallback | null = null;
@@ -62,7 +62,7 @@ beforeEach(() => {
 	disconnected = false;
 });
 
-describe('intersect_attachment', () => {
+describe('intersect', () => {
 	let el: HTMLElement;
 	let cleanup: (() => void) | void;
 	let effect_cleanup: (() => void) | void;
@@ -86,7 +86,7 @@ describe('intersect_attachment', () => {
 		test('creates observer and observes element with simple callback', () => {
 			effect_cleanup = $effect.root(() => {
 				const callback = vi.fn();
-				cleanup = intersect_attachment(() => callback)(el);
+				cleanup = intersect(() => callback)(el);
 				flushSync();
 
 				assert.ok(observer_callback, 'observer should be created');
@@ -98,7 +98,7 @@ describe('intersect_attachment', () => {
 		test('calls callback when element intersects', () => {
 			effect_cleanup = $effect.root(() => {
 				const callback = vi.fn();
-				cleanup = intersect_attachment(() => callback)(el);
+				cleanup = intersect(() => callback)(el);
 				flushSync();
 
 				trigger_intersection(true);
@@ -112,7 +112,7 @@ describe('intersect_attachment', () => {
 		test('tracks intersections count', () => {
 			effect_cleanup = $effect.root(() => {
 				const callback = vi.fn();
-				cleanup = intersect_attachment(() => callback)(el);
+				cleanup = intersect(() => callback)(el);
 				flushSync();
 
 				// Enter viewport
@@ -136,7 +136,7 @@ describe('intersect_attachment', () => {
 		test('provides disconnect function to callback', () => {
 			effect_cleanup = $effect.root(() => {
 				const callback = vi.fn();
-				cleanup = intersect_attachment(() => callback)(el);
+				cleanup = intersect(() => callback)(el);
 				flushSync();
 
 				trigger_intersection(true);
@@ -149,7 +149,7 @@ describe('intersect_attachment', () => {
 		test('provides observer reference to callback', () => {
 			effect_cleanup = $effect.root(() => {
 				const callback = vi.fn();
-				cleanup = intersect_attachment(() => callback)(el);
+				cleanup = intersect(() => callback)(el);
 				flushSync();
 
 				trigger_intersection(true);
@@ -161,7 +161,7 @@ describe('intersect_attachment', () => {
 		test('provides element reference to callback', () => {
 			effect_cleanup = $effect.root(() => {
 				const callback = vi.fn();
-				cleanup = intersect_attachment(() => callback)(el);
+				cleanup = intersect(() => callback)(el);
 				flushSync();
 
 				trigger_intersection(true);
@@ -175,7 +175,7 @@ describe('intersect_attachment', () => {
 		test('accepts params object with onintersect', () => {
 			effect_cleanup = $effect.root(() => {
 				const onintersect = vi.fn();
-				cleanup = intersect_attachment(() => ({onintersect}))(el);
+				cleanup = intersect(() => ({onintersect}))(el);
 				flushSync();
 
 				trigger_intersection(true);
@@ -188,7 +188,7 @@ describe('intersect_attachment', () => {
 			effect_cleanup = $effect.root(() => {
 				const callback = vi.fn();
 				const options = {threshold: 0.5};
-				cleanup = intersect_attachment(() => ({onintersect: callback, options}))(el);
+				cleanup = intersect(() => ({onintersect: callback, options}))(el);
 				flushSync();
 
 				assert.deepEqual(observer_options, options);
@@ -199,7 +199,7 @@ describe('intersect_attachment', () => {
 			effect_cleanup = $effect.root(() => {
 				const onintersect = vi.fn();
 				const ondisconnect = vi.fn();
-				cleanup = intersect_attachment(() => ({onintersect, ondisconnect}))(el);
+				cleanup = intersect(() => ({onintersect, ondisconnect}))(el);
 				flushSync();
 
 				trigger_intersection(true);
@@ -218,7 +218,7 @@ describe('intersect_attachment', () => {
 		test('disconnects after count intersections when leaving viewport', () => {
 			effect_cleanup = $effect.root(() => {
 				const callback = vi.fn();
-				cleanup = intersect_attachment(() => ({onintersect: callback, count: 2}))(el);
+				cleanup = intersect(() => ({onintersect: callback, count: 2}))(el);
 				flushSync();
 
 				// First intersection
@@ -236,7 +236,7 @@ describe('intersect_attachment', () => {
 		test('count of 0 disables observer', () => {
 			effect_cleanup = $effect.root(() => {
 				const callback = vi.fn();
-				cleanup = intersect_attachment(() => ({onintersect: callback, count: 0}))(el);
+				cleanup = intersect(() => ({onintersect: callback, count: 0}))(el);
 				flushSync();
 
 				assert.strictEqual(observer_callback, null, 'observer should not be created');
@@ -246,7 +246,7 @@ describe('intersect_attachment', () => {
 		test('count of 1 disconnects after first intersection cycle', () => {
 			effect_cleanup = $effect.root(() => {
 				const callback = vi.fn();
-				cleanup = intersect_attachment(() => ({onintersect: callback, count: 1}))(el);
+				cleanup = intersect(() => ({onintersect: callback, count: 1}))(el);
 				flushSync();
 
 				trigger_intersection(true);
@@ -260,7 +260,7 @@ describe('intersect_attachment', () => {
 		test('negative count never disconnects', () => {
 			effect_cleanup = $effect.root(() => {
 				const callback = vi.fn();
-				cleanup = intersect_attachment(() => ({onintersect: callback, count: -1}))(el);
+				cleanup = intersect(() => ({onintersect: callback, count: -1}))(el);
 				flushSync();
 
 				// Multiple intersection cycles
@@ -276,7 +276,7 @@ describe('intersect_attachment', () => {
 		test('undefined count never disconnects', () => {
 			effect_cleanup = $effect.root(() => {
 				const callback = vi.fn();
-				cleanup = intersect_attachment(() => ({onintersect: callback, count: undefined}))(el);
+				cleanup = intersect(() => ({onintersect: callback, count: undefined}))(el);
 				flushSync();
 
 				// Multiple intersection cycles
@@ -293,7 +293,7 @@ describe('intersect_attachment', () => {
 	describe('conditional enabling', () => {
 		test('null params does not create observer', () => {
 			effect_cleanup = $effect.root(() => {
-				cleanup = intersect_attachment(() => null)(el);
+				cleanup = intersect(() => null)(el);
 				flushSync();
 
 				assert.strictEqual(observer_callback, null, 'observer should not be created');
@@ -302,7 +302,7 @@ describe('intersect_attachment', () => {
 
 		test('undefined params does not create observer', () => {
 			effect_cleanup = $effect.root(() => {
-				cleanup = intersect_attachment(() => undefined)(el);
+				cleanup = intersect(() => undefined)(el);
 				flushSync();
 
 				assert.strictEqual(observer_callback, null, 'observer should not be created');
@@ -313,7 +313,7 @@ describe('intersect_attachment', () => {
 			effect_cleanup = $effect.root(() => {
 				let enabled = $state(true);
 				const callback = vi.fn();
-				cleanup = intersect_attachment(() => (enabled ? callback : null))(el);
+				cleanup = intersect(() => (enabled ? callback : null))(el);
 				flushSync();
 
 				assert.ok(observer_callback, 'observer should be created initially');
@@ -329,7 +329,7 @@ describe('intersect_attachment', () => {
 			effect_cleanup = $effect.root(() => {
 				let enabled = $state(false);
 				const callback = vi.fn();
-				cleanup = intersect_attachment(() => (enabled ? callback : null))(el);
+				cleanup = intersect(() => (enabled ? callback : null))(el);
 				flushSync();
 
 				assert.strictEqual(observer_callback, null, 'observer should not be created initially');
@@ -349,7 +349,7 @@ describe('intersect_attachment', () => {
 				const callback1 = vi.fn();
 				const callback2 = vi.fn();
 
-				cleanup = intersect_attachment(() => (callback_version === 1 ? callback1 : callback2))(el);
+				cleanup = intersect(() => (callback_version === 1 ? callback1 : callback2))(el);
 				flushSync();
 
 				const first_observer_callback = observer_callback;
@@ -375,7 +375,7 @@ describe('intersect_attachment', () => {
 				const callback1 = vi.fn();
 				const callback2 = vi.fn();
 
-				cleanup = intersect_attachment(() => (callback_version === 1 ? callback1 : callback2))(el);
+				cleanup = intersect(() => (callback_version === 1 ? callback1 : callback2))(el);
 				flushSync();
 
 				// First intersection with callback1
@@ -405,7 +405,7 @@ describe('intersect_attachment', () => {
 				const callback1 = vi.fn();
 				const callback2 = vi.fn();
 
-				cleanup = intersect_attachment(() => (callback_version === 1 ? callback1 : callback2))(el);
+				cleanup = intersect(() => (callback_version === 1 ? callback1 : callback2))(el);
 				flushSync();
 
 				trigger_intersection(true);
@@ -431,7 +431,7 @@ describe('intersect_attachment', () => {
 				let threshold = $state(0.5);
 				const callback = vi.fn();
 
-				cleanup = intersect_attachment(() => ({
+				cleanup = intersect(() => ({
 					onintersect: callback,
 					options: {threshold},
 				}))(el);
@@ -459,7 +459,7 @@ describe('intersect_attachment', () => {
 				let threshold = $state(0.5);
 				const callback = vi.fn();
 
-				cleanup = intersect_attachment(() => ({
+				cleanup = intersect(() => ({
 					onintersect: callback,
 					options: {threshold},
 				}))(el);
@@ -489,7 +489,7 @@ describe('intersect_attachment', () => {
 				let has_options = $state(false);
 				const callback = vi.fn();
 
-				cleanup = intersect_attachment(() => ({
+				cleanup = intersect(() => ({
 					onintersect: callback,
 					options: has_options ? {threshold: 0.5} : undefined,
 				}))(el);
@@ -512,7 +512,7 @@ describe('intersect_attachment', () => {
 				let has_options = $state(true);
 				const callback = vi.fn();
 
-				cleanup = intersect_attachment(() => ({
+				cleanup = intersect(() => ({
 					onintersect: callback,
 					options: has_options ? {threshold: 0.5} : undefined,
 				}))(el);
@@ -535,7 +535,7 @@ describe('intersect_attachment', () => {
 		test('cleanup function disconnects observer', () => {
 			effect_cleanup = $effect.root(() => {
 				const callback = vi.fn();
-				cleanup = intersect_attachment(() => callback)(el);
+				cleanup = intersect(() => callback)(el);
 				flushSync();
 
 				assert.strictEqual(disconnected, false);
@@ -549,7 +549,7 @@ describe('intersect_attachment', () => {
 		test('cleanup is safe to call multiple times', () => {
 			effect_cleanup = $effect.root(() => {
 				const callback = vi.fn();
-				cleanup = intersect_attachment(() => callback)(el);
+				cleanup = intersect(() => callback)(el);
 				flushSync();
 
 				cleanup!();
@@ -566,7 +566,7 @@ describe('intersect_attachment', () => {
 				const callback = vi.fn(({disconnect}) => {
 					disconnect();
 				});
-				cleanup = intersect_attachment(() => callback)(el);
+				cleanup = intersect(() => callback)(el);
 				flushSync();
 
 				trigger_intersection(true);
@@ -582,7 +582,7 @@ describe('intersect_attachment', () => {
 				let count = $state(2);
 				const callback = vi.fn();
 
-				cleanup = intersect_attachment(() => ({onintersect: callback, count}))(el);
+				cleanup = intersect(() => ({onintersect: callback, count}))(el);
 				flushSync();
 
 				const first_observer_callback = observer_callback;
@@ -603,7 +603,7 @@ describe('intersect_attachment', () => {
 				const ondisconnect1 = vi.fn();
 				const ondisconnect2 = vi.fn();
 
-				cleanup = intersect_attachment(() => ({
+				cleanup = intersect(() => ({
 					onintersect: callback,
 					ondisconnect: ondisconnect_version === 1 ? ondisconnect1 : ondisconnect2,
 				}))(el);
@@ -630,7 +630,7 @@ describe('intersect_attachment', () => {
 				let root_margin = $state('0px');
 				const callback = vi.fn();
 
-				cleanup = intersect_attachment(() => ({
+				cleanup = intersect(() => ({
 					onintersect: callback,
 					options: {rootMargin: root_margin, threshold: [0, 0.5, 1]},
 				}))(el);
