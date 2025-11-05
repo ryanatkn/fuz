@@ -1,6 +1,8 @@
 import type {Identifier} from '$lib/identifier.svelte.js';
 import type {Contextmenu_Params} from '$lib/contextmenu_state.svelte.js';
 
+// TODO BLOCK review
+
 /**
  * Create contextmenu entries for an identifier
  */
