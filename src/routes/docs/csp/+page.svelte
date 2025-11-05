@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
+	import Github_Link from '$lib/Github_Link.svelte';
 	import {get_tome_by_name} from '$lib/tome.js';
 	import Tome_Content from '$lib/Tome_Content.svelte';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
@@ -325,10 +326,10 @@ create_csp_directives({
 		</table>
 	</Tome_Section>
 	<aside>
-		For more, see the <a href="https://github.com/ryanatkn/fuz/blob/main/src/lib/csp.ts"
-			>source code</a
+		For more, see the <Github_Link path="ryanatkn/fuz/blob/main/src/lib/csp.ts"
+			>source code</Github_Link
 		>
-		and <a href="https://github.com/ryanatkn/fuz/blob/main/src/lib/csp.test.ts">tests</a>. The API
+		and <Github_Link path="ryanatkn/fuz/blob/main/src/lib/csp.test.ts">tests</Github_Link>. The API
 		feels near-complete, and includes full customization of the default directive values and trust
 		levels. Some details may change and input is welcome.
 	</aside>

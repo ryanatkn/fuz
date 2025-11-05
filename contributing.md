@@ -26,7 +26,7 @@ See the [GitHub issues](https://github.com/ryanatkn/fuz/issues).
 
 I'm open to PRs when they fit the project's design goals, which can be subtle and arbitrary.
 Feel free to open PRs for straightforward changes,
-but please start with an issue or Discord discussion for most PRs.
+but for most PRs please start with an issue or Discord discussion.
 
 The code is permissively licensed, feel free to fork for your own needs.
 

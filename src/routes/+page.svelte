@@ -3,6 +3,7 @@
 
 	import Docs_Footer from '$lib/Docs_Footer.svelte';
 	import Card from '$lib/Card.svelte';
+	import Github_Link from '$lib/Github_Link.svelte';
 	import {pkg_context} from '$lib/pkg.svelte.js';
 	import Svg, {type Svg_Data} from '$lib/Svg.svelte';
 	import {
@@ -64,8 +65,8 @@
 					</p>
 					<p>
 						To learn more see <a href={resolve('/docs')}>the docs</a>
-						and <a href="https://github.com/ryanatkn/fuz#readme">readme</a>. Feel free to take the
-						ideas and <a href="https://github.com/ryanatkn/fuz">code</a> for your own purposes.
+						and <Github_Link path="ryanatkn/fuz#readme">readme</Github_Link>. Feel free to take the
+						ideas and <Github_Link path="ryanatkn/fuz">code</Github_Link> for your own purposes.
 					</p>
 				</div>
 			</div>
