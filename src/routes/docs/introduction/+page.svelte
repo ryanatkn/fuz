@@ -26,8 +26,8 @@
 			just following along, see <Github_Link path="ryanatkn/fuz/blob/main/contributing.md" />.
 		</p>
 		<p>
-			These docs are a work in progress - for an overview see
-			<Github_Link path="ryanatkn/fuz#readme">the readme</Github_Link>.
+			These docs are a work in progress - for an overview see the
+			<Github_Link path="ryanatkn/fuz#readme">readme</Github_Link>.
 		</p>
 	</section>
 </Tome_Content>
