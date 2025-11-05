@@ -15,6 +15,7 @@
 		oncopy,
 		disabled: disabled_prop,
 		children,
+		class: class_prop,
 		...rest
 	}: SvelteHTMLElements['button'] & {
 		text: string | null;
@@ -61,6 +62,7 @@
 	type="button"
 	title="copy to clipboard"
 	{...rest}
+	class="copy_to_clipboard {class_prop}"
 	class:icon_button={children ? false : icon_button}
 	class:copied
 	class:failed

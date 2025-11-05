@@ -2401,11 +2401,6 @@ export const src_json: Src_Json = {
 							type: 'string',
 							optional: false,
 						},
-						{
-							name: 'children',
-							type: 'Snippet',
-							optional: true,
-						},
 					],
 					source_line: 1,
 				},
@@ -2521,11 +2516,6 @@ export const src_json: Src_Json = {
 							name: 'name',
 							type: 'string',
 							optional: false,
-						},
-						{
-							name: 'children',
-							type: 'Snippet',
-							optional: true,
 						},
 					],
 					source_line: 1,
@@ -3038,11 +3028,6 @@ export const src_json: Src_Json = {
 							optional: false,
 							description: '',
 						},
-						{
-							name: 'children',
-							type: 'Snippet',
-							optional: true,
-						},
 					],
 					source_line: 1,
 				},
@@ -3203,11 +3188,6 @@ export const src_json: Src_Json = {
 							name: 'module_path',
 							type: 'string',
 							optional: false,
-						},
-						{
-							name: 'children',
-							type: 'Snippet',
-							optional: true,
 						},
 					],
 					source_line: 1,
@@ -3663,11 +3643,6 @@ export const src_json: Src_Json = {
 						{
 							name: 'onerror',
 							type: '(error: Error) => void',
-							optional: true,
-						},
-						{
-							name: 'children',
-							type: 'Snippet',
 							optional: true,
 						},
 					],
@@ -4859,11 +4834,6 @@ export const src_json: Src_Json = {
 						{
 							name: 'chip',
 							type: 'boolean',
-							optional: true,
-						},
-						{
-							name: 'children',
-							type: 'Snippet',
 							optional: true,
 						},
 					],
