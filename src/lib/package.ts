@@ -2475,8 +2475,8 @@ export const src_json: Src_Json = {
 					name: 'Identifier',
 					kind: 'class',
 					doc_comment:
-						'Rich runtime representation of an exported identifier with computed properties.\n\nCombines:\n- Minimal Identifier_Json data (serializable)\n- Parent Module reference (provides Pkg context)\n- Lazy-computed URLs, import statements, etc.\n- Query methods for ergonomic usage',
-					source_line: 18,
+						'Rich runtime representation of an exported identifier with computed properties.\n\nCombines:\n\n- minimal Identifier_Json data\n- parent Module reference (provides Pkg context)\n- lazy-computed URLs, import statements, etc.\n- query methods for ergonomic usage',
+					source_line: 19,
 					members: [
 						{
 							name: 'module',
@@ -3157,8 +3157,8 @@ export const src_json: Src_Json = {
 					name: 'Module',
 					kind: 'class',
 					doc_comment:
-						'Rich runtime representation of Module_Json with computed properties.\n\nCombines:\n- Minimal Module_Json data (serializable)\n- Full Pkg reference (for generating URLs, import statements, etc.)\n- Lazy-computed Identifier instances\n- Query methods for ergonomic usage',
-					source_line: 16,
+						'Rich runtime representation of Module_Json with computed properties.\n\nCombines:\n\n- minimal Module_Json data\n- full Pkg reference (for generating URLs, import statements, etc.)\n- lazy-computed Identifier instances\n- query methods for ergonomic usage',
+					source_line: 17,
 					members: [
 						{
 							name: 'pkg',

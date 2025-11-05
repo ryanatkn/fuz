@@ -10,10 +10,11 @@ import {api_doc_url, api_doc_url_full, github_file_url} from '$lib/package_helpe
  * Rich runtime representation of an exported identifier with computed properties.
  *
  * Combines:
- * - Minimal Identifier_Json data (serializable)
- * - Parent Module reference (provides Pkg context)
- * - Lazy-computed URLs, import statements, etc.
- * - Query methods for ergonomic usage
+ *
+ * - minimal Identifier_Json data
+ * - parent Module reference (provides Pkg context)
+ * - lazy-computed URLs, import statements, etc.
+ * - query methods for ergonomic usage
  */
 export class Identifier {
 	readonly module: Module = $state.raw()!;

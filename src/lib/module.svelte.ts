@@ -8,10 +8,11 @@ import {DOCS_API_PATH} from '$lib/docs_helpers.svelte.js';
  * Rich runtime representation of Module_Json with computed properties.
  *
  * Combines:
- * - Minimal Module_Json data (serializable)
- * - Full Pkg reference (for generating URLs, import statements, etc.)
- * - Lazy-computed Identifier instances
- * - Query methods for ergonomic usage
+ *
+ * - minimal Module_Json data
+ * - full Pkg reference (for generating URLs, import statements, etc.)
+ * - lazy-computed Identifier instances
+ * - query methods for ergonomic usage
  */
 export class Module {
 	readonly pkg: Pkg = $state.raw()!;
