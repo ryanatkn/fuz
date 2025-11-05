@@ -18,11 +18,11 @@ export const create_identifier_contextmenu = (
 		},
 	});
 
-	// Copy identifier name
+	// copy identifier name
 	entries.push({
 		snippet: 'text',
 		props: {
-			content: `Copy name: ${identifier.name}`,
+			content: `copy name: ${identifier.name}`,
 			icon: '📋',
 			run: async () => {
 				await navigator.clipboard.writeText(identifier.name);
@@ -30,11 +30,11 @@ export const create_identifier_contextmenu = (
 		},
 	});
 
-	// Copy import statement
+	// copy import statement
 	entries.push({
 		snippet: 'text',
 		props: {
-			content: 'Copy import',
+			content: 'copy import',
 			icon: '📥',
 			run: async () => {
 				await navigator.clipboard.writeText(identifier.import_statement);
@@ -53,12 +53,12 @@ export const create_identifier_contextmenu = (
 		});
 	}
 
-	// Copy link to docs
+	// copy link to docs
 	if (identifier.docs_link) {
 		entries.push({
 			snippet: 'text',
 			props: {
-				content: 'Copy docs link',
+				content: 'copy docs link',
 				icon: '🔗',
 				run: async () => {
 					await navigator.clipboard.writeText(identifier.docs_link!);

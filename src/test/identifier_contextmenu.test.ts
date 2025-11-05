@@ -86,7 +86,7 @@ describe('create_identifier_contextmenu', () => {
 		const entries = create_identifier_contextmenu(identifier);
 
 		const copy_entries = entries.filter(
-			(e) => typeof e === 'object' && e.snippet === 'text' && e.props.content.includes('Copy name'),
+			(e) => typeof e === 'object' && e.snippet === 'text' && e.props.content.includes('copy name'),
 		);
 		assert.strictEqual(copy_entries.length, 1, 'should have exactly one copy name entry');
 	});
@@ -96,7 +96,7 @@ describe('create_identifier_contextmenu', () => {
 		const entries = create_identifier_contextmenu(identifier);
 
 		const import_entry = entries.find(
-			(e) => typeof e === 'object' && e.snippet === 'text' && e.props.content === 'Copy import',
+			(e) => typeof e === 'object' && e.snippet === 'text' && e.props.content === 'copy import',
 		);
 		assert.ok(import_entry, 'should have copy import entry');
 	});
@@ -148,7 +148,7 @@ describe('create_identifier_contextmenu', () => {
 		const entries = create_identifier_contextmenu(identifier);
 
 		const copy_link_entry = entries.find(
-			(e) => typeof e === 'object' && e.snippet === 'text' && e.props.content === 'Copy docs link',
+			(e) => typeof e === 'object' && e.snippet === 'text' && e.props.content === 'copy docs link',
 		);
 		assert.ok(copy_link_entry, 'should have copy docs link when homepage_url provided');
 	});
@@ -158,7 +158,7 @@ describe('create_identifier_contextmenu', () => {
 		const entries = create_identifier_contextmenu(identifier);
 
 		const copy_link_entry = entries.find(
-			(e) => typeof e === 'object' && e.snippet === 'text' && e.props.content === 'Copy docs link',
+			(e) => typeof e === 'object' && e.snippet === 'text' && e.props.content === 'copy docs link',
 		);
 		assert.strictEqual(
 			copy_link_entry,
