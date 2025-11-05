@@ -1,3 +1,5 @@
+// TODO BLOCK either rename pkg -> src or Src_Json to Pkg_Json
+
 /**
  * Top-level source metadata.
  *
