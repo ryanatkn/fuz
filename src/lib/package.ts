@@ -2145,6 +2145,38 @@ export const src_json: Src_Json = {
 			],
 		},
 		{
+			path: 'Docs_List.svelte',
+			identifiers: [
+				{
+					name: 'Docs_List',
+					kind: 'component',
+					props: [
+						{
+							name: 'expand_width',
+							type: 'boolean',
+							optional: true,
+						},
+						{
+							name: 'margin',
+							type: 'boolean',
+							optional: true,
+						},
+						{
+							name: 'class',
+							type: 'string',
+							optional: true,
+						},
+						{
+							name: 'children',
+							type: 'Snippet',
+							optional: false,
+						},
+					],
+					source_line: 1,
+				},
+			],
+		},
+		{
 			path: 'Docs_Menu_Header.svelte',
 			identifiers: [
 				{

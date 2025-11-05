@@ -26,9 +26,3 @@
 	style:min-height={final_size}
 	style:font-size={size ?? DEFAULT_FONT_SIZE}>{glyph}</span
 >
-
-<style>
-	.class {
-		font-size:  /* comment */ 12px;
-	}
-</style>
