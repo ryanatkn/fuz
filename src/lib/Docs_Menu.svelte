@@ -9,9 +9,10 @@
 	interface Props {
 		tomes: Array<Tome>;
 		children?: Snippet<[category: string]>;
+		expand_width?: boolean;
 	}
 
-	const {tomes, children}: Props = $props();
+	const {tomes, children, expand_width = false}: Props = $props();
 
 	const tomes_by_category = $derived(
 		tomes.reduce<Record<string, Array<Tome>>>((result, c) => {
@@ -25,7 +26,7 @@
 
 <!-- eslint-disable svelte/no-navigation-without-resolve -->
 
-<ul class="docs_menu unstyled">
+<ul class="docs_menu unstyled" class:expand_width>
 	{#each Object.entries(tomes_by_category) as [category, tomes] (category)}
 		<li class="category">
 			{#if children}{@render children(category)}{:else}<Docs_Menu_Header
@@ -35,10 +36,8 @@
 				{#each tomes as item (item)}
 					{@const pathname = to_tome_pathname(item)}
 					<li role="none" transition:slide>
-						<a
-							class="menu_item ellipsis line_height_lg"
-							href={pathname}
-							class:selected={pathname === page.url.pathname}>{item.name}</a
+						<a class="menu_item" href={pathname} class:selected={pathname === page.url.pathname}
+							><div class="ellipsis">{item.name}</div></a
 						>
 					</li>
 				{/each}
@@ -52,6 +51,9 @@
 	.docs_menu {
 		width: var(--docs_menu_width);
 		min-width: var(--docs_menu_width);
+	}
+	.docs_menu.expand_width {
+		width: 100%;
 	}
 
 	.category {

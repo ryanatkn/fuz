@@ -593,6 +593,11 @@ export const src_json: Src_Json = {
 							type: 'boolean',
 							optional: true,
 						},
+						{
+							name: 'external_rel',
+							type: 'string',
+							optional: true,
+						},
 					],
 					source_line: 1,
 				},
@@ -2173,6 +2178,28 @@ export const src_json: Src_Json = {
 							type: 'Snippet<[category: string]>',
 							optional: true,
 						},
+						{
+							name: 'expand_width',
+							type: 'boolean',
+							optional: true,
+						},
+					],
+					source_line: 1,
+				},
+			],
+		},
+		{
+			path: 'Docs_Modules_List.svelte',
+			identifiers: [
+				{
+					name: 'Docs_Modules_List',
+					kind: 'component',
+					props: [
+						{
+							name: 'expand_width',
+							type: 'boolean',
+							optional: true,
+						},
 					],
 					source_line: 1,
 				},
@@ -2187,6 +2214,11 @@ export const src_json: Src_Json = {
 					props: [
 						{
 							name: 'sidebar',
+							type: 'boolean',
+							optional: true,
+						},
+						{
+							name: 'expand_width',
 							type: 'boolean',
 							optional: true,
 						},

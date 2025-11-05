@@ -7,19 +7,19 @@
 
 	const DEFAULT_LINK_ICON = '🔗';
 
-	interface Props {
-		href: string;
-		icon?: string | Snippet<[icon: string]>; // TODO @many rethink this API
-		children?: Snippet; // TODO @many rethink this API
-		disabled?: boolean;
-	}
-
 	const {
 		href,
 		icon = DEFAULT_LINK_ICON,
 		children,
 		disabled: disabled_prop = false,
-	}: Props = $props();
+		external_rel = 'noreferrer',
+	}: {
+		href: string;
+		icon?: string | Snippet<[icon: string]>; // TODO @many rethink this API
+		children?: Snippet; // TODO @many rethink this API
+		disabled?: boolean;
+		external_rel?: string;
+	} = $props();
 
 	const contextmenu = contextmenu_context.get();
 
@@ -45,7 +45,7 @@
 
 	const text = $derived(format_url(href));
 	const external = $derived(!(text[0] === '.' || (text[0] === '/' && text[1] !== '/')));
-	const rel = $derived(external ? 'noreferrer' : undefined);
+	const rel = $derived(external ? external_rel : undefined);
 </script>
 
 <li role="none">

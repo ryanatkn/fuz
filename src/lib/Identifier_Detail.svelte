@@ -19,7 +19,7 @@
 {#if identifier.source_url}
 	<p>
 		<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-		<a class="chip" href={identifier.source_url} target="_blank" rel="noopener"> view source </a>
+		<a class="chip" href={identifier.source_url} target="_blank" rel="noopener">view source</a>
 	</p>
 {/if}
 

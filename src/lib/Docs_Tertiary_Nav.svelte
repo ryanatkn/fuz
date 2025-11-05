@@ -2,10 +2,10 @@
 	import {page} from '$app/state';
 
 	import Docs_Menu from '$lib/Docs_Menu.svelte';
+	import Docs_Modules_List from '$lib/Docs_Modules_List.svelte';
 	import Docs_Page_Links from '$lib/Docs_Page_Links.svelte';
 	import {to_tome_pathname, Tome} from '$lib/tome.js';
 	import {docs_links_context, DOCS_API_PATH} from '$lib/docs_helpers.svelte.js';
-	import {pkg_context} from '$lib/pkg.svelte.js';
 
 	interface Props {
 		tomes: Array<Tome>;
@@ -14,8 +14,6 @@
 	}
 
 	const {tomes, tomes_by_name, sidebar = true}: Props = $props();
-
-	const pkg = pkg_context.get();
 
 	const selected_item = $derived(tomes.find((t) => to_tome_pathname(t) === page.url.pathname));
 
@@ -35,38 +33,20 @@
 	const page_is_module = $derived(
 		page.url.pathname.startsWith(DOCS_API_PATH + '/') && page.url.pathname !== DOCS_API_PATH,
 	);
-
-	// TODO BLOCK overflow works differently in different places, and should it grow?
 </script>
 
 <!-- TODO probably add a `nav` wrapper? around which? -->
 <aside class="docs_tertiary_nav unstyled">
 	{#if tomes_related_to_selected?.length}
-		<Docs_Menu tomes={tomes_related_to_selected}>
+		<Docs_Menu tomes={tomes_related_to_selected} expand_width>
 			{#snippet children(category)}<h4 class="mb_sm">related {category}</h4>{/snippet}
 		</Docs_Menu>
 	{/if}
 	{#if should_show_page_links}
-		<Docs_Page_Links {sidebar} />
+		<Docs_Page_Links {sidebar} expand_width />
 	{/if}
 	{#if page_is_module}
-		<div class="modules_list">
-			<h4 class="mb_sm">modules</h4>
-			<ul class="unstyled">
-				{#each pkg.modules_sorted as module (module.path)}
-					<li>
-						<!-- eslint-disable svelte/no-navigation-without-resolve -->
-						<a
-							class="menu_item ellipsis line_height_sm"
-							href={module.path_docs}
-							class:selected={module.path_docs === page.url.pathname}
-						>
-							{module.path}
-						</a>
-					</li>
-				{/each}
-			</ul>
-		</div>
+		<Docs_Modules_List expand_width />
 	{/if}
 </aside>
 
@@ -94,21 +74,5 @@
 			background-color: initial;
 			overflow: initial;
 		}
-	}
-
-	/* TODO @many repeated pattern, also I think we want to support this growing? */
-	.modules_list {
-		margin: var(--space_xl6) 0;
-		width: var(--docs_menu_width);
-		min-width: var(--docs_menu_width);
-	}
-
-	/* TODO @many should be a CSS class or variable, maybe should be the default?
-	problem is it doesn't work on .bg, maybe needs a variant/modifier in the name? */
-	.modules_list a:hover {
-		background-color: var(--bg_5);
-	}
-	.modules_list a:is(:active, .selected) {
-		background-color: var(--bg_7);
 	}
 </style>

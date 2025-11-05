@@ -218,9 +218,6 @@ a.chip {
 .display_inline_flex {
 	display: inline-flex;
 }
-.overflow_wrap_anywhere {
-	overflow-wrap: anywhere;
-}
 .flex_1 {
 	flex: 1;
 }
@@ -238,12 +235,6 @@ a.chip {
 }
 .line_height_1 {
 	line-height: 1;
-}
-.line_height_sm {
-	line-height: var(--line_height_sm);
-}
-.line_height_lg {
-	line-height: var(--line_height_lg);
 }
 .font_size_md {
 	font-size: var(--font_size_md);

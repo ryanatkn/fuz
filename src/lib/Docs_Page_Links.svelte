@@ -6,9 +6,10 @@
 
 	interface Props {
 		sidebar?: boolean; // TODO @many dialog navs (this shouldn't exist)
+		expand_width?: boolean;
 	}
 
-	const {sidebar = true}: Props = $props();
+	const {sidebar = true, expand_width = false}: Props = $props();
 
 	// TODO remove CSS below with reusable CSS or a Svelte component
 
@@ -17,7 +18,7 @@
 	const hash = $derived(page.url.hash.slice(1));
 </script>
 
-<div class="docs_page_links">
+<div class="docs_page_links" class:expand_width>
 	<h4 class="mb_sm">on this page</h4>
 	{#if sidebar}
 		<div class="sidebar_wrapper">{@render content()}</div>
@@ -32,10 +33,11 @@
 			{#each docs_links.docs_links as item (item.id)}
 				<li role="none" transition:slide class:pl_xl4={item.tag === 'h4'}>
 					<a
-						class="menu_item overflow_wrap_anywhere line_height_sm"
+						class="menu_item"
 						href="#{item.slug}"
 						class:selected={item.slug === hash}
-						class:highlighted={docs_links.slugs_onscreen.has(item.slug)}>{item.text}</a
+						class:highlighted={docs_links.slugs_onscreen.has(item.slug)}
+						><div class="ellipsis">{item.text}</div></a
 					>
 				</li>
 			{/each}
@@ -49,6 +51,9 @@
 		margin: var(--space_xl6) 0;
 		width: var(--docs_menu_width);
 		min-width: var(--docs_menu_width);
+	}
+	.docs_page_links.expand_width {
+		width: 100%;
 	}
 
 	/* this is needed because `.docs_page_links` needs to be a block to collapse the vertical margin */
