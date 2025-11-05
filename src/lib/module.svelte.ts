@@ -1,14 +1,3 @@
-/**
- * Rich runtime Module class following the "minimal + rich" pattern.
- *
- * Wraps minimal serializable Module_Json data with computed properties and query methods.
- * Part of the API documentation hierarchy: Pkg -> Module -> Identifier
- *
- * @see pkg.svelte.ts for parent Pkg class
- * @see identifier.svelte.ts for child Identifier class
- * @see src_json.ts for minimal serializable types
- */
-
 import {Identifier} from '$lib/identifier.svelte.js';
 import type {Pkg} from '$lib/pkg.svelte.js';
 import type {Module_Json} from '$lib/src_json.js';
@@ -16,7 +5,7 @@ import {github_file_url} from '$lib/package_helpers.js';
 import {DOCS_API_PATH} from '$lib/docs_helpers.svelte.js';
 
 /**
- * Rich runtime representation of a source module with computed properties.
+ * Rich runtime representation of Module_Json with computed properties.
  *
  * Combines:
  * - Minimal Module_Json data (serializable)

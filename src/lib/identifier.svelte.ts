@@ -1,15 +1,3 @@
-/**
- * Rich runtime Identifier class following the "minimal + rich" pattern.
- *
- * Represents an exported identifier from a module (function, type, class, component, etc.)
- * Wraps minimal serializable identifier data with computed properties and query methods.
- * Part of the API documentation hierarchy: Pkg -> Module -> Identifier
- *
- * @see module.svelte.ts for parent Module class
- * @see pkg.svelte.ts for root Pkg class
- * @see src_json.ts for minimal serializable types
- */
-
 import type {Module} from '$lib/module.svelte.js';
 import {
 	type Identifier_Json,

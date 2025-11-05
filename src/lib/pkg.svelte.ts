@@ -16,7 +16,7 @@ import {
 } from '$lib/package_helpers.js';
 
 /**
- * Rich runtime package representation following the "minimal + rich" pattern.
+ * Rich runtime package representation of a package.
  *
  * Wraps minimal serializable data (package_json, src_json) with computed properties
  * and provides the root of the API documentation hierarchy:
