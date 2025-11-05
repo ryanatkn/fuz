@@ -10,6 +10,8 @@
 	<section>
 		The <code>Docs</code> is the component behind these docs. Its docs are unfinished - for now see
 		usage in
+		<a href="https://github.com/ryanatkn/fuz/blob/main/src/routes/docs/%2Blayout.svelte">Fuz</a>
+		or
 		<a href="https://github.com/ryanatkn/moss/blob/main/src/routes/docs/%2Blayout.svelte">Moss</a>.
 	</section>
 </Tome_Content>
