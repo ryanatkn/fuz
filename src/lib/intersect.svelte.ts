@@ -25,7 +25,6 @@ export interface Intersect_Params {
 
 export type Intersect_Params_Or_Callback = On_Intersect | Intersect_Params;
 
-// TODO BLOCK rename to `intersect`
 /**
  * Creates an attachment that observes element viewport intersection.
  * Uses the lazy function pattern to optimize reactivity:

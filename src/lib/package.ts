@@ -1968,7 +1968,7 @@ export const src_json: Src_Json = {
 					kind: 'variable',
 					source_line: 8,
 					type_signature:
-						'"/docs" | "/" | "/about" | "/docs/alert" | "/docs/api" | "/docs/breadcrumb" | "/docs/breadcrumb/a" | "/docs/breadcrumb/a/b" | "/docs/breadcrumb/a/b/c" | "/docs/breadcrumb/a/b/c/d" | ... 78 more ... | `/${string}/help/`',
+						'"/docs" | "/" | "/about" | "/docs/alert" | "/docs/api" | "/docs/breadcrumb" | "/docs/breadcrumb/a" | "/docs/breadcrumb/a/b" | "/docs/breadcrumb/a/b/c" | "/docs/breadcrumb/a/b/c/d" | ... 81 more ... | `/${string}/help/`',
 				},
 				{
 					name: 'get_next_docs_link_order',

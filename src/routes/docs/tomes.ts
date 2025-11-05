@@ -20,6 +20,7 @@ import csp from '$routes/docs/csp/+page.svelte';
 import logos from '$routes/docs/logos/+page.svelte';
 import theming from '$routes/docs/theming/+page.svelte';
 import api from '$routes/docs/api/+page.svelte';
+import intersect from '$routes/docs/intersect/+page.svelte';
 
 // TODO maybe decouple `related` from `Tome` to get bidirectionality for free
 
@@ -47,6 +48,12 @@ export const tomes: Array<Tome> = [
 		category: 'helpers',
 		component: csp,
 		related: [],
+	},
+	{
+		name: 'intersect',
+		category: 'helpers',
+		component: intersect,
+		related: ['Tome_Content', 'Tome_Section'],
 	},
 	{
 		name: 'logos',
