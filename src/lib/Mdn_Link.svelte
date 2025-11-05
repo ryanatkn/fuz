@@ -28,7 +28,7 @@
 
 <!-- TODO -next-line doesnt work? -->
 <!-- eslint-disable svelte/no-navigation-without-resolve -->
-<a {...rest} {href} class="mdn_link chip white_space_nowrap {class_prop}"
+<a {...rest} {href} class="mdn_link chip white_space_nowrap {class_prop}" rel="noopener"
 	><Svg
 		data={mdn_logo}
 		inline

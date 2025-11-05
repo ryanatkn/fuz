@@ -313,40 +313,6 @@ export const src_json: Src_Json = {
 			],
 		},
 		{
-			path: 'Community_Links_Panel.svelte',
-			identifiers: [
-				{
-					name: 'Community_Links_Panel',
-					kind: 'component',
-					props: [
-						{
-							name: 'children',
-							type: 'Snippet',
-							optional: true,
-						},
-					],
-					source_line: 1,
-				},
-			],
-		},
-		{
-			path: 'Community_Links.svelte',
-			identifiers: [
-				{
-					name: 'Community_Links',
-					kind: 'component',
-					props: [
-						{
-							name: 'selected',
-							type: "'webdevladder.net' | 'ryanatkn.com'",
-							optional: true,
-						},
-					],
-					source_line: 1,
-				},
-			],
-		},
-		{
 			path: 'constants.ts',
 			identifiers: [
 				{
@@ -2361,6 +2327,59 @@ export const src_json: Src_Json = {
 							name: 'children',
 							type: 'Snippet',
 							optional: false,
+						},
+					],
+					source_line: 1,
+				},
+			],
+		},
+		{
+			path: 'Ecosystem_Links_Panel.svelte',
+			identifiers: [
+				{
+					name: 'Ecosystem_Links_Panel',
+					kind: 'component',
+					props: [
+						{
+							name: 'children',
+							type: 'Snippet',
+							optional: true,
+						},
+					],
+					source_line: 1,
+				},
+			],
+		},
+		{
+			path: 'Ecosystem_Links.svelte',
+			identifiers: [
+				{
+					name: 'Ecosystem_Links',
+					kind: 'component',
+					props: [
+						{
+							name: 'selected',
+							type: "'webdevladder.net' | 'ryanatkn.com'",
+							optional: true,
+						},
+					],
+					source_line: 1,
+				},
+			],
+		},
+		{
+			path: 'Github_Link.svelte',
+			identifiers: [
+				{
+					name: 'Github_Link',
+					kind: 'component',
+					props: [
+						{
+							name: 'path',
+							type: 'string',
+							optional: true,
+							description:
+								'GitHub path - can be a full URL or a relative path like `owner/repo` or `owner/repo/blob/main/file.ts`',
 						},
 					],
 					source_line: 1,

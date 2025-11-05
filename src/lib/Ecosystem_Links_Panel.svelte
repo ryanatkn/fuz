@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
 
-	import Community_Links from '$lib/Community_Links.svelte';
+	import Ecosystem_Links from '$lib/Ecosystem_Links.svelte';
 	import Project_Links from '$lib/Project_Links.svelte';
 
 	interface Props {
@@ -17,6 +17,6 @@
 	{:else}
 		<h2 class="mt_0 mb_lg">Links</h2>
 	{/if}
-	<Community_Links />
+	<Ecosystem_Links />
 	<div class="box row"><Project_Links /></div>
 </section>

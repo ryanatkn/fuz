@@ -216,7 +216,7 @@
 
 ### Patch Changes
 
-- improve `Community_Links` ([25fe36b](https://github.com/ryanatkn/fuz/commit/25fe36b))
+- improve `Ecosystem_Links` ([25fe36b](https://github.com/ryanatkn/fuz/commit/25fe36b))
 
 ## 0.132.2
 
@@ -255,7 +255,7 @@
 
 ### Patch Changes
 
-- remove funding from `Community_Links` ([e5dab77](https://github.com/ryanatkn/fuz/commit/e5dab77))
+- remove funding from `Ecosystem_Links` ([e5dab77](https://github.com/ryanatkn/fuz/commit/e5dab77))
 
 ## 0.131.4
 
@@ -307,13 +307,13 @@
 
 ### Patch Changes
 
-- linkify blog in `Community_Links` ([de2652f](https://github.com/ryanatkn/fuz/commit/de2652f))
+- linkify blog in `Ecosystem_Links` ([de2652f](https://github.com/ryanatkn/fuz/commit/de2652f))
 
 ## 0.130.2
 
 ### Patch Changes
 
-- remove spiderspace from `Community_Links` for now ([66f6ec6](https://github.com/ryanatkn/fuz/commit/66f6ec6))
+- remove spiderspace from `Ecosystem_Links` for now ([66f6ec6](https://github.com/ryanatkn/fuz/commit/66f6ec6))
 
 ## 0.130.1
 
@@ -696,7 +696,7 @@
 
 ### Patch Changes
 
-- add `Project_Links.svelte` and use it in `Community_Links_Panel.svelte` ([b90fb70](https://github.com/ryanatkn/fuz/commit/b90fb70))
+- add `Project_Links.svelte` and use it in `Ecosystem_Links_Panel.svelte` ([b90fb70](https://github.com/ryanatkn/fuz/commit/b90fb70))
 
 ## 0.108.2
 
@@ -708,7 +708,7 @@
 
 ### Patch Changes
 
-- fix word-break on `Community_Links.svelte` ([2a21db8](https://github.com/ryanatkn/fuz/commit/2a21db8))
+- fix word-break on `Ecosystem_Links.svelte` ([2a21db8](https://github.com/ryanatkn/fuz/commit/2a21db8))
 
 ## 0.108.0
 
@@ -724,7 +724,7 @@
 - add `effect_skip` helper ([#36](https://github.com/ryanatkn/fuz/pull/36))
 - allow package_json logo to have a starting slash ([bed6aa2](https://github.com/ryanatkn/fuz/commit/bed6aa2))
 - fix ssr ([#38](https://github.com/ryanatkn/fuz/pull/38))
-- add `Community_Links.svelte`, `Community_Links_Panel.svelte`, and `Hidden_Personal_Links.svelte` ([d422d79](https://github.com/ryanatkn/fuz/commit/d422d79))
+- add `Ecosystem_Links.svelte`, `Ecosystem_Links_Panel.svelte`, and `Hidden_Personal_Links.svelte` ([d422d79](https://github.com/ryanatkn/fuz/commit/d422d79))
 
 ## 0.107.1
 

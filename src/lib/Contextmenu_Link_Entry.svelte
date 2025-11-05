@@ -12,7 +12,7 @@
 		icon = DEFAULT_LINK_ICON,
 		children,
 		disabled: disabled_prop = false,
-		external_rel = 'noreferrer',
+		external_rel = 'noreferrer', // TODO smarter defaults
 	}: {
 		href: string;
 		icon?: string | Snippet<[icon: string]>; // TODO @many rethink this API
