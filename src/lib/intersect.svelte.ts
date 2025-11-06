@@ -1,4 +1,5 @@
 import type {Attachment} from 'svelte/attachments';
+import {deep_equal} from '@ryanatkn/belt/deep_equal.js';
 
 export interface Intersect_Params {
 	/**
@@ -94,7 +95,7 @@ export const intersect =
 			}
 
 			// Check if options changed (requires observer recreation)
-			const options_changed = !options_equal(current_options, options);
+			const options_changed = !deep_equal(current_options, options);
 
 			if (options_changed || !observer) {
 				// Disconnect old observer if exists
@@ -128,16 +129,6 @@ export const intersect =
 
 		return disconnect;
 	};
-
-// TODO hacky, probably need to add a deep equality helper to belt
-const options_equal = (
-	a: IntersectionObserverInit | undefined,
-	b: IntersectionObserverInit | undefined,
-): boolean => {
-	if (a === b) return true;
-	if (a == null || b == null) return false;
-	return JSON.stringify(a) === JSON.stringify(b);
-};
 
 // TODO how to forward generic `el` type?
 export type On_Intersect = (state: Intersect_State) => void;
