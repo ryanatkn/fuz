@@ -42,7 +42,11 @@
 <!-- type signature -->
 {#if identifier.type_signature}
 	<p>
-		<Code content={identifier.type_signature} lang="ts" />
+		<Code
+			content={identifier.type_signature}
+			lang="ts"
+			code_attrs={{class: 'white_space_pre_wrap'}}
+		/>
 	</p>
 {/if}
 
@@ -82,7 +86,12 @@
 						{#if identifier.parameters.some((p) => p.default_value)}
 							<td>
 								{#if param.default_value}
-									<Code inline content={param.default_value} lang="ts" />
+									<Code
+										inline
+										content={param.default_value}
+										lang="ts"
+										code_attrs={{class: 'white_space_pre_wrap'}}
+									/>
 								{/if}
 							</td>
 						{/if}
@@ -128,7 +137,12 @@
 						{#if identifier.props.some((p) => p.default_value)}
 							<td>
 								{#if prop.default_value}
-									<Code inline content={prop.default_value} lang="ts" />
+									<Code
+										inline
+										content={prop.default_value}
+										lang="ts"
+										code_attrs={{class: 'white_space_pre_wrap'}}
+									/>
 								{/if}
 							</td>
 						{/if}
@@ -143,7 +157,7 @@
 {#if identifier.return_type}
 	<section>
 		<h4>return type</h4>
-		<Code content={identifier.return_type} lang="ts" />
+		<Code content={identifier.return_type} lang="ts" code_attrs={{class: 'white_space_pre_wrap'}} />
 		{#if identifier.return_description}
 			<p>{identifier.return_description}</p>
 		{/if}

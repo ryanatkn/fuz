@@ -25,6 +25,7 @@
 	}
 	.docs_list.expand_width {
 		width: 100%;
+		max-width: var(--distance_md);
 	}
 	.docs_list.margin {
 		margin: var(--space_xl6) 0;

@@ -59,7 +59,7 @@ export const package_json: Package_Json = {
 	},
 	devDependencies: {
 		'@changesets/changelog-git': '^0.2.1',
-		'@ryanatkn/belt': '^0.36.0',
+		'@ryanatkn/belt': '^0.36.1',
 		'@ryanatkn/eslint-config': '^0.8.0',
 		'@ryanatkn/fuz_code': '^0.30.0',
 		'@ryanatkn/gro': '^0.171.0',
@@ -2790,7 +2790,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Intersect_Params',
 					kind: 'type',
-					source_line: 3,
+					source_line: 4,
 					type_signature: 'Intersect_Params',
 					properties: [
 						{
@@ -2826,7 +2826,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Intersect_Params_Or_Callback',
 					kind: 'type',
-					source_line: 26,
+					source_line: 27,
 					type_signature: 'Intersect_Params_Or_Callback',
 				},
 				{
@@ -2834,7 +2834,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Creates an attachment that observes element viewport intersection.\nUses the lazy function pattern to optimize reactivity:\ncallbacks can update without recreating the observer, preserving state.',
-					source_line: 34,
+					source_line: 35,
 					type_signature:
 						'(get_params: () => Intersect_Params_Or_Callback | null | undefined): Attachment<HTMLElement | SVGElement>',
 					return_type: 'Attachment<HTMLElement | SVGElement>',
@@ -2850,13 +2850,13 @@ export const src_json: Src_Json = {
 				{
 					name: 'On_Intersect',
 					kind: 'type',
-					source_line: 143,
+					source_line: 134,
 					type_signature: 'On_Intersect',
 				},
 				{
 					name: 'Intersect_State',
 					kind: 'type',
-					source_line: 145,
+					source_line: 136,
 					type_signature: 'Intersect_State',
 					properties: [
 						{
@@ -2889,13 +2889,13 @@ export const src_json: Src_Json = {
 				{
 					name: 'On_Disconnect',
 					kind: 'type',
-					source_line: 154,
+					source_line: 145,
 					type_signature: 'On_Disconnect',
 				},
 				{
 					name: 'Disconnect_State',
 					kind: 'type',
-					source_line: 156,
+					source_line: 147,
 					type_signature: 'Disconnect_State',
 					properties: [
 						{

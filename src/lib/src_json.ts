@@ -1,5 +1,3 @@
-// TODO BLOCK either rename pkg -> src or Src_Json to Pkg_Json
-
 /**
  * Top-level source metadata.
  *
@@ -34,11 +32,8 @@ export type Identifier_Kind =
  * Identifier metadata with rich TypeScript/JSDoc information.
  */
 export interface Identifier_Json {
-	/** Identifier name. */
 	name: string;
-	/** Identifier kind. */
 	kind: Identifier_Kind | null;
-
 	doc_comment?: string;
 	type_signature?: string;
 	/** TypeScript modifiers like `readonly`, `private`, or `static`. */

@@ -269,6 +269,9 @@ a.chip {
 .white_space_nowrap {
 	white-space: nowrap;
 }
+.white_space_pre_wrap {
+	white-space: pre-wrap;
+}
 .text_color_3 {
 	color: var(--text_color_3);
 }
