@@ -57,7 +57,9 @@ repo_url_parse()       // repo_url.parse()
 package_is_published() // package.is_published()
 ```
 
-Why: JS's dynamic nature and flat module structure benefit from explicit prefixes. This pattern:
+Why: JS's dynamic nature and flat module structure benefit from explicit prefixes.
+This pattern:
+
 - groups related functions in autocomplete (`github_*`, `repo_*`, `package_*`)
 - prevents name collisions without import aliasing
 - works across modules without hierarchical nesting
@@ -69,6 +71,9 @@ Common patterns:
 - action verbs: `parse`, `url`, `create`, `get`, `to`
 
 This naming is consistent across Belt, Moss, and Gro for a unified developer experience.
+
+Duplicate identifier names across modules fail fast during `gro gen` with clear error messages.
+Resolve by renaming one identifier following the `domain_action` pattern.
 
 ### API documentation system
 
@@ -85,6 +90,7 @@ Code generation flow:
 
 Supporting helpers:
 - `src_json.ts` - type definitions for the metadata format
+- `package_gen_helpers.ts` - build-time generation helpers (validation, sorting, analysis)
 - `ts_helpers.ts` - TypeScript compiler API utilities
 - `tsdoc_helpers.ts` - JSDoc/TSDoc parsing
 - `svelte_helpers.ts` - Svelte component analysis (via svelte2tsx)

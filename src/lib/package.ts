@@ -3611,6 +3611,202 @@ export const src_json: Src_Json = {
 			],
 		},
 		{
+			path: 'package_gen_helpers.ts',
+			identifiers: [
+				{
+					name: 'package_gen_validate_no_duplicates',
+					kind: 'function',
+					doc_comment:
+						'Validates that no identifier names are duplicated across modules.\nThe flat namespace is intentional - duplicates should fail fast.',
+					throws: [
+						{
+							type: 'Error',
+							description: 'if duplicate identifier names are found',
+						},
+					],
+					source_line: 43,
+					type_signature: '(src_json: Src_Json, log: Logger): void',
+					return_type: 'void',
+					parameters: [
+						{
+							name: 'src_json',
+							type: 'Src_Json',
+							optional: false,
+						},
+						{
+							name: 'log',
+							type: 'Logger',
+							optional: false,
+						},
+					],
+				},
+				{
+					name: 'package_gen_enhance_identifier',
+					kind: 'function',
+					doc_comment: 'Enhance a single identifier with rich metadata from TypeScript analysis.',
+					throws: [
+						{
+							type: 'Error',
+							description: 'if TypeScript analysis fails (fails fast)',
+						},
+					],
+					source_line: 90,
+					type_signature:
+						'(symbol: Symbol, source_file: SourceFile, checker: TypeChecker): Identifier_Json',
+					return_type: 'Identifier_Json',
+					parameters: [
+						{
+							name: 'symbol',
+							type: 'Symbol',
+							optional: false,
+						},
+						{
+							name: 'source_file',
+							type: 'SourceFile',
+							optional: false,
+						},
+						{
+							name: 'checker',
+							type: 'TypeChecker',
+							optional: false,
+						},
+					],
+				},
+				{
+					name: 'package_gen_sort_modules',
+					kind: 'function',
+					doc_comment:
+						'Sort modules alphabetically by path for deterministic output and cleaner diffs.',
+					source_line: 135,
+					type_signature: '(modules: Module_Json[]): Module_Json[]',
+					return_type: 'Module_Json[]',
+					parameters: [
+						{
+							name: 'modules',
+							type: 'Module_Json[]',
+							optional: false,
+						},
+					],
+				},
+				{
+					name: 'package_gen_generate_ts',
+					kind: 'function',
+					doc_comment:
+						'Generate the package.ts file content with package_json and src_json exports.',
+					source_line: 142,
+					type_signature:
+						'(package_json: { [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }, src_json: Src_Json): string',
+					return_type: 'string',
+					parameters: [
+						{
+							name: 'package_json',
+							type: '{ [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }',
+							optional: false,
+						},
+						{
+							name: 'src_json',
+							type: 'Src_Json',
+							optional: false,
+						},
+					],
+				},
+				{
+					name: 'package_gen_collect_source_files',
+					kind: 'function',
+					doc_comment:
+						'Collect and filter source files from filer.\n\nReturns disknodes for TypeScript/JS files and Svelte components from /src/lib/, excluding test files.',
+					throws: [
+						{
+							type: 'Error',
+							description: 'if no source files are found in /src/lib/',
+						},
+					],
+					source_line: 162,
+					type_signature: '(filer: Filer, log: Logger): Disknode[]',
+					return_type: 'Disknode[]',
+					parameters: [
+						{
+							name: 'filer',
+							type: 'Filer',
+							optional: false,
+						},
+						{
+							name: 'log',
+							type: 'Logger',
+							optional: false,
+						},
+					],
+				},
+				{
+					name: 'package_gen_analyze_svelte_file',
+					kind: 'function',
+					doc_comment: 'Analyze a Svelte component file and extract metadata.',
+					throws: [
+						{
+							type: 'Error',
+							description:
+								'if file cannot be read, svelte2tsx transformation fails, or component analysis fails',
+						},
+					],
+					source_line: 192,
+					type_signature:
+						'(source_id: string, module_path: string, checker: TypeChecker): Module_Json',
+					return_type: 'Module_Json',
+					parameters: [
+						{
+							name: 'source_id',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'module_path',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'checker',
+							type: 'TypeChecker',
+							optional: false,
+						},
+					],
+				},
+				{
+					name: 'package_gen_analyze_typescript_file',
+					kind: 'function',
+					doc_comment: 'Analyze a TypeScript file and extract all exported identifiers.',
+					throws: [
+						{
+							type: 'Error',
+							description: 'if identifier enhancement fails (via package_gen_enhance_identifier)',
+						},
+					],
+					source_line: 234,
+					type_signature:
+						'(source_file: SourceFile, module_path: string, checker: TypeChecker): Module_Json',
+					return_type: 'Module_Json',
+					parameters: [
+						{
+							name: 'source_file',
+							type: 'SourceFile',
+							optional: false,
+						},
+						{
+							name: 'module_path',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'checker',
+							type: 'TypeChecker',
+							optional: false,
+						},
+					],
+				},
+			],
+			module_comment:
+				'Build-time helpers for package metadata generation.\n\nThese functions are used during `gro gen` to analyze TypeScript and Svelte source files\nand generate package metadata with rich type information and documentation.\n\n@see package.gen.ts for the main generation task\n@see src_json.ts for type definitions',
+		},
+		{
 			path: 'package_helpers.ts',
 			identifiers: [
 				{
@@ -3894,11 +4090,11 @@ export const src_json: Src_Json = {
 				{
 					name: 'gen',
 					kind: 'function',
-					source_line: 96,
+					source_line: 36,
 				},
 			],
 			module_comment:
-				'Custom package generator with full TypeScript analysis\n\nGenerates package.json and src.json with rich metadata:\n- JSDoc/TSDoc comments with full tag support\n- Full type signatures\n- Source code locations\n- Parameter information with descriptions and defaults\n- Return value documentation\n- Usage examples\n- Dependency graphs\n- Svelte component props\n\n@see src/lib/src_json.ts for type definitions\n@see src/lib/tsdoc_helpers.ts for JSDoc/TSDoc parsing\n@see src/lib/ts_helpers.ts for TypeScript analysis\n@see src/lib/svelte_helpers.ts for Svelte component analysis',
+				'Custom package generator with full TypeScript analysis\n\nGenerates package.json and src.json with rich metadata:\n- JSDoc/TSDoc comments with full tag support\n- Full type signatures\n- Source code locations\n- Parameter information with descriptions and defaults\n- Return value documentation\n- Usage examples\n- Dependency graphs\n- Svelte component props\n\n@see src/lib/src_json.ts for type definitions\n@see src/lib/package_gen_helpers.ts for buildtime-only helpers\n@see src/lib/tsdoc_helpers.ts for JSDoc/TSDoc parsing\n@see src/lib/ts_helpers.ts for TypeScript analysis\n@see src/lib/svelte_helpers.ts for Svelte component analysis',
 		},
 		{
 			path: 'package.ts',
