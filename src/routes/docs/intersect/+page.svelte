@@ -217,14 +217,14 @@
 				</div>
 			</label>
 			<label>
-				<code>count</code>
+				<code>options.count</code>
 				<div class="control_inputs">
 					<input type="number" min={0} max={3} step={1} bind:value={count} />
 					<input type="range" min={0} max={3} step={1} bind:value={count} />
 				</div>
 			</label>
 			<label>
-				<code>rootMargin</code>
+				<code>options.rootMargin</code>
 				<select bind:value={rootMargin}>
 					<option value="0px">0px</option>
 					<option value="50px">50px</option>
