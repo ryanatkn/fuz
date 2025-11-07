@@ -10,7 +10,7 @@
 		node: Mdz_Node;
 	} = $props();
 
-	// TODO BLOCk support both content and node in props?
+	// TODO BLOCK support both content and node in props?
 
 	const components = mdz_components_context.get();
 </script>
