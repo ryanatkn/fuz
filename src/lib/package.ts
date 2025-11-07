@@ -3143,7 +3143,7 @@ export const src_json: Src_Json = {
 					name: 'mdz_parse',
 					kind: 'function',
 					doc_comment: 'Parses text to an array of `Mdz_Node`.',
-					source_line: 16,
+					source_line: 21,
 					type_signature: '(text: string): Mdz_Node[]',
 					return_type: 'Mdz_Node[]',
 					parameters: [
@@ -3157,13 +3157,13 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Node',
 					kind: 'type',
-					source_line: 18,
+					source_line: 23,
 					type_signature: 'Mdz_Node',
 				},
 				{
 					name: 'Mdz_Base_Node',
 					kind: 'type',
-					source_line: 27,
+					source_line: 32,
 					type_signature: 'Mdz_Base_Node',
 					properties: [
 						{
@@ -3186,7 +3186,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Text_Node',
 					kind: 'type',
-					source_line: 33,
+					source_line: 38,
 					type_signature: 'Mdz_Text_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3205,7 +3205,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Code_Node',
 					kind: 'type',
-					source_line: 38,
+					source_line: 43,
 					type_signature: 'Mdz_Code_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3229,7 +3229,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Bold_Node',
 					kind: 'type',
-					source_line: 44,
+					source_line: 49,
 					type_signature: 'Mdz_Bold_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3248,7 +3248,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Italic_Node',
 					kind: 'type',
-					source_line: 49,
+					source_line: 54,
 					type_signature: 'Mdz_Italic_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3267,7 +3267,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Link_Node',
 					kind: 'type',
-					source_line: 54,
+					source_line: 59,
 					type_signature: 'Mdz_Link_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3296,7 +3296,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Paragraph_Node',
 					kind: 'type',
-					source_line: 61,
+					source_line: 66,
 					type_signature: 'Mdz_Paragraph_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3315,7 +3315,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Component_Node',
 					kind: 'type',
-					source_line: 66,
+					source_line: 71,
 					type_signature: 'Mdz_Component_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3341,7 +3341,7 @@ export const src_json: Src_Json = {
 					kind: 'class',
 					doc_comment:
 						'Parser for mdz format.\nSingle-pass lexer/parser with text accumulation for efficiency.\nUsed by `mdz_parse`, which should be preferred for simple usage.',
-					source_line: 87,
+					source_line: 92,
 					members: [
 						{
 							name: '#index',
@@ -3452,7 +3452,7 @@ export const src_json: Src_Json = {
 				},
 			],
 			module_comment:
-				'mdz - Minimal TSDoc Markdown parser for Fuz API documentation.\n\nParses a specialized markdown dialect with:\n- Inline formatting: `code`, **bold**, *italic*, _italic_\n- TSDoc tags: {@link}, {@see}\n- Auto-linking via backticks to identifiers/modules\n- Paragraph breaks (double newline)\n\nKey constraint: Preserves ALL whitespace exactly as authored.',
+				'mdz - minimal Markdown+TSDoc parser for Fuz API documentation.\n\nParses a specialized markdown dialect with:\n- inline formatting: `code`, **bold**, *italic*, _italic_\n- TSDoc tags: {@link}, {@see}\n- auto-linking via backticks to identifiers/modules\n- paragraph breaks (double newline)\n\nKey constraint: preserves ALL whitespace exactly as authored,\nand is rendered with white-space pre or pre-wrap.',
 		},
 		{
 			path: 'module_helpers.ts',

@@ -1,14 +1,17 @@
 /**
- * mdz - Minimal TSDoc Markdown parser for Fuz API documentation.
+ * mdz - minimal Markdown+TSDoc parser for Fuz API documentation.
  *
  * Parses a specialized markdown dialect with:
- * - Inline formatting: `code`, **bold**, *italic*, _italic_
+ * - inline formatting: `code`, **bold**, *italic*, _italic_
  * - TSDoc tags: {@link}, {@see}
- * - Auto-linking via backticks to identifiers/modules
- * - Paragraph breaks (double newline)
+ * - auto-linking via backticks to identifiers/modules
+ * - paragraph breaks (double newline)
  *
- * Key constraint: Preserves ALL whitespace exactly as authored.
+ * Key constraint: preserves ALL whitespace exactly as authored,
+ * and is rendered with white-space pre or pre-wrap.
  */
+
+// TODO this is an early proof of concept, is missing many features and edge cases
 
 // TODO design incremental parsing or some system that preserves Svelte components across re-renders when possible
 
