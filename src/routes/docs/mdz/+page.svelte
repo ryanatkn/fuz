@@ -13,17 +13,18 @@
 
 	const basic_example = '**Bold** and _italic_ text.';
 	const code_example = 'To parse markdown, use `mdz_parse` from module `mdz.ts`.';
+	const code_plain_example = 'This `identifier` does not exist.';
 	const link_example = 'See {@link Alert} and {@link Card} components.';
 	const paragraph_example = 'First paragraph.\n\nSecond paragraph.';
 
-	// TODO BLOCK needs to show usage in code blocks
+	// TODO BLOCK needs to show usage in code blocks -- merging under "Basic formatting" probably isnt right, maybe Usage? Basic usage?
 </script>
 
 <Tome_Content {tome}>
 	<section>
 		<p>
-			<code>mdz</code> is a minimal TSDoc markdown parser for Fuz API documentation. It parses a specialized
-			markdown dialect with inline formatting and TSDoc tags.
+			<code>mdz</code> is a minimal, user-oriented language that combines Svelte components with Markdown
+			and TSDoc. It parses a specialized markdown dialect with inline formatting and TSDoc tags.
 		</p>
 	</section>
 
@@ -38,7 +39,7 @@ import Mdz from '@ryanatkn/fuz/Mdz.svelte';`}
 	<Tome_Section>
 		<Tome_Section_Header text="Basic formatting" />
 		<p>Supports <strong>bold</strong>, <em>italic</em>, and inline code:</p>
-		<Code content={basic_example} />
+		<Code content={`<Mdz node={mdz_parse('${basic_example}')} />`} />
 		<div>
 			{#each mdz_parse(basic_example) as node (node)}
 				<Mdz {node} />
@@ -50,8 +51,15 @@ import Mdz from '@ryanatkn/fuz/Mdz.svelte';`}
 		<Tome_Section_Header text="Inline code auto-linking" />
 		<p>Backtick code automatically links to identifiers and modules:</p>
 		<Code content={code_example} />
-		<div>
+		<div class="mb_lg">
 			{#each mdz_parse(code_example) as node (node)}
+				<Mdz {node} />
+			{/each}
+		</div>
+		<p>Non-identifiers become plain code elements:</p>
+		<Code content={code_plain_example} />
+		<div>
+			{#each mdz_parse(code_plain_example) as node (node)}
 				<Mdz {node} />
 			{/each}
 		</div>

@@ -120,10 +120,10 @@
 						{/each}
 					</div>
 				{/if}
-				<p class="row gap_md">
+				<div class="row gap_md mb_lg">
 					<strong>type</strong>
 					<Type_Link type={prop.type} />
-				</p>
+				</div>
 				{#if prop.optional || prop.bindable || prop.default_value}
 					<div class="row gap_md">
 						{#if prop.optional}
