@@ -1968,7 +1968,7 @@ export const src_json: Src_Json = {
 					kind: 'variable',
 					source_line: 8,
 					type_signature:
-						'"/docs" | "/" | "/about" | "/docs/alert" | "/docs/api" | "/docs/breadcrumb" | "/docs/breadcrumb/a" | "/docs/breadcrumb/a/b" | "/docs/breadcrumb/a/b/c" | "/docs/breadcrumb/a/b/c/d" | ... 81 more ... | `/${string}/help/`',
+						'"/docs" | "/" | "/about" | "/docs/alert" | "/docs/api" | "/docs/breadcrumb" | "/docs/breadcrumb/a" | "/docs/breadcrumb/a/b" | "/docs/breadcrumb/a/b/c" | "/docs/breadcrumb/a/b/c/d" | ... 84 more ... | `/${string}/help/`',
 				},
 				{
 					name: 'get_next_docs_link_order',
@@ -2107,6 +2107,33 @@ export const src_json: Src_Json = {
 							type_signature: '(id: string) => void',
 						},
 					],
+				},
+			],
+		},
+		{
+			path: 'Docs_Link.svelte',
+			identifiers: [
+				{
+					name: 'Docs_Link',
+					kind: 'component',
+					props: [
+						{
+							name: 'reference',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'display_text',
+							type: 'string',
+							optional: true,
+						},
+						{
+							name: 'children',
+							type: 'Snippet<[Identifier | undefined, Module | undefined]>',
+							optional: true,
+						},
+					],
+					source_line: 1,
 				},
 			],
 		},
@@ -3052,6 +3079,250 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+		},
+		{
+			path: 'mdz_components.ts',
+			identifiers: [
+				{
+					name: 'Mdz_Components',
+					kind: 'type',
+					doc_comment:
+						"Component registry for custom Svelte components that can be used in mdz content.\n\nFor example, registering 'Alert' allows using `<Alert>...</Alert>` in TSDoc comments.\n\nComponent names must start with an uppercase letter to distinguish them from HTML elements.",
+					source_line: 11,
+					type_signature: 'Mdz_Components',
+				},
+				{
+					name: 'mdz_components_context',
+					kind: 'variable',
+					doc_comment:
+						'Context for providing custom mdz components.\nMust be set by the application using mdz.',
+					source_line: 17,
+					type_signature:
+						'{ get: (error_message?: string | undefined) => Mdz_Components; maybe_get: () => Mdz_Components | undefined; set: (value: Mdz_Components) => Mdz_Components; }',
+				},
+			],
+		},
+		{
+			path: 'Mdz.svelte',
+			identifiers: [
+				{
+					name: 'Mdz',
+					kind: 'component',
+					props: [
+						{
+							name: 'node',
+							type: 'Mdz_Node',
+							optional: false,
+						},
+					],
+					source_line: 1,
+				},
+			],
+		},
+		{
+			path: 'mdz.ts',
+			identifiers: [
+				{
+					name: 'mdz_parse',
+					kind: 'function',
+					doc_comment:
+						'mdz - Minimal TSDoc Markdown parser for Fuz API documentation.\n\nParses a specialized markdown dialect with:\n- Inline formatting: `code`, **bold**, *italic*, _italic_\n- TSDoc tags: , {@see}\n- Auto-linking via backticks to identifiers/modules\n- Paragraph breaks (double newline)\n\nKey constraint: Preserves ALL whitespace exactly as authored.',
+					source_line: 13,
+					type_signature: '(text: string): Mdz_Node[]',
+					return_type: 'Mdz_Node[]',
+					parameters: [
+						{
+							name: 'text',
+							type: 'string',
+							optional: false,
+						},
+					],
+				},
+				{
+					name: 'Mdz_Node',
+					kind: 'type',
+					source_line: 17,
+					type_signature: 'Mdz_Node',
+				},
+				{
+					name: 'Mdz_Base_Node',
+					kind: 'type',
+					source_line: 26,
+					type_signature: 'Mdz_Base_Node',
+					properties: [
+						{
+							name: 'type',
+							kind: 'variable',
+							type_signature: 'string',
+						},
+						{
+							name: 'start',
+							kind: 'variable',
+							type_signature: 'number',
+						},
+						{
+							name: 'end',
+							kind: 'variable',
+							type_signature: 'number',
+						},
+					],
+				},
+				{
+					name: 'Mdz_Text_Node',
+					kind: 'type',
+					source_line: 32,
+					type_signature: 'Mdz_Text_Node',
+					extends: ['Mdz_Base_Node'],
+					properties: [
+						{
+							name: 'type',
+							kind: 'variable',
+							type_signature: "'Text'",
+						},
+						{
+							name: 'content',
+							kind: 'variable',
+							type_signature: 'string',
+						},
+					],
+				},
+				{
+					name: 'Mdz_Code_Node',
+					kind: 'type',
+					source_line: 37,
+					type_signature: 'Mdz_Code_Node',
+					extends: ['Mdz_Base_Node'],
+					properties: [
+						{
+							name: 'type',
+							kind: 'variable',
+							type_signature: "'Code'",
+						},
+						{
+							name: 'content',
+							kind: 'variable',
+							type_signature: 'string',
+						},
+						{
+							name: 'reference',
+							kind: 'variable',
+							type_signature: 'string',
+						},
+					],
+				},
+				{
+					name: 'Mdz_Bold_Node',
+					kind: 'type',
+					source_line: 43,
+					type_signature: 'Mdz_Bold_Node',
+					extends: ['Mdz_Base_Node'],
+					properties: [
+						{
+							name: 'type',
+							kind: 'variable',
+							type_signature: "'Bold'",
+						},
+						{
+							name: 'children',
+							kind: 'variable',
+							type_signature: 'Array<Mdz_Node>',
+						},
+					],
+				},
+				{
+					name: 'Mdz_Italic_Node',
+					kind: 'type',
+					source_line: 48,
+					type_signature: 'Mdz_Italic_Node',
+					extends: ['Mdz_Base_Node'],
+					properties: [
+						{
+							name: 'type',
+							kind: 'variable',
+							type_signature: "'Italic'",
+						},
+						{
+							name: 'children',
+							kind: 'variable',
+							type_signature: 'Array<Mdz_Node>',
+						},
+					],
+				},
+				{
+					name: 'Mdz_Link_Node',
+					kind: 'type',
+					source_line: 53,
+					type_signature: 'Mdz_Link_Node',
+					extends: ['Mdz_Base_Node'],
+					properties: [
+						{
+							name: 'type',
+							kind: 'variable',
+							type_signature: "'Link'",
+						},
+						{
+							name: 'reference',
+							kind: 'variable',
+							type_signature: 'string',
+						},
+						{
+							name: 'display_text',
+							kind: 'variable',
+							type_signature: 'string',
+						},
+						{
+							name: 'link_type',
+							kind: 'variable',
+							type_signature: "'identifier' | 'url'",
+						},
+					],
+				},
+				{
+					name: 'Mdz_Paragraph_Node',
+					kind: 'type',
+					source_line: 60,
+					type_signature: 'Mdz_Paragraph_Node',
+					extends: ['Mdz_Base_Node'],
+					properties: [
+						{
+							name: 'type',
+							kind: 'variable',
+							type_signature: "'Paragraph'",
+						},
+						{
+							name: 'children',
+							kind: 'variable',
+							type_signature: 'Array<Mdz_Node>',
+						},
+					],
+				},
+				{
+					name: 'Mdz_Component_Node',
+					kind: 'type',
+					source_line: 65,
+					type_signature: 'Mdz_Component_Node',
+					extends: ['Mdz_Base_Node'],
+					properties: [
+						{
+							name: 'type',
+							kind: 'variable',
+							type_signature: "'Component'",
+						},
+						{
+							name: 'name',
+							kind: 'variable',
+							type_signature: 'string',
+						},
+						{
+							name: 'children',
+							kind: 'variable',
+							type_signature: 'Array<Mdz_Node>',
+						},
+					],
+				},
+			],
+			module_comment:
+				'mdz - Minimal TSDoc Markdown parser for Fuz API documentation.\n\nParses a specialized markdown dialect with:\n- Inline formatting: `code`, **bold**, *italic*, _italic_\n- TSDoc tags: {@link}, {@see}\n- Auto-linking via backticks to identifiers/modules\n- Paragraph breaks (double newline)\n\nKey constraint: Preserves ALL whitespace exactly as authored.',
 		},
 		{
 			path: 'module_helpers.ts',

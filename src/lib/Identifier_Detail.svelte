@@ -5,6 +5,8 @@
 	import Details from '$lib/Details.svelte';
 	import Type_Link from '$lib/Type_Link.svelte';
 	import Module_Link from '$lib/Module_Link.svelte';
+	import {mdz_parse} from '$lib/mdz.js';
+	import Mdz from '$lib/Mdz.svelte';
 
 	const {identifier}: {identifier: Identifier} = $props();
 
@@ -52,9 +54,11 @@
 
 <!-- documentation -->
 {#if identifier.has_documentation}
-	<p>
-		{identifier.doc_comment}
-	</p>
+	<div class="doc-comment">
+		{#each mdz_parse(identifier.doc_comment!) as node (node)}
+			<Mdz {node} />
+		{/each}
+	</div>
 {/if}
 
 <!-- parameters -->
@@ -68,7 +72,11 @@
 					>
 				</h4>
 				{#if param.description}
-					<p>{param.description}</p>
+					<div class="param-description">
+						{#each mdz_parse(param.description) as node (node)}
+							<Mdz {node} />
+						{/each}
+					</div>
 				{/if}
 				<div class="row gap_md">
 					<strong>type</strong>
@@ -106,12 +114,16 @@
 					>
 				</h4>
 				{#if prop.description}
-					<p>{prop.description}</p>
+					<div class="prop-description">
+						{#each mdz_parse(prop.description) as node (node)}
+							<Mdz {node} />
+						{/each}
+					</div>
 				{/if}
-				<div class="row gap_md">
+				<p class="row gap_md">
 					<strong>type</strong>
 					<Type_Link type={prop.type} />
-				</div>
+				</p>
 				{#if prop.optional || prop.bindable || prop.default_value}
 					<div class="row gap_md">
 						{#if prop.optional}
@@ -142,7 +154,11 @@
 		<h4>returns</h4>
 		<Code content={identifier.return_type} lang="ts" code_attrs={{class: 'white_space_pre_wrap'}} />
 		{#if identifier.return_description}
-			<p>{identifier.return_description}</p>
+			<div class="return-description">
+				{#each mdz_parse(identifier.return_description) as node (node)}
+					<Mdz {node} />
+				{/each}
+			</div>
 		{/if}
 	</section>
 {/if}
@@ -243,9 +259,11 @@
 		<h4>see also</h4>
 		<ul>
 			{#each identifier.see_also as ref (ref)}
-				<!-- TODO @many support internal identifiers/modules -->
-				<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-				<li><a href={ref} target="_blank" rel="noopener">{ref}</a></li>
+				<li>
+					{#each mdz_parse(ref) as node (node)}
+						<Mdz {node} />
+					{/each}
+				</li>
 			{/each}
 		</ul>
 	</section>
@@ -258,13 +276,17 @@
 			<section>
 				<h4><code>{member.name}</code></h4>
 				{#if member.doc_comment}
-					<p>{member.doc_comment}</p>
+					<div class="member-doc-comment">
+						{#each mdz_parse(member.doc_comment) as node (node)}
+							<Mdz {node} />
+						{/each}
+					</div>
 				{/if}
 				{#if member.type_signature}
-					<div class="row gap_md">
+					<p class="row gap_md">
 						<strong>type</strong>
 						<Type_Link type={member.type_signature} />
-					</div>
+					</p>
 				{/if}
 				{#if member.modifiers?.length}
 					<div class="row gap_md">
@@ -285,7 +307,11 @@
 			<section>
 				<h4><code>{prop.name}</code></h4>
 				{#if prop.doc_comment}
-					<p>{prop.doc_comment}</p>
+					<div class="property-doc-comment">
+						{#each mdz_parse(prop.doc_comment) as node (node)}
+							<Mdz {node} />
+						{/each}
+					</div>
 				{/if}
 				{#if prop.type_signature}
 					<div class="row gap_md">
@@ -295,7 +321,7 @@
 				{/if}
 				{#if prop.modifiers?.length}
 					<div class="row gap_md">
-						{#each prop.modifiers as modifier}
+						{#each prop.modifiers as modifier (modifier)}
 							<span class="chip">{modifier}</span>
 						{/each}
 					</div>

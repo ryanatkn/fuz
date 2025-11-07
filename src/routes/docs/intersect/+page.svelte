@@ -7,7 +7,7 @@
 	import Tome_Section from '$lib/Tome_Section.svelte';
 	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
-	import Tome_Link from '$lib/Tome_Link.svelte';
+	import Identifier_Link from '$lib/Identifier_Link.svelte';
 
 	const LIBRARY_ITEM_NAME = 'intersect';
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
@@ -42,7 +42,7 @@
 		</p>
 		<p>
 			Uses the lazy function pattern to optimize reactivity: callbacks can update without recreating
-			the observer, preserving state. See <Tome_Link name="Tome_Content" /> and <Tome_Link
+			the observer, preserving state. See <Identifier_Link name="Tome_Content" /> and <Identifier_Link
 				name="Tome_Section"
 			/> for usage examples in this codebase.
 		</p>
