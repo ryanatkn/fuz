@@ -2027,10 +2027,10 @@ export const src_json: Src_Json = {
 					type_signature: 'Docs_Link_Tag',
 				},
 				{
-					name: 'Docs_Link',
+					name: 'Docs_Link_Info',
 					kind: 'type',
 					source_line: 35,
-					type_signature: 'Docs_Link',
+					type_signature: 'Docs_Link_Info',
 					properties: [
 						{
 							name: 'id',
@@ -2074,7 +2074,7 @@ export const src_json: Src_Json = {
 							name: 'links',
 							kind: 'variable',
 							modifiers: ['readonly'],
-							type_signature: 'SvelteMap<string, Docs_Link>',
+							type_signature: 'SvelteMap<string, Docs_Link_Info>',
 						},
 						{
 							name: '#slug_to_order',
@@ -3894,7 +3894,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'gen',
 					kind: 'function',
-					source_line: 49,
+					source_line: 96,
 				},
 			],
 			module_comment:

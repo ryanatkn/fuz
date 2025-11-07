@@ -32,7 +32,7 @@ export const docs_links_context = create_context(() => new Docs_Links());
 
 export type Docs_Link_Tag = 'h3' | 'h4';
 
-export interface Docs_Link {
+export interface Docs_Link_Info {
 	id: string;
 	text: string;
 	slug: string;
@@ -43,7 +43,7 @@ export interface Docs_Link {
 export class Docs_Links {
 	readonly root_path: string;
 
-	readonly links: SvelteMap<string, Docs_Link> = new SvelteMap();
+	readonly links: SvelteMap<string, Docs_Link_Info> = new SvelteMap();
 
 	// Maps compound keys (pathname#slug) to their original order
 	// This preserves order across component remounts

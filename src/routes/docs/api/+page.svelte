@@ -54,7 +54,7 @@
 				<p>No identifiers found matching "{search_query}"</p>
 			</section>
 		{:else}
-			{#each sorted_identifiers as identifier (identifier.name)}
+			{#each sorted_identifiers as identifier (`${identifier.module_path}:${identifier.name}`)}
 				<Tome_Section>
 					<Tome_Section_Header text={identifier.name} />
 					<article id={identifier.name}>

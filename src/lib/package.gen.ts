@@ -46,6 +46,53 @@ import {
 	module_is_source,
 } from '$lib/module_helpers.js';
 
+/**
+ * Validates that no identifier names are duplicated across modules.
+ * The flat namespace is intentional - duplicates should fail fast.
+ *
+ * @throws Error if duplicate identifier names are found
+ */
+const validate_no_duplicate_identifiers = (src_json: Src_Json, log: Logger): void => {
+	const identifier_locations: Map<string, Array<{module: string; kind: string | null}>> = new Map();
+
+	// Collect all identifier names and their locations
+	for (const mod of src_json.modules ?? []) {
+		for (const identifier of mod.identifiers ?? []) {
+			const name = identifier.name;
+			if (!identifier_locations.has(name)) {
+				identifier_locations.set(name, []);
+			}
+			identifier_locations.get(name)!.push({
+				module: mod.path,
+				kind: identifier.kind,
+			});
+		}
+	}
+
+	// Check for duplicates
+	const duplicates: Array<{name: string; locations: Array<{module: string; kind: string | null}>}> =
+		[];
+	for (const [name, locations] of identifier_locations.entries()) {
+		if (locations.length > 1) {
+			duplicates.push({name, locations});
+		}
+	}
+
+	if (duplicates.length > 0) {
+		log.error('Duplicate identifier names detected in flat namespace:');
+		for (const {name, locations} of duplicates) {
+			log.error(`  "${name}" found in:`);
+			for (const {module, kind} of locations) {
+				log.error(`    - ${module} (${kind ?? 'unknown'})`);
+			}
+		}
+		throw new Error(
+			`Found ${duplicates.length} duplicate identifier name${duplicates.length === 1 ? '' : 's'} across modules. ` +
+				'The flat namespace requires unique names. Please rename one of the conflicting identifiers.',
+		);
+	}
+};
+
 export const gen: Gen = async ({log, filer}) => {
 	log.info('generating package metadata with full TypeScript analysis...');
 
@@ -105,6 +152,9 @@ export const gen: Gen = async ({log, filer}) => {
 
 	// Sort modules alphabetically for deterministic output and cleaner diffs
 	src_json.modules = src_json.modules ? sort_modules(src_json.modules) : undefined;
+
+	// Validate no duplicate identifier names across modules
+	validate_no_duplicate_identifiers(src_json, log);
 
 	log.info('package metadata generation complete');
 
