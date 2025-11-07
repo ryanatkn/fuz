@@ -3103,10 +3103,10 @@ export const src_json: Src_Json = {
 			],
 		},
 		{
-			path: 'Mdz.svelte',
+			path: 'Mdz_Node_View.svelte',
 			identifiers: [
 				{
-					name: 'Mdz',
+					name: 'Mdz_Node_View',
 					kind: 'component',
 					props: [
 						{
@@ -3120,14 +3120,30 @@ export const src_json: Src_Json = {
 			],
 		},
 		{
+			path: 'Mdz.svelte',
+			identifiers: [
+				{
+					name: 'Mdz',
+					kind: 'component',
+					props: [
+						{
+							name: 'content',
+							type: 'string',
+							optional: false,
+						},
+					],
+					source_line: 1,
+				},
+			],
+		},
+		{
 			path: 'mdz.ts',
 			identifiers: [
 				{
 					name: 'mdz_parse',
 					kind: 'function',
-					doc_comment:
-						'mdz - Minimal TSDoc Markdown parser for Fuz API documentation.\n\nParses a specialized markdown dialect with:\n- Inline formatting: `code`, **bold**, *italic*, _italic_\n- TSDoc tags: , {@see}\n- Auto-linking via backticks to identifiers/modules\n- Paragraph breaks (double newline)\n\nKey constraint: Preserves ALL whitespace exactly as authored.',
-					source_line: 13,
+					doc_comment: 'Parses text to an array of `Mdz_Node`.',
+					source_line: 16,
 					type_signature: '(text: string): Mdz_Node[]',
 					return_type: 'Mdz_Node[]',
 					parameters: [
@@ -3141,13 +3157,13 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Node',
 					kind: 'type',
-					source_line: 17,
+					source_line: 18,
 					type_signature: 'Mdz_Node',
 				},
 				{
 					name: 'Mdz_Base_Node',
 					kind: 'type',
-					source_line: 26,
+					source_line: 27,
 					type_signature: 'Mdz_Base_Node',
 					properties: [
 						{
@@ -3170,7 +3186,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Text_Node',
 					kind: 'type',
-					source_line: 32,
+					source_line: 33,
 					type_signature: 'Mdz_Text_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3189,7 +3205,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Code_Node',
 					kind: 'type',
-					source_line: 37,
+					source_line: 38,
 					type_signature: 'Mdz_Code_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3213,7 +3229,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Bold_Node',
 					kind: 'type',
-					source_line: 43,
+					source_line: 44,
 					type_signature: 'Mdz_Bold_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3232,7 +3248,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Italic_Node',
 					kind: 'type',
-					source_line: 48,
+					source_line: 49,
 					type_signature: 'Mdz_Italic_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3251,7 +3267,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Link_Node',
 					kind: 'type',
-					source_line: 53,
+					source_line: 54,
 					type_signature: 'Mdz_Link_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3280,7 +3296,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Paragraph_Node',
 					kind: 'type',
-					source_line: 60,
+					source_line: 61,
 					type_signature: 'Mdz_Paragraph_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3299,7 +3315,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Component_Node',
 					kind: 'type',
-					source_line: 65,
+					source_line: 66,
 					type_signature: 'Mdz_Component_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3317,6 +3333,120 @@ export const src_json: Src_Json = {
 							name: 'children',
 							kind: 'variable',
 							type_signature: 'Array<Mdz_Node>',
+						},
+					],
+				},
+				{
+					name: 'Mdz_Parser',
+					kind: 'class',
+					doc_comment:
+						'Parser for mdz format.\nSingle-pass lexer/parser with text accumulation for efficiency.\nUsed by `mdz_parse`, which should be preferred for simple usage.',
+					source_line: 87,
+					members: [
+						{
+							name: '#index',
+							kind: 'variable',
+							type_signature: 'number',
+						},
+						{
+							name: '#template',
+							kind: 'variable',
+							type_signature: 'string',
+						},
+						{
+							name: '#accumulated_text',
+							kind: 'variable',
+							type_signature: 'string',
+						},
+						{
+							name: '#accumulated_start',
+							kind: 'variable',
+							type_signature: 'number',
+						},
+						{
+							name: '#nodes',
+							kind: 'variable',
+							type_signature: 'Array<Mdz_Node>',
+						},
+						{
+							name: 'parse',
+							kind: 'function',
+							type_signature: '() => Mdz_Node[]',
+							doc_comment:
+								'Main parse method. Returns flat array of nodes,\nwith paragraph nodes wrapping content between double newlines.',
+						},
+						{
+							name: '#accumulate_text',
+							kind: 'function',
+							type_signature: '(text: string, start: number) => void',
+							doc_comment: 'Accumulate text for later flushing (performance optimization).',
+						},
+						{
+							name: '#flush_text',
+							kind: 'function',
+							type_signature: '() => void',
+							doc_comment: 'Flush accumulated text as a single Text node.',
+						},
+						{
+							name: '#parse_node',
+							kind: 'function',
+							type_signature: '() => Mdz_Node',
+							doc_comment:
+								'Parse next node based on current character.\nUses switch for performance (avoids regex in hot loop).',
+						},
+						{
+							name: '#parse_code',
+							kind: 'function',
+							type_signature: '() => Mdz_Text_Node | Mdz_Code_Node',
+							doc_comment:
+								'Parse backtick code: `code`\nAuto-links to identifiers/modules if match found.\nFalls back to text if unclosed.',
+						},
+						{
+							name: '#parse_bold_or_italic',
+							kind: 'function',
+							type_signature: '() => Mdz_Text_Node | Mdz_Bold_Node | Mdz_Italic_Node',
+							doc_comment:
+								'Parse bold or italic starting with asterisk.\n\n- **bold** = Bold node\n- *italic* = Italic node\n\nFalls back to text if unclosed.',
+						},
+						{
+							name: '#parse_italic',
+							kind: 'function',
+							type_signature: '() => Mdz_Text_Node | Mdz_Italic_Node',
+							doc_comment:
+								'Parse italic starting with underscore.\n_italic_ = Italic node\nFalls back to text if unclosed.',
+						},
+						{
+							name: '#parse_link',
+							kind: 'function',
+							type_signature: '() => Mdz_Text_Node | Mdz_Link_Node',
+							doc_comment:
+								'Parse TSDoc inline tag: `...` or `{@see ...`.\nFormats:\n\n-  - local ref\n- ://url - external URL\n- ://url|Display Text - URL with custom text\n\nFalls back to text if malformed.',
+						},
+						{
+							name: '#parse_text',
+							kind: 'function',
+							type_signature: '() => Mdz_Text_Node',
+							doc_comment:
+								'Parse plain text until special character encountered.\nPreserves all whitespace (except paragraph breaks handled separately).',
+						},
+						{
+							name: '#parse_nodes_until',
+							kind: 'function',
+							type_signature: '(delimiter: string) => Mdz_Node[]',
+							doc_comment:
+								'Parse nodes until delimiter string is found.\nUsed for bold/italic content parsing.',
+						},
+						{
+							name: '#match',
+							kind: 'function',
+							type_signature: '(str: string) => boolean',
+							doc_comment: 'Check if template matches string at current index.',
+						},
+						{
+							name: '#eat',
+							kind: 'function',
+							type_signature: '(str: string) => void',
+							doc_comment: 'Consume string at current index, or throw error.',
 						},
 					],
 				},

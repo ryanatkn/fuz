@@ -5,7 +5,6 @@
 	import Details from '$lib/Details.svelte';
 	import Type_Link from '$lib/Type_Link.svelte';
 	import Module_Link from '$lib/Module_Link.svelte';
-	import {mdz_parse} from '$lib/mdz.js';
 	import Mdz from '$lib/Mdz.svelte';
 
 	const {identifier}: {identifier: Identifier} = $props();
@@ -55,9 +54,7 @@
 <!-- documentation -->
 {#if identifier.has_documentation}
 	<div class="doc-comment">
-		{#each mdz_parse(identifier.doc_comment!) as node (node)}
-			<Mdz {node} />
-		{/each}
+		<Mdz content={identifier.doc_comment!} />
 	</div>
 {/if}
 
@@ -73,9 +70,7 @@
 				</h4>
 				{#if param.description}
 					<div class="param-description">
-						{#each mdz_parse(param.description) as node (node)}
-							<Mdz {node} />
-						{/each}
+						<Mdz content={param.description} />
 					</div>
 				{/if}
 				<div class="row gap_md">
@@ -115,9 +110,7 @@
 				</h4>
 				{#if prop.description}
 					<div class="prop-description">
-						{#each mdz_parse(prop.description) as node (node)}
-							<Mdz {node} />
-						{/each}
+						<Mdz content={prop.description} />
 					</div>
 				{/if}
 				<div class="row gap_md mb_lg">
@@ -155,9 +148,7 @@
 		<Code content={identifier.return_type} lang="ts" code_attrs={{class: 'white_space_pre_wrap'}} />
 		{#if identifier.return_description}
 			<div class="return-description">
-				{#each mdz_parse(identifier.return_description) as node (node)}
-					<Mdz {node} />
-				{/each}
+				<Mdz content={identifier.return_description} />
 			</div>
 		{/if}
 	</section>
@@ -260,9 +251,7 @@
 		<ul>
 			{#each identifier.see_also as ref (ref)}
 				<li>
-					{#each mdz_parse(ref) as node (node)}
-						<Mdz {node} />
-					{/each}
+					<Mdz content={ref} />
 				</li>
 			{/each}
 		</ul>
@@ -277,9 +266,7 @@
 				<h4><code>{member.name}</code></h4>
 				{#if member.doc_comment}
 					<div class="member-doc-comment">
-						{#each mdz_parse(member.doc_comment) as node (node)}
-							<Mdz {node} />
-						{/each}
+						<Mdz content={member.doc_comment} />
 					</div>
 				{/if}
 				{#if member.type_signature}
@@ -308,9 +295,7 @@
 				<h4><code>{prop.name}</code></h4>
 				{#if prop.doc_comment}
 					<div class="property-doc-comment">
-						{#each mdz_parse(prop.doc_comment) as node (node)}
-							<Mdz {node} />
-						{/each}
+						<Mdz content={prop.doc_comment} />
 					</div>
 				{/if}
 				{#if prop.type_signature}
