@@ -21,6 +21,11 @@
 	let threshold = $state(0);
 	let count = $state(3);
 	let rootMargin = $state('0px');
+
+	// reset keys for forcing remounts
+	let count_1_key = $state(0);
+	let count_2_key = $state(0);
+	let configurable_key = $state(0);
 </script>
 
 <Tome_Content {tome}>
@@ -155,20 +160,23 @@
   content
 </div>`}
 		/>
-		<ul class="demo_list">
-			{#each items as item (item)}
-				<li
-					{@attach intersect(() => ({
-						onintersect: ({intersecting, el}) => {
-							el.classList.toggle('intersecting', intersecting);
-						},
-						count: 1,
-					}))}
-				>
-					item {item}
-				</li>
-			{/each}
-		</ul>
+		{#key count_1_key}
+			<ul class="demo_list">
+				{#each items as item (item)}
+					<li
+						{@attach intersect(() => ({
+							onintersect: ({intersecting, el}) => {
+								el.classList.toggle('intersecting', intersecting);
+							},
+							count: 1,
+						}))}
+					>
+						item {item}
+					</li>
+				{/each}
+			</ul>
+		{/key}
+		<button type="button" onclick={() => count_1_key++}>reset</button>
 	</Tome_Section>
 
 	<Tome_Section>
@@ -184,20 +192,23 @@
   content
 </div>`}
 		/>
-		<ul class="demo_list">
-			{#each items as item (item)}
-				<li
-					{@attach intersect(() => ({
-						onintersect: ({intersecting, el}) => {
-							el.classList.toggle('intersecting', intersecting);
-						},
-						count: 2,
-					}))}
-				>
-					item {item}
-				</li>
-			{/each}
-		</ul>
+		{#key count_2_key}
+			<ul class="demo_list">
+				{#each items as item (item)}
+					<li
+						{@attach intersect(() => ({
+							onintersect: ({intersecting, el}) => {
+								el.classList.toggle('intersecting', intersecting);
+							},
+							count: 2,
+						}))}
+					>
+						item {item}
+					</li>
+				{/each}
+			</ul>
+		{/key}
+		<button type="button" onclick={() => count_2_key++}>reset</button>
 	</Tome_Section>
 
 	<Tome_Section>
@@ -210,17 +221,17 @@
 		</p>
 		<div class="controls">
 			<label>
-				<code>threshold</code>
+				<code>count</code>
 				<div class="control_inputs">
-					<input type="number" step={0.1} min={0} max={1} bind:value={threshold} />
-					<input type="range" step={0.1} min={0} max={1} bind:value={threshold} />
+					<input type="number" min={-1} max={3} step={1} bind:value={count} />
+					<input type="range" min={-1} max={3} step={1} bind:value={count} />
 				</div>
 			</label>
 			<label>
-				<code>options.count</code>
+				<code>options.threshold</code>
 				<div class="control_inputs">
-					<input type="number" min={0} max={3} step={1} bind:value={count} />
-					<input type="range" min={0} max={3} step={1} bind:value={count} />
+					<input type="number" step={0.1} min={0} max={1} bind:value={threshold} />
+					<input type="range" step={0.1} min={0} max={1} bind:value={threshold} />
 				</div>
 			</label>
 			<label>
@@ -234,21 +245,24 @@
 				</select>
 			</label>
 		</div>
-		<ul class="demo_list">
-			{#each items as item (item)}
-				<li
-					{@attach intersect(() => ({
-						onintersect: ({intersecting, el}) => {
-							el.classList.toggle('intersecting', intersecting);
-						},
-						count,
-						options: {threshold, rootMargin},
-					}))}
-				>
-					item {item}
-				</li>
-			{/each}
-		</ul>
+		{#key configurable_key}
+			<ul class="demo_list">
+				{#each items as item (item)}
+					<li
+						{@attach intersect(() => ({
+							onintersect: ({intersecting, el}) => {
+								el.classList.toggle('intersecting', intersecting);
+							},
+							count,
+							options: {threshold, rootMargin},
+						}))}
+					>
+						item {item}
+					</li>
+				{/each}
+			</ul>
+		{/key}
+		<button type="button" onclick={() => configurable_key++}>reset</button>
 	</Tome_Section>
 </Tome_Content>
 
