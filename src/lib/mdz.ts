@@ -10,6 +10,8 @@
  * Key constraint: Preserves ALL whitespace exactly as authored.
  */
 
+// TODO design incremental parsing or some system that preserves Svelte components across re-renders when possible
+
 /**
  * Parses text to an array of `Mdz_Node`.
  */
