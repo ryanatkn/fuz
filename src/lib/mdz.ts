@@ -10,9 +10,10 @@
  * Key constraint: Preserves ALL whitespace exactly as authored.
  */
 
+/**
+ * Parses text to an array of `Mdz_Node`.
+ */
 export const mdz_parse = (text: string): Array<Mdz_Node> => new Mdz_Parser(text).parse();
-
-// Node type definitions
 
 export type Mdz_Node =
 	| Mdz_Text_Node
@@ -81,8 +82,9 @@ const S_LOWER = 115; // s
 /**
  * Parser for mdz format.
  * Single-pass lexer/parser with text accumulation for efficiency.
+ * Used by `mdz_parse`, which should be preferred for simple usage.
  */
-class Mdz_Parser {
+export class Mdz_Parser {
 	#index: number = 0;
 	#template: string;
 	#accumulated_text: string = '';
@@ -262,8 +264,10 @@ class Mdz_Parser {
 
 	/**
 	 * Parse bold or italic starting with asterisk.
-	 * **bold** = Bold_Node
-	 * *italic* = Italic_Node
+	 *
+	 * - **bold** = Bold node
+	 * - *italic* = Italic node
+	 *
 	 * Falls back to text if unclosed.
 	 */
 	#parse_bold_or_italic(): Mdz_Bold_Node | Mdz_Italic_Node | Mdz_Text_Node {
@@ -330,7 +334,7 @@ class Mdz_Parser {
 
 	/**
 	 * Parse italic starting with underscore.
-	 * _italic_ = Italic_Node
+	 * _italic_ = Italic node
 	 * Falls back to text if unclosed.
 	 */
 	#parse_italic(): Mdz_Italic_Node | Mdz_Text_Node {
@@ -358,11 +362,13 @@ class Mdz_Parser {
 	}
 
 	/**
-	 * Parse TSDoc inline tag: {@link ...} or {@see ...}
+	 * Parse TSDoc inline tag: `{@link ...}` or `{@see ...`.
 	 * Formats:
+	 *
 	 * - {@link identifier} - local ref
 	 * - {@link https://url} - external URL
 	 * - {@link https://url|Display Text} - URL with custom text
+	 *
 	 * Falls back to text if malformed.
 	 */
 	#parse_link(): Mdz_Link_Node | Mdz_Text_Node {
