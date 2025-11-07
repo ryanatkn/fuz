@@ -7,6 +7,8 @@
 	import Tome_Section from '$lib/Tome_Section.svelte';
 	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
+	import Module_Link from '$lib/Module_Link.svelte';
+	import Identifier_Link from '$lib/Identifier_Link.svelte';
 
 	const LIBRARY_ITEM_NAME = 'intersect';
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
@@ -31,7 +33,9 @@
 <Tome_Content {tome}>
 	<section>
 		<p>
-			Creates an attachment that observes when an element enters or leaves the viewport using the
+			The <Identifier_Link name="intersect" /> helper in <Module_Link
+				module_path="intersect.svelte.ts"
+			/> creates an attachment that observes when an element enters or leaves the viewport using the
 			<Mdn_Link path="Web/API/Intersection_Observer_API">Intersection Observer API</Mdn_Link>.
 		</p>
 		<p>
@@ -264,6 +268,7 @@
 		{/key}
 		<button type="button" onclick={() => configurable_key++}>reset</button>
 	</Tome_Section>
+	<p>Full API docs at <Module_Link module_path="intersect.svelte.ts" />.</p>
 </Tome_Content>
 
 <style>

@@ -4,7 +4,7 @@
 	import {module_doc_url} from '$lib/package_helpers.js';
 
 	const {
-		module_path,
+		module_path, // TODO BLOCK rename to `name`? see also the data structure
 		children,
 		class: class_prop,
 		...rest
