@@ -77,7 +77,7 @@ export const package_gen_validate_no_duplicates = (src_json: Src_Json, log: Logg
 		throw new Error(
 			`Found ${duplicates.length} duplicate identifier name${duplicates.length === 1 ? '' : 's'} across modules. ` +
 				'The flat namespace requires unique names. Please rename one of the conflicting identifiers. ' +
-				'See CLAUDE.md "Flat namespace validation" for details on this design decision.',
+				'See CLAUDE.md "Identifier namespacing" section for details on this design decision.',
 		);
 	}
 };
