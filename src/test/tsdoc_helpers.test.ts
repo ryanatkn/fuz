@@ -477,9 +477,8 @@ function foo() {}
 			assert.strictEqual(result.deprecated_message, 'Use newFunction() instead');
 		});
 
-		test('extracts see tags with quirky TS API behavior', () => {
-			// NOTE: TypeScript API returns unreliable comment text for @see tags
-			// First tag gets "*" and subsequent ones get undefined (filtered out)
+		test('extracts multiple see tags correctly', () => {
+			// We use getText() to extract full source, avoiding TS API quirks
 			const code = `
 /**
  * @see relatedFunction
@@ -492,10 +491,219 @@ function foo() {}
 			const result = tsdoc_parse(node, source_file);
 
 			assert.ok(result);
-			// Only the first see tag is extracted (with "*" as the text)
-			// Second tag has undefined comment and is filtered by the `tag_text` check
+			assert.strictEqual(result.see_also?.length, 2);
+			assert.strictEqual(result.see_also?.[0], 'relatedFunction');
+			assert.strictEqual(result.see_also?.[1], 'anotherFunction');
+		});
+
+		test('extracts see tags with https URLs correctly', () => {
+			// The TS API strips 'https' from tag.comment, but we get it from getText()
+			const code = `
+/**
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event
+ */
+function foo() {}
+`;
+			const node = get_first_statement(code);
+			const source_file = create_source_file(code);
+			const result = tsdoc_parse(node, source_file);
+
+			assert.ok(result);
 			assert.strictEqual(result.see_also?.length, 1);
-			assert.strictEqual(result.see_also?.[0], '*');
+			assert.strictEqual(
+				result.see_also?.[0],
+				'https://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event',
+			);
+		});
+
+		test('extracts see tags with http URLs correctly', () => {
+			const code = `
+/**
+ * @see http://example.com/docs
+ */
+function foo() {}
+`;
+			const node = get_first_statement(code);
+			const source_file = create_source_file(code);
+			const result = tsdoc_parse(node, source_file);
+
+			assert.ok(result);
+			assert.strictEqual(result.see_also?.length, 1);
+			assert.strictEqual(result.see_also?.[0], 'http://example.com/docs');
+		});
+
+		test('extracts mixed see tags with URLs and identifiers', () => {
+			const code = `
+/**
+ * @see https://www.w3.org/WAI/ARIA/apg/patterns/alert/
+ * @see relatedFunction
+ * @see http://example.com
+ */
+function foo() {}
+`;
+			const node = get_first_statement(code);
+			const source_file = create_source_file(code);
+			const result = tsdoc_parse(node, source_file);
+
+			assert.ok(result);
+			assert.strictEqual(result.see_also?.length, 3);
+			assert.strictEqual(result.see_also?.[0], 'https://www.w3.org/WAI/ARIA/apg/patterns/alert/');
+			assert.strictEqual(result.see_also?.[1], 'relatedFunction');
+			assert.strictEqual(result.see_also?.[2], 'http://example.com');
+		});
+
+		test('extracts see tags with URL anchors/fragments', () => {
+			const code = `
+/**
+ * @see https://example.com/docs#section-name
+ */
+function foo() {}
+`;
+			const node = get_first_statement(code);
+			const source_file = create_source_file(code);
+			const result = tsdoc_parse(node, source_file);
+
+			assert.ok(result);
+			assert.strictEqual(result.see_also?.length, 1);
+			assert.strictEqual(result.see_also?.[0], 'https://example.com/docs#section-name');
+		});
+
+		test('extracts see tags with URL query parameters', () => {
+			const code = `
+/**
+ * @see https://example.com/search?q=test&page=2
+ */
+function foo() {}
+`;
+			const node = get_first_statement(code);
+			const source_file = create_source_file(code);
+			const result = tsdoc_parse(node, source_file);
+
+			assert.ok(result);
+			assert.strictEqual(result.see_also?.length, 1);
+			assert.strictEqual(result.see_also?.[0], 'https://example.com/search?q=test&page=2');
+		});
+
+		test('extracts see tags with file:// protocol', () => {
+			const code = `
+/**
+ * @see file:///path/to/file.ts
+ */
+function foo() {}
+`;
+			const node = get_first_statement(code);
+			const source_file = create_source_file(code);
+			const result = tsdoc_parse(node, source_file);
+
+			assert.ok(result);
+			assert.strictEqual(result.see_also?.length, 1);
+			assert.strictEqual(result.see_also?.[0], 'file:///path/to/file.ts');
+		});
+
+		test('extracts see tags with relative paths', () => {
+			const code = `
+/**
+ * @see ./helper.ts
+ */
+function foo() {}
+`;
+			const node = get_first_statement(code);
+			const source_file = create_source_file(code);
+			const result = tsdoc_parse(node, source_file);
+
+			assert.ok(result);
+			assert.strictEqual(result.see_also?.length, 1);
+			assert.strictEqual(result.see_also?.[0], './helper.ts');
+		});
+
+		test('extracts see tags with module paths', () => {
+			const code = `
+/**
+ * @see $lib/utils.ts
+ */
+function foo() {}
+`;
+			const node = get_first_statement(code);
+			const source_file = create_source_file(code);
+			const result = tsdoc_parse(node, source_file);
+
+			assert.ok(result);
+			assert.strictEqual(result.see_also?.length, 1);
+			assert.strictEqual(result.see_also?.[0], '$lib/utils.ts');
+		});
+
+		test('extracts see tags with {@link} syntax for URLs', () => {
+			// Standard TSDoc/JSDoc syntax with explicit {@link} - extracts clean URL
+			const code = `
+/**
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/Element}
+ */
+function foo() {}
+`;
+			const node = get_first_statement(code);
+			const source_file = create_source_file(code);
+			const result = tsdoc_parse(node, source_file);
+
+			assert.ok(result);
+			assert.strictEqual(result.see_also?.length, 1);
+			assert.strictEqual(
+				result.see_also?.[0],
+				'https://developer.mozilla.org/en-US/docs/Web/API/Element',
+			);
+		});
+
+		test('extracts see tags with {@link} and display text', () => {
+			// {@link URL|Display Text} syntax - extracts URL only
+			const code = `
+/**
+ * @see {@link https://www.w3.org/WAI/ARIA/|WAI-ARIA Specification}
+ */
+function foo() {}
+`;
+			const node = get_first_statement(code);
+			const source_file = create_source_file(code);
+			const result = tsdoc_parse(node, source_file);
+
+			assert.ok(result);
+			assert.strictEqual(result.see_also?.length, 1);
+			assert.strictEqual(result.see_also?.[0], 'https://www.w3.org/WAI/ARIA/');
+		});
+
+		test('extracts multiple see tags with mixed {@link} and plain syntax', () => {
+			const code = `
+/**
+ * @see {@link https://example.com/docs}
+ * @see relatedFunction
+ * @see https://other.com
+ */
+function foo() {}
+`;
+			const node = get_first_statement(code);
+			const source_file = create_source_file(code);
+			const result = tsdoc_parse(node, source_file);
+
+			assert.ok(result);
+			assert.strictEqual(result.see_also?.length, 3);
+			// {@link} wrapper is parsed away, leaving clean URL
+			assert.strictEqual(result.see_also?.[0], 'https://example.com/docs');
+			assert.strictEqual(result.see_also?.[1], 'relatedFunction');
+			assert.strictEqual(result.see_also?.[2], 'https://other.com');
+		});
+
+		test('handles empty see tag gracefully', () => {
+			const code = `
+/**
+ * @see
+ */
+function foo() {}
+`;
+			const node = get_first_statement(code);
+			const source_file = create_source_file(code);
+			const result = tsdoc_parse(node, source_file);
+
+			assert.ok(result);
+			// Empty @see should not be added to see_also array
+			assert.strictEqual(result.see_also, undefined);
 		});
 
 		test('extracts since tag', () => {
@@ -572,7 +780,9 @@ function foo() {}
 			const result = tsdoc_parse(node, source_file);
 
 			assert.ok(result);
-			assert.strictEqual(result.see_also, undefined);
+			assert.ok(Array.isArray(result.see_also));
+			assert.strictEqual(result.see_also.length, 1);
+			assert.strictEqual(result.see_also[0], 'other');
 		});
 
 		test('optional fields are undefined when absent', () => {

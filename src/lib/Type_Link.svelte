@@ -11,7 +11,7 @@
 </script>
 
 {#if pkg.lookup_identifier(type)}
-	<code><Identifier_Link name={type} /></code>
+	<Identifier_Link name={type}><code>{type}</code></Identifier_Link>
 {:else}
 	<Code content={type} lang="ts" code_attrs={{class: 'white_space_pre_wrap'}} />
 {/if}

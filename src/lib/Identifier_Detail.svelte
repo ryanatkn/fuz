@@ -10,18 +10,18 @@
 
 	// TODO verbose and badly laid out -- but we want to be sure it's complete/thorough
 	// (all parsed data is now rendered; layout improvements can come later)
+
+	// TODO BLOCK @many support internal identifiers/modules
 </script>
 
 <!-- Metadata -->
-<p>
+<p class="row justify_content_space_between">
 	<Module_Link module_path={identifier.module_path} />
-</p>
-{#if identifier.source_url}
-	<p>
+	{#if identifier.source_url}
 		<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 		<a class="chip" href={identifier.source_url} target="_blank" rel="noopener">view source</a>
-	</p>
-{/if}
+	{/if}
+</p>
 
 <!-- eslint-disable-next-line @typescript-eslint/no-deprecated -->
 {#if identifier.is_deprecated}
@@ -60,103 +60,86 @@
 <!-- parameters -->
 {#if identifier.parameters?.length}
 	<section>
-		<table>
-			<thead>
-				<tr>
-					<th>parameter</th>
-					<th>type</th>
-					<th>optional</th>
-					{#if identifier.parameters.some((p) => p.description)}
-						<th>description</th>
-					{/if}
-					{#if identifier.parameters.some((p) => p.default_value)}
-						<th>default</th>
-					{/if}
-				</tr>
-			</thead>
-			<tbody>
-				{#each identifier.parameters as param (param)}
-					<tr>
-						<td><code>{param.name}</code></td>
-						<td><Type_Link type={param.type} /></td>
-						<td>{param.optional ? 'yes' : 'no'}</td>
-						{#if identifier.parameters.some((p) => p.description)}
-							<td>{param.description ?? ''}</td>
+		{#each identifier.parameters as param (param)}
+			<section>
+				<h4>
+					<code
+						>{param.name}{#if param.optional}<strong>?</strong>{/if}</code
+					>
+				</h4>
+				{#if param.description}
+					<p>{param.description}</p>
+				{/if}
+				<div class="row gap_md">
+					<strong>type</strong>
+					<Type_Link type={param.type} />
+				</div>
+				{#if param.optional || param.default_value}
+					<div class="row gap_md">
+						{#if param.optional}
+							<span class="chip">optional</span>
 						{/if}
-						{#if identifier.parameters.some((p) => p.default_value)}
-							<td>
-								{#if param.default_value}
-									<Code
-										inline
-										content={param.default_value}
-										lang="ts"
-										code_attrs={{class: 'white_space_pre_wrap'}}
-									/>
-								{/if}
-							</td>
+						{#if param.default_value}
+							<strong>default</strong>
+							<Code
+								inline
+								content={param.default_value}
+								lang="ts"
+								code_attrs={{class: 'white_space_pre_wrap'}}
+							/>
 						{/if}
-					</tr>
-				{/each}
-			</tbody>
-		</table>
+					</div>
+				{/if}
+			</section>
+		{/each}
 	</section>
 {/if}
 
 <!-- component props (for Svelte components) -->
 {#if identifier.props?.length}
 	<section>
-		<table>
-			<thead>
-				<tr>
-					<th>prop</th>
-					<th>type</th>
-					<th>optional</th>
-					{#if identifier.props.some((p) => p.bindable)}
-						<th>bindable</th>
-					{/if}
-					{#if identifier.props.some((p) => p.description)}
-						<th>description</th>
-					{/if}
-					{#if identifier.props.some((p) => p.default_value)}
-						<th>default</th>
-					{/if}
-				</tr>
-			</thead>
-			<tbody>
-				{#each identifier.props as prop (prop)}
-					<tr>
-						<td><code>{prop.name}</code></td>
-						<td><Type_Link type={prop.type} /></td>
-						<td>{prop.optional ? 'yes' : 'no'}</td>
-						{#if identifier.props.some((p) => p.bindable)}
-							<td>{prop.bindable ? 'yes' : 'no'}</td>
+		{#each identifier.props as prop (prop)}
+			<section>
+				<h4>
+					<code
+						>{prop.name}{#if prop.optional}<strong>?</strong>{/if}</code
+					>
+				</h4>
+				{#if prop.description}
+					<p>{prop.description}</p>
+				{/if}
+				<div class="row gap_md">
+					<strong>type</strong>
+					<Type_Link type={prop.type} />
+				</div>
+				{#if prop.optional || prop.bindable || prop.default_value}
+					<div class="row gap_md">
+						{#if prop.optional}
+							<span class="chip">optional</span>
 						{/if}
-						{#if identifier.props.some((p) => p.description)}
-							<td>{prop.description ?? ''}</td>
+						{#if prop.bindable}
+							<span class="chip">bindable</span>
 						{/if}
-						{#if identifier.props.some((p) => p.default_value)}
-							<td>
-								{#if prop.default_value}
-									<Code
-										inline
-										content={prop.default_value}
-										lang="ts"
-										code_attrs={{class: 'white_space_pre_wrap'}}
-									/>
-								{/if}
-							</td>
+						{#if prop.default_value}
+							<strong>default</strong>
+							<Code
+								inline
+								content={prop.default_value}
+								lang="ts"
+								code_attrs={{class: 'white_space_pre_wrap'}}
+							/>
 						{/if}
-					</tr>
-				{/each}
-			</tbody>
-		</table>
+					</div>
+				{/if}
+			</section>
+		{/each}
 	</section>
 {/if}
 
-<!-- return type -->
+<!-- returns -->
 {#if identifier.return_type}
 	<section>
-		<h4>return type</h4>
+		<h4>returns</h4>
 		<Code content={identifier.return_type} lang="ts" code_attrs={{class: 'white_space_pre_wrap'}} />
 		{#if identifier.return_description}
 			<p>{identifier.return_description}</p>
@@ -164,44 +147,27 @@
 	</section>
 {/if}
 
-<!-- generic parameters -->
+<!-- generics -->
 {#if identifier.generic_params?.length}
 	<section>
-		<h4>generic parameters</h4>
-		<table>
-			<thead>
-				<tr>
-					<th>parameter</th>
-					{#if identifier.generic_params.some((g) => g.constraint)}
-						<th>constraint</th>
-					{/if}
-					{#if identifier.generic_params.some((g) => g.default_type)}
-						<th>default</th>
-					{/if}
-				</tr>
-			</thead>
-			<tbody>
-				{#each identifier.generic_params as generic (generic)}
-					<tr>
-						<td><code>{generic.name}</code></td>
-						{#if identifier.generic_params.some((g) => g.constraint)}
-							<td>
-								{#if generic.constraint}
-									<Type_Link type={generic.constraint} />
-								{/if}
-							</td>
-						{/if}
-						{#if identifier.generic_params.some((g) => g.default_type)}
-							<td>
-								{#if generic.default_type}
-									<Type_Link type={generic.default_type} />
-								{/if}
-							</td>
-						{/if}
-					</tr>
-				{/each}
-			</tbody>
-		</table>
+		<h4>generics</h4>
+		{#each identifier.generic_params as generic (generic)}
+			<section>
+				<h4><code>{generic.name}</code></h4>
+				{#if generic.constraint}
+					<div class="row gap_md">
+						<strong>constraint</strong>
+						<Type_Link type={generic.constraint} />
+					</div>
+				{/if}
+				{#if generic.default_type}
+					<div class="row gap_md">
+						<strong>default</strong>
+						<Type_Link type={generic.default_type} />
+					</div>
+				{/if}
+			</section>
+		{/each}
 	</section>
 {/if}
 
@@ -277,7 +243,9 @@
 		<h4>see also</h4>
 		<ul>
 			{#each identifier.see_also as ref (ref)}
-				<li>{ref}</li>
+				<!-- TODO @many support internal identifiers/modules -->
+				<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+				<li><a href={ref} target="_blank" rel="noopener">{ref}</a></li>
 			{/each}
 		</ul>
 	</section>
@@ -286,75 +254,53 @@
 <!-- members (for classes) -->
 {#if identifier.members?.length}
 	<section>
-		<table>
-			<thead>
-				<tr>
-					<th>member</th>
-					<th>type</th>
-					{#if identifier.members.some((m) => m.modifiers?.length)}
-						<th>modifiers</th>
-					{/if}
-					{#if identifier.members.some((m) => m.doc_comment)}
-						<th>description</th>
-					{/if}
-				</tr>
-			</thead>
-			<tbody>
-				{#each identifier.members as member (member)}
-					<tr>
-						<td><code>{member.name}</code></td>
-						<td>
-							{#if member.type_signature}
-								<Type_Link type={member.type_signature} />
-							{/if}
-						</td>
-						{#if identifier.members.some((m) => m.modifiers?.length)}
-							<td>{member.modifiers?.join(' ') ?? ''}</td>
-						{/if}
-						{#if identifier.members.some((m) => m.doc_comment)}
-							<td>{member.doc_comment ?? ''}</td>
-						{/if}
-					</tr>
-				{/each}
-			</tbody>
-		</table>
+		{#each identifier.members as member (member)}
+			<section>
+				<h4><code>{member.name}</code></h4>
+				{#if member.doc_comment}
+					<p>{member.doc_comment}</p>
+				{/if}
+				{#if member.type_signature}
+					<div class="row gap_md">
+						<strong>type</strong>
+						<Type_Link type={member.type_signature} />
+					</div>
+				{/if}
+				{#if member.modifiers?.length}
+					<div class="row gap_md">
+						{#each member.modifiers as modifier (modifier)}
+							<span class="chip">{modifier}</span>
+						{/each}
+					</div>
+				{/if}
+			</section>
+		{/each}
 	</section>
 {/if}
 
 <!-- properties (for types/interfaces) -->
 {#if identifier.properties?.length}
 	<section>
-		<table>
-			<thead>
-				<tr>
-					<th>property</th>
-					<th>type</th>
-					{#if identifier.properties.some((p) => p.modifiers?.length)}
-						<th>modifiers</th>
-					{/if}
-					{#if identifier.properties.some((p) => p.doc_comment)}
-						<th>description</th>
-					{/if}
-				</tr>
-			</thead>
-			<tbody>
-				{#each identifier.properties as prop (prop)}
-					<tr>
-						<td><code>{prop.name}</code></td>
-						<td>
-							{#if prop.type_signature}
-								<Type_Link type={prop.type_signature} />
-							{/if}
-						</td>
-						{#if identifier.properties.some((p) => p.modifiers?.length)}
-							<td>{prop.modifiers?.join(' ') ?? ''}</td>
-						{/if}
-						{#if identifier.properties.some((p) => p.doc_comment)}
-							<td>{prop.doc_comment ?? ''}</td>
-						{/if}
-					</tr>
-				{/each}
-			</tbody>
-		</table>
+		{#each identifier.properties as prop (prop)}
+			<section>
+				<h4><code>{prop.name}</code></h4>
+				{#if prop.doc_comment}
+					<p>{prop.doc_comment}</p>
+				{/if}
+				{#if prop.type_signature}
+					<div class="row gap_md">
+						<strong>type</strong>
+						<Type_Link type={prop.type_signature} />
+					</div>
+				{/if}
+				{#if prop.modifiers?.length}
+					<div class="row gap_md">
+						{#each prop.modifiers as modifier}
+							<span class="chip">{modifier}</span>
+						{/each}
+					</div>
+				{/if}
+			</section>
+		{/each}
 	</section>
 {/if}

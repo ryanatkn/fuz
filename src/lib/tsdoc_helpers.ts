@@ -12,7 +12,7 @@
  *
  * - Preserves dash separator in @param descriptions: `@param x - desc` → `"- desc"`
  * - @throws tags have {Type} stripped by TS API; fallback regex extracts first word as error type
- * - @see tags return unreliable values ("*" or undefined) from TS API
+ * - @see tags strip URL protocols from comment text; we use `getText()` to get the full source
  *
  * ## Usage
  *
@@ -62,11 +62,11 @@ export interface Tsdoc_Parsed_Comment {
  * - @ since - version information
  *
  * @param node - The TypeScript node to extract JSDoc from
- * @param _source_file - Source file (unused, kept for API consistency)
+ * @param source_file - Source file (used for extracting full @see tag text)
  */
 export const tsdoc_parse = (
 	node: ts.Node,
-	_source_file: ts.SourceFile,
+	source_file: ts.SourceFile,
 ): Tsdoc_Parsed_Comment | undefined => {
 	const tsdoc_comments = ts.getJSDocCommentsAndTags(node);
 	if (tsdoc_comments.length === 0) return undefined;
@@ -118,8 +118,27 @@ export const tsdoc_parse = (
 			examples.push(tag_text.trim());
 		} else if (tag_name === 'deprecated' && tag_text) {
 			deprecated_message = tag_text.trim();
-		} else if (tag_name === 'see' && tag_text) {
-			see_also.push(tag_text.trim());
+		} else if (tag_name === 'see') {
+			// The TS API strips 'https' from URLs in @see tags, so get full text from source
+			const full_tag_text = tag.getText(source_file);
+			// Extract content after @see, handling JSDoc formatting artifacts
+			let see_content = full_tag_text
+				.replace(/^@see\s+/, '') // remove @see prefix
+				.replace(/\n\s*\*\s*/g, ' ') // remove JSDoc line continuations
+				.trim();
+
+			// Parse {@link} syntax to extract clean URL/reference
+			// {@link URL} → URL
+			// {@link URL|Display Text} → URL
+			const link_match = /^\{@link\s+([^}|]+?)(?:\|([^}]+))?\s*\}$/.exec(see_content);
+			if (link_match) {
+				// Extract the URL/reference (ignore display text for data purity)
+				see_content = link_match[1]!.trim();
+			}
+
+			if (see_content) {
+				see_also.push(see_content);
+			}
 		} else if (tag_name === 'since' && tag_text) {
 			since = tag_text.trim();
 		}

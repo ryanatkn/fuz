@@ -927,7 +927,7 @@ export const src_json: Src_Json = {
 					kind: 'class',
 					doc_comment:
 						'Creates a `contextmenu` store.\nSee usage with `Contextmenu_Root.svelte` and `Contextmenu.svelte`.',
-					see_also: ['://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event'],
+					see_also: ['https://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event'],
 					source_line: 85,
 					members: [
 						{
@@ -1561,7 +1561,7 @@ export const src_json: Src_Json = {
 					doc_comment:
 						'Static data descriptors for the CSP directives.\nFuz excludes deprecated directives, so those are intentionally omitted,\nbut any newer missing directives are bugs.\n\nCould be moved to `csp.ts` but is currently here to keep that module smaller.',
 					see_also: [
-						'://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy',
+						'https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy',
 					],
 					source_line: 344,
 					type_signature: 'Csp_Directive_Spec[]',
@@ -3757,7 +3757,10 @@ export const src_json: Src_Json = {
 					kind: 'class',
 					doc_comment:
 						"Rich runtime package representation of a package.\n\nWraps minimal serializable data (package_json, src_json) with computed properties\nand provides the root of the API documentation hierarchy:\nPkg -> modules -> identifiers\n\nAll computed properties are automatically cached via Svelte's $derived mechanism,\nincluding the identifier_map which enables O(1) lookups by name.",
-					see_also: ['for Module class', 'for Identifier class'],
+					see_also: [
+						'module.svelte.ts for Module class',
+						'identifier.svelte.ts for Identifier class',
+					],
 					source_line: 31,
 					members: [
 						{
@@ -4019,9 +4022,9 @@ export const src_json: Src_Json = {
 					kind: 'type',
 					doc_comment: 'Top-level source metadata.',
 					see_also: [
-						'://github.com/ryanatkn/gro/blob/main/src/docs/gro_plugin_sveltekit_app.md#well-known-src',
+						'https://github.com/ryanatkn/gro/blob/main/src/docs/gro_plugin_sveltekit_app.md#well-known-src',
 					],
-					source_line: 8,
+					source_line: 6,
 					type_signature: 'Src_Json',
 					properties: [
 						{
@@ -4045,7 +4048,7 @@ export const src_json: Src_Json = {
 					name: 'Module_Json',
 					kind: 'type',
 					doc_comment: 'Module information with metadata.',
-					source_line: 17,
+					source_line: 15,
 					type_signature: 'Module_Json',
 					properties: [
 						{
@@ -4069,27 +4072,25 @@ export const src_json: Src_Json = {
 				{
 					name: 'Identifier_Kind',
 					kind: 'type',
-					source_line: 24,
+					source_line: 22,
 					type_signature: 'Identifier_Kind',
 				},
 				{
 					name: 'Identifier_Json',
 					kind: 'type',
 					doc_comment: 'Identifier metadata with rich TypeScript/JSDoc information.',
-					source_line: 36,
+					source_line: 34,
 					type_signature: 'Identifier_Json',
 					properties: [
 						{
 							name: 'name',
 							kind: 'variable',
 							type_signature: 'string',
-							doc_comment: 'Identifier name.',
 						},
 						{
 							name: 'kind',
 							kind: 'variable',
 							type_signature: 'Identifier_Kind | null',
-							doc_comment: 'Identifier kind.',
 						},
 						{
 							name: 'doc_comment',
@@ -4194,7 +4195,7 @@ export const src_json: Src_Json = {
 					name: 'Generic_Param_Info',
 					kind: 'type',
 					doc_comment: 'Generic type parameter information.',
-					source_line: 72,
+					source_line: 67,
 					type_signature: 'Generic_Param_Info',
 					properties: [
 						{
@@ -4222,7 +4223,7 @@ export const src_json: Src_Json = {
 					kind: 'type',
 					doc_comment:
 						'Parameter information for functions and methods.\n\nKept distinct from Component_Prop_Info despite structural similarity.\nFunction parameters form a tuple with positional semantics:\ncalling order matters (`fn(a, b)` vs `fn(b, a)`),\nmay include rest parameters and destructuring patterns.',
-					source_line: 89,
+					source_line: 84,
 					type_signature: 'Parameter_Info',
 					properties: [
 						{
@@ -4257,7 +4258,7 @@ export const src_json: Src_Json = {
 					kind: 'type',
 					doc_comment:
 						'Component prop information for Svelte components.\n\nKept distinct from Parameter_Info despite structural similarity.\nComponent props are named attributes with different semantics:\nno positional order when passing (`<Foo {a} {b} />` = `<Foo {b} {a} />`),\nsupport two-way binding via `$bindable` rune.',
-					source_line: 105,
+					source_line: 100,
 					type_signature: 'Component_Prop_Info',
 					properties: [
 						{
@@ -4296,7 +4297,7 @@ export const src_json: Src_Json = {
 					name: 'get_identifier_display_name',
 					kind: 'function',
 					doc_comment: "Gets an identifier's display name with generic parameters.",
-					source_line: 117,
+					source_line: 112,
 					type_signature: '(identifier: Identifier_Json): string',
 					return_type: 'string',
 					parameters: [
@@ -4311,7 +4312,7 @@ export const src_json: Src_Json = {
 					name: 'generate_import_statement',
 					kind: 'function',
 					doc_comment: 'Generates an import statement for an identifier.',
-					source_line: 135,
+					source_line: 130,
 					type_signature:
 						'(identifier: Identifier_Json, module_path: string, pkg_name: string): string',
 					return_type: 'string',
@@ -4334,7 +4335,8 @@ export const src_json: Src_Json = {
 					],
 				},
 			],
-			module_comment: '// TODO BLOCK either rename pkg -> src or Src_Json to Pkg_Json',
+			module_comment:
+				'Top-level source metadata.\n\n@see {@link https://github.com/ryanatkn/gro/blob/main/src/docs/gro_plugin_sveltekit_app.md#well-known-src}',
 		},
 		{
 			path: 'storage.ts',
@@ -5218,9 +5220,9 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Parse JSDoc comment from a TypeScript node.\n\nExtracts and parses all JSDoc tags including:\n\n- @ param - parameter descriptions\n- @ returns/@ return - return value description\n- @ throws - error documentation\n- @ example - code examples\n- @ deprecated - deprecation warnings\n- @ see - related references\n- @ since - version information',
+					see_also: ['tag text)'],
 					source_line: 67,
-					type_signature:
-						'(node: Node, _source_file: SourceFile): Tsdoc_Parsed_Comment | undefined',
+					type_signature: '(node: Node, source_file: SourceFile): Tsdoc_Parsed_Comment | undefined',
 					return_type: 'Tsdoc_Parsed_Comment | undefined',
 					parameters: [
 						{
@@ -5230,10 +5232,10 @@ export const src_json: Src_Json = {
 							description: '- The TypeScript node to extract JSDoc from',
 						},
 						{
-							name: '_source_file',
+							name: 'source_file',
 							type: 'SourceFile',
 							optional: false,
-							description: '- Source file (unused, kept for API consistency)',
+							description: '- Source file (used for extracting full',
 						},
 					],
 				},
@@ -5242,7 +5244,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Apply parsed TSDoc metadata to an identifier.\n\nConsolidates the common pattern of assigning TSDoc fields to identifiers,\nwith conditional assignment for array fields (only if non-empty).',
-					source_line: 151,
+					source_line: 170,
 					type_signature: '(identifier: any, tsdoc: Tsdoc_Parsed_Comment | undefined): void',
 					return_type: 'void',
 					parameters: [
@@ -5262,7 +5264,7 @@ export const src_json: Src_Json = {
 				},
 			],
 			module_comment:
-				'TSDoc/JSDoc parsing helpers using the TypeScript Compiler API.\n\nProvides `tsdoc_parse()` for extracting JSDoc/TSDoc from TypeScript nodes.\n\n## How it works\n\nUses TypeScript\'s built-in `ts.getJSDocCommentsAndTags()` API to extract\nstructured documentation from AST nodes.\n\n## Behavioral notes (due to TS Compiler API)\n\n- Preserves dash separator in @param descriptions: `@param x - desc` → `"- desc"`\n- @throws tags have {Type} stripped by TS API; fallback regex extracts first word as error type\n- @see tags return unreliable values ("*" or undefined) from TS API\n\n## Usage\n\nWorks on all TypeScript nodes, including:\n- Regular TypeScript files (.ts, .tsx)\n- Transformed output from svelte2tsx\n- Any node with JSDoc comments in the AST\n\nAll functions are prefixed with `tsdoc_` for clarity.',
+				'TSDoc/JSDoc parsing helpers using the TypeScript Compiler API.\n\nProvides `tsdoc_parse()` for extracting JSDoc/TSDoc from TypeScript nodes.\n\n## How it works\n\nUses TypeScript\'s built-in `ts.getJSDocCommentsAndTags()` API to extract\nstructured documentation from AST nodes.\n\n## Behavioral notes (due to TS Compiler API)\n\n- Preserves dash separator in @param descriptions: `@param x - desc` → `"- desc"`\n- @throws tags have {Type} stripped by TS API; fallback regex extracts first word as error type\n- @see tags strip URL protocols from comment text; we use `getText()` to get the full source\n\n## Usage\n\nWorks on all TypeScript nodes, including:\n- Regular TypeScript files (.ts, .tsx)\n- Transformed output from svelte2tsx\n- Any node with JSDoc comments in the AST\n\nAll functions are prefixed with `tsdoc_` for clarity.',
 		},
 		{
 			path: 'Type_Link.svelte',

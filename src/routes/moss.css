@@ -230,6 +230,9 @@ a.chip {
 .justify_content_center {
 	justify-content: center;
 }
+.justify_content_space_between {
+	justify-content: space-between;
+}
 .font_family_mono {
 	font-family: var(--font_family_mono);
 }
@@ -422,6 +425,9 @@ a.chip {
 .my_lg {
 	margin-top: var(--space_lg);
 	margin-bottom: var(--space_lg);
+}
+.gap_md {
+	gap: var(--space_md);
 }
 .gap_lg {
 	gap: var(--space_lg);
