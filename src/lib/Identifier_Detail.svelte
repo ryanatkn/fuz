@@ -8,11 +8,6 @@
 	import Mdz from '$lib/Mdz.svelte';
 
 	const {identifier}: {identifier: Identifier} = $props();
-
-	// TODO verbose and badly laid out -- but we want to be sure it's complete/thorough
-	// (all parsed data is now rendered; layout improvements can come later)
-
-	// TODO BLOCK @many support internal identifiers/modules
 </script>
 
 <!-- Metadata -->

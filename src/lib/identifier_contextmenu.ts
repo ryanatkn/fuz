@@ -1,7 +1,7 @@
 import type {Identifier} from '$lib/identifier.svelte.js';
 import type {Contextmenu_Params} from '$lib/contextmenu_state.svelte.js';
 
-// TODO BLOCK review
+// TODO BLOCK review, also add a module contextmenu and module submenu here, and identifiers submenu to the module one
 
 /**
  * Create contextmenu entries for an identifier
