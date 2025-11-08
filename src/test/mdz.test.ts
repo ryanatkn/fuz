@@ -115,6 +115,64 @@ describe('bold parsing', () => {
 	});
 });
 
+// === Strikethrough ===
+
+describe('strikethrough parsing', () => {
+	test('parses strikethrough with tilde', () => {
+		const result = mdz_parse('hello ~strikethrough~ world');
+		assert.strictEqual(result[0]!.type, 'Paragraph');
+		if (result[0]!.type === 'Paragraph') {
+			const children = result[0]!.children;
+			assert.deepEqual(node_types(children), ['Text', 'Strikethrough', 'Text']);
+			if (children[1]!.type === 'Strikethrough') {
+				assert.strictEqual(text_content(children[1]!.children[0]!), 'strikethrough');
+			}
+		}
+	});
+
+	test('handles unclosed strikethrough as text', () => {
+		const result = mdz_parse('hello ~unclosed');
+		assert.strictEqual(result[0]!.type, 'Paragraph');
+		if (result[0]!.type === 'Paragraph') {
+			const combined = result[0]!.children.map(text_content).join('');
+			assert.strictEqual(combined, 'hello ~unclosed');
+		}
+	});
+
+	test('parses strikethrough with nested code', () => {
+		const result = mdz_parse('~deleted `code` text~');
+		assert.strictEqual(result[0]!.type, 'Paragraph');
+		if (result[0]!.type === 'Paragraph') {
+			const strikethrough_node = result[0]!.children[0]!;
+			if (strikethrough_node.type === 'Strikethrough') {
+				assert.deepEqual(node_types(strikethrough_node.children), ['Text', 'Code', 'Text']);
+			}
+		}
+	});
+
+	test('parses strikethrough with nested bold', () => {
+		const result = mdz_parse('~deleted **bold** text~');
+		assert.strictEqual(result[0]!.type, 'Paragraph');
+		if (result[0]!.type === 'Paragraph') {
+			const strikethrough_node = result[0]!.children[0]!;
+			if (strikethrough_node.type === 'Strikethrough') {
+				assert.deepEqual(node_types(strikethrough_node.children), ['Text', 'Bold', 'Text']);
+			}
+		}
+	});
+
+	test('parses strikethrough with nested italic', () => {
+		const result = mdz_parse('~deleted *italic* text~');
+		assert.strictEqual(result[0]!.type, 'Paragraph');
+		if (result[0]!.type === 'Paragraph') {
+			const strikethrough_node = result[0]!.children[0]!;
+			if (strikethrough_node.type === 'Strikethrough') {
+				assert.deepEqual(node_types(strikethrough_node.children), ['Text', 'Italic', 'Text']);
+			}
+		}
+	});
+});
+
 // === Italic ===
 
 describe('italic parsing', () => {
@@ -318,6 +376,20 @@ describe('complex examples', () => {
 			assert.ok(types.includes('Italic'));
 			assert.ok(types.includes('Code'));
 			assert.ok(types.includes('Link'));
+		}
+	});
+
+	test('handles mixed formatting with strikethrough', () => {
+		const text = 'Use **bold** and *italic* and ~strikethrough~ with `code`.';
+		const result = mdz_parse(text);
+
+		assert.strictEqual(result[0]!.type, 'Paragraph');
+		if (result[0]!.type === 'Paragraph') {
+			const types = node_types(result[0]!.children);
+			assert.ok(types.includes('Bold'));
+			assert.ok(types.includes('Italic'));
+			assert.ok(types.includes('Strikethrough'));
+			assert.ok(types.includes('Code'));
 		}
 	});
 });

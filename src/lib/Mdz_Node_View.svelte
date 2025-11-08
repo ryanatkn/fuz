@@ -36,6 +36,10 @@
 	<em
 		>{#each node.children as child (child)}<Mdz_Node_View node={child} />{/each}</em
 	>
+{:else if node.type === 'Strikethrough'}
+	<s
+		>{#each node.children as child (child)}<Mdz_Node_View node={child} />{/each}</s
+	>
 {:else if node.type === 'Link'}
 	{#if node.link_type === 'identifier'}
 		<Docs_Link reference={node.reference} display_text={node.display_text} />

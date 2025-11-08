@@ -3163,7 +3163,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Base_Node',
 					kind: 'type',
-					source_line: 32,
+					source_line: 33,
 					type_signature: 'Mdz_Base_Node',
 					properties: [
 						{
@@ -3186,7 +3186,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Text_Node',
 					kind: 'type',
-					source_line: 38,
+					source_line: 39,
 					type_signature: 'Mdz_Text_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3205,7 +3205,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Code_Node',
 					kind: 'type',
-					source_line: 43,
+					source_line: 44,
 					type_signature: 'Mdz_Code_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3229,7 +3229,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Bold_Node',
 					kind: 'type',
-					source_line: 49,
+					source_line: 50,
 					type_signature: 'Mdz_Bold_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3248,7 +3248,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Italic_Node',
 					kind: 'type',
-					source_line: 54,
+					source_line: 55,
 					type_signature: 'Mdz_Italic_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3265,9 +3265,28 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
+					name: 'Mdz_Strikethrough_Node',
+					kind: 'type',
+					source_line: 60,
+					type_signature: 'Mdz_Strikethrough_Node',
+					extends: ['Mdz_Base_Node'],
+					properties: [
+						{
+							name: 'type',
+							kind: 'variable',
+							type_signature: "'Strikethrough'",
+						},
+						{
+							name: 'children',
+							kind: 'variable',
+							type_signature: 'Array<Mdz_Node>',
+						},
+					],
+				},
+				{
 					name: 'Mdz_Link_Node',
 					kind: 'type',
-					source_line: 59,
+					source_line: 65,
 					type_signature: 'Mdz_Link_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3296,7 +3315,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Paragraph_Node',
 					kind: 'type',
-					source_line: 66,
+					source_line: 72,
 					type_signature: 'Mdz_Paragraph_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3315,7 +3334,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Component_Node',
 					kind: 'type',
-					source_line: 71,
+					source_line: 77,
 					type_signature: 'Mdz_Component_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3341,7 +3360,7 @@ export const src_json: Src_Json = {
 					kind: 'class',
 					doc_comment:
 						'Parser for mdz format.\nSingle-pass lexer/parser with text accumulation for efficiency.\nUsed by `mdz_parse`, which should be preferred for simple usage.',
-					source_line: 92,
+					source_line: 99,
 					members: [
 						{
 							name: '#index',
@@ -3416,6 +3435,13 @@ export const src_json: Src_Json = {
 								'Parse italic starting with underscore.\n_italic_ = Italic node\nFalls back to text if unclosed.',
 						},
 						{
+							name: '#parse_strikethrough',
+							kind: 'function',
+							type_signature: '() => Mdz_Text_Node | Mdz_Strikethrough_Node',
+							doc_comment:
+								'Parse strikethrough starting with tilde.\n~strikethrough~ = Strikethrough node\nFalls back to text if unclosed.',
+						},
+						{
 							name: '#parse_link',
 							kind: 'function',
 							type_signature: '() => Mdz_Text_Node | Mdz_Link_Node',
@@ -3452,7 +3478,7 @@ export const src_json: Src_Json = {
 				},
 			],
 			module_comment:
-				'mdz - minimal Markdown+TSDoc parser for Fuz API documentation.\n\nParses a specialized markdown dialect with:\n- inline formatting: `code`, **bold**, *italic*, _italic_\n- TSDoc tags: {@link}, {@see}\n- auto-linking via backticks to identifiers/modules\n- paragraph breaks (double newline)\n\nKey constraint: preserves ALL whitespace exactly as authored,\nand is rendered with white-space pre or pre-wrap.',
+				'mdz - minimal Markdown+TSDoc parser for Fuz API documentation.\n\nParses a specialized markdown dialect with:\n- inline formatting: `code`, **bold**, *italic*, _italic_, ~strikethrough~\n- TSDoc tags: {@link}, {@see}\n- auto-linking via backticks to identifiers/modules\n- paragraph breaks (double newline)\n\nKey constraint: preserves ALL whitespace exactly as authored,\nand is rendered with white-space pre or pre-wrap.',
 		},
 		{
 			path: 'module_helpers.ts',

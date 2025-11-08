@@ -2,7 +2,7 @@
  * mdz - minimal Markdown+TSDoc parser for Fuz API documentation.
  *
  * Parses a specialized markdown dialect with:
- * - inline formatting: `code`, **bold**, *italic*, _italic_
+ * - inline formatting: `code`, **bold**, *italic*, _italic_, ~strikethrough~
  * - TSDoc tags: {@link}, {@see}
  * - auto-linking via backticks to identifiers/modules
  * - paragraph breaks (double newline)
@@ -25,6 +25,7 @@ export type Mdz_Node =
 	| Mdz_Code_Node
 	| Mdz_Bold_Node
 	| Mdz_Italic_Node
+	| Mdz_Strikethrough_Node
 	| Mdz_Link_Node
 	| Mdz_Paragraph_Node
 	| Mdz_Component_Node;
@@ -56,6 +57,11 @@ export interface Mdz_Italic_Node extends Mdz_Base_Node {
 	children: Array<Mdz_Node>;
 }
 
+export interface Mdz_Strikethrough_Node extends Mdz_Base_Node {
+	type: 'Strikethrough';
+	children: Array<Mdz_Node>;
+}
+
 export interface Mdz_Link_Node extends Mdz_Base_Node {
 	type: 'Link';
 	reference: string; // URL or identifier/module name
@@ -78,6 +84,7 @@ export interface Mdz_Component_Node extends Mdz_Base_Node {
 const BACKTICK = 96; // `
 const ASTERISK = 42; // *
 const UNDERSCORE = 95; // _
+const TILDE = 126; // ~
 const LEFT_BRACE = 123; // {
 const NEWLINE = 10; // \n
 const AT_SIGN = 64; // @
@@ -206,6 +213,8 @@ export class Mdz_Parser {
 				return this.#parse_bold_or_italic();
 			case UNDERSCORE:
 				return this.#parse_italic();
+			case TILDE:
+				return this.#parse_strikethrough();
 			case LEFT_BRACE:
 				// Fast path: check {@link or {@see with character codes
 				if (
@@ -360,6 +369,35 @@ export class Mdz_Parser {
 	}
 
 	/**
+	 * Parse strikethrough starting with tilde.
+	 * ~strikethrough~ = Strikethrough node
+	 * Falls back to text if unclosed.
+	 */
+	#parse_strikethrough(): Mdz_Strikethrough_Node | Mdz_Text_Node {
+		const start = this.#index;
+		this.#eat('~');
+		const children = this.#parse_nodes_until('~');
+		if (this.#match('~')) {
+			this.#eat('~');
+			return {
+				type: 'Strikethrough',
+				children,
+				start,
+				end: this.#index,
+			};
+		} else {
+			// Unclosed, treat as text
+			this.#index = start + 1;
+			return {
+				type: 'Text',
+				content: '~',
+				start,
+				end: this.#index,
+			};
+		}
+	}
+
+	/**
 	 * Parse TSDoc inline tag: `{@link ...}` or `{@see ...`.
 	 * Formats:
 	 *
@@ -451,6 +489,7 @@ export class Mdz_Parser {
 				char_code === BACKTICK ||
 				char_code === ASTERISK ||
 				char_code === UNDERSCORE ||
+				char_code === TILDE ||
 				char_code === LEFT_BRACE
 			) {
 				break;
