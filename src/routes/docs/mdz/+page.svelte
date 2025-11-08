@@ -26,6 +26,7 @@
 			<code>mdz</code> is a minimal, user-oriented language that combines Svelte components with Markdown
 			and TSDoc. It parses a specialized markdown dialect with inline formatting and TSDoc tags.
 		</p>
+		<aside>⚠️ This is an early proof of concept, many features and edge cases are missing.</aside>
 	</section>
 
 	<section>

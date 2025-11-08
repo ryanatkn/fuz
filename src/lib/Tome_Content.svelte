@@ -9,14 +9,17 @@
 	import {DOCS_PATH_DEFAULT, docs_links_context} from '$lib/docs_helpers.svelte.js';
 	import {intersect} from '$lib/intersect.svelte.js';
 
-	interface Props {
+	const {
+		tome,
+		docs_path = DOCS_PATH_DEFAULT,
+		header,
+		children,
+	}: {
 		tome: Tome;
 		docs_path?: string;
 		header?: Snippet;
 		children: Snippet;
-	}
-
-	const {tome, docs_path = DOCS_PATH_DEFAULT, header, children}: Props = $props();
+	} = $props();
 
 	const docs_links = docs_links_context.get();
 
