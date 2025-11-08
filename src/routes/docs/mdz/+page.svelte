@@ -16,7 +16,10 @@
 	const code_example = 'To parse markdown directly, use `mdz_parse` from module `mdz.ts`.';
 	const code_plain_example = 'This `identifier` does not exist.';
 	const link_example = 'See {@link Alert} and {@link Card} components.';
+	const linebreak_example = 'First line.\nSecond line.\nThird line.';
 	const paragraph_example = 'First paragraph.\n\nSecond paragraph.';
+	const triple_linebreak_example =
+		'First paragraph.\n\n\nSecond paragraph separated by an extra newline.';
 
 	let whitespace_example_el: HTMLDivElement;
 </script>
@@ -65,6 +68,23 @@
 	</Tome_Section>
 
 	<Tome_Section>
+		<Tome_Section_Header text="Line breaks and paragraphs" />
+		<p>Single newlines create line breaks:</p>
+		<Code content={linebreak_example} />
+		<div class="mb_lg">
+			<Mdz content={linebreak_example} />
+		</div>
+		<p>Double newlines create paragraph breaks:</p>
+		<Code content={paragraph_example} />
+		<div class="mb_lg">
+			<Mdz content={paragraph_example} />
+		</div>
+		<p>Triple newlines create paragraphs with a blank line between:</p>
+		<Code content={triple_linebreak_example} />
+		<Mdz content={triple_linebreak_example} />
+	</Tome_Section>
+
+	<Tome_Section>
 		<Tome_Section_Header text="Inline code auto-linking" />
 		<p>Backtick code automatically links to identifiers and modules:</p>
 		<Code content={code_example} />
@@ -79,13 +99,6 @@
 		<p>Use <code>{'{@link}'}</code> and <code>{'{@see}'}</code> tags:</p>
 		<Code content={link_example} />
 		<Mdz content={link_example} />
-	</Tome_Section>
-
-	<Tome_Section>
-		<Tome_Section_Header text="Paragraphs" />
-		<p>Double newlines create paragraph breaks:</p>
-		<Code content={paragraph_example} />
-		<Mdz content={paragraph_example} />
 	</Tome_Section>
 
 	<Tome_Section>

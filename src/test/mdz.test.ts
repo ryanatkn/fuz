@@ -2,6 +2,8 @@ import {test, assert, describe} from 'vitest';
 
 import {mdz_parse, type Mdz_Node} from '$lib/mdz.js';
 
+// TODO rework with fixtures
+
 // Helper to extract node types for easier testing
 const node_types = (nodes: Array<Mdz_Node>): Array<string> => nodes.map((n) => n.type);
 
@@ -224,29 +226,23 @@ describe('paragraph handling', () => {
 
 	test('splits paragraphs on double newline', () => {
 		const result = mdz_parse('paragraph 1\n\nparagraph 2');
-		assert.deepEqual(node_types(result), ['Paragraph', 'Text', 'Paragraph']);
-		// Middle Text node is the \n\n separator
-		if (result[1]!.type === 'Text') {
-			assert.strictEqual(result[1]!.content, '\n\n');
-		}
+		assert.deepEqual(node_types(result), ['Paragraph', 'Paragraph']);
 		if (result[0]!.type === 'Paragraph') {
 			assert.strictEqual(text_content(result[0]!.children[0]!), 'paragraph 1');
 		}
-		if (result[2]!.type === 'Paragraph') {
-			assert.strictEqual(text_content(result[2]!.children[0]!), 'paragraph 2');
+		if (result[1]!.type === 'Paragraph') {
+			assert.strictEqual(text_content(result[1]!.children[0]!), 'paragraph 2');
 		}
 	});
 
 	test('handles multiple paragraph breaks', () => {
 		const result = mdz_parse('p1\n\np2\n\np3');
 		const types = node_types(result);
-		// Should be: Paragraph, Text(\n\n), Paragraph, Text(\n\n), Paragraph
-		assert.strictEqual(types.length, 5);
+		// Should be: Paragraph, Paragraph, Paragraph
+		assert.strictEqual(types.length, 3);
 		assert.strictEqual(types[0], 'Paragraph');
-		assert.strictEqual(types[1], 'Text');
+		assert.strictEqual(types[1], 'Paragraph');
 		assert.strictEqual(types[2], 'Paragraph');
-		assert.strictEqual(types[3], 'Text');
-		assert.strictEqual(types[4], 'Paragraph');
 	});
 });
 
@@ -294,8 +290,8 @@ describe('complex examples', () => {
 			'Creates a new `Foo` instance. See {@link Bar} for details.\n\nReturns **null** if invalid.';
 		const result = mdz_parse(doc);
 
-		// Should have: Paragraph, Text(\n\n), Paragraph
-		assert.deepEqual(node_types(result), ['Paragraph', 'Text', 'Paragraph']);
+		// Should have: Paragraph, Paragraph
+		assert.deepEqual(node_types(result), ['Paragraph', 'Paragraph']);
 
 		// First paragraph
 		if (result[0]!.type === 'Paragraph') {
@@ -305,8 +301,8 @@ describe('complex examples', () => {
 		}
 
 		// Second paragraph
-		if (result[2]!.type === 'Paragraph') {
-			const types = node_types(result[2]!.children);
+		if (result[1]!.type === 'Paragraph') {
+			const types = node_types(result[1]!.children);
 			assert.ok(types.includes('Bold'));
 		}
 	});

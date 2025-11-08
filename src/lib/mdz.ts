@@ -131,15 +131,8 @@ export class Mdz_Parser {
 					});
 					paragraph_children.length = 0;
 				}
-				// Add the paragraph break as text to preserve formatting
-				const start = this.#index;
+				// Consume the paragraph break
 				this.#eat('\n\n');
-				root_nodes.push({
-					type: 'Text',
-					content: '\n\n',
-					start,
-					end: this.#index,
-				});
 			} else {
 				const node = this.#parse_node();
 				if (node.type === 'Text') {
