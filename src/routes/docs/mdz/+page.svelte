@@ -40,7 +40,10 @@
 
 	<Tome_Section>
 		<Tome_Section_Header text="Preserves whitespace" />
-		<p>mdz retains full source text fidelity, including trailing spaces.</p>
+		<p>
+			mdz preserves and renders all whitespace exactly as written, minimizing surprise for
+			nontechnical users:
+		</p>
 		<Code content={`<Mdz content="${whitespace_example}" />`} />
 		<Mdz content={whitespace_example} />
 	</Tome_Section>
