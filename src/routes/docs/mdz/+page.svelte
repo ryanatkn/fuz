@@ -17,6 +17,8 @@
 	const code_plain_example = 'This `identifier` does not exist.';
 	const link_example = 'See {@link Alert} and {@link Card} components.';
 	const paragraph_example = 'First paragraph.\n\nSecond paragraph.';
+
+	let whitespace_example_el: HTMLDivElement;
 </script>
 
 <Tome_Content {tome}>
@@ -45,7 +47,21 @@
 			nontechnical users:
 		</p>
 		<Code content={`<Mdz content="${whitespace_example}" />`} />
-		<Mdz content={whitespace_example} />
+		<div class="mb_lg" bind:this={whitespace_example_el}>
+			<Mdz content={whitespace_example} />
+		</div>
+		<button
+			type="button"
+			onclick={() => {
+				const selection = window.getSelection();
+				const range = document.createRange();
+				range.selectNodeContents(whitespace_example_el);
+				selection?.removeAllRanges();
+				selection?.addRange(range);
+			}}
+		>
+			click to inspect whitespace
+		</button>
 	</Tome_Section>
 
 	<Tome_Section>
