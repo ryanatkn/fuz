@@ -1968,7 +1968,7 @@ export const src_json: Src_Json = {
 					kind: 'variable',
 					source_line: 8,
 					type_signature:
-						'"/docs" | "/" | "/about" | "/docs/alert" | "/docs/api" | "/docs/breadcrumb" | "/docs/breadcrumb/a" | "/docs/breadcrumb/a/b" | "/docs/breadcrumb/a/b/c" | "/docs/breadcrumb/a/b/c/d" | ... 90 more ... | `/${string}/test/mdz/`',
+						'"/docs" | "/" | "/about" | "/debug" | "/debug/mdz" | "/docs/alert" | "/docs/api" | "/docs/breadcrumb" | "/docs/breadcrumb/a" | "/docs/breadcrumb/a/b" | "/docs/breadcrumb/a/b/c" | ... 89 more ... | `/${string}/help/`',
 				},
 				{
 					name: 'get_next_docs_link_order',
@@ -3498,7 +3498,7 @@ export const src_json: Src_Json = {
 							kind: 'function',
 							type_signature: '(delimiter: string) => Mdz_Node[]',
 							doc_comment:
-								'Parse nodes until delimiter string is found.\nUsed for bold/italic content parsing.',
+								'Parse nodes until delimiter string is found.\nUsed for bold/italic content parsing.\nStops at paragraph breaks (double newline) to allow block elements to interrupt inline formatting.',
 						},
 						{
 							name: '#match',

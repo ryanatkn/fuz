@@ -156,6 +156,6 @@ const nodes = mdz_parse(content);`}
 	</Tome_Section>
 
 	<p>
-		See also the mdz <a href={resolve('/test/mdz')}>fixtures test page</a>.
+		See also the mdz <a href={resolve('/debug/mdz')}>fixtures debug page</a>.
 	</p>
 </Tome_Content>
