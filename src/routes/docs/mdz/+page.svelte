@@ -11,20 +11,18 @@
 	const LIBRARY_ITEM_NAME = 'mdz';
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
 
-	const basic_example = '**Bold** and _italic_ text.';
+	const basic_example = '**Bold** and _italic_ and ~strikethrough~ text.';
+	const whitespace_example = ' see \n  how       \n   whitespace    \nis preserved ';
 	const code_example = 'To parse markdown directly, use `mdz_parse` from module `mdz.ts`.';
 	const code_plain_example = 'This `identifier` does not exist.';
 	const link_example = 'See {@link Alert} and {@link Card} components.';
 	const paragraph_example = 'First paragraph.\n\nSecond paragraph.';
-
-	// TODO BLOCK needs to show usage in code blocks -- merging under "Basic formatting" probably isnt right, maybe Usage? Basic usage?
 </script>
 
 <Tome_Content {tome}>
 	<section>
 		<p>
-			<code>mdz</code> is a minimal, user-oriented language that combines Svelte components with Markdown
-			and TSDoc. It parses a specialized markdown dialect with inline formatting and TSDoc tags.
+			mdz is a user-oriented markdown dialect that supports Svelte components and a subset of TSDoc.
 		</p>
 		<aside>⚠️ This is an early proof of concept, many features and edge cases are missing.</aside>
 	</section>
@@ -35,43 +33,40 @@
 
 	<Tome_Section>
 		<Tome_Section_Header text="Basic formatting" />
-		<p>Supports <strong>bold</strong>, <em>italic</em>, and inline code:</p>
+		<p>Supports <strong>bold</strong>, <em>italic</em>, and strikethrough:</p>
 		<Code content={`<Mdz content="${basic_example}" />`} />
-		<div>
-			<Mdz content={basic_example} />
-		</div>
+		<Mdz content={basic_example} />
+	</Tome_Section>
+
+	<Tome_Section>
+		<Tome_Section_Header text="Preserves whitespace" />
+		<p>mdz retains full source text fidelity, including trailing spaces.</p>
+		<Code content={`<Mdz content="${whitespace_example}" />`} />
+		<Mdz content={whitespace_example} />
 	</Tome_Section>
 
 	<Tome_Section>
 		<Tome_Section_Header text="Inline code auto-linking" />
 		<p>Backtick code automatically links to identifiers and modules:</p>
 		<Code content={code_example} />
-		<div class="mb_lg">
-			<Mdz content={code_example} />
-		</div>
+		<Mdz content={code_example} />
 		<p>Non-identifiers become plain code elements:</p>
 		<Code content={code_plain_example} />
-		<div>
-			<Mdz content={code_plain_example} />
-		</div>
+		<Mdz content={code_plain_example} />
 	</Tome_Section>
 
 	<Tome_Section>
 		<Tome_Section_Header text="TSDoc links" />
 		<p>Use <code>{'{@link}'}</code> and <code>{'{@see}'}</code> tags:</p>
 		<Code content={link_example} />
-		<div>
-			<Mdz content={link_example} />
-		</div>
+		<Mdz content={link_example} />
 	</Tome_Section>
 
 	<Tome_Section>
 		<Tome_Section_Header text="Paragraphs" />
 		<p>Double newlines create paragraph breaks:</p>
 		<Code content={paragraph_example} />
-		<div>
-			<Mdz content={paragraph_example} />
-		</div>
+		<Mdz content={paragraph_example} />
 	</Tome_Section>
 
 	<Tome_Section>

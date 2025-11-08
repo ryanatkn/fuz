@@ -11,6 +11,8 @@
 	const nodes = $derived(mdz_parse(content));
 </script>
 
-{#each nodes as node (node)}
-	<Mdz_Node_View {node} />
-{/each}
+<div class="white_space_pre_wrap">
+	{#each nodes as node (node)}
+		<Mdz_Node_View {node} />
+	{/each}
+</div>
