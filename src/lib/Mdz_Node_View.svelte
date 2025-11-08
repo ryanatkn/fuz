@@ -13,12 +13,16 @@
 	const components = mdz_components_context.get();
 </script>
 
+{#snippet render_children(children: Array<Mdz_Node>)}
+	{#each children as child (child)}<Mdz_Node_View node={child} />{/each}
+{/snippet}
+
 {#if node.type === 'Component'}
 	{@const Component = components[node.name]}
 	{#if Component}
 		<Component>
 			{#if node.children}
-				{#each node.children as child (child)}<Mdz_Node_View node={child} />{/each}
+				{@render render_children(node.children)}
 			{/if}
 		</Component>
 	{:else}
@@ -29,17 +33,11 @@
 {:else if node.type === 'Code'}
 	<Docs_Link reference={node.reference} />
 {:else if node.type === 'Bold'}
-	<strong
-		>{#each node.children as child (child)}<Mdz_Node_View node={child} />{/each}</strong
-	>
+	<strong>{@render render_children(node.children)}</strong>
 {:else if node.type === 'Italic'}
-	<em
-		>{#each node.children as child (child)}<Mdz_Node_View node={child} />{/each}</em
-	>
+	<em>{@render render_children(node.children)}</em>
 {:else if node.type === 'Strikethrough'}
-	<s
-		>{#each node.children as child (child)}<Mdz_Node_View node={child} />{/each}</s
-	>
+	<s>{@render render_children(node.children)}</s>
 {:else if node.type === 'Link'}
 	{#if node.link_type === 'identifier'}
 		<Docs_Link reference={node.reference} display_text={node.display_text} />
@@ -49,9 +47,11 @@
 		>
 	{/if}
 {:else if node.type === 'Paragraph'}
-	<p>
-		{#each node.children as child (child)}<Mdz_Node_View node={child} />{/each}
-	</p>
+	<p>{@render render_children(node.children)}</p>
 {:else if node.type === 'Hr'}
 	<hr />
+{:else if node.type === 'Heading'}
+	<svelte:element this={`h${node.level}`}>
+		{@render render_children(node.children)}
+	</svelte:element>
 {/if}

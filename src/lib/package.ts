@@ -3163,7 +3163,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Base_Node',
 					kind: 'type',
-					source_line: 34,
+					source_line: 35,
 					type_signature: 'Mdz_Base_Node',
 					properties: [
 						{
@@ -3186,7 +3186,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Text_Node',
 					kind: 'type',
-					source_line: 40,
+					source_line: 41,
 					type_signature: 'Mdz_Text_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3205,7 +3205,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Code_Node',
 					kind: 'type',
-					source_line: 45,
+					source_line: 46,
 					type_signature: 'Mdz_Code_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3229,7 +3229,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Bold_Node',
 					kind: 'type',
-					source_line: 51,
+					source_line: 52,
 					type_signature: 'Mdz_Bold_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3248,7 +3248,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Italic_Node',
 					kind: 'type',
-					source_line: 56,
+					source_line: 57,
 					type_signature: 'Mdz_Italic_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3267,7 +3267,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Strikethrough_Node',
 					kind: 'type',
-					source_line: 61,
+					source_line: 62,
 					type_signature: 'Mdz_Strikethrough_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3286,7 +3286,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Link_Node',
 					kind: 'type',
-					source_line: 66,
+					source_line: 67,
 					type_signature: 'Mdz_Link_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3315,7 +3315,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Paragraph_Node',
 					kind: 'type',
-					source_line: 73,
+					source_line: 74,
 					type_signature: 'Mdz_Paragraph_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3334,7 +3334,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Hr_Node',
 					kind: 'type',
-					source_line: 78,
+					source_line: 79,
 					type_signature: 'Mdz_Hr_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3346,9 +3346,33 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
+					name: 'Mdz_Heading_Node',
+					kind: 'type',
+					source_line: 83,
+					type_signature: 'Mdz_Heading_Node',
+					extends: ['Mdz_Base_Node'],
+					properties: [
+						{
+							name: 'type',
+							kind: 'variable',
+							type_signature: "'Heading'",
+						},
+						{
+							name: 'level',
+							kind: 'variable',
+							type_signature: '1 | 2 | 3 | 4 | 5 | 6',
+						},
+						{
+							name: 'children',
+							kind: 'variable',
+							type_signature: 'Array<Mdz_Node>',
+						},
+					],
+				},
+				{
 					name: 'Mdz_Component_Node',
 					kind: 'type',
-					source_line: 82,
+					source_line: 89,
 					type_signature: 'Mdz_Component_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3374,7 +3398,7 @@ export const src_json: Src_Json = {
 					kind: 'class',
 					doc_comment:
 						'Parser for mdz format.\nSingle-pass lexer/parser with text accumulation for efficiency.\nUsed by `mdz_parse`, which should be preferred for simple usage.',
-					source_line: 105,
+					source_line: 114,
 					members: [
 						{
 							name: '#index',
@@ -3501,6 +3525,20 @@ export const src_json: Src_Json = {
 							type_signature: '() => Mdz_Hr_Node',
 							doc_comment:
 								'Parse horizontal rule: `---`\nAssumes #match_hr() already verified this is an hr.',
+						},
+						{
+							name: '#match_heading',
+							kind: 'function',
+							type_signature: '() => boolean',
+							doc_comment:
+								'Check if current position matches a heading.\nHeading must be 1-6 hashes at column 0, followed by space and content,\nfollowed by blank line or EOF.',
+						},
+						{
+							name: '#parse_heading',
+							kind: 'function',
+							type_signature: '() => Mdz_Heading_Node',
+							doc_comment:
+								'Parse heading: `# Heading text`\nAssumes #match_heading() already verified this is a heading.',
 						},
 					],
 				},

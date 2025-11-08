@@ -29,6 +29,7 @@ export type Mdz_Node =
 	| Mdz_Link_Node
 	| Mdz_Paragraph_Node
 	| Mdz_Hr_Node
+	| Mdz_Heading_Node
 	| Mdz_Component_Node;
 
 export interface Mdz_Base_Node {
@@ -79,6 +80,12 @@ export interface Mdz_Hr_Node extends Mdz_Base_Node {
 	type: 'Hr';
 }
 
+export interface Mdz_Heading_Node extends Mdz_Base_Node {
+	type: 'Heading';
+	level: 1 | 2 | 3 | 4 | 5 | 6;
+	children: Array<Mdz_Node>; // inline formatting allowed
+}
+
 export interface Mdz_Component_Node extends Mdz_Base_Node {
 	type: 'Component';
 	name: string; // Component name (e.g., 'Alert', 'Card')
@@ -96,6 +103,8 @@ const AT_SIGN = 64; // @
 const L_LOWER = 108; // l
 const S_LOWER = 115; // s
 const HYPHEN = 45; // -
+const HASH = 35; // #
+const SPACE = 32; // (space)
 
 /**
  * Parser for mdz format.
@@ -122,8 +131,13 @@ export class Mdz_Parser {
 		const root_nodes: Array<Mdz_Node> = [];
 		const paragraph_children: Array<Mdz_Node> = [];
 
+		// Check for heading at document start
+		if (this.#match_heading()) {
+			const heading = this.#parse_heading();
+			root_nodes.push(heading);
+		}
 		// Check for hr at document start
-		if (this.#match_hr()) {
+		else if (this.#match_hr()) {
 			const hr = this.#parse_hr();
 			root_nodes.push(hr);
 		}
@@ -153,8 +167,13 @@ export class Mdz_Parser {
 				// Consume the paragraph break
 				this.#eat('\n\n');
 
+				// Check for heading after paragraph break
+				if (this.#match_heading()) {
+					const heading = this.#parse_heading();
+					root_nodes.push(heading);
+				}
 				// Check for hr after paragraph break
-				if (this.#match_hr()) {
+				else if (this.#match_hr()) {
 					const hr = this.#parse_hr();
 					root_nodes.push(hr);
 				}
@@ -515,12 +534,22 @@ export class Mdz_Parser {
 	/**
 	 * Parse nodes until delimiter string is found.
 	 * Used for bold/italic content parsing.
+	 * Stops at paragraph breaks (double newline) to allow block elements to interrupt inline formatting.
 	 */
 	#parse_nodes_until(delimiter: string): Array<Mdz_Node> {
 		const nodes: Array<Mdz_Node> = [];
 
 		while (this.#index < this.#template.length) {
 			if (this.#match(delimiter)) {
+				break;
+			}
+
+			// Check for paragraph break (block element interruption)
+			if (
+				this.#template.charCodeAt(this.#index) === NEWLINE &&
+				this.#template.charCodeAt(this.#index + 1) === NEWLINE
+			) {
+				// Paragraph break interrupts inline formatting
 				break;
 			}
 
@@ -615,6 +644,137 @@ export class Mdz_Parser {
 
 		return {
 			type: 'Hr',
+			start,
+			end: this.#index,
+		};
+	}
+
+	/**
+	 * Check if current position matches a heading.
+	 * Heading must be 1-6 hashes at column 0, followed by space and content,
+	 * followed by blank line or EOF.
+	 */
+	#match_heading(): boolean {
+		let i = this.#index;
+
+		// Must start at column 0 (no leading whitespace)
+		if (i < this.#template.length && this.#template[i] === ' ') {
+			return false;
+		}
+
+		// Count hashes (must be 1-6)
+		let hash_count = 0;
+		while (i < this.#template.length && this.#template.charCodeAt(i) === HASH && hash_count < 7) {
+			hash_count++;
+			i++;
+		}
+
+		if (hash_count === 0 || hash_count > 6) {
+			return false;
+		}
+
+		// Must have space after hashes
+		if (i >= this.#template.length || this.#template.charCodeAt(i) !== SPACE) {
+			return false;
+		}
+		i++; // consume the space
+
+		// Must have non-whitespace content after the space (not just whitespace until newline)
+		let has_content = false;
+		while (i < this.#template.length && this.#template.charCodeAt(i) !== NEWLINE) {
+			if (this.#template[i] !== ' ' && this.#template[i] !== '\t') {
+				has_content = true;
+			}
+			i++;
+		}
+
+		if (!has_content) {
+			return false; // heading with only whitespace, treat as plain text
+		}
+
+		// At this point we're at newline or EOF
+		// Check for blank line after (newline + newline) or EOF
+		if (i >= this.#template.length) {
+			return true; // heading at EOF
+		}
+
+		// Must have newline
+		if (this.#template.charCodeAt(i) !== NEWLINE) {
+			return false;
+		}
+
+		const next_i = i + 1;
+		if (next_i >= this.#template.length) {
+			return true; // heading followed by newline + EOF
+		}
+
+		if (this.#template.charCodeAt(next_i) === NEWLINE) {
+			return true; // heading followed by blank line
+		}
+
+		return false; // heading followed by single newline + content
+	}
+
+	/**
+	 * Parse heading: `# Heading text`
+	 * Assumes #match_heading() already verified this is a heading.
+	 */
+	#parse_heading(): Mdz_Heading_Node {
+		const start = this.#index;
+
+		// Count and consume hashes
+		let level = 0;
+		while (this.#index < this.#template.length && this.#template.charCodeAt(this.#index) === HASH) {
+			level++;
+			this.#index++;
+		}
+
+		// Consume the space after hashes (already verified to exist)
+		this.#index++;
+
+		// Parse inline content until newline
+		const content_nodes: Array<Mdz_Node> = [];
+
+		while (this.#index < this.#template.length) {
+			const char_code = this.#template.charCodeAt(this.#index);
+
+			if (char_code === NEWLINE) {
+				break;
+			}
+
+			const node = this.#parse_node();
+			if (node.type === 'Text') {
+				// Check if text node includes a newline (since #parse_text doesn't stop at single newlines)
+				// If so, trim it and move index back
+				const newline_index = node.content.indexOf('\n');
+				if (newline_index !== -1) {
+					const trimmed_content = node.content.slice(0, newline_index);
+					if (trimmed_content) {
+						this.#accumulate_text(trimmed_content, node.start);
+					}
+					this.#index = node.start + newline_index;
+					break;
+				} else {
+					this.#accumulate_text(node.content, node.start);
+				}
+			} else {
+				this.#flush_text();
+				content_nodes.push(...this.#nodes);
+				this.#nodes.length = 0;
+				content_nodes.push(node);
+			}
+		}
+
+		this.#flush_text();
+		content_nodes.push(...this.#nodes);
+		this.#nodes.length = 0;
+
+		// Don't consume the newline - let the main parse loop handle it
+
+		return {
+			type: 'Heading',
+			level: level as 1 | 2 | 3 | 4 | 5 | 6,
+			children: content_nodes,
 			start,
 			end: this.#index,
 		};
