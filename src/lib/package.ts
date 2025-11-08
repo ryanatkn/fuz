@@ -3421,11 +3421,11 @@ export const src_json: Src_Json = {
 								'Parse backtick code: `code`\nAuto-links to identifiers/modules if match found.\nFalls back to text if unclosed.',
 						},
 						{
-							name: '#parse_bold_or_italic',
+							name: '#parse_bold',
 							kind: 'function',
-							type_signature: '() => Mdz_Text_Node | Mdz_Bold_Node | Mdz_Italic_Node',
+							type_signature: '() => Mdz_Text_Node | Mdz_Bold_Node',
 							doc_comment:
-								'Parse bold or italic starting with asterisk.\n\n- **bold** = Bold node\n- *italic* = Italic node\n\nFalls back to text if unclosed.',
+								'Parse bold starting with double asterisk.\n\n- **bold** = Bold node\n\nFalls back to text if unclosed or single asterisk.',
 						},
 						{
 							name: '#parse_italic',
@@ -3478,7 +3478,7 @@ export const src_json: Src_Json = {
 				},
 			],
 			module_comment:
-				'mdz - minimal Markdown+TSDoc parser for Fuz API documentation.\n\nParses a specialized markdown dialect with:\n- inline formatting: `code`, **bold**, *italic*, _italic_, ~strikethrough~\n- TSDoc tags: {@link}, {@see}\n- auto-linking via backticks to identifiers/modules\n- paragraph breaks (double newline)\n\nKey constraint: preserves ALL whitespace exactly as authored,\nand is rendered with white-space pre or pre-wrap.',
+				'mdz - minimal Markdown+TSDoc parser for Fuz API documentation.\n\nParses a specialized markdown dialect with:\n- inline formatting: `code`, **bold**, _italic_, ~strikethrough~\n- TSDoc tags: {@link}, {@see}\n- auto-linking via backticks to identifiers/modules\n- paragraph breaks (double newline)\n\nKey constraint: preserves ALL whitespace exactly as authored,\nand is rendered with white-space pre or pre-wrap.',
 		},
 		{
 			path: 'module_helpers.ts',

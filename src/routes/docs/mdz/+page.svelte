@@ -133,6 +133,20 @@ const nodes = mdz_parse(content);`}
 			For example you may want <code>white_space_pre</code> to avoid wrapping in some circumstances.
 		</p>
 	</Tome_Section>
+
+	<Tome_Section>
+		<Tome_Section_Header text="Compatibility with other markdowns" />
+		<p>mdz has simpler syntax than CommonMark/GFM:</p>
+		<ul>
+			<li>bold: <code>**text**</code> only</li>
+			<li>italic: <code>_text_</code> only</li>
+		</ul>
+		<p>
+			In CommonMark, <code>*text*</code> is italic. In mdz, single <code>*</code> has no special meaning
+			and renders as literal text. This choice creates a clear visual distinction between bold and italics.
+		</p>
+	</Tome_Section>
+
 	<p>
 		See also the mdz <a href={resolve('/test/mdz')}>fixtures test page</a>.
 	</p>

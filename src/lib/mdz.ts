@@ -2,7 +2,7 @@
  * mdz - minimal Markdown+TSDoc parser for Fuz API documentation.
  *
  * Parses a specialized markdown dialect with:
- * - inline formatting: `code`, **bold**, *italic*, _italic_, ~strikethrough~
+ * - inline formatting: `code`, **bold**, _italic_, ~strikethrough~
  * - TSDoc tags: {@link}, {@see}
  * - auto-linking via backticks to identifiers/modules
  * - paragraph breaks (double newline)
@@ -210,7 +210,7 @@ export class Mdz_Parser {
 			case BACKTICK:
 				return this.#parse_code();
 			case ASTERISK:
-				return this.#parse_bold_or_italic();
+				return this.#parse_bold();
 			case UNDERSCORE:
 				return this.#parse_italic();
 			case TILDE:
@@ -270,14 +270,13 @@ export class Mdz_Parser {
 	}
 
 	/**
-	 * Parse bold or italic starting with asterisk.
+	 * Parse bold starting with double asterisk.
 	 *
 	 * - **bold** = Bold node
-	 * - *italic* = Italic node
 	 *
-	 * Falls back to text if unclosed.
+	 * Falls back to text if unclosed or single asterisk.
 	 */
-	#parse_bold_or_italic(): Mdz_Bold_Node | Mdz_Italic_Node | Mdz_Text_Node {
+	#parse_bold(): Mdz_Bold_Node | Mdz_Text_Node {
 		const start = this.#index;
 
 		// Check for ** (bold)
@@ -304,31 +303,7 @@ export class Mdz_Parser {
 			}
 		}
 
-		// Check for * (italic)
-		if (this.#match('*')) {
-			this.#eat('*');
-			const children = this.#parse_nodes_until('*');
-			if (this.#match('*')) {
-				this.#eat('*');
-				return {
-					type: 'Italic',
-					children,
-					start,
-					end: this.#index,
-				};
-			} else {
-				// Unclosed, treat as text
-				this.#index = start + 1;
-				return {
-					type: 'Text',
-					content: '*',
-					start,
-					end: this.#index,
-				};
-			}
-		}
-
-		// Shouldn't reach here, but fallback
+		// Single asterisk - treat as text
 		const content = this.#template[this.#index]!;
 		this.#index++;
 		return {
