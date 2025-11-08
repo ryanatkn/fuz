@@ -1,0 +1,34 @@
+[
+	{
+		"type": "Paragraph",
+		"children": [
+			{
+				"type": "Bold",
+				"children": [
+					{
+						"type": "Text",
+						"content": "bold text",
+						"start": 2,
+						"end": 11
+					},
+					{
+						"type": "Text",
+						"content": "\n",
+						"start": 11,
+						"end": 12
+					},
+					{
+						"type": "Text",
+						"content": "\ncontinues here",
+						"start": 12,
+						"end": 27
+					}
+				],
+				"start": 0,
+				"end": 29
+			}
+		],
+		"start": 0,
+		"end": 29
+	}
+]

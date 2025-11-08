@@ -13,7 +13,7 @@
 		children: children_prop,
 	}: {
 		reference: string;
-		display_text?: string;
+		display_text?: string | null;
 		children?: Snippet<[Identifier | undefined, Module | undefined]>;
 	} = $props();
 	const pkg = pkg_context.get();

@@ -1,0 +1,23 @@
+[
+	{
+		"type": "Paragraph",
+		"children": [
+			{
+				"type": "Code",
+				"content": "foo",
+				"reference": "foo",
+				"start": 0,
+				"end": 5
+			},
+			{
+				"type": "Code",
+				"content": "bar",
+				"reference": "bar",
+				"start": 5,
+				"end": 10
+			}
+		],
+		"start": 0,
+		"end": 10
+	}
+]

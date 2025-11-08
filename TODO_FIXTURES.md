@@ -39,9 +39,11 @@ positions_no_duplicates          → code_duplicate_identifier_positions    ✓
 - `positions_code_unique` - deleted (duplicate of
   code_duplicate_identifier_positions) ✓
 
-## New Fixtures to Add
+## New Fixtures - ✓ COMPLETED
 
-### High Priority - Parser Robustness
+All 32 new fixtures have been added, tested, and verified!
+
+### High Priority - Parser Robustness (12 fixtures) ✓
 
 **`bold_nested_italic`** - Bold containing italic:
 
@@ -117,7 +119,7 @@ continues here**
 **bold **again** text**
 ```
 
-### High Priority - Link Edge Cases
+### High Priority - Link Edge Cases (8 fixtures) ✓
 
 **`link_see_url`** - {@see} tag with URL:
 
@@ -167,7 +169,7 @@ see {@see https://example.com} for more
 {@link Foo}{@link Bar}
 ```
 
-### High Priority - Empty/Special Characters
+### High Priority - Empty/Special Characters (5 fixtures) ✓
 
 **`empty_code`** - Empty backticks:
 
@@ -199,7 +201,7 @@ use `**bold**` syntax or `~tilde~` for strikethrough
 `a` *b* **c** ~d~
 ```
 
-### High Priority - Real-World Content
+### High Priority - Real-World Content (3 fixtures) ✓
 
 **`unicode_content`** - Unicode/emoji in text:
 
@@ -219,7 +221,7 @@ use `🎉` emoji or `中文` characters
 text	with	tabs	and spaces
 ```
 
-### Medium Priority - Paragraph Edge Cases
+### Medium Priority - Paragraph Edge Cases (4 fixtures) ✓
 
 **`paragraph_only_formatting`** - Paragraph with only formatted content:
 
@@ -257,16 +259,31 @@ para 2
 
 ## Implementation Notes
 
-### Completed
+### Phase 1: Cleanup - ✓ COMPLETED
 
+- ✓ Investigated and identified 2 duplicate fixture pairs
 - ✓ Deleted duplicate fixtures: `code_inline` and `positions_code_unique`
 - ✓ Renamed 13 fixtures to follow consistent naming scheme
-- ✓ Regenerated all expected.json files with `gro src/test/fixtures/mdz/update`
-- ✓ All tests passing
+- ✓ All tests passing (38 fixtures after cleanup)
 
-### Pending
+### Phase 2: New Fixtures - ✓ COMPLETED
 
-- 30 new fixtures documented above, ready to add when needed
-- Unicode fixtures will ensure international content works correctly
-- Empty formatter cases will test parser robustness against malformed input
-- Link edge cases will validate URL parsing behavior
+- ✓ Created 32 new fixtures across 5 categories
+- ✓ Generated all expected.json files with `gro src/test/fixtures/mdz/update`
+- ✓ All tests passing (70 total fixtures)
+
+### Summary
+
+**Total fixtures:** 70 (from 40 original)
+
+- 38 existing fixtures (after removing 2 duplicates)
+- 32 new fixtures added
+
+**Coverage improvements:**
+
+- Unicode and emoji content support verified
+- Empty formatter edge cases covered
+- Link parsing edge cases (URLs with fragments, query params, malformed pipes)
+- Complex nesting scenarios (triple nesting, reverse nesting)
+- Paragraph boundary behaviors
+- Special characters inside formatters
