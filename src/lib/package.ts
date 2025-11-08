@@ -1679,7 +1679,7 @@ export const src_json: Src_Json = {
 						},
 						{
 							name: 'summary',
-							type: 'Snippet',
+							type: 'string | Snippet',
 							optional: false,
 						},
 						{
@@ -1968,7 +1968,7 @@ export const src_json: Src_Json = {
 					kind: 'variable',
 					source_line: 8,
 					type_signature:
-						'"/docs" | "/" | "/about" | "/docs/alert" | "/docs/api" | "/docs/breadcrumb" | "/docs/breadcrumb/a" | "/docs/breadcrumb/a/b" | "/docs/breadcrumb/a/b/c" | "/docs/breadcrumb/a/b/c/d" | ... 84 more ... | `/${string}/help/`',
+						'"/docs" | "/" | "/about" | "/docs/alert" | "/docs/api" | "/docs/breadcrumb" | "/docs/breadcrumb/a" | "/docs/breadcrumb/a/b" | "/docs/breadcrumb/a/b/c" | "/docs/breadcrumb/a/b/c/d" | ... 90 more ... | `/${string}/test/mdz/`',
 				},
 				{
 					name: 'get_next_docs_link_order',
@@ -2124,7 +2124,7 @@ export const src_json: Src_Json = {
 						},
 						{
 							name: 'display_text',
-							type: 'string',
+							type: 'string | null',
 							optional: true,
 						},
 						{
@@ -3303,7 +3303,7 @@ export const src_json: Src_Json = {
 						{
 							name: 'display_text',
 							kind: 'variable',
-							type_signature: 'string',
+							type_signature: 'string | null',
 						},
 						{
 							name: 'link_type',

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
+	import {resolve} from '$app/paths';
 
 	import {get_tome_by_name} from '$lib/tome.js';
 	import Tome_Content from '$lib/Tome_Content.svelte';
@@ -27,9 +28,14 @@
 <Tome_Content {tome}>
 	<section>
 		<p>
-			mdz is a user-oriented markdown dialect that supports Svelte components and a subset of TSDoc.
+			mdz is a small markdown dialect that supports Svelte components and a subset of TSDoc. The
+			goal is to be friendly to nontechnical users and integrate with other Fuz systems.
 		</p>
 		<aside>⚠️ This is an early proof of concept, many features and edge cases are missing.</aside>
+		<aside>
+			⚠️ Currently uses <code>white-space: pre-wrap</code>, but we may want to support an option to
+			disable wrapping.
+		</aside>
 	</section>
 
 	<section>
@@ -112,12 +118,22 @@
 			content={`import {mdz_parse} from '@ryanatkn/fuz/mdz.js';
 import Mdz_Node_View from '@ryanatkn/fuz/Mdz_Node_View.svelte';
 
-const nodes = mdz_parse(content);
-// Manipulate nodes if needed
-{#each nodes as node (node)}
-  <Mdz_Node_View {node} />
-{/each}`}
+const nodes = mdz_parse(content);`}
 			lang="ts"
 		/>
+		<Code
+			content={`<!-- manipulate nodes or customize the wrapper as desired -->
+<div class="white_space_pre_wrap">
+	{#each nodes as node (node)}
+		<Mdz_Node_View {node} />
+	{/each}
+</div>`}
+		/>
+		<p>
+			For example you may want <code>white_space_pre</code> to avoid wrapping in some circumstances.
+		</p>
 	</Tome_Section>
+	<p>
+		See also the mdz <a href={resolve('/test/mdz')}>fixtures test page</a>.
+	</p>
 </Tome_Content>
