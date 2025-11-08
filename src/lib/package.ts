@@ -3520,6 +3520,18 @@ export const src_json: Src_Json = {
 								'Parse nodes until delimiter string is found.\nUsed for bold/italic content parsing.\nStops at paragraph breaks (double newline) to allow block elements to interrupt inline formatting.',
 						},
 						{
+							name: '#current_char',
+							kind: 'function',
+							type_signature: '() => number',
+							doc_comment: 'Get character code at current index, or -1 if at EOF.',
+						},
+						{
+							name: '#is_at_paragraph_break',
+							kind: 'function',
+							type_signature: '() => boolean',
+							doc_comment: 'Check if current position is at a paragraph break (double newline).',
+						},
+						{
 							name: '#match',
 							kind: 'function',
 							type_signature: '(str: string) => boolean',
