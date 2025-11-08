@@ -3163,7 +3163,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Base_Node',
 					kind: 'type',
-					source_line: 33,
+					source_line: 34,
 					type_signature: 'Mdz_Base_Node',
 					properties: [
 						{
@@ -3186,7 +3186,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Text_Node',
 					kind: 'type',
-					source_line: 39,
+					source_line: 40,
 					type_signature: 'Mdz_Text_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3205,7 +3205,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Code_Node',
 					kind: 'type',
-					source_line: 44,
+					source_line: 45,
 					type_signature: 'Mdz_Code_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3229,7 +3229,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Bold_Node',
 					kind: 'type',
-					source_line: 50,
+					source_line: 51,
 					type_signature: 'Mdz_Bold_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3248,7 +3248,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Italic_Node',
 					kind: 'type',
-					source_line: 55,
+					source_line: 56,
 					type_signature: 'Mdz_Italic_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3267,7 +3267,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Strikethrough_Node',
 					kind: 'type',
-					source_line: 60,
+					source_line: 61,
 					type_signature: 'Mdz_Strikethrough_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3286,7 +3286,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Link_Node',
 					kind: 'type',
-					source_line: 65,
+					source_line: 66,
 					type_signature: 'Mdz_Link_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3315,7 +3315,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Paragraph_Node',
 					kind: 'type',
-					source_line: 72,
+					source_line: 73,
 					type_signature: 'Mdz_Paragraph_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3332,9 +3332,23 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
+					name: 'Mdz_Hr_Node',
+					kind: 'type',
+					source_line: 78,
+					type_signature: 'Mdz_Hr_Node',
+					extends: ['Mdz_Base_Node'],
+					properties: [
+						{
+							name: 'type',
+							kind: 'variable',
+							type_signature: "'Hr'",
+						},
+					],
+				},
+				{
 					name: 'Mdz_Component_Node',
 					kind: 'type',
-					source_line: 77,
+					source_line: 82,
 					type_signature: 'Mdz_Component_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3360,7 +3374,7 @@ export const src_json: Src_Json = {
 					kind: 'class',
 					doc_comment:
 						'Parser for mdz format.\nSingle-pass lexer/parser with text accumulation for efficiency.\nUsed by `mdz_parse`, which should be preferred for simple usage.',
-					source_line: 99,
+					source_line: 105,
 					members: [
 						{
 							name: '#index',
@@ -3473,6 +3487,20 @@ export const src_json: Src_Json = {
 							kind: 'function',
 							type_signature: '(str: string) => void',
 							doc_comment: 'Consume string at current index, or throw error.',
+						},
+						{
+							name: '#match_hr',
+							kind: 'function',
+							type_signature: '() => boolean',
+							doc_comment:
+								'Check if current position matches a horizontal rule.\nHR must be exactly `---` at column 0, followed by blank line or EOF.',
+						},
+						{
+							name: '#parse_hr',
+							kind: 'function',
+							type_signature: '() => Mdz_Hr_Node',
+							doc_comment:
+								'Parse horizontal rule: `---`\nAssumes #match_hr() already verified this is an hr.',
 						},
 					],
 				},

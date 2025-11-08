@@ -52,4 +52,6 @@
 	<p>
 		{#each node.children as child (child)}<Mdz_Node_View node={child} />{/each}
 	</p>
+{:else if node.type === 'Hr'}
+	<hr />
 {/if}

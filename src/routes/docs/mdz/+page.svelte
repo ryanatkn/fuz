@@ -21,6 +21,7 @@
 	const paragraph_example = 'First paragraph.\n\nSecond paragraph.';
 	const triple_linebreak_example =
 		'First paragraph.\n\n\nSecond paragraph separated by an extra newline.';
+	const hr_example = 'Section one.\n\n---\n\nSection two.';
 
 	let whitespace_example_el: HTMLDivElement;
 </script>
@@ -32,10 +33,6 @@
 			goal is to be friendly to nontechnical users and integrate with other Fuz systems.
 		</p>
 		<aside>⚠️ This is an early proof of concept, many features and edge cases are missing.</aside>
-		<aside>
-			⚠️ Currently uses <code>white-space: pre-wrap</code>, but we may want to support an option to
-			disable wrapping.
-		</aside>
 	</section>
 
 	<section>
@@ -88,6 +85,17 @@
 		<p>Triple newlines create paragraphs with a blank line between:</p>
 		<Code content={triple_linebreak_example} />
 		<Mdz content={triple_linebreak_example} />
+	</Tome_Section>
+
+	<Tome_Section>
+		<Tome_Section_Header text="Horizontal rules" />
+		<p>
+			Use exactly three hyphens (<code>---</code>) at the start of a line to create a horizontal
+			rule. Must be separated from other content by blank lines (paragraph breaks), except at
+			document start/end:
+		</p>
+		<Code content={hr_example} />
+		<Mdz content={hr_example} />
 	</Tome_Section>
 
 	<Tome_Section>

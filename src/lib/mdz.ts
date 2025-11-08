@@ -28,6 +28,7 @@ export type Mdz_Node =
 	| Mdz_Strikethrough_Node
 	| Mdz_Link_Node
 	| Mdz_Paragraph_Node
+	| Mdz_Hr_Node
 	| Mdz_Component_Node;
 
 export interface Mdz_Base_Node {
@@ -74,6 +75,10 @@ export interface Mdz_Paragraph_Node extends Mdz_Base_Node {
 	children: Array<Mdz_Node>;
 }
 
+export interface Mdz_Hr_Node extends Mdz_Base_Node {
+	type: 'Hr';
+}
+
 export interface Mdz_Component_Node extends Mdz_Base_Node {
 	type: 'Component';
 	name: string; // Component name (e.g., 'Alert', 'Card')
@@ -90,6 +95,7 @@ const NEWLINE = 10; // \n
 const AT_SIGN = 64; // @
 const L_LOWER = 108; // l
 const S_LOWER = 115; // s
+const HYPHEN = 45; // -
 
 /**
  * Parser for mdz format.
@@ -116,6 +122,12 @@ export class Mdz_Parser {
 		const root_nodes: Array<Mdz_Node> = [];
 		const paragraph_children: Array<Mdz_Node> = [];
 
+		// Check for hr at document start
+		if (this.#match_hr()) {
+			const hr = this.#parse_hr();
+			root_nodes.push(hr);
+		}
+
 		while (this.#index < this.#template.length) {
 			// Check for paragraph break (double newline) - inlined for performance
 			if (
@@ -140,6 +152,12 @@ export class Mdz_Parser {
 				}
 				// Consume the paragraph break
 				this.#eat('\n\n');
+
+				// Check for hr after paragraph break
+				if (this.#match_hr()) {
+					const hr = this.#parse_hr();
+					root_nodes.push(hr);
+				}
 			} else {
 				const node = this.#parse_node();
 				if (node.type === 'Text') {
@@ -529,5 +547,76 @@ export class Mdz_Parser {
 		} else {
 			throw Error(`Expected "${str}" at index ${this.#index}`);
 		}
+	}
+
+	/**
+	 * Check if current position matches a horizontal rule.
+	 * HR must be exactly `---` at column 0, followed by blank line or EOF.
+	 */
+	#match_hr(): boolean {
+		let i = this.#index;
+
+		// Must start at column 0 (no leading whitespace)
+		if (i < this.#template.length && this.#template[i] === ' ') {
+			return false;
+		}
+
+		// Must have exactly three hyphens
+		if (
+			i + 3 > this.#template.length ||
+			this.#template.charCodeAt(i) !== HYPHEN ||
+			this.#template.charCodeAt(i + 1) !== HYPHEN ||
+			this.#template.charCodeAt(i + 2) !== HYPHEN
+		) {
+			return false;
+		}
+		i += 3;
+
+		// After the three hyphens, only whitespace and newline (or EOF) allowed
+		while (i < this.#template.length) {
+			const char_code = this.#template.charCodeAt(i);
+			if (char_code === NEWLINE) {
+				// Found newline - check if followed by another newline (blank line) or EOF
+				const next_i = i + 1;
+				if (next_i >= this.#template.length) {
+					return true; // hr followed by newline + EOF
+				}
+				if (this.#template.charCodeAt(next_i) === NEWLINE) {
+					return true; // hr followed by blank line
+				}
+				return false; // hr followed by single newline + content
+			}
+			if (this.#template[i] !== ' ') {
+				return false; // Non-whitespace after ---, not an hr
+			}
+			i++;
+		}
+
+		// Reached EOF after ---, valid hr
+		return true;
+	}
+
+	/**
+	 * Parse horizontal rule: `---`
+	 * Assumes #match_hr() already verified this is an hr.
+	 */
+	#parse_hr(): Mdz_Hr_Node {
+		const start = this.#index;
+
+		// Consume the three hyphens (no leading whitespace - already verified)
+		this.#index += 3;
+
+		// Skip trailing whitespace
+		while (this.#index < this.#template.length && this.#template[this.#index] === ' ') {
+			this.#index++;
+		}
+
+		// Don't consume the newline - let the main parse loop handle it
+
+		return {
+			type: 'Hr',
+			start,
+			end: this.#index,
+		};
 	}
 }
