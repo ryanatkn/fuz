@@ -11,7 +11,6 @@
 			{
 				"type": "Code",
 				"content": "Foo",
-				"reference": "Foo",
 				"start": 14,
 				"end": 19
 			},

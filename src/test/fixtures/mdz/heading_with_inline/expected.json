@@ -50,7 +50,6 @@
 			{
 				"type": "Code",
 				"content": "code",
-				"reference": "code",
 				"start": 42,
 				"end": 48
 			}

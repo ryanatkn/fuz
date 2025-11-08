@@ -1,0 +1,15 @@
+[
+	{
+		"type": "Paragraph",
+		"children": [
+			{
+				"type": "Text",
+				"content": "`invalid code with newline\n`\n",
+				"start": 0,
+				"end": 29
+			}
+		],
+		"start": 0,
+		"end": 29
+	}
+]

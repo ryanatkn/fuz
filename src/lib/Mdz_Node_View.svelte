@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Code from '@ryanatkn/fuz_code/Code.svelte';
+
 	import type {Mdz_Node} from '$lib/mdz.js';
 	import Docs_Link from '$lib/Docs_Link.svelte';
 	import Mdz_Node_View from '$lib/Mdz_Node_View.svelte';
@@ -31,7 +33,7 @@
 {:else if node.type === 'Text'}
 	{node.content}
 {:else if node.type === 'Code'}
-	<Docs_Link reference={node.reference} />
+	<Docs_Link reference={node.content} />
 {:else if node.type === 'Bold'}
 	<strong>{@render render_children(node.children)}</strong>
 {:else if node.type === 'Italic'}
@@ -54,4 +56,6 @@
 	<svelte:element this={`h${node.level}`}>
 		{@render render_children(node.children)}
 	</svelte:element>
+{:else if node.type === 'Code_Block'}
+	<Code lang={node.lang} content={node.content} />
 {/if}

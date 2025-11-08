@@ -3143,7 +3143,7 @@ export const src_json: Src_Json = {
 					name: 'mdz_parse',
 					kind: 'function',
 					doc_comment: 'Parses text to an array of `Mdz_Node`.',
-					source_line: 21,
+					source_line: 30,
 					type_signature: '(text: string): Mdz_Node[]',
 					return_type: 'Mdz_Node[]',
 					parameters: [
@@ -3157,13 +3157,13 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Node',
 					kind: 'type',
-					source_line: 23,
+					source_line: 32,
 					type_signature: 'Mdz_Node',
 				},
 				{
 					name: 'Mdz_Base_Node',
 					kind: 'type',
-					source_line: 35,
+					source_line: 45,
 					type_signature: 'Mdz_Base_Node',
 					properties: [
 						{
@@ -3186,7 +3186,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Text_Node',
 					kind: 'type',
-					source_line: 41,
+					source_line: 51,
 					type_signature: 'Mdz_Text_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3205,7 +3205,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Code_Node',
 					kind: 'type',
-					source_line: 46,
+					source_line: 56,
 					type_signature: 'Mdz_Code_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3219,17 +3219,12 @@ export const src_json: Src_Json = {
 							kind: 'variable',
 							type_signature: 'string',
 						},
-						{
-							name: 'reference',
-							kind: 'variable',
-							type_signature: 'string',
-						},
 					],
 				},
 				{
 					name: 'Mdz_Bold_Node',
 					kind: 'type',
-					source_line: 52,
+					source_line: 61,
 					type_signature: 'Mdz_Bold_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3248,7 +3243,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Italic_Node',
 					kind: 'type',
-					source_line: 57,
+					source_line: 66,
 					type_signature: 'Mdz_Italic_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3267,7 +3262,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Strikethrough_Node',
 					kind: 'type',
-					source_line: 62,
+					source_line: 71,
 					type_signature: 'Mdz_Strikethrough_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3286,7 +3281,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Link_Node',
 					kind: 'type',
-					source_line: 67,
+					source_line: 76,
 					type_signature: 'Mdz_Link_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3315,7 +3310,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Paragraph_Node',
 					kind: 'type',
-					source_line: 74,
+					source_line: 83,
 					type_signature: 'Mdz_Paragraph_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3334,7 +3329,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Hr_Node',
 					kind: 'type',
-					source_line: 79,
+					source_line: 88,
 					type_signature: 'Mdz_Hr_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3348,7 +3343,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Heading_Node',
 					kind: 'type',
-					source_line: 83,
+					source_line: 92,
 					type_signature: 'Mdz_Heading_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3370,9 +3365,33 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
+					name: 'Mdz_Code_Block_Node',
+					kind: 'type',
+					source_line: 98,
+					type_signature: 'Mdz_Code_Block_Node',
+					extends: ['Mdz_Base_Node'],
+					properties: [
+						{
+							name: 'type',
+							kind: 'variable',
+							type_signature: "'Code_Block'",
+						},
+						{
+							name: 'lang',
+							kind: 'variable',
+							type_signature: 'string | null',
+						},
+						{
+							name: 'content',
+							kind: 'variable',
+							type_signature: 'string',
+						},
+					],
+				},
+				{
 					name: 'Mdz_Component_Node',
 					kind: 'type',
-					source_line: 89,
+					source_line: 104,
 					type_signature: 'Mdz_Component_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3398,7 +3417,7 @@ export const src_json: Src_Json = {
 					kind: 'class',
 					doc_comment:
 						'Parser for mdz format.\nSingle-pass lexer/parser with text accumulation for efficiency.\nUsed by `mdz_parse`, which should be preferred for simple usage.',
-					source_line: 114,
+					source_line: 130,
 					members: [
 						{
 							name: '#index',
@@ -3456,7 +3475,7 @@ export const src_json: Src_Json = {
 							kind: 'function',
 							type_signature: '() => Mdz_Text_Node | Mdz_Code_Node',
 							doc_comment:
-								'Parse backtick code: `code`\nAuto-links to identifiers/modules if match found.\nFalls back to text if unclosed.',
+								'Parse backtick code: `code`\nAuto-links to identifiers/modules if match found.\nFalls back to text if unclosed, empty, or if newline encountered before closing backtick.',
 						},
 						{
 							name: '#parse_bold',
@@ -3540,11 +3559,25 @@ export const src_json: Src_Json = {
 							doc_comment:
 								'Parse heading: `# Heading text`\nAssumes #match_heading() already verified this is a heading.',
 						},
+						{
+							name: '#match_code_block',
+							kind: 'function',
+							type_signature: '() => boolean',
+							doc_comment:
+								'Check if current position matches a code block.\nCode block must be 3+ backticks at column 0, followed by blank line or EOF.\nEmpty code blocks (no content) are treated as invalid.',
+						},
+						{
+							name: '#parse_code_block',
+							kind: 'function',
+							type_signature: '() => Mdz_Code_Block_Node',
+							doc_comment:
+								'Parse code block: ```lang\\ncode\\n```\nAssumes #match_code_block() already verified this is a code block.',
+						},
 					],
 				},
 			],
 			module_comment:
-				'mdz - minimal Markdown+TSDoc parser for Fuz API documentation.\n\nParses a specialized markdown dialect with:\n- inline formatting: `code`, **bold**, _italic_, ~strikethrough~\n- TSDoc tags: {@link}, {@see}\n- auto-linking via backticks to identifiers/modules\n- paragraph breaks (double newline)\n\nKey constraint: preserves ALL whitespace exactly as authored,\nand is rendered with white-space pre or pre-wrap.',
+				'mdz - minimal Markdown+TSDoc parser for Fuz API documentation.\n\nParses a specialized markdown dialect with:\n- inline formatting: `code`, **bold**, _italic_, ~strikethrough~\n- TSDoc tags: {@link}, {@see}\n- auto-linking via backticks to identifiers/modules\n- paragraph breaks (double newline)\n- block elements: headings, horizontal rules, code blocks\n\nKey constraint: preserves ALL whitespace exactly as authored,\nand is rendered with white-space pre or pre-wrap.\n\n## Design Philosophy\n\n- **False negatives over false positives**: Strict syntax prevents accidentally\n  interpreting plain text as formatting. When in doubt, treat as plain text.\n- **One way to do things**: Single unambiguous syntax per feature. No alternatives.\n- **Explicit over implicit**: Clear delimiters and column-0 requirements avoid ambiguity.\n- **Simple over complete**: Prefer simple parsing rules over complex edge case handling.',
 		},
 		{
 			path: 'module_helpers.ts',

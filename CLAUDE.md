@@ -51,7 +51,7 @@ Central registry: `src/routes/docs/tomes.ts`
 Fuz uses prefix-based namespacing with functions grouped by domain/object rather
 than file location:
 
-```typescript
+```ts
 // domain-first, action-last (reads like method calls)
 github_file_url(); // github_file.url()
 repo_url_parse(); // repo_url.parse()
@@ -264,6 +264,8 @@ for validation and code generation.
   - mdz tests use file-based fixtures in `src/test/fixtures/mdz/`
   - each fixture: directory with `input.mdz` and `expected.json`
   - regenerate with `gro src/test/fixtures/mdz/update`
+  - IMPORTANT: NEVER manually create or edit `expected.json` files - only create
+    `input.mdz` files and run the update task to generate the JSON
 
 ### Code style
 

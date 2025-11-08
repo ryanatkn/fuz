@@ -39,6 +39,7 @@ export type Mdz_Node =
 	| Mdz_Paragraph_Node
 	| Mdz_Hr_Node
 	| Mdz_Heading_Node
+	| Mdz_Code_Block_Node
 	| Mdz_Component_Node;
 
 export interface Mdz_Base_Node {
@@ -55,7 +56,6 @@ export interface Mdz_Text_Node extends Mdz_Base_Node {
 export interface Mdz_Code_Node extends Mdz_Base_Node {
 	type: 'Code';
 	content: string; // The code content (identifier/module name)
-	reference: string; // Same as content, used for lookup
 }
 
 export interface Mdz_Bold_Node extends Mdz_Base_Node {
@@ -95,6 +95,12 @@ export interface Mdz_Heading_Node extends Mdz_Base_Node {
 	children: Array<Mdz_Node>; // inline formatting allowed
 }
 
+export interface Mdz_Code_Block_Node extends Mdz_Base_Node {
+	type: 'Code_Block';
+	lang: string | null; // language hint, if provided
+	content: string; // raw code content
+}
+
 export interface Mdz_Component_Node extends Mdz_Base_Node {
 	type: 'Component';
 	name: string; // Component name (e.g., 'Alert', 'Card')
@@ -114,6 +120,7 @@ const S_LOWER = 115; // s
 const HYPHEN = 45; // -
 const HASH = 35; // #
 const SPACE = 32; // (space)
+const TAB = 9; // \t
 
 /**
  * Parser for mdz format.
@@ -150,13 +157,15 @@ export class Mdz_Parser {
 			const hr = this.#parse_hr();
 			root_nodes.push(hr);
 		}
+		// Check for code block at document start
+		else if (this.#match_code_block()) {
+			const code_block = this.#parse_code_block();
+			root_nodes.push(code_block);
+		}
 
 		while (this.#index < this.#template.length) {
-			// Check for paragraph break (double newline) - inlined for performance
-			if (
-				this.#template.charCodeAt(this.#index) === NEWLINE &&
-				this.#template.charCodeAt(this.#index + 1) === NEWLINE
-			) {
+			// Check for paragraph break (double newline)
+			if (this.#is_at_paragraph_break()) {
 				this.#flush_text();
 				// Move flushed nodes to paragraph_children
 				if (this.#nodes.length > 0) {
@@ -185,6 +194,11 @@ export class Mdz_Parser {
 				else if (this.#match_hr()) {
 					const hr = this.#parse_hr();
 					root_nodes.push(hr);
+				}
+				// Check for code block after paragraph break
+				else if (this.#match_code_block()) {
+					const code_block = this.#parse_code_block();
+					root_nodes.push(code_block);
 				}
 			} else {
 				const node = this.#parse_node();
@@ -249,7 +263,7 @@ export class Mdz_Parser {
 	 * Uses switch for performance (avoids regex in hot loop).
 	 */
 	#parse_node(): Mdz_Node {
-		const char_code = this.#template.charCodeAt(this.#index);
+		const char_code = this.#current_char();
 
 		// Use character codes for performance in hot path
 		switch (char_code) {
@@ -284,32 +298,56 @@ export class Mdz_Parser {
 	/**
 	 * Parse backtick code: `code`
 	 * Auto-links to identifiers/modules if match found.
-	 * Falls back to text if unclosed.
+	 * Falls back to text if unclosed, empty, or if newline encountered before closing backtick.
 	 */
 	#parse_code(): Mdz_Code_Node | Mdz_Text_Node {
 		const start = this.#index;
 		this.#eat('`');
 		const content_start = this.#index;
-		const content_end = this.#template.indexOf('`', this.#index);
+
+		// Find closing backtick, but stop at newline
+		let content_end = -1;
+		for (let i = this.#index; i < this.#template.length; i++) {
+			const char_code = this.#template.charCodeAt(i);
+			if (char_code === BACKTICK) {
+				content_end = i;
+				break;
+			}
+			if (char_code === NEWLINE) {
+				// Newline before closing backtick - treat as unclosed
+				break;
+			}
+		}
 
 		if (content_end === -1) {
-			// Unclosed backtick, treat as text
-			this.#index = this.#template.length;
+			// Unclosed backtick or newline encountered, treat as text
+			this.#index = start + 1;
 			return {
 				type: 'Text',
-				content: this.#template.slice(start),
+				content: '`',
 				start,
 				end: this.#index,
 			};
 		}
 
 		const content = this.#template.slice(content_start, content_end);
+
+		// Empty inline code has no semantic meaning, treat as literal text
+		if (content.length === 0) {
+			this.#index = start + 2; // consume both backticks
+			return {
+				type: 'Text',
+				content: '``',
+				start,
+				end: this.#index,
+			};
+		}
+
 		this.#index = content_end + 1;
 
 		return {
 			type: 'Code',
 			content,
-			reference: content,
 			start,
 			end: this.#index,
 		};
@@ -503,7 +541,7 @@ export class Mdz_Parser {
 		const start = this.#index;
 
 		while (this.#index < this.#template.length) {
-			const char_code = this.#template.charCodeAt(this.#index);
+			const char_code = this.#current_char();
 
 			// Stop at special characters (but preserve single newlines)
 			if (
@@ -516,8 +554,8 @@ export class Mdz_Parser {
 				break;
 			}
 
-			// Check for paragraph break (double newline) - inlined for performance
-			if (char_code === NEWLINE && this.#template.charCodeAt(this.#index + 1) === NEWLINE) {
+			// Check for paragraph break (double newline)
+			if (this.#is_at_paragraph_break()) {
 				break;
 			}
 
@@ -554,10 +592,7 @@ export class Mdz_Parser {
 			}
 
 			// Check for paragraph break (block element interruption)
-			if (
-				this.#template.charCodeAt(this.#index) === NEWLINE &&
-				this.#template.charCodeAt(this.#index + 1) === NEWLINE
-			) {
+			if (this.#is_at_paragraph_break()) {
 				// Paragraph break interrupts inline formatting
 				break;
 			}
@@ -567,6 +602,24 @@ export class Mdz_Parser {
 		}
 
 		return nodes;
+	}
+
+	/**
+	 * Get character code at current index, or -1 if at EOF.
+	 */
+	#current_char(): number {
+		return this.#index < this.#template.length ? this.#template.charCodeAt(this.#index) : -1;
+	}
+
+	/**
+	 * Check if current position is at a paragraph break (double newline).
+	 */
+	#is_at_paragraph_break(): boolean {
+		return (
+			this.#current_char() === NEWLINE &&
+			this.#index + 1 < this.#template.length &&
+			this.#template.charCodeAt(this.#index + 1) === NEWLINE
+		);
 	}
 
 	/**
@@ -595,7 +648,7 @@ export class Mdz_Parser {
 		let i = this.#index;
 
 		// Must start at column 0 (no leading whitespace)
-		if (i < this.#template.length && this.#template[i] === ' ') {
+		if (i < this.#template.length && this.#template.charCodeAt(i) === SPACE) {
 			return false;
 		}
 
@@ -624,7 +677,7 @@ export class Mdz_Parser {
 				}
 				return false; // hr followed by single newline + content
 			}
-			if (this.#template[i] !== ' ') {
+			if (char_code !== SPACE) {
 				return false; // Non-whitespace after ---, not an hr
 			}
 			i++;
@@ -645,7 +698,10 @@ export class Mdz_Parser {
 		this.#index += 3;
 
 		// Skip trailing whitespace
-		while (this.#index < this.#template.length && this.#template[this.#index] === ' ') {
+		while (
+			this.#index < this.#template.length &&
+			this.#template.charCodeAt(this.#index) === SPACE
+		) {
 			this.#index++;
 		}
 
@@ -667,7 +723,7 @@ export class Mdz_Parser {
 		let i = this.#index;
 
 		// Must start at column 0 (no leading whitespace)
-		if (i < this.#template.length && this.#template[i] === ' ') {
+		if (i < this.#template.length && this.#template.charCodeAt(i) === SPACE) {
 			return false;
 		}
 
@@ -691,7 +747,8 @@ export class Mdz_Parser {
 		// Must have non-whitespace content after the space (not just whitespace until newline)
 		let has_content = false;
 		while (i < this.#template.length && this.#template.charCodeAt(i) !== NEWLINE) {
-			if (this.#template[i] !== ' ' && this.#template[i] !== '\t') {
+			const char_code = this.#template.charCodeAt(i);
+			if (char_code !== SPACE && char_code !== TAB) {
 				has_content = true;
 			}
 			i++;
@@ -787,5 +844,203 @@ export class Mdz_Parser {
 			start,
 			end: this.#index,
 		};
+	}
+
+	/**
+	 * Check if current position matches a code block.
+	 * Code block must be 3+ backticks at column 0, followed by blank line or EOF.
+	 * Empty code blocks (no content) are treated as invalid.
+	 */
+	#match_code_block(): boolean {
+		let i = this.#index;
+
+		// Must start at column 0 (no leading whitespace)
+		if (i < this.#template.length && this.#template.charCodeAt(i) === SPACE) {
+			return false;
+		}
+
+		// Must have at least three backticks
+		let backtick_count = 0;
+		while (i < this.#template.length && this.#template.charCodeAt(i) === BACKTICK) {
+			backtick_count++;
+			i++;
+		}
+
+		if (backtick_count < 3) {
+			return false;
+		}
+
+		// Skip optional language hint (consume until space or newline)
+		while (i < this.#template.length) {
+			const char_code = this.#template.charCodeAt(i);
+			if (char_code === SPACE || char_code === NEWLINE) {
+				break;
+			}
+			i++;
+		}
+
+		// Skip any trailing spaces on opening fence line
+		while (i < this.#template.length && this.#template.charCodeAt(i) === SPACE) {
+			i++;
+		}
+
+		// Must have newline after opening fence (or be at EOF)
+		if (i >= this.#template.length) {
+			return false; // No newline, can't be a valid code block
+		}
+
+		if (this.#template.charCodeAt(i) !== NEWLINE) {
+			return false;
+		}
+		i++; // consume the newline
+
+		// Mark content start position (after opening fence newline)
+		const content_start = i;
+
+		// Now search for closing fence
+		const closing_fence = '`'.repeat(backtick_count);
+		while (i < this.#template.length) {
+			// Check if we're at a potential closing fence (must be at start of line)
+			if (this.#template.startsWith(closing_fence, i)) {
+				// Verify it's at column 0 by checking previous character
+				const prev_char = i > 0 ? this.#template.charCodeAt(i - 1) : NEWLINE;
+				if (prev_char === NEWLINE || i === 0) {
+					// Found closing fence - check for empty content first
+					const content = this.#template.slice(content_start, i);
+					const final_content = content.endsWith('\n') ? content.slice(0, -1) : content;
+					if (final_content.length === 0) {
+						return false; // Empty code block has no semantic meaning
+					}
+
+					// Now verify what comes after closing fence
+					let j = i + backtick_count;
+
+					// Skip trailing whitespace on closing fence line
+					while (j < this.#template.length && this.#template.charCodeAt(j) === SPACE) {
+						j++;
+					}
+
+					// Must have newline after closing fence (or be at EOF)
+					if (j >= this.#template.length) {
+						return true;
+					}
+
+					if (this.#template.charCodeAt(j) !== NEWLINE) {
+						// closing fence has non-whitespace after it on same line - not a code block
+						return false;
+					}
+
+					// Check if followed by blank line or EOF
+					const next_j = j + 1;
+					if (next_j >= this.#template.length) {
+						return true; // code block followed by newline + EOF
+					}
+					if (this.#template.charCodeAt(next_j) === NEWLINE) {
+						return true; // code block followed by blank line
+					}
+					return false; // code block followed by single newline + content
+				}
+			}
+			i++;
+		}
+
+		// No closing fence found - not a valid code block
+		return false;
+	}
+
+	/**
+	 * Parse code block: ```lang\ncode\n```
+	 * Assumes #match_code_block() already verified this is a code block.
+	 */
+	#parse_code_block(): Mdz_Code_Block_Node {
+		const start = this.#index;
+
+		// Count and consume opening backticks
+		let backtick_count = 0;
+		while (
+			this.#index < this.#template.length &&
+			this.#template.charCodeAt(this.#index) === BACKTICK
+		) {
+			backtick_count++;
+			this.#index++;
+		}
+
+		// Parse optional language hint (consume until space or newline)
+		let lang: string | null = null;
+		const lang_start = this.#index;
+		while (this.#index < this.#template.length) {
+			const char_code = this.#template.charCodeAt(this.#index);
+			if (char_code === SPACE || char_code === NEWLINE) {
+				break;
+			}
+			this.#index++;
+		}
+		if (this.#index > lang_start) {
+			lang = this.#template.slice(lang_start, this.#index);
+		}
+
+		// Skip any trailing spaces on opening fence line
+		while (
+			this.#index < this.#template.length &&
+			this.#template.charCodeAt(this.#index) === SPACE
+		) {
+			this.#index++;
+		}
+
+		// Consume the newline after opening fence (first newline is consumed per spec)
+		if (this.#index < this.#template.length && this.#template.charCodeAt(this.#index) === NEWLINE) {
+			this.#index++;
+		}
+
+		// Collect content until closing fence
+		const content_start = this.#index;
+		const closing_fence = '`'.repeat(backtick_count);
+
+		while (this.#index < this.#template.length) {
+			// Check if we're at the closing fence (must be at start of line)
+			if (this.#template.startsWith(closing_fence, this.#index)) {
+				// Verify it's at column 0 by checking previous character
+				const prev_char = this.#index > 0 ? this.#template.charCodeAt(this.#index - 1) : NEWLINE;
+				if (prev_char === NEWLINE || this.#index === 0) {
+					// Check if it's exactly the right number of backticks at line start
+					let j = this.#index + backtick_count;
+					// After closing fence, only whitespace and newline allowed
+					while (j < this.#template.length && this.#template.charCodeAt(j) === SPACE) {
+						j++;
+					}
+					if (j >= this.#template.length || this.#template.charCodeAt(j) === NEWLINE) {
+						// Valid closing fence
+						const content = this.#template.slice(content_start, this.#index);
+						// Remove trailing newline if present (closing fence comes after a newline)
+						const final_content = content.endsWith('\n') ? content.slice(0, -1) : content;
+
+						// Consume closing fence
+						this.#index += backtick_count;
+
+						// Skip trailing whitespace on closing fence line
+						while (
+							this.#index < this.#template.length &&
+							this.#template.charCodeAt(this.#index) === SPACE
+						) {
+							this.#index++;
+						}
+
+						// Don't consume the newline - let the main parse loop handle it
+
+						return {
+							type: 'Code_Block',
+							lang,
+							content: final_content,
+							start,
+							end: this.#index,
+						};
+					}
+				}
+			}
+			this.#index++;
+		}
+
+		// Should not reach here if #match_code_block() validated correctly
+		throw Error('Code block not properly closed');
 	}
 }
