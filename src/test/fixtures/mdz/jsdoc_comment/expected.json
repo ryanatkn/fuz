@@ -1,0 +1,74 @@
+[
+	{
+		"type": "Paragraph",
+		"children": [
+			{
+				"type": "Text",
+				"content": "Creates a new ",
+				"start": 0,
+				"end": 14
+			},
+			{
+				"type": "Code",
+				"content": "Foo",
+				"reference": "Foo",
+				"start": 14,
+				"end": 19
+			},
+			{
+				"type": "Text",
+				"content": " instance. See ",
+				"start": 19,
+				"end": 34
+			},
+			{
+				"type": "Link",
+				"reference": "Bar",
+				"display_text": null,
+				"link_type": "identifier",
+				"start": 34,
+				"end": 45
+			},
+			{
+				"type": "Text",
+				"content": " for details.",
+				"start": 45,
+				"end": 58
+			}
+		],
+		"start": 0,
+		"end": 58
+	},
+	{
+		"type": "Paragraph",
+		"children": [
+			{
+				"type": "Text",
+				"content": "Returns ",
+				"start": 60,
+				"end": 68
+			},
+			{
+				"type": "Bold",
+				"children": [
+					{
+						"type": "Text",
+						"content": "null",
+						"start": 70,
+						"end": 74
+					}
+				],
+				"start": 68,
+				"end": 76
+			},
+			{
+				"type": "Text",
+				"content": " if invalid.",
+				"start": 76,
+				"end": 88
+			}
+		],
+		"start": 60,
+		"end": 88
+	}
+]

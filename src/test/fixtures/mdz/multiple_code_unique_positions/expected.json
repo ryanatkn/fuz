@@ -1,0 +1,41 @@
+[
+	{
+		"type": "Paragraph",
+		"children": [
+			{
+				"type": "Text",
+				"content": "Use ",
+				"start": 0,
+				"end": 4
+			},
+			{
+				"type": "Code",
+				"content": "Docs_Link",
+				"reference": "Docs_Link",
+				"start": 4,
+				"end": 15
+			},
+			{
+				"type": "Text",
+				"content": " to link to docs, and ",
+				"start": 15,
+				"end": 37
+			},
+			{
+				"type": "Code",
+				"content": "Docs_Link",
+				"reference": "Docs_Link",
+				"start": 37,
+				"end": 48
+			},
+			{
+				"type": "Text",
+				"content": " again.",
+				"start": 48,
+				"end": 55
+			}
+		],
+		"start": 0,
+		"end": 55
+	}
+]

@@ -1,0 +1,28 @@
+[
+	{
+		"type": "Paragraph",
+		"children": [
+			{
+				"type": "Text",
+				"content": "use ",
+				"start": 0,
+				"end": 4
+			},
+			{
+				"type": "Code",
+				"content": "Foo_Bar",
+				"reference": "Foo_Bar",
+				"start": 4,
+				"end": 13
+			},
+			{
+				"type": "Text",
+				"content": " here",
+				"start": 13,
+				"end": 18
+			}
+		],
+		"start": 0,
+		"end": 18
+	}
+]

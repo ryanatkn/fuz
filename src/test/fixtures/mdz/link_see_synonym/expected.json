@@ -1,0 +1,23 @@
+[
+	{
+		"type": "Paragraph",
+		"children": [
+			{
+				"type": "Text",
+				"content": "refer to ",
+				"start": 0,
+				"end": 9
+			},
+			{
+				"type": "Link",
+				"reference": "Bar",
+				"display_text": null,
+				"link_type": "identifier",
+				"start": 9,
+				"end": 19
+			}
+		],
+		"start": 0,
+		"end": 19
+	}
+]

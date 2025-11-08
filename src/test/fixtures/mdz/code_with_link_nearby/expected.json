@@ -1,0 +1,30 @@
+[
+	{
+		"type": "Paragraph",
+		"children": [
+			{
+				"type": "Code",
+				"content": "code",
+				"reference": "code",
+				"start": 0,
+				"end": 6
+			},
+			{
+				"type": "Text",
+				"content": " then ",
+				"start": 6,
+				"end": 12
+			},
+			{
+				"type": "Link",
+				"reference": "Foo",
+				"display_text": null,
+				"link_type": "identifier",
+				"start": 12,
+				"end": 23
+			}
+		],
+		"start": 0,
+		"end": 23
+	}
+]

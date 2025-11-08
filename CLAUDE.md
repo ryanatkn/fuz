@@ -2,9 +2,9 @@
 
 > friendly user zystem 🧶
 
-Fuz is a Svelte UI library built on the Moss CSS framework.
-It provides Svelte components and TypeScript helpers
-for building user-friendly and resource-efficient websites.
+Fuz is a Svelte UI library built on the Moss CSS framework. It provides Svelte
+components and TypeScript helpers for building user-friendly and
+resource-efficient websites.
 
 ## Key dependencies
 
@@ -36,8 +36,8 @@ src/
 
 ### Core concepts
 
-Tome - documentation units that define the library's structure.
-Each tome represents a component or helper with:
+Tome - documentation units that define the library's structure. Each tome
+represents a component or helper with:
 
 - `name` - identifier
 - `category` - "guide", "helpers", or "components"
@@ -48,17 +48,18 @@ Central registry: `src/routes/docs/tomes.ts`
 
 ### Identifier namespacing
 
-Fuz uses prefix-based namespacing with functions grouped by domain/object rather than file location:
+Fuz uses prefix-based namespacing with functions grouped by domain/object rather
+than file location:
 
 ```typescript
 // domain-first, action-last (reads like method calls)
-github_file_url()      // github_file.url()
-repo_url_parse()       // repo_url.parse()
-package_is_published() // package.is_published()
+github_file_url(); // github_file.url()
+repo_url_parse(); // repo_url.parse()
+package_is_published(); // package.is_published()
 ```
 
-Why: JS's dynamic nature and flat module structure benefit from explicit prefixes.
-This pattern:
+Why: JS's dynamic nature and flat module structure benefit from explicit
+prefixes. This pattern:
 
 - groups related functions in autocomplete (`github_*`, `repo_*`, `package_*`)
 - prevents name collisions without import aliasing
@@ -66,31 +67,41 @@ This pattern:
 - maps naturally to `/docs/api` namespace for documentation
 
 Common patterns:
+
 - `domain_action` - object-first, action-last (primary pattern)
 - `domain_is_adjective` - boolean checks (`package_is_published`)
 - action verbs: `parse`, `url`, `create`, `get`, `to`
 
-This naming is consistent across Belt, Moss, and Gro for a unified developer experience.
+This naming is consistent across Belt, Moss, and Gro for a unified developer
+experience.
 
-Duplicate identifier names across modules fail fast during `gro gen` with clear error messages.
-Resolve by renaming one identifier following the `domain_action` pattern.
+Duplicate identifier names across modules fail fast during `gro gen` with clear
+error messages. Resolve by renaming one identifier following the `domain_action`
+pattern.
 
 ### API documentation system
 
-Fuz includes a comprehensive system for generating and displaying API documentation:
+Fuz includes a comprehensive system for generating and displaying API
+documentation:
 
 Code generation flow:
-1. `package.gen.ts` (Gro task) - analyzes TypeScript/Svelte source with full TSDoc support
-2. generates `package.ts` - serialized package metadata (`package_json` + `src_json`)
+
+1. `package.gen.ts` (Gro task) - analyzes TypeScript/Svelte source with full
+   TSDoc support
+2. generates `package.ts` - serialized package metadata (`package_json` +
+   `src_json`)
 3. runtime classes wrap the data with Svelte 5 reactivity:
    - `Pkg` - package-level API with module/identifier lookups
    - `Module` - represents a source file with its exports
-   - `Identifier` - represents an exported identifier (function, type, class, component)
+   - `Identifier` - represents an exported identifier (function, type, class,
+     component)
 4. SvelteKit routes at `/docs/api` render searchable documentation
 
 Supporting helpers:
+
 - `src_json.ts` - type definitions for the metadata format
-- `package_gen_helpers.ts` - build-time generation helpers (validation, sorting, analysis)
+- `package_gen_helpers.ts` - build-time generation helpers (validation, sorting,
+  analysis)
 - `ts_helpers.ts` - TypeScript compiler API utilities
 - `tsdoc_helpers.ts` - JSDoc/TSDoc parsing
 - `svelte_helpers.ts` - Svelte component analysis (via svelte2tsx)
@@ -98,8 +109,10 @@ Supporting helpers:
 - `package_helpers.ts` - URL builders (`github_file_url`, `api_doc_url`, etc.)
 
 Documentation components:
+
 - `Identifier_Detail.svelte` - renders full identifier documentation
-- `Type_Link.svelte`, `Module_Link.svelte`, `Identifier_Link.svelte` - cross-reference links
+- `Type_Link.svelte`, `Module_Link.svelte`, `Identifier_Link.svelte` -
+  cross-reference links
 - `Docs*.svelte` - documentation layout system
 
 ## Navigation
@@ -107,11 +120,13 @@ Documentation components:
 ### Documentation categories
 
 #### Guides
+
 - introduction - overview and getting started
 - theming - theme and color scheme system
 - api - API documentation structure
 
 #### Helpers
+
 - csp - Content Security Policy utilities (`src/lib/csp.ts`)
 - logos - logo and branding helpers (`src/lib/logos.ts`)
 
@@ -234,9 +249,9 @@ gro test         # test
 gro gen          # run code generators
 ```
 
-IMPORTANT for AI agents:
-Do NOT run `npm run dev` or `gro dev` - the developer will manage the dev server.
-Only run `gro check`, `gro test`, `gro gen`, etc. for validation and code generation.
+IMPORTANT for AI agents: Do NOT run `npm run dev` or `gro dev` - the developer
+will manage the dev server. Only run `gro check`, `gro test`, `gro gen`, etc.
+for validation and code generation.
 
 ### Project standards
 
@@ -246,24 +261,32 @@ Only run `gro check`, `gro test`, `gro gen`, etc. for validation and code genera
 - formatting - Prettier with tabs, 100 char width
 - Node - requires >=22.15
 - tests - located in `src/test/` (not co-located with source)
+  - mdz tests use file-based fixtures in `src/test/fixtures/mdz/`
+  - each fixture: directory with `input.mdz` and `expected.json`
+  - regenerate with `gro src/test/fixtures/mdz/update`
 
 ### Code style
 
-Fuz uses distinctive naming conventions compared to typical TypeScript/Svelte projects:
+Fuz uses distinctive naming conventions compared to typical TypeScript/Svelte
+projects:
 
-- `snake_case` for most identifiers (files, variables, functions, types) instead of camelCase
-- `Upper_Snake_Case` for types, class names, and Svelte components instead of PascalCase
+- `snake_case` for most identifiers (files, variables, functions, types) instead
+  of camelCase
+- `Upper_Snake_Case` for types, class names, and Svelte components instead of
+  PascalCase
 - explicit file extensions in all imports
 - tab indentation, 100 character line width
 - tends toward flat file structure with co-located related code
 - JSDoc comments (`/** ... */`) use proper sentence structure with periods;
-  inline comments (`//`) can be sentence fragments and should not start with capital letters
+  inline comments (`//`) can be sentence fragments and should not start with
+  capital letters
 
 ## Key patterns
 
 ### Context system
 
 Uses a standardized context pattern via `context_helpers.ts`:
+
 - `themer_context` - theme state
 - `tomes_context` - available documentation
 - `tome_context` - current documentation page
@@ -273,6 +296,7 @@ Uses a standardized context pattern via `context_helpers.ts`:
 ### Theming
 
 Built on Moss CSS custom properties:
+
 - `Themer` class manages theme state
 - `Themed` component provides theme context
 - `Color_Scheme_Input` and `Theme_Input` for user theme selection

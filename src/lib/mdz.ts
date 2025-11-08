@@ -65,7 +65,7 @@ export interface Mdz_Strikethrough_Node extends Mdz_Base_Node {
 export interface Mdz_Link_Node extends Mdz_Base_Node {
 	type: 'Link';
 	reference: string; // URL or identifier/module name
-	display_text?: string; // Optional display text from {@link URL|text}
+	display_text: string | null; // Display text from {@link URL|text}, null if not provided
 	link_type: 'identifier' | 'url'; // Determined by parser
 }
 
@@ -467,7 +467,7 @@ export class Mdz_Parser {
 		return {
 			type: 'Link',
 			reference,
-			display_text,
+			display_text: display_text ?? null,
 			link_type,
 			start,
 			end: this.#index,
