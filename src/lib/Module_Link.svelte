@@ -4,12 +4,12 @@
 	import {module_doc_url} from '$lib/package_helpers.js';
 
 	const {
-		module_path, // TODO BLOCK rename to `name`? see also the data structure
+		module_path,
 		children,
 		class: class_prop,
 		...rest
 	}: SvelteHTMLElements['a'] & {
-		module_path: string;
+		module_path: string; // TODO maybe rename?
 	} = $props();
 
 	// generate module doc URL
