@@ -2527,7 +2527,7 @@ export const src_json: Src_Json = {
 					name: 'create_identifier_contextmenu',
 					kind: 'function',
 					doc_comment: 'Create contextmenu entries for an identifier.',
-					source_line: 7,
+					source_line: 9,
 					type_signature: '(identifier: Identifier): Contextmenu_Params[]',
 					return_type: 'Contextmenu_Params[]',
 					parameters: [
@@ -3604,7 +3604,7 @@ export const src_json: Src_Json = {
 					name: 'create_module_contextmenu',
 					kind: 'function',
 					doc_comment: 'Create contextmenu entries for a module.',
-					source_line: 7,
+					source_line: 9,
 					type_signature: '(module: Module): Contextmenu_Params[]',
 					return_type: 'Contextmenu_Params[]',
 					parameters: [
