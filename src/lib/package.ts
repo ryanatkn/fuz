@@ -3222,9 +3222,33 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'Mdz_Bold_Node',
+					name: 'Mdz_Codeblock_Node',
 					kind: 'type',
 					source_line: 61,
+					type_signature: 'Mdz_Codeblock_Node',
+					extends: ['Mdz_Base_Node'],
+					properties: [
+						{
+							name: 'type',
+							kind: 'variable',
+							type_signature: "'Codeblock'",
+						},
+						{
+							name: 'lang',
+							kind: 'variable',
+							type_signature: 'string | null',
+						},
+						{
+							name: 'content',
+							kind: 'variable',
+							type_signature: 'string',
+						},
+					],
+				},
+				{
+					name: 'Mdz_Bold_Node',
+					kind: 'type',
+					source_line: 67,
 					type_signature: 'Mdz_Bold_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3243,7 +3267,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Italic_Node',
 					kind: 'type',
-					source_line: 66,
+					source_line: 72,
 					type_signature: 'Mdz_Italic_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3262,7 +3286,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Strikethrough_Node',
 					kind: 'type',
-					source_line: 71,
+					source_line: 77,
 					type_signature: 'Mdz_Strikethrough_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3281,7 +3305,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Link_Node',
 					kind: 'type',
-					source_line: 76,
+					source_line: 82,
 					type_signature: 'Mdz_Link_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3310,7 +3334,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Paragraph_Node',
 					kind: 'type',
-					source_line: 83,
+					source_line: 89,
 					type_signature: 'Mdz_Paragraph_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3329,7 +3353,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Hr_Node',
 					kind: 'type',
-					source_line: 88,
+					source_line: 94,
 					type_signature: 'Mdz_Hr_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3343,7 +3367,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Heading_Node',
 					kind: 'type',
-					source_line: 92,
+					source_line: 98,
 					type_signature: 'Mdz_Heading_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3361,30 +3385,6 @@ export const src_json: Src_Json = {
 							name: 'children',
 							kind: 'variable',
 							type_signature: 'Array<Mdz_Node>',
-						},
-					],
-				},
-				{
-					name: 'Mdz_Code_Block_Node',
-					kind: 'type',
-					source_line: 98,
-					type_signature: 'Mdz_Code_Block_Node',
-					extends: ['Mdz_Base_Node'],
-					properties: [
-						{
-							name: 'type',
-							kind: 'variable',
-							type_signature: "'Code_Block'",
-						},
-						{
-							name: 'lang',
-							kind: 'variable',
-							type_signature: 'string | null',
-						},
-						{
-							name: 'content',
-							kind: 'variable',
-							type_signature: 'string',
 						},
 					],
 				},
@@ -3581,7 +3581,7 @@ export const src_json: Src_Json = {
 						{
 							name: '#parse_code_block',
 							kind: 'function',
-							type_signature: '() => Mdz_Code_Block_Node',
+							type_signature: '() => Mdz_Codeblock_Node',
 							doc_comment:
 								'Parse code block: ```lang\\ncode\\n```\nAssumes #match_code_block() already verified this is a code block.',
 						},

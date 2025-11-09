@@ -56,6 +56,6 @@
 	<svelte:element this={`h${node.level}`}>
 		{@render render_children(node.children)}
 	</svelte:element>
-{:else if node.type === 'Code_Block'}
+{:else if node.type === 'Codeblock'}
 	<Code lang={node.lang} content={node.content} />
 {/if}

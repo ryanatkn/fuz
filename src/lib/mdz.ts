@@ -32,6 +32,7 @@ export const mdz_parse = (text: string): Array<Mdz_Node> => new Mdz_Parser(text)
 export type Mdz_Node =
 	| Mdz_Text_Node
 	| Mdz_Code_Node
+	| Mdz_Codeblock_Node
 	| Mdz_Bold_Node
 	| Mdz_Italic_Node
 	| Mdz_Strikethrough_Node
@@ -39,7 +40,6 @@ export type Mdz_Node =
 	| Mdz_Paragraph_Node
 	| Mdz_Hr_Node
 	| Mdz_Heading_Node
-	| Mdz_Code_Block_Node
 	| Mdz_Component_Node;
 
 export interface Mdz_Base_Node {
@@ -56,6 +56,12 @@ export interface Mdz_Text_Node extends Mdz_Base_Node {
 export interface Mdz_Code_Node extends Mdz_Base_Node {
 	type: 'Code';
 	content: string; // The code content (identifier/module name)
+}
+
+export interface Mdz_Codeblock_Node extends Mdz_Base_Node {
+	type: 'Codeblock';
+	lang: string | null; // language hint, if provided
+	content: string; // raw code content
 }
 
 export interface Mdz_Bold_Node extends Mdz_Base_Node {
@@ -93,12 +99,6 @@ export interface Mdz_Heading_Node extends Mdz_Base_Node {
 	type: 'Heading';
 	level: 1 | 2 | 3 | 4 | 5 | 6;
 	children: Array<Mdz_Node>; // inline formatting allowed
-}
-
-export interface Mdz_Code_Block_Node extends Mdz_Base_Node {
-	type: 'Code_Block';
-	lang: string | null; // language hint, if provided
-	content: string; // raw code content
 }
 
 export interface Mdz_Component_Node extends Mdz_Base_Node {
@@ -952,7 +952,7 @@ export class Mdz_Parser {
 	 * Parse code block: ```lang\ncode\n```
 	 * Assumes #match_code_block() already verified this is a code block.
 	 */
-	#parse_code_block(): Mdz_Code_Block_Node {
+	#parse_code_block(): Mdz_Codeblock_Node {
 		const start = this.#index;
 
 		// Count and consume opening backticks
@@ -1028,7 +1028,7 @@ export class Mdz_Parser {
 						// Don't consume the newline - let the main parse loop handle it
 
 						return {
-							type: 'Code_Block',
+							type: 'Codeblock',
 							lang,
 							content: final_content,
 							start,

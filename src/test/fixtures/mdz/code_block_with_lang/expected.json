@@ -1,6 +1,6 @@
 [
 	{
-		"type": "Code_Block",
+		"type": "Codeblock",
 		"lang": "ts",
 		"content": "const x: number = 42;",
 		"start": 0,

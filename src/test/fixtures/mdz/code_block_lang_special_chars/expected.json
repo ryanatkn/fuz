@@ -1,6 +1,6 @@
 [
 	{
-		"type": "Code_Block",
+		"type": "Codeblock",
 		"lang": "c++",
 		"content": "int main() {}",
 		"start": 0,

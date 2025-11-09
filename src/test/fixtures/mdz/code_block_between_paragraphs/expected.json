@@ -13,7 +13,7 @@
 		"end": 16
 	},
 	{
-		"type": "Code_Block",
+		"type": "Codeblock",
 		"lang": null,
 		"content": "code block",
 		"start": 18,

@@ -32,7 +32,9 @@
 			mdz is a small markdown dialect that supports Svelte components and a subset of TSDoc. The
 			goal is to be friendly to nontechnical users and integrate with other Fuz systems.
 		</p>
-		<aside>⚠️ This is an early proof of concept, many features and edge cases are missing.</aside>
+		<aside>
+			⚠️ This is an early proof of concept with missing features. Lists and blockquotes are next.
+		</aside>
 	</section>
 
 	<section>
