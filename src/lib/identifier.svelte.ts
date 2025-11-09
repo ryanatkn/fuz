@@ -4,7 +4,7 @@ import {
 	generate_import_statement,
 	get_identifier_display_name,
 } from '$lib/src_json.js';
-import {api_doc_url, api_doc_url_full, github_file_url} from '$lib/package_helpers.js';
+import {url_api_identifier, url_api_identifier_full, url_github_file} from '$lib/package_helpers.js';
 
 /**
  * Rich runtime representation of an exported identifier with computed properties.
@@ -44,9 +44,9 @@ export class Identifier {
 	 * GitHub source URL with line number.
 	 * Example: "https://github.com/ryanatkn/fuz/blob/main/src/lib/Alert.ts#L42"
 	 */
-	source_url = $derived(
+	url_github = $derived(
 		this.pkg.repo_url && this.identifier_json.source_line
-			? github_file_url(
+			? url_github_file(
 					this.pkg.repo_url,
 					`src/lib/${this.module_path}`,
 					this.identifier_json.source_line,
@@ -58,7 +58,7 @@ export class Identifier {
 	 * API documentation URL (hash-based navigation).
 	 * Example: "/docs/api#Alert"
 	 */
-	api_url = $derived(api_doc_url(this.name));
+	url_api = $derived(url_api_identifier(this.name));
 
 	/**
 	 * Generated TypeScript import statement.
@@ -72,8 +72,8 @@ export class Identifier {
 	 * Public documentation link (if homepage_url is available).
 	 * Example: "https://fuz.ryanatkn.com/docs/api#Alert"
 	 */
-	docs_link = $derived(
-		this.pkg.homepage_url ? api_doc_url_full(this.pkg.homepage_url, this.name) : undefined,
+	url_api_full = $derived(
+		this.pkg.homepage_url ? url_api_identifier_full(this.pkg.homepage_url, this.name) : undefined,
 	);
 
 	/**

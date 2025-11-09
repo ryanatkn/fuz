@@ -1,6 +1,8 @@
 import type {Module} from '$lib/module.svelte.js';
 import type {Contextmenu_Params} from '$lib/contextmenu_state.svelte.js';
 
+// TODO @many expand contextmenus for docs
+
 /**
  * Create contextmenu entries for a module.
  */
@@ -8,11 +10,11 @@ export const create_module_contextmenu = (module: Module): Array<Contextmenu_Par
 	const entries: Array<Contextmenu_Params> = [];
 
 	// View source on GitHub
-	if (module.module_url) {
+	if (module.url_github) {
 		entries.push({
 			snippet: 'link',
 			props: {
-				href: module.module_url,
+				href: module.url_github,
 			},
 		});
 	}

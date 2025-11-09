@@ -13,9 +13,9 @@
 <!-- Metadata -->
 <p class="row justify_content_space_between">
 	<Module_Link module_path={identifier.module_path} />
-	{#if identifier.source_url}
+	{#if identifier.url_github}
 		<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-		<a class="chip" href={identifier.source_url} target="_blank" rel="noopener">view source</a>
+		<a class="chip" href={identifier.url_github} target="_blank" rel="noopener">view source</a>
 	{/if}
 </p>
 

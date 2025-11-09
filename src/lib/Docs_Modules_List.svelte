@@ -21,8 +21,8 @@
 				<!-- eslint-disable svelte/no-navigation-without-resolve -->
 				<a
 					class="menu_item"
-					href={module.path_docs}
-					class:selected={module.path_docs === page.url.pathname}
+					href={module.url_api}
+					class:selected={module.url_api === page.url.pathname}
 				>
 					<div class="ellipsis">{module.path}</div>
 				</a>

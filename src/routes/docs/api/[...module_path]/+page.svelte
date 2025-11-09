@@ -35,7 +35,7 @@
 	});
 
 	// GitHub source URL for the module
-	const source_url = $derived(module?.module_url);
+	const source_url = $derived(module?.url_github);
 </script>
 
 <svelte:head>

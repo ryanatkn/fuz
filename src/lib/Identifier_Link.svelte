@@ -32,7 +32,7 @@
 	<a
 		{...rest}
 		class="identifier_link chip {class_prop}"
-		href={identifier.api_url}
+		href={identifier.url_api}
 		{@attach contextmenu_attachment(contextmenu_entries)}
 	>
 		{#if children}

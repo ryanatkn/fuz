@@ -5,12 +5,12 @@ import type {Src_Json} from '$lib/src_json.js';
 import {Identifier} from '$lib/identifier.svelte.js';
 import {Module} from '$lib/module.svelte.js';
 import {
-	github_file_url,
-	github_org_url,
+	url_github_file,
+	url_github_org,
 	github_owner_parse,
-	npm_package_url,
+	url_npm_package,
 	package_is_published,
-	package_logo_url,
+	url_package_logo,
 	repo_name_parse,
 	repo_url_parse,
 } from '$lib/package_helpers.js';
@@ -69,7 +69,7 @@ export class Pkg {
 	/**
 	 * Logo URL (falls back to favicon.png).
 	 */
-	logo_url = $derived(package_logo_url(this.homepage_url, this.package_json.logo));
+	logo_url = $derived(url_package_logo(this.homepage_url, this.package_json.logo));
 
 	/**
 	 * Logo alt text.
@@ -84,19 +84,19 @@ export class Pkg {
 	/**
 	 * npm package URL (if published).
 	 */
-	npm_url = $derived(this.published ? npm_package_url(this.package_json.name) : null);
+	npm_url = $derived(this.published ? url_npm_package(this.package_json.name) : null);
 
 	/**
 	 * Changelog URL (if published).
 	 */
 	changelog_url = $derived(
-		this.published && this.repo_url ? github_file_url(this.repo_url, 'CHANGELOG.md') : null,
+		this.published && this.repo_url ? url_github_file(this.repo_url, 'CHANGELOG.md') : null,
 	);
 
 	/**
 	 * Organization URL (e.g., 'https://github.com/ryanatkn').
 	 */
-	org_url = $derived(github_org_url(this.repo_url, this.repo_name));
+	org_url = $derived(url_github_org(this.repo_url, this.repo_name));
 
 	/**
 	 * All modules as rich Module instances (cached via $derived).

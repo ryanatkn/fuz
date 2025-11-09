@@ -28,7 +28,7 @@
 	<a
 		{...rest}
 		class="chip {class_prop}"
-		href={module.api_url}
+		href={module.url_api}
 		{@attach contextmenu_attachment(contextmenu_entries)}
 	>
 		<!-- eslint-enable svelte/no-navigation-without-resolve -->

@@ -546,7 +546,7 @@ export const src_json: Src_Json = {
 						},
 						{
 							name: 'icon',
-							type: 'string | Snippet<[icon: string]>',
+							type: 'string | Snippet',
 							optional: true,
 						},
 						{
@@ -777,25 +777,25 @@ export const src_json: Src_Json = {
 				{
 					name: 'Contextmenu_Params',
 					kind: 'type',
-					source_line: 12,
+					source_line: 13,
 					type_signature: 'Contextmenu_Params',
 				},
 				{
 					name: 'Contextmenu_Activate_Result',
 					kind: 'type',
-					source_line: 19,
+					source_line: 20,
 					type_signature: 'Contextmenu_Activate_Result',
 				},
 				{
 					name: 'Item_State',
 					kind: 'type',
-					source_line: 24,
+					source_line: 25,
 					type_signature: 'Item_State',
 				},
 				{
 					name: 'Entry_State',
 					kind: 'class',
-					source_line: 26,
+					source_line: 27,
 					members: [
 						{
 							name: 'is_menu',
@@ -845,7 +845,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Submenu_State',
 					kind: 'class',
-					source_line: 49,
+					source_line: 50,
 					members: [
 						{
 							name: 'is_menu',
@@ -879,7 +879,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Root_Menu_State',
 					kind: 'class',
-					source_line: 63,
+					source_line: 64,
 					members: [
 						{
 							name: 'is_menu',
@@ -906,13 +906,13 @@ export const src_json: Src_Json = {
 				{
 					name: 'Contextmenu_Run',
 					kind: 'type',
-					source_line: 71,
+					source_line: 72,
 					type_signature: 'Contextmenu_Run',
 				},
 				{
 					name: 'Contextmenu_State_Options',
 					kind: 'type',
-					source_line: 75,
+					source_line: 76,
 					type_signature: 'Contextmenu_State_Options',
 					properties: [
 						{
@@ -928,7 +928,7 @@ export const src_json: Src_Json = {
 					doc_comment:
 						'Creates a `contextmenu` store.\nSee usage with `Contextmenu_Root.svelte` and `Contextmenu.svelte`.',
 					see_also: ['https://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event'],
-					source_line: 85,
+					source_line: 86,
 					members: [
 						{
 							name: 'layout',
@@ -1080,7 +1080,7 @@ export const src_json: Src_Json = {
 					name: 'contextmenu_attachment',
 					kind: 'function',
 					doc_comment: 'Creates an attachment that sets up contextmenu behavior on an element.',
-					source_line: 350,
+					source_line: 351,
 					type_signature:
 						'<T extends Contextmenu_Params, U extends T | Array<T>>(params: U | null | undefined): Attachment<HTMLElement | SVGElement>',
 					return_type: 'Attachment<HTMLElement | SVGElement>',
@@ -1096,7 +1096,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Open_Contextmenu_Options',
 					kind: 'type',
-					source_line: 374,
+					source_line: 375,
 					type_signature: 'Open_Contextmenu_Options',
 					properties: [
 						{
@@ -1126,7 +1126,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Opens the contextmenu, if appropriate,\nquerying the menu items from the DOM starting at the event target.',
-					source_line: 391,
+					source_line: 392,
 					type_signature:
 						'(target: HTMLElement | SVGElement, x: number, y: number, contextmenu: Contextmenu_State, options?: Open_Contextmenu_Options | undefined): boolean',
 					return_type: 'boolean',
@@ -1169,21 +1169,21 @@ export const src_json: Src_Json = {
 				{
 					name: 'contextmenu_context',
 					kind: 'variable',
-					source_line: 477,
+					source_line: 479,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Contextmenu_State; maybe_get: () => Contextmenu_State | undefined; set: (value: Contextmenu_State) => Contextmenu_State; }',
 				},
 				{
 					name: 'contextmenu_submenu_context',
 					kind: 'variable',
-					source_line: 479,
+					source_line: 481,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Submenu_State; maybe_get: () => Submenu_State | undefined; set: (value: Submenu_State) => Submenu_State; }',
 				},
 				{
 					name: 'contextmenu_dimensions_context',
 					kind: 'variable',
-					source_line: 481,
+					source_line: 483,
 					type_signature:
 						'{ get: () => Dimensions; set: (value?: Dimensions | undefined) => Dimensions; }',
 				},
@@ -1192,7 +1192,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Registers a contextmenu root and warns if multiple non-scoped roots are detected.\nOnly active in development mode. Automatically handles cleanup on unmount.',
-					source_line: 492,
+					source_line: 494,
 					type_signature: '(get_scoped: () => boolean): void',
 					return_type: 'void',
 					parameters: [
@@ -1964,16 +1964,22 @@ export const src_json: Src_Json = {
 					type_signature: '"/docs"',
 				},
 				{
-					name: 'DOCS_API_PATH',
+					name: 'DOCS_PATH',
 					kind: 'variable',
 					source_line: 8,
 					type_signature:
 						'"/docs" | "/" | "/about" | "/debug" | "/debug/mdz" | "/docs/alert" | "/docs/api" | "/docs/breadcrumb" | "/docs/breadcrumb/a" | "/docs/breadcrumb/a/b" | "/docs/breadcrumb/a/b/c" | ... 89 more ... | `/${string}/help/`',
 				},
 				{
+					name: 'DOCS_API_PATH',
+					kind: 'variable',
+					source_line: 9,
+					type_signature: 'string',
+				},
+				{
 					name: 'get_next_docs_link_order',
 					kind: 'function',
-					source_line: 13,
+					source_line: 14,
 					type_signature: '(): number',
 					return_type: 'number',
 					parameters: [],
@@ -1981,7 +1987,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'reset_docs_link_order',
 					kind: 'function',
-					source_line: 16,
+					source_line: 17,
 					type_signature: '(): void',
 					return_type: 'void',
 					parameters: [],
@@ -1989,7 +1995,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'to_docs_path_info',
 					kind: 'function',
-					source_line: 20,
+					source_line: 21,
 					type_signature:
 						'(slug: string, pathname: string, root_path?: string): { path: string; path_is_selected: boolean; path_segment: string | undefined; }',
 					return_type:
@@ -2016,20 +2022,20 @@ export const src_json: Src_Json = {
 				{
 					name: 'docs_links_context',
 					kind: 'variable',
-					source_line: 31,
+					source_line: 32,
 					type_signature:
 						'{ get: () => Docs_Links; set: (value?: Docs_Links | undefined) => Docs_Links; }',
 				},
 				{
 					name: 'Docs_Link_Tag',
 					kind: 'type',
-					source_line: 33,
+					source_line: 34,
 					type_signature: 'Docs_Link_Tag',
 				},
 				{
 					name: 'Docs_Link_Info',
 					kind: 'type',
-					source_line: 35,
+					source_line: 36,
 					type_signature: 'Docs_Link_Info',
 					properties: [
 						{
@@ -2062,7 +2068,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Docs_Links',
 					kind: 'class',
-					source_line: 43,
+					source_line: 44,
 					members: [
 						{
 							name: 'root_path',
@@ -2520,8 +2526,8 @@ export const src_json: Src_Json = {
 				{
 					name: 'create_identifier_contextmenu',
 					kind: 'function',
-					doc_comment: 'Create contextmenu entries for an identifier',
-					source_line: 9,
+					doc_comment: 'Create contextmenu entries for an identifier.',
+					source_line: 7,
 					type_signature: '(identifier: Identifier): Contextmenu_Params[]',
 					return_type: 'Contextmenu_Params[]',
 					parameters: [
@@ -2611,13 +2617,13 @@ export const src_json: Src_Json = {
 							doc_comment: 'Declaration kind (type, function, class, etc.).',
 						},
 						{
-							name: 'source_url',
+							name: 'url_github',
 							kind: 'variable',
 							doc_comment:
 								'GitHub source URL with line number.\nExample: "https://github.com/ryanatkn/fuz/blob/main/src/lib/Alert.ts#L42"',
 						},
 						{
-							name: 'api_url',
+							name: 'url_api',
 							kind: 'variable',
 							doc_comment:
 								'API documentation URL (hash-based navigation).\nExample: "/docs/api#Alert"',
@@ -2629,7 +2635,7 @@ export const src_json: Src_Json = {
 								'Generated TypeScript import statement.\nExample: "import {Alert} from \'@ryanatkn/fuz/Alert.js\';"',
 						},
 						{
-							name: 'docs_link',
+							name: 'url_api_full',
 							kind: 'variable',
 							doc_comment:
 								'Public documentation link (if homepage_url is available).\nExample: "https://fuz.ryanatkn.com/docs/api#Alert"',
@@ -3592,6 +3598,26 @@ export const src_json: Src_Json = {
 				'mdz - minimal Markdown+TSDoc parser for Fuz API documentation.\n\nParses a specialized markdown dialect with:\n- inline formatting: `code`, **bold**, _italic_, ~strikethrough~\n- TSDoc tags: {@link}, {@see}\n- auto-linking via backticks to identifiers/modules\n- paragraph breaks (double newline)\n- block elements: headings, horizontal rules, code blocks\n\nKey constraint: preserves ALL whitespace exactly as authored,\nand is rendered with white-space pre or pre-wrap.\n\n## Design Philosophy\n\n- **False negatives over false positives**: Strict syntax prevents accidentally\n  interpreting plain text as formatting. When in doubt, treat as plain text.\n- **One way to do things**: Single unambiguous syntax per feature. No alternatives.\n- **Explicit over implicit**: Clear delimiters and column-0 requirements avoid ambiguity.\n- **Simple over complete**: Prefer simple parsing rules over complex edge case handling.',
 		},
 		{
+			path: 'module_contextmenu.ts',
+			identifiers: [
+				{
+					name: 'create_module_contextmenu',
+					kind: 'function',
+					doc_comment: 'Create contextmenu entries for a module.',
+					source_line: 7,
+					type_signature: '(module: Module): Contextmenu_Params[]',
+					return_type: 'Contextmenu_Params[]',
+					parameters: [
+						{
+							name: 'module',
+							type: 'Module',
+							optional: false,
+						},
+					],
+				},
+			],
+		},
+		{
 			path: 'module_helpers.ts',
 			identifiers: [
 				{
@@ -3760,7 +3786,7 @@ export const src_json: Src_Json = {
 					kind: 'class',
 					doc_comment:
 						'Rich runtime representation of Module_Json with computed properties.\n\nCombines:\n\n- minimal Module_Json data\n- full Pkg reference (for generating URLs, import statements, etc.)\n- lazy-computed Identifier instances\n- query methods for ergonomic usage',
-					source_line: 17,
+					source_line: 16,
 					members: [
 						{
 							name: 'pkg',
@@ -3781,12 +3807,6 @@ export const src_json: Src_Json = {
 								"Canonical module path (no prefix) - matches storage, URLs, display.\nExamples: 'Alert.ts', 'helpers/foo.ts'",
 						},
 						{
-							name: 'path_docs',
-							kind: 'variable',
-							doc_comment:
-								"Full docs URL pathname for this module page.\nExamples: '/docs/api/Alert.ts', '/docs/api/helpers/foo.ts'",
-						},
-						{
 							name: 'path_import',
 							kind: 'variable',
 							doc_comment:
@@ -3804,9 +3824,16 @@ export const src_json: Src_Json = {
 								'Lazy-computed array of Identifier instances.\nFilters out default exports and creates rich Identifier objects.',
 						},
 						{
-							name: 'module_url',
+							name: 'url_api',
 							kind: 'variable',
-							doc_comment: 'GitHub source URL for the module file.',
+							doc_comment:
+								'API documentation URL for this module page.\nExample: "/docs/api/Alert.ts"',
+						},
+						{
+							name: 'url_github',
+							kind: 'variable',
+							doc_comment:
+								'GitHub source URL for the module file.\nExample: "https://github.com/ryanatkn/fuz/blob/main/src/lib/Alert.ts"',
 						},
 						{
 							name: 'has_identifiers',
@@ -4077,10 +4104,10 @@ export const src_json: Src_Json = {
 			path: 'package_helpers.ts',
 			identifiers: [
 				{
-					name: 'api_doc_url',
+					name: 'url_api_identifier',
 					kind: 'function',
 					doc_comment: 'Build project-relative API documentation URL with hash anchor.',
-					source_line: 9,
+					source_line: 10,
 					type_signature: '(identifier_name: string): string',
 					return_type: 'string',
 					parameters: [
@@ -4092,10 +4119,10 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'api_doc_url_full',
+					name: 'url_api_identifier_full',
 					kind: 'function',
 					doc_comment: 'Build full API documentation URL with domain and hash anchor.',
-					source_line: 15,
+					source_line: 16,
 					type_signature: '(homepage: string, identifier_name: string): string',
 					return_type: 'string',
 					parameters: [
@@ -4112,10 +4139,10 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'module_doc_url',
+					name: 'url_api_module',
 					kind: 'function',
 					doc_comment: 'Build project-relative module documentation URL.',
-					source_line: 21,
+					source_line: 22,
 					type_signature: '(module_path: string): string',
 					return_type: 'string',
 					parameters: [
@@ -4127,10 +4154,10 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'github_file_url',
+					name: 'url_github_file',
 					kind: 'function',
 					doc_comment: 'Build GitHub file URL for a repository.',
-					source_line: 26,
+					source_line: 27,
 					type_signature:
 						'(repo_url: string, file_path: string, line?: number | undefined): string',
 					return_type: 'string',
@@ -4153,11 +4180,11 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'github_org_url',
+					name: 'url_github_org',
 					kind: 'function',
 					doc_comment:
 						"Build GitHub organization URL from repo URL and repo name.\nExample: ('https://github.com/ryanatkn/fuz', 'fuz') -> 'https://github.com/ryanatkn'",
-					source_line: 36,
+					source_line: 37,
 					type_signature: '(repo_url: string, repo_name: string): string | null',
 					return_type: 'string | null',
 					parameters: [
@@ -4178,7 +4205,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						"Parse GitHub owner/org name from repository URL.\nExample: 'https://github.com/ryanatkn/fuz' -> 'ryanatkn'",
-					source_line: 44,
+					source_line: 45,
 					type_signature: '(repo_url: string): string | null',
 					return_type: 'string | null',
 					parameters: [
@@ -4190,10 +4217,10 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'npm_package_url',
+					name: 'url_npm_package',
 					kind: 'function',
 					doc_comment: 'Build npm package URL.',
-					source_line: 53,
+					source_line: 55,
 					type_signature: '(package_name: string): string',
 					return_type: 'string',
 					parameters: [
@@ -4209,7 +4236,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Check if a package is published to npm.\nPublished packages are not private, have exports, and have a version beyond 0.0.1.',
-					source_line: 60,
+					source_line: 62,
 					type_signature:
 						'(package_json: { [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }): boolean',
 					return_type: 'boolean',
@@ -4222,11 +4249,11 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'package_logo_url',
+					name: 'url_package_logo',
 					kind: 'function',
 					doc_comment:
 						'Build package logo URL with favicon.png fallback.\nReturns null if no homepage URL is provided.',
-					source_line: 68,
+					source_line: 70,
 					type_signature:
 						'(homepage_url: string | null, logo_path?: string | undefined): string | null',
 					return_type: 'string | null',
@@ -4248,7 +4275,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						"Extract repository name without scope from package name.\nExamples: '@org/pkg' -> 'pkg', 'pkg' -> 'pkg'",
-					source_line: 81,
+					source_line: 83,
 					type_signature: '(name: string): string',
 					return_type: 'string',
 					parameters: [
@@ -4264,7 +4291,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						"Parse repository URL from package.json format.\nStrips 'git+', '.git', and trailing slashes.",
-					source_line: 96,
+					source_line: 98,
 					type_signature:
 						'(repository: string | { [x: string]: unknown; type: string; url: string; directory?: string | undefined; } | undefined): string | null',
 					return_type: 'string | null',
@@ -4277,11 +4304,11 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'well_known_url',
+					name: 'url_well_known',
 					kind: 'function',
 					doc_comment:
 						"Build .well-known URL for package metadata files.\nExample: ('https://fuz.dev/', 'src.json') -> 'https://fuz.dev/.well-known/src.json'",
-					source_line: 107,
+					source_line: 109,
 					type_signature: '(homepage_url: string, filename: string): string',
 					return_type: 'string',
 					parameters: [
@@ -4294,6 +4321,28 @@ export const src_json: Src_Json = {
 							name: 'filename',
 							type: 'string',
 							optional: false,
+						},
+					],
+				},
+				{
+					name: 'url_to_root_relative',
+					kind: 'function',
+					doc_comment:
+						"Convert a full URL to root-relative format by removing the origin.\nExample: ('https://example.com/path/to/page', 'https://example.com') -> '/path/to/page'",
+					source_line: 117,
+					type_signature: '(url: string, origin?: string): string',
+					return_type: 'string',
+					parameters: [
+						{
+							name: 'url',
+							type: 'string',
+							optional: false,
+						},
+						{
+							name: 'origin',
+							type: 'string',
+							optional: false,
+							default_value: 'page.url.origin',
 						},
 					],
 				},
@@ -4617,7 +4666,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Convenience factory function for creating Pkg instances\n(kept for backward compatibility during migration)',
-					source_line: 199,
+					source_line: 200,
 					type_signature:
 						'(package_json: { [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }, src_json: Src_Json): Pkg',
 					return_type: 'Pkg',
@@ -4637,7 +4686,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'pkg_context',
 					kind: 'variable',
-					source_line: 203,
+					source_line: 204,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Pkg; maybe_get: () => Pkg | undefined; set: (value: Pkg) => Pkg; }',
 				},

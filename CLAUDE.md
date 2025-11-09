@@ -53,7 +53,7 @@ than file location:
 
 ```ts
 // domain-first, action-last (reads like method calls)
-github_file_url(); // github_file.url()
+url_github_file(); // url.github_file()
 repo_url_parse(); // repo_url.parse()
 package_is_published(); // package.is_published()
 ```
@@ -61,7 +61,7 @@ package_is_published(); // package.is_published()
 Why: JS's dynamic nature and flat module structure benefit from explicit
 prefixes. This pattern:
 
-- groups related functions in autocomplete (`github_*`, `repo_*`, `package_*`)
+- groups related functions in autocomplete (`url_*`, `repo_*`, `package_*`)
 - prevents name collisions without import aliasing
 - works across modules without hierarchical nesting
 - maps naturally to `/docs/api` namespace for documentation
@@ -70,7 +70,8 @@ Common patterns:
 
 - `domain_action` - object-first, action-last (primary pattern)
 - `domain_is_adjective` - boolean checks (`package_is_published`)
-- action verbs: `parse`, `url`, `create`, `get`, `to`
+- action verbs: `parse`, `create`, `get`, `to`
+- action prefixes: `url_*` for URL builders
 
 This naming is consistent across Belt, Moss, and Gro for a unified developer
 experience.
@@ -106,7 +107,8 @@ Supporting helpers:
 - `tsdoc_helpers.ts` - JSDoc/TSDoc parsing
 - `svelte_helpers.ts` - Svelte component analysis (via svelte2tsx)
 - `module_helpers.ts` - module path utilities
-- `package_helpers.ts` - URL builders (`github_file_url`, `api_doc_url`, etc.)
+- `package_helpers.ts` - URL builders (`url_github_file`, `url_api_identifier`,
+  `url_api_module`, etc.)
 
 Documentation components:
 

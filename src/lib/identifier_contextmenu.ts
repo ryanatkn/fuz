@@ -1,6 +1,8 @@
 import type {Identifier} from '$lib/identifier.svelte.js';
 import type {Contextmenu_Params} from '$lib/contextmenu_state.svelte.js';
 
+// TODO @many expand contextmenus for docs
+
 /**
  * Create contextmenu entries for an identifier.
  */
@@ -10,11 +12,11 @@ export const create_identifier_contextmenu = (
 	const entries: Array<Contextmenu_Params> = [];
 
 	// View source on GitHub
-	if (identifier.source_url) {
+	if (identifier.url_github) {
 		entries.push({
 			snippet: 'link',
 			props: {
-				href: identifier.source_url,
+				href: identifier.url_github,
 			},
 		});
 	}

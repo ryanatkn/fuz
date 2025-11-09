@@ -1,8 +1,7 @@
 import {Identifier} from '$lib/identifier.svelte.js';
 import type {Pkg} from '$lib/pkg.svelte.js';
 import type {Module_Json} from '$lib/src_json.js';
-import {github_file_url, module_doc_url} from '$lib/package_helpers.js';
-import {DOCS_API_PATH} from '$lib/docs_helpers.svelte.js';
+import {url_github_file, url_api_module} from '$lib/package_helpers.js';
 
 /**
  * Rich runtime representation of Module_Json with computed properties.
@@ -23,12 +22,6 @@ export class Module {
 	 * Examples: 'Alert.ts', 'helpers/foo.ts'
 	 */
 	path = $derived(this.module_json.path);
-
-	/**
-	 * Full docs URL pathname for this module page.
-	 * Examples: '/docs/api/Alert.ts', '/docs/api/helpers/foo.ts'
-	 */
-	path_docs = $derived(`${DOCS_API_PATH}/${this.path}`);
 
 	/**
 	 * Import-style path with ./ prefix for import statements.
@@ -54,17 +47,17 @@ export class Module {
 	);
 
 	/**
-	 * API documentation URL (hash-based navigation).
-	 * Example: "/docs/api#Alert"
+	 * API documentation URL for this module page.
+	 * Example: "/docs/api/Alert.ts"
 	 */
-	api_url = $derived(module_doc_url(this.path));
+	url_api = $derived(url_api_module(this.path));
 
 	/**
 	 * GitHub source URL for the module file.
 	 * Example: "https://github.com/ryanatkn/fuz/blob/main/src/lib/Alert.ts"
 	 */
-	module_url = $derived(
-		this.pkg.repo_url ? github_file_url(this.pkg.repo_url, `src/lib/${this.path}`) : undefined,
+	url_github = $derived(
+		this.pkg.repo_url ? url_github_file(this.pkg.repo_url, `src/lib/${this.path}`) : undefined,
 	);
 
 	/**
