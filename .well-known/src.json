@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.147.0",
+  "version": "0.148.0",
   "modules": {
     "./alert.js": {
       "path": "alert.ts",
@@ -126,7 +126,7 @@
           "kind": "class"
         },
         {
-          "name": "contextmenu_action",
+          "name": "contextmenu_attachment",
           "kind": "function"
         },
         {
@@ -319,7 +319,15 @@
       "path": "docs_helpers.svelte.ts",
       "declarations": [
         {
-          "name": "DEFAULT_LIBRARY_PATH",
+          "name": "DOCS_PATH_DEFAULT",
+          "kind": "variable"
+        },
+        {
+          "name": "DOCS_PATH",
+          "kind": "variable"
+        },
+        {
+          "name": "DOCS_API_PATH",
           "kind": "variable"
         },
         {
@@ -343,7 +351,7 @@
           "kind": "type"
         },
         {
-          "name": "Docs_Link",
+          "name": "Docs_Link_Info",
           "kind": "type"
         },
         {
@@ -361,8 +369,26 @@
         }
       ]
     },
-    "./intersect.js": {
-      "path": "intersect.ts",
+    "./identifier_contextmenu.js": {
+      "path": "identifier_contextmenu.ts",
+      "declarations": [
+        {
+          "name": "create_identifier_contextmenu",
+          "kind": "function"
+        }
+      ]
+    },
+    "./identifier.svelte.js": {
+      "path": "identifier.svelte.ts",
+      "declarations": [
+        {
+          "name": "Identifier",
+          "kind": "class"
+        }
+      ]
+    },
+    "./intersect.svelte.js": {
+      "path": "intersect.svelte.ts",
       "declarations": [
         {
           "name": "Intersect_Params",
@@ -471,9 +497,266 @@
         }
       ]
     },
-    "./pkg.js": {
-      "path": "pkg.ts",
+    "./mdz_components.js": {
+      "path": "mdz_components.ts",
       "declarations": [
+        {
+          "name": "Mdz_Components",
+          "kind": "type"
+        },
+        {
+          "name": "mdz_components_context",
+          "kind": "variable"
+        }
+      ]
+    },
+    "./mdz.js": {
+      "path": "mdz.ts",
+      "declarations": [
+        {
+          "name": "mdz_parse",
+          "kind": "function"
+        },
+        {
+          "name": "Mdz_Node",
+          "kind": "type"
+        },
+        {
+          "name": "Mdz_Base_Node",
+          "kind": "type"
+        },
+        {
+          "name": "Mdz_Text_Node",
+          "kind": "type"
+        },
+        {
+          "name": "Mdz_Code_Node",
+          "kind": "type"
+        },
+        {
+          "name": "Mdz_Codeblock_Node",
+          "kind": "type"
+        },
+        {
+          "name": "Mdz_Bold_Node",
+          "kind": "type"
+        },
+        {
+          "name": "Mdz_Italic_Node",
+          "kind": "type"
+        },
+        {
+          "name": "Mdz_Strikethrough_Node",
+          "kind": "type"
+        },
+        {
+          "name": "Mdz_Link_Node",
+          "kind": "type"
+        },
+        {
+          "name": "Mdz_Paragraph_Node",
+          "kind": "type"
+        },
+        {
+          "name": "Mdz_Hr_Node",
+          "kind": "type"
+        },
+        {
+          "name": "Mdz_Heading_Node",
+          "kind": "type"
+        },
+        {
+          "name": "Mdz_Component_Node",
+          "kind": "type"
+        },
+        {
+          "name": "Mdz_Parser",
+          "kind": "class"
+        }
+      ]
+    },
+    "./module_contextmenu.js": {
+      "path": "module_contextmenu.ts",
+      "declarations": [
+        {
+          "name": "create_module_contextmenu",
+          "kind": "function"
+        }
+      ]
+    },
+    "./module_helpers.js": {
+      "path": "module_helpers.ts",
+      "declarations": [
+        {
+          "name": "module_extract_path",
+          "kind": "function"
+        },
+        {
+          "name": "module_get_component_name",
+          "kind": "function"
+        },
+        {
+          "name": "module_get_key",
+          "kind": "function"
+        },
+        {
+          "name": "module_is_typescript",
+          "kind": "function"
+        },
+        {
+          "name": "module_is_svelte",
+          "kind": "function"
+        },
+        {
+          "name": "module_is_css",
+          "kind": "function"
+        },
+        {
+          "name": "module_is_json",
+          "kind": "function"
+        },
+        {
+          "name": "module_is_test",
+          "kind": "function"
+        },
+        {
+          "name": "module_is_source",
+          "kind": "function"
+        }
+      ]
+    },
+    "./module.svelte.js": {
+      "path": "module.svelte.ts",
+      "declarations": [
+        {
+          "name": "Module",
+          "kind": "class"
+        }
+      ]
+    },
+    "./package_gen_helpers.js": {
+      "path": "package_gen_helpers.ts",
+      "declarations": [
+        {
+          "name": "package_gen_validate_no_duplicates",
+          "kind": "function"
+        },
+        {
+          "name": "package_gen_enhance_identifier",
+          "kind": "function"
+        },
+        {
+          "name": "package_gen_sort_modules",
+          "kind": "function"
+        },
+        {
+          "name": "package_gen_generate_ts",
+          "kind": "function"
+        },
+        {
+          "name": "package_gen_collect_source_files",
+          "kind": "function"
+        },
+        {
+          "name": "package_gen_analyze_svelte_file",
+          "kind": "function"
+        },
+        {
+          "name": "package_gen_analyze_typescript_file",
+          "kind": "function"
+        }
+      ]
+    },
+    "./package_helpers.js": {
+      "path": "package_helpers.ts",
+      "declarations": [
+        {
+          "name": "url_api_identifier",
+          "kind": "function"
+        },
+        {
+          "name": "url_api_identifier_full",
+          "kind": "function"
+        },
+        {
+          "name": "url_api_module",
+          "kind": "function"
+        },
+        {
+          "name": "url_github_file",
+          "kind": "function"
+        },
+        {
+          "name": "url_github_org",
+          "kind": "function"
+        },
+        {
+          "name": "github_owner_parse",
+          "kind": "function"
+        },
+        {
+          "name": "url_npm_package",
+          "kind": "function"
+        },
+        {
+          "name": "package_is_published",
+          "kind": "function"
+        },
+        {
+          "name": "url_package_logo",
+          "kind": "function"
+        },
+        {
+          "name": "repo_name_parse",
+          "kind": "function"
+        },
+        {
+          "name": "repo_url_parse",
+          "kind": "function"
+        },
+        {
+          "name": "url_well_known",
+          "kind": "function"
+        },
+        {
+          "name": "url_to_root_relative",
+          "kind": "function"
+        }
+      ]
+    },
+    "./package.gen.js": {
+      "path": "package.gen.ts",
+      "declarations": [
+        {
+          "name": "gen",
+          "kind": "function"
+        }
+      ]
+    },
+    "./package.js": {
+      "path": "package.ts",
+      "declarations": [
+        {
+          "name": "package_json",
+          "kind": "variable"
+        },
+        {
+          "name": "src_json",
+          "kind": "variable"
+        }
+      ]
+    },
+    "./pkg.svelte.js": {
+      "path": "pkg.svelte.ts",
+      "declarations": [
+        {
+          "name": "Pkg",
+          "kind": "class"
+        },
+        {
+          "name": "parse_pkg",
+          "kind": "function"
+        },
         {
           "name": "pkg_context",
           "kind": "variable"
@@ -485,6 +768,47 @@
       "declarations": [
         {
           "name": "effect_with_count",
+          "kind": "function"
+        }
+      ]
+    },
+    "./src_json.js": {
+      "path": "src_json.ts",
+      "declarations": [
+        {
+          "name": "Src_Json",
+          "kind": "type"
+        },
+        {
+          "name": "Module_Json",
+          "kind": "type"
+        },
+        {
+          "name": "Identifier_Kind",
+          "kind": "type"
+        },
+        {
+          "name": "Identifier_Json",
+          "kind": "type"
+        },
+        {
+          "name": "Generic_Param_Info",
+          "kind": "type"
+        },
+        {
+          "name": "Parameter_Info",
+          "kind": "type"
+        },
+        {
+          "name": "Component_Prop_Info",
+          "kind": "type"
+        },
+        {
+          "name": "get_identifier_display_name",
+          "kind": "function"
+        },
+        {
+          "name": "generate_import_statement",
           "kind": "function"
         }
       ]
@@ -502,41 +826,14 @@
         }
       ]
     },
-    "./test_helpers.js": {
-      "path": "test_helpers.ts",
+    "./svelte_helpers.js": {
+      "path": "svelte_helpers.ts",
       "declarations": [
         {
-          "name": "mount_component",
-          "kind": "function"
-        },
-        {
-          "name": "unmount_component",
-          "kind": "function"
-        },
-        {
-          "name": "create_contextmenu_event",
-          "kind": "function"
-        },
-        {
-          "name": "create_keyboard_event",
-          "kind": "function"
-        },
-        {
-          "name": "create_mouse_event",
-          "kind": "function"
-        },
-        {
-          "name": "set_event_target",
-          "kind": "function"
-        },
-        {
-          "name": "create_touch_event",
+          "name": "svelte_analyze_component",
           "kind": "function"
         }
       ]
-    },
-    "./test_setup.js": {
-      "path": "test_setup.ts"
     },
     "./themer.svelte.js": {
       "path": "themer.svelte.ts",
@@ -608,6 +905,56 @@
         }
       ]
     },
+    "./ts_helpers.js": {
+      "path": "ts_helpers.ts",
+      "declarations": [
+        {
+          "name": "ts_infer_declaration_kind",
+          "kind": "function"
+        },
+        {
+          "name": "ts_extract_function_info",
+          "kind": "function"
+        },
+        {
+          "name": "ts_extract_type_info",
+          "kind": "function"
+        },
+        {
+          "name": "ts_extract_class_info",
+          "kind": "function"
+        },
+        {
+          "name": "ts_extract_variable_info",
+          "kind": "function"
+        },
+        {
+          "name": "ts_extract_module_comment",
+          "kind": "function"
+        },
+        {
+          "name": "ts_create_program",
+          "kind": "function"
+        }
+      ]
+    },
+    "./tsdoc_helpers.js": {
+      "path": "tsdoc_helpers.ts",
+      "declarations": [
+        {
+          "name": "Tsdoc_Parsed_Comment",
+          "kind": "type"
+        },
+        {
+          "name": "tsdoc_parse",
+          "kind": "function"
+        },
+        {
+          "name": "tsdoc_apply_to_declaration",
+          "kind": "function"
+        }
+      ]
+    },
     "./Alert.svelte": {
       "path": "Alert.svelte",
       "declarations": [
@@ -637,24 +984,6 @@
     },
     "./Color_Scheme_Input.svelte": {
       "path": "Color_Scheme_Input.svelte",
-      "declarations": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    "./Community_Links_Panel.svelte": {
-      "path": "Community_Links_Panel.svelte",
-      "declarations": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    "./Community_Links.svelte": {
-      "path": "Community_Links.svelte",
       "declarations": [
         {
           "name": "default",
@@ -788,6 +1117,24 @@
         }
       ]
     },
+    "./Docs_Link.svelte": {
+      "path": "Docs_Link.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Docs_List.svelte": {
+      "path": "Docs_List.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
     "./Docs_Menu_Header.svelte": {
       "path": "Docs_Menu_Header.svelte",
       "declarations": [
@@ -799,6 +1146,15 @@
     },
     "./Docs_Menu.svelte": {
       "path": "Docs_Menu.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Docs_Modules_List.svelte": {
+      "path": "Docs_Modules_List.svelte",
       "declarations": [
         {
           "name": "default",
@@ -851,6 +1207,33 @@
         }
       ]
     },
+    "./Ecosystem_Links_Panel.svelte": {
+      "path": "Ecosystem_Links_Panel.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Ecosystem_Links.svelte": {
+      "path": "Ecosystem_Links.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Github_Link.svelte": {
+      "path": "Github_Link.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
     "./Glyph.svelte": {
       "path": "Glyph.svelte",
       "declarations": [
@@ -887,8 +1270,17 @@
         }
       ]
     },
-    "./Identifier.svelte": {
-      "path": "Identifier.svelte",
+    "./Identifier_Detail.svelte": {
+      "path": "Identifier_Detail.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Identifier_Link.svelte": {
+      "path": "Identifier_Link.svelte",
       "declarations": [
         {
           "name": "default",
@@ -907,6 +1299,33 @@
     },
     "./Mdn_Link.svelte": {
       "path": "Mdn_Link.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Mdz_Node_View.svelte": {
+      "path": "Mdz_Node_View.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Mdz.svelte": {
+      "path": "Mdz.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Module_Link.svelte": {
+      "path": "Module_Link.svelte",
       "declarations": [
         {
           "name": "default",
@@ -1060,6 +1479,15 @@
     },
     "./Tome_Section.svelte": {
       "path": "Tome_Section.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Type_Link.svelte": {
+      "path": "Type_Link.svelte",
       "declarations": [
         {
           "name": "default",

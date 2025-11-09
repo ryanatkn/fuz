@@ -1,0 +1,28 @@
+import"../chunks/DsnmJJEf.js";import{p as W,c as X,f as m,s as e,a as l,d as f,t as Z,b as p,r as g,n as b,aA as ee}from"../chunks/BElm8bt9.js";import{s as te}from"../chunks/C7GdCpii.js";import{b as ne}from"../chunks/VROXyBOs.js";import{C as d}from"../chunks/JTQcVK_f.js";import{r as oe}from"../chunks/fJarm6ln.js";import{g as ae}from"../chunks/BHlF-VH_.js";import{T as re}from"../chunks/CwfrO8Bg.js";import{T as v,a as h}from"../chunks/BEf1vmPq.js";import{M as _}from"../chunks/C7UBy7a4.js";import{I as Y}from"../chunks/Bap5m-yO.js";var se=m("<!> <p>Supports <strong>bold</strong>, <em>italic</em>, and strikethrough:</p> <!> <!>",1),ie=m(`<!> <p>mdz preserves and renders all whitespace exactly as written, minimizing surprise for
+			nontechnical users:</p> <!> <div class="mb_lg"><!></div> <button type="button">click to inspect whitespace</button>`,1),de=m('<!> <p>Single newlines create line breaks:</p> <!> <div class="mb_lg"><!></div> <p>Double newlines create paragraph breaks:</p> <!> <div class="mb_lg"><!></div> <p>Triple newlines create paragraphs with a blank line between:</p> <!> <!>',1),ce=m(`<!> <p>Use exactly three hyphens (<code>---</code>) at the start of a line to create a horizontal
+			rule. Must be separated from other content by blank lines (paragraph breaks), except at
+			document start/end:</p> <!> <!>`,1),le=m("<!> <p>Backtick code automatically links to identifiers and modules:</p> <!> <!> <p>Non-identifiers become plain code elements:</p> <!> <!>",1),pe=m("<!> <p>Use <code></code> and <code></code> tags:</p> <!> <!>",1),_e=m("<!> <p>For more control, use <!> directly with <!>:</p> <!> <!> <p>For example you may want <code>white_space_pre</code> to avoid wrapping in some circumstances.</p>",1),me=m(`<!> <p>mdz has simpler syntax than CommonMark/GFM:</p> <ul><li>bold: <code>**text**</code> only</li> <li>italic: <code>_text_</code> only</li></ul> <p>In CommonMark, <code>*text*</code> is italic. In mdz, single <code>*</code> has no special meaning
+			and renders as literal text. This choice creates a clear visual distinction between bold and italics.</p>`,1),ve=m(`<section><p>mdz is a small markdown dialect that supports Svelte components and a subset of TSDoc. The
+			goal is to be friendly to nontechnical users and integrate with other Fuz systems.</p> <aside>⚠️ This is an early proof of concept with missing features. Lists and blockquotes are next.</aside></section> <section><!></section> <!> <!> <!> <!> <!> <!> <!> <!> <p>See also the mdz <a>fixtures debug page</a>.</p>`,1);function Se(j,q){W(q,!0);const G=ae("mdz"),k="**Bold** and _italic_ and ~strikethrough~ text.",z=` see 
+  how       
+   whitespace    
+is preserved `,y="To parse markdown directly, use `mdz_parse` from module `mdz.ts`.",M="This `identifier` does not exist.",T="See {@link Alert} and {@link Card} components.",S=`First line.
+Second line.
+Third line.`,C=`First paragraph.
+
+Second paragraph.`,P=`First paragraph.
+
+
+Second paragraph separated by an extra newline.`,I=`Section one.
+
+---
+
+Section two.`;let x;re(j,{get tome(){return G},children:(J,ue)=>{var A=ve(),w=e(l(A),2),K=f(w);d(K,{content:"import Mdz from '@ryanatkn/fuz/Mdz.svelte';",lang:"ts"}),g(w);var N=e(w,2);v(N,{children:(r,u)=>{var t=se(),n=l(t);h(n,{text:"Basic formatting"});var o=e(n,4);d(o,{content:`<Mdz content="${k}" />`});var a=e(o,2);_(a,{content:k}),p(r,t)},$$slots:{default:!0}});var F=e(N,2);v(F,{children:(r,u)=>{var t=ie(),n=l(t);h(n,{text:"Preserves whitespace"});var o=e(n,4);d(o,{content:`<Mdz content="${z}" />`});var a=e(o,2),c=f(a);_(c,{content:z}),g(a),ne(a,i=>x=i,()=>x);var s=e(a,2);s.__click=()=>{const i=window.getSelection(),$=document.createRange();$.selectNodeContents(x),i?.removeAllRanges(),i?.addRange($)},p(r,t)},$$slots:{default:!0}});var R=e(F,2);v(R,{children:(r,u)=>{var t=de(),n=l(t);h(n,{text:"Line breaks and paragraphs"});var o=e(n,4);d(o,{content:S});var a=e(o,2),c=f(a);_(c,{content:S}),g(a);var s=e(a,4);d(s,{content:C});var i=e(s,2),$=f(i);_($,{content:C}),g(i);var U=e(i,4);d(U,{content:P});var Q=e(U,2);_(Q,{content:P}),p(r,t)},$$slots:{default:!0}});var B=e(R,2);v(B,{children:(r,u)=>{var t=ce(),n=l(t);h(n,{text:"Horizontal rules"});var o=e(n,4);d(o,{content:I});var a=e(o,2);_(a,{content:I}),p(r,t)},$$slots:{default:!0}});var L=e(B,2);v(L,{children:(r,u)=>{var t=le(),n=l(t);h(n,{text:"Inline code auto-linking"});var o=e(n,4);d(o,{content:y});var a=e(o,2);_(a,{content:y});var c=e(a,4);d(c,{content:M});var s=e(c,2);_(s,{content:M}),p(r,t)},$$slots:{default:!0}});var E=e(L,2);v(E,{children:(r,u)=>{var t=pe(),n=l(t);h(n,{text:"TSDoc links"});var o=e(n,2),a=e(f(o));a.textContent="{@link}";var c=e(a,2);c.textContent="{@see}",b(),g(o);var s=e(o,2);d(s,{content:T});var i=e(s,2);_(i,{content:T}),p(r,t)},$$slots:{default:!0}});var V=e(E,2);v(V,{children:(r,u)=>{var t=_e(),n=l(t);h(n,{text:"Advanced usage"});var o=e(n,2),a=e(f(o));Y(a,{name:"mdz_parse"});var c=e(a,2);Y(c,{name:"Mdz_Node_View"}),b(),g(o);var s=e(o,2);d(s,{content:`import {mdz_parse} from '@ryanatkn/fuz/mdz.js';
+import Mdz_Node_View from '@ryanatkn/fuz/Mdz_Node_View.svelte';
+
+const nodes = mdz_parse(content);`,lang:"ts"});var i=e(s,2);d(i,{content:`<!-- manipulate nodes or customize the wrapper as desired -->
+<div class="white_space_pre_wrap">
+	{#each nodes as node (node)}
+		<Mdz_Node_View {node} />
+	{/each}
+</div>`}),b(2),p(r,t)},$$slots:{default:!0}});var D=e(V,2);v(D,{children:(r,u)=>{var t=me(),n=l(t);h(n,{text:"Compatibility with other markdowns"}),b(6),p(r,t)},$$slots:{default:!0}});var H=e(D,2),O=e(f(H));b(),g(H),Z(r=>te(O,"href",r),[()=>oe("/debug/mdz")]),p(J,A)},$$slots:{default:!0}}),X()}ee(["click"]);export{Se as component};

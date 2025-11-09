@@ -1,0 +1,1 @@
+import{c as s,r,a as n}from"./fJarm6ln.js";import{s as m}from"./QeaNnfvq.js";import{o as c,a as _,s as o,b as g}from"./9QbeSS3E.js";c({name:o(),category:o(),component:g(),related:_(o())});const y=(t,e=n)=>r(e+"/"+m(t.name)),i=s(),l=t=>{const a=i.get().get(t);if(!a)throw Error(`unable to find tome "${t}"`);return a},x=s();export{x as a,y as b,l as g,i as t};
