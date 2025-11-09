@@ -1,5 +1,22 @@
 # @ryanatkn/fuz
 
+## 0.148.0
+
+### Minor Changes
+
+- break Contextmenu_Root compat with Safari, add Contextmenu_Root_For_Safari_Compatibility.svelte ([#86](https://github.com/ryanatkn/fuz/pull/86))
+- validate csp `trusted_sources` directives ([#88](https://github.com/ryanatkn/fuz/pull/88))
+- change `run` for `Entry_State` to be a getter ([#86](https://github.com/ryanatkn/fuz/pull/86))
+- rename Ecosystem_Links from Community_Links ([#87](https://github.com/ryanatkn/fuz/pull/87))
+- remove bold styling from the `Alert` ([8ca616b](https://github.com/ryanatkn/fuz/commit/8ca616b))
+- upgrade peer deps ([714cdd6](https://github.com/ryanatkn/fuz/commit/714cdd6))
+- update peer deps ([f716e28](https://github.com/ryanatkn/fuz/commit/f716e28))
+- change from `attrs` props pattern to extending props directly with element attributes ([#85](https://github.com/ryanatkn/fuz/pull/85))
+
+### Patch Changes
+
+- remove old domains from csp ([#86](https://github.com/ryanatkn/fuz/pull/86))
+
 ## 0.147.0
 
 ### Minor Changes
