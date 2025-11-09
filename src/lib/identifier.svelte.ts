@@ -4,7 +4,11 @@ import {
 	generate_import_statement,
 	get_identifier_display_name,
 } from '$lib/src_json.js';
-import {url_api_identifier, url_api_identifier_full, url_github_file} from '$lib/package_helpers.js';
+import {
+	url_api_identifier,
+	url_api_identifier_full,
+	url_github_file,
+} from '$lib/package_helpers.js';
 
 /**
  * Rich runtime representation of an exported identifier with computed properties.
