@@ -18,6 +18,7 @@
 	} from '$lib/logos.js';
 	import Hidden_Personal_Links from '$lib/Hidden_Personal_Links.svelte';
 	import {MAIN_HEADER_MARGIN_TOP} from '$lib/constants.js';
+	import {DOCS_PATH} from '$lib/docs_helpers.svelte.js';
 
 	const pkg = pkg_context.get();
 
@@ -64,7 +65,8 @@
 						but the eventual goal is to be fully-featured with high flexibility.
 					</p>
 					<p>
-						To learn more see <a href={resolve('/docs')}>the docs</a>
+						<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+						To learn more see <a href={DOCS_PATH}>the docs</a>
 						and <Github_Link path="ryanatkn/fuz#readme">readme</Github_Link>. Feel free to take the
 						ideas and <Github_Link path="ryanatkn/fuz">code</Github_Link> for your own purposes.
 					</p>
@@ -73,7 +75,7 @@
 		</section>
 		<section>
 			<!-- TODO add color variants -->
-			<Card href={resolve('/docs')}>docs{#snippet icon()}🧶{/snippet}</Card>
+			<Card href={DOCS_PATH}>docs{#snippet icon()}🧶{/snippet}</Card>
 		</section>
 		<section class="panel p_lg shadow_inset_xs">
 			<!-- TODO ideally this wouldn't duplicate metadata like descriptions, but adding fuz_gitops to this repo is heavy -->

@@ -7,11 +7,12 @@
 
 	const pkg = pkg_context.get();
 
+	// TODO is not extensible
 	// TODO maybe better name?
 </script>
 
 {#if pkg.lookup_identifier(type)}
-	<Identifier_Link name={type}><code>{type}</code></Identifier_Link>
+	<Identifier_Link name={type} />
 {:else}
 	<Code content={type} lang="ts" code_attrs={{class: 'white_space_pre_wrap'}} />
 {/if}

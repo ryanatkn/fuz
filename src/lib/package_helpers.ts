@@ -1,7 +1,8 @@
 import {ensure_end, strip_end, strip_start} from '@ryanatkn/belt/string.js';
 import type {Package_Json} from '@ryanatkn/belt/package_json.js';
+import {page} from '$app/state';
 
-import {DOCS_API_PATH} from '$lib/docs_helpers.svelte.js';
+import {DOCS_API_PATH, DOCS_PATH_DEFAULT} from '$lib/docs_helpers.svelte.js';
 
 /**
  * Build project-relative API documentation URL with hash anchor.
@@ -13,7 +14,7 @@ export const api_doc_url = (identifier_name: string): string =>
  * Build full API documentation URL with domain and hash anchor.
  */
 export const api_doc_url_full = (homepage: string, identifier_name: string): string =>
-	`${homepage}/docs/api#${encodeURIComponent(identifier_name)}`;
+	`${homepage}${DOCS_PATH_DEFAULT}/api#${encodeURIComponent(identifier_name)}`;
 
 /**
  * Build project-relative module documentation URL.
@@ -43,6 +44,7 @@ export const github_org_url = (repo_url: string, repo_name: string): string | nu
  */
 export const github_owner_parse = (repo_url: string): string | null => {
 	const stripped = strip_start(repo_url, 'https://github.com/');
+	if (stripped === repo_url) return null; // not a GitHub URL
 	const parts = stripped.split('/');
 	return parts[0] || null;
 };
@@ -106,4 +108,29 @@ export const repo_url_parse = (repository: Package_Json['repository']): string |
  */
 export const well_known_url = (homepage_url: string, filename: string): string => {
 	return `${ensure_end(homepage_url, '/')}.well-known/${filename}`;
+};
+
+/**
+ * Convert a full URL to root-relative format by removing the origin.
+ * Example: ('https://example.com/path/to/page', 'https://example.com') -> '/path/to/page'
+ */
+export const url_to_root_relative = (url: string, origin: string = page.url.origin): string => {
+	const origin_with_slash = ensure_end(origin, '/');
+
+	// handle the case where URL is exactly the origin
+	if (url === origin || url === origin_with_slash) {
+		return '/';
+	}
+
+	// strip origin_with_slash to ensure we match the full origin
+	// (prevents matching 'https://example.com' against 'https://example.com-evil.com')
+	const stripped = strip_start(url, origin_with_slash);
+
+	// is the URL is from a different origin?
+	if (stripped === url) {
+		return url;
+	}
+
+	// make it root-relative
+	return '/' + stripped;
 };

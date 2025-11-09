@@ -7,11 +7,10 @@
 	import Tome_Content from '$lib/Tome_Content.svelte';
 	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
 	import Tome_Section from '$lib/Tome_Section.svelte';
+	import {DOCS_PATH} from '$lib/docs_helpers.svelte.js';
 
 	const LIBRARY_ITEM_NAME = 'Card';
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
-
-	const href = resolve('/docs');
 </script>
 
 <!-- eslint-disable svelte/no-useless-mustaches -->
@@ -65,12 +64,12 @@
 	<Tome_Section>
 		<Tome_Section_Header text="As the selected link" />
 		<Code
-			content={`<Card href="${href}/card">
+			content={`<Card href="${DOCS_PATH}/card">
   href is<br />
   selected
 </Card>`}
 		/>
-		<Card href="{href}/card">
+		<Card href="{DOCS_PATH}/card">
 			href is<br />
 			selected
 		</Card>

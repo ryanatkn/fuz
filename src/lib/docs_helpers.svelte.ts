@@ -5,7 +5,8 @@ import {ensure_end, ensure_start} from '@ryanatkn/belt/string.js';
 import {create_context} from '$lib/context_helpers.js';
 
 export const DOCS_PATH_DEFAULT = '/docs';
-export const DOCS_API_PATH = resolve(`${DOCS_PATH_DEFAULT}/api` as any);
+export const DOCS_PATH = resolve('/docs');
+export const DOCS_API_PATH = DOCS_PATH + '/api';
 
 // Shared order counter for all docs links (headers and sections)
 // This ensures proper document order even when components mount/unmount

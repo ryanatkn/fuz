@@ -42,6 +42,7 @@ export class Pkg {
 	 */
 	repo_name = $derived(repo_name_parse(this.package_json.name));
 
+	// TODO this is not optional, but is being treated as such -- maybe rely on schema validation upstream? or graceful fallback?
 	/**
 	 * GitHub repository URL (e.g., 'https://github.com/ryanatkn/fuz').
 	 */

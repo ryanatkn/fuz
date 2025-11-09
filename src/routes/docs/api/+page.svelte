@@ -1,6 +1,6 @@
 <script lang="ts">
 	import {page} from '$app/state';
-	import {resolve} from '$app/paths';
+
 	import {pkg_context} from '$lib/pkg.svelte.js';
 	import Identifier_Detail from '$lib/Identifier_Detail.svelte';
 	import {get_tome_by_name} from '$lib/tome.js';
@@ -9,11 +9,12 @@
 	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
 	import Module_Search from '$routes/docs/api/Module_Search.svelte';
 	import Tome_Link from '$lib/Tome_Link.svelte';
+	import {DOCS_PATH} from '$lib/docs_helpers.svelte.js';
 
 	const pkg = pkg_context.get();
 	const tome = get_tome_by_name('api');
 
-	const at_root = $derived(page.url.pathname === resolve('/docs'));
+	const at_root = $derived(page.url.pathname === DOCS_PATH);
 
 	let search_query = $state('');
 

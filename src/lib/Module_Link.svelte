@@ -1,7 +1,9 @@
 <script lang="ts">
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
-	import {module_doc_url} from '$lib/package_helpers.js';
+	import {pkg_context} from '$lib/pkg.svelte.js';
+	import {contextmenu_attachment} from '$lib/contextmenu_state.svelte.js';
+	import {create_module_contextmenu} from '$lib/module_contextmenu.js';
 
 	const {
 		module_path,
@@ -12,16 +14,35 @@
 		module_path: string; // TODO maybe rename?
 	} = $props();
 
-	// generate module doc URL
-	const doc_url = $derived(module_doc_url(module_path));
+	const pkg = pkg_context.get();
+
+	const module = $derived(pkg.lookup_module(module_path));
+
+	const contextmenu_entries = $derived(module ? create_module_contextmenu(module) : undefined);
+
+	// TODO @many support full https:// url variants - automatic detection? pkg prop?
 </script>
 
-<!-- eslint-disable svelte/no-navigation-without-resolve -->
-<a {...rest} class="chip {class_prop}" href={doc_url}>
-	<!-- eslint-enable svelte/no-navigation-without-resolve -->
+{#if module}
+	<!-- eslint-disable svelte/no-navigation-without-resolve -->
+	<a
+		{...rest}
+		class="chip {class_prop}"
+		href={module.api_url}
+		{@attach contextmenu_attachment(contextmenu_entries)}
+	>
+		<!-- eslint-enable svelte/no-navigation-without-resolve -->
+		{#if children}
+			{@render children()}
+		{:else}
+			{module_path}
+		{/if}
+	</a>
+{:else}
+	<!-- Fallback to plain text if not found -->
 	{#if children}
 		{@render children()}
 	{:else}
 		{module_path}
 	{/if}
-</a>
+{/if}

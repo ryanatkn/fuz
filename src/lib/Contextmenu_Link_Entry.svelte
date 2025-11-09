@@ -2,20 +2,19 @@
 	import {strip_start} from '@ryanatkn/belt/string.js';
 	import {swallow} from '@ryanatkn/belt/dom.js';
 	import type {Snippet} from 'svelte';
+	import {page} from '$app/state';
 
 	import {contextmenu_context} from '$lib/contextmenu_state.svelte.js';
 
-	const DEFAULT_LINK_ICON = '🔗';
-
 	const {
 		href,
-		icon = DEFAULT_LINK_ICON,
+		icon,
 		children,
 		disabled: disabled_prop = false,
 		external_rel = 'noreferrer', // TODO smarter defaults
 	}: {
 		href: string;
-		icon?: string | Snippet<[icon: string]>; // TODO @many rethink this API
+		icon?: string | Snippet; // TODO @many rethink this API, add svg icon fallback
 		children?: Snippet; // TODO @many rethink this API
 		disabled?: boolean;
 		external_rel?: string;
@@ -34,7 +33,6 @@
 		() => disabled_prop,
 	);
 
-	const {selected} = $derived(entry);
 	const disabled = $derived(entry.disabled());
 
 	// TODO move or upstream? rename? `print_url`?
@@ -46,6 +44,8 @@
 	const text = $derived(format_url(href));
 	const external = $derived(!(text[0] === '.' || (text[0] === '/' && text[1] !== '/')));
 	const rel = $derived(external ? external_rel : undefined);
+
+	const selected = $derived(page.url.pathname === href);
 </script>
 
 <li role="none">
@@ -81,8 +81,8 @@
 			<div class="icon">
 				{#if typeof icon === 'string'}
 					{icon}
-				{:else}
-					{@render icon(DEFAULT_LINK_ICON)}
+				{:else if icon}
+					{@render icon()}
 				{/if}
 			</div>
 			<div class="title">

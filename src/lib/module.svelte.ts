@@ -1,7 +1,7 @@
 import {Identifier} from '$lib/identifier.svelte.js';
 import type {Pkg} from '$lib/pkg.svelte.js';
 import type {Module_Json} from '$lib/src_json.js';
-import {github_file_url} from '$lib/package_helpers.js';
+import {github_file_url, module_doc_url} from '$lib/package_helpers.js';
 import {DOCS_API_PATH} from '$lib/docs_helpers.svelte.js';
 
 /**
@@ -54,7 +54,14 @@ export class Module {
 	);
 
 	/**
+	 * API documentation URL (hash-based navigation).
+	 * Example: "/docs/api#Alert"
+	 */
+	api_url = $derived(module_doc_url(this.path));
+
+	/**
 	 * GitHub source URL for the module file.
+	 * Example: "https://github.com/ryanatkn/fuz/blob/main/src/lib/Alert.ts"
 	 */
 	module_url = $derived(
 		this.pkg.repo_url ? github_file_url(this.pkg.repo_url, `src/lib/${this.path}`) : undefined,

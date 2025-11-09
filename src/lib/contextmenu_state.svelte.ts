@@ -8,6 +8,7 @@ import type {Attachment} from 'svelte/attachments';
 
 import {Dimensions} from '$lib/dimensions.svelte.js';
 import {create_context} from '$lib/context_helpers.js';
+import {url_to_root_relative} from '$lib/package_helpers.js';
 
 export type Contextmenu_Params =
 	| Snippet
@@ -450,7 +451,8 @@ const query_contextmenu_params = (
 		if (el.tagName === 'A') {
 			(params ??= []).push({
 				snippet: 'link',
-				props: {href: (el as HTMLAnchorElement).href},
+				// anchor elements have the full url, but we want the slash-prefixed/absolute/root-relative version
+				props: {href: url_to_root_relative((el as HTMLAnchorElement).href)},
 			});
 		}
 		el = el.parentElement;
