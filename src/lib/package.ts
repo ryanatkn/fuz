@@ -2582,7 +2582,7 @@ export const src_json: Src_Json = {
 					kind: 'class',
 					doc_comment:
 						'Rich runtime representation of an exported identifier with computed properties.\n\nCombines:\n\n- minimal Identifier_Json data\n- parent Module reference (provides Pkg context)\n- lazy-computed URLs, import statements, etc.\n- query methods for ergonomic usage',
-					source_line: 19,
+					source_line: 23,
 					members: [
 						{
 							name: 'module',
