@@ -5,18 +5,15 @@
 	import '$routes/moss.css';
 
 	import type {Snippet} from 'svelte';
-	import {parse_pkg} from '@ryanatkn/belt/pkg.js';
 
 	import Themed from '$lib/Themed.svelte';
-	import {pkg_context} from '$lib/pkg.js';
-	import {package_json, src_json} from '$routes/package.js';
+	import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
+	import {pkg_context, parse_pkg} from '$lib/pkg.svelte.js';
+	import {package_json, src_json} from '$lib/package.js';
 	import Spiders from '$lib/Spiders.svelte';
-
-	// TODO re-enable this, see comment below
-	// import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
-	// import Dialog from '$lib/Dialog.svelte';
-	// import Settings from '$routes/Settings.svelte';
-	// import {contextmenu_action} from '$lib/contextmenu_helpers.svelte.js';
+	import {mdz_components_context} from '$lib/mdz_components.js';
+	import Alert from '$lib/Alert.svelte';
+	import Card from '$lib/Card.svelte';
 
 	interface Props {
 		children: Snippet;
@@ -25,8 +22,10 @@
 	const {children}: Props = $props();
 
 	pkg_context.set(parse_pkg(package_json, src_json));
-
-	// let show_settings = $state(false);
+	mdz_components_context.set({
+		Alert,
+		Card,
+	});
 </script>
 
 <svelte:head>
@@ -34,42 +33,8 @@
 </svelte:head>
 
 <Themed>
-	<!-- TODO add all of this and fixed scoped, so the docs examples work as expected,
-		or maybe disable this main contextmenu when in the docs -->
-	<!-- <Contextmenu_Root> -->
-	{@render children()}
-	<Spiders />
-	<!-- </Contextmenu_Root> -->
-	<!-- {#if show_settings}
-		<Dialog onclose={() => (show_settings = false)}>
-			<div class="pane p_md width_upto_md mx_auto">
-				<Settings />
-			</div>
-		</Dialog>
-	{/if} -->
+	<Contextmenu_Root>
+		{@render children()}
+		<Spiders />
+	</Contextmenu_Root>
 </Themed>
-
-<!-- <svelte:body
-	use:contextmenu_action={[
-		{
-			snippet: 'text',
-			props: {
-				content: 'Settings',
-				icon: '?',
-				run: () => {
-					show_settings = true;
-				},
-			},
-		},
-		{
-			snippet: 'text',
-			props: {
-				content: 'Reload',
-				icon: '⟳',
-				run: () => {
-					location.reload();
-				},
-			},
-		},
-	]}
-/> -->

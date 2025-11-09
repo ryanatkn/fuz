@@ -36,6 +36,6 @@ export const to_cats_label = (cats: Array<Cat>): string | null => {
 	const count = cats.length;
 	if (count === 2) return 'cats';
 	if (count === 0) return null;
-	const cat = cats[0];
+	const cat = cats[0]!;
 	return cat.icon + cat.name;
 };

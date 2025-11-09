@@ -1,0 +1,36 @@
+[
+	{
+		"type": "Paragraph",
+		"children": [
+			{
+				"type": "Strikethrough",
+				"children": [
+					{
+						"type": "Text",
+						"content": "deleted ",
+						"start": 1,
+						"end": 9
+					},
+					{
+						"type": "Link",
+						"reference": "Foo",
+						"display_text": null,
+						"link_type": "identifier",
+						"start": 9,
+						"end": 20
+					},
+					{
+						"type": "Text",
+						"content": " reference",
+						"start": 20,
+						"end": 30
+					}
+				],
+				"start": 0,
+				"end": 31
+			}
+		],
+		"start": 0,
+		"end": 31
+	}
+]

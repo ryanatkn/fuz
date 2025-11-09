@@ -1,0 +1,17 @@
+[
+	{
+		"type": "Paragraph",
+		"children": [
+			{
+				"type": "Link",
+				"reference": "https://example.com",
+				"display_text": "Display Text",
+				"link_type": "url",
+				"start": 0,
+				"end": 42
+			}
+		],
+		"start": 0,
+		"end": 42
+	}
+]

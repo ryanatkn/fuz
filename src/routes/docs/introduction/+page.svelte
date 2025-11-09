@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Github_Link from '$lib/Github_Link.svelte';
 	import Tome_Content from '$lib/Tome_Content.svelte';
 	import {get_tome_by_name} from '$lib/tome.js';
 
@@ -22,13 +23,11 @@
 			The goal is to make a fully-featured Svelte UI library, but it'll take extra time to get
 			there. That lets us prioritize patterns like APIs above features, making it an interesting
 			project for learning and experimentation. If you're interested in using Fuz, helping out, or
-			just following along, see <a href="https://github.com/ryanatkn/fuz/blob/main/contributing.md"
-				>contributing.md</a
-			>.
+			just following along, see <Github_Link path="ryanatkn/fuz/blob/main/contributing.md" />.
 		</p>
 		<p>
-			These docs are a work in progress - for an overview see
-			<a href="https://github.com/ryanatkn/fuz#readme">the readme</a>.
+			These docs are a work in progress - for an overview see the
+			<Github_Link path="ryanatkn/fuz#readme">readme</Github_Link>.
 		</p>
 	</section>
 </Tome_Content>

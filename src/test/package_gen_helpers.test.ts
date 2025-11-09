@@ -1,0 +1,609 @@
+import {test, assert, describe} from 'vitest';
+import type {Logger} from '@ryanatkn/belt/log.js';
+import type {Package_Json} from '@ryanatkn/belt/package_json.js';
+
+import {
+	package_gen_validate_no_duplicates,
+	package_gen_sort_modules,
+	package_gen_generate_ts,
+} from '$lib/package_gen_helpers.js';
+import type {Src_Json, Module_Json, Identifier_Kind} from '$lib/src_json.js';
+
+/**
+ * Create a mock logger that captures log calls for testing validation output.
+ *
+ * Returns a logger with arrays to inspect logged messages:
+ * - `errors` - array of error messages
+ * - `warnings` - array of warning messages
+ * - `infos` - array of info messages
+ */
+const create_mock_logger = (): Logger & {
+	errors: Array<string>;
+	warnings: Array<string>;
+	infos: Array<string>;
+} => {
+	const errors: Array<string> = [];
+	const warnings: Array<string> = [];
+	const infos: Array<string> = [];
+
+	return {
+		errors,
+		warnings,
+		infos,
+		error: (...args: Array<any>) => {
+			errors.push(args.join(' '));
+		},
+		warn: (...args: Array<any>) => {
+			warnings.push(args.join(' '));
+		},
+		info: (...args: Array<any>) => {
+			infos.push(args.join(' '));
+		},
+	} as any;
+};
+
+/**
+ * Create a mock Src_Json with test modules.
+ *
+ * Provides minimal package metadata for testing validation logic.
+ *
+ * @param modules - array of Module_Json objects to include
+ * @returns Src_Json with standard test package name and version
+ */
+const create_mock_src_json = (modules: Array<Module_Json>): Src_Json => {
+	return {
+		name: '@test/package',
+		version: '1.0.0',
+		modules,
+	};
+};
+
+/**
+ * Create a mock Module_Json with test identifiers.
+ *
+ * Simplifies test setup by auto-generating minimal identifier metadata.
+ *
+ * @param path - module path (e.g., 'foo.ts', 'Bar.svelte')
+ * @param identifiers - array of identifier objects with name and kind
+ * @returns Module_Json with the specified identifiers
+ */
+const create_mock_module = (
+	path: string,
+	identifiers: Array<{name: string; kind: Identifier_Kind | null}>,
+): Module_Json => {
+	return {
+		path,
+		identifiers: identifiers.map(({name, kind}) => ({
+			name,
+			kind,
+		})),
+	};
+};
+
+describe('package_gen_validate_no_duplicates', () => {
+	describe('happy path - validation passes', () => {
+		test('no duplicates - validation passes', () => {
+			const src_json = create_mock_src_json([
+				create_mock_module('foo.ts', [
+					{name: 'foo', kind: 'function'},
+					{name: 'bar', kind: 'type'},
+				]),
+				create_mock_module('baz.ts', [
+					{name: 'baz', kind: 'class'},
+					{name: 'qux', kind: 'variable'},
+				]),
+			]);
+
+			const logger = create_mock_logger();
+
+			// Should not throw
+			assert.doesNotThrow(() => {
+				package_gen_validate_no_duplicates(src_json, logger);
+			});
+
+			assert.strictEqual(logger.errors.length, 0);
+		});
+
+		test('empty modules array', () => {
+			const src_json = create_mock_src_json([]);
+			const logger = create_mock_logger();
+
+			assert.doesNotThrow(() => {
+				package_gen_validate_no_duplicates(src_json, logger);
+			});
+
+			assert.strictEqual(logger.errors.length, 0);
+		});
+
+		test('modules with no identifiers', () => {
+			const src_json = create_mock_src_json([
+				{path: 'empty.ts', identifiers: []},
+				{path: 'also_empty.ts', identifiers: []},
+			]);
+
+			const logger = create_mock_logger();
+
+			assert.doesNotThrow(() => {
+				package_gen_validate_no_duplicates(src_json, logger);
+			});
+
+			assert.strictEqual(logger.errors.length, 0);
+		});
+
+		test('undefined modules array', () => {
+			const src_json: Src_Json = {
+				name: '@test/package',
+				version: '1.0.0',
+			};
+
+			const logger = create_mock_logger();
+
+			assert.doesNotThrow(() => {
+				package_gen_validate_no_duplicates(src_json, logger);
+			});
+
+			assert.strictEqual(logger.errors.length, 0);
+		});
+
+		test('single module with multiple unique identifiers', () => {
+			const src_json = create_mock_src_json([
+				create_mock_module('helpers.ts', [
+					{name: 'foo', kind: 'function'},
+					{name: 'bar', kind: 'function'},
+					{name: 'Baz', kind: 'type'},
+					{name: 'Qux', kind: 'class'},
+				]),
+			]);
+
+			const logger = create_mock_logger();
+
+			assert.doesNotThrow(() => {
+				package_gen_validate_no_duplicates(src_json, logger);
+			});
+
+			assert.strictEqual(logger.errors.length, 0);
+		});
+	});
+
+	describe('error cases - validation fails', () => {
+		test('single duplicate across two modules', () => {
+			const src_json = create_mock_src_json([
+				create_mock_module('foo.ts', [{name: 'Duplicate', kind: 'type'}]),
+				create_mock_module('bar.ts', [{name: 'Duplicate', kind: 'component'}]),
+			]);
+
+			const logger = create_mock_logger();
+
+			assert.throws(
+				() => {
+					package_gen_validate_no_duplicates(src_json, logger);
+				},
+				/Found 1 duplicate identifier name across modules/,
+				'should throw error for single duplicate',
+			);
+
+			// Check error logging
+			assert.ok(logger.errors.length > 0);
+			assert.ok(logger.errors.some((e) => e.includes('Duplicate')));
+			assert.ok(logger.errors.some((e) => e.includes('foo.ts')));
+			assert.ok(logger.errors.some((e) => e.includes('bar.ts')));
+		});
+
+		test('multiple duplicates', () => {
+			const src_json = create_mock_src_json([
+				create_mock_module('a.ts', [
+					{name: 'Dup1', kind: 'type'},
+					{name: 'Dup2', kind: 'function'},
+				]),
+				create_mock_module('b.ts', [
+					{name: 'Dup1', kind: 'class'},
+					{name: 'Dup2', kind: 'variable'},
+				]),
+			]);
+
+			const logger = create_mock_logger();
+
+			assert.throws(
+				() => {
+					package_gen_validate_no_duplicates(src_json, logger);
+				},
+				/Found 2 duplicate identifier names across modules/,
+				'should throw error for multiple duplicates',
+			);
+
+			// Check error logging mentions both duplicates
+			const all_errors = logger.errors.join(' ');
+			assert.ok(all_errors.includes('Dup1'));
+			assert.ok(all_errors.includes('Dup2'));
+		});
+
+		test('same name in 3+ modules', () => {
+			const src_json = create_mock_src_json([
+				create_mock_module('a.ts', [{name: 'Common', kind: 'type'}]),
+				create_mock_module('b.ts', [{name: 'Common', kind: 'function'}]),
+				create_mock_module('c.ts', [{name: 'Common', kind: 'class'}]),
+			]);
+
+			const logger = create_mock_logger();
+
+			assert.throws(() => {
+				package_gen_validate_no_duplicates(src_json, logger);
+			}, /Found 1 duplicate identifier name across modules/);
+
+			// Check all three modules are mentioned
+			const all_errors = logger.errors.join(' ');
+			assert.ok(all_errors.includes('a.ts'));
+			assert.ok(all_errors.includes('b.ts'));
+			assert.ok(all_errors.includes('c.ts'));
+		});
+
+		test('duplicate with different kinds shows both kinds', () => {
+			const src_json = create_mock_src_json([
+				create_mock_module('helpers.ts', [{name: 'Foo', kind: 'function'}]),
+				create_mock_module('Foo.svelte', [{name: 'Foo', kind: 'component'}]),
+			]);
+
+			const logger = create_mock_logger();
+
+			assert.throws(() => {
+				package_gen_validate_no_duplicates(src_json, logger);
+			});
+
+			const all_errors = logger.errors.join(' ');
+			assert.ok(all_errors.includes('function'));
+			assert.ok(all_errors.includes('component'));
+		});
+
+		test('duplicate with null kind', () => {
+			const src_json = create_mock_src_json([
+				create_mock_module('a.ts', [{name: 'Unknown', kind: null}]),
+				create_mock_module('b.ts', [{name: 'Unknown', kind: 'type'}]),
+			]);
+
+			const logger = create_mock_logger();
+
+			assert.throws(() => {
+				package_gen_validate_no_duplicates(src_json, logger);
+			});
+
+			const all_errors = logger.errors.join(' ');
+			assert.ok(all_errors.includes('unknown')); // null kind shows as "unknown"
+			assert.ok(all_errors.includes('type'));
+		});
+	});
+
+	describe('edge cases', () => {
+		test('identifiers with undefined kind', () => {
+			const src_json = create_mock_src_json([
+				{
+					path: 'test.ts',
+					identifiers: [
+						{name: 'foo', kind: 'function'},
+						// @ts-expect-error - testing undefined kind
+						{name: 'bar', kind: undefined},
+					],
+				},
+			]);
+
+			const logger = create_mock_logger();
+
+			assert.doesNotThrow(() => {
+				package_gen_validate_no_duplicates(src_json, logger);
+			});
+		});
+
+		test('real-world scenario - Docs_Link collision', () => {
+			const src_json = create_mock_src_json([
+				create_mock_module('docs_helpers.svelte.ts', [{name: 'Docs_Link', kind: 'type'}]),
+				create_mock_module('Docs_Link.svelte', [{name: 'Docs_Link', kind: 'component'}]),
+			]);
+
+			const logger = create_mock_logger();
+
+			assert.throws(() => {
+				package_gen_validate_no_duplicates(src_json, logger);
+			}, /duplicate identifier name/i);
+
+			const all_errors = logger.errors.join(' ');
+			assert.ok(all_errors.includes('Docs_Link'));
+			assert.ok(all_errors.includes('docs_helpers.svelte.ts'));
+			assert.ok(all_errors.includes('Docs_Link.svelte'));
+		});
+	});
+});
+
+describe('package_gen_sort_modules', () => {
+	test('sorts modules alphabetically by path', () => {
+		const modules: Array<Module_Json> = [
+			{path: 'zebra.ts', identifiers: []},
+			{path: 'alpha.ts', identifiers: []},
+			{path: 'beta.ts', identifiers: []},
+		];
+
+		const sorted = package_gen_sort_modules(modules);
+
+		assert.strictEqual(sorted[0]!.path, 'alpha.ts');
+		assert.strictEqual(sorted[1]!.path, 'beta.ts');
+		assert.strictEqual(sorted[2]!.path, 'zebra.ts');
+	});
+
+	test('does not mutate original array', () => {
+		const modules: Array<Module_Json> = [
+			{path: 'c.ts', identifiers: []},
+			{path: 'a.ts', identifiers: []},
+			{path: 'b.ts', identifiers: []},
+		];
+
+		const sorted = package_gen_sort_modules(modules);
+
+		// Original array should not be mutated
+		assert.strictEqual(modules[0]!.path, 'c.ts');
+		assert.strictEqual(modules[1]!.path, 'a.ts');
+		assert.strictEqual(modules[2]!.path, 'b.ts');
+
+		// Sorted array should be sorted
+		assert.strictEqual(sorted[0]!.path, 'a.ts');
+		assert.strictEqual(sorted[1]!.path, 'b.ts');
+		assert.strictEqual(sorted[2]!.path, 'c.ts');
+	});
+
+	test('handles empty array', () => {
+		const sorted = package_gen_sort_modules([]);
+		assert.strictEqual(sorted.length, 0);
+	});
+
+	test('handles single module', () => {
+		const modules: Array<Module_Json> = [{path: 'single.ts', identifiers: []}];
+		const sorted = package_gen_sort_modules(modules);
+		assert.strictEqual(sorted.length, 1);
+		assert.strictEqual(sorted[0]!.path, 'single.ts');
+	});
+
+	test('stable sort with identical paths', () => {
+		const modules: Array<Module_Json> = [
+			{path: 'same.ts', identifiers: [{name: 'first', kind: 'type'}]},
+			{path: 'same.ts', identifiers: [{name: 'second', kind: 'function'}]},
+		];
+
+		const sorted = package_gen_sort_modules(modules);
+
+		// Should maintain original order for identical paths
+		assert.strictEqual(sorted[0]!.identifiers![0]!.name, 'first');
+		assert.strictEqual(sorted[1]!.identifiers![0]!.name, 'second');
+	});
+});
+
+describe('package_gen_generate_ts', () => {
+	test('generates valid TypeScript with correct structure', () => {
+		const package_json: Package_Json = {
+			name: '@test/package',
+			version: '1.0.0',
+			type: 'module',
+		};
+
+		const src_json: Src_Json = {
+			name: '@test/package',
+			version: '1.0.0',
+			modules: [
+				{
+					path: 'test.ts',
+					identifiers: [{name: 'foo', kind: 'function'}],
+				},
+			],
+		};
+
+		const result = package_gen_generate_ts(package_json, src_json);
+
+		// Check file header comment
+		assert.ok(result.includes('// Generated by package.gen.ts'));
+		assert.ok(result.includes('// Do not edit directly - regenerated on build'));
+
+		// Check imports
+		assert.ok(result.includes('import type {Package_Json}'));
+		assert.ok(result.includes('import type {Src_Json}'));
+
+		// Check exports
+		assert.ok(result.includes('export const package_json: Package_Json ='));
+		assert.ok(result.includes('export const src_json: Src_Json ='));
+
+		// Verify valid TypeScript structure (no syntax errors obvious)
+		assert.ok(!result.includes('undefined'));
+	});
+
+	test('properly serializes package_json data', () => {
+		const package_json: Package_Json = {
+			name: '@scope/pkg',
+			version: '2.0.0',
+			type: 'module',
+			description: 'Test package',
+		};
+
+		const src_json: Src_Json = {
+			name: '@scope/pkg',
+			version: '2.0.0',
+		};
+
+		const result = package_gen_generate_ts(package_json, src_json);
+
+		// Verify package_json fields are in output
+		assert.ok(result.includes('"name": "@scope/pkg"'));
+		assert.ok(result.includes('"version": "2.0.0"'));
+		assert.ok(result.includes('"type": "module"'));
+		assert.ok(result.includes('"description": "Test package"'));
+	});
+
+	test('properly serializes src_json with modules', () => {
+		const package_json: Package_Json = {
+			name: '@test/package',
+			version: '1.0.0',
+		};
+
+		const src_json: Src_Json = {
+			name: '@test/package',
+			version: '1.0.0',
+			modules: [
+				{
+					path: 'foo.ts',
+					identifiers: [
+						{name: 'foo', kind: 'function'},
+						{name: 'Bar', kind: 'type'},
+					],
+				},
+			],
+		};
+
+		const result = package_gen_generate_ts(package_json, src_json);
+
+		// Verify modules structure
+		assert.ok(result.includes('"modules"'));
+		assert.ok(result.includes('"path": "foo.ts"'));
+		assert.ok(result.includes('"identifiers"'));
+		assert.ok(result.includes('"name": "foo"'));
+		assert.ok(result.includes('"kind": "function"'));
+		assert.ok(result.includes('"name": "Bar"'));
+		assert.ok(result.includes('"kind": "type"'));
+	});
+
+	test('uses tab indentation for JSON', () => {
+		const package_json: Package_Json = {
+			name: '@test/package',
+			version: '1.0.0',
+		};
+
+		const src_json: Src_Json = {
+			name: '@test/package',
+			version: '1.0.0',
+		};
+
+		const result = package_gen_generate_ts(package_json, src_json);
+
+		// Should use tabs (not spaces) for indentation
+		const lines = result.split('\n');
+		const json_lines = lines.filter((line) => line.startsWith('\t'));
+
+		// Should have some indented lines with tabs
+		assert.ok(json_lines.length > 0, 'Expected tab-indented JSON lines');
+		// Verify tabs, not spaces
+		assert.ok(json_lines.some((line) => line.startsWith('\t"')));
+	});
+
+	test('handles empty modules array', () => {
+		const package_json: Package_Json = {
+			name: '@test/package',
+			version: '1.0.0',
+		};
+
+		const src_json: Src_Json = {
+			name: '@test/package',
+			version: '1.0.0',
+			modules: [],
+		};
+
+		const result = package_gen_generate_ts(package_json, src_json);
+
+		assert.ok(result.includes('export const src_json'));
+		assert.ok(result.includes('"modules": []'));
+	});
+
+	test('handles undefined modules', () => {
+		const package_json: Package_Json = {
+			name: '@test/package',
+			version: '1.0.0',
+		};
+
+		const src_json: Src_Json = {
+			name: '@test/package',
+			version: '1.0.0',
+		};
+
+		const result = package_gen_generate_ts(package_json, src_json);
+
+		assert.ok(result.includes('export const src_json'));
+		// Should not include modules key if undefined
+		assert.ok(!result.includes('"modules"'));
+	});
+});
+
+describe('package_gen_validate_no_duplicates - error message format', () => {
+	test('singular error message for one duplicate', () => {
+		const src_json = create_mock_src_json([
+			create_mock_module('a.ts', [{name: 'Dup', kind: 'type'}]),
+			create_mock_module('b.ts', [{name: 'Dup', kind: 'function'}]),
+		]);
+
+		const logger = create_mock_logger();
+
+		try {
+			package_gen_validate_no_duplicates(src_json, logger);
+			assert.fail('Should have thrown');
+		} catch (err: any) {
+			// Check singular form
+			assert.ok(err.message.includes('1 duplicate identifier name across'));
+			assert.ok(!err.message.includes('1 duplicate identifier names'));
+		}
+	});
+
+	test('plural error message for multiple duplicates', () => {
+		const src_json = create_mock_src_json([
+			create_mock_module('a.ts', [
+				{name: 'Dup1', kind: 'type'},
+				{name: 'Dup2', kind: 'type'},
+			]),
+			create_mock_module('b.ts', [
+				{name: 'Dup1', kind: 'function'},
+				{name: 'Dup2', kind: 'function'},
+			]),
+		]);
+
+		const logger = create_mock_logger();
+
+		try {
+			package_gen_validate_no_duplicates(src_json, logger);
+			assert.fail('Should have thrown');
+		} catch (err: any) {
+			// Check plural form
+			assert.ok(err.message.includes('2 duplicate identifier names across'));
+		}
+	});
+
+	test('error message includes CLAUDE.md reference', () => {
+		const src_json = create_mock_src_json([
+			create_mock_module('a.ts', [{name: 'Dup', kind: 'type'}]),
+			create_mock_module('b.ts', [{name: 'Dup', kind: 'function'}]),
+		]);
+
+		const logger = create_mock_logger();
+
+		try {
+			package_gen_validate_no_duplicates(src_json, logger);
+			assert.fail('Should have thrown');
+		} catch (err: any) {
+			assert.ok(err.message.includes('CLAUDE.md'));
+			assert.ok(err.message.includes('Identifier namespacing'));
+		}
+	});
+
+	test('log output includes all duplicate details', () => {
+		const src_json = create_mock_src_json([
+			create_mock_module('foo/bar.ts', [{name: 'Widget', kind: 'class'}]),
+			create_mock_module('baz/Widget.svelte', [{name: 'Widget', kind: 'component'}]),
+		]);
+
+		const logger = create_mock_logger();
+
+		try {
+			package_gen_validate_no_duplicates(src_json, logger);
+			assert.fail('Should have thrown');
+		} catch (_err: any) {
+			const all_errors = logger.errors.join('\n');
+
+			// Check structured error output
+			assert.ok(all_errors.includes('Duplicate identifier names detected'));
+			assert.ok(all_errors.includes('"Widget" found in:'));
+			assert.ok(all_errors.includes('foo/bar.ts'));
+			assert.ok(all_errors.includes('class'));
+			assert.ok(all_errors.includes('baz/Widget.svelte'));
+			assert.ok(all_errors.includes('component'));
+		}
+	});
+});

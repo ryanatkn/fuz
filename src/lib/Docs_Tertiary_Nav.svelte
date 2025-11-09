@@ -2,9 +2,10 @@
 	import {page} from '$app/state';
 
 	import Docs_Menu from '$lib/Docs_Menu.svelte';
+	import Docs_Modules_List from '$lib/Docs_Modules_List.svelte';
 	import Docs_Page_Links from '$lib/Docs_Page_Links.svelte';
 	import {to_tome_pathname, Tome} from '$lib/tome.js';
-	import {docs_links_context} from '$lib/docs_helpers.svelte.js';
+	import {docs_links_context, DOCS_API_PATH} from '$lib/docs_helpers.svelte.js';
 
 	interface Props {
 		tomes: Array<Tome>;
@@ -28,17 +29,24 @@
 		console.log('[Docs_Tertiary_Nav] conditional check:', {length, should_show}); // eslint-disable-line no-console
 		return should_show;
 	});
+
+	const page_is_module = $derived(
+		page.url.pathname.startsWith(DOCS_API_PATH + '/') && page.url.pathname !== DOCS_API_PATH,
+	);
 </script>
 
 <!-- TODO probably add a `nav` wrapper? around which? -->
 <aside class="docs_tertiary_nav unstyled">
 	{#if tomes_related_to_selected?.length}
-		<Docs_Menu tomes={tomes_related_to_selected}>
+		<Docs_Menu tomes={tomes_related_to_selected} expand_width>
 			{#snippet children(category)}<h4 class="mb_sm">related {category}</h4>{/snippet}
 		</Docs_Menu>
 	{/if}
 	{#if should_show_page_links}
-		<Docs_Page_Links {sidebar} />
+		<Docs_Page_Links {sidebar} expand_width />
+	{/if}
+	{#if page_is_module}
+		<Docs_Modules_List expand_width />
 	{/if}
 </aside>
 

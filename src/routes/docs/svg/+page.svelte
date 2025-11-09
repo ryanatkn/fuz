@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
+	import Github_Link from '$lib/Github_Link.svelte';
 	import {get_tome_by_name} from '$lib/tome.js';
 	import Svg from '$lib/Svg.svelte';
 	import Tome_Content from '$lib/Tome_Content.svelte';
@@ -66,8 +67,8 @@
 	</Tome_Section>
 
 	<aside>
-		⚠️ These docs are a work in progress, see the <a
-			href="https://github.com/ryanatkn/fuz/blob/main/src/lib/Svg.svelte">source code</a
+		⚠️ These docs are a work in progress, see the <Github_Link
+			path="ryanatkn/fuz/blob/main/src/lib/Svg.svelte">source code</Github_Link
 		> for now.
 	</aside>
 </Tome_Content>

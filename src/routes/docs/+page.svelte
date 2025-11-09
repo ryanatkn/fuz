@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Docs_Content from '$lib/Docs_Content.svelte';
 	import {tomes_context} from '$lib/tome.js';
-	import {pkg_context} from '$lib/pkg.js';
+	import {pkg_context} from '$lib/pkg.svelte.js';
 
 	const tomes_by_name = tomes_context.get();
 

@@ -1,0 +1,34 @@
+[
+	{
+		"type": "Paragraph",
+		"children": [
+			{
+				"type": "Bold",
+				"children": [
+					{
+						"type": "Text",
+						"content": "bold with ",
+						"start": 2,
+						"end": 12
+					},
+					{
+						"type": "Text",
+						"content": "_",
+						"start": 12,
+						"end": 13
+					},
+					{
+						"type": "Text",
+						"content": "unclosed italic",
+						"start": 13,
+						"end": 28
+					}
+				],
+				"start": 0,
+				"end": 30
+			}
+		],
+		"start": 0,
+		"end": 30
+	}
+]

@@ -4,7 +4,9 @@ import {ensure_end, ensure_start} from '@ryanatkn/belt/string.js';
 
 import {create_context} from '$lib/context_helpers.js';
 
-export const DEFAULT_LIBRARY_PATH = '/docs';
+export const DOCS_PATH_DEFAULT = '/docs';
+export const DOCS_PATH = resolve('/docs');
+export const DOCS_API_PATH = DOCS_PATH + '/api';
 
 // Shared order counter for all docs links (headers and sections)
 // This ensures proper document order even when components mount/unmount
@@ -19,10 +21,10 @@ export const reset_docs_link_order = (): void => {
 export const to_docs_path_info = (
 	slug: string,
 	pathname: string,
-	root_path = DEFAULT_LIBRARY_PATH,
+	root_path = DOCS_PATH_DEFAULT,
 ): {path: string; path_is_selected: boolean; path_segment: string | undefined} => {
 	const path_segment = pathname.split('/').at(-1);
-	const path = resolve((ensure_end(ensure_start(root_path, '/'), '/') + slug) as any); // TODO @many check sometime if typecast is still needed
+	const path = resolve((ensure_end(ensure_start(root_path, '/'), '/') + slug) as any);
 	const path_is_selected = path_segment === slug; // messy but works
 	return {path, path_is_selected, path_segment};
 };
@@ -31,7 +33,7 @@ export const docs_links_context = create_context(() => new Docs_Links());
 
 export type Docs_Link_Tag = 'h3' | 'h4';
 
-export interface Docs_Link {
+export interface Docs_Link_Info {
 	id: string;
 	text: string;
 	slug: string;
@@ -42,7 +44,7 @@ export interface Docs_Link {
 export class Docs_Links {
 	readonly root_path: string;
 
-	readonly links: SvelteMap<string, Docs_Link> = new SvelteMap();
+	readonly links: SvelteMap<string, Docs_Link_Info> = new SvelteMap();
 
 	// Maps compound keys (pathname#slug) to their original order
 	// This preserves order across component remounts
@@ -60,7 +62,7 @@ export class Docs_Links {
 
 	readonly slugs_onscreen: SvelteSet<string> = new SvelteSet();
 
-	constructor(root_path = DEFAULT_LIBRARY_PATH) {
+	constructor(root_path = DOCS_PATH_DEFAULT) {
 		this.root_path = root_path;
 	}
 

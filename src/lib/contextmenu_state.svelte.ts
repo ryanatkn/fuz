@@ -1,15 +1,14 @@
 import {onDestroy, type Snippet} from 'svelte';
 import type {Result} from '@ryanatkn/belt/result.js';
 import {is_promise} from '@ryanatkn/belt/async.js';
-import type {ActionReturn} from 'svelte/action';
 import {BROWSER} from 'esm-env';
 import type {SvelteHTMLElements} from 'svelte/elements';
 import {EMPTY_OBJECT} from '@ryanatkn/belt/object.js';
+import type {Attachment} from 'svelte/attachments';
 
 import {Dimensions} from '$lib/dimensions.svelte.js';
 import {create_context} from '$lib/context_helpers.js';
-
-// TODO use $state.raw for the arrays here, maybe other data structure refactoring too
+import {url_to_root_relative} from '$lib/package_helpers.js';
 
 export type Contextmenu_Params =
 	| Snippet
@@ -35,7 +34,7 @@ export class Entry_State {
 	selected: boolean = $state(false);
 	pending: boolean = $state(false);
 	error_message: string | null = $state(null);
-	promise: Promise<any> | null = $state(null);
+	promise: Promise<Contextmenu_Activate_Result> | null = $state.raw(null);
 
 	constructor(
 		menu: Submenu_State | Root_Menu_State,
@@ -54,7 +53,7 @@ export class Submenu_State {
 	readonly depth: number;
 
 	selected: boolean = $state(false);
-	items: Array<Item_State> = $state([]);
+	items: ReadonlyArray<Item_State> = $state.raw([]);
 
 	constructor(menu: Submenu_State | Root_Menu_State, depth: number) {
 		this.menu = menu;
@@ -67,7 +66,7 @@ export class Root_Menu_State {
 	readonly menu = null;
 	readonly depth = 1;
 
-	items: Array<Item_State> = $state([]);
+	items: ReadonlyArray<Item_State> = $state.raw([]);
 }
 
 export type Contextmenu_Run = () =>
@@ -82,7 +81,7 @@ export interface Contextmenu_State_Options {
  * Creates a `contextmenu` store.
  * See usage with `Contextmenu_Root.svelte` and `Contextmenu.svelte`.
  *
- * @see https://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event}
  */
 export class Contextmenu_State {
 	layout: Dimensions; // TODO $state?
@@ -96,15 +95,15 @@ export class Contextmenu_State {
 	opened: boolean = $state(false);
 	x: number = $state(0);
 	y: number = $state(0);
-	params: Array<Contextmenu_Params> = $state([]);
+	params: ReadonlyArray<Contextmenu_Params> = $state.raw([]);
 	error: string | undefined = $state();
 
-	// These two properties are mutated internally.
+	// These arrays use immutable updates (reassignment, not mutation).
 	// If you need reactivity, use `$contextmenu` in a reactive statement to react to all changes, and
-	// then access the mutable non-reactive  `contextmenu.root_menu` and `contextmenu.selections`.
+	// then access the immutable `contextmenu.root_menu` and `contextmenu.selections`.
 	// See `Contextmenu_Entry.svelte` and `Contextmenu_Submenu.svelte` for reactive usage examples.
 	readonly root_menu: Root_Menu_State = new Root_Menu_State();
-	selections: Array<Item_State> = $state([]);
+	selections: ReadonlyArray<Item_State> = $state.raw([]);
 
 	can_collapse = $derived(this.selections.length > 1);
 
@@ -138,7 +137,7 @@ export class Contextmenu_State {
 	}
 
 	open(params: Array<Contextmenu_Params>, x: number, y: number): void {
-		this.selections.length = 0;
+		this.selections = [];
 		this.opened = true;
 		this.x = x;
 		this.y = y;
@@ -151,7 +150,7 @@ export class Contextmenu_State {
 		this.opened = false;
 	}
 
-	reset_items(items: Array<Item_State>): void {
+	reset_items(items: ReadonlyArray<Item_State>): void {
 		for (const item of items) {
 			if (item.is_menu) {
 				this.reset_items(item.items);
@@ -251,27 +250,29 @@ export class Contextmenu_State {
 	select(item: Item_State): void {
 		if (this.selections.at(-1) === item) return;
 		for (const s of this.selections) s.selected = false;
-		this.selections.length = 0;
+		const new_selections: Array<Item_State> = [];
 		let i: Item_State | Root_Menu_State = item;
 		do {
 			i.selected = true;
-			this.selections.unshift(i);
+			new_selections.unshift(i);
 		} while ((i = i.menu) && i.menu); // eslint-disable-line @typescript-eslint/no-unnecessary-condition
+		this.selections = new_selections;
 	}
 
 	collapse_selected(): void {
 		if (!this.can_collapse) return;
-		const deselected = this.selections.pop()!;
+		const deselected = this.selections.at(-1)!;
 		deselected.selected = false;
+		this.selections = this.selections.slice(0, -1);
 	}
 
 	expand_selected(): void {
 		if (!this.can_expand) return;
 		const parent = this.selections.at(-1);
-		if (!parent?.is_menu) return;
-		const selected = parent.items[0];
+		if (!parent?.is_menu || !parent.items.length) return;
+		const selected = parent.items[0]!;
 		selected.selected = true;
-		this.selections.push(selected);
+		this.selections = [...this.selections, selected];
 	}
 
 	select_next(): void {
@@ -281,7 +282,7 @@ export class Contextmenu_State {
 		}
 		const item = this.selections.at(-1)!;
 		const index = item.menu.items.indexOf(item);
-		this.select(item.menu.items[index === item.menu.items.length - 1 ? 0 : index + 1]);
+		this.select(item.menu.items[index === item.menu.items.length - 1 ? 0 : index + 1]!);
 	}
 
 	select_previous(): void {
@@ -291,11 +292,13 @@ export class Contextmenu_State {
 		}
 		const item = this.selections.at(-1)!;
 		const index = item.menu.items.indexOf(item);
-		this.select(item.menu.items[index === 0 ? item.menu.items.length - 1 : index - 1]);
+		this.select(item.menu.items[index === 0 ? item.menu.items.length - 1 : index - 1]!);
 	}
 
 	select_first(): void {
-		this.select((this.selections.at(-1)?.menu ?? this.root_menu).items[0]);
+		const menu = this.selections.at(-1)?.menu ?? this.root_menu;
+		if (!menu.items.length) return;
+		this.select(menu.items[0]!);
 	}
 
 	select_last(): void {
@@ -310,10 +313,10 @@ export class Contextmenu_State {
 	add_entry(run: () => Contextmenu_Run, disabled: () => boolean = () => false): Entry_State {
 		const menu = contextmenu_submenu_context.maybe_get() ?? this.root_menu;
 		const entry = new Entry_State(menu, run, disabled);
-		menu.items.push(entry);
+		menu.items = [...menu.items, entry];
 		// TODO messy, runs more than needed
 		onDestroy(() => {
-			menu.items.length = 0;
+			menu.items = [];
 		});
 		return entry;
 	}
@@ -324,11 +327,11 @@ export class Contextmenu_State {
 	add_submenu(): Submenu_State {
 		const menu = contextmenu_submenu_context.maybe_get() ?? this.root_menu;
 		const submenu = new Submenu_State(menu, menu.depth + 1);
-		menu.items.push(submenu);
+		menu.items = [...menu.items, submenu];
 		contextmenu_submenu_context.set(submenu);
 		// TODO messy, runs more than needed
 		onDestroy(() => {
-			menu.items.length = 0;
+			menu.items = [];
 		});
 		return submenu;
 	}
@@ -341,23 +344,31 @@ const CONTEXTMENU_DOM_QUERY = `a,[data-${CONTEXTMENU_DATASET_KEY}]`;
 const contextmenu_cache: Map<string, Contextmenu_Params | Array<Contextmenu_Params>> = new Map();
 let cache_key_counter = 0;
 
-export const contextmenu_action = <T extends Contextmenu_Params, U extends T | Array<T>>(
-	el: HTMLElement | SVGElement,
-	params: U | null | undefined,
-): ActionReturn<U> | undefined => {
-	if (params == null) return;
-	const key = cache_key_counter++ + '';
-	el.dataset[CONTEXTMENU_DATASET_KEY] = key;
-	contextmenu_cache.set(key, params);
-	return {
-		update: (p: U) => {
-			contextmenu_cache.set(key, p);
-		},
-		destroy: () => {
+/**
+ * Creates an attachment that sets up contextmenu behavior on an element.
+ * @param params - Contextmenu parameters or nullish to disable
+ */
+export const contextmenu_attachment =
+	<T extends Contextmenu_Params, U extends T | Array<T>>(
+		params: U | null | undefined,
+	): Attachment<HTMLElement | SVGElement> =>
+	(el): undefined | (() => void) => {
+		// TODO could clean up the dataset attr, maybe use a weakmap?
+		if (params == null) return;
+
+		// Only create key once per element, reuse on updates
+		let key = el.dataset[CONTEXTMENU_DATASET_KEY];
+		if (!key) {
+			key = cache_key_counter++ + '';
+			el.dataset[CONTEXTMENU_DATASET_KEY] = key;
+		}
+
+		contextmenu_cache.set(key, params);
+
+		return () => {
 			contextmenu_cache.delete(key);
-		},
+		};
 	};
-};
 
 const CONTEXTMENU_OPEN_VIBRATE_DURATION = 17;
 
@@ -440,7 +451,8 @@ const query_contextmenu_params = (
 		if (el.tagName === 'A') {
 			(params ??= []).push({
 				snippet: 'link',
-				props: {href: (el as HTMLAnchorElement).href},
+				// anchor elements have the full url, but we want the slash-prefixed/absolute/root-relative version
+				props: {href: url_to_root_relative((el as HTMLAnchorElement).href)},
 			});
 		}
 		el = el.parentElement;

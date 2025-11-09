@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type {Snippet} from 'svelte';
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
 	// TODO @many should this have the Button suffix?
@@ -8,11 +7,11 @@
 		onpaste,
 		onerror,
 		children,
+		class: class_prop,
 		...rest
 	}: SvelteHTMLElements['button'] & {
 		onpaste: (text: string) => void;
 		onerror?: (error: Error) => void;
-		children?: Snippet;
 	} = $props();
 
 	// TODO add docs entry, see also Copy_To_Clipboard.svelte
@@ -22,6 +21,7 @@
 	type="button"
 	title="paste from clipboard"
 	{...rest}
+	class="paste_from_clipboard {class_prop}"
 	onclick={async () => {
 		try {
 			const text = await navigator.clipboard.readText();

@@ -1,15 +1,15 @@
 <script lang="ts">
-	import type {Snippet} from 'svelte';
+	import type {SvelteHTMLElements} from 'svelte/elements';
 
-	interface Props {
-		slug: string;
-		children?: Snippet;
-	}
-
-	const {slug, children}: Props = $props();
+	const {
+		slug,
+		children,
+		class: class_prop,
+		...rest
+	}: SvelteHTMLElements['a'] & {slug: string} = $props();
 </script>
 
-<a class="hashlink" href="#{slug}" aria-label="hashlink"
+<a {...rest} class="hashlink {class_prop}" href="#{slug}" aria-label="hashlink"
 	>{#if children}{@render children()}{:else}#{/if}</a
 >
 <span class="hashlink_scroll_target" id={slug} aria-hidden="true"></span>

@@ -1,12 +1,20 @@
 <script lang="ts">
 	import {page} from '$app/state';
-	import {ensure_end, strip_end, strip_start} from '@ryanatkn/belt/string.js';
 	import {format_url} from '@ryanatkn/belt/url.js';
 	import type {Snippet} from 'svelte';
-	import type {Pkg} from '@ryanatkn/belt/pkg.js';
 
+	import type {Pkg} from '$lib/pkg.svelte.js';
 	import Details from '$lib/Details.svelte';
 	import Img_Or_Svg from '$lib/Img_Or_Svg.svelte';
+	import Identifier_Link from '$lib/Identifier_Link.svelte';
+	import Module_Link from '$lib/Module_Link.svelte';
+	import {url_github_file, repo_url_parse, url_well_known} from '$lib/package_helpers.js';
+	import {
+		module_is_typescript,
+		module_is_svelte,
+		module_is_css,
+		module_is_json,
+	} from '$lib/module_helpers.js';
 
 	interface Props {
 		pkg: Pkg; // TODO normalized version with cached primitives?
@@ -22,46 +30,11 @@
 
 	// TODO show other data (lines of code)
 
-	const {package_json, src_json} = $derived(pkg);
-	const {modules: pkg_modules} = $derived(src_json);
+	const {package_json} = $derived(pkg);
 
-	// TODO helper (zod parser?)
-	const repository_url = $derived(
-		package_json.repository
-			? strip_start(
-					strip_end(
-						strip_end(
-							typeof package_json.repository === 'string'
-								? package_json.repository
-								: package_json.repository.url,
-							'.git',
-						),
-						'/',
-					),
-					'git+',
-				)
-			: null,
-	);
+	const repository_url = $derived(repo_url_parse(package_json.repository));
 	const license_url = $derived(
-		package_json.license && repository_url ? repository_url + '/blob/main/LICENSE' : null,
-	);
-
-	// TODO refactor
-	const to_source_url = (repo_url: string, module_name: string): string =>
-		repo_url +
-		'/blob/main/src/lib/' +
-		(module_name.endsWith('.js') ? module_name.slice(0, -3) + '.ts' : module_name);
-
-	const pkg_exports_keys = $derived(src_json.modules && Object.keys(src_json.modules)); // TODO hacky, see usage
-
-	// TODO helper, look at existing code
-	const modules = $derived(
-		src_json.modules
-			? Object.keys(src_json.modules).map((k) => {
-					const v = strip_start(k, './');
-					return v === '.' ? 'index.js' : v;
-				})
-			: null,
+		package_json.license && repository_url ? url_github_file(repository_url, 'LICENSE') : null,
 	);
 </script>
 
@@ -157,15 +130,11 @@
 					{#if pkg.homepage_url}
 						<span class="title">data</span>
 						<div class="content">
-							<a
-								class="chip"
-								title="data"
-								href="{ensure_end(pkg.homepage_url, '/')}.well-known/package.json">package.json</a
+							<a class="chip" title="data" href={url_well_known(pkg.homepage_url, 'package.json')}
+								>package.json</a
 							>
-							<a
-								class="chip"
-								title="data"
-								href="{ensure_end(pkg.homepage_url, '/')}.well-known/src.json">src.json</a
+							<a class="chip" title="data" href={url_well_known(pkg.homepage_url, 'src.json')}
+								>src.json</a
 							>
 						</div>
 					{/if}
@@ -182,29 +151,27 @@
 			</div>
 		{/if}
 	</div>
-	{#if modules && pkg.repo_url}
+	{#if pkg.modules.length > 0 && pkg.repo_url}
 		<section>
 			<menu class="unstyled">
-				{#each modules as module_name, i (module_name)}
+				{#each pkg.modules as module (module.path)}
 					<!-- TODO improve rendering and enrich data - start with the type (not just extension - mime?) -->
-					{@const source_url = to_source_url(pkg.repo_url, module_name)}
-					{@const exports_key = pkg_exports_keys?.[i]}
-					{@const pkg_module = exports_key ? pkg_modules?.[exports_key] : undefined}
-					{@const declarations = pkg_module?.declarations?.filter((d) => d.name !== 'default')}
 					<li
 						class="module"
-						class:ts={module_name.endsWith('.js')}
-						class:svelte={module_name.endsWith('.svelte')}
-						class:css={module_name.endsWith('.css')}
-						class:json={module_name.endsWith('.json')}
+						class:ts={module_is_typescript(module.path)}
+						class:svelte={module_is_svelte(module.path)}
+						class:css={module_is_css(module.path)}
+						class:json={module_is_json(module.path)}
 					>
 						<div class="module_content">
-							<a class="chip" href={source_url}>{module_name}</a>
-							{#if declarations?.length}
-								<ul class="declarations unstyled">
-									{#each declarations as { name, kind } (name)}
-										<li class="declaration chip {kind}_declaration">
-											{name}
+							<Module_Link module_path={module.path}>
+								{module.path}
+							</Module_Link>
+							{#if module.identifiers.length > 0}
+								<ul class="identifiers unstyled">
+									{#each module.identifiers as identifier (identifier.name)}
+										<li>
+											<Identifier_Link name={identifier.name} />
 										</li>
 									{/each}
 								</ul>
@@ -312,7 +279,7 @@
 		--link_color: var(--color_f_5);
 	}
 	/* TODO extract */
-	.declarations {
+	.identifiers {
 		display: flex;
 		flex: 1;
 		flex-direction: row;
@@ -320,23 +287,5 @@
 		align-items: flex-start;
 		gap: var(--space_xs) 0;
 		padding-top: var(--space_xs);
-	}
-	.declaration {
-		font-family: var(--font_family_mono);
-		font-size: var(--font_size_sm);
-		margin-left: var(--space_xs2);
-		margin-right: var(--space_xs2);
-	}
-	.variable_declaration {
-		color: var(--color_d_5);
-	}
-	.function_declaration {
-		color: var(--color_c_5);
-	}
-	.type_declaration {
-		color: var(--color_g_5);
-	}
-	.class_declaration {
-		color: var(--color_f_5);
 	}
 </style>

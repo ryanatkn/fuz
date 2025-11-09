@@ -1,0 +1,36 @@
+[
+	{
+		"type": "Codeblock",
+		"lang": null,
+		"content": "first block",
+		"start": 0,
+		"end": 19
+	},
+	{
+		"type": "Codeblock",
+		"lang": "js",
+		"content": "second block",
+		"start": 21,
+		"end": 43
+	},
+	{
+		"type": "Codeblock",
+		"lang": null,
+		"content": "third block",
+		"start": 45,
+		"end": 64
+	},
+	{
+		"type": "Paragraph",
+		"children": [
+			{
+				"type": "Text",
+				"content": "\n",
+				"start": 64,
+				"end": 65
+			}
+		],
+		"start": 64,
+		"end": 65
+	}
+]

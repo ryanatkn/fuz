@@ -1,11 +1,12 @@
 <script lang="ts">
 	import Alert from '$lib/Alert.svelte';
+	import Github_Link from '$lib/Github_Link.svelte';
 </script>
 
 <div class="width_upto_md m_auto">
 	<Alert status="help">todo</Alert>
 	<div>
-		<a href="https://github.com/ryanatkn/fuz/issues">github.com/ryanatkn/fuz/issues</a>
+		<Github_Link path="ryanatkn/fuz/issues" />
 	</div>
 </div>
 

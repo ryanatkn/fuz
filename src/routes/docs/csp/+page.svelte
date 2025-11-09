@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
+	import Github_Link from '$lib/Github_Link.svelte';
 	import {get_tome_by_name} from '$lib/tome.js';
 	import Tome_Content from '$lib/Tome_Content.svelte';
 	import Mdn_Link from '$lib/Mdn_Link.svelte';
@@ -12,7 +13,7 @@
 	import {render_value_to_string} from '$lib/helpers.js';
 	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
 	import Tome_Section from '$lib/Tome_Section.svelte';
-	import Identifier from '$lib/Identifier.svelte';
+	import Identifier_Link from '$lib/Identifier_Link.svelte';
 
 	const LIBRARY_ITEM_NAME = 'csp';
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
@@ -32,8 +33,8 @@
 				path="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Content_Security_Policy"
 				>Content Security Policies</Mdn_Link
 			> with the
-			<Identifier name="create_csp_directives" /> helper. Fuz also provides related helpers, types, and
-			CSP data.
+			<Identifier_Link name="create_csp_directives" /> helper. Fuz also provides related helpers, types,
+			and CSP data.
 		</p>
 		<p>
 			The goal is to provide a simple trust modeling system that balances safety+security+privacy
@@ -119,7 +120,7 @@ const custom_csp = create_csp_directives({
 			API with full declarative transparency (and more verbosity and information load).
 		</p>
 		<p>
-			Fuz defines an optional system with three levels of trust/risk/sensitivity (low/medium/high, <Identifier
+			Fuz defines an optional system with three levels of trust/risk/sensitivity (low/medium/high, <Identifier_Link
 				name="Csp_Trust_Level"
 			/>) that can be configured for each trusted source to give blanket permissions at a specified
 			tier. Granular overrides are straightforward and declarative.
@@ -135,7 +136,7 @@ const custom_csp = create_csp_directives({
 		<Tome_Section_Header text="Trust" />
 		<!-- TODO make this a header if it stabilizes -->
 		<p>
-			Fuz provides an optional CSP abstraction with three trust levels (of type <Identifier
+			Fuz provides an optional CSP abstraction with three trust levels (of type <Identifier_Link
 				name="Csp_Trust_Level"
 			/>) with tiers of escalating risk and implied permission. Sources can opt-in to blanket
 			permissions at a specific level:
@@ -154,7 +155,7 @@ const custom_csp = create_csp_directives({
 				<tr>
 					<th class="white_space_nowrap">trust level</th>
 					<th>what it means</th>
-					<th>configured by <Identifier name="required_trust_defaults_base" /></th>
+					<th>configured by <Identifier_Link name="required_trust_defaults_base" /></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -236,9 +237,9 @@ export const my_csp_trusted_sources: Array<Csp_Source_Spec> = [
 	<Tome_Section>
 		<Tome_Section_Header text="Base defaults" />
 		<p>
-			The options <code>value_defaults_base</code> (defaults to <Identifier
+			The options <code>value_defaults_base</code> (defaults to <Identifier_Link
 				name="csp_directive_value_defaults"
-			/>) and <code>required_trust_defaults_base</code> (defaults to <Identifier
+			/>) and <code>required_trust_defaults_base</code> (defaults to <Identifier_Link
 				name="csp_directive_required_trust_defaults"
 			/>) afford full control over defaults:
 		</p>
@@ -301,7 +302,7 @@ create_csp_directives({
 		<Tome_Section_Header text="Directive specs" />
 		<p>
 			<!-- TODO component for the `code` here to reference identifier -->
-			The exported <Identifier name="csp_directive_specs" /> has JSON data about the
+			The exported <Identifier_Link name="csp_directive_specs" /> has JSON data about the
 			<Mdn_Link path="Web/HTTP/Reference/Headers/Content-Security-Policy">CSP directives</Mdn_Link>.
 			Fuz omits deprecated directives.
 		</p>
@@ -325,10 +326,10 @@ create_csp_directives({
 		</table>
 	</Tome_Section>
 	<aside>
-		For more, see the <a href="https://github.com/ryanatkn/fuz/blob/main/src/lib/csp.ts"
-			>source code</a
+		For more, see the <Github_Link path="ryanatkn/fuz/blob/main/src/lib/csp.ts"
+			>source code</Github_Link
 		>
-		and <a href="https://github.com/ryanatkn/fuz/blob/main/src/lib/csp.test.ts">tests</a>. The API
+		and <Github_Link path="ryanatkn/fuz/blob/main/src/lib/csp.test.ts">tests</Github_Link>. The API
 		feels near-complete, and includes full customization of the default directive values and trust
 		levels. Some details may change and input is welcome.
 	</aside>

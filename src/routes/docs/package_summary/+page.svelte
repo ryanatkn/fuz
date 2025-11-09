@@ -4,7 +4,7 @@
 	import {get_tome_by_name} from '$lib/tome.js';
 	import Package_Summary from '$lib/Package_Summary.svelte';
 	import Tome_Content from '$lib/Tome_Content.svelte';
-	import {pkg_context} from '$lib/pkg.js';
+	import {pkg_context} from '$lib/pkg.svelte.js';
 
 	const LIBRARY_ITEM_NAME = 'Package_Summary';
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);

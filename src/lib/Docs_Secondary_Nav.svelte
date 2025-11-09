@@ -8,11 +8,13 @@
 	}
 
 	const {tomes, sidebar = true}: Props = $props();
+
+	const expand_width = $derived(!sidebar);
 </script>
 
 <aside class="docs_secondary_nav unstyled" class:sidebar>
 	<nav aria-label="Secondary nav">
-		<Docs_Menu {tomes} />
+		<Docs_Menu {tomes} {expand_width} />
 	</nav>
 </aside>
 

@@ -96,14 +96,14 @@ describe('Contextmenu_State - Structure', () => {
 			assert.strictEqual(submenu3.items.length, 0);
 
 			// Can still navigate structure
-			contextmenu.root_menu.items.push(submenu1);
-			submenu1.items.push(submenu2);
-			submenu2.items.push(submenu3);
+			contextmenu.root_menu.items = [...contextmenu.root_menu.items, submenu1];
+			submenu1.items = [...submenu1.items, submenu2];
+			submenu2.items = [...submenu2.items, submenu3];
 
 			// Verify structure is intact
-			assert.strictEqual(contextmenu.root_menu.items[0], submenu1);
-			assert.strictEqual(submenu1.items[0], submenu2);
-			assert.strictEqual(submenu2.items[0], submenu3);
+			assert.strictEqual(contextmenu.root_menu.items[0]!, submenu1);
+			assert.strictEqual(submenu1.items[0]!, submenu2);
+			assert.strictEqual(submenu2.items[0]!, submenu3);
 		});
 
 		test('menu hierarchy validation', () => {
@@ -137,8 +137,8 @@ describe('Contextmenu_State - Structure', () => {
 			assert.strictEqual(submenu2.menu, submenu1);
 
 			// Items array doesn't reference parents
-			contextmenu.root_menu.items.push(submenu1);
-			submenu1.items.push(submenu2);
+			contextmenu.root_menu.items = [...contextmenu.root_menu.items, submenu1];
+			submenu1.items = [...submenu1.items, submenu2];
 
 			// Verify no cycles exist by walking up the chain
 			let current: any = submenu2;
@@ -179,7 +179,7 @@ describe('Contextmenu_State - Structure', () => {
 			const entry = new Entry_State(submenu, () => () => {});
 			entry.promise = Promise.resolve();
 			entry.error_message = 'error';
-			submenu.items.push(entry);
+			submenu.items = [...submenu.items, entry];
 
 			contextmenu.reset_items([submenu]);
 
@@ -197,8 +197,8 @@ describe('Contextmenu_State - Structure', () => {
 			const submenu2 = new Submenu_State(submenu1, 3);
 			const entry = new Entry_State(submenu2, () => () => {});
 			entry.error_message = 'error';
-			submenu2.items.push(entry);
-			submenu1.items.push(submenu2);
+			submenu2.items = [...submenu2.items, entry];
+			submenu1.items = [...submenu1.items, submenu2];
 
 			contextmenu.reset_items([submenu1]);
 
@@ -211,7 +211,7 @@ describe('Contextmenu_State - Structure', () => {
 			const entry2 = new Entry_State(submenu, () => () => {});
 			entry1.error_message = 'error1';
 			entry2.error_message = 'error2';
-			submenu.items.push(entry1, entry2);
+			submenu.items = [...submenu.items, entry1, entry2];
 
 			contextmenu.reset_items([submenu]);
 

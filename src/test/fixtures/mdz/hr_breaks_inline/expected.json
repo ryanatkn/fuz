@@ -1,0 +1,33 @@
+[
+	{
+		"type": "Paragraph",
+		"children": [
+			{
+				"type": "Text",
+				"content": "**Bold starts",
+				"start": 0,
+				"end": 13
+			}
+		],
+		"start": 0,
+		"end": 13
+	},
+	{
+		"type": "Hr",
+		"start": 15,
+		"end": 18
+	},
+	{
+		"type": "Paragraph",
+		"children": [
+			{
+				"type": "Text",
+				"content": "Bold ends**\n",
+				"start": 20,
+				"end": 32
+			}
+		],
+		"start": 20,
+		"end": 32
+	}
+]

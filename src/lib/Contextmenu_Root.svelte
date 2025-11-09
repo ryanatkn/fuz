@@ -207,7 +207,7 @@
 			return;
 		}
 
-		const {clientX, clientY} = touches[0];
+		const {clientX, clientY} = touches[0]!;
 
 		// Check if this is a tap-then-longpress gesture
 		if (

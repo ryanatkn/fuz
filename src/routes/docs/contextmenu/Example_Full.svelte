@@ -6,6 +6,7 @@
 
 	import Contextmenu from '$lib/Contextmenu.svelte';
 	import Details from '$lib/Details.svelte';
+	import Github_Link from '$lib/Github_Link.svelte';
 	import Contextmenu_Text_Entry from '$lib/Contextmenu_Text_Entry.svelte';
 	import Cat_Contextmenu from '$routes/docs/contextmenu/Cat_Contextmenu.svelte';
 	import App_Contextmenu from '$routes/docs/contextmenu/App_Contextmenu.svelte';
@@ -211,14 +212,10 @@
 				<h1>About Fuz</h1>
 				<blockquote>Svelte UI library</blockquote>
 				<blockquote>
-					free and open source at<br /><a href="https://github.com/ryanatkn/fuz"
-						>github.com/ryanatkn/fuz</a
-					>
+					free and open source at<br /><Github_Link path="ryanatkn/fuz" />
 				</blockquote>
 				<code class="display_block p_md mb_lg"
-					>npm i -D <a href="https://www.npmjs.com/package/@fuz.dev/fuz_contextmenu"
-						>@fuz.dev/fuz_contextmenu</a
-					></code
+					>npm i -D <a href="https://www.npmjs.com/package/@ryanatkn/fuz">@ryanatkn/fuz</a></code
 				>
 				<div class="p_xl box">
 					<h2>Color scheme</h2>

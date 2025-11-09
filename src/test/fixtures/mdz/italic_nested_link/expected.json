@@ -1,0 +1,36 @@
+[
+	{
+		"type": "Paragraph",
+		"children": [
+			{
+				"type": "Italic",
+				"children": [
+					{
+						"type": "Text",
+						"content": "see ",
+						"start": 1,
+						"end": 5
+					},
+					{
+						"type": "Link",
+						"reference": "Foo",
+						"display_text": null,
+						"link_type": "identifier",
+						"start": 5,
+						"end": 16
+					},
+					{
+						"type": "Text",
+						"content": " here",
+						"start": 16,
+						"end": 21
+					}
+				],
+				"start": 0,
+				"end": 22
+			}
+		],
+		"start": 0,
+		"end": 22
+	}
+]

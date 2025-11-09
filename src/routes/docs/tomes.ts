@@ -19,6 +19,9 @@ import Svg from '$routes/docs/svg/+page.svelte';
 import csp from '$routes/docs/csp/+page.svelte';
 import logos from '$routes/docs/logos/+page.svelte';
 import theming from '$routes/docs/theming/+page.svelte';
+import api from '$routes/docs/api/+page.svelte';
+import intersect from '$routes/docs/intersect/+page.svelte';
+import mdz from '$routes/docs/mdz/+page.svelte';
 
 // TODO maybe decouple `related` from `Tome` to get bidirectionality for free
 
@@ -36,9 +39,21 @@ export const tomes: Array<Tome> = [
 		related: [],
 	},
 	{
+		name: 'api',
+		category: 'guide',
+		component: api,
+		related: ['mdz', 'Package_Detail', 'Package_Summary'],
+	},
+	{
 		name: 'csp',
 		category: 'helpers',
 		component: csp,
+		related: [],
+	},
+	{
+		name: 'intersect',
+		category: 'helpers',
+		component: intersect,
 		related: [],
 	},
 	{
@@ -46,6 +61,12 @@ export const tomes: Array<Tome> = [
 		category: 'helpers',
 		component: logos,
 		related: ['Package_Detail', 'Package_Summary', 'Svg'],
+	},
+	{
+		name: 'mdz',
+		category: 'helpers',
+		component: mdz,
+		related: ['api'],
 	},
 	{
 		name: 'Alert',

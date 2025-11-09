@@ -27,7 +27,7 @@
 		 * Consider a `<details>` element instead of making this component eager.
 		 */
 		eager?: boolean;
-		summary: Snippet;
+		summary: string | Snippet;
 		summary_attrs?: SvelteHTMLElements['summary'];
 		children: Snippet;
 	} = $props();
@@ -36,7 +36,13 @@
 </script>
 
 <details {...rest} bind:open>
-	<summary {...summary_attrs}>{@render summary()}</summary>
+	<summary {...summary_attrs}>
+		{#if typeof summary === 'string'}
+			{summary}
+		{:else}
+			{@render summary()}
+		{/if}
+	</summary>
 	{#if eager}
 		{@render children()}
 	{:else if open}

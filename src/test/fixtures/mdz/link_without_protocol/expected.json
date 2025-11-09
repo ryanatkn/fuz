@@ -1,0 +1,31 @@
+[
+	{
+		"type": "Paragraph",
+		"children": [
+			{
+				"type": "Link",
+				"reference": "example.com",
+				"display_text": null,
+				"link_type": "identifier",
+				"start": 0,
+				"end": 19
+			},
+			{
+				"type": "Text",
+				"content": " and ",
+				"start": 19,
+				"end": 24
+			},
+			{
+				"type": "Link",
+				"reference": "www.example.com",
+				"display_text": null,
+				"link_type": "identifier",
+				"start": 24,
+				"end": 47
+			}
+		],
+		"start": 0,
+		"end": 47
+	}
+]
