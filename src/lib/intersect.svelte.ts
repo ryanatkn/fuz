@@ -30,7 +30,7 @@ export type Intersect_Params_Or_Callback = On_Intersect | Intersect_Params;
  * Creates an attachment that observes element viewport intersection.
  * Uses the lazy function pattern to optimize reactivity:
  * callbacks can update without recreating the observer, preserving state.
- * @param get_params - Function that returns callback, params object, or nullish to disable
+ * @param get_params Function that returns callback, params object, or nullish to disable
  */
 export const intersect =
 	(

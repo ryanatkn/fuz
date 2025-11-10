@@ -346,7 +346,7 @@ let cache_key_counter = 0;
 
 /**
  * Creates an attachment that sets up contextmenu behavior on an element.
- * @param params - Contextmenu parameters or nullish to disable
+ * @param params Contextmenu parameters or nullish to disable
  */
 export const contextmenu_attachment =
 	<T extends Contextmenu_Params, U extends T | Array<T>>(
@@ -382,11 +382,11 @@ export interface Open_Contextmenu_Options {
 /**
  * Opens the contextmenu, if appropriate,
  * querying the menu items from the DOM starting at the event target.
- * @param target - the leaf element from which to open the contextmenu
- * @param x - the page X coordinate at which to open the contextmenu, typically the mouse `pageX`
- * @param y - the page Y coordinate at which to open the contextmenu, typically the mouse `pageY`
- * @param contextmenu - the contextmenu store
- * @param options - optional configuration for filtering entries and haptic feedback
+ * @param target the leaf element from which to open the contextmenu
+ * @param x the page X coordinate at which to open the contextmenu, typically the mouse `pageX`
+ * @param y the page Y coordinate at which to open the contextmenu, typically the mouse `pageY`
+ * @param contextmenu the contextmenu store
+ * @param options optional configuration for filtering entries and haptic feedback
  * @returns a boolean indicating if the menu was opened or not
  */
 export const open_contextmenu = (
@@ -489,7 +489,7 @@ const non_scoped_roots: Set<symbol> = new Set();
  * Registers a contextmenu root and warns if multiple non-scoped roots are detected.
  * Only active in development mode. Automatically handles cleanup on unmount.
  *
- * @param get_scoped - Getter function that returns the current scoped value
+ * @param get_scoped Getter function that returns the current scoped value
  */
 export const contextmenu_check_global_root = (get_scoped: () => boolean): void => {
 	const id = Symbol('contextmenu_root');

@@ -1,7 +1,7 @@
 {
 	"text": "Function that can throw multiple error types.",
 	"params": {
-		"value": "- value to validate"
+		"value": "value to validate"
 	},
 	"throws": [
 		{

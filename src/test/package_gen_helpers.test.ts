@@ -47,7 +47,7 @@ const create_mock_logger = (): Logger & {
  *
  * Provides minimal package metadata for testing validation logic.
  *
- * @param modules - array of Module_Json objects to include
+ * @param modules array of Module_Json objects to include
  * @returns Src_Json with standard test package name and version
  */
 const create_mock_src_json = (modules: Array<Module_Json>): Src_Json => {
@@ -63,8 +63,8 @@ const create_mock_src_json = (modules: Array<Module_Json>): Src_Json => {
  *
  * Simplifies test setup by auto-generating minimal identifier metadata.
  *
- * @param path - module path (e.g., 'foo.ts', 'Bar.svelte')
- * @param identifiers - array of identifier objects with name and kind
+ * @param path module path (e.g., 'foo.ts', 'Bar.svelte')
+ * @param identifiers array of identifier objects with name and kind
  * @returns Module_Json with the specified identifiers
  */
 const create_mock_module = (

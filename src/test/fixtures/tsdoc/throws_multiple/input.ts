@@ -1,7 +1,7 @@
 /**
  * Function that can throw multiple error types.
  *
- * @param value - value to validate
+ * @param value value to validate
  * @throws TypeError if value is not a string
  * @throws RangeError if value length exceeds limit
  * @throws Error for other validation failures

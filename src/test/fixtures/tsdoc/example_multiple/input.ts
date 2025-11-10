@@ -1,7 +1,7 @@
 /**
  * Function with multiple usage examples.
  *
- * @param text - text to transform
+ * @param text text to transform
  * @example
  * capitalize('hello'); // "HELLO"
  * @example
