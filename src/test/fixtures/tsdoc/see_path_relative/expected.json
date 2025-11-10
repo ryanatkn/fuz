@@ -1,8 +1,0 @@
-{
-	"text": "Function with relative path references.",
-	"params": {},
-	"see_also": [
-		"./helper.ts",
-		"../types.ts"
-	]
-}

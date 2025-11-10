@@ -184,6 +184,8 @@ const svelte_extract_bindable_props = (virtual_source: ts.SourceFile): Set<strin
 
 /**
  * Extract props from a type node (handles type literals and intersection types).
+ *
+ * @mutates props - adds extracted prop info to the array
  */
 const svelte_extract_props_from_type = (
 	type_node: ts.TypeNode,

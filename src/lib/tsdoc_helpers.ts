@@ -17,6 +17,9 @@
  * Also supports `@mutates` (non-standard) for documenting side effects.
  * Only `@returns` is supported (not `@return`).
  *
+ * The `@see` tag supports multiple formats: plain URLs (`https://...`), `{@link}` syntax, and module names.
+ * Relative/absolute path support in `@see` is TBD.
+ *
  * ## Behavioral notes
  *
  * Due to TS Compiler API limitations:
