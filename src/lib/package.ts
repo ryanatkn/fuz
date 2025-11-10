@@ -60,7 +60,7 @@ export const package_json: Package_Json = {
 	devDependencies: {
 		'@changesets/changelog-git': '^0.2.1',
 		'@ryanatkn/belt': '^0.36.1',
-		'@ryanatkn/eslint-config': '^0.8.0',
+		'@ryanatkn/eslint-config': '^0.8.1',
 		'@ryanatkn/fuz_code': '^0.30.1',
 		'@ryanatkn/gro': '^0.171.0',
 		'@ryanatkn/moss': '^0.36.3',
@@ -426,9 +426,8 @@ export const src_json: Src_Json = {
 				{
 					name: 'contextmenu_is_valid_target',
 					kind: 'function',
-					doc_comment:
-						'Check if a target element is valid for contextmenu interactions.\nReturns true if valid and narrows the type to HTMLElement | SVGElement.',
-					source_line: 17,
+					doc_comment: 'Returns true if valid and narrows the type to HTMLElement | SVGElement.',
+					source_line: 16,
 					type_signature:
 						'(target: EventTarget | null, shiftKey: boolean): target is HTMLElement | SVGElement',
 					return_type: 'boolean',
@@ -448,9 +447,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'contextmenu_create_keyboard_handlers',
 					kind: 'function',
-					doc_comment:
-						'Creates the keyboard handler map for contextmenu navigation.\nBinds handlers to the provided contextmenu instance.',
-					source_line: 32,
+					source_line: 27,
 					type_signature: '(contextmenu: Contextmenu_State): Map<string, () => void>',
 					return_type: 'Map<string, () => void>',
 					parameters: [
@@ -464,9 +461,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'contextmenu_create_keydown_handler',
 					kind: 'function',
-					doc_comment:
-						'Creates a keydown event handler that uses the provided keyboard handlers map.',
-					source_line: 50,
+					source_line: 42,
 					type_signature:
 						'(keyboard_handlers: Map<string, () => void>): (e: KeyboardEvent) => void',
 					return_type: '(e: KeyboardEvent) => void',
@@ -481,9 +476,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'contextmenu_calculate_constrained_x',
 					kind: 'function',
-					doc_comment:
-						'Calculates the constrained X position for the contextmenu,\nensuring it stays within the layout width.',
-					source_line: 65,
+					source_line: 53,
 					type_signature: '(menu_x: number, menu_width: number, layout_width: number): number',
 					return_type: 'number',
 					parameters: [
@@ -507,9 +500,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'contextmenu_calculate_constrained_y',
 					kind: 'function',
-					doc_comment:
-						'Calculates the constrained Y position for the contextmenu,\nensuring it stays within the layout height.',
-					source_line: 75,
+					source_line: 59,
 					type_signature: '(menu_y: number, menu_height: number, layout_height: number): number',
 					return_type: 'number',
 					parameters: [
@@ -927,7 +918,9 @@ export const src_json: Src_Json = {
 					kind: 'class',
 					doc_comment:
 						'Creates a `contextmenu` store.\nSee usage with `Contextmenu_Root.svelte` and `Contextmenu.svelte`.',
-					see_also: ['https://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event'],
+					see_also: [
+						'{@link https://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event}',
+					],
 					source_line: 86,
 					members: [
 						{
@@ -1319,7 +1312,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'csp_trusted_sources_of_ryanatkn',
 					kind: 'variable',
-					doc_comment: 'List of trusted sources owned by ryanatkn (me, ryanatkn.com).',
+					doc_comment: 'Trusted sources owned by ryanatkn.',
 					source_line: 6,
 					type_signature: 'Csp_Source_Spec[]',
 				},
@@ -1561,7 +1554,7 @@ export const src_json: Src_Json = {
 					doc_comment:
 						'Static data descriptors for the CSP directives.\nFuz excludes deprecated directives, so those are intentionally omitted,\nbut any newer missing directives are bugs.\n\nCould be moved to `csp.ts` but is currently here to keep that module smaller.',
 					see_also: [
-						'https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy',
+						'{@link https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy}',
 					],
 					source_line: 344,
 					type_signature: 'Csp_Directive_Spec[]',
@@ -2464,23 +2457,18 @@ export const src_json: Src_Json = {
 				{
 					name: 'render_value_to_string',
 					kind: 'function',
-					doc_comment: 'Renders any value to a string representation',
-					source_line: 7,
+					source_line: 1,
 					type_signature: '(value: unknown): string',
 					return_type: 'string',
-					return_description: 'A string representation of the value',
 					parameters: [
 						{
 							name: 'value',
 							type: 'unknown',
 							optional: false,
-							description: 'Any JS value to stringify',
 						},
 					],
 				},
 			],
-			module_comment:
-				'Renders any value to a string representation\n\n@param value Any JS value to stringify\n@returns A string representation of the value',
 		},
 		{
 			path: 'Hidden_Personal_Links.svelte',
@@ -2526,8 +2514,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'create_identifier_contextmenu',
 					kind: 'function',
-					doc_comment: 'Create contextmenu entries for an identifier.',
-					source_line: 9,
+					source_line: 6,
 					type_signature: '(identifier: Identifier): Contextmenu_Params[]',
 					return_type: 'Contextmenu_Params[]',
 					parameters: [
@@ -2599,7 +2586,6 @@ export const src_json: Src_Json = {
 						{
 							name: 'pkg',
 							kind: 'variable',
-							doc_comment: 'Get parent Pkg for accessing package metadata.',
 						},
 						{
 							name: 'module_path',
@@ -2649,12 +2635,10 @@ export const src_json: Src_Json = {
 						{
 							name: 'type_signature',
 							kind: 'variable',
-							doc_comment: 'TypeScript type signature.',
 						},
 						{
 							name: 'doc_comment',
 							kind: 'variable',
-							doc_comment: 'Main documentation comment.',
 						},
 						{
 							name: 'deprecated_message',
@@ -2664,17 +2648,14 @@ export const src_json: Src_Json = {
 						{
 							name: 'parameters',
 							kind: 'variable',
-							doc_comment: 'Function/method parameters.',
 						},
 						{
 							name: 'props',
 							kind: 'variable',
-							doc_comment: 'Svelte component props.',
 						},
 						{
 							name: 'return_type',
 							kind: 'variable',
-							doc_comment: 'Return type for functions/methods.',
 						},
 						{
 							name: 'return_description',
@@ -2684,22 +2665,18 @@ export const src_json: Src_Json = {
 						{
 							name: 'generic_params',
 							kind: 'variable',
-							doc_comment: 'Generic type parameters.',
 						},
 						{
 							name: 'extends',
 							kind: 'variable',
-							doc_comment: 'Base classes/types this extends.',
 						},
 						{
 							name: 'implements',
 							kind: 'variable',
-							doc_comment: 'Interfaces this implements.',
 						},
 						{
 							name: 'throws',
 							kind: 'variable',
-							doc_comment: 'Exception types this may throw.',
 						},
 						{
 							name: 'since',
@@ -2724,37 +2701,30 @@ export const src_json: Src_Json = {
 						{
 							name: 'properties',
 							kind: 'variable',
-							doc_comment: 'Type/interface properties.',
 						},
 						{
 							name: 'has_examples',
 							kind: 'variable',
-							doc_comment: 'Check if identifier has code examples.',
 						},
 						{
 							name: 'is_deprecated',
 							kind: 'variable',
-							doc_comment: 'Check if identifier is deprecated.',
 						},
 						{
 							name: 'has_documentation',
 							kind: 'variable',
-							doc_comment: 'Check if identifier has documentation.',
 						},
 						{
 							name: 'has_parameters',
 							kind: 'variable',
-							doc_comment: 'Check if function/method has parameters.',
 						},
 						{
 							name: 'has_props',
 							kind: 'variable',
-							doc_comment: 'Check if component has props.',
 						},
 						{
 							name: 'has_generics',
 							kind: 'variable',
-							doc_comment: 'Check if type/function has generic parameters.',
 						},
 					],
 				},
@@ -3079,7 +3049,6 @@ export const src_json: Src_Json = {
 							name: 'path',
 							type: 'string',
 							optional: false,
-							description: '',
 						},
 					],
 					source_line: 1,
@@ -3467,7 +3436,6 @@ export const src_json: Src_Json = {
 							name: '#flush_text',
 							kind: 'function',
 							type_signature: '() => void',
-							doc_comment: 'Flush accumulated text as a single Text node.',
 						},
 						{
 							name: '#parse_node',
@@ -3541,7 +3509,6 @@ export const src_json: Src_Json = {
 							name: '#match',
 							kind: 'function',
 							type_signature: '(str: string) => boolean',
-							doc_comment: 'Check if template matches string at current index.',
 						},
 						{
 							name: '#eat',
@@ -3603,8 +3570,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'create_module_contextmenu',
 					kind: 'function',
-					doc_comment: 'Create contextmenu entries for a module.',
-					source_line: 9,
+					source_line: 6,
 					type_signature: '(module: Module): Contextmenu_Params[]',
 					return_type: 'Contextmenu_Params[]',
 					parameters: [
@@ -3815,7 +3781,6 @@ export const src_json: Src_Json = {
 						{
 							name: 'module_comment',
 							kind: 'variable',
-							doc_comment: 'Module-level JSDoc comment.',
 						},
 						{
 							name: 'identifiers',
@@ -3839,13 +3804,11 @@ export const src_json: Src_Json = {
 							name: 'has_identifiers',
 							kind: 'variable',
 							type_signature: 'boolean',
-							doc_comment: 'Check if module has any identifiers.',
 						},
 						{
 							name: 'has_module_comment',
 							kind: 'variable',
 							type_signature: 'boolean',
-							doc_comment: 'Check if module has a module-level comment.',
 						},
 						{
 							name: 'get_identifier_by_name',
@@ -4775,7 +4738,6 @@ export const src_json: Src_Json = {
 				{
 					name: 'Spiders',
 					kind: 'component',
-					doc_comment: 'Returns the minute of the current day.',
 					props: [
 						{
 							name: 'spiders',
@@ -4805,7 +4767,7 @@ export const src_json: Src_Json = {
 					kind: 'type',
 					doc_comment: 'Top-level source metadata.',
 					see_also: [
-						'https://github.com/ryanatkn/gro/blob/main/src/docs/gro_plugin_sveltekit_app.md#well-known-src',
+						'{@link https://github.com/ryanatkn/gro/blob/main/src/docs/gro_plugin_sveltekit_app.md#well-known-src}',
 					],
 					source_line: 6,
 					type_signature: 'Src_Json',
@@ -5274,7 +5236,6 @@ export const src_json: Src_Json = {
 							name: 'shrink',
 							type: 'boolean',
 							optional: true,
-							description: 'Flex shrink behavior? Defaults to `true`.',
 						},
 						{
 							name: 'attrs',
@@ -5758,7 +5719,7 @@ export const src_json: Src_Json = {
 					name: 'ts_infer_declaration_kind',
 					kind: 'function',
 					doc_comment: 'Infer declaration kind from symbol and node.',
-					source_line: 57,
+					source_line: 54,
 					type_signature: '(symbol: Symbol, node: Node): Identifier_Kind | null',
 					return_type: 'Identifier_Kind | null',
 					parameters: [
@@ -5779,7 +5740,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Extract function/method information including parameters\nwith descriptions and default values.',
-					source_line: 88,
+					source_line: 87,
 					type_signature:
 						'(node: Node, symbol: Symbol, checker: TypeChecker, identifier: Identifier_Json, tsdoc: Tsdoc_Parsed_Comment | undefined): void',
 					return_type: 'void',
@@ -5815,7 +5776,7 @@ export const src_json: Src_Json = {
 					name: 'ts_extract_type_info',
 					kind: 'function',
 					doc_comment: 'Extract type/interface information with rich property metadata.',
-					source_line: 157,
+					source_line: 158,
 					type_signature:
 						'(node: Node, _symbol: Symbol, checker: TypeChecker, identifier: Identifier_Json): void',
 					return_type: 'void',
@@ -5846,7 +5807,7 @@ export const src_json: Src_Json = {
 					name: 'ts_extract_class_info',
 					kind: 'function',
 					doc_comment: 'Extract class information with rich member metadata.',
-					source_line: 219,
+					source_line: 222,
 					type_signature:
 						'(node: Node, _symbol: Symbol, checker: TypeChecker, identifier: Identifier_Json): void',
 					return_type: 'void',
@@ -5877,7 +5838,7 @@ export const src_json: Src_Json = {
 					name: 'ts_extract_variable_info',
 					kind: 'function',
 					doc_comment: 'Extract variable information.',
-					source_line: 289,
+					source_line: 294,
 					type_signature:
 						'(node: Node, symbol: Symbol, checker: TypeChecker, identifier: Identifier_Json): void',
 					return_type: 'void',
@@ -5908,7 +5869,7 @@ export const src_json: Src_Json = {
 					name: 'ts_extract_module_comment',
 					kind: 'function',
 					doc_comment: 'Extract module-level comment.',
-					source_line: 306,
+					source_line: 311,
 					type_signature: '(source_file: SourceFile): string | undefined',
 					return_type: 'string | undefined',
 					parameters: [
@@ -5923,7 +5884,7 @@ export const src_json: Src_Json = {
 					name: 'ts_create_program',
 					kind: 'function',
 					doc_comment: 'Create TypeScript program for analysis.',
-					source_line: 329,
+					source_line: 334,
 					type_signature: '(log: { warn: (message: string) => void; }): Program | null',
 					return_type: 'Program | null',
 					parameters: [
@@ -5945,7 +5906,7 @@ export const src_json: Src_Json = {
 					name: 'Tsdoc_Parsed_Comment',
 					kind: 'type',
 					doc_comment: 'Parsed JSDoc/TSDoc comment with structured metadata.',
-					source_line: 32,
+					source_line: 38,
 					type_signature: 'Tsdoc_Parsed_Comment',
 					properties: [
 						{
@@ -5964,37 +5925,43 @@ export const src_json: Src_Json = {
 							name: 'returns',
 							kind: 'variable',
 							type_signature: 'string',
-							doc_comment: 'Return value description from @ returns or @ return',
+							doc_comment: 'Return value description from `@returns`',
 						},
 						{
 							name: 'throws',
 							kind: 'variable',
 							type_signature: 'Array<{type?: string; description: string}>',
-							doc_comment: 'Thrown errors from @ throws',
+							doc_comment: 'Thrown errors from `@throws`',
 						},
 						{
 							name: 'examples',
 							kind: 'variable',
 							type_signature: 'Array<string>',
-							doc_comment: 'Code examples from @ example',
+							doc_comment: 'Code examples from `@example`',
 						},
 						{
 							name: 'deprecated_message',
 							kind: 'variable',
 							type_signature: 'string',
-							doc_comment: 'Deprecation message from @ deprecated',
+							doc_comment: 'Deprecation message from `@deprecated`',
 						},
 						{
 							name: 'see_also',
 							kind: 'variable',
 							type_signature: 'Array<string>',
-							doc_comment: 'Related references from @ see',
+							doc_comment: 'Related references from `@see`',
 						},
 						{
 							name: 'since',
 							kind: 'variable',
 							type_signature: 'string',
-							doc_comment: 'Version information from @ since',
+							doc_comment: 'Version information from `@since`',
+						},
+						{
+							name: 'mutates',
+							kind: 'variable',
+							type_signature: 'Array<string>',
+							doc_comment: 'Mutation documentation from `@mutates` (non-standard)',
 						},
 					],
 				},
@@ -6002,9 +5969,8 @@ export const src_json: Src_Json = {
 					name: 'tsdoc_parse',
 					kind: 'function',
 					doc_comment:
-						'Parse JSDoc comment from a TypeScript node.\n\nExtracts and parses all JSDoc tags including:\n\n- @ param - parameter descriptions\n- @ returns/@ return - return value description\n- @ throws - error documentation\n- @ example - code examples\n- @ deprecated - deprecation warnings\n- @ see - related references\n- @ since - version information',
-					see_also: ['tag text)'],
-					source_line: 67,
+						'Parse JSDoc comment from a TypeScript node.\n\nExtracts and parses all JSDoc tags including:\n\n- `@param` - parameter descriptions\n- `@returns` - return value description\n- `@throws` - error documentation\n- `@example` - code examples\n- `@deprecated` - deprecation warnings\n- `@see` - related references\n- `@since` - version information\n- `@mutates` - mutation documentation (non-standard)',
+					source_line: 76,
 					type_signature: '(node: Node, source_file: SourceFile): Tsdoc_Parsed_Comment | undefined',
 					return_type: 'Tsdoc_Parsed_Comment | undefined',
 					parameters: [
@@ -6018,7 +5984,7 @@ export const src_json: Src_Json = {
 							name: 'source_file',
 							type: 'SourceFile',
 							optional: false,
-							description: '- Source file (used for extracting full',
+							description: '- Source file (used for extracting full` @see` tag text)',
 						},
 					],
 				},
@@ -6027,7 +5993,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Apply parsed TSDoc metadata to an identifier.\n\nConsolidates the common pattern of assigning TSDoc fields to identifiers,\nwith conditional assignment for array fields (only if non-empty).',
-					source_line: 170,
+					source_line: 176,
 					type_signature: '(identifier: any, tsdoc: Tsdoc_Parsed_Comment | undefined): void',
 					return_type: 'void',
 					parameters: [
@@ -6035,19 +6001,19 @@ export const src_json: Src_Json = {
 							name: 'identifier',
 							type: 'any',
 							optional: false,
-							description: '- The identifier to update',
+							description: '- identifier object to update',
 						},
 						{
 							name: 'tsdoc',
 							type: 'Tsdoc_Parsed_Comment | undefined',
 							optional: false,
-							description: '- The parsed TSDoc comment (if available)',
+							description: '- parsed TSDoc comment (if available)',
 						},
 					],
 				},
 			],
 			module_comment:
-				'TSDoc/JSDoc parsing helpers using the TypeScript Compiler API.\n\nProvides `tsdoc_parse()` for extracting JSDoc/TSDoc from TypeScript nodes.\n\n## How it works\n\nUses TypeScript\'s built-in `ts.getJSDocCommentsAndTags()` API to extract\nstructured documentation from AST nodes.\n\n## Behavioral notes (due to TS Compiler API)\n\n- Preserves dash separator in @param descriptions: `@param x - desc` → `"- desc"`\n- @throws tags have {Type} stripped by TS API; fallback regex extracts first word as error type\n- @see tags strip URL protocols from comment text; we use `getText()` to get the full source\n\n## Usage\n\nWorks on all TypeScript nodes, including:\n- Regular TypeScript files (.ts, .tsx)\n- Transformed output from svelte2tsx\n- Any node with JSDoc comments in the AST\n\nAll functions are prefixed with `tsdoc_` for clarity.',
+				'TSDoc/JSDoc parsing helpers using the TypeScript Compiler API.\n\nProvides `tsdoc_parse()` for extracting JSDoc/TSDoc from TypeScript nodes.\nPrimarily designed for build-time code generation but can be used at runtime.\n\n## Design\n\nPure extraction approach: extracts documentation as-is with minimal transformation,\npreserving source intent. Works around TypeScript Compiler API quirks where needed.\n\nSupports both regular TypeScript and Svelte components (via svelte2tsx output).\n\n## Tag support\n\nSupports standard TSDoc tags: `@param`, `@returns`, `@throws`, `@example`, `@deprecated`, `@see`, `@since`.\nAlso supports `@mutates` (non-standard) for documenting side effects.\nOnly `@returns` is supported (not `@return`).\n\nThe `@see` tag supports multiple formats: plain URLs (`https://...`), `{@link}` syntax, and module names.\nRelative/absolute path support in `@see` is TBD.\n\n## Behavioral notes\n\nDue to TS Compiler API limitations:\n- Preserves dash separator in `@param` descriptions: `@param x - desc` → `"- desc"`\n- `@throws` tags have `{Type}` stripped by TS API; fallback regex extracts first word as error type\n- TS API strips URL protocols from `@see` tag text; we use `getText()` to preserve original format including `{@link}` syntax\n\nAll functions are prefixed with `tsdoc_` for clarity.',
 		},
 		{
 			path: 'Type_Link.svelte',

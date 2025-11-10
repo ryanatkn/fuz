@@ -11,7 +11,6 @@ export const CONTEXTMENU_DEFAULT_LONGPRESS_DURATION = 633;
 export const CONTEXTMENU_DEFAULT_LONGPRESS_MOVE_TOLERANCE = 21;
 
 /**
- * Check if a target element is valid for contextmenu interactions.
  * Returns true if valid and narrows the type to HTMLElement | SVGElement.
  */
 export const contextmenu_is_valid_target = (
@@ -25,10 +24,6 @@ export const contextmenu_is_valid_target = (
 
 // TODO maybe bind these to the contextmenu instance instead of including the function wrapper
 // TODO customize
-/**
- * Creates the keyboard handler map for contextmenu navigation.
- * Binds handlers to the provided contextmenu instance.
- */
 export const contextmenu_create_keyboard_handlers = (
 	contextmenu: Contextmenu_State,
 ): Map<string, () => void> =>
@@ -44,9 +39,6 @@ export const contextmenu_create_keyboard_handlers = (
 		['Enter', () => contextmenu.activate_selected()],
 	]);
 
-/**
- * Creates a keydown event handler that uses the provided keyboard handlers map.
- */
 export const contextmenu_create_keydown_handler = (
 	keyboard_handlers: Map<string, () => void>,
 ): ((e: KeyboardEvent) => void) => {
@@ -58,20 +50,12 @@ export const contextmenu_create_keydown_handler = (
 	};
 };
 
-/**
- * Calculates the constrained X position for the contextmenu,
- * ensuring it stays within the layout width.
- */
 export const contextmenu_calculate_constrained_x = (
 	menu_x: number,
 	menu_width: number,
 	layout_width: number,
 ): number => menu_x + Math.min(0, layout_width - (menu_x + menu_width));
 
-/**
- * Calculates the constrained Y position for the contextmenu,
- * ensuring it stays within the layout height.
- */
 export const contextmenu_calculate_constrained_y = (
 	menu_y: number,
 	menu_height: number,

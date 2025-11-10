@@ -24,9 +24,6 @@ export class Identifier {
 	readonly module: Module = $state.raw()!;
 	readonly identifier_json: Identifier_Json = $state.raw()!;
 
-	/**
-	 * Get parent Pkg for accessing package metadata.
-	 */
 	pkg = $derived(this.module.pkg);
 
 	/**
@@ -89,114 +86,46 @@ export class Identifier {
 	// Direct accessors for identifier_json properties
 	// These provide convenient access without repeatedly typing `.identifier_json`
 
-	/**
-	 * TypeScript type signature.
-	 */
 	type_signature = $derived(this.identifier_json.type_signature);
-
-	/**
-	 * Main documentation comment.
-	 */
 	doc_comment = $derived(this.identifier_json.doc_comment);
-
 	/**
 	 * Deprecation message if identifier is deprecated.
 	 */
 	deprecated_message = $derived(this.identifier_json.deprecated_message);
-
-	/**
-	 * Function/method parameters.
-	 */
 	parameters = $derived(this.identifier_json.parameters);
-
-	/**
-	 * Svelte component props.
-	 */
 	props = $derived(this.identifier_json.props);
-
-	/**
-	 * Return type for functions/methods.
-	 */
 	return_type = $derived(this.identifier_json.return_type);
-
 	/**
 	 * Return type description from JSDoc @returns.
 	 */
 	return_description = $derived(this.identifier_json.return_description);
-
-	/**
-	 * Generic type parameters.
-	 */
 	generic_params = $derived(this.identifier_json.generic_params);
-
-	/**
-	 * Base classes/types this extends.
-	 */
 	extends = $derived(this.identifier_json.extends);
-
-	/**
-	 * Interfaces this implements.
-	 */
 	implements = $derived(this.identifier_json.implements);
-
-	/**
-	 * Exception types this may throw.
-	 */
 	throws = $derived(this.identifier_json.throws);
-
 	/**
 	 * Version when this was introduced (from @since).
 	 */
 	since = $derived(this.identifier_json.since);
-
 	/**
 	 * Code examples from JSDoc @example.
 	 */
 	examples = $derived(this.identifier_json.examples);
-
 	/**
 	 * See-also references from JSDoc @see.
 	 */
 	see_also = $derived(this.identifier_json.see_also);
-
 	/**
 	 * Class members (for classes).
 	 */
 	members = $derived(this.identifier_json.members);
-
-	/**
-	 * Type/interface properties.
-	 */
 	properties = $derived(this.identifier_json.properties);
 
-	/**
-	 * Check if identifier has code examples.
-	 */
 	has_examples = $derived(!!(this.examples && this.examples.length > 0));
-
-	/**
-	 * Check if identifier is deprecated.
-	 */
 	is_deprecated = $derived(!!this.deprecated_message);
-
-	/**
-	 * Check if identifier has documentation.
-	 */
 	has_documentation = $derived(!!this.doc_comment);
-
-	/**
-	 * Check if function/method has parameters.
-	 */
 	has_parameters = $derived(!!(this.parameters && this.parameters.length > 0));
-
-	/**
-	 * Check if component has props.
-	 */
 	has_props = $derived(!!(this.props && this.props.length > 0));
-
-	/**
-	 * Check if type/function has generic parameters.
-	 */
 	has_generics = $derived(!!(this.generic_params && this.generic_params.length > 0));
 
 	constructor(module: Module, identifier_json: Identifier_Json) {
