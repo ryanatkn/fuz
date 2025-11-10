@@ -53,9 +53,7 @@ export const task: Task = {
 					) {
 						// Check if exported
 						const modifiers = ts.getModifiers(statement);
-						const is_exported = modifiers?.some(
-							(mod) => mod.kind === ts.SyntaxKind.ExportKeyword,
-						);
+						const is_exported = modifiers?.some((mod) => mod.kind === ts.SyntaxKind.ExportKeyword);
 
 						if (is_exported) {
 							result = tsdoc_parse(statement, source_file);
