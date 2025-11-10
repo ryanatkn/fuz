@@ -29,9 +29,6 @@ export class Module {
 	 */
 	path_import = $derived('./' + this.path);
 
-	/**
-	 * Module-level JSDoc comment.
-	 */
 	module_comment = $derived(this.module_json.module_comment);
 
 	/**
@@ -60,16 +57,10 @@ export class Module {
 		this.pkg.repo_url ? url_github_file(this.pkg.repo_url, `src/lib/${this.path}`) : undefined,
 	);
 
-	/**
-	 * Check if module has any identifiers.
-	 */
 	has_identifiers: boolean = $derived(
 		!!(this.module_json.identifiers && this.module_json.identifiers.length > 0),
 	);
 
-	/**
-	 * Check if module has a module-level comment.
-	 */
 	has_module_comment: boolean = $derived(!!this.module_json.module_comment);
 
 	constructor(pkg: Pkg, module_json: Module_Json) {

@@ -243,9 +243,6 @@ export class Mdz_Parser {
 		this.#accumulated_text += text;
 	}
 
-	/**
-	 * Flush accumulated text as a single Text node.
-	 */
 	#flush_text(): void {
 		if (this.#accumulated_text !== '') {
 			this.#nodes.push({
@@ -622,9 +619,6 @@ export class Mdz_Parser {
 		);
 	}
 
-	/**
-	 * Check if template matches string at current index.
-	 */
 	#match(str: string): boolean {
 		return this.#template.startsWith(str, this.#index);
 	}

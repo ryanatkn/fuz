@@ -1,7 +1,4 @@
 <script module lang="ts">
-	/**
-	 * Returns the minute of the current day.
-	 */
 	const minute_of_day = (): number => {
 		const now = new Date();
 		return now.getHours() * 60 + now.getMinutes();

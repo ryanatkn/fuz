@@ -49,9 +49,6 @@
 		 * Renders the SVG as an inline block with spacing appropriate for text. Defaults to `false`.
 		 */
 		inline?: boolean;
-		/**
-		 * Flex shrink behavior? Defaults to `true`.
-		 */
 		shrink?: boolean;
 		attrs?: SvelteHTMLElements['svg'];
 	}

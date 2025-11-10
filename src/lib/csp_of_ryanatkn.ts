@@ -1,7 +1,7 @@
 import type {Csp_Source_Spec} from '$lib/csp.js';
 
 /**
- * List of trusted sources owned by ryanatkn (me, ryanatkn.com).
+ * Trusted sources owned by ryanatkn.
  */
 export const csp_trusted_sources_of_ryanatkn: Array<Csp_Source_Spec> = [
 	{source: 'https://*.ryanatkn.com/', trust: 'low'},

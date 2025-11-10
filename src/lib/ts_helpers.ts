@@ -9,9 +9,6 @@ import ts from 'typescript';
 import type {Identifier_Json, Generic_Param_Info, Identifier_Kind} from '$lib/src_json.js';
 import {tsdoc_parse} from '$lib/tsdoc_helpers.js';
 
-/**
- * Parse a generic type parameter into structured information.
- */
 const ts_parse_generic_param = (param: ts.TypeParameterDeclaration): Generic_Param_Info => {
 	const result: Generic_Param_Info = {
 		name: param.name.text,

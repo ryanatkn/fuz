@@ -11,9 +11,6 @@
 		class: class_prop,
 		...rest
 	}: SvelteHTMLElements['a'] & {
-		/**
-		 * @example Web/HTML/Element
-		 */
 		path: string;
 	} = $props();
 
