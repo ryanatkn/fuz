@@ -15,7 +15,7 @@
  * @see {@link https://example.com/api}
  * @since 1.5.0
  */
-export function complex_function(input: string, options?: {verbose?: boolean}) {
+export function complex_function(input: string, _options?: {verbose?: boolean}) {
 	if (typeof input !== 'string') {
 		throw new TypeError('Input must be a string');
 	}

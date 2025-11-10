@@ -67,7 +67,7 @@ export const task: Task = {
 				const output =
 					JSON.stringify(
 						result === undefined ? null : result,
-						(key, value) => {
+						(_key, value) => {
 							// Convert Map to object for JSON serialization
 							if (value instanceof Map) {
 								return Object.fromEntries(value);
