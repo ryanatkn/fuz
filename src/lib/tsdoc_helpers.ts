@@ -34,17 +34,17 @@ export interface Tsdoc_Parsed_Comment {
 	text: string;
 	/** Parameter descriptions mapped by parameter name */
 	params: Map<string, string>;
-	/** Return value description from @ returns or @ return */
+	/** Return value description from `@returns` or `@return` */
 	returns?: string;
-	/** Thrown errors from @ throws */
+	/** Thrown errors from `@throws` */
 	throws?: Array<{type?: string; description: string}>;
-	/** Code examples from @ example */
+	/** Code examples from `@example` */
 	examples?: Array<string>;
-	/** Deprecation message from @ deprecated */
+	/** Deprecation message from `@deprecated` */
 	deprecated_message?: string;
-	/** Related references from @ see */
+	/** Related references from `@see` */
 	see_also?: Array<string>;
-	/** Version information from @ since */
+	/** Version information from `@since` */
 	since?: string;
 }
 
@@ -53,16 +53,16 @@ export interface Tsdoc_Parsed_Comment {
  *
  * Extracts and parses all JSDoc tags including:
  *
- * - @ param - parameter descriptions
- * - @ returns/@ return - return value description
- * - @ throws - error documentation
- * - @ example - code examples
- * - @ deprecated - deprecation warnings
- * - @ see - related references
- * - @ since - version information
+ * - `@param` - parameter descriptions
+ * - `@returns`/`@return` - return value description
+ * - `@throws` - error documentation
+ * - `@example` - code examples
+ * - `@deprecated` - deprecation warnings
+ * - `@see` - related references
+ * - `@since` - version information
  *
  * @param node - The TypeScript node to extract JSDoc from
- * @param source_file - Source file (used for extracting full @see tag text)
+ * @param source_file - Source file (used for extracting full` @see` tag text)
  */
 export const tsdoc_parse = (
 	node: ts.Node,
