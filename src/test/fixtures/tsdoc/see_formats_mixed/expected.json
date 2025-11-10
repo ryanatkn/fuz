@@ -1,0 +1,10 @@
+{
+	"text": "Function demonstrating mixed see tag formats.",
+	"params": {},
+	"see_also": [
+		"https://example.com/docs",
+		"{@link https://example.com/api}",
+		"./local_helper.ts",
+		"other_module"
+	]
+}

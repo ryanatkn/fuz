@@ -1,0 +1,20 @@
+{
+	"text": "Function that can throw multiple error types.",
+	"params": {
+		"value": "- value to validate"
+	},
+	"throws": [
+		{
+			"type": "TypeError",
+			"description": "if value is not a string"
+		},
+		{
+			"type": "RangeError",
+			"description": "if value length exceeds limit"
+		},
+		{
+			"type": "Error",
+			"description": "for other validation failures"
+		}
+	]
+}

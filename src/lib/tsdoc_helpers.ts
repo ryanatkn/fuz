@@ -2,24 +2,27 @@
  * TSDoc/JSDoc parsing helpers using the TypeScript Compiler API.
  *
  * Provides `tsdoc_parse()` for extracting JSDoc/TSDoc from TypeScript nodes.
+ * Primarily designed for build-time code generation but can be used at runtime.
  *
- * ## How it works
+ * ## Design
  *
- * Uses TypeScript's built-in `ts.getJSDocCommentsAndTags()` API to extract
- * structured documentation from AST nodes.
+ * Pure extraction approach: extracts documentation as-is with minimal transformation,
+ * preserving source intent. Works around TypeScript Compiler API quirks where needed.
  *
- * ## Behavioral notes (due to TS Compiler API)
+ * Supports both regular TypeScript and Svelte components (via svelte2tsx output).
  *
- * - Preserves dash separator in @param descriptions: `@param x - desc` → `"- desc"`
- * - @throws tags have {Type} stripped by TS API; fallback regex extracts first word as error type
- * - @see tags strip URL protocols from comment text; we use `getText()` to get the full source
+ * ## Tag support
  *
- * ## Usage
+ * Supports standard TSDoc tags: `@param`, `@returns`, `@throws`, `@example`, `@deprecated`, `@see`, `@since`.
+ * Also supports `@mutates` (non-standard) for documenting side effects.
+ * Only `@returns` is supported (not `@return`).
  *
- * Works on all TypeScript nodes, including:
- * - Regular TypeScript files (.ts, .tsx)
- * - Transformed output from svelte2tsx
- * - Any node with JSDoc comments in the AST
+ * ## Behavioral notes
+ *
+ * Due to TS Compiler API limitations:
+ * - Preserves dash separator in `@param` descriptions: `@param x - desc` → `"- desc"`
+ * - `@throws` tags have `{Type}` stripped by TS API; fallback regex extracts first word as error type
+ * - TS API strips URL protocols from `@see` tag text; we use `getText()` to preserve original format including `{@link}` syntax
  *
  * All functions are prefixed with `tsdoc_` for clarity.
  */
@@ -34,7 +37,7 @@ export interface Tsdoc_Parsed_Comment {
 	text: string;
 	/** Parameter descriptions mapped by parameter name */
 	params: Map<string, string>;
-	/** Return value description from `@returns` or `@return` */
+	/** Return value description from `@returns` */
 	returns?: string;
 	/** Thrown errors from `@throws` */
 	throws?: Array<{type?: string; description: string}>;
@@ -46,6 +49,8 @@ export interface Tsdoc_Parsed_Comment {
 	see_also?: Array<string>;
 	/** Version information from `@since` */
 	since?: string;
+	/** Mutation documentation from `@mutates` (non-standard) */
+	mutates?: Array<string>;
 }
 
 /**
@@ -54,12 +59,13 @@ export interface Tsdoc_Parsed_Comment {
  * Extracts and parses all JSDoc tags including:
  *
  * - `@param` - parameter descriptions
- * - `@returns`/`@return` - return value description
+ * - `@returns` - return value description
  * - `@throws` - error documentation
  * - `@example` - code examples
  * - `@deprecated` - deprecation warnings
  * - `@see` - related references
  * - `@since` - version information
+ * - `@mutates` - mutation documentation (non-standard)
  *
  * @param node - The TypeScript node to extract JSDoc from
  * @param source_file - Source file (used for extracting full` @see` tag text)
@@ -79,6 +85,7 @@ export const tsdoc_parse = (
 	let deprecated_message: string | undefined;
 	const see_also: Array<string> = [];
 	let since: string | undefined;
+	const mutates: Array<string> = [];
 
 	// Extract main comment text
 	for (const comment of tsdoc_comments) {
@@ -104,7 +111,7 @@ export const tsdoc_parse = (
 			if (param_name && tag_text) {
 				params.set(param_name, tag_text.trim());
 			}
-		} else if ((tag_name === 'returns' || tag_name === 'return') && tag_text) {
+		} else if (tag_name === 'returns' && tag_text) {
 			returns = tag_text.trim();
 		} else if (tag_name === 'throws' && tag_text) {
 			// Try to extract error type and description
@@ -122,25 +129,19 @@ export const tsdoc_parse = (
 			// The TS API strips 'https' from URLs in @see tags, so get full text from source
 			const full_tag_text = tag.getText(source_file);
 			// Extract content after @see, handling JSDoc formatting artifacts
-			let see_content = full_tag_text
+			// Preserve original format (plain URLs, {@link}, paths, module names)
+			const see_content = full_tag_text
 				.replace(/^@see\s+/, '') // remove @see prefix
 				.replace(/\n\s*\*\s*/g, ' ') // remove JSDoc line continuations
 				.trim();
-
-			// Parse {@link} syntax to extract clean URL/reference
-			// {@link URL} → URL
-			// {@link URL|Display Text} → URL
-			const link_match = /^\{@link\s+([^}|]+?)(?:\|([^}]+))?\s*\}$/.exec(see_content);
-			if (link_match) {
-				// Extract the URL/reference (ignore display text for data purity)
-				see_content = link_match[1]!.trim();
-			}
 
 			if (see_content) {
 				see_also.push(see_content);
 			}
 		} else if (tag_name === 'since' && tag_text) {
 			since = tag_text.trim();
+		} else if (tag_name === 'mutates' && tag_text) {
+			mutates.push(tag_text.trim());
 		}
 	}
 
@@ -155,6 +156,7 @@ export const tsdoc_parse = (
 		deprecated_message,
 		...(see_also.length && {see_also}),
 		since,
+		...(mutates.length && {mutates}),
 	};
 };
 
@@ -164,8 +166,9 @@ export const tsdoc_parse = (
  * Consolidates the common pattern of assigning TSDoc fields to identifiers,
  * with conditional assignment for array fields (only if non-empty).
  *
- * @param identifier - The identifier to update
- * @param tsdoc - The parsed TSDoc comment (if available)
+ * @param identifier - identifier object to update
+ * @param tsdoc - parsed TSDoc comment (if available)
+ * @mutates identifier - adds doc_comment, deprecated_message, examples, see_also, throws, since fields
  */
 export const tsdoc_apply_to_declaration = (
 	identifier: any, // Using any to avoid circular import with src_json.ts

@@ -84,6 +84,8 @@ export const ts_infer_declaration_kind = (
 /**
  * Extract function/method information including parameters
  * with descriptions and default values.
+ *
+ * @mutates identifier - adds type_signature, return_type, return_description, throws, since, parameters, generic_params
  */
 export const ts_extract_function_info = (
 	node: ts.Node,
@@ -153,6 +155,8 @@ export const ts_extract_function_info = (
 
 /**
  * Extract type/interface information with rich property metadata.
+ *
+ * @mutates identifier - adds type_signature, generic_params, extends, properties
  */
 export const ts_extract_type_info = (
 	node: ts.Node,
@@ -215,6 +219,8 @@ export const ts_extract_type_info = (
 
 /**
  * Extract class information with rich member metadata.
+ *
+ * @mutates identifier - adds extends, implements, generic_params, members
  */
 export const ts_extract_class_info = (
 	node: ts.Node,
@@ -285,6 +291,8 @@ export const ts_extract_class_info = (
 
 /**
  * Extract variable information.
+ *
+ * @mutates identifier - adds type_signature
  */
 export const ts_extract_variable_info = (
 	node: ts.Node,

@@ -264,10 +264,12 @@ for validation and code generation.
 - Node - requires >=22.15
 - tests - located in `src/test/` (not co-located with source)
   - mdz tests use file-based fixtures in `src/test/fixtures/mdz/`
-  - each fixture: directory with `input.mdz` and `expected.json`
-  - regenerate with `gro src/test/fixtures/mdz/update`
+  - tsdoc tests use file-based fixtures in `src/test/fixtures/tsdoc/`
+  - each fixture: directory with input file (`input.mdz` or `input.ts`) and
+    `expected.json`
+  - regenerate with `gro src/test/fixtures/update` (updates both mdz and tsdoc)
   - IMPORTANT: NEVER manually create or edit `expected.json` files - only create
-    `input.mdz` files and run the update task to generate the JSON
+    input files and run the update task to generate the JSON
 
 ### Code style
 

@@ -1,0 +1,7 @@
+{
+	"text": "Function with link that has display text.",
+	"params": {},
+	"see_also": [
+		"{@link https://example.com/docs|API Documentation}"
+	]
+}

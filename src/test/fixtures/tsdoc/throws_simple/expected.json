@@ -1,0 +1,12 @@
+{
+	"text": "Function that may throw an error.",
+	"params": {
+		"value": "- value to check"
+	},
+	"throws": [
+		{
+			"type": "Error",
+			"description": "if value is negative"
+		}
+	]
+}
