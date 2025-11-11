@@ -28,6 +28,7 @@ import {
 import {tsdoc_parse, tsdoc_apply_to_declaration} from '$lib/tsdoc_helpers.js';
 import {svelte_analyze_component} from '$lib/svelte_helpers.js';
 import {
+	module_extract_path,
 	module_get_component_name,
 	module_is_typescript,
 	module_is_svelte,
@@ -190,10 +191,11 @@ export const package_gen_collect_source_files = (filer: Filer, log: Logger): Arr
  * @throws Error if file cannot be read, svelte2tsx transformation fails, or component analysis fails
  */
 export const package_gen_analyze_svelte_file = (
-	source_id: string,
+	disknode: Disknode,
 	module_path: string,
 	checker: ts.TypeChecker,
 ): Module_Json => {
+	const source_id = disknode.id;
 	const svelte_source = readFileSync(source_id, 'utf-8');
 
 	// Check if component uses TypeScript
@@ -220,9 +222,14 @@ export const package_gen_analyze_svelte_file = (
 		component_name,
 	);
 
+	// Extract dependencies and dependents
+	const {dependencies, dependents} = package_gen_extract_dependencies(disknode);
+
 	return {
 		path: module_path,
 		identifiers: [identifier_json],
+		dependencies: dependencies.length > 0 ? dependencies : undefined,
+		dependents: dependents.length > 0 ? dependents : undefined,
 	};
 };
 
@@ -232,6 +239,7 @@ export const package_gen_analyze_svelte_file = (
  * @throws Error if identifier enhancement fails (via package_gen_enhance_identifier)
  */
 export const package_gen_analyze_typescript_file = (
+	disknode: Disknode,
 	source_file: ts.SourceFile,
 	module_path: string,
 	checker: ts.TypeChecker,
@@ -257,5 +265,47 @@ export const package_gen_analyze_typescript_file = (
 		}
 	}
 
+	// Extract dependencies and dependents
+	const {dependencies, dependents} = package_gen_extract_dependencies(disknode);
+	if (dependencies.length > 0) {
+		mod.dependencies = dependencies;
+	}
+	if (dependents.length > 0) {
+		mod.dependents = dependents;
+	}
+
 	return mod;
+};
+
+/**
+ * Extract dependencies and dependents for a module from the filer's dependency graph.
+ *
+ * Filters to only include source modules from /src/lib/ (excludes external packages, node_modules, tests).
+ * Returns sorted arrays of module paths (relative to src/lib) for deterministic output.
+ */
+export const package_gen_extract_dependencies = (
+	disknode: Disknode,
+): {dependencies: Array<string>; dependents: Array<string>} => {
+	const dependencies: Array<string> = [];
+	const dependents: Array<string> = [];
+
+	// Extract dependencies (files this module imports)
+	for (const dep_id of disknode.dependencies.keys()) {
+		if (module_is_source(dep_id)) {
+			dependencies.push(module_extract_path(dep_id));
+		}
+	}
+
+	// Extract dependents (files that import this module)
+	for (const dependent_id of disknode.dependents.keys()) {
+		if (module_is_source(dependent_id)) {
+			dependents.push(module_extract_path(dependent_id));
+		}
+	}
+
+	// Sort for deterministic output
+	dependencies.sort();
+	dependents.sort();
+
+	return {dependencies, dependents};
 };

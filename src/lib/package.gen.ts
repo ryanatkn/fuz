@@ -67,7 +67,7 @@ export const gen: Gen = async ({log, filer}) => {
 
 		// Handle Svelte files separately (before trying to get TypeScript source file)
 		if (is_svelte) {
-			const mod = package_gen_analyze_svelte_file(source_id, module_path, checker);
+			const mod = package_gen_analyze_svelte_file(disknode, module_path, checker);
 			src_json.modules!.push(mod);
 		} else {
 			// For TypeScript/JS files, get the source file from the program
@@ -78,7 +78,7 @@ export const gen: Gen = async ({log, filer}) => {
 			}
 
 			// May throw, which we want to see
-			const mod = package_gen_analyze_typescript_file(source_file, module_path, checker);
+			const mod = package_gen_analyze_typescript_file(disknode, source_file, module_path, checker);
 			src_json.modules!.push(mod);
 		}
 	}

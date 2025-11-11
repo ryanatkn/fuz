@@ -17,6 +17,10 @@ export interface Module_Json {
 	path: string;
 	identifiers?: Array<Identifier_Json>;
 	module_comment?: string;
+	/** Module paths (relative to src/lib) that this module imports. */
+	dependencies?: Array<string>;
+	/** Module paths (relative to src/lib) that import this module. */
+	dependents?: Array<string>;
 }
 
 export type Identifier_Kind =
