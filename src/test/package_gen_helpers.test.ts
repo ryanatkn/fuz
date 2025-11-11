@@ -69,7 +69,7 @@ const create_mock_src_json = (modules: Array<Module_Json>): Src_Json => {
  */
 const create_mock_module = (
 	path: string,
-	identifiers: Array<{name: string; kind: Identifier_Kind | null}>,
+	identifiers: Array<{name: string; kind: Identifier_Kind}>,
 ): Module_Json => {
 	return {
 		path,
@@ -254,9 +254,9 @@ describe('package_gen_validate_no_duplicates', () => {
 			assert.ok(all_errors.includes('component'));
 		});
 
-		test('duplicate with null kind', () => {
+		test('duplicate with different kinds', () => {
 			const src_json = create_mock_src_json([
-				create_mock_module('a.ts', [{name: 'Unknown', kind: null}]),
+				create_mock_module('a.ts', [{name: 'Unknown', kind: 'variable'}]),
 				create_mock_module('b.ts', [{name: 'Unknown', kind: 'type'}]),
 			]);
 
@@ -267,31 +267,12 @@ describe('package_gen_validate_no_duplicates', () => {
 			});
 
 			const all_errors = logger.errors.join(' ');
-			assert.ok(all_errors.includes('unknown')); // null kind shows as "unknown"
+			assert.ok(all_errors.includes('variable'));
 			assert.ok(all_errors.includes('type'));
 		});
 	});
 
 	describe('edge cases', () => {
-		test('identifiers with undefined kind', () => {
-			const src_json = create_mock_src_json([
-				{
-					path: 'test.ts',
-					identifiers: [
-						{name: 'foo', kind: 'function'},
-						// @ts-expect-error - testing undefined kind
-						{name: 'bar', kind: undefined},
-					],
-				},
-			]);
-
-			const logger = create_mock_logger();
-
-			assert.doesNotThrow(() => {
-				package_gen_validate_no_duplicates(src_json, logger);
-			});
-		});
-
 		test('real-world scenario - Docs_Link collision', () => {
 			const src_json = create_mock_src_json([
 				create_mock_module('docs_helpers.svelte.ts', [{name: 'Docs_Link', kind: 'type'}]),

@@ -25,12 +25,28 @@
 
 	const all_identifiers = $derived(module?.identifiers ?? []);
 
-	// Search and sort alphabetically
+	// Search with multi-term AND logic and sort alphabetically
 	const sorted_identifiers = $derived.by(() => {
 		if (!module) return [];
-		const items = search_query.trim()
-			? all_identifiers.filter((id) => id.name.toLowerCase().includes(search_query.toLowerCase()))
-			: all_identifiers;
+		const trimmed_query = search_query.trim();
+		if (!trimmed_query) return all_identifiers.sort((a, b) => a.name.localeCompare(b.name));
+
+		const terms = trimmed_query.toLowerCase().split(/\s+/);
+
+		// filter: include identifier only if ALL terms match (each term can match any field)
+		const items = all_identifiers.filter((id) => {
+			const name_lower = id.name.toLowerCase();
+			const kind_lower = id.kind.toLowerCase();
+			const module_path_lower = id.module_path.toLowerCase();
+
+			return terms.every(
+				(term) =>
+					name_lower.includes(term) ||
+					kind_lower.includes(term) ||
+					module_path_lower.includes(term),
+			);
+		});
+
 		return items.sort((a, b) => a.name.localeCompare(b.name));
 	});
 

@@ -3940,7 +3940,7 @@ export const src_json: Src_Json = {
 							description: 'if TypeScript analysis fails (fails fast)',
 						},
 					],
-					source_line: 90,
+					source_line: 89,
 					type_signature:
 						'(symbol: Symbol, source_file: SourceFile, checker: TypeChecker): Identifier_Json',
 					return_type: 'Identifier_Json',
@@ -4653,7 +4653,8 @@ export const src_json: Src_Json = {
 							name: 'search_identifiers',
 							kind: 'function',
 							type_signature: '(query: string) => Identifier[]',
-							doc_comment: 'Search identifiers by query string.',
+							doc_comment:
+								'Search identifiers by query string with multi-term AND logic.\nSearches across identifier name, kind, and module path.\nMultiple space-separated terms match only if ALL terms match (each term can match any field).',
 						},
 					],
 				},
@@ -4662,7 +4663,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Convenience factory function for creating Pkg instances\n(kept for backward compatibility during migration)',
-					source_line: 200,
+					source_line: 166,
 					type_signature:
 						'(package_json: { [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }, src_json: Src_Json): Pkg',
 					return_type: 'Pkg',
@@ -4682,7 +4683,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'pkg_context',
 					kind: 'variable',
-					source_line: 204,
+					source_line: 170,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Pkg; maybe_get: () => Pkg | undefined; set: (value: Pkg) => Pkg; }',
 				},
@@ -4868,7 +4869,7 @@ export const src_json: Src_Json = {
 						{
 							name: 'kind',
 							kind: 'variable',
-							type_signature: 'Identifier_Kind | null',
+							type_signature: 'Identifier_Kind',
 						},
 						{
 							name: 'doc_comment',
@@ -5753,8 +5754,8 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Infer declaration kind from symbol and node.',
 					source_line: 54,
-					type_signature: '(symbol: Symbol, node: Node): Identifier_Kind | null',
-					return_type: 'Identifier_Kind | null',
+					type_signature: '(symbol: Symbol, node: Node): Identifier_Kind',
+					return_type: 'Identifier_Kind',
 					parameters: [
 						{
 							name: 'symbol',
@@ -5773,7 +5774,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Extract function/method information including parameters\nwith descriptions and default values.',
-					source_line: 87,
+					source_line: 84,
 					type_signature:
 						'(node: Node, symbol: Symbol, checker: TypeChecker, identifier: Identifier_Json, tsdoc: Tsdoc_Parsed_Comment | undefined): void',
 					return_type: 'void',
@@ -5809,7 +5810,7 @@ export const src_json: Src_Json = {
 					name: 'ts_extract_type_info',
 					kind: 'function',
 					doc_comment: 'Extract type/interface information with rich property metadata.',
-					source_line: 158,
+					source_line: 155,
 					type_signature:
 						'(node: Node, _symbol: Symbol, checker: TypeChecker, identifier: Identifier_Json): void',
 					return_type: 'void',
@@ -5840,7 +5841,7 @@ export const src_json: Src_Json = {
 					name: 'ts_extract_class_info',
 					kind: 'function',
 					doc_comment: 'Extract class information with rich member metadata.',
-					source_line: 222,
+					source_line: 219,
 					type_signature:
 						'(node: Node, _symbol: Symbol, checker: TypeChecker, identifier: Identifier_Json): void',
 					return_type: 'void',
@@ -5871,7 +5872,7 @@ export const src_json: Src_Json = {
 					name: 'ts_extract_variable_info',
 					kind: 'function',
 					doc_comment: 'Extract variable information.',
-					source_line: 294,
+					source_line: 291,
 					type_signature:
 						'(node: Node, symbol: Symbol, checker: TypeChecker, identifier: Identifier_Json): void',
 					return_type: 'void',
@@ -5902,7 +5903,7 @@ export const src_json: Src_Json = {
 					name: 'ts_extract_module_comment',
 					kind: 'function',
 					doc_comment: 'Extract module-level comment.',
-					source_line: 311,
+					source_line: 308,
 					type_signature: '(source_file: SourceFile): string | undefined',
 					return_type: 'string | undefined',
 					parameters: [
@@ -5917,7 +5918,7 @@ export const src_json: Src_Json = {
 					name: 'ts_create_program',
 					kind: 'function',
 					doc_comment: 'Create TypeScript program for analysis.',
-					source_line: 334,
+					source_line: 331,
 					type_signature: '(log: { warn: (message: string) => void; }): Program | null',
 					return_type: 'Program | null',
 					parameters: [

@@ -51,10 +51,7 @@ const ts_extract_modifiers = (
 /**
  * Infer declaration kind from symbol and node.
  */
-export const ts_infer_declaration_kind = (
-	symbol: ts.Symbol,
-	node: ts.Node,
-): Identifier_Kind | null => {
+export const ts_infer_declaration_kind = (symbol: ts.Symbol, node: ts.Node): Identifier_Kind => {
 	// Check symbol flags
 	if (symbol.flags & ts.SymbolFlags.Class) return 'class';
 	if (symbol.flags & ts.SymbolFlags.Function) return 'function';

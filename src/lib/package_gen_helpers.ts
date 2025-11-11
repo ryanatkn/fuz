@@ -41,7 +41,7 @@ import {
  * @throws Error if duplicate identifier names are found
  */
 export const package_gen_validate_no_duplicates = (src_json: Src_Json, log: Logger): void => {
-	const identifier_locations: Map<string, Array<{module: string; kind: string | null}>> = new Map();
+	const identifier_locations: Map<string, Array<{module: string; kind: string}>> = new Map();
 
 	// Collect all identifier names and their locations
 	for (const mod of src_json.modules ?? []) {
@@ -58,8 +58,7 @@ export const package_gen_validate_no_duplicates = (src_json: Src_Json, log: Logg
 	}
 
 	// Check for duplicates
-	const duplicates: Array<{name: string; locations: Array<{module: string; kind: string | null}>}> =
-		[];
+	const duplicates: Array<{name: string; locations: Array<{module: string; kind: string}>}> = [];
 	for (const [name, locations] of identifier_locations.entries()) {
 		if (locations.length > 1) {
 			duplicates.push({name, locations});
@@ -71,7 +70,7 @@ export const package_gen_validate_no_duplicates = (src_json: Src_Json, log: Logg
 		for (const {name, locations} of duplicates) {
 			log.error(`  "${name}" found in:`);
 			for (const {module, kind} of locations) {
-				log.error(`    - ${module} (${kind ?? 'unknown'})`);
+				log.error(`    - ${module} (${kind})`);
 			}
 		}
 		throw new Error(
@@ -93,18 +92,19 @@ export const package_gen_enhance_identifier = (
 	checker: ts.TypeChecker,
 ): Identifier_Json => {
 	const name = symbol.name;
+	const decl_node = symbol.valueDeclaration || symbol.declarations?.[0];
+
+	// Determine kind (fallback to 'variable' if no declaration node)
+	const kind = decl_node ? ts_infer_declaration_kind(symbol, decl_node) : 'variable';
+
 	const result: Identifier_Json = {
 		name,
-		kind: null,
+		kind,
 	};
 
-	const decl_node = symbol.valueDeclaration || symbol.declarations?.[0];
 	if (!decl_node) {
 		return result;
 	}
-
-	// Determine kind
-	result.kind = ts_infer_declaration_kind(symbol, decl_node);
 
 	// Extract TSDoc
 	const tsdoc = tsdoc_parse(decl_node, source_file);

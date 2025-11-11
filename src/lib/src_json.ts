@@ -33,7 +33,7 @@ export type Identifier_Kind =
  */
 export interface Identifier_Json {
 	name: string;
-	kind: Identifier_Kind | null;
+	kind: Identifier_Kind;
 	doc_comment?: string;
 	type_signature?: string;
 	/** TypeScript modifiers like `readonly`, `private`, or `static`. */
