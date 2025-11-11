@@ -23,11 +23,7 @@
 
 	const docs_links = docs_links_context.get();
 
-	const should_show_page_links = $derived.by(() => {
-		const length = docs_links.docs_links.length;
-		const should_show = length > 1;
-		return should_show;
-	});
+	const should_show_page_links = $derived(docs_links.docs_links.length > 0);
 
 	const at_api_root = $derived(page.url.pathname === DOCS_API_PATH);
 	const at_module = $derived(page.url.pathname.startsWith(DOCS_API_PATH + '/'));

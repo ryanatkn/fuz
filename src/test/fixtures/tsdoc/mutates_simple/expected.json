@@ -3,7 +3,5 @@
 	"params": {
 		"obj": "object to modify"
 	},
-	"mutates": [
-		"obj - adds processed field"
-	]
+	"mutates": ["obj - adds processed field"]
 }
