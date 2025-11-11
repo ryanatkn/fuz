@@ -26,13 +26,11 @@
 	const should_show_page_links = $derived.by(() => {
 		const length = docs_links.docs_links.length;
 		const should_show = length > 1;
-		console.log('[Docs_Tertiary_Nav] conditional check:', {length, should_show}); // eslint-disable-line no-console
 		return should_show;
 	});
 
-	const page_is_module = $derived(
-		page.url.pathname.startsWith(DOCS_API_PATH + '/') && page.url.pathname !== DOCS_API_PATH,
-	);
+	const at_api_root = $derived(page.url.pathname === DOCS_API_PATH);
+	const at_module = $derived(page.url.pathname.startsWith(DOCS_API_PATH + '/'));
 </script>
 
 <!-- TODO probably add a `nav` wrapper? around which? -->
@@ -45,7 +43,7 @@
 	{#if should_show_page_links}
 		<Docs_Page_Links {sidebar} expand_width />
 	{/if}
-	{#if page_is_module}
+	{#if at_api_root || at_module}
 		<Docs_Modules_List expand_width />
 	{/if}
 </aside>
