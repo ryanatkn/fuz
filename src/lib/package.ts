@@ -2279,6 +2279,39 @@ export const src_json: Src_Json = {
 			],
 		},
 		{
+			path: 'Docs_Search.svelte',
+			identifiers: [
+				{
+					name: 'Docs_Search',
+					kind: 'component',
+					props: [
+						{
+							name: 'placeholder',
+							type: 'string',
+							optional: true,
+						},
+						{
+							name: 'total_count',
+							type: 'number',
+							optional: false,
+						},
+						{
+							name: 'result_count',
+							type: 'number',
+							optional: true,
+						},
+						{
+							name: 'search_query',
+							type: 'string',
+							optional: false,
+							bindable: true,
+						},
+					],
+					source_line: 1,
+				},
+			],
+		},
+		{
 			path: 'Docs_Secondary_Nav.svelte',
 			identifiers: [
 				{

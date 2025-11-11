@@ -5,7 +5,7 @@
 	import Tome_Content from '$lib/Tome_Content.svelte';
 	import Tome_Section from '$lib/Tome_Section.svelte';
 	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
-	import Module_Search from '$routes/docs/api/Module_Search.svelte';
+	import Docs_Search from '$lib/Docs_Search.svelte';
 
 	const {params} = $props();
 
@@ -55,7 +55,7 @@
 		{/if}
 
 		{#if all_identifiers.length > 1}
-			<Module_Search
+			<Docs_Search
 				placeholder="search identifiers in this module..."
 				total_count={all_identifiers.length}
 				result_count={sorted_identifiers.length}

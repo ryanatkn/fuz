@@ -1,8 +1,10 @@
 <script lang="ts">
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
+	// TODO BLOCK support searching modules too (AND collection logic)
+
 	let {
-		placeholder = 'Search identifiers...',
+		placeholder = 'search identifiers and modules...',
 		total_count,
 		result_count,
 		search_query = $bindable(),

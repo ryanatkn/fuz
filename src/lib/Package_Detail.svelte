@@ -268,11 +268,12 @@
 		border-radius: var(--border_radius_sm);
 		padding: var(--space_xs);
 	}
+	/* TODO probably add variables/classes for these */
 	.ts {
 		--link_color: var(--color_a_5);
 	}
 	.svelte {
-		--link_color: var(--color_e_5);
+		--link_color: var(--color_h_5);
 	}
 	.css {
 		--link_color: var(--color_b_5);

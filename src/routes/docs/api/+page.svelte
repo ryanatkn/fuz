@@ -7,7 +7,7 @@
 	import Tome_Content from '$lib/Tome_Content.svelte';
 	import Tome_Section from '$lib/Tome_Section.svelte';
 	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
-	import Module_Search from '$routes/docs/api/Module_Search.svelte';
+	import Docs_Search from '$lib/Docs_Search.svelte';
 	import Tome_Link from '$lib/Tome_Link.svelte';
 	import {DOCS_PATH} from '$lib/docs_helpers.svelte.js';
 
@@ -41,8 +41,7 @@
 			<p>{pkg.package_json.description}</p>
 
 			{#if all_identifiers.length > 1}
-				<Module_Search
-					placeholder="search identifiers..."
+				<Docs_Search
 					total_count={all_identifiers.length}
 					result_count={sorted_identifiers.length}
 					bind:search_query

@@ -25,6 +25,8 @@ import mdz from '$routes/docs/mdz/+page.svelte';
 
 // TODO maybe decouple `related` from `Tome` to get bidirectionality for free
 
+// TODO consider with auto-discovery and exported metadata per-component
+
 export const tomes: Array<Tome> = [
 	{
 		name: 'introduction',
