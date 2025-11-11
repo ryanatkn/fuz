@@ -82,7 +82,7 @@
 		{#if source_url}
 			<p>
 				<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-				<a href={source_url} target="_blank" rel="noopener">view source</a>
+				<a href={source_url} class="chip" target="_blank" rel="noopener">view source</a>
 			</p>
 		{/if}
 	</section>
