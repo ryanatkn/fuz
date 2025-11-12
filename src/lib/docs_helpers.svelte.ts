@@ -4,6 +4,26 @@ import {ensure_end, ensure_start} from '@ryanatkn/belt/string.js';
 
 import {create_context} from '$lib/context_helpers.js';
 
+/**
+ * Convert a string to a URL-safe slug, preserving case for API identifiers.
+ * Only transforms spaces and special characters, keeping valid identifier characters intact.
+ * @param str - The string to slugify
+ * @returns A URL-safe slug
+ */
+export const docs_slugify = (str: string): string => {
+	return (
+		str
+			.trim()
+			// Replace spaces and multiple hyphens with single hyphen
+			.replace(/\s+/g, '-')
+			.replace(/-+/g, '-')
+			// Remove invalid characters (keep letters, digits, _, $, -)
+			.replace(/[^\w$-]/g, '')
+			// Remove leading/trailing hyphens
+			.replace(/^-+|-+$/g, '')
+	);
+};
+
 export const DOCS_PATH_DEFAULT = '/docs';
 export const DOCS_PATH = resolve('/docs');
 export const DOCS_API_PATH = DOCS_PATH + '/api';

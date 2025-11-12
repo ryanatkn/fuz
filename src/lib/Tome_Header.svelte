@@ -1,12 +1,11 @@
 <script lang="ts">
 	import {page} from '$app/state';
 	import {onDestroy} from 'svelte';
-	import {slugify} from '@ryanatkn/belt/path.js';
 	import {DEV} from 'esm-env';
 
 	import {tome_context} from '$lib/tome.js';
 	import Hashlink from '$lib/Hashlink.svelte';
-	import {docs_links_context, to_docs_path_info} from '$lib/docs_helpers.svelte.js';
+	import {docs_links_context, docs_slugify, to_docs_path_info} from '$lib/docs_helpers.svelte.js';
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
 	// eslint-disable-next-line @typescript-eslint/no-duplicate-type-constituents
@@ -17,7 +16,7 @@
 
 	const docs_links = docs_links_context.get();
 
-	const slug = slugify(tome.name);
+	const slug = docs_slugify(tome.name);
 	const id = docs_links.add(slug, tome.name, page.url.pathname);
 
 	onDestroy(() => {

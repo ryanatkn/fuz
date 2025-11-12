@@ -1,11 +1,10 @@
 <script lang="ts">
 	import {resolve} from '$app/paths';
-	import {slugify} from '@ryanatkn/belt/path.js';
 	import {DEV} from 'esm-env';
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
 	import {get_tome_by_name} from '$lib/tome.js';
-	import {DOCS_PATH_DEFAULT} from '$lib/docs_helpers.svelte.js';
+	import {DOCS_PATH_DEFAULT, docs_slugify} from '$lib/docs_helpers.svelte.js';
 
 	const {
 		name,
@@ -31,7 +30,7 @@
 	{...rest}
 	class:chip
 	class="tome_link {class_prop}"
-	href={resolve(`${docs_path}/${slugify(name)}${hash ? `#${hash}` : ''}` as any)}
+	href={resolve(`${docs_path}/${docs_slugify(name)}${hash ? `#${hash}` : ''}` as any)}
 	>{#if children}{@render children()}{:else}{name}{/if}</a
 >
 

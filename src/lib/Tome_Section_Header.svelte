@@ -3,7 +3,6 @@
 	import type {SvelteHTMLElements} from 'svelte/elements';
 	import {page} from '$app/state';
 	import {resolve} from '$app/paths';
-	import {slugify} from '@ryanatkn/belt/path.js';
 
 	import Hashlink from '$lib/Hashlink.svelte';
 	import {
@@ -11,7 +10,7 @@
 		section_depth_context,
 		section_id_context,
 	} from '$lib/Tome_Section.svelte';
-	import {docs_links_context, type Docs_Link_Tag} from '$lib/docs_helpers.svelte.js';
+	import {docs_links_context, docs_slugify, type Docs_Link_Tag} from '$lib/docs_helpers.svelte.js';
 
 	const {
 		text,
@@ -25,7 +24,7 @@
 		children?: Snippet;
 	} = $props();
 
-	const slug = slugify(text);
+	const slug = docs_slugify(text);
 
 	const register_section_header = register_section_header_context.get();
 	if (!register_section_header) {

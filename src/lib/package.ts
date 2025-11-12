@@ -2007,28 +2007,46 @@ export const src_json: Src_Json = {
 			path: 'docs_helpers.svelte.ts',
 			identifiers: [
 				{
+					name: 'docs_slugify',
+					kind: 'function',
+					doc_comment:
+						'Convert a string to a URL-safe slug, preserving case for API identifiers.\nOnly transforms spaces and special characters, keeping valid identifier characters intact.',
+					source_line: 13,
+					type_signature: '(str: string): string',
+					return_type: 'string',
+					return_description: 'A URL-safe slug',
+					parameters: [
+						{
+							name: 'str',
+							type: 'string',
+							optional: false,
+							description: '- The string to slugify',
+						},
+					],
+				},
+				{
 					name: 'DOCS_PATH_DEFAULT',
 					kind: 'variable',
-					source_line: 7,
+					source_line: 27,
 					type_signature: '"/docs"',
 				},
 				{
 					name: 'DOCS_PATH',
 					kind: 'variable',
-					source_line: 8,
+					source_line: 28,
 					type_signature:
 						'"/docs" | "/" | "/about" | "/debug" | "/debug/mdz" | "/docs/alert" | "/docs/api" | "/docs/breadcrumb" | "/docs/breadcrumb/a" | "/docs/breadcrumb/a/b" | "/docs/breadcrumb/a/b/c" | ... 89 more ... | `/${string}/help/`',
 				},
 				{
 					name: 'DOCS_API_PATH',
 					kind: 'variable',
-					source_line: 9,
+					source_line: 29,
 					type_signature: 'string',
 				},
 				{
 					name: 'get_next_docs_link_order',
 					kind: 'function',
-					source_line: 14,
+					source_line: 34,
 					type_signature: '(): number',
 					return_type: 'number',
 					parameters: [],
@@ -2036,7 +2054,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'reset_docs_link_order',
 					kind: 'function',
-					source_line: 17,
+					source_line: 37,
 					type_signature: '(): void',
 					return_type: 'void',
 					parameters: [],
@@ -2044,7 +2062,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'to_docs_path_info',
 					kind: 'function',
-					source_line: 21,
+					source_line: 41,
 					type_signature:
 						'(slug: string, pathname: string, root_path?: string): { path: string; path_is_selected: boolean; path_segment: string | undefined; }',
 					return_type:
@@ -2071,20 +2089,20 @@ export const src_json: Src_Json = {
 				{
 					name: 'docs_links_context',
 					kind: 'variable',
-					source_line: 32,
+					source_line: 52,
 					type_signature:
 						'{ get: () => Docs_Links; set: (value?: Docs_Links | undefined) => Docs_Links; }',
 				},
 				{
 					name: 'Docs_Link_Tag',
 					kind: 'type',
-					source_line: 34,
+					source_line: 54,
 					type_signature: 'Docs_Link_Tag',
 				},
 				{
 					name: 'Docs_Link_Info',
 					kind: 'type',
-					source_line: 36,
+					source_line: 56,
 					type_signature: 'Docs_Link_Info',
 					properties: [
 						{
@@ -2127,7 +2145,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Docs_Links',
 					kind: 'class',
-					source_line: 46,
+					source_line: 66,
 					members: [
 						{
 							name: 'root_path',
