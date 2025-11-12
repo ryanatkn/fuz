@@ -9,7 +9,7 @@ import {getContext, setContext} from 'svelte';
 // TODO maybe remove `error_message`?
 
 /**
- * Wraps Svelte's `setContext` and `getContext` for better ergonmics.
+ * Wraps Svelte's `setContext` and `getContext` for better ergonomics.
  * When no value is set in the context,
  * `get` throws an error and `maybe_get` returns `undefined`.
  * If a `fallback` is provided, the `value` argument to `set` is optional

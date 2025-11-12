@@ -333,7 +333,7 @@ export const src_json: Src_Json = {
 					name: 'create_context',
 					kind: 'function',
 					doc_comment:
-						"Wraps Svelte's `setContext` and `getContext` for better ergonmics.\nWhen no value is set in the context,\n`get` throws an error and `maybe_get` returns `undefined`.\nIf a `fallback` is provided, the `value` argument to `set` is optional\nand `maybe_get` is omitted from the type.",
+						"Wraps Svelte's `setContext` and `getContext` for better ergonomics.\nWhen no value is set in the context,\n`get` throws an error and `maybe_get` returns `undefined`.\nIf a `fallback` is provided, the `value` argument to `set` is optional\nand `maybe_get` is omitted from the type.",
 					source_line: 18,
 					type_signature:
 						'<T>(fallback: () => T): { get: () => T; set: (value?: T | undefined) => T; }',

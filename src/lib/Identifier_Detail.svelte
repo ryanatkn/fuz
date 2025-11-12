@@ -9,8 +9,6 @@
 
 	const {identifier}: {identifier: Identifier} = $props();
 
-	// TODO BLOCK should {#if identifier.type_signature} be inline or set only white_space_pre_wrap ? same with `<h4>returns</h4>`
-
 	// TODO BLOCK Docs_Link if possible -- but the correct thing here is to have it parsed so both `Alert_Status` and `Record<Alert_Status, Alert_Status_Options>` get linkified correctly (convert to mdz at buildtime?)
 </script>
 
@@ -41,7 +39,7 @@
 
 <!-- type signature -->
 {#if identifier.type_signature}
-	<Code inline content={identifier.type_signature} lang="ts" />
+	<Code content={identifier.type_signature} lang="ts" class="mb_lg" />
 {/if}
 
 <!-- documentation -->
@@ -73,7 +71,7 @@
 						{/if}
 						{#if param.default_value}
 							<strong>default</strong>
-							<Code inline content={param.default_value} lang="ts" />
+							<Code content={param.default_value} lang="ts" />
 						{/if}
 					</div>
 				{/if}
@@ -109,7 +107,7 @@
 						{/if}
 						{#if prop.default_value}
 							<strong>default</strong>
-							<Code inline content={prop.default_value} lang="ts" />
+							<Code content={prop.default_value} lang="ts" />
 						{/if}
 					</div>
 				{/if}
@@ -122,7 +120,7 @@
 {#if identifier.return_type}
 	<section>
 		<h4>returns</h4>
-		<Code inline content={identifier.return_type} lang="ts" />
+		<Code content={identifier.return_type} lang="ts" />
 		{#if identifier.return_description}
 			<Mdz content={identifier.return_description} />
 		{/if}
