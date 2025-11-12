@@ -28,16 +28,6 @@ export const DOCS_PATH_DEFAULT = '/docs';
 export const DOCS_PATH = resolve('/docs');
 export const DOCS_API_PATH = DOCS_PATH + '/api';
 
-// Shared order counter for all docs links (headers and sections)
-// This ensures proper document order even when components mount/unmount
-let global_docs_link_order = 0;
-export const get_next_docs_link_order = (): number => global_docs_link_order++;
-
-// For testing only - resets the global order counter
-export const reset_docs_link_order = (): void => {
-	global_docs_link_order = 0;
-};
-
 export const to_docs_path_info = (
 	slug: string,
 	pathname: string,
@@ -74,6 +64,13 @@ export class Docs_Links {
 
 	// Counter for generating unique IDs
 	#next_id = 0;
+
+	// Counter for generating section IDs (page-scoped, not module-scoped)
+	#section_counter = 0;
+
+	// Counter for generating link order values (page-scoped, not module-scoped)
+	// This ensures consistent ordering between SSR and client hydration
+	#order_counter = 0;
 
 	docs_links = $derived.by(() => {
 		// Build parent-child map
@@ -126,7 +123,7 @@ export class Docs_Links {
 		// Use compound key (pathname#slug) to preserve order across remounts
 		const page_slug_key = `${pathname}#${slug}`;
 		const existing_order = this.#slug_to_order.get(page_slug_key);
-		const order = existing_order ?? get_next_docs_link_order();
+		const order = existing_order ?? this.#order_counter++;
 
 		// Store order for new slugs only
 		if (existing_order === undefined) {
@@ -139,5 +136,13 @@ export class Docs_Links {
 
 	remove(id: string): void {
 		this.links.delete(id);
+	}
+
+	/**
+	 * Generate a unique section ID for the current page render.
+	 * This counter is instance-scoped, ensuring SSR/client consistency.
+	 */
+	generate_section_id(): string {
+		return `section_${this.#section_counter++}`;
 	}
 }

@@ -1,12 +1,7 @@
 import {test, assert, describe, beforeEach} from 'vitest';
 import {flushSync} from 'svelte';
 
-import {
-	to_docs_path_info,
-	Docs_Links,
-	DOCS_PATH_DEFAULT,
-	reset_docs_link_order,
-} from '$lib/docs_helpers.svelte.js';
+import {to_docs_path_info, Docs_Links, DOCS_PATH_DEFAULT} from '$lib/docs_helpers.svelte.js';
 
 describe('to_docs_path_info', () => {
 	test('extracts path segment from pathname', () => {
@@ -44,7 +39,6 @@ describe('Docs_Links', () => {
 	let docs_links: Docs_Links;
 
 	beforeEach(() => {
-		reset_docs_link_order();
 		docs_links = new Docs_Links();
 	});
 

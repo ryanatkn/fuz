@@ -2041,25 +2041,9 @@ export const src_json: Src_Json = {
 					type_signature: 'string',
 				},
 				{
-					name: 'get_next_docs_link_order',
-					kind: 'function',
-					source_line: 34,
-					type_signature: '(): number',
-					return_type: 'number',
-					parameters: [],
-				},
-				{
-					name: 'reset_docs_link_order',
-					kind: 'function',
-					source_line: 37,
-					type_signature: '(): void',
-					return_type: 'void',
-					parameters: [],
-				},
-				{
 					name: 'to_docs_path_info',
 					kind: 'function',
-					source_line: 41,
+					source_line: 31,
 					type_signature:
 						'(slug: string, pathname: string, root_path?: string): { path: string; path_is_selected: boolean; path_segment: string | undefined; }',
 					return_type:
@@ -2086,20 +2070,20 @@ export const src_json: Src_Json = {
 				{
 					name: 'docs_links_context',
 					kind: 'variable',
-					source_line: 52,
+					source_line: 42,
 					type_signature:
 						'{ get: () => Docs_Links; set: (value?: Docs_Links | undefined) => Docs_Links; }',
 				},
 				{
 					name: 'Docs_Link_Tag',
 					kind: 'type',
-					source_line: 54,
+					source_line: 44,
 					type_signature: 'Docs_Link_Tag',
 				},
 				{
 					name: 'Docs_Link_Info',
 					kind: 'type',
-					source_line: 56,
+					source_line: 46,
 					type_signature: 'Docs_Link_Info',
 					properties: [
 						{
@@ -2142,7 +2126,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Docs_Links',
 					kind: 'class',
-					source_line: 66,
+					source_line: 56,
 					members: [
 						{
 							name: 'root_path',
@@ -2176,6 +2160,13 @@ export const src_json: Src_Json = {
 							name: 'remove',
 							kind: 'function',
 							type_signature: '(id: string) => void',
+						},
+						{
+							name: 'generate_section_id',
+							kind: 'function',
+							type_signature: '() => string',
+							doc_comment:
+								'Generate a unique section ID for the current page render.\nThis counter is instance-scoped, ensuring SSR/client consistency.',
 						},
 					],
 				},

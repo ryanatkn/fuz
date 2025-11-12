@@ -5,10 +5,6 @@
 	export const register_section_header_context = create_context<Register_Section_Header>();
 	export const section_depth_context = create_context(() => 0);
 	export const section_id_context = create_context<string | undefined>();
-
-	// Module-level counter for generating stable section IDs.
-	// Counter never resets - sections get fresh IDs on each page due to keyed recreation.
-	let section_counter = 0;
 </script>
 
 <script lang="ts">
@@ -37,7 +33,8 @@
 	const parent_section_id = section_id_context.maybe_get();
 
 	// Generate unique section ID immediately (before children render)
-	const section_id = `section_${section_counter++}`;
+	// Uses page-scoped counter from docs_links to ensure SSR/client consistency
+	const section_id = docs_links.generate_section_id();
 
 	// Provide own section ID to direct children (header) via context
 	section_id_context.set(section_id);
