@@ -27,7 +27,7 @@ import mdz from '$routes/docs/mdz/+page.svelte';
 
 // TODO consider with auto-discovery and exported metadata per-component
 
-// TODO BLOCK maybe add related modules here? to display in a structured way for each tome? always having links at the top seems useful
+// TODO BLOCK maybe add `modules` here and possibly `identifiers` too? to display in a structured way for each tome? always having links at the top seems useful
 
 export const tomes: Array<Tome> = [
 	{
