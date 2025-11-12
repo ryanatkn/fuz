@@ -134,9 +134,7 @@
 		<h4>returns</h4>
 		<Code content={identifier.return_type} lang="ts" code_attrs={{class: 'white_space_pre_wrap'}} />
 		{#if identifier.return_description}
-			<div class="return-description">
-				<Mdz content={identifier.return_description} />
-			</div>
+			<Mdz content={identifier.return_description} />
 		{/if}
 	</section>
 {/if}

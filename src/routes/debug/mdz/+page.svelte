@@ -27,9 +27,7 @@
 				<Code content={fixture.input} lang="md" />
 			</div>
 
-			<div class="mb_lg">
-				<Mdz content={fixture.input} />
-			</div>
+			<Mdz content={fixture.input} class="mb_lg" />
 
 			<Details summary="JSON" open={false}>
 				<Code lang="json" content={format_json(fixture.expected)} />
