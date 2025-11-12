@@ -4,6 +4,7 @@
 	import {resolve} from '$app/paths';
 
 	import Tome_Header from '$lib/Tome_Header.svelte';
+	import Tome_Related from '$lib/Tome_Related.svelte';
 	import {tome_context, type Tome} from '$lib/tome.js';
 	import {DOCS_PATH_DEFAULT, docs_links_context, docs_slugify} from '$lib/docs_helpers.svelte.js';
 	import {intersect} from '$lib/intersect.svelte.js';
@@ -63,5 +64,6 @@
 			<Tome_Header />
 		{/if}
 	</header>
+	<Tome_Related />
 	{@render children()}
 </section>

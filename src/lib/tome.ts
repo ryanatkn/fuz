@@ -11,7 +11,9 @@ export const Tome = z.object({
 	category: z.string(),
 	// TODO uppercase this
 	component: z.any(), // TODO type
-	related: z.array(z.string()),
+	related_tomes: z.array(z.string()),
+	related_modules: z.array(z.string()),
+	related_identifiers: z.array(z.string()),
 });
 export type Tome = z.infer<typeof Tome>;
 

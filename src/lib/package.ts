@@ -2292,7 +2292,7 @@ export const src_json: Src_Json = {
 				},
 			],
 			dependencies: ['Docs_List.svelte', 'Docs_Menu_Header.svelte', 'tome.ts'],
-			dependents: ['Docs_Secondary_Nav.svelte', 'Docs_Tertiary_Nav.svelte'],
+			dependents: ['Docs_Secondary_Nav.svelte'],
 		},
 		{
 			path: 'Docs_Modules_List.svelte',
@@ -2450,10 +2450,13 @@ export const src_json: Src_Json = {
 				},
 			],
 			dependencies: [
-				'Docs_Menu.svelte',
 				'Docs_Modules_List.svelte',
 				'Docs_Page_Links.svelte',
+				'Identifier_Link.svelte',
+				'Module_Link.svelte',
+				'Tome_Link.svelte',
 				'docs_helpers.svelte.ts',
+				'pkg.svelte.ts',
 				'tome.ts',
 			],
 			dependents: ['Docs.svelte'],
@@ -2708,7 +2711,13 @@ export const src_json: Src_Json = {
 				},
 			],
 			dependencies: ['contextmenu_state.svelte.ts', 'identifier_contextmenu.ts', 'pkg.svelte.ts'],
-			dependents: ['Docs_Link.svelte', 'Package_Detail.svelte', 'Type_Link.svelte'],
+			dependents: [
+				'Docs_Link.svelte',
+				'Docs_Tertiary_Nav.svelte',
+				'Package_Detail.svelte',
+				'Tome_Related.svelte',
+				'Type_Link.svelte',
+			],
 		},
 		{
 			path: 'identifier.svelte.ts',
@@ -3757,7 +3766,13 @@ export const src_json: Src_Json = {
 				},
 			],
 			dependencies: ['contextmenu_state.svelte.ts', 'module_contextmenu.ts', 'pkg.svelte.ts'],
-			dependents: ['Docs_Link.svelte', 'Identifier_Detail.svelte', 'Package_Detail.svelte'],
+			dependents: [
+				'Docs_Link.svelte',
+				'Docs_Tertiary_Nav.svelte',
+				'Identifier_Detail.svelte',
+				'Package_Detail.svelte',
+				'Tome_Related.svelte',
+			],
 		},
 		{
 			path: 'module.svelte.ts',
@@ -4734,8 +4749,10 @@ export const src_json: Src_Json = {
 			dependents: [
 				'Docs_Link.svelte',
 				'Docs_Modules_List.svelte',
+				'Docs_Tertiary_Nav.svelte',
 				'Identifier_Link.svelte',
 				'Module_Link.svelte',
+				'Tome_Related.svelte',
 				'Type_Link.svelte',
 			],
 		},
@@ -5677,6 +5694,7 @@ export const src_json: Src_Json = {
 			],
 			dependencies: [
 				'Tome_Header.svelte',
+				'Tome_Related.svelte',
 				'docs_helpers.svelte.ts',
 				'intersect.svelte.ts',
 				'tome.ts',
@@ -5726,6 +5744,25 @@ export const src_json: Src_Json = {
 				},
 			],
 			dependencies: ['docs_helpers.svelte.ts', 'tome.ts'],
+			dependents: ['Docs_Tertiary_Nav.svelte', 'Tome_Related.svelte'],
+		},
+		{
+			path: 'Tome_Related.svelte',
+			identifiers: [
+				{
+					name: 'Tome_Related',
+					kind: 'component',
+					source_line: 1,
+				},
+			],
+			dependencies: [
+				'Identifier_Link.svelte',
+				'Module_Link.svelte',
+				'Tome_Link.svelte',
+				'pkg.svelte.ts',
+				'tome.ts',
+			],
+			dependents: ['Tome_Content.svelte'],
 		},
 		{
 			path: 'Tome_Section_Header.svelte',
@@ -5782,19 +5819,19 @@ export const src_json: Src_Json = {
 					kind: 'type',
 					source_line: 8,
 					type_signature:
-						'ZodObject<{ name: ZodString; category: ZodString; component: ZodAny; related: ZodArray<ZodString>; }, $strip>',
+						'ZodObject<{ name: ZodString; category: ZodString; component: ZodAny; related_tomes: ZodArray<ZodString>; related_modules: ZodArray<ZodString>; related_identifiers: ZodArray<...>; }, $strip>',
 				},
 				{
 					name: 'to_tome_pathname',
 					kind: 'function',
-					source_line: 18,
+					source_line: 20,
 					type_signature:
-						'(item: { name: string; category: string; component: any; related: string[]; }, docs_path?: string): string',
+						'(item: { name: string; category: string; component: any; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }, docs_path?: string): string',
 					return_type: 'string',
 					parameters: [
 						{
 							name: 'item',
-							type: '{ name: string; category: string; component: any; related: string[]; }',
+							type: '{ name: string; category: string; component: any; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }',
 							optional: false,
 						},
 						{
@@ -5808,17 +5845,18 @@ export const src_json: Src_Json = {
 				{
 					name: 'tomes_context',
 					kind: 'variable',
-					source_line: 21,
+					source_line: 23,
 					type_signature:
-						'{ get: (error_message?: string | undefined) => Map<string, { name: string; category: string; component: any; related: string[]; }>; maybe_get: () => Map<string, { name: string; category: string; component: any; related: string[]; }> | undefined; set: (value: Map<...>) => Map<...>; }',
+						'{ get: (error_message?: string | undefined) => Map<string, { name: string; category: string; component: any; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }>; maybe_get: () => Map<...> | undefined; set: (value: Map<...>) => Map<...>; }',
 				},
 				{
 					name: 'get_tome_by_name',
 					kind: 'function',
-					source_line: 23,
+					source_line: 25,
 					type_signature:
-						'(name: string): { name: string; category: string; component: any; related: string[]; }',
-					return_type: '{ name: string; category: string; component: any; related: string[]; }',
+						'(name: string): { name: string; category: string; component: any; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }',
+					return_type:
+						'{ name: string; category: string; component: any; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }',
 					parameters: [
 						{
 							name: 'name',
@@ -5830,9 +5868,9 @@ export const src_json: Src_Json = {
 				{
 					name: 'tome_context',
 					kind: 'variable',
-					source_line: 30,
+					source_line: 32,
 					type_signature:
-						'{ get: (error_message?: string | undefined) => { name: string; category: string; component: any; related: string[]; }; maybe_get: () => { name: string; category: string; component: any; related: string[]; } | undefined; set: (value: { ...; }) => { ...; }; }',
+						'{ get: (error_message?: string | undefined) => { name: string; category: string; component: any; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }; maybe_get: () => { ...; } | undefined; set: (value: { ...; }) => { ...; }; }',
 				},
 			],
 			dependencies: ['context_helpers.ts', 'docs_helpers.svelte.ts'],
@@ -5844,6 +5882,7 @@ export const src_json: Src_Json = {
 				'Tome_Content.svelte',
 				'Tome_Header.svelte',
 				'Tome_Link.svelte',
+				'Tome_Related.svelte',
 			],
 		},
 		{

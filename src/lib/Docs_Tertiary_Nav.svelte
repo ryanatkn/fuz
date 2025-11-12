@@ -1,11 +1,14 @@
 <script lang="ts">
 	import {page} from '$app/state';
 
-	import Docs_Menu from '$lib/Docs_Menu.svelte';
 	import Docs_Modules_List from '$lib/Docs_Modules_List.svelte';
 	import Docs_Page_Links from '$lib/Docs_Page_Links.svelte';
 	import {to_tome_pathname, Tome} from '$lib/tome.js';
 	import {docs_links_context, DOCS_API_PATH} from '$lib/docs_helpers.svelte.js';
+	import {pkg_context} from '$lib/pkg.svelte.js';
+	import Tome_Link from '$lib/Tome_Link.svelte';
+	import Module_Link from '$lib/Module_Link.svelte';
+	import Identifier_Link from '$lib/Identifier_Link.svelte';
 
 	interface Props {
 		tomes: Array<Tome>;
@@ -18,7 +21,23 @@
 	const selected_item = $derived(tomes.find((t) => to_tome_pathname(t) === page.url.pathname));
 
 	const tomes_related_to_selected = $derived(
-		selected_item?.related.map((r) => tomes_by_name.get(r)!),
+		selected_item?.related_tomes
+			.map((name) => tomes_by_name.get(name))
+			.filter((t) => t !== undefined) ?? [],
+	);
+
+	const pkg = pkg_context.get();
+
+	const modules_related_to_selected = $derived(
+		selected_item?.related_modules
+			.map((path) => pkg.lookup_module(path))
+			.filter((m) => m !== undefined) ?? [],
+	);
+
+	const identifiers_related_to_selected = $derived(
+		selected_item?.related_identifiers
+			.map((name) => pkg.lookup_identifier(name))
+			.filter((i) => i !== undefined) ?? [],
 	);
 
 	const docs_links = docs_links_context.get();
@@ -31,10 +50,35 @@
 
 <!-- TODO probably add a `nav` wrapper? around which? -->
 <aside class="docs_tertiary_nav unstyled">
-	{#if tomes_related_to_selected?.length}
-		<Docs_Menu tomes={tomes_related_to_selected} expand_width>
-			{#snippet children(category)}<h4 class="mb_sm">related {category}</h4>{/snippet}
-		</Docs_Menu>
+	{#if tomes_related_to_selected.length}
+		<section class="related_section">
+			<h4 class="mb_sm">related tomes</h4>
+			<ul class="unstyled ml_md">
+				{#each tomes_related_to_selected as tome (tome.name)}
+					<li><Tome_Link name={tome.name} /></li>
+				{/each}
+			</ul>
+		</section>
+	{/if}
+	{#if modules_related_to_selected.length}
+		<section class="related_section">
+			<h4 class="mb_sm">related modules</h4>
+			<ul class="unstyled ml_md">
+				{#each modules_related_to_selected as module (module.path)}
+					<li><Module_Link module_path={module.path} /></li>
+				{/each}
+			</ul>
+		</section>
+	{/if}
+	{#if identifiers_related_to_selected.length}
+		<section class="related_section">
+			<h4 class="mb_sm">related identifiers</h4>
+			<ul class="unstyled ml_md">
+				{#each identifiers_related_to_selected as identifier (identifier.name)}
+					<li><Identifier_Link name={identifier.name} /></li>
+				{/each}
+			</ul>
+		</section>
 	{/if}
 	{#if should_show_page_links}
 		<Docs_Page_Links {sidebar} expand_width />
