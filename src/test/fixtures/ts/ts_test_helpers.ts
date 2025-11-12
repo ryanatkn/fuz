@@ -172,34 +172,51 @@ export const extract_identifier_from_source = (
 };
 
 /**
- * Load all fixtures from the ts fixtures directory, organized by category.
+ * Infer the fixture category from its name based on naming conventions.
+ */
+export const infer_category_from_name = (name: string): Ts_Fixture_Category => {
+	if (name.startsWith('class_') || name === 'fields_private' || name === 'members_public') {
+		return 'class';
+	}
+	if (name.startsWith('function_') || name.startsWith('params_')) {
+		return 'function';
+	}
+	if (name.startsWith('interface_') || name.startsWith('type_')) {
+		return 'type';
+	}
+	if (name.startsWith('variable_')) {
+		return 'variable';
+	}
+	if (name.startsWith('infer_kind_') || name.endsWith('_declaration')) {
+		return 'infer_kind';
+	}
+	if (name === 'multi_line' || name === 'no_comment') {
+		return 'module_comment';
+	}
+	throw new Error(`Cannot infer category from fixture name: ${name}`);
+};
+
+/**
+ * Load all fixtures from the ts fixtures directory (flat structure).
  */
 export const load_fixtures = async (): Promise<Array<Ts_Fixture>> => {
 	const fixtures_dir = join(import.meta.dirname);
-	const categories = await readdir(fixtures_dir, {withFileTypes: true});
-	const category_names = categories
+	const entries = await readdir(fixtures_dir, {withFileTypes: true});
+	const fixture_names = entries
 		.filter((dirent) => dirent.isDirectory())
-		.map((dirent) => dirent.name as Ts_Fixture_Category)
+		.map((dirent) => dirent.name)
 		.sort();
 
 	const all_fixtures: Array<Ts_Fixture> = [];
 
-	for (const category of category_names) {
-		const category_dir = join(fixtures_dir, category);
-		const fixture_dirs = await readdir(category_dir, {withFileTypes: true});
-		const fixture_names = fixture_dirs
-			.filter((dirent) => dirent.isDirectory())
-			.map((dirent) => dirent.name)
-			.sort();
+	for (const name of fixture_names) {
+		const fixture_dir = join(fixtures_dir, name);
+		const input = await readFile(join(fixture_dir, 'input.ts'), 'utf-8');
+		const expected_text = await readFile(join(fixture_dir, 'expected.json'), 'utf-8');
+		const expected = JSON.parse(expected_text);
+		const category = infer_category_from_name(name);
 
-		for (const name of fixture_names) {
-			const fixture_dir = join(category_dir, name);
-			const input = await readFile(join(fixture_dir, 'input.ts'), 'utf-8');
-			const expected_text = await readFile(join(fixture_dir, 'expected.json'), 'utf-8');
-			const expected = JSON.parse(expected_text);
-
-			all_fixtures.push({name, category, input, expected});
-		}
+		all_fixtures.push({name, category, input, expected});
 	}
 
 	return all_fixtures;
