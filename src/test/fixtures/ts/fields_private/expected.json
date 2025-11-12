@@ -5,9 +5,7 @@
 		{
 			"name": "name",
 			"kind": "variable",
-			"modifiers": [
-				"readonly"
-			],
+			"modifiers": ["readonly"],
 			"type_signature": "string"
 		},
 		{

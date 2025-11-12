@@ -259,7 +259,11 @@ export const ts_extract_class_info = (
 
 			const member_identifier: Identifier_Json = {
 				name: member_name,
-				kind: is_constructor ? 'constructor' : ts.isMethodDeclaration(member) ? 'function' : 'variable',
+				kind: is_constructor
+					? 'constructor'
+					: ts.isMethodDeclaration(member)
+						? 'function'
+						: 'variable',
 			};
 
 			// Extract visibility and modifiers
@@ -332,11 +336,7 @@ export const ts_extract_class_info = (
 							return {
 								name: param.name,
 								type: checker.typeToString(param_type),
-								optional: !!(
-									param_decl &&
-									ts.isParameter(param_decl) &&
-									param_decl.questionToken
-								),
+								optional: !!(param_decl && ts.isParameter(param_decl) && param_decl.questionToken),
 								description,
 								default_value,
 							};

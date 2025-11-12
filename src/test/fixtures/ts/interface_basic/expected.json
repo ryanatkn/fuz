@@ -18,9 +18,7 @@
 		{
 			"name": "email",
 			"kind": "variable",
-			"modifiers": [
-				"readonly"
-			],
+			"modifiers": ["readonly"],
 			"type_signature": "string",
 			"doc_comment": "The user's email address"
 		}
