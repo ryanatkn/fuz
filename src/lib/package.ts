@@ -1145,7 +1145,7 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'open_contextmenu',
+					name: 'contextmenu_open',
 					kind: 'function',
 					doc_comment:
 						'Opens the contextmenu, if appropriate,\nquerying the menu items from the DOM starting at the event target.',

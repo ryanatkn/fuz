@@ -389,7 +389,7 @@ export interface Open_Contextmenu_Options {
  * @param options optional configuration for filtering entries and haptic feedback
  * @returns a boolean indicating if the menu was opened or not
  */
-export const open_contextmenu = (
+export const contextmenu_open = (
 	target: HTMLElement | SVGElement,
 	x: number,
 	y: number,
