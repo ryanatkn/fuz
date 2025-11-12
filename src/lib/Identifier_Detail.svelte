@@ -8,8 +8,6 @@
 	import Mdz from '$lib/Mdz.svelte';
 
 	const {identifier}: {identifier: Identifier} = $props();
-
-	// TODO BLOCK Docs_Link if possible -- but the correct thing here is to have it parsed so both `Alert_Status` and `Record<Alert_Status, Alert_Status_Options>` get linkified correctly (convert to mdz at buildtime?)
 </script>
 
 <!-- Metadata -->
