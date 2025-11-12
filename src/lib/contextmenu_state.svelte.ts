@@ -403,7 +403,7 @@ export const contextmenu_open = (
 		vibrate = true,
 	} = options ?? EMPTY_OBJECT;
 
-	const params = query_contextmenu_params(target)?.filter(
+	const params = contextmenu_query_params(target)?.filter(
 		(p) =>
 			typeof p === 'function' ||
 			((p.snippet !== 'link' || link_enabled) &&
@@ -427,7 +427,7 @@ export const contextmenu_open = (
 	return true;
 };
 
-const query_contextmenu_params = (
+const contextmenu_query_params = (
 	target: HTMLElement | SVGElement,
 ): null | Array<Contextmenu_Params> => {
 	let params: null | Array<Contextmenu_Params> = null;
