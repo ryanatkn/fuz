@@ -55,7 +55,7 @@
 			<h4 class="mb_sm">related tomes</h4>
 			<ul class="unstyled ml_md">
 				{#each tomes_related_to_selected as tome (tome.name)}
-					<li><Tome_Link name={tome.name} /></li>
+					<li><Tome_Link name={tome.name} class="menu_item" /></li>
 				{/each}
 			</ul>
 		</section>
@@ -65,7 +65,7 @@
 			<h4 class="mb_sm">related modules</h4>
 			<ul class="unstyled ml_md">
 				{#each modules_related_to_selected as module (module.path)}
-					<li><Module_Link module_path={module.path} /></li>
+					<li><Module_Link module_path={module.path} class="menu_item" /></li>
 				{/each}
 			</ul>
 		</section>
@@ -75,7 +75,7 @@
 			<h4 class="mb_sm">related identifiers</h4>
 			<ul class="unstyled ml_md">
 				{#each identifiers_related_to_selected as identifier (identifier.name)}
-					<li><Identifier_Link name={identifier.name} /></li>
+					<li><Identifier_Link name={identifier.name} class="menu_item" /></li>
 				{/each}
 			</ul>
 		</section>

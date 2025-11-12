@@ -10,15 +10,13 @@
 		name,
 		docs_path = DOCS_PATH_DEFAULT,
 		hash,
-		chip = true,
 		children,
-		class: class_prop,
+		class: class_prop = 'chip',
 		...rest
 	}: SvelteHTMLElements['a'] & {
 		name: string; // TODO type, generate from `tomes`?
 		docs_path?: string;
 		hash?: string;
-		chip?: boolean;
 	} = $props();
 
 	if (DEV) get_tome_by_name(name); // throws if not found
@@ -28,7 +26,6 @@
 
 <a
 	{...rest}
-	class:chip
 	class="tome_link {class_prop}"
 	href={resolve(`${docs_path}/${docs_slugify(name)}${hash ? `#${hash}` : ''}` as any)}
 	>{#if children}{@render children()}{:else}{name}{/if}</a

@@ -8,7 +8,7 @@
 	const {
 		module_path,
 		children,
-		class: class_prop,
+		class: class_prop = 'chip',
 		...rest
 	}: SvelteHTMLElements['a'] & {
 		module_path: string; // TODO maybe rename?
@@ -27,7 +27,7 @@
 	<!-- eslint-disable svelte/no-navigation-without-resolve -->
 	<a
 		{...rest}
-		class="chip {class_prop}"
+		class="module_link {class_prop}"
 		href={module.url_api}
 		{@attach contextmenu_attachment(contextmenu_entries)}
 	>

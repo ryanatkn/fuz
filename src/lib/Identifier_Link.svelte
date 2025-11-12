@@ -8,7 +8,7 @@
 	const {
 		name,
 		children,
-		class: class_prop,
+		class: class_prop = 'chip',
 		...rest
 	}: SvelteHTMLElements['a'] & {
 		name: string;
@@ -31,7 +31,7 @@
 	<!-- eslint-disable svelte/no-navigation-without-resolve -->
 	<a
 		{...rest}
-		class="identifier_link chip {class_prop}"
+		class="identifier_link {class_prop}"
 		href={identifier.url_api}
 		{@attach contextmenu_attachment(contextmenu_entries)}
 	>
