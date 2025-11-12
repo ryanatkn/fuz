@@ -3,7 +3,7 @@
  *
  * Parses a specialized markdown dialect with:
  * - inline formatting: `code`, **bold**, _italic_, ~strikethrough~
- * - TSDoc tags: {@link}, {@see}
+ * - TSDoc tags: `{@link}`, `{@see}`
  * - auto-linking via backticks to identifiers/modules
  * - paragraph breaks (double newline)
  * - block elements: headings, horizontal rules, code blocks
@@ -11,7 +11,7 @@
  * Key constraint: preserves ALL whitespace exactly as authored,
  * and is rendered with white-space pre or pre-wrap.
  *
- * ## Design Philosophy
+ * Design philosophy:
  *
  * - **False negatives over false positives**: Strict syntax prevents accidentally
  *   interpreting plain text as formatting. When in doubt, treat as plain text.

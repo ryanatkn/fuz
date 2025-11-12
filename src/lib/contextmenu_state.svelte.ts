@@ -492,9 +492,9 @@ const non_scoped_roots: Set<symbol> = new Set();
  * @param get_scoped Getter function that returns the current scoped value
  */
 export const contextmenu_check_global_root = (get_scoped: () => boolean): void => {
-	const id = Symbol('contextmenu_root');
-
 	$effect(() => {
+		const id = Symbol('contextmenu_root');
+
 		if (!get_scoped()) {
 			// Register as global (non-scoped)
 			non_scoped_roots.add(id);

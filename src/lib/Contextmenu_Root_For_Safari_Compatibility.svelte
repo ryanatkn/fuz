@@ -26,8 +26,8 @@
 		contextmenu_context,
 		contextmenu_dimensions_context,
 		Contextmenu_State,
-		contextmenu_check_global_root,
 		open_contextmenu,
+		contextmenu_check_global_root,
 	} from '$lib/contextmenu_state.svelte.js';
 	import Contextmenu_Link_Entry from '$lib/Contextmenu_Link_Entry.svelte';
 	import Contextmenu_Text_Entry from '$lib/Contextmenu_Text_Entry.svelte';

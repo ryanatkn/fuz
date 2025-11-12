@@ -2715,7 +2715,6 @@ export const src_json: Src_Json = {
 				'Docs_Link.svelte',
 				'Docs_Tertiary_Nav.svelte',
 				'Package_Detail.svelte',
-				'Tome_Related.svelte',
 				'Type_Link.svelte',
 			],
 		},
@@ -3581,7 +3580,7 @@ export const src_json: Src_Json = {
 				},
 			],
 			module_comment:
-				'mdz - minimal Markdown+TSDoc parser for Fuz API documentation.\n\nParses a specialized markdown dialect with:\n- inline formatting: `code`, **bold**, _italic_, ~strikethrough~\n- TSDoc tags: {@link}, {@see}\n- auto-linking via backticks to identifiers/modules\n- paragraph breaks (double newline)\n- block elements: headings, horizontal rules, code blocks\n\nKey constraint: preserves ALL whitespace exactly as authored,\nand is rendered with white-space pre or pre-wrap.\n\n## Design Philosophy\n\n- **False negatives over false positives**: Strict syntax prevents accidentally\n  interpreting plain text as formatting. When in doubt, treat as plain text.\n- **One way to do things**: Single unambiguous syntax per feature. No alternatives.\n- **Explicit over implicit**: Clear delimiters and column-0 requirements avoid ambiguity.\n- **Simple over complete**: Prefer simple parsing rules over complex edge case handling.',
+				'mdz - minimal Markdown+TSDoc parser for Fuz API documentation.\n\nParses a specialized markdown dialect with:\n- inline formatting: `code`, **bold**, _italic_, ~strikethrough~\n- TSDoc tags: `{@link}`, `{@see}`\n- auto-linking via backticks to identifiers/modules\n- paragraph breaks (double newline)\n- block elements: headings, horizontal rules, code blocks\n\nKey constraint: preserves ALL whitespace exactly as authored,\nand is rendered with white-space pre or pre-wrap.\n\nDesign philosophy:\n\n- **False negatives over false positives**: Strict syntax prevents accidentally\n  interpreting plain text as formatting. When in doubt, treat as plain text.\n- **One way to do things**: Single unambiguous syntax per feature. No alternatives.\n- **Explicit over implicit**: Clear delimiters and column-0 requirements avoid ambiguity.\n- **Simple over complete**: Prefer simple parsing rules over complex edge case handling.',
 			dependents: ['Mdz.svelte'],
 		},
 		{
@@ -3771,7 +3770,6 @@ export const src_json: Src_Json = {
 				'Docs_Tertiary_Nav.svelte',
 				'Identifier_Detail.svelte',
 				'Package_Detail.svelte',
-				'Tome_Related.svelte',
 			],
 		},
 		{
@@ -4752,7 +4750,6 @@ export const src_json: Src_Json = {
 				'Docs_Tertiary_Nav.svelte',
 				'Identifier_Link.svelte',
 				'Module_Link.svelte',
-				'Tome_Related.svelte',
 				'Type_Link.svelte',
 			],
 		},
@@ -5694,7 +5691,6 @@ export const src_json: Src_Json = {
 			],
 			dependencies: [
 				'Tome_Header.svelte',
-				'Tome_Related.svelte',
 				'docs_helpers.svelte.ts',
 				'intersect.svelte.ts',
 				'tome.ts',
@@ -5734,35 +5730,12 @@ export const src_json: Src_Json = {
 							type: 'string',
 							optional: true,
 						},
-						{
-							name: 'chip',
-							type: 'boolean',
-							optional: true,
-						},
 					],
 					source_line: 1,
 				},
 			],
 			dependencies: ['docs_helpers.svelte.ts', 'tome.ts'],
-			dependents: ['Docs_Tertiary_Nav.svelte', 'Tome_Related.svelte'],
-		},
-		{
-			path: 'Tome_Related.svelte',
-			identifiers: [
-				{
-					name: 'Tome_Related',
-					kind: 'component',
-					source_line: 1,
-				},
-			],
-			dependencies: [
-				'Identifier_Link.svelte',
-				'Module_Link.svelte',
-				'Tome_Link.svelte',
-				'pkg.svelte.ts',
-				'tome.ts',
-			],
-			dependents: ['Tome_Content.svelte'],
+			dependents: ['Docs_Tertiary_Nav.svelte'],
 		},
 		{
 			path: 'Tome_Section_Header.svelte',
@@ -5882,7 +5855,6 @@ export const src_json: Src_Json = {
 				'Tome_Content.svelte',
 				'Tome_Header.svelte',
 				'Tome_Link.svelte',
-				'Tome_Related.svelte',
 			],
 		},
 		{
