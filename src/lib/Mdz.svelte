@@ -15,7 +15,7 @@
 </script>
 
 <div class="white_space_pre_wrap" {...rest}>
-	{#each nodes as node (node)}
-		<Mdz_Node_View {node} />
-	{/each}
+	<!-- TODO @many currently not using keys, what would be correct here? -->
+	<!-- eslint-disable-next-line svelte/require-each-key -->
+	{#each nodes as node}<Mdz_Node_View {node} />{/each}
 </div>

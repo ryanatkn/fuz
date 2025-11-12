@@ -15,8 +15,10 @@
 	const components = mdz_components_context.get();
 </script>
 
-{#snippet render_children(children: Array<Mdz_Node>)}
-	{#each children as child (child)}<Mdz_Node_View node={child} />{/each}
+{#snippet render_children(nodes: Array<Mdz_Node>)}
+	<!-- TODO @many currently not using keys, what would be correct here? -->
+	<!-- eslint-disable-next-line svelte/require-each-key -->
+	{#each nodes as node}<Mdz_Node_View {node} />{/each}
 {/snippet}
 
 {#if node.type === 'Component'}
