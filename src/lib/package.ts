@@ -1117,10 +1117,10 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'Open_Contextmenu_Options',
+					name: 'Contextmenu_Open_Options',
 					kind: 'type',
 					source_line: 375,
-					type_signature: 'Open_Contextmenu_Options',
+					type_signature: 'Contextmenu_Open_Options',
 					properties: [
 						{
 							name: 'link_enabled',
@@ -1151,7 +1151,7 @@ export const src_json: Src_Json = {
 						'Opens the contextmenu, if appropriate,\nquerying the menu items from the DOM starting at the event target.',
 					source_line: 392,
 					type_signature:
-						'(target: HTMLElement | SVGElement, x: number, y: number, contextmenu: Contextmenu_State, options?: Open_Contextmenu_Options | undefined): boolean',
+						'(target: HTMLElement | SVGElement, x: number, y: number, contextmenu: Contextmenu_State, options?: Contextmenu_Open_Options | undefined): boolean',
 					return_type: 'boolean',
 					return_description: 'a boolean indicating if the menu was opened or not',
 					parameters: [
@@ -1183,7 +1183,7 @@ export const src_json: Src_Json = {
 						},
 						{
 							name: 'options',
-							type: 'Open_Contextmenu_Options | undefined',
+							type: 'Contextmenu_Open_Options | undefined',
 							optional: true,
 							description: 'optional configuration for filtering entries and haptic feedback',
 						},

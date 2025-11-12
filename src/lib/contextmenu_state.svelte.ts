@@ -372,7 +372,7 @@ export const contextmenu_attachment =
 
 const CONTEXTMENU_OPEN_VIBRATE_DURATION = 17;
 
-export interface Open_Contextmenu_Options {
+export interface Contextmenu_Open_Options {
 	link_enabled?: boolean;
 	text_enabled?: boolean;
 	separator_enabled?: boolean;
@@ -394,7 +394,7 @@ export const contextmenu_open = (
 	x: number,
 	y: number,
 	contextmenu: Contextmenu_State,
-	options?: Open_Contextmenu_Options,
+	options?: Contextmenu_Open_Options,
 ): boolean => {
 	const {
 		link_enabled = true,
