@@ -31,14 +31,16 @@ export const to_docs_path_info = (
 
 export const docs_links_context = create_context(() => new Docs_Links());
 
-export type Docs_Link_Tag = 'h3' | 'h4';
+export type Docs_Link_Tag = 'h2' | 'h3' | 'h4';
 
 export interface Docs_Link_Info {
 	id: string;
 	text: string;
 	slug: string;
-	tag: Docs_Link_Tag | undefined; // TODO hacky, maybe `depth` or similar is better?
+	tag: Docs_Link_Tag | undefined;
+	depth: number;
 	order: number;
+	parent_id: string | undefined;
 }
 
 export class Docs_Links {
@@ -54,10 +56,33 @@ export class Docs_Links {
 	#next_id = 0;
 
 	docs_links = $derived.by(() => {
-		const arr = Array.from(this.links.values());
-		// Sort by order to maintain document order
-		arr.sort((a, b) => a.order - b.order);
-		return arr;
+		// Build parent-child map
+		const children_map: Map<string | undefined, Array<Docs_Link_Info>> = new Map();
+
+		for (const link of this.links.values()) {
+			if (!children_map.has(link.parent_id)) {
+				children_map.set(link.parent_id, []);
+			}
+			children_map.get(link.parent_id)!.push(link);
+		}
+
+		// Sort siblings by order
+		for (const siblings of children_map.values()) {
+			siblings.sort((a, b) => a.order - b.order);
+		}
+
+		// Flatten tree with depth-first traversal
+		const result: Array<Docs_Link_Info> = [];
+		const traverse = (parent_id: string | undefined) => {
+			const children = children_map.get(parent_id) || [];
+			for (const child of children) {
+				result.push(child);
+				traverse(child.id); // recursively add children
+			}
+		};
+
+		traverse(undefined); // start with root nodes (no parent)
+		return result;
 	});
 
 	readonly slugs_onscreen: SvelteSet<string> = new SvelteSet();
@@ -66,9 +91,17 @@ export class Docs_Links {
 		this.root_path = root_path;
 	}
 
-	add(slug: string, text: string, pathname: string, tag?: Docs_Link_Tag): string {
-		// Generate unique ID
-		const id = 'docs_link_' + this.#next_id++;
+	add(
+		slug: string,
+		text: string,
+		pathname: string,
+		tag?: Docs_Link_Tag,
+		depth = 1,
+		parent_id?: string,
+		explicit_id?: string,
+	): string {
+		// Use explicit ID if provided, otherwise generate one
+		const id = explicit_id ?? 'docs_link_' + this.#next_id++;
 
 		// Use compound key (pathname#slug) to preserve order across remounts
 		const page_slug_key = `${pathname}#${slug}`;
@@ -80,7 +113,7 @@ export class Docs_Links {
 			this.#slug_to_order.set(page_slug_key, order);
 		}
 
-		this.links.set(id, {id, slug, text, tag, order});
+		this.links.set(id, {id, slug, text, tag, depth, order, parent_id});
 		return id;
 	}
 

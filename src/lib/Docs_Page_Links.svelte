@@ -31,7 +31,13 @@
 	<nav aria-label="on this page" class="width_100">
 		<ul class="unstyled">
 			{#each docs_links.docs_links as item (item.id)}
-				<li role="none" transition:slide class:pl_xl4={item.tag === 'h4'}>
+				<li
+					role="none"
+					transition:slide
+					class:pl_xl={item.depth === 2}
+					class:pl_xl2={item.depth === 3}
+					class:pl_xl3={item.depth >= 4}
+				>
 					<a
 						class="menu_item"
 						href="#{item.slug}"

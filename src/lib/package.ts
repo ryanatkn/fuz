@@ -2108,16 +2108,26 @@ export const src_json: Src_Json = {
 							type_signature: 'Docs_Link_Tag | undefined',
 						},
 						{
+							name: 'depth',
+							kind: 'variable',
+							type_signature: 'number',
+						},
+						{
 							name: 'order',
 							kind: 'variable',
 							type_signature: 'number',
+						},
+						{
+							name: 'parent_id',
+							kind: 'variable',
+							type_signature: 'string | undefined',
 						},
 					],
 				},
 				{
 					name: 'Docs_Links',
 					kind: 'class',
-					source_line: 44,
+					source_line: 46,
 					members: [
 						{
 							name: 'root_path',
@@ -2154,7 +2164,7 @@ export const src_json: Src_Json = {
 							name: 'add',
 							kind: 'function',
 							type_signature:
-								'(slug: string, text: string, pathname: string, tag?: Docs_Link_Tag | undefined) => string',
+								'(slug: string, text: string, pathname: string, tag?: Docs_Link_Tag | undefined, depth?: number, parent_id?: string | undefined, explicit_id?: string | undefined) => string',
 						},
 						{
 							name: 'remove',
@@ -3974,6 +3984,16 @@ export const src_json: Src_Json = {
 							name: 'has_module_comment',
 							kind: 'variable',
 							type_signature: 'boolean',
+						},
+						{
+							name: 'dependencies',
+							kind: 'variable',
+							doc_comment: 'Module paths (relative to src/lib) that this module imports.',
+						},
+						{
+							name: 'dependents',
+							kind: 'variable',
+							doc_comment: 'Module paths (relative to src/lib) that import this module.',
 						},
 						{
 							name: 'get_identifier_by_name',

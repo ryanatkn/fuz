@@ -63,6 +63,20 @@ export class Module {
 
 	has_module_comment: boolean = $derived(!!this.module_json.module_comment);
 
+	/**
+	 * Module paths (relative to src/lib) that this module imports.
+	 *
+	 * @nonempty
+	 */
+	dependencies = $derived(this.module_json.dependencies);
+
+	/**
+	 * Module paths (relative to src/lib) that import this module.
+	 *
+	 * @nonempty
+	 */
+	dependents = $derived(this.module_json.dependents);
+
 	constructor(pkg: Pkg, module_json: Module_Json) {
 		this.pkg = pkg;
 		this.module_json = module_json;

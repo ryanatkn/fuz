@@ -6,6 +6,7 @@
 	import Tome_Section from '$lib/Tome_Section.svelte';
 	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
 	import Docs_Search from '$lib/Docs_Search.svelte';
+	import Module_Link from '$lib/Module_Link.svelte';
 
 	const {params} = $props();
 
@@ -63,50 +64,85 @@
 		<h1 class="mt_xl4">{module_name}</h1>
 	{/snippet}
 
-	<section>
-		{#if module?.module_comment}
-			<blockquote>
-				{module.module_comment}
-			</blockquote>
-		{/if}
-
-		{#if all_identifiers.length > 1}
-			<Docs_Search
-				placeholder="search identifiers in this module..."
-				total_count={all_identifiers.length}
-				result_count={sorted_identifiers.length}
-				bind:search_query
-			/>
-		{/if}
-
-		{#if source_url}
-			<p>
-				<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-				<a href={source_url} class="chip" target="_blank" rel="noopener">view source</a>
-			</p>
-		{/if}
-	</section>
-
 	{#if !module}
 		<section>
 			<p>Module not found: {module_path_param}</p>
 		</section>
-	{:else if sorted_identifiers.length === 0}
-		<section>
-			{#if search_query}
-				<p>No identifiers found matching "{search_query}"</p>
-			{:else}
-				<p>No identifiers in this module</p>
-			{/if}
-		</section>
 	{:else}
-		{#each sorted_identifiers as identifier (identifier.name)}
+		<!-- Identifiers Section -->
+		<Tome_Section>
+			<Tome_Section_Header text="Identifiers" />
+
+			<section>
+				{#if module?.module_comment}
+					<blockquote>
+						{module.module_comment}
+					</blockquote>
+				{/if}
+
+				{#if all_identifiers.length > 1}
+					<Docs_Search
+						placeholder="search identifiers in this module..."
+						total_count={all_identifiers.length}
+						result_count={sorted_identifiers.length}
+						bind:search_query
+					/>
+				{/if}
+
+				{#if source_url}
+					<p>
+						<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+						<a href={source_url} class="chip" target="_blank" rel="noopener">view source</a>
+					</p>
+				{/if}
+			</section>
+
+			{#if sorted_identifiers.length > 0}
+				{#each sorted_identifiers as identifier (identifier.name)}
+					<Tome_Section>
+						<Tome_Section_Header text={identifier.name} />
+						<article id={identifier.name}>
+							<Identifier_Detail {identifier} />
+						</article>
+					</Tome_Section>
+				{/each}
+			{:else}
+				<section>
+					{#if search_query}
+						<p>No identifiers found matching "{search_query}"</p>
+					{:else}
+						<p>No identifiers in this module</p>
+					{/if}
+				</section>
+			{/if}
+		</Tome_Section>
+
+		<!-- Depends on Section -->
+		{#if module.dependencies}
 			<Tome_Section>
-				<Tome_Section_Header text={identifier.name} />
-				<article id={identifier.name}>
-					<Identifier_Detail {identifier} />
-				</article>
+				<Tome_Section_Header text="Depends on" />
+				<ul>
+					{#each module.dependencies as dep_path (dep_path)}
+						<li>
+							<Module_Link module_path={dep_path} />
+						</li>
+					{/each}
+				</ul>
 			</Tome_Section>
-		{/each}
+		{/if}
+
+		<!-- Imported by Section -->
+		{#if module.dependents}
+			<Tome_Section>
+				<Tome_Section_Header text="Imported by" />
+				<ul>
+					{#each module.dependents as dependent_path (dependent_path)}
+						<li>
+							<Module_Link module_path={dependent_path} />
+						</li>
+					{/each}
+				</ul>
+			</Tome_Section>
+		{/if}
 	{/if}
 </Tome_Content>
