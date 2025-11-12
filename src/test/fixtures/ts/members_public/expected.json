@@ -15,27 +15,60 @@
 		{
 			"name": "id",
 			"kind": "variable",
-			"modifiers": ["readonly"],
+			"modifiers": [
+				"readonly"
+			],
 			"type_signature": "number"
 		},
 		{
 			"name": "count",
 			"kind": "variable",
-			"modifiers": ["static"],
+			"modifiers": [
+				"static"
+			],
 			"type_signature": "number"
+		},
+		{
+			"name": "constructor",
+			"kind": "constructor",
+			"type_signature": "(name: string, age: number): User",
+			"parameters": [
+				{
+					"name": "name",
+					"type": "string",
+					"optional": false
+				},
+				{
+					"name": "age",
+					"type": "number",
+					"optional": false
+				}
+			]
 		},
 		{
 			"name": "to_string",
 			"kind": "function",
-			"type_signature": "() => string",
-			"doc_comment": "Get user info as a string"
+			"doc_comment": "Get user info as a string",
+			"type_signature": "(): string",
+			"return_type": "string",
+			"parameters": []
 		},
 		{
 			"name": "create",
 			"kind": "function",
-			"modifiers": ["static"],
-			"type_signature": "(name: string) => User",
-			"doc_comment": "Static factory method"
+			"modifiers": [
+				"static"
+			],
+			"doc_comment": "Static factory method",
+			"type_signature": "(name: string): User",
+			"return_type": "User",
+			"parameters": [
+				{
+					"name": "name",
+					"type": "string",
+					"optional": false
+				}
+			]
 		}
 	]
 }

@@ -98,15 +98,13 @@
 				{/if}
 			</section>
 
-			{#if sorted_identifiers.length > 0}
-				{#each sorted_identifiers as identifier (identifier.name)}
-					<Tome_Section>
-						<Tome_Section_Header text={identifier.name} />
-						<article id={identifier.name}>
-							<Identifier_Detail {identifier} />
-						</article>
-					</Tome_Section>
-				{/each}
+			{#each sorted_identifiers as identifier (identifier.name)}
+				<Tome_Section>
+					<Tome_Section_Header text={identifier.name} />
+					<article id={identifier.name}>
+						<Identifier_Detail {identifier} />
+					</article>
+				</Tome_Section>
 			{:else}
 				<section>
 					{#if search_query}
@@ -115,7 +113,7 @@
 						<p>No identifiers in this module</p>
 					{/if}
 				</section>
-			{/if}
+			{/each}
 		</Tome_Section>
 
 		<!-- Depends on Section -->

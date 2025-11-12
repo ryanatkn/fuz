@@ -861,6 +861,30 @@ export const src_json: Src_Json = {
 							kind: 'variable',
 							type_signature: 'Promise<Contextmenu_Activate_Result> | null',
 						},
+						{
+							name: 'constructor',
+							kind: 'constructor',
+							type_signature:
+								'(menu: Submenu_State | Root_Menu_State, run: () => Contextmenu_Run, disabled?: () => boolean): Entry_State',
+							parameters: [
+								{
+									name: 'menu',
+									type: 'Submenu_State | Root_Menu_State',
+									optional: false,
+								},
+								{
+									name: 'run',
+									type: '() => Contextmenu_Run',
+									optional: false,
+								},
+								{
+									name: 'disabled',
+									type: '() => boolean',
+									optional: false,
+									default_value: '() => false',
+								},
+							],
+						},
 					],
 				},
 				{
@@ -894,6 +918,24 @@ export const src_json: Src_Json = {
 							name: 'items',
 							kind: 'variable',
 							type_signature: 'ReadonlyArray<Item_State>',
+						},
+						{
+							name: 'constructor',
+							kind: 'constructor',
+							type_signature:
+								'(menu: Submenu_State | Root_Menu_State, depth: number): Submenu_State',
+							parameters: [
+								{
+									name: 'menu',
+									type: 'Submenu_State | Root_Menu_State',
+									optional: false,
+								},
+								{
+									name: 'depth',
+									type: 'number',
+									optional: false,
+								},
+							],
 						},
 					],
 				},
@@ -962,9 +1004,9 @@ export const src_json: Src_Json = {
 							name: 'has_custom_layout',
 							kind: 'variable',
 							modifiers: ['readonly'],
-							type_signature: 'boolean',
 							doc_comment:
 								'If an initial layout is provided, control is deferred externally.\nOtherwise the layout syncs to the page dimensions.',
+							type_signature: 'boolean',
 						},
 						{
 							name: 'opened',
@@ -1023,79 +1065,164 @@ export const src_json: Src_Json = {
 							kind: 'variable',
 						},
 						{
+							name: 'constructor',
+							kind: 'constructor',
+							type_signature: '(options?: Contextmenu_State_Options): Contextmenu_State',
+							parameters: [
+								{
+									name: 'options',
+									type: 'Contextmenu_State_Options',
+									optional: false,
+									default_value: 'EMPTY_OBJECT',
+								},
+							],
+						},
+						{
 							name: 'open',
 							kind: 'function',
-							type_signature: '(params: Contextmenu_Params[], x: number, y: number) => void',
+							type_signature: '(params: Contextmenu_Params[], x: number, y: number): void',
+							return_type: 'void',
+							parameters: [
+								{
+									name: 'params',
+									type: 'Contextmenu_Params[]',
+									optional: false,
+								},
+								{
+									name: 'x',
+									type: 'number',
+									optional: false,
+								},
+								{
+									name: 'y',
+									type: 'number',
+									optional: false,
+								},
+							],
 						},
 						{
 							name: 'close',
 							kind: 'function',
-							type_signature: '() => void',
+							type_signature: '(): void',
+							return_type: 'void',
+							parameters: [],
 						},
 						{
 							name: 'reset_items',
 							kind: 'function',
-							type_signature: '(items: readonly Item_State[]) => void',
+							type_signature: '(items: readonly Item_State[]): void',
+							return_type: 'void',
+							parameters: [
+								{
+									name: 'items',
+									type: 'readonly Item_State[]',
+									optional: false,
+								},
+							],
 						},
 						{
 							name: 'activate',
 							kind: 'function',
-							type_signature:
-								'(item: Item_State) => boolean | Promise<Contextmenu_Activate_Result>',
+							type_signature: '(item: Item_State): boolean | Promise<Contextmenu_Activate_Result>',
+							return_type: 'boolean | Promise<Contextmenu_Activate_Result>',
+							parameters: [
+								{
+									name: 'item',
+									type: 'Item_State',
+									optional: false,
+								},
+							],
 						},
 						{
 							name: 'activate_selected',
 							kind: 'function',
-							type_signature: '() => boolean | void | Promise<Contextmenu_Activate_Result>',
+							type_signature: '(): boolean | void | Promise<Contextmenu_Activate_Result>',
+							return_type: 'boolean | void | Promise<Contextmenu_Activate_Result>',
+							parameters: [],
 						},
 						{
 							name: 'select',
 							kind: 'function',
-							type_signature: '(item: Item_State) => void',
 							doc_comment: 'Activates the selected entry, or if none, selects the first.',
+							type_signature: '(item: Item_State): void',
+							return_type: 'void',
+							parameters: [
+								{
+									name: 'item',
+									type: 'Item_State',
+									optional: false,
+								},
+							],
 						},
 						{
 							name: 'collapse_selected',
 							kind: 'function',
-							type_signature: '() => void',
+							type_signature: '(): void',
+							return_type: 'void',
+							parameters: [],
 						},
 						{
 							name: 'expand_selected',
 							kind: 'function',
-							type_signature: '() => void',
+							type_signature: '(): void',
+							return_type: 'void',
+							parameters: [],
 						},
 						{
 							name: 'select_next',
 							kind: 'function',
-							type_signature: '() => void',
+							type_signature: '(): void',
+							return_type: 'void',
+							parameters: [],
 						},
 						{
 							name: 'select_previous',
 							kind: 'function',
-							type_signature: '() => void',
+							type_signature: '(): void',
+							return_type: 'void',
+							parameters: [],
 						},
 						{
 							name: 'select_first',
 							kind: 'function',
-							type_signature: '() => void',
+							type_signature: '(): void',
+							return_type: 'void',
+							parameters: [],
 						},
 						{
 							name: 'select_last',
 							kind: 'function',
-							type_signature: '() => void',
+							type_signature: '(): void',
+							return_type: 'void',
+							parameters: [],
 						},
 						{
 							name: 'add_entry',
 							kind: 'function',
-							type_signature:
-								'(run: () => Contextmenu_Run, disabled?: () => boolean) => Entry_State',
 							doc_comment: 'Used by `Contextmenu_Entry` and custom entry components',
+							type_signature: '(run: () => Contextmenu_Run, disabled?: () => boolean): Entry_State',
+							return_type: 'Entry_State',
+							parameters: [
+								{
+									name: 'run',
+									type: '() => Contextmenu_Run',
+									optional: false,
+								},
+								{
+									name: 'disabled',
+									type: '() => boolean',
+									optional: false,
+									default_value: '() => false',
+								},
+							],
 						},
 						{
 							name: 'add_submenu',
 							kind: 'function',
-							type_signature: '() => Submenu_State',
 							doc_comment: '',
+							type_signature: '(): Submenu_State',
+							return_type: 'Submenu_State',
+							parameters: [],
 						},
 					],
 				},
@@ -2151,22 +2278,84 @@ export const src_json: Src_Json = {
 							type_signature: 'SvelteSet<string>',
 						},
 						{
+							name: 'constructor',
+							kind: 'constructor',
+							type_signature: '(root_path?: string): Docs_Links',
+							parameters: [
+								{
+									name: 'root_path',
+									type: 'string',
+									optional: false,
+									default_value: 'DOCS_PATH_DEFAULT',
+								},
+							],
+						},
+						{
 							name: 'add',
 							kind: 'function',
 							type_signature:
-								'(slug: string, text: string, pathname: string, tag?: Docs_Link_Tag | undefined, depth?: number, parent_id?: string | undefined, explicit_id?: string | undefined) => string',
+								'(slug: string, text: string, pathname: string, tag?: Docs_Link_Tag | undefined, depth?: number, parent_id?: string | undefined, explicit_id?: string | undefined): string',
+							return_type: 'string',
+							parameters: [
+								{
+									name: 'slug',
+									type: 'string',
+									optional: false,
+								},
+								{
+									name: 'text',
+									type: 'string',
+									optional: false,
+								},
+								{
+									name: 'pathname',
+									type: 'string',
+									optional: false,
+								},
+								{
+									name: 'tag',
+									type: 'Docs_Link_Tag | undefined',
+									optional: true,
+								},
+								{
+									name: 'depth',
+									type: 'number',
+									optional: false,
+									default_value: '1',
+								},
+								{
+									name: 'parent_id',
+									type: 'string | undefined',
+									optional: true,
+								},
+								{
+									name: 'explicit_id',
+									type: 'string | undefined',
+									optional: true,
+								},
+							],
 						},
 						{
 							name: 'remove',
 							kind: 'function',
-							type_signature: '(id: string) => void',
+							type_signature: '(id: string): void',
+							return_type: 'void',
+							parameters: [
+								{
+									name: 'id',
+									type: 'string',
+									optional: false,
+								},
+							],
 						},
 						{
 							name: 'generate_section_id',
 							kind: 'function',
-							type_signature: '() => string',
 							doc_comment:
 								'Generate a unique section ID for the current page render.\nThis counter is instance-scoped, ensuring SSR/client consistency.',
+							type_signature: '(): string',
+							return_type: 'string',
+							parameters: [],
 						},
 					],
 				},
@@ -2883,6 +3072,23 @@ export const src_json: Src_Json = {
 							name: 'has_generics',
 							kind: 'variable',
 						},
+						{
+							name: 'constructor',
+							kind: 'constructor',
+							type_signature: '(module: Module, identifier_json: Identifier_Json): Identifier',
+							parameters: [
+								{
+									name: 'module',
+									type: 'Module',
+									optional: false,
+								},
+								{
+									name: 'identifier_json',
+									type: 'Identifier_Json',
+									optional: false,
+								},
+							],
+						},
 					],
 				},
 			],
@@ -3570,11 +3776,25 @@ export const src_json: Src_Json = {
 					source_line: 130,
 					members: [
 						{
+							name: 'constructor',
+							kind: 'constructor',
+							type_signature: '(template: string): Mdz_Parser',
+							parameters: [
+								{
+									name: 'template',
+									type: 'string',
+									optional: false,
+								},
+							],
+						},
+						{
 							name: 'parse',
 							kind: 'function',
-							type_signature: '() => Mdz_Node[]',
 							doc_comment:
 								'Main parse method. Returns flat array of nodes,\nwith paragraph nodes wrapping content between double newlines.',
+							type_signature: '(): Mdz_Node[]',
+							return_type: 'Mdz_Node[]',
+							parameters: [],
 						},
 					],
 				},
@@ -3849,10 +4069,35 @@ export const src_json: Src_Json = {
 							doc_comment: 'Module paths (relative to src/lib) that import this module.',
 						},
 						{
+							name: 'constructor',
+							kind: 'constructor',
+							type_signature: '(pkg: Pkg, module_json: Module_Json): Module',
+							parameters: [
+								{
+									name: 'pkg',
+									type: 'Pkg',
+									optional: false,
+								},
+								{
+									name: 'module_json',
+									type: 'Module_Json',
+									optional: false,
+								},
+							],
+						},
+						{
 							name: 'get_identifier_by_name',
 							kind: 'function',
-							type_signature: '(name: string) => Identifier | undefined',
 							doc_comment: 'Look up an identifier by name within this module.',
+							type_signature: '(name: string): Identifier | undefined',
+							return_type: 'Identifier | undefined',
+							parameters: [
+								{
+									name: 'name',
+									type: 'string',
+									optional: false,
+								},
+							],
 						},
 					],
 				},
@@ -4682,29 +4927,79 @@ export const src_json: Src_Json = {
 								'Identifier lookup map by name (cached via $derived).\nProvides O(1) lookup after first access.',
 						},
 						{
+							name: 'constructor',
+							kind: 'constructor',
+							type_signature:
+								'(package_json: { [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }, src_json: Src_Json): Pkg',
+							parameters: [
+								{
+									name: 'package_json',
+									type: '{ [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }',
+									optional: false,
+								},
+								{
+									name: 'src_json',
+									type: 'Src_Json',
+									optional: false,
+								},
+							],
+						},
+						{
 							name: 'lookup_identifier',
 							kind: 'function',
-							type_signature: '(name: string) => Identifier | undefined',
 							doc_comment: 'Look up an identifier by name.',
+							type_signature: '(name: string): Identifier | undefined',
+							return_type: 'Identifier | undefined',
+							parameters: [
+								{
+									name: 'name',
+									type: 'string',
+									optional: false,
+								},
+							],
 						},
 						{
 							name: 'has_identifier',
 							kind: 'function',
-							type_signature: '(name: string) => boolean',
 							doc_comment: 'Check if an identifier exists.',
+							type_signature: '(name: string): boolean',
+							return_type: 'boolean',
+							parameters: [
+								{
+									name: 'name',
+									type: 'string',
+									optional: false,
+								},
+							],
 						},
 						{
 							name: 'lookup_module',
 							kind: 'function',
-							type_signature: '(path: string) => Module | undefined',
 							doc_comment: 'Look up a module by its canonical path.',
+							type_signature: '(path: string): Module | undefined',
+							return_type: 'Module | undefined',
+							parameters: [
+								{
+									name: 'path',
+									type: 'string',
+									optional: false,
+								},
+							],
 						},
 						{
 							name: 'search_identifiers',
 							kind: 'function',
-							type_signature: '(query: string) => Identifier[]',
 							doc_comment:
 								'Search identifiers by query string with multi-term AND logic.\nSearches across identifier name, kind, and module path.\nMultiple space-separated terms match only if ALL terms match (each term can match any field).',
+							type_signature: '(query: string): Identifier[]',
+							return_type: 'Identifier[]',
+							parameters: [
+								{
+									name: 'query',
+									type: 'string',
+									optional: false,
+								},
+							],
 						},
 					],
 				},
@@ -4936,7 +5231,7 @@ export const src_json: Src_Json = {
 					name: 'Identifier_Json',
 					kind: 'type',
 					doc_comment: 'Identifier metadata with rich TypeScript/JSDoc information.',
-					source_line: 38,
+					source_line: 39,
 					type_signature: 'Identifier_Json',
 					properties: [
 						{
@@ -5052,7 +5347,7 @@ export const src_json: Src_Json = {
 					name: 'Generic_Param_Info',
 					kind: 'type',
 					doc_comment: 'Generic type parameter information.',
-					source_line: 71,
+					source_line: 72,
 					type_signature: 'Generic_Param_Info',
 					properties: [
 						{
@@ -5080,7 +5375,7 @@ export const src_json: Src_Json = {
 					kind: 'type',
 					doc_comment:
 						'Parameter information for functions and methods.\n\nKept distinct from Component_Prop_Info despite structural similarity.\nFunction parameters form a tuple with positional semantics:\ncalling order matters (`fn(a, b)` vs `fn(b, a)`),\nmay include rest parameters and destructuring patterns.',
-					source_line: 88,
+					source_line: 89,
 					type_signature: 'Parameter_Info',
 					properties: [
 						{
@@ -5115,7 +5410,7 @@ export const src_json: Src_Json = {
 					kind: 'type',
 					doc_comment:
 						'Component prop information for Svelte components.\n\nKept distinct from Parameter_Info despite structural similarity.\nComponent props are named attributes with different semantics:\nno positional order when passing (`<Foo {a} {b} />` = `<Foo {b} {a} />`),\nsupport two-way binding via `$bindable` rune.',
-					source_line: 104,
+					source_line: 105,
 					type_signature: 'Component_Prop_Info',
 					properties: [
 						{
@@ -5154,7 +5449,7 @@ export const src_json: Src_Json = {
 					name: 'get_identifier_display_name',
 					kind: 'function',
 					doc_comment: "Gets an identifier's display name with generic parameters.",
-					source_line: 116,
+					source_line: 117,
 					type_signature: '(identifier: Identifier_Json): string',
 					return_type: 'string',
 					parameters: [
@@ -5169,7 +5464,7 @@ export const src_json: Src_Json = {
 					name: 'generate_import_statement',
 					kind: 'function',
 					doc_comment: 'Generates an import statement for an identifier.',
-					source_line: 134,
+					source_line: 135,
 					type_signature:
 						'(identifier: Identifier_Json, module_path: string, pkg_name: string): string',
 					return_type: 'string',
@@ -5515,9 +5810,30 @@ export const src_json: Src_Json = {
 							type_signature: 'Color_Scheme',
 						},
 						{
+							name: 'constructor',
+							kind: 'constructor',
+							type_signature: '(theme?: Theme, color_scheme?: Color_Scheme): Themer',
+							parameters: [
+								{
+									name: 'theme',
+									type: 'Theme',
+									optional: false,
+									default_value: 'default_themes[0]!',
+								},
+								{
+									name: 'color_scheme',
+									type: 'Color_Scheme',
+									optional: false,
+									default_value: "'auto'",
+								},
+							],
+						},
+						{
 							name: 'toJSON',
 							kind: 'function',
-							type_signature: '() => Themer_Json',
+							type_signature: '(): Themer_Json',
+							return_type: 'Themer_Json',
+							parameters: [],
 						},
 					],
 				},
@@ -5983,7 +6299,7 @@ export const src_json: Src_Json = {
 					name: 'ts_extract_variable_info',
 					kind: 'function',
 					doc_comment: 'Extract variable information.',
-					source_line: 294,
+					source_line: 368,
 					type_signature:
 						'(node: Node, symbol: Symbol, checker: TypeChecker, identifier: Identifier_Json): void',
 					return_type: 'void',
@@ -6015,7 +6331,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Extract module-level comment.\nOnly accepts JSDoc/TSDoc comments (`/** ... *\\/`) that have a blank line separating them\nfrom the following statement. Module comments can appear after imports.',
-					source_line: 313,
+					source_line: 387,
 					type_signature: '(source_file: SourceFile): string | undefined',
 					return_type: 'string | undefined',
 					parameters: [
@@ -6030,7 +6346,7 @@ export const src_json: Src_Json = {
 					name: 'ts_create_program',
 					kind: 'function',
 					doc_comment: 'Create TypeScript program for analysis.',
-					source_line: 385,
+					source_line: 459,
 					type_signature: '(log: { warn: (message: string) => void; }): Program | null',
 					return_type: 'Program | null',
 					parameters: [

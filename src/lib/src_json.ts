@@ -28,6 +28,7 @@ export type Identifier_Kind =
 	| 'function'
 	| 'variable'
 	| 'class'
+	| 'constructor'
 	| 'component'
 	| 'json'
 	| 'css';

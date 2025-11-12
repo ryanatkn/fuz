@@ -5,26 +5,52 @@
 		{
 			"name": "name",
 			"kind": "variable",
-			"modifiers": ["readonly"],
+			"modifiers": [
+				"readonly"
+			],
 			"type_signature": "string"
+		},
+		{
+			"name": "constructor",
+			"kind": "constructor",
+			"type_signature": "(name: string, max?: number): Counter",
+			"parameters": [
+				{
+					"name": "name",
+					"type": "string",
+					"optional": false
+				},
+				{
+					"name": "max",
+					"type": "number",
+					"optional": false,
+					"default_value": "100"
+				}
+			]
 		},
 		{
 			"name": "get_count",
 			"kind": "function",
-			"type_signature": "() => number",
-			"doc_comment": "Get the current count"
+			"doc_comment": "Get the current count",
+			"type_signature": "(): number",
+			"return_type": "number",
+			"parameters": []
 		},
 		{
 			"name": "increment",
 			"kind": "function",
-			"type_signature": "() => void",
-			"doc_comment": "Increment the counter"
+			"doc_comment": "Increment the counter",
+			"type_signature": "(): void",
+			"return_type": "void",
+			"parameters": []
 		},
 		{
 			"name": "reset",
 			"kind": "function",
-			"type_signature": "() => void",
-			"doc_comment": "Reset the counter to zero"
+			"doc_comment": "Reset the counter to zero",
+			"type_signature": "(): void",
+			"return_type": "void",
+			"parameters": []
 		}
 	]
 }

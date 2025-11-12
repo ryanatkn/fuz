@@ -243,7 +243,11 @@
 				{#if member.type_signature}
 					<p class="row gap_md">
 						<strong>type</strong>
-						<Type_Link type={member.type_signature} />
+						<Type_Link
+							type={member.kind === 'constructor'
+								? `new ${member.type_signature}`
+								: member.type_signature}
+						/>
 					</p>
 				{/if}
 				{#if member.modifiers?.length}
@@ -251,6 +255,66 @@
 						{#each member.modifiers as modifier (modifier)}
 							<span class="chip">{modifier}</span>
 						{/each}
+					</div>
+				{/if}
+				<!-- parameters for methods and constructors -->
+				{#if member.parameters?.length}
+					<section>
+						<!-- <h5>parameters</h5> -->
+						{#each member.parameters as param (param)}
+							<section>
+								<h5>
+									<code
+										>{param.name}{#if param.optional}<strong>?</strong>{/if}</code
+									>
+								</h5>
+								{#if param.description}
+									<Mdz content={param.description} />
+								{/if}
+								<div class="row gap_md">
+									<strong>type</strong>
+									<Type_Link type={param.type} />
+								</div>
+								{#if param.optional || param.default_value}
+									<div class="row gap_md">
+										{#if param.optional}
+											<span class="chip">optional</span>
+										{/if}
+										{#if param.default_value}
+											<strong>default</strong>
+											<Code content={param.default_value} lang="ts" />
+										{/if}
+									</div>
+								{/if}
+							</section>
+						{/each}
+					</section>
+				{/if}
+				<!-- return type for methods -->
+				{#if member.return_type}
+					<div class="row gap_md">
+						<strong>returns</strong>
+						<Type_Link type={member.return_type} />
+					</div>
+					{#if member.return_description}
+						<Mdz content={member.return_description} />
+					{/if}
+				{/if}
+				<!-- throws for methods and constructors -->
+				{#if member.throws?.length}
+					<div>
+						<strong>throws</strong>
+						<ul>
+							{#each member.throws as thrown (thrown)}
+								<li>
+									{#if thrown.type}
+										<code>{thrown.type}</code> - {thrown.description}
+									{:else}
+										{thrown.description}
+									{/if}
+								</li>
+							{/each}
+						</ul>
 					</div>
 				{/if}
 			</section>
