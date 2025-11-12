@@ -2072,7 +2072,7 @@ export const src_json: Src_Json = {
 					kind: 'variable',
 					source_line: 42,
 					type_signature:
-						'{ get: () => Docs_Links; set: (value?: Docs_Links | undefined) => Docs_Links; }',
+						'{ get: (error_message?: string | undefined) => Docs_Links; maybe_get: () => Docs_Links | undefined; set: (value: Docs_Links) => Docs_Links; }',
 				},
 				{
 					name: 'Docs_Link_Tag',

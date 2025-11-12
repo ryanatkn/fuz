@@ -37,20 +37,16 @@
 
 <!-- type signature -->
 {#if identifier.type_signature}
-	<p>
-		<Code
-			content={identifier.type_signature}
-			lang="ts"
-			code_attrs={{class: 'white_space_pre_wrap'}}
-		/>
-	</p>
+	<Code
+		content={identifier.type_signature}
+		lang="ts"
+		code_attrs={{class: 'white_space_pre_wrap'}}
+	/>
 {/if}
 
 <!-- documentation -->
 {#if identifier.has_documentation}
-	<div class="doc-comment">
-		<Mdz content={identifier.doc_comment!} />
-	</div>
+	<Mdz content={identifier.doc_comment!} />
 {/if}
 
 <!-- parameters -->
@@ -64,9 +60,7 @@
 					>
 				</h4>
 				{#if param.description}
-					<div class="param-description">
-						<Mdz content={param.description} />
-					</div>
+					<Mdz content={param.description} />
 				{/if}
 				<div class="row gap_md">
 					<strong>type</strong>
@@ -104,9 +98,7 @@
 					>
 				</h4>
 				{#if prop.description}
-					<div class="prop-description">
-						<Mdz content={prop.description} />
-					</div>
+					<Mdz content={prop.description} />
 				{/if}
 				<div class="row gap_md mb_lg">
 					<strong>type</strong>
@@ -260,9 +252,7 @@
 			<section>
 				<h4><code>{member.name}</code></h4>
 				{#if member.doc_comment}
-					<div class="member-doc-comment">
-						<Mdz content={member.doc_comment} />
-					</div>
+					<Mdz content={member.doc_comment} />
 				{/if}
 				{#if member.type_signature}
 					<p class="row gap_md">
@@ -289,9 +279,7 @@
 			<section>
 				<h4><code>{prop.name}</code></h4>
 				{#if prop.doc_comment}
-					<div class="property-doc-comment">
-						<Mdz content={prop.doc_comment} />
-					</div>
+					<Mdz content={prop.doc_comment} />
 				{/if}
 				{#if prop.type_signature}
 					<div class="row gap_md">

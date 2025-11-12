@@ -76,14 +76,10 @@
 		<Tome_Section_Header text="Line breaks and paragraphs" />
 		<p>Single newlines create line breaks:</p>
 		<Code content={linebreak_example} />
-		<div class="mb_lg">
-			<Mdz content={linebreak_example} />
-		</div>
+		<Mdz content={linebreak_example} class="mb_lg" />
 		<p>Double newlines create paragraph breaks:</p>
 		<Code content={paragraph_example} />
-		<div class="mb_lg">
-			<Mdz content={paragraph_example} />
-		</div>
+		<Mdz content={paragraph_example} class="mb_lg" />
 		<p>Triple newlines create paragraphs with a blank line between:</p>
 		<Code content={triple_linebreak_example} />
 		<Mdz content={triple_linebreak_example} />
