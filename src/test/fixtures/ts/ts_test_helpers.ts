@@ -189,7 +189,7 @@ export const infer_category_from_name = (name: string): Ts_Fixture_Category => {
 	if (name.startsWith('infer_kind_') || name.endsWith('_declaration')) {
 		return 'infer_kind';
 	}
-	if (name === 'multi_line' || name === 'no_comment') {
+	if (name.startsWith('module_comment_') || name === 'multi_line' || name === 'no_comment') {
 		return 'module_comment';
 	}
 	throw new Error(`Cannot infer category from fixture name: ${name}`);

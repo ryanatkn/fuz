@@ -7,6 +7,7 @@
 	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
 	import Docs_Search from '$lib/Docs_Search.svelte';
 	import Module_Link from '$lib/Module_Link.svelte';
+	import Mdz from '$lib/Mdz.svelte';
 
 	const {params} = $props();
 
@@ -76,7 +77,7 @@
 			<section>
 				{#if module?.module_comment}
 					<blockquote>
-						{module.module_comment}
+						<Mdz content={module.module_comment} />
 					</blockquote>
 				{/if}
 

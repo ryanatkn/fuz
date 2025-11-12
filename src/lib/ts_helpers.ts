@@ -307,14 +307,65 @@ export const ts_extract_variable_info = (
 
 /**
  * Extract module-level comment.
+ * Only accepts JSDoc/TSDoc comments (`/** ... *\/`) that have a blank line separating them
+ * from the following statement. Module comments can appear after imports.
  */
 export const ts_extract_module_comment = (source_file: ts.SourceFile): string | undefined => {
 	const full_text = source_file.getFullText();
-	const leading_comments = ts.getLeadingCommentRanges(full_text, 0);
-	if (!leading_comments?.length) return undefined;
 
-	const first_comment = leading_comments[0]!;
-	let text = full_text.substring(first_comment.pos, first_comment.end);
+	// Check for comments at the start of the file (before any statements)
+	const leading_comments = ts.getLeadingCommentRanges(full_text, 0);
+	if (leading_comments?.length) {
+		for (const comment of leading_comments) {
+			const comment_text = full_text.substring(comment.pos, comment.end);
+			if (!comment_text.trimStart().startsWith('/**')) continue;
+
+			// Check if there's a blank line after this comment
+			const first_statement = source_file.statements[0];
+			if (first_statement) {
+				const between = full_text.substring(comment.end, first_statement.getStart());
+				if (between.includes('\n\n')) {
+					return extract_and_clean_jsdoc(full_text, comment);
+				}
+			} else {
+				// No statements, just return the comment
+				return extract_and_clean_jsdoc(full_text, comment);
+			}
+		}
+	}
+
+	// Check for comments before each statement (e.g., after imports)
+	for (const statement of source_file.statements) {
+		const statement_start = statement.getFullStart();
+		const statement_pos = statement.getStart();
+
+		// Get comments in the trivia before this statement
+		const comments = ts.getLeadingCommentRanges(full_text, statement_start);
+		if (!comments?.length) continue;
+
+		for (const comment of comments) {
+			const comment_text = full_text.substring(comment.pos, comment.end);
+			if (!comment_text.trimStart().startsWith('/**')) continue;
+
+			// Check if there's a blank line between comment and statement
+			const between = full_text.substring(comment.end, statement_pos);
+			if (between.includes('\n\n')) {
+				return extract_and_clean_jsdoc(full_text, comment);
+			}
+		}
+	}
+
+	return undefined;
+};
+
+/**
+ * Extract and clean JSDoc comment text.
+ */
+const extract_and_clean_jsdoc = (
+	full_text: string,
+	comment: {pos: number; end: number},
+): string | undefined => {
+	let text = full_text.substring(comment.pos, comment.end);
 
 	// Clean comment markers
 	text = text
