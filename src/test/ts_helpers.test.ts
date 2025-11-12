@@ -56,11 +56,11 @@ describe('TypeScript helpers (fixture-based)', () => {
 
 	test('class fixtures correctly exclude private fields', () => {
 		const private_fields_fixture = fixtures.find(
-			(f) => f.category === 'class' && f.name === 'private_fields',
+			(f) => f.category === 'class' && f.name === 'fields_private',
 		);
 
 		if (!private_fields_fixture) {
-			throw new Error('private_fields fixture not found');
+			throw new Error('fields_private fixture not found');
 		}
 
 		const result = private_fields_fixture.expected as Identifier_Json;

@@ -1,5 +1,5 @@
 {
-	"name": "Component_Jsdoc",
+	"name": "Component_With_Jsdoc",
 	"kind": "component",
 	"doc_comment": "A well-documented component with JSDoc.\n\nThis component demonstrates comprehensive documentation.",
 	"examples": ["```svelte\n<Component_Jsdoc title=\"Hello\" />\n```"],
