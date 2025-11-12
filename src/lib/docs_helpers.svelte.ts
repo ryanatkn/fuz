@@ -39,7 +39,7 @@ export const to_docs_path_info = (
 	return {path, path_is_selected, path_segment};
 };
 
-export const docs_links_context = create_context(() => new Docs_Links());
+export const docs_links_context = create_context<Docs_Links>();
 
 export type Docs_Link_Tag = 'h2' | 'h3' | 'h4';
 

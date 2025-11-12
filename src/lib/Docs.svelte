@@ -12,7 +12,7 @@
 	import Docs_Tertiary_Nav from '$lib/Docs_Tertiary_Nav.svelte';
 	import Dialog from '$lib/Dialog.svelte';
 	import Docs_Footer from '$lib/Docs_Footer.svelte';
-	import {docs_links_context} from '$lib/docs_helpers.svelte.js';
+	import {Docs_Links, docs_links_context} from '$lib/docs_helpers.svelte.js';
 
 	interface Props {
 		tomes: Array<Tome>;
@@ -38,7 +38,7 @@
 		show_secondary_nav_dialog = show ?? !show_secondary_nav_dialog;
 	};
 
-	docs_links_context.set();
+	docs_links_context.set(new Docs_Links());
 
 	onNavigate(() => {
 		show_secondary_nav_dialog = false;
