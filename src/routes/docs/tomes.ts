@@ -43,7 +43,7 @@ export const tomes: Array<Tome> = [
 		category: 'guide',
 		component: theming,
 		related_tomes: ['Themed'],
-		related_modules: ['Themed.svelte', 'themer.svelte.ts'],
+		related_modules: ['themer.svelte.ts'],
 		related_identifiers: ['Themed', 'Themer'],
 	},
 	{
@@ -51,8 +51,15 @@ export const tomes: Array<Tome> = [
 		category: 'guide',
 		component: api,
 		related_tomes: ['introduction', 'mdz', 'Package_Detail', 'Package_Summary'],
-		related_modules: [],
-		related_identifiers: [],
+		related_modules: ['pkg.svelte.ts', 'module.svelte.ts', 'identifier.svelte.ts'],
+		related_identifiers: [
+			'Docs_Link',
+			'Pkg',
+			'Module',
+			'Identifier',
+			'Identifier_Link',
+			'Module_Link',
+		],
 	},
 	{
 		name: 'csp',
