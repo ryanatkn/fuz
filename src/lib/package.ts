@@ -2160,15 +2160,6 @@ export const src_json: Src_Json = {
 							type_signature: 'SvelteMap<string, Docs_Link_Info>',
 						},
 						{
-							name: '#slug_to_order',
-							kind: 'variable',
-							type_signature: 'Map<string, number>',
-						},
-						{
-							name: '#next_id',
-							kind: 'variable',
-						},
-						{
 							name: 'docs_links',
 							kind: 'variable',
 						},
@@ -3583,168 +3574,11 @@ export const src_json: Src_Json = {
 					source_line: 130,
 					members: [
 						{
-							name: '#index',
-							kind: 'variable',
-							type_signature: 'number',
-						},
-						{
-							name: '#template',
-							kind: 'variable',
-							type_signature: 'string',
-						},
-						{
-							name: '#accumulated_text',
-							kind: 'variable',
-							type_signature: 'string',
-						},
-						{
-							name: '#accumulated_start',
-							kind: 'variable',
-							type_signature: 'number',
-						},
-						{
-							name: '#nodes',
-							kind: 'variable',
-							type_signature: 'Array<Mdz_Node>',
-						},
-						{
 							name: 'parse',
 							kind: 'function',
 							type_signature: '() => Mdz_Node[]',
 							doc_comment:
 								'Main parse method. Returns flat array of nodes,\nwith paragraph nodes wrapping content between double newlines.',
-						},
-						{
-							name: '#accumulate_text',
-							kind: 'function',
-							type_signature: '(text: string, start: number) => void',
-							doc_comment: 'Accumulate text for later flushing (performance optimization).',
-						},
-						{
-							name: '#flush_text',
-							kind: 'function',
-							type_signature: '() => void',
-						},
-						{
-							name: '#parse_node',
-							kind: 'function',
-							type_signature: '() => Mdz_Node',
-							doc_comment:
-								'Parse next node based on current character.\nUses switch for performance (avoids regex in hot loop).',
-						},
-						{
-							name: '#parse_code',
-							kind: 'function',
-							type_signature: '() => Mdz_Text_Node | Mdz_Code_Node',
-							doc_comment:
-								'Parse backtick code: `code`\nAuto-links to identifiers/modules if match found.\nFalls back to text if unclosed, empty, or if newline encountered before closing backtick.',
-						},
-						{
-							name: '#parse_bold',
-							kind: 'function',
-							type_signature: '() => Mdz_Text_Node | Mdz_Bold_Node',
-							doc_comment:
-								'Parse bold starting with double asterisk.\n\n- **bold** = Bold node\n\nFalls back to text if unclosed or single asterisk.',
-						},
-						{
-							name: '#parse_italic',
-							kind: 'function',
-							type_signature: '() => Mdz_Text_Node | Mdz_Italic_Node',
-							doc_comment:
-								'Parse italic starting with underscore.\n_italic_ = Italic node\nFalls back to text if unclosed.',
-						},
-						{
-							name: '#parse_strikethrough',
-							kind: 'function',
-							type_signature: '() => Mdz_Text_Node | Mdz_Strikethrough_Node',
-							doc_comment:
-								'Parse strikethrough starting with tilde.\n~strikethrough~ = Strikethrough node\nFalls back to text if unclosed.',
-						},
-						{
-							name: '#parse_link',
-							kind: 'function',
-							type_signature: '() => Mdz_Text_Node | Mdz_Link_Node',
-							doc_comment:
-								'Parse TSDoc inline tag: `...` or `{@see ...`.\nFormats:\n\n-  - local ref\n- ://url - external URL\n- ://url|Display Text - URL with custom text\n\nFalls back to text if malformed.',
-						},
-						{
-							name: '#parse_text',
-							kind: 'function',
-							type_signature: '() => Mdz_Text_Node',
-							doc_comment:
-								'Parse plain text until special character encountered.\nPreserves all whitespace (except paragraph breaks handled separately).',
-						},
-						{
-							name: '#parse_nodes_until',
-							kind: 'function',
-							type_signature: '(delimiter: string) => Mdz_Node[]',
-							doc_comment:
-								'Parse nodes until delimiter string is found.\nUsed for bold/italic content parsing.\nStops at paragraph breaks (double newline) to allow block elements to interrupt inline formatting.',
-						},
-						{
-							name: '#current_char',
-							kind: 'function',
-							type_signature: '() => number',
-							doc_comment: 'Get character code at current index, or -1 if at EOF.',
-						},
-						{
-							name: '#is_at_paragraph_break',
-							kind: 'function',
-							type_signature: '() => boolean',
-							doc_comment: 'Check if current position is at a paragraph break (double newline).',
-						},
-						{
-							name: '#match',
-							kind: 'function',
-							type_signature: '(str: string) => boolean',
-						},
-						{
-							name: '#eat',
-							kind: 'function',
-							type_signature: '(str: string) => void',
-							doc_comment: 'Consume string at current index, or throw error.',
-						},
-						{
-							name: '#match_hr',
-							kind: 'function',
-							type_signature: '() => boolean',
-							doc_comment:
-								'Check if current position matches a horizontal rule.\nHR must be exactly `---` at column 0, followed by blank line or EOF.',
-						},
-						{
-							name: '#parse_hr',
-							kind: 'function',
-							type_signature: '() => Mdz_Hr_Node',
-							doc_comment:
-								'Parse horizontal rule: `---`\nAssumes #match_hr() already verified this is an hr.',
-						},
-						{
-							name: '#match_heading',
-							kind: 'function',
-							type_signature: '() => boolean',
-							doc_comment:
-								'Check if current position matches a heading.\nHeading must be 1-6 hashes at column 0, followed by space and content,\nfollowed by blank line or EOF.',
-						},
-						{
-							name: '#parse_heading',
-							kind: 'function',
-							type_signature: '() => Mdz_Heading_Node',
-							doc_comment:
-								'Parse heading: `# Heading text`\nAssumes #match_heading() already verified this is a heading.',
-						},
-						{
-							name: '#match_code_block',
-							kind: 'function',
-							type_signature: '() => boolean',
-							doc_comment:
-								'Check if current position matches a code block.\nCode block must be 3+ backticks at column 0, followed by blank line or EOF.\nEmpty code blocks (no content) are treated as invalid.',
-						},
-						{
-							name: '#parse_code_block',
-							kind: 'function',
-							type_signature: '() => Mdz_Codeblock_Node',
-							doc_comment:
-								'Parse code block: ```lang\\ncode\\n```\nAssumes #match_code_block() already verified this is a code block.',
 						},
 					],
 				},
@@ -6155,7 +5989,7 @@ export const src_json: Src_Json = {
 					name: 'ts_extract_variable_info',
 					kind: 'function',
 					doc_comment: 'Extract variable information.',
-					source_line: 291,
+					source_line: 294,
 					type_signature:
 						'(node: Node, symbol: Symbol, checker: TypeChecker, identifier: Identifier_Json): void',
 					return_type: 'void',
@@ -6186,7 +6020,7 @@ export const src_json: Src_Json = {
 					name: 'ts_extract_module_comment',
 					kind: 'function',
 					doc_comment: 'Extract module-level comment.',
-					source_line: 308,
+					source_line: 311,
 					type_signature: '(source_file: SourceFile): string | undefined',
 					return_type: 'string | undefined',
 					parameters: [
@@ -6201,7 +6035,7 @@ export const src_json: Src_Json = {
 					name: 'ts_create_program',
 					kind: 'function',
 					doc_comment: 'Create TypeScript program for analysis.',
-					source_line: 331,
+					source_line: 334,
 					type_signature: '(log: { warn: (message: string) => void; }): Program | null',
 					return_type: 'Program | null',
 					parameters: [

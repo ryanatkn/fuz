@@ -245,6 +245,9 @@ export const ts_extract_class_info = (
 			const member_name = ts.isIdentifier(member.name) ? member.name.text : member.name.getText();
 			if (!member_name) continue;
 
+			// Skip private fields (those starting with #)
+			if (member_name.startsWith('#')) continue;
+
 			const member_identifier: Identifier_Json = {
 				name: member_name,
 				kind: ts.isMethodDeclaration(member) ? 'function' : 'variable',
