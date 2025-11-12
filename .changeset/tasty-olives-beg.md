@@ -1,5 +1,5 @@
 ---
-'@ryanatkn/fuz': patch
+'@ryanatkn/fuz': minor
 ---
 
 add dependencies and dependents to `Module_Json`
