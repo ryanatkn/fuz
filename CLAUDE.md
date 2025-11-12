@@ -131,6 +131,7 @@ Documentation components:
 
 - csp - Content Security Policy utilities (`src/lib/csp.ts`)
 - logos - logo and branding helpers (`src/lib/logos.ts`)
+- mdz - minimal Markdown+TSDoc parser for API documentation (`src/lib/mdz.ts`)
 
 #### Components
 
@@ -151,7 +152,8 @@ overlays and dialogs:
 - `Dialog` - modal dialog component
 - `Dialogs` - multi-dialog queue manager (experimental)
 - `Teleport` - portal/teleport component
-- `Contextmenu` - context menu system (`Contextmenu*.svelte`)
+- `Contextmenu` - context menu system (`Contextmenu_Root`, `Contextmenu_Entry`,
+  `Contextmenu_Link_Entry`, `Contextmenu_Submenu`, etc.)
 
 forms and inputs:
 
@@ -182,6 +184,7 @@ documentation:
 - `Tome_Content`, `Tome_Header`, `Tome_Section` - tome layout components
 - `Package_Detail` - package information display
 - `Package_Summary` - package summary card
+- `Mdz` - renders mdz (minimal Markdown+TSDoc) content with custom components
 
 utilities:
 
@@ -196,6 +199,7 @@ core systems:
 - `docs_helpers.svelte.ts` - docs navigation and linking
 - `themer.svelte.ts` - theme and color scheme management
 - `context_helpers.ts` - Svelte context utilities
+- `mdz.ts` - minimal Markdown+TSDoc parser for API docs
 
 component helpers:
 
@@ -225,7 +229,7 @@ TypeScript and Svelte analysis:
 browser and DOM:
 
 - `storage.ts` - localStorage utilities
-- `intersect.ts` - Intersection Observer utilities
+- `intersect.svelte.ts` - Svelte 5 attachment for IntersectionObserver
 - `dimensions.svelte.ts` - dimension tracking
 - `rune_helpers.svelte.ts` - Svelte 5 rune utilities
 - `helpers.ts` - general utilities (`render_value_to_string`)
@@ -263,11 +267,9 @@ for validation and code generation.
 - formatting - Prettier with tabs, 100 char width
 - Node - requires >=22.15
 - tests - located in `src/test/` (not co-located with source)
-  - mdz tests use file-based fixtures in `src/test/fixtures/mdz/`
-  - tsdoc tests use file-based fixtures in `src/test/fixtures/tsdoc/`
-  - each fixture: directory with input file (`input.mdz` or `input.ts`) and
-    `expected.json`
-  - regenerate with `gro src/test/fixtures/update` (updates both mdz and tsdoc)
+  - fixture-based tests in `src/test/fixtures/` (mdz, tsdoc, ts, svelte)
+  - each fixture: directory with input file and `expected.json`
+  - regenerate with `gro src/test/fixtures/update` (updates all fixture types)
   - IMPORTANT: NEVER manually create or edit `expected.json` files - only create
     input files and run the update task to generate the JSON
 
@@ -293,11 +295,22 @@ projects:
 
 Uses a standardized context pattern via `context_helpers.ts`:
 
+Core:
+
 - `themer_context` - theme state
+- `pkg_context` - package API metadata
+
+Documentation:
+
 - `tomes_context` - available documentation
 - `tome_context` - current documentation page
 - `docs_links_context` - documentation navigation links
-- `pkg_context` - package API metadata
+- `mdz_components_context` - custom mdz components
+
+Contextmenu:
+
+- `contextmenu_context`, `contextmenu_submenu_context`,
+  `contextmenu_dimensions_context`
 
 ### Theming
 
