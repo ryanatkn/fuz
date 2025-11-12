@@ -30,9 +30,3 @@
 	href={resolve(`${docs_path}/${docs_slugify(name)}${hash ? `#${hash}` : ''}` as any)}
 	>{#if children}{@render children()}{:else}{name}{/if}</a
 >
-
-<style>
-	a {
-		font-family: var(--font_family_mono);
-	}
-</style>

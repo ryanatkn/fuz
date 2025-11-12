@@ -53,7 +53,7 @@
 	{#if tomes_related_to_selected.length}
 		<section class="related_section">
 			<h4 class="mb_sm">related tomes</h4>
-			<ul class="unstyled ml_md">
+			<ul class="unstyled">
 				{#each tomes_related_to_selected as tome (tome.name)}
 					<li><Tome_Link name={tome.name} class="menu_item" /></li>
 				{/each}
@@ -63,7 +63,7 @@
 	{#if modules_related_to_selected.length}
 		<section class="related_section">
 			<h4 class="mb_sm">related modules</h4>
-			<ul class="unstyled ml_md">
+			<ul class="unstyled">
 				{#each modules_related_to_selected as module (module.path)}
 					<li><Module_Link module_path={module.path} class="menu_item" /></li>
 				{/each}
@@ -73,7 +73,7 @@
 	{#if identifiers_related_to_selected.length}
 		<section class="related_section">
 			<h4 class="mb_sm">related identifiers</h4>
-			<ul class="unstyled ml_md">
+			<ul class="unstyled">
 				{#each identifiers_related_to_selected as identifier (identifier.name)}
 					<li><Identifier_Link name={identifier.name} class="menu_item" /></li>
 				{/each}

@@ -416,9 +416,6 @@ a.chip {
 .ml_sm {
 	margin-left: var(--space_sm);
 }
-.ml_md {
-	margin-left: var(--space_md);
-}
 .mx_auto {
 	margin-left: auto;
 	margin-right: auto;
