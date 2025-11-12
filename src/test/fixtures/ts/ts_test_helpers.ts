@@ -1,8 +1,7 @@
-import {readdir, readFile} from 'node:fs/promises';
-import {join} from 'node:path';
 import ts from 'typescript';
 
 import type {Identifier_Json} from '$lib/src_json.js';
+import {load_fixtures_generic} from '../../test_helpers.js';
 import {
 	ts_infer_declaration_kind,
 	ts_extract_function_info,
@@ -200,26 +199,16 @@ export const infer_category_from_name = (name: string): Ts_Fixture_Category => {
  * Load all fixtures from the ts fixtures directory (flat structure).
  */
 export const load_fixtures = async (): Promise<Array<Ts_Fixture>> => {
-	const fixtures_dir = join(import.meta.dirname);
-	const entries = await readdir(fixtures_dir, {withFileTypes: true});
-	const fixture_names = entries
-		.filter((dirent) => dirent.isDirectory())
-		.map((dirent) => dirent.name)
-		.sort();
+	const generic_fixtures = await load_fixtures_generic<Identifier_Json | string | null>({
+		fixtures_dir: import.meta.dirname,
+		input_extension: '.ts',
+	});
 
-	const all_fixtures: Array<Ts_Fixture> = [];
-
-	for (const name of fixture_names) {
-		const fixture_dir = join(fixtures_dir, name);
-		const input = await readFile(join(fixture_dir, 'input.ts'), 'utf-8');
-		const expected_text = await readFile(join(fixture_dir, 'expected.json'), 'utf-8');
-		const expected = JSON.parse(expected_text);
-		const category = infer_category_from_name(name);
-
-		all_fixtures.push({name, category, input, expected});
-	}
-
-	return all_fixtures;
+	// Add category inference
+	return generic_fixtures.map((f) => ({
+		...f,
+		category: infer_category_from_name(f.name),
+	}));
 };
 
 /**

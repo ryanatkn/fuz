@@ -1,7 +1,5 @@
-import {readdir, readFile} from 'node:fs/promises';
-import {join} from 'node:path';
-
 import type {Identifier_Json} from '$lib/src_json.js';
+import {load_fixtures_generic} from '../../test_helpers.js';
 
 export interface Svelte_Fixture {
 	name: string;
@@ -27,23 +25,10 @@ export const fixture_name_to_component_name = (name: string): string => {
  * Load all fixtures from the svelte fixtures directory.
  */
 export const load_fixtures = async (): Promise<Array<Svelte_Fixture>> => {
-	const fixtures_dir = join(import.meta.dirname);
-	const entries = await readdir(fixtures_dir, {withFileTypes: true});
-	const fixture_names = entries
-		.filter((dirent) => dirent.isDirectory())
-		.map((dirent) => dirent.name)
-		.sort();
-
-	return await Promise.all(
-		fixture_names.map(async (name) => {
-			const fixture_dir = join(fixtures_dir, name);
-			const input = await readFile(join(fixture_dir, 'input.svelte'), 'utf-8');
-			const expected_text = await readFile(join(fixture_dir, 'expected.json'), 'utf-8');
-			const expected: Identifier_Json = JSON.parse(expected_text);
-
-			return {name, input, expected};
-		}),
-	);
+	return load_fixtures_generic<Identifier_Json>({
+		fixtures_dir: import.meta.dirname,
+		input_extension: '.svelte',
+	});
 };
 
 /**

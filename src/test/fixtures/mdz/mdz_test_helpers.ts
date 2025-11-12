@@ -1,6 +1,5 @@
-import {readdir, readFile} from 'node:fs/promises';
-import {join} from 'node:path';
 import type {Mdz_Node} from '$lib/mdz.js';
+import {load_fixtures_generic} from '../../test_helpers.js';
 
 export interface Mdz_Fixture {
 	name: string;
@@ -91,20 +90,8 @@ export const validate_positions = (
  * Load all fixtures from the mdz fixtures directory.
  */
 export const load_fixtures = async (): Promise<Array<Mdz_Fixture>> => {
-	const fixtures_dir = join(import.meta.dirname);
-	const entries = await readdir(fixtures_dir, {withFileTypes: true});
-	const fixture_names = entries
-		.filter((dirent) => dirent.isDirectory())
-		.map((dirent) => dirent.name)
-		.sort();
-
-	return await Promise.all(
-		fixture_names.map(async (name) => {
-			const fixture_dir = join(fixtures_dir, name);
-			const input = await readFile(join(fixture_dir, 'input.mdz'), 'utf-8');
-			const expected_text = await readFile(join(fixture_dir, 'expected.json'), 'utf-8');
-			const expected = JSON.parse(expected_text);
-			return {name, input, expected};
-		}),
-	);
+	return load_fixtures_generic<Array<Mdz_Node>>({
+		fixtures_dir: import.meta.dirname,
+		input_extension: '.mdz',
+	});
 };
