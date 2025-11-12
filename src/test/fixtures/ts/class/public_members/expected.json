@@ -1,0 +1,41 @@
+{
+	"name": "User",
+	"kind": "class",
+	"members": [
+		{
+			"name": "name",
+			"kind": "variable",
+			"type_signature": "string"
+		},
+		{
+			"name": "age",
+			"kind": "variable",
+			"type_signature": "number"
+		},
+		{
+			"name": "id",
+			"kind": "variable",
+			"modifiers": ["readonly"],
+			"type_signature": "number"
+		},
+		{
+			"name": "count",
+			"kind": "variable",
+			"modifiers": ["static"],
+			"type_signature": "number"
+		},
+		{
+			"name": "to_string",
+			"kind": "function",
+			"type_signature": "() => string",
+			"doc_comment": "Get user info as a string"
+		},
+		{
+			"name": "create",
+			"kind": "function",
+			"modifiers": ["static"],
+			"type_signature": "(name: string) => User",
+			"doc_comment": "Static factory method"
+		}
+	]
+}

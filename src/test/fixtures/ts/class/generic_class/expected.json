@@ -1,0 +1,37 @@
+{
+	"name": "Box",
+	"kind": "class",
+	"generic_params": [
+		{
+			"name": "T"
+		},
+		{
+			"name": "U",
+			"default_type": "string"
+		}
+	],
+	"members": [
+		{
+			"name": "value",
+			"kind": "variable",
+			"type_signature": "T"
+		},
+		{
+			"name": "label",
+			"kind": "variable",
+			"type_signature": "U"
+		},
+		{
+			"name": "get",
+			"kind": "function",
+			"type_signature": "() => T",
+			"doc_comment": "Get the boxed value"
+		},
+		{
+			"name": "set",
+			"kind": "function",
+			"type_signature": "(value: T) => void",
+			"doc_comment": "Update the value"
+		}
+	]
+}

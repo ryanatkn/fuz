@@ -1,0 +1,37 @@
+{
+	"name": "Complex_Types",
+	"kind": "component",
+	"props": [
+		{
+			"name": "status",
+			"type": "Status",
+			"optional": false,
+			"description": "Current status"
+		},
+		{
+			"name": "user",
+			"type": "User | null",
+			"optional": false,
+			"description": "User data"
+		},
+		{
+			"name": "onclick",
+			"type": "(event: MouseEvent) => void",
+			"optional": true,
+			"description": "Callback function"
+		},
+		{
+			"name": "children",
+			"type": "Snippet",
+			"optional": true,
+			"description": "Snippet for custom content"
+		},
+		{
+			"name": "items",
+			"type": "Array<string>",
+			"optional": true,
+			"description": "Array of items"
+		}
+	],
+	"source_line": 1
+}

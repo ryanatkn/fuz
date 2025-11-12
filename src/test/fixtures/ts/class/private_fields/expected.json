@@ -1,0 +1,30 @@
+{
+	"name": "Counter",
+	"kind": "class",
+	"members": [
+		{
+			"name": "name",
+			"kind": "variable",
+			"modifiers": ["readonly"],
+			"type_signature": "string"
+		},
+		{
+			"name": "get_count",
+			"kind": "function",
+			"type_signature": "() => number",
+			"doc_comment": "Get the current count"
+		},
+		{
+			"name": "increment",
+			"kind": "function",
+			"type_signature": "() => void",
+			"doc_comment": "Increment the counter"
+		},
+		{
+			"name": "reset",
+			"kind": "function",
+			"type_signature": "() => void",
+			"doc_comment": "Reset the counter to zero"
+		}
+	]
+}

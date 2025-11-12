@@ -1,6 +1,6 @@
 /**
  * Shared test utilities for vitest tests.
- * Provides helpers for component mounting and DOM event creation.
+ * Provides helpers for component mounting, DOM event creation, and test data normalization.
  */
 
 import {mount, unmount, type Component} from 'svelte';
@@ -119,4 +119,34 @@ export const create_touch_event = (
 		changedTouches: touch_objects,
 		...options,
 	});
+};
+
+/**
+ * Normalize an object by removing all undefined values.
+ * This matches JSON serialization behavior where undefined values are omitted.
+ *
+ * Used to compare test results with expected.json files, since JSON.stringify
+ * automatically removes undefined values when serializing.
+ *
+ * Note: Treats both null and undefined as null for comparison consistency.
+ *
+ * @param obj - The object to normalize
+ * @returns The normalized object without undefined values
+ */
+export const normalize_json = (obj: any): any => {
+	// Treat both null and undefined as null for comparison consistency
+	if (obj === null || obj === undefined) return null;
+	if (Array.isArray(obj)) {
+		return obj.map(normalize_json);
+	}
+	if (typeof obj === 'object') {
+		const normalized: any = {};
+		for (const [key, value] of Object.entries(obj)) {
+			if (value !== undefined) {
+				normalized[key] = normalize_json(value);
+			}
+		}
+		return normalized;
+	}
+	return obj;
 };

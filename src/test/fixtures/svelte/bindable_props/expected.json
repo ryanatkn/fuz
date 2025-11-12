@@ -1,0 +1,27 @@
+{
+	"name": "Bindable_Props",
+	"kind": "component",
+	"props": [
+		{
+			"name": "name",
+			"type": "string",
+			"optional": false,
+			"description": "Regular prop"
+		},
+		{
+			"name": "value",
+			"type": "string",
+			"optional": false,
+			"description": "Bindable value prop",
+			"bindable": true
+		},
+		{
+			"name": "checked",
+			"type": "boolean",
+			"optional": false,
+			"description": "Bindable checked prop",
+			"bindable": true
+		}
+	],
+	"source_line": 1
+}

@@ -7,6 +7,7 @@ import {
 	validate_tsdoc_structure,
 	type Tsdoc_Fixture,
 } from './fixtures/tsdoc/tsdoc_test_helpers.js';
+import {normalize_json} from './test_helpers.js';
 
 let fixtures: Array<Tsdoc_Fixture> = [];
 
@@ -49,21 +50,10 @@ describe('tsdoc parser (fixture-based)', () => {
 				}
 			}
 
-			// Compare with expected (normalize by removing undefined values)
-			const normalize = (obj: any) => {
-				if (obj === null || obj === undefined) return null; // Treat both as null for comparison
-				const normalized: any = {};
-				for (const [key, value] of Object.entries(obj)) {
-					if (value !== undefined) {
-						normalized[key] = value;
-					}
-				}
-				return normalized;
-			};
-
+			// Compare with expected (normalize to match JSON serialization)
 			assert.deepEqual(
-				normalize(result),
-				normalize(fixture.expected),
+				normalize_json(result),
+				normalize_json(fixture.expected),
 				`Fixture "${fixture.name}" failed`,
 			);
 		}

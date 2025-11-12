@@ -1,0 +1,5 @@
+{
+	"name": "config",
+	"kind": "variable",
+	"type_signature": "{ timeout: number; retries: number; endpoints: Array<string>; }"
+}

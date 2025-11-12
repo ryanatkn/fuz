@@ -1,0 +1,25 @@
+{
+	"name": "Prop_Descriptions",
+	"kind": "component",
+	"props": [
+		{
+			"name": "name",
+			"type": "string",
+			"optional": false,
+			"description": "The user's full name.\nShould be formatted as \"First Last\"."
+		},
+		{
+			"name": "age",
+			"type": "number",
+			"optional": false,
+			"description": "The user's age in years.\nMust be a positive integer."
+		},
+		{
+			"name": "active",
+			"type": "boolean",
+			"optional": true,
+			"description": "Whether the user is active.\nDefaults to true if not specified."
+		}
+	],
+	"source_line": 1
+}

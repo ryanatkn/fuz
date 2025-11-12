@@ -1,0 +1,19 @@
+{
+	"name": "Intersection_Types",
+	"kind": "component",
+	"props": [
+		{
+			"name": "custom",
+			"type": "string",
+			"optional": false,
+			"description": "Custom prop"
+		},
+		{
+			"name": "data",
+			"type": "Record<string, unknown>",
+			"optional": true,
+			"description": "Another custom prop"
+		}
+	],
+	"source_line": 1
+}
