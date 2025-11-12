@@ -8,6 +8,8 @@
 	import Mdz from '$lib/Mdz.svelte';
 
 	const {identifier}: {identifier: Identifier} = $props();
+
+	// TODO BLOCK should {#if identifier.type_signature} be inline or set only white_space_pre_wrap ? same with `<h4>returns</h4>`
 </script>
 
 <!-- Metadata -->
@@ -37,11 +39,7 @@
 
 <!-- type signature -->
 {#if identifier.type_signature}
-	<Code
-		content={identifier.type_signature}
-		lang="ts"
-		code_attrs={{class: 'white_space_pre_wrap'}}
-	/>
+	<Code inline content={identifier.type_signature} lang="ts" />
 {/if}
 
 <!-- documentation -->
@@ -73,12 +71,7 @@
 						{/if}
 						{#if param.default_value}
 							<strong>default</strong>
-							<Code
-								inline
-								content={param.default_value}
-								lang="ts"
-								code_attrs={{class: 'white_space_pre_wrap'}}
-							/>
+							<Code inline content={param.default_value} lang="ts" />
 						{/if}
 					</div>
 				{/if}
@@ -114,12 +107,7 @@
 						{/if}
 						{#if prop.default_value}
 							<strong>default</strong>
-							<Code
-								inline
-								content={prop.default_value}
-								lang="ts"
-								code_attrs={{class: 'white_space_pre_wrap'}}
-							/>
+							<Code inline content={prop.default_value} lang="ts" />
 						{/if}
 					</div>
 				{/if}
@@ -132,7 +120,7 @@
 {#if identifier.return_type}
 	<section>
 		<h4>returns</h4>
-		<Code content={identifier.return_type} lang="ts" code_attrs={{class: 'white_space_pre_wrap'}} />
+		<Code inline content={identifier.return_type} lang="ts" />
 		{#if identifier.return_description}
 			<Mdz content={identifier.return_description} />
 		{/if}
