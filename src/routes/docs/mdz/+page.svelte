@@ -155,6 +155,7 @@ mdz_elements_context.set(new Map([
 	['marquee', true],
 ]));`}
 			lang="ts"
+			class="mb_lg"
 		/>
 		<p>
 			Unregistered elements render as <Mdz content="<tagname />" inline /> placeholders for security.
