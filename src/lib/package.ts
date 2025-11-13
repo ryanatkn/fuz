@@ -2778,7 +2778,7 @@ export const src_json: Src_Json = {
 					kind: 'component',
 					props: [
 						{
-							name: 'slug',
+							name: 'fragment',
 							type: 'string',
 							optional: false,
 						},
@@ -6115,12 +6115,12 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					source_line: 20,
 					type_signature:
-						'(item: { name: string; category: string; component: any; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }, docs_path?: string): string',
+						'(item: string | { name: string; category: string; component: any; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }, docs_path?: string, hash?: string | undefined): string',
 					return_type: 'string',
 					parameters: [
 						{
 							name: 'item',
-							type: '{ name: string; category: string; component: any; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }',
+							type: 'string | { name: string; category: string; component: any; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }',
 							optional: false,
 						},
 						{
@@ -6129,19 +6129,24 @@ export const src_json: Src_Json = {
 							optional: false,
 							default_value: 'DOCS_PATH_DEFAULT',
 						},
+						{
+							name: 'hash',
+							type: 'string | undefined',
+							optional: true,
+						},
 					],
 				},
 				{
 					name: 'tomes_context',
 					kind: 'variable',
-					source_line: 23,
+					source_line: 30,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Map<string, { name: string; category: string; component: any; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }>; maybe_get: () => Map<...> | undefined; set: (value: Map<...>) => Map<...>; }',
 				},
 				{
 					name: 'get_tome_by_name',
 					kind: 'function',
-					source_line: 25,
+					source_line: 32,
 					type_signature:
 						'(name: string): { name: string; category: string; component: any; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }',
 					return_type:
@@ -6157,7 +6162,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'tome_context',
 					kind: 'variable',
-					source_line: 32,
+					source_line: 39,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => { name: string; category: string; component: any; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }; maybe_get: () => { ...; } | undefined; set: (value: { ...; }) => { ...; }; }',
 				},

@@ -46,7 +46,7 @@ export type Docs_Link_Tag = 'h2' | 'h3' | 'h4';
 export interface Docs_Link_Info {
 	id: string;
 	text: string;
-	slug: string;
+	slug: string; // TODO BLOCK rename to fragment?
 	tag: Docs_Link_Tag | undefined;
 	depth: number;
 	order: number;
@@ -60,7 +60,7 @@ export class Docs_Links {
 
 	// Maps compound keys (pathname#slug) to their original order
 	// This preserves order across component remounts
-	#slug_to_order: Map<string, number> = new Map();
+	#slug_to_order: Map<string, number> = new Map(); // TODO BLOCK rename to fragment?
 
 	// Counter for generating unique IDs
 	#next_id = 0;
@@ -109,7 +109,7 @@ export class Docs_Links {
 	}
 
 	add(
-		slug: string,
+		slug: string, // TODO BLOCK rename to fragment?
 		text: string,
 		pathname: string,
 		tag?: Docs_Link_Tag,

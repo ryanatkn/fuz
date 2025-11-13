@@ -17,8 +17,15 @@ export const Tome = z.object({
 });
 export type Tome = z.infer<typeof Tome>;
 
-export const to_tome_pathname = (item: Tome, docs_path = DOCS_PATH_DEFAULT): string =>
-	resolve((docs_path + '/' + slugify(item.name)) as any);
+export const to_tome_pathname = (
+	item: Tome | string,
+	docs_path = DOCS_PATH_DEFAULT,
+	hash?: string,
+): string => {
+	const name = typeof item === 'string' ? item : item.name;
+	const path = docs_path + '/' + slugify(name);
+	return resolve((hash ? path + '#' + hash : path) as any);
+};
 
 export const tomes_context = create_context<Map<string, Tome>>();
 

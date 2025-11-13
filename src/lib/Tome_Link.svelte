@@ -1,10 +1,8 @@
 <script lang="ts">
-	import {resolve} from '$app/paths';
 	import {DEV} from 'esm-env';
 	import type {SvelteHTMLElements} from 'svelte/elements';
-	import {slugify} from '@ryanatkn/belt/path.js';
 
-	import {get_tome_by_name} from '$lib/tome.js';
+	import {get_tome_by_name, to_tome_pathname} from '$lib/tome.js';
 	import {DOCS_PATH_DEFAULT} from '$lib/docs_helpers.svelte.js';
 
 	const {
@@ -25,9 +23,7 @@
 	// TODO add contextmenu behavior
 </script>
 
-<a
-	{...rest}
-	class="tome_link {class_prop}"
-	href={resolve(`${docs_path}/${slugify(name)}${hash ? `#${hash}` : ''}` as any)}
+<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+<a {...rest} class="tome_link {class_prop}" href={to_tome_pathname(name, docs_path, hash)}
 	>{#if children}{@render children()}{:else}{name}{/if}</a
 >

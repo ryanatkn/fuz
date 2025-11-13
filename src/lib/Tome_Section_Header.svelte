@@ -24,7 +24,7 @@
 		children?: Snippet;
 	} = $props();
 
-	const slug = docs_slugify(text);
+	const fragment = docs_slugify(text);
 
 	const register_section_header = register_section_header_context.get();
 	if (!register_section_header) {
@@ -41,13 +41,13 @@
 	const my_section_id = section_id_context.get();
 
 	// Register with parent section to get parent's ID back
-	const parent_section_id = register_section_header(slug);
+	const parent_section_id = register_section_header(fragment);
 
 	// Register with docs_links using own section ID and parent section ID
 	let id: string | undefined;
 	if (page.url.pathname !== resolve(docs_links.root_path as any)) {
 		id = docs_links.add(
-			slug,
+			fragment,
 			text,
 			page.url.pathname,
 			final_tag,
@@ -72,7 +72,7 @@
 				{text}
 			{/if}
 		</div>
-		<Hashlink {slug} />
+		<Hashlink {fragment} />
 	</svelte:element>
 </header>
 

@@ -2,6 +2,7 @@
 	import {page} from '$app/state';
 	import {onDestroy} from 'svelte';
 	import {DEV} from 'esm-env';
+	import {slugify} from '@ryanatkn/belt/path.js';
 
 	import {tome_context} from '$lib/tome.js';
 	import Hashlink from '$lib/Hashlink.svelte';
@@ -16,14 +17,15 @@
 
 	const docs_links = docs_links_context.get();
 
-	const slug = docs_slugify(tome.name);
-	const id = docs_links.add(slug, tome.name, page.url.pathname);
+	const fragment = docs_slugify(tome.name); // case-preserving for anchor IDs
+	const path_slug = slugify(tome.name); // lowercase for URLs
+	const id = docs_links.add(fragment, tome.name, page.url.pathname);
 
 	onDestroy(() => {
 		docs_links.remove(id);
 	});
 
-	const {path, path_is_selected} = $derived(to_docs_path_info(slug, page.url.pathname));
+	const {path, path_is_selected} = $derived(to_docs_path_info(path_slug, page.url.pathname));
 </script>
 
 <svelte:element this={path_is_selected ? 'h1' : 'h2'} {...props} class="tome_header">
@@ -33,7 +35,7 @@
 		<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 		<a href={path}>{@render content(tome.name)}</a>
 	{/if}
-	<Hashlink {slug} />
+	<Hashlink {fragment} />
 </svelte:element>
 
 {#snippet content(name: string)}

@@ -18,10 +18,10 @@
 
 	const {tomes, tomes_by_name, sidebar = true}: Props = $props();
 
-	const selected_item = $derived(tomes.find((t) => to_tome_pathname(t) === page.url.pathname));
+	const selected_tome = $derived(tomes.find((t) => to_tome_pathname(t) === page.url.pathname));
 
 	const tomes_related_to_selected = $derived(
-		selected_item?.related_tomes
+		selected_tome?.related_tomes
 			.map((name) => tomes_by_name.get(name))
 			.filter((t) => t !== undefined) ?? [],
 	);
@@ -29,13 +29,13 @@
 	const pkg = pkg_context.get();
 
 	const modules_related_to_selected = $derived(
-		selected_item?.related_modules
+		selected_tome?.related_modules
 			.map((path) => pkg.lookup_module(path))
 			.filter((m) => m !== undefined) ?? [],
 	);
 
 	const identifiers_related_to_selected = $derived(
-		selected_item?.related_identifiers
+		selected_tome?.related_identifiers
 			.map((name) => pkg.lookup_identifier(name))
 			.filter((i) => i !== undefined) ?? [],
 	);

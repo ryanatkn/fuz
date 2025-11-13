@@ -2,17 +2,17 @@
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
 	const {
-		slug,
+		fragment,
 		children,
 		class: class_prop,
 		...rest
-	}: SvelteHTMLElements['a'] & {slug: string} = $props();
+	}: SvelteHTMLElements['a'] & {fragment: string} = $props();
 </script>
 
-<a {...rest} class="hashlink {class_prop}" href="#{slug}" aria-label="hashlink"
+<a {...rest} class="hashlink {class_prop}" href="#{fragment}" aria-label="hashlink"
 	>{#if children}{@render children()}{:else}#{/if}</a
 >
-<span class="hashlink_scroll_target" id={slug} aria-hidden="true"></span>
+<span class="hashlink_scroll_target" id={fragment} aria-hidden="true"></span>
 
 <style>
 	/* TODO @many how can this be done generically so it's composable? currently using `:global` at usage site - ideally we'd continue to use :hover instead of JS */

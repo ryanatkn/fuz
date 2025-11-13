@@ -22,12 +22,8 @@
 	<p>
 		Fuz provides a customizable contextmenu that overrides the system contextmenu to provide helpful
 		capabilities to users. Popular websites with similar features include Google Docs and Discord.
-		Below are
-		<a href="#caveats">caveats</a>
-		about this breaking some user expectations, and a workaround for
-		<a href="#ios-compatibility">iOS Safari support</a>. See also the <Mdn_Link
-			path="Web/API/Element/contextmenu_event"
-		/> docs and
+		Below are caveats about this breaking some user expectations, and a workaround for iOS Safari
+		support. See also the <Mdn_Link path="Web/API/Element/contextmenu_event" /> docs and
 		<a href="https://www.w3.org/TR/uievents/#event-type-contextmenu">w3 spec</a>.
 	</p>
 	<p>
