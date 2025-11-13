@@ -208,6 +208,150 @@ export const src_json: Src_Json = {
 			dependents: ['Alert.svelte'],
 		},
 		{
+			path: 'Api_Identifier_List.svelte',
+			identifiers: [
+				{
+					name: 'Api_Identifier_List',
+					kind: 'component',
+					props: [
+						{
+							name: 'identifiers',
+							type: 'Array<Identifier>',
+							optional: false,
+						},
+						{
+							name: 'search_query',
+							type: 'string',
+							optional: true,
+						},
+					],
+					source_line: 1,
+				},
+			],
+			dependencies: [
+				'Identifier_Detail.svelte',
+				'Tome_Section.svelte',
+				'Tome_Section_Header.svelte',
+			],
+			dependents: ['Api_Index.svelte', 'Api_Module.svelte'],
+		},
+		{
+			path: 'Api_Index.svelte',
+			identifiers: [
+				{
+					name: 'Api_Index',
+					kind: 'component',
+					props: [
+						{
+							name: 'pkg',
+							type: 'Pkg',
+							optional: true,
+							description:
+								'The package instance to render API docs for.\nDefaults to getting from pkg_context.',
+						},
+						{
+							name: 'tome',
+							type: 'Tome',
+							optional: true,
+							description:
+								"The tome for the API docs page.\nDefaults to looking up the 'api' tome.",
+						},
+					],
+					source_line: 1,
+				},
+			],
+			dependencies: [
+				'Api_Identifier_List.svelte',
+				'Docs_Search.svelte',
+				'Tome_Content.svelte',
+				'api_search.svelte.ts',
+				'pkg.svelte.ts',
+				'tome.ts',
+			],
+		},
+		{
+			path: 'Api_Module.svelte',
+			identifiers: [
+				{
+					name: 'Api_Module',
+					kind: 'component',
+					props: [
+						{
+							name: 'module_path',
+							type: 'string | Array<string>',
+							optional: false,
+							description: 'The module path parameter from the route (e.g., "lib/Button.svelte").',
+						},
+						{
+							name: 'pkg',
+							type: 'Pkg',
+							optional: true,
+							description:
+								'The package instance to render API docs for.\nDefaults to getting from pkg_context.',
+						},
+						{
+							name: 'tome',
+							type: 'Tome',
+							optional: true,
+							description:
+								"The tome for the API docs page.\nDefaults to looking up the 'api' tome.",
+						},
+					],
+					source_line: 1,
+				},
+			],
+			dependencies: [
+				'Api_Identifier_List.svelte',
+				'Docs_Search.svelte',
+				'Mdz.svelte',
+				'Module_Link.svelte',
+				'Tome_Content.svelte',
+				'Tome_Section.svelte',
+				'Tome_Section_Header.svelte',
+				'api_search.svelte.ts',
+				'pkg.svelte.ts',
+				'tome.ts',
+			],
+		},
+		{
+			path: 'api_search.svelte.ts',
+			identifiers: [
+				{
+					name: 'create_identifier_search',
+					kind: 'function',
+					doc_comment:
+						"Creates search state for the API index page (all identifiers across all modules).\nUses the pkg's built-in search method and sorts results alphabetically.",
+					source_line: 14,
+					type_signature: '(pkg: Pkg): Identifier_Search_State',
+					return_type: 'Identifier_Search_State',
+					parameters: [
+						{
+							name: 'pkg',
+							type: 'Pkg',
+							optional: false,
+						},
+					],
+				},
+				{
+					name: 'create_module_identifier_search',
+					kind: 'function',
+					doc_comment:
+						'Creates search state for module-specific identifier lists.\nSupports multi-term AND search (all terms must match, each term can match name/kind/module_path).',
+					source_line: 44,
+					type_signature: '(identifiers: Identifier[]): Identifier_Search_State',
+					return_type: 'Identifier_Search_State',
+					parameters: [
+						{
+							name: 'identifiers',
+							type: 'Identifier[]',
+							optional: false,
+						},
+					],
+				},
+			],
+			dependents: ['Api_Index.svelte', 'Api_Module.svelte'],
+		},
+		{
 			path: 'Breadcrumb.svelte',
 			identifiers: [
 				{
@@ -2587,6 +2731,7 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependents: ['Api_Index.svelte', 'Api_Module.svelte'],
 		},
 		{
 			path: 'Docs_Secondary_Nav.svelte',
@@ -2882,6 +3027,7 @@ export const src_json: Src_Json = {
 				},
 			],
 			dependencies: ['Details.svelte', 'Mdz.svelte', 'Module_Link.svelte', 'Type_Link.svelte'],
+			dependents: ['Api_Identifier_List.svelte'],
 		},
 		{
 			path: 'Identifier_Link.svelte',
@@ -3512,7 +3658,7 @@ export const src_json: Src_Json = {
 				},
 			],
 			dependencies: ['Mdz_Node_View.svelte', 'mdz.ts'],
-			dependents: ['Identifier_Detail.svelte'],
+			dependents: ['Api_Module.svelte', 'Identifier_Detail.svelte'],
 		},
 		{
 			path: 'mdz.ts',
@@ -3541,7 +3687,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Base_Node',
 					kind: 'type',
-					source_line: 45,
+					source_line: 46,
 					type_signature: 'Mdz_Base_Node',
 					properties: [
 						{
@@ -3564,7 +3710,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Text_Node',
 					kind: 'type',
-					source_line: 51,
+					source_line: 52,
 					type_signature: 'Mdz_Text_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3583,7 +3729,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Code_Node',
 					kind: 'type',
-					source_line: 56,
+					source_line: 57,
 					type_signature: 'Mdz_Code_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3602,7 +3748,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Codeblock_Node',
 					kind: 'type',
-					source_line: 61,
+					source_line: 62,
 					type_signature: 'Mdz_Codeblock_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3626,7 +3772,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Bold_Node',
 					kind: 'type',
-					source_line: 67,
+					source_line: 68,
 					type_signature: 'Mdz_Bold_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3645,7 +3791,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Italic_Node',
 					kind: 'type',
-					source_line: 72,
+					source_line: 73,
 					type_signature: 'Mdz_Italic_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3664,7 +3810,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Strikethrough_Node',
 					kind: 'type',
-					source_line: 77,
+					source_line: 78,
 					type_signature: 'Mdz_Strikethrough_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3683,7 +3829,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Link_Node',
 					kind: 'type',
-					source_line: 82,
+					source_line: 83,
 					type_signature: 'Mdz_Link_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3712,7 +3858,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Paragraph_Node',
 					kind: 'type',
-					source_line: 89,
+					source_line: 90,
 					type_signature: 'Mdz_Paragraph_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3731,7 +3877,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Hr_Node',
 					kind: 'type',
-					source_line: 94,
+					source_line: 95,
 					type_signature: 'Mdz_Hr_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3745,7 +3891,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Heading_Node',
 					kind: 'type',
-					source_line: 98,
+					source_line: 99,
 					type_signature: 'Mdz_Heading_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3767,9 +3913,33 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
+					name: 'Mdz_Element_Node',
+					kind: 'type',
+					source_line: 105,
+					type_signature: 'Mdz_Element_Node',
+					extends: ['Mdz_Base_Node'],
+					properties: [
+						{
+							name: 'type',
+							kind: 'variable',
+							type_signature: "'Element'",
+						},
+						{
+							name: 'name',
+							kind: 'variable',
+							type_signature: 'string',
+						},
+						{
+							name: 'children',
+							kind: 'variable',
+							type_signature: 'Array<Mdz_Node>',
+						},
+					],
+				},
+				{
 					name: 'Mdz_Component_Node',
 					kind: 'type',
-					source_line: 104,
+					source_line: 111,
 					type_signature: 'Mdz_Component_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3795,7 +3965,7 @@ export const src_json: Src_Json = {
 					kind: 'class',
 					doc_comment:
 						'Parser for mdz format.\nSingle-pass lexer/parser with text accumulation for efficiency.\nUsed by `mdz_parse`, which should be preferred for simple usage.',
-					source_line: 133,
+					source_line: 140,
 					members: [
 						{
 							name: 'constructor',
@@ -4008,6 +4178,7 @@ export const src_json: Src_Json = {
 			],
 			dependencies: ['contextmenu_state.svelte.ts', 'module_contextmenu.ts', 'pkg.svelte.ts'],
 			dependents: [
+				'Api_Module.svelte',
 				'Docs_Link.svelte',
 				'Docs_Tertiary_Nav.svelte',
 				'Identifier_Detail.svelte',
@@ -5062,6 +5233,8 @@ export const src_json: Src_Json = {
 				'package_helpers.ts',
 			],
 			dependents: [
+				'Api_Index.svelte',
+				'Api_Module.svelte',
 				'Docs_Link.svelte',
 				'Docs_Modules_List.svelte',
 				'Docs_Tertiary_Nav.svelte',
@@ -6033,6 +6206,7 @@ export const src_json: Src_Json = {
 				'intersect.svelte.ts',
 				'tome.ts',
 			],
+			dependents: ['Api_Index.svelte', 'Api_Module.svelte'],
 		},
 		{
 			path: 'Tome_Header.svelte',
@@ -6102,6 +6276,7 @@ export const src_json: Src_Json = {
 				},
 			],
 			dependencies: ['Hashlink.svelte', 'Tome_Section.svelte', 'docs_helpers.svelte.ts'],
+			dependents: ['Api_Identifier_List.svelte', 'Api_Module.svelte'],
 		},
 		{
 			path: 'Tome_Section.svelte',
@@ -6120,7 +6295,7 @@ export const src_json: Src_Json = {
 				},
 			],
 			dependencies: ['context_helpers.ts', 'docs_helpers.svelte.ts', 'intersect.svelte.ts'],
-			dependents: ['Tome_Section_Header.svelte'],
+			dependents: ['Api_Identifier_List.svelte', 'Api_Module.svelte', 'Tome_Section_Header.svelte'],
 		},
 		{
 			path: 'tome.ts',
@@ -6191,6 +6366,8 @@ export const src_json: Src_Json = {
 			],
 			dependencies: ['context_helpers.ts', 'docs_helpers.svelte.ts'],
 			dependents: [
+				'Api_Index.svelte',
+				'Api_Module.svelte',
 				'Docs.svelte',
 				'Docs_Menu.svelte',
 				'Docs_Secondary_Nav.svelte',
