@@ -54,6 +54,8 @@
 
 	// GitHub source URL for the module
 	const source_url = $derived(module?.url_github);
+
+	// TODO BLOCK simplify like Docs, maybe `Docs_Api_Module`?
 </script>
 
 <svelte:head>

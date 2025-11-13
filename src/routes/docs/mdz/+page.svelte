@@ -24,6 +24,8 @@
 	const hr_example = 'Section one.\n\n---\n\nSection two.';
 
 	let whitespace_example_el: HTMLDivElement;
+
+	// TODO BLOCK Svelte component example (Alert only?)
 </script>
 
 <Tome_Content {tome}>
@@ -142,7 +144,7 @@ const nodes = mdz_parse(content);`}
 
 	<Tome_Section>
 		<Tome_Section_Header text="Compatibility with other markdowns" />
-		<p>mdz has simpler syntax than CommonMark/GFM:</p>
+		<p>mdz supports fewer syntax variants than CommonMark/GFM:</p>
 		<ul>
 			<li>bold: <code>**text**</code> only</li>
 			<li>italic: <code>_text_</code> only</li>

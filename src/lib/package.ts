@@ -2172,12 +2172,12 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					source_line: 31,
 					type_signature:
-						'(slug: string, pathname: string, root_path?: string): { path: string; path_is_selected: boolean; path_segment: string | undefined; }',
+						'(path_slug: string, pathname: string, root_path?: string): { path: string; path_is_selected: boolean; path_segment: string | undefined; }',
 					return_type:
 						'{ path: string; path_is_selected: boolean; path_segment: string | undefined; }',
 					parameters: [
 						{
-							name: 'slug',
+							name: 'path_slug',
 							type: 'string',
 							optional: false,
 						},
@@ -2224,7 +2224,7 @@ export const src_json: Src_Json = {
 							type_signature: 'string',
 						},
 						{
-							name: 'slug',
+							name: 'fragment',
 							kind: 'variable',
 							type_signature: 'string',
 						},
@@ -2272,7 +2272,7 @@ export const src_json: Src_Json = {
 							kind: 'variable',
 						},
 						{
-							name: 'slugs_onscreen',
+							name: 'fragments_onscreen',
 							kind: 'variable',
 							modifiers: ['readonly'],
 							type_signature: 'SvelteSet<string>',
@@ -2294,11 +2294,11 @@ export const src_json: Src_Json = {
 							name: 'add',
 							kind: 'function',
 							type_signature:
-								'(slug: string, text: string, pathname: string, tag?: Docs_Link_Tag | undefined, depth?: number, parent_id?: string | undefined, explicit_id?: string | undefined): string',
+								'(fragment: string, text: string, pathname: string, tag?: Docs_Link_Tag | undefined, depth?: number, parent_id?: string | undefined, explicit_id?: string | undefined): string',
 							return_type: 'string',
 							parameters: [
 								{
-									name: 'slug',
+									name: 'fragment',
 									type: 'string',
 									optional: false,
 								},

@@ -35,9 +35,9 @@
 		at_root
 			? ({intersecting}) => {
 					if (intersecting) {
-						docs_links.slugs_onscreen.add(slug);
+						docs_links.fragments_onscreen.add(slug);
 					} else {
-						docs_links.slugs_onscreen.delete(slug);
+						docs_links.fragments_onscreen.delete(slug);
 					}
 				}
 			: null,
@@ -50,9 +50,9 @@
 				? null
 				: ({intersecting}) => {
 						if (intersecting) {
-							docs_links.slugs_onscreen.add(slug);
+							docs_links.fragments_onscreen.add(slug);
 						} else {
-							docs_links.slugs_onscreen.delete(slug);
+							docs_links.fragments_onscreen.delete(slug);
 						}
 					},
 		)}

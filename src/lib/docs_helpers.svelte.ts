@@ -29,13 +29,13 @@ export const DOCS_PATH = resolve('/docs');
 export const DOCS_API_PATH = DOCS_PATH + '/api';
 
 export const to_docs_path_info = (
-	slug: string,
+	path_slug: string,
 	pathname: string,
 	root_path = DOCS_PATH_DEFAULT,
 ): {path: string; path_is_selected: boolean; path_segment: string | undefined} => {
 	const path_segment = pathname.split('/').at(-1);
-	const path = resolve((ensure_end(ensure_start(root_path, '/'), '/') + slug) as any);
-	const path_is_selected = path_segment === slug; // messy but works
+	const path = resolve((ensure_end(ensure_start(root_path, '/'), '/') + path_slug) as any);
+	const path_is_selected = path_segment === path_slug; // messy but works
 	return {path, path_is_selected, path_segment};
 };
 
@@ -46,7 +46,7 @@ export type Docs_Link_Tag = 'h2' | 'h3' | 'h4';
 export interface Docs_Link_Info {
 	id: string;
 	text: string;
-	slug: string; // TODO BLOCK rename to fragment?
+	fragment: string;
 	tag: Docs_Link_Tag | undefined;
 	depth: number;
 	order: number;
@@ -58,9 +58,9 @@ export class Docs_Links {
 
 	readonly links: SvelteMap<string, Docs_Link_Info> = new SvelteMap();
 
-	// Maps compound keys (pathname#slug) to their original order
+	// Maps compound keys (pathname#fragment) to their original order
 	// This preserves order across component remounts
-	#slug_to_order: Map<string, number> = new Map(); // TODO BLOCK rename to fragment?
+	#fragment_to_order: Map<string, number> = new Map();
 
 	// Counter for generating unique IDs
 	#next_id = 0;
@@ -102,14 +102,14 @@ export class Docs_Links {
 		return result;
 	});
 
-	readonly slugs_onscreen: SvelteSet<string> = new SvelteSet();
+	readonly fragments_onscreen: SvelteSet<string> = new SvelteSet();
 
 	constructor(root_path = DOCS_PATH_DEFAULT) {
 		this.root_path = root_path;
 	}
 
 	add(
-		slug: string, // TODO BLOCK rename to fragment?
+		fragment: string,
 		text: string,
 		pathname: string,
 		tag?: Docs_Link_Tag,
@@ -120,17 +120,17 @@ export class Docs_Links {
 		// Use explicit ID if provided, otherwise generate one
 		const id = explicit_id ?? 'docs_link_' + this.#next_id++;
 
-		// Use compound key (pathname#slug) to preserve order across remounts
-		const page_slug_key = `${pathname}#${slug}`;
-		const existing_order = this.#slug_to_order.get(page_slug_key);
+		// Use compound key (pathname#fragment) to preserve order across remounts
+		const page_fragment_key = `${pathname}#${fragment}`;
+		const existing_order = this.#fragment_to_order.get(page_fragment_key);
 		const order = existing_order ?? this.#order_counter++;
 
-		// Store order for new slugs only
+		// Store order for new fragments only
 		if (existing_order === undefined) {
-			this.#slug_to_order.set(page_slug_key, order);
+			this.#fragment_to_order.set(page_fragment_key, order);
 		}
 
-		this.links.set(id, {id, slug, text, tag, depth, order, parent_id});
+		this.links.set(id, {id, fragment, text, tag, depth, order, parent_id});
 		return id;
 	}
 

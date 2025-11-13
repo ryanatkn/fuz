@@ -40,9 +40,9 @@
 				>
 					<a
 						class="menu_item"
-						href="#{item.slug}"
-						class:selected={item.slug === hash}
-						class:highlighted={docs_links.slugs_onscreen.has(item.slug)}
+						href="#{item.fragment}"
+						class:selected={item.fragment === hash}
+						class:highlighted={docs_links.fragments_onscreen.has(item.fragment)}
 						><div class="ellipsis">{item.text}</div></a
 					>
 				</li>

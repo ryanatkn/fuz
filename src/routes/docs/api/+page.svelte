@@ -25,6 +25,8 @@
 		const items = search_query.trim() ? pkg.search_identifiers(search_query) : all_identifiers;
 		return items.sort((a, b) => a.name.localeCompare(b.name));
 	});
+
+	// TODO BLOCK simplify like Docs, maybe `Docs_Api`?
 </script>
 
 <svelte:head>
