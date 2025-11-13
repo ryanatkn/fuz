@@ -11,9 +11,6 @@
 	import {pkg_context, parse_pkg} from '$lib/pkg.svelte.js';
 	import {package_json, src_json} from '$lib/package.js';
 	import Spiders from '$lib/Spiders.svelte';
-	import {mdz_components_context} from '$lib/mdz_components.js';
-	import Alert from '$lib/Alert.svelte';
-	import Card from '$lib/Card.svelte';
 
 	interface Props {
 		children: Snippet;
@@ -22,10 +19,6 @@
 	const {children}: Props = $props();
 
 	pkg_context.set(parse_pkg(package_json, src_json));
-	mdz_components_context.set({
-		Alert,
-		Card,
-	});
 </script>
 
 <svelte:head>

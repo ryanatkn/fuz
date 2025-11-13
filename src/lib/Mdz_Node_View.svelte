@@ -4,7 +4,7 @@
 	import type {Mdz_Node} from '$lib/mdz.js';
 	import Docs_Link from '$lib/Docs_Link.svelte';
 	import Mdz_Node_View from '$lib/Mdz_Node_View.svelte';
-	import {mdz_components_context} from '$lib/mdz_components.js';
+	import {mdz_components_context, mdz_elements_context} from '$lib/mdz_components.js';
 
 	const {
 		node,
@@ -12,7 +12,8 @@
 		node: Mdz_Node;
 	} = $props();
 
-	const components = mdz_components_context.get();
+	const components = mdz_components_context.get_maybe();
+	const elements = mdz_elements_context.get_maybe();
 </script>
 
 {#snippet render_children(nodes: Array<Mdz_Node>)}
@@ -22,14 +23,24 @@
 {/snippet}
 
 {#if node.type === 'Component'}
-	{@const Component = components[node.name]}
-	{#if Component}
+	{@const element_config = elements?.get(node.name)}
+	{@const Component = components?.get(node.name)}
+	{#if element_config !== undefined}
+		<!-- It's an HTML element -->
+		<svelte:element this={node.name}>
+			{#if node.children.length > 0}
+				{@render render_children(node.children)}
+			{/if}
+		</svelte:element>
+	{:else if Component}
+		<!-- It's a Svelte component -->
 		<Component>
-			{#if node.children}
+			{#if node.children.length > 0}
 				{@render render_children(node.children)}
 			{/if}
 		</Component>
 	{:else}
+		<!-- Not registered -->
 		<code class="color_c_5">&lt;{node.name} /&gt;</code>
 	{/if}
 {:else if node.type === 'Text'}

@@ -30,7 +30,7 @@
 	section_depth_context.set(current_depth);
 
 	// Read parent section ID before overwriting context (undefined for root sections)
-	const parent_section_id = section_id_context.maybe_get();
+	const parent_section_id = section_id_context.get_maybe();
 
 	// Generate unique section ID immediately (before children render)
 	// Uses page-scoped counter from docs_links to ensure SSR/client consistency

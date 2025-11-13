@@ -311,7 +311,7 @@ export class Contextmenu_State {
 	 * @initializes
 	 */
 	add_entry(run: () => Contextmenu_Run, disabled: () => boolean = () => false): Entry_State {
-		const menu = contextmenu_submenu_context.maybe_get() ?? this.root_menu;
+		const menu = contextmenu_submenu_context.get_maybe() ?? this.root_menu;
 		const entry = new Entry_State(menu, run, disabled);
 		menu.items = [...menu.items, entry];
 		// TODO messy, runs more than needed
@@ -325,7 +325,7 @@ export class Contextmenu_State {
 	 * @initializes
 	 */
 	add_submenu(): Submenu_State {
-		const menu = contextmenu_submenu_context.maybe_get() ?? this.root_menu;
+		const menu = contextmenu_submenu_context.get_maybe() ?? this.root_menu;
 		const submenu = new Submenu_State(menu, menu.depth + 1);
 		menu.items = [...menu.items, submenu];
 		contextmenu_submenu_context.set(submenu);

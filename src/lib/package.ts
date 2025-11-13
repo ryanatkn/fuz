@@ -333,7 +333,7 @@ export const src_json: Src_Json = {
 					name: 'create_context',
 					kind: 'function',
 					doc_comment:
-						"Wraps Svelte's `setContext` and `getContext` for better ergonomics.\nWhen no value is set in the context,\n`get` throws an error and `maybe_get` returns `undefined`.\nIf a `fallback` is provided, the `value` argument to `set` is optional\nand `maybe_get` is omitted from the type.",
+						"Wraps Svelte's `setContext` and `getContext` for better ergonomics.\nWhen no value is set in the context,\n`get` throws an error and `get_maybe` returns `undefined`.\nIf a `fallback` is provided, the `value` argument to `set` is optional\nand `get_maybe` is omitted from the type.",
 					source_line: 18,
 					type_signature:
 						'<T>(fallback: () => T): { get: () => T; set: (value?: T | undefined) => T; }',
@@ -1321,14 +1321,14 @@ export const src_json: Src_Json = {
 					kind: 'variable',
 					source_line: 479,
 					type_signature:
-						'{ get: (error_message?: string | undefined) => Contextmenu_State; maybe_get: () => Contextmenu_State | undefined; set: (value: Contextmenu_State) => Contextmenu_State; }',
+						'{ get: (error_message?: string | undefined) => Contextmenu_State; get_maybe: () => Contextmenu_State | undefined; set: (value: Contextmenu_State) => Contextmenu_State; }',
 				},
 				{
 					name: 'contextmenu_submenu_context',
 					kind: 'variable',
 					source_line: 481,
 					type_signature:
-						'{ get: (error_message?: string | undefined) => Submenu_State; maybe_get: () => Submenu_State | undefined; set: (value: Submenu_State) => Submenu_State; }',
+						'{ get: (error_message?: string | undefined) => Submenu_State; get_maybe: () => Submenu_State | undefined; set: (value: Submenu_State) => Submenu_State; }',
 				},
 				{
 					name: 'contextmenu_dimensions_context',
@@ -2199,7 +2199,7 @@ export const src_json: Src_Json = {
 					kind: 'variable',
 					source_line: 43,
 					type_signature:
-						'{ get: (error_message?: string | undefined) => Docs_Links; maybe_get: () => Docs_Links | undefined; set: (value: Docs_Links) => Docs_Links; }',
+						'{ get: (error_message?: string | undefined) => Docs_Links; get_maybe: () => Docs_Links | undefined; set: (value: Docs_Links) => Docs_Links; }',
 				},
 				{
 					name: 'Docs_Link_Tag',
@@ -3448,7 +3448,7 @@ export const src_json: Src_Json = {
 						'Context for providing custom mdz components.\nMust be set by the application using mdz.',
 					source_line: 17,
 					type_signature:
-						'{ get: (error_message?: string | undefined) => Mdz_Components; maybe_get: () => Mdz_Components | undefined; set: (value: Mdz_Components) => Mdz_Components; }',
+						'{ get: (error_message?: string | undefined) => Mdz_Components; get_maybe: () => Mdz_Components | undefined; set: (value: Mdz_Components) => Mdz_Components; }',
 				},
 			],
 			dependencies: ['context_helpers.ts'],
@@ -5030,7 +5030,7 @@ export const src_json: Src_Json = {
 					kind: 'variable',
 					source_line: 170,
 					type_signature:
-						'{ get: (error_message?: string | undefined) => Pkg; maybe_get: () => Pkg | undefined; set: (value: Pkg) => Pkg; }',
+						'{ get: (error_message?: string | undefined) => Pkg; get_maybe: () => Pkg | undefined; set: (value: Pkg) => Pkg; }',
 				},
 			],
 			dependencies: [
@@ -5860,7 +5860,7 @@ export const src_json: Src_Json = {
 					kind: 'variable',
 					source_line: 33,
 					type_signature:
-						'{ get: (error_message?: string | undefined) => Themer; maybe_get: () => Themer | undefined; set: (value: Themer) => Themer; }',
+						'{ get: (error_message?: string | undefined) => Themer; get_maybe: () => Themer | undefined; set: (value: Themer) => Themer; }',
 				},
 				{
 					name: 'sync_color_scheme',
@@ -6141,7 +6141,7 @@ export const src_json: Src_Json = {
 					kind: 'variable',
 					source_line: 30,
 					type_signature:
-						'{ get: (error_message?: string | undefined) => Map<string, { name: string; category: string; component: any; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }>; maybe_get: () => Map<...> | undefined; set: (value: Map<...>) => Map<...>; }',
+						'{ get: (error_message?: string | undefined) => Map<string, { name: string; category: string; component: any; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }>; get_maybe: () => Map<...> | undefined; set: (value: Map<...>) => Map<...>; }',
 				},
 				{
 					name: 'get_tome_by_name',
@@ -6164,7 +6164,7 @@ export const src_json: Src_Json = {
 					kind: 'variable',
 					source_line: 39,
 					type_signature:
-						'{ get: (error_message?: string | undefined) => { name: string; category: string; component: any; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }; maybe_get: () => { ...; } | undefined; set: (value: { ...; }) => { ...; }; }',
+						'{ get: (error_message?: string | undefined) => { name: string; category: string; component: any; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }; get_maybe: () => { ...; } | undefined; set: (value: { ...; }) => { ...; }; }',
 				},
 			],
 			dependencies: ['context_helpers.ts', 'docs_helpers.svelte.ts'],

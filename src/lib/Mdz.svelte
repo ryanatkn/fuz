@@ -6,15 +6,19 @@
 
 	const {
 		content,
+		inline,
 		...rest
 	}: SvelteHTMLElements['div'] & {
 		content: string;
+		inline?: boolean;
 	} = $props();
 
 	const nodes = $derived(mdz_parse(content));
+
+	// TODO maybe rethink how inline works here, possibly remove the wrapper when one element, or otherwise do something smart/convenient/predictable? what could that be
 </script>
 
-<div class="white_space_pre_wrap" {...rest}>
+<div class="white_space_pre_wrap" {...rest} class:display_inline_block={inline}>
 	<!-- TODO @many currently not using keys, what would be correct here? -->
 	<!-- eslint-disable-next-line svelte/require-each-key -->
 	{#each nodes as node}<Mdz_Node_View {node} />{/each}

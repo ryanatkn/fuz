@@ -1,0 +1,31 @@
+[
+	{
+		"type": "Paragraph",
+		"children": [
+			{
+				"type": "Component",
+				"name": "Card",
+				"children": [
+					{
+						"type": "Component",
+						"name": "Alert",
+						"children": [
+							{
+								"type": "Text",
+								"content": "Nested content.",
+								"start": 13,
+								"end": 28
+							}
+						],
+						"start": 6,
+						"end": 36
+					}
+				],
+				"start": 0,
+				"end": 43
+			}
+		],
+		"start": 0,
+		"end": 43
+	}
+]

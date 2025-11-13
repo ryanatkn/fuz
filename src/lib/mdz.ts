@@ -121,6 +121,9 @@ const HYPHEN = 45; // -
 const HASH = 35; // #
 const SPACE = 32; // (space)
 const TAB = 9; // \t
+const LEFT_ANGLE = 60; // <
+const RIGHT_ANGLE = 62; // >
+const SLASH = 47; // /
 
 /**
  * Parser for mdz format.
@@ -287,6 +290,8 @@ export class Mdz_Parser {
 					}
 				}
 				return this.#parse_text();
+			case LEFT_ANGLE:
+				return this.#parse_tag();
 			default:
 				return this.#parse_text();
 		}
@@ -531,6 +536,236 @@ export class Mdz_Parser {
 	}
 
 	/**
+	 * Parse component/element tag: `<TagName>content</TagName>` or `<TagName />`
+	 *
+	 * Formats:
+	 * - `<Alert>content</Alert>` - component/element with children
+	 * - `<Alert />` - self-closing component/element
+	 *
+	 * Tag names must start with a letter and can contain letters, numbers, hyphens, underscores.
+	 *
+	 * Falls back to text if malformed or unclosed.
+	 *
+	 * TODO: Add attribute support like `<Alert status="error">`
+	 */
+	#parse_tag(): Mdz_Component_Node | Mdz_Text_Node {
+		const start = this.#index;
+
+		// Save parent accumulation state to avoid polluting component children with parent's accumulated text
+		const saved_accumulated_text = this.#accumulated_text;
+		const saved_accumulated_start = this.#accumulated_start;
+		const saved_nodes = this.#nodes.slice();
+
+		// Clear accumulation state for parsing component children
+		this.#accumulated_text = '';
+		this.#nodes.length = 0;
+
+		// Consume <
+		if (!this.#match('<')) {
+			// Restore parent state before returning
+			this.#accumulated_text = saved_accumulated_text;
+			this.#accumulated_start = saved_accumulated_start;
+			this.#nodes.length = 0;
+			this.#nodes.push(...saved_nodes);
+
+			const content = this.#template[this.#index]!;
+			this.#index++;
+			return {
+				type: 'Text',
+				content,
+				start,
+				end: this.#index,
+			};
+		}
+		this.#index++;
+
+		// Parse tag name
+		const tag_name_start = this.#index;
+		let tag_name_end = this.#index;
+
+		// Tag name must start with a letter
+		if (this.#index >= this.#template.length) {
+			// Just a `<` at EOF - restore parent state
+			this.#accumulated_text = saved_accumulated_text;
+			this.#accumulated_start = saved_accumulated_start;
+			this.#nodes.length = 0;
+			this.#nodes.push(...saved_nodes);
+			return {
+				type: 'Text',
+				content: '<',
+				start,
+				end: this.#index,
+			};
+		}
+
+		const first_char = this.#template.charCodeAt(this.#index);
+		if (!this.#is_letter(first_char)) {
+			// Not a valid tag, treat as text - restore parent state
+			this.#accumulated_text = saved_accumulated_text;
+			this.#accumulated_start = saved_accumulated_start;
+			this.#nodes.length = 0;
+			this.#nodes.push(...saved_nodes);
+			return {
+				type: 'Text',
+				content: '<',
+				start,
+				end: start + 1,
+			};
+		}
+
+		// Collect tag name (letters, numbers, hyphens, underscores)
+		while (this.#index < this.#template.length) {
+			const char_code = this.#template.charCodeAt(this.#index);
+			if (this.#is_tag_name_char(char_code)) {
+				this.#index++;
+			} else {
+				break;
+			}
+		}
+
+		tag_name_end = this.#index;
+		const tag_name = this.#template.slice(tag_name_start, tag_name_end);
+
+		if (tag_name.length === 0) {
+			// Empty tag name - restore parent state
+			this.#accumulated_text = saved_accumulated_text;
+			this.#accumulated_start = saved_accumulated_start;
+			this.#nodes.length = 0;
+			this.#nodes.push(...saved_nodes);
+			return {
+				type: 'Text',
+				content: '<',
+				start,
+				end: start + 1,
+			};
+		}
+
+		// Skip whitespace after tag name (for future attribute support)
+		while (this.#index < this.#template.length && this.#template.charCodeAt(this.#index) === SPACE) {
+			this.#index++;
+		}
+
+		// TODO: Parse attributes here
+
+		// Check for self-closing />
+		if (
+			this.#index + 1 < this.#template.length &&
+			this.#template.charCodeAt(this.#index) === SLASH &&
+			this.#template.charCodeAt(this.#index + 1) === RIGHT_ANGLE
+		) {
+			this.#index += 2;
+
+			// Restore parent state before returning
+			this.#accumulated_text = saved_accumulated_text;
+			this.#accumulated_start = saved_accumulated_start;
+			this.#nodes.length = 0;
+			this.#nodes.push(...saved_nodes);
+
+			return {
+				type: 'Component',
+				name: tag_name,
+				children: [],
+				start,
+				end: this.#index,
+			};
+		}
+
+		// Check for closing >
+		if (this.#index >= this.#template.length || this.#template.charCodeAt(this.#index) !== RIGHT_ANGLE) {
+			// Unclosed opening tag, treat as text - restore parent state
+			this.#accumulated_text = saved_accumulated_text;
+			this.#accumulated_start = saved_accumulated_start;
+			this.#nodes.length = 0;
+			this.#nodes.push(...saved_nodes);
+
+			this.#index = start + 1;
+			return {
+				type: 'Text',
+				content: '<',
+				start,
+				end: this.#index,
+			};
+		}
+
+		// Consume >
+		this.#index++;
+
+		// Parse children until closing tag
+		const closing_tag = `</${tag_name}>`;
+		const children: Array<Mdz_Node> = [];
+
+		while (this.#index < this.#template.length) {
+			// Check for closing tag
+			if (this.#match(closing_tag)) {
+				// Flush any accumulated text from children
+				this.#flush_text();
+				children.push(...this.#nodes);
+				this.#nodes.length = 0;
+
+				this.#index += closing_tag.length;
+
+				// Restore parent state before returning
+				this.#accumulated_text = saved_accumulated_text;
+				this.#accumulated_start = saved_accumulated_start;
+				this.#nodes.length = 0;
+				this.#nodes.push(...saved_nodes);
+
+				return {
+					type: 'Component',
+					name: tag_name,
+					children,
+					start,
+					end: this.#index,
+				};
+			}
+
+			const node = this.#parse_node();
+			if (node.type === 'Text') {
+				this.#accumulate_text(node.content, node.start);
+			} else {
+				this.#flush_text();
+				children.push(...this.#nodes);
+				this.#nodes.length = 0;
+				children.push(node);
+			}
+		}
+
+		// Unclosed tag - reached EOF without finding closing tag
+		// Treat the opening tag as text - restore parent state
+		this.#accumulated_text = saved_accumulated_text;
+		this.#accumulated_start = saved_accumulated_start;
+		this.#nodes.length = 0;
+		this.#nodes.push(...saved_nodes);
+
+		this.#index = start + 1;
+		return {
+			type: 'Text',
+			content: '<',
+			start,
+			end: this.#index,
+		};
+	}
+
+	/**
+	 * Check if character code is a letter (A-Z, a-z).
+	 */
+	#is_letter(char_code: number): boolean {
+		return (char_code >= 65 && char_code <= 90) || (char_code >= 97 && char_code <= 122);
+	}
+
+	/**
+	 * Check if character code is valid for tag name (letter, number, hyphen, underscore).
+	 */
+	#is_tag_name_char(char_code: number): boolean {
+		return (
+			this.#is_letter(char_code) ||
+			(char_code >= 48 && char_code <= 57) || // 0-9
+			char_code === HYPHEN || // -
+			char_code === UNDERSCORE // _
+		);
+	}
+
+	/**
 	 * Parse plain text until special character encountered.
 	 * Preserves all whitespace (except paragraph breaks handled separately).
 	 */
@@ -546,7 +781,8 @@ export class Mdz_Parser {
 				char_code === ASTERISK ||
 				char_code === UNDERSCORE ||
 				char_code === TILDE ||
-				char_code === LEFT_BRACE
+				char_code === LEFT_BRACE ||
+				char_code === LEFT_ANGLE
 			) {
 				break;
 			}
