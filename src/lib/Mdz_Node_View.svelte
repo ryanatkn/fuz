@@ -18,8 +18,7 @@
 
 {#snippet render_children(nodes: Array<Mdz_Node>)}
 	<!-- TODO @many currently not using keys, what would be correct here? -->
-	<!-- eslint-disable-next-line svelte/require-each-key -->
-	{#each nodes as node}<Mdz_Node_View {node} />{/each}
+	{#each nodes as node (node)}<Mdz_Node_View {node} />{/each}
 {/snippet}
 
 {#if node.type === 'Element'}

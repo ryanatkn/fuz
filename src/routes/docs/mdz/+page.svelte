@@ -41,8 +41,6 @@
 		'<Alert>This is an `Alert` with _italicized <code>code</code>_ inside.</Alert>';
 
 	let whitespace_example_el: HTMLDivElement;
-
-	// TODO BLOCK hydration mismatch here
 </script>
 
 <Tome_Content {tome}>
