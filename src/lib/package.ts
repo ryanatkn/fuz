@@ -256,6 +256,13 @@ export const src_json: Src_Json = {
 							description:
 								"The tome for the API docs page.\nDefaults to looking up the 'api' tome.",
 						},
+						{
+							name: 'minimal',
+							type: 'boolean',
+							optional: true,
+							description:
+								'Whether to show minimal content (just a link to full API docs).\nUsed when the API index is shown on a parent docs page.',
+						},
 					],
 					source_line: 1,
 				},
@@ -264,6 +271,9 @@ export const src_json: Src_Json = {
 				'Api_Identifier_List.svelte',
 				'Docs_Search.svelte',
 				'Tome_Content.svelte',
+				'Tome_Link.svelte',
+				'Tome_Section.svelte',
+				'Tome_Section_Header.svelte',
 				'api_search.svelte.ts',
 				'pkg.svelte.ts',
 				'tome.ts',
@@ -6247,7 +6257,7 @@ export const src_json: Src_Json = {
 				},
 			],
 			dependencies: ['docs_helpers.svelte.ts', 'tome.ts'],
-			dependents: ['Docs_Tertiary_Nav.svelte'],
+			dependents: ['Api_Index.svelte', 'Docs_Tertiary_Nav.svelte'],
 		},
 		{
 			path: 'Tome_Section_Header.svelte',
@@ -6276,7 +6286,7 @@ export const src_json: Src_Json = {
 				},
 			],
 			dependencies: ['Hashlink.svelte', 'Tome_Section.svelte', 'docs_helpers.svelte.ts'],
-			dependents: ['Api_Identifier_List.svelte', 'Api_Module.svelte'],
+			dependents: ['Api_Identifier_List.svelte', 'Api_Index.svelte', 'Api_Module.svelte'],
 		},
 		{
 			path: 'Tome_Section.svelte',
@@ -6295,7 +6305,12 @@ export const src_json: Src_Json = {
 				},
 			],
 			dependencies: ['context_helpers.ts', 'docs_helpers.svelte.ts', 'intersect.svelte.ts'],
-			dependents: ['Api_Identifier_List.svelte', 'Api_Module.svelte', 'Tome_Section_Header.svelte'],
+			dependents: [
+				'Api_Identifier_List.svelte',
+				'Api_Index.svelte',
+				'Api_Module.svelte',
+				'Tome_Section_Header.svelte',
+			],
 		},
 		{
 			path: 'tome.ts',
