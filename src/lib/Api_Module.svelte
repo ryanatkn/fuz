@@ -48,8 +48,6 @@
 
 	// GitHub source URL for the module
 	const source_url = $derived(module?.url_github);
-
-	// TODO identifiers are h3 here, but h2 on the api listing
 </script>
 
 <svelte:head>

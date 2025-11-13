@@ -2,6 +2,8 @@
 	import {pkg_context, type Pkg} from '$lib/pkg.svelte.js';
 	import {get_tome_by_name, type Tome} from '$lib/tome.js';
 	import Tome_Content from '$lib/Tome_Content.svelte';
+	import Tome_Section from '$lib/Tome_Section.svelte';
+	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
 	import Docs_Search from '$lib/Docs_Search.svelte';
 	import Api_Identifier_List from '$lib/Api_Identifier_List.svelte';
 	import {create_identifier_search} from '$lib/api_search.svelte.js';
@@ -29,17 +31,21 @@
 </svelte:head>
 
 <Tome_Content {tome}>
-	<section>
-		<p>{pkg.package_json.description}</p>
+	<Tome_Section>
+		<Tome_Section_Header text="Identifiers" />
 
-		{#if search.all.length > 1}
-			<Docs_Search
-				total_count={search.all.length}
-				result_count={search.filtered.length}
-				bind:search_query={search.query}
-			/>
-		{/if}
-	</section>
+		<section>
+			<p>{pkg.package_json.description}</p>
 
-	<Api_Identifier_List identifiers={search.filtered} search_query={search.query} />
+			{#if search.all.length > 1}
+				<Docs_Search
+					total_count={search.all.length}
+					result_count={search.filtered.length}
+					bind:search_query={search.query}
+				/>
+			{/if}
+		</section>
+
+		<Api_Identifier_List identifiers={search.filtered} search_query={search.query} />
+	</Tome_Section>
 </Tome_Content>
