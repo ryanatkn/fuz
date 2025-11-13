@@ -141,6 +141,7 @@
 		<Mdz content={link_example} class="mb_xl5" />
 	</Tome_Section>
 
+	<!-- TODO HYDRATION_MISMATCH: ONE -->
 	<Tome_Section>
 		<Tome_Section_Header text="HTML elements" />
 		<p>mdz supports an opt-in set of HTML elements for semantic markup and styling.</p>
@@ -165,6 +166,7 @@ mdz_elements_context.set(new Map([
 		</p>
 	</Tome_Section>
 
+	<!-- TODO HYDRATION_MISMATCH: TWO -->
 	<Tome_Section>
 		<Tome_Section_Header text="Svelte components" />
 		<p>
@@ -193,6 +195,7 @@ mdz_components_context.set(new Map([
 		</aside>
 	</Tome_Section>
 
+	<!-- TODO HYDRATION_MISMATCH: THREE -->
 	<Tome_Section>
 		<Tome_Section_Header text="Advanced usage" />
 		<p>
@@ -206,11 +209,11 @@ import Mdz_Node_View from '@ryanatkn/fuz/Mdz_Node_View.svelte';
 
 const nodes = mdz_parse(content);`}
 			lang="ts"
+			class="mb_lg"
 		/>
 		<Code
-			content={`<!-- manipulate nodes or customize the wrapper as desired -->
-<div class="white_space_pre_wrap">
-	{#each nodes as node (node)}
+			content={`<div class="custom white_space_pre_wrap">
+	{#each nodes as node}
 		<Mdz_Node_View {node} />
 	{/each}
 </div>`}
