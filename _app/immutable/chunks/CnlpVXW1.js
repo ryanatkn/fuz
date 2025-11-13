@@ -1,0 +1,1 @@
+import{j as c,k as _,l as o,E as T,Q as d,R as E,S as b,T as y,B as R,U as f}from"./CCvlg-B_.js";function k(t,i,l=!1){_&&o();var r=new R(t),u=l?T:0;function n(a,s){if(_){const h=d(t)===E;if(a===h){var e=b();y(e),r.anchor=e,f(!1),r.ensure(a,s),f(!0);return}}r.ensure(a,s)}c(()=>{var a=!1;i((s,e=!0)=>{a=!0,n(e,s)}),a||n(!1,null)},u)}export{k as i};

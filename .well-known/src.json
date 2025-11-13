@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.148.0",
+  "version": "0.149.0",
   "modules": {
     "./alert.js": {
       "path": "alert.ts",
@@ -16,6 +16,19 @@
         {
           "name": "alert_status_options",
           "kind": "variable"
+        }
+      ]
+    },
+    "./api_search.svelte.js": {
+      "path": "api_search.svelte.ts",
+      "declarations": [
+        {
+          "name": "create_identifier_search",
+          "kind": "function"
+        },
+        {
+          "name": "create_module_identifier_search",
+          "kind": "function"
         }
       ]
     },
@@ -130,11 +143,11 @@
           "kind": "function"
         },
         {
-          "name": "Open_Contextmenu_Options",
+          "name": "Contextmenu_Open_Options",
           "kind": "type"
         },
         {
-          "name": "open_contextmenu",
+          "name": "contextmenu_open",
           "kind": "function"
         },
         {
@@ -319,6 +332,10 @@
       "path": "docs_helpers.svelte.ts",
       "declarations": [
         {
+          "name": "docs_slugify",
+          "kind": "function"
+        },
+        {
           "name": "DOCS_PATH_DEFAULT",
           "kind": "variable"
         },
@@ -329,14 +346,6 @@
         {
           "name": "DOCS_API_PATH",
           "kind": "variable"
-        },
-        {
-          "name": "get_next_docs_link_order",
-          "kind": "function"
-        },
-        {
-          "name": "reset_docs_link_order",
-          "kind": "function"
         },
         {
           "name": "to_docs_path_info",
@@ -505,7 +514,15 @@
           "kind": "type"
         },
         {
+          "name": "Mdz_Elements",
+          "kind": "type"
+        },
+        {
           "name": "mdz_components_context",
+          "kind": "variable"
+        },
+        {
+          "name": "mdz_elements_context",
           "kind": "variable"
         }
       ]
@@ -563,6 +580,10 @@
         },
         {
           "name": "Mdz_Heading_Node",
+          "kind": "type"
+        },
+        {
+          "name": "Mdz_Element_Node",
           "kind": "type"
         },
         {
@@ -663,6 +684,10 @@
         },
         {
           "name": "package_gen_analyze_typescript_file",
+          "kind": "function"
+        },
+        {
+          "name": "package_gen_extract_dependencies",
           "kind": "function"
         }
       ]
@@ -964,6 +989,33 @@
         }
       ]
     },
+    "./Api_Identifier_List.svelte": {
+      "path": "Api_Identifier_List.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Api_Index.svelte": {
+      "path": "Api_Index.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Api_Module.svelte": {
+      "path": "Api_Module.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
     "./Breadcrumb.svelte": {
       "path": "Breadcrumb.svelte",
       "declarations": [
@@ -1173,6 +1225,15 @@
     },
     "./Docs_Primary_Nav.svelte": {
       "path": "Docs_Primary_Nav.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./Docs_Search.svelte": {
+      "path": "Docs_Search.svelte",
       "declarations": [
         {
           "name": "default",
