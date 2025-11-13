@@ -1,20 +1,13 @@
 [
 	{
-		"type": "Paragraph",
+		"type": "Component",
+		"name": "Alert",
 		"children": [
 			{
-				"type": "Component",
-				"name": "Alert",
-				"children": [
-					{
-						"type": "Text",
-						"content": "First line.\nSecond line.\nThird line.",
-						"start": 7,
-						"end": 43
-					}
-				],
-				"start": 0,
-				"end": 51
+				"type": "Text",
+				"content": "First line.\nSecond line.\nThird line.",
+				"start": 7,
+				"end": 43
 			}
 		],
 		"start": 0,

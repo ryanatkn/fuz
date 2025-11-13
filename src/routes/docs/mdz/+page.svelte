@@ -58,6 +58,7 @@
 				<li>
 					end lines with <code class="white_space_pre"> \</code> to opt out of rendering the line break?
 				</li>
+				<li>loosen/tighten some restrictions?</li>
 			</ul>
 		</aside>
 	</section>
@@ -158,7 +159,7 @@ mdz_elements_context.set(new Map([
 			class="mb_lg"
 		/>
 		<p>
-			Unregistered elements render as <Mdz content="<tagname />" inline /> placeholders for security.
+			Unregistered elements render as <Mdz content="<tag-name />" inline /> placeholders for security.
 		</p>
 	</Tome_Section>
 

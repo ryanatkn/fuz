@@ -1,20 +1,13 @@
 [
 	{
-		"type": "Paragraph",
+		"type": "Component",
+		"name": "Alert",
 		"children": [
 			{
-				"type": "Component",
-				"name": "Alert",
-				"children": [
-					{
-						"type": "Text",
-						"content": "Content with space before closing bracket.",
-						"start": 8,
-						"end": 50
-					}
-				],
-				"start": 0,
-				"end": 58
+				"type": "Text",
+				"content": "Content with space before closing bracket.",
+				"start": 8,
+				"end": 50
 			}
 		],
 		"start": 0,

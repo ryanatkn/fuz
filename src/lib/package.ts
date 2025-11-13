@@ -3437,18 +3437,35 @@ export const src_json: Src_Json = {
 					name: 'Mdz_Components',
 					kind: 'type',
 					doc_comment:
-						"Component registry for custom Svelte components that can be used in mdz content.\n\nFor example, registering 'Alert' allows using `<Alert>...</Alert>` in TSDoc comments.\n\nComponent names must start with an uppercase letter to distinguish them from HTML elements.",
+						"Component registry for custom Svelte components that can be used in mdz content.\n\nFor example, registering 'Alert' allows using `<Alert>...</Alert>` in mdz content.\n\nThe Map values are the Svelte component constructors.",
 					source_line: 11,
 					type_signature: 'Mdz_Components',
+				},
+				{
+					name: 'Mdz_Elements',
+					kind: 'type',
+					doc_comment:
+						"Element registry for HTML elements that can be used in mdz content.\n\nFor example, registering 'div' allows using `<div>...</div>` in mdz content.\n\nThe Map values are boolean placeholders for future configuration options.",
+					source_line: 20,
+					type_signature: 'Mdz_Elements',
 				},
 				{
 					name: 'mdz_components_context',
 					kind: 'variable',
 					doc_comment:
 						'Context for providing custom mdz components.\nMust be set by the application using mdz.',
-					source_line: 17,
+					source_line: 26,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Mdz_Components; get_maybe: () => Mdz_Components | undefined; set: (value: Mdz_Components) => Mdz_Components; }',
+				},
+				{
+					name: 'mdz_elements_context',
+					kind: 'variable',
+					doc_comment:
+						'Context for providing allowed HTML elements.\nMust be set by the application using mdz.\nBy default, no HTML elements are allowed.',
+					source_line: 33,
+					type_signature:
+						'{ get: (error_message?: string | undefined) => Mdz_Elements; get_maybe: () => Mdz_Elements | undefined; set: (value: Mdz_Elements) => Mdz_Elements; }',
 				},
 			],
 			dependencies: ['context_helpers.ts'],
@@ -3484,6 +3501,11 @@ export const src_json: Src_Json = {
 							name: 'content',
 							type: 'string',
 							optional: false,
+						},
+						{
+							name: 'inline',
+							type: 'boolean',
+							optional: true,
 						},
 					],
 					source_line: 1,
@@ -3773,7 +3795,7 @@ export const src_json: Src_Json = {
 					kind: 'class',
 					doc_comment:
 						'Parser for mdz format.\nSingle-pass lexer/parser with text accumulation for efficiency.\nUsed by `mdz_parse`, which should be preferred for simple usage.',
-					source_line: 130,
+					source_line: 133,
 					members: [
 						{
 							name: 'constructor',

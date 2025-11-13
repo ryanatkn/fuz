@@ -13,21 +13,14 @@
 		"end": 16
 	},
 	{
-		"type": "Paragraph",
+		"type": "Component",
+		"name": "Alert",
 		"children": [
 			{
-				"type": "Component",
-				"name": "Alert",
-				"children": [
-					{
-						"type": "Text",
-						"content": "Component between paragraphs.",
-						"start": 25,
-						"end": 54
-					}
-				],
-				"start": 18,
-				"end": 62
+				"type": "Text",
+				"content": "Component between paragraphs.",
+				"start": 25,
+				"end": 54
 			}
 		],
 		"start": 18,

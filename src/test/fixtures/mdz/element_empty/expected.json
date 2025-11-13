@@ -1,15 +1,8 @@
 [
 	{
-		"type": "Paragraph",
-		"children": [
-			{
-				"type": "Component",
-				"name": "div",
-				"children": [],
-				"start": 0,
-				"end": 11
-			}
-		],
+		"type": "Component",
+		"name": "div",
+		"children": [],
 		"start": 0,
 		"end": 11
 	}

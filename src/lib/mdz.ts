@@ -175,14 +175,21 @@ export class Mdz_Parser {
 					paragraph_children.push(...this.#nodes);
 					this.#nodes.length = 0;
 				}
-				// Wrap accumulated nodes in paragraph
+				// Wrap accumulated nodes in paragraph (or add single component directly)
 				if (paragraph_children.length > 0) {
-					root_nodes.push({
-						type: 'Paragraph',
-						children: paragraph_children.slice(),
-						start: paragraph_children[0]!.start,
-						end: paragraph_children[paragraph_children.length - 1]!.end,
-					});
+					if (this.#is_single_component(paragraph_children)) {
+						// Single component - add directly without paragraph wrapper (MDX convention)
+						const component = paragraph_children.find((n) => n.type === 'Component')!;
+						root_nodes.push(component);
+					} else {
+						// Regular paragraph
+						root_nodes.push({
+							type: 'Paragraph',
+							children: paragraph_children.slice(),
+							start: paragraph_children[0]!.start,
+							end: paragraph_children[paragraph_children.length - 1]!.end,
+						});
+					}
 					paragraph_children.length = 0;
 				}
 				// Consume the paragraph break
@@ -223,14 +230,21 @@ export class Mdz_Parser {
 			paragraph_children.push(...this.#nodes);
 		}
 
-		// Wrap remaining nodes in final paragraph if any
+		// Wrap remaining nodes in final paragraph if any (or add single component directly)
 		if (paragraph_children.length > 0) {
-			root_nodes.push({
-				type: 'Paragraph',
-				children: paragraph_children,
-				start: paragraph_children[0]!.start,
-				end: paragraph_children[paragraph_children.length - 1]!.end,
-			});
+			if (this.#is_single_component(paragraph_children)) {
+				// Single component - add directly without paragraph wrapper (MDX convention)
+				const component = paragraph_children.find((n) => n.type === 'Component')!;
+				root_nodes.push(component);
+			} else {
+				// Regular paragraph
+				root_nodes.push({
+					type: 'Paragraph',
+					children: paragraph_children,
+					start: paragraph_children[0]!.start,
+					end: paragraph_children[paragraph_children.length - 1]!.end,
+				});
+			}
 		}
 
 		return root_nodes;
@@ -641,7 +655,10 @@ export class Mdz_Parser {
 		}
 
 		// Skip whitespace after tag name (for future attribute support)
-		while (this.#index < this.#template.length && this.#template.charCodeAt(this.#index) === SPACE) {
+		while (
+			this.#index < this.#template.length &&
+			this.#template.charCodeAt(this.#index) === SPACE
+		) {
 			this.#index++;
 		}
 
@@ -671,7 +688,10 @@ export class Mdz_Parser {
 		}
 
 		// Check for closing >
-		if (this.#index >= this.#template.length || this.#template.charCodeAt(this.#index) !== RIGHT_ANGLE) {
+		if (
+			this.#index >= this.#template.length ||
+			this.#template.charCodeAt(this.#index) !== RIGHT_ANGLE
+		) {
 			// Unclosed opening tag, treat as text - restore parent state
 			this.#accumulated_text = saved_accumulated_text;
 			this.#accumulated_start = saved_accumulated_start;
@@ -744,6 +764,30 @@ export class Mdz_Parser {
 			start,
 			end: this.#index,
 		};
+	}
+
+	/**
+	 * Check if nodes represent a single component with only whitespace text nodes.
+	 * Used to determine if paragraph wrapping should be skipped (MDX convention).
+	 * Returns true if there's exactly one Component node and all other nodes are whitespace-only Text nodes.
+	 */
+	#is_single_component(nodes: Array<Mdz_Node>): boolean {
+		let found_component = false;
+
+		for (const node of nodes) {
+			if (node.type === 'Component') {
+				if (found_component) return false; // Multiple components
+				found_component = true;
+			} else if (node.type === 'Text') {
+				// Allow only whitespace-only text nodes
+				if (node.content.trim() !== '') return false;
+			} else {
+				// Any other node type means not a single component
+				return false;
+			}
+		}
+
+		return found_component;
 	}
 
 	/**
