@@ -282,7 +282,7 @@ export const create_shared_link_entry_tests = (
 				link.dispatchEvent(event);
 
 				// The contextmenu params should not have changed
-				// (if the bug existed, query_contextmenu_params would detect the <a> tag and reopen)
+				// (if the bug existed, contextmenu_query_params would detect the <a> tag and reopen)
 				assert.deepStrictEqual(
 					contextmenu.params,
 					original_params,
@@ -440,7 +440,7 @@ export const create_shared_link_entry_tests = (
 		});
 
 		describe('link entry regression tests', () => {
-			test('without stopPropagation, query_contextmenu_params auto-detects links (demonstrates bug)', () => {
+			test('without stopPropagation, contextmenu_query_params auto-detects links (demonstrates bug)', () => {
 				mounted = mount_contextmenu_root(Component);
 
 				const {container, contextmenu} = mounted;
@@ -457,7 +457,7 @@ export const create_shared_link_entry_tests = (
 				let open_was_called = false;
 				let open_params: any = null;
 
-				// Spy on contextmenu.open to see if query_contextmenu_params detects the link
+				// Spy on contextmenu.open to see if contextmenu_query_params detects the link
 				contextmenu.open = (params: any, x: number, y: number) => {
 					open_was_called = true;
 					open_params = params;
@@ -479,7 +479,7 @@ export const create_shared_link_entry_tests = (
 						'contextmenu.open should be called when link is detected',
 					);
 
-					// Verify that query_contextmenu_params auto-detected the <a> tag
+					// Verify that contextmenu_query_params auto-detected the <a> tag
 					// (This is the behavior at contextmenu_state.svelte.ts:410)
 					assert.ok(open_params, 'params should exist');
 					assert.ok(Array.isArray(open_params), 'params should be an array');
@@ -557,7 +557,7 @@ export const create_shared_link_entry_tests = (
 					);
 
 					// This proves the fix works: stopPropagation prevents the event from
-					// reaching the window handler, so query_contextmenu_params never runs
+					// reaching the window handler, so contextmenu_query_params never runs
 				} finally {
 					// Restore original open method
 					contextmenu.open = original_open;

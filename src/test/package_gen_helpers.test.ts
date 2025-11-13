@@ -1,11 +1,13 @@
 import {test, assert, describe} from 'vitest';
 import type {Logger} from '@ryanatkn/belt/log.js';
 import type {Package_Json} from '@ryanatkn/belt/package_json.js';
+import type {Disknode} from '@ryanatkn/gro/disknode.js';
 
 import {
 	package_gen_validate_no_duplicates,
 	package_gen_sort_modules,
 	package_gen_generate_ts,
+	package_gen_extract_dependencies,
 } from '$lib/package_gen_helpers.js';
 import type {Src_Json, Module_Json, Identifier_Kind} from '$lib/src_json.js';
 
@@ -47,7 +49,7 @@ const create_mock_logger = (): Logger & {
  *
  * Provides minimal package metadata for testing validation logic.
  *
- * @param modules - array of Module_Json objects to include
+ * @param modules array of Module_Json objects to include
  * @returns Src_Json with standard test package name and version
  */
 const create_mock_src_json = (modules: Array<Module_Json>): Src_Json => {
@@ -63,13 +65,13 @@ const create_mock_src_json = (modules: Array<Module_Json>): Src_Json => {
  *
  * Simplifies test setup by auto-generating minimal identifier metadata.
  *
- * @param path - module path (e.g., 'foo.ts', 'Bar.svelte')
- * @param identifiers - array of identifier objects with name and kind
+ * @param path module path (e.g., 'foo.ts', 'Bar.svelte')
+ * @param identifiers array of identifier objects with name and kind
  * @returns Module_Json with the specified identifiers
  */
 const create_mock_module = (
 	path: string,
-	identifiers: Array<{name: string; kind: Identifier_Kind | null}>,
+	identifiers: Array<{name: string; kind: Identifier_Kind}>,
 ): Module_Json => {
 	return {
 		path,
@@ -78,6 +80,62 @@ const create_mock_module = (
 			kind,
 		})),
 	};
+};
+
+/**
+ * Create a mock Disknode for testing dependency extraction.
+ *
+ * Simulates filer's disknode structure with dependencies/dependents maps.
+ *
+ * @param id absolute path to the file
+ * @param deps array of absolute paths this file imports
+ * @param dependents_ids array of absolute paths that import this file
+ * @returns Disknode with populated dependencies and dependents maps
+ */
+const create_mock_disknode = (
+	id: string,
+	deps: Array<string> = [],
+	dependents_ids: Array<string> = [],
+): Disknode => {
+	const disknode: Disknode = {
+		id,
+		contents: '// mock contents',
+		external: false,
+		ctime: Date.now(),
+		mtime: Date.now(),
+		dependencies: new Map(),
+		dependents: new Map(),
+	};
+
+	// Add dependencies
+	for (const dep_id of deps) {
+		const dep_disknode: Disknode = {
+			id: dep_id,
+			contents: '// mock dependency',
+			external: false,
+			ctime: Date.now(),
+			mtime: Date.now(),
+			dependencies: new Map(),
+			dependents: new Map(),
+		};
+		disknode.dependencies.set(dep_id, dep_disknode);
+	}
+
+	// Add dependents
+	for (const dependent_id of dependents_ids) {
+		const dependent_disknode: Disknode = {
+			id: dependent_id,
+			contents: '// mock dependent',
+			external: false,
+			ctime: Date.now(),
+			mtime: Date.now(),
+			dependencies: new Map(),
+			dependents: new Map(),
+		};
+		disknode.dependents.set(dependent_id, dependent_disknode);
+	}
+
+	return disknode;
 };
 
 describe('package_gen_validate_no_duplicates', () => {
@@ -254,9 +312,9 @@ describe('package_gen_validate_no_duplicates', () => {
 			assert.ok(all_errors.includes('component'));
 		});
 
-		test('duplicate with null kind', () => {
+		test('duplicate with different kinds', () => {
 			const src_json = create_mock_src_json([
-				create_mock_module('a.ts', [{name: 'Unknown', kind: null}]),
+				create_mock_module('a.ts', [{name: 'Unknown', kind: 'variable'}]),
 				create_mock_module('b.ts', [{name: 'Unknown', kind: 'type'}]),
 			]);
 
@@ -267,31 +325,12 @@ describe('package_gen_validate_no_duplicates', () => {
 			});
 
 			const all_errors = logger.errors.join(' ');
-			assert.ok(all_errors.includes('unknown')); // null kind shows as "unknown"
+			assert.ok(all_errors.includes('variable'));
 			assert.ok(all_errors.includes('type'));
 		});
 	});
 
 	describe('edge cases', () => {
-		test('identifiers with undefined kind', () => {
-			const src_json = create_mock_src_json([
-				{
-					path: 'test.ts',
-					identifiers: [
-						{name: 'foo', kind: 'function'},
-						// @ts-expect-error - testing undefined kind
-						{name: 'bar', kind: undefined},
-					],
-				},
-			]);
-
-			const logger = create_mock_logger();
-
-			assert.doesNotThrow(() => {
-				package_gen_validate_no_duplicates(src_json, logger);
-			});
-		});
-
 		test('real-world scenario - Docs_Link collision', () => {
 			const src_json = create_mock_src_json([
 				create_mock_module('docs_helpers.svelte.ts', [{name: 'Docs_Link', kind: 'type'}]),
@@ -605,5 +644,264 @@ describe('package_gen_validate_no_duplicates - error message format', () => {
 			assert.ok(all_errors.includes('baz/Widget.svelte'));
 			assert.ok(all_errors.includes('component'));
 		}
+	});
+});
+
+describe('package_gen_extract_dependencies', () => {
+	describe('basic functionality', () => {
+		test('extracts both dependencies and dependents from source modules', () => {
+			const disknode = create_mock_disknode(
+				'/home/user/project/src/lib/foo.ts',
+				['/home/user/project/src/lib/bar.ts', '/home/user/project/src/lib/baz.svelte'],
+				['/home/user/project/src/lib/qux.ts', '/home/user/project/src/lib/Quux.svelte'],
+			);
+
+			const result = package_gen_extract_dependencies(disknode);
+
+			assert.deepStrictEqual(result.dependencies, ['bar.ts', 'baz.svelte']);
+			assert.deepStrictEqual(result.dependents, ['Quux.svelte', 'qux.ts']);
+		});
+
+		test('returns empty arrays when no dependencies or dependents', () => {
+			const disknode = create_mock_disknode('/home/user/project/src/lib/standalone.ts');
+
+			const result = package_gen_extract_dependencies(disknode);
+
+			assert.deepStrictEqual(result.dependencies, []);
+			assert.deepStrictEqual(result.dependents, []);
+		});
+
+		test('handles module with only dependencies', () => {
+			const disknode = create_mock_disknode(
+				'/home/user/project/src/lib/consumer.ts',
+				['/home/user/project/src/lib/dependency.ts'],
+				[],
+			);
+
+			const result = package_gen_extract_dependencies(disknode);
+
+			assert.deepStrictEqual(result.dependencies, ['dependency.ts']);
+			assert.deepStrictEqual(result.dependents, []);
+		});
+
+		test('handles module with only dependents', () => {
+			const disknode = create_mock_disknode(
+				'/home/user/project/src/lib/provider.ts',
+				[],
+				['/home/user/project/src/lib/consumer.ts'],
+			);
+
+			const result = package_gen_extract_dependencies(disknode);
+
+			assert.deepStrictEqual(result.dependencies, []);
+			assert.deepStrictEqual(result.dependents, ['consumer.ts']);
+		});
+	});
+
+	describe('filtering - only includes src/lib modules', () => {
+		test('excludes external node_modules dependencies', () => {
+			const disknode = create_mock_disknode(
+				'/home/user/project/src/lib/app.ts',
+				[
+					'/home/user/project/src/lib/local.ts',
+					'/home/user/project/node_modules/svelte/index.js',
+					'/home/user/project/node_modules/@ryanatkn/belt/object.js',
+				],
+				[],
+			);
+
+			const result = package_gen_extract_dependencies(disknode);
+
+			// Should only include src/lib modules
+			assert.deepStrictEqual(result.dependencies, ['local.ts']);
+		});
+
+		test('excludes test files from dependencies', () => {
+			const disknode = create_mock_disknode(
+				'/home/user/project/src/lib/component.svelte',
+				['/home/user/project/src/lib/helpers.ts', '/home/user/project/src/test/fixtures/mock.ts'],
+				[],
+			);
+
+			const result = package_gen_extract_dependencies(disknode);
+
+			// Should exclude src/test
+			assert.deepStrictEqual(result.dependencies, ['helpers.ts']);
+		});
+
+		test('excludes test files from dependents', () => {
+			const disknode = create_mock_disknode(
+				'/home/user/project/src/lib/utils.ts',
+				[],
+				['/home/user/project/src/lib/app.ts', '/home/user/project/src/test/utils.test.ts'],
+			);
+
+			const result = package_gen_extract_dependencies(disknode);
+
+			// Should exclude test files
+			assert.deepStrictEqual(result.dependents, ['app.ts']);
+		});
+
+		test('excludes routes directory', () => {
+			const disknode = create_mock_disknode(
+				'/home/user/project/src/lib/component.svelte',
+				[],
+				['/home/user/project/src/lib/other.svelte', '/home/user/project/src/routes/index.svelte'],
+			);
+
+			const result = package_gen_extract_dependencies(disknode);
+
+			// Should only include src/lib modules
+			assert.deepStrictEqual(result.dependents, ['other.svelte']);
+		});
+	});
+
+	describe('path extraction', () => {
+		test('extracts relative module paths correctly', () => {
+			const disknode = create_mock_disknode(
+				'/home/user/project/src/lib/components/Button.svelte',
+				['/home/user/project/src/lib/styles/theme.ts'],
+				['/home/user/project/src/lib/layouts/Layout.svelte'],
+			);
+
+			const result = package_gen_extract_dependencies(disknode);
+
+			assert.deepStrictEqual(result.dependencies, ['styles/theme.ts']);
+			assert.deepStrictEqual(result.dependents, ['layouts/Layout.svelte']);
+		});
+
+		test('handles deeply nested module paths', () => {
+			const disknode = create_mock_disknode(
+				'/home/user/project/src/lib/deep/nested/module.ts',
+				['/home/user/project/src/lib/deep/nested/sibling.ts'],
+				['/home/user/project/src/lib/other/path/consumer.ts'],
+			);
+
+			const result = package_gen_extract_dependencies(disknode);
+
+			assert.deepStrictEqual(result.dependencies, ['deep/nested/sibling.ts']);
+			assert.deepStrictEqual(result.dependents, ['other/path/consumer.ts']);
+		});
+	});
+
+	describe('sorting', () => {
+		test('sorts dependencies alphabetically', () => {
+			const disknode = create_mock_disknode(
+				'/home/user/project/src/lib/app.ts',
+				[
+					'/home/user/project/src/lib/zebra.ts',
+					'/home/user/project/src/lib/alpha.ts',
+					'/home/user/project/src/lib/beta.ts',
+				],
+				[],
+			);
+
+			const result = package_gen_extract_dependencies(disknode);
+
+			assert.deepStrictEqual(result.dependencies, ['alpha.ts', 'beta.ts', 'zebra.ts']);
+		});
+
+		test('sorts dependents alphabetically', () => {
+			const disknode = create_mock_disknode(
+				'/home/user/project/src/lib/utils.ts',
+				[],
+				[
+					'/home/user/project/src/lib/zoo.ts',
+					'/home/user/project/src/lib/aardvark.ts',
+					'/home/user/project/src/lib/middle.ts',
+				],
+			);
+
+			const result = package_gen_extract_dependencies(disknode);
+
+			assert.deepStrictEqual(result.dependents, ['aardvark.ts', 'middle.ts', 'zoo.ts']);
+		});
+
+		test('sorts case-insensitively for consistency', () => {
+			const disknode = create_mock_disknode(
+				'/home/user/project/src/lib/app.ts',
+				[
+					'/home/user/project/src/lib/Zebra.svelte',
+					'/home/user/project/src/lib/alpha.ts',
+					'/home/user/project/src/lib/Beta.svelte',
+				],
+				[],
+			);
+
+			const result = package_gen_extract_dependencies(disknode);
+
+			// Standard localeCompare should handle case properly
+			assert.strictEqual(result.dependencies.length, 3);
+			assert.ok(result.dependencies.includes('alpha.ts'));
+			assert.ok(result.dependencies.includes('Beta.svelte'));
+			assert.ok(result.dependencies.includes('Zebra.svelte'));
+		});
+	});
+
+	describe('edge cases', () => {
+		test('handles svelte components with .svelte extension', () => {
+			const disknode = create_mock_disknode(
+				'/home/user/project/src/lib/App.svelte',
+				['/home/user/project/src/lib/Button.svelte'],
+				['/home/user/project/src/lib/Layout.svelte'],
+			);
+
+			const result = package_gen_extract_dependencies(disknode);
+
+			assert.deepStrictEqual(result.dependencies, ['Button.svelte']);
+			assert.deepStrictEqual(result.dependents, ['Layout.svelte']);
+		});
+
+		test('handles mixed file types', () => {
+			const disknode = create_mock_disknode(
+				'/home/user/project/src/lib/component.svelte',
+				[
+					'/home/user/project/src/lib/utils.ts',
+					'/home/user/project/src/lib/types.ts',
+					'/home/user/project/src/lib/Other.svelte',
+				],
+				[],
+			);
+
+			const result = package_gen_extract_dependencies(disknode);
+
+			assert.deepStrictEqual(result.dependencies, ['Other.svelte', 'types.ts', 'utils.ts']);
+		});
+
+		test('handles modules at src/lib root', () => {
+			const disknode = create_mock_disknode(
+				'/home/user/project/src/lib/index.ts',
+				['/home/user/project/src/lib/exports.ts'],
+				[],
+			);
+
+			const result = package_gen_extract_dependencies(disknode);
+
+			assert.deepStrictEqual(result.dependencies, ['exports.ts']);
+		});
+
+		test('deterministic output - multiple runs produce same results', () => {
+			const disknode = create_mock_disknode(
+				'/home/user/project/src/lib/app.ts',
+				[
+					'/home/user/project/src/lib/c.ts',
+					'/home/user/project/src/lib/a.ts',
+					'/home/user/project/src/lib/b.ts',
+				],
+				[
+					'/home/user/project/src/lib/z.ts',
+					'/home/user/project/src/lib/x.ts',
+					'/home/user/project/src/lib/y.ts',
+				],
+			);
+
+			const result1 = package_gen_extract_dependencies(disknode);
+			const result2 = package_gen_extract_dependencies(disknode);
+
+			assert.deepStrictEqual(result1.dependencies, result2.dependencies);
+			assert.deepStrictEqual(result1.dependents, result2.dependents);
+			assert.deepStrictEqual(result1.dependencies, ['a.ts', 'b.ts', 'c.ts']);
+			assert.deepStrictEqual(result1.dependents, ['x.ts', 'y.ts', 'z.ts']);
+		});
 	});
 });

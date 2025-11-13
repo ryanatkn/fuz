@@ -41,8 +41,8 @@ export const package_json: Package_Json = {
 	},
 	peerDependencies: {
 		'@ryanatkn/belt': '^0.36.1',
-		'@ryanatkn/gro': '^0.171.0',
-		'@ryanatkn/moss': '^0.36.3',
+		'@ryanatkn/gro': '^0.172.0',
+		'@ryanatkn/moss': '^0.37.0',
 		'@sveltejs/kit': '^2.47.3',
 		'esm-env': '^1',
 		svelte: '^5',
@@ -61,9 +61,9 @@ export const package_json: Package_Json = {
 		'@changesets/changelog-git': '^0.2.1',
 		'@ryanatkn/belt': '^0.36.1',
 		'@ryanatkn/eslint-config': '^0.8.1',
-		'@ryanatkn/fuz_code': '^0.30.1',
-		'@ryanatkn/gro': '^0.171.0',
-		'@ryanatkn/moss': '^0.36.3',
+		'@ryanatkn/fuz_code': '^0.31.0',
+		'@ryanatkn/gro': '^0.172.0',
+		'@ryanatkn/moss': '^0.37.0',
 		'@sveltejs/adapter-static': '^3.0.10',
 		'@sveltejs/kit': '^2.47.3',
 		'@sveltejs/package': '^2.5.4',
@@ -169,6 +169,7 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: ['alert.ts'],
 		},
 		{
 			path: 'alert.ts',
@@ -204,7 +205,161 @@ export const src_json: Src_Json = {
 					type_signature: 'Record<Alert_Status, Alert_Status_Options>',
 				},
 			],
-			module_comment: '// TODO move to module context?',
+			dependents: ['Alert.svelte'],
+		},
+		{
+			path: 'Api_Identifier_List.svelte',
+			identifiers: [
+				{
+					name: 'Api_Identifier_List',
+					kind: 'component',
+					props: [
+						{
+							name: 'identifiers',
+							type: 'Array<Identifier>',
+							optional: false,
+						},
+						{
+							name: 'search_query',
+							type: 'string',
+							optional: true,
+						},
+					],
+					source_line: 1,
+				},
+			],
+			dependencies: [
+				'Identifier_Detail.svelte',
+				'Tome_Section.svelte',
+				'Tome_Section_Header.svelte',
+			],
+			dependents: ['Api_Index.svelte', 'Api_Module.svelte'],
+		},
+		{
+			path: 'Api_Index.svelte',
+			identifiers: [
+				{
+					name: 'Api_Index',
+					kind: 'component',
+					props: [
+						{
+							name: 'pkg',
+							type: 'Pkg',
+							optional: true,
+							description:
+								'The package instance to render API docs for.\nDefaults to getting from pkg_context.',
+						},
+						{
+							name: 'tome',
+							type: 'Tome',
+							optional: true,
+							description:
+								"The tome for the API docs page.\nDefaults to looking up the 'api' tome.",
+						},
+						{
+							name: 'minimal',
+							type: 'boolean',
+							optional: true,
+							description:
+								'Whether to show minimal content (just a link to full API docs).\nUsed when the API index is shown on a parent docs page.',
+						},
+					],
+					source_line: 1,
+				},
+			],
+			dependencies: [
+				'Api_Identifier_List.svelte',
+				'Docs_Search.svelte',
+				'Tome_Content.svelte',
+				'Tome_Link.svelte',
+				'Tome_Section.svelte',
+				'Tome_Section_Header.svelte',
+				'api_search.svelte.ts',
+				'pkg.svelte.ts',
+				'tome.ts',
+			],
+		},
+		{
+			path: 'Api_Module.svelte',
+			identifiers: [
+				{
+					name: 'Api_Module',
+					kind: 'component',
+					props: [
+						{
+							name: 'module_path',
+							type: 'string | Array<string>',
+							optional: false,
+							description: 'The module path parameter from the route (e.g., "lib/Button.svelte").',
+						},
+						{
+							name: 'pkg',
+							type: 'Pkg',
+							optional: true,
+							description:
+								'The package instance to render API docs for.\nDefaults to getting from pkg_context.',
+						},
+						{
+							name: 'tome',
+							type: 'Tome',
+							optional: true,
+							description:
+								"The tome for the API docs page.\nDefaults to looking up the 'api' tome.",
+						},
+					],
+					source_line: 1,
+				},
+			],
+			dependencies: [
+				'Api_Identifier_List.svelte',
+				'Docs_Search.svelte',
+				'Mdz.svelte',
+				'Module_Link.svelte',
+				'Tome_Content.svelte',
+				'Tome_Section.svelte',
+				'Tome_Section_Header.svelte',
+				'api_search.svelte.ts',
+				'pkg.svelte.ts',
+				'tome.ts',
+			],
+		},
+		{
+			path: 'api_search.svelte.ts',
+			identifiers: [
+				{
+					name: 'create_identifier_search',
+					kind: 'function',
+					doc_comment:
+						"Creates search state for the API index page (all identifiers across all modules).\nUses the pkg's built-in search method and sorts results alphabetically.",
+					source_line: 14,
+					type_signature: '(pkg: Pkg): Identifier_Search_State',
+					return_type: 'Identifier_Search_State',
+					parameters: [
+						{
+							name: 'pkg',
+							type: 'Pkg',
+							optional: false,
+						},
+					],
+				},
+				{
+					name: 'create_module_identifier_search',
+					kind: 'function',
+					doc_comment:
+						'Creates search state for module-specific identifier lists.\nSupports multi-term AND search (all terms must match, each term can match name/kind/module_path).',
+					source_line: 44,
+					type_signature: '(identifiers: Identifier[]): Identifier_Search_State',
+					return_type: 'Identifier_Search_State',
+					parameters: [
+						{
+							name: 'identifiers',
+							type: 'Identifier[]',
+							optional: false,
+						},
+					],
+				},
+			],
+			dependents: ['Api_Index.svelte', 'Api_Module.svelte'],
 		},
 		{
 			path: 'Breadcrumb.svelte',
@@ -247,6 +402,7 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependents: ['Docs.svelte', 'Docs_Primary_Nav.svelte'],
 		},
 		{
 			path: 'Card.svelte',
@@ -311,6 +467,7 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: ['themer.svelte.ts'],
 		},
 		{
 			path: 'constants.ts',
@@ -322,8 +479,6 @@ export const src_json: Src_Json = {
 					type_signature: '"calc(60px + var(--space_lg))"',
 				},
 			],
-			module_comment:
-				'// TODO the 60px is a hack, need `--docs_primary_nav_height` exported or :root values from Fuz -- the --space_lg also needs to be kept in sync',
 		},
 		{
 			path: 'context_helpers.ts',
@@ -332,7 +487,7 @@ export const src_json: Src_Json = {
 					name: 'create_context',
 					kind: 'function',
 					doc_comment:
-						"Wraps Svelte's `setContext` and `getContext` for better ergonmics.\nWhen no value is set in the context,\n`get` throws an error and `maybe_get` returns `undefined`.\nIf a `fallback` is provided, the `value` argument to `set` is optional\nand `maybe_get` is omitted from the type.",
+						"Wraps Svelte's `setContext` and `getContext` for better ergonomics.\nWhen no value is set in the context,\n`get` throws an error and `get_maybe` returns `undefined`.\nIf a `fallback` is provided, the `value` argument to `set` is optional\nand `get_maybe` is omitted from the type.",
 					source_line: 18,
 					type_signature:
 						'<T>(fallback: () => T): { get: () => T; set: (value?: T | undefined) => T; }',
@@ -350,6 +505,15 @@ export const src_json: Src_Json = {
 						},
 					],
 				},
+			],
+			dependents: [
+				'Tome_Section.svelte',
+				'contextmenu_state.svelte.ts',
+				'docs_helpers.svelte.ts',
+				'mdz_components.ts',
+				'pkg.svelte.ts',
+				'themer.svelte.ts',
+				'tome.ts',
 			],
 		},
 		{
@@ -383,6 +547,8 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: ['Pending_Animation.svelte', 'contextmenu_state.svelte.ts'],
+			dependents: ['Contextmenu_Text_Entry.svelte'],
 		},
 		{
 			path: 'contextmenu_helpers.ts',
@@ -522,6 +688,7 @@ export const src_json: Src_Json = {
 					],
 				},
 			],
+			dependents: ['Contextmenu_Root.svelte', 'Contextmenu_Root_For_Safari_Compatibility.svelte'],
 		},
 		{
 			path: 'Contextmenu_Link_Entry.svelte',
@@ -559,6 +726,8 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: ['contextmenu_state.svelte.ts'],
+			dependents: ['Contextmenu_Root.svelte', 'Contextmenu_Root_For_Safari_Compatibility.svelte'],
 		},
 		{
 			path: 'Contextmenu_Root_For_Safari_Compatibility.svelte',
@@ -662,6 +831,13 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: [
+				'Contextmenu_Link_Entry.svelte',
+				'Contextmenu_Separator.svelte',
+				'Contextmenu_Text_Entry.svelte',
+				'contextmenu_helpers.ts',
+				'contextmenu_state.svelte.ts',
+			],
 		},
 		{
 			path: 'Contextmenu_Root.svelte',
@@ -751,6 +927,13 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: [
+				'Contextmenu_Link_Entry.svelte',
+				'Contextmenu_Separator.svelte',
+				'Contextmenu_Text_Entry.svelte',
+				'contextmenu_helpers.ts',
+				'contextmenu_state.svelte.ts',
+			],
 		},
 		{
 			path: 'Contextmenu_Separator.svelte',
@@ -761,6 +944,7 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependents: ['Contextmenu_Root.svelte', 'Contextmenu_Root_For_Safari_Compatibility.svelte'],
 		},
 		{
 			path: 'contextmenu_state.svelte.ts',
@@ -831,6 +1015,30 @@ export const src_json: Src_Json = {
 							kind: 'variable',
 							type_signature: 'Promise<Contextmenu_Activate_Result> | null',
 						},
+						{
+							name: 'constructor',
+							kind: 'constructor',
+							type_signature:
+								'(menu: Submenu_State | Root_Menu_State, run: () => Contextmenu_Run, disabled?: () => boolean): Entry_State',
+							parameters: [
+								{
+									name: 'menu',
+									type: 'Submenu_State | Root_Menu_State',
+									optional: false,
+								},
+								{
+									name: 'run',
+									type: '() => Contextmenu_Run',
+									optional: false,
+								},
+								{
+									name: 'disabled',
+									type: '() => boolean',
+									optional: false,
+									default_value: '() => false',
+								},
+							],
+						},
 					],
 				},
 				{
@@ -864,6 +1072,24 @@ export const src_json: Src_Json = {
 							name: 'items',
 							kind: 'variable',
 							type_signature: 'ReadonlyArray<Item_State>',
+						},
+						{
+							name: 'constructor',
+							kind: 'constructor',
+							type_signature:
+								'(menu: Submenu_State | Root_Menu_State, depth: number): Submenu_State',
+							parameters: [
+								{
+									name: 'menu',
+									type: 'Submenu_State | Root_Menu_State',
+									optional: false,
+								},
+								{
+									name: 'depth',
+									type: 'number',
+									optional: false,
+								},
+							],
 						},
 					],
 				},
@@ -932,9 +1158,9 @@ export const src_json: Src_Json = {
 							name: 'has_custom_layout',
 							kind: 'variable',
 							modifiers: ['readonly'],
-							type_signature: 'boolean',
 							doc_comment:
 								'If an initial layout is provided, control is deferred externally.\nOtherwise the layout syncs to the page dimensions.',
+							type_signature: 'boolean',
 						},
 						{
 							name: 'opened',
@@ -993,79 +1219,164 @@ export const src_json: Src_Json = {
 							kind: 'variable',
 						},
 						{
+							name: 'constructor',
+							kind: 'constructor',
+							type_signature: '(options?: Contextmenu_State_Options): Contextmenu_State',
+							parameters: [
+								{
+									name: 'options',
+									type: 'Contextmenu_State_Options',
+									optional: false,
+									default_value: 'EMPTY_OBJECT',
+								},
+							],
+						},
+						{
 							name: 'open',
 							kind: 'function',
-							type_signature: '(params: Contextmenu_Params[], x: number, y: number) => void',
+							type_signature: '(params: Contextmenu_Params[], x: number, y: number): void',
+							return_type: 'void',
+							parameters: [
+								{
+									name: 'params',
+									type: 'Contextmenu_Params[]',
+									optional: false,
+								},
+								{
+									name: 'x',
+									type: 'number',
+									optional: false,
+								},
+								{
+									name: 'y',
+									type: 'number',
+									optional: false,
+								},
+							],
 						},
 						{
 							name: 'close',
 							kind: 'function',
-							type_signature: '() => void',
+							type_signature: '(): void',
+							return_type: 'void',
+							parameters: [],
 						},
 						{
 							name: 'reset_items',
 							kind: 'function',
-							type_signature: '(items: readonly Item_State[]) => void',
+							type_signature: '(items: readonly Item_State[]): void',
+							return_type: 'void',
+							parameters: [
+								{
+									name: 'items',
+									type: 'readonly Item_State[]',
+									optional: false,
+								},
+							],
 						},
 						{
 							name: 'activate',
 							kind: 'function',
-							type_signature:
-								'(item: Item_State) => boolean | Promise<Contextmenu_Activate_Result>',
+							type_signature: '(item: Item_State): boolean | Promise<Contextmenu_Activate_Result>',
+							return_type: 'boolean | Promise<Contextmenu_Activate_Result>',
+							parameters: [
+								{
+									name: 'item',
+									type: 'Item_State',
+									optional: false,
+								},
+							],
 						},
 						{
 							name: 'activate_selected',
 							kind: 'function',
-							type_signature: '() => boolean | void | Promise<Contextmenu_Activate_Result>',
+							type_signature: '(): boolean | void | Promise<Contextmenu_Activate_Result>',
+							return_type: 'boolean | void | Promise<Contextmenu_Activate_Result>',
+							parameters: [],
 						},
 						{
 							name: 'select',
 							kind: 'function',
-							type_signature: '(item: Item_State) => void',
 							doc_comment: 'Activates the selected entry, or if none, selects the first.',
+							type_signature: '(item: Item_State): void',
+							return_type: 'void',
+							parameters: [
+								{
+									name: 'item',
+									type: 'Item_State',
+									optional: false,
+								},
+							],
 						},
 						{
 							name: 'collapse_selected',
 							kind: 'function',
-							type_signature: '() => void',
+							type_signature: '(): void',
+							return_type: 'void',
+							parameters: [],
 						},
 						{
 							name: 'expand_selected',
 							kind: 'function',
-							type_signature: '() => void',
+							type_signature: '(): void',
+							return_type: 'void',
+							parameters: [],
 						},
 						{
 							name: 'select_next',
 							kind: 'function',
-							type_signature: '() => void',
+							type_signature: '(): void',
+							return_type: 'void',
+							parameters: [],
 						},
 						{
 							name: 'select_previous',
 							kind: 'function',
-							type_signature: '() => void',
+							type_signature: '(): void',
+							return_type: 'void',
+							parameters: [],
 						},
 						{
 							name: 'select_first',
 							kind: 'function',
-							type_signature: '() => void',
+							type_signature: '(): void',
+							return_type: 'void',
+							parameters: [],
 						},
 						{
 							name: 'select_last',
 							kind: 'function',
-							type_signature: '() => void',
+							type_signature: '(): void',
+							return_type: 'void',
+							parameters: [],
 						},
 						{
 							name: 'add_entry',
 							kind: 'function',
-							type_signature:
-								'(run: () => Contextmenu_Run, disabled?: () => boolean) => Entry_State',
 							doc_comment: 'Used by `Contextmenu_Entry` and custom entry components',
+							type_signature: '(run: () => Contextmenu_Run, disabled?: () => boolean): Entry_State',
+							return_type: 'Entry_State',
+							parameters: [
+								{
+									name: 'run',
+									type: '() => Contextmenu_Run',
+									optional: false,
+								},
+								{
+									name: 'disabled',
+									type: '() => boolean',
+									optional: false,
+									default_value: '() => false',
+								},
+							],
 						},
 						{
 							name: 'add_submenu',
 							kind: 'function',
-							type_signature: '() => Submenu_State',
 							doc_comment: '',
+							type_signature: '(): Submenu_State',
+							return_type: 'Submenu_State',
+							parameters: [],
 						},
 					],
 				},
@@ -1082,15 +1393,15 @@ export const src_json: Src_Json = {
 							name: 'params',
 							type: 'U | null | undefined',
 							optional: false,
-							description: '- Contextmenu parameters or nullish to disable',
+							description: 'Contextmenu parameters or nullish to disable',
 						},
 					],
 				},
 				{
-					name: 'Open_Contextmenu_Options',
+					name: 'Contextmenu_Open_Options',
 					kind: 'type',
 					source_line: 375,
-					type_signature: 'Open_Contextmenu_Options',
+					type_signature: 'Contextmenu_Open_Options',
 					properties: [
 						{
 							name: 'link_enabled',
@@ -1115,13 +1426,13 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'open_contextmenu',
+					name: 'contextmenu_open',
 					kind: 'function',
 					doc_comment:
 						'Opens the contextmenu, if appropriate,\nquerying the menu items from the DOM starting at the event target.',
 					source_line: 392,
 					type_signature:
-						'(target: HTMLElement | SVGElement, x: number, y: number, contextmenu: Contextmenu_State, options?: Open_Contextmenu_Options | undefined): boolean',
+						'(target: HTMLElement | SVGElement, x: number, y: number, contextmenu: Contextmenu_State, options?: Contextmenu_Open_Options | undefined): boolean',
 					return_type: 'boolean',
 					return_description: 'a boolean indicating if the menu was opened or not',
 					parameters: [
@@ -1129,33 +1440,33 @@ export const src_json: Src_Json = {
 							name: 'target',
 							type: 'HTMLElement | SVGElement',
 							optional: false,
-							description: '- the leaf element from which to open the contextmenu',
+							description: 'the leaf element from which to open the contextmenu',
 						},
 						{
 							name: 'x',
 							type: 'number',
 							optional: false,
 							description:
-								'- the page X coordinate at which to open the contextmenu, typically the mouse `pageX`',
+								'the page X coordinate at which to open the contextmenu, typically the mouse `pageX`',
 						},
 						{
 							name: 'y',
 							type: 'number',
 							optional: false,
 							description:
-								'- the page Y coordinate at which to open the contextmenu, typically the mouse `pageY`',
+								'the page Y coordinate at which to open the contextmenu, typically the mouse `pageY`',
 						},
 						{
 							name: 'contextmenu',
 							type: 'Contextmenu_State',
 							optional: false,
-							description: '- the contextmenu store',
+							description: 'the contextmenu store',
 						},
 						{
 							name: 'options',
-							type: 'Open_Contextmenu_Options | undefined',
+							type: 'Contextmenu_Open_Options | undefined',
 							optional: true,
-							description: '- optional configuration for filtering entries and haptic feedback',
+							description: 'optional configuration for filtering entries and haptic feedback',
 						},
 					],
 				},
@@ -1164,14 +1475,14 @@ export const src_json: Src_Json = {
 					kind: 'variable',
 					source_line: 479,
 					type_signature:
-						'{ get: (error_message?: string | undefined) => Contextmenu_State; maybe_get: () => Contextmenu_State | undefined; set: (value: Contextmenu_State) => Contextmenu_State; }',
+						'{ get: (error_message?: string | undefined) => Contextmenu_State; get_maybe: () => Contextmenu_State | undefined; set: (value: Contextmenu_State) => Contextmenu_State; }',
 				},
 				{
 					name: 'contextmenu_submenu_context',
 					kind: 'variable',
 					source_line: 481,
 					type_signature:
-						'{ get: (error_message?: string | undefined) => Submenu_State; maybe_get: () => Submenu_State | undefined; set: (value: Submenu_State) => Submenu_State; }',
+						'{ get: (error_message?: string | undefined) => Submenu_State; get_maybe: () => Submenu_State | undefined; set: (value: Submenu_State) => Submenu_State; }',
 				},
 				{
 					name: 'contextmenu_dimensions_context',
@@ -1193,10 +1504,21 @@ export const src_json: Src_Json = {
 							name: 'get_scoped',
 							type: '() => boolean',
 							optional: false,
-							description: '- Getter function that returns the current scoped value',
+							description: 'Getter function that returns the current scoped value',
 						},
 					],
 				},
+			],
+			dependencies: ['context_helpers.ts', 'dimensions.svelte.ts', 'package_helpers.ts'],
+			dependents: [
+				'Contextmenu.svelte',
+				'Contextmenu_Entry.svelte',
+				'Contextmenu_Link_Entry.svelte',
+				'Contextmenu_Root.svelte',
+				'Contextmenu_Root_For_Safari_Compatibility.svelte',
+				'Contextmenu_Submenu.svelte',
+				'Identifier_Link.svelte',
+				'Module_Link.svelte',
 			],
 		},
 		{
@@ -1225,6 +1547,7 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: ['contextmenu_state.svelte.ts'],
 		},
 		{
 			path: 'Contextmenu_Text_Entry.svelte',
@@ -1252,6 +1575,8 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: ['Contextmenu_Entry.svelte'],
+			dependents: ['Contextmenu_Root.svelte', 'Contextmenu_Root_For_Safari_Compatibility.svelte'],
 		},
 		{
 			path: 'Contextmenu.svelte',
@@ -1262,6 +1587,7 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: ['contextmenu_state.svelte.ts'],
 		},
 		{
 			path: 'Copy_To_Clipboard.svelte',
@@ -1689,6 +2015,7 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependents: ['Identifier_Detail.svelte', 'Package_Detail.svelte'],
 		},
 		{
 			path: 'Dialog.svelte',
@@ -1742,6 +2069,8 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: ['Teleport.svelte'],
+			dependents: ['Dialogs.svelte', 'Docs.svelte'],
 		},
 		{
 			path: 'dialog.ts',
@@ -1845,6 +2174,7 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: ['Dialog.svelte'],
 		},
 		{
 			path: 'dimensions.svelte.ts',
@@ -1867,6 +2197,7 @@ export const src_json: Src_Json = {
 					],
 				},
 			],
+			dependents: ['contextmenu_state.svelte.ts'],
 		},
 		{
 			path: 'Docs_Content.svelte',
@@ -1904,6 +2235,7 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: ['Package_Summary.svelte'],
 		},
 		{
 			path: 'Docs_Footer.svelte',
@@ -1946,56 +2278,60 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: ['Svg.svelte', 'logos.ts'],
+			dependents: ['Docs.svelte'],
 		},
 		{
 			path: 'docs_helpers.svelte.ts',
 			identifiers: [
 				{
+					name: 'docs_slugify',
+					kind: 'function',
+					doc_comment:
+						'Convert a string to a URL-safe fragment identifier, preserving case for API identifiers.\nOnly transforms spaces and special characters, keeping valid identifier characters intact.\nUsed for hash anchors in documentation.',
+					source_line: 14,
+					type_signature: '(str: string): string',
+					return_type: 'string',
+					return_description: 'A URL-safe fragment identifier',
+					parameters: [
+						{
+							name: 'str',
+							type: 'string',
+							optional: false,
+							description: '- The string to convert to a fragment',
+						},
+					],
+				},
+				{
 					name: 'DOCS_PATH_DEFAULT',
 					kind: 'variable',
-					source_line: 7,
+					source_line: 28,
 					type_signature: '"/docs"',
 				},
 				{
 					name: 'DOCS_PATH',
 					kind: 'variable',
-					source_line: 8,
+					source_line: 29,
 					type_signature:
 						'"/docs" | "/" | "/about" | "/debug" | "/debug/mdz" | "/docs/alert" | "/docs/api" | "/docs/breadcrumb" | "/docs/breadcrumb/a" | "/docs/breadcrumb/a/b" | "/docs/breadcrumb/a/b/c" | ... 89 more ... | `/${string}/help/`',
 				},
 				{
 					name: 'DOCS_API_PATH',
 					kind: 'variable',
-					source_line: 9,
+					source_line: 30,
 					type_signature: 'string',
-				},
-				{
-					name: 'get_next_docs_link_order',
-					kind: 'function',
-					source_line: 14,
-					type_signature: '(): number',
-					return_type: 'number',
-					parameters: [],
-				},
-				{
-					name: 'reset_docs_link_order',
-					kind: 'function',
-					source_line: 17,
-					type_signature: '(): void',
-					return_type: 'void',
-					parameters: [],
 				},
 				{
 					name: 'to_docs_path_info',
 					kind: 'function',
-					source_line: 21,
+					source_line: 32,
 					type_signature:
-						'(slug: string, pathname: string, root_path?: string): { path: string; path_is_selected: boolean; path_segment: string | undefined; }',
+						'(path_slug: string, pathname: string, root_path?: string): { path: string; path_is_selected: boolean; path_segment: string | undefined; }',
 					return_type:
 						'{ path: string; path_is_selected: boolean; path_segment: string | undefined; }',
 					parameters: [
 						{
-							name: 'slug',
+							name: 'path_slug',
 							type: 'string',
 							optional: false,
 						},
@@ -2015,20 +2351,20 @@ export const src_json: Src_Json = {
 				{
 					name: 'docs_links_context',
 					kind: 'variable',
-					source_line: 32,
+					source_line: 43,
 					type_signature:
-						'{ get: () => Docs_Links; set: (value?: Docs_Links | undefined) => Docs_Links; }',
+						'{ get: (error_message?: string | undefined) => Docs_Links; get_maybe: () => Docs_Links | undefined; set: (value: Docs_Links) => Docs_Links; }',
 				},
 				{
 					name: 'Docs_Link_Tag',
 					kind: 'type',
-					source_line: 34,
+					source_line: 45,
 					type_signature: 'Docs_Link_Tag',
 				},
 				{
 					name: 'Docs_Link_Info',
 					kind: 'type',
-					source_line: 36,
+					source_line: 47,
 					type_signature: 'Docs_Link_Info',
 					properties: [
 						{
@@ -2042,7 +2378,7 @@ export const src_json: Src_Json = {
 							type_signature: 'string',
 						},
 						{
-							name: 'slug',
+							name: 'fragment',
 							kind: 'variable',
 							type_signature: 'string',
 						},
@@ -2052,16 +2388,26 @@ export const src_json: Src_Json = {
 							type_signature: 'Docs_Link_Tag | undefined',
 						},
 						{
+							name: 'depth',
+							kind: 'variable',
+							type_signature: 'number',
+						},
+						{
 							name: 'order',
 							kind: 'variable',
 							type_signature: 'number',
+						},
+						{
+							name: 'parent_id',
+							kind: 'variable',
+							type_signature: 'string | undefined',
 						},
 					],
 				},
 				{
 					name: 'Docs_Links',
 					kind: 'class',
-					source_line: 44,
+					source_line: 57,
 					members: [
 						{
 							name: 'root_path',
@@ -2076,37 +2422,110 @@ export const src_json: Src_Json = {
 							type_signature: 'SvelteMap<string, Docs_Link_Info>',
 						},
 						{
-							name: '#slug_to_order',
-							kind: 'variable',
-							type_signature: 'Map<string, number>',
-						},
-						{
-							name: '#next_id',
-							kind: 'variable',
-						},
-						{
 							name: 'docs_links',
 							kind: 'variable',
 						},
 						{
-							name: 'slugs_onscreen',
+							name: 'fragments_onscreen',
 							kind: 'variable',
 							modifiers: ['readonly'],
 							type_signature: 'SvelteSet<string>',
 						},
 						{
+							name: 'constructor',
+							kind: 'constructor',
+							type_signature: '(root_path?: string): Docs_Links',
+							parameters: [
+								{
+									name: 'root_path',
+									type: 'string',
+									optional: false,
+									default_value: 'DOCS_PATH_DEFAULT',
+								},
+							],
+						},
+						{
 							name: 'add',
 							kind: 'function',
 							type_signature:
-								'(slug: string, text: string, pathname: string, tag?: Docs_Link_Tag | undefined) => string',
+								'(fragment: string, text: string, pathname: string, tag?: Docs_Link_Tag | undefined, depth?: number, parent_id?: string | undefined, explicit_id?: string | undefined): string',
+							return_type: 'string',
+							parameters: [
+								{
+									name: 'fragment',
+									type: 'string',
+									optional: false,
+								},
+								{
+									name: 'text',
+									type: 'string',
+									optional: false,
+								},
+								{
+									name: 'pathname',
+									type: 'string',
+									optional: false,
+								},
+								{
+									name: 'tag',
+									type: 'Docs_Link_Tag | undefined',
+									optional: true,
+								},
+								{
+									name: 'depth',
+									type: 'number',
+									optional: false,
+									default_value: '1',
+								},
+								{
+									name: 'parent_id',
+									type: 'string | undefined',
+									optional: true,
+								},
+								{
+									name: 'explicit_id',
+									type: 'string | undefined',
+									optional: true,
+								},
+							],
 						},
 						{
 							name: 'remove',
 							kind: 'function',
-							type_signature: '(id: string) => void',
+							type_signature: '(id: string): void',
+							return_type: 'void',
+							parameters: [
+								{
+									name: 'id',
+									type: 'string',
+									optional: false,
+								},
+							],
+						},
+						{
+							name: 'generate_section_id',
+							kind: 'function',
+							doc_comment:
+								'Generate a unique section ID for the current page render.\nThis counter is instance-scoped, ensuring SSR/client consistency.',
+							type_signature: '(): string',
+							return_type: 'string',
+							parameters: [],
 						},
 					],
 				},
+			],
+			dependencies: ['context_helpers.ts'],
+			dependents: [
+				'Docs.svelte',
+				'Docs_Page_Links.svelte',
+				'Docs_Tertiary_Nav.svelte',
+				'Tome_Content.svelte',
+				'Tome_Header.svelte',
+				'Tome_Link.svelte',
+				'Tome_Section.svelte',
+				'Tome_Section_Header.svelte',
+				'package_helpers.ts',
+				'tome.ts',
 			],
 		},
 		{
@@ -2135,6 +2554,8 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: ['Identifier_Link.svelte', 'Module_Link.svelte', 'pkg.svelte.ts'],
+			dependents: ['Mdz_Node_View.svelte'],
 		},
 		{
 			path: 'Docs_List.svelte',
@@ -2167,6 +2588,7 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependents: ['Docs_Menu.svelte', 'Docs_Modules_List.svelte', 'Docs_Page_Links.svelte'],
 		},
 		{
 			path: 'Docs_Menu_Header.svelte',
@@ -2184,6 +2606,7 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependents: ['Docs_Menu.svelte'],
 		},
 		{
 			path: 'Docs_Menu.svelte',
@@ -2211,6 +2634,8 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: ['Docs_List.svelte', 'Docs_Menu_Header.svelte', 'tome.ts'],
+			dependents: ['Docs_Secondary_Nav.svelte'],
 		},
 		{
 			path: 'Docs_Modules_List.svelte',
@@ -2228,6 +2653,8 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: ['Docs_List.svelte', 'pkg.svelte.ts'],
+			dependents: ['Docs_Tertiary_Nav.svelte'],
 		},
 		{
 			path: 'Docs_Page_Links.svelte',
@@ -2250,6 +2677,8 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: ['Docs_List.svelte', 'docs_helpers.svelte.ts'],
+			dependents: ['Docs_Tertiary_Nav.svelte'],
 		},
 		{
 			path: 'Docs_Primary_Nav.svelte',
@@ -2277,6 +2706,42 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: ['Breadcrumb.svelte'],
+			dependents: ['Docs.svelte'],
+		},
+		{
+			path: 'Docs_Search.svelte',
+			identifiers: [
+				{
+					name: 'Docs_Search',
+					kind: 'component',
+					props: [
+						{
+							name: 'placeholder',
+							type: 'string',
+							optional: true,
+						},
+						{
+							name: 'total_count',
+							type: 'number',
+							optional: false,
+						},
+						{
+							name: 'result_count',
+							type: 'number',
+							optional: true,
+						},
+						{
+							name: 'search_query',
+							type: 'string',
+							optional: false,
+							bindable: true,
+						},
+					],
+					source_line: 1,
+				},
+			],
+			dependents: ['Api_Index.svelte', 'Api_Module.svelte'],
 		},
 		{
 			path: 'Docs_Secondary_Nav.svelte',
@@ -2299,6 +2764,8 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: ['Docs_Menu.svelte', 'tome.ts'],
+			dependents: ['Docs.svelte'],
 		},
 		{
 			path: 'Docs_Tertiary_Nav.svelte',
@@ -2326,6 +2793,17 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: [
+				'Docs_Modules_List.svelte',
+				'Docs_Page_Links.svelte',
+				'Identifier_Link.svelte',
+				'Module_Link.svelte',
+				'Tome_Link.svelte',
+				'docs_helpers.svelte.ts',
+				'pkg.svelte.ts',
+				'tome.ts',
+			],
+			dependents: ['Docs.svelte'],
 		},
 		{
 			path: 'Docs.svelte',
@@ -2358,6 +2836,16 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: [
+				'Breadcrumb.svelte',
+				'Dialog.svelte',
+				'Docs_Footer.svelte',
+				'Docs_Primary_Nav.svelte',
+				'Docs_Secondary_Nav.svelte',
+				'Docs_Tertiary_Nav.svelte',
+				'docs_helpers.svelte.ts',
+				'tome.ts',
+			],
 		},
 		{
 			path: 'Ecosystem_Links_Panel.svelte',
@@ -2375,6 +2863,7 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: ['Ecosystem_Links.svelte', 'Project_Links.svelte'],
 		},
 		{
 			path: 'Ecosystem_Links.svelte',
@@ -2392,6 +2881,7 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependents: ['Ecosystem_Links_Panel.svelte'],
 		},
 		{
 			path: 'Github_Link.svelte',
@@ -2411,6 +2901,7 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: ['Svg.svelte', 'logos.ts'],
 		},
 		{
 			path: 'Glyph.svelte',
@@ -2442,7 +2933,7 @@ export const src_json: Src_Json = {
 					kind: 'component',
 					props: [
 						{
-							name: 'slug',
+							name: 'fragment',
 							type: 'string',
 							optional: false,
 						},
@@ -2450,6 +2941,7 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependents: ['Tome_Header.svelte', 'Tome_Section_Header.svelte'],
 		},
 		{
 			path: 'helpers.ts',
@@ -2526,6 +3018,7 @@ export const src_json: Src_Json = {
 					],
 				},
 			],
+			dependents: ['Identifier_Link.svelte'],
 		},
 		{
 			path: 'Identifier_Detail.svelte',
@@ -2543,6 +3036,8 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: ['Details.svelte', 'Mdz.svelte', 'Module_Link.svelte', 'Type_Link.svelte'],
+			dependents: ['Api_Identifier_List.svelte'],
 		},
 		{
 			path: 'Identifier_Link.svelte',
@@ -2559,6 +3054,13 @@ export const src_json: Src_Json = {
 					],
 					source_line: 1,
 				},
+			],
+			dependencies: ['contextmenu_state.svelte.ts', 'identifier_contextmenu.ts', 'pkg.svelte.ts'],
+			dependents: [
+				'Docs_Link.svelte',
+				'Docs_Tertiary_Nav.svelte',
+				'Package_Detail.svelte',
+				'Type_Link.svelte',
 			],
 		},
 		{
@@ -2726,9 +3228,28 @@ export const src_json: Src_Json = {
 							name: 'has_generics',
 							kind: 'variable',
 						},
+						{
+							name: 'constructor',
+							kind: 'constructor',
+							type_signature: '(module: Module, identifier_json: Identifier_Json): Identifier',
+							parameters: [
+								{
+									name: 'module',
+									type: 'Module',
+									optional: false,
+								},
+								{
+									name: 'identifier_json',
+									type: 'Identifier_Json',
+									optional: false,
+								},
+							],
+						},
 					],
 				},
 			],
+			dependencies: ['package_helpers.ts', 'src_json.ts'],
+			dependents: ['module.svelte.ts', 'pkg.svelte.ts'],
 		},
 		{
 			path: 'Img_Or_Svg.svelte',
@@ -2786,6 +3307,7 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependents: ['Package_Detail.svelte', 'Package_Summary.svelte'],
 		},
 		{
 			path: 'intersect.svelte.ts',
@@ -2846,7 +3368,7 @@ export const src_json: Src_Json = {
 							name: 'get_params',
 							type: '() => Intersect_Params_Or_Callback | null | undefined',
 							optional: false,
-							description: '- Function that returns callback, params object, or nullish to disable',
+							description: 'Function that returns callback, params object, or nullish to disable',
 						},
 					],
 				},
@@ -2924,6 +3446,7 @@ export const src_json: Src_Json = {
 					],
 				},
 			],
+			dependents: ['Tome_Content.svelte', 'Tome_Section.svelte'],
 		},
 		{
 			path: 'logos.ts',
@@ -3037,6 +3560,13 @@ export const src_json: Src_Json = {
 					type_signature: 'Svg_Data',
 				},
 			],
+			dependents: [
+				'Docs_Footer.svelte',
+				'Github_Link.svelte',
+				'Mdn_Link.svelte',
+				'Project_Links.svelte',
+				'Spiders.svelte',
+			],
 		},
 		{
 			path: 'Mdn_Link.svelte',
@@ -3054,6 +3584,7 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: ['Svg.svelte', 'logos.ts'],
 		},
 		{
 			path: 'mdz_components.ts',
@@ -3062,20 +3593,39 @@ export const src_json: Src_Json = {
 					name: 'Mdz_Components',
 					kind: 'type',
 					doc_comment:
-						"Component registry for custom Svelte components that can be used in mdz content.\n\nFor example, registering 'Alert' allows using `<Alert>...</Alert>` in TSDoc comments.\n\nComponent names must start with an uppercase letter to distinguish them from HTML elements.",
+						"Component registry for custom Svelte components that can be used in mdz content.\n\nFor example, registering 'Alert' allows using `<Alert>...</Alert>` in mdz content.\n\nThe Map values are the Svelte component constructors.",
 					source_line: 11,
 					type_signature: 'Mdz_Components',
+				},
+				{
+					name: 'Mdz_Elements',
+					kind: 'type',
+					doc_comment:
+						"Element registry for HTML elements that can be used in mdz content.\n\nFor example, registering 'div' allows using `<div>...</div>` in mdz content.\n\nThe Map values are boolean placeholders for future configuration options.",
+					source_line: 20,
+					type_signature: 'Mdz_Elements',
 				},
 				{
 					name: 'mdz_components_context',
 					kind: 'variable',
 					doc_comment:
 						'Context for providing custom mdz components.\nMust be set by the application using mdz.',
-					source_line: 17,
+					source_line: 26,
 					type_signature:
-						'{ get: (error_message?: string | undefined) => Mdz_Components; maybe_get: () => Mdz_Components | undefined; set: (value: Mdz_Components) => Mdz_Components; }',
+						'{ get: (error_message?: string | undefined) => Mdz_Components; get_maybe: () => Mdz_Components | undefined; set: (value: Mdz_Components) => Mdz_Components; }',
+				},
+				{
+					name: 'mdz_elements_context',
+					kind: 'variable',
+					doc_comment:
+						'Context for providing allowed HTML elements.\nMust be set by the application using mdz.\nBy default, no HTML elements are allowed.',
+					source_line: 33,
+					type_signature:
+						'{ get: (error_message?: string | undefined) => Mdz_Elements; get_maybe: () => Mdz_Elements | undefined; set: (value: Mdz_Elements) => Mdz_Elements; }',
 				},
 			],
+			dependencies: ['context_helpers.ts'],
+			dependents: ['Mdz_Node_View.svelte'],
 		},
 		{
 			path: 'Mdz_Node_View.svelte',
@@ -3093,6 +3643,8 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: ['Docs_Link.svelte', 'Mdz_Node_View.svelte', 'mdz_components.ts'],
+			dependents: ['Mdz.svelte', 'Mdz_Node_View.svelte'],
 		},
 		{
 			path: 'Mdz.svelte',
@@ -3106,10 +3658,17 @@ export const src_json: Src_Json = {
 							type: 'string',
 							optional: false,
 						},
+						{
+							name: 'inline',
+							type: 'boolean',
+							optional: true,
+						},
 					],
 					source_line: 1,
 				},
 			],
+			dependencies: ['Mdz_Node_View.svelte', 'mdz.ts'],
+			dependents: ['Api_Module.svelte', 'Identifier_Detail.svelte'],
 		},
 		{
 			path: 'mdz.ts',
@@ -3138,7 +3697,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Base_Node',
 					kind: 'type',
-					source_line: 45,
+					source_line: 46,
 					type_signature: 'Mdz_Base_Node',
 					properties: [
 						{
@@ -3161,7 +3720,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Text_Node',
 					kind: 'type',
-					source_line: 51,
+					source_line: 52,
 					type_signature: 'Mdz_Text_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3180,7 +3739,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Code_Node',
 					kind: 'type',
-					source_line: 56,
+					source_line: 57,
 					type_signature: 'Mdz_Code_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3199,7 +3758,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Codeblock_Node',
 					kind: 'type',
-					source_line: 61,
+					source_line: 62,
 					type_signature: 'Mdz_Codeblock_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3223,7 +3782,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Bold_Node',
 					kind: 'type',
-					source_line: 67,
+					source_line: 68,
 					type_signature: 'Mdz_Bold_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3242,7 +3801,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Italic_Node',
 					kind: 'type',
-					source_line: 72,
+					source_line: 73,
 					type_signature: 'Mdz_Italic_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3261,7 +3820,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Strikethrough_Node',
 					kind: 'type',
-					source_line: 77,
+					source_line: 78,
 					type_signature: 'Mdz_Strikethrough_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3280,7 +3839,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Link_Node',
 					kind: 'type',
-					source_line: 82,
+					source_line: 83,
 					type_signature: 'Mdz_Link_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3309,7 +3868,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Paragraph_Node',
 					kind: 'type',
-					source_line: 89,
+					source_line: 90,
 					type_signature: 'Mdz_Paragraph_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3328,7 +3887,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Hr_Node',
 					kind: 'type',
-					source_line: 94,
+					source_line: 95,
 					type_signature: 'Mdz_Hr_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3342,7 +3901,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Heading_Node',
 					kind: 'type',
-					source_line: 98,
+					source_line: 99,
 					type_signature: 'Mdz_Heading_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3364,9 +3923,33 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
+					name: 'Mdz_Element_Node',
+					kind: 'type',
+					source_line: 105,
+					type_signature: 'Mdz_Element_Node',
+					extends: ['Mdz_Base_Node'],
+					properties: [
+						{
+							name: 'type',
+							kind: 'variable',
+							type_signature: "'Element'",
+						},
+						{
+							name: 'name',
+							kind: 'variable',
+							type_signature: 'string',
+						},
+						{
+							name: 'children',
+							kind: 'variable',
+							type_signature: 'Array<Mdz_Node>',
+						},
+					],
+				},
+				{
 					name: 'Mdz_Component_Node',
 					kind: 'type',
-					source_line: 104,
+					source_line: 111,
 					type_signature: 'Mdz_Component_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3392,177 +3975,35 @@ export const src_json: Src_Json = {
 					kind: 'class',
 					doc_comment:
 						'Parser for mdz format.\nSingle-pass lexer/parser with text accumulation for efficiency.\nUsed by `mdz_parse`, which should be preferred for simple usage.',
-					source_line: 130,
+					source_line: 140,
 					members: [
 						{
-							name: '#index',
-							kind: 'variable',
-							type_signature: 'number',
-						},
-						{
-							name: '#template',
-							kind: 'variable',
-							type_signature: 'string',
-						},
-						{
-							name: '#accumulated_text',
-							kind: 'variable',
-							type_signature: 'string',
-						},
-						{
-							name: '#accumulated_start',
-							kind: 'variable',
-							type_signature: 'number',
-						},
-						{
-							name: '#nodes',
-							kind: 'variable',
-							type_signature: 'Array<Mdz_Node>',
+							name: 'constructor',
+							kind: 'constructor',
+							type_signature: '(template: string): Mdz_Parser',
+							parameters: [
+								{
+									name: 'template',
+									type: 'string',
+									optional: false,
+								},
+							],
 						},
 						{
 							name: 'parse',
 							kind: 'function',
-							type_signature: '() => Mdz_Node[]',
 							doc_comment:
 								'Main parse method. Returns flat array of nodes,\nwith paragraph nodes wrapping content between double newlines.',
-						},
-						{
-							name: '#accumulate_text',
-							kind: 'function',
-							type_signature: '(text: string, start: number) => void',
-							doc_comment: 'Accumulate text for later flushing (performance optimization).',
-						},
-						{
-							name: '#flush_text',
-							kind: 'function',
-							type_signature: '() => void',
-						},
-						{
-							name: '#parse_node',
-							kind: 'function',
-							type_signature: '() => Mdz_Node',
-							doc_comment:
-								'Parse next node based on current character.\nUses switch for performance (avoids regex in hot loop).',
-						},
-						{
-							name: '#parse_code',
-							kind: 'function',
-							type_signature: '() => Mdz_Text_Node | Mdz_Code_Node',
-							doc_comment:
-								'Parse backtick code: `code`\nAuto-links to identifiers/modules if match found.\nFalls back to text if unclosed, empty, or if newline encountered before closing backtick.',
-						},
-						{
-							name: '#parse_bold',
-							kind: 'function',
-							type_signature: '() => Mdz_Text_Node | Mdz_Bold_Node',
-							doc_comment:
-								'Parse bold starting with double asterisk.\n\n- **bold** = Bold node\n\nFalls back to text if unclosed or single asterisk.',
-						},
-						{
-							name: '#parse_italic',
-							kind: 'function',
-							type_signature: '() => Mdz_Text_Node | Mdz_Italic_Node',
-							doc_comment:
-								'Parse italic starting with underscore.\n_italic_ = Italic node\nFalls back to text if unclosed.',
-						},
-						{
-							name: '#parse_strikethrough',
-							kind: 'function',
-							type_signature: '() => Mdz_Text_Node | Mdz_Strikethrough_Node',
-							doc_comment:
-								'Parse strikethrough starting with tilde.\n~strikethrough~ = Strikethrough node\nFalls back to text if unclosed.',
-						},
-						{
-							name: '#parse_link',
-							kind: 'function',
-							type_signature: '() => Mdz_Text_Node | Mdz_Link_Node',
-							doc_comment:
-								'Parse TSDoc inline tag: `...` or `{@see ...`.\nFormats:\n\n-  - local ref\n- ://url - external URL\n- ://url|Display Text - URL with custom text\n\nFalls back to text if malformed.',
-						},
-						{
-							name: '#parse_text',
-							kind: 'function',
-							type_signature: '() => Mdz_Text_Node',
-							doc_comment:
-								'Parse plain text until special character encountered.\nPreserves all whitespace (except paragraph breaks handled separately).',
-						},
-						{
-							name: '#parse_nodes_until',
-							kind: 'function',
-							type_signature: '(delimiter: string) => Mdz_Node[]',
-							doc_comment:
-								'Parse nodes until delimiter string is found.\nUsed for bold/italic content parsing.\nStops at paragraph breaks (double newline) to allow block elements to interrupt inline formatting.',
-						},
-						{
-							name: '#current_char',
-							kind: 'function',
-							type_signature: '() => number',
-							doc_comment: 'Get character code at current index, or -1 if at EOF.',
-						},
-						{
-							name: '#is_at_paragraph_break',
-							kind: 'function',
-							type_signature: '() => boolean',
-							doc_comment: 'Check if current position is at a paragraph break (double newline).',
-						},
-						{
-							name: '#match',
-							kind: 'function',
-							type_signature: '(str: string) => boolean',
-						},
-						{
-							name: '#eat',
-							kind: 'function',
-							type_signature: '(str: string) => void',
-							doc_comment: 'Consume string at current index, or throw error.',
-						},
-						{
-							name: '#match_hr',
-							kind: 'function',
-							type_signature: '() => boolean',
-							doc_comment:
-								'Check if current position matches a horizontal rule.\nHR must be exactly `---` at column 0, followed by blank line or EOF.',
-						},
-						{
-							name: '#parse_hr',
-							kind: 'function',
-							type_signature: '() => Mdz_Hr_Node',
-							doc_comment:
-								'Parse horizontal rule: `---`\nAssumes #match_hr() already verified this is an hr.',
-						},
-						{
-							name: '#match_heading',
-							kind: 'function',
-							type_signature: '() => boolean',
-							doc_comment:
-								'Check if current position matches a heading.\nHeading must be 1-6 hashes at column 0, followed by space and content,\nfollowed by blank line or EOF.',
-						},
-						{
-							name: '#parse_heading',
-							kind: 'function',
-							type_signature: '() => Mdz_Heading_Node',
-							doc_comment:
-								'Parse heading: `# Heading text`\nAssumes #match_heading() already verified this is a heading.',
-						},
-						{
-							name: '#match_code_block',
-							kind: 'function',
-							type_signature: '() => boolean',
-							doc_comment:
-								'Check if current position matches a code block.\nCode block must be 3+ backticks at column 0, followed by blank line or EOF.\nEmpty code blocks (no content) are treated as invalid.',
-						},
-						{
-							name: '#parse_code_block',
-							kind: 'function',
-							type_signature: '() => Mdz_Codeblock_Node',
-							doc_comment:
-								'Parse code block: ```lang\\ncode\\n```\nAssumes #match_code_block() already verified this is a code block.',
+							type_signature: '(): Mdz_Node[]',
+							return_type: 'Mdz_Node[]',
+							parameters: [],
 						},
 					],
 				},
 			],
 			module_comment:
-				'mdz - minimal Markdown+TSDoc parser for Fuz API documentation.\n\nParses a specialized markdown dialect with:\n- inline formatting: `code`, **bold**, _italic_, ~strikethrough~\n- TSDoc tags: {@link}, {@see}\n- auto-linking via backticks to identifiers/modules\n- paragraph breaks (double newline)\n- block elements: headings, horizontal rules, code blocks\n\nKey constraint: preserves ALL whitespace exactly as authored,\nand is rendered with white-space pre or pre-wrap.\n\n## Design Philosophy\n\n- **False negatives over false positives**: Strict syntax prevents accidentally\n  interpreting plain text as formatting. When in doubt, treat as plain text.\n- **One way to do things**: Single unambiguous syntax per feature. No alternatives.\n- **Explicit over implicit**: Clear delimiters and column-0 requirements avoid ambiguity.\n- **Simple over complete**: Prefer simple parsing rules over complex edge case handling.',
+				'mdz - minimal Markdown+TSDoc parser for Fuz API documentation.\n\nParses a specialized markdown dialect with:\n- inline formatting: `code`, **bold**, _italic_, ~strikethrough~\n- TSDoc tags: `{@link}`, `{@see}`\n- auto-linking via backticks to identifiers/modules\n- paragraph breaks (double newline)\n- block elements: headings, horizontal rules, code blocks\n\nKey constraint: preserves ALL whitespace exactly as authored,\nand is rendered with white-space pre or pre-wrap.\n\nDesign philosophy:\n\n- **False negatives over false positives**: Strict syntax prevents accidentally\n  interpreting plain text as formatting. When in doubt, treat as plain text.\n- **One way to do things**: Single unambiguous syntax per feature. No alternatives.\n- **Explicit over implicit**: Clear delimiters and column-0 requirements avoid ambiguity.\n- **Simple over complete**: Prefer simple parsing rules over complex edge case handling.',
+			dependents: ['Mdz.svelte'],
 		},
 		{
 			path: 'module_contextmenu.ts',
@@ -3582,6 +4023,7 @@ export const src_json: Src_Json = {
 					],
 				},
 			],
+			dependents: ['Module_Link.svelte'],
 		},
 		{
 			path: 'module_helpers.ts',
@@ -3726,6 +4168,7 @@ export const src_json: Src_Json = {
 			],
 			module_comment:
 				'Module path and metadata helpers.\n\nProvides utilities for working with source module paths, file types,\nand import relationships in the package generation system.\n\nAll functions are prefixed with `module_` for clarity.',
+			dependents: ['Package_Detail.svelte', 'package.gen.ts', 'package_gen_helpers.ts'],
 		},
 		{
 			path: 'Module_Link.svelte',
@@ -3742,6 +4185,14 @@ export const src_json: Src_Json = {
 					],
 					source_line: 1,
 				},
+			],
+			dependencies: ['contextmenu_state.svelte.ts', 'module_contextmenu.ts', 'pkg.svelte.ts'],
+			dependents: [
+				'Api_Module.svelte',
+				'Docs_Link.svelte',
+				'Docs_Tertiary_Nav.svelte',
+				'Identifier_Detail.svelte',
+				'Package_Detail.svelte',
 			],
 		},
 		{
@@ -3811,14 +4262,51 @@ export const src_json: Src_Json = {
 							type_signature: 'boolean',
 						},
 						{
+							name: 'dependencies',
+							kind: 'variable',
+							doc_comment: 'Module paths (relative to src/lib) that this module imports.',
+						},
+						{
+							name: 'dependents',
+							kind: 'variable',
+							doc_comment: 'Module paths (relative to src/lib) that import this module.',
+						},
+						{
+							name: 'constructor',
+							kind: 'constructor',
+							type_signature: '(pkg: Pkg, module_json: Module_Json): Module',
+							parameters: [
+								{
+									name: 'pkg',
+									type: 'Pkg',
+									optional: false,
+								},
+								{
+									name: 'module_json',
+									type: 'Module_Json',
+									optional: false,
+								},
+							],
+						},
+						{
 							name: 'get_identifier_by_name',
 							kind: 'function',
-							type_signature: '(name: string) => Identifier | undefined',
 							doc_comment: 'Look up an identifier by name within this module.',
+							type_signature: '(name: string): Identifier | undefined',
+							return_type: 'Identifier | undefined',
+							parameters: [
+								{
+									name: 'name',
+									type: 'string',
+									optional: false,
+								},
+							],
 						},
 					],
 				},
 			],
+			dependencies: ['identifier.svelte.ts', 'package_helpers.ts'],
+			dependents: ['pkg.svelte.ts'],
 		},
 		{
 			path: 'Package_Detail.svelte',
@@ -3866,6 +4354,14 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: [
+				'Details.svelte',
+				'Identifier_Link.svelte',
+				'Img_Or_Svg.svelte',
+				'Module_Link.svelte',
+				'module_helpers.ts',
+				'package_helpers.ts',
+			],
 		},
 		{
 			path: 'package_gen_helpers.ts',
@@ -3881,7 +4377,7 @@ export const src_json: Src_Json = {
 							description: 'if duplicate identifier names are found',
 						},
 					],
-					source_line: 43,
+					source_line: 44,
 					type_signature: '(src_json: Src_Json, log: Logger): void',
 					return_type: 'void',
 					parameters: [
@@ -3934,7 +4430,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Sort modules alphabetically by path for deterministic output and cleaner diffs.',
-					source_line: 135,
+					source_line: 136,
 					type_signature: '(modules: Module_Json[]): Module_Json[]',
 					return_type: 'Module_Json[]',
 					parameters: [
@@ -3950,7 +4446,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Generate the package.ts file content with package_json and src_json exports.',
-					source_line: 142,
+					source_line: 143,
 					type_signature:
 						'(package_json: { [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }, src_json: Src_Json): string',
 					return_type: 'string',
@@ -3978,7 +4474,7 @@ export const src_json: Src_Json = {
 							description: 'if no source files are found in /src/lib/',
 						},
 					],
-					source_line: 162,
+					source_line: 163,
 					type_signature: '(filer: Filer, log: Logger): Disknode[]',
 					return_type: 'Disknode[]',
 					parameters: [
@@ -4005,14 +4501,14 @@ export const src_json: Src_Json = {
 								'if file cannot be read, svelte2tsx transformation fails, or component analysis fails',
 						},
 					],
-					source_line: 192,
+					source_line: 193,
 					type_signature:
-						'(source_id: string, module_path: string, checker: TypeChecker): Module_Json',
+						'(disknode: Disknode, module_path: string, checker: TypeChecker): Module_Json',
 					return_type: 'Module_Json',
 					parameters: [
 						{
-							name: 'source_id',
-							type: 'string',
+							name: 'disknode',
+							type: 'Disknode',
 							optional: false,
 						},
 						{
@@ -4037,11 +4533,16 @@ export const src_json: Src_Json = {
 							description: 'if identifier enhancement fails (via package_gen_enhance_identifier)',
 						},
 					],
-					source_line: 234,
+					source_line: 241,
 					type_signature:
-						'(source_file: SourceFile, module_path: string, checker: TypeChecker): Module_Json',
+						'(disknode: Disknode, source_file: SourceFile, module_path: string, checker: TypeChecker): Module_Json',
 					return_type: 'Module_Json',
 					parameters: [
+						{
+							name: 'disknode',
+							type: 'Disknode',
+							optional: false,
+						},
 						{
 							name: 'source_file',
 							type: 'SourceFile',
@@ -4059,9 +4560,27 @@ export const src_json: Src_Json = {
 						},
 					],
 				},
+				{
+					name: 'package_gen_extract_dependencies',
+					kind: 'function',
+					doc_comment:
+						"Extract dependencies and dependents for a module from the filer's dependency graph.\n\nFilters to only include source modules from /src/lib/ (excludes external packages, node_modules, tests).\nReturns sorted arrays of module paths (relative to src/lib) for deterministic output.",
+					source_line: 286,
+					type_signature: '(disknode: Disknode): { dependencies: string[]; dependents: string[]; }',
+					return_type: '{ dependencies: string[]; dependents: string[]; }',
+					parameters: [
+						{
+							name: 'disknode',
+							type: 'Disknode',
+							optional: false,
+						},
+					],
+				},
 			],
 			module_comment:
 				'Build-time helpers for package metadata generation.\n\nThese functions are used during `gro gen` to analyze TypeScript and Svelte source files\nand generate package metadata with rich type information and documentation.\n\n@see package.gen.ts for the main generation task\n@see src_json.ts for type definitions',
+			dependencies: ['module_helpers.ts', 'svelte_helpers.ts', 'ts_helpers.ts', 'tsdoc_helpers.ts'],
+			dependents: ['package.gen.ts'],
 		},
 		{
 			path: 'package_helpers.ts',
@@ -4310,6 +4829,14 @@ export const src_json: Src_Json = {
 					],
 				},
 			],
+			dependencies: ['docs_helpers.svelte.ts'],
+			dependents: [
+				'Package_Detail.svelte',
+				'contextmenu_state.svelte.ts',
+				'identifier.svelte.ts',
+				'module.svelte.ts',
+				'pkg.svelte.ts',
+			],
 		},
 		{
 			path: 'Package_Summary.svelte',
@@ -4362,6 +4889,8 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: ['Img_Or_Svg.svelte'],
+			dependents: ['Docs_Content.svelte'],
 		},
 		{
 			path: 'package.gen.ts',
@@ -4374,6 +4903,7 @@ export const src_json: Src_Json = {
 			],
 			module_comment:
 				'Custom package generator with full TypeScript analysis\n\nGenerates package.json and src.json with rich metadata:\n- JSDoc/TSDoc comments with full tag support\n- Full type signatures\n- Source code locations\n- Parameter information with descriptions and defaults\n- Return value documentation\n- Usage examples\n- Dependency graphs\n- Svelte component props\n\n@see src/lib/src_json.ts for type definitions\n@see src/lib/package_gen_helpers.ts for buildtime-only helpers\n@see src/lib/tsdoc_helpers.ts for JSDoc/TSDoc parsing\n@see src/lib/ts_helpers.ts for TypeScript analysis\n@see src/lib/svelte_helpers.ts for Svelte component analysis',
+			dependencies: ['module_helpers.ts', 'package_gen_helpers.ts', 'ts_helpers.ts'],
 		},
 		{
 			path: 'package.ts',
@@ -4392,7 +4922,6 @@ export const src_json: Src_Json = {
 					type_signature: 'Src_Json',
 				},
 			],
-			module_comment: '// Generated by package.gen.ts',
 		},
 		{
 			path: 'Paste_From_Clipboard.svelte',
@@ -4447,6 +4976,7 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependents: ['Contextmenu_Entry.svelte', 'Pending_Button.svelte'],
 		},
 		{
 			path: 'Pending_Button.svelte',
@@ -4494,6 +5024,7 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: ['Pending_Animation.svelte'],
 		},
 		{
 			path: 'pkg.svelte.ts',
@@ -4599,28 +5130,79 @@ export const src_json: Src_Json = {
 								'Identifier lookup map by name (cached via $derived).\nProvides O(1) lookup after first access.',
 						},
 						{
+							name: 'constructor',
+							kind: 'constructor',
+							type_signature:
+								'(package_json: { [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }, src_json: Src_Json): Pkg',
+							parameters: [
+								{
+									name: 'package_json',
+									type: '{ [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }',
+									optional: false,
+								},
+								{
+									name: 'src_json',
+									type: 'Src_Json',
+									optional: false,
+								},
+							],
+						},
+						{
 							name: 'lookup_identifier',
 							kind: 'function',
-							type_signature: '(name: string) => Identifier | undefined',
 							doc_comment: 'Look up an identifier by name.',
+							type_signature: '(name: string): Identifier | undefined',
+							return_type: 'Identifier | undefined',
+							parameters: [
+								{
+									name: 'name',
+									type: 'string',
+									optional: false,
+								},
+							],
 						},
 						{
 							name: 'has_identifier',
 							kind: 'function',
-							type_signature: '(name: string) => boolean',
 							doc_comment: 'Check if an identifier exists.',
+							type_signature: '(name: string): boolean',
+							return_type: 'boolean',
+							parameters: [
+								{
+									name: 'name',
+									type: 'string',
+									optional: false,
+								},
+							],
 						},
 						{
 							name: 'lookup_module',
 							kind: 'function',
-							type_signature: '(path: string) => Module | undefined',
 							doc_comment: 'Look up a module by its canonical path.',
+							type_signature: '(path: string): Module | undefined',
+							return_type: 'Module | undefined',
+							parameters: [
+								{
+									name: 'path',
+									type: 'string',
+									optional: false,
+								},
+							],
 						},
 						{
 							name: 'search_identifiers',
 							kind: 'function',
-							type_signature: '(query: string) => Identifier[]',
-							doc_comment: 'Search identifiers by query string.',
+							doc_comment:
+								'Search identifiers by query string with multi-term AND logic.\nSearches across identifier name, kind, and module path.\nMultiple space-separated terms match only if ALL terms match (each term can match any field).',
+							type_signature: '(query: string): Identifier[]',
+							return_type: 'Identifier[]',
+							parameters: [
+								{
+									name: 'query',
+									type: 'string',
+									optional: false,
+								},
+							],
 						},
 					],
 				},
@@ -4629,7 +5211,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Convenience factory function for creating Pkg instances\n(kept for backward compatibility during migration)',
-					source_line: 200,
+					source_line: 166,
 					type_signature:
 						'(package_json: { [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }, src_json: Src_Json): Pkg',
 					return_type: 'Pkg',
@@ -4649,10 +5231,26 @@ export const src_json: Src_Json = {
 				{
 					name: 'pkg_context',
 					kind: 'variable',
-					source_line: 204,
+					source_line: 170,
 					type_signature:
-						'{ get: (error_message?: string | undefined) => Pkg; maybe_get: () => Pkg | undefined; set: (value: Pkg) => Pkg; }',
+						'{ get: (error_message?: string | undefined) => Pkg; get_maybe: () => Pkg | undefined; set: (value: Pkg) => Pkg; }',
 				},
+			],
+			dependencies: [
+				'context_helpers.ts',
+				'identifier.svelte.ts',
+				'module.svelte.ts',
+				'package_helpers.ts',
+			],
+			dependents: [
+				'Api_Index.svelte',
+				'Api_Module.svelte',
+				'Docs_Link.svelte',
+				'Docs_Modules_List.svelte',
+				'Docs_Tertiary_Nav.svelte',
+				'Identifier_Link.svelte',
+				'Module_Link.svelte',
+				'Type_Link.svelte',
 			],
 		},
 		{
@@ -4664,6 +5262,8 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: ['Svg.svelte', 'logos.ts'],
+			dependents: ['Ecosystem_Links_Panel.svelte'],
 		},
 		{
 			path: 'Redirect.svelte',
@@ -4729,8 +5329,7 @@ export const src_json: Src_Json = {
 					],
 				},
 			],
-			module_comment:
-				'Runs `fn` in an `$effect`, passing `true` as the `skip` argument for the first `count` runs.\nCalls `fn` even when skipping so callers can read any dependent signals.',
+			dependents: ['Themed.svelte'],
 		},
 		{
 			path: 'Spiders.svelte',
@@ -4758,6 +5357,7 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: ['Svg.svelte', 'logos.ts'],
 		},
 		{
 			path: 'src_json.ts',
@@ -4812,19 +5412,31 @@ export const src_json: Src_Json = {
 							kind: 'variable',
 							type_signature: 'string',
 						},
+						{
+							name: 'dependencies',
+							kind: 'variable',
+							type_signature: 'Array<string>',
+							doc_comment: 'Module paths (relative to src/lib) that this module imports.',
+						},
+						{
+							name: 'dependents',
+							kind: 'variable',
+							type_signature: 'Array<string>',
+							doc_comment: 'Module paths (relative to src/lib) that import this module.',
+						},
 					],
 				},
 				{
 					name: 'Identifier_Kind',
 					kind: 'type',
-					source_line: 22,
+					source_line: 26,
 					type_signature: 'Identifier_Kind',
 				},
 				{
 					name: 'Identifier_Json',
 					kind: 'type',
 					doc_comment: 'Identifier metadata with rich TypeScript/JSDoc information.',
-					source_line: 34,
+					source_line: 39,
 					type_signature: 'Identifier_Json',
 					properties: [
 						{
@@ -4835,7 +5447,7 @@ export const src_json: Src_Json = {
 						{
 							name: 'kind',
 							kind: 'variable',
-							type_signature: 'Identifier_Kind | null',
+							type_signature: 'Identifier_Kind',
 						},
 						{
 							name: 'doc_comment',
@@ -4940,7 +5552,7 @@ export const src_json: Src_Json = {
 					name: 'Generic_Param_Info',
 					kind: 'type',
 					doc_comment: 'Generic type parameter information.',
-					source_line: 67,
+					source_line: 72,
 					type_signature: 'Generic_Param_Info',
 					properties: [
 						{
@@ -4968,7 +5580,7 @@ export const src_json: Src_Json = {
 					kind: 'type',
 					doc_comment:
 						'Parameter information for functions and methods.\n\nKept distinct from Component_Prop_Info despite structural similarity.\nFunction parameters form a tuple with positional semantics:\ncalling order matters (`fn(a, b)` vs `fn(b, a)`),\nmay include rest parameters and destructuring patterns.',
-					source_line: 84,
+					source_line: 89,
 					type_signature: 'Parameter_Info',
 					properties: [
 						{
@@ -5003,7 +5615,7 @@ export const src_json: Src_Json = {
 					kind: 'type',
 					doc_comment:
 						'Component prop information for Svelte components.\n\nKept distinct from Parameter_Info despite structural similarity.\nComponent props are named attributes with different semantics:\nno positional order when passing (`<Foo {a} {b} />` = `<Foo {b} {a} />`),\nsupport two-way binding via `$bindable` rune.',
-					source_line: 100,
+					source_line: 105,
 					type_signature: 'Component_Prop_Info',
 					properties: [
 						{
@@ -5042,7 +5654,7 @@ export const src_json: Src_Json = {
 					name: 'get_identifier_display_name',
 					kind: 'function',
 					doc_comment: "Gets an identifier's display name with generic parameters.",
-					source_line: 112,
+					source_line: 117,
 					type_signature: '(identifier: Identifier_Json): string',
 					return_type: 'string',
 					parameters: [
@@ -5057,7 +5669,7 @@ export const src_json: Src_Json = {
 					name: 'generate_import_statement',
 					kind: 'function',
 					doc_comment: 'Generates an import statement for an identifier.',
-					source_line: 130,
+					source_line: 135,
 					type_signature:
 						'(identifier: Identifier_Json, module_path: string, pkg_name: string): string',
 					return_type: 'string',
@@ -5080,8 +5692,7 @@ export const src_json: Src_Json = {
 					],
 				},
 			],
-			module_comment:
-				'Top-level source metadata.\n\n@see {@link https://github.com/ryanatkn/gro/blob/main/src/docs/gro_plugin_sveltekit_app.md#well-known-src}',
+			dependents: ['identifier.svelte.ts'],
 		},
 		{
 			path: 'storage.ts',
@@ -5144,6 +5755,7 @@ export const src_json: Src_Json = {
 					],
 				},
 			],
+			dependents: ['themer.svelte.ts'],
 		},
 		{
 			path: 'svelte_helpers.ts',
@@ -5182,6 +5794,8 @@ export const src_json: Src_Json = {
 			],
 			module_comment:
 				'Svelte component analysis helpers.\n\nExtracts metadata from Svelte components using svelte2tsx transformations:\n\n- Component props with types and JSDoc\n- Component-level documentation\n- Type information\n\nUses the TypeScript Compiler API to parse the transformed output from svelte2tsx.\n\nAll functions are prefixed with `svelte_` for clarity.',
+			dependencies: ['tsdoc_helpers.ts'],
+			dependents: ['package_gen_helpers.ts'],
 		},
 		{
 			path: 'Svg.svelte',
@@ -5246,6 +5860,13 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependents: [
+				'Docs_Footer.svelte',
+				'Github_Link.svelte',
+				'Mdn_Link.svelte',
+				'Project_Links.svelte',
+				'Spiders.svelte',
+			],
 		},
 		{
 			path: 'Teleport.svelte',
@@ -5275,6 +5896,7 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependents: ['Dialog.svelte'],
 		},
 		{
 			path: 'Theme_Input.svelte',
@@ -5317,6 +5939,7 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: ['themer.svelte.ts'],
 		},
 		{
 			path: 'Themed.svelte',
@@ -5371,6 +5994,7 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: ['rune_helpers.svelte.ts', 'themer.svelte.ts'],
 		},
 		{
 			path: 'themer.svelte.ts',
@@ -5391,9 +6015,30 @@ export const src_json: Src_Json = {
 							type_signature: 'Color_Scheme',
 						},
 						{
+							name: 'constructor',
+							kind: 'constructor',
+							type_signature: '(theme?: Theme, color_scheme?: Color_Scheme): Themer',
+							parameters: [
+								{
+									name: 'theme',
+									type: 'Theme',
+									optional: false,
+									default_value: 'default_themes[0]!',
+								},
+								{
+									name: 'color_scheme',
+									type: 'Color_Scheme',
+									optional: false,
+									default_value: "'auto'",
+								},
+							],
+						},
+						{
 							name: 'toJSON',
 							kind: 'function',
-							type_signature: '() => Themer_Json',
+							type_signature: '(): Themer_Json',
+							return_type: 'Themer_Json',
+							parameters: [],
 						},
 					],
 				},
@@ -5420,7 +6065,7 @@ export const src_json: Src_Json = {
 					kind: 'variable',
 					source_line: 33,
 					type_signature:
-						'{ get: (error_message?: string | undefined) => Themer; maybe_get: () => Themer | undefined; set: (value: Themer) => Themer; }',
+						'{ get: (error_message?: string | undefined) => Themer; get_maybe: () => Themer | undefined; set: (value: Themer) => Themer; }',
 				},
 				{
 					name: 'sync_color_scheme',
@@ -5531,6 +6176,8 @@ export const src_json: Src_Json = {
 					],
 				},
 			],
+			dependencies: ['context_helpers.ts', 'storage.ts'],
+			dependents: ['Color_Scheme_Input.svelte', 'Theme_Input.svelte', 'Themed.svelte'],
 		},
 		{
 			path: 'Tome_Content.svelte',
@@ -5563,6 +6210,13 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: [
+				'Tome_Header.svelte',
+				'docs_helpers.svelte.ts',
+				'intersect.svelte.ts',
+				'tome.ts',
+			],
+			dependents: ['Api_Index.svelte', 'Api_Module.svelte'],
 		},
 		{
 			path: 'Tome_Header.svelte',
@@ -5573,6 +6227,8 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: ['Hashlink.svelte', 'docs_helpers.svelte.ts', 'tome.ts'],
+			dependents: ['Tome_Content.svelte'],
 		},
 		{
 			path: 'Tome_Link.svelte',
@@ -5596,15 +6252,12 @@ export const src_json: Src_Json = {
 							type: 'string',
 							optional: true,
 						},
-						{
-							name: 'chip',
-							type: 'boolean',
-							optional: true,
-						},
 					],
 					source_line: 1,
 				},
 			],
+			dependencies: ['docs_helpers.svelte.ts', 'tome.ts'],
+			dependents: ['Api_Index.svelte', 'Docs_Tertiary_Nav.svelte'],
 		},
 		{
 			path: 'Tome_Section_Header.svelte',
@@ -5632,6 +6285,8 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: ['Hashlink.svelte', 'Tome_Section.svelte', 'docs_helpers.svelte.ts'],
+			dependents: ['Api_Identifier_List.svelte', 'Api_Index.svelte', 'Api_Module.svelte'],
 		},
 		{
 			path: 'Tome_Section.svelte',
@@ -5649,6 +6304,13 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: ['context_helpers.ts', 'docs_helpers.svelte.ts', 'intersect.svelte.ts'],
+			dependents: [
+				'Api_Identifier_List.svelte',
+				'Api_Index.svelte',
+				'Api_Module.svelte',
+				'Tome_Section_Header.svelte',
+			],
 		},
 		{
 			path: 'tome.ts',
@@ -5658,19 +6320,19 @@ export const src_json: Src_Json = {
 					kind: 'type',
 					source_line: 8,
 					type_signature:
-						'ZodObject<{ name: ZodString; category: ZodString; component: ZodAny; related: ZodArray<ZodString>; }, $strip>',
+						'ZodObject<{ name: ZodString; category: ZodString; component: ZodAny; related_tomes: ZodArray<ZodString>; related_modules: ZodArray<ZodString>; related_identifiers: ZodArray<...>; }, $strip>',
 				},
 				{
 					name: 'to_tome_pathname',
 					kind: 'function',
-					source_line: 18,
+					source_line: 20,
 					type_signature:
-						'(item: { name: string; category: string; component: any; related: string[]; }, docs_path?: string): string',
+						'(item: string | { name: string; category: string; component: any; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }, docs_path?: string, hash?: string | undefined): string',
 					return_type: 'string',
 					parameters: [
 						{
 							name: 'item',
-							type: '{ name: string; category: string; component: any; related: string[]; }',
+							type: 'string | { name: string; category: string; component: any; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }',
 							optional: false,
 						},
 						{
@@ -5679,22 +6341,28 @@ export const src_json: Src_Json = {
 							optional: false,
 							default_value: 'DOCS_PATH_DEFAULT',
 						},
+						{
+							name: 'hash',
+							type: 'string | undefined',
+							optional: true,
+						},
 					],
 				},
 				{
 					name: 'tomes_context',
 					kind: 'variable',
-					source_line: 21,
+					source_line: 30,
 					type_signature:
-						'{ get: (error_message?: string | undefined) => Map<string, { name: string; category: string; component: any; related: string[]; }>; maybe_get: () => Map<string, { name: string; category: string; component: any; related: string[]; }> | undefined; set: (value: Map<...>) => Map<...>; }',
+						'{ get: (error_message?: string | undefined) => Map<string, { name: string; category: string; component: any; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }>; get_maybe: () => Map<...> | undefined; set: (value: Map<...>) => Map<...>; }',
 				},
 				{
 					name: 'get_tome_by_name',
 					kind: 'function',
-					source_line: 23,
+					source_line: 32,
 					type_signature:
-						'(name: string): { name: string; category: string; component: any; related: string[]; }',
-					return_type: '{ name: string; category: string; component: any; related: string[]; }',
+						'(name: string): { name: string; category: string; component: any; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }',
+					return_type:
+						'{ name: string; category: string; component: any; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }',
 					parameters: [
 						{
 							name: 'name',
@@ -5706,10 +6374,22 @@ export const src_json: Src_Json = {
 				{
 					name: 'tome_context',
 					kind: 'variable',
-					source_line: 30,
+					source_line: 39,
 					type_signature:
-						'{ get: (error_message?: string | undefined) => { name: string; category: string; component: any; related: string[]; }; maybe_get: () => { name: string; category: string; component: any; related: string[]; } | undefined; set: (value: { ...; }) => { ...; }; }',
+						'{ get: (error_message?: string | undefined) => { name: string; category: string; component: any; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }; get_maybe: () => { ...; } | undefined; set: (value: { ...; }) => { ...; }; }',
 				},
+			],
+			dependencies: ['context_helpers.ts', 'docs_helpers.svelte.ts'],
+			dependents: [
+				'Api_Index.svelte',
+				'Api_Module.svelte',
+				'Docs.svelte',
+				'Docs_Menu.svelte',
+				'Docs_Secondary_Nav.svelte',
+				'Docs_Tertiary_Nav.svelte',
+				'Tome_Content.svelte',
+				'Tome_Header.svelte',
+				'Tome_Link.svelte',
 			],
 		},
 		{
@@ -5720,8 +6400,8 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Infer declaration kind from symbol and node.',
 					source_line: 54,
-					type_signature: '(symbol: Symbol, node: Node): Identifier_Kind | null',
-					return_type: 'Identifier_Kind | null',
+					type_signature: '(symbol: Symbol, node: Node): Identifier_Kind',
+					return_type: 'Identifier_Kind',
 					parameters: [
 						{
 							name: 'symbol',
@@ -5740,7 +6420,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Extract function/method information including parameters\nwith descriptions and default values.',
-					source_line: 87,
+					source_line: 84,
 					type_signature:
 						'(node: Node, symbol: Symbol, checker: TypeChecker, identifier: Identifier_Json, tsdoc: Tsdoc_Parsed_Comment | undefined): void',
 					return_type: 'void',
@@ -5776,7 +6456,7 @@ export const src_json: Src_Json = {
 					name: 'ts_extract_type_info',
 					kind: 'function',
 					doc_comment: 'Extract type/interface information with rich property metadata.',
-					source_line: 158,
+					source_line: 155,
 					type_signature:
 						'(node: Node, _symbol: Symbol, checker: TypeChecker, identifier: Identifier_Json): void',
 					return_type: 'void',
@@ -5807,7 +6487,7 @@ export const src_json: Src_Json = {
 					name: 'ts_extract_class_info',
 					kind: 'function',
 					doc_comment: 'Extract class information with rich member metadata.',
-					source_line: 222,
+					source_line: 219,
 					type_signature:
 						'(node: Node, _symbol: Symbol, checker: TypeChecker, identifier: Identifier_Json): void',
 					return_type: 'void',
@@ -5838,7 +6518,7 @@ export const src_json: Src_Json = {
 					name: 'ts_extract_variable_info',
 					kind: 'function',
 					doc_comment: 'Extract variable information.',
-					source_line: 294,
+					source_line: 368,
 					type_signature:
 						'(node: Node, symbol: Symbol, checker: TypeChecker, identifier: Identifier_Json): void',
 					return_type: 'void',
@@ -5868,8 +6548,9 @@ export const src_json: Src_Json = {
 				{
 					name: 'ts_extract_module_comment',
 					kind: 'function',
-					doc_comment: 'Extract module-level comment.',
-					source_line: 311,
+					doc_comment:
+						'Extract module-level comment.\nOnly accepts JSDoc/TSDoc comments (`/** ... *\\/`) that have a blank line separating them\nfrom the following statement. Module comments can appear after imports.',
+					source_line: 387,
 					type_signature: '(source_file: SourceFile): string | undefined',
 					return_type: 'string | undefined',
 					parameters: [
@@ -5884,7 +6565,7 @@ export const src_json: Src_Json = {
 					name: 'ts_create_program',
 					kind: 'function',
 					doc_comment: 'Create TypeScript program for analysis.',
-					source_line: 334,
+					source_line: 459,
 					type_signature: '(log: { warn: (message: string) => void; }): Program | null',
 					return_type: 'Program | null',
 					parameters: [
@@ -5898,6 +6579,8 @@ export const src_json: Src_Json = {
 			],
 			module_comment:
 				'TypeScript compiler API helpers for extracting metadata from source code.\n\nAll functions are prefixed with `ts_` for clarity.',
+			dependencies: ['tsdoc_helpers.ts'],
+			dependents: ['package.gen.ts', 'package_gen_helpers.ts'],
 		},
 		{
 			path: 'tsdoc_helpers.ts',
@@ -5978,13 +6661,13 @@ export const src_json: Src_Json = {
 							name: 'node',
 							type: 'Node',
 							optional: false,
-							description: '- The TypeScript node to extract JSDoc from',
+							description: 'The TypeScript node to extract JSDoc from',
 						},
 						{
 							name: 'source_file',
 							type: 'SourceFile',
 							optional: false,
-							description: '- Source file (used for extracting full` @see` tag text)',
+							description: 'Source file (used for extracting full` @see` tag text)',
 						},
 					],
 				},
@@ -6001,19 +6684,20 @@ export const src_json: Src_Json = {
 							name: 'identifier',
 							type: 'any',
 							optional: false,
-							description: '- identifier object to update',
+							description: 'identifier object to update',
 						},
 						{
 							name: 'tsdoc',
 							type: 'Tsdoc_Parsed_Comment | undefined',
 							optional: false,
-							description: '- parsed TSDoc comment (if available)',
+							description: 'parsed TSDoc comment (if available)',
 						},
 					],
 				},
 			],
 			module_comment:
-				'TSDoc/JSDoc parsing helpers using the TypeScript Compiler API.\n\nProvides `tsdoc_parse()` for extracting JSDoc/TSDoc from TypeScript nodes.\nPrimarily designed for build-time code generation but can be used at runtime.\n\n## Design\n\nPure extraction approach: extracts documentation as-is with minimal transformation,\npreserving source intent. Works around TypeScript Compiler API quirks where needed.\n\nSupports both regular TypeScript and Svelte components (via svelte2tsx output).\n\n## Tag support\n\nSupports standard TSDoc tags: `@param`, `@returns`, `@throws`, `@example`, `@deprecated`, `@see`, `@since`.\nAlso supports `@mutates` (non-standard) for documenting side effects.\nOnly `@returns` is supported (not `@return`).\n\nThe `@see` tag supports multiple formats: plain URLs (`https://...`), `{@link}` syntax, and module names.\nRelative/absolute path support in `@see` is TBD.\n\n## Behavioral notes\n\nDue to TS Compiler API limitations:\n- Preserves dash separator in `@param` descriptions: `@param x - desc` → `"- desc"`\n- `@throws` tags have `{Type}` stripped by TS API; fallback regex extracts first word as error type\n- TS API strips URL protocols from `@see` tag text; we use `getText()` to preserve original format including `{@link}` syntax\n\nAll functions are prefixed with `tsdoc_` for clarity.',
+				'TSDoc/JSDoc parsing helpers using the TypeScript Compiler API.\n\nProvides `tsdoc_parse()` for extracting JSDoc/TSDoc from TypeScript nodes.\nPrimarily designed for build-time code generation but can be used at runtime.\n\n## Design\n\nPure extraction approach: extracts documentation as-is with minimal transformation,\npreserving source intent. Works around TypeScript Compiler API quirks where needed.\n\nSupports both regular TypeScript and Svelte components (via svelte2tsx output).\n\n## Tag support\n\nSupports standard TSDoc tags: `@param`, `@returns`, `@throws`, `@example`, `@deprecated`, `@see`, `@since`.\nAlso supports `@mutates` (non-standard) for documenting side effects.\nOnly `@returns` is supported (not `@return`).\n\nThe `@see` tag supports multiple formats: plain URLs (`https://...`), `{@link}` syntax, and module names.\nRelative/absolute path support in `@see` is TBD.\n\n## Behavioral notes\n\nDue to TS Compiler API limitations:\n- Preserves dash separator in `@param` descriptions: `@param x desc` → `"- desc"`\n- `@throws` tags have `{Type}` stripped by TS API; fallback regex extracts first word as error type\n- TS API strips URL protocols from `@see` tag text; we use `getText()` to preserve original format including `{@link}` syntax\n\nAll functions are prefixed with `tsdoc_` for clarity.',
+			dependents: ['package_gen_helpers.ts', 'svelte_helpers.ts', 'ts_helpers.ts'],
 		},
 		{
 			path: 'Type_Link.svelte',
@@ -6031,6 +6715,8 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
+			dependencies: ['Identifier_Link.svelte', 'pkg.svelte.ts'],
+			dependents: ['Identifier_Detail.svelte'],
 		},
 	],
 };

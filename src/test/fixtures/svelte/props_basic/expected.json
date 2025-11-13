@@ -1,0 +1,19 @@
+{
+	"name": "Props_Basic",
+	"kind": "component",
+	"props": [
+		{
+			"name": "title",
+			"type": "string",
+			"optional": false,
+			"description": "The title to display"
+		},
+		{
+			"name": "count",
+			"type": "number",
+			"optional": false,
+			"description": "The count value"
+		}
+	],
+	"source_line": 1
+}

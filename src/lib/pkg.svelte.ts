@@ -150,46 +150,12 @@ export class Pkg {
 	}
 
 	/**
-	 * Search identifiers by query string.
+	 * Search identifiers by query string with multi-term AND logic.
+	 * Searches across identifier name, kind, and module path.
+	 * Multiple space-separated terms match only if ALL terms match (each term can match any field).
 	 */
 	search_identifiers(query: string): Array<Identifier> {
-		if (!query.trim()) return [];
-
-		const all = this.identifiers;
-		const lower_query = query.toLowerCase();
-
-		// score and filter
-		const results = all
-			.map((identifier) => {
-				const name_lower = identifier.name.toLowerCase();
-
-				// exact match
-				if (name_lower === lower_query) return {identifier, score: 100};
-
-				// starts with
-				if (name_lower.startsWith(lower_query)) return {identifier, score: 80};
-
-				// contains
-				if (name_lower.includes(lower_query)) return {identifier, score: 60};
-
-				// fuzzy match (simple version - contains all characters in order)
-				let query_idx = 0;
-				for (const char of name_lower) {
-					if (char === lower_query[query_idx]) {
-						query_idx++;
-						if (query_idx === lower_query.length) {
-							return {identifier, score: 40};
-						}
-					}
-				}
-
-				return null;
-			})
-			.filter((r) => r !== null)
-			.sort((a, b) => b.score - a.score)
-			.map((r) => r.identifier);
-
-		return results;
+		return pkg_search_identifiers(this.identifiers, query);
 	}
 }
 
@@ -202,3 +168,77 @@ export const parse_pkg = (package_json: Package_Json, src_json: Src_Json): Pkg =
 };
 
 export const pkg_context = create_context<Pkg>();
+
+/**
+ * Search identifiers by query string with multi-term AND logic.
+ * Searches across identifier name, kind, and module path.
+ * Multiple space-separated terms match only if ALL terms match (each term can match any field).
+ */
+const pkg_search_identifiers = (
+	identifiers: Array<Identifier>,
+	query: string,
+): Array<Identifier> => {
+	if (!query.trim()) return [];
+
+	const terms = query.trim().toLowerCase().split(/\s+/);
+
+	// score and filter with AND logic
+	const results = identifiers
+		.map((identifier) => {
+			let total_score = 0;
+
+			// check that ALL terms match (AND logic)
+			for (const term of terms) {
+				const name_score = pkg_score_match(identifier.name, term);
+				const kind_score = pkg_score_match(identifier.kind, term);
+				const module_score = pkg_score_match(identifier.module_path, term);
+
+				const term_best = Math.max(name_score, kind_score, module_score);
+
+				// if this term doesn't match any field, exclude this identifier
+				if (term_best === 0) {
+					return null;
+				}
+
+				// accumulate scores across all terms
+				total_score += term_best;
+			}
+
+			return {identifier, score: total_score};
+		})
+		.filter((r) => r !== null)
+		.sort((a, b) => b.score - a.score || a.identifier.name.localeCompare(b.identifier.name))
+		.map((r) => r.identifier);
+
+	return results;
+};
+
+/**
+ * Score a search term match against a field value.
+ * Returns a score from 0 (no match) to 100 (exact match).
+ */
+const pkg_score_match = (field_value: string, term: string): number => {
+	const field_lower = field_value.toLowerCase();
+
+	// exact match
+	if (field_lower === term) return 100;
+
+	// starts with
+	if (field_lower.startsWith(term)) return 80;
+
+	// contains
+	if (field_lower.includes(term)) return 60;
+
+	// fuzzy match (simple version - contains all characters in order)
+	let term_idx = 0;
+	for (const char of field_lower) {
+		if (char === term[term_idx]) {
+			term_idx++;
+			if (term_idx === term.length) {
+				return 40;
+			}
+		}
+	}
+
+	return 0;
+};

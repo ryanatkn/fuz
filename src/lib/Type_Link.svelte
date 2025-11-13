@@ -14,5 +14,5 @@
 {#if pkg.lookup_identifier(type)}
 	<Identifier_Link name={type} />
 {:else}
-	<Code content={type} lang="ts" code_attrs={{class: 'white_space_pre_wrap'}} />
+	<Code inline content={type} lang="ts" />
 {/if}

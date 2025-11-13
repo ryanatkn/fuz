@@ -4,8 +4,8 @@
  * This function showcases the complete set of supported TSDoc features
  * for documentation generation.
  *
- * @param input - input value to process
- * @param options - configuration options
+ * @param input input value to process
+ * @param options configuration options
  * @returns processed result
  * @throws TypeError if input is invalid
  * @throws RangeError if value is out of range

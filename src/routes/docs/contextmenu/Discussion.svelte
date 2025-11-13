@@ -62,9 +62,8 @@
 	<ul>
 		<li>
 			The Fuz contextmenu only replaces the system contextmenu when the DOM tree has defined
-			behaviors. Note that <code>a</code> links have default contextmenu behaviors unless
-			<a href="#disable-default-behaviors">disabled</a>. Other interactive elements may have default
-			behaviors added in the future.
+			behaviors. Note that <code>a</code> links have default contextmenu behaviors unless disabled. Other
+			interactive elements may have default behaviors added in the future.
 		</li>
 		<li>
 			The Fuz contextmenu does not open on elements that allow clipboard pasting like inputs,

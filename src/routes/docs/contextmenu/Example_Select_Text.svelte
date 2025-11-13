@@ -82,9 +82,7 @@ Try selecting text and then opening the contextmenu on it.`;
 				<blockquote contenteditable="plaintext-only" bind:innerText={value}></blockquote>
 				<aside>
 					Note that if there are no actions found (like the toggle here) the system contextmenu
-					opens instead, bypassing the Fuz contextmenu, as demonstrated in the <a
-						href="#default-behaviors">default behaviors</a
-					>.
+					opens instead, bypassing the Fuz contextmenu, as demonstrated in the default behaviors.
 				</aside>
 			</div>
 		</Contextmenu>

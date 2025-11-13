@@ -181,24 +181,11 @@ a.chip {
 	font-weight: 600;
 }
 
-.pre {
-	font-family: var(--font_family_mono);
-	color: var(--text_color, var(--text_color_3));
-	overflow: auto;
-	max-width: 100%;
-}
-.pre > code {
-	font-size: var(
-		--font_size_sm
-	); /* TODO @many use a var? maybe computed from generic `--font_size`? */
-	font-weight: 500;
-}
-.pre:not(.inline) > code {
-	display: block;
-}
-
 .position_relative {
 	position: relative;
+}
+.position_absolute {
+	position: absolute;
 }
 .position_sticky {
 	position: sticky;
@@ -272,6 +259,9 @@ a.chip {
 .white_space_nowrap {
 	white-space: nowrap;
 }
+.white_space_pre {
+	white-space: pre;
+}
 .white_space_pre_wrap {
 	white-space: pre-wrap;
 }
@@ -323,6 +313,9 @@ a.chip {
 .top_0 {
 	top: 0;
 }
+.right_0 {
+	right: 0;
+}
 .p_xs2 {
 	padding: var(--space_xs2);
 }
@@ -344,8 +337,14 @@ a.chip {
 .pl_lg {
 	padding-left: var(--space_lg);
 }
-.pl_xl4 {
-	padding-left: var(--space_xl4);
+.pl_xl {
+	padding-left: var(--space_xl);
+}
+.pl_xl2 {
+	padding-left: var(--space_xl2);
+}
+.pl_xl3 {
+	padding-left: var(--space_xl3);
 }
 .px_md {
 	padding-left: var(--space_md);
@@ -368,9 +367,6 @@ a.chip {
 }
 .mt_0 {
 	margin-top: 0;
-}
-.mt_sm {
-	margin-top: var(--space_sm);
 }
 .mt_md {
 	margin-top: var(--space_md);

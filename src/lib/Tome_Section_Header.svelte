@@ -3,44 +3,68 @@
 	import type {SvelteHTMLElements} from 'svelte/elements';
 	import {page} from '$app/state';
 	import {resolve} from '$app/paths';
-	import {slugify} from '@ryanatkn/belt/path.js';
 
 	import Hashlink from '$lib/Hashlink.svelte';
-	import {register_section_header_context} from '$lib/Tome_Section.svelte';
-	import {docs_links_context, type Docs_Link_Tag} from '$lib/docs_helpers.svelte.js';
+	import {
+		register_section_header_context,
+		section_depth_context,
+		section_id_context,
+	} from '$lib/Tome_Section.svelte';
+	import {docs_links_context, docs_slugify, type Docs_Link_Tag} from '$lib/docs_helpers.svelte.js';
 
 	const {
 		text,
-		tag = 'h3',
+		tag,
 		children,
 		...rest
 	}: // eslint-disable-next-line @typescript-eslint/no-duplicate-type-constituents
-	(SvelteHTMLElements['h3'] | SvelteHTMLElements['h4']) & {
+	(SvelteHTMLElements['h2'] | SvelteHTMLElements['h3'] | SvelteHTMLElements['h4']) & {
 		text: string;
 		tag?: Docs_Link_Tag;
 		children?: Snippet;
 	} = $props();
 
-	const slug = slugify(text);
+	const fragment = docs_slugify(text);
 
 	const register_section_header = register_section_header_context.get();
 	if (!register_section_header) {
 		throw Error('Tome_Section_Header must be a child of Tome_Section');
 	}
-	register_section_header(slug);
 
 	const docs_links = docs_links_context.get();
 
-	// Add section titles only if not on the root page.
-	// TODO make reactive?
+	// Auto-detect tag based on depth if not explicitly provided
+	const depth = section_depth_context.get();
+	const final_tag = tag ?? (depth === 1 ? 'h2' : depth === 2 ? 'h3' : 'h4');
+
+	// Get own section's ID from context
+	const my_section_id = section_id_context.get();
+
+	// Register with parent section to get parent's ID back
+	const parent_section_id = register_section_header(fragment);
+
+	// Register with docs_links using own section ID and parent section ID
+	let id: string | undefined;
 	if (page.url.pathname !== resolve(docs_links.root_path as any)) {
-		const id = docs_links.add(slug, text, page.url.pathname, tag);
-		onDestroy(() => docs_links.remove(id));
+		id = docs_links.add(
+			fragment,
+			text,
+			page.url.pathname,
+			final_tag,
+			depth,
+			parent_section_id,
+			my_section_id,
+		);
 	}
+
+	// Cleanup on unmount
+	onDestroy(() => {
+		if (id) docs_links.remove(id);
+	});
 </script>
 
 <header>
-	<svelte:element this={tag} {...rest} class:tome_section_header={true}>
+	<svelte:element this={final_tag} {...rest} class:tome_section_header={true}>
 		<div class="flex_1">
 			{#if children}
 				{@render children()}
@@ -48,7 +72,7 @@
 				{text}
 			{/if}
 		</div>
-		<Hashlink {slug} />
+		<Hashlink {fragment} />
 	</svelte:element>
 </header>
 

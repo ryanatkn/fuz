@@ -2,7 +2,7 @@
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
 	let {
-		placeholder = 'Search identifiers...',
+		placeholder = 'search identifiers and modules...',
 		total_count,
 		result_count,
 		search_query = $bindable(),
@@ -18,14 +18,29 @@
 		total_count === 1 ? `${total_count} identifier` : `${total_count} identifiers`,
 	);
 	const result_text = $derived(
-		result_count === 1 ? `${result_count} result` : `${result_count} results`,
+		result_count === 1 ? `${result_count} match found` : `${result_count} matches found`,
 	);
 	const has_search = $derived(search_query.trim().length > 0);
 </script>
 
-<input {...rest} type="search" {placeholder} bind:value={search_query} />
+<label class="display_block position_relative">
+	<input {...rest} type="search" {placeholder} bind:value={search_query} />
+	{#if has_search}
+		<button
+			type="button"
+			class="plain icon_button position_absolute right_0 top_0"
+			onclick={() => {
+				search_query = '';
+			}}
+			title="clear search"
+			aria-label="clear search"
+		>
+			🗙
+		</button>
+	{/if}
+</label>
 
-<p class="mt_sm">
+<p>
 	{total_text}
 	{#if has_search && result_count !== undefined}
 		· {result_text}

@@ -51,10 +51,7 @@ const ts_extract_modifiers = (
 /**
  * Infer declaration kind from symbol and node.
  */
-export const ts_infer_declaration_kind = (
-	symbol: ts.Symbol,
-	node: ts.Node,
-): Identifier_Kind | null => {
+export const ts_infer_declaration_kind = (symbol: ts.Symbol, node: ts.Node): Identifier_Kind => {
 	// Check symbol flags
 	if (symbol.flags & ts.SymbolFlags.Class) return 'class';
 	if (symbol.flags & ts.SymbolFlags.Function) return 'function';
@@ -244,13 +241,29 @@ export const ts_extract_class_info = (
 	// Extract members with full metadata
 	identifier.members = [];
 	for (const member of node.members) {
-		if (ts.isPropertyDeclaration(member) || ts.isMethodDeclaration(member)) {
-			const member_name = ts.isIdentifier(member.name) ? member.name.text : member.name.getText();
+		if (
+			ts.isPropertyDeclaration(member) ||
+			ts.isMethodDeclaration(member) ||
+			ts.isConstructorDeclaration(member)
+		) {
+			const is_constructor = ts.isConstructorDeclaration(member);
+			const member_name = is_constructor
+				? 'constructor'
+				: ts.isIdentifier(member.name)
+					? member.name.text
+					: member.name.getText();
 			if (!member_name) continue;
+
+			// Skip private fields (those starting with #)
+			if (member_name.startsWith('#')) continue;
 
 			const member_identifier: Identifier_Json = {
 				name: member_name,
-				kind: ts.isMethodDeclaration(member) ? 'function' : 'variable',
+				kind: is_constructor
+					? 'constructor'
+					: ts.isMethodDeclaration(member)
+						? 'function'
+						: 'variable',
 			};
 
 			// Extract visibility and modifiers
@@ -259,26 +272,87 @@ export const ts_extract_class_info = (
 				member_identifier.modifiers = modifier_flags;
 			}
 
-			// Extract type information
-			try {
-				if (ts.isPropertyDeclaration(member) && member.type) {
-					member_identifier.type_signature = member.type.getText();
-				} else if (ts.isMethodDeclaration(member)) {
-					// For methods, get full signature
-					const member_symbol = checker.getSymbolAtLocation(member.name);
-					if (member_symbol) {
-						const member_type = checker.getTypeOfSymbolAtLocation(member_symbol, member);
-						member_identifier.type_signature = checker.typeToString(member_type);
-					}
-				}
-			} catch (_err) {
-				// Ignore: Type checker may fail on complex member signatures
-			}
-
 			// Extract TSDoc
 			const member_tsdoc = tsdoc_parse(member, node.getSourceFile());
 			if (member_tsdoc) {
 				member_identifier.doc_comment = member_tsdoc.text;
+			}
+
+			// Extract type information and parameters for methods and constructors
+			try {
+				if (ts.isPropertyDeclaration(member) && member.type) {
+					member_identifier.type_signature = member.type.getText();
+				} else if (ts.isMethodDeclaration(member) || ts.isConstructorDeclaration(member)) {
+					let signatures: ReadonlyArray<ts.Signature> = [];
+
+					if (is_constructor) {
+						// For constructors, get construct signatures from the class symbol
+						const class_symbol = checker.getSymbolAtLocation(node.name!);
+						if (class_symbol) {
+							const class_type = checker.getTypeOfSymbolAtLocation(class_symbol, node);
+							signatures = class_type.getConstructSignatures();
+						}
+					} else {
+						// For methods, get call signatures from the method symbol
+						const member_symbol = checker.getSymbolAtLocation(member.name);
+						if (member_symbol) {
+							const member_type = checker.getTypeOfSymbolAtLocation(member_symbol, member);
+							signatures = member_type.getCallSignatures();
+						}
+					}
+
+					if (signatures.length > 0) {
+						const sig = signatures[0]!;
+
+						// Extract type signature for both constructors and methods
+						member_identifier.type_signature = checker.signatureToString(sig);
+
+						// For methods (but not constructors), also extract return info separately
+						if (!is_constructor) {
+							// Extract return type for methods
+							const return_type = checker.getReturnTypeOfSignature(sig);
+							member_identifier.return_type = checker.typeToString(return_type);
+
+							// Extract return description from TSDoc
+							if (member_tsdoc?.returns) {
+								member_identifier.return_description = member_tsdoc.returns;
+							}
+						}
+
+						// Extract parameters with descriptions and default values
+						member_identifier.parameters = sig.parameters.map((param) => {
+							const param_decl = param.valueDeclaration;
+							const param_type = checker.getTypeOfSymbolAtLocation(param, param_decl!);
+
+							// Get TSDoc description for this parameter
+							const description = member_tsdoc?.params.get(param.name);
+
+							// Extract default value from AST
+							let default_value: string | undefined;
+							if (param_decl && ts.isParameter(param_decl) && param_decl.initializer) {
+								default_value = param_decl.initializer.getText();
+							}
+
+							return {
+								name: param.name,
+								type: checker.typeToString(param_type),
+								optional: !!(param_decl && ts.isParameter(param_decl) && param_decl.questionToken),
+								description,
+								default_value,
+							};
+						});
+
+						// Extract throws and since from TSDoc (for both methods and constructors)
+						if (member_tsdoc?.throws?.length) {
+							member_identifier.throws = member_tsdoc.throws;
+						}
+						if (member_tsdoc?.since) {
+							member_identifier.since = member_tsdoc.since;
+						}
+					}
+				}
+			} catch (_err) {
+				// Ignore: Type checker may fail on complex member signatures
 			}
 
 			identifier.members.push(member_identifier);
@@ -307,14 +381,65 @@ export const ts_extract_variable_info = (
 
 /**
  * Extract module-level comment.
+ * Only accepts JSDoc/TSDoc comments (`/** ... *\/`) that have a blank line separating them
+ * from the following statement. Module comments can appear after imports.
  */
 export const ts_extract_module_comment = (source_file: ts.SourceFile): string | undefined => {
 	const full_text = source_file.getFullText();
-	const leading_comments = ts.getLeadingCommentRanges(full_text, 0);
-	if (!leading_comments?.length) return undefined;
 
-	const first_comment = leading_comments[0]!;
-	let text = full_text.substring(first_comment.pos, first_comment.end);
+	// Check for comments at the start of the file (before any statements)
+	const leading_comments = ts.getLeadingCommentRanges(full_text, 0);
+	if (leading_comments?.length) {
+		for (const comment of leading_comments) {
+			const comment_text = full_text.substring(comment.pos, comment.end);
+			if (!comment_text.trimStart().startsWith('/**')) continue;
+
+			// Check if there's a blank line after this comment
+			const first_statement = source_file.statements[0];
+			if (first_statement) {
+				const between = full_text.substring(comment.end, first_statement.getStart());
+				if (between.includes('\n\n')) {
+					return extract_and_clean_jsdoc(full_text, comment);
+				}
+			} else {
+				// No statements, just return the comment
+				return extract_and_clean_jsdoc(full_text, comment);
+			}
+		}
+	}
+
+	// Check for comments before each statement (e.g., after imports)
+	for (const statement of source_file.statements) {
+		const statement_start = statement.getFullStart();
+		const statement_pos = statement.getStart();
+
+		// Get comments in the trivia before this statement
+		const comments = ts.getLeadingCommentRanges(full_text, statement_start);
+		if (!comments?.length) continue;
+
+		for (const comment of comments) {
+			const comment_text = full_text.substring(comment.pos, comment.end);
+			if (!comment_text.trimStart().startsWith('/**')) continue;
+
+			// Check if there's a blank line between comment and statement
+			const between = full_text.substring(comment.end, statement_pos);
+			if (between.includes('\n\n')) {
+				return extract_and_clean_jsdoc(full_text, comment);
+			}
+		}
+	}
+
+	return undefined;
+};
+
+/**
+ * Extract and clean JSDoc comment text.
+ */
+const extract_and_clean_jsdoc = (
+	full_text: string,
+	comment: {pos: number; end: number},
+): string | undefined => {
+	let text = full_text.substring(comment.pos, comment.end);
 
 	// Clean comment markers
 	text = text

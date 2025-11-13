@@ -4,7 +4,7 @@
 	import type {Mdz_Node} from '$lib/mdz.js';
 	import Docs_Link from '$lib/Docs_Link.svelte';
 	import Mdz_Node_View from '$lib/Mdz_Node_View.svelte';
-	import {mdz_components_context} from '$lib/mdz_components.js';
+	import {mdz_components_context, mdz_elements_context} from '$lib/mdz_components.js';
 
 	const {
 		node,
@@ -12,18 +12,31 @@
 		node: Mdz_Node;
 	} = $props();
 
-	const components = mdz_components_context.get();
+	const components = mdz_components_context.get_maybe();
+	const elements = mdz_elements_context.get_maybe();
 </script>
 
-{#snippet render_children(children: Array<Mdz_Node>)}
-	{#each children as child (child)}<Mdz_Node_View node={child} />{/each}
+{#snippet render_children(nodes: Array<Mdz_Node>)}
+	<!-- TODO @many currently not using keys, what would be correct here? -->
+	{#each nodes as node (node)}<Mdz_Node_View {node} />{/each}
 {/snippet}
 
-{#if node.type === 'Component'}
-	{@const Component = components[node.name]}
+{#if node.type === 'Element'}
+	{@const element_config = elements?.get(node.name)}
+	{#if element_config !== undefined}
+		<svelte:element this={node.name}>
+			{#if node.children.length > 0}
+				{@render render_children(node.children)}
+			{/if}
+		</svelte:element>
+	{:else}
+		<code class="color_c_5">&lt;{node.name} /&gt;</code>
+	{/if}
+{:else if node.type === 'Component'}
+	{@const Component = components?.get(node.name)}
 	{#if Component}
 		<Component>
-			{#if node.children}
+			{#if node.children.length > 0}
 				{@render render_children(node.children)}
 			{/if}
 		</Component>

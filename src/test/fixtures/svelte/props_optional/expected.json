@@ -1,0 +1,25 @@
+{
+	"name": "Props_Optional",
+	"kind": "component",
+	"props": [
+		{
+			"name": "id",
+			"type": "string",
+			"optional": false,
+			"description": "Required prop"
+		},
+		{
+			"name": "label",
+			"type": "string",
+			"optional": true,
+			"description": "Optional prop"
+		},
+		{
+			"name": "enabled",
+			"type": "boolean",
+			"optional": true,
+			"description": "Optional with default value"
+		}
+	],
+	"source_line": 1
+}

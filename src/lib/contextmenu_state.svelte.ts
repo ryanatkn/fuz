@@ -311,7 +311,7 @@ export class Contextmenu_State {
 	 * @initializes
 	 */
 	add_entry(run: () => Contextmenu_Run, disabled: () => boolean = () => false): Entry_State {
-		const menu = contextmenu_submenu_context.maybe_get() ?? this.root_menu;
+		const menu = contextmenu_submenu_context.get_maybe() ?? this.root_menu;
 		const entry = new Entry_State(menu, run, disabled);
 		menu.items = [...menu.items, entry];
 		// TODO messy, runs more than needed
@@ -325,7 +325,7 @@ export class Contextmenu_State {
 	 * @initializes
 	 */
 	add_submenu(): Submenu_State {
-		const menu = contextmenu_submenu_context.maybe_get() ?? this.root_menu;
+		const menu = contextmenu_submenu_context.get_maybe() ?? this.root_menu;
 		const submenu = new Submenu_State(menu, menu.depth + 1);
 		menu.items = [...menu.items, submenu];
 		contextmenu_submenu_context.set(submenu);
@@ -346,7 +346,7 @@ let cache_key_counter = 0;
 
 /**
  * Creates an attachment that sets up contextmenu behavior on an element.
- * @param params - Contextmenu parameters or nullish to disable
+ * @param params Contextmenu parameters or nullish to disable
  */
 export const contextmenu_attachment =
 	<T extends Contextmenu_Params, U extends T | Array<T>>(
@@ -372,7 +372,7 @@ export const contextmenu_attachment =
 
 const CONTEXTMENU_OPEN_VIBRATE_DURATION = 17;
 
-export interface Open_Contextmenu_Options {
+export interface Contextmenu_Open_Options {
 	link_enabled?: boolean;
 	text_enabled?: boolean;
 	separator_enabled?: boolean;
@@ -382,19 +382,19 @@ export interface Open_Contextmenu_Options {
 /**
  * Opens the contextmenu, if appropriate,
  * querying the menu items from the DOM starting at the event target.
- * @param target - the leaf element from which to open the contextmenu
- * @param x - the page X coordinate at which to open the contextmenu, typically the mouse `pageX`
- * @param y - the page Y coordinate at which to open the contextmenu, typically the mouse `pageY`
- * @param contextmenu - the contextmenu store
- * @param options - optional configuration for filtering entries and haptic feedback
+ * @param target the leaf element from which to open the contextmenu
+ * @param x the page X coordinate at which to open the contextmenu, typically the mouse `pageX`
+ * @param y the page Y coordinate at which to open the contextmenu, typically the mouse `pageY`
+ * @param contextmenu the contextmenu store
+ * @param options optional configuration for filtering entries and haptic feedback
  * @returns a boolean indicating if the menu was opened or not
  */
-export const open_contextmenu = (
+export const contextmenu_open = (
 	target: HTMLElement | SVGElement,
 	x: number,
 	y: number,
 	contextmenu: Contextmenu_State,
-	options?: Open_Contextmenu_Options,
+	options?: Contextmenu_Open_Options,
 ): boolean => {
 	const {
 		link_enabled = true,
@@ -403,7 +403,7 @@ export const open_contextmenu = (
 		vibrate = true,
 	} = options ?? EMPTY_OBJECT;
 
-	const params = query_contextmenu_params(target)?.filter(
+	const params = contextmenu_query_params(target)?.filter(
 		(p) =>
 			typeof p === 'function' ||
 			((p.snippet !== 'link' || link_enabled) &&
@@ -427,7 +427,7 @@ export const open_contextmenu = (
 	return true;
 };
 
-const query_contextmenu_params = (
+const contextmenu_query_params = (
 	target: HTMLElement | SVGElement,
 ): null | Array<Contextmenu_Params> => {
 	let params: null | Array<Contextmenu_Params> = null;
@@ -489,12 +489,12 @@ const non_scoped_roots: Set<symbol> = new Set();
  * Registers a contextmenu root and warns if multiple non-scoped roots are detected.
  * Only active in development mode. Automatically handles cleanup on unmount.
  *
- * @param get_scoped - Getter function that returns the current scoped value
+ * @param get_scoped Getter function that returns the current scoped value
  */
 export const contextmenu_check_global_root = (get_scoped: () => boolean): void => {
-	const id = Symbol('contextmenu_root');
-
 	$effect(() => {
+		const id = Symbol('contextmenu_root');
+
 		if (!get_scoped()) {
 			// Register as global (non-scoped)
 			non_scoped_roots.add(id);

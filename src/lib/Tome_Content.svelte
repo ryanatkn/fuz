@@ -1,12 +1,11 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
-	import {slugify} from '@ryanatkn/belt/path.js';
 	import {page} from '$app/state';
 	import {resolve} from '$app/paths';
 
 	import Tome_Header from '$lib/Tome_Header.svelte';
 	import {tome_context, type Tome} from '$lib/tome.js';
-	import {DOCS_PATH_DEFAULT, docs_links_context} from '$lib/docs_helpers.svelte.js';
+	import {DOCS_PATH_DEFAULT, docs_links_context, docs_slugify} from '$lib/docs_helpers.svelte.js';
 	import {intersect} from '$lib/intersect.svelte.js';
 
 	const {
@@ -25,7 +24,7 @@
 
 	tome_context.set(tome); // TODO make reactive?
 
-	const slug = slugify(tome.name);
+	const fragment = docs_slugify(tome.name);
 
 	const at_root = $derived(page.url.pathname === resolve(docs_path as any));
 </script>
@@ -36,9 +35,9 @@
 		at_root
 			? ({intersecting}) => {
 					if (intersecting) {
-						docs_links.slugs_onscreen.add(slug);
+						docs_links.fragments_onscreen.add(fragment);
 					} else {
-						docs_links.slugs_onscreen.delete(slug);
+						docs_links.fragments_onscreen.delete(fragment);
 					}
 				}
 			: null,
@@ -51,9 +50,9 @@
 				? null
 				: ({intersecting}) => {
 						if (intersecting) {
-							docs_links.slugs_onscreen.add(slug);
+							docs_links.fragments_onscreen.add(fragment);
 						} else {
-							docs_links.slugs_onscreen.delete(slug);
+							docs_links.fragments_onscreen.delete(fragment);
 						}
 					},
 		)}

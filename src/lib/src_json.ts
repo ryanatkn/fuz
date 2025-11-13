@@ -17,6 +17,10 @@ export interface Module_Json {
 	path: string;
 	identifiers?: Array<Identifier_Json>;
 	module_comment?: string;
+	/** Module paths (relative to src/lib) that this module imports. */
+	dependencies?: Array<string>;
+	/** Module paths (relative to src/lib) that import this module. */
+	dependents?: Array<string>;
 }
 
 export type Identifier_Kind =
@@ -24,6 +28,7 @@ export type Identifier_Kind =
 	| 'function'
 	| 'variable'
 	| 'class'
+	| 'constructor'
 	| 'component'
 	| 'json'
 	| 'css';
@@ -33,7 +38,7 @@ export type Identifier_Kind =
  */
 export interface Identifier_Json {
 	name: string;
-	kind: Identifier_Kind | null;
+	kind: Identifier_Kind;
 	doc_comment?: string;
 	type_signature?: string;
 	/** TypeScript modifiers like `readonly`, `private`, or `static`. */

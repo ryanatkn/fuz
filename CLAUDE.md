@@ -131,6 +131,7 @@ Documentation components:
 
 - csp - Content Security Policy utilities (`src/lib/csp.ts`)
 - logos - logo and branding helpers (`src/lib/logos.ts`)
+- mdz - minimal Markdown+TSDoc parser for API documentation (`src/lib/mdz.ts`)
 
 #### Components
 
@@ -151,7 +152,8 @@ overlays and dialogs:
 - `Dialog` - modal dialog component
 - `Dialogs` - multi-dialog queue manager (experimental)
 - `Teleport` - portal/teleport component
-- `Contextmenu` - context menu system (`Contextmenu*.svelte`)
+- `Contextmenu` - context menu system (`Contextmenu_Root`, `Contextmenu_Entry`,
+  `Contextmenu_Link_Entry`, `Contextmenu_Submenu`, etc.)
 
 forms and inputs:
 
@@ -182,6 +184,7 @@ documentation:
 - `Tome_Content`, `Tome_Header`, `Tome_Section` - tome layout components
 - `Package_Detail` - package information display
 - `Package_Summary` - package summary card
+- `Mdz` - renders mdz (minimal Markdown+TSDoc) content with custom components
 
 utilities:
 
@@ -196,6 +199,7 @@ core systems:
 - `docs_helpers.svelte.ts` - docs navigation and linking
 - `themer.svelte.ts` - theme and color scheme management
 - `context_helpers.ts` - Svelte context utilities
+- `mdz.ts` - minimal Markdown+TSDoc parser for API docs
 
 component helpers:
 
@@ -225,7 +229,7 @@ TypeScript and Svelte analysis:
 browser and DOM:
 
 - `storage.ts` - localStorage utilities
-- `intersect.ts` - Intersection Observer utilities
+- `intersect.svelte.ts` - Svelte 5 attachment for IntersectionObserver
 - `dimensions.svelte.ts` - dimension tracking
 - `rune_helpers.svelte.ts` - Svelte 5 rune utilities
 - `helpers.ts` - general utilities (`render_value_to_string`)
@@ -263,11 +267,9 @@ for validation and code generation.
 - formatting - Prettier with tabs, 100 char width
 - Node - requires >=22.15
 - tests - located in `src/test/` (not co-located with source)
-  - mdz tests use file-based fixtures in `src/test/fixtures/mdz/`
-  - tsdoc tests use file-based fixtures in `src/test/fixtures/tsdoc/`
-  - each fixture: directory with input file (`input.mdz` or `input.ts`) and
-    `expected.json`
-  - regenerate with `gro src/test/fixtures/update` (updates both mdz and tsdoc)
+  - fixture-based tests in `src/test/fixtures/` (mdz, tsdoc, ts, svelte)
+  - each fixture: directory with input file and `expected.json`
+  - regenerate with `gro src/test/fixtures/update` (updates all fixture types)
   - IMPORTANT: NEVER manually create or edit `expected.json` files - only create
     input files and run the update task to generate the JSON
 
@@ -293,11 +295,22 @@ projects:
 
 Uses a standardized context pattern via `context_helpers.ts`:
 
+Core:
+
 - `themer_context` - theme state
+- `pkg_context` - package API metadata
+
+Documentation:
+
 - `tomes_context` - available documentation
 - `tome_context` - current documentation page
 - `docs_links_context` - documentation navigation links
-- `pkg_context` - package API metadata
+- `mdz_components_context` - custom mdz components
+
+Contextmenu:
+
+- `contextmenu_context`, `contextmenu_submenu_context`,
+  `contextmenu_dimensions_context`
 
 ### Theming
 
@@ -308,24 +321,124 @@ Built on Moss CSS custom properties:
 - `Color_Scheme_Input` and `Theme_Input` for user theme selection
 - syncs with localStorage and system preferences
 
-### Documentation
+### Documentation system
 
-Tome system, alternative to "stories":
+Fuz provides a comprehensive documentation system for library projects,
+combining manual documentation (tomes) with auto-generated API docs.
 
-- each doc is a `+page.svelte` wrapping content in `Tome_Content`
+#### Docs layout and navigation
+
+The `<Docs>` component provides the full documentation layout:
+
+- three-column layout: primary nav (header), secondary nav (sidebar), tertiary
+  nav (on-page links)
+- responsive: sidebars collapse on mobile
+- managed contexts: `tomes_context`, `docs_links_context`
+
+Usage in Fuz:
+
+```svelte
+<!-- src/routes/docs/+layout.svelte -->
+<script>
+  import {Docs} from '@ryanatkn/fuz/Docs.svelte';
+  import {tomes} from './tomes.js';
+  import {pkg} from './pkg.js';
+</script>
+
+<Docs {tomes} {pkg}>
+  {@render children()}
+</Docs>
+```
+
+For consumer projects (like Moss):
+
+- same setup, just import your local tomes and pkg
+- optional `breadcrumb_children` snippet for branding
+
+#### Tomes (manual documentation)
+
+Tome system, alternative to "stories" for component docs:
+
+- each doc is a `+page.svelte` wrapping content in `<Tome_Content>`
 - central registry in `tomes.ts` defines all available docs as data
-- `Docs_Links` class manages in-page navigation
+- each tome has: `name`, `category`, `component`, `related`
+- categories: "guide", "helpers", "components"
+- `Docs_Links` class manages in-page navigation (tertiary nav)
 - related links connect documentation
 
-### API documentation
+Creating a tome:
 
-Auto-generated documentation from TypeScript/Svelte source:
+1. **Define in registry**:
+   ```typescript
+   // src/routes/docs/tomes.ts
+   export const tomes: Tome[] = [
+     {
+       name: "my_component",
+       category: "components",
+       component: lazy(() => import("./my_component/+page.svelte")),
+       related: ["other_component", "guide"],
+     },
+   ];
+   ```
 
-- run `gro gen` to analyze source and generate `package.ts`
-- `pkg_context` provides access to the `Pkg` instance in SvelteKit routes
-- `/docs/api` route renders searchable identifier list
-- `/docs/api/[module_path]` routes render per-module documentation
-- full TSDoc support including `@param`, `@returns`, `@example`, etc.
+2. **Create page**:
+   ```svelte
+   <!-- src/routes/docs/my_component/+page.svelte -->
+   <script>
+     import {Tome_Content} from '@ryanatkn/fuz/Tome_Content.svelte';
+     import {get_tome_by_name} from '@ryanatkn/fuz/tome.js';
+     const tome = get_tome_by_name('my_component');
+   </script>
+
+   <Tome_Content {tome}>
+     <section>
+       <p>Documentation content...</p>
+     </section>
+   </Tome_Content>
+   ```
+
+#### API documentation (auto-generated)
+
+Auto-generated documentation from TypeScript/Svelte source with full TSDoc
+support.
+
+Setup for consumer projects (opt-in):
+
+1. **Setup generation**:
+   ```typescript
+   // src/routes/package.gen.ts
+   export * from "@ryanatkn/fuz/package.gen.js";
+   ```
+
+2. **Create API index route**:
+   ```svelte
+   <!-- src/routes/docs/api/+page.svelte -->
+   <script>
+     import {Api_Index} from '@ryanatkn/fuz/Api_Index.svelte';
+   </script>
+   <Api_Index />
+   ```
+
+3. **Create module detail route**:
+   ```svelte
+   <!-- src/routes/docs/api/[...module_path]/+page.svelte -->
+   <script>
+     import {Api_Module} from '@ryanatkn/fuz/Api_Module.svelte';
+     const {params} = $props();
+   </script>
+   <Api_Module module_path={params.module_path} />
+   ```
+
+4. **Run generator**: `gro gen` to create `package.ts`
+
+Composable building blocks (for custom layouts):
+
+- `api_search.svelte.ts` - search/filter state management
+  - `create_identifier_search(pkg)` - for API index
+  - `create_module_identifier_search(identifiers)` - for module pages
+- `Api_Identifier_List.svelte` - renders filtered identifier list
+- `Docs_Search.svelte` - search input UI
+- use with `Tome_Content`, `Tome_Section`, etc. for custom composition
 
 ## Notes
 

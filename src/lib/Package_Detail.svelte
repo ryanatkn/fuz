@@ -164,9 +164,11 @@
 						class:json={module_is_json(module.path)}
 					>
 						<div class="module_content">
-							<Module_Link module_path={module.path}>
-								{module.path}
-							</Module_Link>
+							<span class="font_size_xl">
+								<Module_Link module_path={module.path}>
+									{module.path}
+								</Module_Link>
+							</span>
 							{#if module.identifiers.length > 0}
 								<ul class="identifiers unstyled">
 									{#each module.identifiers as identifier (identifier.name)}
@@ -266,11 +268,12 @@
 		border-radius: var(--border_radius_sm);
 		padding: var(--space_xs);
 	}
+	/* TODO probably add variables/classes for these */
 	.ts {
 		--link_color: var(--color_a_5);
 	}
 	.svelte {
-		--link_color: var(--color_e_5);
+		--link_color: var(--color_h_5);
 	}
 	.css {
 		--link_color: var(--color_b_5);

@@ -1,12 +1,13 @@
 import {test, assert, describe, beforeAll} from 'vitest';
 import ts from 'typescript';
 
-import {tsdoc_parse} from '$lib/tsdoc_helpers.js';
 import {
 	load_fixtures,
 	validate_tsdoc_structure,
+	find_and_parse_tsdoc,
 	type Tsdoc_Fixture,
 } from './fixtures/tsdoc/tsdoc_test_helpers.js';
+import {normalize_json} from './test_helpers.js';
 
 let fixtures: Array<Tsdoc_Fixture> = [];
 
@@ -26,44 +27,13 @@ describe('tsdoc parser (fixture-based)', () => {
 				ts.ScriptKind.TS,
 			);
 
-			// Find the exported declaration
-			let result = null;
-			for (const statement of source_file.statements) {
-				if (ts.isExportAssignment(statement)) {
-					result = tsdoc_parse(statement.expression, source_file);
-					break;
-				} else if (
-					ts.isFunctionDeclaration(statement) ||
-					ts.isVariableStatement(statement) ||
-					ts.isTypeAliasDeclaration(statement) ||
-					ts.isInterfaceDeclaration(statement) ||
-					ts.isClassDeclaration(statement)
-				) {
-					const modifiers = ts.getModifiers(statement);
-					const is_exported = modifiers?.some((mod) => mod.kind === ts.SyntaxKind.ExportKeyword);
+			// Find and parse the exported declaration
+			const result = find_and_parse_tsdoc(source_file);
 
-					if (is_exported) {
-						result = tsdoc_parse(statement, source_file);
-						break;
-					}
-				}
-			}
-
-			// Compare with expected (normalize by removing undefined values)
-			const normalize = (obj: any) => {
-				if (obj === null || obj === undefined) return null; // Treat both as null for comparison
-				const normalized: any = {};
-				for (const [key, value] of Object.entries(obj)) {
-					if (value !== undefined) {
-						normalized[key] = value;
-					}
-				}
-				return normalized;
-			};
-
+			// Compare with expected (normalize to match JSON serialization)
 			assert.deepEqual(
-				normalize(result),
-				normalize(fixture.expected),
+				normalize_json(result),
+				normalize_json(fixture.expected),
 				`Fixture "${fixture.name}" failed`,
 			);
 		}

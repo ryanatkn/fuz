@@ -37,20 +37,12 @@
 
 <!-- type signature -->
 {#if identifier.type_signature}
-	<p>
-		<Code
-			content={identifier.type_signature}
-			lang="ts"
-			code_attrs={{class: 'white_space_pre_wrap'}}
-		/>
-	</p>
+	<Code content={identifier.type_signature} lang="ts" class="mb_lg" />
 {/if}
 
 <!-- documentation -->
 {#if identifier.has_documentation}
-	<div class="doc-comment">
-		<Mdz content={identifier.doc_comment!} />
-	</div>
+	<Mdz content={identifier.doc_comment!} />
 {/if}
 
 <!-- parameters -->
@@ -64,9 +56,7 @@
 					>
 				</h4>
 				{#if param.description}
-					<div class="param-description">
-						<Mdz content={param.description} />
-					</div>
+					<Mdz content={param.description} />
 				{/if}
 				<div class="row gap_md">
 					<strong>type</strong>
@@ -79,12 +69,7 @@
 						{/if}
 						{#if param.default_value}
 							<strong>default</strong>
-							<Code
-								inline
-								content={param.default_value}
-								lang="ts"
-								code_attrs={{class: 'white_space_pre_wrap'}}
-							/>
+							<Code content={param.default_value} lang="ts" />
 						{/if}
 					</div>
 				{/if}
@@ -104,9 +89,7 @@
 					>
 				</h4>
 				{#if prop.description}
-					<div class="prop-description">
-						<Mdz content={prop.description} />
-					</div>
+					<Mdz content={prop.description} />
 				{/if}
 				<div class="row gap_md mb_lg">
 					<strong>type</strong>
@@ -122,12 +105,7 @@
 						{/if}
 						{#if prop.default_value}
 							<strong>default</strong>
-							<Code
-								inline
-								content={prop.default_value}
-								lang="ts"
-								code_attrs={{class: 'white_space_pre_wrap'}}
-							/>
+							<Code content={prop.default_value} lang="ts" />
 						{/if}
 					</div>
 				{/if}
@@ -140,11 +118,9 @@
 {#if identifier.return_type}
 	<section>
 		<h4>returns</h4>
-		<Code content={identifier.return_type} lang="ts" code_attrs={{class: 'white_space_pre_wrap'}} />
+		<Code content={identifier.return_type} lang="ts" />
 		{#if identifier.return_description}
-			<div class="return-description">
-				<Mdz content={identifier.return_description} />
-			</div>
+			<Mdz content={identifier.return_description} />
 		{/if}
 	</section>
 {/if}
@@ -260,14 +236,16 @@
 			<section>
 				<h4><code>{member.name}</code></h4>
 				{#if member.doc_comment}
-					<div class="member-doc-comment">
-						<Mdz content={member.doc_comment} />
-					</div>
+					<Mdz content={member.doc_comment} />
 				{/if}
 				{#if member.type_signature}
 					<p class="row gap_md">
 						<strong>type</strong>
-						<Type_Link type={member.type_signature} />
+						<Type_Link
+							type={member.kind === 'constructor'
+								? `new ${member.type_signature}`
+								: member.type_signature}
+						/>
 					</p>
 				{/if}
 				{#if member.modifiers?.length}
@@ -275,6 +253,66 @@
 						{#each member.modifiers as modifier (modifier)}
 							<span class="chip">{modifier}</span>
 						{/each}
+					</div>
+				{/if}
+				<!-- parameters for methods and constructors -->
+				{#if member.parameters?.length}
+					<section>
+						<!-- <h5>parameters</h5> -->
+						{#each member.parameters as param (param)}
+							<section>
+								<h5>
+									<code
+										>{param.name}{#if param.optional}<strong>?</strong>{/if}</code
+									>
+								</h5>
+								{#if param.description}
+									<Mdz content={param.description} />
+								{/if}
+								<div class="row gap_md">
+									<strong>type</strong>
+									<Type_Link type={param.type} />
+								</div>
+								{#if param.optional || param.default_value}
+									<div class="row gap_md">
+										{#if param.optional}
+											<span class="chip">optional</span>
+										{/if}
+										{#if param.default_value}
+											<strong>default</strong>
+											<Code content={param.default_value} lang="ts" />
+										{/if}
+									</div>
+								{/if}
+							</section>
+						{/each}
+					</section>
+				{/if}
+				<!-- return type for methods -->
+				{#if member.return_type}
+					<div class="row gap_md">
+						<strong>returns</strong>
+						<Type_Link type={member.return_type} />
+					</div>
+					{#if member.return_description}
+						<Mdz content={member.return_description} />
+					{/if}
+				{/if}
+				<!-- throws for methods and constructors -->
+				{#if member.throws?.length}
+					<div>
+						<strong>throws</strong>
+						<ul>
+							{#each member.throws as thrown (thrown)}
+								<li>
+									{#if thrown.type}
+										<code>{thrown.type}</code> - {thrown.description}
+									{:else}
+										{thrown.description}
+									{/if}
+								</li>
+							{/each}
+						</ul>
 					</div>
 				{/if}
 			</section>
@@ -289,9 +327,7 @@
 			<section>
 				<h4><code>{prop.name}</code></h4>
 				{#if prop.doc_comment}
-					<div class="property-doc-comment">
-						<Mdz content={prop.doc_comment} />
-					</div>
+					<Mdz content={prop.doc_comment} />
 				{/if}
 				{#if prop.type_signature}
 					<div class="row gap_md">

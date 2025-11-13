@@ -1,0 +1,19 @@
+{
+	"name": "Props_Default_Values",
+	"kind": "component",
+	"props": [
+		{
+			"name": "color",
+			"type": "string",
+			"optional": true,
+			"description": "The color to use."
+		},
+		{
+			"name": "size",
+			"type": "number",
+			"optional": true,
+			"description": "The size of the component."
+		}
+	],
+	"source_line": 1
+}

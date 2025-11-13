@@ -23,7 +23,7 @@
  * ## Behavioral notes
  *
  * Due to TS Compiler API limitations:
- * - Preserves dash separator in `@param` descriptions: `@param x - desc` → `"- desc"`
+ * - Preserves dash separator in `@param` descriptions: `@param x desc` → `"- desc"`
  * - `@throws` tags have `{Type}` stripped by TS API; fallback regex extracts first word as error type
  * - TS API strips URL protocols from `@see` tag text; we use `getText()` to preserve original format including `{@link}` syntax
  *
@@ -70,8 +70,8 @@ export interface Tsdoc_Parsed_Comment {
  * - `@since` - version information
  * - `@mutates` - mutation documentation (non-standard)
  *
- * @param node - The TypeScript node to extract JSDoc from
- * @param source_file - Source file (used for extracting full` @see` tag text)
+ * @param node The TypeScript node to extract JSDoc from
+ * @param source_file Source file (used for extracting full` @see` tag text)
  */
 export const tsdoc_parse = (
 	node: ts.Node,
@@ -169,8 +169,8 @@ export const tsdoc_parse = (
  * Consolidates the common pattern of assigning TSDoc fields to identifiers,
  * with conditional assignment for array fields (only if non-empty).
  *
- * @param identifier - identifier object to update
- * @param tsdoc - parsed TSDoc comment (if available)
+ * @param identifier identifier object to update
+ * @param tsdoc parsed TSDoc comment (if available)
  * @mutates identifier - adds doc_comment, deprecated_message, examples, see_also, throws, since fields
  */
 export const tsdoc_apply_to_declaration = (

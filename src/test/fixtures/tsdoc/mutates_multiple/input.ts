@@ -1,8 +1,8 @@
 /**
  * Function with multiple mutation points.
  *
- * @param config - configuration object
- * @param state - state object
+ * @param config configuration object
+ * @param state state object
  * @mutates config - adds defaults for missing fields
  * @mutates state - updates status and timestamp fields
  */

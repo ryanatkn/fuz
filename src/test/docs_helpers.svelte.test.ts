@@ -1,12 +1,7 @@
 import {test, assert, describe, beforeEach} from 'vitest';
 import {flushSync} from 'svelte';
 
-import {
-	to_docs_path_info,
-	Docs_Links,
-	DOCS_PATH_DEFAULT,
-	reset_docs_link_order,
-} from '$lib/docs_helpers.svelte.js';
+import {to_docs_path_info, Docs_Links, DOCS_PATH_DEFAULT} from '$lib/docs_helpers.svelte.js';
 
 describe('to_docs_path_info', () => {
 	test('extracts path segment from pathname', () => {
@@ -44,7 +39,6 @@ describe('Docs_Links', () => {
 	let docs_links: Docs_Links;
 
 	beforeEach(() => {
-		reset_docs_link_order();
 		docs_links = new Docs_Links();
 	});
 
@@ -69,9 +63,9 @@ describe('Docs_Links', () => {
 			assert.strictEqual(instance.docs_links.length, 0);
 		});
 
-		test('initializes with empty slugs_onscreen set', () => {
+		test('initializes with empty fragments_onscreen set', () => {
 			const instance = new Docs_Links();
-			assert.strictEqual(instance.slugs_onscreen.size, 0);
+			assert.strictEqual(instance.fragments_onscreen.size, 0);
 		});
 	});
 
@@ -90,7 +84,7 @@ describe('Docs_Links', () => {
 			const link = docs_links.links.get(id);
 			assert.ok(link);
 			assert.strictEqual(link.id, id);
-			assert.strictEqual(link.slug, 'test-slug');
+			assert.strictEqual(link.fragment, 'test-slug');
 			assert.strictEqual(link.text, 'Test Title');
 			assert.strictEqual(link.tag, 'h3');
 			assert.strictEqual(link.order, 0);
@@ -110,11 +104,11 @@ describe('Docs_Links', () => {
 			flushSync();
 
 			assert.strictEqual(docs_links.docs_links.length, 1);
-			assert.strictEqual(docs_links.docs_links[0]!.slug, 'test-slug');
+			assert.strictEqual(docs_links.docs_links[0]!.fragment, 'test-slug');
 			assert.strictEqual(docs_links.docs_links[0]!.text, 'Test Title');
 		});
 
-		test('adding same slug twice creates two separate entries', () => {
+		test('adding same fragment twice creates two separate entries', () => {
 			const id1 = docs_links.add('test-slug', 'First Title', '/docs/test', 'h3');
 			flushSync();
 			const id2 = docs_links.add('test-slug', 'Updated Title', '/docs/test', 'h4');
@@ -131,7 +125,7 @@ describe('Docs_Links', () => {
 			assert.strictEqual(link2.order, 0); // Same slug = same order
 		});
 
-		test('adding same slug twice does not duplicate in docs_links array', () => {
+		test('adding same fragment twice does not duplicate in docs_links array', () => {
 			docs_links.add('test-slug', 'First Title', '/docs/test');
 			flushSync();
 			docs_links.add('test-slug', 'Updated Title', '/docs/test');
@@ -243,7 +237,7 @@ describe('Docs_Links', () => {
 			assert.strictEqual(docs_links.docs_links.length, 3);
 		});
 
-		test('simultaneous remove and add of same slug works correctly', () => {
+		test('simultaneous remove and add of same fragment works correctly', () => {
 			const oldId = docs_links.add('test-slug', 'Original', '/docs/test');
 			flushSync();
 
@@ -274,42 +268,42 @@ describe('Docs_Links', () => {
 		});
 	});
 
-	describe('slugs_onscreen', () => {
-		test('can add slug to slugs_onscreen', () => {
-			docs_links.slugs_onscreen.add('test-slug');
-			assert.ok(docs_links.slugs_onscreen.has('test-slug'));
-			assert.strictEqual(docs_links.slugs_onscreen.size, 1);
+	describe('fragments_onscreen', () => {
+		test('can add fragment to fragments_onscreen', () => {
+			docs_links.fragments_onscreen.add('test-slug');
+			assert.ok(docs_links.fragments_onscreen.has('test-slug'));
+			assert.strictEqual(docs_links.fragments_onscreen.size, 1);
 		});
 
-		test('can remove slug from slugs_onscreen', () => {
-			docs_links.slugs_onscreen.add('test-slug');
-			docs_links.slugs_onscreen.delete('test-slug');
-			assert.ok(!docs_links.slugs_onscreen.has('test-slug'));
-			assert.strictEqual(docs_links.slugs_onscreen.size, 0);
+		test('can remove fragment from fragments_onscreen', () => {
+			docs_links.fragments_onscreen.add('test-slug');
+			docs_links.fragments_onscreen.delete('test-slug');
+			assert.ok(!docs_links.fragments_onscreen.has('test-slug'));
+			assert.strictEqual(docs_links.fragments_onscreen.size, 0);
 		});
 
-		test('can add multiple slugs to slugs_onscreen', () => {
-			docs_links.slugs_onscreen.add('slug-1');
-			docs_links.slugs_onscreen.add('slug-2');
-			docs_links.slugs_onscreen.add('slug-3');
-			assert.strictEqual(docs_links.slugs_onscreen.size, 3);
+		test('can add multiple fragments to fragments_onscreen', () => {
+			docs_links.fragments_onscreen.add('slug-1');
+			docs_links.fragments_onscreen.add('slug-2');
+			docs_links.fragments_onscreen.add('slug-3');
+			assert.strictEqual(docs_links.fragments_onscreen.size, 3);
 		});
 
-		test('adding same slug twice does not duplicate', () => {
-			docs_links.slugs_onscreen.add('test-slug');
-			docs_links.slugs_onscreen.add('test-slug');
-			assert.strictEqual(docs_links.slugs_onscreen.size, 1);
+		test('adding same fragment twice does not duplicate', () => {
+			docs_links.fragments_onscreen.add('test-slug');
+			docs_links.fragments_onscreen.add('test-slug');
+			assert.strictEqual(docs_links.fragments_onscreen.size, 1);
 		});
 
-		test('slugs_onscreen is independent of links', () => {
+		test('fragments_onscreen is independent of links', () => {
 			const id = docs_links.add('slug-1', 'Title 1', '/docs/test');
-			docs_links.slugs_onscreen.add('slug-2');
+			docs_links.fragments_onscreen.add('slug-2');
 			flushSync();
 
 			assert.strictEqual(docs_links.links.size, 1);
-			assert.strictEqual(docs_links.slugs_onscreen.size, 1);
+			assert.strictEqual(docs_links.fragments_onscreen.size, 1);
 			assert.ok(docs_links.links.has(id));
-			assert.ok(docs_links.slugs_onscreen.has('slug-2'));
+			assert.ok(docs_links.fragments_onscreen.has('slug-2'));
 		});
 	});
 
@@ -323,23 +317,23 @@ describe('Docs_Links', () => {
 
 			// Should be sorted by order
 			assert.strictEqual(docs_links.docs_links.length, 3);
-			assert.strictEqual(docs_links.docs_links[0]!.slug, 'slug-a');
-			assert.strictEqual(docs_links.docs_links[1]!.slug, 'slug-b');
-			assert.strictEqual(docs_links.docs_links[2]!.slug, 'slug-c');
+			assert.strictEqual(docs_links.docs_links[0]!.fragment, 'slug-a');
+			assert.strictEqual(docs_links.docs_links[1]!.fragment, 'slug-b');
+			assert.strictEqual(docs_links.docs_links[2]!.fragment, 'slug-c');
 		});
 	});
 
-	describe('auto-generated IDs with slugs for keying', () => {
-		test('id and slug are separate fields', () => {
+	describe('auto-generated IDs with fragments for keying', () => {
+		test('id and fragment are separate fields', () => {
 			const id = docs_links.add('my-slug', 'My Title', '/docs/test');
 			flushSync();
 
 			const link = docs_links.docs_links[0]!;
 			assert.strictEqual(link.id, id);
-			assert.strictEqual(link.slug, 'my-slug');
+			assert.strictEqual(link.fragment, 'my-slug');
 		});
 
-		test('adding same slug twice creates separate entries with same order', () => {
+		test('adding same fragment twice creates separate entries with same order', () => {
 			const id1 = docs_links.add('slug-1', 'Original', '/docs/test');
 			flushSync();
 
@@ -361,7 +355,7 @@ describe('Docs_Links', () => {
 			assert.strictEqual(docs_links.links.size, 2);
 		});
 
-		test('different IDs with same slug coexist and maintain order', () => {
+		test('different IDs with same fragment coexist and maintain order', () => {
 			const id1 = docs_links.add('same-slug', 'Instance 1', '/docs/test');
 			const id2 = docs_links.add('same-slug', 'Instance 2', '/docs/test');
 			const id3 = docs_links.add('same-slug', 'Instance 3', '/docs/test');
@@ -370,9 +364,9 @@ describe('Docs_Links', () => {
 			assert.strictEqual(docs_links.links.size, 3);
 			assert.strictEqual(docs_links.docs_links.length, 3);
 
-			// All have same slug
-			const slugs = docs_links.docs_links.map((l) => l.slug);
-			assert.ok(slugs.every((s) => s === 'same-slug'));
+			// All have same fragment
+			const fragments = docs_links.docs_links.map((l) => l.fragment);
+			assert.ok(fragments.every((s) => s === 'same-slug'));
 
 			// But different IDs
 			const ids = new Set(docs_links.docs_links.map((l) => l.id));

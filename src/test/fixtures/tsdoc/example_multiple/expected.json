@@ -1,7 +1,7 @@
 {
 	"text": "Function with multiple usage examples.",
 	"params": {
-		"text": "- text to transform"
+		"text": "text to transform"
 	},
 	"examples": [
 		"capitalize('hello'); // \"HELLO\"",

@@ -2,6 +2,7 @@
 	import type {Snippet} from 'svelte';
 	import {onNavigate} from '$app/navigation';
 	import {innerWidth} from 'svelte/reactivity/window';
+	import {page} from '$app/state';
 	import type {Pkg} from '$lib/pkg.svelte.js';
 
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
@@ -11,7 +12,7 @@
 	import Docs_Tertiary_Nav from '$lib/Docs_Tertiary_Nav.svelte';
 	import Dialog from '$lib/Dialog.svelte';
 	import Docs_Footer from '$lib/Docs_Footer.svelte';
-	import {docs_links_context} from '$lib/docs_helpers.svelte.js';
+	import {Docs_Links, docs_links_context} from '$lib/docs_helpers.svelte.js';
 
 	interface Props {
 		tomes: Array<Tome>;
@@ -37,11 +38,11 @@
 		show_secondary_nav_dialog = show ?? !show_secondary_nav_dialog;
 	};
 
+	docs_links_context.set(new Docs_Links());
+
 	onNavigate(() => {
 		show_secondary_nav_dialog = false;
 	});
-
-	docs_links_context.set();
 </script>
 
 <svelte:window onhashchange={() => (show_secondary_nav_dialog = false)} />
@@ -60,7 +61,9 @@
 		</div>
 	{/if}
 	<main>
-		{@render children()}
+		{#key page.url.pathname}
+			{@render children()}
+		{/key}
 		<!-- TODO @many dialog navs -->
 		{#if !innerWidth.current || innerWidth.current > TERTIARY_NAV_BREAKPOINT}
 			<Docs_Tertiary_Nav {tomes} {tomes_by_name} />

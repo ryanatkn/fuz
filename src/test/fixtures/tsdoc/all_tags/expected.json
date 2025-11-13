@@ -1,8 +1,8 @@
 {
 	"text": "Comprehensive function demonstrating all TSDoc tags.\n\nThis function showcases the complete set of supported TSDoc features\nfor documentation generation.",
 	"params": {
-		"input": "- input value to process",
-		"options": "- configuration options"
+		"input": "input value to process",
+		"options": "configuration options"
 	},
 	"returns": "processed result",
 	"throws": [

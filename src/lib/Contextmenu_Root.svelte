@@ -24,7 +24,7 @@
 		contextmenu_context,
 		contextmenu_dimensions_context,
 		Contextmenu_State,
-		open_contextmenu,
+		contextmenu_open,
 		contextmenu_check_global_root,
 	} from '$lib/contextmenu_state.svelte.js';
 	import Contextmenu_Link_Entry from '$lib/Contextmenu_Link_Entry.svelte';
@@ -165,7 +165,7 @@
 			return;
 		}
 		if (
-			open_contextmenu(target, e.clientX + open_offset_x, e.clientY + open_offset_y, contextmenu, {
+			contextmenu_open(target, e.clientX + open_offset_x, e.clientY + open_offset_y, contextmenu, {
 				link_enabled: link_entry !== null,
 				text_enabled: text_entry !== null,
 				separator_enabled: separator_entry !== null,

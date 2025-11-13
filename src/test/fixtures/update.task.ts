@@ -1,13 +1,19 @@
 import type {Task} from '@ryanatkn/gro';
 
 export const task: Task = {
-	summary: 'generate all fixture expected.json files (mdz + tsdoc)',
+	summary: 'generate all fixture expected.json files (mdz + tsdoc + ts + svelte)',
 	run: async ({invoke_task, log}) => {
 		log.info('updating mdz fixtures...');
 		await invoke_task('src/test/fixtures/mdz/update');
 
 		log.info('updating tsdoc fixtures...');
 		await invoke_task('src/test/fixtures/tsdoc/update');
+
+		log.info('updating ts fixtures...');
+		await invoke_task('src/test/fixtures/ts/update');
+
+		log.info('updating svelte fixtures...');
+		await invoke_task('src/test/fixtures/svelte/update');
 
 		log.info('all fixtures updated!');
 	},
