@@ -9,7 +9,7 @@
 				"end": 10
 			},
 			{
-				"type": "Component",
+				"type": "Element",
 				"name": "span",
 				"children": [
 					{

@@ -22,25 +22,26 @@
 	{#each nodes as node}<Mdz_Node_View {node} />{/each}
 {/snippet}
 
-{#if node.type === 'Component'}
+{#if node.type === 'Element'}
 	{@const element_config = elements?.get(node.name)}
-	{@const Component = components?.get(node.name)}
 	{#if element_config !== undefined}
-		<!-- It's an HTML element -->
 		<svelte:element this={node.name}>
 			{#if node.children.length > 0}
 				{@render render_children(node.children)}
 			{/if}
 		</svelte:element>
-	{:else if Component}
-		<!-- It's a Svelte component -->
+	{:else}
+		<code class="color_c_5">&lt;{node.name} /&gt;</code>
+	{/if}
+{:else if node.type === 'Component'}
+	{@const Component = components?.get(node.name)}
+	{#if Component}
 		<Component>
 			{#if node.children.length > 0}
 				{@render render_children(node.children)}
 			{/if}
 		</Component>
 	{:else}
-		<!-- Not registered -->
 		<code class="color_c_5">&lt;{node.name} /&gt;</code>
 	{/if}
 {:else if node.type === 'Text'}

@@ -40,6 +40,7 @@ export type Mdz_Node =
 	| Mdz_Paragraph_Node
 	| Mdz_Hr_Node
 	| Mdz_Heading_Node
+	| Mdz_Element_Node
 	| Mdz_Component_Node;
 
 export interface Mdz_Base_Node {
@@ -101,9 +102,15 @@ export interface Mdz_Heading_Node extends Mdz_Base_Node {
 	children: Array<Mdz_Node>; // inline formatting allowed
 }
 
+export interface Mdz_Element_Node extends Mdz_Base_Node {
+	type: 'Element';
+	name: string; // HTML element name (e.g., 'div', 'span', 'code')
+	children: Array<Mdz_Node>;
+}
+
 export interface Mdz_Component_Node extends Mdz_Base_Node {
 	type: 'Component';
-	name: string; // Component name (e.g., 'Alert', 'Card')
+	name: string; // Svelte component name (e.g., 'Alert', 'Card')
 	children: Array<Mdz_Node>;
 }
 
@@ -175,12 +182,14 @@ export class Mdz_Parser {
 					paragraph_children.push(...this.#nodes);
 					this.#nodes.length = 0;
 				}
-				// Wrap accumulated nodes in paragraph (or add single component directly)
+				// Wrap accumulated nodes in paragraph (or add single tag directly)
 				if (paragraph_children.length > 0) {
-					if (this.#is_single_component(paragraph_children)) {
-						// Single component - add directly without paragraph wrapper (MDX convention)
-						const component = paragraph_children.find((n) => n.type === 'Component')!;
-						root_nodes.push(component);
+					if (this.#is_single_tag(paragraph_children)) {
+						// Single tag (component/element) - add directly without paragraph wrapper (MDX convention)
+						const tag = paragraph_children.find(
+							(n) => n.type === 'Component' || n.type === 'Element',
+						)!;
+						root_nodes.push(tag);
 					} else {
 						// Regular paragraph
 						root_nodes.push({
@@ -230,12 +239,12 @@ export class Mdz_Parser {
 			paragraph_children.push(...this.#nodes);
 		}
 
-		// Wrap remaining nodes in final paragraph if any (or add single component directly)
+		// Wrap remaining nodes in final paragraph if any (or add single tag directly)
 		if (paragraph_children.length > 0) {
-			if (this.#is_single_component(paragraph_children)) {
-				// Single component - add directly without paragraph wrapper (MDX convention)
-				const component = paragraph_children.find((n) => n.type === 'Component')!;
-				root_nodes.push(component);
+			if (this.#is_single_tag(paragraph_children)) {
+				// Single tag (component/element) - add directly without paragraph wrapper (MDX convention)
+				const tag = paragraph_children.find((n) => n.type === 'Component' || n.type === 'Element')!;
+				root_nodes.push(tag);
 			} else {
 				// Regular paragraph
 				root_nodes.push({
@@ -553,16 +562,17 @@ export class Mdz_Parser {
 	 * Parse component/element tag: `<TagName>content</TagName>` or `<TagName />`
 	 *
 	 * Formats:
-	 * - `<Alert>content</Alert>` - component/element with children
+	 * - `<Alert>content</Alert>` - Svelte component with children (uppercase first letter)
+	 * - `<div>content</div>` - HTML element with children (lowercase first letter)
 	 * - `<Alert />` - self-closing component/element
 	 *
 	 * Tag names must start with a letter and can contain letters, numbers, hyphens, underscores.
 	 *
 	 * Falls back to text if malformed or unclosed.
 	 *
-	 * TODO: Add attribute support like `<Alert status="error">`
+	 * TODO: Add attribute support like `<Alert status="error">` or `<div class="container">`
 	 */
-	#parse_tag(): Mdz_Component_Node | Mdz_Text_Node {
+	#parse_tag(): Mdz_Element_Node | Mdz_Component_Node | Mdz_Text_Node {
 		const start = this.#index;
 
 		// Save parent accumulation state to avoid polluting component children with parent's accumulated text
@@ -654,6 +664,11 @@ export class Mdz_Parser {
 			};
 		}
 
+		// Determine if this is a Component (uppercase) or Element (lowercase)
+		const first_char_code = tag_name.charCodeAt(0);
+		const is_component = first_char_code >= 65 && first_char_code <= 90; // A-Z
+		const node_type: 'Component' | 'Element' = is_component ? 'Component' : 'Element';
+
 		// Skip whitespace after tag name (for future attribute support)
 		while (
 			this.#index < this.#template.length &&
@@ -679,7 +694,7 @@ export class Mdz_Parser {
 			this.#nodes.push(...saved_nodes);
 
 			return {
-				type: 'Component',
+				type: node_type,
 				name: tag_name,
 				children: [],
 				start,
@@ -731,7 +746,7 @@ export class Mdz_Parser {
 				this.#nodes.push(...saved_nodes);
 
 				return {
-					type: 'Component',
+					type: node_type,
 					name: tag_name,
 					children,
 					start,
@@ -767,27 +782,27 @@ export class Mdz_Parser {
 	}
 
 	/**
-	 * Check if nodes represent a single component with only whitespace text nodes.
+	 * Check if nodes represent a single tag (component or element) with only whitespace text nodes.
 	 * Used to determine if paragraph wrapping should be skipped (MDX convention).
-	 * Returns true if there's exactly one Component node and all other nodes are whitespace-only Text nodes.
+	 * Returns true if there's exactly one Component/Element node and all other nodes are whitespace-only Text nodes.
 	 */
-	#is_single_component(nodes: Array<Mdz_Node>): boolean {
-		let found_component = false;
+	#is_single_tag(nodes: Array<Mdz_Node>): boolean {
+		let found_tag = false;
 
 		for (const node of nodes) {
-			if (node.type === 'Component') {
-				if (found_component) return false; // Multiple components
-				found_component = true;
+			if (node.type === 'Component' || node.type === 'Element') {
+				if (found_tag) return false; // Multiple tags
+				found_tag = true;
 			} else if (node.type === 'Text') {
 				// Allow only whitespace-only text nodes
 				if (node.content.trim() !== '') return false;
 			} else {
-				// Any other node type means not a single component
+				// Any other node type means not a single tag
 				return false;
 			}
 		}
 
-		return found_component;
+		return found_tag;
 	}
 
 	/**

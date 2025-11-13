@@ -21,13 +21,11 @@
 		</p>
 		<p>
 			The goal is to make a fully-featured Svelte UI library, but it'll take extra time to get
-			there. That lets us prioritize patterns like APIs above features, making it an interesting
-			project for learning and experimentation. If you're interested in using Fuz, helping out, or
-			just following along, see <Github_Link path="ryanatkn/fuz/blob/main/contributing.md" />.
-		</p>
-		<p>
-			These docs are a work in progress - for an overview see the
-			<Github_Link path="ryanatkn/fuz#readme">readme</Github_Link>.
+			there. That lets us prioritize design above features, making it an interesting project for
+			learning and experimentation. For more see the
+			<Github_Link path="ryanatkn/fuz#readme">readme</Github_Link>, and to get involved see <Github_Link
+				path="ryanatkn/fuz/blob/main/contributing.md"
+			/>.
 		</p>
 	</section>
 </Tome_Content>

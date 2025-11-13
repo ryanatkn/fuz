@@ -1,6 +1,6 @@
 [
 	{
-		"type": "Component",
+		"type": "Element",
 		"name": "div",
 		"children": [
 			{
