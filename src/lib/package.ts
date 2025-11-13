@@ -2134,43 +2134,43 @@ export const src_json: Src_Json = {
 					name: 'docs_slugify',
 					kind: 'function',
 					doc_comment:
-						'Convert a string to a URL-safe slug, preserving case for API identifiers.\nOnly transforms spaces and special characters, keeping valid identifier characters intact.',
-					source_line: 13,
+						'Convert a string to a URL-safe fragment identifier, preserving case for API identifiers.\nOnly transforms spaces and special characters, keeping valid identifier characters intact.\nUsed for hash anchors in documentation.',
+					source_line: 14,
 					type_signature: '(str: string): string',
 					return_type: 'string',
-					return_description: 'A URL-safe slug',
+					return_description: 'A URL-safe fragment identifier',
 					parameters: [
 						{
 							name: 'str',
 							type: 'string',
 							optional: false,
-							description: '- The string to slugify',
+							description: '- The string to convert to a fragment',
 						},
 					],
 				},
 				{
 					name: 'DOCS_PATH_DEFAULT',
 					kind: 'variable',
-					source_line: 27,
+					source_line: 28,
 					type_signature: '"/docs"',
 				},
 				{
 					name: 'DOCS_PATH',
 					kind: 'variable',
-					source_line: 28,
+					source_line: 29,
 					type_signature:
 						'"/docs" | "/" | "/about" | "/debug" | "/debug/mdz" | "/docs/alert" | "/docs/api" | "/docs/breadcrumb" | "/docs/breadcrumb/a" | "/docs/breadcrumb/a/b" | "/docs/breadcrumb/a/b/c" | ... 89 more ... | `/${string}/help/`',
 				},
 				{
 					name: 'DOCS_API_PATH',
 					kind: 'variable',
-					source_line: 29,
+					source_line: 30,
 					type_signature: 'string',
 				},
 				{
 					name: 'to_docs_path_info',
 					kind: 'function',
-					source_line: 31,
+					source_line: 32,
 					type_signature:
 						'(path_slug: string, pathname: string, root_path?: string): { path: string; path_is_selected: boolean; path_segment: string | undefined; }',
 					return_type:
@@ -2197,20 +2197,20 @@ export const src_json: Src_Json = {
 				{
 					name: 'docs_links_context',
 					kind: 'variable',
-					source_line: 42,
+					source_line: 43,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Docs_Links; maybe_get: () => Docs_Links | undefined; set: (value: Docs_Links) => Docs_Links; }',
 				},
 				{
 					name: 'Docs_Link_Tag',
 					kind: 'type',
-					source_line: 44,
+					source_line: 45,
 					type_signature: 'Docs_Link_Tag',
 				},
 				{
 					name: 'Docs_Link_Info',
 					kind: 'type',
-					source_line: 46,
+					source_line: 47,
 					type_signature: 'Docs_Link_Info',
 					properties: [
 						{
@@ -2253,7 +2253,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Docs_Links',
 					kind: 'class',
-					source_line: 56,
+					source_line: 57,
 					members: [
 						{
 							name: 'root_path',

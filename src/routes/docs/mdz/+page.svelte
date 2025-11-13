@@ -37,6 +37,14 @@
 		<aside>
 			⚠️ This is an early proof of concept with missing features. Lists and blockquotes are next.
 		</aside>
+		<aside>
+			<p>Possible changes?</p>
+			<ul>
+				<li>
+					end lines with <code class="white_space_pre"> \</code> to opt out of rendering the line break?
+				</li>
+			</ul>
+		</aside>
 	</section>
 
 	<section>

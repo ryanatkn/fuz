@@ -1,7 +1,7 @@
 <script lang="ts" module>
 	import {create_context} from '$lib/context_helpers.js';
 
-	export type Register_Section_Header = (slug: string) => string | undefined;
+	export type Register_Section_Header = (fragment: string) => string | undefined;
 	export const register_section_header_context = create_context<Register_Section_Header>();
 	export const section_depth_context = create_context(() => 0);
 	export const section_id_context = create_context<string | undefined>();
@@ -39,10 +39,10 @@
 	// Provide own section ID to direct children (header) via context
 	section_id_context.set(section_id);
 
-	let slug: string;
+	let fragment: string;
 
-	register_section_header_context.set((s) => {
-		slug = s;
+	register_section_header_context.set((f) => {
+		fragment = f;
 		return parent_section_id; // Return parent section ID to header
 	});
 </script>
@@ -50,14 +50,14 @@
 <section
 	{...rest}
 	{@attach intersect(() => ({intersecting}) => {
-		if (!slug) {
+		if (!fragment) {
 			if (DEV) console.error('Tome_Section_Header must be a child of Tome_Section'); // eslint-disable-line no-console
 			return;
 		}
 		if (intersecting) {
-			docs_links.fragments_onscreen.add(slug);
+			docs_links.fragments_onscreen.add(fragment);
 		} else {
-			docs_links.fragments_onscreen.delete(slug);
+			docs_links.fragments_onscreen.delete(fragment);
 		}
 	})}
 >

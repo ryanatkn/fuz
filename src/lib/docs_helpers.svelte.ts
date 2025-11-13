@@ -5,10 +5,11 @@ import {ensure_end, ensure_start} from '@ryanatkn/belt/string.js';
 import {create_context} from '$lib/context_helpers.js';
 
 /**
- * Convert a string to a URL-safe slug, preserving case for API identifiers.
+ * Convert a string to a URL-safe fragment identifier, preserving case for API identifiers.
  * Only transforms spaces and special characters, keeping valid identifier characters intact.
- * @param str - The string to slugify
- * @returns A URL-safe slug
+ * Used for hash anchors in documentation.
+ * @param str - The string to convert to a fragment
+ * @returns A URL-safe fragment identifier
  */
 export const docs_slugify = (str: string): string => {
 	return (

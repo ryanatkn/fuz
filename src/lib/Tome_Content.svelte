@@ -24,7 +24,7 @@
 
 	tome_context.set(tome); // TODO make reactive?
 
-	const slug = docs_slugify(tome.name);
+	const fragment = docs_slugify(tome.name);
 
 	const at_root = $derived(page.url.pathname === resolve(docs_path as any));
 </script>
@@ -35,9 +35,9 @@
 		at_root
 			? ({intersecting}) => {
 					if (intersecting) {
-						docs_links.fragments_onscreen.add(slug);
+						docs_links.fragments_onscreen.add(fragment);
 					} else {
-						docs_links.fragments_onscreen.delete(slug);
+						docs_links.fragments_onscreen.delete(fragment);
 					}
 				}
 			: null,
@@ -50,9 +50,9 @@
 				? null
 				: ({intersecting}) => {
 						if (intersecting) {
-							docs_links.fragments_onscreen.add(slug);
+							docs_links.fragments_onscreen.add(fragment);
 						} else {
-							docs_links.fragments_onscreen.delete(slug);
+							docs_links.fragments_onscreen.delete(fragment);
 						}
 					},
 		)}

@@ -259,6 +259,9 @@ a.chip {
 .white_space_nowrap {
 	white-space: nowrap;
 }
+.white_space_pre {
+	white-space: pre;
+}
 .white_space_pre_wrap {
 	white-space: pre-wrap;
 }
