@@ -1,5 +1,17 @@
 # @ryanatkn/fuz
 
+## 0.149.0
+
+### Minor Changes
+
+- rename `get_maybe` from `maybe_get` ([#90](https://github.com/ryanatkn/fuz/pull/90))
+- rename some identifiers with better suffixes ([#90](https://github.com/ryanatkn/fuz/pull/90))
+- add dependencies and dependents to `Module_Json` ([#90](https://github.com/ryanatkn/fuz/pull/90))
+
+### Patch Changes
+
+- public `Docs_Search` ([#90](https://github.com/ryanatkn/fuz/pull/90))
+
 ## 0.148.0
 
 ### Minor Changes
