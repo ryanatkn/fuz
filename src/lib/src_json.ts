@@ -1,7 +1,7 @@
 /**
  * Top-level source metadata.
  *
- * @see {@link https://github.com/ryanatkn/gro/blob/main/src/docs/gro_plugin_sveltekit_app.md#well-known-src}
+ * @see https://github.com/ryanatkn/gro/blob/main/src/docs/gro_plugin_sveltekit_app.md#well-known-src
  */
 export interface Src_Json {
 	name: string;
