@@ -112,7 +112,7 @@ export const url_well_known = (homepage_url: string, filename: string): string =
 
 /**
  * Convert a full URL to root-relative format by removing the origin.
- * Example: ('https://example.com/path/to/page', 'https://example.com') -> '/path/to/page'
+ * Example: ('https://fuz.dev/path/to/page', 'https://fuz.dev') -> '/path/to/page'
  */
 export const url_to_root_relative = (url: string, origin: string = page.url.origin): string => {
 	const origin_with_slash = ensure_end(origin, '/');
@@ -123,7 +123,7 @@ export const url_to_root_relative = (url: string, origin: string = page.url.orig
 	}
 
 	// strip origin_with_slash to ensure we match the full origin
-	// (prevents matching 'https://example.com' against 'https://example.com-evil.com')
+	// (prevents matching 'https://fuz.dev' against 'https://fuz.dev-evil.com')
 	const stripped = strip_start(url, origin_with_slash);
 
 	// is the URL is from a different origin?

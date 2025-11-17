@@ -134,7 +134,7 @@ describe('immutability tests', () => {
 	test('immutability: modifying returned directives does not affect subsequent calls', () => {
 		const options = {
 			value_defaults: {
-				'script-src': ['self', 'https://example.com' as any],
+				'script-src': ['self', 'https://fuz.dev' as any],
 			},
 		};
 
@@ -154,7 +154,7 @@ describe('immutability tests', () => {
 	});
 
 	test('immutability: modifying input options does not affect output', () => {
-		const input_array = ['self', 'https://example.com' as any];
+		const input_array = ['self', 'https://fuz.dev' as any];
 		const options = {
 			value_defaults: {
 				'script-src': input_array,
@@ -176,7 +176,7 @@ describe('immutability tests', () => {
 	test('immutability: modifying result arrays does not affect subsequent calls', () => {
 		const csp1 = create_csp_directives({
 			value_defaults: {
-				'script-src': ['self', 'https://example.com' as any],
+				'script-src': ['self', 'https://fuz.dev' as any],
 			},
 		});
 
@@ -185,7 +185,7 @@ describe('immutability tests', () => {
 
 		const csp2 = create_csp_directives({
 			value_defaults: {
-				'script-src': ['self', 'https://example.com' as any],
+				'script-src': ['self', 'https://fuz.dev' as any],
 			},
 		});
 
@@ -244,7 +244,7 @@ describe('immutability tests', () => {
 	test('immutability: structuredClone works for complex directives', () => {
 		const complex_value = [
 			'self',
-			'https://example.com' as any,
+			'https://fuz.dev' as any,
 			{nested: 'object'} as any, // Though not typical for CSP, test that cloning works
 		];
 

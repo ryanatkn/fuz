@@ -4,8 +4,14 @@
  * These functions are used during `gro gen` to analyze TypeScript and Svelte source files
  * and generate package metadata with rich type information and documentation.
  *
+ * Design philosophy: Fail fast with clear errors rather than silently producing invalid
+ * metadata. All validation errors halt the build immediately with actionable messages.
+ *
  * @see package.gen.ts for the main generation task
  * @see src_json.ts for type definitions
+ * @see tsdoc_helpers.ts for JSDoc/TSDoc parsing utilities
+ * @see ts_helpers.ts for TypeScript analysis
+ * @see svelte_helpers.ts for Svelte component analysis
  */
 
 import type {Package_Json} from '@ryanatkn/belt/package_json.js';
@@ -234,7 +240,7 @@ export const package_gen_analyze_svelte_file = (
 };
 
 /**
- * Analyze a TypeScript file and extract all exported identifiers.
+ * Analyze a TypeScript file and extract all identifiers.
  *
  * @throws Error if identifier enhancement fails (via package_gen_enhance_identifier)
  */
@@ -255,7 +261,7 @@ export const package_gen_analyze_typescript_file = (
 		mod.module_comment = module_comment;
 	}
 
-	// Extract identifiers - extract all exports
+	// Extract identifiers - get all exported symbols
 	const symbol = checker.getSymbolAtLocation(source_file);
 	if (symbol) {
 		const exports = checker.getExportsOfModule(symbol);

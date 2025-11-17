@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
+	import {resolve} from '$app/paths';
 
 	import type {Mdz_Node} from '$lib/mdz.js';
 	import Docs_Link from '$lib/Docs_Link.svelte';
@@ -54,9 +55,11 @@
 {:else if node.type === 'Strikethrough'}
 	<s>{@render render_children(node.children)}</s>
 {:else if node.type === 'Link'}
-	{#if node.link_type === 'identifier'}
-		<Docs_Link reference={node.reference} display_text={node.display_text} />
+	{#if node.link_type === 'internal'}
+		<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+		<a href={resolve(node.reference as any)}>{node.display_text ?? node.reference}</a>
 	{:else}
+		<!-- external link -->
 		<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 		<a href={node.reference} target="_blank" rel="noopener">{node.display_text ?? node.reference}</a
 		>

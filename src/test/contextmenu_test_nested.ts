@@ -407,7 +407,7 @@ export const create_shared_nested_tests = (
 				// Setup contextmenu with nested structure (simplified)
 				await setup_contextmenu_action(target, [
 					{snippet: 'text', props: {content: 'Parent', icon: '📁', run: () => undefined}},
-					{snippet: 'link', props: {href: 'https://example.com', content: 'Nested Link'}},
+					{snippet: 'link', props: {href: 'https://fuz.dev', content: 'Nested Link'}},
 				]);
 
 				// Open menu
@@ -429,7 +429,7 @@ export const create_shared_nested_tests = (
 
 				flushSync();
 
-				const link = container.querySelector('a[href="https://example.com"]');
+				const link = container.querySelector('a[href="https://fuz.dev"]');
 				assert.ok(link);
 
 				// Right-click on link

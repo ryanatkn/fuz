@@ -28,7 +28,11 @@
 	const whitespace_example = ' see \n  how       \n   whitespace    \nis preserved ';
 	const code_example = 'To parse markdown directly, use `mdz_parse` from module `mdz.ts`.';
 	const code_plain_example = 'This `identifier` does not exist.';
-	const link_example = 'See the {@link Alert} component.';
+	const link_external_example = 'Visit https://fuz.dev/docs/api for details.';
+	const link_internal_example = 'See /docs/api for the API documentation.';
+	const link_markdown_example = 'Check [the docs](https://fuz.dev/docs/api) for more info.';
+	const link_parentheses_example = 'See (https://fuz.dev/wiki/Foo_(bar)) for context.';
+	const link_no_autolink_example = 'Use // for comments. Domain fuz.dev requires protocol.';
 	const linebreak_example = 'First line.\nSecond line.\nThird line.';
 	const paragraph_example = 'First paragraph.\n\nSecond paragraph.';
 	const triple_linebreak_example =
@@ -46,8 +50,9 @@
 <Tome_Content {tome}>
 	<section>
 		<p>
-			mdz is a small markdown dialect that supports Svelte components and a subset of TSDoc. The
-			goal is to be friendly to nontechnical users and integrate with other Fuz systems.
+			mdz is a small markdown dialect that supports Svelte components, auto-detected URLs and paths,
+			and standard markdown link syntax. The goal is to be friendly to nontechnical users and
+			integrate with other Fuz systems.
 		</p>
 		<aside>
 			⚠️ This is an early proof of concept with missing features. Lists and blockquotes are next.
@@ -133,10 +138,39 @@
 	</Tome_Section>
 
 	<Tome_Section>
-		<Tome_Section_Header text="TSDoc links" />
-		<p>Use <code>{'{@link}'}</code> and <code>{'{@see}'}</code> tags:</p>
-		<Code content={link_example} class="mb_lg" />
-		<Mdz content={link_example} class="mb_xl5" />
+		<Tome_Section_Header text="Links" />
+		<p>
+			mdz automatically detects external URLs starting with <code>https://</code> or
+			<code>http://</code>:
+		</p>
+		<Code content={link_external_example} class="mb_lg" />
+		<Mdz content={link_external_example} class="mb_xl5" />
+		<p>Internal paths starting with <code>/</code> are also auto-detected:</p>
+		<Code content={link_internal_example} class="mb_lg" />
+		<Mdz content={link_internal_example} class="mb_xl5" />
+		<p>Use standard markdown link syntax for custom display text:</p>
+		<Code content={link_markdown_example} class="mb_lg" />
+		<Mdz content={link_markdown_example} class="mb_xl5" />
+		<p>
+			mdz follows <a
+				href="https://github.github.com/gfm/#autolinks-extension-"
+				target="_blank"
+				rel="noopener">GFM autolink rules</a
+			>, handling balanced parentheses in URLs:
+		</p>
+		<Code content={link_parentheses_example} class="mb_lg" />
+		<Mdz content={link_parentheses_example} class="mb_xl5" />
+		<p>
+			Protocol-less domains and <code>//</code> do <strong>not</strong> auto-link:
+		</p>
+		<Code content={link_no_autolink_example} class="mb_lg" />
+		<Mdz content={link_no_autolink_example} class="mb_xl5" />
+		<p>
+			<strong>Note:</strong> Relative paths (<code>./</code>, <code>../</code>) are not supported.
+			mdz content doesn't have a stable location concept—TSDoc comments render at different URLs
+			than their source files. Root-relative paths (<code>/docs/...</code>) are more portable and
+			work consistently regardless of where the content is rendered.
+		</p>
 	</Tome_Section>
 
 	<!-- TODO HYDRATION_MISMATCH: ONE -->

@@ -14,7 +14,10 @@
  * ## Tag support
  *
  * Supports standard TSDoc tags: `@param`, `@returns`, `@throws`, `@example`, `@deprecated`, `@see`, `@since`.
- * Also supports `@mutates` (non-standard) for documenting side effects.
+ *
+ * Also supports `@mutates` (non-standard) for documenting mutations to parameters or external state.
+ * Use format: `@mutates paramName - description of mutation`.
+ *
  * Only `@returns` is supported (not `@return`).
  *
  * The `@see` tag supports multiple formats: plain URLs (`https://...`), `{@link}` syntax, and module names.
@@ -55,6 +58,53 @@ export interface Tsdoc_Parsed_Comment {
 	/** Mutation documentation from `@mutates` (non-standard) */
 	mutates?: Array<string>;
 }
+
+/**
+ * Convert TSDoc link syntax to mdz-compatible format.
+ *
+ * Conversions:
+ * - `{@link url|text}` → `[text](url)` (markdown link)
+ * - `{@link https://...}` → `https://...` (bare URL)
+ * - `{@link identifier}` → `` `identifier` `` (backticks)
+ * - `@see` variants follow same rules
+ *
+ * @param content The @see tag content to convert
+ */
+const tsdoc_convert_link_to_mdz = (content: string): string => {
+	// Check for {@link ...} or {@see ...} syntax
+	const link_match = /^\{@(?:link|see)\s+([^}]+)\}$/.exec(content.trim());
+	if (link_match) {
+		const inner = link_match[1]!.trim();
+
+		// Check for pipe separator (custom display text)
+		const pipe_index = inner.indexOf('|');
+		if (pipe_index !== -1) {
+			const reference = inner.slice(0, pipe_index).trim();
+			const display_text = inner.slice(pipe_index + 1).trim();
+			// Convert to markdown link: [text](url)
+			return `[${display_text}](${reference})`;
+		}
+
+		// No pipe - check if it's a URL or identifier
+		if (inner.startsWith('https://') || inner.startsWith('http://')) {
+			// Bare URL - return as-is
+			return inner;
+		} else {
+			// Identifier or module - wrap in backticks
+			return `\`${inner}\``;
+		}
+	}
+
+	// No {@link} or {@see} syntax - check if it's a bare URL or identifier
+	const trimmed = content.trim();
+	if (trimmed.startsWith('https://') || trimmed.startsWith('http://')) {
+		// Already a bare URL - return as-is
+		return trimmed;
+	} else {
+		// Identifier or module - wrap in backticks
+		return `\`${trimmed}\``;
+	}
+};
 
 /**
  * Parse JSDoc comment from a TypeScript node.
@@ -132,14 +182,15 @@ export const tsdoc_parse = (
 			// The TS API strips 'https' from URLs in @see tags, so get full text from source
 			const full_tag_text = tag.getText(source_file);
 			// Extract content after @see, handling JSDoc formatting artifacts
-			// Preserve original format (plain URLs, {@link}, paths, module names)
 			const see_content = full_tag_text
 				.replace(/^@see\s+/, '') // remove @see prefix
 				.replace(/\n\s*\*\s*/g, ' ') // remove JSDoc line continuations
 				.trim();
 
 			if (see_content) {
-				see_also.push(see_content);
+				// Convert TSDoc link syntax to mdz-compatible format
+				const mdz_content = tsdoc_convert_link_to_mdz(see_content);
+				see_also.push(mdz_content);
 			}
 		} else if (tag_name === 'since' && tag_text) {
 			since = tag_text.trim();

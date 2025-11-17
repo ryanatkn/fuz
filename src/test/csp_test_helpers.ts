@@ -15,7 +15,7 @@ export const TEST_SOURCES = {
 	GOOGLE_FONTS: 'fonts.googleapis.com',
 	GOOGLE_FONTS_STATIC: 'fonts.gstatic.com',
 	CLOUDFLARE_CDN: 'cdnjs.cloudflare.com',
-	ANALYTICS: 'analytics.example.com',
+	ANALYTICS: 'analytics.fuz.dev',
 	STRIPE: 'js.stripe.com',
 } as const;
 

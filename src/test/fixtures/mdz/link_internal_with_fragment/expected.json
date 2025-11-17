@@ -1,0 +1,29 @@
+[
+	{
+		"type": "Paragraph",
+		"children": [
+			{
+				"type": "Text",
+				"content": "Jump to ",
+				"start": 0,
+				"end": 8
+			},
+			{
+				"type": "Link",
+				"reference": "/docs/api#identifier",
+				"display_text": null,
+				"link_type": "internal",
+				"start": 8,
+				"end": 28
+			},
+			{
+				"type": "Text",
+				"content": " for details.",
+				"start": 28,
+				"end": 41
+			}
+		],
+		"start": 0,
+		"end": 41
+	}
+]

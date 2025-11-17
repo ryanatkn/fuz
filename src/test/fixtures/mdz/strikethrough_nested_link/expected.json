@@ -13,24 +13,24 @@
 					},
 					{
 						"type": "Link",
-						"reference": "Foo",
-						"display_text": null,
-						"link_type": "identifier",
+						"reference": "https://fuz.dev",
+						"display_text": "Example",
+						"link_type": "external",
 						"start": 9,
-						"end": 20
+						"end": 35
 					},
 					{
 						"type": "Text",
 						"content": " reference",
-						"start": 20,
-						"end": 30
+						"start": 35,
+						"end": 45
 					}
 				],
 				"start": 0,
-				"end": 31
+				"end": 46
 			}
 		],
 		"start": 0,
-		"end": 31
+		"end": 46
 	}
 ]

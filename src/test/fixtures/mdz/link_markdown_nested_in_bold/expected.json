@@ -1,0 +1,36 @@
+[
+	{
+		"type": "Paragraph",
+		"children": [
+			{
+				"type": "Text",
+				"content": "This is ",
+				"start": 0,
+				"end": 8
+			},
+			{
+				"type": "Bold",
+				"children": [
+					{
+						"type": "Link",
+						"reference": "https://fuz.dev",
+						"display_text": "bold link",
+						"link_type": "external",
+						"start": 10,
+						"end": 38
+					}
+				],
+				"start": 8,
+				"end": 40
+			},
+			{
+				"type": "Text",
+				"content": " text.",
+				"start": 40,
+				"end": 46
+			}
+		],
+		"start": 0,
+		"end": 46
+	}
+]

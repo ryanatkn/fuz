@@ -1,0 +1,29 @@
+[
+	{
+		"type": "Paragraph",
+		"children": [
+			{
+				"type": "Text",
+				"content": "Check ",
+				"start": 0,
+				"end": 6
+			},
+			{
+				"type": "Link",
+				"reference": "/docs/guides/introduction",
+				"display_text": null,
+				"link_type": "internal",
+				"start": 6,
+				"end": 31
+			},
+			{
+				"type": "Text",
+				"content": " for getting started.",
+				"start": 31,
+				"end": 52
+			}
+		],
+		"start": 0,
+		"end": 52
+	}
+]

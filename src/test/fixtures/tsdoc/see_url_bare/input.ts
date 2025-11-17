@@ -1,7 +1,7 @@
 /**
  * Function with plain URL reference.
  *
- * @see https://example.com/api/docs
+ * @see https://fuz.dev/docs/api
  */
 export function fetch_data() {
 	return {};

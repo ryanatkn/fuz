@@ -15,13 +15,17 @@
 		{
 			"name": "id",
 			"kind": "variable",
-			"modifiers": ["readonly"],
+			"modifiers": [
+				"readonly"
+			],
 			"type_signature": "number"
 		},
 		{
 			"name": "count",
 			"kind": "variable",
-			"modifiers": ["static"],
+			"modifiers": [
+				"static"
+			],
 			"type_signature": "number"
 		},
 		{
@@ -52,7 +56,9 @@
 		{
 			"name": "create",
 			"kind": "function",
-			"modifiers": ["static"],
+			"modifiers": [
+				"static"
+			],
 			"doc_comment": "Static factory method",
 			"type_signature": "(name: string): User",
 			"return_type": "User",

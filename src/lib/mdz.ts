@@ -1,26 +1,30 @@
 /**
- * mdz - minimal Markdown+TSDoc parser for Fuz API documentation.
+ * mdz - minimal markdown dialect for Fuz documentation.
  *
- * Parses a specialized markdown dialect with:
+ * Parses an enhanced markdown dialect with:
  * - inline formatting: `code`, **bold**, _italic_, ~strikethrough~
- * - TSDoc tags: `{@link}`, `{@see}`
+ * - auto-detected links: external URLs (`https://...`) and internal paths (`/path`)
+ * - markdown links: `[text](url)` with custom display text
  * - auto-linking via backticks to identifiers/modules
  * - paragraph breaks (double newline)
  * - block elements: headings, horizontal rules, code blocks
+ * - HTML elements and Svelte components (opt-in via context)
  *
  * Key constraint: preserves ALL whitespace exactly as authored,
  * and is rendered with white-space pre or pre-wrap.
  *
- * Design philosophy:
+ * ## Design philosophy
  *
  * - **False negatives over false positives**: Strict syntax prevents accidentally
  *   interpreting plain text as formatting. When in doubt, treat as plain text.
  * - **One way to do things**: Single unambiguous syntax per feature. No alternatives.
  * - **Explicit over implicit**: Clear delimiters and column-0 requirements avoid ambiguity.
  * - **Simple over complete**: Prefer simple parsing rules over complex edge case handling.
+ *
+ * ## Status
+ *
+ * This is an early proof of concept with missing features and edge cases.
  */
-
-// TODO this is an early proof of concept, is missing many features and edge cases
 
 // TODO design incremental parsing or some system that preserves Svelte components across re-renders when possible
 
@@ -82,9 +86,9 @@ export interface Mdz_Strikethrough_Node extends Mdz_Base_Node {
 
 export interface Mdz_Link_Node extends Mdz_Base_Node {
 	type: 'Link';
-	reference: string; // URL or identifier/module name
-	display_text: string | null; // Display text from {@link URL|text}, null if not provided
-	link_type: 'identifier' | 'url'; // Determined by parser
+	reference: string; // URL or path
+	display_text: string | null; // Display text from [text](url), null if auto-detected
+	link_type: 'external' | 'internal'; // external: https/http, internal: /path
 }
 
 export interface Mdz_Paragraph_Node extends Mdz_Base_Node {
@@ -119,11 +123,7 @@ const BACKTICK = 96; // `
 const ASTERISK = 42; // *
 const UNDERSCORE = 95; // _
 const TILDE = 126; // ~
-const LEFT_BRACE = 123; // {
 const NEWLINE = 10; // \n
-const AT_SIGN = 64; // @
-const L_LOWER = 108; // l
-const S_LOWER = 115; // s
 const HYPHEN = 45; // -
 const HASH = 35; // #
 const SPACE = 32; // (space)
@@ -131,6 +131,16 @@ const TAB = 9; // \t
 const LEFT_ANGLE = 60; // <
 const RIGHT_ANGLE = 62; // >
 const SLASH = 47; // /
+const LEFT_BRACKET = 91; // [
+const RIGHT_BRACKET = 93; // ]
+const LEFT_PAREN = 40; // (
+const RIGHT_PAREN = 41; // )
+const COLON = 58; // :
+const PERIOD = 46; // .
+const COMMA = 44; // ,
+const SEMICOLON = 59; // ;
+const EXCLAMATION = 33; // !
+const QUESTION = 63; // ?
 
 /**
  * Parser for mdz format.
@@ -298,21 +308,8 @@ export class Mdz_Parser {
 				return this.#parse_italic();
 			case TILDE:
 				return this.#parse_strikethrough();
-			case LEFT_BRACE:
-				// Fast path: check {@link or {@see with character codes
-				if (
-					this.#index + 6 <= this.#template.length &&
-					this.#template.charCodeAt(this.#index + 1) === AT_SIGN
-				) {
-					const third = this.#template.charCodeAt(this.#index + 2);
-					if (third === L_LOWER || third === S_LOWER) {
-						// Validate full tag for safety
-						if (this.#match('{@link') || this.#match('{@see')) {
-							return this.#parse_link();
-						}
-					}
-				}
-				return this.#parse_text();
+			case LEFT_BRACKET:
+				return this.#parse_markdown_link();
 			case LEFT_ANGLE:
 				return this.#parse_tag();
 			default:
@@ -482,24 +479,14 @@ export class Mdz_Parser {
 	}
 
 	/**
-	 * Parse TSDoc inline tag: `{@link ...}` or `{@see ...`.
-	 * Formats:
-	 *
-	 * - {@link identifier} - local ref
-	 * - {@link https://url} - external URL
-	 * - {@link https://url|Display Text} - URL with custom text
-	 *
+	 * Parse markdown link: `[text](url)`.
 	 * Falls back to text if malformed.
 	 */
-	#parse_link(): Mdz_Link_Node | Mdz_Text_Node {
+	#parse_markdown_link(): Mdz_Link_Node | Mdz_Text_Node {
 		const start = this.#index;
 
-		if (this.#match('{@link')) {
-			this.#eat('{@link');
-		} else if (this.#match('{@see')) {
-			this.#eat('{@see');
-		} else {
-			// Shouldn't reach here
+		// Consume opening [
+		if (!this.#match('[')) {
 			const content = this.#template[this.#index]!;
 			this.#index++;
 			return {
@@ -509,49 +496,96 @@ export class Mdz_Parser {
 				end: this.#index,
 			};
 		}
+		this.#index++;
 
-		// Skip whitespace after tag
-		while (this.#index < this.#template.length && this.#template[this.#index] === ' ') {
-			this.#index++;
-		}
-
-		// Find closing }
-		const close_index = this.#template.indexOf('}', this.#index);
-		if (close_index === -1) {
-			// Unclosed tag, treat as text
-			this.#index = this.#template.length;
+		// Find closing ]
+		const close_bracket = this.#template.indexOf(']', this.#index);
+		if (close_bracket === -1) {
+			// No closing ], treat as text
+			this.#index = start + 1;
 			return {
 				type: 'Text',
-				content: this.#template.slice(start),
+				content: '[',
 				start,
 				end: this.#index,
 			};
 		}
 
-		// Extract content between tag and }
-		const content = this.#template.slice(this.#index, close_index).trim();
-		this.#index = close_index + 1;
+		// Extract display text
+		const display_text = this.#template.slice(this.#index, close_bracket);
+		this.#index = close_bracket + 1;
 
-		// Check for display text separator |
-		const pipe_index = content.indexOf('|');
-		let reference: string;
-		let display_text: string | undefined;
+		// Check for opening (
+		if (
+			this.#index >= this.#template.length ||
+			this.#template.charCodeAt(this.#index) !== LEFT_PAREN
+		) {
+			// No opening (, treat as text
+			this.#index = start + 1;
+			return {
+				type: 'Text',
+				content: '[',
+				start,
+				end: this.#index,
+			};
+		}
+		this.#index++;
 
-		if (pipe_index !== -1) {
-			reference = content.slice(0, pipe_index).trim();
-			display_text = content.slice(pipe_index + 1).trim();
-		} else {
-			reference = content;
+		// Find closing )
+		const close_paren = this.#template.indexOf(')', this.#index);
+		if (close_paren === -1) {
+			// No closing ), treat as text
+			this.#index = start + 1;
+			return {
+				type: 'Text',
+				content: '[',
+				start,
+				end: this.#index,
+			};
 		}
 
-		// Determine link type (url vs identifier)
+		// Extract URL/path
+		const reference = this.#template.slice(this.#index, close_paren);
+
+		// Validate reference is not empty or whitespace-only
+		if (!reference.trim()) {
+			// Empty reference, treat as text
+			this.#index = start + 1;
+			return {
+				type: 'Text',
+				content: '[',
+				start,
+				end: this.#index,
+			};
+		}
+
+		// Validate all characters in reference are valid URI characters per RFC 3986
+		// This prevents spaces and other invalid characters from being in markdown link URLs
+		// Follows GFM behavior: invalid chars cause fallback to text, then auto-detection
+		for (let i = 0; i < reference.length; i++) {
+			const char_code = reference.charCodeAt(i);
+			if (!this.#is_valid_path_char(char_code)) {
+				// Invalid character in URL, treat as text and let auto-detection handle it
+				this.#index = start + 1;
+				return {
+					type: 'Text',
+					content: '[',
+					start,
+					end: this.#index,
+				};
+			}
+		}
+
+		this.#index = close_paren + 1;
+
+		// Determine link type (external vs internal)
 		const link_type =
-			reference.startsWith('http://') || reference.startsWith('https://') ? 'url' : 'identifier';
+			reference.startsWith('https://') || reference.startsWith('http://') ? 'external' : 'internal';
 
 		return {
 			type: 'Link',
 			reference,
-			display_text: display_text ?? null,
+			display_text: display_text || null,
 			link_type,
 			start,
 			end: this.#index,
@@ -825,11 +859,250 @@ export class Mdz_Parser {
 	}
 
 	/**
+	 * Check if character code is valid in URI path per RFC 3986.
+	 * Validates against the `pchar` production plus path/query/fragment separators.
+	 *
+	 * Valid characters:
+	 * - unreserved: A-Z a-z 0-9 - . _ ~
+	 * - sub-delims: ! $ & ' ( ) * + , ; =
+	 * - path allowed: : @
+	 * - separators: / ? #
+	 * - percent-encoding: %
+	 */
+	#is_valid_path_char(char_code: number): boolean {
+		return (
+			// A-Z
+			(char_code >= 65 && char_code <= 90) ||
+			// a-z
+			(char_code >= 97 && char_code <= 122) ||
+			// 0-9
+			(char_code >= 48 && char_code <= 57) ||
+			// unreserved: - . _ ~
+			char_code === 45 || // -
+			char_code === 46 || // .
+			char_code === 95 || // _
+			char_code === 126 || // ~
+			// sub-delims: ! $ & ' ( ) * + , ; =
+			char_code === 33 || // !
+			char_code === 36 || // $
+			char_code === 38 || // &
+			char_code === 39 || // '
+			char_code === 40 || // (
+			char_code === 41 || // )
+			char_code === 42 || // *
+			char_code === 43 || // +
+			char_code === 44 || // ,
+			char_code === 59 || // ;
+			char_code === 61 || // =
+			// path allowed: : @
+			char_code === 58 || // :
+			char_code === 64 || // @
+			// separators: / ? #
+			char_code === 47 || // /
+			char_code === 63 || // ?
+			char_code === 35 || // #
+			// percent-encoding: %
+			char_code === 37 // %
+		);
+	}
+
+	/**
+	 * Check if current position is the start of an external URL (https:// or http://).
+	 */
+	#is_at_url(): boolean {
+		if (this.#match('https://')) {
+			// Check for protocol-only (e.g., just "https://")
+			// Must have at least one non-whitespace character after protocol
+			if (this.#index + 8 >= this.#template.length) {
+				return false;
+			}
+			const next_char = this.#template.charCodeAt(this.#index + 8);
+			return next_char !== SPACE && next_char !== NEWLINE;
+		}
+		if (this.#match('http://')) {
+			// Check for protocol-only (e.g., just "http://")
+			// Must have at least one non-whitespace character after protocol
+			if (this.#index + 7 >= this.#template.length) {
+				return false;
+			}
+			const next_char = this.#template.charCodeAt(this.#index + 7);
+			return next_char !== SPACE && next_char !== NEWLINE;
+		}
+		return false;
+	}
+
+	/**
+	 * Check if current position is the start of an internal path (starts with /).
+	 */
+	#is_at_internal_path(): boolean {
+		if (this.#template.charCodeAt(this.#index) !== SLASH) {
+			return false;
+		}
+		// Check previous character - must be whitespace or start of string
+		// (to avoid matching / within relative paths like ./a/b or ../a/b)
+		if (this.#index > 0) {
+			const prev_char = this.#template.charCodeAt(this.#index - 1);
+			if (prev_char !== SPACE && prev_char !== NEWLINE && prev_char !== TAB) {
+				return false;
+			}
+		}
+		// Must have at least one more character after /, and it must NOT be:
+		// - another / (to avoid matching // which is used for comments or protocol-relative URLs)
+		// - whitespace (a bare / followed by space is not a useful link)
+		if (this.#index + 1 >= this.#template.length) {
+			return false;
+		}
+		const next_char = this.#template.charCodeAt(this.#index + 1);
+		return next_char !== SLASH && next_char !== SPACE && next_char !== NEWLINE;
+	}
+
+	/**
+	 * Parse auto-detected external URL (https:// or http://).
+	 * Uses RFC 3986 whitelist validation for valid URI characters.
+	 */
+	#parse_auto_link_url(): Mdz_Link_Node {
+		const start = this.#index;
+
+		// Consume protocol
+		if (this.#match('https://')) {
+			this.#index += 8;
+		} else if (this.#match('http://')) {
+			this.#index += 7;
+		}
+
+		// Collect URL characters using RFC 3986 whitelist
+		// Stop at whitespace or any character invalid in URIs
+		while (this.#index < this.#template.length) {
+			const char_code = this.#current_char();
+			if (char_code === SPACE || char_code === NEWLINE || !this.#is_valid_path_char(char_code)) {
+				break;
+			}
+			this.#index++;
+		}
+
+		let reference = this.#template.slice(start, this.#index);
+
+		// Apply GFM trailing punctuation trimming with balanced parentheses
+		reference = this.#trim_trailing_punctuation(reference);
+
+		// Update index after trimming
+		this.#index = start + reference.length;
+
+		return {
+			type: 'Link',
+			reference,
+			display_text: null,
+			link_type: 'external',
+			start,
+			end: this.#index,
+		};
+	}
+
+	/**
+	 * Parse auto-detected internal path (starts with /).
+	 * Uses RFC 3986 whitelist validation for valid URI characters.
+	 */
+	#parse_auto_link_internal(): Mdz_Link_Node {
+		const start = this.#index;
+
+		// Collect path characters using RFC 3986 whitelist
+		// Stop at whitespace or any character invalid in URIs
+		while (this.#index < this.#template.length) {
+			const char_code = this.#current_char();
+			if (char_code === SPACE || char_code === NEWLINE || !this.#is_valid_path_char(char_code)) {
+				break;
+			}
+			this.#index++;
+		}
+
+		let reference = this.#template.slice(start, this.#index);
+
+		// Apply GFM trailing punctuation trimming
+		reference = this.#trim_trailing_punctuation(reference);
+
+		// Update index after trimming
+		this.#index = start + reference.length;
+
+		return {
+			type: 'Link',
+			reference,
+			display_text: null,
+			link_type: 'internal',
+			start,
+			end: this.#index,
+		};
+	}
+
+	/**
+	 * Trim trailing punctuation from URL/path per RFC 3986 and GFM rules.
+	 * - Trims simple trailing: .,;:!?]
+	 * - Balanced logic for () only (valid in path components)
+	 * - Invalid chars like [] {} are already stopped by whitelist, but ] trimmed as fallback
+	 */
+	#trim_trailing_punctuation(url: string): string {
+		let trimmed = url;
+
+		// Trim simple trailing punctuation (] as fallback - whitelist should prevent it)
+		while (trimmed.length > 0) {
+			const last_char = trimmed.charCodeAt(trimmed.length - 1);
+			if (
+				last_char === PERIOD ||
+				last_char === COMMA ||
+				last_char === SEMICOLON ||
+				last_char === COLON ||
+				last_char === EXCLAMATION ||
+				last_char === QUESTION ||
+				last_char === RIGHT_BRACKET
+			) {
+				trimmed = trimmed.slice(0, -1);
+			} else {
+				break;
+			}
+		}
+
+		// Handle balanced parentheses ONLY (parens are valid in URI path components)
+		while (trimmed.length > 0) {
+			const last_char = trimmed.charCodeAt(trimmed.length - 1);
+			if (last_char === RIGHT_PAREN) {
+				// Count opening and closing parens
+				let open_count = 0;
+				let close_count = 0;
+
+				for (let i = 0; i < trimmed.length; i++) {
+					const char = trimmed.charCodeAt(i);
+					if (char === LEFT_PAREN) open_count++;
+					if (char === RIGHT_PAREN) close_count++;
+				}
+
+				// If more closing than opening, this trailing one is unmatched - trim it
+				if (close_count > open_count) {
+					trimmed = trimmed.slice(0, -1);
+				} else {
+					break;
+				}
+			} else {
+				break;
+			}
+		}
+
+		return trimmed;
+	}
+
+	/**
 	 * Parse plain text until special character encountered.
 	 * Preserves all whitespace (except paragraph breaks handled separately).
+	 * Detects and delegates to URL/path parsing when encountered.
 	 */
-	#parse_text(): Mdz_Text_Node {
+	#parse_text(): Mdz_Text_Node | Mdz_Link_Node {
 		const start = this.#index;
+
+		// Check for URL or internal path at current position
+		if (this.#is_at_url()) {
+			return this.#parse_auto_link_url();
+		}
+		if (this.#is_at_internal_path()) {
+			return this.#parse_auto_link_internal();
+		}
 
 		while (this.#index < this.#template.length) {
 			const char_code = this.#current_char();
@@ -840,7 +1113,7 @@ export class Mdz_Parser {
 				char_code === ASTERISK ||
 				char_code === UNDERSCORE ||
 				char_code === TILDE ||
-				char_code === LEFT_BRACE ||
+				char_code === LEFT_BRACKET ||
 				char_code === LEFT_ANGLE
 			) {
 				break;
@@ -848,6 +1121,11 @@ export class Mdz_Parser {
 
 			// Check for paragraph break (double newline)
 			if (this.#is_at_paragraph_break()) {
+				break;
+			}
+
+			// Check for URL or internal path mid-text
+			if (this.#is_at_url() || this.#is_at_internal_path()) {
 				break;
 			}
 

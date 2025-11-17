@@ -1,0 +1,29 @@
+[
+	{
+		"type": "Paragraph",
+		"children": [
+			{
+				"type": "Text",
+				"content": "Check [ text ]( ",
+				"start": 0,
+				"end": 16
+			},
+			{
+				"type": "Link",
+				"reference": "https://fuz.dev",
+				"display_text": null,
+				"link_type": "external",
+				"start": 16,
+				"end": 31
+			},
+			{
+				"type": "Text",
+				"content": " ) with spaces.",
+				"start": 31,
+				"end": 46
+			}
+		],
+		"start": 0,
+		"end": 46
+	}
+]

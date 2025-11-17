@@ -1144,9 +1144,7 @@ export const src_json: Src_Json = {
 					kind: 'class',
 					doc_comment:
 						'Creates a `contextmenu` store.\nSee usage with `Contextmenu_Root.svelte` and `Contextmenu.svelte`.',
-					see_also: [
-						'{@link https://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event}',
-					],
+					see_also: ['https://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event'],
 					source_line: 86,
 					members: [
 						{
@@ -1880,7 +1878,7 @@ export const src_json: Src_Json = {
 					doc_comment:
 						'Static data descriptors for the CSP directives.\nFuz excludes deprecated directives, so those are intentionally omitted,\nbut any newer missing directives are bugs.\n\nCould be moved to `csp.ts` but is currently here to keep that module smaller.',
 					see_also: [
-						'{@link https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy}',
+						'https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy',
 					],
 					source_line: 344,
 					type_signature: 'Csp_Directive_Spec[]',
@@ -3677,7 +3675,7 @@ export const src_json: Src_Json = {
 					name: 'mdz_parse',
 					kind: 'function',
 					doc_comment: 'Parses text to an array of `Mdz_Node`.',
-					source_line: 30,
+					source_line: 34,
 					type_signature: '(text: string): Mdz_Node[]',
 					return_type: 'Mdz_Node[]',
 					parameters: [
@@ -3691,13 +3689,13 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Node',
 					kind: 'type',
-					source_line: 32,
+					source_line: 36,
 					type_signature: 'Mdz_Node',
 				},
 				{
 					name: 'Mdz_Base_Node',
 					kind: 'type',
-					source_line: 46,
+					source_line: 50,
 					type_signature: 'Mdz_Base_Node',
 					properties: [
 						{
@@ -3720,7 +3718,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Text_Node',
 					kind: 'type',
-					source_line: 52,
+					source_line: 56,
 					type_signature: 'Mdz_Text_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3739,7 +3737,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Code_Node',
 					kind: 'type',
-					source_line: 57,
+					source_line: 61,
 					type_signature: 'Mdz_Code_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3758,7 +3756,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Codeblock_Node',
 					kind: 'type',
-					source_line: 62,
+					source_line: 66,
 					type_signature: 'Mdz_Codeblock_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3782,7 +3780,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Bold_Node',
 					kind: 'type',
-					source_line: 68,
+					source_line: 72,
 					type_signature: 'Mdz_Bold_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3801,7 +3799,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Italic_Node',
 					kind: 'type',
-					source_line: 73,
+					source_line: 77,
 					type_signature: 'Mdz_Italic_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3820,7 +3818,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Strikethrough_Node',
 					kind: 'type',
-					source_line: 78,
+					source_line: 82,
 					type_signature: 'Mdz_Strikethrough_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3839,7 +3837,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Link_Node',
 					kind: 'type',
-					source_line: 83,
+					source_line: 87,
 					type_signature: 'Mdz_Link_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3861,14 +3859,14 @@ export const src_json: Src_Json = {
 						{
 							name: 'link_type',
 							kind: 'variable',
-							type_signature: "'identifier' | 'url'",
+							type_signature: "'external' | 'internal'",
 						},
 					],
 				},
 				{
 					name: 'Mdz_Paragraph_Node',
 					kind: 'type',
-					source_line: 90,
+					source_line: 94,
 					type_signature: 'Mdz_Paragraph_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3887,7 +3885,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Hr_Node',
 					kind: 'type',
-					source_line: 95,
+					source_line: 99,
 					type_signature: 'Mdz_Hr_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3901,7 +3899,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Heading_Node',
 					kind: 'type',
-					source_line: 99,
+					source_line: 103,
 					type_signature: 'Mdz_Heading_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3925,7 +3923,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Element_Node',
 					kind: 'type',
-					source_line: 105,
+					source_line: 109,
 					type_signature: 'Mdz_Element_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3949,7 +3947,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Component_Node',
 					kind: 'type',
-					source_line: 111,
+					source_line: 115,
 					type_signature: 'Mdz_Component_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3975,7 +3973,7 @@ export const src_json: Src_Json = {
 					kind: 'class',
 					doc_comment:
 						'Parser for mdz format.\nSingle-pass lexer/parser with text accumulation for efficiency.\nUsed by `mdz_parse`, which should be preferred for simple usage.',
-					source_line: 140,
+					source_line: 150,
 					members: [
 						{
 							name: 'constructor',
@@ -4002,7 +4000,7 @@ export const src_json: Src_Json = {
 				},
 			],
 			module_comment:
-				'mdz - minimal Markdown+TSDoc parser for Fuz API documentation.\n\nParses a specialized markdown dialect with:\n- inline formatting: `code`, **bold**, _italic_, ~strikethrough~\n- TSDoc tags: `{@link}`, `{@see}`\n- auto-linking via backticks to identifiers/modules\n- paragraph breaks (double newline)\n- block elements: headings, horizontal rules, code blocks\n\nKey constraint: preserves ALL whitespace exactly as authored,\nand is rendered with white-space pre or pre-wrap.\n\nDesign philosophy:\n\n- **False negatives over false positives**: Strict syntax prevents accidentally\n  interpreting plain text as formatting. When in doubt, treat as plain text.\n- **One way to do things**: Single unambiguous syntax per feature. No alternatives.\n- **Explicit over implicit**: Clear delimiters and column-0 requirements avoid ambiguity.\n- **Simple over complete**: Prefer simple parsing rules over complex edge case handling.',
+				'mdz - minimal markdown dialect for Fuz documentation.\n\nParses an enhanced markdown dialect with:\n- inline formatting: `code`, **bold**, _italic_, ~strikethrough~\n- auto-detected links: external URLs (`https://...`) and internal paths (`/path`)\n- markdown links: `[text](url)` with custom display text\n- auto-linking via backticks to identifiers/modules\n- paragraph breaks (double newline)\n- block elements: headings, horizontal rules, code blocks\n- HTML elements and Svelte components (opt-in via context)\n\nKey constraint: preserves ALL whitespace exactly as authored,\nand is rendered with white-space pre or pre-wrap.\n\n## Design philosophy\n\n- **False negatives over false positives**: Strict syntax prevents accidentally\n  interpreting plain text as formatting. When in doubt, treat as plain text.\n- **One way to do things**: Single unambiguous syntax per feature. No alternatives.\n- **Explicit over implicit**: Clear delimiters and column-0 requirements avoid ambiguity.\n- **Simple over complete**: Prefer simple parsing rules over complex edge case handling.\n\n## Status\n\nThis is an early proof of concept with missing features and edge cases.',
 			dependents: ['Mdz.svelte'],
 		},
 		{
@@ -4377,7 +4375,7 @@ export const src_json: Src_Json = {
 							description: 'if duplicate identifier names are found',
 						},
 					],
-					source_line: 44,
+					source_line: 50,
 					type_signature: '(src_json: Src_Json, log: Logger): void',
 					return_type: 'void',
 					parameters: [
@@ -4403,7 +4401,7 @@ export const src_json: Src_Json = {
 							description: 'if TypeScript analysis fails (fails fast)',
 						},
 					],
-					source_line: 90,
+					source_line: 96,
 					type_signature:
 						'(symbol: Symbol, source_file: SourceFile, checker: TypeChecker): Identifier_Json',
 					return_type: 'Identifier_Json',
@@ -4430,7 +4428,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Sort modules alphabetically by path for deterministic output and cleaner diffs.',
-					source_line: 136,
+					source_line: 142,
 					type_signature: '(modules: Module_Json[]): Module_Json[]',
 					return_type: 'Module_Json[]',
 					parameters: [
@@ -4446,7 +4444,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Generate the package.ts file content with package_json and src_json exports.',
-					source_line: 143,
+					source_line: 149,
 					type_signature:
 						'(package_json: { [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }, src_json: Src_Json): string',
 					return_type: 'string',
@@ -4474,7 +4472,7 @@ export const src_json: Src_Json = {
 							description: 'if no source files are found in /src/lib/',
 						},
 					],
-					source_line: 163,
+					source_line: 169,
 					type_signature: '(filer: Filer, log: Logger): Disknode[]',
 					return_type: 'Disknode[]',
 					parameters: [
@@ -4501,7 +4499,7 @@ export const src_json: Src_Json = {
 								'if file cannot be read, svelte2tsx transformation fails, or component analysis fails',
 						},
 					],
-					source_line: 193,
+					source_line: 199,
 					type_signature:
 						'(disknode: Disknode, module_path: string, checker: TypeChecker): Module_Json',
 					return_type: 'Module_Json',
@@ -4526,14 +4524,14 @@ export const src_json: Src_Json = {
 				{
 					name: 'package_gen_analyze_typescript_file',
 					kind: 'function',
-					doc_comment: 'Analyze a TypeScript file and extract all exported identifiers.',
+					doc_comment: 'Analyze a TypeScript file and extract all identifiers.',
 					throws: [
 						{
 							type: 'Error',
 							description: 'if identifier enhancement fails (via package_gen_enhance_identifier)',
 						},
 					],
-					source_line: 241,
+					source_line: 247,
 					type_signature:
 						'(disknode: Disknode, source_file: SourceFile, module_path: string, checker: TypeChecker): Module_Json',
 					return_type: 'Module_Json',
@@ -4565,7 +4563,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						"Extract dependencies and dependents for a module from the filer's dependency graph.\n\nFilters to only include source modules from /src/lib/ (excludes external packages, node_modules, tests).\nReturns sorted arrays of module paths (relative to src/lib) for deterministic output.",
-					source_line: 286,
+					source_line: 292,
 					type_signature: '(disknode: Disknode): { dependencies: string[]; dependents: string[]; }',
 					return_type: '{ dependencies: string[]; dependents: string[]; }',
 					parameters: [
@@ -4578,7 +4576,7 @@ export const src_json: Src_Json = {
 				},
 			],
 			module_comment:
-				'Build-time helpers for package metadata generation.\n\nThese functions are used during `gro gen` to analyze TypeScript and Svelte source files\nand generate package metadata with rich type information and documentation.\n\n@see package.gen.ts for the main generation task\n@see src_json.ts for type definitions',
+				'Build-time helpers for package metadata generation.\n\nThese functions are used during `gro gen` to analyze TypeScript and Svelte source files\nand generate package metadata with rich type information and documentation.\n\nDesign philosophy: Fail fast with clear errors rather than silently producing invalid\nmetadata. All validation errors halt the build immediately with actionable messages.\n\n@see package.gen.ts for the main generation task\n@see src_json.ts for type definitions\n@see tsdoc_helpers.ts for JSDoc/TSDoc parsing utilities\n@see ts_helpers.ts for TypeScript analysis\n@see svelte_helpers.ts for Svelte component analysis',
 			dependencies: ['module_helpers.ts', 'svelte_helpers.ts', 'ts_helpers.ts', 'tsdoc_helpers.ts'],
 			dependents: ['package.gen.ts'],
 		},
@@ -4810,7 +4808,7 @@ export const src_json: Src_Json = {
 					name: 'url_to_root_relative',
 					kind: 'function',
 					doc_comment:
-						"Convert a full URL to root-relative format by removing the origin.\nExample: ('https://example.com/path/to/page', 'https://example.com') -> '/path/to/page'",
+						"Convert a full URL to root-relative format by removing the origin.\nExample: ('https://fuz.dev/path/to/page', 'https://fuz.dev') -> '/path/to/page'",
 					source_line: 117,
 					type_signature: '(url: string, origin?: string): string',
 					return_type: 'string',
@@ -5035,8 +5033,8 @@ export const src_json: Src_Json = {
 					doc_comment:
 						"Rich runtime package representation of a package.\n\nWraps minimal serializable data (package_json, src_json) with computed properties\nand provides the root of the API documentation hierarchy:\nPkg -> modules -> identifiers\n\nAll computed properties are automatically cached via Svelte's $derived mechanism,\nincluding the identifier_map which enables O(1) lookups by name.",
 					see_also: [
-						'module.svelte.ts for Module class',
-						'identifier.svelte.ts for Identifier class',
+						'`module.svelte.ts for Module class`',
+						'`identifier.svelte.ts for Identifier class`',
 					],
 					source_line: 31,
 					members: [
@@ -5367,7 +5365,7 @@ export const src_json: Src_Json = {
 					kind: 'type',
 					doc_comment: 'Top-level source metadata.',
 					see_also: [
-						'{@link https://github.com/ryanatkn/gro/blob/main/src/docs/gro_plugin_sveltekit_app.md#well-known-src}',
+						'https://github.com/ryanatkn/gro/blob/main/src/docs/gro_plugin_sveltekit_app.md#well-known-src',
 					],
 					source_line: 6,
 					type_signature: 'Src_Json',
@@ -5764,7 +5762,7 @@ export const src_json: Src_Json = {
 					name: 'svelte_analyze_component',
 					kind: 'function',
 					doc_comment: 'Analyze a Svelte component from its svelte2tsx transformation.',
-					source_line: 23,
+					source_line: 24,
 					type_signature:
 						'(ts_code: string, source_file: SourceFile, checker: TypeChecker, component_name: string): Identifier_Json',
 					return_type: 'Identifier_Json',
@@ -5793,7 +5791,7 @@ export const src_json: Src_Json = {
 				},
 			],
 			module_comment:
-				'Svelte component analysis helpers.\n\nExtracts metadata from Svelte components using svelte2tsx transformations:\n\n- Component props with types and JSDoc\n- Component-level documentation\n- Type information\n\nUses the TypeScript Compiler API to parse the transformed output from svelte2tsx.\n\nAll functions are prefixed with `svelte_` for clarity.',
+				'Svelte component analysis helpers.\n\nExtracts metadata from Svelte components using svelte2tsx transformations:\n\n- Component props with types and JSDoc\n- Component-level documentation\n- Type information\n\nWorkflow: Transform Svelte to TypeScript via svelte2tsx, parse the transformed\nTypeScript with the TS Compiler API, extract component-level JSDoc from original source.\n\nAll functions are prefixed with `svelte_` for clarity.',
 			dependencies: ['tsdoc_helpers.ts'],
 			dependents: ['package_gen_helpers.ts'],
 		},
@@ -6549,8 +6547,8 @@ export const src_json: Src_Json = {
 					name: 'ts_extract_module_comment',
 					kind: 'function',
 					doc_comment:
-						'Extract module-level comment.\nOnly accepts JSDoc/TSDoc comments (`/** ... *\\/`) that have a blank line separating them\nfrom the following statement. Module comments can appear after imports.',
-					source_line: 387,
+						'Extract module-level comment.\n\nOnly accepts JSDoc/TSDoc comments (`/** ... *\\/`) followed by a blank line to distinguish\nthem from identifier-level comments. This prevents accidentally treating function/class\ncomments as module comments. Module comments can appear after imports.',
+					source_line: 389,
 					type_signature: '(source_file: SourceFile): string | undefined',
 					return_type: 'string | undefined',
 					parameters: [
@@ -6565,7 +6563,7 @@ export const src_json: Src_Json = {
 					name: 'ts_create_program',
 					kind: 'function',
 					doc_comment: 'Create TypeScript program for analysis.',
-					source_line: 459,
+					source_line: 461,
 					type_signature: '(log: { warn: (message: string) => void; }): Program | null',
 					return_type: 'Program | null',
 					parameters: [
@@ -6589,7 +6587,7 @@ export const src_json: Src_Json = {
 					name: 'Tsdoc_Parsed_Comment',
 					kind: 'type',
 					doc_comment: 'Parsed JSDoc/TSDoc comment with structured metadata.',
-					source_line: 38,
+					source_line: 41,
 					type_signature: 'Tsdoc_Parsed_Comment',
 					properties: [
 						{
@@ -6653,7 +6651,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Parse JSDoc comment from a TypeScript node.\n\nExtracts and parses all JSDoc tags including:\n\n- `@param` - parameter descriptions\n- `@returns` - return value description\n- `@throws` - error documentation\n- `@example` - code examples\n- `@deprecated` - deprecation warnings\n- `@see` - related references\n- `@since` - version information\n- `@mutates` - mutation documentation (non-standard)',
-					source_line: 76,
+					source_line: 126,
 					type_signature: '(node: Node, source_file: SourceFile): Tsdoc_Parsed_Comment | undefined',
 					return_type: 'Tsdoc_Parsed_Comment | undefined',
 					parameters: [
@@ -6676,7 +6674,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Apply parsed TSDoc metadata to an identifier.\n\nConsolidates the common pattern of assigning TSDoc fields to identifiers,\nwith conditional assignment for array fields (only if non-empty).',
-					source_line: 176,
+					source_line: 227,
 					type_signature: '(identifier: any, tsdoc: Tsdoc_Parsed_Comment | undefined): void',
 					return_type: 'void',
 					parameters: [
@@ -6696,7 +6694,7 @@ export const src_json: Src_Json = {
 				},
 			],
 			module_comment:
-				'TSDoc/JSDoc parsing helpers using the TypeScript Compiler API.\n\nProvides `tsdoc_parse()` for extracting JSDoc/TSDoc from TypeScript nodes.\nPrimarily designed for build-time code generation but can be used at runtime.\n\n## Design\n\nPure extraction approach: extracts documentation as-is with minimal transformation,\npreserving source intent. Works around TypeScript Compiler API quirks where needed.\n\nSupports both regular TypeScript and Svelte components (via svelte2tsx output).\n\n## Tag support\n\nSupports standard TSDoc tags: `@param`, `@returns`, `@throws`, `@example`, `@deprecated`, `@see`, `@since`.\nAlso supports `@mutates` (non-standard) for documenting side effects.\nOnly `@returns` is supported (not `@return`).\n\nThe `@see` tag supports multiple formats: plain URLs (`https://...`), `{@link}` syntax, and module names.\nRelative/absolute path support in `@see` is TBD.\n\n## Behavioral notes\n\nDue to TS Compiler API limitations:\n- Preserves dash separator in `@param` descriptions: `@param x desc` → `"- desc"`\n- `@throws` tags have `{Type}` stripped by TS API; fallback regex extracts first word as error type\n- TS API strips URL protocols from `@see` tag text; we use `getText()` to preserve original format including `{@link}` syntax\n\nAll functions are prefixed with `tsdoc_` for clarity.',
+				'TSDoc/JSDoc parsing helpers using the TypeScript Compiler API.\n\nProvides `tsdoc_parse()` for extracting JSDoc/TSDoc from TypeScript nodes.\nPrimarily designed for build-time code generation but can be used at runtime.\n\n## Design\n\nPure extraction approach: extracts documentation as-is with minimal transformation,\npreserving source intent. Works around TypeScript Compiler API quirks where needed.\n\nSupports both regular TypeScript and Svelte components (via svelte2tsx output).\n\n## Tag support\n\nSupports standard TSDoc tags: `@param`, `@returns`, `@throws`, `@example`, `@deprecated`, `@see`, `@since`.\n\nAlso supports `@mutates` (non-standard) for documenting mutations to parameters or external state.\nUse format: `@mutates paramName - description of mutation`.\n\nOnly `@returns` is supported (not `@return`).\n\nThe `@see` tag supports multiple formats: plain URLs (`https://...`), `{@link}` syntax, and module names.\nRelative/absolute path support in `@see` is TBD.\n\n## Behavioral notes\n\nDue to TS Compiler API limitations:\n- Preserves dash separator in `@param` descriptions: `@param x desc` → `"- desc"`\n- `@throws` tags have `{Type}` stripped by TS API; fallback regex extracts first word as error type\n- TS API strips URL protocols from `@see` tag text; we use `getText()` to preserve original format including `{@link}` syntax\n\nAll functions are prefixed with `tsdoc_` for clarity.',
 			dependents: ['package_gen_helpers.ts', 'svelte_helpers.ts', 'ts_helpers.ts'],
 		},
 		{
