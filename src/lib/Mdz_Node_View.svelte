@@ -55,14 +55,18 @@
 {:else if node.type === 'Strikethrough'}
 	<s>{@render render_children(node.children)}</s>
 {:else if node.type === 'Link'}
+	{@const {reference} = node}
 	{#if node.link_type === 'internal'}
+		{@const is_fragment_or_query_only = reference.startsWith('#') || reference.startsWith('?')}
+		<!-- Fragment/query-only links skip resolve() to avoid unwanted `/` prefix -->
 		<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-		<a href={resolve(node.reference as any)}>{node.display_text ?? node.reference}</a>
+		<a href={is_fragment_or_query_only ? reference : resolve(reference as any)}
+			>{node.display_text ?? reference}</a
+		>
 	{:else}
 		<!-- external link -->
 		<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-		<a href={node.reference} target="_blank" rel="noopener">{node.display_text ?? node.reference}</a
-		>
+		<a href={reference} target="_blank" rel="noopener">{node.display_text ?? reference}</a>
 	{/if}
 {:else if node.type === 'Paragraph'}
 	<p>{@render render_children(node.children)}</p>
