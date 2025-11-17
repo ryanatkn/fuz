@@ -31,8 +31,6 @@
 	const link_external_example = 'Visit https://fuz.dev/docs/api for details.';
 	const link_internal_example = 'See /docs/api for the API documentation.';
 	const link_markdown_example = 'Check [the docs](https://fuz.dev/docs/api) for more info.';
-	const link_parentheses_example = 'See (https://fuz.dev/wiki/Foo_(bar)) for context.';
-	const link_no_autolink_example = 'Use // for comments. Domain fuz.dev requires protocol.';
 	const linebreak_example = 'First line.\nSecond line.\nThird line.';
 	const paragraph_example = 'First paragraph.\n\nSecond paragraph.';
 	const triple_linebreak_example =
@@ -152,20 +150,6 @@
 		<Code content={link_markdown_example} class="mb_lg" />
 		<Mdz content={link_markdown_example} class="mb_xl5" />
 		<p>
-			mdz follows <a
-				href="https://github.github.com/gfm/#autolinks-extension-"
-				target="_blank"
-				rel="noopener">GFM autolink rules</a
-			>, handling balanced parentheses in URLs:
-		</p>
-		<Code content={link_parentheses_example} class="mb_lg" />
-		<Mdz content={link_parentheses_example} class="mb_xl5" />
-		<p>
-			Protocol-less domains and <code>//</code> do <strong>not</strong> auto-link:
-		</p>
-		<Code content={link_no_autolink_example} class="mb_lg" />
-		<Mdz content={link_no_autolink_example} class="mb_xl5" />
-		<p>
 			<strong>Note:</strong> Relative paths (<code>./</code>, <code>../</code>) are not supported.
 			mdz content doesn't have a stable location concept—TSDoc comments render at different URLs
 			than their source files. Root-relative paths (<code>/docs/...</code>) are more portable and
@@ -173,7 +157,6 @@
 		</p>
 	</Tome_Section>
 
-	<!-- TODO HYDRATION_MISMATCH: ONE -->
 	<Tome_Section>
 		<Tome_Section_Header text="HTML elements" />
 		<p>mdz supports an opt-in set of HTML elements for semantic markup and styling.</p>
@@ -198,7 +181,6 @@ mdz_elements_context.set(new Map([
 		</p>
 	</Tome_Section>
 
-	<!-- TODO HYDRATION_MISMATCH: TWO -->
 	<Tome_Section>
 		<Tome_Section_Header text="Svelte components" />
 		<p>
@@ -227,7 +209,6 @@ mdz_components_context.set(new Map([
 		</aside>
 	</Tome_Section>
 
-	<!-- TODO HYDRATION_MISMATCH: THREE -->
 	<Tome_Section>
 		<Tome_Section_Header text="Advanced usage" />
 		<p>

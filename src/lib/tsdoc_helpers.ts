@@ -13,7 +13,8 @@
  *
  * ## Tag support
  *
- * Supports standard TSDoc tags: `@param`, `@returns`, `@throws`, `@example`, `@deprecated`, `@see`, `@since`.
+ * Supports a subset of standard TSDoc tags:
+ * `@param`, `@returns`, `@throws`, `@example`, `@deprecated`, `@see`, `@since`.
  *
  * Also supports `@mutates` (non-standard) for documenting mutations to parameters or external state.
  * Use format: `@mutates paramName - description of mutation`.
@@ -189,8 +190,7 @@ export const tsdoc_parse = (
 
 			if (see_content) {
 				// Convert TSDoc link syntax to mdz-compatible format
-				const mdz_content = tsdoc_convert_link_to_mdz(see_content);
-				see_also.push(mdz_content);
+				see_also.push(tsdoc_convert_link_to_mdz(see_content));
 			}
 		} else if (tag_name === 'since' && tag_text) {
 			since = tag_text.trim();
