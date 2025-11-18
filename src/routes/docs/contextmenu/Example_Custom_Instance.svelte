@@ -74,7 +74,7 @@
 				/>
 				<p class="mb_md">
 					Try opening the contextmenu on this panel, then use the navigation buttons below to cycle
-					through entries — just like the arrow keys. The color entries return <code
+					through entries -- just like the arrow keys. The color entries return <code
 						>{'{ok: true, close: false}'}</code
 					> to keep the menu open after activation, allowing you to select multiple colors using the
 					activate button (↵).

@@ -29,7 +29,7 @@
 	const code_example = 'To parse markdown directly, use `mdz_parse` from module `mdz.ts`.';
 	const code_plain_example = 'This `identifier` does not exist.';
 	const link_external_example =
-		'[Fuz API docs](https://fuz.dev/docs/api) - https://fuz.dev/docs/api - /docs/api';
+		'[Fuz API docs](https://fuz.dev/docs/api) and https://fuz.dev/docs/api and /docs/api';
 	const linebreak_example = 'First line.\nSecond line.\nThird line.';
 	const paragraph_example = 'First paragraph.\n\nSecond paragraph.';
 	const triple_linebreak_example =
@@ -149,9 +149,10 @@
 		<Mdz content={link_external_example} class="mb_xl5" />
 		<p>
 			<strong>Note:</strong> Relative paths (<code>./</code>, <code>../</code>) are not supported.
-			mdz content doesn't have a stable location concept—TSDoc comments render at different URLs
+			mdz content doesn't have a stable location concept -- TSDoc comments render at different URLs
 			than their source files. Root-relative paths (<code>/docs/...</code>) are more portable and
-			work consistently regardless of where the content is rendered.
+			work consistently regardless of where the content is rendered. This could change, I'm open to
+			discussion.
 		</p>
 	</Tome_Section>
 
