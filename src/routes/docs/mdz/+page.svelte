@@ -255,7 +255,25 @@ const nodes = mdz_parse(content);`}
 		</p>
 	</Tome_Section>
 
-	<p>
-		See also the mdz <a href={resolve('/debug/mdz')}>fixtures debug page</a>.
-	</p>
+	<Tome_Section>
+		<Tome_Section_Header text="Generated docs" />
+		<p>For more see the generated mdz docs:</p>
+		<ul>
+			<li>
+				<strong>
+					<a href={resolve('/docs/mdz/spec')}>mdz specification</a>
+				</strong>
+			</li>
+			<li>
+				<strong>
+					<a href={resolve('/docs/mdz/grammar')}>mdz grammar</a>
+				</strong>
+			</li>
+			<li>
+				<strong>
+					<a href={resolve('/docs/mdz/fixtures')}>fixtures debug page</a>
+				</strong>
+			</li>
+		</ul>
+	</Tome_Section>
 </Tome_Content>

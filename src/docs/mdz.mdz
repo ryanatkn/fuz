@@ -1,0 +1,70 @@
+# mdz
+
+**mdz** (minimal markdown dialect) is a strict, unambiguous markdown variant designed for Fuz documentation with tight Svelte integration.
+
+## What is mdz?
+
+mdz is a small markdown dialect that prioritizes _predictability_ over _flexibility_. It supports Svelte components, auto-detected URLs and paths, and standard markdown link syntax. The goal is to be friendly to nontechnical users while integrating seamlessly with Fuz systems like API documentation and component props.
+
+## Philosophy
+
+mdz follows these core principles:
+
+**False negatives over false positives** - strict syntax prevents accidentally interpreting plain text as formatting
+
+**One way to do things** - single unambiguous syntax per feature, no alternatives
+
+**Explicit over implicit** - clear delimiters and column-0 requirements avoid ambiguity
+
+**Whitespace preservation** - render all whitespace exactly as authored
+
+## Features
+
+mdz supports 8 main syntax features:
+
+- **Inline formatting** - bold, italic, strikethrough, inline code
+- **Links** - markdown links, auto-detected URLs, internal paths
+- **Paragraphs** - line breaks and paragraph breaks
+- **Headings** - 1-6 levels with strict syntax
+- **Horizontal rules** - visual separators
+- **Code blocks** - fenced code with syntax hints
+- **HTML elements** - opt-in semantic markup
+- **Svelte components** - first-class component support
+
+## Documentation
+
+**Specification** - see `mdz_spec.mdz` for detailed syntax guide with examples
+
+**Grammar** - see `mdz_grammar.mdz` for formal grammar rules with Rust-inspired notation
+
+**Examples** - see `/docs/mdz` for interactive examples and use cases
+
+**Tests** - 181 fixtures in `src/test/fixtures/mdz/` cover comprehensive edge cases
+
+**Debug** - see `/docs/mdz/fixtures` for AST visualization and fixture inspection
+
+## Use Cases
+
+**API documentation** - TSDoc comments converted to mdz at build time, rendered with auto-linking at runtime
+
+**Documentation pages** - manual docs written in mdz (like this file)
+
+**Component descriptions** - props and behavior with auto-linked code identifiers
+
+**Inline help text** - lightweight formatting without full markdown complexity
+
+## Implementation
+
+**Parser** - `mdz.ts` - single-pass character-code-based lexer/parser
+
+**Renderer** - `Mdz.svelte` - component wrapper for parsing and rendering
+
+**Context** - `mdz_components_context` and `mdz_elements_context` for opt-in components/elements
+
+**Integration** - `tsdoc_helpers.ts` converts TSDoc to mdz at build time
+
+## Status
+
+mdz is an **early proof of concept** with comprehensive test coverage but limited feature set. Lists and blockquotes are next. The API and syntax may change as we learn from real-world usage.
+
+**Current version:** Fuz v0.150.0
