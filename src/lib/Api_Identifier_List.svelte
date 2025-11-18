@@ -23,7 +23,9 @@
 {:else}
 	{#each identifiers as identifier (`${identifier.module_path}:${identifier.name}`)}
 		<Tome_Section>
-			<Tome_Section_Header text={identifier.name} />
+			<Tome_Section_Header text={identifier.name}>
+				<div class="word_break_break_all">{identifier.name}</div>
+			</Tome_Section_Header>
 			<article id={identifier.name}>
 				<Identifier_Detail {identifier} />
 			</article>

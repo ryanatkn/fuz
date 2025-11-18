@@ -256,6 +256,9 @@ a.chip {
 .vertical_align_middle {
 	vertical-align: middle;
 }
+.word_break_break_all {
+	word-break: break-all;
+}
 .white_space_nowrap {
 	white-space: nowrap;
 }
