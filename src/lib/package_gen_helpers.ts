@@ -162,9 +162,9 @@ export const src_json: Src_Json = ${JSON.stringify(src_json, null, '\t')};
 /**
  * Collect and filter source files from filer.
  *
- * Returns disknodes for TypeScript/JS files and Svelte components from /src/lib/, excluding test files.
+ * Returns disknodes for TypeScript/JS files and Svelte components from src/lib, excluding test files.
  *
- * @throws Error if no source files are found in /src/lib/
+ * @throws Error if no source files are found in src/lib
  */
 export const package_gen_collect_source_files = (filer: Filer, log: Logger): Array<Disknode> => {
 	log.info(`filer has ${filer.files.size} files total`);
@@ -182,7 +182,7 @@ export const package_gen_collect_source_files = (filer: Filer, log: Logger): Arr
 	log.info(`found ${source_disknodes.length} source files to analyze`);
 
 	if (source_disknodes.length === 0) {
-		throw new Error('No source files found in /src/lib/ - cannot generate package metadata');
+		throw new Error('No source files found in src/lib - cannot generate package metadata');
 	}
 
 	// Sort for deterministic output (stable alphabetical module ordering)
@@ -286,7 +286,7 @@ export const package_gen_analyze_typescript_file = (
 /**
  * Extract dependencies and dependents for a module from the filer's dependency graph.
  *
- * Filters to only include source modules from /src/lib/ (excludes external packages, node_modules, tests).
+ * Filters to only include source modules from src/lib (excludes external packages, node_modules, tests).
  * Returns sorted arrays of module paths (relative to src/lib) for deterministic output.
  */
 export const package_gen_extract_dependencies = (

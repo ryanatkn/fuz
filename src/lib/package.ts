@@ -4151,7 +4151,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'module_is_source',
 					kind: 'function',
-					doc_comment: 'Check if ID is a source file in /src/lib/ (excluding tests).',
+					doc_comment: 'Check if ID is a source file in src/lib (excluding tests).',
 					source_line: 54,
 					type_signature: '(id: string): boolean',
 					return_type: 'boolean',
@@ -4465,11 +4465,11 @@ export const src_json: Src_Json = {
 					name: 'package_gen_collect_source_files',
 					kind: 'function',
 					doc_comment:
-						'Collect and filter source files from filer.\n\nReturns disknodes for TypeScript/JS files and Svelte components from /src/lib/, excluding test files.',
+						'Collect and filter source files from filer.\n\nReturns disknodes for TypeScript/JS files and Svelte components from src/lib, excluding test files.',
 					throws: [
 						{
 							type: 'Error',
-							description: 'if no source files are found in /src/lib/',
+							description: 'if no source files are found in src/lib',
 						},
 					],
 					source_line: 169,
@@ -4562,7 +4562,7 @@ export const src_json: Src_Json = {
 					name: 'package_gen_extract_dependencies',
 					kind: 'function',
 					doc_comment:
-						"Extract dependencies and dependents for a module from the filer's dependency graph.\n\nFilters to only include source modules from /src/lib/ (excludes external packages, node_modules, tests).\nReturns sorted arrays of module paths (relative to src/lib) for deterministic output.",
+						"Extract dependencies and dependents for a module from the filer's dependency graph.\n\nFilters to only include source modules from src/lib (excludes external packages, node_modules, tests).\nReturns sorted arrays of module paths (relative to src/lib) for deterministic output.",
 					source_line: 292,
 					type_signature: '(disknode: Disknode): { dependencies: string[]; dependents: string[]; }',
 					return_type: '{ dependencies: string[]; dependents: string[]; }',
