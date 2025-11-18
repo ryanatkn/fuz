@@ -380,16 +380,50 @@ export class Mdz_Parser {
 	 *
 	 * - **bold** = Bold node
 	 *
-	 * Falls back to text if unclosed or single asterisk.
+	 * Falls back to text if unclosed, single asterisk, or not at word boundary.
+	 *
+	 * Following mdz philosophy (false negatives over false positives):
+	 * Bold requires word boundaries to prevent intraword formatting.
+	 * Examples:
+	 * - `foo**bar**baz` → literal text (intraword)
+	 * - `word **bold** word` → bold (at word boundaries)
 	 */
 	#parse_bold(): Mdz_Bold_Node | Mdz_Text_Node {
 		const start = this.#index;
 
 		// Check for ** (bold)
 		if (this.#match('**')) {
+			// Check if opening ** is at word boundary
+			// Must not be preceded by word char (intraword position)
+			if (!this.#is_at_word_boundary(this.#index, true, false)) {
+				// Intraword ** - treat as literal text
+				const content = this.#template[this.#index]!;
+				this.#index++;
+				return {
+					type: 'Text',
+					content,
+					start,
+					end: this.#index,
+				};
+			}
+
 			this.#eat('**');
 			const children = this.#parse_nodes_until('**');
+
 			if (this.#match('**')) {
+				// Check if closing ** is at word boundary
+				// Must not be followed by word char
+				if (!this.#is_at_word_boundary(this.#index + 2, false, true)) {
+					// Closing ** not at boundary - treat whole thing as text
+					this.#index = start + 1;
+					return {
+						type: 'Text',
+						content: '*',
+						start,
+						end: this.#index,
+					};
+				}
+
 				this.#eat('**');
 				return {
 					type: 'Bold',
@@ -423,13 +457,47 @@ export class Mdz_Parser {
 	/**
 	 * Parse italic starting with underscore.
 	 * _italic_ = Italic node
-	 * Falls back to text if unclosed.
+	 * Falls back to text if unclosed or not at word boundary.
+	 *
+	 * Following GFM spec: underscores cannot create emphasis in middle of words.
+	 * Examples:
+	 * - `foo_bar_baz` → literal text (intraword)
+	 * - `word _emphasis_ word` → emphasis (at word boundaries)
 	 */
 	#parse_italic(): Mdz_Italic_Node | Mdz_Text_Node {
 		const start = this.#index;
+
+		// Check if opening underscore is at word boundary
+		// Must not be preceded by word char (intraword position)
+		if (!this.#is_at_word_boundary(this.#index, true, false)) {
+			// Intraword underscore - treat as literal text
+			const content = this.#template[this.#index]!;
+			this.#index++;
+			return {
+				type: 'Text',
+				content,
+				start,
+				end: this.#index,
+			};
+		}
+
 		this.#eat('_');
 		const children = this.#parse_nodes_until('_');
+
 		if (this.#match('_')) {
+			// Check if closing underscore is at word boundary
+			// Must not be followed by word char
+			if (!this.#is_at_word_boundary(this.#index + 1, false, true)) {
+				// Closing underscore not at boundary - treat whole thing as text
+				this.#index = start + 1;
+				return {
+					type: 'Text',
+					content: '_',
+					start,
+					end: this.#index,
+				};
+			}
+
 			this.#eat('_');
 			return {
 				type: 'Italic',
@@ -452,13 +520,48 @@ export class Mdz_Parser {
 	/**
 	 * Parse strikethrough starting with tilde.
 	 * ~strikethrough~ = Strikethrough node
-	 * Falls back to text if unclosed.
+	 * Falls back to text if unclosed or not at word boundary.
+	 *
+	 * Following mdz philosophy (false negatives over false positives):
+	 * Strikethrough requires word boundaries to prevent intraword formatting.
+	 * Examples:
+	 * - `foo~bar~baz` → literal text (intraword)
+	 * - `word ~strike~ word` → strikethrough (at word boundaries)
 	 */
 	#parse_strikethrough(): Mdz_Strikethrough_Node | Mdz_Text_Node {
 		const start = this.#index;
+
+		// Check if opening tilde is at word boundary
+		// Must not be preceded by word char (intraword position)
+		if (!this.#is_at_word_boundary(this.#index, true, false)) {
+			// Intraword tilde - treat as literal text
+			const content = this.#template[this.#index]!;
+			this.#index++;
+			return {
+				type: 'Text',
+				content,
+				start,
+				end: this.#index,
+			};
+		}
+
 		this.#eat('~');
 		const children = this.#parse_nodes_until('~');
+
 		if (this.#match('~')) {
+			// Check if closing tilde is at word boundary
+			// Must not be followed by word char
+			if (!this.#is_at_word_boundary(this.#index + 1, false, true)) {
+				// Closing tilde not at boundary - treat whole thing as text
+				this.#index = start + 1;
+				return {
+					type: 'Text',
+					content: '~',
+					start,
+					end: this.#index,
+				};
+			}
+
 			this.#eat('~');
 			return {
 				type: 'Strikethrough',
@@ -856,6 +959,55 @@ export class Mdz_Parser {
 			char_code === HYPHEN || // -
 			char_code === UNDERSCORE // _
 		);
+	}
+
+	/**
+	 * Check if character is part of a word (alphanumeric or underscore).
+	 * Used for word boundary detection to prevent intraword emphasis.
+	 */
+	#is_word_char(char_code: number): boolean {
+		return (
+			// A-Z
+			(char_code >= 65 && char_code <= 90) ||
+			// a-z
+			(char_code >= 97 && char_code <= 122) ||
+			// 0-9
+			(char_code >= 48 && char_code <= 57) ||
+			// _
+			char_code === UNDERSCORE
+		);
+	}
+
+	/**
+	 * Check if position is at a word boundary.
+	 * Word boundary = not surrounded by alphanumeric/underscore characters.
+	 * Used to prevent intraword emphasis for underscores, asterisks, tildes.
+	 *
+	 * Following GFM spec: underscores should not create emphasis in middle of words
+	 * (e.g., snake_case_identifier should remain literal).
+	 *
+	 * @param index - Position to check
+	 * @param check_before - Whether to check the character before this position
+	 * @param check_after - Whether to check the character after this position
+	 */
+	#is_at_word_boundary(index: number, check_before: boolean, check_after: boolean): boolean {
+		if (check_before && index > 0) {
+			const prev = this.#template.charCodeAt(index - 1);
+			// If preceded by word char, not at boundary
+			if (this.#is_word_char(prev)) {
+				return false;
+			}
+		}
+
+		if (check_after && index < this.#template.length) {
+			const next = this.#template.charCodeAt(index);
+			// If followed by word char, not at boundary
+			if (this.#is_word_char(next)) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	/**

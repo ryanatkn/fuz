@@ -3,15 +3,8 @@
 		"type": "Paragraph",
 		"children": [
 			{
-				"type": "Bold",
-				"children": [
-					{
-						"type": "Text",
-						"content": "bold",
-						"start": 2,
-						"end": 6
-					}
-				],
+				"type": "Text",
+				"content": "**bold**",
 				"start": 0,
 				"end": 8
 			},

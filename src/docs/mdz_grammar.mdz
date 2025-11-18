@@ -99,9 +99,23 @@ Strikethrough requires at least one character between `~` delimiters.
 Inline code cannot contain newlines - if a newline appears before the closing backtick, both backticks render as literal text.
 Empty inline code ` `` ` renders as literal backticks.
 
+**Word boundary requirements:**
+
+Bold, italic, and strikethrough require word boundaries (not surrounded by alphanumeric or underscore characters):
+- `foo_bar_baz` → literal text (underscores not at word boundaries)
+- `foo**bar**baz` → literal text (asterisks not at word boundaries)
+- `foo~bar~baz` → literal text (tildes not at word boundaries)
+- `word _emphasis_ word` → emphasis (underscores at word boundaries)
+- `word **bold** word` → bold (asterisks at word boundaries)
+
+Inline code has no word boundary requirement - backticks work anywhere:
+- `foo\`bar\`baz` → foo<code>bar</code>baz (allowed)
+
+**Word character definition:** `a-z`, `A-Z`, `0-9`, `_`
+
 **Implementation note:**
 
-The parser validates that opening delimiters have matching closing delimiters. If no valid closing delimiter is found, the opening delimiter renders as literal text.
+The parser validates that opening delimiters have matching closing delimiters AND are at word boundaries. If no valid closing delimiter is found, or if delimiters are not at word boundaries, the opening delimiter renders as literal text.
 
 ---
 
@@ -527,7 +541,19 @@ Consider preserving Svelte components across re-renders for better performance.
 
 ## Changelog
 
-**v0.150.0** - Current version
+**v0.151.0** - Next version
+
+Breaking change: Fixed intraword emphasis behavior to follow GFM spec and mdz philosophy.
+- Underscores (`_`) no longer create emphasis in middle of words (e.g., `snake_case_name` remains literal)
+- Bold (`**`) no longer works in middle of words (e.g., `foo**bar**baz` remains literal)
+- Strikethrough (`~`) no longer works in middle of words (e.g., `foo~bar~baz` remains literal)
+- Inline code (`` ` ``) still works anywhere (no word boundary requirement)
+- All formatting delimiters now require word boundaries (not surrounded by alphanumeric or underscore characters)
+- This change supports programming identifiers and aligns with GFM for underscores, while being stricter for bold/strikethrough per mdz philosophy
+
+Migration: If you have content relying on intraword emphasis, add spaces around the delimiters. Most existing content should be unaffected as the previous behavior was likely unintentional.
+
+**v0.150.0**
 
 Changed behavior: mdz accepts markdown links but not TSDoc link syntax.
 Reason: mdz is the OUTPUT format. TSDoc → mdz conversion happens at build time in `tsdoc_helpers.ts`, not at runtime.

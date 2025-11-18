@@ -1,0 +1,15 @@
+[
+	{
+		"type": "Paragraph",
+		"children": [
+			{
+				"type": "Text",
+				"content": "plain text\ncontinues here\n",
+				"start": 0,
+				"end": 26
+			}
+		],
+		"start": 0,
+		"end": 26
+	}
+]

@@ -5,7 +5,7 @@
 		"children": [
 			{
 				"type": "Text",
-				"content": "First line.\nSecond line.\nThird line.",
+				"content": "First line.\n  Second line.\nThird line.",
 				"start": 7,
 				"end": 43
 			}

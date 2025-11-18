@@ -31,7 +31,13 @@
 			{/if}
 		</svelte:element>
 	{:else}
-		<code class="color_c_5">&lt;{node.name} /&gt;</code>
+		<!-- Unregistered element - show placeholder with children -->
+		{#if node.children.length > 0}
+			<code class="color_c_5">&lt;{node.name}&gt;</code
+			>{@render render_children(node.children)}<code class="color_c_5">&lt;/{node.name}&gt;</code>
+		{:else}
+			<code class="color_c_5">&lt;{node.name} /&gt;</code>
+		{/if}
 	{/if}
 {:else if node.type === 'Component'}
 	{@const Component = components?.get(node.name)}
@@ -42,7 +48,13 @@
 			{/if}
 		</Component>
 	{:else}
-		<code class="color_c_5">&lt;{node.name} /&gt;</code>
+		<!-- Unregistered component - show placeholder with children -->
+		{#if node.children.length > 0}
+			<code class="color_c_5">&lt;{node.name}&gt;</code
+			>{@render render_children(node.children)}<code class="color_c_5">&lt;/{node.name}&gt;</code>
+		{:else}
+			<code class="color_c_5">&lt;{node.name} /&gt;</code>
+		{/if}
 	{/if}
 {:else if node.type === 'Text'}
 	{node.content}

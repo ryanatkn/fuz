@@ -80,6 +80,50 @@ _Italic with **bold** and ~strikethrough~_
 **~_All three combined_~**
 ```
 
+### Intraword Emphasis
+
+mdz follows GitHub Flavored Markdown rules for word boundaries to support programming identifiers.
+
+**Underscores cannot create emphasis in the middle of words:**
+
+```
+foo_bar_baz → literal text (no emphasis)
+snake_case_identifier → literal text
+CONSTANT_CASE_NAME → literal text
+word _emphasis_ word → word <em>emphasis</em> word
+```
+
+This is intentional to support `snake_case` and `CONSTANT_CASE` identifiers common in programming.
+
+**Bold and strikethrough also require word boundaries:**
+
+```
+foo**bar**baz → literal text (no bold)
+foo~bar~baz → literal text (no strikethrough)
+word **bold** word → word <strong>bold</strong> word
+```
+
+**Inline code works anywhere:**
+
+```
+foo`bar`baz → foo<code>bar</code>baz
+```
+
+**Word boundary definition**: A delimiter is at a word boundary if not surrounded by alphanumeric characters or underscores (`a-z`, `A-Z`, `0-9`, `_`).
+
+### Multiline Formatting
+
+Bold, italic, and strikethrough can span single newlines (line breaks):
+
+```
+**bold text
+continues here**
+```
+
+This creates a single bold element containing text with a line break. Inline code CANNOT span newlines - a newline before the closing backtick makes both backticks literal text.
+
+Double newlines (paragraph breaks) interrupt all inline formatting:
+
 ---
 
 ## Links
@@ -154,7 +198,7 @@ Second line.
 Third line.
 ```
 
-Renders with `<br>` between lines.
+Newlines are preserved in the text content and rendered visually via CSS `white-space: pre-wrap`. The `<Mdz>` component wraps content with this CSS class to ensure line breaks display correctly.
 
 ### Double Newline
 
@@ -438,7 +482,9 @@ mdz deliberately diverges from CommonMark and GitHub Flavored Markdown to minimi
 | Bold | `**text**` or `__text__` | `**text**` only |
 | Italic | `*text*` or `_text_` | `_text_` only |
 | Single `*` | Creates italic | Literal text |
-| Strikethrough | Not in CommonMark, `~~text~~` in GFM | `~text~` |
+| Intraword underscore | `foo_bar_baz` = literal (GFM) | Same: literal (word boundaries required) |
+| Intraword asterisk | `foo*bar*baz` = emphasis (allowed) | Different: literal (word boundaries required) |
+| Strikethrough | Not in CommonMark, `~~text~~` in GFM | `~text~` with word boundaries |
 | Horizontal rule | `---`, `***`, `___`, variable lengths | `---` exactly (3 hyphens) |
 | Indented code | 4 spaces creates code block | NOT supported |
 | Code block indent | Can be indented | Must be column 0 |

@@ -32,7 +32,7 @@
 	const link_external_example =
 		'[Fuz API docs](https://fuz.dev/docs/api) and https://fuz.dev/docs/api and /docs/api';
 	const linebreak_example = 'First line.\nSecond line.\nThird line.';
-	const paragraph_example = 'First paragraph.\n\nSecond paragraph.';
+	const paragraph_example = 'First paragraph.\n\nSecond paragraph.\nLinebreak in second paragraph.';
 	const triple_linebreak_example =
 		'First paragraph.\n\n\nSecond paragraph separated by an extra newline.';
 	const hr_example = 'Section one.\n\n---\n\nSection two.';
