@@ -28,9 +28,8 @@
 	const whitespace_example = ' see \n  how       \n   whitespace    \nis preserved ';
 	const code_example = 'To parse markdown directly, use `mdz_parse` from module `mdz.ts`.';
 	const code_plain_example = 'This `identifier` does not exist.';
-	const link_external_example = 'Visit https://fuz.dev/docs/api for details.';
-	const link_internal_example = 'See /docs/api for the API documentation.';
-	const link_markdown_example = 'Check [the docs](https://fuz.dev/docs/api) for more info.';
+	const link_external_example =
+		'[Fuz API docs](https://fuz.dev/docs/api) - https://fuz.dev/docs/api - /docs/api';
 	const linebreak_example = 'First line.\nSecond line.\nThird line.';
 	const paragraph_example = 'First paragraph.\n\nSecond paragraph.';
 	const triple_linebreak_example =
@@ -61,7 +60,7 @@
 				<li>
 					end lines with <code class="white_space_pre"> \</code> to opt out of rendering the line break?
 				</li>
-				<li>loosen/tighten some restrictions?</li>
+				<li>loosen/tighten some restrictions like requiring blank newline separators?</li>
 			</ul>
 		</aside>
 	</section>
@@ -137,18 +136,17 @@
 
 	<Tome_Section>
 		<Tome_Section_Header text="Links" />
-		<p>
-			mdz automatically detects external URLs starting with <code>https://</code> or
-			<code>http://</code>:
-		</p>
+		<p>mdz supports three kinds of links:</p>
+		<ul>
+			<li>standard markdown link syntax</li>
+			<li>
+				external URLs starting with <code>https://</code> or
+				<code>http://</code>
+			</li>
+			<li>internal paths starting with <code>/</code></li>
+		</ul>
 		<Code content={link_external_example} class="mb_lg" />
 		<Mdz content={link_external_example} class="mb_xl5" />
-		<p>Internal paths starting with <code>/</code> are also auto-detected:</p>
-		<Code content={link_internal_example} class="mb_lg" />
-		<Mdz content={link_internal_example} class="mb_xl5" />
-		<p>Use standard markdown link syntax for custom display text:</p>
-		<Code content={link_markdown_example} class="mb_lg" />
-		<Mdz content={link_markdown_example} class="mb_xl5" />
 		<p>
 			<strong>Note:</strong> Relative paths (<code>./</code>, <code>../</code>) are not supported.
 			mdz content doesn't have a stable location concept—TSDoc comments render at different URLs
