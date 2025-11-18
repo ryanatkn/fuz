@@ -47,9 +47,10 @@
 <Tome_Content {tome}>
 	<section>
 		<p>
-			mdz is a small markdown dialect that supports Svelte components, auto-detected URLs and paths,
-			and standard markdown link syntax. The goal is to be friendly to nontechnical users and
-			integrate with other Fuz systems.
+			mdz is a small markdown dialect that supports Svelte components, auto-detected URLs prefixed
+			with <code>https://</code> and <code>/</code>, and some Fuz features like linkified
+			identifiers and modules in <code>`backticks`</code>. The goal is to be friendly to
+			nontechnical users and integrate markdown with Svelte and Fuz.
 		</p>
 		<aside>
 			⚠️ This is an early proof of concept with missing features. Lists and blockquotes are next.
@@ -58,7 +59,8 @@
 			<p>Possible changes?</p>
 			<ul>
 				<li>
-					end lines with <code class="white_space_pre"> \</code> to opt out of rendering the line break?
+					allow ending lines with <code class="white_space_pre"> \</code> to opt out of rendering the
+					line break?
 				</li>
 				<li>loosen/tighten some restrictions like requiring blank newline separators?</li>
 			</ul>
