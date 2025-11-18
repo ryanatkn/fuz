@@ -3661,6 +3661,11 @@ export const src_json: Src_Json = {
 							type: 'boolean',
 							optional: true,
 						},
+						{
+							name: 'nowrap',
+							type: 'boolean',
+							optional: true,
+						},
 					],
 					source_line: 1,
 				},

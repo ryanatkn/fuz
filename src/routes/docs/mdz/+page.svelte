@@ -60,7 +60,8 @@
 			preferring false negatives over false positives to minimize surprise.
 		</p>
 		<aside>
-			⚠️ This is an early proof of concept with missing features. Lists and blockquotes are next.
+			⚠️ This is an early proof of concept with missing features. Attributes, lists, and blockquotes
+			are next.
 		</aside>
 		<aside>
 			<p>Possible changes?</p>
