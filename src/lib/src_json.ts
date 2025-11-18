@@ -13,7 +13,7 @@ export interface Src_Json {
  * Module information with metadata.
  */
 export interface Module_Json {
-	/** Module path relative to `src/lib`. */
+	/** Module path relative to src/lib. */
 	path: string;
 	identifiers?: Array<Identifier_Json>;
 	module_comment?: string;

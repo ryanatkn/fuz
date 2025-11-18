@@ -5398,7 +5398,7 @@ export const src_json: Src_Json = {
 							name: 'path',
 							kind: 'variable',
 							type_signature: 'string',
-							doc_comment: 'Module path relative to `src/lib`.',
+							doc_comment: 'Module path relative to src/lib.',
 						},
 						{
 							name: 'identifiers',

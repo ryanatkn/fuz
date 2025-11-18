@@ -152,9 +152,9 @@ Documentation components:
 
 #### Helpers
 
-- csp - Content Security Policy utilities (`src/lib/csp.ts`)
-- logos - logo and branding helpers (`src/lib/logos.ts`)
-- mdz - minimal markdown dialect for documentation (`src/lib/mdz.ts`)
+- csp - Content Security Policy utilities (`csp.ts`)
+- logos - logo and branding helpers (`logos.ts`)
+- mdz - minimal markdown dialect for documentation (`mdz.ts`)
 
 #### Components
 
