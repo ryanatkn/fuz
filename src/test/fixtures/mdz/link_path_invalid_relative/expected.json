@@ -1,0 +1,15 @@
+[
+	{
+		"type": "Paragraph",
+		"children": [
+			{
+				"type": "Text",
+				"content": "Relative paths like ./a/b and ../a/b should not auto-link.",
+				"start": 0,
+				"end": 58
+			}
+		],
+		"start": 0,
+		"end": 58
+	}
+]

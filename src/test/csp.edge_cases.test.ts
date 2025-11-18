@@ -352,7 +352,7 @@ describe('directive override precedence edge cases', () => {
 
 describe('structuredClone edge cases', () => {
 	test('clones nested arrays correctly', () => {
-		const nested = [['self', 'example.com']];
+		const nested = [['self', 'fuz.dev']];
 
 		const csp1 = create_csp_directives({
 			directives: {

@@ -1,0 +1,29 @@
+[
+	{
+		"type": "Paragraph",
+		"children": [
+			{
+				"type": "Text",
+				"content": "See ",
+				"start": 0,
+				"end": 4
+			},
+			{
+				"type": "Link",
+				"reference": "/docs/api",
+				"display_text": "API Documentation",
+				"link_type": "internal",
+				"start": 4,
+				"end": 34
+			},
+			{
+				"type": "Text",
+				"content": " for reference.",
+				"start": 34,
+				"end": 49
+			}
+		],
+		"start": 0,
+		"end": 49
+	}
+]

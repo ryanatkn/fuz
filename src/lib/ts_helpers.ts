@@ -381,8 +381,10 @@ export const ts_extract_variable_info = (
 
 /**
  * Extract module-level comment.
- * Only accepts JSDoc/TSDoc comments (`/** ... *\/`) that have a blank line separating them
- * from the following statement. Module comments can appear after imports.
+ *
+ * Only accepts JSDoc/TSDoc comments (`/** ... *\/`) followed by a blank line to distinguish
+ * them from identifier-level comments. This prevents accidentally treating function/class
+ * comments as module comments. Module comments can appear after imports.
  */
 export const ts_extract_module_comment = (source_file: ts.SourceFile): string | undefined => {
 	const full_text = source_file.getFullText();

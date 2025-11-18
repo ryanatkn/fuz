@@ -49,7 +49,7 @@ export const module_is_json = (path: string): boolean => path.endsWith('.json');
 export const module_is_test = (path: string): boolean => path.endsWith('.test.ts');
 
 /**
- * Check if ID is a source file in /src/lib/ (excluding tests).
+ * Check if ID is a source file in src/lib (excluding tests).
  */
 export const module_is_source = (id: string): boolean =>
 	id.includes('/src/lib/') && !module_is_test(id);

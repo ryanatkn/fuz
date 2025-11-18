@@ -28,7 +28,8 @@
 	const whitespace_example = ' see \n  how       \n   whitespace    \nis preserved ';
 	const code_example = 'To parse markdown directly, use `mdz_parse` from module `mdz.ts`.';
 	const code_plain_example = 'This `identifier` does not exist.';
-	const link_example = 'See the {@link Alert} component.';
+	const link_external_example =
+		'[Fuz API docs](https://fuz.dev/docs/api) and https://fuz.dev/docs/api and /docs/api';
 	const linebreak_example = 'First line.\nSecond line.\nThird line.';
 	const paragraph_example = 'First paragraph.\n\nSecond paragraph.';
 	const triple_linebreak_example =
@@ -46,8 +47,9 @@
 <Tome_Content {tome}>
 	<section>
 		<p>
-			mdz is a small markdown dialect that supports Svelte components and a subset of TSDoc. The
-			goal is to be friendly to nontechnical users and integrate with other Fuz systems.
+			mdz is a small markdown dialect that supports Svelte components, auto-detected URLs and paths,
+			and standard markdown link syntax. The goal is to be friendly to nontechnical users and
+			integrate with other Fuz systems.
 		</p>
 		<aside>
 			⚠️ This is an early proof of concept with missing features. Lists and blockquotes are next.
@@ -58,7 +60,7 @@
 				<li>
 					end lines with <code class="white_space_pre"> \</code> to opt out of rendering the line break?
 				</li>
-				<li>loosen/tighten some restrictions?</li>
+				<li>loosen/tighten some restrictions like requiring blank newline separators?</li>
 			</ul>
 		</aside>
 	</section>
@@ -133,13 +135,27 @@
 	</Tome_Section>
 
 	<Tome_Section>
-		<Tome_Section_Header text="TSDoc links" />
-		<p>Use <code>{'{@link}'}</code> and <code>{'{@see}'}</code> tags:</p>
-		<Code content={link_example} class="mb_lg" />
-		<Mdz content={link_example} class="mb_xl5" />
+		<Tome_Section_Header text="Links" />
+		<p>mdz supports three kinds of links:</p>
+		<ul>
+			<li>standard markdown link syntax</li>
+			<li>
+				external URLs starting with <code>https://</code> or
+				<code>http://</code>
+			</li>
+			<li>internal paths starting with <code>/</code></li>
+		</ul>
+		<Code content={link_external_example} class="mb_lg" />
+		<Mdz content={link_external_example} class="mb_xl5" />
+		<p>
+			<strong>Note:</strong> Relative paths (<code>./</code>, <code>../</code>) are not supported.
+			mdz content doesn't have a stable location concept -- TSDoc comments render at different URLs
+			than their source files. Root-relative paths (<code>/docs/...</code>) are more portable and
+			work consistently regardless of where the content is rendered. This could change, I'm open to
+			discussion.
+		</p>
 	</Tome_Section>
 
-	<!-- TODO HYDRATION_MISMATCH: ONE -->
 	<Tome_Section>
 		<Tome_Section_Header text="HTML elements" />
 		<p>mdz supports an opt-in set of HTML elements for semantic markup and styling.</p>
@@ -164,7 +180,6 @@ mdz_elements_context.set(new Map([
 		</p>
 	</Tome_Section>
 
-	<!-- TODO HYDRATION_MISMATCH: TWO -->
 	<Tome_Section>
 		<Tome_Section_Header text="Svelte components" />
 		<p>
@@ -193,7 +208,6 @@ mdz_components_context.set(new Map([
 		</aside>
 	</Tome_Section>
 
-	<!-- TODO HYDRATION_MISMATCH: THREE -->
 	<Tome_Section>
 		<Tome_Section_Header text="Advanced usage" />
 		<p>

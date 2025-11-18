@@ -405,14 +405,14 @@ describe('interaction with value_defaults', () => {
 	test('sources added to custom value_defaults', () => {
 		const csp = create_csp_directives({
 			value_defaults: {
-				'connect-src': ['self', 'https://api.example.com'],
+				'connect-src': ['self', 'https://template.fuz.dev'],
 			},
 			trusted_sources: [create_test_source(TRUSTED, 'high')],
 		});
 
 		// Trusted source should be added to custom defaults
 		assert_source_in_directive(csp, 'connect-src', 'self');
-		assert_source_in_directive(csp, 'connect-src', 'https://api.example.com' as any);
+		assert_source_in_directive(csp, 'connect-src', 'https://template.fuz.dev' as any);
 		assert_source_in_directive(csp, 'connect-src', TRUSTED);
 	});
 
@@ -611,9 +611,9 @@ describe('empty and unusual source values', () => {
 
 	test('sources with special characters', () => {
 		const special_sources = [
-			'https://example.com:8080',
-			'*.example.com',
-			'wss://websocket.example.com',
+			'https://fuz.dev:8080',
+			'*.fuz.dev',
+			'wss://websocket.fuz.dev',
 			'data:',
 			'blob:',
 		] as const;

@@ -1,5 +1,7 @@
 {
 	"text": "Function with related references.",
 	"params": {},
-	"see_also": ["{@link https://example.com/docs}"]
+	"see_also": [
+		"https://fuz.dev/docs"
+	]
 }

@@ -98,13 +98,36 @@ Code generation flow:
      component)
 4. SvelteKit routes at `/docs/api` render searchable documentation
 
+Two-phase architecture (TSDoc → mdz):
+
+**Build phase** (TSDoc extraction):
+
+- uses `tsdoc_helpers.ts` with TypeScript Compiler API
+- extracts JSDoc/TSDoc from source files
+- produces structured data (doc_comment, params, returns, throws, examples,
+  see_also, mutates)
+- runs during `gro gen` only (build-time only)
+
+**Runtime phase** (mdz rendering):
+
+- uses `mdz.ts` to parse and render documentation strings
+- mdz is an enhanced markdown dialect
+- supports auto-detected URLs (`https://`), internal paths (`/path`), and
+  standard markdown links (`[text](url)`)
+- TSDoc `@see` tags are converted to mdz format during build phase
+- runs in the browser when viewing docs
+- mdz is the OUTPUT format - documentation extracted at build time is stored as
+  mdz-formatted strings
+
 Supporting helpers:
 
 - `src_json.ts` - type definitions for the metadata format
 - `package_gen_helpers.ts` - build-time generation helpers (validation, sorting,
   analysis)
 - `ts_helpers.ts` - TypeScript compiler API utilities
-- `tsdoc_helpers.ts` - JSDoc/TSDoc parsing
+- `tsdoc_helpers.ts` - JSDoc/TSDoc parsing (supports standard tags: `@param`,
+  `@returns`, `@throws`, `@example`, `@deprecated`, `@see`, `@since`, plus
+  non-standard `@mutates` for documenting side effects)
 - `svelte_helpers.ts` - Svelte component analysis (via svelte2tsx)
 - `module_helpers.ts` - module path utilities
 - `package_helpers.ts` - URL builders (`url_github_file`, `url_api_identifier`,
@@ -129,9 +152,9 @@ Documentation components:
 
 #### Helpers
 
-- csp - Content Security Policy utilities (`src/lib/csp.ts`)
-- logos - logo and branding helpers (`src/lib/logos.ts`)
-- mdz - minimal Markdown+TSDoc parser for API documentation (`src/lib/mdz.ts`)
+- csp - Content Security Policy utilities (`csp.ts`)
+- logos - logo and branding helpers (`logos.ts`)
+- mdz - minimal markdown dialect for documentation (`mdz.ts`)
 
 #### Components
 
@@ -184,7 +207,7 @@ documentation:
 - `Tome_Content`, `Tome_Header`, `Tome_Section` - tome layout components
 - `Package_Detail` - package information display
 - `Package_Summary` - package summary card
-- `Mdz` - renders mdz (minimal Markdown+TSDoc) content with custom components
+- `Mdz` - renders mdz (minimal markdown dialect) content with custom components
 
 utilities:
 
@@ -199,7 +222,7 @@ core systems:
 - `docs_helpers.svelte.ts` - docs navigation and linking
 - `themer.svelte.ts` - theme and color scheme management
 - `context_helpers.ts` - Svelte context utilities
-- `mdz.ts` - minimal Markdown+TSDoc parser for API docs
+- `mdz.ts` - minimal markdown dialect for rendering documentation
 
 component helpers:
 

@@ -57,9 +57,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Link Entry Handling (Safar
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
-				{snippet: 'link', props: {href: 'https://example.com'}},
-			]);
+			await setup_contextmenu_action(target, [{snippet: 'link', props: {href: 'https://fuz.dev'}}]);
 
 			// Longpress to open menu
 			const touchstart = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
@@ -74,9 +72,9 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Link Entry Handling (Safar
 			flushSync();
 
 			// Link should be rendered with formatted URL (format_url strips protocol)
-			const link = container.querySelector('a[href="https://example.com"]');
+			const link = container.querySelector('a[href="https://fuz.dev"]');
 			assert.ok(link);
-			assert.ok(link.textContent.includes('example.com'));
+			assert.ok(link.textContent.includes('fuz.dev'));
 		});
 
 		test('long-pressing link opens fuz contextmenu with link entry', async () => {
@@ -86,12 +84,12 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Link Entry Handling (Safar
 
 			// Create an actual link element as the target
 			const link_target = document.createElement('a');
-			link_target.href = 'https://example.com';
+			link_target.href = 'https://fuz.dev';
 			link_target.textContent = 'A link';
 			container.appendChild(link_target);
 
 			await setup_contextmenu_action(link_target, [
-				{snippet: 'link', props: {href: 'https://example.com', content: 'Open in new tab'}},
+				{snippet: 'link', props: {href: 'https://fuz.dev', content: 'Open in new tab'}},
 			]);
 
 			// Longpress on the link itself
@@ -110,7 +108,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Link Entry Handling (Safar
 			flushSync();
 
 			// Menu should contain link entry
-			const menu_link = container.querySelector('.contextmenu a[href="https://example.com"]');
+			const menu_link = container.querySelector('.contextmenu a[href="https://fuz.dev"]');
 			assert.ok(menu_link);
 		});
 
@@ -123,7 +121,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Link Entry Handling (Safar
 			container.appendChild(target);
 
 			await setup_contextmenu_action(target, [
-				{snippet: 'link', props: {href: 'https://example.com', content: 'Example Link'}},
+				{snippet: 'link', props: {href: 'https://fuz.dev', content: 'Example Link'}},
 			]);
 
 			// Open menu
@@ -136,7 +134,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Link Entry Handling (Safar
 			await tick();
 			flushSync();
 
-			const menu_link = container.querySelector('a[href="https://example.com"]');
+			const menu_link = container.querySelector('a[href="https://fuz.dev"]');
 			assert.ok(menu_link);
 
 			// Right-click on the link entry in the menu
@@ -162,7 +160,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Link Entry Handling (Safar
 			// Note: This is a simplified test - actual submenu implementation may differ
 			await setup_contextmenu_action(target, [
 				{snippet: 'text', props: {content: 'Parent Item', icon: '📁', run: () => undefined}},
-				{snippet: 'link', props: {href: 'https://example.com', content: 'Nested Link'}},
+				{snippet: 'link', props: {href: 'https://fuz.dev', content: 'Nested Link'}},
 			]);
 
 			// Open menu
@@ -175,7 +173,7 @@ describe('Contextmenu_Root_For_Safari_Compatibility - Link Entry Handling (Safar
 			await tick();
 			flushSync();
 
-			const link = container.querySelector('a[href="https://example.com"]');
+			const link = container.querySelector('a[href="https://fuz.dev"]');
 			assert.ok(link);
 
 			// Right-click on nested link

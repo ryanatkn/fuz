@@ -69,7 +69,7 @@ describe('SvelteKit config patterns', () => {
 	});
 
 	test('SvelteKit with CDN assets', () => {
-		const cdn = 'cdn.example.com';
+		const cdn = 'blog.fuz.dev';
 
 		const csp = create_csp_directives({
 			trusted_sources: [
@@ -109,7 +109,7 @@ describe('SvelteKit config patterns', () => {
 	});
 
 	test('SvelteKit with analytics', () => {
-		const analytics = 'analytics.example.com';
+		const analytics = 'analytics.fuz.dev';
 
 		const csp = create_csp_directives({
 			trusted_sources: [
@@ -236,7 +236,7 @@ describe('SvelteKit form handling', () => {
 	});
 
 	test('form-action with external API', () => {
-		const api_endpoint = 'api.example.com';
+		const api_endpoint = 'template.fuz.dev';
 
 		const csp = create_csp_directives({
 			trusted_sources: [
@@ -261,7 +261,7 @@ describe('SvelteKit WebSocket support', () => {
 	});
 
 	test('connect-src with external WebSocket server', () => {
-		const ws_server = 'wss://ws.example.com';
+		const ws_server = 'wss://ws.fuz.dev';
 
 		const csp = create_csp_directives({
 			trusted_sources: [
@@ -285,7 +285,7 @@ describe('SvelteKit iframe embedding', () => {
 	});
 
 	test('frame-ancestors for widget use case', () => {
-		const parent_site = 'parent.example.com';
+		const parent_site = 'parent.fuz.dev';
 
 		const csp = create_csp_directives({
 			trusted_sources: [
@@ -321,7 +321,7 @@ describe('SvelteKit environment variables', () => {
 
 	test('conditional analytics in production', () => {
 		const is_prod = true as boolean; // Simulating environment check
-		const analytics = 'analytics.example.com';
+		const analytics = 'analytics.fuz.dev';
 
 		const csp = create_csp_directives({
 			trusted_sources: is_prod
@@ -374,7 +374,7 @@ describe('SvelteKit manifest support', () => {
 	});
 
 	test('manifest-src with CDN', () => {
-		const cdn = 'cdn.example.com';
+		const cdn = 'blog.fuz.dev';
 
 		const csp = create_csp_directives({
 			value_defaults: {

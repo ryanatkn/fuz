@@ -1,0 +1,1 @@
+Relative paths like ./a/b and ../a/b should not auto-link.

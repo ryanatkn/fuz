@@ -7,7 +7,8 @@
  * - Component-level documentation
  * - Type information
  *
- * Uses the TypeScript Compiler API to parse the transformed output from svelte2tsx.
+ * Workflow: Transform Svelte to TypeScript via svelte2tsx, parse the transformed
+ * TypeScript with the TS Compiler API, extract component-level JSDoc from original source.
  *
  * All functions are prefixed with `svelte_` for clarity.
  */

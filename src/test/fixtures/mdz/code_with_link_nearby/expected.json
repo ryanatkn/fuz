@@ -16,14 +16,14 @@
 			},
 			{
 				"type": "Link",
-				"reference": "Foo",
+				"reference": "https://fuz.dev",
 				"display_text": null,
-				"link_type": "identifier",
+				"link_type": "external",
 				"start": 12,
-				"end": 23
+				"end": 27
 			}
 		],
 		"start": 0,
-		"end": 23
+		"end": 27
 	}
 ]

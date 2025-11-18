@@ -145,13 +145,13 @@ describe('value_defaults_base option tests', () => {
 		const csp = create_csp_directives({
 			value_defaults_base: null,
 			value_defaults: {
-				'script-src': ['self', 'https://example.com' as any],
+				'script-src': ['self', 'https://fuz.dev' as any],
 			},
 			trusted_sources: [create_test_source(TRUSTED, 'high')],
 		});
 
 		// Only the explicitly added directive should exist
-		assert.deepEqual(csp['script-src'], ['self', 'https://example.com', TRUSTED]);
+		assert.deepEqual(csp['script-src'], ['self', 'https://fuz.dev', TRUSTED]);
 
 		// No other directives should be present
 		assert_directive_not_exists(csp, 'img-src', 'img-src should not exist in the result');
@@ -167,12 +167,12 @@ describe('value_defaults_base option tests', () => {
 		const csp = create_csp_directives({
 			value_defaults_base: {},
 			value_defaults: {
-				'script-src': ['self', 'https://example.com' as any],
+				'script-src': ['self', 'https://fuz.dev' as any],
 			},
 		});
 
 		// Only the explicitly added directive should exist
-		assert.deepEqual(csp['script-src'], ['self', 'https://example.com']);
+		assert.deepEqual(csp['script-src'], ['self', 'https://fuz.dev']);
 
 		// No other directives should be present
 		assert_directive_not_exists(csp, 'img-src', 'img-src should not exist in the result');
@@ -188,12 +188,12 @@ describe('value_defaults_base option tests', () => {
 		const csp = create_csp_directives({
 			value_defaults_base: custom_base,
 			value_defaults: {
-				'script-src': ['self', 'https://example.com' as any],
+				'script-src': ['self', 'https://fuz.dev' as any],
 			},
 		});
 
 		// The overridden directive should have the new values
-		assert.deepEqual(csp['script-src'], ['self', 'https://example.com']);
+		assert.deepEqual(csp['script-src'], ['self', 'https://fuz.dev']);
 
 		// The non-overridden directive should use the custom base
 		assert.deepEqual(csp['img-src'], ['https://custom-images.com']);
@@ -214,7 +214,7 @@ describe('value_defaults_base option tests', () => {
 				// Override script-src from custom base
 				'script-src': ['self'],
 				// Add connect-src not in custom base
-				'connect-src': ['self', 'https://api.example.com' as any],
+				'connect-src': ['self', 'https://template.fuz.dev' as any],
 			},
 		});
 
@@ -225,7 +225,7 @@ describe('value_defaults_base option tests', () => {
 		assert.deepEqual(csp['img-src'], ['https://base-images.com']);
 
 		// connect-src should use value_defaults (new directive)
-		assert.deepEqual(csp['connect-src'], ['self', 'https://api.example.com']);
+		assert.deepEqual(csp['connect-src'], ['self', 'https://template.fuz.dev']);
 
 		// Other directives should not exist
 		assert_directive_not_exists(csp, 'style-src');
@@ -270,7 +270,7 @@ describe('minimal configurations', () => {
 
 describe('array vs non-array directives', () => {
 	test('array directives are properly cloned', () => {
-		const original_array = ['self', 'https://example.com' as any];
+		const original_array = ['self', 'https://fuz.dev' as any];
 		const csp1 = create_csp_directives({
 			value_defaults: {
 				'script-src': original_array,
@@ -304,7 +304,7 @@ describe("default value mutation doesn't affect subsequent calls", () => {
 	test('modifying returned directives does not affect subsequent calls', () => {
 		const options = {
 			value_defaults: {
-				'script-src': ['self', 'https://example.com' as any],
+				'script-src': ['self', 'https://fuz.dev' as any],
 			},
 		};
 

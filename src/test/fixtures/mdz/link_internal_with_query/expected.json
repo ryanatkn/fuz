@@ -1,0 +1,29 @@
+[
+	{
+		"type": "Paragraph",
+		"children": [
+			{
+				"type": "Text",
+				"content": "Search at ",
+				"start": 0,
+				"end": 10
+			},
+			{
+				"type": "Link",
+				"reference": "/search?q=test",
+				"display_text": null,
+				"link_type": "internal",
+				"start": 10,
+				"end": 24
+			},
+			{
+				"type": "Text",
+				"content": " for results.",
+				"start": 24,
+				"end": 37
+			}
+		],
+		"start": 0,
+		"end": 37
+	}
+]

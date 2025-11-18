@@ -130,7 +130,7 @@ export const create_shared_link_entry_tests = (
 				container.appendChild(target);
 
 				await setup_contextmenu_action(target, [
-					{snippet: 'link', props: {href: 'https://example.com'}},
+					{snippet: 'link', props: {href: 'https://fuz.dev'}},
 				]);
 
 				// Open menu
@@ -152,7 +152,7 @@ export const create_shared_link_entry_tests = (
 
 				flushSync();
 
-				const link = container.querySelector('a[href="https://example.com"]');
+				const link = container.querySelector('a[href="https://fuz.dev"]');
 				assert.ok(link);
 
 				// Right-click on link
@@ -174,7 +174,7 @@ export const create_shared_link_entry_tests = (
 
 				await setup_contextmenu_action(target, [
 					{snippet: 'link', props: {href: 'https://www.fuz.dev/'}},
-					{snippet: 'link', props: {href: 'https://example.com/'}},
+					{snippet: 'link', props: {href: 'https://fuz.dev/'}},
 				]);
 
 				// Open menu
@@ -303,7 +303,7 @@ export const create_shared_link_entry_tests = (
 				container.appendChild(target);
 
 				await setup_contextmenu_action(target, [
-					{snippet: 'link', props: {href: 'https://example.com'}},
+					{snippet: 'link', props: {href: 'https://fuz.dev'}},
 				]);
 
 				// Open menu
@@ -325,7 +325,7 @@ export const create_shared_link_entry_tests = (
 
 				flushSync();
 
-				const link = container.querySelector('a[href="https://example.com"]');
+				const link = container.querySelector('a[href="https://fuz.dev"]');
 				assert.ok(link);
 
 				// Track if window handler is called
@@ -354,7 +354,7 @@ export const create_shared_link_entry_tests = (
 				container.appendChild(target);
 
 				await setup_contextmenu_action(target, [
-					{snippet: 'link', props: {href: 'https://example.com', content: 'Example Link'}},
+					{snippet: 'link', props: {href: 'https://fuz.dev', content: 'Example Link'}},
 				]);
 
 				// Open menu
@@ -376,7 +376,7 @@ export const create_shared_link_entry_tests = (
 
 				flushSync();
 
-				const link = container.querySelector('a[href="https://example.com"]');
+				const link = container.querySelector('a[href="https://fuz.dev"]');
 				assert.ok(link);
 
 				// Right-click on link
@@ -400,7 +400,7 @@ export const create_shared_link_entry_tests = (
 				container.appendChild(target);
 
 				await setup_contextmenu_action(target, [
-					{snippet: 'link', props: {href: 'https://example.com', content: 'Example Link'}},
+					{snippet: 'link', props: {href: 'https://fuz.dev', content: 'Example Link'}},
 				]);
 
 				// Open menu at specific position
@@ -425,7 +425,7 @@ export const create_shared_link_entry_tests = (
 
 				flushSync();
 
-				const menu_link = container.querySelector('a[href="https://example.com"]');
+				const menu_link = container.querySelector('a[href="https://fuz.dev"]');
 				assert.ok(menu_link);
 
 				// Right-click on link entry

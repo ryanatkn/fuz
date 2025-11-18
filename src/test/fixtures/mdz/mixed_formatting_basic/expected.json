@@ -60,20 +60,20 @@
 			},
 			{
 				"type": "Link",
-				"reference": "Foo",
+				"reference": "/about",
 				"display_text": null,
-				"link_type": "identifier",
+				"link_type": "internal",
 				"start": 42,
-				"end": 53
+				"end": 48
 			},
 			{
 				"type": "Text",
 				"content": ".",
-				"start": 53,
-				"end": 54
+				"start": 48,
+				"end": 49
 			}
 		],
 		"start": 0,
-		"end": 54
+		"end": 49
 	}
 ]

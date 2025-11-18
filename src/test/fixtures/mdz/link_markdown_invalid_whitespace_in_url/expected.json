@@ -1,0 +1,43 @@
+[
+	{
+		"type": "Paragraph",
+		"children": [
+			{
+				"type": "Text",
+				"content": "Link with [text](",
+				"start": 0,
+				"end": 17
+			},
+			{
+				"type": "Link",
+				"reference": "https://fuz.dev",
+				"display_text": null,
+				"link_type": "external",
+				"start": 17,
+				"end": 32
+			},
+			{
+				"type": "Text",
+				"content": " ",
+				"start": 32,
+				"end": 33
+			},
+			{
+				"type": "Link",
+				"reference": "/path",
+				"display_text": null,
+				"link_type": "internal",
+				"start": 33,
+				"end": 38
+			},
+			{
+				"type": "Text",
+				"content": ") has space in URL.",
+				"start": 38,
+				"end": 57
+			}
+		],
+		"start": 0,
+		"end": 57
+	}
+]

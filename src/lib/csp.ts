@@ -339,7 +339,7 @@ export const csp_directive_required_trust_defaults: Record<Csp_Directive, Csp_Tr
  *
  * Could be moved to `csp.ts` but is currently here to keep that module smaller.
  *
- * @see {@link https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy}
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy
  */
 export const csp_directive_specs: Array<Csp_Directive_Spec> = [
 	{

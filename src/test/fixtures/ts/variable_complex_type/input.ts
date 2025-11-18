@@ -8,5 +8,5 @@ export const config: {
 } = {
 	timeout: 5000,
 	retries: 3,
-	endpoints: ['https://api.example.com'],
+	endpoints: ['https://template.fuz.dev'],
 };

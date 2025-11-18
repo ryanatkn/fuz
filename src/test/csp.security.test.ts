@@ -123,7 +123,7 @@ describe('defense in depth with styles', () => {
 	});
 
 	test('external stylesheets require trust level', () => {
-		const external_styles = 'cdn.example.com';
+		const external_styles = 'blog.fuz.dev';
 
 		const csp_default = create_csp_directives();
 		assert.ok(!csp_default['style-src']!.includes(external_styles as any));
@@ -149,7 +149,7 @@ describe('defense in depth with styles', () => {
 
 describe('trust levels enforce security boundaries', () => {
 	test('high trust required for script execution', () => {
-		const source = 'cdn.example.com';
+		const source = 'blog.fuz.dev';
 
 		// Low trust cannot add scripts
 		const csp_low = create_csp_directives({
@@ -174,7 +174,7 @@ describe('trust levels enforce security boundaries', () => {
 	});
 
 	test('trust levels correctly cascade downward', () => {
-		const source = 'trusted.example.com';
+		const source = 'trusted.fuz.dev';
 
 		// High trust source appears in high, medium, and low directives
 		const csp = create_csp_directives({
@@ -334,7 +334,7 @@ describe('form action restrictions', () => {
 	});
 
 	test('form actions require medium trust to expand', () => {
-		const external_endpoint = 'api.example.com';
+		const external_endpoint = 'template.fuz.dev';
 
 		// Medium trust needed for form-action
 		const csp_low = create_csp_directives({
@@ -364,7 +364,7 @@ describe('frame restrictions', () => {
 	});
 
 	test('medium trust required for frame sources', () => {
-		const embedded_content = 'widgets.example.com';
+		const embedded_content = 'widgets.fuz.dev';
 
 		const csp_low = create_csp_directives({
 			trusted_sources: [create_test_source(embedded_content, 'low')],

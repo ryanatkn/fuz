@@ -5,7 +5,8 @@ a [Svelte](https://svelte.dev/) UI library.
 The project is currently in early alpha,
 and there will be many breaking changes ahead.
 
-I'm an independent dev making this library to support [my other projects](http://www.ryanatkn.com/)
+I'm an independent dev making this library to
+support [my other projects](https://www.ryanatkn.com/)
 that focus on end-users. Like every UI library, Fuz can't satisfy everyone's needs,
 and it has opinions and design choices that make it more specialized than most UI libraries.
 But Fuz should be broadly useful, and I always appreciate help

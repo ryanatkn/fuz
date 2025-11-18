@@ -362,7 +362,7 @@ describe("multiple transforms don't affect each other", () => {
 
 describe('structuredClone verification', () => {
 	test('modifications to shared arrays do not affect previous results', () => {
-		const shared_array = ['self', 'https://example.com' as any];
+		const shared_array = ['self', 'https://fuz.dev' as any];
 
 		const csp1 = create_csp_directives({
 			directives: {
