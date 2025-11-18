@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.150.0
+
+### Minor Changes
+
+- change mdz to accept markdown links but not tsdoc ([#91](https://github.com/ryanatkn/fuz/pull/91))
+
 ## 0.149.0
 
 ### Minor Changes
