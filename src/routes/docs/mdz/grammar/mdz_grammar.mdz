@@ -1,6 +1,6 @@
 # mdz Formal Grammar Specification
 
-⚠️ AI generated docs
+⚠️ AI-generated
 
 This document defines the precise syntax and parsing rules for mdz (minimal markdown dialect) using Rust-inspired notation.
 
