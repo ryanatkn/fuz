@@ -16,8 +16,6 @@
 	} = $props();
 
 	const nodes = $derived(mdz_parse(content));
-
-	// TODO maybe rethink how inline works here, possibly remove the wrapper when one element, or otherwise do something smart/convenient/predictable? what could that be
 </script>
 
 <svelte:element
