@@ -64,7 +64,7 @@ Use backticks `` `code` `` for inline code.
 Use `mdz_parse` to parse mdz content.
 ```
 
-In API documentation contexts, inline code automatically links to identifiers and modules when they exist. If no match is found, it renders as plain `<code>` elements.
+Renders as `<code>` elements.
 
 **Restrictions:**
 - Cannot contain newlines (newline before closing backtick makes both backticks literal)
@@ -499,221 +499,56 @@ Strict syntax with one canonical way per feature reduces cognitive load and make
 
 ## Use Cases
 
-### API Documentation
+mdz is designed for documentation and content where predictability and simplicity matter:
 
-TSDoc comments are converted to mdz at build time by `tsdoc_helpers.ts`:
+**Technical documentation** - Whitespace preservation makes mdz ideal for code examples and technical content where spacing is meaningful. The strict syntax prevents accidental formatting.
 
-```typescript
-/**
- * Parses mdz content and returns an AST.
- *
- * @param content - The mdz string to parse
- * @returns Array of `Mdz_Node` representing the parsed content
- */
-export function mdz_parse(content: string): Mdz_Node[] {
-  // ...
-}
-```
+**Component-based content** - Integration with Svelte components and HTML elements allows rich, interactive documentation while keeping the markup simple and readable.
 
-At build time, TSDoc link syntax converts to mdz:
-- `{@link url|text}` → `[text](url)`
-- `{@link https://...}` → `https://...`
-- `{@link identifier}` → `` `identifier` ``
+**User-facing documentation** - Simple, unambiguous syntax makes mdz accessible for nontechnical writers. When syntax is strict, users can predict what will render.
 
-At runtime, `` `identifier` `` auto-links to API docs when available.
+**Embedded help text** - Lightweight formatting without markdown's complexity or edge cases. Good for tooltips, error messages, and UI strings that need basic formatting.
 
-### Documentation Pages
-
-Manual documentation written in mdz (like this file):
-
-- Simple syntax for nontechnical writers
-- Whitespace preservation for code examples
-- Auto-linking to API identifiers
-- Svelte component integration
-
-### Component Descriptions
-
-Describing component behavior with auto-linked code:
-
-```
-This component accepts a `status` prop and renders an `Alert`.
-See `Alert.svelte` for the full API.
-```
-
-### Inline Help Text
-
-Lightweight formatting without markdown complexity:
-
-```
-**Important:** Make sure to call `cleanup()` when done.
-```
-
----
-
-## Implementation Details
-
-### Parser Architecture
-
-**File:** `src/lib/mdz.ts` (1614 lines)
-
-**Characteristics:**
-- Single-pass lexer/parser
-- Character-code-based scanning for performance
-- Text accumulation optimization
-- Strict validation (false negatives over false positives)
-- Greedy/bounded delimiter matching (prevents nested formatters from consuming parent delimiters)
-- Position tracking for all nodes
-
-### Renderer Components
-
-**`Mdz.svelte`** - Component wrapper that parses content and renders nodes
-
-**`Mdz_Node_View.svelte`** - Renders individual AST nodes recursively
-
-**Basic usage:**
-
-```svelte
-<script>
-  import Mdz from '@ryanatkn/fuz/Mdz.svelte';
-</script>
-
-<Mdz content="**Bold** and _italic_ text." />
-```
-
-**Advanced usage with direct parsing:**
-
-```svelte
-<script>
-  import {mdz_parse} from '@ryanatkn/fuz/mdz.js';
-  import Mdz_Node_View from '@ryanatkn/fuz/Mdz_Node_View.svelte';
-
-  const nodes = mdz_parse(content);
-</script>
-
-<div class="custom white_space_pre_wrap">
-  {#each nodes as node}
-    <Mdz_Node_View {node} />
-  {/each}
-</div>
-```
-
-### Context System
-
-**`mdz_components_context`** - Register Svelte components
-
-**`mdz_elements_context`** - Register HTML elements
-
-Both accept `Map<string, any>` or Svelte's `SvelteMap`.
-
-### TSDoc Integration
-
-**Build phase** (`tsdoc_helpers.ts`):
-- Extracts JSDoc/TSDoc from TypeScript source
-- Converts TSDoc link syntax to mdz format
-- Stores as mdz strings in generated package metadata
-
-**Runtime phase**:
-- mdz parser processes the strings
-- Backtick code auto-links to API identifiers
-- Links render to `/docs/api` routes
-
----
-
-## Testing and Debugging
-
-### Test Fixtures
-
-**Location:** `src/test/fixtures/mdz/`
-
-**Count:** 181 fixtures covering comprehensive edge cases
-
-**Categories:**
-- Inline formatting (bold, italic, strikethrough, code)
-- Links (markdown, external URLs, internal paths)
-- Block elements (headings, hr, code blocks)
-- Components and elements
-- Whitespace handling
-- Invalid syntax patterns
-
-**Fixture structure:**
-- `input.mdz` - test input
-- `expected.json` - AST output (auto-generated)
-
-**Updating fixtures:**
-
-```bash
-gro src/test/fixtures/update
-```
-
-NEVER manually edit `expected.json` files - always regenerate via the update task.
-
-### Debug Visualization
-
-**Route:** `/docs/mdz/fixtures`
-
-Provides visual inspection of:
-- Parsed AST structure
-- All test fixtures
-- Node positions and types
+**Reference documentation** - Inline code formatting works well for documenting APIs, configuration options, and technical references.
 
 ---
 
 ## Future Features
 
-Features under consideration for future versions:
+Under consideration for future versions:
 
-**Lists** (next priority)
-- Bulleted lists with `-` or `*`
-- Numbered lists with `1.`, `2.`, etc.
-- Nested lists
+**Lists** (next priority) - bulleted (`-`, `*`) and numbered (`1.`, `2.`) with nesting support
 
-**Blockquotes**
-- Standard markdown `>` prefix
-- Nested blockquotes
+**Blockquotes** - standard markdown `>` prefix with nesting
 
-**Tag Attributes**
-- Component props: `<Alert status="error">`
-- Element classes: `<div class="container">`
-- Arbitrary attributes
+**Tag Attributes** - component props `<Alert status="error">` and element classes `<div class="container">`
 
-**Images**
-- Standard markdown: `![alt text](url)`
-- With optional title: `![alt](url "title")`
+**Images** - standard markdown `![alt](url)` with optional titles
 
-**Tables**
-- Need to determine appropriate syntax
-- Consider alignment options
+**Tables** - appropriate syntax TBD, considering alignment options
 
-**Definition Lists**
-- Useful for API documentation
-- Key-value format
+**Definition Lists** - key-value format for API documentation
 
-**Footnotes**
-- For academic/technical writing
-- Inline references with bottom definitions
+**Footnotes** - inline references with definitions for academic/technical writing
 
-**Line Break Opt-Out**
-- Possibly trailing `\` to suppress `<br>`
-- Would require careful consideration
+**Line Break Opt-Out** - possibly trailing `\` to suppress `<br>` rendering
 
 ---
 
 ## Status and Stability
 
-mdz is an **early proof of concept** with:
+mdz is an **early proof of concept**:
 
-**Strengths:**
-- Comprehensive test coverage (181 fixtures)
-- Well-defined parsing behavior
-- Production use in Fuz documentation
-- Self-documenting (this spec is written in mdz)
+**Current capabilities:**
+- Well-defined syntax and parsing rules
+- Core inline formatting (bold, italic, strikethrough, code)
+- Links (markdown, auto-detected URLs and paths)
+- Block elements (headings, horizontal rules, code blocks)
+- Component and element integration
+- Whitespace preservation
 
-**Limitations:**
-- Limited feature set (no lists, blockquotes, tables)
-- No attribute/prop support for components/elements
-- API may change based on real-world usage
-- Early adopters should expect breaking changes
-
-**Version:** Current as of Fuz v0.150.0
-
-**Feedback:** Issues and suggestions welcome at https://github.com/ryanatkn/fuz/issues
+**Known limitations:**
+- No lists, blockquotes, or tables
+- No attributes/props for components/elements
+- Syntax may evolve based on real-world usage
+- Breaking changes expected as the format matures
