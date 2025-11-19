@@ -4477,7 +4477,7 @@ export const src_json: Src_Json = {
 							description: 'if no source files are found in src/lib',
 						},
 					],
-					source_line: 169,
+					source_line: 170,
 					type_signature: '(filer: Filer, log: Logger): Disknode[]',
 					return_type: 'Disknode[]',
 					parameters: [
@@ -4504,7 +4504,7 @@ export const src_json: Src_Json = {
 								'if file cannot be read, svelte2tsx transformation fails, or component analysis fails',
 						},
 					],
-					source_line: 199,
+					source_line: 200,
 					type_signature:
 						'(disknode: Disknode, module_path: string, checker: TypeChecker): Module_Json',
 					return_type: 'Module_Json',
@@ -4536,7 +4536,7 @@ export const src_json: Src_Json = {
 							description: 'if identifier enhancement fails (via package_gen_enhance_identifier)',
 						},
 					],
-					source_line: 247,
+					source_line: 248,
 					type_signature:
 						'(disknode: Disknode, source_file: SourceFile, module_path: string, checker: TypeChecker): Module_Json',
 					return_type: 'Module_Json',
@@ -4568,7 +4568,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						"Extract dependencies and dependents for a module from the filer's dependency graph.\n\nFilters to only include source modules from src/lib (excludes external packages, node_modules, tests).\nReturns sorted arrays of module paths (relative to src/lib) for deterministic output.",
-					source_line: 292,
+					source_line: 293,
 					type_signature: '(disknode: Disknode): { dependencies: string[]; dependents: string[]; }',
 					return_type: '{ dependencies: string[]; dependents: string[]; }',
 					parameters: [
