@@ -5,7 +5,7 @@
 
 import type {Component} from 'svelte';
 import {Contextmenu_State} from '$lib/contextmenu_state.svelte.js';
-import {mount_component} from '$test/test_helpers.js';
+import {mount_component} from './test_helpers.js';
 
 /**
  * Create a test contextmenu with standard layout dimensions.

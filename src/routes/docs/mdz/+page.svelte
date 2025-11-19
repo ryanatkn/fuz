@@ -51,9 +51,9 @@
 	<section>
 		<p>
 			mdz is a small markdown dialect that supports Svelte components, auto-detected URLs prefixed
-			with <code>https://</code> and <code>/</code>, and some Fuz features like linkified
-			identifiers and modules in <code>`backticks`</code>. The goal is to be friendly to
-			nontechnical users and integrate markdown with Svelte and Fuz.
+			with <code>https://</code> and <code>/</code>, and Fuz integration like linkified identifiers
+			and modules in <code>`backticks`</code>. The goal is to securely integrate markdown with the
+			environment's capabilities, while being simple and friendly to nontechnical users.
 		</p>
 		<p>
 			mdz prioritizes predictability: strict syntax with one canonical pattern per feature,

@@ -11,7 +11,7 @@ import {
 	assert_directive_exists,
 	assert_directive_not_exists,
 	assert_source_in_directive,
-} from '$test/csp_test_helpers.js';
+} from './csp_test_helpers.js';
 
 const {DEFAULT_OVERRIDE, SECONDARY_DEFAULT, TRUSTED} = TEST_SOURCES;
 

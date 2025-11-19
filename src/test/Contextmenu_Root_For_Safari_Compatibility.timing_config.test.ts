@@ -10,8 +10,8 @@ import {
 	create_touch_event,
 	create_contextmenu_event,
 	set_event_target,
-} from '$test/test_helpers.js';
-import {mount_contextmenu_root, setup_contextmenu_action} from '$test/contextmenu_test_helpers.js';
+} from './test_helpers.js';
+import {mount_contextmenu_root, setup_contextmenu_action} from './contextmenu_test_helpers.js';
 import {
 	CONTEXTMENU_DEFAULT_LONGPRESS_DURATION,
 	CONTEXTMENU_DEFAULT_LONGPRESS_MOVE_TOLERANCE,
