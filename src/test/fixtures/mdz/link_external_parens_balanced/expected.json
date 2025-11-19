@@ -11,7 +11,14 @@
 			{
 				"type": "Link",
 				"reference": "https://fuz.dev/wiki/Foo_(bar)",
-				"display_text": null,
+				"children": [
+					{
+						"type": "Text",
+						"content": "https://fuz.dev/wiki/Foo_(bar)",
+						"start": 4,
+						"end": 34
+					}
+				],
 				"link_type": "external",
 				"start": 4,
 				"end": 34

@@ -10,10 +10,10 @@ import {
 	create_touch_event,
 	create_contextmenu_event,
 	set_event_target,
-} from '$test/test_helpers.js';
-import {mount_contextmenu_root, setup_contextmenu_action} from '$test/contextmenu_test_helpers.js';
+} from './test_helpers.js';
+import {mount_contextmenu_root, setup_contextmenu_action} from './contextmenu_test_helpers.js';
 import {CONTEXTMENU_DEFAULT_LONGPRESS_DURATION} from '$lib/contextmenu_helpers.js';
-import {create_shared_link_entry_tests} from '$test/contextmenu_test_link_entries.js';
+import {create_shared_link_entry_tests} from './contextmenu_test_link_entries.js';
 
 // ResizeObserver is not currently available in jsdom
 class ResizeObserverMock {

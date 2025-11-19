@@ -7,18 +7,24 @@
 	const {
 		content,
 		inline = false,
+		nowrap = false,
 		...rest
 	}: (SvelteHTMLElements['div'] | SvelteHTMLElements['span']) & {
 		content: string;
 		inline?: boolean;
+		nowrap?: boolean;
 	} = $props();
 
 	const nodes = $derived(mdz_parse(content));
-
-	// TODO maybe rethink how inline works here, possibly remove the wrapper when one element, or otherwise do something smart/convenient/predictable? what could that be
 </script>
 
-<svelte:element this={inline ? 'span' : 'div'} class="white_space_pre_wrap" {...rest}>
-	<!-- TODO @many currently not using keys, what would be correct here? -->
-	{#each nodes as node (node)}<Mdz_Node_View {node} />{/each}
+<svelte:element
+	this={inline ? 'span' : 'div'}
+	{...rest}
+	class:white_space_pre={nowrap}
+	class:white_space_pre_wrap={!nowrap}
+>
+	{#each nodes as node (node)}
+		<Mdz_Node_View {node} />
+	{/each}
 </svelte:element>

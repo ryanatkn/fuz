@@ -9,8 +9,8 @@ import {
 	create_contextmenu_event,
 	create_touch_event,
 	set_event_target,
-} from '$test/test_helpers.js';
-import {mount_contextmenu_root, setup_contextmenu_action} from '$test/contextmenu_test_helpers.js';
+} from './test_helpers.js';
+import {mount_contextmenu_root, setup_contextmenu_action} from './contextmenu_test_helpers.js';
 import {CONTEXTMENU_DEFAULT_BYPASS_WINDOW} from '$lib/contextmenu_helpers.js';
 
 // ResizeObserver is not currently available in jsdom

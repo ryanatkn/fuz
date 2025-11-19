@@ -25,16 +25,19 @@
 	);
 
 	const basic_example = '**Bold** and _italic_ and ~strikethrough~ text.';
+	const nesting_example = '**~_All_ three~ combi**_ned_';
 	const whitespace_example = ' see \n  how       \n   whitespace    \nis preserved ';
 	const code_example = 'To parse markdown directly, use `mdz_parse` from module `mdz.ts`.';
 	const code_plain_example = 'This `identifier` does not exist.';
 	const link_external_example =
 		'[Fuz API docs](https://fuz.dev/docs/api) and https://fuz.dev/docs/api and /docs/api';
 	const linebreak_example = 'First line.\nSecond line.\nThird line.';
-	const paragraph_example = 'First paragraph.\n\nSecond paragraph.';
+	const paragraph_example = 'First paragraph.\n\nSecond paragraph.\nLinebreak in second paragraph.';
 	const triple_linebreak_example =
 		'First paragraph.\n\n\nSecond paragraph separated by an extra newline.';
 	const hr_example = 'Section one.\n\n---\n\nSection two.';
+	const heading_example = '#### h4 ~with~ _italic_';
+	const code_block_example = '```ts\nconst z: number = 43;\n```';
 	const element_aside_example =
 		'<aside>This is _italicized <code>code</code>_ inside an `aside`.</aside>';
 	const element_marquee_example = '<marquee>use it or lose it</marquee>';
@@ -47,18 +50,25 @@
 <Tome_Content {tome}>
 	<section>
 		<p>
-			mdz is a small markdown dialect that supports Svelte components, auto-detected URLs and paths,
-			and standard markdown link syntax. The goal is to be friendly to nontechnical users and
-			integrate with other Fuz systems.
+			mdz is a small markdown dialect that supports Svelte components, auto-detected URLs prefixed
+			with <code>https://</code> and <code>/</code>, and Fuz integration like linkified identifiers
+			and modules in <code>`backticks`</code>. The goal is to securely integrate markdown with the
+			environment's capabilities, while being simple and friendly to nontechnical users.
+		</p>
+		<p>
+			mdz prioritizes predictability: strict syntax with one canonical pattern per feature,
+			preferring false negatives over false positives to minimize surprise.
 		</p>
 		<aside>
-			⚠️ This is an early proof of concept with missing features. Lists and blockquotes are next.
+			⚠️ This is an early proof of concept with missing features. Attributes, lists, and blockquotes
+			are next.
 		</aside>
 		<aside>
 			<p>Possible changes?</p>
 			<ul>
 				<li>
-					end lines with <code class="white_space_pre"> \</code> to opt out of rendering the line break?
+					allow ending lines with <code class="white_space_pre"> \</code> to opt out of rendering the
+					line break?
 				</li>
 				<li>loosen/tighten some restrictions like requiring blank newline separators?</li>
 			</ul>
@@ -74,6 +84,9 @@
 		<p>Supports <strong>bold</strong>, <em>italic</em>, and strikethrough:</p>
 		<Code content={`<Mdz content="${basic_example}" />`} class="mb_lg" />
 		<Mdz content={basic_example} class="mb_xl5" />
+		<p>All inline formatting can nest:</p>
+		<Code content={`<Mdz content="${nesting_example}" />`} class="mb_lg" />
+		<Mdz content={nesting_example} class="mb_xl5" />
 	</Tome_Section>
 
 	<Tome_Section>
@@ -96,7 +109,7 @@
 				selection?.addRange(range);
 			}}
 		>
-			click to inspect whitespace
+			select text to reveal whitespace
 		</button>
 	</Tome_Section>
 
@@ -149,10 +162,10 @@
 		<Mdz content={link_external_example} class="mb_xl5" />
 		<p>
 			<strong>Note:</strong> Relative paths (<code>./</code>, <code>../</code>) are not supported.
-			mdz content doesn't have a stable location concept -- TSDoc comments render at different URLs
-			than their source files. Root-relative paths (<code>/docs/...</code>) are more portable and
-			work consistently regardless of where the content is rendered. This could change, I'm open to
-			discussion.
+			mdz content may be rendered at different URLs than where source files live (e.g., TSDoc
+			comments from <code>src/lib/foo.ts</code> render at <code>/docs/api/foo.ts</code>).
+			Root-relative paths (<code>/docs/...</code>) have unambiguous meaning regardless of render
+			location, making them more portable.
 		</p>
 	</Tome_Section>
 
@@ -237,6 +250,28 @@ const nodes = mdz_parse(content);`}
 	</Tome_Section>
 
 	<Tome_Section>
+		<Tome_Section_Header text="Headings" />
+		<p>Use 1-6 hashes followed by a space:</p>
+		<Code content={heading_example} class="mb_lg" />
+		<Mdz content={heading_example} class="mb_xl5" />
+		<p>
+			Must start at column 0, have a space after hashes, and be followed by a blank line or EOF.
+			Headings can include inline formatting.
+		</p>
+	</Tome_Section>
+
+	<Tome_Section>
+		<Tome_Section_Header text="Code blocks" />
+		<p>Use three or more backticks with optional language hint:</p>
+		<Code content={code_block_example} class="mb_lg" />
+		<Mdz content={code_block_example} class="mb_xl5" />
+		<p>
+			Must start at column 0, closing fence must match opening length, and be followed by a blank
+			line or EOF.
+		</p>
+	</Tome_Section>
+
+	<Tome_Section>
 		<Tome_Section_Header text="Compatibility with other markdowns" />
 		<p>mdz supports fewer syntax variants than CommonMark/GFM:</p>
 		<ul>
@@ -255,7 +290,25 @@ const nodes = mdz_parse(content);`}
 		</p>
 	</Tome_Section>
 
-	<p>
-		See also the mdz <a href={resolve('/debug/mdz')}>fixtures debug page</a>.
-	</p>
+	<Tome_Section>
+		<Tome_Section_Header text="Generated docs" />
+		<p>For more see the generated mdz docs:</p>
+		<ul>
+			<li>
+				<strong>
+					<a href={resolve('/docs/mdz/spec')}>mdz specification</a>
+				</strong>
+			</li>
+			<li>
+				<strong>
+					<a href={resolve('/docs/mdz/grammar')}>mdz grammar</a>
+				</strong>
+			</li>
+			<li>
+				<strong>
+					<a href={resolve('/docs/mdz/fixtures')}>fixtures debug page</a>
+				</strong>
+			</li>
+		</ul>
+	</Tome_Section>
 </Tome_Content>

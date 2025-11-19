@@ -11,7 +11,14 @@
 			{
 				"type": "Link",
 				"reference": "https://fuz.dev",
-				"display_text": null,
+				"children": [
+					{
+						"type": "Text",
+						"content": "https://fuz.dev",
+						"start": 17,
+						"end": 32
+					}
+				],
 				"link_type": "external",
 				"start": 17,
 				"end": 32
@@ -25,7 +32,14 @@
 			{
 				"type": "Link",
 				"reference": "/path",
-				"display_text": null,
+				"children": [
+					{
+						"type": "Text",
+						"content": "/path",
+						"start": 33,
+						"end": 38
+					}
+				],
 				"link_type": "internal",
 				"start": 33,
 				"end": 38

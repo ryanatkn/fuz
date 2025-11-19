@@ -1,0 +1,40 @@
+[
+	{
+		"type": "Paragraph",
+		"children": [
+			{
+				"type": "Bold",
+				"children": [
+					{
+						"type": "Text",
+						"content": "bold ",
+						"start": 2,
+						"end": 7
+					},
+					{
+						"type": "Text",
+						"content": "`",
+						"start": 7,
+						"end": 8
+					},
+					{
+						"type": "Text",
+						"content": "backtick",
+						"start": 8,
+						"end": 16
+					}
+				],
+				"start": 0,
+				"end": 18
+			},
+			{
+				"type": "Text",
+				"content": " after`",
+				"start": 18,
+				"end": 25
+			}
+		],
+		"start": 0,
+		"end": 25
+	}
+]

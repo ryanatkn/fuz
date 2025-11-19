@@ -6,7 +6,7 @@ import {
 	parse_csp_trust_level,
 	csp_directive_specs,
 } from '$lib/csp.js';
-import {create_test_source, TEST_SOURCES} from '$test/csp_test_helpers.js';
+import {create_test_source, TEST_SOURCES} from './csp_test_helpers.js';
 
 const {TRUSTED} = TEST_SOURCES;
 

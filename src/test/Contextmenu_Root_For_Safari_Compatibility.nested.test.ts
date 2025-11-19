@@ -3,7 +3,7 @@
  */
 import {vi} from 'vitest';
 
-import {create_shared_nested_tests} from '$test/contextmenu_test_nested.js';
+import {create_shared_nested_tests} from './contextmenu_test_nested.js';
 import Contextmenu_Root_For_Safari_Compatibility from '$lib/Contextmenu_Root_For_Safari_Compatibility.svelte';
 
 // ResizeObserver is not currently available in jsdom

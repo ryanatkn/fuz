@@ -3,7 +3,7 @@
  */
 import {vi} from 'vitest';
 
-import {create_shared_positioning_tests} from '$test/contextmenu_test_positioning.js';
+import {create_shared_positioning_tests} from './contextmenu_test_positioning.js';
 import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
 
 // ResizeObserver is not currently available in jsdom

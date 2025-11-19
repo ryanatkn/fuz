@@ -12,12 +12,12 @@ import {
 	create_mouse_event,
 	create_keyboard_event,
 	set_event_target,
-} from '$test/test_helpers.js';
+} from './test_helpers.js';
 import {
 	mount_contextmenu_root,
 	setup_contextmenu_action,
 	type Shared_Test_Options,
-} from '$test/contextmenu_test_helpers.js';
+} from './contextmenu_test_helpers.js';
 
 export const create_shared_core_tests = (
 	Component: any,

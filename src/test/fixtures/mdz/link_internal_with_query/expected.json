@@ -11,7 +11,14 @@
 			{
 				"type": "Link",
 				"reference": "/search?q=test",
-				"display_text": null,
+				"children": [
+					{
+						"type": "Text",
+						"content": "/search?q=test",
+						"start": 10,
+						"end": 24
+					}
+				],
 				"link_type": "internal",
 				"start": 10,
 				"end": 24

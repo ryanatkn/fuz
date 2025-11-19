@@ -2311,7 +2311,7 @@ export const src_json: Src_Json = {
 					kind: 'variable',
 					source_line: 29,
 					type_signature:
-						'"/docs" | "/" | "/about" | "/debug" | "/debug/mdz" | "/docs/alert" | "/docs/api" | "/docs/breadcrumb" | "/docs/breadcrumb/a" | "/docs/breadcrumb/a/b" | "/docs/breadcrumb/a/b/c" | ... 89 more ... | `/${string}/help/`',
+						'"/docs" | "/" | "/about" | "/docs/alert" | "/docs/api" | "/docs/breadcrumb" | "/docs/breadcrumb/a" | "/docs/breadcrumb/a/b" | "/docs/breadcrumb/a/b/c" | "/docs/breadcrumb/a/b/c/d" | ... 93 more ... | `/${string}/help/`',
 				},
 				{
 					name: 'DOCS_API_PATH',
@@ -3661,6 +3661,11 @@ export const src_json: Src_Json = {
 							type: 'boolean',
 							optional: true,
 						},
+						{
+							name: 'nowrap',
+							type: 'boolean',
+							optional: true,
+						},
 					],
 					source_line: 1,
 				},
@@ -3852,9 +3857,9 @@ export const src_json: Src_Json = {
 							type_signature: 'string',
 						},
 						{
-							name: 'display_text',
+							name: 'children',
 							kind: 'variable',
-							type_signature: 'string | null',
+							type_signature: 'Array<Mdz_Node>',
 						},
 						{
 							name: 'link_type',

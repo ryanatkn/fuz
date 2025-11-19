@@ -14,7 +14,14 @@
 					{
 						"type": "Link",
 						"reference": "https://fuz.dev",
-						"display_text": "bold link",
+						"children": [
+							{
+								"type": "Text",
+								"content": "bold link",
+								"start": 11,
+								"end": 20
+							}
+						],
 						"link_type": "external",
 						"start": 10,
 						"end": 38

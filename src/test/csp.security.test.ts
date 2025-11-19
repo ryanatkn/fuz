@@ -1,7 +1,7 @@
 import {test, assert, describe} from 'vitest';
 
 import {create_csp_directives, COLOR_SCHEME_SCRIPT_HASH} from '$lib/csp.js';
-import {create_test_source, TEST_SOURCES} from '$test/csp_test_helpers.js';
+import {create_test_source, TEST_SOURCES} from './csp_test_helpers.js';
 
 const {TRUSTED} = TEST_SOURCES;
 

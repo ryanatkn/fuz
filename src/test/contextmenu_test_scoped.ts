@@ -4,8 +4,8 @@
  */
 
 import {describe, test, assert, afterEach} from 'vitest';
-import {unmount_component, create_contextmenu_event} from '$test/test_helpers.js';
-import {mount_contextmenu_root, type Shared_Test_Options} from '$test/contextmenu_test_helpers.js';
+import {unmount_component, create_contextmenu_event} from './test_helpers.js';
+import {mount_contextmenu_root, type Shared_Test_Options} from './contextmenu_test_helpers.js';
 
 export const create_shared_scoped_tests = (
 	Component: any,

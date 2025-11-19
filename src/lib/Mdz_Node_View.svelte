@@ -17,11 +17,6 @@
 	const elements = mdz_elements_context.get_maybe();
 </script>
 
-{#snippet render_children(nodes: Array<Mdz_Node>)}
-	<!-- TODO @many currently not using keys, what would be correct here? -->
-	{#each nodes as node (node)}<Mdz_Node_View {node} />{/each}
-{/snippet}
-
 {#if node.type === 'Element'}
 	{@const element_config = elements?.get(node.name)}
 	{#if element_config !== undefined}
@@ -31,7 +26,7 @@
 			{/if}
 		</svelte:element>
 	{:else}
-		<code class="color_c_5">&lt;{node.name} /&gt;</code>
+		{@render render_unregistered_tag(node.name, node.children)}
 	{/if}
 {:else if node.type === 'Component'}
 	{@const Component = components?.get(node.name)}
@@ -42,7 +37,7 @@
 			{/if}
 		</Component>
 	{:else}
-		<code class="color_c_5">&lt;{node.name} /&gt;</code>
+		{@render render_unregistered_tag(node.name, node.children)}
 	{/if}
 {:else if node.type === 'Text'}
 	{node.content}
@@ -61,12 +56,12 @@
 		<!-- Fragment/query-only links skip resolve() to avoid unwanted `/` prefix -->
 		<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 		<a href={is_fragment_or_query_only ? reference : resolve(reference as any)}
-			>{node.display_text ?? reference}</a
+			>{@render render_children(node.children)}</a
 		>
 	{:else}
 		<!-- external link -->
 		<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-		<a href={reference} target="_blank" rel="noopener">{node.display_text ?? reference}</a>
+		<a href={reference} target="_blank" rel="noopener">{@render render_children(node.children)}</a>
 	{/if}
 {:else if node.type === 'Paragraph'}
 	<p>{@render render_children(node.children)}</p>
@@ -79,3 +74,19 @@
 {:else if node.type === 'Codeblock'}
 	<Code lang={node.lang} content={node.content} />
 {/if}
+
+{#snippet render_children(nodes: Array<Mdz_Node>)}
+	{#each nodes as node (node)}
+		<Mdz_Node_View {node} />
+	{/each}
+{/snippet}
+
+{#snippet render_unregistered_tag(name: string, children: Array<Mdz_Node>)}
+	{#if children.length > 0}
+		<code class="color_c_5">&lt;{name}&gt;</code>{@render render_children(children)}<code
+			class="color_c_5">&lt;/{name}&gt;</code
+		>
+	{:else}
+		<code class="color_c_5">&lt;{name} /&gt;</code>
+	{/if}
+{/snippet}

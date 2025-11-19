@@ -50,6 +50,12 @@
 
 <!-- TODO probably add a `nav` wrapper? around which? -->
 <aside class="docs_tertiary_nav unstyled">
+	{#if should_show_page_links}
+		<Docs_Page_Links {sidebar} expand_width />
+	{/if}
+	{#if at_api_root || at_module}
+		<Docs_Modules_List expand_width />
+	{/if}
 	{#if tomes_related_to_selected.length}
 		<section class="related_section">
 			<h4 class="mb_sm">related tomes</h4>
@@ -79,12 +85,6 @@
 				{/each}
 			</ul>
 		</section>
-	{/if}
-	{#if should_show_page_links}
-		<Docs_Page_Links {sidebar} expand_width />
-	{/if}
-	{#if at_api_root || at_module}
-		<Docs_Modules_List expand_width />
 	{/if}
 </aside>
 
