@@ -36,7 +36,7 @@
 	const triple_linebreak_example =
 		'First paragraph.\n\n\nSecond paragraph separated by an extra newline.';
 	const hr_example = 'Section one.\n\n---\n\nSection two.';
-	const heading_example = '## **Bold** h2 with _italic_';
+	const heading_example = '#### h4 ~with~ _italic_';
 	const code_block_example = '```ts\nconst z: number = 43;\n```';
 	const element_aside_example =
 		'<aside>This is _italicized <code>code</code>_ inside an `aside`.</aside>';
