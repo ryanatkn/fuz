@@ -18,8 +18,9 @@
 </script>
 
 {#snippet render_children(nodes: Array<Mdz_Node>)}
-	<!-- TODO @many currently not using keys, what would be correct here? -->
-	{#each nodes as node (node)}<Mdz_Node_View {node} />{/each}
+	{#each nodes as node (node)}
+		<Mdz_Node_View {node} />
+	{/each}
 {/snippet}
 
 {#if node.type === 'Element'}
@@ -33,8 +34,9 @@
 	{:else}
 		<!-- Unregistered element - show placeholder with children -->
 		{#if node.children.length > 0}
-			<code class="color_c_5">&lt;{node.name}&gt;</code
-			>{@render render_children(node.children)}<code class="color_c_5">&lt;/{node.name}&gt;</code>
+			<code class="color_c_5">&lt;{node.name}&gt;</code>{@render render_children(
+				node.children,
+			)}<code class="color_c_5">&lt;/{node.name}&gt;</code>
 		{:else}
 			<code class="color_c_5">&lt;{node.name} /&gt;</code>
 		{/if}
@@ -50,8 +52,9 @@
 	{:else}
 		<!-- Unregistered component - show placeholder with children -->
 		{#if node.children.length > 0}
-			<code class="color_c_5">&lt;{node.name}&gt;</code
-			>{@render render_children(node.children)}<code class="color_c_5">&lt;/{node.name}&gt;</code>
+			<code class="color_c_5">&lt;{node.name}&gt;</code>{@render render_children(
+				node.children,
+			)}<code class="color_c_5">&lt;/{node.name}&gt;</code>
 		{:else}
 			<code class="color_c_5">&lt;{node.name} /&gt;</code>
 		{/if}

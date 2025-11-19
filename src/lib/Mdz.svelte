@@ -24,6 +24,7 @@
 	class:white_space_pre={nowrap}
 	class:white_space_pre_wrap={!nowrap}
 >
-	<!-- TODO @many currently not using keys, what would be correct here? -->
-	{#each nodes as node (node)}<Mdz_Node_View {node} />{/each}
+	{#each nodes as node (node)}
+		<Mdz_Node_View {node} />
+	{/each}
 </svelte:element>
