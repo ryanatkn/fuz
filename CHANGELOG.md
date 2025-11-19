@@ -1,5 +1,12 @@
 # @ryanatkn/fuz
 
+## 0.151.0
+
+### Minor Changes
+
+- fix mdz intraword behavior ([#92](https://github.com/ryanatkn/fuz/pull/92))
+- upgrade belt and gro ([9f4645a](https://github.com/ryanatkn/fuz/commit/9f4645a))
+
 ## 0.150.0
 
 ### Minor Changes
