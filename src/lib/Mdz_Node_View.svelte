@@ -17,12 +17,6 @@
 	const elements = mdz_elements_context.get_maybe();
 </script>
 
-{#snippet render_children(nodes: Array<Mdz_Node>)}
-	{#each nodes as node (node)}
-		<Mdz_Node_View {node} />
-	{/each}
-{/snippet}
-
 {#if node.type === 'Element'}
 	{@const element_config = elements?.get(node.name)}
 	{#if element_config !== undefined}
@@ -32,14 +26,7 @@
 			{/if}
 		</svelte:element>
 	{:else}
-		<!-- Unregistered element - show placeholder with children -->
-		{#if node.children.length > 0}
-			<code class="color_c_5">&lt;{node.name}&gt;</code>{@render render_children(
-				node.children,
-			)}<code class="color_c_5">&lt;/{node.name}&gt;</code>
-		{:else}
-			<code class="color_c_5">&lt;{node.name} /&gt;</code>
-		{/if}
+		{@render render_unregistered_tag(node.name, node.children)}
 	{/if}
 {:else if node.type === 'Component'}
 	{@const Component = components?.get(node.name)}
@@ -50,14 +37,7 @@
 			{/if}
 		</Component>
 	{:else}
-		<!-- Unregistered component - show placeholder with children -->
-		{#if node.children.length > 0}
-			<code class="color_c_5">&lt;{node.name}&gt;</code>{@render render_children(
-				node.children,
-			)}<code class="color_c_5">&lt;/{node.name}&gt;</code>
-		{:else}
-			<code class="color_c_5">&lt;{node.name} /&gt;</code>
-		{/if}
+		{@render render_unregistered_tag(node.name, node.children)}
 	{/if}
 {:else if node.type === 'Text'}
 	{node.content}
@@ -94,3 +74,19 @@
 {:else if node.type === 'Codeblock'}
 	<Code lang={node.lang} content={node.content} />
 {/if}
+
+{#snippet render_children(nodes: Array<Mdz_Node>)}
+	{#each nodes as node (node)}
+		<Mdz_Node_View {node} />
+	{/each}
+{/snippet}
+
+{#snippet render_unregistered_tag(name: string, children: Array<Mdz_Node>)}
+	{#if children.length > 0}
+		<code class="color_c_5">&lt;{name}&gt;</code>{@render render_children(children)}<code
+			class="color_c_5">&lt;/{name}&gt;</code
+		>
+	{:else}
+		<code class="color_c_5">&lt;{name} /&gt;</code>
+	{/if}
+{/snippet}
