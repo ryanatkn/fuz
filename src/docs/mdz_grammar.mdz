@@ -117,6 +117,8 @@ Inline code has no word boundary requirement - backticks work anywhere:
 
 The parser validates that opening delimiters have matching closing delimiters AND are at word boundaries. If no valid closing delimiter is found, or if delimiters are not at word boundaries, the opening delimiter renders as literal text.
 
+Delimiter matching uses greedy/bounded parsing: each opening delimiter finds its first matching closing delimiter, then parses children only within that range. This prevents nested formatters from consuming parent delimiters.
+
 ---
 
 ## Links
@@ -151,7 +153,7 @@ Closing `)` terminates the URL.
 Must start with `https://` or `http://` (case-sensitive).
 Continues until whitespace or certain trailing punctuation.
 Trailing punctuation is trimmed: `.,;:!?]`
-Balanced parentheses: `https://example.com/page_(disambiguation)` keeps the closing `)`.
+Balanced parentheses: `https://fuz.dev/page_(disambiguation)` keeps the closing `)`.
 
 **Auto-detected paths:**
 

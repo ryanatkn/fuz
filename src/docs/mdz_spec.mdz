@@ -141,7 +141,7 @@ Standard markdown syntax with explicit display text:
 The display text can include inline formatting:
 
 ```
-[**Bold link** with _italic_](https://example.com)
+[**Bold link** with _italic_](https://fuz.dev)
 ```
 
 ### Auto-Detected External URLs
@@ -157,8 +157,8 @@ Visit https://fuz.dev for more information.
 mdz automatically trims these characters from the end of URLs: `.,;:!?]`
 
 ```
-See https://example.com.
-Check out https://example.com!
+See https://fuz.dev.
+Check out https://fuz.dev!
 ```
 
 The period and exclamation mark are NOT part of the URL.
@@ -561,6 +561,7 @@ Lightweight formatting without markdown complexity:
 - Character-code-based scanning for performance
 - Text accumulation optimization
 - Strict validation (false negatives over false positives)
+- Greedy/bounded delimiter matching (prevents nested formatters from consuming parent delimiters)
 - Position tracking for all nodes
 
 ### Renderer Components

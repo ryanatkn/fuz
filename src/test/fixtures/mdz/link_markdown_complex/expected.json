@@ -11,7 +11,14 @@
 			{
 				"type": "Link",
 				"reference": "https://fuz.dev/path?q=test#section",
-				"display_text": "docs",
+				"children": [
+					{
+						"type": "Text",
+						"content": "docs",
+						"start": 5,
+						"end": 9
+					}
+				],
 				"link_type": "external",
 				"start": 4,
 				"end": 47

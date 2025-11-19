@@ -11,7 +11,14 @@
 			{
 				"type": "Link",
 				"reference": "https://fuz.dev",
-				"display_text": "Example",
+				"children": [
+					{
+						"type": "Text",
+						"content": "Example",
+						"start": 7,
+						"end": 14
+					}
+				],
 				"link_type": "external",
 				"start": 6,
 				"end": 32
@@ -25,7 +32,14 @@
 			{
 				"type": "Link",
 				"reference": "/docs/api",
-				"display_text": "Docs",
+				"children": [
+					{
+						"type": "Text",
+						"content": "Docs",
+						"start": 38,
+						"end": 42
+					}
+				],
 				"link_type": "internal",
 				"start": 37,
 				"end": 54

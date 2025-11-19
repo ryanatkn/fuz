@@ -1,0 +1,59 @@
+[
+	{
+		"type": "Paragraph",
+		"children": [
+			{
+				"type": "Bold",
+				"children": [
+					{
+						"type": "Text",
+						"content": "bold ",
+						"start": 2,
+						"end": 7
+					},
+					{
+						"type": "Italic",
+						"children": [
+							{
+								"type": "Text",
+								"content": "italic ",
+								"start": 8,
+								"end": 15
+							},
+							{
+								"type": "Text",
+								"content": "~",
+								"start": 15,
+								"end": 16
+							},
+							{
+								"type": "Text",
+								"content": "strike ",
+								"start": 16,
+								"end": 23
+							},
+							{
+								"type": "Code",
+								"content": "code",
+								"start": 23,
+								"end": 29
+							},
+							{
+								"type": "Text",
+								"content": "~",
+								"start": 29,
+								"end": 30
+							}
+						],
+						"start": 7,
+						"end": 31
+					}
+				],
+				"start": 0,
+				"end": 33
+			}
+		],
+		"start": 0,
+		"end": 33
+	}
+]

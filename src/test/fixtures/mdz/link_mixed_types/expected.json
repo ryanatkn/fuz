@@ -4,54 +4,75 @@
 		"children": [
 			{
 				"type": "Text",
-				"content": "Visit ",
+				"content": "See ",
 				"start": 0,
-				"end": 6
+				"end": 4
 			},
 			{
 				"type": "Link",
-				"reference": "https://fuz.dev",
-				"display_text": null,
-				"link_type": "external",
-				"start": 6,
-				"end": 21
+				"reference": "/internal",
+				"children": [
+					{
+						"type": "Text",
+						"content": "/internal",
+						"start": 4,
+						"end": 13
+					}
+				],
+				"link_type": "internal",
+				"start": 4,
+				"end": 13
 			},
 			{
 				"type": "Text",
 				"content": " and ",
-				"start": 21,
-				"end": 26
+				"start": 13,
+				"end": 18
 			},
 			{
 				"type": "Link",
-				"reference": "/docs/api",
-				"display_text": null,
-				"link_type": "internal",
-				"start": 26,
-				"end": 35
+				"reference": "https://external.com",
+				"children": [
+					{
+						"type": "Text",
+						"content": "https://external.com",
+						"start": 18,
+						"end": 38
+					}
+				],
+				"link_type": "external",
+				"start": 18,
+				"end": 38
 			},
 			{
 				"type": "Text",
-				"content": " or ",
-				"start": 35,
-				"end": 39
+				"content": " and ",
+				"start": 38,
+				"end": 43
 			},
 			{
 				"type": "Link",
-				"reference": "/about",
-				"display_text": "click here",
-				"link_type": "internal",
-				"start": 39,
-				"end": 59
+				"reference": "https://fuz.dev",
+				"children": [
+					{
+						"type": "Text",
+						"content": "markdown",
+						"start": 44,
+						"end": 52
+					}
+				],
+				"link_type": "external",
+				"start": 43,
+				"end": 70
 			},
 			{
 				"type": "Text",
-				"content": " for info.",
-				"start": 59,
-				"end": 69
+				"content": " links.",
+				"start": 70,
+				"end": 77
 			}
 		],
 		"start": 0,
-		"end": 69
+		"end": 77
 	}
 ]

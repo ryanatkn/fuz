@@ -3857,9 +3857,9 @@ export const src_json: Src_Json = {
 							type_signature: 'string',
 						},
 						{
-							name: 'display_text',
+							name: 'children',
 							kind: 'variable',
-							type_signature: 'string | null',
+							type_signature: 'Array<Mdz_Node>',
 						},
 						{
 							name: 'link_type',

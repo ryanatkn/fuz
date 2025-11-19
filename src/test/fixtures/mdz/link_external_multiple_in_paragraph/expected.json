@@ -11,7 +11,14 @@
 			{
 				"type": "Link",
 				"reference": "https://fuz.dev",
-				"display_text": null,
+				"children": [
+					{
+						"type": "Text",
+						"content": "https://fuz.dev",
+						"start": 6,
+						"end": 21
+					}
+				],
 				"link_type": "external",
 				"start": 6,
 				"end": 21
@@ -25,7 +32,14 @@
 			{
 				"type": "Link",
 				"reference": "https://fuz.dev/tutorials",
-				"display_text": null,
+				"children": [
+					{
+						"type": "Text",
+						"content": "https://fuz.dev/tutorials",
+						"start": 32,
+						"end": 57
+					}
+				],
 				"link_type": "external",
 				"start": 32,
 				"end": 57
@@ -39,7 +53,14 @@
 			{
 				"type": "Link",
 				"reference": "https://fuz.dev/support",
-				"display_text": null,
+				"children": [
+					{
+						"type": "Text",
+						"content": "https://fuz.dev/support",
+						"start": 77,
+						"end": 100
+					}
+				],
 				"link_type": "external",
 				"start": 77,
 				"end": 100

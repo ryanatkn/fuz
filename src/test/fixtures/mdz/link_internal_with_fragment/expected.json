@@ -11,7 +11,14 @@
 			{
 				"type": "Link",
 				"reference": "/docs/api#identifier",
-				"display_text": null,
+				"children": [
+					{
+						"type": "Text",
+						"content": "/docs/api#identifier",
+						"start": 8,
+						"end": 28
+					}
+				],
 				"link_type": "internal",
 				"start": 8,
 				"end": 28
