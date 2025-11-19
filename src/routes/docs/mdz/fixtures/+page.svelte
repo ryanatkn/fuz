@@ -4,6 +4,8 @@
 
 	import Mdz from '$lib/Mdz.svelte';
 	import Details from '$lib/Details.svelte';
+	import Tome_Section from '$lib/Tome_Section.svelte';
+	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
 
 	const {data} = $props();
 
@@ -20,8 +22,8 @@
 	<h2>{data.fixtures.length} fixtures</h2>
 
 	{#each data.fixtures as fixture (fixture.name)}
-		<section class="mb_xl">
-			<h3>{fixture.name}</h3>
+		<Tome_Section class="mb_xl">
+			<Tome_Section_Header text={fixture.name} />
 
 			<div class="mb_xl2">
 				<Code content={fixture.input} lang="md" />
@@ -32,6 +34,6 @@
 			<Details summary="JSON" open={false}>
 				<Code lang="json" content={format_json(fixture.expected)} />
 			</Details>
-		</section>
+		</Tome_Section>
 	{/each}
 </main>
