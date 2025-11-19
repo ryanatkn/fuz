@@ -13,7 +13,7 @@
 </script>
 
 <main class="p_xl mx_auto width_upto_md">
-	<h1 class="mt_xl5">mdz fixtures debug</h1>
+	<h1 class="mt_xl5" id="mdz-fixtures-debug">mdz fixtures debug</h1>
 	<p>
 		This page renders all of the test fixtures. See also the mdz <a href={resolve('/docs/mdz')}
 			>docs page</a

@@ -1,6 +1,44 @@
-import {load_fixtures, type Mdz_Fixture} from '../../../../test/fixtures/mdz/mdz_test_helpers.js';
+import type {Mdz_Node} from '$lib/mdz.js';
+import type {Mdz_Fixture} from '../../../../test/fixtures/mdz/mdz_test_helpers.js';
 
-export const load = async (): Promise<{fixtures: Array<Mdz_Fixture>}> => {
-	const fixtures = await load_fixtures();
+export const load = (): {fixtures: Array<Mdz_Fixture>} => {
+	// use Vite glob imports to bundle fixtures at build time
+	const input_modules = import.meta.glob<string>('../../../../test/fixtures/mdz/**/input.mdz', {
+		eager: true,
+		query: '?raw',
+		import: 'default',
+	});
+	const expected_modules = import.meta.glob<Array<Mdz_Node>>(
+		'../../../../test/fixtures/mdz/**/expected.json',
+		{eager: true},
+	);
+
+	// extract fixture names from paths like './fixtures/bold_simple/input.mdz'
+	const fixture_names: Set<string> = new Set();
+	const pattern = /\/([^/]+)\/input\.mdz$/;
+	for (const path of Object.keys(input_modules)) {
+		const match = pattern.exec(path);
+		if (match) {
+			fixture_names.add(match[1]!);
+		}
+	}
+
+	// load each fixture
+	const fixtures: Array<Mdz_Fixture> = [];
+	for (const name of Array.from(fixture_names).sort()) {
+		const input_path = Object.keys(input_modules).find((p) => p.includes(`/${name}/input.mdz`));
+		const expected_path = Object.keys(expected_modules).find((p) =>
+			p.includes(`/${name}/expected.json`),
+		);
+
+		if (input_path && expected_path) {
+			fixtures.push({
+				name,
+				input: input_modules[input_path]!,
+				expected: expected_modules[expected_path]!,
+			});
+		}
+	}
+
 	return {fixtures};
 };

@@ -10,27 +10,27 @@
 			},
 			{
 				"type": "Link",
-				"reference": "/docs/guides/introduction",
+				"reference": "/docs/introduction",
 				"children": [
 					{
 						"type": "Text",
-						"content": "/docs/guides/introduction",
+						"content": "/docs/introduction",
 						"start": 6,
-						"end": 31
+						"end": 24
 					}
 				],
 				"link_type": "internal",
 				"start": 6,
-				"end": 31
+				"end": 24
 			},
 			{
 				"type": "Text",
 				"content": " for getting started.",
-				"start": 31,
-				"end": 52
+				"start": 24,
+				"end": 45
 			}
 		],
 		"start": 0,
-		"end": 52
+		"end": 45
 	}
 ]

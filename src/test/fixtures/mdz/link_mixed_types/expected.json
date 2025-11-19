@@ -10,11 +10,11 @@
 			},
 			{
 				"type": "Link",
-				"reference": "/internal",
+				"reference": "/docs/mdz",
 				"children": [
 					{
 						"type": "Text",
-						"content": "/internal",
+						"content": "/docs/mdz",
 						"start": 4,
 						"end": 13
 					}

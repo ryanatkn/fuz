@@ -31,11 +31,11 @@
 			},
 			{
 				"type": "Link",
-				"reference": "/path",
+				"reference": "/docs",
 				"children": [
 					{
 						"type": "Text",
-						"content": "/path",
+						"content": "/docs",
 						"start": 33,
 						"end": 38
 					}

@@ -31,27 +31,27 @@
 			},
 			{
 				"type": "Link",
-				"reference": "/docs/guides",
+				"reference": "/docs/introduction",
 				"children": [
 					{
 						"type": "Text",
-						"content": "/docs/guides",
+						"content": "/docs/introduction",
 						"start": 20,
-						"end": 32
+						"end": 38
 					}
 				],
 				"link_type": "internal",
 				"start": 20,
-				"end": 32
+				"end": 38
 			},
 			{
 				"type": "Text",
 				"content": " for information.",
-				"start": 32,
-				"end": 49
+				"start": 38,
+				"end": 55
 			}
 		],
 		"start": 0,
-		"end": 49
+		"end": 55
 	}
 ]

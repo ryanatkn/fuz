@@ -10,27 +10,27 @@
 			},
 			{
 				"type": "Link",
-				"reference": "/search?q=test",
+				"reference": "/docs/api?q=test",
 				"children": [
 					{
 						"type": "Text",
-						"content": "/search?q=test",
+						"content": "/docs/api?q=test",
 						"start": 10,
-						"end": 24
+						"end": 26
 					}
 				],
 				"link_type": "internal",
 				"start": 10,
-				"end": 24
+				"end": 26
 			},
 			{
 				"type": "Text",
 				"content": " for results.",
-				"start": 24,
-				"end": 37
+				"start": 26,
+				"end": 39
 			}
 		],
 		"start": 0,
-		"end": 37
+		"end": 39
 	}
 ]
