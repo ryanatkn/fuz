@@ -1,0 +1,450 @@
+import"../chunks/DsnmJJEf.js";import{f as a,b as i,d as o,r}from"../chunks/B5wh5ago.js";import{M as s}from"../chunks/Dc-bCiUG.js";const l=`# mdz Formal Grammar Specification
+
+⚠️ AI-generated
+
+This document defines the precise syntax and parsing rules for mdz (minimal markdown dialect) using Rust-inspired notation.
+
+For a high-level introduction, see \`mdz.mdz\`. For practical examples and usage patterns, see \`mdz_spec.mdz\`.
+
+## Grammar Notation
+
+The following notations are used throughout this specification:
+
+\`\`\`
+Notation              Examples                      Meaning
+--------              --------                      -------
+CAPITAL               TEXT, NEWLINE, BACKTICK       A terminal token
+_ItalicCamelCase_     _Paragraph_, _Heading_        A non-terminal production
+\`literal\`             \`**\`, \`#\`, \`---\`              The exact character(s)
+x?                    \`pub\`?                        An optional item
+x*                    _InlineNode_*                 0 or more of x
+x+                    _InlineNode_+                 1 or more of x
+x{a..b}               BACKTICK{3..}                 a to b repetitions of x
+Rule1 Rule2           \`#\` SPACE _Text_              Sequence of rules in order
+|                     _Bold_ | _Italic_             Either one or another
+[ ]                   [\`a\`-\`z\`]                     Any character in the set
+~[ ]                  ~[\`\\n\`]                       Any character except those listed
+( )                   (\`*\` _InlineNode_)?           Groups items
+<column 0>            <must start at column 0>      Special constraint
+<followed by>         <followed by blank line>      Lookahead constraint
+\`\`\`
+
+Sequences have higher precedence than \`|\` alternation.
+
+---
+
+## Character Classes
+
+\`\`\`
+NEWLINE           = \`\\n\`
+SPACE             = \` \` | \`\\t\`
+WHITESPACE        = SPACE | NEWLINE
+NON_NEWLINE       = ~[\`\\n\`]
+LETTER            = [\`a\`-\`z\`] | [\`A\`-\`Z\`]
+DIGIT             = [\`0\`-\`9\`]
+ALPHANUMERIC      = LETTER | DIGIT
+\`\`\`
+
+---
+
+## Document Structure
+
+\`\`\`
+_Document_ = _Node_*
+
+_Node_ = _Paragraph_
+       | _Heading_
+       | _HorizontalRule_
+       | _CodeBlock_
+
+_Paragraph_ = <column 0> _InlineNode_+ (_ParagraphBreak_ | EOF)
+
+_ParagraphBreak_ = NEWLINE NEWLINE+
+\`\`\`
+
+A document consists of zero or more block-level nodes. Paragraphs contain inline content and are separated by one or more blank lines.
+
+---
+
+## Inline Formatting
+
+\`\`\`
+_InlineNode_ = _Bold_
+             | _Italic_
+             | _Strikethrough_
+             | _InlineCode_
+             | _Link_
+             | _Component_
+             | _Element_
+             | _Text_
+             | NEWLINE
+
+_Bold_ = \`**\` _InlineNode_+ \`**\`
+
+_Italic_ = \`_\` _InlineNode_+ \`_\`
+
+_Strikethrough_ = \`~\` _InlineNode_+ \`~\`
+
+_InlineCode_ = BACKTICK _CodeContent_ BACKTICK
+_CodeContent_ = ~[BACKTICK | NEWLINE]+
+\`\`\`
+
+**Nesting rules:**
+
+All inline formatting can nest within each other. For example, \`**~_text_~**\` produces bold text containing strikethrough containing italic.
+
+**Validation:**
+
+Bold requires at least one character between \`**\` delimiters.
+Italic requires at least one character between \`_\` delimiters.
+Strikethrough requires at least one character between \`~\` delimiters.
+Inline code cannot contain newlines - if a newline appears before the closing backtick, both backticks render as literal text.
+Empty inline code \` \`\` \` renders as literal backticks.
+
+**Word boundary requirements:**
+
+Bold, italic, and strikethrough require word boundaries (not surrounded by alphanumeric or underscore characters):
+- \`foo_bar_baz\` → literal text (underscores not at word boundaries)
+- \`foo**bar**baz\` → literal text (asterisks not at word boundaries)
+- \`foo~bar~baz\` → literal text (tildes not at word boundaries)
+- \`word _emphasis_ word\` → emphasis (underscores at word boundaries)
+- \`word **bold** word\` → bold (asterisks at word boundaries)
+
+Inline code has no word boundary requirement - backticks work anywhere:
+- \`foo\\\`bar\\\`baz\` → foo<code>bar</code>baz (allowed)
+
+**Word character definition:** \`a-z\`, \`A-Z\`, \`0-9\`, \`_\`
+
+**Implementation note:**
+
+The parser validates that opening delimiters have matching closing delimiters AND are at word boundaries. If no valid closing delimiter is found, or if delimiters are not at word boundaries, the opening delimiter renders as literal text.
+
+Delimiter matching uses greedy/bounded parsing: each opening delimiter finds its first matching closing delimiter, then parses children only within that range. This prevents nested formatters from consuming parent delimiters.
+
+---
+
+## Links
+
+\`\`\`
+_Link_ = _MarkdownLink_
+       | _AutoUrl_
+       | _AutoPath_
+
+_MarkdownLink_ = \`[\` _LinkText_ \`]\` \`(\` _LinkUrl_ \`)\`
+_LinkText_     = _InlineNode_+
+_LinkUrl_      = _UrlChar_+
+_UrlChar_      = ~[\`)\` | \`\\n\` | WHITESPACE]
+
+_AutoUrl_ = (\`https://\` | \`http://\`) _UrlChar_+
+
+_AutoPath_ = \`/\` _PathChar_+
+_PathChar_ = ~[WHITESPACE | _TrailingPunctuation_]
+
+_TrailingPunctuation_ = \`.\` | \`,\` | \`;\` | \`:\` | \`!\` | \`?\` | \`]\`
+\`\`\`
+
+**Markdown links:**
+
+Display text can contain any inline formatting including nested links.
+URL must contain valid RFC 3986 characters.
+URLs cannot contain whitespace or newlines.
+Closing \`)\` terminates the URL.
+
+**Auto-detected URLs:**
+
+Must start with \`https://\` or \`http://\` (case-sensitive).
+Continues until whitespace or certain trailing punctuation.
+Trailing punctuation is trimmed: \`.,;:!?]\`
+Balanced parentheses: \`https://fuz.dev/page_(disambiguation)\` keeps the closing \`)\`.
+
+**Auto-detected paths:**
+
+Must start with \`/\` (root-relative only).
+Relative paths (\`./\`, \`../\`) are NOT supported.
+Continues until whitespace or trailing punctuation.
+Trailing punctuation handling same as auto-URLs.
+
+**Rationale for path restrictions:**
+
+mdz content may be rendered at different URLs than where the source file lives. Relative paths would be ambiguous. Root-relative paths (\`/docs/api\`) have unambiguous meaning regardless of where the mdz content is rendered.
+
+---
+
+## Headings
+
+\`\`\`
+_Heading_ = <column 0> _HeadingMarker_ SPACE _HeadingContent_ <followed by blank line or EOF>
+
+_HeadingMarker_ = \`#\`{1..6}
+
+_HeadingContent_ = _InlineNode_+
+\`\`\`
+
+**Requirements:**
+
+Must start at column 0 (no leading whitespace).
+Must have exactly 1-6 \`#\` characters.
+Must have at least one space after the hashes.
+Must have non-whitespace content after the space.
+Must be followed by a blank line or end of file.
+
+**Invalid patterns:**
+
+\`#No space\` - missing space after hash
+\` # Indented\` - leading whitespace
+\`#######\` - more than 6 hashes
+\`## \` - no content after space
+
+**Content:**
+
+Heading content can include any inline formatting: \`## **Bold** and _italic_\`
+
+---
+
+## Horizontal Rules
+
+\`\`\`
+_HorizontalRule_ = <column 0> \`---\` SPACE* <followed by blank line or EOF>
+\`\`\`
+
+**Requirements:**
+
+Must be exactly 3 hyphens (not 2, not 4 or more).
+Must start at column 0 (no leading whitespace).
+Trailing spaces allowed after the three hyphens.
+Must be followed by a blank line or end of file.
+
+**Invalid patterns:**
+
+\`- - -\` - spaces between hyphens
+\` ---\` - leading whitespace
+\`----\` - four hyphens
+\`---text\` - content on same line
+
+**Rationale:**
+
+Other markdown flavors support \`***\`, \`___\`, or variable numbers of hyphens. mdz requires exactly \`---\` to avoid ambiguity and maintain the "one way to do things" principle.
+
+---
+
+## Code Blocks
+
+\`\`\`
+_CodeBlock_ = <column 0> _OpenFence_ NEWLINE _CodeContent_ _CloseFence_ <followed by blank line or EOF>
+
+_OpenFence_  = BACKTICK{3..} _LanguageHint_?
+_CloseFence_ = BACKTICK{n}
+               <where n matches the opening fence length>
+
+_LanguageHint_ = _LanguageChar_+
+_LanguageChar_ = ~[NEWLINE]
+
+_CodeContent_ = (~[BACKTICK] | BACKTICK{1..n-1})*
+                <any text that doesn't start a valid closing fence>
+\`\`\`
+
+**Requirements:**
+
+Opening fence must start at column 0 (no leading whitespace).
+Opening fence must have 3 or more backticks.
+Closing fence must exactly match opening fence length.
+Opening fence must be followed by newline.
+Closing fence must be followed by blank line or EOF.
+Code blocks cannot be empty (must have at least one line of content).
+
+**Language hints:**
+
+Optional text after opening fence: \` \`\`\`typescript \`
+Can contain any characters except newline.
+Used for syntax highlighting hints.
+
+**Nesting:**
+
+Code blocks with different fence lengths can nest:
+
+\`\`\`\`
+\`\`\`
+Use \`\`\` to create code blocks.
+\`\`\`
+\`\`\`\`
+
+The inner \`\`\` does not close the outer \`\`\`\` fence.
+
+**Invalid patterns:**
+
+\` \`\`\` \` - leading whitespace
+Unclosed blocks (no matching closing fence).
+Empty blocks (no content between fences).
+Mismatched fence lengths.
+
+---
+
+## Components and Elements
+
+\`\`\`
+_Component_ = _SelfClosingComponent_
+            | _ComponentWithChildren_
+
+_Element_ = _SelfClosingElement_
+          | _ElementWithChildren_
+
+_SelfClosingComponent_ = \`<\` _ComponentName_ SPACE* \`/>\`
+_ComponentWithChildren_ = \`<\` _ComponentName_ \`>\` _InlineNode_* \`</\` _ComponentName_ \`>\`
+
+_SelfClosingElement_ = \`<\` _ElementName_ SPACE* \`/>\`
+_ElementWithChildren_ = \`<\` _ElementName_ \`>\` _InlineNode_* \`</\` _ElementName_ \`>\`
+
+_ComponentName_ = [\`A\`-\`Z\`] _TagChar_*
+_ElementName_   = [\`a\`-\`z\`] _TagChar_*
+_TagChar_       = LETTER | DIGIT | \`-\` | \`_\`
+\`\`\`
+
+**Differentiation:**
+
+Components start with uppercase letter: \`<Alert>\`, \`<Card>\`
+Elements start with lowercase letter: \`<aside>\`, \`<code>\`
+
+**Requirements:**
+
+Tag names must start with a letter.
+Tag names can contain letters, digits, hyphens, underscores.
+Self-closing syntax requires \`/>\` with optional whitespace before.
+Opening and closing tags must match exactly.
+
+**Opt-in system:**
+
+Components must be registered via \`mdz_components_context\`.
+Elements must be registered via \`mdz_elements_context\`.
+Unregistered components render as \`<ComponentName />\` placeholder.
+Unregistered elements render as \`<element-name />\` placeholder.
+
+**Children:**
+
+Component/element children can include any inline formatting.
+Nesting is supported: \`<Alert>This is _italic_ inside.</Alert>\`
+
+**Attributes:**
+
+Current version does NOT support attributes.
+Future consideration: \`<Alert status="error">\` or \`<div class="container">\`
+
+**MDX convention:**
+
+If a paragraph consists solely of a single component/element with no other content, it does not get wrapped in a \`<p>\` tag. This matches MDX behavior.
+
+---
+
+## Whitespace Handling
+
+**Single newline:**
+
+Within paragraphs, a single newline creates a line break.
+
+\`\`\`
+First line.
+Second line.
+\`\`\`
+
+Renders as two lines with a \`<br>\` between them.
+
+**Double newline:**
+
+Creates a paragraph break.
+
+\`\`\`
+First paragraph.
+
+Second paragraph.
+\`\`\`
+
+**Triple or more newlines:**
+
+Creates paragraphs with preserved blank lines between them.
+
+\`\`\`
+First paragraph.
+
+
+Second paragraph separated by an extra newline.
+\`\`\`
+
+**Trailing whitespace:**
+
+Preserved exactly as authored within inline content.
+
+**Leading whitespace:**
+
+Block-level constructs (headings, hr, code blocks) must start at column 0. Leading whitespace invalidates the construct and causes it to be treated as literal text within a paragraph.
+
+---
+
+## Parsing Strategy
+
+**Single-pass:**
+
+The parser makes a single forward pass through the input.
+
+**Character-code based:**
+
+Uses numeric character codes for performance.
+
+**Text accumulation:**
+
+Optimizes by accumulating consecutive text characters.
+
+**Strict validation:**
+
+Prefers false negatives over false positives - when in doubt, treat as literal text.
+
+**Position tracking:**
+
+All AST nodes track start and end position in the source.
+
+**Error recovery:**
+
+Invalid syntax renders as literal text rather than causing parse errors.
+
+---
+
+## AST Node Types
+
+The parser produces an abstract syntax tree with these node types:
+
+\`\`\`
+Mdz_Node = {
+  type: "paragraph"
+       | "heading"
+       | "hr"
+       | "code_block"
+       | "bold"
+       | "italic"
+       | "strikethrough"
+       | "code"
+       | "link"
+       | "component"
+       | "element"
+       | "text"
+       | "br"
+  start: number
+  end: number
+  children?: Mdz_Node[]
+  text?: string
+  level?: number        // for headings: 1-6
+  language?: string     // for code blocks
+  url?: string          // for links
+  name?: string         // for components/elements
+}
+\`\`\`
+
+**Position tracking:**
+
+\`start\` and \`end\` are 0-based indices into the source string.
+
+**Node-specific fields:**
+
+Headings have \`level\` (1-6).
+Code blocks have optional \`language\` hint.
+Links have \`url\` field.
+Components and elements have \`name\` field.
+Text nodes have \`text\` content.
+`;var c=a('<div class="mt_xl5"><!></div>');function m(e){var n=c(),t=o(n);s(t,{get content(){return l}}),r(n),i(e,n)}export{m as component};
