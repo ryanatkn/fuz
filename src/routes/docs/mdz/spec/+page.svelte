@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Mdz from '$lib/Mdz.svelte';
-	import mdz_spec from '$docs/mdz_spec.mdz?raw';
+	import mdz_spec from './mdz_spec.mdz?raw';
 </script>
 
 <div class="mt_xl5">
