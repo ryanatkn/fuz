@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.151.1
+
+### Patch Changes
+
+- fix package gen helper ([8cdae91](https://github.com/ryanatkn/fuz/commit/8cdae91))
+
 ## 0.151.0
 
 ### Minor Changes
