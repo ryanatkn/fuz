@@ -55,7 +55,7 @@ _Document_ = _Node_*
 _Node_ = _Paragraph_
        | _Heading_
        | _HorizontalRule_
-       | _CodeBlock_
+       | _Codeblock_
 
 _Paragraph_ = <column 0> _InlineNode_+ (_ParagraphBreak_ | EOF)
 
@@ -170,6 +170,10 @@ URL must contain valid RFC 3986 characters.
 URLs cannot contain whitespace or newlines.
 Closing `)` terminates the URL.
 
+Link nodes have a `link_type` field:
+- `'external'` - URL starts with `https://` or `http://`
+- `'internal'` - URL starts with `/` (root-relative path)
+
 **Auto-detected URLs:**
 
 Must start with `https://` or `http://` (case-sensitive).
@@ -247,10 +251,10 @@ Other markdown flavors support `***`, `___`, or variable numbers of hyphens. mdz
 
 ---
 
-## Code Blocks
+## Codeblocks
 
 ```
-_CodeBlock_ = <column 0> _OpenFence_ NEWLINE _CodeContent_ _CloseFence_ <followed by blank line or EOF>
+_Codeblock_ = <column 0> _OpenFence_ NEWLINE _CodeContent_ _CloseFence_ <followed by blank line or EOF>
 
 _OpenFence_  = BACKTICK{3..} _LanguageHint_?
 _CloseFence_ = BACKTICK{n}
@@ -270,7 +274,7 @@ Opening fence must have 3 or more backticks.
 Closing fence must exactly match opening fence length.
 Opening fence must be followed by newline.
 Closing fence must be followed by blank line or EOF.
-Code blocks cannot be empty (must have at least one line of content).
+Codeblocks cannot be empty (must have at least one line of content).
 
 **Language hints:**
 
@@ -280,11 +284,11 @@ Used for syntax highlighting hints.
 
 **Nesting:**
 
-Code blocks with different fence lengths can nest:
+Codeblocks with different fence lengths can nest:
 
 ````
 ```
-Use ``` to create code blocks.
+Use ``` to create codeblocks.
 ```
 ````
 
@@ -358,14 +362,14 @@ If a paragraph consists solely of a single component/element with no other conte
 
 **Single newline:**
 
-Within paragraphs, a single newline creates a line break.
+Within paragraphs, a single newline is preserved in text node content.
 
 ```
 First line.
 Second line.
 ```
 
-Renders as two lines with a `<br>` between them.
+The newline character is preserved exactly as authored in the text content. When rendered by the `<Mdz>` component with CSS `white-space: pre-wrap`, it displays as a line break. No explicit `<br>` nodes are created in the AST.
 
 **Double newline:**
 
@@ -394,7 +398,7 @@ Preserved exactly as authored within inline content.
 
 **Leading whitespace:**
 
-Block-level constructs (headings, hr, code blocks) must start at column 0. Leading whitespace invalidates the construct and causes it to be treated as literal text within a paragraph.
+Block-level constructs (headings, hr, codeblocks) must start at column 0. Leading whitespace invalidates the construct and causes it to be treated as literal text within a paragraph.
 
 ---
 
@@ -424,35 +428,113 @@ All AST nodes track start and end position in the source.
 
 Invalid syntax renders as literal text rather than causing parse errors.
 
+**Greedy/bounded parsing:**
+
+The parser uses a bounded search strategy for nested formatting delimiters to prevent nested formatters from consuming parent delimiters.
+
+When parsing formatted content like `**bold with _italic_**`, the parser:
+1. Finds the opening `**` at position X
+2. Searches for the closing `**`, finding it at position Y
+3. Sets `#max_search_index = Y` to create a boundary
+4. Parses children only within range [X+2, Y), preventing them from finding delimiters beyond Y
+5. Nested `_italic_` formatter inherits this boundary, so it cannot consume the closing `**`
+
+This greedy matching (first occurrence within boundary) ensures proper nesting without backtracking.
+
+**Text accumulation:**
+
+For performance, consecutive text characters are accumulated into a single text node rather than creating individual nodes per character. The parser flushes accumulated text when encountering formatting delimiters or when parsing completes.
+
 ---
 
 ## AST Node Types
 
 The parser produces an abstract syntax tree with these node types:
 
-```
-Mdz_Node = {
-  type: "paragraph"
-       | "heading"
-       | "hr"
-       | "code_block"
-       | "bold"
-       | "italic"
-       | "strikethrough"
-       | "code"
-       | "link"
-       | "component"
-       | "element"
-       | "text"
-       | "br"
+```typescript
+type Mdz_Node =
+  | Mdz_Text_Node
+  | Mdz_Code_Node
+  | Mdz_Codeblock_Node
+  | Mdz_Bold_Node
+  | Mdz_Italic_Node
+  | Mdz_Strikethrough_Node
+  | Mdz_Link_Node
+  | Mdz_Paragraph_Node
+  | Mdz_Hr_Node
+  | Mdz_Heading_Node
+  | Mdz_Element_Node
+  | Mdz_Component_Node
+
+interface Mdz_Base_Node {
+  type: string
   start: number
   end: number
-  children?: Mdz_Node[]
-  text?: string
-  level?: number        // for headings: 1-6
-  language?: string     // for code blocks
-  url?: string          // for links
-  name?: string         // for components/elements
+}
+
+interface Mdz_Text_Node extends Mdz_Base_Node {
+  type: 'Text'
+  content: string
+}
+
+interface Mdz_Code_Node extends Mdz_Base_Node {
+  type: 'Code'
+  content: string
+}
+
+interface Mdz_Codeblock_Node extends Mdz_Base_Node {
+  type: 'Codeblock'
+  lang: string | null
+  content: string
+}
+
+interface Mdz_Bold_Node extends Mdz_Base_Node {
+  type: 'Bold'
+  children: Array<Mdz_Node>
+}
+
+interface Mdz_Italic_Node extends Mdz_Base_Node {
+  type: 'Italic'
+  children: Array<Mdz_Node>
+}
+
+interface Mdz_Strikethrough_Node extends Mdz_Base_Node {
+  type: 'Strikethrough'
+  children: Array<Mdz_Node>
+}
+
+interface Mdz_Link_Node extends Mdz_Base_Node {
+  type: 'Link'
+  reference: string
+  children: Array<Mdz_Node>
+  link_type: 'external' | 'internal'
+}
+
+interface Mdz_Paragraph_Node extends Mdz_Base_Node {
+  type: 'Paragraph'
+  children: Array<Mdz_Node>
+}
+
+interface Mdz_Hr_Node extends Mdz_Base_Node {
+  type: 'Hr'
+}
+
+interface Mdz_Heading_Node extends Mdz_Base_Node {
+  type: 'Heading'
+  level: 1 | 2 | 3 | 4 | 5 | 6
+  children: Array<Mdz_Node>
+}
+
+interface Mdz_Element_Node extends Mdz_Base_Node {
+  type: 'Element'
+  name: string
+  children: Array<Mdz_Node>
+}
+
+interface Mdz_Component_Node extends Mdz_Base_Node {
+  type: 'Component'
+  name: string
+  children: Array<Mdz_Node>
 }
 ```
 
@@ -462,8 +544,10 @@ Mdz_Node = {
 
 **Node-specific fields:**
 
-Headings have `level` (1-6).
-Code blocks have optional `language` hint.
-Links have `url` field.
-Components and elements have `name` field.
-Text nodes have `text` content.
+- Text nodes have `content` field with the text string
+- Code nodes have `content` field with the code string (identifier/module name)
+- Codeblock nodes have `lang` (language hint, nullable) and `content` (raw code)
+- Heading nodes have `level` (1-6) and `children` (inline content)
+- Link nodes have `reference` (URL/path), `link_type` ('external' | 'internal'), and `children` (display content)
+- Component and Element nodes have `name` and `children`
+- Bold, Italic, Strikethrough, and Paragraph nodes have `children` arrays

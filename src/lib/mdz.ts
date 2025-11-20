@@ -5,7 +5,8 @@
  * - inline formatting: `code`, **bold**, _italic_, ~strikethrough~
  * - auto-detected links: external URLs (`https://...`) and internal paths (`/path`)
  * - markdown links: `[text](url)` with custom display text
- * - auto-linking via backticks to identifiers/modules
+ * - inline code in backticks (creates `Code` nodes; auto-linking to identifiers/modules
+ *   is handled by the rendering layer via `Mdz_Node_View.svelte`)
  * - paragraph breaks (double newline)
  * - block elements: headings, horizontal rules, code blocks
  * - HTML elements and Svelte components (opt-in via context)
@@ -141,6 +142,27 @@ const COMMA = 44; // ,
 const SEMICOLON = 59; // ;
 const EXCLAMATION = 33; // !
 const QUESTION = 63; // ?
+// RFC 3986 URI characters
+const DOLLAR = 36; // $
+const PERCENT = 37; // %
+const AMPERSAND = 38; // &
+const APOSTROPHE = 39; // '
+const PLUS = 43; // +
+const EQUALS = 61; // =
+const AT = 64; // @
+// Character ranges
+const A_UPPER = 65; // A
+const Z_UPPER = 90; // Z
+const A_LOWER = 97; // a
+const Z_LOWER = 122; // z
+const ZERO = 48; // 0
+const NINE = 57; // 9
+// mdz specification constants
+const HR_HYPHEN_COUNT = 3; // Horizontal rule requires exactly 3 hyphens
+const MIN_CODEBLOCK_BACKTICKS = 3; // Code blocks require minimum 3 backticks
+const MAX_HEADING_LEVEL = 6; // Headings support levels 1-6
+const HTTPS_PREFIX_LENGTH = 8; // Length of "https://"
+const HTTP_PREFIX_LENGTH = 7; // Length of "http://"
 
 /**
  * Parser for mdz format.
@@ -168,20 +190,10 @@ export class Mdz_Parser {
 		const root_nodes: Array<Mdz_Node> = [];
 		const paragraph_children: Array<Mdz_Node> = [];
 
-		// Check for heading at document start
-		if (this.#match_heading()) {
-			const heading = this.#parse_heading();
-			root_nodes.push(heading);
-		}
-		// Check for hr at document start
-		else if (this.#match_hr()) {
-			const hr = this.#parse_hr();
-			root_nodes.push(hr);
-		}
-		// Check for code block at document start
-		else if (this.#match_code_block()) {
-			const code_block = this.#parse_code_block();
-			root_nodes.push(code_block);
+		// Check for block element at document start
+		const start_block = this.#try_parse_block_element();
+		if (start_block) {
+			root_nodes.push(start_block);
 		}
 
 		while (this.#index < this.#template.length) {
@@ -215,20 +227,10 @@ export class Mdz_Parser {
 				// Consume the paragraph break
 				this.#eat('\n\n');
 
-				// Check for heading after paragraph break
-				if (this.#match_heading()) {
-					const heading = this.#parse_heading();
-					root_nodes.push(heading);
-				}
-				// Check for hr after paragraph break
-				else if (this.#match_hr()) {
-					const hr = this.#parse_hr();
-					root_nodes.push(hr);
-				}
-				// Check for code block after paragraph break
-				else if (this.#match_code_block()) {
-					const code_block = this.#parse_code_block();
-					root_nodes.push(code_block);
+				// Check for block element after paragraph break
+				const block = this.#try_parse_block_element();
+				if (block) {
+					root_nodes.push(block);
 				}
 			} else {
 				const node = this.#parse_node();
@@ -384,13 +386,12 @@ export class Mdz_Parser {
 	 *
 	 * - **bold** = Bold node
 	 *
-	 * Falls back to text if unclosed, single asterisk, or not at word boundary.
+	 * Falls back to text if unclosed or single asterisk.
 	 *
-	 * Following mdz philosophy (false negatives over false positives):
-	 * Bold requires word boundaries to prevent intraword formatting.
+	 * Bold has no word boundary restrictions and works everywhere including intraword.
 	 * Examples:
-	 * - `foo**bar**baz` → literal text (intraword)
-	 * - `word **bold** word` → bold (at word boundaries)
+	 * - `foo**bar**baz` → foo<strong>bar</strong>baz (creates bold)
+	 * - `word **bold** word` → word <strong>bold</strong> word (also works)
 	 */
 	#parse_bold(): Mdz_Bold_Node | Mdz_Text_Node {
 		const start = this.#index;
@@ -445,7 +446,22 @@ export class Mdz_Parser {
 
 	/**
 	 * Common parser for single-delimiter formatting (italic and strikethrough).
-	 * Both use identical logic with different delimiters and node types.
+	 * Both formats use identical parsing logic with different delimiters and node types.
+	 *
+	 * Word boundary requirements:
+	 * - Opening delimiter must be at word boundary (not preceded by alphanumeric)
+	 * - Closing delimiter must be at word boundary (not followed by alphanumeric)
+	 * - This prevents false positives with `snake_case` and `foo~bar~baz` text
+	 *
+	 * Falls back to literal text if:
+	 * - Delimiter not at word boundary
+	 * - Unclosed (no matching closing delimiter found)
+	 * - Empty content (e.g., `__` or `~~`)
+	 * - Paragraph break interrupts before closing delimiter
+	 *
+	 * @param delimiter - The delimiter character (`_` for italic, `~` for strikethrough)
+	 * @param node_type - The node type to create ('Italic' or 'Strikethrough')
+	 * @returns Formatted node or text node if validation fails
 	 */
 	#parse_single_delimiter_formatting(
 		delimiter: '_',
@@ -673,9 +689,7 @@ export class Mdz_Parser {
 		const start = this.#index;
 
 		// Save parent accumulation state to avoid polluting component children with parent's accumulated text
-		const saved_accumulated_text = this.#accumulated_text;
-		const saved_accumulated_start = this.#accumulated_start;
-		const saved_nodes = this.#nodes.slice();
+		const saved_state = this.#save_accumulation_state();
 
 		// Clear accumulation state for parsing component children
 		this.#accumulated_text = '';
@@ -684,10 +698,7 @@ export class Mdz_Parser {
 		// Consume <
 		if (!this.#match('<')) {
 			// Restore parent state before returning
-			this.#accumulated_text = saved_accumulated_text;
-			this.#accumulated_start = saved_accumulated_start;
-			this.#nodes.length = 0;
-			this.#nodes.push(...saved_nodes);
+			this.#restore_accumulation_state(saved_state);
 
 			const content = this.#template[this.#index]!;
 			this.#index++;
@@ -707,10 +718,7 @@ export class Mdz_Parser {
 		// Tag name must start with a letter
 		if (this.#index >= this.#template.length) {
 			// Just a `<` at EOF - restore parent state
-			this.#accumulated_text = saved_accumulated_text;
-			this.#accumulated_start = saved_accumulated_start;
-			this.#nodes.length = 0;
-			this.#nodes.push(...saved_nodes);
+			this.#restore_accumulation_state(saved_state);
 			return {
 				type: 'Text',
 				content: '<',
@@ -722,10 +730,7 @@ export class Mdz_Parser {
 		const first_char = this.#template.charCodeAt(this.#index);
 		if (!this.#is_letter(first_char)) {
 			// Not a valid tag, treat as text - restore parent state
-			this.#accumulated_text = saved_accumulated_text;
-			this.#accumulated_start = saved_accumulated_start;
-			this.#nodes.length = 0;
-			this.#nodes.push(...saved_nodes);
+			this.#restore_accumulation_state(saved_state);
 			return {
 				type: 'Text',
 				content: '<',
@@ -749,10 +754,7 @@ export class Mdz_Parser {
 
 		if (tag_name.length === 0) {
 			// Empty tag name - restore parent state
-			this.#accumulated_text = saved_accumulated_text;
-			this.#accumulated_start = saved_accumulated_start;
-			this.#nodes.length = 0;
-			this.#nodes.push(...saved_nodes);
+			this.#restore_accumulation_state(saved_state);
 			return {
 				type: 'Text',
 				content: '<',
@@ -763,7 +765,7 @@ export class Mdz_Parser {
 
 		// Determine if this is a Component (uppercase) or Element (lowercase)
 		const first_char_code = tag_name.charCodeAt(0);
-		const is_component = first_char_code >= 65 && first_char_code <= 90; // A-Z
+		const is_component = first_char_code >= A_UPPER && first_char_code <= Z_UPPER;
 		const node_type: 'Component' | 'Element' = is_component ? 'Component' : 'Element';
 
 		// Skip whitespace after tag name (for future attribute support)
@@ -785,10 +787,7 @@ export class Mdz_Parser {
 			this.#index += 2;
 
 			// Restore parent state before returning
-			this.#accumulated_text = saved_accumulated_text;
-			this.#accumulated_start = saved_accumulated_start;
-			this.#nodes.length = 0;
-			this.#nodes.push(...saved_nodes);
+			this.#restore_accumulation_state(saved_state);
 
 			return {
 				type: node_type,
@@ -805,10 +804,7 @@ export class Mdz_Parser {
 			this.#template.charCodeAt(this.#index) !== RIGHT_ANGLE
 		) {
 			// Unclosed opening tag, treat as text - restore parent state
-			this.#accumulated_text = saved_accumulated_text;
-			this.#accumulated_start = saved_accumulated_start;
-			this.#nodes.length = 0;
-			this.#nodes.push(...saved_nodes);
+			this.#restore_accumulation_state(saved_state);
 
 			this.#index = start + 1;
 			return {
@@ -837,10 +833,7 @@ export class Mdz_Parser {
 				this.#index += closing_tag.length;
 
 				// Restore parent state before returning
-				this.#accumulated_text = saved_accumulated_text;
-				this.#accumulated_start = saved_accumulated_start;
-				this.#nodes.length = 0;
-				this.#nodes.push(...saved_nodes);
+				this.#restore_accumulation_state(saved_state);
 
 				return {
 					type: node_type,
@@ -864,10 +857,7 @@ export class Mdz_Parser {
 
 		// Unclosed tag - reached EOF without finding closing tag
 		// Treat the opening tag as text - restore parent state
-		this.#accumulated_text = saved_accumulated_text;
-		this.#accumulated_start = saved_accumulated_start;
-		this.#nodes.length = 0;
-		this.#nodes.push(...saved_nodes);
+		this.#restore_accumulation_state(saved_state);
 
 		this.#index = start + 1;
 		return {
@@ -903,10 +893,66 @@ export class Mdz_Parser {
 	}
 
 	/**
+	 * Try to parse a block element (heading, hr, or codeblock) at current position.
+	 * Returns the parsed block node if a match is found, null otherwise.
+	 *
+	 * Block elements must:
+	 * - Start at column 0 (no leading whitespace)
+	 * - Be followed by blank line or EOF
+	 *
+	 * This helper eliminates duplication between document start and post-paragraph-break parsing.
+	 */
+	#try_parse_block_element(): Mdz_Heading_Node | Mdz_Hr_Node | Mdz_Codeblock_Node | null {
+		if (this.#match_heading()) {
+			return this.#parse_heading();
+		} else if (this.#match_hr()) {
+			return this.#parse_hr();
+		} else if (this.#match_code_block()) {
+			return this.#parse_code_block();
+		}
+		return null;
+	}
+
+	/**
+	 * Save current text accumulation state.
+	 * Used when parsing nested structures (like components/elements) that need isolated accumulation.
+	 * Returns state object that can be passed to `#restore_accumulation_state()`.
+	 */
+	#save_accumulation_state(): {
+		accumulated_text: string;
+		accumulated_start: number;
+		nodes: Array<Mdz_Node>;
+	} {
+		return {
+			accumulated_text: this.#accumulated_text,
+			accumulated_start: this.#accumulated_start,
+			nodes: this.#nodes.slice(),
+		};
+	}
+
+	/**
+	 * Restore previously saved text accumulation state.
+	 * Used to restore parent state when exiting nested structure parsing.
+	 * @param state - State object returned from `#save_accumulation_state()`
+	 */
+	#restore_accumulation_state(state: {
+		accumulated_text: string;
+		accumulated_start: number;
+		nodes: Array<Mdz_Node>;
+	}): void {
+		this.#accumulated_text = state.accumulated_text;
+		this.#accumulated_start = state.accumulated_start;
+		this.#nodes.length = 0;
+		this.#nodes.push(...state.nodes);
+	}
+
+	/**
 	 * Check if character code is a letter (A-Z, a-z).
 	 */
 	#is_letter(char_code: number): boolean {
-		return (char_code >= 65 && char_code <= 90) || (char_code >= 97 && char_code <= 122);
+		return (
+			(char_code >= A_UPPER && char_code <= Z_UPPER) || (char_code >= A_LOWER && char_code <= Z_LOWER)
+		);
 	}
 
 	/**
@@ -915,9 +961,9 @@ export class Mdz_Parser {
 	#is_tag_name_char(char_code: number): boolean {
 		return (
 			this.#is_letter(char_code) ||
-			(char_code >= 48 && char_code <= 57) || // 0-9
-			char_code === HYPHEN || // -
-			char_code === UNDERSCORE // _
+			(char_code >= ZERO && char_code <= NINE) ||
+			char_code === HYPHEN ||
+			char_code === UNDERSCORE
 		);
 	}
 
@@ -935,22 +981,15 @@ export class Mdz_Parser {
 	 */
 	#is_word_char(char_code: number): boolean {
 		// Formatting delimiters are never word chars (transparent for boundary checks)
-		if (
-			char_code === ASTERISK || // *
-			char_code === UNDERSCORE || // _
-			char_code === TILDE // ~
-		) {
+		if (char_code === ASTERISK || char_code === UNDERSCORE || char_code === TILDE) {
 			return false;
 		}
 
 		// Alphanumeric characters are word chars for all delimiters
 		return (
-			// A-Z
-			(char_code >= 65 && char_code <= 90) ||
-			// a-z
-			(char_code >= 97 && char_code <= 122) ||
-			// 0-9
-			(char_code >= 48 && char_code <= 57)
+			(char_code >= A_UPPER && char_code <= Z_UPPER) ||
+			(char_code >= A_LOWER && char_code <= Z_LOWER) ||
+			(char_code >= ZERO && char_code <= NINE)
 		);
 	}
 
@@ -996,38 +1035,35 @@ export class Mdz_Parser {
 	 */
 	#is_valid_path_char(char_code: number): boolean {
 		return (
-			// A-Z
-			(char_code >= 65 && char_code <= 90) ||
-			// a-z
-			(char_code >= 97 && char_code <= 122) ||
-			// 0-9
-			(char_code >= 48 && char_code <= 57) ||
+			(char_code >= A_UPPER && char_code <= Z_UPPER) ||
+			(char_code >= A_LOWER && char_code <= Z_LOWER) ||
+			(char_code >= ZERO && char_code <= NINE) ||
 			// unreserved: - . _ ~
-			char_code === 45 || // -
-			char_code === 46 || // .
-			char_code === 95 || // _
-			char_code === 126 || // ~
+			char_code === HYPHEN ||
+			char_code === PERIOD ||
+			char_code === UNDERSCORE ||
+			char_code === TILDE ||
 			// sub-delims: ! $ & ' ( ) * + , ; =
-			char_code === 33 || // !
-			char_code === 36 || // $
-			char_code === 38 || // &
-			char_code === 39 || // '
-			char_code === 40 || // (
-			char_code === 41 || // )
-			char_code === 42 || // *
-			char_code === 43 || // +
-			char_code === 44 || // ,
-			char_code === 59 || // ;
-			char_code === 61 || // =
+			char_code === EXCLAMATION ||
+			char_code === DOLLAR ||
+			char_code === AMPERSAND ||
+			char_code === APOSTROPHE ||
+			char_code === LEFT_PAREN ||
+			char_code === RIGHT_PAREN ||
+			char_code === ASTERISK ||
+			char_code === PLUS ||
+			char_code === COMMA ||
+			char_code === SEMICOLON ||
+			char_code === EQUALS ||
 			// path allowed: : @
-			char_code === 58 || // :
-			char_code === 64 || // @
+			char_code === COLON ||
+			char_code === AT ||
 			// separators: / ? #
-			char_code === 47 || // /
-			char_code === 63 || // ?
-			char_code === 35 || // #
+			char_code === SLASH ||
+			char_code === QUESTION ||
+			char_code === HASH ||
 			// percent-encoding: %
-			char_code === 37 // %
+			char_code === PERCENT
 		);
 	}
 
@@ -1038,19 +1074,19 @@ export class Mdz_Parser {
 		if (this.#match('https://')) {
 			// Check for protocol-only (e.g., just "https://")
 			// Must have at least one non-whitespace character after protocol
-			if (this.#index + 8 >= this.#template.length) {
+			if (this.#index + HTTPS_PREFIX_LENGTH >= this.#template.length) {
 				return false;
 			}
-			const next_char = this.#template.charCodeAt(this.#index + 8);
+			const next_char = this.#template.charCodeAt(this.#index + HTTPS_PREFIX_LENGTH);
 			return next_char !== SPACE && next_char !== NEWLINE;
 		}
 		if (this.#match('http://')) {
 			// Check for protocol-only (e.g., just "http://")
 			// Must have at least one non-whitespace character after protocol
-			if (this.#index + 7 >= this.#template.length) {
+			if (this.#index + HTTP_PREFIX_LENGTH >= this.#template.length) {
 				return false;
 			}
-			const next_char = this.#template.charCodeAt(this.#index + 7);
+			const next_char = this.#template.charCodeAt(this.#index + HTTP_PREFIX_LENGTH);
 			return next_char !== SPACE && next_char !== NEWLINE;
 		}
 		return false;
@@ -1090,9 +1126,9 @@ export class Mdz_Parser {
 
 		// Consume protocol
 		if (this.#match('https://')) {
-			this.#index += 8;
+			this.#index += HTTPS_PREFIX_LENGTH;
 		} else if (this.#match('http://')) {
-			this.#index += 7;
+			this.#index += HTTP_PREFIX_LENGTH;
 		}
 
 		// Collect URL characters using RFC 3986 whitelist
@@ -1163,13 +1199,15 @@ export class Mdz_Parser {
 	 * - Trims simple trailing: .,;:!?]
 	 * - Balanced logic for () only (valid in path components)
 	 * - Invalid chars like [] {} are already stopped by whitelist, but ] trimmed as fallback
+	 *
+	 * Optimized to avoid O(n²) string slicing - tracks end index and slices once at the end.
 	 */
 	#trim_trailing_punctuation(url: string): string {
-		let trimmed = url;
+		let end = url.length;
 
 		// Trim simple trailing punctuation (] as fallback - whitelist should prevent it)
-		while (trimmed.length > 0) {
-			const last_char = trimmed.charCodeAt(trimmed.length - 1);
+		while (end > 0) {
+			const last_char = url.charCodeAt(end - 1);
 			if (
 				last_char === PERIOD ||
 				last_char === COMMA ||
@@ -1179,34 +1217,35 @@ export class Mdz_Parser {
 				last_char === QUESTION ||
 				last_char === RIGHT_BRACKET
 			) {
-				trimmed = trimmed.slice(0, -1);
+				end--;
 			} else {
 				break;
 			}
 		}
 
 		// Handle balanced parentheses ONLY (parens are valid in URI path components)
-		// Count parentheses once to avoid O(n²) when trimming multiple trailing parens
+		// Count parentheses in the trimmed portion
 		let open_count = 0;
 		let close_count = 0;
-		for (let i = 0; i < trimmed.length; i++) {
-			const char = trimmed.charCodeAt(i);
+		for (let i = 0; i < end; i++) {
+			const char = url.charCodeAt(i);
 			if (char === LEFT_PAREN) open_count++;
 			if (char === RIGHT_PAREN) close_count++;
 		}
 
 		// Trim unmatched trailing closing parens
-		while (trimmed.length > 0 && close_count > open_count) {
-			const last_char = trimmed.charCodeAt(trimmed.length - 1);
+		while (end > 0 && close_count > open_count) {
+			const last_char = url.charCodeAt(end - 1);
 			if (last_char === RIGHT_PAREN) {
-				trimmed = trimmed.slice(0, -1);
+				end--;
 				close_count--;
 			} else {
 				break;
 			}
 		}
 
-		return trimmed;
+		// Return original string if no trimming, otherwise slice once
+		return end === url.length ? url : url.slice(0, end);
 	}
 
 	/**
@@ -1273,11 +1312,22 @@ export class Mdz_Parser {
 
 	/**
 	 * Parse nodes until delimiter string is found.
-	 * Used for bold/italic content parsing.
-	 * Stops at paragraph breaks (double newline) to allow block elements to interrupt inline formatting.
+	 * Used for parsing children of inline formatting (bold, italic, strikethrough) and markdown links.
 	 *
-	 * @param delimiter - The delimiter string to stop at
+	 * Implements greedy/bounded parsing to prevent nested formatters from consuming parent delimiters:
+	 * - When parsing `**bold with _italic_**`, the outer `**` parser finds its closing delimiter at position Y
+	 * - Sets `#max_search_index = Y` to create a boundary
+	 * - Parses children only within range, preventing `_italic_` from finding delimiters beyond Y
+	 * - This ensures proper nesting without backtracking
+	 *
+	 * Stops parsing when:
+	 * - Delimiter string is found
+	 * - Paragraph break (double newline) is encountered (allows block elements to interrupt inline formatting)
+	 * - `end_index` boundary is reached
+	 *
+	 * @param delimiter - The delimiter string to stop at (e.g., '**', '_', ']')
 	 * @param end_index - Optional maximum index to parse up to (for greedy/bounded parsing)
+	 * @returns Array of parsed nodes (may be empty if delimiter found immediately)
 	 */
 	#parse_nodes_until(delimiter: string, end_index?: number): Array<Mdz_Node> {
 		const nodes: Array<Mdz_Node> = [];
@@ -1344,6 +1394,12 @@ export class Mdz_Parser {
 	/**
 	 * Check if current position matches a horizontal rule.
 	 * HR must be exactly `---` at column 0, followed by blank line or EOF.
+	 *
+	 * Blank line requirement rationale:
+	 * Prevents block elements from accidentally consuming following content.
+	 * Without this, `---` followed by regular text would create an hr and treat
+	 * the next line as a new paragraph, which could be surprising. The blank line
+	 * makes block element boundaries explicit and predictable.
 	 */
 	#match_hr(): boolean {
 		let i = this.#index;
@@ -1355,14 +1411,14 @@ export class Mdz_Parser {
 
 		// Must have exactly three hyphens
 		if (
-			i + 3 > this.#template.length ||
+			i + HR_HYPHEN_COUNT > this.#template.length ||
 			this.#template.charCodeAt(i) !== HYPHEN ||
 			this.#template.charCodeAt(i + 1) !== HYPHEN ||
 			this.#template.charCodeAt(i + 2) !== HYPHEN
 		) {
 			return false;
 		}
-		i += 3;
+		i += HR_HYPHEN_COUNT;
 
 		// After the three hyphens, only whitespace and newline (or EOF) allowed
 		while (i < this.#template.length) {
@@ -1396,7 +1452,7 @@ export class Mdz_Parser {
 		const start = this.#index;
 
 		// Consume the three hyphens (no leading whitespace - already verified)
-		this.#index += 3;
+		this.#index += HR_HYPHEN_COUNT;
 
 		// Skip trailing whitespace
 		while (
@@ -1419,6 +1475,11 @@ export class Mdz_Parser {
 	 * Check if current position matches a heading.
 	 * Heading must be 1-6 hashes at column 0, followed by space and content,
 	 * followed by blank line or EOF.
+	 *
+	 * Blank line requirement rationale:
+	 * Ensures headings are visually and semantically separate from following content.
+	 * Without this, `# Heading\nText` would be ambiguous - is the text part of the
+	 * heading or a new paragraph? The blank line makes document structure explicit.
 	 */
 	#match_heading(): boolean {
 		let i = this.#index;
@@ -1430,12 +1491,16 @@ export class Mdz_Parser {
 
 		// Count hashes (must be 1-6)
 		let hash_count = 0;
-		while (i < this.#template.length && this.#template.charCodeAt(i) === HASH && hash_count < 7) {
+		while (
+			i < this.#template.length &&
+			this.#template.charCodeAt(i) === HASH &&
+			hash_count <= MAX_HEADING_LEVEL
+		) {
 			hash_count++;
 			i++;
 		}
 
-		if (hash_count === 0 || hash_count > 6) {
+		if (hash_count === 0 || hash_count > MAX_HEADING_LEVEL) {
 			return false;
 		}
 
@@ -1551,6 +1616,12 @@ export class Mdz_Parser {
 	 * Check if current position matches a code block.
 	 * Code block must be 3+ backticks at column 0, followed by blank line or EOF.
 	 * Empty code blocks (no content) are treated as invalid.
+	 *
+	 * Blank line requirement rationale:
+	 * Separates code blocks from following content to prevent ambiguity.
+	 * Codeblocks are distinct semantic units that should be visually isolated.
+	 * The blank line makes it explicit where the code block ends and regular
+	 * content begins, following the "explicit over implicit" design principle.
 	 */
 	#match_code_block(): boolean {
 		let i = this.#index;
@@ -1567,7 +1638,7 @@ export class Mdz_Parser {
 			i++;
 		}
 
-		if (backtick_count < 3) {
+		if (backtick_count < MIN_CODEBLOCK_BACKTICKS) {
 			return false;
 		}
 

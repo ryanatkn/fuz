@@ -211,7 +211,7 @@ Visit /docs/mdz/grammar for the formal grammar.
 
 ### Single Newline
 
-A single newline creates a line break:
+A single newline is preserved in the text node content:
 
 ```
 First line.
@@ -219,7 +219,7 @@ Second line.
 Third line.
 ```
 
-Newlines are preserved in the text content and rendered visually via CSS `white-space: pre-wrap`. The `<Mdz>` component wraps content with this CSS class to ensure line breaks display correctly.
+The newline character is preserved exactly as authored in text nodes. When rendered, the `<Mdz>` component applies CSS `white-space: pre-wrap` to display line breaks visually. No explicit `<br>` elements are created - whitespace preservation is purely CSS-based.
 
 ### Double Newline
 
@@ -267,11 +267,13 @@ Use 1-6 hashes followed by a space and content:
 ```
 
 **Requirements:**
-- Must start at column 0 (no leading whitespace)
+- **Must start at column 0** (no leading whitespace) - any indentation makes it literal text
 - Must have exactly 1-6 `#` characters
 - Must have space after hashes
 - Must have non-whitespace content after space
 - Must be followed by blank line or EOF
+
+The column-0 requirement is a key differentiator from CommonMark - mdz requires block elements to start at the line beginning for unambiguous parsing.
 
 **Invalid patterns:**
 - `#No space` - missing space
@@ -301,7 +303,7 @@ Section two.
 
 **Requirements:**
 - Must be exactly 3 hyphens (not 2, not 4+)
-- Must start at column 0
+- **Must start at column 0** (no leading whitespace) - indented `---` is treated as literal text
 - Trailing whitespace allowed
 - Must be followed by blank line or EOF
 
@@ -315,7 +317,7 @@ Section two.
 
 ---
 
-## Code Blocks
+## Codeblocks
 
 Use three or more backticks at column 0 with optional language hint:
 
@@ -341,19 +343,21 @@ The language hint can contain any characters except newline.
 
 `````
 ````
-Use ``` for code blocks.
+Use ``` for codeblocks.
 ````
 `````
 
 The inner ` ``` ` does not close the outer ```` fence.
 
 **Requirements:**
-- Opening fence must start at column 0
+- **Opening fence must start at column 0** (no leading whitespace) - indented fences are literal text
 - Opening fence must have 3+ backticks
 - Closing fence must match opening length
 - Opening fence followed by newline
 - Closing fence followed by blank line or EOF
 - Cannot be empty (must have content)
+
+Like all mdz block elements, the strict column-0 requirement distinguishes codeblocks from inline code and prevents ambiguity.
 
 **Invalid patterns:**
 - ` ``` ` - leading whitespace
@@ -490,7 +494,7 @@ Exact whitespace characters preserved.
 
 **Column-0 requirement:**
 
-Block elements (headings, hr, code blocks) must start at column 0. Leading whitespace invalidates them and causes them to be treated as paragraph text.
+Block elements (headings, hr, codeblocks) must start at column 0. Leading whitespace invalidates them and causes them to be treated as paragraph text.
 
 ---
 
@@ -507,8 +511,8 @@ mdz deliberately diverges from CommonMark and GitHub Flavored Markdown to minimi
 | Intraword asterisk | `foo*bar*baz` = emphasis (allowed) | Same: `foo**bar**baz` = **bold** (allowed, no restrictions) |
 | Strikethrough | Not in CommonMark, `~~text~~` in GFM | `~text~` with word boundaries |
 | Horizontal rule | `---`, `***`, `___`, variable lengths | `---` exactly (3 hyphens) |
-| Indented code | 4 spaces creates code block | NOT supported |
-| Code block indent | Can be indented | Must be column 0 |
+| Indented code | 4 spaces creates codeblock | NOT supported |
+| Codeblock indent | Can be indented | Must be column 0 |
 | Heading no space | `#text` valid | Invalid (space required) |
 | Block spacing | Flexible | Requires blank lines |
 
@@ -564,7 +568,7 @@ mdz is an **early proof of concept**:
 - Well-defined syntax and parsing rules
 - Core inline formatting (bold, italic, strikethrough, code)
 - Links (markdown, auto-detected URLs and paths)
-- Block elements (headings, horizontal rules, code blocks)
+- Block elements (headings, horizontal rules, codeblocks)
 - Component and element integration
 - Whitespace preservation
 
