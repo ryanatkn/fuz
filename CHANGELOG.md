@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.151.2
+
+### Patch Changes
+
+- fix mdz formatting edge cases ([#93](https://github.com/ryanatkn/fuz/pull/93))
+
 ## 0.151.1
 
 ### Patch Changes
