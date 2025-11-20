@@ -951,7 +951,8 @@ export class Mdz_Parser {
 	 */
 	#is_letter(char_code: number): boolean {
 		return (
-			(char_code >= A_UPPER && char_code <= Z_UPPER) || (char_code >= A_LOWER && char_code <= Z_LOWER)
+			(char_code >= A_UPPER && char_code <= Z_UPPER) ||
+			(char_code >= A_LOWER && char_code <= Z_LOWER)
 		);
 	}
 
