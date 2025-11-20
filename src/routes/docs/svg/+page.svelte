@@ -1,13 +1,13 @@
 <script lang="ts">
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
-	import Github_Link from '$lib/Github_Link.svelte';
 	import {get_tome_by_name} from '$lib/tome.js';
 	import Svg from '$lib/Svg.svelte';
 	import Tome_Content from '$lib/Tome_Content.svelte';
 	import Tome_Section from '$lib/Tome_Section.svelte';
 	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
 	import {fuz_logo, github_logo} from '$lib/logos.js';
+	import Identifier_Link from '$lib/Identifier_Link.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Svg';
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
@@ -20,6 +20,9 @@
 		<!-- TODO make this a generic data-driven helper -->
 		<Code content={`import Svg from '@ryanatkn/fuz/Svg.svelte';`} lang="ts" />
 		<Code content={`<Svg data={fuz_logo} />`} />
+		<aside class="mt_lg">
+			⚠️ <Identifier_Link name="Svg" /> currently uses <code>@html</code> but for security should not.
+		</aside>
 		<p>Fills available space by default:</p>
 		<Svg data={fuz_logo} />
 	</section>
@@ -65,10 +68,4 @@
 			<span style:--text_color="var(--color_i_5)"><Svg data={github_logo} /></span>
 		</p>
 	</Tome_Section>
-
-	<aside>
-		⚠️ These docs are a work in progress, see the <Github_Link
-			path="ryanatkn/fuz/blob/main/src/lib/Svg.svelte">source code</Github_Link
-		> for now.
-	</aside>
 </Tome_Content>

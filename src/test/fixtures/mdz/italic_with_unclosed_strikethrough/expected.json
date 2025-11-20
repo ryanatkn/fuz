@@ -1,0 +1,40 @@
+[
+	{
+		"type": "Paragraph",
+		"children": [
+			{
+				"type": "Italic",
+				"children": [
+					{
+						"type": "Text",
+						"content": "italic ",
+						"start": 1,
+						"end": 8
+					},
+					{
+						"type": "Text",
+						"content": "~",
+						"start": 8,
+						"end": 9
+					},
+					{
+						"type": "Text",
+						"content": "strike",
+						"start": 9,
+						"end": 15
+					}
+				],
+				"start": 0,
+				"end": 16
+			},
+			{
+				"type": "Text",
+				"content": " after~",
+				"start": 16,
+				"end": 23
+			}
+		],
+		"start": 0,
+		"end": 23
+	}
+]

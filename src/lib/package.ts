@@ -3680,7 +3680,7 @@ export const src_json: Src_Json = {
 					name: 'mdz_parse',
 					kind: 'function',
 					doc_comment: 'Parses text to an array of `Mdz_Node`.',
-					source_line: 34,
+					source_line: 35,
 					type_signature: '(text: string): Mdz_Node[]',
 					return_type: 'Mdz_Node[]',
 					parameters: [
@@ -3694,13 +3694,13 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Node',
 					kind: 'type',
-					source_line: 36,
+					source_line: 37,
 					type_signature: 'Mdz_Node',
 				},
 				{
 					name: 'Mdz_Base_Node',
 					kind: 'type',
-					source_line: 50,
+					source_line: 51,
 					type_signature: 'Mdz_Base_Node',
 					properties: [
 						{
@@ -3723,7 +3723,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Text_Node',
 					kind: 'type',
-					source_line: 56,
+					source_line: 57,
 					type_signature: 'Mdz_Text_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3742,7 +3742,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Code_Node',
 					kind: 'type',
-					source_line: 61,
+					source_line: 62,
 					type_signature: 'Mdz_Code_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3761,7 +3761,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Codeblock_Node',
 					kind: 'type',
-					source_line: 66,
+					source_line: 67,
 					type_signature: 'Mdz_Codeblock_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3785,7 +3785,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Bold_Node',
 					kind: 'type',
-					source_line: 72,
+					source_line: 73,
 					type_signature: 'Mdz_Bold_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3804,7 +3804,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Italic_Node',
 					kind: 'type',
-					source_line: 77,
+					source_line: 78,
 					type_signature: 'Mdz_Italic_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3823,7 +3823,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Strikethrough_Node',
 					kind: 'type',
-					source_line: 82,
+					source_line: 83,
 					type_signature: 'Mdz_Strikethrough_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3842,7 +3842,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Link_Node',
 					kind: 'type',
-					source_line: 87,
+					source_line: 88,
 					type_signature: 'Mdz_Link_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3871,7 +3871,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Paragraph_Node',
 					kind: 'type',
-					source_line: 94,
+					source_line: 95,
 					type_signature: 'Mdz_Paragraph_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3890,7 +3890,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Hr_Node',
 					kind: 'type',
-					source_line: 99,
+					source_line: 100,
 					type_signature: 'Mdz_Hr_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3904,7 +3904,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Heading_Node',
 					kind: 'type',
-					source_line: 103,
+					source_line: 104,
 					type_signature: 'Mdz_Heading_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3928,7 +3928,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Element_Node',
 					kind: 'type',
-					source_line: 109,
+					source_line: 110,
 					type_signature: 'Mdz_Element_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3952,7 +3952,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'Mdz_Component_Node',
 					kind: 'type',
-					source_line: 115,
+					source_line: 116,
 					type_signature: 'Mdz_Component_Node',
 					extends: ['Mdz_Base_Node'],
 					properties: [
@@ -3978,7 +3978,7 @@ export const src_json: Src_Json = {
 					kind: 'class',
 					doc_comment:
 						'Parser for mdz format.\nSingle-pass lexer/parser with text accumulation for efficiency.\nUsed by `mdz_parse`, which should be preferred for simple usage.',
-					source_line: 150,
+					source_line: 172,
 					members: [
 						{
 							name: 'constructor',
@@ -4005,7 +4005,7 @@ export const src_json: Src_Json = {
 				},
 			],
 			module_comment:
-				'mdz - minimal markdown dialect for Fuz documentation.\n\nParses an enhanced markdown dialect with:\n- inline formatting: `code`, **bold**, _italic_, ~strikethrough~\n- auto-detected links: external URLs (`https://...`) and internal paths (`/path`)\n- markdown links: `[text](url)` with custom display text\n- auto-linking via backticks to identifiers/modules\n- paragraph breaks (double newline)\n- block elements: headings, horizontal rules, code blocks\n- HTML elements and Svelte components (opt-in via context)\n\nKey constraint: preserves ALL whitespace exactly as authored,\nand is rendered with white-space pre or pre-wrap.\n\n## Design philosophy\n\n- **False negatives over false positives**: Strict syntax prevents accidentally\n  interpreting plain text as formatting. When in doubt, treat as plain text.\n- **One way to do things**: Single unambiguous syntax per feature. No alternatives.\n- **Explicit over implicit**: Clear delimiters and column-0 requirements avoid ambiguity.\n- **Simple over complete**: Prefer simple parsing rules over complex edge case handling.\n\n## Status\n\nThis is an early proof of concept with missing features and edge cases.',
+				'mdz - minimal markdown dialect for Fuz documentation.\n\nParses an enhanced markdown dialect with:\n- inline formatting: `code`, **bold**, _italic_, ~strikethrough~\n- auto-detected links: external URLs (`https://...`) and internal paths (`/path`)\n- markdown links: `[text](url)` with custom display text\n- inline code in backticks (creates `Code` nodes; auto-linking to identifiers/modules\n  is handled by the rendering layer via `Mdz_Node_View.svelte`)\n- paragraph breaks (double newline)\n- block elements: headings, horizontal rules, code blocks\n- HTML elements and Svelte components (opt-in via context)\n\nKey constraint: preserves ALL whitespace exactly as authored,\nand is rendered with white-space pre or pre-wrap.\n\n## Design philosophy\n\n- **False negatives over false positives**: Strict syntax prevents accidentally\n  interpreting plain text as formatting. When in doubt, treat as plain text.\n- **One way to do things**: Single unambiguous syntax per feature. No alternatives.\n- **Explicit over implicit**: Clear delimiters and column-0 requirements avoid ambiguity.\n- **Simple over complete**: Prefer simple parsing rules over complex edge case handling.\n\n## Status\n\nThis is an early proof of concept with missing features and edge cases.',
 			dependents: ['Mdz.svelte'],
 		},
 		{

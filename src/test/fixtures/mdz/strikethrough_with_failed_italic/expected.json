@@ -1,0 +1,40 @@
+[
+	{
+		"type": "Paragraph",
+		"children": [
+			{
+				"type": "Text",
+				"content": "_italic ",
+				"start": 0,
+				"end": 8
+			},
+			{
+				"type": "Strikethrough",
+				"children": [
+					{
+						"type": "Text",
+						"content": "strike",
+						"start": 9,
+						"end": 15
+					},
+					{
+						"type": "Text",
+						"content": "_",
+						"start": 15,
+						"end": 16
+					},
+					{
+						"type": "Text",
+						"content": "text",
+						"start": 16,
+						"end": 20
+					}
+				],
+				"start": 8,
+				"end": 21
+			}
+		],
+		"start": 0,
+		"end": 21
+	}
+]

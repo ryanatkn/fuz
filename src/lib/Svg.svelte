@@ -76,7 +76,7 @@
 			: (data.attrs?.style ?? attrs?.style),
 	);
 
-	// TODO @html making me nervous
+	// TODO dont use @html
 </script>
 
 <svg

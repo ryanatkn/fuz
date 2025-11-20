@@ -60,8 +60,8 @@
 			preferring false negatives over false positives to minimize surprise.
 		</p>
 		<aside>
-			⚠️ This is an early proof of concept with missing features. Attributes, lists, and blockquotes
-			are next.
+			⚠️ This is an early proof of concept with missing features. Next: attributes, lists,
+			blockquotes
 		</aside>
 		<aside>
 			<p>Possible changes?</p>
@@ -75,9 +75,11 @@
 		</aside>
 	</section>
 
-	<section>
+	<Tome_Section>
+		<Tome_Section_Header text="Usage" />
+		<Mdz content="import `Mdz` from `mdz.ts`:" class="mb_lg" />
 		<Code content="import Mdz from '@ryanatkn/fuz/Mdz.svelte';" lang="ts" />
-	</section>
+	</Tome_Section>
 
 	<Tome_Section>
 		<Tome_Section_Header text="Basic formatting" />
