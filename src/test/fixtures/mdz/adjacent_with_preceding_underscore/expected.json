@@ -3,17 +3,23 @@
 		"type": "Paragraph",
 		"children": [
 			{
+				"type": "Text",
+				"content": "text_name",
+				"start": 0,
+				"end": 9
+			},
+			{
 				"type": "Bold",
 				"children": [
 					{
 						"type": "Text",
 						"content": "bold",
-						"start": 2,
-						"end": 6
+						"start": 11,
+						"end": 15
 					}
 				],
-				"start": 0,
-				"end": 8
+				"start": 9,
+				"end": 17
 			},
 			{
 				"type": "Italic",
@@ -21,15 +27,15 @@
 					{
 						"type": "Text",
 						"content": "italic",
-						"start": 9,
-						"end": 15
+						"start": 18,
+						"end": 24
 					}
 				],
-				"start": 8,
-				"end": 16
+				"start": 17,
+				"end": 25
 			}
 		],
 		"start": 0,
-		"end": 16
+		"end": 25
 	}
 ]

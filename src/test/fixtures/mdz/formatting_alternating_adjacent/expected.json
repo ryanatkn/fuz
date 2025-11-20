@@ -3,16 +3,29 @@
 		"type": "Paragraph",
 		"children": [
 			{
+				"type": "Italic",
+				"children": [
+					{
+						"type": "Text",
+						"content": "a",
+						"start": 1,
+						"end": 2
+					}
+				],
+				"start": 0,
+				"end": 3
+			},
+			{
 				"type": "Bold",
 				"children": [
 					{
 						"type": "Text",
-						"content": "bold",
-						"start": 2,
+						"content": "b",
+						"start": 5,
 						"end": 6
 					}
 				],
-				"start": 0,
+				"start": 3,
 				"end": 8
 			},
 			{
@@ -20,16 +33,16 @@
 				"children": [
 					{
 						"type": "Text",
-						"content": "italic",
+						"content": "c",
 						"start": 9,
-						"end": 15
+						"end": 10
 					}
 				],
 				"start": 8,
-				"end": 16
+				"end": 11
 			}
 		],
 		"start": 0,
-		"end": 16
+		"end": 11
 	}
 ]

@@ -4,7 +4,7 @@
 		"children": [
 			{
 				"type": "Text",
-				"content": "foo",
+				"content": "123",
 				"start": 0,
 				"end": 3
 			},
@@ -13,22 +13,22 @@
 				"children": [
 					{
 						"type": "Text",
-						"content": "bar",
+						"content": "bold",
 						"start": 5,
-						"end": 8
+						"end": 9
 					}
 				],
 				"start": 3,
-				"end": 10
+				"end": 11
 			},
 			{
 				"type": "Text",
-				"content": "baz\n",
-				"start": 10,
-				"end": 14
+				"content": "_italic_456",
+				"start": 11,
+				"end": 22
 			}
 		],
 		"start": 0,
-		"end": 14
+		"end": 22
 	}
 ]

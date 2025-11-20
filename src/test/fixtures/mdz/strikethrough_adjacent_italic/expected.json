@@ -3,13 +3,13 @@
 		"type": "Paragraph",
 		"children": [
 			{
-				"type": "Bold",
+				"type": "Strikethrough",
 				"children": [
 					{
 						"type": "Text",
-						"content": "bold",
-						"start": 2,
-						"end": 6
+						"content": "strike",
+						"start": 1,
+						"end": 7
 					}
 				],
 				"start": 0,

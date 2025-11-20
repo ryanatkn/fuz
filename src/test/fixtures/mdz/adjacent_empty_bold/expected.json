@@ -4,16 +4,9 @@
 		"children": [
 			{
 				"type": "Bold",
-				"children": [
-					{
-						"type": "Text",
-						"content": "bold",
-						"start": 2,
-						"end": 6
-					}
-				],
+				"children": [],
 				"start": 0,
-				"end": 8
+				"end": 4
 			},
 			{
 				"type": "Italic",
@@ -21,15 +14,15 @@
 					{
 						"type": "Text",
 						"content": "italic",
-						"start": 9,
-						"end": 15
+						"start": 5,
+						"end": 11
 					}
 				],
-				"start": 8,
-				"end": 16
+				"start": 4,
+				"end": 12
 			}
 		],
 		"start": 0,
-		"end": 16
+		"end": 12
 	}
 ]

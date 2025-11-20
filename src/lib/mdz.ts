@@ -395,20 +395,7 @@ export class Mdz_Parser {
 
 		// Check for ** (bold)
 		if (this.#match('**')) {
-			// Check if opening ** is at word boundary
-			// Must not be preceded by word char (intraword position)
-			if (!this.#is_at_word_boundary(this.#index, true, false)) {
-				// Intraword ** - treat as literal text
-				const content = this.#template[this.#index]!;
-				this.#index++;
-				return {
-					type: 'Text',
-					content,
-					start,
-					end: this.#index,
-				};
-			}
-
+			// Bold (**) has no word boundary restrictions - works everywhere including intraword
 			this.#eat('**');
 
 			// Find closing ** (greedy matching - first occurrence within boundary)
@@ -427,18 +414,7 @@ export class Mdz_Parser {
 				};
 			}
 
-			// Check if closing ** is at word boundary
-			if (!this.#is_at_word_boundary(close_index + 2, false, true)) {
-				// Closing ** not at boundary - treat whole thing as text
-				this.#index = start + 1;
-				return {
-					type: 'Text',
-					content: '*',
-					start,
-					end: this.#index,
-				};
-			}
-
+			// No word boundary check for closing ** - works everywhere
 			// Parse children up to closing delimiter (bounded parsing)
 			const children = this.#parse_nodes_until('**', close_index);
 
@@ -490,7 +466,7 @@ export class Mdz_Parser {
 
 		// Check if opening underscore is at word boundary
 		// Must not be preceded by word char (intraword position)
-		if (!this.#is_at_word_boundary(this.#index, true, false)) {
+		if (!this.#is_at_word_boundary(this.#index, true, false, '_')) {
 			// Intraword underscore - treat as literal text
 			const content = this.#template[this.#index]!;
 			this.#index++;
@@ -521,7 +497,7 @@ export class Mdz_Parser {
 		}
 
 		// Check if closing underscore is at word boundary
-		if (!this.#is_at_word_boundary(close_index + 1, false, true)) {
+		if (!this.#is_at_word_boundary(close_index + 1, false, true, '_')) {
 			// Closing underscore not at boundary - treat whole thing as text
 			this.#index = start + 1;
 			return {
@@ -573,7 +549,7 @@ export class Mdz_Parser {
 
 		// Check if opening tilde is at word boundary
 		// Must not be preceded by word char (intraword position)
-		if (!this.#is_at_word_boundary(this.#index, true, false)) {
+		if (!this.#is_at_word_boundary(this.#index, true, false, '~')) {
 			// Intraword tilde - treat as literal text
 			const content = this.#template[this.#index]!;
 			this.#index++;
@@ -604,7 +580,7 @@ export class Mdz_Parser {
 		}
 
 		// Check if closing tilde is at word boundary
-		if (!this.#is_at_word_boundary(close_index + 1, false, true)) {
+		if (!this.#is_at_word_boundary(close_index + 1, false, true, '~')) {
 			// Closing tilde not at boundary - treat whole thing as text
 			this.#index = start + 1;
 			return {
@@ -1020,39 +996,61 @@ export class Mdz_Parser {
 	}
 
 	/**
-	 * Check if character is part of a word (alphanumeric or underscore).
+	 * Check if character is part of a word for the given delimiter type.
 	 * Used for word boundary detection to prevent intraword emphasis.
+	 *
+	 * Formatting delimiters (`*`, `_`, `~`) are NOT considered word characters
+	 * for any delimiter type - they're transparent for boundary checks.
+	 *
+	 * Different delimiters have different word character sets:
+	 * - `**` (bold): no word boundary checks (handled separately)
+	 * - `_` (italic): A-Z a-z 0-9 (NOT formatting delimiters) - prevents snake_case in identifiers
+	 * - `~` (strike): A-Z a-z 0-9 (NOT formatting delimiters) - consistent with italic
+	 *
+	 * @param char_code - Character code to check
+	 * @param delimiter - The delimiter type ('**', '_', or '~')
 	 */
-	#is_word_char(char_code: number): boolean {
+	#is_word_char(char_code: number, delimiter: '**' | '_' | '~'): boolean {
+		// Formatting delimiters are never word chars (transparent for boundary checks)
+		if (
+			char_code === ASTERISK || // *
+			char_code === UNDERSCORE || // _
+			char_code === TILDE // ~
+		) {
+			return false;
+		}
+
+		// Alphanumeric characters are word chars for all delimiters
 		return (
 			// A-Z
 			(char_code >= 65 && char_code <= 90) ||
 			// a-z
 			(char_code >= 97 && char_code <= 122) ||
 			// 0-9
-			(char_code >= 48 && char_code <= 57) ||
-			// _
-			char_code === UNDERSCORE
+			(char_code >= 48 && char_code <= 57)
 		);
 	}
 
 	/**
-	 * Check if position is at a word boundary.
-	 * Word boundary = not surrounded by alphanumeric/underscore characters.
+	 * Check if position is at a word boundary for the given delimiter type.
+	 * Word boundary = not surrounded by word characters (definition varies by delimiter).
 	 * Used to prevent intraword emphasis for underscores, asterisks, tildes.
-	 *
-	 * Following GFM spec: underscores should not create emphasis in middle of words
-	 * (e.g., snake_case_identifier should remain literal).
 	 *
 	 * @param index - Position to check
 	 * @param check_before - Whether to check the character before this position
 	 * @param check_after - Whether to check the character after this position
+	 * @param delimiter - The delimiter type ('**', '_', or '~')
 	 */
-	#is_at_word_boundary(index: number, check_before: boolean, check_after: boolean): boolean {
+	#is_at_word_boundary(
+		index: number,
+		check_before: boolean,
+		check_after: boolean,
+		delimiter: '**' | '_' | '~',
+	): boolean {
 		if (check_before && index > 0) {
 			const prev = this.#template.charCodeAt(index - 1);
 			// If preceded by word char, not at boundary
-			if (this.#is_word_char(prev)) {
+			if (this.#is_word_char(prev, delimiter)) {
 				return false;
 			}
 		}
@@ -1060,7 +1058,7 @@ export class Mdz_Parser {
 		if (check_after && index < this.#template.length) {
 			const next = this.#template.charCodeAt(index);
 			// If followed by word char, not at boundary
-			if (this.#is_word_char(next)) {
+			if (this.#is_word_char(next, delimiter)) {
 				return false;
 			}
 		}

@@ -21,27 +21,22 @@
 								"end": 15
 							},
 							{
-								"type": "Text",
-								"content": "~",
+								"type": "Strikethrough",
+								"children": [
+									{
+										"type": "Text",
+										"content": "strike ",
+										"start": 16,
+										"end": 23
+									},
+									{
+										"type": "Code",
+										"content": "code",
+										"start": 23,
+										"end": 29
+									}
+								],
 								"start": 15,
-								"end": 16
-							},
-							{
-								"type": "Text",
-								"content": "strike ",
-								"start": 16,
-								"end": 23
-							},
-							{
-								"type": "Code",
-								"content": "code",
-								"start": 23,
-								"end": 29
-							},
-							{
-								"type": "Text",
-								"content": "~",
-								"start": 29,
 								"end": 30
 							}
 						],

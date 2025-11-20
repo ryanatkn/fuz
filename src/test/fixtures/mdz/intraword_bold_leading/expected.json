@@ -3,9 +3,22 @@
 		"type": "Paragraph",
 		"children": [
 			{
-				"type": "Text",
-				"content": "**foo**bar\n",
+				"type": "Bold",
+				"children": [
+					{
+						"type": "Text",
+						"content": "foo",
+						"start": 2,
+						"end": 5
+					}
+				],
 				"start": 0,
+				"end": 7
+			},
+			{
+				"type": "Text",
+				"content": "bar\n",
+				"start": 7,
 				"end": 11
 			}
 		],
