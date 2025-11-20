@@ -84,7 +84,15 @@ _Italic with **bold** and ~strikethrough~_
 
 ### Intraword Emphasis
 
-mdz follows GitHub Flavored Markdown rules for word boundaries to support programming identifiers.
+mdz has different word boundary rules for different delimiters to balance flexibility with preventing false positives in code.
+
+**Bold works everywhere** - including in the middle of words:
+
+```
+foo**bar**baz → foo<strong>bar</strong>baz (creates bold)
+snake**_case_** → snake<strong><em>case</em></strong> (bold containing italic)
+word **bold** word → word <strong>bold</strong> word (also works at boundaries)
+```
 
 **Underscores cannot create emphasis in the middle of words:**
 
@@ -97,12 +105,20 @@ word _emphasis_ word → word <em>emphasis</em> word
 
 This is intentional to support `snake_case` and `CONSTANT_CASE` identifiers common in programming.
 
-**Bold and strikethrough also require word boundaries:**
+**Strikethrough also requires word boundaries:**
 
 ```
-foo**bar**baz → literal text (no bold)
 foo~bar~baz → literal text (no strikethrough)
-word **bold** word → word <strong>bold</strong> word
+word ~strike~ word → word <s>strike</s> word
+```
+
+**Formatting delimiters are transparent:**
+
+When checking word boundaries for italic and strikethrough, formatting delimiters (`*`, `_`, `~`) are NOT considered word characters - they are invisible:
+
+```
+**bold**_italic_ → <strong>bold</strong><em>italic</em> (both work)
+_italic_~strike~ → <em>italic</em><s>strike</s> (both work)
 ```
 
 **Inline code works anywhere:**
@@ -111,7 +127,10 @@ word **bold** word → word <strong>bold</strong> word
 foo`bar`baz → foo<code>bar</code>baz
 ```
 
-**Word boundary definition**: A delimiter is at a word boundary if not surrounded by alphanumeric characters or underscores (`a-z`, `A-Z`, `0-9`, `_`).
+**Word boundary definition**:
+- **Bold**: No word boundary restrictions (works everywhere)
+- **Italic and strikethrough**: At word boundary if not surrounded by `a-z`, `A-Z`, `0-9`
+- Formatting delimiters (`*`, `_`, `~`) are NOT word characters for boundary checks
 
 ### Multiline Formatting
 
@@ -485,7 +504,7 @@ mdz deliberately diverges from CommonMark and GitHub Flavored Markdown to minimi
 | Italic | `*text*` or `_text_` | `_text_` only |
 | Single `*` | Creates italic | Literal text |
 | Intraword underscore | `foo_bar_baz` = literal (GFM) | Same: literal (word boundaries required) |
-| Intraword asterisk | `foo*bar*baz` = emphasis (allowed) | Different: literal (word boundaries required) |
+| Intraword asterisk | `foo*bar*baz` = emphasis (allowed) | Same: `foo**bar**baz` = **bold** (allowed, no restrictions) |
 | Strikethrough | Not in CommonMark, `~~text~~` in GFM | `~text~` with word boundaries |
 | Horizontal rule | `---`, `***`, `___`, variable lengths | `---` exactly (3 hyphens) |
 | Indented code | 4 spaces creates code block | NOT supported |

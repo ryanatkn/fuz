@@ -95,29 +95,49 @@ All inline formatting can nest within each other. For example, `**~_text_~**` pr
 
 **Validation:**
 
-Bold requires at least one character between `**` delimiters.
-Italic requires at least one character between `_` delimiters.
-Strikethrough requires at least one character between `~` delimiters.
+Bold, italic, and strikethrough require at least one character between delimiters. Empty formatting renders as literal text:
+- `****` → literal text "****" (empty bold)
+- `__` → literal text "__" (empty italic)
+- `~~` → literal text "~~" (empty strikethrough)
+
 Inline code cannot contain newlines - if a newline appears before the closing backtick, both backticks render as literal text.
 Empty inline code ` `` ` renders as literal backticks.
 
 **Word boundary requirements:**
 
-Bold, italic, and strikethrough require word boundaries (not surrounded by alphanumeric or underscore characters):
-- `foo_bar_baz` → literal text (underscores not at word boundaries)
-- `foo**bar**baz` → literal text (asterisks not at word boundaries)
-- `foo~bar~baz` → literal text (tildes not at word boundaries)
-- `word _emphasis_ word` → emphasis (underscores at word boundaries)
-- `word **bold** word` → bold (asterisks at word boundaries)
+Different delimiters have different word boundary rules:
 
-Inline code has no word boundary requirement - backticks work anywhere:
-- `foo\`bar\`baz` → foo<code>bar</code>baz (allowed)
+**Bold (`**`) has no word boundary restrictions** - works everywhere including intraword:
+- `foo**bar**baz` → foo**bar**baz (creates bold)
+- `snake**_case_**` → snake**_case_** (bold containing italic)
+- `word **bold** word` → word **bold** word (also works with boundaries)
 
-**Word character definition:** `a-z`, `A-Z`, `0-9`, `_`
+**Italic (`_`) and strikethrough (`~`) require word boundaries:**
+
+Underscores and tildes cannot create formatting in the middle of words (prevents false positives with `snake_case` identifiers):
+- `foo_bar_baz` → literal text (underscores intraword)
+- `foo~bar~baz` → literal text (tildes intraword)
+- `word _emphasis_ word` → word _emphasis_ word (at boundaries)
+- `word ~strike~ word` → word ~strike~ word (at boundaries)
+
+**Delimiter transparency:**
+
+Formatting delimiters (`*`, `_`, `~`) are NOT considered word characters for boundary checks - they are transparent:
+- `**bold**_italic_` → **bold**_italic_ (both work, delimiters don't interfere)
+- `_italic_~strike~` → _italic_~strike~ (both work)
+
+**Word character definition:**
+
+For italic and strikethrough: `a-z`, `A-Z`, `0-9`
+
+Notably, underscores (`_`), asterisks (`*`), and tildes (`~`) are NOT word characters - they are transparent for boundary detection.
+
+**Inline code has no word boundary requirement** - backticks work anywhere:
+- `foo\`bar\`baz` → foo<code>bar</code>baz
 
 **Implementation note:**
 
-The parser validates that opening delimiters have matching closing delimiters AND are at word boundaries. If no valid closing delimiter is found, or if delimiters are not at word boundaries, the opening delimiter renders as literal text.
+The parser validates that opening delimiters have matching closing delimiters. For italic and strikethrough, it also checks word boundaries. If validation fails, the delimiter renders as literal text.
 
 Delimiter matching uses greedy/bounded parsing: each opening delimiter finds its first matching closing delimiter, then parses children only within that range. This prevents nested formatters from consuming parent delimiters.
 
