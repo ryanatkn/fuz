@@ -359,26 +359,14 @@ export class Mdz_Parser {
 
 		if (content_end === -1) {
 			// Unclosed backtick or newline encountered, treat as text
-			this.#index = start + 1;
-			return {
-				type: 'Text',
-				content: '`',
-				start,
-				end: this.#index,
-			};
+			return this.#make_text_node('`', start);
 		}
 
 		const content = this.#template.slice(content_start, content_end);
 
 		// Empty inline code has no semantic meaning, treat as literal text
 		if (content.length === 0) {
-			this.#index = start + 2; // consume both backticks
-			return {
-				type: 'Text',
-				content: '``',
-				start,
-				end: this.#index,
-			};
+			return this.#make_text_node('``', start);
 		}
 
 		this.#index = content_end + 1;
@@ -421,13 +409,7 @@ export class Mdz_Parser {
 			}
 			if (close_index === -1) {
 				// Unclosed, treat as text
-				this.#index = start + 2;
-				return {
-					type: 'Text',
-					content: '**',
-					start,
-					end: this.#index,
-				};
+				return this.#make_text_node('**', start);
 			}
 
 			// No word boundary check for closing ** - works everywhere
@@ -437,13 +419,7 @@ export class Mdz_Parser {
 			// Verify we're at the closing delimiter (could have stopped early due to paragraph break)
 			if (!this.#match('**')) {
 				// Interrupted before closing - treat as unclosed
-				this.#index = start + 2;
-				return {
-					type: 'Text',
-					content: '**',
-					start,
-					end: this.#index,
-				};
+				return this.#make_text_node('**', start);
 			}
 
 			// Empty bold has no semantic meaning, treat as literal text
@@ -464,10 +440,74 @@ export class Mdz_Parser {
 
 		// Single asterisk - treat as text
 		const content = this.#template[this.#index]!;
-		this.#index++;
+		return this.#make_text_node(content, start);
+	}
+
+	/**
+	 * Common parser for single-delimiter formatting (italic and strikethrough).
+	 * Both use identical logic with different delimiters and node types.
+	 */
+	#parse_single_delimiter_formatting(
+		delimiter: '_',
+		node_type: 'Italic',
+	): Mdz_Italic_Node | Mdz_Text_Node;
+	#parse_single_delimiter_formatting(
+		delimiter: '~',
+		node_type: 'Strikethrough',
+	): Mdz_Strikethrough_Node | Mdz_Text_Node;
+	#parse_single_delimiter_formatting(
+		delimiter: '_' | '~',
+		node_type: 'Italic' | 'Strikethrough',
+	): Mdz_Italic_Node | Mdz_Strikethrough_Node | Mdz_Text_Node {
+		const start = this.#index;
+
+		// Check if opening delimiter is at word boundary
+		if (!this.#is_at_word_boundary(this.#index, true, false)) {
+			// Intraword delimiter - treat as literal text
+			const content = this.#template[this.#index]!;
+			return this.#make_text_node(content, start);
+		}
+
+		this.#eat(delimiter);
+
+		// Find closing delimiter (greedy matching - first occurrence within boundary)
+		const search_end = Math.min(this.#max_search_index, this.#template.length);
+		let close_index = this.#template.indexOf(delimiter, this.#index);
+		// Check if close_index exceeds search boundary
+		if (close_index !== -1 && close_index >= search_end) {
+			close_index = -1;
+		}
+		if (close_index === -1) {
+			// Unclosed, treat as text
+			return this.#make_text_node(delimiter, start);
+		}
+
+		// Check if closing delimiter is at word boundary
+		if (!this.#is_at_word_boundary(close_index + 1, false, true)) {
+			// Closing delimiter not at boundary - treat whole thing as text
+			return this.#make_text_node(delimiter, start);
+		}
+
+		// Parse children up to closing delimiter (bounded parsing)
+		const children = this.#parse_nodes_until(delimiter, close_index);
+
+		// Verify we're at the closing delimiter (could have stopped early due to paragraph break)
+		if (!this.#match(delimiter)) {
+			// Interrupted before closing - treat as unclosed
+			return this.#make_text_node(delimiter, start);
+		}
+
+		// Empty formatting has no semantic meaning, treat as literal text
+		if (children.length === 0) {
+			this.#index = start;
+			return this.#make_text_node(delimiter + delimiter, start);
+		}
+
+		// Consume closing delimiter
+		this.#eat(delimiter);
 		return {
-			type: 'Text',
-			content,
+			type: node_type,
+			children,
 			start,
 			end: this.#index,
 		};
@@ -484,83 +524,7 @@ export class Mdz_Parser {
 	 * - `word _emphasis_ word` → emphasis (at word boundaries)
 	 */
 	#parse_italic(): Mdz_Italic_Node | Mdz_Text_Node {
-		const start = this.#index;
-
-		// Check if opening underscore is at word boundary
-		// Must not be preceded by word char (intraword position)
-		if (!this.#is_at_word_boundary(this.#index, true, false, '_')) {
-			// Intraword underscore - treat as literal text
-			const content = this.#template[this.#index]!;
-			this.#index++;
-			return {
-				type: 'Text',
-				content,
-				start,
-				end: this.#index,
-			};
-		}
-
-		this.#eat('_');
-
-		// Find closing _ (greedy matching - first occurrence within boundary)
-		const search_end = Math.min(this.#max_search_index, this.#template.length);
-		let close_index = this.#template.indexOf('_', this.#index);
-		// Check if close_index exceeds search boundary
-		if (close_index !== -1 && close_index >= search_end) {
-			close_index = -1;
-		}
-		if (close_index === -1) {
-			// Unclosed, treat as text
-			this.#index = start + 1;
-			return {
-				type: 'Text',
-				content: '_',
-				start,
-				end: this.#index,
-			};
-		}
-
-		// Check if closing underscore is at word boundary
-		if (!this.#is_at_word_boundary(close_index + 1, false, true, '_')) {
-			// Closing underscore not at boundary - treat whole thing as text
-			this.#index = start + 1;
-			return {
-				type: 'Text',
-				content: '_',
-				start,
-				end: this.#index,
-			};
-		}
-
-		// Parse children up to closing delimiter (bounded parsing)
-		const children = this.#parse_nodes_until('_', close_index);
-
-		// Verify we're at the closing delimiter (could have stopped early due to paragraph break)
-		if (!this.#match('_')) {
-			// Interrupted before closing - treat as unclosed
-			this.#index = start + 1;
-			return {
-				type: 'Text',
-				content: '_',
-				start,
-				end: this.#index,
-			};
-		}
-
-		// Empty italic has no semantic meaning, treat as literal text
-		if (children.length === 0) {
-			this.#index = start;
-			return this.#make_text_node('__', start);
-		}
-
-		// Consume closing _
-		this.#eat('_');
-		return {
-			type: 'Italic',
-			children,
-			start,
-			end: this.#index,
-		};
+		return this.#parse_single_delimiter_formatting('_', 'Italic');
 	}
 
 	/**
@@ -575,83 +539,7 @@ export class Mdz_Parser {
 	 * - `word ~strike~ word` → strikethrough (at word boundaries)
 	 */
 	#parse_strikethrough(): Mdz_Strikethrough_Node | Mdz_Text_Node {
-		const start = this.#index;
-
-		// Check if opening tilde is at word boundary
-		// Must not be preceded by word char (intraword position)
-		if (!this.#is_at_word_boundary(this.#index, true, false, '~')) {
-			// Intraword tilde - treat as literal text
-			const content = this.#template[this.#index]!;
-			this.#index++;
-			return {
-				type: 'Text',
-				content,
-				start,
-				end: this.#index,
-			};
-		}
-
-		this.#eat('~');
-
-		// Find closing ~ (greedy matching - first occurrence within boundary)
-		const search_end = Math.min(this.#max_search_index, this.#template.length);
-		let close_index = this.#template.indexOf('~', this.#index);
-		// Check if close_index exceeds search boundary
-		if (close_index !== -1 && close_index >= search_end) {
-			close_index = -1;
-		}
-		if (close_index === -1) {
-			// Unclosed, treat as text
-			this.#index = start + 1;
-			return {
-				type: 'Text',
-				content: '~',
-				start,
-				end: this.#index,
-			};
-		}
-
-		// Check if closing tilde is at word boundary
-		if (!this.#is_at_word_boundary(close_index + 1, false, true, '~')) {
-			// Closing tilde not at boundary - treat whole thing as text
-			this.#index = start + 1;
-			return {
-				type: 'Text',
-				content: '~',
-				start,
-				end: this.#index,
-			};
-		}
-
-		// Parse children up to closing delimiter (bounded parsing)
-		const children = this.#parse_nodes_until('~', close_index);
-
-		// Verify we're at the closing delimiter (could have stopped early due to paragraph break)
-		if (!this.#match('~')) {
-			// Interrupted before closing - treat as unclosed
-			this.#index = start + 1;
-			return {
-				type: 'Text',
-				content: '~',
-				start,
-				end: this.#index,
-			};
-		}
-
-		// Empty strikethrough has no semantic meaning, treat as literal text
-		if (children.length === 0) {
-			this.#index = start;
-			return this.#make_text_node('~~', start);
-		}
-
-		// Consume closing ~
-		this.#eat('~');
-		return {
-			type: 'Strikethrough',
-			children,
-			start,
-			end: this.#index,
-		};
+		return this.#parse_single_delimiter_formatting('~', 'Strikethrough');
 	}
 
 	/**
@@ -1034,21 +922,18 @@ export class Mdz_Parser {
 	}
 
 	/**
-	 * Check if character is part of a word for the given delimiter type.
-	 * Used for word boundary detection to prevent intraword emphasis.
+	 * Check if character is part of a word for word boundary detection.
+	 * Used to prevent intraword emphasis with `_` and `~` delimiters.
 	 *
-	 * Formatting delimiters (`*`, `_`, `~`) are NOT considered word characters
-	 * for any delimiter type - they're transparent for boundary checks.
+	 * Formatting delimiters (`*`, `_`, `~`) are NOT word characters - they're transparent.
+	 * Only alphanumeric characters (A-Z, a-z, 0-9) are considered word characters.
 	 *
-	 * Different delimiters have different word character sets:
-	 * - `**` (bold): no word boundary checks (handled separately)
-	 * - `_` (italic): A-Z a-z 0-9 (NOT formatting delimiters) - prevents snake_case in identifiers
-	 * - `~` (strike): A-Z a-z 0-9 (NOT formatting delimiters) - consistent with italic
+	 * This prevents false positives with snake_case identifiers while allowing
+	 * adjacent formatting like `**bold**_italic_`.
 	 *
 	 * @param char_code - Character code to check
-	 * @param delimiter - The delimiter type ('**', '_', or '~')
 	 */
-	#is_word_char(char_code: number, delimiter: '**' | '_' | '~'): boolean {
+	#is_word_char(char_code: number): boolean {
 		// Formatting delimiters are never word chars (transparent for boundary checks)
 		if (
 			char_code === ASTERISK || // *
@@ -1070,25 +955,19 @@ export class Mdz_Parser {
 	}
 
 	/**
-	 * Check if position is at a word boundary for the given delimiter type.
-	 * Word boundary = not surrounded by word characters (definition varies by delimiter).
-	 * Used to prevent intraword emphasis for underscores, asterisks, tildes.
+	 * Check if position is at a word boundary.
+	 * Word boundary = not surrounded by word characters (A-Z, a-z, 0-9).
+	 * Used to prevent intraword emphasis for underscores and tildes.
 	 *
 	 * @param index - Position to check
 	 * @param check_before - Whether to check the character before this position
 	 * @param check_after - Whether to check the character after this position
-	 * @param delimiter - The delimiter type ('**', '_', or '~')
 	 */
-	#is_at_word_boundary(
-		index: number,
-		check_before: boolean,
-		check_after: boolean,
-		delimiter: '**' | '_' | '~',
-	): boolean {
+	#is_at_word_boundary(index: number, check_before: boolean, check_after: boolean): boolean {
 		if (check_before && index > 0) {
 			const prev = this.#template.charCodeAt(index - 1);
 			// If preceded by word char, not at boundary
-			if (this.#is_word_char(prev, delimiter)) {
+			if (this.#is_word_char(prev)) {
 				return false;
 			}
 		}
@@ -1096,7 +975,7 @@ export class Mdz_Parser {
 		if (check_after && index < this.#template.length) {
 			const next = this.#template.charCodeAt(index);
 			// If followed by word char, not at boundary
-			if (this.#is_word_char(next, delimiter)) {
+			if (this.#is_word_char(next)) {
 				return false;
 			}
 		}
