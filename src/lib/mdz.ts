@@ -293,6 +293,20 @@ export class Mdz_Parser {
 	}
 
 	/**
+	 * Create a text node and advance index past the content.
+	 * Used when formatting delimiters fail to match and need to be treated as literal text.
+	 */
+	#make_text_node(content: string, start: number): Mdz_Text_Node {
+		this.#index = start + content.length;
+		return {
+			type: 'Text',
+			content,
+			start,
+			end: this.#index,
+		};
+	}
+
+	/**
 	 * Parse next node based on current character.
 	 * Uses switch for performance (avoids regex in hot loop).
 	 */
@@ -400,9 +414,11 @@ export class Mdz_Parser {
 
 			// Find closing ** (greedy matching - first occurrence within boundary)
 			const search_end = Math.min(this.#max_search_index, this.#template.length);
-			const substring = this.#template.substring(this.#index, search_end);
-			const relative_close = substring.indexOf('**');
-			const close_index = relative_close === -1 ? -1 : this.#index + relative_close;
+			let close_index = this.#template.indexOf('**', this.#index);
+			// Check if close_index exceeds search boundary
+			if (close_index !== -1 && close_index >= search_end) {
+				close_index = -1;
+			}
 			if (close_index === -1) {
 				// Unclosed, treat as text
 				this.#index = start + 2;
@@ -428,6 +444,12 @@ export class Mdz_Parser {
 					start,
 					end: this.#index,
 				};
+			}
+
+			// Empty bold has no semantic meaning, treat as literal text
+			if (children.length === 0) {
+				this.#index = start;
+				return this.#make_text_node('****', start);
 			}
 
 			// Consume closing **
@@ -482,9 +504,11 @@ export class Mdz_Parser {
 
 		// Find closing _ (greedy matching - first occurrence within boundary)
 		const search_end = Math.min(this.#max_search_index, this.#template.length);
-		const substring = this.#template.substring(this.#index, search_end);
-		const relative_close = substring.indexOf('_');
-		const close_index = relative_close === -1 ? -1 : this.#index + relative_close;
+		let close_index = this.#template.indexOf('_', this.#index);
+		// Check if close_index exceeds search boundary
+		if (close_index !== -1 && close_index >= search_end) {
+			close_index = -1;
+		}
 		if (close_index === -1) {
 			// Unclosed, treat as text
 			this.#index = start + 1;
@@ -521,6 +545,12 @@ export class Mdz_Parser {
 				start,
 				end: this.#index,
 			};
+		}
+
+		// Empty italic has no semantic meaning, treat as literal text
+		if (children.length === 0) {
+			this.#index = start;
+			return this.#make_text_node('__', start);
 		}
 
 		// Consume closing _
@@ -565,9 +595,11 @@ export class Mdz_Parser {
 
 		// Find closing ~ (greedy matching - first occurrence within boundary)
 		const search_end = Math.min(this.#max_search_index, this.#template.length);
-		const substring = this.#template.substring(this.#index, search_end);
-		const relative_close = substring.indexOf('~');
-		const close_index = relative_close === -1 ? -1 : this.#index + relative_close;
+		let close_index = this.#template.indexOf('~', this.#index);
+		// Check if close_index exceeds search boundary
+		if (close_index !== -1 && close_index >= search_end) {
+			close_index = -1;
+		}
 		if (close_index === -1) {
 			// Unclosed, treat as text
 			this.#index = start + 1;
@@ -604,6 +636,12 @@ export class Mdz_Parser {
 				start,
 				end: this.#index,
 			};
+		}
+
+		// Empty strikethrough has no semantic meaning, treat as literal text
+		if (children.length === 0) {
+			this.#index = start;
+			return this.#make_text_node('~~', start);
 		}
 
 		// Consume closing ~
@@ -1269,25 +1307,21 @@ export class Mdz_Parser {
 		}
 
 		// Handle balanced parentheses ONLY (parens are valid in URI path components)
-		while (trimmed.length > 0) {
+		// Count parentheses once to avoid O(n²) when trimming multiple trailing parens
+		let open_count = 0;
+		let close_count = 0;
+		for (let i = 0; i < trimmed.length; i++) {
+			const char = trimmed.charCodeAt(i);
+			if (char === LEFT_PAREN) open_count++;
+			if (char === RIGHT_PAREN) close_count++;
+		}
+
+		// Trim unmatched trailing closing parens
+		while (trimmed.length > 0 && close_count > open_count) {
 			const last_char = trimmed.charCodeAt(trimmed.length - 1);
 			if (last_char === RIGHT_PAREN) {
-				// Count opening and closing parens
-				let open_count = 0;
-				let close_count = 0;
-
-				for (let i = 0; i < trimmed.length; i++) {
-					const char = trimmed.charCodeAt(i);
-					if (char === LEFT_PAREN) open_count++;
-					if (char === RIGHT_PAREN) close_count++;
-				}
-
-				// If more closing than opening, this trailing one is unmatched - trim it
-				if (close_count > open_count) {
-					trimmed = trimmed.slice(0, -1);
-				} else {
-					break;
-				}
+				trimmed = trimmed.slice(0, -1);
+				close_count--;
 			} else {
 				break;
 			}

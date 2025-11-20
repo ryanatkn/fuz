@@ -34,21 +34,27 @@
 										"content": "code",
 										"start": 23,
 										"end": 29
+									},
+									{
+										"type": "Text",
+										"content": " text",
+										"start": 29,
+										"end": 34
 									}
 								],
 								"start": 15,
-								"end": 30
+								"end": 35
 							}
 						],
 						"start": 7,
-						"end": 31
+						"end": 36
 					}
 				],
 				"start": 0,
-				"end": 33
+				"end": 38
 			}
 		],
 		"start": 0,
-		"end": 33
+		"end": 38
 	}
 ]
