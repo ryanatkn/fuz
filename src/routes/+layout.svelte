@@ -8,7 +8,7 @@
 
 	import Themed from '$lib/Themed.svelte';
 	import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
-	import {pkg_context, parse_pkg} from '$lib/pkg.svelte.js';
+	import {pkg_context, Pkg} from '$lib/pkg.svelte.js';
 	import {package_json, src_json} from '$lib/package.js';
 	import Spiders from '$lib/Spiders.svelte';
 
@@ -18,7 +18,7 @@
 
 	const {children}: Props = $props();
 
-	pkg_context.set(parse_pkg(package_json, src_json));
+	pkg_context.set(new Pkg(package_json, src_json));
 </script>
 
 <svelte:head>

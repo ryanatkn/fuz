@@ -5210,31 +5210,9 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'parse_pkg',
-					kind: 'function',
-					doc_comment:
-						'Convenience factory function for creating Pkg instances\n(kept for backward compatibility during migration)',
-					source_line: 166,
-					type_signature:
-						'(package_json: { [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }, src_json: Src_Json): Pkg',
-					return_type: 'Pkg',
-					parameters: [
-						{
-							name: 'package_json',
-							type: '{ [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }',
-							optional: false,
-						},
-						{
-							name: 'src_json',
-							type: 'Src_Json',
-							optional: false,
-						},
-					],
-				},
-				{
 					name: 'pkg_context',
 					kind: 'variable',
-					source_line: 170,
+					source_line: 162,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Pkg; get_maybe: () => Pkg | undefined; set: (value: Pkg) => Pkg; }',
 				},

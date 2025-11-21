@@ -159,14 +159,6 @@ export class Pkg {
 	}
 }
 
-/**
- * Convenience factory function for creating Pkg instances
- * (kept for backward compatibility during migration)
- */
-export const parse_pkg = (package_json: Package_Json, src_json: Src_Json): Pkg => {
-	return new Pkg(package_json, src_json);
-};
-
 export const pkg_context = create_context<Pkg>();
 
 /**
