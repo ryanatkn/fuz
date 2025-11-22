@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.153.1
+
+### Patch Changes
+
+- fix `package_gen_helpers.ts` belt import path for belt itself ([7d2fd14](https://github.com/ryanatkn/fuz/commit/7d2fd14))
+
 ## 0.153.0
 
 ### Minor Changes
