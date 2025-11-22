@@ -186,4 +186,17 @@ describe('svelte_analyze_file', () => {
 		assert.ok(count_prop);
 		assert.strictEqual(count_prop.type, 'number');
 	});
+
+	test('handles JavaScript component (no lang="ts")', () => {
+		// component_basic has no script tag with lang="ts"
+		const file_path = join(FIXTURES_DIR, 'component_basic/input.svelte');
+		const module_path = 'JavaScript_Component.svelte';
+
+		const result = svelte_analyze_file(file_path, module_path, checker);
+
+		assert.strictEqual(result.name, 'JavaScript_Component');
+		assert.strictEqual(result.kind, 'component');
+		// Basic component has no props
+		assert.ok(!result.props || result.props.length === 0);
+	});
 });

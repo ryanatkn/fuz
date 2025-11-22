@@ -262,4 +262,61 @@ export { internal_value as exported_value };
 		assert.strictEqual(result.identifiers.length, 1);
 		assert.strictEqual(result.identifiers[0]!.name, 'exported_value');
 	});
+
+	test('handles mixed export kinds in same module', () => {
+		const source_code = `
+/**
+ * Module with all kinds of exports.
+ */
+
+export const VERSION = '1.0.0';
+
+export function greet(name: string): string {
+	return \`Hello, \${name}\`;
+}
+
+export type Config = {
+	debug: boolean;
+};
+
+export interface Logger {
+	log(message: string): void;
+}
+
+export class Service {
+	start(): void {}
+}
+`;
+
+		const source_file = ts.createSourceFile('mixed.ts', source_code, ts.ScriptTarget.Latest, true);
+		const {checker} = create_test_program(source_file, 'mixed.ts');
+
+		const result = ts_analyze_module_exports(source_file, checker);
+
+		// Should have 5 identifiers of different kinds
+		assert.strictEqual(result.identifiers.length, 5);
+
+		const by_name = new Map(result.identifiers.map((i) => [i.name, i]));
+
+		// Check each kind
+		const version = by_name.get('VERSION');
+		assert.ok(version);
+		assert.strictEqual(version.kind, 'variable');
+
+		const greet = by_name.get('greet');
+		assert.ok(greet);
+		assert.strictEqual(greet.kind, 'function');
+
+		const config = by_name.get('Config');
+		assert.ok(config);
+		assert.strictEqual(config.kind, 'type');
+
+		const logger = by_name.get('Logger');
+		assert.ok(logger);
+		assert.strictEqual(logger.kind, 'type');
+
+		const service = by_name.get('Service');
+		assert.ok(service);
+		assert.strictEqual(service.kind, 'class');
+	});
 });
