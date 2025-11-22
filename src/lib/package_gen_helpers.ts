@@ -152,7 +152,7 @@ export const package_gen_generate_ts = (package_json: Package_Json, src_json: Sr
 // Do not edit directly - regenerated on build
 
 import type {Package_Json} from '@ryanatkn/belt/package_json.js';
-import type {Src_Json} from '${is_this_fuz ? '$lib/src_json.js' : '@ryanatkn/fuz/src_json.js'}';
+import type {Src_Json} from '${is_this_fuz ? './src_json.js' : '@ryanatkn/fuz/src_json.js'}';
 
 export const package_json: Package_Json = ${JSON.stringify(package_json, null, '\t')};
 

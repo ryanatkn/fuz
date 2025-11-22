@@ -2,7 +2,7 @@
 // Do not edit directly - regenerated on build
 
 import type {Package_Json} from '@ryanatkn/belt/package_json.js';
-import type {Src_Json} from '$lib/src_json.js';
+import type {Src_Json} from './src_json.js';
 
 export const package_json: Package_Json = {
 	name: '@ryanatkn/fuz',
