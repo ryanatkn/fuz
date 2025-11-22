@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.151.2",
+  "version": "0.152.0",
   "modules": {
     "./alert.js": {
       "path": "alert.ts",
@@ -777,10 +777,6 @@
         {
           "name": "Pkg",
           "kind": "class"
-        },
-        {
-          "name": "parse_pkg",
-          "kind": "function"
         },
         {
           "name": "pkg_context",
