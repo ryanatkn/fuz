@@ -86,7 +86,8 @@ experience.
 
 Duplicate identifier names across modules fail fast during `gro gen` with clear
 error messages. Resolve by renaming one identifier following the `domain_action`
-pattern.
+pattern, or add `/** @internal */` to exclude from the public API and namespace
+validation.
 
 ### API documentation system
 
@@ -136,8 +137,9 @@ Supporting helpers (three-layer architecture):
   - `ts_analyze_module_exports` - analyze all exports from a source file (reusable)
   - `ts_extract_*` - lower-level extraction functions for specific constructs
 - `tsdoc_helpers.ts` - JSDoc/TSDoc parsing (supports standard tags: `@param`,
-  `@returns`, `@throws`, `@example`, `@deprecated`, `@see`, `@since`, plus
-  non-standard `@mutates` for documenting side effects)
+  `@returns`, `@throws`, `@example`, `@deprecated`, `@see`, `@since`, `@internal`,
+  plus non-standard `@mutates` for documenting side effects; `@internal` excludes
+  identifiers from public API and flat namespace validation)
   - `tsdoc_parse` - extract structured TSDoc from a node
   - `tsdoc_apply_to_declaration` - apply parsed TSDoc to an identifier
 

@@ -380,6 +380,16 @@ export const ts_extract_variable_info = (
 };
 
 /**
+ * Result of analyzing a single identifier.
+ */
+export interface Ts_Identifier_Analysis {
+	/** The analyzed identifier metadata. */
+	identifier: Identifier_Json;
+	/** Whether the identifier is marked @internal (should be excluded from public API). */
+	internal: boolean;
+}
+
+/**
  * Analyze a TypeScript symbol and extract rich metadata.
  *
  * This is a high-level function that combines TSDoc parsing with TypeScript
@@ -389,13 +399,13 @@ export const ts_extract_variable_info = (
  * @param symbol The TypeScript symbol to analyze
  * @param source_file The source file containing the symbol
  * @param checker The TypeScript type checker
- * @returns Complete identifier metadata including docs, types, and parameters
+ * @returns Complete identifier metadata including docs, types, and parameters, plus internal flag
  */
 export const ts_analyze_identifier = (
 	symbol: ts.Symbol,
 	source_file: ts.SourceFile,
 	checker: ts.TypeChecker,
-): Identifier_Json => {
+): Ts_Identifier_Analysis => {
 	const name = symbol.name;
 	const decl_node = symbol.valueDeclaration || symbol.declarations?.[0];
 
@@ -408,11 +418,12 @@ export const ts_analyze_identifier = (
 	};
 
 	if (!decl_node) {
-		return result;
+		return {identifier: result, internal: false};
 	}
 
 	// Extract TSDoc
 	const tsdoc = tsdoc_parse(decl_node, source_file);
+	const internal = tsdoc?.internal ?? false;
 	tsdoc_apply_to_declaration(result, tsdoc);
 
 	// Extract source line
@@ -431,7 +442,7 @@ export const ts_analyze_identifier = (
 		ts_extract_variable_info(decl_node, symbol, checker, result);
 	}
 
-	return result;
+	return {identifier: result, internal};
 };
 
 /**
@@ -469,8 +480,10 @@ export const ts_analyze_module_exports = (
 	if (symbol) {
 		const exports = checker.getExportsOfModule(symbol);
 		for (const export_symbol of exports) {
-			const identifier_json = ts_analyze_identifier(export_symbol, source_file, checker);
-			identifiers.push(identifier_json);
+			const {identifier, internal} = ts_analyze_identifier(export_symbol, source_file, checker);
+			// Skip @internal identifiers - they're not part of the public API
+			if (internal) continue;
+			identifiers.push(identifier);
 		}
 	}
 

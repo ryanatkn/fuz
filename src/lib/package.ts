@@ -4450,7 +4450,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Sort modules alphabetically by path for deterministic output and cleaner diffs.',
-					source_line: 86,
+					source_line: 88,
 					type_signature: '(modules: Module_Json[]): Module_Json[]',
 					return_type: 'Module_Json[]',
 					parameters: [
@@ -4466,7 +4466,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Generate the package.ts file content with package_json and src_json exports.',
-					source_line: 93,
+					source_line: 95,
 					type_signature:
 						'(package_json: { [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }, src_json: Src_Json): string',
 					return_type: 'string',
@@ -4494,7 +4494,7 @@ export const src_json: Src_Json = {
 							description: 'if no source files are found in src/lib',
 						},
 					],
-					source_line: 115,
+					source_line: 117,
 					type_signature: '(filer: Filer, log: Logger): Disknode[]',
 					return_type: 'Disknode[]',
 					parameters: [
@@ -4515,7 +4515,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Analyze a Svelte component file and extract metadata.\n\nUses `svelte_analyze_file` for core analysis, then adds\nGro-specific dependency information from the disknode.',
-					source_line: 146,
+					source_line: 148,
 					type_signature:
 						'(disknode: Disknode, module_path: string, checker: TypeChecker): Module_Json',
 					return_type: 'Module_Json',
@@ -4542,7 +4542,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Analyze a TypeScript file and extract all identifiers.\n\nUses `ts_analyze_module_exports` for core analysis, then adds\nGro-specific dependency information from the disknode.',
-					source_line: 171,
+					source_line: 173,
 					type_signature:
 						'(disknode: Disknode, source_file: SourceFile, module_path: string, checker: TypeChecker): Module_Json',
 					return_type: 'Module_Json',
@@ -4574,7 +4574,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						"Extract dependencies and dependents for a module from the filer's dependency graph.\n\nFilters to only include source modules from src/lib (excludes external packages, node_modules, tests).\nReturns sorted arrays of module paths (relative to src/lib) for deterministic output.",
-					source_line: 207,
+					source_line: 209,
 					type_signature: '(disknode: Disknode): { dependencies: string[]; dependents: string[]; }',
 					return_type: '{ dependencies: string[]; dependents: string[]; }',
 					parameters: [
@@ -6564,15 +6564,37 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
+					name: 'Ts_Identifier_Analysis',
+					kind: 'type',
+					doc_comment: 'Result of analyzing a single identifier.',
+					source_line: 385,
+					type_signature: 'Ts_Identifier_Analysis',
+					properties: [
+						{
+							name: 'identifier',
+							kind: 'variable',
+							type_signature: 'Identifier_Json',
+							doc_comment: 'The analyzed identifier metadata.',
+						},
+						{
+							name: 'internal',
+							kind: 'variable',
+							type_signature: 'boolean',
+							doc_comment: 'Whether the identifier is marked',
+						},
+					],
+				},
+				{
 					name: 'ts_analyze_identifier',
 					kind: 'function',
 					doc_comment:
 						'Analyze a TypeScript symbol and extract rich metadata.\n\nThis is a high-level function that combines TSDoc parsing with TypeScript\ntype analysis to produce complete identifier metadata. Suitable for use\nin documentation generators, IDE integrations, and other tooling.',
-					source_line: 394,
+					source_line: 404,
 					type_signature:
-						'(symbol: Symbol, source_file: SourceFile, checker: TypeChecker): Identifier_Json',
-					return_type: 'Identifier_Json',
-					return_description: 'Complete identifier metadata including docs, types, and parameters',
+						'(symbol: Symbol, source_file: SourceFile, checker: TypeChecker): Ts_Identifier_Analysis',
+					return_type: 'Ts_Identifier_Analysis',
+					return_description:
+						'Complete identifier metadata including docs, types, and parameters, plus internal flag',
 					parameters: [
 						{
 							name: 'symbol',
@@ -6598,7 +6620,7 @@ export const src_json: Src_Json = {
 					name: 'Module_Exports_Analysis',
 					kind: 'type',
 					doc_comment: "Result of analyzing a module's exports.",
-					source_line: 440,
+					source_line: 451,
 					type_signature: 'Module_Exports_Analysis',
 					properties: [
 						{
@@ -6620,7 +6642,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Analyze all exports from a TypeScript source file.\n\nExtracts the module-level comment and all exported identifiers with\ncomplete metadata. This is a high-level function suitable for building\ndocumentation, API explorers, or analysis tools.',
-					source_line: 458,
+					source_line: 469,
 					type_signature:
 						'(source_file: SourceFile, checker: TypeChecker): Module_Exports_Analysis',
 					return_type: 'Module_Exports_Analysis',
@@ -6645,7 +6667,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Extract module-level comment.\n\nOnly accepts JSDoc/TSDoc comments (`/** ... *\\/`) followed by a blank line to distinguish\nthem from identifier-level comments. This prevents accidentally treating function/class\ncomments as module comments. Module comments can appear after imports.',
-					source_line: 490,
+					source_line: 503,
 					type_signature: '(source_file: SourceFile): string | undefined',
 					return_type: 'string | undefined',
 					parameters: [
@@ -6660,7 +6682,7 @@ export const src_json: Src_Json = {
 					name: 'ts_create_program',
 					kind: 'function',
 					doc_comment: 'Create TypeScript program for analysis.',
-					source_line: 562,
+					source_line: 575,
 					type_signature: '(log: { warn: (message: string) => void; }): Program | null',
 					return_type: 'Program | null',
 					parameters: [
@@ -6684,7 +6706,7 @@ export const src_json: Src_Json = {
 					name: 'Tsdoc_Parsed_Comment',
 					kind: 'type',
 					doc_comment: 'Parsed JSDoc/TSDoc comment with structured metadata.',
-					source_line: 42,
+					source_line: 45,
 					type_signature: 'Tsdoc_Parsed_Comment',
 					properties: [
 						{
@@ -6741,6 +6763,13 @@ export const src_json: Src_Json = {
 							type_signature: 'Array<string>',
 							doc_comment: 'Mutation documentation from `@mutates` (non-standard)',
 						},
+						{
+							name: 'internal',
+							kind: 'variable',
+							type_signature: 'boolean',
+							doc_comment:
+								'Whether the identifier is internal (not part of public API) from `@internal`',
+						},
 					],
 				},
 				{
@@ -6748,7 +6777,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Parse JSDoc comment from a TypeScript node.\n\nExtracts and parses all JSDoc tags including:\n\n- `@param` - parameter descriptions\n- `@returns` - return value description\n- `@throws` - error documentation\n- `@example` - code examples\n- `@deprecated` - deprecation warnings\n- `@see` - related references\n- `@since` - version information\n- `@mutates` - mutation documentation (non-standard)',
-					source_line: 127,
+					source_line: 132,
 					type_signature: '(node: Node, source_file: SourceFile): Tsdoc_Parsed_Comment | undefined',
 					return_type: 'Tsdoc_Parsed_Comment | undefined',
 					parameters: [
@@ -6771,7 +6800,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Apply parsed TSDoc metadata to an identifier.\n\nConsolidates the common pattern of assigning TSDoc fields to identifiers,\nwith conditional assignment for array fields (only if non-empty).',
-					source_line: 227,
+					source_line: 236,
 					type_signature: '(identifier: any, tsdoc: Tsdoc_Parsed_Comment | undefined): void',
 					return_type: 'void',
 					parameters: [
@@ -6791,7 +6820,7 @@ export const src_json: Src_Json = {
 				},
 			],
 			module_comment:
-				'TSDoc/JSDoc parsing helpers using the TypeScript Compiler API.\n\nProvides `tsdoc_parse()` for extracting JSDoc/TSDoc from TypeScript nodes.\nPrimarily designed for build-time code generation but can be used at runtime.\n\n## Design\n\nPure extraction approach: extracts documentation as-is with minimal transformation,\npreserving source intent. Works around TypeScript Compiler API quirks where needed.\n\nSupports both regular TypeScript and Svelte components (via svelte2tsx output).\n\n## Tag support\n\nSupports a subset of standard TSDoc tags:\n`@param`, `@returns`, `@throws`, `@example`, `@deprecated`, `@see`, `@since`.\n\nAlso supports `@mutates` (non-standard) for documenting mutations to parameters or external state.\nUse format: `@mutates paramName - description of mutation`.\n\nOnly `@returns` is supported (not `@return`).\n\nThe `@see` tag supports multiple formats: plain URLs (`https://...`), `{@link}` syntax, and module names.\nRelative/absolute path support in `@see` is TBD.\n\n## Behavioral notes\n\nDue to TS Compiler API limitations:\n- Preserves dash separator in `@param` descriptions: `@param x desc` → `"- desc"`\n- `@throws` tags have `{Type}` stripped by TS API; fallback regex extracts first word as error type\n- TS API strips URL protocols from `@see` tag text; we use `getText()` to preserve original format including `{@link}` syntax\n\nAll functions are prefixed with `tsdoc_` for clarity.',
+				'TSDoc/JSDoc parsing helpers using the TypeScript Compiler API.\n\nProvides `tsdoc_parse()` for extracting JSDoc/TSDoc from TypeScript nodes.\nPrimarily designed for build-time code generation but can be used at runtime.\n\n## Design\n\nPure extraction approach: extracts documentation as-is with minimal transformation,\npreserving source intent. Works around TypeScript Compiler API quirks where needed.\n\nSupports both regular TypeScript and Svelte components (via svelte2tsx output).\n\n## Tag support\n\nSupports a subset of standard TSDoc tags:\n`@param`, `@returns`, `@throws`, `@example`, `@deprecated`, `@see`, `@since`, `@internal`.\n\nThe `@internal` tag marks exports as not part of the public API, excluding them from\ngenerated documentation and flat namespace validation.\n\nAlso supports `@mutates` (non-standard) for documenting mutations to parameters or external state.\nUse format: `@mutates paramName - description of mutation`.\n\nOnly `@returns` is supported (not `@return`).\n\nThe `@see` tag supports multiple formats: plain URLs (`https://...`), `{@link}` syntax, and module names.\nRelative/absolute path support in `@see` is TBD.\n\n## Behavioral notes\n\nDue to TS Compiler API limitations:\n- Preserves dash separator in `@param` descriptions: `@param x desc` → `"- desc"`\n- `@throws` tags have `{Type}` stripped by TS API; fallback regex extracts first word as error type\n- TS API strips URL protocols from `@see` tag text; we use `getText()` to preserve original format including `{@link}` syntax\n\nAll functions are prefixed with `tsdoc_` for clarity.',
 			dependents: ['svelte_helpers.ts', 'ts_helpers.ts'],
 		},
 		{
