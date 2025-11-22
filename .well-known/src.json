@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.153.1",
+  "version": "0.154.0",
   "modules": {
     "./alert.js": {
       "path": "alert.ts",
@@ -956,6 +956,10 @@
         {
           "name": "ts_extract_variable_info",
           "kind": "function"
+        },
+        {
+          "name": "Ts_Identifier_Analysis",
+          "kind": "type"
         },
         {
           "name": "ts_analyze_identifier",
