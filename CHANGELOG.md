@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.153.0
+
+### Minor Changes
+
+- rework some helpers ([#94](https://github.com/ryanatkn/fuz/pull/94))
+
 ## 0.152.0
 
 ### Minor Changes
