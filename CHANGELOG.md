@@ -1,5 +1,15 @@
 # @ryanatkn/fuz
 
+## 0.152.0
+
+### Minor Changes
+
+- remove outdated and useless `parse_pkg` ([6b704dc](https://github.com/ryanatkn/fuz/commit/6b704dc))
+
+### Patch Changes
+
+- update @sveltejs/package ([c82676e](https://github.com/ryanatkn/fuz/commit/c82676e))
+
 ## 0.151.2
 
 ### Patch Changes
