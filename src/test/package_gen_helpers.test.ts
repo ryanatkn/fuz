@@ -622,6 +622,24 @@ describe('package_gen_validate_no_duplicates - error message format', () => {
 		}
 	});
 
+	test('error message mentions @internal as resolution option', () => {
+		const src_json = create_mock_src_json([
+			create_mock_module('a.ts', [{name: 'Dup', kind: 'type'}]),
+			create_mock_module('b.ts', [{name: 'Dup', kind: 'function'}]),
+		]);
+
+		const logger = create_mock_logger();
+
+		try {
+			package_gen_validate_no_duplicates(src_json, logger);
+			assert.fail('Should have thrown');
+		} catch (err: any) {
+			// Error message should mention both resolution options
+			assert.ok(err.message.includes('rename'), 'should mention renaming');
+			assert.ok(err.message.includes('@internal'), 'should mention @internal');
+		}
+	});
+
 	test('log output includes all duplicate details', () => {
 		const src_json = create_mock_src_json([
 			create_mock_module('foo/bar.ts', [{name: 'Widget', kind: 'class'}]),
