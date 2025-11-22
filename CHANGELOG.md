@@ -1,5 +1,15 @@
 # @ryanatkn/fuz
 
+## 0.154.0
+
+### Minor Changes
+
+- change `ts_analyze_identifier`'s interface ([#95](https://github.com/ryanatkn/fuz/pull/95))
+
+### Patch Changes
+
+- support `@internal` tsdoc tag ([#95](https://github.com/ryanatkn/fuz/pull/95))
+
 ## 0.153.1
 
 ### Patch Changes
