@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
-	import {pkg_context} from '$lib/pkg.svelte.js';
-	import {contextmenu_attachment} from '$lib/contextmenu_state.svelte.js';
-	import {create_identifier_contextmenu} from '$lib/identifier_contextmenu.js';
+	import {pkg_context} from './pkg.svelte.js';
+	import {contextmenu_attachment} from './contextmenu_state.svelte.js';
+	import {create_identifier_contextmenu} from './identifier_contextmenu.js';
 
 	const {
 		name,

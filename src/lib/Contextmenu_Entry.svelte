@@ -2,8 +2,8 @@
 	import type {Snippet} from 'svelte';
 	import {swallow} from '@ryanatkn/belt/dom.js';
 
-	import Pending_Animation from '$lib/Pending_Animation.svelte';
-	import {contextmenu_context, type Contextmenu_Run} from '$lib/contextmenu_state.svelte.js';
+	import Pending_Animation from './Pending_Animation.svelte';
+	import {contextmenu_context, type Contextmenu_Run} from './contextmenu_state.svelte.js';
 
 	interface Props {
 		run: Contextmenu_Run;

@@ -1,14 +1,14 @@
 <script lang="ts">
-	import {pkg_context, type Pkg} from '$lib/pkg.svelte.js';
-	import {get_tome_by_name, type Tome} from '$lib/tome.js';
-	import Tome_Content from '$lib/Tome_Content.svelte';
-	import Tome_Section from '$lib/Tome_Section.svelte';
-	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
-	import Docs_Search from '$lib/Docs_Search.svelte';
-	import Module_Link from '$lib/Module_Link.svelte';
-	import Mdz from '$lib/Mdz.svelte';
-	import Api_Identifier_List from '$lib/Api_Identifier_List.svelte';
-	import {create_module_identifier_search} from '$lib/api_search.svelte.js';
+	import {pkg_context, type Pkg} from './pkg.svelte.js';
+	import {get_tome_by_name, type Tome} from './tome.js';
+	import Tome_Content from './Tome_Content.svelte';
+	import Tome_Section from './Tome_Section.svelte';
+	import Tome_Section_Header from './Tome_Section_Header.svelte';
+	import Docs_Search from './Docs_Search.svelte';
+	import Module_Link from './Module_Link.svelte';
+	import Mdz from './Mdz.svelte';
+	import Api_Identifier_List from './Api_Identifier_List.svelte';
+	import {create_module_identifier_search} from './api_search.svelte.js';
 
 	interface Props {
 		/**

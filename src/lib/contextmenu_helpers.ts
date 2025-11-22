@@ -1,6 +1,6 @@
 import {is_editable, swallow, inside_editable} from '@ryanatkn/belt/dom.js';
 
-import type {Contextmenu_State} from '$lib/contextmenu_state.svelte.js';
+import type {Contextmenu_State} from './contextmenu_state.svelte.js';
 
 // Constants for default prop values
 export const CONTEXTMENU_DEFAULT_OPEN_OFFSET_X = -2;

@@ -8,6 +8,30 @@
  */
 
 /**
+ * Configuration for module source detection.
+ *
+ * Allows customizing which paths are considered source modules,
+ * useful for projects with non-standard directory structures.
+ */
+export interface Module_Source_Options {
+	/** Source directory paths to include. @default ['/src/lib/'] */
+	source_paths?: Array<string>;
+	/** File extensions to analyze. @default ['.ts', '.js', '.svelte'] */
+	extensions?: Array<string>;
+	/** Patterns to exclude (matched against full path). @default [/\.test\.ts$/] */
+	exclude_patterns?: Array<RegExp>;
+}
+
+/**
+ * Default options for module source detection.
+ */
+export const MODULE_SOURCE_DEFAULTS: Required<Module_Source_Options> = {
+	source_paths: ['/src/lib/'],
+	extensions: ['.ts', '.js', '.svelte'],
+	exclude_patterns: [/\.test\.ts$/],
+};
+
+/**
  * Extract module path relative to src/lib from absolute source ID.
  *
  * @example
@@ -49,7 +73,29 @@ export const module_is_json = (path: string): boolean => path.endsWith('.json');
 export const module_is_test = (path: string): boolean => path.endsWith('.test.ts');
 
 /**
- * Check if ID is a source file in src/lib (excluding tests).
+ * Check if a path matches source criteria.
+ *
+ * Checks source directory paths, file extensions, and exclusion patterns.
+ * Uses defaults if no options provided.
+ *
+ * @param path Full path to check
+ * @param options Configuration options (uses defaults if not provided)
+ * @returns True if the path matches all criteria
  */
-export const module_is_source = (id: string): boolean =>
-	id.includes('/src/lib/') && !module_is_test(id);
+export const module_matches_source = (path: string, options?: Module_Source_Options): boolean => {
+	const opts = {...MODULE_SOURCE_DEFAULTS, ...options};
+
+	// Check if path is in one of the source directories
+	const in_source_dir = opts.source_paths.some((source_path) => path.includes(source_path));
+	if (!in_source_dir) return false;
+
+	// Check if extension matches
+	const has_valid_extension = opts.extensions.some((ext) => path.endsWith(ext));
+	if (!has_valid_extension) return false;
+
+	// Check exclusion patterns
+	const is_excluded = opts.exclude_patterns.some((pattern) => pattern.test(path));
+	if (is_excluded) return false;
+
+	return true;
+};

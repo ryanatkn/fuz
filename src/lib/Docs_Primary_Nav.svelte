@@ -3,8 +3,8 @@
 	import type {Snippet} from 'svelte';
 	import {scrollY} from 'svelte/reactivity/window';
 
-	import type {Pkg} from '$lib/pkg.svelte.js';
-	import Breadcrumb from '$lib/Breadcrumb.svelte';
+	import type {Pkg} from './pkg.svelte.js';
+	import Breadcrumb from './Breadcrumb.svelte';
 
 	interface Props {
 		pkg: Pkg;

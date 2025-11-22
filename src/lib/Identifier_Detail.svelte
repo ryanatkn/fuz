@@ -1,11 +1,11 @@
 <script lang="ts">
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
-	import type {Identifier} from '$lib/identifier.svelte.js';
-	import Details from '$lib/Details.svelte';
-	import Type_Link from '$lib/Type_Link.svelte';
-	import Module_Link from '$lib/Module_Link.svelte';
-	import Mdz from '$lib/Mdz.svelte';
+	import type {Identifier} from './identifier.svelte.js';
+	import Details from './Details.svelte';
+	import Type_Link from './Type_Link.svelte';
+	import Module_Link from './Module_Link.svelte';
+	import Mdz from './Mdz.svelte';
 
 	const {identifier}: {identifier: Identifier} = $props();
 </script>

@@ -1,9 +1,9 @@
 import type {Package_Json} from '@ryanatkn/belt/package_json.js';
 
-import {create_context} from '$lib/context_helpers.js';
-import type {Src_Json} from '$lib/src_json.js';
-import {Identifier} from '$lib/identifier.svelte.js';
-import {Module} from '$lib/module.svelte.js';
+import {create_context} from './context_helpers.js';
+import type {Src_Json} from './src_json.js';
+import {Identifier} from './identifier.svelte.js';
+import {Module} from './module.svelte.js';
 import {
 	url_github_file,
 	url_github_org,
@@ -13,7 +13,7 @@ import {
 	url_package_logo,
 	repo_name_parse,
 	repo_url_parse,
-} from '$lib/package_helpers.js';
+} from './package_helpers.js';
 
 /**
  * Rich runtime package representation of a package.

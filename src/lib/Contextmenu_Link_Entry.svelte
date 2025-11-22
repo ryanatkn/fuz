@@ -4,7 +4,7 @@
 	import type {Snippet} from 'svelte';
 	import {page} from '$app/state';
 
-	import {contextmenu_context} from '$lib/contextmenu_state.svelte.js';
+	import {contextmenu_context} from './contextmenu_state.svelte.js';
 
 	const {
 		href,

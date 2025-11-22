@@ -3,11 +3,11 @@
 	import {onDestroy} from 'svelte';
 	import {DEV} from 'esm-env';
 	import {slugify} from '@ryanatkn/belt/path.js';
-
-	import {tome_context} from '$lib/tome.js';
-	import Hashlink from '$lib/Hashlink.svelte';
-	import {docs_links_context, docs_slugify, to_docs_path_info} from '$lib/docs_helpers.svelte.js';
 	import type {SvelteHTMLElements} from 'svelte/elements';
+
+	import {tome_context} from './tome.js';
+	import Hashlink from './Hashlink.svelte';
+	import {docs_links_context, docs_slugify, to_docs_path_info} from './docs_helpers.svelte.js';
 
 	// eslint-disable-next-line @typescript-eslint/no-duplicate-type-constituents
 	const props: SvelteHTMLElements['h1'] | SvelteHTMLElements['h2'] = $props();

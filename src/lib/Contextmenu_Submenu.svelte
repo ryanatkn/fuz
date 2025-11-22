@@ -2,11 +2,8 @@
 	import type {Snippet} from 'svelte';
 	import {swallow} from '@ryanatkn/belt/dom.js';
 
-	import {
-		contextmenu_context,
-		contextmenu_dimensions_context,
-	} from '$lib/contextmenu_state.svelte.js';
-	import type {Dimensions} from '$lib/dimensions.svelte.js';
+	import {contextmenu_context, contextmenu_dimensions_context} from './contextmenu_state.svelte.js';
+	import type {Dimensions} from './dimensions.svelte.js';
 
 	interface Props {
 		icon?: Snippet;

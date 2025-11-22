@@ -2,8 +2,8 @@ import {resolve} from '$app/paths';
 import {slugify} from '@ryanatkn/belt/path.js';
 import {z} from 'zod';
 
-import {create_context} from '$lib/context_helpers.js';
-import {DOCS_PATH_DEFAULT} from '$lib/docs_helpers.svelte.js';
+import {create_context} from './context_helpers.js';
+import {DOCS_PATH_DEFAULT} from './docs_helpers.svelte.js';
 
 export const Tome = z.object({
 	name: z.string(),

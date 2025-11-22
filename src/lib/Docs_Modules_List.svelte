@@ -1,8 +1,8 @@
 <script lang="ts">
 	import {page} from '$app/state';
 
-	import Docs_List from '$lib/Docs_List.svelte';
-	import {pkg_context} from '$lib/pkg.svelte.js';
+	import Docs_List from './Docs_List.svelte';
+	import {pkg_context} from './pkg.svelte.js';
 
 	const {
 		expand_width = false,

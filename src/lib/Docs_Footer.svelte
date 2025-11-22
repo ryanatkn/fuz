@@ -2,9 +2,9 @@
 	import {format_url, type Url} from '@ryanatkn/belt/url.js';
 	import type {Snippet} from 'svelte';
 
-	import type {Pkg} from '$lib/pkg.svelte.js';
-	import Svg from '$lib/Svg.svelte';
-	import {github_logo} from '$lib/logos.js';
+	import type {Pkg} from './pkg.svelte.js';
+	import Svg from './Svg.svelte';
+	import {github_logo} from './logos.js';
 
 	interface Props {
 		pkg: Pkg;

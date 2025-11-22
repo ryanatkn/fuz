@@ -3,18 +3,18 @@
 	import {format_url} from '@ryanatkn/belt/url.js';
 	import type {Snippet} from 'svelte';
 
-	import type {Pkg} from '$lib/pkg.svelte.js';
-	import Details from '$lib/Details.svelte';
-	import Img_Or_Svg from '$lib/Img_Or_Svg.svelte';
-	import Identifier_Link from '$lib/Identifier_Link.svelte';
-	import Module_Link from '$lib/Module_Link.svelte';
-	import {url_github_file, repo_url_parse, url_well_known} from '$lib/package_helpers.js';
+	import type {Pkg} from './pkg.svelte.js';
+	import Details from './Details.svelte';
+	import Img_Or_Svg from './Img_Or_Svg.svelte';
+	import Identifier_Link from './Identifier_Link.svelte';
+	import Module_Link from './Module_Link.svelte';
+	import {url_github_file, repo_url_parse, url_well_known} from './package_helpers.js';
 	import {
 		module_is_typescript,
 		module_is_svelte,
 		module_is_css,
 		module_is_json,
-	} from '$lib/module_helpers.js';
+	} from './module_helpers.js';
 
 	interface Props {
 		pkg: Pkg; // TODO normalized version with cached primitives?

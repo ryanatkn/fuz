@@ -2,8 +2,8 @@
 	import {page} from '$app/state';
 	import {slide} from 'svelte/transition';
 
-	import Docs_List from '$lib/Docs_List.svelte';
-	import {docs_links_context} from '$lib/docs_helpers.svelte.js';
+	import Docs_List from './Docs_List.svelte';
+	import {docs_links_context} from './docs_helpers.svelte.js';
 
 	const {
 		sidebar = true,

@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
 
-	import Ecosystem_Links from '$lib/Ecosystem_Links.svelte';
-	import Project_Links from '$lib/Project_Links.svelte';
+	import Ecosystem_Links from './Ecosystem_Links.svelte';
+	import Project_Links from './Project_Links.svelte';
 
 	interface Props {
 		children?: Snippet;

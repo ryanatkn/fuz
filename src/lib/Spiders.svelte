@@ -9,8 +9,8 @@
 	import {random_int, shuffle} from '@ryanatkn/belt/random.js';
 	import {create_random_alea} from '@ryanatkn/belt/random_alea.js';
 
-	import Svg from '$lib/Svg.svelte';
-	import {fuz_logo} from '$lib/logos.js';
+	import Svg from './Svg.svelte';
+	import {fuz_logo} from './logos.js';
 
 	interface Props {
 		spiders?: Array<string>; // for now, just colors

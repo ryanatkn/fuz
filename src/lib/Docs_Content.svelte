@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
 
-	import type {Pkg} from '$lib/pkg.svelte.js';
-	import type {Tome} from '$lib/tome.js';
-	import Package_Summary from '$lib/Package_Summary.svelte';
+	import type {Pkg} from './pkg.svelte.js';
+	import type {Tome} from './tome.js';
+	import Package_Summary from './Package_Summary.svelte';
 
 	interface Props {
 		tomes: Array<Tome>;

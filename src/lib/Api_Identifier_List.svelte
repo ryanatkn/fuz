@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type {Identifier} from '$lib/identifier.svelte.js';
-	import Identifier_Detail from '$lib/Identifier_Detail.svelte';
-	import Tome_Section from '$lib/Tome_Section.svelte';
-	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
+	import type {Identifier} from './identifier.svelte.js';
+	import Identifier_Detail from './Identifier_Detail.svelte';
+	import Tome_Section from './Tome_Section.svelte';
+	import Tome_Section_Header from './Tome_Section_Header.svelte';
 
 	interface Props {
 		identifiers: Array<Identifier>;

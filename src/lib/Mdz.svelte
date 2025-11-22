@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
-	import {mdz_parse} from '$lib/mdz.js';
-	import Mdz_Node_View from '$lib/Mdz_Node_View.svelte';
+	import {mdz_parse} from './mdz.js';
+	import Mdz_Node_View from './Mdz_Node_View.svelte';
 
 	const {
 		content,

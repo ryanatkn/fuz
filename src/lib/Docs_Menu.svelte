@@ -3,9 +3,9 @@
 	import {slide} from 'svelte/transition';
 	import type {Snippet} from 'svelte';
 
-	import Docs_List from '$lib/Docs_List.svelte';
-	import {to_tome_pathname, type Tome} from '$lib/tome.js';
-	import Docs_Menu_Header from '$lib/Docs_Menu_Header.svelte';
+	import Docs_List from './Docs_List.svelte';
+	import {to_tome_pathname, type Tome} from './tome.js';
+	import Docs_Menu_Header from './Docs_Menu_Header.svelte';
 
 	const {
 		tomes,

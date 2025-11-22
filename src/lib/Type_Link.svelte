@@ -1,7 +1,8 @@
 <script lang="ts">
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
-	import Identifier_Link from '$lib/Identifier_Link.svelte';
-	import {pkg_context} from '$lib/pkg.svelte.js';
+
+	import Identifier_Link from './Identifier_Link.svelte';
+	import {pkg_context} from './pkg.svelte.js';
 
 	const {type}: {type: string} = $props();
 

@@ -21,9 +21,9 @@
 import type {Gen} from '@ryanatkn/gro';
 import {load_package_json} from '@ryanatkn/gro/package_json.js';
 
-import type {Src_Json} from '$lib/src_json.js';
-import {ts_create_program} from '$lib/ts_helpers.js';
-import {module_extract_path, module_is_svelte} from '$lib/module_helpers.js';
+import type {Src_Json} from './src_json.js';
+import {ts_create_program} from './ts_helpers.js';
+import {module_extract_path, module_is_svelte} from './module_helpers.js';
 import {
 	package_gen_collect_source_files,
 	package_gen_sort_modules,
@@ -31,7 +31,7 @@ import {
 	package_gen_generate_ts,
 	package_gen_analyze_svelte_file,
 	package_gen_analyze_typescript_file,
-} from '$lib/package_gen_helpers.js';
+} from './package_gen_helpers.js';
 
 export const gen: Gen = async ({log, filer}) => {
 	log.info('generating package metadata with full TypeScript analysis...');

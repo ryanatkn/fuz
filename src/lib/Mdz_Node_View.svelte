@@ -2,10 +2,10 @@
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 	import {resolve} from '$app/paths';
 
-	import type {Mdz_Node} from '$lib/mdz.js';
-	import Docs_Link from '$lib/Docs_Link.svelte';
-	import Mdz_Node_View from '$lib/Mdz_Node_View.svelte';
-	import {mdz_components_context, mdz_elements_context} from '$lib/mdz_components.js';
+	import type {Mdz_Node} from './mdz.js';
+	import Docs_Link from './Docs_Link.svelte';
+	import Mdz_Node_View from './Mdz_Node_View.svelte';
+	import {mdz_components_context, mdz_elements_context} from './mdz_components.js';
 
 	const {
 		node,

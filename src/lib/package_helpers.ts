@@ -2,7 +2,7 @@ import {ensure_end, strip_end, strip_start} from '@ryanatkn/belt/string.js';
 import type {Package_Json} from '@ryanatkn/belt/package_json.js';
 import {page} from '$app/state';
 
-import {DOCS_API_PATH, DOCS_PATH_DEFAULT} from '$lib/docs_helpers.svelte.js';
+import {DOCS_API_PATH, DOCS_PATH_DEFAULT} from './docs_helpers.svelte.js';
 
 /**
  * Build project-relative API documentation URL with hash anchor.

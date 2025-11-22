@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Svg from '$lib/Svg.svelte';
-	import {gro_logo, fuz_logo, moss_logo, fuz_template_logo} from '$lib/logos.js';
+	import Svg from './Svg.svelte';
+	import {gro_logo, fuz_logo, moss_logo, fuz_template_logo} from './logos.js';
 
 	const size = 'var(--icon_size_lg)';
 </script>

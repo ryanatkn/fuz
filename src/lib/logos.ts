@@ -1,4 +1,4 @@
-import type {Svg_Data} from '$lib/Svg.svelte';
+import type {Svg_Data} from './Svg.svelte';
 
 // TODO these can be optimized during builds, helpers and gen files?
 
