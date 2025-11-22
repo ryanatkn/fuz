@@ -70,8 +70,16 @@ Common patterns:
 
 - `domain_action` - object-first, action-last (primary pattern)
 - `domain_is_adjective` - boolean checks (`package_is_published`)
-- action verbs: `parse`, `create`, `get`, `to`
+- action verbs: `parse`, `create`, `get`, `to`, `analyze`, `extract`
 - action prefixes: `url_*` for URL builders
+
+Helper file prefixes (by domain):
+
+- `ts_*` - TypeScript compiler API helpers
+- `tsdoc_*` - TSDoc/JSDoc parsing helpers
+- `svelte_*` - Svelte component analysis helpers
+- `module_*` - module path and detection helpers
+- `package_gen_*` - Gro-specific package generation helpers
 
 This naming is consistent across Belt, Moss, and Gro for a unified developer
 experience.
@@ -119,19 +127,44 @@ Two-phase architecture (TSDoc → mdz):
 - mdz is the OUTPUT format - documentation extracted at build time is stored as
   mdz-formatted strings
 
-Supporting helpers:
+Supporting helpers (three-layer architecture):
 
-- `src_json.ts` - type definitions for the metadata format
-- `package_gen_helpers.ts` - build-time generation helpers (validation, sorting,
-  analysis)
+**Low-level** (TypeScript/TSDoc API wrappers):
+
 - `ts_helpers.ts` - TypeScript compiler API utilities
+  - `ts_analyze_identifier` - analyze a symbol with full metadata (reusable)
+  - `ts_analyze_module_exports` - analyze all exports from a source file (reusable)
+  - `ts_extract_*` - lower-level extraction functions for specific constructs
 - `tsdoc_helpers.ts` - JSDoc/TSDoc parsing (supports standard tags: `@param`,
   `@returns`, `@throws`, `@example`, `@deprecated`, `@see`, `@since`, plus
   non-standard `@mutates` for documenting side effects)
+  - `tsdoc_parse` - extract structured TSDoc from a node
+  - `tsdoc_apply_to_declaration` - apply parsed TSDoc to an identifier
+
+**Mid-level** (domain utilities):
+
 - `svelte_helpers.ts` - Svelte component analysis (via svelte2tsx)
-- `module_helpers.ts` - module path utilities
+  - `svelte_analyze_file` - analyze a .svelte file from disk (reusable)
+  - `svelte_analyze_component` - analyze from svelte2tsx output
+- `module_helpers.ts` - module path utilities and source detection
+  - `module_is_source`, `module_is_typescript`, `module_is_svelte` - predicates
+  - `module_extract_path`, `module_get_component_name` - path utilities
+  - `Module_Source_Options` - configurable source detection options
+- `src_json.ts` - type definitions for the metadata format
 - `package_helpers.ts` - URL builders (`url_github_file`, `url_api_identifier`,
   `url_api_module`, etc.)
+
+**High-level** (Gro-specific orchestration):
+
+- `package_gen_helpers.ts` - build-time generation helpers
+  - `package_gen_collect_source_files` - collect files from Gro's filer
+  - `package_gen_extract_dependencies` - extract dependency graph from disknode
+  - `package_gen_validate_no_duplicates` - flat namespace validation
+  - `package_gen_analyze_*` - thin wrappers adding Gro-specific concerns
+- `package.gen.ts` - the Gro task that orchestrates generation
+
+The reusable functions (`ts_analyze_*`, `svelte_analyze_file`) can be used
+outside of package generation for IDE integrations, linters, or custom tools.
 
 Documentation components:
 
@@ -245,9 +278,18 @@ package and API:
 TypeScript and Svelte analysis:
 
 - `ts_helpers.ts` - TypeScript compiler API utilities
+  - high-level: `ts_analyze_identifier`, `ts_analyze_module_exports`
+  - low-level: `ts_extract_function_info`, `ts_extract_class_info`, etc.
 - `svelte_helpers.ts` - Svelte component analysis
+  - high-level: `svelte_analyze_file`
+  - low-level: `svelte_analyze_component`, `svelte_extract_props`
 - `tsdoc_helpers.ts` - TSDoc/JSDoc parsing
+  - `tsdoc_parse`, `tsdoc_apply_to_declaration`
 - `module_helpers.ts` - module path utilities
+  - predicates: `module_is_source`, `module_is_typescript`, `module_is_svelte`
+  - utilities: `module_extract_path`, `module_get_component_name`
+  - configuration: `Module_Source_Options`, `MODULE_SOURCE_DEFAULTS`
+- `package_gen_helpers.ts` - Gro-specific build-time helpers
 
 browser and DOM:
 

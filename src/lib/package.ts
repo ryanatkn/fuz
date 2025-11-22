@@ -3069,7 +3069,7 @@ export const src_json: Src_Json = {
 					kind: 'class',
 					doc_comment:
 						'Rich runtime representation of an exported identifier with computed properties.\n\nCombines:\n\n- minimal Identifier_Json data\n- parent Module reference (provides Pkg context)\n- lazy-computed URLs, import statements, etc.\n- query methods for ergonomic usage',
-					source_line: 23,
+					source_line: 19,
 					members: [
 						{
 							name: 'module',
@@ -4032,13 +4032,48 @@ export const src_json: Src_Json = {
 			path: 'module_helpers.ts',
 			identifiers: [
 				{
+					name: 'Module_Source_Options',
+					kind: 'type',
+					doc_comment:
+						'Configuration for module source detection.\n\nAllows customizing which paths are considered source modules,\nuseful for projects with non-standard directory structures.',
+					source_line: 16,
+					type_signature: 'Module_Source_Options',
+					properties: [
+						{
+							name: 'source_paths',
+							kind: 'variable',
+							type_signature: 'Array<string>',
+							doc_comment: 'Source directory paths to include.',
+						},
+						{
+							name: 'extensions',
+							kind: 'variable',
+							type_signature: 'Array<string>',
+							doc_comment: 'File extensions to analyze.',
+						},
+						{
+							name: 'exclude_patterns',
+							kind: 'variable',
+							type_signature: 'Array<RegExp>',
+							doc_comment: 'Patterns to exclude (matched against full path).',
+						},
+					],
+				},
+				{
+					name: 'MODULE_SOURCE_DEFAULTS',
+					kind: 'variable',
+					doc_comment: 'Default options for module source detection.',
+					source_line: 28,
+					type_signature: 'Required<Module_Source_Options>',
+				},
+				{
 					name: 'module_extract_path',
 					kind: 'function',
 					doc_comment: 'Extract module path relative to src/lib from absolute source ID.',
 					examples: [
 						"module_extract_path('/home/user/project/src/lib/foo.ts') // => 'foo.ts'\nmodule_extract_path('/home/user/project/src/lib/nested/bar.svelte') // => 'nested/bar.svelte'",
 					],
-					source_line: 17,
+					source_line: 41,
 					type_signature: '(source_id: string): string',
 					return_type: 'string',
 					parameters: [
@@ -4056,7 +4091,7 @@ export const src_json: Src_Json = {
 					examples: [
 						"module_get_component_name('Alert.svelte') // => 'Alert'\nmodule_get_component_name('components/Button.svelte') // => 'Button'",
 					],
-					source_line: 29,
+					source_line: 53,
 					type_signature: '(module_path: string): string',
 					return_type: 'string',
 					parameters: [
@@ -4072,7 +4107,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment: 'Convert module path to module key format (with ./ prefix).',
 					examples: ["module_get_key('foo.ts') // => './foo.ts'"],
-					source_line: 38,
+					source_line: 62,
 					type_signature: '(module_path: string): string',
 					return_type: 'string',
 					parameters: [
@@ -4086,7 +4121,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'module_is_typescript',
 					kind: 'function',
-					source_line: 40,
+					source_line: 64,
 					type_signature: '(path: string): boolean',
 					return_type: 'boolean',
 					parameters: [
@@ -4100,7 +4135,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'module_is_svelte',
 					kind: 'function',
-					source_line: 43,
+					source_line: 67,
 					type_signature: '(path: string): boolean',
 					return_type: 'boolean',
 					parameters: [
@@ -4114,7 +4149,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'module_is_css',
 					kind: 'function',
-					source_line: 45,
+					source_line: 69,
 					type_signature: '(path: string): boolean',
 					return_type: 'boolean',
 					parameters: [
@@ -4128,7 +4163,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'module_is_json',
 					kind: 'function',
-					source_line: 47,
+					source_line: 71,
 					type_signature: '(path: string): boolean',
 					return_type: 'boolean',
 					parameters: [
@@ -4142,7 +4177,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'module_is_test',
 					kind: 'function',
-					source_line: 49,
+					source_line: 73,
 					type_signature: '(path: string): boolean',
 					return_type: 'boolean',
 					parameters: [
@@ -4156,8 +4191,9 @@ export const src_json: Src_Json = {
 				{
 					name: 'module_is_source',
 					kind: 'function',
-					doc_comment: 'Check if ID is a source file in src/lib (excluding tests).',
-					source_line: 54,
+					doc_comment:
+						'Check if ID is a source file in src/lib (excluding tests).\n\nFor customizable source detection, use `module_matches_source_options`.',
+					source_line: 80,
 					type_signature: '(id: string): boolean',
 					return_type: 'boolean',
 					parameters: [
@@ -4168,10 +4204,38 @@ export const src_json: Src_Json = {
 						},
 					],
 				},
+				{
+					name: 'module_matches_source_options',
+					kind: 'function',
+					doc_comment:
+						'Check if a path matches the configured source options.\n\nMore flexible than `module_is_source`, allowing custom source paths,\nextensions, and exclusion patterns.',
+					source_line: 92,
+					type_signature: '(path: string, options?: Module_Source_Options | undefined): boolean',
+					return_type: 'boolean',
+					parameters: [
+						{
+							name: 'path',
+							type: 'string',
+							optional: false,
+							description: 'Full path to check',
+						},
+						{
+							name: 'options',
+							type: 'Module_Source_Options | undefined',
+							optional: true,
+							description: 'Configuration options (uses defaults if not provided)',
+						},
+					],
+				},
 			],
 			module_comment:
 				'Module path and metadata helpers.\n\nProvides utilities for working with source module paths, file types,\nand import relationships in the package generation system.\n\nAll functions are prefixed with `module_` for clarity.',
-			dependents: ['Package_Detail.svelte', 'package.gen.ts', 'package_gen_helpers.ts'],
+			dependents: [
+				'Package_Detail.svelte',
+				'package.gen.ts',
+				'package_gen_helpers.ts',
+				'svelte_helpers.ts',
+			],
 		},
 		{
 			path: 'Module_Link.svelte',
@@ -4380,7 +4444,7 @@ export const src_json: Src_Json = {
 							description: 'if duplicate identifier names are found',
 						},
 					],
-					source_line: 50,
+					source_line: 42,
 					type_signature: '(src_json: Src_Json, log: Logger): void',
 					return_type: 'void',
 					parameters: [
@@ -4398,42 +4462,20 @@ export const src_json: Src_Json = {
 				},
 				{
 					name: 'package_gen_enhance_identifier',
-					kind: 'function',
+					kind: 'variable',
 					doc_comment: 'Enhance a single identifier with rich metadata from TypeScript analysis.',
-					throws: [
-						{
-							type: 'Error',
-							description: 'if TypeScript analysis fails (fails fast)',
-						},
-					],
-					source_line: 96,
+					deprecated_message:
+						'Use `ts_analyze_identifier` from `ts_helpers.ts` directly.\nThis is kept for backwards compatibility but delegates to the extracted function.',
+					source_line: 89,
 					type_signature:
-						'(symbol: Symbol, source_file: SourceFile, checker: TypeChecker): Identifier_Json',
-					return_type: 'Identifier_Json',
-					parameters: [
-						{
-							name: 'symbol',
-							type: 'Symbol',
-							optional: false,
-						},
-						{
-							name: 'source_file',
-							type: 'SourceFile',
-							optional: false,
-						},
-						{
-							name: 'checker',
-							type: 'TypeChecker',
-							optional: false,
-						},
-					],
+						'(symbol: Symbol, source_file: SourceFile, checker: TypeChecker) => Identifier_Json',
 				},
 				{
 					name: 'package_gen_sort_modules',
 					kind: 'function',
 					doc_comment:
 						'Sort modules alphabetically by path for deterministic output and cleaner diffs.',
-					source_line: 142,
+					source_line: 94,
 					type_signature: '(modules: Module_Json[]): Module_Json[]',
 					return_type: 'Module_Json[]',
 					parameters: [
@@ -4449,7 +4491,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Generate the package.ts file content with package_json and src_json exports.',
-					source_line: 149,
+					source_line: 101,
 					type_signature:
 						'(package_json: { [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }, src_json: Src_Json): string',
 					return_type: 'string',
@@ -4477,7 +4519,7 @@ export const src_json: Src_Json = {
 							description: 'if no source files are found in src/lib',
 						},
 					],
-					source_line: 170,
+					source_line: 122,
 					type_signature: '(filer: Filer, log: Logger): Disknode[]',
 					return_type: 'Disknode[]',
 					parameters: [
@@ -4496,15 +4538,9 @@ export const src_json: Src_Json = {
 				{
 					name: 'package_gen_analyze_svelte_file',
 					kind: 'function',
-					doc_comment: 'Analyze a Svelte component file and extract metadata.',
-					throws: [
-						{
-							type: 'Error',
-							description:
-								'if file cannot be read, svelte2tsx transformation fails, or component analysis fails',
-						},
-					],
-					source_line: 200,
+					doc_comment:
+						'Analyze a Svelte component file and extract metadata.\n\nUses `svelte_analyze_file` for core analysis, then adds\nGro-specific dependency information from the disknode.',
+					source_line: 153,
 					type_signature:
 						'(disknode: Disknode, module_path: string, checker: TypeChecker): Module_Json',
 					return_type: 'Module_Json',
@@ -4529,14 +4565,9 @@ export const src_json: Src_Json = {
 				{
 					name: 'package_gen_analyze_typescript_file',
 					kind: 'function',
-					doc_comment: 'Analyze a TypeScript file and extract all identifiers.',
-					throws: [
-						{
-							type: 'Error',
-							description: 'if identifier enhancement fails (via package_gen_enhance_identifier)',
-						},
-					],
-					source_line: 248,
+					doc_comment:
+						'Analyze a TypeScript file and extract all identifiers.\n\nUses `ts_analyze_module_exports` for core analysis, then adds\nGro-specific dependency information from the disknode.',
+					source_line: 178,
 					type_signature:
 						'(disknode: Disknode, source_file: SourceFile, module_path: string, checker: TypeChecker): Module_Json',
 					return_type: 'Module_Json',
@@ -4568,7 +4599,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						"Extract dependencies and dependents for a module from the filer's dependency graph.\n\nFilters to only include source modules from src/lib (excludes external packages, node_modules, tests).\nReturns sorted arrays of module paths (relative to src/lib) for deterministic output.",
-					source_line: 293,
+					source_line: 214,
 					type_signature: '(disknode: Disknode): { dependencies: string[]; dependents: string[]; }',
 					return_type: '{ dependencies: string[]; dependents: string[]; }',
 					parameters: [
@@ -4581,8 +4612,8 @@ export const src_json: Src_Json = {
 				},
 			],
 			module_comment:
-				'Build-time helpers for package metadata generation.\n\nThese functions are used during `gro gen` to analyze TypeScript and Svelte source files\nand generate package metadata with rich type information and documentation.\n\nDesign philosophy: Fail fast with clear errors rather than silently producing invalid\nmetadata. All validation errors halt the build immediately with actionable messages.\n\n@see package.gen.ts for the main generation task\n@see src_json.ts for type definitions\n@see tsdoc_helpers.ts for JSDoc/TSDoc parsing utilities\n@see ts_helpers.ts for TypeScript analysis\n@see svelte_helpers.ts for Svelte component analysis',
-			dependencies: ['module_helpers.ts', 'svelte_helpers.ts', 'ts_helpers.ts', 'tsdoc_helpers.ts'],
+				'Build-time helpers for package metadata generation.\n\nThese functions handle Gro-specific concerns like file collection and dependency\ngraph extraction. Core analysis logic has been extracted to reusable helpers:\n\n- `ts_helpers.ts` - `ts_analyze_identifier`, `ts_analyze_module_exports`\n- `svelte_helpers.ts` - `svelte_analyze_file`\n- `module_helpers.ts` - path utilities and source detection\n\nDesign philosophy: Fail fast with clear errors rather than silently producing invalid\nmetadata. All validation errors halt the build immediately with actionable messages.\n\n@see package.gen.ts for the main generation task\n@see src_json.ts for type definitions\n@see ts_helpers.ts for reusable TypeScript analysis\n@see svelte_helpers.ts for reusable Svelte component analysis',
+			dependencies: ['module_helpers.ts', 'svelte_helpers.ts', 'ts_helpers.ts'],
 			dependents: ['package.gen.ts'],
 		},
 		{
@@ -5745,7 +5776,7 @@ export const src_json: Src_Json = {
 					name: 'svelte_analyze_component',
 					kind: 'function',
 					doc_comment: 'Analyze a Svelte component from its svelte2tsx transformation.',
-					source_line: 24,
+					source_line: 27,
 					type_signature:
 						'(ts_code: string, source_file: SourceFile, checker: TypeChecker, component_name: string): Identifier_Json',
 					return_type: 'Identifier_Json',
@@ -5772,10 +5803,41 @@ export const src_json: Src_Json = {
 						},
 					],
 				},
+				{
+					name: 'svelte_analyze_file',
+					kind: 'function',
+					doc_comment:
+						'Analyze a Svelte component file from disk.\n\nThis is a high-level function that handles the complete workflow:\n1. Read the Svelte source from disk\n2. Transform to TypeScript via svelte2tsx\n3. Extract component metadata (props, documentation)\n\nSuitable for use in documentation generators, build tools, and analysis.',
+					source_line: 278,
+					type_signature:
+						'(file_path: string, module_path: string, checker: TypeChecker): Identifier_Json',
+					return_type: 'Identifier_Json',
+					return_description: 'Complete identifier metadata for the component',
+					parameters: [
+						{
+							name: 'file_path',
+							type: 'string',
+							optional: false,
+							description: 'Absolute path to the .svelte file',
+						},
+						{
+							name: 'module_path',
+							type: 'string',
+							optional: false,
+							description: "Module path relative to src/lib (e.g., 'Alert.svelte')",
+						},
+						{
+							name: 'checker',
+							type: 'TypeChecker',
+							optional: false,
+							description: 'TypeScript type checker for type resolution',
+						},
+					],
+				},
 			],
 			module_comment:
 				'Svelte component analysis helpers.\n\nExtracts metadata from Svelte components using svelte2tsx transformations:\n\n- Component props with types and JSDoc\n- Component-level documentation\n- Type information\n\nWorkflow: Transform Svelte to TypeScript via svelte2tsx, parse the transformed\nTypeScript with the TS Compiler API, extract component-level JSDoc from original source.\n\nAll functions are prefixed with `svelte_` for clarity.',
-			dependencies: ['tsdoc_helpers.ts'],
+			dependencies: ['module_helpers.ts', 'tsdoc_helpers.ts'],
 			dependents: ['package_gen_helpers.ts'],
 		},
 		{
@@ -6527,11 +6589,88 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
+					name: 'ts_analyze_identifier',
+					kind: 'function',
+					doc_comment:
+						'Analyze a TypeScript symbol and extract rich metadata.\n\nThis is a high-level function that combines TSDoc parsing with TypeScript\ntype analysis to produce complete identifier metadata. Suitable for use\nin documentation generators, IDE integrations, and other tooling.',
+					source_line: 394,
+					type_signature:
+						'(symbol: Symbol, source_file: SourceFile, checker: TypeChecker): Identifier_Json',
+					return_type: 'Identifier_Json',
+					return_description: 'Complete identifier metadata including docs, types, and parameters',
+					parameters: [
+						{
+							name: 'symbol',
+							type: 'Symbol',
+							optional: false,
+							description: 'The TypeScript symbol to analyze',
+						},
+						{
+							name: 'source_file',
+							type: 'SourceFile',
+							optional: false,
+							description: 'The source file containing the symbol',
+						},
+						{
+							name: 'checker',
+							type: 'TypeChecker',
+							optional: false,
+							description: 'The TypeScript type checker',
+						},
+					],
+				},
+				{
+					name: 'Module_Exports_Analysis',
+					kind: 'type',
+					doc_comment: "Result of analyzing a module's exports.",
+					source_line: 440,
+					type_signature: 'Module_Exports_Analysis',
+					properties: [
+						{
+							name: 'module_comment',
+							kind: 'variable',
+							type_signature: 'string',
+							doc_comment: 'Module-level documentation comment.',
+						},
+						{
+							name: 'identifiers',
+							kind: 'variable',
+							type_signature: 'Array<Identifier_Json>',
+							doc_comment: 'All exported identifiers with their metadata.',
+						},
+					],
+				},
+				{
+					name: 'ts_analyze_module_exports',
+					kind: 'function',
+					doc_comment:
+						'Analyze all exports from a TypeScript source file.\n\nExtracts the module-level comment and all exported identifiers with\ncomplete metadata. This is a high-level function suitable for building\ndocumentation, API explorers, or analysis tools.',
+					source_line: 458,
+					type_signature:
+						'(source_file: SourceFile, checker: TypeChecker): Module_Exports_Analysis',
+					return_type: 'Module_Exports_Analysis',
+					return_description: 'Module comment and array of analyzed identifiers',
+					parameters: [
+						{
+							name: 'source_file',
+							type: 'SourceFile',
+							optional: false,
+							description: 'The TypeScript source file to analyze',
+						},
+						{
+							name: 'checker',
+							type: 'TypeChecker',
+							optional: false,
+							description: 'The TypeScript type checker',
+						},
+					],
+				},
+				{
 					name: 'ts_extract_module_comment',
 					kind: 'function',
 					doc_comment:
 						'Extract module-level comment.\n\nOnly accepts JSDoc/TSDoc comments (`/** ... *\\/`) followed by a blank line to distinguish\nthem from identifier-level comments. This prevents accidentally treating function/class\ncomments as module comments. Module comments can appear after imports.',
-					source_line: 389,
+					source_line: 490,
 					type_signature: '(source_file: SourceFile): string | undefined',
 					return_type: 'string | undefined',
 					parameters: [
@@ -6546,7 +6685,7 @@ export const src_json: Src_Json = {
 					name: 'ts_create_program',
 					kind: 'function',
 					doc_comment: 'Create TypeScript program for analysis.',
-					source_line: 461,
+					source_line: 562,
 					type_signature: '(log: { warn: (message: string) => void; }): Program | null',
 					return_type: 'Program | null',
 					parameters: [
@@ -6678,7 +6817,7 @@ export const src_json: Src_Json = {
 			],
 			module_comment:
 				'TSDoc/JSDoc parsing helpers using the TypeScript Compiler API.\n\nProvides `tsdoc_parse()` for extracting JSDoc/TSDoc from TypeScript nodes.\nPrimarily designed for build-time code generation but can be used at runtime.\n\n## Design\n\nPure extraction approach: extracts documentation as-is with minimal transformation,\npreserving source intent. Works around TypeScript Compiler API quirks where needed.\n\nSupports both regular TypeScript and Svelte components (via svelte2tsx output).\n\n## Tag support\n\nSupports a subset of standard TSDoc tags:\n`@param`, `@returns`, `@throws`, `@example`, `@deprecated`, `@see`, `@since`.\n\nAlso supports `@mutates` (non-standard) for documenting mutations to parameters or external state.\nUse format: `@mutates paramName - description of mutation`.\n\nOnly `@returns` is supported (not `@return`).\n\nThe `@see` tag supports multiple formats: plain URLs (`https://...`), `{@link}` syntax, and module names.\nRelative/absolute path support in `@see` is TBD.\n\n## Behavioral notes\n\nDue to TS Compiler API limitations:\n- Preserves dash separator in `@param` descriptions: `@param x desc` → `"- desc"`\n- `@throws` tags have `{Type}` stripped by TS API; fallback regex extracts first word as error type\n- TS API strips URL protocols from `@see` tag text; we use `getText()` to preserve original format including `{@link}` syntax\n\nAll functions are prefixed with `tsdoc_` for clarity.',
-			dependents: ['package_gen_helpers.ts', 'svelte_helpers.ts', 'ts_helpers.ts'],
+			dependents: ['svelte_helpers.ts', 'ts_helpers.ts'],
 		},
 		{
 			path: 'Type_Link.svelte',

@@ -7,7 +7,7 @@
 import ts from 'typescript';
 
 import type {Identifier_Json, Generic_Param_Info, Identifier_Kind} from './src_json.js';
-import {tsdoc_parse} from './tsdoc_helpers.js';
+import {tsdoc_parse, tsdoc_apply_to_declaration} from './tsdoc_helpers.js';
 
 const ts_parse_generic_param = (param: ts.TypeParameterDeclaration): Generic_Param_Info => {
 	const result: Generic_Param_Info = {
@@ -377,6 +377,107 @@ export const ts_extract_variable_info = (
 	} catch (_err) {
 		// Ignore: Type checker may fail on complex variable types
 	}
+};
+
+/**
+ * Analyze a TypeScript symbol and extract rich metadata.
+ *
+ * This is a high-level function that combines TSDoc parsing with TypeScript
+ * type analysis to produce complete identifier metadata. Suitable for use
+ * in documentation generators, IDE integrations, and other tooling.
+ *
+ * @param symbol The TypeScript symbol to analyze
+ * @param source_file The source file containing the symbol
+ * @param checker The TypeScript type checker
+ * @returns Complete identifier metadata including docs, types, and parameters
+ */
+export const ts_analyze_identifier = (
+	symbol: ts.Symbol,
+	source_file: ts.SourceFile,
+	checker: ts.TypeChecker,
+): Identifier_Json => {
+	const name = symbol.name;
+	const decl_node = symbol.valueDeclaration || symbol.declarations?.[0];
+
+	// Determine kind (fallback to 'variable' if no declaration node)
+	const kind = decl_node ? ts_infer_declaration_kind(symbol, decl_node) : 'variable';
+
+	const result: Identifier_Json = {
+		name,
+		kind,
+	};
+
+	if (!decl_node) {
+		return result;
+	}
+
+	// Extract TSDoc
+	const tsdoc = tsdoc_parse(decl_node, source_file);
+	tsdoc_apply_to_declaration(result, tsdoc);
+
+	// Extract source line
+	const start = decl_node.getStart(source_file);
+	const start_pos = source_file.getLineAndCharacterOfPosition(start);
+	result.source_line = start_pos.line + 1;
+
+	// Extract type-specific info
+	if (result.kind === 'function') {
+		ts_extract_function_info(decl_node, symbol, checker, result, tsdoc);
+	} else if (result.kind === 'type') {
+		ts_extract_type_info(decl_node, symbol, checker, result);
+	} else if (result.kind === 'class') {
+		ts_extract_class_info(decl_node, symbol, checker, result);
+	} else if (result.kind === 'variable') {
+		ts_extract_variable_info(decl_node, symbol, checker, result);
+	}
+
+	return result;
+};
+
+/**
+ * Result of analyzing a module's exports.
+ */
+export interface Module_Exports_Analysis {
+	/** Module-level documentation comment. */
+	module_comment?: string;
+	/** All exported identifiers with their metadata. */
+	identifiers: Array<Identifier_Json>;
+}
+
+/**
+ * Analyze all exports from a TypeScript source file.
+ *
+ * Extracts the module-level comment and all exported identifiers with
+ * complete metadata. This is a high-level function suitable for building
+ * documentation, API explorers, or analysis tools.
+ *
+ * @param source_file The TypeScript source file to analyze
+ * @param checker The TypeScript type checker
+ * @returns Module comment and array of analyzed identifiers
+ */
+export const ts_analyze_module_exports = (
+	source_file: ts.SourceFile,
+	checker: ts.TypeChecker,
+): Module_Exports_Analysis => {
+	const identifiers: Array<Identifier_Json> = [];
+
+	// Extract module-level comment
+	const module_comment = ts_extract_module_comment(source_file);
+
+	// Get all exported symbols
+	const symbol = checker.getSymbolAtLocation(source_file);
+	if (symbol) {
+		const exports = checker.getExportsOfModule(symbol);
+		for (const export_symbol of exports) {
+			const identifier_json = ts_analyze_identifier(export_symbol, source_file, checker);
+			identifiers.push(identifier_json);
+		}
+	}
+
+	return {
+		module_comment,
+		identifiers,
+	};
 };
 
 /**

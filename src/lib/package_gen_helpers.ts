@@ -1,41 +1,33 @@
 /**
  * Build-time helpers for package metadata generation.
  *
- * These functions are used during `gro gen` to analyze TypeScript and Svelte source files
- * and generate package metadata with rich type information and documentation.
+ * These functions handle Gro-specific concerns like file collection and dependency
+ * graph extraction. Core analysis logic has been extracted to reusable helpers:
+ *
+ * - `ts_helpers.ts` - `ts_analyze_identifier`, `ts_analyze_module_exports`
+ * - `svelte_helpers.ts` - `svelte_analyze_file`
+ * - `module_helpers.ts` - path utilities and source detection
  *
  * Design philosophy: Fail fast with clear errors rather than silently producing invalid
  * metadata. All validation errors halt the build immediately with actionable messages.
  *
  * @see package.gen.ts for the main generation task
  * @see src_json.ts for type definitions
- * @see tsdoc_helpers.ts for JSDoc/TSDoc parsing utilities
- * @see ts_helpers.ts for TypeScript analysis
- * @see svelte_helpers.ts for Svelte component analysis
+ * @see ts_helpers.ts for reusable TypeScript analysis
+ * @see svelte_helpers.ts for reusable Svelte component analysis
  */
 
 import type {Package_Json} from '@ryanatkn/belt/package_json.js';
 import type {Logger} from '@ryanatkn/belt/log.js';
 import type {Filer} from '@ryanatkn/gro/filer.js';
 import type {Disknode} from '@ryanatkn/gro/disknode.js';
-import ts from 'typescript';
-import {readFileSync} from 'node:fs';
-import {svelte2tsx} from 'svelte2tsx';
+import type ts from 'typescript';
 
-import type {Identifier_Json, Module_Json, Src_Json} from './src_json.js';
-import {
-	ts_extract_module_comment,
-	ts_infer_declaration_kind,
-	ts_extract_function_info,
-	ts_extract_type_info,
-	ts_extract_class_info,
-	ts_extract_variable_info,
-} from './ts_helpers.js';
-import {tsdoc_parse, tsdoc_apply_to_declaration} from './tsdoc_helpers.js';
-import {svelte_analyze_component} from './svelte_helpers.js';
+import type {Module_Json, Src_Json} from './src_json.js';
+import {ts_analyze_identifier, ts_analyze_module_exports} from './ts_helpers.js';
+import {svelte_analyze_file} from './svelte_helpers.js';
 import {
 	module_extract_path,
-	module_get_component_name,
 	module_is_typescript,
 	module_is_svelte,
 	module_is_source,
@@ -91,50 +83,10 @@ export const package_gen_validate_no_duplicates = (src_json: Src_Json, log: Logg
 /**
  * Enhance a single identifier with rich metadata from TypeScript analysis.
  *
- * @throws Error if TypeScript analysis fails (fails fast)
+ * @deprecated Use `ts_analyze_identifier` from `ts_helpers.ts` directly.
+ * This is kept for backwards compatibility but delegates to the extracted function.
  */
-export const package_gen_enhance_identifier = (
-	symbol: ts.Symbol,
-	source_file: ts.SourceFile,
-	checker: ts.TypeChecker,
-): Identifier_Json => {
-	const name = symbol.name;
-	const decl_node = symbol.valueDeclaration || symbol.declarations?.[0];
-
-	// Determine kind (fallback to 'variable' if no declaration node)
-	const kind = decl_node ? ts_infer_declaration_kind(symbol, decl_node) : 'variable';
-
-	const result: Identifier_Json = {
-		name,
-		kind,
-	};
-
-	if (!decl_node) {
-		return result;
-	}
-
-	// Extract TSDoc
-	const tsdoc = tsdoc_parse(decl_node, source_file);
-	tsdoc_apply_to_declaration(result, tsdoc);
-
-	// Extract source line
-	const start = decl_node.getStart(source_file);
-	const start_pos = source_file.getLineAndCharacterOfPosition(start);
-	result.source_line = start_pos.line + 1;
-
-	// Extract type-specific info
-	if (result.kind === 'function') {
-		ts_extract_function_info(decl_node, symbol, checker, result, tsdoc);
-	} else if (result.kind === 'type') {
-		ts_extract_type_info(decl_node, symbol, checker, result);
-	} else if (result.kind === 'class') {
-		ts_extract_class_info(decl_node, symbol, checker, result);
-	} else if (result.kind === 'variable') {
-		ts_extract_variable_info(decl_node, symbol, checker, result);
-	}
-
-	return result;
-};
+export const package_gen_enhance_identifier = ts_analyze_identifier;
 
 /**
  * Sort modules alphabetically by path for deterministic output and cleaner diffs.
@@ -195,41 +147,18 @@ export const package_gen_collect_source_files = (filer: Filer, log: Logger): Arr
 /**
  * Analyze a Svelte component file and extract metadata.
  *
- * @throws Error if file cannot be read, svelte2tsx transformation fails, or component analysis fails
+ * Uses `svelte_analyze_file` for core analysis, then adds
+ * Gro-specific dependency information from the disknode.
  */
 export const package_gen_analyze_svelte_file = (
 	disknode: Disknode,
 	module_path: string,
 	checker: ts.TypeChecker,
 ): Module_Json => {
-	const source_id = disknode.id;
-	const svelte_source = readFileSync(source_id, 'utf-8');
+	// Use the extracted helper for core analysis
+	const identifier_json = svelte_analyze_file(disknode.id, module_path, checker);
 
-	// Check if component uses TypeScript
-	const is_ts_file = svelte_source.includes('lang="ts"');
-
-	// Transform Svelte to TS
-	const ts_result = svelte2tsx(svelte_source, {
-		filename: source_id,
-		isTsFile: is_ts_file,
-		emitOnTemplateError: true, // Handle malformed templates gracefully
-	});
-
-	// Get component name from filename
-	const component_name = module_get_component_name(module_path);
-
-	// Create a temporary source file from the original Svelte content for JSDoc extraction
-	const temp_source = ts.createSourceFile(source_id, svelte_source, ts.ScriptTarget.Latest, true);
-
-	// Analyze the component
-	const identifier_json = svelte_analyze_component(
-		ts_result.code,
-		temp_source,
-		checker,
-		component_name,
-	);
-
-	// Extract dependencies and dependents
+	// Extract dependencies and dependents (Gro-specific)
 	const {dependencies, dependents} = package_gen_extract_dependencies(disknode);
 
 	return {
@@ -243,7 +172,8 @@ export const package_gen_analyze_svelte_file = (
 /**
  * Analyze a TypeScript file and extract all identifiers.
  *
- * @throws Error if identifier enhancement fails (via package_gen_enhance_identifier)
+ * Uses `ts_analyze_module_exports` for core analysis, then adds
+ * Gro-specific dependency information from the disknode.
  */
 export const package_gen_analyze_typescript_file = (
 	disknode: Disknode,
@@ -251,28 +181,19 @@ export const package_gen_analyze_typescript_file = (
 	module_path: string,
 	checker: ts.TypeChecker,
 ): Module_Json => {
+	// Use the extracted helper for core analysis
+	const {module_comment, identifiers} = ts_analyze_module_exports(source_file, checker);
+
 	const mod: Module_Json = {
 		path: module_path,
-		identifiers: [],
+		identifiers,
 	};
 
-	// Extract module-level comment
-	const module_comment = ts_extract_module_comment(source_file);
 	if (module_comment) {
 		mod.module_comment = module_comment;
 	}
 
-	// Extract identifiers - get all exported symbols
-	const symbol = checker.getSymbolAtLocation(source_file);
-	if (symbol) {
-		const exports = checker.getExportsOfModule(symbol);
-		for (const export_symbol of exports) {
-			const identifier_json = package_gen_enhance_identifier(export_symbol, source_file, checker);
-			mod.identifiers!.push(identifier_json);
-		}
-	}
-
-	// Extract dependencies and dependents
+	// Extract dependencies and dependents (Gro-specific)
 	const {dependencies, dependents} = package_gen_extract_dependencies(disknode);
 	if (dependencies.length > 0) {
 		mod.dependencies = dependencies;
