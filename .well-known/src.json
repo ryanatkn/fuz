@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.152.0",
+  "version": "0.153.0",
   "modules": {
     "./alert.js": {
       "path": "alert.ts",
@@ -609,6 +609,14 @@
       "path": "module_helpers.ts",
       "declarations": [
         {
+          "name": "Module_Source_Options",
+          "kind": "type"
+        },
+        {
+          "name": "MODULE_SOURCE_DEFAULTS",
+          "kind": "variable"
+        },
+        {
           "name": "module_extract_path",
           "kind": "function"
         },
@@ -641,7 +649,7 @@
           "kind": "function"
         },
         {
-          "name": "module_is_source",
+          "name": "module_matches_source",
           "kind": "function"
         }
       ]
@@ -660,10 +668,6 @@
       "declarations": [
         {
           "name": "package_gen_validate_no_duplicates",
-          "kind": "function"
-        },
-        {
-          "name": "package_gen_enhance_identifier",
           "kind": "function"
         },
         {
@@ -853,6 +857,10 @@
         {
           "name": "svelte_analyze_component",
           "kind": "function"
+        },
+        {
+          "name": "svelte_analyze_file",
+          "kind": "function"
         }
       ]
     },
@@ -947,6 +955,18 @@
         },
         {
           "name": "ts_extract_variable_info",
+          "kind": "function"
+        },
+        {
+          "name": "ts_analyze_identifier",
+          "kind": "function"
+        },
+        {
+          "name": "Module_Exports_Analysis",
+          "kind": "type"
+        },
+        {
+          "name": "ts_analyze_module_exports",
           "kind": "function"
         },
         {
