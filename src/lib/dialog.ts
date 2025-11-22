@@ -1,6 +1,6 @@
 import type {ComponentProps, Component} from 'svelte';
 
-import type Dialog from '$lib/Dialog.svelte';
+import type Dialog from './Dialog.svelte';
 
 /**
  * This helper function is needed to construct `Dialog_Params` with type safety.

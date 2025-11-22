@@ -2,7 +2,7 @@
 	import type {Snippet} from 'svelte';
 	import type {HTMLAttributes} from 'svelte/elements';
 
-	import {alert_status_options, type Alert_Status} from '$lib/alert.js';
+	import {alert_status_options, type Alert_Status} from './alert.js';
 
 	/**
 	 * @see https://www.w3.org/WAI/ARIA/apg/patterns/alert/

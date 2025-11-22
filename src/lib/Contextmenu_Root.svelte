@@ -26,10 +26,10 @@
 		Contextmenu_State,
 		contextmenu_open,
 		contextmenu_check_global_root,
-	} from '$lib/contextmenu_state.svelte.js';
-	import Contextmenu_Link_Entry from '$lib/Contextmenu_Link_Entry.svelte';
-	import Contextmenu_Text_Entry from '$lib/Contextmenu_Text_Entry.svelte';
-	import Contextmenu_Separator from '$lib/Contextmenu_Separator.svelte';
+	} from './contextmenu_state.svelte.js';
+	import Contextmenu_Link_Entry from './Contextmenu_Link_Entry.svelte';
+	import Contextmenu_Text_Entry from './Contextmenu_Text_Entry.svelte';
+	import Contextmenu_Separator from './Contextmenu_Separator.svelte';
 	import {
 		CONTEXTMENU_DEFAULT_OPEN_OFFSET_X,
 		CONTEXTMENU_DEFAULT_OPEN_OFFSET_Y,
@@ -40,7 +40,7 @@
 		contextmenu_create_keydown_handler,
 		contextmenu_calculate_constrained_x,
 		contextmenu_calculate_constrained_y,
-	} from '$lib/contextmenu_helpers.js';
+	} from './contextmenu_helpers.js';
 
 	const {
 		contextmenu = new Contextmenu_State(),

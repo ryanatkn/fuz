@@ -4,13 +4,13 @@
 	import {page} from '$app/state';
 	import {resolve} from '$app/paths';
 
-	import Hashlink from '$lib/Hashlink.svelte';
+	import Hashlink from './Hashlink.svelte';
 	import {
 		register_section_header_context,
 		section_depth_context,
 		section_id_context,
-	} from '$lib/Tome_Section.svelte';
-	import {docs_links_context, docs_slugify, type Docs_Link_Tag} from '$lib/docs_helpers.svelte.js';
+	} from './Tome_Section.svelte';
+	import {docs_links_context, docs_slugify, type Docs_Link_Tag} from './docs_helpers.svelte.js';
 
 	const {
 		text,

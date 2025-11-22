@@ -22,7 +22,7 @@ import ts from 'typescript';
 import {readFileSync} from 'node:fs';
 import {svelte2tsx} from 'svelte2tsx';
 
-import type {Identifier_Json, Module_Json, Src_Json} from '$lib/src_json.js';
+import type {Identifier_Json, Module_Json, Src_Json} from './src_json.js';
 import {
 	ts_extract_module_comment,
 	ts_infer_declaration_kind,
@@ -30,16 +30,16 @@ import {
 	ts_extract_type_info,
 	ts_extract_class_info,
 	ts_extract_variable_info,
-} from '$lib/ts_helpers.js';
-import {tsdoc_parse, tsdoc_apply_to_declaration} from '$lib/tsdoc_helpers.js';
-import {svelte_analyze_component} from '$lib/svelte_helpers.js';
+} from './ts_helpers.js';
+import {tsdoc_parse, tsdoc_apply_to_declaration} from './tsdoc_helpers.js';
+import {svelte_analyze_component} from './svelte_helpers.js';
 import {
 	module_extract_path,
 	module_get_component_name,
 	module_is_typescript,
 	module_is_svelte,
 	module_is_source,
-} from '$lib/module_helpers.js';
+} from './module_helpers.js';
 
 /**
  * Validates that no identifier names are duplicated across modules.

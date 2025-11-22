@@ -2,8 +2,8 @@ import {color_schemes, type Color_Scheme, type Theme} from '@ryanatkn/moss/theme
 import {default_themes} from '@ryanatkn/moss/themes.js';
 import {BROWSER} from 'esm-env';
 
-import {create_context} from '$lib/context_helpers.js';
-import {load_from_storage, save_to_storage} from '$lib/storage.js';
+import {create_context} from './context_helpers.js';
+import {load_from_storage, save_to_storage} from './storage.js';
 
 export class Themer {
 	theme: Theme = $state()!;

@@ -1,14 +1,14 @@
 <script lang="ts">
 	import {page} from '$app/state';
 
-	import Docs_Modules_List from '$lib/Docs_Modules_List.svelte';
-	import Docs_Page_Links from '$lib/Docs_Page_Links.svelte';
-	import {to_tome_pathname, Tome} from '$lib/tome.js';
-	import {docs_links_context, DOCS_API_PATH} from '$lib/docs_helpers.svelte.js';
-	import {pkg_context} from '$lib/pkg.svelte.js';
-	import Tome_Link from '$lib/Tome_Link.svelte';
-	import Module_Link from '$lib/Module_Link.svelte';
-	import Identifier_Link from '$lib/Identifier_Link.svelte';
+	import Docs_Modules_List from './Docs_Modules_List.svelte';
+	import Docs_Page_Links from './Docs_Page_Links.svelte';
+	import {to_tome_pathname, Tome} from './tome.js';
+	import {docs_links_context, DOCS_API_PATH} from './docs_helpers.svelte.js';
+	import {pkg_context} from './pkg.svelte.js';
+	import Tome_Link from './Tome_Link.svelte';
+	import Module_Link from './Module_Link.svelte';
+	import Identifier_Link from './Identifier_Link.svelte';
 
 	interface Props {
 		tomes: Array<Tome>;

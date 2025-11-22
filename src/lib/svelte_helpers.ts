@@ -15,8 +15,8 @@
 
 import ts from 'typescript';
 
-import type {Identifier_Json, Component_Prop_Info} from '$lib/src_json.js';
-import {tsdoc_parse, tsdoc_apply_to_declaration} from '$lib/tsdoc_helpers.js';
+import type {Identifier_Json, Component_Prop_Info} from './src_json.js';
+import {tsdoc_parse, tsdoc_apply_to_declaration} from './tsdoc_helpers.js';
 
 /**
  * Analyze a Svelte component from its svelte2tsx transformation.

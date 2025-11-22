@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Docs_Menu from '$lib/Docs_Menu.svelte';
-	import {Tome} from '$lib/tome.js';
+	import Docs_Menu from './Docs_Menu.svelte';
+	import {Tome} from './tome.js';
 
 	interface Props {
 		tomes: Array<Tome>;

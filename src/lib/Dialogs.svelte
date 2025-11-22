@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
 
-	import type {Dialog_Params} from '$lib/dialog.js';
-	import Dialog from '$lib/Dialog.svelte';
+	import type {Dialog_Params} from './dialog.js';
+	import Dialog from './Dialog.svelte';
 
 	// TODO this is experimental
 

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Contextmenu_Entry from '$lib/Contextmenu_Entry.svelte';
-	import type {Contextmenu_Run} from '$lib/contextmenu_state.svelte.js';
+	import Contextmenu_Entry from './Contextmenu_Entry.svelte';
+	import type {Contextmenu_Run} from './contextmenu_state.svelte.js';
 
 	interface Props {
 		run: Contextmenu_Run;

@@ -6,9 +6,9 @@ import type {SvelteHTMLElements} from 'svelte/elements';
 import {EMPTY_OBJECT} from '@ryanatkn/belt/object.js';
 import type {Attachment} from 'svelte/attachments';
 
-import {Dimensions} from '$lib/dimensions.svelte.js';
-import {create_context} from '$lib/context_helpers.js';
-import {url_to_root_relative} from '$lib/package_helpers.js';
+import {Dimensions} from './dimensions.svelte.js';
+import {create_context} from './context_helpers.js';
+import {url_to_root_relative} from './package_helpers.js';
 
 export type Contextmenu_Params =
 	| Snippet

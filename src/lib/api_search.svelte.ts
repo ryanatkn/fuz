@@ -1,5 +1,5 @@
-import type {Identifier} from '$lib/identifier.svelte.js';
-import type {Pkg} from '$lib/pkg.svelte.js';
+import type {Identifier} from './identifier.svelte.js';
+import type {Pkg} from './pkg.svelte.js';
 
 interface Identifier_Search_State {
 	query: string;

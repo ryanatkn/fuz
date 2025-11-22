@@ -6,8 +6,8 @@
 
 import ts from 'typescript';
 
-import type {Identifier_Json, Generic_Param_Info, Identifier_Kind} from '$lib/src_json.js';
-import {tsdoc_parse} from '$lib/tsdoc_helpers.js';
+import type {Identifier_Json, Generic_Param_Info, Identifier_Kind} from './src_json.js';
+import {tsdoc_parse} from './tsdoc_helpers.js';
 
 const ts_parse_generic_param = (param: ts.TypeParameterDeclaration): Generic_Param_Info => {
 	const result: Generic_Param_Info = {

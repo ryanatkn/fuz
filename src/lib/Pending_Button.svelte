@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
 
-	import Pending_Animation from '$lib/Pending_Animation.svelte';
+	import Pending_Animation from './Pending_Animation.svelte';
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
 	const {

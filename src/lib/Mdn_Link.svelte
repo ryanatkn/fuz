@@ -2,8 +2,8 @@
 	import {strip_end, strip_start} from '@ryanatkn/belt/string.js';
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
-	import Svg from '$lib/Svg.svelte';
-	import {mdn_logo} from '$lib/logos.js';
+	import Svg from './Svg.svelte';
+	import {mdn_logo} from './logos.js';
 
 	const {
 		path,

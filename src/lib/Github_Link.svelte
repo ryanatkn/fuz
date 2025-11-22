@@ -3,8 +3,8 @@
 	import type {SvelteHTMLElements} from 'svelte/elements';
 	import {DEV} from 'esm-env';
 
-	import Svg from '$lib/Svg.svelte';
-	import {github_logo} from '$lib/logos.js';
+	import Svg from './Svg.svelte';
+	import {github_logo} from './logos.js';
 
 	const {
 		path,

@@ -1,11 +1,11 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
 
-	import Module_Link from '$lib/Module_Link.svelte';
-	import Identifier_Link from '$lib/Identifier_Link.svelte';
-	import {pkg_context} from '$lib/pkg.svelte.js';
-	import type {Identifier} from '$lib/identifier.svelte.js';
-	import type {Module} from '$lib/module.svelte.js';
+	import Module_Link from './Module_Link.svelte';
+	import Identifier_Link from './Identifier_Link.svelte';
+	import {pkg_context} from './pkg.svelte.js';
+	import type {Identifier} from './identifier.svelte.js';
+	import type {Module} from './module.svelte.js';
 
 	const {
 		reference,

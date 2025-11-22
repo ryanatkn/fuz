@@ -1,5 +1,5 @@
-import type {Identifier} from '$lib/identifier.svelte.js';
-import type {Contextmenu_Params} from '$lib/contextmenu_state.svelte.js';
+import type {Identifier} from './identifier.svelte.js';
+import type {Contextmenu_Params} from './contextmenu_state.svelte.js';
 
 // TODO @many expand contextmenus for docs
 

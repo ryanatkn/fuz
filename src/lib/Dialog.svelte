@@ -3,8 +3,8 @@
 	import {is_editable, swallow} from '@ryanatkn/belt/dom.js';
 	import {wait} from '@ryanatkn/belt/async.js';
 
-	import Teleport from '$lib/Teleport.svelte';
-	import type {Dialog_Layout} from '$lib/dialog.js';
+	import Teleport from './Teleport.svelte';
+	import type {Dialog_Layout} from './dialog.js';
 
 	// TODO use `<dialog>` here instead of `Teleport`
 	// https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog

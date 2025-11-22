@@ -1,7 +1,7 @@
-import {Identifier} from '$lib/identifier.svelte.js';
-import type {Pkg} from '$lib/pkg.svelte.js';
-import type {Module_Json} from '$lib/src_json.js';
-import {url_github_file, url_api_module} from '$lib/package_helpers.js';
+import {Identifier} from './identifier.svelte.js';
+import type {Pkg} from './pkg.svelte.js';
+import type {Module_Json} from './src_json.js';
+import {url_github_file, url_api_module} from './package_helpers.js';
 
 /**
  * Rich runtime representation of Module_Json with computed properties.

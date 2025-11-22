@@ -1,4 +1,4 @@
-import type {Csp_Source_Spec} from '$lib/csp.js';
+import type {Csp_Source_Spec} from './csp.js';
 
 /**
  * Trusted sources owned by ryanatkn.

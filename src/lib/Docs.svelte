@@ -3,16 +3,16 @@
 	import {onNavigate} from '$app/navigation';
 	import {innerWidth} from 'svelte/reactivity/window';
 	import {page} from '$app/state';
-	import type {Pkg} from '$lib/pkg.svelte.js';
 
-	import Breadcrumb from '$lib/Breadcrumb.svelte';
-	import {Tome, tomes_context} from '$lib/tome.js';
-	import Docs_Primary_Nav from '$lib/Docs_Primary_Nav.svelte';
-	import Docs_Secondary_Nav from '$lib/Docs_Secondary_Nav.svelte';
-	import Docs_Tertiary_Nav from '$lib/Docs_Tertiary_Nav.svelte';
-	import Dialog from '$lib/Dialog.svelte';
-	import Docs_Footer from '$lib/Docs_Footer.svelte';
-	import {Docs_Links, docs_links_context} from '$lib/docs_helpers.svelte.js';
+	import type {Pkg} from './pkg.svelte.js';
+	import Breadcrumb from './Breadcrumb.svelte';
+	import {Tome, tomes_context} from './tome.js';
+	import Docs_Primary_Nav from './Docs_Primary_Nav.svelte';
+	import Docs_Secondary_Nav from './Docs_Secondary_Nav.svelte';
+	import Docs_Tertiary_Nav from './Docs_Tertiary_Nav.svelte';
+	import Dialog from './Dialog.svelte';
+	import Docs_Footer from './Docs_Footer.svelte';
+	import {Docs_Links, docs_links_context} from './docs_helpers.svelte.js';
 
 	interface Props {
 		tomes: Array<Tome>;

@@ -2,8 +2,8 @@
 	import {DEV} from 'esm-env';
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
-	import {get_tome_by_name, to_tome_pathname} from '$lib/tome.js';
-	import {DOCS_PATH_DEFAULT} from '$lib/docs_helpers.svelte.js';
+	import {get_tome_by_name, to_tome_pathname} from './tome.js';
+	import {DOCS_PATH_DEFAULT} from './docs_helpers.svelte.js';
 
 	const {
 		name,

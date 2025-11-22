@@ -1,7 +1,8 @@
 <script lang="ts" generics="T extends string = 'span'">
 	import type {Snippet} from 'svelte';
-	import {contextmenu_attachment} from '$lib/contextmenu_state.svelte.js';
 	import type {SvelteHTMLElements} from 'svelte/elements';
+
+	import {contextmenu_attachment} from './contextmenu_state.svelte.js';
 
 	const {
 		tag = 'span' as T, // TODO why is casting needed?

@@ -1,5 +1,5 @@
 <script lang="ts" module>
-	import {create_context} from '$lib/context_helpers.js';
+	import {create_context} from './context_helpers.js';
 
 	export type Register_Section_Header = (fragment: string) => string | undefined;
 	export const register_section_header_context = create_context<Register_Section_Header>();
@@ -12,8 +12,8 @@
 	import type {SvelteHTMLElements} from 'svelte/elements';
 	import {DEV} from 'esm-env';
 
-	import {intersect} from '$lib/intersect.svelte.js';
-	import {docs_links_context} from '$lib/docs_helpers.svelte.js';
+	import {intersect} from './intersect.svelte.js';
+	import {docs_links_context} from './docs_helpers.svelte.js';
 
 	const {
 		children,
