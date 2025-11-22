@@ -1,5 +1,5 @@
 ---
-'@ryanatkn/fuz': minor
+'@ryanatkn/fuz': patch
 ---
 
-support `@internal` tsdoc tag and change `ts_analyze_identifier`'s interface
+support `@internal` tsdoc tag
