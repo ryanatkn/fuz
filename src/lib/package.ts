@@ -2,7 +2,7 @@
 // Do not edit directly - regenerated on build
 
 import type {Package_Json} from '@ryanatkn/belt/package_json.js';
-import type {Src_Json} from './src_json.js';
+import type {Src_Json} from '$lib/src_json.js';
 
 export const package_json: Package_Json = {
 	name: '@ryanatkn/fuz',
@@ -60,7 +60,7 @@ export const package_json: Package_Json = {
 	devDependencies: {
 		'@changesets/changelog-git': '^0.2.1',
 		'@ryanatkn/belt': '^0.37.2',
-		'@ryanatkn/eslint-config': '^0.8.1',
+		'@ryanatkn/eslint-config': '^0.9.0',
 		'@ryanatkn/fuz_code': '^0.32.0',
 		'@ryanatkn/gro': '^0.173.2',
 		'@ryanatkn/moss': '^0.37.0',
@@ -3592,7 +3592,7 @@ export const src_json: Src_Json = {
 					kind: 'type',
 					doc_comment:
 						"Component registry for custom Svelte components that can be used in mdz content.\n\nFor example, registering 'Alert' allows using `<Alert>...</Alert>` in mdz content.\n\nThe Map values are the Svelte component constructors.",
-					source_line: 11,
+					source_line: 12,
 					type_signature: 'Mdz_Components',
 				},
 				{
@@ -3600,7 +3600,7 @@ export const src_json: Src_Json = {
 					kind: 'type',
 					doc_comment:
 						"Element registry for HTML elements that can be used in mdz content.\n\nFor example, registering 'div' allows using `<div>...</div>` in mdz content.\n\nThe Map values are boolean placeholders for future configuration options.",
-					source_line: 20,
+					source_line: 21,
 					type_signature: 'Mdz_Elements',
 				},
 				{
@@ -3608,7 +3608,7 @@ export const src_json: Src_Json = {
 					kind: 'variable',
 					doc_comment:
 						'Context for providing custom mdz components.\nMust be set by the application using mdz.',
-					source_line: 26,
+					source_line: 27,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Mdz_Components; get_maybe: () => Mdz_Components | undefined; set: (value: Mdz_Components) => Mdz_Components; }',
 				},
@@ -3617,7 +3617,7 @@ export const src_json: Src_Json = {
 					kind: 'variable',
 					doc_comment:
 						'Context for providing allowed HTML elements.\nMust be set by the application using mdz.\nBy default, no HTML elements are allowed.',
-					source_line: 33,
+					source_line: 34,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Mdz_Elements; get_maybe: () => Mdz_Elements | undefined; set: (value: Mdz_Elements) => Mdz_Elements; }',
 				},
