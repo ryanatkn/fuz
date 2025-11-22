@@ -147,9 +147,10 @@ Supporting helpers (three-layer architecture):
   - `svelte_analyze_file` - analyze a .svelte file from disk (reusable)
   - `svelte_analyze_component` - analyze from svelte2tsx output
 - `module_helpers.ts` - module path utilities and source detection
-  - `module_is_source`, `module_is_typescript`, `module_is_svelte` - predicates
+  - `module_matches_source` - configurable source detection predicate
+  - `module_is_typescript`, `module_is_svelte` - simple extension predicates
   - `module_extract_path`, `module_get_component_name` - path utilities
-  - `Module_Source_Options` - configurable source detection options
+  - `Module_Source_Options`, `MODULE_SOURCE_DEFAULTS` - configuration
 - `src_json.ts` - type definitions for the metadata format
 - `package_helpers.ts` - URL builders (`url_github_file`, `url_api_identifier`,
   `url_api_module`, etc.)
@@ -286,7 +287,7 @@ TypeScript and Svelte analysis:
 - `tsdoc_helpers.ts` - TSDoc/JSDoc parsing
   - `tsdoc_parse`, `tsdoc_apply_to_declaration`
 - `module_helpers.ts` - module path utilities
-  - predicates: `module_is_source`, `module_is_typescript`, `module_is_svelte`
+  - predicates: `module_matches_source`, `module_is_typescript`, `module_is_svelte`
   - utilities: `module_extract_path`, `module_get_component_name`
   - configuration: `Module_Source_Options`, `MODULE_SOURCE_DEFAULTS`
 - `package_gen_helpers.ts` - Gro-specific build-time helpers

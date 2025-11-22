@@ -73,26 +73,16 @@ export const module_is_json = (path: string): boolean => path.endsWith('.json');
 export const module_is_test = (path: string): boolean => path.endsWith('.test.ts');
 
 /**
- * Check if ID is a source file in src/lib (excluding tests).
+ * Check if a path matches source criteria.
  *
- * For customizable source detection, use `module_matches_source_options`.
- */
-export const module_is_source = (id: string): boolean =>
-	id.includes('/src/lib/') && !module_is_test(id);
-
-/**
- * Check if a path matches the configured source options.
- *
- * More flexible than `module_is_source`, allowing custom source paths,
- * extensions, and exclusion patterns.
+ * Checks source directory paths, file extensions, and exclusion patterns.
+ * Uses defaults if no options provided.
  *
  * @param path Full path to check
  * @param options Configuration options (uses defaults if not provided)
+ * @returns True if the path matches all criteria
  */
-export const module_matches_source_options = (
-	path: string,
-	options?: Module_Source_Options,
-): boolean => {
+export const module_matches_source = (path: string, options?: Module_Source_Options): boolean => {
 	const opts = {...MODULE_SOURCE_DEFAULTS, ...options};
 
 	// Check if path is in one of the source directories

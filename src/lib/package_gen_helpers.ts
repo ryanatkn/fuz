@@ -4,7 +4,7 @@
  * These functions handle Gro-specific concerns like file collection and dependency
  * graph extraction. Core analysis logic has been extracted to reusable helpers:
  *
- * - `ts_helpers.ts` - `ts_analyze_identifier`, `ts_analyze_module_exports`
+ * - `ts_helpers.ts` - `ts_analyze_module_exports`
  * - `svelte_helpers.ts` - `svelte_analyze_file`
  * - `module_helpers.ts` - path utilities and source detection
  *
@@ -24,13 +24,13 @@ import type {Disknode} from '@ryanatkn/gro/disknode.js';
 import type ts from 'typescript';
 
 import type {Module_Json, Src_Json} from './src_json.js';
-import {ts_analyze_identifier, ts_analyze_module_exports} from './ts_helpers.js';
+import {ts_analyze_module_exports} from './ts_helpers.js';
 import {svelte_analyze_file} from './svelte_helpers.js';
 import {
 	module_extract_path,
 	module_is_typescript,
 	module_is_svelte,
-	module_is_source,
+	module_matches_source,
 } from './module_helpers.js';
 
 /**
@@ -81,14 +81,6 @@ export const package_gen_validate_no_duplicates = (src_json: Src_Json, log: Logg
 };
 
 /**
- * Enhance a single identifier with rich metadata from TypeScript analysis.
- *
- * @deprecated Use `ts_analyze_identifier` from `ts_helpers.ts` directly.
- * This is kept for backwards compatibility but delegates to the extracted function.
- */
-export const package_gen_enhance_identifier = ts_analyze_identifier;
-
-/**
  * Sort modules alphabetically by path for deterministic output and cleaner diffs.
  */
 export const package_gen_sort_modules = (modules: Array<Module_Json>): Array<Module_Json> => {
@@ -124,7 +116,7 @@ export const package_gen_collect_source_files = (filer: Filer, log: Logger): Arr
 
 	const source_disknodes: Array<Disknode> = [];
 	for (const [id, disknode] of filer.files.entries()) {
-		if (module_is_source(id)) {
+		if (module_matches_source(id)) {
 			// Include TypeScript/JS files and Svelte components
 			if (module_is_typescript(id) || module_is_svelte(id)) {
 				source_disknodes.push(disknode);
@@ -219,14 +211,14 @@ export const package_gen_extract_dependencies = (
 
 	// Extract dependencies (files this module imports)
 	for (const dep_id of disknode.dependencies.keys()) {
-		if (module_is_source(dep_id)) {
+		if (module_matches_source(dep_id)) {
 			dependencies.push(module_extract_path(dep_id));
 		}
 	}
 
 	// Extract dependents (files that import this module)
 	for (const dependent_id of disknode.dependents.keys()) {
-		if (module_is_source(dependent_id)) {
+		if (module_matches_source(dependent_id)) {
 			dependents.push(module_extract_path(dependent_id));
 		}
 	}
