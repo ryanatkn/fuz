@@ -319,4 +319,46 @@ export class Service {
 		assert.ok(service);
 		assert.strictEqual(service.kind, 'class');
 	});
+
+	test('excludes @internal identifiers from exports', () => {
+		const source_code = `
+/**
+ * Module with internal exports.
+ */
+
+export const public_value = 42;
+
+/**
+ * Internal helper not part of public API.
+ * @internal
+ */
+export function internal_helper(): void {}
+
+/** @internal */
+export type Internal_Type = { secret: string };
+
+export function public_function(): string {
+	return 'public';
+}
+`;
+
+		const source_file = ts.createSourceFile(
+			'internal.ts',
+			source_code,
+			ts.ScriptTarget.Latest,
+			true,
+		);
+		const {checker} = create_test_program(source_file, 'internal.ts');
+
+		const result = ts_analyze_module_exports(source_file, checker);
+
+		// Should only have 2 public identifiers (internal ones excluded)
+		assert.strictEqual(result.identifiers.length, 2);
+
+		const names = result.identifiers.map((i) => i.name);
+		assert.include(names, 'public_value');
+		assert.include(names, 'public_function');
+		assert.notInclude(names, 'internal_helper');
+		assert.notInclude(names, 'Internal_Type');
+	});
 });

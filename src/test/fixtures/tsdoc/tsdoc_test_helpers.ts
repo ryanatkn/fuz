@@ -120,4 +120,19 @@ export const validate_tsdoc_structure = (tsdoc: Tsdoc_Parsed_Comment | undefined
 	if (tsdoc.since !== undefined && typeof tsdoc.since !== 'string') {
 		throw new Error('Expected tsdoc.since to be a string');
 	}
+
+	if (tsdoc.mutates !== undefined) {
+		if (!Array.isArray(tsdoc.mutates)) {
+			throw new Error('Expected tsdoc.mutates to be an array');
+		}
+		for (const m of tsdoc.mutates) {
+			if (typeof m !== 'string') {
+				throw new Error('Expected mutates entry to be a string');
+			}
+		}
+	}
+
+	if (tsdoc.internal !== undefined && typeof tsdoc.internal !== 'boolean') {
+		throw new Error('Expected tsdoc.internal to be a boolean');
+	}
 };
