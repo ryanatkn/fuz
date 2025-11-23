@@ -1,7 +1,7 @@
 import {test, assert, describe, beforeAll} from 'vitest';
 import ts from 'typescript';
+import type {Identifier_Json} from '@ryanatkn/belt/src_json.js';
 
-import type {Identifier_Json} from '$lib/src_json.js';
 import {ts_analyze_module_exports} from '$lib/ts_helpers.js';
 import {
 	load_fixtures,

@@ -1,7 +1,7 @@
 import type {Package_Json} from '@ryanatkn/belt/package_json.js';
+import type {Src_Json} from '@ryanatkn/belt/src_json.js';
 
 import {create_context} from './context_helpers.js';
-import type {Src_Json} from './src_json.js';
 import {Identifier} from './identifier.svelte.js';
 import {Module} from './module.svelte.js';
 import {

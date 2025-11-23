@@ -1,6 +1,6 @@
 import ts from 'typescript';
+import type {Identifier_Json} from '@ryanatkn/belt/src_json.js';
 
-import type {Identifier_Json} from '$lib/src_json.js';
 import {load_fixtures_generic} from '../../test_helpers.js';
 import {
 	ts_infer_declaration_kind,

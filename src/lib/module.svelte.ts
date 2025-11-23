@@ -1,6 +1,7 @@
+import type {Module_Json} from '@ryanatkn/belt/src_json.js';
+
 import {Identifier} from './identifier.svelte.js';
 import type {Pkg} from './pkg.svelte.js';
-import type {Module_Json} from './src_json.js';
 import {url_github_file, url_api_module} from './package_helpers.js';
 
 /**

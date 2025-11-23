@@ -11,7 +11,7 @@
  * - Dependency graphs
  * - Svelte component props
  *
- * @see src/lib/src_json.ts for type definitions
+ * @see @ryanatkn/belt/src_json.js for type definitions
  * @see src/lib/package_gen_helpers.ts for buildtime-only helpers
  * @see src/lib/tsdoc_helpers.ts for JSDoc/TSDoc parsing
  * @see src/lib/ts_helpers.ts for TypeScript analysis
@@ -20,8 +20,8 @@
 
 import type {Gen} from '@ryanatkn/gro';
 import {load_package_json} from '@ryanatkn/gro/package_json.js';
+import type {Src_Json} from '@ryanatkn/belt/src_json.js';
 
-import type {Src_Json} from './src_json.js';
 import {ts_create_program, type Re_Export_Info} from './ts_helpers.js';
 import {module_extract_path, module_is_svelte} from './module_helpers.js';
 import {
@@ -51,7 +51,7 @@ export const gen: Gen = async ({log, filer}) => {
 	const checker = program.getTypeChecker();
 
 	// Collect source files from filer
-	const source_disknodes = package_gen_collect_source_files(filer, log);
+	const source_disknodes = package_gen_collect_source_files(filer.files, log);
 
 	// Build src.json with array-based modules
 	// Phase 1: Analyze all modules and collect re-exports

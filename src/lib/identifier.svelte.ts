@@ -1,9 +1,10 @@
-import type {Module} from './module.svelte.js';
 import {
 	type Identifier_Json,
-	generate_import_statement,
-	get_identifier_display_name,
-} from './src_json.js';
+	identifier_generate_import,
+	identifier_get_display_name,
+} from '@ryanatkn/belt/src_json.js';
+
+import type {Module} from './module.svelte.js';
 import {url_api_identifier, url_api_identifier_full, url_github_file} from './package_helpers.js';
 
 /**
@@ -62,7 +63,7 @@ export class Identifier {
 	 * Example: "import {Alert} from '@ryanatkn/fuz/Alert.js';"
 	 */
 	import_statement = $derived(
-		generate_import_statement(this.identifier_json, this.module_path, this.pkg.package_json.name),
+		identifier_generate_import(this.identifier_json, this.module_path, this.pkg.package_json.name),
 	);
 
 	/**
@@ -77,7 +78,7 @@ export class Identifier {
 	 * Display name with generic parameters.
 	 * Example: "Map<K extends string, V = unknown>"
 	 */
-	display_name = $derived(get_identifier_display_name(this.identifier_json));
+	display_name = $derived(identifier_get_display_name(this.identifier_json));
 
 	// Direct accessors for identifier_json properties
 	// These provide convenient access without repeatedly typing `.identifier_json`
@@ -114,8 +115,12 @@ export class Identifier {
 	/**
 	 * Class members (for classes).
 	 */
-	members = $derived(this.identifier_json.members);
-	properties = $derived(this.identifier_json.properties);
+	members: Array<Identifier_Json> | undefined = $derived(
+		this.identifier_json.members as Array<Identifier_Json> | undefined,
+	);
+	properties: Array<Identifier_Json> | undefined = $derived(
+		this.identifier_json.properties as Array<Identifier_Json> | undefined,
+	);
 
 	has_examples = $derived(!!(this.examples && this.examples.length > 0));
 	is_deprecated = $derived(!!this.deprecated_message);

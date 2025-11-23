@@ -38,6 +38,7 @@
  */
 
 import ts from 'typescript';
+import type {Identifier_Json} from '@ryanatkn/belt/src_json.js';
 
 /**
  * Parsed JSDoc/TSDoc comment with structured metadata.
@@ -234,7 +235,7 @@ export const tsdoc_parse = (
  * @mutates identifier - adds doc_comment, deprecated_message, examples, see_also, throws, since fields
  */
 export const tsdoc_apply_to_declaration = (
-	identifier: any, // Using any to avoid circular import with src_json.ts
+	identifier: Identifier_Json,
 	tsdoc: Tsdoc_Parsed_Comment | undefined,
 ): void => {
 	if (!tsdoc) return;

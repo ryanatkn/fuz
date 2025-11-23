@@ -1,6 +1,7 @@
 import {test, assert, describe} from 'vitest';
 import type {Logger} from '@ryanatkn/belt/log.js';
 import type {Package_Json} from '@ryanatkn/belt/package_json.js';
+import type {Src_Json, Module_Json, Identifier_Kind} from '@ryanatkn/belt/src_json.js';
 import type {Disknode} from '@ryanatkn/gro/disknode.js';
 
 import {
@@ -9,7 +10,6 @@ import {
 	package_gen_generate_ts,
 	package_gen_extract_dependencies,
 } from '$lib/package_gen_helpers.js';
-import type {Src_Json, Module_Json, Identifier_Kind} from '$lib/src_json.js';
 
 /**
  * Create a mock logger that captures log calls for testing validation output.

@@ -16,8 +16,8 @@
 import ts from 'typescript';
 import {readFileSync} from 'node:fs';
 import {svelte2tsx} from 'svelte2tsx';
+import type {Identifier_Json, Component_Prop_Info} from '@ryanatkn/belt/src_json.js';
 
-import type {Identifier_Json, Component_Prop_Info} from './src_json.js';
 import {tsdoc_parse, tsdoc_apply_to_declaration} from './tsdoc_helpers.js';
 import {module_get_component_name} from './module_helpers.js';
 
