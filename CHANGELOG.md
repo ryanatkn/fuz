@@ -4,7 +4,7 @@
 
 ### Minor Changes
 
-- rework `@internal` to `@nodocs` ([#96](https://github.com/ryanatkn/fuz/pull/96))
+- rework `@internal` to `@nodocs` and support re-exports in docs ([#96](https://github.com/ryanatkn/fuz/pull/96))
 
 ## 0.154.0
 
