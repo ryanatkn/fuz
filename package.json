@@ -55,7 +55,7 @@
     "@changesets/changelog-git": "^0.2.1",
     "@ryanatkn/belt": "^0.38.0",
     "@ryanatkn/eslint-config": "^0.9.0",
-    "@ryanatkn/fuz_code": "^0.32.0",
+    "@ryanatkn/fuz_code": "^0.33.0",
     "@ryanatkn/gro": "^0.174.1",
     "@ryanatkn/moss": "^0.37.0",
     "@sveltejs/adapter-static": "^3.0.10",
