@@ -1,5 +1,15 @@
 # @ryanatkn/fuz
 
+## 0.158.0
+
+### Minor Changes
+
+- upgrade moss ([6852bfc](https://github.com/ryanatkn/fuz/commit/6852bfc))
+
+### Patch Changes
+
+- use >= for ecosystem peer deps ([6852bfc](https://github.com/ryanatkn/fuz/commit/6852bfc))
+
 ## 0.157.0
 
 ### Minor Changes
