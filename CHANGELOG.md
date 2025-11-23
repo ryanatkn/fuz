@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.157.0
+
+### Minor Changes
+
+- upstream src_json fully to belt ([816d708](https://github.com/ryanatkn/fuz/commit/816d708))
+
 ## 0.156.0
 
 ### Minor Changes
