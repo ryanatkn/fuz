@@ -8,6 +8,7 @@ import ts from 'typescript';
 
 import type {Identifier_Json, Generic_Param_Info, Identifier_Kind} from './src_json.js';
 import {tsdoc_parse, tsdoc_apply_to_declaration} from './tsdoc_helpers.js';
+import {module_extract_path, module_matches_source} from './module_helpers.js';
 
 const ts_parse_generic_param = (param: ts.TypeParameterDeclaration): Generic_Param_Info => {
 	const result: Generic_Param_Info = {
@@ -385,8 +386,8 @@ export const ts_extract_variable_info = (
 export interface Ts_Identifier_Analysis {
 	/** The analyzed identifier metadata. */
 	identifier: Identifier_Json;
-	/** Whether the identifier is marked @internal (should be excluded from public API). */
-	internal: boolean;
+	/** Whether the identifier is marked @nodocs (should be excluded from documentation). */
+	nodocs: boolean;
 }
 
 /**
@@ -399,7 +400,7 @@ export interface Ts_Identifier_Analysis {
  * @param symbol The TypeScript symbol to analyze
  * @param source_file The source file containing the symbol
  * @param checker The TypeScript type checker
- * @returns Complete identifier metadata including docs, types, and parameters, plus internal flag
+ * @returns Complete identifier metadata including docs, types, and parameters, plus nodocs flag
  */
 export const ts_analyze_identifier = (
 	symbol: ts.Symbol,
@@ -418,12 +419,12 @@ export const ts_analyze_identifier = (
 	};
 
 	if (!decl_node) {
-		return {identifier: result, internal: false};
+		return {identifier: result, nodocs: false};
 	}
 
 	// Extract TSDoc
 	const tsdoc = tsdoc_parse(decl_node, source_file);
-	const internal = tsdoc?.internal ?? false;
+	const nodocs = tsdoc?.nodocs ?? false;
 	tsdoc_apply_to_declaration(result, tsdoc);
 
 	// Extract source line
@@ -442,8 +443,19 @@ export const ts_analyze_identifier = (
 		ts_extract_variable_info(decl_node, symbol, checker, result);
 	}
 
-	return {identifier: result, internal};
+	return {identifier: result, nodocs};
 };
+
+/**
+ * Information about a same-name re-export.
+ * Used for post-processing to build `also_exported_from` arrays.
+ */
+export interface Re_Export_Info {
+	/** Name of the re-exported identifier. */
+	name: string;
+	/** Module path (relative to src/lib) where the identifier is originally declared. */
+	original_module: string;
+}
 
 /**
  * Result of analyzing a module's exports.
@@ -451,26 +463,32 @@ export const ts_analyze_identifier = (
 export interface Module_Exports_Analysis {
 	/** Module-level documentation comment. */
 	module_comment?: string;
-	/** All exported identifiers with their metadata. */
+	/** All exported identifiers with their metadata (excludes same-name re-exports). */
 	identifiers: Array<Identifier_Json>;
+	/** Same-name re-exports (for building also_exported_from in post-processing). */
+	re_exports: Array<Re_Export_Info>;
 }
 
 /**
  * Analyze all exports from a TypeScript source file.
  *
  * Extracts the module-level comment and all exported identifiers with
- * complete metadata. This is a high-level function suitable for building
- * documentation, API explorers, or analysis tools.
+ * complete metadata. Handles re-exports by:
+ * - Same-name re-exports: tracked in `re_exports` for `also_exported_from` building
+ * - Renamed re-exports: included as new identifiers with `alias_of` metadata
+ *
+ * This is a high-level function suitable for building documentation, API explorers, or analysis tools.
  *
  * @param source_file The TypeScript source file to analyze
  * @param checker The TypeScript type checker
- * @returns Module comment and array of analyzed identifiers
+ * @returns Module comment, array of analyzed identifiers, and re-export information
  */
 export const ts_analyze_module_exports = (
 	source_file: ts.SourceFile,
 	checker: ts.TypeChecker,
 ): Module_Exports_Analysis => {
 	const identifiers: Array<Identifier_Json> = [];
+	const re_exports: Array<Re_Export_Info> = [];
 
 	// Extract module-level comment
 	const module_comment = ts_extract_module_comment(source_file);
@@ -480,9 +498,54 @@ export const ts_analyze_module_exports = (
 	if (symbol) {
 		const exports = checker.getExportsOfModule(symbol);
 		for (const export_symbol of exports) {
-			const {identifier, internal} = ts_analyze_identifier(export_symbol, source_file, checker);
-			// Skip @internal identifiers - they're not part of the public API
-			if (internal) continue;
+			// Check if this is an alias (potential re-export) using the Alias flag
+			const is_alias = (export_symbol.flags & ts.SymbolFlags.Alias) !== 0;
+
+			if (is_alias) {
+				// This might be a re-export - use getAliasedSymbol to find the original
+				const aliased_symbol = checker.getAliasedSymbol(export_symbol);
+				const aliased_decl = aliased_symbol.valueDeclaration || aliased_symbol.declarations?.[0];
+
+				if (aliased_decl) {
+					const original_source = aliased_decl.getSourceFile();
+
+					// Check if this is a CROSS-FILE re-export (original in different file)
+					if (original_source.fileName !== source_file.fileName) {
+						// Only track if the original is from a source module (not node_modules)
+						if (module_matches_source(original_source.fileName)) {
+							const original_module = module_extract_path(original_source.fileName);
+							const original_name = aliased_symbol.name;
+							const is_renamed = export_symbol.name !== original_name;
+
+							if (is_renamed) {
+								// Renamed re-export (export {foo as bar}) - create new identifier with alias_of
+								const kind = ts_infer_declaration_kind(aliased_symbol, aliased_decl);
+								const identifier: Identifier_Json = {
+									name: export_symbol.name,
+									kind,
+									alias_of: {module: original_module, name: original_name},
+								};
+								identifiers.push(identifier);
+							} else {
+								// Same-name re-export - track for also_exported_from, skip from identifiers
+								re_exports.push({
+									name: export_symbol.name,
+									original_module,
+								});
+							}
+							continue;
+						}
+						// Re-export from external module (node_modules) - skip entirely
+						continue;
+					}
+					// Within-file alias (export { x as y }) - fall through to normal analysis
+				}
+			}
+
+			// Normal export or within-file alias - declared in this file
+			const {identifier, nodocs} = ts_analyze_identifier(export_symbol, source_file, checker);
+			// Skip @nodocs identifiers - they're excluded from documentation
+			if (nodocs) continue;
 			identifiers.push(identifier);
 		}
 	}
@@ -490,6 +553,7 @@ export const ts_analyze_module_exports = (
 	return {
 		module_comment,
 		identifiers,
+		re_exports,
 	};
 };
 

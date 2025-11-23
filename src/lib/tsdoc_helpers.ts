@@ -14,10 +14,10 @@
  * ## Tag support
  *
  * Supports a subset of standard TSDoc tags:
- * `@param`, `@returns`, `@throws`, `@example`, `@deprecated`, `@see`, `@since`, `@internal`.
+ * `@param`, `@returns`, `@throws`, `@example`, `@deprecated`, `@see`, `@since`, `@nodocs`.
  *
- * The `@internal` tag marks exports as not part of the public API, excluding them from
- * generated documentation and flat namespace validation.
+ * The `@nodocs` tag excludes exports from documentation and flat namespace validation.
+ * The identifier is still exported and usable, just not documented.
  *
  * Also supports `@mutates` (non-standard) for documenting mutations to parameters or external state.
  * Use format: `@mutates paramName - description of mutation`.
@@ -61,8 +61,8 @@ export interface Tsdoc_Parsed_Comment {
 	since?: string;
 	/** Mutation documentation from `@mutates` (non-standard) */
 	mutates?: Array<string>;
-	/** Whether the identifier is internal (not part of public API) from `@internal` */
-	internal?: boolean;
+	/** Whether to exclude from documentation. From `@nodocs` tag. */
+	nodocs?: boolean;
 }
 
 /**
@@ -145,7 +145,7 @@ export const tsdoc_parse = (
 	const see_also: Array<string> = [];
 	let since: string | undefined;
 	const mutates: Array<string> = [];
-	let internal = false;
+	let nodocs = false;
 
 	// Extract main comment text
 	for (const comment of tsdoc_comments) {
@@ -202,8 +202,8 @@ export const tsdoc_parse = (
 			since = tag_text.trim();
 		} else if (tag_name === 'mutates' && tag_text) {
 			mutates.push(tag_text.trim());
-		} else if (tag_name === 'internal') {
-			internal = true;
+		} else if (tag_name === 'nodocs') {
+			nodocs = true;
 		}
 	}
 
@@ -219,7 +219,7 @@ export const tsdoc_parse = (
 		...(see_also.length && {see_also}),
 		since,
 		...(mutates.length && {mutates}),
-		...(internal && {internal}),
+		...(nodocs && {nodocs}),
 	};
 };
 

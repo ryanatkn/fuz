@@ -4220,6 +4220,7 @@ export const src_json: Src_Json = {
 				'package.gen.ts',
 				'package_gen_helpers.ts',
 				'svelte_helpers.ts',
+				'ts_helpers.ts',
 			],
 		},
 		{
@@ -4419,6 +4420,28 @@ export const src_json: Src_Json = {
 			path: 'package_gen_helpers.ts',
 			identifiers: [
 				{
+					name: 'Ts_File_Analysis',
+					kind: 'type',
+					doc_comment:
+						'Result of analyzing a TypeScript file.\nIncludes both the module metadata and re-export information for post-processing.',
+					source_line: 40,
+					type_signature: 'Ts_File_Analysis',
+					properties: [
+						{
+							name: 'module',
+							kind: 'variable',
+							type_signature: 'Module_Json',
+							doc_comment: 'Module metadata for inclusion in src_json.',
+						},
+						{
+							name: 're_exports',
+							kind: 'variable',
+							type_signature: 'Array<Re_Export_Info>',
+							doc_comment: 'Re-exports from this module for building also_exported_from.',
+						},
+					],
+				},
+				{
 					name: 'package_gen_validate_no_duplicates',
 					kind: 'function',
 					doc_comment:
@@ -4429,7 +4452,7 @@ export const src_json: Src_Json = {
 							description: 'if duplicate identifier names are found',
 						},
 					],
-					source_line: 42,
+					source_line: 53,
 					type_signature: '(src_json: Src_Json, log: Logger): void',
 					return_type: 'void',
 					parameters: [
@@ -4450,7 +4473,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Sort modules alphabetically by path for deterministic output and cleaner diffs.',
-					source_line: 88,
+					source_line: 99,
 					type_signature: '(modules: Module_Json[]): Module_Json[]',
 					return_type: 'Module_Json[]',
 					parameters: [
@@ -4466,7 +4489,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Generate the package.ts file content with package_json and src_json exports.',
-					source_line: 95,
+					source_line: 106,
 					type_signature:
 						'(package_json: { [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }, src_json: Src_Json): string',
 					return_type: 'string',
@@ -4494,7 +4517,7 @@ export const src_json: Src_Json = {
 							description: 'if no source files are found in src/lib',
 						},
 					],
-					source_line: 117,
+					source_line: 128,
 					type_signature: '(filer: Filer, log: Logger): Disknode[]',
 					return_type: 'Disknode[]',
 					parameters: [
@@ -4515,7 +4538,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Analyze a Svelte component file and extract metadata.\n\nUses `svelte_analyze_file` for core analysis, then adds\nGro-specific dependency information from the disknode.',
-					source_line: 148,
+					source_line: 159,
 					type_signature:
 						'(disknode: Disknode, module_path: string, checker: TypeChecker): Module_Json',
 					return_type: 'Module_Json',
@@ -4541,11 +4564,11 @@ export const src_json: Src_Json = {
 					name: 'package_gen_analyze_typescript_file',
 					kind: 'function',
 					doc_comment:
-						'Analyze a TypeScript file and extract all identifiers.\n\nUses `ts_analyze_module_exports` for core analysis, then adds\nGro-specific dependency information from the disknode.',
-					source_line: 173,
+						'Analyze a TypeScript file and extract all identifiers.\n\nUses `ts_analyze_module_exports` for core analysis, then adds\nGro-specific dependency information from the disknode.\n\nReturns both the module metadata and re-export information for post-processing.',
+					source_line: 186,
 					type_signature:
-						'(disknode: Disknode, source_file: SourceFile, module_path: string, checker: TypeChecker): Module_Json',
-					return_type: 'Module_Json',
+						'(disknode: Disknode, source_file: SourceFile, module_path: string, checker: TypeChecker): Ts_File_Analysis',
+					return_type: 'Ts_File_Analysis',
 					parameters: [
 						{
 							name: 'disknode',
@@ -4574,7 +4597,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						"Extract dependencies and dependents for a module from the filer's dependency graph.\n\nFilters to only include source modules from src/lib (excludes external packages, node_modules, tests).\nReturns sorted arrays of module paths (relative to src/lib) for deterministic output.",
-					source_line: 209,
+					source_line: 222,
 					type_signature: '(disknode: Disknode): { dependencies: string[]; dependents: string[]; }',
 					return_type: '{ dependencies: string[]; dependents: string[]; }',
 					parameters: [
@@ -5533,13 +5556,27 @@ export const src_json: Src_Json = {
 							kind: 'variable',
 							type_signature: 'Array<Component_Prop_Info>',
 						},
+						{
+							name: 'also_exported_from',
+							kind: 'variable',
+							type_signature: 'Array<string>',
+							doc_comment:
+								"Module paths (relative to src/lib) that also re-export this identifier.\nThe identifier's canonical location is the module where it appears in `identifiers`.",
+						},
+						{
+							name: 'alias_of',
+							kind: 'variable',
+							type_signature: '{module: string; name: string}',
+							doc_comment:
+								'For renamed re-exports (`export {foo as bar}`), points to the original identifier.\nThe current identifier is an alias created by the re-export.',
+						},
 					],
 				},
 				{
 					name: 'Generic_Param_Info',
 					kind: 'type',
 					doc_comment: 'Generic type parameter information.',
-					source_line: 72,
+					source_line: 82,
 					type_signature: 'Generic_Param_Info',
 					properties: [
 						{
@@ -5567,7 +5604,7 @@ export const src_json: Src_Json = {
 					kind: 'type',
 					doc_comment:
 						'Parameter information for functions and methods.\n\nKept distinct from Component_Prop_Info despite structural similarity.\nFunction parameters form a tuple with positional semantics:\ncalling order matters (`fn(a, b)` vs `fn(b, a)`),\nmay include rest parameters and destructuring patterns.',
-					source_line: 89,
+					source_line: 99,
 					type_signature: 'Parameter_Info',
 					properties: [
 						{
@@ -5602,7 +5639,7 @@ export const src_json: Src_Json = {
 					kind: 'type',
 					doc_comment:
 						'Component prop information for Svelte components.\n\nKept distinct from Parameter_Info despite structural similarity.\nComponent props are named attributes with different semantics:\nno positional order when passing (`<Foo {a} {b} />` = `<Foo {b} {a} />`),\nsupport two-way binding via `$bindable` rune.',
-					source_line: 105,
+					source_line: 115,
 					type_signature: 'Component_Prop_Info',
 					properties: [
 						{
@@ -5641,7 +5678,7 @@ export const src_json: Src_Json = {
 					name: 'get_identifier_display_name',
 					kind: 'function',
 					doc_comment: "Gets an identifier's display name with generic parameters.",
-					source_line: 117,
+					source_line: 127,
 					type_signature: '(identifier: Identifier_Json): string',
 					return_type: 'string',
 					parameters: [
@@ -5656,7 +5693,7 @@ export const src_json: Src_Json = {
 					name: 'generate_import_statement',
 					kind: 'function',
 					doc_comment: 'Generates an import statement for an identifier.',
-					source_line: 135,
+					source_line: 145,
 					type_signature:
 						'(identifier: Identifier_Json, module_path: string, pkg_name: string): string',
 					return_type: 'string',
@@ -6417,7 +6454,7 @@ export const src_json: Src_Json = {
 					name: 'ts_infer_declaration_kind',
 					kind: 'function',
 					doc_comment: 'Infer declaration kind from symbol and node.',
-					source_line: 54,
+					source_line: 55,
 					type_signature: '(symbol: Symbol, node: Node): Identifier_Kind',
 					return_type: 'Identifier_Kind',
 					parameters: [
@@ -6438,7 +6475,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Extract function/method information including parameters\nwith descriptions and default values.',
-					source_line: 84,
+					source_line: 85,
 					type_signature:
 						'(node: Node, symbol: Symbol, checker: TypeChecker, identifier: Identifier_Json, tsdoc: Tsdoc_Parsed_Comment | undefined): void',
 					return_type: 'void',
@@ -6474,7 +6511,7 @@ export const src_json: Src_Json = {
 					name: 'ts_extract_type_info',
 					kind: 'function',
 					doc_comment: 'Extract type/interface information with rich property metadata.',
-					source_line: 155,
+					source_line: 156,
 					type_signature:
 						'(node: Node, _symbol: Symbol, checker: TypeChecker, identifier: Identifier_Json): void',
 					return_type: 'void',
@@ -6505,7 +6542,7 @@ export const src_json: Src_Json = {
 					name: 'ts_extract_class_info',
 					kind: 'function',
 					doc_comment: 'Extract class information with rich member metadata.',
-					source_line: 219,
+					source_line: 220,
 					type_signature:
 						'(node: Node, _symbol: Symbol, checker: TypeChecker, identifier: Identifier_Json): void',
 					return_type: 'void',
@@ -6536,7 +6573,7 @@ export const src_json: Src_Json = {
 					name: 'ts_extract_variable_info',
 					kind: 'function',
 					doc_comment: 'Extract variable information.',
-					source_line: 368,
+					source_line: 369,
 					type_signature:
 						'(node: Node, symbol: Symbol, checker: TypeChecker, identifier: Identifier_Json): void',
 					return_type: 'void',
@@ -6567,7 +6604,7 @@ export const src_json: Src_Json = {
 					name: 'Ts_Identifier_Analysis',
 					kind: 'type',
 					doc_comment: 'Result of analyzing a single identifier.',
-					source_line: 385,
+					source_line: 386,
 					type_signature: 'Ts_Identifier_Analysis',
 					properties: [
 						{
@@ -6577,7 +6614,7 @@ export const src_json: Src_Json = {
 							doc_comment: 'The analyzed identifier metadata.',
 						},
 						{
-							name: 'internal',
+							name: 'nodocs',
 							kind: 'variable',
 							type_signature: 'boolean',
 							doc_comment: 'Whether the identifier is marked',
@@ -6589,12 +6626,12 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Analyze a TypeScript symbol and extract rich metadata.\n\nThis is a high-level function that combines TSDoc parsing with TypeScript\ntype analysis to produce complete identifier metadata. Suitable for use\nin documentation generators, IDE integrations, and other tooling.',
-					source_line: 404,
+					source_line: 405,
 					type_signature:
 						'(symbol: Symbol, source_file: SourceFile, checker: TypeChecker): Ts_Identifier_Analysis',
 					return_type: 'Ts_Identifier_Analysis',
 					return_description:
-						'Complete identifier metadata including docs, types, and parameters, plus internal flag',
+						'Complete identifier metadata including docs, types, and parameters, plus nodocs flag',
 					parameters: [
 						{
 							name: 'symbol',
@@ -6617,10 +6654,33 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
+					name: 'Re_Export_Info',
+					kind: 'type',
+					doc_comment:
+						'Information about a same-name re-export.\nUsed for post-processing to build `also_exported_from` arrays.',
+					source_line: 453,
+					type_signature: 'Re_Export_Info',
+					properties: [
+						{
+							name: 'name',
+							kind: 'variable',
+							type_signature: 'string',
+							doc_comment: 'Name of the re-exported identifier.',
+						},
+						{
+							name: 'original_module',
+							kind: 'variable',
+							type_signature: 'string',
+							doc_comment:
+								'Module path (relative to src/lib) where the identifier is originally declared.',
+						},
+					],
+				},
+				{
 					name: 'Module_Exports_Analysis',
 					kind: 'type',
 					doc_comment: "Result of analyzing a module's exports.",
-					source_line: 451,
+					source_line: 463,
 					type_signature: 'Module_Exports_Analysis',
 					properties: [
 						{
@@ -6633,7 +6693,15 @@ export const src_json: Src_Json = {
 							name: 'identifiers',
 							kind: 'variable',
 							type_signature: 'Array<Identifier_Json>',
-							doc_comment: 'All exported identifiers with their metadata.',
+							doc_comment:
+								'All exported identifiers with their metadata (excludes same-name re-exports).',
+						},
+						{
+							name: 're_exports',
+							kind: 'variable',
+							type_signature: 'Array<Re_Export_Info>',
+							doc_comment:
+								'Same-name re-exports (for building also_exported_from in post-processing).',
 						},
 					],
 				},
@@ -6641,12 +6709,13 @@ export const src_json: Src_Json = {
 					name: 'ts_analyze_module_exports',
 					kind: 'function',
 					doc_comment:
-						'Analyze all exports from a TypeScript source file.\n\nExtracts the module-level comment and all exported identifiers with\ncomplete metadata. This is a high-level function suitable for building\ndocumentation, API explorers, or analysis tools.',
-					source_line: 469,
+						'Analyze all exports from a TypeScript source file.\n\nExtracts the module-level comment and all exported identifiers with\ncomplete metadata. Handles re-exports by:\n- Same-name re-exports: tracked in `re_exports` for `also_exported_from` building\n- Renamed re-exports: included as new identifiers with `alias_of` metadata\n\nThis is a high-level function suitable for building documentation, API explorers, or analysis tools.',
+					source_line: 486,
 					type_signature:
 						'(source_file: SourceFile, checker: TypeChecker): Module_Exports_Analysis',
 					return_type: 'Module_Exports_Analysis',
-					return_description: 'Module comment and array of analyzed identifiers',
+					return_description:
+						'Module comment, array of analyzed identifiers, and re-export information',
 					parameters: [
 						{
 							name: 'source_file',
@@ -6667,7 +6736,7 @@ export const src_json: Src_Json = {
 					kind: 'function',
 					doc_comment:
 						'Extract module-level comment.\n\nOnly accepts JSDoc/TSDoc comments (`/** ... *\\/`) followed by a blank line to distinguish\nthem from identifier-level comments. This prevents accidentally treating function/class\ncomments as module comments. Module comments can appear after imports.',
-					source_line: 503,
+					source_line: 567,
 					type_signature: '(source_file: SourceFile): string | undefined',
 					return_type: 'string | undefined',
 					parameters: [
@@ -6682,7 +6751,7 @@ export const src_json: Src_Json = {
 					name: 'ts_create_program',
 					kind: 'function',
 					doc_comment: 'Create TypeScript program for analysis.',
-					source_line: 575,
+					source_line: 639,
 					type_signature: '(log: { warn: (message: string) => void; }): Program | null',
 					return_type: 'Program | null',
 					parameters: [
@@ -6696,7 +6765,7 @@ export const src_json: Src_Json = {
 			],
 			module_comment:
 				'TypeScript compiler API helpers for extracting metadata from source code.\n\nAll functions are prefixed with `ts_` for clarity.',
-			dependencies: ['tsdoc_helpers.ts'],
+			dependencies: ['module_helpers.ts', 'tsdoc_helpers.ts'],
 			dependents: ['package.gen.ts', 'package_gen_helpers.ts'],
 		},
 		{
@@ -6764,11 +6833,10 @@ export const src_json: Src_Json = {
 							doc_comment: 'Mutation documentation from `@mutates` (non-standard)',
 						},
 						{
-							name: 'internal',
+							name: 'nodocs',
 							kind: 'variable',
 							type_signature: 'boolean',
-							doc_comment:
-								'Whether the identifier is internal (not part of public API) from `@internal`',
+							doc_comment: 'Whether to exclude from documentation. From `@nodocs` tag.',
 						},
 					],
 				},
@@ -6820,7 +6888,7 @@ export const src_json: Src_Json = {
 				},
 			],
 			module_comment:
-				'TSDoc/JSDoc parsing helpers using the TypeScript Compiler API.\n\nProvides `tsdoc_parse()` for extracting JSDoc/TSDoc from TypeScript nodes.\nPrimarily designed for build-time code generation but can be used at runtime.\n\n## Design\n\nPure extraction approach: extracts documentation as-is with minimal transformation,\npreserving source intent. Works around TypeScript Compiler API quirks where needed.\n\nSupports both regular TypeScript and Svelte components (via svelte2tsx output).\n\n## Tag support\n\nSupports a subset of standard TSDoc tags:\n`@param`, `@returns`, `@throws`, `@example`, `@deprecated`, `@see`, `@since`, `@internal`.\n\nThe `@internal` tag marks exports as not part of the public API, excluding them from\ngenerated documentation and flat namespace validation.\n\nAlso supports `@mutates` (non-standard) for documenting mutations to parameters or external state.\nUse format: `@mutates paramName - description of mutation`.\n\nOnly `@returns` is supported (not `@return`).\n\nThe `@see` tag supports multiple formats: plain URLs (`https://...`), `{@link}` syntax, and module names.\nRelative/absolute path support in `@see` is TBD.\n\n## Behavioral notes\n\nDue to TS Compiler API limitations:\n- Preserves dash separator in `@param` descriptions: `@param x desc` → `"- desc"`\n- `@throws` tags have `{Type}` stripped by TS API; fallback regex extracts first word as error type\n- TS API strips URL protocols from `@see` tag text; we use `getText()` to preserve original format including `{@link}` syntax\n\nAll functions are prefixed with `tsdoc_` for clarity.',
+				'TSDoc/JSDoc parsing helpers using the TypeScript Compiler API.\n\nProvides `tsdoc_parse()` for extracting JSDoc/TSDoc from TypeScript nodes.\nPrimarily designed for build-time code generation but can be used at runtime.\n\n## Design\n\nPure extraction approach: extracts documentation as-is with minimal transformation,\npreserving source intent. Works around TypeScript Compiler API quirks where needed.\n\nSupports both regular TypeScript and Svelte components (via svelte2tsx output).\n\n## Tag support\n\nSupports a subset of standard TSDoc tags:\n`@param`, `@returns`, `@throws`, `@example`, `@deprecated`, `@see`, `@since`, `@nodocs`.\n\nThe `@nodocs` tag excludes exports from documentation and flat namespace validation.\nThe identifier is still exported and usable, just not documented.\n\nAlso supports `@mutates` (non-standard) for documenting mutations to parameters or external state.\nUse format: `@mutates paramName - description of mutation`.\n\nOnly `@returns` is supported (not `@return`).\n\nThe `@see` tag supports multiple formats: plain URLs (`https://...`), `{@link}` syntax, and module names.\nRelative/absolute path support in `@see` is TBD.\n\n## Behavioral notes\n\nDue to TS Compiler API limitations:\n- Preserves dash separator in `@param` descriptions: `@param x desc` → `"- desc"`\n- `@throws` tags have `{Type}` stripped by TS API; fallback regex extracts first word as error type\n- TS API strips URL protocols from `@see` tag text; we use `getText()` to preserve original format including `{@link}` syntax\n\nAll functions are prefixed with `tsdoc_` for clarity.',
 			dependents: ['svelte_helpers.ts', 'ts_helpers.ts'],
 		},
 		{

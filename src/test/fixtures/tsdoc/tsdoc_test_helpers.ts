@@ -132,7 +132,7 @@ export const validate_tsdoc_structure = (tsdoc: Tsdoc_Parsed_Comment | undefined
 		}
 	}
 
-	if (tsdoc.internal !== undefined && typeof tsdoc.internal !== 'boolean') {
-		throw new Error('Expected tsdoc.internal to be a boolean');
+	if (tsdoc.nodocs !== undefined && typeof tsdoc.nodocs !== 'boolean') {
+		throw new Error('Expected tsdoc.nodocs to be a boolean');
 	}
 };

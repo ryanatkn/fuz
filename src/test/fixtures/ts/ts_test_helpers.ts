@@ -68,6 +68,77 @@ export const create_test_program = (
 };
 
 /**
+ * A source file entry for multi-file test programs.
+ */
+export interface Test_Source_File {
+	path: string;
+	content: string;
+}
+
+/**
+ * Create a TypeScript program with multiple source files.
+ * Used for testing re-export scenarios where declarations are in different files.
+ *
+ * Note: The re-export detection in ts_helpers.ts uses `checker.getAliasedSymbol()` to
+ * properly resolve aliases to their original declarations, which works correctly with
+ * this test infrastructure.
+ *
+ * @param files - Array of source files with their paths and content
+ * @returns Object with program, checker, and a map of source files by path
+ */
+export const create_multi_file_program = (
+	files: Array<Test_Source_File>,
+): {program: ts.Program; checker: ts.TypeChecker; source_files: Map<string, ts.SourceFile>} => {
+	// Create source files
+	const source_files = new Map<string, ts.SourceFile>();
+	for (const file of files) {
+		const source_file = ts.createSourceFile(file.path, file.content, ts.ScriptTarget.Latest, true);
+		source_files.set(file.path, source_file);
+	}
+
+	const file_paths = files.map((f) => f.path);
+
+	const program = ts.createProgram(
+		file_paths,
+		{
+			target: ts.ScriptTarget.Latest,
+			module: ts.ModuleKind.ESNext,
+			moduleResolution: ts.ModuleResolutionKind.NodeNext,
+		},
+		{
+			getSourceFile: (fileName) => source_files.get(fileName),
+			writeFile: () => undefined,
+			getCurrentDirectory: () => '/src/lib',
+			getDirectories: () => [],
+			fileExists: (fileName) => source_files.has(fileName),
+			readFile: (fileName) => {
+				const sf = source_files.get(fileName);
+				return sf?.text ?? '';
+			},
+			getCanonicalFileName: (fileName) => fileName,
+			useCaseSensitiveFileNames: () => true,
+			getNewLine: () => '\n',
+			getDefaultLibFileName: () => 'lib.d.ts',
+			resolveModuleNames: (moduleNames, _containingFile) => {
+				return moduleNames.map((name) => {
+					// Handle relative imports like './foo.js' or './foo.ts'
+					if (name.startsWith('./')) {
+						const resolved = name.replace(/^\.\//, '/src/lib/').replace(/\.js$/, '.ts');
+						if (source_files.has(resolved)) {
+							return {resolvedFileName: resolved, isExternalLibraryImport: false};
+						}
+					}
+					return undefined;
+				});
+			},
+		},
+	);
+
+	const checker = program.getTypeChecker();
+	return {program, checker, source_files};
+};
+
+/**
  * Extract an identifier from a TypeScript source file based on the fixture category.
  * Used by both test files and update tasks to ensure consistent behavior.
  *

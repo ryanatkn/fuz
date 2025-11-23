@@ -7,6 +7,7 @@ import {
 	load_fixtures,
 	validate_identifier_structure,
 	create_test_program,
+	create_multi_file_program,
 	extract_identifier_from_source,
 	type Ts_Fixture,
 } from './fixtures/ts/ts_test_helpers.js';
@@ -320,45 +321,168 @@ export class Service {
 		assert.strictEqual(service.kind, 'class');
 	});
 
-	test('excludes @internal identifiers from exports', () => {
+	test('excludes @nodocs identifiers from exports', () => {
 		const source_code = `
 /**
- * Module with internal exports.
+ * Module with nodocs exports.
  */
 
 export const public_value = 42;
 
 /**
- * Internal helper not part of public API.
- * @internal
+ * Helper excluded from documentation.
+ * @nodocs
  */
-export function internal_helper(): void {}
+export function nodocs_helper(): void {}
 
-/** @internal */
-export type Internal_Type = { secret: string };
+/** @nodocs */
+export type Nodocs_Type = { secret: string };
 
 export function public_function(): string {
 	return 'public';
 }
 `;
 
-		const source_file = ts.createSourceFile(
-			'internal.ts',
-			source_code,
-			ts.ScriptTarget.Latest,
-			true,
-		);
-		const {checker} = create_test_program(source_file, 'internal.ts');
+		const source_file = ts.createSourceFile('nodocs.ts', source_code, ts.ScriptTarget.Latest, true);
+		const {checker} = create_test_program(source_file, 'nodocs.ts');
 
 		const result = ts_analyze_module_exports(source_file, checker);
 
-		// Should only have 2 public identifiers (internal ones excluded)
+		// Should only have 2 public identifiers (nodocs ones excluded)
 		assert.strictEqual(result.identifiers.length, 2);
 
 		const names = result.identifiers.map((i) => i.name);
 		assert.include(names, 'public_value');
 		assert.include(names, 'public_function');
-		assert.notInclude(names, 'internal_helper');
-		assert.notInclude(names, 'Internal_Type');
+		assert.notInclude(names, 'nodocs_helper');
+		assert.notInclude(names, 'Nodocs_Type');
+	});
+
+	test('detects same-name re-exports and tracks in re_exports array', () => {
+		const {checker, source_files} = create_multi_file_program([
+			{
+				path: '/src/lib/helpers.ts',
+				content: `
+/** A helper function. */
+export function helper(): void {}
+
+export const CONSTANT = 42;
+`,
+			},
+			{
+				path: '/src/lib/index.ts',
+				content: `
+// Re-export from helpers
+export {helper, CONSTANT} from './helpers.js';
+
+// Direct export
+export const local_value = 'local';
+`,
+			},
+		]);
+
+		const index_file = source_files.get('/src/lib/index.ts')!;
+		const result = ts_analyze_module_exports(index_file, checker);
+
+		// index.ts should only have local_value as a direct export
+		// helper and CONSTANT are re-exports and should be in re_exports array
+		assert.strictEqual(result.identifiers.length, 1);
+		assert.strictEqual(result.identifiers[0]!.name, 'local_value');
+
+		// re_exports should contain the two re-exported identifiers
+		assert.strictEqual(result.re_exports.length, 2);
+
+		const re_export_names = result.re_exports.map((r) => r.name);
+		assert.include(re_export_names, 'helper');
+		assert.include(re_export_names, 'CONSTANT');
+
+		// Each re-export should reference the original module
+		for (const re_export of result.re_exports) {
+			assert.strictEqual(re_export.original_module, 'helpers.ts');
+		}
+	});
+
+	test('handles renamed re-exports with alias_of metadata', () => {
+		const {checker, source_files} = create_multi_file_program([
+			{
+				path: '/src/lib/internal.ts',
+				content: `
+/** Internal implementation. */
+export function internal_impl(): string {
+	return 'internal';
+}
+`,
+			},
+			{
+				path: '/src/lib/public.ts',
+				content: `
+// Renamed re-export
+export {internal_impl as public_api} from './internal.js';
+`,
+			},
+		]);
+
+		const public_file = source_files.get('/src/lib/public.ts')!;
+		const result = ts_analyze_module_exports(public_file, checker);
+
+		// Renamed re-export creates a NEW identifier with alias_of
+		assert.strictEqual(result.identifiers.length, 1);
+		const identifier = result.identifiers[0]!;
+		assert.strictEqual(identifier.name, 'public_api');
+		assert.ok(identifier.alias_of);
+		assert.strictEqual(identifier.alias_of.module, 'internal.ts');
+		assert.strictEqual(identifier.alias_of.name, 'internal_impl');
+
+		// Should not be in re_exports (renamed exports are tracked as new identifiers)
+		assert.strictEqual(result.re_exports.length, 0);
+	});
+
+	test('handles mixed direct exports and re-exports', () => {
+		const {checker, source_files} = create_multi_file_program([
+			{
+				path: '/src/lib/utils.ts',
+				content: `
+export const util_a = 'a';
+export const util_b = 'b';
+`,
+			},
+			{
+				path: '/src/lib/mixed.ts',
+				content: `
+// Direct exports
+export function direct_fn(): void {}
+export type Direct_Type = { value: string };
+
+// Same-name re-export
+export {util_a} from './utils.js';
+
+// Renamed re-export
+export {util_b as renamed_util} from './utils.js';
+`,
+			},
+		]);
+
+		const mixed_file = source_files.get('/src/lib/mixed.ts')!;
+		const result = ts_analyze_module_exports(mixed_file, checker);
+
+		// Should have 3 identifiers: direct_fn, Direct_Type, renamed_util
+		assert.strictEqual(result.identifiers.length, 3);
+
+		const names = result.identifiers.map((i) => i.name);
+		assert.include(names, 'direct_fn');
+		assert.include(names, 'Direct_Type');
+		assert.include(names, 'renamed_util');
+		assert.notInclude(names, 'util_a'); // same-name re-export excluded
+
+		// renamed_util should have alias_of
+		const renamed = result.identifiers.find((i) => i.name === 'renamed_util');
+		assert.ok(renamed?.alias_of);
+		assert.strictEqual(renamed.alias_of.module, 'utils.ts');
+		assert.strictEqual(renamed.alias_of.name, 'util_b');
+
+		// re_exports should contain util_a
+		assert.strictEqual(result.re_exports.length, 1);
+		assert.strictEqual(result.re_exports[0]!.name, 'util_a');
+		assert.strictEqual(result.re_exports[0]!.original_module, 'utils.ts');
 	});
 });

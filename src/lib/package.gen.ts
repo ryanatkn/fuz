@@ -22,7 +22,7 @@ import type {Gen} from '@ryanatkn/gro';
 import {load_package_json} from '@ryanatkn/gro/package_json.js';
 
 import type {Src_Json} from './src_json.js';
-import {ts_create_program} from './ts_helpers.js';
+import {ts_create_program, type Re_Export_Info} from './ts_helpers.js';
 import {module_extract_path, module_is_svelte} from './module_helpers.js';
 import {
 	package_gen_collect_source_files,
@@ -54,11 +54,16 @@ export const gen: Gen = async ({log, filer}) => {
 	const source_disknodes = package_gen_collect_source_files(filer, log);
 
 	// Build src.json with array-based modules
+	// Phase 1: Analyze all modules and collect re-exports
 	const src_json: Src_Json = {
 		name: package_json.name,
 		version: package_json.version,
 		modules: [],
 	};
+
+	// Collect all re-exports: Map<identifier_name, Set<re_exporting_module_path>>
+	// The Set tracks which modules re-export each identifier
+	const all_re_exports: Array<{re_exporting_module: string; re_export: Re_Export_Info}> = [];
 
 	for (const disknode of source_disknodes) {
 		const source_id = disknode.id;
@@ -78,8 +83,46 @@ export const gen: Gen = async ({log, filer}) => {
 			}
 
 			// May throw, which we want to see
-			const mod = package_gen_analyze_typescript_file(disknode, source_file, module_path, checker);
+			const {module: mod, re_exports} = package_gen_analyze_typescript_file(
+				disknode,
+				source_file,
+				module_path,
+				checker,
+			);
 			src_json.modules!.push(mod);
+
+			// Collect re-exports for post-processing
+			for (const re_export of re_exports) {
+				all_re_exports.push({re_exporting_module: module_path, re_export});
+			}
+		}
+	}
+
+	// Phase 2: Build also_exported_from arrays from re-export data
+	// Group re-exports by original module and identifier name
+	const re_export_map: Map<string, Map<string, Array<string>>> = new Map();
+	for (const {re_exporting_module, re_export} of all_re_exports) {
+		const {name, original_module} = re_export;
+		if (!re_export_map.has(original_module)) {
+			re_export_map.set(original_module, new Map());
+		}
+		const module_map = re_export_map.get(original_module)!;
+		if (!module_map.has(name)) {
+			module_map.set(name, []);
+		}
+		module_map.get(name)!.push(re_exporting_module);
+	}
+
+	// Merge into original identifiers
+	for (const mod of src_json.modules ?? []) {
+		const module_re_exports = re_export_map.get(mod.path);
+		if (!module_re_exports) continue;
+
+		for (const identifier of mod.identifiers ?? []) {
+			const re_exporters = module_re_exports.get(identifier.name);
+			if (re_exporters?.length) {
+				identifier.also_exported_from = re_exporters.sort();
+			}
 		}
 	}
 
