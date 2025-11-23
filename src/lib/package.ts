@@ -40,9 +40,9 @@ export const package_json: Package_Json = {
 		node: '>=22.15',
 	},
 	peerDependencies: {
-		'@ryanatkn/belt': '^0.38.0',
-		'@ryanatkn/gro': '^0.174.1',
-		'@ryanatkn/moss': '^0.38.0',
+		'@ryanatkn/belt': '>=0.38.0',
+		'@ryanatkn/gro': '>=0.174.1',
+		'@ryanatkn/moss': '>=0.38.0',
 		'@sveltejs/kit': '^2.47.3',
 		'esm-env': '^1',
 		svelte: '^5',
