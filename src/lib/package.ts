@@ -40,8 +40,8 @@ export const package_json: Package_Json = {
 		node: '>=22.15',
 	},
 	peerDependencies: {
-		'@ryanatkn/belt': '^0.37.0',
-		'@ryanatkn/gro': '^0.173.0',
+		'@ryanatkn/belt': '^0.38.0',
+		'@ryanatkn/gro': '^0.174.1',
 		'@ryanatkn/moss': '^0.37.0',
 		'@sveltejs/kit': '^2.47.3',
 		'esm-env': '^1',
@@ -59,10 +59,10 @@ export const package_json: Package_Json = {
 	},
 	devDependencies: {
 		'@changesets/changelog-git': '^0.2.1',
-		'@ryanatkn/belt': '^0.37.2',
+		'@ryanatkn/belt': '^0.38.0',
 		'@ryanatkn/eslint-config': '^0.9.0',
 		'@ryanatkn/fuz_code': '^0.32.0',
-		'@ryanatkn/gro': '^0.173.2',
+		'@ryanatkn/gro': '^0.174.1',
 		'@ryanatkn/moss': '^0.37.0',
 		'@sveltejs/adapter-static': '^3.0.10',
 		'@sveltejs/kit': '^2.49.0',
