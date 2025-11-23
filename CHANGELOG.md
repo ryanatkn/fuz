@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.155.0
+
+### Minor Changes
+
+- rework `@internal` to `@nodocs` ([#96](https://github.com/ryanatkn/fuz/pull/96))
+
 ## 0.154.0
 
 ### Minor Changes
