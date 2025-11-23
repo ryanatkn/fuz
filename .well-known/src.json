@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.154.0",
+  "version": "0.155.0",
   "modules": {
     "./alert.js": {
       "path": "alert.ts",
@@ -667,6 +667,10 @@
       "path": "package_gen_helpers.ts",
       "declarations": [
         {
+          "name": "Ts_File_Analysis",
+          "kind": "type"
+        },
+        {
           "name": "package_gen_validate_no_duplicates",
           "kind": "function"
         },
@@ -964,6 +968,10 @@
         {
           "name": "ts_analyze_identifier",
           "kind": "function"
+        },
+        {
+          "name": "Re_Export_Info",
+          "kind": "type"
         },
         {
           "name": "Module_Exports_Analysis",
