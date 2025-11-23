@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.156.0
+
+### Minor Changes
+
+- upgrade belt and gro ([9209c75](https://github.com/ryanatkn/fuz/commit/9209c75))
+
 ## 0.155.0
 
 ### Minor Changes
