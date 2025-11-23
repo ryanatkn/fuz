@@ -622,7 +622,7 @@ describe('package_gen_validate_no_duplicates - error message format', () => {
 		}
 	});
 
-	test('error message mentions @internal as resolution option', () => {
+	test('error message mentions @nodocs as resolution option', () => {
 		const src_json = create_mock_src_json([
 			create_mock_module('a.ts', [{name: 'Dup', kind: 'type'}]),
 			create_mock_module('b.ts', [{name: 'Dup', kind: 'function'}]),
@@ -636,7 +636,7 @@ describe('package_gen_validate_no_duplicates - error message format', () => {
 		} catch (err: any) {
 			// Error message should mention both resolution options
 			assert.ok(err.message.includes('rename'), 'should mention renaming');
-			assert.ok(err.message.includes('@internal'), 'should mention @internal');
+			assert.ok(err.message.includes('@nodocs'), 'should mention @nodocs');
 		}
 	});
 

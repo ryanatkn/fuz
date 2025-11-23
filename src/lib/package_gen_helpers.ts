@@ -24,7 +24,7 @@ import type {Disknode} from '@ryanatkn/gro/disknode.js';
 import type ts from 'typescript';
 
 import type {Module_Json, Src_Json} from './src_json.js';
-import {ts_analyze_module_exports} from './ts_helpers.js';
+import {ts_analyze_module_exports, type Re_Export_Info} from './ts_helpers.js';
 import {svelte_analyze_file} from './svelte_helpers.js';
 import {
 	module_extract_path,
@@ -32,6 +32,17 @@ import {
 	module_is_svelte,
 	module_matches_source,
 } from './module_helpers.js';
+
+/**
+ * Result of analyzing a TypeScript file.
+ * Includes both the module metadata and re-export information for post-processing.
+ */
+export interface Ts_File_Analysis {
+	/** Module metadata for inclusion in src_json. */
+	module: Module_Json;
+	/** Re-exports from this module for building also_exported_from. */
+	re_exports: Array<Re_Export_Info>;
+}
 
 /**
  * Validates that no identifier names are duplicated across modules.
@@ -76,7 +87,7 @@ export const package_gen_validate_no_duplicates = (src_json: Src_Json, log: Logg
 			`Found ${duplicates.length} duplicate identifier name${duplicates.length === 1 ? '' : 's'} across modules. ` +
 				'The flat namespace requires unique names. To resolve: ' +
 				'(1) rename one of the conflicting identifiers, or ' +
-				'(2) add /** @internal */ to exclude from public API. ' +
+				'(2) add /** @nodocs */ to exclude from documentation. ' +
 				'See CLAUDE.md "Identifier namespacing" section for details.',
 		);
 	}
@@ -169,15 +180,17 @@ export const package_gen_analyze_svelte_file = (
  *
  * Uses `ts_analyze_module_exports` for core analysis, then adds
  * Gro-specific dependency information from the disknode.
+ *
+ * Returns both the module metadata and re-export information for post-processing.
  */
 export const package_gen_analyze_typescript_file = (
 	disknode: Disknode,
 	source_file: ts.SourceFile,
 	module_path: string,
 	checker: ts.TypeChecker,
-): Module_Json => {
+): Ts_File_Analysis => {
 	// Use the extracted helper for core analysis
-	const {module_comment, identifiers} = ts_analyze_module_exports(source_file, checker);
+	const {module_comment, identifiers, re_exports} = ts_analyze_module_exports(source_file, checker);
 
 	const mod: Module_Json = {
 		path: module_path,
@@ -197,7 +210,7 @@ export const package_gen_analyze_typescript_file = (
 		mod.dependents = dependents;
 	}
 
-	return mod;
+	return {module: mod, re_exports};
 };
 
 /**

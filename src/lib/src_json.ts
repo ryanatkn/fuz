@@ -64,6 +64,16 @@ export interface Identifier_Json {
 	members?: Array<Identifier_Json>;
 	properties?: Array<Identifier_Json>;
 	props?: Array<Component_Prop_Info>;
+	/**
+	 * Module paths (relative to src/lib) that also re-export this identifier.
+	 * The identifier's canonical location is the module where it appears in `identifiers`.
+	 */
+	also_exported_from?: Array<string>;
+	/**
+	 * For renamed re-exports (`export {foo as bar}`), points to the original identifier.
+	 * The current identifier is an alias created by the re-export.
+	 */
+	alias_of?: {module: string; name: string};
 }
 
 /**
