@@ -121,8 +121,7 @@ export const src_json: Src_Json = ${JSON.stringify(src_json, null, '\t')};
  * Collect and filter source files from filer.
  *
  * Returns disknodes for TypeScript/JS files and Svelte components from src/lib, excluding test files.
- *
- * @throws Error if no source files are found in src/lib
+ * Returns an empty array with a warning if no source files are found.
  */
 export const package_gen_collect_source_files = (
 	files: Map<Path_Id, Disknode>,
@@ -143,7 +142,8 @@ export const package_gen_collect_source_files = (
 	log.info(`found ${source_disknodes.length} source files to analyze`);
 
 	if (source_disknodes.length === 0) {
-		throw new Error('No source files found in src/lib - cannot generate package metadata');
+		log.warn('No source files found in src/lib - generating empty package metadata');
+		return [];
 	}
 
 	// Sort for deterministic output (stable alphabetical module ordering)

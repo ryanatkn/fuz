@@ -128,6 +128,8 @@ export class Pkg {
 		this.src_json = src_json;
 	}
 
+	// TODO toJSON as Pkg_Json but see that overlap with belt's Pkg_Json
+
 	/**
 	 * Look up an identifier by name.
 	 */
