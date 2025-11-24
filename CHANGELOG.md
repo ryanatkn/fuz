@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.160.0
+
+### Minor Changes
+
+- use >= for fuz_code peer dep ([8d494ef](https://github.com/ryanatkn/fuz/commit/8d494ef))
+
 ## 0.159.1
 
 ### Patch Changes
