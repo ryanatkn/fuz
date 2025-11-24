@@ -2017,7 +2017,7 @@ export const src_json: Src_Json = {
 					source_line: 1,
 				},
 			],
-			dependents: ['Identifier_Detail.svelte', 'Package_Detail.svelte'],
+			dependents: ['Identifier_Detail.svelte'],
 		},
 		{
 			path: 'Dialog.svelte',
@@ -4416,7 +4416,6 @@ export const src_json: Src_Json = {
 				},
 			],
 			dependencies: [
-				'Details.svelte',
 				'Identifier_Link.svelte',
 				'Img_Or_Svg.svelte',
 				'Module_Link.svelte',

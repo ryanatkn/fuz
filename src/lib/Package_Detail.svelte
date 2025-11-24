@@ -4,7 +4,6 @@
 	import type {Snippet} from 'svelte';
 
 	import type {Pkg} from './pkg.svelte.js';
-	import Details from './Details.svelte';
 	import Img_Or_Svg from './Img_Or_Svg.svelte';
 	import Identifier_Link from './Identifier_Link.svelte';
 	import Module_Link from './Module_Link.svelte';
@@ -185,14 +184,7 @@
 		</section>
 	{/if}
 
-	<section>
-		<Details>
-			{#snippet summary()}raw package metadata{/snippet}
-			<pre><code>{JSON.stringify(pkg, null, '\t')}</code></pre>
-		</Details>
-	</section>
-
-	<!-- TODO more details behind a `<details>`, including author -->
+	<!-- TODO maybe add more details, possibly behind a `<details>`, including author -->
 	<!-- TODO render exports, then link to source, then tomes -->
 </div>
 
