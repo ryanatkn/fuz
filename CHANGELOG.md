@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.159.1
+
+### Patch Changes
+
+- add fuz_code as a peer dep ([36c52a3](https://github.com/ryanatkn/fuz/commit/36c52a3))
+
 ## 0.159.0
 
 ### Minor Changes
