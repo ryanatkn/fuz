@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.159.0
+
+### Minor Changes
+
+- change `package_gen_collect_source_files` to return an empty array instead of throwing for no src/lib ([402f22e](https://github.com/ryanatkn/fuz/commit/402f22e))
+
 ## 0.158.0
 
 ### Minor Changes
