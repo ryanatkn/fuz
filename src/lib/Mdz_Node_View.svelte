@@ -15,6 +15,7 @@
 
 	const components = mdz_components_context.get_maybe();
 	const elements = mdz_elements_context.get_maybe();
+	// TODO make `Code` customizable via context, maybe registered as component Codeblock?
 </script>
 
 {#if node.type === 'Element'}

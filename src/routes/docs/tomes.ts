@@ -33,7 +33,7 @@ export const tomes: Array<Tome> = [
 	{
 		name: 'introduction',
 		category: 'guide',
-		component: introduction,
+		Component: introduction,
 		related_tomes: ['api'],
 		related_modules: [],
 		related_identifiers: [],
@@ -41,7 +41,7 @@ export const tomes: Array<Tome> = [
 	{
 		name: 'theming',
 		category: 'guide',
-		component: theming,
+		Component: theming,
 		related_tomes: ['Themed'],
 		related_modules: ['themer.svelte.ts'],
 		related_identifiers: ['Themed', 'Themer'],
@@ -49,7 +49,7 @@ export const tomes: Array<Tome> = [
 	{
 		name: 'api',
 		category: 'guide',
-		component: api,
+		Component: api,
 		related_tomes: [],
 		related_modules: [],
 		related_identifiers: [],
@@ -57,7 +57,7 @@ export const tomes: Array<Tome> = [
 	{
 		name: 'csp',
 		category: 'helpers',
-		component: csp,
+		Component: csp,
 		related_tomes: [],
 		related_modules: ['csp.ts'],
 		related_identifiers: [],
@@ -65,7 +65,7 @@ export const tomes: Array<Tome> = [
 	{
 		name: 'intersect',
 		category: 'helpers',
-		component: intersect,
+		Component: intersect,
 		related_tomes: [],
 		related_modules: ['intersect.svelte.ts'],
 		related_identifiers: [],
@@ -73,7 +73,7 @@ export const tomes: Array<Tome> = [
 	{
 		name: 'logos',
 		category: 'helpers',
-		component: logos,
+		Component: logos,
 		related_tomes: ['Package_Detail', 'Package_Summary', 'Svg'],
 		related_modules: ['logos.ts'],
 		related_identifiers: [],
@@ -81,7 +81,7 @@ export const tomes: Array<Tome> = [
 	{
 		name: 'mdz',
 		category: 'helpers',
-		component: mdz,
+		Component: mdz,
 		related_tomes: [],
 		related_modules: ['mdz.ts'],
 		related_identifiers: ['Mdz', 'mdz_parse', 'Mdz_Node_View'],
@@ -89,7 +89,7 @@ export const tomes: Array<Tome> = [
 	{
 		name: 'Alert',
 		category: 'components',
-		component: Alert,
+		Component: Alert,
 		related_tomes: ['Card'],
 		related_modules: [],
 		related_identifiers: ['Alert'],
@@ -97,7 +97,7 @@ export const tomes: Array<Tome> = [
 	{
 		name: 'Breadcrumb',
 		category: 'components',
-		component: Breadcrumb,
+		Component: Breadcrumb,
 		related_tomes: ['Redirect'],
 		related_modules: [],
 		related_identifiers: ['Breadcrumb'],
@@ -105,7 +105,7 @@ export const tomes: Array<Tome> = [
 	{
 		name: 'Card',
 		category: 'components',
-		component: Card,
+		Component: Card,
 		related_tomes: ['Alert'],
 		related_modules: [],
 		related_identifiers: ['Card'],
@@ -113,7 +113,7 @@ export const tomes: Array<Tome> = [
 	{
 		name: 'Contextmenu',
 		category: 'components',
-		component: Contextmenu,
+		Component: Contextmenu,
 		related_tomes: [],
 		related_modules: ['contextmenu_helpers.ts', 'contextmenu_state.svelte.ts'],
 		related_identifiers: ['Contextmenu', 'Contextmenu_Root', 'Contextmenu_Entry'],
@@ -121,7 +121,7 @@ export const tomes: Array<Tome> = [
 	{
 		name: 'Details',
 		category: 'components',
-		component: Details,
+		Component: Details,
 		related_tomes: [],
 		related_modules: [],
 		related_identifiers: ['Details'],
@@ -129,7 +129,7 @@ export const tomes: Array<Tome> = [
 	{
 		name: 'Dialog',
 		category: 'components',
-		component: Dialog,
+		Component: Dialog,
 		related_tomes: ['Teleport'],
 		related_modules: ['dialog.ts'],
 		related_identifiers: ['Dialog', 'Dialogs'],
@@ -137,7 +137,7 @@ export const tomes: Array<Tome> = [
 	{
 		name: 'Hue_Input',
 		category: 'components',
-		component: Hue_Input,
+		Component: Hue_Input,
 		related_tomes: [], // TODO externals?
 		related_modules: [],
 		related_identifiers: ['Hue_Input'],
@@ -145,7 +145,7 @@ export const tomes: Array<Tome> = [
 	{
 		name: 'Docs',
 		category: 'components',
-		component: Docs,
+		Component: Docs,
 		related_tomes: [],
 		related_modules: [],
 		related_identifiers: ['Docs'],
@@ -153,7 +153,7 @@ export const tomes: Array<Tome> = [
 	{
 		name: 'Package_Detail',
 		category: 'components',
-		component: Package_Detail,
+		Component: Package_Detail,
 		related_tomes: ['api', 'logos', 'Package_Summary'],
 		related_modules: [],
 		related_identifiers: ['Package_Detail'],
@@ -161,7 +161,7 @@ export const tomes: Array<Tome> = [
 	{
 		name: 'Package_Summary',
 		category: 'components',
-		component: Package_Summary,
+		Component: Package_Summary,
 		related_tomes: ['api', 'logos', 'Package_Detail'],
 		related_modules: [],
 		related_identifiers: ['Package_Summary'],
@@ -169,7 +169,7 @@ export const tomes: Array<Tome> = [
 	{
 		name: 'Pending_Animation',
 		category: 'components',
-		component: Pending_Animation,
+		Component: Pending_Animation,
 		related_tomes: ['Pending_Button'],
 		related_modules: [],
 		related_identifiers: ['Pending_Animation'],
@@ -177,7 +177,7 @@ export const tomes: Array<Tome> = [
 	{
 		name: 'Pending_Button',
 		category: 'components',
-		component: Pending_Button,
+		Component: Pending_Button,
 		related_tomes: ['Pending_Animation'],
 		related_modules: [],
 		related_identifiers: ['Pending_Button'],
@@ -185,7 +185,7 @@ export const tomes: Array<Tome> = [
 	{
 		name: 'Redirect',
 		category: 'components',
-		component: Redirect,
+		Component: Redirect,
 		related_tomes: ['Breadcrumb'],
 		related_modules: [],
 		related_identifiers: ['Redirect'],
@@ -193,7 +193,7 @@ export const tomes: Array<Tome> = [
 	{
 		name: 'Svg',
 		category: 'components',
-		component: Svg,
+		Component: Svg,
 		related_tomes: ['logos'],
 		related_modules: [],
 		related_identifiers: ['Svg'],
@@ -201,7 +201,7 @@ export const tomes: Array<Tome> = [
 	{
 		name: 'Teleport',
 		category: 'components',
-		component: Teleport,
+		Component: Teleport,
 		related_tomes: ['Dialog'],
 		related_modules: [],
 		related_identifiers: ['Teleport'],
@@ -209,7 +209,7 @@ export const tomes: Array<Tome> = [
 	{
 		name: 'Themed',
 		category: 'components',
-		component: Themed,
+		Component: Themed,
 		related_tomes: ['theming'],
 		related_modules: [],
 		related_identifiers: ['Themed'],

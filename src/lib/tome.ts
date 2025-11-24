@@ -1,5 +1,6 @@
 import {resolve} from '$app/paths';
 import {slugify} from '@ryanatkn/belt/path.js';
+import type {Component} from 'svelte';
 import {z} from 'zod';
 
 import {create_context} from './context_helpers.js';
@@ -7,11 +8,9 @@ import {DOCS_PATH_DEFAULT} from './docs_helpers.svelte.js';
 
 export const Tome = z.object({
 	name: z.string(),
-	// TODO ? summary: z.string(),
+	// TODO maybe now this makes sense with mdz? summary: z.string(),
 	category: z.string(),
-	// TODO uppercase this?
-	component: z.any(), // TODO type
-	// TODO make these optional?
+	Component: z.custom<Component<any, any>>(),
 	related_tomes: z.array(z.string()),
 	related_modules: z.array(z.string()),
 	related_identifiers: z.array(z.string()),
