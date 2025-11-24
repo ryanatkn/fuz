@@ -260,5 +260,33 @@ describe('module_matches_source', () => {
 			assert.isFalse(module_matches_source('/home/user/project/src/lib/foo.test.ts', options));
 			assert.isFalse(module_matches_source('/home/user/project/src/routes/page.ts', options));
 		});
+
+		test('rejects nested repo paths with /src/lib/ inside other src directories', () => {
+			// Fixture repos nested in src/fixtures/ should be rejected even though they have src/lib/
+			assert.isFalse(
+				module_matches_source(
+					'/home/user/project/src/fixtures/repos/repo_a/src/lib/index.ts',
+				),
+			);
+			assert.isFalse(
+				module_matches_source(
+					'/home/user/project/src/test/fixtures/repos/repo_b/src/lib/foo.ts',
+				),
+			);
+		});
+
+		test('accepts monorepo paths where first /src/ leads to /lib/', () => {
+			// Monorepo structure with packages outside src/
+			assert.isTrue(
+				module_matches_source('/home/user/monorepo/packages/core/src/lib/foo.ts'),
+			);
+		});
+
+		test('accepts deeply nested paths within src/lib/', () => {
+			// Files deeply nested in src/lib/ should work
+			assert.isTrue(
+				module_matches_source('/home/user/project/src/lib/utils/helpers/deep/file.ts'),
+			);
+		});
 	});
 });

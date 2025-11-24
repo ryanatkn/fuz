@@ -78,6 +78,9 @@ export const module_is_test = (path: string): boolean => path.endsWith('.test.ts
  * Checks source directory paths, file extensions, and exclusion patterns.
  * Uses defaults if no options provided.
  *
+ * Rejects nested repo paths by ensuring the first `/src/` leads to the source directory
+ * (e.g. rejects `/src/fixtures/repos/foo/src/lib/index.ts` because `/src/fixtures/` ≠ `/src/lib/`).
+ *
  * @param path Full path to check
  * @param options Configuration options (uses defaults if not provided)
  * @returns True if the path matches all criteria
@@ -86,7 +89,16 @@ export const module_matches_source = (path: string, options?: Module_Source_Opti
 	const opts = {...MODULE_SOURCE_DEFAULTS, ...options};
 
 	// Check if path is in one of the source directories
-	const in_source_dir = opts.source_paths.some((source_path) => path.includes(source_path));
+	// The first /src/ in the path must lead directly to the source directory
+	// This rejects nested repos like /src/fixtures/repos/foo/src/lib/
+	const in_source_dir = opts.source_paths.some((source_path) => {
+		if (!path.includes(source_path)) return false;
+		// Find the first /src/ and verify it's part of the source_path
+		const first_src_index = path.indexOf('/src/');
+		if (first_src_index === -1) return false;
+		// The source_path should start at that position
+		return path.substring(first_src_index).startsWith(source_path);
+	});
 	if (!in_source_dir) return false;
 
 	// Check if extension matches

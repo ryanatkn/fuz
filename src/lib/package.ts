@@ -4201,8 +4201,8 @@ export const src_json: Src_Json = {
 					name: 'module_matches_source',
 					kind: 'function',
 					doc_comment:
-						'Check if a path matches source criteria.\n\nChecks source directory paths, file extensions, and exclusion patterns.\nUses defaults if no options provided.',
-					source_line: 85,
+						'Check if a path matches source criteria.\n\nChecks source directory paths, file extensions, and exclusion patterns.\nUses defaults if no options provided.\n\nRejects nested repo paths by ensuring the first `/src/` leads to the source directory\n(e.g. rejects `/src/fixtures/repos/foo/src/lib/index.ts` because `/src/fixtures/` ≠ `/src/lib/`).',
+					source_line: 88,
 					type_signature: '(path: string, options?: Module_Source_Options | undefined): boolean',
 					return_type: 'boolean',
 					return_description: 'True if the path matches all criteria',
