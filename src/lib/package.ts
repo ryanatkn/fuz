@@ -41,7 +41,7 @@ export const package_json: Package_Json = {
 	},
 	peerDependencies: {
 		'@ryanatkn/belt': '>=0.38.0',
-		'@ryanatkn/fuz_code': '^0.34.0',
+		'@ryanatkn/fuz_code': '>=0.34.0',
 		'@ryanatkn/gro': '>=0.174.1',
 		'@ryanatkn/moss': '>=0.38.0',
 		'@sveltejs/kit': '^2.47.3',
@@ -86,7 +86,7 @@ export const package_json: Package_Json = {
 		typescript: '^5.9.3',
 		'typescript-eslint': '^8.47.0',
 		vitest: '^4.0.13',
-		zod: '^4.1.12',
+		zod: '^4.1.13',
 	},
 	prettier: {
 		plugins: ['prettier-plugin-svelte'],
@@ -6040,7 +6040,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'to_tome_pathname',
 					kind: 'function',
-					source_line: 20,
+					source_line: 21,
 					type_signature:
 						'(item: string | { name: string; category: string; component: any; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }, docs_path?: string, hash?: string | undefined): string',
 					return_type: 'string',
@@ -6066,14 +6066,14 @@ export const src_json: Src_Json = {
 				{
 					name: 'tomes_context',
 					kind: 'variable',
-					source_line: 30,
+					source_line: 31,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Map<string, { name: string; category: string; component: any; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }>; get_maybe: () => Map<...> | undefined; set: (value: Map<...>) => Map<...>; }',
 				},
 				{
 					name: 'get_tome_by_name',
 					kind: 'function',
-					source_line: 32,
+					source_line: 33,
 					type_signature:
 						'(name: string): { name: string; category: string; component: any; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }',
 					return_type:
@@ -6089,7 +6089,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'tome_context',
 					kind: 'variable',
-					source_line: 39,
+					source_line: 40,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => { name: string; category: string; component: any; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }; get_maybe: () => { ...; } | undefined; set: (value: { ...; }) => { ...; }; }',
 				},

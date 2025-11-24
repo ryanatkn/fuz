@@ -35,7 +35,7 @@
   },
   "peerDependencies": {
     "@ryanatkn/belt": ">=0.38.0",
-    "@ryanatkn/fuz_code": "^0.34.0",
+    "@ryanatkn/fuz_code": ">=0.34.0",
     "@ryanatkn/gro": ">=0.174.1",
     "@ryanatkn/moss": ">=0.38.0",
     "@sveltejs/kit": "^2.47.3",
@@ -80,7 +80,7 @@
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.47.0",
     "vitest": "^4.0.13",
-    "zod": "^4.1.12"
+    "zod": "^4.1.13"
   },
   "prettier": {
     "plugins": [
