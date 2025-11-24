@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.161.2
+
+### Patch Changes
+
+- fix source dir detection in `module_matches_source` ([548d3a9](https://github.com/ryanatkn/fuz/commit/548d3a9))
+
 ## 0.161.1
 
 ### Patch Changes
