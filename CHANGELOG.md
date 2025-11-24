@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.161.0
+
+### Minor Changes
+
+- rename `tome.Component` from `.component` and make it typesafe ([#97](https://github.com/ryanatkn/fuz/pull/97))
+
 ## 0.160.0
 
 ### Minor Changes
