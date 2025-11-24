@@ -6033,21 +6033,21 @@ export const src_json: Src_Json = {
 				{
 					name: 'Tome',
 					kind: 'type',
-					source_line: 8,
+					source_line: 9,
 					type_signature:
-						'ZodObject<{ name: ZodString; category: ZodString; Component: ZodAny; related_tomes: ZodArray<ZodString>; related_modules: ZodArray<ZodString>; related_identifiers: ZodArray<...>; }, $strip>',
+						'ZodObject<{ name: ZodString; category: ZodString; Component: ZodCustom<Component<any, any, string>, Component<any, any, string>>; related_tomes: ZodArray<...>; related_modules: ZodArray<...>; related_identifiers: ZodArray<...>; }, $strip>',
 				},
 				{
 					name: 'to_tome_pathname',
 					kind: 'function',
-					source_line: 21,
+					source_line: 20,
 					type_signature:
-						'(item: string | { name: string; category: string; Component: any; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }, docs_path?: string, hash?: string | undefined): string',
+						'(item: string | { name: string; category: string; Component: Component<any, any, string>; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }, docs_path?: string, hash?: string | undefined): string',
 					return_type: 'string',
 					parameters: [
 						{
 							name: 'item',
-							type: 'string | { name: string; category: string; Component: any; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }',
+							type: 'string | { name: string; category: string; Component: Component<any, any, string>; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }',
 							optional: false,
 						},
 						{
@@ -6066,18 +6066,18 @@ export const src_json: Src_Json = {
 				{
 					name: 'tomes_context',
 					kind: 'variable',
-					source_line: 31,
+					source_line: 30,
 					type_signature:
-						'{ get: (error_message?: string | undefined) => Map<string, { name: string; category: string; Component: any; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }>; get_maybe: () => Map<...> | undefined; set: (value: Map<...>) => Map<...>; }',
+						'{ get: (error_message?: string | undefined) => Map<string, { name: string; category: string; Component: Component<any, any, string>; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }>; get_maybe: () => Map<...> | undefined; set: (value: Map<...>) => Map<...>; }',
 				},
 				{
 					name: 'get_tome_by_name',
 					kind: 'function',
-					source_line: 33,
+					source_line: 32,
 					type_signature:
-						'(name: string): { name: string; category: string; Component: any; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }',
+						'(name: string): { name: string; category: string; Component: Component<any, any, string>; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }',
 					return_type:
-						'{ name: string; category: string; Component: any; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }',
+						'{ name: string; category: string; Component: Component<any, any, string>; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }',
 					parameters: [
 						{
 							name: 'name',
@@ -6089,9 +6089,9 @@ export const src_json: Src_Json = {
 				{
 					name: 'tome_context',
 					kind: 'variable',
-					source_line: 40,
+					source_line: 39,
 					type_signature:
-						'{ get: (error_message?: string | undefined) => { name: string; category: string; Component: any; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }; get_maybe: () => { ...; } | undefined; set: (value: { ...; }) => { ...; }; }',
+						'{ get: (error_message?: string | undefined) => { name: string; category: string; Component: Component<any, any, string>; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }; get_maybe: () => { ...; } | undefined; set: (value: { ...; }) => { ...; }; }',
 				},
 			],
 			dependencies: ['context_helpers.ts', 'docs_helpers.svelte.ts'],
