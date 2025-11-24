@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.161.1
+
+### Patch Changes
+
+- remove serialized pkg section from `Package_Detail` ([b6d102d](https://github.com/ryanatkn/fuz/commit/b6d102d))
+
 ## 0.161.0
 
 ### Minor Changes
