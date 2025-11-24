@@ -15,7 +15,15 @@
 		module_is_json,
 	} from './module_helpers.js';
 
-	interface Props {
+	const {
+		pkg,
+		repo_name,
+		description,
+		motto,
+		npm_url,
+		homepage_url,
+		children,
+	}: {
 		pkg: Pkg; // TODO normalized version with cached primitives?
 		repo_name?: Snippet<[repo_name: string]>;
 		description?: Snippet<[description: string]>;
@@ -23,9 +31,7 @@
 		npm_url?: Snippet<[npm_url: string]>;
 		homepage_url?: Snippet<[homepage_url: string]>;
 		children?: Snippet<[pkg: Pkg]>;
-	}
-
-	const {pkg, repo_name, description, motto, npm_url, homepage_url, children}: Props = $props();
+	} = $props();
 
 	// TODO show other data (lines of code)
 

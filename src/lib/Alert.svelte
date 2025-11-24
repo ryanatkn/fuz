@@ -10,7 +10,15 @@
 
 	// TODO think through Alert+Card APIs together, one can be a button and the other a link atm
 
-	interface Props {
+	const {
+		status = 'inform',
+		color,
+		onclick,
+		disabled,
+		attrs,
+		icon,
+		children,
+	}: {
 		status?: Alert_Status;
 		color?: string;
 		// TODO this API is a mess in part because of the types, maybe an explicit `Alert_Button` is better,
@@ -22,9 +30,7 @@
 		attrs?: HTMLAttributes<HTMLElement> | undefined;
 		icon?: string | Snippet<[icon: string]> | null | undefined; // TODO experimenting with this, gets complex in the impl
 		children: Snippet;
-	}
-
-	const {status = 'inform', color, onclick, disabled, attrs, icon, children}: Props = $props();
+	} = $props();
 
 	const options = $derived(alert_status_options[status]);
 	// TODO change this to use the hue and put transparency on the borders, or add a borderColor option

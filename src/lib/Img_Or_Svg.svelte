@@ -1,7 +1,16 @@
 <script lang="ts">
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
-	interface Props {
+	const {
+		src,
+		label,
+		size,
+		width,
+		height,
+		svg_attrs,
+		img_attrs,
+		attrs,
+	}: {
 		src: string;
 		label?: string;
 		/**
@@ -20,9 +29,7 @@
 		img_attrs?: SvelteHTMLElements['img'];
 		/** Shared attributes for both img and svg. */
 		attrs?: Pick<SvelteHTMLElements['div'], 'class' | 'style'>; // TODO more shared attributes? can't use `div` directly for svg, users can always assert the type as a hacky workaround
-	}
-
-	const {src, label, size, width, height, svg_attrs, img_attrs, attrs}: Props = $props();
+	} = $props();
 
 	const final_width = $derived(width ?? size);
 	const final_height = $derived(height ?? size);

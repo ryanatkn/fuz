@@ -6,13 +6,15 @@
 
 	// TODO this is experimental
 
-	interface Props {
+	const {
+		dialogs,
+		onclose,
+		children,
+	}: {
 		dialogs: Array<Dialog_Params>;
 		onclose?: () => void;
 		children?: Snippet<[dialog: Dialog_Params]>;
-	}
-
-	const {dialogs, onclose, children}: Props = $props();
+	} = $props();
 </script>
 
 {#each dialogs as dialog, index (dialog)}<Dialog

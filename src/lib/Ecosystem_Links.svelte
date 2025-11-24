@@ -1,9 +1,9 @@
 <script lang="ts">
-	interface Props {
+	const {
+		selected,
+	}: {
 		selected?: 'webdevladder.net' | 'ryanatkn.com'; // 'spiderspace.org' |
-	}
-
-	const {selected}: Props = $props();
+	} = $props();
 </script>
 
 <ul>

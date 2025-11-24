@@ -12,11 +12,11 @@
 	import {package_json, src_json} from '$lib/package.js';
 	import Spiders from '$lib/Spiders.svelte';
 
-	interface Props {
+	const {
+		children,
+	}: {
 		children: Snippet;
-	}
-
-	const {children}: Props = $props();
+	} = $props();
 
 	pkg_context.set(new Pkg(package_json, src_json));
 </script>

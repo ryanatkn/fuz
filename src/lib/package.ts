@@ -133,6 +133,8 @@ export const src_json: Src_Json = {
 				{
 					name: 'Alert',
 					kind: 'component',
+					doc_comment: '',
+					see_also: ['https://www.w3.org/WAI/ARIA/apg/patterns/alert/'],
 					props: [
 						{
 							name: 'status',

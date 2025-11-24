@@ -8,7 +8,13 @@
 		name: string;
 	}
 
-	interface Props {
+	let {
+		status,
+		user,
+		onclick,
+		children,
+		items,
+	}: {
 		/** Current status */
 		status: Status;
 		/** User data */
@@ -19,9 +25,7 @@
 		children?: Snippet;
 		/** Array of items */
 		items?: Array<string>;
-	}
-
-	let {status, user, onclick, children, items}: Props = $props();
+	} = $props();
 </script>
 
 <button {onclick}>

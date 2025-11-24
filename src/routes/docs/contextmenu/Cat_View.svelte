@@ -1,15 +1,19 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
 
-	interface Props {
+	const {
+		name = 'Cat',
+		icon = '😺',
+		show_name = true,
+		show_icon = true,
+		children,
+	}: {
 		name?: string;
 		icon?: string | null;
 		show_name?: boolean;
 		show_icon?: boolean;
 		children?: Snippet;
-	}
-
-	const {name = 'Cat', icon = '😺', show_name = true, show_icon = true, children}: Props = $props();
+	} = $props();
 </script>
 
 <!-- TODO add link option? -->

@@ -1,5 +1,9 @@
 <script lang="ts">
-	interface Props {
+	let {
+		name,
+		age,
+		active = true,
+	}: {
 		/**
 		 * The user's full name.
 		 * Should be formatted as "First Last".
@@ -15,9 +19,7 @@
 		 * Defaults to true if not specified.
 		 */
 		active?: boolean;
-	}
-
-	let {name, age, active = true}: Props = $props();
+	} = $props();
 </script>
 
 <div>

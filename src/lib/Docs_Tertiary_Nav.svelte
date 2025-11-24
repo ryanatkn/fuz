@@ -10,13 +10,15 @@
 	import Module_Link from './Module_Link.svelte';
 	import Identifier_Link from './Identifier_Link.svelte';
 
-	interface Props {
+	const {
+		tomes,
+		tomes_by_name,
+		sidebar = true,
+	}: {
 		tomes: Array<Tome>;
 		tomes_by_name: Map<string, Tome>;
 		sidebar?: boolean; // TODO @many dialog navs (this shouldn't exist)
-	}
-
-	const {tomes, tomes_by_name, sidebar = true}: Props = $props();
+	} = $props();
 
 	const selected_tome = $derived(tomes.find((t) => to_tome_pathname(t) === page.url.pathname));
 

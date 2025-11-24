@@ -10,7 +10,11 @@
 	import Api_Identifier_List from './Api_Identifier_List.svelte';
 	import {create_module_identifier_search} from './api_search.svelte.js';
 
-	interface Props {
+	const {
+		module_path: module_path_param,
+		pkg = pkg_context.get(),
+		tome = get_tome_by_name('api'),
+	}: {
 		/**
 		 * The module path parameter from the route (e.g., "lib/Button.svelte").
 		 */
@@ -25,13 +29,7 @@
 		 * Defaults to looking up the 'api' tome.
 		 */
 		tome?: Tome;
-	}
-
-	const {
-		module_path: module_path_param,
-		pkg = pkg_context.get(),
-		tome = get_tome_by_name('api'),
-	}: Props = $props();
+	} = $props();
 
 	// normalize module_path to string (could be array from [...module_path] route param)
 	const module_path = $derived(

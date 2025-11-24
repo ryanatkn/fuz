@@ -5,14 +5,17 @@
 	import Pending_Animation from './Pending_Animation.svelte';
 	import {contextmenu_context, type Contextmenu_Run} from './contextmenu_state.svelte.js';
 
-	interface Props {
+	const {
+		run,
+		icon,
+		children,
+		disabled: disabled_prop = false,
+	}: {
 		run: Contextmenu_Run;
 		icon?: string | Snippet;
 		children: Snippet;
 		disabled?: boolean;
-	}
-
-	const {run, icon, children, disabled: disabled_prop = false}: Props = $props();
+	} = $props();
 
 	const contextmenu = contextmenu_context.get();
 

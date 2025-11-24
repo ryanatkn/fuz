@@ -2,12 +2,13 @@
 	import Docs_Menu from './Docs_Menu.svelte';
 	import {Tome} from './tome.js';
 
-	interface Props {
+	const {
+		tomes,
+		sidebar = true,
+	}: {
 		tomes: Array<Tome>;
 		sidebar?: boolean; // TODO @many dialog navs (this shouldn't exist)
-	}
-
-	const {tomes, sidebar = true}: Props = $props();
+	} = $props();
 
 	const expand_width = $derived(!sidebar);
 </script>

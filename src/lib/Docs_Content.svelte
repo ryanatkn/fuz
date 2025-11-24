@@ -5,15 +5,19 @@
 	import type {Tome} from './tome.js';
 	import Package_Summary from './Package_Summary.svelte';
 
-	interface Props {
+	const {
+		tomes,
+		pkg,
+		repo_name,
+		content,
+		header,
+	}: {
 		tomes: Array<Tome>;
 		pkg: Pkg;
 		repo_name?: Snippet<[repo_name: string]>;
 		content?: Snippet;
 		header?: Snippet;
-	}
-
-	const {tomes, pkg, repo_name, content, header}: Props = $props();
+	} = $props();
 </script>
 
 <div class="width_upto_md">

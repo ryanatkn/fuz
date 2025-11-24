@@ -1,6 +1,7 @@
 {
 	"name": "Props_Basic",
 	"kind": "component",
+	"doc_comment": "A component with basic typed props.",
 	"props": [
 		{
 			"name": "title",

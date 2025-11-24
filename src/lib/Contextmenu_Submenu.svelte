@@ -5,13 +5,15 @@
 	import {contextmenu_context, contextmenu_dimensions_context} from './contextmenu_state.svelte.js';
 	import type {Dimensions} from './dimensions.svelte.js';
 
-	interface Props {
+	const {
+		icon,
+		menu,
+		children,
+	}: {
 		icon?: Snippet;
 		menu: Snippet;
 		children: Snippet;
-	}
-
-	const {icon, menu, children}: Props = $props();
+	} = $props();
 
 	const contextmenu = contextmenu_context.get();
 

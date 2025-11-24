@@ -5,7 +5,12 @@
 	import type {Snippet} from 'svelte';
 	import {BROWSER} from 'esm-env';
 
-	interface Props {
+	const {
+		host = '',
+		path = page.url.pathname,
+		auto = true,
+		children,
+	}: {
 		/**
 		 * The target host to redirect to. Defaults to the current `location.host`.
 		 * @nonreactive
@@ -22,9 +27,7 @@
 		 */
 		auto?: boolean;
 		children?: Snippet<[url: string]>;
-	}
-
-	const {host = '', path = page.url.pathname, auto = true, children}: Props = $props();
+	} = $props();
 
 	const url = host + path;
 

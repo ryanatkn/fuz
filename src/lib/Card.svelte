@@ -4,16 +4,21 @@
 
 	// TODO think through Alert+Card APIs together, one can be a button and the other a link atm
 
-	interface Props {
+	const {
+		tag,
+		href,
+		align = 'left',
+		attrs,
+		icon,
+		children,
+	}: {
 		tag?: string | undefined;
 		href?: string | undefined;
 		align?: 'left' | 'right' | 'above' | 'below';
 		attrs?: any; // type? what about the optional tag though? (button etc - maybe API should be more explicit)
 		icon?: string | Snippet;
 		children: Snippet;
-	}
-
-	const {tag, href, align = 'left', attrs, icon, children}: Props = $props();
+	} = $props();
 
 	const link = $derived(!!href);
 	const selected = $derived(link && page.url.pathname === href);

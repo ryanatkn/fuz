@@ -182,12 +182,8 @@
 	import '@ryanatkn/moss/theme.css';
 	import Themed from '@ryanatkn/fuz/Themed.svelte';
 	import type {Snippet} from 'svelte';
-
-	interface Props {
-		children: Snippet;
-	}
 	
-	const {children}: Props = $props();
+	const {children}: {children: Snippet} = $props();
 </script>
 
 <!-- enable theme and color-scheme support -->

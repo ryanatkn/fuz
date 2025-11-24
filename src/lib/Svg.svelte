@@ -26,7 +26,17 @@
 </script>
 
 <script lang="ts">
-	interface Props {
+	const {
+		data,
+		fill,
+		size = 'var(--font_size, auto)',
+		width,
+		height,
+		label,
+		inline,
+		shrink = true,
+		attrs,
+	}: {
 		data: Svg_Data;
 		/**
 		 * Overrides `data.fill`.
@@ -51,19 +61,7 @@
 		inline?: boolean;
 		shrink?: boolean;
 		attrs?: SvelteHTMLElements['svg'];
-	}
-
-	const {
-		data,
-		fill,
-		size = 'var(--font_size, auto)',
-		width,
-		height,
-		label,
-		inline,
-		shrink = true,
-		attrs,
-	}: Props = $props();
+	} = $props();
 
 	const final_fill = $derived(fill ?? data.fill ?? 'var(--text_color, #000)'); // can be overridden by each path's `fill` attribute
 	const final_width = $derived(width ?? size); // TODO @many default value? `100%` or omitted or something else?

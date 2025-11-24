@@ -12,12 +12,6 @@
 	import Svg from './Svg.svelte';
 	import {fuz_logo} from './logos.js';
 
-	interface Props {
-		spiders?: Array<string>; // for now, just colors
-		seed?: unknown;
-		random?: typeof Math.random;
-	}
-
 	const {
 		spiders = [
 			'var(--color_a_5)',
@@ -33,7 +27,11 @@
 		],
 		seed = minute_of_day(),
 		random = create_random_alea(seed),
-	}: Props = $props();
+	}: {
+		spiders?: Array<string>; // for now, just colors
+		seed?: unknown;
+		random?: typeof Math.random;
+	} = $props();
 
 	const shuffled = $derived(shuffle(spiders.slice(), (min, max) => random_int(min, max, random)));
 	const rotations = $derived(shuffled.map(() => random_int(0, 359, random)));

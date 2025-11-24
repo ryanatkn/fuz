@@ -1,11 +1,11 @@
 <script lang="ts">
 	import type {Style_Variable} from '@ryanatkn/moss/variable.js';
 
-	interface Props {
+	const {
+		variable,
+	}: {
 		variable: Style_Variable | null;
-	}
-
-	const {variable}: Props = $props();
+	} = $props();
 
 	// TODO @many add to $lib?
 

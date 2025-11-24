@@ -4,17 +4,15 @@
 
 	import {themer_context} from './themer.svelte.js';
 
-	interface Props {
-		value?: {color_scheme: Color_Scheme};
-		onchange?: (color_scheme: Color_Scheme) => void;
-	}
-
 	const {
 		value = themer_context.get(),
 		onchange = (color_scheme) => {
 			value.color_scheme = color_scheme; // won't work with POJOs but users could provide their own onchange in that case
 		},
-	}: Props = $props();
+	}: {
+		value?: {color_scheme: Color_Scheme};
+		onchange?: (color_scheme: Color_Scheme) => void;
+	} = $props();
 </script>
 
 <!-- TODO maybe support menubar aria

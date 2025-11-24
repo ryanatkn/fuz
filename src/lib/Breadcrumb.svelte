@@ -5,7 +5,13 @@
 	import type {Snippet} from 'svelte';
 	import {strip_start, ensure_end} from '@ryanatkn/belt/string.js';
 
-	interface Props {
+	const {
+		path,
+		selected_path,
+		base_path,
+		separator,
+		children,
+	}: {
 		/**
 		 * Prefixed with a slash and relative to the base path.
 		 */
@@ -22,9 +28,7 @@
 		base_path?: string;
 		separator?: Snippet;
 		children?: Snippet;
-	}
-
-	const {path, selected_path, base_path, separator, children}: Props = $props();
+	} = $props();
 
 	const final_base_path = $derived(base_path ?? resolve('/').slice(0, -1));
 

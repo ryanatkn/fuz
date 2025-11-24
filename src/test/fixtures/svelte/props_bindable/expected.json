@@ -1,6 +1,7 @@
 {
 	"name": "Props_Bindable",
 	"kind": "component",
+	"doc_comment": "Component with bindable props.",
 	"props": [
 		{
 			"name": "name",

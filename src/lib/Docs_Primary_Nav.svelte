@@ -6,13 +6,15 @@
 	import type {Pkg} from './pkg.svelte.js';
 	import Breadcrumb from './Breadcrumb.svelte';
 
-	interface Props {
+	const {
+		pkg,
+		breadcrumb_children,
+		children,
+	}: {
 		pkg: Pkg;
 		breadcrumb_children?: Snippet<[is_primary_nav: boolean]>;
 		children?: Snippet;
-	}
-
-	const {pkg, breadcrumb_children, children}: Props = $props();
+	} = $props();
 
 	const iframed = is_iframed();
 	const enabled = !iframed;

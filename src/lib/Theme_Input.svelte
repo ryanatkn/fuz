@@ -5,15 +5,6 @@
 
 	import {themer_context} from './themer.svelte.js';
 
-	interface Props {
-		selected_theme?: {theme: Theme};
-		themes?: Array<Theme>;
-		enable_editing?: boolean;
-		select?: ((theme: Theme) => void | boolean) | null;
-		onselect?: (theme: Theme) => void;
-		onedit?: (theme: Theme) => void;
-	}
-
 	const {
 		selected_theme = themer_context.get(),
 		themes = default_themes,
@@ -23,7 +14,14 @@
 		},
 		onselect,
 		onedit,
-	}: Props = $props();
+	}: {
+		selected_theme?: {theme: Theme};
+		themes?: Array<Theme>;
+		enable_editing?: boolean;
+		select?: ((theme: Theme) => void | boolean) | null;
+		onselect?: (theme: Theme) => void;
+		onedit?: (theme: Theme) => void;
+	} = $props();
 </script>
 
 <menu class="theme_input unstyled">

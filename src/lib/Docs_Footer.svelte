@@ -6,16 +6,21 @@
 	import Svg from './Svg.svelte';
 	import {github_logo} from './logos.js';
 
-	interface Props {
+	const {
+		pkg,
+		root_url = null,
+		logo,
+		logo_header,
+		logo_footer,
+		children,
+	}: {
 		pkg: Pkg;
 		root_url?: Url | null;
 		logo?: Snippet;
 		logo_header?: Snippet;
 		logo_footer?: Snippet;
 		children?: Snippet;
-	}
-
-	const {pkg, root_url = null, logo, logo_header, logo_footer, children}: Props = $props();
+	} = $props();
 </script>
 
 <footer class="box">

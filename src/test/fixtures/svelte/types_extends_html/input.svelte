@@ -1,17 +1,20 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
-	import type {HTMLButtonAttributes} from 'svelte/elements';
+	import type {SvelteHTMLElements} from 'svelte/elements';
 
-	interface Props extends HTMLButtonAttributes {
+	let {
+		variant = 'primary',
+		loading = false,
+		children,
+		...attrs
+	}: SvelteHTMLElements['button'] & {
 		/** The variant style */
 		variant?: 'primary' | 'secondary';
 		/** Loading state */
 		loading?: boolean;
 		/** Content snippet */
 		children?: Snippet;
-	}
-
-	let {variant = 'primary', loading = false, children, ...attrs}: Props = $props();
+	} = $props();
 </script>
 
 <button class="button-{variant}" disabled={loading} {...attrs}>

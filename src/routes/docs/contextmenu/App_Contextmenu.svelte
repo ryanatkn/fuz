@@ -5,11 +5,11 @@
 	import Svg from '$lib/Svg.svelte';
 	import {github_logo} from '$lib/logos.js';
 
-	interface Props {
+	const {
+		toggle_about_dialog,
+	}: {
 		toggle_about_dialog: () => void;
-	}
-
-	const {toggle_about_dialog}: Props = $props();
+	} = $props();
 </script>
 
 <Contextmenu_Link_Entry href="https://github.com/ryanatkn/fuz">

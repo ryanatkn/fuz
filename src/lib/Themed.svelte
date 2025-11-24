@@ -19,7 +19,16 @@
 	} from './themer.svelte.js';
 	import {effect_with_count} from './rune_helpers.svelte.js';
 
-	interface Props {
+	const {
+		sync_color_scheme = default_sync_color_scheme,
+		load_color_scheme = default_load_color_scheme,
+		save_color_scheme = default_save_color_scheme,
+		load_theme = default_load_theme,
+		save_theme = default_save_theme,
+		theme_fallback,
+		themer = new Themer(load_theme(theme_fallback), load_color_scheme()),
+		children,
+	}: {
 		sync_color_scheme?: typeof default_sync_color_scheme;
 		load_color_scheme?: typeof default_load_color_scheme;
 		save_color_scheme?: typeof default_save_color_scheme;
@@ -35,18 +44,7 @@
 		 */
 		themer?: Themer;
 		children: Snippet<[themer: Themer, style: string | null, theme_style_html: string | null]>;
-	}
-
-	const {
-		sync_color_scheme = default_sync_color_scheme,
-		load_color_scheme = default_load_color_scheme,
-		save_color_scheme = default_save_color_scheme,
-		load_theme = default_load_theme,
-		save_theme = default_save_theme,
-		theme_fallback,
-		themer = new Themer(load_theme(theme_fallback), load_color_scheme()),
-		children,
-	}: Props = $props();
+	} = $props();
 
 	// In dev mode only, warn about misuse of the singleton `Themed`.
 	if (DEV) {

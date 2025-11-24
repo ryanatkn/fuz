@@ -1,5 +1,8 @@
 <script lang="ts">
-	interface Props {
+	let {
+		color = 'blue',
+		size = 100,
+	}: {
 		/**
 		 * The color to use.
 		 * @default "blue"
@@ -10,9 +13,7 @@
 		 * @default 100
 		 */
 		size?: number;
-	}
-
-	let {color = 'blue', size = 100}: Props = $props();
+	} = $props();
 </script>
 
 <div style="color: {color}; width: {size}px">Content</div>

@@ -3,14 +3,15 @@
 	 * A component with basic typed props.
 	 */
 
-	interface Props {
+	let {
+		title,
+		count,
+	}: {
 		/** The title to display */
 		title: string;
 		/** The count value */
 		count: number;
-	}
-
-	let {title, count}: Props = $props();
+	} = $props();
 </script>
 
 <div>

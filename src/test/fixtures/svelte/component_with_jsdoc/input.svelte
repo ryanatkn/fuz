@@ -11,11 +11,11 @@
 -->
 
 <script lang="ts">
-	interface Props {
+	let {
+		title,
+	}: {
 		title: string;
-	}
-
-	let {title}: Props = $props();
+	} = $props();
 </script>
 
 <h1>{title}</h1>

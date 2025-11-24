@@ -6,7 +6,16 @@
 	import type {Pkg} from './pkg.svelte.js';
 	import Img_Or_Svg from './Img_Or_Svg.svelte';
 
-	interface Props {
+	const {
+		pkg,
+		repo_name,
+		logo,
+		motto,
+		description,
+		npm_url,
+		homepage_url,
+		children,
+	}: {
 		pkg: Pkg; // TODO normalized version with cached primitives?
 		repo_name?: Snippet<[repo_name: string]>;
 		logo?: Snippet<[logo_url: string, logo_alt: string]>;
@@ -15,10 +24,7 @@
 		npm_url?: Snippet<[npm_url: string]>;
 		homepage_url?: Snippet<[homepage_url: string]>;
 		children?: Snippet;
-	}
-
-	const {pkg, repo_name, logo, motto, description, npm_url, homepage_url, children}: Props =
-		$props();
+	} = $props();
 
 	const {package_json} = $derived(pkg);
 </script>

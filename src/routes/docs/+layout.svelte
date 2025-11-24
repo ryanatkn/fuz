@@ -10,11 +10,11 @@
 	import Svg from '$lib/Svg.svelte';
 	import {fuz_logo} from '$lib/logos.js';
 
-	interface Props {
+	const {
+		children,
+	}: {
 		children: Snippet;
-	}
-
-	const {children}: Props = $props();
+	} = $props();
 
 	const selected_variable = selected_variable_context.set();
 

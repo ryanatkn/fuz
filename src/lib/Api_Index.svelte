@@ -9,7 +9,11 @@
 	import Api_Identifier_List from './Api_Identifier_List.svelte';
 	import {create_identifier_search} from './api_search.svelte.js';
 
-	interface Props {
+	const {
+		pkg = pkg_context.get(),
+		tome = get_tome_by_name('api'),
+		minimal = false,
+	}: {
 		/**
 		 * The package instance to render API docs for.
 		 * Defaults to getting from pkg_context.
@@ -25,13 +29,7 @@
 		 * Used when the API index is shown on a parent docs page.
 		 */
 		minimal?: boolean;
-	}
-
-	const {
-		pkg = pkg_context.get(),
-		tome = get_tome_by_name('api'),
-		minimal = false,
-	}: Props = $props();
+	} = $props();
 
 	const search = create_identifier_search(pkg);
 </script>

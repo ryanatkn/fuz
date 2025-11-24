@@ -4,11 +4,11 @@
 	import {get_tome_by_name} from '$lib/tome.js';
 	import Tome_Content from '$lib/Tome_Content.svelte';
 
-	interface Props {
+	const {
+		children,
+	}: {
 		children: Snippet;
-	}
-
-	const {children}: Props = $props();
+	} = $props();
 
 	const LIBRARY_ITEM_NAME = 'Breadcrumb';
 

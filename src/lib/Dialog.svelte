@@ -21,7 +21,15 @@
 
 	*/
 
-	interface Props {
+	const {
+		container,
+		layout = 'centered',
+		index = 0,
+		active = true,
+		content_selector = '.pane',
+		onclose,
+		children,
+	}: {
 		// TODO maybe change this API away from an element to a selector? or remove the API completely?
 		container?: HTMLElement;
 		/**
@@ -45,17 +53,7 @@
 		content_selector?: string | null;
 		onclose?: () => void;
 		children: Snippet<[close: (e?: Event) => void]>;
-	}
-
-	const {
-		container,
-		layout = 'centered',
-		index = 0,
-		active = true,
-		content_selector = '.pane',
-		onclose,
-		children,
-	}: Props = $props();
+	} = $props();
 
 	const ROOT_SELECTOR = 'body'; // TODO make configurable
 	const CONTAINER_ID = 'fuz_dialog';

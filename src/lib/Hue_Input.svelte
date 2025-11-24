@@ -2,13 +2,15 @@
 	import type {Hue} from '@ryanatkn/belt/colors.js';
 	import type {Snippet} from 'svelte';
 
-	interface Props {
+	let {
+		value = $bindable(180),
+		oninput,
+		children,
+	}: {
 		value?: Hue;
 		oninput?: (hue: Hue) => void;
 		children?: Snippet;
-	}
-
-	let {value = $bindable(180), oninput, children}: Props = $props();
+	} = $props();
 
 	// TODO probably upstream this to belt
 	const parse_hue = (v: any): Hue | null => {

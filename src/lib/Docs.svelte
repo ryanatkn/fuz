@@ -14,14 +14,17 @@
 	import Docs_Footer from './Docs_Footer.svelte';
 	import {Docs_Links, docs_links_context} from './docs_helpers.svelte.js';
 
-	interface Props {
+	const {
+		tomes,
+		pkg,
+		breadcrumb_children,
+		children,
+	}: {
 		tomes: Array<Tome>;
 		pkg: Pkg;
 		breadcrumb_children?: Snippet<[is_primary_nav: boolean]>;
 		children: Snippet;
-	}
-
-	const {tomes, pkg, breadcrumb_children, children}: Props = $props();
+	} = $props();
 
 	// TODO this API is messy, inconsistent usage of props/context
 	const tomes_by_name = new Map(tomes.map((t) => [t.name, t]));

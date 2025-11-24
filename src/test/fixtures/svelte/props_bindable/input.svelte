@@ -3,16 +3,18 @@
 	 * Component with bindable props.
 	 */
 
-	interface Props {
+	let {
+		name,
+		value = $bindable(),
+		checked = $bindable(),
+	}: {
 		/** Regular prop */
 		name: string;
 		/** Bindable value prop */
 		value: string;
 		/** Bindable checked prop */
 		checked: boolean;
-	}
-
-	let {name, value = $bindable(), checked = $bindable()}: Props = $props();
+	} = $props();
 </script>
 
 <label>

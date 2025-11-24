@@ -4,11 +4,11 @@
 
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
 
-	interface Props {
+	const {
+		selected_path,
+	}: {
 		selected_path: string;
-	}
-
-	const {selected_path}: Props = $props();
+	} = $props();
 </script>
 
 <Code

@@ -4,11 +4,11 @@
 	import Ecosystem_Links from './Ecosystem_Links.svelte';
 	import Project_Links from './Project_Links.svelte';
 
-	interface Props {
+	const {
+		children,
+	}: {
 		children?: Snippet;
-	}
-
-	const {children}: Props = $props();
+	} = $props();
 </script>
 
 <section class="panel p_lg">

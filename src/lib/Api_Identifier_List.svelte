@@ -4,12 +4,13 @@
 	import Tome_Section from './Tome_Section.svelte';
 	import Tome_Section_Header from './Tome_Section_Header.svelte';
 
-	interface Props {
+	const {
+		identifiers,
+		search_query = '',
+	}: {
 		identifiers: Array<Identifier>;
 		search_query?: string;
-	}
-
-	const {identifiers, search_query = ''}: Props = $props();
+	} = $props();
 </script>
 
 {#if identifiers.length === 0}
