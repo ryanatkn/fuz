@@ -29,7 +29,7 @@
 			{@render content()}
 		{:else}
 			{#each tomes as tome (tome)}
-				<tome.component />
+				<tome.Component />
 			{/each}
 		{/if}
 	</div>

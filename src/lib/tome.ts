@@ -10,8 +10,8 @@ export const Tome = z.object({
 	// TODO ? summary: z.string(),
 	category: z.string(),
 	// TODO uppercase this?
-	component: z.any(), // TODO type
-	// TODO make these optional?
+	Component: z.any(), // TODO type
+	// TODO make these optional? maybe not
 	related_tomes: z.array(z.string()),
 	related_modules: z.array(z.string()),
 	related_identifiers: z.array(z.string()),
