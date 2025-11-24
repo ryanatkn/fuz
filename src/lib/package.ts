@@ -41,6 +41,7 @@ export const package_json: Package_Json = {
 	},
 	peerDependencies: {
 		'@ryanatkn/belt': '>=0.38.0',
+		'@ryanatkn/fuz_code': '^0.34.0',
 		'@ryanatkn/gro': '>=0.174.1',
 		'@ryanatkn/moss': '>=0.38.0',
 		'@sveltejs/kit': '^2.47.3',
@@ -50,6 +51,9 @@ export const package_json: Package_Json = {
 		zod: '^4.1.12',
 	},
 	peerDependenciesMeta: {
+		'@ryanatkn/fuz_code': {
+			optional: true,
+		},
 		'@ryanatkn/gro': {
 			optional: true,
 		},
@@ -4952,7 +4956,7 @@ export const src_json: Src_Json = {
 				{
 					name: 'src_json',
 					kind: 'variable',
-					source_line: 122,
+					source_line: 126,
 					type_signature:
 						'{ [x: string]: unknown; name: string; version: string; modules?: { [x: string]: unknown; path: string; identifiers?: { [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "constructor" | "component" | "css"; ... 19 more ...; alias_of?: { ...; } | undefined; }[] | undefined...',
 				},
