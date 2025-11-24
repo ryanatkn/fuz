@@ -2,4 +2,4 @@
 '@ryanatkn/fuz': minor
 ---
 
-rename `tome.Component` from `.component`
+rename `tome.Component` from `.component` and make it typesafe
