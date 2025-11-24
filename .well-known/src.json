@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.161.1",
+  "version": "0.161.2",
   "modules": [
     {
       "path": "alert.ts",
