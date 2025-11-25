@@ -152,7 +152,7 @@ Supporting helpers (three-layer architecture):
   - `module_matches_source` - configurable source detection predicate
   - `module_is_typescript`, `module_is_svelte` - simple extension predicates
   - `module_extract_path`, `module_get_component_name` - path utilities
-  - `Module_Source_Options`, `MODULE_SOURCE_DEFAULTS` - configuration
+  - `ModuleSourceOptions`, `MODULE_SOURCE_DEFAULTS` - configuration
 - `src_json.ts` - type definitions for the metadata format
 - `package_helpers.ts` - URL builders (`url_github_file`, `url_api_identifier`,
   `url_api_module`, etc.)
@@ -171,8 +171,8 @@ outside of package generation for IDE integrations, linters, or custom tools.
 
 Documentation components:
 
-- `Identifier_Detail.svelte` - renders full identifier documentation
-- `Type_Link.svelte`, `Module_Link.svelte`, `Identifier_Link.svelte` -
+- `IdentifierDetail.svelte` - renders full identifier documentation
+- `TypeLink.svelte`, `ModuleLink.svelte`, `IdentifierLink.svelte` -
   cross-reference links
 - `Docs*.svelte` - documentation layout system
 
@@ -203,46 +203,46 @@ layout and structure:
 feedback and alerts:
 
 - `Alert` - alert/notification component
-- `Pending_Animation` - loading animations
-- `Pending_Button` - buttons with pending states
+- `PendingAnimation` - loading animations
+- `PendingButton` - buttons with pending states
 
 overlays and dialogs:
 
 - `Dialog` - modal dialog component
 - `Dialogs` - multi-dialog queue manager (experimental)
 - `Teleport` - portal/teleport component
-- `Contextmenu` - context menu system (`Contextmenu_Root`, `Contextmenu_Entry`,
-  `Contextmenu_Link_Entry`, `Contextmenu_Submenu`, etc.)
+- `Contextmenu` - context menu system (`ContextmenuRoot`, `ContextmenuEntry`,
+  `ContextmenuLinkEntry`, `ContextmenuSubmenu`, etc.)
 
 forms and inputs:
 
-- `Hue_Input` - hue color picker
-- `Color_Scheme_Input` - color scheme selector
-- `Theme_Input` - theme selector
+- `HueInput` - hue color picker
+- `ColorSchemeInput` - color scheme selector
+- `ThemeInput` - theme selector
 
 icons and media:
 
 - `Svg` - SVG component wrapper
 - `Glyph` - emoji/icon display
-- `Img_Or_Svg` - image/SVG wrapper
+- `ImgOrSvg` - image/SVG wrapper
 
 clipboard:
 
-- `Copy_To_Clipboard` - clipboard copy button
-- `Paste_From_Clipboard` - clipboard paste functionality
+- `CopyToClipboard` - clipboard copy button
+- `PasteFromClipboard` - clipboard paste functionality
 
 navigation links:
 
 - `Hashlink` - hash anchor links
-- `Tome_Link`, `Identifier_Link`, `Module_Link` - docs navigation
-- `Github_Link`, `Mdn_Link` - external reference links
+- `TomeLink`, `IdentifierLink`, `ModuleLink` - docs navigation
+- `GithubLink`, `MdnLink` - external reference links
 
 documentation:
 
 - `Docs` - documentation layout system (`Docs*.svelte`)
-- `Tome_Content`, `Tome_Header`, `Tome_Section` - tome layout components
-- `Package_Detail` - package information display
-- `Package_Summary` - package summary card
+- `TomeContent`, `TomeHeader`, `TomeSection` - tome layout components
+- `PackageDetail` - package information display
+- `PackageSummary` - package summary card
 - `Mdz` - renders mdz (minimal markdown dialect) content with custom components
 
 utilities:
@@ -291,7 +291,7 @@ TypeScript and Svelte analysis:
 - `module_helpers.ts` - module path utilities
   - predicates: `module_matches_source`, `module_is_typescript`, `module_is_svelte`
   - utilities: `module_extract_path`, `module_get_component_name`
-  - configuration: `Module_Source_Options`, `MODULE_SOURCE_DEFAULTS`
+  - configuration: `ModuleSourceOptions`, `MODULE_SOURCE_DEFAULTS`
 - `package_gen_helpers.ts` - Gro-specific build-time helpers
 
 browser and DOM:
@@ -348,8 +348,7 @@ projects:
 
 - `snake_case` for most identifiers (files, variables, functions, types) instead
   of camelCase
-- `Upper_Snake_Case` for types, class names, and Svelte components instead of
-  PascalCase
+- `PascalCase` for types, class names, and Svelte components
 - explicit file extensions in all imports
 - tab indentation, 100 character line width
 - tends toward flat file structure with co-located related code
@@ -386,7 +385,7 @@ Built on Moss CSS custom properties:
 
 - `Themer` class manages theme state
 - `Themed` component provides theme context
-- `Color_Scheme_Input` and `Theme_Input` for user theme selection
+- `ColorSchemeInput` and `ThemeInput` for user theme selection
 - syncs with localStorage and system preferences
 
 ### Documentation system
@@ -427,11 +426,11 @@ For consumer projects (like Moss):
 
 Tome system, alternative to "stories" for component docs:
 
-- each doc is a `+page.svelte` wrapping content in `<Tome_Content>`
+- each doc is a `+page.svelte` wrapping content in `<TomeContent>`
 - central registry in `tomes.ts` defines all available docs as data
 - each tome has: `name`, `category`, `component`, `related`
 - categories: "guide", "helpers", "components"
-- `Docs_Links` class manages in-page navigation (tertiary nav)
+- `DocsLinks` class manages in-page navigation (tertiary nav)
 - related links connect documentation
 
 Creating a tome:
@@ -453,16 +452,16 @@ Creating a tome:
    ```svelte
    <!-- src/routes/docs/my_component/+page.svelte -->
    <script>
-     import {Tome_Content} from '@ryanatkn/fuz/Tome_Content.svelte';
+     import {TomeContent} from '@ryanatkn/fuz/TomeContent.svelte';
      import {get_tome_by_name} from '@ryanatkn/fuz/tome.js';
      const tome = get_tome_by_name('my_component');
    </script>
 
-   <Tome_Content {tome}>
+   <TomeContent {tome}>
      <section>
        <p>Documentation content...</p>
      </section>
-   </Tome_Content>
+   </TomeContent>
    ```
 
 #### API documentation (auto-generated)
@@ -482,19 +481,19 @@ Setup for consumer projects (opt-in):
    ```svelte
    <!-- src/routes/docs/api/+page.svelte -->
    <script>
-     import {Api_Index} from '@ryanatkn/fuz/Api_Index.svelte';
+     import {ApiIndex} from '@ryanatkn/fuz/ApiIndex.svelte';
    </script>
-   <Api_Index />
+   <ApiIndex />
    ```
 
 3. **Create module detail route**:
    ```svelte
    <!-- src/routes/docs/api/[...module_path]/+page.svelte -->
    <script>
-     import {Api_Module} from '@ryanatkn/fuz/Api_Module.svelte';
+     import {ApiModule} from '@ryanatkn/fuz/ApiModule.svelte';
      const {params} = $props();
    </script>
-   <Api_Module module_path={params.module_path} />
+   <ApiModule module_path={params.module_path} />
    ```
 
 4. **Run generator**: `gro gen` to create `package.ts`
@@ -504,9 +503,9 @@ Composable building blocks (for custom layouts):
 - `api_search.svelte.ts` - search/filter state management
   - `create_identifier_search(pkg)` - for API index
   - `create_module_identifier_search(identifiers)` - for module pages
-- `Api_Identifier_List.svelte` - renders filtered identifier list
-- `Docs_Search.svelte` - search input UI
-- use with `Tome_Content`, `Tome_Section`, etc. for custom composition
+- `ApiIdentifierList.svelte` - renders filtered identifier list
+- `DocsSearch.svelte` - search input UI
+- use with `TomeContent`, `TomeSection`, etc. for custom composition
 
 ## Notes
 

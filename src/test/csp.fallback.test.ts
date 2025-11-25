@@ -1,6 +1,6 @@
 import {test, assert, describe} from 'vitest';
 
-import {csp_directive_specs, csp_directive_spec_by_name, type Csp_Directive} from '$lib/csp.js';
+import {csp_directive_specs, csp_directive_spec_by_name, type CspDirective} from '$lib/csp.js';
 
 describe('directive spec fallback relationships', () => {
 	test('all fallback references point to valid directives', () => {
@@ -154,7 +154,7 @@ describe('fallback_of relationships', () => {
 			'img-src',
 			'connect-src',
 			'font-src',
-		] as Array<Csp_Directive>;
+		] as Array<CspDirective>;
 
 		for (const child of expected_children) {
 			assert.ok(spec.fallback_of.includes(child), `default-src should be fallback for ${child}`);
@@ -209,7 +209,7 @@ describe('directives without fallback', () => {
 			'sandbox',
 			'require-trusted-types-for',
 			'trusted-types',
-		] as Array<Csp_Directive>;
+		] as Array<CspDirective>;
 
 		for (const directive of standalone) {
 			const spec = csp_directive_spec_by_name.get(directive);
@@ -230,7 +230,7 @@ describe('directives without fallback', () => {
 			'media-src',
 			'manifest-src',
 			'object-src',
-		] as Array<Csp_Directive>;
+		] as Array<CspDirective>;
 
 		for (const directive of terminal) {
 			const spec = csp_directive_spec_by_name.get(directive);
@@ -247,7 +247,7 @@ describe('no circular fallback chains', () => {
 		for (const spec of csp_directive_specs) {
 			if (!spec.fallback) continue;
 
-			const visited: Set<Csp_Directive> = new Set();
+			const visited: Set<CspDirective> = new Set();
 			let current: typeof spec | undefined = spec;
 			visited.add(spec.name);
 

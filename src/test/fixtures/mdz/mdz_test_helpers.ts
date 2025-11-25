@@ -1,21 +1,21 @@
-import type {Mdz_Node} from '$lib/mdz.js';
+import type {MdzNode} from '$lib/mdz.js';
 import {load_fixtures_generic} from '../../test_helpers.js';
 
-export interface Mdz_Fixture {
+export interface MdzFixture {
 	name: string;
 	input: string;
-	expected: Array<Mdz_Node>;
+	expected: Array<MdzNode>;
 }
 
 /**
  * Extract node types from an array of nodes for easier testing.
  */
-export const node_types = (nodes: Array<Mdz_Node>): Array<string> => nodes.map((n) => n.type);
+export const node_types = (nodes: Array<MdzNode>): Array<string> => nodes.map((n) => n.type);
 
 /**
  * Extract text content from a node, recursively for container nodes.
  */
-export const text_content = (node: Mdz_Node): string => {
+export const text_content = (node: MdzNode): string => {
 	if (node.type === 'Text') return node.content;
 	if (node.type === 'Code') return node.content;
 	if ('children' in node) {
@@ -29,7 +29,7 @@ export const text_content = (node: Mdz_Node): string => {
  * Checks that all start/end positions are valid and contiguous.
  */
 export const validate_positions = (
-	nodes: Array<Mdz_Node>,
+	nodes: Array<MdzNode>,
 	parent_start?: number,
 	parent_end?: number,
 ): void => {
@@ -89,8 +89,8 @@ export const validate_positions = (
 /**
  * Load all fixtures from the mdz fixtures directory.
  */
-export const load_fixtures = async (): Promise<Array<Mdz_Fixture>> => {
-	return load_fixtures_generic<Array<Mdz_Node>>({
+export const load_fixtures = async (): Promise<Array<MdzFixture>> => {
+	return load_fixtures_generic<Array<MdzNode>>({
 		fixtures_dir: import.meta.dirname,
 		input_extension: '.mdz',
 	});

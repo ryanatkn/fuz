@@ -1,11 +1,11 @@
 <script lang="ts">
 	import {resolve} from '$app/paths';
 
-	import Docs_Footer from '$lib/Docs_Footer.svelte';
+	import DocsFooter from '$lib/DocsFooter.svelte';
 	import Card from '$lib/Card.svelte';
-	import Github_Link from '$lib/Github_Link.svelte';
+	import GithubLink from '$lib/GithubLink.svelte';
 	import {pkg_context} from '$lib/pkg.svelte.js';
-	import Svg, {type Svg_Data} from '$lib/Svg.svelte';
+	import Svg, {type SvgData} from '$lib/Svg.svelte';
 	import {
 		fuz_logo,
 		fuz_code_logo,
@@ -16,23 +16,23 @@
 		gro_logo,
 		moss_logo,
 	} from '$lib/logos.js';
-	import Hidden_Personal_Links from '$lib/Hidden_Personal_Links.svelte';
+	import HiddenPersonalLinks from '$lib/HiddenPersonalLinks.svelte';
 	import {MAIN_HEADER_MARGIN_TOP} from '$lib/constants.js';
 	import {DOCS_PATH} from '$lib/docs_helpers.svelte.js';
 
 	const pkg = pkg_context.get();
 
 	// TODO refactor
-	interface Project_Item {
+	interface ProjectItem {
 		name: string;
 		url: string;
-		logo: Svg_Data;
+		logo: SvgData;
 		description: string;
 		glyph: string;
 	}
 
 	// prettier-ignore
-	const project_items: Array<Project_Item> = [ 
+	const project_items: Array<ProjectItem> = [ 
 		{name: 'moss', url: 'https://moss.ryanatkn.com/', logo: moss_logo, description: 'CSS framework and design system', glyph: '🌿'},
 		{name: 'gro', url: 'https://gro.ryanatkn.com/', logo: gro_logo, description: 'task runner and toolkit extending SvelteKit', glyph: '🌰'},
 		{name: 'fuz_template', url: 'https://template.fuz.dev/', logo: fuz_template_logo, description: 'a static web app and Node library template with TypeScript, Svelte, SvelteKit, Vite, esbuild, Fuz, and Gro', glyph: '❄'},
@@ -67,8 +67,8 @@
 					<p>
 						<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 						To learn more see <a href={DOCS_PATH}>the docs</a>
-						and <Github_Link path="ryanatkn/fuz#readme">readme</Github_Link>. Feel free to take the
-						ideas and <Github_Link path="ryanatkn/fuz">code</Github_Link> for your own purposes.
+						and <GithubLink path="ryanatkn/fuz#readme">readme</GithubLink>. Feel free to take the
+						ideas and <GithubLink path="ryanatkn/fuz">code</GithubLink> for your own purposes.
 					</p>
 				</div>
 			</div>
@@ -87,17 +87,17 @@
 			</menu>
 		</section>
 		<section>
-			<Docs_Footer {pkg}>
+			<DocsFooter {pkg}>
 				{#snippet logo_header()}
 					<a href={resolve('/about')} class="mb_xs">about</a>
 				{/snippet}
-				<Hidden_Personal_Links />
-			</Docs_Footer>
+				<HiddenPersonalLinks />
+			</DocsFooter>
 		</section>
 	</div>
 </main>
 
-{#snippet package_thumbnail(project_item: Project_Item)}
+{#snippet package_thumbnail(project_item: ProjectItem)}
 	<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 	<a class="thumbnail row bg px_md py_xs border_radius_sm mb_lg" href={project_item.url}
 		><Svg shrink={false} data={project_item.logo} size="var(--icon_size_lg)" />

@@ -1,7 +1,7 @@
 import {test, assert, describe} from 'vitest';
 import type {Logger} from '@ryanatkn/belt/log.js';
-import type {Package_Json} from '@ryanatkn/belt/package_json.js';
-import type {Src_Json, Module_Json, Identifier_Kind} from '@ryanatkn/belt/src_json.js';
+import type {PackageJson} from '@ryanatkn/belt/package_json.js';
+import type {SrcJson, ModuleJson, IdentifierKind} from '@ryanatkn/belt/src_json.js';
 import type {Disknode} from '@ryanatkn/gro/disknode.js';
 
 import {
@@ -45,14 +45,14 @@ const create_mock_logger = (): Logger & {
 };
 
 /**
- * Create a mock Src_Json with test modules.
+ * Create a mock SrcJson with test modules.
  *
  * Provides minimal package metadata for testing validation logic.
  *
- * @param modules array of Module_Json objects to include
- * @returns Src_Json with standard test package name and version
+ * @param modules array of ModuleJson objects to include
+ * @returns SrcJson with standard test package name and version
  */
-const create_mock_src_json = (modules: Array<Module_Json>): Src_Json => {
+const create_mock_src_json = (modules: Array<ModuleJson>): SrcJson => {
 	return {
 		name: '@test/package',
 		version: '1.0.0',
@@ -61,18 +61,18 @@ const create_mock_src_json = (modules: Array<Module_Json>): Src_Json => {
 };
 
 /**
- * Create a mock Module_Json with test identifiers.
+ * Create a mock ModuleJson with test identifiers.
  *
  * Simplifies test setup by auto-generating minimal identifier metadata.
  *
  * @param path module path (e.g., 'foo.ts', 'Bar.svelte')
  * @param identifiers array of identifier objects with name and kind
- * @returns Module_Json with the specified identifiers
+ * @returns ModuleJson with the specified identifiers
  */
 const create_mock_module = (
 	path: string,
-	identifiers: Array<{name: string; kind: Identifier_Kind}>,
-): Module_Json => {
+	identifiers: Array<{name: string; kind: IdentifierKind}>,
+): ModuleJson => {
 	return {
 		path,
 		identifiers: identifiers.map(({name, kind}) => ({
@@ -189,7 +189,7 @@ describe('package_gen_validate_no_duplicates', () => {
 		});
 
 		test('undefined modules array', () => {
-			const src_json: Src_Json = {
+			const src_json: SrcJson = {
 				name: '@test/package',
 				version: '1.0.0',
 			};
@@ -331,10 +331,10 @@ describe('package_gen_validate_no_duplicates', () => {
 	});
 
 	describe('edge cases', () => {
-		test('real-world scenario - Docs_Link collision', () => {
+		test('real-world scenario - DocsLink collision', () => {
 			const src_json = create_mock_src_json([
-				create_mock_module('docs_helpers.svelte.ts', [{name: 'Docs_Link', kind: 'type'}]),
-				create_mock_module('Docs_Link.svelte', [{name: 'Docs_Link', kind: 'component'}]),
+				create_mock_module('docs_helpers.svelte.ts', [{name: 'DocsLink', kind: 'type'}]),
+				create_mock_module('DocsLink.svelte', [{name: 'DocsLink', kind: 'component'}]),
 			]);
 
 			const logger = create_mock_logger();
@@ -344,16 +344,16 @@ describe('package_gen_validate_no_duplicates', () => {
 			}, /duplicate identifier name/i);
 
 			const all_errors = logger.errors.join(' ');
-			assert.ok(all_errors.includes('Docs_Link'));
+			assert.ok(all_errors.includes('DocsLink'));
 			assert.ok(all_errors.includes('docs_helpers.svelte.ts'));
-			assert.ok(all_errors.includes('Docs_Link.svelte'));
+			assert.ok(all_errors.includes('DocsLink.svelte'));
 		});
 	});
 });
 
 describe('package_gen_sort_modules', () => {
 	test('sorts modules alphabetically by path', () => {
-		const modules: Array<Module_Json> = [
+		const modules: Array<ModuleJson> = [
 			{path: 'zebra.ts', identifiers: []},
 			{path: 'alpha.ts', identifiers: []},
 			{path: 'beta.ts', identifiers: []},
@@ -367,7 +367,7 @@ describe('package_gen_sort_modules', () => {
 	});
 
 	test('does not mutate original array', () => {
-		const modules: Array<Module_Json> = [
+		const modules: Array<ModuleJson> = [
 			{path: 'c.ts', identifiers: []},
 			{path: 'a.ts', identifiers: []},
 			{path: 'b.ts', identifiers: []},
@@ -392,14 +392,14 @@ describe('package_gen_sort_modules', () => {
 	});
 
 	test('handles single module', () => {
-		const modules: Array<Module_Json> = [{path: 'single.ts', identifiers: []}];
+		const modules: Array<ModuleJson> = [{path: 'single.ts', identifiers: []}];
 		const sorted = package_gen_sort_modules(modules);
 		assert.strictEqual(sorted.length, 1);
 		assert.strictEqual(sorted[0]!.path, 'single.ts');
 	});
 
 	test('stable sort with identical paths', () => {
-		const modules: Array<Module_Json> = [
+		const modules: Array<ModuleJson> = [
 			{path: 'same.ts', identifiers: [{name: 'first', kind: 'type'}]},
 			{path: 'same.ts', identifiers: [{name: 'second', kind: 'function'}]},
 		];
@@ -414,13 +414,13 @@ describe('package_gen_sort_modules', () => {
 
 describe('package_gen_generate_ts', () => {
 	test('generates valid TypeScript with correct structure', () => {
-		const package_json: Package_Json = {
+		const package_json: PackageJson = {
 			name: '@test/package',
 			version: '1.0.0',
 			type: 'module',
 		};
 
-		const src_json: Src_Json = {
+		const src_json: SrcJson = {
 			name: '@test/package',
 			version: '1.0.0',
 			modules: [
@@ -438,26 +438,26 @@ describe('package_gen_generate_ts', () => {
 		assert.ok(result.includes('// Do not edit directly - regenerated on build'));
 
 		// Check imports
-		assert.ok(result.includes('import type {Package_Json}'));
-		assert.ok(result.includes('import type {Src_Json}'));
+		assert.ok(result.includes('import type {PackageJson}'));
+		assert.ok(result.includes('import type {SrcJson}'));
 
 		// Check exports
-		assert.ok(result.includes('export const package_json: Package_Json ='));
-		assert.ok(result.includes('export const src_json: Src_Json ='));
+		assert.ok(result.includes('export const package_json: PackageJson ='));
+		assert.ok(result.includes('export const src_json: SrcJson ='));
 
 		// Verify valid TypeScript structure (no syntax errors obvious)
 		assert.ok(!result.includes('undefined'));
 	});
 
 	test('properly serializes package_json data', () => {
-		const package_json: Package_Json = {
+		const package_json: PackageJson = {
 			name: '@scope/pkg',
 			version: '2.0.0',
 			type: 'module',
 			description: 'Test package',
 		};
 
-		const src_json: Src_Json = {
+		const src_json: SrcJson = {
 			name: '@scope/pkg',
 			version: '2.0.0',
 		};
@@ -472,12 +472,12 @@ describe('package_gen_generate_ts', () => {
 	});
 
 	test('properly serializes src_json with modules', () => {
-		const package_json: Package_Json = {
+		const package_json: PackageJson = {
 			name: '@test/package',
 			version: '1.0.0',
 		};
 
-		const src_json: Src_Json = {
+		const src_json: SrcJson = {
 			name: '@test/package',
 			version: '1.0.0',
 			modules: [
@@ -504,12 +504,12 @@ describe('package_gen_generate_ts', () => {
 	});
 
 	test('uses tab indentation for JSON', () => {
-		const package_json: Package_Json = {
+		const package_json: PackageJson = {
 			name: '@test/package',
 			version: '1.0.0',
 		};
 
-		const src_json: Src_Json = {
+		const src_json: SrcJson = {
 			name: '@test/package',
 			version: '1.0.0',
 		};
@@ -527,12 +527,12 @@ describe('package_gen_generate_ts', () => {
 	});
 
 	test('handles empty modules array', () => {
-		const package_json: Package_Json = {
+		const package_json: PackageJson = {
 			name: '@test/package',
 			version: '1.0.0',
 		};
 
-		const src_json: Src_Json = {
+		const src_json: SrcJson = {
 			name: '@test/package',
 			version: '1.0.0',
 			modules: [],
@@ -545,12 +545,12 @@ describe('package_gen_generate_ts', () => {
 	});
 
 	test('handles undefined modules', () => {
-		const package_json: Package_Json = {
+		const package_json: PackageJson = {
 			name: '@test/package',
 			version: '1.0.0',
 		};
 
-		const src_json: Src_Json = {
+		const src_json: SrcJson = {
 			name: '@test/package',
 			version: '1.0.0',
 		};

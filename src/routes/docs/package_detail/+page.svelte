@@ -2,11 +2,11 @@
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	import {get_tome_by_name} from '$lib/tome.js';
-	import Package_Detail from '$lib/Package_Detail.svelte';
-	import Tome_Content from '$lib/Tome_Content.svelte';
+	import PackageDetail from '$lib/PackageDetail.svelte';
+	import TomeContent from '$lib/TomeContent.svelte';
 	import {pkg_context} from '$lib/pkg.svelte.js';
 
-	const LIBRARY_ITEM_NAME = 'Package_Detail';
+	const LIBRARY_ITEM_NAME = 'PackageDetail';
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
 
 	const pkg = pkg_context.get();
@@ -14,7 +14,7 @@
 
 <!-- eslint-disable svelte/no-useless-mustaches -->
 
-<Tome_Content {tome}>
+<TomeContent {tome}>
 	<section>
 		<p>
 			This is a component related to <a
@@ -22,10 +22,10 @@
 				>Gro's public packages</a
 			> features.
 		</p>
-		<Code content={`import Package_Detail from '@ryanatkn/fuz/Package_Detail.svelte';`} lang="ts" />
-		<Code content={`<Package_Detail {pkg} />`} />
+		<Code content={`import PackageDetail from '@ryanatkn/fuz/PackageDetail.svelte';`} lang="ts" />
+		<Code content={`<PackageDetail {pkg} />`} />
 	</section>
 	<section>
-		<Package_Detail {pkg} />
+		<PackageDetail {pkg} />
 	</section>
-</Tome_Content>
+</TomeContent>

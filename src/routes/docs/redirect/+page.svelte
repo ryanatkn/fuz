@@ -3,8 +3,8 @@
 
 	import {get_tome_by_name} from '$lib/tome.js';
 	import Redirect from '$lib/Redirect.svelte';
-	import Mdn_Link from '$lib/Mdn_Link.svelte';
-	import Tome_Content from '$lib/Tome_Content.svelte';
+	import MdnLink from '$lib/MdnLink.svelte';
+	import TomeContent from '$lib/TomeContent.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Redirect';
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
@@ -12,15 +12,15 @@
 
 <!-- eslint-disable svelte/no-useless-mustaches -->
 
-<Tome_Content {tome}>
+<TomeContent {tome}>
 	<section>
 		<p>
-			Adds a redirect for a page using <Mdn_Link path="Web/HTTP/Redirections#html_redirections"
-				>a meta tag</Mdn_Link
+			Adds a redirect for a page using <MdnLink path="Web/HTTP/Redirections#html_redirections"
+				>a meta tag</MdnLink
 			>
 			with
-			<Mdn_Link path="Web/HTML/Element/meta#http-equiv"
-				>the <span class="font_family_mono">refresh</span> header</Mdn_Link
+			<MdnLink path="Web/HTML/Element/meta#http-equiv"
+				>the <span class="font_family_mono">refresh</span> header</MdnLink
 			>. Includes a rendered link and JS navigation fallback.
 		</p>
 		<!-- TODO make this a generic data-driven helper -->
@@ -49,4 +49,4 @@
 			{/snippet}
 		</Redirect>
 	</section>
-</Tome_Content>
+</TomeContent>

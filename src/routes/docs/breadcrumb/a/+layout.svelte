@@ -2,7 +2,7 @@
 	import type {Snippet} from 'svelte';
 
 	import {get_tome_by_name} from '$lib/tome.js';
-	import Tome_Content from '$lib/Tome_Content.svelte';
+	import TomeContent from '$lib/TomeContent.svelte';
 
 	const {
 		children,
@@ -15,6 +15,6 @@
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
 </script>
 
-<Tome_Content {tome}>
+<TomeContent {tome}>
 	{@render children()}
-</Tome_Content>
+</TomeContent>

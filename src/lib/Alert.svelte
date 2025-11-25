@@ -2,7 +2,7 @@
 	import type {Snippet} from 'svelte';
 	import type {HTMLAttributes} from 'svelte/elements';
 
-	import {alert_status_options, type Alert_Status} from './alert.js';
+	import {alert_status_options, type AlertStatus} from './alert.js';
 
 	/**
 	 * @see https://www.w3.org/WAI/ARIA/apg/patterns/alert/
@@ -19,9 +19,9 @@
 		icon,
 		children,
 	}: {
-		status?: Alert_Status;
+		status?: AlertStatus;
 		color?: string;
-		// TODO this API is a mess in part because of the types, maybe an explicit `Alert_Button` is better,
+		// TODO this API is a mess in part because of the types, maybe an explicit `AlertButton` is better,
 		// or rethink the design because `role="alert"` can't be put on buttons.
 		// $props must be destructured, so we can't use a union with narrowing right?
 		// so `disabled` only makes sense if `onclick` is defined, and we dont get the other HTMLButtonElement attributes

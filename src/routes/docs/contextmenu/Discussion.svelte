@@ -1,27 +1,27 @@
 <script lang="ts">
-	import Mdn_Link from '$lib/Mdn_Link.svelte';
-	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
-	import Tome_Section from '$lib/Tome_Section.svelte';
-	import Root_Component_Selector from '$routes/docs/contextmenu/Root_Component_Selector.svelte';
+	import MdnLink from '$lib/MdnLink.svelte';
+	import TomeSectionHeader from '$lib/TomeSectionHeader.svelte';
+	import TomeSection from '$lib/TomeSection.svelte';
+	import RootComponentSelector from '$routes/docs/contextmenu/RootComponentSelector.svelte';
 </script>
 
-<Tome_Section>
-	<Tome_Section_Header text="iOS compatibility" />
+<TomeSection>
+	<TomeSectionHeader text="iOS compatibility" />
 	<p>
 		Fuz provides two versions of the contextmenu root component with different tradeoffs due to iOS
 		Safari not supporting the <code>contextmenu</code> event as of October 2025, see
 		<a href="https://bugs.webkit.org/show_bug.cgi?id=213953">WebKit bug #213953</a>.
 	</p>
 	<p>
-		Use <code>Contextmenu_Root</code> by default for better performance and haptic feedback. Use
-		<code>Contextmenu_Root_For_Safari_Compatibility</code> only if you need iOS Safari support.
+		Use <code>ContextmenuRoot</code> by default for better performance and haptic feedback. Use
+		<code>ContextmenuRootForSafariCompatibility</code> only if you need iOS Safari support.
 	</p>
-	<h4>Contextmenu_Root</h4>
+	<h4>ContextmenuRoot</h4>
 	<ul>
 		<li>standard, default implementation</li>
 		<li>
-			relies on the browser's <Mdn_Link path="Web/API/Element/contextmenu_event"
-				><span class="font_family_mono">contextmenu</span> event</Mdn_Link
+			relies on the browser's <MdnLink path="Web/API/Element/contextmenu_event"
+				><span class="font_family_mono">contextmenu</span> event</MdnLink
 			>
 		</li>
 		<li>
@@ -34,7 +34,7 @@
 			> is fixed
 		</li>
 	</ul>
-	<h4>Contextmenu_Root_For_Safari_Compatibility</h4>
+	<h4>ContextmenuRootForSafariCompatibility</h4>
 	<ul>
 		<li>opt-in for iOS</li>
 		<li>
@@ -50,10 +50,10 @@
 		<li>a longpress is cancelled if you move the touch past a threshold before it triggers</li>
 		<li>opt into this version only if you need iOS Safari support</li>
 	</ul>
-	<Root_Component_Selector />
-</Tome_Section>
-<Tome_Section>
-	<Tome_Section_Header text="Caveats" />
+	<RootComponentSelector />
+</TomeSection>
+<TomeSection>
+	<TomeSectionHeader text="Caveats" />
 	<p>
 		The Fuz contextmenu provides powerful app-specific UX, but it breaks from normal browser
 		behavior by replacing the system contextmenu.
@@ -77,7 +77,7 @@
 		<li>Triggering the contextmenu inside the Fuz contextmenu shows the system contextmenu.</li>
 	</ul>
 	<p>
-		See also the <Mdn_Link path="Web/API/Element/contextmenu_event" /> docs and the
+		See also the <MdnLink path="Web/API/Element/contextmenu_event" /> docs and the
 		<a href="https://www.w3.org/TR/uievents/#event-type-contextmenu">w3 spec</a>.
 	</p>
-</Tome_Section>
+</TomeSection>

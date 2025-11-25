@@ -1,6 +1,6 @@
 import {is_editable, swallow, inside_editable} from '@ryanatkn/belt/dom.js';
 
-import type {Contextmenu_State} from './contextmenu_state.svelte.js';
+import type {ContextmenuState} from './contextmenu_state.svelte.js';
 
 // Constants for default prop values
 export const CONTEXTMENU_DEFAULT_OPEN_OFFSET_X = -2;
@@ -25,7 +25,7 @@ export const contextmenu_is_valid_target = (
 // TODO maybe bind these to the contextmenu instance instead of including the function wrapper
 // TODO customize
 export const contextmenu_create_keyboard_handlers = (
-	contextmenu: Contextmenu_State,
+	contextmenu: ContextmenuState,
 ): Map<string, () => void> =>
 	new Map([
 		['Escape', () => contextmenu.close()],

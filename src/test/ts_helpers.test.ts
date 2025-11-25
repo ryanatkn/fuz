@@ -1,6 +1,6 @@
 import {test, assert, describe, beforeAll} from 'vitest';
 import ts from 'typescript';
-import type {Identifier_Json} from '@ryanatkn/belt/src_json.js';
+import type {IdentifierJson} from '@ryanatkn/belt/src_json.js';
 
 import {ts_analyze_module_exports} from '$lib/ts_helpers.js';
 import {
@@ -9,11 +9,11 @@ import {
 	create_test_program,
 	create_multi_file_program,
 	extract_identifier_from_source,
-	type Ts_Fixture,
+	type TsFixture,
 } from './fixtures/ts/ts_test_helpers.js';
 import {normalize_json} from './test_helpers.js';
 
-let fixtures: Array<Ts_Fixture> = [];
+let fixtures: Array<TsFixture> = [];
 
 beforeAll(async () => {
 	fixtures = await load_fixtures();
@@ -48,11 +48,11 @@ describe('TypeScript helpers (fixture-based)', () => {
 
 	test('all fixtures have valid structure', () => {
 		for (const fixture of fixtures) {
-			// Skip module_comment category (returns string, not Identifier_Json)
+			// Skip module_comment category (returns string, not IdentifierJson)
 			if (fixture.category === 'module_comment') continue;
 
 			// Validate identifier structure
-			validate_identifier_structure(fixture.expected as Identifier_Json);
+			validate_identifier_structure(fixture.expected as IdentifierJson);
 		}
 	});
 
@@ -65,7 +65,7 @@ describe('TypeScript helpers (fixture-based)', () => {
 			throw new Error('fields_private fixture not found');
 		}
 
-		const result = private_fields_fixture.expected as Identifier_Json;
+		const result = private_fields_fixture.expected as IdentifierJson;
 
 		// Verify that #count, #max, and #reset are NOT in the members
 		if (result.members) {
@@ -336,7 +336,7 @@ export const public_value = 42;
 export function nodocs_helper(): void {}
 
 /** @nodocs */
-export type Nodocs_Type = { secret: string };
+export type NodocsType = { secret: string };
 
 export function public_function(): string {
 	return 'public';
@@ -355,7 +355,7 @@ export function public_function(): string {
 		assert.include(names, 'public_value');
 		assert.include(names, 'public_function');
 		assert.notInclude(names, 'nodocs_helper');
-		assert.notInclude(names, 'Nodocs_Type');
+		assert.notInclude(names, 'NodocsType');
 	});
 
 	test('detects same-name re-exports and tracks in re_exports array', () => {
@@ -451,7 +451,7 @@ export const util_b = 'b';
 				content: `
 // Direct exports
 export function direct_fn(): void {}
-export type Direct_Type = { value: string };
+export type DirectType = { value: string };
 
 // Same-name re-export
 export {util_a} from './utils.js';
@@ -465,12 +465,12 @@ export {util_b as renamed_util} from './utils.js';
 		const mixed_file = source_files.get('/src/lib/mixed.ts')!;
 		const result = ts_analyze_module_exports(mixed_file, checker);
 
-		// Should have 3 identifiers: direct_fn, Direct_Type, renamed_util
+		// Should have 3 identifiers: direct_fn, DirectType, renamed_util
 		assert.strictEqual(result.identifiers.length, 3);
 
 		const names = result.identifiers.map((i) => i.name);
 		assert.include(names, 'direct_fn');
-		assert.include(names, 'Direct_Type');
+		assert.include(names, 'DirectType');
 		assert.include(names, 'renamed_util');
 		assert.notInclude(names, 'util_a'); // same-name re-export excluded
 

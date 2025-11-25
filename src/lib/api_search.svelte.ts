@@ -1,7 +1,7 @@
 import type {Identifier} from './identifier.svelte.js';
 import type {Pkg} from './pkg.svelte.js';
 
-interface Identifier_Search_State {
+interface IdentifierSearchState {
 	query: string;
 	all: Array<Identifier>;
 	filtered: Array<Identifier>;
@@ -11,7 +11,7 @@ interface Identifier_Search_State {
  * Creates search state for the API index page (all identifiers across all modules).
  * Uses the pkg's built-in search method and sorts results alphabetically.
  */
-export const create_identifier_search = (pkg: Pkg): Identifier_Search_State => {
+export const create_identifier_search = (pkg: Pkg): IdentifierSearchState => {
 	let query = $state('');
 
 	const all = $derived(pkg.identifiers);
@@ -43,7 +43,7 @@ export const create_identifier_search = (pkg: Pkg): Identifier_Search_State => {
  */
 export const create_module_identifier_search = (
 	identifiers: Array<Identifier>,
-): Identifier_Search_State => {
+): IdentifierSearchState => {
 	let query = $state('');
 
 	const all = $derived(identifiers);

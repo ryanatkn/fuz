@@ -1,12 +1,12 @@
 import {describe, test, assert, beforeEach} from 'vitest';
 
-import {Contextmenu_State} from '$lib/contextmenu_state.svelte.js';
+import {ContextmenuState} from '$lib/contextmenu_state.svelte.js';
 
-describe('Contextmenu_State - Initialization', () => {
-	let contextmenu: Contextmenu_State;
+describe('ContextmenuState - Initialization', () => {
+	let contextmenu: ContextmenuState;
 
 	beforeEach(() => {
-		contextmenu = new Contextmenu_State();
+		contextmenu = new ContextmenuState();
 	});
 
 	describe('initialization', () => {
@@ -26,7 +26,7 @@ describe('Contextmenu_State - Initialization', () => {
 
 		test('uses provided initial layout', () => {
 			const custom_layout = {width: 800, height: 600};
-			const cm = new Contextmenu_State({layout: custom_layout as any});
+			const cm = new ContextmenuState({layout: custom_layout as any});
 			assert.strictEqual(cm.layout, custom_layout);
 			assert.strictEqual(cm.has_custom_layout, true);
 		});
@@ -41,7 +41,7 @@ describe('Contextmenu_State - Initialization', () => {
 
 		test('custom layout is preserved', () => {
 			const custom_layout = {width: 1920, height: 1080};
-			const cm = new Contextmenu_State({layout: custom_layout as any});
+			const cm = new ContextmenuState({layout: custom_layout as any});
 
 			// Open and close shouldn't modify custom layout
 			cm.open([], 100, 200);

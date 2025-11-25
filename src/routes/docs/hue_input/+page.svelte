@@ -2,12 +2,12 @@
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	import {get_tome_by_name} from '$lib/tome.js';
-	import Hue_Input from '$lib/Hue_Input.svelte';
-	import Tome_Content from '$lib/Tome_Content.svelte';
-	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
-	import Tome_Section from '$lib/Tome_Section.svelte';
+	import HueInput from '$lib/HueInput.svelte';
+	import TomeContent from '$lib/TomeContent.svelte';
+	import TomeSectionHeader from '$lib/TomeSectionHeader.svelte';
+	import TomeSection from '$lib/TomeSection.svelte';
 
-	const LIBRARY_ITEM_NAME = 'Hue_Input';
+	const LIBRARY_ITEM_NAME = 'HueInput';
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
 
 	let value: number = $state(180);
@@ -16,37 +16,37 @@
 
 <!-- eslint-disable svelte/no-useless-mustaches -->
 
-<Tome_Content {tome}>
+<TomeContent {tome}>
 	<section>
-		<Code content={`import Hue_Input from '@ryanatkn/fuz/Hue_Input.svelte';`} lang="ts" />
+		<Code content={`import HueInput from '@ryanatkn/fuz/HueInput.svelte';`} lang="ts" />
 	</section>
-	<Tome_Section>
-		<Tome_Section_Header text="With bind:value">With <code>bind:value</code></Tome_Section_Header>
-		<Code content={`<Hue_Input bind:value />`} />
-		<Hue_Input bind:value />
+	<TomeSection>
+		<TomeSectionHeader text="With bind:value">With <code>bind:value</code></TomeSectionHeader>
+		<Code content={`<HueInput bind:value />`} />
+		<HueInput bind:value />
 		<div class="mt_md" style:--text_color="hsl({value} 62% 31%)">
 			<code>bind:value === {value}</code>
 		</div>
-	</Tome_Section>
-	<Tome_Section>
-		<Tome_Section_Header text="With oninput">With <code>oninput</code></Tome_Section_Header>
+	</TomeSection>
+	<TomeSection>
+		<TomeSectionHeader text="With oninput">With <code>oninput</code></TomeSectionHeader>
 		<Code
-			content={`<Hue_Input
+			content={`<HueInput
 	oninput={(v) => (value_from_oninput = v)}
 />`}
 		/>
-		<Hue_Input oninput={(v) => (value_from_oninput = v)} />
+		<HueInput oninput={(v) => (value_from_oninput = v)} />
 		<div class="mt_md" style:--text_color="hsl({value} 62% 31%)">
 			<code>value_from_oninput === {value_from_oninput + ''}</code>
 		</div>
-	</Tome_Section>
-	<Tome_Section>
-		<Tome_Section_Header text="With children">With <code>children</code></Tome_Section_Header>
+	</TomeSection>
+	<TomeSection>
+		<TomeSectionHeader text="With children">With <code>children</code></TomeSectionHeader>
 		<Code
-			content={`<Hue_Input>
+			content={`<HueInput>
 	Some colorful hue input
-</Hue_Input>`}
+</HueInput>`}
 		/>
-		<Hue_Input>Some colorful hue input</Hue_Input>
-	</Tome_Section>
-</Tome_Content>
+		<HueInput>Some colorful hue input</HueInput>
+	</TomeSection>
+</TomeContent>

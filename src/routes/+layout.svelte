@@ -7,7 +7,7 @@
 	import type {Snippet} from 'svelte';
 
 	import Themed from '$lib/Themed.svelte';
-	import Contextmenu_Root from '$lib/Contextmenu_Root.svelte';
+	import ContextmenuRoot from '$lib/ContextmenuRoot.svelte';
 	import {pkg_context, Pkg} from '$lib/pkg.svelte.js';
 	import {package_json, src_json} from '$lib/package.js';
 	import Spiders from '$lib/Spiders.svelte';
@@ -26,8 +26,8 @@
 </svelte:head>
 
 <Themed>
-	<Contextmenu_Root>
+	<ContextmenuRoot>
 		{@render children()}
 		<Spiders />
-	</Contextmenu_Root>
+	</ContextmenuRoot>
 </Themed>

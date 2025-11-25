@@ -1,18 +1,18 @@
 <script lang="ts">
-	import Github_Link from '$lib/Github_Link.svelte';
+	import GithubLink from '$lib/GithubLink.svelte';
 	import {get_tome_by_name} from '$lib/tome.js';
-	import Tome_Content from '$lib/Tome_Content.svelte';
+	import TomeContent from '$lib/TomeContent.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Docs';
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
 </script>
 
-<Tome_Content {tome}>
+<TomeContent {tome}>
 	<section>
 		The <code>Docs</code> is the component behind these docs. Its docs are unfinished - for now see
 		usage in
-		<Github_Link path="ryanatkn/fuz/blob/main/src/routes/docs/%2Blayout.svelte">Fuz</Github_Link>
+		<GithubLink path="ryanatkn/fuz/blob/main/src/routes/docs/%2Blayout.svelte">Fuz</GithubLink>
 		or
-		<Github_Link path="ryanatkn/moss/blob/main/src/routes/docs/%2Blayout.svelte">Moss</Github_Link>.
+		<GithubLink path="ryanatkn/moss/blob/main/src/routes/docs/%2Blayout.svelte">Moss</GithubLink>.
 	</section>
-</Tome_Content>
+</TomeContent>

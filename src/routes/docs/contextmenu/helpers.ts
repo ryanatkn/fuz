@@ -1,35 +1,35 @@
-export type History_Item =
-	| Cat_Go_Home_History_Item
-	| Cat_Be_Or_Do_History_Item
-	| Cat_Go_Adventure_History_Item
-	| Home_Call_Cats_History_Item
-	| Adventure_Call_Cats_History_Item;
-export interface Cat_Go_Home_History_Item {
+export type HistoryItem =
+	| CatGoHomeHistoryItem
+	| CatBeOrDoHistoryItem
+	| CatGoAdventureHistoryItem
+	| HomeCallCatsHistoryItem
+	| AdventureCallCatsHistoryItem;
+export interface CatGoHomeHistoryItem {
 	type: 'cat_go_home';
 	name: string;
 }
-export interface Cat_Be_Or_Do_History_Item {
+export interface CatBeOrDoHistoryItem {
 	type: 'cat_be_or_do';
 	name: string | null;
-	position: Cat_Position;
+	position: CatPosition;
 }
-export interface Cat_Go_Adventure_History_Item {
+export interface CatGoAdventureHistoryItem {
 	type: 'cat_go_adventure';
 	name: string;
 }
-export interface Home_Call_Cats_History_Item {
+export interface HomeCallCatsHistoryItem {
 	type: 'call_cats_home';
 }
-export interface Adventure_Call_Cats_History_Item {
+export interface AdventureCallCatsHistoryItem {
 	type: 'call_cats_adventure';
 }
 
-export type Cat_Position = 'home' | 'adventure';
+export type CatPosition = 'home' | 'adventure';
 
 export interface Cat {
 	name: string;
 	icon: string;
-	position: Cat_Position;
+	position: CatPosition;
 }
 
 export const to_cats_label = (cats: Array<Cat>): string | null => {

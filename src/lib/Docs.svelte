@@ -7,12 +7,12 @@
 	import type {Pkg} from './pkg.svelte.js';
 	import Breadcrumb from './Breadcrumb.svelte';
 	import {Tome, tomes_context} from './tome.js';
-	import Docs_Primary_Nav from './Docs_Primary_Nav.svelte';
-	import Docs_Secondary_Nav from './Docs_Secondary_Nav.svelte';
-	import Docs_Tertiary_Nav from './Docs_Tertiary_Nav.svelte';
+	import DocsPrimaryNav from './DocsPrimaryNav.svelte';
+	import DocsSecondaryNav from './DocsSecondaryNav.svelte';
+	import DocsTertiaryNav from './DocsTertiaryNav.svelte';
 	import Dialog from './Dialog.svelte';
-	import Docs_Footer from './Docs_Footer.svelte';
-	import {Docs_Links, docs_links_context} from './docs_helpers.svelte.js';
+	import DocsFooter from './DocsFooter.svelte';
+	import {DocsLinks, docs_links_context} from './docs_helpers.svelte.js';
 
 	const {
 		tomes,
@@ -41,7 +41,7 @@
 		show_secondary_nav_dialog = show ?? !show_secondary_nav_dialog;
 	};
 
-	docs_links_context.set(new Docs_Links());
+	docs_links_context.set(new DocsLinks());
 
 	onNavigate(() => {
 		show_secondary_nav_dialog = false;
@@ -51,16 +51,16 @@
 <svelte:window onhashchange={() => (show_secondary_nav_dialog = false)} />
 
 <div class="docs" style:--docs_menu_width={docs_menu_width}>
-	<Docs_Primary_Nav {pkg} {breadcrumb_children}>
+	<DocsPrimaryNav {pkg} {breadcrumb_children}>
 		<div class="nav_dialog_toggle">
 			<button class="plain" type="button" onclick={() => toggle_secondary_nav_dialog()}>menu</button
 			>
 		</div>
-	</Docs_Primary_Nav>
+	</DocsPrimaryNav>
 	<!-- TODO @many dialog navs -->
 	{#if !innerWidth.current || innerWidth.current > SECONDARY_NAV_BREAKPOINT}
 		<div class="secondary_nav_wrapper">
-			<Docs_Secondary_Nav {tomes} />
+			<DocsSecondaryNav {tomes} />
 		</div>
 	{/if}
 	<main>
@@ -69,10 +69,10 @@
 		{/key}
 		<!-- TODO @many dialog navs -->
 		{#if !innerWidth.current || innerWidth.current > TERTIARY_NAV_BREAKPOINT}
-			<Docs_Tertiary_Nav {tomes} {tomes_by_name} />
+			<DocsTertiaryNav {tomes} {tomes_by_name} />
 		{/if}
 		<section class="box">
-			<Docs_Footer {pkg}>
+			<DocsFooter {pkg}>
 				<div class="mb_xl5">
 					<Breadcrumb>
 						{#if breadcrumb_children}
@@ -82,12 +82,12 @@
 						{/if}
 					</Breadcrumb>
 				</div>
-			</Docs_Footer>
+			</DocsFooter>
 		</section>
 	</main>
 </div>
 <!-- TODO @many dialog navs - instead of a dialog, probably use a popover (new component) -->
-<!-- TODO this is messy rendering `Docs_Secondary_Nav` twice to handle responsive states with SSR correctly -->
+<!-- TODO this is messy rendering `DocsSecondaryNav` twice to handle responsive states with SSR correctly -->
 {#if show_secondary_nav_dialog && innerWidth.current && innerWidth.current <= TERTIARY_NAV_BREAKPOINT}
 	<Dialog onclose={() => (show_secondary_nav_dialog = false)}>
 		<div class="pane" style:--docs_menu_width={docs_menu_width}>
@@ -101,8 +101,8 @@
 				</Breadcrumb>
 			</div>
 			<div class="px_lg pb_xl">
-				<Docs_Secondary_Nav {tomes} sidebar={false} />
-				<Docs_Tertiary_Nav {tomes} {tomes_by_name} sidebar={false} />
+				<DocsSecondaryNav {tomes} sidebar={false} />
+				<DocsTertiaryNav {tomes} {tomes_by_name} sidebar={false} />
 			</div>
 		</div>
 	</Dialog>
@@ -146,11 +146,11 @@
 		border-radius: 0;
 	}
 
-	/* sync this breakpoint with `Docs_Tertiary_Nav` and `Tome_Section_Header` */
+	/* sync this breakpoint with `DocsTertiaryNav` and `TomeSectionHeader` */
 	@media (max-width: 1000px) {
 		main {
 			--docs_content_padding: var(--space_xl);
-			/* handle the moved `Docs_Tertiary_Nav` */
+			/* handle the moved `DocsTertiaryNav` */
 			width: calc(100% - var(--docs_sidebar_width));
 			margin-right: 0;
 		}
@@ -160,10 +160,10 @@
 		}
 	}
 
-	/* sync this breakpoint with `Docs_Primary_Nav`, `Docs_Secondary_Nav`, and `Tome_Section_Header` */
+	/* sync this breakpoint with `DocsPrimaryNav`, `DocsSecondaryNav`, and `TomeSectionHeader` */
 	@media (max-width: 800px) {
 		main {
-			/* handle the moved `Docs_Secondary_Nav` */
+			/* handle the moved `DocsSecondaryNav` */
 			width: 100%;
 			margin-left: 0;
 		}

@@ -2,10 +2,10 @@
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	import {get_tome_by_name} from '$lib/tome.js';
-	import Pending_Button from '$lib/Pending_Button.svelte';
-	import Tome_Content from '$lib/Tome_Content.svelte';
+	import PendingButton from '$lib/PendingButton.svelte';
+	import TomeContent from '$lib/TomeContent.svelte';
 
-	const LIBRARY_ITEM_NAME = 'Pending_Button';
+	const LIBRARY_ITEM_NAME = 'PendingButton';
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
 
 	let pending_1 = $state(false);
@@ -14,14 +14,14 @@
 
 <!-- eslint-disable svelte/no-useless-mustaches -->
 
-<Tome_Content {tome}>
+<TomeContent {tome}>
 	<section>
 		<p>Preserves a button's normal width while animating.</p>
 		<aside>
 			<p>This component may be replaced with an action in the future or otherwise change.</p>
 		</aside>
 		<!-- TODO make this a generic data-driven helper -->
-		<Code content={`import Pending_Button from '@ryanatkn/fuz/Pending_Button.svelte';`} lang="ts" />
+		<Code content={`import PendingButton from '@ryanatkn/fuz/PendingButton.svelte';`} lang="ts" />
 		<p>
 			<button
 				type="button"
@@ -32,28 +32,28 @@
 			>
 		</p>
 		<Code
-			content={`<Pending_Button
+			content={`<PendingButton
 	pending={${pending_1}}
 	onclick={() => (pending_1 = !pending_1)}
 >
 	do something async
-</Pending_Button>`}
+</PendingButton>`}
 		/>
 		<p>
-			<Pending_Button pending={pending_1} onclick={() => (pending_1 = !pending_1)}>
+			<PendingButton pending={pending_1} onclick={() => (pending_1 = !pending_1)}>
 				do something async
-			</Pending_Button>
+			</PendingButton>
 		</p>
 		<Code
-			content={`<Pending_Button
+			content={`<PendingButton
 	pending={${pending_2}}
 	onclick={() => (pending_2 = !pending_2)}
 >
 	do another
-</Pending_Button>`}
+</PendingButton>`}
 		/>
-		<Pending_Button pending={pending_2} onclick={() => (pending_2 = !pending_2)}>
+		<PendingButton pending={pending_2} onclick={() => (pending_2 = !pending_2)}>
 			do another
-		</Pending_Button>
+		</PendingButton>
 	</section>
-</Tome_Content>
+</TomeContent>

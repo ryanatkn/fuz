@@ -1,20 +1,20 @@
 import {describe, test, assert, beforeEach} from 'vitest';
 
-import {Contextmenu_State, Entry_State, Submenu_State} from '$lib/contextmenu_state.svelte.js';
+import {ContextmenuState, EntryState, SubmenuState} from '$lib/contextmenu_state.svelte.js';
 
 /* eslint-disable @typescript-eslint/no-empty-function */
 
-describe('Contextmenu_State - Immutability', () => {
-	let contextmenu: Contextmenu_State;
+describe('ContextmenuState - Immutability', () => {
+	let contextmenu: ContextmenuState;
 
 	beforeEach(() => {
-		contextmenu = new Contextmenu_State();
+		contextmenu = new ContextmenuState();
 	});
 
 	describe('items array immutability', () => {
 		test('adding entry to root menu creates new items array reference', () => {
 			const old_items = contextmenu.root_menu.items;
-			const entry = new Entry_State(contextmenu.root_menu, () => () => {});
+			const entry = new EntryState(contextmenu.root_menu, () => () => {});
 			contextmenu.root_menu.items = [...contextmenu.root_menu.items, entry];
 
 			assert.notStrictEqual(contextmenu.root_menu.items, old_items);
@@ -24,7 +24,7 @@ describe('Contextmenu_State - Immutability', () => {
 
 		test('adding submenu to root menu creates new items array reference', () => {
 			const old_items = contextmenu.root_menu.items;
-			const submenu = new Submenu_State(contextmenu.root_menu, 2);
+			const submenu = new SubmenuState(contextmenu.root_menu, 2);
 			contextmenu.root_menu.items = [...contextmenu.root_menu.items, submenu];
 
 			assert.notStrictEqual(contextmenu.root_menu.items, old_items);
@@ -33,11 +33,11 @@ describe('Contextmenu_State - Immutability', () => {
 		});
 
 		test('nested submenu items remain immutable', () => {
-			const submenu = new Submenu_State(contextmenu.root_menu, 2);
+			const submenu = new SubmenuState(contextmenu.root_menu, 2);
 			const old_submenu_items = submenu.items;
 
 			// Manually add entry to submenu (simulating add_entry behavior)
-			const entry = new Entry_State(submenu, () => () => {});
+			const entry = new EntryState(submenu, () => () => {});
 			submenu.items = [...submenu.items, entry];
 
 			assert.notStrictEqual(submenu.items, old_submenu_items);
@@ -46,12 +46,12 @@ describe('Contextmenu_State - Immutability', () => {
 
 		test('multiple additions each create new references', () => {
 			const ref1 = contextmenu.root_menu.items;
-			const entry1 = new Entry_State(contextmenu.root_menu, () => () => {});
+			const entry1 = new EntryState(contextmenu.root_menu, () => () => {});
 			contextmenu.root_menu.items = [...contextmenu.root_menu.items, entry1];
 
 			const ref2 = contextmenu.root_menu.items;
 			assert.notStrictEqual(ref2, ref1);
-			const entry2 = new Entry_State(contextmenu.root_menu, () => () => {});
+			const entry2 = new EntryState(contextmenu.root_menu, () => () => {});
 			contextmenu.root_menu.items = [...contextmenu.root_menu.items, entry2];
 
 			const ref3 = contextmenu.root_menu.items;
@@ -61,12 +61,12 @@ describe('Contextmenu_State - Immutability', () => {
 	});
 
 	describe('selections array immutability', () => {
-		let entry1: Entry_State;
-		let entry2: Entry_State;
+		let entry1: EntryState;
+		let entry2: EntryState;
 
 		beforeEach(() => {
-			entry1 = new Entry_State(contextmenu.root_menu, () => () => {});
-			entry2 = new Entry_State(contextmenu.root_menu, () => () => {});
+			entry1 = new EntryState(contextmenu.root_menu, () => () => {});
+			entry2 = new EntryState(contextmenu.root_menu, () => () => {});
 			contextmenu.root_menu.items = [entry1, entry2];
 		});
 
@@ -106,8 +106,8 @@ describe('Contextmenu_State - Immutability', () => {
 		});
 
 		test('collapse_selected creates new selections array reference', () => {
-			const submenu = new Submenu_State(contextmenu.root_menu, 2);
-			const nested_entry = new Entry_State(submenu, () => () => {});
+			const submenu = new SubmenuState(contextmenu.root_menu, 2);
+			const nested_entry = new EntryState(submenu, () => () => {});
 			submenu.items = [nested_entry];
 			contextmenu.root_menu.items = [submenu];
 
@@ -121,8 +121,8 @@ describe('Contextmenu_State - Immutability', () => {
 		});
 
 		test('expand_selected creates new selections array reference', () => {
-			const submenu = new Submenu_State(contextmenu.root_menu, 2);
-			const nested_entry = new Entry_State(submenu, () => () => {});
+			const submenu = new SubmenuState(contextmenu.root_menu, 2);
+			const nested_entry = new EntryState(submenu, () => () => {});
 			submenu.items = [nested_entry];
 			contextmenu.root_menu.items = [submenu];
 
@@ -161,14 +161,14 @@ describe('Contextmenu_State - Immutability', () => {
 
 	describe('concurrent read safety', () => {
 		test('captured items reference unaffected by subsequent modifications', () => {
-			const entry1 = new Entry_State(contextmenu.root_menu, () => () => {});
+			const entry1 = new EntryState(contextmenu.root_menu, () => () => {});
 			contextmenu.root_menu.items = [entry1];
 
 			const captured_items = contextmenu.root_menu.items;
 			assert.strictEqual(captured_items.length, 1);
 
 			// Add more entries
-			const entry2 = new Entry_State(contextmenu.root_menu, () => () => {});
+			const entry2 = new EntryState(contextmenu.root_menu, () => () => {});
 			contextmenu.root_menu.items = [...contextmenu.root_menu.items, entry2];
 
 			// Captured reference should still have original data
@@ -180,8 +180,8 @@ describe('Contextmenu_State - Immutability', () => {
 		});
 
 		test('captured selections reference unaffected by subsequent selections', () => {
-			const entry1 = new Entry_State(contextmenu.root_menu, () => () => {});
-			const entry2 = new Entry_State(contextmenu.root_menu, () => () => {});
+			const entry1 = new EntryState(contextmenu.root_menu, () => () => {});
+			const entry2 = new EntryState(contextmenu.root_menu, () => () => {});
 			contextmenu.root_menu.items = [entry1, entry2];
 
 			contextmenu.select(entry1);
@@ -204,7 +204,7 @@ describe('Contextmenu_State - Immutability', () => {
 		test('iterating items while modifying selections is safe', () => {
 			const entries = Array.from(
 				{length: 5},
-				() => new Entry_State(contextmenu.root_menu, () => () => {}),
+				() => new EntryState(contextmenu.root_menu, () => () => {}),
 			);
 			contextmenu.root_menu.items = entries;
 
@@ -228,7 +228,7 @@ describe('Contextmenu_State - Immutability', () => {
 		});
 
 		test('rapid state changes maintain reference integrity', () => {
-			const entry = new Entry_State(contextmenu.root_menu, () => () => {});
+			const entry = new EntryState(contextmenu.root_menu, () => () => {});
 			contextmenu.root_menu.items = [entry];
 
 			const refs: Array<any> = [];
@@ -253,7 +253,7 @@ describe('Contextmenu_State - Immutability', () => {
 
 	describe('operations that preserve references', () => {
 		test('select with same item preserves selections reference', () => {
-			const entry = new Entry_State(contextmenu.root_menu, () => () => {});
+			const entry = new EntryState(contextmenu.root_menu, () => () => {});
 			contextmenu.root_menu.items = [entry];
 
 			contextmenu.select(entry);
@@ -279,7 +279,7 @@ describe('Contextmenu_State - Immutability', () => {
 		});
 
 		test('collapse when cannot collapse preserves selections reference', () => {
-			const entry = new Entry_State(contextmenu.root_menu, () => () => {});
+			const entry = new EntryState(contextmenu.root_menu, () => () => {});
 			contextmenu.root_menu.items = [entry];
 
 			contextmenu.select(entry);
@@ -292,7 +292,7 @@ describe('Contextmenu_State - Immutability', () => {
 		});
 
 		test('expand when cannot expand preserves selections reference', () => {
-			const entry = new Entry_State(contextmenu.root_menu, () => () => {});
+			const entry = new EntryState(contextmenu.root_menu, () => () => {});
 			contextmenu.root_menu.items = [entry];
 
 			contextmenu.select(entry);

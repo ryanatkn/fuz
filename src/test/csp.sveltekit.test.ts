@@ -4,18 +4,18 @@ import type {Defined} from '@ryanatkn/belt/types.js';
 
 import {
 	create_csp_directives,
-	type Csp_Directives,
-	type Csp_Directive,
+	type CspDirectives,
+	type CspDirective,
 	COLOR_SCHEME_SCRIPT_HASH,
 } from '$lib/csp.js';
 
 describe('SvelteKit type compatibility', () => {
-	test('Csp_Directives is assignable to SvelteKit CSP directives type', () => {
-		type Kit_Csp_Directives = Defined<KitConfig['csp']>['directives'];
+	test('CspDirectives is assignable to SvelteKit CSP directives type', () => {
+		type KitCspDirectives = Defined<KitConfig['csp']>['directives'];
 
 		// This should compile without errors
-		const csp: Csp_Directives = create_csp_directives();
-		const kit_csp: Kit_Csp_Directives = csp;
+		const csp: CspDirectives = create_csp_directives();
+		const kit_csp: KitCspDirectives = csp;
 
 		// Verify assignment worked
 		assert.ok(kit_csp);
@@ -35,10 +35,10 @@ describe('SvelteKit type compatibility', () => {
 	});
 
 	test('empty CSP is valid for SvelteKit', () => {
-		type Kit_Csp_Directives = Defined<KitConfig['csp']>['directives'];
+		type KitCspDirectives = Defined<KitConfig['csp']>['directives'];
 
-		const empty_csp: Csp_Directives = {};
-		const kit_csp: Kit_Csp_Directives = empty_csp;
+		const empty_csp: CspDirectives = {};
+		const kit_csp: KitCspDirectives = empty_csp;
 
 		assert.deepEqual(kit_csp, {});
 	});
@@ -95,11 +95,11 @@ describe('SvelteKit config patterns', () => {
 			trusted_sources: [
 				{
 					source: 'fonts.googleapis.com' as any,
-					directives: ['style-src' as Csp_Directive],
+					directives: ['style-src' as CspDirective],
 				},
 				{
 					source: 'fonts.gstatic.com' as any,
-					directives: ['font-src' as Csp_Directive],
+					directives: ['font-src' as CspDirective],
 				},
 			],
 		});
@@ -116,7 +116,7 @@ describe('SvelteKit config patterns', () => {
 				{
 					source: analytics as any,
 					trust: 'high',
-					directives: ['script-src' as Csp_Directive, 'connect-src' as Csp_Directive],
+					directives: ['script-src' as CspDirective, 'connect-src' as CspDirective],
 				},
 			],
 		});
@@ -292,7 +292,7 @@ describe('SvelteKit iframe embedding', () => {
 				{
 					source: parent_site as any,
 					trust: 'medium',
-					directives: ['frame-ancestors' as Csp_Directive],
+					directives: ['frame-ancestors' as CspDirective],
 				},
 			],
 		});
@@ -356,7 +356,7 @@ describe('SvelteKit worker support', () => {
 				{
 					source: worker_cdn as any,
 					trust: 'medium',
-					directives: ['worker-src' as Csp_Directive],
+					directives: ['worker-src' as CspDirective],
 				},
 			],
 		});

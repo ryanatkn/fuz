@@ -2,12 +2,12 @@
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	import {get_tome_by_name} from '$lib/tome.js';
-	import Pending_Animation from '$lib/Pending_Animation.svelte';
-	import Tome_Content from '$lib/Tome_Content.svelte';
-	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
-	import Tome_Section from '$lib/Tome_Section.svelte';
+	import PendingAnimation from '$lib/PendingAnimation.svelte';
+	import TomeContent from '$lib/TomeContent.svelte';
+	import TomeSectionHeader from '$lib/TomeSectionHeader.svelte';
+	import TomeSection from '$lib/TomeSection.svelte';
 
-	const LIBRARY_ITEM_NAME = 'Pending_Animation';
+	const LIBRARY_ITEM_NAME = 'PendingAnimation';
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
 
 	let turtle_slot = $state('🐢');
@@ -27,15 +27,15 @@
 
 <!-- eslint-disable svelte/no-useless-mustaches -->
 
-<Tome_Content {tome}>
+<TomeContent {tome}>
 	<section>
 		<!-- TODO make this a generic data-driven helper -->
 		<Code
-			content={`import Pending_Animation from '@ryanatkn/fuz/Pending_Animation.svelte';`}
+			content={`import PendingAnimation from '@ryanatkn/fuz/PendingAnimation.svelte';`}
 			lang="ts"
 		/>
-		<Code content={`<Pending_Animation${to_boolean_attr('running', running)} />`} />
-		<Pending_Animation {running} />
+		<Code content={`<PendingAnimation${to_boolean_attr('running', running)} />`} />
+		<PendingAnimation {running} />
 		<button type="button" class="my_lg" onclick={() => (running = !running)}
 			>{#if running}pause animation{:else}play animation{/if}</button
 		>
@@ -44,31 +44,31 @@
 		</p>
 		<p>Set size with custom properties:</p>
 		<Code
-			content={`<Pending_Animation --font_size="var(--font_size_xl5)"${to_boolean_attr('running', running)} />`}
+			content={`<PendingAnimation --font_size="var(--font_size_xl5)"${to_boolean_attr('running', running)} />`}
 		/>
 		<div class="mb_lg align_items_flex_start" role="none">
-			<Pending_Animation --font_size="var(--font_size_xl5)" {running} />
+			<PendingAnimation --font_size="var(--font_size_xl5)" {running} />
 		</div>
 		<p>Set size with classes:</p>
 		<Code
-			content={`<Pending_Animation attrs={{class: 'font_size_xl3'}}${to_boolean_attr('running', running)} />`}
+			content={`<PendingAnimation attrs={{class: 'font_size_xl3'}}${to_boolean_attr('running', running)} />`}
 		/>
 		<div class="align_items_flex_start" role="none">
-			<Pending_Animation class="font_size_xl3" {running} />
+			<PendingAnimation class="font_size_xl3" {running} />
 		</div>
 		<p>Size is inherited by default:</p>
 		<Code
-			content={`<div class="font_size_xl4"><Pending_Animation${to_boolean_attr('running', running)} /></div>`}
+			content={`<div class="font_size_xl4"><PendingAnimation${to_boolean_attr('running', running)} /></div>`}
 		/>
 		<div class="font_size_xl4 align_items_flex_start" role="none">
-			<Pending_Animation {running} />
+			<PendingAnimation {running} />
 		</div>
 	</section>
 
-	<Tome_Section>
-		<Tome_Section_Header text="With inline">With <code>inline</code></Tome_Section_Header>
+	<TomeSection>
+		<TomeSectionHeader text="With inline">With <code>inline</code></TomeSectionHeader>
 		<Code
-			content={`<Pending_Animation${to_boolean_attr('inline', inline)}${to_boolean_attr('running', running)} />`}
+			content={`<PendingAnimation${to_boolean_attr('inline', inline)}${to_boolean_attr('running', running)} />`}
 		/>
 		<p>
 			with
@@ -76,16 +76,16 @@
 				>inline={'{'}<button type="button" onclick={() => (inline = !inline)}>{inline}</button
 				>{'}'}</code
 			>
-			<Pending_Animation {inline} {running} />
+			<PendingAnimation {inline} {running} />
 		</p>
-	</Tome_Section>
+	</TomeSection>
 
-	<Tome_Section>
-		<Tome_Section_Header text="With custom children" />
+	<TomeSection>
+		<TomeSectionHeader text="With custom children" />
 		<Code
-			content={`<Pending_Animation --font_size="var(--font_size_xl6)"${to_boolean_attr('running', running)}>
+			content={`<PendingAnimation --font_size="var(--font_size_xl6)"${to_boolean_attr('running', running)}>
 	{${turtle_slot}}
-</Pending_Animation>`}
+</PendingAnimation>`}
 		/>
 		<p>
 			with children <input bind:value={turtle_slot} />
@@ -95,20 +95,20 @@
 				onclick={() => (turtle_slot = (turtle_slot + turtle_slot).substring(0, 24))}>* 2</button
 			>
 		</p>
-		<Pending_Animation {running} --font_size="var(--font_size_xl6)">
+		<PendingAnimation {running} --font_size="var(--font_size_xl6)">
 			{turtle_slot}
-		</Pending_Animation>
+		</PendingAnimation>
 		<button type="button" onclick={() => (running = !running)}>
 			{#if running}pause animation{:else}play animation{/if}
 		</button>
-	</Tome_Section>
+	</TomeSection>
 
-	<Tome_Section>
-		<Tome_Section_Header text="With children index prop"
-			>With children <code>index</code> prop</Tome_Section_Header
+	<TomeSection>
+		<TomeSectionHeader text="With children index prop"
+			>With children <code>index</code> prop</TomeSectionHeader
 		>
 		<Code
-			content={`<Pending_Animation${to_boolean_attr('running', running)}>
+			content={`<PendingAnimation${to_boolean_attr('running', running)}>
 	{#snippet children(index)}
 		<div class="box">
 			{${turtle_slot_2a}}
@@ -118,7 +118,7 @@
 			</span>}
 		</div>
 	{/snippet}
-</Pending_Animation>`}
+</PendingAnimation>`}
 		/>
 		<p>
 			with
@@ -131,7 +131,7 @@
 			and children <input bind:value={turtle_slot_2a} />
 			<input bind:value={turtle_slot_2b} />
 		</p>
-		<Pending_Animation {running}>
+		<PendingAnimation {running}>
 			{#snippet children(index)}
 				<div class="row">
 					<span class="font_size_xl5">{turtle_slot_2a}</span>
@@ -139,23 +139,23 @@
 					{turtle_slot_2b}
 				</div>
 			{/snippet}
-		</Pending_Animation>
-	</Tome_Section>
+		</PendingAnimation>
+	</TomeSection>
 
-	<Tome_Section>
-		<Tome_Section_Header text="With custom duration" />
+	<TomeSection>
+		<TomeSectionHeader text="With custom duration" />
 		<Code
-			content={`<Pending_Animation --animation_duration="var(--duration_6)" --font_size="var(--font_size_xl4)"${to_boolean_attr('running', running)} />`}
+			content={`<PendingAnimation --animation_duration="var(--duration_6)" --font_size="var(--font_size_xl4)"${to_boolean_attr('running', running)} />`}
 		/>
-		<Pending_Animation
+		<PendingAnimation
 			{running}
 			--animation_duration="var(--duration_6)"
 			--font_size="var(--font_size_xl4)"
 		>
 			{turtle_slot}
-		</Pending_Animation>
+		</PendingAnimation>
 		<button type="button" onclick={() => (running = !running)}>
 			{#if running}pause animation{:else}play animation{/if}
 		</button>
-	</Tome_Section>
-</Tome_Content>
+	</TomeSection>
+</TomeContent>

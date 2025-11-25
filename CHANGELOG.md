@@ -10,7 +10,7 @@
 
 ### Patch Changes
 
-- remove serialized pkg section from `Package_Detail` ([b6d102d](https://github.com/ryanatkn/fuz/commit/b6d102d))
+- remove serialized pkg section from `PackageDetail` ([b6d102d](https://github.com/ryanatkn/fuz/commit/b6d102d))
 
 ## 0.161.0
 
@@ -127,20 +127,20 @@
 
 - rename `get_maybe` from `maybe_get` ([#90](https://github.com/ryanatkn/fuz/pull/90))
 - rename some identifiers with better suffixes ([#90](https://github.com/ryanatkn/fuz/pull/90))
-- add dependencies and dependents to `Module_Json` ([#90](https://github.com/ryanatkn/fuz/pull/90))
+- add dependencies and dependents to `ModuleJson` ([#90](https://github.com/ryanatkn/fuz/pull/90))
 
 ### Patch Changes
 
-- public `Docs_Search` ([#90](https://github.com/ryanatkn/fuz/pull/90))
+- public `DocsSearch` ([#90](https://github.com/ryanatkn/fuz/pull/90))
 
 ## 0.148.0
 
 ### Minor Changes
 
-- break Contextmenu_Root compat with Safari, add Contextmenu_Root_For_Safari_Compatibility.svelte ([#86](https://github.com/ryanatkn/fuz/pull/86))
+- break ContextmenuRoot compat with Safari, add ContextmenuRootForSafariCompatibility.svelte ([#86](https://github.com/ryanatkn/fuz/pull/86))
 - validate csp `trusted_sources` directives ([#88](https://github.com/ryanatkn/fuz/pull/88))
-- change `run` for `Entry_State` to be a getter ([#86](https://github.com/ryanatkn/fuz/pull/86))
-- rename Ecosystem_Links from Community_Links ([#87](https://github.com/ryanatkn/fuz/pull/87))
+- change `run` for `EntryState` to be a getter ([#86](https://github.com/ryanatkn/fuz/pull/86))
+- rename EcosystemLinks from CommunityLinks ([#87](https://github.com/ryanatkn/fuz/pull/87))
 - remove bold styling from the `Alert` ([8ca616b](https://github.com/ryanatkn/fuz/commit/8ca616b))
 - upgrade peer deps ([714cdd6](https://github.com/ryanatkn/fuz/commit/714cdd6))
 - update peer deps ([f716e28](https://github.com/ryanatkn/fuz/commit/f716e28))
@@ -187,7 +187,7 @@
 
 ### Patch Changes
 
-- fix: `Pending_Animation` flex class ([1617c87](https://github.com/ryanatkn/fuz/commit/1617c87))
+- fix: `PendingAnimation` flex class ([1617c87](https://github.com/ryanatkn/fuz/commit/1617c87))
 
 ## 0.144.2
 
@@ -218,7 +218,7 @@
 
 ### Patch Changes
 
-- tweak `Package_Detail` declarations to not render `'default'` ([f7655b0](https://github.com/ryanatkn/fuz/commit/f7655b0))
+- tweak `PackageDetail` declarations to not render `'default'` ([f7655b0](https://github.com/ryanatkn/fuz/commit/f7655b0))
 
 ## 0.142.0
 
@@ -242,7 +242,7 @@
 
 ### Patch Changes
 
-- change `Package_Detail` and `Package_Summary` headers to serif ([dc26875](https://github.com/ryanatkn/fuz/commit/dc26875))
+- change `PackageDetail` and `PackageSummary` headers to serif ([dc26875](https://github.com/ryanatkn/fuz/commit/dc26875))
 
 ## 0.140.0
 
@@ -254,7 +254,7 @@
 
 ### Patch Changes
 
-- add `Img_Or_Svg` ([#73](https://github.com/ryanatkn/fuz/pull/73))
+- add `ImgOrSvg` ([#73](https://github.com/ryanatkn/fuz/pull/73))
 
 ## 0.139.1
 
@@ -304,7 +304,7 @@
 
 ### Patch Changes
 
-- fix a11y for `Contextmenu_Root` ([820d1b1](https://github.com/ryanatkn/fuz/commit/820d1b1))
+- fix a11y for `ContextmenuRoot` ([820d1b1](https://github.com/ryanatkn/fuz/commit/820d1b1))
 
 ## 0.136.0
 
@@ -314,13 +314,13 @@
 
 ### Patch Changes
 
-- add `animation` prop to customize `Pending_Button` ([#69](https://github.com/ryanatkn/fuz/pull/69))
+- add `animation` prop to customize `PendingButton` ([#69](https://github.com/ryanatkn/fuz/pull/69))
 
 ## 0.135.0
 
 ### Minor Changes
 
-- break: rework `Pending_Animation` to support `inline` variants and custom attrs ([#68](https://github.com/ryanatkn/fuz/pull/68))
+- break: rework `PendingAnimation` to support `inline` variants and custom attrs ([#68](https://github.com/ryanatkn/fuz/pull/68))
 - break: automatic `Svg` sizing - the `size` prop now has a default that uses `--size` ([#66](https://github.com/ryanatkn/fuz/pull/66))
 
 ## 0.134.0
@@ -333,22 +333,22 @@
 
 ### Patch Changes
 
-- fix `Pending_Button` to accept `attrs.title` ([1a94e28](https://github.com/ryanatkn/fuz/commit/1a94e28))
-- fix `Pending_Button` disabled fallback ([c20bf54](https://github.com/ryanatkn/fuz/commit/c20bf54))
-- add default title to `Paste_From_Clipboard` ([8132235](https://github.com/ryanatkn/fuz/commit/8132235))
+- fix `PendingButton` to accept `attrs.title` ([1a94e28](https://github.com/ryanatkn/fuz/commit/1a94e28))
+- fix `PendingButton` disabled fallback ([c20bf54](https://github.com/ryanatkn/fuz/commit/c20bf54))
+- add default title to `PasteFromClipboard` ([8132235](https://github.com/ryanatkn/fuz/commit/8132235))
 
 ## 0.133.1
 
 ### Patch Changes
 
-- relax `Svg_Data` type to accept `null` for all values ([92f5b2a](https://github.com/ryanatkn/fuz/commit/92f5b2a))
-- add `icon_button` prop to `Copy_To_Clipboard` ([caddfe8](https://github.com/ryanatkn/fuz/commit/caddfe8))
+- relax `SvgData` type to accept `null` for all values ([92f5b2a](https://github.com/ryanatkn/fuz/commit/92f5b2a))
+- add `icon_button` prop to `CopyToClipboard` ([caddfe8](https://github.com/ryanatkn/fuz/commit/caddfe8))
 
 ## 0.133.0
 
 ### Minor Changes
 
-- break: add `allow_copying_empty_string` to `Copy_To_Clipboard` and change its default to false ([e2ef554](https://github.com/ryanatkn/fuz/commit/e2ef554))
+- break: add `allow_copying_empty_string` to `CopyToClipboard` and change its default to false ([e2ef554](https://github.com/ryanatkn/fuz/commit/e2ef554))
 
 ## 0.132.5
 
@@ -366,20 +366,20 @@
 
 ### Patch Changes
 
-- improve `Ecosystem_Links` ([25fe36b](https://github.com/ryanatkn/fuz/commit/25fe36b))
+- improve `EcosystemLinks` ([25fe36b](https://github.com/ryanatkn/fuz/commit/25fe36b))
 
 ## 0.132.2
 
 ### Patch Changes
 
-- improve `Copy_To_Clipboard` ([#64](https://github.com/ryanatkn/fuz/pull/64))
+- improve `CopyToClipboard` ([#64](https://github.com/ryanatkn/fuz/pull/64))
 
 ## 0.132.1
 
 ### Patch Changes
 
-- add `onerror` prop to `Paste_From_Clipboard` ([68e3c3e](https://github.com/ryanatkn/fuz/commit/68e3c3e))
-- fix `.icon_button` for `Copy_To_Clipboard` ([3b2c0c1](https://github.com/ryanatkn/fuz/commit/3b2c0c1))
+- add `onerror` prop to `PasteFromClipboard` ([68e3c3e](https://github.com/ryanatkn/fuz/commit/68e3c3e))
+- fix `.icon_button` for `CopyToClipboard` ([3b2c0c1](https://github.com/ryanatkn/fuz/commit/3b2c0c1))
 
 ## 0.132.0
 
@@ -387,43 +387,43 @@
 
 - remove classes from props interfaces for attrs ([#63](https://github.com/ryanatkn/fuz/pull/63))
 - update ([#63](https://github.com/ryanatkn/fuz/pull/63))
-  - change `Copy_To_Clipboard` to pass a status to children
+  - change `CopyToClipboard` to pass a status to children
   - change `onclick` to `oncopy`
 
 ### Patch Changes
 
-- add `Paste_From_Clipboard` ([#63](https://github.com/ryanatkn/fuz/pull/63))
+- add `PasteFromClipboard` ([#63](https://github.com/ryanatkn/fuz/pull/63))
 
 ## 0.131.6
 
 ### Patch Changes
 
 - remove hci.social Mastodon link ([88f1927](https://github.com/ryanatkn/fuz/commit/88f1927))
-- improve `Copy_To_Clipboard` style ([#62](https://github.com/ryanatkn/fuz/pull/62))
+- improve `CopyToClipboard` style ([#62](https://github.com/ryanatkn/fuz/pull/62))
 
 ## 0.131.5
 
 ### Patch Changes
 
-- remove funding from `Ecosystem_Links` ([e5dab77](https://github.com/ryanatkn/fuz/commit/e5dab77))
+- remove funding from `EcosystemLinks` ([e5dab77](https://github.com/ryanatkn/fuz/commit/e5dab77))
 
 ## 0.131.4
 
 ### Patch Changes
 
-- tweak `Package_Detail` package metadata text ([38f009f](https://github.com/ryanatkn/fuz/commit/38f009f))
+- tweak `PackageDetail` package metadata text ([38f009f](https://github.com/ryanatkn/fuz/commit/38f009f))
 
 ## 0.131.3
 
 ### Patch Changes
 
-- rearrange `Project_Links` ([cf2f5b9](https://github.com/ryanatkn/fuz/commit/cf2f5b9))
+- rearrange `ProjectLinks` ([cf2f5b9](https://github.com/ryanatkn/fuz/commit/cf2f5b9))
 
 ## 0.131.2
 
 ### Patch Changes
 
-- use Svelte's `on` in `Contextmenu_Root` instead of DOM event API ([#61](https://github.com/ryanatkn/fuz/pull/61))
+- use Svelte's `on` in `ContextmenuRoot` instead of DOM event API ([#61](https://github.com/ryanatkn/fuz/pull/61))
 
 ## 0.131.1
 
@@ -457,13 +457,13 @@
 
 ### Patch Changes
 
-- linkify blog in `Ecosystem_Links` ([de2652f](https://github.com/ryanatkn/fuz/commit/de2652f))
+- linkify blog in `EcosystemLinks` ([de2652f](https://github.com/ryanatkn/fuz/commit/de2652f))
 
 ## 0.130.2
 
 ### Patch Changes
 
-- remove spiderspace from `Ecosystem_Links` for now ([66f6ec6](https://github.com/ryanatkn/fuz/commit/66f6ec6))
+- remove spiderspace from `EcosystemLinks` for now ([66f6ec6](https://github.com/ryanatkn/fuz/commit/66f6ec6))
 
 ## 0.130.1
 
@@ -504,7 +504,7 @@
 
 ### Patch Changes
 
-- relax type of `Copy_To_Clipboard` type `text` to disable when `null` ([87cddf0](https://github.com/ryanatkn/fuz/commit/87cddf0))
+- relax type of `CopyToClipboard` type `text` to disable when `null` ([87cddf0](https://github.com/ryanatkn/fuz/commit/87cddf0))
 
 ## 0.129.1
 
@@ -577,9 +577,9 @@
 ### Minor Changes
 
 - improve library styles ([#54](https://github.com/ryanatkn/fuz/pull/54))
-  - rename `Tome_Header` from `Tome_Title`
-  - rename `Tome_Section_Header` from `Tome_Subheading`
-  - rename `Library_Link` from `Library_Link_Data`
+  - rename `TomeHeader` from `TomeTitle`
+  - rename `TomeSectionHeader` from `TomeSubheading`
+  - rename `LibraryLink` from `LibraryLinkData`
   - rename `get_tome_by_name` from `get_tome`
   - use belt's `slugify`, which lowercases, and remove `tome.slug` and `tome.pathname`
 
@@ -587,8 +587,8 @@
 
 ### Minor Changes
 
-- rename `Tome_Content` from `Tome_Content` ([#53](https://github.com/ryanatkn/fuz/pull/53))
-- add snippets to `Library_Content` to customize the root page and remove the `root_path` prop ([#52](https://github.com/ryanatkn/fuz/pull/52))
+- rename `TomeContent` from `TomeContent` ([#53](https://github.com/ryanatkn/fuz/pull/53))
+- add snippets to `LibraryContent` to customize the root page and remove the `root_path` prop ([#52](https://github.com/ryanatkn/fuz/pull/52))
 
 ## 0.122.1
 
@@ -612,7 +612,7 @@
 
 ### Patch Changes
 
-- fix `Dialog_Params['dialog_props']` type to be partial ([a158542](https://github.com/ryanatkn/fuz/commit/a158542))
+- fix `DialogParams['dialog_props']` type to be partial ([a158542](https://github.com/ryanatkn/fuz/commit/a158542))
 
 ## 0.120.10
 
@@ -630,13 +630,13 @@
 
 ### Patch Changes
 
-- update `Earbetter_Logo` ([#48](https://github.com/ryanatkn/fuz/pull/48))
+- update `EarbetterLogo` ([#48](https://github.com/ryanatkn/fuz/pull/48))
 
 ## 0.120.7
 
 ### Patch Changes
 
-- add `onclick` prop to `Copy_To_Clipboard` ([10b7ccc](https://github.com/ryanatkn/fuz/commit/10b7ccc))
+- add `onclick` prop to `CopyToClipboard` ([10b7ccc](https://github.com/ryanatkn/fuz/commit/10b7ccc))
 
 ## 0.120.6
 
@@ -678,25 +678,25 @@
 
 ### Minor Changes
 
-- simplify `Copy_To_Clipboard` to not include a wrapper ([4abb6ab](https://github.com/ryanatkn/fuz/commit/4abb6ab))
+- simplify `CopyToClipboard` to not include a wrapper ([4abb6ab](https://github.com/ryanatkn/fuz/commit/4abb6ab))
 
 ## 0.119.3
 
 ### Patch Changes
 
-- fix `Copy_To_Clipboard` text size for non-icons ([3769839](https://github.com/ryanatkn/fuz/commit/3769839))
+- fix `CopyToClipboard` text size for non-icons ([3769839](https://github.com/ryanatkn/fuz/commit/3769839))
 
 ## 0.119.2
 
 ### Patch Changes
 
-- fix `Copy_To_Clipboard` for non-icons ([5f904ee](https://github.com/ryanatkn/fuz/commit/5f904ee))
+- fix `CopyToClipboard` for non-icons ([5f904ee](https://github.com/ryanatkn/fuz/commit/5f904ee))
 
 ## 0.119.1
 
 ### Patch Changes
 
-- add options to `Copy_To_Clipboard` ([c4bd56e](https://github.com/ryanatkn/fuz/commit/c4bd56e))
+- add options to `CopyToClipboard` ([c4bd56e](https://github.com/ryanatkn/fuz/commit/c4bd56e))
 
 ## 0.119.0
 
@@ -731,11 +731,11 @@
 ### Minor Changes
 
 - loosen peer deps temporarily ([ca9a88a](https://github.com/ryanatkn/fuz/commit/ca9a88a))
-- rename `contextmenu_state.svelte.ts` from `contextmenu_helpers.svelte.ts` and `Contextmenu_State` from `Contextmenu_Store` ([ca9a88a](https://github.com/ryanatkn/fuz/commit/ca9a88a))
+- rename `contextmenu_state.svelte.ts` from `contextmenu_helpers.svelte.ts` and `ContextmenuState` from `ContextmenuStore` ([ca9a88a](https://github.com/ryanatkn/fuz/commit/ca9a88a))
 
 ### Patch Changes
 
-- fix `Tome_Section_Header` layout and add `content_attrs` prop ([ca9a88a](https://github.com/ryanatkn/fuz/commit/ca9a88a))
+- fix `TomeSectionHeader` layout and add `content_attrs` prop ([ca9a88a](https://github.com/ryanatkn/fuz/commit/ca9a88a))
 - fix secondary nav layout for small screens ([ca9a88a](https://github.com/ryanatkn/fuz/commit/ca9a88a))
 
 ## 0.116.0
@@ -766,7 +766,7 @@
 
 ### Minor Changes
 
-- rename `Fuz_Repo` to `Fuz_Repo_Config` and its `url` property to `repo_url` ([#44](https://github.com/ryanatkn/fuz/pull/44))
+- rename `FuzRepo` to `FuzRepoConfig` and its `url` property to `repo_url` ([#44](https://github.com/ryanatkn/fuz/pull/44))
 
 ## 0.112.0
 
@@ -846,19 +846,19 @@
 
 ### Patch Changes
 
-- add `Project_Links.svelte` and use it in `Ecosystem_Links_Panel.svelte` ([b90fb70](https://github.com/ryanatkn/fuz/commit/b90fb70))
+- add `ProjectLinks.svelte` and use it in `EcosystemLinksPanel.svelte` ([b90fb70](https://github.com/ryanatkn/fuz/commit/b90fb70))
 
 ## 0.108.2
 
 ### Patch Changes
 
-- add base path hack to `Library_Content.svelte` ([6b2b337](https://github.com/ryanatkn/fuz/commit/6b2b337))
+- add base path hack to `LibraryContent.svelte` ([6b2b337](https://github.com/ryanatkn/fuz/commit/6b2b337))
 
 ## 0.108.1
 
 ### Patch Changes
 
-- fix word-break on `Ecosystem_Links.svelte` ([2a21db8](https://github.com/ryanatkn/fuz/commit/2a21db8))
+- fix word-break on `EcosystemLinks.svelte` ([2a21db8](https://github.com/ryanatkn/fuz/commit/2a21db8))
 
 ## 0.108.0
 
@@ -867,14 +867,14 @@
 - rework `Themed.svelte` ([#38](https://github.com/ryanatkn/fuz/pull/38))
   - move some helpers from `Themed.svelte` to `theme.ts`
   - replace `get_theme` and `get_color_scheme` with `get_themer`
-  - remove `Themed_Scope.svelte` for now because it's too broken
+  - remove `ThemedScope.svelte` for now because it's too broken
 
 ### Patch Changes
 
 - add `effect_skip` helper ([#36](https://github.com/ryanatkn/fuz/pull/36))
 - allow package_json logo to have a starting slash ([bed6aa2](https://github.com/ryanatkn/fuz/commit/bed6aa2))
 - fix ssr ([#38](https://github.com/ryanatkn/fuz/pull/38))
-- add `Ecosystem_Links.svelte`, `Ecosystem_Links_Panel.svelte`, and `Hidden_Personal_Links.svelte` ([d422d79](https://github.com/ryanatkn/fuz/commit/d422d79))
+- add `EcosystemLinks.svelte`, `EcosystemLinksPanel.svelte`, and `HiddenPersonalLinks.svelte` ([d422d79](https://github.com/ryanatkn/fuz/commit/d422d79))
 
 ## 0.107.1
 
@@ -886,13 +886,13 @@
 
 ### Minor Changes
 
-- rename `Mdn_Link` prop `path` from `href` ([38ee414](https://github.com/ryanatkn/fuz/commit/38ee414))
+- rename `MdnLink` prop `path` from `href` ([38ee414](https://github.com/ryanatkn/fuz/commit/38ee414))
 
 ## 0.106.4
 
 ### Patch Changes
 
-- add `Gro_Logo` ([33009ce](https://github.com/ryanatkn/fuz/commit/33009ce))
+- add `GroLogo` ([33009ce](https://github.com/ryanatkn/fuz/commit/33009ce))
 
 ## 0.106.3
 
@@ -910,7 +910,7 @@
 
 ### Patch Changes
 
-- use standard favicon size in `Package_Detail` ([2d7a92f](https://github.com/ryanatkn/fuz/commit/2d7a92f))
+- use standard favicon size in `PackageDetail` ([2d7a92f](https://github.com/ryanatkn/fuz/commit/2d7a92f))
 
 ## 0.106.0
 
@@ -923,7 +923,7 @@
 ### Patch Changes
 
 - add logos for webdevladder and zzz ([#33](https://github.com/ryanatkn/fuz/pull/33))
-- add support for `logo` and `logo_alt` in `Package_Json` ([#33](https://github.com/ryanatkn/fuz/pull/33))
+- add support for `logo` and `logo_alt` in `PackageJson` ([#33](https://github.com/ryanatkn/fuz/pull/33))
 - add `sideEffects` to `package.json` ([85b92a8](https://github.com/ryanatkn/fuz/commit/85b92a8))
 
 ## 0.105.2
@@ -966,23 +966,23 @@
 
 ### Patch Changes
 
-- improve `Package_Summary` logo ([#31](https://github.com/ryanatkn/fuz/pull/31))
+- improve `PackageSummary` logo ([#31](https://github.com/ryanatkn/fuz/pull/31))
 
 ## 0.102.0
 
 ### Minor Changes
 
-- remove `el` from `Pending_Button` props in favor of an exported `focus` method ([#29](https://github.com/ryanatkn/fuz/pull/29))
+- remove `el` from `PendingButton` props in favor of an exported `focus` method ([#29](https://github.com/ryanatkn/fuz/pull/29))
 
 ### Patch Changes
 
-- tweak `Package_Summary` styles ([ae718b1](https://github.com/ryanatkn/fuz/commit/ae718b1))
+- tweak `PackageSummary` styles ([ae718b1](https://github.com/ryanatkn/fuz/commit/ae718b1))
 
 ## 0.101.5
 
 ### Patch Changes
 
-- add `$bindable` prop `el` to `Pending_Button` ([#28](https://github.com/ryanatkn/fuz/pull/28))
+- add `$bindable` prop `el` to `PendingButton` ([#28](https://github.com/ryanatkn/fuz/pull/28))
 
 ## 0.101.4
 
@@ -1045,7 +1045,7 @@
 
 ### Patch Changes
 
-- show shadow on `Library_Primary_Nav` only when scrolled down the page ([98a2798](https://github.com/ryanatkn/fuz/commit/98a2798))
+- show shadow on `LibraryPrimaryNav` only when scrolled down the page ([98a2798](https://github.com/ryanatkn/fuz/commit/98a2798))
 - Updated dependencies [98a2798]
   - @ryanatkn/fuz@0.99.4
 
@@ -1053,7 +1053,7 @@
 
 ### Patch Changes
 
-- fix `Tome_Section_Header` h4 links ([60a6ec1](https://github.com/ryanatkn/fuz/commit/60a6ec1))
+- fix `TomeSectionHeader` h4 links ([60a6ec1](https://github.com/ryanatkn/fuz/commit/60a6ec1))
 - Updated dependencies [60a6ec1]
   - @ryanatkn/fuz@0.99.3
 
@@ -1061,7 +1061,7 @@
 
 ### Patch Changes
 
-- fix `Tome_Section_Header` indentation ([4c4c111](https://github.com/ryanatkn/fuz/commit/4c4c111))
+- fix `TomeSectionHeader` indentation ([4c4c111](https://github.com/ryanatkn/fuz/commit/4c4c111))
 - Updated dependencies [4c4c111]
   - @ryanatkn/fuz@0.99.2
 
@@ -1069,7 +1069,7 @@
 
 ### Patch Changes
 
-- add support for `tag` prop value `'h4'` to `Tome_Section_Header` ([df0bb3c](https://github.com/ryanatkn/fuz/commit/df0bb3c))
+- add support for `tag` prop value `'h4'` to `TomeSectionHeader` ([df0bb3c](https://github.com/ryanatkn/fuz/commit/df0bb3c))
 - Updated dependencies [df0bb3c]
   - @ryanatkn/fuz@0.99.1
 
@@ -1101,7 +1101,7 @@
 
 ### Patch Changes
 
-- improve `Package_Detail` ([b10f1ee](https://github.com/ryanatkn/fuz/commit/b10f1ee))
+- improve `PackageDetail` ([b10f1ee](https://github.com/ryanatkn/fuz/commit/b10f1ee))
 - Updated dependencies [b10f1ee]
   - @ryanatkn/fuz@0.97.2
 
@@ -1121,31 +1121,31 @@
 
 ### Patch Changes
 
-- update `Moss_Logo` ([3e035b1](https://github.com/ryanatkn/fuz/commit/3e035b1))
+- update `MossLogo` ([3e035b1](https://github.com/ryanatkn/fuz/commit/3e035b1))
 
 ## 0.96.7
 
 ### Patch Changes
 
-- add `Zzz_Logo` ([dcc26b1](https://github.com/ryanatkn/fuz/commit/dcc26b1))
+- add `ZzzLogo` ([dcc26b1](https://github.com/ryanatkn/fuz/commit/dcc26b1))
 
 ## 0.96.6
 
 ### Patch Changes
 
-- add `Moss_Logo` ([00edf68](https://github.com/ryanatkn/fuz/commit/00edf68))
+- add `MossLogo` ([00edf68](https://github.com/ryanatkn/fuz/commit/00edf68))
 
 ## 0.96.5
 
 ### Patch Changes
 
-- add `Fuz_Template_Logo` ([6e6d7a6](https://github.com/ryanatkn/fuz/commit/6e6d7a6))
+- add `FuzTemplateLogo` ([6e6d7a6](https://github.com/ryanatkn/fuz/commit/6e6d7a6))
 
 ## 0.96.4
 
 ### Patch Changes
 
-- add `Spiderspace_Logo` ([9b6df0f](https://github.com/ryanatkn/fuz/commit/9b6df0f))
+- add `SpiderspaceLogo` ([9b6df0f](https://github.com/ryanatkn/fuz/commit/9b6df0f))
 
 ## 0.96.3
 
@@ -1158,20 +1158,20 @@
 
 ### Patch Changes
 
-- hoist `repo_name` out of `Library_Content` ([a7e6c77](https://github.com/ryanatkn/fuz/commit/a7e6c77))
+- hoist `repo_name` out of `LibraryContent` ([a7e6c77](https://github.com/ryanatkn/fuz/commit/a7e6c77))
 
 ## 0.96.1
 
 ### Patch Changes
 
 - allow customizing the library breadcrumb children ([a521537](https://github.com/ryanatkn/fuz/commit/a521537))
-- fix `Package_Summary` homepage url ([a521537](https://github.com/ryanatkn/fuz/commit/a521537))
+- fix `PackageSummary` homepage url ([a521537](https://github.com/ryanatkn/fuz/commit/a521537))
 
 ## 0.96.0
 
 ### Minor Changes
 
-- rename `Spider` from `Fuz_Logo` and publish `Fuz_Logo` and `Spiders` ([0f4908e](https://github.com/ryanatkn/fuz/commit/0f4908e))
+- rename `Spider` from `FuzLogo` and publish `FuzLogo` and `Spiders` ([0f4908e](https://github.com/ryanatkn/fuz/commit/0f4908e))
 
 ## 0.95.0
 
@@ -1213,13 +1213,13 @@
 
 - rename `font_sans` and `font_mono` from `font_family_sans` and `font_family_mono` ([#15](https://github.com/ryanatkn/fuz/pull/15))
 - remove `nav` styles ([#15](https://github.com/ryanatkn/fuz/pull/15))
-- remove `Page_Header` and `Page_Footer` ([#15](https://github.com/ryanatkn/fuz/pull/15))
+- remove `PageHeader` and `PageFooter` ([#15](https://github.com/ryanatkn/fuz/pull/15))
 - remove the `border_radius` variable ([#15](https://github.com/ryanatkn/fuz/pull/15))
 - remove `h1-6` `margin-top` and compensate by increasing `margin-bottom` ([#15](https://github.com/ryanatkn/fuz/pull/15))
 - upgrade to svelte@5 including many breaking changes to components ([#15](https://github.com/ryanatkn/fuz/pull/15))
   - convert slots to snippets
   - change events to callbacks
-  - remove `Devmode_Controls`
+  - remove `DevmodeControls`
 
 - change `line_height` vaiables ([#15](https://github.com/ryanatkn/fuz/pull/15))
   - rename `line_height_xs` from `line_height_1`
@@ -1254,13 +1254,13 @@
 
 ### Patch Changes
 
-- fix `Package_Detail` homepage formatting ([2b22117](https://github.com/ryanatkn/fuz/commit/2b22117))
+- fix `PackageDetail` homepage formatting ([2b22117](https://github.com/ryanatkn/fuz/commit/2b22117))
 
 ## 0.91.4
 
 ### Patch Changes
 
-- fix `Package_Summary` homepage formatting ([37e6790](https://github.com/ryanatkn/fuz/commit/37e6790))
+- fix `PackageSummary` homepage formatting ([37e6790](https://github.com/ryanatkn/fuz/commit/37e6790))
 - make hidden `display: none` higher specificity with `!important` ([948e3e6](https://github.com/ryanatkn/fuz/commit/948e3e6))
 
 ## 0.91.3
@@ -1286,7 +1286,7 @@
 ### Minor Changes
 
 - extract optional stylesheets from `style.css` ([#16](https://github.com/ryanatkn/fuz/pull/16))
-- rename `Tome_Link` from `Library_Tome_Link` ([#14](https://github.com/ryanatkn/fuz/pull/14))
+- rename `TomeLink` from `LibraryTomeLink` ([#14](https://github.com/ryanatkn/fuz/pull/14))
 - - rename `font_sans` variable from `font_family` ([#16](https://github.com/ryanatkn/fuz/pull/16))
   - remove `spaced_hz`, use `mr_lg`
   - remove `spaced`, use `mb_lg`
@@ -1296,7 +1296,7 @@
 
 ### Patch Changes
 
-- add `Mdn_Link`, `Mdn_Logo`, and `$lib/variable_data.ts` ([#14](https://github.com/ryanatkn/fuz/pull/14))
+- add `MdnLink`, `MdnLogo`, and `$lib/variable_data.ts` ([#14](https://github.com/ryanatkn/fuz/pull/14))
 
 ## 0.90.0
 
@@ -1311,7 +1311,7 @@
 ### Minor Changes
 
 - many potentially-breaking style changes ([#12](https://github.com/ryanatkn/fuz/pull/12))
-- rename `Style_Variable` from `Theme_Variable` ([#12](https://github.com/ryanatkn/fuz/pull/12))
+- rename `StyleVariable` from `ThemeVariable` ([#12](https://github.com/ryanatkn/fuz/pull/12))
 - rename `Theme` property `variables` from `items` ([#12](https://github.com/ryanatkn/fuz/pull/12))
 - rename some variables ([#12](https://github.com/ryanatkn/fuz/pull/12))
   - `fade_N` from `faded_N`
@@ -1350,7 +1350,7 @@
 ### Patch Changes
 
 - tweak colors ([#10](https://github.com/ryanatkn/fuz/pull/10))
-- rename `Tome_Link` from `Library_Vocab` ([#12](https://github.com/ryanatkn/fuz/pull/12))
+- rename `TomeLink` from `LibraryVocab` ([#12](https://github.com/ryanatkn/fuz/pull/12))
 
 ## 0.88.0
 
@@ -1413,7 +1413,7 @@
 
 ### Patch Changes
 
-- publish `Page_Menu` ([#4](https://github.com/ryanatkn/fuz/pull/4))
+- publish `PageMenu` ([#4](https://github.com/ryanatkn/fuz/pull/4))
 
 ## 0.83.0
 
@@ -1473,7 +1473,7 @@
 
 ### Minor Changes
 
-- use `Proper_Snakes` ([39e2af5](https://github.com/ryanatkn/fuz/commit/39e2af5))
+- use `ProperSnakes` ([39e2af5](https://github.com/ryanatkn/fuz/commit/39e2af5))
 
 ## 0.77.1
 
@@ -1642,7 +1642,7 @@
 
 ## 0.65.4
 
-- improve `Color_Scheme_Input`
+- improve `ColorSchemeInput`
   ([commit](https://github.com/ryanatkn/fuz/commit/028a62992cfee8375c0597247b7f74b78cd37727))
 
 ## 0.65.3
@@ -1692,7 +1692,7 @@
   ([#324](https://github.com/ryanatkn/fuz/pull/324))
 - **break**: change the `.icon_button` size to match `--input_height`
   ([#318](https://github.com/ryanatkn/fuz/pull/318))
-- **break**: replace `scoped` behavior of `Themed` with `Themed_Scope`, publish it,
+- **break**: replace `scoped` behavior of `Themed` with `ThemedScope`, publish it,
   and revamp the API of `Themed`
   ([#317](https://github.com/ryanatkn/fuz/pull/317),
   [#318](https://github.com/ryanatkn/fuz/pull/318))
@@ -1700,13 +1700,13 @@
   ([#330](https://github.com/ryanatkn/fuz/pull/330))
 - fix theme when SSR is disabled
   ([#317](https://github.com/ryanatkn/fuz/pull/317))
-- add and publish `@ryanatkn/fuz/Copy_To_Clipboard.svelte`
+- add and publish `@ryanatkn/fuz/CopyToClipboard.svelte`
   ([#318](https://github.com/ryanatkn/fuz/pull/318))
 - publish `$lib/prism.css`
   ([#318](https://github.com/ryanatkn/fuz/pull/318))
 - add more readable dark mode text colors
   ([#327](https://github.com/ryanatkn/fuz/pull/327))
-- add `attrs` prop to `Pending_Animation`
+- add `attrs` prop to `PendingAnimation`
   ([#327](https://github.com/ryanatkn/fuz/pull/327))
 - improve `HueInput` a11y
   ([#334](https://github.com/ryanatkn/fuz/pull/334))
@@ -1724,18 +1724,18 @@
 
 ## 0.61.0
 
-- **break**: rename the `Theme_Input` prop `theme` to `selected_theme`
+- **break**: rename the `ThemeInput` prop `theme` to `selected_theme`
   and make it and `themes` optional
   ([#310](https://github.com/ryanatkn/fuz/pull/310))
 
 ## 0.60.2
 
-- improve defaults of `Color_Scheme_Input` and `Theme_Input`
+- improve defaults of `ColorSchemeInput` and `ThemeInput`
   ([commit](https://github.com/ryanatkn/fuz/commit/3b1d6fb03f25ce0eec4046c2cac993c6dc475d41))
 
 ## 0.60.1
 
-- add store defaults for `Color_Scheme_Input` and `Theme_Input`
+- add store defaults for `ColorSchemeInput` and `ThemeInput`
   ([commit](https://github.com/ryanatkn/fuz/commit/5fcf82ae333a5a34e734f190d5050ab760d79729))
 
 ## 0.60.0
@@ -1744,8 +1744,8 @@
   and add helpers `get_color_scheme` and `set_color_scheme`,
   and rename its `sync` prop to `sync_color_scheme`
   ([#308](https://github.com/ryanatkn/fuz/pull/308))
-- **break**: rename the `Color_Scheme_Input` prop `color_scheme` to `selected_color_scheme`
-  to match `Theme_Input`
+- **break**: rename the `ColorSchemeInput` prop `color_scheme` to `selected_color_scheme`
+  to match `ThemeInput`
   ([#308](https://github.com/ryanatkn/fuz/pull/308))
 
 ## 0.59.0
@@ -1771,11 +1771,11 @@
 
 - **break**: tweak some styles and components
   ([#306](https://github.com/ryanatkn/fuz/pull/306))
-  - make `Color_Scheme_Input` sync by default
+  - make `ColorSchemeInput` sync by default
   - rename `--button_color` to `--button_bg`, `--button_hover` to `--button_bg_hover`,
     `--button_active` to `--button_bg_active`, and `--button_disabled` to `--button_bg_disabled`
   - replace `--icon_X` with `--icon_size_X`
-  - add `enable_editing` to `Theme_Input`
+  - add `enable_editing` to `ThemeInput`
   - add `.formatted` CSS helper class
   - add `.chip` CSS helper class
   - add `.spaced`, `.unspaced`, and `.unspaced_hz` CSS helper classes
@@ -1788,9 +1788,9 @@
   - add and publish `$lib/theme.ts` with `create_theme_setup_script` for setting up the color scheme
   - add and publish `$lib/themes.ts` with the default theme data,
     including the base theme along with low and high contrast themes
-  - add and publish `$lib/variables.ts` with the default `Style_Variable` data
+  - add and publish `$lib/variables.ts` with the default `StyleVariable` data
   - add and publish `$lib/Themed.svelte` for mounting a theme to the page or a part of it
-  - add and publish `$lib/Color_Scheme_Input.svelte`
+  - add and publish `$lib/ColorSchemeInput.svelte`
   - remove the `error` param from `createContextmenu` and add the `contextmenu.error` store
   - rename `.prose` from `.markup`
   - replace `--active_color` and `--active_color_b_5` with `--color_N`
@@ -1837,7 +1837,7 @@
   - add `--outline_width_1` to accompany 2 and 3
 - **break**: more style changes
   ([#304](https://github.com/ryanatkn/fuz/pull/304))
-  - publish `$lib/Theme_Input.svelte`
+  - publish `$lib/ThemeInput.svelte`
   - rename `--font_X` to `--size_X`
   - rename `--input_padding_v` to `--input_padding_y` and
     `--input_padding_h` to `--input_padding_x` to disambiguate the `h`
@@ -2159,7 +2159,7 @@
 
 - **break**: rename `Breadcrumb.svelte` from `LinkPath.svelte`
   ([#214](https://github.com/ryanatkn/fuz/pull/214))
-- **break**: unpublish `Github_Logo.svelte` and `TwitterLogo.svelte`
+- **break**: unpublish `GithubLogo.svelte` and `TwitterLogo.svelte`
   ([#213](https://github.com/ryanatkn/fuz/pull/213))
 - add `"separator"` slot to `Breadcrumb.svelte`
   ([#214](https://github.com/ryanatkn/fuz/pull/214))
@@ -2252,7 +2252,7 @@
 
 - **break**: rename `--duration_N` CSS variables from `--transition_duration_N` and add `--duration_6`
   ([#186](https://github.com/ryanatkn/fuz/pull/186))
-- add `--animation_duration` API to `Pending_Animation.svelte`
+- add `--animation_duration` API to `PendingAnimation.svelte`
   ([#186](https://github.com/ryanatkn/fuz/pull/186))
 - relax `is_editable` type in `util/dom.js`
   ([#187](https://github.com/ryanatkn/fuz/pull/187))
@@ -2279,7 +2279,7 @@
   ([#178](https://github.com/ryanatkn/fuz/pull/178))
 - improve env handling for log level
   ([#180](https://github.com/ryanatkn/fuz/pull/180))
-- add `index` to `Pending_Animation` slot props
+- add `index` to `PendingAnimation` slot props
   ([#181](https://github.com/ryanatkn/fuz/pull/181))
 
 ## 0.22.0
@@ -2332,7 +2332,7 @@
 
 ## 0.16.0
 
-- **break**: rename `Devmode_Controls.svelte` from `Devmode.svelte` and remove toggle button
+- **break**: rename `DevmodeControls.svelte` from `Devmode.svelte` and remove toggle button
   ([#159](https://github.com/ryanatkn/fuz/pull/159))
 - **break**: remove opinionated layout CSS on the `html` and `body` elements
   ([#155](https://github.com/ryanatkn/fuz/pull/155))
@@ -2356,7 +2356,7 @@
 
 - **break**: remove most of `icons.ts`
   ([#148](https://github.com/ryanatkn/fuz/pull/148))
-- export `Github_Logo.svelte` and `TwitterLogo.svelte`
+- export `GithubLogo.svelte` and `TwitterLogo.svelte`
   ([#150](https://github.com/ryanatkn/fuz/pull/150))
 - add reusable `.pane` CSS class
   ([#152](https://github.com/ryanatkn/fuz/pull/152))
@@ -2394,7 +2394,7 @@
   ([#136](https://github.com/ryanatkn/fuz/pull/136))
 - **break**: update styles
   ([#136](https://github.com/ryanatkn/fuz/pull/136))
-- **break**: change `Pending_Animation` property `paused` to `running`
+- **break**: change `PendingAnimation` property `paused` to `running`
   ([#136](https://github.com/ryanatkn/fuz/pull/136))
 - add optional `separator` arg to `toToClientId`
   ([#136](https://github.com/ryanatkn/fuz/pull/136))
@@ -2433,7 +2433,7 @@
 
 ## 0.8.0
 
-- **break**: rename to `PascalCase` from `Proper_Snake_Case`
+- **break**: rename to `PascalCase` from `ProperSnakeCase`
   ([#120](https://github.com/ryanatkn/fuz/pull/120))
 
 ## 0.7.0
@@ -2449,7 +2449,7 @@
   ([#108](https://github.com/ryanatkn/fuz/pull/108))
 - **break**: add peer deps `svelte` and `@sveltejs/kit`
   ([#112](https://github.com/ryanatkn/fuz/pull/112))
-- update `Pending_Animation.svelte` with slot content and `running` prop
+- update `PendingAnimation.svelte` with slot content and `running` prop
   ([#108](https://github.com/ryanatkn/fuz/pull/108))
 - replace `Message.svelte` prop `text` with a slot
   ([#108](https://github.com/ryanatkn/fuz/pull/108))
@@ -2512,7 +2512,7 @@
 
 ## 0.4.2
 
-- publish component `Pending_Animation.svelte`
+- publish component `PendingAnimation.svelte`
   ([#91](https://github.com/ryanatkn/fuz/pull/91))
 
 ## 0.4.1

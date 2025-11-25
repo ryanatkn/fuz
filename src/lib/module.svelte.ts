@@ -1,22 +1,22 @@
-import type {Module_Json} from '@ryanatkn/belt/src_json.js';
+import type {ModuleJson} from '@ryanatkn/belt/src_json.js';
 
 import {Identifier} from './identifier.svelte.js';
 import type {Pkg} from './pkg.svelte.js';
 import {url_github_file, url_api_module} from './package_helpers.js';
 
 /**
- * Rich runtime representation of Module_Json with computed properties.
+ * Rich runtime representation of ModuleJson with computed properties.
  *
  * Combines:
  *
- * - minimal Module_Json data
+ * - minimal ModuleJson data
  * - full Pkg reference (for generating URLs, import statements, etc.)
  * - lazy-computed Identifier instances
  * - query methods for ergonomic usage
  */
 export class Module {
 	readonly pkg: Pkg = $state.raw()!;
-	readonly module_json: Module_Json = $state.raw()!;
+	readonly module_json: ModuleJson = $state.raw()!;
 
 	/**
 	 * Canonical module path (no prefix) - matches storage, URLs, display.
@@ -78,7 +78,7 @@ export class Module {
 	 */
 	dependents = $derived(this.module_json.dependents);
 
-	constructor(pkg: Pkg, module_json: Module_Json) {
+	constructor(pkg: Pkg, module_json: ModuleJson) {
 		this.pkg = pkg;
 		this.module_json = module_json;
 	}

@@ -1,5 +1,5 @@
 {
-	"name": "Props_Bindable",
+	"name": "PropsBindable",
 	"kind": "component",
 	"doc_comment": "Component with bindable props.",
 	"props": [

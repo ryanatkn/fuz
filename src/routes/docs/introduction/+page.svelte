@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Github_Link from '$lib/Github_Link.svelte';
-	import Tome_Content from '$lib/Tome_Content.svelte';
+	import GithubLink from '$lib/GithubLink.svelte';
+	import TomeContent from '$lib/TomeContent.svelte';
 	import {get_tome_by_name} from '$lib/tome.js';
 
 	const LIBRARY_ITEM_NAME = 'introduction';
@@ -8,7 +8,7 @@
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
 </script>
 
-<Tome_Content {tome}>
+<TomeContent {tome}>
 	<section>
 		<p>
 			Fuz is a Svelte UI library that builds on my CSS framework <a
@@ -23,9 +23,9 @@
 			The goal is to make a fully-featured Svelte UI library, but it'll take extra time to get
 			there. That lets us prioritize design above features, making it an interesting project for
 			learning and experimentation. For more see the
-			<Github_Link path="ryanatkn/fuz#readme">readme</Github_Link>, and to get involved see <Github_Link
+			<GithubLink path="ryanatkn/fuz#readme">readme</GithubLink>, and to get involved see <GithubLink
 				path="ryanatkn/fuz/blob/main/contributing.md"
 			/>.
 		</p>
 	</section>
-</Tome_Content>
+</TomeContent>

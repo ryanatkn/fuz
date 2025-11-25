@@ -16,7 +16,7 @@
 import ts from 'typescript';
 import {readFileSync} from 'node:fs';
 import {svelte2tsx} from 'svelte2tsx';
-import type {Identifier_Json, Component_Prop_Info} from '@ryanatkn/belt/src_json.js';
+import type {IdentifierJson, ComponentPropInfo} from '@ryanatkn/belt/src_json.js';
 
 import {tsdoc_parse, tsdoc_apply_to_declaration} from './tsdoc_helpers.js';
 import {module_get_component_name} from './module_helpers.js';
@@ -29,8 +29,8 @@ export const svelte_analyze_component = (
 	source_file: ts.SourceFile,
 	checker: ts.TypeChecker,
 	component_name: string,
-): Identifier_Json => {
-	const result: Identifier_Json = {
+): IdentifierJson => {
+	const result: IdentifierJson = {
 		name: component_name,
 		kind: 'component',
 	};
@@ -114,7 +114,7 @@ const svelte_extract_prop_from_member = (
 	member: ts.PropertySignature,
 	source_file: ts.SourceFile,
 	checker: ts.TypeChecker,
-): Component_Prop_Info | undefined => {
+): ComponentPropInfo | undefined => {
 	if (!ts.isIdentifier(member.name)) return undefined;
 
 	const prop_name = member.name.text;
@@ -196,7 +196,7 @@ const svelte_extract_props_from_type = (
 	virtual_source: ts.SourceFile,
 	checker: ts.TypeChecker,
 	bindable_props: Set<string>,
-	props: Array<Component_Prop_Info>,
+	props: Array<ComponentPropInfo>,
 ): void => {
 	if (ts.isTypeLiteralNode(type_node)) {
 		// Handle direct type literal: { prop1: type1, prop2: type2 }
@@ -230,8 +230,8 @@ const svelte_extract_props_from_type = (
 const svelte_extract_props = (
 	virtual_source: ts.SourceFile,
 	checker: ts.TypeChecker,
-): Array<Component_Prop_Info> => {
-	const props: Array<Component_Prop_Info> = [];
+): Array<ComponentPropInfo> => {
+	const props: Array<ComponentPropInfo> = [];
 	const bindable_props = svelte_extract_bindable_props(virtual_source);
 
 	// Look for $$ComponentProps type alias or Props interface
@@ -279,7 +279,7 @@ export const svelte_analyze_file = (
 	file_path: string,
 	module_path: string,
 	checker: ts.TypeChecker,
-): Identifier_Json => {
+): IdentifierJson => {
 	const svelte_source = readFileSync(file_path, 'utf-8');
 
 	// Check if component uses TypeScript

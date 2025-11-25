@@ -6,7 +6,7 @@
  * - auto-detected links: external URLs (`https://...`) and internal paths (`/path`)
  * - markdown links: `[text](url)` with custom display text
  * - inline code in backticks (creates `Code` nodes; auto-linking to identifiers/modules
- *   is handled by the rendering layer via `Mdz_Node_View.svelte`)
+ *   is handled by the rendering layer via `MdzNodeView.svelte`)
  * - paragraph breaks (double newline)
  * - block elements: headings, horizontal rules, code blocks
  * - HTML elements and Svelte components (opt-in via context)
@@ -30,93 +30,93 @@
 // TODO design incremental parsing or some system that preserves Svelte components across re-renders when possible
 
 /**
- * Parses text to an array of `Mdz_Node`.
+ * Parses text to an array of `MdzNode`.
  */
-export const mdz_parse = (text: string): Array<Mdz_Node> => new Mdz_Parser(text).parse();
+export const mdz_parse = (text: string): Array<MdzNode> => new MdzParser(text).parse();
 
-export type Mdz_Node =
-	| Mdz_Text_Node
-	| Mdz_Code_Node
-	| Mdz_Codeblock_Node
-	| Mdz_Bold_Node
-	| Mdz_Italic_Node
-	| Mdz_Strikethrough_Node
-	| Mdz_Link_Node
-	| Mdz_Paragraph_Node
-	| Mdz_Hr_Node
-	| Mdz_Heading_Node
-	| Mdz_Element_Node
-	| Mdz_Component_Node;
+export type MdzNode =
+	| MdzTextNode
+	| MdzCodeNode
+	| MdzCodeblockNode
+	| MdzBoldNode
+	| MdzItalicNode
+	| MdzStrikethroughNode
+	| MdzLinkNode
+	| MdzParagraphNode
+	| MdzHrNode
+	| MdzHeadingNode
+	| MdzElementNode
+	| MdzComponentNode;
 
-export interface Mdz_Base_Node {
+export interface MdzBaseNode {
 	type: string;
 	start: number;
 	end: number;
 }
 
-export interface Mdz_Text_Node extends Mdz_Base_Node {
+export interface MdzTextNode extends MdzBaseNode {
 	type: 'Text';
 	content: string;
 }
 
-export interface Mdz_Code_Node extends Mdz_Base_Node {
+export interface MdzCodeNode extends MdzBaseNode {
 	type: 'Code';
 	content: string; // The code content (identifier/module name)
 }
 
-export interface Mdz_Codeblock_Node extends Mdz_Base_Node {
+export interface MdzCodeblockNode extends MdzBaseNode {
 	type: 'Codeblock';
 	lang: string | null; // language hint, if provided
 	content: string; // raw code content
 }
 
-export interface Mdz_Bold_Node extends Mdz_Base_Node {
+export interface MdzBoldNode extends MdzBaseNode {
 	type: 'Bold';
-	children: Array<Mdz_Node>;
+	children: Array<MdzNode>;
 }
 
-export interface Mdz_Italic_Node extends Mdz_Base_Node {
+export interface MdzItalicNode extends MdzBaseNode {
 	type: 'Italic';
-	children: Array<Mdz_Node>;
+	children: Array<MdzNode>;
 }
 
-export interface Mdz_Strikethrough_Node extends Mdz_Base_Node {
+export interface MdzStrikethroughNode extends MdzBaseNode {
 	type: 'Strikethrough';
-	children: Array<Mdz_Node>;
+	children: Array<MdzNode>;
 }
 
-export interface Mdz_Link_Node extends Mdz_Base_Node {
+export interface MdzLinkNode extends MdzBaseNode {
 	type: 'Link';
 	reference: string; // URL or path
-	children: Array<Mdz_Node>; // Display content (can include inline formatting)
+	children: Array<MdzNode>; // Display content (can include inline formatting)
 	link_type: 'external' | 'internal'; // external: https/http, internal: /path
 }
 
-export interface Mdz_Paragraph_Node extends Mdz_Base_Node {
+export interface MdzParagraphNode extends MdzBaseNode {
 	type: 'Paragraph';
-	children: Array<Mdz_Node>;
+	children: Array<MdzNode>;
 }
 
-export interface Mdz_Hr_Node extends Mdz_Base_Node {
+export interface MdzHrNode extends MdzBaseNode {
 	type: 'Hr';
 }
 
-export interface Mdz_Heading_Node extends Mdz_Base_Node {
+export interface MdzHeadingNode extends MdzBaseNode {
 	type: 'Heading';
 	level: 1 | 2 | 3 | 4 | 5 | 6;
-	children: Array<Mdz_Node>; // inline formatting allowed
+	children: Array<MdzNode>; // inline formatting allowed
 }
 
-export interface Mdz_Element_Node extends Mdz_Base_Node {
+export interface MdzElementNode extends MdzBaseNode {
 	type: 'Element';
 	name: string; // HTML element name (e.g., 'div', 'span', 'code')
-	children: Array<Mdz_Node>;
+	children: Array<MdzNode>;
 }
 
-export interface Mdz_Component_Node extends Mdz_Base_Node {
+export interface MdzComponentNode extends MdzBaseNode {
 	type: 'Component';
 	name: string; // Svelte component name (e.g., 'Alert', 'Card')
-	children: Array<Mdz_Node>;
+	children: Array<MdzNode>;
 }
 
 // Character codes for performance
@@ -169,12 +169,12 @@ const HTTP_PREFIX_LENGTH = 7; // Length of "http://"
  * Single-pass lexer/parser with text accumulation for efficiency.
  * Used by `mdz_parse`, which should be preferred for simple usage.
  */
-export class Mdz_Parser {
+export class MdzParser {
 	#index: number = 0;
 	#template: string;
 	#accumulated_text: string = '';
 	#accumulated_start: number = 0;
-	#nodes: Array<Mdz_Node> = [];
+	#nodes: Array<MdzNode> = [];
 	#max_search_index: number = Number.MAX_SAFE_INTEGER; // Boundary for delimiter searches
 
 	constructor(template: string) {
@@ -185,10 +185,10 @@ export class Mdz_Parser {
 	 * Main parse method. Returns flat array of nodes,
 	 * with paragraph nodes wrapping content between double newlines.
 	 */
-	parse(): Array<Mdz_Node> {
+	parse(): Array<MdzNode> {
 		this.#nodes.length = 0;
-		const root_nodes: Array<Mdz_Node> = [];
-		const paragraph_children: Array<Mdz_Node> = [];
+		const root_nodes: Array<MdzNode> = [];
+		const paragraph_children: Array<MdzNode> = [];
 
 		// Check for block element at document start
 		const start_block = this.#try_parse_block_element();
@@ -298,7 +298,7 @@ export class Mdz_Parser {
 	 * Create a text node and advance index past the content.
 	 * Used when formatting delimiters fail to match and need to be treated as literal text.
 	 */
-	#make_text_node(content: string, start: number): Mdz_Text_Node {
+	#make_text_node(content: string, start: number): MdzTextNode {
 		this.#index = start + content.length;
 		return {
 			type: 'Text',
@@ -312,7 +312,7 @@ export class Mdz_Parser {
 	 * Parse next node based on current character.
 	 * Uses switch for performance (avoids regex in hot loop).
 	 */
-	#parse_node(): Mdz_Node {
+	#parse_node(): MdzNode {
 		const char_code = this.#current_char();
 
 		// Use character codes for performance in hot path
@@ -339,7 +339,7 @@ export class Mdz_Parser {
 	 * Auto-links to identifiers/modules if match found.
 	 * Falls back to text if unclosed, empty, or if newline encountered before closing backtick.
 	 */
-	#parse_code(): Mdz_Code_Node | Mdz_Text_Node {
+	#parse_code(): MdzCodeNode | MdzTextNode {
 		const start = this.#index;
 		this.#eat('`');
 		const content_start = this.#index;
@@ -393,7 +393,7 @@ export class Mdz_Parser {
 	 * - `foo**bar**baz` → foo<strong>bar</strong>baz (creates bold)
 	 * - `word **bold** word` → word <strong>bold</strong> word (also works)
 	 */
-	#parse_bold(): Mdz_Bold_Node | Mdz_Text_Node {
+	#parse_bold(): MdzBoldNode | MdzTextNode {
 		const start = this.#index;
 
 		// Check for ** (bold)
@@ -466,15 +466,15 @@ export class Mdz_Parser {
 	#parse_single_delimiter_formatting(
 		delimiter: '_',
 		node_type: 'Italic',
-	): Mdz_Italic_Node | Mdz_Text_Node;
+	): MdzItalicNode | MdzTextNode;
 	#parse_single_delimiter_formatting(
 		delimiter: '~',
 		node_type: 'Strikethrough',
-	): Mdz_Strikethrough_Node | Mdz_Text_Node;
+	): MdzStrikethroughNode | MdzTextNode;
 	#parse_single_delimiter_formatting(
 		delimiter: '_' | '~',
 		node_type: 'Italic' | 'Strikethrough',
-	): Mdz_Italic_Node | Mdz_Strikethrough_Node | Mdz_Text_Node {
+	): MdzItalicNode | MdzStrikethroughNode | MdzTextNode {
 		const start = this.#index;
 
 		// Check if opening delimiter is at word boundary
@@ -539,7 +539,7 @@ export class Mdz_Parser {
 	 * - `foo_bar_baz` → literal text (intraword)
 	 * - `word _emphasis_ word` → emphasis (at word boundaries)
 	 */
-	#parse_italic(): Mdz_Italic_Node | Mdz_Text_Node {
+	#parse_italic(): MdzItalicNode | MdzTextNode {
 		return this.#parse_single_delimiter_formatting('_', 'Italic');
 	}
 
@@ -554,7 +554,7 @@ export class Mdz_Parser {
 	 * - `foo~bar~baz` → literal text (intraword)
 	 * - `word ~strike~ word` → strikethrough (at word boundaries)
 	 */
-	#parse_strikethrough(): Mdz_Strikethrough_Node | Mdz_Text_Node {
+	#parse_strikethrough(): MdzStrikethroughNode | MdzTextNode {
 		return this.#parse_single_delimiter_formatting('~', 'Strikethrough');
 	}
 
@@ -562,7 +562,7 @@ export class Mdz_Parser {
 	 * Parse markdown link: `[text](url)`.
 	 * Falls back to text if malformed.
 	 */
-	#parse_markdown_link(): Mdz_Link_Node | Mdz_Text_Node {
+	#parse_markdown_link(): MdzLinkNode | MdzTextNode {
 		const start = this.#index;
 
 		// Consume opening [
@@ -685,7 +685,7 @@ export class Mdz_Parser {
 	 *
 	 * TODO: Add attribute support like `<Alert status="error">` or `<div class="container">`
 	 */
-	#parse_tag(): Mdz_Element_Node | Mdz_Component_Node | Mdz_Text_Node {
+	#parse_tag(): MdzElementNode | MdzComponentNode | MdzTextNode {
 		const start = this.#index;
 
 		// Save parent accumulation state to avoid polluting component children with parent's accumulated text
@@ -820,7 +820,7 @@ export class Mdz_Parser {
 
 		// Parse children until closing tag
 		const closing_tag = `</${tag_name}>`;
-		const children: Array<Mdz_Node> = [];
+		const children: Array<MdzNode> = [];
 
 		while (this.#index < this.#template.length) {
 			// Check for closing tag
@@ -873,7 +873,7 @@ export class Mdz_Parser {
 	 * Used to determine if paragraph wrapping should be skipped (MDX convention).
 	 * Returns true if there's exactly one Component/Element node and all other nodes are whitespace-only Text nodes.
 	 */
-	#is_single_tag(nodes: Array<Mdz_Node>): boolean {
+	#is_single_tag(nodes: Array<MdzNode>): boolean {
 		let found_tag = false;
 
 		for (const node of nodes) {
@@ -902,7 +902,7 @@ export class Mdz_Parser {
 	 *
 	 * This helper eliminates duplication between document start and post-paragraph-break parsing.
 	 */
-	#try_parse_block_element(): Mdz_Heading_Node | Mdz_Hr_Node | Mdz_Codeblock_Node | null {
+	#try_parse_block_element(): MdzHeadingNode | MdzHrNode | MdzCodeblockNode | null {
 		if (this.#match_heading()) {
 			return this.#parse_heading();
 		} else if (this.#match_hr()) {
@@ -921,7 +921,7 @@ export class Mdz_Parser {
 	#save_accumulation_state(): {
 		accumulated_text: string;
 		accumulated_start: number;
-		nodes: Array<Mdz_Node>;
+		nodes: Array<MdzNode>;
 	} {
 		return {
 			accumulated_text: this.#accumulated_text,
@@ -938,7 +938,7 @@ export class Mdz_Parser {
 	#restore_accumulation_state(state: {
 		accumulated_text: string;
 		accumulated_start: number;
-		nodes: Array<Mdz_Node>;
+		nodes: Array<MdzNode>;
 	}): void {
 		this.#accumulated_text = state.accumulated_text;
 		this.#accumulated_start = state.accumulated_start;
@@ -1122,7 +1122,7 @@ export class Mdz_Parser {
 	 * Parse auto-detected external URL (https:// or http://).
 	 * Uses RFC 3986 whitelist validation for valid URI characters.
 	 */
-	#parse_auto_link_url(): Mdz_Link_Node {
+	#parse_auto_link_url(): MdzLinkNode {
 		const start = this.#index;
 
 		// Consume protocol
@@ -1164,7 +1164,7 @@ export class Mdz_Parser {
 	 * Parse auto-detected internal path (starts with /).
 	 * Uses RFC 3986 whitelist validation for valid URI characters.
 	 */
-	#parse_auto_link_internal(): Mdz_Link_Node {
+	#parse_auto_link_internal(): MdzLinkNode {
 		const start = this.#index;
 
 		// Collect path characters using RFC 3986 whitelist
@@ -1254,7 +1254,7 @@ export class Mdz_Parser {
 	 * Preserves all whitespace (except paragraph breaks handled separately).
 	 * Detects and delegates to URL/path parsing when encountered.
 	 */
-	#parse_text(): Mdz_Text_Node | Mdz_Link_Node {
+	#parse_text(): MdzTextNode | MdzLinkNode {
 		const start = this.#index;
 
 		// Check for URL or internal path at current position
@@ -1330,8 +1330,8 @@ export class Mdz_Parser {
 	 * @param end_index - Optional maximum index to parse up to (for greedy/bounded parsing)
 	 * @returns Array of parsed nodes (may be empty if delimiter found immediately)
 	 */
-	#parse_nodes_until(delimiter: string, end_index?: number): Array<Mdz_Node> {
-		const nodes: Array<Mdz_Node> = [];
+	#parse_nodes_until(delimiter: string, end_index?: number): Array<MdzNode> {
+		const nodes: Array<MdzNode> = [];
 		const max_index = end_index ?? this.#template.length;
 
 		// Save and set max search boundary for nested parsers
@@ -1449,7 +1449,7 @@ export class Mdz_Parser {
 	 * Parse horizontal rule: `---`
 	 * Assumes #match_hr() already verified this is an hr.
 	 */
-	#parse_hr(): Mdz_Hr_Node {
+	#parse_hr(): MdzHrNode {
 		const start = this.#index;
 
 		// Consume the three hyphens (no leading whitespace - already verified)
@@ -1552,7 +1552,7 @@ export class Mdz_Parser {
 	 * Parse heading: `# Heading text`
 	 * Assumes #match_heading() already verified this is a heading.
 	 */
-	#parse_heading(): Mdz_Heading_Node {
+	#parse_heading(): MdzHeadingNode {
 		const start = this.#index;
 
 		// Count and consume hashes
@@ -1566,7 +1566,7 @@ export class Mdz_Parser {
 		this.#index++;
 
 		// Parse inline content until newline
-		const content_nodes: Array<Mdz_Node> = [];
+		const content_nodes: Array<MdzNode> = [];
 
 		while (this.#index < this.#template.length) {
 			const char_code = this.#template.charCodeAt(this.#index);
@@ -1725,7 +1725,7 @@ export class Mdz_Parser {
 	 * Parse code block: ```lang\ncode\n```
 	 * Assumes #match_code_block() already verified this is a code block.
 	 */
-	#parse_code_block(): Mdz_Codeblock_Node {
+	#parse_code_block(): MdzCodeblockNode {
 		const start = this.#index;
 
 		// Count and consume opening backticks

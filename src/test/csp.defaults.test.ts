@@ -3,7 +3,7 @@ import {test, assert, describe} from 'vitest';
 import {
 	create_csp_directives,
 	COLOR_SCHEME_SCRIPT_HASH,
-	type Create_Csp_Directives_Options,
+	type CreateCspDirectivesOptions,
 } from '$lib/csp.js';
 import {
 	create_test_source,
@@ -203,7 +203,7 @@ describe('value_defaults_base option tests', () => {
 	});
 
 	test('value_defaults_base: merging behavior', () => {
-		const custom_base: Create_Csp_Directives_Options['value_defaults_base'] = {
+		const custom_base: CreateCspDirectivesOptions['value_defaults_base'] = {
 			'script-src': ['https://base-script.com' as any],
 			'img-src': ['https://base-images.com' as any],
 		};

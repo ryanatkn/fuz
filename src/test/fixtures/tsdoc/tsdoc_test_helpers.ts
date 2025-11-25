@@ -1,20 +1,20 @@
 import ts from 'typescript';
 
-import type {Tsdoc_Parsed_Comment} from '$lib/tsdoc_helpers.js';
+import type {TsdocParsedComment} from '$lib/tsdoc_helpers.js';
 import {tsdoc_parse} from '$lib/tsdoc_helpers.js';
 import {load_fixtures_generic} from '../../test_helpers.js';
 
-export interface Tsdoc_Fixture {
+export interface TsdocFixture {
 	name: string;
 	input: string;
-	expected: Tsdoc_Parsed_Comment | null;
+	expected: TsdocParsedComment | null;
 }
 
 /**
  * Load all fixtures from the tsdoc fixtures directory.
  */
-export const load_fixtures = async (): Promise<Array<Tsdoc_Fixture>> =>
-	load_fixtures_generic<Tsdoc_Parsed_Comment | null>({
+export const load_fixtures = async (): Promise<Array<TsdocFixture>> =>
+	load_fixtures_generic<TsdocParsedComment | null>({
 		fixtures_dir: import.meta.dirname,
 		input_extension: '.ts',
 		transform_expected: (json) =>
@@ -28,7 +28,7 @@ export const load_fixtures = async (): Promise<Array<Tsdoc_Fixture>> =>
  * @param source_file - The TypeScript source file to search
  * @returns The parsed TSDoc comment, or null if not found
  */
-export const find_and_parse_tsdoc = (source_file: ts.SourceFile): Tsdoc_Parsed_Comment | null => {
+export const find_and_parse_tsdoc = (source_file: ts.SourceFile): TsdocParsedComment | null => {
 	for (const statement of source_file.statements) {
 		// Check for export assignments
 		if (ts.isExportAssignment(statement)) {
@@ -58,7 +58,7 @@ export const find_and_parse_tsdoc = (source_file: ts.SourceFile): Tsdoc_Parsed_C
 /**
  * Validate that a parsed TSDoc comment has the expected structure.
  */
-export const validate_tsdoc_structure = (tsdoc: Tsdoc_Parsed_Comment | undefined): void => {
+export const validate_tsdoc_structure = (tsdoc: TsdocParsedComment | undefined): void => {
 	if (!tsdoc) {
 		throw new Error('Expected tsdoc to be defined');
 	}

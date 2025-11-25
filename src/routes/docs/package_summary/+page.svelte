@@ -2,11 +2,11 @@
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	import {get_tome_by_name} from '$lib/tome.js';
-	import Package_Summary from '$lib/Package_Summary.svelte';
-	import Tome_Content from '$lib/Tome_Content.svelte';
+	import PackageSummary from '$lib/PackageSummary.svelte';
+	import TomeContent from '$lib/TomeContent.svelte';
 	import {pkg_context} from '$lib/pkg.svelte.js';
 
-	const LIBRARY_ITEM_NAME = 'Package_Summary';
+	const LIBRARY_ITEM_NAME = 'PackageSummary';
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
 
 	const pkg = pkg_context.get();
@@ -14,7 +14,7 @@
 
 <!-- eslint-disable svelte/no-useless-mustaches -->
 
-<Tome_Content {tome}>
+<TomeContent {tome}>
 	<section>
 		<p>
 			This is a component related to <a
@@ -23,12 +23,12 @@
 			> features.
 		</p>
 		<Code
-			content={`import Package_Summary from '@ryanatkn/fuz/Package_Summary.svelte';`}
+			content={`import PackageSummary from '@ryanatkn/fuz/PackageSummary.svelte';`}
 			lang="ts"
 		/>
-		<Code content={`<Package_Summary {pkg} />`} />
+		<Code content={`<PackageSummary {pkg} />`} />
 	</section>
 	<section>
-		<Package_Summary {pkg} />
+		<PackageSummary {pkg} />
 	</section>
-</Tome_Content>
+</TomeContent>

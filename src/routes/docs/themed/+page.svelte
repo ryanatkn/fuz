@@ -3,16 +3,16 @@
 	import type {Theme} from '@ryanatkn/moss/theme.js';
 	import {default_themes} from '@ryanatkn/moss/themes.js';
 
-	import Tome_Content from '$lib/Tome_Content.svelte';
+	import TomeContent from '$lib/TomeContent.svelte';
 	import Details from '$lib/Details.svelte';
 	import Dialog from '$lib/Dialog.svelte';
 	import {get_tome_by_name} from '$lib/tome.js';
-	import Color_Scheme_Input from '$lib/Color_Scheme_Input.svelte';
-	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
-	import Tome_Section from '$lib/Tome_Section.svelte';
-	import Theme_Input from '$lib/Theme_Input.svelte';
-	import Theme_Form from '$routes/Theme_Form.svelte';
-	import Mdn_Link from '$lib/Mdn_Link.svelte';
+	import ColorSchemeInput from '$lib/ColorSchemeInput.svelte';
+	import TomeSectionHeader from '$lib/TomeSectionHeader.svelte';
+	import TomeSection from '$lib/TomeSection.svelte';
+	import ThemeInput from '$lib/ThemeInput.svelte';
+	import ThemeForm from '$routes/ThemeForm.svelte';
+	import MdnLink from '$lib/MdnLink.svelte';
 	import {themer_context} from '$lib/themer.svelte.js';
 
 	const LIBRARY_ITEM_NAME = 'Themed';
@@ -29,7 +29,7 @@
 
 <!-- eslint-disable svelte/no-useless-mustaches -->
 
-<Tome_Content {tome}>
+<TomeContent {tome}>
 	<section class="theme">
 		<p>
 			Fuz provides UI components that use <a href="https://moss.ryanatkn.com/docs/themes"
@@ -38,10 +38,10 @@
 		</p>
 		<p>
 			<code>Themed</code> adds global support for both the browser's
-			<Mdn_Link path="Web/CSS/color-scheme" />
+			<MdnLink path="Web/CSS/color-scheme" />
 			and custom themes based on
 			<a href="https://moss.ryanatkn.com/docs/variables">Moss style variables</a>, which use
-			<Mdn_Link path="Web/CSS/--*">CSS custom properties</Mdn_Link>.
+			<MdnLink path="Web/CSS/--*">CSS custom properties</MdnLink>.
 			<code>Themed</code> is a singleton component that's mounted at the top-level of the page:
 		</p>
 		<Code content={`import Themed from '@ryanatkn/fuz/Themed.svelte';`} lang="ts" />
@@ -77,7 +77,7 @@
 					This lets you call <code>themer_context.get()</code> to access the reactive
 					<code>Themer</code>
 					class instance anywhere in your code. The helper components on this page like
-					<code>Color_Scheme_Input</code> and <code>Theme_Input</code> use it so they don't require
+					<code>ColorSchemeInput</code> and <code>ThemeInput</code> use it so they don't require
 					a <code>themer</code> prop.
 				</p>
 				<p>
@@ -100,26 +100,26 @@
 			</aside>
 		</Details>
 	</section>
-	<Tome_Section>
-		<Tome_Section_Header text="Color scheme" />
+	<TomeSection>
+		<TomeSectionHeader text="Color scheme" />
 		<p>
 			<code>Themed</code> defaults to automatic
-			<Mdn_Link path="Web/CSS/color-scheme" />
+			<MdnLink path="Web/CSS/color-scheme" />
 			detection with
-			<Mdn_Link path="Web/CSS/@media/prefers-color-scheme" />, and users can also set it directly:
+			<MdnLink path="Web/CSS/@media/prefers-color-scheme" />, and users can also set it directly:
 		</p>
 		<div class="mb_lg">
-			<Color_Scheme_Input />
+			<ColorSchemeInput />
 		</div>
 		<Code
-			content={`import Color_Scheme_Input from '@ryanatkn/fuz/Color_Scheme_Input.svelte';`}
+			content={`import ColorSchemeInput from '@ryanatkn/fuz/ColorSchemeInput.svelte';`}
 			lang="ts"
 		/>
-		<Code content="<Color_Scheme_Input />" />
+		<Code content="<ColorSchemeInput />" />
 		<p>Pass props to override the default:</p>
 		<!-- TODO this is bugged on page load, auto is SSR'd but doesn't update here, can we fix? Should Svelte prefer the client value? -->
 		<Code
-			content={`<Color_Scheme_Input\n\tvalue={{color_scheme: ${
+			content={`<ColorSchemeInput\n\tvalue={{color_scheme: ${
 				"'" + JSON.stringify(themer.color_scheme).replace(/"/g, '') + "'"
 			}}}\n\tonchange={...}\n/>`}
 		/>
@@ -128,14 +128,14 @@
 			both color schemes.
 		</p>
 		<Details>
-			{#snippet summary()}More about <code>Color_Scheme_Input</code>{/snippet}
+			{#snippet summary()}More about <code>ColorSchemeInput</code>{/snippet}
 			<aside>
 				<p>
-					<code>Color_Scheme_Input</code> enables users to choose and persist the color scheme without
+					<code>ColorSchemeInput</code> enables users to choose and persist the color scheme without
 					boilerplate.
 				</p>
 				<p>
-					By default, <code>Color_Scheme_Input</code> works with <code>Themed</code>'s
+					By default, <code>ColorSchemeInput</code> works with <code>Themed</code>'s
 					<code>themer</code> in context to save the user's preference to <code>localStorage</code>.
 					To customize this behavior, pass your own <code>value</code> or <code>onchange</code>
 					props. The <code>value</code> defaults to <code>themer_context.get()</code> so technically
@@ -144,9 +144,9 @@
 				</p>
 			</aside>
 		</Details>
-	</Tome_Section>
-	<Tome_Section>
-		<Tome_Section_Header text="Builtin themes" />
+	</TomeSection>
+	<TomeSection>
+		<TomeSectionHeader text="Builtin themes" />
 		<p>
 			A theme is a simple JSON collection of <a href="https://moss.ryanatkn.com/docs/variables"
 				>Moss style variables</a
@@ -154,9 +154,9 @@
 			light and/or dark color schemes. In other words, "dark" isn't a theme, it's a mode that any theme
 			can implement.
 		</p>
-		<!-- TODO explain when exported <Code code={`<Theme_Input\n\t{themes}\n\t{selected_theme}\n/>`} /> -->
+		<!-- TODO explain when exported <Code code={`<ThemeInput\n\t{themes}\n\t{selected_theme}\n/>`} /> -->
 		<div class="width_upto_sm mb_lg">
-			<Theme_Input {themes} enable_editing onedit={(t) => (editing_theme = t)} />
+			<ThemeInput {themes} enable_editing onedit={(t) => (editing_theme = t)} />
 		</div>
 		<!-- <button class="mb_lg" onclick={() => (show_create_theme_dialog = true)} disabled
 				>create a new theme (todo)</button
@@ -169,9 +169,9 @@
 			refresh the page. This can be fixed using a similar strategy that we use to avoid pop-in of
 			user-defined color schemes, but it's more involved.
 		</aside>
-	</Tome_Section>
-	<Tome_Section>
-		<Tome_Section_Header text="Example usage" />
+	</TomeSection>
+	<TomeSection>
+		<TomeSectionHeader text="Example usage" />
 		<p>Themes are plain CSS that can be sourced in a variety of ways.</p>
 		<p>To use Fuz's base theme:</p>
 		<Code
@@ -225,9 +225,9 @@ themer.color_scheme; // '${themer.color_scheme}'`}
 				>fuz_template</a
 			>.
 		</p>
-	</Tome_Section>
-	<Tome_Section>
-		<Tome_Section_Header text="More details" />
+	</TomeSection>
+	<TomeSection>
+		<TomeSectionHeader text="More details" />
 		<p>
 			<code>Themed</code> initializes the system's theme support. Without it, the page will not
 			reflect the user's system
@@ -244,21 +244,21 @@ themer.color_scheme; // '${themer.color_scheme}'`}
 		</p>
 		<p>
 			The theme setup script interacts with <code>sync_color_scheme</code> to save the user's
-			preference to <code>localStorage</code>. See also <code>Color_Scheme_Input</code>.
+			preference to <code>localStorage</code>. See also <code>ColorSchemeInput</code>.
 		</p>
 		<p>
 			The setup script avoids flash-on-load due to color scheme, but currently themes flash in after
 			loading. We'll try to fix this when the system stabilizes.
 		</p>
-	</Tome_Section>
-</Tome_Content>
+	</TomeSection>
+</TomeContent>
 
 <!-- TODO enable creating themes -->
 <!-- {#if show_create_theme_dialog}
 	<Dialog onclose={() => (show_create_theme_dialog = false)} let:close>
 		<div class="pane p_md width_upto_md mx_auto">
 			<div class="theme_editor_wrapper panel">
-				<Theme_Form
+				<ThemeForm
 					oncreate={(theme) => {
 						themes = themes.concat(theme);
 						close();
@@ -272,7 +272,7 @@ themer.color_scheme; // '${themer.color_scheme}'`}
 	<Dialog onclose={() => (editing_theme = null)}>
 		<div class="pane p_md width_upto_md mx_auto">
 			<div class="theme_editor_wrapper panel">
-				<Theme_Form
+				<ThemeForm
 					theme={editing_theme}
 					onsave={(theme) => {
 						console.log(`update theme`, theme); // eslint-disable-line no-console

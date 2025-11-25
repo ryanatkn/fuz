@@ -1,5 +1,5 @@
-import type {Package_Json} from '@ryanatkn/belt/package_json.js';
-import type {Src_Json} from '@ryanatkn/belt/src_json.js';
+import type {PackageJson} from '@ryanatkn/belt/package_json.js';
+import type {SrcJson} from '@ryanatkn/belt/src_json.js';
 
 import {create_context} from './context_helpers.js';
 import {Identifier} from './identifier.svelte.js';
@@ -29,8 +29,8 @@ import {
  * @see identifier.svelte.ts for Identifier class
  */
 export class Pkg {
-	readonly package_json: Package_Json = $state.raw()!;
-	readonly src_json: Src_Json = $state.raw()!;
+	readonly package_json: PackageJson = $state.raw()!;
+	readonly src_json: SrcJson = $state.raw()!;
 
 	/**
 	 * Package name (e.g., '@ryanatkn/fuz').
@@ -123,12 +123,12 @@ export class Pkg {
 	 */
 	identifier_map = $derived(new Map(this.identifiers.map((id) => [id.name, id])));
 
-	constructor(package_json: Package_Json, src_json: Src_Json) {
+	constructor(package_json: PackageJson, src_json: SrcJson) {
 		this.package_json = package_json;
 		this.src_json = src_json;
 	}
 
-	// TODO toJSON as Pkg_Json but see that overlap with belt's Pkg_Json
+	// TODO toJSON as PkgJson but see that overlap with belt's PkgJson
 
 	/**
 	 * Look up an identifier by name.

@@ -1,33 +1,33 @@
 <script lang="ts">
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
-	import Mdn_Link from '$lib/Mdn_Link.svelte';
-	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
-	import Tome_Section from '$lib/Tome_Section.svelte';
+	import MdnLink from '$lib/MdnLink.svelte';
+	import TomeSectionHeader from '$lib/TomeSectionHeader.svelte';
+	import TomeSection from '$lib/TomeSection.svelte';
 	import Contextmenu from '$lib/Contextmenu.svelte';
-	import Contextmenu_Entry from '$lib/Contextmenu_Entry.svelte';
+	import ContextmenuEntry from '$lib/ContextmenuEntry.svelte';
 	import Details from '$lib/Details.svelte';
-	import Root_Component_Selector from '$routes/docs/contextmenu/Root_Component_Selector.svelte';
+	import RootComponentSelector from '$routes/docs/contextmenu/RootComponentSelector.svelte';
 	import {selected_contextmenu_root_component_context} from '$routes/docs/contextmenu/selected_root_component.svelte.js';
 
 	/* eslint-disable no-alert */
 
 	const selected = selected_contextmenu_root_component_context.get();
-	const Contextmenu_Root_Component = $derived(selected.component);
+	const ContextmenuRootComponent = $derived(selected.component);
 	const root_component_name = $derived(selected.name);
 </script>
 
-<Tome_Section>
-	<Tome_Section_Header text="Introduction" />
+<TomeSection>
+	<TomeSectionHeader text="Introduction" />
 	<p>
 		Fuz provides a customizable contextmenu that overrides the system contextmenu to provide helpful
 		capabilities to users. Popular websites with similar features include Google Docs and Discord.
 		Below are caveats about this breaking some user expectations, and a workaround for iOS Safari
-		support. See also the <Mdn_Link path="Web/API/Element/contextmenu_event" /> docs and
+		support. See also the <MdnLink path="Web/API/Element/contextmenu_event" /> docs and
 		<a href="https://www.w3.org/TR/uievents/#event-type-contextmenu">w3 spec</a>.
 	</p>
 	<p>
-		When you rightclick inside a <code>Contextmenu_Root</code>, or longpress on touch devices, it
+		When you rightclick inside a <code>ContextmenuRoot</code>, or longpress on touch devices, it
 		searches the DOM tree for behaviors defined with <code>Contextmenu</code> starting from the target
 		element up to the root. If any behaviors are found, the Fuz contextmenu opens, showing all contextually
 		available actions. If no behaviors are found, the default system contextmenu opens.
@@ -36,22 +36,22 @@
 		Here's a <code>{root_component_name}</code> with a <code>Contextmenu</code> inside another
 		<code>Contextmenu</code>:
 	</p>
-	<Contextmenu_Root_Component scoped>
+	<ContextmenuRootComponent scoped>
 		<Contextmenu>
 			{#snippet entries()}
-				<Contextmenu_Entry run={() => alert('alert A')}>alert A</Contextmenu_Entry>
+				<ContextmenuEntry run={() => alert('alert A')}>alert A</ContextmenuEntry>
 			{/snippet}
 			<div class="panel p_md mb_lg">
 				<p>alert A -- rightclick or longpress here to open the contextmenu</p>
 				<Contextmenu>
 					{#snippet entries()}
-						<Contextmenu_Entry run={() => alert('alert B')}>alert B</Contextmenu_Entry>
+						<ContextmenuEntry run={() => alert('alert B')}>alert B</ContextmenuEntry>
 					{/snippet}
 					<p class="panel p_md">alert B -- also inherits A</p>
 				</Contextmenu>
 			</div>
 		</Contextmenu>
-	</Contextmenu_Root_Component>
+	</ContextmenuRootComponent>
 	<Details>
 		{#snippet summary()}
 			view code
@@ -60,17 +60,17 @@
 			content={`<${root_component_name}>
 	<Contextmenu>
 		{#snippet entries()}
-			<Contextmenu_Entry run={() => alert('alert A')}>
+			<ContextmenuEntry run={() => alert('alert A')}>
 				alert A
-			</Contextmenu_Entry>
+			</ContextmenuEntry>
 		{/snippet}
 		<div class="panel p_md mb_lg">
 			<p>alert A -- rightclick or longpress here to open the contextmenu</p>
 			<Contextmenu>
 				{#snippet entries()}
-					<Contextmenu_Entry run={() => alert('alert B')}>
+					<ContextmenuEntry run={() => alert('alert B')}>
 						alert B
-					</Contextmenu_Entry>
+					</ContextmenuEntry>
 				{/snippet}
 				<p class="panel p_md">
 					alert B -- also inherits A
@@ -124,10 +124,10 @@
 			Fuz contextmenu
 		</li>
 		<li>
-			opening the contextmenu attempts haptic feedback with <Mdn_Link
-				path="Web/API/Navigator/vibrate"><code>navigator.vibrate</code></Mdn_Link
+			opening the contextmenu attempts haptic feedback with <MdnLink
+				path="Web/API/Navigator/vibrate"><code>navigator.vibrate</code></MdnLink
 			>
 		</li>
 	</ul>
-	<Root_Component_Selector />
-</Tome_Section>
+	<RootComponentSelector />
+</TomeSection>

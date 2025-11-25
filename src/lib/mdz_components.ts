@@ -9,7 +9,7 @@ import {create_context} from './context_helpers.js';
  *
  * The Map values are the Svelte component constructors.
  */
-export type Mdz_Components = Map<string, Component<any, any>>; // TODO support params
+export type MdzComponents = Map<string, Component<any, any>>; // TODO support params
 
 /**
  * Element registry for HTML elements that can be used in mdz content.
@@ -18,17 +18,17 @@ export type Mdz_Components = Map<string, Component<any, any>>; // TODO support p
  *
  * The Map values are boolean placeholders for future configuration options.
  */
-export type Mdz_Elements = Map<string, boolean>;
+export type MdzElements = Map<string, boolean>;
 
 /**
  * Context for providing custom mdz components.
  * Must be set by the application using mdz.
  */
-export const mdz_components_context = create_context<Mdz_Components>();
+export const mdz_components_context = create_context<MdzComponents>();
 
 /**
  * Context for providing allowed HTML elements.
  * Must be set by the application using mdz.
  * By default, no HTML elements are allowed.
  */
-export const mdz_elements_context = create_context<Mdz_Elements>();
+export const mdz_elements_context = create_context<MdzElements>();

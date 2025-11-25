@@ -4,9 +4,9 @@
 
 	import {get_tome_by_name} from '$lib/tome.js';
 	import Card from '$lib/Card.svelte';
-	import Tome_Content from '$lib/Tome_Content.svelte';
-	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
-	import Tome_Section from '$lib/Tome_Section.svelte';
+	import TomeContent from '$lib/TomeContent.svelte';
+	import TomeSectionHeader from '$lib/TomeSectionHeader.svelte';
+	import TomeSection from '$lib/TomeSection.svelte';
 	import {DOCS_PATH} from '$lib/docs_helpers.svelte.js';
 
 	const LIBRARY_ITEM_NAME = 'Card';
@@ -15,7 +15,7 @@
 
 <!-- eslint-disable svelte/no-useless-mustaches -->
 
-<Tome_Content {tome}>
+<TomeContent {tome}>
 	<section>
 		<aside>⚠️ This API is unfinished and will likely change.</aside>
 	</section>
@@ -33,8 +33,8 @@
 			a card
 		</Card>
 	</section>
-	<Tome_Section>
-		<Tome_Section_Header text="With a custom icon" />
+	<TomeSection>
+		<TomeSectionHeader text="With a custom icon" />
 		<Code
 			content={`<Card>
   custom<br />
@@ -47,9 +47,9 @@
 			icon
 			{#snippet icon()}📖{/snippet}
 		</Card>
-	</Tome_Section>
-	<Tome_Section>
-		<Tome_Section_Header text="As a link" />
+	</TomeSection>
+	<TomeSection>
+		<TomeSectionHeader text="As a link" />
 		<Code
 			content={`<Card href="${resolve('/')}">
   a<br />
@@ -60,9 +60,9 @@
 			a<br />
 			link
 		</Card>
-	</Tome_Section>
-	<Tome_Section>
-		<Tome_Section_Header text="As the selected link" />
+	</TomeSection>
+	<TomeSection>
+		<TomeSectionHeader text="As the selected link" />
 		<Code
 			content={`<Card href="${DOCS_PATH}/card">
   href is<br />
@@ -73,9 +73,9 @@
 			href is<br />
 			selected
 		</Card>
-	</Tome_Section>
-	<Tome_Section>
-		<Tome_Section_Header text="With a custom HTML tag" />
+	</TomeSection>
+	<TomeSection>
+		<TomeSectionHeader text="With a custom HTML tag" />
 		<Code
 			content={`<Card tag="button">
   custom<br />
@@ -86,9 +86,9 @@
 			custom<br />
 			tag
 		</Card>
-	</Tome_Section>
-	<Tome_Section>
-		<Tome_Section_Header text="With custom alignment" />
+	</TomeSection>
+	<TomeSection>
+		<TomeSectionHeader text="With custom alignment" />
 		<Code
 			content={`<Card align="right">
   align<br />
@@ -99,7 +99,7 @@
 			align<br />
 			icon right
 		</Card>
-	</Tome_Section>
+	</TomeSection>
 	<section>
 		<Code
 			content={`<Card align="above">
@@ -124,4 +124,4 @@
 			icon below
 		</Card>
 	</section>
-</Tome_Content>
+</TomeContent>

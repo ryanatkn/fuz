@@ -5,11 +5,11 @@ import {
 	load_fixtures,
 	validate_tsdoc_structure,
 	find_and_parse_tsdoc,
-	type Tsdoc_Fixture,
+	type TsdocFixture,
 } from './fixtures/tsdoc/tsdoc_test_helpers.js';
 import {normalize_json} from './test_helpers.js';
 
-let fixtures: Array<Tsdoc_Fixture> = [];
+let fixtures: Array<TsdocFixture> = [];
 
 beforeAll(async () => {
 	fixtures = await load_fixtures();

@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 	import {get_tome_by_name} from '$lib/tome.js';
-	import Tome_Content from '$lib/Tome_Content.svelte';
-	import Tome_Link from '$lib/Tome_Link.svelte';
+	import TomeContent from '$lib/TomeContent.svelte';
+	import TomeLink from '$lib/TomeLink.svelte';
 	import Svg from '$lib/Svg.svelte';
 	import {
 		zzz_logo,
@@ -30,10 +30,10 @@
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
 </script>
 
-<Tome_Content {tome}>
+<TomeContent {tome}>
 	<section>
 		<p>
-			Fuz includes a number of logos available as data that can be mounted with the <Tome_Link
+			Fuz includes a number of logos available as data that can be mounted with the <TomeLink
 				name="Svg"
 			/>
 			component. Only the ones you use are included in your bundle.
@@ -135,7 +135,7 @@
 			</li>
 		</ul>
 	</section>
-</Tome_Content>
+</TomeContent>
 
 <style>
 	li {

@@ -5,14 +5,14 @@
 
 import {describe, test, assert, afterEach} from 'vitest';
 import {flushSync} from 'svelte';
-import {Contextmenu_State} from '$lib/contextmenu_state.svelte.js';
+import {ContextmenuState} from '$lib/contextmenu_state.svelte.js';
 import {unmount_component} from './test_helpers.js';
-import {mount_contextmenu_root, type Shared_Test_Options} from './contextmenu_test_helpers.js';
+import {mount_contextmenu_root, type SharedTestOptions} from './contextmenu_test_helpers.js';
 
 export const create_shared_positioning_tests = (
 	Component: any,
 	component_name: string,
-	_options: Shared_Test_Options = {},
+	_options: SharedTestOptions = {},
 ): void => {
 	describe(`${component_name} - Positioning`, () => {
 		let mounted: ReturnType<typeof mount_contextmenu_root> | null = null;
@@ -101,7 +101,7 @@ export const create_shared_positioning_tests = (
 
 		test('custom layout is not overridden', () => {
 			const custom_layout = {width: 800, height: 600};
-			const cm = new Contextmenu_State({layout: custom_layout});
+			const cm = new ContextmenuState({layout: custom_layout});
 
 			mounted = mount_contextmenu_root(Component, cm);
 

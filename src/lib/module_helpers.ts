@@ -13,7 +13,7 @@
  * Allows customizing which paths are considered source modules,
  * useful for projects with non-standard directory structures.
  */
-export interface Module_Source_Options {
+export interface ModuleSourceOptions {
 	/** Source directory paths to include. @default ['/src/lib/'] */
 	source_paths?: Array<string>;
 	/** File extensions to analyze. @default ['.ts', '.js', '.svelte'] */
@@ -25,7 +25,7 @@ export interface Module_Source_Options {
 /**
  * Default options for module source detection.
  */
-export const MODULE_SOURCE_DEFAULTS: Required<Module_Source_Options> = {
+export const MODULE_SOURCE_DEFAULTS: Required<ModuleSourceOptions> = {
 	source_paths: ['/src/lib/'],
 	extensions: ['.ts', '.js', '.svelte'],
 	exclude_patterns: [/\.test\.ts$/],
@@ -85,7 +85,7 @@ export const module_is_test = (path: string): boolean => path.endsWith('.test.ts
  * @param options Configuration options (uses defaults if not provided)
  * @returns True if the path matches all criteria
  */
-export const module_matches_source = (path: string, options?: Module_Source_Options): boolean => {
+export const module_matches_source = (path: string, options?: ModuleSourceOptions): boolean => {
 	const opts = {...MODULE_SOURCE_DEFAULTS, ...options};
 
 	// Check if path is in one of the source directories

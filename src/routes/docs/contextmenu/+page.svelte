@@ -1,14 +1,14 @@
 <script lang="ts">
-	import Tome_Content from '$lib/Tome_Content.svelte';
+	import TomeContent from '$lib/TomeContent.svelte';
 	import {get_tome_by_name} from '$lib/tome.js';
 	import Introduction from '$routes/docs/contextmenu/Introduction.svelte';
 	import Discussion from '$routes/docs/contextmenu/Discussion.svelte';
-	import Example_Full from '$routes/docs/contextmenu/Example_Full.svelte';
-	import Example_Basic from '$routes/docs/contextmenu/Example_Basic.svelte';
-	import Example_Custom_Instance from '$routes/docs/contextmenu/Example_Custom_Instance.svelte';
-	import Example_Select_Text from '$routes/docs/contextmenu/Example_Select_Text.svelte';
-	import Example_Disable_Default_Behaviors from '$routes/docs/contextmenu/Example_Disable_Default_Behaviors.svelte';
-	import Example_Default_Behaviors from '$routes/docs/contextmenu/Example_Default_Behaviors.svelte';
+	import ExampleFull from '$routes/docs/contextmenu/ExampleFull.svelte';
+	import ExampleBasic from '$routes/docs/contextmenu/ExampleBasic.svelte';
+	import ExampleCustomInstance from '$routes/docs/contextmenu/ExampleCustomInstance.svelte';
+	import ExampleSelectText from '$routes/docs/contextmenu/ExampleSelectText.svelte';
+	import ExampleDisableDefaultBehaviors from '$routes/docs/contextmenu/ExampleDisableDefaultBehaviors.svelte';
+	import ExampleDefaultBehaviors from '$routes/docs/contextmenu/ExampleDefaultBehaviors.svelte';
 	import {selected_contextmenu_root_component_context} from '$routes/docs/contextmenu/selected_root_component.svelte.js';
 
 	const LIBRARY_ITEM_NAME = 'Contextmenu';
@@ -21,14 +21,14 @@
 </script>
 
 <!-- TODO demonstrate usage of a custom `link_snippet` and `linkProps`  -->
-<Tome_Content {tome}>
+<TomeContent {tome}>
 	<Introduction />
-	<Example_Basic />
-	<Example_Default_Behaviors />
-	<Example_Select_Text />
-	<Example_Disable_Default_Behaviors />
-	<Example_Custom_Instance />
-	<Example_Full />
+	<ExampleBasic />
+	<ExampleDefaultBehaviors />
+	<ExampleSelectText />
+	<ExampleDisableDefaultBehaviors />
+	<ExampleCustomInstance />
+	<ExampleFull />
 	<Discussion />
 	<section>
 		<aside>
@@ -40,4 +40,4 @@
 			<p>todo: for mobile, probably change to a drawer-from-bottom design</p>
 		</aside>
 	</section>
-</Tome_Content>
+</TomeContent>

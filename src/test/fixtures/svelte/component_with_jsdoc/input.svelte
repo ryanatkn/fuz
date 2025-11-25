@@ -6,7 +6,7 @@
 
 	@example
 	```svelte
-	<Component_Jsdoc title="Hello" />
+	<ComponentJsdoc title="Hello" />
 	```
 -->
 

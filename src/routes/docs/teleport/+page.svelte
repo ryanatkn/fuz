@@ -3,8 +3,8 @@
 
 	import {get_tome_by_name} from '$lib/tome.js';
 	import Teleport from '$lib/Teleport.svelte';
-	import Tome_Content from '$lib/Tome_Content.svelte';
-	import Tome_Link from '$lib/Tome_Link.svelte';
+	import TomeContent from '$lib/TomeContent.svelte';
+	import TomeLink from '$lib/TomeLink.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Teleport';
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
@@ -16,10 +16,10 @@
 
 <!-- eslint-disable svelte/no-useless-mustaches -->
 
-<Tome_Content {tome}>
+<TomeContent {tome}>
 	<section>
 		<p>
-			Relocates elements in the DOM, in the rare cases that's useful and the best solution. The <Tome_Link
+			Relocates elements in the DOM, in the rare cases that's useful and the best solution. The <TomeLink
 				name="Dialog"
 			/> uses this to mount dialogs from any component without inheriting styles.
 		</p>
@@ -54,7 +54,7 @@
 		</div>
 		<button type="button" onclick={() => (swap = !swap)}> teleport the bunny </button>
 	</section>
-</Tome_Content>
+</TomeContent>
 
 <style>
 	.teleports {

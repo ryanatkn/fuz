@@ -3,9 +3,9 @@
 
 	import {get_tome_by_name} from '$lib/tome.js';
 	import Alert from '$lib/Alert.svelte';
-	import Tome_Content from '$lib/Tome_Content.svelte';
-	import Tome_Section from '$lib/Tome_Section.svelte';
-	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
+	import TomeContent from '$lib/TomeContent.svelte';
+	import TomeSection from '$lib/TomeSection.svelte';
+	import TomeSectionHeader from '$lib/TomeSectionHeader.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Alert';
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
@@ -17,7 +17,7 @@
 
 <!-- eslint-disable svelte/no-useless-mustaches -->
 
-<Tome_Content {tome}
+<TomeContent {tome}
 	><section>
 		<aside>⚠️ This API is unfinished and will likely change.</aside>
 	</section>
@@ -27,8 +27,8 @@
 		<Code content={`<Alert>info</Alert>`} />
 		<Alert>info</Alert>
 	</section>
-	<Tome_Section>
-		<Tome_Section_Header text="With custom icon" />
+	<TomeSection>
+		<TomeSectionHeader text="With custom icon" />
 		<p><code>icon</code> can be a string prop or snippet:</p>
 		<Code
 			content={`<Alert icon="▷">
@@ -46,12 +46,12 @@
 			{#snippet icon(t)}{t}◡{t}{/snippet}
 			icon as a snippet
 		</Alert>
-	</Tome_Section>
-	<Tome_Section>
-		<Tome_Section_Header text="As optional button" />
+	</TomeSection>
+	<TomeSection>
+		<TomeSectionHeader text="As optional button" />
 		<p>
 			Alerts can be buttons by including an <code>onclick</code> prop. This API may change because
-			it's a bit of a mess - a separate <code>Alert_Button</code> may be better.
+			it's a bit of a mess - a separate <code>AlertButton</code> may be better.
 		</p>
 		<Code
 			content={`<Alert onclick={() => clicks++}>
@@ -62,16 +62,16 @@
 			alerts can be buttons{'.'.repeat(clicks)}
 		</Alert>
 		<p>clicks: {clicks}</p>
-	</Tome_Section>
-	<Tome_Section>
-		<Tome_Section_Header text="With custom status" />
+	</TomeSection>
+	<TomeSection>
+		<TomeSectionHeader text="With custom status" />
 		<p>
 			The <code>status</code> prop, which defaults to <code>'inform'</code>, changes the default
 			icon and color.
 		</p>
 		<Code
 			content="// @ryanatkn/fuz/alert.js
-export type Alert_Status = 'inform' | 'help' | 'error';"
+export type AlertStatus = 'inform' | 'help' | 'error';"
 			lang="ts"
 		/>
 		<Code
@@ -94,5 +94,5 @@ export type Alert_Status = 'inform' | 'help' | 'error';"
 		<Alert status="help" color="var(--color_d_5)"
 			>the <code>color</code> prop overrides the status color</Alert
 		>
-	</Tome_Section>
-</Tome_Content>
+	</TomeSection>
+</TomeContent>

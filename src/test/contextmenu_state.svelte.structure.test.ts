@@ -1,25 +1,25 @@
 import {describe, test, assert, beforeEach} from 'vitest';
 
 import {
-	Contextmenu_State,
-	Entry_State,
-	Submenu_State,
-	Root_Menu_State,
+	ContextmenuState,
+	EntryState,
+	SubmenuState,
+	RootMenuState,
 } from '$lib/contextmenu_state.svelte.js';
 
 /* eslint-disable @typescript-eslint/no-empty-function */
 
-describe('Contextmenu_State - Structure', () => {
-	let contextmenu: Contextmenu_State;
+describe('ContextmenuState - Structure', () => {
+	let contextmenu: ContextmenuState;
 
 	beforeEach(() => {
-		contextmenu = new Contextmenu_State();
+		contextmenu = new ContextmenuState();
 	});
 
 	describe('menu structure', () => {
-		test('Entry_State initializes correctly', () => {
+		test('EntryState initializes correctly', () => {
 			const run = () => {};
-			const entry = new Entry_State(contextmenu.root_menu, () => run);
+			const entry = new EntryState(contextmenu.root_menu, () => run);
 
 			assert.strictEqual(entry.is_menu, false);
 			assert.strictEqual(entry.menu, contextmenu.root_menu);
@@ -30,8 +30,8 @@ describe('Contextmenu_State - Structure', () => {
 			assert.strictEqual(entry.promise, null);
 		});
 
-		test('Submenu_State initializes correctly', () => {
-			const submenu = new Submenu_State(contextmenu.root_menu, 2);
+		test('SubmenuState initializes correctly', () => {
+			const submenu = new SubmenuState(contextmenu.root_menu, 2);
 
 			assert.strictEqual(submenu.is_menu, true);
 			assert.strictEqual(submenu.menu, contextmenu.root_menu);
@@ -40,8 +40,8 @@ describe('Contextmenu_State - Structure', () => {
 			assert.deepEqual(submenu.items, []);
 		});
 
-		test('Root_Menu_State initializes correctly', () => {
-			const root = new Root_Menu_State();
+		test('RootMenuState initializes correctly', () => {
+			const root = new RootMenuState();
 
 			assert.strictEqual(root.is_menu, true);
 			assert.strictEqual(root.menu, null);
@@ -50,9 +50,9 @@ describe('Contextmenu_State - Structure', () => {
 		});
 
 		test('nested menu hierarchy', () => {
-			const submenu1 = new Submenu_State(contextmenu.root_menu, 2);
-			const submenu2 = new Submenu_State(submenu1, 3);
-			const entry = new Entry_State(submenu2, () => () => {});
+			const submenu1 = new SubmenuState(contextmenu.root_menu, 2);
+			const submenu2 = new SubmenuState(submenu1, 3);
+			const entry = new EntryState(submenu2, () => () => {});
 
 			assert.strictEqual(entry.menu, submenu2);
 			assert.strictEqual(submenu2.menu, submenu1);
@@ -62,12 +62,12 @@ describe('Contextmenu_State - Structure', () => {
 
 		test('deep nesting (5+ levels) works correctly', () => {
 			// Create a 6-level deep menu structure
-			const submenu1 = new Submenu_State(contextmenu.root_menu, 2);
-			const submenu2 = new Submenu_State(submenu1, 3);
-			const submenu3 = new Submenu_State(submenu2, 4);
-			const submenu4 = new Submenu_State(submenu3, 5);
-			const submenu5 = new Submenu_State(submenu4, 6);
-			const entry = new Entry_State(submenu5, () => () => {});
+			const submenu1 = new SubmenuState(contextmenu.root_menu, 2);
+			const submenu2 = new SubmenuState(submenu1, 3);
+			const submenu3 = new SubmenuState(submenu2, 4);
+			const submenu4 = new SubmenuState(submenu3, 5);
+			const submenu5 = new SubmenuState(submenu4, 6);
+			const entry = new EntryState(submenu5, () => () => {});
 
 			// Verify depth property
 			assert.strictEqual(submenu1.depth, 2);
@@ -86,9 +86,9 @@ describe('Contextmenu_State - Structure', () => {
 		});
 
 		test('empty menus at various depths handled correctly', () => {
-			const submenu1 = new Submenu_State(contextmenu.root_menu, 2);
-			const submenu2 = new Submenu_State(submenu1, 3);
-			const submenu3 = new Submenu_State(submenu2, 4);
+			const submenu1 = new SubmenuState(contextmenu.root_menu, 2);
+			const submenu2 = new SubmenuState(submenu1, 3);
+			const submenu3 = new SubmenuState(submenu2, 4);
 
 			// All submenus are empty
 			assert.strictEqual(submenu1.items.length, 0);
@@ -107,8 +107,8 @@ describe('Contextmenu_State - Structure', () => {
 		});
 
 		test('menu hierarchy validation', () => {
-			const submenu = new Submenu_State(contextmenu.root_menu, 2);
-			const entry = new Entry_State(submenu, () => () => {});
+			const submenu = new SubmenuState(contextmenu.root_menu, 2);
+			const entry = new EntryState(submenu, () => () => {});
 
 			// Root menu has no parent
 			assert.strictEqual(contextmenu.root_menu.menu, null);
@@ -129,8 +129,8 @@ describe('Contextmenu_State - Structure', () => {
 
 		test('circular reference prevention', () => {
 			// Verify that the structure doesn't allow circular references
-			const submenu1 = new Submenu_State(contextmenu.root_menu, 2);
-			const submenu2 = new Submenu_State(submenu1, 3);
+			const submenu1 = new SubmenuState(contextmenu.root_menu, 2);
+			const submenu2 = new SubmenuState(submenu1, 3);
 
 			// Menu property is set at construction and shouldn't create cycles
 			assert.strictEqual(submenu1.menu, contextmenu.root_menu);
@@ -153,7 +153,7 @@ describe('Contextmenu_State - Structure', () => {
 
 	describe('reset_items', () => {
 		test('resets entry promise and error', () => {
-			const entry = new Entry_State(contextmenu.root_menu, () => () => {});
+			const entry = new EntryState(contextmenu.root_menu, () => () => {});
 			entry.promise = Promise.resolve();
 			entry.error_message = 'error';
 
@@ -164,7 +164,7 @@ describe('Contextmenu_State - Structure', () => {
 		});
 
 		test('resets entry pending flag', () => {
-			const entry = new Entry_State(contextmenu.root_menu, () => () => {});
+			const entry = new EntryState(contextmenu.root_menu, () => () => {});
 			entry.promise = Promise.resolve();
 			entry.pending = true;
 
@@ -175,8 +175,8 @@ describe('Contextmenu_State - Structure', () => {
 		});
 
 		test('recursively resets submenu items', () => {
-			const submenu = new Submenu_State(contextmenu.root_menu, 2);
-			const entry = new Entry_State(submenu, () => () => {});
+			const submenu = new SubmenuState(contextmenu.root_menu, 2);
+			const entry = new EntryState(submenu, () => () => {});
 			entry.promise = Promise.resolve();
 			entry.error_message = 'error';
 			submenu.items = [...submenu.items, entry];
@@ -193,9 +193,9 @@ describe('Contextmenu_State - Structure', () => {
 		});
 
 		test('handles deeply nested structure', () => {
-			const submenu1 = new Submenu_State(contextmenu.root_menu, 2);
-			const submenu2 = new Submenu_State(submenu1, 3);
-			const entry = new Entry_State(submenu2, () => () => {});
+			const submenu1 = new SubmenuState(contextmenu.root_menu, 2);
+			const submenu2 = new SubmenuState(submenu1, 3);
+			const entry = new EntryState(submenu2, () => () => {});
 			entry.error_message = 'error';
 			submenu2.items = [...submenu2.items, entry];
 			submenu1.items = [...submenu1.items, submenu2];
@@ -206,9 +206,9 @@ describe('Contextmenu_State - Structure', () => {
 		});
 
 		test('reset preserves structure', () => {
-			const submenu = new Submenu_State(contextmenu.root_menu, 2);
-			const entry1 = new Entry_State(submenu, () => () => {});
-			const entry2 = new Entry_State(submenu, () => () => {});
+			const submenu = new SubmenuState(contextmenu.root_menu, 2);
+			const entry1 = new EntryState(submenu, () => () => {});
+			const entry2 = new EntryState(submenu, () => () => {});
 			entry1.error_message = 'error1';
 			entry2.error_message = 'error2';
 			submenu.items = [...submenu.items, entry1, entry2];
@@ -226,7 +226,7 @@ describe('Contextmenu_State - Structure', () => {
 		});
 
 		test('reset clears all async state', () => {
-			const entry = new Entry_State(contextmenu.root_menu, () => async () => {});
+			const entry = new EntryState(contextmenu.root_menu, () => async () => {});
 			entry.promise = Promise.resolve({ok: true});
 			entry.pending = true;
 			entry.error_message = 'async error';

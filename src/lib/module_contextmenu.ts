@@ -1,10 +1,10 @@
 import type {Module} from './module.svelte.js';
-import type {Contextmenu_Params} from './contextmenu_state.svelte.js';
+import type {ContextmenuParams} from './contextmenu_state.svelte.js';
 
 // TODO @many expand contextmenus for docs
 
-export const create_module_contextmenu = (module: Module): Array<Contextmenu_Params> => {
-	const entries: Array<Contextmenu_Params> = [];
+export const create_module_contextmenu = (module: Module): Array<ContextmenuParams> => {
+	const entries: Array<ContextmenuParams> = [];
 
 	// View source on GitHub
 	if (module.url_github) {

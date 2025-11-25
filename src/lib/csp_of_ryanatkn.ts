@@ -1,9 +1,9 @@
-import type {Csp_Source_Spec} from './csp.js';
+import type {CspSourceSpec} from './csp.js';
 
 /**
  * Trusted sources owned by ryanatkn.
  */
-export const csp_trusted_sources_of_ryanatkn: Array<Csp_Source_Spec> = [
+export const csp_trusted_sources_of_ryanatkn: Array<CspSourceSpec> = [
 	{source: 'https://*.ryanatkn.com/', trust: 'low'},
 	{source: 'https://*.spiderspace.org/', trust: 'low'},
 	{source: 'https://*.webdevladder.net/', trust: 'low'},

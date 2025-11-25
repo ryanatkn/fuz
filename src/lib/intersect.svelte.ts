@@ -1,16 +1,16 @@
 import type {Attachment} from 'svelte/attachments';
 import {deep_equal} from '@ryanatkn/belt/deep_equal.js';
 
-export interface Intersect_Params {
+export interface IntersectParams {
 	/**
 	 * Called when the element enters or leaves the viewport until disconnected.
 	 */
-	onintersect?: On_Intersect;
+	onintersect?: OnIntersect;
 	/**
 	 * Called when the attachment's observer is disconnected,
 	 * either by the user calling disconnect or the attachment being destroyed.
 	 */
-	ondisconnect?: On_Disconnect;
+	ondisconnect?: OnDisconnect;
 	/**
 	 * A value of `1` disconnects after `el` enters and leaves the viewport one time,
 	 * similar to 'once' for an event.
@@ -24,7 +24,7 @@ export interface Intersect_Params {
 	options?: IntersectionObserverInit;
 }
 
-export type Intersect_Params_Or_Callback = On_Intersect | Intersect_Params;
+export type IntersectParamsOrCallback = OnIntersect | IntersectParams;
 
 /**
  * Creates an attachment that observes element viewport intersection.
@@ -34,7 +34,7 @@ export type Intersect_Params_Or_Callback = On_Intersect | Intersect_Params;
  */
 export const intersect =
 	(
-		get_params: () => Intersect_Params_Or_Callback | null | undefined,
+		get_params: () => IntersectParamsOrCallback | null | undefined,
 	): Attachment<HTMLElement | SVGElement> =>
 	(el) => {
 		// State that persists across callback changes
@@ -44,8 +44,8 @@ export const intersect =
 		let current_options: IntersectionObserverInit | undefined = undefined;
 
 		// Current callbacks - updated reactively without recreating observer
-		let current_onintersect: On_Intersect | undefined;
-		let current_ondisconnect: On_Disconnect | undefined;
+		let current_onintersect: OnIntersect | undefined;
+		let current_ondisconnect: OnDisconnect | undefined;
 		let current_count: number | undefined;
 
 		const disconnect = (): void => {
@@ -131,9 +131,9 @@ export const intersect =
 	};
 
 // TODO how to forward generic `el` type?
-export type On_Intersect = (state: Intersect_State) => void;
+export type OnIntersect = (state: IntersectState) => void;
 
-export interface Intersect_State {
+export interface IntersectState {
 	intersecting: boolean;
 	intersections: number;
 	el: HTMLElement | SVGElement;
@@ -142,9 +142,9 @@ export interface Intersect_State {
 }
 
 // TODO how to forward generic `el` type?
-export type On_Disconnect = (state: Disconnect_State) => void;
+export type OnDisconnect = (state: DisconnectState) => void;
 
-export interface Disconnect_State {
+export interface DisconnectState {
 	intersecting: boolean;
 	intersections: number;
 	el: HTMLElement | SVGElement;

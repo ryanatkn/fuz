@@ -4,7 +4,7 @@
 	import Docs from '$lib/Docs.svelte';
 	import {tomes} from '$routes/docs/tomes.js';
 	import {selected_variable_context} from '$routes/style_variable_helpers.svelte.js';
-	import Style_Variable_Detail from '$routes/Style_Variable_Detail.svelte';
+	import StyleVariableDetail from '$routes/StyleVariableDetail.svelte';
 	import Dialog from '$lib/Dialog.svelte';
 	import {pkg_context} from '$lib/pkg.svelte.js';
 	import Svg from '$lib/Svg.svelte';
@@ -39,7 +39,7 @@
 		{#snippet children(close)}
 			<div class="pane p_md width_upto_md mx_auto">
 				<div class="panel p_lg box">
-					<Style_Variable_Detail variable={selected_variable.value} />
+					<StyleVariableDetail variable={selected_variable.value} />
 					<aside>⚠️ This is unfinished and will change.</aside>
 					<button type="button" onclick={close}>ok</button>
 				</div>

@@ -1,7 +1,7 @@
 import {test, assert, describe, beforeEach} from 'vitest';
 import {flushSync} from 'svelte';
 
-import {to_docs_path_info, Docs_Links, DOCS_PATH_DEFAULT} from '$lib/docs_helpers.svelte.js';
+import {to_docs_path_info, DocsLinks, DOCS_PATH_DEFAULT} from '$lib/docs_helpers.svelte.js';
 
 describe('to_docs_path_info', () => {
 	test('extracts path segment from pathname', () => {
@@ -35,36 +35,36 @@ describe('to_docs_path_info', () => {
 	});
 });
 
-describe('Docs_Links', () => {
-	let docs_links: Docs_Links;
+describe('DocsLinks', () => {
+	let docs_links: DocsLinks;
 
 	beforeEach(() => {
-		docs_links = new Docs_Links();
+		docs_links = new DocsLinks();
 	});
 
 	describe('constructor', () => {
 		test('initializes with default root_path', () => {
-			const instance = new Docs_Links();
+			const instance = new DocsLinks();
 			assert.strictEqual(instance.root_path, DOCS_PATH_DEFAULT);
 		});
 
 		test('initializes with custom root_path', () => {
-			const instance = new Docs_Links('/custom');
+			const instance = new DocsLinks('/custom');
 			assert.strictEqual(instance.root_path, '/custom');
 		});
 
 		test('initializes with empty links map', () => {
-			const instance = new Docs_Links();
+			const instance = new DocsLinks();
 			assert.strictEqual(instance.links.size, 0);
 		});
 
 		test('initializes with empty docs_links array', () => {
-			const instance = new Docs_Links();
+			const instance = new DocsLinks();
 			assert.strictEqual(instance.docs_links.length, 0);
 		});
 
 		test('initializes with empty fragments_onscreen set', () => {
-			const instance = new Docs_Links();
+			const instance = new DocsLinks();
 			assert.strictEqual(instance.fragments_onscreen.size, 0);
 		});
 	});

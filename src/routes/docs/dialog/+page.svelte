@@ -3,16 +3,16 @@
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	import Alert from '$lib/Alert.svelte';
-	import Tome_Content from '$lib/Tome_Content.svelte';
+	import TomeContent from '$lib/TomeContent.svelte';
 	import {get_tome_by_name} from '$lib/tome.js';
 	import Dialog from '$lib/Dialog.svelte';
-	import Tome_Link from '$lib/Tome_Link.svelte';
-	import Mdn_Link from '$lib/Mdn_Link.svelte';
+	import TomeLink from '$lib/TomeLink.svelte';
+	import MdnLink from '$lib/MdnLink.svelte';
 	import Dialogs from '$lib/Dialogs.svelte';
 	import {
 		dialog_layouts,
-		type Dialog_Params,
-		type Dialog_Layout,
+		type DialogParams,
+		type DialogLayout,
 		to_dialog_params,
 	} from '$lib/dialog.js';
 	import Text from '$routes/docs/dialog/Text.svelte';
@@ -28,7 +28,7 @@
 	let dialog_nested_2_opened = $state(false);
 	let dialog_nested_3_opened = $state(false);
 
-	let selected_layout: Dialog_Layout = $state('page');
+	let selected_layout: DialogLayout = $state('page');
 
 	let items: Array<object> = $state([]);
 	const remove_item = (item: object) => {
@@ -41,7 +41,7 @@
 		items = [];
 	};
 
-	let dialogs: Array<Dialog_Params> = $state([]);
+	let dialogs: Array<DialogParams> = $state([]);
 	const add_dialogs = (count: number) => {
 		const to_text = (index: number) => '!'.repeat(count * 3 - index * 3);
 		dialogs = Array.from({length: count}, (_, i) =>
@@ -54,14 +54,14 @@
 	};
 </script>
 
-<Tome_Content {tome}>
+<TomeContent {tome}>
 	<section>
 		<p>
-			A modal that overlays the entire page. Uses <Tome_Link name="Teleport" /> to allow usage from any
+			A modal that overlays the entire page. Uses <TomeLink name="Teleport" /> to allow usage from any
 			component without inheriting styles.
 		</p>
 		<aside>
-			⚠️ This will change to use and align APIs with the builtin <Mdn_Link
+			⚠️ This will change to use and align APIs with the builtin <MdnLink
 				path="Web/HTML/Element/dialog"
 			/>. API
 		</aside>
@@ -100,7 +100,7 @@
 		>
 		<button type="button" class="mb_lg" onclick={() => add_dialogs(5)}>open many dialogs</button>
 	</section>
-</Tome_Content>
+</TomeContent>
 {#if opened}
 	<Dialog onclose={() => (opened = false)}>
 		{#snippet children(close)}

@@ -40,24 +40,24 @@ export const to_docs_path_info = (
 	return {path, path_is_selected, path_segment};
 };
 
-export const docs_links_context = create_context<Docs_Links>();
+export const docs_links_context = create_context<DocsLinks>();
 
-export type Docs_Link_Tag = 'h2' | 'h3' | 'h4';
+export type DocsLinkTag = 'h2' | 'h3' | 'h4';
 
-export interface Docs_Link_Info {
+export interface DocsLinkInfo {
 	id: string;
 	text: string;
 	fragment: string;
-	tag: Docs_Link_Tag | undefined;
+	tag: DocsLinkTag | undefined;
 	depth: number;
 	order: number;
 	parent_id: string | undefined;
 }
 
-export class Docs_Links {
+export class DocsLinks {
 	readonly root_path: string;
 
-	readonly links: SvelteMap<string, Docs_Link_Info> = new SvelteMap();
+	readonly links: SvelteMap<string, DocsLinkInfo> = new SvelteMap();
 
 	// Maps compound keys (pathname#fragment) to their original order
 	// This preserves order across component remounts
@@ -75,7 +75,7 @@ export class Docs_Links {
 
 	docs_links = $derived.by(() => {
 		// Build parent-child map
-		const children_map: Map<string | undefined, Array<Docs_Link_Info>> = new Map();
+		const children_map: Map<string | undefined, Array<DocsLinkInfo>> = new Map();
 
 		for (const link of this.links.values()) {
 			if (!children_map.has(link.parent_id)) {
@@ -90,7 +90,7 @@ export class Docs_Links {
 		}
 
 		// Flatten tree with depth-first traversal
-		const result: Array<Docs_Link_Info> = [];
+		const result: Array<DocsLinkInfo> = [];
 		const traverse = (parent_id: string | undefined) => {
 			const children = children_map.get(parent_id) || [];
 			for (const child of children) {
@@ -113,7 +113,7 @@ export class Docs_Links {
 		fragment: string,
 		text: string,
 		pathname: string,
-		tag?: Docs_Link_Tag,
+		tag?: DocsLinkTag,
 		depth = 1,
 		parent_id?: string,
 		explicit_id?: string,

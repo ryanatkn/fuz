@@ -161,7 +161,7 @@ export const normalize_json = (obj: any): any => {
 /**
  * Generic fixture data structure.
  */
-export interface Generic_Fixture<T> {
+export interface GenericFixture<T> {
 	name: string;
 	input: string;
 	expected: T;
@@ -170,7 +170,7 @@ export interface Generic_Fixture<T> {
 /**
  * Generic fixture loader configuration.
  */
-export interface Fixture_Loader_Config<T> {
+export interface FixtureLoaderConfig<T> {
 	/** Directory containing fixture subdirectories */
 	fixtures_dir: string;
 	/** Input file extension (e.g., '.mdz', '.ts', '.svelte') */
@@ -191,15 +191,15 @@ export interface Fixture_Loader_Config<T> {
  *
  * @example
  * ```ts
- * const fixtures = await load_fixtures_generic<Array<Mdz_Node>>({
+ * const fixtures = await load_fixtures_generic<Array<MdzNode>>({
  *   fixtures_dir: import.meta.dirname,
  *   input_extension: '.mdz',
  * });
  * ```
  */
 export const load_fixtures_generic = async <T>(
-	config: Fixture_Loader_Config<T>,
-): Promise<Array<Generic_Fixture<T>>> => {
+	config: FixtureLoaderConfig<T>,
+): Promise<Array<GenericFixture<T>>> => {
 	const {fixtures_dir, input_extension, transform_expected} = config;
 	const entries = await readdir(fixtures_dir, {withFileTypes: true});
 	const fixture_names = entries
@@ -222,7 +222,7 @@ export const load_fixtures_generic = async <T>(
 /**
  * Configuration for the generic update task.
  */
-export interface Update_Task_Config<TInput, TOutput> {
+export interface UpdateTaskConfig<TInput, TOutput> {
 	/** Directory containing fixture subdirectories */
 	fixtures_dir: string;
 	/** Input file extension */
@@ -262,7 +262,7 @@ export interface Update_Task_Config<TInput, TOutput> {
  * ```
  */
 export const run_update_task = async <TInput = string, TOutput = any>(
-	config: Update_Task_Config<TInput, TOutput>,
+	config: UpdateTaskConfig<TInput, TOutput>,
 	log: {info: (msg: string) => void},
 ): Promise<{generated_count: number; skipped_count: number}> => {
 	const {fixtures_dir, input_extension, process, json_replacer} = config;
