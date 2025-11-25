@@ -1,16 +1,16 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.161.2",
+  "version": "0.162.0",
   "modules": [
     {
       "path": "alert.ts",
       "identifiers": [
         {
-          "name": "Alert_Status",
+          "name": "AlertStatus",
           "kind": "type"
         },
         {
-          "name": "Alert_Status_Options",
+          "name": "AlertStatusOptions",
           "kind": "type"
         },
         {
@@ -103,39 +103,39 @@
       "path": "contextmenu_state.svelte.ts",
       "identifiers": [
         {
-          "name": "Contextmenu_Params",
+          "name": "ContextmenuParams",
           "kind": "type"
         },
         {
-          "name": "Contextmenu_Activate_Result",
+          "name": "ContextmenuActivateResult",
           "kind": "type"
         },
         {
-          "name": "Item_State",
+          "name": "ItemState",
           "kind": "type"
         },
         {
-          "name": "Entry_State",
+          "name": "EntryState",
           "kind": "class"
         },
         {
-          "name": "Submenu_State",
+          "name": "SubmenuState",
           "kind": "class"
         },
         {
-          "name": "Root_Menu_State",
+          "name": "RootMenuState",
           "kind": "class"
         },
         {
-          "name": "Contextmenu_Run",
+          "name": "ContextmenuRun",
           "kind": "type"
         },
         {
-          "name": "Contextmenu_State_Options",
+          "name": "ContextmenuStateOptions",
           "kind": "type"
         },
         {
-          "name": "Contextmenu_State",
+          "name": "ContextmenuState",
           "kind": "class"
         },
         {
@@ -143,7 +143,7 @@
           "kind": "function"
         },
         {
-          "name": "Contextmenu_Open_Options",
+          "name": "ContextmenuOpenOptions",
           "kind": "type"
         },
         {
@@ -185,11 +185,11 @@
           "kind": "function"
         },
         {
-          "name": "Create_Csp_Directives_Options",
+          "name": "CreateCspDirectivesOptions",
           "kind": "type"
         },
         {
-          "name": "Csp_Directive",
+          "name": "CspDirective",
           "kind": "type"
         },
         {
@@ -197,7 +197,7 @@
           "kind": "function"
         },
         {
-          "name": "Csp_Directive_Value",
+          "name": "CspDirectiveValue",
           "kind": "type"
         },
         {
@@ -209,7 +209,7 @@
           "kind": "variable"
         },
         {
-          "name": "Csp_Trust_Level",
+          "name": "CspTrustLevel",
           "kind": "type"
         },
         {
@@ -217,11 +217,11 @@
           "kind": "function"
         },
         {
-          "name": "Csp_Source_Spec",
+          "name": "CspSourceSpec",
           "kind": "type"
         },
         {
-          "name": "Csp_Directive_Spec",
+          "name": "CspDirectiveSpec",
           "kind": "type"
         },
         {
@@ -249,51 +249,51 @@
           "kind": "variable"
         },
         {
-          "name": "Csp_Action_Source",
+          "name": "CspActionSource",
           "kind": "type"
         },
         {
-          "name": "Csp_Base_Source",
+          "name": "CspBaseSource",
           "kind": "type"
         },
         {
-          "name": "Csp_Crypto_Source",
+          "name": "CspCryptoSource",
           "kind": "type"
         },
         {
-          "name": "Csp_Frame_Source",
+          "name": "CspFrameSource",
           "kind": "type"
         },
         {
-          "name": "Csp_Host_Name_Scheme",
+          "name": "CspHostNameScheme",
           "kind": "type"
         },
         {
-          "name": "Csp_Host_Source",
+          "name": "CspHostSource",
           "kind": "type"
         },
         {
-          "name": "Csp_Host_Protocol_Schemes",
+          "name": "CspHostProtocolSchemes",
           "kind": "type"
         },
         {
-          "name": "Csp_Port_Scheme",
+          "name": "CspPortScheme",
           "kind": "type"
         },
         {
-          "name": "Csp_Scheme_Source",
+          "name": "CspSchemeSource",
           "kind": "type"
         },
         {
-          "name": "Csp_Source",
+          "name": "CspSource",
           "kind": "type"
         },
         {
-          "name": "Csp_Sources",
+          "name": "CspSources",
           "kind": "type"
         },
         {
-          "name": "Csp_Directives",
+          "name": "CspDirectives",
           "kind": "type"
         }
       ]
@@ -306,11 +306,11 @@
           "kind": "function"
         },
         {
-          "name": "Dialog_Params",
+          "name": "DialogParams",
           "kind": "type"
         },
         {
-          "name": "Dialog_Layout",
+          "name": "DialogLayout",
           "kind": "type"
         },
         {
@@ -356,15 +356,15 @@
           "kind": "variable"
         },
         {
-          "name": "Docs_Link_Tag",
+          "name": "DocsLinkTag",
           "kind": "type"
         },
         {
-          "name": "Docs_Link_Info",
+          "name": "DocsLinkInfo",
           "kind": "type"
         },
         {
-          "name": "Docs_Links",
+          "name": "DocsLinks",
           "kind": "class"
         }
       ]
@@ -400,11 +400,11 @@
       "path": "intersect.svelte.ts",
       "identifiers": [
         {
-          "name": "Intersect_Params",
+          "name": "IntersectParams",
           "kind": "type"
         },
         {
-          "name": "Intersect_Params_Or_Callback",
+          "name": "IntersectParamsOrCallback",
           "kind": "type"
         },
         {
@@ -412,19 +412,19 @@
           "kind": "function"
         },
         {
-          "name": "On_Intersect",
+          "name": "OnIntersect",
           "kind": "type"
         },
         {
-          "name": "Intersect_State",
+          "name": "IntersectState",
           "kind": "type"
         },
         {
-          "name": "On_Disconnect",
+          "name": "OnDisconnect",
           "kind": "type"
         },
         {
-          "name": "Disconnect_State",
+          "name": "DisconnectState",
           "kind": "type"
         }
       ]
@@ -510,11 +510,11 @@
       "path": "mdz_components.ts",
       "identifiers": [
         {
-          "name": "Mdz_Components",
+          "name": "MdzComponents",
           "kind": "type"
         },
         {
-          "name": "Mdz_Elements",
+          "name": "MdzElements",
           "kind": "type"
         },
         {
@@ -535,63 +535,63 @@
           "kind": "function"
         },
         {
-          "name": "Mdz_Node",
+          "name": "MdzNode",
           "kind": "type"
         },
         {
-          "name": "Mdz_Base_Node",
+          "name": "MdzBaseNode",
           "kind": "type"
         },
         {
-          "name": "Mdz_Text_Node",
+          "name": "MdzTextNode",
           "kind": "type"
         },
         {
-          "name": "Mdz_Code_Node",
+          "name": "MdzCodeNode",
           "kind": "type"
         },
         {
-          "name": "Mdz_Codeblock_Node",
+          "name": "MdzCodeblockNode",
           "kind": "type"
         },
         {
-          "name": "Mdz_Bold_Node",
+          "name": "MdzBoldNode",
           "kind": "type"
         },
         {
-          "name": "Mdz_Italic_Node",
+          "name": "MdzItalicNode",
           "kind": "type"
         },
         {
-          "name": "Mdz_Strikethrough_Node",
+          "name": "MdzStrikethroughNode",
           "kind": "type"
         },
         {
-          "name": "Mdz_Link_Node",
+          "name": "MdzLinkNode",
           "kind": "type"
         },
         {
-          "name": "Mdz_Paragraph_Node",
+          "name": "MdzParagraphNode",
           "kind": "type"
         },
         {
-          "name": "Mdz_Hr_Node",
+          "name": "MdzHrNode",
           "kind": "type"
         },
         {
-          "name": "Mdz_Heading_Node",
+          "name": "MdzHeadingNode",
           "kind": "type"
         },
         {
-          "name": "Mdz_Element_Node",
+          "name": "MdzElementNode",
           "kind": "type"
         },
         {
-          "name": "Mdz_Component_Node",
+          "name": "MdzComponentNode",
           "kind": "type"
         },
         {
-          "name": "Mdz_Parser",
+          "name": "MdzParser",
           "kind": "class"
         }
       ]
@@ -609,7 +609,7 @@
       "path": "module_helpers.ts",
       "identifiers": [
         {
-          "name": "Module_Source_Options",
+          "name": "ModuleSourceOptions",
           "kind": "type"
         },
         {
@@ -667,7 +667,7 @@
       "path": "package_gen_helpers.ts",
       "identifiers": [
         {
-          "name": "Ts_File_Analysis",
+          "name": "TsFileAnalysis",
           "kind": "type"
         },
         {
@@ -835,7 +835,7 @@
           "kind": "class"
         },
         {
-          "name": "Themer_Json",
+          "name": "ThemerJson",
           "kind": "type"
         },
         {
@@ -921,7 +921,7 @@
           "kind": "function"
         },
         {
-          "name": "Ts_Identifier_Analysis",
+          "name": "TsIdentifierAnalysis",
           "kind": "type"
         },
         {
@@ -929,11 +929,11 @@
           "kind": "function"
         },
         {
-          "name": "Re_Export_Info",
+          "name": "ReExportInfo",
           "kind": "type"
         },
         {
-          "name": "Module_Exports_Analysis",
+          "name": "ModuleExportsAnalysis",
           "kind": "type"
         },
         {
@@ -954,7 +954,7 @@
       "path": "tsdoc_helpers.ts",
       "identifiers": [
         {
-          "name": "Tsdoc_Parsed_Comment",
+          "name": "TsdocParsedComment",
           "kind": "type"
         },
         {
@@ -977,7 +977,7 @@
       ]
     },
     {
-      "path": "Api_Identifier_List.svelte",
+      "path": "ApiIdentifierList.svelte",
       "identifiers": [
         {
           "name": "default",
@@ -986,7 +986,7 @@
       ]
     },
     {
-      "path": "Api_Index.svelte",
+      "path": "ApiIndex.svelte",
       "identifiers": [
         {
           "name": "default",
@@ -995,7 +995,7 @@
       ]
     },
     {
-      "path": "Api_Module.svelte",
+      "path": "ApiModule.svelte",
       "identifiers": [
         {
           "name": "default",
@@ -1022,70 +1022,7 @@
       ]
     },
     {
-      "path": "Color_Scheme_Input.svelte",
-      "identifiers": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    {
-      "path": "Contextmenu_Entry.svelte",
-      "identifiers": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    {
-      "path": "Contextmenu_Link_Entry.svelte",
-      "identifiers": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    {
-      "path": "Contextmenu_Root_For_Safari_Compatibility.svelte",
-      "identifiers": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    {
-      "path": "Contextmenu_Root.svelte",
-      "identifiers": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    {
-      "path": "Contextmenu_Separator.svelte",
-      "identifiers": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    {
-      "path": "Contextmenu_Submenu.svelte",
-      "identifiers": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    {
-      "path": "Contextmenu_Text_Entry.svelte",
+      "path": "ColorSchemeInput.svelte",
       "identifiers": [
         {
           "name": "default",
@@ -1103,7 +1040,70 @@
       ]
     },
     {
-      "path": "Copy_To_Clipboard.svelte",
+      "path": "ContextmenuEntry.svelte",
+      "identifiers": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "path": "ContextmenuLinkEntry.svelte",
+      "identifiers": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "path": "ContextmenuRoot.svelte",
+      "identifiers": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "path": "ContextmenuRootForSafariCompatibility.svelte",
+      "identifiers": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "path": "ContextmenuSeparator.svelte",
+      "identifiers": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "path": "ContextmenuSubmenu.svelte",
+      "identifiers": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "path": "ContextmenuTextEntry.svelte",
+      "identifiers": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "path": "CopyToClipboard.svelte",
       "identifiers": [
         {
           "name": "default",
@@ -1139,114 +1139,6 @@
       ]
     },
     {
-      "path": "Docs_Content.svelte",
-      "identifiers": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    {
-      "path": "Docs_Footer.svelte",
-      "identifiers": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    {
-      "path": "Docs_Link.svelte",
-      "identifiers": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    {
-      "path": "Docs_List.svelte",
-      "identifiers": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    {
-      "path": "Docs_Menu_Header.svelte",
-      "identifiers": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    {
-      "path": "Docs_Menu.svelte",
-      "identifiers": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    {
-      "path": "Docs_Modules_List.svelte",
-      "identifiers": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    {
-      "path": "Docs_Page_Links.svelte",
-      "identifiers": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    {
-      "path": "Docs_Primary_Nav.svelte",
-      "identifiers": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    {
-      "path": "Docs_Search.svelte",
-      "identifiers": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    {
-      "path": "Docs_Secondary_Nav.svelte",
-      "identifiers": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    {
-      "path": "Docs_Tertiary_Nav.svelte",
-      "identifiers": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    {
       "path": "Docs.svelte",
       "identifiers": [
         {
@@ -1256,7 +1148,7 @@
       ]
     },
     {
-      "path": "Ecosystem_Links_Panel.svelte",
+      "path": "DocsContent.svelte",
       "identifiers": [
         {
           "name": "default",
@@ -1265,7 +1157,7 @@
       ]
     },
     {
-      "path": "Ecosystem_Links.svelte",
+      "path": "DocsFooter.svelte",
       "identifiers": [
         {
           "name": "default",
@@ -1274,7 +1166,115 @@
       ]
     },
     {
-      "path": "Github_Link.svelte",
+      "path": "DocsLink.svelte",
+      "identifiers": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "path": "DocsList.svelte",
+      "identifiers": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "path": "DocsMenu.svelte",
+      "identifiers": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "path": "DocsMenuHeader.svelte",
+      "identifiers": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "path": "DocsModulesList.svelte",
+      "identifiers": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "path": "DocsPageLinks.svelte",
+      "identifiers": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "path": "DocsPrimaryNav.svelte",
+      "identifiers": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "path": "DocsSearch.svelte",
+      "identifiers": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "path": "DocsSecondaryNav.svelte",
+      "identifiers": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "path": "DocsTertiaryNav.svelte",
+      "identifiers": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "path": "EcosystemLinks.svelte",
+      "identifiers": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "path": "EcosystemLinksPanel.svelte",
+      "identifiers": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "path": "GithubLink.svelte",
       "identifiers": [
         {
           "name": "default",
@@ -1301,7 +1301,7 @@
       ]
     },
     {
-      "path": "Hidden_Personal_Links.svelte",
+      "path": "HiddenPersonalLinks.svelte",
       "identifiers": [
         {
           "name": "default",
@@ -1310,7 +1310,7 @@
       ]
     },
     {
-      "path": "Hue_Input.svelte",
+      "path": "HueInput.svelte",
       "identifiers": [
         {
           "name": "default",
@@ -1319,7 +1319,7 @@
       ]
     },
     {
-      "path": "Identifier_Detail.svelte",
+      "path": "IdentifierDetail.svelte",
       "identifiers": [
         {
           "name": "default",
@@ -1328,7 +1328,7 @@
       ]
     },
     {
-      "path": "Identifier_Link.svelte",
+      "path": "IdentifierLink.svelte",
       "identifiers": [
         {
           "name": "default",
@@ -1337,7 +1337,7 @@
       ]
     },
     {
-      "path": "Img_Or_Svg.svelte",
+      "path": "ImgOrSvg.svelte",
       "identifiers": [
         {
           "name": "default",
@@ -1346,16 +1346,7 @@
       ]
     },
     {
-      "path": "Mdn_Link.svelte",
-      "identifiers": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    {
-      "path": "Mdz_Node_View.svelte",
+      "path": "MdnLink.svelte",
       "identifiers": [
         {
           "name": "default",
@@ -1373,7 +1364,7 @@
       ]
     },
     {
-      "path": "Module_Link.svelte",
+      "path": "MdzNodeView.svelte",
       "identifiers": [
         {
           "name": "default",
@@ -1382,7 +1373,7 @@
       ]
     },
     {
-      "path": "Package_Detail.svelte",
+      "path": "ModuleLink.svelte",
       "identifiers": [
         {
           "name": "default",
@@ -1391,7 +1382,7 @@
       ]
     },
     {
-      "path": "Package_Summary.svelte",
+      "path": "PackageDetail.svelte",
       "identifiers": [
         {
           "name": "default",
@@ -1400,7 +1391,7 @@
       ]
     },
     {
-      "path": "Paste_From_Clipboard.svelte",
+      "path": "PackageSummary.svelte",
       "identifiers": [
         {
           "name": "default",
@@ -1409,7 +1400,7 @@
       ]
     },
     {
-      "path": "Pending_Animation.svelte",
+      "path": "PasteFromClipboard.svelte",
       "identifiers": [
         {
           "name": "default",
@@ -1418,7 +1409,7 @@
       ]
     },
     {
-      "path": "Pending_Button.svelte",
+      "path": "PendingAnimation.svelte",
       "identifiers": [
         {
           "name": "default",
@@ -1427,7 +1418,16 @@
       ]
     },
     {
-      "path": "Project_Links.svelte",
+      "path": "PendingButton.svelte",
+      "identifiers": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "path": "ProjectLinks.svelte",
       "identifiers": [
         {
           "name": "default",
@@ -1472,15 +1472,6 @@
       ]
     },
     {
-      "path": "Theme_Input.svelte",
-      "identifiers": [
-        {
-          "name": "default",
-          "kind": "component"
-        }
-      ]
-    },
-    {
       "path": "Themed.svelte",
       "identifiers": [
         {
@@ -1490,7 +1481,7 @@
       ]
     },
     {
-      "path": "Tome_Content.svelte",
+      "path": "ThemeInput.svelte",
       "identifiers": [
         {
           "name": "default",
@@ -1499,7 +1490,7 @@
       ]
     },
     {
-      "path": "Tome_Header.svelte",
+      "path": "TomeContent.svelte",
       "identifiers": [
         {
           "name": "default",
@@ -1508,7 +1499,7 @@
       ]
     },
     {
-      "path": "Tome_Link.svelte",
+      "path": "TomeHeader.svelte",
       "identifiers": [
         {
           "name": "default",
@@ -1517,7 +1508,7 @@
       ]
     },
     {
-      "path": "Tome_Section_Header.svelte",
+      "path": "TomeLink.svelte",
       "identifiers": [
         {
           "name": "default",
@@ -1526,7 +1517,7 @@
       ]
     },
     {
-      "path": "Tome_Section.svelte",
+      "path": "TomeSection.svelte",
       "identifiers": [
         {
           "name": "default",
@@ -1535,7 +1526,16 @@
       ]
     },
     {
-      "path": "Type_Link.svelte",
+      "path": "TomeSectionHeader.svelte",
+      "identifiers": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "path": "TypeLink.svelte",
       "identifiers": [
         {
           "name": "default",
