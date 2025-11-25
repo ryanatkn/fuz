@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.162.1
+
+### Patch Changes
+
+- fix `CopyToClipboard` `children` type ([63efa9c](https://github.com/ryanatkn/fuz/commit/63efa9c))
+
 ## 0.162.0
 
 ### Minor Changes
