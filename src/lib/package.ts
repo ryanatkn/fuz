@@ -40,10 +40,10 @@ export const package_json: PackageJson = {
 		node: '>=22.15',
 	},
 	peerDependencies: {
-		'@ryanatkn/belt': '>=0.38.0',
-		'@ryanatkn/fuz_code': '>=0.34.0',
-		'@ryanatkn/gro': '>=0.174.1',
-		'@ryanatkn/moss': '>=0.38.0',
+		'@ryanatkn/belt': '>=0.39.0',
+		'@ryanatkn/fuz_code': '>=0.36.0',
+		'@ryanatkn/gro': '>=0.177.0',
+		'@ryanatkn/moss': '>=0.39.0',
 		'@sveltejs/kit': '^2.47.3',
 		'esm-env': '^1',
 		svelte: '^5',
@@ -63,11 +63,11 @@ export const package_json: PackageJson = {
 	},
 	devDependencies: {
 		'@changesets/changelog-git': '^0.2.1',
-		'@ryanatkn/belt': '^0.38.0',
+		'@ryanatkn/belt': '^0.39.0',
 		'@ryanatkn/eslint-config': '^0.9.0',
-		'@ryanatkn/fuz_code': '^0.34.0',
-		'@ryanatkn/gro': '^0.174.2',
-		'@ryanatkn/moss': '^0.38.0',
+		'@ryanatkn/fuz_code': '^0.36.0',
+		'@ryanatkn/gro': '^0.177.0',
+		'@ryanatkn/moss': '^0.39.0',
 		'@sveltejs/adapter-static': '^3.0.10',
 		'@sveltejs/kit': '^2.49.0',
 		'@sveltejs/package': '^2.5.6',
@@ -1757,8 +1757,7 @@ export const src_json: SrcJson = {
 					doc_comment:
 						'Numeric values for CSP trust levels, `csp_trust_levels`.\nLower is less trusted.\nIncludes `undefined` in the type for safety.',
 					source_line: 191,
-					type_signature:
-						'Record<ArrayElement<readonly ["low", "medium", "high"]>, number | undefined>',
+					type_signature: 'Record<"low" | "medium" | "high", number | undefined>',
 				},
 				{
 					name: 'CspTrustLevel',
@@ -1766,15 +1765,15 @@ export const src_json: SrcJson = {
 					doc_comment:
 						"Trust levels for CSP sources.\n\nWith the base defaults, trust levels roughly correspond to:\n\n- `low` – Passive resources only (no script execution, no styling or UI control).\n\t\tExamples: `img-src`, `font-src`.\n- `medium` – Content that may affect layout, styling, or embed external browsing contexts,\n   but cannot directly run code in the page's JS execution environment or\n\t\tperform other high-risk actions. Examples: `style-src`, `frame-src`, `frame-ancestors`.\n- `high` – Sources that can execute code in the page's context or open powerful network\n   channels. Examples: `script-src`, `connect-src`, `child-src`.\n- `null` – No trust. This is used for directives that don't support sources.",
 					source_line: 212,
-					type_signature: 'ArrayElement<readonly ["low", "medium", "high"]>',
+					type_signature: '"low" | "medium" | "high"',
 				},
 				{
 					name: 'parse_csp_trust_level',
 					kind: 'function',
 					doc_comment: 'Validates and extracts a CSP trust level from an unknown value.',
 					source_line: 217,
-					type_signature: '(trust: unknown): any',
-					return_type: 'any',
+					type_signature: '(trust: unknown): "low" | "medium" | "high" | null',
+					return_type: '"low" | "medium" | "high" | null',
 					parameters: [
 						{
 							name: 'trust',
@@ -1835,17 +1834,18 @@ export const src_json: SrcJson = {
 					doc_comment:
 						"Determines if a granted trust level is sufficient to satisfy a required trust level.\n\nTrust levels have the following hierarchy:\n- 'high' sources can be used in high, medium, and low trust directives (highest privilege)\n- 'medium' sources can be used in medium and low trust directives\n- 'low' sources can only be used in low trust directives (lowest privilege)",
 					source_line: 240,
-					type_signature: '(required_trust: any, granted_trust: any): boolean',
+					type_signature:
+						'(required_trust: "low" | "medium" | "high" | null | undefined, granted_trust: "low" | "medium" | "high" | null | undefined): boolean',
 					return_type: 'boolean',
 					parameters: [
 						{
 							name: 'required_trust',
-							type: 'any',
+							type: '"low" | "medium" | "high" | null | undefined',
 							optional: false,
 						},
 						{
 							name: 'granted_trust',
-							type: 'any',
+							type: '"low" | "medium" | "high" | null | undefined',
 							optional: false,
 						},
 					],
@@ -1871,7 +1871,7 @@ export const src_json: SrcJson = {
 					doc_comment:
 						"Sources that meet this trust requirement are included for it by default.\nIf null, no trusted sources are added to the directive automatically.\nDirectives that don't support sources or default to `['none']` are null.\n\nFeedback is welcome, please see the issues - https://github.com/ryanatkn/fuz/issues",
 					source_line: 307,
-					type_signature: 'Record<keyof CspDirectives, any>',
+					type_signature: 'Record<keyof CspDirectives, "low" | "medium" | "high" | null>',
 				},
 				{
 					name: 'csp_directive_specs',
@@ -3189,7 +3189,8 @@ export const src_json: SrcJson = {
 						{
 							name: 'constructor',
 							kind: 'constructor',
-							type_signature: '(module: Module, identifier_json: IdentifierJson): Identifier',
+							type_signature:
+								'(module: Module, identifier_json: { [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "constructor" | "component" | "css"; doc_comment?: string | undefined; ... 18 more ...; alias_of?: { ...; } | undefined; }): Identifier',
 							parameters: [
 								{
 									name: 'module',
@@ -3198,7 +3199,7 @@ export const src_json: SrcJson = {
 								},
 								{
 									name: 'identifier_json',
-									type: 'IdentifierJson',
+									type: '{ [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "constructor" | "component" | "css"; doc_comment?: string | undefined; type_signature?: string | undefined; ... 17 more ...; alias_of?: { ...; } | undefined; }',
 									optional: false,
 								},
 							],
@@ -4305,7 +4306,8 @@ export const src_json: SrcJson = {
 						{
 							name: 'constructor',
 							kind: 'constructor',
-							type_signature: '(pkg: Pkg, module_json: ModuleJson): Module',
+							type_signature:
+								'(pkg: Pkg, module_json: { [x: string]: unknown; path: string; identifiers?: { [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "constructor" | "component" | "css"; ... 19 more ...; alias_of?: { ...; } | undefined; }[] | undefined; module_comment?: string | undefined; dependencies?: string[] | undefined; dependents?: string[] | undefined; }): Module',
 							parameters: [
 								{
 									name: 'pkg',
@@ -4314,7 +4316,7 @@ export const src_json: SrcJson = {
 								},
 								{
 									name: 'module_json',
-									type: 'ModuleJson',
+									type: '{ [x: string]: unknown; path: string; identifiers?: { [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "constructor" | "component" | "css"; doc_comment?: string | undefined; ... 18 more ...; alias_of?: { ...; } | undefined; }[] | undefined; module_comment?: string | und...',
 									optional: false,
 								},
 							],
@@ -4401,12 +4403,13 @@ export const src_json: SrcJson = {
 						},
 					],
 					source_line: 53,
-					type_signature: '(src_json: SrcJson, log: Logger): void',
+					type_signature:
+						'(src_json: { [x: string]: unknown; name: string; version: string; modules?: { [x: string]: unknown; path: string; identifiers?: { [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "constructor" | "component" | "css"; ... 19 more ...; alias_of?: { ...; } | undefined; }[] | undefined; module_comment?: string | undefined; dependencies?: string[] | undefined; dependents?: string[] | undefined; }[] | undefined; }, log: Logger): void',
 					return_type: 'void',
 					parameters: [
 						{
 							name: 'src_json',
-							type: 'SrcJson',
+							type: '{ [x: string]: unknown; name: string; version: string; modules?: { [x: string]: unknown; path: string; identifiers?: { [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "constructor" | "component" | "css"; ... 19 more ...; alias_of?: { ...; } | undefined; }[] | undefined...',
 							optional: false,
 						},
 						{
@@ -4422,12 +4425,14 @@ export const src_json: SrcJson = {
 					doc_comment:
 						'Sort modules alphabetically by path for deterministic output and cleaner diffs.',
 					source_line: 99,
-					type_signature: '(modules: ModuleJson[]): ModuleJson[]',
-					return_type: 'ModuleJson[]',
+					type_signature:
+						'(modules: { [x: string]: unknown; path: string; identifiers?: { [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "constructor" | "component" | "css"; doc_comment?: string | undefined; ... 18 more ...; alias_of?: { ...; } | undefined; }[] | undefined; module_comment?: string | undefined; dependencies?: string[] | undefined; dependents?: string[] | undefined; }[]): { ...; }[]',
+					return_type:
+						'{ [x: string]: unknown; path: string; identifiers?: { [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "constructor" | "component" | "css"; doc_comment?: string | undefined; ... 18 more ...; alias_of?: { ...; } | undefined; }[] | undefined; module_comment?: string | und...',
 					parameters: [
 						{
 							name: 'modules',
-							type: 'ModuleJson[]',
+							type: '{ [x: string]: unknown; path: string; identifiers?: { [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "constructor" | "component" | "css"; doc_comment?: string | undefined; ... 18 more ...; alias_of?: { ...; } | undefined; }[] | undefined; module_comment?: string | und...',
 							optional: false,
 						},
 					],
@@ -4438,17 +4443,18 @@ export const src_json: SrcJson = {
 					doc_comment:
 						'Generate the package.ts file content with package_json and src_json exports.',
 					source_line: 106,
-					type_signature: '(package_json: PackageJson, src_json: SrcJson): string',
+					type_signature:
+						'(package_json: { [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }, src_json: { ...; }): string',
 					return_type: 'string',
 					parameters: [
 						{
 							name: 'package_json',
-							type: 'PackageJson',
+							type: '{ [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }',
 							optional: false,
 						},
 						{
 							name: 'src_json',
-							type: 'SrcJson',
+							type: '{ [x: string]: unknown; name: string; version: string; modules?: { [x: string]: unknown; path: string; identifiers?: { [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "constructor" | "component" | "css"; ... 19 more ...; alias_of?: { ...; } | undefined; }[] | undefined...',
 							optional: false,
 						},
 					],
@@ -4481,8 +4487,9 @@ export const src_json: SrcJson = {
 						'Analyze a Svelte component file and extract metadata.\n\nUses `svelte_analyze_file` for core analysis, then adds\nGro-specific dependency information from the disknode.',
 					source_line: 161,
 					type_signature:
-						'(disknode: Disknode, module_path: string, checker: TypeChecker): ModuleJson',
-					return_type: 'ModuleJson',
+						'(disknode: Disknode, module_path: string, checker: TypeChecker): { [x: string]: unknown; path: string; identifiers?: { [x: string]: unknown; name: string; kind: "function" | ... 6 more ... | "css"; ... 19 more ...; alias_of?: { ...; } | undefined; }[] | undefined; module_comment?: string | undefined; dependencies?: string[] | undefined; dependents?: string[] | undefined; }',
+					return_type:
+						'{ [x: string]: unknown; path: string; identifiers?: { [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "constructor" | "component" | "css"; doc_comment?: string | undefined; ... 18 more ...; alias_of?: { ...; } | undefined; }[] | undefined; module_comment?: string | und...',
 					parameters: [
 						{
 							name: 'disknode',
@@ -4692,12 +4699,13 @@ export const src_json: SrcJson = {
 					doc_comment:
 						'Check if a package is published to npm.\nPublished packages are not private, have exports, and have a version beyond 0.0.1.',
 					source_line: 62,
-					type_signature: '(package_json: PackageJson): boolean',
+					type_signature:
+						'(package_json: { [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }): boolean',
 					return_type: 'boolean',
 					parameters: [
 						{
 							name: 'package_json',
-							type: 'PackageJson',
+							type: '{ [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }',
 							optional: false,
 						},
 					],
@@ -4746,12 +4754,13 @@ export const src_json: SrcJson = {
 					doc_comment:
 						"Parse repository URL from package.json format.\nStrips 'git+', '.git', and trailing slashes.",
 					source_line: 98,
-					type_signature: '(repository: PackageJson): string | null',
+					type_signature:
+						'(repository: string | { [x: string]: unknown; type: string; url: string; directory?: string | undefined; } | undefined): string | null',
 					return_type: 'string | null',
 					parameters: [
 						{
 							name: 'repository',
-							type: 'PackageJson',
+							type: 'string | { [x: string]: unknown; type: string; url: string; directory?: string | undefined; } | undefined',
 							optional: false,
 						},
 					],
@@ -4829,13 +4838,15 @@ export const src_json: SrcJson = {
 					name: 'package_json',
 					kind: 'variable',
 					source_line: 7,
-					type_signature: 'PackageJson',
+					type_signature:
+						'{ [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }',
 				},
 				{
 					name: 'src_json',
 					kind: 'variable',
 					source_line: 126,
-					type_signature: 'SrcJson',
+					type_signature:
+						'{ [x: string]: unknown; name: string; version: string; modules?: { [x: string]: unknown; path: string; identifiers?: { [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "constructor" | "component" | "css"; ... 19 more ...; alias_of?: { ...; } | undefined; }[] | undefined...',
 				},
 			],
 		},
@@ -5156,16 +5167,17 @@ export const src_json: SrcJson = {
 						{
 							name: 'constructor',
 							kind: 'constructor',
-							type_signature: '(package_json: PackageJson, src_json: SrcJson): Pkg',
+							type_signature:
+								'(package_json: { [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }, src_json: { ...; }): Pkg',
 							parameters: [
 								{
 									name: 'package_json',
-									type: 'PackageJson',
+									type: '{ [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }',
 									optional: false,
 								},
 								{
 									name: 'src_json',
-									type: 'SrcJson',
+									type: '{ [x: string]: unknown; name: string; version: string; modules?: { [x: string]: unknown; path: string; identifiers?: { [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "constructor" | "component" | "css"; ... 19 more ...; alias_of?: { ...; } | undefined; }[] | undefined...',
 									optional: false,
 								},
 							],
@@ -5432,8 +5444,9 @@ export const src_json: SrcJson = {
 					doc_comment: 'Analyze a Svelte component from its svelte2tsx transformation.',
 					source_line: 27,
 					type_signature:
-						'(ts_code: string, source_file: SourceFile, checker: TypeChecker, component_name: string): IdentifierJson',
-					return_type: 'IdentifierJson',
+						'(ts_code: string, source_file: SourceFile, checker: TypeChecker, component_name: string): { [x: string]: unknown; name: string; kind: "function" | "type" | "json" | ... 4 more ... | "css"; ... 19 more ...; alias_of?: { ...; } | undefined; }',
+					return_type:
+						'{ [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "constructor" | "component" | "css"; doc_comment?: string | undefined; type_signature?: string | undefined; ... 17 more ...; alias_of?: { ...; } | undefined; }',
 					parameters: [
 						{
 							name: 'ts_code',
@@ -5464,8 +5477,9 @@ export const src_json: SrcJson = {
 						'Analyze a Svelte component file from disk.\n\nThis is a high-level function that handles the complete workflow:\n1. Read the Svelte source from disk\n2. Transform to TypeScript via svelte2tsx\n3. Extract component metadata (props, documentation)\n\nSuitable for use in documentation generators, build tools, and analysis.',
 					source_line: 278,
 					type_signature:
-						'(file_path: string, module_path: string, checker: TypeChecker): IdentifierJson',
-					return_type: 'IdentifierJson',
+						'(file_path: string, module_path: string, checker: TypeChecker): { [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "constructor" | "component" | "css"; ... 19 more ...; alias_of?: { ...; } | undefined; }',
+					return_type:
+						'{ [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "constructor" | "component" | "css"; doc_comment?: string | undefined; type_signature?: string | undefined; ... 17 more ...; alias_of?: { ...; } | undefined; }',
 					return_description: 'Complete identifier metadata for the component',
 					parameters: [
 						{
@@ -5768,12 +5782,12 @@ export const src_json: SrcJson = {
 					name: 'sync_color_scheme',
 					kind: 'function',
 					source_line: 35,
-					type_signature: '(color_scheme: any): void',
+					type_signature: '(color_scheme: ColorScheme | null): void',
 					return_type: 'void',
 					parameters: [
 						{
 							name: 'color_scheme',
-							type: 'any',
+							type: 'ColorScheme | null',
 							optional: false,
 						},
 					],
@@ -5794,12 +5808,12 @@ export const src_json: SrcJson = {
 					name: 'save_color_scheme',
 					kind: 'function',
 					source_line: 47,
-					type_signature: '(color_scheme: any, key?: string): void',
+					type_signature: '(color_scheme: ColorScheme | null, key?: string): void',
 					return_type: 'void',
 					parameters: [
 						{
 							name: 'color_scheme',
-							type: 'any',
+							type: 'ColorScheme | null',
 							optional: false,
 						},
 						{
@@ -6097,8 +6111,10 @@ export const src_json: SrcJson = {
 					kind: 'function',
 					doc_comment: 'Infer declaration kind from symbol and node.',
 					source_line: 59,
-					type_signature: '(symbol: Symbol, node: Node): IdentifierKind',
-					return_type: 'IdentifierKind',
+					type_signature:
+						'(symbol: Symbol, node: Node): "function" | "type" | "json" | "variable" | "class" | "constructor" | "component" | "css"',
+					return_type:
+						'"function" | "type" | "json" | "variable" | "class" | "constructor" | "component" | "css"',
 					parameters: [
 						{
 							name: 'symbol',
@@ -6119,7 +6135,7 @@ export const src_json: SrcJson = {
 						'Extract function/method information including parameters\nwith descriptions and default values.',
 					source_line: 89,
 					type_signature:
-						'(node: Node, symbol: Symbol, checker: TypeChecker, identifier: IdentifierJson, tsdoc: TsdocParsedComment | undefined): void',
+						'(node: Node, symbol: Symbol, checker: TypeChecker, identifier: { [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "constructor" | "component" | "css"; ... 19 more ...; alias_of?: { ...; } | undefined; }, tsdoc: TsdocParsedComment | undefined): void',
 					return_type: 'void',
 					parameters: [
 						{
@@ -6139,7 +6155,7 @@ export const src_json: SrcJson = {
 						},
 						{
 							name: 'identifier',
-							type: 'IdentifierJson',
+							type: '{ [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "constructor" | "component" | "css"; doc_comment?: string | undefined; type_signature?: string | undefined; ... 17 more ...; alias_of?: { ...; } | undefined; }',
 							optional: false,
 						},
 						{
@@ -6155,7 +6171,7 @@ export const src_json: SrcJson = {
 					doc_comment: 'Extract type/interface information with rich property metadata.',
 					source_line: 160,
 					type_signature:
-						'(node: Node, _symbol: Symbol, checker: TypeChecker, identifier: IdentifierJson): void',
+						'(node: Node, _symbol: Symbol, checker: TypeChecker, identifier: { [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "constructor" | "component" | "css"; ... 19 more ...; alias_of?: { ...; } | undefined; }): void',
 					return_type: 'void',
 					parameters: [
 						{
@@ -6175,7 +6191,7 @@ export const src_json: SrcJson = {
 						},
 						{
 							name: 'identifier',
-							type: 'IdentifierJson',
+							type: '{ [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "constructor" | "component" | "css"; doc_comment?: string | undefined; type_signature?: string | undefined; ... 17 more ...; alias_of?: { ...; } | undefined; }',
 							optional: false,
 						},
 					],
@@ -6186,7 +6202,7 @@ export const src_json: SrcJson = {
 					doc_comment: 'Extract class information with rich member metadata.',
 					source_line: 224,
 					type_signature:
-						'(node: Node, _symbol: Symbol, checker: TypeChecker, identifier: IdentifierJson): void',
+						'(node: Node, _symbol: Symbol, checker: TypeChecker, identifier: { [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "constructor" | "component" | "css"; ... 19 more ...; alias_of?: { ...; } | undefined; }): void',
 					return_type: 'void',
 					parameters: [
 						{
@@ -6206,7 +6222,7 @@ export const src_json: SrcJson = {
 						},
 						{
 							name: 'identifier',
-							type: 'IdentifierJson',
+							type: '{ [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "constructor" | "component" | "css"; doc_comment?: string | undefined; type_signature?: string | undefined; ... 17 more ...; alias_of?: { ...; } | undefined; }',
 							optional: false,
 						},
 					],
@@ -6217,7 +6233,7 @@ export const src_json: SrcJson = {
 					doc_comment: 'Extract variable information.',
 					source_line: 373,
 					type_signature:
-						'(node: Node, symbol: Symbol, checker: TypeChecker, identifier: IdentifierJson): void',
+						'(node: Node, symbol: Symbol, checker: TypeChecker, identifier: { [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "constructor" | "component" | "css"; ... 19 more ...; alias_of?: { ...; } | undefined; }): void',
 					return_type: 'void',
 					parameters: [
 						{
@@ -6237,7 +6253,7 @@ export const src_json: SrcJson = {
 						},
 						{
 							name: 'identifier',
-							type: 'IdentifierJson',
+							type: '{ [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "constructor" | "component" | "css"; doc_comment?: string | undefined; type_signature?: string | undefined; ... 17 more ...; alias_of?: { ...; } | undefined; }',
 							optional: false,
 						},
 					],
@@ -6511,12 +6527,12 @@ export const src_json: SrcJson = {
 						'Apply parsed TSDoc metadata to an identifier.\n\nConsolidates the common pattern of assigning TSDoc fields to identifiers,\nwith conditional assignment for array fields (only if non-empty).',
 					source_line: 237,
 					type_signature:
-						'(identifier: IdentifierJson, tsdoc: TsdocParsedComment | undefined): void',
+						'(identifier: { [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "constructor" | "component" | "css"; doc_comment?: string | undefined; type_signature?: string | undefined; ... 17 more ...; alias_of?: { ...; } | undefined; }, tsdoc: TsdocParsedComment | undefined): void',
 					return_type: 'void',
 					parameters: [
 						{
 							name: 'identifier',
-							type: 'IdentifierJson',
+							type: '{ [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "constructor" | "component" | "css"; doc_comment?: string | undefined; type_signature?: string | undefined; ... 17 more ...; alias_of?: { ...; } | undefined; }',
 							optional: false,
 							description: 'identifier object to update',
 						},
