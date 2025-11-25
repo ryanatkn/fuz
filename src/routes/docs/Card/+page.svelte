@@ -64,12 +64,12 @@
 	<TomeSection>
 		<TomeSectionHeader text="As the selected link" />
 		<Code
-			content={`<Card href="${DOCS_PATH}/card">
+			content={`<Card href="${DOCS_PATH}/Card">
   href is<br />
   selected
 </Card>`}
 		/>
-		<Card href="{DOCS_PATH}/card">
+		<Card href="{DOCS_PATH}/Card">
 			href is<br />
 			selected
 		</Card>
