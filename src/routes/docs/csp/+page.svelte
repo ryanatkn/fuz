@@ -1,39 +1,39 @@
 <script lang="ts">
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
-	import Github_Link from '$lib/Github_Link.svelte';
+	import GithubLink from '$lib/GithubLink.svelte';
 	import {get_tome_by_name} from '$lib/tome.js';
-	import Tome_Content from '$lib/Tome_Content.svelte';
-	import Mdn_Link from '$lib/Mdn_Link.svelte';
+	import TomeContent from '$lib/TomeContent.svelte';
+	import MdnLink from '$lib/MdnLink.svelte';
 	import {
 		csp_directive_required_trust_defaults,
 		csp_directive_specs,
 		csp_trust_levels,
 	} from '$lib/csp.js';
 	import {render_value_to_string} from '$lib/helpers.js';
-	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
-	import Tome_Section from '$lib/Tome_Section.svelte';
-	import Identifier_Link from '$lib/Identifier_Link.svelte';
+	import TomeSectionHeader from '$lib/TomeSectionHeader.svelte';
+	import TomeSection from '$lib/TomeSection.svelte';
+	import IdentifierLink from '$lib/IdentifierLink.svelte';
 
 	const LIBRARY_ITEM_NAME = 'csp';
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
 
 	// TODO maybe subheadings, needs polish/reworking tho
 
-	// TODO add a Svelte logo svg and make the below a special component that Mdn_Link also extends (Mdn_Link only exists because it has special inference logic for its href)
+	// TODO add a Svelte logo svg and make the below a special component that MdnLink also extends (MdnLink only exists because it has special inference logic for its href)
 </script>
 
 <!-- eslint-disable svelte/no-useless-mustaches -->
 
-<Tome_Content {tome}>
+<TomeContent {tome}>
 	<section>
 		<p>
 			Fuz supports <a href="https://svelte.dev/docs/kit/configuration#csp">SvelteKit's config</a>
-			for <Mdn_Link
-				path="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Content_Security_Policy"
-				>Content Security Policies</Mdn_Link
+			for <MdnLink
+				path="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/ContentSecurityPolicy"
+				>Content Security Policies</MdnLink
 			> with the
-			<Identifier_Link name="create_csp_directives" /> helper. Fuz also provides related helpers, types,
+			<IdentifierLink name="create_csp_directives" /> helper. Fuz also provides related helpers, types,
 			and CSP data.
 		</p>
 		<p>
@@ -44,7 +44,7 @@
 		</p>
 		<p>Example usage:</p>
 		<Code
-			content={`import {create_csp_directives, type Csp_Source_Spec} from '@ryanatkn/fuz/csp.js';
+			content={`import {create_csp_directives, type CspSourceSpec} from '@ryanatkn/fuz/csp.js';
 
 // Create the default CSP with no trusted sources except 'self' and some sensible fallbacks.
 // This tries to balance security and privacy with usability,
@@ -55,7 +55,7 @@ const csp = create_csp_directives();
 // export default {kit: {csp}}
 
 // Create a CSP with some trusted sources, using Fuz's CSP default trust levels:
-export const my_csp_trusted_sources: Array<Csp_Source_Spec> = [
+export const my_csp_trusted_sources: Array<CspSourceSpec> = [
 	// Trust in yourself:
 	{source: 'https://my.domain/', trust: 'high'},
 	// No scripting allowed on these subdomains:
@@ -120,8 +120,8 @@ const custom_csp = create_csp_directives({
 			API with full declarative transparency (and more verbosity and information load).
 		</p>
 		<p>
-			Fuz defines an optional system with three levels of trust/risk/sensitivity (low/medium/high, <Identifier_Link
-				name="Csp_Trust_Level"
+			Fuz defines an optional system with three levels of trust/risk/sensitivity (low/medium/high, <IdentifierLink
+				name="CspTrustLevel"
 			/>) that can be configured for each trusted source to give blanket permissions at a specified
 			tier. Granular overrides are straightforward and declarative.
 		</p>
@@ -132,17 +132,17 @@ const custom_csp = create_csp_directives({
 		</p>
 	</section>
 
-	<Tome_Section>
-		<Tome_Section_Header text="Trust" />
+	<TomeSection>
+		<TomeSectionHeader text="Trust" />
 		<!-- TODO make this a header if it stabilizes -->
 		<p>
-			Fuz provides an optional CSP abstraction with three trust levels (of type <Identifier_Link
-				name="Csp_Trust_Level"
+			Fuz provides an optional CSP abstraction with three trust levels (of type <IdentifierLink
+				name="CspTrustLevel"
 			/>) with tiers of escalating risk and implied permission. Sources can opt-in to blanket
 			permissions at a specific level:
 		</p>
 		<Code
-			content={`export const my_csp_trusted_sources: Array<Csp_Source_Spec> = [
+			content={`export const my_csp_trusted_sources: Array<CspSourceSpec> = [
 	{source: 'https://a.domain/'}, // undefined \`trust\` - same as null
 	{source: 'https://b.domain/', trust: null}, // no trust
 	{source: 'https://c.domain/', trust: 'low'}, // passive resources only
@@ -155,7 +155,7 @@ const custom_csp = create_csp_directives({
 				<tr>
 					<th class="white_space_nowrap">trust level</th>
 					<th>what it means</th>
-					<th>configured by <Identifier_Link name="required_trust_defaults_base" /></th>
+					<th>configured by <IdentifierLink name="required_trust_defaults_base" /></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -194,10 +194,10 @@ const custom_csp = create_csp_directives({
 			important questions right most of the time for most users, and additional safeguards are
 			available for those that want tighter control or less chance of error.
 		</p>
-	</Tome_Section>
+	</TomeSection>
 
-	<Tome_Section>
-		<Tome_Section_Header text="Explicit directives" />
+	<TomeSection>
+		<TomeSectionHeader text="Explicit directives" />
 		<!-- TODO make this a header if it stabilizes -->
 		<p>
 			The CSP helpers have a convenient, declarative API for defining directives per source. These
@@ -205,7 +205,7 @@ const custom_csp = create_csp_directives({
 			on an abstraction layer, so WYSIWYG.
 		</p>
 		<Code
-			content={`export const my_csp_trusted_sources: Array<Csp_Source_Spec> = [
+			content={`export const my_csp_trusted_sources: Array<CspSourceSpec> = [
 	{source: 'https://a.domain/'}, // No explicit directives, will use trust level if any
 	{source: 'https://b.domain/', directives: null}, // Explicitly no directives
 	{source: 'https://c.domain/', directives: ['img-src']}, // Only use for images
@@ -220,7 +220,7 @@ const custom_csp = create_csp_directives({
 		</p>
 		<Code
 			content={`// Example: explicitly allowing a source for specific directives regardless of trust
-export const my_csp_trusted_sources: Array<Csp_Source_Spec> = [
+export const my_csp_trusted_sources: Array<CspSourceSpec> = [
 	// Allow for specific directives (adds to what trust level allows):
 	{source: 'https://a.domain/', trust: 'low', directives: ['connect-src']},
 	
@@ -232,14 +232,14 @@ export const my_csp_trusted_sources: Array<Csp_Source_Spec> = [
 ];`}
 			lang="ts"
 		/>
-	</Tome_Section>
+	</TomeSection>
 
-	<Tome_Section>
-		<Tome_Section_Header text="Base defaults" />
+	<TomeSection>
+		<TomeSectionHeader text="Base defaults" />
 		<p>
-			The options <code>value_defaults_base</code> (defaults to <Identifier_Link
+			The options <code>value_defaults_base</code> (defaults to <IdentifierLink
 				name="csp_directive_value_defaults"
-			/>) and <code>required_trust_defaults_base</code> (defaults to <Identifier_Link
+			/>) and <code>required_trust_defaults_base</code> (defaults to <IdentifierLink
 				name="csp_directive_required_trust_defaults"
 			/>) afford full control over defaults:
 		</p>
@@ -296,14 +296,14 @@ create_csp_directives({
 });`}
 			lang="ts"
 		/>
-	</Tome_Section>
+	</TomeSection>
 
-	<Tome_Section>
-		<Tome_Section_Header text="Directive specs" />
+	<TomeSection>
+		<TomeSectionHeader text="Directive specs" />
 		<p>
 			<!-- TODO component for the `code` here to reference identifier -->
-			The exported <Identifier_Link name="csp_directive_specs" /> has JSON data about the
-			<Mdn_Link path="Web/HTTP/Reference/Headers/Content-Security-Policy">CSP directives</Mdn_Link>.
+			The exported <IdentifierLink name="csp_directive_specs" /> has JSON data about the
+			<MdnLink path="Web/HTTP/Reference/Headers/Content-Security-Policy">CSP directives</MdnLink>.
 			Fuz omits deprecated directives.
 		</p>
 		<table>
@@ -324,13 +324,13 @@ create_csp_directives({
 				{/each}
 			</tbody>
 		</table>
-	</Tome_Section>
+	</TomeSection>
 	<aside>
-		For more, see the <Github_Link path="ryanatkn/fuz/blob/main/src/lib/csp.ts"
-			>source code</Github_Link
+		For more, see the <GithubLink path="ryanatkn/fuz/blob/main/src/lib/csp.ts"
+			>source code</GithubLink
 		>
-		and <Github_Link path="ryanatkn/fuz/blob/main/src/lib/csp.test.ts">tests</Github_Link>. The API
+		and <GithubLink path="ryanatkn/fuz/blob/main/src/lib/csp.test.ts">tests</GithubLink>. The API
 		feels near-complete, and includes full customization of the default directive values and trust
 		levels. Some details may change and input is welcome.
 	</aside>
-</Tome_Content>
+</TomeContent>

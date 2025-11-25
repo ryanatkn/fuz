@@ -38,12 +38,12 @@
  */
 
 import ts from 'typescript';
-import type {Identifier_Json} from '@ryanatkn/belt/src_json.js';
+import type {IdentifierJson} from '@ryanatkn/belt/src_json.js';
 
 /**
  * Parsed JSDoc/TSDoc comment with structured metadata.
  */
-export interface Tsdoc_Parsed_Comment {
+export interface TsdocParsedComment {
 	/** Comment text (excluding comment markers) */
 	text: string;
 	/** Parameter descriptions mapped by parameter name */
@@ -133,7 +133,7 @@ const tsdoc_convert_link_to_mdz = (content: string): string => {
 export const tsdoc_parse = (
 	node: ts.Node,
 	source_file: ts.SourceFile,
-): Tsdoc_Parsed_Comment | undefined => {
+): TsdocParsedComment | undefined => {
 	const tsdoc_comments = ts.getJSDocCommentsAndTags(node);
 	if (tsdoc_comments.length === 0) return undefined;
 
@@ -235,8 +235,8 @@ export const tsdoc_parse = (
  * @mutates identifier - adds doc_comment, deprecated_message, examples, see_also, throws, since fields
  */
 export const tsdoc_apply_to_declaration = (
-	identifier: Identifier_Json,
-	tsdoc: Tsdoc_Parsed_Comment | undefined,
+	identifier: IdentifierJson,
+	tsdoc: TsdocParsedComment | undefined,
 ): void => {
 	if (!tsdoc) return;
 

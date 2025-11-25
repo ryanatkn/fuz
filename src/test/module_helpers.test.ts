@@ -11,7 +11,7 @@ import {
 	module_is_test,
 	module_matches_source,
 	MODULE_SOURCE_DEFAULTS,
-	type Module_Source_Options,
+	type ModuleSourceOptions,
 } from '$lib/module_helpers.js';
 
 describe('module_extract_path', () => {
@@ -169,7 +169,7 @@ describe('module_matches_source', () => {
 
 	describe('with custom source_paths', () => {
 		test('respects custom source paths', () => {
-			const options: Module_Source_Options = {
+			const options: ModuleSourceOptions = {
 				source_paths: ['/src/routes/'],
 			};
 
@@ -178,7 +178,7 @@ describe('module_matches_source', () => {
 		});
 
 		test('supports multiple source paths', () => {
-			const options: Module_Source_Options = {
+			const options: ModuleSourceOptions = {
 				source_paths: ['/src/lib/', '/src/routes/'],
 			};
 
@@ -189,7 +189,7 @@ describe('module_matches_source', () => {
 
 	describe('with custom extensions', () => {
 		test('respects custom extensions', () => {
-			const options: Module_Source_Options = {
+			const options: ModuleSourceOptions = {
 				extensions: ['.ts'],
 			};
 
@@ -199,7 +199,7 @@ describe('module_matches_source', () => {
 		});
 
 		test('supports additional extensions like css', () => {
-			const options: Module_Source_Options = {
+			const options: ModuleSourceOptions = {
 				extensions: ['.ts', '.css'],
 			};
 
@@ -211,7 +211,7 @@ describe('module_matches_source', () => {
 
 	describe('with custom exclude_patterns', () => {
 		test('respects custom exclude patterns', () => {
-			const options: Module_Source_Options = {
+			const options: ModuleSourceOptions = {
 				exclude_patterns: [/\.test\.ts$/, /\.spec\.ts$/],
 			};
 
@@ -221,7 +221,7 @@ describe('module_matches_source', () => {
 		});
 
 		test('can exclude by directory pattern', () => {
-			const options: Module_Source_Options = {
+			const options: ModuleSourceOptions = {
 				exclude_patterns: [/\/internal\//],
 			};
 
@@ -232,7 +232,7 @@ describe('module_matches_source', () => {
 		});
 
 		test('empty exclude_patterns includes everything', () => {
-			const options: Module_Source_Options = {
+			const options: ModuleSourceOptions = {
 				exclude_patterns: [],
 			};
 
@@ -251,7 +251,7 @@ describe('module_matches_source', () => {
 		});
 
 		test('partial options merge with defaults', () => {
-			const options: Module_Source_Options = {
+			const options: ModuleSourceOptions = {
 				extensions: ['.ts'], // only override extensions
 			};
 

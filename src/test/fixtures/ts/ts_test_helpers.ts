@@ -1,5 +1,5 @@
 import ts from 'typescript';
-import type {Identifier_Json} from '@ryanatkn/belt/src_json.js';
+import type {IdentifierJson} from '@ryanatkn/belt/src_json.js';
 
 import {load_fixtures_generic} from '../../test_helpers.js';
 import {
@@ -12,7 +12,7 @@ import {
 } from '$lib/ts_helpers.js';
 import {tsdoc_parse} from '$lib/tsdoc_helpers.js';
 
-export type Ts_Fixture_Category =
+export type TsFixtureCategory =
 	| 'function'
 	| 'class'
 	| 'type'
@@ -20,12 +20,12 @@ export type Ts_Fixture_Category =
 	| 'module_comment'
 	| 'infer_kind';
 
-export interface Ts_Fixture {
+export interface TsFixture {
 	name: string;
-	category: Ts_Fixture_Category;
+	category: TsFixtureCategory;
 	input: string;
-	/** string for module_comment category, null for no_comment case, otherwise Identifier_Json */
-	expected: Identifier_Json | string | null;
+	/** string for module_comment category, null for no_comment case, otherwise IdentifierJson */
+	expected: IdentifierJson | string | null;
 }
 
 /**
@@ -70,7 +70,7 @@ export const create_test_program = (
 /**
  * A source file entry for multi-file test programs.
  */
-export interface Test_Source_File {
+export interface TestSourceFile {
 	path: string;
 	content: string;
 }
@@ -87,7 +87,7 @@ export interface Test_Source_File {
  * @returns Object with program, checker, and a map of source files by path
  */
 export const create_multi_file_program = (
-	files: Array<Test_Source_File>,
+	files: Array<TestSourceFile>,
 ): {program: ts.Program; checker: ts.TypeChecker; source_files: Map<string, ts.SourceFile>} => {
 	// Create source files
 	const source_files = new Map<string, ts.SourceFile>();
@@ -150,9 +150,9 @@ export const create_multi_file_program = (
 export const extract_identifier_from_source = (
 	source_file: ts.SourceFile,
 	checker: ts.TypeChecker,
-	category: Ts_Fixture_Category,
-): Identifier_Json | string | null => {
-	// Handle module_comment category differently (returns string, not Identifier_Json)
+	category: TsFixtureCategory,
+): IdentifierJson | string | null => {
+	// Handle module_comment category differently (returns string, not IdentifierJson)
 	if (category === 'module_comment') {
 		return ts_extract_module_comment(source_file) ?? null;
 	}
@@ -211,7 +211,7 @@ export const extract_identifier_from_source = (
 		}
 
 		// Create base identifier
-		const identifier: Identifier_Json = {
+		const identifier: IdentifierJson = {
 			name,
 			kind: ts_infer_declaration_kind(symbol, node),
 		};
@@ -244,7 +244,7 @@ export const extract_identifier_from_source = (
 /**
  * Infer the fixture category from its name based on naming conventions.
  */
-export const infer_category_from_name = (name: string): Ts_Fixture_Category => {
+export const infer_category_from_name = (name: string): TsFixtureCategory => {
 	if (name.startsWith('class_') || name === 'fields_private' || name === 'members_public') {
 		return 'class';
 	}
@@ -269,8 +269,8 @@ export const infer_category_from_name = (name: string): Ts_Fixture_Category => {
 /**
  * Load all fixtures from the ts fixtures directory (flat structure).
  */
-export const load_fixtures = async (): Promise<Array<Ts_Fixture>> => {
-	const generic_fixtures = await load_fixtures_generic<Identifier_Json | string | null>({
+export const load_fixtures = async (): Promise<Array<TsFixture>> => {
+	const generic_fixtures = await load_fixtures_generic<IdentifierJson | string | null>({
 		fixtures_dir: import.meta.dirname,
 		input_extension: '.ts',
 	});
@@ -283,9 +283,9 @@ export const load_fixtures = async (): Promise<Array<Ts_Fixture>> => {
 };
 
 /**
- * Validate that an Identifier_Json has the expected structure.
+ * Validate that an IdentifierJson has the expected structure.
  */
-export const validate_identifier_structure = (identifier: Identifier_Json): void => {
+export const validate_identifier_structure = (identifier: IdentifierJson): void => {
 	if (!identifier) {
 		throw new Error('Expected identifier to be defined');
 	}

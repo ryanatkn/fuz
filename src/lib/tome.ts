@@ -1,10 +1,9 @@
 import {resolve} from '$app/paths';
-import {slugify} from '@ryanatkn/belt/path.js';
 import type {Component} from 'svelte';
 import {z} from 'zod';
 
 import {create_context} from './context_helpers.js';
-import {DOCS_PATH_DEFAULT} from './docs_helpers.svelte.js';
+import {DOCS_PATH_DEFAULT, docs_slugify} from './docs_helpers.svelte.js';
 
 export const Tome = z.object({
 	name: z.string(),
@@ -23,7 +22,7 @@ export const to_tome_pathname = (
 	hash?: string,
 ): string => {
 	const name = typeof item === 'string' ? item : item.name;
-	const path = docs_path + '/' + slugify(name);
+	const path = docs_path + '/' + docs_slugify(name);
 	return resolve((hash ? path + '#' + hash : path) as any);
 };
 

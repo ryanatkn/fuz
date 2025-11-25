@@ -10,30 +10,30 @@
 			},
 			{
 				"type": "Code",
-				"content": "Docs_Link",
+				"content": "DocsLink",
 				"start": 15,
-				"end": 26
+				"end": 25
 			},
 			{
 				"type": "Text",
 				"content": " ",
-				"start": 26,
-				"end": 27
+				"start": 25,
+				"end": 26
 			},
 			{
 				"type": "Code",
-				"content": "Docs_Link",
-				"start": 27,
-				"end": 38
+				"content": "DocsLink",
+				"start": 26,
+				"end": 36
 			},
 			{
 				"type": "Text",
 				"content": " references.",
-				"start": 38,
-				"end": 50
+				"start": 36,
+				"end": 48
 			}
 		],
 		"start": 0,
-		"end": 50
+		"end": 48
 	}
 ]

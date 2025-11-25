@@ -4,7 +4,7 @@
 	import {wait} from '@ryanatkn/belt/async.js';
 
 	import Teleport from './Teleport.svelte';
-	import type {Dialog_Layout} from './dialog.js';
+	import type {DialogLayout} from './dialog.js';
 
 	// TODO use `<dialog>` here instead of `Teleport`
 	// https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog
@@ -35,7 +35,7 @@
 		/**
 		 * @default 'centered'
 		 */
-		layout?: Dialog_Layout;
+		layout?: DialogLayout;
 		/**
 		 * index 0 is under 1 is under 2 etc -- the topmost dialog is the last in the array
 		 * @default 0

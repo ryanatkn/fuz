@@ -1,21 +1,21 @@
 import {describe, test, assert, beforeEach} from 'vitest';
 
-import {Contextmenu_State, Entry_State, Submenu_State} from '$lib/contextmenu_state.svelte.js';
+import {ContextmenuState, EntryState, SubmenuState} from '$lib/contextmenu_state.svelte.js';
 
 /* eslint-disable @typescript-eslint/require-await */
 /* eslint-disable @typescript-eslint/no-empty-function */
 
-describe('Contextmenu_State - Activation', () => {
-	let contextmenu: Contextmenu_State;
+describe('ContextmenuState - Activation', () => {
+	let contextmenu: ContextmenuState;
 
 	beforeEach(() => {
-		contextmenu = new Contextmenu_State();
+		contextmenu = new ContextmenuState();
 	});
 
 	describe('activation', () => {
 		test('activate() runs synchronous callback and closes', () => {
 			let ran = false;
-			const entry = new Entry_State(contextmenu.root_menu, () => () => {
+			const entry = new EntryState(contextmenu.root_menu, () => () => {
 				ran = true;
 			});
 
@@ -27,7 +27,7 @@ describe('Contextmenu_State - Activation', () => {
 		});
 
 		test('activate() handles synchronous error', () => {
-			const entry = new Entry_State(contextmenu.root_menu, () => {
+			const entry = new EntryState(contextmenu.root_menu, () => {
 				throw new Error('test error');
 			});
 
@@ -39,7 +39,7 @@ describe('Contextmenu_State - Activation', () => {
 
 		test('activate() handles async success and closes', async () => {
 			let resolved = false;
-			const entry = new Entry_State(contextmenu.root_menu, () => async () => {
+			const entry = new EntryState(contextmenu.root_menu, () => async () => {
 				resolved = true;
 				return {ok: true};
 			});
@@ -58,7 +58,7 @@ describe('Contextmenu_State - Activation', () => {
 		});
 
 		test('activate() handles async error', async () => {
-			const entry = new Entry_State(contextmenu.root_menu, () => async () => {
+			const entry = new EntryState(contextmenu.root_menu, () => async () => {
 				throw new Error('async error');
 			});
 
@@ -71,7 +71,7 @@ describe('Contextmenu_State - Activation', () => {
 		});
 
 		test('activate() handles async failure result', async () => {
-			const entry = new Entry_State(contextmenu.root_menu, () => async () => {
+			const entry = new EntryState(contextmenu.root_menu, () => async () => {
 				return {ok: false, message: 'failed'};
 			});
 
@@ -84,8 +84,8 @@ describe('Contextmenu_State - Activation', () => {
 		});
 
 		test('activate() on submenu calls expand_selected', () => {
-			const submenu = new Submenu_State(contextmenu.root_menu, 2);
-			const child = new Entry_State(submenu, () => () => {});
+			const submenu = new SubmenuState(contextmenu.root_menu, 2);
+			const child = new EntryState(submenu, () => () => {});
 			submenu.items = [...submenu.items, child];
 
 			contextmenu.select(submenu);
@@ -96,7 +96,7 @@ describe('Contextmenu_State - Activation', () => {
 
 		test('activate_selected() activates current selection', () => {
 			let ran = false;
-			const entry = new Entry_State(contextmenu.root_menu, () => () => {
+			const entry = new EntryState(contextmenu.root_menu, () => () => {
 				ran = true;
 			});
 
@@ -108,7 +108,7 @@ describe('Contextmenu_State - Activation', () => {
 		});
 
 		test('activate_selected() selects first when no selection', () => {
-			const entry = new Entry_State(contextmenu.root_menu, () => () => {});
+			const entry = new EntryState(contextmenu.root_menu, () => () => {});
 			contextmenu.root_menu.items = [...contextmenu.root_menu.items, entry];
 
 			void contextmenu.activate_selected();
@@ -117,7 +117,7 @@ describe('Contextmenu_State - Activation', () => {
 		});
 
 		test('activate() closes on void return (async)', async () => {
-			const entry = new Entry_State(contextmenu.root_menu, () => async () => {
+			const entry = new EntryState(contextmenu.root_menu, () => async () => {
 				// Implicit undefined/void return
 			});
 
@@ -134,7 +134,7 @@ describe('Contextmenu_State - Activation', () => {
 			const promise2: Promise<{ok: true}> = new Promise((r) => (resolve2 = r));
 
 			let call_count = 0;
-			const entry = new Entry_State(contextmenu.root_menu, () => async () => {
+			const entry = new EntryState(contextmenu.root_menu, () => async () => {
 				call_count++;
 				return call_count === 1 ? await promise1 : await promise2;
 			});
@@ -162,7 +162,7 @@ describe('Contextmenu_State - Activation', () => {
 		});
 
 		test('activate() with close: false keeps menu open (async)', async () => {
-			const entry = new Entry_State(contextmenu.root_menu, () => async () => {
+			const entry = new EntryState(contextmenu.root_menu, () => async () => {
 				return {ok: true, close: false};
 			});
 
@@ -173,7 +173,7 @@ describe('Contextmenu_State - Activation', () => {
 		});
 
 		test('activate() with close: true explicitly closes menu (async)', async () => {
-			const entry = new Entry_State(contextmenu.root_menu, () => async () => {
+			const entry = new EntryState(contextmenu.root_menu, () => async () => {
 				return {ok: true, close: true};
 			});
 
@@ -184,7 +184,7 @@ describe('Contextmenu_State - Activation', () => {
 		});
 
 		test('activate() with {ok: true} defaults to closing (async)', async () => {
-			const entry = new Entry_State(contextmenu.root_menu, () => async () => {
+			const entry = new EntryState(contextmenu.root_menu, () => async () => {
 				return {ok: true};
 			});
 
@@ -195,7 +195,7 @@ describe('Contextmenu_State - Activation', () => {
 		});
 
 		test('activate() with close: false keeps menu open (sync)', () => {
-			const entry = new Entry_State(contextmenu.root_menu, () => () => {
+			const entry = new EntryState(contextmenu.root_menu, () => () => {
 				return {ok: true, close: false};
 			});
 
@@ -206,7 +206,7 @@ describe('Contextmenu_State - Activation', () => {
 		});
 
 		test('activate() with {ok: true} defaults to closing (sync)', () => {
-			const entry = new Entry_State(contextmenu.root_menu, () => () => {
+			const entry = new EntryState(contextmenu.root_menu, () => () => {
 				return {ok: true};
 			});
 
@@ -217,7 +217,7 @@ describe('Contextmenu_State - Activation', () => {
 		});
 
 		test('activate() with {ok: false} never closes', async () => {
-			const entry = new Entry_State(contextmenu.root_menu, () => async () => {
+			const entry = new EntryState(contextmenu.root_menu, () => async () => {
 				return {ok: false, message: 'error'};
 			});
 
@@ -234,13 +234,13 @@ describe('Contextmenu_State - Activation', () => {
 			let resolve1: any;
 			let resolve2: any;
 
-			const entry1 = new Entry_State(contextmenu.root_menu, () => async () => {
+			const entry1 = new EntryState(contextmenu.root_menu, () => async () => {
 				activation1_started = true;
 				await new Promise((r) => (resolve1 = r));
 				return {ok: true};
 			});
 
-			const entry2 = new Entry_State(contextmenu.root_menu, () => async () => {
+			const entry2 = new EntryState(contextmenu.root_menu, () => async () => {
 				activation2_started = true;
 				await new Promise((r) => (resolve2 = r));
 				return {ok: true};
@@ -272,7 +272,7 @@ describe('Contextmenu_State - Activation', () => {
 			let resolve: any;
 			const promise = new Promise((r) => (resolve = r));
 
-			const entry = new Entry_State(contextmenu.root_menu, () => async () => {
+			const entry = new EntryState(contextmenu.root_menu, () => async () => {
 				await promise;
 				return {ok: true};
 			});
@@ -294,7 +294,7 @@ describe('Contextmenu_State - Activation', () => {
 		});
 
 		test("activation error doesn't corrupt state", async () => {
-			const entry = new Entry_State(contextmenu.root_menu, () => async () => {
+			const entry = new EntryState(contextmenu.root_menu, () => async () => {
 				throw new Error('corruption test');
 			});
 
@@ -313,7 +313,7 @@ describe('Contextmenu_State - Activation', () => {
 			assert.strictEqual(contextmenu.opened, true);
 
 			// Can activate again successfully
-			const entry2 = new Entry_State(contextmenu.root_menu, () => () => {
+			const entry2 = new EntryState(contextmenu.root_menu, () => () => {
 				return {ok: true};
 			});
 			contextmenu.root_menu.items = [...contextmenu.root_menu.items, entry2];
@@ -327,7 +327,7 @@ describe('Contextmenu_State - Activation', () => {
 			const promise = new Promise((r) => (resolve = r));
 			let completed = false;
 
-			const entry = new Entry_State(contextmenu.root_menu, () => async () => {
+			const entry = new EntryState(contextmenu.root_menu, () => async () => {
 				await promise;
 				completed = true;
 				return {ok: true};
@@ -357,7 +357,7 @@ describe('Contextmenu_State - Activation', () => {
 		test('disabled state is checked via can_activate (not enforced by activate)', () => {
 			// The state layer provides can_activate to check disabled state
 			// but doesn't prevent calling activate() directly
-			const disabled_entry = new Entry_State(
+			const disabled_entry = new EntryState(
 				contextmenu.root_menu,
 				() => () => {
 					return {ok: true};

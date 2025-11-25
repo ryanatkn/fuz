@@ -4,10 +4,10 @@ import {mdz_parse} from '$lib/mdz.js';
 import {
 	load_fixtures,
 	validate_positions,
-	type Mdz_Fixture,
+	type MdzFixture,
 } from './fixtures/mdz/mdz_test_helpers.js';
 
-let fixtures: Array<Mdz_Fixture> = [];
+let fixtures: Array<MdzFixture> = [];
 
 beforeAll(async () => {
 	fixtures = await load_fixtures();

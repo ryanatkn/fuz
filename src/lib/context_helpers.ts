@@ -1,7 +1,7 @@
 import {getContext, setContext} from 'svelte';
 
 // This uses a function instead of a class because of the overloaded type signatures.
-// It could be implemented internally with a class like `Svelte_Context`
+// It could be implemented internally with a class like `SvelteContext`
 // but this is less code and seems a bit simpler.
 // The memory gains of a class appear minimal given the expected usage patterns.
 // See https://github.com/ryanatkn/fuz/pull/56 for more.

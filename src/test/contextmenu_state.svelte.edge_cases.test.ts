@@ -1,25 +1,25 @@
 import {describe, test, assert, beforeEach} from 'vitest';
 
 import {
-	Contextmenu_State,
-	Entry_State,
-	Submenu_State,
-	Root_Menu_State,
+	ContextmenuState,
+	EntryState,
+	SubmenuState,
+	RootMenuState,
 } from '$lib/contextmenu_state.svelte.js';
 
 /* eslint-disable @typescript-eslint/require-await */
 /* eslint-disable @typescript-eslint/no-empty-function */
 
-describe('Contextmenu_State - Edge Cases', () => {
-	let contextmenu: Contextmenu_State;
+describe('ContextmenuState - Edge Cases', () => {
+	let contextmenu: ContextmenuState;
 
 	beforeEach(() => {
-		contextmenu = new Contextmenu_State();
+		contextmenu = new ContextmenuState();
 	});
 
 	describe('error handling', () => {
 		test('synchronous errors display correctly', () => {
-			const entry = new Entry_State(contextmenu.root_menu, () => {
+			const entry = new EntryState(contextmenu.root_menu, () => {
 				throw new Error('sync error');
 			});
 
@@ -30,7 +30,7 @@ describe('Contextmenu_State - Edge Cases', () => {
 		});
 
 		test('async errors display correctly', async () => {
-			const entry = new Entry_State(contextmenu.root_menu, () => async () => {
+			const entry = new EntryState(contextmenu.root_menu, () => async () => {
 				throw new Error('async error');
 			});
 
@@ -41,10 +41,10 @@ describe('Contextmenu_State - Edge Cases', () => {
 		});
 
 		test('multiple errors in sequence handled', async () => {
-			const entry1 = new Entry_State(contextmenu.root_menu, () => {
+			const entry1 = new EntryState(contextmenu.root_menu, () => {
 				throw new Error('error 1');
 			});
-			const entry2 = new Entry_State(contextmenu.root_menu, () => {
+			const entry2 = new EntryState(contextmenu.root_menu, () => {
 				throw new Error('error 2');
 			});
 
@@ -56,10 +56,10 @@ describe('Contextmenu_State - Edge Cases', () => {
 		});
 
 		test('error state cleared on successful action', async () => {
-			const failing_entry = new Entry_State(contextmenu.root_menu, () => {
+			const failing_entry = new EntryState(contextmenu.root_menu, () => {
 				throw new Error('initial error');
 			});
-			const success_entry = new Entry_State(contextmenu.root_menu, () => () => {
+			const success_entry = new EntryState(contextmenu.root_menu, () => () => {
 				return {ok: true};
 			});
 
@@ -75,7 +75,7 @@ describe('Contextmenu_State - Edge Cases', () => {
 		});
 
 		test('error state cleared on menu close', () => {
-			const entry = new Entry_State(contextmenu.root_menu, () => async () => {
+			const entry = new EntryState(contextmenu.root_menu, () => async () => {
 				throw new Error('error to clear');
 			});
 			contextmenu.root_menu.items = [...contextmenu.root_menu.items, entry];
@@ -98,7 +98,7 @@ describe('Contextmenu_State - Edge Cases', () => {
 		});
 
 		test('error state cleared on new menu open', async () => {
-			const entry = new Entry_State(contextmenu.root_menu, () => async () => {
+			const entry = new EntryState(contextmenu.root_menu, () => async () => {
 				throw new Error('old error');
 			});
 			contextmenu.root_menu.items = [...contextmenu.root_menu.items, entry];
@@ -176,7 +176,7 @@ describe('Contextmenu_State - Edge Cases', () => {
 
 		test('zero-sized layout', () => {
 			const zero_layout = {width: 0, height: 0};
-			const cm = new Contextmenu_State({layout: zero_layout as any});
+			const cm = new ContextmenuState({layout: zero_layout as any});
 
 			assert.strictEqual(cm.layout.width, 0);
 			assert.strictEqual(cm.layout.height, 0);
@@ -187,7 +187,7 @@ describe('Contextmenu_State - Edge Cases', () => {
 		});
 
 		test('single item menus', () => {
-			const entry = new Entry_State(contextmenu.root_menu, () => () => {});
+			const entry = new EntryState(contextmenu.root_menu, () => () => {});
 			contextmenu.root_menu.items = [...contextmenu.root_menu.items, entry];
 
 			contextmenu.select_next();
@@ -202,11 +202,11 @@ describe('Contextmenu_State - Edge Cases', () => {
 
 		test('maximum depth nesting', () => {
 			// Create 10-level deep menu
-			let current_menu: Submenu_State | Root_Menu_State = contextmenu.root_menu;
+			let current_menu: SubmenuState | RootMenuState = contextmenu.root_menu;
 			const depth = 10;
 
 			for (let i = 1; i <= depth; i++) {
-				const submenu = new Submenu_State(current_menu, i + 1) as any;
+				const submenu = new SubmenuState(current_menu, i + 1) as any;
 				// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 				if (current_menu.is_menu) {
 					current_menu.items = [...current_menu.items, submenu];
@@ -215,7 +215,7 @@ describe('Contextmenu_State - Edge Cases', () => {
 			}
 
 			// Add entry at deepest level
-			const deepest_entry = new Entry_State(current_menu, () => () => {});
+			const deepest_entry = new EntryState(current_menu, () => () => {});
 			current_menu.items = [...current_menu.items, deepest_entry];
 
 			// Verify structure depth
@@ -246,7 +246,7 @@ describe('Contextmenu_State - Edge Cases', () => {
 		test('concurrent selections', () => {
 			const entries = Array.from(
 				{length: 10},
-				() => new Entry_State(contextmenu.root_menu, () => () => {}),
+				() => new EntryState(contextmenu.root_menu, () => () => {}),
 			);
 			contextmenu.root_menu.items = [...contextmenu.root_menu.items, ...entries];
 
@@ -264,7 +264,7 @@ describe('Contextmenu_State - Edge Cases', () => {
 			const entries = Array.from(
 				{length: 3},
 				() =>
-					new Entry_State(contextmenu.root_menu, () => async () => {
+					new EntryState(contextmenu.root_menu, () => async () => {
 						await new Promise((resolve) => setTimeout(resolve, 10));
 						return {ok: true};
 					}),
@@ -290,7 +290,7 @@ describe('Contextmenu_State - Edge Cases', () => {
 			let resolve: any;
 			const promise = new Promise((r) => (resolve = r));
 
-			const entry = new Entry_State(contextmenu.root_menu, () => async () => {
+			const entry = new EntryState(contextmenu.root_menu, () => async () => {
 				await promise;
 				return {ok: true};
 			});
@@ -312,7 +312,7 @@ describe('Contextmenu_State - Edge Cases', () => {
 		test('state mutations during iteration', () => {
 			const entries = Array.from(
 				{length: 5},
-				() => new Entry_State(contextmenu.root_menu, () => () => {}),
+				() => new EntryState(contextmenu.root_menu, () => () => {}),
 			);
 			contextmenu.root_menu.items = [...contextmenu.root_menu.items, ...entries];
 

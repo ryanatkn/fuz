@@ -16,13 +16,13 @@ import {
 import {
 	mount_contextmenu_root,
 	setup_contextmenu_action,
-	type Shared_Test_Options,
+	type SharedTestOptions,
 } from './contextmenu_test_helpers.js';
 
 export const create_shared_core_tests = (
 	Component: any,
 	component_name: string,
-	options: Shared_Test_Options = {},
+	options: SharedTestOptions = {},
 ): void => {
 	const {requires_longpress = false} = options;
 

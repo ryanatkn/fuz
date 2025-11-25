@@ -1,5 +1,5 @@
 import {
-	type Identifier_Json,
+	type IdentifierJson,
 	identifier_generate_import,
 	identifier_get_display_name,
 } from '@ryanatkn/belt/src_json.js';
@@ -12,14 +12,14 @@ import {url_api_identifier, url_api_identifier_full, url_github_file} from './pa
  *
  * Combines:
  *
- * - minimal Identifier_Json data
+ * - minimal IdentifierJson data
  * - parent Module reference (provides Pkg context)
  * - lazy-computed URLs, import statements, etc.
  * - query methods for ergonomic usage
  */
 export class Identifier {
 	readonly module: Module = $state.raw()!;
-	readonly identifier_json: Identifier_Json = $state.raw()!;
+	readonly identifier_json: IdentifierJson = $state.raw()!;
 
 	pkg = $derived(this.module.pkg);
 
@@ -115,11 +115,11 @@ export class Identifier {
 	/**
 	 * Class members (for classes).
 	 */
-	members: Array<Identifier_Json> | undefined = $derived(
-		this.identifier_json.members as Array<Identifier_Json> | undefined,
+	members: Array<IdentifierJson> | undefined = $derived(
+		this.identifier_json.members as Array<IdentifierJson> | undefined,
 	);
-	properties: Array<Identifier_Json> | undefined = $derived(
-		this.identifier_json.properties as Array<Identifier_Json> | undefined,
+	properties: Array<IdentifierJson> | undefined = $derived(
+		this.identifier_json.properties as Array<IdentifierJson> | undefined,
 	);
 
 	has_examples = $derived(!!(this.examples && this.examples.length > 0));
@@ -129,7 +129,7 @@ export class Identifier {
 	has_props = $derived(!!(this.props && this.props.length > 0));
 	has_generics = $derived(!!(this.generic_params && this.generic_params.length > 0));
 
-	constructor(module: Module, identifier_json: Identifier_Json) {
+	constructor(module: Module, identifier_json: IdentifierJson) {
 		this.module = module;
 		this.identifier_json = identifier_json;
 	}

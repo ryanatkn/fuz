@@ -6,7 +6,7 @@ import {
 	parse_csp_trust_level,
 	csp_trust_levels,
 	csp_trust_level_value,
-	type Create_Csp_Directives_Options,
+	type CreateCspDirectivesOptions,
 } from '$lib/csp.js';
 import {
 	create_test_source,
@@ -284,7 +284,7 @@ describe('required_trust_defaults_base option tests', () => {
 	});
 
 	test('required_trust_defaults_base: can provide custom trust requirements', () => {
-		const custom_trust_base: Create_Csp_Directives_Options['required_trust_defaults_base'] = {
+		const custom_trust_base: CreateCspDirectivesOptions['required_trust_defaults_base'] = {
 			'script-src': 'low',
 			'connect-src': 'low',
 		};

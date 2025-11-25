@@ -20,9 +20,9 @@
 
 import type {Gen} from '@ryanatkn/gro';
 import {load_package_json} from '@ryanatkn/gro/package_json.js';
-import type {Src_Json} from '@ryanatkn/belt/src_json.js';
+import type {SrcJson} from '@ryanatkn/belt/src_json.js';
 
-import {ts_create_program, type Re_Export_Info} from './ts_helpers.js';
+import {ts_create_program, type ReExportInfo} from './ts_helpers.js';
 import {module_extract_path, module_is_svelte} from './module_helpers.js';
 import {
 	package_gen_collect_source_files,
@@ -55,7 +55,7 @@ export const gen: Gen = async ({log, filer}) => {
 
 	// Build src.json with array-based modules
 	// Phase 1: Analyze all modules and collect re-exports
-	const src_json: Src_Json = {
+	const src_json: SrcJson = {
 		name: package_json.name,
 		version: package_json.version,
 		modules: [],
@@ -63,7 +63,7 @@ export const gen: Gen = async ({log, filer}) => {
 
 	// Collect all re-exports: Map<identifier_name, Set<re_exporting_module_path>>
 	// The Set tracks which modules re-export each identifier
-	const all_re_exports: Array<{re_exporting_module: string; re_export: Re_Export_Info}> = [];
+	const all_re_exports: Array<{re_exporting_module: string; re_export: ReExportInfo}> = [];
 
 	for (const disknode of source_disknodes) {
 		const source_id = disknode.id;

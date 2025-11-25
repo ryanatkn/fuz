@@ -1,24 +1,24 @@
-import type {Array_Element, Defined} from '@ryanatkn/belt/types.js';
+import type {ArrayElement, Defined} from '@ryanatkn/belt/types.js';
 
 // TODO schemas, but I may be moving to ArkType from Zod if precompilation looks good
 
-export interface Create_Csp_Directives_Options {
+export interface CreateCspDirectivesOptions {
 	/**
 	 * Override or transform specific directives.
 	 * Returning `null` or `undefined` from a transform function will remove the directive.
 	 */
 	directives?: {
-		[K in Csp_Directive]?:
-			| Csp_Directive_Value<K> // Static value replacement
+		[K in CspDirective]?:
+			| CspDirectiveValue<K> // Static value replacement
 			| null // Removes the directive
 			// Transform function returning one of the previous types
-			| ((value: Csp_Directive_Value<K>) => Csp_Directive_Value<K> | null);
+			| ((value: CspDirectiveValue<K>) => CspDirectiveValue<K> | null);
 	};
 
 	/**
 	 * Sources to include based on their trust levels.
 	 */
-	trusted_sources?: Array<Csp_Source_Spec>;
+	trusted_sources?: Array<CspSourceSpec>;
 
 	/**
 	 * Override default values for specific directives,
@@ -57,7 +57,7 @@ export interface Create_Csp_Directives_Options {
  * Things like validation and rendering to a string
  * are out of scope and left to SvelteKit.
  */
-export function create_csp_directives(options: Create_Csp_Directives_Options = {}): Csp_Directives {
+export function create_csp_directives(options: CreateCspDirectivesOptions = {}): CspDirectives {
 	const {
 		directives: directives_option,
 		trusted_sources,
@@ -67,7 +67,7 @@ export function create_csp_directives(options: Create_Csp_Directives_Options = {
 		required_trust_defaults: required_trust_defaults_option,
 	} = options;
 
-	const directives: Csp_Directives = {};
+	const directives: CspDirectives = {};
 
 	// Shallowly merge any provided defaults with the base defaults
 	const value_defaults = {...value_defaults_base, ...value_defaults_option};
@@ -85,11 +85,11 @@ export function create_csp_directives(options: Create_Csp_Directives_Options = {
 
 		directives[spec.name] = Array.isArray(default_value)
 			? [...default_value]
-			: (default_value as Csp_Directive_Value<any>);
+			: (default_value as CspDirectiveValue<any>);
 	}
 
 	// Get trust requirements (with overrides applied)
-	const trust_requirements: Map<Csp_Directive, Csp_Trust_Level | null> = new Map();
+	const trust_requirements: Map<CspDirective, CspTrustLevel | null> = new Map();
 	for (const spec of csp_directive_specs) {
 		const required_trust = required_trust_defaults[spec.name];
 		if (required_trust == null) continue; // omit null and undefined
@@ -143,7 +143,7 @@ export function create_csp_directives(options: Create_Csp_Directives_Options = {
 				.map((spec) => spec.source);
 
 			if (sources_to_add.length > 0) {
-				directives[directive] = [...value, ...sources_to_add] as Csp_Directive_Value<any>;
+				directives[directive] = [...value, ...sources_to_add] as CspDirectiveValue<any>;
 			}
 		}
 	}
@@ -156,7 +156,7 @@ export function create_csp_directives(options: Create_Csp_Directives_Options = {
 				throw new Error(`Invalid directive in options.directives: ${key}`);
 			}
 
-			const current = directives[directive] as Csp_Directive_Value<any>;
+			const current = directives[directive] as CspDirectiveValue<any>;
 
 			const result = typeof value_or_fn === 'function' ? value_or_fn(current) : value_or_fn;
 
@@ -164,7 +164,7 @@ export function create_csp_directives(options: Create_Csp_Directives_Options = {
 			if (result == null) {
 				delete directives[directive]; // eslint-disable-line @typescript-eslint/no-dynamic-delete
 			} else {
-				directives[directive] = structuredClone(result) as Csp_Directive_Value<any>;
+				directives[directive] = structuredClone(result) as CspDirectiveValue<any>;
 			}
 		}
 	}
@@ -172,14 +172,14 @@ export function create_csp_directives(options: Create_Csp_Directives_Options = {
 	return directives;
 }
 
-export type Csp_Directive = keyof Csp_Directives;
+export type CspDirective = keyof CspDirectives;
 
-export const parse_csp_directive = (directive: unknown): Csp_Directive | null =>
-	typeof directive === 'string' && csp_directive_spec_by_name.has(directive as Csp_Directive)
-		? (directive as Csp_Directive)
+export const parse_csp_directive = (directive: unknown): CspDirective | null =>
+	typeof directive === 'string' && csp_directive_spec_by_name.has(directive as CspDirective)
+		? (directive as CspDirective)
 		: null;
 
-export type Csp_Directive_Value<T extends Csp_Directive> = Defined<Csp_Directives[T]>;
+export type CspDirectiveValue<T extends CspDirective> = Defined<CspDirectives[T]>;
 
 export const csp_trust_levels = ['low', 'medium', 'high'] as const;
 
@@ -188,7 +188,7 @@ export const csp_trust_levels = ['low', 'medium', 'high'] as const;
  * Lower is less trusted.
  * Includes `undefined` in the type for safety.
  */
-export const csp_trust_level_value: Record<Csp_Trust_Level, number | undefined> = {
+export const csp_trust_level_value: Record<CspTrustLevel, number | undefined> = {
 	low: 0,
 	medium: 1,
 	high: 2,
@@ -209,24 +209,24 @@ export const csp_trust_level_value: Record<Csp_Trust_Level, number | undefined> 
  * - `null` – No trust. This is used for directives that don't support sources.
  *
  */
-export type Csp_Trust_Level = Array_Element<typeof csp_trust_levels>;
+export type CspTrustLevel = ArrayElement<typeof csp_trust_levels>;
 
 /**
  * Validates and extracts a CSP trust level from an unknown value.
  */
-export const parse_csp_trust_level = (trust: unknown): Csp_Trust_Level | null =>
-	csp_trust_levels.includes(trust as any) ? (trust as Csp_Trust_Level) : null;
+export const parse_csp_trust_level = (trust: unknown): CspTrustLevel | null =>
+	csp_trust_levels.includes(trust as any) ? (trust as CspTrustLevel) : null;
 
-export interface Csp_Source_Spec {
-	source: Csp_Source;
-	trust?: Csp_Trust_Level;
-	directives?: Array<Csp_Directive>;
+export interface CspSourceSpec {
+	source: CspSource;
+	trust?: CspTrustLevel;
+	directives?: Array<CspDirective>;
 }
 
-export interface Csp_Directive_Spec {
-	name: Csp_Directive;
-	fallback: Array<Csp_Directive> | null;
-	fallback_of: Array<Csp_Directive> | null;
+export interface CspDirectiveSpec {
+	name: CspDirective;
+	fallback: Array<CspDirective> | null;
+	fallback_of: Array<CspDirective> | null;
 }
 
 /**
@@ -238,8 +238,8 @@ export interface Csp_Directive_Spec {
  * - 'low' sources can only be used in low trust directives (lowest privilege)
  */
 export const is_csp_trusted = (
-	required_trust: Csp_Trust_Level | null | undefined,
-	granted_trust: Csp_Trust_Level | null | undefined,
+	required_trust: CspTrustLevel | null | undefined,
+	granted_trust: CspTrustLevel | null | undefined,
 ): boolean => {
 	const required_value = required_trust && csp_trust_level_value[required_trust];
 	const granted_value = granted_trust && csp_trust_level_value[granted_trust];
@@ -265,11 +265,11 @@ export const COLOR_SCHEME_SCRIPT_HASH = 'sha256-QOxqn7EUzb3ydF9SALJoJGWSvywW9R0A
 /**
  * The base CSP directive defaults.
  * Prioritizes safety but loosens around media and styles, relying on defense-in-depth.
- * Customizable via `Create_Csp_Directives_Options.defaults`.
+ * Customizable via `CreateCspDirectivesOptions.defaults`.
  */
 export const csp_directive_value_defaults: Record<
-	Csp_Directive,
-	Csp_Directive_Value<Csp_Directive> | null
+	CspDirective,
+	CspDirectiveValue<CspDirective> | null
 > = {
 	'default-src': ['none'],
 	'script-src': ['self', COLOR_SCHEME_SCRIPT_HASH], // Eval is opt-in, scripting is locked down except for self and the color scheme loader script
@@ -304,33 +304,32 @@ export const csp_directive_value_defaults: Record<
  *
  * Feedback is welcome, please see the issues - https://github.com/ryanatkn/fuz/issues
  */
-export const csp_directive_required_trust_defaults: Record<Csp_Directive, Csp_Trust_Level | null> =
-	{
-		'default-src': null,
-		'script-src': 'high',
-		'script-src-elem': 'high',
-		'script-src-attr': null,
-		'style-src': 'medium',
-		'style-src-elem': 'medium',
-		'style-src-attr': 'medium',
-		'img-src': 'low',
-		'media-src': 'low',
-		'font-src': 'low',
-		'manifest-src': null,
-		'child-src': null,
-		'connect-src': 'medium',
-		'frame-src': 'medium',
-		'frame-ancestors': 'medium',
-		'form-action': 'medium',
-		'worker-src': 'medium',
-		'object-src': null,
-		'base-uri': null,
-		'upgrade-insecure-requests': null,
-		'report-to': null,
-		'require-trusted-types-for': null,
-		'trusted-types': null,
-		sandbox: null,
-	};
+export const csp_directive_required_trust_defaults: Record<CspDirective, CspTrustLevel | null> = {
+	'default-src': null,
+	'script-src': 'high',
+	'script-src-elem': 'high',
+	'script-src-attr': null,
+	'style-src': 'medium',
+	'style-src-elem': 'medium',
+	'style-src-attr': 'medium',
+	'img-src': 'low',
+	'media-src': 'low',
+	'font-src': 'low',
+	'manifest-src': null,
+	'child-src': null,
+	'connect-src': 'medium',
+	'frame-src': 'medium',
+	'frame-ancestors': 'medium',
+	'form-action': 'medium',
+	'worker-src': 'medium',
+	'object-src': null,
+	'base-uri': null,
+	'upgrade-insecure-requests': null,
+	'report-to': null,
+	'require-trusted-types-for': null,
+	'trusted-types': null,
+	sandbox: null,
+};
 
 /**
  * Static data descriptors for the CSP directives.
@@ -341,7 +340,7 @@ export const csp_directive_required_trust_defaults: Record<Csp_Directive, Csp_Tr
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy
  */
-export const csp_directive_specs: Array<Csp_Directive_Spec> = [
+export const csp_directive_specs: Array<CspDirectiveSpec> = [
 	{
 		name: 'default-src',
 		fallback: null,
@@ -479,7 +478,7 @@ export const csp_directive_specs: Array<Csp_Directive_Spec> = [
 	},
 ];
 
-export const csp_directive_spec_by_name: Map<Csp_Directive, Csp_Directive_Spec> = new Map(
+export const csp_directive_spec_by_name: Map<CspDirective, CspDirectiveSpec> = new Map(
 	csp_directive_specs.map((s) => [s.name, s]),
 );
 
@@ -511,51 +510,50 @@ export const csp_directive_spec_by_name: Map<Csp_Directive, Csp_Directive_Spec> 
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-export type Csp_Action_Source = 'strict-dynamic' | 'report-sample';
-export type Csp_Base_Source =
+export type CspActionSource = 'strict-dynamic' | 'report-sample';
+export type CspBaseSource =
 	| 'self'
 	| 'unsafe-eval'
 	| 'unsafe-hashes'
 	| 'unsafe-inline'
 	| 'wasm-unsafe-eval'
 	| 'none';
-export type Csp_Crypto_Source = `${'nonce' | 'sha256' | 'sha384' | 'sha512'}-${string}`;
-export type Csp_Frame_Source = Csp_Host_Source | Csp_Scheme_Source | 'self' | 'none';
-export type Csp_Host_Name_Scheme = `${string}.${string}` | 'localhost';
-export type Csp_Host_Source =
-	`${Csp_Host_Protocol_Schemes}${Csp_Host_Name_Scheme}${Csp_Port_Scheme}`;
-export type Csp_Host_Protocol_Schemes = `${string}://` | '';
-export type Csp_Port_Scheme = `:${number}` | '' | ':*';
-export type Csp_Scheme_Source =
+export type CspCryptoSource = `${'nonce' | 'sha256' | 'sha384' | 'sha512'}-${string}`;
+export type CspFrameSource = CspHostSource | CspSchemeSource | 'self' | 'none';
+export type CspHostNameScheme = `${string}.${string}` | 'localhost';
+export type CspHostSource = `${CspHostProtocolSchemes}${CspHostNameScheme}${CspPortScheme}`;
+export type CspHostProtocolSchemes = `${string}://` | '';
+export type CspPortScheme = `:${number}` | '' | ':*';
+export type CspSchemeSource =
 	| 'http:'
 	| 'https:'
 	| 'data:'
 	| 'mediastream:'
 	| 'blob:'
 	| 'filesystem:';
-export type Csp_Source = Csp_Host_Source | Csp_Scheme_Source | Csp_Crypto_Source | Csp_Base_Source;
-export type Csp_Sources = Array<Csp_Source>;
+export type CspSource = CspHostSource | CspSchemeSource | CspCryptoSource | CspBaseSource;
+export type CspSources = Array<CspSource>;
 
-export interface Csp_Directives {
-	'default-src'?: Array<Csp_Source | Csp_Action_Source>;
-	'script-src'?: Array<Csp_Source | Csp_Action_Source>;
-	'script-src-elem'?: Csp_Sources;
-	'script-src-attr'?: Csp_Sources;
-	'style-src'?: Array<Csp_Source | Csp_Action_Source>;
-	'style-src-elem'?: Csp_Sources;
-	'style-src-attr'?: Csp_Sources;
-	'img-src'?: Csp_Sources;
-	'media-src'?: Csp_Sources;
-	'font-src'?: Csp_Sources;
-	'manifest-src'?: Csp_Sources;
-	'child-src'?: Csp_Sources;
-	'connect-src'?: Csp_Sources;
-	'frame-src'?: Csp_Sources;
-	'frame-ancestors'?: Array<Csp_Host_Source | Csp_Scheme_Source | Csp_Frame_Source>;
-	'form-action'?: Array<Csp_Source | Csp_Action_Source>;
-	'worker-src'?: Csp_Sources;
-	'object-src'?: Csp_Sources;
-	'base-uri'?: Array<Csp_Source | Csp_Action_Source>;
+export interface CspDirectives {
+	'default-src'?: Array<CspSource | CspActionSource>;
+	'script-src'?: Array<CspSource | CspActionSource>;
+	'script-src-elem'?: CspSources;
+	'script-src-attr'?: CspSources;
+	'style-src'?: Array<CspSource | CspActionSource>;
+	'style-src-elem'?: CspSources;
+	'style-src-attr'?: CspSources;
+	'img-src'?: CspSources;
+	'media-src'?: CspSources;
+	'font-src'?: CspSources;
+	'manifest-src'?: CspSources;
+	'child-src'?: CspSources;
+	'connect-src'?: CspSources;
+	'frame-src'?: CspSources;
+	'frame-ancestors'?: Array<CspHostSource | CspSchemeSource | CspFrameSource>;
+	'form-action'?: Array<CspSource | CspActionSource>;
+	'worker-src'?: CspSources;
+	'object-src'?: CspSources;
+	'base-uri'?: Array<CspSource | CspActionSource>;
 	'upgrade-insecure-requests'?: boolean;
 	'report-to'?: Array<string>;
 	'require-trusted-types-for'?: Array<'script'>;

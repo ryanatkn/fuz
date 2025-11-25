@@ -3,12 +3,12 @@
 
 	import {get_tome_by_name} from '$lib/tome.js';
 	import {intersect} from '$lib/intersect.svelte.js';
-	import Tome_Content from '$lib/Tome_Content.svelte';
-	import Tome_Section from '$lib/Tome_Section.svelte';
-	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
-	import Mdn_Link from '$lib/Mdn_Link.svelte';
-	import Module_Link from '$lib/Module_Link.svelte';
-	import Identifier_Link from '$lib/Identifier_Link.svelte';
+	import TomeContent from '$lib/TomeContent.svelte';
+	import TomeSection from '$lib/TomeSection.svelte';
+	import TomeSectionHeader from '$lib/TomeSectionHeader.svelte';
+	import MdnLink from '$lib/MdnLink.svelte';
+	import ModuleLink from '$lib/ModuleLink.svelte';
+	import IdentifierLink from '$lib/IdentifierLink.svelte';
 
 	const LIBRARY_ITEM_NAME = 'intersect';
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
@@ -30,13 +30,13 @@
 	let configurable_key = $state(0);
 </script>
 
-<Tome_Content {tome}>
+<TomeContent {tome}>
 	<section>
 		<p>
-			The <Identifier_Link name="intersect" /> helper in <Module_Link
+			The <IdentifierLink name="intersect" /> helper in <ModuleLink
 				module_path="intersect.svelte.ts"
 			/> creates an attachment that observes when an element enters or leaves the viewport using the
-			<Mdn_Link path="Web/API/Intersection_Observer_API">Intersection Observer API</Mdn_Link>.
+			<MdnLink path="Web/API/Intersection_Observer_API">Intersection Observer API</MdnLink>.
 		</p>
 		<p>
 			Uses the lazy function pattern to optimize reactivity: callbacks can update without recreating
@@ -59,8 +59,8 @@
 		</p>
 	</section>
 
-	<Tome_Section>
-		<Tome_Section_Header text="threshold: 0 (default)" />
+	<TomeSection>
+		<TomeSectionHeader text="threshold: 0 (default)" />
 		<p>
 			Triggers when the element enters the viewport by at least a pixel. Scroll to see items change
 			state.
@@ -87,10 +87,10 @@
 				</li>
 			{/each}
 		</ul>
-	</Tome_Section>
+	</TomeSection>
 
-	<Tome_Section>
-		<Tome_Section_Header text="threshold: 0.5" />
+	<TomeSection>
+		<TomeSectionHeader text="threshold: 0.5" />
 		<p>Triggers when 50% of the element is visible.</p>
 		<Code
 			content={`<div {@attach intersect(() => ({
@@ -116,10 +116,10 @@
 				</li>
 			{/each}
 		</ul>
-	</Tome_Section>
+	</TomeSection>
 
-	<Tome_Section>
-		<Tome_Section_Header text="threshold: 1" />
+	<TomeSection>
+		<TomeSectionHeader text="threshold: 1" />
 		<p>Triggers only when the element is fully visible.</p>
 		<Code
 			content={`<div {@attach intersect(() => ({
@@ -145,10 +145,10 @@
 				</li>
 			{/each}
 		</ul>
-	</Tome_Section>
+	</TomeSection>
 
-	<Tome_Section>
-		<Tome_Section_Header text="count: 1" />
+	<TomeSection>
+		<TomeSectionHeader text="count: 1" />
 		<p>
 			Disconnects after the first intersection cycle (enter and leave). A <code>count</code> of
 			<code>0</code> disables observation. Negative or <code>undefined</code> never disconnects. (the
@@ -181,10 +181,10 @@
 			</ul>
 		{/key}
 		<button type="button" onclick={() => count_1_key++}>reset</button>
-	</Tome_Section>
+	</TomeSection>
 
-	<Tome_Section>
-		<Tome_Section_Header text="count: 2" />
+	<TomeSection>
+		<TomeSectionHeader text="count: 2" />
 		<p>Disconnects after two intersection cycles.</p>
 		<Code
 			content={`<div {@attach intersect(() => ({
@@ -213,10 +213,10 @@
 			</ul>
 		{/key}
 		<button type="button" onclick={() => count_2_key++}>reset</button>
-	</Tome_Section>
+	</TomeSection>
 
-	<Tome_Section>
-		<Tome_Section_Header text="Configurable" />
+	<TomeSection>
+		<TomeSectionHeader text="Configurable" />
 		<p>
 			Try different parameter combinations. Positive <code>count</code> values disconnect after N
 			cycles.
@@ -267,9 +267,9 @@
 			</ul>
 		{/key}
 		<button type="button" onclick={() => configurable_key++}>reset</button>
-	</Tome_Section>
-	<p>Full API docs at <Module_Link module_path="intersect.svelte.ts" />.</p>
-</Tome_Content>
+	</TomeSection>
+	<p>Full API docs at <ModuleLink module_path="intersect.svelte.ts" />.</p>
+</TomeContent>
 
 <style>
 	.controls {

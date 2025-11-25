@@ -5,12 +5,12 @@
 
 import {describe, test, assert, afterEach, vi} from 'vitest';
 import {unmount_component, create_keyboard_event, set_event_target} from './test_helpers.js';
-import {mount_contextmenu_root, type Shared_Test_Options} from './contextmenu_test_helpers.js';
+import {mount_contextmenu_root, type SharedTestOptions} from './contextmenu_test_helpers.js';
 
 export const create_shared_keyboard_tests = (
 	Component: any,
 	component_name: string,
-	_options: Shared_Test_Options = {},
+	_options: SharedTestOptions = {},
 ): void => {
 	describe(`${component_name} - Keyboard Navigation`, () => {
 		let mounted: ReturnType<typeof mount_contextmenu_root> | null = null;

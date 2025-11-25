@@ -2,7 +2,7 @@
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
 	import {mdz_parse} from './mdz.js';
-	import Mdz_Node_View from './Mdz_Node_View.svelte';
+	import MdzNodeView from './MdzNodeView.svelte';
 
 	const {
 		content,
@@ -25,6 +25,6 @@
 	class:white_space_pre_wrap={!nowrap}
 >
 	{#each nodes as node (node)}
-		<Mdz_Node_View {node} />
+		<MdzNodeView {node} />
 	{/each}
 </svelte:element>

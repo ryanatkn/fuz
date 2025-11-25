@@ -7,12 +7,12 @@ import {
 	csp_directive_value_defaults,
 	csp_directive_specs,
 	COLOR_SCHEME_SCRIPT_HASH,
-	type Csp_Directives,
+	type CspDirectives,
 } from '$lib/csp.js';
 
-// Type compatibility test - this errors if Csp_Directives is not assignable to SvelteKit's directives type
-type Kit_Csp_Directives = Defined<KitConfig['csp']>['directives'];
-const assert_csp_directives: Kit_Csp_Directives = {} as Csp_Directives;
+// Type compatibility test - this errors if CspDirectives is not assignable to SvelteKit's directives type
+type KitCspDirectives = Defined<KitConfig['csp']>['directives'];
+const assert_csp_directives: KitCspDirectives = {} as CspDirectives;
 assert_csp_directives;
 
 describe('basic defaults', () => {

@@ -1,8 +1,8 @@
 <script lang="ts">
 	import {pkg_context} from '$lib/pkg.svelte.js';
-	import Ecosystem_Links_Panel from '$lib/Ecosystem_Links_Panel.svelte';
-	import Package_Detail from '$lib/Package_Detail.svelte';
-	import Docs_Footer from '$lib/Docs_Footer.svelte';
+	import EcosystemLinksPanel from '$lib/EcosystemLinksPanel.svelte';
+	import PackageDetail from '$lib/PackageDetail.svelte';
+	import DocsFooter from '$lib/DocsFooter.svelte';
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
 	import Svg from '$lib/Svg.svelte';
 	import {fuz_logo} from '$lib/logos.js';
@@ -22,18 +22,18 @@
 		</header>
 		<Breadcrumb><Svg data={fuz_logo} size="var(--icon_size_sm)" /></Breadcrumb>
 	</section>
-	<Ecosystem_Links_Panel />
+	<EcosystemLinksPanel />
 	<section class="box width_100 mb_lg">
 		<div class="panel p_md width_upto_md">
-			<Package_Detail {pkg} />
+			<PackageDetail {pkg} />
 		</div>
 	</section>
 	<section class="box mb_xl7">
-		<Docs_Footer {pkg}>
+		<DocsFooter {pkg}>
 			<div class="mb_xl5">
 				<Breadcrumb><Svg data={fuz_logo} size="var(--icon_size_sm)" /></Breadcrumb>
 			</div>
-		</Docs_Footer>
+		</DocsFooter>
 	</section>
 </main>
 

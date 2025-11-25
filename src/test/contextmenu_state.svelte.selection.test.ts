@@ -1,25 +1,25 @@
 import {describe, test, assert, beforeEach} from 'vitest';
 
-import {Contextmenu_State, Entry_State, Submenu_State} from '$lib/contextmenu_state.svelte.js';
+import {ContextmenuState, EntryState, SubmenuState} from '$lib/contextmenu_state.svelte.js';
 
 /* eslint-disable @typescript-eslint/no-empty-function */
 
-describe('Contextmenu_State - Selection', () => {
-	let contextmenu: Contextmenu_State;
+describe('ContextmenuState - Selection', () => {
+	let contextmenu: ContextmenuState;
 
 	beforeEach(() => {
-		contextmenu = new Contextmenu_State();
+		contextmenu = new ContextmenuState();
 	});
 
 	describe('selection management', () => {
-		let entry1: Entry_State;
-		let entry2: Entry_State;
-		let entry3: Entry_State;
+		let entry1: EntryState;
+		let entry2: EntryState;
+		let entry3: EntryState;
 
 		beforeEach(() => {
-			entry1 = new Entry_State(contextmenu.root_menu, () => () => {});
-			entry2 = new Entry_State(contextmenu.root_menu, () => () => {});
-			entry3 = new Entry_State(contextmenu.root_menu, () => () => {});
+			entry1 = new EntryState(contextmenu.root_menu, () => () => {});
+			entry2 = new EntryState(contextmenu.root_menu, () => () => {});
+			entry3 = new EntryState(contextmenu.root_menu, () => () => {});
 			contextmenu.root_menu.items = [entry1, entry2, entry3];
 		});
 
@@ -115,8 +115,8 @@ describe('Contextmenu_State - Selection', () => {
 		});
 
 		test('collapse_selected() deselects nested item', () => {
-			const submenu = new Submenu_State(contextmenu.root_menu, 2);
-			const nested_entry = new Entry_State(submenu, () => () => {});
+			const submenu = new SubmenuState(contextmenu.root_menu, 2);
+			const nested_entry = new EntryState(submenu, () => () => {});
 			submenu.items = [...submenu.items, nested_entry];
 
 			// Manually set up a nested selection
@@ -141,8 +141,8 @@ describe('Contextmenu_State - Selection', () => {
 		});
 
 		test('expand_selected() selects first child of submenu', () => {
-			const submenu = new Submenu_State(contextmenu.root_menu, 2);
-			const child = new Entry_State(submenu, () => () => {});
+			const submenu = new SubmenuState(contextmenu.root_menu, 2);
+			const child = new EntryState(submenu, () => () => {});
 			submenu.items = [...submenu.items, child];
 			contextmenu.root_menu.items = [submenu];
 
@@ -155,7 +155,7 @@ describe('Contextmenu_State - Selection', () => {
 		});
 
 		test('collapse_selected() respects can_collapse', () => {
-			const entry = new Entry_State(contextmenu.root_menu, () => () => {});
+			const entry = new EntryState(contextmenu.root_menu, () => () => {});
 			contextmenu.root_menu.items = [...contextmenu.root_menu.items, entry];
 			contextmenu.select(entry);
 
@@ -170,7 +170,7 @@ describe('Contextmenu_State - Selection', () => {
 		});
 
 		test('expand_selected() respects can_expand with empty submenu', () => {
-			const empty_submenu = new Submenu_State(contextmenu.root_menu, 2);
+			const empty_submenu = new SubmenuState(contextmenu.root_menu, 2);
 			contextmenu.root_menu.items = [...contextmenu.root_menu.items, empty_submenu];
 			contextmenu.select(empty_submenu);
 
@@ -187,7 +187,7 @@ describe('Contextmenu_State - Selection', () => {
 		test('expand_selected() does not crash on empty submenu (regression)', () => {
 			// This is a regression test for the bug where expand_selected()
 			// would access parent.items[0] without checking if items is empty
-			const empty_submenu = new Submenu_State(contextmenu.root_menu, 2);
+			const empty_submenu = new SubmenuState(contextmenu.root_menu, 2);
 			contextmenu.root_menu.items = [...contextmenu.root_menu.items, empty_submenu];
 			contextmenu.select(empty_submenu);
 
@@ -215,7 +215,7 @@ describe('Contextmenu_State - Selection', () => {
 		});
 
 		test('selecting disabled items is prevented', () => {
-			const disabled_entry = new Entry_State(
+			const disabled_entry = new EntryState(
 				contextmenu.root_menu,
 				() => () => {},
 				() => true, // disabled function returns true
@@ -231,9 +231,9 @@ describe('Contextmenu_State - Selection', () => {
 		});
 
 		test('selection state survives across multiple levels', () => {
-			const submenu1 = new Submenu_State(contextmenu.root_menu, 2);
-			const submenu2 = new Submenu_State(submenu1, 3);
-			const deep_entry = new Entry_State(submenu2, () => () => {});
+			const submenu1 = new SubmenuState(contextmenu.root_menu, 2);
+			const submenu2 = new SubmenuState(submenu1, 3);
+			const deep_entry = new EntryState(submenu2, () => () => {});
 
 			submenu2.items = [...submenu2.items, deep_entry];
 			submenu1.items = [...submenu1.items, submenu2];
@@ -271,7 +271,7 @@ describe('Contextmenu_State - Selection', () => {
 			assert.strictEqual(contextmenu.selections.length, 0);
 
 			// Single item menu
-			const single = new Entry_State(contextmenu.root_menu, () => () => {});
+			const single = new EntryState(contextmenu.root_menu, () => () => {});
 			contextmenu.root_menu.items = [single];
 
 			contextmenu.select_first();

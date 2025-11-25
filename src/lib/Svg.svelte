@@ -2,7 +2,7 @@
 	import {ensure_end} from '@ryanatkn/belt/string.js';
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
-	export interface Svg_Data {
+	export interface SvgData {
 		/**
 		 * Raw svg markup string that's inserted unsafely as a child of the `svg` element.
 		 * This is an escape hatch for non-`path` markup -
@@ -37,7 +37,7 @@
 		shrink = true,
 		attrs,
 	}: {
-		data: Svg_Data;
+		data: SvgData;
 		/**
 		 * Overrides `data.fill`.
 		 */

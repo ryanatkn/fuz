@@ -1,5 +1,5 @@
 import {ensure_end, strip_end, strip_start} from '@ryanatkn/belt/string.js';
-import type {Package_Json} from '@ryanatkn/belt/package_json.js';
+import type {PackageJson} from '@ryanatkn/belt/package_json.js';
 import {page} from '$app/state';
 
 import {DOCS_API_PATH, DOCS_PATH_DEFAULT} from './docs_helpers.svelte.js';
@@ -59,7 +59,7 @@ export const url_npm_package = (package_name: string): string =>
  * Check if a package is published to npm.
  * Published packages are not private, have exports, and have a version beyond 0.0.1.
  */
-export const package_is_published = (package_json: Package_Json): boolean => {
+export const package_is_published = (package_json: PackageJson): boolean => {
 	return !package_json.private && !!package_json.exports && package_json.version !== '0.0.1';
 };
 
@@ -95,7 +95,7 @@ export const repo_name_parse = (name: string): string => {
  * Parse repository URL from package.json format.
  * Strips 'git+', '.git', and trailing slashes.
  */
-export const repo_url_parse = (repository: Package_Json['repository']): string | null => {
+export const repo_url_parse = (repository: PackageJson['repository']): string | null => {
 	if (!repository) return null;
 	const url = typeof repository === 'string' ? repository : repository.url;
 	if (!url) return null;

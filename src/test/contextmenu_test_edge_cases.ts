@@ -9,13 +9,13 @@ import {unmount_component, create_contextmenu_event, set_event_target} from './t
 import {
 	mount_contextmenu_root,
 	setup_contextmenu_action,
-	type Shared_Test_Options,
+	type SharedTestOptions,
 } from './contextmenu_test_helpers.js';
 
 export const create_shared_edge_case_tests = (
 	Component: any,
 	component_name: string,
-	_options: Shared_Test_Options = {},
+	_options: SharedTestOptions = {},
 ): void => {
 	describe(`${component_name} - Edge Cases`, () => {
 		let mounted: ReturnType<typeof mount_contextmenu_root> | null = null;

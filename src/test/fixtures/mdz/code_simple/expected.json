@@ -10,18 +10,18 @@
 			},
 			{
 				"type": "Code",
-				"content": "Foo_Bar",
+				"content": "FooBar",
 				"start": 4,
-				"end": 13
+				"end": 12
 			},
 			{
 				"type": "Text",
 				"content": " here",
-				"start": 13,
-				"end": 18
+				"start": 12,
+				"end": 17
 			}
 		],
 		"start": 0,
-		"end": 18
+		"end": 17
 	}
 ]

@@ -452,89 +452,89 @@ For performance, consecutive text characters are accumulated into a single text 
 The parser produces an abstract syntax tree with these node types:
 
 ```typescript
-type Mdz_Node =
-  | Mdz_Text_Node
-  | Mdz_Code_Node
-  | Mdz_Codeblock_Node
-  | Mdz_Bold_Node
-  | Mdz_Italic_Node
-  | Mdz_Strikethrough_Node
-  | Mdz_Link_Node
-  | Mdz_Paragraph_Node
-  | Mdz_Hr_Node
-  | Mdz_Heading_Node
-  | Mdz_Element_Node
-  | Mdz_Component_Node
+type MdzNode =
+  | MdzTextNode
+  | MdzCodeNode
+  | MdzCodeblockNode
+  | MdzBoldNode
+  | MdzItalicNode
+  | MdzStrikethroughNode
+  | MdzLinkNode
+  | MdzParagraphNode
+  | MdzHrNode
+  | MdzHeadingNode
+  | MdzElementNode
+  | MdzComponentNode
 
-interface Mdz_Base_Node {
+interface MdzBaseNode {
   type: string
   start: number
   end: number
 }
 
-interface Mdz_Text_Node extends Mdz_Base_Node {
+interface MdzTextNode extends MdzBaseNode {
   type: 'Text'
   content: string
 }
 
-interface Mdz_Code_Node extends Mdz_Base_Node {
+interface MdzCodeNode extends MdzBaseNode {
   type: 'Code'
   content: string
 }
 
-interface Mdz_Codeblock_Node extends Mdz_Base_Node {
+interface MdzCodeblockNode extends MdzBaseNode {
   type: 'Codeblock'
   lang: string | null
   content: string
 }
 
-interface Mdz_Bold_Node extends Mdz_Base_Node {
+interface MdzBoldNode extends MdzBaseNode {
   type: 'Bold'
-  children: Array<Mdz_Node>
+  children: Array<MdzNode>
 }
 
-interface Mdz_Italic_Node extends Mdz_Base_Node {
+interface MdzItalicNode extends MdzBaseNode {
   type: 'Italic'
-  children: Array<Mdz_Node>
+  children: Array<MdzNode>
 }
 
-interface Mdz_Strikethrough_Node extends Mdz_Base_Node {
+interface MdzStrikethroughNode extends MdzBaseNode {
   type: 'Strikethrough'
-  children: Array<Mdz_Node>
+  children: Array<MdzNode>
 }
 
-interface Mdz_Link_Node extends Mdz_Base_Node {
+interface MdzLinkNode extends MdzBaseNode {
   type: 'Link'
   reference: string
-  children: Array<Mdz_Node>
+  children: Array<MdzNode>
   link_type: 'external' | 'internal'
 }
 
-interface Mdz_Paragraph_Node extends Mdz_Base_Node {
+interface MdzParagraphNode extends MdzBaseNode {
   type: 'Paragraph'
-  children: Array<Mdz_Node>
+  children: Array<MdzNode>
 }
 
-interface Mdz_Hr_Node extends Mdz_Base_Node {
+interface MdzHrNode extends MdzBaseNode {
   type: 'Hr'
 }
 
-interface Mdz_Heading_Node extends Mdz_Base_Node {
+interface MdzHeadingNode extends MdzBaseNode {
   type: 'Heading'
   level: 1 | 2 | 3 | 4 | 5 | 6
-  children: Array<Mdz_Node>
+  children: Array<MdzNode>
 }
 
-interface Mdz_Element_Node extends Mdz_Base_Node {
+interface MdzElementNode extends MdzBaseNode {
   type: 'Element'
   name: string
-  children: Array<Mdz_Node>
+  children: Array<MdzNode>
 }
 
-interface Mdz_Component_Node extends Mdz_Base_Node {
+interface MdzComponentNode extends MdzBaseNode {
   type: 'Component'
   name: string
-  children: Array<Mdz_Node>
+  children: Array<MdzNode>
 }
 ```
 

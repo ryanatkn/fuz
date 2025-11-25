@@ -9,13 +9,13 @@ import {
 	load_fixtures,
 	validate_component_structure,
 	fixture_name_to_component_name,
-	type Svelte_Fixture,
+	type SvelteFixture,
 } from './fixtures/svelte/svelte_test_helpers.js';
 import {normalize_json} from './test_helpers.js';
 
 const FIXTURES_DIR = join(import.meta.dirname, 'fixtures/svelte');
 
-let fixtures: Array<Svelte_Fixture> = [];
+let fixtures: Array<SvelteFixture> = [];
 let checker: ts.TypeChecker;
 
 beforeAll(async () => {
@@ -75,11 +75,11 @@ describe('svelte component analyzer (fixture-based)', () => {
 describe('svelte_analyze_file', () => {
 	test('analyzes a basic component from disk', () => {
 		const file_path = join(FIXTURES_DIR, 'props_basic/input.svelte');
-		const module_path = 'Props_Basic.svelte';
+		const module_path = 'PropsBasic.svelte';
 
 		const result = svelte_analyze_file(file_path, module_path, checker);
 
-		assert.strictEqual(result.name, 'Props_Basic');
+		assert.strictEqual(result.name, 'PropsBasic');
 		assert.strictEqual(result.kind, 'component');
 		assert.ok(result.props);
 		assert.strictEqual(result.props.length, 2);
@@ -91,33 +91,33 @@ describe('svelte_analyze_file', () => {
 
 	test('extracts component documentation when present', () => {
 		const file_path = join(FIXTURES_DIR, 'props_basic/input.svelte');
-		const module_path = 'Props_Basic.svelte';
+		const module_path = 'PropsBasic.svelte';
 
 		const result = svelte_analyze_file(file_path, module_path, checker);
 
 		// The component has JSDoc in the script block - extraction depends on svelte2tsx behavior
 		// Just verify we get a valid component back (doc_comment extraction is tested in fixture tests)
-		assert.strictEqual(result.name, 'Props_Basic');
+		assert.strictEqual(result.name, 'PropsBasic');
 		assert.strictEqual(result.kind, 'component');
 	});
 
 	test('handles component with JSDoc in HTML comment', () => {
 		const file_path = join(FIXTURES_DIR, 'component_with_jsdoc/input.svelte');
-		const module_path = 'Component_Jsdoc.svelte';
+		const module_path = 'ComponentJsdoc.svelte';
 
 		const result = svelte_analyze_file(file_path, module_path, checker);
 
-		assert.strictEqual(result.name, 'Component_Jsdoc');
+		assert.strictEqual(result.name, 'ComponentJsdoc');
 		assert.strictEqual(result.kind, 'component');
 	});
 
 	test('handles component without props', () => {
 		const file_path = join(FIXTURES_DIR, 'component_no_props/input.svelte');
-		const module_path = 'Component_No_Props.svelte';
+		const module_path = 'ComponentNoProps.svelte';
 
 		const result = svelte_analyze_file(file_path, module_path, checker);
 
-		assert.strictEqual(result.name, 'Component_No_Props');
+		assert.strictEqual(result.name, 'ComponentNoProps');
 		assert.strictEqual(result.kind, 'component');
 		// Props should be undefined or empty
 		assert.ok(!result.props || result.props.length === 0);
@@ -125,7 +125,7 @@ describe('svelte_analyze_file', () => {
 
 	test('extracts prop descriptions', () => {
 		const file_path = join(FIXTURES_DIR, 'props_with_descriptions/input.svelte');
-		const module_path = 'Props_Descriptions.svelte';
+		const module_path = 'PropsDescriptions.svelte';
 
 		const result = svelte_analyze_file(file_path, module_path, checker);
 
@@ -138,7 +138,7 @@ describe('svelte_analyze_file', () => {
 
 	test('detects optional props', () => {
 		const file_path = join(FIXTURES_DIR, 'props_optional/input.svelte');
-		const module_path = 'Props_Optional.svelte';
+		const module_path = 'PropsOptional.svelte';
 
 		const result = svelte_analyze_file(file_path, module_path, checker);
 
@@ -150,7 +150,7 @@ describe('svelte_analyze_file', () => {
 
 	test('detects bindable props', () => {
 		const file_path = join(FIXTURES_DIR, 'props_bindable/input.svelte');
-		const module_path = 'Props_Bindable.svelte';
+		const module_path = 'PropsBindable.svelte';
 
 		const result = svelte_analyze_file(file_path, module_path, checker);
 

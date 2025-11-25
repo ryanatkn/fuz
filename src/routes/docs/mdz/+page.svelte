@@ -3,11 +3,11 @@
 	import {resolve} from '$app/paths';
 
 	import {get_tome_by_name} from '$lib/tome.js';
-	import Tome_Content from '$lib/Tome_Content.svelte';
-	import Tome_Section from '$lib/Tome_Section.svelte';
-	import Tome_Section_Header from '$lib/Tome_Section_Header.svelte';
+	import TomeContent from '$lib/TomeContent.svelte';
+	import TomeSection from '$lib/TomeSection.svelte';
+	import TomeSectionHeader from '$lib/TomeSectionHeader.svelte';
 	import Mdz from '$lib/Mdz.svelte';
-	import Identifier_Link from '$lib/Identifier_Link.svelte';
+	import IdentifierLink from '$lib/IdentifierLink.svelte';
 	import {mdz_components_context, mdz_elements_context} from '$lib/mdz_components.js';
 	import Alert from '$lib/Alert.svelte';
 
@@ -47,7 +47,7 @@
 	let whitespace_example_el: HTMLDivElement;
 </script>
 
-<Tome_Content {tome}>
+<TomeContent {tome}>
 	<section>
 		<p>
 			mdz is a small markdown dialect that supports Svelte components, auto-detected URLs prefixed
@@ -75,24 +75,24 @@
 		</aside>
 	</section>
 
-	<Tome_Section>
-		<Tome_Section_Header text="Usage" />
+	<TomeSection>
+		<TomeSectionHeader text="Usage" />
 		<Mdz content="import `Mdz` from `mdz.ts`:" class="mb_lg" />
 		<Code content="import Mdz from '@ryanatkn/fuz/Mdz.svelte';" lang="ts" />
-	</Tome_Section>
+	</TomeSection>
 
-	<Tome_Section>
-		<Tome_Section_Header text="Basic formatting" />
+	<TomeSection>
+		<TomeSectionHeader text="Basic formatting" />
 		<p>Supports <strong>bold</strong>, <em>italic</em>, and strikethrough:</p>
 		<Code content={`<Mdz content="${basic_example}" />`} class="mb_lg" />
 		<Mdz content={basic_example} class="mb_xl5" />
 		<p>All inline formatting can nest:</p>
 		<Code content={`<Mdz content="${nesting_example}" />`} class="mb_lg" />
 		<Mdz content={nesting_example} class="mb_xl5" />
-	</Tome_Section>
+	</TomeSection>
 
-	<Tome_Section>
-		<Tome_Section_Header text="Preserves whitespace" />
+	<TomeSection>
+		<TomeSectionHeader text="Preserves whitespace" />
 		<p>
 			mdz preserves and renders all whitespace exactly as written, minimizing surprise for
 			nontechnical users:
@@ -113,10 +113,10 @@
 		>
 			select text to reveal whitespace
 		</button>
-	</Tome_Section>
+	</TomeSection>
 
-	<Tome_Section>
-		<Tome_Section_Header text="Line breaks and paragraphs" />
+	<TomeSection>
+		<TomeSectionHeader text="Line breaks and paragraphs" />
 		<p>Single newlines create line breaks:</p>
 		<Code content={linebreak_example} class="mb_lg" />
 		<Mdz content={linebreak_example} class="mb_xl5" />
@@ -126,10 +126,10 @@
 		<p>Triple newlines create paragraphs with a blank line between:</p>
 		<Code content={triple_linebreak_example} class="mb_lg" />
 		<Mdz content={triple_linebreak_example} class="mb_xl5" />
-	</Tome_Section>
+	</TomeSection>
 
-	<Tome_Section>
-		<Tome_Section_Header text="Horizontal rules" />
+	<TomeSection>
+		<TomeSectionHeader text="Horizontal rules" />
 		<p>
 			Use exactly three hyphens (<code>---</code>) at the start of a line to create a horizontal
 			rule. Must be separated from other content by blank lines (paragraph breaks), except at
@@ -137,20 +137,20 @@
 		</p>
 		<Code content={hr_example} class="mb_lg" />
 		<Mdz content={hr_example} class="mb_xl5" />
-	</Tome_Section>
+	</TomeSection>
 
-	<Tome_Section>
-		<Tome_Section_Header text="Inline code auto-linking" />
+	<TomeSection>
+		<TomeSectionHeader text="Inline code auto-linking" />
 		<p>Backtick code automatically links to identifiers and modules:</p>
 		<Code content={code_example} class="mb_lg" />
 		<Mdz content={code_example} class="mb_xl5" />
 		<p>Non-identifiers become plain code elements:</p>
 		<Code content={code_plain_example} class="mb_lg" />
 		<Mdz content={code_plain_example} class="mb_xl5" />
-	</Tome_Section>
+	</TomeSection>
 
-	<Tome_Section>
-		<Tome_Section_Header text="Links" />
+	<TomeSection>
+		<TomeSectionHeader text="Links" />
 		<p>mdz supports three kinds of links:</p>
 		<ul>
 			<li>standard markdown link syntax</li>
@@ -169,10 +169,10 @@
 			Root-relative paths (<code>/docs/...</code>) have unambiguous meaning regardless of render
 			location, making them more portable.
 		</p>
-	</Tome_Section>
+	</TomeSection>
 
-	<Tome_Section>
-		<Tome_Section_Header text="HTML elements" />
+	<TomeSection>
+		<TomeSectionHeader text="HTML elements" />
 		<p>mdz supports an opt-in set of HTML elements for semantic markup and styling.</p>
 		<Code content={element_aside_example} class="mb_lg" />
 		<Mdz content={element_aside_example} class="mb_xl5" />
@@ -193,10 +193,10 @@ mdz_elements_context.set(new Map([
 		<p>
 			Unregistered elements render as <Mdz content="<tag-name />" inline /> placeholders for security.
 		</p>
-	</Tome_Section>
+	</TomeSection>
 
-	<Tome_Section>
-		<Tome_Section_Header text="Svelte components" />
+	<TomeSection>
+		<TomeSectionHeader text="Svelte components" />
 		<p>
 			mdz supports Svelte components to a minimal (and possibly expanding) degree. Components are
 			distinguished from HTML elements by their uppercase first letter:
@@ -221,18 +221,18 @@ mdz_components_context.set(new Map([
 		<aside>
 			tip: You can put a <code>SvelteMap</code> in the component and element registries.
 		</aside>
-	</Tome_Section>
+	</TomeSection>
 
-	<Tome_Section>
-		<Tome_Section_Header text="Advanced usage" />
+	<TomeSection>
+		<TomeSectionHeader text="Advanced usage" />
 		<p>
-			For more control, use <Identifier_Link name="mdz_parse" /> directly with <Identifier_Link
-				name="Mdz_Node_View"
+			For more control, use <IdentifierLink name="mdz_parse" /> directly with <IdentifierLink
+				name="MdzNodeView"
 			/>:
 		</p>
 		<Code
 			content={`import {mdz_parse} from '@ryanatkn/fuz/mdz.js';
-import Mdz_Node_View from '@ryanatkn/fuz/Mdz_Node_View.svelte';
+import MdzNodeView from '@ryanatkn/fuz/MdzNodeView.svelte';
 
 const nodes = mdz_parse(content);`}
 			lang="ts"
@@ -241,7 +241,7 @@ const nodes = mdz_parse(content);`}
 		<Code
 			content={`<div class="custom white_space_pre_wrap">
 	{#each nodes as node}
-		<Mdz_Node_View {node} />
+		<MdzNodeView {node} />
 	{/each}
 </div>`}
 			class="mb_lg"
@@ -249,10 +249,10 @@ const nodes = mdz_parse(content);`}
 		<p>
 			For example you may want <code>white_space_pre</code> to avoid wrapping in some circumstances.
 		</p>
-	</Tome_Section>
+	</TomeSection>
 
-	<Tome_Section>
-		<Tome_Section_Header text="Headings" />
+	<TomeSection>
+		<TomeSectionHeader text="Headings" />
 		<p>Use 1-6 hashes followed by a space:</p>
 		<Code content={heading_example} class="mb_lg" />
 		<Mdz content={heading_example} class="mb_xl5" />
@@ -260,10 +260,10 @@ const nodes = mdz_parse(content);`}
 			Must start at column 0, have a space after hashes, and be followed by a blank line or EOF.
 			Headings can include inline formatting.
 		</p>
-	</Tome_Section>
+	</TomeSection>
 
-	<Tome_Section>
-		<Tome_Section_Header text="Code blocks" />
+	<TomeSection>
+		<TomeSectionHeader text="Code blocks" />
 		<p>Use three or more backticks with optional language hint:</p>
 		<Code content={code_block_example} class="mb_lg" />
 		<Mdz content={code_block_example} class="mb_xl5" />
@@ -271,10 +271,10 @@ const nodes = mdz_parse(content);`}
 			Must start at column 0, closing fence must match opening length, and be followed by a blank
 			line or EOF.
 		</p>
-	</Tome_Section>
+	</TomeSection>
 
-	<Tome_Section>
-		<Tome_Section_Header text="Compatibility with other markdowns" />
+	<TomeSection>
+		<TomeSectionHeader text="Compatibility with other markdowns" />
 		<p>mdz supports fewer syntax variants than CommonMark/GFM:</p>
 		<ul>
 			<li>bold: <code>**text**</code> only</li>
@@ -290,10 +290,10 @@ const nodes = mdz_parse(content);`}
 			separating blank line and <code>```</code> with no preceding spaces or characters to start a code
 			block.
 		</p>
-	</Tome_Section>
+	</TomeSection>
 
-	<Tome_Section>
-		<Tome_Section_Header text="Generated docs" />
+	<TomeSection>
+		<TomeSectionHeader text="Generated docs" />
 		<p>For more see the generated mdz docs:</p>
 		<ul>
 			<li>
@@ -312,5 +312,5 @@ const nodes = mdz_parse(content);`}
 				</strong>
 			</li>
 		</ul>
-	</Tome_Section>
-</Tome_Content>
+	</TomeSection>
+</TomeContent>

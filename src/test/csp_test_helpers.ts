@@ -1,5 +1,5 @@
 import {assert} from 'vitest';
-import type {Csp_Trust_Level, Csp_Source_Spec, Csp_Directives, Csp_Directive} from '$lib/csp.js';
+import type {CspTrustLevel, CspSourceSpec, CspDirectives, CspDirective} from '$lib/csp.js';
 
 // Test domain constants
 export const TEST_SOURCES = {
@@ -22,7 +22,7 @@ export const TEST_SOURCES = {
 /**
  * Creates a test source spec with a trust level.
  */
-export const create_test_source = (source: string, trust: Csp_Trust_Level): Csp_Source_Spec => ({
+export const create_test_source = (source: string, trust: CspTrustLevel): CspSourceSpec => ({
 	source: source as any,
 	trust,
 });
@@ -32,8 +32,8 @@ export const create_test_source = (source: string, trust: Csp_Trust_Level): Csp_
  */
 export const create_test_source_with_directives = (
 	source: string,
-	directives: Array<Csp_Directive>,
-): Csp_Source_Spec => ({
+	directives: Array<CspDirective>,
+): CspSourceSpec => ({
 	source: source as any,
 	directives,
 });
@@ -43,9 +43,9 @@ export const create_test_source_with_directives = (
  */
 export const create_test_source_with_both = (
 	source: string,
-	trust: Csp_Trust_Level,
-	directives: Array<Csp_Directive>,
-): Csp_Source_Spec => ({
+	trust: CspTrustLevel,
+	directives: Array<CspDirective>,
+): CspSourceSpec => ({
 	source: source as any,
 	trust,
 	directives,
@@ -55,8 +55,8 @@ export const create_test_source_with_both = (
  * Asserts that a source is included in a directive.
  */
 export const assert_source_in_directive = (
-	csp: Csp_Directives,
-	directive: Csp_Directive,
+	csp: CspDirectives,
+	directive: CspDirective,
 	source: string,
 	message?: string,
 ): void => {
@@ -71,8 +71,8 @@ export const assert_source_in_directive = (
  * Asserts that a source is not included in a directive.
  */
 export const assert_source_not_in_directive = (
-	csp: Csp_Directives,
-	directive: Csp_Directive,
+	csp: CspDirectives,
+	directive: CspDirective,
 	source: string,
 	message?: string,
 ): void => {
@@ -87,8 +87,8 @@ export const assert_source_not_in_directive = (
  * Asserts that a directive exists in the CSP.
  */
 export const assert_directive_exists = (
-	csp: Csp_Directives,
-	directive: Csp_Directive,
+	csp: CspDirectives,
+	directive: CspDirective,
 	message?: string,
 ): void => {
 	assert.ok(directive in csp, message || `${directive} should exist in CSP`);
@@ -98,8 +98,8 @@ export const assert_directive_exists = (
  * Asserts that a directive does not exist in the CSP.
  */
 export const assert_directive_not_exists = (
-	csp: Csp_Directives,
-	directive: Csp_Directive,
+	csp: CspDirectives,
+	directive: CspDirective,
 	message?: string,
 ): void => {
 	assert.ok(!(directive in csp), message || `${directive} should not exist in CSP`);
@@ -109,8 +109,8 @@ export const assert_directive_not_exists = (
  * Asserts that a directive has a specific value.
  */
 export const assert_directive_equals = (
-	csp: Csp_Directives,
-	directive: Csp_Directive,
+	csp: CspDirectives,
+	directive: CspDirective,
 	expected: any,
 	message?: string,
 ): void => {

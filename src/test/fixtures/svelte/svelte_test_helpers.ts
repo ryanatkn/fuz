@@ -1,32 +1,32 @@
-import type {Identifier_Json} from '@ryanatkn/belt/src_json.js';
+import type {IdentifierJson} from '@ryanatkn/belt/src_json.js';
 
 import {load_fixtures_generic} from '../../test_helpers.js';
 
-export interface Svelte_Fixture {
+export interface SvelteFixture {
 	name: string;
 	input: string;
-	expected: Identifier_Json;
+	expected: IdentifierJson;
 }
 
 /**
  * Convert a fixture name to a component name.
- * Transforms snake_case to Upper_Snake_Case (e.g., "basic_props" -> "Basic_Props").
+ * Transforms snake_case to PascalCase (e.g., "basic_props" -> "BasicProps").
  *
  * @param name - The fixture name in snake_case
- * @returns The component name in Upper_Snake_Case
+ * @returns The component name in PascalCase
  */
 export const fixture_name_to_component_name = (name: string): string => {
 	return name
 		.split('_')
 		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-		.join('_');
+		.join('');
 };
 
 /**
  * Load all fixtures from the svelte fixtures directory.
  */
-export const load_fixtures = async (): Promise<Array<Svelte_Fixture>> => {
-	return load_fixtures_generic<Identifier_Json>({
+export const load_fixtures = async (): Promise<Array<SvelteFixture>> => {
+	return load_fixtures_generic<IdentifierJson>({
 		fixtures_dir: import.meta.dirname,
 		input_extension: '.svelte',
 	});
@@ -35,7 +35,7 @@ export const load_fixtures = async (): Promise<Array<Svelte_Fixture>> => {
 /**
  * Validate that a parsed Svelte component has the expected structure.
  */
-export const validate_component_structure = (component: Identifier_Json): void => {
+export const validate_component_structure = (component: IdentifierJson): void => {
 	if (!component) {
 		throw new Error('Expected component to be defined');
 	}

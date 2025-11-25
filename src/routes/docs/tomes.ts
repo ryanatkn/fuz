@@ -1,21 +1,21 @@
 import type {Tome} from '$lib/tome.js';
 import introduction from '$routes/docs/introduction/+page.svelte';
-import Themed from '$routes/docs/themed/+page.svelte';
-import Pending_Animation from '$routes/docs/pending_animation/+page.svelte';
-import Pending_Button from '$routes/docs/pending_button/+page.svelte';
-import Package_Summary from '$routes/docs/package_summary/+page.svelte';
-import Package_Detail from '$routes/docs/package_detail/+page.svelte';
-import Details from '$routes/docs/details/+page.svelte';
-import Dialog from '$routes/docs/dialog/+page.svelte';
-import Teleport from '$routes/docs/teleport/+page.svelte';
-import Alert from '$routes/docs/alert/+page.svelte';
-import Docs from '$routes/docs/docs/+page.svelte';
-import Contextmenu from '$routes/docs/contextmenu/+page.svelte';
-import Redirect from '$routes/docs/redirect/+page.svelte';
-import Hue_Input from '$routes/docs/hue_input/+page.svelte';
-import Breadcrumb from '$routes/docs/breadcrumb/+page.svelte';
-import Card from '$routes/docs/card/+page.svelte';
-import Svg from '$routes/docs/svg/+page.svelte';
+import Themed from '$routes/docs/Themed/+page.svelte';
+import PendingAnimation from '$routes/docs/PendingAnimation/+page.svelte';
+import PendingButton from '$routes/docs/PendingButton/+page.svelte';
+import PackageSummary from '$routes/docs/PackageSummary/+page.svelte';
+import PackageDetail from '$routes/docs/PackageDetail/+page.svelte';
+import Details from '$routes/docs/Details/+page.svelte';
+import Dialog from '$routes/docs/Dialog/+page.svelte';
+import Teleport from '$routes/docs/Teleport/+page.svelte';
+import Alert from '$routes/docs/Alert/+page.svelte';
+import Docs from '$routes/docs/Docs/+page.svelte';
+import Contextmenu from '$routes/docs/Contextmenu/+page.svelte';
+import Redirect from '$routes/docs/Redirect/+page.svelte';
+import HueInput from '$routes/docs/HueInput/+page.svelte';
+import Breadcrumb from '$routes/docs/Breadcrumb/+page.svelte';
+import Card from '$routes/docs/Card/+page.svelte';
+import Svg from '$routes/docs/Svg/+page.svelte';
 import csp from '$routes/docs/csp/+page.svelte';
 import logos from '$routes/docs/logos/+page.svelte';
 import theming from '$routes/docs/theming/+page.svelte';
@@ -74,7 +74,7 @@ export const tomes: Array<Tome> = [
 		name: 'logos',
 		category: 'helpers',
 		Component: logos,
-		related_tomes: ['Package_Detail', 'Package_Summary', 'Svg'],
+		related_tomes: ['PackageDetail', 'PackageSummary', 'Svg'],
 		related_modules: ['logos.ts'],
 		related_identifiers: [],
 	},
@@ -84,7 +84,7 @@ export const tomes: Array<Tome> = [
 		Component: mdz,
 		related_tomes: [],
 		related_modules: ['mdz.ts'],
-		related_identifiers: ['Mdz', 'mdz_parse', 'Mdz_Node_View'],
+		related_identifiers: ['Mdz', 'mdz_parse', 'MdzNodeView'],
 	},
 	{
 		name: 'Alert',
@@ -116,7 +116,7 @@ export const tomes: Array<Tome> = [
 		Component: Contextmenu,
 		related_tomes: [],
 		related_modules: ['contextmenu_helpers.ts', 'contextmenu_state.svelte.ts'],
-		related_identifiers: ['Contextmenu', 'Contextmenu_Root', 'Contextmenu_Entry'],
+		related_identifiers: ['Contextmenu', 'ContextmenuRoot', 'ContextmenuEntry'],
 	},
 	{
 		name: 'Details',
@@ -135,12 +135,12 @@ export const tomes: Array<Tome> = [
 		related_identifiers: ['Dialog', 'Dialogs'],
 	},
 	{
-		name: 'Hue_Input',
+		name: 'HueInput',
 		category: 'components',
-		Component: Hue_Input,
+		Component: HueInput,
 		related_tomes: [], // TODO externals?
 		related_modules: [],
-		related_identifiers: ['Hue_Input'],
+		related_identifiers: ['HueInput'],
 	},
 	{
 		name: 'Docs',
@@ -151,36 +151,36 @@ export const tomes: Array<Tome> = [
 		related_identifiers: ['Docs'],
 	},
 	{
-		name: 'Package_Detail',
+		name: 'PackageDetail',
 		category: 'components',
-		Component: Package_Detail,
-		related_tomes: ['api', 'logos', 'Package_Summary'],
+		Component: PackageDetail,
+		related_tomes: ['api', 'logos', 'PackageSummary'],
 		related_modules: [],
-		related_identifiers: ['Package_Detail'],
+		related_identifiers: ['PackageDetail'],
 	},
 	{
-		name: 'Package_Summary',
+		name: 'PackageSummary',
 		category: 'components',
-		Component: Package_Summary,
-		related_tomes: ['api', 'logos', 'Package_Detail'],
+		Component: PackageSummary,
+		related_tomes: ['api', 'logos', 'PackageDetail'],
 		related_modules: [],
-		related_identifiers: ['Package_Summary'],
+		related_identifiers: ['PackageSummary'],
 	},
 	{
-		name: 'Pending_Animation',
+		name: 'PendingAnimation',
 		category: 'components',
-		Component: Pending_Animation,
-		related_tomes: ['Pending_Button'],
+		Component: PendingAnimation,
+		related_tomes: ['PendingButton'],
 		related_modules: [],
-		related_identifiers: ['Pending_Animation'],
+		related_identifiers: ['PendingAnimation'],
 	},
 	{
-		name: 'Pending_Button',
+		name: 'PendingButton',
 		category: 'components',
-		Component: Pending_Button,
-		related_tomes: ['Pending_Animation'],
+		Component: PendingButton,
+		related_tomes: ['PendingAnimation'],
 		related_modules: [],
-		related_identifiers: ['Pending_Button'],
+		related_identifiers: ['PendingButton'],
 	},
 	{
 		name: 'Redirect',

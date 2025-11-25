@@ -5,17 +5,13 @@
  */
 
 import ts from 'typescript';
-import type {
-	Identifier_Json,
-	Generic_Param_Info,
-	Identifier_Kind,
-} from '@ryanatkn/belt/src_json.js';
+import type {IdentifierJson, GenericParamInfo, IdentifierKind} from '@ryanatkn/belt/src_json.js';
 
 import {tsdoc_parse, tsdoc_apply_to_declaration} from './tsdoc_helpers.js';
 import {module_extract_path, module_matches_source} from './module_helpers.js';
 
-const ts_parse_generic_param = (param: ts.TypeParameterDeclaration): Generic_Param_Info => {
-	const result: Generic_Param_Info = {
+const ts_parse_generic_param = (param: ts.TypeParameterDeclaration): GenericParamInfo => {
+	const result: GenericParamInfo = {
 		name: param.name.text,
 	};
 
@@ -56,7 +52,7 @@ const ts_extract_modifiers = (
 /**
  * Infer declaration kind from symbol and node.
  */
-export const ts_infer_declaration_kind = (symbol: ts.Symbol, node: ts.Node): Identifier_Kind => {
+export const ts_infer_declaration_kind = (symbol: ts.Symbol, node: ts.Node): IdentifierKind => {
 	// Check symbol flags
 	if (symbol.flags & ts.SymbolFlags.Class) return 'class';
 	if (symbol.flags & ts.SymbolFlags.Function) return 'function';
@@ -90,7 +86,7 @@ export const ts_extract_function_info = (
 	node: ts.Node,
 	symbol: ts.Symbol,
 	checker: ts.TypeChecker,
-	identifier: Identifier_Json,
+	identifier: IdentifierJson,
 	tsdoc: ReturnType<typeof tsdoc_parse>,
 ): void => {
 	try {
@@ -161,7 +157,7 @@ export const ts_extract_type_info = (
 	node: ts.Node,
 	_symbol: ts.Symbol,
 	checker: ts.TypeChecker,
-	identifier: Identifier_Json,
+	identifier: IdentifierJson,
 ): void => {
 	try {
 		const type = checker.getTypeAtLocation(node);
@@ -188,7 +184,7 @@ export const ts_extract_type_info = (
 		for (const member of node.members) {
 			if (ts.isPropertySignature(member) && ts.isIdentifier(member.name)) {
 				const prop_name = member.name.text;
-				const prop_identifier: Identifier_Json = {
+				const prop_identifier: IdentifierJson = {
 					name: prop_name,
 					kind: 'variable',
 				};
@@ -225,7 +221,7 @@ export const ts_extract_class_info = (
 	node: ts.Node,
 	_symbol: ts.Symbol,
 	checker: ts.TypeChecker,
-	identifier: Identifier_Json,
+	identifier: IdentifierJson,
 ): void => {
 	if (!ts.isClassDeclaration(node)) return;
 
@@ -262,7 +258,7 @@ export const ts_extract_class_info = (
 			// Skip private fields (those starting with #)
 			if (member_name.startsWith('#')) continue;
 
-			const member_identifier: Identifier_Json = {
+			const member_identifier: IdentifierJson = {
 				name: member_name,
 				kind: is_constructor
 					? 'constructor'
@@ -374,7 +370,7 @@ export const ts_extract_variable_info = (
 	node: ts.Node,
 	symbol: ts.Symbol,
 	checker: ts.TypeChecker,
-	identifier: Identifier_Json,
+	identifier: IdentifierJson,
 ): void => {
 	try {
 		const type = checker.getTypeOfSymbolAtLocation(symbol, node);
@@ -387,9 +383,9 @@ export const ts_extract_variable_info = (
 /**
  * Result of analyzing a single identifier.
  */
-export interface Ts_Identifier_Analysis {
+export interface TsIdentifierAnalysis {
 	/** The analyzed identifier metadata. */
-	identifier: Identifier_Json;
+	identifier: IdentifierJson;
 	/** Whether the identifier is marked @nodocs (should be excluded from documentation). */
 	nodocs: boolean;
 }
@@ -410,14 +406,14 @@ export const ts_analyze_identifier = (
 	symbol: ts.Symbol,
 	source_file: ts.SourceFile,
 	checker: ts.TypeChecker,
-): Ts_Identifier_Analysis => {
+): TsIdentifierAnalysis => {
 	const name = symbol.name;
 	const decl_node = symbol.valueDeclaration || symbol.declarations?.[0];
 
 	// Determine kind (fallback to 'variable' if no declaration node)
 	const kind = decl_node ? ts_infer_declaration_kind(symbol, decl_node) : 'variable';
 
-	const result: Identifier_Json = {
+	const result: IdentifierJson = {
 		name,
 		kind,
 	};
@@ -454,7 +450,7 @@ export const ts_analyze_identifier = (
  * Information about a same-name re-export.
  * Used for post-processing to build `also_exported_from` arrays.
  */
-export interface Re_Export_Info {
+export interface ReExportInfo {
 	/** Name of the re-exported identifier. */
 	name: string;
 	/** Module path (relative to src/lib) where the identifier is originally declared. */
@@ -464,13 +460,13 @@ export interface Re_Export_Info {
 /**
  * Result of analyzing a module's exports.
  */
-export interface Module_Exports_Analysis {
+export interface ModuleExportsAnalysis {
 	/** Module-level documentation comment. */
 	module_comment?: string;
 	/** All exported identifiers with their metadata (excludes same-name re-exports). */
-	identifiers: Array<Identifier_Json>;
+	identifiers: Array<IdentifierJson>;
 	/** Same-name re-exports (for building also_exported_from in post-processing). */
-	re_exports: Array<Re_Export_Info>;
+	re_exports: Array<ReExportInfo>;
 }
 
 /**
@@ -490,9 +486,9 @@ export interface Module_Exports_Analysis {
 export const ts_analyze_module_exports = (
 	source_file: ts.SourceFile,
 	checker: ts.TypeChecker,
-): Module_Exports_Analysis => {
-	const identifiers: Array<Identifier_Json> = [];
-	const re_exports: Array<Re_Export_Info> = [];
+): ModuleExportsAnalysis => {
+	const identifiers: Array<IdentifierJson> = [];
+	const re_exports: Array<ReExportInfo> = [];
 
 	// Extract module-level comment
 	const module_comment = ts_extract_module_comment(source_file);
@@ -524,7 +520,7 @@ export const ts_analyze_module_exports = (
 							if (is_renamed) {
 								// Renamed re-export (export {foo as bar}) - create new identifier with alias_of
 								const kind = ts_infer_declaration_kind(aliased_symbol, aliased_decl);
-								const identifier: Identifier_Json = {
+								const identifier: IdentifierJson = {
 									name: export_symbol.name,
 									kind,
 									alias_of: {module: original_module, name: original_name},
