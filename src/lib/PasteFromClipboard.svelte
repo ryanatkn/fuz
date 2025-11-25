@@ -4,13 +4,13 @@
 	// TODO @many should this have the Button suffix?
 
 	const {
-		onpaste,
+		onclipboardtext,
 		onerror,
 		children,
 		class: class_prop,
 		...rest
 	}: SvelteHTMLElements['button'] & {
-		onpaste: (text: string) => void;
+		onclipboardtext: (text: string) => void;
 		onerror?: (error: Error) => void;
 	} = $props();
 
@@ -25,7 +25,7 @@
 	onclick={async () => {
 		try {
 			const text = await navigator.clipboard.readText();
-			onpaste(text);
+			onclipboardtext(text);
 		} catch (err) {
 			onerror?.(err);
 		}

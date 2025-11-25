@@ -4960,7 +4960,7 @@ export const src_json: SrcJson = {
 					kind: 'component',
 					props: [
 						{
-							name: 'onpaste',
+							name: 'onclipboardtext',
 							type: '(text: string) => void',
 							optional: false,
 						},
