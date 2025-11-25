@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.163.0
+
+### Minor Changes
+
+- rename `PasteFromClipboard` prop `onclipboardtext` from `onpaste` to avoid conflict ([515f9d3](https://github.com/ryanatkn/fuz/commit/515f9d3))
+
 ## 0.162.1
 
 ### Patch Changes
