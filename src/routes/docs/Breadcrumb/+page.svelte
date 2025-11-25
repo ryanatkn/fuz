@@ -4,7 +4,7 @@
 	import {get_tome_by_name} from '$lib/tome.js';
 	import Breadcrumb from '$lib/Breadcrumb.svelte';
 	import TomeContent from '$lib/TomeContent.svelte';
-	import BreadcrumbExample from '$routes/docs/breadcrumb/BreadcrumbExample.svelte';
+	import BreadcrumbExample from '$routes/docs/Breadcrumb/BreadcrumbExample.svelte';
 	import TomeSectionHeader from '$lib/TomeSectionHeader.svelte';
 	import TomeSection from '$lib/TomeSection.svelte';
 

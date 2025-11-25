@@ -2,8 +2,8 @@
 	import ContextmenuEntry from '$lib/ContextmenuEntry.svelte';
 	import ContextmenuSubmenu from '$lib/ContextmenuSubmenu.svelte';
 	import ContextmenuSeparator from '$lib/ContextmenuSeparator.svelte';
-	import {to_cats_label, type Cat, type HistoryItem} from '$routes/docs/contextmenu/helpers.js';
-	import CatContextmenu from '$routes/docs/contextmenu/CatContextmenu.svelte';
+	import {to_cats_label, type Cat, type HistoryItem} from '$routes/docs/Contextmenu/helpers.js';
+	import CatContextmenu from '$routes/docs/Contextmenu/CatContextmenu.svelte';
 
 	const {
 		home_cats,

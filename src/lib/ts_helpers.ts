@@ -5,11 +5,7 @@
  */
 
 import ts from 'typescript';
-import type {
-	IdentifierJson,
-	GenericParamInfo,
-	IdentifierKind,
-} from '@ryanatkn/belt/src_json.js';
+import type {IdentifierJson, GenericParamInfo, IdentifierKind} from '@ryanatkn/belt/src_json.js';
 
 import {tsdoc_parse, tsdoc_apply_to_declaration} from './tsdoc_helpers.js';
 import {module_extract_path, module_matches_source} from './module_helpers.js';

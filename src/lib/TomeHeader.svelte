@@ -2,7 +2,6 @@
 	import {page} from '$app/state';
 	import {onDestroy} from 'svelte';
 	import {DEV} from 'esm-env';
-	import {slugify} from '@ryanatkn/belt/path.js';
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
 	import {tome_context} from './tome.js';
@@ -17,8 +16,8 @@
 
 	const docs_links = docs_links_context.get();
 
-	const fragment = docs_slugify(tome.name); // case-preserving for anchor IDs
-	const path_slug = slugify(tome.name); // lowercase for URLs
+	const fragment = docs_slugify(tome.name);
+	const path_slug = docs_slugify(tome.name);
 	const id = docs_links.add(fragment, tome.name, page.url.pathname);
 
 	onDestroy(() => {

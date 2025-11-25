@@ -31,8 +31,7 @@
 	<ul class="unstyled">
 		{#each Object.entries(tomes_by_category) as [category, tomes] (category)}
 			<li class="category">
-				{#if children}{@render children(category)}{:else}<DocsMenuHeader
-						>{category}</DocsMenuHeader
+				{#if children}{@render children(category)}{:else}<DocsMenuHeader>{category}</DocsMenuHeader
 					>{/if}
 				<ul class="unstyled">
 					{#each tomes as item (item)}

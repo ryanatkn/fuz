@@ -77,8 +77,8 @@
 					This lets you call <code>themer_context.get()</code> to access the reactive
 					<code>Themer</code>
 					class instance anywhere in your code. The helper components on this page like
-					<code>ColorSchemeInput</code> and <code>ThemeInput</code> use it so they don't require
-					a <code>themer</code> prop.
+					<code>ColorSchemeInput</code> and <code>ThemeInput</code> use it so they don't require a
+					<code>themer</code> prop.
 				</p>
 				<p>
 					If you don't don't want to wrap everything in <code>Themed</code> for some reason, you can

@@ -22,10 +22,7 @@
 				>Gro's public packages</a
 			> features.
 		</p>
-		<Code
-			content={`import PackageSummary from '@ryanatkn/fuz/PackageSummary.svelte';`}
-			lang="ts"
-		/>
+		<Code content={`import PackageSummary from '@ryanatkn/fuz/PackageSummary.svelte';`} lang="ts" />
 		<Code content={`<PackageSummary {pkg} />`} />
 	</section>
 	<section>

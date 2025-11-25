@@ -840,7 +840,7 @@ export const src_json: SrcJson = {
 				{
 					name: 'ContextmenuStateOptions',
 					kind: 'type',
-					source_line: 76,
+					source_line: 74,
 					type_signature: 'ContextmenuStateOptions',
 					properties: [
 						{
@@ -856,7 +856,7 @@ export const src_json: SrcJson = {
 					doc_comment:
 						'Creates a `contextmenu` store.\nSee usage with `ContextmenuRoot.svelte` and `Contextmenu.svelte`.',
 					see_also: ['https://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event'],
-					source_line: 86,
+					source_line: 84,
 					members: [
 						{
 							name: 'layout',
@@ -1093,7 +1093,7 @@ export const src_json: SrcJson = {
 					name: 'contextmenu_attachment',
 					kind: 'function',
 					doc_comment: 'Creates an attachment that sets up contextmenu behavior on an element.',
-					source_line: 351,
+					source_line: 349,
 					type_signature:
 						'<T extends ContextmenuParams, U extends T | Array<T>>(params: U | null | undefined): Attachment<HTMLElement | SVGElement>',
 					return_type: 'Attachment<HTMLElement | SVGElement>',
@@ -1109,7 +1109,7 @@ export const src_json: SrcJson = {
 				{
 					name: 'ContextmenuOpenOptions',
 					kind: 'type',
-					source_line: 375,
+					source_line: 373,
 					type_signature: 'ContextmenuOpenOptions',
 					properties: [
 						{
@@ -1139,7 +1139,7 @@ export const src_json: SrcJson = {
 					kind: 'function',
 					doc_comment:
 						'Opens the contextmenu, if appropriate,\nquerying the menu items from the DOM starting at the event target.',
-					source_line: 392,
+					source_line: 390,
 					type_signature:
 						'(target: HTMLElement | SVGElement, x: number, y: number, contextmenu: ContextmenuState, options?: ContextmenuOpenOptions | undefined): boolean',
 					return_type: 'boolean',
@@ -1182,21 +1182,21 @@ export const src_json: SrcJson = {
 				{
 					name: 'contextmenu_context',
 					kind: 'variable',
-					source_line: 479,
+					source_line: 477,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => ContextmenuState; get_maybe: () => ContextmenuState | undefined; set: (value: ContextmenuState) => ContextmenuState; }',
 				},
 				{
 					name: 'contextmenu_submenu_context',
 					kind: 'variable',
-					source_line: 481,
+					source_line: 479,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => SubmenuState; get_maybe: () => SubmenuState | undefined; set: (value: SubmenuState) => SubmenuState; }',
 				},
 				{
 					name: 'contextmenu_dimensions_context',
 					kind: 'variable',
-					source_line: 483,
+					source_line: 481,
 					type_signature:
 						'{ get: () => Dimensions; set: (value?: Dimensions | undefined) => Dimensions; }',
 				},
@@ -1205,7 +1205,7 @@ export const src_json: SrcJson = {
 					kind: 'function',
 					doc_comment:
 						'Registers a contextmenu root and warns if multiple non-scoped roots are detected.\nOnly active in development mode. Automatically handles cleanup on unmount.',
-					source_line: 494,
+					source_line: 492,
 					type_signature: '(get_scoped: () => boolean): void',
 					return_type: 'void',
 					parameters: [
@@ -1881,87 +1881,87 @@ export const src_json: SrcJson = {
 					see_also: [
 						'https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy',
 					],
-					source_line: 344,
+					source_line: 343,
 					type_signature: 'CspDirectiveSpec[]',
 				},
 				{
 					name: 'csp_directive_spec_by_name',
 					kind: 'variable',
-					source_line: 482,
+					source_line: 481,
 					type_signature: 'Map<keyof CspDirectives, CspDirectiveSpec>',
 				},
 				{
 					name: 'CspActionSource',
 					kind: 'type',
-					source_line: 514,
+					source_line: 513,
 					type_signature: 'CspActionSource',
 				},
 				{
 					name: 'CspBaseSource',
 					kind: 'type',
-					source_line: 515,
+					source_line: 514,
 					type_signature: 'CspBaseSource',
 				},
 				{
 					name: 'CspCryptoSource',
 					kind: 'type',
-					source_line: 522,
+					source_line: 521,
 					type_signature:
 						'`nonce-${string}` | `sha256-${string}` | `sha384-${string}` | `sha512-${string}`',
 				},
 				{
 					name: 'CspFrameSource',
 					kind: 'type',
-					source_line: 523,
+					source_line: 522,
 					type_signature: 'CspFrameSource',
 				},
 				{
 					name: 'CspHostNameScheme',
 					kind: 'type',
-					source_line: 524,
+					source_line: 523,
 					type_signature: 'CspHostNameScheme',
 				},
 				{
 					name: 'CspHostSource',
 					kind: 'type',
-					source_line: 525,
+					source_line: 524,
 					type_signature:
 						'`${string}.${string}` | "localhost" | `${string}.${string}:${number}` | `${string}.${string}:*` | `localhost:${number}` | "localhost:*" | `${string}://${string}.${string}` | `${string}://${string}.${string}:${number}` | `${string}://${string}.${string}:*` | `${string}://localhost` | `${string}://localhost:${number}`...',
 				},
 				{
 					name: 'CspHostProtocolSchemes',
 					kind: 'type',
-					source_line: 527,
+					source_line: 525,
 					type_signature: 'CspHostProtocolSchemes',
 				},
 				{
 					name: 'CspPortScheme',
 					kind: 'type',
-					source_line: 528,
+					source_line: 526,
 					type_signature: 'CspPortScheme',
 				},
 				{
 					name: 'CspSchemeSource',
 					kind: 'type',
-					source_line: 529,
+					source_line: 527,
 					type_signature: 'CspSchemeSource',
 				},
 				{
 					name: 'CspSource',
 					kind: 'type',
-					source_line: 536,
+					source_line: 534,
 					type_signature: 'CspSource',
 				},
 				{
 					name: 'CspSources',
 					kind: 'type',
-					source_line: 537,
+					source_line: 535,
 					type_signature: 'CspSources',
 				},
 				{
 					name: 'CspDirectives',
 					kind: 'type',
-					source_line: 539,
+					source_line: 537,
 					type_signature: 'CspDirectives',
 					properties: [
 						{
@@ -2230,7 +2230,7 @@ export const src_json: SrcJson = {
 					kind: 'variable',
 					source_line: 29,
 					type_signature:
-						'"/docs" | "/" | "/about" | "/docs/alert" | "/docs/api" | "/docs/breadcrumb" | "/docs/breadcrumb/a" | "/docs/breadcrumb/a/b" | "/docs/breadcrumb/a/b/c" | "/docs/breadcrumb/a/b/c/d" | ... 93 more ... | `/${string}/help/`',
+						'"/docs" | "/" | "/about" | "/docs/Alert" | "/docs/Breadcrumb" | "/docs/Breadcrumb/a" | "/docs/Breadcrumb/a/b" | "/docs/Breadcrumb/a/b/c" | "/docs/Breadcrumb/a/b/c/d" | "/docs/Card" | ... 94 more ... | `/${string}/help/`',
 				},
 				{
 					name: 'DOCS_API_PATH',
@@ -5896,14 +5896,14 @@ export const src_json: SrcJson = {
 				{
 					name: 'Tome',
 					kind: 'type',
-					source_line: 9,
+					source_line: 8,
 					type_signature:
 						'ZodObject<{ name: ZodString; category: ZodString; Component: ZodCustom<Component<any, any, string>, Component<any, any, string>>; related_tomes: ZodArray<...>; related_modules: ZodArray<...>; related_identifiers: ZodArray<...>; }, $strip>',
 				},
 				{
 					name: 'to_tome_pathname',
 					kind: 'function',
-					source_line: 20,
+					source_line: 19,
 					type_signature:
 						'(item: string | { name: string; category: string; Component: Component<any, any, string>; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }, docs_path?: string, hash?: string | undefined): string',
 					return_type: 'string',
@@ -5929,14 +5929,14 @@ export const src_json: SrcJson = {
 				{
 					name: 'tomes_context',
 					kind: 'variable',
-					source_line: 30,
+					source_line: 29,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => Map<string, { name: string; category: string; Component: Component<any, any, string>; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }>; get_maybe: () => Map<...> | undefined; set: (value: Map<...>) => Map<...>; }',
 				},
 				{
 					name: 'get_tome_by_name',
 					kind: 'function',
-					source_line: 32,
+					source_line: 31,
 					type_signature:
 						'(name: string): { name: string; category: string; Component: Component<any, any, string>; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }',
 					return_type:
@@ -5952,7 +5952,7 @@ export const src_json: SrcJson = {
 				{
 					name: 'tome_context',
 					kind: 'variable',
-					source_line: 39,
+					source_line: 38,
 					type_signature:
 						'{ get: (error_message?: string | undefined) => { name: string; category: string; Component: Component<any, any, string>; related_tomes: string[]; related_modules: string[]; related_identifiers: string[]; }; get_maybe: () => { ...; } | undefined; set: (value: { ...; }) => { ...; }; }',
 				},
@@ -6110,7 +6110,7 @@ export const src_json: SrcJson = {
 					name: 'ts_infer_declaration_kind',
 					kind: 'function',
 					doc_comment: 'Infer declaration kind from symbol and node.',
-					source_line: 59,
+					source_line: 55,
 					type_signature:
 						'(symbol: Symbol, node: Node): "function" | "type" | "json" | "variable" | "class" | "constructor" | "component" | "css"',
 					return_type:
@@ -6133,7 +6133,7 @@ export const src_json: SrcJson = {
 					kind: 'function',
 					doc_comment:
 						'Extract function/method information including parameters\nwith descriptions and default values.',
-					source_line: 89,
+					source_line: 85,
 					type_signature:
 						'(node: Node, symbol: Symbol, checker: TypeChecker, identifier: { [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "constructor" | "component" | "css"; ... 19 more ...; alias_of?: { ...; } | undefined; }, tsdoc: TsdocParsedComment | undefined): void',
 					return_type: 'void',
@@ -6169,7 +6169,7 @@ export const src_json: SrcJson = {
 					name: 'ts_extract_type_info',
 					kind: 'function',
 					doc_comment: 'Extract type/interface information with rich property metadata.',
-					source_line: 160,
+					source_line: 156,
 					type_signature:
 						'(node: Node, _symbol: Symbol, checker: TypeChecker, identifier: { [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "constructor" | "component" | "css"; ... 19 more ...; alias_of?: { ...; } | undefined; }): void',
 					return_type: 'void',
@@ -6200,7 +6200,7 @@ export const src_json: SrcJson = {
 					name: 'ts_extract_class_info',
 					kind: 'function',
 					doc_comment: 'Extract class information with rich member metadata.',
-					source_line: 224,
+					source_line: 220,
 					type_signature:
 						'(node: Node, _symbol: Symbol, checker: TypeChecker, identifier: { [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "constructor" | "component" | "css"; ... 19 more ...; alias_of?: { ...; } | undefined; }): void',
 					return_type: 'void',
@@ -6231,7 +6231,7 @@ export const src_json: SrcJson = {
 					name: 'ts_extract_variable_info',
 					kind: 'function',
 					doc_comment: 'Extract variable information.',
-					source_line: 373,
+					source_line: 369,
 					type_signature:
 						'(node: Node, symbol: Symbol, checker: TypeChecker, identifier: { [x: string]: unknown; name: string; kind: "function" | "type" | "json" | "variable" | "class" | "constructor" | "component" | "css"; ... 19 more ...; alias_of?: { ...; } | undefined; }): void',
 					return_type: 'void',
@@ -6262,7 +6262,7 @@ export const src_json: SrcJson = {
 					name: 'TsIdentifierAnalysis',
 					kind: 'type',
 					doc_comment: 'Result of analyzing a single identifier.',
-					source_line: 390,
+					source_line: 386,
 					type_signature: 'TsIdentifierAnalysis',
 					properties: [
 						{
@@ -6284,7 +6284,7 @@ export const src_json: SrcJson = {
 					kind: 'function',
 					doc_comment:
 						'Analyze a TypeScript symbol and extract rich metadata.\n\nThis is a high-level function that combines TSDoc parsing with TypeScript\ntype analysis to produce complete identifier metadata. Suitable for use\nin documentation generators, IDE integrations, and other tooling.',
-					source_line: 409,
+					source_line: 405,
 					type_signature:
 						'(symbol: Symbol, source_file: SourceFile, checker: TypeChecker): TsIdentifierAnalysis',
 					return_type: 'TsIdentifierAnalysis',
@@ -6316,7 +6316,7 @@ export const src_json: SrcJson = {
 					kind: 'type',
 					doc_comment:
 						'Information about a same-name re-export.\nUsed for post-processing to build `also_exported_from` arrays.',
-					source_line: 457,
+					source_line: 453,
 					type_signature: 'ReExportInfo',
 					properties: [
 						{
@@ -6338,7 +6338,7 @@ export const src_json: SrcJson = {
 					name: 'ModuleExportsAnalysis',
 					kind: 'type',
 					doc_comment: "Result of analyzing a module's exports.",
-					source_line: 467,
+					source_line: 463,
 					type_signature: 'ModuleExportsAnalysis',
 					properties: [
 						{
@@ -6368,7 +6368,7 @@ export const src_json: SrcJson = {
 					kind: 'function',
 					doc_comment:
 						'Analyze all exports from a TypeScript source file.\n\nExtracts the module-level comment and all exported identifiers with\ncomplete metadata. Handles re-exports by:\n- Same-name re-exports: tracked in `re_exports` for `also_exported_from` building\n- Renamed re-exports: included as new identifiers with `alias_of` metadata\n\nThis is a high-level function suitable for building documentation, API explorers, or analysis tools.',
-					source_line: 490,
+					source_line: 486,
 					type_signature: '(source_file: SourceFile, checker: TypeChecker): ModuleExportsAnalysis',
 					return_type: 'ModuleExportsAnalysis',
 					return_description:
@@ -6393,7 +6393,7 @@ export const src_json: SrcJson = {
 					kind: 'function',
 					doc_comment:
 						'Extract module-level comment.\n\nOnly accepts JSDoc/TSDoc comments (`/** ... *\\/`) followed by a blank line to distinguish\nthem from identifier-level comments. This prevents accidentally treating function/class\ncomments as module comments. Module comments can appear after imports.',
-					source_line: 571,
+					source_line: 567,
 					type_signature: '(source_file: SourceFile): string | undefined',
 					return_type: 'string | undefined',
 					parameters: [
@@ -6408,7 +6408,7 @@ export const src_json: SrcJson = {
 					name: 'ts_create_program',
 					kind: 'function',
 					doc_comment: 'Create TypeScript program for analysis.',
-					source_line: 643,
+					source_line: 639,
 					type_signature: '(log: { warn: (message: string) => void; }): Program | null',
 					return_type: 'Program | null',
 					parameters: [

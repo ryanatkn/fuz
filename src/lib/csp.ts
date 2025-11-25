@@ -304,33 +304,32 @@ export const csp_directive_value_defaults: Record<
  *
  * Feedback is welcome, please see the issues - https://github.com/ryanatkn/fuz/issues
  */
-export const csp_directive_required_trust_defaults: Record<CspDirective, CspTrustLevel | null> =
-	{
-		'default-src': null,
-		'script-src': 'high',
-		'script-src-elem': 'high',
-		'script-src-attr': null,
-		'style-src': 'medium',
-		'style-src-elem': 'medium',
-		'style-src-attr': 'medium',
-		'img-src': 'low',
-		'media-src': 'low',
-		'font-src': 'low',
-		'manifest-src': null,
-		'child-src': null,
-		'connect-src': 'medium',
-		'frame-src': 'medium',
-		'frame-ancestors': 'medium',
-		'form-action': 'medium',
-		'worker-src': 'medium',
-		'object-src': null,
-		'base-uri': null,
-		'upgrade-insecure-requests': null,
-		'report-to': null,
-		'require-trusted-types-for': null,
-		'trusted-types': null,
-		sandbox: null,
-	};
+export const csp_directive_required_trust_defaults: Record<CspDirective, CspTrustLevel | null> = {
+	'default-src': null,
+	'script-src': 'high',
+	'script-src-elem': 'high',
+	'script-src-attr': null,
+	'style-src': 'medium',
+	'style-src-elem': 'medium',
+	'style-src-attr': 'medium',
+	'img-src': 'low',
+	'media-src': 'low',
+	'font-src': 'low',
+	'manifest-src': null,
+	'child-src': null,
+	'connect-src': 'medium',
+	'frame-src': 'medium',
+	'frame-ancestors': 'medium',
+	'form-action': 'medium',
+	'worker-src': 'medium',
+	'object-src': null,
+	'base-uri': null,
+	'upgrade-insecure-requests': null,
+	'report-to': null,
+	'require-trusted-types-for': null,
+	'trusted-types': null,
+	sandbox: null,
+};
 
 /**
  * Static data descriptors for the CSP directives.
@@ -522,8 +521,7 @@ export type CspBaseSource =
 export type CspCryptoSource = `${'nonce' | 'sha256' | 'sha384' | 'sha512'}-${string}`;
 export type CspFrameSource = CspHostSource | CspSchemeSource | 'self' | 'none';
 export type CspHostNameScheme = `${string}.${string}` | 'localhost';
-export type CspHostSource =
-	`${CspHostProtocolSchemes}${CspHostNameScheme}${CspPortScheme}`;
+export type CspHostSource = `${CspHostProtocolSchemes}${CspHostNameScheme}${CspPortScheme}`;
 export type CspHostProtocolSchemes = `${string}://` | '';
 export type CspPortScheme = `:${number}` | '' | ':*';
 export type CspSchemeSource =

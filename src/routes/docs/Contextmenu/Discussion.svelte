@@ -2,7 +2,7 @@
 	import MdnLink from '$lib/MdnLink.svelte';
 	import TomeSectionHeader from '$lib/TomeSectionHeader.svelte';
 	import TomeSection from '$lib/TomeSection.svelte';
-	import RootComponentSelector from '$routes/docs/contextmenu/RootComponentSelector.svelte';
+	import RootComponentSelector from '$routes/docs/Contextmenu/RootComponentSelector.svelte';
 </script>
 
 <TomeSection>

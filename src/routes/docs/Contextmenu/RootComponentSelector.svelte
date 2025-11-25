@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {selected_contextmenu_root_component_context} from '$routes/docs/contextmenu/selected_root_component.svelte.js';
+	import {selected_contextmenu_root_component_context} from '$routes/docs/Contextmenu/selected_root_component.svelte.js';
 
 	const selected_root_component = selected_contextmenu_root_component_context.get();
 </script>

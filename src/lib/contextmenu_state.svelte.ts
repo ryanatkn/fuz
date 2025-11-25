@@ -69,9 +69,7 @@ export class RootMenuState {
 	items: ReadonlyArray<ItemState> = $state.raw([]);
 }
 
-export type ContextmenuRun = () =>
-	| ContextmenuActivateResult
-	| Promise<ContextmenuActivateResult>;
+export type ContextmenuRun = () => ContextmenuActivateResult | Promise<ContextmenuActivateResult>;
 
 export interface ContextmenuStateOptions {
 	layout?: Dimensions; // TODO consider making this a prop on `ContextmenuRoot`, and being assigned here

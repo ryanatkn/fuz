@@ -15,12 +15,12 @@
 	content={`<Breadcrumb
 	path="/a/b/c/d"
 	selected_path="${selected_path}"
-	base_path={resolve('/docs/breadcrumb')}
+	base_path={resolve('/docs/Breadcrumb')}
 >
 	<span class="font_size_xl">🔡</span>
 	{#snippet separator()}.{/snippet}
 </Breadcrumb>`}
 />
-<Breadcrumb path="/a/b/c/d" {selected_path} base_path={resolve('/docs/breadcrumb')}>
+<Breadcrumb path="/a/b/c/d" {selected_path} base_path={resolve('/docs/Breadcrumb')}>
 	<span class="font_size_xl">🔡</span>
 </Breadcrumb>

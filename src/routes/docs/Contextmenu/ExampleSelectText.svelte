@@ -5,7 +5,7 @@
 	import MdnLink from '$lib/MdnLink.svelte';
 	import TomeSectionHeader from '$lib/TomeSectionHeader.svelte';
 	import TomeSection from '$lib/TomeSection.svelte';
-	import {selected_contextmenu_root_component_context} from '$routes/docs/contextmenu/selected_root_component.svelte.js';
+	import {selected_contextmenu_root_component_context} from '$routes/docs/Contextmenu/selected_root_component.svelte.js';
 
 	const selected = selected_contextmenu_root_component_context.get();
 	const ContextmenuRootComponent = $derived(selected.component);
@@ -46,8 +46,7 @@ Try selecting text and then opening the contextmenu on it.`;
 		</div>
 		<Contextmenu>
 			{#snippet entries()}
-				<ContextmenuEntry run={() => void (toggled = !toggled)}>Toggle something</ContextmenuEntry
-				>
+				<ContextmenuEntry run={() => void (toggled = !toggled)}>Toggle something</ContextmenuEntry>
 			{/snippet}
 			<div class="panel p_md" class:color_g_5={highlighted}>
 				<div bind:this={text_el} class="mb_lg">
@@ -73,8 +72,8 @@ Try selecting text and then opening the contextmenu on it.`;
 					<textarea placeholder="paste text here?" bind:value></textarea>
 				</label>
 				<p>
-					<MdnLink path="Web/HTML/Global_attributes/contenteditable" /> likewise has your browser's
-					default contextmenu behavior.
+					<MdnLink path="Web/HTML/Global_attributes/contenteditable" /> likewise has your browser's default
+					contextmenu behavior.
 				</p>
 				<p><code>contenteditable</code></p>
 				<blockquote contenteditable bind:innerText={value}></blockquote>
