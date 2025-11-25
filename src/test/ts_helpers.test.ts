@@ -151,7 +151,7 @@ export const bar = 123;
 		assert.strictEqual(result.declarations.length, 2);
 	});
 
-	test('extracts full identifier metadata', () => {
+	test('extracts full declaration metadata', () => {
 		const source_code = `
 /**
  * Adds two numbers.
@@ -425,15 +425,15 @@ export {internal_impl as public_api} from './internal.js';
 		const public_file = source_files.get('/src/lib/public.ts')!;
 		const result = ts_analyze_module_exports(public_file, checker);
 
-		// Renamed re-export creates a NEW identifier with alias_of
+		// Renamed re-export creates a NEW declaration with alias_of
 		assert.strictEqual(result.declarations.length, 1);
-		const identifier = result.declarations[0]!;
-		assert.strictEqual(identifier.name, 'public_api');
-		assert.ok(identifier.alias_of);
-		assert.strictEqual(identifier.alias_of.module, 'internal.ts');
-		assert.strictEqual(identifier.alias_of.name, 'internal_impl');
+		const declaration = result.declarations[0]!;
+		assert.strictEqual(declaration.name, 'public_api');
+		assert.ok(declaration.alias_of);
+		assert.strictEqual(declaration.alias_of.module, 'internal.ts');
+		assert.strictEqual(declaration.alias_of.name, 'internal_impl');
 
-		// Should not be in re_exports (renamed exports are tracked as new identifiers)
+		// Should not be in re_exports (renamed exports are tracked as new declarations)
 		assert.strictEqual(result.re_exports.length, 0);
 	});
 

@@ -2,7 +2,7 @@
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
 	let {
-		placeholder = 'search identifiers and modules...',
+		placeholder = 'search declarations and modules...',
 		total_count,
 		result_count,
 		search_query = $bindable(),
@@ -15,7 +15,7 @@
 	} = $props();
 
 	const total_text = $derived(
-		total_count === 1 ? `${total_count} identifier` : `${total_count} identifiers`,
+		total_count === 1 ? `${total_count} declaration` : `${total_count} declarations`,
 	);
 	const result_text = $derived(
 		result_count === 1 ? `${result_count} match found` : `${result_count} matches found`,

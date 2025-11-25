@@ -17,7 +17,7 @@
  * `@param`, `@returns`, `@throws`, `@example`, `@deprecated`, `@see`, `@since`, `@nodocs`.
  *
  * The `@nodocs` tag excludes exports from documentation and flat namespace validation.
- * The identifier is still exported and usable, just not documented.
+ * The declaration is still exported and usable, just not documented.
  *
  * Also supports `@mutates` (non-standard) for documenting mutations to parameters or external state.
  * Use format: `@mutates paramName - description of mutation`.
@@ -92,23 +92,23 @@ const tsdoc_convert_link_to_mdz = (content: string): string => {
 			return `[${display_text}](${reference})`;
 		}
 
-		// No pipe - check if it's a URL or identifier
+		// No pipe - check if it's a URL or declaration
 		if (inner.startsWith('https://') || inner.startsWith('http://')) {
 			// Bare URL - return as-is
 			return inner;
 		} else {
-			// Identifier or module - wrap in backticks
+			// Declaration or module - wrap in backticks
 			return `\`${inner}\``;
 		}
 	}
 
-	// No {@link} or {@see} syntax - check if it's a bare URL or identifier
+	// No {@link} or {@see} syntax - check if it's a bare URL or declaration
 	const trimmed = content.trim();
 	if (trimmed.startsWith('https://') || trimmed.startsWith('http://')) {
 		// Already a bare URL - return as-is
 		return trimmed;
 	} else {
-		// Identifier or module - wrap in backticks
+		// Declaration or module - wrap in backticks
 		return `\`${trimmed}\``;
 	}
 };

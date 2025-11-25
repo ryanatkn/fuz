@@ -301,7 +301,7 @@ create_csp_directives({
 	<TomeSection>
 		<TomeSectionHeader text="Directive specs" />
 		<p>
-			<!-- TODO component for the `code` here to reference identifier -->
+			<!-- TODO component for the `code` here to reference declaration -->
 			The exported <DeclarationLink name="csp_directive_specs" /> has JSON data about the
 			<MdnLink path="Web/HTTP/Reference/Headers/Content-Security-Policy">CSP directives</MdnLink>.
 			Fuz omits deprecated directives.

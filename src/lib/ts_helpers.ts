@@ -455,9 +455,9 @@ export const ts_analyze_declaration = (
  * Used for post-processing to build `also_exported_from` arrays.
  */
 export interface ReExportInfo {
-	/** Name of the re-exported identifier. */
+	/** Name of the re-exported declaration. */
 	name: string;
-	/** Module path (relative to src/lib) where the identifier is originally declared. */
+	/** Module path (relative to src/lib) where the declaration is originally declared. */
 	original_module: string;
 }
 

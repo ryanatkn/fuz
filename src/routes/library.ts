@@ -2471,7 +2471,7 @@ export const source_json: SourceJson = {
 					name: 'docs_slugify',
 					kind: 'function',
 					doc_comment:
-						'Convert a string to a URL-safe fragment identifier, preserving case for API identifiers.\nOnly transforms spaces and special characters, keeping valid identifier characters intact.\nUsed for hash anchors in documentation.',
+						'Convert a string to a URL-safe fragment identifier, preserving case for API declarations.\nOnly transforms spaces and special characters, keeping valid identifier characters intact.\nUsed for hash anchors in documentation.',
 					source_line: 14,
 					type_signature: '(str: string): string',
 					return_type: 'string',
@@ -6283,14 +6283,14 @@ export const source_json: SourceJson = {
 							name: 'name',
 							kind: 'variable',
 							type_signature: 'string',
-							doc_comment: 'Name of the re-exported identifier.',
+							doc_comment: 'Name of the re-exported declaration.',
 						},
 						{
 							name: 'original_module',
 							kind: 'variable',
 							type_signature: 'string',
 							doc_comment:
-								'Module path (relative to src/lib) where the identifier is originally declared.',
+								'Module path (relative to src/lib) where the declaration is originally declared.',
 						},
 					],
 				},
@@ -6506,7 +6506,7 @@ export const source_json: SourceJson = {
 				},
 			],
 			module_comment:
-				'TSDoc/JSDoc parsing helpers using the TypeScript Compiler API.\n\nProvides `tsdoc_parse()` for extracting JSDoc/TSDoc from TypeScript nodes.\nPrimarily designed for build-time code generation but can be used at runtime.\n\n## Design\n\nPure extraction approach: extracts documentation as-is with minimal transformation,\npreserving source intent. Works around TypeScript Compiler API quirks where needed.\n\nSupports both regular TypeScript and Svelte components (via svelte2tsx output).\n\n## Tag support\n\nSupports a subset of standard TSDoc tags:\n`@param`, `@returns`, `@throws`, `@example`, `@deprecated`, `@see`, `@since`, `@nodocs`.\n\nThe `@nodocs` tag excludes exports from documentation and flat namespace validation.\nThe identifier is still exported and usable, just not documented.\n\nAlso supports `@mutates` (non-standard) for documenting mutations to parameters or external state.\nUse format: `@mutates paramName - description of mutation`.\n\nOnly `@returns` is supported (not `@return`).\n\nThe `@see` tag supports multiple formats: plain URLs (`https://...`), `{@link}` syntax, and module names.\nRelative/absolute path support in `@see` is TBD.\n\n## Behavioral notes\n\nDue to TS Compiler API limitations:\n- Preserves dash separator in `@param` descriptions: `@param x desc` → `"- desc"`\n- `@throws` tags have `{Type}` stripped by TS API; fallback regex extracts first word as error type\n- TS API strips URL protocols from `@see` tag text; we use `getText()` to preserve original format including `{@link}` syntax\n\nAll functions are prefixed with `tsdoc_` for clarity.',
+				'TSDoc/JSDoc parsing helpers using the TypeScript Compiler API.\n\nProvides `tsdoc_parse()` for extracting JSDoc/TSDoc from TypeScript nodes.\nPrimarily designed for build-time code generation but can be used at runtime.\n\n## Design\n\nPure extraction approach: extracts documentation as-is with minimal transformation,\npreserving source intent. Works around TypeScript Compiler API quirks where needed.\n\nSupports both regular TypeScript and Svelte components (via svelte2tsx output).\n\n## Tag support\n\nSupports a subset of standard TSDoc tags:\n`@param`, `@returns`, `@throws`, `@example`, `@deprecated`, `@see`, `@since`, `@nodocs`.\n\nThe `@nodocs` tag excludes exports from documentation and flat namespace validation.\nThe declaration is still exported and usable, just not documented.\n\nAlso supports `@mutates` (non-standard) for documenting mutations to parameters or external state.\nUse format: `@mutates paramName - description of mutation`.\n\nOnly `@returns` is supported (not `@return`).\n\nThe `@see` tag supports multiple formats: plain URLs (`https://...`), `{@link}` syntax, and module names.\nRelative/absolute path support in `@see` is TBD.\n\n## Behavioral notes\n\nDue to TS Compiler API limitations:\n- Preserves dash separator in `@param` descriptions: `@param x desc` → `"- desc"`\n- `@throws` tags have `{Type}` stripped by TS API; fallback regex extracts first word as error type\n- TS API strips URL protocols from `@see` tag text; we use `getText()` to preserve original format including `{@link}` syntax\n\nAll functions are prefixed with `tsdoc_` for clarity.',
 			dependents: ['svelte_helpers.ts', 'ts_helpers.ts'],
 		},
 		{
