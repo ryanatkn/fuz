@@ -4359,7 +4359,7 @@ export const src_json: SrcJson = JSON.parse(
 			"module_comment": "Module path and metadata helpers.\n\nProvides utilities for working with source module paths, file types,\nand import relationships in the package generation system.\n\nAll functions are prefixed with `module_` for clarity.",\
 			"dependents": [\
 				"PackageDetail.svelte",\
-				"package.gen.ts",\
+				"package_gen.ts",\
 				"package_gen_helpers.ts",\
 				"svelte_helpers.ts",\
 				"ts_helpers.ts"\
@@ -4693,7 +4693,27 @@ export const src_json: SrcJson = JSON.parse(
 				"ts_helpers.ts"\
 			],\
 			"dependents": [\
-				"package.gen.ts"\
+				"package_gen.ts"\
+			]\
+		},\
+		{\
+			"path": "package_gen.ts",\
+			"identifiers": [\
+				{\
+					"name": "package_gen",\
+					"kind": "function",\
+					"doc_comment": "Creates a Gen object for generating package metadata with full TypeScript analysis.\n\nUsage in a `.gen.ts` file:\n```ts\nimport {package_gen} from \'@ryanatkn/fuz/package_gen.js\';\nexport const gen = package_gen();\n```",\
+					"source_line": 45,\
+					"type_signature": "(): Gen",\
+					"return_type": "Gen",\
+					"parameters": []\
+				}\
+			],\
+			"module_comment": "Package metadata generator helper.\n\nGenerates package.json and src.json with rich metadata:\n- JSDoc/TSDoc comments with full tag support\n- Full type signatures\n- Source code locations\n- Parameter information with descriptions and defaults\n- Return value documentation\n- Usage examples\n- Dependency graphs\n- Svelte component props\n\n@see @ryanatkn/belt/src_json.js for type definitions\n@see src/lib/package_gen_helpers.ts for buildtime-only helpers\n@see src/lib/tsdoc_helpers.ts for JSDoc/TSDoc parsing\n@see src/lib/ts_helpers.ts for TypeScript analysis\n@see src/lib/svelte_helpers.ts for Svelte component analysis",\
+			"dependencies": [\
+				"module_helpers.ts",\
+				"package_gen_helpers.ts",\
+				"ts_helpers.ts"\
 			]\
 		},\
 		{\
@@ -4940,33 +4960,6 @@ export const src_json: SrcJson = JSON.parse(
 				"identifier.svelte.ts",\
 				"module.svelte.ts",\
 				"pkg.svelte.ts"\
-			]\
-		},\
-		{\
-			"path": "package.gen.ts",\
-			"identifiers": [],\
-			"module_comment": "Custom package generator with full TypeScript analysis\n\nGenerates package.json and src.json with rich metadata:\n- JSDoc/TSDoc comments with full tag support\n- Full type signatures\n- Source code locations\n- Parameter information with descriptions and defaults\n- Return value documentation\n- Usage examples\n- Dependency graphs\n- Svelte component props\n\n@see @ryanatkn/belt/src_json.js for type definitions\n@see src/lib/package_gen_helpers.ts for buildtime-only helpers\n@see src/lib/tsdoc_helpers.ts for JSDoc/TSDoc parsing\n@see src/lib/ts_helpers.ts for TypeScript analysis\n@see src/lib/svelte_helpers.ts for Svelte component analysis",\
-			"dependencies": [\
-				"module_helpers.ts",\
-				"package_gen_helpers.ts",\
-				"ts_helpers.ts"\
-			]\
-		},\
-		{\
-			"path": "package.ts",\
-			"identifiers": [\
-				{\
-					"name": "package_json",\
-					"kind": "variable",\
-					"source_line": 7,\
-					"type_signature": "{ [x: string]: unknown; name: string; version: string; private?: boolean | undefined; public?: boolean | undefined; description?: string | undefined; motto?: string | undefined; glyph?: string | undefined; ... 24 more ...; exports?: string | ... 2 more ... | undefined; }"\
-				},\
-				{\
-					"name": "src_json",\
-					"kind": "variable",\
-					"source_line": 137,\
-					"type_signature": "{ [x: string]: unknown; name: string; version: string; modules?: { [x: string]: unknown; path: string; identifiers?: { [x: string]: unknown; name: string; kind: \"function\" | \"type\" | \"json\" | \"variable\" | \"class\" | \"constructor\" | \"component\" | \"css\"; ... 19 more ...; alias_of?: { ...; } | undefined; }[] | undefined..."\
-				}\
 			]\
 		},\
 		{\
@@ -6574,7 +6567,7 @@ export const src_json: SrcJson = JSON.parse(
 				"tsdoc_helpers.ts"\
 			],\
 			"dependents": [\
-				"package.gen.ts",\
+				"package_gen.ts",\
 				"package_gen_helpers.ts"\
 			]\
 		},\
