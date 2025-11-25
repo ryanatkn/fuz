@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {pkg_context, type Pkg} from './pkg.svelte.js';
+	import {library_context, type Library} from './library.svelte.js';
 	import {get_tome_by_name, type Tome} from './tome.js';
 	import TomeContent from './TomeContent.svelte';
 	import TomeSection from './TomeSection.svelte';
@@ -7,12 +7,12 @@
 	import DocsSearch from './DocsSearch.svelte';
 	import ModuleLink from './ModuleLink.svelte';
 	import Mdz from './Mdz.svelte';
-	import ApiIdentifierList from './ApiIdentifierList.svelte';
-	import {create_module_identifier_search} from './api_search.svelte.js';
+	import ApiDeclarationList from './ApiDeclarationList.svelte';
+	import {create_module_declaration_search} from './api_search.svelte.js';
 
 	const {
 		module_path: module_path_param,
-		pkg = pkg_context.get(),
+		library = library_context.get(),
 		tome = get_tome_by_name('api'),
 	}: {
 		/**
@@ -20,10 +20,10 @@
 		 */
 		module_path: string | Array<string>;
 		/**
-		 * The package instance to render API docs for.
-		 * Defaults to getting from pkg_context.
+		 * The library instance to render API docs for.
+		 * Defaults to getting from library_context.
 		 */
-		pkg?: Pkg;
+		library?: Library;
 		/**
 		 * The tome for the API docs page.
 		 * Defaults to looking up the 'api' tome.
@@ -37,19 +37,19 @@
 	);
 
 	// find the module using the lookup helper
-	const module = $derived(pkg.lookup_module(module_path));
+	const module = $derived(library.lookup_module(module_path));
 
 	// fallback for 404
 	const module_name = $derived(module?.path || '[missing module]');
 
-	const search = $derived(create_module_identifier_search(module?.identifiers ?? []));
+	const search = $derived(create_module_declaration_search(module?.declarations ?? []));
 
 	// GitHub source URL for the module
 	const source_url = $derived(module?.url_github);
 </script>
 
 <svelte:head>
-	<title>{module_name} - API docs - {pkg.package_json.name}</title>
+	<title>{module_name} - API docs - {library.package_json.name}</title>
 </svelte:head>
 
 <TomeContent {tome}>
@@ -62,9 +62,9 @@
 			<p>Module not found: {module_path}</p>
 		</section>
 	{:else}
-		<!-- Identifiers Section -->
+		<!-- Declarations Section -->
 		<TomeSection>
-			<TomeSectionHeader text="Identifiers" />
+			<TomeSectionHeader text="Declarations" />
 
 			<section>
 				{#if module.module_comment}
@@ -75,7 +75,7 @@
 
 				{#if search.all.length > 1}
 					<DocsSearch
-						placeholder="search identifiers in this module..."
+						placeholder="search declarations in this module..."
 						total_count={search.all.length}
 						result_count={search.filtered.length}
 						bind:search_query={search.query}
@@ -90,7 +90,7 @@
 				{/if}
 			</section>
 
-			<ApiIdentifierList identifiers={search.filtered} search_query={search.query} />
+			<ApiDeclarationList declarations={search.filtered} search_query={search.query} />
 		</TomeSection>
 
 		<!-- Depends on Section -->

@@ -2,14 +2,14 @@
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
 	import {get_tome_by_name} from '$lib/tome.js';
-	import PackageSummary from '$lib/PackageSummary.svelte';
+	import LibraryDetail from '$lib/LibraryDetail.svelte';
 	import TomeContent from '$lib/TomeContent.svelte';
-	import {pkg_context} from '$lib/pkg.svelte.js';
+	import {library_context} from '$lib/library.svelte.js';
 
-	const LIBRARY_ITEM_NAME = 'PackageSummary';
+	const LIBRARY_ITEM_NAME = 'LibraryDetail';
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
 
-	const pkg = pkg_context.get();
+	const library = library_context.get();
 </script>
 
 <!-- eslint-disable svelte/no-useless-mustaches -->
@@ -22,10 +22,10 @@
 				>Gro's public packages</a
 			> features.
 		</p>
-		<Code content={`import PackageSummary from '@ryanatkn/fuz/PackageSummary.svelte';`} lang="ts" />
-		<Code content={`<PackageSummary {pkg} />`} />
+		<Code content={`import LibraryDetail from '@ryanatkn/fuz/LibraryDetail.svelte';`} lang="ts" />
+		<Code content={`<LibraryDetail {library} />`} />
 	</section>
 	<section>
-		<PackageSummary {pkg} />
+		<LibraryDetail {library} />
 	</section>
 </TomeContent>

@@ -13,7 +13,7 @@
 	import {render_value_to_string} from '$lib/helpers.js';
 	import TomeSectionHeader from '$lib/TomeSectionHeader.svelte';
 	import TomeSection from '$lib/TomeSection.svelte';
-	import IdentifierLink from '$lib/IdentifierLink.svelte';
+	import DeclarationLink from '$lib/DeclarationLink.svelte';
 
 	const LIBRARY_ITEM_NAME = 'csp';
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
@@ -33,7 +33,7 @@
 				path="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/ContentSecurityPolicy"
 				>Content Security Policies</MdnLink
 			> with the
-			<IdentifierLink name="create_csp_directives" /> helper. Fuz also provides related helpers, types,
+			<DeclarationLink name="create_csp_directives" /> helper. Fuz also provides related helpers, types,
 			and CSP data.
 		</p>
 		<p>
@@ -120,7 +120,7 @@ const custom_csp = create_csp_directives({
 			API with full declarative transparency (and more verbosity and information load).
 		</p>
 		<p>
-			Fuz defines an optional system with three levels of trust/risk/sensitivity (low/medium/high, <IdentifierLink
+			Fuz defines an optional system with three levels of trust/risk/sensitivity (low/medium/high, <DeclarationLink
 				name="CspTrustLevel"
 			/>) that can be configured for each trusted source to give blanket permissions at a specified
 			tier. Granular overrides are straightforward and declarative.
@@ -136,7 +136,7 @@ const custom_csp = create_csp_directives({
 		<TomeSectionHeader text="Trust" />
 		<!-- TODO make this a header if it stabilizes -->
 		<p>
-			Fuz provides an optional CSP abstraction with three trust levels (of type <IdentifierLink
+			Fuz provides an optional CSP abstraction with three trust levels (of type <DeclarationLink
 				name="CspTrustLevel"
 			/>) with tiers of escalating risk and implied permission. Sources can opt-in to blanket
 			permissions at a specific level:
@@ -155,7 +155,7 @@ const custom_csp = create_csp_directives({
 				<tr>
 					<th class="white_space_nowrap">trust level</th>
 					<th>what it means</th>
-					<th>configured by <IdentifierLink name="required_trust_defaults_base" /></th>
+					<th>configured by <DeclarationLink name="required_trust_defaults_base" /></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -237,9 +237,9 @@ export const my_csp_trusted_sources: Array<CspSourceSpec> = [
 	<TomeSection>
 		<TomeSectionHeader text="Base defaults" />
 		<p>
-			The options <code>value_defaults_base</code> (defaults to <IdentifierLink
+			The options <code>value_defaults_base</code> (defaults to <DeclarationLink
 				name="csp_directive_value_defaults"
-			/>) and <code>required_trust_defaults_base</code> (defaults to <IdentifierLink
+			/>) and <code>required_trust_defaults_base</code> (defaults to <DeclarationLink
 				name="csp_directive_required_trust_defaults"
 			/>) afford full control over defaults:
 		</p>
@@ -302,7 +302,7 @@ create_csp_directives({
 		<TomeSectionHeader text="Directive specs" />
 		<p>
 			<!-- TODO component for the `code` here to reference identifier -->
-			The exported <IdentifierLink name="csp_directive_specs" /> has JSON data about the
+			The exported <DeclarationLink name="csp_directive_specs" /> has JSON data about the
 			<MdnLink path="Web/HTTP/Reference/Headers/Content-Security-Policy">CSP directives</MdnLink>.
 			Fuz omits deprecated directives.
 		</p>

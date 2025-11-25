@@ -1,5 +1,5 @@
 /**
- * Build-time helpers for package metadata generation.
+ * Build-time helpers for library metadata generation.
  *
  * These functions handle Gro-specific concerns like file collection and dependency
  * graph extraction. Core analysis logic has been extracted to reusable helpers:
@@ -11,15 +11,15 @@
  * Design philosophy: Fail fast with clear errors rather than silently producing invalid
  * metadata. All validation errors halt the build immediately with actionable messages.
  *
- * @see package.gen.ts for the main generation task
- * @see @ryanatkn/belt/src_json.js for type definitions
+ * @see library_gen.ts for the main generation task
+ * @see @ryanatkn/belt/source_json.js for type definitions
  * @see ts_helpers.ts for reusable TypeScript analysis
  * @see svelte_helpers.ts for reusable Svelte component analysis
  */
 
 import type {PackageJson} from '@ryanatkn/belt/package_json.js';
 import type {Logger} from '@ryanatkn/belt/log.js';
-import type {ModuleJson, SrcJson} from '@ryanatkn/belt/src_json.js';
+import type {ModuleJson, SourceJson} from '@ryanatkn/belt/source_json.js';
 import type {Disknode} from '@ryanatkn/gro/disknode.js';
 import type ts from 'typescript';
 import type {PathId} from '@ryanatkn/belt/path.js';
@@ -38,45 +38,45 @@ import {
  * Includes both the module metadata and re-export information for post-processing.
  */
 export interface TsFileAnalysis {
-	/** Module metadata for inclusion in src_json. */
+	/** Module metadata for inclusion in source_json. */
 	module: ModuleJson;
 	/** Re-exports from this module for building also_exported_from. */
 	re_exports: Array<ReExportInfo>;
 }
 
 /**
- * Validates that no identifier names are duplicated across modules.
+ * Validates that no declaration names are duplicated across modules.
  * The flat namespace is intentional - duplicates should fail fast.
  *
- * @throws Error if duplicate identifier names are found
+ * @throws Error if duplicate declaration names are found
  */
-export const package_gen_validate_no_duplicates = (src_json: SrcJson, log: Logger): void => {
-	const identifier_locations: Map<string, Array<{module: string; kind: string}>> = new Map();
+export const library_gen_validate_no_duplicates = (source_json: SourceJson, log: Logger): void => {
+	const declaration_locations: Map<string, Array<{module: string; kind: string}>> = new Map();
 
-	// Collect all identifier names and their locations
-	for (const mod of src_json.modules ?? []) {
-		for (const identifier of mod.identifiers ?? []) {
-			const name = identifier.name;
-			if (!identifier_locations.has(name)) {
-				identifier_locations.set(name, []);
+	// Collect all declaration names and their locations
+	for (const mod of source_json.modules ?? []) {
+		for (const declaration of mod.declarations ?? []) {
+			const name = declaration.name;
+			if (!declaration_locations.has(name)) {
+				declaration_locations.set(name, []);
 			}
-			identifier_locations.get(name)!.push({
+			declaration_locations.get(name)!.push({
 				module: mod.path,
-				kind: identifier.kind,
+				kind: declaration.kind,
 			});
 		}
 	}
 
 	// Check for duplicates
 	const duplicates: Array<{name: string; locations: Array<{module: string; kind: string}>}> = [];
-	for (const [name, locations] of identifier_locations.entries()) {
+	for (const [name, locations] of declaration_locations.entries()) {
 		if (locations.length > 1) {
 			duplicates.push({name, locations});
 		}
 	}
 
 	if (duplicates.length > 0) {
-		log.error('Duplicate identifier names detected in flat namespace:');
+		log.error('Duplicate declaration names detected in flat namespace:');
 		for (const {name, locations} of duplicates) {
 			log.error(`  "${name}" found in:`);
 			for (const {module, kind} of locations) {
@@ -84,11 +84,11 @@ export const package_gen_validate_no_duplicates = (src_json: SrcJson, log: Logge
 			}
 		}
 		throw new Error(
-			`Found ${duplicates.length} duplicate identifier name${duplicates.length === 1 ? '' : 's'} across modules. ` +
+			`Found ${duplicates.length} duplicate declaration name${duplicates.length === 1 ? '' : 's'} across modules. ` +
 				'The flat namespace requires unique names. To resolve: ' +
-				'(1) rename one of the conflicting identifiers, or ' +
+				'(1) rename one of the conflicting declarations, or ' +
 				'(2) add /** @nodocs */ to exclude from documentation. ' +
-				'See CLAUDE.md "Identifier namespacing" section for details.',
+				'See CLAUDE.md "Declaration namespacing" section for details.',
 		);
 	}
 };
@@ -96,24 +96,30 @@ export const package_gen_validate_no_duplicates = (src_json: SrcJson, log: Logge
 /**
  * Sort modules alphabetically by path for deterministic output and cleaner diffs.
  */
-export const package_gen_sort_modules = (modules: Array<ModuleJson>): Array<ModuleJson> => {
+export const library_gen_sort_modules = (modules: Array<ModuleJson>): Array<ModuleJson> => {
 	return modules.slice().sort((a, b) => a.path.localeCompare(b.path));
 };
 
 /**
- * Generate the package.ts file content with package_json and src_json exports.
+ * Generate the library.ts file content with library_json export.
  */
-export const package_gen_generate_ts = (package_json: PackageJson, src_json: SrcJson): string => {
+export const library_gen_generate_ts = (
+	package_json: PackageJson,
+	source_json: SourceJson,
+): string => {
 	const is_this_belt = package_json.name === '@ryanatkn/belt';
-	const banner = `// generated by package.gen.ts !! do not edit directly or risk lost data`;
+	const banner = `// generated by library.gen.ts !! do not edit directly or risk lost data`;
 	return `${banner}
 
+import {library_json_parse} from '${is_this_belt ? './library_json.js' : '@ryanatkn/belt/library_json.js'}';
 import type {PackageJson} from '${is_this_belt ? './package_json.js' : '@ryanatkn/belt/package_json.js'}';
-import type {SrcJson} from '${is_this_belt ? './src_json.js' : '@ryanatkn/belt/src_json.js'}';
+import type {SourceJson} from '${is_this_belt ? './source_json.js' : '@ryanatkn/belt/source_json.js'}';
 
 export const package_json: PackageJson = ${stringify(package_json)};
 
-export const src_json: SrcJson = ${stringify(src_json)};
+export const source_json: SourceJson = ${stringify(source_json)};
+
+export const library_json = library_json_parse(package_json, source_json);
 
 ${banner}
 `;
@@ -127,7 +133,7 @@ const stringify = (v: unknown): string => JSON.stringify(v, null, '\t');
  * Returns disknodes for TypeScript/JS files and Svelte components from src/lib, excluding test files.
  * Returns an empty array with a warning if no source files are found.
  */
-export const package_gen_collect_source_files = (
+export const library_gen_collect_source_files = (
 	files: Map<PathId, Disknode>,
 	log: Logger,
 ): Array<Disknode> => {
@@ -146,7 +152,7 @@ export const package_gen_collect_source_files = (
 	log.info(`found ${source_disknodes.length} source files to analyze`);
 
 	if (source_disknodes.length === 0) {
-		log.warn('No source files found in src/lib - generating empty package metadata');
+		log.warn('No source files found in src/lib - generating empty library metadata');
 		return [];
 	}
 
@@ -162,45 +168,48 @@ export const package_gen_collect_source_files = (
  * Uses `svelte_analyze_file` for core analysis, then adds
  * Gro-specific dependency information from the disknode.
  */
-export const package_gen_analyze_svelte_file = (
+export const library_gen_analyze_svelte_file = (
 	disknode: Disknode,
 	module_path: string,
 	checker: ts.TypeChecker,
 ): ModuleJson => {
 	// Use the extracted helper for core analysis
-	const identifier_json = svelte_analyze_file(disknode.id, module_path, checker);
+	const declaration_json = svelte_analyze_file(disknode.id, module_path, checker);
 
 	// Extract dependencies and dependents (Gro-specific)
-	const {dependencies, dependents} = package_gen_extract_dependencies(disknode);
+	const {dependencies, dependents} = library_gen_extract_dependencies(disknode);
 
 	return {
 		path: module_path,
-		identifiers: [identifier_json],
+		declarations: [declaration_json],
 		dependencies: dependencies.length > 0 ? dependencies : undefined,
 		dependents: dependents.length > 0 ? dependents : undefined,
 	};
 };
 
 /**
- * Analyze a TypeScript file and extract all identifiers.
+ * Analyze a TypeScript file and extract all declarations.
  *
  * Uses `ts_analyze_module_exports` for core analysis, then adds
  * Gro-specific dependency information from the disknode.
  *
  * Returns both the module metadata and re-export information for post-processing.
  */
-export const package_gen_analyze_typescript_file = (
+export const library_gen_analyze_typescript_file = (
 	disknode: Disknode,
 	source_file: ts.SourceFile,
 	module_path: string,
 	checker: ts.TypeChecker,
 ): TsFileAnalysis => {
 	// Use the extracted helper for core analysis
-	const {module_comment, identifiers, re_exports} = ts_analyze_module_exports(source_file, checker);
+	const {module_comment, declarations, re_exports} = ts_analyze_module_exports(
+		source_file,
+		checker,
+	);
 
 	const mod: ModuleJson = {
 		path: module_path,
-		identifiers,
+		declarations,
 	};
 
 	if (module_comment) {
@@ -208,7 +217,7 @@ export const package_gen_analyze_typescript_file = (
 	}
 
 	// Extract dependencies and dependents (Gro-specific)
-	const {dependencies, dependents} = package_gen_extract_dependencies(disknode);
+	const {dependencies, dependents} = library_gen_extract_dependencies(disknode);
 	if (dependencies.length > 0) {
 		mod.dependencies = dependencies;
 	}
@@ -225,7 +234,7 @@ export const package_gen_analyze_typescript_file = (
  * Filters to only include source modules from src/lib (excludes external packages, node_modules, tests).
  * Returns sorted arrays of module paths (relative to src/lib) for deterministic output.
  */
-export const package_gen_extract_dependencies = (
+export const library_gen_extract_dependencies = (
 	disknode: Disknode,
 ): {dependencies: Array<string>; dependents: Array<string>} => {
 	const dependencies: Array<string> = [];

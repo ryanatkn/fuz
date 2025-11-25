@@ -4,7 +4,7 @@
 	import {innerWidth} from 'svelte/reactivity/window';
 	import {page} from '$app/state';
 
-	import type {Pkg} from './pkg.svelte.js';
+	import type {Library} from './library.svelte.js';
 	import Breadcrumb from './Breadcrumb.svelte';
 	import {Tome, tomes_context} from './tome.js';
 	import DocsPrimaryNav from './DocsPrimaryNav.svelte';
@@ -16,12 +16,12 @@
 
 	const {
 		tomes,
-		pkg,
+		library,
 		breadcrumb_children,
 		children,
 	}: {
 		tomes: Array<Tome>;
-		pkg: Pkg;
+		library: Library;
 		breadcrumb_children?: Snippet<[is_primary_nav: boolean]>;
 		children: Snippet;
 	} = $props();
@@ -51,7 +51,7 @@
 <svelte:window onhashchange={() => (show_secondary_nav_dialog = false)} />
 
 <div class="docs" style:--docs_menu_width={docs_menu_width}>
-	<DocsPrimaryNav {pkg} {breadcrumb_children}>
+	<DocsPrimaryNav {library} {breadcrumb_children}>
 		<div class="nav_dialog_toggle">
 			<button class="plain" type="button" onclick={() => toggle_secondary_nav_dialog()}>menu</button
 			>
@@ -72,13 +72,13 @@
 			<DocsTertiaryNav {tomes} {tomes_by_name} />
 		{/if}
 		<section class="box">
-			<DocsFooter {pkg}>
+			<DocsFooter {library}>
 				<div class="mb_xl5">
 					<Breadcrumb>
 						{#if breadcrumb_children}
 							{@render breadcrumb_children(false)}
 						{:else}
-							{pkg.package_json.glyph ?? '🏠'}
+							{library.package_json.glyph ?? '🏠'}
 						{/if}
 					</Breadcrumb>
 				</div>
@@ -96,7 +96,7 @@
 					{#if breadcrumb_children}
 						{@render breadcrumb_children(false)}
 					{:else}
-						{pkg.package_json.glyph ?? '🏠'}
+						{library.package_json.glyph ?? '🏠'}
 					{/if}
 				</Breadcrumb>
 			</div>

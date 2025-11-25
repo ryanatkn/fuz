@@ -1,54 +1,47 @@
 <script lang="ts">
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
-	import type {Identifier} from './identifier.svelte.js';
+	import type {Declaration} from './declaration.svelte.js';
 	import Details from './Details.svelte';
 	import TypeLink from './TypeLink.svelte';
 	import ModuleLink from './ModuleLink.svelte';
 	import Mdz from './Mdz.svelte';
 
-	const {identifier}: {identifier: Identifier} = $props();
+	const {declaration}: {declaration: Declaration} = $props();
 </script>
 
 <!-- Metadata -->
 <p class="row justify_content_space_between">
-	<ModuleLink module_path={identifier.module_path} />
-	{#if identifier.url_github}
+	<ModuleLink module_path={declaration.module_path} />
+	{#if declaration.url_github}
 		<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-		<a class="chip" href={identifier.url_github} target="_blank" rel="noopener">view source</a>
+		<a class="chip" href={declaration.url_github} target="_blank" rel="noopener">view source</a>
 	{/if}
 </p>
 
 <!-- eslint-disable-next-line @typescript-eslint/no-deprecated -->
-{#if identifier.is_deprecated}
+{#if declaration.is_deprecated}
 	<p>
 		<strong>⚠️ deprecated:</strong>
 		<!-- eslint-disable-next-line @typescript-eslint/no-deprecated -->
-		{identifier.deprecated_message}
+		{declaration.deprecated_message}
 	</p>
 {/if}
 
-<!-- TODO is this useful sometimes? -->
-<!-- {#if identifier.kind}
-	<p>
-		<span class="chip font_size_md">{identifier.kind}</span>
-	</p>
-{/if} -->
-
 <!-- type signature -->
-{#if identifier.type_signature}
-	<Code content={identifier.type_signature} lang="ts" class="mb_lg" />
+{#if declaration.type_signature}
+	<Code content={declaration.type_signature} lang="ts" class="mb_lg" />
 {/if}
 
 <!-- documentation -->
-{#if identifier.has_documentation}
-	<Mdz content={identifier.doc_comment!} />
+{#if declaration.has_documentation}
+	<Mdz content={declaration.doc_comment!} />
 {/if}
 
 <!-- parameters -->
-{#if identifier.parameters?.length}
+{#if declaration.parameters?.length}
 	<section>
-		{#each identifier.parameters as param (param)}
+		{#each declaration.parameters as param (param)}
 			<section>
 				<h4>
 					<code
@@ -79,9 +72,9 @@
 {/if}
 
 <!-- component props (for Svelte components) -->
-{#if identifier.props?.length}
+{#if declaration.props?.length}
 	<section>
-		{#each identifier.props as prop (prop)}
+		{#each declaration.props as prop (prop)}
 			<section>
 				<h4>
 					<code
@@ -115,21 +108,21 @@
 {/if}
 
 <!-- returns -->
-{#if identifier.return_type}
+{#if declaration.return_type}
 	<section>
 		<h4>returns</h4>
-		<Code content={identifier.return_type} lang="ts" />
-		{#if identifier.return_description}
-			<Mdz content={identifier.return_description} />
+		<Code content={declaration.return_type} lang="ts" />
+		{#if declaration.return_description}
+			<Mdz content={declaration.return_description} />
 		{/if}
 	</section>
 {/if}
 
 <!-- generics -->
-{#if identifier.generic_params?.length}
+{#if declaration.generic_params?.length}
 	<section>
 		<h4>generics</h4>
-		{#each identifier.generic_params as generic (generic)}
+		{#each declaration.generic_params as generic (generic)}
 			<section>
 				<h4><code>{generic.name}</code></h4>
 				{#if generic.constraint}
@@ -150,24 +143,24 @@
 {/if}
 
 <!-- Extends/Implements -->
-{#if identifier.extends?.length || identifier.implements?.length}
+{#if declaration.extends?.length || declaration.implements?.length}
 	<section>
 		<h4>inheritance</h4>
-		{#if identifier.extends?.length}
+		{#if declaration.extends?.length}
 			<div>
 				<strong>extends:</strong>
 				<ul>
-					{#each identifier.extends as ext (ext)}
+					{#each declaration.extends as ext (ext)}
 						<li><TypeLink type={ext} /></li>
 					{/each}
 				</ul>
 			</div>
 		{/if}
-		{#if identifier.implements?.length}
+		{#if declaration.implements?.length}
 			<div>
 				<strong>implements:</strong>
 				<ul>
-					{#each identifier.implements as impl (impl)}
+					{#each declaration.implements as impl (impl)}
 						<li><TypeLink type={impl} /></li>
 					{/each}
 				</ul>
@@ -177,11 +170,11 @@
 {/if}
 
 <!-- throws -->
-{#if identifier.throws?.length}
+{#if declaration.throws?.length}
 	<section>
 		<h4>throws</h4>
 		<ul>
-			{#each identifier.throws as thrown (thrown)}
+			{#each declaration.throws as thrown (thrown)}
 				<li>
 					{#if thrown.type}
 						<code>{thrown.type}</code> - {thrown.description}
@@ -195,18 +188,18 @@
 {/if}
 
 <!-- since -->
-{#if identifier.since}
+{#if declaration.since}
 	<section>
 		<h4>since</h4>
-		<p>{identifier.since}</p>
+		<p>{declaration.since}</p>
 	</section>
 {/if}
 
 <!-- examples -->
-{#if identifier.examples?.length}
+{#if declaration.examples?.length}
 	<section>
 		<h4>examples</h4>
-		{#each identifier.examples as example, i (example)}
+		{#each declaration.examples as example, i (example)}
 			<Details>
 				{#snippet summary()}Example {i + 1}{/snippet}
 				<Code content={example} lang="ts" />
@@ -216,11 +209,11 @@
 {/if}
 
 <!-- see also -->
-{#if identifier.see_also?.length}
+{#if declaration.see_also?.length}
 	<section>
 		<h4>see also</h4>
 		<ul>
-			{#each identifier.see_also as ref (ref)}
+			{#each declaration.see_also as ref (ref)}
 				<li>
 					<Mdz content={ref} />
 				</li>
@@ -230,9 +223,9 @@
 {/if}
 
 <!-- members (for classes) -->
-{#if identifier.members?.length}
+{#if declaration.members?.length}
 	<section>
-		{#each identifier.members as member (member)}
+		{#each declaration.members as member (member)}
 			<section>
 				<h4><code>{member.name}</code></h4>
 				{#if member.doc_comment}
@@ -258,7 +251,6 @@
 				<!-- parameters for methods and constructors -->
 				{#if member.parameters?.length}
 					<section>
-						<!-- <h5>parameters</h5> -->
 						{#each member.parameters as param (param)}
 							<section>
 								<h5>
@@ -321,9 +313,9 @@
 {/if}
 
 <!-- properties (for types/interfaces) -->
-{#if identifier.properties?.length}
+{#if declaration.properties?.length}
 	<section>
-		{#each identifier.properties as prop (prop)}
+		{#each declaration.properties as prop (prop)}
 			<section>
 				<h4><code>{prop.name}</code></h4>
 				{#if prop.doc_comment}

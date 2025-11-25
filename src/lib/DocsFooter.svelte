@@ -2,19 +2,19 @@
 	import {format_url, type Url} from '@ryanatkn/belt/url.js';
 	import type {Snippet} from 'svelte';
 
-	import type {Pkg} from './pkg.svelte.js';
+	import type {Library} from './library.svelte.js';
 	import Svg from './Svg.svelte';
 	import {github_logo} from './logos.js';
 
 	const {
-		pkg,
+		library,
 		root_url = null,
 		logo,
 		logo_header,
 		logo_footer,
 		children,
 	}: {
-		pkg: Pkg;
+		library: Library;
 		root_url?: Url | null;
 		logo?: Snippet;
 		logo_header?: Snippet;
@@ -28,7 +28,7 @@
 	<div class="logo box panel p_lg shadow_inset_xs">
 		{@render logo_header?.()}
 		<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-		<a href={pkg.repo_url} rel="me" title="source code on GitHub"
+		<a href={library.repo_url} rel="me" title="source code on GitHub"
 			>{#if logo}{@render logo()}{:else}<Svg
 					data={github_logo}
 					size="var(--icon_size_lg)"

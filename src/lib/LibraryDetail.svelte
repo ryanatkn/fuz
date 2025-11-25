@@ -3,11 +3,11 @@
 	import {format_url} from '@ryanatkn/belt/url.js';
 	import type {Snippet} from 'svelte';
 
-	import type {Pkg} from './pkg.svelte.js';
+	import type {Library} from './library.svelte.js';
 	import ImgOrSvg from './ImgOrSvg.svelte';
-	import IdentifierLink from './IdentifierLink.svelte';
+	import DeclarationLink from './DeclarationLink.svelte';
 	import ModuleLink from './ModuleLink.svelte';
-	import {url_github_file, repo_url_parse, url_well_known} from './package_helpers.js';
+	import {url_github_file, repo_url_parse, url_well_known} from './library_helpers.js';
 	import {
 		module_is_typescript,
 		module_is_svelte,
@@ -16,7 +16,7 @@
 	} from './module_helpers.js';
 
 	const {
-		pkg,
+		library,
 		repo_name,
 		description,
 		motto,
@@ -24,18 +24,18 @@
 		homepage_url,
 		children,
 	}: {
-		pkg: Pkg; // TODO normalized version with cached primitives?
+		library: Library;
 		repo_name?: Snippet<[repo_name: string]>;
 		description?: Snippet<[description: string]>;
 		motto?: Snippet<[description: string]>;
 		npm_url?: Snippet<[npm_url: string]>;
 		homepage_url?: Snippet<[homepage_url: string]>;
-		children?: Snippet<[pkg: Pkg]>;
+		children?: Snippet<[library: Library]>;
 	} = $props();
 
 	// TODO show other data (lines of code)
 
-	const {package_json} = $derived(pkg);
+	const {package_json} = $derived(library);
 
 	const repository_url = $derived(repo_url_parse(package_json.repository));
 	const license_url = $derived(
@@ -45,7 +45,7 @@
 
 <!-- eslint-disable svelte/no-navigation-without-resolve -->
 
-<div class="package_detail">
+<div class="library_detail">
 	<!-- TODO maybe continue this snippet pattern, or maybe simplify? -->
 	<div class="info">
 		<div class="display_flex flex_1">
@@ -53,14 +53,14 @@
 			<div>
 				<header>
 					{#if repo_name}
-						{@render repo_name(pkg.repo_name)}
+						{@render repo_name(library.repo_name)}
 					{:else}
 						<div class="repo_name">
-							{pkg.repo_name}{#if package_json.glyph}&nbsp;{package_json.glyph}{/if}
+							{library.repo_name}{#if package_json.glyph}&nbsp;{package_json.glyph}{/if}
 						</div>
 					{/if}
 				</header>
-				{@render children?.(pkg)}
+				{@render children?.(library)}
 				{#if package_json.description}
 					{#if description}
 						{@render description(package_json.description)}
@@ -75,55 +75,58 @@
 						<div class="motto">{package_json.motto}</div>
 					{/if}
 				{/if}
-				{#if pkg.npm_url}
+				{#if library.npm_url}
 					{#if npm_url}
-						{@render npm_url(pkg.npm_url)}
+						{@render npm_url(library.npm_url)}
 					{:else}
 						<blockquote class="npm_url">npm i -D {package_json.name}</blockquote>
 					{/if}
 				{/if}
 				<!-- TODO accessible HTML -->
 				<section class="properties">
-					{#if pkg.homepage_url}
+					{#if library.homepage_url}
 						{#if homepage_url}
-							{@render homepage_url(pkg.homepage_url)}
+							{@render homepage_url(library.homepage_url)}
 						{:else}
 							<span class="title">homepage</span>
 							<div class="content">
 								<a
 									class="chip"
-									class:selected={pkg.homepage_url === page.url.href}
-									href={pkg.homepage_url}
+									class:selected={library.homepage_url === page.url.href}
+									href={library.homepage_url}
 								>
-									{#if pkg.logo_url}
+									{#if library.logo_url}
 										<ImgOrSvg
-											src={pkg.logo_url}
-											label={pkg.logo_alt}
+											src={library.logo_url}
+											label={library.logo_alt}
 											size="16px"
 											attrs={{class: 'mr_xs'}}
 										/>
 									{/if}
-									{format_url(pkg.homepage_url)}
+									{format_url(library.homepage_url)}
 								</a>
 							</div>
 						{/if}
 					{/if}
-					{#if pkg.repo_url}
+					{#if library.repo_url}
 						<span class="title">repo</span>
 						<div class="content">
-							<a class="chip" title="repo" href={pkg.repo_url}>{pkg.owner_name}/{pkg.repo_name}</a>
+							<a class="chip" title="repo" href={library.repo_url}
+								>{library.owner_name}/{library.repo_name}</a
+							>
 						</div>
 					{/if}
-					{#if pkg.npm_url}
+					{#if library.npm_url}
 						<span class="title">npm</span>
 						<div class="content">
-							<a class="chip" title="npm" href={pkg.npm_url}>{package_json.name}</a>
+							<a class="chip" title="npm" href={library.npm_url}>{package_json.name}</a>
 						</div>
 					{/if}
-					{#if pkg.changelog_url}
+					{#if library.changelog_url}
 						<span class="title">version</span>
 						<div class="content">
-							<a class="chip" title="version" href={pkg.changelog_url}>{package_json.version}</a>
+							<a class="chip" title="version" href={library.changelog_url}>{package_json.version}</a
+							>
 						</div>
 					{/if}
 					{#if license_url}
@@ -132,13 +135,15 @@
 							<a class="chip" title="license" href={license_url}>{package_json.license}</a>
 						</div>
 					{/if}
-					{#if pkg.homepage_url}
+					{#if library.homepage_url}
 						<span class="title">data</span>
 						<div class="content">
-							<a class="chip" title="data" href={url_well_known(pkg.homepage_url, 'package.json')}
-								>package.json</a
+							<a
+								class="chip"
+								title="data"
+								href={url_well_known(library.homepage_url, 'package.json')}>package.json</a
 							>
-							<a class="chip" title="data" href={url_well_known(pkg.homepage_url, 'src.json')}
+							<a class="chip" title="data" href={url_well_known(library.homepage_url, 'src.json')}
 								>src.json</a
 							>
 						</div>
@@ -146,20 +151,20 @@
 				</section>
 			</div>
 		</div>
-		{#if pkg.logo_url}
+		{#if library.logo_url}
 			<div class="logo">
 				<ImgOrSvg
-					src={pkg.logo_url}
-					label={pkg.logo_alt}
+					src={library.logo_url}
+					label={library.logo_alt}
 					size="var(--font_size, var(--icon_size_xl2))"
 				/>
 			</div>
 		{/if}
 	</div>
-	{#if pkg.modules.length > 0 && pkg.repo_url}
+	{#if library.modules.length > 0 && library.repo_url}
 		<section>
 			<menu class="unstyled">
-				{#each pkg.modules as module (module.path)}
+				{#each library.modules as module (module.path)}
 					<!-- TODO improve rendering and enrich data - start with the type (not just extension - mime?) -->
 					<li
 						class="module"
@@ -174,11 +179,11 @@
 									{module.path}
 								</ModuleLink>
 							</span>
-							{#if module.identifiers.length > 0}
-								<ul class="identifiers unstyled">
-									{#each module.identifiers as identifier (identifier.name)}
+							{#if module.declarations.length > 0}
+								<ul class="declarations unstyled">
+									{#each module.declarations as declaration (declaration.name)}
 										<li>
-											<IdentifierLink name={identifier.name} />
+											<DeclarationLink name={declaration.name} />
 										</li>
 									{/each}
 								</ul>
@@ -197,7 +202,7 @@
 <!-- TODO better rendering, also show author, etc -->
 
 <style>
-	.package_detail {
+	.library_detail {
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
@@ -280,7 +285,7 @@
 		--link_color: var(--color_f_5);
 	}
 	/* TODO extract */
-	.identifiers {
+	.declarations {
 		display: flex;
 		flex: 1;
 		flex-direction: row;

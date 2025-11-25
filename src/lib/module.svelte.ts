@@ -1,92 +1,78 @@
-import type {ModuleJson} from '@ryanatkn/belt/src_json.js';
+import type {ModuleJson} from '@ryanatkn/belt/source_json.js';
 
-import {Identifier} from './identifier.svelte.js';
-import type {Pkg} from './pkg.svelte.js';
-import {url_github_file, url_api_module} from './package_helpers.js';
+import {Declaration} from './declaration.svelte.js';
+import type {Library} from './library.svelte.js';
+import {url_github_file} from './library_helpers.js';
 
 /**
- * Rich runtime representation of ModuleJson with computed properties.
- *
- * Combines:
- *
- * - minimal ModuleJson data
- * - full Pkg reference (for generating URLs, import statements, etc.)
- * - lazy-computed Identifier instances
- * - query methods for ergonomic usage
+ * Rich runtime representation of a module with computed properties.
  */
 export class Module {
-	readonly pkg: Pkg = $state.raw()!;
+	readonly library: Library = $state.raw()!;
 	readonly module_json: ModuleJson = $state.raw()!;
 
 	/**
-	 * Canonical module path (no prefix) - matches storage, URLs, display.
-	 * Examples: 'Alert.ts', 'helpers/foo.ts'
+	 * Canonical module path (e.g., 'Alert.ts', 'helpers/foo.ts').
 	 */
 	path = $derived(this.module_json.path);
 
 	/**
-	 * Import-style path with ./ prefix for import statements.
-	 * Examples: './Alert.ts', './helpers/foo.ts'
+	 * Import-style path with ./ prefix.
 	 */
 	path_import = $derived('./' + this.path);
 
 	module_comment = $derived(this.module_json.module_comment);
 
 	/**
-	 * Lazy-computed array of Identifier instances.
-	 * Filters out default exports and creates rich Identifier objects.
+	 * Array of Declaration instances. Filters out default exports.
 	 */
-	identifiers = $derived(
-		this.module_json.identifiers
-			? this.module_json.identifiers
-					.filter((identifier_json) => identifier_json.name !== 'default') // skip default exports
-					.map((identifier_json) => new Identifier(this, identifier_json))
+	declarations = $derived(
+		this.module_json.declarations
+			? this.module_json.declarations
+					.filter((declaration_json) => declaration_json.name !== 'default')
+					.map((declaration_json) => new Declaration(this, declaration_json))
 			: [],
 	);
 
 	/**
-	 * API documentation URL for this module page.
-	 * Example: "/docs/api/Alert.ts"
+	 * API documentation URL for this module.
 	 */
-	url_api = $derived(url_api_module(this.path));
+	url_api = $derived(`/docs/api/${this.path}`);
 
 	/**
-	 * GitHub source URL for the module file.
-	 * Example: "https://github.com/ryanatkn/fuz/blob/main/src/lib/Alert.ts"
+	 * GitHub source URL.
 	 */
 	url_github = $derived(
-		this.pkg.repo_url ? url_github_file(this.pkg.repo_url, `src/lib/${this.path}`) : undefined,
+		this.library.repo_url
+			? url_github_file(this.library.repo_url, `src/lib/${this.path}`)
+			: undefined,
 	);
 
-	has_identifiers: boolean = $derived(
-		!!(this.module_json.identifiers && this.module_json.identifiers.length > 0),
+	has_declarations: boolean = $derived(
+		!!(this.module_json.declarations && this.module_json.declarations.length > 0),
 	);
 
 	has_module_comment: boolean = $derived(!!this.module_json.module_comment);
 
 	/**
-	 * Module paths (relative to src/lib) that this module imports.
-	 *
-	 * @nonempty
+	 * Modules this imports (paths relative to src/lib).
 	 */
 	dependencies = $derived(this.module_json.dependencies);
 
 	/**
-	 * Module paths (relative to src/lib) that import this module.
-	 *
-	 * @nonempty
+	 * Modules that import this (paths relative to src/lib).
 	 */
 	dependents = $derived(this.module_json.dependents);
 
-	constructor(pkg: Pkg, module_json: ModuleJson) {
-		this.pkg = pkg;
+	constructor(library: Library, module_json: ModuleJson) {
+		this.library = library;
 		this.module_json = module_json;
 	}
 
 	/**
-	 * Look up an identifier by name within this module.
+	 * Look up a declaration by name within this module.
 	 */
-	get_identifier_by_name(name: string): Identifier | undefined {
-		return this.identifiers.find((id) => id.name === name);
+	get_declaration_by_name(name: string): Declaration | undefined {
+		return this.declarations.find((d) => d.name === name);
 	}
 }

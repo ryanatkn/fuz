@@ -8,7 +8,7 @@ import type {Attachment} from 'svelte/attachments';
 
 import {Dimensions} from './dimensions.svelte.js';
 import {create_context} from './context_helpers.js';
-import {url_to_root_relative} from './package_helpers.js';
+import {url_to_root_relative} from './library_helpers.js';
 
 export type ContextmenuParams =
 	| Snippet

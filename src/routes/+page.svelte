@@ -4,7 +4,7 @@
 	import DocsFooter from '$lib/DocsFooter.svelte';
 	import Card from '$lib/Card.svelte';
 	import GithubLink from '$lib/GithubLink.svelte';
-	import {pkg_context} from '$lib/pkg.svelte.js';
+	import {library_context} from '$lib/library.svelte.js';
 	import Svg, {type SvgData} from '$lib/Svg.svelte';
 	import {
 		fuz_logo,
@@ -20,7 +20,7 @@
 	import {MAIN_HEADER_MARGIN_TOP} from '$lib/constants.js';
 	import {DOCS_PATH} from '$lib/docs_helpers.svelte.js';
 
-	const pkg = pkg_context.get();
+	const library = library_context.get();
 
 	// TODO refactor
 	interface ProjectItem {
@@ -87,7 +87,7 @@
 			</menu>
 		</section>
 		<section>
-			<DocsFooter {pkg}>
+			<DocsFooter {library}>
 				{#snippet logo_header()}
 					<a href={resolve('/about')} class="mb_xs">about</a>
 				{/snippet}

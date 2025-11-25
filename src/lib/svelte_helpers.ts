@@ -16,7 +16,7 @@
 import ts from 'typescript';
 import {readFileSync} from 'node:fs';
 import {svelte2tsx} from 'svelte2tsx';
-import type {IdentifierJson, ComponentPropInfo} from '@ryanatkn/belt/src_json.js';
+import type {DeclarationJson, ComponentPropInfo} from '@ryanatkn/belt/source_json.js';
 
 import {tsdoc_parse, tsdoc_apply_to_declaration} from './tsdoc_helpers.js';
 import {module_get_component_name} from './module_helpers.js';
@@ -29,8 +29,8 @@ export const svelte_analyze_component = (
 	source_file: ts.SourceFile,
 	checker: ts.TypeChecker,
 	component_name: string,
-): IdentifierJson => {
-	const result: IdentifierJson = {
+): DeclarationJson => {
+	const result: DeclarationJson = {
 		name: component_name,
 		kind: 'component',
 	};
@@ -273,13 +273,13 @@ const svelte_extract_props = (
  * @param file_path Absolute path to the .svelte file
  * @param module_path Module path relative to src/lib (e.g., 'Alert.svelte')
  * @param checker TypeScript type checker for type resolution
- * @returns Complete identifier metadata for the component
+ * @returns Complete declaration metadata for the component
  */
 export const svelte_analyze_file = (
 	file_path: string,
 	module_path: string,
 	checker: ts.TypeChecker,
-): IdentifierJson => {
+): DeclarationJson => {
 	const svelte_source = readFileSync(file_path, 'utf-8');
 
 	// Check if component uses TypeScript

@@ -5,7 +5,11 @@
  */
 
 import ts from 'typescript';
-import type {IdentifierJson, GenericParamInfo, IdentifierKind} from '@ryanatkn/belt/src_json.js';
+import type {
+	DeclarationJson,
+	GenericParamInfo,
+	DeclarationKind,
+} from '@ryanatkn/belt/source_json.js';
 
 import {tsdoc_parse, tsdoc_apply_to_declaration} from './tsdoc_helpers.js';
 import {module_extract_path, module_matches_source} from './module_helpers.js';
@@ -52,7 +56,7 @@ const ts_extract_modifiers = (
 /**
  * Infer declaration kind from symbol and node.
  */
-export const ts_infer_declaration_kind = (symbol: ts.Symbol, node: ts.Node): IdentifierKind => {
+export const ts_infer_declaration_kind = (symbol: ts.Symbol, node: ts.Node): DeclarationKind => {
 	// Check symbol flags
 	if (symbol.flags & ts.SymbolFlags.Class) return 'class';
 	if (symbol.flags & ts.SymbolFlags.Function) return 'function';
@@ -80,13 +84,13 @@ export const ts_infer_declaration_kind = (symbol: ts.Symbol, node: ts.Node): Ide
  * Extract function/method information including parameters
  * with descriptions and default values.
  *
- * @mutates identifier - adds type_signature, return_type, return_description, throws, since, parameters, generic_params
+ * @mutates declaration - adds type_signature, return_type, return_description, throws, since, parameters, generic_params
  */
 export const ts_extract_function_info = (
 	node: ts.Node,
 	symbol: ts.Symbol,
 	checker: ts.TypeChecker,
-	identifier: IdentifierJson,
+	declaration: DeclarationJson,
 	tsdoc: ReturnType<typeof tsdoc_parse>,
 ): void => {
 	try {
@@ -95,26 +99,26 @@ export const ts_extract_function_info = (
 
 		if (signatures.length > 0) {
 			const sig = signatures[0]!;
-			identifier.type_signature = checker.signatureToString(sig);
+			declaration.type_signature = checker.signatureToString(sig);
 
 			const return_type = checker.getReturnTypeOfSignature(sig);
-			identifier.return_type = checker.typeToString(return_type);
+			declaration.return_type = checker.typeToString(return_type);
 
 			// Extract return description from TSDoc
 			if (tsdoc?.returns) {
-				identifier.return_description = tsdoc.returns;
+				declaration.return_description = tsdoc.returns;
 			}
 
 			// Extract throws and since from TSDoc
 			if (tsdoc?.throws?.length) {
-				identifier.throws = tsdoc.throws;
+				declaration.throws = tsdoc.throws;
 			}
 			if (tsdoc?.since) {
-				identifier.since = tsdoc.since;
+				declaration.since = tsdoc.since;
 			}
 
 			// Extract parameters with descriptions and default values
-			identifier.parameters = sig.parameters.map((param) => {
+			declaration.parameters = sig.parameters.map((param) => {
 				const param_decl = param.valueDeclaration;
 				const param_type = checker.getTypeOfSymbolAtLocation(param, param_decl!);
 
@@ -143,7 +147,7 @@ export const ts_extract_function_info = (
 	// Extract generic type parameters
 	if (ts.isFunctionDeclaration(node) || ts.isArrowFunction(node) || ts.isFunctionExpression(node)) {
 		if (node.typeParameters?.length) {
-			identifier.generic_params = node.typeParameters.map(ts_parse_generic_param);
+			declaration.generic_params = node.typeParameters.map(ts_parse_generic_param);
 		}
 	}
 };
@@ -151,40 +155,40 @@ export const ts_extract_function_info = (
 /**
  * Extract type/interface information with rich property metadata.
  *
- * @mutates identifier - adds type_signature, generic_params, extends, properties
+ * @mutates declaration - adds type_signature, generic_params, extends, properties
  */
 export const ts_extract_type_info = (
 	node: ts.Node,
 	_symbol: ts.Symbol,
 	checker: ts.TypeChecker,
-	identifier: IdentifierJson,
+	declaration: DeclarationJson,
 ): void => {
 	try {
 		const type = checker.getTypeAtLocation(node);
-		identifier.type_signature = checker.typeToString(type);
+		declaration.type_signature = checker.typeToString(type);
 	} catch (_err) {
 		// Ignore: Type checker may fail on complex or recursive types
 	}
 
 	if (ts.isTypeAliasDeclaration(node) || ts.isInterfaceDeclaration(node)) {
 		if (node.typeParameters?.length) {
-			identifier.generic_params = node.typeParameters.map(ts_parse_generic_param);
+			declaration.generic_params = node.typeParameters.map(ts_parse_generic_param);
 		}
 	}
 
 	if (ts.isInterfaceDeclaration(node)) {
 		if (node.heritageClauses) {
-			identifier.extends = node.heritageClauses
+			declaration.extends = node.heritageClauses
 				.filter((hc) => hc.token === ts.SyntaxKind.ExtendsKeyword)
 				.flatMap((hc) => hc.types.map((t) => t.getText()));
 		}
 
 		// Extract properties with full metadata
-		identifier.properties = [];
+		declaration.properties = [];
 		for (const member of node.members) {
 			if (ts.isPropertySignature(member) && ts.isIdentifier(member.name)) {
 				const prop_name = member.name.text;
-				const prop_identifier: IdentifierJson = {
+				const prop_declaration: DeclarationJson = {
 					name: prop_name,
 					kind: 'variable',
 				};
@@ -192,21 +196,21 @@ export const ts_extract_type_info = (
 				// Extract modifiers
 				const modifier_flags = ts_extract_modifiers(ts.getModifiers(member));
 				if (modifier_flags.length > 0) {
-					prop_identifier.modifiers = modifier_flags;
+					prop_declaration.modifiers = modifier_flags;
 				}
 
 				// Extract type
 				if (member.type) {
-					prop_identifier.type_signature = member.type.getText();
+					prop_declaration.type_signature = member.type.getText();
 				}
 
 				// Extract TSDoc
 				const prop_tsdoc = tsdoc_parse(member, node.getSourceFile());
 				if (prop_tsdoc) {
-					prop_identifier.doc_comment = prop_tsdoc.text;
+					prop_declaration.doc_comment = prop_tsdoc.text;
 				}
 
-				identifier.properties.push(prop_identifier);
+				declaration.properties.push(prop_declaration);
 			}
 		}
 	}
@@ -215,32 +219,32 @@ export const ts_extract_type_info = (
 /**
  * Extract class information with rich member metadata.
  *
- * @mutates identifier - adds extends, implements, generic_params, members
+ * @mutates declaration - adds extends, implements, generic_params, members
  */
 export const ts_extract_class_info = (
 	node: ts.Node,
 	_symbol: ts.Symbol,
 	checker: ts.TypeChecker,
-	identifier: IdentifierJson,
+	declaration: DeclarationJson,
 ): void => {
 	if (!ts.isClassDeclaration(node)) return;
 
 	if (node.heritageClauses) {
-		identifier.extends = node.heritageClauses
+		declaration.extends = node.heritageClauses
 			.filter((hc) => hc.token === ts.SyntaxKind.ExtendsKeyword)
 			.flatMap((hc) => hc.types.map((t) => t.getText()));
 
-		identifier.implements = node.heritageClauses
+		declaration.implements = node.heritageClauses
 			.filter((hc) => hc.token === ts.SyntaxKind.ImplementsKeyword)
 			.flatMap((hc) => hc.types.map((t) => t.getText()));
 	}
 
 	if (node.typeParameters?.length) {
-		identifier.generic_params = node.typeParameters.map(ts_parse_generic_param);
+		declaration.generic_params = node.typeParameters.map(ts_parse_generic_param);
 	}
 
 	// Extract members with full metadata
-	identifier.members = [];
+	declaration.members = [];
 	for (const member of node.members) {
 		if (
 			ts.isPropertyDeclaration(member) ||
@@ -258,7 +262,7 @@ export const ts_extract_class_info = (
 			// Skip private fields (those starting with #)
 			if (member_name.startsWith('#')) continue;
 
-			const member_identifier: IdentifierJson = {
+			const member_declaration: DeclarationJson = {
 				name: member_name,
 				kind: is_constructor
 					? 'constructor'
@@ -270,19 +274,19 @@ export const ts_extract_class_info = (
 			// Extract visibility and modifiers
 			const modifier_flags = ts_extract_modifiers(ts.getModifiers(member));
 			if (modifier_flags.length > 0) {
-				member_identifier.modifiers = modifier_flags;
+				member_declaration.modifiers = modifier_flags;
 			}
 
 			// Extract TSDoc
 			const member_tsdoc = tsdoc_parse(member, node.getSourceFile());
 			if (member_tsdoc) {
-				member_identifier.doc_comment = member_tsdoc.text;
+				member_declaration.doc_comment = member_tsdoc.text;
 			}
 
 			// Extract type information and parameters for methods and constructors
 			try {
 				if (ts.isPropertyDeclaration(member) && member.type) {
-					member_identifier.type_signature = member.type.getText();
+					member_declaration.type_signature = member.type.getText();
 				} else if (ts.isMethodDeclaration(member) || ts.isConstructorDeclaration(member)) {
 					let signatures: ReadonlyArray<ts.Signature> = [];
 
@@ -306,22 +310,22 @@ export const ts_extract_class_info = (
 						const sig = signatures[0]!;
 
 						// Extract type signature for both constructors and methods
-						member_identifier.type_signature = checker.signatureToString(sig);
+						member_declaration.type_signature = checker.signatureToString(sig);
 
 						// For methods (but not constructors), also extract return info separately
 						if (!is_constructor) {
 							// Extract return type for methods
 							const return_type = checker.getReturnTypeOfSignature(sig);
-							member_identifier.return_type = checker.typeToString(return_type);
+							member_declaration.return_type = checker.typeToString(return_type);
 
 							// Extract return description from TSDoc
 							if (member_tsdoc?.returns) {
-								member_identifier.return_description = member_tsdoc.returns;
+								member_declaration.return_description = member_tsdoc.returns;
 							}
 						}
 
 						// Extract parameters with descriptions and default values
-						member_identifier.parameters = sig.parameters.map((param) => {
+						member_declaration.parameters = sig.parameters.map((param) => {
 							const param_decl = param.valueDeclaration;
 							const param_type = checker.getTypeOfSymbolAtLocation(param, param_decl!);
 
@@ -345,10 +349,10 @@ export const ts_extract_class_info = (
 
 						// Extract throws and since from TSDoc (for both methods and constructors)
 						if (member_tsdoc?.throws?.length) {
-							member_identifier.throws = member_tsdoc.throws;
+							member_declaration.throws = member_tsdoc.throws;
 						}
 						if (member_tsdoc?.since) {
-							member_identifier.since = member_tsdoc.since;
+							member_declaration.since = member_tsdoc.since;
 						}
 					}
 				}
@@ -356,7 +360,7 @@ export const ts_extract_class_info = (
 				// Ignore: Type checker may fail on complex member signatures
 			}
 
-			identifier.members.push(member_identifier);
+			declaration.members.push(member_declaration);
 		}
 	}
 };
@@ -364,29 +368,29 @@ export const ts_extract_class_info = (
 /**
  * Extract variable information.
  *
- * @mutates identifier - adds type_signature
+ * @mutates declaration - adds type_signature
  */
 export const ts_extract_variable_info = (
 	node: ts.Node,
 	symbol: ts.Symbol,
 	checker: ts.TypeChecker,
-	identifier: IdentifierJson,
+	declaration: DeclarationJson,
 ): void => {
 	try {
 		const type = checker.getTypeOfSymbolAtLocation(symbol, node);
-		identifier.type_signature = checker.typeToString(type);
+		declaration.type_signature = checker.typeToString(type);
 	} catch (_err) {
 		// Ignore: Type checker may fail on complex variable types
 	}
 };
 
 /**
- * Result of analyzing a single identifier.
+ * Result of analyzing a single declaration.
  */
-export interface TsIdentifierAnalysis {
-	/** The analyzed identifier metadata. */
-	identifier: IdentifierJson;
-	/** Whether the identifier is marked @nodocs (should be excluded from documentation). */
+export interface TsDeclarationAnalysis {
+	/** The analyzed declaration metadata. */
+	declaration: DeclarationJson;
+	/** Whether the declaration is marked @nodocs (should be excluded from documentation). */
 	nodocs: boolean;
 }
 
@@ -394,32 +398,32 @@ export interface TsIdentifierAnalysis {
  * Analyze a TypeScript symbol and extract rich metadata.
  *
  * This is a high-level function that combines TSDoc parsing with TypeScript
- * type analysis to produce complete identifier metadata. Suitable for use
+ * type analysis to produce complete declaration metadata. Suitable for use
  * in documentation generators, IDE integrations, and other tooling.
  *
  * @param symbol The TypeScript symbol to analyze
  * @param source_file The source file containing the symbol
  * @param checker The TypeScript type checker
- * @returns Complete identifier metadata including docs, types, and parameters, plus nodocs flag
+ * @returns Complete declaration metadata including docs, types, and parameters, plus nodocs flag
  */
-export const ts_analyze_identifier = (
+export const ts_analyze_declaration = (
 	symbol: ts.Symbol,
 	source_file: ts.SourceFile,
 	checker: ts.TypeChecker,
-): TsIdentifierAnalysis => {
+): TsDeclarationAnalysis => {
 	const name = symbol.name;
 	const decl_node = symbol.valueDeclaration || symbol.declarations?.[0];
 
 	// Determine kind (fallback to 'variable' if no declaration node)
 	const kind = decl_node ? ts_infer_declaration_kind(symbol, decl_node) : 'variable';
 
-	const result: IdentifierJson = {
+	const result: DeclarationJson = {
 		name,
 		kind,
 	};
 
 	if (!decl_node) {
-		return {identifier: result, nodocs: false};
+		return {declaration: result, nodocs: false};
 	}
 
 	// Extract TSDoc
@@ -443,7 +447,7 @@ export const ts_analyze_identifier = (
 		ts_extract_variable_info(decl_node, symbol, checker, result);
 	}
 
-	return {identifier: result, nodocs};
+	return {declaration: result, nodocs};
 };
 
 /**
@@ -463,8 +467,8 @@ export interface ReExportInfo {
 export interface ModuleExportsAnalysis {
 	/** Module-level documentation comment. */
 	module_comment?: string;
-	/** All exported identifiers with their metadata (excludes same-name re-exports). */
-	identifiers: Array<IdentifierJson>;
+	/** All exported declarations with their metadata (excludes same-name re-exports). */
+	declarations: Array<DeclarationJson>;
 	/** Same-name re-exports (for building also_exported_from in post-processing). */
 	re_exports: Array<ReExportInfo>;
 }
@@ -472,22 +476,22 @@ export interface ModuleExportsAnalysis {
 /**
  * Analyze all exports from a TypeScript source file.
  *
- * Extracts the module-level comment and all exported identifiers with
+ * Extracts the module-level comment and all exported declarations with
  * complete metadata. Handles re-exports by:
  * - Same-name re-exports: tracked in `re_exports` for `also_exported_from` building
- * - Renamed re-exports: included as new identifiers with `alias_of` metadata
+ * - Renamed re-exports: included as new declarations with `alias_of` metadata
  *
  * This is a high-level function suitable for building documentation, API explorers, or analysis tools.
  *
  * @param source_file The TypeScript source file to analyze
  * @param checker The TypeScript type checker
- * @returns Module comment, array of analyzed identifiers, and re-export information
+ * @returns Module comment, array of analyzed declarations, and re-export information
  */
 export const ts_analyze_module_exports = (
 	source_file: ts.SourceFile,
 	checker: ts.TypeChecker,
 ): ModuleExportsAnalysis => {
-	const identifiers: Array<IdentifierJson> = [];
+	const declarations: Array<DeclarationJson> = [];
 	const re_exports: Array<ReExportInfo> = [];
 
 	// Extract module-level comment
@@ -518,16 +522,16 @@ export const ts_analyze_module_exports = (
 							const is_renamed = export_symbol.name !== original_name;
 
 							if (is_renamed) {
-								// Renamed re-export (export {foo as bar}) - create new identifier with alias_of
+								// Renamed re-export (export {foo as bar}) - create new declaration with alias_of
 								const kind = ts_infer_declaration_kind(aliased_symbol, aliased_decl);
-								const identifier: IdentifierJson = {
+								const decl: DeclarationJson = {
 									name: export_symbol.name,
 									kind,
 									alias_of: {module: original_module, name: original_name},
 								};
-								identifiers.push(identifier);
+								declarations.push(decl);
 							} else {
-								// Same-name re-export - track for also_exported_from, skip from identifiers
+								// Same-name re-export - track for also_exported_from, skip from declarations
 								re_exports.push({
 									name: export_symbol.name,
 									original_module,
@@ -543,16 +547,16 @@ export const ts_analyze_module_exports = (
 			}
 
 			// Normal export or within-file alias - declared in this file
-			const {identifier, nodocs} = ts_analyze_identifier(export_symbol, source_file, checker);
-			// Skip @nodocs identifiers - they're excluded from documentation
+			const {declaration, nodocs} = ts_analyze_declaration(export_symbol, source_file, checker);
+			// Skip @nodocs declarations - they're excluded from documentation
 			if (nodocs) continue;
-			identifiers.push(identifier);
+			declarations.push(declaration);
 		}
 	}
 
 	return {
 		module_comment,
-		identifiers,
+		declarations,
 		re_exports,
 	};
 };

@@ -1,11 +1,11 @@
-import type {IdentifierJson} from '@ryanatkn/belt/src_json.js';
+import type {DeclarationJson} from '@ryanatkn/belt/source_json.js';
 
 import {load_fixtures_generic} from '../../test_helpers.js';
 
 export interface SvelteFixture {
 	name: string;
 	input: string;
-	expected: IdentifierJson;
+	expected: DeclarationJson;
 }
 
 /**
@@ -26,7 +26,7 @@ export const fixture_name_to_component_name = (name: string): string => {
  * Load all fixtures from the svelte fixtures directory.
  */
 export const load_fixtures = async (): Promise<Array<SvelteFixture>> => {
-	return load_fixtures_generic<IdentifierJson>({
+	return load_fixtures_generic<DeclarationJson>({
 		fixtures_dir: import.meta.dirname,
 		input_extension: '.svelte',
 	});
@@ -35,7 +35,7 @@ export const load_fixtures = async (): Promise<Array<SvelteFixture>> => {
 /**
  * Validate that a parsed Svelte component has the expected structure.
  */
-export const validate_component_structure = (component: IdentifierJson): void => {
+export const validate_component_structure = (component: DeclarationJson): void => {
 	if (!component) {
 		throw new Error('Expected component to be defined');
 	}

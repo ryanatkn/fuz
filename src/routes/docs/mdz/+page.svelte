@@ -7,7 +7,7 @@
 	import TomeSection from '$lib/TomeSection.svelte';
 	import TomeSectionHeader from '$lib/TomeSectionHeader.svelte';
 	import Mdz from '$lib/Mdz.svelte';
-	import IdentifierLink from '$lib/IdentifierLink.svelte';
+	import DeclarationLink from '$lib/DeclarationLink.svelte';
 	import {mdz_components_context, mdz_elements_context} from '$lib/mdz_components.js';
 	import Alert from '$lib/Alert.svelte';
 
@@ -226,7 +226,7 @@ mdz_components_context.set(new Map([
 	<TomeSection>
 		<TomeSectionHeader text="Advanced usage" />
 		<p>
-			For more control, use <IdentifierLink name="mdz_parse" /> directly with <IdentifierLink
+			For more control, use <DeclarationLink name="mdz_parse" /> directly with <DeclarationLink
 				name="MdzNodeView"
 			/>:
 		</p>

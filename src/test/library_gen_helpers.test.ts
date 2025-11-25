@@ -1,15 +1,15 @@
 import {test, assert, describe} from 'vitest';
 import type {Logger} from '@ryanatkn/belt/log.js';
 import type {PackageJson} from '@ryanatkn/belt/package_json.js';
-import type {SrcJson, ModuleJson, IdentifierKind} from '@ryanatkn/belt/src_json.js';
+import type {SourceJson, ModuleJson, DeclarationKind} from '@ryanatkn/belt/source_json.js';
 import type {Disknode} from '@ryanatkn/gro/disknode.js';
 
 import {
-	package_gen_validate_no_duplicates,
-	package_gen_sort_modules,
-	package_gen_generate_ts,
-	package_gen_extract_dependencies,
-} from '$lib/package_gen_helpers.js';
+	library_gen_validate_no_duplicates,
+	library_gen_sort_modules,
+	library_gen_generate_ts,
+	library_gen_extract_dependencies,
+} from '$lib/library_gen_helpers.js';
 
 /**
  * Create a mock logger that captures log calls for testing validation output.
@@ -45,14 +45,14 @@ const create_mock_logger = (): Logger & {
 };
 
 /**
- * Create a mock SrcJson with test modules.
+ * Create a mock SourceJson with test modules.
  *
  * Provides minimal package metadata for testing validation logic.
  *
  * @param modules array of ModuleJson objects to include
- * @returns SrcJson with standard test package name and version
+ * @returns SourceJson with standard test package name and version
  */
-const create_mock_src_json = (modules: Array<ModuleJson>): SrcJson => {
+const create_mock_source_json = (modules: Array<ModuleJson>): SourceJson => {
 	return {
 		name: '@test/package',
 		version: '1.0.0',
@@ -61,21 +61,21 @@ const create_mock_src_json = (modules: Array<ModuleJson>): SrcJson => {
 };
 
 /**
- * Create a mock ModuleJson with test identifiers.
+ * Create a mock ModuleJson with test declarations.
  *
- * Simplifies test setup by auto-generating minimal identifier metadata.
+ * Simplifies test setup by auto-generating minimal declaration metadata.
  *
  * @param path module path (e.g., 'foo.ts', 'Bar.svelte')
- * @param identifiers array of identifier objects with name and kind
- * @returns ModuleJson with the specified identifiers
+ * @param declarations array of declaration objects with name and kind
+ * @returns ModuleJson with the specified declarations
  */
 const create_mock_module = (
 	path: string,
-	identifiers: Array<{name: string; kind: IdentifierKind}>,
+	declarations: Array<{name: string; kind: DeclarationKind}>,
 ): ModuleJson => {
 	return {
 		path,
-		identifiers: identifiers.map(({name, kind}) => ({
+		declarations: declarations.map(({name, kind}) => ({
 			name,
 			kind,
 		})),
@@ -138,10 +138,10 @@ const create_mock_disknode = (
 	return disknode;
 };
 
-describe('package_gen_validate_no_duplicates', () => {
+describe('library_gen_validate_no_duplicates', () => {
 	describe('happy path - validation passes', () => {
 		test('no duplicates - validation passes', () => {
-			const src_json = create_mock_src_json([
+			const source_json = create_mock_source_json([
 				create_mock_module('foo.ts', [
 					{name: 'foo', kind: 'function'},
 					{name: 'bar', kind: 'type'},
@@ -156,40 +156,40 @@ describe('package_gen_validate_no_duplicates', () => {
 
 			// Should not throw
 			assert.doesNotThrow(() => {
-				package_gen_validate_no_duplicates(src_json, logger);
+				library_gen_validate_no_duplicates(source_json, logger);
 			});
 
 			assert.strictEqual(logger.errors.length, 0);
 		});
 
 		test('empty modules array', () => {
-			const src_json = create_mock_src_json([]);
+			const source_json = create_mock_source_json([]);
 			const logger = create_mock_logger();
 
 			assert.doesNotThrow(() => {
-				package_gen_validate_no_duplicates(src_json, logger);
+				library_gen_validate_no_duplicates(source_json, logger);
 			});
 
 			assert.strictEqual(logger.errors.length, 0);
 		});
 
-		test('modules with no identifiers', () => {
-			const src_json = create_mock_src_json([
-				{path: 'empty.ts', identifiers: []},
-				{path: 'also_empty.ts', identifiers: []},
+		test('modules with no declarations', () => {
+			const source_json = create_mock_source_json([
+				{path: 'empty.ts', declarations: []},
+				{path: 'also_empty.ts', declarations: []},
 			]);
 
 			const logger = create_mock_logger();
 
 			assert.doesNotThrow(() => {
-				package_gen_validate_no_duplicates(src_json, logger);
+				library_gen_validate_no_duplicates(source_json, logger);
 			});
 
 			assert.strictEqual(logger.errors.length, 0);
 		});
 
 		test('undefined modules array', () => {
-			const src_json: SrcJson = {
+			const source_json: SourceJson = {
 				name: '@test/package',
 				version: '1.0.0',
 			};
@@ -197,14 +197,14 @@ describe('package_gen_validate_no_duplicates', () => {
 			const logger = create_mock_logger();
 
 			assert.doesNotThrow(() => {
-				package_gen_validate_no_duplicates(src_json, logger);
+				library_gen_validate_no_duplicates(source_json, logger);
 			});
 
 			assert.strictEqual(logger.errors.length, 0);
 		});
 
-		test('single module with multiple unique identifiers', () => {
-			const src_json = create_mock_src_json([
+		test('single module with multiple unique declarations', () => {
+			const source_json = create_mock_source_json([
 				create_mock_module('helpers.ts', [
 					{name: 'foo', kind: 'function'},
 					{name: 'bar', kind: 'function'},
@@ -216,7 +216,7 @@ describe('package_gen_validate_no_duplicates', () => {
 			const logger = create_mock_logger();
 
 			assert.doesNotThrow(() => {
-				package_gen_validate_no_duplicates(src_json, logger);
+				library_gen_validate_no_duplicates(source_json, logger);
 			});
 
 			assert.strictEqual(logger.errors.length, 0);
@@ -225,7 +225,7 @@ describe('package_gen_validate_no_duplicates', () => {
 
 	describe('error cases - validation fails', () => {
 		test('single duplicate across two modules', () => {
-			const src_json = create_mock_src_json([
+			const source_json = create_mock_source_json([
 				create_mock_module('foo.ts', [{name: 'Duplicate', kind: 'type'}]),
 				create_mock_module('bar.ts', [{name: 'Duplicate', kind: 'component'}]),
 			]);
@@ -234,9 +234,9 @@ describe('package_gen_validate_no_duplicates', () => {
 
 			assert.throws(
 				() => {
-					package_gen_validate_no_duplicates(src_json, logger);
+					library_gen_validate_no_duplicates(source_json, logger);
 				},
-				/Found 1 duplicate identifier name across modules/,
+				/Found 1 duplicate declaration name across modules/,
 				'should throw error for single duplicate',
 			);
 
@@ -248,7 +248,7 @@ describe('package_gen_validate_no_duplicates', () => {
 		});
 
 		test('multiple duplicates', () => {
-			const src_json = create_mock_src_json([
+			const source_json = create_mock_source_json([
 				create_mock_module('a.ts', [
 					{name: 'Dup1', kind: 'type'},
 					{name: 'Dup2', kind: 'function'},
@@ -263,9 +263,9 @@ describe('package_gen_validate_no_duplicates', () => {
 
 			assert.throws(
 				() => {
-					package_gen_validate_no_duplicates(src_json, logger);
+					library_gen_validate_no_duplicates(source_json, logger);
 				},
-				/Found 2 duplicate identifier names across modules/,
+				/Found 2 duplicate declaration names across modules/,
 				'should throw error for multiple duplicates',
 			);
 
@@ -276,7 +276,7 @@ describe('package_gen_validate_no_duplicates', () => {
 		});
 
 		test('same name in 3+ modules', () => {
-			const src_json = create_mock_src_json([
+			const source_json = create_mock_source_json([
 				create_mock_module('a.ts', [{name: 'Common', kind: 'type'}]),
 				create_mock_module('b.ts', [{name: 'Common', kind: 'function'}]),
 				create_mock_module('c.ts', [{name: 'Common', kind: 'class'}]),
@@ -285,8 +285,8 @@ describe('package_gen_validate_no_duplicates', () => {
 			const logger = create_mock_logger();
 
 			assert.throws(() => {
-				package_gen_validate_no_duplicates(src_json, logger);
-			}, /Found 1 duplicate identifier name across modules/);
+				library_gen_validate_no_duplicates(source_json, logger);
+			}, /Found 1 duplicate declaration name across modules/);
 
 			// Check all three modules are mentioned
 			const all_errors = logger.errors.join(' ');
@@ -296,7 +296,7 @@ describe('package_gen_validate_no_duplicates', () => {
 		});
 
 		test('duplicate with different kinds shows both kinds', () => {
-			const src_json = create_mock_src_json([
+			const source_json = create_mock_source_json([
 				create_mock_module('helpers.ts', [{name: 'Foo', kind: 'function'}]),
 				create_mock_module('Foo.svelte', [{name: 'Foo', kind: 'component'}]),
 			]);
@@ -304,7 +304,7 @@ describe('package_gen_validate_no_duplicates', () => {
 			const logger = create_mock_logger();
 
 			assert.throws(() => {
-				package_gen_validate_no_duplicates(src_json, logger);
+				library_gen_validate_no_duplicates(source_json, logger);
 			});
 
 			const all_errors = logger.errors.join(' ');
@@ -313,7 +313,7 @@ describe('package_gen_validate_no_duplicates', () => {
 		});
 
 		test('duplicate with different kinds', () => {
-			const src_json = create_mock_src_json([
+			const source_json = create_mock_source_json([
 				create_mock_module('a.ts', [{name: 'Unknown', kind: 'variable'}]),
 				create_mock_module('b.ts', [{name: 'Unknown', kind: 'type'}]),
 			]);
@@ -321,7 +321,7 @@ describe('package_gen_validate_no_duplicates', () => {
 			const logger = create_mock_logger();
 
 			assert.throws(() => {
-				package_gen_validate_no_duplicates(src_json, logger);
+				library_gen_validate_no_duplicates(source_json, logger);
 			});
 
 			const all_errors = logger.errors.join(' ');
@@ -332,7 +332,7 @@ describe('package_gen_validate_no_duplicates', () => {
 
 	describe('edge cases', () => {
 		test('real-world scenario - DocsLink collision', () => {
-			const src_json = create_mock_src_json([
+			const source_json = create_mock_source_json([
 				create_mock_module('docs_helpers.svelte.ts', [{name: 'DocsLink', kind: 'type'}]),
 				create_mock_module('DocsLink.svelte', [{name: 'DocsLink', kind: 'component'}]),
 			]);
@@ -340,8 +340,8 @@ describe('package_gen_validate_no_duplicates', () => {
 			const logger = create_mock_logger();
 
 			assert.throws(() => {
-				package_gen_validate_no_duplicates(src_json, logger);
-			}, /duplicate identifier name/i);
+				library_gen_validate_no_duplicates(source_json, logger);
+			}, /duplicate declaration name/i);
 
 			const all_errors = logger.errors.join(' ');
 			assert.ok(all_errors.includes('DocsLink'));
@@ -351,15 +351,15 @@ describe('package_gen_validate_no_duplicates', () => {
 	});
 });
 
-describe('package_gen_sort_modules', () => {
+describe('library_gen_sort_modules', () => {
 	test('sorts modules alphabetically by path', () => {
 		const modules: Array<ModuleJson> = [
-			{path: 'zebra.ts', identifiers: []},
-			{path: 'alpha.ts', identifiers: []},
-			{path: 'beta.ts', identifiers: []},
+			{path: 'zebra.ts', declarations: []},
+			{path: 'alpha.ts', declarations: []},
+			{path: 'beta.ts', declarations: []},
 		];
 
-		const sorted = package_gen_sort_modules(modules);
+		const sorted = library_gen_sort_modules(modules);
 
 		assert.strictEqual(sorted[0]!.path, 'alpha.ts');
 		assert.strictEqual(sorted[1]!.path, 'beta.ts');
@@ -368,12 +368,12 @@ describe('package_gen_sort_modules', () => {
 
 	test('does not mutate original array', () => {
 		const modules: Array<ModuleJson> = [
-			{path: 'c.ts', identifiers: []},
-			{path: 'a.ts', identifiers: []},
-			{path: 'b.ts', identifiers: []},
+			{path: 'c.ts', declarations: []},
+			{path: 'a.ts', declarations: []},
+			{path: 'b.ts', declarations: []},
 		];
 
-		const sorted = package_gen_sort_modules(modules);
+		const sorted = library_gen_sort_modules(modules);
 
 		// Original array should not be mutated
 		assert.strictEqual(modules[0]!.path, 'c.ts');
@@ -387,32 +387,32 @@ describe('package_gen_sort_modules', () => {
 	});
 
 	test('handles empty array', () => {
-		const sorted = package_gen_sort_modules([]);
+		const sorted = library_gen_sort_modules([]);
 		assert.strictEqual(sorted.length, 0);
 	});
 
 	test('handles single module', () => {
-		const modules: Array<ModuleJson> = [{path: 'single.ts', identifiers: []}];
-		const sorted = package_gen_sort_modules(modules);
+		const modules: Array<ModuleJson> = [{path: 'single.ts', declarations: []}];
+		const sorted = library_gen_sort_modules(modules);
 		assert.strictEqual(sorted.length, 1);
 		assert.strictEqual(sorted[0]!.path, 'single.ts');
 	});
 
 	test('stable sort with identical paths', () => {
 		const modules: Array<ModuleJson> = [
-			{path: 'same.ts', identifiers: [{name: 'first', kind: 'type'}]},
-			{path: 'same.ts', identifiers: [{name: 'second', kind: 'function'}]},
+			{path: 'same.ts', declarations: [{name: 'first', kind: 'type'}]},
+			{path: 'same.ts', declarations: [{name: 'second', kind: 'function'}]},
 		];
 
-		const sorted = package_gen_sort_modules(modules);
+		const sorted = library_gen_sort_modules(modules);
 
 		// Should maintain original order for identical paths
-		assert.strictEqual(sorted[0]!.identifiers![0]!.name, 'first');
-		assert.strictEqual(sorted[1]!.identifiers![0]!.name, 'second');
+		assert.strictEqual(sorted[0]!.declarations![0]!.name, 'first');
+		assert.strictEqual(sorted[1]!.declarations![0]!.name, 'second');
 	});
 });
 
-describe('package_gen_generate_ts', () => {
+describe('library_gen_generate_ts', () => {
 	test('generates valid TypeScript with correct structure', () => {
 		const package_json: PackageJson = {
 			name: '@test/package',
@@ -420,31 +420,31 @@ describe('package_gen_generate_ts', () => {
 			type: 'module',
 		};
 
-		const src_json: SrcJson = {
+		const source_json: SourceJson = {
 			name: '@test/package',
 			version: '1.0.0',
 			modules: [
 				{
 					path: 'test.ts',
-					identifiers: [{name: 'foo', kind: 'function'}],
+					declarations: [{name: 'foo', kind: 'function'}],
 				},
 			],
 		};
 
-		const result = package_gen_generate_ts(package_json, src_json);
+		const result = library_gen_generate_ts(package_json, source_json);
 
 		// Check file header comment
 		assert.ok(
-			result.includes('// generated by package.gen.ts !! do not edit directly or risk lost data'),
+			result.includes('// generated by library.gen.ts !! do not edit directly or risk lost data'),
 		);
 
 		// Check imports
 		assert.ok(result.includes('import type {PackageJson}'));
-		assert.ok(result.includes('import type {SrcJson}'));
+		assert.ok(result.includes('import type {SourceJson}'));
 
 		// Check exports use plain object literals (not JSON.parse)
 		assert.ok(result.includes('export const package_json: PackageJson = {'));
-		assert.ok(result.includes('export const src_json: SrcJson = {'));
+		assert.ok(result.includes('export const source_json: SourceJson = {'));
 
 		// Verify valid TypeScript structure (no syntax errors obvious)
 		assert.ok(!result.includes('undefined'));
@@ -458,12 +458,12 @@ describe('package_gen_generate_ts', () => {
 			description: 'Test package',
 		};
 
-		const src_json: SrcJson = {
+		const source_json: SourceJson = {
 			name: '@scope/pkg',
 			version: '2.0.0',
 		};
 
-		const result = package_gen_generate_ts(package_json, src_json);
+		const result = library_gen_generate_ts(package_json, source_json);
 
 		// Verify package_json fields are in embedded JSON string (single quotes, so no escaping needed for double quotes)
 		assert.ok(result.includes('"name": "@scope/pkg"'));
@@ -472,19 +472,19 @@ describe('package_gen_generate_ts', () => {
 		assert.ok(result.includes('"description": "Test package"'));
 	});
 
-	test('properly serializes src_json with modules', () => {
+	test('properly serializes source_json with modules', () => {
 		const package_json: PackageJson = {
 			name: '@test/package',
 			version: '1.0.0',
 		};
 
-		const src_json: SrcJson = {
+		const source_json: SourceJson = {
 			name: '@test/package',
 			version: '1.0.0',
 			modules: [
 				{
 					path: 'foo.ts',
-					identifiers: [
+					declarations: [
 						{name: 'foo', kind: 'function'},
 						{name: 'Bar', kind: 'type'},
 					],
@@ -492,12 +492,12 @@ describe('package_gen_generate_ts', () => {
 			],
 		};
 
-		const result = package_gen_generate_ts(package_json, src_json);
+		const result = library_gen_generate_ts(package_json, source_json);
 
 		// Verify modules structure in embedded JSON string (single quotes, so no escaping for double quotes)
 		assert.ok(result.includes('"modules"'));
 		assert.ok(result.includes('"path": "foo.ts"'));
-		assert.ok(result.includes('"identifiers"'));
+		assert.ok(result.includes('"declarations"'));
 		assert.ok(result.includes('"name": "foo"'));
 		assert.ok(result.includes('"kind": "function"'));
 		assert.ok(result.includes('"name": "Bar"'));
@@ -510,12 +510,12 @@ describe('package_gen_generate_ts', () => {
 			version: '1.0.0',
 		};
 
-		const src_json: SrcJson = {
+		const source_json: SourceJson = {
 			name: '@test/package',
 			version: '1.0.0',
 		};
 
-		const result = package_gen_generate_ts(package_json, src_json);
+		const result = library_gen_generate_ts(package_json, source_json);
 
 		// Should use tabs for indentation within embedded JSON
 		// json_embed uses line continuations with actual tabs for indentation
@@ -528,15 +528,15 @@ describe('package_gen_generate_ts', () => {
 			version: '1.0.0',
 		};
 
-		const src_json: SrcJson = {
+		const source_json: SourceJson = {
 			name: '@test/package',
 			version: '1.0.0',
 			modules: [],
 		};
 
-		const result = package_gen_generate_ts(package_json, src_json);
+		const result = library_gen_generate_ts(package_json, source_json);
 
-		assert.ok(result.includes('export const src_json'));
+		assert.ok(result.includes('export const source_json'));
 		assert.ok(result.includes('"modules": []'));
 	});
 
@@ -546,22 +546,22 @@ describe('package_gen_generate_ts', () => {
 			version: '1.0.0',
 		};
 
-		const src_json: SrcJson = {
+		const source_json: SourceJson = {
 			name: '@test/package',
 			version: '1.0.0',
 		};
 
-		const result = package_gen_generate_ts(package_json, src_json);
+		const result = library_gen_generate_ts(package_json, source_json);
 
-		assert.ok(result.includes('export const src_json'));
+		assert.ok(result.includes('export const source_json'));
 		// Should not include modules key if undefined
 		assert.ok(!result.includes('"modules"'));
 	});
 });
 
-describe('package_gen_validate_no_duplicates - error message format', () => {
+describe('library_gen_validate_no_duplicates - error message format', () => {
 	test('singular error message for one duplicate', () => {
-		const src_json = create_mock_src_json([
+		const source_json = create_mock_source_json([
 			create_mock_module('a.ts', [{name: 'Dup', kind: 'type'}]),
 			create_mock_module('b.ts', [{name: 'Dup', kind: 'function'}]),
 		]);
@@ -569,17 +569,17 @@ describe('package_gen_validate_no_duplicates - error message format', () => {
 		const logger = create_mock_logger();
 
 		try {
-			package_gen_validate_no_duplicates(src_json, logger);
+			library_gen_validate_no_duplicates(source_json, logger);
 			assert.fail('Should have thrown');
 		} catch (err: any) {
 			// Check singular form
-			assert.ok(err.message.includes('1 duplicate identifier name across'));
-			assert.ok(!err.message.includes('1 duplicate identifier names'));
+			assert.ok(err.message.includes('1 duplicate declaration name across'));
+			assert.ok(!err.message.includes('1 duplicate declaration names'));
 		}
 	});
 
 	test('plural error message for multiple duplicates', () => {
-		const src_json = create_mock_src_json([
+		const source_json = create_mock_source_json([
 			create_mock_module('a.ts', [
 				{name: 'Dup1', kind: 'type'},
 				{name: 'Dup2', kind: 'type'},
@@ -593,16 +593,16 @@ describe('package_gen_validate_no_duplicates - error message format', () => {
 		const logger = create_mock_logger();
 
 		try {
-			package_gen_validate_no_duplicates(src_json, logger);
+			library_gen_validate_no_duplicates(source_json, logger);
 			assert.fail('Should have thrown');
 		} catch (err: any) {
 			// Check plural form
-			assert.ok(err.message.includes('2 duplicate identifier names across'));
+			assert.ok(err.message.includes('2 duplicate declaration names across'));
 		}
 	});
 
 	test('error message includes CLAUDE.md reference', () => {
-		const src_json = create_mock_src_json([
+		const source_json = create_mock_source_json([
 			create_mock_module('a.ts', [{name: 'Dup', kind: 'type'}]),
 			create_mock_module('b.ts', [{name: 'Dup', kind: 'function'}]),
 		]);
@@ -610,16 +610,16 @@ describe('package_gen_validate_no_duplicates - error message format', () => {
 		const logger = create_mock_logger();
 
 		try {
-			package_gen_validate_no_duplicates(src_json, logger);
+			library_gen_validate_no_duplicates(source_json, logger);
 			assert.fail('Should have thrown');
 		} catch (err: any) {
 			assert.ok(err.message.includes('CLAUDE.md'));
-			assert.ok(err.message.includes('Identifier namespacing'));
+			assert.ok(err.message.includes('Declaration namespacing'));
 		}
 	});
 
 	test('error message mentions @nodocs as resolution option', () => {
-		const src_json = create_mock_src_json([
+		const source_json = create_mock_source_json([
 			create_mock_module('a.ts', [{name: 'Dup', kind: 'type'}]),
 			create_mock_module('b.ts', [{name: 'Dup', kind: 'function'}]),
 		]);
@@ -627,7 +627,7 @@ describe('package_gen_validate_no_duplicates - error message format', () => {
 		const logger = create_mock_logger();
 
 		try {
-			package_gen_validate_no_duplicates(src_json, logger);
+			library_gen_validate_no_duplicates(source_json, logger);
 			assert.fail('Should have thrown');
 		} catch (err: any) {
 			// Error message should mention both resolution options
@@ -637,7 +637,7 @@ describe('package_gen_validate_no_duplicates - error message format', () => {
 	});
 
 	test('log output includes all duplicate details', () => {
-		const src_json = create_mock_src_json([
+		const source_json = create_mock_source_json([
 			create_mock_module('foo/bar.ts', [{name: 'Widget', kind: 'class'}]),
 			create_mock_module('baz/Widget.svelte', [{name: 'Widget', kind: 'component'}]),
 		]);
@@ -645,13 +645,13 @@ describe('package_gen_validate_no_duplicates - error message format', () => {
 		const logger = create_mock_logger();
 
 		try {
-			package_gen_validate_no_duplicates(src_json, logger);
+			library_gen_validate_no_duplicates(source_json, logger);
 			assert.fail('Should have thrown');
 		} catch (_err: any) {
 			const all_errors = logger.errors.join('\n');
 
 			// Check structured error output
-			assert.ok(all_errors.includes('Duplicate identifier names detected'));
+			assert.ok(all_errors.includes('Duplicate declaration names detected'));
 			assert.ok(all_errors.includes('"Widget" found in:'));
 			assert.ok(all_errors.includes('foo/bar.ts'));
 			assert.ok(all_errors.includes('class'));
@@ -661,7 +661,7 @@ describe('package_gen_validate_no_duplicates - error message format', () => {
 	});
 });
 
-describe('package_gen_extract_dependencies', () => {
+describe('library_gen_extract_dependencies', () => {
 	describe('basic functionality', () => {
 		test('extracts both dependencies and dependents from source modules', () => {
 			const disknode = create_mock_disknode(
@@ -670,7 +670,7 @@ describe('package_gen_extract_dependencies', () => {
 				['/home/user/project/src/lib/qux.ts', '/home/user/project/src/lib/Quux.svelte'],
 			);
 
-			const result = package_gen_extract_dependencies(disknode);
+			const result = library_gen_extract_dependencies(disknode);
 
 			assert.deepStrictEqual(result.dependencies, ['bar.ts', 'baz.svelte']);
 			assert.deepStrictEqual(result.dependents, ['Quux.svelte', 'qux.ts']);
@@ -679,7 +679,7 @@ describe('package_gen_extract_dependencies', () => {
 		test('returns empty arrays when no dependencies or dependents', () => {
 			const disknode = create_mock_disknode('/home/user/project/src/lib/standalone.ts');
 
-			const result = package_gen_extract_dependencies(disknode);
+			const result = library_gen_extract_dependencies(disknode);
 
 			assert.deepStrictEqual(result.dependencies, []);
 			assert.deepStrictEqual(result.dependents, []);
@@ -692,7 +692,7 @@ describe('package_gen_extract_dependencies', () => {
 				[],
 			);
 
-			const result = package_gen_extract_dependencies(disknode);
+			const result = library_gen_extract_dependencies(disknode);
 
 			assert.deepStrictEqual(result.dependencies, ['dependency.ts']);
 			assert.deepStrictEqual(result.dependents, []);
@@ -705,7 +705,7 @@ describe('package_gen_extract_dependencies', () => {
 				['/home/user/project/src/lib/consumer.ts'],
 			);
 
-			const result = package_gen_extract_dependencies(disknode);
+			const result = library_gen_extract_dependencies(disknode);
 
 			assert.deepStrictEqual(result.dependencies, []);
 			assert.deepStrictEqual(result.dependents, ['consumer.ts']);
@@ -724,7 +724,7 @@ describe('package_gen_extract_dependencies', () => {
 				[],
 			);
 
-			const result = package_gen_extract_dependencies(disknode);
+			const result = library_gen_extract_dependencies(disknode);
 
 			// Should only include src/lib modules
 			assert.deepStrictEqual(result.dependencies, ['local.ts']);
@@ -737,7 +737,7 @@ describe('package_gen_extract_dependencies', () => {
 				[],
 			);
 
-			const result = package_gen_extract_dependencies(disknode);
+			const result = library_gen_extract_dependencies(disknode);
 
 			// Should exclude src/test
 			assert.deepStrictEqual(result.dependencies, ['helpers.ts']);
@@ -750,7 +750,7 @@ describe('package_gen_extract_dependencies', () => {
 				['/home/user/project/src/lib/app.ts', '/home/user/project/src/test/utils.test.ts'],
 			);
 
-			const result = package_gen_extract_dependencies(disknode);
+			const result = library_gen_extract_dependencies(disknode);
 
 			// Should exclude test files
 			assert.deepStrictEqual(result.dependents, ['app.ts']);
@@ -763,7 +763,7 @@ describe('package_gen_extract_dependencies', () => {
 				['/home/user/project/src/lib/other.svelte', '/home/user/project/src/routes/index.svelte'],
 			);
 
-			const result = package_gen_extract_dependencies(disknode);
+			const result = library_gen_extract_dependencies(disknode);
 
 			// Should only include src/lib modules
 			assert.deepStrictEqual(result.dependents, ['other.svelte']);
@@ -778,7 +778,7 @@ describe('package_gen_extract_dependencies', () => {
 				['/home/user/project/src/lib/layouts/Layout.svelte'],
 			);
 
-			const result = package_gen_extract_dependencies(disknode);
+			const result = library_gen_extract_dependencies(disknode);
 
 			assert.deepStrictEqual(result.dependencies, ['styles/theme.ts']);
 			assert.deepStrictEqual(result.dependents, ['layouts/Layout.svelte']);
@@ -791,7 +791,7 @@ describe('package_gen_extract_dependencies', () => {
 				['/home/user/project/src/lib/other/path/consumer.ts'],
 			);
 
-			const result = package_gen_extract_dependencies(disknode);
+			const result = library_gen_extract_dependencies(disknode);
 
 			assert.deepStrictEqual(result.dependencies, ['deep/nested/sibling.ts']);
 			assert.deepStrictEqual(result.dependents, ['other/path/consumer.ts']);
@@ -810,7 +810,7 @@ describe('package_gen_extract_dependencies', () => {
 				[],
 			);
 
-			const result = package_gen_extract_dependencies(disknode);
+			const result = library_gen_extract_dependencies(disknode);
 
 			assert.deepStrictEqual(result.dependencies, ['alpha.ts', 'beta.ts', 'zebra.ts']);
 		});
@@ -826,7 +826,7 @@ describe('package_gen_extract_dependencies', () => {
 				],
 			);
 
-			const result = package_gen_extract_dependencies(disknode);
+			const result = library_gen_extract_dependencies(disknode);
 
 			assert.deepStrictEqual(result.dependents, ['aardvark.ts', 'middle.ts', 'zoo.ts']);
 		});
@@ -842,7 +842,7 @@ describe('package_gen_extract_dependencies', () => {
 				[],
 			);
 
-			const result = package_gen_extract_dependencies(disknode);
+			const result = library_gen_extract_dependencies(disknode);
 
 			// Standard localeCompare should handle case properly
 			assert.strictEqual(result.dependencies.length, 3);
@@ -860,7 +860,7 @@ describe('package_gen_extract_dependencies', () => {
 				['/home/user/project/src/lib/Layout.svelte'],
 			);
 
-			const result = package_gen_extract_dependencies(disknode);
+			const result = library_gen_extract_dependencies(disknode);
 
 			assert.deepStrictEqual(result.dependencies, ['Button.svelte']);
 			assert.deepStrictEqual(result.dependents, ['Layout.svelte']);
@@ -877,7 +877,7 @@ describe('package_gen_extract_dependencies', () => {
 				[],
 			);
 
-			const result = package_gen_extract_dependencies(disknode);
+			const result = library_gen_extract_dependencies(disknode);
 
 			assert.deepStrictEqual(result.dependencies, ['Other.svelte', 'types.ts', 'utils.ts']);
 		});
@@ -889,7 +889,7 @@ describe('package_gen_extract_dependencies', () => {
 				[],
 			);
 
-			const result = package_gen_extract_dependencies(disknode);
+			const result = library_gen_extract_dependencies(disknode);
 
 			assert.deepStrictEqual(result.dependencies, ['exports.ts']);
 		});
@@ -909,8 +909,8 @@ describe('package_gen_extract_dependencies', () => {
 				],
 			);
 
-			const result1 = package_gen_extract_dependencies(disknode);
-			const result2 = package_gen_extract_dependencies(disknode);
+			const result1 = library_gen_extract_dependencies(disknode);
+			const result2 = library_gen_extract_dependencies(disknode);
 
 			assert.deepStrictEqual(result1.dependencies, result2.dependencies);
 			assert.deepStrictEqual(result1.dependents, result2.dependents);
