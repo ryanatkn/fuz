@@ -10,7 +10,7 @@ import {
 	create_touch_event,
 	set_event_target,
 } from './test_helpers.js';
-import {mount_contextmenu_root, setup_contextmenu_action} from './contextmenu_test_helpers.js';
+import {mount_contextmenu_root, setup_contextmenu_attachment} from './contextmenu_test_helpers.js';
 import {CONTEXTMENU_DEFAULT_BYPASS_WINDOW} from '$lib/contextmenu_helpers.js';
 
 // ResizeObserver is not currently available in jsdom
@@ -89,7 +89,7 @@ describe('ContextmenuRoot - Tap-Then-Longpress Bypass Gesture', () => {
 		document.body.appendChild(target);
 
 		// Setup contextmenu action so menu can open
-		await setup_contextmenu_action(target, [
+		await setup_contextmenu_attachment(target, [
 			{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 		]);
 
@@ -128,7 +128,7 @@ describe('ContextmenuRoot - Tap-Then-Longpress Bypass Gesture', () => {
 		document.body.appendChild(target);
 
 		// Setup contextmenu action so menu can open
-		await setup_contextmenu_action(target, [
+		await setup_contextmenu_attachment(target, [
 			{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 		]);
 
@@ -165,7 +165,7 @@ describe('ContextmenuRoot - Tap-Then-Longpress Bypass Gesture', () => {
 		document.body.appendChild(target);
 
 		// Setup contextmenu action so menu can open
-		await setup_contextmenu_action(target, [
+		await setup_contextmenu_attachment(target, [
 			{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 		]);
 
@@ -295,7 +295,7 @@ describe('ContextmenuRoot - Tap-Then-Longpress Bypass Gesture', () => {
 		window.dispatchEvent(touchstart2);
 
 		// Setup contextmenu action so menu can open
-		await setup_contextmenu_action(target, [
+		await setup_contextmenu_attachment(target, [
 			{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 		]);
 
@@ -335,7 +335,7 @@ describe('ContextmenuRoot - Tap-Then-Longpress Bypass Gesture', () => {
 		window.dispatchEvent(touchstart2);
 
 		// Setup contextmenu action so menu can open
-		await setup_contextmenu_action(target, [
+		await setup_contextmenu_attachment(target, [
 			{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 		]);
 
@@ -400,7 +400,7 @@ describe('ContextmenuRoot - Tap-Then-Longpress Bypass Gesture', () => {
 		document.body.appendChild(target);
 
 		// Setup contextmenu action so menu can open
-		await setup_contextmenu_action(target, [
+		await setup_contextmenu_attachment(target, [
 			{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 		]);
 
@@ -441,7 +441,7 @@ describe('ContextmenuRoot - Tap-Then-Longpress Bypass Gesture', () => {
 		document.body.appendChild(target);
 
 		// Setup contextmenu action so menu can open
-		await setup_contextmenu_action(target, [
+		await setup_contextmenu_attachment(target, [
 			{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 		]);
 
@@ -553,7 +553,7 @@ describe('ContextmenuRoot - Tap-Then-Longpress Bypass Gesture', () => {
 		document.body.appendChild(target);
 
 		// Setup contextmenu action
-		await setup_contextmenu_action(target, [
+		await setup_contextmenu_attachment(target, [
 			{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 		]);
 
@@ -621,7 +621,7 @@ describe('ContextmenuRoot - Tap-Then-Longpress Bypass Gesture', () => {
 		document.body.appendChild(target);
 
 		// Setup contextmenu action
-		await setup_contextmenu_action(target, [
+		await setup_contextmenu_attachment(target, [
 			{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 		]);
 
@@ -661,7 +661,7 @@ describe('ContextmenuRoot - Tap-Then-Longpress Bypass Gesture', () => {
 		document.body.appendChild(target);
 
 		// Setup contextmenu action
-		await setup_contextmenu_action(target, [
+		await setup_contextmenu_attachment(target, [
 			{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 		]);
 

@@ -13,7 +13,7 @@ import {
 } from './test_helpers.js';
 import {
 	mount_contextmenu_root,
-	setup_contextmenu_action,
+	setup_contextmenu_attachment,
 	type SharedTestOptions,
 } from './contextmenu_test_helpers.js';
 import {CONTEXTMENU_DEFAULT_LONGPRESS_DURATION} from '$lib/contextmenu_helpers.js';
@@ -53,7 +53,7 @@ export const create_shared_link_entry_tests = (
 				const target = document.createElement('div');
 				container.appendChild(target);
 
-				await setup_contextmenu_action(target, [
+				await setup_contextmenu_attachment(target, [
 					{snippet: 'link', props: {href: 'https://www.fuz.dev/'}},
 				]);
 
@@ -129,7 +129,7 @@ export const create_shared_link_entry_tests = (
 				const target = document.createElement('div');
 				container.appendChild(target);
 
-				await setup_contextmenu_action(target, [
+				await setup_contextmenu_attachment(target, [
 					{snippet: 'link', props: {href: 'https://fuz.dev'}},
 				]);
 
@@ -172,7 +172,7 @@ export const create_shared_link_entry_tests = (
 				const target = document.createElement('div');
 				container.appendChild(target);
 
-				await setup_contextmenu_action(target, [
+				await setup_contextmenu_attachment(target, [
 					{snippet: 'link', props: {href: 'https://www.fuz.dev/'}},
 					{snippet: 'link', props: {href: 'https://fuz.dev/'}},
 				]);
@@ -244,7 +244,7 @@ export const create_shared_link_entry_tests = (
 				const target = document.createElement('div');
 				container.appendChild(target);
 
-				await setup_contextmenu_action(target, [
+				await setup_contextmenu_attachment(target, [
 					{snippet: 'link', props: {href: 'https://www.fuz.dev/'}},
 				]);
 
@@ -302,7 +302,7 @@ export const create_shared_link_entry_tests = (
 				const target = document.createElement('div');
 				container.appendChild(target);
 
-				await setup_contextmenu_action(target, [
+				await setup_contextmenu_attachment(target, [
 					{snippet: 'link', props: {href: 'https://fuz.dev'}},
 				]);
 
@@ -353,7 +353,7 @@ export const create_shared_link_entry_tests = (
 				const target = document.createElement('div');
 				container.appendChild(target);
 
-				await setup_contextmenu_action(target, [
+				await setup_contextmenu_attachment(target, [
 					{snippet: 'link', props: {href: 'https://fuz.dev', content: 'Example Link'}},
 				]);
 
@@ -399,7 +399,7 @@ export const create_shared_link_entry_tests = (
 				const target = document.createElement('div');
 				container.appendChild(target);
 
-				await setup_contextmenu_action(target, [
+				await setup_contextmenu_attachment(target, [
 					{snippet: 'link', props: {href: 'https://fuz.dev', content: 'Example Link'}},
 				]);
 
@@ -505,7 +505,7 @@ export const create_shared_link_entry_tests = (
 				const target = document.createElement('div');
 				container.appendChild(target);
 
-				await setup_contextmenu_action(target, [
+				await setup_contextmenu_attachment(target, [
 					{snippet: 'link', props: {href: 'https://fixed.test/'}},
 				]);
 

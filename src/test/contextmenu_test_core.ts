@@ -15,7 +15,7 @@ import {
 } from './test_helpers.js';
 import {
 	mount_contextmenu_root,
-	setup_contextmenu_action,
+	setup_contextmenu_attachment,
 	type SharedTestOptions,
 } from './contextmenu_test_helpers.js';
 
@@ -49,7 +49,7 @@ export const create_shared_core_tests = (
 					const target = document.createElement('div');
 					container.appendChild(target);
 
-					await setup_contextmenu_action(target, [
+					await setup_contextmenu_attachment(target, [
 						{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 					]);
 
@@ -195,7 +195,7 @@ export const create_shared_core_tests = (
 					const target = document.createElement('div');
 					container.appendChild(target);
 
-					await setup_contextmenu_action(target, [
+					await setup_contextmenu_attachment(target, [
 						{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 					]);
 

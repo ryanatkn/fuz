@@ -11,7 +11,7 @@ import {
 	create_contextmenu_event,
 	set_event_target,
 } from './test_helpers.js';
-import {mount_contextmenu_root, setup_contextmenu_action} from './contextmenu_test_helpers.js';
+import {mount_contextmenu_root, setup_contextmenu_attachment} from './contextmenu_test_helpers.js';
 import {
 	CONTEXTMENU_DEFAULT_LONGPRESS_DURATION,
 	CONTEXTMENU_DEFAULT_BYPASS_WINDOW,
@@ -51,7 +51,7 @@ describe('ContextmenuRootForSafariCompatibility - Tap-Then-Longpress Bypass Gest
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -98,7 +98,7 @@ describe('ContextmenuRootForSafariCompatibility - Tap-Then-Longpress Bypass Gest
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -138,7 +138,7 @@ describe('ContextmenuRootForSafariCompatibility - Tap-Then-Longpress Bypass Gest
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -178,7 +178,7 @@ describe('ContextmenuRootForSafariCompatibility - Tap-Then-Longpress Bypass Gest
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -219,7 +219,7 @@ describe('ContextmenuRootForSafariCompatibility - Tap-Then-Longpress Bypass Gest
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -259,7 +259,7 @@ describe('ContextmenuRootForSafariCompatibility - Tap-Then-Longpress Bypass Gest
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -301,7 +301,7 @@ describe('ContextmenuRootForSafariCompatibility - Tap-Then-Longpress Bypass Gest
 			container.appendChild(target);
 			container.appendChild(input);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -355,7 +355,7 @@ describe('ContextmenuRootForSafariCompatibility - Tap-Then-Longpress Bypass Gest
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -400,7 +400,7 @@ describe('ContextmenuRootForSafariCompatibility - Tap-Then-Longpress Bypass Gest
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -438,7 +438,7 @@ describe('ContextmenuRootForSafariCompatibility - Tap-Then-Longpress Bypass Gest
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -493,7 +493,7 @@ describe('ContextmenuRootForSafariCompatibility - Tap-Then-Longpress Bypass Gest
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -531,7 +531,7 @@ describe('ContextmenuRootForSafariCompatibility - Tap-Then-Longpress Bypass Gest
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -575,7 +575,7 @@ describe('ContextmenuRootForSafariCompatibility - Tap-Then-Longpress Bypass Gest
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -619,7 +619,7 @@ describe('ContextmenuRootForSafariCompatibility - Tap-Then-Longpress Bypass Gest
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -659,7 +659,7 @@ describe('ContextmenuRootForSafariCompatibility - Tap-Then-Longpress Bypass Gest
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -701,7 +701,7 @@ describe('ContextmenuRootForSafariCompatibility - Tap-Then-Longpress Bypass Gest
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -744,7 +744,7 @@ describe('ContextmenuRootForSafariCompatibility - Tap-Then-Longpress Bypass Gest
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -795,7 +795,7 @@ describe('ContextmenuRootForSafariCompatibility - Tap-Then-Longpress Bypass Gest
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -846,7 +846,7 @@ describe('ContextmenuRootForSafariCompatibility - Tap-Then-Longpress Bypass Gest
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -883,7 +883,7 @@ describe('ContextmenuRootForSafariCompatibility - Tap-Then-Longpress Bypass Gest
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -928,7 +928,7 @@ describe('ContextmenuRootForSafariCompatibility - Tap-Then-Longpress Bypass Gest
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -966,7 +966,7 @@ describe('ContextmenuRootForSafariCompatibility - Tap-Then-Longpress Bypass Gest
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -1004,7 +1004,7 @@ describe('ContextmenuRootForSafariCompatibility - Tap-Then-Longpress Bypass Gest
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -1045,7 +1045,7 @@ describe('ContextmenuRootForSafariCompatibility - Tap-Then-Longpress Bypass Gest
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 

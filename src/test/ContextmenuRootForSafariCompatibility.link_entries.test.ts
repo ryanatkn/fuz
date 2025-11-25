@@ -11,7 +11,7 @@ import {
 	create_contextmenu_event,
 	set_event_target,
 } from './test_helpers.js';
-import {mount_contextmenu_root, setup_contextmenu_action} from './contextmenu_test_helpers.js';
+import {mount_contextmenu_root, setup_contextmenu_attachment} from './contextmenu_test_helpers.js';
 import {CONTEXTMENU_DEFAULT_LONGPRESS_DURATION} from '$lib/contextmenu_helpers.js';
 import {create_shared_link_entry_tests} from './contextmenu_test_link_entries.js';
 
@@ -57,7 +57,9 @@ describe('ContextmenuRootForSafariCompatibility - Link Entry Handling (Safari-Sp
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [{snippet: 'link', props: {href: 'https://fuz.dev'}}]);
+			await setup_contextmenu_attachment(target, [
+				{snippet: 'link', props: {href: 'https://fuz.dev'}},
+			]);
 
 			// Longpress to open menu
 			const touchstart = create_touch_event('touchstart', [{clientX: 100, clientY: 200, target}]);
@@ -88,7 +90,7 @@ describe('ContextmenuRootForSafariCompatibility - Link Entry Handling (Safari-Sp
 			link_target.textContent = 'A link';
 			container.appendChild(link_target);
 
-			await setup_contextmenu_action(link_target, [
+			await setup_contextmenu_attachment(link_target, [
 				{snippet: 'link', props: {href: 'https://fuz.dev', content: 'Open in new tab'}},
 			]);
 
@@ -120,7 +122,7 @@ describe('ContextmenuRootForSafariCompatibility - Link Entry Handling (Safari-Sp
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'link', props: {href: 'https://fuz.dev', content: 'Example Link'}},
 			]);
 
@@ -158,7 +160,7 @@ describe('ContextmenuRootForSafariCompatibility - Link Entry Handling (Safari-Sp
 
 			// Setup contextmenu with nested structure
 			// Note: This is a simplified test - actual submenu implementation may differ
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Parent Item', icon: '📁', run: () => undefined}},
 				{snippet: 'link', props: {href: 'https://fuz.dev', content: 'Nested Link'}},
 			]);
@@ -193,7 +195,7 @@ describe('ContextmenuRootForSafariCompatibility - Link Entry Handling (Safari-Sp
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'link', props: {href: 'https://example1.com', content: 'Link 1'}},
 				{snippet: 'link', props: {href: 'https://example2.com', content: 'Link 2'}},
 				{snippet: 'link', props: {href: 'https://example3.com', content: 'Link 3'}},

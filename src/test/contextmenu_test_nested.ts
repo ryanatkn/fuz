@@ -13,7 +13,7 @@ import {
 } from './test_helpers.js';
 import {
 	mount_contextmenu_root,
-	setup_contextmenu_action,
+	setup_contextmenu_attachment,
 	type SharedTestOptions,
 } from './contextmenu_test_helpers.js';
 import {CONTEXTMENU_DEFAULT_LONGPRESS_DURATION} from '$lib/contextmenu_helpers.js';
@@ -53,7 +53,7 @@ export const create_shared_nested_tests = (
 				const target = document.createElement('div');
 				container.appendChild(target);
 
-				await setup_contextmenu_action(target, [
+				await setup_contextmenu_attachment(target, [
 					{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 				]);
 
@@ -113,7 +113,7 @@ export const create_shared_nested_tests = (
 				const target = document.createElement('div');
 				container.appendChild(target);
 
-				await setup_contextmenu_action(target, [
+				await setup_contextmenu_attachment(target, [
 					{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 				]);
 
@@ -177,7 +177,7 @@ export const create_shared_nested_tests = (
 				const target = document.createElement('div');
 				container.appendChild(target);
 
-				await setup_contextmenu_action(target, [
+				await setup_contextmenu_attachment(target, [
 					{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 				]);
 
@@ -233,7 +233,7 @@ export const create_shared_nested_tests = (
 				const target = document.createElement('div');
 				container.appendChild(target);
 
-				await setup_contextmenu_action(target, [
+				await setup_contextmenu_attachment(target, [
 					{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 				]);
 
@@ -286,7 +286,7 @@ export const create_shared_nested_tests = (
 				const target = document.createElement('div');
 				container.appendChild(target);
 
-				await setup_contextmenu_action(target, [
+				await setup_contextmenu_attachment(target, [
 					{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 				]);
 
@@ -338,7 +338,7 @@ export const create_shared_nested_tests = (
 				const target = document.createElement('div');
 				container.appendChild(target);
 
-				await setup_contextmenu_action(target, [
+				await setup_contextmenu_attachment(target, [
 					{snippet: 'link', props: {href: 'https://nested.test/'}},
 				]);
 
@@ -405,7 +405,7 @@ export const create_shared_nested_tests = (
 				container.appendChild(target);
 
 				// Setup contextmenu with nested structure (simplified)
-				await setup_contextmenu_action(target, [
+				await setup_contextmenu_attachment(target, [
 					{snippet: 'text', props: {content: 'Parent', icon: '📁', run: () => undefined}},
 					{snippet: 'link', props: {href: 'https://fuz.dev', content: 'Nested Link'}},
 				]);
@@ -449,7 +449,7 @@ export const create_shared_nested_tests = (
 				const target = document.createElement('div');
 				container.appendChild(target);
 
-				await setup_contextmenu_action(target, [
+				await setup_contextmenu_attachment(target, [
 					{snippet: 'link', props: {href: 'https://deep.test/', content: 'Deep Link'}},
 				]);
 

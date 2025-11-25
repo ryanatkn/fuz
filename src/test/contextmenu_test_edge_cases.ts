@@ -8,7 +8,7 @@ import {flushSync} from 'svelte';
 import {unmount_component, create_contextmenu_event, set_event_target} from './test_helpers.js';
 import {
 	mount_contextmenu_root,
-	setup_contextmenu_action,
+	setup_contextmenu_attachment,
 	type SharedTestOptions,
 } from './contextmenu_test_helpers.js';
 
@@ -36,7 +36,7 @@ export const create_shared_edge_case_tests = (
 			svg.appendChild(rect);
 			container.appendChild(svg);
 
-			await setup_contextmenu_action(rect, [
+			await setup_contextmenu_attachment(rect, [
 				{snippet: 'text', props: {content: 'SVG Test', icon: '🎨', run: () => undefined}},
 			]);
 
@@ -107,7 +107,7 @@ export const create_shared_edge_case_tests = (
 			// First open on HTML element
 			const div = document.createElement('div');
 			container.appendChild(div);
-			await setup_contextmenu_action(div, [
+			await setup_contextmenu_attachment(div, [
 				{snippet: 'text', props: {content: 'HTML', icon: '📄', run: () => undefined}},
 			]);
 
@@ -121,7 +121,7 @@ export const create_shared_edge_case_tests = (
 			// Then open on SVG element
 			const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
 			container.appendChild(circle);
-			await setup_contextmenu_action(circle, [
+			await setup_contextmenu_attachment(circle, [
 				{snippet: 'text', props: {content: 'SVG', icon: '🎨', run: () => undefined}},
 			]);
 

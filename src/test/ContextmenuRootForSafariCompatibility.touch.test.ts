@@ -12,7 +12,7 @@ import {
 	create_contextmenu_event,
 	set_event_target,
 } from './test_helpers.js';
-import {mount_contextmenu_root, setup_contextmenu_action} from './contextmenu_test_helpers.js';
+import {mount_contextmenu_root, setup_contextmenu_attachment} from './contextmenu_test_helpers.js';
 import {
 	CONTEXTMENU_DEFAULT_LONGPRESS_DURATION,
 	CONTEXTMENU_DEFAULT_LONGPRESS_MOVE_TOLERANCE,
@@ -50,7 +50,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -86,7 +86,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -116,7 +116,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -148,7 +148,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -177,7 +177,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -208,7 +208,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -241,7 +241,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -287,7 +287,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -313,7 +313,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -350,7 +350,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -386,7 +386,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -419,7 +419,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -457,7 +457,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			container.appendChild(target);
 
 			let clicked = false;
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => (clicked = true)}},
 			]);
 
@@ -490,7 +490,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -521,7 +521,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -569,7 +569,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -600,7 +600,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -646,7 +646,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -676,7 +676,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -710,7 +710,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -742,7 +742,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -775,7 +775,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -805,7 +805,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -837,7 +837,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -870,7 +870,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			container.appendChild(target);
 
 			let clicked = false;
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => (clicked = true)}},
 			]);
 
@@ -916,7 +916,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -966,7 +966,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -1021,7 +1021,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -1057,7 +1057,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -1110,7 +1110,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -1135,7 +1135,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -1166,7 +1166,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -1200,7 +1200,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -1233,7 +1233,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -1288,7 +1288,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -1316,7 +1316,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -1392,7 +1392,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -1418,7 +1418,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 
@@ -1450,7 +1450,7 @@ describe('ContextmenuRootForSafariCompatibility - Touch Event Handling', () => {
 			const target = document.createElement('div');
 			container.appendChild(target);
 
-			await setup_contextmenu_action(target, [
+			await setup_contextmenu_attachment(target, [
 				{snippet: 'text', props: {content: 'Test', icon: '🧪', run: () => undefined}},
 			]);
 

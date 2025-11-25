@@ -51,7 +51,7 @@ export const mount_contextmenu_root = <Props extends Record<string, any>>(
  * @param params Array of contextmenu params (entries, snippets, etc.)
  * @returns Cleanup function to call when done
  */
-export const setup_contextmenu_action = async (
+export const setup_contextmenu_attachment = async (
 	element: HTMLElement | SVGElement,
 	params: Array<any>,
 ): Promise<(() => void) | void> => {
