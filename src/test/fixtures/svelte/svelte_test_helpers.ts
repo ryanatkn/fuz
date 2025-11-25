@@ -10,16 +10,16 @@ export interface SvelteFixture {
 
 /**
  * Convert a fixture name to a component name.
- * Transforms snake_case to Upper_Snake_Case (e.g., "basic_props" -> "BasicProps").
+ * Transforms snake_case to PascalCase (e.g., "basic_props" -> "BasicProps").
  *
  * @param name - The fixture name in snake_case
- * @returns The component name in Upper_Snake_Case
+ * @returns The component name in PascalCase
  */
 export const fixture_name_to_component_name = (name: string): string => {
 	return name
 		.split('_')
 		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-		.join('_');
+		.join('');
 };
 
 /**
