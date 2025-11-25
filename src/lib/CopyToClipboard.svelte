@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type {OmitStrict} from '@ryanatkn/belt/types.js';
 	import type {Snippet} from 'svelte';
 	import type {SvelteHTMLElements} from 'svelte/elements';
 	import {scale, slide} from 'svelte/transition';
@@ -17,7 +18,7 @@
 		children,
 		class: class_prop,
 		...rest
-	}: SvelteHTMLElements['button'] & {
+	}: OmitStrict<SvelteHTMLElements['button'], 'children'> & {
 		text: string | null;
 		copied_display_duration?: number;
 		allow_copying_empty_string?: boolean;

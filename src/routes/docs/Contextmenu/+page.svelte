@@ -33,7 +33,7 @@
 	<section>
 		<aside>
 			<p>
-				todo: demonstrate using <code>contextmenu_action</code> to avoid the wrapper element
+				todo: demonstrate using <code>contextmenu_attachment</code> to avoid the wrapper element
 			</p>
 		</aside>
 		<aside>

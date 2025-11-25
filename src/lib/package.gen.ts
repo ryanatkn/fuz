@@ -33,6 +33,7 @@ import {
 	package_gen_analyze_typescript_file,
 } from './package_gen_helpers.js';
 
+/** @nodocs */
 export const gen: Gen = async ({log, filer}) => {
 	log.info('generating package metadata with full TypeScript analysis...');
 

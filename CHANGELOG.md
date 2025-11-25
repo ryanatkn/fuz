@@ -1000,7 +1000,7 @@
 
 ### Patch Changes
 
-- relax `contextmenu_action` type to accept `null | undefined` ([#26](https://github.com/ryanatkn/fuz/pull/26))
+- relax `contextmenu_attachment` type to accept `null | undefined` ([#26](https://github.com/ryanatkn/fuz/pull/26))
 
 ## 0.101.2
 

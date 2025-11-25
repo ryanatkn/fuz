@@ -4820,13 +4820,7 @@ export const src_json: SrcJson = {
 		},
 		{
 			path: 'package.gen.ts',
-			identifiers: [
-				{
-					name: 'gen',
-					kind: 'function',
-					source_line: 36,
-				},
-			],
+			identifiers: [],
 			module_comment:
 				'Custom package generator with full TypeScript analysis\n\nGenerates package.json and src.json with rich metadata:\n- JSDoc/TSDoc comments with full tag support\n- Full type signatures\n- Source code locations\n- Parameter information with descriptions and defaults\n- Return value documentation\n- Usage examples\n- Dependency graphs\n- Svelte component props\n\n@see @ryanatkn/belt/src_json.js for type definitions\n@see src/lib/package_gen_helpers.ts for buildtime-only helpers\n@see src/lib/tsdoc_helpers.ts for JSDoc/TSDoc parsing\n@see src/lib/ts_helpers.ts for TypeScript analysis\n@see src/lib/svelte_helpers.ts for Svelte component analysis',
 			dependencies: ['module_helpers.ts', 'package_gen_helpers.ts', 'ts_helpers.ts'],
