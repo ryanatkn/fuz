@@ -5,13 +5,11 @@
 		{
 			"name": "name",
 			"type": "string",
-			"optional": false,
 			"description": "The user's full name.\nShould be formatted as \"First Last\"."
 		},
 		{
 			"name": "age",
 			"type": "number",
-			"optional": false,
 			"description": "The user's age in years.\nMust be a positive integer."
 		},
 		{

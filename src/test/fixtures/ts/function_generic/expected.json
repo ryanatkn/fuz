@@ -8,13 +8,11 @@
 		{
 			"name": "items",
 			"type": "Array<T>",
-			"optional": false,
 			"description": "- An array of items"
 		},
 		{
 			"name": "predicate",
 			"type": "(item: T) => boolean",
-			"optional": false,
 			"description": "- A function to test each item"
 		}
 	],

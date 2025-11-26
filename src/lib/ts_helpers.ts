@@ -131,10 +131,12 @@ export const ts_extract_function_info = (
 					default_value = param_decl.initializer.getText();
 				}
 
+				const optional = !!(param_decl && ts.isParameter(param_decl) && param_decl.questionToken);
+
 				return {
 					name: param.name,
 					type: checker.typeToString(param_type),
-					optional: !!(param_decl && ts.isParameter(param_decl) && param_decl.questionToken),
+					...(optional && {optional}),
 					description,
 					default_value,
 				};
@@ -338,10 +340,16 @@ export const ts_extract_class_info = (
 								default_value = param_decl.initializer.getText();
 							}
 
+							const optional = !!(
+								param_decl &&
+								ts.isParameter(param_decl) &&
+								param_decl.questionToken
+							);
+
 							return {
 								name: param.name,
 								type: checker.typeToString(param_type),
-								optional: !!(param_decl && ts.isParameter(param_decl) && param_decl.questionToken),
+								...(optional && {optional}),
 								description,
 								default_value,
 							};

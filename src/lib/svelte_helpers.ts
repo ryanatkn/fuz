@@ -151,7 +151,7 @@ const svelte_extract_prop_from_member = (
 	return {
 		name: prop_name,
 		type: type_string,
-		optional,
+		...(optional && {optional}),
 		description,
 		default_value,
 	};

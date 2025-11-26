@@ -8,8 +8,7 @@
 	"props": [
 		{
 			"name": "title",
-			"type": "string",
-			"optional": false
+			"type": "string"
 		}
 	],
 	"source_line": 1

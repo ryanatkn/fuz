@@ -35,13 +35,11 @@
 			"parameters": [
 				{
 					"name": "name",
-					"type": "string",
-					"optional": false
+					"type": "string"
 				},
 				{
 					"name": "age",
-					"type": "number",
-					"optional": false
+					"type": "number"
 				}
 			]
 		},
@@ -65,8 +63,7 @@
 			"parameters": [
 				{
 					"name": "name",
-					"type": "string",
-					"optional": false
+					"type": "string"
 				}
 			]
 		}

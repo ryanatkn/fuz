@@ -17,13 +17,11 @@
 			"parameters": [
 				{
 					"name": "name",
-					"type": "string",
-					"optional": false
+					"type": "string"
 				},
 				{
 					"name": "max",
 					"type": "number",
-					"optional": false,
 					"default_value": "100"
 				}
 			]

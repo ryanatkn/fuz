@@ -5,13 +5,11 @@
 		{
 			"name": "status",
 			"type": "Status",
-			"optional": false,
 			"description": "Current status"
 		},
 		{
 			"name": "user",
 			"type": "User | null",
-			"optional": false,
 			"description": "User data"
 		},
 		{

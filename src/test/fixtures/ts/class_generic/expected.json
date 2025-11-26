@@ -28,13 +28,11 @@
 			"parameters": [
 				{
 					"name": "value",
-					"type": "T",
-					"optional": false
+					"type": "T"
 				},
 				{
 					"name": "label",
-					"type": "U",
-					"optional": false
+					"type": "U"
 				}
 			]
 		},
@@ -55,8 +53,7 @@
 			"parameters": [
 				{
 					"name": "value",
-					"type": "T",
-					"optional": false
+					"type": "T"
 				}
 			]
 		}

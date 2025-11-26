@@ -7,7 +7,6 @@
 		{
 			"name": "required",
 			"type": "string",
-			"optional": false,
 			"description": "- A required parameter"
 		},
 		{
@@ -19,7 +18,6 @@
 		{
 			"name": "withDefault",
 			"type": "boolean",
-			"optional": false,
 			"description": "- A parameter with a default value",
 			"default_value": "true"
 		}

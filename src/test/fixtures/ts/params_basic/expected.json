@@ -8,13 +8,11 @@
 		{
 			"name": "name",
 			"type": "string",
-			"optional": false,
 			"description": "- The user's name"
 		},
 		{
 			"name": "age",
 			"type": "number",
-			"optional": false,
 			"description": "- The user's age"
 		}
 	]

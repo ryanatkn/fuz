@@ -6,13 +6,11 @@
 		{
 			"name": "title",
 			"type": "string",
-			"optional": false,
 			"description": "The title to display"
 		},
 		{
 			"name": "count",
 			"type": "number",
-			"optional": false,
 			"description": "The count value"
 		}
 	],

@@ -62,8 +62,8 @@ export const validate_component_structure = (component: DeclarationJson): void =
 			if (typeof prop.type !== 'string') {
 				throw new Error('Expected prop.type to be a string');
 			}
-			if (typeof prop.optional !== 'boolean') {
-				throw new Error('Expected prop.optional to be a boolean');
+			if (prop.optional !== undefined && typeof prop.optional !== 'boolean') {
+				throw new Error('Expected prop.optional to be a boolean when present');
 			}
 			// Optional fields
 			if (prop.description !== undefined && typeof prop.description !== 'string') {
