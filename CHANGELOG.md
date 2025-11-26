@@ -1,5 +1,11 @@
 # @ryanatkn/fuz
 
+## 0.165.0
+
+### Minor Changes
+
+- change generated `library_json` interface ([768857a](https://github.com/ryanatkn/fuz/commit/768857a))
+
 ## 0.164.0
 
 ### Minor Changes
