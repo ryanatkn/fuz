@@ -549,7 +549,7 @@ export interface CspDirectives {
 	'child-src'?: CspSources;
 	'connect-src'?: CspSources;
 	'frame-src'?: CspSources;
-	'frame-ancestors'?: Array<CspHostSource | CspSchemeSource | CspFrameSource>;
+	'frame-ancestors'?: Array<CspFrameSource>;
 	'form-action'?: Array<CspSource | CspActionSource>;
 	'worker-src'?: CspSources;
 	'object-src'?: CspSources;
