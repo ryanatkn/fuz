@@ -1,5 +1,15 @@
 # @ryanatkn/fuz
 
+## 0.166.0
+
+### Minor Changes
+
+- upgrade peer deps ([27b6fa3](https://github.com/ryanatkn/fuz/commit/27b6fa3))
+
+### Patch Changes
+
+- make `optional` optional ([3daec66](https://github.com/ryanatkn/fuz/commit/3daec66))
+
 ## 0.165.0
 
 ### Minor Changes

@@ -5,7 +5,7 @@ import type {LibraryJson} from '@ryanatkn/belt/library_json.js';
 export const library_json: LibraryJson = {
 	package_json: {
 		name: '@ryanatkn/fuz',
-		version: '0.165.0',
+		version: '0.166.0',
 		description: 'Svelte UI library',
 		motto: 'friendly user zystem',
 		glyph: '🧶',
@@ -123,7 +123,7 @@ export const library_json: LibraryJson = {
 	},
 	source_json: {
 		name: '@ryanatkn/fuz',
-		version: '0.165.0',
+		version: '0.166.0',
 		modules: [
 			{
 				path: 'Alert.svelte',
