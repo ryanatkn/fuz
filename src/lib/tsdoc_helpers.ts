@@ -17,7 +17,7 @@
  * `@param`, `@returns`, `@throws`, `@example`, `@deprecated`, `@see`, `@since`, `@nodocs`.
  *
  * The `@nodocs` tag excludes exports from documentation and flat namespace validation.
- * The identifier is still exported and usable, just not documented.
+ * The declaration is still exported and usable, just not documented.
  *
  * Also supports `@mutates` (non-standard) for documenting mutations to parameters or external state.
  * Use format: `@mutates paramName - description of mutation`.
@@ -38,7 +38,7 @@
  */
 
 import ts from 'typescript';
-import type {IdentifierJson} from '@ryanatkn/belt/src_json.js';
+import type {DeclarationJson} from '@ryanatkn/belt/source_json.js';
 
 /**
  * Parsed JSDoc/TSDoc comment with structured metadata.
@@ -92,23 +92,23 @@ const tsdoc_convert_link_to_mdz = (content: string): string => {
 			return `[${display_text}](${reference})`;
 		}
 
-		// No pipe - check if it's a URL or identifier
+		// No pipe - check if it's a URL or declaration
 		if (inner.startsWith('https://') || inner.startsWith('http://')) {
 			// Bare URL - return as-is
 			return inner;
 		} else {
-			// Identifier or module - wrap in backticks
+			// Declaration or module - wrap in backticks
 			return `\`${inner}\``;
 		}
 	}
 
-	// No {@link} or {@see} syntax - check if it's a bare URL or identifier
+	// No {@link} or {@see} syntax - check if it's a bare URL or declaration
 	const trimmed = content.trim();
 	if (trimmed.startsWith('https://') || trimmed.startsWith('http://')) {
 		// Already a bare URL - return as-is
 		return trimmed;
 	} else {
-		// Identifier or module - wrap in backticks
+		// Declaration or module - wrap in backticks
 		return `\`${trimmed}\``;
 	}
 };
@@ -225,35 +225,35 @@ export const tsdoc_parse = (
 };
 
 /**
- * Apply parsed TSDoc metadata to an identifier.
+ * Apply parsed TSDoc metadata to a declaration.
  *
- * Consolidates the common pattern of assigning TSDoc fields to identifiers,
+ * Consolidates the common pattern of assigning TSDoc fields to declarations,
  * with conditional assignment for array fields (only if non-empty).
  *
- * @param identifier identifier object to update
+ * @param declaration declaration object to update
  * @param tsdoc parsed TSDoc comment (if available)
- * @mutates identifier - adds doc_comment, deprecated_message, examples, see_also, throws, since fields
+ * @mutates declaration - adds doc_comment, deprecated_message, examples, see_also, throws, since fields
  */
 export const tsdoc_apply_to_declaration = (
-	identifier: IdentifierJson,
+	declaration: DeclarationJson,
 	tsdoc: TsdocParsedComment | undefined,
 ): void => {
 	if (!tsdoc) return;
 
-	identifier.doc_comment = tsdoc.text;
-	identifier.deprecated_message = tsdoc.deprecated_message;
+	declaration.doc_comment = tsdoc.text;
+	declaration.deprecated_message = tsdoc.deprecated_message;
 
 	// Only assign arrays if they have content
 	if (tsdoc.examples?.length) {
-		identifier.examples = tsdoc.examples;
+		declaration.examples = tsdoc.examples;
 	}
 	if (tsdoc.see_also?.length) {
-		identifier.see_also = tsdoc.see_also;
+		declaration.see_also = tsdoc.see_also;
 	}
 	if (tsdoc.throws?.length) {
-		identifier.throws = tsdoc.throws;
+		declaration.throws = tsdoc.throws;
 	}
 	if (tsdoc.since) {
-		identifier.since = tsdoc.since;
+		declaration.since = tsdoc.since;
 	}
 };

@@ -24,7 +24,7 @@ src/
 │   ├── *.svelte      # UI components
 │   ├── *.ts          # TypeScript utilities
 │   ├── *.svelte.ts   # Svelte 5 runes and reactive utilities
-│   └── *.gen.ts      # generated files (by Gro tasks)
+│   └── *.gen.ts      # Gro genfiles (code generators)
 ├── test/             # test files (not co-located)
 └── routes/           # SvelteKit routes
     ├── docs/         # documentation pages
@@ -96,14 +96,14 @@ documentation:
 
 Code generation flow:
 
-1. `package.gen.ts` (Gro task) - analyzes TypeScript/Svelte source with full
+1. `library.gen.ts` (Gro genfile) - analyzes TypeScript/Svelte source with full
    TSDoc support
-2. generates `package.ts` - serialized package metadata (`package_json` +
-   `src_json`)
+2. generates `library.ts` - serialized library metadata (`package_json` +
+   `source_json`)
 3. runtime classes wrap the data with Svelte 5 reactivity:
-   - `Pkg` - package-level API with module/identifier lookups
+   - `Library` - library-level API with module/declaration lookups
    - `Module` - represents a source file with its exports
-   - `Identifier` - represents an exported identifier (function, type, class,
+   - `Declaration` - represents an exported declaration (function, type, class,
      component)
 4. SvelteKit routes at `/docs/api` render searchable documentation
 
@@ -133,15 +133,15 @@ Supporting helpers (three-layer architecture):
 **Low-level** (TypeScript/TSDoc API wrappers):
 
 - `ts_helpers.ts` - TypeScript compiler API utilities
-  - `ts_analyze_identifier` - analyze a symbol with full metadata (reusable)
+  - `ts_analyze_declaration` - analyze a symbol with full metadata (reusable)
   - `ts_analyze_module_exports` - analyze all exports from a source file (reusable)
   - `ts_extract_*` - lower-level extraction functions for specific constructs
 - `tsdoc_helpers.ts` - JSDoc/TSDoc parsing (supports standard tags: `@param`,
   `@returns`, `@throws`, `@example`, `@deprecated`, `@see`, `@since`, `@nodocs`,
   plus non-standard `@mutates` for documenting side effects; `@nodocs` excludes
-  identifiers from documentation and flat namespace validation)
+  declarations from documentation and flat namespace validation)
   - `tsdoc_parse` - extract structured TSDoc from a node
-  - `tsdoc_apply_to_declaration` - apply parsed TSDoc to an identifier
+  - `tsdoc_apply_to_declaration` - apply parsed TSDoc to a declaration
 
 **Mid-level** (domain utilities):
 
@@ -154,25 +154,25 @@ Supporting helpers (three-layer architecture):
   - `module_extract_path`, `module_get_component_name` - path utilities
   - `ModuleSourceOptions`, `MODULE_SOURCE_DEFAULTS` - configuration
 - `src_json.ts` - type definitions for the metadata format
-- `package_helpers.ts` - URL builders (`url_github_file`, `url_api_identifier`,
+- `library_helpers.ts` - URL builders (`url_github_file`, `url_api_declaration`,
   `url_api_module`, etc.)
 
 **High-level** (Gro-specific orchestration):
 
-- `package_gen_helpers.ts` - build-time generation helpers
-  - `package_gen_collect_source_files` - collect files from Gro's filer
-  - `package_gen_extract_dependencies` - extract dependency graph from disknode
-  - `package_gen_validate_no_duplicates` - flat namespace validation
-  - `package_gen_analyze_*` - thin wrappers adding Gro-specific concerns
-- `package.gen.ts` - the Gro task that orchestrates generation
+- `library_gen_helpers.ts` - build-time generation helpers
+  - `library_gen_collect_source_files` - collect files from Gro's filer
+  - `library_gen_extract_dependencies` - extract dependency graph from disknode
+  - `library_gen_validate_no_duplicates` - flat namespace validation
+  - `library_gen_analyze_*` - thin wrappers adding Gro-specific concerns
+- `library_gen.ts` - the Gro genfile that orchestrates generation
 
 The reusable functions (`ts_analyze_*`, `svelte_analyze_file`) can be used
 outside of package generation for IDE integrations, linters, or custom tools.
 
 Documentation components:
 
-- `IdentifierDetail.svelte` - renders full identifier documentation
-- `TypeLink.svelte`, `ModuleLink.svelte`, `IdentifierLink.svelte` -
+- `DeclarationDetail.svelte` - renders full declaration documentation
+- `TypeLink.svelte`, `ModuleLink.svelte`, `DeclarationLink.svelte` -
   cross-reference links
 - `Docs*.svelte` - documentation layout system
 
@@ -234,7 +234,7 @@ clipboard:
 navigation links:
 
 - `Hashlink` - hash anchor links
-- `TomeLink`, `IdentifierLink`, `ModuleLink` - docs navigation
+- `TomeLink`, `DeclarationLink`, `ModuleLink` - docs navigation
 - `GithubLink`, `MdnLink` - external reference links
 
 documentation:
@@ -264,24 +264,23 @@ component helpers:
 
 - `contextmenu_state.svelte.ts` - context menu state management
 - `contextmenu_helpers.ts` - context menu utilities
-- `identifier_contextmenu.ts` - contextmenu for code identifiers
+- `declaration_contextmenu.ts` - contextmenu for code declarations
 - `dialog.ts` - dialog utilities
 - `alert.ts` - alert utilities
 
-package and API:
+library and API:
 
-- `package.ts` - generated package metadata (from `package.gen.ts`)
-- `package.gen.ts` - package metadata generator (Gro task)
-- `src_json.ts` - type definitions for metadata format
-- `pkg.svelte.ts` - `Pkg` class wrapping package data
-- `identifier.svelte.ts` - `Identifier` class for code identifiers
+- `library.ts` - generated library metadata (from `library.gen.ts`)
+- `library.gen.ts` - library metadata generator (Gro genfile)
+- `library.svelte.ts` - `Library` class wrapping library data
+- `declaration.svelte.ts` - `Declaration` class for code declarations
 - `module.svelte.ts` - `Module` class for source files
-- `package_helpers.ts` - package URL and parsing utilities
+- `library_helpers.ts` - library URL and parsing utilities
 
 TypeScript and Svelte analysis:
 
 - `ts_helpers.ts` - TypeScript compiler API utilities
-  - high-level: `ts_analyze_identifier`, `ts_analyze_module_exports`
+  - high-level: `ts_analyze_declaration`, `ts_analyze_module_exports`
   - low-level: `ts_extract_function_info`, `ts_extract_class_info`, etc.
 - `svelte_helpers.ts` - Svelte component analysis
   - high-level: `svelte_analyze_file`
@@ -292,7 +291,7 @@ TypeScript and Svelte analysis:
   - predicates: `module_matches_source`, `module_is_typescript`, `module_is_svelte`
   - utilities: `module_extract_path`, `module_get_component_name`
   - configuration: `ModuleSourceOptions`, `MODULE_SOURCE_DEFAULTS`
-- `package_gen_helpers.ts` - Gro-specific build-time helpers
+- `library_gen_helpers.ts` - Gro-specific build-time helpers
 
 browser and DOM:
 
@@ -365,7 +364,7 @@ Uses a standardized context pattern via `context_helpers.ts`:
 Core:
 
 - `themer_context` - theme state
-- `pkg_context` - package API metadata
+- `library_context` - library API metadata
 
 Documentation:
 
@@ -409,17 +408,17 @@ Usage in Fuz:
 <script>
   import {Docs} from '@ryanatkn/fuz/Docs.svelte';
   import {tomes} from './tomes.js';
-  import {pkg} from './pkg.js';
+  import {library} from './library.js';
 </script>
 
-<Docs {tomes} {pkg}>
+<Docs {tomes} {library}>
   {@render children()}
 </Docs>
 ```
 
 For consumer projects (like Moss):
 
-- same setup, just import your local tomes and pkg
+- same setup, just import your local tomes and library
 - optional `breadcrumb_children` snippet for branding
 
 #### Tomes (manual documentation)
@@ -473,8 +472,8 @@ Setup for consumer projects (opt-in):
 
 1. **Setup generation**:
    ```typescript
-   // src/routes/package.gen.ts
-   export * from "@ryanatkn/fuz/package.gen.js";
+   // src/routes/library.gen.ts
+   export * from "@ryanatkn/fuz/library.gen.js";
    ```
 
 2. **Create API index route**:
@@ -496,14 +495,14 @@ Setup for consumer projects (opt-in):
    <ApiModule module_path={params.module_path} />
    ```
 
-4. **Run generator**: `gro gen` to create `package.ts`
+4. **Run generator**: `gro gen` to create `library.ts`
 
 Composable building blocks (for custom layouts):
 
 - `api_search.svelte.ts` - search/filter state management
-  - `create_identifier_search(pkg)` - for API index
-  - `create_module_identifier_search(identifiers)` - for module pages
-- `ApiIdentifierList.svelte` - renders filtered identifier list
+  - `create_declaration_search(library)` - for API index
+  - `create_module_declaration_search(declarations)` - for module pages
+- `ApiDeclarationList.svelte` - renders filtered declaration list
 - `DocsSearch.svelte` - search input UI
 - use with `TomeContent`, `TomeSection`, etc. for custom composition
 

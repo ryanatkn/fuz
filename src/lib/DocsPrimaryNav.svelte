@@ -3,15 +3,15 @@
 	import type {Snippet} from 'svelte';
 	import {scrollY} from 'svelte/reactivity/window';
 
-	import type {Pkg} from './pkg.svelte.js';
+	import type {Library} from './library.svelte.js';
 	import Breadcrumb from './Breadcrumb.svelte';
 
 	const {
-		pkg,
+		library,
 		breadcrumb_children,
 		children,
 	}: {
-		pkg: Pkg;
+		library: Library;
 		breadcrumb_children?: Snippet<[is_primary_nav: boolean]>;
 		children?: Snippet;
 	} = $props();
@@ -31,7 +31,7 @@
 					{#if breadcrumb_children}
 						{@render breadcrumb_children(true)}
 					{:else}
-						{pkg.package_json.glyph ?? '🏠'}
+						{library.package_json.glyph ?? '🏠'}
 					{/if}
 				</Breadcrumb>
 			</nav>

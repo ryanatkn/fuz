@@ -1,23 +1,22 @@
-import type {Identifier} from './identifier.svelte.js';
-import type {Pkg} from './pkg.svelte.js';
+import type {Declaration} from './declaration.svelte.js';
+import type {Library} from './library.svelte.js';
 
-interface IdentifierSearchState {
+export interface DeclarationSearchState {
 	query: string;
-	all: Array<Identifier>;
-	filtered: Array<Identifier>;
+	all: Array<Declaration>;
+	filtered: Array<Declaration>;
 }
 
 /**
- * Creates search state for the API index page (all identifiers across all modules).
- * Uses the pkg's built-in search method and sorts results alphabetically.
+ * Creates search state for the API index page (all declarations across all modules).
  */
-export const create_identifier_search = (pkg: Pkg): IdentifierSearchState => {
+export const create_declaration_search = (library: Library): DeclarationSearchState => {
 	let query = $state('');
 
-	const all = $derived(pkg.identifiers);
+	const all = $derived(library.declarations);
 
 	const filtered = $derived.by(() => {
-		const items = query.trim() ? pkg.search_identifiers(query) : all;
+		const items = query.trim() ? library.search_declarations(query) : all;
 		return items.sort((a, b) => a.name.localeCompare(b.name));
 	});
 
@@ -38,15 +37,14 @@ export const create_identifier_search = (pkg: Pkg): IdentifierSearchState => {
 };
 
 /**
- * Creates search state for module-specific identifier lists.
- * Supports multi-term AND search (all terms must match, each term can match name/kind/module_path).
+ * Creates search state for module-specific declaration lists.
  */
-export const create_module_identifier_search = (
-	identifiers: Array<Identifier>,
-): IdentifierSearchState => {
+export const create_module_declaration_search = (
+	declarations: Array<Declaration>,
+): DeclarationSearchState => {
 	let query = $state('');
 
-	const all = $derived(identifiers);
+	const all = $derived(declarations);
 
 	const filtered = $derived.by(() => {
 		const trimmed_query = query.trim();
@@ -54,11 +52,10 @@ export const create_module_identifier_search = (
 
 		const terms = trimmed_query.toLowerCase().split(/\s+/);
 
-		// filter: include identifier only if ALL terms match (each term can match any field)
-		const items = all.filter((id) => {
-			const name_lower = id.name.toLowerCase();
-			const kind_lower = id.kind.toLowerCase();
-			const module_path_lower = id.module_path.toLowerCase();
+		const items = all.filter((d) => {
+			const name_lower = d.name.toLowerCase();
+			const kind_lower = d.kind.toLowerCase();
+			const module_path_lower = d.module_path.toLowerCase();
 
 			return terms.every(
 				(term) =>

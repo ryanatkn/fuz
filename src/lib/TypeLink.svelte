@@ -1,19 +1,19 @@
 <script lang="ts">
 	import Code from '@ryanatkn/fuz_code/Code.svelte';
 
-	import IdentifierLink from './IdentifierLink.svelte';
-	import {pkg_context} from './pkg.svelte.js';
+	import DeclarationLink from './DeclarationLink.svelte';
+	import {library_context} from './library.svelte.js';
 
 	const {type}: {type: string} = $props();
 
-	const pkg = pkg_context.get();
+	const library = library_context.get();
 
 	// TODO is not extensible
 	// TODO maybe better name?
 </script>
 
-{#if pkg.lookup_identifier(type)}
-	<IdentifierLink name={type} />
+{#if library.lookup_declaration(type)}
+	<DeclarationLink name={type} />
 {:else}
 	<Code inline content={type} lang="ts" />
 {/if}

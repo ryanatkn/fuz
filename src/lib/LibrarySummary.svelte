@@ -3,11 +3,11 @@
 	import type {Snippet} from 'svelte';
 	import {format_url} from '@ryanatkn/belt/url.js';
 
-	import type {Pkg} from './pkg.svelte.js';
+	import type {Library} from './library.svelte.js';
 	import ImgOrSvg from './ImgOrSvg.svelte';
 
 	const {
-		pkg,
+		library,
 		repo_name,
 		logo,
 		motto,
@@ -16,7 +16,7 @@
 		homepage_url,
 		children,
 	}: {
-		pkg: Pkg; // TODO normalized version with cached primitives?
+		library: Library;
 		repo_name?: Snippet<[repo_name: string]>;
 		logo?: Snippet<[logo_url: string, logo_alt: string]>;
 		motto?: Snippet<[motto: string, glyph?: string]>;
@@ -26,26 +26,26 @@
 		children?: Snippet;
 	} = $props();
 
-	const {package_json} = $derived(pkg);
+	const {package_json} = $derived(library);
 </script>
 
-<div class="package_summary">
+<div class="library_summary">
 	<!-- TODO maybe continue this snippet pattern, or maybe simplify? -->
 	<header class="box">
 		{#if repo_name}
-			{@render repo_name(pkg.repo_name)}
+			{@render repo_name(library.repo_name)}
 		{:else}
-			<div class="repo_name">{pkg.repo_name}</div>
+			<div class="repo_name">{library.repo_name}</div>
 		{/if}
 		<!-- TODO maybe add `icon_alt` to package.json -->
 		<!-- TODO what about svg logos? maybe a package.json logo url that defaults to favicon? -->
-		{#if pkg.logo_url}
+		{#if library.logo_url}
 			{#if logo}
-				{@render logo(pkg.logo_url, pkg.logo_alt)}
+				{@render logo(library.logo_url, library.logo_alt)}
 			{:else}
 				<ImgOrSvg
-					src={pkg.logo_url}
-					label={pkg.logo_alt}
+					src={library.logo_url}
+					label={library.logo_alt}
 					size="var(--font_size, var(--icon_size_xl2))"
 				/>
 			{/if}
@@ -74,35 +74,38 @@
 		{/if}
 	{/if}
 	{@render children?.()}
-	{#if pkg.homepage_url}
+	{#if library.homepage_url}
 		{#if homepage_url}
-			{@render homepage_url(pkg.homepage_url)}
+			{@render homepage_url(library.homepage_url)}
 		{:else}
 			<div class="homepage_url">
-				<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-				<a class="chip" class:selected={pkg.homepage_url === page.url.href} href={pkg.homepage_url}
-					>{format_url(pkg.homepage_url)}</a
+				<!-- eslint-disable svelte/no-navigation-without-resolve -->
+				<a
+					class="chip"
+					class:selected={library.homepage_url === page.url.href}
+					href={library.homepage_url}>{format_url(library.homepage_url)}</a
 				>
+				<!-- eslint-enable svelte/no-navigation-without-resolve -->
 			</div>
 		{/if}
 	{/if}
 	<div class="links">
-		{#if pkg.repo_url}
+		{#if library.repo_url}
 			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-			<a class="chip" href={pkg.repo_url}>repo</a>
+			<a class="chip" href={library.repo_url}>repo</a>
 		{/if}
-		{#if pkg.changelog_url}
+		{#if library.changelog_url}
 			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-			<a class="chip" title="version" href={pkg.changelog_url}>{package_json.version}</a>
+			<a class="chip" title="version" href={library.changelog_url}>{package_json.version}</a>
 		{/if}
-		{#if pkg.npm_url}
+		{#if library.npm_url}
 			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-			<a class="chip" href={pkg.npm_url}>npm</a>
+			<a class="chip" href={library.npm_url}>npm</a>
 		{/if}
 	</div>
-	{#if pkg.npm_url}
+	{#if library.npm_url}
 		{#if npm_url}
-			{@render npm_url(pkg.npm_url)}
+			{@render npm_url(library.npm_url)}
 		{:else}
 			<blockquote class="npm_url">npm i -D {package_json.name}</blockquote>
 		{/if}
@@ -113,7 +116,7 @@
 <!-- TODO better rendering, also show author, etc -->
 
 <style>
-	.package_summary {
+	.library_summary {
 		padding: var(--space_lg);
 		display: flex;
 		flex-direction: column;

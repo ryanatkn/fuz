@@ -1,0 +1,162 @@
+import type {LibraryJson} from '@ryanatkn/belt/library_json.js';
+
+import {create_context} from './context_helpers.js';
+import {Declaration} from './declaration.svelte.js';
+import {Module} from './module.svelte.js';
+
+/**
+ * Rich runtime representation of a library.
+ *
+ * Wraps `LibraryJson` with computed properties and provides the root
+ * of the API documentation hierarchy: Library → modules → declarations
+ *
+ * @see module.svelte.ts for Module class
+ * @see declaration.svelte.ts for Declaration class
+ */
+export class Library {
+	readonly library_json: LibraryJson = $state.raw()!;
+
+	package_json = $derived(this.library_json.package_json);
+	source_json = $derived(this.library_json.source_json);
+
+	name = $derived(this.library_json.name);
+	repo_name = $derived(this.library_json.repo_name);
+	repo_url = $derived(this.library_json.repo_url);
+	owner_name = $derived(this.library_json.owner_name);
+	homepage_url = $derived(this.library_json.homepage_url);
+	logo_url = $derived(this.library_json.logo_url);
+	logo_alt = $derived(this.library_json.logo_alt);
+	npm_url = $derived(this.library_json.npm_url);
+	changelog_url = $derived(this.library_json.changelog_url);
+	published = $derived(this.library_json.published);
+
+	/**
+	 * Organization URL (e.g., 'https://github.com/ryanatkn').
+	 */
+	org_url = $derived(
+		this.repo_url && this.repo_name
+			? this.repo_url.endsWith('/' + this.repo_name)
+				? this.repo_url.slice(0, -this.repo_name.length - 1)
+				: null
+			: null,
+	);
+
+	/**
+	 * All modules as rich Module instances.
+	 */
+	modules = $derived(
+		this.source_json.modules
+			? this.source_json.modules.map((module_json) => new Module(this, module_json))
+			: [],
+	);
+
+	/**
+	 * All modules sorted alphabetically by path.
+	 */
+	modules_sorted = $derived([...this.modules].sort((a, b) => a.path.localeCompare(b.path)));
+
+	/**
+	 * All declarations across all modules as a flat array.
+	 */
+	declarations = $derived(this.modules.flatMap((module) => module.declarations));
+
+	/**
+	 * Declaration lookup map by name. Provides O(1) lookup.
+	 */
+	declaration_map = $derived(new Map(this.declarations.map((d) => [d.name, d])));
+
+	constructor(library_json: LibraryJson) {
+		this.library_json = library_json;
+	}
+
+	/**
+	 * Look up a declaration by name.
+	 */
+	lookup_declaration(name: string): Declaration | undefined {
+		return this.declaration_map.get(name);
+	}
+
+	/**
+	 * Check if a declaration exists.
+	 */
+	has_declaration(name: string): boolean {
+		return this.declaration_map.has(name);
+	}
+
+	/**
+	 * Look up a module by its canonical path.
+	 */
+	lookup_module(path: string): Module | undefined {
+		return this.modules.find((m) => m.path === path);
+	}
+
+	/**
+	 * Search declarations by query string with multi-term AND logic.
+	 */
+	search_declarations(query: string): Array<Declaration> {
+		return library_search_declarations(this.declarations, query);
+	}
+}
+
+export const library_context = create_context<Library>();
+
+/**
+ * Search declarations by query string with multi-term AND logic.
+ */
+const library_search_declarations = (
+	declarations: Array<Declaration>,
+	query: string,
+): Array<Declaration> => {
+	if (!query.trim()) return [];
+
+	const terms = query.trim().toLowerCase().split(/\s+/);
+
+	const results = declarations
+		.map((declaration) => {
+			let total_score = 0;
+
+			for (const term of terms) {
+				const name_score = library_score_match(declaration.name, term);
+				const kind_score = library_score_match(declaration.kind, term);
+				const module_score = library_score_match(declaration.module_path, term);
+
+				const term_best = Math.max(name_score, kind_score, module_score);
+
+				if (term_best === 0) {
+					return null;
+				}
+
+				total_score += term_best;
+			}
+
+			return {declaration, score: total_score};
+		})
+		.filter((r) => r !== null)
+		.sort((a, b) => b.score - a.score || a.declaration.name.localeCompare(b.declaration.name))
+		.map((r) => r.declaration);
+
+	return results;
+};
+
+/**
+ * Score a search term match against a field value.
+ */
+const library_score_match = (field_value: string, term: string): number => {
+	const field_lower = field_value.toLowerCase();
+
+	if (field_lower === term) return 100;
+	if (field_lower.startsWith(term)) return 80;
+	if (field_lower.includes(term)) return 60;
+
+	let term_idx = 0;
+	for (const char of field_lower) {
+		if (char === term[term_idx]) {
+			term_idx++;
+			if (term_idx === term.length) {
+				return 40;
+			}
+		}
+	}
+
+	return 0;
+};

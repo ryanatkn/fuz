@@ -12,7 +12,7 @@ export const Tome = z.object({
 	Component: z.custom<Component<any, any>>(),
 	related_tomes: z.array(z.string()),
 	related_modules: z.array(z.string()),
-	related_identifiers: z.array(z.string()),
+	related_declarations: z.array(z.string()),
 });
 export type Tome = z.infer<typeof Tome>;
 

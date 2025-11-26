@@ -1,14 +1,14 @@
 import {test, assert, describe, beforeAll} from 'vitest';
 import ts from 'typescript';
-import type {IdentifierJson} from '@ryanatkn/belt/src_json.js';
+import type {DeclarationJson} from '@ryanatkn/belt/source_json.js';
 
 import {ts_analyze_module_exports} from '$lib/ts_helpers.js';
 import {
 	load_fixtures,
-	validate_identifier_structure,
+	validate_declaration_structure,
 	create_test_program,
 	create_multi_file_program,
-	extract_identifier_from_source,
+	extract_declaration_from_source,
 	type TsFixture,
 } from './fixtures/ts/ts_test_helpers.js';
 import {normalize_json} from './test_helpers.js';
@@ -34,8 +34,8 @@ describe('TypeScript helpers (fixture-based)', () => {
 			// Create a program with this source file for type checking
 			const {checker} = create_test_program(source_file, `${fixture.name}.ts`);
 
-			// Extract the identifier from the source file
-			const result = extract_identifier_from_source(source_file, checker, fixture.category);
+			// Extract the declaration from the source file
+			const result = extract_declaration_from_source(source_file, checker, fixture.category);
 
 			// Compare with expected (normalize to match JSON serialization)
 			assert.deepEqual(
@@ -48,11 +48,11 @@ describe('TypeScript helpers (fixture-based)', () => {
 
 	test('all fixtures have valid structure', () => {
 		for (const fixture of fixtures) {
-			// Skip module_comment category (returns string, not IdentifierJson)
+			// Skip module_comment category (returns string, not DeclarationJson)
 			if (fixture.category === 'module_comment') continue;
 
-			// Validate identifier structure
-			validate_identifier_structure(fixture.expected as IdentifierJson);
+			// Validate declaration structure
+			validate_declaration_structure(fixture.expected as DeclarationJson);
 		}
 	});
 
@@ -65,7 +65,7 @@ describe('TypeScript helpers (fixture-based)', () => {
 			throw new Error('fields_private fixture not found');
 		}
 
-		const result = private_fields_fixture.expected as IdentifierJson;
+		const result = private_fields_fixture.expected as DeclarationJson;
 
 		// Verify that #count, #max, and #reset are NOT in the members
 		if (result.members) {
@@ -105,9 +105,9 @@ export type Baz = { value: number };
 		assert.strictEqual(result.module_comment, 'Test module with exports.');
 
 		// Should have 3 identifiers
-		assert.strictEqual(result.identifiers.length, 3);
+		assert.strictEqual(result.declarations.length, 3);
 
-		const names = result.identifiers.map((i) => i.name);
+		const names = result.declarations.map((i) => i.name);
 		assert.include(names, 'foo');
 		assert.include(names, 'bar');
 		assert.include(names, 'Baz');
@@ -128,7 +128,7 @@ const internal = 'not exported';
 		const result = ts_analyze_module_exports(source_file, checker);
 
 		assert.strictEqual(result.module_comment, 'Module with no exports.');
-		assert.strictEqual(result.identifiers.length, 0);
+		assert.strictEqual(result.declarations.length, 0);
 	});
 
 	test('handles module with no comment', () => {
@@ -148,10 +148,10 @@ export const bar = 123;
 		const result = ts_analyze_module_exports(source_file, checker);
 
 		assert.isUndefined(result.module_comment);
-		assert.strictEqual(result.identifiers.length, 2);
+		assert.strictEqual(result.declarations.length, 2);
 	});
 
-	test('extracts full identifier metadata', () => {
+	test('extracts full declaration metadata', () => {
 		const source_code = `
 /**
  * Adds two numbers.
@@ -169,9 +169,9 @@ export function add(a: number, b: number): number {
 
 		const result = ts_analyze_module_exports(source_file, checker);
 
-		assert.strictEqual(result.identifiers.length, 1);
+		assert.strictEqual(result.declarations.length, 1);
 
-		const add_fn = result.identifiers[0]!;
+		const add_fn = result.declarations[0]!;
 		assert.strictEqual(add_fn.name, 'add');
 		assert.strictEqual(add_fn.kind, 'function');
 		assert.strictEqual(add_fn.doc_comment, 'Adds two numbers.');
@@ -206,9 +206,9 @@ export class Counter {
 
 		const result = ts_analyze_module_exports(source_file, checker);
 
-		assert.strictEqual(result.identifiers.length, 1);
+		assert.strictEqual(result.declarations.length, 1);
 
-		const counter = result.identifiers[0]!;
+		const counter = result.declarations[0]!;
 		assert.strictEqual(counter.name, 'Counter');
 		assert.strictEqual(counter.kind, 'class');
 		assert.ok(counter.members);
@@ -234,9 +234,9 @@ export interface Config {
 
 		const result = ts_analyze_module_exports(source_file, checker);
 
-		assert.strictEqual(result.identifiers.length, 1);
+		assert.strictEqual(result.declarations.length, 1);
 
-		const config = result.identifiers[0]!;
+		const config = result.declarations[0]!;
 		assert.strictEqual(config.name, 'Config');
 		assert.strictEqual(config.kind, 'type');
 		assert.ok(config.properties);
@@ -260,8 +260,8 @@ export { internal_value as exported_value };
 		const result = ts_analyze_module_exports(source_file, checker);
 
 		// Should have the re-exported value
-		assert.strictEqual(result.identifiers.length, 1);
-		assert.strictEqual(result.identifiers[0]!.name, 'exported_value');
+		assert.strictEqual(result.declarations.length, 1);
+		assert.strictEqual(result.declarations[0]!.name, 'exported_value');
 	});
 
 	test('handles mixed export kinds in same module', () => {
@@ -295,9 +295,9 @@ export class Service {
 		const result = ts_analyze_module_exports(source_file, checker);
 
 		// Should have 5 identifiers of different kinds
-		assert.strictEqual(result.identifiers.length, 5);
+		assert.strictEqual(result.declarations.length, 5);
 
-		const by_name = new Map(result.identifiers.map((i) => [i.name, i]));
+		const by_name = new Map(result.declarations.map((i) => [i.name, i]));
 
 		// Check each kind
 		const version = by_name.get('VERSION');
@@ -349,9 +349,9 @@ export function public_function(): string {
 		const result = ts_analyze_module_exports(source_file, checker);
 
 		// Should only have 2 public identifiers (nodocs ones excluded)
-		assert.strictEqual(result.identifiers.length, 2);
+		assert.strictEqual(result.declarations.length, 2);
 
-		const names = result.identifiers.map((i) => i.name);
+		const names = result.declarations.map((i) => i.name);
 		assert.include(names, 'public_value');
 		assert.include(names, 'public_function');
 		assert.notInclude(names, 'nodocs_helper');
@@ -386,8 +386,8 @@ export const local_value = 'local';
 
 		// index.ts should only have local_value as a direct export
 		// helper and CONSTANT are re-exports and should be in re_exports array
-		assert.strictEqual(result.identifiers.length, 1);
-		assert.strictEqual(result.identifiers[0]!.name, 'local_value');
+		assert.strictEqual(result.declarations.length, 1);
+		assert.strictEqual(result.declarations[0]!.name, 'local_value');
 
 		// re_exports should contain the two re-exported identifiers
 		assert.strictEqual(result.re_exports.length, 2);
@@ -425,15 +425,15 @@ export {internal_impl as public_api} from './internal.js';
 		const public_file = source_files.get('/src/lib/public.ts')!;
 		const result = ts_analyze_module_exports(public_file, checker);
 
-		// Renamed re-export creates a NEW identifier with alias_of
-		assert.strictEqual(result.identifiers.length, 1);
-		const identifier = result.identifiers[0]!;
-		assert.strictEqual(identifier.name, 'public_api');
-		assert.ok(identifier.alias_of);
-		assert.strictEqual(identifier.alias_of.module, 'internal.ts');
-		assert.strictEqual(identifier.alias_of.name, 'internal_impl');
+		// Renamed re-export creates a NEW declaration with alias_of
+		assert.strictEqual(result.declarations.length, 1);
+		const declaration = result.declarations[0]!;
+		assert.strictEqual(declaration.name, 'public_api');
+		assert.ok(declaration.alias_of);
+		assert.strictEqual(declaration.alias_of.module, 'internal.ts');
+		assert.strictEqual(declaration.alias_of.name, 'internal_impl');
 
-		// Should not be in re_exports (renamed exports are tracked as new identifiers)
+		// Should not be in re_exports (renamed exports are tracked as new declarations)
 		assert.strictEqual(result.re_exports.length, 0);
 	});
 
@@ -466,16 +466,16 @@ export {util_b as renamed_util} from './utils.js';
 		const result = ts_analyze_module_exports(mixed_file, checker);
 
 		// Should have 3 identifiers: direct_fn, DirectType, renamed_util
-		assert.strictEqual(result.identifiers.length, 3);
+		assert.strictEqual(result.declarations.length, 3);
 
-		const names = result.identifiers.map((i) => i.name);
+		const names = result.declarations.map((i) => i.name);
 		assert.include(names, 'direct_fn');
 		assert.include(names, 'DirectType');
 		assert.include(names, 'renamed_util');
 		assert.notInclude(names, 'util_a'); // same-name re-export excluded
 
 		// renamed_util should have alias_of
-		const renamed = result.identifiers.find((i) => i.name === 'renamed_util');
+		const renamed = result.declarations.find((i) => i.name === 'renamed_util');
 		assert.ok(renamed?.alias_of);
 		assert.strictEqual(renamed.alias_of.module, 'utils.ts');
 		assert.strictEqual(renamed.alias_of.name, 'util_b');

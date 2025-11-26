@@ -1,19 +1,19 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
 
-	import type {Pkg} from './pkg.svelte.js';
+	import type {Library} from './library.svelte.js';
 	import type {Tome} from './tome.js';
-	import PackageSummary from './PackageSummary.svelte';
+	import LibrarySummary from './LibrarySummary.svelte';
 
 	const {
 		tomes,
-		pkg,
+		library,
 		repo_name,
 		content,
 		header,
 	}: {
 		tomes: Array<Tome>;
-		pkg: Pkg;
+		library: Library;
 		repo_name?: Snippet<[repo_name: string]>;
 		content?: Snippet;
 		header?: Snippet;
@@ -25,7 +25,7 @@
 		{@render header()}
 	{:else}
 		<div class="box mb_xl5">
-			<PackageSummary {pkg} {repo_name} />
+			<LibrarySummary {library} {repo_name} />
 		</div>
 	{/if}
 	<div>

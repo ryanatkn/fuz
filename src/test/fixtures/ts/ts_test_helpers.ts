@@ -1,5 +1,5 @@
 import ts from 'typescript';
-import type {IdentifierJson} from '@ryanatkn/belt/src_json.js';
+import type {DeclarationJson} from '@ryanatkn/belt/source_json.js';
 
 import {load_fixtures_generic} from '../../test_helpers.js';
 import {
@@ -24,8 +24,8 @@ export interface TsFixture {
 	name: string;
 	category: TsFixtureCategory;
 	input: string;
-	/** string for module_comment category, null for no_comment case, otherwise IdentifierJson */
-	expected: IdentifierJson | string | null;
+	/** string for module_comment category, null for no_comment case, otherwise DeclarationJson */
+	expected: DeclarationJson | string | null;
 }
 
 /**
@@ -139,19 +139,19 @@ export const create_multi_file_program = (
 };
 
 /**
- * Extract an identifier from a TypeScript source file based on the fixture category.
+ * Extract a declaration from a TypeScript source file based on the fixture category.
  * Used by both test files and update tasks to ensure consistent behavior.
  *
  * @param source_file - The TypeScript source file to analyze
  * @param checker - The TypeScript type checker
  * @param category - The fixture category (function, class, type, etc.)
- * @returns The extracted identifier, or null if not found
+ * @returns The extracted declaration, or null if not found
  */
-export const extract_identifier_from_source = (
+export const extract_declaration_from_source = (
 	source_file: ts.SourceFile,
 	checker: ts.TypeChecker,
 	category: TsFixtureCategory,
-): IdentifierJson | string | null => {
+): DeclarationJson | string | null => {
 	// Handle module_comment category differently (returns string, not IdentifierJson)
 	if (category === 'module_comment') {
 		return ts_extract_module_comment(source_file) ?? null;
@@ -210,8 +210,8 @@ export const extract_identifier_from_source = (
 			return {name, kind};
 		}
 
-		// Create base identifier
-		const identifier: IdentifierJson = {
+		// Create base declaration
+		const declaration: DeclarationJson = {
 			name,
 			kind: ts_infer_declaration_kind(symbol, node),
 		};
@@ -222,20 +222,20 @@ export const extract_identifier_from_source = (
 		// Apply appropriate extraction based on category
 		switch (category) {
 			case 'function':
-				ts_extract_function_info(node, symbol, checker, identifier, tsdoc);
+				ts_extract_function_info(node, symbol, checker, declaration, tsdoc);
 				break;
 			case 'class':
-				ts_extract_class_info(node, symbol, checker, identifier);
+				ts_extract_class_info(node, symbol, checker, declaration);
 				break;
 			case 'type':
-				ts_extract_type_info(node, symbol, checker, identifier);
+				ts_extract_type_info(node, symbol, checker, declaration);
 				break;
 			case 'variable':
-				ts_extract_variable_info(node, symbol, checker, identifier);
+				ts_extract_variable_info(node, symbol, checker, declaration);
 				break;
 		}
 
-		return identifier;
+		return declaration;
 	}
 
 	return null;
@@ -270,7 +270,7 @@ export const infer_category_from_name = (name: string): TsFixtureCategory => {
  * Load all fixtures from the ts fixtures directory (flat structure).
  */
 export const load_fixtures = async (): Promise<Array<TsFixture>> => {
-	const generic_fixtures = await load_fixtures_generic<IdentifierJson | string | null>({
+	const generic_fixtures = await load_fixtures_generic<DeclarationJson | string | null>({
 		fixtures_dir: import.meta.dirname,
 		input_extension: '.ts',
 	});
@@ -283,56 +283,56 @@ export const load_fixtures = async (): Promise<Array<TsFixture>> => {
 };
 
 /**
- * Validate that an IdentifierJson has the expected structure.
+ * Validate that a DeclarationJson has the expected structure.
  */
-export const validate_identifier_structure = (identifier: IdentifierJson): void => {
-	if (!identifier) {
-		throw new Error('Expected identifier to be defined');
+export const validate_declaration_structure = (declaration: DeclarationJson): void => {
+	if (!declaration) {
+		throw new Error('Expected declaration to be defined');
 	}
 
 	// Must have name and kind
-	if (typeof identifier.name !== 'string') {
-		throw new Error('Expected identifier.name to be a string');
+	if (typeof declaration.name !== 'string') {
+		throw new Error('Expected declaration.name to be a string');
 	}
 
-	if (typeof identifier.kind !== 'string') {
-		throw new Error('Expected identifier.kind to be a string');
+	if (typeof declaration.kind !== 'string') {
+		throw new Error('Expected declaration.kind to be a string');
 	}
 
 	// Validate kind is one of the allowed values
 	const valid_kinds = ['function', 'class', 'type', 'variable', 'component'];
-	if (!valid_kinds.includes(identifier.kind)) {
-		throw new Error(`Expected identifier.kind to be one of ${valid_kinds.join(', ')}`);
+	if (!valid_kinds.includes(declaration.kind)) {
+		throw new Error(`Expected declaration.kind to be one of ${valid_kinds.join(', ')}`);
 	}
 
 	// Validate optional fields based on kind
-	if (identifier.kind === 'function') {
-		if (identifier.parameters !== undefined && !Array.isArray(identifier.parameters)) {
+	if (declaration.kind === 'function') {
+		if (declaration.parameters !== undefined && !Array.isArray(declaration.parameters)) {
 			throw new Error('Expected parameters to be an array');
 		}
-		if (identifier.return_type !== undefined && typeof identifier.return_type !== 'string') {
+		if (declaration.return_type !== undefined && typeof declaration.return_type !== 'string') {
 			throw new Error('Expected return_type to be a string');
 		}
 	}
 
-	if (identifier.kind === 'class') {
-		if (identifier.members !== undefined && !Array.isArray(identifier.members)) {
+	if (declaration.kind === 'class') {
+		if (declaration.members !== undefined && !Array.isArray(declaration.members)) {
 			throw new Error('Expected members to be an array');
 		}
 	}
 
-	if (identifier.kind === 'type') {
-		if (identifier.properties !== undefined && !Array.isArray(identifier.properties)) {
+	if (declaration.kind === 'type') {
+		if (declaration.properties !== undefined && !Array.isArray(declaration.properties)) {
 			throw new Error('Expected properties to be an array');
 		}
 	}
 
 	// Validate generic_params if present
-	if (identifier.generic_params !== undefined) {
-		if (!Array.isArray(identifier.generic_params)) {
+	if (declaration.generic_params !== undefined) {
+		if (!Array.isArray(declaration.generic_params)) {
 			throw new Error('Expected generic_params to be an array');
 		}
-		for (const param of identifier.generic_params) {
+		for (const param of declaration.generic_params) {
 			if (typeof param.name !== 'string') {
 				throw new Error('Expected generic param name to be a string');
 			}

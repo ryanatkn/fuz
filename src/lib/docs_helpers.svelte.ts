@@ -5,7 +5,7 @@ import {ensure_end, ensure_start} from '@ryanatkn/belt/string.js';
 import {create_context} from './context_helpers.js';
 
 /**
- * Convert a string to a URL-safe fragment identifier, preserving case for API identifiers.
+ * Convert a string to a URL-safe fragment identifier, preserving case for API declarations.
  * Only transforms spaces and special characters, keeping valid identifier characters intact.
  * Used for hash anchors in documentation.
  * @param str - The string to convert to a fragment

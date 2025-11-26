@@ -8,8 +8,8 @@
 
 	import Themed from '$lib/Themed.svelte';
 	import ContextmenuRoot from '$lib/ContextmenuRoot.svelte';
-	import {pkg_context, Pkg} from '$lib/pkg.svelte.js';
-	import {package_json, src_json} from './package.js';
+	import {library_context, Library} from '$lib/library.svelte.js';
+	import {library_json} from './library.js';
 	import Spiders from '$lib/Spiders.svelte';
 
 	const {
@@ -18,7 +18,7 @@
 		children: Snippet;
 	} = $props();
 
-	pkg_context.set(new Pkg(package_json, src_json));
+	library_context.set(new Library(library_json));
 </script>
 
 <svelte:head>

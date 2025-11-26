@@ -7,7 +7,7 @@
 	import TomeSection from '$lib/TomeSection.svelte';
 	import TomeSectionHeader from '$lib/TomeSectionHeader.svelte';
 	import {fuz_logo, github_logo} from '$lib/logos.js';
-	import IdentifierLink from '$lib/IdentifierLink.svelte';
+	import DeclarationLink from '$lib/DeclarationLink.svelte';
 
 	const LIBRARY_ITEM_NAME = 'Svg';
 	const tome = get_tome_by_name(LIBRARY_ITEM_NAME);
@@ -21,7 +21,7 @@
 		<Code content={`import Svg from '@ryanatkn/fuz/Svg.svelte';`} lang="ts" />
 		<Code content={`<Svg data={fuz_logo} />`} />
 		<aside class="mt_lg">
-			⚠️ <IdentifierLink name="Svg" /> currently uses <code>@html</code> but for security should not.
+			⚠️ <DeclarationLink name="Svg" /> currently uses <code>@html</code> but for security should not.
 		</aside>
 		<p>Fills available space by default:</p>
 		<Svg data={fuz_logo} />

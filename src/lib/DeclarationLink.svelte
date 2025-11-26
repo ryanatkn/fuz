@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
-	import {pkg_context} from './pkg.svelte.js';
+	import {library_context} from './library.svelte.js';
 	import {contextmenu_attachment} from './contextmenu_state.svelte.js';
-	import {create_identifier_contextmenu} from './identifier_contextmenu.js';
+	import {create_declaration_contextmenu} from './declaration_contextmenu.js';
 
 	const {
 		name,
@@ -14,25 +14,24 @@
 		name: string;
 	} = $props();
 
-	const pkg = pkg_context.get();
+	const library = library_context.get();
 
-	const identifier = $derived(pkg.lookup_identifier(name));
+	const declaration = $derived(library.lookup_declaration(name));
 
 	const contextmenu_entries = $derived(
-		identifier ? create_identifier_contextmenu(identifier) : undefined,
+		declaration ? create_declaration_contextmenu(declaration) : undefined,
 	);
 
-	// TODO @many support full https:// url variants - automatic detection? pkg prop?
+	// TODO @many support full https:// url variants - automatic detection? library prop?
 </script>
 
-{#if identifier}
-	<!-- TODO maybe colors per identifier.kind? -->
-	<!-- TODO -next-line doesnt work in some cases? -->
+{#if declaration}
+	<!-- TODO maybe colors per declaration.kind? -->
 	<!-- eslint-disable svelte/no-navigation-without-resolve -->
 	<a
 		{...rest}
-		class="identifier_link {class_prop}"
-		href={identifier.url_api}
+		class="declaration_link {class_prop}"
+		href={declaration.url_api}
 		{@attach contextmenu_attachment(contextmenu_entries)}
 	>
 		{#if children}

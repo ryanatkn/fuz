@@ -6,7 +6,7 @@
 	import {selected_variable_context} from '$routes/style_variable_helpers.svelte.js';
 	import StyleVariableDetail from '$routes/StyleVariableDetail.svelte';
 	import Dialog from '$lib/Dialog.svelte';
-	import {pkg_context} from '$lib/pkg.svelte.js';
+	import {library_context} from '$lib/library.svelte.js';
 	import Svg from '$lib/Svg.svelte';
 	import {fuz_logo} from '$lib/logos.js';
 
@@ -18,10 +18,10 @@
 
 	const selected_variable = selected_variable_context.set();
 
-	const pkg = pkg_context.get();
+	const library = library_context.get();
 </script>
 
-<Docs {tomes} {pkg}>
+<Docs {tomes} {library}>
 	{#snippet breadcrumb_children(is_primary_nav)}
 		{#if is_primary_nav}
 			<div class="icon row">

@@ -2,9 +2,9 @@
 	import type {Snippet} from 'svelte';
 
 	import ModuleLink from './ModuleLink.svelte';
-	import IdentifierLink from './IdentifierLink.svelte';
-	import {pkg_context} from './pkg.svelte.js';
-	import type {Identifier} from './identifier.svelte.js';
+	import DeclarationLink from './DeclarationLink.svelte';
+	import {library_context} from './library.svelte.js';
+	import type {Declaration} from './declaration.svelte.js';
 	import type {Module} from './module.svelte.js';
 
 	const {
@@ -14,19 +14,19 @@
 	}: {
 		reference: string;
 		display_text?: string | null;
-		children?: Snippet<[Identifier | undefined, Module | undefined]>;
+		children?: Snippet<[Declaration | undefined, Module | undefined]>;
 	} = $props();
-	const pkg = pkg_context.get();
+	const library = library_context.get();
 
-	// Try to find as identifier first, then module
-	const identifier = $derived(pkg.lookup_identifier(reference));
-	const module = $derived(identifier ? identifier.module : pkg.lookup_module(reference));
+	// Try to find as declaration first, then module
+	const declaration = $derived(library.lookup_declaration(reference));
+	const module = $derived(declaration ? declaration.module : library.lookup_module(reference));
 </script>
 
-{#if identifier}
-	<IdentifierLink name={reference}>
+{#if declaration}
+	<DeclarationLink name={reference}>
 		{@render children()}
-	</IdentifierLink>
+	</DeclarationLink>
 {:else if module}
 	<ModuleLink module_path={module.path}>
 		{@render children()}
@@ -36,6 +36,6 @@
 {/if}
 
 {#snippet children()}{#if children_prop}{@render children_prop(
-			identifier,
+			declaration,
 			module,
 		)}{:else}{display_text ?? reference}{/if}{/snippet}

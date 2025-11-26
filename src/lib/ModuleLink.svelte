@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
-	import {pkg_context} from './pkg.svelte.js';
+	import {library_context} from './library.svelte.js';
 	import {contextmenu_attachment} from './contextmenu_state.svelte.js';
 	import {create_module_contextmenu} from './module_contextmenu.js';
 
@@ -14,13 +14,13 @@
 		module_path: string; // TODO maybe rename?
 	} = $props();
 
-	const pkg = pkg_context.get();
+	const library = library_context.get();
 
-	const module = $derived(pkg.lookup_module(module_path));
+	const module = $derived(library.lookup_module(module_path));
 
 	const contextmenu_entries = $derived(module ? create_module_contextmenu(module) : undefined);
 
-	// TODO @many support full https:// url variants - automatic detection? pkg prop?
+	// TODO @many support full https:// url variants - automatic detection? library prop?
 </script>
 
 {#if module}

@@ -5,10 +5,10 @@
 	import DocsPageLinks from './DocsPageLinks.svelte';
 	import {to_tome_pathname, Tome} from './tome.js';
 	import {docs_links_context, DOCS_API_PATH} from './docs_helpers.svelte.js';
-	import {pkg_context} from './pkg.svelte.js';
+	import {library_context} from './library.svelte.js';
 	import TomeLink from './TomeLink.svelte';
 	import ModuleLink from './ModuleLink.svelte';
-	import IdentifierLink from './IdentifierLink.svelte';
+	import DeclarationLink from './DeclarationLink.svelte';
 
 	const {
 		tomes,
@@ -28,18 +28,18 @@
 			.filter((t) => t !== undefined) ?? [],
 	);
 
-	const pkg = pkg_context.get();
+	const library = library_context.get();
 
 	const modules_related_to_selected = $derived(
 		selected_tome?.related_modules
-			.map((path) => pkg.lookup_module(path))
+			.map((path) => library.lookup_module(path))
 			.filter((m) => m !== undefined) ?? [],
 	);
 
-	const identifiers_related_to_selected = $derived(
-		selected_tome?.related_identifiers
-			.map((name) => pkg.lookup_identifier(name))
-			.filter((i) => i !== undefined) ?? [],
+	const declarations_related_to_selected = $derived(
+		selected_tome?.related_declarations
+			.map((name) => library.lookup_declaration(name))
+			.filter((d) => d !== undefined) ?? [],
 	);
 
 	const docs_links = docs_links_context.get();
@@ -78,12 +78,12 @@
 			</ul>
 		</section>
 	{/if}
-	{#if identifiers_related_to_selected.length}
+	{#if declarations_related_to_selected.length}
 		<section class="related_section">
-			<h4 class="mb_sm">related identifiers</h4>
+			<h4 class="mb_sm">related declarations</h4>
 			<ul class="unstyled">
-				{#each identifiers_related_to_selected as identifier (identifier.name)}
-					<li><IdentifierLink name={identifier.name} class="menu_item" /></li>
+				{#each declarations_related_to_selected as declaration (declaration.name)}
+					<li><DeclarationLink name={declaration.name} class="menu_item" /></li>
 				{/each}
 			</ul>
 		</section>

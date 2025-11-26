@@ -1,24 +1,24 @@
 <script lang="ts">
-	import {pkg_context, type Pkg} from './pkg.svelte.js';
+	import {library_context, type Library} from './library.svelte.js';
 	import {get_tome_by_name, type Tome} from './tome.js';
 	import TomeContent from './TomeContent.svelte';
 	import TomeSection from './TomeSection.svelte';
 	import TomeLink from './TomeLink.svelte';
 	import TomeSectionHeader from './TomeSectionHeader.svelte';
 	import DocsSearch from './DocsSearch.svelte';
-	import ApiIdentifierList from './ApiIdentifierList.svelte';
-	import {create_identifier_search} from './api_search.svelte.js';
+	import ApiDeclarationList from './ApiDeclarationList.svelte';
+	import {create_declaration_search} from './api_search.svelte.js';
 
 	const {
-		pkg = pkg_context.get(),
+		library = library_context.get(),
 		tome = get_tome_by_name('api'),
 		minimal = false,
 	}: {
 		/**
-		 * The package instance to render API docs for.
-		 * Defaults to getting from pkg_context.
+		 * The library instance to render API docs for.
+		 * Defaults to getting from library_context.
 		 */
-		pkg?: Pkg;
+		library?: Library;
 		/**
 		 * The tome for the API docs page.
 		 * Defaults to looking up the 'api' tome.
@@ -31,11 +31,11 @@
 		minimal?: boolean;
 	} = $props();
 
-	const search = create_identifier_search(pkg);
+	const search = create_declaration_search(library);
 </script>
 
 <svelte:head>
-	<title>API docs - {pkg.package_json.name}</title>
+	<title>API docs - {library.package_json.name}</title>
 </svelte:head>
 
 <TomeContent {tome}>
@@ -45,10 +45,10 @@
 		</section>
 	{:else}
 		<TomeSection>
-			<TomeSectionHeader text="Identifiers" />
+			<TomeSectionHeader text="Declarations" />
 
 			<section>
-				<p>{pkg.package_json.description}</p>
+				<p>{library.package_json.description}</p>
 
 				{#if search.all.length > 1}
 					<DocsSearch
@@ -59,7 +59,7 @@
 				{/if}
 			</section>
 
-			<ApiIdentifierList identifiers={search.filtered} search_query={search.query} />
+			<ApiDeclarationList declarations={search.filtered} search_query={search.query} />
 		</TomeSection>
 	{/if}
 </TomeContent>
