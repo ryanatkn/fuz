@@ -408,7 +408,7 @@ Usage in Fuz:
 <script>
   import {Docs} from '@ryanatkn/fuz/Docs.svelte';
   import {tomes} from './tomes.js';
-  import {library} from './library.js';
+  import {library_json} from './library.js';
 </script>
 
 <Docs {tomes} {library}>
