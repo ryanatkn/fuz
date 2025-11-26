@@ -6,7 +6,7 @@ import type {SourceJson} from '@ryanatkn/belt/source_json.js';
 
 export const package_json: PackageJson = {
 	name: '@ryanatkn/fuz',
-	version: '0.163.0',
+	version: '0.164.0',
 	description: 'Svelte UI library',
 	motto: 'friendly user zystem',
 	glyph: '🧶',
@@ -125,7 +125,7 @@ export const package_json: PackageJson = {
 
 export const source_json: SourceJson = {
 	name: '@ryanatkn/fuz',
-	version: '0.163.0',
+	version: '0.164.0',
 	modules: [
 		{
 			path: 'Alert.svelte',

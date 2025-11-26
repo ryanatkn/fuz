@@ -1,5 +1,16 @@
 # @ryanatkn/fuz
 
+## 0.164.0
+
+### Minor Changes
+
+- rename library and source and declaration ([#100](https://github.com/ryanatkn/fuz/pull/100))
+- unpublish `package.ts` and replace with `package_gen.ts` ([#99](https://github.com/ryanatkn/fuz/pull/99))
+
+### Patch Changes
+
+- tweak package.ts generated message ([#99](https://github.com/ryanatkn/fuz/pull/99))
+
 ## 0.163.0
 
 ### Minor Changes
