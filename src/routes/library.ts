@@ -39,7 +39,7 @@ export const library_json: LibraryJson = {
 			node: '>=22.15',
 		},
 		peerDependencies: {
-			'@ryanatkn/belt': '>=0.40.0',
+			'@ryanatkn/belt': '>=0.40.1',
 			'@ryanatkn/fuz_code': '>=0.36.0',
 			'@ryanatkn/gro': '>=0.179.0',
 			'@ryanatkn/moss': '>=0.39.0',
