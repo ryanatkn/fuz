@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz",
-  "version": "0.167.0",
+  "version": "0.168.0",
   "modules": [
     {
       "path": "alert.ts",
@@ -473,6 +473,10 @@
     {
       "path": "library_gen.ts",
       "declarations": [
+        {
+          "name": "LibraryGenOptions",
+          "kind": "type"
+        },
         {
           "name": "library_gen",
           "kind": "function"
