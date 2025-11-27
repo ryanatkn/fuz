@@ -168,8 +168,8 @@ export class ContextmenuState {
 			let returned;
 			try {
 				returned = item.run()();
-			} catch (err) {
-				const message = typeof err?.message === 'string' ? err.message : undefined;
+			} catch (error) {
+				const message = typeof error?.message === 'string' ? error.message : undefined;
 				item.error_message = message ?? 'unknown error';
 				this.error = message;
 			}
