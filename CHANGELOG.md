@@ -1,5 +1,15 @@
 # @ryanatkn/fuz
 
+## 0.168.0
+
+### Minor Changes
+
+- upgrade deps ([#101](https://github.com/ryanatkn/fuz/pull/101))
+
+### Patch Changes
+
+- add `filename` option to `library_gen` ([#101](https://github.com/ryanatkn/fuz/pull/101))
+
 ## 0.167.0
 
 ### Minor Changes
