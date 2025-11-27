@@ -26,8 +26,8 @@
 		try {
 			const text = await navigator.clipboard.readText();
 			onclipboardtext(text);
-		} catch (err) {
-			onerror?.(err);
+		} catch (error) {
+			onerror?.(error);
 		}
 	}}
 >

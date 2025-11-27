@@ -59,10 +59,10 @@ export const svelte_analyze_component = (
 		// Extract source line from original file
 		const start_pos = source_file.getLineAndCharacterOfPosition(0);
 		result.source_line = start_pos.line + 1;
-	} catch (err) {
+	} catch (error) {
 		// If analysis fails, return basic component info
 		// eslint-disable-next-line no-console
-		console.error(`Error analyzing Svelte component ${component_name}:`, err);
+		console.error(`Error analyzing Svelte component ${component_name}:`, error);
 	}
 
 	return result;

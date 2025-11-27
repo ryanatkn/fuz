@@ -39,9 +39,9 @@ export const library_json: LibraryJson = {
 			node: '>=22.15',
 		},
 		peerDependencies: {
-			'@ryanatkn/belt': '>=0.40.1',
+			'@ryanatkn/belt': '>=0.41.1',
 			'@ryanatkn/fuz_code': '>=0.36.0',
-			'@ryanatkn/gro': '>=0.179.0',
+			'@ryanatkn/gro': '>=0.180.0',
 			'@ryanatkn/moss': '>=0.39.0',
 			'@sveltejs/kit': '^2.47.3',
 			'esm-env': '^1',
@@ -62,14 +62,14 @@ export const library_json: LibraryJson = {
 		},
 		devDependencies: {
 			'@changesets/changelog-git': '^0.2.1',
-			'@ryanatkn/belt': '^0.40.1',
+			'@ryanatkn/belt': '^0.41.1',
 			'@ryanatkn/eslint-config': '^0.9.0',
 			'@ryanatkn/fuz_code': '^0.36.0',
-			'@ryanatkn/gro': '^0.179.0',
+			'@ryanatkn/gro': '^0.180.0',
 			'@ryanatkn/moss': '^0.39.0',
 			'@sveltejs/adapter-static': '^3.0.10',
 			'@sveltejs/kit': '^2.49.0',
-			'@sveltejs/package': '^2.5.6',
+			'@sveltejs/package': '^2.5.7',
 			'@sveltejs/vite-plugin-svelte': '^6.2.1',
 			'@types/node': '^24.10.1',
 			eslint: '^9.39.1',
@@ -78,7 +78,7 @@ export const library_json: LibraryJson = {
 			jsdom: '^27.2.0',
 			prettier: '^3.6.2',
 			'prettier-plugin-svelte': '^3.4.0',
-			svelte: '^5.44.1',
+			svelte: '^5.45.2',
 			'svelte-check': '^4.3.4',
 			svelte2tsx: '^0.7.45',
 			tslib: '^2.8.1',
@@ -2157,7 +2157,13 @@ export const library_json: LibraryJson = {
 						source_line: 1,
 					},
 				],
-				dependencies: ['Details.svelte', 'Mdz.svelte', 'ModuleLink.svelte', 'TypeLink.svelte'],
+				dependencies: [
+					'Details.svelte',
+					'Mdz.svelte',
+					'ModuleLink.svelte',
+					'TypeLink.svelte',
+					'_code/Code.svelte.ts',
+				],
 				dependents: ['ApiDeclarationList.svelte'],
 			},
 			{
@@ -3558,14 +3564,33 @@ export const library_json: LibraryJson = {
 				path: 'library_gen.ts',
 				declarations: [
 					{
+						name: 'LibraryGenOptions',
+						kind: 'type',
+						source_line: 36,
+						type_signature: 'LibraryGenOptions',
+						properties: [
+							{
+								name: 'filename',
+								kind: 'variable',
+								type_signature: 'string',
+							},
+						],
+					},
+					{
 						name: 'library_gen',
 						kind: 'function',
 						doc_comment:
 							"Creates a Gen object for generating library metadata with full TypeScript analysis.\n\nUsage in a `.gen.ts` file:\n```ts\nimport {library_gen} from '@ryanatkn/fuz/library_gen.js';\nexport const gen = library_gen();\n```",
-						source_line: 45,
-						type_signature: '(): Gen',
+						source_line: 49,
+						type_signature: '(options?: LibraryGenOptions | undefined): Gen',
 						return_type: 'Gen',
-						parameters: [],
+						parameters: [
+							{
+								name: 'options',
+								type: 'LibraryGenOptions | undefined',
+								optional: true,
+							},
+						],
 					},
 				],
 				module_comment:
@@ -4639,7 +4664,12 @@ export const library_json: LibraryJson = {
 						source_line: 1,
 					},
 				],
-				dependencies: ['DocsLink.svelte', 'MdzNodeView.svelte', 'mdz_components.ts'],
+				dependencies: [
+					'DocsLink.svelte',
+					'MdzNodeView.svelte',
+					'_code/Code.svelte.ts',
+					'mdz_components.ts',
+				],
 				dependents: ['Mdz.svelte', 'MdzNodeView.svelte'],
 			},
 			{
@@ -6309,7 +6339,7 @@ export const library_json: LibraryJson = {
 						source_line: 1,
 					},
 				],
-				dependencies: ['DeclarationLink.svelte', 'library.svelte.ts'],
+				dependencies: ['DeclarationLink.svelte', '_code/Code.svelte.ts', 'library.svelte.ts'],
 				dependents: ['DeclarationDetail.svelte'],
 			},
 		],
