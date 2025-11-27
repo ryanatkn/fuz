@@ -3558,14 +3558,33 @@ export const library_json: LibraryJson = {
 				path: 'library_gen.ts',
 				declarations: [
 					{
+						name: 'LibraryGenOptions',
+						kind: 'type',
+						source_line: 36,
+						type_signature: 'LibraryGenOptions',
+						properties: [
+							{
+								name: 'filename',
+								kind: 'variable',
+								type_signature: 'string',
+							},
+						],
+					},
+					{
 						name: 'library_gen',
 						kind: 'function',
 						doc_comment:
 							"Creates a Gen object for generating library metadata with full TypeScript analysis.\n\nUsage in a `.gen.ts` file:\n```ts\nimport {library_gen} from '@ryanatkn/fuz/library_gen.js';\nexport const gen = library_gen();\n```",
-						source_line: 45,
-						type_signature: '(): Gen',
+						source_line: 49,
+						type_signature: '(options?: LibraryGenOptions | undefined): Gen',
 						return_type: 'Gen',
-						parameters: [],
+						parameters: [
+							{
+								name: 'options',
+								type: 'LibraryGenOptions | undefined',
+								optional: true,
+							},
+						],
 					},
 				],
 				module_comment:
