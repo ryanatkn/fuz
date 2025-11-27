@@ -159,7 +159,7 @@ const custom_csp = create_csp_directives({
 				</tr>
 			</thead>
 			<tbody>
-				{#each ([null] as Array<string | null>).concat(csp_trust_levels) as trust_level (trust_level)}
+				{#each ([null] as Array).concat(csp_trust_levels) as trust_level (trust_level)}
 					<tr>
 						<td><Code content={render_value_to_string(trust_level)} /></td>
 						{#if trust_level === null}
