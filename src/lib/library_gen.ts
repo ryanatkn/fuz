@@ -33,6 +33,10 @@ import {
 	library_gen_analyze_typescript_file,
 } from './library_gen_helpers.js';
 
+export interface LibraryGenOptions {
+	filename?: string;
+}
+
 /**
  * Creates a Gen object for generating library metadata with full TypeScript analysis.
  *
@@ -42,7 +46,7 @@ import {
  * export const gen = library_gen();
  * ```
  */
-export const library_gen = (): Gen => {
+export const library_gen = (options?: LibraryGenOptions): Gen => {
 	return {
 		generate: async ({log, filer}) => {
 			log.info('generating library metadata with full TypeScript analysis...');
@@ -51,7 +55,7 @@ export const library_gen = (): Gen => {
 			await filer.init();
 
 			// Read package.json
-			const package_json = load_package_json();
+			const package_json = await load_package_json();
 
 			// Create TypeScript program
 			const program = ts_create_program(log);
@@ -149,6 +153,7 @@ export const library_gen = (): Gen => {
 
 			return {
 				content: library_gen_generate_ts(package_json, source_json),
+				...(options?.filename && {filename: options.filename}),
 			};
 		},
 	};
