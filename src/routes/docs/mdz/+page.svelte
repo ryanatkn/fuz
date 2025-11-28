@@ -163,11 +163,14 @@
 		<Code content={link_external_example} class="mb_lg" />
 		<Mdz content={link_external_example} class="mb_xl5" />
 		<p>
-			<strong>Note:</strong> Relative paths (<code>./</code>, <code>../</code>) are not supported.
-			mdz content may be rendered at different URLs than where source files live (e.g., TSDoc
-			comments from <code>src/lib/foo.ts</code> render at <code>/docs/api/foo.ts</code>).
-			Root-relative paths (<code>/docs/...</code>) have unambiguous meaning regardless of render
-			location, making them more portable.
+			<strong>Note:</strong> Relative paths (<code>./</code>, <code>../</code>) are not supported
+			(currently, I think this will be changed). mdz content may be rendered at different URLs than
+			where source files live (e.g., TSDoc comments from <code>src/lib/foo.ts</code> render at
+			<code>/docs/api/foo.ts</code>). Root-relative paths (<code>/docs/...</code>) have unambiguous
+			meaning regardless of render location, making them more portable. However it seems very useful
+			to make
+			<code>../</code> and <code>./</code> links work, maybe we can support it and make the renderer
+			accept a custom base path?
 		</p>
 	</TomeSection>
 
